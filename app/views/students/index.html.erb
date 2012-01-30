@@ -23,9 +23,9 @@
     <td><%= student.birth %></td>
     <td><%= student.admitted %></td>
     <td><%= student.graduated %></td>
-    <td><%= link_to t('Show'), student %></td>
-    <td><%= link_to t('Edit'), edit_student_path(student) %></td>
-    <td><%= link_to t('Destroy'), student, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:Show), student %></td>
+    <td><%= link_to t(:Edit), edit_student_path(student) %></td>
+    <td><%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

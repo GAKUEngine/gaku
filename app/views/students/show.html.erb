@@ -1,40 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b><%= t :name %>:</b>
   <%= @student.name %>
 </p>
 
 <p>
-  <b>Address:</b>
+  <b><%= t :address %>:</b>
   <%= @student.address %>
 </p>
 
 <p>
-  <b>Phone:</b>
+  <b><%= t :phone %>:</b>
   <%= @student.phone %>
 </p>
 
 <p>
-  <b>Email:</b>
+  <b><%= t :email %>:</b>
   <%= @student.email %>
 </p>
 
 <p>
-  <b>Birth:</b>
+  <b><%= t :birth %>:</b>
   <%= @student.birth %>
 </p>
 
 <p>
-  <b>Admitted:</b>
+  <b><%= t :admitted %>:</b>
   <%= @student.admitted %>
 </p>
 
 <p>
-  <b>Graduated:</b>
+  <b><%= t :graduated %>:</b>
   <%= @student.graduated %>
 </p>
 
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to t(:Edit), edit_student_path(@student) %> |
+<%= link_to t(:Back), students_path %>
