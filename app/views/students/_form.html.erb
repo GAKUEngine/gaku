@@ -29,15 +29,15 @@
   </div>
   <div class="field">
     <%= f.label t :birth %><br />
-    <%= f.date_select :birth %>
+    <%= f.date_select :birth, :start_year => (Date.today.year - 20), :end_year => (Date.today.year), :default => 15.years.ago %>
   </div>
   <div class="field">
     <%= f.label t :admitted %><br />
-    <%= f.date_select :admitted %>
+    <%= f.date_select :admitted, :start_year => (Date.today.year - 10), :end_year => (Date.today.year + 5), :default => Date.today %>
   </div>
   <div class="field">
     <%= f.label t :graduated %><br />
-    <%= f.date_select :graduated %>
+    <%= f.date_select :graduated, :start_year => (Date.today.year - 5), :end_year => (Date.today.year + 10), :default => 3.years.from_now %>
   </div>
   <div class="actions">
     <%= f.submit %>
