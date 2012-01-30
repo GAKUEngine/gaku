@@ -1,3 +1,16 @@
 en:
   hello: "Hello world"
   comname: "GAKU-Engine"
+  Show: "Show"
+  Edit: "Edit"
+  Destroy: "Destroy"
+  students:
+    new: "Register New Student"
+    list: "Students List"
+    name: "Name"
+    address: "Address"
+    phone: "Phone #"
+    email: "E-Mail"
+    birth: "Birth Date"
+    admitted: "Admitted"
+    graduated: "Graduated"
