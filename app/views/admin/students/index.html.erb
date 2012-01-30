@@ -1,0 +1,35 @@
+<h1><%= t "students.list" %></h1>
+
+<table>
+  <tr>
+    <th><%= t "students.name" %></th>
+    <th><%= t "students.address" %></th>
+    <th><%= t "students.phone" %></th>
+    <th><%= t "students.email" %></th>
+    <th><%= t "students.birth" %></th>
+    <th><%= t "students.admitted" %></th>
+    <th><%= t "students.graduated" %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @students.each do |student| %>
+  <tr>
+    <td><%= student.name %></td>
+    <td><%= student.address %></td>
+    <td><%= student.phone %></td>
+    <td><%= student.email %></td>
+    <td><%= student.birth %></td>
+    <td><%= student.admitted %></td>
+    <td><%= student.graduated %></td>
+    <td><%= link_to t(:Show), student %></td>
+    <td><%= link_to t(:Edit), edit_student_path(student) %></td>
+    <td><%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t('students.new'), new_student_path %>

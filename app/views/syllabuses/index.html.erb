@@ -1,0 +1,27 @@
+<h1>Listing syllabuses</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Credits</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @syllabuses.each do |syllabus| %>
+  <tr>
+    <td><%= syllabus.name %></td>
+    <td><%= syllabus.description %></td>
+    <td><%= syllabus.credits %></td>
+    <td><%= link_to 'Show', syllabus %></td>
+    <td><%= link_to 'Edit', edit_syllabus_path(syllabus) %></td>
+    <td><%= link_to 'Destroy', syllabus, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Syllabus', new_syllabus_path %>
