@@ -4,9 +4,9 @@ GAKUEngine::Application.routes.draw do
   namespace :admin do
     resources :class_manager
     resources :students
+    resources :panel, :only => :index, :as => :admin
   end
   
-  match '/admin', :to => 'admin#panel#index', :as => :admin
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
