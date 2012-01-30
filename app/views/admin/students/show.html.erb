@@ -2,39 +2,39 @@
 
 <p>
   <b><%= t :name %>:</b>
-  <%= @student.name %>
+  <%= @admin_student.name %>
 </p>
 
 <p>
   <b><%= t :address %>:</b>
-  <%= @student.address %>
+  <%= @admin_student.address %>
 </p>
 
 <p>
   <b><%= t :phone %>:</b>
-  <%= @student.phone %>
+  <%= @admin_student.phone %>
 </p>
 
 <p>
   <b><%= t :email %>:</b>
-  <%= @student.email %>
+  <%= @admin_student.email %>
 </p>
 
 <p>
   <b><%= t :birth %>:</b>
-  <%= @student.birth %>
+  <%= @admin_student.birth %>
 </p>
 
 <p>
   <b><%= t :admitted %>:</b>
-  <%= @student.admitted %>
+  <%= @admin_student.admitted %>
 </p>
 
 <p>
   <b><%= t :graduated %>:</b>
-  <%= @student.graduated %>
+  <%= @admin_student.graduated %>
 </p>
 
 
-<%= link_to t(:Edit), edit_student_path(@student) %> |
-<%= link_to t(:Back), students_path %>
+<%= link_to t(:Edit), edit_admin_student_path(@admin_student) %> |
+<%= link_to t(:Back), admin_students_path %>
