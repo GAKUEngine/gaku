@@ -15,9 +15,13 @@
     <td><%= syllabus.name %></td>
     <td><%= syllabus.description %></td>
     <td><%= syllabus.credits %></td>
-    <td><%= link_to 'Show', syllabus %></td>
+    <td><%= link_to 'Show', admin_syllabus_path(syllabus) %></td>
+    <td><%= link_to 'Edit', edit_admin_syllabus_path(syllabus) %></td>
+    <td><%= link_to 'Destroy', admin_syllabus_path(syllabus), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
+
+<%= link_to 'New Syllabus', new_admin_syllabus_path %>

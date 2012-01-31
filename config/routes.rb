@@ -3,6 +3,7 @@ GAKUEngine::Application.routes.draw do
 
   namespace :admin do
     resources :class_manager
+    resources :syllabuses
     resources :students
     resources :panel, :only => :index
     match "/" => "panel#index"
