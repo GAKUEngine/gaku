@@ -23,3 +23,10 @@ ja:
     birth: "生徒生年月日"
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
+  syllabuses:
+    new: "新規授業計画"
+    edit: "授業計画の編集"
+    list: "授業計画一覧"
+    name: "授業名"
+    description: "授業説明"
+    credits: "単位数"

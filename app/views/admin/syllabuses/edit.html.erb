@@ -1,6 +1,6 @@
-<h1>Editing syllabus</h1>
+<h1><%= t 'syllabuses.edit' %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', admin_syllabus_path(@syllabus) %> |
-<%= link_to 'Back', admin_syllabuses_path %>
+<%= link_to t('Show'), admin_syllabus_path(@syllabus) %> |
+<%= link_to t('Back'), admin_syllabuses_path %>

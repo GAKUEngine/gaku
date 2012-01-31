@@ -1,4 +1,5 @@
-admin index
-<%= link_to t("students.list"), admin_students_path %>
-<%= link_to t("class_manager"), "/admin/class_manager" %>
-<%= link_to t("syllibuses"), admin_syllabuses_path %>
+<ul>
+  <li><%= link_to t("students.list"), admin_students_path %></li>
+  <li><%= link_to t("syllabuses.list"), admin_syllabuses_path %></li>
+  <li><%= link_to t("class_manager"), "/admin/class_manager" %></li>
+</ul>
