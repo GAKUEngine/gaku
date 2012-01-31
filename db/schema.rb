@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130125740) do
+ActiveRecord::Schema.define(:version => 20120131151805) do
 
-  create_table "student_class_instances", :force => true do |t|
+  create_table "school_classes", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
