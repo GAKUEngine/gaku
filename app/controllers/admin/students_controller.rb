@@ -1,8 +1,8 @@
-class Admin::StudentsController < ApplicationController
+class StudentsController < ApplicationController
   # GET /admin/students
   # GET /admin/students.json
   def index
-    @admin_students = Admin::Student.all
+    @admin_students = Student.all
 
     respond_to do |format|
       format.html # index.html.erb

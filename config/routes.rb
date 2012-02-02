@@ -1,14 +1,8 @@
 GAKUEngine::Application.routes.draw do
   resources :syllabuses
+  resources :school_classes
+  resources :students
 
-  namespace :admin do
-    resources :class_manager
-    resources :syllabuses
-    resources :students
-    resources :panel, :only => :index
-    match "/" => "panel#index"
-  end
-  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
