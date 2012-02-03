@@ -14,7 +14,7 @@
     <th></th>
   </tr>
 
-<% @admin_students.each do |student| %>
+<% @students.each do |student| %>
   <tr>
     <td><%= student.name %></td>
     <td><%= student.address %></td>
@@ -24,7 +24,7 @@
     <td><%= student.admitted %></td>
     <td><%= student.graduated %></td>
     <td><%= link_to t(:Show), student %></td>
-    <td><%= link_to t(:Edit), edit_admin_student_path(student) %></td>
+    <td><%= link_to t(:Edit), edit_student_path(student) %></td>
     <td><%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -32,4 +32,4 @@
 
 <br />
 
-<%= link_to t('students.new'), new_admin_student_path %>
+<%= link_to t('students.new'), new_student_path %>

@@ -11,21 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202103320) do
-
-  create_table "admin_school_classes", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20120202141053) do
 
   create_table "school_classes", :force => true do |t|
-    t.integer  "syllibus_id"
+    t.string   "code"
+    t.integer  "syllabus_id"
     t.integer  "schedule_id"
-    t.integer  "instructor_id"
-    t.integer  "semster_id"
+    t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "school_classes", ["schedule_id"], :name => "index_school_classes_on_schedule_id"
+  add_index "school_classes", ["syllabus_id"], :name => "index_school_classes_on_syllabus_id"
+  add_index "school_classes", ["teacher_id"], :name => "index_school_classes_on_teacher_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"

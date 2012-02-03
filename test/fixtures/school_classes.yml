@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  syllibus_id: 1
-  schedule_id: 1
-  instructor_id: 1
-  semster_id: 1
+  code: MyString
+  syllabus: 
+  schedule: 
+  teacher: 
 
 two:
-  syllibus_id: 1
-  schedule_id: 1
-  instructor_id: 1
-  semster_id: 1
+  code: MyString
+  syllabus: 
+  schedule: 
+  teacher: 

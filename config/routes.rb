@@ -1,6 +1,8 @@
 GAKUEngine::Application.routes.draw do
-  resources :syllabuses
   resources :school_classes
+
+  resources :syllabuses
+
   resources :students
 
   # The priority is based upon order of creation:
