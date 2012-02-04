@@ -1,4 +1,6 @@
 GAKUEngine::Application.routes.draw do
+  resources :teachers
+
   resources :school_classes
 
   resources :syllabuses

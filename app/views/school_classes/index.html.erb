@@ -1,11 +1,11 @@
-<h1>Listing school_classes</h1>
+<h1><%= t 'school_classes.list' %></h1>
 
 <table>
   <tr>
-    <th>Code</th>
-    <th>Syllabus</th>
-    <th>Schedule</th>
-    <th>Teacher</th>
+    <th><%= t 'school_classes.code' %></th>
+    <th><%= t :syllabus %></th>
+    <th><%= t :schedule %></th>
+    <th><%= t :teacher %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,9 +14,7 @@
 <% @school_classes.each do |school_class| %>
   <tr>
     <td><%= school_class.code %></td>
-    <td><%= school_class.syllabus %></td>
-    <td><%= school_class.schedule %></td>
-    <td><%= school_class.teacher %></td>
+    <td><%= Syllabus.find(school_class.syllabus).name %></td>
     <td><%= link_to 'Show', school_class %></td>
     <td><%= link_to 'Edit', edit_school_class_path(school_class) %></td>
     <td><%= link_to 'Destroy', school_class, confirm: 'Are you sure?', method: :delete %></td>
@@ -26,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New School class', new_school_class_path %>
+<%= link_to t('school_classes.new'), new_school_class_path %>
