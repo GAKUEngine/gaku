@@ -1,4 +1,4 @@
-class SchoolClass < ActiveRecord::Base
+class Course < ActiveRecord::Base
   has_one :syllabus
   #has_one :schedule
   #has_one :teacher

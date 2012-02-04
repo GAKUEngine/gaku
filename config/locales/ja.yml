@@ -36,8 +36,8 @@ ja:
     name: "授業名"
     description: "授業説明"
     credits: "単位数"
-  school_class: "授業"
-  school_classes:
+  course: "授業"
+  courses:
     new: "新規授業"
     edit: "授業の編集"
     list: "授業一覧"

@@ -11,17 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204062110) do
+ActiveRecord::Schema.define(:version => 20120204103734) do
 
-  create_table "class_enrollements", :force => true do |t|
+  create_table "course_enrollments", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "school_class_id"
+    t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "class_enrollements", ["school_class_id"], :name => "index_class_enrollements_on_school_class_id"
-  add_index "class_enrollements", ["student_id"], :name => "index_class_enrollements_on_student_id"
+  add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
+  add_index "course_enrollments", ["student_id"], :name => "index_course_enrollments_on_student_id"
+
+  create_table "courses", :force => true do |t|
+    t.string   "code"
+    t.integer  "syllabus_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
 
   create_table "schedules", :force => true do |t|
     t.datetime "start"
@@ -30,15 +39,6 @@ ActiveRecord::Schema.define(:version => 20120204062110) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "school_classes", :force => true do |t|
-    t.string   "code"
-    t.integer  "syllabus_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "school_classes", ["syllabus_id"], :name => "index_school_classes_on_syllabus_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"

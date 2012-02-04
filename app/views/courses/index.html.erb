@@ -1,0 +1,27 @@
+<h1><%= t 'courses.list' %></h1>
+
+<table>
+  <tr>
+    <th><%= t 'courses.code' %></th>
+    <th><%= t :syllabus %></th>
+    <th><%= t :schedule %></th>
+    <th><%= t :teacher %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @courses.each do |course| %>
+  <tr>
+    <td><%= course.code %></td>
+    <td><%= Syllabus.find(course.syllabus_id).name %></td>
+    <td><%= link_to t(:Show), course %></td>
+    <td><%= link_to t(:Edit), edit_course_path(course) %></td>
+    <td><%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t('courses.new'), new_course_path %>
