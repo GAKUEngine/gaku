@@ -8,3 +8,4 @@
 //= require jquery_ujs
 //= require kendo_js/kendo.all.min.js
 //= require kendo_js/cultures/kendo.culture.ja-JP.min.js
+//= require kendo_js/cultures/set_culture.js
