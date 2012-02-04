@@ -17,8 +17,8 @@
   </div>
   <div class="field">
     <%= f.label :syllabus %><br />
-    <%= f.text_field :syllabus %>
-    <%= Syllabus.all %>
+    <% #f.text_field :syllabus %>
+    <%= f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] } %>
   </div>
   <div class="field">
     <%= f.label :schedule %><br />
