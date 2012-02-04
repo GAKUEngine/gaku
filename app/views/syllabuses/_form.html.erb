@@ -12,15 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label t('syllabuses.code') %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label t('syllabuses.name') %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label t('syllabuses.description') %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :credits %><br />
+    <%= f.label t('syllabuses.credits') %><br />
     <%= f.number_field :credits %>
   </div>
   <div class="actions">

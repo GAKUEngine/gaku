@@ -27,6 +27,7 @@ ja:
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"
+    code: "項目コード"
     name: "授業名"
     description: "授業説明"
     credits: "単位数"
