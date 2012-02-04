@@ -1,5 +1,9 @@
 GAKUEngine::Application.routes.draw do
-  resources :school_classes
+  resources :course_enrollments
+
+  resources :teachers
+
+  resources :courses
 
   resources :syllabuses
 
