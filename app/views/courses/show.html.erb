@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t 'courses.code' %>:</b>
+  <%= @course.code %>
+</p>
+
+<p>
+  <b><%= t 'combined_code' %>:</b>
+  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code + "-" end -%>
+</p>
+
+<p>
+  <b><%= t :syllabus %>:</b>
+  <%= Syllabus::find(@course.syllabus_id).name %>
+</p>
+
+<%= link_to t(:Edit), edit_course_path(@course) %> |
+<%= link_to t(:Back), courses_path %>

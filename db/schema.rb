@@ -11,20 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202141053) do
+ActiveRecord::Schema.define(:version => 20120204103734) do
 
-  create_table "school_classes", :force => true do |t|
-    t.string   "code"
-    t.integer  "syllabus_id"
-    t.integer  "schedule_id"
-    t.integer  "teacher_id"
+  create_table "course_enrollments", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "school_classes", ["schedule_id"], :name => "index_school_classes_on_schedule_id"
-  add_index "school_classes", ["syllabus_id"], :name => "index_school_classes_on_syllabus_id"
-  add_index "school_classes", ["teacher_id"], :name => "index_school_classes_on_teacher_id"
+  add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
+  add_index "course_enrollments", ["student_id"], :name => "index_course_enrollments_on_student_id"
+
+  create_table "courses", :force => true do |t|
+    t.string   "code"
+    t.integer  "syllabus_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
+
+  create_table "schedules", :force => true do |t|
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "repeat"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", :force => true do |t|
     t.string   "name"
@@ -42,6 +56,17 @@ ActiveRecord::Schema.define(:version => 20120202141053) do
     t.string   "name"
     t.text     "description"
     t.integer  "credits"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "teachers", :force => true do |t|
+    t.string   "name"
+    t.text     "address"
+    t.string   "phone"
+    t.string   "email"
+    t.date     "birth"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

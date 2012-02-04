@@ -4,6 +4,6 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
+//= require kendo_js/jquery.min.js
 //= require jquery_ujs
-//= require_tree .
+//= require kendo_js/kendo.all.min.js

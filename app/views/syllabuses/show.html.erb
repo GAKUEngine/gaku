@@ -1,20 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
-  <b>Name:</b>
+  <b><%= t 'syllabuses.code' %>:</b>
+  <%= @syllabus.code %>
+</p>
+
+<p>
+  <b><%= t 'syllabuses.name' %>:</b>
   <%= @syllabus.name %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b><%= t 'syllabuses.description' %>:</b>
   <%= @syllabus.description %>
 </p>
 
 <p>
-  <b>Credits:</b>
+  <b><%= t 'syllabuses.credits' %>:</b>
   <%= @syllabus.credits %>
 </p>
 
 
-<%= link_to 'Edit', edit_syllabus_path(@syllabus) %> |
-<%= link_to 'Back', syllabuses_path %>
+<%= link_to t(:Edit), edit_syllabus_path(@syllabus) %> |
+<%= link_to t(:Back), syllabuses_path %>
