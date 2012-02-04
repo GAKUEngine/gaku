@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label t(:syllabus) %><br />
-    <%= f.select :syllabus, Syllabus.all.collect { |s| [s.name, s.id] } %>
+    <%= f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

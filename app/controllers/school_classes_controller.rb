@@ -14,6 +14,7 @@ class SchoolClassesController < ApplicationController
   # GET /school_classes/1.json
   def show
     @school_class = SchoolClass.find(params[:id])
+    @syllabus = Syllabus.find(@school_class.syllabus_id)
 
     respond_to do |format|
       format.html # show.html.erb

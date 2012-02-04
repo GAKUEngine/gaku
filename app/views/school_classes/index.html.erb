@@ -14,10 +14,10 @@
 <% @school_classes.each do |school_class| %>
   <tr>
     <td><%= school_class.code %></td>
-    <td><%= Syllabus.find(school_class.syllabus).name %></td>
-    <td><%= link_to 'Show', school_class %></td>
-    <td><%= link_to 'Edit', edit_school_class_path(school_class) %></td>
-    <td><%= link_to 'Destroy', school_class, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= Syllabus.find(school_class.syllabus_id).name %></td>
+    <td><%= link_to t(:Show), school_class %></td>
+    <td><%= link_to t(:Edit), edit_school_class_path(school_class) %></td>
+    <td><%= link_to t(:Destroy), school_class, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
