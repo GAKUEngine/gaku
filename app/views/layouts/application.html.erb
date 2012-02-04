@@ -7,10 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render :partial => "shared/menubar" %>
-
-<%= yield %>
-
+  <div id="container" class="k-content">
+    <%= render :partial => "shared/menubar" %>
+  
+    <%= yield %>
+  </div>
 </body>
 </html>
