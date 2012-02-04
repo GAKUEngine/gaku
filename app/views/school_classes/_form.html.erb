@@ -1,0 +1,34 @@
+<%= form_for(@school_class) do |f| %>
+  <% if @school_class.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@school_class.errors.count, "error") %> prohibited this school_class from being saved:</h2>
+
+      <ul>
+      <% @school_class.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :syllabus %><br />
+    <% #f.text_field :syllabus %>
+    <%= f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] } %>
+  </div>
+  <div class="field">
+    <%= f.label :schedule %><br />
+    <%= f.text_field :schedule %>
+  </div>
+  <div class="field">
+    <%= f.label :teacher %><br />
+    <%= f.text_field :teacher %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

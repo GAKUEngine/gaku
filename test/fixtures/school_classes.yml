@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  syllabus: 
+  schedule: 
+  teacher: 
+
+two:
+  code: MyString
+  syllabus: 
+  schedule: 
+  teacher: 

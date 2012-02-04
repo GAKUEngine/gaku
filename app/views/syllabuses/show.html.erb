@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @syllabus.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @syllabus.description %>
+</p>
+
+<p>
+  <b>Credits:</b>
+  <%= @syllabus.credits %>
+</p>
+
+
+<%= link_to 'Edit', edit_syllabus_path(@syllabus) %> |
+<%= link_to 'Back', syllabuses_path %>

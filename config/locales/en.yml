@@ -1,5 +1,16 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   hello: "Hello world"
+  comname: "GAKU-Engine"
+  Show: "Show"
+  Edit: "Edit"
+  Destroy: "Destroy"
+  students:
+    new: "Register New Student"
+    list: "Students List"
+    name: "Name"
+    address: "Address"
+    phone: "Phone #"
+    email: "E-Mail"
+    birth: "Birth Date"
+    admitted: "Admitted"
+    graduated: "Graduated"
