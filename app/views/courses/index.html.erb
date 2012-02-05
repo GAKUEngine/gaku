@@ -2,10 +2,12 @@
 
 <table>
   <tr>
+    <th><%= t 'syllabuses.code' %></th>
     <th><%= t 'courses.code' %></th>
     <th><%= t :syllabus %></th>
     <th><%= t :schedule %></th>
     <th><%= t :teacher %></th>
+    <th><%= t :num_enrolled %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +15,12 @@
 
 <% @courses.each do |course| %>
   <tr>
+    <td><%= Syllabus.find(course.syllabus_id).code %></td>
     <td><%= course.code %></td>
     <td><%= Syllabus.find(course.syllabus_id).name %></td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td><%= link_to t(:Show), course %></td>
     <td><%= link_to t(:Edit), edit_course_path(course) %></td>
     <td><%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %></td>
