@@ -15,5 +15,11 @@
   <%= Syllabus::find(@course.syllabus_id).name %>
 </p>
 
+<div id="course_enrollments">
+</div>
+<%= link_to_function t("add_student") do |page|
+  page.insert_html :bottom, :class_enrollments, :partial => "course_enrollments/new_course_enrollment", :object => CourseEnrollment.new
+end %>
+
 <%= link_to t(:Edit), edit_course_path(@course) %> |
 <%= link_to t(:Back), courses_path %>
