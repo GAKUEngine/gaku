@@ -16,10 +16,16 @@
 </p>
 
 <div id="course_enrollments">
-
+  <div id="enrolled_students_list">
+  </div>
+  <div id="add_student_enrollment">
+  </div>
 </div>
-<% # link_to_add_course_enrollment @course, "course_enrollments", t('add_student') %>
-<%= link_to t('add_student'), {:action => :new_course_enrollment}, :remote => true %>
+
+
+<%= link_to_enroll_student t('add_student'), "#add_student_enrollment" %>
+<% # link_to_enroll_student t('add_student'), {:controller => :course_enrollments, :action => :new, :format => :json}, :remote => true, :id => "new_course_enrollment" %>
+<% # link_to t('add_student'), {:method => :new_course_enrollment}, :remote => true %>
 
 <%= link_to t(:Edit), edit_course_path(@course) %> |
 <%= link_to t(:Back), courses_path %>

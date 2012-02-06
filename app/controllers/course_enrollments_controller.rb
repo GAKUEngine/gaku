@@ -27,7 +27,7 @@ class CourseEnrollmentsController < ApplicationController
     @course_enrollment = CourseEnrollment.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :partial => "form" }
       format.json { render json: @course_enrollment }
     end
   end

@@ -81,9 +81,4 @@ class CoursesController < ApplicationController
       format.json { head :ok }
     end
   end
-
-  def new_course_enrollment
-    @course_enrollment = CourseEnrollment.new
-    render :partial => 'course_enrollments/new_course_enrollment'
-  end
 end

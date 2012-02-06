@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ = jQuery
+
+$("#add_student_enrollment").live("ajax:success", (event, data, status, xhr) ->
+  $("#add_student_enrollment").append(data)
+)
