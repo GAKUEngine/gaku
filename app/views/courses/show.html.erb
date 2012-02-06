@@ -23,7 +23,8 @@
 </div>
 
 
-<%= link_to_enroll_student t('add_student'), "#add_student_enrollment" %>
+<%= link_to_enroll_student t('add_student'), @course.id, "add_student_enrollment" %>
+<% # link_to t('add_student'), {:controller => :course_enrollments, :action => :new_from_course}, :remote => true, :id => "add_student_enrollment" %>
 <% # link_to_enroll_student t('add_student'), {:controller => :course_enrollments, :action => :new, :format => :json}, :remote => true, :id => "new_course_enrollment" %>
 <% # link_to t('add_student'), {:method => :new_course_enrollment}, :remote => true %>
 

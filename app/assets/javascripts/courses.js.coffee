@@ -9,7 +9,7 @@ class CourseActions
   @enrollments = []
   
   #attach ajax to enrollment form
-  @enrollmentForm.live("ajax:success", (event, data, status, xhr) =>
+  $("#add_student_enrollment").live("ajax:success", (event, data, status, xhr) =>
     @enrollmentForm = $("#add_student_enrollment")
     ne = $(data)
 
