@@ -20,7 +20,7 @@
     <td><%= Syllabus.find(course.syllabus_id).name %></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td><%= CourseEnrollment.where(:course_id => course).count %></td>
     <td><%= link_to t(:Show), course %></td>
     <td><%= link_to t(:Edit), edit_course_path(course) %></td>
     <td><%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %></td>

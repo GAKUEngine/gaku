@@ -1,4 +1,4 @@
-<%= form_for(@course_enrollment, :remote => true) do |f| %>
+<%= form_for(@course_enrollment, :remote => true, :format => :json) do |f| %>
   <% if @course_enrollment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@course_enrollment.errors.count, "error") %> prohibited this course_enrollment from being saved:</h2>
