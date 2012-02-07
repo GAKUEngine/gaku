@@ -1,6 +1,6 @@
 <h1><%= t "students.list" %></h1>
 
-<table>
+<table id="grid">
   <tr>
     <th><%= t "students.name" %></th>
     <th><%= t "students.address" %></th>
@@ -29,6 +29,16 @@
   </tr>
 <% end %>
 </table>
+
+<br />
+
+<script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            height: 250
+        });
+    });
+</script>
 
 <br />
 
