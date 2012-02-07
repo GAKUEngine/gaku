@@ -1,15 +1,13 @@
 <h1>Listing teachers</h1>
 
-<table>
+<table id="grid">
   <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>Email</th>
-    <th>Birth</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th data-field="Name">Name</th>
+    <th data-field="Address">Address</th>
+    <th data-field="Phone">Phone</th>
+    <th data-field="Email">Email</th>
+    <th data-field="Birth">Birth</th>
+    <th data-field="管理">管理</th>
   </tr>
 
 <% @teachers.each do |teacher| %>
@@ -19,12 +17,25 @@
     <td><%= teacher.phone %></td>
     <td><%= teacher.email %></td>
     <td><%= teacher.birth %></td>
-    <td><%= link_to 'Show', teacher %></td>
-    <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-    <td><%= link_to 'Destroy', teacher, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <div>
+        <%= link_to 'Show', teacher %>
+        <%= link_to 'Edit', edit_teacher_path(teacher) %>
+        <%= link_to 'Destroy', teacher, confirm: 'Are you sure?', method: :delete %>
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
+
+<script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            height: 360,
+            sortable: true
+        });
+    });
+</script>
 
 <br />
 

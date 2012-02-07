@@ -1,16 +1,14 @@
 <h1><%= t 'courses.list' %></h1>
 
-<table>
+<table id="grid">
   <tr>
-    <th><%= t 'syllabuses.code' %></th>
-    <th><%= t 'courses.code' %></th>
-    <th><%= t :syllabus %></th>
-    <th><%= t :schedule %></th>
-    <th><%= t :teacher %></th>
-    <th><%= t :num_enrolled %></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th data-field="<%= t 'syllabuses.code' %>"><%= t 'syllabuses.code' %></th>
+    <th data-field="<%= t 'courses.code' %>"><%= t 'courses.code' %></th>
+    <th data-field="<%= t :syllabus %>"><%= t :syllabus %></th>
+    <th data-field="<%= t :schedule %>"><%= t :schedule %></th>
+    <th data-field="<%= t :teacher %>"><%= t :teacher %></th>
+    <th data-field="<%= t :num_enrolled %>"><%= t :num_enrolled %></th>
+    <th data-field="管理">管理</th>
   </tr>
 
 <% @courses.each do |course| %>
@@ -21,12 +19,25 @@
     <td></td>
     <td></td>
     <td><%= CourseEnrollment.where(:course_id => course).count %></td>
-    <td><%= link_to t(:Show), course %></td>
-    <td><%= link_to t(:Edit), edit_course_path(course) %></td>
-    <td><%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <div>
+        <%= link_to t(:Show), course %>
+        <%= link_to t(:Edit), edit_course_path(course) %>
+        <%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %>      
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
+
+<script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            height: 360,
+            sortable: true
+        });
+    });
+</script>
 
 <br />
 

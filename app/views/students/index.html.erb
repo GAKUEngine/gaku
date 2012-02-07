@@ -2,19 +2,17 @@
 
 <table id="grid">
   <tr>
-    <th><%= t "students.name" %></th>
-    <th><%= t "students.address" %></th>
-    <th><%= t "students.phone" %></th>
-    <th><%= t "students.email" %></th>
-    <th><%= t "students.birth" %></th>
-    <th><%= t "students.admitted" %></th>
-    <th><%= t "students.graduated" %></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th data-field="<%= t "students.name" %>"><%= t "students.name" %></th>
+    <th data-field="<%= t "students.address" %>"><%= t "students.address" %></th>
+    <th data-field="<%= t "students.phone" %>"><%= t "students.phone" %></th>
+    <th data-field="<%= t "students.email" %>"><%= t "students.email" %></th>
+    <th data-field="<%= t "students.birth" %>"><%= t "students.birth" %></th>
+    <th data-field="<%= t "students.admitted" %>"><%= t "students.admitted" %></th>
+    <th data-field="<%= t "students.graduated" %>"><%= t "students.graduated" %></th>
+    <th data-field="管理">管理</th>
   </tr>
 
-<% @students.each do |student| %>
+  <% @students.each do |student| %>
   <tr>
     <td><%= student.name %></td>
     <td><%= student.address %></td>
@@ -23,19 +21,23 @@
     <td><%= student.birth %></td>
     <td><%= student.admitted %></td>
     <td><%= student.graduated %></td>
-    <td><%= link_to t(:Show), student %></td>
-    <td><%= link_to t(:Edit), edit_student_path(student) %></td>
-    <td><%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <div>
+        <%= link_to t(:Show), student %>
+        <%= link_to t(:Edit), edit_student_path(student) %>
+        <%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %>
+      </div>
+    </td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-
-<br />
 
 <script>
     $(document).ready(function() {
         $("#grid").kendoGrid({
-            height: 250
+            height: 360,
+            groupable: true,
+            sortable: true
         });
     });
 </script>
