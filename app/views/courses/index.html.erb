@@ -13,9 +13,9 @@
 
 <% @courses.each do |course| %>
   <tr>
-    <td><%= Syllabus.find(course.syllabus_id).code %></td>
+    <td><%= course.syllabus.code %></td>
     <td><%= course.code %></td>
-    <td><%= Syllabus.find(course.syllabus_id).name %></td>
+    <td><%= course.syllabus.name %></td>
     <td></td>
     <td></td>
     <td><%= CourseEnrollment.where(:course_id => course).count %></td>

@@ -24,7 +24,7 @@
     <b><%= t "course_enrollments.list" %>:</b>
     <ul>
       <% @course_enrollments.each do |enrollment| %>
-        <li><%= Student.find(enrollment.student_id).name %></li>
+        <li><%= enrollment.student.name %></li>
       <% end %>
     </ul>
   </p>

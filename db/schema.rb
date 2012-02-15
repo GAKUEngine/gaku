@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204103734) do
+ActiveRecord::Schema.define(:version => 20120209112026) do
+
+  create_table "class_group_enrollments", :force => true do |t|
+    t.integer  "class_group_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "class_group_enrollments", ["class_group_id"], :name => "index_class_group_enrollments_on_class_group_id"
+  add_index "class_group_enrollments", ["student_id"], :name => "index_class_group_enrollments_on_student_id"
+
+  create_table "class_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "course_enrollments", :force => true do |t|
     t.integer  "student_id"
