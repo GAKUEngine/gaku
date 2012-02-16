@@ -1,4 +1,6 @@
 class SyllabusesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /syllabuses
   # GET /syllabuses.json
   def index

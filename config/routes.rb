@@ -1,4 +1,6 @@
 GAKUEngine::Application.routes.draw do
+  devise_for :users
+
   resources :class_group_enrollments
 
   resources :class_groups
