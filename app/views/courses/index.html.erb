@@ -13,7 +13,10 @@
 
 <% @courses.each do |course| %>
   <tr>
-    <td><%= course.syllabus.code %></td>
+    <td>
+      <%= link_to t(:Show), course, :class => "k-button" %>
+      <%= course.syllabus.code %>
+    </td>
     <td><%= course.code %></td>
     <td><%= course.syllabus.name %></td>
     <td></td>
@@ -21,9 +24,8 @@
     <td><%= CourseEnrollment.where(:course_id => course).count %></td>
     <td>
       <div>
-        <%= link_to t(:Show), course %>
-        <%= link_to t(:Edit), edit_course_path(course) %>
-        <%= link_to t(:Destroy), course, confirm: t(:confirm_delete), method: :delete %>      
+        <%= link_to t(:Edit), edit_course_path(course), :class => "k-button" %>
+        <%= link_to t(:Destroy), course, confirm: t(:confirm_delete), method: :delete, :class => "k-button" %>      
       </div>
     </td>
   </tr>
