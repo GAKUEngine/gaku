@@ -14,6 +14,7 @@ class ClassGroupsController < ApplicationController
   # GET /class_groups/1.json
   def show
     @class_group = ClassGroup.find(params[:id])
+    @class_group_enrollments = ClassGroupEnrollment.where(:class_group_id => @class_group)
 
     respond_to do |format|
       format.html # show.html.erb

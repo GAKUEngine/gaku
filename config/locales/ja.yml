@@ -5,6 +5,7 @@ ja:
   Edit: "編集"
   Destroy: "削除"
   Back: "戻る"
+  panel: "パネル"
   name: "名前"
   address: "住所"
   phone: "電話番号"
@@ -29,7 +30,6 @@ ja:
   schedule: "定刻"
   num_enrolled: "在籍人数"
   combined_code: "総合コード"
-  class_management: "授業管理"
   syllabus: "授業計画"
   syllabuses:
     new: "新規授業計画"
@@ -39,6 +39,7 @@ ja:
     name: "授業名"
     description: "授業説明"
     credits: "単位数"
+  course_management: "授業管理"
   course: "授業"
   courses:
     new: "新規授業"
@@ -47,3 +48,10 @@ ja:
     code: "授業コード"
   course_enrollments:
     list: "授業在籍一覧"
+  class_group_management: "クラス管理"
+  class_groups:
+    list: "クラス一覧"
+    new: "新規クラス登録"
+    name: "クラス名"
+  class_group_enrollments:
+    list: "クラス名簿"
