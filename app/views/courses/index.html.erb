@@ -8,7 +8,7 @@
     <th data-field="<%= t :schedule %>"><%= t :schedule %></th>
     <th data-field="<%= t :teacher %>"><%= t :teacher %></th>
     <th data-field="<%= t :num_enrolled %>"><%= t :num_enrolled %></th>
-    <th data-field="管理">管理</th>
+    <th data-field="<%= t :manage %>"><%= t :manage %></th>
   </tr>
 
 <% @courses.each do |course| %>
@@ -23,7 +23,7 @@
       <div>
         <%= link_to t(:Show), course %>
         <%= link_to t(:Edit), edit_course_path(course) %>
-        <%= link_to t(:Destroy), course, confirm: 'Are you sure?', method: :delete %>      
+        <%= link_to t(:Destroy), course, confirm: t(:confirm_delete), method: :delete %>      
       </div>
     </td>
   </tr>

@@ -5,6 +5,8 @@ ja:
   Edit: "編集"
   Destroy: "削除"
   Back: "戻る"
+  manage: "管理"
+  confirm_delete: "本当に削除しますか?"
   panel: "パネル"
   name: "名前"
   address: "住所"
@@ -55,3 +57,9 @@ ja:
     name: "クラス名"
   class_group_enrollments:
     list: "クラス名簿"
+  grades:
+    average_points: "平均点数"
+    total_points: "総合点数"
+    rank: "ランク"
+  assignments:
+    results: "課題の結果"

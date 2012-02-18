@@ -15,24 +15,18 @@
   <%= Syllabus::find(@course.syllabus_id).name %>
 </p>
 
-<div id="course_enrollments">
-  <p id="enrolled_students_count">
-    <b><%= t :num_enrolled %>:</b>
-    <%= @course_enrollments.count %>
-  </p>
-  <p id="enrolled_students_list">
-    <b><%= t "course_enrollments.list" %>:</b>
-    <ul>
-      <% @course_enrollments.each do |enrollment| %>
-        <li><%= enrollment.student.name %></li>
-      <% end %>
-    </ul>
-  </p>
-  <div id="add_student_enrollment">
-  </div>
+<div id="tabStrip">
+  <ul>
+    <li><%= t "course_enrollments.list" %></li>
+    <li>課題</li>
+    <li>試験</li>
+  </ul>
+  <%= render :partial => "courses/enrollments" %>
+  <%= render :partial => "courses/assignments" %>
+  <%= render :partial => "courses/tests" %>
 </div>
-
-
-<%= link_to_enroll_student t('add_student'), @course.id, "add_student_enrollment" %> | 
+<script>
+  $("#tabStrip").kendoTabStrip();
+</script>
 <%= link_to t(:Edit), edit_course_path(@course) %> |
 <%= link_to t(:Back), courses_path %>
