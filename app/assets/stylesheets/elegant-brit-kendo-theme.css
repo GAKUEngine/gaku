@@ -118,7 +118,7 @@ span.k-numeric-wrap.k-state-active,
   color: #2e2e2e;
 }
 .k-link:link, .k-link:visited {
-  background-color: #2d2d2d;
+  /*background-color: #2d2d2d;*/
   color: #eaf4fc;
 }
 .k-header {
@@ -140,7 +140,15 @@ span.k-numeric-wrap.k-state-active,
 .k-state-selected,
 .k-state-focused,
 .k-tabstrip-items .k-item {
-  background-image: none;
+  /*background-image: url("kendo_styles/Default/highlight.png");*/
+}
+.k-button {
+  background-image: url("kendo_styles/Default/highlight.png");
+}
+.k-item .k-link {
+  color: #eaf4fc;
+  background-color: #2b2b2b;
+  background-image: url("kendo_styles/Default/highlight.png");
 }
 .k-header,
 .k-grid-header,
@@ -169,13 +177,13 @@ span.k-numeric-wrap.k-state-active,
 .k-callout,
 .k-progress,
 .k-progress-status {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/sprite.png');
+  background-image: url('kendo_styles/Default/sprite.png');
 }
 .k-loading {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/loading.gif');
+  background-image: url('kendo_styles/Default/loading.gif');
 }
 .k-loading-image {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/loading-image.gif');
+  background-image: url('kendo_styles/Default/loading-image.gif');
 }
 .k-loading-color {
   background-color: #ffffff;
@@ -272,10 +280,10 @@ a.k-button {
   background-color: #eb6101;
 }
 .k-slider-horizontal .k-tick {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/slider-h.gif');
+  background-image: url('kendo_styles/Default/slider-h.gif');
 }
 .k-slider-vertical .k-tick {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/slider-v.gif');
+  background-image: url('kendo_styles/Default/slider-v.gif');
 }
 /* Tooltip */
 .k-tooltip {
@@ -310,7 +318,7 @@ a.k-button {
   border-color: #eb6101;
 }
 .k-tile .k-folder {
-  background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Default/imagebrowser.png');
+  background-image: url('kendo_styles/Default/imagebrowser.png');
 }
 /* Shadows */
 .k-popup,
@@ -360,9 +368,9 @@ a.k-button {
 .k-tile,
 .k-slider-track,
 .k-slider-selection {
-  -moz-border-radius: 1px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 .k-calendar-container.k-state-border-up,
 .k-list-container.k-state-border-up,
