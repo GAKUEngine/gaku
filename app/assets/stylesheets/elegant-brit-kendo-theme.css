@@ -183,6 +183,9 @@ span.k-numeric-wrap.k-state-active,
 .k-button {
   color: #1a1a1a;
 }
+a.k-button {
+  color: #1a1a1a;
+}
 .k-button,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover,
