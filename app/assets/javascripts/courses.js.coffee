@@ -5,12 +5,12 @@ class CourseActions
   enrollments: null
 
   constructor: () ->
-    @enrollmentForm = $("#add_student_enrollment")
+    @enrollmentForm = $("#add_student_enrollment_box")
     @enrollments = []
     
     #attach ajax to enrollment form
     $("#add_student_enrollment").live("ajax:success", (event, data, status, xhr) =>
-      @enrollmentForm = $("#add_student_enrollment")
+      @enrollmentForm = $("#add_student_enrollment_box")
       ne = $(data)
 
       @enrollments.push(ne)

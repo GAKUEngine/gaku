@@ -3,10 +3,9 @@
     <b><%= t :num_enrolled %>:</b>
     <%= @course_enrollments.count %>
     <%= link_to t('add_student'), {:controller => :course_enrollments, :action => :new, :format => :html, 
-      :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment_button", :class => "k-button" %>
-    <div id="add_student_enrollment">
+      :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment", :class => "k-button" %>
+    <div id="add_student_enrollment_box">
     </div>
-    <%= link_to 'add enrollment', {:controller => :course_enrollments, :action => :new, :format => :js}, :remote => true %>
   </p>
   <table id="enrolled_students_grid">
     <tr>
