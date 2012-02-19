@@ -3,7 +3,7 @@
     <b><%= t :num_enrolled %>:</b>
     <%= @course_enrollments.count %>
     <%= link_to t('add_student'), {:controller => :course_enrollments, :action => :new, :format => :html, 
-      :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment", :class => "k-button" %>
+      :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment_button", :class => "k-button" %>
     <div id="add_student_enrollment">
     </div>
     <%= link_to 'add enrollment', {:controller => :course_enrollments, :action => :new, :format => :js}, :remote => true %>
@@ -11,14 +11,18 @@
   <table id="enrolled_students_grid">
     <tr>
       <th data-field='<%= t "students.name" %>'><%= t "students.name" %></th>
-      <th data-field='<%= t "assignments.results" %>'><%= t "assignments.results" %></th>
+      <th data-field='<%= t("assignments.plural") + t(:and) + t("tests.plural") %>'><%= t("assignments.plural") + t(:and) + t("tests.plural") %></th>
       <th data-field='<%= t "grades.total_points" %>'><%= t "grades.total_points" %></th>
       <th data-field='<%= t "grades.rank" %>'><%= t "grades.rank" %></th>
       <th data-field='<%= t :manage %>'><%= t :manage %></th>
     </tr>
     <% @course_enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.student.name %></td><td>結果参照</td><td></td><td></td><td></td>
+        <td><%= enrollment.student.name %></td>
+        <td>
+          <%= link_to t("assignments.view"), "", :class => "k-button" %>
+          <%= link_to t("tests.view"), "", :class => "k-button" %>
+        </td><td></td><td></td><td></td>
       </tr>
     <% end %>
   </table>
