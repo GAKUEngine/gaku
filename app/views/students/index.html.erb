@@ -72,7 +72,7 @@ $(document).ready(function() {
   {
     for(var i = 0; i < ds.length; i++)
     {
-      var tag = '<div style="float:left"><a class="k-button" href="/students/'+ds[i].id+'">表示</a><br/></div><div style="float:left"><a class="k-button" href="/students/'+ds[i].id+'/edit">編集</a></div>';
+      var tag = '<div style="float:left"><a class="k-button" href="/students/'+ds[i].id+'">表示</a><a class="k-button" href="/students/'+ds[i].id+'/edit">編集</a></div>';
       ds[i]["manage"] = tag;
     }
     SetGrid(ds);
