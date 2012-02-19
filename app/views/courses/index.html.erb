@@ -2,9 +2,9 @@
 
 <table id="grid">
   <tr>
-    <th data-field="<%= t 'syllabuses.code' %>"><%= t 'syllabuses.code' %></th>
-    <th data-field="<%= t 'courses.code' %>"><%= t 'courses.code' %></th>
-    <th data-field="<%= t :syllabus %>"><%= t :syllabus %></th>
+    <th data-field="<%= t 'syllabuses.code' %>-<%= t :syllabus %>-<%= t 'courses.code' %>">
+      [<%= t 'syllabuses.code' %>]: <%= t :syllabus %>-<%= t 'courses.code' %>
+    </th>
     <th data-field="<%= t :schedule %>"><%= t :schedule %></th>
     <th data-field="<%= t :teacher %>"><%= t :teacher %></th>
     <th data-field="<%= t :num_enrolled %>"><%= t :num_enrolled %></th>
@@ -14,11 +14,8 @@
 <% @courses.each do |course| %>
   <tr>
     <td>
-      <%= link_to t(:Show), course, :class => "k-button" %>
-      <%= course.syllabus.code %>
+      <%= link_to ("[" + course.syllabus.code + "]: " +course.syllabus.name + "-" + course.code), course, :class => "k-button" %>
     </td>
-    <td><%= course.code %></td>
-    <td><%= course.syllabus.name %></td>
     <td></td>
     <td></td>
     <td><%= CourseEnrollment.where(:course_id => course).count %></td>
@@ -36,7 +33,8 @@
     $(document).ready(function() {
         $("#grid").kendoGrid({
             height: 360,
-            sortable: true
+            sortable: true,
+            selectable: true
         });
     });
 </script>

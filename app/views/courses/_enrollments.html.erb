@@ -6,6 +6,7 @@
       :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment", :class => "k-button" %>
     <div id="add_student_enrollment">
     </div>
+    <%= link_to 'add enrollment', {:controller => :course_enrollments, :action => :new, :format => :js}, :remote => true %>
   </p>
   <table id="enrolled_students_grid">
     <tr>

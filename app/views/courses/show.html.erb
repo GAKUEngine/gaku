@@ -7,7 +7,7 @@
 
 <p>
   <b><%= t 'combined_code' %>:</b>
-  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code + "-" end -%>
+  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%>
 </p>
 
 <p>

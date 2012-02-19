@@ -34,6 +34,7 @@ class CourseEnrollmentsController < ApplicationController
     respond_to do |format|
       format.html { render :partial => "form" }
       format.json { render json: @course_enrollment }
+      format.js
     end
   end
 

@@ -39,6 +39,7 @@ ja:
     list: "授業計画一覧"
     code: "項目コード"
     name: "授業名"
+    name_sample: "[例: 科学A]"
     description: "授業説明"
     credits: "単位数"
   course_management: "授業管理"
@@ -48,6 +49,7 @@ ja:
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
+    code_sample: "[例: 秋2020]"
   course_enrollments:
     list: "授業在籍一覧"
   class_group_management: "クラス管理"
