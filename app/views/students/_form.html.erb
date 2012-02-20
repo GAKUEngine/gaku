@@ -29,17 +29,23 @@
   </div>
   <div class="field">
     <%= f.label t :birth %><br />
-    <%= f.date_select :birth %>
+    <div class="hide">
+      <%= f.date_select :birth %>
+    </div>
     <input class="datepicker" id="dp-birth"></input>
   </div>
   <div class="field">
     <%= f.label t :admitted %><br />
-    <%= f.date_select :admitted %>
+    <div class="hide">
+      <%= f.date_select :admitted %>
+    </div>
     <input class="datepicker" id="dp-admitted"></input>
   </div>
   <div class="field">
     <%= f.label t :graduated %><br />
-    <%= f.date_select :graduated %>
+    <div class="hide">
+      <%= f.date_select :graduated %>
+    </div>
     <input class="datepicker" id="dp-graduated"></input>
   </div>
   <div class="actions">
@@ -53,6 +59,7 @@ $(document).ready(function() {
   function ChangeBirth(e)
   {
     var date = $("#dp-birth").data("kendoDatePicker").value();
+    $('#student_birth_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
     $("#student_birth_1i").val(date.getFullYear());
     $("#student_birth_2i").val(date.getMonth()+1);
     $("#student_birth_3i").val(date.getDate());
@@ -61,6 +68,7 @@ $(document).ready(function() {
   function ChangeAdmitted(e)
   {
     var date = $("#dp-admitted").data("kendoDatePicker").value();
+    $('#student_admitted_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
     $("#student_admitted_1i").val(date.getFullYear());
     $("#student_admitted_2i").val(date.getMonth()+1);
     $("#student_admitted_3i").val(date.getDate());
@@ -69,6 +77,7 @@ $(document).ready(function() {
   function ChangeGraduated(e)
   {
     var date = $("#dp-graduated").data("kendoDatePicker").value();
+    $('#student_graduated_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
     $("#student_graduated_1i").val(date.getFullYear());
     $("#student_graduated_2i").val(date.getMonth()+1);
     $("#student_graduated_3i").val(date.getDate());
