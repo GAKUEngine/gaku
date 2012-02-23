@@ -3,14 +3,17 @@
 <head>
   <title>GAKUEngine</title>
   <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    params[:controller] %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag params[:controller] %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render :partial => "shared/menubar" %>
-
-<%= yield %>
-
+  <div id="container" class="k-content">
+    <%= render :partial => "shared/menubar" %>
+    <%= render :partial => "shared/flash" %>
+  
+    <%= yield %>
+  </div>
 </body>
 </html>

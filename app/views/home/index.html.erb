@@ -1,3 +1,13 @@
 <% content_for :title, translate("comname") %>
 
-学園陣
+<h1 align="center">学園陣</h1>
+
+<div id="login" align="center">
+  <% if user_signed_in? %>
+    --ここにユーザの役割・権限によるアクションとそのユーザが担当する授業やクラスなど--
+  <% else %>
+    <%= link_to t("devise.sign_in"), new_user_session_path %>
+  <% end %>
+</div>
+
+

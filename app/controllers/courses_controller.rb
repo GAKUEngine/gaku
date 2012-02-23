@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /courses
   # GET /courses.json
   def index
@@ -15,6 +17,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @syllabus = Syllabus.find(@course.syllabus_id)
+    @course_enrollments = CourseEnrollment.where(:course_id => @course)
 
     respond_to do |format|
       format.html # show.html.erb

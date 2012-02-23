@@ -2,6 +2,12 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree . 
+ * = require_self
+ * = require scaffolds.css.scss
+ * = require kendo_styles/kendo.common.min.css
+ *  require kendo_styles/kendo.gakuengine.css
+ * require kendo_styles/kendo.silver.min.css
+ *  require kendo_styles/override_kendo.css.scss
+ * = require override_main.css.scss
+ * = require elegant-brit-kendo-theme.css
 */

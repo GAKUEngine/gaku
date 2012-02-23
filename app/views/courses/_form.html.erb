@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label t('courses.code') %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
     <%= f.label t(:syllabus) %><br />
     <%= f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] } %>
+  </div>
+  <div class="field">
+    <%= f.label t('courses.code') %><%= t 'courses.code_sample' %><br />
+    <%= f.text_field :code %>
   </div>
   <div class="actions">
     <%= f.submit %>

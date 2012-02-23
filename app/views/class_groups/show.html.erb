@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t "class_groups.name" %>:</b>
+  <%= @class_group.name %>
+</p>
+
+<div id="class_group_enrollments">
+    <p id="enrolled_students_count">
+    <b><%= t :num_enrolled %>:</b>
+    <%= @class_group_enrollments.count %>
+  </p>
+  <p id="enrolled_students_list">
+    <b><%= t "class_group_enrollments.list" %>:</b>
+    <ul>
+      <% @class_group_enrollments.each do |enrollment| %>
+        <li><%= enrollment.student.name %></li>
+      <% end %>
+    </ul>
+  </p>
+  <div id="add_student_enrollment">
+  </div>
+</div>
+
+<%= link_to_enroll_student t('add_student'), @class_group.id, "add_student_enrollment" %> | 
+<%= link_to t(:Edit), edit_class_group_path(@class_group) %> |
+<%= link_to t(:Back), class_groups_path %>

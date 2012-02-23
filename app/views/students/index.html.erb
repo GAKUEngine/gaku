@@ -1,35 +1,77 @@
 <h1><%= t "students.list" %></h1>
 
-<table>
-  <tr>
-    <th><%= t "students.name" %></th>
-    <th><%= t "students.address" %></th>
-    <th><%= t "students.phone" %></th>
-    <th><%= t "students.email" %></th>
-    <th><%= t "students.birth" %></th>
-    <th><%= t "students.admitted" %></th>
-    <th><%= t "students.graduated" %></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="grid"></div>
 
-<% @students.each do |student| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%= student.address %></td>
-    <td><%= student.phone %></td>
-    <td><%= student.email %></td>
-    <td><%= student.birth %></td>
-    <td><%= student.admitted %></td>
-    <td><%= student.graduated %></td>
-    <td><%= link_to t(:Show), student %></td>
-    <td><%= link_to t(:Edit), edit_student_path(student) %></td>
-    <td><%= link_to t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<script>
+$(document).ready(function() {
+  
+  $.getJSON("/students.json",function(ds)
+  {
+    for(var i = 0; i < ds.length; i++)
+    {
+      var tag = "<a href='/students/"+(i+1)+"'>表示</a> <a href='/students/"+(i+1)+"/edit'>編集</a>";
+      ds[i]["manage"] = tag;
+    }
+    SetGrid(ds);
+  });
+  
+  function SetGrid(DataSource)
+  {
+    $("#grid").kendoGrid
+    ({
+      dataSource:
+      {
+        data: DataSource,
+        pageSize: 20
+      },
+      height: 720,
+      groupable: false,
+      scrollable: false,
+      sortable: true,
+      pageable: true,
+      columns: 
+      [
+        {
+          width: 128,
+          field: "name",
+          title: "<%= t "students.name" %>"
+        },
+        {
+          field: "address",
+          title: "<%= t "students.address" %>"
+        },
+        {
+          field: "phone",
+          title: "<%= t "students.phone" %>"
+        },
+        {
+          field: "email",
+          title: "<%= t "students.email" %>"
+        },
+        {
+          field: "birth",
+          title: "<%= t "students.birth" %>"
+        },
+        {
+          field: "admitted",
+          title: "<%= t "students.admitted" %>"
+        },
+        {
+          field: "graduated",
+          title: "<%= t "students.graduated" %>"
+        },
+        {
+          field: "manage",
+          encoded: false,
+          title: "<%= t "manage" %>"
+        }
+      ]
+    });
+  }
+
+});
+</script>
 
 <br />
 
-<%= link_to t('students.new'), new_student_path %>
+<%= link_to t('students.new'), new_student_path, :class => "k-button" %>

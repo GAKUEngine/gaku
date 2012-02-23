@@ -1,2 +1,0 @@
-module Admin::ClassManagerHelper
-end

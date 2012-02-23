@@ -1,0 +1,20 @@
+<ul id="menubarMenu">
+  <li><%= link_to t("panel"), root_path %></li>
+
+  <li><%= link_to t("students.list"), students_path %></li>
+
+  <li><%= t "class_group_management" %>
+  <ul>
+    <li><%= link_to t("class_groups.list"), class_groups_path %></li>
+  </ul>
+  
+  <li><%= t "course_management" %>
+  <ul>
+    <li><%= link_to t("syllabuses.list"), syllabuses_path %></li>
+    <li><%= link_to t("courses.list"), courses_path %></li>
+  </ul>
+</ul>
+
+<script>
+  $("#menubarMenu").kendoMenu();
+</script>

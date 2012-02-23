@@ -1,14 +1,12 @@
 <h1><%= t 'syllabuses.list' %></h1>
 
-<table>
+<table id="grid">
   <tr>
-    <th><%= t 'syllabuses.code' %></th>
-    <th><%= t 'syllabuses.name' %></th>
-    <th><%= t 'syllabuses.description' %></th>
-    <th><%= t 'syllabuses.credits' %></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th data-field="<%= t 'syllabuses.code' %>"><%= t 'syllabuses.code' %></th>
+    <th data-field="<%= t 'syllabuses.name' %>"><%= t 'syllabuses.name' %></th>
+    <th data-field="<%= t 'syllabuses.description' %>"><%= t 'syllabuses.description' %></th>
+    <th data-field="<%= t 'syllabuses.credits' %>"><%= t 'syllabuses.credits' %></th>
+    <th data-field="管理">管理</th>
   </tr>
 
 <% @syllabuses.each do |syllabus| %>
@@ -17,13 +15,26 @@
     <td><%= syllabus.name %></td>
     <td><%= syllabus.description %></td>
     <td><%= syllabus.credits %></td>
-    <td><%= link_to t(:Show), syllabus %></td>
-    <td><%= link_to t(:Edit), edit_syllabus_path(syllabus) %></td>
-    <td><%= link_to t(:Destroy), syllabus, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <div>
+        <%= link_to t(:Show), syllabus %>
+        <%= link_to t(:Edit), edit_syllabus_path(syllabus) %>
+        <%= link_to t(:Destroy), syllabus, confirm: 'Are you sure?', method: :delete %>        
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
 
+<script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            height: 360,
+            sortable: true
+        });
+    });
+</script>
+
 <br />
 
-<%= link_to t('syllabuses.new'), new_syllabus_path %>
+<%= link_to t('syllabuses.new'), new_syllabus_path, :class => "k-button" %>

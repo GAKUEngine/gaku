@@ -1,5 +1,8 @@
-<ul>
-  <li><%= link_to t("students.list"), students_path %></li>
-  <li><%= link_to t("syllabuses.list"), syllabuses_path %></li>
-  <li><%= link_to t("courses.list"), courses_path %></li>
-</ul>
+<div id="menubar">
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+    <%= link_to t("devise.sign_out"), destroy_user_session_path, :method => :delete %>
+    <%= render :partial => "shared/menubar_menu" %>
+  <% end %>
+</div>
+

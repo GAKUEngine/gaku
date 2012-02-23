@@ -7,7 +7,7 @@
 
 <p>
   <b><%= t 'combined_code' %>:</b>
-  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code + "-" end -%>
+  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%>
 </p>
 
 <p>
@@ -15,5 +15,18 @@
   <%= Syllabus::find(@course.syllabus_id).name %>
 </p>
 
+<div id="tabStrip">
+  <ul>
+    <li class="k-state-acive"><%= t "course_enrollments.list" %></li>
+    <li>課題</li>
+    <li>試験</li>
+  </ul>
+  <%= render :partial => "courses/enrollments" %>
+  <%= render :partial => "courses/assignments" %>
+  <%= render :partial => "courses/tests" %>
+</div>
+<script>
+  $("#tabStrip").kendoTabStrip();
+</script>
 <%= link_to t(:Edit), edit_course_path(@course) %> |
 <%= link_to t(:Back), courses_path %>

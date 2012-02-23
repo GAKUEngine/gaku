@@ -5,6 +5,9 @@ ja:
   Edit: "編集"
   Destroy: "削除"
   Back: "戻る"
+  manage: "管理"
+  confirm_delete: "本当に削除しますか?"
+  panel: "パネル"
   name: "名前"
   address: "住所"
   phone: "電話番号"
@@ -25,7 +28,9 @@ ja:
     birth: "生徒生年月日"
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
+  add_student: "生徒を追加する"
   schedule: "定刻"
+  num_enrolled: "在籍人数"
   combined_code: "総合コード"
   syllabus: "授業計画"
   syllabuses:
@@ -34,11 +39,36 @@ ja:
     list: "授業計画一覧"
     code: "項目コード"
     name: "授業名"
+    name_sample: "[例: 科学A]"
     description: "授業説明"
     credits: "単位数"
+  course_management: "授業管理"
   course: "授業"
   courses:
     new: "新規授業"
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
+    code_sample: "[例: 秋2020]"
+  course_enrollments:
+    list: "授業在籍一覧"
+  class_group_management: "クラス管理"
+  class_groups:
+    list: "クラス一覧"
+    new: "新規クラス登録"
+    name: "クラス名"
+  class_group_enrollments:
+    list: "クラス名簿"
+  grades:
+    average_points: "平均点数"
+    total_points: "総合点数"
+    rank: "ランク"
+  assignments:
+    plural: "課題"
+    results: "課題の結果"
+    view: "課題参照"
+  tests:
+    plural: "試験"
+    view: "試験参照"
+
+  and: "と"
