@@ -1,22 +1,15 @@
 <h1><%= t "students.list" %></h1>
+<%= link_to t('students.new'), new_student_path, :class => "k-button" %>
 
 <div id="grid"></div>
 
 <script>
 $(document).ready(function() {
-  
-  $.getJSON("/students.json",function(ds)
-  {
-    for(var i = 0; i < ds.length; i++)
-    {
-      var tag = "<a href='/students/"+(i+1)+"'>表示</a> <a href='/students/"+(i+1)+"/edit'>編集</a>";
-      ds[i]["manage"] = tag;
-    }
-    SetGrid(ds);
-  });
-  
+    
   function SetGrid(DataSource)
   {
+    var DateW = 95;
+    
     $("#grid").kendoGrid
     ({
       dataSource:
@@ -32,9 +25,9 @@ $(document).ready(function() {
       columns: 
       [
         {
-          width: 128,
           field: "name",
-          title: "<%= t "students.name" %>"
+          title: "<%= t "students.name" %>",
+          width: 128
         },
         {
           field: "address",
@@ -42,36 +35,50 @@ $(document).ready(function() {
         },
         {
           field: "phone",
-          title: "<%= t "students.phone" %>"
+          title: "<%= t "students.phone" %>",
+          width: 128
         },
         {
           field: "email",
-          title: "<%= t "students.email" %>"
+          title: "<%= t "students.email" %>",
+          width: 256
         },
         {
           field: "birth",
-          title: "<%= t "students.birth" %>"
+          title: "<%= t "students.birth" %>",
+          width: DateW
         },
         {
           field: "admitted",
-          title: "<%= t "students.admitted" %>"
+          title: "<%= t "students.admitted" %>",
+          width: DateW
         },
         {
           field: "graduated",
-          title: "<%= t "students.graduated" %>"
+          title: "<%= t "students.graduated" %>",
+          width: DateW
         },
         {
           field: "manage",
-          encoded: false,
-          title: "<%= t "manage" %>"
+          title: "<%= t "manage" %>",
+          width: 183,
+          encoded: false
         }
       ]
     });
   }
 
+  $.getJSON("/students.json",function(ds)
+  {
+    for(var i = 0; i < ds.length; i++)
+    {
+      var tag = '<div style="float:left"><a class="k-button" href="/students/'+ds[i].id+'">表示</a><a class="k-button" href="/students/'+ds[i].id+'/edit">編集</a></div>';
+      ds[i]["manage"] = tag;
+    }
+    SetGrid(ds);
+  });
+
 });
 </script>
 
 <br />
-
-<%= link_to t('students.new'), new_student_path, :class => "k-button" %>
