@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216051841) do
+ActiveRecord::Schema.define(:version => 20120220083354) do
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
@@ -47,6 +47,31 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
   end
 
   add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
+
+  create_table "exam_scores", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "exam_id"
+    t.float    "score"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exam_scores", ["exam_id"], :name => "index_exam_scores_on_exam_id"
+  add_index "exam_scores", ["student_id"], :name => "index_exam_scores_on_student_id"
+
+  create_table "exams", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "problem_count"
+    t.float    "max_score"
+    t.float    "weight"
+    t.binary   "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exams", ["course_id"], :name => "index_exams_on_course_id"
 
   create_table "schedules", :force => true do |t|
     t.datetime "start"
