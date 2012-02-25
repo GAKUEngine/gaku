@@ -9,3 +9,6 @@
 //= require kendo_js/kendo.all.min.js
 //= require kendo_js/cultures/kendo.culture.ja-JP.min.js
 //= require kendo_js/cultures/set_culture.js
+//= require ../raw/wijmo-open/development-bundle/external/jquery-ui-1.8.17.custom.min.js
+//= require jquery.wijmo-open.all.2.0.0.min.js
+//= require jquery.wijmo-complete.all.2.0.0.min.js

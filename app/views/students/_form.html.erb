@@ -48,10 +48,46 @@
     </div>
     <input class="datepicker" id="dp-graduated"></input>
   </div>
+  
+  <div class="main demo">
+    <!-- Begin demo markup -->
+    <div id="calendar">
+    </div>
+    <label for="popdate">Choose a Date:</label>
+    <input name="popdate" type="text" id="popdate" style="width: 180px;" />
+    <!-- End demo markup -->
+    <div class="demo-options">
+      <!-- Begin options markup -->
+      <!-- End options markup -->
+    </div>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(function () {
+    $("#calendar").wijcalendar(
+  {
+    popupMode: true,
+    selectedDatesChanged: function (e,args) {       
+      console.log(e, args);
+      var selDate = $(this).wijcalendar("getSelectedDate");
+      if (!!selDate) $("#popdate").val(selDate.toDateString());
+    }
+  });
+  
+  $("#popdate").click(function () {
+      $("#calendar").wijcalendar("popup", {
+        of: $("#popdate"),
+        offset: '0 2'
+      });
+    })
+  });
+</script>
+
 
 <script>
 $(document).ready(function() {
@@ -74,8 +110,9 @@ $(document).ready(function() {
     $("#student_admitted_3i").val(date.getDate());
   }
   
-  function ChangeGraduated(e)
+  function ChangeGraduated(e, args)
   {
+    console.log(e, args);
     var date = $("#dp-graduated").data("kendoDatePicker").value();
     $('#student_graduated_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
     $("#student_graduated_1i").val(date.getFullYear());
