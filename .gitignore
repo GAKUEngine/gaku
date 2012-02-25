@@ -15,3 +15,11 @@
 /tmp
 
 *.swp
+
+# Wijmo Complete files (may need the purchase of a license - not for distrobution)
+/app/assets/images/images/wijeditor
+/app/assets/images/images/wijrating
+/app/assets/images/images/waiting.gif
+/app/assets/javascripts/jquery.wijmo-complete.all.2.0.0.min.js
+/app/assets/stylesheets/jquery.wijmo-complete.2.0.0.css
+/app/assets/stylesheets/jquery.wijmo-complete.all.2.0.0.min.css
