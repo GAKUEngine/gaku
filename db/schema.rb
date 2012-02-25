@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216051841) do
+ActiveRecord::Schema.define(:version => 20120224153813) do
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
     t.integer  "student_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "class_group_enrollments", ["class_group_id"], :name => "index_class_group_enrollments_on_class_group_id"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
 
   create_table "class_groups", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "course_enrollments", :force => true do |t|
     t.integer  "student_id"
     t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
@@ -42,18 +42,43 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
   create_table "courses", :force => true do |t|
     t.string   "code"
     t.integer  "syllabus_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
+
+  create_table "exam_scores", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "exam_id"
+    t.float    "score"
+    t.text     "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "exam_scores", ["exam_id"], :name => "index_exam_scores_on_exam_id"
+  add_index "exam_scores", ["student_id"], :name => "index_exam_scores_on_student_id"
+
+  create_table "exams", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "problem_count"
+    t.float    "max_score"
+    t.float    "weight"
+    t.binary   "data"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "exams", ["course_id"], :name => "index_exams_on_course_id"
 
   create_table "schedules", :force => true do |t|
     t.datetime "start"
     t.datetime "end"
     t.string   "repeat"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "students", :force => true do |t|
@@ -64,16 +89,16 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
     t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "syllabuses", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "credits"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "code"
   end
 
@@ -83,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -98,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120216051841) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

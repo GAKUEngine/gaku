@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  course: 
+  problem_count: 1
+  max_score: 1.5
+  weight: 1.5
+  data: 
+
+two:
+  name: MyString
+  course: 
+  problem_count: 1
+  max_score: 1.5
+  weight: 1.5
+  data: 
