@@ -63,7 +63,7 @@
 $(document).ready(function() {
 
   $(function ()
-  {
+  {  
     var ctarget;
     $(".calendar").wijcalendar(
     {
@@ -101,43 +101,33 @@ $(document).ready(function() {
         offset: '0 2'
       });
     })
+    
+    var db_birth = new Date("<%= @student.birth %>");
+    var db_admitted = new Date("<%= @student.admitted %>");
+    var db_graduated = new Date("<%= @student.graduated %>")
+    if(db_birth)
+    {
+      console.log(db_birth);
+      $("#birth").val(db_birth.getFullYear()+"年 "+(db_birth.getMonth()+1)+"月"+db_birth.getDate()+"日");
+      $("#c-birth").wijcalendar("selectDate", db_birth);
+      $("#c-birth").wijcalendar({displayDate: db_birth});
+    }
+    if(db_admitted)
+    {
+      console.log(db_admitted);
+      $("#admitted").val(db_admitted.getFullYear()+"年 "+(db_admitted.getMonth()+1)+"月"+db_admitted.getDate()+"日");
+      $("#c-admitted").wijcalendar("selectDate", db_admitted);
+      $("#c-admitted").wijcalendar({displayDate: db_admitted});
+    }
+    if(db_graduated)
+    {
+      console.log(db_graduated);
+      $("#graduated").val(db_graduated.getFullYear()+"年 "+(db_graduated.getMonth()+1)+"月"+db_graduated.getDate()+"日");
+      $("#c-graduated").wijcalendar("selectDate", db_graduated);
+      $("#c-graduated").wijcalendar({displayDate: db_graduated});
+    }  
+    
   });
-
-
-
-  
-  function ChangeBirth(e)
-  {
-    var date = $("#dp-birth").data("kendoDatePicker").value();
-    $('#student_birth_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
-    $("#student_birth_1i").val(date.getFullYear());
-    $("#student_birth_2i").val(date.getMonth()+1);
-    $("#student_birth_3i").val(date.getDate());
-  }
-  
-  function ChangeAdmitted(e)
-  {
-    var date = $("#dp-admitted").data("kendoDatePicker").value();
-    $('#student_admitted_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
-    $("#student_admitted_1i").val(date.getFullYear());
-    $("#student_admitted_2i").val(date.getMonth()+1);
-    $("#student_admitted_3i").val(date.getDate());
-  }
-  
-  function ChangeGraduated(e, args)
-  {
-    console.log(e, args);
-    var date = $("#dp-graduated").data("kendoDatePicker").value();
-    $('#student_graduated_1i').append($('<option value="'+date.getFullYear()+'">'+date.getFullYear()+'</option>'));
-    $("#student_graduated_1i").val(date.getFullYear());
-    $("#student_graduated_2i").val(date.getMonth()+1);
-    $("#student_graduated_3i").val(date.getDate());
-  }
-  
-//  $(".datepicker").kendoDatePicker();
-//  $("#dp-birth").data("kendoDatePicker").bind("change", ChangeBirth);
-//  $("#dp-admitted").data("kendoDatePicker").bind("change", ChangeAdmitted);
-//  $("#dp-graduated").data("kendoDatePicker").bind("change", ChangeGraduated);
 
 });
 </script>
