@@ -102,29 +102,29 @@ $(document).ready(function() {
       });
     })
     
-    var db_birth = new Date("<%= @student.birth %>");
-    var db_admitted = new Date("<%= @student.admitted %>");
-    var db_graduated = new Date("<%= @student.graduated %>")
-    if(db_birth == NaN)
+    var db_birth = "<%= @student.birth %>";
+    var db_admitted = "<%= @student.admitted %>";
+    var db_graduated = "<%= @student.graduated %>";
+    if(db_birth)
     {
-      console.log(db_birth);
-      $("#birth").val(db_birth.getFullYear()+"年 "+(db_birth.getMonth()+1)+"月"+db_birth.getDate()+"日");
-      $("#c-birth").wijcalendar("selectDate", db_birth);
-      $("#c-birth").wijcalendar({displayDate: db_birth});
+      var date = new Date(db_birth);
+      $("#birth").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-birth").wijcalendar("selectDate", date);
+      $("#c-birth").wijcalendar({displayDate: date});
     }
-    if(db_admitted == NaN)
+    if(db_admitted)
     {
-      console.log(db_admitted);
-      $("#admitted").val(db_admitted.getFullYear()+"年 "+(db_admitted.getMonth()+1)+"月"+db_admitted.getDate()+"日");
-      $("#c-admitted").wijcalendar("selectDate", db_admitted);
-      $("#c-admitted").wijcalendar({displayDate: db_admitted});
+      var date = new Date(db_birth);
+      $("#admitted").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-admitted").wijcalendar("selectDate", date);
+      $("#c-admitted").wijcalendar({displayDate: date});
     }
-    if(db_graduated == NaN)
+    if(db_graduated)
     {
-      console.log(db_graduated);
-      $("#graduated").val(db_graduated.getFullYear()+"年 "+(db_graduated.getMonth()+1)+"月"+db_graduated.getDate()+"日");
-      $("#c-graduated").wijcalendar("selectDate", db_graduated);
-      $("#c-graduated").wijcalendar({displayDate: db_graduated});
+      var date = new Date(db_birth);
+      $("#graduated").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-graduated").wijcalendar("selectDate", date);
+      $("#c-graduated").wijcalendar({displayDate: date});
     }  
     
   });
