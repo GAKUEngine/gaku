@@ -1,7 +1,7 @@
 <div id="menubar">
   <% if user_signed_in? %>
     <%= current_user.email %>
-    <%= link_to t("devise.sign_out"), destroy_user_session_path, :method => :delete %>
+    <%= link_to t("devise.sign_out"), destroy_user_session_path, :class => "k-button", :method => :delete %>
     <%= render :partial => "shared/menubar_menu" %>
   <% end %>
 </div>
