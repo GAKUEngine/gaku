@@ -32,65 +32,79 @@
     <div class="hide">
       <%= f.date_select :birth %>
     </div>
-    <input class="datepicker" id="dp-birth"></input>
+    <div class="calendar" id="c-birth"></div>
+    <input class="popdate" id="birth" style="width: 180px;"></input>
   </div>
   <div class="field">
     <%= f.label t :admitted %><br />
     <div class="hide">
       <%= f.date_select :admitted %>
     </div>
-    <input class="datepicker" id="dp-admitted"></input>
+    <div class="calendar" id="c-admitted"></div>
+    <input class="popdate" id="admitted" style="width: 180px;"></input>
   </div>
   <div class="field">
     <%= f.label t :graduated %><br />
     <div class="hide">
       <%= f.date_select :graduated %>
     </div>
-    <input class="datepicker" id="dp-graduated"></input>
+    <div class="calendar" id="c-graduated"></div>
+    <input class="popdate" id="graduated" style="width: 180px;"></input>
   </div>
-  
-  <div class="main demo">
-    <!-- Begin demo markup -->
-    <div id="calendar">
-    </div>
-    <label for="popdate">Choose a Date:</label>
-    <input name="popdate" type="text" id="popdate" style="width: 180px;" />
-    <!-- End demo markup -->
-    <div class="demo-options">
-      <!-- Begin options markup -->
-      <!-- End options markup -->
-    </div>
-  </div>
-  
+      
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
 
-<script type="text/javascript">
-  $(function () {
-    $("#calendar").wijcalendar(
-  {
-    popupMode: true,
-    selectedDatesChanged: function (e,args) {       
-      console.log(e, args);
-      var selDate = $(this).wijcalendar("getSelectedDate");
-      if (!!selDate) $("#popdate").val(selDate.toDateString());
-    }
-  });
-  
-  $("#popdate").click(function () {
-      $("#calendar").wijcalendar("popup", {
-        of: $("#popdate"),
-        offset: '0 2'
-      });
-    })
-  });
-</script>
 
 
 <script>
 $(document).ready(function() {
+
+  $(function ()
+  {
+    var ctarget;
+    $(".calendar").wijcalendar(
+    {
+      culture: "ja-JP",
+      titleFormat: "yyyy年 MMMM",
+      toolTipFormat: 'yyyy年MMMMdd日(dddd)',
+      popupMode: true,
+      selectedDatesChanged: function (e,args)
+      {       
+        console.log(e, args);
+        var selDate = $(this).wijcalendar("getSelectedDate");
+        if (!!selDate)
+        {
+          var y = selDate.getFullYear();
+          var m = selDate.getMonth()+1;
+          var d = selDate.getDate();
+          
+          $(ctarget).val(y+"年 "+m+"月"+d+"日"); 
+
+          $("#student_"+ctarget.id+"_1i").append($('<option value="'+y+'">'+y+'</option>'));
+          $("#student_"+ctarget.id+"_1i").val(y);
+          $("#student_"+ctarget.id+"_2i").val(m);
+          $("#student_"+ctarget.id+"_3i").val(d);
+        }
+      }
+    });
+  
+    $(".popdate").click(function (e, args)
+    {
+      ctarget = e.currentTarget;
+      cname = "c-" + ctarget.id;
+      $(".calendar#"+cname).wijcalendar("popup",
+      {
+        of: $(ctarget),
+        offset: '0 2'
+      });
+    })
+  });
+
+
+
   
   function ChangeBirth(e)
   {
@@ -120,10 +134,10 @@ $(document).ready(function() {
     $("#student_graduated_3i").val(date.getDate());
   }
   
-  $(".datepicker").kendoDatePicker();
-  $("#dp-birth").data("kendoDatePicker").bind("change", ChangeBirth);
-  $("#dp-admitted").data("kendoDatePicker").bind("change", ChangeAdmitted);
-  $("#dp-graduated").data("kendoDatePicker").bind("change", ChangeGraduated);
+//  $(".datepicker").kendoDatePicker();
+//  $("#dp-birth").data("kendoDatePicker").bind("change", ChangeBirth);
+//  $("#dp-admitted").data("kendoDatePicker").bind("change", ChangeAdmitted);
+//  $("#dp-graduated").data("kendoDatePicker").bind("change", ChangeGraduated);
 
 });
 </script>
