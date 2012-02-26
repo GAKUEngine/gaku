@@ -17,6 +17,7 @@
 //= require external/globalize.min.js
 //= require external/cultures/globalize.cultures.js
 
+// require wijmo/jquery.wijmo.wijpopup.js
 //= require wijmo/jquery.wijmo.wijcalendar.js
 //= require wijmo/jquery.wijmo.wijpopup.js
 

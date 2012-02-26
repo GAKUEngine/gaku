@@ -105,21 +105,21 @@ $(document).ready(function() {
     var db_birth = new Date("<%= @student.birth %>");
     var db_admitted = new Date("<%= @student.admitted %>");
     var db_graduated = new Date("<%= @student.graduated %>")
-    if(db_birth)
+    if(db_birth == NaN)
     {
       console.log(db_birth);
       $("#birth").val(db_birth.getFullYear()+"年 "+(db_birth.getMonth()+1)+"月"+db_birth.getDate()+"日");
       $("#c-birth").wijcalendar("selectDate", db_birth);
       $("#c-birth").wijcalendar({displayDate: db_birth});
     }
-    if(db_admitted)
+    if(db_admitted == NaN)
     {
       console.log(db_admitted);
       $("#admitted").val(db_admitted.getFullYear()+"年 "+(db_admitted.getMonth()+1)+"月"+db_admitted.getDate()+"日");
       $("#c-admitted").wijcalendar("selectDate", db_admitted);
       $("#c-admitted").wijcalendar({displayDate: db_admitted});
     }
-    if(db_graduated)
+    if(db_graduated == NaN)
     {
       console.log(db_graduated);
       $("#graduated").val(db_graduated.getFullYear()+"年 "+(db_graduated.getMonth()+1)+"月"+db_graduated.getDate()+"日");
