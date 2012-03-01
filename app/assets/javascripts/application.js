@@ -22,4 +22,4 @@
 //= require wijmo/jquery.wijmo.wijpopup.js
 
 // require jquery.wijmo-open.all.2.0.0.min.js
-//= require jquery.wijmo-complete.all.2.0.0.min.js
+// require jquery.wijmo-complete.all.2.0.0.min.js
