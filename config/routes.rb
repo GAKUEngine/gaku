@@ -1,21 +1,19 @@
 GAKUEngine::Application.routes.draw do
-  resources :exams
-
   devise_for :users
 
-  resources :class_group_enrollments
-
   resources :class_groups
-
-  resources :course_enrollments
+  resources :class_group_enrollments
 
   resources :teachers
 
   resources :courses
+  resources :course_enrollments
 
   resources :syllabuses
 
   resources :students
+
+  resources :exams
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
