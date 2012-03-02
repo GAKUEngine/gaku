@@ -2,8 +2,9 @@
   <p id="enrolled_students_count">
     <b><%= t :num_enrolled %>:</b>
     <%= @course_enrollments.count %>
-    <%= link_to t('add_student'), {:controller => :course_enrollments, :action => :new, :format => :html, 
-      :active => "course", :idnum => @course.id}, :remote => true, :id => "add_student_enrollment", :class => "make-button" %>
+    <%= link_to t('add_student'), 
+      {:controller => :course_enrollments, :action => :enroll_to_course, :course_id => @course.id},
+      :remote => true, :id => "add_student_enrollment", :class => "make-button" %>
     <div id="add_student_enrollment_box">
     </div>
   </p>
