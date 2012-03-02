@@ -1,7 +1,10 @@
 <h1><%= t "students.list" %></h1>
 <%= link_to t('students.new'), new_student_path, :class => "k-button" %>
 
+
+
 <div id="grid"></div>
+
 
 <script>
 $(document).ready(function() {
@@ -77,8 +80,10 @@ $(document).ready(function() {
     }
     SetGrid(ds);
   });
+  
 
 });
 </script>
+
 
 <br />
