@@ -1,6 +1,7 @@
 <h1><%= t 'syllabuses.list' %></h1>
+<%= link_to t('syllabuses.new'), new_syllabus_path, :class => "make-button" %>
 
-<table id="grid">
+<table class="make-grid">
   <tr>
     <th data-field="<%= t 'syllabuses.code' %>"><%= t 'syllabuses.code' %></th>
     <th data-field="<%= t 'syllabuses.name' %>"><%= t 'syllabuses.name' %></th>
@@ -25,16 +26,3 @@
   </tr>
 <% end %>
 </table>
-
-<script>
-    $(document).ready(function() {
-        $("#grid").kendoGrid({
-            height: 360,
-            sortable: true
-        });
-    });
-</script>
-
-<br />
-
-<%= link_to t('syllabuses.new'), new_syllabus_path, :class => "k-button" %>
