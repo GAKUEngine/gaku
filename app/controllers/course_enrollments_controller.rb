@@ -26,17 +26,30 @@ class CourseEnrollmentsController < ApplicationController
   def new
     @course_enrollment = CourseEnrollment.new
 
-    if params[:active] == "course"
-      @course_enrollment.course_id = Course.find(params[:idnum])
-      return render :partial => "active_form_courses"
+    if params[:course_id]
+      @course_enrollment.course_id = Course.find(params[:course_id])
     end
 
     respond_to do |format|
-      format.html { render :partial => "form" }
+      format.html { render :partial => "enroll_to_course" }
+      #format.html { render :partial => "form" }
+      format.json { render json: @course_enrollment }
+      format.js { render :layout => false }
+    end
+  end
+
+  def enroll_to_course
+    @course_enrollment = CourseEnrollment.new
+
+    @course_enrollment.course_id = Course.find(params[:course_id])
+
+    respond_to do |format|
+      format.html { render :partial => "enroll_to_course" }
       format.json { render json: @course_enrollment }
       format.js
     end
   end
+
 
   # GET /course_enrollments/1/edit
   def edit

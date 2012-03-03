@@ -2,9 +2,9 @@
 <b><%= t 'courses.code' %>:</b>
 <%= @course.code %> | 
 <b><%= t 'combined_code' %>:</b>
-<%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%> | 
+<%= if @course.syllabus.code != "" then @course.syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%> | 
 <b><%= t :syllabus %>:</b>
-<%= Syllabus::find(@course.syllabus_id).name %>
+<%= @course.syllabus.name %>
 
 <%= link_to t(:Edit), edit_course_path(@course), :class => "make-button" %>
 <%= link_to t(:Back), courses_path, :class => "make-button" %>
