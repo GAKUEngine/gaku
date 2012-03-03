@@ -6,8 +6,9 @@ GAKUEngine::Application.routes.draw do
 
   resources :teachers
 
-  resources :courses
-  resources :course_enrollments
+  resources :courses do
+    resources :course_enrollments
+  end
 
   resources :syllabuses
 
