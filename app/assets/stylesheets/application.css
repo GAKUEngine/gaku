@@ -2,17 +2,11 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- * = require_self
- * = require scaffolds.css.scss
- * = require kendo_styles/kendo.common.min.css
- * = require kendo_styles/kendo.gakuengine.css
- *  require kendo_styles/kendo.silver.min.css
- *  require kendo_styles/override_kendo.css.scss
- *  require override_main.css.scss
- *  require elegant-brit-kendo-theme.css
- *  require jquery.wijmo-complete.2.0.0.css
- *  require themes/rocket/jquery-wijmo.css
- *  require jquery.wijmo-complete.all.2.0.0.min.css
- * = require jquery.wijmo-open.2.0.0.css
- * = require themes/gakuengine/gakuengine-rocket.css.scss
+ *= require_self
+ *= require scaffolds.css.scss
+ *= require jquery.wijmo-open.2.0.0.css
+ *= require themes/gakuengine/gakuengine-rocket.css.scss
+ *= require kendo/kendo.common.min
+ * require kendo/kendo.default.min
+ *= require kendo.gakuengine
 */
