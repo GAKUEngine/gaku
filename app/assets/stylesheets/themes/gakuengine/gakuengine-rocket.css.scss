@@ -1,14 +1,8 @@
 /* 
  * 
- * Wijmo Rocket Theme
- * http://wijmo.com/
- * 
- * Copyright(c) ComponentOne, LLC.  All rights reserved.
- * 
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * licensing@wijmo.com
- * http://wijmo.com/license
- * 
+ * Gakuengine Preliminary Theme
+ * Based on Wijmo Rocket theme
+ *  
  * 
 */
 
@@ -2354,3 +2348,19 @@ div.wijmo-wijribbon .ui-state-active .ui-button-text
 .wijmo-wijgrid .ui-state-highlight .ui-state-active .ui-icon {
     background-image: url("images/ui-icons_00a6dd_256x240.png");
 }
+
+/******************************************************************
+* Additions for generic overrides
+******************************************************************/
+
+/*a {
+  color: white;// #007bbb;
+  text-shadow: 1px 1px 2px white;
+
+  &:visited {
+    color: #007bbb;
+  }
+  &:hover {
+    color: #0095d9;
+  }
+}*/

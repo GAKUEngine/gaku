@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
     t.integer  "student_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "class_group_enrollments", ["class_group_id"], :name => "index_class_group_enrollments_on_class_group_id"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
 
   create_table "class_groups", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "course_enrollments", :force => true do |t|
     t.integer  "student_id"
     t.integer  "course_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
   create_table "courses", :force => true do |t|
     t.string   "code"
     t.integer  "syllabus_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
     t.datetime "start"
     t.datetime "end"
     t.string   "repeat"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "students", :force => true do |t|
@@ -89,16 +89,16 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
     t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "syllabuses", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "credits"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "code"
   end
 
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120224153813) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

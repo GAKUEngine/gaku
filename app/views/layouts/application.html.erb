@@ -9,11 +9,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container" class="k-content">
-    <%= render :partial => "shared/menubar" %>
-    <%= render :partial => "shared/flash" %>
-  
-    <%= yield %>
-  </div>
+  <%= render :partial => "shared/menubar" %>
+  <%= render :partial => "shared/flash" %>
+
+  <%= yield %>
 </body>
 </html>
