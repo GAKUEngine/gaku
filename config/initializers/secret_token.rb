@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-GAKUEngine::Application.config.secret_token = '4b0c904de16ccc2430400b4786596340b984ea00b4a6ad726dc686183839e1fd30c9456787b2626c98b07ca684611295a7b2016ecfbe7598626a47ded59cba59'
+GAKUEngine::Application.config.secret_token = '569a9ff54f0c28f3c4e945fa1cef59a63a29abd85eada6916920bcd9ba7ce4f63b48c71e3bafb950a066f50fa1c53c6c58cab7a3429e55fb0675062063b2b227'

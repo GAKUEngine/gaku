@@ -1,32 +1,24 @@
 <p id="notice"><%= notice %></p>
+<b><%= t 'courses.code' %>:</b>
+<%= @course.code %> | 
+<b><%= t 'combined_code' %>:</b>
+<%= if @course.syllabus.code != "" then @course.syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%> | 
+<b><%= t :syllabus %>:</b>
+<%= @course.syllabus.name %>
 
-<p>
-  <b><%= t 'courses.code' %>:</b>
-  <%= @course.code %>
-</p>
-
-<p>
-  <b><%= t 'combined_code' %>:</b>
-  <%= if @syllabus.code != "" then @syllabus.code + "-" end -%><%= if @course.code != "" then @course.code end -%>
-</p>
-
-<p>
-  <b><%= t :syllabus %>:</b>
-  <%= Syllabus::find(@course.syllabus_id).name %>
-</p>
+<%= link_to t(:Edit), edit_course_path(@course), :class => "make-button" %>
+<%= link_to t(:Back), courses_path, :class => "make-button" %>
 
 <div id="tabStrip">
   <ul>
     <li class="k-state-acive"><%= t "course_enrollments.list" %></li>
-    <li>課題</li>
-    <li>試験</li>
+    <li><%= t "assignments.list" %></li>
+    <li><%= t "exams.list" %></li>
   </ul>
   <%= render :partial => "courses/enrollments" %>
   <%= render :partial => "courses/assignments" %>
-  <%= render :partial => "courses/tests" %>
+  <%= render :partial => "courses/exams" %>
 </div>
 <script>
-  $("#tabStrip").kendoTabStrip();
+  var tabStrip = $("#tabStrip").kendoTabStrip();
 </script>
-<%= link_to t(:Edit), edit_course_path(@course) %> |
-<%= link_to t(:Back), courses_path %>

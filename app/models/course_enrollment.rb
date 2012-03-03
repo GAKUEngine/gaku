@@ -6,9 +6,9 @@ class CourseEnrollment < ActiveRecord::Base
 
   #scope 
 
-  def self.get_enrolled(course_id)
-    CourseEnrollment.where({:course_id => course_id})
-  end
+  #def self.get_enrolled(course_id)
+  #  CourseEnrollment.where({:course_id => course_id})
+  #end
 
   #def self.get_not_enrolled(course_id)
   #  CourseEnrollment.lambda({ |

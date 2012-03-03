@@ -5,9 +5,14 @@
  * = require_self
  * = require scaffolds.css.scss
  * = require kendo_styles/kendo.common.min.css
- *  require kendo_styles/kendo.gakuengine.css
- * require kendo_styles/kendo.silver.min.css
+ * = require kendo_styles/kendo.gakuengine.css
+ *  require kendo_styles/kendo.silver.min.css
  *  require kendo_styles/override_kendo.css.scss
- * = require override_main.css.scss
- * = require elegant-brit-kendo-theme.css
+ *  require override_main.css.scss
+ *  require elegant-brit-kendo-theme.css
+ *  require jquery.wijmo-complete.2.0.0.css
+ *  require themes/rocket/jquery-wijmo.css
+ *  require jquery.wijmo-complete.all.2.0.0.min.css
+ * = require jquery.wijmo-open.2.0.0.css
+ * = require themes/gakuengine/gakuengine-rocket.css.scss
 */

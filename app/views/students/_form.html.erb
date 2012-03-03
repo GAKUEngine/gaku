@@ -29,20 +29,105 @@
   </div>
   <div class="field">
     <%= f.label t :birth %><br />
-    <%= f.date_select :birth %>
-    <input class="datepicker"></input>
+    <div class="hide">
+      <%= f.date_select :birth %>
+    </div>
+    <div class="calendar" id="c-birth"></div>
+    <input class="popdate" id="birth" style="width: 180px;"></input>
   </div>
   <div class="field">
     <%= f.label t :admitted %><br />
-    <%= f.date_select :admitted %>
-    <input class="datepicker"></input>
+    <div class="hide">
+      <%= f.date_select :admitted %>
+    </div>
+    <div class="calendar" id="c-admitted"></div>
+    <input class="popdate" id="admitted" style="width: 180px;"></input>
   </div>
   <div class="field">
     <%= f.label t :graduated %><br />
-    <%= f.date_select :graduated %>
-    <input class="datepicker"></input>
+    <div class="hide">
+      <%= f.date_select :graduated %>
+    </div>
+    <div class="calendar" id="c-graduated"></div>
+    <input class="popdate" id="graduated" style="width: 180px;"></input>
   </div>
+      
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+
+<script>
+$(document).ready(function() {
+
+  $(function ()
+  {  
+    var ctarget;
+    $(".calendar").wijcalendar(
+    {
+      culture: "ja-JP",
+      titleFormat: "yyyy年 MMMM",
+      toolTipFormat: 'yyyy年MMMMdd日(dddd)',
+      popupMode: true,
+      selectedDatesChanged: function (e,args)
+      {       
+        console.log(e, args);
+        var selDate = $(this).wijcalendar("getSelectedDate");
+        if (!!selDate)
+        {
+          var y = selDate.getFullYear();
+          var m = selDate.getMonth()+1;
+          var d = selDate.getDate();
+          
+          $(ctarget).val(y+"年 "+m+"月"+d+"日"); 
+
+          $("#student_"+ctarget.id+"_1i").append($('<option value="'+y+'">'+y+'</option>'));
+          $("#student_"+ctarget.id+"_1i").val(y);
+          $("#student_"+ctarget.id+"_2i").val(m);
+          $("#student_"+ctarget.id+"_3i").val(d);
+        }
+      }
+    });
+  
+    $(".popdate").click(function (e, args)
+    {
+      ctarget = e.currentTarget;
+      cname = "c-" + ctarget.id;
+      $(".calendar#"+cname).wijcalendar("popup",
+      {
+        of: $(ctarget),
+        offset: '0 2'
+      });
+    })
+    
+    var db_birth = "<%= @student.birth %>";
+    var db_admitted = "<%= @student.admitted %>";
+    var db_graduated = "<%= @student.graduated %>";
+    if(db_birth)
+    {
+      var date = new Date(db_birth);
+      $("#birth").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-birth").wijcalendar("selectDate", date);
+      $("#c-birth").wijcalendar({displayDate: date});
+    }
+    if(db_admitted)
+    {
+      var date = new Date(db_birth);
+      $("#admitted").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-admitted").wijcalendar("selectDate", date);
+      $("#c-admitted").wijcalendar({displayDate: date});
+    }
+    if(db_graduated)
+    {
+      var date = new Date(db_birth);
+      $("#graduated").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
+      $("#c-graduated").wijcalendar("selectDate", date);
+      $("#c-graduated").wijcalendar({displayDate: date});
+    }  
+    
+  });
+
+});
+</script>

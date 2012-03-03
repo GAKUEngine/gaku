@@ -1,7 +1,7 @@
 /* Kendo skin */
 /* main colors */
 .k-widget {
-  background-color: #bed3ca;
+  background-color: #eaf4ff;
 }
 .k-widget,
 .k-input,
@@ -46,7 +46,7 @@
 .k-dropdown-wrap,
 .k-tooltip,
 .k-progress {
-  border-color: #6b7b6e;
+  border-color: #dbdbde;
 }
 .k-group,
 .k-toolbar,
@@ -61,17 +61,17 @@ td.k-group-cell,
 .k-calendar th,
 .k-dropzone-hovered,
 .k-upload-files {
-  background-color: #bed3ca;
+  background-color: #8a8a8a;
 }
 .k-list-container {
-  border-color: #c4c4c4;
+  border-color: #dbdbde;
   background-color: #f3f3f4;
 }
 .k-content,
 .k-editable-area,
 .k-panelbar li.k-item,
 .k-tiles {
-  background-color: #d6e9ca;
+  background-color: #e3e3e3;
 }
 .k-alt, .k-separator {
   background-color: #ffffff;
@@ -90,7 +90,7 @@ div.k-picker-wrap.k-state-active,
 span.k-numeric-wrap.k-state-active,
 .k-numeric-wrap.k-state-focused,
 .k-numeric-wrap.k-state-focused:hover {
-  border-color: #6b7b6e;
+  border-color: #dbdbde;
   background-color: #f3f3f4;
 }
 .k-autocomplete .k-input,
@@ -99,7 +99,7 @@ span.k-numeric-wrap.k-state-active,
 .k-dropdown-wrap.k-state-focused .k-input,
 .k-picker-wrap.k-state-focused .k-input,
 .k-numeric-wrap.k-state-focused .k-input {
-  border-color: #6b7b6e;
+  border-color: #dbdbde;
 }
 .k-input, .k-textbox {
   background-color: #ffffff;
@@ -118,10 +118,10 @@ span.k-numeric-wrap.k-state-active,
   color: #000000;
 }
 .k-link:link, .k-link:visited {
-  color: #000000;
+  color: #ffffff;
 }
 .k-header {
-  color: #000000;
+  color: #ffffff;
 }
 .k-header,
 .k-grid-header,
@@ -149,7 +149,7 @@ span.k-numeric-wrap.k-state-active,
 .k-grid-pager,
 .k-button,
 .k-draghandle {
-  background-color: #e3e3e3;
+  background-color: #000000;
 }
 /* icons */
 .k-icon {
@@ -180,23 +180,23 @@ span.k-numeric-wrap.k-state-active,
   background-color: #ffffff;
 }
 .k-button {
-  color: #000000;
+  color: #ffffff;
 }
 .k-button,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover,
 .k-draghandle {
-  border-color: #6b7b6e;
-  background-color: #bed3ca;
+  border-color: #dbdbde;
+  background-color: #000000;
 }
 .k-button:hover, .k-draghandle:hover {
-  border-color: #47885e;
-  background-color: #47885e;
+  border-color: #363636;
+  background-color: #8a8a8a;
 }
 /* states */
 .k-state-active, .k-state-active:hover, .k-active-filter {
-  background-color: #bed3ca;
-  border-color: #6b7b6e;
+  background-color: #ffffff;
+  border-color: #0879c0;
   color: #000000;
 }
 .k-state-selected,
@@ -207,12 +207,12 @@ span.k-numeric-wrap.k-state-active,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
 .k-draghandle.k-state-selected:hover {
-  color: #ffffff;
-  background-color: #5a79ba;
-  border-color: #5a79ba;
+  color: #000000;
+  background-color: #0879c0;
+  border-color: #0879c0;
 }
 .k-state-selected > .k-link {
-  color: #ffffff;
+  color: #000000;
 }
 .k-state-hover,
 .k-state-hover:hover,
@@ -221,23 +221,23 @@ span.k-numeric-wrap.k-state-active,
 .k-list > .k-state-hover,
 .k-state-focused,
 .k-marquee {
-  color: #ffffff;
-  background-color: #47885e;
-  border-color: #47885e;
+  color: #000000;
+  background-color: #8a8a8a;
+  border-color: #363636;
 }
 .k-state-hover > .k-link, .k-other-month.k-state-hover .k-link {
-  color: #ffffff;
+  color: #000000;
 }
 .k-state-focused > .k-link,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover {
-  background-color: #47885e;
-  border-color: #6b7b6e;
+  background-color: #00b0f0;
+  border-color: #a6afbe;
 }
 .k-dropdown .k-state-hover .k-input {
-  color: #ffffff;
+  color: #000000;
 }
 .k-dropdown .k-state-focused .k-input {
   color: #000000;
@@ -258,14 +258,14 @@ span.k-numeric-wrap.k-state-active,
 .k-dropzone em,
 .k-tile-empty strong,
 .k-slider .k-draghandle {
-  color: #c4c4c4;
+  color: #a6afbe;
 }
 /* Slider */
 .k-slider-track {
-  background-color: #e3e3e3;
+  background-color: #000000;
 }
 .k-slider-selection {
-  background-color: #5a79ba;
+  background-color: #0879c0;
 }
 .k-slider-horizontal .k-tick {
   background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Silver/slider-h.gif');
@@ -275,9 +275,9 @@ span.k-numeric-wrap.k-state-active,
 }
 /* Tooltip */
 .k-tooltip {
-  border-color: #5a79ba;
+  border-color: #0879c0;
   background-color: #ffffff;
-  color: #000000;
+  color: #ffffff;
 }
 .k-tooltip-validation {
   border-color: #ffe79e;
@@ -293,17 +293,17 @@ span.k-numeric-wrap.k-state-active,
 }
 /* Upload */
 .k-progress-status {
-  border-color: #47885e transparent;
+  border-color: #363636 transparent;
 }
 /* ImageBrowser */
 .k-tile {
-  border-color: #d6e9ca;
+  border-color: #e3e3e3;
 }
 .k-tiles li.k-state-hover {
-  border-color: #47885e;
+  border-color: #363636;
 }
 .k-tiles li.k-state-selected {
-  border-color: #5a79ba;
+  border-color: #0879c0;
 }
 .k-tile .k-folder {
   background-image: url('http://cdn.kendostatic.com/2011.3.1407/styles/Silver/imagebrowser.png');

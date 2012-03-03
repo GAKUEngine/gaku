@@ -1,0 +1,20 @@
+<ul id="menubarMenu">
+  <li><%= link_to t("panel"), root_path %></li>
+
+  <li><%= link_to t("students.list"), students_path %></li>
+
+  <li>
+    <a><%= t "class_group_management" %></a>
+    <ul>
+      <li><%= link_to t("class_groups.list"), class_groups_path %></li>
+    </ul>
+  </li>
+  
+  <li>
+    <a><%= t "course_management" %></a>
+    <ul>
+      <li><%= link_to t("syllabuses.list"), syllabuses_path %></li>
+      <li><%= link_to t("courses.list"), courses_path %></li>
+    </ul>
+  </li>
+</ul>

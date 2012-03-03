@@ -64,10 +64,12 @@ ja:
     total_points: "総合点数"
     rank: "ランク"
   assignments:
+    list: "課題一覧"
     plural: "課題"
     results: "課題の結果"
     view: "課題参照"
-  tests:
+  exams:
+    list: "試験一覧"
     plural: "試験"
     view: "試験参照"
 

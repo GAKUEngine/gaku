@@ -37,6 +37,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    @birth = @student.birth
   end
 
   # POST /students
