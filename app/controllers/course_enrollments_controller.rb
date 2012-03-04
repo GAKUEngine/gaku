@@ -10,6 +10,7 @@ class CourseEnrollmentsController < ApplicationController
     end
   end
 
+
   # GET /course_enrollments/1
   # GET /course_enrollments/1.json
   def show
@@ -37,19 +38,6 @@ class CourseEnrollmentsController < ApplicationController
       format.js { render :layout => false }
     end
   end
-
-  def enroll_to_course
-    @course_enrollment = CourseEnrollment.new
-
-    @course_enrollment.course_id = Course.find(params[:course_id])
-
-    respond_to do |format|
-      format.html { render :partial => "enroll_to_course" }
-      format.json { render json: @course_enrollment }
-      format.js
-    end
-  end
-
 
   # GET /course_enrollments/1/edit
   def edit

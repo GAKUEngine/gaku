@@ -4,16 +4,11 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-// require kendo_js/jquery.min.js
 // = require jquery
 // = require jquery_ujs
-// require kendo_js/cultures/kendo.culture.ja-JP.min.js
-// require kendo_js/cultures/set_culture.js
-
-//= require external/jquery-1.7.1.min.js
+// require external/jquery-1.7.1.min.js
 //= require external/jquery-ui-1.8.17.custom.min.js
-
-//= require kendo_js/kendo.all.min.js
+//= require kendo/kendo.all.min
 
 //= require external/globalize.min.js
 //= require external/cultures/globalize.cultures.js
