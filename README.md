@@ -1,4 +1,4 @@
-GAKU Engine [学園陣] - Academic Encampment
+GAKU Engine [学園陣] - Learning Engine [Academic Encampment]
 Genshin Academic Karte Unification Engine
 =========================================
 
@@ -6,10 +6,9 @@ GAKU Engine is a student/assignment focused student and school management system
 
 What does the name mean?
 ------------------------
-GAKU Engine is primarily being developed by the Genshin Souzou organization in Japan. It is also being developed in Ruby/Rails, in which using Japanese names is a common practice. So we chose to use the character for "learning", which is 学 - read "gaku".  
-But "gaku" alone in Japanese isn't a very good name for a software project. So we added "Engine" because it's also a common Rails naming construct and because adding the word "Engine" to something makes it sound all powerful and cool.  
-So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).  
-To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.  
+The kanji for "learning" is 学[gaku]. So literally GAKU Engine alone means "Learning Engine". The full Japanese name further uses "ateji" to make the name into 学園陣, which is broken down into 学園[gakuen] "academic" and 陣[jin] "encampment/battle formation". Either way it's always read the same, so take your pick of the meaning: "Learning Engine" or "Academic Encampment".  
+
+For the English we also chose to treat GAKU as an acronym, which can be seen above. You know, because confusing acronyms are radical to the max.
 
 What does it do?
 ----------------
@@ -36,3 +35,10 @@ Development Status
 ------------------
 Development continuing is contigent upon receiving proper initial funding. Currently what you see here is a very rought demo which is being refined as time permits. Failure to acquire funds will not end the project but may inhibit its progress.  
 If you would like to participate in development or if you are a school and would like to see GAKU Engine developed (we will offer services for free to everyone who funds development) plese contact Genshin Souzou K.K. at info@genshin.org
+
+Full Naming History
+-------------------
+GAKU Engine is primarily being developed by the Genshin Souzou organization in Japan. It is also being developed in Ruby/Rails, in which using Japanese names is a common practice. So we chose to use the character for "learning", which is 学 - read "gaku".  
+But "gaku" alone in Japanese isn't a very good name for a software project. So we added "Engine" because it's also a common Rails naming construct and because adding the word "Engine" to something makes it sound all powerful and cool.  
+So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).  
+To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.  
