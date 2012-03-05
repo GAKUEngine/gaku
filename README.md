@@ -1,4 +1,5 @@
-GAKU Engine [学園陣] - Learning Engine [Academic Encampment]
+GAKU Engine [学園陣]
+====================
 Genshin Academic Karte Unification Engine
 =========================================
 
