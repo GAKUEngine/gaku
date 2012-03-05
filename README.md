@@ -14,12 +14,13 @@ To further make things all cool and confusing we made GAKU into an acronym in En
 What does it do?
 ----------------
 It allows for full student management, grading etc. It's bascally what all student grading tools are but it's unique in that:
-- It's completely Open Source, licensed under the GPL3. (See note #1)
-- It only uses Free Open Source components and does not rely on a licensed back end - so you don't need to worry about the BSA suing you. (See note #2)
-- It's Rails based, so it's easily extendable and runs on everything.
-- It does not require a special client to use. Any web browser will do. Special clients can be developed, and one for students will eventually be created [for use on smart phones].
-- It will feature a full set of "social" interfaces for students. Students will be able to check their grades, assignments, download notes and printouts, communicate with teachers and staff and share links and information. These features can be enabled or disabled and can be easily regulated by staff.
-- It is multi-locale. Generated reports and paperwork will be formatted appropriately for your schools country of operation (if paperwork for your contry is not available yet please file an issue and we will see about adding it).
+
+* It's completely Open Source, licensed under the GPL3. (See note #1)
+* It only uses Free Open Source components and does not rely on a licensed back end - so you don't need to worry about the BSA suing you. (See note #2)
+* It's Rails based, so it's easily extendable and runs on everything.
+* It does not require a special client to use. Any web browser will do. Special clients can be developed, and one for students will eventually be created [for use on smart phones].
+* It will feature a full set of "social" interfaces for students. Students will be able to check their grades, assignments, download notes and printouts, communicate with teachers and staff and share links and information. These features can be enabled or disabled and can be easily regulated by staff.
+* It is multi-locale. Generated reports and paperwork will be formatted appropriately for your schools country of operation (if paperwork for your contry is not available yet please file an issue and we will see about adding it).
 
 Notes
 -----
