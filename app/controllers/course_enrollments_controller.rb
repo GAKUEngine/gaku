@@ -35,7 +35,7 @@ class CourseEnrollmentsController < ApplicationController
       format.html { render :partial => "enroll_to_course" }
       #format.html { render :partial => "form" }
       format.json { render json: @course_enrollment }
-      format.js { render :layout => false }
+      format.js { render :partial => "enroll_to_course" }
     end
   end
 
