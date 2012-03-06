@@ -29,8 +29,9 @@ Notes
 	- These licenses are expensive, and many school management systems are built on and rely on them. 
 	- The problem is some companies have created organizations (specifically the BSA) that actively go after schools for license infringement.
 	- Schools are particularly easy targets as they often have a lot of computers and very rarely have license management schemes. 
-	- Don't take this lightly - a school we spoke to was strong armed into paying the equivilent of 6 teachers yearly salaries because their school administration software vendor didn't provide them with the proper license for a secondary database installation. A disgruntled former staff member called the BSA which then ordered a costly audit. That audit revealed a full list of all software installed on all machines in the school, which included copies of MS Office the school had lost the original receipts for. The school was strong armed into paying the equivilent of roughly 6 teachers yearly salaries [for software they had already paid for] or face harsh litigation.
+	- Don't take this lightly - a school we spoke to was strong armed into paying the equivilent of 6 teachers simply because they hadn't kept complete records.
 	- The school we spoke to appears to have made it off lightly. Other accounts from schools reveal much worse. Reguardless of weather or not you choose to use GAKU Engine we recommend you take these factors into consideration and avoid all vendors associated with organizations like the BSA.
+	- Far more than that just your back end systems we recommend switching to OSS software on your workstations, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc.
 
 Development Status
 ------------------
