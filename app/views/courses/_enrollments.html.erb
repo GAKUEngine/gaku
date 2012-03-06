@@ -7,6 +7,12 @@
       :remote => true, :id => "add_student_enrollment", :class => "make-button" %>
     <div id="add_student_enrollment_box">
     </div>
+    <script>
+      //$(".make-button").on('click', function(){
+      //  alert("Success!");
+      //});
+      CourseAct.hookupEnrollment();
+    </script>
   </p>
   <table id="enrolled_students_grid">
     <tr>
