@@ -15,5 +15,6 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"  
   course_management:
+    title: 'Course Management'
     list_syllabuses: "List Syllabuses"
     list_courses: "List Courses"  
