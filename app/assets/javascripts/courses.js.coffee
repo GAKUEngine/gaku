@@ -12,17 +12,10 @@ class CourseActions
     @enrollments = []
 
     #attach ajax to enrollment form
-    $("#add_student_enrollment").on("ajax:complete", (event, data, status, xhr) =>
-      alert "fire"
+    $("#add_student_enrollment").on("ajax:complete", (event, data, status) =>
       @enrollmentForm = $("#add_student_enrollment_box")
-      ne = $(data)
 
-      @enrollments.push(ne)
-      @enrollmentForm.append(@enrollments[@enrollments.length - 1])
-
-     #@enrollmentForm.append("event:" + event + "\ndata: " + data + "\nstatus: " + status + "\nxhr: " + xhr)
-     #alert data.id
-     #@enrollmentForm.append(event)
+      @enrollmentForm.append(data.responseText)
     )
 
 
