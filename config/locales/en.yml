@@ -13,4 +13,7 @@ en:
     email: "E-Mail"
     birth: "Birth Date"
     admitted: "Admitted"
-    graduated: "Graduated"
+    graduated: "Graduated"  
+  course_management:
+    list_syllabuses: "List Syllabuses"
+    list_courses: "List Courses"  
