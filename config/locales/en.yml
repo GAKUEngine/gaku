@@ -51,26 +51,26 @@ en:
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
   course_enrollments:
-    list: "授業在籍一覧"
-  class_group_management: "クラス管理"
+    list: "Enrollments"
+  class_group_management: "Class Management"
   class_groups:
-    list: "クラス一覧"
-    new: "新規クラス登録"
-    name: "クラス名"
+    list: "Class Listing"
+    new: "New Class"
+    name: "Class Name"
   class_group_enrollments:
-    list: "クラス名簿"
+    list: "Class Roster"
   grades:
-    average_points: "平均点数"
-    total_points: "総合点数"
-    rank: "ランク"
+    average_points: "Average Score"
+    total_points: "Total Score"
+    rank: "Rank/Grade"
   assignments:
-    list: "課題一覧"
-    plural: "課題"
-    results: "課題の結果"
-    view: "課題参照"
+    list: "Assignments"
+    plural: "Assignments"
+    results: "Assignment Results"
+    view: "View Assignments"
   exams:
-    list: "試験一覧"
-    plural: "試験"
-    view: "試験参照"
+    list: "Exams"
+    plural: "Exams"
+    view: "View Exams"
 
   and: " and "
