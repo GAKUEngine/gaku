@@ -1,3 +1,4 @@
+root = exports ? this
 $ = jQuery
 
 class CourseActions
@@ -5,20 +6,18 @@ class CourseActions
   enrollments: null
 
   constructor: () ->
-    @enrollmentForm = $("#add_student_enrollment")
+
+  hookupEnrollment: () ->
+    @enrollmentForm = $("#add_student_enrollment_box")
     @enrollments = []
-     
+
     #attach ajax to enrollment form
-    $("#add_student_enrollment").live("ajax:success", (event, data, status, xhr) =>
+    $("#add_student_enrollment").on("ajax:complete", (event, data, status) =>
       @enrollmentForm = $("#add_student_enrollment_box")
-      ne = $(data)
 
-      @enrollments.push(ne)
-      @enrollmentForm.append(@enrollments[@enrollments.length - 1])
-
-     #@enrollmentForm.append("event:" + event + "\ndata: " + data + "\nstatus: " + status + "\nxhr: " + xhr)
-     #alert data.id
-     #@enrollmentForm.append(event)
+      @enrollmentForm.append(data.responseText)
     )
 
-CourseAct = CourseActions()
+
+@CourseAct = new CourseActions()
+
