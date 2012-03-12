@@ -1,1 +1,25 @@
-ppp
+<table class="make-grid">
+  <tr>
+    <th data-field="<%= t 'exams.name' %>"><%= t 'exams.name' %></th>
+    <th data-field="<%= t :execution_date %>"><%= t :execution_date %></th>
+    <th data-field="<%= t :grading %>"><%= t :grading %></th>
+    <th data-field="<%= t :options %>"><%= t :options %></th>
+  </tr>
+
+
+  <tr>
+    <td><%= link_to "1章から6章レビュー", "", :class => "make-button" %></td>
+    <td><%= text_field_tag "exam_date1", "" %></td>
+    <script>
+      $("#exam_date1").kendoDatePicker({value: new Date(2012, 2, 22)});
+    </script>
+    <td>[済]<%= link_to t(:grading), "", :class => "make-button" %></td>
+    <td><%= link_to "ノート追加", "", :class => "make-button" %></td>
+  </tr>
+  <tr>
+    <td><%= link_to t("exams.new"), "", :class => "make-button" %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>

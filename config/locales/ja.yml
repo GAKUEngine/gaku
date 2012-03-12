@@ -68,9 +68,15 @@ ja:
     plural: "課題"
     results: "課題の結果"
     view: "課題参照"
+  due_date: "提出日"
   exams:
     list: "試験一覧"
+    name: "試験名"
     plural: "試験"
     view: "試験参照"
+    new: "新規試験登録"
+  execution_date: "実行日"
+  grading: "採点"
+  options: "オプション"
 
   and: "と"
