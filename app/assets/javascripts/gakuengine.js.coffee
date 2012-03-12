@@ -13,7 +13,7 @@ $(document).ready( ->
   # ボタン作成
   $(".make-button").addClass("k-button")
 
-  $(".make-grid").kendoGrid({
+  $(".make-grid").trigger("grid_ready").kendoGrid({
     height: 360,
     sortable: true,
     selectable: true

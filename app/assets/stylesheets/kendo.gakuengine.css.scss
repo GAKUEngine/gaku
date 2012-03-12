@@ -426,3 +426,17 @@ span.k-numeric-wrap.k-state-active,
   -webkit-border-radius: 7px;
   border-radius: 7px;
 }
+
+td {
+  .k-link:link, .k-link:visited {
+    color: #000000;
+  }
+}
+
+.k-nav-fast:link {
+  color: #000000;
+}
+
+.k-link-today, .k-link-today:link, .k-link-today:visited {
+  color: #000000;
+}
