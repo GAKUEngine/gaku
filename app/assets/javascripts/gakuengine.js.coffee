@@ -4,18 +4,18 @@
 # classes staring with "make-" are picked up here and automatically converted
 ###############################################################################
 
-$(document).ready( ->
+#$(document).ready( ->
   # Create top menubar
   # メニューバーのメニューを作る
-  $("#menubarMenu").kendoMenu()
+  #$("#menubarMenu").kendoMenu()
 
-  # Create buttons
-  # ボタン作成
-  $(".make-button").addClass("k-button")
+# Create buttons
+# ボタン作成
+$(".make-button").addClass("k-button")
 
-  $(".make-grid").trigger("grid_ready").kendoGrid({
-    height: 360,
-    sortable: true,
-    selectable: true
-  })
-)
+$(".make-grid").trigger("grid_ready").kendoGrid({
+  height: 400,
+  sortable: true,
+  selectable: true
+})
+#)

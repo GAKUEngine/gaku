@@ -19,4 +19,4 @@
 //= require wijmo/jquery.wijmo.wijpopup.js
 //= require jquery.wijmo-open.all.2.0.0.min.js
 
-//= require gakuengine.js.coffee
+// require gakuengine.js.coffee

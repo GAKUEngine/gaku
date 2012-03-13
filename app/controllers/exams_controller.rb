@@ -34,7 +34,7 @@ class ExamsController < ApplicationController
 
   # GET /exams/1/edit
   def edit
-    @exam = Exam.find(params[:id])
+    #@exam = Exam.find(params[:id])
   end
 
   # POST /exams
