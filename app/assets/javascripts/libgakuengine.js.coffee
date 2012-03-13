@@ -1,24 +1,30 @@
 #This file is a library of widgets for GAKUEngine.
 #Each widget is a jQuery/jQuery UI plugin, written in coffeescript, with the GE prefix for class, lower case ge for plugin.
 #
+#= require buhin/buhin-base
 
-#root = exports ? this
-$ = jQuery
-
-class GEGradingWidget
+class GEGradingWidget extends BuHin
   target: null
   score: 0
   scoreBox: null
   scoreBar: null
 
-  constructor: (toTarget) ->
-    @target = $(toTarget)
+  init: () ->
     @score = @target.html()
     @target.html("")
     @scoreBox = $("<input />")
     @scoreBox.attr({value: @score})
     @scoreBox.appendTo(@target)
-    @scoreBox.kendoNumericTextBox()
+    @scoreBox.kendoNumericTextBox({
+      min: 0,
+      max: 100,
+      step: 0.5
+    })
+    @scoreBar = $("<div></div>")
+    @scoreBar.progressbar({value: @score}) #why does this not work?
+    #@scoreBar.appendTo(@target)
+    #@scoreBar.css({display: "block"; width: "200px";})
+    return @
   
   ProcessOptions: (options) ->
 
