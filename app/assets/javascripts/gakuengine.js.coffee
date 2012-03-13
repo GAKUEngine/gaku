@@ -11,11 +11,14 @@
 
 # Create buttons
 # ボタン作成
-$(".make-button").addClass("k-button")
+$(".make-button").button() #addClass("k-button")
 
-$(".make-grid").trigger("grid_ready").kendoGrid({
-  height: 400,
-  sortable: true,
-  selectable: true
-})
+$(".make-grid").buhinGrid()
+#kendoGrid({
+#  height: 400,
+#  sortable: true,
+#  selectable: true
+#})
 #)
+
+$(".make-datepicker").datepicker()
