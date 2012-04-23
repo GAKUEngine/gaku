@@ -52,7 +52,7 @@ class CourseEnrollmentsController < ApplicationController
 
     respond_to do |format|
       if @course_enrollment.save
-        format.html { redirect_to @course_enrollment, notice: 'Course enrollment was successfully created.' }
+        format.html { redirect_to Course.find(@course_enrollment.course_id) }
         format.json { render json: @course_enrollment, status: :created, location: @course_enrollment }
       else
         format.html { render action: "new" }
