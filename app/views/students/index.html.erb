@@ -5,7 +5,11 @@
 
 <script>
 $(document).ready(function() {
-    
+  
+  var wh = $(window).height();
+  var gp = $('#grid').position();
+  var g_num = Math.round((wh - gp.top) / 36) - 2;
+
   function SetGrid(DataSource)
   {
     var DateW = 95;
@@ -15,9 +19,9 @@ $(document).ready(function() {
       dataSource:
       {
         data: DataSource,
-        pageSize: 20
+        pageSize: g_num
       },
-      height: 720,
+      height: (g_num + 1) * 36,
       groupable: false,
       scrollable: false,
       sortable: true,
@@ -67,7 +71,7 @@ $(document).ready(function() {
       ]
     });
   }
-
+  
   $.getJSON("/students.json",function(ds)
   {
     for(var i = 0; i < ds.length; i++)
@@ -77,8 +81,8 @@ $(document).ready(function() {
     }
     SetGrid(ds);
   });
-
 });
 </script>
+
 
 <br />

@@ -4,19 +4,16 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-// = require jquery
-// = require jquery_ujs
+// require self
+//= require jquery
+//= require jquery_ujs
 // require external/jquery-1.7.1.min.js
-//= require external/jquery-ui-1.8.17.custom.min.js
+//= require external/jquery-ui-1.8.18.custom.min.js
 //= require kendo/kendo.all.min
 
 //= require external/globalize.min.js
 //= require external/cultures/globalize.cultures.js
 
-// require wijmo/jquery.wijmo.wijpopup.js
-//= require wijmo/jquery.wijmo.wijcalendar.js
-//= require wijmo/jquery.wijmo.wijpopup.js
-
-//= require jquery.wijmo-open.all.2.0.0.min.js
-
-//= require gakuengine.js.coffee
+//= require buhin/buhin.js.coffee
+// require gakuengine.js.coffee
+//= require libgakuengine.js.coffee

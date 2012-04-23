@@ -11,14 +11,14 @@
 
 <div id="tabStrip">
   <ul>
-    <li class="k-state-acive"><%= t "course_enrollments.list" %></li>
-    <li><%= t "assignments.list" %></li>
-    <li><%= t "exams.list" %></li>
+    <li class="state-active"><a href="#enrollments-tab"><%= t "course_enrollments.list" %></a></li>
+    <li><a href="#assignments-tab"><%= t "assignments.list" %></a></li>
+    <li><a href="#exams-tab"><%= t "exams.list" %></a></li>
   </ul>
-  <%= render :partial => "courses/enrollments" %>
-  <%= render :partial => "courses/assignments" %>
-  <%= render :partial => "courses/exams" %>
+  <div id="enrollments-tab"><%= render :partial => "courses/enrollments" %></div>
+  <div id="assignments-tab"><%= render :partial => "courses/assignments" %></div>
+  <div id="exams-tab"><%= render :partial => "courses/exams" %></div>
 </div>
 <script>
-  var tabStrip = $("#tabStrip").kendoTabStrip();
+  var tabStrip = $("#tabStrip").tabs();
 </script>

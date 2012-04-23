@@ -1,0 +1,95 @@
+<table id="exams-grid" class="make-grid">
+  <tr>
+    <th data-field="<%= t 'exams.name' %>"><%= t 'exams.name' %></th>
+    <th data-field="<%= t :execution_date %>"><%= t :execution_date %></th>
+    <th data-field="<%= t 'grades.grading' %>"><%= t 'grades.grading' %></th>
+    <th data-field="<%= t 'grades.average_score' %>"><%= t 'grades.average_score' %></th>
+    <th data-field="<%= t 'grades.weighting_portion' %>"><%= t 'grades.weighting_portion' %></th>
+    <th data-field="<%= t 'grades.max_points' %>"><%= t 'grades.max_points' %></th>
+    <th data-field="<%= t :options %>"><%= t :options %></th>
+  </tr>
+
+
+  <tr>
+    <td><%= link_to "1章から6章レビュー", '',
+       :class => "make-button" %>
+    <td><input id="exam_date1" /></td>
+    <td>[12/12件済]<%= link_to t('grades.grading'), 
+      {:controller => :exams, :action => :edit, :course_id => @course.id, :exam_id => "1"},
+      :id => "grade_exam", :class => "make-button" %></td>
+    <td><div id="exam_result1"><div style="float:right; margin-right: 15px; margin-top: 5px;">76.5/100</div></div>
+    </td>
+    <td>
+      <input id="exam1" class="exam_weighting_type" />
+      <input id="exam1" class="exam_weighting" type="textbox" value="0.1" />
+    </td>
+    <td>
+      100点<%= link_to "変更", "", :class => "make-button" %>
+    </td>
+    <td>
+      <%= link_to "ノート追加", "", :class => "make-button" %>
+      <%= link_to "編集", "", :class => "make-button" %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= link_to "6章から10章レビュー", "", :class => "make-button" %></td>
+    <td><input id="exam_date2" /></td>
+    <td>[12/12件済]<%= link_to t('grades.grading'), "", :class => "make-button" %></td>
+    <td>
+      <div id="exam_result2"><div style="float:right; margin-right: 15px; margin-top: 5px;">83/150</div></div>
+    </td>
+    <td>
+      <input id="exam2" class="exam_weighting_type" />
+      <input id="exam2" class="exam_weighting" type="textbox" value="0.3" />
+    </td>
+    <td>
+      150点<%= link_to "変更", "", :class => "make-button" %>
+    </td>
+    <td>
+      <%= link_to "ノート追加", "", :class => "make-button" %>
+      <%= link_to "編集", "", :class => "make-button" %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= link_to "中間テスト", "", :class => "make-button" %></td>
+    <td><input id="exam_date3" /></td>
+    <td>[0/12件済]<%= link_to t('grades.grading'), "", :class => "make-button" %></td>
+    <td><div id="exam_result3"><div style="float:right; margin-right: 15px; margin-top: 5px;">未採点</div></div>
+    </td>
+    <td>
+      <input id="exam3" class="exam_weighting_type" />
+      <input id="exam3" class="exam_weighting" type="textbox" value="0.25" />
+    </td>
+    <td>
+      100点<%= link_to "変更", "", :class => "make-button" %>
+    </td>
+    <td>
+      <%= link_to "ノート追加", "", :class => "make-button" %>
+      <%= link_to "編集", "", :class => "make-button" %>
+    </td>
+  </tr>
+</table>
+</table>
+<script>
+  $(".exam_weighting_type").kendoDropDownList([
+    { text: "なし", value: "none" },
+    { text: "倍数", value: "miltiplier"},
+    { text: "試験内", value: "exams"},
+    { text: "授業全体", value: "course"}
+  ]);
+  $("#exam_date1").kendoDatePicker({value: new Date(2012, 2, 23), format: 'yyyy年MM月dd日' });
+  $("#exam_result1").progressbar({value: 76.5});
+  $(".exam_weighting").kendoNumericTextBox({
+    format: "p0",
+    min: 0,
+    max: 1,
+    step: 0.01
+  });
+
+  $("#exam_date2").kendoDatePicker({value: new Date(2012, 3, 2), format: 'yyyy年MM月dd日' });
+  $("#exam_result2").progressbar({value: ((83 / 150) * 100)});
+
+  $("#exam_date3").kendoDatePicker({format: 'yyyy年MM月dd日' });
+  /*$("#exams-grid").bind("grid_ready", function(){
+  });*/
+</script>

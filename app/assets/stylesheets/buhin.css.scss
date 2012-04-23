@@ -1,0 +1,24 @@
+.buhin-grid {
+  width: 100%;
+  height: 100%;
+  table {
+    border: none;
+    border-collapse: collapse;
+    vertical-align: middle;
+  }
+  
+  tr, th, td {
+    vertical-align: center;
+    border-collapse: collapse;
+    border-style: none;
+    border-spacing: 0px;
+    border-width: 0px;
+    margin: {
+      bottom: 10%;
+    }
+  }
+
+  tr:nth-child(odd) td{
+    background: #999999;
+  }
+}

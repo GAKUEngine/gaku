@@ -11,7 +11,7 @@
       CourseAct.hookupEnrollment();
     </script>
   </p>
-  <table id="enrolled_students_grid">
+  <table id="enrolled_students_grid" class="make-grid">
     <tr>
       <th data-field='<%= t "students.name" %>'><%= t "students.name" %></th>
       <th data-field='<%= t("assignments.plural") + t(:and) + t("exams.plural") %>'><%= t("assignments.plural") + t(:and) + t("exams.plural") %></th>
@@ -30,7 +30,4 @@
       </tr>
     <% end %>
   </table>
-  <script>
-    $("#enrolled_students_grid").kendoGrid({height: "100%"});
-  </script>
 </div>

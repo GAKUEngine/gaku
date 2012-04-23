@@ -1,5 +1,9 @@
 <div id="menubar">
-  <%= render :partial => "shared/login_widget" %>
-  <%= render :partial => "shared/global_menu" %>
+  <% if user_signed_in? %>
+    <%= render :partial => "shared/login_widget" %>
+    <%= render :partial => "shared/global_menu" %>
+  <% end %>
 </div>
-
+<script>
+  $("#menubarMenu").kendoMenu();
+</script>

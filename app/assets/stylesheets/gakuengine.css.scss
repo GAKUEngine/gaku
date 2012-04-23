@@ -1,0 +1,28 @@
+html {
+  overflow-y: hidden;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  border: 0;
+  margin: 0;
+  padding: 5px;
+}
+
+.notice {
+  border: 2px;
+  background: {
+    color: #00a3af;
+  }
+
+  font: {
+    size: 20px;
+  }
+
+  color: black;
+  padding: 10px;
+}

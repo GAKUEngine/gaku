@@ -1,0 +1,26 @@
+<h1>サンプル試験採点</h1>
+<table class="make-grid">
+  <tr>
+    <th data-field="<%= t 'students.name' %>"><%= t 'students.name' %></th>
+    <th data-field="<%= t 'grades.points' %>"><%= t 'grades.points' %></th>
+    <th data-field="<%= t :options %>"><%= t :options %></th>
+  </tr>
+  <tr>
+    <td>A子</td>
+    <td><div class="make-grading-widget">85</div></td>
+    <td><%= link_to "ノート追加", "", :class => "make-button" %></td>
+  </tr>
+  <tr>
+    <td>B子</td>
+    <td><div class="make-grading-widget">65</div></td>
+    <td><%= link_to "ノート追加", "", :class => "make-button" %></td>
+  </tr>
+  <tr>
+    <td>A子</td>
+    <td><div class="make-grading-widget">95</div></td>
+    <td><%= link_to "ノート追加", "", :class => "make-button" %></td>
+  </tr>
+</table>
+<script>
+  $(".make-grading-widget").geGradingWidget();
+</script>

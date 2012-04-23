@@ -2,10 +2,14 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
+ *
+ * NOTES: Kendo UI will likely be phased out in favor of an in house solution (which would be released OSS/GPL with commercial licensing options - NO lite/full version BS).
+ * require_self
+ *= require gakuengine.css.scss
  *= require scaffolds.css.scss
- *= require jquery.wijmo-open.2.0.0.css
- *= require themes/gakuengine/gakuengine-rocket.css.scss
+ * require themes/gakuengine/gakuengine.css.scss
+ *= require themes/gakuengine/jquery-ui-1.8.18.custom.css
  *= require kendo/kendo.common.min
  *= require kendo.gakuengine
+ *= require buhin.css.scss
 */

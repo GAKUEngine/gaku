@@ -60,17 +60,28 @@ ja:
   class_group_enrollments:
     list: "クラス名簿"
   grades:
+    grading: "採点"
+    weighting: "重み付け"
+    weighting_portion: "重み付け率"
     average_points: "平均点数"
+    average_score: "平均点数"
     total_points: "総合点数"
+    max_points: "最高点数"
+    points: "点数"
     rank: "ランク"
   assignments:
     list: "課題一覧"
     plural: "課題"
     results: "課題の結果"
     view: "課題参照"
+  due_date: "提出日"
   exams:
     list: "試験一覧"
+    name: "試験名"
     plural: "試験"
     view: "試験参照"
+    new: "新規試験登録"
+  execution_date: "実行日"
+  options: "オプション"
 
   and: "と"
