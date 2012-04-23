@@ -13,12 +13,13 @@
 # ボタン作成
 $(".make-button").button() #addClass("k-button")
 
-$(".make-grid").buhinGrid()
-#kendoGrid({
-#  height: 400,
+#$(".make-grid").kendoGrid({
+#  scrollable: true,
 #  sortable: true,
-#  selectable: true
+#  editable: true
 #})
-#)
+#
+
+$(".make-grid").buhinGrid()
 
 $(".make-datepicker").datepicker()

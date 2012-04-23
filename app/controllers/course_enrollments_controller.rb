@@ -27,9 +27,9 @@ class CourseEnrollmentsController < ApplicationController
   def new
     @course_enrollment = CourseEnrollment.new
 
-    if params[:course_id]
-      @course_enrollment.course_id = Course.find(params[:course_id])
-    end
+    #if params[:course_id]
+    @course_enrollment.course_id = params[:course_id] #Course.find(params[:course_id])
+    #end
 
     respond_to do |format|
       format.json { render json: @course_enrollment }
