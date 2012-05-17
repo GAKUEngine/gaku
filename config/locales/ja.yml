@@ -75,6 +75,7 @@ ja:
     results: "課題の結果"
     view: "課題参照"
   due_date: "提出日"
+  exam_management: "試験管理"
   exams:
     list: "試験一覧"
     name: "試験名"

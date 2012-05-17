@@ -30,9 +30,13 @@ body {
 /*bootstrap fix*/
 .navbar .brand
 {
-  padding: 6px 20px 7px;
+  padding: 7px 20px 7px;
 }
 
 .navbar .nav > li > a {
-  padding: 11px 10px 9px;
+  padding: 11px 10px 10px;
+}
+
+.navbar .btn-group{
+  padding: 6px 0px 6px 10px;
 }
