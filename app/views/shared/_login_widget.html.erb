@@ -1,18 +1,15 @@
 <ui class="nav pull-right">
-  <li class="divider-vertical"></li>
-  <li class="active">
   <% if user_signed_in? %>
+  <li class="divider-vertical"></li>
+  <li>
     <div class="btn-group">
-      <a class="btn btn-success" href="#">
-        <i class="icon-user icon-white"></i>　<%= current_user.email %>
-      </a>  
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span class="caret"></span>
-      </a>    
+      <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-user icon-white"></i>　<%= current_user.email %> <span class="caret"></span>
+      </a>
       <ul class="dropdown-menu">
         <li><a href="<%= destroy_user_session_path %>"><i class="icon-ban-circle"></i> <%= t("devise.sign_out") %></a></li>
       </ul>
     </div>
-  <% end %>
   </li>
+  <% end %>
 </ul>
