@@ -1,4 +1,18 @@
-<% if user_signed_in? %>
-  <%= current_user.email %>
-  <%= link_to t("devise.sign_out"), destroy_user_session_path, :class => "make-button", :method => :delete, :id => "logout_button" %>
-<% end %>
+<ui class="nav pull-right">
+  <li class="divider-vertical"></li>
+  <li class="active">
+  <% if user_signed_in? %>
+    <div class="btn-group">
+      <a class="btn btn-mini btn-success" href="#">
+        <i class="icon-user icon-white"></i>　<%= current_user.email %>
+      </a>  
+      <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="caret"></span>
+      </a>    
+      <ul class="dropdown-menu">
+        <li><a href="<%= destroy_user_session_path %>"><i class="icon-ban-circle"></i> <%= t("devise.sign_out") %></a></li>
+      </ul>
+    </div>
+  <% end %>
+  </li>
+</ul>

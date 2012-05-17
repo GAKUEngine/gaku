@@ -10,6 +10,8 @@
 // require external/jquery-1.7.1.min.js
 //= require external/jquery-ui-1.8.18.custom.min.js
 //= require kendo/kendo.all.min
+//= require bootstrap.min
+
 
 //= require external/globalize.min.js
 //= require external/cultures/globalize.cultures.js
