@@ -1,9 +1,11 @@
-<div id="menubar">
-  <% if user_signed_in? %>
-    <%= render :partial => "shared/login_widget" %>
-    <%= render :partial => "shared/global_menu" %>
-  <% end %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="<%= root_path %>"><%= image_tag("gaku-logo.png") %></a>
+      <% if user_signed_in? %>
+        <%= render :partial => "shared/global_menu" %>
+        <%= render :partial => "shared/login_widget" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<script>
-  $("#menubarMenu").kendoMenu();
-</script>

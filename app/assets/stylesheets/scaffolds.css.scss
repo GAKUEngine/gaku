@@ -17,8 +17,10 @@ pre {
 
 
 div {
-  &.field, &.actions {
-    margin-bottom: 10px; } }
+  .field,&.actions {
+    margin-bottom: 10px;
+ }
+}
 
 #notice {
   color: green; }
@@ -46,4 +48,4 @@ div {
     color: #fff; }
   ul li {
     font-size: 12px;
-    list-style: square; } }
+    list-style: square; }}
