@@ -10,10 +10,12 @@
 </head>
 <body>
   <%= render :partial => "shared/menubar" %>
-  <%= render :partial => "shared/flash" %>
-
-  <%= yield %>
-
-  <%= javascript_include_tag "gakuengine" %>
+  <div class="container-fluid">
+    <%= render :partial => "shared/flash" %>
+  
+    <%= yield %>
+  
+    <%= javascript_include_tag "gakuengine" %>
+  </div>
 </body>
 </html>

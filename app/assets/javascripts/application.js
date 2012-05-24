@@ -7,13 +7,15 @@
 // require self
 //= require jquery
 //= require jquery_ujs
-// require external/jquery-1.7.1.min.js
 //= require external/jquery-ui-1.8.18.custom.min.js
-//= require kendo/kendo.all.min
-
-//= require external/globalize.min.js
-//= require external/cultures/globalize.cultures.js
+//= require kendo2012/kendo.all.min
+// require kendo/kendo.all.min
+//= require bootstrap.min
 
 //= require buhin/buhin.js.coffee
-// require gakuengine.js.coffee
 //= require libgakuengine.js.coffee
+
+// require external/jquery-1.7.1.min.js
+// require gakuengine.js.coffee
+// require external/globalize.min.js
+// require external/cultures/globalize.cultures.js

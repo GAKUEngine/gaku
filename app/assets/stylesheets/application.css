@@ -5,11 +5,14 @@
  *
  * NOTES: Kendo UI will likely be phased out in favor of an in house solution (which would be released OSS/GPL with commercial licensing options - NO lite/full version BS).
  * require_self
- *= require gakuengine.css.scss
  *= require scaffolds.css.scss
  * require themes/gakuengine/gakuengine.css.scss
  *= require themes/gakuengine/jquery-ui-1.8.18.custom.css
- *= require kendo/kendo.common.min
+ * require kendo/kendo.common.min
+ *= require kendo2012/kendo.common.min
  *= require kendo.gakuengine
  *= require buhin.css.scss
+ *= require bootstrap.min
+ *= require bootstrap-responsive.min
+ *= require gakuengine.css.scss
 */
