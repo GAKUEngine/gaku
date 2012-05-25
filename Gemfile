@@ -9,10 +9,6 @@ gem 'kendoui-rails'
 gem 'devise'
 gem 'devise-i18n'
 
-group :development do 
-  gem 'sqlite3'
-end
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -44,3 +40,5 @@ unless ENV["CI"]
     gem 'ruby-debug19'
   end
 end
+
+gemspec
