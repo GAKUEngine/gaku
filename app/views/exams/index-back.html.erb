@@ -32,7 +32,7 @@
 <hr />
 <div class="well">
   <div class="row-fluid">
-    <div class="span8">
+    <div class="span12">
       <div class="btn-toolbar">
         <div class="btn-group">
           <button class="btn btn-success" href="#"><i class="icon-list-alt icon-white"></i> 整列順序</button>
@@ -60,141 +60,61 @@
   <hr />
   <div class="row-fluid">
     <div class="span12">
-      <table class="table table-striped table-bordered table-condensed">
-        <thead class="th-center">
-          <tr>
-            <th rowspan="2">No.</th>
-            <th rowspan="2">組</th>
-            <th rowspan="2">出席番号</th>
-            <th rowspan="2">氏名</th>
-            <th colspan="5">中間考査</th>
-            <th colspan="5">期末考査</th>
-            <th rowspan="2">学期得点</th>
-            <th rowspan="2">中間評価</th>
-            <th rowspan="2">学期評価</th>
-            <th rowspan="2">欠果時数</th>
-            <th rowspan="2">停止忌引</th>
-            <th rowspan="2">得点対象外</th>
-          </tr>
-          <tr>
-            <th>素点</th>
-            <th>その他１</th>
-            <th>その他２</th>
-            <th>得点</th>
-            <th>欠席</th>
-            <th>素点</th>
-            <th>その他３</th>
-            <th>その他４</th>
-            <th>得点</th>
-            <th>欠席</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td class="td-left">テストテスト</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td class="td-left">&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-        <thead>
-          <tr>
-            <th class="th-center" colspan="4">合計</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-          <tr>
-            <th class="th-center" colspan="4">平均点</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-          <tr>
-            <th class="th-center" colspan="4">受験者数</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-      </table>
+		<table id="grid">
+		  <thead>
+		      <tr>
+	            <th data-field="no"rowspan="2">No.</th>
+	            <th data-field="kumi"rowspan="2">組</th>
+	            <th data-field="sekino"rowspan="2">出席番号</th>
+	            <th data-field="name"rowspan="2">氏名</th>
+				<th data-field="soten1">素点</th>
+	            <th data-field="etc1">その他１</th>
+	            <th data-field="etc2">その他２</th>
+	            <th data-field="tokuten1">得点</th>
+	            <th data-field="kesseki1">欠席</th>
+	            <th data-field="soten2">素点</th>
+	            <th data-field="etc3">その他３</th>
+	            <th data-field="etc4">その他４</th>
+	            <th data-field="tokuten2">得点</th>
+	            <th data-field="kesseki2">欠席</th>	            <th data-field="point"rowspan="2">学期得点</th>
+	            <th data-field="thyouka"rowspan="2">中間評価</th>
+	            <th data-field="khyouka"rowspan="2">学期評価</th>
+	            <th data-field="kekka"rowspan="2">欠果時数</th>
+	            <th data-field="kibiki"rowspan="2">停止忌引</th>
+	            <th data-field="nopoint"rowspan="2">得点対象外</th>
+		      </tr>
+		  </thead>
+		  <tbody>
+	          <tr>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td class="td-left">テストテスト</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	          </tr>
+		  </tbody>
+		</table>		
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#grid").kendoGrid();
+});
+</script>
