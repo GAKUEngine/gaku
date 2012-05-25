@@ -14,8 +14,6 @@
 /log/*.log
 /tmp
 
-*.swp
-
 # Wijmo Complete files (may need the purchase of a license - not for distrobution)
 /app/assets/images/images/wijeditor
 /app/assets/images/images/wijrating
@@ -29,15 +27,15 @@
 *~
 .#*
 .DS_Store
-.sass_cache
 .idea
 .project
 nbproject
+*.sublime-project
+*.sublime-workspace
+
 spec/dummy
+.sass_cache
 *.swp
 *.orig
 Gemfile.lock
 .rvmrc
-*.sublime-project
-*.sublime-workspace
-
