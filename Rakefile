@@ -13,7 +13,7 @@ Bundler.setup
 RSpec::Core::RakeTask.new
 
 task :all_tests => [:environment] do
-  ["rake spec"].each do |cmd|
+  ["rake db:migrate", "rake spec"].each do |cmd|
     puts "Starting to run #{cmd}..."
     system("bundle exec #{cmd}")
     raise "#{cmd} failed!" unless $?.exitstatus == 0
