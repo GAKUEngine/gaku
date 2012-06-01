@@ -35,5 +35,5 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.include RSpecSupport::ControllerHelpers, :type => :controller
+  #config.include RSpecSupport::ControllerHelpers, :type => :controller
 end
