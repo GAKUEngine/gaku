@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2'
+gem 'rails', '~> 3.2.4'
 gem 'rails-i18n'
 
 gem 'jquery-rails'
@@ -8,6 +8,9 @@ gem 'kendoui-rails'
 
 gem 'devise'
 gem 'devise-i18n'
+
+gem 'execjs'
+gem 'therubyracer'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
