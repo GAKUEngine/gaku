@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'Student' do
   before(:each) do
-    save_and_open_page
     visit root_path
     save_and_open_page
     sign_in_as!(Factory(:user))
