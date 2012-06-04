@@ -4,10 +4,24 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
 require 'active_record/fixtures'
+require 'factory_girl_rails'
 
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each { |f| require File.expand_path(f)}
+#Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each { |f| require File.expand_path(f)}
+
+
+# reload all the models
+Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
+  load model 
+end
+
+# reload all factories
+FactoryGirl.factories.clear
+Dir.glob("#{::Rails.root}/spec/factories/*.rb").each do |file|
+  load "#{file}"
+end
+
 
 GAKUEngine::Application.reload_routes!
 
@@ -36,4 +50,5 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   #config.include RSpecSupport::ControllerHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :controller
 end
