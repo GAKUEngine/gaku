@@ -2,8 +2,14 @@ require 'spec_helper'
 
 describe StudentsController do
 
+  let(:student) { FactoryGirl.build_stubbed(:student) }
+
   before do
-    controller.stub :current_user => Factory(:user)
+    login_admin
+  end
+
+  it "should have a current_user" do
+    subject.current_user.should_not be_nil
   end
 
   describe "GET :index	" do
