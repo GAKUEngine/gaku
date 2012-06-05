@@ -1,12 +1,18 @@
 require 'spec_helper'
 
 describe 'Student' do
-  before(:each) do
+  before do
+    @student1 = Factory(:student)
+    #@student2 = Factory(:student)
     sign_in_as!(Factory(:user))
   end
 
-  context "listing warehouses" do
-    it "should list existing warehouses" do
+  context "listing students" do
+    it "should list existing students" do
+      visit students_path
+      save_and_open_page
+      page.should have_content @student1.name
+      #page.should have_content @student2.email
     end
   end
 end
