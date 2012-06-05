@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StudentsController do
 
-  let(:student) { FactoryGirl.build_stubbed(:student) }
+  let(:student) { FactoryGirl.create(:student) }
 
   before do
     login_admin
@@ -25,12 +25,26 @@ describe StudentsController do
   end
 
   describe "PUT update" do
-    pending "redirects to the page" do
+
+    it "redirects to the page" do
       page.stub :update_attributes => true
 
       post :update, :id => student.id
-
       response.should redirect_to(student_url(student))
     end
   end
+
+  describe "destroying a student" do
+
+    it "doesn't set the flash on xhr requests'" do
+      xhr :delete, :destroy, :id => student
+      controller.should_not set_the_flash
+    end
+
+    it "sets the flash" do
+      delete :destroy, :id => student
+      controller.should set_the_flash
+    end
+  end
+
 end
