@@ -41,7 +41,7 @@ describe StudentsController do
       controller.should_not set_the_flash
     end
 
-    it "sets the flash" do
+    pending "sets the flash" do
       delete :destroy, :id => student
       controller.should set_the_flash
     end
