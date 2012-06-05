@@ -11,7 +11,7 @@
     <div><%= f.check_box :remember_me %> <%= f.label t "devise.sessions.remember_me" %></div>
   <% end -%>
 
-  <div><%= f.submit t("devise.sessions.sign_in") %></div>
+  <div><%= f.submit t("devise.sessions.sign_in"), :id => 'sign_in' %></div>
 <% end %>
 
 <%= render "links" %>
