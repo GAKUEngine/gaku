@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CoursesController do
 
-  let!(:course) { FactoryGirl.build_stubbed(:course) }
+  let(:course) { FactoryGirl.build_stubbed(:course) }
 
   before do
     login_admin
