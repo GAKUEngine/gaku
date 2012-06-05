@@ -10,7 +10,7 @@ describe 'Student' do
   context "listing students" do
     it "should list existing students" do
       visit students_path
-      save_and_open_page
+      #save_and_open_page
       page.should have_content @student1.name
       #page.should have_content @student2.email
     end
