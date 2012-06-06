@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606103825) do
+ActiveRecord::Schema.define(:version => 20120606120716) do
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20120606103825) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "contact_type_id"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string  "iso_name"
+    t.string  "iso"
+    t.string  "iso3"
+    t.string  "name"
+    t.integer "numcode"
   end
 
   create_table "course_enrollments", :force => true do |t|
@@ -89,6 +97,12 @@ ActiveRecord::Schema.define(:version => 20120606103825) do
     t.string   "repeat"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.string  "name"
+    t.string  "abbr"
+    t.integer "country_id"
   end
 
   create_table "students", :force => true do |t|
