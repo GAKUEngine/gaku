@@ -14,8 +14,6 @@
 ActiveRecord::Schema.define(:version => 20120606135343) do
 
   create_table "addresses", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
