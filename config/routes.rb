@@ -9,7 +9,13 @@ GAKUEngine::Application.routes.draw do
 
   resources :syllabuses
 
-  resources :students
+  resources :students do 
+  	resources :profiles 
+  	resources :exams
+  	resources :courses
+  	resources :address
+  	resources :contacts
+  end
 
   resources :exams
 
