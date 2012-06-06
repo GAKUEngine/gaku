@@ -41,28 +41,19 @@ ActiveRecord::Schema.define(:version => 20120605124741) do
 
   create_table "courses", :force => true do |t|
     t.string   "code"
-    t.integer  "syllabus_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "courses", ["syllabus_id"], :name => "index_courses_on_syllabus_id"
-
   create_table "exam_scores", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "exam_id"
     t.float    "score"
     t.text     "comment"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "exam_scores", ["exam_id"], :name => "index_exam_scores_on_exam_id"
-  add_index "exam_scores", ["student_id"], :name => "index_exam_scores_on_student_id"
-
   create_table "exams", :force => true do |t|
     t.string   "name"
-    t.integer  "course_id"
     t.integer  "problem_count"
     t.float    "max_score"
     t.float    "weight"
@@ -70,8 +61,6 @@ ActiveRecord::Schema.define(:version => 20120605124741) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
-
-  add_index "exams", ["course_id"], :name => "index_exams_on_course_id"
 
   create_table "schedules", :force => true do |t|
     t.datetime "start"
@@ -100,16 +89,6 @@ ActiveRecord::Schema.define(:version => 20120605124741) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "code"
-  end
-
-  create_table "teachers", :force => true do |t|
-    t.string   "name"
-    t.text     "address"
-    t.string   "phone"
-    t.string   "email"
-    t.date     "birth"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
