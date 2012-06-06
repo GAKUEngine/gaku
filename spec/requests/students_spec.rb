@@ -13,4 +13,16 @@ describe 'Student' do
       #page.should have_content @student1.name
     end
   end
+
+  context "creating new student" do 
+    it "should create new student" do 
+      visit students_path
+      click_link "new_student_link"
+      #TODO fix default locale to English
+      #page.should have_content "Register New Student"
+      fill_in "student_name", :with => "John"
+      fill_in "student_email", :with => "john@example.com"
+      click_button "Create"
+    end
+  end
 end
