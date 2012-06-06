@@ -4,6 +4,7 @@ describe State do
 
   context "validations" do 
     it { should have_valid_factory(:state) }
+    it { should belong_to(:country) }
   end
 
   before(:all) do
