@@ -11,6 +11,10 @@ describe Address do
       country.states.stub :find_all_by_name_or_abbr => [state]
     end
 
+    it { should have_valid_factory(:address) }
+    it { should belong_to(:country) }
+    it { should belong_to(:state) }
+
     it "state_name is not nil and country does not have any states" do
       address.state = nil
       address.state_name = 'alabama'
