@@ -14,6 +14,7 @@ describe Address do
     it { should have_valid_factory(:address) }
     it { should belong_to(:country) }
     it { should belong_to(:state) }
+    it { should have_and_belong_to_many(:students) } 
 
     it "state_name is not nil and country does not have any states" do
       address.state = nil

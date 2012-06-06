@@ -1,6 +1,7 @@
 class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
+    has_and_belongs_to_many :students
 
     validates :first_name, :last_name, :address1, :city, :zipcode, :country, :presence => true
     validate :state_validate
