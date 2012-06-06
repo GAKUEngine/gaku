@@ -16,9 +16,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Rememberable
       t.datetime :remember_created_at
 
+      ## Database authenticatable
       t.string :email
       t.string :encrypted_password
-      t.string :reset_password_token
       t.timestamps
       
     end
