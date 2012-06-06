@@ -7,5 +7,6 @@ describe Student do
     it { should have_many(:courses) }
     it { should have_many(:exams) }
     it { should belong_to(:user) }
+    it { should belong_to(:profile) }
   end
 end
