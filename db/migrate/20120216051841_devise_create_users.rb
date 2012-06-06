@@ -1,9 +1,10 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def change
-    create_table :users  do |t|
+    create_table :users do |t|
+      #t.database_authenticatable
       #t.recoverable
       #t.rememberable
-      #t.trackable\
+      #t.trackable
       t.string :email
       t.string :encrypted_password
       t.string :reset_password_token
