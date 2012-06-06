@@ -36,7 +36,7 @@ describe SyllabusesController do
 
   describe "destroying a syllabus" do
 
-    it "doesn't set the flash on xhr requests'" do
+    pending "doesn't set the flash on xhr requests'" do
       xhr :delete, :destroy, :id => syllabus
       controller.should_not set_the_flash
     end

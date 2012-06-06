@@ -36,7 +36,7 @@ describe ClassGroupsController do
 
   describe "destroying a class group" do
 
-    it "doesn't set the flash on xhr requests'" do
+    pending "doesn't set the flash on xhr requests'" do
       xhr :delete, :destroy, :id => class_group
       controller.should_not set_the_flash
     end
