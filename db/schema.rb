@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606183458) do
+ActiveRecord::Schema.define(:version => 20120606184836) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -100,6 +100,17 @@ ActiveRecord::Schema.define(:version => 20120606183458) do
     t.binary   "data"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "preferences", :force => true do |t|
+    t.string   "name",       :limit => 100, :null => false
+    t.integer  "owner_id",   :limit => 30,  :null => false
+    t.string   "owner_type", :limit => 50,  :null => false
+    t.string   "value"
+    t.string   "value_type"
+    t.string   "key"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "profiles", :force => true do |t|
