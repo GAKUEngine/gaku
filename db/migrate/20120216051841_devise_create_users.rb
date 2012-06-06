@@ -3,7 +3,15 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table :users  do |t|
       #t.recoverable
       #t.rememberable
-      #t.trackable\
+      #t.trackable
+      
+      ## Trackable
+      t.integer  :sign_in_count, :default => 0
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
+
       t.string :email
       t.string :encrypted_password
       t.string :reset_password_token
