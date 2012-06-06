@@ -9,10 +9,10 @@ class Address < ActiveRecord::Base
                     :city, :zipcode, :country_id, :state_id, :state , :state_name
 
 
-    def self.default
-      country = Country.find(Config[:default_country_id]) rescue Country.first
-      new({:country => country}, :without_protection => true)
-    end
+    #def self.default
+     # country = Country.find(Config[:default_country_id]) rescue Country.first
+     # new({:country => country}, :without_protection => true)
+    #end
 
     # Can modify an address if it's not been used in an order (but checkouts controller has finer control)
     # def editable?
@@ -69,7 +69,7 @@ class Address < ActiveRecord::Base
       def state_validate
         # Skip state validation without country (also required)
         # or when disabled by preference
-        return if country.blank? || Config[:address_requires_state]
+        return if country.blank? #|| Config[:address_requires_state]
 
         # ensure associated state belongs to country
         if state.present?
