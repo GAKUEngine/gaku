@@ -1,5 +1,5 @@
 class ClassGroupsController < ApplicationController
   inherit_resources
 
-  actions :show, :new, :create, :update, :edit, :destroy
+  actions :index, :show, :new, :create, :update, :edit, :destroy
 end
