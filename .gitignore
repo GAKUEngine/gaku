@@ -36,6 +36,7 @@ nbproject
 spec/dummy
 .sass_cache
 *.swp
+*.swo
 *.orig
 Gemfile.lock
 .rvmrc
