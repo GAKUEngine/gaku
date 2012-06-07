@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120607184543) do
-=======
-ActiveRecord::Schema.define(:version => 20120606183458) do
->>>>>>> parent of ff0cc8e... WIP : Started Preference model
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -117,24 +113,12 @@ ActiveRecord::Schema.define(:version => 20120606183458) do
     t.datetime "updated_at",    :null => false
   end
 
-<<<<<<< HEAD
   create_table "guardians", :force => true do |t|
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
   end
 
-  create_table "preferences", :force => true do |t|
-    t.string   "name",       :limit => 100
-    t.string   "value"
-    t.string   "value_type"
-    t.string   "key"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-=======
->>>>>>> parent of ff0cc8e... WIP : Started Preference model
   create_table "profiles", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
