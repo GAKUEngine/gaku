@@ -8,15 +8,9 @@
       </a>
       <ul class="dropdown-menu">
         <li><a href="<%= destroy_user_session_path %>"><i class="icon-ban-circle"></i> <%= t "devise.sign_out" %></a></li>
-        <li id="options"><a href="#modal-options"><i class="icon-certificate"></i> <%= t "config.label" %></a></li>
+        <li id="options"><a data-toggle="modal" href="#modal-options"><i class="icon-certificate"></i> <%= t "config.label" %></a></li>
       </ul>
     </div>
   </li>
   <% end %>
 </ul>
-<script type="text/javascript" charset="utf-8">
-  $('#options').click(function(e){
-    console.log("aaaaaaa");
-    $('#modal-options').modal('show')
-  });
-</script>
