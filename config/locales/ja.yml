@@ -84,5 +84,14 @@ ja:
     new: "新規試験登録"
   execution_date: "実行日"
   options: "オプション"
-
+  config:
+    label: "設定"
+    close: "閉じる"
+    save: "変更を保存"
+    help:
+      language: 使用する言語を選択してください。
+  language: "言語"
+  lang:
+    ja: "日本語"
+    en: "英語"
   and: "と"

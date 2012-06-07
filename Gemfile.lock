@@ -6,31 +6,31 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (3.2.2)
-      actionpack (= 3.2.2)
-      mail (~> 2.4.0)
-    actionpack (3.2.2)
-      activemodel (= 3.2.2)
-      activesupport (= 3.2.2)
+    actionmailer (3.2.5)
+      actionpack (= 3.2.5)
+      mail (~> 2.4.4)
+    actionpack (3.2.5)
+      activemodel (= 3.2.5)
+      activesupport (= 3.2.5)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.1)
       rack (~> 1.4.0)
-      rack-cache (~> 1.1)
+      rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
-      sprockets (~> 2.1.2)
-    activemodel (3.2.2)
-      activesupport (= 3.2.2)
+      sprockets (~> 2.1.3)
+    activemodel (3.2.5)
+      activesupport (= 3.2.5)
       builder (~> 3.0.0)
-    activerecord (3.2.2)
-      activemodel (= 3.2.2)
-      activesupport (= 3.2.2)
+    activerecord (3.2.5)
+      activemodel (= 3.2.5)
+      activesupport (= 3.2.5)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.2)
-      activemodel (= 3.2.2)
-      activesupport (= 3.2.2)
-    activesupport (3.2.2)
+    activeresource (3.2.5)
+      activemodel (= 3.2.5)
+      activesupport (= 3.2.5)
+    activesupport (3.2.5)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
@@ -93,6 +93,7 @@ GEM
       jquery-rails
     launchy (2.1.0)
       addressable (~> 2.2.6)
+    libv8 (3.3.10.4)
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
     linecache19 (0.5.12)
@@ -102,7 +103,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.18)
-    multi_json (1.3.5)
+    multi_json (1.3.6)
     nokogiri (1.5.2)
     nokogiri (1.5.2-x86-mingw32)
     orm_adapter (0.0.7)
@@ -114,23 +115,23 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.2.2)
-      actionmailer (= 3.2.2)
-      actionpack (= 3.2.2)
-      activerecord (= 3.2.2)
-      activeresource (= 3.2.2)
-      activesupport (= 3.2.2)
+    rails (3.2.5)
+      actionmailer (= 3.2.5)
+      actionpack (= 3.2.5)
+      activerecord (= 3.2.5)
+      activeresource (= 3.2.5)
+      activesupport (= 3.2.5)
       bundler (~> 1.0)
-      railties (= 3.2.2)
+      railties (= 3.2.5)
     rails-i18n (0.6.4)
       i18n (~> 0.5)
-    railties (3.2.2)
-      actionpack (= 3.2.2)
-      activesupport (= 3.2.2)
+    railties (3.2.5)
+      actionpack (= 3.2.5)
+      activesupport (= 3.2.5)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
-      thor (~> 0.14.6)
+      thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
     rbx-require-relative (0.0.9)
     rcov (1.0.0)
@@ -186,7 +187,9 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
     sqlite3 (1.3.6-x86-mingw32)
-    thor (0.14.6)
+    therubyracer (0.10.1)
+      libv8 (~> 3.3.10)
+    thor (0.15.2)
     tilt (1.3.3)
     treetop (1.4.10)
       polyglot
@@ -210,6 +213,7 @@ DEPENDENCIES
   database_cleaner (= 0.7.1)
   devise
   devise-i18n
+  execjs
   factory_girl_rails (~> 1.7.0)
   ffaker
   gaku_engine!
@@ -219,7 +223,7 @@ DEPENDENCIES
   jquery-rails
   kendoui-rails
   launchy
-  rails (~> 3.2)
+  rails (~> 3.2.4)
   rails-i18n
   rcov
   rspec-rails (~> 2.9.0)
@@ -230,4 +234,5 @@ DEPENDENCIES
   shoulda-matchers (~> 1.0.0)
   simplecov
   sqlite3
+  therubyracer
   uglifier (>= 1.0.3)
