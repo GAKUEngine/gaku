@@ -3,10 +3,10 @@ class Address < ActiveRecord::Base
     belongs_to :state
     has_and_belongs_to_many :students
 
-    validates :first_name, :last_name, :address1, :city, :zipcode, :country, :presence => true
+    validates :address1, :city, :country, :presence => true
     validate :state_validate
 
-    attr_accessible :first_name, :last_name, :address1, :address2,
+    attr_accessible :address1, :address2,
                     :city, :zipcode, :country_id, :state_id, :state , :state_name
 
 
