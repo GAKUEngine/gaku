@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3.2.4'
 gem 'rails-i18n'
 
+gem 'inherited_resources'
+
 gem 'jquery-rails'
 gem 'kendoui-rails'
 

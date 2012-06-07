@@ -3,6 +3,7 @@ class CourseEnrollment < ActiveRecord::Base
   belongs_to :course
   validates :student_id, :uniqueness => {:scope => :course_id}
 
+  attr_accessible :course_id, :student_id 
 
   #scope 
 
