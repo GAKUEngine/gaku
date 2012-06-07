@@ -44,7 +44,7 @@ describe Address do
       address.state_name.should be_nil
     end
 
-    pending "state is entered but country does not contain that state" do
+    it "state is entered but country does not contain that state" do
       address.state = state
       address.country = stub_model(Country)
       address.valid?
@@ -66,8 +66,8 @@ describe Address do
       address.state_name.should be_nil
     end
 
-    it "address_requires_state preference is false" do
-      pending "Broken on CI server, but not on dev machines. To be investigated later."
+    pending "address_requires_state preference is false" do
+       "Broken on CI server, but not on dev machines. To be investigated later."
       Config.set :address_requires_state => false
       address.state = nil
       address.state_name = nil

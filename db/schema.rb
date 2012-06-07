@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606135343) do
+ActiveRecord::Schema.define(:version => 20120607184543) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(:version => 20120606135343) do
     t.datetime "updated_at", :null => false
     t.integer  "country_id"
     t.integer  "state_id"
+  end
+
+  create_table "addresses_guardians", :force => true do |t|
+    t.integer "address_id"
+    t.integer "guardian_id"
   end
 
   create_table "addresses_students", :force => true do |t|
@@ -47,6 +52,11 @@ ActiveRecord::Schema.define(:version => 20120606135343) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "class_groups_students", :force => true do |t|
+    t.integer "class_group_id"
+    t.integer "student_id"
+  end
+
   create_table "contact_types", :force => true do |t|
     t.string "name"
   end
@@ -58,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120606135343) do
     t.datetime "updated_at",      :null => false
     t.integer  "contact_type_id"
     t.integer  "student_id"
+    t.integer  "guardian_id"
   end
 
   create_table "countries", :force => true do |t|
@@ -89,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20120606135343) do
     t.text     "comment"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "exam_id"
   end
 
   create_table "exams", :force => true do |t|
@@ -99,6 +111,12 @@ ActiveRecord::Schema.define(:version => 20120606135343) do
     t.binary   "data"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "guardians", :force => true do |t|
+    t.string  "relationship"
+    t.integer "profile_id"
+    t.integer "user_id"
   end
 
   create_table "profiles", :force => true do |t|
