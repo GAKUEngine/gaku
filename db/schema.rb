@@ -115,9 +115,9 @@ ActiveRecord::Schema.define(:version => 20120607150105) do
   end
 
   create_table "preferences", :force => true do |t|
-    t.string   "name",       :limit => 100, :null => false
-    t.integer  "owner_id",   :limit => 30,  :null => false
-    t.string   "owner_type", :limit => 50,  :null => false
+    t.string   "name",       :limit => 100
+    t.integer  "owner_id",   :limit => 30
+    t.string   "owner_type", :limit => 50
     t.string   "value"
     t.string   "value_type"
     t.string   "key"
