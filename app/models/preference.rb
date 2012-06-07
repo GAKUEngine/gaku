@@ -1,8 +1,7 @@
 class Preference < ActiveRecord::Base
   attr_accessible :name, :key, :value_type, :value
 
-  validates :key, :presence => true
-  validates :value_type, :presence => true
+  validates :key, :value_type, :presence => true
 
   scope :valid, where(Preference.arel_table[:key].not_eq(nil)).where(Preference.arel_table[:value_type].not_eq(nil))
 
