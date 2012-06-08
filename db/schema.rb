@@ -128,6 +128,10 @@ ActiveRecord::Schema.define(:version => 20120607184543) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "schedules", :force => true do |t|
     t.datetime "start"
     t.datetime "stop"
