@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
     validate :state_validate
 
     attr_accessible :address1, :address2,
-                    :city, :zipcode, :country_id, :state_id, :state , :state_name
+                    :city, :zipcode, :state , :state_name
 
 
     def self.default
