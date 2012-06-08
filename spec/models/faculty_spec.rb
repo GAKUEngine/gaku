@@ -4,6 +4,6 @@ describe Faculty do
   context "validations" do
     it { should have_valid_factory(:faculty) }
     it { should have_many(:roles) }
-    
+    it { should have_many(:students) } 
   end
 end
