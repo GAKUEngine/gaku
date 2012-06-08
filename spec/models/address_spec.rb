@@ -66,33 +66,25 @@ describe Address do
       address.state_name.should be_nil
     end
 
-    pending "address_requires_state preference is false" do
-       "Broken on CI server, but not on dev machines. To be investigated later."
-      Config.set :address_requires_state => false
-      address.state = nil
-      address.state_name = nil
-      address.should be_valid
-    end
-
   end
 
   context ".default" do
     before do
-      @default_country_id = Config[:default_country_id]
-      new_country = create(:country)
-      Config[:default_country_id] = new_country.id
+      @default_country_id = AppConfig[:default_country_id]
+      new_country = Factory(:country)
+      AppConfig[:default_country_id] = new_country.id
     end
 
     after do
-      Config[:default_country_id] = @default_country_id
+      AppConfig[:default_country_id] = @default_country_id
     end
-    pending "sets up a new record with Spree::Config[:default_country_id]" do
-      Address.default.country.should == Country.find(Config[:default_country_id])
+    it "sets up a new record with Spree::Config[:default_country_id]" do
+      Address.default.country.should == Country.find(AppConfig[:default_country_id])
     end
 
     # Regression test for #1142
-    pending "uses the first available country if :default_country_id is set to an invalid value" do
-      Config[:default_country_id] = "0"
+    it "uses the first available country if :default_country_id is set to an invalid value" do
+      AppConfig[:default_country_id] = "0"
       Address.default.country.should == Country.first
     end
   end
