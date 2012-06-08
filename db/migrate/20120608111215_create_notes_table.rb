@@ -3,6 +3,8 @@ class CreateNotesTable < ActiveRecord::Migration
     create_table :notes do |t|
       t.string  :title
       t.text    :content
+
+      t.timestamps
     end 
   end
 end
