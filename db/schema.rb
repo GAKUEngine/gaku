@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608133158) do
+ActiveRecord::Schema.define(:version => 20120608134417) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -97,8 +97,9 @@ ActiveRecord::Schema.define(:version => 20120608133158) do
 
   create_table "exam_portion_scores", :force => true do |t|
     t.float    "score"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "exam_portion_id"
   end
 
   create_table "exam_portions", :force => true do |t|
