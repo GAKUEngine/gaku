@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608111215) do
+ActiveRecord::Schema.define(:version => 20120608113007) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -120,8 +120,11 @@ ActiveRecord::Schema.define(:version => 20120608111215) do
   end
 
   create_table "notes", :force => true do |t|
-    t.string "title"
-    t.text   "content"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "student_id"
   end
 
   create_table "profiles", :force => true do |t|
