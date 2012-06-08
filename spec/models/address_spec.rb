@@ -66,14 +66,6 @@ describe Address do
       address.state_name.should be_nil
     end
 
-    pending "address_requires_state preference is false" do
-       "Broken on CI server, but not on dev machines. To be investigated later."
-      Config.set :address_requires_state => false
-      address.state = nil
-      address.state_name = nil
-      address.should be_valid
-    end
-
   end
 
   context ".default" do
