@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607184543) do
+ActiveRecord::Schema.define(:version => 20120608115237) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -113,11 +113,32 @@ ActiveRecord::Schema.define(:version => 20120607184543) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "faculties", :force => true do |t|
+  end
+
   create_table "guardians", :force => true do |t|
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
   end
+
+  create_table "installs", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "installs", ["email"], :name => "index_installs_on_email", :unique => true
+  add_index "installs", ["reset_password_token"], :name => "index_installs_on_reset_password_token", :unique => true
 
   create_table "profiles", :force => true do |t|
     t.string   "first_name"
@@ -129,7 +150,8 @@ ActiveRecord::Schema.define(:version => 20120607184543) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string "name"
+    t.integer "faculty_id"
+    t.string  "name"
   end
 
   create_table "schedules", :force => true do |t|
