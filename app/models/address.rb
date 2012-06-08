@@ -10,15 +10,15 @@ class Address < ActiveRecord::Base
                     :city, :zipcode, :country_id, :state_id, :state , :state_name
 
 
-    #def self.default
-     # country = Country.find(Config[:default_country_id]) rescue Country.first
-     # new({:country => country}, :without_protection => true)
-    #end
+    def self.default
+      country = Country.find(Config[:default_country_id]) rescue Country.first
+      new({:country => country}, :without_protection => true)
+    end
 
-    # Can modify an address if it's not been used in an order (but checkouts controller has finer control)
-    # def editable?
-    #   new_record? || (shipments.empty? && checkouts.empty?)
-    # end
+    #Can modify an address if it's not been used in an order (but checkouts controller has finer control)
+    def editable?
+      new_record? || (shipments.empty? && checkouts.empty?)
+    end
 
     def full_name
       "#{first_name} #{last_name}".strip
@@ -27,14 +27,6 @@ class Address < ActiveRecord::Base
     def state_text
       state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
     end
-
-    #def zone
-    #  (state && state.zone) || (country && country.zone)
-    #end
-
-    #def zones
-    #  Zone.match(self)
-    #end
 
     def same_as?(other)
       return false if other.nil?

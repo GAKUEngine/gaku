@@ -41,7 +41,7 @@ describe ExamsController do
       controller.should_not set_the_flash
     end
 
-    pending "sets the flash" do
+    it "sets the flash" do
       delete :destroy, :id => exam
       controller.should set_the_flash
     end
