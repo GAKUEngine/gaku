@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608192039) do
+ActiveRecord::Schema.define(:version => 20120609175618) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20120608192039) do
   end
 
   create_table "faculties", :force => true do |t|
+    t.integer "profile_id"
   end
 
   create_table "guardians", :force => true do |t|
