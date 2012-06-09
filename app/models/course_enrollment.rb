@@ -3,7 +3,6 @@ class CourseEnrollment < ActiveRecord::Base
   belongs_to :course
   validates :student_id, :uniqueness => {:scope => :course_id}
 
-
   #scope 
 
   #def self.get_enrolled(course_id)

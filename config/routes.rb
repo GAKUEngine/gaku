@@ -4,14 +4,18 @@ GAKUEngine::Application.routes.draw do
   resources :class_groups
   resources :class_group_enrollments
 
-  resources :teachers
-
   resources :courses
   resources :course_enrollments
 
   resources :syllabuses
 
-  resources :students
+  resources :students do 
+  	resources :profiles 
+  	resources :exams
+  	resources :courses
+  	resources :address
+  	resources :contacts
+  end
 
   resources :exams
 
