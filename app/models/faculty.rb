@@ -5,4 +5,6 @@ class Faculty < ActiveRecord::Base
   has_many :courses
   belongs_to :profile
   belongs_to :users
+  has_many :addresses
+  has_many :contacts
 end
