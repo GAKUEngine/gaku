@@ -4,5 +4,5 @@ class Guardian < ActiveRecord::Base
   has_and_belongs_to_many :addresses
   has_many :contacts
 
-  attr_accessible :relationship, :profile_id, :user_id
+  attr_accessible :relationship
 end

@@ -4,5 +4,6 @@ describe ExamScore do
   context "validations" do 
   	it { should have_valid_factory(:exam_score) }
     it { should belong_to(:exam) }
+    it { should belong_to(:student) }
   end
 end
