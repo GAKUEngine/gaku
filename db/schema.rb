@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608134417) do
+ActiveRecord::Schema.define(:version => 20120611125810) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.integer "user_id"
   end
 
-<<<<<<< HEAD
   create_table "installs", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -165,7 +164,6 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
   add_index "installs", ["email"], :name => "index_installs_on_email", :unique => true
   add_index "installs", ["reset_password_token"], :name => "index_installs_on_reset_password_token", :unique => true
 
-=======
   create_table "notes", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -174,7 +172,6 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.integer  "student_id"
   end
 
->>>>>>> 1459ee807192f9807f0d2eaed69a086a5aba8bfd
   create_table "profiles", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
