@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -6,4 +7,5 @@ class AddressesController < ApplicationController
   def destroy
     destroy! :flash => !request.xhr?
   end
+  
 end
