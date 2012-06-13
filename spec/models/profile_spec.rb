@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Profile do
+
   context "validations" do 
   	let(:profile) { stub_model(Profile) }
 
@@ -20,6 +21,6 @@ describe Profile do
       profile.email = nil
       profile.should_not be_valid
     end
-
   end
+  
 end
