@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608134417) do
+ActiveRecord::Schema.define(:version => 20120611125810) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.datetime "updated_at", :null => false
     t.integer  "country_id"
     t.integer  "state_id"
+    t.integer  "faculty_id"
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "faculty_id"
   end
 
   create_table "class_groups_students", :force => true do |t|
@@ -69,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.integer  "contact_type_id"
     t.integer  "student_id"
     t.integer  "guardian_id"
+    t.integer  "faculty_id"
   end
 
   create_table "countries", :force => true do |t|
@@ -93,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "faculty_id"
   end
 
   create_table "exam_portion_scores", :force => true do |t|
@@ -131,11 +135,34 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.integer  "schedule_id"
   end
 
+  create_table "faculties", :force => true do |t|
+    t.integer "profile_id"
+    t.integer "users_id"
+  end
+
   create_table "guardians", :force => true do |t|
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
   end
+
+  create_table "installs", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "installs", ["email"], :name => "index_installs_on_email", :unique => true
+  add_index "installs", ["reset_password_token"], :name => "index_installs_on_reset_password_token", :unique => true
 
   create_table "notes", :force => true do |t|
     t.string   "title"
@@ -155,7 +182,8 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string "name"
+    t.integer "faculty_id"
+    t.string  "name"
   end
 
   create_table "schedules", :force => true do |t|
@@ -184,6 +212,7 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.integer  "profile_id"
+    t.integer  "faculty_id"
   end
 
   create_table "syllabuses", :force => true do |t|
@@ -196,17 +225,19 @@ ActiveRecord::Schema.define(:version => 20120608134417) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "sign_in_count",        :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.string   "email"
     t.string   "encrypted_password"
-    t.string   "reset_password_token"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
-    t.boolean  "admin",                :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "admin",                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

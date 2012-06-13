@@ -1,4 +1,4 @@
-class ExamsController < ApplicationController
+class NotesController < ApplicationController
   before_filter :authenticate_user!
   inherit_resources
 
