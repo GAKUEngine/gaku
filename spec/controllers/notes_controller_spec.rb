@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe NotesController do
 
-  let(:note) { FactoryGirl.create(:note) }
+  let(:note) { FactoryGirl.build_stubbed(:note) }
 
   before do
     login_admin
