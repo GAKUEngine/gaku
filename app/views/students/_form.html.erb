@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="span6 control-group">
-        <%= f.label :name, "名前（フリガナ）", :class => "control-label" %>
+        <%= f.label :name, t("name")+" ("+t("phonetic")+")", :class => "control-label" %>
         <div class="controls">
           <%= f.text_field :name, :class => "span12" %>
         </div>
@@ -52,8 +52,8 @@
     <div class="tabbable tabs-right">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#profile" data-toggle="tab"><%= t "profile" %></a></li>
-        <li class=""><a href="#guardian" data-toggle="tab"><%= t "guardian.label" %></a></li>
-        <li class=""><a href="#note" data-toggle="tab"><%= t "note.label" %></a></li>
+        <li class=""><a href="#guardian" data-toggle="tab"><%= t "guardian.guardian" %></a></li>
+        <li class=""><a href="#note" data-toggle="tab"><%= t "note.note" %></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="profile">
@@ -113,8 +113,8 @@
         <div class="tab-pane" id="guardian">
           <div class="tabbable">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#guardian1" data-toggle="tab"><%= t "guardian.label" %>1</a></li>
-              <li class=""><a href="#guardian2" data-toggle="tab"><%= t "guardian.label" %>2</a></li>
+              <li class="active"><a href="#guardian1" data-toggle="tab"><%= t "guardian.guardian" %>1</a></li>
+              <li class=""><a href="#guardian2" data-toggle="tab"><%= t "guardian.guardian" %>2</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="guardian1">
@@ -126,7 +126,7 @@
                     </div>
                   </div>
                   <div class="span6 control-group">
-                    <%= f.label :name, "名前（フリガナ）", :class => "control-label" %>
+                    <%= f.label :name, t("name")+" ("+t("phonetic")+")", :class => "control-label" %>
                     <div class="controls">
                       <%= f.text_field :name, :class => "span12" %>
                     </div>
@@ -194,7 +194,7 @@
                     </div>
                   </div>
                   <div class="span6 control-group">
-                    <%= f.label :name, "名前（フリガナ）", :class => "control-label" %>
+                    <%= f.label :name, t("name")+" ("+t("phonetic")+")", :class => "control-label" %>
                     <div class="controls">
                       <%= f.text_field :name, :class => "span12" %>
                     </div>
@@ -263,8 +263,8 @@
         <div class="tab-pane" id="note">
           <div class="tabbable">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#note1" data-toggle="tab"><%= t "note.label" %>1</a></li>
-              <li class=""><a href="#note2" data-toggle="tab"><%= t "note.label" %>2</a></li>
+              <li class="active"><a href="#note1" data-toggle="tab"><%= t "note.note" %>1</a></li>
+              <li class=""><a href="#note2" data-toggle="tab"><%= t "note.note" %>2</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="note1">
