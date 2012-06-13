@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Student do
+
   context "validations" do 
   	it { should have_valid_factory(:student) }
     it { should have_many(:course_enrollments) }
@@ -14,4 +15,5 @@ describe Student do
     it { should have_many(:contacts) }
     it { should have_many(:notes) }
   end
+  
 end

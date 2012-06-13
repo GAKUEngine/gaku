@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class NotesController < ApplicationController
 
   #before_filter :authenticate_user!
 
@@ -11,3 +11,4 @@ class StudentsController < ApplicationController
   end
   
 end
+

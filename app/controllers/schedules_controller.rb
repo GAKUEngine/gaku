@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class SchedulesController < ApplicationController
 
   #before_filter :authenticate_user!
 
