@@ -94,4 +94,19 @@ ja:
   lang:
     ja: "日本語"
     en: "英語"
+  profile: "プロフィール"
+  guardian:
+    label: "保護者"
+    plus: "保護者を追加"
+  note:
+    label: "備考"
+    title: "題名"
+    content: "本文"
+    plus: "備考を追加"
   and: "と"
+  submit: "登録する"
+  zipcode: "郵便番号"
+  prefecture: "都道府県"
+  gender: "性別"
+  male: "男性"
+  female: "女性"

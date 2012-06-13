@@ -78,9 +78,9 @@ en:
     save: "Save changes"
     help:
       language: choose your language
-      
   language: "Language"
   lang:
     ja: "Japanese"
     en: "English"
   and: " and "
+  submit: "Submit"
