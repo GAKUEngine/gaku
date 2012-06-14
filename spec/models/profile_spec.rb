@@ -7,13 +7,13 @@ describe Profile do
 
   	it { should have_valid_factory(:profile) }
 
-  	it "errors when first_name is nil" do
-      profile.first_name = nil
+  	it "errors when name is nil" do
+      profile.name = nil
       profile.should_not be_valid
     end
 
-    it "errors when last_name is nil" do
-      profile.last_name = nil
+    it "errors when surname is nil" do
+      profile.surname = nil
       profile.should_not be_valid
     end
 
