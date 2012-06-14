@@ -10,7 +10,7 @@ describe Student do
     it { should have_many(:exam_scores) }
     it { should belong_to(:user) }
     it { should belong_to(:profile) }
-    it { should have_and_belong_to_many(:class_groups) } 
+    it { should have_many(:class_groups) } 
     it { should have_and_belong_to_many(:addresses) } 
     it { should have_many(:contacts) }
     it { should have_many(:notes) }

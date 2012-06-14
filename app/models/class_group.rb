@@ -1,4 +1,4 @@
 class ClassGroup < ActiveRecord::Base
-  has_and_belongs_to_many :students
+  has_many :students, :through => :class_group_enrollments
   attr_accessible :name
 end

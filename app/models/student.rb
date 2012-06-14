@@ -1,7 +1,7 @@
 class Student < ActiveRecord::Base
   has_many :course_enrollments
   has_many :courses, :through => :course_enrollments
-  has_and_belongs_to_many :class_groups
+  has_many :class_groups, :through => :class_group_enrollments
 
   #FIXME maybe it should be reversed
   has_many :exam_scores
@@ -13,5 +13,5 @@ class Student < ActiveRecord::Base
   has_many :contacts
   has_many :notes
 
-  attr_accessible :name, :address, :phone, :email, :birth, :admitted, :graduated
+  attr_accessible :name, :address, :phone, :email, :birth, :admitted, :graduated, :class_groups
 end
