@@ -12,7 +12,7 @@
 
 <% @syllabuses.each do |syllabus| %>
   <tr>
-    <td><%= syllabus.code %></td>
+    <td><%= link_to syllabus.code, edit_syllabus_path(syllabus) %></td>
     <td><%= syllabus.name %></td>
     <td><%= syllabus.description %></td>
     <td><%= syllabus.credits %></td>

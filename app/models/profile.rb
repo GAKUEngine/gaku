@@ -1,5 +1,5 @@
 class Profile < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :email, :birth_date
+  attr_accessible :surname, :name, :name_reading, :email, :birth_date
   
-  validates :first_name, :last_name, :email, :presence => true
+  validates :surname, :name, :email, :presence => true
 end

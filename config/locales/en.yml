@@ -9,6 +9,9 @@ en:
   confirm_delete: "Really Delete this record?"
   panel: "Panel"
   name: "Name"
+  surname: "Surname"
+  given_name: "Given Name"
+  phonetic_reading: "Phonetic Reading"
   address: "Address"
   phone: "Phone Number"
   email: "Mail Address"
@@ -72,5 +75,30 @@ en:
     list: "Exams"
     plural: "Exams"
     view: "View Exams"
-
+  config:
+    label: "Config"
+    close: "Close"
+    save: "Save changes"
+    help:
+      language: choose your language
+  language: "Language"
+  lang:
+    ja: "Japanese"
+    en: "English"
   and: " and "
+  submit: "Submit"
+  zipcode: "ZIP Code"
+  prefecture: "State/Province/Prefecture"
+  gender: "Sex"
+  male: "Male"
+  female: "Female"
+  profile: "Profile"
+  guardian:
+    guardian: "Guardian"
+    add: "Add Guardian"
+  note:
+    notes: "Notes"
+    title: "Title"
+    content: "Content"
+    add: "Add Note"
+  class: Class

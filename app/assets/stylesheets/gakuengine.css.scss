@@ -1,5 +1,5 @@
 html {
-  overflow-y: hidden;
+  // overflow-y: hidden;
   border: 0;
   margin: 0;
   padding: 0;
@@ -13,6 +13,19 @@ body {
   border: 0px;
   margin: 0px;
   padding-top: 60px;
+}
+
+@media (max-width: 768px) {
+  /* Remove any padding from the body */
+  body {
+    padding-top: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 980px) {
+  /* Remove any padding from the body */
+  body {
+    padding-top: 0;
+  }
 }
 
 .notice {
@@ -46,15 +59,15 @@ hr{
 .btn.active, .btn:active {
   background-color: lightGoldenrodYellow;
 }
-.row{
-  margin: 0px 0px 0px
-}
-.row-fluid{
-  margin: 0px 0px 0px
-}
-[class*="span"] {
-  margin-left: 0px;
-}
+// .row{
+  // margin: 0px 0px 0px
+// }
+// .row-fluid{
+  // margin: 0px 0px 0px
+// }
+// [class*="span"] {
+  // margin-left: 0px;
+// }
 .navbar .brand
 {
   padding: 7px 20px 7px;

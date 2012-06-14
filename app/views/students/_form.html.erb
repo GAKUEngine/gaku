@@ -1,8 +1,7 @@
-<%= form_for(@student) do |f| %>
+<%= form_for @student, :html => {:class => "form-vertical"} do |f| %>
   <% if @student.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
       <ul>
       <% @student.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,121 +10,353 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label t :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label t :address %><br />
-    <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label t :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label t :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label t :birth %><br />
-    <div class="hide">
-      <%= f.date_select :birth %>
+  <fieldset class="well">
+    <div class="row-fluid">
+      <div class="span6 control-group">
+        <%= f.label :class_groups, t("class"), :class => "control-label" %>
+        <div class="controls">
+          <%= f.select :class_groups, [["ClassA", "class_a"], ["ClassB", "class_b"]], {:prompt => "選択してください"}, {:class => "span12"} %>
+        </div>
+      </div>
     </div>
-    <div class="calendar" id="c-birth"></div>
-    <input class="popdate" id="birth" style="width: 180px;"></input>
-  </div>
-  <div class="field">
-    <%= f.label t :admitted %><br />
-    <div class="hide">
-      <%= f.date_select :admitted %>
+    <div class="row-fluid">
+      <div class="span3 control-group">
+        <%= f.label :name, t("name")+" ("+t("surname")+")", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :surname, nil, :class => "span12" %>
+        </div>
+      </div>
+      <div class="span3 control-group">
+        <%= f.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :given_name, nil, :class => "span12" %>
+        </div>
+      </div>
+      <div class="span3 control-group">
+        <%= f.label :name, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :surname, nil, :class => "span12" %>
+        </div>
+      </div>
+      <div class="span3 control-group">
+        <%= f.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :given_name, nil, :class => "span12" %>
+        </div>
+      </div>
     </div>
-    <div class="calendar" id="c-admitted"></div>
-    <input class="popdate" id="admitted" style="width: 180px;"></input>
-  </div>
-  <div class="field">
-    <%= f.label t :graduated %><br />
-    <div class="hide">
-      <%= f.date_select :graduated %>
+    <div class="row-fluid">
+      <div class="span6 control-group">
+        <%= f.label :admitted, t("admitted"), :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_field :admitted, :class => "span12" %>
+        </div>
+      </div>
+      <div class="span6 control-group">
+        <%= f.label :graduated, t("graduated"), :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_field :graduated, :class => "span12" %>
+        </div>
+      </div>
     </div>
-    <div class="calendar" id="c-graduated"></div>
-    <input class="popdate" id="graduated" style="width: 180px;"></input>
-  </div>
-      
-  <div class="actions">
-    <%= f.submit %>
+  </fieldset>
+  <fieldset class="well">
+    <div class="tabbable tabs-right">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#profile" data-toggle="tab"><%= t "profile" %></a></li>
+        <li class=""><a href="#guardian" data-toggle="tab"><%= t "guardian.guardian" %></a></li>
+        <li class=""><a href="#note" data-toggle="tab"><%= t "note.notes" %></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="profile">
+          <div class="row-fluid">
+            <div class="span6 control-group">
+              <%= f.label :birth, t("birth"), :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :birth, :class => "span12" %>
+              </div>
+            </div>
+            <div class="span6 control-group">
+              <%= label_tag :gender, t("gender"), :class => "control-label" %>
+              <div class="controls">
+                <%= select_tag :gender, options_for_select([[t("male"), "male"], [t("female"), "female"]]), :class => "span12" %>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6 control-group">
+              <%= label_tag :zipcode, t("zipcode"), :class => "control-label" %>
+              <div class="controls">
+                <%= text_field_tag :zipcode, nil, :class => "span12" %>
+              </div>
+            </div>
+            <div class="span6 control-group">
+              <%= label_tag :prefecture, t("prefecture"), :class => "control-label" %>
+              <div class="controls">
+                <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12 control-group">
+              <%= label_tag :address, t("address"), :class => "control-label" %>
+              <div class="controls">
+                <%= text_area_tag :address, nil, :class => "span12" %>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6 control-group">
+              <%= f.label :phone, t("phone"), :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :phone, :class => "span12" %>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6 control-group">
+              <%= f.label :email, t("email"), :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :email, :class => "span12" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="guardian">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#guardian1" data-toggle="tab"><%= t "guardian.guardian" %>1</a></li>
+              <li class=""><a href="#guardian2" data-toggle="tab"><%= t "guardian.guardian" %>2</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="guardian1">
+                <div class="row-fluid">
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("name")+" ("+t("surname")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :surname, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :given_name, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :surname, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :given_name, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :birth, t("birth"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :birth, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span6 control-group">
+                    <%= label_tag :gender, t("gender"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= select_tag :gender, options_for_select([[t("male"), "male"], [t("female"), "female"]]), :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= label_tag :zipcode, t("zipcode"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :zipcode, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span6 control-group">
+                    <%= label_tag :prefecture, t("prefecture"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= f.label :address, t("address"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_area :address, :class => "span12", :size => "0x0" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :phone, t("phone"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :phone, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :email, t("email"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :email, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="guardian2">
+                <div class="row-fluid">
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("name")+" ("+t("surname")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :surname, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :given_name, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :surname, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span3 control-group">
+                    <%= f.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :given_name, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :birth, t("birth"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :birth, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span6 control-group">
+                    <%= label_tag :gender, t("gender"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= select_tag :gender, options_for_select([[t("male"), "male"], [t("female"), "female"]]), :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= label_tag :zipcode, t("zipcode"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :zipcode, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                  <div class="span6 control-group">
+                    <%= label_tag :prefecture, t("prefecture"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= f.label :address, t("address"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_area :address, :class => "span12", :size => "0x0" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :phone, t("phone"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :phone, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span6 control-group">
+                    <%= f.label :email, t("email"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :email, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row-fluid">
+            <button class="span12 btn btn-primary"><%= t "guardian.add" %></button>
+          </div>
+        </div>
+        <div class="tab-pane" id="note">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#note1" data-toggle="tab"><%= t "note.notes" %>1</a></li>
+              <li class=""><a href="#note2" data-toggle="tab"><%= t "note.notes" %>2</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="note1">
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= label_tag :title, t("note.title"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :title, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= label_tag :content, t("note.content"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_area_tag :content, nil, :class => "span12", :size => "0x10" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="note2">
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= label_tag :title, t("note.title"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_field_tag :title, nil, :class => "span12" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="span12 control-group">
+                    <%= label_tag :content, t("note.content"), :class => "control-label" %>
+                    <div class="controls">
+                      <%= text_area_tag :content, nil, :class => "span12", :size => "0x10" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row-fluid">
+            <button class="span12 btn btn-primary"><%= t "note.add" %></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <div class="row-fluid">
+      <div class="span3">
+        <%= f.submit t("submit"), :class => "span12 btn btn-primary" %>
+      </div>
+      <div class="span3">
+        <%= link_to t("Back"), students_path, :class => "span12 btn" %>
+      </div>
+    </div>
   </div>
 <% end %>
-
-<script>
-$(document).ready(function() {
-
-  $(function ()
-  {  
-    var ctarget;
-    $(".calendar").wijcalendar(
-    {
-      culture: "ja-JP",
-      titleFormat: "yyyy年 MMMM",
-      toolTipFormat: 'yyyy年MMMMdd日(dddd)',
-      popupMode: true,
-      selectedDatesChanged: function (e,args)
-      {       
-        console.log(e, args);
-        var selDate = $(this).wijcalendar("getSelectedDate");
-        if (!!selDate)
-        {
-          var y = selDate.getFullYear();
-          var m = selDate.getMonth()+1;
-          var d = selDate.getDate();
-          
-          $(ctarget).val(y+"年 "+m+"月"+d+"日"); 
-
-          $("#student_"+ctarget.id+"_1i").append($('<option value="'+y+'">'+y+'</option>'));
-          $("#student_"+ctarget.id+"_1i").val(y);
-          $("#student_"+ctarget.id+"_2i").val(m);
-          $("#student_"+ctarget.id+"_3i").val(d);
-        }
-      }
-    });
-  
-    $(".popdate").click(function (e, args)
-    {
-      ctarget = e.currentTarget;
-      cname = "c-" + ctarget.id;
-      $(".calendar#"+cname).wijcalendar("popup",
-      {
-        of: $(ctarget),
-        offset: '0 2'
-      });
-    })
-    
-    var db_birth = "<%= @student.birth %>";
-    var db_admitted = "<%= @student.admitted %>";
-    var db_graduated = "<%= @student.graduated %>";
-    if(db_birth)
-    {
-      var date = new Date(db_birth);
-      $("#birth").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
-      $("#c-birth").wijcalendar("selectDate", date);
-      $("#c-birth").wijcalendar({displayDate: date});
-    }
-    if(db_admitted)
-    {
-      var date = new Date(db_birth);
-      $("#admitted").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
-      $("#c-admitted").wijcalendar("selectDate", date);
-      $("#c-admitted").wijcalendar({displayDate: date});
-    }
-    if(db_graduated)
-    {
-      var date = new Date(db_birth);
-      $("#graduated").val(date.getFullYear()+"年 "+(date.getMonth()+1)+"月"+date.getDate()+"日");
-      $("#c-graduated").wijcalendar("selectDate", date);
-      $("#c-graduated").wijcalendar({displayDate: date});
-    }  
-    
-  });
-
-});
-</script>
