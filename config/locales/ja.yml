@@ -9,6 +9,9 @@ ja:
   confirm_delete: "本当に削除しますか?"
   panel: "パネル"
   name: "名前"
+  surname: "姓"
+  given_name: "名"
+  phonetic_reading: "フリガナ"
   address: "住所"
   phone: "電話番号"
   email: "メールアドレス"
@@ -84,5 +87,30 @@ ja:
     new: "新規試験登録"
   execution_date: "実行日"
   options: "オプション"
-
+  config:
+    label: "設定"
+    close: "閉じる"
+    save: "変更を保存"
+    help:
+      language: 使用する言語を選択してください。
+  language: "言語"
+  lang:
+    ja: "日本語"
+    en: "英語"
   and: "と"
+  submit: "登録する"
+  zipcode: "郵便番号"
+  prefecture: "都道府県"
+  gender: "性別"
+  male: "男性"
+  female: "女性"
+  profile: "プロフィール"
+  guardian:
+    guardian: "保護者"
+    add: "保護者を追加"
+  note:
+    notes: "備考"
+    title: "題名"
+    content: "本文"
+    add: "備考を追加"
+  class: クラス

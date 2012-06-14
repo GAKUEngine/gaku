@@ -1,6 +1,6 @@
 GAKUEngine::Application.routes.draw do
-  devise_for :installs
 
+  devise_for :installs
   devise_for :users
 
   resources :class_groups
