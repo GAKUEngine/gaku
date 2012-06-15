@@ -1,7 +1,24 @@
-<h1><%= t "students.list" %></h1>
-<%= link_to t('students.new'), new_student_path, :class => "k-button", :id => "new_student_link" %>
-
-<div id="grid"></div>
+<div class="row-fluid">
+  <div class="span1"></div>
+  <div class="span10">
+    <div class="row-fluid">
+      <div class="span12">
+        <h3><%= t "students.list" %></h3>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <hr />
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12 well">
+        <%= link_to t('students.new'), new_student_path, :class => "btn btn-primary", :id => "new_student_link" %>
+        <div id="grid" class="span12"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 $(document).ready(function() {
@@ -83,5 +100,3 @@ $(document).ready(function() {
   });
 });
 </script>
-
-<br />

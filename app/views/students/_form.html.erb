@@ -15,7 +15,7 @@
       <div class="span6 control-group">
         <%= f.label :class_groups, t("class"), :class => "control-label" %>
         <div class="controls">
-          <%= f.select :class_groups, [["ClassA", "class_a"], ["ClassB", "class_b"]], {:prompt => "選択してください"}, {:class => "span12"} %>
+          <%= select_tag :class_group_id, options_from_collection_for_select(@class_groups, "id", "name", @class_group_id), {:class => 'span12'} %>
         </div>
       </div>
     </div>
