@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
 
   create_table "students", :force => true do |t|
     t.string   "name"
-    t.text     "address"
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
