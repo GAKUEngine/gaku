@@ -16,5 +16,5 @@ class Student < ActiveRecord::Base
   has_many :contacts
   has_many :notes
 
-  attr_accessible :name, :phone, :email, :birth, :admitted, :graduated, :class_groups
+  attr_accessible :name, :phone, :email, :birth, :gender, :admitted, :graduated, :class_groups
 end
