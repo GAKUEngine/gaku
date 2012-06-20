@@ -1,0 +1,49 @@
+<div class="alert alert-info">
+  <button class="close" data-dismiss="alert">×</button>
+  <%= notice %>
+</div>
+
+<div class="row-fluid">
+  <div class="span1"></div>
+  <div class="span10">
+    <table class="table table-condensed table-striped"></table>
+  </div>
+</div>
+<p>
+  <b><%= t :name %>:</b>
+  <%= @student.name %>
+</p>
+
+<p>
+  <b><%= t :address %>:</b>
+  <%= @student.address %>
+</p>
+
+<p>
+  <b><%= t :phone %>:</b>
+  <%= @student.phone %>
+</p>
+
+<p>
+  <b><%= t :email %>:</b>
+  <%= @student.email %>
+</p>
+
+<p>
+  <b><%= t :birth %>:</b>
+  <%= @student.birth %>
+</p>
+
+<p>
+  <b><%= t :admitted %>:</b>
+  <%= @student.admitted %>
+</p>
+
+<p>
+  <b><%= t :graduated %>:</b>
+  <%= @student.graduated %>
+</p>
+
+
+<%= link_to t(:Edit), edit_student_path(@student) %> |
+<%= link_to t(:Back), students_path %>
