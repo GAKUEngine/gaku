@@ -13,6 +13,7 @@ describe Student do
     it { should have_many :class_group_enrollments }
     it { should have_many(:class_groups) } 
     it { should have_and_belong_to_many(:addresses) } 
+    it { should have_and_belong_to_many(:guardians) }
     it { should have_many(:contacts) }
     it { should have_many(:notes) }
   end
