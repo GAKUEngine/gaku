@@ -1,0 +1,110 @@
+<div class="tab-pane" id="guardian">
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#guardian1" data-toggle="tab"><%= t("guardian") + " 1" %></a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="guardian1">
+        <div class="row-fluid">
+          <div class="span3 control-group">
+            <%= f.label :name, t("name")+" ("+t("surname")+")", :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :surname, nil, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span3 control-group">
+            <%= f.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :given_name, nil, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span3 control-group">
+            <%= f.label :name, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :surname, nil, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span3 control-group">
+            <%= f.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :given_name, nil, :class => "span12" %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span6 control-group">
+            <%= f.label :birth, t("birth"), :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :birth, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span6 control-group">
+            <%= label_tag :gender, t("gender"), :class => "control-label" %>
+            <div class="controls">
+              <%= select_tag :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12" %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span6 control-group">
+            <%= label_tag :zipcode, t("addresses.zipcode"), :class => "control-label" %>
+            <div class="controls">
+              <div class="row-fluid">
+                <div class="span6">
+                  <%= text_field_tag :zipcode, nil, :class => "span12" %>
+                </div>
+                <div class="span6">
+                  <button class="span12 btn btn-primary">郵便番号で住所検索</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="span6 control-group">
+            <%= label_tag :prefecture, t("addresses.prefecture"), :class => "control-label" %>
+            <div class="controls">
+              <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4 control-group">
+            <%= label_tag :city, t("addresses.city"), :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :city, nil, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span4 control-group">
+            <%= label_tag :address1, t("addresses.address1"), :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :address1, nil, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span4 control-group">
+            <%= label_tag :address2, t("addresses.address2"), :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :address2, nil, :class => "span12" %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span6 control-group">
+            <%= f.label :phone, t("phone"), :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :phone, :class => "span12" %>
+            </div>
+          </div>
+          <div class="span6 control-group">
+            <%= f.label :email, t("email"), :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :email, :class => "span12" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row-fluid">
+    <button class="span12 btn btn-primary"><%= t "guardians.add" %></button>
+  </div>
+</div>

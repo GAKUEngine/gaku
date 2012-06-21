@@ -1,0 +1,31 @@
+<div class="tab-pane" id="note">
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#note1" data-toggle="tab"><%= t("note.notes") + " 1" %></a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="note1">
+        <div class="row-fluid">
+          <div class="span12 control-group">
+            <%= label_tag :title, t("note.title"), :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag :title, nil, :class => "span12" %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12 control-group">
+            <%= label_tag :content, t("note.content"), :class => "control-label" %>
+            <div class="controls">
+              <%= text_area_tag :content, nil, :class => "span12", :size => "0x10" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row-fluid">
+    <button class="span12 btn btn-primary"><%= t "note.add" %></button>
+  </div>
+</div>

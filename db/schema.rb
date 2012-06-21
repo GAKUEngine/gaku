@@ -173,13 +173,10 @@ ActiveRecord::Schema.define(:version => 20120620140647) do
   end
 
   create_table "profiles", :force => true do |t|
-    t.string   "surname"
-    t.string   "name"
-    t.string   "name_reading"
     t.string   "email"
     t.datetime "birth_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -203,13 +200,15 @@ ActiveRecord::Schema.define(:version => 20120620140647) do
 
   create_table "students", :force => true do |t|
     t.string   "name"
+    t.string   "surname"
+    t.string   "name_reading"
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "user_id"
     t.integer  "profile_id"
     t.integer  "faculty_id"
