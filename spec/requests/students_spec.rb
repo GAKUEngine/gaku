@@ -15,14 +15,12 @@ describe 'Student' do
   end
 
   context "creating new student" do 
-    pending "should create new student" do 
+    it "should create new student" do 
       visit students_path
       click_link "new_student_link"
-      #TODO fix default locale to English
-      #page.should have_content "Register New Student"
-      fill_in "student_name", :with => "John"
-      fill_in "student_email", :with => "john@example.com"
-      click_button "Create"
+      fill_in "given_name", :with => "John"
+      fill_in "surname", :with => "Doe"
+      click_button "Submit"
     end
   end
 end

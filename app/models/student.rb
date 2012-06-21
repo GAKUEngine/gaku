@@ -12,8 +12,9 @@ class Student < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
   has_and_belongs_to_many :addresses
+  has_and_belongs_to_many :guardians
   has_many :contacts
   has_many :notes
 
-  attr_accessible :name, :address, :phone, :email, :birth, :admitted, :graduated, :class_groups
+  attr_accessible :name, :phone, :email, :birth, :gender, :admitted, :graduated, :class_groups
 end
