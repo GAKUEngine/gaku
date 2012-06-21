@@ -19,7 +19,7 @@ describe StudentsController do
     it "redirects to the new page" do
       page.stub :save => true
 
-      post :create
+      post :create, :name => student.name, :surname => student.surname
       response.should redirect_to(student_url(Student.last))
     end
   end
