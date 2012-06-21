@@ -1,0 +1,97 @@
+<% if @student.guardians.any? %>
+  <div class="tab-pane" id="guardian">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#guardian1" data-toggle="tab"><%= t "guardian.guardian" %>1</a></li>
+        <li class=""><a href="#guardian2" data-toggle="tab"><%= t "guardian.guardian" %>2</a></li>
+      </ul>
+      <div class="tab-content">
+
+        <div class="tab-pane active" id="guardian1">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th><%= t :name %></th>
+                <td><%= @student.guardians.first.name %></td>
+              </tr>
+              <tr>
+                <th><%= t :birth %></th>
+                <td><%= @student.guardians.first.birth %></td>
+              </tr>
+              <tr>
+                <th><%= t :gender %></th>
+                <td><%= @student.guardians.first.gender %></td>
+              </tr>
+              <tr>
+                <th><%= t :zipcode %></th>
+                <td><%= @student.guardians.first.zipcode %></td>
+              </tr>
+              <tr>
+                <th><%= t :prefecture %></th>
+                <td><%= @student.guardians.first.birth %></td>
+              </tr>
+              <tr>
+                <th><%= t :address %></th>
+                <td><%= @student.guardians.first.address %></td>
+              </tr>
+              <tr>
+                <th><%= t :phone %></th>
+                <td><%= @student.guardians.first.phone %></td>
+              </tr>
+              <tr>
+                <th><%= t :email %></th>
+                <td><%= @student.guardians.first.email %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <% unless @student.guardians.second.nil? %> 
+          <div class="tab-pane" id="guardian2">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th><%= t :name %></th>
+                  <td><%= @student.guardians.second.name %></td>
+                </tr>
+                <tr>
+                  <th><%= t :birth %></th>
+                  <td><%= @student.guardians.second.birth %></td>
+                </tr>
+                <tr>
+                  <th><%= t :gender %></th>
+                  <td><%= @student.guardians.second.gender %></td>
+                </tr>
+                <tr>
+                  <th><%= t :zipcode %></th>
+                  <td><%= @student.guardians.second.zipcode %></td>
+                </tr>
+                <tr>
+                  <th><%= t :prefecture %></th>
+                  <td><%= @student.guardians.second.birth %></td>
+                </tr>
+                <tr>
+                  <th><%= t :address %></th>
+                  <td><%= @student.guardians.second.address %></td>
+                </tr>
+                <tr>
+                  <th><%= t :phone %></th>
+                  <td><%= @student.guardians.second.phone %></td>
+                </tr>
+                <tr>
+                  <th><%= t :email %></th>
+                  <td><%= @student.guardians.second.email %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+    <hr />
+    <div class="row-fluid">
+      <button class="span12 btn btn-primary"><%= t "guardian.add" %></button>
+    </div>
+  </div>
+<% end %>
