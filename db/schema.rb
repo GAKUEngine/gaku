@@ -173,13 +173,10 @@ ActiveRecord::Schema.define(:version => 20120620140647) do
   end
 
   create_table "profiles", :force => true do |t|
-    t.string   "surname"
-    t.string   "name"
-    t.string   "name_reading"
     t.string   "email"
     t.datetime "birth_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
