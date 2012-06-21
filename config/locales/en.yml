@@ -13,6 +13,12 @@ en:
   given_name: "Given Name"
   phonetic_reading: "Phonetic Reading"
   address: "Address"
+  addresses:
+    zipcode: "ZIP Code"
+    prefecture: "State/Province/Prefecture"
+    city: "City"
+    address1:
+    address2:
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -87,11 +93,10 @@ en:
     en: "English"
   and: " and "
   submit: "Submit"
-  zipcode: "ZIP Code"
-  prefecture: "State/Province/Prefecture"
   gender: "Sex"
-  male: "Male"
-  female: "Female"
+  genders:
+    male: "Male"
+    female: "Female"
   profile: "Profile"
   guardian:
     guardian: "Guardian"
