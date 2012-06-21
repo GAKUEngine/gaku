@@ -18,7 +18,7 @@ describe 'Student' do
     it "should create new student" do 
       visit students_path
       click_link "new_student_link"
-      fill_in "given_name", :with => "John"
+      fill_in "name", :with => "John"
       fill_in "surname", :with => "Doe"
       click_button "Submit"
     end
