@@ -1,11 +1,20 @@
 <% content_for :title, translate("comname") %>
 <div class="row-fluid">
   <div class="span12">
-      <% if user_signed_in? %>
-        --ここにユーザの役割・権限によるアクションとそのユーザが担当する授業やクラスなど--
-        <%= render 'menu' %>
-      <% else %>
-        下記のリンクからログインしてください。
-        <%= link_to t("devise.sign_in"), new_user_session_path %>
-      <% end %>
+    <% if user_signed_in? %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= render :partial => 'user_info' %>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= render :partial => 'user_menu' %>
+        </div>
+      </div>
+    <% else %>
+      下記のリンクからログインしてください。
+      <%= link_to t("devise.sign_in"), new_user_session_path %>
+    <% end %>
   </div>
+</dir>
