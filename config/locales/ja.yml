@@ -15,6 +15,7 @@ ja:
   address: "住所"
   addresses:
     zipcode: "郵便番号"
+    search_address: "郵便番号で住所検索"
     prefecture: "都道府県"
     city: "市区"
     address1: "町村名番地"

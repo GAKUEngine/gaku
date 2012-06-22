@@ -15,6 +15,7 @@ en:
   address: "Address"
   addresses:
     zipcode: "ZIP Code"
+    search_address:
     prefecture: "State/Province/Prefecture"
     city: "City"
     address1:
