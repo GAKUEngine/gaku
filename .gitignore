@@ -40,3 +40,4 @@ spec/dummy
 *.orig
 Gemfile.lock
 .rvmrc
+.yardoc/**
