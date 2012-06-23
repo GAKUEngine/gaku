@@ -47,13 +47,13 @@
       </div>
     </div>
     <div class="row-fluid">
-      <div class="span6 control-group">
+      <div class="span6">
         <%= f.label :admitted, t("admitted"), :class => "control-label" %>
         <div class="controls">
           <%= f.text_field :admitted, :class => "span12" %>
         </div>
       </div>
-      <div class="span6 control-group">
+      <div class="span6">
         <%= f.label :graduated, t("graduated"), :class => "control-label" %>
         <div class="controls">
           <%= f.text_field :graduated, :class => "span12" %>
@@ -66,16 +66,14 @@
     <div class="tabbable tabs-right">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#profile" data-toggle="tab"><%= t "profile" %></a></li>
-        <li class=""><a href="#guardian" data-toggle="tab"><%= t "guardian.guardian" %></a></li>
+        <li class=""><a href="#guardian" data-toggle="tab"><%= t "guardian" %></a></li>
         <li class=""><a href="#note" data-toggle="tab"><%= t "note.notes" %></a></li>
       </ul>
-
       <div class="tab-content">
         <%= render :partial => 'new_profile', :locals => {:f => f} %>
         <%= render :partial => 'new_guardian', :locals => {:f => f} %>
         <%= render :partial => 'new_note', :locals => {:f => f} %>
       </div>
-
     </div>
   </fieldset>
 
