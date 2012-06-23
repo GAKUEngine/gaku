@@ -1,4 +1,5 @@
 <div class="tab-pane active" id="profile">
+
   <div class="row-fluid">
     <div class="span6 control-group">
       <%= f.label :birth, t("birth"), :class => "control-label" %>
@@ -7,34 +8,56 @@
       </div>
     </div>
     <div class="span6 control-group">
-      <%= label_tag :gender, t("gender"), :class => "control-label" %>
+      <%= f.label :gender, t("gender"), :class => "control-label" %>
       <div class="controls">
-        <%= select_tag :gender, options_for_select([[t("male"), "male"], [t("female"), "female"]]), :class => "span12" %>
+        <%= select_tag :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12" %>
       </div>
     </div>
   </div>
+
   <div class="row-fluid">
     <div class="span6 control-group">
-      <%= label_tag :zipcode, t("zipcode"), :class => "control-label" %>
+      <%= f.label :zipcode, t("addresses.zipcode"), :class => "control-label" %>
       <div class="controls">
-        <%= text_field_tag :zipcode, nil, :class => "span12" %>
+        <div class="row-fluid">
+          <div class="span6">
+            <%= f.text_field :zipcode, :class => "span12" %>
+          </div>
+          <div class="span6">
+            <button class="span12 btn btn-primary"><%= t "addresses.search_address" %></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="span6 control-group">
-      <%= label_tag :prefecture, t("prefecture"), :class => "control-label" %>
+      <%= f.label :prefecture, t("addresses.prefecture"), :class => "control-label" %>
       <div class="controls">
         <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
       </div>
     </div>
   </div>
+
   <div class="row-fluid">
-    <div class="span12 control-group">
-      <%= label_tag :address, t("address"), :class => "control-label" %>
+    <div class="span4 control-group">
+      <%= f.label :city, t("addresses.city"), :class => "control-label" %>
       <div class="controls">
-        <%= text_area_tag :address, nil, :class => "span12" %>
+        <%= f.text_field :city, :class => "span12" %>
+      </div>
+    </div>
+    <div class="span4 control-group">
+      <%= f.label :address1, t("addresses.address1"), :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :address1, :class => "span12" %>
+      </div>
+    </div>
+    <div class="span4 control-group">
+      <%= f.label :address2, t("addresses.address2"), :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :address2, :class => "span12" %>
       </div>
     </div>
   </div>
+
   <div class="row-fluid">
     <div class="span6 control-group">
       <%= f.label :phone, t("phone"), :class => "control-label" %>
@@ -42,8 +65,6 @@
         <%= f.text_field :phone, :class => "span12" %>
       </div>
     </div>
-  </div>
-  <div class="row-fluid">
     <div class="span6 control-group">
       <%= f.label :email, t("email"), :class => "control-label" %>
       <div class="controls">
@@ -51,4 +72,5 @@
       </div>
     </div>
   </div>
+  
 </div>

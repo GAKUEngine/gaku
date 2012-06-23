@@ -13,12 +13,26 @@
     </div>
     <div class="row-fluid">
       <div class="span12 well">
-        <%= link_to t('students.new'), new_student_path, :class => "btn btn-primary", :id => "new_student_link" %>
-        <div id="grid" class="span12"></div>
+        <div class="row-fluid">
+          <div class="span12">
+            <%= link_to t('students.new'), new_student_path, :class => "btn btn-primary", :id => "new_student_link" %>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <hr />
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <div id="grid" class="span12"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <script>
 $(document).ready(function() {
   var wh = $(window).height();
@@ -37,10 +51,12 @@ $(document).ready(function() {
         pageSize: g_num
       },
       height: (g_num + 1) * 36,
-      groupable: false,
-      scrollable: false,
+      groupable: true,
+      // scrollable: false,
       sortable: true,
       pageable: true,
+      resizable: true,
+      reorderable: true,
       columns: 
       [
         {
@@ -50,7 +66,8 @@ $(document).ready(function() {
         },
         {
           field: "address",
-          title: "<%= t "students.address" %>"
+          title: "<%= t "students.address" %>",
+          width: 64
         },
         {
           field: "phone",
