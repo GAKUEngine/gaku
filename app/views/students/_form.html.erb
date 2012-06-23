@@ -25,25 +25,25 @@
       <div class="span3 control-group">
         <%= f.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :surname, nil, :class => "span12" %>
+          <%= f.text_field :surname, :class => "span12" %>
         </div>
       </div>
       <div class="span3 control-group">
         <%= f.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :name, nil, :class => "span12" %>
+          <%= f.text_field :name, :class => "span12" %>
         </div>
       </div>
       <div class="span3 control-group">
         <%= f.label :surname, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :surname, nil, :class => "span12" %>
+          <%= f.text_field :surname, :class => "span12" %>
         </div>
       </div>
       <div class="span3 control-group">
         <%= f.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :name, nil, :class => "span12" %>
+          <%= f.text_field :name, :class => "span12" %>
         </div>
       </div>
     </div>
