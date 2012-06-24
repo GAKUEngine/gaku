@@ -12,7 +12,7 @@
       <div class="span6 control-group">
         <%= profile_form.label :gender, t("gender"), :class => "control-label" %>
         <div class="controls">
-          <%= select_tag :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12" %>
+          <%= profile_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12" %>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
       <div class="span6 control-group">
         <%= profile_form.label :prefecture, t("addresses.prefecture"), :class => "control-label" %>
         <div class="controls">
-          <%= select_tag :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
+          <%= profile_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12" %>
         </div>
       </div>
     </div>

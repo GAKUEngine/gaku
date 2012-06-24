@@ -16,7 +16,7 @@
       <div class="span6 control-group">
         <%= form.label :class_group_id, t("class"), :class => "control-label" %>
         <div class="controls">
-          <%= select_tag :class_group_id, options_from_collection_for_select(ClassGroup.all, "id", "name", @class_group_id), {:class => 'span12'} %>
+          <%= form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'} %>
         </div>
       </div>
     </div>

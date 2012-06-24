@@ -17,8 +17,8 @@ class Student < ActiveRecord::Base
   has_many :notes
 
   attr_accessible :name, :surname, :name_reading, :phone, :email, :birth, :gender, :admitted, :graduated,
-                  :class_groups, :profile, :profile_attributes, :guardians, :guardians_attributes,
-                  :notes, :notes_attributes
+                  :class_groups, :class_groups_attributes, :profile, :profile_attributes,
+                  :guardians, :guardians_attributes, :notes, :notes_attributes
 
   validates :name, :surname, :presence => true
 
