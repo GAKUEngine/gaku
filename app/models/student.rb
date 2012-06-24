@@ -16,7 +16,13 @@ class Student < ActiveRecord::Base
   has_many :contacts
   has_many :notes
 
-  attr_accessible :name, :surname, :name_reading, :phone, :email, :birth, :gender, :admitted, :graduated, :class_groups
+  attr_accessible :name, :surname, :name_reading, :phone, :email, :birth, :gender, :admitted, :graduated,
+                  :class_groups, :profile, :profile_attributes, :guardians, :guardians_attributes,
+                  :notes, :notes_attributes
 
   validates :name, :surname, :presence => true
+
+  accepts_nested_attributes_for :profile
+  accepts_nested_attributes_for :guardians
+  accepts_nested_attributes_for :notes
 end
