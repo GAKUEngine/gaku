@@ -74,9 +74,9 @@
       </ul>
 
       <div class="tab-content">
-        <%= render :partial => 'new_profile', :locals => {:form => form} %>
-        <%= render :partial => 'new_guardian', :locals => {:form => form} %>
-        <%= render :partial => 'new_note', :locals => {:form => form} %>
+        <%= render 'new_profile', :form => form %>
+        <%= render 'new_guardian', :form => form %>
+        <%= render 'new_note', :form => form %>
       </div>
     </div>
 
