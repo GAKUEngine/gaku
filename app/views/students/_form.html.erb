@@ -23,15 +23,15 @@
 
     <div class="row-fluid">
       <div class="span3 control-group">
-        <%= form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label" %>
+        <%= form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label" %><span class="required">*</span><br />
         <div class="controls">
-          <%= form.text_field :surname, :class => "span12" %>
+          <%= form.text_field :surname, :class => "span12 required" %>
         </div>
       </div>
       <div class="span3 control-group">
-        <%= form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %>
+        <%= form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label" %><span class="required">*</span><br />
         <div class="controls">
-          <%= form.text_field :name, :class => "span12" %>
+          <%= form.text_field :name, :class => "span12 required" %>
         </div>
       </div>
       <div class="span3 control-group">
