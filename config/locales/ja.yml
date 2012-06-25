@@ -74,8 +74,8 @@ ja:
     list: "クラス名簿"
   grades:
     grading: "採点"
-    weighting: "重み付け"
-    weighting_portion: "重み付け率"
+    weighting: "加重する"
+    weighting_portion: "加重率"
     average_points: "平均点数"
     average_score: "平均点数"
     total_points: "総合点数"
