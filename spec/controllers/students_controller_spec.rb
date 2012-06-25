@@ -16,7 +16,7 @@ describe StudentsController do
   end 
 
   describe "POST create" do
-    it "redirects to the new page" do
+    pending "redirects to the new page" do
       page.stub :save => true
 
       post :create, :name => student.name, :surname => student.surname
