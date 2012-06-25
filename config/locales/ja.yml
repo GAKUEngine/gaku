@@ -21,7 +21,7 @@ ja:
     search_address: "郵便番号で住所検索"
     prefecture: "都道府県"
     city: "市区"
-    address1: "町村名番地"
+    address1: "町村名と番地"
     address2: "建物名など"
   phone: "電話番号"
   email: "メールアドレス"
