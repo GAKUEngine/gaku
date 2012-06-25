@@ -1,3 +1,5 @@
+$c_red: #e45353; /* Error red */
+
 html {
   // overflow-y: hidden;
   border: 0;
@@ -108,4 +110,10 @@ hr{
 }
 .table tbody tr:hover td, .table tbody tr:hover th {
   background-color: #e2f3e7;
+}
+
+span.required {
+  color: $c_red;
+  font-weight: bold;
+  font-size: 1.2em;
 }
