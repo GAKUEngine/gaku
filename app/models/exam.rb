@@ -5,5 +5,5 @@ class Exam < ActiveRecord::Base
   has_many :exam_portion_scores, :through => :exam_portions
   belongs_to :schedule
 
-  attr_accessible :name, :problem_count, :max_score, :weight, :data
+  attr_accessible :name, :description, :problem_count, :max_score, :execution_date, :weight, :data
 end
