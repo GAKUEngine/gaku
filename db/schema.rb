@@ -121,12 +121,14 @@ ActiveRecord::Schema.define(:version => 20120620141755) do
 
   create_table "exams", :force => true do |t|
     t.string   "name"
+    t.text     "description"
     t.integer  "problem_count"
     t.float    "max_score"
     t.float    "weight"
     t.binary   "data"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "execution_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "schedule_id"
   end
 

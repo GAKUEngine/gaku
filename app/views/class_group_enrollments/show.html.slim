@@ -1,0 +1,10 @@
+p#notice= notice
+p
+  b Class group:
+  = @class_group_enrollment.class_group
+p
+  b Student:
+  = @class_group_enrollment.student
+= link_to 'Edit', edit_class_group_enrollment_path(@class_group_enrollment)
+|| 
+#{link_to 'Back', class_group_enrollments_path}

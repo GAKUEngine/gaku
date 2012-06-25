@@ -1,0 +1,23 @@
+p#notice= notice
+p
+  b
+    = t('syllabuses.code')
+    |: 
+  = @syllabus.code
+p
+  b
+    = t('syllabuses.name')
+    |: 
+  = @syllabus.name
+p
+  b
+    = t('syllabuses.description')
+    |: 
+  = @syllabus.description
+p
+  b
+    = t('syllabuses.credits')
+    |: 
+  = @syllabus.credits
+= link_to t(:Edit), edit_syllabus_path(@syllabus)
+| |  #{link_to t(:Back), syllabuses_path}
