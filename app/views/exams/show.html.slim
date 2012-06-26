@@ -1,0 +1,22 @@
+p#notice= notice
+p
+  b Name:
+  = @exam.name
+p
+  b Course:
+  = @exam.course
+p
+  b Problem count:
+  = @exam.problem_count
+p
+  b Max score:
+  = @exam.max_score
+p
+  b Weight:
+  = @exam.weight
+p
+  b Data:
+  = @exam.data
+= link_to 'Edit', edit_exam_path(@exam)
+| \
+#{link_to 'Back', exams_path}

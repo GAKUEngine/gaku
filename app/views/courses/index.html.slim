@@ -1,0 +1,24 @@
+h1= t 'courses.list'
+= link_to t('courses.new'), new_course_path, :class => "make-button"
+table.make-grid
+  tr
+    th{"data-field" => "#{t 'syllabuses.code'}-#{t :syllabus}-# t 'courses.code'}"
+      | [#{t 'syllabuses.code'}]: #{t :syllabus}-#{t 'courses.code'}
+    th data-field=(t :schedule)
+    th data-field=(t :teacher)
+    th data-field=(t :num_enrolled)
+    /! <th data-field="<haml:loud> t :manage </haml:loud>"><haml:loud> t :manage </haml:loud></th>
+  - @courses.each do |course|
+    tr
+      td
+        = link_to ("[" + course.syllabus.code + "]: " +course.syllabus.name + "-" + course.code), course, :class => "make-button"
+      td
+      td
+      td= CourseEnrollment.where(:course_id => course).count
+      /!
+        | <td>
+        | <div>
+        | <haml:loud> link_to t(:Edit), edit_course_path(course), :class =&amp;gt; &amp;quot;make-button&amp;quot; </haml:loud>
+        | <haml:loud> link_to t(:Destroy), course, confirm: t(:confirm_delete), method: :delete, :class =&amp;gt; &amp;quot;make-button&amp;quot; </haml:loud>
+        | </div>
+        | </td>

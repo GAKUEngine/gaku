@@ -1,0 +1,24 @@
+.container
+  .row
+    .span4.offset4
+      .row-fluid
+        .span12
+          h3= t "devise.sessions.sign_in"
+      hr/
+      .row-fluid
+        .span12
+          .well
+            = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+              #password-credentials
+                p
+                  = f.label :email, t("devise.email")
+                  = f.email_field :email, :class => 'title', :tabindex => 1
+                p
+                  = f.label :password, t("devise.password")
+                  = f.password_field :password, :class => 'title', :tabindex => 2
+                - if devise_mapping.rememberable?
+                  p
+                    = f.check_box :remember_me
+                    = f.label :remember_me, t("devise.sessions.remember_me")
+                p= f.submit t("devise.sessions.sign_in"), :id => 'sign_in', :class => 'button primary'
+            = render "links"
