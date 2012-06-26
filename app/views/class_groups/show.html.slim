@@ -1,0 +1,20 @@
+p#notice= notice
+p
+  b
+    = t("class_groups.name")
+  = @class_group.name
+#class_group_enrollments
+  p#enrolled_students_count
+    b
+      = t :num_enrolled
+    = @class_group_enrollments.count
+  p#enrolled_students_list
+    b
+      = t "class_group_enrollments.list"
+  ul
+    - @class_group_enrollments.each do |enrollment|
+      li= enrollment.student.name
+  #add_student_enrollment
+= link_to_enroll_student t('add_student'), @class_group.id, "add_student_enrollment"
+= link_to t(:Edit), edit_class_group_path(@class_group)
+= link_to t(:Back), class_groups_path

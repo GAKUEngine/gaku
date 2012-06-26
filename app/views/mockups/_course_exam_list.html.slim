@@ -1,0 +1,92 @@
+table#exams-grid.make-grid
+  tr
+    th*{'data-field' => t('exams.name')}
+      = t('exams.name')
+    th*{'data-field' => t(:execution_date)}
+      = t(:expiration_date)
+    th*{'data-field' => t('grades.grading')} 
+      = t('grades.grading')
+    th*{'data-field' => t('grades.average_score')}
+      = t('grades.average_score')
+    th*{'data-field' => t('grades.weighting_portion')} 
+      = t('grades.weighting_portion')
+    th*{'data-field' => t('grades.max_points')} 
+      = t('grades.max_points')
+    th*{'data-field' => t(:options)} 
+      = t(:options)
+  tr
+    td
+      = link_to "1章から6章レビュー", '', :class => "make-button" 
+    td
+      input#exam_date1/
+    td 
+      | [12/12件済]
+      = link_to t('grades.grading'), {:controller => :exams, :action => :edit, :course_id => 1, :exam_id => "1"}, :id => "grade_exam", :class => "make-button"
+    td
+      #exam_result1
+        div style="float:right; margin-right: 15px; margin-top: 5px;" 76.5/100
+    td
+      input#exam1.exam_weighting_type/
+      input#exam1.exam_weighting type="textbox" value="0.1"
+    td
+      | 100点#{link_to "変更", "", :class => "make-button"}
+    td
+      = link_to "ノート追加", "", :class => "make-button"
+      = link_to "編集", "", :class => "make-button"
+  tr
+    td= link_to "6章から10章レビュー", "", :class => "make-button"
+    td
+      input#exam_date2/
+    td
+      | [12/12件済]#{link_to t('grades.grading'), "", :class => "make-button"}
+    td
+      #exam_result2
+        div style="float:right; margin-right: 15px; margin-top: 5px;"
+    td
+      input#exam2.exam_weighting_type/
+      input#exam2.exam_weighting type="textbox" value="0.3"
+    td
+      | 150点#{link_to "変更", "", :class => "make-button"}
+    td
+      = link_to "ノート追加", "", :class => "make-button"
+      = link_to "編集", "", :class => "make-button"
+  tr
+    td= link_to "中間テスト", "", :class => "make-button"
+    td
+      input#exam_date3/
+    td
+      | [0/12件済]#{link_to t('grades.grading'), "", :class => "make-button"}
+    td
+      #exam_result3
+        div style="float:right; margin-right: 15px; margin-top: 5px;"
+    td
+      input#exam3.exam_weighting_type/
+      input#exam3.exam_weighting type="textbox" value="0.25"
+    td
+      | 100点#{link_to "変更", "", :class => "make-button"}
+    td
+      = link_to "ノート追加", "", :class => "make-button"
+      = link_to "編集", "", :class => "make-button"
+javascript:
+  | $(".exam_weighting_type").kendoDropDownList([
+    | { text: "なし", value: "none" },
+    | { text: "倍数", value: "miltiplier"},
+    | { text: "試験内", value: "exams"},
+    | { text: "授業全体", value: "course"}
+  | ]);
+    \| \:
+  | $("#exam_date1").kendoDatePicker({value: new Date(2012, 2, 23), format: 'yyyy年MM月dd日' });
+  | $("#exam_result1").progressbar({value: 76.5});
+  | $(".exam_weighting").kendoNumericTextBox({
+    | format: "p0",
+    | min: 0,
+    | max: 1,
+    | step: 0.01
+  | });
+
+  | $("#exam_date2").kendoDatePicker({value: new Date(2012, 3, 2), format: 'yyyy年MM月dd日' });
+  | $("#exam_result2").progressbar({value: ((83 / 150) * 100)});
+
+  | $("#exam_date3").kendoDatePicker({format: 'yyyy年MM月dd日' });
+  /!*$("#exams-grid").bind("grid_ready", function(){
+  | });*/

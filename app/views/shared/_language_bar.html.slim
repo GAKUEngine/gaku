@@ -1,0 +1,8 @@
+ul.nav
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      = t("language")
+      b.caret
+    ul.dropdown-menu
+      li= link_to "日本語 : " + t("languages.ja"), :locale => 'ja'
+      li= link_to "English : " + t("languages.en"), :locale => 'en'

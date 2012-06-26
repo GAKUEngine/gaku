@@ -1,0 +1,26 @@
+p#notice= notice
+b
+  = t 'courses.code'
+= @course.code
+b
+  = t 'combined_code'
+= if @course.syllabus.code != "" then @course.syllabus.code + "-" end
+= if @course.code != "" then @course.code end
+b
+  = t :syllabus
+= @course.syllabus.name
+= link_to t(:Edit), edit_course_path(@course), :class => "make-button"
+= link_to t(:Back), courses_path, :class => "make-button"
+#tabStrip
+  ul
+    li.state-active
+      a href="#enrollments-tab"
+    li
+      a href="#assignments-tab"
+    li
+      a href="#exams-tab"
+  #enrollments-tab= render :partial => "courses/enrollments"
+  #assignments-tab= render :partial => "courses/assignments"
+  #exams-tab= render :partial => "courses/exams"
+javascript:
+  | var tabStrip = $("#tabStrip").tabs();

@@ -1,0 +1,24 @@
+table
+  tr
+    th Name
+    th Course
+    th Problem count
+    th Max score
+    th Weight
+    th Data
+    th
+    th
+    th
+  - @exams.each do |exam|
+    tr
+      td= exam.name
+      td= exam.course
+      td= exam.problem_count
+      td= exam.max_score
+      td= exam.weight
+      td= exam.data
+      td= link_to 'Show', exam
+      td= link_to 'Edit', edit_exam_path(exam)
+      td= link_to 'Destroy', exam, confirm: 'Are you sure?', method: :delete
+br/
+= link_to 'New Exam', new_exam_path
