@@ -1,9 +1,9 @@
 p#notice= notice
 b
-  = t 'courses.code'
+  = t('courses.code')
 = @course.code
 b
-  = t 'combined_code'
+  = t('combined_code')
 = if @course.syllabus.code != "" then @course.syllabus.code + "-" end
 = if @course.code != "" then @course.code end
 b
