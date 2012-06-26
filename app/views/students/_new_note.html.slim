@@ -1,0 +1,21 @@
+= form.fields_for :notes do |note_form|
+  #note.tab-pane
+    .tabbable
+      ul.nav.nav-tabs
+        li.active
+          a data-toggle="tab" href="#note1"
+      .tab-content
+        #note1.tab-pane.active
+          .row-fluid
+            .span12.control-group
+              = note_form.label :title, t("note.title"), :class => "control-label"
+              .controls
+                = note_form.text_field :title, :class => "span12"
+          .row-fluid
+            .span12.control-group
+              = note_form.label :content, t("note.content"), :class => "control-label"
+              .controls
+                = note_form.text_area :content, :class => "span12", :size => "0x10"
+    hr/
+    .row-fluid
+      button.span12.btn.btn-primary= t "note.add"

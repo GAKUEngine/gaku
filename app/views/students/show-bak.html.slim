@@ -1,0 +1,45 @@
+.alert.alert-info
+  button.close data-dismiss="alert"
+  = notice
+.row-fluid
+  .span1
+  .span10
+    table.table.table-condensed.table-striped
+p
+  b
+    = t :name
+    | \:
+  = @student.name
+p
+  b
+    = t :address
+    | \:
+  = @student.address
+p
+  b
+    = t :phone
+    | \:
+  = @student.phone
+p
+  b
+    = t :email
+    | \:
+  = @student.email
+p
+  b
+    = t :birth
+    | \:
+  = @student.birth
+p
+  b
+    = t :admitted
+    | \:
+  = @student.admitted
+p
+  b
+    = t :graduated
+    | \:
+  = @student.graduated
+= link_to t(:Edit), edit_student_path(@student)
+| \
+| \#{link_to t(:Back), students_path}

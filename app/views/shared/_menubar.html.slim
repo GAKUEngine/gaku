@@ -1,0 +1,8 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      a.brand(href=root_path) = image_tag('gaku-logo.png') 
+      - if user_signed_in?
+        = render :partial => "shared/global_menu"
+        = render :partial => "shared/login_widget"
+        = render :partial => "shared/language_bar"

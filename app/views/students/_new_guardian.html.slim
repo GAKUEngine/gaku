@@ -1,0 +1,72 @@
+= form.fields_for :guardians do |guardian_form|
+  #guardian.tab-pane
+    .tabbable
+      ul.nav.nav-tabs
+        li.active
+          a data-toggle="tab" href="#guardian1"
+      .tab-content
+        #guardian1.tab-pane.active
+          .row-fluid
+            .span3.control-group
+              = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label"
+              .controls
+                = guardian_form.text_field :surname, :class => "span12"
+            .span3.control-group
+              = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label"
+              .controls
+                = guardian_form.text_field :name, :class => "span12"
+            .span3.control-group
+              = guardian_form.label :surname, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label"
+              .controls
+                = guardian_form.text_field :surname, :class => "span12"
+            .span3.control-group
+              = guardian_form.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label"
+              .controls
+                = guardian_form.text_field :name, :class => "span12"
+          .row-fluid
+            .span6.control-group
+              = guardian_form.label :birth, t("birth"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :birth, :class => "span12"
+            .span6.control-group
+              = guardian_form.label :gender, t("gender"), :class => "control-label"
+              .controls
+                = guardian_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12"
+          .row-fluid
+            .span6.control-group
+              = guardian_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+              .controls
+                .row-fluid
+                  .span6
+                    = guardian_form.text_field :zipcode, :class => "span12"
+                  .span6
+                    button.span12.btn.btn-primary= t "addresses.search_address"
+            .span6.control-group
+              = guardian_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
+              .controls
+                = guardian_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12"
+          .row-fluid
+            .span4.control-group
+              = guardian_form.label :city, t("addresses.city"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :city, :class => "span12"
+            .span4.control-group
+              = guardian_form.label :address1, t("addresses.address1"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :address1, :class => "span12"
+            .span4.control-group
+              = guardian_form.label :address2, t("addresses.address2"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :address2, :class => "span12"
+          .row-fluid
+            .span6.control-group
+              = guardian_form.label :phone, t("phone"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :phone, :class => "span12"
+            .span6.control-group
+              = guardian_form.label :email, t("email"), :class => "control-label"
+              .controls
+                = guardian_form.text_field :email, :class => "span12"
+    hr/
+    .row-fluid
+      button.span12.btn.btn-primary= t "guardians.add"

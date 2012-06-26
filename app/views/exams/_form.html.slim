@@ -1,0 +1,35 @@
+= form_for(@exam) do |f|
+  - if @exam.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@exam.errors.count, "error")
+        | prohibited this exam from being saved:
+      ul
+        - @exam.errors.full_messages.each do |msg|
+          li= msg
+  .field
+    = f.label :name
+    br/
+    = f.text_field :name
+  .field
+    = f.label :course
+    br/
+    = f.text_field :course
+  .field
+    = f.label :problem_count
+    br/
+    = f.number_field :problem_count
+  .field
+    = f.label :max_score
+    br/
+    = f.text_field :max_score
+  .field
+    = f.label :weight
+    br/
+    = f.text_field :weight
+  .field
+    = f.label :data
+    br/
+    = f.text_field :data
+  .actions
+    = f.submit

@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    title GAKUEngine
+    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag    params[:controller]
+    = javascript_include_tag "application"
+    = javascript_include_tag params[:controller]
+    = csrf_meta_tags
+  body
+    = render :partial => 'shared/modal_config'
+    = render :partial => "shared/menubar"
+    .container-fluid
+      = render :partial => "shared/flash"
+      = yield
+      = javascript_include_tag "gakuengine"

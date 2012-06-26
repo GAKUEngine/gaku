@@ -1,0 +1,27 @@
+#course_enrollments
+  p#enrolled_students_count
+    b
+      = t :num_enrolled
+    = @course.students.count
+    = link_to t('add_student'),                                                        \
+      {:controller => :course_enrollments, :action => :new, :course_id => @course.id}, \
+      remote => true, :id => "add_student_enrollment", :class => "make-button"        |:
+  #add_student_enrollment_box
+  javascript:
+    | CourseAct.hookupEnrollment();
+      table#enrolled_students_grid.make-grid
+    tr
+      th data-field=(t)"students.name"
+      th data-field=t("assignments.plural") + t(:and) + t("exams.plural")
+      th data-field=(t)"grades.total_points"
+      th data-field=(t)"grades.rank"
+      /! <th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
+    - @course.students.each do |enrollment|
+      tr
+        td= enrollment.name
+        td
+          = link_to t("assignments.view"), "", :class => "make-button"
+          = link_to t("exams.view"), "", :class => "make-button"
+        td
+        td
+        /! <td></td>
