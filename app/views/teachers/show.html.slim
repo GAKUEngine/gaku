@@ -1,0 +1,19 @@
+p#notice= notice
+p
+  b Name:
+  = @teacher.name
+p
+  b Address:
+  = @teacher.address
+p
+  b Phone:
+  = @teacher.phone
+p
+  b Email:
+  = @teacher.email
+p
+  b Birth:
+  = @teacher.birth
+= link_to 'Edit', edit_teacher_path(@teacher)
+| \
+| \#{link_to 'Back', teachers_path}

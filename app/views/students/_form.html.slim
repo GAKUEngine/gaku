@@ -1,0 +1,64 @@
+= form_for @student, :html => {:class => "form-vertical"} do |form|
+  - if @student.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@student.errors.count, "error")
+        | prohibited this student from being saved:
+      ul
+        - @student.errors.full_messages.each do |msg|
+          li= msg
+  fieldset.well
+    .row-fluid
+      .span6.control-group
+        = form.label :class_group_id, t("class"), :class => "control-label"
+        .controls
+          = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+    .row-fluid
+      .span3.control-group
+        = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label"
+        span.required *
+        br/
+        .controls
+          = form.text_field :surname, :class => "span12 required"
+      .span3.control-group
+        = form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label"
+        span.required *
+        br/
+        .controls
+          = form.text_field :name, :class => "span12 required"
+      .span3.control-group
+        = form.label :surname, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label"
+        .controls
+          = form.text_field :surname, :class => "span12"
+      .span3.control-group
+        = form.label :name, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label"
+        .controls
+          = form.text_field :name, :class => "span12"
+    .row-fluid
+      .span6
+        = form.label :admitted, t("admitted"), :class => "control-label"
+        .controls
+          = form.text_field :admitted, :class => "span12"
+      .span6
+        = form.label :graduated, t("graduated"), :class => "control-label"
+        .controls
+          = form.text_field :graduated, :class => "span12"
+  fieldset.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
+        li
+          a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
+        li
+          a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+      .tab-content
+        = render 'new_profile', :form => form
+        = render 'new_guardian', :form => form
+        = render 'new_note', :form => form
+  .form-actions
+    .row-fluid
+      .span3
+        = form.submit t("submit"), :class => "span12 btn btn-primary"
+      .span3
+        = link_to t("Back"), students_path, :class => "span12 btn"

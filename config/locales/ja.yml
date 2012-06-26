@@ -1,4 +1,7 @@
 ja:
+  users:
+    info: "ユーザー情報"
+  
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -13,6 +16,13 @@ ja:
   given_name: "名"
   phonetic_reading: "フリガナ"
   address: "住所"
+  addresses:
+    zipcode: "郵便番号"
+    search_address: "郵便番号で住所検索"
+    prefecture: "都道府県"
+    city: "市区"
+    address1: "町村名と番地"
+    address2: "建物名など"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -64,8 +74,8 @@ ja:
     list: "クラス名簿"
   grades:
     grading: "採点"
-    weighting: "重み付け"
-    weighting_portion: "重み付け率"
+    weighting: "加重する"
+    weighting_portion: "加重率"
     average_points: "平均点数"
     average_score: "平均点数"
     total_points: "総合点数"
@@ -86,7 +96,6 @@ ja:
     view: "試験参照"
     new: "新規試験登録"
   execution_date: "実行日"
-  options: "オプション"
   config:
     label: "設定"
     close: "閉じる"
@@ -94,19 +103,18 @@ ja:
     help:
       language: 使用する言語を選択してください。
   language: "言語"
-  lang:
+  languages:
     ja: "日本語"
     en: "英語"
   and: "と"
   submit: "登録する"
-  zipcode: "郵便番号"
-  prefecture: "都道府県"
   gender: "性別"
-  male: "男性"
-  female: "女性"
+  genders:
+    male: "男性"
+    female: "女性"
   profile: "プロフィール"
-  guardian:
-    guardian: "保護者"
+  guardian: "保護者"
+  guardians:
     add: "保護者を追加"
   note:
     notes: "備考"
@@ -114,3 +122,4 @@ ja:
     content: "本文"
     add: "備考を追加"
   class: クラス
+  options: "オプション"

@@ -1,0 +1,20 @@
+= form_for(@course) do |f|
+  - if @course.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@course.errors.count, "error")
+        | prohibited this course from being saved:
+      ul
+        - @course.errors.full_messages.each do |msg|
+          li= msg
+  .field
+    = f.label t(:syllabus)
+    br/
+    = f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }
+  .field
+    = f.label t('courses.code')
+    = t 'courses.code_sample'
+    br/
+    = f.text_field :code
+  .actions
+    = f.submit

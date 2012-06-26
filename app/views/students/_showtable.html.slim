@@ -1,0 +1,59 @@
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        .well
+          table.table.table-striped
+            tbody
+              tr
+                th= t :name
+                td= @student.name
+              tr
+                th= t :email
+                td= @student.email
+              tr
+                th= t :birth
+                td= @student.birth
+              tr
+                th= t :admitted
+                td= @student.admitted
+              tr
+                th= t :graduated
+                td= @student.graduated
+    .row-fluid
+      .span12
+        .well
+          .tabbable.tabs-right
+            ul.nav.nav-tabs
+              li.active
+                a data-toggle="tab" href="#profile"
+              li
+                a data-toggle="tab" href="#guardian"
+              li
+                a data-toggle="tab" href="#note"
+            .tab-content
+              #profile.tab-pane.active
+                table.table.table-striped
+                  tbody
+                    tr
+                      th= t :birth
+                      td= @student.birth
+                    tr
+                      th= t :gender
+                      td= @student.gender
+                    tr
+                      th= t :prefecture
+                      td= @student.birth
+                    tr
+                      th= t :phone
+                      td= @student.phone
+                    tr
+                      th= t :email
+                      td= @student.email
+              = render 'guardians'
+              = render 'notes'
+  .row-fluid
+    = link_to t(:Edit), edit_student_path(@student)
+    | \
+    | \#{link_to t(:Back), students_path}

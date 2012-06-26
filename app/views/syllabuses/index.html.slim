@@ -1,0 +1,22 @@
+h1= t 'syllabuses.list'
+= link_to t('syllabuses.new'), new_syllabus_path, :class => "make-button"
+table.make-grid
+  tr
+    th*{'data-field' => t('syllabuses.code')} = t('syllabuses.code')
+    th*{'data-field' => t('syllabuses.name')} = t('syllabuses.name')
+    th*{'data-field' => t('syllabuses.description')} = t('syllabuses.description')
+    th*{'data-field' => t('syllabuses.credits')} = t('syllabuses.credits')
+    th*{'data-field' => "管理"} 管理
+  - @syllabuses.each do |syllabus|
+    tr
+      td= link_to syllabus.code, edit_syllabus_path(syllabus)
+      td= syllabus.name
+      td= syllabus.description
+      td= syllabus.credits
+      td
+        div
+          = link_to t(:Show), syllabus
+          |  | 
+          = link_to t(:Edit), edit_syllabus_path(syllabus)
+          |  | 
+          = link_to t(:Destroy), syllabus, confirm: 'Are you sure?', method: :delete

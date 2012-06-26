@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120611125810) do
+ActiveRecord::Schema.define(:version => 20120620141755) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -121,12 +121,14 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
 
   create_table "exams", :force => true do |t|
     t.string   "name"
+    t.text     "description"
     t.integer  "problem_count"
     t.float    "max_score"
     t.float    "weight"
     t.binary   "data"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "execution_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "schedule_id"
   end
 
@@ -139,6 +141,11 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
+  end
+
+  create_table "guardians_students", :force => true do |t|
+    t.integer "guardian_id"
+    t.integer "student_id"
   end
 
   create_table "installs", :force => true do |t|
@@ -168,13 +175,10 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
   end
 
   create_table "profiles", :force => true do |t|
-    t.string   "surname"
-    t.string   "name"
-    t.string   "name_reading"
     t.string   "email"
     t.datetime "birth_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -198,17 +202,19 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
 
   create_table "students", :force => true do |t|
     t.string   "name"
-    t.text     "address"
+    t.string   "surname"
+    t.string   "name_reading"
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "user_id"
     t.integer  "profile_id"
     t.integer  "faculty_id"
+    t.string   "gender"
   end
 
   create_table "syllabuses", :force => true do |t|
@@ -234,6 +240,7 @@ ActiveRecord::Schema.define(:version => 20120611125810) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false
+    t.string   "locale"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

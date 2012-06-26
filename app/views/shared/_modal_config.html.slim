@@ -1,0 +1,19 @@
+#modal-options.modal.hide.fade
+  .modal-header
+    button.close data-dismiss="modal" type="button"
+    h3= t "config.label"
+  .modal-body
+    form.form-horizontal
+      fieldset
+        .control-group
+          label.control-label= t 'language'
+          .controls
+            select.span3
+              option
+                | 日本語 : #{t("languages.ja")}
+              option
+                | English : #{t("languages.en")}
+            p.help-block= t 'config.help.language'
+  .modal-footer
+    a.btn data-dismiss="modal" href="#"
+    a.btn.btn-primary href="#"

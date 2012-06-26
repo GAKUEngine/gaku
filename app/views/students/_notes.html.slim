@@ -1,0 +1,32 @@
+- if @student.notes.any?
+  #note.tab-pane
+    .tabbable
+      ul.nav.nav-tabs
+        li.active
+          a data-toggle="tab" href="#note1"
+            = t "note.notes"
+            | 1
+        li
+          a data-toggle="tab" href="#note2"
+            = t "note.notes"
+            | 2
+      .tab-content
+        #note1.tab-pane.active
+          .row-fluid
+            .span12
+              = @student.notes.first.title
+          hr/
+          .row-fluid
+            .span12
+              = @student.notes.first.content
+        - unless @student.notes.second.nil?
+          #note2.tab-pane.active
+            .row-fluid
+              .span12= @student.notes.second.title
+            hr/
+            .row-fluid
+              .span12
+                = @student.notes.second.content
+    hr/
+    .row-fluid
+      button.span12.btn.btn-primary= t "note.add"

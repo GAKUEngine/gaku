@@ -1,0 +1,9 @@
+p#notice= notice
+p
+  b Student:
+  = @course_enrollment.student
+p
+  b Course:
+  = @course_enrollment.course
+= link_to 'Edit', edit_course_enrollment_path(@course_enrollment)
+= link_to 'Back', course_enrollments_path
