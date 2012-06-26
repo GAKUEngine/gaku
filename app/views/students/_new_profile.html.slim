@@ -1,5 +1,5 @@
-= form.fields_for :profile do |profile_form|
-  #profile.tab-pane.active
+#profile.tab-pane.active
+  = form_for :profile do |profile_form|
     .row-fluid
       .span6.control-group
         = profile_form.label :birth, t("birth"), :class => "control-label"
