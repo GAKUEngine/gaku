@@ -10,7 +10,7 @@ gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kendoui-rails'
 
-gem 'devise'
+gem 'devise', :git => "git://github.com/plataformatec/devise.git"
 gem 'devise-i18n'
 
 gem 'execjs'
