@@ -1,23 +1,23 @@
-ul.nav
+ul.nav#menu
   li= link_to t("panel"), root_path
   li
     = link_to t("students.list"), students_path
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
-      = t "class_group_management"
+      = t("class_group_management")
       b.caret
     ul.dropdown-menu
       li= link_to t("class_groups.list"), class_groups_path
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
-      = t "course_management"
+      = t("course_management")
       b.caret
     ul.dropdown-menu
       li= link_to t("syllabuses.list"), syllabuses_path
       li= link_to t("courses.list"), courses_path
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
-      = t "exam_management"
+      = t("exam_management")
       b.caret
     ul.dropdown-menu
       li= link_to t("exams.list"), exams_path
