@@ -8,7 +8,7 @@
       .span6.control-group
         = profile_form.label :gender, t("gender"), :class => "control-label"
         .controls
-          = profile_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), :class => "span12"
+          = profile_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), {}, :class => "span12"
     .row-fluid
       .span6.control-group
         = profile_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
@@ -21,7 +21,7 @@
       .span6.control-group
         = profile_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
         .controls
-          = profile_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), :class => "span12"
+          = profile_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
     .row-fluid
       .span4.control-group
         = profile_form.label :city, t("addresses.city"), :class => "control-label"
