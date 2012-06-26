@@ -1,9 +1,9 @@
-= form.fields_for :guardians do |guardian_form|
-  #guardian.tab-pane
+#guardian.tab-pane
+  = form_for :guardians do |guardian_form|
     .tabbable
       ul.nav.nav-tabs
         li.active
-          a data-toggle="tab" href="#guardian1"
+          a data-toggle="tab" href="#guardian1" = t("guardian")+" 1";
       .tab-content
         #guardian1.tab-pane.active
           .row-fluid

@@ -1,9 +1,9 @@
-= form.fields_for :notes do |note_form|
-  #note.tab-pane
+#note.tab-pane
+  = form_for :notes do |note_form|
     .tabbable
       ul.nav.nav-tabs
         li.active
-          a data-toggle="tab" href="#note1"
+          a data-toggle="tab" href="#note1" = t("note.notes")+" 1"
       .tab-content
         #note1.tab-pane.active
           .row-fluid
