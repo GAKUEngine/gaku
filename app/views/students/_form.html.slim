@@ -61,4 +61,4 @@
       .span3
         = form.submit t("submit"), :class => "span12 btn btn-primary"
       .span3
-        = link_to t("Back"), students_path, :class => "span12 btn"
+        = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
