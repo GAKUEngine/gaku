@@ -1,4 +1,4 @@
-= form_for @student, :html => {:class => "form-vertical"} do |form|
+= form_for @student, :html => {:class => "form-vertical"}, :remote => false do |form|
   - if @student.errors.any?
     #error_explanation
       h2
@@ -58,9 +58,9 @@
           = render :partial => 'new_profile', :form => form
           = render :partial => 'new_guardian', :form => form
           = render :partial => 'new_note', :form => form
-  .row-fluid
-    .span12.well
-      .span3
-        = form.submit t("submit"), :class => "span12 btn btn-primary"
-      .span3
-        = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
+    .row-fluid
+      .span12.well
+        .span3
+          = form.submit t("submit"), :class => "span12 btn btn-primary"
+        .span3
+          = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
