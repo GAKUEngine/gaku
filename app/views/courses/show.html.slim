@@ -1,4 +1,7 @@
-p#notice= notice
+- if notice
+  .alert.alert-info
+    button.close{data-dismiss="alert"} ×
+    = notice
 b
   = t('courses.code')
 = @course.code

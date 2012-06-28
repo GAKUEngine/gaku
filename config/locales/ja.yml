@@ -113,8 +113,11 @@ ja:
     male: "男性"
     female: "女性"
   profile: "プロフィール"
+  profiles:
+    new: "新規プロフィール登録"
   guardian: "保護者"
   guardians:
+    new: "新規保護者登録"
     add: "保護者を追加"
   note:
     notes: "備考"

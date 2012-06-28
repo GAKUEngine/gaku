@@ -1,5 +1,6 @@
 GAKUEngine::Application.routes.draw do
 
+  devise_for :installs
   devise_for :users
 
   resources :class_groups
@@ -17,6 +18,10 @@ GAKUEngine::Application.routes.draw do
   	resources :address
   	resources :contacts
   end
+
+  resources :profiles
+  
+  resources :guardians
 
   resources :exams
 
