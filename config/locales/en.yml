@@ -100,8 +100,9 @@ en:
     female: "Female"
   profile: "Profile"
   profiles:
-    new: "New Profilse"
+    new: "New Profile"
   guardian: "保護者"
+  guardians:
     new: "New Guardian"
     add: "Add Guardian"
   note:
