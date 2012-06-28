@@ -18,6 +18,10 @@ GAKUEngine::Application.routes.draw do
   	resources :contacts
   end
 
+  resources :profiles
+  
+  resources :guardians
+
   resources :exams
 
   root :to => 'home#index'
