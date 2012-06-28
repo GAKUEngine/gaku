@@ -4,13 +4,13 @@
     = notice
 b
   = t('courses.code')
-= @course.code
+  = @course.code
 b
   = t('combined_code')
-= if @course.syllabus.code != "" then @course.syllabus.code + "-" end
+= if @course.syllabus.any? != "" then @course.syllabus.code + "-" end
 = if @course.code != "" then @course.code end
 b
-  = t :syllabus
+  = t(:syllabus)
 = @course.syllabus.name
 = link_to t(:Edit), edit_course_path(@course), :class => "make-button"
 = link_to t(:Back), courses_path, :class => "make-button"
