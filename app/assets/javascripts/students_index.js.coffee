@@ -8,6 +8,9 @@ class StudentGrid extends BuHin
     height: 600
   position: null
   studentsPerPage: 10
+  titles:
+    name: "Name"
+    gender: "Gender"
 
   defColWidth: 128
 
@@ -26,14 +29,15 @@ class StudentGrid extends BuHin
       columns: [
         {
           field: "name"
-          title: 'students.name' #これをt("students.name")にしたい。
+          title: @titles.name
           width: 128
         },{
           field: "gender"
-          title: "students.gender"
+          title: @titles.gender
           width: 64
         }]
     
+    @target.html("")
     @target.kendoGrid(gridArgs)
 
   refreshGrid: (query) ->
@@ -52,17 +56,28 @@ class StudentGrid extends BuHin
 
         @_createGrid()
 
+  _getFieldNames: () ->
+    fields = @target.find('*[data-field]')
+    for field in fields
+      fieldObj = $(field)
+      @titles[fieldObj.attr('data-field')] = fieldObj.html()
+
+
   _getScreenMetrics: () ->
     @window.height = $(window).height()
     @position = @target.position()
     @studentsPerPage = Math.round((@window.height - @position.top) / 36) - 2
 
   init: () ->
+    @_getFieldNames()
     @_getScreenMetrics()
     @refreshGrid("/students.json")
 
   ProcessOptions: (options) ->
-    
+    if options
+      if options["titles"]
+        @titles = options["titles"]
+        @_createGrid() #本当はタイトルだけ置き換えると良いけど
 
 $.fn.studentGrid = (options) ->
   pluginName = 'studentGrid'

@@ -41,6 +41,7 @@ ja:
     birth: "生徒生年月日"
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
+    gender: "性別"
   add_student: "生徒を追加する"
   schedule: "定刻"
   num_enrolled: "在籍人数"

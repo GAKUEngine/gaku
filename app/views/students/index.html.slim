@@ -20,9 +20,13 @@
             hr/
         .row-fluid
           .span12
-            #grid.span12
+            table#grid.span12
+              thead
+                tr
+                  th data-field="name"  = t('students.name')
+                  th data-field="gender" = t('students.gender')
 
 = javascript_include_tag "students_index"
-javascript:
-  $('#grid').studentGrid();
 
+coffee:
+  $('#grid').studentGrid()
