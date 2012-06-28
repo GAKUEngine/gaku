@@ -1,56 +1,55 @@
-$(document).ready ->
-  SetGrid = (DataSource) ->
-    DateW = 95
-    $("#grid").kendoGrid
-      dataSource:
-        data: DataSource
-        pageSize: g_num
+SetGrid = (DataSource) ->
+  DateW = 95
+  $("#grid").kendoGrid
+    dataSource:
+      data: DataSource
+      pageSize: g_num
 
-      height: (g_num + 1) * 36
-      groupable: true
-      scrollable: false
-      sortable: true
-      pageable: true
-      resizable: true
-      reorderable: true
-      columns: [
-        field: "name"
-        title: "students.name"
-        width: 128
-      ,
-        field: "address"
-        title: "students.address"
-        width: 64
-      ,
-        field: "address"
-        title: "students.address"
-        width: 64
-      ,
-        field: "phone"
-        title: "students.phone"
-        width: 128
-      ,
-        field: "birth"
-        title: "students.birth"
-        width: DateW
-      ,
-        field: "admitted"
-        title: "students.admitted"
-        width: DateW
-      ,
-        field: "graduated"
-        title: "students.graduated"
-        width: DateW
-      ,
-        field: "address"
-        title: "students.address"
-        width: 64
-      ,
-        field: "manage",
-        title: "manage",
-        width: 183,
-        encoded: false
-       ]
+    height: (g_num + 1) * 36
+    groupable: true
+    scrollable: false
+    sortable: true
+    pageable: true
+    resizable: true
+    reorderable: true
+    columns: [
+      field: "name"
+      title: 'students.name' #これをt("students.name")にしたい。
+      width: 128
+    ,
+      field: "address"
+      title: "students.address"
+      width: 64
+    ,
+      field: "address"
+      title: "students.address"
+      width: 64
+    ,
+      field: "phone"
+      title: "students.phone"
+      width: 128
+    ,
+      field: "birth"
+      title: "students.birth"
+      width: DateW
+    ,
+      field: "admitted"
+      title: "students.admitted"
+      width: DateW
+    ,
+      field: "graduated"
+      title: "students.graduated"
+      width: DateW
+    ,
+      field: "address"
+      title: "students.address"
+      width: 64
+    ,
+      field: "manage",
+      title: "manage",
+      width: 183,
+      encoded: false
+     ]
   $("a[rel=popover]").popover(
     trigger: "manual"
     animation: true
