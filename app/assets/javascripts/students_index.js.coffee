@@ -8,6 +8,7 @@ class StudentGrid extends BuHin
     height: 600
   position: null
   studentsPerPage: 10
+  fields: null
   titles:
     name: "Name"
     surname: "Surname"
@@ -58,13 +59,16 @@ class StudentGrid extends BuHin
         @students[i]["manage"] = pop
         i++
 
-        @_createGrid()
+      @_createGrid()
 
   _getFieldNames: () ->
-    fields = $("#fields").find('*[data-field]')
-    for field in fields
+    @fields = $("#fields")
+    fieldItems = @fields.find('*[data-field]')
+    for field in fieldItems
       fieldObj = $(field)
       @titles[fieldObj.attr('data-field')] = fieldObj.html()
+
+    @fields.css("display", "none")
 
 
   _getScreenMetrics: () ->
