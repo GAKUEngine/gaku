@@ -20,11 +20,13 @@
             hr/
         .row-fluid
           .span12
-            table#grid.span12
+            table#fields.span12
               thead
                 tr
+                  th data-field="surname"  = t('students.surname')
                   th data-field="name"  = t('students.name')
                   th data-field="gender" = t('students.gender')
+            #grid.span12
 
 = javascript_include_tag "students_index"
 

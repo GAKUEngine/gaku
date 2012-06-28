@@ -34,6 +34,7 @@ ja:
     new: "新規生徒登録"
     edit: "生徒情報の編集"
     list: "生徒一覧"
+    surname: "生徒名字"
     name: "生徒名"
     address: "生徒住所"
     phone: "生徒電話番号"

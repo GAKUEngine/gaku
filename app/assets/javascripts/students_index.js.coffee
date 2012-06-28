@@ -10,6 +10,7 @@ class StudentGrid extends BuHin
   studentsPerPage: 10
   titles:
     name: "Name"
+    surname: "Surname"
     gender: "Gender"
 
   defColWidth: 128
@@ -28,6 +29,10 @@ class StudentGrid extends BuHin
       reorderable: true
       columns: [
         {
+          field: "surname"
+          title: @titles.surname
+          width: 128
+        },{
           field: "name"
           title: @titles.name
           width: 128
@@ -37,7 +42,6 @@ class StudentGrid extends BuHin
           width: 64
         }]
     
-    @target.html("")
     @target.kendoGrid(gridArgs)
 
   refreshGrid: (query) ->
@@ -57,7 +61,7 @@ class StudentGrid extends BuHin
         @_createGrid()
 
   _getFieldNames: () ->
-    fields = @target.find('*[data-field]')
+    fields = $("#fields").find('*[data-field]')
     for field in fields
       fieldObj = $(field)
       @titles[fieldObj.attr('data-field')] = fieldObj.html()
