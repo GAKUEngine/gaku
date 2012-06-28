@@ -4,7 +4,6 @@ describe Syllabus do
 
   context "validations" do 
   	it { should have_valid_factory(:syllabus) }
-    it { should belong_to(:course) }
   end
   
 end
