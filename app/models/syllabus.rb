@@ -1,4 +1,4 @@
 class Syllabus < ActiveRecord::Base
-  belongs_to :course
+  has_many :courses
   attr_accessible :name, :code, :description, :credits
 end
