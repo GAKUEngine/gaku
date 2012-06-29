@@ -70,11 +70,19 @@ class StudentGrid extends BuHin
           .attr("data-content", "edit")
           .html("hover for popover")
 
-        editButton = $("<a></a>")
+        managementButtons = $("<div></div>")
+        showButton = $("<a></a>")
           .addClass("btn")
           .attr("href", ('/students/' + @students[i].id))
+          .html("表示")
+          .appendTo(managementButtons)
+        editButton = $("<a></a>")
+          .addClass("btn")
+          .attr("href", ('/students/' + @students[i].id + "/edit"))
           .html("編集")
-        @students[i]["manage"] = editButton.wrap("<div></div>").parent().html()
+          .appendTo(managementButtons)
+        
+        @students[i]["manage"] = managementButtons.html()
         i++
 
       @_createGrid()
