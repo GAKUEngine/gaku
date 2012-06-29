@@ -46,6 +46,8 @@ class StudentGrid extends BuHin
           title: @titles.manage
           width: 64
           encoded: false
+          sortable: false
+          groupable: false
         }]
     
     @target.kendoGrid(gridArgs)
