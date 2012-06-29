@@ -42,9 +42,10 @@ class StudentGrid extends BuHin
           title: @titles.gender
           width: 64
         },{
-          command: ["edit", "show"]
+          field: "manage"
           title: @titles.manage
-          width: 200
+          width: 64
+          encoded: false
         }]
     
     @target.kendoGrid(gridArgs)
@@ -59,15 +60,19 @@ class StudentGrid extends BuHin
       i = 0
       while i < @students.length
         manage = $("<div></div>")
-        #pop = $("<a></a>")
-        #pop.attr("href", "#")
-        #  .addClass("btn btn-danger")
-        #  .attr("rel", "popover")
-        #  .attr("title", "edit")
-        #  .attr("data-content", "eidt")
-          #.attr("hover for popover")
-          #tag = "<div style=\"float:left\"><a class=\"k-button\" href=\"/students/" + @students[i].id + "\">表示</a><a class=\"k-button\" href=\"/students/" + @students[i].id + "/edit\">編集</a></div>"
-          #@students[i]["manage"] = manage
+        pop = $("<a></a>")
+        pop.attr("href", "#")
+          .addClass("btn btn-danger")
+          .attr("rel", "popover")
+          .attr("title", "edit")
+          .attr("data-content", "edit")
+          .html("hover for popover")
+
+        editButton = $("<a></a>")
+          .addClass("btn")
+          .attr("href", ('/students/' + @students[i].id))
+          .html("編集")
+        @students[i]["manage"] = editButton.wrap("<div></div>").parent().html()
         i++
 
       @_createGrid()
