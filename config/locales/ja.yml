@@ -31,6 +31,7 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
+    show: 生徒照会
     new: "新規生徒登録"
     edit: "生徒情報の編集"
     list: "生徒一覧"
