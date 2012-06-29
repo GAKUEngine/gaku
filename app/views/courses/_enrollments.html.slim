@@ -2,10 +2,9 @@
   p#enrolled_students_count
     b
       = t :num_enrolled
-    = @course.students.count
-    = link_to t('add_student'),                                                        \
-      {:controller => :course_enrollments, :action => :new, :course_id => @course.id}, \
-      remote => true, :id => "add_student_enrollment", :class => "make-button"        |:
+      = @course.students.count
+      = link_to t('add_student'), {:controller => :course_enrollments, :action => :new, :course_id => @course.id},:remote => true, :id => "add_student_enrollment", :class => "make-button"
+
   #add_student_enrollment_box
   javascript:
     | CourseAct.hookupEnrollment();
