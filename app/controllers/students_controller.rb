@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
   end
 
   private
-
+  
     def load_class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]

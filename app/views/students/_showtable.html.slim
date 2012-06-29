@@ -4,11 +4,11 @@
       table.table.table-striped.table-bordered.table-condensed
         tbody
           tr
-            th= t :surname
-            td= @student.surname
+            th = t :name
+            td= @student.surname+" "+@student.name
           tr
-            th= t :name
-            td= @student.name
+            th= t('name')+" ("+t('phonetic_reading')+")"
+            td= @student.surname_reading.to_s+" "+@student.name_reading.to_s 
           tr
             th= t :email
             td= @student.email
@@ -43,8 +43,8 @@
                   th= t :gender
                   td= @student.gender
                 tr
-                  th= t :prefecture
-                  td= @student.birth
+                  th= t 'addresses.prefecture'
+                  td= @student.name
                 tr
                   th= t :phone
                   td= @student.phone

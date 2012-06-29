@@ -14,7 +14,7 @@ ja:
   name: "名前"
   surname: "姓"
   given_name: "名"
-  phonetic_reading: "フリガナ"
+  phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   addresses:
     zipcode: "郵便番号"
