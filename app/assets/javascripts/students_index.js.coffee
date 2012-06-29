@@ -41,6 +41,10 @@ class StudentGrid extends BuHin
           field: "gender"
           title: @titles.gender
           width: 64
+        },{
+          command: ["edit", "show"]
+          title: @titles.manage
+          width: 200
         }]
     
     @target.kendoGrid(gridArgs)
@@ -54,9 +58,16 @@ class StudentGrid extends BuHin
 
       i = 0
       while i < @students.length
-        pop = "<a href=\"#\" class=\"btn btn-danger\" rel=\"popover\" title=\"A Title\" data-content=\"test\">hover for popover</a>"
-        tag = "<div style=\"float:left\"><a class=\"k-button\" href=\"/students/" + @students[i].id + "\">表示</a><a class=\"k-button\" href=\"/students/" + @students[i].id + "/edit\">編集</a></div>"
-        @students[i]["manage"] = pop
+        manage = $("<div></div>")
+        #pop = $("<a></a>")
+        #pop.attr("href", "#")
+        #  .addClass("btn btn-danger")
+        #  .attr("rel", "popover")
+        #  .attr("title", "edit")
+        #  .attr("data-content", "eidt")
+          #.attr("hover for popover")
+          #tag = "<div style=\"float:left\"><a class=\"k-button\" href=\"/students/" + @students[i].id + "\">表示</a><a class=\"k-button\" href=\"/students/" + @students[i].id + "/edit\">編集</a></div>"
+          #@students[i]["manage"] = manage
         i++
 
       @_createGrid()
