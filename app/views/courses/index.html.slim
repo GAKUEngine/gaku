@@ -10,7 +10,8 @@ table.make-grid
   - @courses.each do |course|
     tr
       td
-        = link_to ("[" + course.syllabus.code + "]: " +course.syllabus.name + "-" + course.code), course, :class => "make-button"
+        - if course.syllabus
+          = link_to ("[" + course.syllabus.code + "]: " +course.syllabus.name + "-" + course.code), course, :class => "make-button"
       td
       td
       td= CourseEnrollment.where(:course_id => course).count
