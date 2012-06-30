@@ -19,4 +19,4 @@ table.make-grid
           |  | 
           = link_to t(:Edit), edit_syllabus_path(syllabus)
           |  | 
-          = link_to t(:Destroy), syllabus, confirm: 'Are you sure?', method: :delete
+          = link_to t(:Destroy), syllabus, :data => { :confirm => 'Are you sure?' }, :method => :delete
