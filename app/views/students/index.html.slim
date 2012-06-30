@@ -2,8 +2,12 @@
   .span1
   .span10
     .row-fluid
-      .span12
+      .span3
         h3 = t("students.list")
+      .pull-right
+        = link_to new_student_path, :class => "btn btn-primary", :id => "new_student_link" do
+          i.icon-plus.icon-white
+          = " "+t("students.new")
     .row-fluid
       .span12
         hr/
@@ -11,17 +15,18 @@
       .span12.well
         .row-fluid
           .span12
-            = link_to t('students.new'), new_student_path, :class => "btn btn-primary", :id => "new_student_link"
+            div checkboxes
         .row-fluid
           .span12
             hr/
-            table#fields.span12
-              thead
-                tr
-                  th data-field="surname"  = t('students.surname')
-                  th data-field="name"  = t('students.name')
-                  th data-field="gender" = t('students.gender')
-                  th data-field="manage" = t('manage')
+        .row-fluid
+          table#fields.span12
+            thead
+              tr
+                th data-field="surname"  = t('students.surname')
+                th data-field="name"  = t('students.name')
+                th data-field="gender" = t('students.gender')
+                th data-field="manage" = t('manage')
         .row-fluid
           .span12
             #grid.span12

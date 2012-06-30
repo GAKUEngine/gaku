@@ -22,16 +22,12 @@ end
 
 desc "Generates a dummy app for testing"
 task :test_app do
+  Rails.env = "test"
   puts "Setting up dummy database..."
-  cmd = "bundle exec rake db:drop db:create db:migrate db:test:prepare"
-
-  if RUBY_PLATFORM =~ /mswin/ #windows
-    cmd += " >nul"
-  else
-    cmd += " >/dev/null"
-  end
-
-  system(cmd)
+  Rake::Task['db:drop'].invoke
+  Rake::Task['db:create'].invoke
+  Rake::Task['db:migrate'].invoke
+  Rake::Task['db:test:prepare'].invoke
 end
 
 
