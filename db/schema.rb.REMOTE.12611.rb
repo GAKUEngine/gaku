@@ -210,13 +210,12 @@ ActiveRecord::Schema.define(:version => 20120628130835) do
     t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "user_id"
     t.integer  "profile_id"
     t.integer  "faculty_id"
     t.string   "gender"
-    t.string   "surname_reading"
   end
 
   create_table "syllabuses", :force => true do |t|
