@@ -13,6 +13,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :students do 
   	resources :profiles 
+    resources :guardians
   	resources :exams
   	resources :courses
   	resources :address
@@ -20,9 +21,6 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :profiles
-  
-  resources :guardians
-
   resources :exams
 
   root :to => 'home#index'
