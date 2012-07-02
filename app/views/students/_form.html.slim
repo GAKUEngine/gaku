@@ -28,13 +28,13 @@
           .controls
             = form.text_field :name, :class => "span12 required"
         .span3.control-group
-          = form.label :surname, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label"
+          = form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label"
           .controls
-            = form.text_field :surname, :class => "span12"
+            = form.text_field :surname_reading, :class => "span12"
         .span3.control-group
-          = form.label :name, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label"
+          = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label"
           .controls
-            = form.text_field :name, :class => "span12"
+            = form.text_field :name_reading, :class => "span12"
       .row-fluid
         .span6
           = form.label :admitted, t("admitted"), :class => "control-label"
@@ -51,7 +51,7 @@
           li.active
             a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
           li
-            a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
+            a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
           li
             a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
         .tab-content

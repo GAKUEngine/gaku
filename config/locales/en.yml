@@ -28,6 +28,7 @@ en:
   teacher: "Instructor"
   student: "Student"
   students:
+    show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
     list: "Students List"

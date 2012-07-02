@@ -1,5 +1,13 @@
-h1 Editing student
-= render 'form'
-= link_to 'Show', @student
-| \
-| \#{link_to 'Back', students_path}
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span3
+        h3 = t("students.edit")
+      .pull-right
+        = link_to t('students.show'), @student, :class => "btn btn-primary"
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      = render 'form'

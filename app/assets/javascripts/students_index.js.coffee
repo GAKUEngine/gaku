@@ -1,70 +1,124 @@
-SetGrid = (DataSource) ->
-  DateW = 95
-  $("#grid").kendoGrid
-    dataSource:
-      data: DataSource
-      pageSize: g_num
+#= require buhin/buhin-base
 
-    height: (g_num + 1) * 36
-    groupable: true
-    scrollable: false
-    sortable: true
-    pageable: true
-    resizable: true
-    reorderable: true
-    columns: [
-      field: "name"
-      title: 'students.name' #これをt("students.name")にしたい。
-      width: 128
-    ,
-      field: "address"
-      title: "students.address"
-      width: 64
-    ,
-      field: "address"
-      title: "students.address"
-      width: 64
-    ,
-      field: "phone"
-      title: "students.phone"
-      width: 128
-    ,
-      field: "birth"
-      title: "students.birth"
-      width: DateW
-    ,
-      field: "admitted"
-      title: "students.admitted"
-      width: DateW
-    ,
-      field: "graduated"
-      title: "students.graduated"
-      width: DateW
-    ,
-      field: "address"
-      title: "students.address"
-      width: 64
-    ,
-      field: "manage",
-      title: "manage",
-      width: 183,
-      encoded: false
-     ]
-  $("a[rel=popover]").popover(
-    trigger: "manual"
-    animation: true
-  ).click (e) ->
-    $(e.target).popover "toggle"
+class StudentGrid extends BuHin
+  students: null
+  pageSize: 5
+  window:
+    width: 800
+    height: 600
+  position: null
+  studentsPerPage: 10
+  fields: null
+  titles:
+    name: "Name"
+    surname: "Surname"
+    gender: "Gender"
 
-  wh = $(window).height()
-  gp = $("#grid").position()
-  g_num = Math.round((wh - gp.top) / 36) - 2
-  $.getJSON "/students.json", (ds) ->
-    i = 0
+  defColWidth: 128
 
-    while i < ds.length
-      pop = "<a href=\"#\" class=\"btn btn-danger\" rel=\"popover\" title=\"A Title\" data-content=\"test\">hover for popover</a>"
-      tag = "<div style=\"float:left\"><a class=\"k-button\" href=\"/students/" + ds[i].id + "\">表示</a><a class=\"k-button\" href=\"/students/" + ds[i].id + "/edit\">編集</a></div>"
-      ds[i]["manage"] = pop
-      i++
-    SetGrid ds
+  _createGrid: () ->
+    gridArgs =
+      dataSource:
+        data: @students
+        pageSize: @studentsPerPage
+      height: (@studentsPerPage + 1) * 36
+      groupable: true
+      scrollable: false
+      sortable: true
+      pageable: true
+      resizable: true
+      reorderable: true
+      columns: [
+        {
+          field: "surname"
+          title: @titles.surname
+          width: 128
+        },{
+          field: "name"
+          title: @titles.name
+          width: 128
+        },{
+          field: "gender"
+          title: @titles.gender
+          width: 64
+        },{
+          field: "manage"
+          title: @titles.manage
+          width: 64
+          encoded: false
+          sortable: false
+          groupable: false
+        }]
+    
+    @target.kendoGrid(gridArgs)
+
+  refreshGrid: (query) ->
+    $.getJSON query, (studentData) =>
+      if studentData == null
+        return
+
+      @students = studentData
+
+      i = 0
+      while i < @students.length
+        manage = $("<div></div>")
+        pop = $("<a></a>")
+        pop.attr("href", "#")
+          .addClass("btn btn-danger")
+          .attr("rel", "popover")
+          .attr("title", "edit")
+          .attr("data-content", "edit")
+          .html("hover for popover")
+
+        managementButtons = $("<div></div>")
+        showButton = $("<a></a>")
+          .addClass("btn")
+          .attr("href", ('/students/' + @students[i].id))
+          .html("<i class='icon-eye-open'></i>")
+          .appendTo(managementButtons)
+        editButton = $("<a></a>")
+          .addClass("btn")
+          .attr("href", ('/students/' + @students[i].id + "/edit"))
+          .html("<i class='icon-pencil'></i>")
+          .appendTo(managementButtons)
+        
+        @students[i]["manage"] = managementButtons.html()
+        i++
+
+      @_createGrid()
+
+  _getFieldNames: () ->
+    @fields = $("#fields")
+    fieldItems = @fields.find('*[data-field]')
+    for field in fieldItems
+      fieldObj = $(field)
+      @titles[fieldObj.attr('data-field')] = fieldObj.html()
+
+    @fields.css("display", "none")
+
+
+  _getScreenMetrics: () ->
+    @window.height = $(window).height()
+    @position = @target.position()
+    @studentsPerPage = Math.round((@window.height - @position.top) / 36) - 2
+
+  init: () ->
+    @_getFieldNames()
+    @_getScreenMetrics()
+    @refreshGrid("/students.json")
+
+  ProcessOptions: (options) ->
+    if options
+      if options["titles"]
+        @titles = options["titles"]
+        @_createGrid() #本当はタイトルだけ置き換えると良いけど
+
+$.fn.studentGrid = (options) ->
+  pluginName = 'studentGrid'
+  @.each ->
+    if !$.data(@, "plugin_#{pluginName}")
+      $.data(@, "plugin_#{pluginName}", new StudentGrid(@))
+
+    $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
+
+  return @

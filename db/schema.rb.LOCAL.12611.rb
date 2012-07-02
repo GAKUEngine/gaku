@@ -89,10 +89,9 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
 
   create_table "courses", :force => true do |t|
     t.string   "code"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "faculty_id"
-    t.integer  "syllabus_id"
   end
 
   create_table "exam_portion_scores", :force => true do |t|
@@ -226,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "code"
+    t.integer  "course_id"
   end
 
   create_table "users", :force => true do |t|
