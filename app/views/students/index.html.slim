@@ -1,12 +1,13 @@
 .row-fluid
-  .span12
-    a href="#" class="btn btn-danger" rel="popover" title=t("name") data-content="<button class='btn btn-primary'>aaa</button>" test-poppover
-.row-fluid
   .span1
   .span10
     .row-fluid
-      .span12
+      .span3
         h3 = t("students.list")
+      .pull-right
+        = link_to new_student_path, :class => "btn btn-primary", :id => "new_student_link" do
+          i.icon-plus.icon-white
+          = " "+t("students.new")
     .row-fluid
       .span12
         hr/
@@ -14,11 +15,23 @@
       .span12.well
         .row-fluid
           .span12
-            = link_to t('students.new'), new_student_path, :class => "btn btn-primary", :id => "new_student_link"
+            div checkboxes
         .row-fluid
           .span12
             hr/
         .row-fluid
+          table#fields.span12
+            thead
+              tr
+                th data-field="surname"  = t('students.surname')
+                th data-field="name"  = t('students.name')
+                th data-field="gender" = t('students.gender')
+                th data-field="manage" = t('manage')
+        .row-fluid
           .span12
             #grid.span12
+
 = javascript_include_tag "students_index"
+
+coffee:
+  $('#grid').studentGrid()
