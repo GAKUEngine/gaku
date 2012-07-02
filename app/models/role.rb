@@ -1,3 +1,5 @@
 class Role < ActiveRecord::Base
-  attr_accessible :name
+  belongs_to :class_group_enrollment
+  
+  attr_accessible :name, :class_group_enrollment_id
 end
