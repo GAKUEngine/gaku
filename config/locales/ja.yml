@@ -9,6 +9,7 @@ ja:
   Update: "更新"
   Destroy: "削除"
   Back: "戻る"
+  required: "必須"
   manage: "管理"
   confirm_delete: "本当に削除しますか?"
   panel: "パネル"
@@ -119,14 +120,16 @@ ja:
   profile: "プロフィール"
   profiles:
     new: "新規プロフィール登録"
+    save: "プロフィールを保存"
   guardian: "保護者"
   guardians:
-    new: "新規保護者登録"
     add: "保護者を追加"
+    save: "保護者を保存"
   note:
     notes: "備考"
     title: "題名"
     content: "本文"
     add: "備考を追加"
+    save: "備考を保存"
   class: クラス
   options: "オプション"

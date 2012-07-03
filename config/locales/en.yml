@@ -5,6 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
+  required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
   panel: "Panel"
@@ -102,13 +103,15 @@ en:
   profile: "Profile"
   profiles:
     new: "New Profile"
+    save: "Save profile"
   guardian: "保護者"
   guardians:
-    new: "New Guardian"
     add: "Add Guardian"
+    save: "Save Guardian"
   note:
     notes: "Notes"
     title: "Title"
     content: "Content"
     add: "Add Note"
+    save: "Save Note"
   class: Class
