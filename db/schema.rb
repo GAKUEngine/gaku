@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702160218) do
+ActiveRecord::Schema.define(:version => 20120703041436) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -198,6 +198,11 @@ ActiveRecord::Schema.define(:version => 20120702160218) do
     t.string   "repeat"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "semesters", :force => true do |t|
+    t.date "starting"
+    t.date "ending"
   end
 
   create_table "states", :force => true do |t|
