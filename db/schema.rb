@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(:version => 20120702160218) do
   end
 
   create_table "schedules", :force => true do |t|
-    t.datetime "start"
-    t.datetime "stop"
+    t.datetime "starting"
+    t.datetime "ending"
     t.string   "repeat"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
   has_many :exams
   
-  attr_accessible :start, :stop, :repeat 
+  attr_accessible :starting, :ending, :repeat 
 end
