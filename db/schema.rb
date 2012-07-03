@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628185831) do
+ActiveRecord::Schema.define(:version => 20120702160218) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
     t.integer  "student_id"
+    t.integer  "seat_number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -49,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
 
   create_table "class_groups", :force => true do |t|
     t.string   "name"
+    t.integer  "grade"
+    t.string   "homeroom"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "faculty_id"
@@ -89,10 +92,11 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
 
   create_table "courses", :force => true do |t|
     t.string   "code"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "faculty_id"
     t.integer  "syllabus_id"
+    t.integer  "class_group_id"
   end
 
   create_table "exam_portion_scores", :force => true do |t|
@@ -185,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20120628185831) do
   create_table "roles", :force => true do |t|
     t.integer "faculty_id"
     t.string  "name"
+    t.integer "class_group_enrollment_id"
   end
 
   create_table "schedules", :force => true do |t|

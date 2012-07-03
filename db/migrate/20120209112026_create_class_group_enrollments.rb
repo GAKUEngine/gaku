@@ -3,6 +3,7 @@ class CreateClassGroupEnrollments < ActiveRecord::Migration
     create_table :class_group_enrollments do |t|
       t.references :class_group
       t.references :student
+      t.integer    :seat_number
 
       t.timestamps
     end
