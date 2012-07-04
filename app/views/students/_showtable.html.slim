@@ -22,40 +22,25 @@
             th= t :graduated
             td= @student.graduated
 .row-fluid
-  .span12
-    .well
-      .tabbable.tabs-right
-        ul.nav.nav-tabs
-          li.active
-            a data-toggle="tab" href="#profile" =t :profile
-          li
-            a data-toggle="tab" href="#guardian" =t :guardian
-          li
-            a data-toggle="tab" href="#note" =t 'note.notes'
-        .tab-content
-          #profile.tab-pane.active
-            table.table.table-striped.table-bordered.table-condensed
-              tbody
-                tr
-                  th= t :birth
-                  td= @student.birth
-                tr
-                  th= t :gender
-                  td= @student.gender
-                tr
-                  th= t 'addresses.prefecture'
-                  td= @student.name
-                tr
-                  th= t :phone
-                  td= @student.phone
-                tr
-                  th= t :email
-                  td= @student.email
-          / = render 'guardians'
-          / = render 'notes'
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
+        li
+          a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
+        li
+          a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+      .tab-content
+        = render :partial => 'new_profile'
+        = render :partial => 'new_guardian'
+        = render :partial => 'new_note'
+        /= render :partial => 'new_profile', :form => form
+        /= render :partial => 'new_guardian', :form => form
+        /= render :partial => 'new_note', :form => form
 .row-fluid
   .span12.well
     .span3
-      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-primary"
+      = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "span12 btn btn-primary"
     .span3
       = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"

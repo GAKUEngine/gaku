@@ -1,4 +1,13 @@
 #note.tab-pane
+  .row-fluid
+    h3.pull-left = t("note.notes")
+    .pull-right
+      = link_to new_student_path, :class => "btn btn-primary" do
+        i.icon-plus.icon-white
+        = " "+t("note.add")
+  .row-fluid
+    .span12
+      hr
   = form_for :notes do |note_form|
     .tabbable
       ul.nav.nav-tabs
@@ -16,6 +25,5 @@
               = note_form.label :content, t("note.content"), :class => "control-label"
               .controls
                 = note_form.text_area :content, :class => "span12", :size => "0x10"
-    hr/
-    .row-fluid
-      button.span12.btn.btn-primary= t "note.add"
+          .row-fluid
+            button.span12.btn.btn-primary= t "note.save"

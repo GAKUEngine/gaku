@@ -2,8 +2,7 @@
   .span1
   .span10
     .row-fluid
-      .span3
-        h3 = t("students.list")
+      h3.pull-left = t("students.list")
       .pull-right
         = link_to new_student_path, :class => "btn btn-primary", :id => "new_student_link" do
           i.icon-plus.icon-white

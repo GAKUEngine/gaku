@@ -1,4 +1,13 @@
 #profile.tab-pane.active
+  .row-fluid
+    h3.pull-left = t("profile")
+    .pull-right
+      = link_to new_student_path, :class => "btn btn-primary" do
+        i.icon-plus.icon-white
+        = " "+t("profiles.new")
+  .row-fluid
+    .span12
+      hr
   = form_for :profile do |profile_form|
     .row-fluid
       .span6.control-group
@@ -44,3 +53,5 @@
         = profile_form.label :email, t("email"), :class => "control-label"
         .controls
           = profile_form.text_field :email, :class => "span12"
+  .row-fluid
+    button.span12.btn.btn-primary= t "profiles.save"
