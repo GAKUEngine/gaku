@@ -4,10 +4,8 @@ GAKUEngine::Application.routes.draw do
   devise_for :users
 
   resources :class_groups
-  resources :class_group_enrollments
 
   resources :courses
-  resources :course_enrollments
 
   resources :syllabuses
 
@@ -20,7 +18,8 @@ GAKUEngine::Application.routes.draw do
   	resources :contacts
   end
 
-  resources :profiles
+  resources :semesters
+
   resources :exams
 
   root :to => 'home#index'
