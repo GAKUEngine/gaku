@@ -1,4 +1,13 @@
 #guardian.tab-pane
+  .row-fluid
+    h3.pull-left = t("guardian")
+    .pull-right
+      = link_to new_student_path, :class => "btn btn-primary" do
+        i.icon-plus.icon-white
+        = " "+t("guardians.add")
+  .row-fluid
+    .span12
+      hr
   = form_for :guardians do |guardian_form|
     .tabbable
       ul.nav.nav-tabs
@@ -67,6 +76,5 @@
               = guardian_form.label :email, t("email"), :class => "control-label"
               .controls
                 = guardian_form.text_field :email, :class => "span12"
-    hr/
-    .row-fluid
-      button.span12.btn.btn-primary= t "guardians.add"
+          .row-fluid
+            button.span12.btn.btn-primary= t "guardians.save"
