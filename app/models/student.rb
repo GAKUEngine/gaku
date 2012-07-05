@@ -20,7 +20,7 @@ class Student < ActiveRecord::Base
                   :class_groups, :class_group_ids, :class_groups_attributes, :profile, :profile_attributes,
                   :guardians, :guardians_attributes, :notes, :notes_attributes
 
-  validates :name, :surname, :name_reading, :surname_reading, :presence => true
+  validates :name, :surname, :presence => true
 
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :guardians

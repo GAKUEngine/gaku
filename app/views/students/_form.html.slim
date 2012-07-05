@@ -24,14 +24,14 @@
           = form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
           span.label.label-important.pull-right =t 'required'
           = form.text_field :name, :class => "span12"
-        .span3.control-group
-          = form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
-          span.label.label-important.pull-right =t 'required'
-          = form.text_field :surname_reading, :class => "span12"
-        .span3.control-group
-          = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
-          span.label.label-important.pull-right =t 'required'
-          = form.text_field :name_reading, :class => "span12"
+        /.span3.control-group
+          /= form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+          /span.label.label-important.pull-right =t 'required'
+          /= form.text_field :surname_reading, :class => "span12"
+        /.span3.control-group
+        /  = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+        /  span.label.label-important.pull-right =t 'required'
+        /  = form.text_field :name_reading, :class => "span12"
       .row-fluid
         .span6
           = form.label :admitted, t("admitted"), :class => "control-label"
