@@ -20,8 +20,7 @@ table#exams-grid.make-grid
     td
       input#exam_date1/
     td 
-      | [12/12件済]
-      = link_to t('grades.grading'), {:controller => :exams, :action => :edit, :course_id => 1, :exam_id => "1"}, :id => "grade_exam", :class => "make-button"
+      /| [12/12件済] = link_to t('grades.grading'), {:controller => :exams, :action => :edit, :course_id => @exam.course.id, :exam_id => @exam.id}, :id => "grade_exam", :class => "make-button"
     td
       #exam_result1
         div style="float:right; margin-right: 15px; margin-top: 5px;" 76.5/100
