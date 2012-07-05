@@ -14,7 +14,7 @@
   .field
     = f.label :course
     br/
-    = f.text_field :course
+    = f.select :course_id, Course.all.collect{|c| [c.code,c.id]},{:prompt => t('exams.select')}
   .field
     = f.label :problem_count
     br/
