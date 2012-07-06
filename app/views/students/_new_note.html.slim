@@ -1,10 +1,11 @@
 #note.tab-pane
   .row-fluid
     .span12
-      = notes.each do |note|
-        .row-fluid
-          .span6 =note.title
-          .span6 =note.content
+      - if @student.notes.any?
+        = @student.notes.each do |note|
+          .row-fluid
+            .span6 =note.title
+            .span6 =note.content
   .row-fluid
     h3.pull-left = t("note.notes")
     .pull-right
