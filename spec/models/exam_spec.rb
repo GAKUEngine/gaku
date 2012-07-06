@@ -8,7 +8,6 @@ describe Exam do
     it { should have_many(:exam_portions) }
     it { should have_many(:exam_portion_scores) }
     it { should belong_to(:schedule) }
-    it { should belong_to(:course) }
   end
   
 end
