@@ -8,12 +8,12 @@
   .row-fluid
     .span12
       hr
-  = form_for :profile do |profile_form|
+  = form_for :profile, :remote => true do |profile_form|
     .row-fluid
       .span6.control-group
-        = profile_form.label :birth, t("birth"), :class => "control-label"
+        = profile_form.label :birth_date, t("birth"), :class => "control-label"
         .controls
-          = profile_form.text_field :birth, :class => "span12"
+          = profile_form.text_field :birth_date, :class => "span12"
       .span6.control-group
         = profile_form.label :gender, t("gender"), :class => "control-label"
         .controls

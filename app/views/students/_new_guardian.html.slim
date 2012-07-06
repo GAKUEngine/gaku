@@ -8,7 +8,7 @@
   .row-fluid
     .span12
       hr
-  = form_for :guardians do |guardian_form|
+  = form_for :guardian, :remote => true do |guardian_form|
     .tabbable
       ul.nav.nav-tabs
         li.active

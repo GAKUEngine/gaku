@@ -11,7 +11,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :syllabuses
 
-  resources :students do 
+  resources :students do
   	resources :profiles 
     resources :guardians
   	resources :exams

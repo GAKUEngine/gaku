@@ -12,10 +12,35 @@ class StudentsController < ApplicationController
     @students = Student.all
     respond_to do |format|
       format.html
-      format.json {render :json => @students.to_json}
+      format.json {render :json => @students}
+    end
+  end
+  
+  def show
+    @new_profile = Profile.new
+    @new_guardian = Guardian.new
+    @notes = Note.all
+    @new_note = Note.new
+    
+    @student = Student.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json {render :json => @student}
     end
   end
 
+  def create_note
+    @note = Note.new(params[:new_note])
+    
+    if @note.update_attributes(params[:new_note])
+      status = 'success'
+    else
+      status = 'error'
+    end
+    
+    render json: { status: status, data: @note, html: html }
+  end
+  
   def destroy
     destroy! :flash => !request.xhr?
   end
