@@ -1,5 +1,12 @@
 #note.tab-pane
   .row-fluid
+    .span12
+      - if @student.notes.any?
+        = @student.notes.each do |note|
+          .row-fluid
+            .span6 =note.title
+            .span6 =note.content
+  .row-fluid
     h3.pull-left = t("note.notes")
     .pull-right
       = link_to new_student_path, :class => "btn btn-primary" do
@@ -8,7 +15,7 @@
   .row-fluid
     .span12
       hr
-  = form_for :notes do |note_form|
+  = form_for :new_note, :remote => true do |f|
     .tabbable
       ul.nav.nav-tabs
         li.active
@@ -17,13 +24,15 @@
         #note1.tab-pane.active
           .row-fluid
             .span12.control-group
-              = note_form.label :title, t("note.title"), :class => "control-label"
+              = f.label :title, t("note.title"), :class => "control-label"
               .controls
-                = note_form.text_field :title, :class => "span12"
+                = f.text_field :title, :class => "span12 edit_note"
           .row-fluid
             .span12.control-group
-              = note_form.label :content, t("note.content"), :class => "control-label"
+              = f.label :content, t("note.content"), :class => "control-label"
               .controls
-                = note_form.text_area :content, :class => "span12", :size => "0x10"
+                = f.text_area :content, :class => "span12 edit_note", :size => "0x10"
           .row-fluid
-            button.span12.btn.btn-primary= t "note.save"
+            = f.submit t "note.save"
+
+= javascript_include_tag "students_show"
