@@ -14,10 +14,11 @@ GAKUEngine::Application.routes.draw do
   resources :students do
   	resources :profiles 
     resources :guardians
+    resources :notes
+    resources :addresses
+    resources :contacts
   	resources :exams
   	resources :courses
-  	resources :address
-  	resources :contacts
   end
 
   resources :semesters
