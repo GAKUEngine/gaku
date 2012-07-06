@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(:version => 20120703044236) do
     t.string   "name"
     t.string   "surname"
     t.string   "name_reading"
+    t.string   "surname_reading"
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
@@ -230,7 +231,6 @@ ActiveRecord::Schema.define(:version => 20120703044236) do
     t.integer  "profile_id"
     t.integer  "faculty_id"
     t.string   "gender"
-    t.string   "surname_reading"
   end
 
   create_table "syllabuses", :force => true do |t|

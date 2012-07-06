@@ -4,6 +4,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :name
       t.string :surname
       t.string :name_reading
+      t.string :surname_reading
       t.string :phone
       t.string :email
       t.date :birth
