@@ -7,7 +7,7 @@ p
   = @exam.name
 p
   b Course:
-  = @exam.course
+  = @exam.course.code if @exam.course
 p
   b Problem count:
   = @exam.problem_count

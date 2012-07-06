@@ -6,5 +6,5 @@ class Exam < ActiveRecord::Base
   belongs_to :schedule
   belongs_to :course
 
-  attr_accessible :name, :description, :problem_count, :max_score, :execution_date, :weight, :data
+  attr_accessible :name, :description, :problem_count, :max_score, :execution_date, :weight, :data, :course, :course_id
 end
