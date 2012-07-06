@@ -1,5 +1,7 @@
 class AddLocaleToUserTable < ActiveRecord::Migration
   def change
-   add_column :users, :locale, :string
+    change_table :users do |t|
+    	t.string :locale
+    end 
   end
 end
