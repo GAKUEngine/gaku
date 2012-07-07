@@ -1,8 +1,12 @@
 class Address < ActiveRecord::Base
   
+  before_save :archive_address
+
   belongs_to :country
   belongs_to :state
   has_and_belongs_to_many :students
+
+  has_many :address_histories
 
   validates :address1, :city, :country, :presence => true
   validate :state_validate
@@ -92,5 +96,15 @@ class Address < ActiveRecord::Base
 
       # ensure at least one state field is populated
       errors.add :state, :blank if state.blank? && state_name.blank?
+    end
+
+    def archive_address
+      if self.changed? && !self.new_record?
+        ah = self.address_histories.build(self.attributes.except!('id', 'created_at', 'updated_at', 'country_id', 'state_id', 'faculty_id'))
+        self.changes.each {|k,v| ah.assign_attributes(k => v[0])}
+        ah.state = self.state
+        ah.country = self.country
+        ah.save
+      end
     end
 end
