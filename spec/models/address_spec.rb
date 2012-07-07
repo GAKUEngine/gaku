@@ -129,6 +129,24 @@ describe Address do
       let(:address) { stub_model(Address, :state => state) }
       specify { address.state_text.should == 'virginia' }
     end
+  end
 
+  context "make address history for changed address " do
+    before(:each) do
+      @address = FactoryGirl.create(:address)
+    end
+    
+    it "should create address history" do
+      expect do
+        @address.address1 = 'other address'
+        @address.save
+      end.to change(AddressHistory, :count).by(1)
+    end
+
+    it "should not create address history" do
+      expect do
+        @address.save
+      end.to_not change(AddressHistory, :count).by(1)
+    end
   end
 end
