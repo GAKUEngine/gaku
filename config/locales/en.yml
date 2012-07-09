@@ -84,6 +84,7 @@ en:
     list: "Exams"
     plural: "Exams"
     view: "View Exams"
+    select: "Select Exam"
   config:
     label: "Config"
     close: "Close"

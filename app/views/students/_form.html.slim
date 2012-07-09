@@ -15,6 +15,7 @@
           = form.label :class_group_id, t("class"), :class => "control-label"
           .controls
             = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+
       .row-fluid
         .span3.control-group
           = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
@@ -24,14 +25,15 @@
           = form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
           span.label.label-important.pull-right =t 'required'
           = form.text_field :name, :class => "span12"
-        /.span3.control-group
-          /= form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
-          /span.label.label-important.pull-right =t 'required'
-          /= form.text_field :surname_reading, :class => "span12"
-        /.span3.control-group
-        /  = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
-        /  span.label.label-important.pull-right =t 'required'
-        /  = form.text_field :name_reading, :class => "span12"
+        .span3.control-group
+          = form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+          span3 
+          = form.text_field :surname_reading, :class => "span12"
+        .span3.control-group
+          = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+          span3
+          = form.text_field :name_reading, :class => "span12"
+
       .row-fluid
         .span6
           = form.label :admitted, t("admitted"), :class => "control-label"
@@ -41,6 +43,22 @@
           = form.label :graduated, t("graduated"), :class => "control-label"
           .controls
             = form.text_field :graduated, :class => "span12"
+
+    .row-fluid
+      .span12.well
+        .tabbable.tabs-right
+          ul.nav.nav-tabs
+            li.active
+              a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile.profile')
+            li
+              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
+            li
+              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+          .tab-content
+            = render :partial => 'new_profile',  :form => form
+            = render :partial => 'new_guardian', :form => form  
+            = render :partial => 'new_note',     :form => form
+
     .row-fluid
       .span12.well
         .span3
