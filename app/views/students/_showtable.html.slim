@@ -44,3 +44,5 @@
       = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "span12 btn btn-primary"
     .span3
       = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
+    .span3
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
