@@ -1,0 +1,13 @@
+- if notice
+  .alert.alert-info
+    button.close{data-dismiss="alert"} ×
+    = notice
+p
+  b Data:
+  = @contact.data
+p
+  b Details:
+  = @contact.details
+= link_to 'Edit', edit_contact_path(@contact)
+| \
+#{link_to 'Back',contacts_path}
