@@ -21,6 +21,7 @@ GAKUEngine::Application.routes.draw do
   	resources :courses
   end
 
+  resources :notes
   resources :semesters
 
   resources :exams do 
