@@ -108,9 +108,6 @@ ja:
     help:
       language: 使用する言語を選択してください。
   language: "言語"
-  languages:
-    ja: "日本語"
-    en: "英語"
   and: "と"
   submit: "登録する"
   gender: "性別"

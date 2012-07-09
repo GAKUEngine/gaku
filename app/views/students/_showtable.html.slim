@@ -34,7 +34,7 @@
       .tab-content
         = render 'new_profile', :new_profile => @new_profile
         = render 'new_guardian', :new_guardian => @new_guardian
-        = render 'new_note', :notes => @notes, new_note: @new_note
+        = render 'new_note', :notes => @notes, :new_note => @new_note
         /= render :partial => 'new_profile', :form => form
         /= render :partial => 'new_guardian', :form => form
         /= render :partial => 'new_note', :form => form
