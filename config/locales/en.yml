@@ -91,9 +91,6 @@ en:
     help:
       language: choose your language
   language: "Language"
-  languages:
-    ja: "Japanese"
-    en: "English"
   and: " and "
   submit: "Submit"
   gender: "Sex"

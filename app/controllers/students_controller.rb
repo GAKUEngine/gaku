@@ -29,7 +29,11 @@ class StudentsController < ApplicationController
     end
   end
 
-  def create_note
+  def new
+    @new_note = Note.new(params[:id])
+  end
+
+  def create
     @note = Note.new(params[:new_note])
     
     if @note.update_attributes(params[:new_note])
@@ -38,7 +42,7 @@ class StudentsController < ApplicationController
       status = 'error'
     end
     
-    render json: { status: status, data: @note, html: html }
+    render json: {status:status, data:@note}
   end
   
   def destroy

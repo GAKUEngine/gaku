@@ -18,6 +18,7 @@ GAKUEngine::Application.routes.draw do
   	resources :contacts
   end
 
+  resources :notes
   resources :semesters
 
   resources :exams

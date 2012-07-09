@@ -14,7 +14,7 @@
   .row-fluid
     .span12
       hr
-  = form_for :new_note, :remote => true do |f|
+  = form_for :new_note, :html => {:class => "edit_note"}, :remote => true do |f|
     .tabbable
       ul.nav.nav-tabs
         li.active
