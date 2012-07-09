@@ -18,6 +18,6 @@ p
     - @class_group.class_group_enrollments.each do |enrollment|
       li= enrollment.student.name
   #add_student_enrollment
-= link_to_enroll_student t('add_student'), @class_group.id, "add_student_enrollment"
+/= link_to_enroll_student t('add_student'), @class_group.id, "add_student_enrollment"
 = link_to t(:Edit), edit_class_group_path(@class_group)
 = link_to t(:Back), class_groups_path
