@@ -5,22 +5,27 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_groups
 
-  resources :courses
+  resources :courses do
+    resources :course_enrollments
+  end
 
   resources :syllabuses
 
   resources :students do
   	resources :profiles 
     resources :guardians
+    resources :notes
+    resources :addresses
+    resources :contacts
   	resources :exams
   	resources :courses
-  	resources :address
-  	resources :contacts
   end
 
   resources :semesters
 
-  resources :exams
+  resources :exams do 
+    resources :exam_scores
+  end
 
   root :to => 'home#index'
 

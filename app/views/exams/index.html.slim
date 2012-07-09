@@ -1,3 +1,4 @@
 h1= t("exams.list")
+= link_to t('exams.new'), new_exam_path, :class => "make-button", :id => "new_exam_link"
 = render :partial => "mockups/exam_searchbox"
 = render :partial => "mockups/course_exam_list"
