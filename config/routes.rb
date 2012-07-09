@@ -3,7 +3,9 @@ GAKUEngine::Application.routes.draw do
   devise_for :installs
   devise_for :users
 
-  resources :class_groups
+  resources :class_groups do
+    resources :class_group_enrollments
+  end
 
   resources :courses do
     resources :course_enrollments
