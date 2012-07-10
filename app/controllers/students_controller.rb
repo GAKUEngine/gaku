@@ -9,6 +9,14 @@ class StudentsController < ApplicationController
   before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_before_show, :only => :show
   
+  def index
+    @students = Student.all
+
+    respond_to do |format|
+      format.html
+      format.json {render :json => @students}
+    end
+  end
 
   def create_note
     @note = Note.new(params[:new_note])
