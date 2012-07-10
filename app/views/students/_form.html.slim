@@ -54,6 +54,8 @@
               a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
             li.active
               a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+            li
+              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address.address')
           .tab-content
             #profile.tab-pane
               /= f.fields_for :profile do |builder|
@@ -64,7 +66,6 @@
             #note.tab-pane.active
               = form.fields_for :notes do |builder|
                 = render 'note_fields', f: builder
-
     .row-fluid
       .span12.well
         .span3

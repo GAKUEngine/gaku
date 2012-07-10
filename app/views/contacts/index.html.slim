@@ -1,1 +1,15 @@
-
+h1= t("contacts.list")
+table
+  tr
+    th= t("contacts.name")
+    th
+    th
+    th
+  - @contacts.each do |contact|
+    tr
+      td= contact.name
+      td= link_to t(:Show), contact 
+      td= link_to t(:Edit), edit_contact_path(contact) 
+      td= link_to t(:Destroy), contact, :data => { :confirm => 'Are you sure?' }, :method => :delete
+br/
+= link_to t("contacts.new"), new_contact_path, :class => "k-button", :id => "new_contact_link"

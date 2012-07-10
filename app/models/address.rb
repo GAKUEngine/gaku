@@ -14,15 +14,6 @@ class Address < ActiveRecord::Base
     new({:country => country}, :without_protection => true)
   end
 
-  #Can modify an address if it's not been used in an order (but checkouts controller has finer control)
-  def editable?
-    new_record? || (shipments.empty? && checkouts.empty?)
-  end
-
-  def full_name
-    "#{first_name} #{last_name}".strip
-  end
-
   def state_text
     state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
   end
@@ -34,10 +25,6 @@ class Address < ActiveRecord::Base
 
   alias same_as same_as?
 
-  def to_s
-    "#{full_name}: #{address1}"
-  end
-
   def clone
     self.class.new(self.attributes.except('id', 'updated_at', 'created_at'))
   end
@@ -46,13 +33,13 @@ class Address < ActiveRecord::Base
     self_attrs = self.attributes
     other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
 
-    [self_attrs, other_attrs].each { |attrs| attrs.except!('id', 'created_at', 'updated_at', 'order_id') }
+    [self_attrs, other_attrs].each { |attrs| attrs.except!('id', 'created_at', 'updated_at') }
 
     self_attrs == other_attrs
   end
 
   def empty?
-    attributes.except('id', 'created_at', 'updated_at', 'order_id', 'country_id').all? { |_, v| v.nil? }
+    attributes.except('id', 'created_at', 'updated_at', 'country_id').all? { |_, v| v.nil? }
   end
 
 

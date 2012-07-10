@@ -89,29 +89,6 @@ describe Address do
     end
   end
 
-  context '#full_name' do
-    context 'both first and last names are present' do
-      let(:address) { stub_model(Address, :first_name => 'Michael', :last_name => 'Jackson') }
-      specify { address.full_name.should == 'Michael Jackson' }
-    end
-
-    context 'first name is blank' do
-      let(:address) { stub_model(Address, :first_name => nil, :last_name => 'Jackson') }
-      specify { address.full_name.should == 'Jackson' }
-    end
-
-    context 'last name is blank' do
-      let(:address) { stub_model(Address, :first_name => 'Michael', :last_name => nil) }
-      specify { address.full_name.should == 'Michael' }
-    end
-
-    context 'both first and last names are blank' do
-      let(:address) { stub_model(Address, :first_name => nil, :last_name => nil) }
-      specify { address.full_name.should == '' }
-    end
-
-  end
-
   context '#state_text' do
     context 'state is blank' do
       let(:address) { stub_model(Address, :state => nil, :state_name => 'virginia') }
@@ -129,6 +106,5 @@ describe Address do
       let(:address) { stub_model(Address, :state => state) }
       specify { address.state_text.should == 'virginia' }
     end
-
   end
 end
