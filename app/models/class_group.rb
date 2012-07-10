@@ -4,5 +4,5 @@ class ClassGroup < ActiveRecord::Base
   has_many :courses
   has_many :semesters
   
-  attr_accessible :name, :grade, :home_room
+  attr_accessible :name, :grade, :homeroom
 end
