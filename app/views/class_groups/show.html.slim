@@ -33,7 +33,8 @@ br
       li= semester.starting + " - " + semester.ending
 
 #add_semester
-  = link_to t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :class => "btn"
+  /TODO decide if Semester will be nested under ClassGroup
+  = link_to t('add_semester'), new_semester_path(:class_group_id => @class_group.id), :class => "btn"
 br
 #class_group_courses
   p#courses_count
