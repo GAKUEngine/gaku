@@ -63,6 +63,8 @@ en:
     list: "Course List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
+  num_courses: "Number of courses"
+  add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
   class_group_management: "Class Management"
