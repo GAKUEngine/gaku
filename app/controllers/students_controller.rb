@@ -18,16 +18,9 @@ class StudentsController < ApplicationController
     end
   end
 
-  def create_note
-    @note = Note.new(params[:new_note])
-    
-    if @note.update_attributes(params[:new_note])
-      status = 'success'
-    else
-      status = 'error'
-    end
-    
-    render :json => { :status => status, :data => @note, :html => html }
+  def new
+    @student = Student.new
+    @student.notes.build
   end
   
   def destroy
