@@ -90,6 +90,7 @@ en:
     plural: "Exams"
     view: "View Exams"
     select: "Select Exam"
+    choose_schedule: "Choose Schedule"
   config:
     label: "Config"
     close: "Close"
