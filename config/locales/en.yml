@@ -71,6 +71,8 @@ en:
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
+    grade: "Grade"
+    home_room: "Home Room"
   class_group_enrollments:
     list: "Class Roster"
   grades:

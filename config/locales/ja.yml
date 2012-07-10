@@ -76,6 +76,8 @@ ja:
     list: "クラス一覧"
     new: "新規クラス登録"
     name: "クラス名"
+    grade: "学年"
+    home_room: "主教室"
   class_group_enrollments:
     list: "クラス名簿"
   grades:

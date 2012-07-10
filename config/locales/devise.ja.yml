@@ -25,6 +25,7 @@ ja:
       unlock_instructions:
         subject: アカウントの凍結解除
     passwords:
+      forgot: パスワードを忘れた場合
       send_instructions: パスワードのリセット方法を数分以内にメールでご連絡します。
       updated: パスワードを変更しました。
     registrations:
@@ -33,6 +34,7 @@ ja:
       updated: アカウントを更新しました。
     sessions:
       sign_in: ログイン
+      sign_up: アカウント登録
       remember_me: ログイン情報を記憶する
       signed_in: ログインしました。
       signed_out: ログアウトしました。

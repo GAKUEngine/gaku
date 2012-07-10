@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
     t.integer  "student_id"
-    t.integer  "seat_number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -60,11 +59,11 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
 
   create_table "class_groups", :force => true do |t|
     t.string   "name"
-    t.integer  "grade"
-    t.string   "homeroom"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "faculty_id"
+    t.integer  "grade"
+    t.string   "home_room"
   end
 
   create_table "contact_types", :force => true do |t|
@@ -209,8 +208,8 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
   end
 
   create_table "schedules", :force => true do |t|
-    t.datetime "starting"
-    t.datetime "ending"
+    t.datetime "start"
+    t.datetime "stop"
     t.string   "repeat"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -255,6 +254,7 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "code"
+    t.integer  "course_id"
   end
 
   create_table "users", :force => true do |t|

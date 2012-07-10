@@ -9,7 +9,12 @@
           li= msg
   .field
     = f.label t "class_groups.name"
-    br/
     = f.text_field :name
+  .field
+    = f.label t "class_groups.grade"
+    = f.number_field :grade
+  .field
+    = f.label t "class_groups.home_room"
+    = f.text_field :home_room
   .actions
     = f.submit
