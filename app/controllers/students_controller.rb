@@ -20,7 +20,6 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
-    @student.notes.build
   end
   
   def destroy

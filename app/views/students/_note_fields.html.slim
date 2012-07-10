@@ -1,4 +1,15 @@
-= f.label :title, t("note.title"), :class => "control-label"
-= f.text_field :title, :class => "span12 edit_note"
-= f.label :content, t("note.content"), :class => "control-label"
-= f.text_area :content, :class => "span12 edit_note", :size => "0x10"
+.row-fluid
+  .span12
+    .row-fluid
+      .span12
+        = f.label :title, t("note.title"), :class => "control-label"
+        .controls
+          = f.text_field :title, :class => "span12 edit_note"
+    .row-fluid
+      .span12
+        = f.label :content, t("note.content"), :class => "control-label"
+        .controls
+          = f.text_area :content, :class => "span12 edit_note", :size => "0x10"
+    .row-fluid
+      .span12
+        hr                

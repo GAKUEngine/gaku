@@ -64,8 +64,15 @@
               /= f.fields_for :guardians do |builder|
                 /= render 'guardian_fields', f: builder
             #note.tab-pane.active
-              = form.fields_for :notes do |builder|
-                = render 'note_fields', f: builder
+              .row-fluid
+                h3.pull-left = t("note.notes")
+              .row-fluid
+                .span12
+                  hr
+              .row-fluid
+                = form.fields_for :notes do |builder|
+                  = render 'note_fields', f: builder
+                = link_to_add_fields t("note.add"), form, :notes
     .row-fluid
       .span12.well
         .span3
