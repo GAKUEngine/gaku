@@ -114,3 +114,7 @@ en:
     add: "Add Note"
     save: "Save Note"
   class: Class
+  semesters:
+    list: "Semesters list"
+  num_semesters: "Number of semesters"
+  add_semester: "Add a semester"

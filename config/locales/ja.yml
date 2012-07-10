@@ -130,4 +130,8 @@ ja:
     add: "備考を追加"
     save: "備考を保存"
   class: クラス
+  semesters:
+    list: ""
+  num_semesters: ""
+  add_semester: ""
   options: "オプション"
