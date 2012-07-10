@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroups' do
   before do
-    @syllabus = Factory(:class_group)
+    @class_group = Factory(:class_group)
     sign_in_as!(Factory(:user))
     within('ul#menu') { click_link "Class Listing"}
   end
