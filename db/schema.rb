@@ -11,20 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706120900) do
-
-  create_table "address_histories", :force => true do |t|
-    t.string  "address1"
-    t.string  "address2"
-    t.string  "city"
-    t.string  "zipcode"
-    t.string  "state"
-    t.string  "state_name"
-    t.integer "country_id"
-    t.integer "state_id"
-    t.integer "faculty_id"
-    t.integer "address_id"
-  end
+ActiveRecord::Schema.define(:version => 20120709143456) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -33,11 +20,12 @@ ActiveRecord::Schema.define(:version => 20120706120900) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "state_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
+    t.boolean  "past",       :default => false
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -157,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20120706120900) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "schedule_id"
+    t.integer  "course_id"
   end
 
   create_table "exams_syllabuses", :force => true do |t|
@@ -214,9 +203,9 @@ ActiveRecord::Schema.define(:version => 20120706120900) do
   end
 
   create_table "roles", :force => true do |t|
+    t.integer "faculty_id"
     t.string  "name"
     t.integer "class_group_enrollment_id"
-    t.integer "faculty_id"
   end
 
   create_table "schedules", :force => true do |t|
@@ -245,8 +234,6 @@ ActiveRecord::Schema.define(:version => 20120706120900) do
     t.string   "name"
     t.string   "surname"
     t.string   "name_reading"
-    t.string   "surname_reading"
-    t.string   "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth"
@@ -257,15 +244,17 @@ ActiveRecord::Schema.define(:version => 20120706120900) do
     t.integer  "user_id"
     t.integer  "profile_id"
     t.integer  "faculty_id"
+    t.string   "gender"
+    t.string   "surname_reading"
   end
 
   create_table "syllabuses", :force => true do |t|
     t.string   "name"
-    t.string   "code"
     t.text     "description"
     t.integer  "credits"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "code"
   end
 
   create_table "users", :force => true do |t|
