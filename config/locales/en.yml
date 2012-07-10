@@ -22,6 +22,7 @@ en:
     city: "City"
     address1:
     address2:
+    past: "Make past?"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -91,6 +92,7 @@ en:
     plural: "Exams"
     view: "View Exams"
     select: "Select Exam"
+    choose_schedule: "Choose Schedule"
   config:
     label: "Config"
     close: "Close"

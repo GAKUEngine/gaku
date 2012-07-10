@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
   validates :address1, :city, :country, :presence => true
   validate :state_validate
 
-  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name
+  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past
 
   def self.default
     country = Country.find(Config[:default_country_id]) rescue Country.first
