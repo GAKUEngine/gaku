@@ -44,7 +44,7 @@ en:
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
-  num_enrolled: "Number Entrolled"
+  num_enrolled: "Number Enrolled"
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
@@ -64,6 +64,8 @@ en:
     list: "Course List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
+  num_courses: "Number of courses"
+  add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
   class_group_management: "Class Management"
@@ -117,3 +119,7 @@ en:
     add: "Add Note"
     save: "Save Note"
   class: Class
+  semesters:
+    list: "Semesters list"
+  num_semesters: "Number of semesters"
+  add_semester: "Add a semester"

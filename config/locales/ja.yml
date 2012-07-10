@@ -69,6 +69,8 @@ ja:
     list: "授業一覧"
     code: "授業コード"
     code_sample: "[例: 秋2020]"
+  num_courses: ""
+  add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
   class_group_management: "クラス管理"
@@ -132,4 +134,8 @@ ja:
     add: "備考を追加"
     save: "備考を保存"
   class: クラス
+  semesters:
+    list: ""
+  num_semesters: ""
+  add_semester: ""
   options: "オプション"

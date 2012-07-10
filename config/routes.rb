@@ -5,6 +5,8 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_groups
 
+  resources :semesters  
+
   resources :courses do
     resources :course_enrollments
   end
@@ -24,7 +26,6 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :notes
-  resources :semesters
 
   resources :exams do 
     resources :exam_scores
