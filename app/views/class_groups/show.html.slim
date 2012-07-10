@@ -45,9 +45,9 @@ br
       = t "courses.list"
   ul
     - @class_group.courses.each do |course|
-      li= semester.starting + " - " + semester.ending
+      li= course.code
 
-#add_semester
+#add_course
   /TODO decide if Course will be nested under ClassGroup
   = link_to t('add_course'), new_course_path(:class_group_id => @class_group.id), :class => "btn"
 br
