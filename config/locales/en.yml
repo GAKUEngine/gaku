@@ -42,6 +42,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
   add_student: "Add Student"
+  enroll_to_class: "Enroll to class"
   schedule: "Schedule"
   num_enrolled: "Number Entrolled"
   combined_code: "Combined Code"
