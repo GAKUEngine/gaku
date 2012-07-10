@@ -17,8 +17,8 @@ p
   ul
     - @class_group.class_group_enrollments.each do |enrollment|
       li= enrollment.student.name
-  #add_student_enrollment
-= link_to t('add_student'), new_class_group_enrollment_path(:class_group_id => @class_group.id), :class => "btn"
+#add_student_enrollment
+  = link_to t('add_student'), new_class_group_enrollment_path(:class_group_id => @class_group.id), :class => "btn"
 br
 #class_group_semesters
   p#semesters_count
@@ -33,7 +33,23 @@ br
       li= semester.starting + " - " + semester.ending
 
 #add_semester
-= link_to t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :class => "btn"
+  = link_to t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :class => "btn"
+br
+#class_group_courses
+  p#courses_count
+    b
+      = t :num_courses
+    =  @class_group.courses.count
+  p#courses_list
+    b
+      = t "courses.list"
+  ul
+    - @class_group.courses.each do |course|
+      li= semester.starting + " - " + semester.ending
+
+#add_semester
+  /TODO decide if Course will be nested under ClassGroup
+  = link_to t('add_course'), new_course_path(:class_group_id => @class_group.id), :class => "btn"
 br
 = link_to t(:Edit), edit_class_group_path(@class_group)
 = link_to t(:Back), class_groups_path
