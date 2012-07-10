@@ -1,0 +1,45 @@
+#address.tab-pane
+  .row-fluid
+    h3.pull-left = t("address")
+    .pull-right
+      = link_to new_student_path, :class => "btn btn-primary" do
+        i.icon-plus.icon-white
+        = " "+t("addresses.add")
+  .row-fluid
+    .span12
+      hr
+  = form_for :address, :remote => true do |address_form|
+    .tabbable
+      ul.nav.nav-tabs
+        li.active
+          a data-toggle="tab" href="#address1" = t("address")+" 1";
+      .tab-content
+        #address1.tab-pane.active
+          .row-fluid
+            .span4.control-group
+              = address_form.label :city, t("addresses.city"), :class => "control-label"
+              .controls
+                = address_form.text_field :city, :class => "span12"
+            .span4.control-group
+              = address_form.label :address1, t("addresses.address1"), :class => "control-label"
+              .controls
+                = address_form.text_field :address1, :class => "span12"
+            .span4.control-group
+              = address_form.label :address2, t("addresses.address2"), :class => "control-label"
+              .controls
+                = address_form.text_field :address2, :class => "span12"
+          .row-fluid
+            .span6.control-group
+              = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+              .controls
+                .row-fluid
+                  .span6
+                    = address_form.text_field :zipcode, :class => "span12"
+                  .span6
+                    button.span12.btn.btn-primary= t "addresses.search_address"
+            .span6.control-group
+              = address_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
+              .controls
+                = address_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
+          .row-fluid
+            button.span12.btn.btn-primary= t "addresses.save"

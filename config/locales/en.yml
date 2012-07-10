@@ -15,6 +15,7 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   addresses:
+    add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
     prefecture: "State/Province/Prefecture"
@@ -41,6 +42,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
   add_student: "Add Student"
+  enroll_to_class: "Enroll to class"
   schedule: "Schedule"
   num_enrolled: "Number Entrolled"
   combined_code: "Combined Code"
@@ -69,6 +71,8 @@ en:
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
+    grade: "Grade"
+    homeroom: "Home Room"
   class_group_enrollments:
     list: "Class Roster"
   grades:

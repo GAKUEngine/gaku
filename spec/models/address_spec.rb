@@ -129,6 +129,5 @@ describe Address do
       let(:address) { stub_model(Address, :state => state) }
       specify { address.state_text.should == 'virginia' }
     end
-
   end
 end
