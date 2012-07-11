@@ -2,14 +2,23 @@ require 'spec_helper'
 
 describe 'Courses' do
   before do
-    @course = Factory(:course)
+    @course = Factory(:course, :code => 'bio')
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Course List"}
+    within('ul#menu') { click_link "Courses"}
     @syllabus = Factory(:syllabus)
   end
 
   context "listing courses" do
-    it "should list existing courses" do
+    pending "should list existing courses" do
+      page.should have_content("Courses List")
+      within('table.index tr:nth-child(2)') { page.should have_content("bio") }
+      
+      # show
+      #within('table.index tr:nth-child(2)') { click_link "Show" }
+
+      #TODO Make a real check when view is finished
+      #page.should have_content("Course")
+      #page.should have_content("bio")
 
     end
   end

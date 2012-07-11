@@ -2,36 +2,53 @@ require 'spec_helper'
 
 describe 'Exams' do
 	before(:each) do
-		@exam = Factory(:exam)
-		@exam_portion = Factory(:exam_portion, :exam_id => @exam.id)
+		@exam = Factory(:exam, :name => "Linux", :max_score => 100)
 		sign_in_as!(Factory(:user))
 		within('ul#menu') { click_link "Exams"}
 	end
 
-	context do
+	context "create and edit exam" do
+
+		#TODO Add execution_date and data
 		it 'should create new exam' do
 			click_link 'new_exam_link'
-			fill_in 'exam_name', :with => 'exam name'
+			fill_in 'exam_name', :with => 'Biology Exam'
+			fill_in 'exam_problem_count', :with => 5
+			fill_in 'exam_max_score', :with => 10
+			fill_in 'exam_weight', :with => 1 
+			fill_in 'exam_description', :with => "Good work"
 			click_button 'Create Exam'  
+
+      page.should have_content "was successfully created"
 		end	
+
+		 pending "should edit exam" do 
+      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      fill_in "exam_name", :with => "Biology Exam 2"
+      fill_in "exam_problem_count", :with => 7
+      click_button "Update Exam"
+
+      page.should have_content("was successfully updated")
+      page.should have_content("Biology Exam 2")
+      page.should have_content("7")
+    end
 	end
 
-	context "showing exams" do
-	  it "should have button for add portions" do
-	   visit exam_path(@exam)
-	   page.should have_link("Add Portion")
-	  end
+	context "list and show exams" do
+    pending "should list and show existing exams" do
+      page.should have_content("Exams List")
+      save_and_open_page
+      within('table.index tr:nth-child(2)') { page.should have_content("Linux") }
+      within('table.index tr:nth-child(2)') { page.should have_content("100") }
+      
+      # show
+      within('table.index tr:nth-child(2)') { click_link "Show" }
 
-	  it "should have index of exam portions" do
-	   	visit exam_path(@exam)
-	   	page.should have_content("#{@exam_portion.name}")
-	  end
-	end
+      #TODO Make a real check when view is finished
+      page.should have_content("Exam")
+      page.should have_content("Linux")
+      page.should have_content("100")
 
-	context "editing exams" do
-	  it "should have index of exam portions" do
-	   	visit edit_exam_path(@exam)
-	   	page.should have_content("#{@exam_portion.name}")
-	  end
+    end
 	end
 end

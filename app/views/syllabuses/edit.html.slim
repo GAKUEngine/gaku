@@ -1,5 +1,12 @@
 h1 Editing syllabus
 = render 'form'
+
+= link_to t(:select), available_exams_url, { :remote => true }
+#exams
+#selected-exams
+  
+
 = link_to 'Show', @syllabus
-| \
-| \#{link_to 'Back', syllabuses_path}
+
+br
+= link_to 'Back', syllabuses_path

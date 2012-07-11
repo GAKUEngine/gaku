@@ -48,20 +48,31 @@
       .span12.well
         .tabbable.tabs-right
           ul.nav.nav-tabs
-            li.active
+            li
               a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile.profile')
             li
               a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
-            li
+            li.active
               a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
             li
               a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address.address')
           .tab-content
-            = render :partial => 'new_profile',  :form => form
-            = render :partial => 'new_guardian', :form => form  
-            = render :partial => 'new_note',     :form => form
-            = render :partial => 'new_address',  :form => form
-
+            #profile.tab-pane
+              /= f.fields_for :profile do |builder|
+                /= render 'profile_fields', f: builder
+            #guardian.tab-pane
+              /= f.fields_for :guardians do |builder|
+                /= render 'guardian_fields', f: builder
+            #note.tab-pane.active
+              .row-fluid
+                h3.pull-left = t("note.notes")
+              .row-fluid
+                .span12
+                  hr
+              .row-fluid
+                = form.fields_for :notes do |builder|
+                  = render 'note_fields', f: builder
+                = link_to_add_fields t("note.add"), form, :notes
     .row-fluid
       .span12.well
         .span3

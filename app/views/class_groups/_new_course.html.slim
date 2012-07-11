@@ -1,0 +1,9 @@
+= form_for @new_course do |f|
+  .row-fluid
+    .span12.control-group
+      = f.label :code, t("courses.code"), :class => "control-label"
+      .controls
+        = f.text_field :code, :class => "span12"
+  = f.hidden_field :class_group_id, :value => @class_group.id
+  .row-fluid
+    = f.submit t "courses.save"

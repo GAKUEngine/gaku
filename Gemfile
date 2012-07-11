@@ -19,6 +19,7 @@ gem 'therubyracer'
 gem 'app_config'
 
 gem 'seedbank'
+gem 'annotate'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
