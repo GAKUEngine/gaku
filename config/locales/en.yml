@@ -63,6 +63,7 @@ en:
     list: "Course List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
+    save: "Save course"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
@@ -118,5 +119,8 @@ en:
   class: Class
   semesters:
     list: "Semesters list"
+    starting: "Starting"
+    ending:   "Ending"
+    save: "Save semester"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
