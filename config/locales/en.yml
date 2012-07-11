@@ -131,3 +131,8 @@ en:
     save: "Save semester"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
+
+
+  notice:
+    no_assignments: "No assignments, assign one first"
+    no_exams: "No exams, assign one first"

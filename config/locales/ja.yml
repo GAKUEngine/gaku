@@ -145,3 +145,7 @@ ja:
   num_semesters: ""
   add_semester: ""
   options: "オプション"
+
+  notice:
+    no_assignments: "No assignments, assign one first"
+    no_exams: "No exams, assign one first"
