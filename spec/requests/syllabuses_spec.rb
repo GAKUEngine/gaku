@@ -4,7 +4,7 @@ describe 'Syllabus' do
   before do
     @syllabus = Factory(:syllabus, :name => 'Biology', :code => 'bio')
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "List Syllabuses"}
+    within('ul#menu') { click_link "Syllabuses"}
   end
 
   context "list and show syllabuses" do

@@ -4,7 +4,7 @@ describe 'ClassGroups' do
   before do
     @class_group = Factory(:class_group)
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Class Listing"}
+    within('ul#menu') { click_link "Class Groups"}
   end
 
   context "listing class groups" do
@@ -50,7 +50,7 @@ describe 'ClassGroups' do
     it "should list existing courses" do
       visit class_group_path(@class_group)
       page.should have_content "Number of courses"
-      page.should have_content "Course List"
+      page.should have_content "Courses List"
     end
 
     it "should exist add_course link" do

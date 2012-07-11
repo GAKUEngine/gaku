@@ -4,7 +4,7 @@ describe 'Courses' do
   before do
     @course = Factory(:course, :code => 'bio')
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Course List"}
+    within('ul#menu') { click_link "Courses"}
     @syllabus = Factory(:syllabus)
   end
 

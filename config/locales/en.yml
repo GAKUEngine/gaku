@@ -49,6 +49,7 @@ en:
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
+    plural: "Syllabuses"
     show: "Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
@@ -74,6 +75,7 @@ en:
     list: "Enrollments"
   class_group_management: "Class Management"
   class_groups:
+    plural: "Class Groups"
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
@@ -91,9 +93,9 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
   exams:
+    plural: "Exams"
     new: "New Exam"
     list: "Exams List"
-    plural: "Exams"
     view: "View Exams"
     select: "Select Exam"
     choose_schedule: "Choose Schedule"

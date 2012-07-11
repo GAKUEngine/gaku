@@ -4,7 +4,7 @@ describe 'Student' do
   before do
     @student1 = Factory(:student)
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Students List"}
+    within('ul#menu') { click_link "Students"}
   end
 
   context "listing students" do
