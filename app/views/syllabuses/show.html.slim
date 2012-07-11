@@ -22,5 +22,19 @@ p
     = t('syllabuses.credits')
     |: 
   = @syllabus.credits
+
+#syllabus-exams
+  b
+    = t('num_exams')
+    |:
+  = @syllabus.exams.count
+  p
+    b
+      = t('exams.list')
+      |:
+    = render 'exams'
+
+  =link_to t('exams.add'), new_exam_path, :class => 'btn'
+
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
 | |  #{link_to t(:Back), syllabuses_path}
