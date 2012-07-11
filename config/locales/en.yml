@@ -91,7 +91,7 @@ en:
     view: "View Assignments"
   exams:
     new: "New Exam"
-    list: "Exams"
+    list: "Exams List"
     plural: "Exams"
     view: "View Exams"
     select: "Select Exam"
