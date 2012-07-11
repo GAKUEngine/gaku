@@ -47,6 +47,7 @@ ja:
     graduated: "生徒卒業日"
     gender: "性別"
   add_student: "生徒を追加する"
+  enroll_to_class: ""
   schedule: "定刻"
   num_enrolled: "在籍人数"
   combined_code: "総合コード"
@@ -76,7 +77,7 @@ ja:
     new: "新規クラス登録"
     name: "クラス名"
     grade: "学年"
-    home_room: "主教室"
+    homeroom: "主教室"
   class_group_enrollments:
     list: "クラス名簿"
   grades:
@@ -110,9 +111,6 @@ ja:
     help:
       language: 使用する言語を選択してください。
   language: "言語"
-  languages:
-    ja: "日本語"
-    en: "英語"
   and: "と"
   submit: "登録する"
   gender: "性別"
