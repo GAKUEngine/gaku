@@ -65,6 +65,7 @@ ja:
   course_management: "授業管理"
   course: "授業"
   courses:
+    plural: "Courses"
     new: "新規授業"
     edit: "授業の編集"
     list: "授業一覧"

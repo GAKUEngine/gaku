@@ -61,9 +61,10 @@ en:
   course_management: 'Course Management'
   course: "Course"
   courses:
+    plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Course List"
+    list: "Courses List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
