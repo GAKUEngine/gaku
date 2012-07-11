@@ -102,6 +102,7 @@ ja:
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
+    new: "New Exam"
     list: "試験一覧"
     name: "試験名"
     plural: "試験"
@@ -149,3 +150,5 @@ ja:
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
+
+  select: "Select"

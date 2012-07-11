@@ -28,6 +28,15 @@ GAKUEngine::Application.routes.draw do
   resources :notes
 
   resources :exams do 
+
+    member do
+      get :select
+    end
+    
+    collection do
+      get :available
+    end
+
     resources :exam_scores
     resources :exam_portions
   end

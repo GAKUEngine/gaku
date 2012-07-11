@@ -90,6 +90,7 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
   exams:
+    new: "New Exam"
     list: "Exams"
     plural: "Exams"
     view: "View Exams"
@@ -136,3 +137,5 @@ en:
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
+
+  select: "Select"
