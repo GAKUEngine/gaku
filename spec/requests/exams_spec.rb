@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Exams' do
 	before(:each) do
 		@exam = Factory(:exam)
+		@exam_portion = Factory(:exam_portion, :exam_id => @exam.id)
 		sign_in_as!(Factory(:user))
 		within('ul#menu') { click_link "Exams"}
 	end
@@ -19,6 +20,18 @@ describe 'Exams' do
 	  it "should have button for add portions" do
 	   visit exam_path(@exam)
 	   page.should have_link("Add Portion")
+	  end
+
+	  it "should have index of exam portions" do
+	   	visit exam_path(@exam)
+	   	page.should have_content("#{@exam_portion.name}")
+	  end
+	end
+
+	context "editing exams" do
+	  it "should have index of exam portions" do
+	   	visit edit_exam_path(@exam)
+	   	page.should have_content("#{@exam_portion.name}")
 	  end
 	end
 end
