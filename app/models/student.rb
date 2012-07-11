@@ -26,3 +26,26 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :guardians
   accepts_nested_attributes_for :notes
 end
+
+# == Schema Information
+#
+# Table name: students
+#
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  surname         :string(255)
+#  name_reading    :string(255)
+#  surname_reading :string(255)
+#  gender          :string(255)
+#  phone           :string(255)
+#  email           :string(255)
+#  birth           :date
+#  admitted        :date
+#  graduated       :date
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  user_id         :integer
+#  profile_id      :integer
+#  faculty_id      :integer
+#
+

@@ -19,7 +19,7 @@ gem 'therubyracer'
 gem 'app_config'
 
 gem 'seedbank'
-gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+gem 'annotate'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
