@@ -53,6 +53,7 @@ ja:
   combined_code: "総合コード"
   syllabus: "授業計画"
   syllabuses:
+    show: ""
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"

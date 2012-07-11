@@ -49,9 +49,10 @@ en:
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
+    show: "Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
-    list: "List Syllabus"
+    list: "List Syllabuses"
     code: "Syllabus Code"
     name: "Course Name"
     name_sample: "[EX: Science A]"
