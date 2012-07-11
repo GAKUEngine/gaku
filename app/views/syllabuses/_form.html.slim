@@ -25,3 +25,7 @@
     = f.number_field :credits
   .actions
     = f.submit
+
+  #selected_exams
+  = f.fields_for :exams do |exam_form|
+    = render :partial => 'exam_fields', :locals => { :f => exam_form } 

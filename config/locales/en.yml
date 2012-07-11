@@ -22,6 +22,7 @@ en:
     city: "City"
     address1:
     address2:
+    past: "Make past?"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -44,13 +45,15 @@ en:
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
-  num_enrolled: "Number Entrolled"
+  num_enrolled: "Number Enrolled"
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
+    plural: "Syllabuses"
+    show: "Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
-    list: "List Syllabus"
+    list: "List Syllabuses"
     code: "Syllabus Code"
     name: "Course Name"
     name_sample: "[EX: Science A]"
@@ -59,15 +62,20 @@ en:
   course_management: 'Course Management'
   course: "Course"
   courses:
+    plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Course List"
+    list: "Courses List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
+    save: "Save course"
+  num_courses: "Number of courses"
+  add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
   class_group_management: "Class Management"
   class_groups:
+    plural: "Class Groups"
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
@@ -85,10 +93,13 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
   exams:
-    list: "Exams"
     plural: "Exams"
+    new: "New Exam"
+    list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
+    choose_schedule: "Choose Schedule"
+    add_portion: 'Add Portion'
   config:
     label: "Config"
     close: "Close"
@@ -117,3 +128,17 @@ en:
     add: "Add Note"
     save: "Save Note"
   class: Class
+  semesters:
+    list: "Semesters list"
+    starting: "Starting"
+    ending:   "Ending"
+    save: "Save semester"
+  num_semesters: "Number of semesters"
+  add_semester: "Add a semester"
+
+
+  notice:
+    no_assignments: "No assignments, assign one first"
+    no_exams: "No exams, assign one first"
+
+  select: "Select"

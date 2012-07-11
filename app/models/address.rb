@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
   validates :address1, :city, :country, :presence => true
   validate :state_validate
 
-  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name
+  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past
 
   def self.default
     country = Country.find(Config[:default_country_id]) rescue Country.first
@@ -81,3 +81,22 @@ class Address < ActiveRecord::Base
       errors.add :state, :blank if state.blank? && state_name.blank?
     end
 end
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id         :integer         not null, primary key
+#  address1   :string(255)
+#  address2   :string(255)
+#  city       :string(255)
+#  zipcode    :string(255)
+#  state      :string(255)
+#  state_name :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  country_id :integer
+#  state_id   :integer
+#  faculty_id :integer
+#  past       :boolean         default(FALSE)
+#
+

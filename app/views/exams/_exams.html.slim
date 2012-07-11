@@ -1,0 +1,14 @@
+table.index
+  thead
+    tr data-hook="avilable_header"
+      th= t('name')
+      th
+  tbody
+    - @exams.each do |exam| 
+      tr#row_*{ 'data-hook' => "available_row" }
+        td= exam.name
+        td.actions= link_to t(:select), select_exam_url(exam), :class => 'ajax iconlink select_properties_from_prototype' 
+
+    - if @exams.empty? 
+      tr*{ 'data-hook' => "available_none" }
+        td*{ 'colspan' => "2" } = t(:none)

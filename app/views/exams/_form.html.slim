@@ -27,5 +27,14 @@
     = f.label :data
     br/
     = f.text_field :data
+  .field
+    = f.label :schedule
+    br/
+    = f.select :schedule_id, Schedule.all.collect { |s| ["#{s.starting} - #{s.ending}", s.id] },:prompt => t('exam.choose_shedule') 
+  .field 
+    = f.label :description
+    br/
+    = f.text_area :description
+
   .actions
     = f.submit
