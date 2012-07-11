@@ -29,6 +29,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :exams do 
     resources :exam_scores
+    resources :exam_portions
   end
 
   root :to => 'home#index'

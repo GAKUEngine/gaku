@@ -105,6 +105,7 @@ ja:
     plural: "試験"
     view: "試験参照"
     new: "新規試験登録"
+    add_portion: ''
   execution_date: "実行日"
   config:
     label: "設定"

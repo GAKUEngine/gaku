@@ -93,6 +93,7 @@ en:
     view: "View Exams"
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
+    add_portion: 'Add Portion'
   config:
     label: "Config"
     close: "Close"
