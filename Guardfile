@@ -9,7 +9,7 @@ guard 'rspec', :version => 2, :spec_paths => %w(spec),
   watch("config/routes.rb")
   watch("app/controllers/application_controller.rb")  { "spec/controllers" }
   # Capybara request specs
-  watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
+  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
 end
 
 guard 'bundler' do
