@@ -38,12 +38,14 @@ br
       = t "semesters.list"
   ul
     - @class_group.semesters.each do |semester|
-      li= semester.starting + " - " + semester.ending
+      li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
 
 #add_semester
-  /TODO decide if Semester will be nested under ClassGroup
-  = link_to t('add_semester'), new_semester_path(:class_group_id => @class_group.id), :class => "btn"
+  = link_to t('add_semester'), '#', :id => 'show_semester_form', :class => "btn"
 br
+/TODO need to redirect to the right route after create!
+div id="semester_form" style="display:none"
+  = render 'new_semester'
 #class_group_courses
   p#courses_count
     b
@@ -57,8 +59,24 @@ br
       li= course.code
 
 #add_course
-  /TODO decide if Course will be nested under ClassGroup
-  = link_to t('add_course'), new_course_path(:class_group_id => @class_group.id), :class => "btn"
+  = link_to t('add_course'), '#', :id=> 'show_course_form',:class => "btn"
 br
+/TODO need to redirect to the right route after create!
+div id="course_form" style="display:none"
+  = render 'new_course'
 = link_to t(:Edit), edit_class_group_path(@class_group)
 = link_to t(:Back), class_groups_path
+
+javascript:
+  $(document).ready(function() {
+    $('#show_semester_form').click(function() {
+     $('#semester_form').toggle('slow', function() {
+      // Animation complete.
+     });
+    });
+    $('#show_course_form').click(function() {
+     $('#course_form').toggle('slow', function() {
+      // Animation complete.
+     });
+    });
+  });
