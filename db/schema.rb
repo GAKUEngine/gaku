@@ -13,19 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120709143456) do
 
-  create_table "address_histories", :force => true do |t|
-    t.string  "address1"
-    t.string  "address2"
-    t.string  "city"
-    t.string  "zipcode"
-    t.string  "state"
-    t.string  "state_name"
-    t.integer "country_id"
-    t.integer "state_id"
-    t.integer "faculty_id"
-    t.integer "address_id"
-  end
-
   create_table "addresses", :force => true do |t|
     t.string   "address1"
     t.string   "address2"
