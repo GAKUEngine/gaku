@@ -100,6 +100,8 @@ en:
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
+    add: "Add exam"
+    num_exams: "Number of exams"
   config:
     label: "Config"
     close: "Close"
