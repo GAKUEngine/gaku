@@ -1,0 +1,5 @@
+$('<li><%= "#{@class_group_enrollment.student.name} #{@class_group_enrollment.student.surname}" %></li>').appendTo('#class_group_enrollments ul');
+// change enrolled students count 
+$('#enrolled_students_count span').text(parseInt($('#enrolled_students_count span').text(),10) + 1);
+$('#new_class_group_enrollment select').val('');
+$('#class_group_enrollment_seat_number').val('');

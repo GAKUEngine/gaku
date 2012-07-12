@@ -1,0 +1,17 @@
+table
+  tr
+    th Name
+    th Max Score
+    th Weight
+    th
+    th
+    th
+  - @exam.exam_portions.each do |exam_portion|
+    tr
+      td= exam_portion.name
+      td= exam_portion.max_score
+      td= exam_portion.weight
+      td= link_to 'Show', exam_exam_portion_path(exam_portion)
+      td= link_to 'Edit', edit_exam_exam_portion_path(exam_portion)
+      td= link_to 'Destroy', exam_exam_portion_path(exam_portion), confirm: 'Are you sure?', method: :delete
+=link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam)
