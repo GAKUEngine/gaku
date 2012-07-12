@@ -21,9 +21,22 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
   end
+
+  def edit
+    @student = Student.find(params[:id])
+  end
+  
+  def update
+    @student = Student.find(params[:id])
+    if @student.update_attributes(params[:student])
+      redirect_to @student
+    else
+      render :edit
+    end
+  end
   
   def destroy
-    destroy! :flash => !request.xhr?
+    destroy! :flash => !request.xhr?    
   end
 
   private

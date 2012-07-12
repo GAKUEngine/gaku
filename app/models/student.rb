@@ -22,9 +22,10 @@ class Student < ActiveRecord::Base
 
   validates :name, :surname, :presence => true
 
-  accepts_nested_attributes_for :profile
-  accepts_nested_attributes_for :guardians
-  accepts_nested_attributes_for :notes
+  accepts_nested_attributes_for :profile, :allow_destroy => true
+  accepts_nested_attributes_for :guardians, :allow_destroy => true
+  accepts_nested_attributes_for :notes, :allow_destroy => true
+  accepts_nested_attributes_for :addresses, :allow_destroy => true
 end
 
 # == Schema Information

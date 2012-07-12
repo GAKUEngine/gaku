@@ -49,13 +49,13 @@
         .tabbable.tabs-right
           ul.nav.nav-tabs
             li
-              a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile.profile')
+              a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
             li
-              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
+              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
             li.active
-              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note')
             li
-              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address.address')
+              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address')
           .tab-content
             #profile.tab-pane
               /= f.fields_for :profile do |builder|
@@ -65,17 +65,17 @@
                 /= render 'guardian_fields', f: builder
             #note.tab-pane.active
               .row-fluid
-                h3.pull-left = t("note.notes")
+                h3.pull-left = t("note")
               .row-fluid
                 .span12
                   hr
               .row-fluid
                 = form.fields_for :notes do |builder|
                   = render 'note_fields', f: builder
-                = link_to_add_fields t("note.add"), form, :notes
+                = link_to_add_fields t("notes.add"), form, :notes
     .row-fluid
       .span12.well
         .span3
-          = form.submit t("submit"), :class => "span12 btn btn-primary"
+          = form.submit nil, :class => "span12 btn btn-primary"
         .span3
           = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"

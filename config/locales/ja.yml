@@ -134,12 +134,12 @@ ja:
   guardians:
     add: "保護者を追加"
     save: "保護者を保存"
-  note:
-    notes: "備考"
+  note: "備考"
+  notes:
     title: "題名"
     content: "本文"
     add: "備考を追加"
-    save: "備考を保存"
+    delete: "備考を削除"
   class: クラス
   semesters:
     list: ""
