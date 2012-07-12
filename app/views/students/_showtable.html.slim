@@ -26,18 +26,15 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
+          a*{'data-toggle' =>"tab", 'href' => "#addresses"} = t('addresses')
         li
           a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
         li
           a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
       .tab-content
-        = render 'new_profile', :new_profile => @new_profile
-        = render 'new_guardian', :new_guardian => @new_guardian
-        = render 'new_note', :notes => @notes, :new_note => @new_note
-        /= render :partial => 'new_profile', :form => form
-        /= render :partial => 'new_guardian', :form => form
-        /= render :partial => 'new_note', :form => form
+        = render :partial => 'addresses'
+        = render :partial => 'guardians'
+        = render :partial => 'notes'
 .row-fluid
   .span12.well
     .span3
