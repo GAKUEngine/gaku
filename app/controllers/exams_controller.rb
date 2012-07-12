@@ -8,8 +8,9 @@ class ExamsController < ApplicationController
 
   def destroy
     #destroy! :flash => !request.xhr?
+    #flash[:notice] = "The user was successfully destroyed"
     @exam = Exam.find(params[:id])
-    #@exam.destroy
+    @exam.destroy
     respond_to do |format|
         format.js { render :nothing => true }
     end
