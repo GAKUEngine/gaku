@@ -1,26 +1,31 @@
 .row-fluid
-  .span12
-    .well
-      table.table.table-striped.table-bordered.table-condensed
-        tbody
-          tr
-            th = t :name
-            td= @student.surname+" "+@student.name
-          tr
-            th= t('name')+" ("+t('phonetic_reading')+")"
-            td= @student.surname_reading.to_s+" "+@student.name_reading.to_s 
-          tr
-            th= t :email
-            td= @student.email
-          tr
-            th= t :birth
-            td= @student.birth
-          tr
-            th= t :admitted
-            td= @student.admitted
-          tr
-            th= t :graduated
-            td= @student.graduated
+  .span12.well
+    .row-fluid
+      .span6.control-group
+        = label_tag :class_group_id, t("class"), :class => "control-label"
+        .controls
+          = @student.class_groups.name
+    .row-fluid
+      .span3.control-group
+        .row-fluid
+          = label_tag :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.surname
+      .span3.control-group
+        .row-fluid
+          = label_tag :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.name
+      .span3.control-group
+        .row-fluid
+          = label_tag :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.surname_reading
+      .span3.control-group
+        .row-fluid
+          = label_tag :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.name_reading
 .row-fluid
   .span12.well
     .tabbable.tabs-right
