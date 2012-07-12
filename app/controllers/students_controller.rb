@@ -20,6 +20,7 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    #@student.profile.build
   end
 
   def edit
