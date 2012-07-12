@@ -1,4 +1,4 @@
-= form_for @student, :html => {:class => "form-vertical"}, :remote => false do |form|
+= form_for @student, :html => {:class => "f-vertical"}, :remote => false do |form|
   - if @student.errors.any?
     .alert.alert-error
       #error_explanation
@@ -15,7 +15,6 @@
           = form.label :class_group_id, t("class"), :class => "control-label"
           .controls
             = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
-
       .row-fluid
         .span3.control-group
           = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
@@ -48,34 +47,49 @@
       .span12.well
         .tabbable.tabs-right
           ul.nav.nav-tabs
+            li.acitve
+              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address')
             li
-              a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile.profile')
+              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
             li
-              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian.guardian')
-            li.active
-              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
-            li
-              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address.address')
+              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note')
           .tab-content
-            #profile.tab-pane
-              /= f.fields_for :profile do |builder|
-                /= render 'profile_fields', f: builder
-            #guardian.tab-pane
-              /= f.fields_for :guardians do |builder|
-                /= render 'guardian_fields', f: builder
-            #note.tab-pane.active
+            #address.tab-pane
               .row-fluid
-                h3.pull-left = t("note.notes")
+                h3.pull-left = t("address")
               .row-fluid
                 .span12
                   hr
               .row-fluid
-                = form.fields_for :notes do |builder|
-                  = render 'note_fields', f: builder
-                = link_to_add_fields t("note.add"), form, :notes
+                /FIXME
+                /= form.fields_for :addresses do |builder|
+                /  = render 'address_fields', f: builder
+                /= link_to_add_fields t("addresses.add"), f, :addresses
+            #guardian.tab-pane
+              .row-fluid
+                h3.pull-left = t("guardian")
+              .row-fluid
+                .span12
+                  hr
+              .row-fluid
+                /FIXME
+                /= form.fields_for :guardians do |builder|
+                /  = render 'guardian_fields', f: builder
+                /= link_to_add_fields t("guardians.add"), f, :guardians
+            #note.tab-pane
+              .row-fluid
+                h3.pull-left = t("note")
+              .row-fluid
+                .span12
+                  hr
+              .row-fluid
+                /= form.fields_for :notes do |builder|
+                /  = render 'note_fields', note_form: builder
+                /= link_to_add_fields t("notes.add"), note_form, :notes
+                = link_to t("notes.new"), :controller => :notes, :action => :new, :remote => true
     .row-fluid
       .span12.well
         .span3
-          = form.submit t("submit"), :class => "span12 btn btn-primary"
+          = form.submit nil, :class => "span12 btn btn-primary"
         .span3
-          = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
+          = link_to t("Back"), students_path, :class => "span12 btn"

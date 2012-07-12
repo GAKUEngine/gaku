@@ -1,0 +1,30 @@
+- if @syllabus.exams.any?
+  #syllabus-exams
+    b= t('exams.count')
+    |:
+    = @syllabus.exams.count
+    p
+      b= t('exams.list')
+
+    table
+      tr
+        th Name
+        th Max score
+        th Weight
+        th
+        th 
+        th
+      - @syllabus.exams.each do |exam|
+        tr
+          td= exam.name
+          td= exam.max_score
+          td= exam.weight
+          td= link_to 'Show', exam_path(exam)
+          /td= link_to 'Edit', edit_exam_exam_path(exam)
+          /td= link_to 'Destroy', exam_exam_portion_path(exam), confirm: 'Are you sure?', method: :delete
+- else 
+  p= t('notice.no_exams')
+
+#new_exam
+= link_to t('exams.new'), new_exam_syllabus_path(@syllabus), { :id => 'new_exam_link', :class => 'btn', :remote => true } 
+

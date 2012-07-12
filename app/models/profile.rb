@@ -1,4 +1,4 @@
-class Profile < ActiveRecord::Base
+class Profile < ActiveRecord::Base  
   attr_accessible :email, :birth_date
 end
 # == Schema Information

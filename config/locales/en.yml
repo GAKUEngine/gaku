@@ -102,6 +102,8 @@ en:
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
+    add: "Add exam"
+    count: "Exams Count"
   config:
     label: "Config"
     close: "Close"
@@ -123,12 +125,19 @@ en:
   guardians:
     add: "Add Guardian"
     save: "Save Guardian"
-  note:
-    notes: "Notes"
+  contact_type: ""
+  contact_types:
+     add: ""
+  contact: ""
+  contacts:
+    data: ""
+    details: ""
+  note: "Notes"
+  notes:
     title: "Title"
     content: "Content"
     add: "Add Note"
-    save: "Save Note"
+    delete: "Delete Note"
   class: Class
   semesters:
     list: "Semesters list"
