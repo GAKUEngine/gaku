@@ -26,9 +26,9 @@ fieldset
       .controls
         = f.text_field :address2, :class => "span12"
   .row-fluid
-    .span12.control-group
-      =f.label :past, t('addresses.past')
+    .span12.form-inline
       =f.check_box :past
+      =f.label :past, t('addresses.past'), :class => "help-inline"
   .row-fluid
     .span12
       hr

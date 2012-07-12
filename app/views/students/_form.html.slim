@@ -15,7 +15,6 @@
           = f.label :class_group_id, t("class"), :class => "control-label"
           .controls
             = f.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
-
       .row-fluid
         .span3.control-group
           = f.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
@@ -64,10 +63,10 @@
                 .span12
                   hr
               .row-fluid
-              /FIXME
-                = f.fields_for :profile do |builder|
-                  = render 'profile_fields', f: builder
-                = link_to_add_fields t(".add"), f, :profile
+                /FIXME
+                /= f.fields_for :profile do |builder|
+                /  = render 'profile_fields', f: builder
+                /= link_to_add_fields t(".add"), f, :profile
             #address.tab-pane
               .row-fluid
                 h3.pull-left = t("address")
@@ -75,7 +74,7 @@
                 .span12
                   hr
               .row-fluid
-              /FIXME
+                /FIXME
                 = f.fields_for :addresses do |builder|
                   = render 'address_fields', f: builder
                 = link_to_add_fields t("addresses.add"), f, :addresses
@@ -86,7 +85,7 @@
                 .span12
                   hr
               .row-fluid
-              /FIXME
+                /FIXME
                 = f.fields_for :guardians do |builder|
                   = render 'guardian_fields', f: builder
                 = link_to_add_fields t("guardians.add"), f, :guardians
