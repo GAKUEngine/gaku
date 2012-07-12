@@ -5,7 +5,8 @@ class Guardian < ActiveRecord::Base
   has_and_belongs_to_many :students
   has_many :contacts
 
-  attr_accessible :relationship
+  attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship
+  validates :name, :surname, :presence => true
 end
 # == Schema Information
 #
