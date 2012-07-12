@@ -128,12 +128,19 @@ en:
   guardians:
     add: "Add Guardian"
     save: "Save Guardian"
-  note:
-    notes: "Notes"
+  contact_type: ""
+  contact_types:
+     add: ""
+  contact: ""
+  contacts:
+    data: ""
+    details: ""
+  note: "Notes"
+  notes:
     title: "Title"
     content: "Content"
     add: "Add Note"
-    save: "Save Note"
+    delete: "Delete Note"
   class: Class
   semesters:
     list: "Semesters list"
