@@ -100,8 +100,10 @@ ja:
   assignments:
     list: "課題一覧"
     plural: "課題"
+    add: "Add Assignment"
     results: "課題の結果"
     view: "課題参照"
+    count: "Assignments Count"
   due_date: "提出日"
   exam_management: "試験管理"
   exams:

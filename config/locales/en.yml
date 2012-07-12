@@ -88,19 +88,22 @@ en:
     total_points: "Total Score"
     rank: "Rank/Grade"
   assignments:
-    list: "Assignments"
     plural: "Assignments"
+    new: "New Assignment"
+    add: "Add Assignment"
+    list: "Assignments"
     results: "Assignment Results"
     view: "View Assignments"
+    count: "Assignments Count"
   exams:
     plural: "Exams"
     new: "New Exam"
+    add: "Add exam"
     list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
-    add: "Add exam"
     count: "Exams Count"
   config:
     label: "Config"
