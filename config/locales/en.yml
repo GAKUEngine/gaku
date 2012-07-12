@@ -15,12 +15,14 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   addresses:
+    add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
     prefecture: "State/Province/Prefecture"
     city: "City"
     address1:
     address2:
+    past: "Make past?"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -47,9 +49,10 @@ en:
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
+    show: "Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
-    list: "List Syllabus"
+    list: "List Syllabuses"
     code: "Syllabus Code"
     name: "Course Name"
     name_sample: "[EX: Science A]"
@@ -73,6 +76,8 @@ en:
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
+    grade: "Grade"
+    homeroom: "Home Room"
   class_group_enrollments:
     list: "Class Roster"
   grades:
@@ -85,12 +90,15 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
   exams:
+    new: "New Exam"
     list: "Exams"
     plural: "Exams"
     view: "View Exams"
     select: "Select Exam"
     add: "Add exam"
-  num_exams: "Number of exams"
+    num_exams: "Number of exams"
+    choose_schedule: "Choose Schedule"
+    add_portion: 'Add Portion'
   config:
     label: "Config"
     close: "Close"
@@ -126,3 +134,10 @@ en:
     save: "Save semester"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
+
+
+  notice:
+    no_assignments: "No assignments, assign one first"
+    no_exams: "No exams, assign one first"
+
+  select: "Select"

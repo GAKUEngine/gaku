@@ -53,6 +53,7 @@ ja:
   combined_code: "総合コード"
   syllabus: "授業計画"
   syllabuses:
+    show: ""
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"
@@ -79,6 +80,8 @@ ja:
     list: "クラス一覧"
     new: "新規クラス登録"
     name: "クラス名"
+    grade: "学年"
+    homeroom: "主教室"
   class_group_enrollments:
     list: "クラス名簿"
   grades:
@@ -99,13 +102,15 @@ ja:
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
+    new: "New Exam"
     list: "試験一覧"
     name: "試験名"
     plural: "試験"
     view: "試験参照"
     new: "新規試験登録"
     add: ""
-  num_exams: ""
+    num_exams: ""
+    add_portion: ''
   execution_date: "実行日"
   config:
     label: "設定"
@@ -143,3 +148,9 @@ ja:
   num_semesters: ""
   add_semester: ""
   options: "オプション"
+
+  notice:
+    no_assignments: "No assignments, assign one first"
+    no_exams: "No exams, assign one first"
+
+  select: "Select"

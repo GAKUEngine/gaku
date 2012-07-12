@@ -1,6 +1,6 @@
 h1= t 'syllabuses.list'
 = link_to t('syllabuses.new'), new_syllabus_path, :class => "make-button", :id => "new_syllabus_link"
-table.make-grid
+table.make-grid.index
   tr
     th*{'data-field' => t('syllabuses.code')} = t('syllabuses.code')
     th*{'data-field' => t('syllabuses.name')} = t('syllabuses.name')

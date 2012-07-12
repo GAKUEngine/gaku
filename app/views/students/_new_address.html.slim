@@ -42,4 +42,8 @@
               .controls
                 = address_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
           .row-fluid
+            .span12.control-group
+              =address_form.label :past, t('addresses.past')
+              =address_form.check_box :past
+          .row-fluid
             button.span12.btn.btn-primary= t "addresses.save"

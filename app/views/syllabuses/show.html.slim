@@ -1,7 +1,5 @@
-- if notice
-  .alert.alert-info
-    button.close{data-dismiss="alert"} ×
-    = notice
+h1= t 'syllabuses.show'
+
 p
   b
     = t('syllabuses.code')
@@ -23,6 +21,7 @@ p
     |: 
   = @syllabus.credits
 
+<<<<<<< HEAD
 #syllabus-exams
   b
     = t('num_exams')
@@ -35,6 +34,49 @@ p
     = render 'exams'
 
   =link_to t('exams.add'), new_exam_path, :class => 'btn'
+=======
+
+- if @syllabus.assignments.any?
+  p
+    h3 Assignments  
+    table
+      tr
+        th Name
+        th Description
+        th Max Score
+      -@syllabus.assignments.each do |assignment|
+        tr
+          td=assignment.name
+          td=assignment.description
+          td=assignment.max_score
+- else
+  p
+    = t('notice.no_assignments')
+
+- if @syllabus.exams.any?          
+  p
+    h3 Exam  
+    table
+      tr
+        th Name
+        th Description
+        th Problem Count
+        th Max Score
+        th Weight
+        th Execution Date
+      -@syllabus.exams.each do |exam|
+        tr
+          td=exam.name
+          td=exam.description
+          td=exam.problem_count
+          td=exam.max_score
+          td=exam.weight
+          td=exam.execution_date
+- else 
+  p 
+    = t('notice.no_exams')
+>>>>>>> 3c5ad61587c3a6bae93a6c9f927d1bf63207e946
 
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
-| |  #{link_to t(:Back), syllabuses_path}
+br
+= link_to t(:Back), syllabuses_path

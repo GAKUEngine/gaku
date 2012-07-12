@@ -9,7 +9,7 @@ describe 'Student' do
 
   context "listing students" do
     it "should list existing students" do
-
+      page.should have_content "Students List "
     end
   end
 

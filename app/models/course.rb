@@ -6,5 +6,5 @@ class Course < ActiveRecord::Base
 
   accepts_nested_attributes_for :course_enrollments
 
-  attr_accessible :code, :class_group_id 
+  attr_accessible :code, :class_group_id, :syllabus_id 
 end

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Addresses' do
   before do
     @address = Factory(:address)
+    @student = Factory(:student)
     sign_in_as!(Factory(:user))
   end
 
@@ -12,8 +13,15 @@ describe 'Addresses' do
       click_link "new_student_link"
       within('ul#menu') { click_link "Class Listing"}
       click_link "new_class_group_link"
-      page.should have_selector('div',   id:   'address')
-
+      page.should have_selector('div', :id => 'address')
     end
   end
+
+  context "edit address" do
+    it 'should edit address' do
+      visit edit_student_address_path(@student, @address)
+      page.should have_content "Edit Student Address"
+    end
+  end
+
 end
