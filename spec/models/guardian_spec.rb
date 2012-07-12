@@ -12,6 +12,9 @@ describe Guardian do
     it { should have_and_belong_to_many(:students) } 
     it { should have_many(:contacts) }
 
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:surname) }
+
     it "errors when name is nil" do
       guardian.name = nil
       guardian.should_not be_valid
