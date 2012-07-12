@@ -114,6 +114,8 @@ ja:
     view: "試験参照"
     new: "新規試験登録"
     add_portion: ''
+    add: ""
+    count: "Exams Count"
   execution_date: "実行日"
   config:
     label: "設定"
