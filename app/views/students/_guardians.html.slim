@@ -1,8 +1,31 @@
-fieldset
-  table.table.table-striped
-    tbody
+table.table.table-striped
+  tbody
+    tr
+      th= t :name
+      th= t :birth
+      th= t :gender
+      th= t :zipcode
+      th= t :prefecture
+      th= t :address
+      th= t :phone
+      th= t :email
+    = @student.guardians.each do |guardian|
       tr
-        th= t :name
-        td= @student.guardians.first.name
-  .row-fluid
-    button.span12.btn.btn-primary = t("guardian.add")
+        td= guardian.name
+      tr
+        td= guardian.birth
+      tr
+        td= guardian.gender
+      tr
+        td= guardian.zipcode
+      tr
+        td= guardian.birth
+      tr
+        td= guardian.address
+      tr
+        td= guardian.phone
+      tr
+        td= guardian.email
+hr/
+.row-fluid
+  button.span12.btn.btn-primary = t("guardian.add")

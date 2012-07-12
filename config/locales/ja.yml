@@ -19,6 +19,7 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   addresses:
+    addresses: "住所"
     add: "住所を追加"
     zipcode: "郵便番号"
     search_address: "郵便番号で住所検索"
@@ -35,7 +36,7 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
-    show: 生徒照会
+    show: "生徒照会"
     new: "新規生徒登録"
     edit: "生徒情報の編集"
     list: "生徒一覧"

@@ -15,6 +15,7 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   addresses:
+    addresses: "Addresses"
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
