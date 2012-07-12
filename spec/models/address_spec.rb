@@ -16,6 +16,10 @@ describe Address do
     it { should belong_to(:state) }
     it { should have_and_belong_to_many(:students) } 
 
+    it { should validate_presence_of(:address1) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:country) }
+
     it "state_name is not nil and country does not have any states" do
       address.state = nil
       address.state_name = 'alabama'

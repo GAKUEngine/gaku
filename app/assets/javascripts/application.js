@@ -8,8 +8,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require external/jquery-ui-1.8.18.custom.min.js
-//= require kendo2012/kendo.all.min
-// require kendo/kendo.all.min
+//= require kendo2012/kendo.web.min
 //= require bootstrap.min
 
 //= require buhin/buhin.js.coffee

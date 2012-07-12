@@ -1,3 +1,4 @@
 $(document).ready(function(){
   $('#new_exam').html('<%= escape_javascript(render :partial => "exam_form", :formats => [:html], :handlers => [:erb, :slim]) %>');
+  $("#new_exam_link").hide();
 });

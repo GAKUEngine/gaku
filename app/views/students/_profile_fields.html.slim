@@ -1,56 +1,14 @@
-.row-fluid
-  h3.pull-left = t("profile")
-  .pull-right
-    = link_to new_student_path, :class => "btn btn-primary" do
-      i.icon-plus.icon-white
-      = " "+t("profiles.new")
-.row-fluid
-  .span12
-    hr
-= form_for :profile, :remote => true do |profile_form|
+fieldset
   .row-fluid
-    .span6.control-group
-      = profile_form.label :birth_date, t("birth"), :class => "control-label"
+    .span12
+      = f.label :email, t("profiles.email"), :class => "control-label"
       .controls
-        = profile_form.text_field :birth_date, :class => "span12"
-    .span6.control-group
-      = profile_form.label :gender, t("gender"), :class => "control-label"
-      .controls
-        = profile_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), {}, :class => "span12"
+        = f.text_field :email, :class => "span12 edit_note"
   .row-fluid
-    .span6.control-group
-      = profile_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+    .span12
+      = f.label :birth_date, t("profile.birth_date"), :class => "control-label"
       .controls
-        .row-fluid
-          .span6
-            = profile_form.text_field :zipcode, :class => "span12"
-          .span6
-            button.span12.btn.btn-primary= t "addresses.search_address"
-    .span6.control-group
-      = profile_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
-      .controls
-        = profile_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
+        = f.datetime_select :birth_date, :class => "span12 edit_note"
   .row-fluid
-    .span4.control-group
-      = profile_form.label :city, t("addresses.city"), :class => "control-label"
-      .controls
-        = profile_form.text_field :city, :class => "span12"
-    .span4.control-group
-      = profile_form.label :address1, t("addresses.address1"), :class => "control-label"
-      .controls
-        = profile_form.text_field :address1, :class => "span12"
-    .span4.control-group
-      = profile_form.label :address2, t("addresses.address2"), :class => "control-label"
-      .controls
-        = profile_form.text_field :address2, :class => "span12"
-  .row-fluid
-    .span6.control-group
-      = profile_form.label :phone, t("phone"), :class => "control-label"
-      .controls
-        = profile_form.text_field :phone, :class => "span12"
-    .span6.control-group
-      = profile_form.label :email, t("email"), :class => "control-label"
-      .controls
-        = profile_form.text_field :email, :class => "span12"
-.row-fluid
-  button.span12.btn.btn-primary= t "profiles.save"
+    .span12
+      hr

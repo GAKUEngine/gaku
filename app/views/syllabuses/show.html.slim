@@ -39,36 +39,8 @@ p
   p
     = t('notice.no_assignments')
 
-- if @syllabus.exams.any?          
-  p
-    h3 Exam  
-    table
-      tr
-        th Name
-        th Description
-        th Problem Count
-        th Max Score
-        th Weight
-        th Execution Date
-      -@syllabus.exams.each do |exam|
-        tr
-          td=exam.name
-          td=exam.description
-          td=exam.problem_count
-          td=exam.max_score
-          td=exam.weight
-          td=exam.execution_date
-- else 
-  p 
-    = t('notice.no_exams')
-
-
-#exams
-#selected-exams
-#new_exam  
-= link_to t('exams.new'), new_exam_syllabus_path(@syllabus), { :id => 'new_exam_link', :remote => true }    
+= render 'exams'
 br
-
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
 br
 = link_to t(:Back), syllabuses_path

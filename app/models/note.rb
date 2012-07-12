@@ -1,7 +1,7 @@
 class Note < ActiveRecord::Base
   belongs_to :student
   
-  attr_accessible :title, :content
+  attr_accessible :title, :content, :student_id
 end
 # == Schema Information
 #
