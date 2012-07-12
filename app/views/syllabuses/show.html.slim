@@ -62,6 +62,13 @@ p
   p 
     = t('notice.no_exams')
 
+
+#exams
+#selected-exams
+#new_exam  
+= link_to t('exams.new'), new_exam_syllabus_path(@syllabus), { :id => 'new_exam_link', :remote => true }    
+br
+
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
 br
 = link_to t(:Back), syllabuses_path
