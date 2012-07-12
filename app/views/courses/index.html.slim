@@ -1,6 +1,6 @@
 h1= t 'courses.list'
 = link_to t('courses.new'), new_course_path, :class => "make-button", :id => "new_course_link"
-table.make-grid
+table.make-grid.index
   tr
     th*{"data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"}
     th*{"data-field" => t(:schedule)}

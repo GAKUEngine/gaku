@@ -5,13 +5,19 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_groups
 
+  resources :semesters  
+
   resources :courses do
     resources :course_enrollments
   end
 
   resources :class_group_enrollments
 
-  resources :syllabuses
+  resources :syllabuses do 
+    member do
+      get :new_exam
+    end
+  end
 
   resources :students do
   	resources :profiles 
@@ -24,10 +30,10 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :notes
-  resources :semesters
 
   resources :exams do 
     resources :exam_scores
+    resources :exam_portions
   end
 
   root :to => 'home#index'
