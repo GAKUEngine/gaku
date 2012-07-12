@@ -2,7 +2,7 @@ class Contact < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :student
   
-  attr_accessible :data, :details
+  attr_accessible :data, :details, :contact_type_id
 end
 # == Schema Information
 #
