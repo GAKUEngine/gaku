@@ -1,11 +1,12 @@
 = form_for(@syllabus) do |f| 
   = f.fields_for :exams do |exam_form| 
-    .field
-      = exam_form.label :name
-      br/
-      = exam_form.text_field :name
-    .field
-      = exam_form.label :problem_count
-      br/
-      = exam_form.number_field :problem_count
+    - if exam_form.object.new_record?
+      .field
+        = exam_form.label :name
+        br/
+        = exam_form.text_field :name
+      .field
+        = exam_form.label :problem_count
+        br/
+        = exam_form.number_field :problem_count
   = f.submit
