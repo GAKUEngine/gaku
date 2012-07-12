@@ -13,6 +13,7 @@ class ClassGroupsController < ApplicationController
   private
   
     def load_before_show
+      @new_class_group_enrollment = ClassGroupEnrollment.new
       @new_semester = Semester.new
       @new_course = Course.new
     end

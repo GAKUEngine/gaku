@@ -81,6 +81,8 @@ en:
     name: "Class Name"
     grade: "Grade"
     homeroom: "Home Room"
+    choose_student: 'Choose Student'
+    create_class_group_enrollment: 'Create Class Group Enrollment'
   class_group_enrollments:
     list: "Class Roster"
   grades:

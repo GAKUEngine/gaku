@@ -1,0 +1,13 @@
+=form_for @new_class_group_enrollment, :remote => true do |f|
+  =f.hidden_field :class_group_id, :value => @class_group.id
+  .field
+		=f.label :students
+		= f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname} ", s.id] }, {:prompt => t('class_groups.choose_student')}
+  br/
+
+  .field
+  	=f.label :seat_number
+  	=f.text_field :seat_number
+  br/
+  .actions
+		=f.submit t('class_groups.create_class_group_enrollment'), :class => 'btn'
