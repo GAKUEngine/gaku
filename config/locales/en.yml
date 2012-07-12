@@ -49,6 +49,7 @@ en:
   combined_code: "Combined Code"
   syllabus: "Syllabus"
   syllabuses:
+    plural: "Syllabuses"
     show: "Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
@@ -61,9 +62,10 @@ en:
   course_management: 'Course Management'
   course: "Course"
   courses:
+    plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Course List"
+    list: "Courses List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
@@ -73,6 +75,7 @@ en:
     list: "Enrollments"
   class_group_management: "Class Management"
   class_groups:
+    plural: "Class Groups"
     list: "Class Listing"
     new: "New Class"
     name: "Class Name"
@@ -90,15 +93,15 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
   exams:
-    new: "New Exam"
-    list: "Exams"
     plural: "Exams"
+    new: "New Exam"
+    list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
-    add: "Add exam"
-    num_exams: "Number of exams"
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
+    add: "Add exam"
+    count: "Exams Count"
   config:
     label: "Config"
     close: "Close"

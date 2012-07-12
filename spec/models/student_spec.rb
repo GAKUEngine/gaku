@@ -19,6 +19,9 @@ describe Student do
     it { should have_many(:contacts) }
     it { should have_many(:notes) }
 
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:surname) }
+
 
     it "errors when name is nil" do
       student.name = nil

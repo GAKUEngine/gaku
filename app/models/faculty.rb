@@ -7,3 +7,12 @@ class Faculty < ActiveRecord::Base
   has_many :addresses
   has_many :contacts
 end
+# == Schema Information
+#
+# Table name: faculties
+#
+#  id         :integer         not null, primary key
+#  profile_id :integer
+#  users_id   :integer
+#
+
