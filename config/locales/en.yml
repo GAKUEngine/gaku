@@ -121,6 +121,13 @@ en:
   guardians:
     add: "Add Guardian"
     save: "Save Guardian"
+  contact_type: ""
+  contact_types:
+     add: ""
+  contact: ""
+  contacts:
+    data: ""
+    details: ""
   note: "Notes"
   notes:
     title: "Title"

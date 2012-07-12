@@ -1,20 +1,18 @@
 fieldset
   .row-fluid
     .span12
-      .row-fluid
-        .span12
-          = f.label :title, t("notes.title"), :class => "control-label"
-          .controls
-            = f.text_field :title, :class => "span12 edit_note"
-      .row-fluid
-        .span12
-          = f.label :content, t("notes.content"), :class => "control-label"
-          .controls
-            = f.text_area :content, :class => "span12 edit_note", :size => "0x10"
-      .row-fluid
-        .span12
-          = f.hidden_field :_destroy
-          = link_to ("<i class='icon-remove icon-white'></i> "+t("notes.delete")).html_safe, "#", :class => "pull-right btn btn-mini btn-danger remove_fields" 
-      .row-fluid
-        .span12
-          hr
+      = f.label :title, t("notes.title"), :class => "control-label"
+      .controls
+        = f.text_field :title, :class => "span12 edit_note"
+  .row-fluid
+    .span12
+      = f.label :content, t("notes.content"), :class => "control-label"
+      .controls
+        = f.text_area :content, :class => "span12 edit_note", :size => "0x10"
+  .row-fluid
+    .span12
+      = f.hidden_field :_destroy
+      = link_to ("<i class='icon-remove icon-white'></i> "+t("notes.delete")).html_safe, "#", :class => "pull-right btn btn-mini btn-danger remove_fields" 
+  .row-fluid
+    .span12
+      hr

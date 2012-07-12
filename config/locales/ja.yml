@@ -19,12 +19,14 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   addresses:
+    add: "住所を追加"
     zipcode: "郵便番号"
     search_address: "郵便番号で住所検索"
     prefecture: "都道府県"
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
+    past: "履歴を作成しますか?"    
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -132,8 +134,17 @@ ja:
     save: "プロフィールを保存"
   guardian: "保護者"
   guardians:
+    relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
+  contact_type: "連絡先種別"
+  contact_types:
+     add: "連絡先種別の追加"
+  contact: "連絡先"
+  contacts:
+    add: "連絡先の追加"
+    data: "情報"
+    details: "詳細"
   note: "備考"
   notes:
     title: "題名"
