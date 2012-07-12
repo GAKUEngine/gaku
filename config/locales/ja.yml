@@ -113,7 +113,7 @@ ja:
     new: "新規試験登録"
     add_portion: ''
     add: ""
-    num_exams: ""
+    count: "Exams Count"
   execution_date: "実行日"
   config:
     label: "設定"

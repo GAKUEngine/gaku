@@ -101,7 +101,7 @@ en:
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
     add: "Add exam"
-    num_exams: "Number of exams"
+    count: "Exams Count"
   config:
     label: "Config"
     close: "Close"
