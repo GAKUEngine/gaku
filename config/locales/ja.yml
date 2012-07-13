@@ -173,3 +173,6 @@ ja:
     no_exams: "No exams, assign one first"
 
   select: "Select"
+  pictures:
+    change: ""
+    upload: ""
