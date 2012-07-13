@@ -7,5 +7,5 @@ table
         td= guardian.name
 hr/
 .row-fluid
-  div#new_guardian_area
-    = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true
+  #add_guardian_form_area
+  = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link"
