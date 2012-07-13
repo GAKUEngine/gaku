@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709143456) do
+ActiveRecord::Schema.define(:version => 20120713084332) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -120,9 +120,14 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
     t.string   "name"
     t.float    "max_score"
     t.float    "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "exam_id"
+    t.integer  "problem_count"
+    t.text     "description"
+    t.datetime "execution_date"
+    t.text     "adjustments"
+    t.boolean  "dynamic_scoring"
   end
 
   create_table "exam_scores", :force => true do |t|
@@ -138,13 +143,13 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
     t.string   "name"
     t.text     "description"
     t.integer  "problem_count"
-    t.float    "max_score"
     t.float    "weight"
     t.binary   "data"
     t.datetime "execution_date"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "schedule_id"
+    t.text     "adjustments"
   end
 
   create_table "exams_syllabuses", :force => true do |t|
@@ -155,6 +160,14 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
   create_table "faculties", :force => true do |t|
     t.integer "profile_id"
     t.integer "users_id"
+  end
+
+  create_table "grading_methods", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "method"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "guardians", :force => true do |t|
@@ -258,6 +271,7 @@ ActiveRecord::Schema.define(:version => 20120709143456) do
     t.integer  "credits"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "hours"
   end
 
   create_table "users", :force => true do |t|
