@@ -157,3 +157,6 @@ en:
     no_exams: "No exams, assign one first"
 
   select: "Select"
+  pictures:
+    change: "Change picture"
+    upload: "Upload"
