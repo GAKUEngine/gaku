@@ -1,7 +1,6 @@
 ja:
   users:
     info: "ユーザー情報"
-  
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -9,6 +8,7 @@ ja:
   Update: "更新"
   Destroy: "削除"
   Back: "戻る"
+  canscel: "キャンセル"
   required: "必須"
   manage: "管理"
   confirm_delete: "本当に削除しますか?"

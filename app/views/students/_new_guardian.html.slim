@@ -20,7 +20,7 @@
       = guardian_form.text_field :relationship, :class => "span12"
   .row-fluid style="margin-top:10px"
     =link_to t("guardians.save"), "", :remote => true, :id => "guardian_save_link", :class => "span6 btn btn-primary"
-    =link_to t(:cancel), "", :remote => true, :id => "guardian_cancel", :class => "span6 btn"
+    =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span6 btn"
 
 coffee:
   $("#guardian_cancel").click( ->
