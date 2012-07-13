@@ -1,8 +1,23 @@
 = form_for :guardian, :remote => true do |guardian_form|
   .row-fluid
     .span3.control-group
-      = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label"
-      /.controls
-        = guardian_form.text_field :name, :class => "span12"
+      = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+      span.label.label-important.pull-right =t 'required'
+      = guardian_form.text_field :surname, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+      span.label.label-important.pull-right =t 'required'
+      = guardian_form.text_field :name, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+      span3 
+      = guardian_form.text_field :surname_reading, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+      span3
+      = guardian_form.text_field :name_reading, :class => "span12"
   .row-fluid
-    button.span12.btn.btn-primary= t "guardians.save"
+    .span12.control-group
+      = guardian_form.label :relationship, t("guardians.relationship"), :class => "control-label"
+      .controls
+        = guardian_form.text_field :relationship, :class => "span12"
