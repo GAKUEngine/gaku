@@ -5,4 +5,16 @@
       /.controls
         = guardian_form.text_field :name, :class => "span12"
   .row-fluid
-    button.span12.btn.btn-primary= t "guardians.save"
+    =link_to t("guardians.save"), "", :remote => true, :id => "guardian_save_link"
+    =link_to t(:cancel), "", :remote => true, :id => "guardian_cancel"
+
+coffee:
+  $("#guardian_cancel").click( ->
+    $("#add_guardian_link").show()
+    $("#add_guardian_form_area").html("")
+  )
+  $("#guardian_save_link").live("ajax:success", (data, status, xhr)->
+    #add new record to list
+    $("#add_guardian_link").show()
+    $("#add_guardian_form_area").html("")
+  )
