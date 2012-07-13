@@ -1,4 +1,12 @@
 .row-fluid
+  .span3.well
+    .row-fluid
+      .span2.control-group
+        = image_tag @student.picture.url(:thumb)
+        = button_to 'Change picture', 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
+        div id="upload_picture" style="display:none;"
+          = render 'upload_picture'
+.row-fluid
   .span12.well
     .row-fluid
       .span6.control-group
@@ -51,3 +59,10 @@
       = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
     .span3
       = button_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+
+javascript:
+  $('#upload_picture_link').click(function() {
+    $('#upload_picture').toggle('slow', function() {
+      // Animation complete.
+    });
+  });
