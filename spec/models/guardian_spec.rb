@@ -26,4 +26,13 @@ describe Guardian do
     end
   end
   
-end
+end# == Schema Information
+#
+# Table name: guardians
+#
+#  id           :integer         not null, primary key
+#  relationship :string(255)
+#  profile_id   :integer
+#  user_id      :integer
+#
+

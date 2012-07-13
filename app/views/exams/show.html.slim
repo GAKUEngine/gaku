@@ -15,8 +15,7 @@ p
   = @exam.data
 = link_to 'Edit', edit_exam_path(@exam)
 br/
-
-=link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam)
+=render 'exams/exam_portions'
 
 
 #{link_to 'Back', exams_path}

@@ -1,80 +1,37 @@
-#guardian.tab-pane
+= form_for :guardian, :remote => true do |guardian_form|
   .row-fluid
-    h3.pull-left = t("guardian")
-    .pull-right
-      = link_to new_student_path, :class => "btn btn-primary" do
-        i.icon-plus.icon-white
-        = " "+t("guardians.add")
+    .span3.control-group
+      = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+      span.label.label-important.pull-right =t 'required'
+      = guardian_form.text_field :surname, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+      span.label.label-important.pull-right =t 'required'
+      = guardian_form.text_field :name, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+      span3 
+      = guardian_form.text_field :surname_reading, :class => "span12"
+    .span3.control-group
+      = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+      span3
+      = guardian_form.text_field :name_reading, :class => "span12"
   .row-fluid
-    .span12
-      hr
-  = form_for :guardian, :remote => true do |guardian_form|
-    .tabbable
-      ul.nav.nav-tabs
-        li.active
-          a data-toggle="tab" href="#guardian1" = t("guardian")+" 1";
-      .tab-content
-        #guardian1.tab-pane.active
-          .row-fluid
-            .span3.control-group
-              = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label"
-              .controls
-                = guardian_form.text_field :surname, :class => "span12"
-            .span3.control-group
-              = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label"
-              .controls
-                = guardian_form.text_field :name, :class => "span12"
-            .span3.control-group
-              = guardian_form.label :surname, t("phonetic_reading")+" ("+t("surname")+")", :class => "control-label"
-              .controls
-                = guardian_form.text_field :surname, :class => "span12"
-            .span3.control-group
-              = guardian_form.label :name, t("phonetic_reading")+" ("+t("given_name")+")", :class => "control-label"
-              .controls
-                = guardian_form.text_field :name, :class => "span12"
-          .row-fluid
-            .span6.control-group
-              = guardian_form.label :birth, t("birth"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :birth, :class => "span12"
-            .span6.control-group
-              = guardian_form.label :gender, t("gender"), :class => "control-label"
-              .controls
-                = guardian_form.select :gender, options_for_select([[t("genders.male"), "male"], [t("genders.female"), "female"]]), {}, :class => "span12"
-          .row-fluid
-            .span6.control-group
-              = guardian_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
-              .controls
-                .row-fluid
-                  .span6
-                    = guardian_form.text_field :zipcode, :class => "span12"
-                  .span6
-                    button.span12.btn.btn-primary= t "addresses.search_address"
-            .span6.control-group
-              = guardian_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
-              .controls
-                = guardian_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
-          .row-fluid
-            .span4.control-group
-              = guardian_form.label :city, t("addresses.city"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :city, :class => "span12"
-            .span4.control-group
-              = guardian_form.label :address1, t("addresses.address1"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :address1, :class => "span12"
-            .span4.control-group
-              = guardian_form.label :address2, t("addresses.address2"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :address2, :class => "span12"
-          .row-fluid
-            .span6.control-group
-              = guardian_form.label :phone, t("phone"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :phone, :class => "span12"
-            .span6.control-group
-              = guardian_form.label :email, t("email"), :class => "control-label"
-              .controls
-                = guardian_form.text_field :email, :class => "span12"
-          .row-fluid
-            button.span12.btn.btn-primary= t "guardians.save"
+    .span12.control-group
+      = guardian_form.label :relationship, t("guardians.relationship"), :class => "control-label"
+      .controls
+        = guardian_form.text_field :relationship, :class => "span12"
+  .row-fluid
+    =link_to t("guardians.save"), "", :remote => true, :id => "guardian_save_link"
+    =link_to t(:cancel), "", :remote => true, :id => "guardian_cancel"
+
+coffee:
+  $("#guardian_cancel").click( ->
+    $("#add_guardian_link").show()
+    $("#add_guardian_form_area").html("")
+  )
+  $("#guardian_save_link").live("ajax:success", (data, status, xhr)->
+    #add new record to list
+    $("#add_guardian_link").show()
+    $("#add_guardian_form_area").html("")
+  )

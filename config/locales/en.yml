@@ -15,6 +15,7 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   addresses:
+    addresses: "Addresses"
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
@@ -81,6 +82,8 @@ en:
     name: "Class Name"
     grade: "Grade"
     homeroom: "Home Room"
+    choose_student: 'Choose Student'
+    create_class_group_enrollment: 'Create Class Group Enrollment'
   class_group_enrollments:
     list: "Class Roster"
   grades:
@@ -107,7 +110,7 @@ en:
     close: "Close"
     save: "Save changes"
     help:
-      language: choose your language
+      language: "Choose your Language"
   language: "Language"
   and: " and "
   submit: "Submit"
@@ -119,16 +122,26 @@ en:
   profiles:
     new: "New Profile"
     save: "Save profile"
-  guardian: "保護者"
+  guardian: "Guardian"
   guardians:
+    guardians: "Guardians"
+    relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
-  note:
+  contact_type: ""
+  contact_types:
+     add: ""
+  contact: ""
+  contacts:
+    data: ""
+    details: ""
+  note: "Notes"
+  notes:
     notes: "Notes"
     title: "Title"
     content: "Content"
     add: "Add Note"
-    save: "Save Note"
+    delete: "Delete Note"
   class: Class
   semesters:
     list: "Semesters list"

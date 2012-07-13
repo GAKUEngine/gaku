@@ -9,4 +9,15 @@ describe ClassGroupEnrollment do
     it { should have_many(:roles) } 
   end
   
-end
+end# == Schema Information
+#
+# Table name: class_group_enrollments
+#
+#  id             :integer         not null, primary key
+#  class_group_id :integer
+#  student_id     :integer
+#  seat_number    :integer
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
+#
+

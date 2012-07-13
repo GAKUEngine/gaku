@@ -27,6 +27,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem 'hirb'
+  gem 'awesome_print'
+end
+
 group :test do
   gem 'rspec-rails', '~> 2.9.0'
   gem 'factory_girl_rails', '~> 1.7.0'
