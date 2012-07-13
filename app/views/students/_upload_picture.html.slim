@@ -1,0 +1,4 @@
+= form_for @student, :url => student_path, :html => { :multipart => true } do |form|
+  = form.file_field :picture
+  = form.submit 'Upload picture'
+
