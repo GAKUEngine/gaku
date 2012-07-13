@@ -3,7 +3,7 @@
     .row-fluid
       .span2.control-group
         = image_tag @student.picture.url(:thumb)
-        = button_to 'Change picture', 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
         div id="upload_picture" style="display:none;"
           = render 'upload_picture'
 .row-fluid
