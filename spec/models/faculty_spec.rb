@@ -13,4 +13,12 @@ describe Faculty do
     it { should have_many(:contacts) }
   end
 
-end
+end# == Schema Information
+#
+# Table name: faculties
+#
+#  id         :integer         not null, primary key
+#  profile_id :integer
+#  users_id   :integer
+#
+

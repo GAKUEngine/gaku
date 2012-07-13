@@ -87,6 +87,8 @@ ja:
     name: "クラス名"
     grade: "学年"
     homeroom: "主教室"
+    choose_student: 'Choose Student'
+    create_class_group_enrollment: 'Create Class Group Enrollment'
   class_group_enrollments:
     list: "クラス名簿"
   grades:
