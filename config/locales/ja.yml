@@ -140,6 +140,7 @@ ja:
   guardian: "保護者"
   guardians:
     guardians: "保護者"
+    list: "保護者リスト"
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
@@ -154,6 +155,7 @@ ja:
   note: "備考"
   notes:
     notes: "備考"
+    list: "備考リスト"
     title: "題名"
     content: "本文"
     add: "備考を追加"
@@ -167,9 +169,7 @@ ja:
   num_semesters: ""
   add_semester: ""
   options: "オプション"
-
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
-
   select: "Select"
