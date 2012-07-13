@@ -18,7 +18,11 @@ class Student < ActiveRecord::Base
 
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth, :gender, :admitted, :graduated,
                   :class_groups, :class_group_ids, :class_groups_attributes, :profile, :profile_attributes,
-                  :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes
+                  :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, :picture
+
+  has_attached_file :picture, :styles => { :thumb => "150x150>" },
+                  :url  => "/assets/products/:id/:style/:basename.:extension",
+                  :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
 
   validates :name, :surname, :presence => true
 
