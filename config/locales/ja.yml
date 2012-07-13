@@ -139,6 +139,7 @@ ja:
     save: "プロフィールを保存"
   guardian: "保護者"
   guardians:
+    guardians: "保護者"
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
@@ -152,11 +153,12 @@ ja:
     details: "詳細"
   note: "備考"
   notes:
+    notes: "備考"
     title: "題名"
     content: "本文"
     add: "備考を追加"
     delete: "備考を削除"
-  class: クラス
+  class: "クラス[組]"
   semesters:
     list: ""
     starting: ""
