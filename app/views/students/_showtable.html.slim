@@ -44,6 +44,8 @@
           a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li
           a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
+        li
+          a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t('courses.courses')
       .tab-content
         #addresses.tab-pane
           = render :partial => 'addresses'
@@ -51,6 +53,8 @@
           = render :partial => 'guardians'
         #notes.tab-pane
           = render :partial => 'notes'
+        #courses.tab-pane
+          = render :partial => 'courses'
 .row-fluid
   .span12.well
     .span3{style="margin-bottom:0px"}
