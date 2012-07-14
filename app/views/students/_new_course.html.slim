@@ -1,0 +1,8 @@
+=form_for @new_course_enrollment, :remote => true do |f|
+  =f.hidden_field :student_id, :value => @student.id
+  .field
+		=f.label :courses
+		= f.select :course_id, Course.all.collect { |s| ["#{s.code}", s.id] }, {:prompt => t('course.choose_course')}
+
+  .actions
+		=f.submit t('add_course'), :class => 'btn'
