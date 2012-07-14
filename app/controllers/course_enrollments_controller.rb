@@ -4,4 +4,10 @@ class CourseEnrollmentsController < ApplicationController
 
   actions :show, :new, :create, :update, :edit, :destroy
   
+  def create
+    super do |format|
+      format.js {render 'create'}
+    end  
+  end
+
 end
