@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @exam_division.name %>
+</p>
+
+<p>
+  <b>Portion:</b>
+  <%= @exam_division.portion %>
+</p>
+
+<p>
+  <b>Maxscore:</b>
+  <%= @exam_division.maxscore %>
+</p>
+
+
+<%= link_to 'Edit', edit_exam_division_path(@exam_division) %> |
+<%= link_to 'Back', exam_divisions_path %>
