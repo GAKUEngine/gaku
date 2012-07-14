@@ -51,6 +51,7 @@ class StudentsController < ApplicationController
       @new_profile = Profile.new
       @new_guardian = Guardian.new
       @new_note = Note.new
+      @new_course_enrollment = CourseEnrollment.new
       @notes = Note.all
     end
 
