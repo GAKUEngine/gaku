@@ -1,71 +1,11 @@
-fieldset
-  #guardian.tab-pane
-    .tabbable
-      ul.nav.nav-tabs
-        li.active
-          a data-toggle="tab" href="#guardian1"
-            = t "guardian.guardian"
-            | 1
-        li
-          a data-toggle="tab" href="#guardian2"
-            = t "guardian.guardian"
-            | 2
-      .tab-content
-        #guardian1.tab-pane.active
-          table.table.table-striped
-            tbody
-              tr
-                th= t :name
-                td= @student.guardians.first.name
-              tr
-                th= t :birth
-                td= @student.guardians.first.birth
-              tr
-                th= t :gender
-                td= @student.guardians.first.gender
-              tr
-                th= t :zipcode
-                td= @student.guardians.first.zipcode
-              tr
-                th= t :prefecture
-                td= @student.guardians.first.birth
-              tr
-                th= t :address
-                td= @student.guardians.first.address
-              tr
-                th= t :phone
-                td= @student.guardians.first.phone
-              tr
-                th= t :email
-                td= @student.guardians.first.email
-        - unless @student.guardians.second.nil?
-          #guardian2.tab-pane
-            table.table.table-striped
-              tbody
-                tr
-                  th= t :name
-                  td= @student.guardians.second.name
-                tr
-                  th= t :birth
-                  td= @student.guardians.second.birth
-                tr
-                  th= t :gender
-                  td= @student.guardians.second.gender
-                tr
-                  th= t :zipcode
-                  td= @student.guardians.second.zipcode
-                tr
-                  th= t :prefecture
-                  td= @student.guardians.second.birth
-                tr
-                  th= t :address
-                  td= @student.guardians.second.address
-                tr
-                  th= t :phone
-                  td= @student.guardians.second.phone
-                tr
-                  th= t :email
-                  td= @student.guardians.second.email
-    hr/
-    .row-fluid
-      button.span12.btn.btn-primary = t("guardian.add")
+table
+  tbody
+    tr
+      th= t :name
+    - @student.guardians.each do |guardian|
+      tr
+        td= guardian.name
+hr/
+.row-fluid
+  #add_guardian_form_area
+  = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link"

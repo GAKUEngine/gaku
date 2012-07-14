@@ -1,48 +1,68 @@
 .row-fluid
-  .span12
-    .well
-      table.table.table-striped.table-bordered.table-condensed
-        tbody
-          tr
-            th = t :name
-            td= @student.surname+" "+@student.name
-          tr
-            th= t('name')+" ("+t('phonetic_reading')+")"
-            td= @student.surname_reading.to_s+" "+@student.name_reading.to_s 
-          tr
-            th= t :email
-            td= @student.email
-          tr
-            th= t :birth
-            td= @student.birth
-          tr
-            th= t :admitted
-            td= @student.admitted
-          tr
-            th= t :graduated
-            td= @student.graduated
+  .span3.well
+    .row-fluid
+      .span2.control-group
+        = image_tag @student.picture.url(:thumb)
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
+        div id="upload_picture" style="display:none;"
+          = render 'upload_picture'
+.row-fluid
+  .span12.well
+    .row-fluid
+      .span6.control-group
+        = label_tag :class_group_id, t("class"), :class => "control-label"
+        .controls
+          = @student.class_groups.name
+    .row-fluid
+      .span3.control-group
+        .row-fluid
+          = label_tag :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.surname
+      .span3.control-group
+        .row-fluid
+          = label_tag :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.name
+      .span3.control-group
+        .row-fluid
+          = label_tag :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.surname_reading
+      .span3.control-group
+        .row-fluid
+          = label_tag :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+        .row-fluid
+          = @student.name_reading
 .row-fluid
   .span12.well
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a*{'data-toggle' =>"tab", 'href' => "#profile"} = t('profile')
+          a*{'data-toggle' =>"tab", 'href' => "#addresses"} = t('addresses.addresses')
         li
-          a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
+          a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li
-          a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note.notes')
+          a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
       .tab-content
-        = render 'new_profile', :new_profile => @new_profile
-        = render 'new_guardian', :new_guardian => @new_guardian
-        = render 'new_note', :notes => @notes, :new_note => @new_note
-        /= render :partial => 'new_profile', :form => form
-        /= render :partial => 'new_guardian', :form => form
-        /= render :partial => 'new_note', :form => form
+        #addresses.tab-pane
+          = render :partial => 'addresses'
+        #guardians.tab-pane
+          = render :partial => 'guardians'
+        #notes.tab-pane
+          = render :partial => 'notes'
 .row-fluid
   .span12.well
-    .span3
-      = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "span12 btn btn-primary"
+    .span3{style="margin-bottom:0px"}
+      = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "btn btn-primary"
     .span3
       = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
     .span3
-      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+      = button_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+
+javascript:
+  $('#upload_picture_link').click(function() {
+    $('#upload_picture').toggle('slow', function() {
+      // Animation complete.
+    });
+  });

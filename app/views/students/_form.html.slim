@@ -38,58 +38,14 @@
           = form.label :admitted, t("admitted"), :class => "control-label"
           .controls
             = form.text_field :admitted, :class => "span12"
-        .span6
+        /.span6
           = form.label :graduated, t("graduated"), :class => "control-label"
           .controls
             = form.text_field :graduated, :class => "span12"
 
-    .row-fluid
-      .span12.well
-        .tabbable.tabs-right
-          ul.nav.nav-tabs
-            li.acitve
-              a*{'data-toggle'=>"tab", 'href'=> "#address"} = t('address')
-            li
-              a*{'data-toggle' =>"tab", 'href' => "#guardian"} = t('guardian')
-            li
-              a*{'data-toggle'=>"tab", 'href'=> "#note"} = t('note')
-          .tab-content
-            #address.tab-pane
-              .row-fluid
-                h3.pull-left = t("address")
-              .row-fluid
-                .span12
-                  hr
-              .row-fluid
-                /FIXME
-                /= form.fields_for :addresses do |builder|
-                /  = render 'address_fields', f: builder
-                /= link_to_add_fields t("addresses.add"), f, :addresses
-            #guardian.tab-pane
-              .row-fluid
-                h3.pull-left = t("guardian")
-              .row-fluid
-                .span12
-                  hr
-              .row-fluid
-                /FIXME
-                /= form.fields_for :guardians do |builder|
-                /  = render 'guardian_fields', f: builder
-                /= link_to_add_fields t("guardians.add"), f, :guardians
-            #note.tab-pane
-              .row-fluid
-                h3.pull-left = t("note")
-              .row-fluid
-                .span12
-                  hr
-              .row-fluid
-                /= form.fields_for :notes do |builder|
-                /  = render 'note_fields', note_form: builder
-                /= link_to_add_fields t("notes.add"), note_form, :notes
-                = link_to t("notes.new"), :controller => :notes, :action => :new, :remote => true
-    .row-fluid
-      .span12.well
-        .span3
-          = form.submit nil, :class => "span12 btn btn-primary"
-        .span3
-          = link_to t("Back"), students_path, :class => "span12 btn"
+  .row-fluid
+    .span12.well
+      .span3
+        = form.submit nil, :class => "span12 btn btn-primary"
+      .span3
+        = link_to t("Back"), students_path, :class => "btn span12", :style => "min-height:0px"
