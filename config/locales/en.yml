@@ -70,10 +70,13 @@ en:
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
+    add: "Add course"
+    choose_course: "Choose course"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
+    add: "Enroll to course"
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
