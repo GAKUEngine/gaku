@@ -22,7 +22,7 @@ GAKUEngine::Application.routes.draw do
   resources :students do
   	resources :profiles 
     resources :guardians, :controller => 'students/guardians'
-    resources :notes
+    resources :notes, :controller => 'notes'
     resources :addresses
     resources :contacts
   	resources :exams

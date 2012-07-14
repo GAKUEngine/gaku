@@ -1,38 +1,25 @@
-#note.tab-pane
+= form_for :note, :remote => true do |note_form|
   .row-fluid
-    .span12
-      - if @student.notes.any?
-        = @student.notes.each do |note|
-          .row-fluid
-            .span6 =note.title
-            .span6 =note.content
+    .span12.control-group
+      = note_form.label :title, t("note.title"), :class => "control-label"
+      .controls
+        = note_form.text_field :title, :class => "span12 edit_note"
   .row-fluid
-    h3.pull-left = t("note.notes")
-    .pull-right
-      = link_to new_student_path, :class => "btn btn-primary" do
-        i.icon-plus.icon-white
-        = " "+t("note.add")
-  .row-fluid
-    .span12
-      hr
-  = form_for :new_note, :html => {:class => "edit_note"}, :remote => true do |f|
-    .tabbable
-      ul.nav.nav-tabs
-        li.active
-          a data-toggle="tab" href="#note1" = t("note.notes")+" 1"
-      .tab-content
-        #note1.tab-pane.active
-          .row-fluid
-            .span12.control-group
-              = f.label :title, t("note.title"), :class => "control-label"
-              .controls
-                = f.text_field :title, :class => "span12 edit_note"
-          .row-fluid
-            .span12.control-group
-              = f.label :content, t("note.content"), :class => "control-label"
-              .controls
-                = f.text_area :content, :class => "span12 edit_note", :size => "0x10"
-          .row-fluid
-            = f.submit t "note.save"
+    .span12.control-group
+      = note_form.label :content, t("note.content"), :class => "control-label"
+      .controls
+        = note_form.text_area :content, :class => "span12 edit_note", :size => "0x10"
+  .row-fluid style="margin-top:10px"
+    =link_to t("notes.save"), "", :remote => true, :id => "note_save_link", :class => "span6 btn btn-primary"
+    =link_to t("cancel"), "", :remote => true, :id => "note_cancel", :class => "span6 btn"
 
-= javascript_include_tag "students_show"
+coffee:
+  $("#note_cancel").click( ->
+    $("#add_note_link").show()
+    $("#add_note_form_area").html("")
+  )
+  $("#note_save_link").live("ajax:success", (data, status, xhr)->
+    #add new record to list
+    $("#add_note_link").show()
+    $("#add_note_form_area").html("")
+  )

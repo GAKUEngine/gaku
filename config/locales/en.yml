@@ -5,6 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
+  canscel: ""
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -110,7 +111,7 @@ en:
     close: "Close"
     save: "Save changes"
     help:
-      language: choose your language
+      language: "Choose your Language"
   language: "Language"
   and: " and "
   submit: "Submit"
@@ -122,8 +123,11 @@ en:
   profiles:
     new: "New Profile"
     save: "Save profile"
-  guardian: "保護者"
+  guardian: "Guardian"
   guardians:
+    guardians: "Guardians"
+    list: "Guardians List"    
+    relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
   contact_type: ""
@@ -135,6 +139,8 @@ en:
     details: ""
   note: "Notes"
   notes:
+    notes: "Notes"
+    list: "Notes List"
     title: "Title"
     content: "Content"
     add: "Add Note"
@@ -147,10 +153,7 @@ en:
     save: "Save semester"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
-
-
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
-
   select: "Select"

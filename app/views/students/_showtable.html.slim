@@ -35,7 +35,7 @@
         li
           a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li
-          a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('note.notes')
+          a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
       .tab-content
         #addresses.tab-pane
           = render :partial => 'addresses'
@@ -45,9 +45,6 @@
           = render :partial => 'notes'
 .row-fluid
   .span12.well
-    .span3
-      = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "span12 btn btn-primary"
-    .span3
-      = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
-    .span3
-      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+    = link_to t('Edit'), edit_student_path(@student), :class => "span4 btn btn-primary"
+    = link_to t("Back"), students_path, :class => "span4 btn"
+    = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span4 btn"

@@ -1,7 +1,6 @@
 ja:
   users:
     info: "ユーザー情報"
-  
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -9,6 +8,7 @@ ja:
   Update: "更新"
   Destroy: "削除"
   Back: "戻る"
+  canscel: "キャンセル"
   required: "必須"
   manage: "管理"
   confirm_delete: "本当に削除しますか?"
@@ -50,7 +50,7 @@ ja:
     graduated: "生徒卒業日"
     gender: "性別"
   add_student: "生徒を追加する"
-  enroll_to_class: ""
+  enroll_to_class: "クラスに登録"
   schedule: "定刻"
   num_enrolled: "在籍人数"
   combined_code: "総合コード"
@@ -139,6 +139,8 @@ ja:
     save: "プロフィールを保存"
   guardian: "保護者"
   guardians:
+    guardians: "保護者"
+    list: "保護者リスト"
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
@@ -152,11 +154,13 @@ ja:
     details: "詳細"
   note: "備考"
   notes:
+    notes: "備考"
+    list: "備考リスト"
     title: "題名"
     content: "本文"
     add: "備考を追加"
     delete: "備考を削除"
-  class: クラス
+  class: "クラス[組]"
   semesters:
     list: ""
     starting: ""
@@ -165,9 +169,7 @@ ja:
   num_semesters: ""
   add_semester: ""
   options: "オプション"
-
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
-
   select: "Select"

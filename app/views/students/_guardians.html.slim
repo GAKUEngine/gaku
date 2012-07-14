@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 table
   tbody
     tr
@@ -9,3 +10,35 @@ hr/
 .row-fluid
   #new_guardian_area
     = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true
+=======
+.row-fluid
+  .span12
+    h4 =t("guardians.list")
+.row-fluid
+  .span12
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th
+          th =t("name")+" ("+t("surname")+")"
+          th =t("name")+" ("+t("given_name")+")"
+          th =t("phonetic_reading") + " ("+t("surname")+")"
+          th =t("phonetic_reading") + " ("+t("name")+")"
+          th =t("guardians.relationship")
+      tbody
+        - @student.guardians.each do |guardian|
+          tr
+            td =guardian.id
+            td =guardian.surname
+            td =guardian.name
+            td =guardian.surname_reading
+            td =guardian.name_reading
+            td =guardian.relationship
+.row-fluid
+  .span12
+    hr
+#add_guardian_form_area
+.row-fluid
+  = link_to t("guardians.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary"
+  
+>>>>>>> 3aefd59ce06126db5e48469062f7e53e03138f71
