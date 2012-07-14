@@ -3,9 +3,9 @@ class Syllabus < ActiveRecord::Base
   has_many :assignments
   has_and_belongs_to_many :exams
 
-  attr_accessible :name, :code, :description, :credits, :exams , :exams_attributes
+  attr_accessible :name, :code, :description, :credits, :exams , :exams_attributes, :assignments, :assignments_attributes
 
-  accepts_nested_attributes_for :exams
+  accepts_nested_attributes_for :exams, :assignments
 end
 
 # == Schema Information

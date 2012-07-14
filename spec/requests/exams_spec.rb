@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Exams' do
   before(:each) do
-    @exam = Factory(:exam, :name => "Linux", :max_score => 100)
+    @exam = Factory(:exam, :name => "Linux")
     sign_in_as!(Factory(:user))
     within('ul#menu') { click_link "Exams"}
   end
@@ -14,7 +14,6 @@ describe 'Exams' do
       click_link 'new_exam_link'
       fill_in 'exam_name', :with => 'Biology Exam'
       fill_in 'exam_problem_count', :with => 5
-      fill_in 'exam_max_score', :with => 10
       fill_in 'exam_weight', :with => 1 
       fill_in 'exam_description', :with => "Good work"
       click_button 'Create Exam'  
@@ -39,7 +38,6 @@ describe 'Exams' do
       page.should have_content("Exams List")
       save_and_open_page
       within('table.index tr:nth-child(2)') { page.should have_content("Linux") }
-      within('table.index tr:nth-child(2)') { page.should have_content("100") }
       
       # show
       within('table.index tr:nth-child(2)') { click_link "Show" }
@@ -47,7 +45,6 @@ describe 'Exams' do
       #TODO Make a real check when view is finished
       page.should have_content("Exam")
       page.should have_content("Linux")
-      page.should have_content("100")
 
     end
   end

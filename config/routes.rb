@@ -16,6 +16,7 @@ GAKUEngine::Application.routes.draw do
   resources :syllabuses do 
     member do
       get :new_exam
+      get :new_assignment
     end
   end
 
