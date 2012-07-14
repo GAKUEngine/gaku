@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-table
-  tbody
-    tr
-      th= t :name
-    - @student.guardians.each do |guardian|
-      tr
-        td= guardian.name
-hr/
-.row-fluid
-  #new_guardian_area
-    = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true
-=======
 .row-fluid
   .span12
     h4 =t("guardians.list")
@@ -40,5 +27,3 @@ hr/
 #add_guardian_form_area
 .row-fluid
   = link_to t("guardians.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary"
-  
->>>>>>> 3aefd59ce06126db5e48469062f7e53e03138f71
