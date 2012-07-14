@@ -1,31 +1,11 @@
-table.table.table-striped
+table
   tbody
     tr
       th= t :name
-      th= t :birth
-      th= t :gender
-      th= t :zipcode
-      th= t :prefecture
-      th= t :address
-      th= t :phone
-      th= t :email
-    = @student.guardians.each do |guardian|
+    - @student.guardians.each do |guardian|
       tr
         td= guardian.name
-      tr
-        td= guardian.birth
-      tr
-        td= guardian.gender
-      tr
-        td= guardian.zipcode
-      tr
-        td= guardian.birth
-      tr
-        td= guardian.address
-      tr
-        td= guardian.phone
-      tr
-        td= guardian.email
 hr/
 .row-fluid
-  button.span12.btn.btn-primary = t("guardian.add")
+  #new_guardian_area
+    = link_to t("guardian.add"), new_student_guardian_url(@student), :remote => true

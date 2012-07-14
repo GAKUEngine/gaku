@@ -21,7 +21,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :students do
   	resources :profiles 
-    resources :guardians
+    resources :guardians, :controller => 'students/guardians'
     resources :notes
     resources :addresses
     resources :contacts
