@@ -11,7 +11,7 @@ class Exam < ActiveRecord::Base
 
   attr_accessible :name, :description, :weight, :schedule_id, :dynamic_scoring, :adjustments
 
-  validates :name, :max_score, :presence => true
+  validates :name, :presence => true
 end
 # == Schema Information
 #
