@@ -1,4 +1,6 @@
 class GradingMethod < ActiveRecord::Base
+  has_one :exam_portion
+  
   attr_accessible :description, :method, :name
 end
 

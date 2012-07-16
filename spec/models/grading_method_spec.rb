@@ -4,6 +4,7 @@ describe GradingMethod do
 
   context "validations" do 
   	it { should have_valid_factory(:grading_method) }
+  	it { should have_one(:exam_portion) }
   end
   
 end

@@ -7,6 +7,7 @@ describe ExamPortion do
     it { should belong_to(:exam) }
     it { should have_many(:exam_portion_scores) }
     it { should belong_to(:schedule) }
+    it { should belong_to(:grading_method) }
   end
 
 end
