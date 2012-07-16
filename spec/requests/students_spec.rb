@@ -27,6 +27,16 @@ describe 'Student' do
       visit student_path(@student1)
       page.should have_link "Enroll to class"
     end
+  
+    it "should list enrolled courses" do
+      visit student_path(@student1)
+      page.should have_content "Courses List"
+    end
+
+    it "should exist enroll_to_course link" do
+      visit student_path(@student1)
+      page.should have_link "Enroll to course"
+    end
   end
 
 end
