@@ -15,10 +15,6 @@
     = f.label :weight
     br/
     = f.text_field :weight
-  .field
-    = f.label :schedule
-    br/
-    = f.select :schedule_id, Schedule.all.collect { |s| ["#{s.starting} - #{s.ending}", s.id] },:prompt => t('exam.choose_shedule') 
   .field 
     = f.label :description
     br/

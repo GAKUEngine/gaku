@@ -7,9 +7,7 @@ class Exam < ActiveRecord::Base
   has_one :grading_method
 
 
-  belongs_to :schedule
-
-  attr_accessible :name, :description, :weight, :schedule_id, :dynamic_scoring, :adjustments
+  attr_accessible :name, :description, :weight, :dynamic_scoring, :adjustments
 
   validates :name, :presence => true
 end

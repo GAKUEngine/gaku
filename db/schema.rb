@@ -147,7 +147,6 @@ ActiveRecord::Schema.define(:version => 20120713131448) do
     t.boolean  "dynamic_scoring"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "schedule_id"
   end
 
   create_table "exams_syllabuses", :force => true do |t|
