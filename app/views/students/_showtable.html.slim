@@ -44,6 +44,8 @@
           a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li
           a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
+        li
+          a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t('courses.courses')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'addresses'
@@ -51,6 +53,8 @@
           = render :partial => 'guardians'
         #notes.tab-pane
           = render :partial => 'notes'
+        #courses.tab-pane
+          = render :partial => 'courses'
 .row-fluid
   .span12.well
     .span3{style="margin-bottom:0px"}
@@ -58,7 +62,7 @@
     .span3
       = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
     .span3
-      = button_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
 
 javascript:
   $('#upload_picture_link').click(function() {

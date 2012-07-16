@@ -1,7 +1,6 @@
 ja:
   users:
     info: "ユーザー情報"
-  
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -9,6 +8,7 @@ ja:
   Update: "更新"
   Destroy: "削除"
   Back: "戻る"
+  canscel: "キャンセル"
   required: "必須"
   manage: "管理"
   confirm_delete: "本当に削除しますか?"
@@ -77,10 +77,12 @@ ja:
     code: "授業コード"
     code_sample: "[例: 秋2020]"
     save: ""
+    choose_course: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
+    add: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "Class Groups"
@@ -143,6 +145,7 @@ ja:
   guardian: "保護者"
   guardians:
     guardians: "保護者"
+    list: "保護者リスト"
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
@@ -157,6 +160,7 @@ ja:
   note: "備考"
   notes:
     notes: "備考"
+    list: "備考リスト"
     title: "題名"
     content: "本文"
     add: "備考を追加"
@@ -170,11 +174,9 @@ ja:
   num_semesters: ""
   add_semester: ""
   options: "オプション"
-
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
-
   select: "Select"
   pictures:
     change: ""

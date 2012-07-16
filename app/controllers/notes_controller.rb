@@ -8,9 +8,10 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
+
     respond_to do |format|
-      format.html {render :partial => "note_fields"}
-      format.json {render :json => @students}
+      format.html {render :partial => "students/new_note"}
+      format.json {render :json => @note}
     end    
   end
   
