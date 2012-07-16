@@ -14,8 +14,9 @@ GAKUEngine::Application.routes.draw do
   resources :class_group_enrollments
 
   resources :syllabuses do 
+    resources :exams
     member do
-      get :new_exam
+      #get :new_exam
       get :new_assignment
     end
   end

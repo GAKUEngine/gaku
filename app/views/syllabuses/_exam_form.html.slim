@@ -1,4 +1,4 @@
-= form_for(@syllabus) do |f| 
+= form_for(@syllabus, :remote => true) do |f| 
   = f.fields_for :exams do |exam_form| 
     - if exam_form.object.new_record?
       .field
@@ -6,12 +6,8 @@
         br/
         = exam_form.text_field :name
       .field
-        = exam_form.label :max_score
-        br/
-        = exam_form.number_field :max_score
-      .field
         = exam_form.label :weight
         br/
         = exam_form.number_field :weight
-
-  = f.submit
+  #submit_syllabus_exam
+    = f.submit t 'exams.add'

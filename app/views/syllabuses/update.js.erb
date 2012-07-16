@@ -1,0 +1,3 @@
+$(document).ready(function(){
+  $('#syllabus_exams').html('<%= escape_javascript(render :partial => "exams", :formats => [:html], :handlers => [:erb, :slim]) %>');
+});
