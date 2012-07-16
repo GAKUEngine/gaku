@@ -8,6 +8,7 @@ class Student < ActiveRecord::Base
   #FIXME maybe it should be reversed
   has_many :exam_scores
   has_many :exams, :through => :exam_scores
+  has_many :assignment_scores
 
   belongs_to :user
   has_and_belongs_to_many :addresses
