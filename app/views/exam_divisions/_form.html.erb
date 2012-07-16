@@ -1,0 +1,29 @@
+<%= form_for(@exam_division) do |f| %>
+  <% if @exam_division.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exam_division.errors.count, "error") %> prohibited this exam_division from being saved:</h2>
+
+      <ul>
+      <% @exam_division.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :portion %><br />
+    <%= f.text_field :portion %>
+  </div>
+  <div class="field">
+    <%= f.label :maxscore %><br />
+    <%= f.text_field :maxscore %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

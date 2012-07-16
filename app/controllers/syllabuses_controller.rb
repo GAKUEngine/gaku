@@ -2,7 +2,7 @@ class SyllabusesController < ApplicationController
 
   #before_filter :authenticate_user!
 
-  before_filter :load_syllabus, :only  => :new_exam 
+  before_filter :load_syllabus, :only  => [:new_exam, :new_assignment]
 
   inherit_resources
 
@@ -14,6 +14,10 @@ class SyllabusesController < ApplicationController
 
   def new_exam
   	@syllabus.exams.build
+  end
+
+  def new_assignment
+    @syllabus.assignments.build
   end
 
   private

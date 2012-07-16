@@ -1,0 +1,9 @@
+= form_for(@syllabus) do |f| 
+  = f.fields_for :assignments do |assignment_form| 
+    - if assignment_form.object.new_record?
+      .field
+        = assignment_form.label :name
+        br/
+        = assignment_form.text_field :name
+
+  = f.submit
