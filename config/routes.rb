@@ -23,11 +23,13 @@ GAKUEngine::Application.routes.draw do
   	resources :profiles 
     resources :guardians, :controller => 'students/guardians'
     resources :notes
-    resources :addresses
     resources :contacts
-  	resources :exams
-  	resources :courses
+    resources :exams
+    resources :courses
+    resources :addresses
+    get :new_address, :on => :member
   end
+  
 
   resources :notes
 

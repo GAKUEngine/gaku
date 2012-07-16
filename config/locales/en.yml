@@ -43,6 +43,7 @@ en:
     birth: "Birth Date"
     admitted: "Admitted"
     graduated: "Graduated"
+    add_address: "Add Address"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
