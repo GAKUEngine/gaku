@@ -13,7 +13,6 @@ describe 'Exams' do
     it 'should create new exam' do
       click_link 'new_exam_link'
       fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_problem_count', :with => 5
       fill_in 'exam_weight', :with => 1 
       fill_in 'exam_description', :with => "Good work"
       click_button 'Create Exam'  
@@ -24,7 +23,6 @@ describe 'Exams' do
      pending "should edit exam" do 
       within('table.index tr:nth-child(2)') { click_link "Edit" }
       fill_in "exam_name", :with => "Biology Exam 2"
-      fill_in "exam_problem_count", :with => 7
       click_button "Update Exam"
 
       page.should have_content("was successfully updated")

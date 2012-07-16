@@ -19,7 +19,7 @@ describe ExamsController do
     pending "redirects to the new exam" do
       page.stub :save => true
 
-      post :create, :name => "biology" , :max_score => 6
+      post :create, :name => "biology"
       response.should redirect_to(exam_url(Exam.last))
     end
   end
