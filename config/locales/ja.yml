@@ -49,6 +49,7 @@ ja:
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
     gender: "性別"
+    add_address: "Add Address"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -76,10 +77,12 @@ ja:
     code: "授業コード"
     code_sample: "[例: 秋2020]"
     save: ""
+    choose_course: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
+    add: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "Class Groups"

@@ -7,9 +7,9 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses do
-    resources :course_enrollments
-  end
+  resources :courses
+
+  resources :course_enrollments
 
   resources :class_group_enrollments
 
@@ -22,13 +22,16 @@ GAKUEngine::Application.routes.draw do
 
   resources :students do
   	resources :profiles 
-    resources :guardians, :controller => 'students/guardians'
-    resources :notes, :controller => 'notes'
+    resources :guardians
     resources :addresses
+    resources :notes
     resources :contacts
-  	resources :exams
-  	resources :courses
+    resources :exams
+    resources :courses
+    resources :addresses
+    get :new_address, :on => :member
   end
+  
 
   resources :notes
 
