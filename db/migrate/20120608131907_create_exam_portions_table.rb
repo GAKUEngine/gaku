@@ -6,7 +6,8 @@ class CreateExamPortionsTable < ActiveRecord::Migration
   	  t.integer  :problem_count
       t.text     :description, :adjustments
       t.datetime :execution_date
-      t.boolean  :dynamic_scoring
+      t.boolean  :dynamic_scoring 
+      t.boolean  :is_master,  :default => false
 
       t.timestamps
   	end
