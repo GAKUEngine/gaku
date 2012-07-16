@@ -11,20 +11,19 @@ class Exam < ActiveRecord::Base
 
   validates :name, :presence => true
 end
+
+
 # == Schema Information
 #
 # Table name: exams
 #
-#  id             :integer         not null, primary key
-#  name           :string(255)
-#  description    :text
-#  problem_count  :integer
-#  max_score      :float
-#  weight         :float
-#  data           :binary
-#  execution_date :datetime
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
-#  schedule_id    :integer
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  description     :text
+#  adjustments     :text
+#  weight          :float
+#  dynamic_scoring :boolean
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
 #
 
