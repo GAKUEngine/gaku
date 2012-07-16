@@ -1,6 +1,7 @@
 class Contact < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :student
+  belongs_to :guardian
   
   attr_accessible :data, :details, :contact_type_id
 end
