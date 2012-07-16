@@ -21,7 +21,6 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :students do
-  	resources :profiles 
     resources :guardians
     resources :addresses
     resources :notes

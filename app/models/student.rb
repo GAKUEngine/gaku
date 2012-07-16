@@ -10,21 +10,20 @@ class Student < ActiveRecord::Base
   has_many :exams, :through => :exam_scores
 
   belongs_to :user
-  belongs_to :profile
   has_and_belongs_to_many :addresses
   has_and_belongs_to_many :guardians
   has_many :contacts
   has_many :notes
 
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth, :gender, :admitted, :graduated,
-                  :class_groups, :class_group_ids, :class_groups_attributes, :profile, :profile_attributes,
-                  :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, :picture
+                  :class_groups, :class_group_ids, :class_groups_attributes,
+                  :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
+                  :picture
 
   has_attached_file :picture, :styles => { :thumb => "150x150>" }
 
   validates :name, :surname, :presence => true
 
-  accepts_nested_attributes_for :profile, :allow_destroy => true
   accepts_nested_attributes_for :guardians, :allow_destroy => true
   accepts_nested_attributes_for :notes, :allow_destroy => true
   accepts_nested_attributes_for :addresses, :allow_destroy => true
