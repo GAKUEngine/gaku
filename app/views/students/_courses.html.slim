@@ -1,0 +1,12 @@
+#course_enrollments
+  p#courses_list
+    b
+      = t "courses.list"
+  ul
+    - @student.courses.each do |course|
+      li= course.code
+
+#add_course_enrollment
+  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :class => "btn"
+div id="course_form" style="display:none;"
+  =render 'new_course'

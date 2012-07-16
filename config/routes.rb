@@ -7,9 +7,9 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses do
-    resources :course_enrollments
-  end
+  resources :courses
+
+  resources :course_enrollments
 
   resources :class_group_enrollments
 

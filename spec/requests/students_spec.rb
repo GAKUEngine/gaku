@@ -18,7 +18,7 @@ describe 'Student' do
       click_link "new_student_link"
       fill_in "student_name", :with => "John"
       fill_in "student_surname", :with => "Doe"
-      click_button "Submit"
+      click_button "Create Student"
     end
   end
 
@@ -27,5 +27,16 @@ describe 'Student' do
       visit student_path(@student1)
       page.should have_link "Enroll to class"
     end
-end
+  
+    it "should list enrolled courses" do
+      visit student_path(@student1)
+      page.should have_content "Courses List"
+    end
+
+    it "should exist enroll_to_course link" do
+      visit student_path(@student1)
+      page.should have_link "Enroll to course"
+    end
+  end
+
 end
