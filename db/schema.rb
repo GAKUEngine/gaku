@@ -254,7 +254,7 @@ ActiveRecord::Schema.define(:version => 20120716154559) do
     t.string   "gender"
     t.string   "phone"
     t.string   "email"
-    t.date     "birth"
+    t.date     "birth_date"
     t.date     "admitted"
     t.date     "graduated"
     t.datetime "created_at",           :null => false
