@@ -17,16 +17,6 @@
           th= 
           th=
           th=
-        - @student.addresses.each do |address|
-          tr
-            td= address.address1
-            td= address.address2
-            td= address.city
-            td= address.zipcode
-            td= address.state_name
-            td= address.country
-            td= link_to "show", student_address_path(@student, address)
-            td= link_to "edit", edit_student_address_path(@student, address)
-            td= link_to "delete", student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?'
+        =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
 #add_new_student_address
 =link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student btn', :remote => true
