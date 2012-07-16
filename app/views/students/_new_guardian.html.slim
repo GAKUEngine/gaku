@@ -1,29 +1,26 @@
 = form_for :guardian, :remote => true do |guardian_form|
   .row-fluid
-    .span3.control-group
+    .span3
       = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
       span.label.label-important.pull-right =t 'required'
       = guardian_form.text_field :surname, :class => "span12"
-    .span3.control-group
+    .span3
       = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
       span.label.label-important.pull-right =t 'required'
       = guardian_form.text_field :name, :class => "span12"
-    .span3.control-group
+    .span3
       = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
-      span3 
       = guardian_form.text_field :surname_reading, :class => "span12"
-    .span3.control-group
+    .span3
       = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
-      span3
       = guardian_form.text_field :name_reading, :class => "span12"
   .row-fluid
-    .span12.control-group
+    .span12
       = guardian_form.label :relationship, t("guardians.relationship"), :class => "control-label"
-      .controls
-        = guardian_form.text_field :relationship, :class => "span12"
-  .row-fluid
-    =link_to t("guardians.save"), "", :remote => true, :id => "guardian_save_link"
-    =link_to t(:cancel), "", :remote => true, :id => "guardian_cancel"
+      = guardian_form.text_field :relationship, :class => "span12"
+  .row-fluid style="margin-top:10px"
+    =link_to t("guardians.save"), "", :remote => true, :id => "guardian_save_link", :class => "span6 btn btn-primary"
+    =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span6 btn"
 
 coffee:
   $("#guardian_cancel").click( ->

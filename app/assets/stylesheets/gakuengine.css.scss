@@ -44,14 +44,14 @@ body {
   padding: 10px;
 }
 
-/*bootstrap fix*/
-hr{
+//bootstrap fix ----------
+hr {
   margin: 10px 0px;
 }
 .btn-toolbar {
   margin: 0px;
   height: 28px;
-  .last{
+  .last {
     margin-right: 15px;
   }
 }
@@ -59,49 +59,37 @@ hr{
   margin-left: 0px;
 }
 .btn.active, .btn:active {
-  background-color: lightGoldenrodYellow;
+  // background-color: lightGoldenrodYellow;
 }
-// .row{
-  // margin: 0px 0px 0px
-// }
-// .row-fluid{
-  // margin: 0px 0px 0px
-// }
-// [class*="span"] {
-  // margin-left: 0px;
-// }
-.navbar .brand
-{
+.navbar .brand {
   padding: 7px 20px 7px;
 }
 
 .navbar .nav > li > a {
   padding: 11px 10px 10px;
 }
-
-.navbar .btn-group{
+.navbar .btn-group {
   padding: 6px 0px 6px 10px;
 }
-
-.table{
+.table {
   margin-bottom: 0px;
 }
-.table .th-center{
+.table.th-center {
   color: white;
   background-color: #98acd4;
   text-align: center;
   vertical-align: middle;
-  th{
+  th {
     text-align: center;
     vertical-align: middle;
   }
 }
-.table tbody{
-  td{
+tbody.table {
+  td {
     text-align: right;
     vertical-align: middle;
   }
-  .td-left{
+  .td-left {
     text-align: left;
   }
 }
@@ -117,8 +105,13 @@ span.required {
   font-weight: bold;
   font-size: 1.2em;
 }
-
-.fieldWithErrors{
+.fieldWithErrors {
   display: block;
   clear: both;
+}
+form {
+  margin: 0px;
+}
+.nav {
+  margin-bottom: 0px;
 }

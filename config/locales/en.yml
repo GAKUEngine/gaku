@@ -5,6 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
+  canscel: ""
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -128,6 +129,7 @@ en:
   guardian: "Guardian"
   guardians:
     guardians: "Guardians"
+    list: "Guardians List"    
     relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
@@ -141,6 +143,7 @@ en:
   note: "Notes"
   notes:
     notes: "Notes"
+    list: "Notes List"
     title: "Title"
     content: "Content"
     add: "Add Note"
@@ -153,12 +156,9 @@ en:
     save: "Save semester"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
-
-
   notice:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
-
   select: "Select"
   pictures:
     change: "Change picture"

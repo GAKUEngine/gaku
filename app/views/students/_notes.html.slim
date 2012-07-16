@@ -1,32 +1,24 @@
-- if @student.notes.any?
-  #note.tab-pane
-    .tabbable
-      ul.nav.nav-tabs
-        li.active
-          a data-toggle="tab" href="#note1"
-            = t("note.notes")
-            | 1
-        li
-          a data-toggle="tab" href="#note2"
-            = t("note.notes")
-            | 2
-      .tab-content
-        #note1.tab-pane.active
-          .row-fluid
-            .span12
-              = @student.notes.first.title
-          hr/
-          .row-fluid
-            .span12
-              = @student.notes.first.content
-        - unless @student.notes.second.nil?
-          #note2.tab-pane.active
-            .row-fluid
-              .span12= @student.notes.second.title
-            hr/
-            .row-fluid
-              .span12
-                = @student.notes.second.content
-    hr/
-    .row-fluid
-      button.span12.btn.btn-primary= t "note.add"
+.row-fluid
+  .span12
+    h4 =t("notes.list")
+.row-fluid
+  .span12
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th
+          th =t("notes.title")
+          th =t("notes.content")
+      tbody
+        - @student.notes.each do |note|
+          tr
+            td =note.id
+            td =note.title
+            td =note.content
+.row-fluid
+  .span12
+    hr
+#add_note_form_area
+.row-fluid
+  = link_to t("notes.add"), new_student_note_url(@student), :remote => true, :id => "add_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
+  
