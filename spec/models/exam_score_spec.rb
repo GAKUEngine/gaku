@@ -8,16 +8,4 @@ describe ExamScore do
     it { should belong_to(:student) }
   end
   
-end# == Schema Information
-#
-# Table name: exam_scores
-#
-#  id         :integer         not null, primary key
-#  score      :float
-#  comment    :text
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#  exam_id    :integer
-#  student_id :integer
-#
-
+end

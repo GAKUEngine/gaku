@@ -24,13 +24,4 @@ describe State do
     state = Factory(:state)
     State.states_group_by_country_id.should == { state.country_id.to_s => [[state.id, state.name]] }
   end
-end# == Schema Information
-#
-# Table name: states
-#
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  abbr       :string(255)
-#  country_id :integer
-#
-
+end
