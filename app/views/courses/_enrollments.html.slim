@@ -3,7 +3,7 @@
     b
       = t :num_enrolled
       = @course.students.count
-      = link_to t('add_student'), new_course_course_enrollment_path(@course),:remote => true, :id => "add_student_enrollment", :class => "make-button"
+      /= link_to t('add_student'), new_course_course_enrollment_path(@course),:remote => true, :id => "add_student_enrollment", :class => "make-button"
 
   #add_student_enrollment_box
   javascript:
