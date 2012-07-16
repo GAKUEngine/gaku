@@ -1,49 +1,41 @@
-#address.tab-pane
-  .row-fluid
-    h3.pull-left = t("address")
-    .pull-right
-      = link_to new_student_path, :class => "btn btn-primary" do
-        i.icon-plus.icon-white
-        = " "+t("addresses.add")
-  .row-fluid
-    .span12
-      hr
-  = form_for :address, :remote => true do |address_form|
-    .tabbable
-      ul.nav.nav-tabs
-        li.active
-          a data-toggle="tab" href="#address1" = t("address")+" 1";
-      .tab-content
-        #address1.tab-pane.active
-          .row-fluid
-            .span4.control-group
-              = address_form.label :city, t("addresses.city"), :class => "control-label"
-              .controls
-                = address_form.text_field :city, :class => "span12"
-            .span4.control-group
-              = address_form.label :address1, t("addresses.address1"), :class => "control-label"
-              .controls
-                = address_form.text_field :address1, :class => "span12"
-            .span4.control-group
-              = address_form.label :address2, t("addresses.address2"), :class => "control-label"
-              .controls
-                = address_form.text_field :address2, :class => "span12"
-          .row-fluid
-            .span6.control-group
-              = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
-              .controls
-                .row-fluid
-                  .span6
-                    = address_form.text_field :zipcode, :class => "span12"
-                  .span6
-                    button.span12.btn.btn-primary= t "addresses.search_address"
-            .span6.control-group
-              = address_form.label :prefecture, t("addresses.prefecture"), :class => "control-label"
-              .controls
-                = address_form.select :prefecture, options_for_select([["Pref1", "pref1"], ["Pref2", "pref2"]]), {}, :class => "span12"
-          .row-fluid
-            .span12.control-group
-              =address_form.label :past, t('addresses.past')
-              =address_form.check_box :past
-          .row-fluid
-            button.span12.btn.btn-primary= t "addresses.save"
+= form_for @student do |f|
+  =f.fields_for :addresses do |address_form| 
+    - if address_form.object.new_record?
+      .row-fluid
+        .span4.control-group
+          = address_form.label :city, t("addresses.city"), :class => "control-label"
+          .controls
+            = address_form.text_field :city, :class => "span12"
+        .span4.control-group
+          = address_form.label :address1, t("addresses.address1"), :class => "control-label"
+          .controls
+            = address_form.text_field :address1, :class => "span12"
+        .span4.control-group
+          = address_form.label :address2, t("addresses.address2"), :class => "control-label"
+          .controls
+            = address_form.text_field :address2, :class => "span12"
+      .row-fluid
+        .span6.control-group
+          = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+          .controls
+            .row-fluid
+              .span6
+                = address_form.text_field :zipcode, :class => "span12"
+              .span6
+                button.span12.btn.btn-primary= t "addresses.search_address"
+        .span6.control-group
+          = address_form.label :state_name, t("addresses.prefecture"), :class => "control-label"
+          .controls
+            = address_form.select :state_name, State.all.collect{|s| [s.name, s.name]}
+      .row-fluid
+         .span6.control-group
+          = address_form.label :country, t("addresses.prefecture"), :class => "control-label"
+          .controls
+            = address_form.select :country_id, Country.all.collect{|s| [s.name, s.id]}
+      -if params[:action] == 'edit'
+        .row-fluid
+        .span12.control-group
+          =address_form.label :past, t('addresses.past')
+          =address_form.check_box :past
+      .row-fluid
+      button.span12.btn.btn-primary= t "addresses.save"

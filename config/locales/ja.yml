@@ -49,6 +49,7 @@ ja:
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
     gender: "性別"
+    add_address: "Add Address"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"

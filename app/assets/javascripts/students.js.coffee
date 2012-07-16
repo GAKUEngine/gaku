@@ -12,3 +12,6 @@ $ ->
     # regexp = new RegExp($(this).data('id'), 'g')
     # $(this).before($(this).data('fields').replace(regexp, time))
     # event.preventDefault()
+		$('#add_new_student_address').on 'click','a.btn', (event) ->
+	    event.preventDefault()
+	    $('#new_address_form').slideDown()

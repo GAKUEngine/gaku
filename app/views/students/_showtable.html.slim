@@ -45,7 +45,7 @@
         li
           a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
       .tab-content
-        #addresses.tab-pane
+        #addresses.tab-pane.active
           = render :partial => 'addresses'
         #guardians.tab-pane
           = render :partial => 'guardians'
