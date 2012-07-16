@@ -1,5 +1,6 @@
 class ExamPortion < ActiveRecord::Base
   belongs_to :exam
+  belongs_to :schedule
   has_many :exam_portion_scores
   has_many :files
   has_one :grading_method
