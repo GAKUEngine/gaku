@@ -171,10 +171,6 @@ ActiveRecord::Schema.define(:version => 20120713131448) do
   end
 
   create_table "guardians", :force => true do |t|
-    t.string  "name"
-    t.string  "surname"
-    t.string  "name_reading"
-    t.string  "surname_reading"
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
