@@ -1,0 +1,2 @@
+  $('#syllabus-assignments table tbody').append('<%= escape_javascript(render :partial => "assignment", :formats => [:html], :handlers => [:erb, :slim], :locals => {:assignment => @syllabus.assignments.last}) %>');
+

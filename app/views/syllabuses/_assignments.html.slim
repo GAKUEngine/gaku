@@ -7,15 +7,11 @@
       b= t('assignments.list')
 
     table
-      tr
-        th Name
-      - @syllabus.assignments.each do |assignment|
-        - unless assignment.new_record?
-          tr
-            td= assignment.name
-            td= link_to 'Show', [@syllabus, assignment]
-            td= link_to 'Edit', edit_syllabus_assignment_path(@syllabus, assignment)
-            td= link_to( 'Destroy', syllabus_assignment_path(@syllabus, assignment), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_assignment' )
+      tbody
+        tr
+          th Name
+        = render :partial => 'assignment', :collection => @syllabus.assignments, :as => :assignment
+          
 - else 
   p= t('notice.no_assignments')
 

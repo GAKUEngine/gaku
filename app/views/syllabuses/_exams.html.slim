@@ -7,20 +7,14 @@
       b= t('exams.list')
 
     table
-      tr
-        th Name
-        th Weight
-        th
-        th 
-        th
-      - @syllabus.exams.each do |exam|
-        - unless exam.new_record?
-          tr
-            td= exam.name
-            td= exam.weight
-            td= link_to 'Show', exam
-            td= link_to 'Edit', edit_syllabus_exam_path(@syllabus, exam)
-            td= link_to( 'Destroy', syllabus_exam_path(@syllabus, exam), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_exam' )
+      tbody
+        tr
+          th Name
+          th Weight
+          th
+          th 
+          th
+        = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
 - else 
   p= t('notice.no_exams')
 
