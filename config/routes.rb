@@ -24,10 +24,13 @@ GAKUEngine::Application.routes.draw do
   	resources :profiles 
     resources :guardians
     resources :addresses
+    
     resources :notes
+    
     resources :contacts
     resources :exams
     resources :courses
+    
     resources :addresses
     get :new_address, :on => :member
     put :create_address, :on => :collection  
