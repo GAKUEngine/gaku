@@ -1,4 +1,4 @@
-= form_for @student do |f|
+= form_for @student, :url => create_address_students_path(:id => @student), :remote => true do |f|
   =f.fields_for :addresses do |address_form| 
     - if address_form.object.new_record?
       .row-fluid
