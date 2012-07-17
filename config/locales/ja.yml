@@ -79,6 +79,7 @@ ja:
     code_sample: "[例: 秋2020]"
     save: ""
     choose_course: ""
+    enroll_student: "Enroll Student"
   num_courses: ""
   add_course: ""
   course_enrollments:
