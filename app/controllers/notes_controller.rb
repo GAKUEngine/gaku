@@ -15,6 +15,19 @@ class NotesController < ApplicationController
     end    
   end
   
+  def create
+    @note = Noew.new(params[:note])
+
+    if @note.update_attributes(params[:note])
+      status = 'success'
+      #html = render_to_string partial: 'show', locals: { note: @note }
+    else
+      status = 'error'
+    end
+  
+    render json: { status: status, data: @memo, html: html }    
+  end
+  
   def destroy
     destroy! :flash => !request.xhr?
   end
