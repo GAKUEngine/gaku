@@ -3,12 +3,23 @@
     b
       = t :num_enrolled
       = @course.students.count
-      = link_to t('add_student'), new_course_course_enrollment_path(@course),:remote => true, :id => "add_student_enrollment", :class => "make-button"
+      br/
+      #add_student_enrollment_link
+        = link_to t('add_student'), new_course_enrollment_path(:course_id => @course.id), :id => "add_student_enrollment", :class => "make-button"
 
-  #add_student_enrollment_box
+  div id='add_student_enrollment_form' style='display:none' 
+    =form_for @new_course_enrollment,:url => enroll_student_course_enrollments_path , :remote => true do |f|
+      =f.hidden_field :course_id, :value => @course.id
+      .field
+        =f.label :students
+        = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}
+      .actions
+        =f.submit t('add_course'), :class => 'btn'
+
   javascript:
     | CourseAct.hookupEnrollment();
-      table#enrolled_students_grid.make-grid
+    
+  table#enrolled_students_grid.make-grid
     tr
       th*{"data-field" => t("students.name")}
         = t("students.name")
@@ -19,12 +30,4 @@
       th*{"data-field" => t("grades.rank")}
         = t("grades.rank")
       /! <th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
-    - @course.students.each do |enrollment|
-      tr
-        td = enrollment.name
-        td
-          = link_to t("assignments.view"), "", :class => "make-button"
-          = link_to t("exams.view"), "", :class => "make-button"
-        td
-        td
-        /! <td></td>
+    =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
