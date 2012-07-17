@@ -8,7 +8,7 @@ ja:
   Update: "更新"
   Destroy: "削除"
   Back: "戻る"
-  canscel: "キャンセル"
+  cancel: "キャンセル"
   required: "必須"
   manage: "管理"
   confirm_delete: "本当に削除しますか?"

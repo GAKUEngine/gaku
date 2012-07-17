@@ -5,7 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
-  canscel: ""
+  cancel: ""
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
