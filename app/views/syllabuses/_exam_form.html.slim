@@ -2,12 +2,25 @@
   = f.fields_for :exams do |exam_form| 
     - if exam_form.object.new_record?
       .field
-        = exam_form.label :name
+        = exam_form.label t 'exams.name'
         br/
         = exam_form.text_field :name
       .field
-        = exam_form.label :weight
+        = exam_form.label t 'exams.description'
+        br/
+        = exam_form.text_area :description
+      .field
+        = exam_form.label t 'exams.adjustments'
+        br/
+        = exam_form.text_area :adjustments
+      .field
+        = exam_form.label t 'exams.weight'
         br/
         = exam_form.number_field :weight
+      .field
+        = exam_form.label t 'exams.dynamic_scoring'
+        br/
+        = exam_form.check_box :dynamic_scoring
+      
   #submit_syllabus_exam
     = f.submit t 'exams.add'

@@ -2,8 +2,16 @@
   = f.fields_for :assignments do |assignment_form| 
     - if assignment_form.object.new_record?
       .field
-        = assignment_form.label :name
+        = assignment_form.label t 'assignments.name'
         br/
         = assignment_form.text_field :name
+      .field
+        = assignment_form.label t 'assignments.description'
+        br/
+        = assignment_form.text_area :description
+      .field
+        = assignment_form.label t 'assignments.max_score'
+        br/
+        = assignment_form.number_field :max_score
 
   = f.submit t 'assignments.add'

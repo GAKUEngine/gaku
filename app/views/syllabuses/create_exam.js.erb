@@ -1,2 +1,6 @@
-  $('#syllabus-exams table tbody').append('<%= escape_javascript(render :partial => "exam", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam => @syllabus.exams.last}) %>');
+$('#syllabus_exam_form').slideToggle();
+$('#syllabus_exam_form form').each (function(){
+  this.reset();
+});
+$('#syllabus-exams table tbody').append('<%= escape_javascript(render :partial => "exam", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam => @syllabus.exams.last}) %>');
 

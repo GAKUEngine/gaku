@@ -1,6 +1,8 @@
 - unless assignment.nil? || assignment.new_record? || !assignment
   tr
     td= assignment.name
+    td= assignment.description
+    td= assignment.max_score
     td= link_to 'Show', [@syllabus, assignment]
     td= link_to 'Edit', edit_syllabus_assignment_path(@syllabus, assignment)
     td= link_to( 'Destroy', syllabus_assignment_path(@syllabus, assignment), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_assignment' )
