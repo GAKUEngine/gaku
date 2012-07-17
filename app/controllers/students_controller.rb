@@ -40,8 +40,22 @@ class StudentsController < ApplicationController
     destroy! :flash => !request.xhr?    
   end
 
+  def new_address
+    @student = Student.find(params[:id])
+    @student.addresses.build
+  end
+
+  def create_address
+    @student = Student.find(params[:id])
+    if  @student.update_attributes(params[:student])
+      respond_to do |format|
+        format.js {render 'create_address'}  
+      end
+    end  
+  end
+
   private
-  
+
     def load_class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]
@@ -51,6 +65,7 @@ class StudentsController < ApplicationController
       @new_profile = Profile.new
       @new_guardian = Guardian.new
       @new_note = Note.new
+      @new_course_enrollment = CourseEnrollment.new
       @notes = Note.all
     end
 

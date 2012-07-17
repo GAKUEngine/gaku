@@ -1,0 +1,22 @@
+-if @student.addresses.any?
+  #student_addresses
+    b= 'Address Count'
+    |:
+    =@student.addresses.count
+    p
+      b="Addresses List"
+    table
+      tbody
+        tr
+          th= 'address1'
+          th= 'address2'
+          th= 'city'
+          th= 'zipcode'
+          th= 'state'
+          th= 'country'
+          th= 
+          th=
+          th=
+        =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+#add_new_student_address
+=link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student btn', :remote => true

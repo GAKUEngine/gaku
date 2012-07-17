@@ -20,6 +20,7 @@ en:
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
+    country:
     prefecture: "State/Province/Prefecture"
     city: "City"
     address1:
@@ -44,6 +45,7 @@ en:
     birth: "Birth Date"
     admitted: "Admitted"
     graduated: "Graduated"
+    add_address: "Add Address"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -71,10 +73,13 @@ en:
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
+    add: "Add course"
+    choose_course: "Choose course"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
+    add: "Enroll to course"
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
@@ -92,19 +97,22 @@ en:
     total_points: "Total Score"
     rank: "Rank/Grade"
   assignments:
-    list: "Assignments"
     plural: "Assignments"
+    new: "New Assignment"
+    add: "Add Assignment"
+    list: "Assignments"
     results: "Assignment Results"
     view: "View Assignments"
+    count: "Assignments Count"
   exams:
     plural: "Exams"
     new: "New Exam"
+    add: "Add exam"
     list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
-    add: "Add exam"
     count: "Exams Count"
   config:
     label: "Config"
@@ -157,3 +165,6 @@ en:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
   select: "Select"
+  pictures:
+    change: "Change picture"
+    upload: "Upload"

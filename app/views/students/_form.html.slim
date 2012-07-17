@@ -11,29 +11,28 @@
   .row-fluid
     .span12.well
       .row-fluid
-        .span6.control-group
+        .span6
           = form.label :class_group_id, t("class"), :class => "control-label"
-          .controls
-            = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+          = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
       .row-fluid
-        .span3.control-group
+        .span3
           = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
           span.label.label-important.pull-right =t 'required'
           = form.text_field :surname, :class => "span12"
-        .span3.control-group
+        .span3
           = form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
           span.label.label-important.pull-right =t 'required'
           = form.text_field :name, :class => "span12"
-        .span3.control-group
+        .span3
           = form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
           = form.text_field :surname_reading, :class => "span12"
-        .span3.control-group
+        .span3
           = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
           = form.text_field :name_reading, :class => "span12"
       .row-fluid
         .span6
-          = form.label :gender, t("gender"), :class => "control-label pull-left"
-          = form.select :gender, {t("genders.male") => "male", t("genders.female") => "female"}
+          = form.label :gender, t("gender")
+          = form.select :gender, {t("genders.male") => "male", t("genders.female") => "female"}, {}, :class => "span12"
       .row-fluid
         .span6
           = form.label :admitted, t("admitted"), :class => "control-label"

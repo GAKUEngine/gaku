@@ -26,5 +26,4 @@
     hr
 #add_guardian_form_area
 .row-fluid
-  = link_to t("guardians.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary"
-  
+  = link_to t("guardians.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary", :style => "min-height:0px"

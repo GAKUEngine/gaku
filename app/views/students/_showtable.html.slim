@@ -1,4 +1,12 @@
 .row-fluid
+  .span3.well
+    .row-fluid
+      .span2.control-group
+        = image_tag @student.picture.url(:thumb)
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
+        div id="upload_picture" style="display:none;"
+          = render 'upload_picture'
+.row-fluid
   .span12.well
     .row-fluid
       .span6.control-group
@@ -36,15 +44,29 @@
           a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li
           a*{'data-toggle'=>"tab", 'href'=> "#notes"} = t('notes.notes')
+        li
+          a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t('courses.courses')
       .tab-content
-        #addresses.tab-pane
+        #addresses.tab-pane.active
           = render :partial => 'addresses'
         #guardians.tab-pane
           = render :partial => 'guardians'
         #notes.tab-pane
           = render :partial => 'notes'
+        #courses.tab-pane
+          = render :partial => 'courses'
 .row-fluid
   .span12.well
-    = link_to t('Edit'), edit_student_path(@student), :class => "span4 btn btn-primary"
-    = link_to t("Back"), students_path, :class => "span4 btn"
-    = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span4 btn"
+    .span4
+      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-primary", :style => "min-height:0px"
+    .span4
+      = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
+    .span4
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn", :style => "min-height:0px"
+
+javascript:
+  $('#upload_picture_link').click(function() {
+    $('#upload_picture').toggle('slow', function() {
+      // Animation complete.
+    });
+  });

@@ -23,6 +23,7 @@ ja:
     add: "住所を追加"
     zipcode: "郵便番号"
     search_address: "郵便番号で住所検索"
+    country: "国"
     prefecture: "都道府県"
     city: "市区"
     address1: "町村名と番地"
@@ -49,6 +50,7 @@ ja:
     admitted: "生徒入学日"
     graduated: "生徒卒業日"
     gender: "性別"
+    add_address: "Add Address"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -76,10 +78,12 @@ ja:
     code: "授業コード"
     code_sample: "[例: 秋2020]"
     save: ""
+    choose_course: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
+    add: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "Class Groups"
@@ -105,8 +109,10 @@ ja:
   assignments:
     list: "課題一覧"
     plural: "課題"
+    add: "Add Assignment"
     results: "課題の結果"
     view: "課題参照"
+    count: "Assignments Count"
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
@@ -173,3 +179,6 @@ ja:
     no_assignments: "No assignments, assign one first"
     no_exams: "No exams, assign one first"
   select: "Select"
+  pictures:
+    change: ""
+    upload: ""
