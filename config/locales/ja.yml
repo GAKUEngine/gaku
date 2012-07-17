@@ -189,3 +189,15 @@ ja:
   pictures:
     change: ""
     upload: ""
+  exam_portions:
+    list: "Exam portions list"
+    count: "Exam portions count"
+    name: "Portion name"
+    max_score: "Maximum score"
+    weight: "Weight"
+    problem_count: "Problem count"
+    description: "Description"
+    adjustments: "Adjustments"
+    execution_date: "Execution date"
+    dynamic_scoring: "Dynamic scoring"
+    is_master: "Master"
