@@ -10,10 +10,18 @@
       tr
         th Name
       - @syllabus.assignments.each do |assignment|
-        tr
-          td= assignment.name
+        - unless assignment.new_record?
+          tr
+            td= assignment.name
+            td= link_to 'Show', [@syllabus, assignment]
+            td= link_to 'Edit', edit_syllabus_assignment_path(@syllabus, assignment)
+            td= link_to( 'Destroy', syllabus_assignment_path(@syllabus, assignment), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_assignment' )
 - else 
   p= t('notice.no_assignments')
 
-#new_assignment
-= link_to t('assignments.new'), new_assignment_syllabus_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn', :remote => true } 
+javascript:
+  $(document).ready(function() {
+    $(".delete_assignment").live('ajax:success', function(evt, data, status, xhr){
+      $(this).closest('tr').fadeOut();
+    });
+  });

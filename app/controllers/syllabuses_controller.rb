@@ -19,17 +19,14 @@ class SyllabusesController < ApplicationController
     end  
   end
 
-  def new_assignment
-    @syllabus.assignments.build
-  end
-
   private
     def load_syllabus 
     	@syllabus = Syllabus.find(params[:id])
     end
 
     def load_before_show
-      @syllabus.exams.build   
+      @syllabus.exams.build  
+      @syllabus.assignments.build    
     end
 
 end

@@ -5,3 +5,8 @@ $ ->
 	$('#new_syllabus_exam').on 'click','a.btn', (event) ->
     event.preventDefault()
     $('#syllabus_exam_form').slideToggle()
+      
+$ ->
+	$('#new_assignment').on 'click','a.btn', (event) ->
+    event.preventDefault()
+    $('#syllabus_assignment_form').slideToggle()

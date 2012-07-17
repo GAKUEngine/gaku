@@ -1,4 +1,4 @@
-= form_for(@syllabus) do |f| 
+= form_for(@syllabus, :remote => true) do |f| 
   = f.fields_for :assignments do |assignment_form| 
     - if assignment_form.object.new_record?
       .field
@@ -6,4 +6,4 @@
         br/
         = assignment_form.text_field :name
 
-  = f.submit
+  = f.submit t 'assignments.add'

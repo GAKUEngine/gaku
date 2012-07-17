@@ -1,3 +1,4 @@
 $(document).ready(function(){
   $('#syllabus_exams').html('<%= escape_javascript(render :partial => "exams", :formats => [:html], :handlers => [:erb, :slim]) %>');
+  $('#syllabus_assigmnents').html('<%= escape_javascript(render :partial => "assignments", :formats => [:html], :handlers => [:erb, :slim]) %>');
 });

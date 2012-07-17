@@ -14,27 +14,19 @@
         th 
         th
       - @syllabus.exams.each do |exam|
-        tr
-          td= exam.name
-          td= exam.weight
-          /td= link_to 'Show', exam_path(exam)
-          /td= link_to 'Edit', edit_exam_path(exam)
-          /td= link_to( 'Destroy', exam_path(exam), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_exam' )
-          /td= link_to 'Destroy', exam_exam_portion_path(exam), confirm: 'Are you sure?', method: :delete
+        - unless exam.new_record?
+          tr
+            td= exam.name
+            td= exam.weight
+            td= link_to 'Show', exam
+            td= link_to 'Edit', edit_syllabus_exam_path(@syllabus, exam)
+            td= link_to( 'Destroy', syllabus_exam_path(@syllabus, exam), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_exam' )
 - else 
   p= t('notice.no_exams')
 
-#new_syllabus_exam
-  = link_to t('exams.new'), 'Javascrpt:void(0);', :class => "btn"
-div id='syllabus_exam_form' style='display:none;'
-  =render 'exam_form'
 javascript:
   $(document).ready(function() {
     $(".delete_exam").live('ajax:success', function(evt, data, status, xhr){
       $(this).closest('tr').fadeOut();
-    });
-
-    $('#target').submit(function() {
-      $('#syllabus-exams').
     });
   });
