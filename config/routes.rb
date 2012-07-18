@@ -9,7 +9,9 @@ GAKUEngine::Application.routes.draw do
 
   resources :courses
 
-  resources :course_enrollments
+  resources :course_enrollments do
+    post :enroll_student, :on => :collection
+  end
 
   resources :class_group_enrollments
 
@@ -31,6 +33,7 @@ GAKUEngine::Application.routes.draw do
     resources :courses
     resources :addresses
     get :new_address, :on => :member
+    put :create_address, :on => :collection  
   end
   
 

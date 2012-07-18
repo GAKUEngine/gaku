@@ -74,6 +74,7 @@ en:
     save: "Save course"
     add: "Add course"
     choose_course: "Choose course"
+    enroll_student: "Enroll Student"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:

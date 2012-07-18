@@ -21,3 +21,7 @@ class CourseActions
 
 @CourseAct = new CourseActions()
 
+$ ->
+  $('#add_student_enrollment_link').on 'click','a.make-button', (event)->
+    event.preventDefault()
+    $('#add_student_enrollment_form').slideToggle()

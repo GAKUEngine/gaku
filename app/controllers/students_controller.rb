@@ -45,6 +45,15 @@ class StudentsController < ApplicationController
     @student.addresses.build
   end
 
+  def create_address
+    @student = Student.find(params[:id])
+    if  @student.update_attributes(params[:student])
+      respond_to do |format|
+        format.js {render 'create_address'}  
+      end
+    end  
+  end
+
   private
 
     def load_class_groups
