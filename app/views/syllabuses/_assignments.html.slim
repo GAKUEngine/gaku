@@ -2,7 +2,8 @@
   #syllabus-assignments
     b= t('assignments.count')
     |:
-    = @syllabus.assignments.count
+    #assignments-count
+      = @syllabus.assignments.count
     p
       b= t('assignments.list')
 

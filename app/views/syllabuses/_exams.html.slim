@@ -2,7 +2,8 @@
   #syllabus-exams
     b= t('exams.count')
     |:
-    = @syllabus.exams.count
+    #exams-count
+      = @syllabus.exams.count
     p
       b= t('exams.list')
 
