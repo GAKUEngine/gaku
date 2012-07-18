@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716122024) do
+ActiveRecord::Schema.define(:version => 20120716165314) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -38,13 +38,21 @@ ActiveRecord::Schema.define(:version => 20120716122024) do
     t.integer "address_id"
   end
 
+  create_table "assignment_scores", :force => true do |t|
+    t.integer  "score"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "student_id"
+  end
+
   create_table "assignments", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "max_score"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "syllabus_id"
+    t.integer  "grading_method_id"
   end
 
   create_table "class_group_enrollments", :force => true do |t|
@@ -125,11 +133,12 @@ ActiveRecord::Schema.define(:version => 20120716122024) do
     t.text     "adjustments"
     t.datetime "execution_date"
     t.boolean  "dynamic_scoring"
-    t.boolean  "is_master",       :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "is_master",         :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "exam_id"
     t.integer  "schedule_id"
+    t.integer  "grading_method_id"
   end
 
   create_table "exam_scores", :force => true do |t|
@@ -170,6 +179,10 @@ ActiveRecord::Schema.define(:version => 20120716122024) do
   end
 
   create_table "guardians", :force => true do |t|
+    t.string  "name"
+    t.string  "surname"
+    t.string  "name_reading"
+    t.string  "surname_reading"
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
@@ -204,13 +217,6 @@ ActiveRecord::Schema.define(:version => 20120716122024) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "student_id"
-  end
-
-  create_table "profiles", :force => true do |t|
-    t.string   "email"
-    t.datetime "birth_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -249,13 +255,12 @@ ActiveRecord::Schema.define(:version => 20120716122024) do
     t.string   "gender"
     t.string   "phone"
     t.string   "email"
-    t.date     "birth"
+    t.date     "birth_date"
     t.date     "admitted"
     t.date     "graduated"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "user_id"
-    t.integer  "profile_id"
     t.integer  "faculty_id"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
