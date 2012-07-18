@@ -6,20 +6,33 @@ class Exam < ActiveRecord::Base
   has_and_belongs_to_many :syllabuses
   has_one :grading_method
 
+  has_one :master,
+      :class_name => 'ExamPortion',
+      :conditions => ["#{ExamPortion.quoted_table_name}.is_master = ?", true]
+
   attr_accessible :name, :description, :weight, :dynamic_scoring, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
 
   validates :name, :presence => true
 
-  after_create :build_default_exam_portion
+  after_create :set_master_defaults
+  after_save :save_master
+  after_initialize :ensure_master
 
+  def ensure_master
+    return unless new_record?
+    self.master ||= ExamPortion.new
+  end
 
   private
-    def build_default_exam_portion
-      exam_portion = ExamPortion.create(:name => self.name)
-      exam_portion.is_master = true
-      self.exam_portions << exam_portion
+
+    def set_master_defaults
+      master.is_master = true
+    end
+
+    def save_master
+      master.save if master && (master.changed? || master.new_record?)
     end
 
 end
