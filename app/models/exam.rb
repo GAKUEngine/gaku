@@ -15,6 +15,8 @@ class Exam < ActiveRecord::Base
   accepts_nested_attributes_for :exam_portions
 
   validates :name, :presence => true
+  validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
+
 
   after_create :set_master_defaults
   after_save :save_master

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Exam do
 
   context "validations" do 
-  	let(:exam) { stub_model(Exam) }
+  	let(:exam) { Factory(:exam) }
 
     it { should have_valid_factory(:exam) }
     it { should have_many(:exam_scores) }
@@ -16,6 +16,16 @@ describe Exam do
     it "errors when name is nil" do
       exam.name = nil
       exam.should_not be_valid
+    end
+
+    it "should validate weight is greater than 0" do
+      exam.weight = -1
+      exam.should be_invalid
+    end
+
+    it "should validate weight is 0" do
+      exam.weight = 0
+      exam.should be_valid
     end
   end
 
