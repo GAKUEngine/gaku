@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "state_name"
-    t.boolean  "past",       :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
+    t.boolean  "past",       :default => false
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -128,15 +128,14 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
     t.string   "name"
     t.float    "max_score"
     t.float    "weight"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "exam_id"
     t.integer  "problem_count"
     t.text     "description"
-    t.text     "adjustments"
     t.datetime "execution_date"
+    t.text     "adjustments"
     t.boolean  "dynamic_scoring"
-    t.boolean  "is_master",         :default => false
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.integer  "exam_id"
     t.integer  "schedule_id"
     t.integer  "grading_method_id"
   end
@@ -153,11 +152,14 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
   create_table "exams", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.text     "adjustments"
+    t.integer  "problem_count"
     t.float    "weight"
-    t.boolean  "dynamic_scoring"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.binary   "data"
+    t.datetime "execution_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "schedule_id"
+    t.text     "adjustments"
   end
 
   create_table "exams_syllabuses", :force => true do |t|
@@ -179,6 +181,10 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
   end
 
   create_table "guardians", :force => true do |t|
+    t.string  "name"
+    t.string  "surname"
+    t.string  "name_reading"
+    t.string  "surname_reading"
     t.string  "relationship"
     t.integer "profile_id"
     t.integer "user_id"
@@ -213,6 +219,13 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "student_id"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.string   "email"
+    t.datetime "birth_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -251,12 +264,13 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
     t.string   "gender"
     t.string   "phone"
     t.string   "email"
-    t.date     "birth_date"
+    t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "user_id"
+    t.integer  "profile_id"
     t.integer  "faculty_id"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
@@ -269,9 +283,9 @@ ActiveRecord::Schema.define(:version => 20120716165314) do
     t.string   "code"
     t.text     "description"
     t.integer  "credits"
-    t.integer  "hours"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "hours"
   end
 
   create_table "users", :force => true do |t|
