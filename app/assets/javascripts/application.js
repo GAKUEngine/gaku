@@ -11,6 +11,8 @@
 //= require kendo2012/kendo.web.min
 //= require bootstrap.min
 
+//= require tbs_datepicker/js/bootstrap-datepicker
+
 //= require buhin/buhin.js.coffee
 //= require libgakuengine.js.coffee
 

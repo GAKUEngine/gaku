@@ -30,18 +30,25 @@
           = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
           = form.text_field :name_reading, :class => "span12"
       .row-fluid
-        .span6
+        .span3
+          = form.label :birth, t("birth"), :class => "control-label"
+          = form.text_field :birth, :class => "span12 datepicker"
+        .span3
           = form.label :gender, t("gender")
           = form.select :gender, {t("genders.male") => "male", t("genders.female") => "female"}, {}, :class => "span12"
+        .span3
+          = form.label :phone, t("phone"), :class => "control-label pull-left"
+          = form.text_field :phone, :class => "span12"
+        .span3
+          = form.label :email, t("email"), :class => "control-label pull-left"
+          = form.text_field :email, :class => "span12"
       .row-fluid
         .span6
           = form.label :admitted, t("admitted"), :class => "control-label"
-          .controls
-            = form.text_field :admitted, :class => "span12"
-        /.span6
+          = form.text_field :admitted, :class => "span12 datepicker"
+        /.span5
           = form.label :graduated, t("graduated"), :class => "control-label"
-          .controls
-            = form.text_field :graduated, :class => "span12"
+          = form.text_field :graduated, :class => "span12"
 
   .row-fluid
     .span12.well
@@ -51,4 +58,6 @@
         = link_to t("Back"), students_path, :class => "btn span12", :style => "min-height:0px"
         
 coffee:
-  $(".datepicker").kendoDatePicker();
+  $('.datepicker').datepicker(
+    format:'yyyy/mm/dd'
+  )
