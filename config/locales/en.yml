@@ -5,7 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
-  canscel: ""
+  cancel: ""
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -20,6 +20,7 @@ en:
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
+    country:
     prefecture: "State/Province/Prefecture"
     city: "City"
     address1:
