@@ -29,12 +29,5 @@ describe Exam do
       exam.should be_valid
     end
   end
-
-  context "master exam portion" do
-    it "should always have a master exam portion" do
-      exam = Exam.new
-      exam.master.should_not be_nil
-    end
-  end
   
 end
