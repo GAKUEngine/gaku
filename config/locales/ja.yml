@@ -114,6 +114,9 @@ ja:
     results: "課題の結果"
     view: "課題参照"
     count: "Assignments Count"
+    name: ""
+    description: ""
+    max_score: ""
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
@@ -126,6 +129,11 @@ ja:
     add_portion: ''
     add: ""
     count: "Exams Count"
+    name: ""
+    description: ""
+    adjustments: ""
+    weight: ""
+    dynamic_scoring: ""
   execution_date: "実行日"
   config:
     label: "設定"
@@ -183,3 +191,15 @@ ja:
   pictures:
     change: ""
     upload: ""
+  exam_portions:
+    list: "Exam portions list"
+    count: "Exam portions count"
+    name: "Portion name"
+    max_score: "Maximum score"
+    weight: "Weight"
+    problem_count: "Problem count"
+    description: "Description"
+    adjustments: "Adjustments"
+    execution_date: "Execution date"
+    dynamic_scoring: "Dynamic scoring"
+    is_master: "Master"

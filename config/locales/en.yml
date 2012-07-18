@@ -105,6 +105,9 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
     count: "Assignments Count"
+    name: "Assignment name"
+    description: "Description"
+    max_score: "Maximum score"
   exams:
     plural: "Exams"
     new: "New Exam"
@@ -115,6 +118,11 @@ en:
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
     count: "Exams Count"
+    name: "Exam name"
+    description: "Description"
+    adjustments: "Adjustments"
+    weight: "Weight"
+    dynamic_scoring: "Dynamic scoring"
   config:
     label: "Config"
     close: "Close"
@@ -169,3 +177,15 @@ en:
   pictures:
     change: "Change picture"
     upload: "Upload"
+  exam_portions:
+    list: "Exam portions list"
+    count: "Exam portions count"
+    name: "Portion name"
+    max_score: "Maximum score"
+    weight: "Weight"
+    problem_count: "Problem count"
+    description: "Description"
+    adjustments: "Adjustments"
+    execution_date: "Execution date"
+    dynamic_scoring: "Dynamic scoring"
+    is_master: "Master"

@@ -6,6 +6,7 @@ class CourseEnrollmentsController < ApplicationController
   
   # creating course_enrollment form students/show
   def create
+  raise  request.to_json
     super do |format|
       format.js {render 'create'}
     end  

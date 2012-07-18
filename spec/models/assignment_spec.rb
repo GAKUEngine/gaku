@@ -5,18 +5,7 @@ describe Assignment do
   context "validations" do 
   	it { should have_valid_factory(:assignment) }
   	it { should belong_to(:syllabus) }
+  	it { should belong_to(:grading_method) }
   end
   
-end# == Schema Information
-#
-# Table name: assignments
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :text
-#  max_score   :integer
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  syllabus_id :integer
-#
-
+end

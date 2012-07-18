@@ -1,21 +1,33 @@
 p
-  b Name:
+  b
+    = t('exams.name')
+    |: 
   = @exam.name
 p
-  b Problem count:
-  = @exam.problem_count
-p
-  b Max score:
-  = @exam.max_score
-p
-  b Weight:
+  b
+    = t('exams.weight')
+    |: 
   = @exam.weight
 p
-  b Data:
-  = @exam.data
-= link_to 'Edit', edit_exam_path(@exam)
+  b
+    = t('exams.description')
+    |: 
+  = @exam.description
+p
+  b
+    = t('exams.adjustments')
+    |: 
+  = @exam.adjustments
+
+
+= link_to t(:Edit), edit_exam_path(@exam)
 br/
+
 =render 'exams/exam_portions'
+#add_exam_exam_portion
+  =link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam), :class => 'btn'
+div id='exam_exam_portions_form' style='display:none;'
+  =render 'exam_portion_form'
 
 
-#{link_to 'Back', exams_path}
+/= link_to t(:Back), exams_path

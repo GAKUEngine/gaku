@@ -2,7 +2,8 @@ class SyllabusesController < ApplicationController
 
   #before_filter :authenticate_user!
 
-  before_filter :load_syllabus, :only  => [:new_exam, :new_assignment]
+  before_filter :load_syllabus, :only  => [:new_exam, :new_assignment, :show]
+  before_filter :load_before_show, :only => :show
 
   inherit_resources
 
@@ -12,17 +13,38 @@ class SyllabusesController < ApplicationController
     destroy! :flash => !request.xhr?
   end
 
-  def new_exam
-  	@syllabus.exams.build
+  def update
+    super do |format|
+      format.js
+    end  
   end
 
-  def new_assignment
-    @syllabus.assignments.build
+  def create_exam
+    @syllabus = Syllabus.find(params[:id])
+    if  @syllabus.update_attributes(params[:syllabus])
+      respond_to do |format|
+        format.js {render 'create_exam'}  
+      end
+    end  
+  end
+
+  def create_assignment
+    @syllabus = Syllabus.find(params[:id])
+    if  @syllabus.update_attributes(params[:syllabus])
+      respond_to do |format|
+        format.js {render 'create_assignment'}  
+      end
+    end  
   end
 
   private
     def load_syllabus 
     	@syllabus = Syllabus.find(params[:id])
     end
-  
+
+    def load_before_show
+      @syllabus.exams.build 
+      @syllabus.assignments.build
+    end
+
 end
