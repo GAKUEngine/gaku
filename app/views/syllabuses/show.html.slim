@@ -21,26 +21,19 @@ p
     |: 
   = @syllabus.credits
 
+#syllabus_exams
+  = render 'exams'
+#new_syllabus_exam
+  = link_to t('exams.new'), new_exam_syllabus_path(@syllabus), :class => "btn", :remote => true
+div id='syllabus_exam_form' style='display:none;'
+  =render 'exam_form'
 
-- if @syllabus.assignments.any?
-  p
-    h3 Assignments  
-    table
-      tr
-        th Name
-        th Description
-        th Max Score
-      -@syllabus.assignments.each do |assignment|
-        tr
-          td=assignment.name
-          td=assignment.description
-          td=assignment.max_score
-- else
-  p
-    = t('notice.no_assignments')
-
-= render 'exams'
-= render 'assignments'
+#syllabus_assigmnents
+  = render 'assignments'
+#new_assignment
+  = link_to t('assignments.new'), new_syllabus_assignment_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
+div id='syllabus_assignment_form' style='display:none;'
+  =render 'assignment_form'
 br
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
 br

@@ -13,11 +13,13 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_group_enrollments
 
-  resources :syllabuses do 
+  resources :syllabuses do
     member do
-      get :new_exam
-      get :new_assignment
+      put :create_exam
+      put :create_assignment
     end
+    resources :exams
+    resources :assignments
   end
 
   resources :students do
@@ -35,6 +37,9 @@ GAKUEngine::Application.routes.draw do
   resources :notes
 
   resources :exams do 
+    member do
+      put :create_exam_portion  
+    end
     resources :exam_scores
     resources :exam_portions
   end

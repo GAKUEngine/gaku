@@ -1,17 +1,28 @@
-table
-  tr
-    th Name
-    th Max Score
-    th Weight
-    th
-    th
-    th
-  - @exam.exam_portions.each do |exam_portion|
-    tr
-      td= exam_portion.name
-      td= exam_portion.max_score
-      td= exam_portion.weight
-      td= link_to 'Show', exam_exam_portion_path(exam_portion)
-      td= link_to 'Edit', edit_exam_exam_portion_path(exam_portion)
-      td= link_to 'Destroy', exam_exam_portion_path(exam_portion), confirm: 'Are you sure?', method: :delete
-=link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam)
+- if @exam.exam_portions.any?
+  #exam-exam_portions
+    b= t('exam_portions.count')
+    |:
+    = @exam.exam_portions.count
+    p
+      b= t('exam_portions.list')
+    table
+      tbody
+        tr
+          th= t 'exam_portions.name'
+          th= t 'exam_portions.max_score'
+          th= t 'exam_portions.weight'
+          th= t 'exam_portions.problem_count'
+          th= t 'exam_portions.execution_date'
+          th= t 'exam_portions.dynamic_scoring'
+          th= t 'exam_portions.is_master'
+          th
+          th
+          th
+        = render :partial => 'exam_portion', :collection => @exam.exam_portions, :as => :exam_portion
+      
+javascript:
+  $(document).ready(function() {
+    $(".delete_exam_portion_link").live('ajax:success', function(evt, data, status, xhr){
+      $(this).closest('tr').fadeOut();
+    });
+  });

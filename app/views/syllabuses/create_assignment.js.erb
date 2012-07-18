@@ -1,0 +1,6 @@
+$('#syllabus_assignment_form').slideToggle();
+$('#syllabus_assignment_form form').each (function(){
+  this.reset();
+});
+$('#syllabus-assignments table tbody').append('<%= escape_javascript(render :partial => "assignment", :formats => [:html], :handlers => [:erb, :slim], :locals => {:assignment => @syllabus.assignments.last}) %>');
+

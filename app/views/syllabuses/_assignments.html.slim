@@ -7,13 +7,19 @@
       b= t('assignments.list')
 
     table
-      tr
-        th Name
-      - @syllabus.assignments.each do |assignment|
+      tbody
         tr
-          td= assignment.name
+          th= t'assignments.name'
+          th= t 'assignments.description'
+          th= t 'assignments.max_score'
+        = render :partial => 'assignment', :collection => @syllabus.assignments, :as => :assignment
+          
 - else 
   p= t('notice.no_assignments')
 
-#new_assignment
-= link_to t('assignments.new'), new_assignment_syllabus_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn', :remote => true } 
+javascript:
+  $(document).ready(function() {
+    $(".delete_assignment").live('ajax:success', function(evt, data, status, xhr){
+      $(this).closest('tr').fadeOut();
+    });
+  });
