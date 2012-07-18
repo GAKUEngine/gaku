@@ -58,7 +58,7 @@ ja:
   combined_code: "総合コード"
   syllabus: "授業計画"
   syllabuses:
-    plural: "Syllabuses"
+    plural: "授業計画表"
     show: ""
     new: "新規授業計画"
     edit: "授業計画の編集"
@@ -71,7 +71,7 @@ ja:
   course_management: "授業管理"
   course: "授業"
   courses:
-    plural: "Courses"
+    plural: "授業表"
     new: "新規授業"
     edit: "授業の編集"
     list: "授業一覧"
@@ -87,7 +87,7 @@ ja:
     add: ""
   class_group_management: "クラス管理"
   class_groups:
-    plural: "Class Groups"
+    plural: "クラスグループ"
     list: "クラス一覧"
     new: "新規クラス登録"
     name: "クラス名"
@@ -121,7 +121,7 @@ ja:
   exam_management: "試験管理"
   exams:
     plural: "試験"
-    new: "New Exam"
+    new: "新規試験"
     list: "試験一覧"
     name: "試験名"
     view: "試験参照"
@@ -129,7 +129,6 @@ ja:
     add_portion: ''
     add: ""
     count: "Exams Count"
-    name: ""
     description: ""
     adjustments: ""
     weight: ""
