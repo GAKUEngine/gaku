@@ -10,13 +10,6 @@ describe ExamPortion do
     it { should belong_to(:schedule) }
     it { should belong_to(:grading_method) }
 
-    it { should validate_presence_of(:name) }
-    
-    it "errors when name is nil" do
-      exam_portion.name = nil
-      exam_portion.should_not be_valid
-    end
-
     it "should validate max_score is greater than 0" do
       exam_portion.max_score = -1
       exam_portion.should be_invalid
