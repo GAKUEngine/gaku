@@ -4,7 +4,7 @@ class Exam < ActiveRecord::Base
   has_many :exam_portions
   has_many :exam_portion_scores, :through => :exam_portions
   has_and_belongs_to_many :syllabuses
-  has_one :grading_method
+  belongs_to :grading_method
 
   has_one :master,
       :class_name => 'ExamPortion',
