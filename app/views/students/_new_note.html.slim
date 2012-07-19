@@ -9,9 +9,9 @@
       = note_form.text_area :content, :class => "span12 edit_note", :size => "0x10"
   .row-fluid
     .span12
-      .span6 
+      .span8
         = note_form.submit nil, :id => "note_save_link", :class => "span12 btn btn-primary"
-      = link_to t("cancel"), "", :id => "note_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+      = link_to t("cancel"), "", :id => "note_cancel", :class => "span4 btn", :style => "min-height:0px"
 
 coffee:
   $("#note_cancel").click( ->
