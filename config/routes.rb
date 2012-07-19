@@ -27,9 +27,7 @@ GAKUEngine::Application.routes.draw do
   resources :students do
     resources :guardians
     resources :addresses
-    
     resources :notes
-    
     resources :contacts
     resources :exams
     resources :courses
