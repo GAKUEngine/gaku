@@ -2,7 +2,8 @@ ja:
   devise:
     email: Eメール
     password: パスワード
-    sign_in: ログインする
+    password_confirmation: パスワードの再確認
+    sign_in: ログイン画面へ移動する
     sign_up: ユーザ登録
     sign_out: ログアウト
     forgot_password: パスワードを忘れた
@@ -29,12 +30,13 @@ ja:
       send_instructions: パスワードのリセット方法を数分以内にメールでご連絡します。
       updated: パスワードを変更しました。
     registrations:
-      destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       signed_up: アカウント登録を受け付けました。確認のメールをお送りします。
       updated: アカウントを更新しました。
+      destroyed: アカウントを削除しました。またのご利用をお待ちしております。
+      sign_up: 新規ユーザ登録
     sessions:
       sign_in: ログイン
-      sign_up: アカウント登録
+      sign_up: 新規ユーザ登録
       remember_me: ログイン情報を記憶する
       signed_in: ログインしました。
       signed_out: ログアウトしました。
@@ -46,3 +48,4 @@ ja:
       already_confirmed: は既に登録済みです
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
+  

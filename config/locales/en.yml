@@ -38,6 +38,7 @@ en:
     new: "Register New Student"
     edit: "Edit"
     list: "Students List"
+    surname: "Surname"
     name: "Name"
     address: "Address"
     phone: "Phone #"

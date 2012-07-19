@@ -1,25 +1,27 @@
-.container
-  .row
-    .span4.offset4
-      .row-fluid
-        .span12
-          h3= t "devise.sessions.sign_in"
+div style="width:320px;margin:0 auto;"
+  .row-fluid
+    .span12
+      h3= t "devise.sessions.sign_in"
+  .row-fluid
+    .span12
       hr/
-      .row-fluid
-        .span12
-          .well
-            = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-              #password-credentials
-                .row-fluid
-                  = f.label :email, t("devise.email")
-                  = f.email_field :email, :class => 'title', :tabindex => 1
-                .row-fluid
-                  = f.label :password, t("devise.password")
-                  = f.password_field :password, :class => 'title', :tabindex => 2
-                - if devise_mapping.rememberable?
-                  .row-fluid
-                    .span12.form-inline
-                      = f.check_box :remember_me
-                      = f.label :remember_me, t("devise.sessions.remember_me"), :class => "help-inline"
-                p= f.submit t("devise.sessions.sign_in"), :id => 'sign_in', :class => 'button primary'
-            = render "devise/shared/links"
+  .row-fluid
+    .span12
+      .well
+        .row-fluid
+          = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+            .row-fluid
+              = f.label :email, t("devise.email")
+              = f.email_field :email, :class => 'span12'
+            .row-fluid
+              = f.label :password, t("devise.password")
+              = f.password_field :password, :class => 'span12'
+            .row-fluid
+              - if devise_mapping.rememberable?
+                .span12.form-inline
+                  = f.check_box :remember_me
+                  = f.label :remember_me, t("devise.sessions.remember_me"), :class => "help-inline"
+            .row-fluid style="margin-top:5px"
+              = f.submit t("devise.sessions.sign_in"), :id => 'sign_in', :class => 'span12 btn btn-primary'
+        .row-fluid style="margin-top:10px"
+          = render "devise/shared/links"
