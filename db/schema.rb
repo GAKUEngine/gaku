@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20120718045347) do
   create_table "exams", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "problem_count"
+    t.text     "adjustments"
     t.float    "weight"
     t.boolean  "dynamic_scoring"
     t.datetime "created_at",        :null => false
