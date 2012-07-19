@@ -29,7 +29,7 @@
   .span2.well
     .row-fluid
       .span12
-        = image_tag @student.picture.url(:small)
+        = image_tag @student.picture.url(:small), :id => "student_picture"
     .row-fluid
       = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
       div id="upload_picture" style="display:none;"
