@@ -21,7 +21,7 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture
 
-  has_attached_file :picture, :styles => { :thumb => "150x150>" }
+  has_attached_file :picture, :styles => {:thumb => "256x256>"}
 
   validates :name, :surname, :presence => true
 
