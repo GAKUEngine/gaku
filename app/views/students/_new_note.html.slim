@@ -1,4 +1,4 @@
-= form_for :note, :remote => true do |note_form|
+= form_for :note, :url => student_notes_path(@student), :remote => true do |note_form|
   .row-fluid.control-group
     .span12
       = note_form.label :title, t("notes.title"), :class => "control-label"
@@ -15,11 +15,6 @@
 
 coffee:
   $("#note_cancel").click( ->
-    $("#add_note_link").show()
-    $("#add_note_form_area").html("")
-  )
-  $("#note_save_link").live("ajax:success", (data, status, xhr)->
-    #add new record to list
     $("#add_note_link").show()
     $("#add_note_form_area").html("")
   )

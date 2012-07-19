@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(:version => 20120718045347) do
     t.integer  "hours"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "level"
   end
 
   create_table "users", :force => true do |t|

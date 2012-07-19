@@ -3,18 +3,14 @@
     h4 =t("notes.list")
 .row-fluid
   .span12
-    table.table.table-striped.table-bordered.table-condensed
+    table.table.table-striped.table-bordered.table-condensed.student-note-table
       thead
         tr
           th
           th =t("notes.title")
           th =t("notes.content")
       tbody
-        - @student.notes.each do |note|
-          tr
-            td =note.id
-            td =note.title
-            td =note.content
+        =render :partial => 'student_note', :collection => @student.notes, :as => :note 
 .row-fluid
   .span12
     hr
