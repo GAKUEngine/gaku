@@ -28,10 +28,10 @@
           = @student.name_reading
   .span2.well
     .row-fluid
-      .span12
-        = image_tag @student.picture.url(:small), :id => "student_picture"
-    .row-fluid
-      = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
+      .span12.pagination-centered
+        = image_tag @student.picture.url(:thumb), :id => "student_picture"
+    .row-fluid style="margin-top:10px"
+      = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
       div id="upload_picture" style="display:none;"
         = render 'upload_picture'
 .row-fluid
