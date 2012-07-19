@@ -5,7 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
-  cancel: ""
+  cancel: "Cancel"
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -191,3 +191,4 @@ en:
     execution_date: "Execution date"
     dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
+    master: "Master exam portion"

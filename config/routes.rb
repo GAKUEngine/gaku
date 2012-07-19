@@ -37,6 +37,8 @@ GAKUEngine::Application.routes.draw do
     resources :addresses
     get :new_address, :on => :member
     put :create_address, :on => :collection  
+    get :new_guardian, :on => :member
+    put :create_guardian, :on => :collection  
   end
   
 
