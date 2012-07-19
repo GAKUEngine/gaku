@@ -1,3 +1,5 @@
 = form_for @student, :url => student_path, :html => { :multipart => true } do |form|
-  = form.file_field :picture
-  = form.submit t('pictures.upload')
+  .row-fluid
+    = form.file_field :picture
+  .row-fluid
+    = form.submit t('pictures.upload'), :class => "btn"

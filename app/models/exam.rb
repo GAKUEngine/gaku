@@ -4,13 +4,15 @@ class Exam < ActiveRecord::Base
   has_many :exam_portions
   has_many :exam_portion_scores, :through => :exam_portions
   has_and_belongs_to_many :syllabuses
-  has_one :grading_method
+  belongs_to :grading_method
 
   attr_accessible :name, :description, :weight, :dynamic_scoring, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
 
   validates :name, :presence => true
+  validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
+
 
   after_create :build_default_exam_portion
 

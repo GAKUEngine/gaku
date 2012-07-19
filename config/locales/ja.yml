@@ -188,8 +188,8 @@ ja:
     no_exams: "No exams, assign one first"
   select: "Select"
   pictures:
-    change: ""
-    upload: ""
+    change: "写真を変更"
+    upload: "写真をアップロード"
   exam_portions:
     list: "Exam portions list"
     count: "Exam portions count"

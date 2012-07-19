@@ -5,8 +5,6 @@
   .modal-body
     form.form-horizontal
       fieldset
-      
-        
         .control-group
           label.control-label= t('language')
           .controls
@@ -16,11 +14,13 @@
               option value="en"
                 | English
             p.help-block= t 'config.help.language'
-            div id="current_lang" style="display:none"
-              = I18n.locale            
-            div id="link_langs" style="display:none"
-              = link_to "ja", :locale => "ja"
-              = link_to "en", :locale => "en"
+            
+            div style="display:none"
+              div id="current_lang"
+                = I18n.locale            
+              div id="link_langs"
+                = link_to "ja", :locale => "ja"
+                = link_to "en", :locale => "en"
   .modal-footer
     a.btn data-dismiss="modal" href="#" =t("config.close")
     a.btn.btn-primary id="btn_config_save" href="#" =t("config.save")
