@@ -15,6 +15,7 @@
             th =t("guardians.relationship")
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
-br
+hr
 #add_new_student_guardian
-=link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn new_student_guardian", :style => "min-height:0px"
+.row-fluid
+  =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
