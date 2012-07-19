@@ -31,8 +31,8 @@
           = form.text_field :name_reading, :class => "span12"
       .row-fluid
         .span3
-          = form.label :birth, t("birth"), :class => "control-label"
-          = form.text_field :birth, :class => "span12 datepicker"
+          = form.label :birth_date, t("birth"), :class => "control-label"
+          = form.text_field :birth_date, :class => "span12 datepicker"
         .span3
           = form.label :gender, t("gender")
           = form.select :gender, {t("genders.male") => "male", t("genders.female") => "female"}, {}, :class => "span12"
