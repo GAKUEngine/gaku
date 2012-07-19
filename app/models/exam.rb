@@ -19,7 +19,7 @@ class Exam < ActiveRecord::Base
 
   private
     def build_default_exam_portion
-      exam_portion = ExamPortion.create(:name => self.name)
+      exam_portion = ExamPortion.create(:name => self.name, :weight => self.weight, :max_score => 1, :problem_count => 1)
       exam_portion.is_master = true
       self.exam_portions << exam_portion
     end
