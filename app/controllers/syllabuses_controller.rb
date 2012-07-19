@@ -21,7 +21,8 @@ class SyllabusesController < ApplicationController
 
   def create_exam
     @syllabus = Syllabus.find(params[:id])
-    if  @syllabus.update_attributes(params[:syllabus])
+    exam = Exam.create(params[:syllabus][:exam])
+    if  @syllabus.exams << exam
       respond_to do |format|
         format.js {render 'create_exam'}  
       end
@@ -43,7 +44,8 @@ class SyllabusesController < ApplicationController
     end
 
     def load_before_show
-      @syllabus.exams.build 
+      @exam = Exam.new
+      @exam.exam_portions.build
       @syllabus.assignments.build
     end
 
