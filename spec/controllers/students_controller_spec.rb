@@ -3,12 +3,13 @@ require 'spec_helper'
 describe StudentsController do
 
   let(:student) { FactoryGirl.create(:student) }
+  let(:country) {Factory(:country)}
 
   before do
     login_admin
   end
 
-  describe "GET :index	" do
+  describe "GET :index  " do
     it "should be successful" do
       get :index
       response.should be_success
@@ -55,7 +56,7 @@ describe StudentsController do
                                                                                       "address2" => "Zapad2",
                                                                                       "zipcode" => "4230",
                                                                                       "state_name"=> "District of Columbia", 
-                                                                                      "country_id"=>"30"}}}
+                                                                                      "country_id"=>country.id}}}
       end.to change(Address, :count).by(1)
     end
   end
