@@ -28,11 +28,11 @@ p
 #syllabus_exam_form*{ 'style' => 'display:none;'}
   =render 'exam_form'
 
-#syllabus_assigmnents
+//#syllabus_assigmnents
   = render 'assignments'
-#new_assignment
+//#new_assignment
   = link_to t('assignments.new'), create_assignment_syllabus_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
-#syllabus_assignment_form*{ 'style' => 'display:none;'}
+//#syllabus_assignment_form*{ 'style' => 'display:none;'}
   =render 'assignment_form'
 br
 = link_to t(:Edit), edit_syllabus_path(@syllabus)
