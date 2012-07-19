@@ -1,41 +1,34 @@
-= form_for @student do |f|
+= form_for @student, :url => create_address_students_path(:id => @student), :remote => true do |f|
   =f.fields_for :addresses do |address_form| 
     - if address_form.object.new_record?
-      .row-fluid
-        .span4.control-group
-          = address_form.label :city, t("addresses.city"), :class => "control-label"
-          .controls
-            = address_form.text_field :city, :class => "span12"
-        .span4.control-group
-          = address_form.label :address1, t("addresses.address1"), :class => "control-label"
-          .controls
-            = address_form.text_field :address1, :class => "span12"
-        .span4.control-group
-          = address_form.label :address2, t("addresses.address2"), :class => "control-label"
-          .controls
-            = address_form.text_field :address2, :class => "span12"
-      .row-fluid
-        .span6.control-group
+      .row-fluid.control-group
+        .span6
+          = address_form.label :country, t("addresses.country"), :class => "control-label"
+          = address_form.select :country_id, Country.all.collect{|s| [s.name, s.id]}, {}, :class => "span12"
+        .span6
           = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
-          .controls
-            .row-fluid
-              .span6
-                = address_form.text_field :zipcode, :class => "span12"
-              .span6
-                button.span12.btn.btn-primary= t "addresses.search_address"
-        .span6.control-group
+          .row-fluid
+            .span6
+              = address_form.text_field :zipcode, :class => "span12"
+            .span6
+              button.span12.btn.btn-primary= t "addresses.search_address"
+      .row-fluid.control-group
+        .span3
           = address_form.label :state_name, t("addresses.prefecture"), :class => "control-label"
-          .controls
-            = address_form.select :state_name, State.all.collect{|s| [s.name, s.name]}
-      .row-fluid
-         .span6.control-group
-          = address_form.label :country, t("addresses.prefecture"), :class => "control-label"
-          .controls
-            = address_form.select :country_id, Country.all.collect{|s| [s.name, s.id]}
+          = address_form.select :state_name, State.all.collect{|s| [s.name, s.name]}, {}, :class => "span12"
+        .span3
+          = address_form.label :city, t("addresses.city"), :class => "control-label"
+          = address_form.text_field :city, :class => "span12"
+        .span3
+          = address_form.label :address1, t("addresses.address1"), :class => "control-label"
+          = address_form.text_field :address1, :class => "span12"
+        .span3
+          = address_form.label :address2, t("addresses.address2"), :class => "control-label"
+          = address_form.text_field :address2, :class => "span12"
       -if params[:action] == 'edit'
-        .row-fluid
-        .span12.control-group
-          =address_form.label :past, t('addresses.past')
-          =address_form.check_box :past
+        .row-fluid.control-group
+          .span12
+            =address_form.label :past, t('addresses.past')
+            =address_form.check_box :past
       .row-fluid
-      button.span12.btn.btn-primary= t "addresses.save"
+        button.span12.btn.btn-primary= t "addresses.save"

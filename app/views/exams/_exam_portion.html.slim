@@ -1,0 +1,12 @@
+- unless exam_portion.nil? || exam_portion.new_record? || !exam_portion
+  tr
+    th= exam_portion.name
+    th= exam_portion.max_score
+    th= exam_portion.weight
+    th= exam_portion.problem_count
+    th= exam_portion.execution_date
+    th= exam_portion.dynamic_scoring
+    th= exam_portion.is_master
+    td= link_to 'Show', exam_exam_portion_path(@exam, exam_portion)
+    td= link_to 'Edit', edit_exam_exam_portion_path(@exam, exam_portion)
+    td= link_to 'Destroy', exam_exam_portion_path(@exam, exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, method: :delete, :class => 'delete_exam_portion_link'

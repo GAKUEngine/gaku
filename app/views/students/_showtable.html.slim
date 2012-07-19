@@ -1,13 +1,5 @@
 .row-fluid
-  .span3.well
-    .row-fluid
-      .span2.control-group
-        = image_tag @student.picture.url(:thumb)
-        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "btn btn-primary"
-        div id="upload_picture" style="display:none;"
-          = render 'upload_picture'
-.row-fluid
-  .span12.well
+  .span10.well
     .row-fluid
       .span6.control-group
         = label_tag :class_group_id, t("class"), :class => "control-label"
@@ -34,6 +26,14 @@
           = label_tag :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
         .row-fluid
           = @student.name_reading
+  .span2.well
+    .row-fluid
+      .span12.pagination-centered
+        = image_tag @student.picture.url(:thumb), :id => "student_picture"
+    .row-fluid style="margin-top:10px"
+      = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
+      div id="upload_picture" style="display:none;"
+        = render 'upload_picture'
 .row-fluid
   .span12.well
     .tabbable.tabs-right
@@ -57,16 +57,14 @@
           = render :partial => 'courses'
 .row-fluid
   .span12.well
-    .span3{style="margin-bottom:0px"}
-      = button_to t('Edit'), edit_student_path(@student), :method => :get, :class => "btn btn-primary"
-    .span3
-      = button_to t("Back"), students_path, :action => "index", :method => :get, :class => "span12 btn"
-    .span3
-      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn"
+    .span4
+      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-primary", :style => "min-height:0px"
+    .span4
+      = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
+    .span4
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn", :style => "min-height:0px"
 
-javascript:
-  $('#upload_picture_link').click(function() {
-    $('#upload_picture').toggle('slow', function() {
-      // Animation complete.
-    });
-  });
+coffee:
+  $("#upload_picture_link").click ->
+    $("#upload_picture").toggle()
+  

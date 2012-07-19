@@ -5,6 +5,7 @@ class CreateSyllabuses < ActiveRecord::Migration
       t.string   :code
       t.text     :description
       t.integer  :credits
+      t.integer  :hours
 
       t.timestamps
     end

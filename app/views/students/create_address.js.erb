@@ -1,0 +1,1 @@
+$('#student_addresses table tbody').append('<%= escape_javascript(render :partial => "student_address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @student.addresses.last}) %>');

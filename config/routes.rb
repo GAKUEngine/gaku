@@ -9,33 +9,43 @@ GAKUEngine::Application.routes.draw do
 
   resources :courses
 
-  resources :course_enrollments
+  resources :course_enrollments do
+    post :enroll_student, :on => :collection
+  end
 
   resources :class_group_enrollments
 
-  resources :syllabuses do 
+  resources :syllabuses do
     member do
-      get :new_exam
-      get :new_assignment
+      put :create_exam
+      put :create_assignment
     end
+    resources :exams
+    resources :assignments
   end
 
   resources :students do
-  	resources :profiles 
     resources :guardians
     resources :addresses
+    
     resources :notes
+    
     resources :contacts
     resources :exams
     resources :courses
+    
     resources :addresses
     get :new_address, :on => :member
+    put :create_address, :on => :collection  
   end
   
 
   resources :notes
 
   resources :exams do 
+    member do
+      put :create_exam_portion  
+    end
     resources :exam_scores
     resources :exam_portions
   end
