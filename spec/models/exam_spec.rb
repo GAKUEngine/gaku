@@ -10,6 +10,7 @@ describe Exam do
     it { should have_many(:exam_portions) }
     it { should have_many(:exam_portion_scores) }
     it { should have_and_belong_to_many(:syllabuses) } 
+    it { should belong_to(:grading_method) }
 
     it { should validate_presence_of(:name) }
 
@@ -26,13 +27,6 @@ describe Exam do
     it "should validate weight is 0" do
       exam.weight = 0
       exam.should be_valid
-    end
-  end
-
-  context "master exam portion" do
-    it "should always have a master exam portion" do
-      exam = Exam.new
-      exam.master.should_not be_nil
     end
   end
   

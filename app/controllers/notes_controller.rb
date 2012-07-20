@@ -7,25 +7,26 @@ class NotesController < ApplicationController
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
   def new
-    @note = Note.new
-
+    @student = Student.find(params[:student_id])
+    @note = @student.notes.build
     respond_to do |format|
-      format.html {render :partial => "students/new_note"}
+      format.html {render :partial => "students/new_note", :locals => {:student => @student}}
       format.json {render :json => @note}
     end    
   end
   
   def create
-    @note = Noew.new(params[:note])
+    @student = Student.find(params[:student_id])
+    @note = @student.notes.build(params[:note])
 
-    if @note.update_attributes(params[:note])
-      status = 'success'
-      #html = render_to_string partial: 'show', locals: { note: @note }
+    if @note.save
+      respond_to do |format|
+        format.html{ redirect_to @student}
+        format.js{ render 'create'}
+      end
     else
-      status = 'error'
+      redirect_to :back
     end
-  
-    render json: { status: status, data: @memo, html: html }    
   end
   
   def destroy

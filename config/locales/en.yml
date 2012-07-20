@@ -5,7 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
-  cancel: ""
+  cancel: "Cancel"
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -38,6 +38,7 @@ en:
     new: "Register New Student"
     edit: "Edit"
     list: "Students List"
+    surname: "Surname"
     name: "Name"
     address: "Address"
     phone: "Phone #"
@@ -46,6 +47,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
+    picture:
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -189,3 +191,4 @@ en:
     execution_date: "Execution date"
     dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
+    master: "Master exam portion"
