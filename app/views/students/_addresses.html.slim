@@ -1,21 +1,22 @@
 #student_addresses
-  b= 'Address Count'
-  |:
-  =@student.addresses.count
-  p
-    b="Addresses List"
-  table
-    tbody
-      tr
-        th= 'address1'
-        th= 'address2'
-        th= 'city'
-        th= 'zipcode'
-        th= 'state'
-        th= 'country'
-        th= 
-        th=
-        th=
-      =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+  .row-fluid
+    .span12
+      h4 =t("addresses.list")
+  .row-fluid
+    .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th =t 'addresses.country'
+            th =t 'addresses.zipcode'
+            th =t 'addresses.state'
+            th =t 'addresses.city'
+            th =t 'addresses.address1'
+            th =t 'addresses.address2'
+            th width="94px" =t 'manage' 
+        tbody
+          =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+hr
 #add_new_student_address
-=link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student btn', :remote => true
+.row-fluid
+  =link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student span3 btn btn-primary', :style => "min-height:0px", :remote => true

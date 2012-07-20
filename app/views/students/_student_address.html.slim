@@ -1,11 +1,12 @@
 -unless address.nil? or address.new_record? or !address
 	tr
-	  td= address.address1
-	  td= address.address2
-	  td= address.city
-	  td= address.zipcode
-	  td= address.state_name
-	  td= address.country
-	  td= link_to "show", student_address_path(@student, address)
-	  td= link_to "edit", edit_student_address_path(@student, address)
-	  td= link_to "delete", student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?'
+	  td = address.country
+	  td = address.zipcode
+	  td = address.state_name
+	  td = address.city
+	  td = address.address1
+	  td = address.address2
+	  td
+	   = link_to ("<i class='icon-eye-open'></i>").html_safe, student_address_path(@student, address), :class => "btn btn-mini", :style => "margin-right:5px"
+	   = link_to ("<i class='icon-pencil'></i>").html_safe, edit_student_address_path(@student, address), :class => "btn btn-mini", :style => "margin-right:5px"
+	   = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?', :class => "btn btn-mini btn-danger"
