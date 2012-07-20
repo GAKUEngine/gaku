@@ -8,7 +8,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string   :gender
       t.string   :phone
       t.string   :email
-      t.date     :birth
+      t.date     :birth_date
       t.date     :admitted
       t.date     :graduated
 

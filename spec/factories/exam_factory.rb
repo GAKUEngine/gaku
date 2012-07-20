@@ -1,8 +1,7 @@
-FactoryGirl.define do
-  factory :exam do
-    name "Math exam"
-    problem_count 2
-    weight 4
-    data "data"
+Factory.define :exam do |f|
+  f.name "Math exam"
+  f.weight 4
+  f.after_build do |exam|
+    exam.exam_portions << Factory.build(:exam_portion, :exam => exam)
   end
 end

@@ -8,6 +8,8 @@ class Syllabus < ActiveRecord::Base
   accepts_nested_attributes_for :exams, :assignments
 end
 
+
+
 # == Schema Information
 #
 # Table name: syllabuses
@@ -17,6 +19,7 @@ end
 #  code        :string(255)
 #  description :text
 #  credits     :integer
+#  hours       :integer
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #

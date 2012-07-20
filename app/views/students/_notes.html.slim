@@ -3,21 +3,15 @@
     h4 =t("notes.list")
 .row-fluid
   .span12
-    table.table.table-striped.table-bordered.table-condensed
+    table.table.table-striped.table-bordered.table-condensed.student-note-table
       thead
         tr
           th
           th =t("notes.title")
           th =t("notes.content")
       tbody
-        - @student.notes.each do |note|
-          tr
-            td =note.id
-            td =note.title
-            td =note.content
-.row-fluid
-  .span12
-    hr
+        =render :partial => 'student_note', :collection => @student.notes, :as => :note 
+hr
 #add_note_form_area
 .row-fluid
   = link_to t("notes.add"), new_student_note_url(@student), :remote => true, :id => "add_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"

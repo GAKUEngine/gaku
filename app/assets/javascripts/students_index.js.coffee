@@ -49,7 +49,8 @@ class StudentGrid extends BuHin
           sortable: false
           groupable: false
         }]
-    
+
+    console.log(@titles)    
     @target.kendoGrid(gridArgs)
 
   refreshGrid: (query) ->

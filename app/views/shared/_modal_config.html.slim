@@ -8,12 +8,29 @@
         .control-group
           label.control-label= t('language')
           .controls
-            select.span3
-              option
+            select.span3 id="select_lang"
+              option value="ja"
                 | 日本語
-              option
+              option value="en"
                 | English
             p.help-block= t 'config.help.language'
+            
+            div style="display:none"
+              div id="current_lang"
+                = I18n.locale            
+              div id="link_langs"
+                = link_to "ja", :locale => "ja"
+                = link_to "en", :locale => "en"
   .modal-footer
     a.btn data-dismiss="modal" href="#" =t("config.close")
-    a.btn.btn-primary href="#" =t("config.save")
+    a.btn.btn-primary id="btn_config_save" href="#" =t("config.save")
+
+coffee:
+  $("#select_lang").val($("#current_lang").text())
+  $("#btn_config_save").click (e) ->
+    links = $("#link_langs").children()
+    switch $("#select_lang").attr("value")
+      when "ja"
+        location.href = $(links[0]).attr("href")
+      when "en"
+        location.href = $(links[1]).attr("href")

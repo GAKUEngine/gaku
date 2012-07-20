@@ -5,7 +5,7 @@ en:
   Edit: "Edit"
   Destroy: "Destroy"
   Back: "Back"
-  cancel: ""
+  cancel: "Cancel"
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -38,6 +38,7 @@ en:
     new: "Register New Student"
     edit: "Edit"
     list: "Students List"
+    surname: "Surname"
     name: "Name"
     address: "Address"
     phone: "Phone #"
@@ -46,6 +47,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
+    picture:
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -75,6 +77,7 @@ en:
     save: "Save course"
     add: "Add course"
     choose_course: "Choose course"
+    enroll_student: "Enroll Student"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
@@ -104,6 +107,9 @@ en:
     results: "Assignment Results"
     view: "View Assignments"
     count: "Assignments Count"
+    name: "Assignment name"
+    description: "Description"
+    max_score: "Maximum score"
   exams:
     plural: "Exams"
     new: "New Exam"
@@ -114,6 +120,11 @@ en:
     choose_schedule: "Choose Schedule"
     add_portion: 'Add Portion'
     count: "Exams Count"
+    name: "Exam name"
+    description: "Description"
+    adjustments: "Adjustments"
+    weight: "Weight"
+    dynamic_scoring: "Dynamic scoring"
   config:
     label: "Config"
     close: "Close"
@@ -168,3 +179,16 @@ en:
   pictures:
     change: "Change picture"
     upload: "Upload"
+  exam_portions:
+    list: "Exam portions list"
+    count: "Exam portions count"
+    name: "Portion name"
+    max_score: "Maximum score"
+    weight: "Weight"
+    problem_count: "Problem count"
+    description: "Description"
+    adjustments: "Adjustments"
+    execution_date: "Execution date"
+    dynamic_scoring: "Dynamic scoring"
+    is_master: "Master"
+    master: "Master exam portion"

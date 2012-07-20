@@ -54,6 +54,20 @@ class StudentsController < ApplicationController
     end  
   end
 
+  def new_guardian
+    @student = Student.find(params[:id])
+    @student.guardians.build
+  end
+
+  def create_guardian
+    @student = Student.find(params[:id])
+    if  @student.update_attributes(params[:student])
+      respond_to do |format|
+        format.js {render 'create_guardian'}  
+      end
+    end  
+  end
+
   private
 
     def load_class_groups
@@ -62,7 +76,6 @@ class StudentsController < ApplicationController
     end
 
     def load_before_show
-      @new_profile = Profile.new
       @new_guardian = Guardian.new
       @new_note = Note.new
       @new_course_enrollment = CourseEnrollment.new

@@ -12,25 +12,46 @@
     br/
     = f.text_field :name
   .field
-    = f.label :problem_count
-    br/
-    = f.number_field :problem_count
-  .field
     = f.label :weight
     br/
     = f.text_field :weight
-  .field
-    = f.label :data
-    br/
-    = f.text_field :data
-  .field
-    = f.label :schedule
-    br/
-    = f.select :schedule_id, Schedule.all.collect { |s| ["#{s.starting} - #{s.ending}", s.id] },:prompt => t('exam.choose_shedule') 
   .field 
     = f.label :description
     br/
     = f.text_area :description
+
+  p = t 'exam_portions.master'
+  = f.fields_for :exam_portions do |ep_form| 
+    - if ep_form.object.new_record?
+      .field
+        = ep_form.label t 'exam_portions.weight'
+        br/
+        = ep_form.number_field :weight
+      .field 
+        = ep_form.label t 'exam_portions.problem_count'
+        br/
+        = ep_form.number_field :problem_count
+      .field 
+        = ep_form.label t 'exam_portions.max_score'
+        br/
+        = ep_form.number_field :max_score
+      .field
+        = ep_form.label t 'exam_portions.description'
+        br/
+        = ep_form.text_area :description
+      .field
+        = ep_form.label t 'exam_portions.adjustments'
+        br/
+        = ep_form.text_area :adjustments
+      .field
+        = ep_form.label t 'exam_portions.execution_date'
+        br/
+        = ep_form.datetime_select :execution_date
+      .field
+        = ep_form.label t 'exam_portions.dynamic_scoring'
+        br/
+        = ep_form.check_box :dynamic_scoring
+
 
   .actions
     = f.submit

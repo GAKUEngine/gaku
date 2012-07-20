@@ -1,6 +1,5 @@
 class Schedule < ActiveRecord::Base
-  has_many :exams
-  
+  has_many :exam_portions
   attr_accessible :starting, :ending, :repeat 
 end
 # == Schema Information

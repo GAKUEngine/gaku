@@ -46,4 +46,29 @@ describe SyllabusesController do
       controller.should set_the_flash
     end
   end
+
+  describe 'PUT create_exam ' do
+    it "should create new exam with ajax" do
+      expect do  
+        xhr :put, :create_exam, :id => syllabus.id, :syllabus => {:exams_attributes => {0 => { "name" => "Test exam",
+                                                                                              "description" =>"Test exam description",
+                                                                                              "adjustments" => "Test exam adjustments",
+                                                                                              "weight" => 2,
+                                                                                              "dynamic_scoring"=> true,
+                                                                                              :exam_portions_attributes => {0 => {"weight" => 1,
+                                                                                                                                  "problem_count" => 1,
+                                                                                                                                  "max_score" => 1}}}}}
+      end.to change(Exam, :count).by(1)
+    end
+  end
+
+  describe 'PUT create_assignment ' do
+    it "should create new assignment with ajax" do
+      expect do  
+        xhr :put, :create_assignment, :id => syllabus.id, :syllabus => {:assignments_attributes => {0 => {"name" => "Test assignment",
+                                                                                                          "description" =>"Test assignment description",
+                                                                                                          "max_score" => 2}}}
+      end.to change(Assignment, :count).by(1)
+    end
+  end
 end
