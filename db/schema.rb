@@ -119,8 +119,6 @@ ActiveRecord::Schema.define(:version => 20120718045347) do
 
   create_table "exam_portion_scores", :force => true do |t|
     t.float    "score"
-    t.integer  "division"
-    t.text     "comment"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "exam_portion_id"
@@ -222,6 +220,13 @@ ActiveRecord::Schema.define(:version => 20120718045347) do
     t.integer  "student_id"
   end
 
+  create_table "profiles", :force => true do |t|
+    t.string   "email"
+    t.datetime "birth_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string  "name"
     t.integer "class_group_enrollment_id"
@@ -258,12 +263,13 @@ ActiveRecord::Schema.define(:version => 20120718045347) do
     t.string   "gender"
     t.string   "phone"
     t.string   "email"
-    t.date     "birth_date"
+    t.date     "birth"
     t.date     "admitted"
     t.date     "graduated"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "user_id"
+    t.integer  "profile_id"
     t.integer  "faculty_id"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
