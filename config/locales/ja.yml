@@ -19,6 +19,7 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   addresses:
+    save: "住所を保存"
     addresses: "住所"
     add: "住所を追加"
     zipcode: "郵便番号"
