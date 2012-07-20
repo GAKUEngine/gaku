@@ -3,26 +3,26 @@
     table.table.table-striped
       tbody
         tr
-          th width="15%" =t("class")
+          th width="20%" =t("class")
           td =@student.class_groups.name
         tr
           th =t("name")
-          td =@student.surname+" "+@student.name+" （"+@student.surname_reading+" "+@student.name_reading+"）"
+          td =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
           td =t("genders."+@student.gender)
         tr
           th =t("students.birth")
-          td 
-        tr
-          th =t("students.address")
-          td 
+          td =@student.birth_date
         tr
           th =t("students.phone")
-          td 
+          td =@student.phone
         tr
           th =t("students.email")
-          td 
+          td =@student.email
+        tr
+          th =t("students.admitted")
+          td =@student.admitted
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
@@ -38,7 +38,7 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a*{'data-toggle' =>"tab", 'href' => "#addresses"} = t('addresses.addresses')
+          a*{'data-toggle' =>"tab", 'href' => "#addresses"} = t('addresses.addresses')+"（ "+@student.addresses.count.to_s+" ）"
         li
           a*{'data-toggle' =>"tab", 'href' => "#guardians"} = t('guardians.guardians')
         li

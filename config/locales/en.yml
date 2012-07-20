@@ -22,11 +22,12 @@ en:
     zipcode: "ZIP Code"
     search_address:
     country:
-    prefecture: "State/Province/Prefecture"
+    state: "State/Province/Prefecture"
     city: "City"
     address1:
     address2:
     past: "Make past?"
+    list: "Addresses List"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"

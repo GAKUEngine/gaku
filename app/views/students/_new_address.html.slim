@@ -14,7 +14,7 @@
               button.span12.btn.btn-primary= t "addresses.search_address"
       .row-fluid.control-group
         .span3
-          = address_form.label :state_name, t("addresses.prefecture"), :class => "control-label"
+          = address_form.label :state_name, t("addresses.state"), :class => "control-label"
           = address_form.select :state_name, State.all.collect{|s| [s.name, s.name]}, {}, :class => "span12"
         .span3
           = address_form.label :city, t("addresses.city"), :class => "control-label"
