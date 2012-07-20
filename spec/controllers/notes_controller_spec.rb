@@ -15,10 +15,10 @@ describe NotesController do
 
   describe "POST :create" do
     it "should create new note with ajax" do
+      @student = Factory(:student)  
       expect do
-        post :create, :student_id => student.id, :note => {:title => "title NOTE", :content => "Content NOTE"}
-      # change count "2" because Factory(:student) have after_create method for new note 
-      end.to change(Note, :count).by(2)
+        post :create, :student_id => @student.id, :note => {:title => "title NOTE", :content => "Content NOTE"}
+      end.to change(Note, :count).by(1)
     end
   end
 end
