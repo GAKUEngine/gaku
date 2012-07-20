@@ -47,6 +47,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
+    picture:
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
