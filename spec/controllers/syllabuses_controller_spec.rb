@@ -50,14 +50,14 @@ describe SyllabusesController do
   describe 'PUT create_exam ' do
     it "should create new exam with ajax" do
       expect do  
-        xhr :put, :create_exam, :id => syllabus.id, :syllabus => {:exams_attributes => {0 => { "name" => "Test exam",
+        xhr :put, :create_exam, :id => syllabus.id, :syllabus => {:exam =>  { "name" => "Test exam",
                                                                                               "description" =>"Test exam description",
                                                                                               "adjustments" => "Test exam adjustments",
                                                                                               "weight" => 2,
                                                                                               "dynamic_scoring"=> true,
                                                                                               :exam_portions_attributes => {0 => {"weight" => 1,
                                                                                                                                   "problem_count" => 1,
-                                                                                                                                  "max_score" => 1}}}}}
+                                                                                                                                  "max_score" => 1}}}}
       end.to change(Exam, :count).by(1)
     end
   end
