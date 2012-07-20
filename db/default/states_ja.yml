@@ -1,0 +1,79 @@
+---
+###########
+# Japan
+###########
+states_39201:
+  name: 北海道
+  name_ascii: Hokkaido
+  country_numcode: "392"
+  abbr: HK
+states_39202:
+  name: 青森県
+  name_ascii: Aomori
+  country_numcode: "392"
+states_39203:
+  name: 岩手県
+  name_ascii: Iwate
+  country_id: "100"
+states_39204:
+  name: 宮城県
+  name_ascii: Miyagi
+  country_numcode: "392"
+states_39205:
+  name: 秋田県
+  name_ascii: Akita
+  country_numcode: "392"
+states_39206:
+  name: 山形県
+  name_ascii: Yamagata
+  country_numcode: "392"
+states_39207:
+  name: 福島県
+  name_ascii: Fukushima
+  country_numcode: "392"
+states_39208:
+  name: 茨城県
+  name_ascii: Ibaraki
+  country_numcode: "392"
+states_39209:
+  name: 栃木県
+  name_ascii: Tochigi
+states_39210:
+  name: 群馬県 gunma
+states_39211 埼玉県 saitama
+states_39212 千葉県 chiba
+states_39213 東京都 tokyo
+states_39214 神奈川県 kanagawa
+states_39215 新潟県 niigata
+states_39216 富山県 toyama
+states_39217 石川県 ishikawa
+states_39218 福井県 fukui
+states_39219 山梨県 yamanashi
+states_39220 長野県 nagano
+states_39221 岐阜県 gifu
+states_39222 静岡県 shizuoka
+states_39223 愛知県 aichi
+states_39224 三重県 mie
+states_39225 滋賀県 shiga
+states_39226 京都府 kyoto
+states_39227 大阪府 osaka
+states_39228 兵庫県 hyogo
+states_39229 奈良県 nara
+states_39230 和歌山県 wakayama
+states_39231 鳥取県 tottori
+states_39232 島根県 shimane
+states_39233 岡山県 okayama
+states_39234 広島県 hiroshima
+states_39235 山口県 yamaguchi
+states_39236 徳島県 tokushima
+states_39237 香川県 kagawa
+states_39238 愛媛県 ehime
+states_39239 高知県 kochi
+states_39240 福岡県 fukuoka
+states_39241 佐賀県 saga
+states_39242 長崎県 nagasaki
+states_39243 熊本県 kumamoto
+states_39244 大分県 oita
+states_39245 宮崎県 miyazaki
+states_39246 鹿児島県 kagoshima
+states_39247 沖縄県 okinawa
