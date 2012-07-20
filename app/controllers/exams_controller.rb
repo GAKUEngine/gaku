@@ -17,7 +17,11 @@ class ExamsController < ApplicationController
     end    
   end
 
-
+  def new
+    @exam = Exam.new
+    @master_portion = @exam.exam_portions.new  
+  end
+  
   def destroy
     #destroy! :flash => !request.xhr?
     @exam = Exam.find(params[:id])
