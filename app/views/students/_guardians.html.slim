@@ -3,24 +3,24 @@
     h4 =t("guardians.list")
 .row-fluid
   .span12
-    table.table.table-striped.table-bordered.table-condensed
-      thead
-        tr
-          th
-          th =t("name")+" ("+t("surname")+")"
-          th =t("name")+" ("+t("given_name")+")"
-          th =t("phonetic_reading") + " ("+t("surname")+")"
-          th =t("phonetic_reading") + " ("+t("name")+")"
-          th =t("guardians.relationship")
-      tbody
-        - @student.guardians.each do |guardian|
+    - @student.guardians.each do |guardian|
+      .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
           tr
-            td =guardian.id
-            td =guardian.surname
-            td =guardian.name
-            td =guardian.surname_reading
-            td =guardian.name_reading
-            td =guardian.relationship
+            th
+            th =t("name")+" ("+t("surname")+")"
+            th =t("name")+" ("+t("given_name")+")"
+            th =t("phonetic_reading") + " ("+t("surname")+")"
+            th =t("phonetic_reading") + " ("+t("name")+")"
+            th =t("guardians.relationship")
+        tbody
+          td =guardian.id
+          td =guardian.surname
+          td =guardian.name
+          td =guardian.surname_reading
+          td =guardian.name_reading
+          td =guardian.relationship
 .row-fluid
   .span12
     hr
