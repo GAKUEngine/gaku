@@ -1,4 +1,12 @@
 ja:
+  activerecord:
+    models:
+      student: 生徒
+    attributes:
+      student:
+        surname: 氏名（性）
+        name:  氏名（名）
+  
   users:
     info: "ユーザー情報"
   hello: "ハローワールド"
