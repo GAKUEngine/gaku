@@ -57,6 +57,6 @@ module GAKUEngine
     config.assets.version = '1.0'
     
     # Fix validates error 
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| ("<span class=\"fieldWithErrors\">#{html_tag}</span>").html_safe }
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| ("<span class='fieldWithErrors control-group error'>#{html_tag}</span>").html_safe }
   end
 end
