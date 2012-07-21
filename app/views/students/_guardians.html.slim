@@ -1,29 +1,21 @@
-.row-fluid
-  .span12
-    h4 =t("guardians.list")
-.row-fluid
-  .span12
-    table.table.table-striped.table-bordered.table-condensed
-      thead
-        tr
-          th
-          th =t("name")+" ("+t("surname")+")"
-          th =t("name")+" ("+t("given_name")+")"
-          th =t("phonetic_reading") + " ("+t("surname")+")"
-          th =t("phonetic_reading") + " ("+t("name")+")"
-          th =t("guardians.relationship")
-      tbody
-        - @student.guardians.each do |guardian|
+#student_addresses
+  .row-fluid
+    .span12
+      h4 =t("guardians.list")
+  .row-fluid
+    .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
           tr
-            td =guardian.id
-            td =guardian.surname
-            td =guardian.name
-            td =guardian.surname_reading
-            td =guardian.name_reading
-            td =guardian.relationship
+            th
+            th =t("name")+" ("+t("surname")+")"
+            th =t("name")+" ("+t("given_name")+")"
+            th =t("phonetic_reading") + " ("+t("surname")+")"
+            th =t("phonetic_reading") + " ("+t("name")+")"
+            th =t("guardians.relationship")
+        tbody
+          =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
+hr
+#add_new_student_guardian
 .row-fluid
-  .span12
-    hr
-#add_guardian_form_area
-.row-fluid
-  = link_to t("guardians.add"), new_student_guardian_url(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
+  =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
