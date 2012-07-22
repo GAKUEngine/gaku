@@ -5,7 +5,7 @@ class Address < ActiveRecord::Base
   has_and_belongs_to_many :students
 
   validates :address1, :city, :country, :presence => true
-  validate :state_validate
+  #validate :state_validate
 
   attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
 
