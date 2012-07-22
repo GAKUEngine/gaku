@@ -7,7 +7,7 @@
           td =@student.class_groups.name
         tr
           th =t("name")
-          td =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
+          td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
           td =t("genders."+@student.gender)
