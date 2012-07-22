@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120722141044) do
+ActiveRecord::Schema.define(:version => 20120722132247) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(:version => 20120722141044) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "state_name"
-    t.boolean  "past",            :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.integer  "country_numcode"
+    t.boolean  "past",       :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
   end
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20120722141044) do
   create_table "contacts", :force => true do |t|
     t.string   "data"
     t.text     "details"
+    t.boolean  "is_primary"
+    t.boolean  "is_emergency"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "contact_type_id"

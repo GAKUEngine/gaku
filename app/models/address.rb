@@ -1,5 +1,4 @@
-class Address < ActiveRecord::Base
-  
+class Address < ActiveRecord::Base 
   belongs_to :country
   belongs_to :state
   has_and_belongs_to_many :students
@@ -7,7 +6,7 @@ class Address < ActiveRecord::Base
   validates :address1, :city, :country, :presence => true
   #validate :state_validate
 
-  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_numcode, :state_id, :student_id
+  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
 
   def self.default
     country = Country.find(Config[:default_country_numcode]) rescue Country.first
