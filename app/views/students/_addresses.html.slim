@@ -4,18 +4,7 @@
       h4 =t("addresses.list")
   .row-fluid
     .span12
-      table.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th =t 'addresses.country'
-            th =t 'addresses.zipcode'
-            th =t 'addresses.state'
-            th =t 'addresses.city'
-            th =t 'addresses.address1'
-            th =t 'addresses.address2'
-            th width="94px" =t 'manage' 
-        tbody
-          =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+      =render :partial => 'addresses/addresses_table', :locals => { :addresses => @student.addresses, :base => url_for(@student) + "/addresses/" }
 hr
 #add_new_student_address
 .row-fluid
