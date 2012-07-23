@@ -7,7 +7,7 @@
       = f.select :course_id, Course.all.collect { |s| ["#{s.code}", s.id] }, {:prompt => t('course.choose_course')}
   .row-fluid style="margin-top:10px"
     .span8
-		  =f.submit t('add_course'), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+		  =f.submit t('course_enrollments.create'), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
     =link_to t("cancel"), "", :remote => true, :id => "course_enrollment_cancel", :class => "span4 btn btn-danger", :style => "min-height:0px"
 
 coffee:

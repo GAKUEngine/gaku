@@ -28,7 +28,10 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
-    past: "履歴を作成しますか?"    
+    state: ""
+    past: "履歴を作成しますか?"
+    count: ""
+    list: ""
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -81,11 +84,13 @@ ja:
     save: ""
     choose_course: ""
     enroll_student: "Enroll Student"
+    count: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
     add: ""
+    create: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "クラスグループ"
@@ -175,6 +180,7 @@ ja:
     content: "本文"
     add: "備考を追加"
     delete: "備考を削除"
+    save: ""
   class: "クラス"
   semesters:
     list: ""

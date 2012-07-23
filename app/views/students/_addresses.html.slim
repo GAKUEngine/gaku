@@ -1,25 +1,25 @@
 #student_addresses
   .row-fluid
     .span12
-      b= 'Address Count'
+      b= t 'addresses.count'
       |:
       .addresses_count
         =@student.addresses.count
   .row-fluid
     .span12
-      h4= 'Addresses List'
+      h4= t 'addresses.list'
   .row-fluid
     .span12
       table.table.table-striped.table-bordered.table-condensed
         thead
           tr
-            th= 'address1'
-            th= 'address2'
-            th= 'city'
-            th= 'zipcode'
-            th= 'state'
-            th= 'country'
-            th= 'options'
+            th= t 'addresses.address1'
+            th= t 'addresses.address2'
+            th= t 'addresses.city'
+            th= t 'addresses.zipcode'
+            th= t 'addresses.state'
+            th= t 'addresses.country'
+            th= t 'options'
             
         tbody
           =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'

@@ -10,7 +10,7 @@
   .row-fluid
     .span12
       .span6 
-        = note_form.submit nil, :id => "note_save_link", :class => "span12 btn btn-primary"
+        = note_form.submit t("notes.save"), :id => "note_save_link", :class => "span12 btn btn-primary"
       = link_to t("cancel"), "", :id => "note_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
 
 coffee:
