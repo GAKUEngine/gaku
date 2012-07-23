@@ -105,13 +105,21 @@ span.required {
   font-weight: bold;
   font-size: 1.2em;
 }
+
 .fieldWithErrors {
+  margin: 0px;
   display: block;
   clear: both;
 }
+
 form {
   margin: 0px;
 }
+
+.alert ul {
+  margin-bottom:0px;
+}
+
 .nav {
   margin-bottom: 0px;
 }

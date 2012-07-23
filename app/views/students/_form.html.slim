@@ -2,7 +2,7 @@
   - if @student.errors.any?
     .alert.alert-error
       #error_explanation
-        h2
+        strong
           = pluralize(@student.errors.count, "error")
           | prohibited this student from being saved:
         ul

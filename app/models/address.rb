@@ -1,16 +1,15 @@
-class Address < ActiveRecord::Base
-  
+class Address < ActiveRecord::Base 
   belongs_to :country
   belongs_to :state
   has_and_belongs_to_many :students
 
   validates :address1, :city, :country, :presence => true
-  validate :state_validate
+  #validate :state_validate
 
   attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
 
   def self.default
-    country = Country.find(Config[:default_country_id]) rescue Country.first
+    country = Country.find(Config[:default_country_numcode]) rescue Country.first
     new({:country => country}, :without_protection => true)
   end
 
@@ -39,7 +38,7 @@ class Address < ActiveRecord::Base
   end
 
   def empty?
-    attributes.except('id', 'created_at', 'updated_at', 'country_id').all? { |_, v| v.nil? }
+    attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
   end
 
 

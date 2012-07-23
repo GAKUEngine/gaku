@@ -1,22 +1,10 @@
 #student_addresses
-  b= 'Address Count'
-  |:
-  =@student.addresses.count
-  p
-    b="Addresses List"
-  table
-    tbody
-      tr
-        th= 'address1'
-        th= 'address2'
-        th= 'city'
-        th= 'zipcode'
-        th= 'state'
-        th= 'country'
-        th= 
-        th=
-        th=
-      =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+  .row-fluid
+    .span12
+      h4 =t("addresses.list")
+  .row-fluid
+    .span12
+      =render :partial => 'addresses/addresses_table', :locals => { :addresses => @student.addresses, :base => url_for(@student) + "/addresses/" }
 hr
 #add_new_student_address
 .row-fluid

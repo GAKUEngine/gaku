@@ -22,7 +22,7 @@ class NotesController < ApplicationController
     if @note.save
       respond_to do |format|
         format.html{ redirect_to @student}
-        format.js{ render 'create'}
+        format.js{render 'create'}
       end
     else
       redirect_to :back
