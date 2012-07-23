@@ -3,7 +3,7 @@ class StatesController < ApplicationController
 
 	def index
 		if params[:country_code]
-			@states = State.where(:country_id => params[:country_code])
+			@states = State.where(:country_numcode => params[:country_numcode])
 			respond_with @states
 		else
 			@states = State.all
