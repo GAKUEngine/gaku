@@ -30,7 +30,12 @@ class NotesController < ApplicationController
   end
   
   def destroy
-    destroy! :flash => !request.xhr?
+    #destroy! :flash => !request.xhr?
+    @note = Note.find(params[:id])
+    @note.destroy
+    respond_to do |format|
+      format.js { render :nothing => true }
+    end
   end
   
 end
