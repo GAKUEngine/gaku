@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render :json => @students}
+      format.csv {render :csv => @students}
     end
   end
 
