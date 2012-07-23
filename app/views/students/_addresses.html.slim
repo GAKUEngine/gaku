@@ -1,25 +1,25 @@
 #student_addresses
   .row-fluid
     .span12
-      b= 'Address Count'
+      b= t 'addresses.count'
       |:
       .addresses_count
         =@student.addresses.count
   .row-fluid
     .span12
-      h4= 'Addresses List'
+      h4= t 'addresses.list'
   .row-fluid
     .span12
       table.table.table-striped.table-bordered.table-condensed
         thead
           tr
-            th= 'address1'
-            th= 'address2'
-            th= 'city'
-            th= 'zipcode'
-            th= 'state'
-            th= 'country'
-            th= 'options'
+            th= t 'addresses.address1'
+            th= t 'addresses.address2'
+            th= t 'addresses.city'
+            th= t 'addresses.zipcode'
+            th= t 'addresses.state'
+            th= t 'addresses.country'
+            th= t 'options'
             
         tbody
           =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
@@ -27,3 +27,12 @@ hr
 #add_new_student_address
 .row-fluid
   =link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student span3 btn btn-primary', :style => "min-height:0px", :remote => true
+
+javascript:
+  $(document).ready(function() {
+    $(".delete_address").live('ajax:success', function(evt, data, status, xhr){
+      inner_text = $('.addresses_count').text();
+      var new_value = inner_text - 1;
+      $('.addresses_count').html(new_value);
+    });
+  });
