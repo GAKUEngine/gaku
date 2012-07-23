@@ -15,6 +15,7 @@
           tr
             th
             th =t("courses.code")
+            th =t("options")
         tbody
           =render :partial => 'students/course', :collection => @student.courses, :as => 'course'
 hr
@@ -23,3 +24,12 @@ hr
 hr
 div id="course_form" style="display:none;"
   =render 'new_course'
+
+javascript:
+  $(document).ready(function() {
+    $(".delete_course_enrollment").live('ajax:success', function(evt, data, status, xhr){
+      inner_text = $('.courses_count').text();
+      var new_value = inner_text - 1;
+      $('.courses_count').html(new_value);
+    });
+  });
