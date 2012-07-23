@@ -13,6 +13,7 @@
             th =t("phonetic_reading") + " ("+t("surname")+")"
             th =t("phonetic_reading") + " ("+t("name")+")"
             th =t("guardians.relationship")
+            th= t("options")
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
 hr

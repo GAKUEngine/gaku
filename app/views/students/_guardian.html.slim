@@ -1,8 +1,11 @@
 -unless guardian.nil? or guardian.new_record? or !guardian
   tr
-    td =guardian.id
-    td =guardian.surname
-    td =guardian.name
-    td =guardian.surname_reading
-    td =guardian.name_reading
-    td =guardian.relationship
+    td= guardian.id
+    td= guardian.surname
+    td= guardian.name
+    td= guardian.surname_reading
+    td= guardian.name_reading
+    td= guardian.relationship
+    td= link_to "show", student_guardian_path(@student, guardian)
+    td= link_to "edit", edit_student_guardian_path(@student, guardian)
+    td= link_to "delete", student_guardian_path(@student, guardian), :method => :delete, :confirm => 'Are you sure?', :class => 'delete_link', :remote => true
