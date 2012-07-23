@@ -2,7 +2,7 @@ class StatesController < ApplicationController
 	respond_to :json
 
 	def index
-		if params[:country_code]
+		if params[:country_numcode]
 			@states = State.where(:country_numcode => params[:country_numcode])
 			respond_with @states
 		else
