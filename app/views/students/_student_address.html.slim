@@ -8,4 +8,4 @@
 	  td= address.country
 	  td= link_to "show", student_address_path(@student, address)
 	  td= link_to "edit", edit_student_address_path(@student, address)
-	  td= link_to "delete", student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?'
+	  td= link_to "delete", student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?', :class => 'delete_link', :remote => true
