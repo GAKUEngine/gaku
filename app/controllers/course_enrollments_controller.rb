@@ -7,6 +7,7 @@ class CourseEnrollmentsController < ApplicationController
   # creating course_enrollment form students/show
   def create
     super do |format|
+      @student = Student.find(params[:course_enrollment][:student_id])      
       format.js {render 'create'}
     end  
   end

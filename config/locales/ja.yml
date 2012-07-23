@@ -1,12 +1,4 @@
 ja:
-  activerecord:
-    models:
-      student: 生徒
-    attributes:
-      student:
-        surname: 氏名（性）
-        name:  氏名（名）
-  
   users:
     info: "ユーザー情報"
   hello: "ハローワールド"
@@ -27,18 +19,19 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   addresses:
-    save: "住所を保存"
     addresses: "住所"
     add: "住所を追加"
     zipcode: "郵便番号"
     search_address: "郵便番号で住所検索"
     country: "国"
-    state: "都道府県"
+    prefecture: "都道府県"
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
+    state: ""
     past: "履歴を作成しますか?"
-    list: "住所一覧"
+    count: ""
+    list: ""
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -91,11 +84,13 @@ ja:
     save: ""
     choose_course: ""
     enroll_student: "Enroll Student"
+    count: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
     add: ""
+    create: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "クラスグループ"
@@ -165,7 +160,7 @@ ja:
   guardian: "保護者"
   guardians:
     guardians: "保護者"
-    list: "保護者一覧"
+    list: "保護者リスト"
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
@@ -180,11 +175,12 @@ ja:
   note: "備考"
   notes:
     notes: "備考"
-    list: "備考一覧"
+    list: "備考リスト"
     title: "題名"
     content: "本文"
     add: "備考を追加"
     delete: "備考を削除"
+    save: ""
   class: "クラス"
   semesters:
     list: ""
@@ -214,3 +210,4 @@ ja:
     dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
     master: ""
+  options: ""
