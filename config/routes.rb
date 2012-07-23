@@ -50,6 +50,8 @@ GAKUEngine::Application.routes.draw do
     resources :exam_portions
   end
 
+  resources :states
+
   root :to => 'home#index'
 
 end
