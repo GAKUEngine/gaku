@@ -1,6 +1,12 @@
 #student_guardians
   .row-fluid
     .span12
+      b= t('guardians.count')
+      |:
+      .guardians_count
+        =@student.guardians.count
+  .row-fluid
+    .span12
       h4 =t("guardians.list")
   .row-fluid
     .span12
@@ -20,3 +26,12 @@ hr
 #add_new_student_guardian
 .row-fluid
   =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
+
+javascript:
+  $(document).ready(function() {
+    $(".delete_guardian").live('ajax:success', function(evt, data, status, xhr){
+      inner_text = $('.guardians_count').text();
+      var new_value = inner_text - 1;
+      $('.guardians_count').html(new_value);
+    });
+  });
