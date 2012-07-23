@@ -1,22 +1,28 @@
 #student_addresses
-  b= 'Address Count'
-  |:
-  =@student.addresses.count
-  p
-    b="Addresses List"
-  table
-    tbody
-      tr
-        th= 'address1'
-        th= 'address2'
-        th= 'city'
-        th= 'zipcode'
-        th= 'state'
-        th= 'country'
-        th= 
-        th=
-        th=
-      =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+  .row-fluid
+    .span12
+      b= 'Address Count'
+      |:
+      .addresses_count
+        =@student.addresses.count
+  .row-fluid
+    .span12
+      h4= 'Addresses List'
+  .row-fluid
+    .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th= 'address1'
+            th= 'address2'
+            th= 'city'
+            th= 'zipcode'
+            th= 'state'
+            th= 'country'
+            th= 'options'
+            
+        tbody
+          =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
 hr
 #add_new_student_address
 .row-fluid
