@@ -37,7 +37,7 @@ class StudentsController < ApplicationController
   end
   
   def destroy
-    destroy! :flash => !request.xhr?    
+    destroy! :flash => !request.xhr?
   end
 
   def new_address
@@ -47,7 +47,7 @@ class StudentsController < ApplicationController
 
   def create_address
     @student = Student.find(params[:id])
-    if  @student.update_attributes(params[:student])
+    if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_address'}  
       end
@@ -61,7 +61,7 @@ class StudentsController < ApplicationController
 
   def create_guardian
     @student = Student.find(params[:id])
-    if  @student.update_attributes(params[:student])
+    if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_guardian'}  
       end
