@@ -32,6 +32,7 @@ ja:
     past: "履歴を作成しますか?"
     count: ""
     list: ""
+    choose_country: "Choose Country"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
