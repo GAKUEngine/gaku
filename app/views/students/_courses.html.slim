@@ -20,16 +20,26 @@
           =render :partial => 'students/course', :collection => @student.courses, :as => 'course'
 hr
 #add_course_enrollment
-  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :class => "span3 btn btn-primary new_student_guardian"
+.row_fluid
+  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :id => "add_course_enrollment_link", :class => "span3 btn btn-primary new_student_guardian", :remote => true
 hr
-div id="course_form" style="display:none;"
+div id="student_course_form" style="display:none;"
   =render 'new_course'
 
-javascript:
-  $(document).ready(function() {
-    $(".delete_course_enrollment").live('ajax:success', function(evt, data, status, xhr){
+
+coffee:
+  $("#add_course_enrollment_link").click( ->
+    $("#add_course_enrollment_link").hide();
+    $("#student_course_form").show();
+  )
+
+  $("#course_enrollment_cancel").click( ->
+    $("#student_course_form").hide();
+    $("#add_course_enrollment_link").show();
+  )
+
+  $(".delete_course_enrollment").live("ajax:success", (evt, data, status, xhr)->
       inner_text = $('.courses_count').text();
-      var new_value = inner_text - 1;
+      new_value = inner_text - 1;
       $('.courses_count').html(new_value);
-    });
-  });
+  )
