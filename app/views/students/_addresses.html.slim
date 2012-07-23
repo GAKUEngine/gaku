@@ -27,3 +27,12 @@ hr
 #add_new_student_address
 .row-fluid
   =link_to t('students.add_address'), new_address_student_path(@student), :class => 'new_address_student span3 btn btn-primary', :style => "min-height:0px", :remote => true
+
+javascript:
+  $(document).ready(function() {
+    $(".delete_address").live('ajax:success', function(evt, data, status, xhr){
+      inner_text = $('.addresses_count').text();
+      var new_value = inner_text - 1;
+      $('.addresses_count').html(new_value);
+    });
+  });
