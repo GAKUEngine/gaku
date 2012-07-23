@@ -1,12 +1,25 @@
 #course_enrollments
-  p#courses_list
-    b
-      = t "courses.list"
-  ul
-    - @student.courses.each do |course|
-      li= course.code
-
+  .row-fluid
+    .span12
+      b= t('courses.count')
+      |:
+      .courses_count
+        = @student.courses.count
+  .row-fluid
+    .span12
+      h4 =t("courses.list")
+  .row-fluid
+    .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th
+            th =t("courses.code")
+        tbody
+          =render :partial => 'students/course', :collection => @student.courses, :as => 'course'
+hr
 #add_course_enrollment
-  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :class => "btn"
+  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :class => "span3 btn btn-primary new_student_guardian"
+hr
 div id="course_form" style="display:none;"
   =render 'new_course'
