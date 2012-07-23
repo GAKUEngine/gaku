@@ -15,8 +15,19 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render :json => @students}
-      format.csv {render :csv => @students}
+      format.csv { export_csv_index(@students)}
     end
+  end
+
+  def export_csv_index(students, field_order = ["surname", "name"])
+    filename = "Students.csv"
+    content = CSV.generate do |csv|
+      csv << Student.translate_fields(field_order)
+      students.each do |student|
+        csv << student.attributes.values_at(*field_order)
+      end
+    end
+    send_data content, :filename => filename
   end
 
   def new
