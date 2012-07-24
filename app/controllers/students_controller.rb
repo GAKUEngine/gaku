@@ -15,7 +15,19 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render :json => @students}
+      format.csv { export_csv_index(@students)}
     end
+  end
+
+  def export_csv_index(students, field_order = ["surname", "name"])
+    filename = "Students.csv"
+    content = CSV.generate do |csv|
+      csv << Student.translate_fields(field_order)
+      students.each do |student|
+        csv << student.attributes.values_at(*field_order)
+      end
+    end
+    send_data content, :filename => filename
   end
 
   def new
@@ -37,7 +49,7 @@ class StudentsController < ApplicationController
   end
   
   def destroy
-    destroy! :flash => !request.xhr?    
+    destroy! :flash => !request.xhr?
   end
 
   def new_address
@@ -47,7 +59,7 @@ class StudentsController < ApplicationController
 
   def create_address
     @student = Student.find(params[:id])
-    if  @student.update_attributes(params[:student])
+    if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_address'}  
       end
@@ -61,7 +73,7 @@ class StudentsController < ApplicationController
 
   def create_guardian
     @student = Student.find(params[:id])
-    if  @student.update_attributes(params[:student])
+    if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_guardian'}  
       end

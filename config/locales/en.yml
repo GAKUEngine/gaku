@@ -29,6 +29,7 @@ en:
     past: "Make past?"
     count: "Addresses count"
     list: "Addresses list"
+    choose_country: "Choose Country"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -124,6 +125,7 @@ en:
   exams:
     plural: "Exams"
     new: "New Exam"
+    new_exam: "New Exam Contents"
     add: "Add exam"
     list: "Exams List"
     view: "View Exams"
@@ -136,6 +138,7 @@ en:
     adjustments: "Adjustments"
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
+    show: "Show Exam"
   config:
     label: "Config"
     close: "Close"
