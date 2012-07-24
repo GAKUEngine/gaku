@@ -29,6 +29,7 @@ en:
     past: "Make past?"
     count: "Addresses count"
     list: "Addresses list"
+    choose_country: "Choose Country"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"

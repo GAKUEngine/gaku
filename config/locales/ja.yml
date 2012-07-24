@@ -1,12 +1,4 @@
 ja:
-  activerecord:
-    models:
-      student: 生徒
-    attributes:
-      student:
-        surname: 氏名（性）
-        name:  氏名（名）
-  
   users:
     info: "ユーザー情報"
   hello: "ハローワールド"
@@ -37,8 +29,10 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
+    state: ""
     past: "履歴を作成しますか?"
     list: "住所一覧"
+    choose_country: "国を選択して下さい"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -91,11 +85,13 @@ ja:
     save: ""
     choose_course: ""
     enroll_student: "Enroll Student"
+    count: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
     add: ""
+    create: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "クラスグループ"
