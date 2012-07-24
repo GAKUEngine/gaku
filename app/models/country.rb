@@ -1,5 +1,5 @@
 class Country < ActiveRecord::Base
-  has_many :states, :order => "name ASC"
+  has_many :states, :order => "name ASC" , :foreign_key => 'country_numcode'
   
   validates :name, :iso_name, :presence => true
 
