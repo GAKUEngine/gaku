@@ -12,11 +12,25 @@ class StudentsController < ApplicationController
   def index
     @students = Student.all
 
+    if params[:action] == "get_csv_template"
+      get_csv_template()
+      return
+    end
     respond_to do |format|
       format.html
       format.json {render :json => @students}
       format.csv { export_csv_index(@students)}
     end
+  end
+
+  def get_csv_template
+    filename = "StudentRegistration.csv"
+    registration_fields = ["surname", "name", "surname_reading", "name_reading", "gender", "phone", "email", "birth_date", "admitted"]
+    content = CSV.generate do |csv|
+      csv << registration_fields
+      csv << Student.translate_fields(registration_fields)
+    end
+    send_data content, :filename => filename
   end
 
   def export_csv_index(students, field_order = ["surname", "name"])
@@ -28,6 +42,21 @@ class StudentsController < ApplicationController
       end
     end
     send_data content, :filename => filename
+  end
+
+  def import_student_list
+    @rowcount = 0
+    @csv_data = nil
+    @status = "NO FILE"
+    if params[:import_student_list][:file] != nil
+      @status = "FILE FOUND"
+      @csv_data = params[:import_student_list][:file].read
+      CSV.parse(@csv_data) do |row|
+        @rowcount += 1
+      end
+    end
+
+    render :student_import_preview
   end
 
   def new

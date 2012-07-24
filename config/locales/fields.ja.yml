@@ -1,8 +1,13 @@
 ja:
   fields:
-    id: "データベースID"
+    id: データベースID
     surname: 氏名 (姓)
     name: 氏名 (名)
     surname_reading: ﾌﾘｶﾞﾅ (姓)
     name_reading: ﾌﾘｶﾞﾅ (名)
+    gender: 性別
+    phone: 電話番号
+    email: メールアドレス
+    birth_date: 生年月日
+    admitted: 入学日
 
