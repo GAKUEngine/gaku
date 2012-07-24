@@ -14,6 +14,7 @@
       .span12.well
         .row-fluid
           .span12
+            = link_to "Student Registration CSV", :action => :get_csv_template
             = form_for :import_student_list, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
               label for="import_student_list"
                 CSV file
