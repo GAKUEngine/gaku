@@ -36,7 +36,9 @@ GAKUEngine::Application.routes.draw do
     get :new_address, :on => :member
     put :create_address, :on => :collection  
     get :new_guardian, :on => :member
-    put :create_guardian, :on => :collection  
+    put :create_guardian, :on => :collection
+
+    post :import_student_list, :on => :collection
   end
   
 

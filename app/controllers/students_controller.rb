@@ -19,6 +19,17 @@ class StudentsController < ApplicationController
     end
   end
 
+  def get_csv_template
+    filename = "StudentRegistration.csv"
+    content = CSV.generate do |csv|
+      csv << Student.translate_fields(model_fields)
+      students.each do |student|
+        csv << student.attributes.values_at(*model_fields)
+      end
+    end
+    send_data content, :filename => filename
+  end
+
   def export_csv_index(students, field_order = ["surname", "name"])
     filename = "Students.csv"
     content = CSV.generate do |csv|
@@ -28,6 +39,21 @@ class StudentsController < ApplicationController
       end
     end
     send_data content, :filename => filename
+  end
+
+  def import_student_list
+    @rowcount = 0
+    @csv_data = nil
+    @status = "NO FILE"
+    if params[:import_student_list][:file] != nil
+      @status = "FILE FOUND"
+      @csv_data = params[:import_student_list][:file].read
+      CSV.parse(file) do |row|
+        @rowcount += 1
+      end
+    end
+
+    render :student_import_preview
   end
 
   def new
