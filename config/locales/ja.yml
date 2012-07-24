@@ -64,7 +64,7 @@ ja:
   syllabus: "授業計画"
   syllabuses:
     plural: "授業計画表"
-    show: ""
+    show: "授業計画照会"
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"
@@ -135,7 +135,7 @@ ja:
     new: "新規試験登録"
     new_exam: "新規試験内容"
     add_portion: '試験の部分を追加'
-    add: "登録"
+    add: "試験登録"
     count: "試験数"
     description: "試験の説明"
     adjustments: "調整"
@@ -194,7 +194,7 @@ ja:
   options: "オプション"
   notice:
     no_assignments: "No assignments, assign one first"
-    no_exams: "No exams, assign one first"
+    no_exams: "試験が登録されていません、新しく試験を追加して下さい。"
   select: "Select"
   pictures:
     change: "写真を変更"
