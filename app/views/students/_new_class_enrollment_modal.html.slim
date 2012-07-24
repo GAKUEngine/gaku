@@ -8,19 +8,19 @@
         'x
       h3=t 'class_group_enrollments.new'
     .modal-body
-      - if @student.class_group_enrollments.last
-        b= t('class_group_enrollments.current_enrollment')
-        |:
-        .row-fluid
-          .span6.well 
-            table.table.table-bordered
-              tbody
-                tr
-                  th =t("class_groups.name")
-                  td#table_class_enrollment_name =@student.class_group_enrollments.last.class_group.name
-                tr
-                  th =t("class_group_enrollments.seat_number")
-                  td#table_class_enrollment_seat_number =@student.class_group_enrollments.last.seat_number
+      
+      b= t('class_group_enrollments.current_enrollment')
+      |:
+      .row-fluid
+        .span6.well 
+          table.table.table-bordered
+            tbody
+              tr
+                th =t("class_groups.name")
+                td#table_class_enrollment_name =@student.class_group_enrollments.last.class_group.name if @student.class_groups.any?
+              tr
+                th =t("class_group_enrollments.seat_number")
+                td#table_class_enrollment_seat_number =@student.class_group_enrollments.last.seat_number if @student.class_groups.any?
       .validation-error
       .form-inputs
         =f.hidden_field :student_id, :value => @student.id
