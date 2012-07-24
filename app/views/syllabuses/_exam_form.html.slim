@@ -1,58 +1,70 @@
 = form_for @syllabus, :url => create_exam_syllabus_path(:id => @syllabus), :remote => true do |f|
   = f.fields_for @exam do |exam_form| 
     - if exam_form.object.new_record?
-      .field
-        = exam_form.label t 'exams.name'
-        br/
-        = exam_form.text_field :name
-      .field
-        = exam_form.label t 'exams.description'
-        br/
-        = exam_form.text_area :description
-      .field
-        = exam_form.label t 'exams.adjustments'
-        br/
-        = exam_form.text_area :adjustments
-      .field
-        = exam_form.label t 'exams.weight'
-        br/
-        = exam_form.number_field :weight
-      .field
-        = exam_form.label t 'exams.dynamic_scoring'
-        br/
-        = exam_form.check_box :dynamic_scoring
-        p = t 'exam_portions.master'
-        = exam_form.fields_for :exam_portions do |ep_form| 
-          - if ep_form.object.new_record?
-            .field
-              = ep_form.label t 'exam_portions.weight'
-              br/
-              = ep_form.number_field :weight
-            .field 
-              = ep_form.label t 'exam_portions.problem_count'
-              br/
-              = ep_form.number_field :problem_count
-            .field 
-              = ep_form.label t 'exam_portions.max_score'
-              br/
-              = ep_form.number_field :max_score
-            .field
-              = ep_form.label t 'exam_portions.description'
-              br/
-              = ep_form.text_area :description
-            .field
-              = ep_form.label t 'exam_portions.adjustments'
-              br/
-              = ep_form.text_area :adjustments
-            .field
-              = ep_form.label t 'exam_portions.execution_date'
-              br/
-              = ep_form.datetime_select :execution_date
-            .field
-              = ep_form.label t 'exam_portions.dynamic_scoring'
-              br/
-              = ep_form.check_box :dynamic_scoring       
-          
+      .row-fluid
+        .row-fluid
+          h4 = t('exams.new_exam')
+        .row-fluid
+          hr
+        .row-fluid
+          .span12.well
+            .row-fluid
+              .span9
+                = exam_form.label :name, t("exams.name")
+                = exam_form.text_field :name, :class => "span12"
+              .span3
+                = exam_form.label :weight, t("exams.weight")
+                = exam_form.number_field :weight, :class => "span12"
+            .row-fluid
+              .span6
+                = exam_form.label :description, t("exams.description")
+                = exam_form.text_area :description, :class => "span12", :size => "0x2"
+              .span6
+                = exam_form.label :adjustments, t("exams.adjustments")
+                = exam_form.text_area :adjustments, :class => "span12", :size => "0x2"
+            .row-fluid
+              .span12.form-inline
+                = exam_form.check_box :dynamic_scoring
+                = exam_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
 
-  #submit_syllabus_exam
-    = f.submit t 'exams.add'
+        .row-fluid
+          h4 = t('exam_portions.master')
+        .row-fluid
+          hr
+        .row-fluid
+          = exam_form.fields_for :exam_portions do |ep_form| 
+            - if ep_form.object.new_record?
+              .span12.well
+                .row-fluid
+                  .span9
+                    = ep_form.label :name, t('exam_portions.name')
+                    = ep_form.text_field :name, :class => "span12"
+                  .span3
+                    = ep_form.label :weight, t('exam_portions.weight')
+                    = ep_form.number_field :weight, :class => "span12"
+                .row-fluid
+                  .span6
+                    = ep_form.label :problem_count, t('exam_portions.problem_count')
+                    = ep_form.number_field :problem_count, :class => "span12"
+                  .span6
+                    = ep_form.label :max_score, t('exam_portions.max_score')
+                    = ep_form.number_field :max_score, :class => "span12"
+                .row-fluid
+                  .span6
+                    = ep_form.label :description, t('exam_portions.description')
+                    = ep_form.text_area :description, :class => "span12", :size => "0x2"
+                  .span6
+                    = ep_form.label :adjustments, t('exam_portions.adjustments')
+                    = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
+                .row-fluid
+                  = ep_form.label :execution_date, t('exam_portions.execution_date')
+                  = ep_form.datetime_select :execution_date
+                .row-fluid
+                  .span12.form-inline
+                    = ep_form.check_box :dynamic_scoring
+                    = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+
+  .row-fluid
+    #submit_syllabus_exam
+      .span12.well
+        = f.submit t('exams.add'), :class => "span12 btn btn-primary"
