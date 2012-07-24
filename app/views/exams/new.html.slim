@@ -1,3 +1,12 @@
-h1 New exam
-= render 'form'
-= link_to 'Back', exams_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('exams.new')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12
+        = render 'form'
