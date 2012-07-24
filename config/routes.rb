@@ -13,7 +13,9 @@ GAKUEngine::Application.routes.draw do
     post :enroll_student, :on => :collection
   end
 
-  resources :class_group_enrollments
+  resources :class_group_enrollments do
+    post :enroll_student, :on => :collection
+  end
 
   resources :syllabuses do
     member do
