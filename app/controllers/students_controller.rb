@@ -92,6 +92,7 @@ class StudentsController < ApplicationController
       @new_note = Note.new
       @new_course_enrollment = CourseEnrollment.new
       @notes = Note.all
+      @class_groups = ClassGroup.all
     end
 
 end

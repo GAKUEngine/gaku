@@ -101,9 +101,13 @@ ja:
     grade: "学年"
     homeroom: "主教室"
     choose_student: 'Choose Student'
-    create_class_group_enrollment: 'Create Class Group Enrollment'
+    create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
+    new: ""
+    seat_number: ""
+    class_groups: ""
+    current_enrollment: ""
   grades:
     grading: "採点"
     weighting: "加重する"
