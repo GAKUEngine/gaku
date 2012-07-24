@@ -5,6 +5,7 @@ class Contact < ActiveRecord::Base
   
   attr_accessible :data, :details, :contact_type_id
 end
+
 # == Schema Information
 #
 # Table name: contacts
@@ -12,6 +13,8 @@ end
 #  id              :integer         not null, primary key
 #  data            :string(255)
 #  details         :text
+#  is_primary      :boolean
+#  is_emergency    :boolean
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  contact_type_id :integer
