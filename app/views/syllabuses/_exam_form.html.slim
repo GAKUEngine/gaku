@@ -63,8 +63,6 @@
                   .span12.form-inline
                     = ep_form.check_box :dynamic_scoring
                     = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
-
-  .row-fluid
-    #submit_syllabus_exam
-      .span12.well
+    .row-fluid
+      #submit_syllabus_exam
         = f.submit t('exams.add'), :class => "span12 btn btn-primary"

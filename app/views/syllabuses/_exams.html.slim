@@ -1,27 +1,24 @@
-
-#syllabus-exams
-  b= t('exams.count')
-  |:
-  #exams-count
-    = @syllabus.exams.count
-  p
-    b= t('exams.list')
-
-  table
-    tbody
+.row-fluid
+  h4 =t('exams.list')
+.row-fluid
+  .span12
+    hr
+.row-fluid
+  table.table.table-condensed.table-striped.table-bordered
+    thead
       tr
-        th= t 'exams.name'
-        th= t 'exams.description'
-        th= t 'exams.adjustments'
-        th= t 'exams.weight'
-        th= t 'exams.dynamic_scoring'
-        th
-        th 
-        th
-    - if @syllabus.exams.any?
-      = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
-    - else 
-      p= t('notice.no_exams')
+        th =t 'exams.name'
+        th =t 'exams.description'
+        th =t 'exams.adjustments'
+        th =t 'exams.weight'
+        th =t 'exams.dynamic_scoring'
+        th =t 'manage'
+    tbody
+      - if @syllabus.exams.any?
+        = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
+      - else 
+        .alert.alert-danger
+          = t('notice.no_exams')
 
 javascript:
   $(document).ready(function() {

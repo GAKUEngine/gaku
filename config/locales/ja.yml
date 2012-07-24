@@ -70,7 +70,7 @@ ja:
   syllabus: "授業計画"
   syllabuses:
     plural: "授業計画表"
-    show: ""
+    show: "授業計画照会"
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"
@@ -198,7 +198,7 @@ ja:
   options: "オプション"
   notice:
     no_assignments: "No assignments, assign one first"
-    no_exams: "No exams, assign one first"
+    no_exams: "試験が登録されていません、新しく試験を追加して下さい。"
   select: "Select"
   pictures:
     change: "写真を変更"
