@@ -119,6 +119,7 @@ en:
   exams:
     plural: "Exams"
     new: "New Exam"
+    new_exam: "New Exam Contents"
     add: "Add exam"
     list: "Exams List"
     view: "View Exams"
@@ -131,6 +132,7 @@ en:
     adjustments: "Adjustments"
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
+    show: "Show Exam"
   config:
     label: "Config"
     close: "Close"
