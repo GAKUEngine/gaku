@@ -1,0 +1,9 @@
+td= address.address1
+td= address.address2
+td= address.city
+td= address.zipcode
+td= address.state_name
+td= address.country
+td= link_to t("show"), student_address_path(@student, address)
+td= link_to t("edit"), edit_student_address_path(@student, address), :remote => true
+td= link_to t("delete"), student_address_path(@student, address), :method => :delete, :confirm => 'Are you sure?', :class => 'delete_link delete_address', :remote => true

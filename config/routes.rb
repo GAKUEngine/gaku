@@ -41,6 +41,7 @@ GAKUEngine::Application.routes.draw do
     put :create_guardian, :on => :collection  
   end
   
+  resources :addresses
 
   resources :notes
 
