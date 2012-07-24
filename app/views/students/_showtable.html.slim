@@ -24,8 +24,10 @@
           th =t("students.admitted")
           td =@student.admitted
         tr
-          th =t("students.enrollment")
-          td#student_class_group_enrollment =@student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")"
+          th =t("students.class_group_enrollment")
+          - if @student.class_group_enrollments.any?
+              td#student_class_group_enrollment =@student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")"
+        
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
