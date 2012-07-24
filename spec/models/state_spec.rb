@@ -20,8 +20,8 @@ describe State do
     State.find_all_by_name_or_abbr("CA").should include(state)
   end
 
-  it "can find all states group by country id" do
+  it "can find all states group by country numcode" do
     state = Factory(:state)
-    State.states_group_by_country_id.should == { state.country_id.to_s => [[state.id, state.name]] }
+    State.states_group_by_country_numcode.should == { state.country_numcode.to_s => [[state.id, state.name]] }
   end
 end
