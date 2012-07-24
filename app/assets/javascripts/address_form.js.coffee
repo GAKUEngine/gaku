@@ -7,7 +7,7 @@ $ ->
 			type: 'get'
 			url: '/states'
 			data:
-				country_numcode: countryCode
+				country_id: countryCode
 			dataType: 'json'
 			success: (data)->
 				stateLabel = $('.state_label')

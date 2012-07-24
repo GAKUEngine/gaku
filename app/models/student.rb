@@ -42,6 +42,7 @@ class Student < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: students
@@ -54,13 +55,12 @@ end
 #  gender               :string(255)
 #  phone                :string(255)
 #  email                :string(255)
-#  birth                :date
+#  birth_date           :date
 #  admitted             :date
 #  graduated            :date
 #  created_at           :datetime        not null
 #  updated_at           :datetime        not null
 #  user_id              :integer
-#  profile_id           :integer
 #  faculty_id           :integer
 #  picture_file_name    :string(255)
 #  picture_content_type :string(255)

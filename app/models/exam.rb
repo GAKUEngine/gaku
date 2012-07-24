@@ -28,17 +28,19 @@ class Exam < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: exams
 #
-#  id              :integer         not null, primary key
-#  name            :string(255)
-#  description     :text
-#  adjustments     :text
-#  weight          :float
-#  dynamic_scoring :boolean
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
+#  id                :integer         not null, primary key
+#  name              :string(255)
+#  description       :text
+#  adjustments       :text
+#  weight            :float
+#  dynamic_scoring   :boolean
+#  created_at        :datetime        not null
+#  updated_at        :datetime        not null
+#  grading_method_id :integer
 #
 
