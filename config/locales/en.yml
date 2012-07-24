@@ -53,6 +53,7 @@ en:
     add_address: "Add Address"
     picture:
     class_group_enrollment: "Class enrollment"
+    add_contact: "Add Contact"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"

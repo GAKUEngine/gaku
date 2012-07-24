@@ -6,6 +6,8 @@ class GuardiansController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  belongs_to :student
+  
   def destroy
     destroy! :flash => !request.xhr?
   end
