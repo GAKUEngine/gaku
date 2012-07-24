@@ -24,7 +24,7 @@
         .span8
           = f.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
         /=link_to , "", :remote => true, :id => "guardian_save_link", :class => "span6 btn btn-primary", :style => "min-height:0px"
-        =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn btn-danger", :style => "min-height:0px"
+        =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn", :style => "min-height:0px"
 
 coffee:
   $("#guardian_cancel").click( ->

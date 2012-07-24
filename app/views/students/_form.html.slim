@@ -1,13 +1,12 @@
-= form_for @student, :html => {:class => "f-vertical"}, :remote => false do |form|
+= form_for @student, :remote => false do |form|
   - if @student.errors.any?
     .alert.alert-error
-      #error_explanation
-        h2
-          = pluralize(@student.errors.count, "error")
-          | prohibited this student from being saved:
-        ul
-          - @student.errors.full_messages.each do |msg|
-            li= msg
+      strong
+        = pluralize(@student.errors.count, "error")
+        | prohibited this student from being saved:
+      ul
+        - @student.errors.full_messages.each do |msg|
+          li= msg
   .row-fluid
     .span12.well
       .row-fluid

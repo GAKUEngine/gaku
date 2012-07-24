@@ -1,4 +1,6 @@
 class Student < ActiveRecord::Base
+  require 'csv'
+
   has_many :course_enrollments
   has_many :courses, :through => :course_enrollments
 
@@ -28,7 +30,17 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :guardians, :allow_destroy => true
   accepts_nested_attributes_for :notes, :allow_destroy => true
   accepts_nested_attributes_for :addresses, :allow_destroy => true
+
+  def self.translate_fields(fields)
+    translated_fields = []
+    fields.each do |field|
+      translated_fields << I18n.t("fields." + field)
+    end
+
+    return translated_fields
+  end
 end
+
 
 
 # == Schema Information
@@ -43,13 +55,12 @@ end
 #  gender               :string(255)
 #  phone                :string(255)
 #  email                :string(255)
-#  birth                :date
+#  birth_date           :date
 #  admitted             :date
 #  graduated            :date
 #  created_at           :datetime        not null
 #  updated_at           :datetime        not null
 #  user_id              :integer
-#  profile_id           :integer
 #  faculty_id           :integer
 #  picture_file_name    :string(255)
 #  picture_content_type :string(255)

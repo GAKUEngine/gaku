@@ -1,33 +1,44 @@
-p
-  b
-    = t('exams.name')
-    |: 
-  = @exam.name
-p
-  b
-    = t('exams.weight')
-    |: 
-  = @exam.weight
-p
-  b
-    = t('exams.description')
-    |: 
-  = @exam.description
-p
-  b
-    = t('exams.adjustments')
-    |: 
-  = @exam.adjustments
-
-
-= link_to t(:Edit), edit_exam_path(@exam)
-br/
-
-=render 'exams/exam_portions'
-#add_exam_exam_portion
-  =link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam), :class => 'btn'
-div id='exam_exam_portions_form' style='display:none;'
-  =render 'exam_portion_form'
-
-
-/= link_to t(:Back), exams_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('exams.show')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+        .row-fluid
+          table.table.table-condensed.table-striped
+            tbody
+              tr
+                th width="20%" =t('exams.name')
+                td =@exam.name
+              tr
+                th =t('exams.weight')
+                td =@exam.weight
+              tr
+                th =t('exams.description')
+                td =@exam.description
+              tr
+                th =t('exams.adjustments')
+                td =@exam.adjustments
+        .row-fluid
+          hr
+        .row-fluid
+          = link_to t(:Edit), edit_exam_path(@exam), :class => "span3 btn btn-primary", :style => "min-height:0px"
+    .row-fluid
+      .span12.well
+        .row-fluid
+          =render 'exams/exam_portions'
+        .row-fluid
+          hr
+        .row-fluid
+          #add_exam_exam_portion
+            =link_to t('exams.add_portion'), new_exam_exam_portion_path(@exam), :class => 'span3 btn btn-primary'
+        .row-fluid
+          div id='exam_exam_portions_form' style='display:none; margin-top:10px'
+            =render 'exam_portion_form'
+        /.row-fluid
+          = link_to t(:Back), exams_path

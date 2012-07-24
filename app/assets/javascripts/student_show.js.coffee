@@ -14,3 +14,9 @@ $ ->
 	$('#add_course_enrollment').on 'click','a.btn', (event) ->
     event.preventDefault()
     $('#course_form').slideToggle()
+      
+
+deleteLink= $(".delete_link")
+deleteLink.live("ajax:success", (evt, data, status, xhr) ->
+    $(this).closest('tr').fadeOut();
+)
