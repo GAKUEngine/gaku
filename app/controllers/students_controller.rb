@@ -8,6 +8,7 @@ class StudentsController < ApplicationController
 
   before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_before_show,  :only => :show
+  before_filter :load_student,      :only => [:new_address, :create_address, :new_guardian, :create_guardian, :edit, :update]
   
   def index
     @students = Student.all
@@ -74,16 +75,7 @@ class StudentsController < ApplicationController
     render :student_import_preview
   end
 
-  def new
-    @student = Student.new
-  end
-
-  def edit
-    load_student
-  end
-  
   def update
-    load_student
     if @student.update_attributes(params[:student])
       redirect_to @student
     else
@@ -96,12 +88,10 @@ class StudentsController < ApplicationController
   end
 
   def new_address
-    load_student
     @student.addresses.build
   end
 
   def create_address
-    load_student
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_address'}  
@@ -110,12 +100,10 @@ class StudentsController < ApplicationController
   end
 
   def new_guardian
-    load_student
     @student.guardians.build
   end
 
   def create_guardian
-    load_student
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_guardian'}  

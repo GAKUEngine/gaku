@@ -11,10 +11,10 @@ class CoursesController < ApplicationController
     destroy! :flash => !request.xhr?
   end
   
-private
-	
-	def load_before_show
-		@new_course_enrollment = CourseEnrollment.new
-	end
+  private
+  
+	  def load_before_show
+		  @new_course_enrollment = CourseEnrollment.new
+	  end
 
 end

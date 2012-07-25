@@ -6,7 +6,7 @@ class ClassGroupEnrollmentsController < ApplicationController
 
   def create
     super do |format|
-      format.js {render 'create'}
+      format.js { render 'create' }
     end  
   end
 
@@ -16,7 +16,7 @@ class ClassGroupEnrollmentsController < ApplicationController
  		# handle not saving course enrollment
  		if @class_group_enrollment.save!
  			respond_to do |format|
- 				format.js { render 'enroll_student'}
+ 				format.js { render 'enroll_student' }
  			end
  		end
   end

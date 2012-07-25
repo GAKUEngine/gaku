@@ -8,7 +8,7 @@ class CourseEnrollmentsController < ApplicationController
   def create
     super do |format|
       @student = Student.find(params[:course_enrollment][:student_id])      
-      format.js {render 'create'}
+      format.js { render 'create' }
     end  
   end
 
@@ -18,7 +18,7 @@ class CourseEnrollmentsController < ApplicationController
  		# handle not saving course enrollment
  		if @course_enrollment.save!
  			respond_to do |format|
- 				format.js { render 'enroll_student'}
+ 				format.js { render 'enroll_student' }
  			end
  		end
   end
