@@ -13,13 +13,14 @@ class StudentsController < ApplicationController
     @students = Student.all
 
     if params[:action] == "get_csv_template"
-      get_csv_template()
+      get_csv_template
       return
     end
+    
     respond_to do |format|
       format.html
-      format.json {render :json => @students}
-      format.csv { export_csv_index(@students)}
+      format.json { render :json => @students }
+      format.csv  { export_csv_index(@students) }
     end
   end
 
@@ -75,15 +76,14 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
-    #@student.profile.build
   end
 
   def edit
-    @student = Student.find(params[:id])
+    load_student
   end
   
   def update
-    @student = Student.find(params[:id])
+    load_student
     if @student.update_attributes(params[:student])
       redirect_to @student
     else
@@ -96,12 +96,12 @@ class StudentsController < ApplicationController
   end
 
   def new_address
-    @student = Student.find(params[:id])
+    load_student
     @student.addresses.build
   end
 
   def create_address
-    @student = Student.find(params[:id])
+    load_student
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_address'}  
@@ -110,12 +110,12 @@ class StudentsController < ApplicationController
   end
 
   def new_guardian
-    @student = Student.find(params[:id])
+    load_student
     @student.guardians.build
   end
 
   def create_guardian
-    @student = Student.find(params[:id])
+    load_student
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_guardian'}  
@@ -128,6 +128,10 @@ class StudentsController < ApplicationController
     def load_class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]
+    end
+
+    def load_student
+      @student = Student.find(params[:id])
     end
 
     def load_before_show
