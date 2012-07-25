@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-
+  include SheetHelper
   #before_filter :authenticate_user!
 
   inherit_resources
@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
     registration_fields = ["surname", "name", "surname_reading", "name_reading", "gender", "phone", "email", "birth_date", "admitted"]
     content = CSV.generate do |csv|
       csv << registration_fields
-      csv << Student.translate_fields(registration_fields)
+      csv << translate_fields(registration_fields)
     end
     send_data content, :filename => filename
   end
@@ -36,13 +36,14 @@ class StudentsController < ApplicationController
   def export_csv_index(students, field_order = ["surname", "name"])
     filename = "Students.csv"
     content = CSV.generate do |csv|
-      csv << Student.translate_fields(field_order)
+      csv << translate_fields(field_order)
       students.each do |student|
         csv << student.attributes.values_at(*field_order)
       end
     end
     send_data content, :filename => filename
   end
+  private :export_csv_index
 
   def import_student_list
     @rowcount = 0
@@ -52,6 +53,19 @@ class StudentsController < ApplicationController
       @status = "FILE FOUND"
       @csv_data = params[:import_student_list][:file].read
       CSV.parse(@csv_data) do |row|
+        case @rowcount
+        when 0 #field index
+          #get mapping
+        when 1 #titles
+          #ignore
+        else #process record
+          Student.create!(:surname => row[0],
+                         :name => row[1],
+                         :surname_reading => row[2],
+                         :name_reading => row[3])
+          
+        end
+
         @rowcount += 1
       end
     end
@@ -61,7 +75,7 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
-    #@student.profile.build    
+    #@student.profile.build
   end
 
   def edit
