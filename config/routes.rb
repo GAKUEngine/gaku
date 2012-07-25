@@ -44,6 +44,7 @@ GAKUEngine::Application.routes.draw do
     post :import_student_list, :on => :collection
   end
   
+  resources :addresses
 
   resources :notes
 
