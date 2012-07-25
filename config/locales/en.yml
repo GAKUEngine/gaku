@@ -30,6 +30,8 @@ en:
     count: "Addresses count"
     list: "Addresses list"
     choose_country: "Choose Country"
+    edit: "Edit address"
+    save: "Save address"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -164,6 +166,7 @@ en:
     relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
+    edit: "Edit guardian"
   contact_type: ""
   contact_types:
      add: ""
@@ -180,6 +183,7 @@ en:
     add: "Add Note"
     delete: "Delete Note"
     save: "Save note"
+    edit: "Edit note"
   class: Class
   semesters:
     list: "Semesters list"

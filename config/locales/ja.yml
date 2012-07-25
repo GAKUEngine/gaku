@@ -33,6 +33,7 @@ ja:
     past: "履歴を作成しますか?"
     list: "住所一覧"
     choose_country: "国を選択して下さい"
+    edit: "Edit address"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -172,6 +173,7 @@ ja:
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
+    edit: "Edit guardian"
   contact_type: "連絡先種別"
   contact_types:
      add: "連絡先種別の追加"
@@ -188,6 +190,8 @@ ja:
     content: "本文"
     add: "備考を追加"
     delete: "備考を削除"
+    save: "Save note"
+    edit: "Edit note"
   class: "クラス"
   semesters:
     list: ""
