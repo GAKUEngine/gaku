@@ -58,6 +58,7 @@ ja:
     add_address: "住所を追加"
     picture: "生徒写真"
     add_contact: "Add Contact"
+    create_contact: "Create Contact"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"

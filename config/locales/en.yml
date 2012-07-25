@@ -56,6 +56,7 @@ en:
     picture:
     class_group_enrollment: "Class enrollment"
     add_contact: "Add Contact"
+    create_contact: "Create Contact"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
