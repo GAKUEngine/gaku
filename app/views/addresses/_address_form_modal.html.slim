@@ -1,0 +1,48 @@
+- model = @address || Address.new
+- model_class = model.class
+.modal.hide#editAddressModal wmode="opaque"
+  
+  = form_for([model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |address_form|
+    .modal-header
+      button.close type="button" data-dismiss="modal"
+        'x
+      h3=t 'edit address'
+    .modal-body
+      .validation-error
+      .form-inputs
+        = hidden_field_tag :student_id, @student.id
+        .row-fluid.control-group
+          .span6
+            = address_form.label :country, t("addresses.country"), :class => "control-label"
+            = address_form.select :country_id, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "span12", :id => "country_dropdown"
+          .span6
+            = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+            .row-fluid
+              .span6
+                = address_form.text_field :zipcode, :class => "span12"
+              .span6
+                button.span12.btn.btn-primary= t "addresses.search_address"
+        .row-fluid.control-group
+          .span3
+            / class state_label for handling changing state input with state dropdown
+            = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label" 
+            = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
+          .span3
+            = address_form.label :city, t("addresses.city"), :class => "control-label"
+            = address_form.text_field :city, :class => "span12"
+          .span3
+            = address_form.label :address1, t("addresses.address1"), :class => "control-label"
+            = address_form.text_field :address1, :class => "span12"
+          .span3
+            = address_form.label :address2, t("addresses.address2"), :class => "control-label"
+            = address_form.text_field :address2, :class => "span12"
+        -if params[:action] == 'edit'
+          .row-fluid.control-group
+            .span12
+              =address_form.label :past, t('addresses.past')
+              =address_form.check_box :past
+        .row-fluid
+            = address_form.submit t('class_groups.create_class_group_enrollment'), :class => 'btn btn btn-primary'
+            = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+
+

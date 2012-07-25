@@ -106,8 +106,8 @@ ja:
   class_group_enrollments:
     list: "クラス名簿"
     new: ""
-    seat_number: ""
-    class_groups: ""
+    seat_number: "Seat number"
+    class_groups: "Class groups"
     current_enrollment: ""
   grades:
     grading: "採点"
