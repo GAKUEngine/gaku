@@ -23,6 +23,10 @@
         tr
           th =t("students.admitted")
           td =@student.admitted
+        tr
+          th =t("students.class_group_enrollment")
+          td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
+        
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
@@ -61,7 +65,11 @@
     .span4
       = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
     .span4
-      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn", :style => "min-height:0px"
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id),  {:'data-target' => "#newContactModal", :'data-toggle' => "modal", :id => 'create_contact', :class => "span12 btn", :style => "min-height:0px"}
+
+== render 'new_class_enrollment_modal'
+
+#modal_dialogs
 
 coffee:
   $("#upload_picture_link").click ->

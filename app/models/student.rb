@@ -31,14 +31,7 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :notes, :allow_destroy => true
   accepts_nested_attributes_for :addresses, :allow_destroy => true
 
-  def self.translate_fields(fields)
-    translated_fields = []
-    fields.each do |field|
-      translated_fields << I18n.t("fields." + field)
-    end
-
-    return translated_fields
-  end
+  
 end
 
 

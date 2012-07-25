@@ -56,6 +56,7 @@ ja:
     gender: "性別"
     add_address: "住所を追加"
     picture: "生徒写真"
+    add_contact: "Add Contact"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -101,9 +102,13 @@ ja:
     grade: "学年"
     homeroom: "主教室"
     choose_student: 'Choose Student'
-    create_class_group_enrollment: 'Create Class Group Enrollment'
+    create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
+    new: ""
+    seat_number: "Seat number"
+    class_groups: "Class groups"
+    current_enrollment: ""
   grades:
     grading: "採点"
     weighting: "加重する"

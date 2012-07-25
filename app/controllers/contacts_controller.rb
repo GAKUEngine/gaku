@@ -4,8 +4,23 @@ class ContactsController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  def create
+  	if params[:guardian_id]
+  		@guardian = Guardian.find(params[:guardian_id])
+	  	@contact = @guardian.contacts.build(params[:contact])
+	  	if @contact.save
+	  		respond_with do |format|
+	  			format.js { render 'guardian_contact' }
+	  		end
+	  	else
+        render :nothing => true
+      end
+  	else
+  		#TODO handle contact create for student 
+  	end
+  end
+
   def destroy
     destroy! :flash => !request.xhr?
-  end
-  
+  end 
 end

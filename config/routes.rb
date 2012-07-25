@@ -13,7 +13,9 @@ GAKUEngine::Application.routes.draw do
     post :enroll_student, :on => :collection
   end
 
-  resources :class_group_enrollments
+  resources :class_group_enrollments do
+    post :enroll_student, :on => :collection
+  end
 
   resources :syllabuses do
     member do
@@ -25,7 +27,10 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :students do
-    resources :guardians
+    resources :guardians do
+      resources :contacts
+      get 'new_contact', :on => :member
+    end
     resources :addresses
     resources :notes
     resources :contacts
@@ -34,11 +39,15 @@ GAKUEngine::Application.routes.draw do
     
     resources :addresses
     get :new_address, :on => :member
-    put :create_address, :on => :collection  
+    put :create_address, :on => :collection
     get :new_guardian, :on => :member
-    put :create_guardian, :on => :collection  
+    put :create_guardian, :on => :collection
+
+    get :get_csv_template, :on => :collection
+    post :import_student_list, :on => :collection
   end
   
+  resources :addresses
 
   resources :notes
 

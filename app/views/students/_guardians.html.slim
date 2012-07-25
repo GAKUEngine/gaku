@@ -1,3 +1,4 @@
+#guardians_modal
 #student_guardians
   .row-fluid
     .span12
@@ -19,7 +20,7 @@
             th =t("phonetic_reading") + " ("+t("surname")+")"
             th =t("phonetic_reading") + " ("+t("name")+")"
             th =t("guardians.relationship")
-            th= t("options")
+            th =t("options")
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
 hr

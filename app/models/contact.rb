@@ -3,7 +3,9 @@ class Contact < ActiveRecord::Base
   belongs_to :student
   belongs_to :guardian
   
-  attr_accessible :data, :details, :contact_type_id
+  attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
+
+  validates_presence_of :data, :details, :contact_type_id
 end
 
 # == Schema Information

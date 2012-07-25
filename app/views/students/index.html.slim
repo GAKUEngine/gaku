@@ -14,6 +14,15 @@
       .span12.well
         .row-fluid
           .span12
+            = link_to "Student Registration CSV", :action => :get_csv_template
+            = form_for :import_student_list, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
+              label for="import_student_list"
+                CSV file
+              = f.file_field :file
+              = submit_tag 'Submit'
+            = link_to "CSV Export", "students.csv"
+        .row-fluid
+          .span12
             div#table-checkboxes
         .row-fluid
           .span12
