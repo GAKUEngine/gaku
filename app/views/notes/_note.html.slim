@@ -1,0 +1,6 @@
+td =note.id
+td =note.title
+td =note.content
+td= link_to t("show"), student_note_path(@student, note)
+td= link_to t("edit"), edit_student_note_path(@student, note)
+td= link_to t("delete"), student_note_path(@student, note), :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'delete_link delete_note'
