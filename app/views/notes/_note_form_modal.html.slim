@@ -1,0 +1,28 @@
+- model = @note || Note.new
+- model_class = model.class
+.modal.hide#editNoteModal wmode="opaque"
+  
+  = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |note_form|
+    .modal-header
+      button.close type="button" data-dismiss="modal"
+        'x
+      h3=t 'edit note'
+    .modal-body
+      .validation-error
+      .form-inputs
+        = hidden_field_tag :student_id, @student.id
+        .row-fluid.control-group
+          .span12
+            = note_form.label :title, t("notes.title"), :class => "control-label"
+            = note_form.text_field :title, :class => "span12 edit_note"
+        .row-fluid.control-group
+          .span12
+            = note_form.label :content, t("notes.content"), :class => "control-label"
+            = note_form.text_area :content, :class => "span12 edit_note", :size => "0x10"
+        .row-fluid
+          .span12
+            .span6 
+              = note_form.submit t("notes.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+              = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+
+
