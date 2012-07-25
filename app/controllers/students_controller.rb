@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
   before_filter :load_class_groups, :only => [:new, :edit]
-  before_filter :load_before_show, :only => :show
+  before_filter :load_before_show,  :only => :show
   
   def index
     @students = Student.all
@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
       get_csv_template
       return
     end
-    
+
     respond_to do |format|
       format.html
       format.json { render :json => @students }
