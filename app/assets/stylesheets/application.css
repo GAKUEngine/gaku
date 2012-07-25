@@ -10,7 +10,8 @@
  *= require themes/gakuengine/jquery-ui-1.8.18.custom.css
  * require kendo/kendo.common.min
  *= require kendo2012/kendo.common.min
- *= require kendo.gakuengine
+ *= require kendo2012/kendo.silver.min
+ * require kendo.gakuengine
  *= require buhin.css.scss
  *= require bootstrap.min
  *= require bootstrap-responsive.min

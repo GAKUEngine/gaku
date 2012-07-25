@@ -10,8 +10,8 @@ class StudentGrid extends BuHin
   studentsPerPage: 10
   fields: null
   titles:
-    name: "Name"
     surname: "Surname"
+    name: "Name"
     gender: "Gender"
 
   defColWidth: 128
@@ -26,32 +26,57 @@ class StudentGrid extends BuHin
       scrollable: false
       sortable: true
       pageable: true
-      resizable: true
+      resizable: false
       reorderable: true
+      # columnMenu: true
       columns: [
         {
           field: "surname"
           title: @titles.surname
-          width: 128
         },{
           field: "name"
           title: @titles.name
-          width: 128
         },{
           field: "gender"
           title: @titles.gender
-          width: 64
         },{
           field: "manage"
           title: @titles.manage
-          width: 64
+          width: 78
           encoded: false
+          resizable: false
           sortable: false
           groupable: false
         }]
-
-    console.log(@titles)    
+    
     @target.kendoGrid(gridArgs)
+
+  _createCheckbox: () ->
+
+    checkString = (check_s) ->
+      ths = $("#grid th")
+      i = 0
+      while i < ths.length
+        if $(ths[i]).text() is check_s
+          return i + 1
+          break
+        i++    
+           
+    checkBoxes = $("<div></div>")
+    $.each @titles, (key, value) ->
+      checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked><label class="help-inline" for="'+key+'">'+value+'</label></div>')
+      .appendTo(checkBoxes)
+    $("#table-checkboxes").html(checkBoxes.html())
+        
+    $("#table-checkboxes .form-inline").toggle ((e) ->
+      num = checkString(e.currentTarget.textContent)
+      $(e.currentTarget).find("input").removeAttr('checked')
+      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
+    ),(e) ->
+      num = checkString(e.currentTarget.textContent)
+      $(e.currentTarget).find("input").attr('checked','checked')
+      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
+
 
   refreshGrid: (query) ->
     $.getJSON query, (studentData) =>
@@ -79,7 +104,6 @@ class StudentGrid extends BuHin
           .html("<i class='icon-eye-open'></i>")
           .appendTo(managementButtons)
         editButton = $("<a></a>")
-          .css("margin-right","5px")
           .addClass("btn btn-mini")
           .attr("href", ('/students/' + @students[i].id + "/edit"))
           .html("<i class='icon-pencil'></i>")
@@ -87,8 +111,9 @@ class StudentGrid extends BuHin
         
         @students[i]["manage"] = managementButtons.html()
         i++
-
+        
       @_createGrid()
+      @_createCheckbox()
 
   _getFieldNames: () ->
     @fields = $("#fields")
@@ -109,7 +134,7 @@ class StudentGrid extends BuHin
     @_getFieldNames()
     @_getScreenMetrics()
     @refreshGrid("/students.json")
-
+  
   ProcessOptions: (options) ->
     if options
       if options["titles"]
