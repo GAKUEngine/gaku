@@ -2,7 +2,7 @@ class SyllabusesController < ApplicationController
 
   #before_filter :authenticate_user!
 
-  before_filter :load_syllabus, :only  => [:new_exam, :new_assignment, :show]
+  before_filter :load_syllabus,    :only  => [:create_exam, :create_assignment, :show]
   before_filter :load_before_show, :only => :show
 
   inherit_resources
@@ -20,7 +20,6 @@ class SyllabusesController < ApplicationController
   end
 
   def create_exam
-    @syllabus = Syllabus.find(params[:id])
     exam = Exam.create(params[:syllabus][:exam])
     if  @syllabus.exams << exam
       respond_to do |format|
@@ -30,8 +29,7 @@ class SyllabusesController < ApplicationController
   end
 
   def create_assignment
-    @syllabus = Syllabus.find(params[:id])
-    if  @syllabus.update_attributes(params[:syllabus])
+    if @syllabus.update_attributes(params[:syllabus])
       respond_to do |format|
         format.js {render 'create_assignment'}  
       end

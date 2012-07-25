@@ -10,8 +10,8 @@ class NotesController < ApplicationController
     @student = Student.find(params[:student_id])
     @note = @student.notes.build
     respond_to do |format|
-      format.html {render :partial => "students/new_note", :locals => {:student => @student}}
-      format.json {render :json => @note}
+      format.html { render :partial => "students/new_note", :locals => {:student => @student} }
+      format.json { render :json => @note }
     end    
   end
   
@@ -29,8 +29,8 @@ class NotesController < ApplicationController
 
     if @note.save
       respond_to do |format|
-        format.html{ redirect_to @student}
-        format.js{render 'create'}
+        format.html { redirect_to @student }
+        format.js   { render 'create' }
       end
     else
       redirect_to :back
