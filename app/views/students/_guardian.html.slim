@@ -1,5 +1,5 @@
 -unless guardian.nil? or guardian.new_record? or !guardian
-  tr
+  tr id="guardian_#{guardian.id}"
     td= guardian.id
     td= guardian.surname
     td= guardian.name
@@ -7,7 +7,7 @@
     td= guardian.name_reading
     td= guardian.relationship
     td= link_to t("show"), student_guardian_path(@student, guardian)
-    td= link_to t("edit"), edit_student_guardian_path(@student, guardian)
+    td= link_to t("edit"), edit_student_guardian_path(@student, guardian), :remote => true
     td= link_to t("delete"), student_guardian_path(@student, guardian), :method => :delete, :confirm => 'Are you sure?', :class => 'delete_link delete_guardian', :remote => true
     td= link_to t('students.add_contact'),  new_contact_student_guardian_path(@student, guardian), :remote => true,:data => {:target => '#newGuardianContanctModal', :toggle => 'modal'}  
     / new_student_guardian_contact_path(@student, guardian), 
