@@ -1,57 +1,73 @@
 = form_for(@exam) do |f|
   - if @exam.errors.any?
-    #error_explanation
-      h2
+    .alert.alert-error
+      strong
         = pluralize(@exam.errors.count, "error")
         | prohibited this exam from being saved:
       ul
         - @exam.errors.full_messages.each do |msg|
           li= msg
-  .field
-    = f.label :name
-    br/
-    = f.text_field :name
-  .field
-    = f.label :weight
-    br/
-    = f.text_field :weight
-  .field 
-    = f.label :description
-    br/
-    = f.text_area :description
-
-  p = t 'exam_portions.master'
-  = f.fields_for :exam_portions do |ep_form| 
-    - if ep_form.object.new_record?
-      .field
-        = ep_form.label t 'exam_portions.weight'
-        br/
-        = ep_form.number_field :weight
-      .field 
-        = ep_form.label t 'exam_portions.problem_count'
-        br/
-        = ep_form.number_field :problem_count
-      .field 
-        = ep_form.label t 'exam_portions.max_score'
-        br/
-        = ep_form.number_field :max_score
-      .field
-        = ep_form.label t 'exam_portions.description'
-        br/
-        = ep_form.text_area :description
-      .field
-        = ep_form.label t 'exam_portions.adjustments'
-        br/
-        = ep_form.text_area :adjustments
-      .field
-        = ep_form.label t 'exam_portions.execution_date'
-        br/
-        = ep_form.datetime_select :execution_date
-      .field
-        = ep_form.label t 'exam_portions.dynamic_scoring'
-        br/
-        = ep_form.check_box :dynamic_scoring
-
-
-  .actions
-    = f.submit
+  .row-fluid
+    .row-fluid
+      h4 = t('exams.new_exam')
+    .row-fluid
+      hr
+    .row-fluid
+      .span12.well
+        .row-fluid
+          .span9
+            = f.label :name, t("exams.name")
+            = f.text_field :name, :class => "span12"
+          .span3
+            = f.label :weight, t("exams.weight")
+            = f.number_field :weight, :class => "span12"
+        .row-fluid
+          .span6
+            = f.label :description, t("exams.description")
+            = f.text_area :description, :class => "span12", :size => "0x2"
+          .span6
+            = f.label :adjustments, t("exams.adjustments")
+            = f.text_area :adjustments, :class => "span12", :size => "0x2"
+        .row-fluid
+          .span12.form-inline
+            = f.check_box :dynamic_scoring
+            = f.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+    .row-fluid
+      h4 = t('exam_portions.master')
+    .row-fluid
+      hr
+    .row-fluid
+      = f.fields_for :exam_portions do |ep_form| 
+        - if ep_form.object.new_record?
+          .span12.well
+            .row-fluid
+              .span9
+                = ep_form.label :name, t('exam_portions.name')
+                = ep_form.text_field :name, :class => "span12"
+              .span3
+                = ep_form.label :weight, t('exam_portions.weight')
+                = ep_form.number_field :weight, :class => "span12"
+            .row-fluid
+              .span6
+                = ep_form.label :problem_count, t('exam_portions.problem_count')
+                = ep_form.number_field :problem_count, :class => "span12"
+              .span6
+                = ep_form.label :max_score, t('exam_portions.max_score')
+                = ep_form.number_field :max_score, :class => "span12"
+            .row-fluid
+              .span6
+                = ep_form.label :description, t('exam_portions.description')
+                = ep_form.text_area :description, :class => "span12", :size => "0x2"
+              .span6
+                = ep_form.label :adjustments, t('exam_portions.adjustments')
+                = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
+            .row-fluid
+              = ep_form.label :execution_date, t('exam_portions.execution_date')
+              = ep_form.datetime_select :execution_date
+            .row-fluid
+              .span12.form-inline
+                = ep_form.check_box :dynamic_scoring
+                = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+  .row-fluid
+    .span12.well
+      = f.submit nil, :class => "span12 btn btn-primary"

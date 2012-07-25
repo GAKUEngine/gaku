@@ -16,18 +16,20 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   addresses:
-    save:
     addresses: "Addresses"
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
-    country:
-    state: "State/Province/Prefecture"
+    country: "Country"
+    prefecture: "State/Province/Prefecture"
     city: "City"
-    address1:
-    address2:
+    address1: "Address 1"
+    address2: "Address 2"
+    state: "State"
     past: "Make past?"
-    list: "Addresses List"
+    count: "Addresses count"
+    list: "Addresses list"
+    choose_country: "Choose Country"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -80,11 +82,13 @@ en:
     add: "Add course"
     choose_course: "Choose course"
     enroll_student: "Enroll Student"
+    count: "Courses count"
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
     list: "Enrollments"
     add: "Enroll to course"
+    create: "Create enrollment"
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
@@ -115,6 +119,7 @@ en:
   exams:
     plural: "Exams"
     new: "New Exam"
+    new_exam: "New Exam Contents"
     add: "Add exam"
     list: "Exams List"
     view: "View Exams"
@@ -127,6 +132,7 @@ en:
     adjustments: "Adjustments"
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
+    show: "Show Exam"
   config:
     label: "Config"
     close: "Close"
@@ -166,6 +172,7 @@ en:
     content: "Content"
     add: "Add Note"
     delete: "Delete Note"
+    save: "Save note"
   class: Class
   semesters:
     list: "Semesters list"
@@ -194,3 +201,4 @@ en:
     dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
     master: "Master exam portion"
+  options: "Options"

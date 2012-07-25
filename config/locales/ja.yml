@@ -1,12 +1,4 @@
 ja:
-  activerecord:
-    models:
-      student: 生徒
-    attributes:
-      student:
-        surname: 氏名（性）
-        name:  氏名（名）
-  
   users:
     info: "ユーザー情報"
   hello: "ハローワールド"
@@ -37,8 +29,10 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
+    state: ""
     past: "履歴を作成しますか?"
     list: "住所一覧"
+    choose_country: "国を選択して下さい"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -70,7 +64,7 @@ ja:
   syllabus: "授業計画"
   syllabuses:
     plural: "授業計画表"
-    show: ""
+    show: "授業計画照会"
     new: "新規授業計画"
     edit: "授業計画の編集"
     list: "授業計画一覧"
@@ -91,11 +85,13 @@ ja:
     save: ""
     choose_course: ""
     enroll_student: "Enroll Student"
+    count: ""
   num_courses: ""
   add_course: ""
   course_enrollments:
     list: "授業在籍一覧"
     add: ""
+    create: ""
   class_group_management: "クラス管理"
   class_groups:
     plural: "クラスグループ"
@@ -137,13 +133,15 @@ ja:
     name: "試験名称"
     view: "試験参照"
     new: "新規試験登録"
+    new_exam: "新規試験内容"
     add_portion: '試験の部分を追加'
-    add: "登録"
+    add: "試験登録"
     count: "試験数"
     description: "試験の説明"
     adjustments: "調整"
     weight: "加重率"
     dynamic_scoring: "動的採点"
+    show: "試験照会"
   execution_date: "実行日"
   config:
     label: "設定"
@@ -196,21 +194,21 @@ ja:
   options: "オプション"
   notice:
     no_assignments: "No assignments, assign one first"
-    no_exams: "No exams, assign one first"
+    no_exams: "試験が登録されていません、新しく試験を追加して下さい。"
   select: "Select"
   pictures:
     change: "写真を変更"
     upload: "写真をアップロード"
   exam_portions:
-    list: "Exam portions list"
-    count: "Exam portions count"
-    name: "Portion name"
-    max_score: "Maximum score"
-    weight: "Weight"
-    problem_count: "Problem count"
-    description: "Description"
-    adjustments: "Adjustments"
-    execution_date: "Execution date"
-    dynamic_scoring: "Dynamic scoring"
-    is_master: "Master"
-    master: ""
+    list: "試験要素リスト"
+    count: "試験要素数"
+    name: "試験要素名"
+    max_score: "最高点数"
+    weight: "加重率"
+    problem_count: "問題数"
+    description: "試験要素の説明"
+    adjustments: "調整"
+    execution_date: "実施日"
+    dynamic_scoring: "動的計算"
+    is_master: "マスター"
+    master: "試験要素内容（マスター）"

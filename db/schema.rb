@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
   create_table "states", :force => true do |t|
     t.string  "name"
     t.string  "abbr"
+    t.string  "name_ascii"
     t.integer "country_numcode"
   end
 

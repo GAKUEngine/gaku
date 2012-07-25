@@ -1,0 +1,8 @@
+ja:
+  fields:
+    id: "データベースID"
+    surname: 氏名 (姓)
+    name: 氏名 (名)
+    surname_reading: ﾌﾘｶﾞﾅ (姓)
+    name_reading: ﾌﾘｶﾞﾅ (名)
+

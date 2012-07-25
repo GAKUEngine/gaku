@@ -25,51 +25,6 @@ describe Address do
       address.state_name = 'alabama'
       address.should be_valid
     end
-
-    it "errors when state_name is nil" do
-      address.state_name = nil
-      address.state = nil
-      address.should_not be_valid
-    end
-
-    it "full state name is in state_name and country does contain that state" do
-      address.state_name = 'alabama'
-      # called by state_validate to set up state_id.
-      # Perhaps this should be a before_validation instead?
-      address.should be_valid
-      address.state.should_not be_nil
-      address.state_name.should be_nil
-    end
-
-    it "state abbr is in state_name and country does contain that state" do
-      address.state_name = state.abbr
-      address.should be_valid
-      address.state_id.should_not be_nil
-      address.state_name.should be_nil
-    end
-
-    it "state is entered but country does not contain that state" do
-      address.state = state
-      address.country = stub_model(Country)
-      address.valid?
-      address.errors["state"].should == ['is invalid']
-    end
-
-    it "both state and state_name are entered but country does not contain the state" do
-      address.state = state
-      address.state_name = 'maryland'
-      address.country = stub_model(Country)
-      address.should be_valid
-      address.state_id.should be_nil
-    end
-
-    it "both state and state_name are entered and country does contain the state" do
-      address.state = state
-      address.state_name = 'maryland'
-      address.should be_valid
-      address.state_name.should be_nil
-    end
-
   end
 
   context ".default" do
