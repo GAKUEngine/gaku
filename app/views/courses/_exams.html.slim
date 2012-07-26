@@ -1,2 +1,131 @@
-#course_exams
-  = render :partial => "mockups/exam_composite"
+#exam_grading_area
+    .row-fluid
+      .span12
+        table.table.table-striped.table-bordered.table-condensed
+          thead.th-center
+            tr
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+              th colspan="5"
+              th colspan="5"
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+              th rowspan="2"
+            tr
+              th 素点
+              th その他１
+              th その他２
+              th 得点
+              th 欠席
+              th 素点
+              th その他３
+              th その他４
+              th 得点
+              th 欠席
+          tbody
+            tr
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td.td-left テストテスト
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+            tr
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td.td-left &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+              td &nbsp;
+          thead
+            tr
+              th.th-center colspan="4"
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+            tr
+              th.th-center colspan="4"
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+            tr
+              th.th-center colspan="4"
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+              th &nbsp;
+
+= javascript_include_tag "exam_grading_widget"
+coffee:
+  $("#exam_grading_area").examGradingWidget()
