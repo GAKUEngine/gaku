@@ -6,7 +6,7 @@
     .modal-header
       button.close type="button" data-dismiss="modal"
         'x
-      h3=t 'edit address'
+      h3= t("addresses.edit")
     .modal-body
       .validation-error
       .form-inputs
@@ -42,7 +42,7 @@
               =address_form.label :past, t('addresses.past')
               =address_form.check_box :past
         .row-fluid
-            = address_form.submit t('class_groups.create_class_group_enrollment'), :class => 'btn btn btn-primary'
+            = address_form.submit t('addresses.save'), :class => 'btn btn btn-primary'
             = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
 
 

@@ -15,6 +15,14 @@ class NotesController < ApplicationController
     end    
   end
   
+  def edit
+    @note = Note.find(params[:id])
+    @student = Student.find(params[:student_id])
+    super do |format|
+      format.js {render 'edit'}  
+    end  
+  end
+
   def create
     @student = Student.find(params[:student_id])
     @note = @student.notes.build(params[:note])
@@ -29,6 +37,14 @@ class NotesController < ApplicationController
     end
   end
   
+  def update
+    @student = Student.find(params[:student_id])
+    super do |format|
+      # Find student/show note row to update it
+      format.js {render 'update'}  
+    end  
+  end
+
   def destroy
     #destroy! :flash => !request.xhr?
     @note = Note.find(params[:id])
