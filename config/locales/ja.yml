@@ -102,7 +102,7 @@ ja:
     new: "新規クラス登録"
     name: "クラス名"
     grade: "学年"
-    homeroom: "主教室"
+    homeroom: "主要教室"
     choose_student: 'Choose Student'
     create_class_group_enrollment: ''
   class_group_enrollments:
