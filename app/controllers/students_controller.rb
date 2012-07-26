@@ -7,19 +7,21 @@ class StudentsController < ApplicationController
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
   before_filter :load_class_groups, :only => [:new, :edit]
-  before_filter :load_before_show, :only => :show
+  before_filter :load_before_show,  :only => :show
+  before_filter :load_student,      :only => [:new_address, :create_address, :new_guardian, :create_guardian, :edit, :update]
   
   def index
     @students = Student.all
 
     if params[:action] == "get_csv_template"
-      get_csv_template()
+      get_csv_template
       return
     end
+
     respond_to do |format|
       format.html
-      format.json {render :json => @students}
-      format.csv { export_csv_index(@students)}
+      format.json { render :json => @students }
+      format.csv  { export_csv_index(@students) }
     end
   end
 
@@ -73,17 +75,7 @@ class StudentsController < ApplicationController
     render :student_import_preview
   end
 
-  def new
-    @student = Student.new
-    #@student.profile.build
-  end
-
-  def edit
-    @student = Student.find(params[:id])
-  end
-  
   def update
-    @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       redirect_to @student
     else
@@ -96,12 +88,10 @@ class StudentsController < ApplicationController
   end
 
   def new_address
-    @student = Student.find(params[:id])
     @student.addresses.build
   end
 
   def create_address
-    @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_address'}  
@@ -110,12 +100,10 @@ class StudentsController < ApplicationController
   end
 
   def new_guardian
-    @student = Student.find(params[:id])
     @student.guardians.build
   end
 
   def create_guardian
-    @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js {render 'create_guardian'}  
@@ -128,6 +116,10 @@ class StudentsController < ApplicationController
     def load_class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]
+    end
+
+    def load_student
+      @student = Student.find(params[:id])
     end
 
     def load_before_show

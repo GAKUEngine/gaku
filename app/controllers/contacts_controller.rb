@@ -10,13 +10,13 @@ class ContactsController < ApplicationController
 	  	@contact = @guardian.contacts.build(params[:contact])
 	  	if @contact.save
 	  		respond_with do |format|
-	  			format.js {render 'guardian_contact'}
+	  			format.js { render 'guardian_contact' }
 	  		end
 	  	else
         render :nothing => true
       end
   	else
-  		#handle contact create for student 
+  		#TODO handle contact create for student 
   	end
   end
 
