@@ -54,6 +54,7 @@ en:
     graduated: "Graduated"
     add_address: "Add Address"
     picture:
+    choose_gender: 'Choose Gender'
     class_group_enrollment: "Class enrollment"
     add_contact: "Add Contact"
     create_contact: "Create Contact"
@@ -156,6 +157,7 @@ en:
   genders:
     male: "Male"
     female: "Female"
+    unknown: "Unknown"
   profile: "Profile"
   profiles:
     new: "New Profile"

@@ -10,7 +10,7 @@
           td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
-          td =t("genders."+@student.gender)
+          td =gender(@student)
         tr
           th =t("students.birth")
           td =@student.birth_date
