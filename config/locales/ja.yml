@@ -186,6 +186,10 @@ ja:
     add: "連絡先の追加"
     data: "情報"
     details: "詳細"
+    primary: "Primary"
+    emergency: "Emergency"
+    actions: "Actions"
+    make_primary: "Make Primary"
   note: "備考"
   notes:
     notes: "備考"

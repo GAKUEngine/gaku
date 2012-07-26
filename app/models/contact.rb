@@ -9,6 +9,14 @@ class Contact < ActiveRecord::Base
 
   before_save :ensure_first_primary, :on => :create
 
+
+  def make_primary_student
+    user_contacts = Contact.where(:student_id => self.student_id)
+    user_contacts.update_all(:is_primary => false)
+    self.is_primary = true
+    self.save
+  end
+
   private
 
   def ensure_first_primary
