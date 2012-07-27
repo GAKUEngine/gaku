@@ -8,8 +8,9 @@ GAKUEngine::Application.routes.draw do
   resources :semesters  
 
   resources :courses do
-    resources :exams
-    resources :exam_portion_scores
+    resources :exams do
+      resources :exam_portion_scores
+    end
   end
 
   resources :course_enrollments do
