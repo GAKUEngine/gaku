@@ -255,16 +255,16 @@ ActiveRecord::Schema.define(:version => 20120727111921) do
   create_table "students", :force => true do |t|
     t.string   "name"
     t.string   "surname"
-    t.string   "name_reading"
-    t.string   "surname_reading"
+    t.string   "name_reading",         :default => ""
+    t.string   "surname_reading",      :default => ""
     t.boolean  "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth_date"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "user_id"
     t.integer  "faculty_id"
     t.string   "picture_file_name"
