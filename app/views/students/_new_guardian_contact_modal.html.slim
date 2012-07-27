@@ -1,0 +1,25 @@
+.modal.hide#newGuardianContanctModal wmode="opaque"
+	.modal-header
+		button.close type="button" data-dismiss="modal"
+			'x
+		h3 = "New Guardian Contact"
+	.modal-body
+		=form_for([@student, @guardian, @contact], {:remote => true}) do |f|
+			.field
+				=f.label :contact_type
+				=f.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, :promt => "Choose Contact Type"
+			.field
+				=f.label :data
+				=f.text_field :data
+			.field
+				=f.label :details
+				=f.text_field :details
+			/ Fix checkboxes position
+			.field
+				=f.label :is_primary
+				=f.check_box :is_primary, {}, 0, 1
+			.field
+				=f.label :is_emergency
+				=f.check_box :is_emergency, {}, 0, 1
+			.actions
+				=f.submit t('students.create_contact'), :class => 'btn btn-primary'

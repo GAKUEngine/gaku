@@ -4,6 +4,7 @@ en:
   Show: "Show"
   Edit: "Edit"
   Destroy: "Destroy"
+  Delete: "Delete"
   Back: "Back"
   cancel: "Cancel"
   required:
@@ -30,6 +31,8 @@ en:
     count: "Addresses count"
     list: "Addresses list"
     choose_country: "Choose Country"
+    edit: "Edit address"
+    save: "Save address"
   phone: "Phone Number"
   email: "Mail Address"
   admitted: "Enrollment Date"
@@ -52,6 +55,11 @@ en:
     graduated: "Graduated"
     add_address: "Add Address"
     picture:
+    choose_gender: 'Choose Gender'
+    class_group_enrollment: "Class enrollment"
+    add_contact: "Add Contact"
+    create_contact: "Create Contact"
+    contact_type: 'Contact Type'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -98,9 +106,14 @@ en:
     grade: "Grade"
     homeroom: "Home Room"
     choose_student: 'Choose Student'
-    create_class_group_enrollment: 'Create Class Group Enrollment'
+    create_class_group_enrollment: 'Create Class Enrollment'
   class_group_enrollments:
     list: "Class Roster"
+    new: "New class enrollment"
+    seat_number: "Seat number"
+    class_groups: "Class groups"
+    current_enrollment: "Current enrollment"
+    enrollments_count: "Enrollments count"
   grades:
     average_points: "Average Score"
     total_points: "Total Score"
@@ -146,6 +159,7 @@ en:
   genders:
     male: "Male"
     female: "Female"
+    unknown: "Unknown"
   profile: "Profile"
   profiles:
     new: "New Profile"
@@ -157,13 +171,17 @@ en:
     relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
-  contact_type: ""
+    edit: "Edit guardian"
+  contact_type: "Contact Type"
   contact_types:
-     add: ""
-  contact: ""
+     add: 
+  contact: 
   contacts:
-    data: ""
-    details: ""
+    data: "Data"
+    details: "Details"
+    primary: "Primary"
+    emergency: "Emergency"
+    actions: 'Actions'
   note: "Notes"
   notes:
     notes: "Notes"
@@ -173,6 +191,7 @@ en:
     add: "Add Note"
     delete: "Delete Note"
     save: "Save note"
+    edit: "Edit note"
   class: Class
   semesters:
     list: "Semesters list"

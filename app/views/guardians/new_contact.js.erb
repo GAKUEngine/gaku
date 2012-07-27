@@ -1,0 +1,3 @@
+$('.modal-backdrop').remove();
+$('#guardians_modal').html('<%= escape_javascript(render :partial => "students/new_guardian_contact_modal", :formats => [:html], :handlers => [:erb, :slim]) %>');
+$('#newGuardianContanctModal').modal('show');

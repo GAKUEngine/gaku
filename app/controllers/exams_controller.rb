@@ -1,7 +1,7 @@
 class ExamsController < ApplicationController
 
   #before_filter :authenticate_user!
-  before_filter :load_exam, :only => :show
+  before_filter :load_exam, :only => [:show, :destroy, :create_exam_portion]
   before_filter :load_before_show, :only => :show
 
   inherit_resources
@@ -9,8 +9,7 @@ class ExamsController < ApplicationController
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
   def create_exam_portion
-    @exam = Exam.find(params[:id])
-    if  @exam.update_attributes(params[:exam])
+    if @exam.update_attributes(params[:exam])
       respond_to do |format|
         format.js {render 'create_exam_portion'}
       end
@@ -24,7 +23,6 @@ class ExamsController < ApplicationController
   
   def destroy
     #destroy! :flash => !request.xhr?
-    @exam = Exam.find(params[:id])
     @exam.destroy
     respond_to do |format|
         format.js { render :nothing => true }

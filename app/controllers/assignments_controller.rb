@@ -11,7 +11,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     @assignment.destroy
     respond_to do |format|
-        format.js { render :nothing => true }
+      format.js { render :nothing => true }
     end
   end
   

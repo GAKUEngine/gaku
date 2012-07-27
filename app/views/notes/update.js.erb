@@ -1,0 +1,1 @@
+$('tr#note_<%= @note.id %>').html('<%= escape_javascript(render :partial => "note", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');

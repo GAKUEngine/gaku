@@ -1,0 +1,31 @@
+---
+home_phone:
+  id: 1
+  name: Home Phone
+work_phone:
+  id: 2
+  name: Work Phone
+mobile_phone:
+  id: 3
+  name: Mobile Phone
+phone:
+  id: 4
+  name: Phone
+email:
+  id: 5
+  name: 'E-Mail'
+mobile_mail:
+  id: 6
+  name: Mobile Mail
+skype:
+  id: 7
+  name: Skype
+google_plus:
+  id: 8
+  name: Google Plus
+facebook:
+  id: 9
+  name: Facebook
+twitter:
+  id: 10
+  name: twitter

@@ -1,0 +1,1 @@
+$('tr#guardian_<%= @guardian.id %>').html('<%= escape_javascript(render :partial => "guardian", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @guardian}) %>');

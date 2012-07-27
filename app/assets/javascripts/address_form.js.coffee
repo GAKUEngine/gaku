@@ -11,8 +11,13 @@ $ ->
 			dataType: 'json'
 			success: (data)->
 				stateLabel = $('.state_label')
+
 				stateDropdownName = stateDropdown.attr('name')
 				stateSelect = $('<select class="span12 state_select" name="' + stateDropdownName + '"> ')
+				
+				console.log(data)
+				console.log($.isEmptyObject(data))
+
 				if $.isEmptyObject(data) 
 					$('.state_select').remove()
 					stateLabel.after stateDropdown

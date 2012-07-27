@@ -2,74 +2,90 @@
   .alert.alert-info
     button.close{data-dismiss="alert"} ×
     = notice
-p
-  b
-    = t("class_groups.name")
-  = @class_group.name
-  br
-  b
-    = t("class_groups.grade")
-  = @class_group.grade
-  br
-  b
-    = t("class_groups.homeroom")
-  = @class_group.homeroom
-#class_group_enrollments
-  p#enrolled_students_count
-    b
-      = t :num_enrolled
-    span
-      =@class_group.class_group_enrollments.count
-  p#enrolled_students_list
-    b
-      = t "class_group_enrollments.list"
-  ul
-    - @class_group.class_group_enrollments.each do |enrollment|
-      li= "#{enrollment.student.name} #{enrollment.student.surname}"
-/TODO: server side validation for duplicate class group enrollment 
-#add_student_enrollment
-  = link_to t('add_student'), new_class_group_enrollment_path(:class_group_id => @class_group.id), :class => "btn"
-div id='enrollment_form' style='display:none'
-  =render 'new_class_group_enrollment'
-br
-#class_group_semesters
-  p#semesters_count
-    b
-      = t :num_semesters
-    =  @class_group.semesters.count
-  p#semesters_list
-    b
-      = t "semesters.list"
-  ul
-    - @class_group.semesters.each do |semester|
-      li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
-
-#add_semester
-  = link_to t('add_semester'), '#', :id => 'show_semester_form', :class => "btn"
-br
-/TODO need to redirect to the right route after create!
-div id="semester_form" style="display:none"
-  = render 'new_semester'
-#class_group_courses
-  p#courses_count
-    b
-      = t :num_courses
-    =  @class_group.courses.count
-  p#courses_list
-    b
-      = t "courses.list"
-  ul
-    - @class_group.courses.each do |course|
-      li= course.code
-
-#add_course
-  = link_to t('add_course'), '#', :id=> 'show_course_form',:class => "btn"
-br
-/TODO need to redirect to the right route after create!
-div id="course_form" style="display:none"
-  = render 'new_course'
-= link_to t(:Edit), edit_class_group_path(@class_group)
-= link_to t(:Back), class_groups_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('class_groups.show')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      table.table.table-condensed.table-striped.table-bordered
+        thead
+          tr
+            th =t("class_groups.grade")
+            th =t("class_groups.name")
+            th =t("class_groups.homeroom")
+        tbody
+          tr
+            td =@class_group.name
+            td =@class_group.grade
+            td =@class_group.homeroom
+    .row-fluid.mt-l
+      .span12.well
+        .tabbable.tabs-right
+          ul.nav.nav-tabs
+            li.active
+              a*{'data-toggle' =>"tab", 'href' => "#class_group_enrollments"} =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
+            li
+              a*{'data-toggle' =>"tab", 'href' => "#semesters"} =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+            li
+              a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
+          .tab-content
+            #class_group_enrollments.tab-pane.active
+              .row-fluid
+                .pull-left
+                  h4 style="height:28px;line-height:28px" =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
+                .pull-right
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_class_group_enrollment_path(:class_group_id => @class_group.id), :remote => true, :class => "btn btn-primary"
+              .row-fluid
+                hr
+              .row-fluid
+                ul
+                  - @class_group.class_group_enrollments.each do |enrollment|
+                    li= "#{enrollment.student.name} #{enrollment.student.surname}"
+              .row-fluid
+                /TODO: server side validation for duplicate class group enrollment 
+                div id='enrollment_form' style='display:none'
+                  =render 'new_class_group_enrollment'
+            #semesters.tab-pane
+              .row-fluid
+                .pull-left
+                  h4 style="height:28px;line-height:28px" =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+                .pull-right
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, '#', :id => 'show_semester_form', :class => "btn btn-primary"
+              .row-fluid
+                hr
+              .row-fluid
+                ul
+                  - @class_group.semesters.each do |semester|
+                    li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
+              .row-fluid
+                /TODO need to redirect to the right route after create!
+                div id="semester_form" style="display:none"
+                  = render 'new_semester'
+            #courses.tab-pane
+              .row-fluid
+                .pull-left
+                  h4 style="height:28px;line-height:28px" =t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
+                .pull-right
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, '#', :id=> 'show_course_form',:class => "btn btn-primary"
+              .row-fluid
+                hr
+              .row-fluid
+                ul
+                  - @class_group.courses.each do |course|
+                    li= course.code
+              .row-fluid
+                /TODO need to redirect to the right route after create!
+                div id="course_form" style="display:none"
+                  = render 'new_course'
+    .row-fluid
+      .span12.well
+        = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :style => "min-height:0px"
+        = link_to t("Back"), class_groups_path, :class => "span6 btn", :style => "min-height:0px"
 
 javascript:
   $(document).ready(function() {

@@ -1,0 +1,2 @@
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "address_form_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
+$('#editAddressModal').modal('show');

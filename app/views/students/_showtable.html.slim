@@ -10,7 +10,7 @@
           td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
-          td =t("genders."+@student.gender)
+          td =gender(@student)
         tr
           th =t("students.birth")
           td =@student.birth_date
@@ -23,16 +23,38 @@
         tr
           th =t("students.admitted")
           td =@student.admitted
+        tr
+          th =t("students.class_group_enrollment")
+          td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
+        
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       .span12.pagination-centered
         = image_tag @student.picture.url(:thumb), :id => "student_picture"
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
       div id="upload_picture" style="display:none;"
         = render 'upload_picture'
+.row-fluid
+  .span12.well
+    table.table.table-striped.table-bordered.table-condensed.student_contact_table
+      thead
+        tr
+          th =t('contact_type')
+          th =t('contacts.data')
+          th =t('contacts.details')
+          th =t('contacts.primary')
+          th =t('contacts.emergency')
+          th =t('contacts.actions')
+      tbody
+        =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
+    br/ 
+    #add_new_student_contact
+      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
+    =render 'new_student_contact_form'
+
 .row-fluid
   .span12.well
     .tabbable.tabs-right
@@ -61,7 +83,11 @@
     .span4
       = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
     .span4
-      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id), :class => "span12 btn", :style => "min-height:0px"
+      = link_to t("enroll_to_class"), new_class_group_enrollment_path(:student_id => @student.id),  {:'data-target' => "#newContactModal", :'data-toggle' => "modal", :id => 'create_contact', :class => "span12 btn", :style => "min-height:0px"}
+
+== render 'new_class_enrollment_modal'
+
+#modal_dialogs
 
 coffee:
   $("#upload_picture_link").click ->

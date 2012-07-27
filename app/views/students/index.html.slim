@@ -2,11 +2,10 @@
   .span1
   .span10
     .row-fluid
-      h3.pull-left = t("students.list")
+      .pull-left
+        h3 = t("students.list")
       .pull-right
-        = link_to new_student_path, :class => "btn btn-primary", :id => "new_student_link" do
-          i.icon-plus.icon-white
-          = " "+t("students.new")
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.new")).html_safe, new_student_path, :class => "btn btn-primary", :id => "new_student_link"
     .row-fluid
       .span12
         hr/
@@ -14,7 +13,16 @@
       .span12.well
         .row-fluid
           .span12
-            div checkboxes
+            = link_to "Student Registration CSV", :action => :get_csv_template
+            = form_for :import_student_list, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
+              label for="import_student_list"
+                CSV file
+              = f.file_field :file
+              = submit_tag 'Submit'
+            = link_to "CSV Export", "students.csv"
+        .row-fluid
+          .span12
+            div#table-checkboxes
         .row-fluid
           .span12
             hr/
@@ -26,6 +34,11 @@
                 th data-field="name"  = t('students.name')
                 th data-field="gender" = t('gender')
                 th data-field="manage" = t('manage')
+                
+              tr#gender
+                th =t("genders.male")
+                th =t("genders.female")
+                
         .row-fluid
           .span12
             #grid.span12

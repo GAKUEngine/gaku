@@ -5,7 +5,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string   :surname
       t.string   :name_reading
       t.string   :surname_reading
-      t.string   :gender
+      t.boolean  :gender
       t.string   :phone
       t.string   :email
       t.date     :birth_date
