@@ -7,7 +7,11 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses
+  resources :courses do
+    resources :exams do
+      resources :exam_portion_scores
+    end
+  end
 
   resources :course_enrollments do
     post :enroll_student, :on => :collection
@@ -37,9 +41,6 @@ GAKUEngine::Application.routes.draw do
     resources :contacts
     resources :exams
     resources :courses
-    
-    resources :addresses
-
     resources :contacts do
       post :make_primary, :on => :member
     end
