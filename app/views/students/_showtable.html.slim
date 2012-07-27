@@ -10,7 +10,7 @@
           td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
-          td =t("genders."+@student.gender)
+          td =gender(@student)
         tr
           th =t("students.birth")
           td =@student.birth_date
@@ -37,6 +37,24 @@
       = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
       div id="upload_picture" style="display:none;"
         = render 'upload_picture'
+.row-fluid
+  .span12.well
+    table.table.table-striped.table-bordered.table-condensed.student_contact_table
+      thead
+        tr
+          th =t('contact_type')
+          th =t('contacts.data')
+          th =t('contacts.details')
+          th =t('contacts.primary')
+          th =t('contacts.emergency')
+          th =t('contacts.actions')
+      tbody
+        =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
+    br/ 
+    #add_new_student_contact
+      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
+    =render 'new_student_contact_form'
+
 .row-fluid
   .span12.well
     .tabbable.tabs-right

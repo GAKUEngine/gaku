@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
     t.string   "surname"
     t.string   "name_reading"
     t.string   "surname_reading"
-    t.string   "gender"
+    t.boolean  "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth_date"

@@ -39,6 +39,10 @@ GAKUEngine::Application.routes.draw do
     resources :courses
     
     resources :addresses
+
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
     get :new_address, :on => :member
     put :create_address, :on => :collection
     get :new_guardian, :on => :member

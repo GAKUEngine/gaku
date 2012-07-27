@@ -123,6 +123,7 @@ class StudentsController < ApplicationController
     end
 
     def load_before_show
+      @new_contact = Contact.new
       @new_guardian = Guardian.new
       @new_note = Note.new
       @new_course_enrollment = CourseEnrollment.new
