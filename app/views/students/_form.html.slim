@@ -34,7 +34,7 @@
           = form.text_field :birth_date, :class => "span12 datepicker"
         .span3
           = form.label :gender, t("gender")
-          = form.select :gender, {t("genders.male") => "male", t("genders.female") => "female"}, {}, :class => "span12"
+          = form.select :gender, {t("genders.female") => false , t("genders.male") => true}, {:prompt => t('students.choose_gender')}, :class => "span12"
         .span3
           = form.label :phone, t("phone"), :class => "control-label pull-left"
           = form.text_field :phone, :class => "span12"

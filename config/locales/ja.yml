@@ -7,6 +7,7 @@ ja:
   Edit: "編集"
   Update: "更新"
   Destroy: "削除"
+  Delete: "Delete"
   Back: "戻る"
   cancel: "キャンセル"
   required: "必須"
@@ -59,6 +60,7 @@ ja:
     picture: "生徒写真"
     add_contact: "Add Contact"
     create_contact: "Create Contact"
+    choose_gender: 'Choose Gender'
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -164,6 +166,7 @@ ja:
   genders:
     male: "男性"
     female: "女性"
+    unknown: "Unknown"
   profile: "プロフィール"
   profiles:
     new: "新規プロフィール登録"
@@ -184,6 +187,10 @@ ja:
     add: "連絡先の追加"
     data: "情報"
     details: "詳細"
+    primary: "Primary"
+    emergency: "Emergency"
+    actions: "Actions"
+    make_primary: "Make Primary"
   note: "備考"
   notes:
     notes: "備考"
