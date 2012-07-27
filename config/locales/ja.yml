@@ -90,7 +90,7 @@ ja:
     enroll_student: "Enroll Student"
     count: 
   num_courses: 
-  add_course: 
+  add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
     add: 
@@ -201,7 +201,7 @@ ja:
     ending:   
     save: "保存"
   num_semesters: 
-  add_semester: 
+  add_semester: "学期を追加する"
   options: "オプション"
   notice:
     no_assignments: "No assignments, assign one first"

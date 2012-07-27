@@ -2,7 +2,8 @@
   .span1
   .span10
     .row-fluid
-      h3.pull-left = t("students.list")
+      .pull-left
+        h3 = t("students.list")
       .pull-right
         = link_to ("<i class='icon-white icon-plus'></i> " + t("students.new")).html_safe, new_student_path, :class => "btn btn-primary", :id => "new_student_link"
     .row-fluid
