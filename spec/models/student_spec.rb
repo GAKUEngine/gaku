@@ -18,6 +18,8 @@ describe Student do
     it { should have_many(:contacts) }
     it { should have_many(:notes) }
     it { should have_many(:assignment_scores) }
+    it { should have_many(:exam_portion_scores) }
+
 
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:surname) }
