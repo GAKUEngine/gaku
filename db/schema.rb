@@ -121,8 +121,6 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
 
   create_table "exam_portion_scores", :force => true do |t|
     t.float    "score"
-    t.integer  "division"
-    t.text     "comment"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "exam_portion_id"

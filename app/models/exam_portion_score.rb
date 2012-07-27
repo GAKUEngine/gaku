@@ -1,6 +1,6 @@
 class ExamPortionScore < ActiveRecord::Base
   belongs_to :exam_portion
-  attr_accessible :score, :comment, :division
+  attr_accessible :score
 
   validates :score, :numericality => { :greater_than_or_equal_to => 0 }, :presence => true
 
