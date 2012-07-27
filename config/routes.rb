@@ -7,7 +7,10 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses
+  resources :courses do
+    resources :exams
+    resources :exam_portion_scores
+  end
 
   resources :course_enrollments do
     post :enroll_student, :on => :collection
