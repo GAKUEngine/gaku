@@ -5,6 +5,10 @@ class ExamGradingWidget extends BuHin
     element: null
     buttonGroups: null
 
+  grid: null
+
+  data: null
+
   _addButtonGroup: (target, id, title, iconClasses) ->
     newGroup = $("<div></div>")
     newGroup.attr("id", id)
@@ -63,8 +67,14 @@ class ExamGradingWidget extends BuHin
     @_addButton(toolbox, "auto_rank", "AutoRank", null)
     @_addButton(toolbox, "view_scales", "View Scales", null)
 
-
     @controlBar.element.appendTo(@target)
+    return @controlBar
+
+  createGrid: () ->
+    @grid = $("<div></div>")
+
+    @grid.kendoGrid()
+    
 
   init: () ->
     if @target == null
@@ -72,6 +82,7 @@ class ExamGradingWidget extends BuHin
 
     @target.addClass("well")
     @createControlBar()
+    @createGrid()
 
     #@target.append(@controlBar)
 

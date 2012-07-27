@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20120722132247) do
   create_table "contacts", :force => true do |t|
     t.string   "data"
     t.text     "details"
+    t.boolean  "is_primary"
+    t.boolean  "is_emergency"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "contact_type_id"
