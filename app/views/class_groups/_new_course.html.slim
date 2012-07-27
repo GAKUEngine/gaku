@@ -5,5 +5,5 @@
         = f.label :code, t("courses.code"), :class => "control-label"
         = f.text_field :code, :class => "span12"
         = f.hidden_field :class_group_id, :value => @class_group.id
-      .row-fluid style="margin-top:10px"
+      .row-fluid.mt-s
         = f.submit t("courses.save"), :class => "span12 btn btn-primary"

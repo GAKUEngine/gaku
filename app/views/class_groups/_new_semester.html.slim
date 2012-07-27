@@ -10,5 +10,5 @@
           = f.label :ending, t("semesters.ending"), :class => "control-label"
           = f.date_select :ending, :class => "span12"
         = f.hidden_field :class_group_id, :value => @class_group.id
-      .row-fluid style="margin-top:10px"
+      .row-fluid.mt-s
         = f.submit t("semesters.save"), :class => "span12 btn btn-primary"
