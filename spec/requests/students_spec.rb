@@ -60,4 +60,29 @@ describe 'Student' do
     end
   end
 
+  context "studets contacts"  do
+    before(:each) do
+      @contact = Factory(:contact, :student_id => @student1)    
+    end 
+    it "should have contact" do
+      visit student_path(@student1)
+      page.should have_content("#{@contact.data}") 
+    end
+
+    it "should have right contact classes in tr" do
+      visit student_path(@student1)
+      page.should have_selector('tr', :class=> "student_contact contact_#{@contact.id}") 
+    end
+
+    it "should have primary column with right class " do
+      visit student_path(@student1)
+      page.should have_selector('td', :class=> "primary_contact") 
+    end
+
+    it "should have action column with right class for button " do
+      visit student_path(@student1)
+      page.should have_selector('td', :class=> "primary_button") 
+    end
+  end
+
 end

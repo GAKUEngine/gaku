@@ -23,7 +23,7 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture
 
-  has_attached_file :picture, :styles => {:thumb => "256x256>"}
+  has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
   validates :name, :surname, :presence => true
 

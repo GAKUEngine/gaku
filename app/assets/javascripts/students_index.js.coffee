@@ -64,8 +64,9 @@ class StudentGrid extends BuHin
            
     checkBoxes = $("<div></div>")
     $.each @titles, (key, value) ->
-      checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked><label class="help-inline" for="'+key+'">'+value+'</label></div>')
-      .appendTo(checkBoxes)
+      if key != "manage"
+        checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked><label class="help-inline" for="'+key+'">'+value+'</label></div>')
+        .appendTo(checkBoxes)
     $("#table-checkboxes").html(checkBoxes.html())
         
     $("#table-checkboxes .form-inline").toggle ((e) ->
