@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
   
   attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
 
-  validates_presence_of :data, :details, :contact_type_id
+  validates_presence_of :data,:contact_type_id
 
   before_save :ensure_first_primary, :on => :create
 

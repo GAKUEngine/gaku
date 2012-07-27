@@ -76,13 +76,20 @@ class ExamGradingWidget extends BuHin
     @grid.kendoGrid()
     
 
+  createWidget: () ->
+    @createControlBar()
+    @createGrid()
+
+
+  obtainData: (cb) ->
+    
+
   init: () ->
     if @target == null
       return
 
     @target.addClass("well")
-    @createControlBar()
-    @createGrid()
+    @obtainData(@createWidget())
 
     #@target.append(@controlBar)
 

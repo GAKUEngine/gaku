@@ -7,6 +7,19 @@ class ExamsController < ApplicationController
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
+  
+  def index
+    if params[:course_id]
+      @exams = Course.find(params[:course_id]).syllabus.exams
+    else
+      @exams = Exam.all()
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @exams}
+    end
+  end
 
   def create_exam_portion
     if @exam.update_attributes(params[:exam])
