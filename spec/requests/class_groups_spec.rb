@@ -20,41 +20,25 @@ describe 'ClassGroups' do
       click_button "Create Class group"
 
       page.should have_content "was successfully created"
-
     end
   end
 
   context "show class group" do
     it "should list existing enrolled students" do
       visit class_group_path(@class_group)
-      page.should have_content "Number Enrolled"
       page.should have_content "Class Roster"
-    end
-
-    it "should exist add_student link" do
-      visit class_group_path(@class_group)
       page.should have_link "Add Student"
     end
 
     it "should list existing semesters" do
       visit class_group_path(@class_group)
-      page.should have_content "Number of semesters"
       page.should have_content "Semesters list"
-    end
-
-    it "should exist add_a_semester link" do
-      visit class_group_path(@class_group)
       page.should have_link "Add a semester"
     end
 
     it "should list existing courses" do
       visit class_group_path(@class_group)
-      page.should have_content "Number of courses"
       page.should have_content "Courses List"
-    end
-
-    it "should exist add_course link" do
-      visit class_group_path(@class_group)
       page.should have_link "Add course"
     end
   end

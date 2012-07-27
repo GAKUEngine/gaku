@@ -1,7 +1,7 @@
 = form_for @student, :url => student_path, :html => { :multipart => true } do |form|
-  .row-fluid style="margin-top:15px"
+  .row-fluid.mt-m
     = form.file_field :picture, :class => "form_file"
-  .row-fluid style="margin-top:5px"
+  .row-fluid.mt-xs
     = form.submit t('pictures.upload'), :class => "span12 btn btn-primary"
 coffee:
   $(".form_file").attr('size', 9)

@@ -30,10 +30,10 @@
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       .span12.pagination-centered
         = image_tag @student.picture.url(:thumb), :id => "student_picture"
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
       div id="upload_picture" style="display:none;"
         = render 'upload_picture'
