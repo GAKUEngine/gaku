@@ -168,13 +168,13 @@ en:
     add: "Add Guardian"
     save: "Save Guardian"
     edit: "Edit guardian"
-  contact_type: ""
+  contact_type: 
   contact_types:
-     add: ""
-  contact: ""
+     add: 
+  contact: 
   contacts:
-    data: ""
-    details: ""
+    data: 
+    details: 
   note: "Notes"
   notes:
     notes: "Notes"

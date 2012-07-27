@@ -1,14 +1,13 @@
 = form_for @new_semester do |f|
   .row-fluid
-    .span12.control-group
-      = f.label :starting, t("semesters.starting"), :class => "control-label"
-      .controls
+    .span12.well
+      /後でカレンダーにする
+      .span6
+        = f.label :starting, t("semesters.starting"), :class => "control-label"
         = f.date_select :starting, :class => "span12"
-  .row-fluid
-    .span12.control-group
-      = f.label :ending, t("semesters.ending"), :class => "control-label"
-      .controls
+      .span6
+        = f.label :ending, t("semesters.ending"), :class => "control-label"
         = f.date_select :ending, :class => "span12"
-  = f.hidden_field :class_group_id, :value => @class_group.id
+    = f.hidden_field :class_group_id, :value => @class_group.id
   .row-fluid
     = f.submit t "semesters.save"
