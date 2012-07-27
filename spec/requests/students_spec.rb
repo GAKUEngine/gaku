@@ -71,18 +71,24 @@ describe 'Student' do
 
     it "should have right contact classes in tr" do
       visit student_path(@student1)
-      page.should have_selector('tr', :class=> "student_contact contact_#{@contact.id}") 
+      page.should have_css("tr.student_contact.contact_#{@contact.id}") 
     end
 
     it "should have primary column with right class " do
       visit student_path(@student1)
-      page.should have_selector('td', :class=> "primary_contact") 
+      page.should have_css('td.primary_contact') 
     end
 
     it "should have action column with right class for button " do
       visit student_path(@student1)
-      page.should have_selector('td', :class=> "primary_button") 
+      page.should have_css('td.primary_button') 
     end
+
+    it "should have form with new_student_contact_form class " do
+      visit student_path(@student1)
+      page.should have_css('form.new_student_contact_form') 
+    end
+
   end
 
 end

@@ -4,9 +4,12 @@ class ContactsController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  respond_to :js
+
   def create
   	if params[:guardian_id]
-  		@guardian = Guardian.find(params[:guardian_id])
+  		#handle contact create for guardian
+      @guardian = Guardian.find(params[:guardian_id])
 	  	@contact = @guardian.contacts.build(params[:contact])
 	  	if @contact.save
 	  		respond_with do |format|
@@ -16,7 +19,17 @@ class ContactsController < ApplicationController
         render :nothing => true
       end
   	else
-  		#TODO handle contact create for student 
+  		#handle contact create for student
+      @student = Student.find(params[:student_id])
+      @contact = @student.contacts.build(params[:contact])
+      if @contact.save
+        @contact.make_primary_student if params[:contact][:is_primary] == "1"
+        respond_with(@contact) do |format|
+          format.js {render 'student_contact'}
+        end
+      else
+        render :nothing => true
+      end
   	end
   end
 
