@@ -1,3 +1,10 @@
-h1= t "class_groups.new"
-= render 'form'
-= link_to t(:Back), class_groups_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      h3.pull-left = t("class_groups.new")
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      = render 'form'

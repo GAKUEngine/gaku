@@ -30,7 +30,7 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
-    state: ""
+    state: 
     past: "履歴を作成しますか?"
     list: "住所一覧"
     choose_country: "国を選択して下さい"
@@ -87,32 +87,33 @@ ja:
     list: "授業一覧"
     code: "授業コード"
     code_sample: "[例: 秋2020]"
-    save: ""
-    choose_course: ""
+    save: "保存"
+    choose_course: 
     enroll_student: "Enroll Student"
-    count: ""
-  num_courses: ""
-  add_course: ""
+    count: 
+  num_courses: 
+  add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
-    add: ""
-    create: ""
+    add: 
+    create: 
   class_group_management: "クラス管理"
   class_groups:
+    show: "クラス照会"
     plural: "クラスグループ"
     list: "クラス一覧"
     new: "新規クラス登録"
     name: "クラス名"
     grade: "学年"
-    homeroom: "主教室"
+    homeroom: "主要教室"
     choose_student: 'Choose Student'
     create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
-    new: ""
+    new: 
     seat_number: "Seat number"
     class_groups: "Class groups"
-    current_enrollment: ""
+    current_enrollment: 
   grades:
     grading: "採点"
     weighting: "加重する"
@@ -131,8 +132,8 @@ ja:
     view: "課題参照"
     count: "課題総数"
     name: "課題名称"
-    description: ""
-    max_score: ""
+    description: 
+    max_score: 
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
@@ -202,12 +203,12 @@ ja:
     edit: "Edit note"
   class: "クラス"
   semesters:
-    list: ""
-    starting: ""
-    ending:   ""
-    save: ""
-  num_semesters: ""
-  add_semester: ""
+    list: "学期リスト"
+    starting: 
+    ending:   
+    save: "保存"
+  num_semesters: 
+  add_semester: "学期を追加する"
   options: "オプション"
   notice:
     no_assignments: "No assignments, assign one first"

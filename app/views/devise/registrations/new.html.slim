@@ -20,7 +20,7 @@ div style="width:320px;margin:0 auto;"
             .row-fluid
               = f.label :password_confirmation, t("devise.password_confirmation")
               = f.password_field :password_confirmation, :class => 'span12'
-            .row-fluid style="margin-top:5px"
+            .row-fluid.mt-xs
               = f.submit t("devise.sign_up"), :class => 'span12 btn btn-primary'
-        .row-fluid style="margin-top:10px"
+        .row-fluid.mt-s
           = render "devise/shared/links"
