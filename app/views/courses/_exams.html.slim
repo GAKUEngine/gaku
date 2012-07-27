@@ -1,4 +1,3 @@
-#exam_grading_area
-= javascript_include_tag "exam_grading_widget"
-coffee:
-  $("#exam_grading_area").examGradingWidget()
+- @course.syllabus.exams.each do |exam|
+  = link_to exam.name, "#{request.fullpath}/exams/#{exam.id}/exam_portion_scores", :params => { :course_id => @course.id, :exam_id => exam.id }
+  br /

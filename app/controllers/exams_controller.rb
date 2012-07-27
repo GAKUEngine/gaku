@@ -50,5 +50,4 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
     end
-
 end
