@@ -5,17 +5,16 @@ class Contact < ActiveRecord::Base
   
   attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
 
-  validates_presence_of :data, :details, :contact_type_id
+  validates_presence_of :data,:contact_type_id
 
   before_save :ensure_first_primary, :on => :create
 
 
   def make_primary_student
+    self.update_attributes(:is_primary => true)
     user_contacts = Contact.where(:student_id => self.student_id)
-    user_contacts.update_all(:is_primary => false)
-    self.is_primary = true
-    self.save
-  end
+    user_contacts.update_all('is_primary = "false"', "id <> #{self.id}")
+   end
 
   private
 
