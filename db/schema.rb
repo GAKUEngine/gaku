@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
   create_table "contacts", :force => true do |t|
     t.string   "data"
     t.text     "details"
-    t.boolean  "is_primary",      :default => false
-    t.boolean  "is_emergency",    :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "is_primary"
+    t.boolean  "is_emergency"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "contact_type_id"
     t.integer  "student_id"
     t.integer  "guardian_id"
@@ -249,7 +249,6 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
   create_table "states", :force => true do |t|
     t.string  "name"
     t.string  "abbr"
-    t.string  "name_ascii"
     t.integer "country_numcode"
   end
 
@@ -258,7 +257,7 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
     t.string   "surname"
     t.string   "name_reading"
     t.string   "surname_reading"
-    t.boolean  "gender"
+    t.string   "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth_date"
