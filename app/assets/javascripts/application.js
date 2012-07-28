@@ -10,6 +10,8 @@
 //= require external/jquery-ui-1.8.18.custom.min.js
 //= require kendo2012/kendo.web.min
 //= require bootstrap.min
+//= require i18n
+//= require i18n/translations
 
 //= require tbs_datepicker/js/bootstrap-datepicker
 

@@ -6,7 +6,8 @@ class ExamGradingWidget extends BuHin
     buttonGroups: null
 
   grid: null
-
+  course_id: null
+  exam_id: null
   data: null
 
   _addButtonGroup: (target, id, title, iconClasses) ->
@@ -73,12 +74,21 @@ class ExamGradingWidget extends BuHin
   createGrid: () ->
     @grid = $("<div></div>")
 
-    @grid.kendoGrid()
+    @grid.kendoGrid({
+      dataSource: {
+        transport: {
+          read: "/courses/" + @course_id + "/exams/" + @exam_id + "/exam_portion_scores.json"
+        }
+      }
+    })
+    @grid.appendTo(@target)
 
-  init: () ->
+  init: (options) ->
     if @target == null
       return
 
+    @ProcessOptions(options)
+    
     @target.addClass("well")
     @createControlBar()
     @createGrid()
@@ -86,19 +96,19 @@ class ExamGradingWidget extends BuHin
     #@target.append(@controlBar)
 
   ProcessOptions: (options) ->
-    if options["student_scores"]
-      console.log "scores found"
-    else
-      console.log options
+    if options["course_id"]
+      @course_id = options["course_id"]
     
+    if options["exam_id"]
+      @exam_id = options["exam_id"]
     
 
 $.fn.examGradingWidget = (options) ->
   pluginName = 'examGradingWidget'
   @.each ->
     if !$.data(@, "plugin_#{pluginName}")
-      $.data(@, "plugin_#{pluginName}", new ExamGradingWidget(@))
-
-    $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
+      $.data(@, "plugin_#{pluginName}", new ExamGradingWidget(@, options))
+    else
+      $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
 
   return @

@@ -8,7 +8,8 @@ class ExamPortionScoresController < ApplicationController
       return
     end
 
-    @students = Course.find(params[:course_id]).students
+    @course = Course.find(params[:course_id])
+    @students = @course.students
     @exam = Exam.find(params[:exam_id])
     
     @scores = []

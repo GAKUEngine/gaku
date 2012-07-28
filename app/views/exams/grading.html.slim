@@ -1,5 +1,8 @@
 #exam_grading_area
   = javascript_include_tag "exam_grading_widget"
 
+javascript:
+  course_id = "#{params[:course_id]}";
+  exam_id = "#{params[:exam_id]}";
 coffee:
-  $("#exam_grading_area").examGradingWidget()
+  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_id: exam_id})
