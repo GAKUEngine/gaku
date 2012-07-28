@@ -127,6 +127,11 @@ form {
 .well {
   .well {
     background-color: white;
+    margin-bottom: 0px;
+    .well{
+      background-color: whiteSmoke;
+      margin-bottom: 20px;
+    }
   }
 }
 
