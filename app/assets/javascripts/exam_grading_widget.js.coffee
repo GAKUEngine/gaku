@@ -74,25 +74,22 @@ class ExamGradingWidget extends BuHin
     @grid = $("<div></div>")
 
     @grid.kendoGrid()
-    
-
-  createWidget: () ->
-    @createControlBar()
-    @createGrid()
-
-
-  obtainData: (cb) ->
-    
 
   init: () ->
     if @target == null
       return
 
     @target.addClass("well")
-    @obtainData(@createWidget())
+    @createControlBar()
+    @createGrid()
 
     #@target.append(@controlBar)
 
+  ProcessOptions: (options) ->
+    if options["student_scores"]
+      alert "scores found"
+    else
+      alert options
     
     
 
