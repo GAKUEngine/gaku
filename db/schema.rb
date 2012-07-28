@@ -249,7 +249,6 @@ ActiveRecord::Schema.define(:version => 20120728032459) do
     t.string  "name"
     t.string  "abbr"
     t.integer "country_numcode"
-    t.string  "name_ascii"
   end
 
   create_table "students", :force => true do |t|

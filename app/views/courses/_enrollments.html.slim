@@ -8,17 +8,18 @@
   .span12
     hr
 .row-fluid  
-  table#enrolled_students_grid.make-grid
-    tr
-      th*{"data-field" => t("students.name")}
-        = t("students.name")
-      th*{"data-field" => t("assignments.plural") + t(:and) + t("exams.plural")}
-        = t("assignments.plural") + t(:and) + t("exams.plural")
-      th*{"data-field" => t("grades.total_points")}
-        = t("grades.total_points")
-      th*{"data-field" => t("grades.rank")}
-        = t("grades.rank")
-      /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
+  table#enrolled_students_grid.table.table-condensed.table-striped.table-bordered
+    thead
+      tr
+        th*{"data-field" => t("students.name")}
+          = t("students.name")
+        th*{"data-field" => t("assignments.plural") + t(:and) + t("exams.plural")}
+          = t("assignments.plural") + t(:and) + t("exams.plural")
+        th*{"data-field" => t("grades.total_points")}
+          = t("grades.total_points")
+        th*{"data-field" => t("grades.rank")}
+          = t("grades.rank")
+        /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
     =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
 .row-fluid
   #add_student_enrollment_form style='display:none' 
