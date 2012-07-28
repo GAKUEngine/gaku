@@ -13,7 +13,7 @@ class ExamPortionScoresController < ApplicationController
     
     @scores = []
     @students.each do |student|
-      studentScore = {:surname => student.surname, :name => student.name, :student_id => student.id, :portion_scores => []}
+      studentScore = {:surname => student.surname, :name => student.name, :student_id => student.id, :scores => []}
       @exam.exam_portions.each do |portion|
         score = student.exam_portion_scores.where(:exam_portion_id => portion.id)
         if score
@@ -22,14 +22,14 @@ class ExamPortionScoresController < ApplicationController
           score.exam_portion_id = portion.id
           score.save
         end
-        studentScore[:portion_scores].push(score)
+        studentScore[:scores].push(score)
       end
       @scores.push(studentScore)
     end
 
     respond_to do |format|
-      format.html { render "exams/grading" }
-      format.json { render :json => {:exam => @exam, :scores => @scores} }
+      #format.html { render "exams/grading" }
+      format.json { render :json => @scores }
     end
   end
 end

@@ -42,6 +42,10 @@ class ExamsController < ApplicationController
     end
   end
 
+  def grading
+    render "exams/grading"
+  end
+
   private
     def load_exam 
     	@exam = Exam.find(params[:id])
