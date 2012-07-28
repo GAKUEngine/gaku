@@ -90,8 +90,7 @@ class ExamGradingWidget extends BuHin
       console.log "scores found"
     else
       console.log options
-    
-    
+
 
 $.fn.examGradingWidget = (options) ->
   pluginName = 'examGradingWidget'

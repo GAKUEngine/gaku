@@ -1,7 +1,8 @@
 doctype 5
 html
   head
-    title GAKUEngine
+    title
+      = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
     = stylesheet_link_tag    "application"
     = stylesheet_link_tag    params[:controller]
     = javascript_include_tag "application"
