@@ -47,7 +47,7 @@ class ExamGradingWidget extends BuHin
 
   createControlBar: () ->
     @controlBar.element = $("<div></div>")
-    @controlBar.element.addClass("row-fluid span12 btn-toolbar")
+    @controlBar.element.addClass("row-fluid btn-toolbar")
     @buttonGroups = []
 
     studentOrder = @_addButtonGroup(@controlBar.element, "student_order", "Student Order", "icon-list-alt icon-black")
@@ -72,8 +72,8 @@ class ExamGradingWidget extends BuHin
 
   createGrid: () ->
     @grid = $("<div></div>")
-
-    @grid.kendoGrid()
+    @grid.kendoGrid({dataSource: {transport: {read: "http://localhost:3000/courses/1/exams/2/exam_portion_scores.json"}}})
+    @grid.appendTo(@target)
 
   init: () ->
     if @target == null
