@@ -9,6 +9,7 @@ html
     = javascript_include_tag params[:controller]
     = csrf_meta_tags
   body
+    = render :partial => "shared/js_config"
     = render :partial => 'shared/modal_config'
     = render :partial => "shared/menubar"
     .container-fluid

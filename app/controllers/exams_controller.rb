@@ -43,6 +43,8 @@ class ExamsController < ApplicationController
   end
 
   def grading
+    @course = Course.find(params[:course_id])
+    @exam = Course.find(params[:exam_id])
     render "exams/grading"
   end
 
