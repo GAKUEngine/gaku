@@ -12,7 +12,7 @@ class ExamGradingWidget extends BuHin
   _addButtonGroup: (target, id, title, iconClasses) ->
     newGroup = $("<div></div>")
     newGroup.attr("id", id)
-    newGroup.addClass("well span3")
+    newGroup.addClass("well span4")
     newGroup.icon = $("<i></i>")
     newGroup.icon.addClass(iconClasses)
     newGroup.append(newGroup.icon)
@@ -47,33 +47,33 @@ class ExamGradingWidget extends BuHin
 
   createControlBar: () ->
     @controlBar.element = $("<div></div>")
-    @controlBar.element.addClass("row-fluid btn-toolbar")
+    @controlBar.element.addClass("row-fluid")
     @buttonGroups = []
 
-    studentOrder = @_addButtonGroup(@controlBar.element, "student_order", "Student Order", "icon-list-alt icon-black")
+    studentOrder = @_addButtonGroup(@controlBar.element, "student_order", "Student Order", "icon-list-alt")
     @_addButtonToGroup(studentOrder.group, "seat_number", "出席番号", null, true)
     @_addButtonToGroup(studentOrder.group, "exam_points", "考査得点順", null, false)
     @_addButtonToGroup(studentOrder.group, "term_points", "学期得点順", null, false)
 
-    processingStatusSort = @_addButtonGroup(@controlBar.element, "processing_status_sort", "Processing Status", "icon_edit icon-black")
+    processingStatusSort = @_addButtonGroup(@controlBar.element, "processing_status_sort", "Processing Status", "icon-edit")
     @_addButtonToGroup(processingStatusSort.group, "processing_all", "全件", null, true)
     @_addButtonToGroup(processingStatusSort.group, "processing_unscored", "未入力", null)
     @_addButtonToGroup(processingStatusSort.group, "processing_partial", "入力途中", null)
     @_addButtonToGroup(processingStatusSort.group, "processing_completed", "入力完了", null)
 
-    toolbox = @_addButtonGroup(@controlBar.element, "exam_toolbox", "Tools", "icon-wrench icon-black")
-    @_addButton(toolbox, "auto_score", "AutoScore", null)
-    @_addButton(toolbox, "auto_grade", "AutoGrade", null)
-    @_addButton(toolbox, "auto_rank", "AutoRank", null)
-    @_addButton(toolbox, "view_scales", "View Scales", null)
+    toolbox = @_addButtonGroup(@controlBar.element, "exam_toolbox", "Tools", "icon-wrench")
+    @_addButton(toolbox.group, "auto_score", "AutoScore", null)
+    @_addButton(toolbox.group, "auto_grade", "AutoGrade", null)
+    @_addButton(toolbox.group, "auto_rank", "AutoRank", null)
+    @_addButton(toolbox.group, "view_scales", "View Scales", null)
 
     @controlBar.element.appendTo(@target)
     return @controlBar
 
   createGrid: () ->
     @grid = $("<div></div>")
-    @grid.kendoGrid({dataSource: {transport: {read: "http://localhost:3000/courses/1/exams/2/exam_portion_scores.json"}}})
-    @grid.appendTo(@target)
+
+    @grid.kendoGrid()
 
   init: () ->
     if @target == null
@@ -87,9 +87,9 @@ class ExamGradingWidget extends BuHin
 
   ProcessOptions: (options) ->
     if options["student_scores"]
-      alert "scores found"
+      console.log "scores found"
     else
-      alert options
+      console.log options
     
     
 
