@@ -117,6 +117,7 @@ class ExamGradingWidget extends BuHin
       grid.kendoGrid(
         dataSource: dataSource
         columns: column_data
+        navigatable: true
         editable: true
       )
       grid.appendTo(target)
