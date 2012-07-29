@@ -59,9 +59,10 @@ ja:
     gender: "性別"
     add_address: "住所を追加"
     picture: "生徒写真"
-    add_contact: "Add Contact"
-    create_contact: "Create Contact"
-    choose_gender: 'Choose Gender'
+    add_contact: "連絡先を追加"
+    create_contact: "連絡先を作成"
+    choose_gender: '性別を選択してください'
+    class_group_enrollment: "登録されているクラス"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
