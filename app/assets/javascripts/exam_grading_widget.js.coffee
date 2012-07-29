@@ -73,54 +73,53 @@ class ExamGradingWidget extends BuHin
     return @controlBar
 
   createGrid: () ->
-    @grid = $("<div></div>")
+    target = @target
+    grid = $("<div class='mt-l'></div>")
+    examPortions = @examPortions
+    exam = @exam
 
-    column_data = [
-      {
-        field: "student_id",
-        title: I18n.t("students.id"),
-        editable: false
-      },{
-        field: "surname",
-        title: I18n.t('students.surname'),
-        editable: false
-      },{
-        field: "name",
-        title: I18n.t('students.name'),
-        editable: false
-      }
-    ]
+    $.getJSON "/courses/" + @course_id + "/exams/" + @exam.id + "/exam_portion_scores.json", null, (data, status) ->
+      column_data = [
+        field: "student_id"
+        title: I18n.t("students.id")
+      ,
+        field: "surname"
+        title: I18n.t('students.surname')
+      ,
+        field: "name"
+        title: I18n.t('students.name')
+      ]
 
-    fields_data = {
-      student_id: 'student_id'
-      surname: 'surname'
-      name: 'name'
-    }
+      dataSource = new kendo.data.DataSource(
+        pageSize: 30
+        data: data
+        schema:
+          model:
+            id: "StudentID"
+            fields:
+              student_id:
+                editable: false
+              surname:
+                editable: false
+              name:
+                editable: false
+      )
 
-
-    for portion in @examPortions
-      do (portion) =>
-        portion_id = "portion" + portion.id + ""
-        column_data.push({field: "scores[0].score", title: @exam.name + "[" + portion.name + "]", editable: true})
-        fields_data["score"] = "name"
-
-
-    @grid.kendoGrid({
-      dataSource: {
-        transport: {
-          read: "/courses/" + @course_id + "/exams/" + @exam.id + "/exam_portion_scores.json"
-        }
-      },
-      columns: column_data,
-      editable: true,
-      schema: {
-        type: 'json'
-        model: {
-          fields: fields_data
-        }
-      }
-    })
-    @grid.appendTo(@target)
+      for portion in examPortions
+        do (portion) =>
+          portion_id = "portion" + portion.id + ""
+          column_data.push
+            field: "scores[0].score"
+            title: exam.name + "[" + portion.name + "]"
+          dataSource.options.schema.model.fields.score = 
+            editable: true
+      
+      grid.kendoGrid(
+        dataSource: dataSource
+        columns: column_data
+        editable: true
+      )
+      grid.appendTo(target)
 
   init: (options) ->
     if @target == null

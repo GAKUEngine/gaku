@@ -47,7 +47,8 @@ class StudentGrid extends BuHin
           resizable: false
           sortable: false
           groupable: false
-        }]
+        }
+      ]
     
     @target.kendoGrid(gridArgs)
 
