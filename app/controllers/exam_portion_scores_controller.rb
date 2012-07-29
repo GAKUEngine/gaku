@@ -11,7 +11,8 @@ class ExamPortionScoresController < ApplicationController
     @course = Course.find(params[:course_id])
     @students = @course.students
     @exam = Exam.find(params[:exam_id])
-    
+    @exam_portions = @exam.exam_portions
+
     @scores = []
     @students.each do |student|
       studentScore = {:surname => student.surname, :name => student.name, :student_id => student.id, :scores => []}

@@ -1,8 +1,12 @@
 #exam_grading_area
   = javascript_include_tag "exam_grading_widget"
 
-javascript:
-  course_id = "#{params[:course_id]}";
-  exam_id = "#{params[:id]}";
+erb:
+  <script>
+    var course_id = <%= params[:course_id] %>;
+    var exam_data = <%== @exam.to_json %>;
+    var exam_portions_data = <%== @exam_portions.to_json %>
+  </script>
+
 coffee:
-  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_id: exam_id})
+  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})
