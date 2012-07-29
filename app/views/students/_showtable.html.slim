@@ -1,53 +1,54 @@
 .row-fluid
-  .span9.well 
-    table.table.table-bordered.table-striped
-      tbody
-        tr
-          th width="20%" style="text-align:center" =t("class")
-          td =@student.class_groups.name
-        tr
-          th style="text-align:center;vertical-align:middle" =t("name")
-          td style="font-size:16pt;vertical-align:middle"
-            div
-              ruby style="margin-right:5px"
-                rb
-                  = @student.surname
-                rt
-                  = @student.surname_reading
-              ruby
-                rb
-                  = @student.name
-                rt
-                  = @student.name_reading
-        tr
-          th style="text-align:center" =t("gender")
-          td =gender(@student)
-        tr
-          th style="text-align:center" =t("students.birth")
-          td =@student.birth_date
-        tr
-          th style="text-align:center" =t("students.phone")
-          td =@student.phone
-        tr
-          th style="text-align:center" =t("students.email")
-          td =@student.email
-        tr
-          th style="text-align:center" =t("students.admitted")
-          td =@student.admitted
-        tr
-          th style="text-align:center" =t("students.class_group_enrollment")
-          td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
-        
-  .span3.well
-    .row-fluid.pagination-centered
-      h4 =t("students.picture")
-    .row-fluid.mt-s
-      .span12.pagination-centered
-        = image_tag @student.picture.url(:thumb), :id => "student_picture"
-    .row-fluid.mt-s
-      = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
-      div id="upload_picture" style="display:none;"
-        = render 'upload_picture'
+  .span12.well
+    .span9 
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            th width="20%" style="text-align:center" =t("class")
+            td =@student.class_groups.name
+          tr
+            th style="text-align:center;vertical-align:middle" =t("name")
+            td style="font-size:16pt;vertical-align:middle"
+              div
+                ruby style="margin-right:5px"
+                  rb
+                    = @student.surname
+                  rt
+                    = @student.surname_reading
+                ruby
+                  rb
+                    = @student.name
+                  rt
+                    = @student.name_reading
+          tr
+            th style="text-align:center" =t("gender")
+            td =gender(@student)
+          tr
+            th style="text-align:center" =t("students.birth")
+            td =@student.birth_date
+          tr
+            th style="text-align:center" =t("students.phone")
+            td =@student.phone
+          tr
+            th style="text-align:center" =t("students.email")
+            td =@student.email
+          tr
+            th style="text-align:center" =t("students.admitted")
+            td =@student.admitted
+          tr
+            th style="text-align:center" =t("students.class_group_enrollment")
+            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
+          
+    .span3.well
+      .row-fluid.pagination-centered
+        h4 =t("students.picture")
+      .row-fluid.mt-s
+        .span12.pagination-centered
+          = image_tag @student.picture.url(:thumb), :id => "student_picture"
+      .row-fluid.mt-s
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
+        div id="upload_picture" style="display:none;"
+          = render 'upload_picture'
 .row-fluid
   .span12.well
     .tabbable.tabs-right
