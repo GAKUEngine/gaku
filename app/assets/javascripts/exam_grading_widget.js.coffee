@@ -7,7 +7,8 @@ class ExamGradingWidget extends BuHin
 
   grid: null
   course_id: null
-  exam_id: null
+  exam: null
+  examPortions: null
   data: null
 
   _addButtonGroup: (target, id, title, iconClasses) ->
@@ -74,27 +75,50 @@ class ExamGradingWidget extends BuHin
   createGrid: () ->
     @grid = $("<div></div>")
 
+    column_data = [
+      {
+        field: "student_id",
+        title: I18n.t("students.id"),
+        editable: false
+      },{
+        field: "surname",
+        title: I18n.t('students.surname'),
+        editable: false
+      },{
+        field: "name",
+        title: I18n.t('students.name'),
+        editable: false
+      }
+    ]
+
+    fields_data = {
+      student_id: 'student_id'
+      surname: 'surname'
+      name: 'name'
+    }
+
+
+    for portion in @examPortions
+      do (portion) =>
+        portion_id = "portion" + portion.id + ""
+        column_data.push({field: "scores[0].score", title: @exam.name + "[" + portion.name + "]", editable: true})
+        fields_data["score"] = "name"
+
+
     @grid.kendoGrid({
       dataSource: {
         transport: {
-          read: "/courses/" + @course_id + "/exams/" + @exam_id + "/exam_portion_scores.json"
+          read: "/courses/" + @course_id + "/exams/" + @exam.id + "/exam_portion_scores.json"
         }
       },
-      columns: [
-        {
-          field: "student_id"
-          title: I18n.t("students.id")
-        },{
-          field: "surname"
-          title: I18n.t('students.surname')
-        },{
-          field: "name"
-          title: I18n.t('students.name')
-        },{
-          field: "scores"
-          title: I18n.t("grades.points")
+      columns: column_data,
+      editable: true,
+      schema: {
+        type: 'json'
+        model: {
+          fields: fields_data
         }
-      ]
+      }
     })
     @grid.appendTo(@target)
 
@@ -113,10 +137,14 @@ class ExamGradingWidget extends BuHin
   ProcessOptions: (options) ->
     if options["course_id"]
       @course_id = options["course_id"]
-    
-    if options["exam_id"]
-      @exam_id = options["exam_id"]
 
+    #TODO: add filtering by class
+    
+    if options["exam_data"]
+      @exam = options["exam_data"]
+
+    if options["exam_portions_data"]
+      @examPortions = options["exam_portions_data"]
 $.fn.examGradingWidget = (options) ->
   pluginName = 'examGradingWidget'
   @.each ->
