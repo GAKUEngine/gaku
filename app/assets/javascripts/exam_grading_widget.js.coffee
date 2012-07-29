@@ -79,7 +79,22 @@ class ExamGradingWidget extends BuHin
         transport: {
           read: "/courses/" + @course_id + "/exams/" + @exam_id + "/exam_portion_scores.json"
         }
-      }
+      },
+      columns: [
+        {
+          field: "student_id"
+          title: I18n.t("students.id")
+        },{
+          field: "surname"
+          title: I18n.t('students.surname')
+        },{
+          field: "name"
+          title: I18n.t('students.name')
+        },{
+          field: "scores"
+          title: I18n.t("grades.points")
+        }
+      ]
     })
     @grid.appendTo(@target)
 
