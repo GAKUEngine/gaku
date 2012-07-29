@@ -5,9 +5,21 @@
         tr
           th width="20%" =t("class")
           td =@student.class_groups.name
-        tr
-          th =t("name")
-          td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
+        tr height="50px"
+          th style="vertical-align:middle" =t("name")
+          td style="font-size:16pt;vertical-align:middle"
+            div
+              ruby style="margin-right:5px"
+                rb
+                  = @student.surname
+                rt
+                  = @student.surname_reading
+              ruby
+                rb
+                  = @student.name
+                rt
+                  = @student.name_reading
+            /=@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
         tr
           th =t("gender")
           td =gender(@student)
