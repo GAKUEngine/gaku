@@ -101,7 +101,6 @@ class ExamGradingWidget extends BuHin
     
     if options["exam_id"]
       @exam_id = options["exam_id"]
-    
 
 $.fn.examGradingWidget = (options) ->
   pluginName = 'examGradingWidget'

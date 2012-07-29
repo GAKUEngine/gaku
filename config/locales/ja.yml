@@ -83,6 +83,7 @@ ja:
   courses:
     plural: "授業表"
     new: "新規授業"
+    show: "授業照会"
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
