@@ -17,18 +17,34 @@
       .actions
         =f.submit t('courses.enroll_student'), :class => 'btn'
 
+  #class_group_enrollment
+    b =t('courses.enroll_class_group')
+    br/ 
+    b =link_to t('courses.add_class_group'), "#", :class => 'show_class_enroll_form'
+    =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course', :style => 'display:none'} do |f|
+      .fields  
+        =f.label :class_group
+        =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
+      .actions
+        =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'
+
   javascript:
     | CourseAct.hookupEnrollment();
     
   table#enrolled_students_grid.make-grid
-    tr
-      th*{"data-field" => t("students.name")}
-        = t("students.name")
-      th*{"data-field" => t("assignments.plural") + t(:and) + t("exams.plural")}
-        = t("assignments.plural") + t(:and) + t("exams.plural")
-      th*{"data-field" => t("grades.total_points")}
-        = t("grades.total_points")
-      th*{"data-field" => t("grades.rank")}
-        = t("grades.rank")
-      /! <th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
-    =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
+    thead  
+      tr
+        th*{"data-field" => t("students.name")}
+          = t("students.name")
+        th*{"data-field" => t("assignments.plural") + t(:and) + t("exams.plural")}
+          = t("assignments.plural") + t(:and) + t("exams.plural")
+        th*{"data-field" => t("grades.total_points")}
+          = t("grades.total_points")
+        th*{"data-field" => t("grades.rank")}
+          = t("grades.rank")
+        /! <th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
+    tbody
+      =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
+/ enroll class groups to course 
+
+

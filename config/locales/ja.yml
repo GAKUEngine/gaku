@@ -91,6 +91,9 @@ ja:
     choose_course: 
     enroll_student: "Enroll Student"
     count: 
+    enroll_class_group: 'Enroll Class Group'
+    add_class_group: 'Add Class Group'
+    choose_class_group: 'Choose Class Group'
   num_courses: 
   add_course: "授業を追加する"
   course_enrollments:

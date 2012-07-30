@@ -25,3 +25,10 @@ $ ->
   $('#add_student_enrollment_link').on 'click','a.make-button', (event)->
     event.preventDefault()
     $('#add_student_enrollment_form').slideToggle()
+
+  $('#class_group_enrollment').on 'click', 'a.show_class_enroll_form', ->
+    event.preventDefault()
+    $('#class_group_enrollment form').slideToggle()
+
+  $(".chzn-select").chosen()
+

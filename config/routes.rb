@@ -11,6 +11,8 @@ GAKUEngine::Application.routes.draw do
     resources :exams do
       resources :exam_portion_scores
     end
+
+    post :enroll_class_group, :on => :member
   end
 
   resources :course_enrollments do
