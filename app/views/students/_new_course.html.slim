@@ -1,11 +1,11 @@
-=form_for @new_course_enrollment, :remote => true do |f|
+=form_for @new_course_enrollment, :html => {:id => 'new_student_course'}, :remote => true do |f|
   .row-fluid
     =f.hidden_field :student_id, :value => @student.id
   .row-fluid
     .span3
       =f.label :course
-      = f.select :course_id, Course.all.collect { |s| ["#{s.code}", s.id] }, {:prompt => t('course.choose_course')}
-  .row-fluid.mt-s
+      = f.select :course_id, Course.all.collect { |s| ["#{s.code}", s.id] }, {:prompt => t('course.choose_course')}, :class => "validate[required]", "data-prompt-position" => "bottomRight:5"
+  .row-fluid style="margin-top:10px"
     .span8
 		  =f.submit t('course_enrollments.create'), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
     =link_to t("cancel"), "", :remote => true, :id => "course_enrollment_cancel", :class => "span4 btn btn-danger", :style => "min-height:0px"
@@ -20,3 +20,4 @@ coffee:
     $("#add_guardian_link").show()
     $("#add_new_student_guardian").html("")
   )
+  $('#new_student_course').validationEngine();

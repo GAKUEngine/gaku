@@ -54,6 +54,8 @@ GAKUEngine::Application.routes.draw do
 
     get :get_csv_template, :on => :collection
     post :import_student_list, :on => :collection
+  
+    get :autocomplete_search, :on => :collection
   end
   
   resources :addresses
