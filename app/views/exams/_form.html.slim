@@ -17,10 +17,10 @@
         .row-fluid
           .span9
             = f.label :name, t("exams.name")
-            = f.text_field :name, :class => "span12"
+            = f.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
           .span3
             = f.label :weight, t("exams.weight")
-            = f.number_field :weight, :class => "span12"
+            = f.number_field :weight, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
         .row-fluid
           .span6
             = f.label :description, t("exams.description")
@@ -71,3 +71,6 @@
   .row-fluid
     .span12.well
       = f.submit nil, :class => "span12 btn btn-primary"
+
+coffee:
+  $('#new_exam').validationEngine();
