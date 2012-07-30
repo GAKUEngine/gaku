@@ -11,6 +11,8 @@
 //= require kendo2012/kendo.web.min
 //= require bootstrap.min
 //= require chosen-jquery
+//= require i18n
+//= require i18n/translations
 
 //= require tbs_datepicker/js/bootstrap-datepicker
 

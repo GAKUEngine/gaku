@@ -25,6 +25,8 @@ gem 'paperclip'
 
 gem 'chosen-rails'
 
+gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

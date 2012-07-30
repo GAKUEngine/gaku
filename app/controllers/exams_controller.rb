@@ -42,6 +42,13 @@ class ExamsController < ApplicationController
     end
   end
 
+  def grading
+    @course = Course.find(params[:course_id])
+    @exam = Exam.find(params[:id])
+    @exam_portions = @exam.exam_portions
+    render "exams/grading"
+  end
+
   private
     def load_exam 
     	@exam = Exam.find(params[:id])
@@ -50,5 +57,4 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
     end
-
 end

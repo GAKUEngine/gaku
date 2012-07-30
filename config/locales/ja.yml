@@ -43,6 +43,7 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
+    id: "生徒番号"
     show: "生徒照会"
     new: "新規生徒登録"
     edit: "生徒情報の編集"
@@ -83,6 +84,7 @@ ja:
   courses:
     plural: "授業表"
     new: "新規授業"
+    show: "授業照会"
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
@@ -113,9 +115,9 @@ ja:
     create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
-    new: 
-    seat_number: "Seat number"
-    class_groups: "Class groups"
+    new: "新規クラス[組]"
+    seat_number: "出席番号"
+    class_groups: "クラス[組]"
     current_enrollment: 
   grades:
     grading: "採点"

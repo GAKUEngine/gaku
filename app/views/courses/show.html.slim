@@ -1,31 +1,55 @@
+- content_for :title, t("courses.show")
 - if notice
   .alert.alert-info
     button.close{data-dismiss="alert"} ×
     = notice
-b
-  = t('courses.code')
-  = @course.code
 
-- if @course.syllabus
-  b
-    = t('combined_code')
-    = @course.syllabus.code
-  b
-    = t(:syllabus)
-    = @course.syllabus.name
-
-= link_to t(:Edit), edit_course_path(@course), :class => "make-button"
-= link_to t(:Back), courses_path, :class => "make-button"
-#tabStrip
-  ul
-    li.state-active
-      a href="#enrollments-tab"
-    li
-      a href="#assignments-tab"
-    li
-      a href="#exams-tab"
-  #enrollments-tab= render :partial => "courses/enrollments"
-  #assignments-tab= render :partial => "courses/assignments"
-  #exams-tab= render :partial => "courses/exams"
-/javascript:
-  | var tabStrip = $("#tabStrip").tabs();
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .pull-left
+        h3 = t("courses.show")
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+        .row-fluid
+            table.table.table-striped.table-bordered.table-condensed.student_contact_table
+              thead
+                tr
+                  th =t('courses.code')
+                  - if @course.syllabus
+                    th =t('combined_code')
+                    th =t("syllabus")
+              tbody
+                tr
+                  td =@course.code
+                  - if @course.syllabus
+                    td =@course.syllabus.code
+                    td =@course.syllabus.name
+        .row-fluid
+          .span12
+            hr/
+        .row-fluid
+          .span12.well
+            .tabbable.tabs-right
+              ul.nav.nav-tabs
+                li.active
+                  a data-toggle="tab" href="#enrollments" =t("enrollment")
+                li
+                  a data-toggle="tab" href="#assignments" =t("assignment")
+                li
+                  a data-toggle="tab" href="#exams" =t("exam")
+              .tab-content
+                #enrollments.tab-pane.active
+                  = render :partial => "courses/enrollments"
+                #assignments.tab-pane
+                  = render :partial => "courses/assignments"
+                #exams.tab-pane
+                  = render :partial => "courses/exams"
+    .row-fluid
+      .span12.well
+        = link_to t(:Edit), edit_course_path(@course), :class => "span9 btn btn-primary", :style => "min-height:0px"
+        = link_to t(:Back), courses_path, :class => "span3 btn", :style => "min-height:0px"
