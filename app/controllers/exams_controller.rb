@@ -7,6 +7,19 @@ class ExamsController < ApplicationController
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
+  
+  def index
+    if params[:course_id]
+      @exams = Course.find(params[:course_id]).syllabus.exams
+    else
+      @exams = Exam.all()
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @exams}
+    end
+  end
 
   def create_exam_portion
     if @exam.update_attributes(params[:exam])
@@ -29,6 +42,13 @@ class ExamsController < ApplicationController
     end
   end
 
+  def grading
+    @course = Course.find(params[:course_id])
+    @exam = Exam.find(params[:id])
+    @exam_portions = @exam.exam_portions
+    render "exams/grading"
+  end
+
   private
     def load_exam 
     	@exam = Exam.find(params[:id])
@@ -37,5 +57,4 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
     end
-
 end

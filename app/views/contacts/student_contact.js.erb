@@ -1,0 +1,16 @@
+$('#.student_contact_table tbody').append('<%= escape_javascript(render :partial => "students/student_contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$("#add_new_student_contact a.btn").show();
+$('.new_student_contact_form').hide();
+$('.new_student_contact_form')[0].reset();
+
+
+<% if @contact.is_primary? %>
+	$('.student_contact').each(function() {
+		$(this).children('td.primary_contact').html('');
+		$(this).find('.primary_button a').removeClass('btn-primary')
+	});
+
+	var currentContact = $(".contact_<%= @contact.id %>");
+	currentContact.children('td.primary_contact').html('Primary');
+	currentContact.find('.primary_button a').addClass('btn-primary');
+<% end %>

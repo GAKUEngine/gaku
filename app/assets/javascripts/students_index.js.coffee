@@ -32,22 +32,23 @@ class StudentGrid extends BuHin
       columns: [
         {
           field: "surname"
-          title: @titles.surname
+          title: I18n.t('students.surname')
         },{
           field: "name"
-          title: @titles.name
+          title: I18n.t('students.name')
         },{
           field: "gender"
-          title: @titles.gender
+          title: I18n.t('gender')
         },{
           field: "manage"
-          title: @titles.manage
+          title: I18n.t('manage')
           width: 78
           encoded: false
           resizable: false
           sortable: false
           groupable: false
-        }]
+        }
+      ]
     
     @target.kendoGrid(gridArgs)
 
@@ -64,8 +65,9 @@ class StudentGrid extends BuHin
            
     checkBoxes = $("<div></div>")
     $.each @titles, (key, value) ->
-      checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked><label class="help-inline" for="'+key+'">'+value+'</label></div>')
-      .appendTo(checkBoxes)
+      if key != "manage"
+        checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked><label class="help-inline" for="'+key+'">'+value+'</label></div>')
+        .appendTo(checkBoxes)
     $("#table-checkboxes").html(checkBoxes.html())
         
     $("#table-checkboxes .form-inline").toggle ((e) ->

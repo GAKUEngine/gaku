@@ -1,20 +1,26 @@
 = form_for(@class_group) do |f|
   - if @class_group.errors.any?
-    #error_explanation
-      h2
+    .alert.alert-error
+      strong
         = pluralize(@class_group.errors.count, "error")
         | prohibited this class_group from being saved:
       ul
         - @class_group.errors.full_messages.each do |msg|
           li= msg
-  .field
-    = f.label t "class_groups.name"
-    = f.text_field :name
-  .field
-    = f.label t "class_groups.grade"
-    = f.number_field :grade
-  .field
-    = f.label :homeroom, t("class_groups.homeroom")
-    = f.text_field :homeroom
-  .actions
-    = f.submit
+  .row-fluid
+    .span12.well
+      .row-fluid
+        .span4
+          = f.label :grade, t("class_groups.grade")
+          = f.number_field :grade, :class => "span12"
+        .span4
+          = f.label :name, t("class_groups.name")
+          = f.text_field :name, :class => "span12"
+        .span4
+          = f.label :homeroom, t("class_groups.homeroom")
+          = f.text_field :homeroom, :class => "span12"
+  .row-fluid
+    .span12.well
+      .span9
+        = f.submit nil, :class => "span12 btn btn-primary"
+      = link_to t(:Back), class_groups_path, :class => "span3 btn", :style => "min-height:0px"

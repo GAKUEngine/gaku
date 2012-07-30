@@ -11,6 +11,7 @@ class Student < ActiveRecord::Base
   has_many :exam_scores
   has_many :exams, :through => :exam_scores
   has_many :assignment_scores
+  has_many :exam_portion_scores
 
   belongs_to :user
   has_and_belongs_to_many :addresses
@@ -23,7 +24,7 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture
 
-  has_attached_file :picture, :styles => {:thumb => "256x256>"}
+  has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
   validates :name, :surname, :presence => true
 

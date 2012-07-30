@@ -7,7 +7,7 @@ describe ExamPortionScore do
 
     it { should have_valid_factory(:exam_portion_score) }
     it { should belong_to(:exam_portion) }
-
+    it { should belong_to(:student)}
     it { should validate_presence_of(:score) }
 
     it "errors when score is nil" do

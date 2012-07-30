@@ -1,0 +1,2 @@
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "guardian_form_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @guardian}) %>');
+$('#editGuardianModal').modal('show');

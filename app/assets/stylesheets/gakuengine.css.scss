@@ -124,8 +124,25 @@ form {
   margin-bottom: 0px;
 }
 
-.well{
-  .well{
+.well {
+  .well {
     background-color: white;
+    margin-bottom: 0px;
+    .well{
+      background-color: whiteSmoke;
+      margin-bottom: 20px;
+    }
   }
+}
+
+.mt-xs { margin-top: 5px }
+.mt-s { margin-top: 10px }
+.mt-m { margin-top: 15px }
+.mt-l { margin-top: 20px }
+
+.mb-0 { margin-bottom: 0px }
+
+.h4-vm {
+  height:28px;
+  line-height:28px;
 }

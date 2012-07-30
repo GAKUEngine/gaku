@@ -20,3 +20,10 @@ deleteLink= $(".delete_link")
 deleteLink.live("ajax:success", (evt, data, status, xhr) ->
     $(this).closest('tr').fadeOut();
 )
+
+$('.new_student_contact_form').hide()
+
+$('#add_new_student_contact').on 'click', 'a.btn', (event) ->
+	event.preventDefault()
+	$(this).hide()
+	$('.new_student_contact_form').slideDown()

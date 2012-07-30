@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720180916) do
+ActiveRecord::Schema.define(:version => 20120728032459) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -82,8 +82,10 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
   create_table "contacts", :force => true do |t|
     t.string   "data"
     t.text     "details"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.boolean  "is_primary",      :default => false
+    t.boolean  "is_emergency",    :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "contact_type_id"
     t.integer  "student_id"
     t.integer  "guardian_id"
@@ -119,11 +121,10 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
 
   create_table "exam_portion_scores", :force => true do |t|
     t.float    "score"
-    t.integer  "division"
-    t.text     "comment"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "exam_portion_id"
+    t.integer  "student_id"
   end
 
   create_table "exam_portions", :force => true do |t|
@@ -247,22 +248,23 @@ ActiveRecord::Schema.define(:version => 20120720180916) do
   create_table "states", :force => true do |t|
     t.string  "name"
     t.string  "abbr"
+    t.string  "name_ascii"
     t.integer "country_numcode"
   end
 
   create_table "students", :force => true do |t|
     t.string   "name"
     t.string   "surname"
-    t.string   "name_reading"
-    t.string   "surname_reading"
-    t.string   "gender"
+    t.string   "name_reading",         :default => ""
+    t.string   "surname_reading",      :default => ""
+    t.boolean  "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth_date"
     t.date     "admitted"
     t.date     "graduated"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "user_id"
     t.integer  "faculty_id"
     t.string   "picture_file_name"

@@ -21,7 +21,7 @@ div style="width:320px;margin:0 auto;"
                 .span12.form-inline
                   = f.check_box :remember_me
                   = f.label :remember_me, t("devise.sessions.remember_me"), :class => "help-inline"
-            .row-fluid style="margin-top:5px"
+            .row-fluid.mt-xs
               = f.submit t("devise.sessions.sign_in"), :id => 'sign_in', :class => 'span12 btn btn-primary'
-        .row-fluid style="margin-top:10px"
+        .row-fluid.mt-s
           = render "devise/shared/links"

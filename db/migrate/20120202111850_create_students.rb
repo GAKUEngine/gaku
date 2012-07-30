@@ -3,9 +3,9 @@ class CreateStudents < ActiveRecord::Migration
     create_table :students do |t|
       t.string   :name
       t.string   :surname
-      t.string   :name_reading
-      t.string   :surname_reading
-      t.string   :gender
+      t.string   :name_reading, :default => "" 
+      t.string   :surname_reading, :default =>  ""
+      t.boolean  :gender
       t.string   :phone
       t.string   :email
       t.date     :birth_date

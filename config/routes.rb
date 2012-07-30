@@ -7,7 +7,12 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses
+  resources :courses do
+    resources :exams do
+      resources :exam_portion_scores
+      get :grading, :on => :member
+    end
+  end
 
   resources :course_enrollments do
     post :enroll_student, :on => :collection
@@ -30,14 +35,16 @@ GAKUEngine::Application.routes.draw do
     resources :guardians do
       resources :contacts
       get 'new_contact', :on => :member
+      get 'edit_student_guardian', :on => :collection
     end
     resources :addresses
     resources :notes
     resources :contacts
     resources :exams
     resources :courses
-    
-    resources :addresses
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
     get :new_address, :on => :member
     put :create_address, :on => :collection
     get :new_guardian, :on => :member
