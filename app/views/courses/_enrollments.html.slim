@@ -4,32 +4,40 @@
   .pull-right
     #add_student_enrollment_link
       = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_course_enrollment_path(:course_id => @course.id), :id => "add_student_enrollment", :class => "btn btn-primary", :remote => true
+    #add_class_group_enrollment_link
+      =link_to ("<i class='icon-white icon-plus'></i> #{t('courses.add_class_group')}").html_safe, "#", :class => 'show_class_enroll_form btn btn-primary'
 .row-fluid
   .span12
     hr
 .row-fluid  
-  table#enrolled_students_grid.table.table-condensed.table-striped.table-bordered
-    thead
+.row-fluid
+  #add_student_enrollment_form style='display:none' 
+    =form_for @new_course_enrollment,:url => enroll_student_course_enrollments_path , :remote => true do |f|
+      =f.hidden_field :course_id, :value => @course.id
+      .field
+        =f.label :students
+        = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}
+      .actions
+        =f.submit t('courses.enroll_student'), :class => 'btn'
+  
+  #add_class_group_enrollment_form style='display:none' 
+    =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course'} do |f|
+      .fields  
+        =f.label :class_group
+        =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
+      .actions
+        =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'
+  table#enrolled_students_grid.make-grid
+    thead  
       tr
         th*{"data-field" => t("students.name")}
           = t("students.name")
-        th*{"data-field" => t("assignments.plural") + t("and") + t("exams.plural")}
-          = t("assignments.plural") + t("and") + t("exams.plural")
+        th*{"data-field" => t("assignments.plural") + t(:and) + t("exams.plural")}
+          = t("assignments.plural") + t(:and) + t("exams.plural")
         th*{"data-field" => t("grades.total_points")}
           = t("grades.total_points")
         th*{"data-field" => t("grades.rank")}
           = t("grades.rank")
-        /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
-    =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
-.row-fluid
-  /Modalでもいいかも。
-  #add_student_enrollment_form style='display:none' 
-    = form_for @new_course_enrollment,:url => enroll_student_course_enrollments_path , :remote => true do |f|
-      = f.hidden_field :course_id, :value => @course.id
-      .row-fluid
-        .span4.well.mt-l style="margin-bottom:0px"
-          .row-fluid
-            = f.label :students
-            = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}
-          .row-fluid.mt-s
-            = f.submit t("courses.enroll_student"), :class => 'span12 btn btn-primary'
+      /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
+    tbody
+      =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
