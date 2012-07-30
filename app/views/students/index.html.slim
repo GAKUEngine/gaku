@@ -21,29 +21,7 @@
               = f.file_field :file
               = submit_tag 'Submit'
             = link_to "CSV Export", "students.csv"
-        .row-fluid
-          .span12
-            div#table-checkboxes
-        .row-fluid
-          .span12
-            hr/
-        .row-fluid
-          table#fields.span12
-            thead
-              tr
-                th data-field="surname" = t('students.surname')
-                th data-field="name"  = t('students.name')
-                th data-field="gender" = t('gender')
-                th data-field="manage" = t('manage')
-                
-              tr#gender
-                th =t("genders.male")
-                th =t("genders.female")
-                
-        .row-fluid
-          .span12
-            #grid.span12
-
+    =render 'students/student_chooser'
 = javascript_include_tag "students_index"
 
 coffee:

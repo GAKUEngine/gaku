@@ -18,6 +18,6 @@
  *= require gakuengine.css.scss
  *= require tbs_datepicker/css/datepicker
  *= require chosen
-
+ *= require jquery_validation_engine/validationEngine.jquery.css
 */
 
