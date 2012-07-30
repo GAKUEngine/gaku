@@ -23,6 +23,8 @@ gem 'annotate'
 
 gem 'paperclip'
 
+gem 'chosen-rails'
+
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
 
 group :assets do

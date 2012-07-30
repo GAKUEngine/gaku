@@ -7,6 +7,17 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :course_enrollments
 
   attr_accessible :code, :class_group_id, :syllabus_id 
+
+  def enroll_class_group(class_group)
+  	unless class_group.blank?
+      ActiveRecord::Base.transaction do
+        class_group.student_ids.each do |student_id|
+    	 	  CourseEnrollment.find_or_create_by_student_id_and_course_id(student_id, self.id)
+    	 end
+      end
+    end
+  end
+
 end
 
 # == Schema Information

@@ -21,4 +21,14 @@ class CourseActions
 $ ->
   $('#add_student_enrollment_link').on 'click','.btn', (event)->
     event.preventDefault()
+    $('#add_class_group_enrollment_form').hide()
     $('#add_student_enrollment_form').slideToggle()
+
+
+  $('#add_class_group_enrollment_link').on 'click', 'a.show_class_enroll_form', ->
+    event.preventDefault()
+    $('#add_student_enrollment_form').hide()
+    $('#add_class_group_enrollment_form').slideToggle()
+
+  $(".chzn-select").chosen()
+
