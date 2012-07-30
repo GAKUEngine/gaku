@@ -1,10 +1,10 @@
-= form_for @student, :url => create_address_students_path(:id => @student), :remote => true do |f|
+= form_for @student, :url => create_address_students_path(:id => @student), :html => {:id => 'new_student_address'}, :remote => true do |f|
   =f.fields_for :addresses do |address_form| 
     - if address_form.object.new_record?
       .row-fluid.control-group
         .span6
           = address_form.label :country, t("addresses.country"), :class => "control-label"
-          = address_form.select :country_id, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "span12", :id => "country_dropdown"
+          = address_form.select :country_id, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
         .span6
           = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
           .row-fluid
@@ -19,10 +19,10 @@
           = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
         .span3
           = address_form.label :city, t("addresses.city"), :class => "control-label"
-          = address_form.text_field :city, :class => "span12"
+          = address_form.text_field :city, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
         .span3
           = address_form.label :address1, t("addresses.address1"), :class => "control-label"
-          = address_form.text_field :address1, :class => "span12"
+          = address_form.text_field :address1, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
         .span3
           = address_form.label :address2, t("addresses.address2"), :class => "control-label"
           = address_form.text_field :address2, :class => "span12"
@@ -35,3 +35,6 @@
         button.span12.btn.btn-primary =t "addresses.save"
 
 = javascript_include_tag "address_form"
+
+coffee:
+  $('#new_student_address').validationEngine();
