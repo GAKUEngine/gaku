@@ -111,6 +111,16 @@ class StudentsController < ApplicationController
     end  
   end
 
+  def autocomplete_search
+    # search only name or surname separate
+    # @students = Student.where("name like ? OR surname like ?", "%#{params[:term]}%", "%#{params[:term]}%")
+    # work only on sqlite3 and postgresql
+    @students = Student.where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?) OR (name LIKE ?) OR (surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%", "%#{params[:term]}%",  "%#{params[:term]}%")
+    render json: @students #.collect{|s| "#{s.name} #{s.surname}"}
+    logger.debug @students.to_json
+
+  end
+
   private
 
     def load_class_groups
