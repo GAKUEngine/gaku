@@ -13,13 +13,14 @@
         th rowspan="2" =t("students.name")
         - @exams.each do |exam|
           th.btn-info colspan="#{exam.exam_portions.count}" = exam.name
-        th.btn-primary rowspan="2" =t("grades.total")
+          th.btn-primary rowspan="2" =t("grades.total")
       tr
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
             th = portion.name
 
     tbody
+      - @students.each do |student|
       tr
         td 生徒クラス
         td 出席番号
