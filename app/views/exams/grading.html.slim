@@ -27,7 +27,7 @@
           td =student.surname << " " << student.name
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
-              td = student.exam_portion_scores.where(:exam_portion_id => portion.id)
+              td = student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score
             td
 
 javascript:

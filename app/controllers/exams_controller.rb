@@ -50,14 +50,12 @@ class ExamsController < ApplicationController
     @students.each do |student|
       @exams.each do |exam|
         exam.exam_portions.each do |portion|
-          ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(:student => student.id, :exam_portion => portion.id)
-         # score = student.exam_portion_scores.where(:exam_portion_id => portion.id)
-         # if score == []
-         #   score = ExamPortionScore.new
-         #   score.student_id = student.id
-         #   score.exam_portion_id = portion.id
-         #   score.save
-         # end
+          if student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
+            score = ExamPortionScore.new
+            score.student_id = student.id
+            score.exam_portion_id = portion.id
+            score.save
+          end
         end
       end
     end
