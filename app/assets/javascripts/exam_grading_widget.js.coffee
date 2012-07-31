@@ -130,7 +130,7 @@ class ExamGradingWidget extends BuHin
     
     @target.addClass("well")
     @createControlBar()
-    @createGrid()
+    #@createGrid()
 
     #@target.append(@controlBar)
 
