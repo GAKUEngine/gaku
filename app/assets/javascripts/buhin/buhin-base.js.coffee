@@ -17,12 +17,12 @@ $ = jQuery
 class BuHin
   target: null
 
-  constructor: (toTarget) ->
+  constructor: (toTarget, options) ->
     @target = $(toTarget)
-    @init()
+    @init(options)
     @target.trigger("buhin-ready")
 
-  init: () ->
+  init: (options) ->
 
   ProcessOptions: (options) ->
 

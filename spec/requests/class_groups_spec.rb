@@ -4,7 +4,7 @@ describe 'ClassGroups' do
   before do
     @class_group = Factory(:class_group)
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Class Groups"}
+    within('ul#menu') { click_link "Class Listing"}
   end
 
   context "listing class groups" do

@@ -1,0 +1,34 @@
+#exam_grading_area
+  = javascript_include_tag "exam_grading_widget"
+.row-fluid
+  h3 = "授業名＋試験名 " + t("grades.grading")
+.row-fluid
+  hr
+.row-fluid
+  table.grading-table.table.table-striped.table-bordered.table-condensed
+    thead
+      tr
+        th rowspan="2" =t("class")
+        th rowspan="2" =t("class_group_enrollments.seat_number")
+        th rowspan="2" =t("students.name")
+        th.btn-info colspan="2" 授業名
+        th.btn-primary rowspan="2" =t("grades.total")
+      tr
+        th 筆記
+        th 実技
+    tbody
+      tr
+        td 生徒クラス
+        td 出席番号
+        td 生徒氏名
+        td 筆記点数
+        td 実技点数
+        td 点数
+
+javascript:
+  var course_id = #{{params[:course_id]}};
+  var exam_data = #{{@exam.to_json}};
+  var exam_portions_data = #{{@exam_portions.to_json}};
+
+coffee:
+  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})

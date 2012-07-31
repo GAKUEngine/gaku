@@ -23,7 +23,7 @@ class AddressesController < ApplicationController
   def destroy
     #destroy! :flash => !request.xhr?
     @address.destroy  
-    redirect_to :back
+    render :nothing => true
   end
 
   private

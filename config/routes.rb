@@ -7,7 +7,14 @@ GAKUEngine::Application.routes.draw do
 
   resources :semesters  
 
-  resources :courses
+  resources :courses do
+    resources :exams do
+      resources :exam_portion_scores
+      get :grading, :on => :member
+    end
+
+    post :enroll_class_group, :on => :member
+  end
 
   resources :course_enrollments do
     post :enroll_student, :on => :collection
@@ -37,9 +44,6 @@ GAKUEngine::Application.routes.draw do
     resources :contacts
     resources :exams
     resources :courses
-    
-    resources :addresses
-
     resources :contacts do
       post :make_primary, :on => :member
     end
@@ -50,6 +54,8 @@ GAKUEngine::Application.routes.draw do
 
     get :get_csv_template, :on => :collection
     post :import_student_list, :on => :collection
+  
+    get :autocomplete_search, :on => :collection
   end
   
   resources :addresses

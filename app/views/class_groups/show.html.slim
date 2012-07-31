@@ -20,8 +20,8 @@
             th =t("class_groups.homeroom")
         tbody
           tr
-            td =@class_group.name
             td =@class_group.grade
+            td =@class_group.name
             td =@class_group.homeroom
     .row-fluid.mt-l
       .span12.well
@@ -37,7 +37,7 @@
             #class_group_enrollments.tab-pane.active
               .row-fluid
                 .pull-left
-                  h4 style="height:28px;line-height:28px" =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
+                  h4.h4-vm =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
                 .pull-right
                   = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_class_group_enrollment_path(:class_group_id => @class_group.id), :remote => true, :class => "btn btn-primary"
               .row-fluid
@@ -45,7 +45,7 @@
               .row-fluid
                 ul
                   - @class_group.class_group_enrollments.each do |enrollment|
-                    li= "#{enrollment.student.name} #{enrollment.student.surname}"
+                    li = "#{enrollment.student.surname} #{enrollment.student.name}"
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'
@@ -53,7 +53,7 @@
             #semesters.tab-pane
               .row-fluid
                 .pull-left
-                  h4 style="height:28px;line-height:28px" =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+                  h4.h4-vm =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
                 .pull-right
                   = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, '#', :id => 'show_semester_form', :class => "btn btn-primary"
               .row-fluid
@@ -69,7 +69,7 @@
             #courses.tab-pane
               .row-fluid
                 .pull-left
-                  h4 style="height:28px;line-height:28px" =t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
+                  h4.h4-vm =t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
                 .pull-right
                   = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, '#', :id=> 'show_course_form',:class => "btn btn-primary"
               .row-fluid

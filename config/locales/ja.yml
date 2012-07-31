@@ -7,7 +7,7 @@ ja:
   Edit: "編集"
   Update: "更新"
   Destroy: "削除"
-  Delete: "Delete"
+  Delete: "消去"
   Back: "戻る"
   cancel: "キャンセル"
   required: "必須"
@@ -30,7 +30,7 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
-    state: 
+    state: "都道府県" 
     past: "履歴を作成しますか?"
     list: "住所一覧"
     choose_country: "国を選択して下さい"
@@ -43,12 +43,13 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
+    id: "生徒番号"
     show: "生徒照会"
     new: "新規生徒登録"
     edit: "生徒情報の編集"
     list: "生徒一覧"
     surname: "生徒名字"
-    name: "生徒名"
+    name: "生徒氏名"
     address: "住所"
     phone: "電話番号"
     email: "メールアドレス"
@@ -58,9 +59,10 @@ ja:
     gender: "性別"
     add_address: "住所を追加"
     picture: "生徒写真"
-    add_contact: "Add Contact"
-    create_contact: "Create Contact"
-    choose_gender: 'Choose Gender'
+    add_contact: "連絡先を追加"
+    create_contact: "連絡先を作成"
+    choose_gender: '性別を選択してください'
+    class_group_enrollment: "登録されているクラス"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -83,14 +85,18 @@ ja:
   courses:
     plural: "授業表"
     new: "新規授業"
+    show: "授業照会"
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
     code_sample: "[例: 秋2020]"
     save: "保存"
     choose_course: 
-    enroll_student: "Enroll Student"
+    enroll_student: "生徒をこの授業に追加する"
     count: 
+    enroll_class_group: 'Enroll Class Group'
+    add_class_group: 'Add Class Group'
+    choose_class_group: 'Choose Class Group'
   num_courses: 
   add_course: "授業を追加する"
   course_enrollments:
@@ -110,9 +116,9 @@ ja:
     create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
-    new: 
-    seat_number: "Seat number"
-    class_groups: "Class groups"
+    new: "新規クラス[組]"
+    seat_number: "出席番号"
+    class_groups: "クラス[組]"
     current_enrollment: 
   grades:
     grading: "採点"
@@ -124,6 +130,7 @@ ja:
     max_points: "最高点数"
     points: "点数"
     rank: "ランク"
+    total: "合計"
   assignments:
     list: "課題一覧"
     plural: "課題"
