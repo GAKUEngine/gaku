@@ -20,8 +20,8 @@
             th =t("class_groups.homeroom")
         tbody
           tr
-            td =@class_group.name
             td =@class_group.grade
+            td =@class_group.name
             td =@class_group.homeroom
     .row-fluid.mt-l
       .span12.well
@@ -45,7 +45,7 @@
               .row-fluid
                 ul
                   - @class_group.class_group_enrollments.each do |enrollment|
-                    li= "#{enrollment.student.name} #{enrollment.student.surname}"
+                    li = "#{enrollment.student.surname} #{enrollment.student.name}"
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'
