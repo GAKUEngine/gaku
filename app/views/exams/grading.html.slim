@@ -14,7 +14,7 @@
         th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
           th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
-          th.btn-inverse rowspan="2" =t("grades.total")
+          th.btn-inverse rowspan="2" =t("grades.total") << "(" << exam.max_score.to_s << "#{t('grades.max')})"
       tr
         th.btn-info =t("class")
         th.btn-info =t("class_group_enrollments.seat_number")
@@ -40,14 +40,14 @@
                     = f.hidden_field :student_id, :value => student.id
             td
 
-javascript:
-  var course_id = #{{params[:course_id]}};
-  var exam_data = #{{@exam.to_json}};
-  var exam_portions_data = #{{@exam_portions.to_json}};
-
-  $('.form_blur_event').blur(function() {
-    $(this).closest("form").submit();
-  });
-
 coffee:
-  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})
+  course_id = #{{params[:course_id]}};
+  exam_data = #{{@exam.to_json}};
+  #var exam_portions_data = #{{@exam_portions.to_json}};
+
+  $('.form_blur_event').blur( ->
+    score = $(this)
+    score.closest("form").submit()
+  );
+  
+  # gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})
