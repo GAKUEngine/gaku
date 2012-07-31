@@ -7,6 +7,9 @@
     .modal-body
       .row-fluid
         .validation-error
+      .row-fluid.control-group
+        = address_form.label :title, t("addresses.title"), :class => "control-label"
+        = address_form.text_field :title, :class => "span12"
       .row-fluid
         = hidden_field_tag :student_id, @student.id
         .row-fluid.control-group
