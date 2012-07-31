@@ -130,6 +130,7 @@ ja:
     max_points: "最高点数"
     points: "点数"
     rank: "ランク"
+    total: "合計"
   assignments:
     list: "課題一覧"
     plural: "課題"

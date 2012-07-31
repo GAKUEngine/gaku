@@ -1,20 +1,30 @@
 /#exam_grading_area
   = javascript_include_tag "exam_grading_widget"
-
 .row-fluid
-  table.table.table-striped.table-bordered
+  h3 = "授業名＋試験名 " + t("grades.grading")
+.row-fluid
+  .span12
+    hr
+.row-fluid
+  table.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
         th rowspan="2" =t("class")
         th rowspan="2" =t("class_group_enrollments.seat_number")
         th rowspan="2" =t("students.name")
-        th 授業名
+        th.btn-info colspan="2" 授業名
+        th.btn-primary rowspan="2" =t("grades.total")
       tr
-        th
-        th
-        th
         th 筆記
         th 実技
+    tbody
+      tr
+        td 生徒クラス
+        td 出席番号
+        td 生徒氏名
+        td 筆記点数
+        td 実技点数
+        td 点数
 
 erb:
   <script>
