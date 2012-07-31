@@ -1,5 +1,20 @@
-#exam_grading_area
+/#exam_grading_area
   = javascript_include_tag "exam_grading_widget"
+
+.row-fluid
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th rowspan="2" =t("class")
+        th rowspan="2" =t("class_group_enrollments.seat_number")
+        th rowspan="2" =t("students.name")
+        th 授業名
+      tr
+        th
+        th
+        th
+        th 筆記
+        th 実技
 
 erb:
   <script>

@@ -146,11 +146,11 @@ class ExamGradingWidget extends BuHin
     if options["exam_portions_data"]
       @examPortions = options["exam_portions_data"]
 $.fn.examGradingWidget = (options) ->
-  pluginName = 'examGradingWidget'
-  @.each ->
-    if !$.data(@, "plugin_#{pluginName}")
-      $.data(@, "plugin_#{pluginName}", new ExamGradingWidget(@, options))
-    else
-      $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
+  # pluginName = 'examGradingWidget'
+  # @.each ->
+    # if !$.data(@, "plugin_#{pluginName}")
+      # $.data(@, "plugin_#{pluginName}", new ExamGradingWidget(@, options))
+    # else
+      # $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
 
   return @
