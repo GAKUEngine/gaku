@@ -8,20 +8,19 @@
       .span12
         hr/
     .row-fluid
-      table.table.table-striped
-        thead
-          tr
-            th =t("syllabuses.code")
-            td =@syllabus.code
-            th =t("syllabuses.name")
-            td =@syllabus.name
-            th =t("syllabuses.credits")
-            td =@syllabus.credits
-            th =t('exams.count')
-            td id="exams-count" =@syllabus.exams.count
-          tr
-            th =t("syllabuses.description")
-            td colspan="7" =@syllabus.description
+      .span12.well
+        table.table.table-striped.table-bordered
+          tbody
+            tr
+              th =t("syllabuses.code") + "：" + @syllabus.code
+              th =t("syllabuses.name") + "：" + @syllabus.name
+              th =t("syllabuses.credits") + "：" + @syllabus.credits.to_s
+              th 
+                =t('exams.count') + "："
+                span#exams-count =@syllabus.exams.count
+            tr
+              th =t("syllabuses.description")
+              td colspan="3" =@syllabus.description
     .row-fluid.mt-l
       .span12.well
         .row-fluid
