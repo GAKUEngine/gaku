@@ -15,9 +15,6 @@
         th.btn-info colspan="#{exam.exam_portions.count}" =exam.name
         th.btn-primary rowspan="2" =t("grades.total")
       tr
-        th
-        th
-        th
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
             th =portion.name
