@@ -2,6 +2,7 @@ class ExamPortion < ActiveRecord::Base
   belongs_to :exam
   belongs_to :grading_method
 
+  has_many :exam_schedules
   has_many :exam_portion_scores
   has_many :files
 
