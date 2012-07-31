@@ -14,7 +14,7 @@ describe 'Syllabus' do
       within('table.index tr:nth-child(2)') { page.should have_content("bio") }
       
       # show
-      within('table.index tr:nth-child(2)') { click_link "Show" }
+      within('table.index tr:nth-child(2)') { click_link "show" }
 
       #TODO Make a real check when view is finished
       page.should have_content("Syllabus")
@@ -36,7 +36,7 @@ describe 'Syllabus' do
     end
 
     it "should edit syllabus" do 
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      within('table.index tr:nth-child(2)') { click_link "edit" }
       fill_in "syllabus_name", :with => "Biology1"
       fill_in "syllabus_code", :with => "bio1"
       fill_in "syllabus_description", :with => "Biology Description"
