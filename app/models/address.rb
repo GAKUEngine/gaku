@@ -42,6 +42,7 @@ class Address < ActiveRecord::Base
   
 end
 
+
 # == Schema Information
 #
 # Table name: addresses
@@ -53,6 +54,7 @@ end
 #  zipcode    :string(255)
 #  state      :string(255)
 #  state_name :string(255)
+#  title      :string(255)
 #  past       :boolean         default(FALSE)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null

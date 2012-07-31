@@ -7,16 +7,16 @@ class ExamPortionScore < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: exam_portion_scores
 #
 #  id              :integer         not null, primary key
 #  score           :float
-#  division        :integer
-#  comment         :text
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  exam_portion_id :integer
+#  student_id      :integer
 #
 
