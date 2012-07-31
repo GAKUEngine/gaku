@@ -27,6 +27,7 @@ class State < ActiveRecord::Base
   
 end
 
+
 # == Schema Information
 #
 # Table name: states
@@ -34,7 +35,7 @@ end
 #  id              :integer         not null, primary key
 #  name            :string(255)
 #  abbr            :string(255)
-#  country_numcode :integer
 #  name_ascii      :string(255)
+#  country_numcode :integer
 #
 
