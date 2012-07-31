@@ -18,7 +18,7 @@ class StudentGrid extends BuHin
 
   _columns: () ->
     switch $('#student_grid').data('select-mode')
-      when 'multiply'
+      when 'multiple'
         return [{
                   field: "checkbox"
                   title: "Select"
@@ -114,7 +114,7 @@ class StudentGrid extends BuHin
       if studentData == null
         return
 
-      @students = studentData 
+      @students = studentData
 
       i = 0
       while i < @students.length
@@ -148,7 +148,7 @@ class StudentGrid extends BuHin
           .css("margin-left","10px")
           .appendTo(checkbox)
 
-        @students[i]["checkbox"] = checkbox.html() 
+        @students[i]["checkbox"] = checkbox.html()
         i++
 
         
@@ -165,8 +165,8 @@ class StudentGrid extends BuHin
         source: (req, res) =>
           autocompleteSource = $('input.student_search').data('autocomplete-source')
           $.ajax
-            data: 
-              term: $('input.student_search').val() 
+            data:
+              term: $('input.student_search').val()
             type: 'get'
             url: autocompleteSource
             dataType: 'json'
@@ -213,7 +213,7 @@ class StudentGrid extends BuHin
                 .css("margin-left","10px")
                 .appendTo(checkbox)
 
-                @students[i]["checkbox"] = checkbox.html() 
+                @students[i]["checkbox"] = checkbox.html()
 
                 i++
                 
