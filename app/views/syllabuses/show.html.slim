@@ -27,13 +27,16 @@
       .span12.well
         .row-fluid
           #syllabus_exams
+            .row-fluid
+              .pull-left
+                h4 =t('exams.list')
+              .pull-right
+                #new_syllabus_exam
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, create_exam_syllabus_path(@syllabus), :class => "btn btn-primary", :remote => true
+            .row-fluid
+              .span12
+                hr
             = render 'exams'
-        .row-fluid
-          .span12
-            hr
-        .row-fluid
-          #new_syllabus_exam
-            = link_to t('exams.new'), create_exam_syllabus_path(@syllabus), :class => "span3 btn btn-primary", :remote => true
         .row-fluid
           #syllabus_exam_form style='display:none;padding-top:10px'
             =render 'exam_form'

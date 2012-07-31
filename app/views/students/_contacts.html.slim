@@ -1,0 +1,16 @@
+.row-fluid
+  table.table.table-striped.table-bordered.table-condensed.student_contact_table
+    thead
+      tr
+        th =t('contact_type')
+        th =t('contacts.data')
+        th =t('contacts.details')
+        th =t('contacts.primary')
+        th =t('contacts.emergency')
+        th =t('contacts.actions')
+    tbody
+      =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
+  br/ 
+  #add_new_student_contact
+    =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
+  =render 'new_student_contact_form'
