@@ -7,7 +7,7 @@
         th =t 'exams.adjustments'
         th =t 'exams.weight'
         th =t 'exams.dynamic_scoring'
-        th =t 'manage'
+        th style="width:94px" =t 'manage'
     tbody
       - if @syllabus.exams.any?
         = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
