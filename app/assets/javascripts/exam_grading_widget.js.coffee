@@ -74,7 +74,6 @@ class ExamGradingWidget extends BuHin
 
   createGrid: () ->
     target = @target
-    grid = $("<div class='mt-l'></div>")
     examPortions = @examPortions
     exam = @exam
 
@@ -114,6 +113,7 @@ class ExamGradingWidget extends BuHin
           dataSource.options.schema.model.fields.score = 
             editable: true
       
+      grid = $("<div class='mt-l'></div>")
       grid.kendoGrid(
         dataSource: dataSource
         columns: column_data
@@ -130,7 +130,7 @@ class ExamGradingWidget extends BuHin
     
     @target.addClass("well")
     @createControlBar()
-    @createGrid()
+    #@createGrid()
 
     #@target.append(@controlBar)
 
