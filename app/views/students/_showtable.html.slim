@@ -1,77 +1,80 @@
 .row-fluid
-  .span9.well 
-    table.table.table-condensed.table-striped
-      tbody
-        tr
-          th width="20%" =t("class")
-          td =@student.class_groups.name
-        tr
-          th =t("name")
-          td style="font-size:16pt" =@student.surname+" "+@student.name+"（ "+@student.surname_reading+" "+@student.name_reading+" ）"
-        tr
-          th =t("gender")
-          td =gender(@student)
-        tr
-          th =t("students.birth")
-          td =@student.birth_date
-        tr
-          th =t("students.phone")
-          td =@student.phone
-        tr
-          th =t("students.email")
-          td =@student.email
-        tr
-          th =t("students.admitted")
-          td =@student.admitted
-        tr
-          th =t("students.class_group_enrollment")
-          td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
-        
-  .span3.well
-    .row-fluid.pagination-centered
-      h4 =t("students.picture")
-    .row-fluid.mt-s
-      .span12.pagination-centered
-        = image_tag @student.picture.url(:thumb), :id => "student_picture"
-    .row-fluid.mt-s
-      = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
-      div id="upload_picture" style="display:none;"
-        = render 'upload_picture'
-.row-fluid
   .span12.well
-    table.table.table-striped.table-bordered.table-condensed.student_contact_table
-      thead
-        tr
-          th =t('contact_type')
-          th =t('contacts.data')
-          th =t('contacts.details')
-          th =t('contacts.primary')
-          th =t('contacts.emergency')
-          th =t('contacts.actions')
-      tbody
-        =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
-    br/ 
-    #add_new_student_contact
-      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
-    =render 'new_student_contact_form'
-
+    .span9 
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            th width="20%" style="text-align:center" =t("class")
+            td =@student.class_groups.name
+          tr
+            th style="text-align:center;vertical-align:middle" =t("name")
+            td style="font-size:16pt;vertical-align:middle"
+              div
+                ruby style="margin-right:5px"
+                  rb
+                    = @student.surname
+                  rt
+                    = @student.surname_reading
+                ruby
+                  rb
+                    = @student.name
+                  rt
+                    = @student.name_reading
+          tr
+            th style="text-align:center" =t("gender")
+            td = gender(@student)
+          tr
+            th style="text-align:center" =t("students.birth")
+            td =@student.birth_date
+          tr
+            th style="text-align:center" =t("students.phone")
+            td =@student.phone
+          tr
+            th style="text-align:center" =t("students.email")
+            td =@student.email
+          tr
+            th style="text-align:center" =t("students.admitted")
+            td =@student.admitted
+          tr
+            th style="text-align:center" =t("students.class_group_enrollment")
+            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
+          
+    .span3.well
+      .row-fluid.pagination-centered
+        h4 =t("students.picture")
+      .row-fluid.mt-s
+        .span12.pagination-centered
+          = image_tag @student.picture.url(:thumb), :id => "student_picture"
+      .row-fluid.mt-s
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
+        div id="upload_picture" style="display:none;"
+          = render 'upload_picture'
 .row-fluid
   .span12.well
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a data-toggle="tab" href="#addresses" =t('addresses.addresses')+"（ "+@student.addresses.count.to_s+" ）"
+          a data-toggle="tab" href="#addresses"
+            = @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
         li
-          a data-toggle="tab" href="#guardians" =t('guardians.guardians')
+          a data-toggle="tab" href="#guardians"
+            = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
-          a data-toggle="tab" href="#notes" =t('notes.notes')
+          a data-toggle="tab" href="#contacts"
+            = @student.contacts.count != 0 ? t('contact') + "（" + @student.contacts.count.to_s + "）" : t('contact')
         li
-          a data-toggle="tab" href="#courses" =t('courses.courses')
+          a data-toggle="tab" href="#notes"
+            = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
+        li
+          a data-toggle="tab" href="#courses"
+            = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'addresses'
         #guardians.tab-pane
           = render :partial => 'guardians'
+        #contacts.tab-pane
+          = render :partial => 'contacts'
         #notes.tab-pane
           = render :partial => 'notes'
         #courses.tab-pane

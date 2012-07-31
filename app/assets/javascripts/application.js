@@ -10,6 +10,7 @@
 //= require external/jquery-ui-1.8.18.custom.min.js
 //= require kendo2012/kendo.web.min
 //= require bootstrap.min
+//= require chosen-jquery
 //= require i18n
 //= require i18n/translations
 
@@ -22,5 +23,6 @@
 // require gakuengine.js.coffee
 // require external/globalize.min.js
 // require external/cultures/globalize.cultures.js
+
 //= require jquery_validation_engine/jquery.validationEngine.js
 //= require jquery_validation_engine/languages/jquery.validationEngine-en.js

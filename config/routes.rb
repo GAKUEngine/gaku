@@ -12,6 +12,8 @@ GAKUEngine::Application.routes.draw do
       resources :exam_portion_scores
       get :grading, :on => :member
     end
+
+    post :enroll_class_group, :on => :member
   end
 
   resources :course_enrollments do
@@ -52,6 +54,8 @@ GAKUEngine::Application.routes.draw do
 
     get :get_csv_template, :on => :collection
     post :import_student_list, :on => :collection
+  
+    get :autocomplete_search, :on => :collection
   end
   
   resources :addresses
