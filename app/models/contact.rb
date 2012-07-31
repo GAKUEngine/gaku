@@ -26,6 +26,7 @@ class Contact < ActiveRecord::Base
   end  
 end
 
+
 # == Schema Information
 #
 # Table name: contacts
@@ -33,8 +34,8 @@ end
 #  id              :integer         not null, primary key
 #  data            :string(255)
 #  details         :text
-#  is_primary      :boolean
-#  is_emergency    :boolean
+#  is_primary      :boolean         default(FALSE)
+#  is_emergency    :boolean         default(FALSE)
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  contact_type_id :integer
