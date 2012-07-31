@@ -1,14 +1,17 @@
 #exam_grading_area
   = javascript_include_tag "exam_grading_widget"
 .row-fluid
-  h3 = "授業名＋試験名 " + t("grades.grading")
+  h3 
+    - @exams.each do |exam|
+      = exam.name << " "
+    =t("grades.grading")
 .row-fluid
   hr
 .row-fluid
   table.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
-        th.btn-primary colspan="3" 受験生徒
+        th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
           th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
           th.btn-inverse rowspan="2" =t("grades.total")
