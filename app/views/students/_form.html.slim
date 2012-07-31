@@ -51,10 +51,9 @@
 
   .row-fluid
     .span12.well
-      .span3
+      .span9
         = form.submit nil, :class => "span12 btn btn-primary"
-      .span3
-        = link_to t("Back"), students_path, :class => "btn span12", :style => "min-height:0px"
+      = link_to t("Back"), students_path, :class => "span3 btn", :style => "min-height:0px"
         
 coffee:
   $('.datepicker').datepicker(

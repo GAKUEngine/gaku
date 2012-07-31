@@ -11,11 +11,10 @@ class Contact < ActiveRecord::Base
 
 
   def make_primary_student
+    self.update_attributes(:is_primary => true)
     user_contacts = Contact.where(:student_id => self.student_id)
-    user_contacts.update_all(:is_primary => false)
-    self.is_primary = true
-    self.save
-  end
+    user_contacts.update_all('is_primary = "false"', "id <> #{self.id}")
+   end
 
   private
 

@@ -30,16 +30,16 @@
   .span3.well
     .row-fluid.pagination-centered
       h4 =t("students.picture")
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       .span12.pagination-centered
         = image_tag @student.picture.url(:thumb), :id => "student_picture"
-    .row-fluid style="margin-top:10px"
+    .row-fluid.mt-s
       = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
       div id="upload_picture" style="display:none;"
         = render 'upload_picture'
 .row-fluid
   .span12.well
-    table.table.table-striped.table-bordered.table-condensed
+    table.table.table-striped.table-bordered.table-condensed.student_contact_table
       thead
         tr
           th =t('contact_type')
@@ -50,6 +50,11 @@
           th =t('contacts.actions')
       tbody
         =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
+    br/ 
+    #add_new_student_contact
+      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
+    =render 'new_student_contact_form'
+
 .row-fluid
   .span12.well
     .tabbable.tabs-right

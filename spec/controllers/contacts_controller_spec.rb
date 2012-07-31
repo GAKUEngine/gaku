@@ -27,6 +27,14 @@ describe ContactsController do
                                                                      :details =>'Office eMail' } 
       end.to change(Contact, :count).by(1)
      end
-   end 
+
+    it "should create new contact for student" do
+      expect do
+        xhr :post, :create, :student_id => student.id, :contact => {:contact_type_id => contact_type.id,
+                                                                     :data => 'student@gakuengine.com',
+                                                                     :details => 'Student Email'}
+      end.to change(Contact, :count).by(1)   
+    end
+  end 
   
 end
