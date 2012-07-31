@@ -129,6 +129,7 @@ ja:
     average_score: "平均点数"
     total_points: "総合点数"
     max_points: "最高点数"
+    max: "点満点"
     points: "点数"
     rank: "ランク"
     total: "合計"
