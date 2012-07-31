@@ -44,6 +44,31 @@ body {
   padding: 10px;
 }
 
+.mt-xs { margin-top: 5px }
+.mt-s { margin-top: 10px }
+.mt-m { margin-top: 15px }
+.mt-l { margin-top: 20px }
+
+.mr-xs { margin-right: 5px }
+
+.mb-0 { margin-bottom: 0px }
+
+.h4-vm {
+  height:28px;
+  line-height:28px;
+}
+
+.grading-table {
+  thead {
+    th {
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+}
+// style="text-align:center;"
+
+
 //bootstrap fix ----------
 hr {
   margin: 10px 0px;
@@ -133,18 +158,4 @@ form {
       margin-bottom: 20px;
     }
   }
-}
-
-.mt-xs { margin-top: 5px }
-.mt-s { margin-top: 10px }
-.mt-m { margin-top: 15px }
-.mt-l { margin-top: 20px }
-
-.mr-xs { margin-right: 5px }
-
-.mb-0 { margin-bottom: 0px }
-
-.h4-vm {
-  height:28px;
-  line-height:28px;
 }
