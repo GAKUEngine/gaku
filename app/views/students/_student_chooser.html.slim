@@ -1,5 +1,8 @@
 / for getting select mode in js. please don`t remove 
-#student_grid data-select-mode="#{select_mode}"
+- if defined?(select_mode)
+    #student_grid data-select-mode="#{select_mode}"
+- else
+    #student_grid
 .row-fluid
   .span12
     input*{'data-autocomplete-source' => "#{autocomplete_search_students_path}"} class='student_search'       
@@ -25,6 +28,7 @@
           
 .row-fluid
   .span12
-    b =select_mode
+    - if defined?(select_mode)
+      b =select_mode
     #students_grid_table  
       #grid.span12
