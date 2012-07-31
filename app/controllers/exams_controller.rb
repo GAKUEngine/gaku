@@ -44,8 +44,22 @@ class ExamsController < ApplicationController
 
   def grading
     @course = Course.find(params[:course_id])
+    @students = @course.students #.select("id, surname, name")
     @exams = Exam.find_all_by_id(params[:id])
-    #@exam_portions = @exam.exam_portions
+
+    @students.each do |student|
+      @exams.each do |exam|
+        exam.exam_portions.each do |portion|
+          if student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
+            score = ExamPortionScore.new
+            score.student_id = student.id
+            score.exam_portion_id = portion.id
+            score.save
+          end
+        end
+      end
+    end
+
     render "exams/grading"
   end
 

@@ -23,6 +23,8 @@ GAKUEngine::Application.routes.draw do
   resources :class_group_enrollments do
     post :enroll_student, :on => :collection
   end
+  
+  resources :exam_portion_scores
 
   resources :syllabuses do
     member do

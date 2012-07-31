@@ -7,7 +7,6 @@ describe ExamScore do
 
   	it { should have_valid_factory(:exam_score) }
     it { should belong_to(:exam) }
-    it { should belong_to(:student) }
 
     it { should validate_presence_of(:score) }
 

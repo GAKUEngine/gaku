@@ -29,16 +29,7 @@ describe ExamPortion do
       exam_portion.weight = 0
       exam_portion.should be_valid
     end
-
-    it "should validate problem_count is greater than 0" do
-      exam_portion.problem_count = -1
-      exam_portion.should be_invalid
-    end
-
-    it "should validate problem_count is 0" do
-      exam_portion.problem_count = 0
-      exam_portion.should be_valid
-    end
+    
   end
 
 end
