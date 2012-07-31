@@ -22,3 +22,5 @@
 // require gakuengine.js.coffee
 // require external/globalize.min.js
 // require external/cultures/globalize.cultures.js
+//= require jquery_validation_engine/jquery.validationEngine.js
+//= require jquery_validation_engine/languages/jquery.validationEngine-en.js

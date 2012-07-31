@@ -17,5 +17,6 @@
  *= require bootstrap-responsive.min
  *= require gakuengine.css.scss
  *= require tbs_datepicker/css/datepicker
+ *= require jquery_validation_engine/validationEngine.jquery.css
 */
 
