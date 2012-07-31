@@ -9,7 +9,9 @@ html
     = javascript_include_tag params[:controller]
     = csrf_meta_tags
   body
-    = render :partial => "shared/js_config"
+    javascript:
+      I18n.defaultLocale = "#{{I18n.default_locale}}";
+      I18n.locale = "#{{I18n.locale}}";
     = render :partial => 'shared/modal_config'
     = render :partial => "shared/menubar"
     .container-fluid
