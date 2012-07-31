@@ -16,6 +16,52 @@ class StudentGrid extends BuHin
 
   defColWidth: 128
 
+  _columns: () ->
+    switch $('#student_grid').data('select-mode')
+      when 'multiple'
+        return [{
+                  field: "checkbox"
+                  title: "Select"
+                  encoded: false
+                  width: 5
+                },{
+                  field: "surname"
+                  title: I18n.t('students.surname')
+                },{
+                  field: "name"
+                  title: I18n.t('students.name')
+                },{
+                  field: "gender"
+                  title: I18n.t('gender')
+                },{
+                  field: "manage"
+                  title: I18n.t('manage')
+                  width: 78
+                  encoded: false
+                  resizable: false
+                  sortable: false
+                  groupable: false
+                }]
+      when 'single'
+        return [{
+                  field: "surname"
+                  title: I18n.t('students.surname')
+                },{
+                  field: "name"
+                  title: I18n.t('students.name')
+                },{
+                  field: "gender"
+                  title: I18n.t('gender')
+                },{
+                  field: "manage"
+                  title: I18n.t('manage')
+                  width: 78
+                  encoded: false
+                  resizable: false
+                  sortable: false
+                  groupable: false
+                }]
+
   _createGrid: () ->
     gridArgs =
       dataSource:
@@ -29,31 +75,7 @@ class StudentGrid extends BuHin
       resizable: false
       reorderable: true
       # columnMenu: true
-      columns: [
-        {
-          field: "checkbox"
-          title: "Select"
-          encoded: false
-          width: 5
-        },{
-          field: "surname"
-          title: I18n.t('students.surname')
-        },{
-          field: "name"
-          title: I18n.t('students.name')
-        },{
-          field: "gender"
-          title: I18n.t('gender')
-        },{
-          field: "manage"
-          title: I18n.t('manage')
-          width: 78
-          encoded: false
-          resizable: false
-          sortable: false
-          groupable: false
-        }
-      ]
+      columns: @_columns()
     
     @target.kendoGrid(gridArgs)
 
@@ -132,7 +154,6 @@ class StudentGrid extends BuHin
         
       # @_createCheckbox()
       @_createGrid()
-      @checkSelectMode()
 
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
@@ -199,7 +220,6 @@ class StudentGrid extends BuHin
               @_createGrid()
               # @_createCheckbox()
               # @refreshGrid
-              @checkSelectMode()
               return false
     ).data('autocomplete')._renderItem =  (ul, item)->
       return $("<li></li>")
@@ -228,20 +248,13 @@ class StudentGrid extends BuHin
       if $('input.student_search').val() == ''
         @refreshGrid("/students.json")
 
-  checkSelectMode: ->
-    switch $('#student_grid').data('select-mode')
-      when 'multiply'
-        $('#students_grid_table tr th').first().show()
-        $('#students_grid_table tr td:first-child').show()
-      when 'single'
-        console.log "something"
-
   init: () ->
     @_getFieldNames()
     @_getScreenMetrics()
     @autocompleteRefreshGrid()
     @refreshGrid("/students.json")
     @clearSearch()
+    console.log @_columns() 
 
   ProcessOptions: (options) ->
     if options
