@@ -22,7 +22,8 @@
         th*{"data-field" => t("grades.rank")}
           = t("grades.rank")
         /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
-    =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
+    tbody
+      =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
 .row-fluid
   /Modalでもいいかも。
   #add_student_enrollment_form style='display:none' 
