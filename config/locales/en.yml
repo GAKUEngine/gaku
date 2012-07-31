@@ -125,6 +125,7 @@ en:
     average_score: "Average Score"
     total_points: "Total Score"
     max_points: "Maximum Score"
+    max: "Max"
     points: "Points"
     rank: "Rank/Grade"
     total: "Total"

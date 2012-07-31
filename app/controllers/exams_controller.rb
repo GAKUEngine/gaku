@@ -46,6 +46,18 @@ class ExamsController < ApplicationController
     @course = Course.find(params[:course_id])
     @students = @course.students #.select("id, surname, name")
     @exams = Exam.find_all_by_id(params[:id])
+    @examDetails = []
+    @exams.each do |exam|
+      maxScore = 0.0
+      portions = []
+      exam.exam_portions.each do |portion|
+        maxScore += portion.max_score
+        portions.push({ :id => portion.id, :name => portion.name, :max_score => portion.max_score })
+      end
+
+      @examDetails.push({ :id => exam.id, :name => exam.name, :max_score => maxScore, :portions => portions })
+    end
+
 
     @students.each do |student|
       @exams.each do |exam|

@@ -21,7 +21,7 @@
         th.btn-info =t("students.name")
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
-            th.btn-warning = portion.name
+            th.btn-warning = portion.name << "(" << portion.max_score.to_s << "#{t('grades.max')})"
     tbody
       - @students.each do |student|
         tr
