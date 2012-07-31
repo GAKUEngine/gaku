@@ -33,11 +33,11 @@
               .span3
                 = address_form.label :address2, t("addresses.address2"), :class => "control-label"
                 = address_form.text_field :address2, :class => "span12"
-            -if params[:action] == 'edit'
-              .row-fluid
-                .span12
-                  =address_form.label :past, t('addresses.past')
-                  =address_form.check_box :past
+              -if params[:action] == 'edit'
+                .row-fluid
+                  .span12
+                    =address_form.label :past, t('addresses.past')
+                    =address_form.check_box :past
           .row-fluid
             .span9
               button.span12.btn.btn-primary =t "addresses.save"

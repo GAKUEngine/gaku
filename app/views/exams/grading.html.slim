@@ -27,7 +27,7 @@
         tr
           td 
           td 
-          td =student.surname << " " << student.name
+          td.vm =student.surname << " " << student.name
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
