@@ -1,0 +1,9 @@
+student1:
+  name: "John"
+  surname: "Doe"
+student2: 
+  name: "Anonime"
+  surname: "Anonimized"
+student3: 
+  name: "Amon"
+  surname: "Tobin"

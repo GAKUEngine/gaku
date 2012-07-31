@@ -1,0 +1,6 @@
+class_group_1:
+  name: "Biology"
+class_group_2: 
+  name: "Math"
+class_group_3:
+  name: "Literature" 
