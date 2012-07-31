@@ -11,21 +11,22 @@
         th rowspan="2" =t("class")
         th rowspan="2" =t("class_group_enrollments.seat_number")
         th rowspan="2" =t("students.name")
-      - @exams.each do |exam|
-        th.btn-info colspan="#{exam.exam_portions.count}" =exam.name
+        - @exams.each do |exam|
+          th.btn-info colspan="#{exam.exam_portions.count}" = exam.name
         th.btn-primary rowspan="2" =t("grades.total")
       tr
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
-            th =portion.name
+            th = portion.name
 
     tbody
-      /tr
+      tr
         td 生徒クラス
         td 出席番号
         td 生徒氏名
-        td 筆記点数
-        td 実技点数
+        - @exams.each do |exam|
+          - exam.exam_portions.each do |portion|
+            td
         td 点数
 
 javascript:
