@@ -8,17 +8,17 @@
   table.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
-        th rowspan="2" =t("class")
-        th rowspan="2" =t("class_group_enrollments.seat_number")
-        th rowspan="2" =t("students.name")
+        th.btn-primary colspan="3" 受験生徒
         - @exams.each do |exam|
-          th.btn-info colspan="#{exam.exam_portions.count}" = exam.name
-        th.btn-primary rowspan="2" =t("grades.total")
+          th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
+          th.btn-inverse rowspan="2" =t("grades.total")
       tr
+        th.btn-info =t("class")
+        th.btn-info =t("class_group_enrollments.seat_number")
+        th.btn-info =t("students.name")
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
-            th = portion.name
-
+            th.btn-warning = portion.name
     tbody
       tr
         td 生徒クラス
@@ -27,7 +27,7 @@
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
             td
-        td 点数
+          td 合計点数
 
 javascript:
   var course_id = #{{params[:course_id]}};
