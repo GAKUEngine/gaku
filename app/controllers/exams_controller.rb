@@ -55,7 +55,7 @@ class ExamsController < ApplicationController
         portions.push({ :id => portion.id, :name => portion.name, :max_score => portion.max_score })
       end
 
-      @examDetails.push({ :id => exam.id, :name => exam.name, :max_score => maxScore, :portions => portions })
+      @examDetails.push({ :id => exam.id, :name => exam.name, :max_score => maxScore, :exam_portions => portions })
     end
 
 
