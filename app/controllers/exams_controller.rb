@@ -44,7 +44,7 @@ class ExamsController < ApplicationController
 
   def grading
     @course = Course.find(params[:course_id])
-    @students = @course.students.select("id, class, surname, name")
+    @students = @course.students #.select("id, surname, name")
     @exams = Exam.find_all_by_id(params[:id])
     #@exam_portions = @exam.exam_portions
     render "exams/grading"
