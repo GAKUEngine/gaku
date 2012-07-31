@@ -8,8 +8,6 @@ describe Student do
   	it { should have_valid_factory(:student) }
     it { should have_many(:course_enrollments) }
     it { should have_many(:courses) }
-    it { should have_many(:exams) }
-    it { should have_many(:exam_scores) }
     it { should belong_to(:user) }
     it { should have_many :class_group_enrollments }
     it { should have_many(:class_groups) } 
