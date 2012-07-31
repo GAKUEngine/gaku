@@ -31,6 +31,11 @@ class StudentGrid extends BuHin
       # columnMenu: true
       columns: [
         {
+          field: "checkbox"
+          title: "Select"
+          encoded: false
+          width: 5
+        },{
           field: "surname"
           title: I18n.t('students.surname')
         },{
@@ -54,32 +59,32 @@ class StudentGrid extends BuHin
 
   _createCheckbox: () ->
 
-    checkString = (check_s) ->
-      ths = $("#grid th")
-      i = 0
-      while i < ths.length
-        if $(ths[i]).text() is check_s
-          return i + 1
-          break
-        i++    
+    # checkString = (check_s) ->
+    #   ths = $("#grid th")
+    #   i = 0
+    #   while i < ths.length
+    #     if $(ths[i]).text() is check_s
+    #       return i + 1
+    #       break
+    #     i++    
            
-    checkBoxes = $("<div></div>")
-    $.each @titles, (key, value) ->
-      if key != "manage"
-        checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
-        .appendTo(checkBoxes)
-    $("#table-checkboxes").html(checkBoxes.html())
+    # checkBoxes = $("<div></div>")
+    # $.each @titles, (key, value) ->
+    #   if key != "manage"
+    #     checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
+    #     .appendTo(checkBoxes)
+    # $("#table-checkboxes").html(checkBoxes.html())
         
-    $("#table-checkboxes .form-inline").toggle ((e) ->
-      num = checkString(e.currentTarget.textContent)
-      $(e.currentTarget).find("input").removeAttr('checked')
-      console.log 1
-      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
-    ),(e) ->
-      num = checkString(e.currentTarget.textContent)
-      $(e.currentTarget).find("input").attr('checked','checked')
-      console.log 2
-      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
+    # $("#table-checkboxes .form-inline").toggle ((e) ->
+    #   num = checkString(e.currentTarget.textContent)
+    #   $(e.currentTarget).find("input").removeAttr('checked')
+    #   console.log 1
+    #   $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
+    # ),(e) ->
+    #   num = checkString(e.currentTarget.textContent)
+    #   $(e.currentTarget).find("input").attr('checked','checked')
+    #   console.log 2
+    #   $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
 
 
   refreshGrid: (query) ->
@@ -87,7 +92,7 @@ class StudentGrid extends BuHin
       if studentData == null
         return
 
-      @students = studentData
+      @students = studentData 
 
       i = 0
       while i < @students.length
@@ -114,10 +119,21 @@ class StudentGrid extends BuHin
           .appendTo(managementButtons)
         
         @students[i]["manage"] = managementButtons.html()
-        i++
         
+        # create checkbox for student row
+        checkbox = $("<div></div>")
+        showButton = $("<input type='checkbox'></input>")
+          .css("margin-left","10px")
+          .appendTo(checkbox)
+
+        @students[i]["checkbox"] = checkbox.html() 
+        i++
+
+        
+      # @_createCheckbox()
       @_createGrid()
-      @_createCheckbox()
+      @checkSelectMode()
+
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
         
@@ -170,11 +186,20 @@ class StudentGrid extends BuHin
                   .appendTo(managementButtons)
                 
                 @students[i]["manage"] = managementButtons.html()
+                
+                checkbox = $("<div></div>")
+                showButton = $("<input type='checkbox'></input>")
+                .css("margin-left","10px")
+                .appendTo(checkbox)
+
+                @students[i]["checkbox"] = checkbox.html() 
+
                 i++
                 
               @_createGrid()
-              @_createCheckbox()
+              # @_createCheckbox()
               # @refreshGrid
+              @checkSelectMode()
               return false
     ).data('autocomplete')._renderItem =  (ul, item)->
       return $("<li></li>")
@@ -203,6 +228,13 @@ class StudentGrid extends BuHin
       if $('input.student_search').val() == ''
         @refreshGrid("/students.json")
 
+  checkSelectMode: ->
+    switch $('#student_grid').data('select-mode')
+      when 'multiply'
+        $('#students_grid_table tr th').first().show()       
+        $('#students_grid_table tr td:first-child').show()
+      when 'single'
+        console.log "something"
 
   init: () ->
     @_getFieldNames()

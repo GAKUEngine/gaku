@@ -5,3 +5,12 @@
 .hide{
   display: none;
 }
+
+
+#students_grid_table tr th:first-child{
+	display:none;
+}
+
+#students_grid_table tr td:first-child{
+	display:none
+}
