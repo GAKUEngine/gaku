@@ -7,7 +7,6 @@ describe ExamPortion do
     it { should have_valid_factory(:exam_portion) }
     it { should belong_to(:exam) }
     it { should have_many(:exam_portion_scores) }
-    it { should belong_to(:schedule) }
     it { should belong_to(:grading_method) }
 
     it "should validate max_score is greater than 0" do
