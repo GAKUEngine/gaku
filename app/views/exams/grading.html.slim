@@ -34,7 +34,7 @@
               - model_class = model.class
               td
                 = form_for [model], :remote => true do |f|
-                  =f.text_field :score, :class => "form_blur_event"
+                  =f.text_field :score, :class => "span12 form_blur_event"
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
