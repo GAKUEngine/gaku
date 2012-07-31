@@ -1,3 +1,12 @@
-h1= t('syllabuses.new')
-= render 'form'
-= link_to t(:Back), syllabuses_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('syllabuses.new')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12
+        = render 'form'

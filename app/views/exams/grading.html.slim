@@ -8,22 +8,27 @@
   table.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
-        th rowspan="2" =t("class")
-        th rowspan="2" =t("class_group_enrollments.seat_number")
-        th rowspan="2" =t("students.name")
-        th.btn-info colspan="2" 授業名
-        th.btn-primary rowspan="2" =t("grades.total")
+        th.btn-primary colspan="3" 受験生徒
+        - @exams.each do |exam|
+          th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
+          th.btn-inverse rowspan="2" =t("grades.total")
       tr
-        th 筆記
-        th 実技
+        th.btn-info =t("class")
+        th.btn-info =t("class_group_enrollments.seat_number")
+        th.btn-info =t("students.name")
+        - @exams.each do |exam|
+          - exam.exam_portions.each do |portion|
+            th.btn-warning = portion.name
     tbody
-      tr
-        td 生徒クラス
-        td 出席番号
-        td 生徒氏名
-        td 筆記点数
-        td 実技点数
-        td 点数
+      - @students.each do |student|
+        tr
+          td 
+          td 
+          td =student.surname << " " << student.name
+          - @exams.each do |exam|
+            - exam.exam_portions.each do |portion|
+              td = student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score
+            td
 
 javascript:
   var course_id = #{{params[:course_id]}};

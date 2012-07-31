@@ -21,7 +21,9 @@ class Exam < ActiveRecord::Base
     def build_default_exam_portion
       exam_portion = self.exam_portions.first
       exam_portion.is_master = true
-      exam_portion.name = self.name
+      if self.name == ""
+        exam_portion.name = self.name
+      end
       exam_portion.save
     end
 

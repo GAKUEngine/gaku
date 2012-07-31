@@ -21,7 +21,7 @@
               = f.file_field :file
               = submit_tag 'Submit'
             = link_to "CSV Export", "students.csv"
-    =render 'students/student_chooser'
+    =render 'students/student_chooser', :select_mode => 'multiple'
 = javascript_include_tag "students_index"
 
 coffee:

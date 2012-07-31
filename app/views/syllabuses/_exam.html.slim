@@ -5,6 +5,7 @@
     td= exam.adjustments
     td= exam.weight
     td= exam.dynamic_scoring
-    td= link_to 'Show', [@syllabus, exam]
-    td= link_to 'Edit', edit_syllabus_exam_path(@syllabus, exam)
-    td= link_to( 'Destroy', syllabus_exam_path(@syllabus, exam), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_exam' )
+    td
+      = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, [@syllabus, exam], :class => "mr-xs btn btn-mini btn-success"
+      = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_syllabus_exam_path(@syllabus, exam), :class => "mr-xs btn btn-mini btn-warning"
+      = link_to ("<i class='icon-white icon-remove'></i>").html_safe, syllabus_exam_path(@syllabus, exam), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'btn btn-mini btn-danger delete_exam'
