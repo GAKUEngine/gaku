@@ -8,21 +8,20 @@
       .span12
         hr/
     .row-fluid
-      table.table.table-condensed.table-striped.table-bordered
+      table.table.table-striped
         thead
           tr
             th =t("syllabuses.code")
-            th =t("syllabuses.name")
-            th =t("syllabuses.description")
-            th =t("syllabuses.credits")
-            th =t('exams.count')
-        tbody
-          tr
             td =@syllabus.code
+            th =t("syllabuses.name")
             td =@syllabus.name
-            td =@syllabus.description
+            th =t("syllabuses.credits")
             td =@syllabus.credits
+            th =t('exams.count')
             td id="exams-count" =@syllabus.exams.count
+          tr
+            th =t("syllabuses.description")
+            td colspan="7" =@syllabus.description
     .row-fluid.mt-l
       .span12.well
         .row-fluid
