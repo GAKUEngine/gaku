@@ -1,15 +1,16 @@
 - model = @address || Address.new
 - model_class = model.class
 .modal.hide#editAddressModal wmode="opaque"
-  
-  = form_for([model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |address_form|
+  = form_for([model], :remote => true, :html => {:'data-type' => 'script'}) do |address_form|
     .modal-header
-      button.close type="button" data-dismiss="modal"
-        'x
-      h3= t("addresses.edit")
+      h3 =t("addresses.edit")
     .modal-body
-      .validation-error
-      .form-inputs
+      .row-fluid
+        .validation-error
+      .row-fluid.control-group
+        = address_form.label :title, t("addresses.title"), :class => "control-label"
+        = address_form.text_field :title, :class => "span12"
+      .row-fluid
         = hidden_field_tag :student_id, @student.id
         .row-fluid.control-group
           .span6
@@ -23,26 +24,29 @@
               .span6
                 button.span12.btn.btn-primary= t "addresses.search_address"
         .row-fluid.control-group
-          .span3
+          .span6
             / class state_label for handling changing state input with state dropdown
             = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label" 
             = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
-          .span3
+          .span6
             = address_form.label :city, t("addresses.city"), :class => "control-label"
             = address_form.text_field :city, :class => "span12"
-          .span3
+        .row-fluid.control-group
+          .span6
             = address_form.label :address1, t("addresses.address1"), :class => "control-label"
             = address_form.text_field :address1, :class => "span12"
-          .span3
+          .span6
             = address_form.label :address2, t("addresses.address2"), :class => "control-label"
             = address_form.text_field :address2, :class => "span12"
         -if params[:action] == 'edit'
-          .row-fluid.control-group
-            .span12
-              =address_form.label :past, t('addresses.past')
+          .row-fluid
+            .span12.form-inline
               =address_form.check_box :past
+              =address_form.label :past, t('addresses.past'), :class => "help-inline"
         .row-fluid
-            = address_form.submit t('addresses.save'), :class => 'btn btn btn-primary'
-            = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
-
-
+          .span12
+            hr
+        .row-fluid
+          .span9
+            = address_form.submit t('addresses.save'), :class => 'span12 btn btn btn-primary'
+          = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :'data-dismiss' => "modal"
