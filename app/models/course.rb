@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   has_many :course_enrollments
   has_many :students, :through => :course_enrollments
+  has_many :exam_schedules
   belongs_to :syllabus
   belongs_to :class_group
 
