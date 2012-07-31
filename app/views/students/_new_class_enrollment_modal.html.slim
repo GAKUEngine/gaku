@@ -23,7 +23,7 @@
                 td#table_class_enrollment_seat_number =@student.class_group_enrollments.last.seat_number if @student.class_groups.any?
       .validation-error
       .form-inputs
-        = hidden_field_tag :student_id, @student.id
+        = f.hidden_field :student_id, :value => @student.id
         .field
           =f.label t('class_group_enrollments.class_groups')
           = f.select :class_group_id, ClassGroup.all.collect { |s| ["#{s.name} ", s.id] }, {:prompt => t('students.choose_class group')}
