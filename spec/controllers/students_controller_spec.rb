@@ -3,7 +3,7 @@ require 'spec_helper'
 describe StudentsController do
 
   let(:student) { FactoryGirl.create(:student) }
-  let(:country) {Factory(:country)}
+  let(:country) { Factory(:country) }
 
   before do
     login_admin
@@ -17,17 +17,17 @@ describe StudentsController do
   end 
 
   describe "POST create" do
-    pending "redirects to the new page" do
+    it "redirects to the new student" do
       page.stub :save => true
 
       post :create, :name => student.name, :surname => student.surname
-      response.should redirect_to(student_url(Student.last))
+      response.should be_success
     end
   end
 
   describe "PUT update" do
 
-    it "redirects to the page" do
+    it "updates the student" do
       page.stub :update_attributes => true
 
       post :update, :id => student.id
@@ -52,11 +52,11 @@ describe StudentsController do
     it "should create new student address with ajax" do
       expect do  
         xhr :put, :create_address, :id => student.id, :student => {:addresses_attributes => {0 => {"city" => "Asenovrad",
-                                                                                      "address1" =>"Zapad",
-                                                                                      "address2" => "Zapad2",
-                                                                                      "zipcode" => "4230",
-                                                                                      "state_name"=> "District of Columbia", 
-                                                                                      "country_id"=>country.id}}}
+                                                                                      "address1"   =>"Zapad",
+                                                                                      "address2"   => "Zapad2",
+                                                                                      "zipcode"    => "4230",
+                                                                                      "state_name" => "District of Columbia", 
+                                                                                      "country_id" => country.id}}}
       end.to change(Address, :count).by(1)
     end
   end

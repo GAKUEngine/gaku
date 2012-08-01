@@ -11,13 +11,6 @@ describe ContactsController do
     login_admin
   end
 
-  describe "GET :index	" do
-    pending "should be successful" do
-      get :index
-      response.should be_success
-    end
-  end
-
   describe "POST :create" do
     it "should create new contact for guardian" do
       expect do
