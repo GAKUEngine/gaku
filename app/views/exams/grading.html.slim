@@ -34,7 +34,7 @@
               - model_class = model.class
               td
                 = form_for [model], :remote => true do |f|
-                  =f.number_field :score, :class => "span12 form_blur_event"
+                  =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "span12 form_blur_event"
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
@@ -44,7 +44,8 @@ coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   #var exam_portions_data = #{{@exam_portions.to_json}};
-
+  
+  
   $('.form_blur_event').blur( ->
     score = $(this)
     score.closest("form").submit()
