@@ -34,6 +34,11 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.integer "guardian_id"
   end
 
+  create_table "addresses_students", :force => true do |t|
+    t.integer "student_id"
+    t.integer "address_id"
+  end
+
   create_table "assignment_scores", :force => true do |t|
     t.integer  "score"
     t.datetime "created_at", :null => false
