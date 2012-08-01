@@ -4,10 +4,10 @@
       table.table.table-bordered.table-striped
         tbody
           tr
-            th.vm-tc width="20%" =t("class")
+            th width="20%" =t("class")
             td =@student.class_groups.name
           tr
-            th.vm-tc =t("name")
+            th =t("name")
             td.vm style="font-size:16pt"
               div
                 ruby style="margin-right:5px"
@@ -21,22 +21,22 @@
                   rt
                     = @student.name_reading
           tr
-            th.vm-tc =t("gender")
+            th =t("gender")
             td = gender(@student)
           tr
-            th.vm-tc =t("students.birth")
+            th =t("students.birth")
             td =@student.birth_date
           tr
-            th.vm-tc =t("students.phone")
+            th =t("students.phone")
             td =@student.phone
           tr
-            th.vm-tc =t("students.email")
+            th =t("students.email")
             td =@student.email
           tr
-            th.vm-tc =t("students.admitted")
+            th =t("students.admitted")
             td =@student.admitted
           tr
-            th.vm-tc =t("students.class_group_enrollment")
+            th =t("students.class_group_enrollment")
             td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
           
     .span3.well
