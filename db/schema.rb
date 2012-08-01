@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801121337) do
+ActiveRecord::Schema.define(:version => 20120801124531) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -179,6 +179,14 @@ ActiveRecord::Schema.define(:version => 20120801121337) do
     t.text     "method"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "guardian_addresses", :force => true do |t|
+    t.integer  "guardian_id"
+    t.integer  "address_id"
+    t.boolean  "is_primary",  :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "guardians", :force => true do |t|

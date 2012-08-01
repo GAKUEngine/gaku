@@ -24,6 +24,8 @@ class Address < ActiveRecord::Base
  
   has_many :student_addresses
   has_many :students, :through => :student_addresses
+  has_many :guardian_addresses
+  has_many :guardians, :through => :guardian_addresses
 
   validates :address1, :city, :country, :presence => true
 
