@@ -46,5 +46,11 @@ describe 'Syllabus' do
       page.should have_content("Biology1")
       page.should have_content("bio1")
     end
+
+    it "should not submit new syllabus without filled validated fields" do 
+      click_link "new_syllabus_link"
+      click_button "Create Syllabus"
+      page.should_not have_content "was successfully created"
+    end
   end
 end
