@@ -16,6 +16,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: exam_portions
@@ -33,7 +34,6 @@ end
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
 #  exam_id           :integer
-#  schedule_id       :integer
 #  grading_method_id :integer
 #
 
