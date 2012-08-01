@@ -22,11 +22,20 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.string   "state_name"
     t.string   "title"
     t.boolean  "past",       :default => false
+<<<<<<< HEAD
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+=======
+    t.boolean  "is_primary", :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "country_id"
+    t.integer  "state_id"
+    t.integer  "faculty_id"
+>>>>>>> e39bec5c42850d5e45a0bac2fa23247080fe0f0f
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -156,6 +165,10 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.integer  "exam_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+<<<<<<< HEAD
+=======
+    t.integer  "exam_id"
+>>>>>>> e39bec5c42850d5e45a0bac2fa23247080fe0f0f
   end
 
   create_table "exams", :force => true do |t|
