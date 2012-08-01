@@ -6,6 +6,8 @@ class CreateExams < ActiveRecord::Migration
       t.float    :weight
       t.boolean  :dynamic_scoring
 
+      t.references :grading_method
+
       t.timestamps
     end
   end

@@ -5,6 +5,9 @@ class CreateAssignmentsTable < ActiveRecord::Migration
   		t.text     :description
   		t.integer  :max_score
 
+  		t.references :syllabus
+  		t.references :grading_method
+
   		t.timestamps
   	end
   end

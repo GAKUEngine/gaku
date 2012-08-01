@@ -9,6 +9,9 @@ class CreateExamPortionsTable < ActiveRecord::Migration
       t.boolean  :dynamic_scoring 
       t.boolean  :is_master,  :default => false
 
+      t.references :exam
+      t.references :grading_method
+
       t.timestamps
   	end
   end

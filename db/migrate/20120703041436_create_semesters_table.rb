@@ -4,6 +4,8 @@ class CreateSemestersTable < ActiveRecord::Migration
       t.date :starting
  	    t.date :ending
 
+ 	    t.references :class_group
+
  	    t.timestamps
  	  end
   end

@@ -9,14 +9,14 @@ describe SemestersController do
   end
 
   describe "GET :index	" do
-    pending "should be successful" do
+    it "should be successful" do
       get :index
       response.should be_success
     end
   end 
 
   describe "POST create" do
-    pending "redirects to the new semester" do
+    it "redirects to the new semester" do
       page.stub :save => true
 
       post :create, :starting => semester.starting, :ending => semester.ending

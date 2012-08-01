@@ -4,6 +4,8 @@ class CreateExamScores < ActiveRecord::Migration
       t.float    :score
       t.text     :comment
 
+      t.references :exam
+
       t.timestamps
     end
   end

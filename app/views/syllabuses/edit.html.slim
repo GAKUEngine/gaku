@@ -1,10 +1,12 @@
-h1 Editing syllabus
-= render 'form'
-
-/= link_to t(:select), available_exams_url, { :remote => true }
-
-
-= link_to 'Show', @syllabus
-
-br
-= link_to 'Back', syllabuses_path
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('syllabuses.edit')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12
+        = render 'form'

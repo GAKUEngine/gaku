@@ -5,6 +5,8 @@ class CreateClassGroups < ActiveRecord::Migration
       t.integer  :grade
       t.string   :homeroom
 
+      t.references :faculty
+
       t.timestamps
     end
   end

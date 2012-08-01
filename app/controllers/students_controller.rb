@@ -11,16 +11,20 @@ class StudentsController < ApplicationController
   before_filter :load_student,      :only => [:new_address, :create_address, :new_guardian, :create_guardian, :edit, :update]
   
   def index
-    @students = Student.all
+    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
 
     if params[:action] == "get_csv_template"
       get_csv_template
       return
     end
 
+
+
     respond_to do |format|
       format.html
-      format.json { render :json => @students }
+      format.json do 
+        render :json => @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget]) 
+      end  
       format.csv  { export_csv_index(@students) }
     end
   end
@@ -115,10 +119,8 @@ class StudentsController < ApplicationController
     # search only name or surname separate
     # @students = Student.where("name like ? OR surname like ?", "%#{params[:term]}%", "%#{params[:term]}%")
     # work only on sqlite3 and postgresql
-    @students = Student.where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?) OR (name LIKE ?) OR (surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%", "%#{params[:term]}%",  "%#{params[:term]}%")
-    render json: @students #.collect{|s| "#{s.name} #{s.surname}"}
-    logger.debug @students.to_json
-
+    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?) OR (name LIKE ?) OR (surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%", "%#{params[:term]}%",  "%#{params[:term]}%")
+    render json: @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget]) 
   end
 
   private
