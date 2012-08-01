@@ -9,15 +9,19 @@
       .span12
         hr/
     .row-fluid
-      table
-        tr
-          th= t("class_groups.name")
-          th
-          th
-          th
-        - @class_groups.each do |class_group|
+      .span12.well
+        table.table.table-striped.table-bordered.table-condensed
           tr
-            td= class_group.name
-            td= link_to t(:Show), class_group 
-            td= link_to t(:Edit), edit_class_group_path(class_group) 
-            td= link_to t(:Destroy), class_group, :data => { :confirm => 'Are you sure?' }, :method => :delete
+            th.btn-inverse = t("class_groups.grade")
+            th.btn-inverse = t("class_groups.name")
+            th.btn-inverse = t("class_groups.homeroom")
+            th.btn-info style="width:94px" = t("manage")
+          - @class_groups.each do |class_group|
+            tr
+              td = class_group.grade
+              td = class_group.name
+              td = class_group.homeroom
+              td
+                = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, class_group , :class => "mr-xs btn btn-mini btn-success"
+                = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_class_group_path(class_group) , :class => "mr-xs btn btn-mini btn-warning"
+                = link_to ("<i class='icon-white icon-remove'></i>").html_safe, class_group, :class => "btn btn-mini btn-danger", :data => { :confirm => 'Are you sure?' }, :method => :delete
