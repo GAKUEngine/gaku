@@ -19,7 +19,7 @@ describe SyllabusesController do
     it "redirects to the new syllabus" do
       page.stub :save => true
 
-      post :create
+      post :create, :syllabus => {:name => syllabus.name, :code => syllabus.code}
       response.should redirect_to(syllabus_url(Syllabus.last))
     end
   end
