@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: states
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  abbr            :string(255)
+#  name_ascii      :string(255)
+#  country_numcode :integer
+#
+
 class State < ActiveRecord::Base
   belongs_to :country, :foreign_key => 'country_numcode'
 
@@ -26,16 +37,4 @@ class State < ActiveRecord::Base
   end
   
 end
-
-
-# == Schema Information
-#
-# Table name: states
-#
-#  id              :integer         not null, primary key
-#  name            :string(255)
-#  abbr            :string(255)
-#  name_ascii      :string(255)
-#  country_numcode :integer
-#
 
