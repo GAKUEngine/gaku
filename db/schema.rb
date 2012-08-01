@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "state_name"
-    t.string   "title"
     t.boolean  "past",       :default => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.string   "title"
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.boolean  "dynamic_scoring"
     t.boolean  "is_master",         :default => false
     t.integer  "exam_id"
+    t.integer  "schedule_id"
     t.integer  "grading_method_id"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
