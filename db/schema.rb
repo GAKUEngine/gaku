@@ -29,11 +29,6 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.datetime "updated_at",                    :null => false
   end
 
-  create_table "addresses_guardians", :force => true do |t|
-    t.integer "address_id"
-    t.integer "guardian_id"
-  end
-
   create_table "assignment_scores", :force => true do |t|
     t.integer  "score"
     t.integer  "student_id"
@@ -126,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
   create_table "exam_portions", :force => true do |t|
     t.string   "name"
     t.float    "max_score"
-    t.float    "weight"
+    t.float    "weight",            :default => 100.0
     t.integer  "problem_count"
     t.text     "description"
     t.text     "adjustments"
