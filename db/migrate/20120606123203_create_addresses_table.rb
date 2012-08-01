@@ -3,7 +3,7 @@ class CreateAddressesTable < ActiveRecord::Migration
   	create_table :addresses do |t|
       t.string   :address1, :address2, :city, :zipcode, :state, :state_name, :title
       t.boolean :past, :default => false
-
+      t.boolean :is_primary, :default => false	
       t.timestamps
     end
   end

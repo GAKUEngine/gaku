@@ -20,13 +20,14 @@ ActiveRecord::Schema.define(:version => 20120731071440) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "state_name"
+    t.string   "title"
     t.boolean  "past",       :default => false
+    t.boolean  "is_primary", :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
-    t.string   "title"
   end
 
   create_table "addresses_guardians", :force => true do |t|
@@ -141,7 +142,6 @@ ActiveRecord::Schema.define(:version => 20120731071440) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "exam_id"
-    t.integer  "schedule_id"
     t.integer  "grading_method_id"
   end
 
@@ -157,7 +157,6 @@ ActiveRecord::Schema.define(:version => 20120731071440) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "exam_id"
-    t.integer  "student_id"
   end
 
   create_table "exams", :force => true do |t|
