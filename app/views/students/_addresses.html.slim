@@ -19,6 +19,7 @@
             th =t 'addresses.city'
             th =t 'addresses.address1'
             th =t 'addresses.address2'
+            th Primary
             th style="width:61px" =t 'manage'
         tbody
           =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'

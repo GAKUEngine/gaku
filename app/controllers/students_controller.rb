@@ -135,6 +135,7 @@ class StudentsController < ApplicationController
     end
 
     def load_before_show
+      @student_addresses = StudentAddress.includes(:address).where(:student_id => params[:id])
       @new_contact = Contact.new
       @new_guardian = Guardian.new
       @new_note = Note.new
