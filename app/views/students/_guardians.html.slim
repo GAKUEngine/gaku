@@ -11,7 +11,9 @@
       hr
   .row-fluid
     .span12
-      =render :partial => 'students/guardian_unit', :collection => @student.guardians, :as => 'guardian'
+      .row-fluid
+        .span12.well
+          =render :partial => 'students/guardian_unit', :collection => @student.guardians, :as => 'guardian'
       
       /table.table.table-striped.table-bordered.table-condensed
         thead
