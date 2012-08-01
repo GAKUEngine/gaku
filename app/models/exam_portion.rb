@@ -1,16 +1,16 @@
 class ExamPortion < ActiveRecord::Base
   belongs_to :exam
-  belongs_to :schedule
   belongs_to :grading_method
 
+  has_many :exam_schedules
   has_many :exam_portion_scores
   has_many :files
 
   attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments, :dynamic_scoring
 
-  validates :max_score, :numericality => { :greater_than_or_equal_to => 0 }
   validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
-  validates :problem_count, :numericality => { :greater_than_or_equal_to => 0 }
+  #validates :problem_count, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :max_score, :numericality => { :greater_than_or_equal_to => 0 }
 
 end
 

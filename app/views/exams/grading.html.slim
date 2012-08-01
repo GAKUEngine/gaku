@@ -1,12 +1,53 @@
 #exam_grading_area
   = javascript_include_tag "exam_grading_widget"
-
-erb:
-  <script>
-    var course_id = <%= params[:course_id] %>;
-    var exam_data = <%== @exam.to_json %>;
-    var exam_portions_data = <%== @exam_portions.to_json %>
-  </script>
+.row-fluid
+  h3 
+    - @exams.each do |exam|
+      = exam.name << " "
+    =t("grades.grading")
+.row-fluid
+  hr
+.row-fluid
+  table.grading-table.table.table-striped.table-bordered.table-condensed
+    thead
+      tr
+        th.btn-primary colspan="3" =t('student')
+        - @exams.each do |exam|
+          th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
+          th.btn-inverse rowspan="2" =t("grades.total") << "(" << exam.max_score.to_s << "#{t('grades.max')})"
+      tr
+        th.btn-info =t("class")
+        th.btn-info =t("class_group_enrollments.seat_number")
+        th.btn-info =t("students.name")
+        - @exams.each do |exam|
+          - exam.exam_portions.each do |portion|
+            th.btn-warning = portion.name << "(" << portion.max_score.to_s << "#{t('grades.max')})"
+    tbody
+      - @students.each do |student|
+        tr
+          td 
+          td 
+          td.vm =student.surname << " " << student.name
+          - @exams.each do |exam|
+            - exam.exam_portions.each do |portion|
+              - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
+              - model_class = model.class
+              td
+                = form_for [model], :remote => true do |f|
+                  =f.text_field :score, :class => "span12 form_blur_event"
+                  - if model.new_record?
+                    = f.hidden_field :exam_portion_id, :value => portion.id
+                    = f.hidden_field :student_id, :value => student.id
+            td
 
 coffee:
-  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})
+  course_id = #{{params[:course_id]}};
+  exam_data = #{{@exam.to_json}};
+  #var exam_portions_data = #{{@exam_portions.to_json}};
+
+  $('.form_blur_event').blur( ->
+    score = $(this)
+    score.closest("form").submit()
+  );
+  
+  # gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, exam_portions_data: exam_portions_data})

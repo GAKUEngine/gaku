@@ -1,22 +1,30 @@
-h1= t 'syllabuses.list'
-= link_to t('syllabuses.new'), new_syllabus_path, :class => "make-button", :id => "new_syllabus_link"
-table.make-grid.index
-  tr
-    th*{'data-field' => t('syllabuses.code')} = t('syllabuses.code')
-    th*{'data-field' => t('syllabuses.name')} = t('syllabuses.name')
-    th*{'data-field' => t('syllabuses.description')} = t('syllabuses.description')
-    th*{'data-field' => t('syllabuses.credits')} = t('syllabuses.credits')
-    th*{'data-field' => "管理"} 管理
-  - @syllabuses.each do |syllabus|
-    tr
-      td= link_to syllabus.code, edit_syllabus_path(syllabus)
-      td= syllabus.name
-      td= syllabus.description
-      td= syllabus.credits
-      td
-        div
-          = link_to t(:Show), syllabus
-          |  | 
-          = link_to t(:Edit), edit_syllabus_path(syllabus)
-          |  | 
-          = link_to t(:Destroy), syllabus, :data => { :confirm => 'Are you sure?' }, :method => :delete
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .pull-left
+        h3 = t("syllabuses.list")
+      .pull-right
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("syllabuses.new")).html_safe, new_syllabus_path, :class => "btn btn-primary", :id => "new_syllabus_link"
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+        table.index.table.table-striped.table-bordered.table-condensed
+          tr
+            th*{'data-field' => t('syllabuses.code')} = t('syllabuses.code')
+            th*{'data-field' => t('syllabuses.name')} = t('syllabuses.name')
+            th*{'data-field' => t('syllabuses.description')} = t('syllabuses.description')
+            th*{'data-field' => t('syllabuses.credits')} = t('syllabuses.credits')
+            th*{'data-field' => t('manage'), 'style' => "width:94px"} = t('manage')
+          - @syllabuses.each do |syllabus|
+            tr
+              td= link_to syllabus.code, edit_syllabus_path(syllabus)
+              td= syllabus.name
+              td= syllabus.description
+              td= syllabus.credits
+              td
+                = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, syllabus, :class => "mr-xs btn btn-mini btn-success", :id => "show"
+                = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_syllabus_path(syllabus), :class => "mr-xs btn btn-mini btn-warning", :id => "edit"
+                = link_to ("<i class='icon-white icon-remove'></i>").html_safe, syllabus, :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_address', :remote => true

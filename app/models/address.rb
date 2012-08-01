@@ -5,7 +5,7 @@ class Address < ActiveRecord::Base
 
   validates :address1, :city, :country, :presence => true
 
-  attr_accessible :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
+  attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
 
   def self.default
     country = Country.find(Config[:default_country_numcode]) rescue Country.first
@@ -42,6 +42,7 @@ class Address < ActiveRecord::Base
   
 end
 
+
 # == Schema Information
 #
 # Table name: addresses
@@ -53,6 +54,7 @@ end
 #  zipcode    :string(255)
 #  state      :string(255)
 #  state_name :string(255)
+#  title      :string(255)
 #  past       :boolean         default(FALSE)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null

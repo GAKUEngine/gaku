@@ -8,10 +8,8 @@ class Student < ActiveRecord::Base
   has_many :class_groups, :through => :class_group_enrollments
 
   #FIXME maybe it should be reversed
-  has_many :exam_scores
-  has_many :exams, :through => :exam_scores
-  has_many :assignment_scores
   has_many :exam_portion_scores
+  has_many :assignment_scores
 
   belongs_to :user
   has_and_belongs_to_many :addresses
@@ -37,6 +35,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: students
@@ -44,9 +43,9 @@ end
 #  id                   :integer         not null, primary key
 #  name                 :string(255)
 #  surname              :string(255)
-#  name_reading         :string(255)
-#  surname_reading      :string(255)
-#  gender               :string(255)
+#  name_reading         :string(255)     default("")
+#  surname_reading      :string(255)     default("")
+#  gender               :boolean
 #  phone                :string(255)
 #  email                :string(255)
 #  birth_date           :date
