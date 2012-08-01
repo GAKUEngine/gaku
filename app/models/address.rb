@@ -1,7 +1,29 @@
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id         :integer          not null, primary key
+#  address1   :string(255)
+#  address2   :string(255)
+#  city       :string(255)
+#  zipcode    :string(255)
+#  state      :string(255)
+#  state_name :string(255)
+#  past       :boolean          default(FALSE)
+#  country_id :integer
+#  state_id   :integer
+#  faculty_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  title      :string(255)
+#
+
 class Address < ActiveRecord::Base 
   belongs_to :country
   belongs_to :state
-  has_and_belongs_to_many :students
+ 
+  has_many :student_addresses
+  has_many :students, :through => :student_addresses
 
   validates :address1, :city, :country, :presence => true
 
@@ -41,25 +63,4 @@ class Address < ActiveRecord::Base
   end
   
 end
-
-
-# == Schema Information
-#
-# Table name: addresses
-#
-#  id         :integer         not null, primary key
-#  address1   :string(255)
-#  address2   :string(255)
-#  city       :string(255)
-#  zipcode    :string(255)
-#  state      :string(255)
-#  state_name :string(255)
-#  title      :string(255)
-#  past       :boolean         default(FALSE)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#  country_id :integer
-#  state_id   :integer
-#  faculty_id :integer
-#
 

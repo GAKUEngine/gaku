@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731070008) do
+ActiveRecord::Schema.define(:version => 20120801121337) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -22,30 +22,16 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.string   "state_name"
     t.string   "title"
     t.boolean  "past",       :default => false
-<<<<<<< HEAD
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-=======
-    t.boolean  "is_primary", :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.integer  "country_id"
-    t.integer  "state_id"
-    t.integer  "faculty_id"
->>>>>>> e39bec5c42850d5e45a0bac2fa23247080fe0f0f
   end
 
   create_table "addresses_guardians", :force => true do |t|
     t.integer "address_id"
     t.integer "guardian_id"
-  end
-
-  create_table "addresses_students", :force => true do |t|
-    t.integer "student_id"
-    t.integer "address_id"
   end
 
   create_table "assignment_scores", :force => true do |t|
@@ -165,10 +151,6 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.integer  "exam_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-<<<<<<< HEAD
-=======
-    t.integer  "exam_id"
->>>>>>> e39bec5c42850d5e45a0bac2fa23247080fe0f0f
   end
 
   create_table "exams", :force => true do |t|
@@ -268,6 +250,14 @@ ActiveRecord::Schema.define(:version => 20120731070008) do
     t.string  "abbr"
     t.string  "name_ascii"
     t.integer "country_numcode"
+  end
+
+  create_table "student_addresses", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "address_id"
+    t.boolean  "is_primary", :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "students", :force => true do |t|

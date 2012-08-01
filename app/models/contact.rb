@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id              :integer          not null, primary key
+#  data            :string(255)
+#  details         :text
+#  is_primary      :boolean          default(FALSE)
+#  is_emergency    :boolean          default(FALSE)
+#  contact_type_id :integer
+#  student_id      :integer
+#  guardian_id     :integer
+#  faculty_id      :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class Contact < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :student
@@ -25,22 +42,4 @@ class Contact < ActiveRecord::Base
   	end
   end  
 end
-
-
-# == Schema Information
-#
-# Table name: contacts
-#
-#  id              :integer         not null, primary key
-#  data            :string(255)
-#  details         :text
-#  is_primary      :boolean         default(FALSE)
-#  is_emergency    :boolean         default(FALSE)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#  contact_type_id :integer
-#  student_id      :integer
-#  guardian_id     :integer
-#  faculty_id      :integer
-#
 

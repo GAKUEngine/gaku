@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: countries
+#
+#  id       :integer          not null, primary key
+#  iso_name :string(255)
+#  iso      :string(255)
+#  iso3     :string(255)
+#  name     :string(255)
+#  numcode  :integer
+#
+
 class Country < ActiveRecord::Base
   has_many :states, :order => "name ASC" , :foreign_key => 'country_numcode'
   
@@ -11,15 +23,3 @@ class Country < ActiveRecord::Base
     name
   end
 end
-# == Schema Information
-#
-# Table name: countries
-#
-#  id       :integer         not null, primary key
-#  iso_name :string(255)
-#  iso      :string(255)
-#  iso3     :string(255)
-#  name     :string(255)
-#  numcode  :integer
-#
-
