@@ -60,6 +60,16 @@ describe SyllabusesController do
                                                                                                                                   "max_score" => 1}}}}
       end.to change(Exam, :count).by(1)
     end
+
+    it "should not create new exam with ajax without filled validated fields" do
+      expect do
+        # try to create exam with only exam_portion fields filled
+        xhr :put, :create_exam, :id => syllabus.id, :syllabus => {:exam =>  {:exam_portions_attributes => {0 => {"weight" => 1,
+                                                                                                                                  "problem_count" => 1,
+                                                                                                                                  "max_score" => 1}}}}
+      end.to change(Exam, :count).by(0)
+
+    end
   end
 
   describe 'PUT create_assignment ' do
