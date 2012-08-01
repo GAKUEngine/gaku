@@ -1,17 +1,21 @@
 #guardians_modal
 #student_guardians
   .row-fluid
-    .span12
-      b= t('guardians.count')
-      |:
-      .guardians_count
-        =@student.guardians.count
+    .pull-left
+      h4.h4-vm
+        = @student.addresses.count != 0 ? t('guardians.list') + "（" + @student.guardians.count.to_s + "）" : t('guardians.list')
+    .pull-right
+      =link_to ("<i class='icon-white icon-plus'></i> " + t('guardians.add')).html_safe, new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "btn btn-primary new_student_guardian", :style => "min-height:0px"
   .row-fluid
     .span12
-      h4 =t("guardians.list")
+      hr
   .row-fluid
     .span12
-      table.table.table-striped.table-bordered.table-condensed
+      .row-fluid
+        .span12.well
+          =render :partial => 'students/guardian_unit', :collection => @student.guardians, :as => 'guardian'
+      
+      /table.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th
@@ -23,10 +27,8 @@
             th =t("options")
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
-hr
+
 #add_new_student_guardian
-.row-fluid
-  =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
 
 javascript:
   $(document).ready(function() {

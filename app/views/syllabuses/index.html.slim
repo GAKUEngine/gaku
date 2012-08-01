@@ -13,11 +13,11 @@
       .span12.well
         table.index.table.table-striped.table-bordered.table-condensed
           tr
-            th*{'data-field' => t('syllabuses.code')} = t('syllabuses.code')
-            th*{'data-field' => t('syllabuses.name')} = t('syllabuses.name')
-            th*{'data-field' => t('syllabuses.description')} = t('syllabuses.description')
-            th*{'data-field' => t('syllabuses.credits')} = t('syllabuses.credits')
-            th*{'data-field' => t('manage'), 'style' => "width:94px"} = t('manage')
+            th.btn-inverse data-field=t('syllabuses.code') = t('syllabuses.code')
+            th.btn-inverse data-field=t('syllabuses.name') = t('syllabuses.name')
+            th.btn-inverse data-field=t('syllabuses.description') = t('syllabuses.description')
+            th.btn-inverse data-field=t('syllabuses.credits') = t('syllabuses.credits')
+            th.btn-info data-field=t('manage') style="width:94px" = t('manage')
           - @syllabuses.each do |syllabus|
             tr
               td= link_to syllabus.code, edit_syllabus_path(syllabus)
