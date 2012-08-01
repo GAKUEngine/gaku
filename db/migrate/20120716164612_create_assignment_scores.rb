@@ -3,6 +3,8 @@ class CreateAssignmentScores < ActiveRecord::Migration
     create_table :assignment_scores do |t|
       t.integer :score
 
+      t.references :student
+
       t.timestamps
     end
   end
