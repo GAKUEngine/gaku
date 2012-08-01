@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: exam_portions
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  max_score         :float
+#  weight            :float
+#  problem_count     :integer
+#  description       :text
+#  adjustments       :text
+#  execution_date    :datetime
+#  dynamic_scoring   :boolean
+#  is_master         :boolean          default(FALSE)
+#  exam_id           :integer
+#  schedule_id       :integer
+#  grading_method_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 class ExamPortion < ActiveRecord::Base
   belongs_to :exam
   belongs_to :grading_method
@@ -17,25 +38,4 @@ class ExamPortion < ActiveRecord::Base
 end
 
 
-
-
-# == Schema Information
-#
-# Table name: exam_portions
-#
-#  id                :integer         not null, primary key
-#  name              :string(255)
-#  max_score         :float
-#  weight            :float
-#  problem_count     :integer
-#  description       :text
-#  adjustments       :text
-#  execution_date    :datetime
-#  dynamic_scoring   :boolean
-#  is_master         :boolean         default(FALSE)
-#  created_at        :datetime        not null
-#  updated_at        :datetime        not null
-#  exam_id           :integer
-#  grading_method_id :integer
-#
 

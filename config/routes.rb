@@ -41,7 +41,9 @@ GAKUEngine::Application.routes.draw do
       get 'new_contact', :on => :member
       get 'edit_student_guardian', :on => :collection
     end
-    resources :addresses
+    resources :addresses do 
+      post :make_primary, :on => :member
+    end
     resources :notes
     resources :contacts
     resources :exams

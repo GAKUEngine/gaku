@@ -7,6 +7,11 @@
     td= address.city
     td= address.address1
     td= address.address2
+    td class='primary_address' = "Primary" if address.check_primary?(@student)
     td
       = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_address_path(@student, address), :remote => true, :class => "mr-xs btn btn-mini btn-warning"
       = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_address_path(@student, address), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_address', :remote => true
+      -if address.check_primary?(@student)
+        = link_to 'Make Primary', make_primary_student_address_url(@student, address), :remote => true, :class => 'btn btn-primary make_primary_address', :method => :post
+      -else
+        = link_to 'Make Primary', make_primary_student_address_url(@student, address), :remote => true, :class => 'btn make_primary_address', :method => :post
