@@ -16,6 +16,14 @@ class Exam < ActiveRecord::Base
 
   after_create :build_default_exam_portion
 
+  def max_score
+    maxScore = 0.0
+    self.exam_portions.each do |portion|
+      maxScore += portion.max_score
+    end
+    
+    return maxScore
+  end
 
   private
     def build_default_exam_portion

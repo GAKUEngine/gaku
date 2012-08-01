@@ -25,7 +25,13 @@
         = syllabus_form.text_area :description, :class => "span12", :size => "0x5"
   .row-fluid
     .span12.well
-      .span9
-        = syllabus_form.submit nil, :class => "span12 btn btn-primary"
-      = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
-  
+      - if params[:action] == 'edit'
+        .span6
+          = syllabus_form.submit nil, :class => "span12 btn btn-primary"
+        = link_to t("Show"), syllabuses_path(@syllabus), :class => "span3 btn btn-success", :style => "min-height:0px"
+        = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
+      - else
+        .span9
+          = syllabus_form.submit nil, :class => "span12 btn btn-primary"
+        = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
+        
