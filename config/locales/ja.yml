@@ -36,6 +36,7 @@ ja:
     choose_country: "国を選択して下さい"
     edit: "住所の編集"
     title: "住所のタイトル"
+    primary: "主要住所"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
