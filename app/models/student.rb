@@ -30,6 +30,23 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :notes, :allow_destroy => true
   accepts_nested_attributes_for :addresses, :allow_destroy => true
 
+  # methods for json student chooser returning
+  
+  def class_group_widget
+    cg = self.class_groups.last
+    cg.blank? ? nil : cg.name 
+  end
+
+  def seat_number_widget
+    sn = self.class_group_enrollments.last
+    sn.blank? ? nil : sn.seat_number
+  end
+
+  # need modify when primary columns is added
+  def address_widget
+    pa = self.addresses.first
+    pa.blank? ? nil : pa.city 
+  end
   
 end
 
