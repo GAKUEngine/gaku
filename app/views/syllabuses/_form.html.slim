@@ -1,25 +1,25 @@
 = form_for(@syllabus) do |syllabus_form|
   - if @syllabus.errors.any?
-   .alert.alert-error
-     strong
-       = pluralize(@syllabus.errors.count, "error")
-       | prohibited this syllabus from being saved:
-     ul
-       - @syllabus.errors.full_messages.each do |msg|
-         li= msg
+    .alert.alert-error
+      strong
+        = pluralize(@syllabus.errors.count, "error")
+        | prohibited this syllabus from being saved:
+      ul
+        - @syllabus.errors.full_messages.each do |msg|
+          li= msg
  
   .row-fluid
     .span12.well
       .row-fluid
         .span4
           = syllabus_form.label t('syllabuses.name')
-          = syllabus_form.text_field :name, :class => "span12"
+          = syllabus_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
         .span4
           = syllabus_form.label t('syllabuses.code')
-          = syllabus_form.text_field :code, :class => "span12"
+          = syllabus_form.text_field :code, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
         .span4
           = syllabus_form.label t('syllabuses.credits')
-          = syllabus_form.number_field :credits, :class => "span12"
+          = syllabus_form.number_field :credits, :class => "validate[custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
       .row-fluid
         = syllabus_form.label t('syllabuses.description')
         = syllabus_form.text_area :description, :class => "span12", :size => "0x5"
@@ -35,3 +35,5 @@
           = syllabus_form.submit nil, :class => "span12 btn btn-primary"
         = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
         
+coffee:
+  $('#new_syllabus').validationEngine();
