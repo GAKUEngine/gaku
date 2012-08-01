@@ -28,12 +28,12 @@
       - if params[:action] == 'edit'
         .span6
           = syllabus_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Show"), syllabuses_path(@syllabus), :class => "span3 btn btn-success", :style => "min-height:0px"
-        = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
+        = link_to t("Show"), @syllabus, :class => "span3 btn btn-success", :style => "min-height:0px"
+        = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
       - else
         .span9
           = syllabus_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Back"), syllabuses_path, :class => "span3 btn", :style => "min-height:0px"
+        = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
         
 coffee:
   $('#new_syllabus').validationEngine();

@@ -74,6 +74,17 @@ input.form_blur_event {
 td.vm {
   vertical-align: middle;
 }
+td.vm-tc {
+  vertical-align: middle;
+  text-align: center;
+}
+th.vm {
+  vertical-align: middle;
+}
+th.vm-tc {
+  vertical-align: middle;
+  text-align: center;
+}
 
 //bootstrap fix ----------
 hr {
@@ -102,28 +113,18 @@ hr {
 .navbar .btn-group {
   padding: 6px 0px 6px 10px;
 }
+
 .table {
   margin-bottom: 0px;
 }
-.table.th-center {
-  color: white;
-  background-color: #98acd4;
-  text-align: center;
-  vertical-align: middle;
+
+table.table{
   th {
+    vertical-align: middle;
     text-align: center;
-    vertical-align: middle;
   }
 }
-tbody.table {
-  td {
-    text-align: right;
-    vertical-align: middle;
-  }
-  .td-left {
-    text-align: left;
-  }
-}
+
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
   background-color: white;
 }
