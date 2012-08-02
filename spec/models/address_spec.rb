@@ -14,7 +14,10 @@ describe Address do
     it { should have_valid_factory(:address) }
     it { should belong_to(:country) }
     it { should belong_to(:state) }
-    it { should have_and_belong_to_many(:students) } 
+    it { should have_many(:student_addresses) } 
+    it { should have_many(:students) } 
+    it { should have_many(:guardian_addresses) } 
+    it { should have_many(:guardians) } 
 
     it { should validate_presence_of(:address1) }
     it { should validate_presence_of(:city) }

@@ -4,7 +4,7 @@ addGuardian.live("ajax:success", (data, status, xhr)->
   addGuardian.hide()
 )
 
-addNote = $("#add_note_link")
+addNote = $("#new_student_note_link")
 addNote.live("ajax:success", (date, status, xhr)->
   $('#add_note_form_area').html(status)
   addNote.hide()

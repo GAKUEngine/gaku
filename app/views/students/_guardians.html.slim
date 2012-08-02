@@ -26,7 +26,7 @@
 hr
 #add_new_student_guardian
 .row-fluid
-  =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "add_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
+  =link_to t('guardians.add'), new_guardian_student_path(@student), :remote => true, :id => "new_student_guardian_link", :class => "span3 btn btn-primary new_student_guardian", :style => "min-height:0px"
 
 javascript:
   $(document).ready(function() {
