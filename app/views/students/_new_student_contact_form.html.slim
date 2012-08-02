@@ -1,4 +1,7 @@
 =form_for([@student, @new_contact], :remote => true, :html => {:class => 'new_student_contact_form'}) do |f|
+  .row-fluid 
+    .span12
+      b= t('contacts.new') 
   .row-fluid
 		=f.label :is_primary, t('contacts.primary')
 		=f.check_box :is_primary
@@ -15,4 +18,4 @@
 		=f.label :is_emergency, t('contacts.emergency')
 		=f.check_box :is_emergency
   .row-fluid
-		=f.submit t('students.create_contact'), :class => 'btn btn-primary'
+		=f.submit t('contacts.save'), :class => 'btn btn-primary'

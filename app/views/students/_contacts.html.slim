@@ -12,5 +12,5 @@
       =render :partial => 'students/student_contact', :collection => @student.contacts, :as => 'contact'
   br/ 
   #add_new_student_contact
-    =link_to t('students.add_contact'), '#', :class => 'btn btn-primary'
+    =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new_student_contact_link'
   =render 'new_student_contact_form'
