@@ -197,8 +197,9 @@ en:
   notes:
     notes: "Notes"
     list: "Notes List"
-    title: "Title"
+    title: "Note Title"
     content: "Content"
+    new: "New Note"
     add: "Add Note"
     delete: "Delete Note"
     save: "Save note"

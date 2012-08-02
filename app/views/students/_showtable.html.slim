@@ -63,7 +63,7 @@
           a data-toggle="tab" href="#contacts"
             = @student.contacts.count != 0 ? t('contact') + "（" + @student.contacts.count.to_s + "）" : t('contact')
         li
-          a data-toggle="tab" href="#notes"
+          a#new_student_note_tab_link data-toggle="tab" href="#notes"
             = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
         li
           a data-toggle="tab" href="#courses"

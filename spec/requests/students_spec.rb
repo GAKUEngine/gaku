@@ -38,12 +38,6 @@ describe 'Student' do
       page.should have_link "Enroll to course"
     end
 
-    it "should exist edit link on student nested note" do
-      @student.notes << Factory(:note)
-      visit student_path(@student)
-      @student.notes.size.should == 1
-      page.should have_selector('a', href: "/students/1/notes/1/edit")
-    end
   end
 
   context "studets contacts"  do
