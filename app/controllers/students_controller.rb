@@ -106,12 +106,13 @@ class StudentsController < ApplicationController
 
   def new_guardian
     @student.guardians.build
+    render 'students/guardians/new'
   end
 
   def create_guardian
     if @student.update_attributes(params[:student])
       respond_to do |format|
-        format.js {render 'create_guardian'}  
+        format.js { render 'students/guardians/create' }  
       end
     end  
   end
