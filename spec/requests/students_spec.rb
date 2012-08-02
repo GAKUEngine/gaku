@@ -38,11 +38,14 @@ describe 'Student' do
       page.should have_link "Enroll to course"
     end
 
-    it "should exist edit link on student nested address" do
+    it "should exist edit link on student nested address", :js => true do
       @student1.addresses << Factory(:address)
       visit student_path(@student1)
       @student1.addresses.size.should == 1
       page.should have_selector('a', href: "/students/1/addresses/1/edit")
+      click_link 'new_address_link'
+      sleep 2
+      save_and_open_page
     end
     
     it "should exist edit link on student nested guardian" do

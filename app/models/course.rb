@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id             :integer          not null, primary key
+#  code           :string(255)
+#  faculty_id     :integer
+#  syllabus_id    :integer
+#  class_group_id :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Course < ActiveRecord::Base
   has_many :course_enrollments
   has_many :students, :through => :course_enrollments
@@ -20,17 +33,3 @@ class Course < ActiveRecord::Base
   end
 
 end
-
-# == Schema Information
-#
-# Table name: courses
-#
-#  id             :integer         not null, primary key
-#  code           :string(255)
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
-#  faculty_id     :integer
-#  syllabus_id    :integer
-#  class_group_id :integer
-#
-
