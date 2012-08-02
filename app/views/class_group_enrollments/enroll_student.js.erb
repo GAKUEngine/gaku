@@ -1,0 +1,3 @@
+<% @students.each {|student| %>
+  $("#class_group_enrollments_list ul").append('<li><%= student.name + " " + student.surname %></li>')
+<% } %>
