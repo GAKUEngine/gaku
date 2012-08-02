@@ -188,6 +188,8 @@ en:
      add: 
   contact: 
   contacts:
+    new: "New Contact"
+    save: "Save Contact"
     data: "Data"
     details: "Details"
     primary: "Primary"

@@ -60,7 +60,7 @@
           a#new_student_guardian_tab_link data-toggle="tab" href="#guardians"
             = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
-          a data-toggle="tab" href="#contacts"
+          a#new_student_contact_tab_link data-toggle="tab" href="#contacts"
             = @student.contacts.count != 0 ? t('contact') + "（" + @student.contacts.count.to_s + "）" : t('contact')
         li
           a#new_student_note_tab_link data-toggle="tab" href="#notes"
