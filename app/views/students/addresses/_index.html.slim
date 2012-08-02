@@ -21,7 +21,7 @@
             th =t 'addresses.address2'
             th style="width:61px" =t 'manage'
         tbody
-          =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
+          =render :partial => 'students/addresses/show', :collection => @student.addresses, :as => 'address'
 
 #add_new_student_address
 

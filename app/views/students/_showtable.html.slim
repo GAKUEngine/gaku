@@ -70,7 +70,7 @@
             = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'addresses'
+          = render :partial => 'students/addresses/index'
         #guardians.tab-pane
           = render :partial => 'guardians'
         #contacts.tab-pane

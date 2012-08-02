@@ -93,12 +93,13 @@ class StudentsController < ApplicationController
 
   def new_address
     @student.addresses.build
+    render 'students/addresses/new'
   end
 
   def create_address
     if @student.update_attributes(params[:student])
       respond_to do |format|
-        format.js {render 'create_address'}  
+        format.js { render 'students/addresses/create' }  
       end
     end  
   end
