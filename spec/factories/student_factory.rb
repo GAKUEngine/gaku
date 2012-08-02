@@ -7,9 +7,5 @@ FactoryGirl.define do
     phone { Faker::PhoneNumber::phone_number }
     email { Faker::Internet::email }
     gender "male"
-    # guardians { |guardians| [guardians.association(:guardian)] }
-    after_create { |student| FactoryGirl.create(:note, :student => student) }
-    # after_create { |student| Factory(:guardian, :students => [student])}
-
   end
 end

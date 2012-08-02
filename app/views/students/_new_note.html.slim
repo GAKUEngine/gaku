@@ -1,6 +1,9 @@
 = form_for :note, :url => student_notes_path(@student), :remote => true do |note_form|
   .row-fluid.control-group
     .span12
+      b= t('notes.new')
+  .row-fluid.control-group
+    .span12
       = note_form.label :title, t("notes.title"), :class => "control-label"
       = note_form.text_field :title, :class => "span12 edit_note"
   .row-fluid.control-group
