@@ -42,7 +42,7 @@ describe 'Student' do
       Factory(:country, :name => "Japan")
       visit student_path(@student)
 
-      click_link 'new_address_link'
+      click_link 'new_student_address_tab_link'
       click_link 'new_student_address_link'
 
       wait_until { page.has_content?('Country') } 

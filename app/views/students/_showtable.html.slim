@@ -54,7 +54,7 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a#new_address_link data-toggle="tab" href="#addresses"
+          a#new_student_address_tab_link data-toggle="tab" href="#addresses"
             = @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
         li
           a data-toggle="tab" href="#guardians"
