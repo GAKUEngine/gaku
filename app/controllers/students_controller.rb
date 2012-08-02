@@ -8,7 +8,10 @@ class StudentsController < ApplicationController
 
   before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_before_show,  :only => :show
-  before_filter :load_student,      :only => [:new_address, :create_address, :new_guardian, :create_guardian, :edit, :update]
+  before_filter :load_student,      :only => [:new_address, :create_address,
+                                              :new_guardian, :create_guardian,
+                                              :new_note, :create_note,
+                                              :edit, :update]
   
   def index
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
@@ -113,6 +116,19 @@ class StudentsController < ApplicationController
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js { render 'students/guardians/create' }  
+      end
+    end  
+  end
+
+  def new_note
+    @student.notes.build
+    render 'students/notes/new'
+  end
+
+  def create_note
+    if @student.update_attributes(params[:student])
+      respond_to do |format|
+        format.js { render 'students/notes/create' }  
       end
     end  
   end

@@ -54,6 +54,9 @@ GAKUEngine::Application.routes.draw do
     get :new_guardian, :on => :member
     put :create_guardian, :on => :collection
 
+    get :new_note, :on => :member
+    put :create_note, :on => :collection
+
     get :get_csv_template, :on => :collection
     post :import_student_list, :on => :collection
   
