@@ -13,11 +13,11 @@
       .span12.well
         table.table.table-striped.table-bordered.table-condensed
           tr
-            th*{"data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
-            th*{"data-field" => t(:schedule)} =t('schedule')
-            th*{"data-field" => t(:teacher)} =t('teacher')
-            th*{"data-field" => t(:num_enrolled)} =t('num_enrolled')
-            th style="width:94px" = t(:manage)
+            th*{"class" => "btn-inverse", "data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
+            th*{"class" => "btn-inverse", "data-field" => t(:schedule)} =t('schedule')
+            th*{"class" => "btn-inverse", "data-field" => t(:teacher)} =t('teacher')
+            th*{"class" => "btn-inverse", "data-field" => t(:num_enrolled)} =t('num_enrolled')
+            th.btn-info style="width:94px" = t(:manage)
           - @courses.each do |course|
             tr
               td= "[#{course.syllabus.code}]: #{course.syllabus.name}-#{course.code}"  if course.syllabus

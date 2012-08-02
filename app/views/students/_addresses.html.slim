@@ -13,16 +13,16 @@
       table.table.table-striped.table-bordered.table-condensed
         thead
           tr
-            th style="width:28px"
-              i.icon-home
-            th =t 'addresses.title'
-            th =t 'addresses.country'
-            th =t 'addresses.zipcode'
-            th =t 'addresses.state'
-            th =t 'addresses.city'
-            th =t 'addresses.address1'
-            th =t 'addresses.address2'
-            th style="width:61px" =t 'manage'
+            th.btn-inverse style="width:28px"
+              i.icon-white.icon-home
+            th.btn-inverse =t 'addresses.title'
+            th.btn-inverse =t 'addresses.country'
+            th.btn-inverse =t 'addresses.zipcode'
+            th.btn-inverse =t 'addresses.state'
+            th.btn-inverse =t 'addresses.city'
+            th.btn-inverse =t 'addresses.address1'
+            th.btn-inverse =t 'addresses.address2'
+            th.btn-info style="width:61px" =t 'manage'
         tbody
           =render :partial => 'students/student_address', :collection => @student.addresses, :as => 'address'
 
