@@ -4,7 +4,7 @@
       h4.h4-vm
         = @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_address')).html_safe, new_address_student_path(@student), :class => 'new_address_student btn btn-primary', :style => "min-height:0px", :remote => true
+      =link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_address')).html_safe, new_address_student_path(@student), :class => 'new_address_student btn btn-primary', :id => 'new_student_address_link', :style => "min-height:0px", :remote => true
   .row-fluid    
     hr
   .row-fluid
