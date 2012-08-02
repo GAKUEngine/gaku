@@ -66,7 +66,7 @@
           a#new_student_note_tab_link data-toggle="tab" href="#notes"
             = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
         li
-          a data-toggle="tab" href="#courses"
+          a#new_student_course_tab_link data-toggle="tab" href="#courses"
             = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
       .tab-content
         #addresses.tab-pane.active
