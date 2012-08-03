@@ -28,4 +28,22 @@ describe 'Note' do
     page.should have_content("The note content")
 
   end
+
+  it "should edit a student note", :js => true do 
+    Factory(:note, :student_id => @student)
+    visit student_path(@student) 
+
+    click_link 'new_student_note_tab_link'
+    click_link 'new_student_note_link'
+
+    wait_until { page.has_content?('New Note') } 
+    sleep 5
+    
+    click_link "Edit" 
+
+    wait_until { find('#editNoteModal').visible? } 
+
+    sleep 5
+
+  end
 end

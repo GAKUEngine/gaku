@@ -1,13 +1,8 @@
-class NotesController < ApplicationController
-=begin
-  #before_filter :authenticate_user!
+class Students::NotesController < ApplicationController
 
-  inherit_resources
-
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
   def new
-    @student = Student.find(params[:student_id])
     @note = @student.notes.build
     respond_to do |format|
       format.html { render :partial => "students/new_note", :locals => {:student => @student} }
@@ -17,14 +12,12 @@ class NotesController < ApplicationController
   
   def edit
     @note = Note.find(params[:id])
-    @student = Student.find(params[:student_id])
-    super do |format|
+    respond_to do |format|
       format.js {render 'edit'}  
     end  
   end
 
   def create
-    @student = Student.find(params[:student_id])
     @note = @student.notes.build(params[:note])
 
     if @note.save
@@ -38,7 +31,7 @@ class NotesController < ApplicationController
   end
   
   def update
-    @student = Student.find(params[:student_id])
+    
     super do |format|
       # Find student/show note row to update it
       format.js {render 'update'}  
@@ -53,6 +46,12 @@ class NotesController < ApplicationController
       format.js { render :nothing => true }
     end
   end
-=end
+
+  private 
+    def load_student
+      @student = Student.find(params[:student_id])
+    end
+  
+  
 end
 

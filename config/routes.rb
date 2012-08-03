@@ -43,7 +43,7 @@ GAKUEngine::Application.routes.draw do
       get :edit_student_guardian, :on => :collection
     end
     resources :addresses
-    resources :notes
+    resources :notes, :controller => 'students/notes'
     resources :contacts
     resources :exams
     resources :courses
