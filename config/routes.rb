@@ -54,13 +54,11 @@ GAKUEngine::Application.routes.draw do
     member do
       get :new_address
       get :new_guardian
-      get :new_note
     end
 
     collection do 
       put :create_address
       put :create_guardian
-      put :create_note
       get :get_csv_template
       post :import_student_list
       get :autocomplete_search
@@ -69,8 +67,6 @@ GAKUEngine::Application.routes.draw do
   end
   
   resources :addresses
-
-  resources :notes
 
   resources :exams do 
     put :create_exam_portion, :on => :member  
