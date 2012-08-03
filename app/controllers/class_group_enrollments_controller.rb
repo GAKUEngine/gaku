@@ -15,13 +15,12 @@ class ClassGroupEnrollmentsController < ApplicationController
     @class_group = ClassGroup.find(params[:class_group_id])
     enrolled_students_ids = ClassGroupEnrollment.where(:class_group_id => @class_group.id).map {|x| x.student_id}
     @class_group_enrollment = ClassGroupEnrollment.new
-    #@students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where(["id NOT IN (?)", enrolled_students_ids]).first
+    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
 
     super do |format|
       format.js {render 'new'}  
     end  
   end
-
 
   # creating class_enrollment from students/show
   def enroll_student
