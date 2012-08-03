@@ -1,28 +1,36 @@
-class AddressesController < ApplicationController
+class Students::AddressesController < ApplicationController
 
-  inherit_resources
+  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
-
-  before_filter :load_student, :only => [:edit, :update]
-  before_filter :load_address, :only => [:edit, :destroy]
+  def new
+    @student.addresses.build
+    render 'students/addresses/new'  
+  end
+  
+  def create
+    if @student.update_attributes(params[:student])
+      respond_to do |format|
+        format.js { render 'students/addresses/create' }  
+      end
+    end  
+  end
 
   def edit
-    super do |format|
+    respond_to do |format|
       format.js {render 'edit'}  
     end  
   end
 
   def update
-    super do |format|
+    respond_to do |format|
       # Find student/show address row to update it
       format.js { render 'update' }  
     end  
   end
 
   def destroy
-    #destroy! :flash => !request.xhr?
-    @address.destroy  
+    # destroy! :flash => !request.xhr?
+    @address.destroy
     render :nothing => true
   end
 
@@ -34,14 +42,9 @@ class AddressesController < ApplicationController
     render :nothing => true
   end
 
-  private
-
+  private 
     def load_student
       @student = Student.find(params[:student_id])
     end
 
-    def load_address
-      @address = Address.find(params[:id])
-    end
-  
 end

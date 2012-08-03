@@ -1,2 +1,5 @@
 $('#student-notes-table tbody').append('<%= escape_javascript(render :partial => "students/notes/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @student.notes.last}) %>');
+$('#add_note_form_area form').each(function() {
+	this.reset();
+});
 $('.notes_count').html('<%= @student.notes.count %>');
