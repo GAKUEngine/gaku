@@ -42,7 +42,7 @@ GAKUEngine::Application.routes.draw do
       get :new_contact, :on => :member
       get :edit_student_guardian, :on => :collection
     end
-    resources :addresses
+    resources :addresses, :controller => 'students/addresses'
     resources :notes, :controller => 'students/notes'
     resources :contacts
     resources :exams
@@ -52,12 +52,10 @@ GAKUEngine::Application.routes.draw do
     end
 
     member do
-      get :new_address
       get :new_guardian
     end
 
     collection do 
-      put :create_address
       put :create_guardian
       get :get_csv_template
       post :import_student_list
@@ -65,8 +63,6 @@ GAKUEngine::Application.routes.draw do
     end
 
   end
-  
-  resources :addresses
 
   resources :exams do 
     put :create_exam_portion, :on => :member  
