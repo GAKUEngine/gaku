@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.string   "state_name"
     t.string   "title"
     t.boolean  "past",       :default => false
-    t.boolean  "is_primary", :default => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
@@ -33,11 +32,6 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
   create_table "addresses_guardians", :force => true do |t|
     t.integer "address_id"
     t.integer "guardian_id"
-  end
-
-  create_table "addresses_students", :force => true do |t|
-    t.integer "student_id"
-    t.integer "address_id"
   end
 
   create_table "assignment_scores", :force => true do |t|
@@ -132,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
   create_table "exam_portions", :force => true do |t|
     t.string   "name"
     t.float    "max_score"
-    t.float    "weight",            :default => 100.0
+    t.float    "weight"
     t.integer  "problem_count"
     t.text     "description"
     t.text     "adjustments"
