@@ -34,7 +34,7 @@
               - model_class = model.class
               td
                 = form_for [model], :remote => true do |f|
-                  =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "span12 form_blur_event score_cell"
+                  =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "validate[custom[integer],min[0]] span12 form_blur_event score_cell", "data-prompt-position" => "bottomRight:5"
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
@@ -46,3 +46,4 @@ coffee:
   exam_data = #{{@exam.to_json}};
   
   gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, score_cell_identifier: ".score_cell"})
+  $('.edit_exam_portion_score').validationEngine()
