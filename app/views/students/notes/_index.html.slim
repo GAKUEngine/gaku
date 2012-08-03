@@ -17,11 +17,11 @@
           th =t("notes.content")
           th =t("options")
       tbody
-        =render :partial => 'student_note', :collection => @student.notes, :as => :note 
+        =render :partial => 'students/notes/show', :collection => @student.notes, :as => :note 
 hr
 #add_note_form_area
 .row-fluid
-  = link_to t("notes.add"), new_student_note_url(@student), :remote => true, :id => "add_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
+  = link_to t("notes.add"), new_note_student_path(@student), :remote => true, :id => "new_student_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
 
 javascript:
   $(document).ready(function() {
