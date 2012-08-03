@@ -3,11 +3,8 @@ class Students::NotesController < ApplicationController
   before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
   def new
-    @note = @student.notes.build
-    respond_to do |format|
-      format.html { render :partial => "students/new_note", :locals => {:student => @student} }
-      format.json { render :json => @note }
-    end    
+    @student.notes.build
+    render 'students/notes/new'  
   end
   
   def edit
@@ -18,28 +15,22 @@ class Students::NotesController < ApplicationController
   end
 
   def create
-    @note = @student.notes.build(params[:note])
-
-    if @note.save
+    if @student.update_attributes(params[:student])
       respond_to do |format|
-        format.html { redirect_to @student }
-        format.js   { render 'create' }
+        format.js { render 'students/notes/create' }  
       end
-    else
-      redirect_to :back
-    end
+    end  
   end
   
   def update
-    
-    super do |format|
+    @note = Note.find(params[:id])
+    respond_to do |format|
       # Find student/show note row to update it
-      format.js {render 'update'}  
+      format.js { render 'update' }  
     end  
   end
 
   def destroy
-    #destroy! :flash => !request.xhr?
     @note = Note.find(params[:id])
     @note.destroy
     respond_to do |format|
@@ -51,7 +42,5 @@ class Students::NotesController < ApplicationController
     def load_student
       @student = Student.find(params[:student_id])
     end
-  
-  
-end
 
+end
