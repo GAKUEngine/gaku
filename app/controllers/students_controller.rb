@@ -85,7 +85,13 @@ class StudentsController < ApplicationController
   def update
     if @student.update_attributes(params[:student])
       respond_to do |format|
-        format.js   { render 'students/notes/create' } 
+        unless params[:student].nil?
+          if !params[:student][:addresses_attributes].nil?
+            format.js { render 'students/addresses/create' }
+          elsif !params[:student][:notes_attributes].nil?
+            format.js { render 'students/notes/create' }             
+          end
+        end
         format.html { redirect_to @student } 
       end
       
