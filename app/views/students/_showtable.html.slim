@@ -5,9 +5,9 @@
         tbody
           tr
             th.btn-primary width="20%" =t("class")
-            td =@student.class_groups.name
+            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
           tr
-            th.btn-warning =t("name")
+            th.btn-success =t("name")
             td.vm style="font-size:16pt"
               div
                 ruby style="margin-right:5px"
@@ -21,23 +21,20 @@
                   rt
                     = @student.name_reading
           tr
-            th.btn-warning =t("gender")
+            th.btn-success =t("gender")
             td = gender(@student)
           tr
-            th.btn-warning =t("students.birth")
+            th.btn-success =t("students.birth")
             td =@student.birth_date
           tr
-            th.btn-success =t("students.phone")
+            th.btn-warning =t("students.phone")
             td =@student.phone
           tr
-            th.btn-success =t("students.email")
+            th.btn-warning =t("students.email")
             td =@student.email
           tr
             th.btn-primary =t("students.admitted")
             td =@student.admitted
-          tr
-            th.btn-primary =t("students.class_group_enrollment")
-            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
           
     .span3.well
       .row-fluid.pagination-centered

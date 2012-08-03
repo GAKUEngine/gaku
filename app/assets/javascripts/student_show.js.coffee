@@ -28,14 +28,9 @@ $('#add_new_student_contact').on 'click', 'a.btn', (event) ->
 	$(this).hide()
 	$('.new_student_contact_form').slideDown()
 
-
 $('.make_primary_address').live 'ajax:success', ->
-  $('.primary_address').each ->
-    $(@).html('')
 
   $('.make_primary_address').each ->
      $(@).removeClass('btn-primary')
-
-  $(@).closest('tr').find('.primary_address').html('Primary')
 
   $(@).addClass('btn-primary')
