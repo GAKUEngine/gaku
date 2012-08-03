@@ -16,6 +16,7 @@ class Students::AddressesController < ApplicationController
   end
 
   def edit
+    @address = Address.find(params[:id])
     respond_to do |format|
       format.js {render 'edit'}  
     end  
