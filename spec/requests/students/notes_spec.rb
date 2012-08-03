@@ -15,9 +15,9 @@ describe 'Note' do
     click_link 'new_student_note_link'
 
     wait_until { page.has_content?('New Note') } 
-
-    fill_in "note_title", :with => "The note title"
-    fill_in "note_content", :with => "The note content"
+  
+    fill_in "student_notes_attributes_0_title", :with => "The note title"
+    fill_in "student_notes_attributes_0_content", :with => "The note content"
 
     click_button "Save note"
 
@@ -26,6 +26,24 @@ describe 'Note' do
 
     page.should have_content("The note title")
     page.should have_content("The note content")
+
+  end
+
+  it "should edit a student note", :js => true do 
+    Factory(:note, :student_id => @student)
+    visit student_path(@student) 
+
+    click_link 'new_student_note_tab_link'
+    click_link 'new_student_note_link'
+
+    wait_until { page.has_content?('New Note') } 
+    sleep 5
+    
+    click_link "Edit" 
+
+    wait_until { find('#editNoteModal').visible? } 
+
+    sleep 5
 
   end
 end
