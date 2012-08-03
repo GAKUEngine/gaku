@@ -15,9 +15,9 @@ describe 'Note' do
     click_link 'new_student_note_link'
 
     wait_until { page.has_content?('New Note') } 
-
-    fill_in "note_title", :with => "The note title"
-    fill_in "note_content", :with => "The note content"
+  
+    fill_in "student_notes_attributes_0_title", :with => "The note title"
+    fill_in "student_notes_attributes_0_content", :with => "The note content"
 
     click_button "Save note"
 
