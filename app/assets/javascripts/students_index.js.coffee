@@ -185,7 +185,7 @@ class StudentGrid extends BuHin
         
         # create checkbox for student row
         checkbox = $("<div></div>")
-        showButton = $("<input type='checkbox'></input>")
+        showButton = $("<input type='checkbox' class='student_check' value='" + @students[i].id + "'></input>")
           .css("margin-left","10px")
           .appendTo(checkbox)
 
