@@ -159,6 +159,9 @@ class StudentsController < ApplicationController
       @new_course_enrollment = CourseEnrollment.new
       @notes = Note.all
       @class_groups = ClassGroup.all
+      
+      student_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      @primary_address_id = !student_address.blank? ? student_address.address.id : nil
     end
 
 end

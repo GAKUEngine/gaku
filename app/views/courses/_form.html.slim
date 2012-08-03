@@ -1,20 +1,29 @@
-= form_for(@course) do |f|
+= form_for(@course) do |course_form|
   - if @course.errors.any?
-    #error_explanation
+    .alert.alert-error
       h2
         = pluralize(@course.errors.count, "error")
         | prohibited this course from being saved:
       ul
         - @course.errors.full_messages.each do |msg|
           li= msg
-  .field
-    = f.label t(:syllabus)
-    br/
-    = f.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }
-  .field
-    = f.label t('courses.code')
-    = t 'courses.code_sample'
-    br/
-    = f.text_field :code
-  .actions
-    = f.submit
+  .row-fluid
+    .span12.well
+      .row-fluid
+        .span6
+          = course_form.label :syllabus_id, t("syllabus")
+          = course_form.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }, {}, :class => "span12"
+        .span6
+          = course_form.label :code, t('courses.code')
+          = course_form.text_field :code, :placeholder => t('courses.code_sample'), :class => "span12"
+  .row-fluid
+    .span12.well
+      - if params[:action] == 'edit'
+        .span6
+          = course_form.submit nil, :class => "span12 btn btn-primary"
+        = link_to t("Show"), @course, :class => "span3 btn btn-success", :style => "min-height:0px"
+        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+      - else
+        .span9
+          = course_form.submit nil, :class => "span12 btn btn-primary"
+        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

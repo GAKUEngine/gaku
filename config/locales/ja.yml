@@ -36,6 +36,7 @@ ja:
     choose_country: "国を選択して下さい"
     edit: "住所の編集"
     title: "住所のタイトル"
+    primary: "主要住所"
   phone: "電話番号"
   email: "メールアドレス"
   admitted: "入学日"
@@ -85,12 +86,12 @@ ja:
   course: "授業"
   courses:
     plural: "授業表"
-    new: "新規授業"
+    new: "新規授業登録"
     show: "授業照会"
     edit: "授業の編集"
     list: "授業一覧"
     code: "授業コード"
-    code_sample: "[例: 秋2020]"
+    code_sample: "例：秋2020"
     save: "保存"
     choose_course: 
     enroll_student: "生徒をこの授業に追加する"
@@ -182,6 +183,7 @@ ja:
     save: "プロフィールを保存"
   guardian: "保護者"
   guardians:
+    name: "氏名"
     guardians: "保護者"
     list: "保護者一覧"
     relationship: "関係"
