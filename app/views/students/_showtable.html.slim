@@ -66,17 +66,17 @@
           a#new_student_note_tab_link data-toggle="tab" href="#notes"
             = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
         li
-          a data-toggle="tab" href="#courses"
+          a#new_student_course_tab_link data-toggle="tab" href="#courses"
             = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'students/addresses/index'
         #guardians.tab-pane
-          = render :partial => 'guardians'
+          = render :partial => 'students/guardians/index'
         #contacts.tab-pane
           = render :partial => 'contacts'
         #notes.tab-pane
-          = render :partial => 'notes'
+          = render :partial => 'students/notes/index'
         #courses.tab-pane
           = render :partial => 'courses'
 .row-fluid

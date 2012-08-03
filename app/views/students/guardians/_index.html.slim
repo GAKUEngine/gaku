@@ -22,7 +22,7 @@
             th =t("guardians.relationship")
             th =t("options")
         tbody
-          =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
+          =render :partial => 'students/guardians/show', :collection => @student.guardians, :as => 'guardian'
 hr
 #add_new_student_guardian
 .row-fluid

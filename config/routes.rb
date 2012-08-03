@@ -38,8 +38,9 @@ GAKUEngine::Application.routes.draw do
   resources :students do
     resources :guardians do
       resources :contacts
-      get 'new_contact', :on => :member
-      get 'edit_student_guardian', :on => :collection
+
+      get :new_contact, :on => :member
+      get :edit_student_guardian, :on => :collection
     end
     resources :addresses do 
       post :make_primary, :on => :member
@@ -51,15 +52,22 @@ GAKUEngine::Application.routes.draw do
     resources :contacts do
       post :make_primary, :on => :member
     end
-    get :new_address, :on => :member
-    put :create_address, :on => :collection
-    get :new_guardian, :on => :member
-    put :create_guardian, :on => :collection
 
-    get :get_csv_template, :on => :collection
-    post :import_student_list, :on => :collection
-  
-    get :autocomplete_search, :on => :collection
+    member do
+      get :new_address
+      get :new_guardian
+      get :new_note
+    end
+
+    collection do 
+      put :create_address
+      put :create_guardian
+      put :create_note
+      get :get_csv_template
+      post :import_student_list
+      get :autocomplete_search
+    end
+
   end
   
   resources :addresses
@@ -67,9 +75,8 @@ GAKUEngine::Application.routes.draw do
   resources :notes
 
   resources :exams do 
-    member do
-      put :create_exam_portion  
-    end
+    put :create_exam_portion, :on => :member  
+
     resources :exam_scores
     resources :exam_portions
   end
