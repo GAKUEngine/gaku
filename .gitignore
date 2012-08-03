@@ -45,3 +45,5 @@ Gemfile.lock
 
 # Paperclip attachments
 public/system/*
+
+routes.txt
