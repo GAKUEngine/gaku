@@ -7,7 +7,7 @@
     =t("grades.grading")
 .row-fluid
   hr
-.row-fluid
+#exam_grading_area.row-fluid
   table.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
@@ -45,9 +45,4 @@ coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   
-  $('.form_blur_event').blur( ->
-    score = $(this)
-    score.closest("form").submit()
-  )
-  
-  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, score_cell_class: ".score_cell"})
+  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, score_cell_identifier: ".score_cell"})

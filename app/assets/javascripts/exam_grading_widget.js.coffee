@@ -9,7 +9,7 @@ class ExamGradingWidget extends BuHin
   course_id: null
   exam: null
   examPortions: null
-  data: null
+  cells: null
 
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
@@ -74,11 +74,13 @@ class ExamGradingWidget extends BuHin
   #
   #  createGrid: () ->
   #
-  #  registerCells: (cellIdentifier)
-  #    $(cellIdentifier).blur( ->
-  #      score = $(this)
-  #      score.closest("form").submit()
-  #    )
+  registerCells: (cellIdentifier) ->
+    @cells =  $(".score_cell")
+    for cell in @cells
+      cell.blur( ->
+        $(this).closest("form").submit()
+      )
+
 
   init: (options) ->
     if @target == null
