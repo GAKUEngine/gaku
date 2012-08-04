@@ -1,15 +1,30 @@
 #= require buhin/buhin-base
 
+class StudentScoreSet
+  id: null
+  name: null
+  classGroup: null
+  seatNumber: null
+  exams: null
+
+  constructor: (id, name, classGroup, seatNumber) ->
+    @id = id
+    @name = name
+    @classGroup = classGroup
+    @seatNumber = seatNumber
+    @exams = []
+    alert "added student: " + @name
+
+  AddExam: (exam) ->
+    @exams.push(exam)
+  
+
 class ExamGradingWidget extends BuHin
   controlBar:
     element: null
     buttonGroups: null
 
-  grid: null
-  course_id: null
-  exam: null
-  examPortions: null
-  cells: null
+  rows: null
 
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
@@ -71,39 +86,50 @@ class ExamGradingWidget extends BuHin
   #
   #    @controlBar.element.appendTo(@target)
   #    return @controlBar
-  #
-  #  createGrid: () ->
-  #
-  registerCells: (cellIdentifier) ->
-    @cells =  $(".score_cell")
-    for cell in @cells
-      cell.blur( ->
-        $(this).closest("form").submit()
-      )
+  
+  registerRows: (cellIdentifier) ->
+    @rows = @target.find(".data_row")
+    for row in @rows
+      rowElement = $(row)
+      studentID = ""
+      name = ""
+      classGroup = ""
+      seatNumber = ""
+      cells = rowElement.find("td")
+      scoreElements = []
+      for cell in cells
+        cellElement = $(cell)
+        id = cellElement.attr("id")
 
+        if id == "name"
+          name = cellElement.html()
+        else if id == "class_group"
+          classGroup = cellElement.html()
+        else if id == "seat_numer"
+          seatNumber = cellElement.html()
+        else if id == "score"
+          scoreElements.push(cellElement)
+
+      scoreSet = new StudentScoreSet(0, name, classGroup, seatNumber)
+      # @cells =  $(cellIdentifier)
+      # for cell in @cells
+      #   element = $(
+      #   alert "attaching to: " + cell.attr("id")
+      #   cell.blur( ->
+      #     $(this).closest("form").submit()
+      #   )
+      #   #alert cell.attr("student_id")
 
   init: (options) ->
     if @target == null
       return
 
-    @ProcessOptions(options)
-    
-    #@createControlBar()
-    #@createGrid()
+    @registerRows()
 
+    #@createControlBar()
     #@target.append(@controlBar)
 
   ProcessOptions: (options) ->
-    if options["course_id"]
-      @course_id = options["course_id"]
-
-    #TODO: add filtering by class
-    
-    if options["exam_data"]
-      @exam = options["exam_data"]
-
-    if options["score_cell_identifier"]
-      @registerCells(options["score_cell_identifier"])
 
 $.fn.examGradingWidget = (options) ->
    pluginName = 'examGradingWidget'
