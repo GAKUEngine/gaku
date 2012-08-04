@@ -1,11 +1,23 @@
 #= require buhin/buhin-base
 
+class Exam
+  id: null
+  portions: null
+
+  constructor: (id) ->
+    @id = id
+    @portions = []
+
+  AddPortion: (portion) ->
+    
+
 class StudentScoreSet
   id: null
   name: null
   classGroup: null
   seatNumber: null
   exams: null
+  scoreElements: null
 
   constructor: (id, name, classGroup, seatNumber) ->
     @id = id
@@ -13,10 +25,12 @@ class StudentScoreSet
     @classGroup = classGroup
     @seatNumber = seatNumber
     @exams = []
-    alert "added student: " + @name
+    @scoreElements = []
 
-  AddExam: (exam) ->
-    @exams.push(exam)
+  AddScore: (scoreElement) ->
+    @scoreElements.push(scoreElement)
+    scoreInput = scoreElement.find("input.exam_portion_score_score")
+    alert "scoreInput: " + scoreInput.attr("value")
   
 
 class ExamGradingWidget extends BuHin
@@ -111,6 +125,9 @@ class ExamGradingWidget extends BuHin
           scoreElements.push(cellElement)
 
       scoreSet = new StudentScoreSet(0, name, classGroup, seatNumber)
+      for scoreElement in scoreElements
+        scoreSet.AddScore(scoreElement)
+      #for
       # @cells =  $(cellIdentifier)
       # for cell in @cells
       #   element = $(

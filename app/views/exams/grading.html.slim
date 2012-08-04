@@ -13,8 +13,7 @@
       tr
         th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
-          th.btn-success colspan="#{exam.exam_portions.count}" = exam.name
-          th.btn-inverse rowspan="2" =t("grades.total") << "(" << exam.max_score.to_s << "#{t('grades.max')})"
+          th.btn-success colspan="#{exam.exam_portions.count + 1}" = exam.name
       tr
         th.btn-info =t("class")
         th.btn-info =t("class_group_enrollments.seat_number")
@@ -22,6 +21,7 @@
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
             th.btn-warning = portion.name << "(" << portion.max_score.to_s << "#{t('grades.max')})"
+          th.btn-inverse rowspan="2" =t("grades.total") << "(" << exam.max_score.to_s << "#{t('grades.max')})"
     tbody
       - @students.each do |student|
         tr.data_row
@@ -35,9 +35,12 @@
               td#score
                 = form_for [model], :remote => true do |f|
                   =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell", "data-prompt-position" => "bottomRight:5"
-                  - if model.new_record?
-                    = f.hidden_field :exam_portion_id, :value => portion.id
-                    = f.hidden_field :student_id, :value => student.id
+                  /- if model.new_record?
+                  = f.hidden_field :exam_id, :value => exam.id
+                  = f.hidden_field :exam_name, :value => exam.name
+                  = f.hidden_field :exam_portion_id, :value => portion.id
+                  = f.hidden_field :exam_portion_name, :value => portion.name
+                  = f.hidden_field :student_id, :value => student.id
             td#total
 
 coffee:
