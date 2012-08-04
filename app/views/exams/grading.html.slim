@@ -8,7 +8,7 @@
 .row-fluid
   hr
 .row-fluid
-  table.grading-table.table.table-striped.table-bordered.table-condensed
+  table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
     thead
       tr
         th.btn-primary colspan="3" =t('student')
@@ -24,30 +24,25 @@
             th.btn-warning = portion.name << "(" << portion.max_score.to_s << "#{t('grades.max')})"
     tbody
       - @students.each do |student|
-        tr
-          td 
-          td 
-          td.vm =student.surname << " " << student.name
+        tr.data_row
+          td#class_group 
+          td#seat_number
+          td#name.vm =student.surname << " " << student.name
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
               - model_class = model.class
-              td
+              td#score
                 = form_for [model], :remote => true do |f|
-                  =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "span12 form_blur_event score_cell"
+                  =f.number_field :score, :max => portion.max_score.to_s, :min => "0", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell", "data-prompt-position" => "bottomRight:5"
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
-
-            td
+            td#total
 
 coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   
-  $('.form_blur_event').blur( ->
-    score = $(this)
-    score.closest("form").submit()
-  )
-  
-  gradingArea = $("#exam_grading_area").examGradingWidget({course_id: course_id, exam_data: exam_data, score_cell_class: ".score_cell"})
+  gradingArea = $("#exam_grid").examGradingWidget()
+  $('.edit_exam_portion_score').validationEngine()
