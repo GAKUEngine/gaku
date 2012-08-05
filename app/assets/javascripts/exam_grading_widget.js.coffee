@@ -33,12 +33,17 @@ class Exam
     total = 0
     for portion in @portions
       total += parseFloat(portion.element.val())
-      
+
     @totalElement.html(total)
 
   CalculateWeightedScore: () ->
+    weighted_score = 0
+    for portion in @portions
+      console.log portion.element.attr("weight")
+      weighted_score += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
 
-
+    @weightedElement.html(weighted_score)
+      
   SetTotalTarget: (@totalElement) ->
     @totalElement.html("--")
   SetWeightedTarget: (@weightedElement) ->
@@ -156,6 +161,7 @@ class StudentScoreSet
   CalculateTotals: () ->
     for exam in @exams
       exam.CalculateTotal()
+      exam.CalculateWeightedScore()
 
   
 
