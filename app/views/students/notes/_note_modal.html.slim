@@ -2,9 +2,8 @@
 - model_class = model.class
 .modal.hide#editNoteModal wmode="opaque"
   
-  = form_for(@student, :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |f|
+  = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |note_form| 
 
-    =f.fields_for :notes do |note_form| 
 
       .modal-header
         button.close type="button" data-dismiss="modal"
