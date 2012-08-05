@@ -5,22 +5,26 @@ class Exam
   portions: null
   totalElement: null
 
-  constructor: (id, totalElement) ->
+  constructor: (id) ->
     @id = id
-    @totalElement = totalElement
     @portions = []
 
-  @calculateTotal: () ->
+  calculateTotal: () ->
     total = 0
     for portion in @portions
-      total += portion.element.val()
+      total += parseFloat(portion.element.val())
       
-    totalElement.html(total)
+    @totalElement.html(total)
 
-  AddPortion: (portionId, element, exam) ->
+  SetTotalTarget: (targetElement) ->
+    @totalElement = targetElement
+
+  AddScoreElement: (info, scoreElement) ->
+    portionId = info.attr("exam_portion_id")
+    element = scoreElement.find("#exam_portion_score_score")
     @portions.push({id: portionId, element: element})
-    element.blur( ->
-      $(this).closest("form").submit()
+    element.blur( =>
+      $(@).closest("form").submit()
       @calculateTotal()
     )
     
@@ -31,7 +35,8 @@ class StudentScoreSet
   classGroup: null
   seatNumber: null
   exams: null
-  scoreElements: null
+  #scoreElements: null
+  #totalTargets: null
 
   constructor: (id, name, classGroup, seatNumber) ->
     @id = id
@@ -51,23 +56,32 @@ class StudentScoreSet
     newExam.AddPortion(portionId)
     @exams.push(newExam)
 
-  setTotalTarget: (examId, element) ->
+  SetTotalTarget: (target) ->
+    examId = target.attr("exam_id")
     for exam in @exams
       if exam.id == examId
-        exam.setTotalTarget(element)
+        exam.SetTotalTarget(target)
 
 
-  AddScore: (scoreElement) ->
-    @scoreElements.push(scoreElement)
+  AddScoreElement: (scoreElement) ->
     #get data
     info = scoreElement.find("#score_info")
     #find what exam this element belongs to
-    exam_id = info.attr("exam_id")
-    portion_id = info.attr("exam_portion_id")
-    student_id = info.attr("student_id")
-    scoreEntry = scoreElement.find("#exam_portion_score_score")
+    examId = info.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        #add it
+        exam.AddScoreElement(info, scoreElement)
+        return
+    
+    #no exams were found with that ID, create a new one
+    exam = new Exam(examId)
+    exam.AddScoreElement(info, scoreElement)
+    @exams.push(exam)
 
-  AddTotalTarget: (totalTarget) ->
+  CalculateTotals: () ->
+    for exam in @exams
+      exam.calculateTotal()
 
   
 
@@ -77,6 +91,7 @@ class ExamGradingWidget extends BuHin
     buttonGroups: null
 
   rows: null
+  scoreSets: null
 
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
@@ -150,6 +165,7 @@ class ExamGradingWidget extends BuHin
       cells = rowElement.find("td")
       totalTargets = []
       scoreElements = []
+      @scoreSets = []
       for cell in cells
         cellElement = $(cell)
         id = cellElement.attr("id")
@@ -169,18 +185,15 @@ class ExamGradingWidget extends BuHin
 
       scoreSet = new StudentScoreSet(studentId, name, classGroup, seatNumber)
       for scoreElement in scoreElements
-        scoreSet.AddScore(scoreElement)
+        scoreSet.AddScoreElement(scoreElement)
       for totalTarget in totalTargets
-        scoreSet.AddTotalTarget(totalTarget)
-      #for
-      # @cells =  $(cellIdentifier)
-      # for cell in @cells
-      #   element = $(
-      #   alert "attaching to: " + cell.attr("id")
-      #   cell.blur( ->
-      #     $(this).closest("form").submit()
-      #   )
-      #   #alert cell.attr("student_id")
+        scoreSet.SetTotalTarget(totalTarget)
+
+      @scoreSets.push(scoreSet)
+
+    #calculate totals for all added exams in all added score sets
+    for scoreSet in @scoreSets
+      scoreSet.CalculateTotals()
 
   init: (options) ->
     if @target == null
