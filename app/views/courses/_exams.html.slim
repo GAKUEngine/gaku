@@ -1,4 +1,6 @@
 - if @course.syllabus and @course.syllabus.exams.any? 
+  = link_to t("grades.all_exams"), "#{request.fullpath}/exams/grading"
+  hr /
   - @course.syllabus.exams.each do |exam|
     = link_to exam.name, "#{request.fullpath}/exams/#{exam.id}/grading", :params => { :course_id => @course.id, :exam_id => exam.id }
     br /
