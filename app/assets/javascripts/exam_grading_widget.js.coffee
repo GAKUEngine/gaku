@@ -17,7 +17,6 @@ class ExamPortion
       @exam.CalculateTotal()
     )
     
-average_score = 0
 class Exam
   id: null
   portions: null
@@ -44,21 +43,7 @@ class Exam
       weighted_score += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
 
     @weightedElement.html(weighted_score)
-    base_score = weighted_score
 
-  CalculateAverage: () ->
-    calculate_value = 0
-    
-    
-    weighted_scores = $(".weighted_scores")
-    i = 0
-    while i < weighted_scores.length
-      calculate_value += parseFloat($(weighted_scores[i]).text())
-      i++
-    
-    average_score = calculate_value / weighted_scores.length
-    console.log average_score
-    
   CalculateGrade: () ->
     console.log average_score
     base_score
@@ -183,7 +168,7 @@ class StudentScoreSet
       exam.CalculateTotal()
       exam.CalculateWeightedScore()
       exam.CalculateAverage()
-              
+
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -253,6 +238,19 @@ class ExamGradingWidget extends BuHin
   #
   #    @controlBar.element.appendTo(@target)
   #    return @controlBar
+  
+  CalculateAverage: () ->
+    calculate_value = 0
+    
+    weighted_scores = $(".weighted_scores")
+    i = 0
+    while i < weighted_scores.length
+      calculate_value += parseFloat($(weighted_scores[i]).text())
+      i++
+    
+    average_score = calculate_value / weighted_scores.length
+    @gradeElement.text(base_score)
+    console.log average_score
   
   registerRows: (cellIdentifier) ->
     @scoreSets = []
