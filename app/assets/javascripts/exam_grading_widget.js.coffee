@@ -12,6 +12,7 @@ class Exam
 
   @calculateTotal: () ->
     total = 0
+    console.log totalElement
     for portion in @portions
       total += portion.element.val()
       
