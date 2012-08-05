@@ -128,7 +128,7 @@ ja:
     weighting_total: "加重総合"
     weighting_portion: "加重率"
     average_points: "平均点数"
-    average_score: "平均点数"
+    average_score: "平均評価"
     total_points: "総合点数"
     max_points: "最高点数"
     max: "点満点"
@@ -156,7 +156,7 @@ ja:
     view: "試験参照"
     new: "新規試験登録"
     new_exam: "新規試験内容"
-    add_portion: '試験の部分を追加'
+    add_portion: '試験要素の追加'
     add: "試験登録"
     count: "試験数"
     description: "試験の説明"
