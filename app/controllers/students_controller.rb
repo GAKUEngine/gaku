@@ -84,7 +84,17 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update_attributes(params[:student])
-      redirect_to @student
+      respond_to do |format|
+        unless params[:student].nil?
+          if !params[:student][:addresses_attributes].nil?
+            format.js { render 'students/addresses/create' }
+          elsif !params[:student][:notes_attributes].nil?
+            format.js { render 'students/notes/create' }             
+          end
+        end
+        format.html { redirect_to @student } 
+      end
+      
     else
       render :edit
     end
@@ -116,19 +126,6 @@ class StudentsController < ApplicationController
     if @student.update_attributes(params[:student])
       respond_to do |format|
         format.js { render 'students/guardians/create' }  
-      end
-    end  
-  end
-
-  def new_note
-    @student.notes.build
-    render 'students/notes/new'
-  end
-
-  def create_note
-    if @student.update_attributes(params[:student])
-      respond_to do |format|
-        format.js { render 'students/notes/create' }  
       end
     end  
   end
