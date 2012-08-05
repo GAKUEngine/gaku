@@ -1,32 +1,61 @@
 #= require buhin/buhin-base
 
+class ExamPortion
+  exam: null
+  info: null
+  id: null
+  cell: null
+  element: null
+  weighting: null
+
+  constructor: (exam, info, scoreElement) ->
+    @exam = exam
+    id = info.attr("exam_portion_id")
+    cell = scoreElement
+    @element = scoreElement.find("#exam_portion_score_score")
+    @element.blur( =>
+      @element.closest("form").submit()
+      @exam.CalculateTotal()
+    )
+    
+
 class Exam
   id: null
   portions: null
   totalElement: null
+  weightedElement: null
+  gradeElement: null
+  rankElement: null
 
   constructor: (id) ->
     @id = id
     @portions = []
 
-  calculateTotal: () ->
+  CalculateTotal: () ->
     total = 0
     for portion in @portions
       total += parseFloat(portion.element.val())
       
     @totalElement.html(total)
 
+  CalculateWeightedScore: () ->
+
+
   SetTotalTarget: (targetElement) ->
     @totalElement = targetElement
+  SetWeightedTarget: (targetElement) ->
+    @weightedElement = targetElement
+    @weightedElement.html("--")
+  SetGradeTarget: (targetElement) ->
+    @gradeElement = targetElement
+    @gradeElement.html("--")
+  SetRankTarget: (targetElement) ->
+    @rankElement = targetElement
+    @rankElement.html("--")
 
   AddScoreElement: (info, scoreElement) ->
-    portionId = info.attr("exam_portion_id")
-    element = scoreElement.find("#exam_portion_score_score")
-    @portions.push({id: portionId, element: element})
-    element.blur( =>
-      element.closest("form").submit()
-      @calculateTotal()
-    )
+    portion = new ExamPortion(@, info, scoreElement)
+    @portions.push(portion)
     
 
 class StudentScoreSet
@@ -62,11 +91,11 @@ class StudentScoreSet
       else if id == "total_points"
         @SetTotalTarget(cellElement)
       else if id == "weighted_score"
-        weightedTargets.push(cellElement)
+        @SetWeightedTarget(cellElement)
       else if id == "grade"
-        gradeTargets.push(cellElement)
+        @SetGradeTarget(cellElement)
       else if id == "rank"
-        rankTargets.push(cellElement)
+        @SetRankTarget(cellElement)
 
     #calculate totals for all added exams in all added score sets
     @CalculateTotals()
@@ -93,7 +122,25 @@ class StudentScoreSet
     for exam in @exams
       if exam.id == examId
         exam.SetTotalTarget(target)
-
+        return
+  SetWeightedTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetWeightedTarget(target)
+        return
+  SetGradeTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetGradeTarget(target)
+        return
+  SetRankTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetRankTarget(target)
+        return
 
   AddScoreElement: (scoreElement) ->
     #get data
@@ -113,7 +160,7 @@ class StudentScoreSet
 
   CalculateTotals: () ->
     for exam in @exams
-      exam.calculateTotal()
+      exam.CalculateTotal()
 
   
 

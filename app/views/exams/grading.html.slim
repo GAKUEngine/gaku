@@ -28,8 +28,8 @@
     tbody
       - @students.each do |student|
         tr.data_row
-          td#class_group 
-          td#seat_number
+          td#class_group = student.class_group_enrollments.last.class_group.name
+          td#seat_number = student.class_group_enrollments.last.seat_number
           td#student.vm
             = student.surname << " " << student.name
             #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
