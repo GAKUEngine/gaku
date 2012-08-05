@@ -3,12 +3,26 @@
 class Exam
   id: null
   portions: null
+  totalElement: null
 
-  constructor: (id) ->
+  constructor: (id, totalElement) ->
     @id = id
+    @totalElement = totalElement
     @portions = []
 
-  AddPortion: (portion) ->
+  @calculateTotal: () ->
+    total = 0
+    for portion in @portions
+      total += portion.element.val()
+      
+    totalElement.html(total)
+
+  AddPortion: (portionId, element, exam) ->
+    @portions.push({id: portionId, element: element})
+    element.blur( ->
+      $(this).closest("form").submit()
+      @calculateTotal()
+    )
     
 
 class StudentScoreSet
@@ -27,10 +41,34 @@ class StudentScoreSet
     @exams = []
     @scoreElements = []
 
+  addExamAndPortion: (examId, portionId) ->
+    for exam in @exams
+      if exam.id == examID
+        exam.AddPortion(portionId)
+        reutrn
+
+    newExam = new Exam(examId)
+    newExam.AddPortion(portionId)
+    @exams.push(newExam)
+
+  setTotalTarget: (examId, element) ->
+    for exam in @exams
+      if exam.id == examId
+        exam.setTotalTarget(element)
+
+
   AddScore: (scoreElement) ->
     @scoreElements.push(scoreElement)
-    scoreInput = scoreElement.find("input.exam_portion_score_score")
-    alert "scoreInput: " + scoreInput.attr("value")
+    #get data
+    info = scoreElement.find("#score_info")
+    #find what exam this element belongs to
+    exam_id = info.attr("exam_id")
+    portion_id = info.attr("exam_portion_id")
+    student_id = info.attr("student_id")
+    scoreEntry = scoreElement.find("#exam_portion_score_score")
+
+  AddTotalTarget: (totalTarget) ->
+
   
 
 class ExamGradingWidget extends BuHin
@@ -105,11 +143,12 @@ class ExamGradingWidget extends BuHin
     @rows = @target.find(".data_row")
     for row in @rows
       rowElement = $(row)
-      studentID = ""
+      studentId = ""
       name = ""
       classGroup = ""
       seatNumber = ""
       cells = rowElement.find("td")
+      totalTargets = []
       scoreElements = []
       for cell in cells
         cellElement = $(cell)
@@ -117,16 +156,22 @@ class ExamGradingWidget extends BuHin
 
         if id == "name"
           name = cellElement.html()
+          info = cellElement.find("#student_info")
+          studentId = info.attr("student_id")
         else if id == "class_group"
           classGroup = cellElement.html()
         else if id == "seat_numer"
           seatNumber = cellElement.html()
         else if id == "score"
           scoreElements.push(cellElement)
+        else if id == "total"
+          totalTargets.push(cellElement)
 
-      scoreSet = new StudentScoreSet(0, name, classGroup, seatNumber)
+      scoreSet = new StudentScoreSet(studentId, name, classGroup, seatNumber)
       for scoreElement in scoreElements
         scoreSet.AddScore(scoreElement)
+      for totalTarget in totalTargets
+        scoreSet.AddTotalTarget(totalTarget)
       #for
       # @cells =  $(cellIdentifier)
       # for cell in @cells
