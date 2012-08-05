@@ -13,7 +13,7 @@
       tr
         th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
-          th.btn-success colspan="#{exam.exam_portions.count + 1}" = exam.name
+          th.btn-success colspan="#{exam.exam_portions.count + 4}" = exam.name
       tr
         th.btn-info =t("class")
         th.btn-info =t("class_group_enrollments.seat_number")
@@ -21,12 +21,15 @@
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
             th.btn-warning = portion.name << "：" << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
-          th.btn-inverse = t("grades.weighting_total")
+          th#total_points_title.btn-inverse = t("grades.total_points")
+          th#weighting_total_title.btn-inverse = t("grades.weighting_total")
+          th#grade_title.btn-inverse = t("grades.grade")
+          th#rank_title.btn-inverse = t("grades.rank")
     tbody
       - @students.each do |student|
         tr.data_row
-          td#class_group 
-          td#seat_number
+          td#class_group = student.class_group_enrollments.last.class_group.name
+          td#seat_number = student.class_group_enrollments.last.seat_number
           td#student.vm
             = student.surname << " " << student.name
             #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
@@ -41,7 +44,10 @@
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
-            td#total.vm*{'exam_id' => exam.id}
+            td#total_points.vm*{'exam_id' => exam.id}
+            td#weighted_score.vm*{'exam_id' => exam.id}
+            td#grade.vm*{'exam_id' => exam.id}
+            td#rank.vm*{'exam_id' => exam.id}
 
 coffee:
   course_id = #{{params[:course_id]}};

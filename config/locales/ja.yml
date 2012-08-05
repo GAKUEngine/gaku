@@ -125,7 +125,7 @@ ja:
   grades:
     grading: "採点"
     weighting: "加重する"
-    weighting_total: "加重総合（100点満点）"
+    weighting_total: "加重総合"
     weighting_portion: "加重率"
     average_points: "平均点数"
     average_score: "平均評価"
@@ -134,6 +134,7 @@ ja:
     max: "点満点"
     points: "点数"
     rank: "ランク"
+    grade: "評価"
     total: "合計"
   assignments:
     list: "課題一覧"
