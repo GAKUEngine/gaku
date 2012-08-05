@@ -49,7 +49,7 @@
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
             td#total_points.vm*{'exam_id' => exam.id}
-            td#weighted_score.vm*{'exam_id' => exam.id}
+            td#weighted_score.weighted_scores.vm*{'exam_id' => exam.id}
             td#grade.vm*{'exam_id' => exam.id}
             td#rank.vm*{'exam_id' => exam.id}
 
