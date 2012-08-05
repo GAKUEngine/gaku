@@ -25,7 +25,7 @@ class Exam
     element = scoreElement.find("#exam_portion_score_score")
     @portions.push({id: portionId, element: element})
     element.blur( =>
-      $(@).closest("form").submit()
+      element.closest("form").submit()
       @calculateTotal()
     )
     
