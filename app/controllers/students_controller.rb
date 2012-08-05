@@ -21,8 +21,6 @@ class StudentsController < ApplicationController
       return
     end
 
-
-
     respond_to do |format|
       format.html
       format.json do 

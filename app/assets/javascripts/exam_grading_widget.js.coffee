@@ -1,15 +1,171 @@
 #= require buhin/buhin-base
 
+class ExamPortion
+  exam: null
+  info: null
+  id: null
+  cell: null
+  element: null
+  weighting: null
+
+  constructor: (@exam, info, scoreElement) ->
+    id = info.attr("exam_portion_id")
+    cell = scoreElement
+    @element = scoreElement.find("#exam_portion_score_score")
+    @element.blur( =>
+      @element.closest("form").submit()
+      @exam.CalculateTotal()
+    )
+    
+
+class Exam
+  id: null
+  portions: null
+  totalElement: null
+  weightedElement: null
+  gradeElement: null
+  rankElement: null
+
+  constructor: (@id) ->
+    @portions = []
+
+  CalculateTotal: () ->
+    total = 0
+    for portion in @portions
+      total += parseFloat(portion.element.val())
+      
+    @totalElement.html(total)
+
+  CalculateWeightedScore: () ->
+
+
+  SetTotalTarget: (@totalElement) ->
+    @totalElement.html("--")
+  SetWeightedTarget: (@weightedElement) ->
+    @weightedElement.html("--")
+  SetGradeTarget: (@gradeElement) ->
+    @gradeElement.html("--")
+  SetRankTarget: (@rankElement) ->
+    @rankElement.html("--")
+
+  AddScoreElement: (info, scoreElement) ->
+    portion = new ExamPortion(@, info, scoreElement)
+    @portions.push(portion)
+    
+
+class StudentScoreSet
+  info: null
+  id: null
+  name: null
+  classGroup: null
+  seatNumber: null
+  exams: null
+  rowElement: null
+
+  parseTableRow: () ->
+    weightedTargets = []
+    gradeTargets = []
+    rankTargets = []
+    @scoreSets = []
+    cells = @rowElement.find("td")
+    for cell in cells
+      cellElement = $(cell)
+      id = cellElement.attr("id")
+
+      #in general these are processed "in order" from the table
+      if id == "name"
+        @name = cellElement.html()
+        @info = cellElement.find("#student_info")
+        @id = @info.attr("student_id")
+      else if id == "class_group"
+        @classGroup = cellElement.html()
+      else if id == "seat_numer"
+        @seatNumber = cellElement.html()
+      else if id == "score"
+        @AddScoreElement(cellElement)
+      else if id == "total_points"
+        @SetTotalTarget(cellElement)
+      else if id == "weighted_score"
+        @SetWeightedTarget(cellElement)
+      else if id == "grade"
+        @SetGradeTarget(cellElement)
+      else if id == "rank"
+        @SetRankTarget(cellElement)
+
+    #calculate totals for all added exams in all added score sets
+    @CalculateTotals()
+
+  constructor: (rowElement) ->
+    @rowElement = rowElement
+    @exams = []
+    @scoreElements = []
+
+    @parseTableRow()
+
+  addExamAndPortion: (examId, portionId) ->
+    for exam in @exams
+      if exam.id == examID
+        exam.AddPortion(portionId)
+        reutrn
+
+    newExam = new Exam(examId)
+    newExam.AddPortion(portionId)
+    @exams.push(newExam)
+
+  SetTotalTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetTotalTarget(target)
+        return
+  SetWeightedTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetWeightedTarget(target)
+        return
+  SetGradeTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetGradeTarget(target)
+        return
+  SetRankTarget: (target) ->
+    examId = target.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        exam.SetRankTarget(target)
+        return
+
+  AddScoreElement: (scoreElement) ->
+    #get data
+    info = scoreElement.find("#score_info")
+    #find what exam this element belongs to
+    examId = info.attr("exam_id")
+    for exam in @exams
+      if exam.id == examId
+        #add it
+        exam.AddScoreElement(info, scoreElement)
+        return
+    
+    #no exams were found with that ID, create a new one
+    exam = new Exam(examId)
+    exam.AddScoreElement(info, scoreElement)
+    @exams.push(exam)
+
+  CalculateTotals: () ->
+    for exam in @exams
+      exam.CalculateTotal()
+
+  
+
 class ExamGradingWidget extends BuHin
   controlBar:
     element: null
     buttonGroups: null
 
-  grid: null
-  course_id: null
-  exam: null
-  examPortions: null
-  cells: null
+  rows: null
+  scoreSets: null
 
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
@@ -71,39 +227,25 @@ class ExamGradingWidget extends BuHin
   #
   #    @controlBar.element.appendTo(@target)
   #    return @controlBar
-  #
-  #  createGrid: () ->
-  #
-  registerCells: (cellIdentifier) ->
-    @cells =  $(".score_cell")
-    for cell in @cells
-      cell.blur( ->
-        $(this).closest("form").submit()
-      )
-
+  
+  registerRows: (cellIdentifier) ->
+    @scoreSets = []
+    @rows = @target.find(".data_row")
+    for row in @rows
+      #create a new student score set for this row
+      scoreSet = new StudentScoreSet($(row))
+      @scoreSets.push(scoreSet)
 
   init: (options) ->
     if @target == null
       return
 
-    @ProcessOptions(options)
-    
-    #@createControlBar()
-    #@createGrid()
+    @registerRows()
 
+    #@createControlBar()
     #@target.append(@controlBar)
 
   ProcessOptions: (options) ->
-    if options["course_id"]
-      @course_id = options["course_id"]
-
-    #TODO: add filtering by class
-    
-    if options["exam_data"]
-      @exam = options["exam_data"]
-
-    if options["score_cell_identifier"]
-      @registerCells(options["score_cell_identifier"])
 
 $.fn.examGradingWidget = (options) ->
    pluginName = 'examGradingWidget'

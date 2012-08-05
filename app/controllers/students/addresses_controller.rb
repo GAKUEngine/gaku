@@ -30,11 +30,18 @@ class Students::AddressesController < ApplicationController
   end
 
   def destroy
-    #destroy! :flash => !request.xhr?
-    @address.destroy  
+    # destroy! :flash => !request.xhr?
+    @address.destroy
     render :nothing => true
   end
 
+  def make_primary
+    @student = Student.find(params[:student_id])
+    @address = Address.find(params[:id])
+    @student_address = StudentAddress.find_by_student_id_and_address_id(@student.id,@address.id)
+    @student_address.make_primary
+    render :nothing => true
+  end
 
   private 
     def load_student
