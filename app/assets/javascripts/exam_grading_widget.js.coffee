@@ -24,29 +24,28 @@ class Exam
   weightedElement: null
   gradeElement: null
   rankElement: null
-
-  base_score = 0
+  total: 0
+  weightedScore: 0
 
   constructor: (@id) ->
     @portions = []
 
   CalculateTotal: () ->
-    total = 0
+    @total = 0
     for portion in @portions
-      total += parseFloat(portion.element.val())
+      @total += parseFloat(portion.element.val())
 
-    @totalElement.html(total)
+    @totalElement.html(@total)
+    @CalculateWeightedScore()
 
   CalculateWeightedScore: () ->
-    weighted_score = 0
+    @weightedScore = 0
     for portion in @portions
-      weighted_score += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
+      @weightedScore += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
 
-    @weightedElement.html(weighted_score)
+    @weightedElement.html(@weightedScore)
 
   CalculateGrade: () ->
-    console.log average_score
-    base_score
 
   SetTotalTarget: (@totalElement) ->
     @totalElement.html("--")
@@ -167,8 +166,61 @@ class StudentScoreSet
     for exam in @exams
       exam.CalculateTotal()
       exam.CalculateWeightedScore()
-      exam.CalculateAverage()
 
+class ExamInfo
+  id: 0
+  name: null
+  average: 0
+  totalScore: 0
+  numStudents: 0
+
+  constructor: (@id, @name) ->
+    @Clear()
+
+  CalculateAverage: (scoreSet) ->
+    # weighted_scores = $(".weighted_scores")
+    # i = 0
+    # while i < weighted_scores.length
+    #   calculate_value += parseFloat($(weighted_scores[i]).text())
+    #   i++
+    # 
+    # average_score = calculate_value / weighted_scores.length
+    # console.log average_score
+
+  Clear: () ->
+    @average = 0
+    @totalScore = 0
+    @numStudents = 0
+
+  AddScore: (score) ->
+    totalScore += score
+    numStudents += 1
+
+class ExamInfoManager
+  exams: null
+
+  constructor: () ->
+    @exams = []
+
+  AddExamInfo: (id, name) ->
+    @exams.push(new ExamInfo(id, name))
+
+  CalculateExamTotals: (scoreSets) ->
+    console.log scoreSets
+    for exam in @exams
+      exam.Clear()
+    
+    #ここに各試験の合計点を割り出す
+    studentIdx = 0
+    for set in scoreSets
+      examIdx = 0
+      for exam in @exams
+        #ここにexamごとのコレクションを作って合計を計算して貰う
+        @exams.exam[examIdx].AddScore(set.exams[examIdx].total)
+        examIdx += 1
+      studentIdx += 1
+
+  CalculateAverages: (scoreSets) ->
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -177,82 +229,15 @@ class ExamGradingWidget extends BuHin
 
   rows: null
   scoreSets: null
+  examInfo: null
+  
+  registerExams: () ->
+    @examInfo = new ExamInfoManager()
+    @examInfo.AddExamInfo(1, "tes")
+    #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
 
-  #  _addButtonGroup: (target, id, title, iconClasses) ->
-  #    newGroup = $("<div></div>")
-  #    newGroup.attr("id", id)
-  #    newGroup.addClass("well span4")
-  #    newGroup.icon = $("<i></i>")
-  #    newGroup.icon.addClass(iconClasses)
-  #    newGroup.append(newGroup.icon)
-  #    newGroup.append("<b>" + title + "</b><br />")
-  #    newGroup.group = $("<div></div>")
-  #    newGroup.group.addClass("btn-group last")
-  #    newGroup.group.attr("data-toggle", "buttons-radio")
-  #    newGroup.append(newGroup.group)
-  #    @buttonGroups.push(newGroup)
-  #    newGroup.appendTo(target)
-  #    return newGroup
-  #
-  #  _addButtonToGroup: (group, id, name, cb, active = false) ->
-  #    newButton = $("<button></button>")
-  #    newButton.attr("id", id)
-  #    newButton.append(name)
-  #    newButton.addClass("btn")
-  #    if active
-  #      newButton.addClass("active")
-  #
-  #    newButton.appendTo(group)
-  #    return newButton
-  #
-  #  _addButton: (target, id, name, cb) ->
-  #    newButton = $("<button></button>")
-  #    newButton.attr("id", id)
-  #    newButton.append(name)
-  #    newButton.addClass("btn")
-  #
-  #    newButton.appendTo(target)
-  #    return newButton
-  #
-  #  createControlBar: () ->
-  #    @controlBar.element = $("<div></div>")
-  #    @controlBar.element.addClass("row-fluid")
-  #    @buttonGroups = []
-  #
-  #    studentOrder = @_addButtonGroup(@controlBar.element, "student_order", "Student Order", "icon-list-alt")
-  #    @_addButtonToGroup(studentOrder.group, "seat_number", "出席番号", null, true)
-  #    @_addButtonToGroup(studentOrder.group, "exam_points", "考査得点順", null, false)
-  #    @_addButtonToGroup(studentOrder.group, "term_points", "学期得点順", null, false)
-  #
-  #    processingStatusSort = @_addButtonGroup(@controlBar.element, "processing_status_sort", "Processing Status", "icon-edit")
-  #    @_addButtonToGroup(processingStatusSort.group, "processing_all", "全件", null, true)
-  #    @_addButtonToGroup(processingStatusSort.group, "processing_unscored", "未入力", null)
-  #    @_addButtonToGroup(processingStatusSort.group, "processing_partial", "入力途中", null)
-  #    @_addButtonToGroup(processingStatusSort.group, "processing_completed", "入力完了", null)
-  #
-  #    toolbox = @_addButtonGroup(@controlBar.element, "exam_toolbox", "Tools", "icon-wrench")
-  #    @_addButton(toolbox.group, "auto_score", "AutoScore", null)
-  #    @_addButton(toolbox.group, "auto_grade", "AutoGrade", null)
-  #    @_addButton(toolbox.group, "auto_rank", "AutoRank", null)
-  #    @_addButton(toolbox.group, "view_scales", "View Scales", null)
-  #
-  #    @controlBar.element.appendTo(@target)
-  #    return @controlBar
-  
-  CalculateAverage: () ->
-    calculate_value = 0
-    
-    weighted_scores = $(".weighted_scores")
-    i = 0
-    while i < weighted_scores.length
-      calculate_value += parseFloat($(weighted_scores[i]).text())
-      i++
-    
-    average_score = calculate_value / weighted_scores.length
-    @gradeElement.text(base_score)
-    console.log average_score
-  
-  registerRows: (cellIdentifier) ->
+
+  registerRows: () ->
     @scoreSets = []
     @rows = @target.find(".data_row")
     for row in @rows
@@ -264,7 +249,10 @@ class ExamGradingWidget extends BuHin
     if @target == null
       return
 
+    @registerExams()
     @registerRows()
+    @examInfo.CalculateExamTotals()
+    @examInfo.CalculateAverages()
 
     #@createControlBar()
     #@target.append(@controlBar)

@@ -136,6 +136,7 @@ ja:
     rank: "ランク"
     grade: "評価"
     total: "合計"
+    all_exams: "全試験採点表"
   assignments:
     list: "課題一覧"
     plural: "課題"
