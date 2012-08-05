@@ -205,7 +205,7 @@ class ExamInfoManager
   constructor: () ->
     @exams = []
 
-  AddExamInfo: (id, name)
+  AddExamInfo: (id, name) ->
     @exams.push(new ExamInfo(id, name))
 
   CalculateExamTotals: (scoreSets) ->
@@ -223,9 +223,7 @@ class ExamInfoManager
       studentIdx += 1
 
   CalculateAverages: (scoreSets) ->
-
-
-        
+      
 
 class ExamGradingWidget extends BuHin
   controlBar:
