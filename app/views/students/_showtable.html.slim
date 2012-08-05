@@ -4,11 +4,11 @@
       table.table.table-bordered.table-striped
         tbody
           tr
-            th width="20%" style="text-align:center" =t("class")
-            td =@student.class_groups.name
+            th.btn-primary width="20%" =t("class")
+            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
           tr
-            th style="text-align:center;vertical-align:middle" =t("name")
-            td style="font-size:16pt;vertical-align:middle"
+            th.btn-success =t("name")
+            td.vm style="font-size:16pt"
               div
                 ruby style="margin-right:5px"
                   rb
@@ -21,23 +21,20 @@
                   rt
                     = @student.name_reading
           tr
-            th style="text-align:center" =t("gender")
+            th.btn-success =t("gender")
             td = gender(@student)
           tr
-            th style="text-align:center" =t("students.birth")
+            th.btn-success =t("students.birth")
             td =@student.birth_date
           tr
-            th style="text-align:center" =t("students.phone")
+            th.btn-warning =t("students.phone")
             td =@student.phone
           tr
-            th style="text-align:center" =t("students.email")
+            th.btn-warning =t("students.email")
             td =@student.email
           tr
-            th style="text-align:center" =t("students.admitted")
+            th.btn-primary =t("students.admitted")
             td =@student.admitted
-          tr
-            th style="text-align:center" =t("students.class_group_enrollment")
-            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
           
     .span3.well
       .row-fluid.pagination-centered
@@ -54,29 +51,29 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a data-toggle="tab" href="#addresses"
+          a#new_student_address_tab_link data-toggle="tab" href="#addresses"
             = @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
         li
-          a data-toggle="tab" href="#guardians"
+          a#new_student_guardian_tab_link data-toggle="tab" href="#guardians"
             = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
-          a data-toggle="tab" href="#contacts"
+          a#new_student_contact_tab_link data-toggle="tab" href="#contacts"
             = @student.contacts.count != 0 ? t('contact') + "（" + @student.contacts.count.to_s + "）" : t('contact')
         li
-          a data-toggle="tab" href="#notes"
+          a#new_student_note_tab_link data-toggle="tab" href="#notes"
             = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
         li
-          a data-toggle="tab" href="#courses"
+          a#new_student_course_tab_link data-toggle="tab" href="#courses"
             = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'addresses'
+          = render :partial => 'students/addresses/index'
         #guardians.tab-pane
-          = render :partial => 'guardians'
+          = render :partial => 'students/guardians/index'
         #contacts.tab-pane
           = render :partial => 'contacts'
         #notes.tab-pane
-          = render :partial => 'notes'
+          = render :partial => 'students/notes/index'
         #courses.tab-pane
           = render :partial => 'courses'
 .row-fluid

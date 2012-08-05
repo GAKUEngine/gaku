@@ -1,0 +1,2 @@
+$('#student_addresses table tbody').append('<%= escape_javascript(render :partial => "students/addresses/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @student.addresses.last}) %>');
+$('.addresses_count').html('<%= @student.addresses.count %>');

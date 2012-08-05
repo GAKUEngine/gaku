@@ -8,8 +8,8 @@
     td= exam_portion.dynamic_scoring
     td= exam_portion.is_master
     td
-      = link_to ("<i class='icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini", :style => "margin-right:5px"
-      = link_to ("<i class='icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini", :style => "margin-right:5px"
+      = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-success", :style => "margin-right:5px"
+      = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-warning", :style => "margin-right:5px"
       = link_to ("<i class='icon-white icon-remove'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "delete_exam_portion_link btn btn-mini btn-danger"
 /    td= link_to 'Show', exam_exam_portion_path(@exam, exam_portion)
 /    td= link_to 'Edit', edit_exam_exam_portion_path(@exam, exam_portion)

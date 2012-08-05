@@ -1,23 +1,18 @@
 - if @exam.exam_portions.any?
-  #exam-exam_portions
-    .row-fluid
-      h4 =t('exam_portions.list') + "（ " + @exam.exam_portions.count.to_s + " ）"
-    .row-fluid
-      hr
-    .row-fluid
-      table.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th =t 'exam_portions.name'
-            th =t 'exam_portions.max_score'
-            th =t 'exam_portions.weight'
-            th =t 'exam_portions.problem_count'
-            th =t 'exam_portions.execution_date'
-            th =t 'exam_portions.dynamic_scoring'
-            th =t 'exam_portions.is_master'
-            th width="94px" =t 'manage'
-        tbody
-          = render :partial => 'exam_portion', :collection => @exam.exam_portions, :as => :exam_portion
+  .row-fluid
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t 'exam_portions.name'
+          th.btn-inverse =t 'exam_portions.max_score'
+          th.btn-inverse =t 'exam_portions.weight'
+          th.btn-inverse =t 'exam_portions.problem_count'
+          th.btn-inverse =t 'exam_portions.execution_date'
+          th.btn-inverse =t 'exam_portions.dynamic_scoring'
+          th.btn-inverse =t 'exam_portions.is_master'
+          th.btn-info width="94px" =t 'manage'
+      tbody
+        = render :partial => 'exam_portion', :collection => @exam.exam_portions, :as => :exam_portion
       
 javascript:
   $(document).ready(function() {

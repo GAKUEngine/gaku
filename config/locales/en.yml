@@ -188,6 +188,8 @@ en:
      add: 
   contact: 
   contacts:
+    new: "New Contact"
+    save: "Save Contact"
     data: "Data"
     details: "Details"
     primary: "Primary"
@@ -197,8 +199,9 @@ en:
   notes:
     notes: "Notes"
     list: "Notes List"
-    title: "Title"
+    title: "Note Title"
     content: "Content"
+    new: "New Note"
     add: "Add Note"
     delete: "Delete Note"
     save: "Save note"
