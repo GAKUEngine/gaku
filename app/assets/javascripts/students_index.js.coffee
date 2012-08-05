@@ -59,7 +59,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 78
+                  width: 76
                   encoded: false
                   resizable: false
                   sortable: false
@@ -96,7 +96,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 78
+                  width: 76
                   encoded: false
                   resizable: false
                   sortable: false
@@ -170,8 +170,7 @@ class StudentGrid extends BuHin
 
         managementButtons = $("<div></div>")
         showButton = $("<a></a>")
-          .css("margin-right","5px")
-          .addClass("btn btn-mini btn-success")
+          .addClass("mr-xs btn btn-mini btn-success")
           .attr("href", ('/students/' + @students[i].id))
           .html("<i class='icon-white icon-eye-open'></i>")
           .appendTo(managementButtons)

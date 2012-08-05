@@ -2,16 +2,16 @@
   table.table.table-condensed.table-striped.table-bordered
     thead
       tr
-        th =t 'exams.name'
-        th =t 'exams.description'
-        th =t 'exams.adjustments'
-        th =t 'exams.weight'
-        th =t 'exams.dynamic_scoring'
-        th style="width:94px" =t 'manage'
+        th.btn-inverse =t 'exams.name'
+        th.btn-inverse =t 'exams.description'
+        th.btn-inverse =t 'exams.adjustments'
+        th.btn-inverse =t 'exams.weight'
+        th.btn-inverse =t 'exams.dynamic_scoring'
+        th.btn-info style="width:94px" =t 'manage'
     tbody
       - if @syllabus.exams.any?
         = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
-      - else 
+      - else
         .alert.alert-danger
           = t('notice.no_exams')
 

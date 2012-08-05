@@ -11,6 +11,7 @@ class Exam
 
   calculateTotal: () ->
     total = 0
+    console.log totalElement
     for portion in @portions
       total += parseFloat(portion.element.val())
       
