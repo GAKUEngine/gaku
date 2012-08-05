@@ -30,21 +30,53 @@ class Exam
     
 
 class StudentScoreSet
+  info: null
   id: null
   name: null
   classGroup: null
   seatNumber: null
   exams: null
-  #scoreElements: null
-  #totalTargets: null
+  rowElement: null
 
-  constructor: (id, name, classGroup, seatNumber) ->
-    @id = id
-    @name = name
-    @classGroup = classGroup
-    @seatNumber = seatNumber
+  parseTableRow: () ->
+    weightedTargets = []
+    gradeTargets = []
+    rankTargets = []
+    @scoreSets = []
+    cells = @rowElement.find("td")
+    for cell in cells
+      cellElement = $(cell)
+      id = cellElement.attr("id")
+
+      #in general these are processed "in order" from the table
+      if id == "name"
+        @name = cellElement.html()
+        @info = cellElement.find("#student_info")
+        @id = @info.attr("student_id")
+      else if id == "class_group"
+        @classGroup = cellElement.html()
+      else if id == "seat_numer"
+        @seatNumber = cellElement.html()
+      else if id == "score"
+        @AddScoreElement(cellElement)
+      else if id == "total_points"
+        @SetTotalTarget(cellElement)
+      else if id == "weighted_score"
+        weightedTargets.push(cellElement)
+      else if id == "grade"
+        gradeTargets.push(cellElement)
+      else if id == "rank"
+        rankTargets.push(cellElement)
+
+    #calculate totals for all added exams in all added score sets
+    @CalculateTotals()
+
+  constructor: (rowElement) ->
+    @rowElement = rowElement
     @exams = []
     @scoreElements = []
+
+    @parseTableRow()
 
   addExamAndPortion: (examId, portionId) ->
     for exam in @exams
@@ -155,45 +187,12 @@ class ExamGradingWidget extends BuHin
   #    return @controlBar
   
   registerRows: (cellIdentifier) ->
+    @scoreSets = []
     @rows = @target.find(".data_row")
     for row in @rows
-      rowElement = $(row)
-      studentId = ""
-      name = ""
-      classGroup = ""
-      seatNumber = ""
-      cells = rowElement.find("td")
-      totalTargets = []
-      scoreElements = []
-      @scoreSets = []
-      for cell in cells
-        cellElement = $(cell)
-        id = cellElement.attr("id")
-
-        if id == "name"
-          name = cellElement.html()
-          info = cellElement.find("#student_info")
-          studentId = info.attr("student_id")
-        else if id == "class_group"
-          classGroup = cellElement.html()
-        else if id == "seat_numer"
-          seatNumber = cellElement.html()
-        else if id == "score"
-          scoreElements.push(cellElement)
-        else if id == "total"
-          totalTargets.push(cellElement)
-
-      scoreSet = new StudentScoreSet(studentId, name, classGroup, seatNumber)
-      for scoreElement in scoreElements
-        scoreSet.AddScoreElement(scoreElement)
-      for totalTarget in totalTargets
-        scoreSet.SetTotalTarget(totalTarget)
-
+      #create a new student score set for this row
+      scoreSet = new StudentScoreSet($(row))
       @scoreSets.push(scoreSet)
-
-    #calculate totals for all added exams in all added score sets
-    for scoreSet in @scoreSets
-      scoreSet.CalculateTotals()
 
   init: (options) ->
     if @target == null
