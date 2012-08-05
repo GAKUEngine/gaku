@@ -8,8 +8,7 @@ class ExamPortion
   element: null
   weighting: null
 
-  constructor: (exam, info, scoreElement) ->
-    @exam = exam
+  constructor: (@exam, info, scoreElement) ->
     id = info.attr("exam_portion_id")
     cell = scoreElement
     @element = scoreElement.find("#exam_portion_score_score")
@@ -27,8 +26,7 @@ class Exam
   gradeElement: null
   rankElement: null
 
-  constructor: (id) ->
-    @id = id
+  constructor: (@id) ->
     @portions = []
 
   CalculateTotal: () ->
@@ -41,16 +39,13 @@ class Exam
   CalculateWeightedScore: () ->
 
 
-  SetTotalTarget: (targetElement) ->
-    @totalElement = targetElement
-  SetWeightedTarget: (targetElement) ->
-    @weightedElement = targetElement
+  SetTotalTarget: (@totalElement) ->
+    @totalElement.html("--")
+  SetWeightedTarget: (@weightedElement) ->
     @weightedElement.html("--")
-  SetGradeTarget: (targetElement) ->
-    @gradeElement = targetElement
+  SetGradeTarget: (@gradeElement) ->
     @gradeElement.html("--")
-  SetRankTarget: (targetElement) ->
-    @rankElement = targetElement
+  SetRankTarget: (@rankElement) ->
     @rankElement.html("--")
 
   AddScoreElement: (info, scoreElement) ->

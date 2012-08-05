@@ -19,11 +19,23 @@
           - if i < @exam.exam_portions.size - 1
             - total += portion.weight
             td
-              = form_for @exam, :remote => true do |exam_form|
-                = exam_form.fields_for :exam_portions, portion, :remote => true do |portion_form|
-                  = portion_form.number_field :weight, :class => "span12 form_blur_event",:min => "0"
-                  = portion_form.hidden_field :id, :value => portion.id
-        td.vm = total
+              = form_for @exam, :remote => true do |f|
+                = f.fields_for :exam_portions, portion, :remote => true do |pf|
+                  = pf.number_field :weight, :class => "span12 form_blur_event",:min => "0"
+                  = pf.hidden_field :id, :value => portion.id
+        td#weight-total.vm = total
 coffee:
+  setTotalWeight = ->
+    weights = $(".form_blur_event")
+    i = 0
+    total = 0
+    while i < weights.length
+      total += parseFloat(weights[i].value)
+      i++
+    $("#weight-total").text(total)
+    
   $(".form_blur_event").blur (e) ->
     $(e.target).closest("form").submit()
+  $("form").live "ajax:success", (event, data, status, xhr) ->
+    #console.log "success"
+    setTotalWeight()
