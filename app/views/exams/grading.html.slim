@@ -14,6 +14,8 @@
         th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
           th.btn-success colspan="#{exam.exam_portions.count + 4}" = exam.name
+        - if defined? @grades
+          th.btn-inverse colspan="4" =t('grades.combined')
       tr
         th.btn-info =t("class")
         th.btn-info =t("class_group_enrollments.seat_number")
@@ -25,6 +27,12 @@
           th#weighting_total_title.btn-inverse = t("grades.weighting_total")
           th#grade_title.btn-inverse = t("grades.grade")
           th#rank_title.btn-inverse = t("grades.rank")
+        - if defined? @grades
+          th#total_points_title.btn-inverse = t("grades.total_points")
+          th#weighting_total_title.btn-inverse = t("grades.weighting_total")
+          th#grade_title.btn-inverse = t("grades.grade")
+          th#rank_title.btn-inverse = t("grades.rank")
+
     tbody
       - @students.each do |student|
         tr.data_row

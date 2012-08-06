@@ -123,6 +123,7 @@ ja:
     class_groups: "クラス[組]"
     current_enrollment: 
   grades:
+    combined: "全試験総合"
     grading: "採点"
     weighting: "加重する"
     weighting_total: "加重総合"

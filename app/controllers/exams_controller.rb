@@ -49,6 +49,8 @@ class ExamsController < ApplicationController
       @exams = Exam.find_all_by_id(params[:id])
     else
       @exams = @course.syllabus.exams.all
+      #TODO calculate all grades and put them in here
+      @grades = 1
     end
 
     @students.each do |student|
