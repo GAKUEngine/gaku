@@ -35,7 +35,6 @@ class Exam
     for portion in @portions
       @total += parseFloat(portion.element.val())
 
-
     @totalElement.html(@total)
     @CalculateWeightedScore()
 
@@ -44,12 +43,9 @@ class Exam
     for portion in @portions
       @weightedScore += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
 
-    alert @weightedScore
     @weightedElement.html(@weightedScore)
 
   CalculateGrade: () ->
-    console.log average_score
-    base_score
 
   SetTotalTarget: (@totalElement) ->
     @totalElement.html("--")
@@ -169,6 +165,7 @@ class StudentScoreSet
     count = 0
     for exam in @exams
       exam.CalculateTotal()
+      exam.CalculateWeightedScore()
 
 class ExamInfo
   id: 0
@@ -209,6 +206,7 @@ class ExamInfoManager
     @exams.push(new ExamInfo(id, name))
 
   CalculateExamTotals: (scoreSets) ->
+    console.log scoreSets
     for exam in @exams
       exam.Clear()
 
@@ -223,7 +221,6 @@ class ExamInfoManager
       studentIdx += 1
 
   CalculateAverages: (scoreSets) ->
-      
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -297,7 +294,7 @@ class ExamGradingWidget extends BuHin
   
   registerExams: () ->
     @examInfo = new ExamInfoManager()
-
+    
     #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
 
 

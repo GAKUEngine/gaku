@@ -45,7 +45,7 @@ class ExamsController < ApplicationController
   def grading
     @course = Course.find(params[:course_id])
     @students = @course.students #.select("id, surname, name")
-    if defined? params[:id]
+    if params[:id] != nil
       @exams = Exam.find_all_by_id(params[:id])
     else
       @exams = @course.syllabus.exams.all
