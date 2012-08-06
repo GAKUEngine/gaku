@@ -1,2 +1,2 @@
-$('#student_guardians table tbody').append('<%= escape_javascript(render :partial => "students/guardians/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @student.guardians.last}) %>');
+$('.guardians_list').append('<%= escape_javascript(render :partial => "show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @student.guardians.last}) %>');
 $('.guardians_count').html('<%= @student.guardians.count%>');
