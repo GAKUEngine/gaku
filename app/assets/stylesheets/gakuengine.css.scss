@@ -71,6 +71,17 @@ input.form_blur_event {
   margin-bottom: 0px; 
 }
 
+th.vm {
+  vertical-align: middle;
+}
+th.vm-tc {
+  vertical-align: middle;
+  text-align: center;
+}
+th.vm-tr {
+  vertical-align: middle;
+  text-align: right;
+}
 td.vm {
   vertical-align: middle;
 }
@@ -78,12 +89,9 @@ td.vm-tc {
   vertical-align: middle;
   text-align: center;
 }
-th.vm {
+td.vm-tr {
   vertical-align: middle;
-}
-th.vm-tc {
-  vertical-align: middle;
-  text-align: center;
+  text-align: right;
 }
 
 //bootstrap fix ----------
