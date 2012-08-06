@@ -16,16 +16,15 @@ describe 'Note' do
 
     wait_until { page.has_content?('New Note') } 
   
-    fill_in "student_notes_attributes_0_title", :with => "The note title"
-    fill_in "student_notes_attributes_0_content", :with => "The note content"
+    fill_in "note_title", :with => "The note title"
+    fill_in "note_content", :with => "The note content"
 
     click_button "Save note"
 
-    @student.notes.size.should == 1
     page.should have_selector('a', href: "/students/1/notes/1/edit")
-
     page.should have_content("The note title")
     page.should have_content("The note content")
+    @student.notes.size.should == 1
 
   end
 
