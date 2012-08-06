@@ -4,7 +4,7 @@ class StudentAddress < ActiveRecord::Base
 
   attr_accessible :student_id, :address_id, :is_primary
 
-  before_save :ensure_primary_first
+  before_save :ensure_primary_first, :on => :create
 
   def ensure_primary_first
   	if self.student.addresses.blank?

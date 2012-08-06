@@ -155,8 +155,7 @@ class StudentsController < ApplicationController
       @notes = Note.all
       @class_groups = ClassGroup.all
       
-      student_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
-      @primary_address_id = !student_address.blank? ? student_address.address.id : nil
+      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 
 end
