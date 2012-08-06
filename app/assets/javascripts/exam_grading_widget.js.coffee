@@ -169,9 +169,11 @@ class StudentScoreSet
 class ExamInfo
   id: 0
   name: null
-  average: 0
+  totalScoreAverage: 0
+  totalWeightedScoreAverage: 0
   totalScore: 0
   totalWeightedScore: 0
+  baseDeviation: 0
   numStudents: 0
 
   constructor: (@id, @name) ->
@@ -228,10 +230,45 @@ class ExamInfoManager
   CalculateAverages: () ->
     i = 0
     while i < @exams.length
-      $(".total_row > #total_points").text(@exams[i].totalScore / (@exams.length + 1))
-      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScore / (@exams.length + 1))
+      @exams[i].totalScoreAverage = @exams[i].totalScore / (@exams.length + 1)
+      @exams[i].totalWeightedScoreAverage = @exams[i].totalWeightedScore / (@exams.length + 1)
+      $(".total_row > #total_points").text(@exams[i].totalScoreAverage)
+      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScoreAverage)
       i++
+      
+  CalculateBaseDeviation: (scoreSets) ->
+    baseDeviation = 0
+    
+    studentIdx = 0
+    for set in scoreSets
+      examIdx = 0
+      for exam in @exams
+        baseDeviation += Math.pow((set.exams[examIdx].weightedScore - exam.totalWeightedScoreAverage), 2)
+        if examIdx == @exams.length - 1 && studentIdx == scoreSets.length - 1
+          baseDeviation = Math.sqrt(baseDeviation / scoreSets.length)
+          @exams[examIdx].baseDeviation = baseDeviation
+        examIdx++
+      studentIdx++
+      
+  CalculateStudentScores: (scoreSets) ->
+    for set in scoreSets
+      examIdx = 0
+      for exam in @exams
+        deviationTarget = $(set.rowElement).find("#deviation")
+        $(deviationTarget).text(@CalculateDeviation(set.exams[examIdx].weightedScore, exam.totalWeightedScoreAverage, exam.baseDeviation))
+        examIdx++
 
+  CalculateDeviation: (score, average, baseDeviation) ->
+    deviation = 0;
+    val = (score - average) / baseDeviation
+    
+    if isNaN(val)
+      deviation = 0 * 10 + 50
+    else
+      deviation = val * 10 + 50
+    
+    return deviation
+    
 class ExamGradingWidget extends BuHin
   controlBar:
     element: null
@@ -326,6 +363,8 @@ class ExamGradingWidget extends BuHin
     @registerExams()
     @registerRows()
     @examInfoManager.CalculateExamTotals(@scoreSets)
+    @examInfoManager.CalculateBaseDeviation(@scoreSets)
+    @examInfoManager.CalculateStudentScores(@scoreSets)
 
     #@createControlBar()
     #@target.append(@controlBar)
