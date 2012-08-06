@@ -34,15 +34,4 @@ describe 'Courses' do
     end
   end
 
-  context "enroll class group" do
-     it "should have link for showing form with right class" do
-      visit course_path(@course)
-      page.should have_css('a.show_class_enroll_form') 
-    end
-
-    it "should have form for enroll class group to course" do
-      visit course_path(@course)
-      page.should have_css('form.add_class_group_to_course') 
-    end
-  end
 end
