@@ -1,5 +1,4 @@
-= form_for @student, :url => create_guardian_students_path(:id => @student), :html => {:id => 'new_student_guardian'}, :remote => true do |f|
-  =f.fields_for :guardians do |guardian_form| 
+= form_for [@student, @guardian], :html => {:id => 'new_student_guardian'}, :remote => true do |guardian_form|
     - if guardian_form.object.new_record?
       .row-fluid.mt-l
         .span12.well
@@ -25,7 +24,7 @@
                 = guardian_form.text_field :relationship, :class => "span12"
           .row-fluid
             .span8
-              = f.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+              = guardian_form.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
             =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn", :style => "min-height:0px"
 
 coffee:
