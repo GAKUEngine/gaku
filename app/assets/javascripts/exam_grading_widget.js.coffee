@@ -325,7 +325,6 @@ class ExamGradingWidget extends BuHin
 
     @registerExams()
     @registerRows()
-    console.log @scoreSets
     @examInfoManager.CalculateExamTotals(@scoreSets)
 
     #@createControlBar()

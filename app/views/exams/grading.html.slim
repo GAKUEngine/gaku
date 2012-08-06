@@ -21,16 +21,16 @@
         th.btn-info =t("students.name")
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
-            th.btn-warning = portion.name << "：" << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
+            th.btn-warning = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
           th#total_points_title.btn-inverse = t("grades.total_points")
           th#weighting_total_title.btn-inverse = t("grades.weighting_total")
           th#grade_title.btn-inverse = t("grades.grade")
           th#rank_title.btn-inverse = t("grades.rank")
         - if defined? @grades
-          th#total_points_title.btn-inverse = t("grades.total_points")
-          th#weighting_total_title.btn-inverse = t("grades.weighting_total")
-          th#grade_title.btn-inverse = t("grades.grade")
-          th#rank_title.btn-inverse = t("grades.rank")
+          th#total_points_title.btn-inverse style="width:1px" = t("grades.total_points")
+          th#weighting_total_title.btn-inverse style="width:1px" = t("grades.weighting_total")
+          th#grade_title.btn-inverse style="width:1px" = t("grades.grade")
+          th#rank_title.btn-inverse style="width:1px" = t("grades.rank")
 
     tbody
       - @students.each do |student|
@@ -50,21 +50,21 @@
               - model_class = model.class
               td#score
                 = form_for [model], :remote => true do |f|
-                  = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell", "data-prompt-position" => "bottomRight:5"
+                  = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell", "data-prompt-position" => "bottomRight:5"
                   #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
                   - if model.new_record?
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
-            td#total_points.vm*{'exam_id' => exam.id}
-            td#weighted_score.weighted_scores.vm*{'exam_id' => exam.id}
-            td#grade.vm*{'exam_id' => exam.id}
-            td#rank.vm*{'exam_id' => exam.id}
+            td#total_points.vm-tr*{'exam_id' => exam.id}
+            td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id}
+            td#grade.vm-tr*{'exam_id' => exam.id}
+            td#rank.vm-tr*{'exam_id' => exam.id}
       tr.total_row
         td colspan="3"
         - @exams.each do |exam|
           th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
-          td#total_points.vm*{'exam_id' => exam.id}
-          td#weighted_score.weighted_scores.vm*{'exam_id' => exam.id}
+          td#total_points.vm-tr*{'exam_id' => exam.id}
+          td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id}
           td colspan="2"
 coffee:
   course_id = #{{params[:course_id]}};
