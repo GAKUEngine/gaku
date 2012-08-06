@@ -1,4 +1,7 @@
 =form_for @new_course_enrollment, :html => {:id => 'new_student_course'}, :remote => true do |f|
+  .row-fluid.control-group
+    .span12
+       b= t('courses.new')
   .row-fluid
     =f.hidden_field :student_id, :value => @student.id
   .row-fluid
@@ -12,7 +15,7 @@
 
 coffee:
   $("#guardian_cancel").click( ->
-    $("#add_course_enrollment_link").show()
+    $("#new_student_course_link").show()
     $("#add_new_student_guardian").html("")
   )
   $("#guardian_save_link").live("ajax:success", (data, status, xhr)->

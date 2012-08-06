@@ -48,17 +48,4 @@ describe StudentsController do
     end
   end
 
-  describe 'PUT create_address ' do
-    it "should create new student address with ajax" do
-      expect do  
-        xhr :put, :create_address, :id => student.id, :student => {:addresses_attributes => {0 => {"city" => "Asenovrad",
-                                                                                      "address1"   =>"Zapad",
-                                                                                      "address2"   => "Zapad2",
-                                                                                      "zipcode"    => "4230",
-                                                                                      "state_name" => "District of Columbia", 
-                                                                                      "country_id" => country.id}}}
-      end.to change(Address, :count).by(1)
-    end
-  end
-
 end

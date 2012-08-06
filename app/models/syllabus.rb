@@ -20,6 +20,8 @@ class Syllabus < ActiveRecord::Base
   attr_accessible :name, :code, :description, :credits, :exams , :exams_attributes, :assignments, :assignments_attributes
 
   accepts_nested_attributes_for :exams, :assignments
+
+  validates :name, :code, :presence => true  
 end
 
 

@@ -1,0 +1,41 @@
+.span12.well
+  /.row-fluid
+    = @exam.exam_portions
+  /.row-fluid
+    = @exam.exam_portions.size
+  .row-fluid
+    .alert.alert-warning
+      = t("exams.help.weight")
+  .row-fluid
+    - total = 0
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        - @exam.exam_portions.each_with_index do |portion, i|
+          - if i < @exam.exam_portions.size - 1
+            th.btn-warning = portion.name + t("exams.weight")
+        th.btn-inverse = t("exams.total_weight")
+      tbody
+        - @exam.exam_portions.each_with_index do |portion, i|
+          - if i < @exam.exam_portions.size - 1
+            - total += portion.weight
+            td
+              = form_for @exam, :remote => true do |f|
+                = f.fields_for :exam_portions, portion, :remote => true do |pf|
+                  = pf.number_field :weight, :class => "span12 form_blur_event",:min => "0"
+                  = pf.hidden_field :id, :value => portion.id
+        td#weight-total.vm = total
+coffee:
+  setTotalWeight = ->
+    weights = $(".form_blur_event")
+    i = 0
+    total = 0
+    while i < weights.length
+      total += parseFloat(weights[i].value)
+      i++
+    $("#weight-total").text(total)
+    
+  $(".form_blur_event").blur (e) ->
+    $(e.target).closest("form").submit()
+  $("form").live "ajax:success", (event, data, status, xhr) ->
+    #console.log "success"
+    setTotalWeight()

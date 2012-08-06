@@ -1,5 +1,16 @@
 class ExamPortionScoresController < ApplicationController
   inherit_resources
+
+   def update
+    @exam_portion_score = ExamPortionScore.find(params[:id])
+    if @exam_portion_score.update_attributes(params[:exam_portion_score])
+      respond_to do |format|
+        format.js { render :nothing => true } 
+      end
+    else
+      #render :edit
+    end
+  end
   #actions :new, :index, :create, :update, :edit, :destroy
 
  # def index

@@ -1,3 +1,4 @@
+#student_notes
 .row-fluid
     .span12
       b= t('notes.count')
@@ -9,7 +10,7 @@
     h4 =t("notes.list")
 .row-fluid
   .span12
-    table.table.table-striped.table-bordered.table-condensed.student-note-table
+    table#student-notes-table.index.table.table-striped.table-bordered.table-condensed
       thead
         tr
           th
@@ -17,12 +18,11 @@
           th =t("notes.content")
           th =t("options")
       tbody
-        =render :partial => 'student_note', :collection => @student.notes, :as => :note 
+        =render :partial => 'students/notes/show', :collection => @student.notes, :as => :note 
 hr
-#add_note_form_area
+#add_new_student_note
 .row-fluid
-  = link_to t("notes.add"), new_student_note_url(@student), :remote => true, :id => "new_student_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
-
+  = link_to t("notes.add"), new_student_note_path(@student), :remote => true, :id => "new_student_note_link", :class => "span3 btn btn-primary", :style => "min-height:0px"
 javascript:
   $(document).ready(function() {
     $(".delete_note").live('ajax:success', function(evt, data, status, xhr){

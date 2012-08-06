@@ -38,14 +38,14 @@
                   = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_class_group_enrollment_path(:class_group_id => @class_group.id), :remote => true, :class => "btn btn-primary"
               .row-fluid
                 hr
-              .row-fluid
+              .row-fluid#class_group_enrollments_list
                 ul
                   - @class_group.class_group_enrollments.each do |enrollment|
                     li = "#{enrollment.student.surname} #{enrollment.student.name}"
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'
-                  =render 'new_class_group_enrollment'
+                  //=render 'new_class_group_enrollment'
             #semesters.tab-pane
               .row-fluid
                 .pull-left
@@ -82,6 +82,8 @@
       .span12.well
         = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :style => "min-height:0px"
         = link_to t("Back"), class_groups_path, :class => "span6 btn", :style => "min-height:0px"
+
+#modal_dialogs
 
 javascript:
   $(document).ready(function() {
