@@ -1,0 +1,21 @@
+=form_for([@student, @new_contact], :remote => true, :html => {:class => 'new_student_contact_form'}) do |f|
+  .row-fluid 
+    .span12
+      b= t('contacts.new') 
+  .row-fluid
+		=f.label :is_primary, t('contacts.primary')
+		=f.check_box :is_primary
+  .row-fluid
+		=f.label :contact_type
+		=f.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, :prompt => "Choose Contact Type"
+  .row-fluid
+		=f.label :data
+		=f.text_field :data
+  .row-fluid
+		=f.label :details
+		=f.text_field :details
+  .row-fluid
+		=f.label :is_emergency, t('contacts.emergency')
+		=f.check_box :is_emergency
+  .row-fluid
+		=f.submit t('contacts.save'), :class => 'btn btn-primary'

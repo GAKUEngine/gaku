@@ -1,0 +1,13 @@
+fieldset
+  .row-fluid
+    .span12.control-group
+      = f.label :name, t("contact_types.name"), :class => "control-label"
+      .controls
+        = f.text_field :name, :class => "span12"
+  .row-fluid
+    = f.fields_for :contacts do |builder|
+      = render 'contact_fields', f: builder
+    = link_to_add_fields t("contacts.add"), f, :contacts
+  .row-fluid
+    .span12
+      hr

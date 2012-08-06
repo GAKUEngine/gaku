@@ -1,0 +1,16 @@
+.row-fluid
+  table.table.table-striped.table-bordered.table-condensed.student_contact_table
+    thead
+      tr
+        th.btn-inverse =t('contact_type')
+        th.btn-inverse =t('contacts.data')
+        th.btn-inverse =t('contacts.details')
+        th.btn-inverse =t('contacts.primary')
+        th.btn-inverse =t('contacts.emergency')
+        th.btn-inverse =t('contacts.actions')
+    tbody
+      =render :partial => 'students/contacts/show', :collection => @student.contacts, :as => 'contact'
+  br/ 
+  #add_new_student_contact
+    =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new_student_contact_link'
+  =render 'students/contacts/new_student_contact_form'

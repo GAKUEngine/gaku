@@ -1,0 +1,13 @@
+fieldset
+  .row-fluid
+    .span6.control-group
+      = f.label :data, t("contacts.data"), :class => "control-label"
+      .controls
+        = f.text_field :data, :class => "span12"
+    .span6.control-group
+      = f.label :details, t("contacts.details"), :class => "control-label"
+      .controls
+        = f.text_field :details, :class => "span12"
+  .row-fluid
+    .span12
+      hr

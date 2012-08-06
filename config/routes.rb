@@ -49,8 +49,7 @@ GAKUEngine::Application.routes.draw do
     resources :notes, :controller => 'students/notes'
     resources :exams
     resources :courses
-    resources :contacts
-    resources :contacts do
+    resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member
     end
 
