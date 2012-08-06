@@ -28,7 +28,6 @@ class Exam < ActiveRecord::Base
   validates :name, :presence => true
   validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
 
-
   after_create :build_default_exam_portion
 
   def max_score

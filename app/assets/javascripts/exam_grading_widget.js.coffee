@@ -17,7 +17,6 @@ class ExamPortion
       @exam.CalculateTotal()
     )
     
-
 class Exam
   id: null
   portions: null
@@ -25,19 +24,28 @@ class Exam
   weightedElement: null
   gradeElement: null
   rankElement: null
+  total: 0
+  weightedScore: 0
 
   constructor: (@id) ->
     @portions = []
 
   CalculateTotal: () ->
-    total = 0
+    @total = 0
     for portion in @portions
-      total += parseFloat(portion.element.val())
-      
-    @totalElement.html(total)
+      @total += parseFloat(portion.element.val())
+
+    @totalElement.html(@total)
+    @CalculateWeightedScore()
 
   CalculateWeightedScore: () ->
+    @weightedScore = 0
+    for portion in @portions
+      @weightedScore += parseFloat(portion.element.val()) * (parseFloat(portion.element.attr("weight")) / 100)
 
+    @weightedElement.html(@weightedScore)
+
+  CalculateGrade: () ->
 
   SetTotalTarget: (@totalElement) ->
     @totalElement.html("--")
@@ -156,8 +164,73 @@ class StudentScoreSet
   CalculateTotals: () ->
     for exam in @exams
       exam.CalculateTotal()
+      exam.CalculateWeightedScore()
 
-  
+class ExamInfo
+  id: 0
+  name: null
+  average: 0
+  totalScore: 0
+  totalWeightedScore: 0
+  numStudents: 0
+
+  constructor: (@id, @name) ->
+    @Clear()
+
+  CalculateAverage: (scoreSet) ->
+    # weighted_scores = $(".weighted_scores")
+    # i = 0
+    # while i < weighted_scores.length
+    #   calculate_value += parseFloat($(weighted_scores[i]).text())
+    #   i++
+    # 
+    # average_score = calculate_value / weighted_scores.length
+    # console.log average_score
+
+  Clear: () ->
+    @average = 0
+    @totalScore = 0
+    @numStudents = 0
+
+  AddTotalScore: (score) ->
+    @totalScore += score
+    @numStudents += 1
+
+  AddWeightedScore: (score) ->
+    @totalWeightedScore += score
+
+class ExamInfoManager
+  exams: null
+
+  constructor: () ->
+    @exams = []
+
+  AddExamInfo: (id, name) ->
+    @exams.push(new ExamInfo(id, name))
+
+  CalculateExamTotals: (scoreSets) ->
+    for exam in @exams
+      exam.Clear()
+    
+    #ここに各試験の合計点を割り出す
+    studentIdx = 0
+    for set in scoreSets
+      examIdx = 0
+      for exam in @exams
+        #ここにexamごとのコレクションを作って合計を計算して貰う
+        @exams[examIdx].AddTotalScore(set.exams[examIdx].total)
+        @exams[examIdx].AddWeightedScore(set.exams[examIdx].weightedScore)
+        examIdx += 1
+      studentIdx += 1
+    
+    @CalculateAverages()    
+
+  CalculateAverages: () ->
+    i = 0
+    while i < @exams.length
+      $(".total_row > #total_points").text(@exams[i].totalScore / (@exams.length + 1))
+      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScore / (@exams.length + 1))
+      i++
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -166,7 +239,8 @@ class ExamGradingWidget extends BuHin
 
   rows: null
   scoreSets: null
-
+  examInfo: null
+  
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
   #    newGroup.attr("id", id)
@@ -227,8 +301,17 @@ class ExamGradingWidget extends BuHin
   #
   #    @controlBar.element.appendTo(@target)
   #    return @controlBar
-  
-  registerRows: (cellIdentifier) ->
+
+  registerExams: () ->
+    @examInfoManager = new ExamInfoManager()
+    #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
+    exam_infos = $(".exam_infos")
+    i = 0
+    while i < exam_infos.length
+      @examInfoManager.AddExamInfo(i + 1, exam_infos[i].textContent)
+      i++
+      
+  registerRows: () ->
     @scoreSets = []
     @rows = @target.find(".data_row")
     for row in @rows
@@ -240,7 +323,10 @@ class ExamGradingWidget extends BuHin
     if @target == null
       return
 
+    @registerExams()
     @registerRows()
+    console.log @scoreSets
+    @examInfoManager.CalculateExamTotals(@scoreSets)
 
     #@createControlBar()
     #@target.append(@controlBar)
