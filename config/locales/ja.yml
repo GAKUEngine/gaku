@@ -128,6 +128,7 @@ ja:
     weighting: "加重する"
     weighting_total: "加重総合"
     weighting_portion: "加重率"
+    average: "平均"
     average_points: "平均点数"
     average_score: "平均評価"
     total_points: "総合点数"

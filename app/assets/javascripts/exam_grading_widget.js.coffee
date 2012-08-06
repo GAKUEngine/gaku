@@ -162,7 +162,6 @@ class StudentScoreSet
     @exams.push(exam)
 
   CalculateTotals: () ->
-    count = 0
     for exam in @exams
       exam.CalculateTotal()
       exam.CalculateWeightedScore()
@@ -172,6 +171,7 @@ class ExamInfo
   name: null
   average: 0
   totalScore: 0
+  totalWeightedScore: 0
   numStudents: 0
 
   constructor: (@id, @name) ->
@@ -192,9 +192,12 @@ class ExamInfo
     @totalScore = 0
     @numStudents = 0
 
-  AddScore: (score) ->
-    totalScore += score
-    numStudents += 1
+  AddTotalScore: (score) ->
+    @totalScore += score
+    @numStudents += 1
+
+  AddWeightedScore: (score) ->
+    @totalWeightedScore += score
 
 class ExamInfoManager
   exams: null
@@ -206,21 +209,28 @@ class ExamInfoManager
     @exams.push(new ExamInfo(id, name))
 
   CalculateExamTotals: (scoreSets) ->
-    console.log scoreSets
     for exam in @exams
       exam.Clear()
-
+    
     #ここに各試験の合計点を割り出す
     studentIdx = 0
     for set in scoreSets
       examIdx = 0
       for exam in @exams
         #ここにexamごとのコレクションを作って合計を計算して貰う
-        @exams.exam[examIdx].AddScore(set.exams[examIdx].total)
+        @exams[examIdx].AddTotalScore(set.exams[examIdx].total)
+        @exams[examIdx].AddWeightedScore(set.exams[examIdx].weightedScore)
         examIdx += 1
       studentIdx += 1
+    
+    @CalculateAverages()    
 
-  CalculateAverages: (scoreSets) ->
+  CalculateAverages: () ->
+    i = 0
+    while i < @exams.length
+      $(".total_row > #total_points").text(@exams[i].totalScore / (@exams.length + 1))
+      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScore / (@exams.length + 1))
+      i++
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -230,7 +240,7 @@ class ExamGradingWidget extends BuHin
   rows: null
   scoreSets: null
   examInfo: null
-
+  
   #  _addButtonGroup: (target, id, title, iconClasses) ->
   #    newGroup = $("<div></div>")
   #    newGroup.attr("id", id)
@@ -291,13 +301,16 @@ class ExamGradingWidget extends BuHin
   #
   #    @controlBar.element.appendTo(@target)
   #    return @controlBar
-  
+
   registerExams: () ->
-    @examInfo = new ExamInfoManager()
-    
+    @examInfoManager = new ExamInfoManager()
     #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
-
-
+    exam_infos = $(".exam_infos")
+    i = 0
+    while i < exam_infos.length
+      @examInfoManager.AddExamInfo(i + 1, exam_infos[i].textContent)
+      i++
+      
   registerRows: () ->
     @scoreSets = []
     @rows = @target.find(".data_row")
@@ -312,8 +325,8 @@ class ExamGradingWidget extends BuHin
 
     @registerExams()
     @registerRows()
-    @examInfo.CalculateExamTotals()
-    @examInfo.CalculateAverages()
+    console.log @scoreSets
+    @examInfoManager.CalculateExamTotals(@scoreSets)
 
     #@createControlBar()
     #@target.append(@controlBar)
