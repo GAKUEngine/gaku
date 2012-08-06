@@ -3,8 +3,7 @@
 .row-fluid
   h3 
     - @exams.each do |exam|
-      = exam.name << " "
-    =t("grades.grading")
+      = exam.name + " " + t("grades.grading")
 .row-fluid
   hr
 .row-fluid
@@ -13,7 +12,7 @@
       tr
         th.btn-primary colspan="3" =t('student')
         - @exams.each do |exam|
-          th.btn-success colspan="#{exam.exam_portions.count + 4}" = exam.name
+          th.exam_infos.btn-success colspan="#{exam.exam_portions.count + 4}" = exam.name
       tr
         th.btn-info =t("class")
         th.btn-info =t("class_group_enrollments.seat_number")
@@ -52,7 +51,13 @@
             td#weighted_score.weighted_scores.vm*{'exam_id' => exam.id}
             td#grade.vm*{'exam_id' => exam.id}
             td#rank.vm*{'exam_id' => exam.id}
-
+      tr.total_row
+        td colspan="3"
+        - @exams.each do |exam|
+          th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
+          td#total_points.vm*{'exam_id' => exam.id}
+          td#weighted_score.weighted_scores.vm*{'exam_id' => exam.id}
+          td colspan="2"
 coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};

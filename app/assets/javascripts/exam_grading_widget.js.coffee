@@ -162,7 +162,6 @@ class StudentScoreSet
     @exams.push(exam)
 
   CalculateTotals: () ->
-    count = 0
     for exam in @exams
       exam.CalculateTotal()
       exam.CalculateWeightedScore()
@@ -172,6 +171,7 @@ class ExamInfo
   name: null
   average: 0
   totalScore: 0
+  totalWeightedScore: 0
   numStudents: 0
 
   constructor: (@id, @name) ->
@@ -192,9 +192,12 @@ class ExamInfo
     @totalScore = 0
     @numStudents = 0
 
-  AddScore: (score) ->
-    totalScore += score
-    numStudents += 1
+  AddTotalScore: (score) ->
+    @totalScore += score
+    @numStudents += 1
+
+  AddWeightedScore: (score) ->
+    @totalWeightedScore += score
 
 class ExamInfoManager
   exams: null
@@ -206,7 +209,6 @@ class ExamInfoManager
     @exams.push(new ExamInfo(id, name))
 
   CalculateExamTotals: (scoreSets) ->
-    console.log scoreSets
     for exam in @exams
       exam.Clear()
     
@@ -216,11 +218,19 @@ class ExamInfoManager
       examIdx = 0
       for exam in @exams
         #ここにexamごとのコレクションを作って合計を計算して貰う
-        @exams.exam[examIdx].AddScore(set.exams[examIdx].total)
+        @exams[examIdx].AddTotalScore(set.exams[examIdx].total)
+        @exams[examIdx].AddWeightedScore(set.exams[examIdx].weightedScore)
         examIdx += 1
       studentIdx += 1
+    
+    @CalculateAverages()    
 
-  CalculateAverages: (scoreSets) ->
+  CalculateAverages: () ->
+    i = 0
+    while i < @exams.length
+      $(".total_row > #total_points").text(@exams[i].totalScore / (@exams.length + 1))
+      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScore / (@exams.length + 1))
+      i++
 
 class ExamGradingWidget extends BuHin
   controlBar:
@@ -231,12 +241,76 @@ class ExamGradingWidget extends BuHin
   scoreSets: null
   examInfo: null
   
+  #  _addButtonGroup: (target, id, title, iconClasses) ->
+  #    newGroup = $("<div></div>")
+  #    newGroup.attr("id", id)
+  #    newGroup.addClass("well span4")
+  #    newGroup.icon = $("<i></i>")
+  #    newGroup.icon.addClass(iconClasses)
+  #    newGroup.append(newGroup.icon)
+  #    newGroup.append("<b>" + title + "</b><br />")
+  #    newGroup.group = $("<div></div>")
+  #    newGroup.group.addClass("btn-group last")
+  #    newGroup.group.attr("data-toggle", "buttons-radio")
+  #    newGroup.append(newGroup.group)
+  #    @buttonGroups.push(newGroup)
+  #    newGroup.appendTo(target)
+  #    return newGroup
+  #
+  #  _addButtonToGroup: (group, id, name, cb, active = false) ->
+  #    newButton = $("<button></button>")
+  #    newButton.attr("id", id)
+  #    newButton.append(name)
+  #    newButton.addClass("btn")
+  #    if active
+  #      newButton.addClass("active")
+  #
+  #    newButton.appendTo(group)
+  #    return newButton
+  #
+  #  _addButton: (target, id, name, cb) ->
+  #    newButton = $("<button></button>")
+  #    newButton.attr("id", id)
+  #    newButton.append(name)
+  #    newButton.addClass("btn")
+  #
+  #    newButton.appendTo(target)
+  #    return newButton
+  #
+  #  createControlBar: () ->
+  #    @controlBar.element = $("<div></div>")
+  #    @controlBar.element.addClass("row-fluid")
+  #    @buttonGroups = []
+  #
+  #    studentOrder = @_addButtonGroup(@controlBar.element, "student_order", "Student Order", "icon-list-alt")
+  #    @_addButtonToGroup(studentOrder.group, "seat_number", "出席番号", null, true)
+  #    @_addButtonToGroup(studentOrder.group, "exam_points", "考査得点順", null, false)
+  #    @_addButtonToGroup(studentOrder.group, "term_points", "学期得点順", null, false)
+  #
+  #    processingStatusSort = @_addButtonGroup(@controlBar.element, "processing_status_sort", "Processing Status", "icon-edit")
+  #    @_addButtonToGroup(processingStatusSort.group, "processing_all", "全件", null, true)
+  #    @_addButtonToGroup(processingStatusSort.group, "processing_unscored", "未入力", null)
+  #    @_addButtonToGroup(processingStatusSort.group, "processing_partial", "入力途中", null)
+  #    @_addButtonToGroup(processingStatusSort.group, "processing_completed", "入力完了", null)
+  #
+  #    toolbox = @_addButtonGroup(@controlBar.element, "exam_toolbox", "Tools", "icon-wrench")
+  #    @_addButton(toolbox.group, "auto_score", "AutoScore", null)
+  #    @_addButton(toolbox.group, "auto_grade", "AutoGrade", null)
+  #    @_addButton(toolbox.group, "auto_rank", "AutoRank", null)
+  #    @_addButton(toolbox.group, "view_scales", "View Scales", null)
+  #
+  #    @controlBar.element.appendTo(@target)
+  #    return @controlBar
+
   registerExams: () ->
-    @examInfo = new ExamInfoManager()
-    @examInfo.AddExamInfo(1, "tes")
+    @examInfoManager = new ExamInfoManager()
     #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
-
-
+    exam_infos = $(".exam_infos")
+    i = 0
+    while i < exam_infos.length
+      @examInfoManager.AddExamInfo(i + 1, exam_infos[i].textContent)
+      i++
+      
   registerRows: () ->
     @scoreSets = []
     @rows = @target.find(".data_row")
@@ -251,8 +325,8 @@ class ExamGradingWidget extends BuHin
 
     @registerExams()
     @registerRows()
-    @examInfo.CalculateExamTotals()
-    @examInfo.CalculateAverages()
+    console.log @scoreSets
+    @examInfoManager.CalculateExamTotals(@scoreSets)
 
     #@createControlBar()
     #@target.append(@controlBar)
