@@ -4,24 +4,22 @@
     .row-fluid
       h3.pull-left = t("class_groups.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("class_groups.new")).html_safe, new_class_group_path, :class => "btn btn-primary", :id => "new_class_group_link"
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("class_groups.new")).html_safe, new_class_group_path, :class => "btn btn-primary", :id => "new_class_group_link", :remote => true
     .row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-        table.table.table-striped.table-bordered.table-condensed
-          tr
-            th.btn-inverse = t("class_groups.grade")
-            th.btn-inverse = t("class_groups.name")
-            th.btn-inverse = t("class_groups.homeroom")
-            th.btn-info style="width:94px" = t("manage")
-          - @class_groups.each do |class_group|
+        table#class_group_index.table.table-striped.table-bordered.table-condensed
+          thead
             tr
-              td = class_group.grade
-              td = class_group.name
-              td = class_group.homeroom
-              td
-                = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, class_group , :class => "mr-xs btn btn-mini btn-success"
-                = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_class_group_path(class_group) , :class => "mr-xs btn btn-mini btn-warning"
-                = link_to ("<i class='icon-white icon-remove'></i>").html_safe, class_group, :class => "btn btn-mini btn-danger", :data => { :confirm => 'Are you sure?' }, :method => :delete
+              th.btn-inverse = t("class_groups.grade")
+              th.btn-inverse = t("class_groups.name")
+              th.btn-inverse = t("class_groups.homeroom")
+              th.btn-info style="width:94px" = t("manage")
+          tbody
+             =render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
+            
+    .row-fluid
+      #new_class_group_form style='display:none'
+        =render 'form' 
