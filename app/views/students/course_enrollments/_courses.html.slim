@@ -17,15 +17,12 @@
             th =t("courses.code")
             th =t("options")
         tbody
-          =render :partial => 'students/course', :collection => @student.courses, :as => 'course'
+          =render :partial => 'students/course_enrollments/show', :collection => @student.courses, :as => 'course'
 hr
 #add_course_enrollment
 .row_fluid
-  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :id => "new_student_course_link", :class => "span3 btn btn-primary new_student_guardian", :remote => true
+  = link_to t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new_student_course_link", :class => "span3 btn btn-primary new_student_course", :remote => true
 hr
-div id="student_course_form" style="display:none;"
-  =render 'new_course'
-
 
 coffee:
   $("#new_student_course_link").click( ->
