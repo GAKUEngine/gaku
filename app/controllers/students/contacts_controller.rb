@@ -1,0 +1,56 @@
+class Students::ContactsController < ApplicationController
+
+  inherit_resources
+
+  actions :index, :show, :new, :create, :update, :edit, :destroy
+
+  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+
+
+  def create
+    super do |format|
+      @contact.make_primary_student if params[:contact][:is_primary] == "1"
+      if @contact.save && @student.contacts << @contact
+        format.js {render 'student_contact'}
+      else
+        render :nothing => true
+      end
+    end
+  end
+
+  def edit
+    super do |format|
+      format.js {render 'edit'}  
+    end  
+  end
+
+  def update
+    super do |format|
+      format.js { render 'update' }  
+    end  
+  end
+
+  def destroy
+    super do |format|
+      format.js { render :nothing => true }
+    end
+  end 
+
+  def make_primary
+    @contact = Contact.find(params[:id])
+    if params[:guardian_id]
+      #handle guardian contact make primary
+    else
+      #handle student contact make primary
+      @contact.make_primary_student
+      respond_with(@contact) do |format|
+        format.js {render 'student_make_primary'}
+      end
+    end
+  end
+
+  private 
+    def load_student
+      @student = Student.find(params[:student_id])
+    end
+end

@@ -1,0 +1,15 @@
+tr id="contact_#{contact.id}" class="student_contact"
+  td=contact.contact_type.name if contact.contact_type
+  td=contact.data
+  td=contact.details
+  td class='primary_contact'
+    ="Primary" if contact.is_primary?
+  td
+    ="Emergency" if contact.is_emergency?
+  td class="primary_button"
+    -if contact.is_primary?
+      =link_to t('contacts.make_primary'), make_primary_student_contact_path(@student, contact), :data => {:confirm => 'are you sure?'}, :class => 'btn btn-primary', :remote => true, :method => :post
+    -else
+      = link_to t('contacts.make_primary'), make_primary_student_contact_path(@student, contact), :data => {:confirm => 'are you sure?'}, :class => 'btn', :remote => true, :method => :post
+    = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_contact_path(@student, contact), :remote => true, :class => "mr-xs btn btn-mini btn-warning"
+    = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_contact_path(@student, contact), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_address', :remote => true

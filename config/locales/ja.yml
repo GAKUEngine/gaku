@@ -123,10 +123,12 @@ ja:
     class_groups: "クラス[組]"
     current_enrollment: 
   grades:
+    combined: "全試験総合"
     grading: "採点"
     weighting: "加重する"
     weighting_total: "加重総合"
     weighting_portion: "加重率"
+    average: "平均"
     average_points: "平均点数"
     average_score: "平均評価"
     total_points: "総合点数"
@@ -136,6 +138,7 @@ ja:
     rank: "ランク"
     grade: "評価"
     total: "合計"
+    all_exams: "全試験採点表"
   assignments:
     list: "課題一覧"
     plural: "課題"

@@ -1,31 +1,32 @@
 class Students::NotesController < ApplicationController
+  
+  inherit_resources
+
+  actions :index, :show, :new, :create, :update, :edit, :destroy
 
   before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
   def new
-    @student.notes.build
+    @note = Note.new
     render 'students/notes/new'  
   end
   
   def edit
-    @note = Note.find(params[:id])
-    respond_to do |format|
+    super do |format|
       format.js {render 'edit'}  
     end  
   end
 
   def create
-    if @student.update_attributes(params[:student])
-      respond_to do |format|
-        format.js { render 'students/notes/create' }  
+    super do |format|
+      if @student.notes << @note
+        format.js { render 'create' }  
       end
     end  
   end
   
   def update
-    @note = Note.find(params[:id])
-    respond_to do |format|
-      # Find student/show note row to update it
+    super do |format|
       format.js { render 'update' }  
     end  
   end
