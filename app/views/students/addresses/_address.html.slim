@@ -1,4 +1,8 @@
-
+td class='primary_address'
+      -if address.check_primary?(@student)
+        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :class => 'span12 btn btn-mini btn-primary make_primary_address', :style => "min-height:0px", :method => :post
+      -else
+        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :class => 'span12 btn btn-mini make_primary_address', :style => "min-height:0px", :method => :post
 td= address.title
 td= address.country
 td= address.zipcode

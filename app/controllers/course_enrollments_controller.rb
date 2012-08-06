@@ -16,10 +16,12 @@ class CourseEnrollmentsController < ApplicationController
   def enroll_student
  		@course_enrollment = CourseEnrollment.new(params[:course_enrollment])
  		# handle not saving course enrollment
- 		if @course_enrollment.save!
+ 		if @course_enrollment.save
  			respond_to do |format|
  				format.js { render 'enroll_student' }
  			end
+    else 
+      flash[:error] = "Student already enrolled"
  		end
   end
 

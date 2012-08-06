@@ -5,7 +5,7 @@
     #add_student_enrollment_link
       = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_course_enrollment_path(:course_id => @course.id), :id => "add_student_enrollment", :class => "btn btn-primary", :remote => true
     #add_class_group_enrollment_link
-      =link_to ("<i class='icon-white icon-plus'></i> #{t('courses.add_class_group')}").html_safe, "#", :class => 'show_class_enroll_form btn btn-primary'
+      =link_to ("<i class='icon-white icon-plus'></i> #{t('courses.add_class_group')}").html_safe, "#", :class => 'show_class_enroll_form btn btn-primary', :id => 'add_class_group_enrollment'
 .row-fluid
   .span12
     hr
@@ -39,6 +39,7 @@
   #add_class_group_enrollment_form style='display:none' 
     =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course'} do |f|
       .fields  
+        b Choose Class Group
         =f.label :class_group
         =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
       .actions
