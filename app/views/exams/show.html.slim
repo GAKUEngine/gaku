@@ -36,13 +36,15 @@
             hr
         .row-fluid
           div id='exam_exam_portions_form' style='display:none; margin-bottom:20px'
-            =render 'exam_portion_form'
+            =render 'exams/exam_portions/exam_portion_form'
         .row-fluid
           #exam-exam_portions
-            =render 'exam_portions'
+            =render 'exams/exam_portions/exam_portions'
         .row-fluid
           =render 'weight_check_widget'
     .row-fluid
       .span12.well        
         = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_exam_path(@exam), :class => "span9 btn btn-warning", :style => "min-height:0px"
         = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, exams_path, :class => "span3 btn btn-danger"
+
+#modal_dialogs

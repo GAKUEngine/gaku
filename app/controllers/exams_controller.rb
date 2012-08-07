@@ -24,7 +24,7 @@ class ExamsController < ApplicationController
   def create_exam_portion
     if @exam.update_attributes(params[:exam])
       respond_to do |format|
-        format.js {render 'create_exam_portion'}
+        format.js {render 'exams/exam_portions/create_exam_portion'}
       end
     end    
   end
