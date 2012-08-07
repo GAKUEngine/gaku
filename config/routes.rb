@@ -54,6 +54,7 @@ GAKUEngine::Application.routes.draw do
     end
 
     resources :course_enrollments, :controller => 'students/course_enrollments'
+    resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
 
     member do
       get :new_guardian
