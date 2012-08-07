@@ -1,0 +1,8 @@
+tr class="class_group_#{class_group.id}"
+	td = class_group.grade
+	td = class_group.name
+	td = class_group.homeroom
+	td
+	  = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, class_group , :class => "mr-xs btn btn-mini btn-success"
+	  = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_class_group_path(class_group) , :class => "mr-xs btn btn-mini btn-warning", :remote => true
+	  = link_to ("<i class='icon-white icon-remove'></i>").html_safe, class_group_path(class_group), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_class_group', :remote => true

@@ -18,8 +18,9 @@
               th.btn-inverse = t("class_groups.homeroom")
               th.btn-info style="width:94px" = t("manage")
           tbody
-             =render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
+            =render :partial => 'show', :collection => @class_groups, :as => 'class_group'
             
     .row-fluid
       #new_class_group_form style='display:none'
         =render 'form' 
+#modal_dialogs

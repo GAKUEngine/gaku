@@ -10,3 +10,7 @@ $ ->
   $('#new_class_group_link').on 'click', (event) ->
   	event.preventDefault()
   	$('#new_class_group_form').slideToggle()
+
+
+ 	$('.delete_class_group').live 'ajax:success', (evt, data, status, xhr) ->
+ 		$(this).closest('tr').remove();

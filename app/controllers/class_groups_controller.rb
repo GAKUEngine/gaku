@@ -6,16 +6,29 @@ class ClassGroupsController < ApplicationController
 
   before_filter :load_before_show, :only => :show
   before_filter :load_before_index, :only => :index
+  before_filter :load_class_group, :only => :destroy
 
   def create
     super do |format|
       format.js { render }
     end
-    
+  end
+
+  def edit
+    super do |format|
+      format.js { render}
+    end
+  end
+
+  def update
+    super do |format|
+      format.js { render}
+    end  
   end
 
   def destroy
-    destroy! :flash => !request.xhr?
+    @class_group.destroy  
+    render :nothing => true
   end
   
   private
@@ -28,6 +41,10 @@ class ClassGroupsController < ApplicationController
 
     def load_before_index
       @class_group = ClassGroup.new
+    end
+
+    def load_class_group
+      @class_group = ClassGroup.find(params[:id])
     end
 
 end
