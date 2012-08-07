@@ -179,19 +179,11 @@ class ExamInfo
   constructor: (@id, @name) ->
     @Clear()
 
-  CalculateAverage: (scoreSet) ->
-    # weighted_scores = $(".weighted_scores")
-    # i = 0
-    # while i < weighted_scores.length
-    #   calculate_value += parseFloat($(weighted_scores[i]).text())
-    #   i++
-    # 
-    # average_score = calculate_value / weighted_scores.length
-    # console.log average_score
-
   Clear: () ->
-    @average = 0
+    @totalWeightedScore = 0
+    @totalWeightedScoreAverage = 0
     @totalScore = 0
+    @totalScoreAverage = 0
     @numStudents = 0
 
   AddTotalScore: (score) ->
@@ -202,26 +194,30 @@ class ExamInfo
     @totalWeightedScore += score
 
 class ExamInfoManager
-  exams: null
-
-  constructor: () ->
-    @exams = []
-
+  examInfos: null
+  scoreSets: null
+  
+  constructor: (@scoreSets) ->
+    @examInfos = []
+    for set in @scoreSets
+      $(set.rowElement).find("#exam_portion_score_score").bind "blur", =>
+        @CalculateAny()
+      
   AddExamInfo: (id, name) ->
-    @exams.push(new ExamInfo(id, name))
+    @examInfos.push(new ExamInfo(id, name))
 
-  CalculateExamTotals: (scoreSets) ->
-    for exam in @exams
+  CalculateExamTotals: () ->
+    for exam in @examInfos
       exam.Clear()
     
     #ここに各試験の合計点を割り出す
     studentIdx = 0
-    for set in scoreSets
+    for set in @scoreSets
       examIdx = 0
-      for exam in @exams
+      for exam in @examInfos
         #ここにexamごとのコレクションを作って合計を計算して貰う
-        @exams[examIdx].AddTotalScore(set.exams[examIdx].total)
-        @exams[examIdx].AddWeightedScore(set.exams[examIdx].weightedScore)
+        @examInfos[examIdx].AddTotalScore(set.exams[examIdx].total)
+        @examInfos[examIdx].AddWeightedScore(set.exams[examIdx].weightedScore)
         examIdx += 1
       studentIdx += 1
     
@@ -229,31 +225,31 @@ class ExamInfoManager
 
   CalculateAverages: () ->
     i = 0
-    while i < @exams.length
-      @exams[i].totalScoreAverage = @exams[i].totalScore / (@exams[i].numStudents)
-      @exams[i].totalWeightedScoreAverage = @exams[i].totalWeightedScore / (@exams[i].numStudents)
-      $(".total_row > #total_points").text(@exams[i].totalScoreAverage)
-      $(".total_row > #weighted_score").text(@exams[i].totalWeightedScoreAverage)
+    while i < @examInfos.length
+      @examInfos[i].totalScoreAverage = @examInfos[i].totalScore / (@examInfos[i].numStudents)
+      @examInfos[i].totalWeightedScoreAverage = @examInfos[i].totalWeightedScore / (@examInfos[i].numStudents)
+      $(".total_row > #total_points").text(@examInfos[i].totalScoreAverage)
+      $(".total_row > #weighted_score").text(@examInfos[i].totalWeightedScoreAverage)
       i++
       
-  CalculateBaseDeviation: (scoreSets) ->
+  CalculateBaseDeviation: () ->
     baseDeviation = 0
     
     studentIdx = 0
-    for set in scoreSets
+    for set in @scoreSets
       examIdx = 0
-      for exam in @exams
+      for exam in @examInfos
         baseDeviation += Math.pow((set.exams[examIdx].weightedScore - exam.totalWeightedScoreAverage), 2)
-        if examIdx == @exams.length - 1 && studentIdx == scoreSets.length - 1
-          baseDeviation = Math.sqrt(baseDeviation / scoreSets.length)
-          @exams[examIdx].baseDeviation = baseDeviation
+        if examIdx == @examInfos.length - 1 && studentIdx == @scoreSets.length - 1
+          baseDeviation = Math.sqrt(baseDeviation / @scoreSets.length)
+          @examInfos[examIdx].baseDeviation = baseDeviation
         examIdx++
       studentIdx++
       
-  CalculateStudentScores: (scoreSets) ->
-    for set in scoreSets
+  CalculateStudentScores: () ->
+    for set in @scoreSets
       examIdx = 0
-      for exam in @exams
+      for exam in @examInfos
         deviationTarget = $(set.rowElement).find("#deviation")
         $(deviationTarget).text(@CalculateDeviation(set.exams[examIdx].weightedScore, exam.totalWeightedScoreAverage, exam.baseDeviation))
         examIdx++
@@ -261,14 +257,18 @@ class ExamInfoManager
   CalculateDeviation: (score, average, baseDeviation) ->
     deviation = 0;
     val = (score - average) / baseDeviation
-    
     if isNaN(val)
       deviation = 50
     else
       deviation = val * 10 + 50
     
     return deviation
-    
+  
+  CalculateAny: () ->
+    @CalculateExamTotals()
+    @CalculateBaseDeviation()
+    @CalculateStudentScores()
+            
 class ExamGradingWidget extends BuHin
   controlBar:
     element: null
@@ -340,7 +340,7 @@ class ExamGradingWidget extends BuHin
   #    return @controlBar
 
   registerExams: () ->
-    @examInfoManager = new ExamInfoManager()
+    @examInfoManager = new ExamInfoManager(@scoreSets)
     #ここで各試験の情報をテーブルから取得し@examInfo.AddExamInfo(id, name)で追加
     exam_infos = $(".exam_infos")
     i = 0
@@ -360,11 +360,9 @@ class ExamGradingWidget extends BuHin
     if @target == null
       return
 
-    @registerExams()
     @registerRows()
-    @examInfoManager.CalculateExamTotals(@scoreSets)
-    @examInfoManager.CalculateBaseDeviation(@scoreSets)
-    @examInfoManager.CalculateStudentScores(@scoreSets)
+    @registerExams()
+    @examInfoManager.CalculateAny()    
 
     #@createControlBar()
     #@target.append(@controlBar)
