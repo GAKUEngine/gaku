@@ -18,7 +18,7 @@ $ ->
 
 deleteLink= $(".delete_link")
 deleteLink.live("ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').fadeOut();
+    $(this).closest('tr').remove();
 )
   
 deleteGuardianLink= $(".delete_guardian")

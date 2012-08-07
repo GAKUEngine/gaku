@@ -24,7 +24,6 @@ describe 'Address' do
     fill_in "address_title", :with => "John Doe main address"
     fill_in "address_zipcode", :with => "00359"
     fill_in "address_address2", :with => "Toyota str."
-    #fill_in "student_addresses_attributes_0_state", :with => "Aichi"
 
     click_button "Save address"
 
@@ -41,5 +40,47 @@ describe 'Address' do
     #page.should have_content("Aichi")
     @student.addresses.size.should == 1
     
+  end
+
+  context "edit and delete" do 
+
+    before(:each) do 
+      @address = Factory(:address)
+      Factory(:student_address, :student => @student, :address => @address)
+      visit student_path(@student) 
+      click_link 'new_student_address_tab_link'
+      wait_until { page.has_content?('Addresses list') } 
+    end
+
+    it "should edit a student address", :js => true do 
+      click_link "edit_link" 
+      wait_until { find('#editAddressModal').visible? } 
+
+      fill_in 'address_address1', :with => 'Edited street address'
+      fill_in 'address_city', :with => 'Tokyo'
+      fill_in 'address_title', :with => 'Edited address'
+
+      click_button 'submit_button'
+      wait_until { !page.find('#editAddressModal').visible? }
+
+      page.should have_content('Edited street address')
+      page.should have_content('Tokyo')
+      page.should have_content('Edited address')
+    end
+
+    it "should delete a student address", :js => true do
+      page.all('table.index tr').size.should == 3
+      page.should have_content(@address.address1)
+      #@student.addresses.size.should == 1
+
+      click_link "delete_link" 
+      page.driver.browser.switch_to.alert.accept
+      #FIXME Make a real check, no sleep 
+      sleep 1
+      page.all('table.index tr').size.should == 2
+      @student.addresses.size.should == 0
+      page.should_not have_content(@address.address1)
+    end
+
   end
 end
