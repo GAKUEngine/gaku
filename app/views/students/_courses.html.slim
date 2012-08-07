@@ -21,21 +21,21 @@
 hr
 #add_course_enrollment
 .row_fluid
-  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :id => "add_course_enrollment_link", :class => "span3 btn btn-primary new_student_guardian", :remote => true
+  = link_to t("course_enrollments.add"), new_course_enrollment_path(:student_id => @student.id), :id => "new_student_course_link", :class => "span3 btn btn-primary new_student_guardian", :remote => true
 hr
 div id="student_course_form" style="display:none;"
   =render 'new_course'
 
 
 coffee:
-  $("#add_course_enrollment_link").click( ->
-    $("#add_course_enrollment_link").hide();
+  $("#new_student_course_link").click( ->
+    $("#new_student_course_link").hide();
     $("#student_course_form").show();
   )
 
   $("#course_enrollment_cancel").click( ->
     $("#student_course_form").hide();
-    $("#add_course_enrollment_link").show();
+    $("#new_student_course_link").show();
   )
 
   $(".delete_course_enrollment").live("ajax:success", (evt, data, status, xhr)->

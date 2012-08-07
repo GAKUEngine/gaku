@@ -1,0 +1,41 @@
+= form_for @student, :url => create_guardian_students_path(:id => @student), :html => {:id => 'new_student_guardian'}, :remote => true do |f|
+  =f.fields_for :guardians do |guardian_form| 
+    - if guardian_form.object.new_record?
+      .row-fluid.mt-l
+        .span12.well
+          .span12.well
+            .row-fluid
+              .span3
+                = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+                span.label.label-important.pull-right =t 'required'
+                = guardian_form.text_field :surname, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+              .span3
+                = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+                span.label.label-important.pull-right =t 'required'
+                = guardian_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+              .span3
+                = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+                = guardian_form.text_field :surname_reading, :class => "span12"
+              .span3
+                = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+                = guardian_form.text_field :name_reading, :class => "span12"
+            .row-fluid
+              .span12
+                = guardian_form.label :relationship, t("guardians.relationship"), :class => "control-label"
+                = guardian_form.text_field :relationship, :class => "span12"
+          .row-fluid
+            .span8
+              = f.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+            =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn", :style => "min-height:0px"
+
+coffee:
+  $("#guardian_cancel").click( ->
+    $("#add_guardian_link").show()
+    $("#add_new_student_guardian").html("")
+  )
+  $("#guardian_save_link").live("ajax:success", (data, status, xhr)->
+    #add new record to list
+    $("#add_guardian_link").show()
+    $("#add_new_student_guardian").html("")
+  )
+  $('#new_student_guardian').validationEngine();

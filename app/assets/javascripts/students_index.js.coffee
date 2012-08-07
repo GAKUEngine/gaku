@@ -13,14 +13,19 @@ class StudentGrid extends BuHin
     surname: "Surname"
     name: "Name"
     gender: "Gender"
+    class_group: "Class Group"
+    seat_number: "Seat Number"
+    addmited: "Admitted"
+    primary_address: "Primary Address"
 
   defColWidth: 128
 
   _columns: () ->
     switch $('#student_grid').data('select-mode')
       when 'multiple'
-        return [{
-                  field: "checkbox"
+        return [
+                {
+                  field: 'checkbox'
                   title: "Select"
                   encoded: false
                   width: 5
@@ -34,9 +39,27 @@ class StudentGrid extends BuHin
                   field: "gender"
                   title: I18n.t('gender')
                 },{
+                  field: "class_group_widget"
+                  title: "Class Group"
+                  groupable: true
+                },{
+                  field: "seat_number_widget"
+                  title: "Seat Number"
+                  sortable: true
+                },{
+                  field: "admitted"
+                  title: "Admitted"
+                  groupable: true
+                  sortable: true
+                },{
+                  field: "address_widget"
+                  title: "Primary Address"
+                  groupable: true
+                  sortable: true
+                },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 78
+                  width: 76
                   encoded: false
                   resizable: false
                   sortable: false
@@ -53,9 +76,27 @@ class StudentGrid extends BuHin
                   field: "gender"
                   title: I18n.t('gender')
                 },{
+                  field: "class_group_widget"
+                  title: "Class Group"
+                  groupable: true
+                },{
+                  field: "seat_number_widget"
+                  title: "Seat Number"
+                  sortable: true
+                },{
+                  field: "admitted"
+                  title: "Admitted"
+                  groupable: true
+                  sortable: true
+                },{
+                  field: "address_widget"
+                  title: "Primary Address"
+                  groupable: true
+                  sortable: true
+                },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 78
+                  width: 76
                   encoded: false
                   resizable: false
                   sortable: false
@@ -81,39 +122,39 @@ class StudentGrid extends BuHin
 
   _createCheckbox: () ->
 
-    # checkString = (check_s) ->
-    #   ths = $("#grid th")
-    #   i = 0
-    #   while i < ths.length
-    #     if $(ths[i]).text() is check_s
-    #       return i + 1
-    #       break
-    #     i++    
+    checkString = (check_s) ->
+      ths = $("#grid th")
+      i = 0
+      while i < ths.length
+        if $(ths[i]).text() is check_s
+          return i + 1
+          break
+        i++    
            
-    # checkBoxes = $("<div></div>")
-    # $.each @titles, (key, value) ->
-    #   if key != "manage"
-    #     checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
-    #     .appendTo(checkBoxes)
-    # $("#table-checkboxes").html(checkBoxes.html())
+    checkBoxes = $("<div></div>")
+    $.each @titles, (key, value) ->
+      if key != "manage" and key != 'checkbox'
+        checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
+        .appendTo(checkBoxes)
+    $("#table-checkboxes").html(checkBoxes.html())
         
-    # $("#table-checkboxes .form-inline").toggle ((e) ->
-    #   num = checkString(e.currentTarget.textContent)
-    #   $(e.currentTarget).find("input").removeAttr('checked')
-    #   console.log 1
-    #   $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
-    # ),(e) ->
-    #   num = checkString(e.currentTarget.textContent)
-    #   $(e.currentTarget).find("input").attr('checked','checked')
-    #   console.log 2
-    #   $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
+    $("#table-checkboxes .form-inline").toggle ((e) ->
+      num = checkString(e.currentTarget.textContent)
+      $(e.currentTarget).find("input").removeAttr('checked')
+      console.log 1
+      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
+    ),(e) ->
+      num = checkString(e.currentTarget.textContent)
+      $(e.currentTarget).find("input").attr('checked','checked')
+      console.log 2
+      $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
 
 
   refreshGrid: (query) ->
     $.getJSON query, (studentData) =>
       if studentData == null
         return
-
+      console.log studentData
       @students = studentData
 
       i = 0
@@ -129,8 +170,7 @@ class StudentGrid extends BuHin
 
         managementButtons = $("<div></div>")
         showButton = $("<a></a>")
-          .css("margin-right","5px")
-          .addClass("btn btn-mini btn-success")
+          .addClass("mr-xs btn btn-mini btn-success")
           .attr("href", ('/students/' + @students[i].id))
           .html("<i class='icon-white icon-eye-open'></i>")
           .appendTo(managementButtons)
@@ -144,7 +184,7 @@ class StudentGrid extends BuHin
         
         # create checkbox for student row
         checkbox = $("<div></div>")
-        showButton = $("<input type='checkbox'></input>")
+        showButton = $("<input type='checkbox' class='student_check' value='" + @students[i].id + "'></input>")
           .css("margin-left","10px")
           .appendTo(checkbox)
 
@@ -152,9 +192,9 @@ class StudentGrid extends BuHin
         i++
 
         
-      # @_createCheckbox()
+      @_createCheckbox()
       @_createGrid()
-
+      console.log @titles
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
         
@@ -218,7 +258,7 @@ class StudentGrid extends BuHin
                 i++
                 
               @_createGrid()
-              # @_createCheckbox()
+              @_createCheckbox()
               # @refreshGrid
               return false
     ).data('autocomplete')._renderItem =  (ul, item)->
@@ -254,7 +294,6 @@ class StudentGrid extends BuHin
     @autocompleteRefreshGrid()
     @refreshGrid("/students.json")
     @clearSearch()
-    console.log @_columns() 
 
   ProcessOptions: (options) ->
     if options

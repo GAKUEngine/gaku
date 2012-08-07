@@ -1,6 +1,9 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table :users  do |t|
+
+      t.boolean :admin, :default => false
+      t.string :locale
       
       ## Trackable
       t.integer  :sign_in_count, :default => 0

@@ -1,4 +1,4 @@
-= form_for @syllabus, :url => create_exam_syllabus_path(:id => @syllabus), :remote => true do |f|
+= form_for @syllabus, :url => create_exam_syllabus_path(:id => @syllabus),:html => {:id => "new_syllabus_exam_form"}, :remote => true do |f|
   = f.fields_for @exam do |exam_form| 
     - if exam_form.object.new_record?
       .row-fluid
@@ -13,10 +13,10 @@
                 .row-fluid
                   .span9
                     = exam_form.label :name, t("exams.name")
-                    = exam_form.text_field :name, :class => "span12"
+                    = exam_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
                   .span3
                     = exam_form.label :weight, t("exams.weight")
-                    = exam_form.number_field :weight, :class => "span12"
+                    = exam_form.number_field :weight, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
                 .row-fluid
                   .span6
                     = exam_form.label :description, t("exams.description")
@@ -40,17 +40,17 @@
                     .row-fluid
                       .span9
                         = ep_form.label :name, t('exam_portions.name')
-                        = ep_form.text_field :name, :class => "span12"
+                        = ep_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
                       .span3
                         = ep_form.label :weight, t('exam_portions.weight')
                         = ep_form.number_field :weight, :class => "span12"
                     .row-fluid
                       .span6
                         = ep_form.label :problem_count, t('exam_portions.problem_count')
-                        = ep_form.number_field :problem_count, :class => "span12"
+                        = ep_form.number_field :problem_count, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
                       .span6
                         = ep_form.label :max_score, t('exam_portions.max_score')
-                        = ep_form.number_field :max_score, :class => "span12"
+                        = ep_form.number_field :max_score, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
                     .row-fluid
                       .span6
                         = ep_form.label :description, t('exam_portions.description')
@@ -68,3 +68,6 @@
             .row-fluid
               #submit_syllabus_exam
                 = f.submit t('exams.add'), :class => "span12 btn btn-primary"
+
+coffee:
+  $('#new_syllabus_exam_form').validationEngine();

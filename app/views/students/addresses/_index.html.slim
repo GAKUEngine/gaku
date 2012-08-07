@@ -1,0 +1,38 @@
+#student_addresses
+  .row-fluid
+    .pull-left
+      h4.h4-vm
+        = @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list')
+    .pull-right
+      =link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_address')).html_safe, new_student_address_path(@student), :class => 'new_address_student btn btn-primary', :id => 'new_student_address_link', :style => "min-height:0px", :remote => true
+  .row-fluid
+    .span12
+      hr
+  .row-fluid
+    .span12
+      table.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th.btn-inverse style="width:28px"
+              i.icon-white.icon-home
+            th.btn-inverse =t 'addresses.title'
+            th.btn-inverse =t 'addresses.country'
+            th.btn-inverse =t 'addresses.zipcode'
+            th.btn-inverse =t 'addresses.state'
+            th.btn-inverse =t 'addresses.city'
+            th.btn-inverse =t 'addresses.address1'
+            th.btn-inverse =t 'addresses.address2'
+            th.btn-info style="width:61px" =t 'manage'
+        tbody
+          =render :partial => 'students/addresses/show', :collection => @student.addresses, :as => 'address'
+
+#add_new_student_address
+
+javascript:
+  $(document).ready(function() {
+    $(".delete_address").live('ajax:success', function(evt, data, status, xhr){
+      inner_text = $('.addresses_count').text();
+      var new_value = inner_text - 1;
+      $('.addresses_count').html(new_value);
+    });
+  });

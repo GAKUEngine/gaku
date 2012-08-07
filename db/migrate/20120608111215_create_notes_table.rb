@@ -4,6 +4,8 @@ class CreateNotesTable < ActiveRecord::Migration
       t.string   :title
       t.text     :content
 
+      t.references :student
+
       t.timestamps
     end 
   end

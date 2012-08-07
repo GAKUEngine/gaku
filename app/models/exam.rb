@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: exams
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  description       :text
+#  adjustments       :text
+#  weight            :float
+#  dynamic_scoring   :boolean
+#  grading_method_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 class Exam < ActiveRecord::Base
 
   has_many :exam_scores 
@@ -12,7 +27,6 @@ class Exam < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
-
 
   after_create :build_default_exam_portion
 
@@ -37,20 +51,4 @@ class Exam < ActiveRecord::Base
 
 end
 
-
-
-# == Schema Information
-#
-# Table name: exams
-#
-#  id                :integer         not null, primary key
-#  name              :string(255)
-#  description       :text
-#  adjustments       :text
-#  weight            :float
-#  dynamic_scoring   :boolean
-#  created_at        :datetime        not null
-#  updated_at        :datetime        not null
-#  grading_method_id :integer
-#
 

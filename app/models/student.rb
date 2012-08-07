@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: students
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  surname              :string(255)
+#  name_reading         :string(255)      default("")
+#  surname_reading      :string(255)      default("")
+#  gender               :boolean
+#  phone                :string(255)
+#  email                :string(255)
+#  birth_date           :date
+#  admitted             :date
+#  graduated            :date
+#  user_id              :integer
+#  faculty_id           :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  picture_file_name    :string(255)
+#  picture_content_type :string(255)
+#  picture_file_size    :integer
+#  picture_updated_at   :datetime
+#
+
 class Student < ActiveRecord::Base
   require 'csv'
 
@@ -12,7 +37,10 @@ class Student < ActiveRecord::Base
   has_many :assignment_scores
 
   belongs_to :user
-  has_and_belongs_to_many :addresses
+
+  has_many :student_addresses
+  has_many :addresses, :through => :student_addresses
+
   has_and_belongs_to_many :guardians
   has_many :contacts
   has_many :notes
@@ -30,34 +58,25 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :notes, :allow_destroy => true
   accepts_nested_attributes_for :addresses, :allow_destroy => true
 
+  # methods for json student chooser returning
+  
+  def class_group_widget
+    cg = self.class_groups.last
+    cg.blank? ? nil : cg.name 
+  end
+
+  def seat_number_widget
+    sn = self.class_group_enrollments.last
+    sn.blank? ? nil : sn.seat_number
+  end
+
+  # need modify when primary columns is added
+  def address_widget
+    pa = self.addresses.first
+    pa.blank? ? nil : pa.city 
+  end
   
 end
 
 
-
-
-# == Schema Information
-#
-# Table name: students
-#
-#  id                   :integer         not null, primary key
-#  name                 :string(255)
-#  surname              :string(255)
-#  name_reading         :string(255)     default("")
-#  surname_reading      :string(255)     default("")
-#  gender               :boolean
-#  phone                :string(255)
-#  email                :string(255)
-#  birth_date           :date
-#  admitted             :date
-#  graduated            :date
-#  created_at           :datetime        not null
-#  updated_at           :datetime        not null
-#  user_id              :integer
-#  faculty_id           :integer
-#  picture_file_name    :string(255)
-#  picture_content_type :string(255)
-#  picture_file_size    :integer
-#  picture_updated_at   :datetime
-#
 

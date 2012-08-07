@@ -8,7 +8,6 @@ describe Faculty do
     it { should have_many(:students) } 
     it { should have_many(:class_groups) }
     it { should have_many(:courses) }
-    it { should belong_to(:profile) } 
     it { should have_many(:addresses) }
     it { should have_many(:contacts) }
   end

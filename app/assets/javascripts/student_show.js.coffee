@@ -4,7 +4,7 @@ addGuardian.live("ajax:success", (data, status, xhr)->
   addGuardian.hide()
 )
 
-addNote = $("#add_note_link")
+addNote = $("#new_student_note_link")
 addNote.live("ajax:success", (date, status, xhr)->
   $('#add_note_form_area').html(status)
   addNote.hide()
@@ -27,3 +27,10 @@ $('#add_new_student_contact').on 'click', 'a.btn', (event) ->
 	event.preventDefault()
 	$(this).hide()
 	$('.new_student_contact_form').slideDown()
+
+$('.make_primary_address').live 'ajax:success', ->
+
+  $('.make_primary_address').each ->
+     $(@).removeClass('btn-primary')
+
+  $(@).addClass('btn-primary')

@@ -12,6 +12,9 @@ class CreateStudents < ActiveRecord::Migration
       t.date     :admitted
       t.date     :graduated
 
+      t.references :user
+      t.references :faculty
+
       t.timestamps
     end
   end
