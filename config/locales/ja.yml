@@ -135,6 +135,7 @@ ja:
     max_points: "最高点数"
     max: "点満点"
     points: "点数"
+    deviation: "偏差値"
     rank: "ランク"
     grade: "評価"
     total: "合計"
