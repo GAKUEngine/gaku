@@ -263,7 +263,7 @@ class ExamInfoManager
     val = (score - average) / baseDeviation
     
     if isNaN(val)
-      deviation = 0 * 10 + 50
+      deviation = 50
     else
       deviation = val * 10 + 50
     
