@@ -27,7 +27,9 @@ class ClassGroupsController < ApplicationController
   end
 
   def destroy
-    @class_group.destroy  
+    if @class_group.destroy && !request.xhr?
+      flash[:notice] = "Class Group Destroyed"  
+    end
     render :nothing => true
   end
   
