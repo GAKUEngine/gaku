@@ -228,8 +228,8 @@ class ExamInfoManager
     while i < @examInfos.length
       @examInfos[i].totalScoreAverage = @examInfos[i].totalScore / (@examInfos[i].numStudents)
       @examInfos[i].totalWeightedScoreAverage = @examInfos[i].totalWeightedScore / (@examInfos[i].numStudents)
-      $(".total_row > #total_points").text(@examInfos[i].totalScoreAverage)
-      $(".total_row > #weighted_score").text(@examInfos[i].totalWeightedScoreAverage)
+      $(".total_row > #total_points").text(Math.floor(@examInfos[i].totalScoreAverage * 100) / 100)
+      $(".total_row > #weighted_score").text(Math.floor(@examInfos[i].totalWeightedScoreAverage * 100) / 100)
       i++
       
   CalculateBaseDeviation: () ->
@@ -262,7 +262,7 @@ class ExamInfoManager
     else
       deviation = val * 10 + 50
     
-    return deviation
+    return Math.floor(deviation)
   
   CalculateAny: () ->
     @CalculateExamTotals()
