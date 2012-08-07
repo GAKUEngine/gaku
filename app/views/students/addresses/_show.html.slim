@@ -1,7 +1,7 @@
 -unless address.nil? or address.new_record? or !address
   tr id="address_#{address.id}"
     td class='primary_address'
-      -if address.check_primary?(@student)
+      -if !@primary_address.blank? && @primary_address.address.id == address.id
         = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :class => 'span12 btn btn-mini btn-primary make_primary_address', :style => "min-height:0px", :method => :post
       -else
         = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :class => 'span12 btn btn-mini make_primary_address', :style => "min-height:0px", :method => :post
