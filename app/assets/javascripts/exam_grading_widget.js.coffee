@@ -230,8 +230,8 @@ class ExamInfoManager
   CalculateAverages: () ->
     i = 0
     while i < @exams.length
-      @exams[i].totalScoreAverage = @exams[i].totalScore / (@exams.length + 1)
-      @exams[i].totalWeightedScoreAverage = @exams[i].totalWeightedScore / (@exams.length + 1)
+      @exams[i].totalScoreAverage = @exams[i].totalScore / (@exams[i].numStudents)
+      @exams[i].totalWeightedScoreAverage = @exams[i].totalWeightedScore / (@exams[i].numStudents)
       $(".total_row > #total_points").text(@exams[i].totalScoreAverage)
       $(".total_row > #weighted_score").text(@exams[i].totalWeightedScoreAverage)
       i++
