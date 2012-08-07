@@ -1,0 +1,5 @@
+$('#course_enrollments table tbody').append('<%= escape_javascript(render :partial => "students/course_enrollments/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course => @student.courses.last}) %>');
+inner_text = $('.courses_count').text();
+var new_value = parseInt(inner_text) + 1;
+$('.courses_count').html(new_value); 
+$('#new_course_enrollment select').val('');

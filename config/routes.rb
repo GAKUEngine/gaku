@@ -53,6 +53,8 @@ GAKUEngine::Application.routes.draw do
       post :make_primary, :on => :member
     end
 
+    resources :course_enrollments, :controller => 'students/course_enrollments'
+
     member do
       get :new_guardian
     end

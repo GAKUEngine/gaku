@@ -1,4 +1,4 @@
-class Students::ContactsController < ApplicationController
+class Students::CourseEnrollmentsController < ApplicationController
 
   inherit_resources
 
@@ -6,14 +6,20 @@ class Students::ContactsController < ApplicationController
 
   before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
+  def new
+    @course_enrollment = CourseEnrollment.new
+    render 'new'  
+  end
 
   def create
     super do |format|
-      @contact.make_primary_student if params[:contact][:is_primary] == "1"
-      if @contact.save && @student.contacts << @contact
-        format.js {render 'student_contact'}
+      if @student.course_enrollments << @course_enrollment
+        format.js { render 'create' }  
+      else
+        @errors = @course_enrollment.errors
+        format.js { render 'error' }
       end
-    end
+    end  
   end
 
   def edit

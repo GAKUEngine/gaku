@@ -1,5 +1,0 @@
--unless course.nil? or course.new_record? or !course
-  tr
-    td= course.id
-    td= course.code
-    td= link_to t("delete"), course_enrollment_path(course.course_enrollments.where(:course_id => course.id, :student_id => @student.id).first.id), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'delete_link delete_course_enrollment', :remote => true
