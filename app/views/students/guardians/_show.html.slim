@@ -1,13 +1,34 @@
 -unless guardian.nil? or guardian.new_record? or !guardian
-  tr id="guardian_#{guardian.id}"
-    td= guardian.id
-    td= guardian.surname
-    td= guardian.name
-    td= guardian.surname_reading
-    td= guardian.name_reading
-    td= guardian.relationship
-    td= link_to t("show"), student_guardian_path(@student, guardian)
-    td= link_to t("edit"), edit_student_guardian_path(@student, guardian), :remote => true
-    td= link_to t("delete"), student_guardian_path(@student, guardian), :method => :delete, :data => { :confirm => 'Are you sure?'}, :class => 'delete_link delete_guardian', :remote => true
-    td= link_to t('students.add_contact'),  new_contact_student_guardian_path(@student, guardian), :remote => true,:data => {:target => '#newGuardianContanctModal', :toggle => 'modal'}  
-    / new_student_guardian_contact_path(@student, guardian), 
+  div id="guardian_#{guardian.id}" class="guardian_cell"
+    .row-fluid
+      .span12.well style="margin-bottom:0px"
+        .row-fluid
+          table.table.table-bordered.table-striped
+            tbody
+              tr
+                th width="20%" = t("guardians.name")
+                td.vm style="font-size:16pt"
+                  div
+                    ruby style="margin-right:5px"
+                      rb
+                        = guardian.surname
+                      rt
+                        = guardian.surname_reading
+                    ruby
+                      rb
+                        = guardian.name
+                      rt
+                        = guardian.name_reading
+                th = t("guardians.relationship")
+                td.vm-tc style="font-size:12pt" = guardian.relationship
+              tr
+                th = t("address")
+                td colspan="3" Guardian Address Here
+              tr
+                th = t("contact")
+                td colspan="3" Guardian Contact Here
+        .row-fluid.mt-m
+          = link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_contact')).html_safe,  new_contact_student_guardian_path(@student, guardian), :class => "span3 btn btn-primary", :style => "min-height:0px", :remote => true,:data => {:target => '#newGuardianContanctModal', :toggle => 'modal'}  
+          = link_to ("<i class='icon-white icon-eye-open'></i> " + t("Show")).html_safe, student_guardian_path(@student, guardian), :class => "span3 btn btn-success"
+          = link_to ("<i class='icon-white icon-pencil'></i> " + t("Edit")).html_safe, edit_student_guardian_path(@student, guardian), :remote => true, :class => "span3 btn btn-warning"
+          = link_to ("<i class='icon-white icon-remove'></i> " + t("Delete")).html_safe, student_guardian_path(@student, guardian), :method => :delete, :data => { :confirm => 'Are you sure?'}, :class => 'span3 btn btn-danger delete_link delete_guardian', :remote => true

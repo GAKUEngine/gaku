@@ -21,11 +21,10 @@ describe 'Contact' do
 
     click_button "Save Contact"
 
-    @student.contacts.size.should == 1
     page.should have_selector('a', href: "/students/1/contacts/1/edit")
-
     page.should have_content("The contact data")
     page.should have_content("The contact details")
+    @student.contacts.size.should == 1
 
   end
 end
