@@ -18,18 +18,16 @@ describe 'Address' do
     wait_until { page.has_content?('Country') } 
     #required
     select "Japan", :from => 'country_dropdown'
-    fill_in "student_addresses_attributes_0_city", :with => "Nagoya"
-    fill_in "student_addresses_attributes_0_address1", :with => "Subaru str."
+    fill_in "address_city", :with => "Nagoya"
+    fill_in "address_address1", :with => "Subaru str."
 
-    fill_in "student_addresses_attributes_0_title", :with => "John Doe main address"
-    fill_in "student_addresses_attributes_0_zipcode", :with => "00359"
-    fill_in "student_addresses_attributes_0_address2", :with => "Toyota str."
+    fill_in "address_title", :with => "John Doe main address"
+    fill_in "address_zipcode", :with => "00359"
+    fill_in "address_address2", :with => "Toyota str."
     #fill_in "student_addresses_attributes_0_state", :with => "Aichi"
-   
 
     click_button "Save address"
 
-    @student.addresses.size.should == 1
     page.should have_selector('a', href: "/students/1/addresses/1/edit")
 
     #required
@@ -41,6 +39,7 @@ describe 'Address' do
     page.should have_content("00359")
     page.should have_content("Toyota str.")
     #page.should have_content("Aichi")
+    @student.addresses.size.should == 1
     
   end
 end

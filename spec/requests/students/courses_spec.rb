@@ -21,9 +21,8 @@ describe 'Course' do
 
     click_button "Create enrollment"
 
-    #@student.courses.size.should == 1
-
     page.should have_content("fall2012")
+    @student.courses.size.should == 1
 
   end
 end
