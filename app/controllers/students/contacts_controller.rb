@@ -12,8 +12,6 @@ class Students::ContactsController < ApplicationController
       @contact.make_primary_student if params[:contact][:is_primary] == "1"
       if @contact.save && @student.contacts << @contact
         format.js {render 'student_contact'}
-      else
-        render :nothing => true
       end
     end
   end
