@@ -188,6 +188,7 @@ en:
      add: 
   contact: 
   contacts:
+    list: "Contacts List"
     new: "New Contact"
     save: "Save Contact"
     data: "Data"
