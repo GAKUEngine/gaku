@@ -1,4 +1,4 @@
-#= require buhin/buhin-base
+  #= require buhin/buhin-base
 
 class StudentGrid extends BuHin
   students: null
@@ -177,6 +177,7 @@ class StudentGrid extends BuHin
         editButton = $("<a></a>")
           .addClass("btn btn-mini btn-warning")
           .attr("href", ('/students/' + @students[i].id + "/edit"))
+          .attr("data-remote", "true")
           .html("<i class='icon-white icon-pencil'></i>")
           .appendTo(managementButtons)
         
@@ -243,6 +244,7 @@ class StudentGrid extends BuHin
                 editButton = $("<a></a>")
                   .addClass("btn btn-mini btn-primary")
                   .attr("href", ('/students/' + @students[i].id + "/edit"))
+                  .attr("data-remote", "true")
                   .html("<i class='icon-pencil'></i>")
                   .appendTo(managementButtons)
                 

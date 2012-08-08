@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  before_filter :load_before_index, :only => :index
   before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_before_show,  :only => :show
   before_filter :load_student,      :only => [:new_address, :create_address,
@@ -80,6 +81,19 @@ class StudentsController < ApplicationController
     render :student_import_preview
   end
 
+
+  def create
+    super do |format|
+      format.js {render}
+    end
+  end
+
+  def edit
+    super do |format|
+      format.js {render}
+    end
+  end
+
   def update
     if @student.update_attributes(params[:student])
       respond_to do |format|
@@ -88,6 +102,8 @@ class StudentsController < ApplicationController
             format.js { render 'students/addresses/create' }
           elsif !params[:student][:notes_attributes].nil?
             format.js { render 'students/notes/create' }             
+          else
+            format.js { render}
           end
         end
         format.html { redirect_to @student } 
@@ -137,6 +153,9 @@ class StudentsController < ApplicationController
   end
 
   private
+    def load_before_index
+      @student = Student.new
+    end
 
     def load_class_groups
       @class_groups = ClassGroup.all
@@ -154,7 +173,7 @@ class StudentsController < ApplicationController
       @new_course_enrollment = CourseEnrollment.new
       @notes = Note.all
       @class_groups = ClassGroup.all
-      
+
       @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 
