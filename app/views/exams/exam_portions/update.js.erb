@@ -1,0 +1,2 @@
+$('tr#exam_portion_<%= @exam_portion.id %>').html('<%= escape_javascript(render :partial => "exams/exam_portions/exam_portion", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_portion => @exam_portion}) %>');
+$("#editExamPortionModal").modal('hide')

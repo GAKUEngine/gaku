@@ -1,6 +1,0 @@
-$('#exam_exam_portions_form').slideToggle();
-$('#exam_exam_portions_form form').each (function(){
-  this.reset();
-});
-$('#exam-exam_portions table tbody').append('<%= escape_javascript(render :partial => "exam_portion", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_portion => @exam.exam_portions.last}) %>');
-

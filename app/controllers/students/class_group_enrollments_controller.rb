@@ -1,4 +1,4 @@
-class Students::CourseEnrollmentsController < ApplicationController
+class Students::ClassGroupEnrollmentsController < ApplicationController
 
   inherit_resources
 
@@ -7,30 +7,21 @@ class Students::CourseEnrollmentsController < ApplicationController
   before_filter :load_student, :only => [ :new, :create, :edit, :update ]
 
   def new
-    @course_enrollment = CourseEnrollment.new
-    render 'new'  
+    @class_group_enrollment = ClassGroupEnrollment.new
+    render 'new'
   end
 
   def create
-    super do |format|
-      if @student.course_enrollments << @course_enrollment
+    @class_group_enrollment = ClassGroupEnrollment.new(params[:class_group_enrollment])
+    respond_to do |format|
+      if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
+        @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)        
+
         format.js { render 'create' }  
       else
         @errors = @course_enrollment.errors
         format.js { render 'error' }
       end
-    end  
-  end
-
-  def edit
-    super do |format|
-      format.js {render 'edit'}  
-    end  
-  end
-
-  def update
-    super do |format|
-      format.js { render 'update' }  
     end  
   end
 

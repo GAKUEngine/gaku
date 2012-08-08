@@ -36,13 +36,20 @@ describe 'Note' do
     click_link 'new_student_note_link'
 
     wait_until { page.has_content?('New Note') } 
-    sleep 5
-    
+
     click_link "Edit" 
 
     wait_until { find('#editNoteModal').visible? } 
+    fill_in 'note_title', :with => 'Edited note title'
+    fill_in 'note_content', :with => 'Edited note content'
 
+    click_button 'submit_button'
+    #click_link 'cancel_link'
+    wait_until { !page.find('#editNoteModal').visible? }
+    
     sleep 5
+    page.should have_content('Edited note title')
+    page.should have_content('Edited note content')
 
   end
 end
