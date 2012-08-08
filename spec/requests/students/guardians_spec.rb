@@ -59,7 +59,7 @@ describe 'Guardian' do
       fill_in 'guardian_surname', :with => 'Edited guardian surname'
 
       click_button 'submit_button'
-      click_link 'cancel_link'
+      #click_link 'cancel_link'
       wait_until { !page.find('#editGuardianModal').visible? }
 
       page.should have_content('Edited guardian name')

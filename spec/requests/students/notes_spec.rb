@@ -44,9 +44,10 @@ describe 'Note' do
     fill_in 'note_content', :with => 'Edited note content'
 
     click_button 'submit_button'
-    click_link 'cancel_link'
+    #click_link 'cancel_link'
     wait_until { !page.find('#editNoteModal').visible? }
-
+    
+    sleep 5
     page.should have_content('Edited note title')
     page.should have_content('Edited note content')
 
