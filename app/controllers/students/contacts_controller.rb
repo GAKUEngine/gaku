@@ -9,8 +9,8 @@ class Students::ContactsController < ApplicationController
 
   def create
     super do |format|
-      @contact.make_primary_student if params[:contact][:is_primary] == "1"
       if @contact.save && @student.contacts << @contact
+        @contact.make_primary_student if params[:contact][:is_primary] == "1"
         format.js {render 'student_contact'}
       end
     end
