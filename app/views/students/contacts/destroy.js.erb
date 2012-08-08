@@ -1,6 +1,3 @@
-<% @student.contacts.each {|contact|%>
-  <% if contact.is_primary? %>
-    $('contact_<%= contact.id.to_s %> a.btn').addClass('btn-primary');
-  <% end %>
-<% } %>
+$('.student_contact_table').find('#contact_<%= @student.contacts.first.id %> .make_primary')
+													 .addClass('btn-primary')
 
