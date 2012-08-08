@@ -1,0 +1,3 @@
+<%- unless @student.addresses.blank? %>
+$('#address_<%= @student.addresses.first.id%> td a').addClass('btn-primary')
+<% end %>

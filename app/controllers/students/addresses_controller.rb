@@ -4,7 +4,8 @@ class Students::AddressesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_address, :only => :destroy
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
     @address = Address.new
@@ -32,9 +33,26 @@ class Students::AddressesController < ApplicationController
   end
 
   def destroy
-    super do |format|
-      format.js { render :nothing => true }
+    @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
+    if @address.destroy
+      if @address.id == @primary_address_id
+        @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
+        respond_to do |format|
+          format.js { render }
+        end
+      else
+        render :nothing => true
+      end
     end
+
+    # super do |format|
+    #   raise student_address.inspect
+    #   if !student_address.blank? && student_address.is_primary?
+    #     format.js {render}
+    #   else
+    #     format.js { render :nothing => true }
+    #   end
+    # end
   end
 
   def make_primary
@@ -45,7 +63,11 @@ class Students::AddressesController < ApplicationController
     render :nothing => true
   end
 
-  private 
+  private
+    def load_address
+      @address = Address.find(params[:id])
+    end
+
     def load_student
       @student = Student.find(params[:student_id])
     end

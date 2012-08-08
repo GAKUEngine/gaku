@@ -22,8 +22,8 @@ class Address < ActiveRecord::Base
   belongs_to :country
   belongs_to :state
  
-  has_many :student_addresses
-  has_many :students, :through => :student_addresses
+  has_many :student_addresses, :dependent => :destroy
+  has_many :students, :through => :student_addresses, :dependent => :destroy
   has_many :guardian_addresses
   has_many :guardians, :through => :guardian_addresses
 
