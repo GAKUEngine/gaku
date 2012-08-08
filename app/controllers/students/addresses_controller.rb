@@ -4,7 +4,7 @@ class Students::AddressesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
     @address = Address.new
@@ -33,7 +33,7 @@ class Students::AddressesController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      format.js { render 'destroy' }
     end
   end
 

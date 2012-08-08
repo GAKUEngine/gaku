@@ -1,7 +1,2 @@
-$('.guardians_list').append('<%= escape_javascript(render :partial => "show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @student.guardians.last}) %>');
-$('.guardians_count').html('<%= @student.guardians.count%>');
-$('#add_new_student_guardian').html('');
-$('.new_student_guardian').show();
-
 $('#new_student_guardian_tab_link').html('<%= @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians') %>');
 $('.guardians_count').html('<%= @student.addresses.count != 0 ? t('guardians.list') + "（" + @student.guardians.count.to_s + "）" : t('guardians.list') %>');

@@ -1,13 +1,8 @@
 #course_enrollments
   .row-fluid
-    .span12
-      b= t('courses.count')
-      |:
-      .courses_count
-        = @student.courses.count
-  .row-fluid
-    .span12
-      h4 =t("courses.list")
+    .pull-left
+      h4.h4-vm.courses_count
+        = @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list')
   .row-fluid
     .span12
       table.table.table-striped.table-bordered.table-condensed
@@ -33,10 +28,4 @@ coffee:
   $("#course_enrollment_cancel").click( ->
     $("#student_course_form").hide();
     $("#new_student_course_link").show();
-  )
-
-  $(".delete_course_enrollment").live("ajax:success", (evt, data, status, xhr)->
-      inner_text = $('.courses_count').text();
-      new_value = inner_text - 1;
-      $('.courses_count').html(new_value);
   )

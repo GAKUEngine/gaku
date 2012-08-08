@@ -5,3 +5,6 @@ $('.courses_count').html(new_value);
 $('#new_course_enrollment select').val('');
 $('#add_course_enrollment').html('');
 $('.new_student_course').show();
+
+$('#new_student_course_tab_link').html('<%= @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural') %>');
+$('.courses_count').html('<%= @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list') %>');

@@ -211,6 +211,8 @@ ja:
     emergency: "Emergency"
     actions: "Actions"
     make_primary: "Make Primary"
+    list: "Contacts list"
+    contacts: "Contacts"
   note: "備考"
   notes:
     notes: "備考"
