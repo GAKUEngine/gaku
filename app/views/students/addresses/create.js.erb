@@ -4,3 +4,6 @@ $('.addresses_count').html('<%= @student.addresses.count %>');
 <%- if @student.addresses.count == 1%>
 	$('#student_addresses table tbody tr td.primary_address a').first().addClass('btn-primary')
 <% end %>
+
+$('#add_new_student_address').html('');
+$('.new_address_student').show();
