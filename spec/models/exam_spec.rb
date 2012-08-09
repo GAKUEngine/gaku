@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: exams
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  description       :text
+#  adjustments       :text
+#  weight            :float
+#  dynamic_scoring   :boolean
+#  grading_method_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Exam do
