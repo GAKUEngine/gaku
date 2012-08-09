@@ -42,4 +42,14 @@ class ClassGroupEnrollmentsController < ApplicationController
  		end
   end
   
+  def filtered_students
+    @class_group_enrolled_students = ClassGroupEnrollment.where(:class_group_id => params[:class_group_id]).pluck(:student_id)
+    @students = Student.find(:all, :conditions => ['id not in (?)', @class_group_enrolled_students], :include => [:addresses, :class_groups, :class_group_enrollments])
+
+    respond_to do |format|
+      format.json { render :json => @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])}
+    end
+  end
+
+
 end

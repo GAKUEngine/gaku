@@ -271,13 +271,18 @@ class StudentChooser extends BuHin
   clearSearch: ->
     $('input.student_search').on 'keyup', (e)=>
       if $('input.student_search').val() == ''
-        @refreshGrid("/students.json")
+        @refreshGrid(@requestPath())
+
+  requestPath: ->
+    classGroupId = window.location.pathname.split('/')[2]
+    return "/class_group_enrollments/filtered_students.json?class_group_id=" + classGroupId
 
   init: () ->
+    console.log(@requestPath())
     @_getFieldNames()
     @_getScreenMetrics()
     @autocompleteRefreshGrid()
-    @refreshGrid("/students.json")
+    @refreshGrid(@requestPath())
     @clearSearch()
 
   ProcessOptions: (options) ->
