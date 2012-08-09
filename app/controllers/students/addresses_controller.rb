@@ -4,6 +4,7 @@ class Students::AddressesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  before_filter :load_address, :only => :destroy
   before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
@@ -43,15 +44,6 @@ class Students::AddressesController < ApplicationController
         render 'destroy'
       end
     end
-
-    # super do |format|
-    #   raise student_address.inspect
-    #   if !student_address.blank? && student_address.is_primary?
-    #     format.js {render}
-    #   else
-    #     format.js { render :nothing => true }
-    #   end
-    # end
   end
 
   def make_primary
