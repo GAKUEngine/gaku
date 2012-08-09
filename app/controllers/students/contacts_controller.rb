@@ -6,7 +6,6 @@ class Students::ContactsController < ApplicationController
 
   before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
-
   def create
     super do |format|
       if @contact.save && @student.contacts << @contact
@@ -30,7 +29,13 @@ class Students::ContactsController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render 'destroy' }
+      if @contact.is_primary?
+        @student.contacts.first.make_primary_student
+        format.js { render }
+      else
+        format.js { render 'destroy' }
+      end
+
     end
   end 
 

@@ -1,2 +1,5 @@
 $('#new_student_address_tab_link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses') %>');
 $('.addresses_count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list') %>');
+<%- unless @student.addresses.blank? %>
+$('#address_<%= @student.addresses.first.id%> td a').addClass('btn-primary')
+<% end %>
