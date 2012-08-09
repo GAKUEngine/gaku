@@ -211,6 +211,8 @@ ja:
     emergency: "Emergency"
     actions: "Actions"
     make_primary: "Make Primary"
+    list: "Contacts list"
+    contacts: "Contacts"
   note: "備考"
   notes:
     notes: "備考"
@@ -250,3 +252,4 @@ ja:
     dynamic_scoring: "動的計算"
     is_master: "マスター"
     master: "試験要素内容（マスター）"
+    save: "Save exam portion"

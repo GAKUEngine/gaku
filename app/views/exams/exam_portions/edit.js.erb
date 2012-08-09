@@ -1,0 +1,2 @@
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "exams/exam_portions/edit_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_portion => @exam_portion}) %>');
+$('#editExamPortionModal').modal('show');

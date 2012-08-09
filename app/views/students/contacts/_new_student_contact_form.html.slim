@@ -7,10 +7,10 @@
 		=f.check_box :is_primary
   .row-fluid
 		=f.label :contact_type
-		=f.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, :prompt => "Choose Contact Type"
+		=f.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, {:prompt => "Choose Contact Type"}, {:class => "validate[required]", "data-prompt-position" => "bottomRight:5"}
   .row-fluid
 		=f.label :data
-		=f.text_field :data
+		=f.text_field :data, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
   .row-fluid
 		=f.label :details
 		=f.text_field :details
@@ -19,3 +19,6 @@
 		=f.check_box :is_emergency
   .row-fluid
 		=f.submit t('contacts.save'), :class => 'btn btn-primary'
+
+coffee:
+  $('.new_student_contact_form').validationEngine();

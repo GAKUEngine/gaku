@@ -32,5 +32,5 @@
             = guardian_form.text_field :relationship, :class => "span12"
         .row-fluid style="margin-top:10px"
           .span8
-            = guardian_form.submit t('guardians.save'), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-            = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+            = guardian_form.submit t('guardians.save'), :class => "span12 btn btn-primary", :id => 'submit_button', :style => "min-height:0px; float: left;"
+            = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :id => 'cancel_link', :'data-dismiss' => "modal"

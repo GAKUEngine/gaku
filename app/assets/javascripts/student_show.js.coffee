@@ -18,12 +18,12 @@ $ ->
 
 deleteLink= $(".delete_link")
 deleteLink.live("ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').fadeOut();
+    $(this).closest('tr').remove();
 )
   
 deleteGuardianLink= $(".delete_guardian")
 deleteGuardianLink.live("ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('div.guardian_cell').fadeOut();
+    $(this).closest('div.guardian_cell').remove();
 )
 
 $('.new_student_contact_form').hide()

@@ -12,7 +12,7 @@
           th.btn-inverse =t 'exam_portions.is_master'
           th.btn-info width="94px" =t 'manage'
       tbody
-        = render :partial => 'exam_portion', :collection => @exam.exam_portions, :as => :exam_portion
+        = render :partial => 'exams/exam_portions/show', :collection => @exam.exam_portions, :as => :exam_portion
       
 javascript:
   $(document).ready(function() {

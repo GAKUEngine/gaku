@@ -6,7 +6,7 @@ class Students::GuardiansController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
     @guardian = Guardian.new
@@ -35,7 +35,7 @@ class Students::GuardiansController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      format.js { render 'destroy' }
     end
   end
 

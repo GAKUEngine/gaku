@@ -76,6 +76,9 @@ class Student < ActiveRecord::Base
     pa.blank? ? nil : pa.city 
   end
   
+  def primary_address
+    self.student_addresses.where(:is_primary => true).first.address
+  end
 end
 
 
