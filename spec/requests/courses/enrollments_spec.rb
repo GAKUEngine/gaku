@@ -22,6 +22,21 @@ describe "CourseEnrollment"  do
     @course.course_enrollments.size.should == 1     
   end
 
+  it "should enroll student only once for a course", :js => true  do
+    Factory(:student, :id => "123", :name => "Toni", :surname => "Rtoe")
+    Factory(:course_enrollment, :student_id => "123", :course_id => @course.id)
+    visit course_path(@course)
+    page.should have_content("Toni")
+
+    click_link 'add_student_enrollment'
+    wait_until { page.has_content?('Choose Student') } 
+
+    select "Toni Rtoe", :from => 'course_enrollment_student_id'
+    click_button "Enroll Student"
+    page.should have_content ("Student Already enrolled to course!")
+    @course.course_enrollments.size.should == 1
+  end
+
   it "should enroll a class group", :js => true do 
     class_group = Factory(:class_group, :name => "Math")
     student1 = Factory(:student, :name => "John", :surname => "Doe")
