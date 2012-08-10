@@ -172,6 +172,7 @@ ja:
       weight: "合計加重率が１００％になるように設定してください。"
     dynamic_scoring: "動的採点"
     show: "試験照会"
+    edit: "Edit Exam"
   execution_date: "実行日"
   config:
     label: "設定"
