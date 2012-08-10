@@ -110,6 +110,7 @@ en:
     homeroom: "Home Room"
     choose_student: 'Choose Student'
     create_class_group_enrollment: 'Create Class Enrollment'
+    none: "None"
   class_group_enrollments:
     list: "Class Roster"
     new: "New class enrollment"
