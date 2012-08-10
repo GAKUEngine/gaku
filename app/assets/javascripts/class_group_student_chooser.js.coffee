@@ -192,6 +192,7 @@ class StudentChooser extends BuHin
           $.ajax
             data:
               term: $('input.student_search').val()
+              class_group_id: window.location.pathname.split('/')[2]
             type: 'get'
             url: autocompleteSource
             dataType: 'json'
