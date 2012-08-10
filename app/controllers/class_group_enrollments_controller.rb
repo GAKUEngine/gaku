@@ -42,6 +42,15 @@ class ClassGroupEnrollmentsController < ApplicationController
  		end
   end
   
+  def destroy
+    @class_group_enrollment = ClassGroupEnrollment.find(params[:id])
+    @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
+    @class_group_enrollment.destroy
+    respond_to do |format|
+      format.js { render 'class_groups/enrollments/destroy' }
+    end
+  end
+
   def filtered_students
     @class_group_enrolled_students = ClassGroupEnrollment.where(:class_group_id => params[:class_group_id]).pluck(:student_id)
     if @class_group_enrolled_students.blank?
