@@ -1,1 +1,7 @@
 $('#enrolled_students_grid tbody').html("<%= escape_javascript(render :partial => 'courses/enrolled_student', :collection => @course.students, :as => 'enrollment') %>");
+var flashError = "<%=flash.now[:error]%>";
+if (flashError){
+  $(".flash-error").html(flashError);
+}else{
+	$(".flash-error").html("");
+}
