@@ -3,7 +3,13 @@ class ExamPortionsController < ApplicationController
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
-  before_filter :load_exam, :only => [ :edit, :update ]
+  before_filter :load_exam, :only => [:show, :edit, :update ]
+
+  def show
+    super do |format|
+      format.html {render 'exams/exam_portions/show'}
+    end
+  end
 
   def edit
     super do |format|
