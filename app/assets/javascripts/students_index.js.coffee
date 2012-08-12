@@ -191,7 +191,6 @@ class StudentGrid extends BuHin
 
         @students[i]["checkbox"] = checkbox.html()
         
-        console.log @students[i]["gender"], i, "test"
         if @students[i]["gender"]
           @students[i]["gender"] = I18n.t("genders.male")
         else

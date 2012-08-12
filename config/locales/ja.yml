@@ -114,13 +114,13 @@ ja:
     name: "クラス名"
     grade: "学年"
     homeroom: "主要教室"
-    choose_student: 'Choose Student'
+    choose_student: '生徒選択'
     create_class_group_enrollment: ''
   class_group_enrollments:
     list: "クラス名簿"
-    new: "新規クラス[組]"
+    new: "新規クラス"
     seat_number: "出席番号"
-    class_groups: "クラス[組]"
+    class_groups: "クラス"
     current_enrollment: 
   grades:
     combined: "全試験総合"
@@ -185,7 +185,7 @@ ja:
   genders:
     male: "男性"
     female: "女性"
-    unknown: "Unknown"
+    unknown: "不明"
   profile: "プロフィール"
   profiles:
     new: "新規プロフィール登録"
@@ -198,7 +198,7 @@ ja:
     relationship: "関係"
     add: "保護者を追加"
     save: "保護者を保存"
-    edit: "Edit guardian"
+    edit: "保護者を編集"
   contact_type: "連絡先種別"
   contact_types:
      add: "連絡先種別の追加"
@@ -207,8 +207,8 @@ ja:
     add: "連絡先の追加"
     data: "情報"
     details: "詳細"
-    primary: "Primary"
-    emergency: "Emergency"
+    primary: "主要"
+    emergency: "緊急"
     actions: "Actions"
     make_primary: "Make Primary"
     list: "Contacts list"
