@@ -22,7 +22,11 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :class_group_enrollments do
-    post :enroll_student, :on => :collection
+    collection do 
+      post :enroll_student
+      get :filtered_students
+      get :autocomplete_filtered_students
+    end
   end
   
   resources :exam_portion_scores
