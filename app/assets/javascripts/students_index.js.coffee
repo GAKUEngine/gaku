@@ -108,9 +108,9 @@ class StudentGrid extends BuHin
       dataSource:
         data: @students
         pageSize: @studentsPerPage
-      height: (@studentsPerPage + 1) * 36
+      # height: (@studentsPerPage + 1) * 36
       groupable: true
-      scrollable: false
+      scrollable: true
       sortable: true
       pageable: true
       resizable: false
@@ -121,7 +121,7 @@ class StudentGrid extends BuHin
     @target.kendoGrid(gridArgs)
 
   _createCheckbox: () ->
-
+    
     checkString = (check_s) ->
       ths = $("#grid th")
       i = 0
@@ -154,7 +154,7 @@ class StudentGrid extends BuHin
     $.getJSON query, (studentData) =>
       if studentData == null
         return
-      console.log studentData
+      # console.log studentData
       @students = studentData
 
       i = 0
@@ -190,12 +190,18 @@ class StudentGrid extends BuHin
           .appendTo(checkbox)
 
         @students[i]["checkbox"] = checkbox.html()
+        
+        console.log @students[i]["gender"], i, "test"
+        if @students[i]["gender"]
+          @students[i]["gender"] = I18n.t("genders.male")
+        else
+          @students[i]["gender"] = I18n.t("genders.female")
+        
         i++
-
         
       @_createCheckbox()
       @_createGrid()
-      console.log @titles
+      # console.log @titles
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
         
@@ -284,6 +290,8 @@ class StudentGrid extends BuHin
     @window.height = $(window).height()
     @position = @target.position()
     @studentsPerPage = Math.round((@window.height - @position.top) / 36) - 2
+    if @studentsPerPage < 3
+      @studentsPerPage = 3
 
   clearSearch: ->
     $('input.student_search').on 'keyup', (e)=>
