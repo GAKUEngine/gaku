@@ -27,7 +27,7 @@
 .row-fluid
   /Modalでもいいかも。
   #add_student_enrollment_form style='display:none' 
-    = form_for [@course, @new_course_enrollment], :html => {:id => "new_course_student"},:url => enroll_student_course_enrollments_path , :remote => true do |f|
+    = form_for [@course, @new_course_enrollment], :html => {:id => "enroll_student_form"},:url => enroll_student_course_enrollments_path , :remote => true do |f|
       = f.hidden_field :course_id, :value => @course.id
       .row-fluid
         .span4.well.mt-l style="margin-bottom:0px"
@@ -37,7 +37,7 @@
           .row-fluid.mt-s
             = f.submit t("courses.enroll_student"), :class => 'span12 btn btn-primary'
   #add_class_group_enrollment_form style='display:none' 
-    =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course'} do |f|
+    =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course', :id => 'enroll_class_group_form'} do |f|
       .fields  
         b Choose Class Group
         =f.label :class_group
@@ -45,4 +45,4 @@
       .actions
         =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'
 coffee:
-  $('#new_course_student').validationEngine();
+  $('#enroll_student_form').validationEngine();
