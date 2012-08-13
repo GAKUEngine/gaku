@@ -20,6 +20,7 @@ describe "CourseEnrollment"  do
 
     page.should have_content("John")
     @course.course_enrollments.size.should == 1     
+    page.should have_content("View Assignments")#check if the student is added to the table visually without redirect
   end
 
   it "should enroll student only once for a course", :js => true  do
@@ -38,11 +39,10 @@ describe "CourseEnrollment"  do
   end
 
   it "should enroll a class group", :js => true do 
-    class_group = Factory(:class_group, :name => "Math")
-    student1 = Factory(:student, :name => "Johniew", :surname => "Doe")
-    student2 = Factory(:student, :name => "Amon", :surname => "Tobin")
-    Factory(:class_group_enrollment, :student => student1, :class_group => class_group)
-
+    class_group = Factory(:class_group, :name => "Math", :id => 'math_class_group')
+    student1 = Factory(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => ['math_class_group'])
+    student2 = Factory(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => ['math_class_group'])
+    
     visit course_path(@course)
 
     click_on 'add_class_group_enrollment'
@@ -50,9 +50,12 @@ describe "CourseEnrollment"  do
     wait_until { page.has_content?('Math') }
     find("li:contains('Math')").click
     click_button "Enroll Class Group"
-    
+
     page.should have_content("Johniew")
+    page.should have_content("Amon")
     @course.course_enrollments.size.should == 2
+    
+    page.should have_content("View Assignments")#check if the students are added to the table visually without redirect
   end
 
 end
