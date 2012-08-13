@@ -22,14 +22,14 @@ class CoursesController < ApplicationController
   # enroll class group to course
   def enroll_class_group
     @course = Course.find(params[:id])
-    
+    @not_added_students = []
     if !params[:course][:class_group_id].blank?
       @class_group = ClassGroup.find(params[:course][:class_group_id])
       if @class_group.students.empty?
         show_flash_error_for_enroll(@course, 'Selected Class Group is empty') and return
       else
-        not_added_students = @class_group.students - @course.students
-        if not_added_students.empty? 
+        @not_added_students = @class_group.students - @course.students
+        if @not_added_students.empty? 
           show_flash_error_for_enroll(@course, 'All students are already added to the course') and return 
         end
       end
