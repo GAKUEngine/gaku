@@ -7,3 +7,6 @@ $('.addresses_count').html('<%= @student.addresses.count %>');
 
 $('#add_new_student_address').html('');
 $('.new_address_student').show();
+
+$('#new_student_address_tab_link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses') %>');
+$('.addresses_count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list') %>');

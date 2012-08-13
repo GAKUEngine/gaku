@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: class_group_enrollments
+#
+#  id             :integer          not null, primary key
+#  class_group_id :integer
+#  student_id     :integer
+#  seat_number    :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 require 'spec_helper'
 
 describe ClassGroupEnrollment do
