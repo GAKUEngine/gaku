@@ -68,8 +68,7 @@ class ExamsController < ApplicationController
             score.save
           else
             @student_total_scores[student.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score
-            # TODO Giorgio to make logic for total weights
-            @student_total_weights[student.id] += 4  
+            @student_total_weights[student.id] +=  (portion.weight / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score
           end
         end
       end
@@ -85,10 +84,15 @@ class ExamsController < ApplicationController
       exam = Exam.find(params[:id])
       exam_portions = exam.exam_portions
       exam_portions_ids = exam_portions.pluck(:id)
-      student_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}").pluck(:score)
+      student_exam_portion_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}")
+      student_scores = student_exam_portion_scores.pluck(:score)
       @student_total_score = student_scores.inject{|sum,x| sum + x }
-      # TODO Giorgio to change @student_weights_total logic
-      @student_weights_total = exam_portions.pluck(:weight).inject{|sum,x| sum + x }
+      
+      @student_weights_total = 0.0
+      student_exam_portion_scores.each do |eps|
+        @student_weights_total += eps.score * (eps.exam_portion.weight / 100)
+      end
+      
       respond_to do |format|
         
           format.js { render 'update_score' }
