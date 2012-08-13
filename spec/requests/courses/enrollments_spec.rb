@@ -39,21 +39,20 @@ describe "CourseEnrollment"  do
 
   it "should enroll a class group", :js => true do 
     class_group = Factory(:class_group, :name => "Math")
-    student1 = Factory(:student, :name => "John", :surname => "Doe")
+    student1 = Factory(:student, :name => "Johniew", :surname => "Doe")
     student2 = Factory(:student, :name => "Amon", :surname => "Tobin")
     Factory(:class_group_enrollment, :student => student1, :class_group => class_group)
 
     visit course_path(@course)
 
-    click_link 'add_class_group_enrollment'
-    wait_until { page.has_content?('Choose Class Group') } 
-    #sleep 5 
-    #save_and_open_page
-    select "Math", :from => 'course_class_group_id'
+    click_on 'add_class_group_enrollment'
+    click_on 'Choose Class Group' 
+    wait_until { page.has_content?('Math') }
+    find("li:contains('Math')").click
     click_button "Enroll Class Group"
-
-    page.should have_content("John")
-    #@course.course_enrollments.size.should == 1
+    
+    page.should have_content("Johniew")
+    @course.course_enrollments.size.should == 2
   end
 
 end
