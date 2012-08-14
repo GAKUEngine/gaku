@@ -4,7 +4,7 @@ $('#student_<%= @student_id %> td.weighted_scores').html('<%= @student_weights_t
 scoreArray = $('.total_points');
 total_score = 0;
 for (i = 0; i < scoreArray.length; ++i) {
-  total_score += parseInt(scoreArray[i].innerText);
+  total_score += parseFloat(scoreArray[i].innerText);
 }
 total_score_average = total_score/scoreArray.length;
 $('.total_points_average').html(total_score_average);
@@ -12,7 +12,7 @@ $('.total_points_average').html(total_score_average);
 weights_arr = $('.weighted_scores');
 total_weights = 0;
 for (i = 0; i < weights_arr.length; ++i) {
-  total_weights += parseInt(weights_arr[i].innerText);
+  total_weights += parseFloat(weights_arr[i].innerText);
 }
 total_weights_average = total_weights/weights_arr.length;
 $('.weighted_scores_average').html(total_weights_average);
