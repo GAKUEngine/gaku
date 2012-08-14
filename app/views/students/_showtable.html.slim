@@ -58,20 +58,20 @@
             = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
           a#new_student_contact_tab_link data-toggle="tab" href="#contacts"
-            = @student.contacts.count != 0 ? t('contact') + "（" + @student.contacts.count.to_s + "）" : t('contact')
+            = @student.contacts.count != 0 ? t('contacts.contacts') + "（" + @student.contacts.count.to_s + "）" : t('contacts.contacts')
         li
           a#new_student_note_tab_link data-toggle="tab" href="#notes"
             = @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes')
         li
           a#new_student_course_tab_link data-toggle="tab" href="#courses"
-            = @student.courses.count != 0 ? t('course') + "（" + @student.courses.count.to_s + "）" : t('course')
+            = @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'students/addresses/index'
         #guardians.tab-pane
           = render :partial => 'students/guardians/index'
         #contacts.tab-pane
-          = render :partial => 'students/contacts/contacts'
+          = render :partial => 'students/contacts/index'
         #notes.tab-pane
           = render :partial => 'students/notes/index'
         #courses.tab-pane

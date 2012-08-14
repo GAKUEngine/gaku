@@ -110,6 +110,7 @@ en:
     homeroom: "Home Room"
     choose_student: 'Choose Student'
     create_class_group_enrollment: 'Create Class Enrollment'
+    none: "None"
   class_group_enrollments:
     list: "Class Roster"
     new: "New class enrollment"
@@ -196,6 +197,8 @@ en:
     primary: "Primary"
     emergency: "Emergency"
     actions: 'Actions'
+    list: "Contacts list"
+    contacts: "Contacts"
   note: "Notes"
   notes:
     notes: "Notes"

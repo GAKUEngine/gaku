@@ -122,6 +122,7 @@ ja:
     seat_number: "出席番号"
     class_groups: "クラス[組]"
     current_enrollment: 
+    none: "None"
   grades:
     combined: "全試験総合"
     grading: "採点"
@@ -211,6 +212,8 @@ ja:
     emergency: "Emergency"
     actions: "Actions"
     make_primary: "Make Primary"
+    list: "Contacts list"
+    contacts: "Contacts"
   note: "備考"
   notes:
     notes: "備考"

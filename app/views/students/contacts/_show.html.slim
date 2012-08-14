@@ -8,7 +8,7 @@ tr id="contact_#{contact.id}" class="student_contact"
     ="Emergency" if contact.is_emergency?
   td class="primary_button"
     -if contact.is_primary?
-      =link_to t('contacts.make_primary'), make_primary_student_contact_path(@student, contact), :data => {:confirm => 'are you sure?'}, :class => 'btn btn-primary', :remote => true, :method => :post
+      =link_to t('contacts.make_primary'), make_primary_student_contact_path(@student, contact), :data => {:confirm => 'are you sure?'}, :class => 'btn btn-primary make_primary', :remote => true, :method => :post
     -else
       = link_to t('contacts.make_primary'), make_primary_student_contact_path(@student, contact), :data => {:confirm => 'are you sure?'}, :class => 'btn', :remote => true, :method => :post
     = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_contact_path(@student, contact), :remote => true, :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"

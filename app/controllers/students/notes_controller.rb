@@ -4,7 +4,7 @@ class Students::NotesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
     @note = Note.new
@@ -35,7 +35,7 @@ class Students::NotesController < ApplicationController
     @note = Note.find(params[:id])
     @note.destroy
     respond_to do |format|
-      format.js { render :nothing => true }
+      format.js { render 'destroy' }
     end
   end
 

@@ -22,8 +22,11 @@
               = submit_tag 'Submit'
             = link_to "CSV Export", "students.csv"
 
+    .row-fluid
+      #modal_dialogs
+      #new_student_form.hide
+        =render 'form'
     =render 'students/student_chooser', :select_mode => 'multiple'
 = javascript_include_tag "students_index"
-
 coffee:
   $('#grid').studentGrid()

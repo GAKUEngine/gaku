@@ -53,6 +53,11 @@ class ExamsController < ApplicationController
       @grades = 1
     end
 
+    @student_total_scores = {}
+    @student_total_scores.default = 0
+    @student_total_weights = {}
+    @student_total_weights.default = 0
+
     @students.each do |student|
       @exams.each do |exam|
         exam.exam_portions.each do |portion|
@@ -61,12 +66,34 @@ class ExamsController < ApplicationController
             score.student_id = student.id
             score.exam_portion_id = portion.id
             score.save
+          else
+            @student_total_scores[student.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score
+            # TODO Giorgio to make logic for total weights
+            @student_total_weights[student.id] += 4  
           end
         end
       end
     end
-
     render "exams/grading"
+  end
+
+  def update_score
+    @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
+    @exam_portion_score.score = params[:exam_portion_score][:score]
+    if @exam_portion_score.save
+      @student_id = Student.find(params[:exam_portion_score][:student_id]).id
+      exam = Exam.find(params[:id])
+      exam_portions = exam.exam_portions
+      exam_portions_ids = exam_portions.pluck(:id)
+      student_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}").pluck(:score)
+      @student_total_score = student_scores.inject{|sum,x| sum + x }
+      # TODO Giorgio to change @student_weights_total logic
+      @student_weights_total = exam_portions.pluck(:weight).inject{|sum,x| sum + x }
+      respond_to do |format|
+        
+          format.js { render 'update_score' }
+        end
+      end
   end
 
   private

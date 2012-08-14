@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: roles
+#
+#  id                        :integer          not null, primary key
+#  name                      :string(255)
+#  class_group_enrollment_id :integer
+#  faculty_id                :integer
+#
+
 require 'spec_helper'
 
 describe Role do

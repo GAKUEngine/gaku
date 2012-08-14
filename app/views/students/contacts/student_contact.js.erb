@@ -14,3 +14,6 @@ $('.new_student_contact_form')[0].reset();
 	currentContact.children('td.primary_contact').html('Primary');
 	currentContact.find('.primary_button a').addClass('btn-primary');
 <% end %>
+
+$('#new_student_contact_tab_link').html('<%= @student.contacts.count != 0 ? t('contacts.contacts') + "（" + @student.contacts.count.to_s + "）" : t('contacts.contacts') %>');
+$('.contacts_count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list') %>');
