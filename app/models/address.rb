@@ -22,8 +22,8 @@ class Address < ActiveRecord::Base
   belongs_to :country
   belongs_to :state
  
-  has_many :student_addresses
-  has_many :students, :through => :student_addresses
+  has_many :student_addresses, :dependent => :destroy
+  has_many :students, :through => :student_addresses, :dependent => :destroy
   has_many :guardian_addresses
   has_many :guardians, :through => :guardian_addresses
 
@@ -62,11 +62,6 @@ class Address < ActiveRecord::Base
 
   def empty?
     attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
-  end
-
-  def check_primary?(student)
-    @student_address = StudentAddress.find_by_student_id_and_address_id(student.id, self.id)
-    @student_address.is_primary? ? true : false
   end
   
 end

@@ -4,16 +4,13 @@ class Students::ContactsController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
-
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def create
     super do |format|
-      @contact.make_primary_student if params[:contact][:is_primary] == "1"
       if @contact.save && @student.contacts << @contact
+        @contact.make_primary_student if params[:contact][:is_primary] == "1"
         format.js {render 'student_contact'}
-      else
-        render :nothing => true
       end
     end
   end
@@ -32,7 +29,13 @@ class Students::ContactsController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      if @contact.is_primary?
+        @student.contacts.first.make_primary_student
+        format.js { render }
+      else
+        format.js { render 'destroy' }
+      end
+
     end
   end 
 

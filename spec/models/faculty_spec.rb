@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: faculties
+#
+#  id      :integer          not null, primary key
+#  user_id :integer
+#
+
 require 'spec_helper'
 
 describe Faculty do

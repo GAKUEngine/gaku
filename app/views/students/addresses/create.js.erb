@@ -1,2 +1,12 @@
 $('#student_addresses table tbody').append('<%= escape_javascript(render :partial => "students/addresses/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @student.addresses.last}) %>');
 $('.addresses_count').html('<%= @student.addresses.count %>');
+
+<%- if @student.addresses.count == 1%>
+	$('#student_addresses table tbody tr td.primary_address a').first().addClass('btn-primary')
+<% end %>
+
+$('#add_new_student_address').html('');
+$('.new_address_student').show();
+
+$('#new_student_address_tab_link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses') %>');
+$('.addresses_count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list') %>');

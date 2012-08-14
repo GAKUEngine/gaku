@@ -23,7 +23,7 @@
       .span12.well
         .tabbable.tabs-right
           ul.nav.nav-tabs
-            li.active
+            li#class_group_students_tab.active
               a*{'data-toggle' =>"tab", 'href' => "#class_group_enrollments"} =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
             li
               a*{'data-toggle' =>"tab", 'href' => "#semesters"} =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
@@ -31,17 +31,9 @@
               a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
           .tab-content
             #class_group_enrollments.tab-pane.active
-              .row-fluid
-                .pull-left
-                  h4.h4-vm =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
-                .pull-right
-                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_class_group_enrollment_path(:class_group_id => @class_group.id), :remote => true, :class => "btn btn-primary"
-              .row-fluid
-                hr
+              
               .row-fluid#class_group_enrollments_list
-                ul
-                  - @class_group.class_group_enrollments.each do |enrollment|
-                    li = "#{enrollment.student.surname} #{enrollment.student.name}"
+                =render 'class_groups/enrollments/index'
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'

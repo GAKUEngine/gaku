@@ -110,6 +110,7 @@ en:
     homeroom: "Home Room"
     choose_student: 'Choose Student'
     create_class_group_enrollment: 'Create Class Enrollment'
+    none: "None"
   class_group_enrollments:
     list: "Class Roster"
     new: "New class enrollment"
@@ -157,6 +158,7 @@ en:
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
     show: "Show Exam"
+    edit: "Edit Exam"
   config:
     label: "Config"
     close: "Close"
@@ -188,6 +190,7 @@ en:
      add: 
   contact: 
   contacts:
+    list: "Contacts List"
     new: "New Contact"
     save: "Save Contact"
     data: "Data"
@@ -195,6 +198,8 @@ en:
     primary: "Primary"
     emergency: "Emergency"
     actions: 'Actions'
+    list: "Contacts list"
+    contacts: "Contacts"
   note: "Notes"
   notes:
     notes: "Notes"
@@ -234,4 +239,5 @@ en:
     dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
     master: "Master exam portion"
+    save: "Save exam portion"
   options: "Options"

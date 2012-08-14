@@ -2,4 +2,4 @@
   tr id="course_enrollment_#{course.id}"
     td= course.id
     td= course.code
-    td= link_to t("delete"), student_course_enrollment_path(@student, course.course_enrollments.where(:course_id => course.id, :student_id => @student.id).first.id), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'delete_link delete_course_enrollment', :remote => true
+    td= link_to t("delete"), student_course_enrollment_path(@student, course.course_enrollments.where(:course_id => course.id, :student_id => @student.id).first.id), :method => :delete, :data => {:confirm => 'Are you sure?'}, :id => 'delete_link', :class => 'delete_link delete_course_enrollment', :remote => true

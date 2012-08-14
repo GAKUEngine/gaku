@@ -50,5 +50,5 @@
               hr
           .row-fluid
             .span9
-              = address_form.submit t('addresses.save'), :class => 'span12 btn btn btn-primary'
-            = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :'data-dismiss' => "modal"
+              = address_form.submit t('addresses.save'), :class => 'span12 btn btn btn-primary', :id => 'submit_button'
+            = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_link', :'data-dismiss' => "modal"

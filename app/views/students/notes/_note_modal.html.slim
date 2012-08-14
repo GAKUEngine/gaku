@@ -24,5 +24,5 @@
           .row-fluid
             .span12
               .span6 
-                = note_form.submit t("notes.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-                = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+                = note_form.submit t("notes.save"), :id => 'submit_button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"

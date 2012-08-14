@@ -1,4 +1,5 @@
-= form_for @student, :remote => false do |form|
+-model = @student || student
+= form_for model, :remote => true do |form|
   - if @student.errors.any?
     .alert.alert-error
       strong
@@ -12,7 +13,7 @@
       .row-fluid
         .span6
           = form.label :class_group_id, t("class"), :class => "control-label"
-          = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+          = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {:include_blank => t('class_groups.none')} ,{:class => 'span12'}
       .row-fluid
         .span3
           = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"

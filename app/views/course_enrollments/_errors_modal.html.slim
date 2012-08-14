@@ -1,0 +1,11 @@
+.modal.hide#errorsModal wmode="opaque"
+  - if @course_enrollment.errors.any?
+    .alert.alert-error
+      strong
+        = pluralize(@course_enrollment.errors.count, "error")
+        | prohibited this enrollment from being saved:
+      ul
+        - @course_enrollment.errors.full_messages.each do |msg|
+          li= msg
+
+    = link_to t('.cancel', :default => t("ok")), '#', :class => 'btn', :'data-dismiss' => "modal"

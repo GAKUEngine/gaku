@@ -23,7 +23,7 @@
               td= "[#{course.syllabus.code}]: #{course.syllabus.name}-#{course.code}"  if course.syllabus
               td
               td
-              td= course.course_enrollments.count
+              td= course.students.count
               td 
                 = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, course, :id => 'show_link', :class => "mr-xs btn btn-mini btn-success"
                 = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_course_path(course), :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"
