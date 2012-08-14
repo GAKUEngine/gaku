@@ -1,0 +1,2 @@
+$('#new_student_note_tab_link').html('<%= @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes') %>');
+$('.notes_count').html('<%= @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list') %>');

@@ -5,15 +5,13 @@
 #  id                :integer          not null, primary key
 #  name              :string(255)
 #  max_score         :float
-#  weight            :float
+#  weight            :float            default(100.0)
 #  problem_count     :integer
 #  description       :text
 #  adjustments       :text
-#  execution_date    :datetime
 #  dynamic_scoring   :boolean
 #  is_master         :boolean          default(FALSE)
 #  exam_id           :integer
-#  schedule_id       :integer
 #  grading_method_id :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

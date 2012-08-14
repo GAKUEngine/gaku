@@ -4,7 +4,7 @@ class Students::CourseEnrollmentsController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
 
   def new
     @course_enrollment = CourseEnrollment.new
@@ -36,22 +36,9 @@ class Students::CourseEnrollmentsController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      format.js { render 'destroy' }
     end
   end 
-
-  def make_primary
-    @contact = Contact.find(params[:id])
-    if params[:guardian_id]
-      #handle guardian contact make primary
-    else
-      #handle student contact make primary
-      @contact.make_primary_student
-      respond_with(@contact) do |format|
-        format.js {render 'student_make_primary'}
-      end
-    end
-  end
 
   private 
     def load_student

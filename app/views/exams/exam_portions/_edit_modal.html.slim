@@ -1,0 +1,46 @@
+- model = @exam_portion || ExamPortion.new
+- model_class = model.class
+.modal.hide#editExamPortionModal wmode="opaque"
+  
+  = form_for([@exam, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |ep_form| 
+
+
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          'x
+        h3= t("exam_portions.edit")
+      .modal-body
+        .validation-error
+        .row-fluid
+          .span12.well
+            .span12.well
+              .row-fluid
+                .span9
+                  = ep_form.label t 'exam_portions.name'
+                  = ep_form.text_field :name, :class => "span12"
+                .span3
+                  = ep_form.label t 'exam_portions.weight'
+                  = ep_form.number_field :weight, :class => "span12"
+              .row-fluid
+                .span6
+                  = ep_form.label t 'exam_portions.problem_count'
+                  = ep_form.number_field :problem_count, :class => "span12"
+                .span6
+                  = ep_form.label t 'exam_portions.max_score'
+                  = ep_form.number_field :max_score, :class => "span12"
+              .row-fluid
+                .span6
+                  = ep_form.label t 'exam_portions.description'
+                  = ep_form.text_area :description, :class => "span12", :size => "0x2"
+                .span6
+                  = ep_form.label t 'exam_portions.adjustments'
+                  = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
+              .row-fluid
+                .span12.form-inline
+                  = ep_form.check_box :dynamic_scoring
+                  = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+              .row-fluid
+                .span12
+                  .span6 
+                    = ep_form.submit t("exam_portions.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+                    = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"

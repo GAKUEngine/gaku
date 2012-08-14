@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.4'
 gem 'rails-i18n'
+gem 'mysql2'
 
 gem 'slim-rails'
 
