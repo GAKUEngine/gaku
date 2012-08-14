@@ -1,1 +1,42 @@
-=render 'exams/exam_portions'
+=render 'exams/exam_portions/exam_portions'
+br/
+= form_for(@exam) do |f|
+  - if @exam.errors.any?
+    .alert.alert-error
+      strong
+        = pluralize(@exam.errors.count, "error")
+        | prohibited this exam from being saved:
+      ul
+        - @exam.errors.full_messages.each do |msg|
+          li= msg
+  .row-fluid
+    .row-fluid
+      h4 = t('exams.edit_exam')
+    .row-fluid
+      hr
+    .row-fluid
+      .span12.well
+        .row-fluid
+          .span9
+            = f.label :name, t("exams.name")
+            = f.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+          .span3
+            = f.label :weight, t("exams.weight")
+            = f.number_field :weight, :class => "validate[required,custom[number],min[0]] span12", "data-prompt-position" => "bottomRight:5"
+        .row-fluid
+          .span6
+            = f.label :description, t("exams.description")
+            = f.text_area :description, :class => "span12", :size => "0x2"
+          .span6
+            = f.label :adjustments, t("exams.adjustments")
+            = f.text_area :adjustments, :class => "span12", :size => "0x2"
+        .row-fluid
+          .span12.form-inline
+            = f.check_box :dynamic_scoring
+            = f.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+  .row-fluid
+    .span12.well
+      = f.submit nil, :class => "span12 btn btn-primary"
+
+coffee:
+  $('.edit_exam').validationEngine();

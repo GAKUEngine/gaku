@@ -158,6 +158,7 @@ en:
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
     show: "Show Exam"
+    edit: "Edit Exam"
   config:
     label: "Config"
     close: "Close"
