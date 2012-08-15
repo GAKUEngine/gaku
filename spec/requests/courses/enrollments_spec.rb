@@ -39,9 +39,9 @@ describe "CourseEnrollment"  do
   end
 
   it "should enroll a class group", :js => true do 
-    class_group = Factory(:class_group, :name => "Math", :id => 'math_class_group')
-    student1 = Factory(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => ['math_class_group'])
-    student2 = Factory(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => ['math_class_group'])
+    class_group = Factory(:class_group, :name => "Math")
+    student1 = Factory(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
+    student2 = Factory(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
     
     visit course_path(@course)
 
