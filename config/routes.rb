@@ -43,7 +43,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :students do
     resources :guardians, :controller => 'students/guardians' do
-      resources :contacts
+      resources :contacts, :controller => 'guardians/contacts'
 
       get :new_contact, :on => :member
       get :edit_student_guardian, :on => :collection
