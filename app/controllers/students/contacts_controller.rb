@@ -30,7 +30,7 @@ class Students::ContactsController < ApplicationController
   def destroy
     super do |format|
       if @contact.is_primary?
-        @student.contacts.first.make_primary_student
+        @student.contacts.first.make_primary_student if @student.contacts.any?
         format.js { render }
       else
         format.js { render 'destroy' }

@@ -54,7 +54,8 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
-    picture:
+    picture: "Picture"
+    picture_uploaded: 'Picture Uploaded'
     choose_gender: 'Choose Gender'
     class_group_enrollment: "Class enrollment"
     add_contact: "Add Contact"
