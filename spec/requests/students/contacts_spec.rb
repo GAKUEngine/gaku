@@ -37,7 +37,7 @@ describe 'Contact' do
 
       visit student_path(@student) 
       click_link 'new_student_contact_tab_link'
-      wait_until { page.has_content?('Contacts List') } 
+      wait_until { page.has_content?('Contacts list') } 
     end
 
     it "should edit a student contact", :js => true do 
