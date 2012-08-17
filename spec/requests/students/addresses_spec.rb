@@ -8,7 +8,7 @@ describe 'Address' do
     within('ul#menu') { click_link "Students"}
   end
 
-  it "should allow to add a student address", :js => true do
+  it "should add and show student address", :js => true do
     Factory(:country, :name => "Japan")
     visit student_path(@student)
 
