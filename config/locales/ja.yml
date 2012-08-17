@@ -61,6 +61,7 @@ ja:
     gender: "性別"
     add_address: "住所を追加"
     picture: "生徒写真"
+    picture_uploaded: 'Picture Uploaded'
     add_contact: "連絡先を追加"
     create_contact: "連絡先を作成"
     choose_gender: '性別を選択してください'

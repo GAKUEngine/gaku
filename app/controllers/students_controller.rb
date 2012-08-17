@@ -103,7 +103,11 @@ class StudentsController < ApplicationController
           elsif !params[:student][:notes_attributes].nil?
             format.js { render 'students/notes/create' }             
           else
-            format.js { render}
+            if !params[:student][:picture].blank?
+              format.html { redirect_to @student, :notice => t('students.picture_uploaded')}
+            else
+              format.js { render}
+            end
           end
         end
         format.html { redirect_to @student } 
