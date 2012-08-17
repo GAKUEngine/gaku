@@ -1,0 +1,3 @@
+<%-if  @guardian.contacts.any? %>
+	$('.guardian_contact_table').find('#contact_<%= @guardian.contacts.first.id %> .make_primary').addClass('btn-primary')
+<% end %>

@@ -6,7 +6,7 @@ class Students::GuardiansController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
+  before_filter :load_student, :only => [ :new,:show, :create, :edit, :update, :destroy ]
 
   def new
     @guardian = Guardian.new
