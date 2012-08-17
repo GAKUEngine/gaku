@@ -11,7 +11,7 @@ class Students::Guardians::ContactsController < ApplicationController
   def create
     @contact = @guardian.contacts.build(params[:contact])
     if @contact.save
-      @contact.make_primary_student if params[:contact][:is_primary] == "1"
+      @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       respond_to do |format|
         format.js {render 'students/guardians/contacts/create'}
       end
@@ -26,6 +26,8 @@ class Students::Guardians::ContactsController < ApplicationController
 
   def update
     super do |format|
+      @contacts = Contact.where(params[:guardian_id])
+      @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       format.js {render 'students/guardians/contacts/update'}
     end  
   end
