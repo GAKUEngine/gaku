@@ -14,7 +14,7 @@ describe "Student Images" do
       absolute_path = Rails.root + "spec/support/120x120.jpg"
       attach_file('student_picture', absolute_path)
       click_button "Upload"
-      #TODO should check for flash message
+      page.should have_content("Picture successfully uploaded")
     end
   end
 end
