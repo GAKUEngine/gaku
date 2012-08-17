@@ -1,0 +1,2 @@
+$('tr#contact_<%= @contact.id %>').html('<%= escape_javascript(render :partial => "students/guardians/contacts/guardian_contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$(".modal#editContactModal").modal("hide");
