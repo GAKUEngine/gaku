@@ -22,4 +22,5 @@
 				=f.label :is_emergency
 				=f.check_box :is_emergency, {}, 0, 1
 			.actions
-				=f.submit t('students.create_contact'), :class => 'btn btn-primary'
+				=f.submit t('students.create_contact'), :id => 'submit_button', :class => 'btn btn-primary'
+				= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"
