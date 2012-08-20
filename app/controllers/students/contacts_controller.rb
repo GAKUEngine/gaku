@@ -23,6 +23,8 @@ class Students::ContactsController < ApplicationController
 
   def update
     super do |format|
+      @contacts = Contact.where(:student_id => params[:student_id])
+      @contact.make_primary_student if params[:contact][:is_primary] == "1"
       format.js { render 'update' }  
     end  
   end
