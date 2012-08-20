@@ -27,32 +27,50 @@ describe 'Note' do
     @student.notes.size.should == 1
 
   end
+  context "edit and delete" do 
+    before do 
+      @note = Factory(:note, :student_id => @student)
+      visit student_path(@student)
+    end
 
-  it "should edit a student note", :js => true do 
-    Factory(:note, :student_id => @student)
-    visit student_path(@student) 
+    it "should edit a student note", :js => true do 
+      click_link 'new_student_note_tab_link'
+      click_link 'new_student_note_link'
 
-    click_link 'new_student_note_tab_link'
-    click_link 'new_student_note_link'
+      wait_until { page.has_content?('New Note') } 
+      fill_in "note_title", :with => "The note title"
+      fill_in "note_content", :with => "The note content"
 
-    wait_until { page.has_content?('New Note') } 
-    fill_in "note_title", :with => "The note title"
-    fill_in "note_content", :with => "The note content"
+      click_button "Save note"
+      click_link "edit_link" 
 
-    click_button "Save note"
-    click_link "Edit" 
+      wait_until { find('#editNoteModal').visible? } 
+      fill_in 'note_title', :with => 'Edited note title'
+      fill_in 'note_content', :with => 'Edited note content'
 
-    wait_until { find('#editNoteModal').visible? } 
-    fill_in 'note_title', :with => 'Edited note title'
-    fill_in 'note_content', :with => 'Edited note content'
+      click_button 'submit_button'
+      wait_until { !page.find('#editNoteModal').visible? }
+      
+      sleep 5
+      page.should have_content('Edited note title')
+      page.should have_content('Edited note content')
+    end
 
-    click_button 'submit_button'
-    #click_link 'cancel_link'
-    wait_until { !page.find('#editNoteModal').visible? }
-    
-    sleep 5
-    page.should have_content('Edited note title')
-    page.should have_content('Edited note content')
+    it "should delete a student note", :js => true do
+      click_link 'new_student_note_tab_link'
+      wait_until { page.has_content?('Notes') } 
+      page.all('table.index tr').size.should == 3
+      page.should have_content(@note.title)
+      @student.notes.size.should == 1
 
+      click_link 'delete_link' 
+      page.driver.browser.switch_to.alert.accept
+      #FIXME Make a real check, no sleep 
+      sleep 1
+      page.all('table.index tr').size.should == 2
+      @student.notes.size.should == 0
+      page.should_not have_content(@note.title)
+    end
   end
+
 end

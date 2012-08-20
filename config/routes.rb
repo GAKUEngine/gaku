@@ -46,32 +46,28 @@ GAKUEngine::Application.routes.draw do
       resources :contacts, :controller => 'students/guardians/contacts' do
         post :make_primary, :on => :member
       end
+
       resources :addresses, :controller => 'students/guardians/addresses' do
         post :make_primary, :on => :member
       end
-
+      
       get :new_contact, :on => :member
-      get :edit_student_guardian, :on => :collection
     end
+
     resources :addresses, :controller => 'students/addresses' do
       post :make_primary, :on => :member
     end
-    resources :notes, :controller => 'students/notes'
-    resources :exams
-    resources :courses
     resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member
     end
 
+    resources :notes, :controller => 'students/notes'
     resources :course_enrollments, :controller => 'students/course_enrollments'
     resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
-
-    member do
-      get :new_guardian
-    end
+    resources :exams
+    resources :courses
 
     collection do 
-      put :create_guardian
       get :get_csv_template
       post :import_student_list
       get :autocomplete_search

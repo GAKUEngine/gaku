@@ -3,16 +3,12 @@ class StudentsController < ApplicationController
   #before_filter :authenticate_user!
 
   inherit_resources
-
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  actions :show, :new, :destroy
 
   before_filter :load_before_index, :only => :index
-  before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_before_show,  :only => :show
-  before_filter :load_student,      :only => [:new_address, :create_address,
-                                              :new_guardian, :create_guardian,
-                                              :new_note, :create_note,
-                                              :edit, :update]
+  before_filter :load_class_groups, :only => [:new, :edit]
+  before_filter :load_student,      :only => [:edit, :update]
   
   def index
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
@@ -67,30 +63,23 @@ class StudentsController < ApplicationController
         when 1 #titles
           #ignore
         else #process record
-          Student.create!(:surname => row[0],
-                         :name => row[1],
-                         :surname_reading => row[2],
-                         :name_reading => row[3])
-          
+          Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
         end
-
         @rowcount += 1
       end
     end
-
     render :student_import_preview
   end
 
-
   def create
     super do |format|
-      format.js {render}
+      format.js { render }
     end
   end
 
   def edit
     super do |format|
-      format.js {render}
+      format.js { render }
     end
   end
 
@@ -104,7 +93,7 @@ class StudentsController < ApplicationController
             format.js { render 'students/notes/create' }             
           else
             if !params[:student][:picture].blank?
-              format.html { redirect_to @student, :notice => t('students.picture_uploaded')}
+              format.html { redirect_to @student, :notice => t('notice.picture_uploaded')}
             else
               format.js { render}
             end
@@ -122,32 +111,6 @@ class StudentsController < ApplicationController
     destroy! :flash => !request.xhr?
   end
 
-  def new_address
-    @student.addresses.build
-    render 'students/addresses/new'
-  end
-
-  def create_address
-    if @student.update_attributes(params[:student])
-      respond_to do |format|
-        format.js { render 'students/addresses/create' }  
-      end
-    end  
-  end
-
-  def new_guardian
-    @student.guardians.build
-    render 'students/guardians/new'
-  end
-
-  def create_guardian
-    if @student.update_attributes(params[:student])
-      respond_to do |format|
-        format.js { render 'students/guardians/create' }  
-      end
-    end  
-  end
-
   def autocomplete_search
     # search only name or surname separate
     # @students = Student.where("name like ? OR surname like ?", "%#{params[:term]}%", "%#{params[:term]}%")
@@ -161,6 +124,16 @@ class StudentsController < ApplicationController
       @student = Student.new
     end
 
+    def load_before_show
+      @new_contact = Contact.new
+      #@new_guardian = Guardian.new
+      #@new_note = Note.new
+      #@new_course_enrollment = CourseEnrollment.new
+      #@notes = Note.all
+      #@class_groups = ClassGroup.all
+      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+    end
+
     def load_class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]
@@ -168,17 +141,6 @@ class StudentsController < ApplicationController
 
     def load_student
       @student = Student.find(params[:id])
-    end
-
-    def load_before_show
-      @new_contact = Contact.new
-      @new_guardian = Guardian.new
-      @new_note = Note.new
-      @new_course_enrollment = CourseEnrollment.new
-      @notes = Note.all
-      @class_groups = ClassGroup.all
-
-      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 
 end

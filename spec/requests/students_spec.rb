@@ -4,17 +4,17 @@ describe 'Student' do
   before do
     @student = Factory(:student)
     sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Students"}
+    within('ul#menu') { click_link "Students" }
   end
 
   context "listing" do
-    it "should list existing students", :js=>true do
+    it "should list existing students", :js => true do
       page.should have_selector('div#students_grid_table')
       page.should have_content("#{@student.name}")
     end
   end
 
-  context "creating", :js=>true do 
+  context "creating", :js => true do 
     it "should create new student" do 
       click_link "new_student_link"
       fill_in "student_name", :with => "John"
@@ -55,7 +55,7 @@ describe 'Student' do
       fill_in "student_name", :with => "Marta"
       click_on "Update Student"
       click_on "Show Students"
-      wait_until {page.has_content?("Kostova Marta")}
+      wait_until { page.has_content?("Kostova Marta") }
     end
   end
 
