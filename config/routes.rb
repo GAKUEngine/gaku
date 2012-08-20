@@ -44,6 +44,11 @@ GAKUEngine::Application.routes.draw do
   resources :students do
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
+        post :create_modal, :on => :collection
+        post :make_primary, :on => :member
+      end
+
+      resources :addresses, :controller => 'students/guardians/addresses' do
         post :make_primary, :on => :member
       end
       

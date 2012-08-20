@@ -1,5 +1,6 @@
 .row-fluid
   .span12.well
+    h3 Guardian Contacts
     table.table.table-striped.table-bordered.table-condensed.guardian_contact_table
       thead
         tr
@@ -17,6 +18,30 @@
     .row-fluid  
       .span12.well
         =render 'students/guardians/contacts/new_guardian_contact_form'
+
+br/
+.row-fluid
+  .span12.well
+    h3 Guardian Addresses
+    table#guardian_addresses_idx.index.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th.btn-inverse style="width:28px"
+              i.icon-white.icon-home
+            th.btn-inverse =t 'addresses.title'
+            th.btn-inverse =t 'addresses.country'
+            th.btn-inverse =t 'addresses.zipcode'
+            th.btn-inverse =t 'addresses.state'
+            th.btn-inverse =t 'addresses.city'
+            th.btn-inverse =t 'addresses.address1'
+            th.btn-inverse =t 'addresses.address2'
+            th.btn-info style="width:61px" =t 'manage'
+        tbody
+          =render :partial => 'students/guardians/addresses/show', :collection => @guardian.addresses, :as => 'address'
+    br/
+    =link_to "New Address", new_student_guardian_address_path(@student, @guardian), :remote => true, :class => 'btn btn-primary new_guardian_address_link'
+
+#new_guardian_address_form
 
   #modal_dialogs
    

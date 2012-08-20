@@ -4,7 +4,7 @@
 			'x
 		h3 = "New Guardian Contact"
 	.modal-body
-		=form_for([@student, @guardian, @contact], {:remote => true}) do |f|
+		=form_for([@student, @guardian, @contact], :url => create_modal_student_guardian_contacts_path(@student, @guardian, @contact), :remote => true) do |f|
 			.field
 				=f.label :contact_type
 				=f.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, :promt => "Choose Contact Type"
