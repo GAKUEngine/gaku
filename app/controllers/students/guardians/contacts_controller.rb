@@ -4,8 +4,8 @@ class Students::Guardians::ContactsController < ApplicationController
 	
 	actions :index, :show, :new, :create, :update, :edit, :destroy
 
-	before_filter :load_guardian, :only => [:edit, :update, :create, :destroy, :show]
-  before_filter :load_before_show, :only => [:edit, :update, :create, :show]
+	before_filter :load_guardian, :only => [:edit, :update, :create, :create_modal, :destroy, :show]
+  before_filter :load_before_show, :only => [:edit, :update, :create, :create_modal, :show]
 
 
   def create
@@ -13,7 +13,18 @@ class Students::Guardians::ContactsController < ApplicationController
     if @contact.save
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       respond_to do |format|
-        format.js { render 'students/guardians/contacts/create' }
+        format.js { render 'students/guardians/contacts/create', :notice => 'Contact Created' }
+      end
+    end
+  end
+
+  def create_modal
+    @contact = @guardian.contacts.build(params[:contact])
+    if @contact.save
+      @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
+      respond_to do |format|
+        flash.now[:notice] = 'Contact Created'
+        format.js { render 'students/guardians/contacts/create_modal'}
       end
     end
   end
