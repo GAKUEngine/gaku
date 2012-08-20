@@ -19,7 +19,8 @@
 		=f.label :is_emergency, t('contacts.emergency')
 		=f.check_box :is_emergency
   .row-fluid
-		=f.submit t('contacts.save'), :class => 'btn btn-primary'
+		=f.submit t('contacts.save'), :id => 'submit_button', :class => 'btn btn-primary'
+		= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"
 
 coffee:
   $('.new_guardian_contact_form').validationEngine();

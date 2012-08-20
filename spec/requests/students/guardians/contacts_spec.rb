@@ -34,23 +34,43 @@ describe 'Guardian Contacts' do
     @student.guardians.first.contacts.count.should == 1
   end
 
-  it 'should make a primary contact to student guardian', :js => true do 
-    mobile1 = Factory(:contact, :data => 123, :contact_type => @contact_type)
-    mobile2 = Factory(:contact, :data => 321, :contact_type => @contact_type)
-    @student.guardians.first.contacts << [ mobile1, mobile2 ]
-    @student.reload
+  context 'edit and set primary' do 
 
-    @student.guardians.first.contacts.first.is_primary? == true
-    @student.guardians.first.contacts.second.is_primary? == false
+    before do 
+      mobile1 = Factory(:contact, :data => 123, :contact_type => @contact_type)
+      mobile2 = Factory(:contact, :data => 321, :contact_type => @contact_type)
+      @student.guardians.first.contacts << [ mobile1, mobile2 ]
+      @student.reload
+    end
 
-    click_link 'show_link'
-    within('table.guardian_contact_table tr#contact_2') { click_link 'set_primary_link' } 
-    page.driver.browser.switch_to.alert.accept
+    it 'should edit contact for student guardian', :js => true do 
+      click_link 'show_link'
+      page.should have_content '321'
 
-    @student.guardians.first.contacts.first.is_primary? == false
-    @student.guardians.first.contacts.second.is_primary? == true
+      within('table.guardian_contact_table tr#contact_2') { click_link 'edit_link' }
+      wait_until { find('#editContactModal').visible? } 
 
-    #TODO Check the css classes of primary button
+      fill_in 'contact_data', :with => '777'
+      click_button 'submit_button'
+      
+      page.should have_content '777'
+      page.should_not have_content '321'
+    end
+
+    it 'should make a primary contact to student guardian', :js => true do 
+      click_link 'show_link'
+
+      @student.guardians.first.contacts.first.is_primary? == true
+      @student.guardians.first.contacts.second.is_primary? == false
+      
+      within('table.guardian_contact_table tr#contact_2') { click_link 'set_primary_link' } 
+      page.driver.browser.switch_to.alert.accept
+
+      @student.guardians.first.contacts.first.is_primary? == false
+      @student.guardians.first.contacts.second.is_primary? == true
+
+      #TODO Check the css classes of primary button
+    end
+
   end
-
 end
