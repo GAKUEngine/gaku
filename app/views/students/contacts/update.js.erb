@@ -1,2 +1,12 @@
-$('tr#contact_<%= @contact.id %>').html('<%= escape_javascript(render :partial => "student_contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$('.student_contact_table tbody').html('<%= escape_javascript(render :partial => "students/contacts/show", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
 $(".modal#editContactModal").modal("hide");
+
+
+$('.student_contact').each(function() {
+	$(this).children('td.primary_contact').html('');
+	$(this).find('.primary_button a').removeClass('btn-primary')
+});
+
+var currentContact = $("#contact_<%= @contact.id %>");
+currentContact.children('td.primary_contact').html('Primary');
+currentContact.find('.primary_button a').addClass('btn-primary')
