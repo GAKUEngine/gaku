@@ -62,7 +62,7 @@ class Student < ActiveRecord::Base
   
   def class_group_widget
     cg = self.class_groups.last
-    cg.blank? ? nil : cg.name 
+    cg.blank? ? nil : cg
   end
 
   def seat_number_widget
