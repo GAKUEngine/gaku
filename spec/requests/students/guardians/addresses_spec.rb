@@ -43,13 +43,13 @@ describe 'Guardian Addresses' do
       address2 = Factory(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
       @student.guardians.first.addresses << [ address1, address2 ]
       @student.reload
+      click_link 'show_link'
     end
 
     it 'should edit address for student guardian', :js => true do 
       Factory(:country, :name => "Brasil")
       #page.should have_content 'Bulgaria'
 
-      click_link 'show_link'
       within('table.guardian_address_table tr#address_2') { click_link 'edit_link' }
       wait_until { find('#editAddressModal').visible? }
 
@@ -61,6 +61,21 @@ describe 'Guardian Addresses' do
 
       page.should have_content 'Brasil'
       #page.should_not have_content 'Bulgaria'
+    end
+
+    it 'should delete address for student guardian', :js => true do 
+      page.all('table.guardian_address_table tr').size.should == 3
+      page.should have_content('Bulgaria')
+      @student.guardians.first.addresses.size.should == 2
+
+      within('table.guardian_address_table tr#address_2') { click_link 'delete_link' }
+      page.driver.browser.switch_to.alert.accept
+      
+      #FIXME Make a real check, no sleep 
+      sleep 1
+      page.all('table.index tr').size.should == 2
+      @student.guardians.first.addresses.size.should == 1
+      page.should_not have_content('Bulgaria')
     end
   end
 
