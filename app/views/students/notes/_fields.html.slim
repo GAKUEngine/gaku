@@ -1,18 +1,7 @@
-fieldset
-  .row-fluid
-    .span12
-      = note.label :title, t("notes.title"), :class => "control-label"
-      .controls
-        = note_form.text_field :title, :class => "span12 edit_note"
-  .row-fluid
-    .span12
-      = note_form.label :content, t("notes.content"), :class => "control-label"
-      .controls
-        = note_form.text_area :content, :class => "span12 edit_note", :size => "0x10"
-  .row-fluid
-    .span12
-      = note_form.hidden_field :_destroy
-      = link_to ("<i class='icon-remove icon-white'></i> "+t("notes.delete")).html_safe, "#", :class => "pull-right btn btn-mini btn-danger remove_fields" 
-  .row-fluid
-    .span12
-      hr
+td =note.id
+td =note.title
+td =note.content
+td= link_to t("show"), student_note_path(@student, note)
+td= link_to t("edit"), edit_student_note_path(@student, note), :id => 'edit_link', :remote => true
+td= link_to t("delete"), student_note_path(@student, note), :id => 'delete_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'delete_link delete_note'
+
