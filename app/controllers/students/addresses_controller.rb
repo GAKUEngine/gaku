@@ -25,14 +25,18 @@ class Students::AddressesController < ApplicationController
           format.js { render 'create' }  
         end
       else
-        format.js {render 'create_error'}
+        format.js {render 'validation_errors'}
       end
     end  
   end
   
   def update
     super do |format|
-      format.js { render 'update' }  
+      if @address.save
+        format.js { render 'update' }
+      else
+        format.js { render 'validation_errors'}
+      end  
     end  
   end
 
