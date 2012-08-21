@@ -36,7 +36,7 @@ describe 'Guardian Addresses' do
     @student.guardians.first.addresses.count.should == 1
   end
 
-  context 'edit and delete' do 
+  context 'edit, delete, set primary' do 
     before do 
       bulgaria = Factory(:country, :name => "Bulgaria")
       address1 = Factory(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
@@ -70,14 +70,26 @@ describe 'Guardian Addresses' do
 
       within('table.guardian_address_table tr#address_2') { click_link 'delete_link' }
       page.driver.browser.switch_to.alert.accept
-      
+
       #FIXME Make a real check, no sleep 
       sleep 1
       page.all('table.index tr').size.should == 2
       @student.guardians.first.addresses.size.should == 1
       page.should_not have_content('Bulgaria')
     end
-  end
 
+ 
+    it 'should set primary address for student guardian', :js => true do 
+      #TODO Maybe refactor so to call addresses instead of guardian_addresses
+      @student.guardians.first.guardian_addresses.first.is_primary? == true
+      @student.guardians.first.guardian_addresses.second.is_primary? == false
+
+      within('table.guardian_address_table tr#address_2') { click_link 'set_primary_link' }
+      #page.driver.browser.switch_to.alert.accept
+
+      @student.guardians.first.guardian_addresses.first.is_primary? == false
+      @student.guardians.first.guardian_addresses.second.is_primary? == true
+    end
+  end
   
 end

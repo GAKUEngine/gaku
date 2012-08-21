@@ -6,7 +6,7 @@
       -if !@primary_address_id.blank? && @primary_address_id == address.id
         = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_guardian_address_path(@student, @guardian, address), :remote => true, :class => 'span12 btn btn-mini btn-primary make_primary_address', :style => "min-height:0px", :method => :post
       -else
-        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_guardian_address_path(@student, @guardian, address), :remote => true, :class => 'span12 btn btn-mini make_primary_address', :style => "min-height:0px", :method => :post
+        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_guardian_address_path(@student, @guardian, address), :remote => true, :id => 'set_primary_link', :class => 'span12 btn btn-mini make_primary_address', :style => "min-height:0px", :method => :post
     td= address.title
     td= address.country
     td= address.zipcode
