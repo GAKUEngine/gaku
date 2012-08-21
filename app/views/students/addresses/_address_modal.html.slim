@@ -2,7 +2,7 @@
 - model_class = model.class
 .modal.hide#editAddressModal wmode="opaque"
 
-  = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |address_form| 
+  = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal', :id => "edit_student_address" }) do |address_form| 
 
       .modal-header
         h3 =t("addresses.edit")
@@ -17,7 +17,7 @@
           .row-fluid.control-group
             .span6
               = address_form.label :country, t("addresses.country"), :class => "control-label"
-              = address_form.select :country_id, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "span12", :id => "country_dropdown"
+              = address_form.select :country_id, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown"
             .span6
               = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
               .row-fluid
@@ -32,11 +32,11 @@
               = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
             .span6
               = address_form.label :city, t("addresses.city"), :class => "control-label"
-              = address_form.text_field :city, :class => "span12"
+              = address_form.text_field :city, :class => "validate[required] span12"
           .row-fluid.control-group
             .span6
               = address_form.label :address1, t("addresses.address1"), :class => "control-label"
-              = address_form.text_field :address1, :class => "span12"
+              = address_form.text_field :address1, :class => "validate[required] span12"
             .span6
               = address_form.label :address2, t("addresses.address2"), :class => "control-label"
               = address_form.text_field :address2, :class => "span12"
@@ -52,3 +52,5 @@
             .span9
               = address_form.submit t('addresses.save'), :class => 'span12 btn btn btn-primary', :id => 'submit_button'
             = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_link', :'data-dismiss' => "modal"
+coffee:
+  $('#edit_student_address').validationEngine()
