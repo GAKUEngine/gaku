@@ -14,4 +14,5 @@
     td= address.address2
     td
       = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_address_path(@student, address), :remote => true, :class => "mr-xs btn btn-mini btn-warning", :id => 'edit_link'
+      
       = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_address_path(@student, address), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_address', :id => 'delete_link', :remote => true

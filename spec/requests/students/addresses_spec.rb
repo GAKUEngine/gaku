@@ -15,11 +15,10 @@ describe 'Address' do
 
       click_link 'new_student_address_tab_link'
       click_link 'new_student_address_link'
-      wait_until { page.has_content?('Country') }
+      wait_until { page.has_content?('New Address') }
     end
 
     it 'should add and show student address', :js => true do
-       
       #required
       select "Japan", :from => 'country_dropdown'
       fill_in "address_city", :with => "Nagoya"
@@ -29,7 +28,7 @@ describe 'Address' do
       fill_in "address_zipcode", :with => "00359"
       fill_in "address_address2", :with => "Toyota str."
 
-      click_button "Save address"
+      click_button "submit_button"
 
       page.should have_selector('a', href: "/students/1/addresses/1/edit")
 
@@ -46,7 +45,7 @@ describe 'Address' do
     end
 
     it 'should error if there are empty fields', :js => true do 
-      click_button "Save address"
+      click_button "submit_button"
       page.should have_content('Address1 is empty')
       page.should have_content('City is empty')
     end
