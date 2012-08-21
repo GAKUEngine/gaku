@@ -20,8 +20,12 @@ class Students::AddressesController < ApplicationController
 
   def create
     super do |format|
-      if @student.addresses << @address
-        format.js { render 'create' }  
+      if @address.save
+        if @student.addresses << @address
+          format.js { render 'create' }  
+        end
+      else
+        format.js {render 'create_error'}
       end
     end  
   end

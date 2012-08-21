@@ -5,6 +5,9 @@
           .span12.well
             .row-fluid.cnntrol-group
               .span12
+                #validation_errors
+            .row-fluid.cnntrol-group
+              .span12
                 = address_form.label :title, t("addresses.title")
                 = address_form.text_field :title, :class => "span12"
             .row-fluid.control-group

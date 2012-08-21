@@ -8,7 +8,7 @@
         h3 =t("addresses.edit")
       .modal-body
         .row-fluid
-          .validation-error
+          #validation_errors
         .row-fluid.control-group
           = address_form.label :title, t("addresses.title"), :class => "control-label"
           = address_form.text_field :title, :class => "span12"
