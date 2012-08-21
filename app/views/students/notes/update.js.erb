@@ -1,2 +1,2 @@
-$('tr#note_<%= @note.id %>').html('<%= escape_javascript(render :partial => "fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
+$('tr#note_<%= @note.id %>').html('<%= escape_javascript(render :partial => "shared/fields/note_fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
 $("#editNoteModal").modal('hide')
