@@ -46,9 +46,10 @@
 = javascript_include_tag "students/addresses/form"
   
 coffee:
-  $("#address_cancel").click( ->
-    $(".new_address_student").show()
-    $("#add_new_student_address").html("")
-  )
+  $('#new_guardian_address_form').on 'click','#cancel_link', (e)->
+      e.preventDefault()
+      $('#add_student_guardian_address_link').show()
+      $('#new_guardian_address_form').hide()  
+  
 
   $('#new_guardian_address').validationEngine();
