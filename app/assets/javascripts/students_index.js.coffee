@@ -297,12 +297,20 @@ class StudentGrid extends BuHin
       if $('input.student_search').val() == ''
         @refreshGrid("/students.json")
 
+  refreshOnUpdateOrCreate: ->
+    $('#student_modal form').live 'ajax:success', =>
+      @refreshGrid()
+    
+    $('#new_student_form').live 'ajax:success', =>
+      @refreshGrid()
+
   init: () ->
     @_getFieldNames()
     @_getScreenMetrics()
     @autocompleteRefreshGrid()
     @refreshGrid("/students.json")
     @clearSearch()
+    @refreshOnUpdateOrCreate()
 
   ProcessOptions: (options) ->
     if options

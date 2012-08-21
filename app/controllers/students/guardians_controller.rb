@@ -6,8 +6,8 @@ class Students::GuardiansController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
-
+  before_filter :load_student, :only => [ :new,:show, :create, :edit, :update, :destroy ]
+  before_filter :load_primary_address, :only => :show
   def new
     @guardian = Guardian.new
     render 'new'  
@@ -49,9 +49,14 @@ class Students::GuardiansController < ApplicationController
   	end
   end
 
-  private 
+  private
     def load_student
       @student = Student.find(params[:student_id])
+    end
+
+    def load_primary_address
+      @guardian = Guardian.find(params[:id])
+      @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
     end
 
 end
