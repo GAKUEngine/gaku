@@ -49,7 +49,7 @@ class Students::ContactsController < ApplicationController
       #handle student contact make primary
       @contact.make_primary_student
       respond_with(@contact) do |format|
-        format.js {render 'student_make_primary'}
+        format.js {render 'make_primary'}
       end
     end
   end

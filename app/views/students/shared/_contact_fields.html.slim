@@ -1,0 +1,18 @@
+.row-fluid
+	=contact_form.label :is_primary, t('contacts.primary')
+	=contact_form.check_box :is_primary
+.row-fluid
+	=contact_form.label :contact_type
+	=contact_form.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, {:prompt => "Choose Contact Type"}, {:class => "validate[required]", "data-prompt-position" => "bottomRight:5"}
+.row-fluid
+	=contact_form.label :data
+	=contact_form.text_field :data, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+.row-fluid
+	=contact_form.label :details
+	=contact_form.text_field :details
+.row-fluid
+	=contact_form.label :is_emergency, t('contacts.emergency')
+	=contact_form.check_box :is_emergency
+.row-fluid
+	=contact_form.submit t('contacts.save'), :id => 'submit_button', :class => 'btn btn-primary'
+	= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"
