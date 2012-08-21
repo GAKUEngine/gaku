@@ -11,27 +11,5 @@
       .validation-error
       .form-inputs
         = hidden_field_tag :student_id, @student.id
-        .row-fluid.control-group
-          .span12
-            =contact_form.label :is_primary, t('contacts.primary')
-            =contact_form.check_box :is_primary
-        .row-fluid.control-group
-          .span12
-            =contact_form.label :contact_type
-            =contact_form.select :contact_type_id, ContactType.all.collect {|ct| [ct.name, ct.id]}, :prompt => "Choose Contact Type"
-        .row-fluid.control-group
-          .span12
-            =contact_form.label :data
-            =contact_form.text_field :data
-        .row-fluid.control-group
-          .span12
-            =contact_form.label :details
-            =contact_form.text_field :details
-        .row-fluid
-          .span12
-            =contact_form.label :is_emergency, t('contacts.emergency')
-            =contact_form.check_box :is_emergency
-        .row-fluid
-          .span12
-            = contact_form.submit t("contacts.save"), :id => 'submit_button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-            = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+        
+        = render 'students/shared/contact_fields', :contact_form => contact_form

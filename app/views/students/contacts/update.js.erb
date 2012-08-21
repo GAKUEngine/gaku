@@ -1,7 +1,6 @@
 $('.student_contact_table tbody').html('<%= escape_javascript(render :partial => "students/contacts/show", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
 $(".modal#editContactModal").modal("hide");
 
-
 $('.student_contact').each(function() {
 	$(this).children('td.primary_contact').html('');
 	$(this).find('.primary_button a').removeClass('btn-primary')
