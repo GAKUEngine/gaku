@@ -10,13 +10,13 @@ class StudentGrid extends BuHin
   studentsPerPage: 10
   fields: null
   titles:
-    surname: "Surname"
-    name: "Name"
-    gender: "Gender"
-    class_group: "Class Group"
-    seat_number: "Seat Number"
-    addmited: "Admitted"
-    primary_address: "Primary Address"
+    surname: I18n.t('students.surname')
+    name: I18n.t('students.name')
+    gender: I18n.t('gender')
+    class_group: I18n.t('class_groups.name')
+    seat_number: I18n.t('class_group_enrollments.seat_number')
+    addmited: I18n.t('students.admitted')
+    primary_address: I18n.t('addresses.primary')
 
   defColWidth: 128
 
@@ -40,20 +40,20 @@ class StudentGrid extends BuHin
                   title: I18n.t('gender')
                 },{
                   field: "class_group_widget"
-                  title: "Class Group"
+                  title: I18n.t('class_groups.name')
                   groupable: true
                 },{
                   field: "seat_number_widget"
-                  title: "Seat Number"
+                  title: I18n.t('class_group_enrollments.seat_number')
                   sortable: true
                 },{
                   field: "admitted"
-                  title: "Admitted"
+                  title: I18n.t('students.admitted')
                   groupable: true
                   sortable: true
                 },{
                   field: "address_widget"
-                  title: "Primary Address"
+                  title: I18n.t('addresses.primary')
                   groupable: true
                   sortable: true
                 },{
@@ -77,20 +77,20 @@ class StudentGrid extends BuHin
                   title: I18n.t('gender')
                 },{
                   field: "class_group_widget"
-                  title: "Class Group"
+                  title: I18n.t('class_groups.name')
                   groupable: true
                 },{
                   field: "seat_number_widget"
-                  title: "Seat Number"
+                  title: I18n.t('class_group_enrollments.seat_number')
                   sortable: true
                 },{
                   field: "admitted"
-                  title: "Admitted"
+                  title: I18n.t('students.admitted')
                   groupable: true
                   sortable: true
                 },{
                   field: "address_widget"
-                  title: "Primary Address"
+                  title: I18n.t('addresses.primary')
                   groupable: true
                   sortable: true
                 },{
@@ -152,13 +152,18 @@ class StudentGrid extends BuHin
 
   refreshGrid: (query) ->
     $.getJSON query, (studentData) =>
+      # console.log studentData
       if studentData == null
         return
-      # console.log studentData
+      
       @students = studentData
 
       i = 0
       while i < @students.length
+        
+        if @students[i]["class_group_widget"]
+          @students[i]["class_group_widget"] = @students[i]["class_group_widget"].grade  + " - " + @students[i]["class_group_widget"].name
+                            
         manage = $("<div></div>")
         pop = $("<a></a>")
         pop.attr("href", "#")
