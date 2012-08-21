@@ -1,4 +1,5 @@
 = form_for [@student, @guardian, Address.new], :html => {:id => 'new_guardian_address'}, :remote => true do |address_form|
+    b= t('addresses.new')
     - if address_form.object.new_record?
       .row-fluid.mt-l
         .span12.well
@@ -39,8 +40,8 @@
                     =address_form.check_box :past
           .row-fluid
             .span9
-              button.span12.btn.btn-primary =t "addresses.save"
-            = link_to t('cancel'), '#', :id => "address_cancel", :class => 'span3 btn btn-danger'
+              =address_form.submit t('addresses.save'), :id => 'submit_button', :class => 'btn btn-primary button span12'
+            = link_to t('cancel'), '#', :id => "cancel_link", :class => 'span3 btn btn-danger'
   
 = javascript_include_tag "students/addresses/form"
   
