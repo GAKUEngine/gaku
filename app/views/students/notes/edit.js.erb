@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "note_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "shared/modals/note_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
 $('#editNoteModal').modal('show');
