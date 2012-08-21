@@ -1,2 +1,2 @@
-$('tr#address_<%= @address.id %>').html('<%= escape_javascript(render :partial => "address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
+$('tr#address_<%= @address.id %>').html('<%= escape_javascript(render :partial => "fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
 $(".modal#editAddressModal").modal("hide");
