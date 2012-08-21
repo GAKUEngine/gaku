@@ -42,17 +42,17 @@ describe 'Address' do
     
   end
 
-  context "edit and delete" do 
+  context "edit and delete, set_primary" do 
 
     before(:each) do 
       @address = Factory(:address)
       Factory(:student_address, :student => @student, :address => @address)
-      visit student_path(@student) 
-      click_link 'new_student_address_tab_link'
-      wait_until { page.has_content?('Addresses list') } 
+      visit student_path(@student)
     end
 
     it "should edit a student address", :js => true do 
+      click_link 'new_student_address_tab_link'
+      wait_until { page.has_content?('Addresses list') } 
       click_link "edit_link" 
       wait_until { find('#editAddressModal').visible? } 
 
@@ -69,6 +69,8 @@ describe 'Address' do
     end
 
     it "should delete a student address", :js => true do
+      click_link 'new_student_address_tab_link'
+      wait_until { page.has_content?('Addresses list') } 
       page.all('table.index tr').size.should == 3
       page.should have_content(@address.address1)
       #@student.addresses.size.should == 1
@@ -80,6 +82,25 @@ describe 'Address' do
       page.all('table.index tr').size.should == 2
       @student.addresses.size.should == 0
       page.should_not have_content(@address.address1)
+    end
+
+    it 'should set primary address', :js => true do 
+      bulgaria = Factory(:country, :name => 'Bulgaria')
+      @address2 = Factory(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
+      Factory(:student_address, :student => @student, :address => @address2)
+    
+      #TODO Maybe refactor so to call addresses instead of student_addresses
+      @student.student_addresses.first.is_primary? == true
+      @student.student_addresses.second.is_primary? == false
+
+      visit student_path(@student) 
+      click_link 'new_student_address_tab_link'
+      wait_until { page.has_content?('Addresses list') } 
+
+      within('table.index tr#address_2') { click_link 'set_primary_link' }
+
+      @student.student_addresses.first.is_primary? == false
+      @student.student_addresses.second.is_primary? == true
     end
 
   end

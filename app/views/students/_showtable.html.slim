@@ -5,7 +5,7 @@
         tbody
           tr
             th.btn-primary width="20%" =t("class")
-            td#student_class_group_enrollment = @student.class_groups.last.name + " (" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + ")" if @student.class_groups.any?
+            td#student_class_group_enrollment = @student.class_groups.last.grade.to_s + " - " + @student.class_groups.last.name + "（" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + "）" if @student.class_groups.any?
           tr
             th.btn-success =t("name")
             td.vm style="font-size:16pt"
@@ -13,13 +13,21 @@
                 ruby style="margin-right:5px"
                   rb
                     = @student.surname
-                  rt
+                  rt style="font-size:12pt"
                     = @student.surname_reading
                 ruby
                   rb
                     = @student.name
-                  rt
+                  rt style="font-size:12pt"
                     = @student.name_reading
+          tr
+            th.btn-success =t("phonetic_reading")
+            td.vm style="font-size:16pt"
+              = @student.surname_reading + " " + @student.name_reading
+          tr
+            th.btn-success =t("name")
+            td.vm style="font-size:16pt"
+              = @student.surname + " " + @student.name
           tr
             th.btn-success =t("gender")
             td = gender(@student)
