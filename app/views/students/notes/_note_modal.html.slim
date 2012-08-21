@@ -13,7 +13,7 @@
         .form-inputs
           = hidden_field_tag :student_id, @student.id
 
-          = render 'students/shared/note_fields', :note_form => note_form
+          = render 'shared/form_fields/note_form_fields', :note_form => note_form
 
           .row-fluid
             .span12
