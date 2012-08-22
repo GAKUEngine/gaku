@@ -1,4 +1,4 @@
-	$('.guardian_contact_table tbody').append('<%= escape_javascript(render :partial => "students/guardians/contacts/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+	$('.guardian_contact_table tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
 $("#new_guardian_contact_link").show();
 $('#new_guardian_contact_form').hide();
 $('#new_guardian_contact_form form')[0].reset();
