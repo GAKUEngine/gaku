@@ -13,7 +13,7 @@
             th =t("notes.content")
             th =t("options")
         tbody
-          =render :partial => 'students/notes/show', :collection => @student.notes, :as => :note 
+          =render :partial => 'students/notes/note', :collection => @student.notes, :as => :note 
   hr
 #add_new_student_note
 .row-fluid

@@ -1,4 +1,4 @@
-$('#guardian_addresses_idx tbody').append('<%= escape_javascript(render :partial => "students/guardians/addresses/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
+$('#guardian_addresses_idx tbody').append('<%= escape_javascript(render :partial => "address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
 
 $('#new_guardian_address').hide()
 $('#new_guardian_address')[0].reset()
