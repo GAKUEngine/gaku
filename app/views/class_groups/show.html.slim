@@ -50,7 +50,7 @@
               .row-fluid
                 hr
               .row-fluid
-                ul
+                ul.semester_list
                   - @class_group.semesters.each do |semester|
                     li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
               .row-fluid

@@ -41,6 +41,11 @@ br/
     br/
     =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'add_student_guardian_address_link', :class => 'btn btn-primary new_guardian_address_link'
 
+
+.row-fluid
+  .span12
+    =link_to t('Back'), @student, :class => 'btn'
+
 #new_guardian_address_form
 
   #modal_dialogs
