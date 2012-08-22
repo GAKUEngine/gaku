@@ -71,6 +71,9 @@
             td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
           end
           td colspan="3"
+
+=link_to t('Back'), @course, :class => 'btn'
+
 coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
