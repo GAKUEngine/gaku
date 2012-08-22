@@ -158,6 +158,7 @@ en:
     adjustments: "Adjustments"
     weight: "Weight"
     dynamic_scoring: "Dynamic scoring"
+    use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
   config:
