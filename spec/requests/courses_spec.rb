@@ -38,4 +38,19 @@ describe 'Courses' do
     end
   end
 
+  context "edit a course" , :js => true do
+    it "should edit a course" do
+      @syllabus2 = Factory(:syllabus, :name => 'biology2013Syllabus', :code => 'biology', :id => '1234' )
+      page.should have_content("Courses List")
+      within('.table  tr:nth-child(2)') { click_link "edit_link" }
+      page.should have_content("Edit Course") 
+      fill_in 'course_code', :with => 'biology2013'
+      page.select "biology2013Syllabus", :from => 'course_syllabus_id'
+      click_button 'Update Course'
+      page.should have_content "was successfully updated"
+      page.should have_content "biology2013Syllabus"
+      page.should have_content "biology2013"
+    end
+  end
+
 end
