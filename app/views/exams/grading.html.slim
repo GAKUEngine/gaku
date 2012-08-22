@@ -21,17 +21,17 @@
         th.btn-info =t("students.name")
         - @exams.each do |exam|
           - exam.exam_portions.each do |portion|
-            th.btn-warning style="width:1px" = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
-          th#total_points_title.btn-inverse style="width:1px" = t("grades.total_points")
-          th#weighting_total_title.btn-inverse style="width:1px" = t("grades.weighting_total")
-          th#deviation.btn-inverse style="width:1px" = t("grades.deviation")
-          th#grade_title.btn-inverse style="width:1px" = t("grades.grade")
-          th#rank_title.btn-inverse style="width:1px" = t("grades.rank")
+            th.btn-warning style="width:62px" = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
+          th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+          th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+          th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
+          th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
+          th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
         - if defined? @grades
-          th#total_points_title.btn-inverse style="width:1px" = t("grades.total_points")
-          th#weighting_total_title.btn-inverse style="width:1px" = t("grades.weighting_total")
-          th#grade_title.btn-inverse style="width:1px" = t("grades.grade")
-          th#rank_title.btn-inverse style="width:1px" = t("grades.rank")
+          th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+          th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+          th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
+          th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
 
     tbody
       - @students.each do |student|
