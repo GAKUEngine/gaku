@@ -18,6 +18,7 @@ en:
   address: "Address"
   addresses:
     addresses: "Addresses"
+    new: "New Address"
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:

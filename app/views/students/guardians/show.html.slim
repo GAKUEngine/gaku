@@ -17,13 +17,13 @@
   #new_guardian_contact_form style='display:none' 
     .row-fluid  
       .span12.well
-        =render 'students/guardians/contacts/new_guardian_contact_form'
+        =render 'students/guardians/contacts/form'
 
 br/
 .row-fluid
   .span12.well
     h3 Guardian Addresses
-    table#guardian_addresses_idx.index.table.table-striped.table-bordered.table-condensed
+    table#guardian_addresses_idx.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th.btn-inverse style="width:28px"
@@ -39,7 +39,7 @@ br/
         tbody
           =render :partial => 'students/guardians/addresses/show', :collection => @guardian.addresses, :as => 'address'
     br/
-    =link_to "New Address", new_student_guardian_address_path(@student, @guardian), :remote => true, :class => 'btn btn-primary new_guardian_address_link'
+    =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'add_student_guardian_address_link', :class => 'btn btn-primary new_guardian_address_link'
 
 #new_guardian_address_form
 

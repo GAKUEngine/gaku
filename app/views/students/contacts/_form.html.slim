@@ -1,0 +1,8 @@
+=form_for([@student, @new_contact], :remote => true, :html => { :class => 'new_student_contact_form' }) do |contact_form|
+  .row-fluid 
+    .span12
+      b= t('contacts.new') 
+    = render 'shared/form_fields/contact_form_fields',  :contact_form => contact_form
+
+coffee:
+  $('.new_student_contact_form').validationEngine()

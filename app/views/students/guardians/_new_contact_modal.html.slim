@@ -1,0 +1,13 @@
+.modal.hide#newGuardianContactModal wmode="opaque"
+	.modal-header
+		button.close type="button" data-dismiss="modal"
+			'x
+		h3 = "New Guardian Contact"
+	.modal-body
+		=form_for([@student, @guardian, @contact], :url => create_modal_student_guardian_contacts_path(@student, @guardian, @contact), :remote => true) do |contact_form|
+
+			= render 'shared/form_fields/contact_form_fields', :contact_form => contact_form
+
+			.actions
+				=contact_form.submit t('students.create_contact'), :id => 'submit_button', :class => 'btn btn-primary'
+				= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"

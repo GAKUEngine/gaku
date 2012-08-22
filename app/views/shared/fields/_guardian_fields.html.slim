@@ -1,0 +1,22 @@
+tr
+  th width="20%" = t("guardians.name")
+  td.vm style="font-size:16pt"
+    div
+      ruby style="margin-right:5px"
+        rb
+          = guardian.surname
+        rt
+          = guardian.surname_reading
+      ruby
+        rb
+          = guardian.name
+        rt
+          = guardian.name_reading
+  th = t("guardians.relationship")
+  td.vm-tc style="font-size:12pt" = guardian.relationship
+tr
+  th = t("address")
+  td colspan="3" Guardian Address Here
+tr
+  th = t("contact")
+  td colspan="3" Guardian Contact Here

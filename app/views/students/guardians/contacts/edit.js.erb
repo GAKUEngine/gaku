@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "/students/guardians/contacts/contact_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact})%>');
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "students/guardians/contacts/contact_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact})%>');
 $('#editContactModal').modal('show');
