@@ -2,10 +2,9 @@
   tr id="exam_portion_#{exam_portion.id}"
     td= exam_portion.name
     td= exam_portion.max_score
-    td= exam_portion.weight
+    - if @exam.dynamic_scoring
+      td= exam_portion.weight
     td= exam_portion.problem_count
-    td= exam_portion.dynamic_scoring
-    td= exam_portion.is_master
     td
       = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-success", :style => "margin-right:5px"
       = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-warning", :style => "margin-right:5px", :remote => true

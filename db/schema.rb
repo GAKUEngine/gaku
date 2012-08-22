@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.integer  "problem_count"
     t.text     "description"
     t.text     "adjustments"
-    t.datetime "execution_date"
     t.boolean  "dynamic_scoring"
     t.boolean  "is_master",         :default => false
     t.integer  "exam_id"

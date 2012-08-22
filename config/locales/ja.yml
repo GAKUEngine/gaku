@@ -252,7 +252,7 @@ ja:
     description: "試験要素の説明"
     adjustments: "調整"
     execution_date: "実施日"
-    dynamic_scoring: "動的計算"
+    dynamic_scoring: "加重率を使用する"
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: "Save exam portion"
