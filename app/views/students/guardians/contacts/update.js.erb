@@ -1,4 +1,4 @@
-$('.guardian_contact_table tbody').html('<%= escape_javascript(render :partial => "students/guardians/contacts/show", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
+$('.guardian_contact_table tbody').html('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
 $(".modal#editContactModal").modal("hide");
 
 

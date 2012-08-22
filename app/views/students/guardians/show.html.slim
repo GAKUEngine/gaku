@@ -10,14 +10,14 @@
           th.btn-inverse =t('contacts.emergency')
           th.btn-inverse =t('contacts.actions')
       tbody
-        =render :partial => 'students/guardians/contacts/show', :collection => @guardian.contacts, :as => 'contact'
+        =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
   .row-fluid
     .span12
       =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new_guardian_contact_link'
   #new_guardian_contact_form style='display:none' 
     .row-fluid  
       .span12.well
-        =render 'students/guardians/contacts/new_guardian_contact_form'
+        =render 'students/guardians/contacts/form'
 
 br/
 .row-fluid
@@ -37,7 +37,7 @@ br/
             th.btn-inverse =t 'addresses.address2'
             th.btn-info style="width:61px" =t 'manage'
         tbody
-          =render :partial => 'students/guardians/addresses/show', :collection => @guardian.addresses, :as => 'address'
+          =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
     br/
     =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'add_student_guardian_address_link', :class => 'btn btn-primary new_guardian_address_link'
 

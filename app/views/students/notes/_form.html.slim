@@ -1,0 +1,26 @@
+= form_for [@student, @note], :html => {:id => 'new_student_note'}, :remote => true do |note_form|
+    - if note_form.object.new_record?
+      .row-fluid.control-group
+        .span12
+          b= t('notes.new')
+
+      = render 'shared/form_fields/note_form_fields', :note_form => note_form
+
+      .row-fluid
+        .span12
+          .span6 
+            = note_form.submit t("notes.save"), :id => "note_save_link", :class => "span12 btn btn-primary"
+          = link_to t("cancel"), "", :id => "note_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+
+coffee:
+  $("#note_cancel").click ->
+    $("#add_note_link").show()
+    $("#add_new_student_note").html("")
+  
+  $("#note_save_link").live("ajax:success", (data, status, xhr)->
+    #add new record to list
+    $("#add_note_link").show()
+    $("#add_new_student_note").html("")
+  )
+
+  $('#new_student_note').validationEngine()

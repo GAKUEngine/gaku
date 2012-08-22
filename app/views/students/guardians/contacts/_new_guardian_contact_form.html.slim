@@ -1,9 +1,0 @@
-- model = @contact || Contact.new
-=form_for([@student, @guardian, model], :remote => true, :html => { :class => 'new_guardian_contact_form' }) do |contact_form|
-  .row-fluid 
-    .span12
-      b= t('contacts.new') 
-    = render 'students/shared/contact_fields',  :contact_form => contact_form
-
-coffee:
-  $('.new_guardian_contact_form').validationEngine()

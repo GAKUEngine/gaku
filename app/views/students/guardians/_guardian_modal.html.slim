@@ -12,24 +12,9 @@
       .form-inputs
         = hidden_field_tag :student_id, @student.id
         .row-fluid.control-group
-          .span3
-            = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
-            span.label.label-important.pull-right =t 'required'
-            = guardian_form.text_field :surname, :class => "span12"
-          .span3
-            = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
-            span.label.label-important.pull-right =t 'required'
-            = guardian_form.text_field :name, :class => "span12"
-          .span3
-            = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
-            = guardian_form.text_field :surname_reading, :class => "span12"
-          .span3
-            = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
-            = guardian_form.text_field :name_reading, :class => "span12"
-        .row-fluid
-          .span12
-            = guardian_form.label :relationship, t("guardians.relationship"), :class => "control-label"
-            = guardian_form.text_field :relationship, :class => "span12"
+          
+          = render 'shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
+
         .row-fluid style="margin-top:10px"
           .span8
             = guardian_form.submit t('guardians.save'), :class => "span12 btn btn-primary", :id => 'submit_button', :style => "min-height:0px; float: left;"
