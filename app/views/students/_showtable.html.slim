@@ -13,20 +13,24 @@
                 ruby style="margin-right:5px"
                   rb
                     = @student.surname
+                  rp （
                   rt style="font-size:12pt"
                     = @student.surname_reading
+                  rp ）
                 ruby
                   rb
                     = @student.name
+                  rp （
                   rt style="font-size:12pt"
                     = @student.name_reading
+                  rp ）
           tr
             th.btn-success =t("phonetic_reading")
-            td.vm style="font-size:16pt"
+            td.vm
               = @student.surname_reading + " " + @student.name_reading
           tr
             th.btn-success =t("name")
-            td.vm style="font-size:16pt"
+            td.vm
               = @student.surname + " " + @student.name
           tr
             th.btn-success =t("gender")

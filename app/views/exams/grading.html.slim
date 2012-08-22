@@ -1,5 +1,5 @@
 #exam_grading_area
-  = javascript_include_tag "exam_grading_widget"
+  /= javascript_include_tag "exam_grading_widget"
 .row-fluid
   h3 
     - @exams.each do |exam|
@@ -67,7 +67,7 @@
           td#total_points.vm-tr.total_points_average*{'exam_id' => exam.id}
           td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
           td colspan="3"
-coffee:
+/coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   gradingArea = $("#exam_grid1").examGradingWidget()
@@ -82,6 +82,7 @@ javascript:
   total_score = 0;
   for (i = 0; i < scoreArray.length; ++i) {
     total_score += parseFloat(scoreArray[i].innerText);
+    console.log(total_score);
   }
   total_score_average = total_score/scoreArray.length;
   $('.total_points_average').html(total_score_average);
