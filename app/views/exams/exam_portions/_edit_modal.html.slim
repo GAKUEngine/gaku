@@ -36,10 +36,6 @@
                   = ep_form.label t 'exam_portions.adjustments'
                   = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
               .row-fluid
-                .span12.form-inline
-                  = ep_form.check_box :dynamic_scoring
-                  = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
-              .row-fluid
                 .span12
                   .span6 
                     = ep_form.submit t("exam_portions.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"

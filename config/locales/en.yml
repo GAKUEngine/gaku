@@ -157,7 +157,7 @@ en:
     description: "Description"
     adjustments: "Adjustments"
     weight: "Weight"
-    dynamic_scoring: "Dynamic scoring"
+    use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
   config:
@@ -237,7 +237,6 @@ en:
     description: "Description"
     adjustments: "Adjustments"
     execution_date: "Execution date"
-    dynamic_scoring: "Dynamic scoring"
     is_master: "Master"
     master: "Master exam portion"
     save: "Save exam portion"

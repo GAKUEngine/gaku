@@ -5,7 +5,7 @@
         tr
           th.btn-inverse =t 'exam_portions.name'
           th.btn-inverse =t 'exam_portions.max_score'
-          - if @exam.dynamic_scoring
+          - if @exam.use_weighting
             th.btn-inverse =t 'exam_portions.weight'
           th.btn-inverse =t 'exam_portions.problem_count'
           th.btn-info width="94px" =t 'manage'

@@ -40,7 +40,7 @@
         .row-fluid
           #exam-exam_portions
             =render 'exams/exam_portions/exam_portions'
-        - if @exam.dynamic_scoring
+        - if @exam.use_weighting
           .row-fluid
             =render 'weight_check_widget'
     .row-fluid

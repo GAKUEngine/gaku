@@ -9,5 +9,11 @@ class SemestersController < ApplicationController
   def destroy
     destroy! :flash => !request.xhr?
   end
+
+  def create
+  	super do |format|
+  		format.js { render 'create'}
+  	end
+  end
   
 end

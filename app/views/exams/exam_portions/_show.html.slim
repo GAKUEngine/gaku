@@ -2,7 +2,7 @@
   tr id="exam_portion_#{exam_portion.id}"
     td= exam_portion.name
     td= exam_portion.max_score
-    - if @exam.dynamic_scoring
+    - if @exam.use_weighting
       td= exam_portion.weight
     td= exam_portion.problem_count
     td

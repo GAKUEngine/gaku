@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.integer  "problem_count"
     t.text     "description"
     t.text     "adjustments"
-    t.boolean  "dynamic_scoring"
     t.boolean  "is_master",         :default => false
     t.integer  "exam_id"
     t.integer  "grading_method_id"
@@ -152,10 +151,10 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
     t.text     "description"
     t.text     "adjustments"
     t.float    "weight"
-    t.boolean  "dynamic_scoring"
+    t.boolean  "use_weighting",     :default => false
     t.integer  "grading_method_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "exams_syllabuses", :force => true do |t|
