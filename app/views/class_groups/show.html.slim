@@ -24,11 +24,14 @@
         .tabbable.tabs-right
           ul.nav.nav-tabs
             li#class_group_students_tab.active
-              a*{'data-toggle' =>"tab", 'href' => "#class_group_enrollments"} =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
+              a#class_group_enrollments_tab_link data-toggle="tab" href="#class_group_enrollments"
+                =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
             li
-              a*{'data-toggle' =>"tab", 'href' => "#semesters"} =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+              a#class_group_semesters_tab_link data-toggle="tab" href="#semesters"
+                =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
             li
-              a*{'data-toggle'=>"tab", 'href'=> "#courses"} = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
+              a#class_group_courses_tab_link data-toggle="tab" href="#courses"
+                = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
           .tab-content
             #class_group_enrollments.tab-pane.active
               
