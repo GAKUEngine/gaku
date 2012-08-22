@@ -1,18 +1,3 @@
 -unless address.nil? or address.new_record? or !address
   tr id="address_#{address.id}"
-    td class='primary_address'
-      -if !@primary_address.blank? && @primary_address.address.id == address.id
-        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :class => 'span12 btn btn-mini btn-primary make_primary_address', :style => "min-height:0px", :method => :post
-      -else
-        = link_to ("<i class='icon-white icon-ok'></i>").html_safe, make_primary_student_address_url(@student, address), :remote => true, :id => 'set_primary_link', :class => 'span12 btn btn-mini make_primary_address', :style => "min-height:0px", :method => :post
-    td= address.title
-    td= address.country
-    td= address.zipcode
-    td= address.state_name
-    td= address.city
-    td= address.address1
-    td= address.address2
-    td
-      = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_address_path(@student, address), :remote => true, :class => "mr-xs btn btn-mini btn-warning", :id => 'edit_link'
-      
-      = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_address_path(@student, address), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger delete_link delete_address', :id => 'delete_link', :remote => true
+    = render 'shared/fields/address_fields', :address => address

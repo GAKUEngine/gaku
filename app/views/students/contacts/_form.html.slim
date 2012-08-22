@@ -2,7 +2,7 @@
   .row-fluid 
     .span12
       b= t('contacts.new') 
-    = render 'students/shared/contact_fields',  :contact_form => contact_form
+    = render 'shared/form_fields/contact_form_fields',  :contact_form => contact_form
 
 coffee:
   $('.new_student_contact_form').validationEngine()
