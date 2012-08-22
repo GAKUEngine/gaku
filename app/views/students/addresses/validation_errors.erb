@@ -1,0 +1,9 @@
+<%- if params[:action] == 'create' %>
+
+$('#new_student_address #validation_errors').html("<%= escape_javascript(render :partial => 'shared/errors', :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @address}) %>")
+
+<%- elsif params[:action] == 'update' %>
+console.log('gdfgdf')
+$('#editAddressModal #validation_errors').html("<%= escape_javascript(render :partial => 'shared/errors', :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @address}) %>")
+
+<% end %>
