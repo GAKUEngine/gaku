@@ -23,7 +23,8 @@
           - exam.exam_portions.each do |portion|
             th.btn-warning = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
           th#total_points_title.btn-inverse = t("grades.total_points")
-          th#weighting_total_title.btn-inverse = t("grades.weighting_total")
+          -if exam.dynamic_scoring
+            th#weighting_total_title.btn-inverse = t("grades.weighting_total")
           th#deviation.btn-inverse = t("grades.deviation")
           th#grade_title.btn-inverse = t("grades.grade")
           th#rank_title.btn-inverse = t("grades.rank")
@@ -56,7 +57,8 @@
                   = f.hidden_field :exam_portion_id, :value => portion.id
                   = f.hidden_field :student_id, :value => student.id
             td#total_points.vm-tr.total_points*{'exam_id' => exam.id} = @student_total_scores[student.id]
-            td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
+            - if exam.dynamic_scoring
+              td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
             td#deviation.vm-tr*{'exam_id' => exam.id}
             td#grade.vm-tr*{'exam_id' => exam.id}
             td#rank.vm-tr*{'exam_id' => exam.id}
@@ -65,7 +67,9 @@
         - @exams.each do |exam|
           th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
           td#total_points.vm-tr.total_points_average*{'exam_id' => exam.id}
-          td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
+          -if exam.dynamic_scoring
+            td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
+          end
           td colspan="3"
 coffee:
   course_id = #{{params[:course_id]}};

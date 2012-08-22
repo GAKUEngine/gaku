@@ -4,7 +4,7 @@ class CreateExams < ActiveRecord::Migration
       t.string   :name
       t.text     :description, :adjustments
       t.float    :weight
-      t.boolean  :dynamic_scoring
+      t.boolean  :dynamic_scoring, :default => false
 
       t.references :grading_method
 
