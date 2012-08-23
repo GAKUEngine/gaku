@@ -24,7 +24,7 @@ class Address < ActiveRecord::Base
  
   has_many :student_addresses, :dependent => :destroy
   has_many :students, :through => :student_addresses, :dependent => :destroy
-  has_many :guardian_addresses
+  has_many :guardian_addresses, :dependent => :destroy
   has_many :guardians, :through => :guardian_addresses
 
   validates :address1, :city, :country, :presence => true

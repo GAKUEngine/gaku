@@ -13,7 +13,7 @@
     .span12
       .row-fluid
         .span12.well.guardians_list
-          =render :partial => 'students/guardians/show', :collection => @student.guardians, :as => 'guardian'
+          =render :partial => 'students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
       
       /table.table.table-striped.table-bordered.table-condensed
         thead

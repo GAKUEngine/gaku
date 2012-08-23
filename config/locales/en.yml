@@ -18,6 +18,7 @@ en:
   address: "Address"
   addresses:
     addresses: "Addresses"
+    new: "New Address"
     add: "Add Address"
     zipcode: "ZIP Code"
     search_address:
@@ -54,7 +55,7 @@ en:
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
-    picture:
+    picture: "Picture"
     choose_gender: 'Choose Gender'
     class_group_enrollment: "Class enrollment"
     add_contact: "Add Contact"
@@ -241,3 +242,6 @@ en:
     master: "Master exam portion"
     save: "Save exam portion"
   options: "Options"
+
+  notice:
+    picture_uploaded: "Picture successfully uploaded"

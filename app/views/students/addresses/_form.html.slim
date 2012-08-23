@@ -1,0 +1,16 @@
+= form_for [@student, @address], :html => { :id => 'new_student_address' }, :remote => true do |address_form|
+  - if address_form.object.new_record?
+    b= t('addresses.new')
+    .row-fluid.mt-l
+      .span12.well
+        .span12.well
+          = render 'shared/form_fields/address_form_fields',  :address_form => address_form 
+  
+= javascript_include_tag 'students/addresses/form'
+  
+coffee:
+  $("#address_cancel").click ->
+    $(".new_address_student").show()
+    $("#add_new_student_address").html("")
+  
+  $('#new_student_address').validationEngine()

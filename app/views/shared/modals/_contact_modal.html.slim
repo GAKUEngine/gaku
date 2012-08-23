@@ -1,0 +1,15 @@
+- model = @contact || Contact.new
+- model_class = model.class
+.modal.hide#editContactModal wmode="opaque"
+  
+  = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |contact_form| 
+    .modal-header
+      button.close type="button" data-dismiss="modal"
+        'x
+      h3= t("contacts.edit")
+    .modal-body
+      .validation-error
+      .form-inputs
+        = hidden_field_tag :student_id, @student.id
+        
+        = render 'shared/form_fields/contact_form_fields', :contact_form => contact_form

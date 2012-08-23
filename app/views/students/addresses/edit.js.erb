@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "address_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "shared/modals/address_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
 $('#editAddressModal').modal('show');
