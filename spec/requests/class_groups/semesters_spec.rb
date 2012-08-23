@@ -13,7 +13,7 @@ describe 'ClassGroup Semesters' do
     click_link 'class_group_semesters_tab_link'
     page.should have_content "Semesters list"
     click_link 'show_semester_form'
-    wait_until { page.has_content?('Starting') }
+    wait_until { page.find('#semester_form').visible? }
 
     select '2012', :from => 'semester_starting_1i'
     select 'January', :from => 'semester_starting_2i'
@@ -25,6 +25,7 @@ describe 'ClassGroup Semesters' do
 
     click_button 'submit_button'
     page.should have_content('01/07/2012 - 06/07/2012')
+    wait_until { !page.find('#semester_form').visible? }
     @class_group.semesters.count.should == 1
   end
 
