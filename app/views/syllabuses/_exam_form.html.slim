@@ -47,10 +47,10 @@
                     .row-fluid
                       .span6
                         = ep_form.label :problem_count, t('exam_portions.problem_count')
-                        = ep_form.number_field :problem_count, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
+                        = ep_form.number_field :problem_count, :class => "validate[custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
                       .span6
                         = ep_form.label :max_score, t('exam_portions.max_score')
-                        = ep_form.number_field :max_score, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
+                        = ep_form.number_field :max_score, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5", :value => 100
                     .row-fluid
                       .span6
                         = ep_form.label :description, t('exam_portions.description')
