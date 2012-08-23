@@ -7,7 +7,7 @@
 #  description       :text
 #  adjustments       :text
 #  weight            :float
-#  use_weighting     :boolean
+#  dynamic_scoring   :boolean
 #  grading_method_id :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
