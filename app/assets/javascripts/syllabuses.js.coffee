@@ -10,3 +10,6 @@ $ ->
 	$('#new_assignment').on 'click','a.btn', (event) ->
     event.preventDefault()
     $('#syllabus_assignment_form').slideToggle()
+
+  $('.delete_syllabus').live 'ajax:success', (evt, data, status, xhr) ->
+ 		$(this).closest('tr').remove();
