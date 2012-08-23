@@ -4,7 +4,7 @@
     td= exam.description
     td= exam.adjustments
     td= exam.weight
-    td= exam.dynamic_scoring
+    td= exam.use_weighting
     td
       = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, [@syllabus, exam], :class => "mr-xs btn btn-mini btn-success"
       = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_syllabus_exam_path(@syllabus, exam), :class => "mr-xs btn btn-mini btn-warning"

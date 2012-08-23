@@ -14,7 +14,7 @@
           th.btn-inverse =t('contacts.emergency')
           th.btn-inverse =t('contacts.actions')
       tbody
-        =render :partial => 'students/contacts/show', :collection => @student.contacts, :as => 'contact'
+        =render :partial => 'students/contacts/contact', :collection => @student.contacts, :as => 'contact'
     br/ 
     #add_new_student_contact
       =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new_student_contact_link'

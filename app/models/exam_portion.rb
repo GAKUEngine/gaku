@@ -9,7 +9,6 @@
 #  problem_count     :integer
 #  description       :text
 #  adjustments       :text
-#  dynamic_scoring   :boolean
 #  is_master         :boolean          default(FALSE)
 #  exam_id           :integer
 #  grading_method_id :integer
@@ -25,7 +24,7 @@ class ExamPortion < ActiveRecord::Base
   has_many :exam_portion_scores
   has_many :files
 
-  attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments, :dynamic_scoring
+  attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments
 
   validates :name, :presence => true
 

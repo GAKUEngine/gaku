@@ -1,4 +1,4 @@
-$('.student_contact_table tbody').append('<%= escape_javascript(render :partial => "show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$('.student_contact_table tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
 $("#add_new_student_contact a.btn").show();
 $('.new_student_contact_form').hide();
 $('.new_student_contact_form')[0].reset();
