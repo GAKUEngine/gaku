@@ -171,8 +171,7 @@ ja:
     total_weight: "合計加重率（％）"
     help:
       weight: "合計加重率が１００％になるように設定してください。"
-    dynamic_scoring: "動的採点"
-    use_weighting: "Use Weighting"
+    use_weighting: "加重率を使用"
     show: "試験照会"
     edit: "Edit Exam"
   execution_date: "実行日"
@@ -253,7 +252,7 @@ ja:
     description: "試験要素の説明"
     adjustments: "調整"
     execution_date: "実施日"
-    dynamic_scoring: "動的計算"
+    use_weighting: "加重率を使用"
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: "Save exam portion"

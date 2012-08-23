@@ -1,78 +1,82 @@
 #exam_grading_area
-  = javascript_include_tag "exam_grading_widget"
+  /= javascript_include_tag "exam_grading_widget"
 .row-fluid
   h3 
     - @exams.each do |exam|
       = exam.name << " " << t("grades.grading")
 .row-fluid
-  hr
+  .span12
+    hr
 .row-fluid
-  table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
-    thead
-      tr
-        th.btn-primary colspan="3" =t('student')
-        - @exams.each do |exam|
-          th.exam_infos.btn-success colspan="#{exam.exam_portions.count + 5}" = exam.name
-        - if defined? @grades
-          th.btn-inverse colspan="4" =t('grades.combined')
-      tr
-        th.btn-info =t("class")
-        th.btn-info =t("class_group_enrollments.seat_number")
-        th.btn-info =t("students.name")
-        - @exams.each do |exam|
-          - exam.exam_portions.each do |portion|
-            th.btn-warning = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
-          th#total_points_title.btn-inverse = t("grades.total_points")
-          -if exam.dynamic_scoring
-            th#weighting_total_title.btn-inverse = t("grades.weighting_total")
-          th#deviation.btn-inverse = t("grades.deviation")
-          th#grade_title.btn-inverse = t("grades.grade")
-          th#rank_title.btn-inverse = t("grades.rank")
-        - if defined? @grades
-          th#total_points_title.btn-inverse style="width:1px" = t("grades.total_points")
-          th#weighting_total_title.btn-inverse style="width:1px" = t("grades.weighting_total")
-          th#grade_title.btn-inverse style="width:1px" = t("grades.grade")
-          th#rank_title.btn-inverse style="width:1px" = t("grades.rank")
-
-    tbody
-      - @students.each do |student|
-        tr.data_row id="student_#{student.id}"
-          - if student.class_group_enrollments.blank?
-              td#class_group 
-              td#seat_number
-          - else
-              td#class_group = student.class_group_enrollments.last.class_group.name
-              td#seat_number = student.class_group_enrollments.last.seat_number
-          td#student.vm
-            = student.surname << " " << student.name
-            #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
+  .span12.well
+    table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-primary colspan="3" =t('student')
+          - @exams.each do |exam|
+            th.exam_infos.btn-success colspan="#{exam.exam_portions.count + 5}" = exam.name
+          - if defined? @grades
+            th.btn-inverse colspan="4" =t('grades.combined')
+        tr
+          th.btn-info =t("class")
+          th.btn-info =t("class_group_enrollments.seat_number")
+          th.btn-info =t("students.name")
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
-              - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
-              - model_class = model.class
-              td#score
-                = form_for [@exam, model], :url => {:controller => 'exams', :action => 'update_score'}, :remote => true do |f|
-                  = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
-                  #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
-                  = f.hidden_field :exam_portion_id, :value => portion.id
-                  = f.hidden_field :student_id, :value => student.id
-            td#total_points.vm-tr.total_points*{'exam_id' => exam.id} = @student_total_scores[student.id]
-            - if exam.dynamic_scoring
-              td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
-            td#deviation.vm-tr*{'exam_id' => exam.id}
-            td#grade.vm-tr*{'exam_id' => exam.id}
-            td#rank.vm-tr*{'exam_id' => exam.id}
-      tr.total_row
-        td colspan="3"
-        - @exams.each do |exam|
-          th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
-          td#total_points.vm-tr.total_points_average*{'exam_id' => exam.id}
-          -if exam.dynamic_scoring
-            td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
-          end
+              th.btn-warning style="width:62px" = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
+            th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+            - if exam.use_weighting
+              th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+            th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
+            th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
+            th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+          - if defined? @grades
+            th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+            - if exam.use_weighting
+              th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+            th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
+            th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+  
+      tbody
+        - @students.each do |student|
+          tr.data_row id="student_#{student.id}"
+            - if student.class_group_enrollments.blank?
+                td#class_group 
+                td#seat_number
+            - else
+                td#class_group = student.class_group_enrollments.last.class_group.name
+                td#seat_number = student.class_group_enrollments.last.seat_number
+            td#student.vm
+              = student.surname << " " << student.name
+              #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
+            - @exams.each do |exam|
+              - exam.exam_portions.each do |portion|
+                - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
+                - model_class = model.class
+                td#score
+                  = form_for [@exam, model], :url => {:controller => 'exams', :action => 'update_score'}, :remote => true do |f|
+                    = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
+                    #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
+                    = f.hidden_field :exam_portion_id, :value => portion.id
+                    = f.hidden_field :student_id, :value => student.id
+              td#total_points.vm-tr.total_points*{'exam_id' => exam.id} = @student_total_scores[student.id]
+              - if exam.use_weighting
+                td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
+              td#deviation.vm-tr*{'exam_id' => exam.id}
+              td#grade.vm-tr*{'exam_id' => exam.id}
+              td#rank.vm-tr*{'exam_id' => exam.id}
+        tr.total_row
           td colspan="3"
-
-=link_to t('Back'), @course, :class => 'btn'
+          - @exams.each do |exam|
+            th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
+            td#total_points.vm-tr.total_points_average*{'exam_id' => exam.id}
+            -if exam.use_weighting
+              td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
+            end
+            td colspan="3"
+.row-fluid
+  .span3.well
+    =link_to t('Back'), @course, :class => 'span12 btn'
 
 coffee:
   course_id = #{{params[:course_id]}};
@@ -89,6 +93,7 @@ javascript:
   total_score = 0;
   for (i = 0; i < scoreArray.length; ++i) {
     total_score += parseFloat(scoreArray[i].innerText);
+    console.log(total_score);
   }
   total_score_average = total_score/scoreArray.length;
   $('.total_points_average').html(total_score_average);

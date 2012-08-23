@@ -70,7 +70,7 @@ class ExamsController < ApplicationController
             score.save
           else
             @student_total_scores[student.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
-            if exam.dynamic_scoring
+            if exam.use_weighting
               @student_total_weights[student.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
             end
           end
@@ -93,7 +93,7 @@ class ExamsController < ApplicationController
       @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
       
       @student_weights_total = 0.0
-      if exam.dynamic_scoring  
+      if exam.use_weighting  
         student_exam_portion_scores.each do |eps|
           @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
         end
