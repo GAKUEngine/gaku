@@ -1,5 +1,7 @@
 class ClassGroupsController < ApplicationController
-	
+
+  helper_method :sort_column, :sort_direction
+  
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -7,6 +9,11 @@ class ClassGroupsController < ApplicationController
   before_filter :load_before_show, :only => :show
   before_filter :load_before_index, :only => :index
   before_filter :load_class_group, :only => :destroy
+
+
+  def index
+    @class_groups = ClassGroup.order( sort_column + " " + sort_direction)
+  end
 
   def create
     super do |format|
@@ -47,6 +54,14 @@ class ClassGroupsController < ApplicationController
 
     def load_class_group
       @class_group = ClassGroup.find(params[:id])
+    end
+
+    def sort_column
+      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
 end
