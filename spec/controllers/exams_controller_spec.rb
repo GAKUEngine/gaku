@@ -16,11 +16,13 @@ describe ExamsController do
   end 
 
   describe "POST create" do
-    pending "redirects to the new exam" do
+    it "redirects to the new exam" do
       page.stub :save => true
 
-      post :create, :name => "biology"
-      response.should redirect_to(exam_url(Exam.last))
+      exam = mock_model(Exam,:attributes => true, :save => true)
+      Exam.stub(:new) { exam }
+      post :create
+      response.should redirect_to(exam_url(exam))
     end
   end
 
@@ -37,12 +39,12 @@ describe ExamsController do
   describe "destroying an exam" do
 
     it "doesn't set the flash on xhr requests'" do
-      xhr :delete, :destroy, :id => exam
+      xhr :delete, :destroy, :id => exam.id
       controller.should_not set_the_flash
     end
 
     pending "sets the flash" do
-      delete :destroy, :id => exam
+      delete :destroy, :id => exam.id
       controller.should set_the_flash
     end
   end

@@ -55,7 +55,7 @@ describe SyllabusesController do
             "description" =>"Test exam description",
             "adjustments" => "Test exam adjustments",
             "weight" => 2,
-            "dynamic_scoring"=> true,
+            "use_weighting"=> true,
             :exam_portions_attributes => 
               {0 => { "name" => "Exam portion 1",
                       "weight" => 1,
