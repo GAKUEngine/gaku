@@ -1,5 +1,3 @@
 -unless address.nil? or address.new_record? or !address
-  b ="Address #{address.id}"
-  b ="Primary Address #{@primary_address_id}"
   tr id="address_#{address.id}"
     = render 'shared/fields/address_fields', :address => address
