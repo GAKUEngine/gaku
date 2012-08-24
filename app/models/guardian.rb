@@ -24,4 +24,12 @@ class Guardian < ActiveRecord::Base
   validates :name, :surname, :presence => true
 
   accepts_nested_attributes_for :contacts, :allow_destroy => true
+
+  def primary_contact
+  	contacts.where(:is_primary => true).first
+  end
+
+  def primary_address
+  	guardian_addresses.where(:is_primary => true).first.address
+  end
 end
