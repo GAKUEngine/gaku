@@ -9,25 +9,11 @@
           tr
             th.btn-success =t("name")
             td.vm style="font-size:16pt"
-              div
-                ruby style="margin-right:5px"
-                  rb
-                    = @student.surname
-                  rt style="font-size:12pt"
-                    = @student.surname_reading
-                ruby
-                  rb
-                    = @student.name
-                  rt style="font-size:12pt"
-                    = @student.name_reading
+              = @student.surname + " " + @student.name
           tr
             th.btn-success =t("phonetic_reading")
             td.vm style="font-size:16pt"
               = @student.surname_reading + " " + @student.name_reading
-          tr
-            th.btn-success =t("name")
-            td.vm style="font-size:16pt"
-              = @student.surname + " " + @student.name
           tr
             th.btn-success =t("gender")
             td = gender(@student)
