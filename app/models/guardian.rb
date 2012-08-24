@@ -30,6 +30,6 @@ class Guardian < ActiveRecord::Base
   end
 
   def primary_address
-  	guardian_addresses.where(:is_primary => true).first.address
+  	guardian_addresses.where(:is_primary => true).first.address rescue nil
   end
 end
