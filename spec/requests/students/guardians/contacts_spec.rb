@@ -33,7 +33,7 @@ describe 'Guardian Contacts' do
     @student.guardians.first.contacts.count.should == 1
   end
 
-  context 'edit and set primary' do 
+  context 'edit, delete and set primary' do 
 
     before do 
       mobile1 = Factory(:contact, :data => 123, :contact_type => @contact_type)
@@ -53,6 +53,15 @@ describe 'Guardian Contacts' do
       click_button 'submit_button'
       
       page.should have_content '777'
+      page.should_not have_content '321'
+    end
+
+    it 'should delete a contact for student guardian' do
+      click_link 'show_link'
+      page.should have_content '321'
+
+      within('table.guardian_contact_table tr#contact_2') { click_link 'delete_link' }
+      @student.guardians.first.contacts.size.should == 1
       page.should_not have_content '321'
     end
 
