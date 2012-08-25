@@ -9,6 +9,7 @@ gem 'slim-rails'
 gem 'inherited_resources'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'kendoui-rails'
 
 gem 'devise', :git => "git://github.com/plataformatec/devise.git"
@@ -27,6 +28,7 @@ gem 'paperclip'
 gem 'chosen-rails'
 
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
+gem 'spreadsheet'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

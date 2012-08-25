@@ -68,9 +68,15 @@ GAKUEngine::Application.routes.draw do
     resources :exams
     resources :courses
 
+
     collection do 
-      get :get_csv_template
-      post :import_student_list
+      resources :importer, :controller => "students/importer" do
+        collection do
+          get :get_csv_template
+          get :get_sheet_template
+          post :import_student_list
+        end
+      end
       get :autocomplete_search
     end
 
