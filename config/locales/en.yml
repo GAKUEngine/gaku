@@ -16,6 +16,7 @@ en:
   given_name: "Given Name"
   phonetic_reading: "Phonetic Reading"
   address: "Address"
+  none: "None"
   addresses:
     addresses: "Addresses"
     new: "New Address"

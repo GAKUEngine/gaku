@@ -19,6 +19,7 @@ ja:
   given_name: "名"
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
+  none: "未登録"
   addresses:
     save: "住所を保存"
     addresses: "住所"
