@@ -6,11 +6,11 @@ describe 'Note' do
     @student = Factory(:student)
     sign_in_as!(Factory(:user))
     within('ul#menu') { click_link "Students" }
+    visit student_path(@student) 
   end
 
   it "should add and show student note", :js => true do
-    visit student_path(@student) 
-
+    
     click_link 'new_student_note_tab_link'
     click_link 'new_student_note_link'
 
@@ -27,6 +27,17 @@ describe 'Note' do
     @student.notes.size.should == 1
 
   end
+
+  it "should not submit new note without filled validated fields", :js => true do 
+    click_link 'new_student_note_tab_link'
+    click_link 'new_student_note_link'
+
+    wait_until { page.has_content?('New Note') } 
+  
+    click_button "Save note"
+    @student.notes.size.should == 0
+  end
+
   context "edit and delete" do 
     before do 
       @note = Factory(:note, :student_id => @student)
@@ -51,7 +62,6 @@ describe 'Note' do
       click_button 'submit_button'
       wait_until { !page.find('#editNoteModal').visible? }
       
-      sleep 5
       page.should have_content('Edited note title')
       page.should have_content('Edited note content')
     end
@@ -65,8 +75,7 @@ describe 'Note' do
 
       click_link 'delete_link' 
       page.driver.browser.switch_to.alert.accept
-      #FIXME Make a real check, no sleep 
-      sleep 1
+      
       page.all('table.index tr').size.should == 2
       @student.notes.size.should == 0
       page.should_not have_content(@note.title)

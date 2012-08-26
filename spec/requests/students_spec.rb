@@ -47,15 +47,17 @@ describe 'Student' do
   end
 
   context "editing", :js => true do
-    pending "should edit an existing student" do
+    it "should edit an existing student" do
       visit student_path(@student)
+      page.should have_content("#{@student.name}")
       find_link("Edit").click
-      wait_until {page.has_content?("Edit")}
+      page.should have_content("Edit")
       fill_in "student_surname", :with => "Kostova"
       fill_in "student_name", :with => "Marta"
       click_on "Update Student"
       click_on "Show Students"
-      wait_until { page.has_content?("Kostova Marta") }
+      page.should have_content("Kostova Marta")
+      Student.last.name.should == "Marta" 
     end
   end
 
