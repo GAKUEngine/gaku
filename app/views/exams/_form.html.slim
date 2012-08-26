@@ -61,10 +61,6 @@
               .span6
                 = ep_form.label :adjustments, t('exam_portions.adjustments')
                 = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
-            .row-fluid
-              .span12.form-inline
-                = ep_form.check_box :use_weighting
-                = ep_form.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
   .row-fluid
     .span12.well
       = f.submit nil, :class => "span12 btn btn-primary"
