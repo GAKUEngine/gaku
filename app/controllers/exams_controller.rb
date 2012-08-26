@@ -59,7 +59,6 @@ class ExamsController < ApplicationController
     @student_total_weights.default = 0
     @weighting_score = true
 
-
     @students.each do |student|
       @exams.each do |exam|
         exam.exam_portions.each do |portion|
@@ -100,7 +99,6 @@ class ExamsController < ApplicationController
       end
         
       respond_to do |format|
-        
           format.js { render 'update_score' }
         end
       end
