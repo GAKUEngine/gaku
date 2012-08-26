@@ -256,3 +256,4 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: "Save exam portion"
+  import_format: "インポート形式"

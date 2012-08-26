@@ -5,12 +5,11 @@
         = link_to ("<i class='icon-white icon-file'></i> " + t("students.registration_csv")).html_safe, :action => :get_csv_template, :class => "btn btn-primary", :id => "get_registration_csv"
         = link_to ("<i class='icon-white icon-file'></i> " + t("students.registration_sheet")).html_safe, :action => :get_sheet_template, :class => "btn btn-primary", :id => "get_registration_csv"
         hr /
-        = form_for :import_student_list, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
-          label for="import_student_list"
-            CSV file
-          = f.file_field :file
+        = form_for :importer, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
+          label for="importer"
+          = f.file_field :data_file
           br /
-          = t "students.import_format"
+          = t "import_format"
           = select("importer", "type", @importer_types, {:include_blank => false})
           br /
           = submit_tag 'Submit'

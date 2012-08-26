@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801124531) do
+ActiveRecord::Schema.define(:version => 20120826094804) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -196,6 +196,14 @@ ActiveRecord::Schema.define(:version => 20120801124531) do
   create_table "guardians_students", :force => true do |t|
     t.integer "guardian_id"
     t.integer "student_id"
+  end
+
+  create_table "import_files", :force => true do |t|
+    t.string   "context"
+    t.string   "data_file_file_name"
+    t.string   "data_file_content_type"
+    t.integer  "data_file_file_size"
+    t.datetime "data_file_updated_at"
   end
 
   create_table "installs", :force => true do |t|

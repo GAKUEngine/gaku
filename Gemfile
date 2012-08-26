@@ -29,6 +29,8 @@ gem 'chosen-rails'
 
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
 gem 'spreadsheet'
+#TODO consider other options for roo?
+gem 'roo'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
