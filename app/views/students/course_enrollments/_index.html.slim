@@ -12,7 +12,7 @@
             th =t("courses.code")
             th =t("options")
         tbody
-          =render :partial => 'students/course_enrollments/show', :collection => @student.courses, :as => 'course'
+          = render :partial => 'students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
 hr
 #add_course_enrollment
 .row_fluid
@@ -20,12 +20,11 @@ hr
 hr
 
 coffee:
-  $("#new_student_course_link").click( ->
-    $("#new_student_course_link").hide();
-    $("#student_course_form").show();
-  )
+  $("#new_student_course_link").click ->
+    $("#new_student_course_link").hide()
+    $("#student_course_form").show()
 
-  $("#course_enrollment_cancel").click( ->
-    $("#student_course_form").hide();
-    $("#new_student_course_link").show();
-  )
+  $("#course_enrollment_cancel").click ->
+    $("#student_course_form").hide()
+    $("#new_student_course_link").show()
+  

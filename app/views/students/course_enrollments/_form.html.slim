@@ -1,0 +1,26 @@
+=form_for [@student, @course_enrollment], :html => {:id => 'new_student_course'}, :remote => true do |course_enrollment_form|
+  .row-fluid.control-group
+    .span12
+       b= t('courses.new')
+  .row-fluid
+    = course_enrollment_form.hidden_field :student_id, :value => @student.id
+
+  = render 'shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
+  
+  .row-fluid style="margin-top:10px"
+    .span8
+		  = course_enrollment_form.submit t('course_enrollments.create'), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+    = link_to t("cancel"), "", :remote => true, :id => "course_enrollment_cancel", :class => "span4 btn btn-danger", :style => "min-height:0px"
+
+coffee:
+  $("#guardian_cancel").click ->
+    $("#new_student_course_link").show()
+    $("#add_new_student_guardian").html("")
+  
+  $("#guardian_save_link").live("ajax:success", (data, status, xhr) ->
+    #add new record to list
+    $("#add_guardian_link").show()
+    $("#add_new_student_guardian").html("")
+  )
+
+  $('#new_student_course').validationEngine()

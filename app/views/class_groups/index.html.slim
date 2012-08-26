@@ -10,16 +10,8 @@
         hr/
     .row-fluid
       .span12.well
-        table#class_group_index.table.table-striped.table-bordered.table-condensed
-          thead
-            tr
-              th.btn-inverse = t("class_groups.grade")
-              th.btn-inverse = t("class_groups.name")
-              th.btn-inverse = t("class_groups.homeroom")
-              th.btn-info style="width:94px" = t("manage")
-          tbody
-            =render :partial => 'show', :collection => @class_groups, :as => 'class_group'
-            
+        #class_groups_index
+          =render 'class_groups/index'
     .row-fluid
       #new_class_group_form style='display:none'
         =render 'form' 

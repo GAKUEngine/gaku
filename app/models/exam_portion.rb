@@ -5,10 +5,11 @@
 #  id                :integer          not null, primary key
 #  name              :string(255)
 #  max_score         :float
-#  weight            :float            default(100.0)
+#  weight            :float
 #  problem_count     :integer
 #  description       :text
 #  adjustments       :text
+#  execution_date    :datetime
 #  dynamic_scoring   :boolean
 #  is_master         :boolean          default(FALSE)
 #  exam_id           :integer
@@ -25,12 +26,11 @@ class ExamPortion < ActiveRecord::Base
   has_many :exam_portion_scores
   has_many :files
 
-  attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments, :dynamic_scoring
+  attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments
 
   validates :name, :presence => true
 
   validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
-  validates :problem_count, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
   validates :max_score, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
 end

@@ -6,23 +6,14 @@
       .pull-left
         h3 = t("students.list")
       .pull-right
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.import")).html_safe, "students/importer", :class => "btn btn-primary", :id => "import_students_link"
         = link_to ("<i class='icon-white icon-plus'></i> " + t("students.new")).html_safe, new_student_path, :class => "btn btn-primary", :id => "new_student_link"
     .row-fluid
       .span12
         hr/
     .row-fluid
-      .span12.well
-        .row-fluid
-          .span12
-            = link_to "Student Registration CSV", :action => :get_csv_template
-            = form_for :import_student_list, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
-              label for="import_student_list"
-                CSV file
-              = f.file_field :file
-              = submit_tag 'Submit'
-            = link_to "CSV Export", "students.csv"
-
-    .row-fluid
+      .pull-right
+        = link_to "CSV Export", "students.csv"
       #modal_dialogs
       #new_student_form.hide
         =render 'form'

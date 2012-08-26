@@ -21,7 +21,7 @@
             tr
               th =t("syllabuses.description")
               td colspan="3" =@syllabus.description
-    .row-fluid.mt-l
+    .row-fluid
       .span12.well
         .row-fluid
           #syllabus_exams
@@ -47,5 +47,5 @@
             =render 'assignment_form'
     .row-fluid
       .span12.well
-        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :style => "min-height:0px"
+        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :id => 'syllabus_edit_btn', :style => "min-height:0px"
         = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

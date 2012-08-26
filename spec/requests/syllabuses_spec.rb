@@ -35,7 +35,13 @@ describe 'Syllabus' do
       page.should have_content "was successfully created"
     end
 
-    it "should edit syllabus" do 
+    it "should not submit new syllabus without filled validated fields" do 
+      click_link "new_syllabus_link"
+      click_button "Create Syllabus"
+      page.should_not have_content "was successfully created"
+    end
+
+    it "should edit a syllabus" do 
       within('table.index tr:nth-child(2)') { click_link "edit" }
       fill_in "syllabus_name", :with => "Biology1"
       fill_in "syllabus_code", :with => "bio1"
@@ -47,10 +53,23 @@ describe 'Syllabus' do
       page.should have_content("bio1")
     end
 
-    it "should not submit new syllabus without filled validated fields" do 
-      click_link "new_syllabus_link"
-      click_button "Create Syllabus"
-      page.should_not have_content "was successfully created"
+    it "should redirect to edit veiw when click to syllabus code link in index table" do
+      within('table.index tr:nth-child(2)') { click_link "#{@syllabus.code}"}
+      page.should have_content("Edit Syllabus")
+    end
+
+    it "should redirect to edit view when click on Edit button in show view" do
+      within('table.index tr:nth-child(2)') { click_link "show" }
+      click_on "syllabus_edit_btn"
+      page.should have_content("Edit Syllabus")
     end
   end
+
+  it "should delete a syllabus" do
+      Syllabus.count.should == 1
+      within('table  tr:nth-child(2)') { click_link "delete" }
+      
+      page.should_not have_content("#{@syllabus.code}")
+      Syllabus.count.should == 0
+    end
 end

@@ -30,8 +30,8 @@
             = f.text_area :adjustments, :class => "span12", :size => "0x2"
         .row-fluid
           .span12.form-inline
-            = f.check_box :dynamic_scoring
-            = f.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
+            = f.check_box :use_weighting
+            = f.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
     .row-fluid
       h4 = t('exam_portions.master')
     .row-fluid
@@ -61,10 +61,6 @@
               .span6
                 = ep_form.label :adjustments, t('exam_portions.adjustments')
                 = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
-            .row-fluid
-              .span12.form-inline
-                = ep_form.check_box :dynamic_scoring
-                = ep_form.label :dynamic_scoring, t("exam_portions.dynamic_scoring"), :class => "help-inline"
   .row-fluid
     .span12.well
       = f.submit nil, :class => "span12 btn btn-primary"

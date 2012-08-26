@@ -9,7 +9,6 @@
 #  problem_count     :integer
 #  description       :text
 #  adjustments       :text
-#  dynamic_scoring   :boolean
 #  is_master         :boolean          default(FALSE)
 #  exam_id           :integer
 #  grading_method_id :integer

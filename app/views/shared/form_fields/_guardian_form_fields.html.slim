@@ -2,14 +2,14 @@
   .span3
     = guardian_form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
     span.label.label-important.pull-right =t 'required'
-    = guardian_form.text_field :surname, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+    = guardian_form.text_field :surname, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => @student.surname
   .span3
     = guardian_form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
     span.label.label-important.pull-right =t 'required'
     = guardian_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
   .span3
     = guardian_form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
-    = guardian_form.text_field :surname_reading, :class => "span12"
+    = guardian_form.text_field :surname_reading, :class => "span12", :value => @student.surname_reading
   .span3
     = guardian_form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
     = guardian_form.text_field :name_reading, :class => "span12"

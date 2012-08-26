@@ -1,0 +1,4 @@
+ $('#semester_form').hide()
+ $('#show_semester_form').show()
+ $('.semester_list').append('<li><%= "#{@semester.starting.strftime('%m/%d/%Y')} - #{@semester.ending.strftime('%m/%d/%Y')}" %></li>').hightlight()
+

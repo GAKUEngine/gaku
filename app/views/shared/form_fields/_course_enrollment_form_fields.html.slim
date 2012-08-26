@@ -1,0 +1,4 @@
+.row-fluid
+  .span3
+    = course_enrollment_form.label :course
+    = course_enrollment_form.select :course_id, Course.all.collect { |s| ["#{s.code}", s.id] }, { :prompt => t('course.choose_course') }, :class => "validate[required]", "data-prompt-position" => "bottomRight:5"

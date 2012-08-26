@@ -1,4 +1,4 @@
-= form_for @new_semester do |f|
+= form_for @new_semester, {:remote => true} do |f|
   .row-fluid
     .span12.well
       .row-fluid
@@ -11,4 +11,4 @@
           = f.date_select :ending, :class => "span12"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
-        = f.submit t("semesters.save"), :class => "span12 btn btn-primary"
+        = f.submit t("semesters.save"), :id => 'submit_button', :class => "span12 btn btn-primary"
