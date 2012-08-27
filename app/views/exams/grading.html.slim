@@ -24,31 +24,31 @@
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - if exam.use_weighting
-                th.btn-warning style="width:62px" = portion.name << portion.max_score.to_s << "（" << portion.weight.to_s << "％）"
+                th.btn-warning style="width:62px" = "【 " + portion.name + " 】" + portion.max_score.to_s + "（" + portion.weight.to_s + "％）"
               - else
-                th.btn-warning style="width:62px" = portion.name << portion.max_score.to_s
+                th.btn-warning style="width:62px" = "【 " + portion.name + " 】" + portion.max_score.to_s
             th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
             - if exam.use_weighting
               th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
             th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
             th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
             th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
-          - if defined? @grades
-            th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
-            - if exam.use_weighting
-              th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
-            th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
-            th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+            /- if defined? @grades
+              th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+              - if exam.use_weighting
+                th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+              th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
+              th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
   
       tbody
         - @students.each do |student|
           tr.data_row id="student_#{student.id}"
             - if student.class_group_enrollments.blank?
-                td#class_group 
-                td#seat_number
+              td#class_group.vm
+              td#seat_number.vm
             - else
-                td#class_group = student.class_group_enrollments.last.class_group.name
-                td#seat_number = student.class_group_enrollments.last.seat_number
+              td#class_group.vm = student.class_group_enrollments.last.class_group.grade.to_s + " - " + student.class_group_enrollments.last.class_group.name
+              td#seat_number.vm = student.class_group_enrollments.last.seat_number
             td#student.vm
               = student.surname << " " << student.name
               #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
@@ -88,47 +88,51 @@ coffee:
   $('.edit_exam_portion_score1').validationEngine()
 
 coffee:
+  FixDigit = (num, digit_num) ->
+    fix = Math.pow 10, digit_num
+    return Math.floor(num * fix) / fix
+    
+  CalculateAverage = (nums) ->
+    total = 0.0
+    i = 0
+    while i < nums.length
+      total += parseFloat(nums[i].innerText)
+      i++
+    return total / nums.length
+  
+  CalculateDeviation = (scoreAve, weightedAve) ->
+    stdDev = 0.0
+    if $("#weighting_total_title").text()
+      scores = $(".weighted_scores")
+      average = weightedAve
+    else 
+      scores = $(".total_points")
+      average = scoreAve
+    i = 0
+    while i < scores.length
+      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2) 
+      i++
+    stdDev = Math.sqrt(stdDev / scores.length)
+        
+    deviation = 0.0
+    i = 0
+    while i < scores.length
+      deviation = (parseFloat($(scores[i]).text()) - average) / stdDev
+      if isNaN(deviation)
+        deviation = 50
+      else
+        deviation = deviation * 10 + 50
+      $(scores[i]).nextAll("#deviation").text(Math.floor(deviation))
+      i++
+
   $(".fire_submit").blur ->
     $(this).closest("form").submit()
   
-  scoreArray = $(".total_points")
-  total_score = 0
-  i = 0
-  while i < scoreArray.length
-    total_score += parseFloat(scoreArray[i].innerText)
-    ++i
-  total_score_average = total_score / scoreArray.length
-  $(".total_points_average").html Math.floor(total_score_average * 100) / 100
-  weights_arr = $(".weighted_scores")
-  total_weights = 0
-  i = 0
-  while i < weights_arr.length
-    total_weights += parseFloat(weights_arr[i].innerText)
-    ++i
-  total_weights_average = total_weights / weights_arr.length
-  $(".weighted_scores_average").html Math.floor(total_weights_average * 100) / 100
+  total_score_average = CalculateAverage $(".total_points")
+  $(".total_points_average").html FixDigit(total_score_average, 2)
+  
+  total_weights_average = CalculateAverage $(".weighted_scores")
+  $(".weighted_scores_average").html FixDigit(total_weights_average, 2)
 
-
-  baseDeviation = 0.0
-  if $("#weighting_total_title").text()
-    scores = $(".weighted_scores")
-    average = total_weights_average
-  else 
-    scores = $(".total_points")
-    average = total_score_average
-  i = 0
-  while i < scores.length
-    baseDeviation += Math.pow(parseFloat($(scores[i]).text()) - average, 2) 
-    i++
-  baseDeviation = Math.sqrt(baseDeviation / scores.length)
-    
-  deviation = 0.0
-  i = 0
-  while i < scores.length
-    deviation = (parseFloat($(scores[i]).text()) - average) / baseDeviation
-    if isNaN(deviation)
-      deviation = 50
-    else
-      deviation = deviation * 10 + 50
-    $(scores[i]).nextAll("#deviation").text(Math.floor(deviation))
-    i++
+  CalculateDeviation total_score_average, total_weights_average
+  
