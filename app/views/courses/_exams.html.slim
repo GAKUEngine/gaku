@@ -1,6 +1,9 @@
-- if @course.syllabus and @course.syllabus.exams.any? 
-  = link_to t("grades.all_exams"), "#{request.fullpath}/exams/grading"
-  hr /
+.row-fluid
   - @course.syllabus.exams.each do |exam|
-    = link_to exam.name, "#{request.fullpath}/exams/#{exam.id}/grading", :params => { :course_id => @course.id, :exam_id => exam.id }
-    br /
+    = link_to ('<i class="icon-white icon-pencil"></i> ' + exam.name + t("grades.grading")).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span3 btn btn-success", :params => { :course_id => @course.id, :exam_id => exam.id }
+.row-fluid
+  .span12
+    hr
+.row-fluid
+  - if @course.syllabus and @course.syllabus.exams.any?
+    = link_to ('<i class="icon-white icon-plus"></i>' + '<i class="icon-white icon-pencil"></i> ' + t("grades.all_exams")).html_safe, "#{request.fullpath}/exams/grading", :class => "span12 btn btn-primary"

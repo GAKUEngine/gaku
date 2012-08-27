@@ -16,7 +16,9 @@ tr
   td.vm-tc style="font-size:12pt" = guardian.relationship
 tr
   th = t("address")
-  td colspan="3" Guardian Address Here
+  td colspan="3" 
+    ="#{guardian.primary_address.address1}, #{guardian.primary_address.address2}, #{guardian.primary_address.city}, #{guardian.primary_address.zipcode}, #{guardian.primary_address.state_name}, #{guardian.primary_address.country.name}" unless guardian.primary_address.blank? 
 tr
   th = t("contact")
-  td colspan="3" Guardian Contact Here
+  td colspan="3" 
+    = "#{guardian.primary_contact.contact_type.name}: #{guardian.primary_contact.data} (#{guardian.primary_contact.details}) " unless guardian.primary_contact.blank?

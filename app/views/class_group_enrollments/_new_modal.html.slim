@@ -8,7 +8,7 @@
     = f.hidden_field :class_group_id, :value => @class_group.id
     = hidden_field_tag "student_ids", "", :id => 'student_ids'
     br
-    = f.submit "Add to class", :class => 'span3 btn btn btn-primary'
+    = f.submit "Add to class", :id => 'submit_button', :class => 'span3 btn btn btn-primary'
   = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_link', :'data-dismiss' => "modal"
 
 = javascript_include_tag "class_group_student_chooser"

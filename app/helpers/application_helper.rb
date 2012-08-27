@@ -7,4 +7,12 @@ module ApplicationHelper
     end
     link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def sortable(column, title = nil)
+  	direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
+  	css_class = column == sort_column ? "current #{sort_direction}" : nil
+  	link_to title, {:sort => column, :direction => direction}, {:class => css_class, :remote => true}
+
+  end
+
 end

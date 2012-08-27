@@ -31,7 +31,7 @@ ja:
     city: "市区"
     address1: "町村名と番地"
     address2: "建物名など"
-    state: "都道府県" 
+    state: "都道府県"
     past: "履歴を作成しますか?"
     list: "住所一覧"
     choose_country: "国を選択して下さい"
@@ -95,18 +95,18 @@ ja:
     code: "授業コード"
     code_sample: "例：秋2020"
     save: "保存"
-    choose_course: 
+    choose_course:
     enroll_student: "生徒をこの授業に追加する"
-    count: 
+    count:
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
-  num_courses: 
+  num_courses:
   add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
-    add: 
-    create: 
+    add:
+    create:
     enrollment: "在籍管理"
     assignment: "割り振り"
   class_group_management: "クラス管理"
@@ -125,18 +125,18 @@ ja:
     new: "新規クラス"
     seat_number: "出席番号"
     class_groups: "クラス"
-    current_enrollment: 
+    current_enrollment:
     none: "None"
   grades:
-    combined: "全試験総合"
-    grading: "採点"
+    combined: "全試験合計"
+    grading: "を採点"
     weighting: "加重する"
-    weighting_total: "加重総合"
+    weighting_total: "加重合計"
     weighting_portion: "加重率"
     average: "平均"
     average_points: "平均点数"
     average_score: "平均評価"
-    total_points: "総合点数"
+    total_points: "合計点数"
     max_points: "最高点数"
     max: "点満点"
     points: "点数"
@@ -144,7 +144,7 @@ ja:
     rank: "ランク"
     grade: "評価"
     total: "合計"
-    all_exams: "全試験採点表"
+    all_exams: "全試験同時採点"
   assignments:
     list: "課題一覧"
     plural: "課題"
@@ -153,8 +153,8 @@ ja:
     view: "課題参照"
     count: "課題総数"
     name: "課題名称"
-    description: 
-    max_score: 
+    description:
+    max_score:
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
@@ -232,10 +232,10 @@ ja:
   class: "クラス"
   semesters:
     list: "学期リスト"
-    starting: 
-    ending:   
+    starting:
+    ending:
     save: "保存"
-  num_semesters: 
+  num_semesters:
   add_semester: "学期を追加する"
   options: "オプション"
   notice:
@@ -259,3 +259,4 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: "Save exam portion"
+  import_format: "インポート形式"

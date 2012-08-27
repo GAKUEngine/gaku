@@ -87,18 +87,18 @@ class ExamsController < ApplicationController
       exam = Exam.find(params[:id])
       exam_portions = exam.exam_portions
       exam_portions_ids = exam_portions.pluck(:id)
-      student_exam_portion_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}")
-      # student_scores = student_exam_portion_scores.pluck(:score)
-      # @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
+      student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
+      student_scores = student_exam_portion_scores.pluck(:score)
+      @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
 
-      @student_total_score = 0.0
-      student_exam_portion_scores.each_with_index do |eps, i|
-        puts 1111111111111111111111111111111111111
-        puts i
-        puts eps.score.to_f
-        puts 1111111111111111111111111111111111111
-        @student_total_score += eps.score.to_f
-      end
+      # @student_total_score = 0.0
+      # student_exam_portion_scores.each_with_index do |eps, i|
+        # puts 1111111111111111111111111111111111111
+        # puts i
+        # puts eps.score.to_f
+        # puts 1111111111111111111111111111111111111
+        # @student_total_score += eps.score.to_f
+      # end
 
       @student_weights_total = 0.0
       if exam.use_weighting

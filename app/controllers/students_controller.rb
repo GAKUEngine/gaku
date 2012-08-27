@@ -27,16 +27,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def get_csv_template
-    filename = "StudentRegistration.csv"
-    registration_fields = ["surname", "name", "surname_reading", "name_reading", "gender", "phone", "email", "birth_date", "admitted"]
-    content = CSV.generate do |csv|
-      csv << registration_fields
-      csv << translate_fields(registration_fields)
-    end
-    send_data content, :filename => filename
-  end
-
   def export_csv_index(students, field_order = ["surname", "name"])
     filename = "Students.csv"
     content = CSV.generate do |csv|
@@ -48,28 +38,6 @@ class StudentsController < ApplicationController
     send_data content, :filename => filename
   end
   private :export_csv_index
-
-  def import_student_list
-    @rowcount = 0
-    @csv_data = nil
-    @status = "NO FILE"
-    if params[:import_student_list][:file] != nil
-      @status = "FILE FOUND"
-      @csv_data = params[:import_student_list][:file].read
-      CSV.parse(@csv_data) do |row|
-        case @rowcount
-        when 0 #field index
-          #get mapping
-        when 1 #titles
-          #ignore
-        else #process record
-          Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
-        end
-        @rowcount += 1
-      end
-    end
-    render :student_import_preview
-  end
 
   def create
     super do |format|
