@@ -16,6 +16,7 @@ en:
   given_name: "Given Name"
   phonetic_reading: "Phonetic Reading"
   address: "Address"
+  none: "None"
   addresses:
     addresses: "Addresses"
     new: "New Address"
@@ -101,6 +102,8 @@ en:
     list: "Enrollments"
     add: "Enroll to course"
     create: "Create enrollment"
+    enrollment: "Enrollment"
+    assignment: "Assignment"
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"

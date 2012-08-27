@@ -59,7 +59,6 @@ class ExamsController < ApplicationController
     @student_total_weights.default = 0
     @weighting_score = true
 
-
     @students.each do |student|
       @exams.each do |exam|
         exam.exam_portions.each do |portion|
@@ -91,6 +90,15 @@ class ExamsController < ApplicationController
       student_exam_portion_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}")
       student_scores = student_exam_portion_scores.pluck(:score)
       @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
+            
+      # @student_total_score = 0.0
+      # student_exam_portion_scores.each_with_index do |eps, i|
+        # puts 1111111111111111111111111111111111111
+        # puts i
+        # puts eps.score.to_f
+        # puts 1111111111111111111111111111111111111
+        # @student_total_score += eps.score.to_f
+      # end
       
       @student_weights_total = 0.0
       if exam.use_weighting  
@@ -100,7 +108,6 @@ class ExamsController < ApplicationController
       end
         
       respond_to do |format|
-        
           format.js { render 'update_score' }
         end
       end
