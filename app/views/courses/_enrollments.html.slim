@@ -2,10 +2,10 @@
   .pull-left
     h4.h4-vm = t("num_enrolled") + "（ " + @course.students.count.to_s + " ）"
   .pull-right
-    #add_student_enrollment_link
+    #add_student_enrollment_link.pull-right
       = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, "", :id => "add_student_enrollment", :class => "btn btn-primary", :remote => true
-    #add_class_group_enrollment_link
-      =link_to ("<i class='icon-white icon-plus'></i> #{t('courses.add_class_group')}").html_safe, "", :class => 'show_class_enroll_form btn btn-primary', :id => 'add_class_group_enrollment', :remote => true
+    #add_class_group_enrollment_link.pull-right.mr-s
+      = link_to ("<i class='icon-white icon-plus'></i> " + t('courses.add_class_group')).html_safe, "", :class => 'show_class_enroll_form btn btn-primary', :id => 'add_class_group_enrollment', :remote => true
 .row-fluid
   .span12
     hr
@@ -13,13 +13,13 @@
   table#enrolled_students_grid.table.table-condensed.table-striped.table-bordered
     thead
       tr
-        th*{"data-field" => t("students.name")}
+        th.btn-inverse*{"data-field" => t("students.name")}
           = t("students.name")
-        th*{"data-field" => t("assignments.plural") + t("and") + t("exams.plural")}
+        th.btn-inverse*{"data-field" => t("assignments.plural") + t("and") + t("exams.plural")}
           = t("assignments.plural") + t("and") + t("exams.plural")
-        th*{"data-field" => t("grades.total_points")}
+        th.btn-inverse*{"data-field" => t("grades.total_points")}
           = t("grades.total_points")
-        th*{"data-field" => t("grades.rank")}
+        th.btn-inverse*{"data-field" => t("grades.rank")}
           = t("grades.rank")
         /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
     tbody

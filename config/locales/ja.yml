@@ -98,15 +98,17 @@ ja:
     choose_course: 
     enroll_student: "生徒をこの授業に追加する"
     count: 
-    enroll_class_group: 'Enroll Class Group'
-    add_class_group: 'Add Class Group'
-    choose_class_group: 'Choose Class Group'
+    enroll_class_group: 'クラスを登録'
+    add_class_group: 'クラスを追加'
+    choose_class_group: 'クラスを選択'
   num_courses: 
   add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
     add: 
     create: 
+    enrollment: "在籍管理"
+    assignment: "割り振り"
   class_group_management: "クラス管理"
   class_groups:
     show: "クラス照会"
