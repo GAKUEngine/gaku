@@ -118,7 +118,6 @@ coffee:
 
     switch $("#how-grade").val()
       when I18n.t("grades.deviation")
-        console.log I18n.t("grades.deviation")+" dayo"
         levels = [100, 66, 62, 58, 55, 59, 45, 37]
         deviations = $(".deviation")
         i = 0
@@ -133,7 +132,6 @@ coffee:
             j++
           i++
       when I18n.t("grades.percent")
-        console.log I18n.t("grades.percent")+" dayo"
         levels = [5, 5, 10, 10, 30, 10, -1]
         sorteds = $.makeArray scores.sort(sortScore)
         grade = 10
@@ -145,13 +143,51 @@ coffee:
           while j < num && !f_end
             if sorteds.length
               target = sorteds.shift()
-              console.log target
               $(target).nextAll("#grade").text(grade.toString())
             else
               f_end = 1
             j++
           grade--
           i++
+    i = 0
+    while i < scores.length
+      if parseFloat($(scores[i]).text()) < average / 2 && parseFloat($(scores[i]).text()) < 30
+        $(scores[i]).nextAll("#grade").text("2")
+      if parseFloat($(scores[i]).text()) < average / 4
+        $(scores[i]).nextAll("#grade").text("1")
+      i++
+
+    levels = [15, 20]
+    sorteds = $.makeArray scores.sort(sortScore)
+    grade = 5
+    f_end = 0
+    i = 0
+    while i < sorteds.length
+      $(sorteds[i]).nextAll("#rank").text("3")
+      i++
+    i = 0
+    while i < levels.length && !f_end
+      num = Math.ceil sorteds.length * (levels[i] / 100)
+      j = 0
+      while j < num && !f_end
+        if sorteds.length
+          target = sorteds.shift()
+          $(target).nextAll("#rank").text(grade.toString())
+        else
+          f_end = 1
+        j++
+      grade--
+      i++
+    sorteds = $.makeArray scores.sort(sortScore)
+    i = 0
+    while i < sorteds.length
+      if parseFloat($(sorteds[i]).nextAll("#grade").text()) == 3
+        $(sorteds[i]).nextAll("#rank").text("2")
+      if parseFloat($(sorteds[i]).nextAll("#grade").text()) < 3
+        $(sorteds[i]).nextAll("#rank").text("1")
+      i++
+
+
 
   CalculateDeviation = (scoreAve, weightedAve) ->
     stdDev = 0.0
@@ -197,3 +233,4 @@ coffee:
   $(".weighted_scores_average").html FixDigit(total_weights_average, 4)
 
   CalculateDeviation total_score_average, total_weights_average
+  CalculateGradeAndRank()
