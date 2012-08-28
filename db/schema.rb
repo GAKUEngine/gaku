@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20120826094804) do
 
   create_table "import_files", :force => true do |t|
     t.string   "context"
+    t.string   "importer_type"
     t.string   "data_file_file_name"
     t.string   "data_file_content_type"
     t.integer  "data_file_file_size"

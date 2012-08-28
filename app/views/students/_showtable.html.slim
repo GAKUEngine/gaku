@@ -1,10 +1,10 @@
 .row-fluid
   .span12.well
-    .span9 
+    .span9
       table.table.table-bordered.table-striped
         tbody
           tr
-            th.btn-primary width="20%" =t("class")
+            th.btn-c1 width="20%" =t("class")
             td#student_class_group_enrollment
               - if @student.class_groups.last
                 - if @student.class_groups.last.grade
@@ -41,7 +41,7 @@
           tr
             th.btn-primary =t("students.admitted")
             td =@student.admitted
-          
+
     .span3.well
       .row-fluid.pagination-centered
         h4 =t("students.picture")
@@ -96,4 +96,4 @@
 coffee:
   $("#upload_picture_link").click ->
     $("#upload_picture").toggle()
-  
+

@@ -1,7 +1,7 @@
 #exam_grading_area
   /= javascript_include_tag "exam_grading_widget"
 .row-fluid
-  h3 
+  h3
     - @exams.each do |exam|
       = exam.name << " " << t("grades.grading")
 .row-fluid
@@ -39,7 +39,7 @@
                 th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
               th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
               th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
-  
+
       tbody
         - @students.each do |student|
           tr.data_row id="student_#{student.id}"
@@ -81,17 +81,17 @@
   .span3.well
     =link_to t('Back'), @course, :class => 'span12 btn'
 
-coffee:
+/coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   # gradingArea = $("#exam_grid1").examGradingWidget()
-  $('.edit_exam_portion_score1').validationEngine()
+  # $('.edit_exam_portion_score1').validationEngine()
 
 coffee:
   FixDigit = (num, digit_num) ->
     fix = Math.pow 10, digit_num
     return Math.floor(num * fix) / fix
-    
+
   CalculateAverage = (nums) ->
     total = 0.0
     i = 0
@@ -99,21 +99,21 @@ coffee:
       total += parseFloat(nums[i].innerText)
       i++
     return total / nums.length
-  
+
   CalculateDeviation = (scoreAve, weightedAve) ->
     stdDev = 0.0
     if $("#weighting_total_title").text()
       scores = $(".weighted_scores")
       average = weightedAve
-    else 
+    else
       scores = $(".total_points")
       average = scoreAve
     i = 0
     while i < scores.length
-      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2) 
+      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2)
       i++
     stdDev = Math.sqrt(stdDev / scores.length)
-        
+
     deviation = 0.0
     i = 0
     while i < scores.length
@@ -125,14 +125,22 @@ coffee:
       $(scores[i]).nextAll("#deviation").text(Math.floor(deviation))
       i++
 
-  $(".fire_submit").blur ->
+  $(".fire_submit").blur (e) ->
+
+    ct = e.currentTarget
+
+    if ct.valueAsNumber > parseFloat(ct.max) || ct.valueAsNumber < parseFloat(ct.min)
+      if ct.valueAsNumber > parseFloat ct.max
+        ct.value = parseFloat ct.max
+      else
+        ct.value = parseFloat ct.min
+
     $(this).closest("form").submit()
-  
+
   total_score_average = CalculateAverage $(".total_points")
   $(".total_points_average").html FixDigit(total_score_average, 2)
-  
+
   total_weights_average = CalculateAverage $(".weighted_scores")
   $(".weighted_scores_average").html FixDigit(total_weights_average, 2)
 
   CalculateDeviation total_score_average, total_weights_average
-  
