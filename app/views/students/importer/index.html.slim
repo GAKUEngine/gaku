@@ -10,6 +10,6 @@
           = f.file_field :data_file
           br /
           = t "import_format"
-          = select("importer", "type", @importer_types, {:include_blank => false})
+          = select("importer", "importer_type", @importer_types, {:include_blank => false})
           br /
           = submit_tag 'Submit'
