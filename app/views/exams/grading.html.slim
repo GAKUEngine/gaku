@@ -36,8 +36,14 @@
             - if exam.use_weighting
               th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
             th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
-            th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
-            th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+            th#grade_title.btn-inverse style="width:62px"
+              = t("grades.grade")
+              br
+              10
+            th#rank_title.btn-inverse style="width:62px"
+              = t("grades.rank")
+              br
+              5
             /- if defined? @grades
               th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
               - if exam.use_weighting
