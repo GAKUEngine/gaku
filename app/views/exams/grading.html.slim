@@ -57,7 +57,7 @@
                 - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
                 - model_class = model.class
                 td#score
-                  = form_for [@exam, model], :url => {:controller => 'exams', :action => 'update_score'}, :remote => true do |f|
+                  = form_for [@exam, model], :url => update_score_course_exam_path(@course, exam), :remote => true do |f|
                     = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
                     #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
                     = f.hidden_field :exam_portion_id, :value => portion.id
