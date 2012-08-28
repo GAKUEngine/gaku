@@ -127,13 +127,12 @@ coffee:
 
   $(".fire_submit").blur (e) ->
 
-    ct = e.currentTarget
-
-    if ct.valueAsNumber > parseFloat(ct.max) || ct.valueAsNumber < parseFloat(ct.min)
-      if ct.valueAsNumber > parseFloat ct.max
-        ct.value = parseFloat ct.max
+    ect = e.currentTarget
+    if ect.valueAsNumber > parseFloat(ect.max) || ect.valueAsNumber < parseFloat(ect.min)
+      if ect.valueAsNumber > parseFloat ect.max
+        ect.value = parseFloat ect.max
       else
-        ct.value = parseFloat ct.min
+        ect.value = parseFloat ect.min
 
     $(this).closest("form").submit()
 
