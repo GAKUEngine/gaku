@@ -108,40 +108,50 @@ coffee:
     return total / nums.length
 
   CalculateGradeAndRank = ->
-    scores = []
+    sortScore = (a, b) ->
+      return parseFloat($(a).text()) < parseFloat($(b).text())
+
     if $("#weighting_total_title").text()
-      f_weight = 1
       scores = $(".weighted_scores")
     else
-      f_weight =0
       scores = $(".total_points")
 
-    how = $("#how-grade").val()
-
-    console.log scores
-
-    if how == I18n.t("grades.deviation")
-      console.log I18n.t("grades.deviation")+" dayo"
-      levels = [100, 66, 62, 58, 55, 59, 45, 37]
-      deviations = $(".deviation")
-      i = 0
-      while i < deviations.length
-        deviation = parseFloat($(deviations[i]).text())
-        j = 0
+    switch $("#how-grade").val()
+      when I18n.t("grades.deviation")
+        console.log I18n.t("grades.deviation")+" dayo"
+        levels = [100, 66, 62, 58, 55, 59, 45, 37]
+        deviations = $(".deviation")
+        i = 0
+        while i < deviations.length
+          deviation = parseFloat($(deviations[i]).text())
+          grade = 10
+          j = 0
+          while j < levels.length - 1
+            if levels[j] > deviation && levels[j+1] < deviation
+              $(deviations[i]).nextAll("#grade").text(grade.toString())
+            grade--
+            j++
+          i++
+      when I18n.t("grades.percent")
+        console.log I18n.t("grades.percent")+" dayo"
+        levels = [5, 5, 10, 10, 30, 10, -1]
+        sorteds = $.makeArray scores.sort(sortScore)
         grade = 10
-        while j < levels.length - 1
-          if levels[j] > deviation && levels[j+1] < deviation
-            $(deviations[i]).nextAll("#grade").text(grade.toString())
+        f_end = 0
+        i = 0
+        while i < levels.length && !f_end
+          num = Math.ceil sorteds.length * (levels[i] / 100)
+          j = 0
+          while j < num && !f_end
+            if sorteds.length
+              target = sorteds.shift()
+              console.log target
+              $(target).nextAll("#grade").text(grade.toString())
+            else
+              f_end = 1
+            j++
           grade--
-          j++
-        i++
-
-    if how == I18n.t("grades.percent")
-      console.log I18n.t("grades.percent")+" dayo"
-      levels = [5, 5, 10, 10, 30, 10, -1]
-      console.log scores
-      console.log levels
-      console.log levels.sort()
+          i++
 
   CalculateDeviation = (scoreAve, weightedAve) ->
     stdDev = 0.0
