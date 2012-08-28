@@ -102,7 +102,12 @@ describe 'ClassGroup ClassGroupEnrollment' do
         within('.tab-content') { page.should have_content 'Biology321'}
       end
 
-      pending 'should not add a course if course code is empty' do
+      pending 'should not add a course if course code is empty', :js => true do #FIXME cannot load the validation code properly
+        click_link 'show_course_form'
+        wait_until { page.find('#course_form').visible? }
+        click_button 'submit_button'
+
+        wait_until { page.has_content?('This field is required') }
       end
 
       context 'Class group with added course' do
