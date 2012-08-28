@@ -4,7 +4,7 @@ class Students::ImporterController < ApplicationController
   require 'roo'
 
   def index
-    @importer_types = ["Native", "SchoolStation"]
+    @importer_types = ["GAKU Engine", "SchoolStation"]
     render "students/importer/index"
   end
 
@@ -23,21 +23,23 @@ class Students::ImporterController < ApplicationController
 
 
   def import_student_list
-    if params[:importer][:data_file].nil?
-      render :text => "no file or bad file"
-      return
-    end
+    # import_sheet_student_list
 
-    importerType = params[:importer][:type]
-    case importerType
-    when "Native"
-      #TODO check file type
-      import_csv_student_list()
-      #if it's a sheet
-      #import_sheet_student_list()
-      return
-    when "SchoolStation"
-      import_school_station_student_list()
+    if params[:importer][:data_file].nil?
+      redirect_to importer_index_path, :alert => 'no file or bad file' 
+    else
+      if params[:importer][:data_file].content_type == 'application/vnd.ms-excel'
+        case params[:importer][:importer_type]
+        when "GAKU Engine"
+          import_sheet_student_list()
+
+        when "SchoolStation"
+          import_school_station_student_list()
+        end
+
+      elsif params[:importer][:data_file].content_type == "text/csv"
+          import_csv_student_list()
+      end
     end
   end
 
@@ -62,7 +64,37 @@ class Students::ImporterController < ApplicationController
   end
 
   def import_sheet_student_list
-    render :text => "import sheet"
+
+    file_data = params[:importer][:data_file]
+    
+    #read from saved file
+    importer = ImportFile.new(params[:importer])
+    importer.context = 'students'
+    if importer.save
+      book = Spreadsheet.open(importer.data_file.path)
+      
+      #read from not saved file. just read file
+      # book = Spreadsheet.open(file_data.path)
+      
+      sheet = book.worksheet(0)
+
+      ActiveRecord::Base.transaction do
+      #Giorgio:put in transaction for fast importing
+        sheet.each do |row|
+          unless book.worksheet('Sheet1').first == row 
+            # check for existing
+            student = Student.create!(:surname => row[0], 
+                            :name => row[1], 
+                            :surname_reading => row[2], 
+                            :name_reading => row[3])
+          end
+        end
+      end
+      redirect_to importer_index_path, :notice => 'Spreadsheet Successful Imported'
+    else
+        redirect_to :back
+    end
+
   end
 
   #import XLS list exported from SchoolStation
