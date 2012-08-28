@@ -29,9 +29,15 @@
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - if exam.use_weighting
-                th.btn-warning style="width:auto" = "【 " + portion.name + " 】" + portion.max_score.to_s + "（" + portion.weight.to_s + "％）"
+                th.btn-warning style="width:120px"
+                  = "【 " + portion.name + " 】"
+                  br
+                  = portion.max_score.to_s + "（" + portion.weight.to_s + "％）"
               - else
-                th.btn-warning style="width:auto" = "【 " + portion.name + " 】" + portion.max_score.to_s
+                th.btn-warning style="width:120px"
+                  = "【 " + portion.name + " 】"
+                  br
+                  = portion.max_score.to_s
             th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
             - if exam.use_weighting
               th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
