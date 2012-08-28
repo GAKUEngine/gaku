@@ -130,7 +130,7 @@ coffee:
 
     switch $("#how-grade").val()
       when I18n.t("grades.deviation")
-        levels = [100, 66, 62, 58, 55, 59, 45, 37]
+        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37]
         deviations = $(".deviation")
         i = 0
         while i < deviations.length
@@ -138,7 +138,7 @@ coffee:
           grade = 10
           j = 0
           while j < levels.length - 1
-            if levels[j] > deviation && levels[j+1] < deviation
+            if levels[j] > deviation && levels[j+1] <= deviation
               $(deviations[i]).nextAll("#grade").text(grade.toString())
             grade--
             j++
