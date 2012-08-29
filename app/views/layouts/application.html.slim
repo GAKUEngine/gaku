@@ -4,9 +4,9 @@ html
     title
       = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
     = stylesheet_link_tag    "application"
-    = stylesheet_link_tag    params[:controller]
-    = javascript_include_tag "application"
-    = javascript_include_tag params[:controller]
+    = stylesheet_link_tag    params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.css")
+    = javascript_include_tag "application" 
+    = javascript_include_tag params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.js")
     = csrf_meta_tags
   body
     javascript:
