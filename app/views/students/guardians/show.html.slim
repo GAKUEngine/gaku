@@ -1,5 +1,10 @@
 .row-fluid
   .span12.well
+    table.table.table-bordered.table-striped
+      tbody
+        = render 'shared/fields/guardian_fields', :guardian => @guardian
+.row-fluid
+  .span12.well
     h3 Guardian Contacts
     table.table.table-striped.table-bordered.table-condensed.guardian_contact_table
       thead
