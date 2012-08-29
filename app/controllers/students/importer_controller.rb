@@ -119,56 +119,56 @@ class Students::ImporterController < ApplicationController
       ActiveRecord::Base.transaction do
         #Giorgio:put in transaction for fast importing
         @rowcount = 0
+        idx = Hash.new
 
         #initial default values (from inital raw output)
-        nameIdx = 7
-        nameReadingIdx = 8
-        birthDateIdx = 10
-        genderIdx = 11
-        phoneIdx = 19
+        idx[:name] = 7
+        idx[:nameReading] = 8
+        idx[:birthDate] = 10
+        idx[:gender] = 11
+        idx[:phone] = 19
 
         #primary address
-        zipcodeIdx = 14
-        stateIdx = 15
-        cityIdx = 16
-        address1Idx = 17
-        address2Idx = 18
+        idx[:zipcode] = 14
+        idx[:state] = 15
+        idx[:city] = 16
+        idx[:address1] = 17
+        idx[:address2] = 18
 
         #primary guardian
-        guardianNameIdx = 34
-        guardianNameReadingIdx = 35
-        guardianZipCodeIdx = 37
-        guardianStateIdx = 38
-        guardianCityIdx = 39
-        guardianAddress1Idx = 40
-        guardianAddress2Idx = 41
-        guardianPhoneIdx = 42
+        idx[:guardianName] = 34
+        idx[:guardianNameReading] = 35
+        idx[:guardianZipCode] = 37
+        idx[:guardianState] = 38
+        idx[:guardianCity] = 39
+        idx[:guardianAddress1] = 40
+        idx[:guardianAddress2] = 41
+        idx[:guardianPhone] = 42
 
         sheet.each do |row|
           unless book.worksheet('CAMPUS_ZAIKOTBL').first == row
-            if row[nameIdx].nil?
+            if row[idx[:name]].nil?
               next
             end
 
             @rowcount += 1
 
-            nameParts = row[nameIdx].to_s().split("　")
+            nameParts = row[idx[:name]].to_s().split("　")
             surname = nameParts.first
             name = nameParts.last
-            nameReadingParts = row[nameReadingIdx].to_s().split(" ")
+            nameReadingParts = row[idx[:nameReading]].to_s().split(" ")
             surname_reading = nameReadingParts.first
             name_reading = nameReadingParts.last
-            puts "parsing date: " << row[birthDateIdx].to_s
-            birth_date = Date.parse(row[birthDateIdx].to_s)
+            birth_date = Date.parse(row[idx[:birthDate]].to_s)
             gender = nil
-            if !row[genderIdx].nil?
-              if row[genderIdx].to_i == 2
+            if !row[idx[:gender]].nil?
+              if row[idx[:gender]].to_i == 2
                 gender = 0
               else
                 gender = 1
               end
             end
-            phone = row[phoneIdx]
+            phone = row[idx[:phone]]
 
             # check for existing
             student = Student.create!(:surname => surname, 
@@ -184,54 +184,70 @@ class Students::ImporterController < ApplicationController
               next
             end
 
-            zipcode = row[zipcodeIdx]
-            state = row[stateIdx]
-            city = row[cityIdx]
-            address1 = address1Idx
-            address2 = address2Idx
+            # add primary address
+            zipcode = row[idx[:zipcode]]
+            state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
+            city = row[idx[:city]]
+            address1 = row[idx[:address1]]
+            address2 = row[idx[:address2]]
             student.addresses.create!(:zipcode => zipcode,
+                                      :country_id => Country.where(:numcode => 392).first.id,
                                       :state => state,
+                                      :state_id => state.id,
+                                      :state_name => state.name,
                                       :city => city,
                                       :address1 => address1,
                                       :address2 => address2)
+
+            # add primary guardian 
+            guardianNameParts = row[idx[:guardianName].to_i].to_s().split("　")
+            guardianSurname = guardianNameParts.first
+            guardianName = guardianNameParts.last
+            guardianNameReadingParts = row[idx[:guardianNameReading]].to_s().split(" ")
+            guardianSurname_reading = guardianNameReadingParts.first
+            guardianName_reading = guardianNameReadingParts.last
+            guardian = student.guardians.create!(:surname => guardianSurname,
+                                                :name => guardianName,
+                                                :surname_reading => guardianSurname_reading,
+                                                :name_reading => guardianName_reading)
 
           else #1st row, try parsing index
             row.each_with_index do |cell, i|
               case cell
               when "ZAINAM_C" #生徒名の漢字
-                nameIdx = i
+                idx[:name] = i
               when "ZAINAM_K"
-                nameReadingIdx = i
+                idx[:nameReading] = i
               when "ZAIBTHDY"
-                birthDateIdx = i
+                idx[:birthDate] = i
               when "ZAISEXKN"
-                genderIdx = i
+                idx[:gender] = i
               when "ZAIZIPCD"
-                zipcodeIdx = i
+                idx[:zipcode] = i
               when "ZAIADRCD"
-                stateIdx = i
+                idx[:state] = i
               when "ZAIADR_1"
-                cityIdx = i
+                idx[:city] = i
               when "ZAIADR_2"
-                address1Idx = i
+                idx[:address1] = i
               when "ZAIADR_3"
-                address2Idx = i
+                idx[:address2] = i
               when "ZAITELNO"
-                phoneIdx = i
+                idx[:phone] = i
               when "HOGNAM_C"
-                guardianNameIdx = i
+                idx[:guardianName] = i
               when "HOGNAM_K"
-                guardianNameReadingIdx = i
+                idx[:guardianNameReading] = i
               when "HOGZIPCD"
-                guardianZipCodeIdx = i
+                idx[:guardianZipCode] = i
               when "HOGADR_1"
-                guardianCityIdx = i
+                idx[:guardianCity] = i
               when "HOGADR_2"
-                guardianAddress1Idx = i
+                idx[:guardianAddress1] = i
               when "HOGADR_3"
-                guardianAddress2Idx = i
+                idx[:guardianAddress2] = i
               when "HOGTELNO"
-                guardianPhoneIdx = i
+                idx[:guardianPhone] = i
               end
             end
           end

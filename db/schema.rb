@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829112241) do
+ActiveRecord::Schema.define(:version => 20120829165008) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20120829112241) do
     t.string  "abbr"
     t.string  "name_ascii"
     t.integer "country_numcode"
+    t.integer "code"
   end
 
   create_table "student_addresses", :force => true do |t|
