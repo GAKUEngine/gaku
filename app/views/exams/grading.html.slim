@@ -130,7 +130,7 @@ coffee:
 
     switch $("#how-grade").val()
       when I18n.t("grades.deviation")
-        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37]
+        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE]
         deviations = $(".deviation")
         i = 0
         while i < deviations.length
@@ -144,7 +144,7 @@ coffee:
             j++
           i++
       when I18n.t("grades.percent")
-        levels = [5, 5, 10, 10, 30, 10, -1]
+        levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE]
         sorteds = $.makeArray scores.sort(sortScore)
         grade = 10
         f_end = 0
@@ -198,8 +198,6 @@ coffee:
       if parseFloat($(sorteds[i]).nextAll("#grade").text()) < 3
         $(sorteds[i]).nextAll("#rank").text("1")
       i++
-
-
 
   CalculateDeviation = (scoreAve, weightedAve) ->
     stdDev = 0.0
