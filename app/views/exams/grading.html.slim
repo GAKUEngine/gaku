@@ -19,7 +19,7 @@
         tr
           th.btn-primary colspan="3" =t('student')
           - @exams.each do |exam|
-            th.exam_infos.btn-success colspan="#{exam.exam_portions.count + 5}" = exam.name
+            th.exam_infos.btn-success exam_id=exam.id colspan="#{exam.exam_portions.count + 5}" = exam.name
           - if defined? @grades
             th.btn-inverse colspan="4" =t('grades.combined')
         tr
@@ -40,7 +40,7 @@
                   = portion.max_score.to_s
             th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
             - if exam.use_weighting
-              th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
+              th#weighting_total_title.btn-inverse exam_id=exam.id style="width:62px" = t("grades.weighting_total")
             th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
             th#grade_title.btn-inverse style="width:62px"
               = t("grades.grade")
@@ -79,17 +79,17 @@
                     #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
-              td#total_points.vm-tr.total_points*{'exam_id' => exam.id} = @student_total_scores[student.id]
+              td#total_points.total_points.vm-tr*{'exam_id' => exam.id} = @student_total_scores[student.id][exam.id]
               - if exam.use_weighting
-                td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
+                td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id][exam.id]
               td.deviation.vm-tr*{'exam_id' => exam.id}
-              td#grade.vm-tr*{'exam_id' => exam.id}
-              td#rank.vm-tr*{'exam_id' => exam.id}
+              td.grade.vm-tr*{'exam_id' => exam.id}
+              td.rank.vm-tr*{'exam_id' => exam.id}
         tr.total_row
           td colspan="3"
           - @exams.each do |exam|
             th.btn-primary colspan="#{exam.exam_portions.count}" = t("grades.average")
-            td#total_points.vm-tr.total_points_average*{'exam_id' => exam.id}
+            td#total_points.total_points_average.vm-tr*{'exam_id' => exam.id}
             -if exam.use_weighting
               td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
             end
@@ -106,124 +106,141 @@
 
 coffee:
   average = 0.0
+  examInfos = []
 
-  FixDigit = (num, digit_num) ->
-    fix = Math.pow 10, digit_num
-    return Math.floor(num * fix) / fix
+  SetExamInfos = ->
+    examInfos = $(".exam_infos")
 
-  CalculateAverage = (nums) ->
-    total = 0.0
+  FixDigit = (num, digitNum) ->
+    fixNum = Math.pow 10, digitNum
+    return Math.floor(num * fixNum) / fixNum
+
+  CalculateAllAverage = ->
+    CalculateAverage = (nums) ->
+      total = 0.0
+      i = 0
+      while i < nums.length
+        total += parseFloat(nums[i].innerText)
+        i++
+      return FixDigit total / nums.length, 2
+
     i = 0
-    while i < nums.length
-      total += parseFloat(nums[i].innerText)
+    while i < examInfos.length
+      $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+(i+1)+"']"))
+      $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+(i+1)+"']"))
       i++
-    return total / nums.length
 
   CalculateGradeAndRank = ->
     sortScore = (a, b) ->
       return parseFloat($(a).text()) < parseFloat($(b).text())
-
-    if $("#weighting_total_title").text()
-      scores = $(".weighted_scores")
-    else
-      scores = $(".total_points")
-
-    switch $("#how-grade").val()
-      when I18n.t("grades.deviation")
-        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE]
-        deviations = $(".deviation")
-        i = 0
-        while i < deviations.length
-          deviation = parseFloat($(deviations[i]).text())
-          grade = 10
-          j = 0
-          while j < levels.length - 1
-            if levels[j] > deviation && levels[j+1] <= deviation
-              $(deviations[i]).nextAll("#grade").text(grade.toString())
-            grade--
-            j++
-          i++
-      when I18n.t("grades.percent")
-        levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE]
-        sorteds = $.makeArray scores.sort(sortScore)
-        grade = 10
-        f_end = 0
-        i = 0
-        while i < levels.length && !f_end
-          num = Math.ceil sorteds.length * (levels[i] / 100)
-          j = 0
-          while j < num && !f_end
-            if sorteds.length
-              target = sorteds.shift()
-              $(target).nextAll("#grade").text(grade.toString())
-            else
-              f_end = 1
-            j++
-          grade--
-          i++
-    i = 0
-    while i < scores.length
-      if parseFloat($(scores[i]).text()) < average / 2 && parseFloat($(scores[i]).text()) < 30
-        $(scores[i]).nextAll("#grade").text("2")
-      if parseFloat($(scores[i]).text()) < average / 4
-        $(scores[i]).nextAll("#grade").text("1")
-      i++
-
-    levels = [15, 20]
-    sorteds = $.makeArray scores.sort(sortScore)
-    grade = 5
-    f_end = 0
-    i = 0
-    while i < sorteds.length
-      $(sorteds[i]).nextAll("#rank").text("3")
-      i++
-    i = 0
-    while i < levels.length && !f_end
-      num = Math.ceil sorteds.length * (levels[i] / 100)
-      j = 0
-      while j < num && !f_end
-        if sorteds.length
-          target = sorteds.shift()
-          $(target).nextAll("#rank").text(grade.toString())
-        else
-          f_end = 1
-        j++
-      grade--
-      i++
-    sorteds = $.makeArray scores.sort(sortScore)
-    i = 0
-    while i < sorteds.length
-      if parseFloat($(sorteds[i]).nextAll("#grade").text()) == 3
-        $(sorteds[i]).nextAll("#rank").text("2")
-      if parseFloat($(sorteds[i]).nextAll("#grade").text()) < 3
-        $(sorteds[i]).nextAll("#rank").text("1")
-      i++
-
-  CalculateDeviation = (scoreAve, weightedAve) ->
-    stdDev = 0.0
-    if $("#weighting_total_title").text()
-      scores = $(".weighted_scores")
-      average = weightedAve
-    else
-      scores = $(".total_points")
-      average = scoreAve
-    i = 0
-    while i < scores.length
-      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2)
-      i++
-    stdDev = Math.sqrt(stdDev / scores.length)
-
-    deviation = 0.0
-    i = 0
-    while i < scores.length
-      deviation = (parseFloat($(scores[i]).text()) - average) / stdDev
-      if isNaN(deviation)
-        deviation = 50
+    exam_loop = 0
+    while exam_loop < examInfos.length
+      -# CalculateGrade -----↓
+      if $("#weighting_total_title[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text()
+        scores = $(".weighted_scores[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']")
       else
-        deviation = deviation * 10 + 50
-      $(scores[i]).nextAll(".deviation").text(FixDigit(deviation, 2))
+        scores = $(".total_points[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']")
+      switch $("#how-grade").val()
+        when I18n.t("grades.deviation")
+          levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE]
+          deviations = $(".deviation[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']")
+          i = 0
+          while i < deviations.length
+            deviation = parseFloat($(deviations[i]).text())
+            grade = 10
+            j = 0
+            while j < levels.length - 1
+              if levels[j] > deviation && levels[j+1] <= deviation
+                $(deviations[i]).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text(grade.toString())
+              grade--
+              j++
+            i++
+        when I18n.t("grades.percent")
+          levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE]
+          sorteds = $.makeArray scores.sort(sortScore)
+          grade = 10
+          f_end = 0
+          i = 0
+          while i < levels.length && !f_end
+            num = Math.ceil sorteds.length * (levels[i] / 100)
+            j = 0
+            while j < num && !f_end
+              if sorteds.length
+                target = sorteds.shift()
+                $(target).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text(grade.toString())
+              else
+                f_end = 1
+              j++
+            grade--
+            i++
+      i = 0
+      while i < scores.length
+        if parseFloat($(scores[i]).text()) < average / 2 && parseFloat($(scores[i]).text()) < 30
+          $(scores[i]).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("2")
+        if parseFloat($(scores[i]).text()) < average / 4
+          $(scores[i]).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("1")
+        i++
+      -# CalculateRank -----↓
+      levels = [15, 20]
+      sorteds = $.makeArray scores.sort(sortScore)
+      grade = 5
+      f_end = 0
+      i = 0
+      while i < sorteds.length
+        $(sorteds[i]).nextAll(".rank[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("3")
+        i++
+      i = 0
+      while i < levels.length && !f_end
+        num = Math.ceil sorteds.length * (levels[i] / 100)
+        j = 0
+        while j < num && !f_end
+          if sorteds.length
+            target = sorteds.shift()
+            $(target).nextAll(".rank[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text(grade.toString())
+          else
+            f_end = 1
+          j++
+        grade--
+        i++
+      sorteds = $.makeArray scores.sort(sortScore)
+      i = 0
+      while i < sorteds.length
+        if parseFloat($(sorteds[i]).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text()) == 3
+          $(sorteds[i]).nextAll(".rank[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("2")
+        if parseFloat($(sorteds[i]).nextAll(".grade[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text()) < 3
+          $(sorteds[i]).nextAll(".rank[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("1")
+        i++
+      exam_loop++
+
+  CalculateDeviation = () ->
+    i = 0
+    while i < examInfos.length
+      stdDev = 0.0
+      if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
+        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+      else
+        scores = $(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
+        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+      j = 0
+      while j < scores.length
+        stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2)
+        j++
+      stdDev = Math.sqrt(stdDev / scores.length)
+
+      deviation = 0.0
+      j = 0
+      while j < scores.length
+        deviation = (parseFloat($(scores[j]).text()) - average) / stdDev
+        if isNaN(deviation)
+          deviation = 50
+        else
+          deviation = deviation * 10 + 50
+        $(scores[j]).nextAll(".deviation").text(FixDigit(deviation, 2))
+        j++
       i++
 
+  -# main -----↓
   $(".fire_submit").blur (e) ->
     ect = e.currentTarget
     if ect.valueAsNumber > parseFloat(ect.max) || ect.valueAsNumber < parseFloat(ect.min)
@@ -236,11 +253,7 @@ coffee:
   $("#how-grade").change (e) ->
     CalculateGradeAndRank()
 
-  total_score_average = CalculateAverage $(".total_points")
-  $(".total_points_average").html FixDigit(total_score_average, 4)
-
-  total_weights_average = CalculateAverage $(".weighted_scores")
-  $(".weighted_scores_average").html FixDigit(total_weights_average, 4)
-
-  CalculateDeviation total_score_average, total_weights_average
+  SetExamInfos()
+  CalculateAllAverage()
+  CalculateDeviation()
   CalculateGradeAndRank()
