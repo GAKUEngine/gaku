@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class Students::ImporterController < ApplicationController
   include SheetHelper
   require 'spreadsheet'
@@ -101,12 +103,141 @@ class Students::ImporterController < ApplicationController
   #在校生リストを先にインポートする必要がある
   def import_school_station_student_list
     #import ZAIKOU list from SchoolStation
-    @rowcount = nil
-    @sheet_data = nil
+    file_data = params[:importer][:data_file]
+    
+    #read from saved file
+    importer = ImportFile.new(params[:importer])
+    importer.context = 'students'
+    if importer.save
+      book = Spreadsheet.open(importer.data_file.path)
+      
+      #read from not saved file. just read file
+      # book = Spreadsheet.open(file_data.path)
+      
+      sheet = book.worksheet(0)
 
-    @status = "OPENING_FILE"
-    @sheet_data = params[:import_student_list][:data_file].read
-    @workbook = Spreadsheet::ParseExcel.parse(@sheet_data)
+      ActiveRecord::Base.transaction do
+        #Giorgio:put in transaction for fast importing
+        @rowcount = 0
+
+        #initial default values (from inital raw output)
+        nameIdx = 7
+        nameReadingIdx = 8
+        birthDateIdx = 10
+        genderIdx = 11
+        phoneIdx = 19
+
+        #primary address
+        zipcodeIdx = 14
+        stateIdx = 15
+        cityIdx = 16
+        address1Idx = 17
+        address2Idx = 18
+
+        #primary guardian
+        guardianNameIdx = 34
+        guardianNameReadingIdx = 35
+        guardianZipCodeIdx = 37
+        guardianStateIdx = 38
+        guardianCityIdx = 39
+        guardianAddress1Idx = 40
+        guardianAddress2Idx = 41
+        guardianPhoneIdx = 42
+
+        sheet.each do |row|
+          unless book.worksheet('CAMPUS_ZAIKOTBL').first == row
+            if row[nameIdx].nil?
+              next
+            end
+
+            @rowcount += 1
+
+            nameParts = row[nameIdx].to_s().split("　")
+            surname = nameParts.first
+            name = nameParts.last
+            nameReadingParts = row[nameReadingIdx].to_s().split(" ")
+            surname_reading = nameReadingParts.first
+            name_reading = nameReadingParts.last
+            puts "parsing date: " << row[birthDateIdx].to_s
+            birth_date = Date.parse(row[birthDateIdx].to_s)
+            gender = nil
+            if !row[genderIdx].nil?
+              if row[genderIdx].to_i == 2
+                gender = 0
+              else
+                gender = 1
+              end
+            end
+            phone = row[phoneIdx]
+
+            # check for existing
+            student = Student.create!(:surname => surname, 
+                            :name => name, 
+                            :surname_reading => surname_reading, 
+                            :name_reading => name_reading,
+                            :birth_date => birth_date,
+                            :gender => gender,
+                            :phone => phone)
+
+            if student.nil?
+              #TODO no student was created
+              next
+            end
+
+            zipcode = row[zipcodeIdx]
+            state = row[stateIdx]
+            city = row[cityIdx]
+            address1 = address1Idx
+            address2 = address2Idx
+            student.addresses.create!(:zipcode => zipcode,
+                                      :state => state,
+                                      :city => city,
+                                      :address1 => address1,
+                                      :address2 => address2)
+
+          else #1st row, try parsing index
+            row.each_with_index do |cell, i|
+              case cell
+              when "ZAINAM_C" #生徒名の漢字
+                nameIdx = i
+              when "ZAINAM_K"
+                nameReadingIdx = i
+              when "ZAIBTHDY"
+                birthDateIdx = i
+              when "ZAISEXKN"
+                genderIdx = i
+              when "ZAIZIPCD"
+                zipcodeIdx = i
+              when "ZAIADRCD"
+                stateIdx = i
+              when "ZAIADR_1"
+                cityIdx = i
+              when "ZAIADR_2"
+                address1Idx = i
+              when "ZAIADR_3"
+                address2Idx = i
+              when "ZAITELNO"
+                phoneIdx = i
+              when "HOGNAM_C"
+                guardianNameIdx = i
+              when "HOGNAM_K"
+                guardianNameReadingIdx = i
+              when "HOGZIPCD"
+                guardianZipCodeIdx = i
+              when "HOGADR_1"
+                guardianCityIdx = i
+              when "HOGADR_2"
+                guardianAddress1Idx = i
+              when "HOGADR_3"
+                guardianAddress2Idx = i
+              when "HOGTELNO"
+                guardianPhoneIdx = i
+              end
+            end
+          end
+        end
+      end
+    end
     #@worksheet = @workbook.work
 
     #collect fields
