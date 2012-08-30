@@ -1,5 +1,6 @@
+/= javascript_include_tag "exam_grading_widget"
+= javascript_include_tag "jquery.tablefix_1.0.0"
 #exam_grading_area
-  /= javascript_include_tag "exam_grading_widget"
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0
@@ -14,8 +15,8 @@
   .span12
     hr
 .row-fluid
-  .well.pull-left style="width:1500px"
-    table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
+  .span12.well.pull-left
+    table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed style="width:1800px"
       thead
         tr
           th.btn-primary colspan="3" =t('student')
@@ -24,9 +25,9 @@
           - if defined? @grades
             th.btn-inverse colspan="4" =t('grades.combined')
         tr
-          th.btn-info =t("class")
-          th.btn-info =t("class_group_enrollments.seat_number")
-          th.btn-info =t("students.name")
+          th.btn-info style="width:150px" =t("class")
+          th.btn-info style="width:150px" =t("class_group_enrollments.seat_number")
+          th.btn-info style="width:150px" =t("students.name")
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - if exam.use_weighting
@@ -39,24 +40,24 @@
                   = "【 " + portion.name + " 】"
                   br
                   = portion.max_score.to_s
-            th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+            th#total_points_title.btn-inverse style="width:65px" = t("grades.total_points")
             - if exam.use_weighting
-              th#weighting_total_title.btn-inverse exam_id=exam.id style="width:62px" = t("grades.weighting_total")
-            th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
-            th#grade_title.btn-inverse style="width:62px"
+              th#weighting_total_title.btn-inverse exam_id=exam.id style="width:65px" = t("grades.weighting_total")
+            th#deviation.btn-inverse style="width:65px" = t("grades.deviation")
+            th#grade_title.btn-inverse style="width:65px"
               = t("grades.grade")
               br
               10
-            th#rank_title.btn-inverse style="width:62px"
+            th#rank_title.btn-inverse style="width:65px"
               = t("grades.rank")
               br
               5
             /- if defined? @grades
-              th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+              th#total_points_title.btn-inverse style="width:65px" = t("grades.total_points")
               - if exam.use_weighting
-                th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
-              th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
-              th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+                th#weighting_total_title.btn-inverse style="width:65px" = t("grades.weighting_total")
+              th#grade_title.btn-inverse style="width:65px" = t("grades.grade")
+              th#rank_title.btn-inverse style="width:65px" = t("grades.rank")
 
       tbody
         - @students.each do |student|
@@ -239,6 +240,8 @@ coffee:
       i++
 
   -# main -----↓
+  $('#exam_grid').tablefix({width: 1288, height: 360, fixRows: 2, fixCols: 3});
+
   $('.edit_exam_portion_score').validationEngine()
 
   $(".fire_submit").blur (e) ->
