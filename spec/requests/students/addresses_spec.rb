@@ -95,15 +95,14 @@ describe 'Address' do
     it 'should delete a student address', :js => true do
       click_link 'new_student_address_tab_link'
       wait_until { page.has_content?('Addresses list') } 
-      page.all('table.index tr').size.should == 3
+      tr_count = page.all('table.index tr').size
       page.should have_content(@address.address1)
       #@student.addresses.size.should == 1
 
       click_link "delete_link" 
       page.driver.browser.switch_to.alert.accept
-      #FIXME Make a real check, no sleep 
-      sleep 1
-      page.all('table.index tr').size.should == 2
+
+      wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.addresses.size.should == 0
       page.should_not have_content(@address.address1)
     end
