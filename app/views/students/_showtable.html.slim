@@ -91,9 +91,19 @@
     .span4
       = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
 
+row-fluid
+  .span12
+    #student_delete_link
+      =link_to 'Delete', "#", :class => 'btn btn-danger pull-right'
+  .delete_modal
+    =render 'shared/delete_modal', :target => @student
+
 #modal_dialogs
 
 coffee:
   $("#upload_picture_link").click ->
     $("#upload_picture").toggle()
 
+  $('#student_delete_link').on 'click', (e)->
+    e.preventDefault()
+    $('#deleteModal').modal('show')
