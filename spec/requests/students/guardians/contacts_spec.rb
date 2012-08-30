@@ -59,8 +59,12 @@ describe 'Guardian Contacts' do
     it 'should delete a contact for student guardian' do
       click_link 'show_link'
       page.should have_content '321'
+      @student.guardians.first.contacts.size.should == 2
+      tr_count = page.all('table.index tr').size
 
       within('table.guardian_contact_table tr#contact_2') { click_link 'delete_link' }
+
+      wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.guardians.first.contacts.size.should == 1
       page.should_not have_content '321'
     end

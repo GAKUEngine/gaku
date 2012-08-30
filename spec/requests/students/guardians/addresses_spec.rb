@@ -71,8 +71,7 @@ describe 'Guardian Addresses' do
       within("table.guardian_address_table tr#address_#{@student.guardians.first.addresses.last.id}") { click_link 'delete_link' }
       page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table.index tr').size.should == tr_count - 1 }
-      
+      wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.guardians.first.addresses.size.should == 1
       page.should_not have_content('Bulgaria')
     end

@@ -70,10 +70,12 @@ describe 'Courses' do
       @syllabus.courses.count.should == 1
       page.should have_content("Courses List")
       page.should have_content(@course.code)
-
-      within('.table  tr:nth-child(2)') { click_link "delete_link" }
+      tr_count = page.all('table.index tr').size
       
+      within('.table  tr:nth-child(2)') { click_link "delete_link" }
       page.driver.browser.switch_to.alert.accept
+
+      wait_until { page.all('table.index tr').size == tr_count - 1 }
       page.should_not have_content(@course.code)
       @syllabus.courses.count.should == 0
     end

@@ -5,7 +5,7 @@
         = @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list')
   .row-fluid
     .span12
-      table.table.table-striped.table-bordered.table-condensed
+      table.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th

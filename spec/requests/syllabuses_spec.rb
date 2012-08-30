@@ -67,8 +67,10 @@ describe 'Syllabus' do
 
   it "should delete a syllabus" do
       Syllabus.count.should == 1
+      tr_count =  page.all('table.index tr').size
       within('table  tr:nth-child(2)') { click_link "delete" }
       
+      wait_until { page.all('table.index tr').size == tr_count - 1 }
       page.should_not have_content("#{@syllabus.code}")
       Syllabus.count.should == 0
     end
