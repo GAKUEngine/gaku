@@ -43,7 +43,7 @@ describe 'Guardian Addresses' do
       address2 = Factory(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
       @student.guardians.first.addresses << [ address1, address2 ]
       @student.reload
-      click_link 'show_link'
+      visit student_guardian_path(@student, @student.guardians.first)
     end
 
     it 'should edit address for student guardian', :js => true do 
@@ -68,7 +68,7 @@ describe 'Guardian Addresses' do
       page.should have_content('Bulgaria')
       @student.guardians.first.addresses.size.should == 2
 
-      within('table.guardian_address_table tr#address_2') { click_link 'delete_link' }
+      within("table.guardian_address_table tr#address_#{@student.guardians.first.addresses.last.id}") { click_link 'delete_link' }
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table.index tr').size == tr_count - 1 } 
