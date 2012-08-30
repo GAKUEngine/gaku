@@ -86,8 +86,8 @@ describe 'Address' do
         
         click_button 'submit_button'
 
-        page.should have_content('Address1 is empty')
-        page.should have_content('City is empty')
+        page.should have_content('Address1 can\'t be blank')
+        page.should have_content('City can\'t be blank')
       end
     end
 
