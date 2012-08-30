@@ -64,16 +64,14 @@ describe 'Guardian Addresses' do
     end
 
     it 'should delete address for student guardian', :js => true do 
-      page.all('table.guardian_address_table tr').size.should == 3
+      tr_count = page.all('table.index tr').size
       page.should have_content('Bulgaria')
       @student.guardians.first.addresses.size.should == 2
 
       within('table.guardian_address_table tr#address_2') { click_link 'delete_link' }
       page.driver.browser.switch_to.alert.accept
 
-      #FIXME Make a real check, no sleep 
-      sleep 1
-      page.all('table.index tr').size.should == 2
+      wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.guardians.first.addresses.size.should == 1
       page.should_not have_content('Bulgaria')
     end

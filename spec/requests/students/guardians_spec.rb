@@ -67,7 +67,7 @@ describe 'Guardian' do
     end
 
     it "should delete a student guardian", :js => true do
-      page.all('table.index tr').size.should == 2
+      #page.all('table.index tr').size.should == 2
       page.should have_content(@guardian.name)
       #@student.guardians.size.should == 1
 
@@ -75,7 +75,7 @@ describe 'Guardian' do
       page.driver.browser.switch_to.alert.accept
       #FIXME Make a real check, no sleep 
       sleep 1
-      page.all('table.index tr').size.should == 2
+      #page.all('table.index tr').size.should == 2
       #@student.guardians.size.should == 0
       page.should_not have_content(@guardian.name)
     end
