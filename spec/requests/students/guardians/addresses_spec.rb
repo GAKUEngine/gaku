@@ -68,7 +68,7 @@ describe 'Guardian Addresses' do
       page.should have_content('Bulgaria')
       @student.guardians.first.addresses.size.should == 2
 
-      within('table.guardian_address_table tr#address_2') { click_link 'delete_link' }
+      within("table.guardian_address_table tr#address_#{@student.guardians.first.addresses.last.id}") { click_link 'delete_link' }
       page.driver.browser.switch_to.alert.accept
 
       #FIXME Make a real check, no sleep 
