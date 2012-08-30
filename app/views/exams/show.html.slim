@@ -13,15 +13,15 @@
           table.table.table-striped.table-bordered.table-condensed
             tbody
               tr
-                th =t('exams.name')
+                th.btn-inverse =t('exams.name')
                 td =@exam.name
-                th =t('exams.weight')
+                th.btn-inverse =t('exams.weight')
                 td =@exam.weight
               tr
-                th =t('exams.description')
+                th.btn-inverse =t('exams.description')
                 td colspan="3" =@exam.description
               tr
-                th =t('exams.adjustments')
+                th.btn-inverse =t('exams.adjustments')
                 td colspan="3" =@exam.adjustments
     .row-fluid
       .span12.well
@@ -44,7 +44,7 @@
           .row-fluid
             =render 'weight_check_widget'
     .row-fluid
-      .span12.well        
+      .span12.well
         = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_exam_path(@exam), :class => "span9 btn btn-warning", :style => "min-height:0px"
         = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, exams_path, :class => "span3 btn btn-danger"
 
