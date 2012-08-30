@@ -6,6 +6,7 @@
       - @exams.each do |exam|
         = exam.name << " " << t("grades.grading")
   .pull-right
+    =link_to t('Back'), @course, :class => 'btn mr-s'
     select#how-grade.mb-0
       option = t("grades.deviation")
       option = t("grades.percent")
@@ -13,7 +14,7 @@
   .span12
     hr
 .row-fluid
-  .span12.well
+  .well.pull-left style="width:1500px"
     table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
       thead
         tr
@@ -75,7 +76,8 @@
                 - model_class = model.class
                 td#score
                   = form_for [@exam, model], :url => update_score_course_exam_path(@course, exam), :remote => true do |f|
-                    = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
+                    /= f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
+                    = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[required] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
                     #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
@@ -94,15 +96,11 @@
               td#weighted_score.weighted_scores_average.vm-tr*{'exam_id' => exam.id}
             end
             td colspan="3"
-.row-fluid
-  .span3.well.pull-right
-    =link_to t('Back'), @course, :class => 'span12 btn'
 
 /coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   # gradingArea = $("#exam_grid1").examGradingWidget()
-  # $('.edit_exam_portion_score1').validationEngine()
 
 coffee:
   average = 0.0
@@ -241,6 +239,8 @@ coffee:
       i++
 
   -# main -----↓
+  $('.edit_exam_portion_score').validationEngine()
+
   $(".fire_submit").blur (e) ->
     ect = e.currentTarget
     if ect.valueAsNumber > parseFloat(ect.max) || ect.valueAsNumber < parseFloat(ect.min)

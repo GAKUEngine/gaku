@@ -59,7 +59,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 76
+                  width: 78
                   encoded: false
                   resizable: false
                   sortable: false
@@ -117,11 +117,11 @@ class StudentGrid extends BuHin
       reorderable: true
       # columnMenu: true
       columns: @_columns()
-    
+
     @target.kendoGrid(gridArgs)
 
   _createCheckbox: () ->
-    
+
     checkString = (check_s) ->
       ths = $("#grid th")
       i = 0
@@ -129,15 +129,15 @@ class StudentGrid extends BuHin
         if $(ths[i]).text() is check_s
           return i + 1
           break
-        i++    
-           
+        i++
+
     checkBoxes = $("<div></div>")
     $.each @titles, (key, value) ->
       if key != "manage" and key != 'checkbox'
         checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
         .appendTo(checkBoxes)
     $("#table-checkboxes").html(checkBoxes.html())
-        
+
     $("#table-checkboxes .form-inline").toggle ((e) ->
       num = checkString(e.currentTarget.textContent)
       $(e.currentTarget).find("input").removeAttr('checked')
@@ -155,15 +155,15 @@ class StudentGrid extends BuHin
       # console.log studentData
       if studentData == null
         return
-      
+
       @students = studentData
 
       i = 0
       while i < @students.length
-        
+
         if @students[i]["class_group_widget"]
           @students[i]["class_group_widget"] = @students[i]["class_group_widget"].grade  + " - " + @students[i]["class_group_widget"].name
-                            
+
         manage = $("<div></div>")
         pop = $("<a></a>")
         pop.attr("href", "#")
@@ -185,9 +185,9 @@ class StudentGrid extends BuHin
           .attr("data-remote", "true")
           .html("<i class='icon-white icon-pencil'></i>")
           .appendTo(managementButtons)
-        
+
         @students[i]["manage"] = managementButtons.html()
-        
+
         # create checkbox for student row
         checkbox = $("<div></div>")
         showButton = $("<input type='checkbox' class='student_check' value='" + @students[i].id + "'></input>")
@@ -195,23 +195,23 @@ class StudentGrid extends BuHin
           .appendTo(checkbox)
 
         @students[i]["checkbox"] = checkbox.html()
-        
+
         if @students[i]["gender"]
           @students[i]["gender"] = I18n.t("genders.male")
         else
           @students[i]["gender"] = I18n.t("genders.female")
-        
+
         i++
-        
+
       @_createCheckbox()
       @_createGrid()
       # console.log @titles
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
-        
+
         select: (event, ui) ->
           $('input.student_search').autocomplete('search',"#{ui.item.surname} #{ui.item.name}")
-      
+
 
         source: (req, res) =>
           autocompleteSource = $('input.student_search').data('autocomplete-source')
@@ -257,9 +257,9 @@ class StudentGrid extends BuHin
                   .attr("data-remote", "true")
                   .html("<i class='icon-pencil'></i>")
                   .appendTo(managementButtons)
-                
+
                 @students[i]["manage"] = managementButtons.html()
-                
+
                 checkbox = $("<div></div>")
                 showButton = $("<input type='checkbox'></input>")
                 .css("margin-left","10px")
@@ -268,7 +268,7 @@ class StudentGrid extends BuHin
                 @students[i]["checkbox"] = checkbox.html()
 
                 i++
-                
+
               @_createGrid()
               @_createCheckbox()
               # @refreshGrid
@@ -305,7 +305,7 @@ class StudentGrid extends BuHin
   refreshOnUpdateOrCreate: ->
     $('#student_modal form').live 'ajax:success', =>
       @refreshGrid()
-    
+
     $('#new_student_form').live 'ajax:success', =>
       @refreshGrid()
 
