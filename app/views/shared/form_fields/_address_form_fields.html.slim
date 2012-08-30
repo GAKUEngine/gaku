@@ -15,7 +15,7 @@
         button.span12.btn.btn-primary= t "addresses.search_address"
 .row-fluid
   .span3
-    / class state_label for handling changing state input with state dropdown
+    / class state_label for handling changing state input with state dropdown/
     = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label" 
     = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
   .span3

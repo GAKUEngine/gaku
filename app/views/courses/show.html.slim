@@ -5,7 +5,7 @@
   .span10
     .row-fluid
       .pull-left
-        h3 = t("courses.show")
+        h4.mb-0 = t("courses.show")
     .row-fluid
       .span12
         hr/
@@ -15,10 +15,10 @@
             table.table.table-striped.table-bordered.table-condensed.student_contact_table
               thead
                 tr
-                  th =t('courses.code')
+                  th.btn-inverse =t('courses.code')
                   - if @course.syllabus
-                    th =t('combined_code')
-                    th =t("syllabus")
+                    th.btn-inverse =t('combined_code')
+                    th.btn-inverse =t("syllabus")
               tbody
                 tr
                   td =@course.code

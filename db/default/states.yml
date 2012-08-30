@@ -211,236 +211,283 @@ states_009:
 ###########
 states_39201:
   name: 北海道
+  code: 1
   name_ascii: Hokkaido
   country_numcode: "392"
   abbr: HK
 states_39202:
   name: 青森県
+  code: 2
   name_ascii: Aomori
   country_numcode: "392"
   abbr: AM
 states_39203:
   name: 岩手県
+  code: 3
   name_ascii: Iwate
   country_numcode: "392"
   abbr: IT
 states_39204:
   name: 宮城県
+  code: 4
   name_ascii: Miyagi
   country_numcode: "392"
   abbr: MG
 states_39205:
   name: 秋田県
+  code: 5
   name_ascii: Akita
   country_numcode: "392"
   abbr: AK
 states_39206:
   name: 山形県
+  code: 6
   name_ascii: Yamagata
   country_numcode: "392"
   abbr: YG
 states_39207:
   name: 福島県
+  code: 7
   name_ascii: Fukushima
   country_numcode: "392"
   abbr: FS
 states_39208:
   name: 茨城県
+  code: 8
   name_ascii: Ibaraki
   country_numcode: "392"
   abbr: IG
 states_39209:
   name: 栃木県
+  code: 9
   name_ascii: Tochigi
   country_numcode: "392"
   abbr: TG
 states_39210:
   name: 群馬県
+  code: 10
   name_ascii: Gunma
   country_numcode: "392"
   abbr: GM
 states_39211:
   name: 埼玉県
+  code: 11
   name_ascii: Saitama
   country_numcode: "392"
   abbr: ST
 states_39212:
   name: 千葉県
+  code: 12
   name_ascii: Chiba
   country_numcode: "392"
   abbr: CB
 states_39213:
   name: 東京都
+  code: 13
   name_ascii: Tokyo
   country_numcode: "392"
   abbr: TK
 states_39214:
   name: 神奈川県
+  code: 14
   name_ascii: Kanagawa
   country_numcode: "392"
   abbr: KG
 states_39215:
   name: 新潟県
+  code: 15
   name_ascii: Niigata
   country_numcode: "392"
   abbr: NG
 states_39216:
   name: 富山県
+  code: 16
   name_ascii: Toyama
   country_numcode: "392"
   abbr: TY
 states_39217:
   name: 石川県
+  code: 17
   name_ascii: Ishikawa
   country_numcode: "392"
   abbr: IK
 states_39218:
   name: 福井県
+  code: 18
   name_ascii: Fukui
   country_numcode: "392"
   abbr: FI
 states_39219:
   name: 山梨県
+  code: 19
   name_ascii: Yamanashi
   country_numcode: "392"
   abbr: YN
 states_39220:
   name: 長野県
+  code: 20
   name_ascii: Nagano
   country_numcode: "392"
   abbr: NN
 states_39221:
   name: 岐阜県
+  code: 21
   name_ascii: Gifu
   country_numcode: "392"
   abbr: GF
 states_39222:
   name: 静岡県
+  code: 22
   name_ascii: Shizuoka
   country_numcode: "392"
   abbr: SO
 states_39223:
   name: 愛知県
+  code: 23
   name_ascii: Aichi
   country_numcode: "392"
   abbr: AC
 states_39224:
   name: 三重県
+  code: 24
   name_ascii: Mie
   country_numcode: "392"
   abbr: ME
 states_39225:
   name: 滋賀県
+  code: 25
   name_ascii: Shiga
   country_numcode: "392"
   abbr: SG
 states_39226:
   name: 京都府
+  code: 26
   name_ascii: Kyoto
   country_numcode: "392"
   abbr: KT
 states_39227:
   name: 大阪府
+  code: 27
   name_ascii: Osaka
   country_numcode: "392"
   abbr: OS
 states_39228:
   name: 兵庫県
+  code: 28
   name_ascii: Hyogo
   country_numcode: "392"
   abbr: HG
 states_39229:
   name: 奈良県
+  code: 29
   name_ascii: Nara
   country_numcode: "392"
   abbr: NR
 states_39230:
   name: 和歌山県
+  code: 30
   name_ascii: Wakayama
   country_numcode: "392"
   abbr: WY
 states_39231:
   name: 鳥取県
+  code: 31
   name_ascii: Tottori
   country_numcode: "392"
   abbr: TT
 states_39232:
   name: 島根県
+  code: 32
   name_ascii: Shimane
   country_numcode: "392"
   abbr: SN
 states_39233:
   name: 岡山県
+  code: 33
   name_ascii: Okayama
   country_numcode: "392"
   abbr: OY
 states_39234:
   name: 広島県
+  code: 34
   name_ascii: Hiroshima
   country_numcode: "392"
   abbr: HS
 states_39235:
   name: 山口県
+  code: 35
   name_ascii: Yamaguchi
   country_numcode: "392"
   abbr: YG
 states_39236:
   name: 徳島県
+  code: 36
   name_ascii: Tokushima
   country_numcode: "392"
   abbr: TS
 states_39237:
   name: 香川県
+  code: 37
   name_ascii: Kagawa
   country_numcode: "392"
   abbr: KG
 states_39238:
   name: 愛媛県
+  code: 38
   name_ascii: Ehime
   country_numcode: "392"
   abbr: EH
 states_39239:
   name: 高知県
+  code: 39
   name_ascii: Kochi
   country_numcode: "392"
   abbr: KC
 states_39240:
   name: 福岡県
+  code: 40
   name_ascii: Fukuoka
   country_numcode: "392"
   abbr: FO
 states_39241:
   name: 佐賀県
+  code: 41
   name_ascii: Saga
   country_numcode: "392"
   abbr: SG
 states_39242:
   name: 長崎県
+  code: 42
   name_ascii: Nagasaki
   country_numcode: "392"
   abbr: NS
 states_39243:
   name: 熊本県
+  code: 43
   name_ascii: Kumamoto
   country_numcode: "392"
   abbr: KM
 states_39244:
   name: 大分県
+  code: 44
   name_ascii: Oita
   country_numcode: "392"
   abbr: OI
 states_39245:
   name: 宮崎県
+  code: 45
   name_ascii: Miyazaki
   country_numcode: "392"
   abbr: MZ
 states_39246:
   name: 鹿児島県
+  code: 46
   name_ascii: Kagoshima
   country_numcode: "392"
   abbr: KS
 states_39247:
   name: 沖縄県
+  code: 47
   name_ascii: Okinawa
   country_numcode: "392"
   abbr: ON

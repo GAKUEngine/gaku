@@ -1,63 +1,189 @@
-$('#student_<%= @student_id %> td.total_points').html('<%= @student_total_score %>');
-$('#student_<%= @student_id %> td.weighted_scores').html('<%= @student_weights_total %>');
+$('#student_<%= @student_id %> td.total_points[exam_id="<%= @exam_id %>"]').html('<%= @student_total_score %>');
+$('#student_<%= @student_id %> td.weighted_scores[exam_id="<%= @exam_id %>"]').html('<%= @student_weights_total %>');
 
-var CalculateAverage, CalculateDeviation, FixDigit, total_score_average, total_weights_average;
+var CalculateAllAverage, CalculateDeviation, CalculateGradeAndRank, FixDigit, SetExamInfos, average, examInfos;
 
-FixDigit = function(num, digit_num) {
-  var fix;
-  fix = Math.pow(10, digit_num);
-  return Math.floor(num * fix) / fix;
+average = 0.0;
+
+examInfos = [];
+
+SetExamInfos = function() {
+  return examInfos = $(".exam_infos");
 };
 
-CalculateAverage = function(nums) {
-  var i, total;
-  total = 0.0;
-  i = 0;
-  while (i < nums.length) {
-    total += parseFloat(nums[i].innerText);
-    i++;
-  }
-  return total / nums.length;
+FixDigit = function(num, digitNum) {
+  var fixNum;
+  fixNum = Math.pow(10, digitNum);
+  return Math.floor(num * fixNum) / fixNum;
 };
 
-CalculateDeviation = function(scoreAve, weightedAve) {
-  var average, deviation, i, scores, stdDev, _results;
-  stdDev = 0.0;
-  if ($("#weighting_total_title").text()) {
-    scores = $(".weighted_scores");
-    average = weightedAve;
-  } else {
-    scores = $(".total_points");
-    average = scoreAve;
-  }
-  i = 0;
-  while (i < scores.length) {
-    stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2);
-    i++;
-  }
-  stdDev = Math.sqrt(stdDev / scores.length);
-  deviation = 0.0;
+CalculateAllAverage = function() {
+  var CalculateAverage, i, _results;
+  CalculateAverage = function(nums) {
+    var i, total;
+    total = 0.0;
+    i = 0;
+    while (i < nums.length) {
+      total += parseFloat(nums[i].innerText);
+      i++;
+    }
+    return FixDigit(total / nums.length, 2);
+  };
   i = 0;
   _results = [];
-  while (i < scores.length) {
-    deviation = (parseFloat($(scores[i]).text()) - average) / stdDev;
-    if (isNaN(deviation)) {
-      deviation = 50;
-    } else {
-      deviation = deviation * 10 + 50;
-    }
-    $(scores[i]).nextAll("#deviation").text(Math.floor(deviation));
+  while (i < examInfos.length) {
+    $(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".total_points[exam_id='" + (i + 1) + "']")));
+    $(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".weighted_scores[exam_id='" + (i + 1) + "']")));
     _results.push(i++);
   }
   return _results;
 };
 
-total_score_average = CalculateAverage($(".total_points"));
+CalculateGradeAndRank = function() {
+  var deviation, deviations, exam_loop, f_end, grade, i, j, levels, num, scores, sortScore, sorteds, target, _results;
+  sortScore = function(a, b) {
+    return parseFloat($(a).text()) < parseFloat($(b).text());
+  };
+  exam_loop = 0;
+  _results = [];
+  while (exam_loop < examInfos.length) {
+    -($("#weighting_total_title[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text() ? scores = $(".weighted_scores[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']") : scores = $(".total_points[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']"));
+    switch ($("#how-grade").val()) {
+      case I18n.t("grades.deviation"):
+        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE];
+        deviations = $(".deviation[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']");
+        i = 0;
+        while (i < deviations.length) {
+          deviation = parseFloat($(deviations[i]).text());
+          grade = 10;
+          j = 0;
+          while (j < levels.length - 1) {
+            if (levels[j] > deviation && levels[j + 1] <= deviation) {
+              $(deviations[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text(grade.toString());
+            }
+            grade--;
+            j++;
+          }
+          i++;
+        }
+        break;
+      case I18n.t("grades.percent"):
+        levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE];
+        sorteds = $.makeArray(scores.sort(sortScore));
+        grade = 10;
+        f_end = 0;
+        i = 0;
+        while (i < levels.length && !f_end) {
+          num = Math.ceil(sorteds.length * (levels[i] / 100));
+          j = 0;
+          while (j < num && !f_end) {
+            if (sorteds.length) {
+              target = sorteds.shift();
+              $(target).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text(grade.toString());
+            } else {
+              f_end = 1;
+            }
+            j++;
+          }
+          grade--;
+          i++;
+        }
+    }
+    i = 0;
+    while (i < scores.length) {
+      if (parseFloat($(scores[i]).text()) < average / 2 && parseFloat($(scores[i]).text()) < 30) {
+        $(scores[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text("2");
+      }
+      if (parseFloat($(scores[i]).text()) < average / 4) {
+        $(scores[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text("1");
+      }
+      i++;
+    }
+    -(levels = [15, 20]);
+    sorteds = $.makeArray(scores.sort(sortScore));
+    grade = 5;
+    f_end = 0;
+    i = 0;
+    while (i < sorteds.length) {
+      $(sorteds[i]).nextAll(".rank[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text("3");
+      i++;
+    }
+    i = 0;
+    while (i < levels.length && !f_end) {
+      num = Math.ceil(sorteds.length * (levels[i] / 100));
+      j = 0;
+      while (j < num && !f_end) {
+        if (sorteds.length) {
+          target = sorteds.shift();
+          $(target).nextAll(".rank[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text(grade.toString());
+        } else {
+          f_end = 1;
+        }
+        j++;
+      }
+      grade--;
+      i++;
+    }
+    sorteds = $.makeArray(scores.sort(sortScore));
+    i = 0;
+    while (i < sorteds.length) {
+      if (parseFloat($(sorteds[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text()) === 3) {
+        $(sorteds[i]).nextAll(".rank[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text("2");
+      }
+      if (parseFloat($(sorteds[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text()) < 3) {
+        $(sorteds[i]).nextAll(".rank[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text("1");
+      }
+      i++;
+    }
+    _results.push(exam_loop++);
+  }
+  return _results;
+};
 
-$(".total_points_average").html(FixDigit(total_score_average, 2));
+CalculateDeviation = function() {
+  var deviation, i, j, scores, stdDev, _results;
+  i = 0;
+  _results = [];
+  while (i < examInfos.length) {
+    stdDev = 0.0;
+    if ($("#weighting_total_title[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text()) {
+      scores = $(".weighted_scores[exam_id='" + $(examInfos[i]).attr("exam_id") + "']");
+      average = parseFloat($(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text());
+    } else {
+      scores = $(".total_points[exam_id='" + $(examInfos[i]).attr("exam_id") + "']");
+      average = parseFloat($(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text());
+    }
+    j = 0;
+    while (j < scores.length) {
+      stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2);
+      j++;
+    }
+    stdDev = Math.sqrt(stdDev / scores.length);
+    deviation = 0.0;
+    j = 0;
+    while (j < scores.length) {
+      deviation = (parseFloat($(scores[j]).text()) - average) / stdDev;
+      if (isNaN(deviation)) {
+        deviation = 50;
+      } else {
+        deviation = deviation * 10 + 50;
+      }
+      $(scores[j]).nextAll(".deviation").text(FixDigit(deviation, 2));
+      j++;
+    }
+    _results.push(i++);
+  }
+  return _results;
+};
 
-total_weights_average = CalculateAverage($(".weighted_scores"));
+-$("#how-grade").change(function(e) {
+  return CalculateGradeAndRank();
+});
 
-$(".weighted_scores_average").html(FixDigit(total_weights_average, 2));
+SetExamInfos();
 
-CalculateDeviation(total_score_average, total_weights_average);
+CalculateAllAverage();
+
+CalculateDeviation();
+
+CalculateGradeAndRank();

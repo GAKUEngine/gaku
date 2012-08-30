@@ -7,7 +7,7 @@ class ExamsController < ApplicationController
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
-  
+
   def index
     if params[:course_id]
       @exams = Course.find(params[:course_id]).syllabus.exams
@@ -26,14 +26,14 @@ class ExamsController < ApplicationController
       respond_to do |format|
         format.js {render 'exams/exam_portions/create_exam_portion'}
       end
-    end    
+    end
   end
 
   def new
     @exam = Exam.new
-    @master_portion = @exam.exam_portions.new  
+    @master_portion = @exam.exam_portions.new
   end
-  
+
   def destroy
     #destroy! :flash => !request.xhr?
     @exam.destroy
@@ -53,14 +53,14 @@ class ExamsController < ApplicationController
       @grades = 1
     end
 
-    @student_total_scores = {}
-    @student_total_scores.default = 0
-    @student_total_weights = {}
-    @student_total_weights.default = 0
+    @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
+    @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
     @weighting_score = true
 
     @students.each do |student|
       @exams.each do |exam|
+        @student_total_scores[student.id][exam.id] = 0.0
+        @student_total_weights[student.id][exam.id] = 0.0
         exam.exam_portions.each do |portion|
           if student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
             score = ExamPortionScore.new
@@ -68,9 +68,9 @@ class ExamsController < ApplicationController
             score.exam_portion_id = portion.id
             score.save
           else
-            @student_total_scores[student.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+            @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
             if exam.use_weighting
-              @student_total_weights[student.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+              @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
             end
           end
         end
@@ -86,27 +86,19 @@ class ExamsController < ApplicationController
       @student_id = Student.find(params[:exam_portion_score][:student_id]).id
       exam = Exam.find(params[:id])
       exam_portions = exam.exam_portions
+      @exam_id = exam.id.to_s
       exam_portions_ids = exam_portions.pluck(:id)
-      student_exam_portion_scores = ExamPortionScore.where("student_id =#{params[:exam_portion_score][:student_id]}", "exam_portion_id in #{exam_portions_ids}")
+      student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
       student_scores = student_exam_portion_scores.pluck(:score)
       @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
-            
-      # @student_total_score = 0.0
-      # student_exam_portion_scores.each_with_index do |eps, i|
-        # puts 1111111111111111111111111111111111111
-        # puts i
-        # puts eps.score.to_f
-        # puts 1111111111111111111111111111111111111
-        # @student_total_score += eps.score.to_f
-      # end
-      
+
       @student_weights_total = 0.0
-      if exam.use_weighting  
+      if exam.use_weighting
         student_exam_portion_scores.each do |eps|
           @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
         end
       end
-        
+
       respond_to do |format|
           format.js { render 'update_score' }
         end
@@ -114,7 +106,7 @@ class ExamsController < ApplicationController
   end
 
   private
-    def load_exam 
+    def load_exam
     	@exam = Exam.find(params[:id])
     end
 

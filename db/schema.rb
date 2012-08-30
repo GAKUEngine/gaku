@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826094804) do
+ActiveRecord::Schema.define(:version => 20120829165008) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20120826094804) do
 
   create_table "import_files", :force => true do |t|
     t.string   "context"
+    t.string   "importer_type"
     t.string   "data_file_file_name"
     t.string   "data_file_content_type"
     t.integer  "data_file_file_size"
@@ -232,6 +233,13 @@ ActiveRecord::Schema.define(:version => 20120826094804) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "presets", :force => true do |t|
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string  "name"
     t.integer "class_group_enrollment_id"
@@ -259,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20120826094804) do
     t.string  "abbr"
     t.string  "name_ascii"
     t.integer "country_numcode"
+    t.integer "code"
   end
 
   create_table "student_addresses", :force => true do |t|

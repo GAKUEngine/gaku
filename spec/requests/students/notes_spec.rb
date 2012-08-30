@@ -68,15 +68,15 @@ describe 'Note' do
 
     it "should delete a student note", :js => true do
       click_link 'new_student_note_tab_link'
-      wait_until { page.has_content?('Notes') } 
-      page.all('table.index tr').size.should == 3
+      wait_until { page.has_content?('Notes') }   
+      tr_count = page.all('table.index tr').size
       page.should have_content(@note.title)
       @student.notes.size.should == 1
 
       click_link 'delete_link' 
       page.driver.browser.switch_to.alert.accept
-      
-      page.all('table.index tr').size.should == 2
+
+      wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.notes.size.should == 0
       page.should_not have_content(@note.title)
     end

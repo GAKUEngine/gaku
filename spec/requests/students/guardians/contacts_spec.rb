@@ -71,7 +71,7 @@ describe 'Guardian Contacts' do
       @student.guardians.first.contacts.first.is_primary? == true
       @student.guardians.first.contacts.second.is_primary? == false
 
-      within('table.guardian_contact_table tr#contact_2') { click_link 'set_primary_link' } 
+      within("table.guardian_contact_table tr#contact_#{@student.guardians.first.contacts.second.id}") { click_link 'set_primary_link' } 
       page.driver.browser.switch_to.alert.accept
 
       @student.guardians.first.contacts.first.is_primary? == false
