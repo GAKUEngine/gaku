@@ -37,7 +37,7 @@
     .row-fluid
       hr
     .row-fluid
-      = f.fields_for :exam_portions do |ep_form| 
+      = f.fields_for :exam_portions do |ep_form|
         - if ep_form.object.new_record?
           .span12.well
             .row-fluid
@@ -66,4 +66,4 @@
       = f.submit nil, :class => "span12 btn btn-primary"
 
 coffee:
-  $('#new_exam').validationEngine();
+  $('.new_exam').validationEngine();

@@ -55,9 +55,9 @@
       .span9
         = form.submit nil, :class => "span12 btn btn-primary"
       = link_to t("Back"), students_path, :class => "span3 btn", :style => "min-height:0px"
-        
+
 coffee:
   $('.datepicker').datepicker(
     format:'yyyy/mm/dd'
   )
-  $('#new_student').validationEngine();
+  $('#new_student').validationEngine()

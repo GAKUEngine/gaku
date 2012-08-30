@@ -59,7 +59,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 76
+                  width: 78
                   encoded: false
                   resizable: false
                   sortable: false
@@ -117,11 +117,11 @@ class StudentGrid extends BuHin
       reorderable: true
       # columnMenu: true
       columns: @_columns()
-    
+
     @target.kendoGrid(gridArgs)
 
   _createCheckbox: () ->
-    
+
     checkString = (check_s) ->
       ths = $("#grid th")
       i = 0
@@ -129,95 +129,89 @@ class StudentGrid extends BuHin
         if $(ths[i]).text() is check_s
           return i + 1
           break
-        i++    
-           
+        i++
+
     checkBoxes = $("<div></div>")
     $.each @titles, (key, value) ->
       if key != "manage" and key != 'checkbox'
         checkBox = $('<div class="form-inline" style="float:left; margin-right:20px"><input id="'+key+'" type="checkbox" checked="false""><label class="help-inline" for="'+key+'">'+value+'</label></div>')
         .appendTo(checkBoxes)
     $("#table-checkboxes").html(checkBoxes.html())
-        
+
     $("#table-checkboxes .form-inline").toggle ((e) ->
       num = checkString(e.currentTarget.textContent)
       $(e.currentTarget).find("input").removeAttr('checked')
-      
+      console.log 1
       $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").hide()
     ),(e) ->
       num = checkString(e.currentTarget.textContent)
       $(e.currentTarget).find("input").attr('checked','checked')
-
+      console.log 2
       $("#grid table").find("col:nth-child("+num+"), th:nth-child("+num+"), td:nth-child("+num+")").show()
 
-  _manageButtons: (@students, editBtnClass) ->
-    i = 0
-    while i < @students.length
-      manage = $("<div></div>")
-      pop = $("<a></a>")
-      pop.attr("href", "#")
-        .addClass("btn btn-danger")
-        .attr("rel", "popover")
-        .attr("title", "edit")
-        .attr("data-content", "edit")
-        .html("hover for popover")
 
-      managementButtons = $("<div></div>")
-      showButton = $("<a></a>")
-        .css("margin-right","5px")
-        .addClass("btn btn-mini btn-success")
-        .attr("href", ('/students/' + @students[i].id))
-        .html("<i class='icon-white icon-eye-open'></i>")
-        .appendTo(managementButtons)
-      editButton = $("<a></a>")
-        .addClass("btn btn-mini "+editBtnClass)
-        .attr("data-remote", "true")
-        .attr("href", ('/students/' + @students[i].id + "/edit"))
-        .html("<i class='icon-white icon-pencil'></i>")
-        .appendTo(managementButtons)
-      
-      @students[i]["manage"] = managementButtons.html()
-      i++
-  _manageCheckBox: (@students) ->
-     # create checkbox for student row
-    i = 0
-    while i < @students.length
-      checkbox = $("<div></div>")
-      showButton = $("<input type='checkbox' class='student_check' value='" + @students[i].id + "'></input>")
-        .css("margin-left","10px")
-        .appendTo(checkbox)
-
-      @students[i]["checkbox"] = checkbox.html()
-      i++
   refreshGrid: (query) ->
     $.getJSON query, (studentData) =>
-    
+      # console.log studentData
       if studentData == null
         return
-      
+
       @students = studentData
 
-      @_manageButtons(@students, "btn-warning")
-      @_manageCheckBox(@students) 
-       
       i = 0
-      while i < @students.length  
+      while i < @students.length
+
         if @students[i]["class_group_widget"]
           @students[i]["class_group_widget"] = @students[i]["class_group_widget"].grade  + " - " + @students[i]["class_group_widget"].name
+
+        manage = $("<div></div>")
+        pop = $("<a></a>")
+        pop.attr("href", "#")
+          .addClass("btn btn-danger")
+          .attr("rel", "popover")
+          .attr("title", "edit")
+          .attr("data-content", "edit")
+          .html("hover for popover")
+
+        managementButtons = $("<div></div>")
+        showButton = $("<a></a>")
+          .addClass("mr-xs btn btn-mini btn-success")
+          .attr("href", ('/students/' + @students[i].id))
+          .html("<i class='icon-white icon-eye-open'></i>")
+          .appendTo(managementButtons)
+        editButton = $("<a></a>")
+          .addClass("btn btn-mini btn-warning")
+          .attr("href", ('/students/' + @students[i].id + "/edit"))
+          .attr("data-remote", "true")
+          .html("<i class='icon-white icon-pencil'></i>")
+          .appendTo(managementButtons)
+
+        @students[i]["manage"] = managementButtons.html()
+
+        # create checkbox for student row
+        checkbox = $("<div></div>")
+        showButton = $("<input type='checkbox' class='student_check' value='" + @students[i].id + "'></input>")
+          .css("margin-left","10px")
+          .appendTo(checkbox)
+
+        @students[i]["checkbox"] = checkbox.html()
+
         if @students[i]["gender"]
           @students[i]["gender"] = I18n.t("genders.male")
         else
           @students[i]["gender"] = I18n.t("genders.female")
+
         i++
-                
+
       @_createCheckbox()
       @_createGrid()
-      
+      # console.log @titles
   autocompleteRefreshGrid: (query) ->
     $('input.student_search').autocomplete(
-        
+
         select: (event, ui) ->
           $('input.student_search').autocomplete('search',"#{ui.item.surname} #{ui.item.name}")
-      
+
 
         source: (req, res) =>
           autocompleteSource = $('input.student_search').data('autocomplete-source')
@@ -230,15 +224,51 @@ class StudentGrid extends BuHin
             success: (studentData) =>
 
               res(studentData)
-    
+    # $.getJSON query, (studentData) =>
+    #   console.log(studentData)
+    #   if studentData == null
+    #     return
               if studentData == null
                 return
 
               @students = studentData
 
-              @_manageButtons(@students, "btn-primary")
-              @_manageCheckBox(@students) 
-                
+              i = 0
+              while i < @students.length
+                manage = $("<div></div>")
+                pop = $("<a></a>")
+                pop.attr("href", "#")
+                  .addClass("btn btn-danger")
+                  .attr("rel", "popover")
+                  .attr("title", "edit")
+                  .attr("data-content", "edit")
+                  .html("hover for popover")
+
+                managementButtons = $("<div></div>")
+                showButton = $("<a></a>")
+                  .css("margin-right","5px")
+                  .addClass("btn btn-mini")
+                  .attr("href", ('/students/' + @students[i].id))
+                  .html("<i class='icon-eye-open'></i>")
+                  .appendTo(managementButtons)
+                editButton = $("<a></a>")
+                  .addClass("btn btn-mini btn-primary")
+                  .attr("href", ('/students/' + @students[i].id + "/edit"))
+                  .attr("data-remote", "true")
+                  .html("<i class='icon-pencil'></i>")
+                  .appendTo(managementButtons)
+
+                @students[i]["manage"] = managementButtons.html()
+
+                checkbox = $("<div></div>")
+                showButton = $("<input type='checkbox'></input>")
+                .css("margin-left","10px")
+                .appendTo(checkbox)
+
+                @students[i]["checkbox"] = checkbox.html()
+
+                i++
+
               @_createGrid()
               @_createCheckbox()
               # @refreshGrid
@@ -275,7 +305,7 @@ class StudentGrid extends BuHin
   refreshOnUpdateOrCreate: ->
     $('#student_modal form').live 'ajax:success', =>
       @refreshGrid()
-    
+
     $('#new_student_form').live 'ajax:success', =>
       @refreshGrid()
 
@@ -302,5 +332,4 @@ $.fn.studentGrid = (options) ->
     $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
 
   return @
-
 
