@@ -48,7 +48,7 @@ class Student < ActiveRecord::Base
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                   :class_groups, :class_group_ids, :class_groups_attributes,
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
-                  :picture
+                  :picture, :student_id_number, :student_foreign_id_number
 
   has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
