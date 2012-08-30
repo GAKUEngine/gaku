@@ -41,6 +41,7 @@ end
 group :development do
   gem 'hirb'
   gem 'awesome_print'
+  gem 'highline'
 end
 
 group :test do
