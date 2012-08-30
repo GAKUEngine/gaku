@@ -159,7 +159,14 @@ class Students::ImporterController < ApplicationController
             nameReadingParts = row[idx[:nameReading]].to_s().split(" ")
             surname_reading = nameReadingParts.first
             name_reading = nameReadingParts.last
-            birth_date = Date.parse(row[idx[:birthDate]].to_s)
+            birth_date = nil
+            if !row[idx[:birthDate]].nil?
+              birth_date = Date.parse(row[idx[:birthDate]].to_s)
+              if birth_date.nil?
+                birth_date = Date.strptime(row[idx[:birthDate]].to_s, "%Y/%m/%d")
+              end
+            end
+            
             gender = nil
             if !row[idx[:gender]].nil?
               if row[idx[:gender]].to_i == 2
@@ -185,31 +192,58 @@ class Students::ImporterController < ApplicationController
             end
 
             # add primary address
-            zipcode = row[idx[:zipcode]]
-            state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
-            city = row[idx[:city]]
-            address1 = row[idx[:address1]]
-            address2 = row[idx[:address2]]
-            student.addresses.create!(:zipcode => zipcode,
-                                      :country_id => Country.where(:numcode => 392).first.id,
-                                      :state => state,
-                                      :state_id => state.id,
-                                      :state_name => state.name,
-                                      :city => city,
-                                      :address1 => address1,
-                                      :address2 => address2)
+            zipcode = nil
+            if !row[idx[:zipcode]].nil?
+              zipcode = row[idx[:zipcode]]
+            end
+            state = nil
+            if !row[idx[:state]].nil?
+              state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
+            end
+            city = nil
+            if !row[idx[:city]].nil?
+              city = row[idx[:city]]
+            end
+            address1 = nil
+            if !row[idx[:address1]].nil?
+              address1 = row[idx[:address1]]
+            end
+            address2 = nil
 
-            # add primary guardian 
-            guardianNameParts = row[idx[:guardianName].to_i].to_s().split("　")
-            guardianSurname = guardianNameParts.first
-            guardianName = guardianNameParts.last
-            guardianNameReadingParts = row[idx[:guardianNameReading]].to_s().split(" ")
-            guardianSurname_reading = guardianNameReadingParts.first
-            guardianName_reading = guardianNameReadingParts.last
-            guardian = student.guardians.create!(:surname => guardianSurname,
-                                                :name => guardianName,
-                                                :surname_reading => guardianSurname_reading,
-                                                :name_reading => guardianName_reading)
+            if !row[idx[:address2]].nil?
+              address2 = row[idx[:address2]]
+            end
+
+            if !city.nil? && !address1.nil?
+              student.addresses.create!(:zipcode => zipcode,
+                                        :country_id => Country.where(:numcode => 392).first.id,
+                                        :state => state,
+                                        :state_id => state.id,
+                                        :state_name => state.name,
+                                        :city => city,
+                                        :address1 => address1,
+                                        :address2 => address2)
+            end
+
+            # add primary guardian
+            if !row[idx[:guardianName]].nil?
+              guardianNameParts = row[idx[:guardianName]].to_s().split("　")
+              guardianSurname = guardianNameParts.first
+              guardianName = guardianNameParts.last
+
+              guardianSurname_reading = nil
+              guardianName_reading = nil
+              if !row[idx[:guardianNameReading]].nil?
+                guardianNameReadingParts = row[idx[:guardianNameReading]].to_s().split(" ")
+                guardianSurname_reading = guardianNameReadingParts.first
+                guardianName_reading = guardianNameReadingParts.last
+              end
+
+              guardian = student.guardians.create!(:surname => guardianSurname,
+                                                  :name => guardianName,
+                                                  :surname_reading => guardianSurname_reading,
+                                                  :name_reading => guardianName_reading)
+            end
 
           else #1st row, try parsing index
             row.each_with_index do |cell, i|
