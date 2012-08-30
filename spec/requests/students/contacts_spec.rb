@@ -32,11 +32,8 @@ describe 'Contact' do
   context "edit, delete, set primary" do 
 
     before(:each) do 
-      
       @contact = Factory(:contact, :contact_type => @contact_type)
-      @student.contacts << @contact
-
-      
+      @student.contacts << @contact 
     end
 
     it "should edit a student contact", :js => true do 
@@ -83,15 +80,15 @@ describe 'Contact' do
       visit student_path(@student)
       click_link 'new_student_contact_tab_link'
       wait_until { page.has_content?('Contacts list') } 
-      #page.all('table.index tr').size.should == 2
+      
+      tr_count = page.all('table.index tr').size
       page.should have_content(@contact.data)
       @student.contacts.size.should == 1
 
       click_link 'delete_link' 
       page.driver.browser.switch_to.alert.accept
-      #FIXME Make a real check, no sleep 
-      sleep 1
-      #page.all('table.index tr').size.should == 2
+
+      wait_until { page.all('table.index tr').size == tr_count - 1 }
       @student.guardians.size.should == 0
       page.should_not have_content(@contact.data)
     end
