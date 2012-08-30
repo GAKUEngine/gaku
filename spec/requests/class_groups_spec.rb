@@ -47,14 +47,13 @@ describe 'ClassGroups' do
     end
 
     it 'should delete class group', :js => true do 
-      page.all('table.index tr').size.should == 2
+      tr_count = page.all('table.index tr').size
       page.should have_content(@class_group.name)
 
       click_link "delete_link" 
       page.driver.browser.switch_to.alert.accept
-      #FIXME Make a real check, no sleep 
-      sleep 1
-      page.all('table.index tr').size.should == 1
+  
+      wait_until { page.all('table.index tr').size == tr_count - 1 }
       ClassGroup.count.should == 0
       page.should_not have_content(@class_group.name)
     end

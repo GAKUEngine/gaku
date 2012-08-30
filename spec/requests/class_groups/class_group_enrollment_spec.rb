@@ -41,6 +41,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
 
       it 'should delete a student from a class group', :js => true do
         click_link 'class_group_enrollments_tab_link'
+        
         tr_count = page.all('table.index tr').size
         click_link('delete_link') 
         page.driver.browser.switch_to.alert.accept
