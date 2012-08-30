@@ -46,8 +46,7 @@ describe 'Address' do
 
     it 'should error if there are empty fields', :js => true do 
       click_button "submit_button"
-      page.should have_content('Address1 is empty')
-      page.should have_content('City is empty')
+      wait_until { page.should have_content('This field is required') }
     end
   end
 
