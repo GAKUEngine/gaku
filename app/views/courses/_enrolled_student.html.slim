@@ -1,8 +1,7 @@
 tr
-  td.vm = enrollment.name
+  td.vm = enrollment.surname + " " + enrollment.name
   td
-    = link_to t("assignments.view"), "", :class => "mr-xs btn btn-mini btn-primary"
-    = link_to t("exams.view"), "", :class => "btn btn-mini btn-primary"
+    = link_to t("assignments.view"), "", :class => "mr-xs btn btn-mini btn-success"
+    = link_to t("exams.view"), "", :class => "btn btn-mini btn-success"
   td
   td
-  /! <td></td>

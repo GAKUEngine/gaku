@@ -13,8 +13,8 @@
  *= require kendo2012/kendo.silver.min
  * require kendo.gakuengine
  *= require buhin.css.scss
- *= require bootstrap.min
- *= require bootstrap-responsive.min
+ *= require bootstrap
+ *= require bootstrap-responsive
  *= require gakuengine.css.scss
  *= require tbs_datepicker/css/datepicker
  *= require chosen

@@ -1,9 +1,14 @@
 #exam_grading_area
   /= javascript_include_tag "exam_grading_widget"
 .row-fluid
-  h3 
-    - @exams.each do |exam|
-      = exam.name << " " << t("grades.grading")
+  .pull-left
+    h4.mt-xs.mb-0
+      - @exams.each do |exam|
+        = exam.name << " " << t("grades.grading")
+  .pull-right
+    select#how-grade.mb-0
+      option = t("grades.deviation")
+      option = t("grades.percent")
 .row-fluid
   .span12
     hr
@@ -24,22 +29,34 @@
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - if exam.use_weighting
-                th.btn-warning style="width:62px" = "【 " + portion.name + " 】" + portion.max_score.to_s + "（" + portion.weight.to_s + "％）"
+                th.btn-warning style="width:120px"
+                  = "【 " + portion.name + " 】"
+                  br
+                  = portion.max_score.to_s + "（" + portion.weight.to_s + "％）"
               - else
-                th.btn-warning style="width:62px" = "【 " + portion.name + " 】" + portion.max_score.to_s
+                th.btn-warning style="width:120px"
+                  = "【 " + portion.name + " 】"
+                  br
+                  = portion.max_score.to_s
             th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
             - if exam.use_weighting
               th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
             th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
-            th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
-            th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+            th#grade_title.btn-inverse style="width:62px"
+              = t("grades.grade")
+              br
+              10
+            th#rank_title.btn-inverse style="width:62px"
+              = t("grades.rank")
+              br
+              5
             /- if defined? @grades
               th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
               - if exam.use_weighting
                 th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
               th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
               th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
-  
+
       tbody
         - @students.each do |student|
           tr.data_row id="student_#{student.id}"
@@ -65,7 +82,7 @@
               td#total_points.vm-tr.total_points*{'exam_id' => exam.id} = @student_total_scores[student.id]
               - if exam.use_weighting
                 td#weighted_score.weighted_scores.vm-tr*{'exam_id' => exam.id} = @student_total_weights[student.id]
-              td#deviation.vm-tr*{'exam_id' => exam.id}
+              td.deviation.vm-tr*{'exam_id' => exam.id}
               td#grade.vm-tr*{'exam_id' => exam.id}
               td#rank.vm-tr*{'exam_id' => exam.id}
         tr.total_row
@@ -78,20 +95,22 @@
             end
             td colspan="3"
 .row-fluid
-  .span3.well
+  .span3.well.pull-right
     =link_to t('Back'), @course, :class => 'span12 btn'
 
-coffee:
+/coffee:
   course_id = #{{params[:course_id]}};
   exam_data = #{{@exam.to_json}};
   # gradingArea = $("#exam_grid1").examGradingWidget()
-  $('.edit_exam_portion_score1').validationEngine()
+  # $('.edit_exam_portion_score1').validationEngine()
 
 coffee:
+  average = 0.0
+
   FixDigit = (num, digit_num) ->
     fix = Math.pow 10, digit_num
     return Math.floor(num * fix) / fix
-    
+
   CalculateAverage = (nums) ->
     total = 0.0
     i = 0
@@ -99,21 +118,101 @@ coffee:
       total += parseFloat(nums[i].innerText)
       i++
     return total / nums.length
-  
+
+  CalculateGradeAndRank = ->
+    sortScore = (a, b) ->
+      return parseFloat($(a).text()) < parseFloat($(b).text())
+
+    if $("#weighting_total_title").text()
+      scores = $(".weighted_scores")
+    else
+      scores = $(".total_points")
+
+    switch $("#how-grade").val()
+      when I18n.t("grades.deviation")
+        levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE]
+        deviations = $(".deviation")
+        i = 0
+        while i < deviations.length
+          deviation = parseFloat($(deviations[i]).text())
+          grade = 10
+          j = 0
+          while j < levels.length - 1
+            if levels[j] > deviation && levels[j+1] <= deviation
+              $(deviations[i]).nextAll("#grade").text(grade.toString())
+            grade--
+            j++
+          i++
+      when I18n.t("grades.percent")
+        levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE]
+        sorteds = $.makeArray scores.sort(sortScore)
+        grade = 10
+        f_end = 0
+        i = 0
+        while i < levels.length && !f_end
+          num = Math.ceil sorteds.length * (levels[i] / 100)
+          j = 0
+          while j < num && !f_end
+            if sorteds.length
+              target = sorteds.shift()
+              $(target).nextAll("#grade").text(grade.toString())
+            else
+              f_end = 1
+            j++
+          grade--
+          i++
+    i = 0
+    while i < scores.length
+      if parseFloat($(scores[i]).text()) < average / 2 && parseFloat($(scores[i]).text()) < 30
+        $(scores[i]).nextAll("#grade").text("2")
+      if parseFloat($(scores[i]).text()) < average / 4
+        $(scores[i]).nextAll("#grade").text("1")
+      i++
+
+    levels = [15, 20]
+    sorteds = $.makeArray scores.sort(sortScore)
+    grade = 5
+    f_end = 0
+    i = 0
+    while i < sorteds.length
+      $(sorteds[i]).nextAll("#rank").text("3")
+      i++
+    i = 0
+    while i < levels.length && !f_end
+      num = Math.ceil sorteds.length * (levels[i] / 100)
+      j = 0
+      while j < num && !f_end
+        if sorteds.length
+          target = sorteds.shift()
+          $(target).nextAll("#rank").text(grade.toString())
+        else
+          f_end = 1
+        j++
+      grade--
+      i++
+    sorteds = $.makeArray scores.sort(sortScore)
+    i = 0
+    while i < sorteds.length
+      if parseFloat($(sorteds[i]).nextAll("#grade").text()) == 3
+        $(sorteds[i]).nextAll("#rank").text("2")
+      if parseFloat($(sorteds[i]).nextAll("#grade").text()) < 3
+        $(sorteds[i]).nextAll("#rank").text("1")
+      i++
+
   CalculateDeviation = (scoreAve, weightedAve) ->
     stdDev = 0.0
     if $("#weighting_total_title").text()
       scores = $(".weighted_scores")
       average = weightedAve
-    else 
+    else
       scores = $(".total_points")
       average = scoreAve
     i = 0
     while i < scores.length
-      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2) 
+      stdDev += Math.pow(parseFloat($(scores[i]).text()) - average, 2)
       i++
     stdDev = Math.sqrt(stdDev / scores.length)
-        
+
     deviation = 0.0
     i = 0
     while i < scores.length
@@ -122,17 +221,26 @@ coffee:
         deviation = 50
       else
         deviation = deviation * 10 + 50
-      $(scores[i]).nextAll("#deviation").text(Math.floor(deviation))
+      $(scores[i]).nextAll(".deviation").text(FixDigit(deviation, 2))
       i++
 
-  $(".fire_submit").blur ->
+  $(".fire_submit").blur (e) ->
+    ect = e.currentTarget
+    if ect.valueAsNumber > parseFloat(ect.max) || ect.valueAsNumber < parseFloat(ect.min)
+      if ect.valueAsNumber > parseFloat ect.max
+        ect.value = parseFloat ect.max
+      else
+        ect.value = parseFloat ect.min
     $(this).closest("form").submit()
-  
+
+  $("#how-grade").change (e) ->
+    CalculateGradeAndRank()
+
   total_score_average = CalculateAverage $(".total_points")
-  $(".total_points_average").html FixDigit(total_score_average, 2)
-  
+  $(".total_points_average").html FixDigit(total_score_average, 4)
+
   total_weights_average = CalculateAverage $(".weighted_scores")
-  $(".weighted_scores_average").html FixDigit(total_weights_average, 2)
+  $(".weighted_scores_average").html FixDigit(total_weights_average, 4)
 
   CalculateDeviation total_score_average, total_weights_average
-  
+  CalculateGradeAndRank()

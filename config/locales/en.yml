@@ -4,7 +4,6 @@ en:
   Show: "Show"
   Edit: "Edit"
   Destroy: "Destroy"
-  Delete: "Delete"
   Back: "Back"
   cancel: "Cancel"
   required:
@@ -132,6 +131,9 @@ en:
     max_points: "Maximum Score"
     max: "Max"
     points: "Points"
+    how_grade: "How to grade"
+    deviation: "Deviation"
+    percent: "Percent"
     rank: "Rank/Grade"
     total: "Total"
   assignments:
@@ -184,15 +186,15 @@ en:
   guardian: "Guardian"
   guardians:
     guardians: "Guardians"
-    list: "Guardians List"    
+    list: "Guardians List"
     relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
     edit: "Edit guardian"
   contact_type: "Contact Type"
   contact_types:
-     add: 
-  contact: 
+     add:
+  contact:
   contacts:
     list: "Contacts List"
     new: "New Contact"
