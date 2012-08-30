@@ -45,6 +45,7 @@ group :development do
 end
 
 group :test do
+  gem 'spork', '~> 1.0rc'
   gem 'rspec-rails', '~> 2.10.1'
   gem 'factory_girl_rails', '~> 1.7.0'
   gem 'ffaker'
@@ -57,6 +58,7 @@ group :test do
   gem 'guard'
   gem 'guard-rspec', '~> 0.6.0'
   gem 'guard-bundler'
+  gem 'guard-spork'
 end
 
 unless ENV["CI"]
