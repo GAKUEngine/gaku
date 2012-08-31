@@ -1,5 +1,6 @@
+/= javascript_include_tag "exam_grading_widget"
+= javascript_include_tag "jquery.tablefix_1.0.0"
 #exam_grading_area
-  /= javascript_include_tag "exam_grading_widget"
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0
@@ -14,8 +15,8 @@
   .span12
     hr
 .row-fluid
-  .well.pull-left style="width:1500px"
-    table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed
+  .span12.well.pull-left
+    table#exam_grid.grading-table.table.table-striped.table-bordered.table-condensed style="width:1800px"
       thead
         tr
           th.btn-primary colspan="3" =t('student')
@@ -24,9 +25,9 @@
           - if defined? @grades
             th.btn-inverse colspan="4" =t('grades.combined')
         tr
-          th.btn-info =t("class")
-          th.btn-info =t("class_group_enrollments.seat_number")
-          th.btn-info =t("students.name")
+          th.btn-info style="width:150px" =t("class")
+          th.btn-info style="width:150px" =t("class_group_enrollments.seat_number")
+          th.btn-info style="width:150px" =t("students.name")
           - @exams.each do |exam|
             - exam.exam_portions.each do |portion|
               - if exam.use_weighting
@@ -39,24 +40,24 @@
                   = "【 " + portion.name + " 】"
                   br
                   = portion.max_score.to_s
-            th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+            th#total_points_title.btn-inverse style="width:65px" = t("grades.total_points")
             - if exam.use_weighting
-              th#weighting_total_title.btn-inverse exam_id=exam.id style="width:62px" = t("grades.weighting_total")
-            th#deviation.btn-inverse style="width:62px" = t("grades.deviation")
-            th#grade_title.btn-inverse style="width:62px"
+              th#weighting_total_title.btn-inverse exam_id=exam.id style="width:65px" = t("grades.weighting_total")
+            th#deviation.btn-inverse style="width:65px" = t("grades.deviation")
+            th#grade_title.btn-inverse style="width:65px"
               = t("grades.grade")
               br
               10
-            th#rank_title.btn-inverse style="width:62px"
+            th#rank_title.btn-inverse style="width:65px"
               = t("grades.rank")
               br
               5
             /- if defined? @grades
-              th#total_points_title.btn-inverse style="width:62px" = t("grades.total_points")
+              th#total_points_title.btn-inverse style="width:65px" = t("grades.total_points")
               - if exam.use_weighting
-                th#weighting_total_title.btn-inverse style="width:62px" = t("grades.weighting_total")
-              th#grade_title.btn-inverse style="width:62px" = t("grades.grade")
-              th#rank_title.btn-inverse style="width:62px" = t("grades.rank")
+                th#weighting_total_title.btn-inverse style="width:65px" = t("grades.weighting_total")
+              th#grade_title.btn-inverse style="width:65px" = t("grades.grade")
+              th#rank_title.btn-inverse style="width:65px" = t("grades.rank")
 
       tbody
         - @students.each do |student|
@@ -115,17 +116,20 @@ coffee:
 
   CalculateAllAverage = ->
     CalculateAverage = (nums) ->
+      # console.log nums, "CalcAVE"
       total = 0.0
       i = 0
       while i < nums.length
         total += parseFloat(nums[i].innerText)
         i++
+      # console.log FixDigit total / nums.length, 2
       return FixDigit total / nums.length, 2
 
     i = 0
     while i < examInfos.length
-      $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+(i+1)+"']"))
-      $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+(i+1)+"']"))
+      $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
+      if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
       i++
 
   CalculateGradeAndRank = ->
@@ -215,13 +219,15 @@ coffee:
     while i < examInfos.length
       stdDev = 0.0
       if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        console.log $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
         scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
       else
         scores = $(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
       j = 0
       while j < scores.length
+        # console.log stdDev, parseFloat($(scores[j]).text()), average, "stdDev"
         stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2)
         j++
       stdDev = Math.sqrt(stdDev / scores.length)
@@ -238,7 +244,18 @@ coffee:
         j++
       i++
 
+  TableFix = ->
+    fixH = $(window).height() - $("#exam_grid").offset().top - 60
+    $('#exam_grid').tablefix({width: 1288, height: fixH, fixRows: 2, fixCols: 3});
+
   -# main -----↓
+
+  TableFix()
+  SetExamInfos()
+  CalculateAllAverage()
+  CalculateDeviation()
+  CalculateGradeAndRank()
+
   $('.edit_exam_portion_score').validationEngine()
 
   $(".fire_submit").blur (e) ->
@@ -253,7 +270,3 @@ coffee:
   $("#how-grade").change (e) ->
     CalculateGradeAndRank()
 
-  SetExamInfos()
-  CalculateAllAverage()
-  CalculateDeviation()
-  CalculateGradeAndRank()
