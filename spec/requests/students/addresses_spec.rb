@@ -82,14 +82,14 @@ describe 'Address' do
         page.should have_content('Edited address')
       end
 
-      pending 'should error if there are empty fields', :js => true do 
+      it 'should error if there are empty fields', :js => true do 
         fill_in 'address_address1', :with => ''
         fill_in 'address_city', :with => ''
         
         click_button 'submit_button'
 
-        #page.should have_content('Address1 is empty')
-        #page.should have_content('City is empty')
+        page.should have_content('Address1 can\'t be blank')
+        page.should have_content('City can\'t be blank')
       end
     end
 
