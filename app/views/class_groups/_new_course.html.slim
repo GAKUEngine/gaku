@@ -3,7 +3,7 @@
     .span12.well
       .row-fluid
         = f.label :code, t("courses.code"), :class => "control-label"
-        = f.text_field :code, :class => "span12"
+        = f.text_field :code, :class => "span12 validate[required]"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
         = f.submit t("courses.save"), :id => 'submit_button', :class => "span12 btn btn-primary"

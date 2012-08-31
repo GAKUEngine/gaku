@@ -127,6 +127,7 @@ class Students::ImporterController < ApplicationController
         idx[:birthDate] = 10
         idx[:gender] = 11
         idx[:phone] = 19
+        idx[:foreignIdNumber] = 4
 
         #primary address
         idx[:zipcode] = 14
@@ -159,7 +160,14 @@ class Students::ImporterController < ApplicationController
             nameReadingParts = row[idx[:nameReading]].to_s().split(" ")
             surname_reading = nameReadingParts.first
             name_reading = nameReadingParts.last
-            birth_date = Date.parse(row[idx[:birthDate]].to_s)
+            birth_date = nil
+            if !row[idx[:birthDate]].nil?
+              birth_date = Date.parse(row[idx[:birthDate]].to_s)
+              if birth_date.nil?
+                birth_date = Date.strptime(row[idx[:birthDate]].to_s, "%Y/%m/%d")
+              end
+            end
+            
             gender = nil
             if !row[idx[:gender]].nil?
               if row[idx[:gender]].to_i == 2
@@ -168,13 +176,23 @@ class Students::ImporterController < ApplicationController
                 gender = 1
               end
             end
-            phone = row[idx[:phone]]
+            
+            phone = nil
+            if !row[idx[:phone]].nil?
+              phone = row[idx[:phone]]
+            end
+
+            student_foreign_id_number = nil
+            if !row[idx[:foreignIdNumber]].nil?
+              student_foreign_id_number = row[idx[:foreignIdNumber]]
+            end
 
             # check for existing
             student = Student.create!(:surname => surname, 
-                            :name => name, 
+                            :name => name,
                             :surname_reading => surname_reading, 
                             :name_reading => name_reading,
+                            :student_foreign_id_number => student_foreign_id_number,
                             :birth_date => birth_date,
                             :gender => gender,
                             :phone => phone)
@@ -185,31 +203,58 @@ class Students::ImporterController < ApplicationController
             end
 
             # add primary address
-            zipcode = row[idx[:zipcode]]
-            state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
-            city = row[idx[:city]]
-            address1 = row[idx[:address1]]
-            address2 = row[idx[:address2]]
-            student.addresses.create!(:zipcode => zipcode,
-                                      :country_id => Country.where(:numcode => 392).first.id,
-                                      :state => state,
-                                      :state_id => state.id,
-                                      :state_name => state.name,
-                                      :city => city,
-                                      :address1 => address1,
-                                      :address2 => address2)
+            zipcode = nil
+            if !row[idx[:zipcode]].nil?
+              zipcode = row[idx[:zipcode]]
+            end
+            state = nil
+            if !row[idx[:state]].nil?
+              state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
+            end
+            city = nil
+            if !row[idx[:city]].nil?
+              city = row[idx[:city]]
+            end
+            address1 = nil
+            if !row[idx[:address1]].nil?
+              address1 = row[idx[:address1]]
+            end
+            address2 = nil
 
-            # add primary guardian 
-            guardianNameParts = row[idx[:guardianName].to_i].to_s().split("　")
-            guardianSurname = guardianNameParts.first
-            guardianName = guardianNameParts.last
-            guardianNameReadingParts = row[idx[:guardianNameReading]].to_s().split(" ")
-            guardianSurname_reading = guardianNameReadingParts.first
-            guardianName_reading = guardianNameReadingParts.last
-            guardian = student.guardians.create!(:surname => guardianSurname,
-                                                :name => guardianName,
-                                                :surname_reading => guardianSurname_reading,
-                                                :name_reading => guardianName_reading)
+            if !row[idx[:address2]].nil?
+              address2 = row[idx[:address2]]
+            end
+
+            if !city.nil? && !address1.nil?
+              student.addresses.create!(:zipcode => zipcode,
+                                        :country_id => Country.where(:numcode => 392).first.id,
+                                        :state => state,
+                                        :state_id => state.id,
+                                        :state_name => state.name,
+                                        :city => city,
+                                        :address1 => address1,
+                                        :address2 => address2)
+            end
+
+            # add primary guardian
+            if !row[idx[:guardianName]].nil?
+              guardianNameParts = row[idx[:guardianName]].to_s().split("　")
+              guardianSurname = guardianNameParts.first
+              guardianName = guardianNameParts.last
+
+              guardianSurname_reading = nil
+              guardianName_reading = nil
+              if !row[idx[:guardianNameReading]].nil?
+                guardianNameReadingParts = row[idx[:guardianNameReading]].to_s().split(" ")
+                guardianSurname_reading = guardianNameReadingParts.first
+                guardianName_reading = guardianNameReadingParts.last
+              end
+
+              guardian = student.guardians.create!(:surname => guardianSurname,
+                                                  :name => guardianName,
+                                                  :surname_reading => guardianSurname_reading,
+                                                  :name_reading => guardianName_reading)
+            end
 
           else #1st row, try parsing index
             row.each_with_index do |cell, i|
@@ -248,6 +293,8 @@ class Students::ImporterController < ApplicationController
                 idx[:guardianAddress2] = i
               when "HOGTELNO"
                 idx[:guardianPhone] = i
+              when "SEITONUM"
+                idx[:foreignIdNumber] = i
               end
             end
           end

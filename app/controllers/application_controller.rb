@@ -6,11 +6,15 @@ class ApplicationController < ActionController::Base
 
     def set_locale
       if current_user && params[:locale]
-        I18n.locale = current_user.locale = params[:locale]
+        I18n.locale = params[:locale]
+        current_user.locale = params[:locale]
         flash[:notice] = "Language is set to #{t('languages.' + current_user.locale)}" if current_user.save
-      else 
+      elsif current_user 
+        I18n.locale = current_user.locale
+      else
         if request.env['HTTP_ACCEPT_LANGUAGE']
           I18n.locale = extract_locale_from_accept_language_header
+          logger.debug I18n.locale
         else
           I18n.default_locale
         end

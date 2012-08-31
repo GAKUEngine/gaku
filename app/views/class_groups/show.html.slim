@@ -54,7 +54,7 @@
                   - @class_group.semesters.each do |semester|
                     li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
               .row-fluid
-                /TODO need to redirect to the right route after create!
+                /TODO need to redirect to the right route after create! /
                 div id="semester_form" style="display:none"
                   = render 'new_semester'
             #courses.tab-pane
@@ -62,7 +62,7 @@
                 .pull-left
                   h4.h4-vm =t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
                 .pull-right
-                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, '#', :id=> 'show_course_form',:class => "btn btn-primary"
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, '#', :id => 'show_course_form', :class => "btn btn-primary"
               .row-fluid
                 hr
               .row-fluid
@@ -70,7 +70,7 @@
                   - @class_group.courses.each do |course|
                     li= course.code
               .row-fluid
-                /TODO need to redirect to the right route after create!
+                /TODO need to redirect to the right route after create! /
                 div id="course_form" style="display:none"
                   = render 'new_course'
     .row-fluid
@@ -82,6 +82,7 @@
 
 javascript:
   $(document).ready(function() {
+
     $('#show_semester_form').click(function() {
     $('#show_semester_form').hide()
      $('#semester_form').toggle('slow', function() {
@@ -91,6 +92,7 @@ javascript:
     $('#show_course_form').click(function() {
      $('#course_form').toggle('slow', function() {
       // Animation complete.
+      $('#new_course').validationEngine();
      });
     });
   });

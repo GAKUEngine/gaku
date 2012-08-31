@@ -333,4 +333,3 @@ $.fn.studentGrid = (options) ->
 
   return @
 
-

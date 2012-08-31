@@ -9,7 +9,6 @@ describe "CourseEnrollment"  do
   end
 
   it "should enroll and show student", :js => true do
-
     Factory(:student, :name => "John", :surname => "Doe")
     visit course_path(@course)
 
