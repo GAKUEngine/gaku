@@ -1,5 +1,6 @@
 /*
- * jQuery TableFix plugin ver 1.0.0
+ * jQuery TableFix plugin ver 1.0.1
+ * ver 1.0.1 2012 nakaya
  * Copyright (c) 2010 Otchy
  * This source file is subject to the MIT license.
  * http://www.otchy.net
