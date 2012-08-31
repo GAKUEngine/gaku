@@ -51,7 +51,7 @@ describe 'Guardian Contacts' do
 
       fill_in 'contact_data', :with => '777'
       click_button 'submit_button'
-      
+      sleep 10
       page.should have_content '777'
       page.should_not have_content '321'
     end
