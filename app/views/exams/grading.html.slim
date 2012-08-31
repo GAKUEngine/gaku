@@ -116,17 +116,20 @@ coffee:
 
   CalculateAllAverage = ->
     CalculateAverage = (nums) ->
+      # console.log nums, "CalcAVE"
       total = 0.0
       i = 0
       while i < nums.length
         total += parseFloat(nums[i].innerText)
         i++
+      # console.log FixDigit total / nums.length, 2
       return FixDigit total / nums.length, 2
 
     i = 0
     while i < examInfos.length
-      $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+(i+1)+"']"))
-      $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+(i+1)+"']"))
+      $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
+      if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
       i++
 
   CalculateGradeAndRank = ->
@@ -216,13 +219,15 @@ coffee:
     while i < examInfos.length
       stdDev = 0.0
       if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        console.log $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
         scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
       else
         scores = $(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
       j = 0
       while j < scores.length
+        # console.log stdDev, parseFloat($(scores[j]).text()), average, "stdDev"
         stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2)
         j++
       stdDev = Math.sqrt(stdDev / scores.length)
@@ -239,8 +244,17 @@ coffee:
         j++
       i++
 
+  TableFix = ->
+    fixH = $(window).height() - $("#exam_grid").offset().top - 60
+    $('#exam_grid').tablefix({width: 1288, height: fixH, fixRows: 2, fixCols: 3});
+
   -# main -----↓
-  $('#exam_grid').tablefix({width: 1288, height: 360, fixRows: 2, fixCols: 3});
+
+  TableFix()
+  SetExamInfos()
+  CalculateAllAverage()
+  CalculateDeviation()
+  CalculateGradeAndRank()
 
   $('.edit_exam_portion_score').validationEngine()
 
@@ -256,7 +270,3 @@ coffee:
   $("#how-grade").change (e) ->
     CalculateGradeAndRank()
 
-  SetExamInfos()
-  CalculateAllAverage()
-  CalculateDeviation()
-  CalculateGradeAndRank()
