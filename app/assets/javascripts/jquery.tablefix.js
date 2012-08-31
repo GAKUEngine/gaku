@@ -24,10 +24,10 @@
 			}
 			if (withWidth || withHeight) {
 				if (withWidth && withHeight) {
-					options.width -= 40;
+					options.width -= 0;
 					options.height -= 0;
 				} else if (withWidth) {
-					options.width -= 20;
+					options.width -= 0;
 				} else {
 					options.height -= 0;
 				}
@@ -71,32 +71,32 @@
 			var bodyHeight = options.height - offsetY;
 			crossDiv.width(offsetX).height(offsetY);
 			rowDiv
-				.width(bodyWidth + (withWidth ? 20 : 0) + (withHeight ? 20 : 0))
+				.width(bodyWidth + (withWidth ? 0 : 0) + (withHeight ? 0 : 0))
 				.height(offsetY)
 				.css({left: offsetX + 'px'});
 			rowTable.css({
 				marginLeft: -offsetX + 'px',
-				marginRight: (withWidth ? 20 : 0) + (withHeight ? 20 : 0) + 'px'
+				marginRight: (withWidth ? 0 : 0) + (withHeight ? 0 : 0) + 'px'
 			});
 			colDiv
 				.width(offsetX)
-				.height(bodyHeight + (withWidth ? 20 : 0) + (withHeight ? 20 : 0))
+				.height(bodyHeight + (withWidth ? 0 : 0) + (withHeight ? 0 : 0))
 				.css({top: offsetY + 'px'});
 			colTable.css({
 				marginTop: -offsetY + 'px',
-				marginBottom: (withWidth ? 20 : 0) + (withHeight ? 20 : 0) + 'px'
+				marginBottom: (withWidth ? 0 : 0) + (withHeight ? 0 : 0) + 'px'
 			});
 			bodyDiv
-				.width(bodyWidth + (withWidth ? 20 : 0) + (withHeight ? 20 : 0))
-				.height(bodyHeight + (withWidth ? 20 : 0) + (withHeight ? 20 : 0))
+				.width(bodyWidth + (withWidth ? 0 : 0) + (withHeight ? 0 : 0))
+				.height(bodyHeight + (withWidth ? 0 : 0) + (withHeight ? 0 : 0))
 				.css({left: offsetX + 'px', top: offsetY + 'px'});
 			bodyTable.css({
 				marginLeft: -offsetX + 'px',
 				marginTop: -offsetY + 'px',
 				marginRight: '0px',
 				marginBottom: '0px'
-				// marginRight: (withWidth ? 20 : 0) + 'px',
-				// marginBottom: (withHeight ? 20 : 0) + 'px'
+				// marginRight: (withWidth ? 0 : 0) + 'px',
+				// marginBottom: (withHeight ? 0 : 0) + 'px'
 			});
 			if (withHeight) {
 				rowTable.width(bodyTable.width());
@@ -108,8 +108,8 @@
 			});
 			// 外部 div の設定
 			div
-				.width(options.width + (withWidth ? 20 : 0) + (withHeight ? 20 : 0))
-				.height(options.height + (withWidth ? 20 : 0) + (withHeight ? 20 : 0));
+				.width(options.width + (withWidth ? 0 : 0) + (withHeight ? 0 : 0))
+				.height(options.height + (withWidth ? 0 : 0) + (withHeight ? 0 : 0));
 		});
 	}
 })(jQuery);
