@@ -1,7 +1,7 @@
 $('#student_<%= @student_id %> td.total_points[exam_id="<%= @exam_id %>"]').html('<%= @student_total_score %>');
 $('#student_<%= @student_id %> td.weighted_scores[exam_id="<%= @exam_id %>"]').html('<%= @student_weights_total %>');
 
-var CalculateAllAverage, CalculateDeviation, CalculateGradeAndRank, FixDigit, SetExamInfos, average, examInfos;
+var CalculateAllAverage, CalculateDeviation, CalculateGradeAndRank, FixDigit, SetExamInfos, TableFix, average, examInfos;
 
 average = 0.0;
 
@@ -32,22 +32,26 @@ CalculateAllAverage = function() {
   i = 0;
   _results = [];
   while (i < examInfos.length) {
-    $(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".total_points[exam_id='" + (i + 1) + "']")));
-    $(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".weighted_scores[exam_id='" + (i + 1) + "']")));
+    $(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".total_points[exam_id='" + $(examInfos[i]).attr("exam_id") + "']")));
+    if ($("#weighting_total_title[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text()) {
+      $(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text(CalculateAverage($(".weighted_scores[exam_id='" + $(examInfos[i]).attr("exam_id") + "']")));
+    }
     _results.push(i++);
   }
   return _results;
 };
 
 CalculateGradeAndRank = function() {
-  var deviation, deviations, exam_loop, f_end, grade, i, j, levels, num, scores, sortScore, sorteds, target, _results;
-  sortScore = function(a, b) {
+  var SortScore, deviation, deviations, exam_loop, f_end, grade, i, j, levels, num, scores, sorteds, target, _results;
+  SortScore = function(a, b) {
     return parseFloat($(a).text()) < parseFloat($(b).text());
   };
   exam_loop = 0;
   _results = [];
-  while (exam_loop < examInfos.length) {
+  while (exam_loop < examInfos.length / 4) {
     -($("#weighting_total_title[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text() ? scores = $(".weighted_scores[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']") : scores = $(".total_points[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']"));
+    scores = $.makeArray(scores);
+    scores = scores.slice(-(scores.length / 4));
     switch ($("#how-grade").val()) {
       case I18n.t("grades.deviation"):
         levels = [Number.MAX_VALUE, 66, 62, 58, 55, 59, 45, 37, Number.MIN_VALUE];
@@ -69,7 +73,7 @@ CalculateGradeAndRank = function() {
         break;
       case I18n.t("grades.percent"):
         levels = [5, 5, 10, 10, 30, 10, Number.MAX_VALUE];
-        sorteds = $.makeArray(scores.sort(sortScore));
+        sorteds = $.makeArray(scores.sort(SortScore));
         grade = 10;
         f_end = 0;
         i = 0;
@@ -100,7 +104,7 @@ CalculateGradeAndRank = function() {
       i++;
     }
     -(levels = [15, 20]);
-    sorteds = $.makeArray(scores.sort(sortScore));
+    sorteds = $.makeArray(scores.sort(SortScore));
     grade = 5;
     f_end = 0;
     i = 0;
@@ -124,7 +128,7 @@ CalculateGradeAndRank = function() {
       grade--;
       i++;
     }
-    sorteds = $.makeArray(scores.sort(sortScore));
+    sorteds = $.makeArray(scores.sort(SortScore));
     i = 0;
     while (i < sorteds.length) {
       if (parseFloat($(sorteds[i]).nextAll(".grade[exam_id='" + $(examInfos[exam_loop]).attr("exam_id") + "']").text()) === 3) {
@@ -148,10 +152,10 @@ CalculateDeviation = function() {
     stdDev = 0.0;
     if ($("#weighting_total_title[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text()) {
       scores = $(".weighted_scores[exam_id='" + $(examInfos[i]).attr("exam_id") + "']");
-      average = parseFloat($(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text());
+      average = parseFloat($(".weighted_scores_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']")[3].textContent);
     } else {
       scores = $(".total_points[exam_id='" + $(examInfos[i]).attr("exam_id") + "']");
-      average = parseFloat($(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']").text());
+      average = parseFloat($(".total_points_average[exam_id='" + $(examInfos[i]).attr("exam_id") + "']")[3].textContent);
     }
     j = 0;
     while (j < scores.length) {
@@ -176,11 +180,18 @@ CalculateDeviation = function() {
   return _results;
 };
 
--$("#how-grade").change(function(e) {
-  return CalculateGradeAndRank();
-});
+TableFix = function() {
+  var fixH;
+  fixH = $(window).height() - $("#exam_grid").offset().top - 60;
+  return $('#exam_grid').tablefix({
+    width: 1288,
+    height: fixH,
+    fixRows: 2,
+    fixCols: 3
+  });
+};
 
-SetExamInfos();
+-SetExamInfos();
 
 CalculateAllAverage();
 
