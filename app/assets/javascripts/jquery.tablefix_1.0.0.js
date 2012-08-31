@@ -92,8 +92,10 @@
 			bodyTable.css({
 				marginLeft: -offsetX + 'px',
 				marginTop: -offsetY + 'px',
-				marginRight: (withWidth ? 20 : 0) + 'px',
-				marginBottom: (withHeight ? 20 : 0) + 'px'
+				marginRight: '0px',
+				marginBottom: '0px'
+				// marginRight: (withWidth ? 20 : 0) + 'px',
+				// marginBottom: (withHeight ? 20 : 0) + 'px'
 			});
 			if (withHeight) {
 				rowTable.width(bodyTable.width());

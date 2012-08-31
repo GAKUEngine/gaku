@@ -221,7 +221,6 @@ coffee:
     i = 0
     while i < examInfos.length
       stdDev = 0.0
-      console.log $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
       if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
         scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
         average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
@@ -257,7 +256,6 @@ coffee:
     $("#exam_grid").width(fixW)
     fixW = $(window).width() - 80
     fixH = $(window).height() - 220
-    console.log fixW, fixH
     $('#exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3});
 
   -# main -----↓
