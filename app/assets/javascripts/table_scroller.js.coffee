@@ -19,8 +19,6 @@
       withHeight = (options.height < baseTable.height());
       options.height = baseTable.height() unless withHeight
       
-      console.log withWidth, withHeight
-            
       # 外部 div の設定
       baseTable.wrap "<div></div>"
       div = baseTable.parent()
@@ -41,7 +39,6 @@
 
         false  if indexY is fixRows
 
-      
       # テーブルの分割と初期化
       crossTable = baseTable.wrap("<div></div>")
       rowTable = baseTable.clone().wrap("<div></div>")
@@ -63,7 +60,7 @@
         position: "absolute"
         overflow: "auto"
       )
-      div.append(rowDiv).append(colDiv).append bodyDiv
+      div.append(rowDiv).append(colDiv).append(bodyDiv)
       
       # クリップ領域の設定
       bodyWidth = options.width - offsetX
@@ -96,14 +93,14 @@
       bodyDiv.scroll ->
         rowDiv.scrollLeft bodyDiv.scrollLeft()
         colDiv.scrollTop bodyDiv.scrollTop()
-
       
       # 外部 div の設定
       div.width(options.width + ((if withWidth then 0 else 0)) + ((if withHeight then 0 else 0))).height options.height + ((if withWidth then 20 else 0)) + ((if withHeight then 0 else 0))
-      console.log "aaa"
       if withWidth and withHeight
-        # bodyDiv.width bodyWidth
-        bodyDiv.height bodyHeight + 20
         div.height options.height
-
+        rowDiv.width bodyWidth - 20
+        colDiv.height bodyHeight - 20
+        bodyDiv.width bodyWidth
+        bodyDiv.height bodyHeight
+        
 ) jQuery
