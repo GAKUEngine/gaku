@@ -12,23 +12,23 @@
 			var withWidth = (options.width > 0);
 			var withHeight = (options.height > 0);
 			if (withWidth) {
-				withWidth = (options.width < baseTable.width());
+				// withWidth = (options.width < baseTable.width());
 			} else {
 				options.width = baseTable.width();
 			}
 			if (withHeight) {
-				withHeight = (options.height < baseTable.height());
+				// withHeight = (options.height < baseTable.height());
 			} else {
 				options.height = baseTable.height();
 			}
 			if (withWidth || withHeight) {
 				if (withWidth && withHeight) {
 					options.width -= 40;
-					options.height -= 40;
+					options.height -= 0;
 				} else if (withWidth) {
 					options.width -= 20;
 				} else {
-					options.height -= 20;
+					options.height -= 0;
 				}
 			} else {
 				return;
@@ -46,8 +46,8 @@
 				$(this).find('td,th').each(function(indexX){
 					if (indexY == fixRows && indexX == fixCols) {
 						var cell = $(this);
-						offsetX = cell.position().left;
-						offsetY = cell.parent('tr').position().top;
+						offsetX = cell.position().left + 1;
+						offsetY = cell.parent('tr').position().top + 1;
 						return false;
 					}
 				});

@@ -24,7 +24,7 @@
             th.exam_infos.btn-success exam_id=exam.id colspan="#{exam.exam_portions.count + 5}" = exam.name
           - if defined? @grades
             th.btn-inverse colspan="4" =t('grades.combined')
-          - else
+          /- else
             th colspan="4"
         tr
           th.btn-info style="width:60px" =t("class")
@@ -247,7 +247,6 @@ coffee:
       i++
 
   TableFix = ->
-    console.log $(".btn-warning").length, $(".btn-inverse").length
     fixW = 303
     fixW += $(".btn-warning").length * 131
     if $(".exam_infos").length > 1
@@ -255,14 +254,9 @@ coffee:
       fixW += 302
     else
       fixW += $(".btn-inverse").length * 76
-    if fixW > $(window).width() - 80
-      $("#exam_grid").width(fixW)
-    else
-      fixW += $(window).width() - 80 - fixW + 2
-      $("#exam_grid").width(fixW)
-
+    $("#exam_grid").width(fixW)
     fixW = $(window).width() - 80
-    fixH = $(window).height() - 200
+    fixH = $(window).height() - 220
     console.log fixW, fixH
     $('#exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3});
 
