@@ -1,0 +1,7 @@
+.modal.hide#deleteModal
+	.modal-header
+		button type="button" class="close" data-dismiss="modal" ×
+		h3 = t('Delete')
+	.modal-body
+		.delete_button style='text-align:center'
+			=link_to t('Delete'), target, :method => :delete, :class => 'btn btn-danger', :data => {:confirm => t('confirm_delete')}

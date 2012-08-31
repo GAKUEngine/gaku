@@ -127,6 +127,7 @@ class Students::ImporterController < ApplicationController
         idx[:birthDate] = 10
         idx[:gender] = 11
         idx[:phone] = 19
+        idx[:foreignIdNumber] = 4
 
         #primary address
         idx[:zipcode] = 14
@@ -175,13 +176,23 @@ class Students::ImporterController < ApplicationController
                 gender = 1
               end
             end
-            phone = row[idx[:phone]]
+            
+            phone = nil
+            if !row[idx[:phone]].nil?
+              phone = row[idx[:phone]]
+            end
+
+            student_foreign_id_number = nil
+            if !row[idx[:foreignIdNumber]].nil?
+              student_foreign_id_number = row[idx[:foreignIdNumber]]
+            end
 
             # check for existing
             student = Student.create!(:surname => surname, 
-                            :name => name, 
+                            :name => name,
                             :surname_reading => surname_reading, 
                             :name_reading => name_reading,
+                            :student_foreign_id_number => student_foreign_id_number,
                             :birth_date => birth_date,
                             :gender => gender,
                             :phone => phone)
@@ -282,6 +293,8 @@ class Students::ImporterController < ApplicationController
                 idx[:guardianAddress2] = i
               when "HOGTELNO"
                 idx[:guardianPhone] = i
+              when "SEITONUM"
+                idx[:foreignIdNumber] = i
               end
             end
           end

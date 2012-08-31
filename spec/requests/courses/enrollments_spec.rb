@@ -9,11 +9,9 @@ describe "CourseEnrollment"  do
   end
 
   it "should enroll and show student", :js => true do
-
     Factory(:student, :name => "John", :surname => "Doe")
-    sleep 5 
     visit course_path(@course)
-    sleep 5
+
     click_link 'add_student_enrollment'
     wait_until { page.has_content?('Choose Student') } 
     select "John Doe", :from => 'course_enrollment_student_id'
