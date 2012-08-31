@@ -4,7 +4,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
   before do
     sign_in_as!(Factory(:user))
     @class_group = Factory(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
-    @student1 = Factory(:student)
+    @student1 = Factory(:student, :name => 'Susumu', :surname => 'Yokota')
     within('ul#menu') { click_link "Class Management" }
     within('ul#menu') { click_link "Class Listing" }
   end
@@ -16,7 +16,6 @@ describe 'ClassGroup ClassGroupEnrollment' do
     end
 
     it 'should add and show student to a class group', :js => true do
-      
       click_link 'add_class_group_enrollment'
       wait_until { page.find('#new_class_enrollment').visible? }
       check "#{@student1.id}"
@@ -24,6 +23,19 @@ describe 'ClassGroup ClassGroupEnrollment' do
       wait_until { !page.find('#new_class_enrollment').visible? }
 
       page.should have_content("#{@student1.name}")
+    end
+
+    it 'should search', :js => true do
+      student2 = Factory(:student, :name => 'Kenji', :surname => 'Kita')
+      student3 = Factory(:student, :name => 'Chikuhei', :surname => 'Nakajima')
+      click_link 'add_class_group_enrollment'
+      wait_until { page.find('#new_class_enrollment').visible? }
+
+      table_rows = page.all('div#students_grid_table table tr').size
+
+      fill_in 'student_search', :with => 'Sus'
+     
+      wait_until { page.all('div#students_grid_table table tr').size == table_rows - 2 } 
     end
 
     context "Class Roster with added student" do
