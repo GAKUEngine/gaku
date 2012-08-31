@@ -8,7 +8,7 @@
         h3 =t("addresses.edit")
       .modal-body
         .row-fluid
-          .validation-error
+          #validation_errors
         .row-fluid
           = hidden_field_tag :student_id, @student.id
           
