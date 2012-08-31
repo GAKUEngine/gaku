@@ -47,6 +47,7 @@ describe 'Address' do
     it 'should error if there are empty fields', :js => true do 
       page.should_not have_css('div.address_address1formError')
       click_button "submit_button"
+
       wait_until { page.should have_selector('div.address_address1formError') }
     end
   end
