@@ -1,0 +1,17 @@
+-unless @note.nil? or @note.new_record? or !@note
+  .row-fluid
+    .span12.well
+      table#student-note-table.index.table.table-striped.table-bordered.table-condensed
+            thead
+              tr
+                th
+                th =t("notes.title")
+                th =t("notes.content")
+            tbody
+              td =@note.id
+              td =@note.title
+              td =@note.content
+  .row-fluid
+    .span12.well
+      = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, student_path(@student), :class => "span3 btn btn-danger", :style => "min-height:0px"
+         

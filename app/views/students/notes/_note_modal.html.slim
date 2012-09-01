@@ -5,8 +5,7 @@
   = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |note_form| 
   
       .modal-header
-        button.close type="button" data-dismiss="modal"
-          'x
+        button.close type="button" data-dismiss="modal" x
         h3= t("notes.edit")
       .modal-body
         .validation-error

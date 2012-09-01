@@ -17,6 +17,14 @@ class Students::NotesController < ApplicationController
     end  
   end
 
+  def show
+    @student = Student.find(params[:student_id])
+    @note = Note.find(params[:id])
+    super do |format|
+      format.js {render 'show'}  
+    end  
+  end
+
   def create
     super do |format|
       if @student.notes << @note
