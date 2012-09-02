@@ -13,8 +13,8 @@ describe 'ClassGroup Semesters' do
   it 'should add and show semester to a class group', :js => true do
     
     page.should have_content "Semesters list"
-    click_link 'show_semester_form'
-    wait_until { page.find('#semester_form').visible? }
+    click_link 'add_class_group_semester_link'
+    wait_until { page.find('#add_class_group_semester').visible? }
     #select a semester
     select '2012', :from => 'semester_starting_1i'
     select 'September', :from => 'semester_starting_2i'
@@ -24,7 +24,7 @@ describe 'ClassGroup Semesters' do
     select 'December', :from => 'semester_ending_2i'
     select '20', :from => 'semester_ending_3i'
     click_button 'submit_button'
-    wait_until { !page.find('#semester_form').visible? }
+    wait_until { !page.find('#add_class_group_semester').visible? }
 
     page.should have_content('09/28/2012 - 12/20/2012')
     @class_group.semesters.count.should == 1

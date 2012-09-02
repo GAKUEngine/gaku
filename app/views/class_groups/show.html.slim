@@ -33,30 +33,22 @@
               a#class_group_courses_tab_link data-toggle="tab" href="#courses"
                 = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
           .tab-content
+
             #class_group_enrollments.tab-pane.active
-              
               .row-fluid#class_group_enrollments_list
                 =render 'class_groups/enrollments/index'
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'
                   //=render 'new_class_group_enrollment'
+
             #semesters.tab-pane
               .row-fluid
-                .pull-left
-                  h4.h4-vm =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
-                .pull-right
-                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, '#', :id => 'show_semester_form', :class => "btn btn-primary"
+                = render 'class_groups/semesters/index'
               .row-fluid
-                hr
-              .row-fluid
-                ul.semester_list
-                  - @class_group.semesters.each do |semester|
-                    li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
-              .row-fluid
-                /TODO need to redirect to the right route after create! /
+                /TODO need to redirect to the right route after create!
                 div id="semester_form" style="display:none"
-                  = render 'new_semester'
+                  
             #courses.tab-pane
               .row-fluid
                 .pull-left

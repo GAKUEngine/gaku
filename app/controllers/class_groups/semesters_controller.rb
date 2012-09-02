@@ -1,4 +1,4 @@
-class SemestersController < ApplicationController
+class ClassGroups::SemestersController < ApplicationController
 
   #before_filter :authenticate_user!
 
@@ -15,5 +15,12 @@ class SemestersController < ApplicationController
   		format.js { render 'create'}
   	end
   end
+
+  def new
+    @semester = Semester.new
+    @class_group =  ClassGroup.find(params[:class_group_id])
+    render 'class_groups/semesters/new'  
+  end
+
   
 end
