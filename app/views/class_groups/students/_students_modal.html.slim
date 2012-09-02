@@ -11,7 +11,7 @@
     = f.submit "Add to class", :id => 'submit_button', :class => 'span3 btn btn btn-primary'
   = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_link', :'data-dismiss' => "modal"
 
-= javascript_include_tag "class_group_student_chooser"
+= javascript_include_tag "class_groups/student_chooser"
 
 coffee:
   $('#grid').studentChooser()

@@ -18,6 +18,7 @@
       #new_student_form.hide
         =render 'form'
     =render 'students/student_chooser', :select_mode => 'multiple'
-= javascript_include_tag "students_index"
+    
+= javascript_include_tag "students/index"
 coffee:
   $('#grid').studentGrid()
