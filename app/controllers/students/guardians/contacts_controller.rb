@@ -37,7 +37,7 @@ class Students::Guardians::ContactsController < ApplicationController
 
   def update
     super do |format|
-      @contacts = Contact.where(params[:guardian_id])
+      @contacts = Contact.where(:guardian_id => params[:guardian_id])
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       format.js { render 'students/guardians/contacts/update' }
     end  
