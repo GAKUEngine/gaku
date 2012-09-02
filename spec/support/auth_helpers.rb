@@ -5,6 +5,11 @@ module AuthHelpers
         controller.should_receive(:authorize!).twice.and_return(true)
       end
     end
+
+    def login_admin
+      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      sign_in Factory.create(:admin) # Using factory girl as an example
+    end
   end
 
   module Request
@@ -33,6 +38,6 @@ module AuthHelpers
 end
 
 RSpec.configure do |config|
-  config.extend AuthHelpers::Controller, :type => :controller
+  config.include AuthHelpers::Controller, :type => :controller
   config.extend AuthHelpers::Request, :type => :request
 end
