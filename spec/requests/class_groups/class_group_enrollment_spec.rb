@@ -16,7 +16,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
     end
 
     it 'should add and show student to a class group', :js => true do
-      click_link 'add_class_group_enrollment'
+      click_link 'add_class_group_student_link'
       wait_until { page.find('#new_class_enrollment').visible? }
       check "#{@student1.id}"
       click_button 'submit_button'
@@ -28,7 +28,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
     it 'should search students', :js => true do
       student2 = Factory(:student, :name => 'Kenji', :surname => 'Kita')
       student3 = Factory(:student, :name => 'Chikuhei', :surname => 'Nakajima')
-      click_link 'add_class_group_enrollment'
+      click_link 'add_class_group_student_link'
       wait_until { page.find('#new_class_enrollment').visible? }
 
       table_rows = page.all('div#students_grid_table table tr').size
@@ -45,7 +45,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
       end
 
       it 'should not show a student for adding if it is already added', :js => true do
-        click_link 'add_class_group_enrollment'
+        click_link 'add_class_group_student_link'
         wait_until { page.find('#new_class_enrollment').visible? }
         within('#new_class_enrollment') { page.should_not have_content("#{@student1.name}") }
       end
@@ -62,6 +62,7 @@ describe 'ClassGroup ClassGroupEnrollment' do
         @class_group.students.count.should == 0
       end
     end
+
 
   end
 

@@ -6,6 +6,13 @@ GAKUEngine::Application.routes.draw do
   resources :class_groups do 
     resources :semesters, :controller => 'class_groups/semesters'
     resources :courses, :controller => 'class_groups/courses'
+    resources :students, :controller => 'class_groups/students' do 
+      collection do 
+        post :enroll_student
+        get :filtered_students
+        get :autocomplete_filtered_students
+      end
+    end
   end
 
   #resources :semesters  
