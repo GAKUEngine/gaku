@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe 'ClassGroup Semesters' do
+  stub_authorization!
+  
   before do
-    sign_in_as!(Factory(:user))
     @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-    within('ul#menu') { click_link "Class Management" }
-    within('ul#menu') { click_link "Class Listing" }
+    #within('ul#menu') { click_link "Class Management" }
+    #within('ul#menu') { click_link "Class Listing" }
     visit class_group_path(@class_group)
     click_link 'class_group_semesters_tab_link'
   end
@@ -13,8 +14,8 @@ describe 'ClassGroup Semesters' do
   it 'should add and show semester to a class group', :js => true do
     
     page.should have_content "Semesters list"
-    click_link 'show_semester_form'
-    wait_until { page.find('#semester_form').visible? }
+    click_link 'add_class_group_semester_link'
+    wait_until { page.find('#add_class_group_semester').visible? }
     #select a semester
     select '2012', :from => 'semester_starting_1i'
     select 'September', :from => 'semester_starting_2i'
@@ -24,7 +25,7 @@ describe 'ClassGroup Semesters' do
     select 'December', :from => 'semester_ending_2i'
     select '20', :from => 'semester_ending_3i'
     click_button 'submit_button'
-    wait_until { !page.find('#semester_form').visible? }
+    wait_until { !page.find('#add_class_group_semester').visible? }
 
     page.should have_content('09/28/2012 - 12/20/2012')
     @class_group.semesters.count.should == 1

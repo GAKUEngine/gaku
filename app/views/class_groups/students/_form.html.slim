@@ -1,4 +1,4 @@
-=form_for @new_class_group_enrollment, :url => enroll_student_class_group_enrollments_path, :remote => true do |f|
+=form_for [@class_group, @class_group_enrollment], :url => enroll_student_class_group_students_path, :remote => true do |f|
   =f.hidden_field :class_group_id, :value => @class_group.id
   .row-fluid
 		=f.label :students

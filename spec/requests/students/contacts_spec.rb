@@ -1,17 +1,16 @@
 require 'spec_helper'
 
 describe 'Contact' do
-  
+  stub_authorization!
+
   before do
     @student = Factory(:student)
     @contact_type = Factory(:contact_type, :name => 'email')
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Students" }
+    #within('ul#menu') { click_link "Students" }
   end
 
   it "should add and show student contact", :js => true do
     visit student_path(@student) 
-
     click_link 'new_student_contact_tab_link'
     click_link 'new_student_contact_link'
 

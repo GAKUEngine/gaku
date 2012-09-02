@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe 'Guardian Contacts' do
+  stub_authorization!
 
   before(:each) do
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Students" }
+    #within('ul#menu') { click_link "Students" }
 
     @student = Factory(:student)
     @guardian = Factory(:guardian)

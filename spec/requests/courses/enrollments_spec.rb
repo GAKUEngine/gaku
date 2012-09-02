@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe "CourseEnrollment"  do
+  stub_authorization!
+
   before do
     @course = Factory(:course)
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Course Management"}
-    within('ul#menu') { click_link "Courses"}
+    #within('ul#menu') { click_link "Course Management"}
+    #within('ul#menu') { click_link "Courses"}
   end
 
   it "should enroll and show student", :js => true do

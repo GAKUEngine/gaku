@@ -32,6 +32,7 @@ class Students::AddressesController < ApplicationController
   
   def update
     super do |format|
+      @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
       if @address.save
         format.js { render 'update' }
       else

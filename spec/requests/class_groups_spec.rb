@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe 'ClassGroups' do
+  stub_authorization!
+
   before do
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Class Management" }
-    within('ul#menu') { click_link "Class Listing" }
+    visit class_groups_path
+    #within('ul#menu') { click_link "Class Management" }
+    #within('ul#menu') { click_link "Class Listing" }
   end
 
   it 'should create and show class group', :js => true do
@@ -56,44 +58,6 @@ describe 'ClassGroups' do
       wait_until { page.all('table.index tr').size == tr_count - 1 }
       ClassGroup.count.should == 0
       page.should_not have_content(@class_group.name)
-    end
-  end
-
-
-  context "show class group" do
-    before do
-      @student = Factory(:student)
-      @semester = Factory(:semester)
-      @course = Factory(:course)
-      @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", 
-        :homeroom => 'A1', :students => [@student], :courses => [@course], :semesters => [@semester])
-    end
-    
-
-    it "should list existing enrolled students" do
-      visit class_group_path(@class_group)
-      page.should have_content "Class Roster"
-      page.should have_link "Add Student"
-      page.all('table.index tr').size.should == 2
-      page.should have_content("#{@student.name}")
-    end
-
-    it "should list existing semesters" do
-      visit class_group_path(@class_group)
-      page.should have_content "Semesters list"
-      click_link 'class_group_semesters_tab_link'
-      page.should have_link "Add a semester"
-      page.all('table.index tr').size.should == 2
-      page.should have_content("#{@semester.starting.strftime('%m/%d/%Y')} - #{@semester.ending.strftime('%m/%d/%Y')}")
-    end
-
-    it "should list existing courses" do
-      visit class_group_path(@class_group)
-      page.should have_content "Courses List"
-      click_link 'class_group_courses_tab_link'
-      page.should have_link "Add course"
-      page.all('table.index tr').size.should == 2
-      page.should have_content("#{@course.code}")
     end
   end
 end

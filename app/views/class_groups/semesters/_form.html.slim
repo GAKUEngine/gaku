@@ -1,6 +1,6 @@
-= form_for @new_semester, {:remote => true} do |f|
+= form_for [@class_group, @semester], { :remote => true } do |f|
   .row-fluid
-    .span12.well
+    .span12.well 
       .row-fluid
         /後でカレンダーにする
         .span6
