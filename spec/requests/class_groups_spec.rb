@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe 'ClassGroups' do
+  stub_authorization!
+
   before do
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Class Management" }
-    within('ul#menu') { click_link "Class Listing" }
+    visit class_groups_path
+    #within('ul#menu') { click_link "Class Management" }
+    #within('ul#menu') { click_link "Class Listing" }
   end
 
   it 'should create and show class group', :js => true do

@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe 'Courses' do
+  stub_authorization!
+
   before do
     @syllabus = Factory(:syllabus, :name => 'biology2012', :code => 'bio')
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Course Management" }
-    within('ul#menu') { click_link "Courses" }
+    visit courses_path
+    #within('ul#menu') { click_link "Course Management" }
+    #within('ul#menu') { click_link "Courses" }
   end
 
   context "creating new course" do 

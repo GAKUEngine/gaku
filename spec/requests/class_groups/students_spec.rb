@@ -1,16 +1,18 @@
 require 'spec_helper'
 
 describe 'ClassGroup Students' do
+  stub_authorization!
+
   before do
-    sign_in_as!(Factory(:user))
     @class_group = Factory(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
     @student1 = Factory(:student, :name => 'Susumu', :surname => 'Yokota')
-    within('ul#menu') { click_link "Class Management" }
-    within('ul#menu') { click_link "Class Listing" }
+    #within('ul#menu') { click_link "Class Management" }
+    #within('ul#menu') { click_link "Class Listing" }
   end
 
   context "Class Roster" do
     before do
+      visit class_groups_path
       click_link 'show_link'
       click_link 'class_group_enrollments_tab_link'
     end

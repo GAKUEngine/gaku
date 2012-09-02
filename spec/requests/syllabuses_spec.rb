@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe 'Syllabus' do
+  stub_authorization!
+
   before do
     @syllabus = Factory(:syllabus, :name => 'Biology', :code => 'bio')
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Syllabuses"}
+    visit syllabuses_path
+    #within('ul#menu') { click_link "Syllabuses"}
   end
 
   context "list and show syllabuses" do

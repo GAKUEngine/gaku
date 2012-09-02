@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe 'ClassGroup Semesters' do
+  stub_authorization!
+  
   before do
-    sign_in_as!(Factory(:user))
     @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-    within('ul#menu') { click_link "Class Management" }
-    within('ul#menu') { click_link "Class Listing" }
+    #within('ul#menu') { click_link "Class Management" }
+    #within('ul#menu') { click_link "Class Listing" }
     visit class_group_path(@class_group)
     click_link 'class_group_semesters_tab_link'
   end
