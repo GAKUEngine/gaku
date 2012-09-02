@@ -19,7 +19,7 @@ class ClassGroups::SemestersController < ApplicationController
   def new
     @semester = Semester.new
     @class_group =  ClassGroup.find(params[:class_group_id])
-    render 'class_groups/semesters/new'  
+    render 'new'  
   end
 
   

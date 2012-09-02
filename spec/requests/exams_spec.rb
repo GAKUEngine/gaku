@@ -1,10 +1,12 @@
 require 'spec_helper' 
 
 describe 'Exams' do
+  stub_authorization!
+
   before(:each) do
     @exam = Factory(:exam, :name => "Linux")
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Exams"}
+    visit exams_path
+    #within('ul#menu') { click_link "Exams"}
   end
 
   context "create and edit exam" do

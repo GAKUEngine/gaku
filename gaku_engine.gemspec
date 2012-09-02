@@ -15,6 +15,4 @@ Gem::Specification.new do |s|
   s.test_files   = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
-
-  s.add_development_dependency 'sqlite3'
 end

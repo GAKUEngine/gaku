@@ -23,6 +23,7 @@ db/test.sqlite3-journal
 /app/assets/stylesheets/jquery.wijmo-complete.2.0.0.css
 /app/assets/stylesheets/jquery.wijmo-complete.all.2.0.0.min.css
 
+public/assets
 
 \#*
 *~

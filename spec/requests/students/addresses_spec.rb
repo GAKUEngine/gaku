@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'Address' do
+  stub_authorization!
   
   before do
     @student = Factory(:student)
-    sign_in_as!(Factory(:user))
-    within('ul#menu') { click_link "Students"}
+    #within('ul#menu') { click_link "Students"}
   end
   context 'add' do 
 
