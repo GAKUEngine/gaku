@@ -19,8 +19,7 @@ class ClassGroups::CoursesController < ApplicationController
   def new
     @course = Course.new
     @class_group =  ClassGroup.find(params[:class_group_id])
-    render 'class_groups/courses/new'  
+    render 'new'  
   end
 
-  
 end

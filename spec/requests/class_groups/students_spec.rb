@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'ClassGroup ClassGroupEnrollment' do
+describe 'ClassGroup Students' do
   before do
     sign_in_as!(Factory(:user))
     @class_group = Factory(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
