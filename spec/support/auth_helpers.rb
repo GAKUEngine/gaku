@@ -21,6 +21,14 @@ module AuthHelpers
       before(:all) { Ability.register_ability(AuthHelpers::Request::SuperAbility) }
       after(:all) { Ability.remove_ability(AuthHelpers::Request::SuperAbility) }
     end
+
+    def sign_in_as!(user)
+      visit '/users/sign_in'
+      fill_in "user_email", :with => user.email
+      fill_in "user_password", :with => 'secret'
+      click_button "sign_in"
+    end
+    
   end
 end
 
