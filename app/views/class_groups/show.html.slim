@@ -51,20 +51,11 @@
                   
             #courses.tab-pane
               .row-fluid
-                .pull-left
-                  h4.h4-vm =t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
-                .pull-right
-                  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, '#', :id => 'show_course_form', :class => "btn btn-primary"
-              .row-fluid
-                hr
-              .row-fluid
-                ul
-                  - @class_group.courses.each do |course|
-                    li= course.code
+                = render 'class_groups/courses/index'
               .row-fluid
                 /TODO need to redirect to the right route after create! /
                 div id="course_form" style="display:none"
-                  = render 'new_course'
+      
     .row-fluid
       .span12.well
         = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :style => "min-height:0px"

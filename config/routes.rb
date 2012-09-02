@@ -5,6 +5,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_groups do 
     resources :semesters, :controller => 'class_groups/semesters'
+    resources :courses, :controller => 'class_groups/courses'
   end
 
   #resources :semesters  

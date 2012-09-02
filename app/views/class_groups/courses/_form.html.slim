@@ -1,4 +1,4 @@
-= form_for @new_course do |f|
+= form_for [@class_group, @course], { :remote => true } do |f|
   .row-fluid
     .span12.well
       .row-fluid
