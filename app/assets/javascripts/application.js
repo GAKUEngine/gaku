@@ -26,6 +26,3 @@
 
 //= require jquery_validation_engine/jquery.validationEngine.js
 //= require jquery_validation_engine/languages/jquery.validationEngine-en.js
-
-//= require students/index.js.coffee
-//= require_tree .
