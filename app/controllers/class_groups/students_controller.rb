@@ -1,26 +1,25 @@
-class ClassGroupEnrollmentsController < ApplicationController
+class ClassGroups::StudentsController < ApplicationController
+
+  #before_filter :authenticate_user!
 
   inherit_resources
 
-  actions :show, :new, :create, :update, :edit, :destroy
+  actions :index, :show, :new, :create, :update, :edit, :destroy
 
   def create
-    super do |format|
-      format.js { render 'create' }
-    end  
+  	super do |format|
+  		format.js { render 'create'}
+  	end
   end
 
   def new
-    
-    @class_group = ClassGroup.find(params[:class_group_id])
+    @class_group =  ClassGroup.find(params[:class_group_id])
     enrolled_students_ids = ClassGroupEnrollment.where(:class_group_id => @class_group.id).map {|x| x.student_id}
     @class_group_enrollment = ClassGroupEnrollment.new
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
-
-    super do |format|
-      format.js {render 'new'}  
-    end  
+    render 'class_groups/students/new'  
   end
+
 
   # creating class_enrollment from students/show
   def enroll_student
@@ -36,13 +35,13 @@ class ClassGroupEnrollmentsController < ApplicationController
         class_group_enrollment.save!
         @students << class_group_enrollment.student
       }
- 		  respond_to do |format|
- 				format.js { render 'enroll_student' }
- 			end
- 		end
+      respond_to do |format|
+        format.js { render 'enroll_student' }
+      end
+    end
   end
-  
-  def destroy
+
+   def destroy
     @class_group_enrollment = ClassGroupEnrollment.find(params[:id])
     @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
     @class_group_enrollment.destroy
@@ -77,5 +76,5 @@ class ClassGroupEnrollmentsController < ApplicationController
   
   end
 
-
+  
 end

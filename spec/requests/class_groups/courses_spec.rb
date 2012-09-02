@@ -12,8 +12,8 @@ describe 'ClassGroup Courses' do
 
   it 'should add and show course to a class group', :js => true do
     
-    click_link 'show_course_form'
-    wait_until { page.find('#course_form').visible? }
+    click_link 'add_class_group_course_link'
+    wait_until { page.find('#add_class_group_course').visible? }
     fill_in 'course_code', :with => 'Biology321'
     click_button 'submit_button'
 
@@ -25,7 +25,7 @@ describe 'ClassGroup Courses' do
   pending 'should not add a course if course code is empty', :js => true do #FIXME cannot load the validation code properly
     
     click_link 'show_course_form'
-    wait_until { page.find('#course_form').visible? }
+    wait_until { page.find('#add_class_group_course').visible? }
     click_button 'submit_button'
 
     wait_until { page.has_content?('This field is required') }

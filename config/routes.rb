@@ -3,9 +3,19 @@ GAKUEngine::Application.routes.draw do
   devise_for :installs
   devise_for :users
 
-  resources :class_groups
+  resources :class_groups do 
+    resources :semesters, :controller => 'class_groups/semesters'
+    resources :courses, :controller => 'class_groups/courses'
+    resources :students, :controller => 'class_groups/students' do 
+      collection do 
+        post :enroll_student
+        get :filtered_students
+        get :autocomplete_filtered_students
+      end
+    end
+  end
 
-  resources :semesters  
+  #resources :semesters  
 
   resources :courses do
     resources :exams do

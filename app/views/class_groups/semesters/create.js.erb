@@ -1,0 +1,3 @@
+ $('#add_class_group_semester').hide()
+ $('#add_class_group_semester_link').show()
+ $('.semester_list').append('<li><%= "#{@semester.starting.strftime('%m/%d/%Y')} - #{@semester.ending.strftime('%m/%d/%Y')}" %></li>').hightlight()

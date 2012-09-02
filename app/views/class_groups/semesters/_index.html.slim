@@ -1,0 +1,12 @@
+.pull-left
+  h4.h4-vm =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+.pull-right
+  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, new_class_group_semester_path(:class_group_id => @class_group.id), :remote => true, :id => 'add_class_group_semester_link', :class => "btn btn-primary"
+.row-fluid
+hr
+.row-fluid
+ul.semester_list
+  - @class_group.semesters.each do |semester|
+    li= semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
+
+#add_class_group_semester
