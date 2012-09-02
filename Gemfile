@@ -14,6 +14,7 @@ gem 'kendoui-rails'
 
 gem 'devise', :git => "git://github.com/plataformatec/devise.git"
 gem 'devise-i18n'
+gem 'cancan'
 
 gem 'execjs'
 gem 'therubyracer'
