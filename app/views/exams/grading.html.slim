@@ -126,12 +126,39 @@ coffee:
         i++
       return FixDigit total / nums.length, 2
 
-    console.log "CalcAllAve"
     i = 0
     while i < examInfos.length
       $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
       if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
         $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
+      i++
+
+  CalculateDeviation = () ->
+    i = 0
+    while i < examInfos.length
+      stdDev = 0.0
+      if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
+        scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
+        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
+      else
+        scores = $(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
+        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
+      j = 0
+      while j < scores.length
+        stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2)
+        j++
+      stdDev = Math.sqrt(stdDev / scores.length)
+
+      deviation = 0.0
+      j = 0
+      while j < scores.length
+        deviation = (parseFloat($(scores[j]).text()) - average) / stdDev
+        if isNaN(deviation)
+          deviation = 50
+        else
+          deviation = deviation * 10 + 50
+        $(scores[j]).nextAll(".deviation").text(FixDigit(deviation, 2))
+        j++
       i++
 
   CalculateGradeAndRank = ->
@@ -218,34 +245,6 @@ coffee:
           $(sorteds[i]).nextAll(".rank[exam_id='"+$(examInfos[exam_loop]).attr("exam_id")+"']").text("1")
         i++
       exam_loop++
-
-  CalculateDeviation = () ->
-    i = 0
-    while i < examInfos.length
-      stdDev = 0.0
-      if $("#weighting_total_title[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text()
-        scores = $(".weighted_scores[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".weighted_scores_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
-      else
-        scores = $(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")
-        average = parseFloat $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']")[3].textContent
-      j = 0
-      while j < scores.length
-        stdDev += Math.pow(parseFloat($(scores[j]).text()) - average, 2)
-        j++
-      stdDev = Math.sqrt(stdDev / scores.length)
-
-      deviation = 0.0
-      j = 0
-      while j < scores.length
-        deviation = (parseFloat($(scores[j]).text()) - average) / stdDev
-        if isNaN(deviation)
-          deviation = 50
-        else
-          deviation = deviation * 10 + 50
-        $(scores[j]).nextAll(".deviation").text(FixDigit(deviation, 2))
-        j++
-      i++
 
   TableFix = ->
     $("html").css "overflow-x", "hidden"
