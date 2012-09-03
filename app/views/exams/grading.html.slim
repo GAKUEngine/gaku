@@ -62,7 +62,7 @@
               th#grade_title.btn-inverse style="width:65px" = t("grades.grade")
               th#rank_title.btn-inverse style="width:65px" = t("grades.rank")
 
-      tbody
+      tbody.results_rows
         - @students.each do |student|
           tr.data_row id="student_#{student.id}"
             - if student.class_group_enrollments.blank?
@@ -78,10 +78,11 @@
               - exam.exam_portions.each do |portion|
                 - model = student.exam_portion_scores.where(:exam_portion_id => portion.id).first || student.exam_portion_scores.new
                 - model_class = model.class
-                td#score
+                td#score.score_coll
                   = form_for [@exam, model], :url => update_score_course_exam_path(@course, exam), :remote => true do |f|
                     /= f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[custom[number],min[0], max[#{portion.max_score}]] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
-                    = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[required] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
+                    div class="exam_portion_#{portion.id.to_s}"
+                      = f.number_field :score, :weight => portion.weight, :max => portion.max_score.to_s, :min => "0", :style => "text-align:right", :class => "validate[required] span12 form_blur_event score_cell fire_submit", "data-prompt-position" => "bottomRight:5"
                     #score_info*{'exam_name' => exam.name, 'exam_portion_id' => portion.id, 'exam_portion_name' => portion.name, 'exam_id' => exam.id}
                     = f.hidden_field :exam_portion_id, :value => portion.id
                     = f.hidden_field :student_id, :value => student.id
@@ -286,4 +287,25 @@ coffee:
 
   $("#how-grade").change (e) ->
     CalculateGradeAndRank()
+
+  $ ->
+    submitenter = (e) ->
+      keycode = e.keyCode || e.which
+      if keycode == 13
+        portion = $(this).parent().attr("class");
+        next_div = $(this).closest("tr").next().find("."+portion);
+        input = $(next_div).find("input:first-child.score_cell");
+        if $(input).attr('class') != undefined
+          $(input).focus();
+        else
+          next_portion_td = $(this).closest("td").next();
+          if $(next_portion_td).attr("class") == "score_coll"
+            next_portion_class = $(next_portion_td).find("div:nth-child(2)").attr("class");
+            $(this).closest("tbody.results_rows").find("tr:first-child").find("div."+next_portion_class).find("input.score_cell").focus();
+          else
+            $(this).closest("tbody.results_rows").find("tr:first-child").find("input.score_cell").first().focus();
+        false
+      else true
+
+    $('input.score_cell').keypress submitenter
 
