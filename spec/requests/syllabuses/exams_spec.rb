@@ -37,7 +37,6 @@ describe 'Syllabus Exams' do
       click_button 'submit_button'
       wait_until { 
                     page.should have_selector('div.syllabus_exam_nameformError') 
-                    page.should have_selector('div.syllabus_exam_weightformError') 
                     page.should have_selector('div.syllabus_exam_exam_portions_attributes_0_nameformError') 
                   }
       @syllabus.exams.count.should eql(0)
