@@ -24,7 +24,7 @@ CalculateAllAverage = function() {
     total = 0.0;
     i = 0;
     while (i < nums.length) {
-      total += parseFloat(nums[i].innerText);
+      total += parseFloat($(nums[i]).text());
       i++;
     }
     return FixDigit(total / nums.length, 2);
