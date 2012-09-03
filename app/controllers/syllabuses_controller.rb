@@ -22,7 +22,7 @@ class SyllabusesController < ApplicationController
   def create_exam
     exam = Exam.create(params[:syllabus][:exam])
     if  @syllabus.exams << exam
-      flash.now[:notice] = 'Exam Created'
+      flash.now[:notice] = t('exams.exam_created')
       respond_to do |format|
        format.js {render 'create_exam'}  
       end
