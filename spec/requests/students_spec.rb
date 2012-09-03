@@ -14,6 +14,12 @@ describe 'Student' do
       page.should have_selector('div#students_grid_table')
       page.should have_content("#{@student.name}")
     end
+    it "should have autocomplete while searching", :js => true do
+      within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
+      fill_in 'student_search', :with => "#{@student.name}"
+      page.all('#students_grid_table tr').size.should==2
+      within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
+    end
   end
 
   context "creating", :js => true do 
