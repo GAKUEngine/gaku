@@ -32,6 +32,7 @@ describe 'Syllabus Exams' do
     end
 
     it 'should error if the required fields are empty', :js => true do 
+      fill_in 'syllabus_exam_exam_portions_attributes_0_name', :with => ''
       click_button 'submit_button'
       wait_until { 
                     page.should have_selector('div.syllabus_exam_nameformError') 
