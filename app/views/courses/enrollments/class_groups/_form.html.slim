@@ -1,0 +1,7 @@
+=form_for @course, :url => enroll_class_group_course_enrollment_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course', :id => 'enroll_class_group_form'} do |f|
+  .fields  
+    b Choose Class Group
+    =f.label :class_group_id
+    =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
+  .actions
+    =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'

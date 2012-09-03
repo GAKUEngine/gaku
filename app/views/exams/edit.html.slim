@@ -36,7 +36,7 @@ br/
             = f.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
   .row-fluid
     .span12.well
-      = f.submit nil, :class => "span12 btn btn-primary"
+      = f.submit nil, :id => 'submit_button', :class => "span12 btn btn-primary"
 
 coffee:
   $('.edit_exam').validationEngine();

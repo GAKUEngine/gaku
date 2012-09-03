@@ -2,10 +2,13 @@
   .pull-left
     h4.h4-vm = t("num_enrolled") + "（ " + @course.students.count.to_s + " ）"
   .pull-right
+
     #add_student_enrollment_link.pull-right
       = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, "", :id => "add_student_enrollment", :class => "btn btn-primary", :remote => true
+
     #add_class_group_enrollment_link.pull-right.mr-s
       = link_to ("<i class='icon-white icon-plus'></i> " + t('courses.add_class_group')).html_safe, "", :class => 'show_class_enroll_form btn btn-primary', :id => 'add_class_group_enrollment', :remote => true
+
 .row-fluid
   .span12
     hr
@@ -23,26 +26,16 @@
           = t("grades.rank")
         /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
     tbody
-      =render :partial => 'enrolled_student', :collection => @course.students, :as => :enrollment
+      =render :partial => 'courses/enrollments/enrolled', :collection => @course.students, :as => :enrollment
 .row-fluid
   /Modalでもいいかも。
+
   #add_student_enrollment_form style='display:none' 
-    = form_for [@course, @new_course_enrollment], :html => {:id => "enroll_student_form"},:url => enroll_student_course_enrollments_path , :remote => true do |f|
-      = f.hidden_field :course_id, :value => @course.id
-      .row-fluid
-        .span4.well.mt-l style="margin-bottom:0px"
-          .row-fluid
-            = f.label :students
-            = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}, :class => "validate[required]"
-          .row-fluid.mt-s
-            = f.submit t("courses.enroll_student"), :class => 'span12 btn btn-primary'
+    =render :partial => 'courses/enrollments/students/form', :course => @course
+
   #add_class_group_enrollment_form style='display:none' 
-    =form_for @course, :url => enroll_class_group_course_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course', :id => 'enroll_class_group_form'} do |f|
-      .fields  
-        b Choose Class Group
-        =f.label :class_group_id
-        =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
-      .actions
-        =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'
+    =render :partial => 'courses/enrollments/class_groups/form', :course => @course, :new_course_enrollment => @new_course_enrollment
+    
+
 coffee:
   $('#enroll_student_form').validationEngine();

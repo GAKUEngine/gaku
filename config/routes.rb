@@ -18,6 +18,10 @@ GAKUEngine::Application.routes.draw do
   #resources :semesters  
 
   resources :courses do
+    resources :enrollments, :controller => 'courses/enrollments' do 
+      post :enroll_class_group, :on => :member
+      post :enroll_student, :on => :collection
+    end
     resources :exams do
       resources :exam_portion_scores
       get :grading, :on => :member
@@ -25,11 +29,11 @@ GAKUEngine::Application.routes.draw do
       put :update_score, :on => :member
     end
 
-    post :enroll_class_group, :on => :member
+    
   end
 
   resources :course_enrollments do
-    post :enroll_student, :on => :collection
+    
   end
 
   resources :class_group_enrollments do

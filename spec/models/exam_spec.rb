@@ -29,6 +29,8 @@ describe Exam do
 
     it { should validate_presence_of(:name) }
 
+    it { should allow_mass_assignment_of :use_weighting }
+
     it "errors when name is nil" do
       exam.name = nil
       exam.should_not be_valid
