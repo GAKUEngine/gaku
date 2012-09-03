@@ -72,17 +72,16 @@ describe 'Student' do
   context "deleting", :js => true do
     it 'should delete an existing student' do
       visit student_path(@student)
-      st_count = Student.all.count
+      student_count = Student.all.count
       page.should have_content("#{@student.name}")
-      find_link("Delete").click
+      click_link 'delete_link'
       
-      within (".delete_modal") {
-        click_on "Delete"
-        page.driver.browser.switch_to.alert.accept
-      }
-      wait_until { page.should have_content 'Student was successfully destroyed.' }
+      within (".delete_modal") { click_on "Delete" }
+      page.driver.browser.switch_to.alert.accept
+      
+      wait_until { page.should have_content 'was successfully destroyed.' }
       page.should_not have_content("#{@student.name}")
-      Student.all.count.should == st_count - 1
+      Student.all.count.should == student_count - 1
     end
   end
 
