@@ -1,5 +1,5 @@
 .row-fluid
-  table.table.table-condensed.table-striped.table-bordered
+  table.index.table.table-condensed.table-striped.table-bordered
     thead
       tr
         th.btn-inverse =t 'exams.name'
@@ -18,6 +18,6 @@
 javascript:
   $(document).ready(function() {
     $(".delete_exam").live('ajax:success', function(evt, data, status, xhr){
-      $(this).closest('tr').fadeOut();
+      $(this).closest('tr').remove();
     });
   });
