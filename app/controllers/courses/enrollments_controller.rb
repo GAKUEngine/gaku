@@ -2,13 +2,12 @@ class Courses::EnrollmentsController < ApplicationController
 
   respond_to :js
 
-	  # creating course_enrollment from courses/show
   def enroll_student
     @course_enrollment = CourseEnrollment.new(params[:course_enrollment])
     @course = Course.find(params[:course_enrollment][:course_id])
     if @course_enrollment.save
       respond_with(@course_enrollment) do |format|
-        format.js { render 'enroll_student' }
+        format.js { render 'courses/enrollments/students/enroll' }
       end
     else
       @errors = @course_enrollment.errors
@@ -19,7 +18,6 @@ class Courses::EnrollmentsController < ApplicationController
   end
 
 
-  # enroll class group to course
   def enroll_class_group
     @course = Course.find(params[:id])
     @not_added_students = []
@@ -35,12 +33,13 @@ class Courses::EnrollmentsController < ApplicationController
       end
       @course.enroll_class_group(@class_group)
       respond_to do |format|
-        format.js { render 'enroll_class_group' }
+        format.js { render 'courses/enrollments/class_groups/enroll' }
       end
     else
       show_flash_error_for_enroll(@course,'No Class Group selected')
     end
   end
+
 
   def show_flash_error_for_enroll(respond_with_var,message)
     respond_with(respond_with_var) do |format|
