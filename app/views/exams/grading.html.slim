@@ -122,10 +122,11 @@ coffee:
       total = 0.0
       i = 0
       while i < nums.length
-        total += parseFloat(nums[i].innerText)
+        total += parseFloat $(nums[i]).text()
         i++
       return FixDigit total / nums.length, 2
 
+    console.log "CalcAllAve"
     i = 0
     while i < examInfos.length
       $(".total_points_average[exam_id='"+$(examInfos[i]).attr("exam_id")+"']").text CalculateAverage($(".total_points[exam_id='"+$(examInfos[i]).attr("exam_id")+"']"))
@@ -250,7 +251,6 @@ coffee:
     $("html").css "overflow-x", "hidden"
     $("html").css "overflow-y", "hidden"
 
-    console.log $(".btn-warning").length
     fixW = 303
     fixW += $(".btn-warning").length * 131
     if $(".exam_infos").length > 1
@@ -258,7 +258,6 @@ coffee:
       fixW += 302
     else
       fixW += $(".btn-inverse").length * 76
-    console.log fixW, $(".exam_grid")
     $(".exam_grid").width(fixW)
 
     if fixW > $(window).width() - 80
