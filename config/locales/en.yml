@@ -149,6 +149,7 @@ en:
     description: "Description"
     max_score: "Maximum score"
   exams:
+    exam: 'Exam'
     plural: "Exams"
     new: "New Exam"
     new_exam: "New Exam Contents"

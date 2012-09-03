@@ -160,6 +160,7 @@ ja:
   due_date: "提出日"
   exam_management: "試験管理"
   exams:
+    exam: '試験'
     plural: "試験"
     new: "新規試験"
     list: "試験一覧"
