@@ -12,7 +12,7 @@
       - if @syllabus.exams.any?
         = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
       - else
-        .alert.alert-danger
+        .alert.alert-danger.no-exam-msg
           = t('notice.no_exams')
 
 javascript:
