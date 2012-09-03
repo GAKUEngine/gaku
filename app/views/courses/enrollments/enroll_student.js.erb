@@ -1,0 +1,2 @@
+$('<%= escape_javascript(render :partial => "enrolled", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @course_enrollment.student}) %>').appendTo('#enrolled_students_grid tbody')
+$('#course_enrollment_student_id').val('');
