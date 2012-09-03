@@ -1,0 +1,1 @@
+require 'core/delegate_belongs_to'
