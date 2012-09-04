@@ -39,6 +39,7 @@ end
 group :development do
   gem 'sqlite3'
   gem 'annotate'
+  gem "rails-erd"
   gem 'hirb'
   gem 'awesome_print'
   gem 'highline'
