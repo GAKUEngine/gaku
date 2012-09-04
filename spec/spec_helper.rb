@@ -32,7 +32,7 @@ Spork.each_run do
   end
 
   GAKUEngine::Application.reload_routes!
-  Capybara.default_wait_time = 3 
+  Capybara.default_wait_time = 5 
 
   RSpec.configure do |config|
     config.mock_with :rspec
