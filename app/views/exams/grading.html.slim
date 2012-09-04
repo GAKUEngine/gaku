@@ -269,6 +269,12 @@ coffee:
     $('.exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3})
 
   -# main -----↓
+  TableFix()
+  SetExamInfos()
+  CalculateAllAverage()
+  CalculateDeviation()
+  CalculateGradeAndRank()
+  
   $('.edit_exam_portion_score').validationEngine()
 
   $(".fire_submit").blur (e) ->
@@ -282,9 +288,3 @@ coffee:
 
   $("#how-grade").change (e) ->
     CalculateGradeAndRank()
-
-  TableFix()
-  SetExamInfos()
-  CalculateAllAverage()
-  CalculateDeviation()
-  CalculateGradeAndRank()

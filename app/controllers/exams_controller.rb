@@ -80,6 +80,12 @@ class ExamsController < ApplicationController
   end
 
   def update_score
+    @course = Course.find(params[:course_id])
+    @students = @course.students #.select("id, surname, name")
+    puts "1------------------------------------------------------"
+    puts @students
+    puts "1------------------------------------------------------"
+    
     @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
     @exam_portion_score.score = params[:exam_portion_score][:score]
     if @exam_portion_score.save
@@ -107,7 +113,7 @@ class ExamsController < ApplicationController
 
   private
     def load_exam
-    	@exam = Exam.find(params[:id])
+      @exam = Exam.find(params[:id])
     end
 
     def load_before_show

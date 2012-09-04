@@ -3052,7 +3052,8 @@ button.close {
 .btn-danger.active,
 .btn-success.active,
 .btn-info.active,
-.btn-inverse.active {
+.btn-inverse.active,
+.btn-c1 {
   color: rgba(255, 255, 255, 0.75);
 }
 
@@ -3251,6 +3252,38 @@ button.close {
 .btn-inverse:active,
 .btn-inverse.active {
   background-color: #080808 \9;
+}
+
+.btn-c1 {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #747BD4;
+  *background-color: #636bce;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8288d8), to(#636bce));
+  background-image: -webkit-linear-gradient(top, #8288d8, #636bce);
+  background-image: -o-linear-gradient(top, #8288d8, #636bce);
+  background-image: linear-gradient(to bottom, #8288d8, #636bce);
+  background-image: -moz-linear-gradient(top, #8288d8, #636bce);
+  background-repeat: repeat-x;
+  border-color: #636bce #636bce #5a5fa6;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff8288d8', endColorstr='#ff636bce', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.btn-c1:hover,
+.btn-c1:active,
+.btn-c1.active,
+.btn-c1.disabled,
+.btn-c1[disabled] {
+  color: #ffffff;
+  background-color: #636bce;
+  *background-color: #6a72d1;
+}
+
+.btn-c1:active,
+.btn-c1.active {
+  background-color: #6a72d1 \9;
 }
 
 button.btn,
