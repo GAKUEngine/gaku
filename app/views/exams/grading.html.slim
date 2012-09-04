@@ -108,6 +108,9 @@
   # gradingArea = $(".exam_grid1").examGradingWidget()
 
 coffee:
+  $(document).ready ->
+    GAKUEngine.init()
+
   average = 0.0
   examInfos = []
 
