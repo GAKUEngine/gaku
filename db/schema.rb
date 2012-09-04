@@ -238,8 +238,9 @@ ActiveRecord::Schema.define(:version => 20120904031236) do
   end
 
   create_table "lessons", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "notes", :force => true do |t|

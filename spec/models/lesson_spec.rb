@@ -4,5 +4,7 @@ describe Lesson do
 
   context "validations" do 
   	it { should have_valid_factory(:lesson) }
+
+    it { should belong_to(:lesson_plan) }
   end
 end
