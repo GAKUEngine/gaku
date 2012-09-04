@@ -9,7 +9,7 @@
           .row-fluid
             .span8
               = guardian_form.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-            =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn", :style => "min-height:0px"
+            =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn"
 
 coffee:
   $("#guardian_cancel").click ->

@@ -21,9 +21,9 @@
       - if params[:action] == 'edit'
         .span6
           = course_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Show"), @course, :class => "span3 btn btn-success", :style => "min-height:0px"
-        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+        = link_to t("Show"), @course, :class => "span3 btn btn-success"
+        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"
       - else
         .span9
           = course_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"

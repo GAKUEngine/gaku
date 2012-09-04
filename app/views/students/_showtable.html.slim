@@ -85,11 +85,11 @@
 .row-fluid
   .span12.well
     .span4
-      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  {:id => 'create_contact', :class => "span12 btn btn-primary", :style => "min-height:0px", :remote => true}
+      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  {:id => 'create_contact', :class => "span12 btn btn-primary", :remote => true}
     .span4
-      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning", :style => "min-height:0px"
+      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning"
     .span4
-      = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
+      = link_to t("Back"), students_path, :class => "span12 btn"
 
 row-fluid
   .span12

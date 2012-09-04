@@ -98,6 +98,9 @@ td.vm-tr {
 }
 
 //bootstrap fix ----------
+.row-fluid a[class*='span']  {
+  min-height:0px;
+}
 hr {
   margin: 10px 0px;
 }
@@ -111,9 +114,6 @@ hr {
 .btn-group + .btn-group {
   margin-left: 0px;
 }
-// .btn.active, .btn:active {
-  // // background-color: lightGoldenrodYellow;
-// }
 .navbar .brand {
   padding: 7px 20px 7px;
 }
