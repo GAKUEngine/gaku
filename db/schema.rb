@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
     t.text     "description"
     t.integer  "attendancable_id"
     t.string   "attendancable_type"
+    t.integer  "student_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end

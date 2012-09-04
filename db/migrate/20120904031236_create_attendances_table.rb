@@ -5,6 +5,7 @@ class CreateAttendancesTable < ActiveRecord::Migration
   		t.text :description
   		t.integer :attendancable_id
   		t.string  :attendancable_type
+      t.references :student
   		
   		t.timestamps
   	end
