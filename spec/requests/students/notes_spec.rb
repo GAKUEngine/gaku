@@ -11,7 +11,6 @@ describe 'Note' do
 
   it "should add and show student note", :js => true do
     
-    click_link 'new_student_note_tab_link'
     click_link 'new_student_note_link'
 
     wait_until { page.has_content?('New Note') } 
@@ -29,7 +28,6 @@ describe 'Note' do
   end
 
   it "should not submit new note without filled validated fields", :js => true do 
-    click_link 'new_student_note_tab_link'
     click_link 'new_student_note_link'
 
     wait_until { page.has_content?('New Note') } 
@@ -45,7 +43,6 @@ describe 'Note' do
     end
 
     it "should edit a student note", :js => true do 
-      click_link 'new_student_note_tab_link'
       click_link 'new_student_note_link'
 
       wait_until { page.has_content?('New Note') } 
@@ -67,7 +64,6 @@ describe 'Note' do
     end
 
     it "should delete a student note", :js => true do
-      click_link 'new_student_note_tab_link'
       wait_until { page.has_content?('Notes') }
         
       tr_count = page.all('table.index tr').size
