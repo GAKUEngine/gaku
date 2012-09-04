@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
   create_table "attendances", :force => true do |t|
     t.string   "reason"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "attendancable_id"
+    t.string   "attendancable_type"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "class_group_enrollments", :force => true do |t|
