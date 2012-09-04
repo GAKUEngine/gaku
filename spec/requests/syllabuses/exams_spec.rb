@@ -22,18 +22,17 @@ describe 'Syllabus Exams' do
     it "should add and show exams", :js => true  do
       #required
       fill_in 'syllabus_exam_name', :with => 'Biology Exam'
-      fill_in 'syllabus_exam_weight', :with => '100'
       fill_in 'syllabus_exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
       click_button 'submit_button'
 
       wait_until { !page.find('#new_syllabus_exam_form').visible? }
       page.should have_content('Biology Exam')
-      page.should have_content('100')
       @syllabus.exams.count.should eql(1)
       page.should_not have_content("No Exams")
     end
 
     it 'should error if the required fields are empty', :js => true do 
+      fill_in 'syllabus_exam_exam_portions_attributes_0_name', :with => ''
       click_button 'submit_button'
       wait_until { 
                     page.should have_selector('div.syllabus_exam_nameformError') 

@@ -28,6 +28,7 @@ en:
     city: "City"
     address1: "Address 1"
     address2: "Address 2"
+    primary: "Primary address"
     state: "State"
     past: "Make past?"
     count: "Addresses count"
@@ -167,6 +168,7 @@ en:
     use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
+    exam_created: 'Exam successfully created'
   config:
     label: "Config"
     close: "Close"
