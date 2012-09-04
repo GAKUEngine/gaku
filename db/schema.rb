@@ -240,8 +240,11 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
   add_index "installs", ["reset_password_token"], :name => "index_installs_on_reset_password_token", :unique => true
 
   create_table "lesson_plans", :force => true do |t|
-    t.string "title"
-    t.text   "description"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "syllabus_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "lessons", :force => true do |t|
