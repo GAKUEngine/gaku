@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
   end
 
   create_table "assets", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "exam_portion_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "assignment_scores", :force => true do |t|

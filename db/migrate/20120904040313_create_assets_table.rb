@@ -1,6 +1,8 @@
 class CreateAssetsTable < ActiveRecord::Migration
   def change
   	create_table :assets do |t|
+  		t.references :exam_portion
+  		
   	  t.timestamps
   	end
   end

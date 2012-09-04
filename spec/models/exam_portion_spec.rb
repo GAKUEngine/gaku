@@ -26,6 +26,7 @@ describe ExamPortion do
     it { should belong_to(:exam) }
     it { should have_many(:exam_schedules) }
     it { should have_many(:exam_portion_scores) }
+    it { should have_many(:assets) }
     it { should belong_to(:grading_method) }
 
     it "should validate max_score is greater than 0" do
