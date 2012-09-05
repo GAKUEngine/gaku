@@ -5,6 +5,7 @@ describe 'ClassGroup Semesters' do
   
   before do
     @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
+    @semester = Factory(:semester)
     #within('ul#menu') { click_link "Class Management" }
     #within('ul#menu') { click_link "Class Listing" }
     visit class_group_path(@class_group)
@@ -31,9 +32,21 @@ describe 'ClassGroup Semesters' do
     @class_group.semesters.count.should == 1
   end
   context 'Class group with added semester' do
+    before do
+      @class_group.semesters << @semester
+      visit class_group_path(@class_group)
+    end
     pending 'should not add a semester if it is already added' do #need to be implemeted in the main logic
     end
-    pending 'should delete a semester from class group' do #need to be implemented in the main logic
+    it 'should delete a semester from class group' do
+      click_link 'class_group_semesters_tab_link'
+        
+      tr_count = page.all('table.index tr').size
+      click_link('delete_link') 
+      page.driver.browser.switch_to.alert.accept
+ 
+      wait_until { page.all('table.index tr').size == tr_count - 1 }
+      @class_group.semesters.count.should == 0
     end
   end
 
