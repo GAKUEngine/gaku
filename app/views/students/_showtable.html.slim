@@ -19,27 +19,27 @@
                 = t("none")
           - if @student.name_reading != ""
             tr
-              th.btn-success =t("phonetic_reading")
+              th.btn-c2 =t("phonetic_reading")
               td.vm
                 = @student.surname_reading + " " + @student.name_reading
           tr
-            th.btn-success =t("name")
+            th.btn-c2 =t("name")
             td.vm style="font-size:16pt"
               = @student.surname + " " + @student.name
           tr
-            th.btn-success =t("gender")
+            th.btn-c2 =t("gender")
             td = gender(@student)
           tr
-            th.btn-success =t("students.birth")
+            th.btn-c2 =t("students.birth")
             td =@student.birth_date
           tr
-            th.btn-warning =t("students.phone")
+            th.btn-c1 =t("students.phone")
             td =@student.phone
           tr
-            th.btn-warning =t("students.email")
+            th.btn-c1 =t("students.email")
             td =@student.email
           tr
-            th.btn-primary =t("students.admitted")
+            th.btn-c2 =t("students.admitted")
             td =@student.admitted
 
     .span3.well
