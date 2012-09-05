@@ -1,0 +1,3 @@
+td =semester.starting.strftime("%m/%d/%Y") + " - " + semester.ending.strftime("%m/%d/%Y")
+td =link_to t("edit"), edit_class_group_semester_path(@class_group, semester), :id => 'edit_link', :remote => true
+td =link_to t("delete"), class_group_semester_path(@class_group, semester), :id => 'delete_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'delete_link delete_semester'
