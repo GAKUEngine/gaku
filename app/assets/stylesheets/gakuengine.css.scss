@@ -9,6 +9,10 @@ html {
   width: 100%;
 }
 
+body {
+  padding-top: 55px;
+}
+
 @media (max-width: 768px) {
   /* Remove any padding from the body */
   body {
