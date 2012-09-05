@@ -24,6 +24,7 @@ gem 'app_config'
 gem 'seedbank'
 gem 'spreadsheet'
 gem 'roo' #TODO consider other options for roo?
+gem 'backbone-on-rails'
 
 group :production do
   gem 'unicorn' 

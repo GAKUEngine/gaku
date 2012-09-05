@@ -45,6 +45,8 @@ class Student < ActiveRecord::Base
   has_many :contacts
   has_many :notes
 
+  has_many :attendances
+
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                   :class_groups, :class_group_ids, :class_groups_attributes,
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 

@@ -56,8 +56,11 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
   create_table "attendances", :force => true do |t|
     t.string   "reason"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "attendancable_id"
+    t.string   "attendancable_type"
+    t.integer  "student_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "class_group_enrollments", :force => true do |t|
@@ -257,9 +260,8 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
     t.string   "title"
     t.text     "content"
     t.integer  "student_id"
-    t.integer  "lesson_plan_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "presets", :force => true do |t|
@@ -295,8 +297,8 @@ ActiveRecord::Schema.define(:version => 20120904040313) do
     t.string  "name"
     t.string  "abbr"
     t.string  "name_ascii"
-    t.integer "code"
     t.integer "country_numcode"
+    t.integer "code"
   end
 
   create_table "student_addresses", :force => true do |t|

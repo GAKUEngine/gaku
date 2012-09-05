@@ -1,6 +1,8 @@
 /= javascript_include_tag "exam_grading_widget"
-/= javascript_include_tag "jquery.tablefix"
-= javascript_include_tag "table_scroller"
+-# = stylesheet_link_tag "jquery.jscrollpane"
+-# = javascript_include_tag "jquery.mousewheel"
+-# = javascript_include_tag "jquery.jscrollpane.min"
+= javascript_include_tag "tablefix"
 #exam_grading_area
 .row-fluid
   .pull-left
@@ -108,6 +110,9 @@
   # gradingArea = $(".exam_grid1").examGradingWidget()
 
 coffee:
+  $(document).ready ->
+    GAKUEngine.init()
+
   average = 0.0
   examInfos = []
 
@@ -265,7 +270,7 @@ coffee:
     fixH = $(".exam_grid").height()
     if fixH > $(window).height() - $(".exam_grid").offset().top - 40
       fixH = $(window).height() - $(".exam_grid").offset().top - 40
-    $('.exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3});
+    $('.exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3})
 
   -# main -----↓
   TableFix()
@@ -273,7 +278,7 @@ coffee:
   CalculateAllAverage()
   CalculateDeviation()
   CalculateGradeAndRank()
-
+  
   $('.edit_exam_portion_score').validationEngine()
 
   $(".fire_submit").blur (e) ->
@@ -308,4 +313,3 @@ coffee:
       else true
 
     $('input.score_cell').keypress submitenter
-

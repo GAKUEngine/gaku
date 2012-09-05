@@ -5,7 +5,7 @@
       h4.h4-vm.guardians_count
         = @student.addresses.count != 0 ? t('guardians.list') + "（" + @student.guardians.count.to_s + "）" : t('guardians.list')
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('guardians.add')).html_safe, new_student_guardian_path(@student), :remote => true, :id => "new_student_guardian_link", :class => "btn btn-primary new_student_guardian", :style => "min-height:0px"
+      =link_to ("<i class='icon-white icon-plus'></i> " + t('guardians.add')).html_safe, new_student_guardian_path(@student), :remote => true, :id => "new_student_guardian_link", :class => "btn btn-primary new_student_guardian"
   .row-fluid
     .span12
       hr

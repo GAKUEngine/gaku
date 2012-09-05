@@ -19,27 +19,27 @@
                 = t("none")
           - if @student.name_reading != ""
             tr
-              th.btn-success =t("phonetic_reading")
+              th.btn-c2 =t("phonetic_reading")
               td.vm
                 = @student.surname_reading + " " + @student.name_reading
           tr
-            th.btn-success =t("name")
+            th.btn-c2 =t("name")
             td.vm style="font-size:16pt"
               = @student.surname + " " + @student.name
           tr
-            th.btn-success =t("gender")
+            th.btn-c2 =t("gender")
             td = gender(@student)
           tr
-            th.btn-success =t("students.birth")
+            th.btn-c2 =t("students.birth")
             td =@student.birth_date
           tr
-            th.btn-warning =t("students.phone")
+            th.btn-c1 =t("students.phone")
             td =@student.phone
           tr
-            th.btn-warning =t("students.email")
+            th.btn-c1 =t("students.email")
             td =@student.email
           tr
-            th.btn-primary =t("students.admitted")
+            th.btn-c2 =t("students.admitted")
             td =@student.admitted
 
     .span3.well
@@ -81,11 +81,11 @@
 .row-fluid
   .span12.well
     .span4
-      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  {:id => 'create_contact', :class => "span12 btn btn-primary", :style => "min-height:0px", :remote => true}
+      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  {:id => 'create_contact', :class => "span12 btn btn-primary", :remote => true}
     .span4
-      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning", :style => "min-height:0px"
+      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning"
     .span4
-      = link_to t("Back"), students_path, :class => "span12 btn", :style => "min-height:0px"
+      = link_to t("Back"), students_path, :class => "span12 btn"
 
 row-fluid
   .span12

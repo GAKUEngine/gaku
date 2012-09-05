@@ -21,6 +21,8 @@ class Exam < ActiveRecord::Base
   has_and_belongs_to_many :syllabuses
   belongs_to :grading_method
 
+  has_many :attendances, :as => :attendancable
+
   attr_accessible :name, :description, :weight, :use_weighting, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
