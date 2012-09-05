@@ -26,5 +26,7 @@
               td= course.students.count
               td 
                 = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, course, :id => 'show_link', :class => "mr-xs btn btn-mini btn-success"
+
                 = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_course_path(course), :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"
+                
                 = link_to ("<i class='icon-white icon-remove'></i>").html_safe, course, :id => 'delete_link', :class => 'btn btn-mini btn-danger', :data => {:confirm => t('confirm_delete')}, :method => :delete

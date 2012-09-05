@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829165008) do
+ActiveRecord::Schema.define(:version => 20120904040313) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20120829165008) do
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "assets", :force => true do |t|
+    t.integer  "exam_portion_id"
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "assignment_scores", :force => true do |t|
     t.integer  "score"
     t.integer  "student_id"
@@ -44,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20120829165008) do
     t.integer  "grading_method_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "attendances", :force => true do |t|
+    t.string   "reason"
+    t.text     "description"
+    t.integer  "attendancable_id"
+    t.string   "attendancable_type"
+    t.integer  "student_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "class_group_enrollments", :force => true do |t|
@@ -225,12 +242,27 @@ ActiveRecord::Schema.define(:version => 20120829165008) do
   add_index "installs", ["email"], :name => "index_installs_on_email", :unique => true
   add_index "installs", ["reset_password_token"], :name => "index_installs_on_reset_password_token", :unique => true
 
+  create_table "lesson_plans", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "syllabus_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "lessons", :force => true do |t|
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "notes", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "student_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "presets", :force => true do |t|
@@ -266,8 +298,8 @@ ActiveRecord::Schema.define(:version => 20120829165008) do
     t.string  "name"
     t.string  "abbr"
     t.string  "name_ascii"
-    t.integer "country_numcode"
     t.integer "code"
+    t.integer "country_numcode"
   end
 
   create_table "student_addresses", :force => true do |t|
@@ -280,19 +312,23 @@ ActiveRecord::Schema.define(:version => 20120829165008) do
 
   create_table "students", :force => true do |t|
     t.string   "name"
+    t.string   "middle_name"
     t.string   "surname"
-    t.string   "name_reading",         :default => ""
-    t.string   "surname_reading",      :default => ""
+    t.string   "name_reading",                 :default => ""
+    t.string   "surname_reading",              :default => ""
     t.boolean  "gender"
     t.string   "phone"
     t.string   "email"
     t.date     "birth_date"
     t.date     "admitted"
     t.date     "graduated"
+    t.string   "student_id_number"
+    t.string   "student_foreign_id_number"
+    t.string   "national_registration_number"
     t.integer  "user_id"
     t.integer  "faculty_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"

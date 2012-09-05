@@ -40,11 +40,11 @@
                   a data-toggle="tab" href="#exams" =t("exams.plural")
               .tab-content
                 #enrollments.tab-pane.active
-                  = render :partial => "courses/enrollments"
+                  = render :partial => "courses/enrollments/enrollments"
                 #assignments.tab-pane
-                  = render :partial => "courses/assignments"
+                  = render :partial => "courses/assignments/assignments"
                 #exams.tab-pane
-                  = render :partial => "courses/exams"
+                  = render :partial => "courses/exams/exams"
     .row-fluid
       .span12.well
         = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_course_path(@course), :class => "span9 btn btn-warning"

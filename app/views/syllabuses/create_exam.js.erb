@@ -4,4 +4,7 @@ $('#syllabus_exam_form form').each (function(){
 });
 $('#syllabus_exams table tbody').append('<%= escape_javascript(render :partial => "exam", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam => @syllabus.exams.last}) %>');
 $('#exams-count').html('<%= @syllabus.exams.count %>')
+$('.no-exam-msg').remove()
+$('.flash-error').html('<%= escape_javascript(render :partial => "shared/flash", :formats => [:html], :handlers => [:erb, :slim]) %>')
+
 

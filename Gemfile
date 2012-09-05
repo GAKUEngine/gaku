@@ -24,6 +24,7 @@ gem 'app_config'
 gem 'seedbank'
 gem 'spreadsheet'
 gem 'roo' #TODO consider other options for roo?
+gem 'backbone-on-rails'
 
 group :production do
   gem 'unicorn' 
@@ -39,6 +40,7 @@ end
 group :development do
   gem 'sqlite3'
   gem 'annotate'
+  gem "rails-erd"
   gem 'hirb'
   gem 'awesome_print'
   gem 'highline'

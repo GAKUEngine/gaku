@@ -7,7 +7,7 @@
             .row-fluid
               .span9
                 = ep_form.label t 'exam_portions.name'
-                = ep_form.text_field :name, :class => "validate[required] span12"
+                = ep_form.text_field :name, :class => "validate[required] span12", :value => t('exams.exam')
               .span3
                 = ep_form.label t 'exam_portions.weight'
                 = ep_form.number_field :weight, :class => "span12"

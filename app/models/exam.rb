@@ -21,12 +21,14 @@ class Exam < ActiveRecord::Base
   has_and_belongs_to_many :syllabuses
   belongs_to :grading_method
 
+  has_many :attendances, :as => :attendancable
+
   attr_accessible :name, :description, :weight, :use_weighting, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
 
   validates :name, :presence => true
-  validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
 
   after_create :build_default_exam_portion
 

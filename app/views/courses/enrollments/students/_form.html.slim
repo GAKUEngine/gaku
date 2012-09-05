@@ -1,0 +1,10 @@
+= form_for [@course, @new_course_enrollment], :html => {:id => "enroll_student_form"},:url => enroll_student_course_enrollments_path(@course) , :remote => true do |f|
+  = f.hidden_field :course_id, :value => @course.id
+  .row-fluid
+    .span4.well.mt-l style="margin-bottom:0px"
+      .row-fluid
+        = f.label :students
+        = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}, :class => "validate[required]"
+        
+      .row-fluid.mt-s
+        = f.submit t("courses.enroll_student"), :class => 'span12 btn btn-primary'
