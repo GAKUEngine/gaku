@@ -17,7 +17,7 @@
             th.btn-inverse =t 'student.name'
             th.btn-info style="width:61px" =t 'manage'
         tbody
-          =render :partial => 'class_groups/students/show', :collection => @class_group.class_group_enrollments, :as => 'enrollment'
+          =render :partial => 'class_groups/students/student', :collection => @class_group.class_group_enrollments, :as => 'enrollment'
           
 #add_class_group_student
 

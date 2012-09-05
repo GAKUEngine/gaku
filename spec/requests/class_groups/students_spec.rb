@@ -59,7 +59,7 @@ describe 'ClassGroup Students' do
         tr_count = page.all('table.index tr').size
         click_link('delete_link') 
         page.driver.browser.switch_to.alert.accept
-   
+        
         wait_until { page.all('table.index tr').size == tr_count - 1 }
         @class_group.students.count.should == 0
       end

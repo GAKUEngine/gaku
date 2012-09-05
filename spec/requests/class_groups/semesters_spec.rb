@@ -38,11 +38,12 @@ describe 'ClassGroup Semesters' do
     end
     pending 'should not add a semester if it is already added' do #need to be implemeted in the main logic
     end
-    it 'should delete a semester from class group' do
+    it 'should delete a semester from class group', :js => true do
       click_link 'class_group_semesters_tab_link'
         
       tr_count = page.all('table.index tr').size
       click_link('delete_link') 
+      
       page.driver.browser.switch_to.alert.accept
  
       wait_until { page.all('table.index tr').size == tr_count - 1 }
