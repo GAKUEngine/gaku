@@ -1,3 +1,5 @@
+.grading-container
+
 javascript:
   var examsForGrade = '#{@exams.to_json(:include => {:exam_portions => {:include => :exam_portion_scores}}).to_s.html_safe}'
   var course = '#{@course.to_json(:include => 'students').to_s.html_safe}'

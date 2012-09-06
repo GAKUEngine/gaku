@@ -9,4 +9,4 @@ class GAKUEngine.Routers.ExamsRouter extends Backbone.Router
 
 	index: ->
 		@tableView = new GAKUEngine.Views.TableView course: @course, exams: @exams
-		console.log @tableView.render().el
+		$('.grading-container').html @tableView.render().el
