@@ -107,6 +107,7 @@ class ExamsController < ApplicationController
 
       respond_to do |format|
           format.js { render 'update_score' }
+          format.js { render :json => @exam_portion_score}
         end
       end
   end
