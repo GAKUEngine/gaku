@@ -1,8 +1,11 @@
 javascript:
-  var examsForGrade = '#{@exams.to_json.to_s.html_safe}'
+  var examsForGrade = '#{@exams.to_json(:include => {:exam_portions => {:include => :exam_portion_scores}}).to_s.html_safe}'
+  var course = '#{@course.to_json(:include => 'students').to_s.html_safe}'
 coffee:
   $(document).ready ->
-    window.router = new GAKUEngine.Routers.ExamsRouter exams: $.parseJSON(examsForGrade)
+    window.router = new GAKUEngine.Routers.ExamsRouter 
+      exams: $.parseJSON(examsForGrade)
+      course: $.parseJSON(course)
     Backbone.history.start()
 
 

@@ -1,0 +1,8 @@
+<%= console.log @course %>
+<% for exam in @exams: %>
+	<% for exam_portion in exam.exam_portions : %>
+		<h1><%= exam_portion.name %></h1>
+	<% end %>
+<% end %>
+
+
