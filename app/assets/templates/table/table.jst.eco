@@ -5,7 +5,7 @@
 	 			<tr>
 	 				<th class='btn-primary' colspan='3'>Student@</td>
 					<% for exam in @exams: %>
-						<th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'> <%= exam.name %> Grading </th>
+						<th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'> <%= exam.name %> Grading@ </th>
 					<% end %>
 	 			</tr>
 	 			<tr>
@@ -24,11 +24,11 @@
                   <%= portion.max_score %>
           			</th>
           		<% end %>
-          		<th id='total_points_title' class='btn-inverse' style="width:65px">Total Point@ </th>
-          		<% if exam.use_weighting : %>
-          			<th id='weighting_total_title' class='btn-inverse' style="width:65px"> Weighting Total@ </td>
           		<% end %>
           	<% end %>
+          		<th id='total_points_title' class='btn-inverse' style="width:65px">Total Point@ </th>
+          		<% if exam.use_weighting : %>
+          			<td id='weighting_total_title' class='btn-inverse' style="width:65px"> Weighting Total@ </td>
           <% end %>
           <th id='grade_title' class='btn-inverse' style="width:65px">
             Grade@
@@ -41,13 +41,38 @@
 	 			</tr>
 	 		</thead>
 	 		<tbody>
+				<% for student in @course.students: %>
+					<tr class='student_<%= student.id %>'>
+						<td>class something</td>
+						<td>seat number</td>
+						<td><%= "#{student.surname} #{student.name}" %></td>
+						<% for exam in @exams: %>
+	          	<% for portion in exam.exam_portions: %>
+	          		<% for score in portion.exam_portion_scores: %>
+		          		<% if score.student_id == student.id : %>
+		          			<td>
+			          			<input type='number' value='<%= score.score %>'/>
+			          		</td>
+			          	<% end %>
+		          	<% end %>
+	          	<% end %>
+          	<% end %>	
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				<% end %> 
 		 		<tr class='total_row'>
 		 			<td colspan='3'></td>
           <% for exam in @exams: %>
-	          <th class='btn-primary' colspan="<%= exam.exam_portions.count %>"> Avarage@ </thead>
+	          <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"> Avarage@ </thead>
           	
           <% end %>
-
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
 		 		</tr>
 	 		</tbody>
 	 	</table>
