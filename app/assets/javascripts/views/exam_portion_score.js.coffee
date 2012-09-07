@@ -3,4 +3,4 @@ class GAKUEngine.Views.ExamPortionScore extends Backbone.View
 		@model.on 'change', @updateLayout, @
 
 	updateLayout:  ->
-		alert 'hello' 
+		alert @model.get('id')

@@ -85,6 +85,12 @@ class ExamsController < ApplicationController
     render "exams/grading"
   end
 
+  def calculations
+    respond_to do |format|
+      format.json {render :json => {:hello => :world}}
+    end
+  end
+
   def update_score
     @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
     @exam_portion_score.score = params[:exam_portion_score][:score]
