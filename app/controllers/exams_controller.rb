@@ -17,7 +17,7 @@ class ExamsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @exams}
+      format.json { render :json => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
     end
   end
 
@@ -32,6 +32,12 @@ class ExamsController < ApplicationController
   def new
     @exam = Exam.new
     @master_portion = @exam.exam_portions.new
+  end
+
+  def show
+    super do |format|
+      format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
+    end
   end
 
   def destroy

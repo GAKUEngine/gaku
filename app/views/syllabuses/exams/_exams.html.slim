@@ -10,7 +10,7 @@
         th.btn-info style="width:94px" =t 'manage'
     tbody
       - if @syllabus.exams.any?
-        = render :partial => 'exam', :collection => @syllabus.exams, :as => :exam
+        = render :partial => 'syllabuses/exams/exam', :collection => @syllabus.exams, :as => :exam
       - else
         .alert.alert-danger.no-exam-msg
           = t('notice.no_exams')

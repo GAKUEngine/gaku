@@ -15,8 +15,6 @@ GAKUEngine::Application.routes.draw do
     end
   end
 
-  #resources :semesters  
-
   resources :courses do
     resources :enrollments, :controller => 'courses/enrollments' do 
       post :enroll_class_group, :on => :member
@@ -28,17 +26,10 @@ GAKUEngine::Application.routes.draw do
       get :grading, :on => :collection
       put :update_score, :on => :member
     end
-
-    
-  end
-
-  resources :course_enrollments do
-    
   end
 
   resources :class_group_enrollments do
     collection do 
-      post :enroll_student
       get :filtered_students
       get :autocomplete_filtered_students
     end
@@ -47,12 +38,8 @@ GAKUEngine::Application.routes.draw do
   resources :exam_portion_scores
 
   resources :syllabuses do
-    member do
-      put :create_exam
-      put :create_assignment
-    end
-    resources :exams
-    resources :assignments
+    resources :assignments, :controller => 'syllabuses/assignments' 
+    resources :exams, :controller => 'syllabuses/exams'
   end
 
   resources :students do

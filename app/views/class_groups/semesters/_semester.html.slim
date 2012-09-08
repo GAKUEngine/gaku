@@ -1,0 +1,3 @@
+-unless semester.nil? or semester.new_record? or !semester
+	tr id="semester_#{semester.id}"
+	  = render 'shared/fields/semester_fields', :semester => semester

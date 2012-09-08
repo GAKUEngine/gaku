@@ -19,23 +19,6 @@ class SyllabusesController < ApplicationController
     end  
   end
 
-  def create_exam
-    exam = Exam.create(params[:syllabus][:exam])
-    if  @syllabus.exams << exam
-      flash.now[:notice] = t('exams.exam_created')
-      respond_to do |format|
-       format.js {render 'create_exam'}  
-      end
-    end  
-  end
-
-  def create_assignment
-    if @syllabus.update_attributes(params[:syllabus])
-      respond_to do |format|
-        format.js {render 'create_assignment'}  
-      end
-    end  
-  end
 
   private
     def load_syllabus 
