@@ -92,6 +92,8 @@ GAKUEngine::Application.routes.draw do
 
   resources :states
 
+  resources :course_groups
+
   root :to => 'home#index'
 
 end
