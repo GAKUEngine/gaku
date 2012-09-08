@@ -31,6 +31,8 @@
 //
 //= require .//gaku_engine
 
+//= reauire openjsgrid/grid
+
 // FIXME need fix
 // require_tree ../templates/
 // require_tree .//models
