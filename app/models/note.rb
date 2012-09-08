@@ -12,6 +12,7 @@
 
 class Note < ActiveRecord::Base
   belongs_to :student
+  belongs_to :lesson_plan
   
   attr_accessible :title, :content, :student_id
 end

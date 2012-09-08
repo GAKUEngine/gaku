@@ -19,6 +19,11 @@ describe State do
 
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:country) }
+
+    it { should allow_mass_assignment_of :name }
+    it { should allow_mass_assignment_of :name_ascii }
+    it { should allow_mass_assignment_of :abbr }
+    it { should allow_mass_assignment_of :code }
   end
 
   before(:all) do

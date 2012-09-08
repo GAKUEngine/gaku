@@ -26,3 +26,13 @@
 
 //= require jquery_validation_engine/jquery.validationEngine.js
 //= require jquery_validation_engine/languages/jquery.validationEngine-en.js
+//= require underscore
+//= require backbone
+//
+//= require .//gaku_engine
+
+//= require_tree .//templates
+//= require_tree .//models
+//= require_tree .//collections
+//= require_tree .//views
+//= require_tree .//routers

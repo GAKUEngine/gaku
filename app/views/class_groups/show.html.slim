@@ -28,7 +28,7 @@
                 =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
             li
               a#class_group_semesters_tab_link data-toggle="tab" href="#semesters"
-                =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+                =t("semesters.semesters")+"（ "+@class_group.semesters.count.to_s+" ）"
             li
               a#class_group_courses_tab_link data-toggle="tab" href="#courses"
                 = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
@@ -58,8 +58,8 @@
       
     .row-fluid
       .span12.well
-        = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :style => "min-height:0px"
-        = link_to t("Back"), class_groups_path, :class => "span6 btn", :style => "min-height:0px"
+        = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn"
+        = link_to t("Back"), class_groups_path, :class => "span6 btn"
 
 #modal_dialogs
 

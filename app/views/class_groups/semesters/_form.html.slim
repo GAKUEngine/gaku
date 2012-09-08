@@ -11,4 +11,11 @@
           = f.date_select :ending, :class => "span12"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
-        = f.submit t("semesters.save"), :id => 'submit_button', :class => "span12 btn btn-primary"
+        = f.submit t("semesters.save"), :id => 'submit_button', :class => "span6 btn btn-primary"
+        = link_to t("cancel"), "", :id => "semester_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+
+coffee:
+  $("#semester_cancel").click ->
+    $("#add_class_group_semester_link").show()
+    $("#add_class_group_semester").html("")
+    false    #prevent page from reloading

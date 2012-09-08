@@ -26,6 +26,7 @@ describe Exam do
     it { should have_many(:exam_portion_scores) }
     it { should have_and_belong_to_many(:syllabuses) } 
     it { should belong_to(:grading_method) }
+    it { should have_many(:attendances) } 
 
     it { should validate_presence_of(:name) }
 

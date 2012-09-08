@@ -5,6 +5,7 @@ class CreateNotesTable < ActiveRecord::Migration
       t.text     :content
 
       t.references :student
+      t.references :lesson_plan
 
       t.timestamps
     end 

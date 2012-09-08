@@ -10,11 +10,7 @@ html {
 }
 
 body {
-  line-height: 1.60;
-  letter-spacing: 0px;
-  border: 0px;
-  margin: 0px;
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 @media (max-width: 768px) {
@@ -98,6 +94,9 @@ td.vm-tr {
 }
 
 //bootstrap fix ----------
+.row-fluid a[class*='span']  {
+  min-height:0px;
+}
 hr {
   margin: 10px 0px;
 }
@@ -111,18 +110,15 @@ hr {
 .btn-group + .btn-group {
   margin-left: 0px;
 }
-// .btn.active, .btn:active {
-  // // background-color: lightGoldenrodYellow;
-// }
 .navbar .brand {
-  padding: 7px 20px 7px;
+  padding: 8px 20px 0px;
 }
 
 .navbar .nav > li > a {
   padding: 11px 10px 10px;
 }
-.navbar .btn-group {
-  padding: 6px 0px 6px 10px;
+.navbar .btn, .navbar .btn-group {
+margin-top: 7px;
 }
 
 .table {
