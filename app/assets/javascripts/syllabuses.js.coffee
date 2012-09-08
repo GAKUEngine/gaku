@@ -13,3 +13,6 @@ $ ->
 
   $('.delete_syllabus').live 'ajax:success', (evt, data, status, xhr) ->
  		$(this).closest('tr').remove();
+
+  $('.delete_exam').live 'ajax:success', ->
+    $(this).closest('tr').remove()

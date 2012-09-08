@@ -21,8 +21,8 @@ describe 'Syllabus Exams' do
 
     it "should add and show exams", :js => true  do
       #required
-      fill_in 'syllabus_exam_name', :with => 'Biology Exam'
-      fill_in 'syllabus_exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
+      fill_in 'exam_name', :with => 'Biology Exam'
+      fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
       click_button 'submit_button'
 
       wait_until { !page.find('#new_syllabus_exam_form').visible? }
@@ -32,11 +32,11 @@ describe 'Syllabus Exams' do
     end
 
     it 'should error if the required fields are empty', :js => true do 
-      fill_in 'syllabus_exam_exam_portions_attributes_0_name', :with => ''
+      fill_in 'exam_exam_portions_attributes_0_name', :with => ''
       click_button 'submit_button'
       wait_until { 
-                    page.should have_selector('div.syllabus_exam_nameformError') 
-                    page.should have_selector('div.syllabus_exam_exam_portions_attributes_0_nameformError') 
+                    page.should have_selector('div.exam_nameformError') 
+                    page.should have_selector('div.exam_exam_portions_attributes_0_nameformError') 
                   }
       @syllabus.exams.count.should eql(0)
     end 
@@ -73,7 +73,8 @@ describe 'Syllabus Exams' do
 
       click_link "delete_link" 
       page.driver.browser.switch_to.alert.accept
-
+      
+      sleep 5 
       wait_until { page.all('table.index tr').size == tr_count - 1 }
       @syllabus.exams.reload 
       @syllabus.exams.size.should eql(0)

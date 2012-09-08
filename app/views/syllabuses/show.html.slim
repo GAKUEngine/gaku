@@ -34,18 +34,19 @@
             .row-fluid
               .span12
                 hr
-            = render 'exams'
+            = render 'syllabuses/exams/exams'
         .row-fluid
           #syllabus_exam_form style='display:none;padding-top:10px'
-            =render 'exam_form'
+            =render 'syllabuses/exams/form'
         /.row-fluid
           #syllabus_assigmnents
-            = render 'assignments'
+            = render 'syllabuses/assignments/assignments'
           #new_assignment
-            = link_to t('assignments.new'), create_assignment_syllabus_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
+            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
           #syllabus_assignment_form*{ 'style' => 'display:none;'}
-            =render 'assignment_form'
+            =render 'syllabuses/assignments/form'
     .row-fluid
       .span12.well
         = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :id => 'syllabus_edit_btn', :style => "min-height:0px"
+
         = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

@@ -1,0 +1,59 @@
+= form_for [@syllabus, @exam], :html => {:id => "new_syllabus_exam_form"}, :remote => true do |exam_form|
+  - if exam_form.object.new_record?
+    .row-fluid
+      .span12.well
+        .row-fluid
+          .row-fluid
+            h4 = t('exams.new_exam')
+          .row-fluid
+            hr
+          .row-fluid
+            .span12.well
+              .row-fluid
+                .span9
+                  = exam_form.label :name, t("exams.name")
+                  = exam_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+              .row-fluid
+                .span6
+                  = exam_form.label :description, t("exams.description")
+                  = exam_form.text_area :description, :class => "span12", :size => "0x2"
+                .span6
+                  = exam_form.label :adjustments, t("exams.adjustments")
+                  = exam_form.text_area :adjustments, :class => "span12", :size => "0x2"
+              .row-fluid
+                .span12.form-inline
+                  = exam_form.check_box :use_weighting
+                  = exam_form.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
+  
+          .row-fluid
+            h4 = t('exam_portions.master')
+          .row-fluid
+            hr
+          .row-fluid
+            = exam_form.fields_for :exam_portions do |ep_form| 
+              - if ep_form.object.new_record?
+                .span12.well
+                  .row-fluid
+                    .span9
+                      = ep_form.label :name, t('exam_portions.name')
+                      = ep_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => t('exams.exam')
+                  .row-fluid
+                    .span6
+                      = ep_form.label :problem_count, t('exam_portions.problem_count')
+                      = ep_form.number_field :problem_count, :class => "validate[custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
+                    .span6
+                      = ep_form.label :max_score, t('exam_portions.max_score')
+                      = ep_form.number_field :max_score, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5", :value => 100
+                  .row-fluid
+                    .span6
+                      = ep_form.label :description, t('exam_portions.description')
+                      = ep_form.text_area :description, :class => "span12", :size => "0x2"
+                    .span6
+                      = ep_form.label :adjustments, t('exam_portions.adjustments')
+                      = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
+          .row-fluid
+            #submit_syllabus_exam
+              = exam_form.submit t('exams.add'), :id => 'submit_button', :class => "span12 btn btn-primary"
+
+coffee:
+  $('#new_syllabus_exam_form').validationEngine();

@@ -38,12 +38,8 @@ GAKUEngine::Application.routes.draw do
   resources :exam_portion_scores
 
   resources :syllabuses do
-    member do
-      put :create_exam
-      put :create_assignment
-    end
-    resources :exams
-    resources :assignments
+    resources :assignments, :controller => 'syllabuses/assignments' 
+    resources :exams, :controller => 'syllabuses/exams'
   end
 
   resources :students do
