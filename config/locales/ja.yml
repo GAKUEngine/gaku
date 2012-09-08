@@ -101,6 +101,8 @@ ja:
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
+  course_group:
+    course_groups: 'Course Groups'
   num_courses:
   add_course: "授業を追加する"
   course_enrollments:
