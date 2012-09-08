@@ -47,7 +47,8 @@ describe 'Syllabus Exams' do
     before do 
       @exam = Factory(:exam, :name => 'Astronomy Exam')
       @syllabus.exams << @exam
-      within('table.index tr:nth-child(2)') { click_link "show" }
+      #within('table.index tr:nth-child(2)') { click_link "show" }
+      visit syllabus_path(@syllabus)
     end
 
     it 'should edit exam' do 

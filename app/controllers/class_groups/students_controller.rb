@@ -42,7 +42,7 @@ class ClassGroups::StudentsController < ApplicationController
   end
 
    def destroy
-    @class_group_enrollment = ClassGroupEnrollment.find(params[:id])
+    @class_group_enrollment = ClassGroupEnrollment.find(params[:class_group_enrollment])
     @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
     @class_group_enrollment.destroy
     respond_to do |format|
