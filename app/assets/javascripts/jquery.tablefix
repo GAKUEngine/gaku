@@ -100,7 +100,7 @@
       div.width(options.width + ((if withWidth then 0 else 0)) + ((if withHeight then 0 else 0))).height options.height + ((if withWidth then 20 else 0)) + ((if withHeight then 0 else 0))
       if withWidth and withHeight
         div.height options.height
-        rowDiv.width bodyWidth - 20
+        rowDiv.width bodyWidth - 15
         colDiv.height bodyHeight - 20
         bodyDiv.width bodyWidth
         bodyDiv.height bodyHeight
