@@ -11,7 +11,6 @@ describe 'Contact' do
 
   it "should add and show student contact", :js => true do
     visit student_path(@student) 
-    click_link 'new_student_contact_tab_link'
     click_link 'new_student_contact_link'
 
     wait_until { page.has_content?('New Contact') } 
@@ -37,7 +36,6 @@ describe 'Contact' do
 
     it "should edit a student contact", :js => true do 
       visit student_path(@student)
-      click_link 'new_student_contact_tab_link'
       wait_until { page.has_content?('Contacts list') } 
       click_link "edit_link" 
       wait_until { find('#editContactModal').visible? } 
@@ -56,7 +54,6 @@ describe 'Contact' do
       #@student.save
       
       visit student_path(@student) 
-      click_link 'new_student_contact_tab_link'
       wait_until { page.has_content?('Contacts list') } 
      
       within('table.student_contact_table tr#contact_1 td.primary_contact') { page.should have_content('Primary')}
@@ -77,7 +74,6 @@ describe 'Contact' do
 
     it "should delete a student contact", :js => true do
       visit student_path(@student)
-      click_link 'new_student_contact_tab_link'
       wait_until { page.has_content?('Contacts list') } 
       
       tr_count = page.all('table.index tr').size

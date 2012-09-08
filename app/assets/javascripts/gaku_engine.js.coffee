@@ -3,7 +3,8 @@ window.GAKUEngine =
   Collections: {}
   Views: {}
   Routers: {}
-  init: -> #alert 'Hello from Backbone!'
-
-$(document).ready ->
-  GAKUEngine.init()
+  init: ->
+  	window.exam = new GAKUEngine.Models.Exam()
+  	window.exam.fetch()
+  	window.course = new GAKUEngine.Models.Course()
+  	window.course.fetch()
