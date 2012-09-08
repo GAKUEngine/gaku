@@ -1,6 +1,6 @@
 $("#class_group_enrollments table tbody").html('');
 <% @class_group.class_group_enrollments.each {|enrollment| %>
-  $('#class_group_enrollments table tbody').append('<%= escape_javascript(render :partial => "show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => enrollment}) %>');
+  $('#class_group_enrollments table tbody').append('<%= escape_javascript(render :partial => "student", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => enrollment}) %>');
 <% } %>
 
 $('#class_group_students_tab a').html('<%=t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）" %>');

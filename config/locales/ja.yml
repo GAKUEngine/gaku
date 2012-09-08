@@ -235,6 +235,7 @@ ja:
     edit: "Edit note"
   class: "クラス"
   semesters:
+    semesters: "Semesters"
     list: "学期リスト"
     starting:
     ending:

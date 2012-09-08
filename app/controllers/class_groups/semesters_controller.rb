@@ -6,21 +6,32 @@ class ClassGroups::SemestersController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  def destroy
-    destroy! :flash => !request.xhr?
-  end
-
+  before_filter :load_class_group, :only => [ :new, :create, :edit, :update, :destroy ]
+  
   def create
-  	super do |format|
-  		format.js { render 'create'}
-  	end
+    super do |format|
+      if @class_group.semesters << @semester
+        format.js { render 'create' }  
+      end
+    end 
   end
 
   def new
     @semester = Semester.new
-    @class_group =  ClassGroup.find(params[:class_group_id])
     render 'new'  
   end
 
+  def destroy
+    @semester = Semester.find(params[:id])
+    @semester.destroy
+    respond_to do |format|
+      format.js { render 'destroy' }
+    end
+  end
   
+  private 
+    def load_class_group
+      @class_group = ClassGroup.find(params[:class_group_id])
+    end
+
 end

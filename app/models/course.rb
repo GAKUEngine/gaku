@@ -18,6 +18,8 @@ class Course < ActiveRecord::Base
   belongs_to :syllabus
   belongs_to :class_group
 
+  has_and_belongs_to_many :course_groups
+
   accepts_nested_attributes_for :course_enrollments
 
   attr_accessible :code, :class_group_id, :syllabus_id 
