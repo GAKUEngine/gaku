@@ -1,0 +1,6 @@
+# added for backbone initial setup
+assets/templates
+assets/javascripts/models
+assets/javascripts/collections
+assets/javascripts/views
+assets/javascripts/routers
