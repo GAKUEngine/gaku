@@ -7,6 +7,13 @@ class CoursesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+
+  def show
+    super do |format|
+      format.json { render :json => @course.as_json(:include => 'students') }
+    end
+  end
+
   def destroy
     destroy! :flash => !request.xhr?
   end

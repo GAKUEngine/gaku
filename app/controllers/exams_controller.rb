@@ -17,7 +17,7 @@ class ExamsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @exams}
+      format.json { render :json => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
     end
   end
 
@@ -32,6 +32,12 @@ class ExamsController < ApplicationController
   def new
     @exam = Exam.new
     @master_portion = @exam.exam_portions.new
+  end
+
+  def show
+    super do |format|
+      format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
+    end
   end
 
   def destroy
@@ -79,7 +85,7 @@ class ExamsController < ApplicationController
     render "exams/grading"
   end
 
-  def update_score
+  def update_score    
     @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
     @exam_portion_score.score = params[:exam_portion_score][:score]
     if @exam_portion_score.save
@@ -107,7 +113,7 @@ class ExamsController < ApplicationController
 
   private
     def load_exam
-    	@exam = Exam.find(params[:id])
+      @exam = Exam.find(params[:id])
     end
 
     def load_before_show

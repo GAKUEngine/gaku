@@ -1,14 +1,24 @@
-ui.nav.pull-right
+ul.nav.pull-right
   - if user_signed_in?
     li.divider-vertical
     li
-      .btn-group
+      /.btn-group
         a.btn.btn-success.dropdown-toggle data-toggle="dropdown" href="#"
-          i.icon-user.icon-white
-          |  
-          | #{current_user.email}
-          |  
-          span.caret
+          i.icon-user.icon-white 
+          = " " + current_user.email + " "
+          b.caret
+        ul.dropdown-menu
+          li= link_to raw('<i class="icon-ban-circle"></i>' +" "+ t("devise.sign_out")), destroy_user_session_path, :method => :delete
+          li#options
+            a data-toggle="modal" href="#modal-options"
+              i.icon-certificate
+              = " "+t("config.label")
+      .btn-group
+        button.btn.btn-small.btn-success
+          i.icon-user.icon-white 
+          = " " + current_user.email + " "
+        button.btn.btn-small.btn-warning.dropdown-toggle data-toggle="dropdown"
+          span.caret style="border-top-color:white;border-bottom-color:white;"
         ul.dropdown-menu
           li= link_to raw('<i class="icon-ban-circle"></i>' +" "+ t("devise.sign_out")), destroy_user_session_path, :method => :delete
           li#options
