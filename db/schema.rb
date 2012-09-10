@@ -271,8 +271,9 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.string   "title"
     t.text     "content"
     t.integer  "student_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "presets", :force => true do |t|
@@ -308,8 +309,8 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.string  "name"
     t.string  "abbr"
     t.string  "name_ascii"
-    t.integer "country_numcode"
     t.integer "code"
+    t.integer "country_numcode"
   end
 
   create_table "student_addresses", :force => true do |t|
@@ -321,13 +322,13 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
   end
 
   create_table "students", :force => true do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.string   "middle_name"
-    t.string   "surname"
+    t.string   "encrypted_surname"
     t.string   "name_reading",                 :default => ""
     t.string   "surname_reading",              :default => ""
     t.boolean  "gender"
-    t.string   "phone"
+    t.string   "encrypted_phone"
     t.string   "email"
     t.date     "birth_date"
     t.date     "admitted"
