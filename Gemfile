@@ -15,7 +15,8 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
 
-gem 'devise', :git => "git://github.com/plataformatec/devise.git"
+#gem 'devise', :git => "git://github.com/plataformatec/devise.git"
+gem 'devise', '~> 2.1'
 gem 'devise-i18n'
 gem 'cancan'
 
