@@ -14,6 +14,7 @@ gem 'kendoui-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
+gem 'attr_encrypted'
 
 gem 'devise', :git => "git://github.com/plataformatec/devise.git"
 gem 'devise-i18n'
