@@ -6,8 +6,14 @@ class ClassGroups::CoursesController < ApplicationController
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
+  before_filter :load_class_group, :only => [ :new, :create, :edit, :update, :destroy ]
+
   def destroy
-    destroy! :flash => !request.xhr?
+    @course = Course.find(params[:id])
+    @course.destroy
+    respond_to do |format|
+      format.js { render 'destroy' }
+    end
   end
 
   def create
@@ -21,5 +27,11 @@ class ClassGroups::CoursesController < ApplicationController
     @class_group =  ClassGroup.find(params[:class_group_id])
     render 'new'  
   end
+
+  private 
+    def load_class_group
+      @class_group = ClassGroup.find(params[:class_group_id])
+    end
+
 
 end

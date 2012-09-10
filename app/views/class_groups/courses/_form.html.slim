@@ -6,4 +6,11 @@
         = f.text_field :code, :class => "span12 validate[required]"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
-        = f.submit t("courses.save"), :id => 'submit_button', :class => "span12 btn btn-primary"
+        = f.submit t("courses.save"), :id => 'submit_button', :class => "span6 btn btn-primary"
+        = link_to t("cancel"), "", :id => "course_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+
+coffee:
+  $("#course_cancel").click ->
+    $("#add_class_group_course_link").show()
+    $("#add_class_group_course").html('')
+    false    #prevent page from reloading
