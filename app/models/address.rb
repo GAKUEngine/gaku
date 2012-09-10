@@ -31,6 +31,13 @@ class Address < ActiveRecord::Base
 
   attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
 
+  attr_encrypted :title,      :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :address1,   :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :address2,   :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :city,       :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :zipcode,    :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :state_name, :key => 'vegb9er7gr5grg7r4r4gr3f'
+
   def self.default
     country = Country.find(Config[:default_country_numcode]) rescue Country.first
     new({:country => country}, :without_protection => true)
