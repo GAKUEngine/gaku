@@ -12,6 +12,16 @@ class StudentsController < ApplicationController
   
   def index
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
+    
+    @students_json = @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
+    i = 0
+    @students_json.each {|student|
+      student[:name] = @students[i].name
+      student[:surname] = @students[i].surname
+      student[:phone] = @students[i].phone
+      i += 1
+    }
+
 
     if params[:action] == "get_csv_template"
       get_csv_template
@@ -21,7 +31,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do 
-        render :json => @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget]) 
+        render :json => @students_json.as_json
       end  
       format.csv  { export_csv_index(@students) }
     end
