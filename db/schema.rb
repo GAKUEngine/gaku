@@ -118,15 +118,15 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
   add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
   add_index "course_enrollments", ["student_id"], :name => "index_course_enrollments_on_student_id"
 
+  create_table "course_group_enrollments", :force => true do |t|
+    t.integer "course_id"
+    t.integer "course_group_id"
+  end
+
   create_table "course_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "course_groups_courses", :force => true do |t|
-    t.integer "course_id"
-    t.integer "course_group_id"
   end
 
   create_table "courses", :force => true do |t|
