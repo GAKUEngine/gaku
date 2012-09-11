@@ -5,7 +5,7 @@ class GAKUEngine.Views.TableView extends Backbone.View
 		'submit .portion_score_update': 'updatePortion'
 
 	render: ->		
-		$(this.el).html @template(course: @options.course.toJSON(), exams: @options.exams.toJSON())
+		$(this.el).html @template(course: @options.course, exams: @options.exams, student_total_scores: @options.student_total_scores, avarage_scores: @options.avarage_scores, deviation: @options.deviation)
 		@
 
 	updatePortion: (event)->

@@ -1,13 +1,18 @@
 .grading-container
-
 javascript:
   var examsForGrade = '#{@exams.to_json(:include => {:exam_portions => {:include => :exam_portion_scores}}).to_s.html_safe}'
   var course = '#{@course.to_json(:include => 'students').to_s.html_safe}'
+  var student_total_scores = '#{@student_total_scores.to_json.to_s.html_safe}'
+  var avarage_scores = '#{@avarage_scores.to_json.to_s.html_safe}'
+  var deviation = '#{@deviation.to_json.to_s.html_safe}'
 coffee:
   $(document).ready ->
     window.router = new GAKUEngine.Routers.ExamsRouter 
       exams: $.parseJSON(examsForGrade)
       course: $.parseJSON(course)
+      student_total_scores: $.parseJSON(student_total_scores)
+      avarage_scores: $.parseJSON(avarage_scores)
+      deviation: $.parseJSON(deviation)
     Backbone.history.start()
 
 

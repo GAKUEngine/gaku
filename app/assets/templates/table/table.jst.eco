@@ -27,6 +27,7 @@
           		<% end %>
           	<% end %>
           		<th id='total_points_title' class='btn-inverse' style="width:65px">Total Point@ </th>
+          		<th class='btn-inverse'>Deviation</th>
           		<% if exam.use_weighting : %>
           			<td id='weighting_total_title' class='btn-inverse' style="width:65px"> Weighting Total@ </td>
           <% end %>
@@ -59,9 +60,17 @@
 			          	<% end %>
 		          	<% end %>
 	          	<% end %>
+						<td>
+							<% for key, value of @student_total_scores[student.id]: %>
+								<%= value %>
+							<% end %>
+						</td>
           	<% end %>	
-						<td></td>
-						<td></td>
+						<td>	
+							<% for key, value of @deviation[student.id]: %>
+								<%= value %>
+							<% end %>
+						</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -71,8 +80,10 @@
           <% for exam in @exams: %>
 	          <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"> Avarage@ </thead>
           	
+          	<td>
+          		<%= @avarage_scores[exam.id] %>
+          	</td>
           <% end %>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>

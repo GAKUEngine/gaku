@@ -61,6 +61,8 @@ class ExamsController < ApplicationController
 
     @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
     @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
+    @avarage_scores  = {}
+    @avarage_scores.default = 0.0
     @weighting_score = true
 
     @students.each do |student|
@@ -80,9 +82,47 @@ class ExamsController < ApplicationController
             end
           end
         end
+      end    
+    end
+    
+    # AVARAGE SCORE CALCULATION
+    @student_total_scores.each do |student_id, student_exam_score|
+      student_exam_score.each do |k, v|
+        @avarage_scores[k] += v / 2
       end
     end
-    render "exams/grading"
+
+    # VARIANCE CALCULATION FOR EXAM
+    variance = {}
+    variance.default = 0.0
+
+    @student_total_scores.each do |k, v|
+      v.each do |n, m|
+        variance[n] += ((m - @avarage_scores[n]) ** 2 / @students.count)   
+      end
+    end
+
+   
+    #STANDARD DEVIATION CALCULATION FOR EXAM
+    standard_deviation = {}
+    standard_deviation.default = 0.0
+    
+    variance.each do |k,v|
+      standard_deviation[k] = Math.sqrt(v)
+    end
+
+    #DEVIATION CALCULATION 
+    @deviation = Hash.new { |hash,key| hash[key] = {} }
+    @students.each do |student|
+      @exams.each do |exam|
+        @deviation[student.id][exam.id] = (((@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / (standard_deviation[exam.id]) * 10) + 50)
+      end
+    end
+
+    respond_to do |format|
+      format.json { render :json => {:total_weights => @student_total_scores }}
+      format.html { render "exams/grading" }
+    end
   end
 
   def calculations
