@@ -6,7 +6,6 @@ describe 'Contact' do
   before do
     @student = Factory(:student)
     @contact_type = Factory(:contact_type, :name => 'email')
-    #within('ul#menu') { click_link "Students" }
   end
 
   it "should add and show student contact", :js => true do
@@ -23,7 +22,7 @@ describe 'Contact' do
     page.should have_selector('a', href: "/students/1/contacts/1/edit")
     page.should have_content("The contact data")
     page.should have_content("The contact details")
-    @student.contacts.size.should == 1
+    @student.contacts.size.should eql(1)
   end
 
 
@@ -40,18 +39,16 @@ describe 'Contact' do
       click_link "edit_link" 
       wait_until { find('#editContactModal').visible? } 
 
-      fill_in 'contact_data',    :with => 'example@genshin.org'
+      fill_in 'contact_data', :with => 'example@genshin.org'
       click_button 'submit_button'
 
       wait_until { !page.find('#editContactModal').visible? }
-
       page.should have_content('example@genshin.org')
     end
 
     it "should set contact as primary", :js => true do 
       contact2 = Factory(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
       @student.contacts << contact2
-      #@student.save
       
       visit student_path(@student) 
       wait_until { page.has_content?('Contacts list') } 
@@ -78,13 +75,13 @@ describe 'Contact' do
       
       tr_count = page.all('table.index tr').size
       page.should have_content(@contact.data)
-      @student.contacts.size.should == 1
+      @student.contacts.size.should eql(1)
 
       click_link 'delete_link' 
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table.index tr').size == tr_count - 1 }
-      @student.guardians.size.should == 0
+      @student.guardians.size.should eql(0)
       page.should_not have_content(@contact.data)
     end
   end
