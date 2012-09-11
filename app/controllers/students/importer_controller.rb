@@ -2,7 +2,7 @@
 
 class Students::ImporterController < ApplicationController
   include SheetHelper
-  require 'importers/school_station'
+  #require 'importers/school_station'
   require 'spreadsheet'
   require 'roo'
 
