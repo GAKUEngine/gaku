@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907130441) do
+ActiveRecord::Schema.define(:version => 20120911001159) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -56,12 +56,29 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
   create_table "attendances", :force => true do |t|
     t.string   "reason"
     t.text     "description"
-    t.integer  "attendancable_id"
-    t.string   "attendancable_type"
-    t.integer  "student_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  create_table "class_group_course_enrollments", :force => true do |t|
+    t.integer  "class_group_id"
+    t.integer  "course_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "class_group_course_enrollments", ["class_group_id"], :name => "index_class_group_course_enrollments_on_class_group_id"
+  add_index "class_group_course_enrollments", ["course_id"], :name => "index_class_group_course_enrollments_on_course_id"
+
+  create_table "class_group_courses", :force => true do |t|
+    t.integer  "class_group_id"
+    t.integer  "course_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "class_group_courses", ["class_group_id"], :name => "index_class_group_courses_on_class_group_id"
+  add_index "class_group_courses", ["course_id"], :name => "index_class_group_courses_on_course_id"
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
@@ -271,9 +288,8 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.string   "title"
     t.text     "content"
     t.integer  "student_id"
-    t.integer  "lesson_plan_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "presets", :force => true do |t|
@@ -309,8 +325,8 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.string  "name"
     t.string  "abbr"
     t.string  "name_ascii"
-    t.integer "code"
     t.integer "country_numcode"
+    t.integer "code"
   end
 
   create_table "student_addresses", :force => true do |t|
