@@ -1,9 +1,9 @@
-= form_for [@class_group, @course], { :remote => true } do |f|
+= form_for [@class_group, @class_group_course_enrollment], { :remote => true } do |f|
   .row-fluid
     .span12.well
       .row-fluid
-        = f.label :code, t("courses.code"), :class => "control-label"
-        = f.text_field :code, :class => "span12 validate[required]"
+        = f.label :course_code, t("courses.code"), :class => "control-label"
+        = f.select :course_id, Course.all.collect { |c| ["#{c.code}", c.id] }, {:prompt => t('courses.choose_course')}, :class => "span12 validate[required]"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
         = f.submit t("courses.save"), :id => 'submit_button', :class => "span6 btn btn-primary"

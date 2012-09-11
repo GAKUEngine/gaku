@@ -1,4 +1,5 @@
-tr id="course_#{course.id}"
-	td= course.code
-	td= link_to "Delete", class_group_course_path(:class_group_id => course.class_group_id, :id =>course.id), :id => 'delete_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'btn btn-mini btn-danger delete_link'
+-unless !enrollment or enrollment.nil? or enrollment.new_record? 
+	tr id="enrollment_#{enrollment.id}"
+		td= enrollment.course.code
+		td= link_to "Delete", class_group_class_group_course_enrollment_path(:class_group_id => enrollment.class_group_id, :id =>enrollment.id), :id => 'delete_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'btn btn-mini btn-danger delete_link'
   

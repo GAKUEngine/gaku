@@ -21,7 +21,8 @@ describe Course do
     it { should have_many(:course_enrollments) }
     it { should have_many(:exam_schedules) }
     it { should belong_to(:syllabus) }
-    it { should belong_to(:class_group) }
+    it { should have_many(:class_groups) }
+    it { should have_many(:class_group_course_enrollments) }
   end
   
   context "enroll_class_group" do
