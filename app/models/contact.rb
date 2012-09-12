@@ -30,13 +30,13 @@ class Contact < ActiveRecord::Base
   def make_primary_student
     self.update_attributes(:is_primary => true)
     user_contacts = Contact.where(:student_id => self.student_id)
-    user_contacts.update_all('is_primary = "false"', "id <> #{self.id}")
+    user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
    end
 
    def make_primary_guardian
     self.update_attributes(:is_primary => true)
     user_contacts = Contact.where(:guardian_id => self.guardian_id)
-    user_contacts.update_all('is_primary = "false"', "id <> #{self.id}")
+    user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
    end
 
 
