@@ -4,7 +4,7 @@ class ClassGroups::StudentsController < ApplicationController
 
   inherit_resources
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  actions :index, :show, :new, :create, :update, :edit, :destroy, :delete
 
   def create
   	super do |format|

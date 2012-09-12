@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: exam_scores
-#
-#  id         :integer          not null, primary key
-#  score      :float
-#  comment    :text
-#  exam_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 require 'spec_helper'
 
 describe ExamScore do

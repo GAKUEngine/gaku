@@ -6,11 +6,11 @@ describe 'Course' do
   before do
     @student = Factory(:student)
     @course = Factory(:course, :code => 'fall2050')
-    #within('ul#menu') { click_link "Students" }
     visit student_path(@student) 
   end
 
-  it "should add and show student course", :js => true do
+  it "should add and show student course", :js => true do\
+    @student.courses.size.should eql(0)
     click_link 'new_student_course_tab_link'
     click_link 'new_student_course_link'
 
@@ -18,9 +18,10 @@ describe 'Course' do
 
     select "fall2050", :from => 'course_enrollment_course_id'
     click_button "Create enrollment"
-
+    
+    sleep 1 #TODO Remove sleep 
     page.should have_content("fall2050")
-    #@student.courses.size.should == 1
+    @student.courses.size.should eql(1)
   end
 
   it "should delete a student course", :js => true do
@@ -32,13 +33,13 @@ describe 'Course' do
 
     tr_count = page.all('table.index tr').size
     page.should have_content(@course.code)
-    @student.courses.size.should == 1
+    @student.courses.size.should eql(1)
 
     click_link 'delete_link' 
     page.driver.browser.switch_to.alert.accept
 
     wait_until { page.all('table.index tr').size == tr_count - 1 }
-    @student.courses.size.should == 0
+    @student.courses.size.should eql(0)
     page.should_not have_content(@course.code)
   end
   

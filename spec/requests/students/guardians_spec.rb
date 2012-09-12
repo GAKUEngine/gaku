@@ -5,16 +5,15 @@ describe 'Guardian' do
 
   before do
     @student = Factory(:student)
-    #within('ul#menu') { click_link "Students"}
     visit student_path(@student)
   end
 
   it "should add and show student guardian", :js => true do
+    @student.guardians.size.should eql(0)
     click_link 'new_student_guardian_tab_link'
     click_link 'new_student_guardian_link'
 
     wait_until { page.has_content?('Relationship') } 
-
     #required 
     fill_in "guardian_surname", :with => "Doe"
     fill_in "guardian_name", :with => "John"
@@ -25,8 +24,8 @@ describe 'Guardian' do
 
     click_button "Save Guardian"
 
+    sleep 1  #TODO Remove sleep
     page.should have_selector('a', href: "/students/1/guardians/1/edit")
-
     #required
     page.should have_content("Doe")
     page.should have_content("John")
@@ -34,8 +33,8 @@ describe 'Guardian' do
     page.should have_content("Phonetic Doe")
     page.should have_content("Phonetic John")
     page.should have_content("Father")
-    @student.guardians.size.should == 1
-
+    @student.reload
+    @student.guardians.size.should eql(1)
   end
 
   context "edit and delete" do 
@@ -56,28 +55,24 @@ describe 'Guardian' do
 
       fill_in 'guardian_name',    :with => 'Edited guardian name'
       fill_in 'guardian_surname', :with => 'Edited guardian surname'
-
       click_button 'submit_button'
-      #click_link 'cancel_link'
-      wait_until { !page.find('#editGuardianModal').visible? }
 
+      wait_until { !page.find('#editGuardianModal').visible? }
       page.should have_content('Edited guardian name')
       page.should have_content('Edited guardian surname')
     end
 
     it "should delete a student guardian", :js => true do
-      #page.all('table.index tr').size.should == 2
+      @student.guardians.size.should eql(1)
       page.should have_content(@guardian.name)
-      #@student.guardians.size.should == 1
 
       click_link 'delete_link' 
       page.driver.browser.switch_to.alert.accept
-      #FIXME Make a real check, no sleep 
-      sleep 1
-      #page.all('table.index tr').size.should == 2
-      #@student.guardians.size.should == 0
+      
       page.should_not have_content(@guardian.name)
+      @student.reload
+      @student.guardians.size.should eql(0)
     end
-
   end
+  
 end

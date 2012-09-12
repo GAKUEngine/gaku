@@ -1,0 +1,32 @@
+- model = @class_group_enrollment || ClassGroupEnrollment.new
+- model_class = model.class
+.modal.hide#new_class_enrollment wmode="opaque" style="display: block;padding: 41px;width: auto;height: auto;"
+  =render 'student_chooser', :select_mode => 'multiple'
+
+  =form_for @class_group_enrollment, :url => enroll_student_class_group_students_path, :remote => true do |f|
+    = f.hidden_field :class_group_id, :value => @class_group.id
+    = hidden_field_tag "student_ids", "", :id => 'student_ids'
+    br
+    = f.submit "Add to class", :id => 'submit_button', :class => 'span3 btn btn btn-primary'
+  = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_link', :'data-dismiss' => "modal"
+
+= javascript_include_tag "class_groups/student_chooser"
+
+coffee:
+  $('#grid').studentChooser()
+
+  student_ids = []
+  $("input:checkbox.student_check").live 'click', -> 
+    checkedStatus = this.checked
+    if checkedStatus == true
+      student_ids.push(this.value);
+    else
+      indexOfStudent = student_ids.indexOf(this.id)
+      student_ids.splice(indexOfStudent, 1)
+    $('input#student_ids').val(student_ids)
+
+/ added temporary to shorten the table
+css:
+  div#grid {
+    height:auto!important;
+  }

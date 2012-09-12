@@ -5,7 +5,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :class_groups do 
     resources :semesters, :controller => 'class_groups/semesters'
-    resources :courses, :controller => 'class_groups/courses'
+    resources :class_group_course_enrollments, :controller => 'class_groups/courses'
     resources :students, :controller => 'class_groups/students' do 
       collection do 
         post :enroll_student
@@ -25,6 +25,7 @@ GAKUEngine::Application.routes.draw do
       get :grading, :on => :member
       get :grading, :on => :collection
       put :update_score, :on => :member
+      get :calculations, :on => :member
     end
   end
 

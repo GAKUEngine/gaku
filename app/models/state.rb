@@ -6,6 +6,7 @@
 #  name            :string(255)
 #  abbr            :string(255)
 #  name_ascii      :string(255)
+#  code            :integer
 #  country_numcode :integer
 #
 

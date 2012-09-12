@@ -2,20 +2,20 @@
 #
 # Table name: addresses
 #
-#  id         :integer          not null, primary key
-#  address1   :string(255)
-#  address2   :string(255)
-#  city       :string(255)
-#  zipcode    :string(255)
-#  state      :string(255)
-#  state_name :string(255)
-#  past       :boolean          default(FALSE)
-#  country_id :integer
-#  state_id   :integer
-#  faculty_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  title      :string(255)
+#  id                   :integer          not null, primary key
+#  encrypted_address1   :string(255)
+#  encrypted_address2   :string(255)
+#  encrypted_city       :string(255)
+#  encrypted_zipcode    :string(255)
+#  encrypted_state_name :string(255)
+#  encrypted_title      :string(255)
+#  state                :string(255)
+#  past                 :boolean          default(FALSE)
+#  country_id           :integer
+#  state_id             :integer
+#  faculty_id           :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 
 class Address < ActiveRecord::Base 
@@ -30,6 +30,13 @@ class Address < ActiveRecord::Base
   validates :address1, :city, :country, :presence => true
 
   attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
+
+  attr_encrypted :title,      :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :address1,   :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :address2,   :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :city,       :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :zipcode,    :key => 'vegb9er7gr5grg7r4r4gr3f'
+  attr_encrypted :state_name, :key => 'vegb9er7gr5grg7r4r4gr3f'
 
   def self.default
     country = Country.find(Config[:default_country_numcode]) rescue Country.first

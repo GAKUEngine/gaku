@@ -3033,6 +3033,10 @@ button.close {
   line-height: 16px;
 }
 
+.btn-mini [class^="icon-"] {
+  margin-top: 0;
+}
+
 .btn-block {
   display: block;
   width: 100%;
