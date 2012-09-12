@@ -88,7 +88,7 @@ class ExamsController < ApplicationController
     # AVARAGE SCORE CALCULATION
     @student_total_scores.each do |student_id, student_exam_score|
       student_exam_score.each do |k, v|
-        @avarage_scores[k] += v / 2
+        @avarage_scores[k] += v / @students.length
       end
     end
 
@@ -115,7 +115,12 @@ class ExamsController < ApplicationController
     @deviation = Hash.new { |hash,key| hash[key] = {} }
     @students.each do |student|
       @exams.each do |exam|
-        @deviation[student.id][exam.id] = (((@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / (standard_deviation[exam.id]) * 10) + 50)
+        deviation = (((@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / (standard_deviation[exam.id]) * 10) + 50)
+        if deviation.nan?
+          @deviation[student.id][exam.id] = 0
+        else 
+          @deviation[student.id][exam.id] = deviation
+        end
       end
     end
 

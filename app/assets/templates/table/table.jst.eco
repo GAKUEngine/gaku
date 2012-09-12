@@ -52,7 +52,7 @@
 	          		<% for score in portion.exam_portion_scores: %>
 		          		<% if score.student_id == student.id : %>
 		          			<td>
-		          				<form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post">
+		          				<form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
 												<input name='portion_score' type='number' value='<%= score.score %>'/>
 											</form>
 			          		</td>
