@@ -5,12 +5,7 @@ describe 'ClassGroup Courses' do
   
   before do
     @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-<<<<<<< HEAD
-=======
-    #within('ul#menu') { click_link "Class Management" }
-    #within('ul#menu') { click_link "Class Listing" }
     @course = Factory(:course)
->>>>>>> 23fcbbecbc02463c50823a8beacded657511e923
     visit class_group_path(@class_group)
     click_link 'class_group_courses_tab_link'
   end
@@ -21,12 +16,8 @@ describe 'ClassGroup Courses' do
     select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
     click_button 'submit_button'
 
-<<<<<<< HEAD
-    page.should have_content ('Biology321') #TODO test the redirect from class group to a course
-    
-=======
     page.should have_content ("#{@course.code}")
->>>>>>> 23fcbbecbc02463c50823a8beacded657511e923
+
     visit class_group_path(@class_group)
     click_link 'class_group_courses_tab_link'
     within('.tab-content') { page.should have_content "#{@course.code}"}
