@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907130441) do
+ActiveRecord::Schema.define(:version => 20120911001159) do
 
   create_table "addresses", :force => true do |t|
     t.string   "encrypted_address1"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  create_table "class_group_course_enrollments", :force => true do |t|
+    t.integer  "class_group_id"
+    t.integer  "course_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "class_group_course_enrollments", ["class_group_id"], :name => "index_class_group_course_enrollments_on_class_group_id"
+  add_index "class_group_course_enrollments", ["course_id"], :name => "index_class_group_course_enrollments_on_course_id"
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
