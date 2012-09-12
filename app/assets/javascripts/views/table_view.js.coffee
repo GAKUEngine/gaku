@@ -13,5 +13,5 @@ class GAKUEngine.Views.TableView extends Backbone.View
 		@exam_score = new GAKUEngine.Models.ExamPortionScore 
 												urlLink: event.target.action
 												score: event.currentTarget[0].value
-		
+												baseURI: event.target.baseURI
 		
