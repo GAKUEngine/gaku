@@ -24,13 +24,12 @@
                 .span12.form-inline
                   = exam_form.check_box :use_weighting
                   = exam_form.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
-  
           .row-fluid
             h4 = t('exam_portions.master')
           .row-fluid
             hr
           .row-fluid
-            = exam_form.fields_for :exam_portions do |ep_form| 
+            = exam_form.fields_for :exam_portions do |ep_form|
               - if ep_form.object.new_record?
                 .span12.well
                   .row-fluid
