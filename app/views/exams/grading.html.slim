@@ -7,7 +7,7 @@ javascript:
   var deviation = '#{@deviation.to_json.to_s.html_safe}'
 coffee:
   $(document).ready ->
-    window.router = new GAKUEngine.Routers.ExamsRouter 
+    router = new GAKUEngine.Routers.ExamsRouter 
       exams: $.parseJSON(examsForGrade)
       course: $.parseJSON(course)
       student_total_scores: $.parseJSON(student_total_scores)
