@@ -6,7 +6,6 @@ describe 'Student' do
   before do
     @student = Factory(:student)
     visit students_path
-    #within('ul#menu') { click_link "Students" }
   end
 
   context "listing" do
@@ -17,7 +16,7 @@ describe 'Student' do
     it "should have autocomplete while searching", :js => true do
       within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
       fill_in 'student_search', :with => "#{@student.name}"
-      page.all('#students_grid_table tr').size.should==2
+      page.all('#students_grid_table tr').size.should eql(2)
       within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
     end
   end

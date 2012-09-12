@@ -4,8 +4,6 @@ describe 'Guardian Contacts' do
   stub_authorization!
 
   before(:each) do
-    #within('ul#menu') { click_link "Students" }
-
     @student = Factory(:student)
     @guardian = Factory(:guardian)
     @student.guardians << @guardian
@@ -18,9 +16,10 @@ describe 'Guardian Contacts' do
   end
 
   it "should add and show contact to a student guardian", :js => true do 
-    click_link "add_student_guardian_contact_link" 
-    wait_until { find('#newGuardianContactModal').visible? } 
+    @student.guardians.first.contacts.count.should eql(0)
+    click_link "add_student_guardian_contact_link"
 
+    wait_until { find('#newGuardianContactModal').visible? } 
     select 'mobile', :from => 'contact_contact_type_id'
     fill_in 'contact_data',    :with => '777'
 
@@ -30,7 +29,7 @@ describe 'Guardian Contacts' do
     click_link 'show_link'
     page.should have_content 'mobile'
     page.should have_content '777'
-    @student.guardians.first.contacts.count.should == 1
+    @student.guardians.first.contacts.count.should eql(1)
   end
 
   context 'edit, delete and set primary' do 
@@ -51,7 +50,7 @@ describe 'Guardian Contacts' do
 
       fill_in 'contact_data', :with => '777'
       click_button 'submit_button'
-      sleep 10
+      sleep 1 #TODO Remove sleep
       page.should have_content '777'
       page.should_not have_content '321'
     end
@@ -59,13 +58,13 @@ describe 'Guardian Contacts' do
     it 'should delete a contact for student guardian' do
       click_link 'show_link'
       page.should have_content '321'
-      @student.guardians.first.contacts.size.should == 2
+      @student.guardians.first.contacts.size.should eql(2)
       tr_count = page.all('table.index tr').size
 
       within('table.guardian_contact_table tr#contact_2') { click_link 'delete_link' }
 
       wait_until { page.all('table.index tr').size == tr_count - 1 } 
-      @student.guardians.first.contacts.size.should == 1
+      @student.guardians.first.contacts.size.should eql(1)
       page.should_not have_content '321'
     end
 

@@ -10,6 +10,7 @@ describe 'Contact' do
 
   it "should add and show student contact", :js => true do
     visit student_path(@student) 
+    @student.contacts.size.should eql(0)
     click_link 'new_student_contact_link'
 
     wait_until { page.has_content?('New Contact') } 
@@ -18,16 +19,17 @@ describe 'Contact' do
     fill_in "contact_data", :with => "The contact data"
     fill_in "contact_details", :with => "The contact details"
     click_button "Save Contact"
-
+    
+    sleep 1  #TODO Remove sleep
     page.should have_selector('a', href: "/students/1/contacts/1/edit")
     page.should have_content("The contact data")
     page.should have_content("The contact details")
+    @student.reload
     @student.contacts.size.should eql(1)
   end
 
 
   context "edit, delete, set primary" do 
-
     before(:each) do 
       @contact = Factory(:contact, :contact_type => @contact_type)
       @student.contacts << @contact 

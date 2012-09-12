@@ -5,7 +5,6 @@ describe "Student Images" do
   
   before do
     @student = Factory(:student)
-    #within('ul#menu') { click_link "Students" }
     visit student_path(@student)
   end
 
@@ -18,4 +17,5 @@ describe "Student Images" do
       page.should have_content("Picture successfully uploaded")
     end
   end
+  
 end

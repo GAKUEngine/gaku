@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: presets
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  content    :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Preset < ActiveRecord::Base
   attr_accessible :content, :name
 

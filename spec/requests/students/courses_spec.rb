@@ -9,7 +9,8 @@ describe 'Course' do
     visit student_path(@student) 
   end
 
-  it "should add and show student course", :js => true do
+  it "should add and show student course", :js => true do\
+    @student.courses.size.should eql(0)
     click_link 'new_student_course_tab_link'
     click_link 'new_student_course_link'
 
@@ -18,7 +19,7 @@ describe 'Course' do
     select "fall2050", :from => 'course_enrollment_course_id'
     click_button "Create enrollment"
     
-    sleep 1
+    sleep 1 #TODO Remove sleep 
     page.should have_content("fall2050")
     @student.courses.size.should eql(1)
   end

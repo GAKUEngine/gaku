@@ -5,8 +5,6 @@ describe 'ClassGroups' do
 
   before do
     visit class_groups_path
-    #within('ul#menu') { click_link "Class Management" }
-    #within('ul#menu') { click_link "Class Listing" }
   end
 
   it 'should create and show class group', :js => true do
@@ -14,16 +12,15 @@ describe 'ClassGroups' do
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
     fill_in 'class_group_homeroom', :with => 'room#7'
-
     click_button 'submit_button'
 
     page.should have_content '7'
     page.should have_content 'Awesome class group'
     page.should have_content 'room#7'
+    #TODO Write check for model creation
   end
 
   context 'edit, delete' do
-
     before do 
       @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
       visit class_groups_path
@@ -49,6 +46,7 @@ describe 'ClassGroups' do
     end
 
     it 'should delete class group', :js => true do 
+      ClassGroup.count.should eql(1)
       tr_count = page.all('table.index tr').size
       page.should have_content(@class_group.name)
 
@@ -56,8 +54,8 @@ describe 'ClassGroups' do
       page.driver.browser.switch_to.alert.accept
   
       wait_until { page.all('table.index tr').size == tr_count - 1 }
-      ClassGroup.count.should == 0
       page.should_not have_content(@class_group.name)
+      ClassGroup.count.should eql(0)
     end
   end
 end

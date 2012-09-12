@@ -1,0 +1,17 @@
+.pull-left
+  h4.h4-vm.courses_count =t("courses.list")+"（ "+@class_group.class_group_course_enrollments.count.to_s+" ）"
+.pull-right
+  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :remote => true, :id => 'add_class_group_course_link', :class => "btn btn-primary"
+.row-fluid
+hr
+.row-fluid
+    .span12
+      table#courses-table.index.table.table-striped.table-bordered.table-condensed 
+        thead
+          tr
+            th.btn-inverse =t 'course.code'
+            th.btn-info style="width:61px" =t 'manage'
+        tbody
+          =render :partial => 'class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
+          
+#add_class_group_course

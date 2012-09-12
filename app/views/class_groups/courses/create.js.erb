@@ -1,3 +1,7 @@
- $('#add_class_group_course').hide()
- $('#add_class_group_course_link').show()
-  $('#courses_list').append('<li><%= "#{@course.code}" %></li>');
+$('#add_class_group_course').html('')
+$('#add_class_group_course_link').show()
+ 
+$('#courses-table').append('<%= escape_javascript(render :partial => "course", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @class_group_course_enrollment}) %>');
+
+$('#class_group_courses_tab_link').html('<%= @class_group.courses.count != 0 ? t('courses.courses') + "（" + @class_group.courses.count.to_s + "）" : t('courses.courses') %>');
+$('.courses_count').html('<%= @class_group.courses.count != 0 ? t('courses.list') + "（" + @class_group.courses.count.to_s + "）" : t('courses.list') %>');

@@ -6,8 +6,6 @@ describe 'Courses' do
   before do
     @syllabus = Factory(:syllabus, :name => 'biology2012', :code => 'bio')
     visit courses_path
-    #within('ul#menu') { click_link "Course Management" }
-    #within('ul#menu') { click_link "Courses" }
   end
 
   context "creating new course" do 
@@ -69,7 +67,7 @@ describe 'Courses' do
     end
 
     it "should delete a course" do
-      @syllabus.courses.count.should == 1
+      @syllabus.courses.count.should eql(1)
       page.should have_content("Courses List")
       page.should have_content(@course.code)
       tr_count = page.all('table.index tr').size
@@ -79,7 +77,7 @@ describe 'Courses' do
 
       wait_until { page.all('table.index tr').size == tr_count - 1 }
       page.should_not have_content(@course.code)
-      @syllabus.courses.count.should == 0
+      @syllabus.courses.count.should eql(0)
     end
   end
 

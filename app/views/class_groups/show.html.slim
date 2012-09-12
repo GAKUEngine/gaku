@@ -36,7 +36,7 @@
 
             #class_group_enrollments.tab-pane.active
               .row-fluid#class_group_enrollments_list
-                =render 'class_groups/students/index'
+                =render 'class_groups/students/students'
               .row-fluid
                 /TODO: server side validation for duplicate class group enrollment 
                 div id='enrollment_form' style='display:none'
@@ -44,14 +44,14 @@
 
             #semesters.tab-pane
               .row-fluid
-                = render 'class_groups/semesters/index'
+                = render 'class_groups/semesters/semesters'
               .row-fluid
                 /TODO need to redirect to the right route after create!
                 div id="semester_form" style="display:none"
                   
             #courses.tab-pane
               .row-fluid
-                = render 'class_groups/courses/index'
+                = render 'class_groups/courses/courses'
               .row-fluid
                 /TODO need to redirect to the right route after create! /
                 div id="course_form" style="display:none"
