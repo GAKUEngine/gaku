@@ -56,9 +56,12 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture, :student_id_number, :student_foreign_id_number
 
-  attr_encrypted :name, :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :surname, :key => 'ds8g8gsd6gf7g6fd7gdgh'
-  attr_encrypted :phone, :key => 'sd8f9d0s9fds0gshgs3hff'
+  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :name_reading,     :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :surname_reading,  :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :phone,            :key => 'f98gd9regre9gr9gre9gerh'
+
 
   has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
