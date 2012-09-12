@@ -1,5 +1,5 @@
 tr
-  td.vm = enrollment.surname + " " + enrollment.name
+  td.vm = enrollment.surname.to_s + " " + enrollment.name.to_s
   td
     = link_to t("assignments.view"), "", :class => "mr-xs btn btn-mini btn-success"
     = link_to t("exams.view"), "", :class => "btn btn-mini btn-success"

@@ -59,7 +59,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 78
+                  width: 79
                   encoded: false
                   resizable: false
                   sortable: false
@@ -96,7 +96,7 @@ class StudentGrid extends BuHin
                 },{
                   field: "manage"
                   title: I18n.t('manage')
-                  width: 76
+                  width: 79
                   encoded: false
                   resizable: false
                   sortable: false
