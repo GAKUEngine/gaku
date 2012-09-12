@@ -6,6 +6,7 @@ gem 'rails-i18n'
 gem 'slim-rails'
 gem 'inherited_resources'
 gem 'chosen-rails'
+gem 'attr_encrypted'
 
 #JS 
 gem 'jquery-rails'
@@ -14,8 +15,10 @@ gem 'kendoui-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
+gem 'backbone-on-rails'
 
-gem 'devise', :git => "git://github.com/plataformatec/devise.git"
+#gem 'devise', :git => "git://github.com/plataformatec/devise.git"
+gem 'devise', '~> 2.1'
 gem 'devise-i18n'
 gem 'cancan'
 
@@ -24,7 +27,6 @@ gem 'app_config'
 gem 'seedbank'
 gem 'spreadsheet'
 gem 'roo' #TODO consider other options for roo?
-gem 'backbone-on-rails'
 
 group :production do
   gem 'unicorn' 

@@ -27,7 +27,7 @@ describe 'ClassGroup Students' do
       page.should have_content("#{@student1.name}")
     end
 
-    it 'should search students', :js => true do
+    pending 'should search students', :js => true do
       student2 = Factory(:student, :name => 'Kenji', :surname => 'Kita')
       student3 = Factory(:student, :name => 'Chikuhei', :surname => 'Nakajima')
       click_link 'add_class_group_student_link'
