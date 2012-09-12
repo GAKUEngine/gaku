@@ -8,7 +8,7 @@
   .pull-left
     h4.mt-xs.mb-0
       - @exams.each do |exam|
-        = exam.name << " " << t("grades.grading")
+        = exam.name + " " + t("grades.grading")
   .pull-right
     =link_to t('Back'), @course, :class => 'btn mr-s'
     select#how-grade.mb-0
@@ -74,7 +74,7 @@
               td#class_group.vm-tc = student.class_group_enrollments.last.class_group.grade.to_s + " - " + student.class_group_enrollments.last.class_group.name
               td#seat_number.vm-tc = student.class_group_enrollments.last.seat_number
             td#student.vm
-              = student.surname << " " << student.name
+              = student.surname.to_s + " " + student.name.to_s
               #student_info*{'student_id' => student.id, 'student_surname' => student.surname, 'student_name' => student.name}
             - @exams.each do |exam|
               - exam.exam_portions.each do |portion|
