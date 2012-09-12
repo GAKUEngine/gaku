@@ -4,8 +4,8 @@ class CreateStudents < ActiveRecord::Migration
       t.string   :encrypted_name
       t.string   :middle_name
       t.string   :encrypted_surname
-      t.string   :name_reading, :default => "" 
-      t.string   :surname_reading, :default =>  ""
+      t.string   :encrypted_name_reading, :default => "" 
+      t.string   :encrypted_surname_reading, :default =>  ""
       t.boolean  :gender
       t.string   :encrypted_phone
       t.string   :email

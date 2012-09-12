@@ -13,9 +13,6 @@
 class ExamPortionScore < ActiveRecord::Base
   belongs_to :student
   belongs_to :exam_portion
+  
   attr_accessible :score, :exam_portion_id, :student_id
-
-  #validates :score, :numericality => { :greater_than_or_equal_to => 0 }, :presence => true
-
 end
-

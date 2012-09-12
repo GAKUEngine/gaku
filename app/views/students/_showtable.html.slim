@@ -54,7 +54,7 @@
           = render 'upload_picture'
 .row-fluid
   .span12.well
-    = render :partial => 'students/contacts/index'
+    = render :partial => 'students/contacts/contacts'
 .row-fluid
   .span12.well
     .tabbable.tabs-right
@@ -70,18 +70,18 @@
             = @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural')
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'students/addresses/index'
+          = render :partial => 'students/addresses/addresses'
         #guardians.tab-pane
-          = render :partial => 'students/guardians/index'
+          = render :partial => 'students/guardians/guardians'
         #courses.tab-pane
-          = render :partial => 'students/course_enrollments/index'
+          = render :partial => 'students/course_enrollments/course_enrollments'
 .row-fluid
   .span12.well
-    = render :partial => 'students/notes/index'
+    = render :partial => 'students/notes/notes'
 .row-fluid
   .span12.well
     .span4
-      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  {:id => 'create_contact', :class => "span12 btn btn-primary", :remote => true}
+      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'create_contact', :class => "span12 btn btn-primary", :remote => true }
     .span4
       = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning"
     .span4

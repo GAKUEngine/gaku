@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907130441) do
+ActiveRecord::Schema.define(:version => 20120911001159) do
 
   create_table "addresses", :force => true do |t|
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "zipcode"
+    t.string   "encrypted_address1"
+    t.string   "encrypted_address2"
+    t.string   "encrypted_city"
+    t.string   "encrypted_zipcode"
+    t.string   "encrypted_state_name"
+    t.string   "encrypted_title"
     t.string   "state"
-    t.string   "state_name"
-    t.string   "title"
-    t.boolean  "past",       :default => false
+    t.boolean  "past",                 :default => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "assets", :force => true do |t|
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  create_table "class_group_course_enrollments", :force => true do |t|
+    t.integer  "class_group_id"
+    t.integer  "course_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "class_group_course_enrollments", ["class_group_id"], :name => "index_class_group_course_enrollments_on_class_group_id"
+  add_index "class_group_course_enrollments", ["course_id"], :name => "index_class_group_course_enrollments_on_course_id"
 
   create_table "class_group_enrollments", :force => true do |t|
     t.integer  "class_group_id"
@@ -118,15 +128,15 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
   add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
   add_index "course_enrollments", ["student_id"], :name => "index_course_enrollments_on_student_id"
 
+  create_table "course_group_enrollments", :force => true do |t|
+    t.integer "course_id"
+    t.integer "course_group_id"
+  end
+
   create_table "course_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "course_groups_courses", :force => true do |t|
-    t.integer "course_id"
-    t.integer "course_group_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -211,14 +221,14 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
   end
 
   create_table "guardians", :force => true do |t|
-    t.string   "name"
-    t.string   "surname"
-    t.string   "name_reading"
-    t.string   "surname_reading"
-    t.string   "relationship"
+    t.string   "encrypted_name"
+    t.string   "encrypted_surname"
+    t.string   "encrypted_name_reading"
+    t.string   "encrypted_surname_reading"
+    t.string   "encrypted_relationship"
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "guardians_students", :force => true do |t|
@@ -325,8 +335,8 @@ ActiveRecord::Schema.define(:version => 20120907130441) do
     t.string   "encrypted_name"
     t.string   "middle_name"
     t.string   "encrypted_surname"
-    t.string   "name_reading",                 :default => ""
-    t.string   "surname_reading",              :default => ""
+    t.string   "encrypted_name_reading",       :default => ""
+    t.string   "encrypted_surname_reading",    :default => ""
     t.boolean  "gender"
     t.string   "encrypted_phone"
     t.string   "email"

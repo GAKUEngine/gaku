@@ -14,11 +14,16 @@
 class Course < ActiveRecord::Base
   has_many :course_enrollments
   has_many :students, :through => :course_enrollments
+
+  has_many :course_group_enrollments
+  has_many :course_groups, :through => :course_group_enrollments
+
+  has_many :class_group_course_enrollments, :dependent => :destroy
+  has_many :class_groups, :through => :class_group_course_enrollments
+  
   has_many :exam_schedules
   belongs_to :syllabus
   belongs_to :class_group
-
-  has_and_belongs_to_many :course_groups
 
   accepts_nested_attributes_for :course_enrollments
 

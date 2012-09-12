@@ -2,25 +2,29 @@
 #
 # Table name: students
 #
-#  id                   :integer          not null, primary key
-#  name                 :string(255)
-#  surname              :string(255)
-#  name_reading         :string(255)      default("")
-#  surname_reading      :string(255)      default("")
-#  gender               :boolean
-#  phone                :string(255)
-#  email                :string(255)
-#  birth_date           :date
-#  admitted             :date
-#  graduated            :date
-#  user_id              :integer
-#  faculty_id           :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  picture_file_name    :string(255)
-#  picture_content_type :string(255)
-#  picture_file_size    :integer
-#  picture_updated_at   :datetime
+#  id                           :integer          not null, primary key
+#  encrypted_name               :string(255)
+#  middle_name                  :string(255)
+#  encrypted_surname            :string(255)
+#  name_reading                 :string(255)      default("")
+#  surname_reading              :string(255)      default("")
+#  gender                       :boolean
+#  encrypted_phone              :string(255)
+#  email                        :string(255)
+#  birth_date                   :date
+#  admitted                     :date
+#  graduated                    :date
+#  student_id_number            :string(255)
+#  student_foreign_id_number    :string(255)
+#  national_registration_number :string(255)
+#  user_id                      :integer
+#  faculty_id                   :integer
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  picture_file_name            :string(255)
+#  picture_content_type         :string(255)
+#  picture_file_size            :integer
+#  picture_updated_at           :datetime
 #
 
 class Student < ActiveRecord::Base
@@ -52,9 +56,12 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture, :student_id_number, :student_foreign_id_number
 
-  attr_encrypted :name, :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :surname, :key => 'ds8g8gsd6gf7g6fd7gdgh'
-  attr_encrypted :phone, :key => 'sd8f9d0s9fds0gshgs3hff'
+  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :name_reading,     :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :surname_reading,  :key => 'f98gd9regre9gr9gre9gerh'
+  attr_encrypted :phone,            :key => 'f98gd9regre9gr9gre9gerh'
+
 
   has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 

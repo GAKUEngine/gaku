@@ -18,6 +18,7 @@ describe 'Address' do
     end
 
     it 'should add and show student address', :js => true do
+      @student.addresses.size.should eql(0)
       #required
       select "Japan", :from => 'country_dropdown'
       fill_in "address_city", :with => "Nagoya"
@@ -92,12 +93,14 @@ describe 'Address' do
       wait_until { page.has_content?('Addresses list') } 
       tr_count = page.all('table.index tr').size
       page.should have_content(@address.address1)
-      @student.addresses.size.should == 1
+      @student.addresses.size.should eql(0)
+      @student.student_addresses.size.should eql(1)
 
       click_link "delete_link" 
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table.index tr').size == tr_count - 1 } 
+      @student.student_addresses.size.should eql(0)
       @student.addresses.size.should eql(0)
       page.should_not have_content(@address.address1)
     end
@@ -107,7 +110,6 @@ describe 'Address' do
       @address2 = Factory(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
       Factory(:student_address, :student => @student, :address => @address2)
     
-      #TODO Maybe refactor so to call addresses instead of student_addresses
       @student.student_addresses.first.is_primary? == true
       @student.student_addresses.second.is_primary? == false
 

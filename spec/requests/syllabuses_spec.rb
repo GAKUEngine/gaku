@@ -6,7 +6,6 @@ describe 'Syllabus' do
   before do
     @syllabus = Factory(:syllabus, :name => 'Biology', :code => 'bio')
     visit syllabuses_path
-    #within('ul#menu') { click_link "Syllabuses"}
   end
 
   context "list and show syllabuses" do
@@ -22,7 +21,6 @@ describe 'Syllabus' do
       page.should have_content("Syllabus")
       page.should have_content("Biology")
       page.should have_content("bio")
-
     end
   end
 
@@ -68,12 +66,13 @@ describe 'Syllabus' do
   end
 
   it "should delete a syllabus" do
-      Syllabus.count.should == 1
-      tr_count =  page.all('table.index tr').size
-      within('table  tr:nth-child(2)') { click_link "delete" }
+    Syllabus.count.should eql(1)
+    tr_count =  page.all('table.index tr').size
+    within('table  tr:nth-child(2)') { click_link "delete" }
       
-      wait_until { page.all('table.index tr').size == tr_count - 1 }
-      page.should_not have_content("#{@syllabus.code}")
-      Syllabus.count.should == 0
-    end
+    wait_until { page.all('table.index tr').size == tr_count - 1 }
+    page.should_not have_content("#{@syllabus.code}")
+    Syllabus.count.should eql(0)
+  end
+
 end

@@ -1,27 +1,17 @@
-# == Schema Information
-#
-# Table name: courses
-#
-#  id             :integer          not null, primary key
-#  code           :string(255)
-#  faculty_id     :integer
-#  syllabus_id    :integer
-#  class_group_id :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#
-
 require 'spec_helper'
 
 describe Course do
 
   context "validations" do 
   	it { should have_valid_factory(:course) }
-    it { should have_many(:students) }
     it { should have_many(:course_enrollments) }
+    it { should have_many(:students) }
+    it { should have_many(:course_group_enrollments) }
+    it { should have_many(:course_groups) }
     it { should have_many(:exam_schedules) }
     it { should belong_to(:syllabus) }
-    it { should belong_to(:class_group) }
+    it { should have_many(:class_groups) }
+    it { should have_many(:class_group_course_enrollments) }
   end
   
   context "enroll_class_group" do

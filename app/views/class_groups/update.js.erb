@@ -1,4 +1,4 @@
 $('#class_group_modal').modal('hide');
 $('#class_group_modal').remove();
 var currentClassGroup = $(".class_group_<%= @class_group.id %>");
-currentClassGroup.html('<%= escape_javascript(render :partial => "class_group", :formats => [:html], :handlers => [:erb, :slim], :locals => {:class_group => @class_group}) %>');
+currentClassGroup.html('<%= escape_javascript(render :partial => "class_group_unit", :formats => [:html], :handlers => [:erb, :slim], :locals => {:class_group => @class_group}) %>');

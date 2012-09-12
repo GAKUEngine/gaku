@@ -9,16 +9,15 @@ describe 'Syllabus Exams' do
   end
 
   context "add and show exams" do
-   
     before do 
       within('table.index tr:nth-child(2)') { click_link "show" }
       page.should have_content("No Exams")
-      @syllabus.exams.count.should eql(0)
       click_link 'add_syllabus_exam_link'
       wait_until { find('#new_syllabus_exam_form').visible? }
     end
 
     it "should add and show exams", :js => true  do
+      @syllabus.exams.count.should eql(0)
       #required
       fill_in 'exam_name', :with => 'Biology Exam'
       fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
@@ -70,9 +69,9 @@ describe 'Syllabus Exams' do
     end
 
     it 'should delete a syllabus exam', :js => true do
+      @syllabus.exams.size.should eql(1)
       tr_count = page.all('table.index tr').size
       page.should have_content(@exam.name)
-      @syllabus.exams.size.should eql(1)
 
       click_link "delete_link" 
       page.driver.browser.switch_to.alert.accept
