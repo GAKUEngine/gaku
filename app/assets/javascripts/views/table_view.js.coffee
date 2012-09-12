@@ -16,8 +16,9 @@ class GAKUEngine.Views.TableView extends Backbone.View
 		currentTarget = $(event.currentTarget)
 		currentTargetInput = currentTarget.find('input')
 		currentTargetValue = currentTargetInput.attr('value')
+		maxScore = $(event.currentTarget).data('max-score')
 
-		if currentTargetValue > 100
+		if currentTargetValue > maxScore
     	currentTargetInput.addClass('score-error')
   	else if currentTargetValue < 0
     	currentTargetInput.addClass('score-error')
