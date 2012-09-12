@@ -6,5 +6,5 @@ table#class_group_index.index.table.table-striped.table-bordered.table-condensed
 	    th.btn-inverse = sortable 'homeroom', t("class_groups.homeroom")
 	    th.btn-info style="width:94px" = t("manage")
 	tbody
-	  =render :partial => 'show', :collection => @class_groups, :as => 'class_group'
+	  =render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
             
