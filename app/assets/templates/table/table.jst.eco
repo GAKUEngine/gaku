@@ -53,8 +53,7 @@
 		          		<% if score.student_id == student.id : %>
 		          			<td>
 		          				<form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post">
-												<input name='lqlq' type='number' value='<%= score.score %>'/>
-												<input type='submit' />
+												<input name='portion_score' type='number' value='<%= score.score %>'/>
 											</form>
 			          		</td>
 			          	<% end %>
