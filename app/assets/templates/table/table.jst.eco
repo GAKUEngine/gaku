@@ -1,0 +1,93 @@
+<div class='row-fluid'>
+	 <div class='span12 well pull-left'>
+	 	<table class='exam_grid grading-table table table-striped table-bordered table-condensed'>
+	 		<thead>
+	 			<tr>
+	 				<th class='btn-primary' colspan='3'>Student@</td>
+					<% for exam in @exams: %>
+						<th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'> <%= exam.name %> Grading@ </th>
+					<% end %>
+	 			</tr>
+	 			<tr>
+	 				<th class='btn-info' style="width:60px">Class@</th>
+          <th class='btn-info' style="width:60px"> Seat Number@ </th>
+          <th class='btn-info' style="width:150px">Student Name @ </th>
+          <% for exam in @exams: %>
+          	<% for portion in exam.exam_portions: %>
+          		<% if exam.use_weighting : %>
+          			<th class='btn-warning' style="width:120px"> [<%= portion.name %>] </th>
+                <br/>
+	          		<!-- More work HERE -->
+          		<% else : %>
+          			<th class='btn-warning' style="width:120px"> [<%= portion.name %>] 
+                	<br/>
+                  <%= portion.max_score %>
+          			</th>
+          		<% end %>
+          		<% end %>
+          	<% end %>
+          		<th id='total_points_title' class='btn-inverse' style="width:65px">Total Point@ </th>
+          		<th class='btn-inverse'>Deviation</th>
+          		<% if exam.use_weighting : %>
+          			<td id='weighting_total_title' class='btn-inverse' style="width:65px"> Weighting Total@ </td>
+          <% end %>
+          <th id='grade_title' class='btn-inverse' style="width:65px">
+            Grade@
+            <br/>
+             10
+          <th id='rank_title' class='btn-inverse' style="width:65px">
+            Grade Rank@
+            <br/>
+             5
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+				<% for student in @course.students: %>
+					<tr class='student_<%= student.id %>'>
+						<td>class something</td>
+						<td>seat number</td>
+						<td><%= "#{student.surname} #{student.name}" %></td>
+						<% for exam in @exams: %>
+	          	<% for portion in exam.exam_portions: %>
+	          		<% for score in portion.exam_portion_scores: %>
+		          		<% if score.student_id == student.id : %>
+		          			<td>
+		          				<form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post">
+												<input name='portion_score' type='number' value='<%= score.score %>'/>
+											</form>
+			          		</td>
+			          	<% end %>
+		          	<% end %>
+	          	<% end %>
+						<td>
+							<% for key, value of @student_total_scores[student.id]: %>
+								<%= value %>
+							<% end %>
+						</td>
+          	<% end %>	
+						<td>	
+							<% for key, value of @deviation[student.id]: %>
+								<%= value %>
+							<% end %>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+				<% end %> 
+		 		<tr class='total_row'>
+		 			<td colspan='3'></td>
+          <% for exam in @exams: %>
+	          <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"> Avarage@ </thead>
+          	
+          	<td>
+          		<%= @avarage_scores[exam.id] %>
+          	</td>
+          <% end %>
+          <td></td>
+          <td></td>
+          <td></td>
+		 		</tr>
+	 		</tbody>
+	 	</table>
+	 </div>
+</div>
