@@ -127,9 +127,10 @@ class ExamsController < ApplicationController
     respond_to do |format|
       format.json { render :json => {:student_total_scores => @student_total_scores,
                                      :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
-                                     :course => @course.as_json(:include => 'students'),
+                                     :course => @course,
                                      :avarage_scores => @avarage_scores,
-                                     :deviation => @deviation
+                                     :deviation => @deviation,
+                                     :students => Student.decrypt_student_fields(@students)
                                      }}
       
       format.html { render "exams/grading" }

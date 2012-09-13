@@ -13,6 +13,7 @@ class GAKUEngine.Routers.ExamsRouter extends Backbone.Router
 												student_total_scores: @options.student_total_scores
 												avarage_scores: @options.avarage_scores
 												deviation: @options.deviation
+												students: @options.students	
 
 		$('.grading-container').html @tableView.render().el
 
