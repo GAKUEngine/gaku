@@ -246,7 +246,7 @@ class StudentChooser extends BuHin
     return "/class_group_enrollments/filtered_students.json?class_group_id=" + classGroupId
 
   init: () ->
-    console.log(@requestPath())
+    #console.log(@requestPath())
     @_getFieldNames()
     @_getScreenMetrics()
     @autocompleteRefreshGrid()

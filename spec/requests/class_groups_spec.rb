@@ -12,7 +12,7 @@ describe 'ClassGroups' do
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
     fill_in 'class_group_homeroom', :with => 'room#7'
-    click_button 'submit_button'
+    click_button 'submit_class_group_button'
 
     page.should have_content '7'
     page.should have_content 'Awesome class group'
@@ -27,14 +27,14 @@ describe 'ClassGroups' do
     end
 
     it 'should edit class group', :js => true do 
-      click_link 'edit_link'
+      click_link 'edit_class_group_link'
       wait_until { find('#class_group_modal').visible? }
 
       fill_in 'class_group_grade', :with => '2'
       fill_in 'class_group_name', :with => 'Really awesome class group'
       fill_in 'class_group_homeroom', :with => 'B2'
 
-      click_button 'submit_button'
+      click_button 'submit_class_group_button'
 
       page.should have_content '2'
       page.should have_content 'Really awesome class group'
@@ -47,13 +47,13 @@ describe 'ClassGroups' do
 
     it 'should delete class group', :js => true do 
       ClassGroup.count.should eql(1)
-      tr_count = page.all('table.index tr').size
+      tr_count = page.all('table#class_groups_index tr').size
       page.should have_content(@class_group.name)
 
-      click_link "delete_link" 
+      click_link "delete_class_group_link" 
       page.driver.browser.switch_to.alert.accept
   
-      wait_until { page.all('table.index tr').size == tr_count - 1 }
+      wait_until { page.all('table#class_groups_index tr').size == tr_count - 1 }
       page.should_not have_content(@class_group.name)
       ClassGroup.count.should eql(0)
     end
