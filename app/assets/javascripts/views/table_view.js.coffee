@@ -8,7 +8,7 @@ class GAKUEngine.Views.TableView extends Backbone.View
 		'click .portion_score_update input': 'removeBorder'
 
 	render: ->		
-		$(this.el).html @template(course: @options.course, exams: @options.exams, student_total_scores: @options.student_total_scores, avarage_scores: @options.avarage_scores, deviation: @options.deviation)
+		$(this.el).html @template(course: @options.course, exams: @options.exams, student_total_scores: @options.student_total_scores, avarage_scores: @options.avarage_scores, deviation: @options.deviation, students: @options.students)
 		@
   
 

@@ -92,6 +92,22 @@ class Student < ActiveRecord::Base
   def primary_address
     self.student_addresses.where(:is_primary => true).first.address
   end
+
+
+  def self.decrypt_student_fields(students)
+      students_json = students.as_json(:except => [:encrypted_name, :encrypted_surname, :encrypted_name_reading, :encrypted_surname_reading, :encrypted_phone])
+
+      i = 0
+      students_json.each do |student|
+        student[:name]    = students[i].name
+        student[:surname] = students[i].surname
+        student[:phone]   = students[i].phone
+        i += 1
+      end
+      
+      return students_json.to_json
+  end
+
 end
 
 

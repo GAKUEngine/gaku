@@ -11,6 +11,6 @@ class GAKUEngine.Models.Calculation extends Backbone.Model
 												student_total_scores: @get('student_total_scores')
 												avarage_scores: @get('avarage_scores')
 												deviation: @get('deviation')
-#
-		
+												students: $.parseJSON(@get('students'))
+
 		$('.grading-container').html tableView.render().el		

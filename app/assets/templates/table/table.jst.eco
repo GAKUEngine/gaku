@@ -42,7 +42,7 @@
 	 			</tr>
 	 		</thead>
 	 		<tbody>
-				<% for student in @course.students: %>
+				<% for student in @students: %>
 					<tr class='student_<%= student.id %>'>
 						<td>class something</td>
 						<td>seat number</td>
