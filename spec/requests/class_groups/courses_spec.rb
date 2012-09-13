@@ -11,16 +11,19 @@ describe 'ClassGroup Courses' do
   end
 
   it 'should add and show course to a class group', :js => true do
+    ClassGroupCourseEnrollment.count.should == 0
+    tr_count = page.all('#courses_index tr').size
     click_link 'add_class_group_course_link'
     wait_until { page.find('#add_class_group_course').visible? }
     select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
     click_button 'submit_course_button'
 
-    page.should have_content ("#{@course.code}")
+    wait_until { page.all('#courses_index tr').size == tr_count+1 }
+    within("#courses_index tbody"){
+      page.should have_content ("#{@course.code}")
+    }
+    ClassGroupCourseEnrollment.count.should == 1
 
-    visit class_group_path(@class_group)
-    click_link 'class_group_courses_tab_link'
-    within('.tab-content') { page.should have_content "#{@course.code}"}
   end
 
   pending 'should not add a course if course code is empty', :js => true do #FIXME cannot load the validation code properly
