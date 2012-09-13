@@ -1,0 +1,12 @@
+.row-fluid
+  .span12.well
+		table.index.table.table-striped.table-bordered.table-condensed
+			thead
+				tr
+					th =t('name')
+					th =t('syllabus')
+			tbody
+				-@course_group.courses.each do |course|				
+					tr
+						td =course.code
+						td =course.syllabus.name if course.syllabus
