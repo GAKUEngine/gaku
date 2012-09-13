@@ -4,4 +4,6 @@
     =f.label :class_group_id
     =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
   .actions
-    =f.submit t('courses.enroll_class_group'), :class => 'btn btn-primary'
+    =f.submit t('courses.enroll_class_group'), :id => 'submit_class_group_button', :class => 'btn btn-primary'
+  .row-fluid.mt-s
+    = link_to t("cancel"), "", :id => "class_group_cancel_link", :class => "span6 btn btn-danger", :style => "min-height:0px"
