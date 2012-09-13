@@ -7,4 +7,4 @@
         = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}, :class => "validate[required]"
         
       .row-fluid.mt-s
-        = f.submit t("courses.enroll_student"), :class => 'span12 btn btn-primary'
+        = f.submit t("courses.enroll_student"), :id => 'submit_student_button', :class => 'span12 btn btn-primary'
