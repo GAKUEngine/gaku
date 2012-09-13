@@ -13,15 +13,7 @@ class StudentsController < ApplicationController
   def index
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
     
-    @students_json = @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
-    i = 0
-    @students_json.each {|student|
-      student[:name] = @students[i].name
-      student[:surname] = @students[i].surname
-      student[:phone] = @students[i].phone
-      i += 1
-    }
-
+    @students_json = decrypt_student_fields(@students)
 
     if params[:action] == "get_csv_template"
       get_csv_template
@@ -93,8 +85,12 @@ class StudentsController < ApplicationController
     # search only name or surname separate
     # @students = Student.where("name like ? OR surname like ?", "%#{params[:term]}%", "%#{params[:term]}%")
     # work only on sqlite3 and postgresql
-    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?) OR (name LIKE ?) OR (surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%", "%#{params[:term]}%",  "%#{params[:term]}%")
-    render json: @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget]) 
+    term = Student.encrypt_name(params[:term])
+    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(encrypted_surname || " " || encrypted_name LIKE ?) OR (encrypted_name || " " || encrypted_surname LIKE ?) OR (encrypted_name LIKE ?) OR (encrypted_surname LIKE ?)', "%#{term}%", "%#{term}%", "%#{term}%",  "%#{term}%")
+
+    @students_json = decrypt_student_fields(@students)
+
+    render json: @students_json.as_json
   end
 
   private
@@ -119,6 +115,18 @@ class StudentsController < ApplicationController
 
     def load_student
       @student = Student.find(params[:id])
+    end
+
+    def decrypt_student_fields(students)
+      students_json = students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
+      i = 0
+      students_json.each {|student|
+        student[:name] = @students[i].name
+        student[:surname] = @students[i].surname
+        student[:phone] = @students[i].phone
+        i += 1
+      }
+      return students_json
     end
 
 end
