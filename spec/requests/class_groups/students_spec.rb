@@ -11,7 +11,7 @@ describe 'ClassGroup Students' do
   context "Class Roster" do
     before do
       visit class_groups_path
-      click_link 'show_link'
+      click_link 'show_class_group_link'
       click_link 'class_group_enrollments_tab_link'
     end
 
@@ -19,7 +19,7 @@ describe 'ClassGroup Students' do
       click_link 'add_class_group_student_link'
       wait_until { page.find('#new_class_enrollment').visible? }
       check "#{@student1.id}"
-      click_button 'submit_button'
+      click_button 'submit_student_button'
       wait_until { !page.find('#new_class_enrollment').visible? }
 
       page.should have_content("#{@student1.name}")
@@ -53,12 +53,12 @@ describe 'ClassGroup Students' do
       it 'should delete a student from a class group', :js => true do
         click_link 'class_group_enrollments_tab_link'
         @class_group.students.count.should eql(1)
-        tr_count = page.all('table.index tr').size
+        tr_count = page.all('table#students_index tr').size
 
-        click_link('delete_link') 
+        click_link('delete_student_link') 
         page.driver.browser.switch_to.alert.accept
         
-        wait_until { page.all('table.index tr').size == tr_count - 1 }
+        wait_until { page.all('table#students_index tr').size == tr_count - 1 }
         @class_group.students.count.should eql(0)
       end
     end

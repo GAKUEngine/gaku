@@ -12,7 +12,7 @@ end
 module GAKUEngine
   class Application < Rails::Application
     
-    if Rails.env == "CI"
+    if ENV["CI"]
       self.paths['config/database'] = 'config/database_travis.yml'
     end
     # Settings in config/environments/* take precedence over those specified here.

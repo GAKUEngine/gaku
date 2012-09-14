@@ -22,12 +22,16 @@ $ ->
   $('#add_student_enrollment_link').on 'click','.btn', (event)->
     event.preventDefault()
     $('#add_class_group_enrollment_form').hide()
+    $('#add_student_enrollment_link').hide()
+    $('#add_class_group_enrollment_link').show()
     $('#add_student_enrollment_form').slideToggle()
 
 
   $('#add_class_group_enrollment_link').on 'click', 'a.show_class_enroll_form', (event)->
     event.preventDefault()
     $('#add_student_enrollment_form').hide()
+    $('#add_class_group_enrollment_link').hide()
+    $('#add_student_enrollment_link').show()
     $('#add_class_group_enrollment_form').slideToggle()
 
   $(".chzn-select").chosen()

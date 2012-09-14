@@ -1,0 +1,16 @@
+.row-fluid
+  .span12.well
+		table.index.table.table-striped.table-bordered.table-condensed
+			thead
+				tr
+					th =t('name')
+					th =t('manage')
+			tbody
+				-@course_groups.each do |course_group|				
+					tr
+						td =course_group.name
+						td
+							=link_to t('Show'), course_group, :class => 'btn btn-primary'
+							=link_to t('Edit'), "#", :class => 'btn btn-warning'
+							=link_to t('Delete'), "#", :class => 'btn btn-danger'
+

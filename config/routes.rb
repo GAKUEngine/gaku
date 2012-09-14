@@ -25,6 +25,7 @@ GAKUEngine::Application.routes.draw do
       get :grading, :on => :member
       get :grading, :on => :collection
       put :update_score, :on => :member
+      get :calculations, :on => :member
     end
   end
 
@@ -91,6 +92,8 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :states
+
+  resources :course_groups
 
   root :to => 'home#index'
 

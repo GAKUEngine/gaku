@@ -97,6 +97,8 @@ en:
     enroll_class_group: 'Enroll Class Group'
     add_class_group: 'Add Class Group'
     choose_class_group: 'Choose Class Group'
+  course_group:
+    course_groups: 'Course Groups'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:

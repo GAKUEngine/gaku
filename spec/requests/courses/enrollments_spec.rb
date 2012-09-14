@@ -10,18 +10,23 @@ describe "CourseEnrollment"  do
   it "should enroll and show student", :js => true do
     Factory(:student, :name => "John", :surname => "Doe")
     visit course_path(@course)
+    @course.students.size.should eql(0)
 
-    click_link 'add_student_enrollment'
-    @course.students.size.should eql(0) 
-    wait_until { page.has_content?('Choose Student') } 
+    click_link 'add_student_enrollment'  
+    wait_until { page.find('#add_student_enrollment_form').visible? }
+    !page.find('#add_student_enrollment').visible?
+
     select "John Doe", :from => 'course_enrollment_student_id'
-    click_button "Enroll Student"
-
-    page.should have_content("John")
-    sleep 1 #TODO change sleep 
-    @course.students.size.should eql(1)     
+    click_button 'submit_student_button'
+    
+    wait_until do
+      !page.find('#add_student_enrollment_form').visible? 
+      page.find('#add_student_enrollment').visible?
+    end
+    page.should have_content("Doe John")
     page.should have_content("View Assignments")
-    #TODO check if the student is added to the table visually without redirect
+    page.should have_content("View Exams")
+    @course.students.size.should eql(1)     
   end
 
   it "should enroll student only once for a course", :js => true  do
@@ -32,12 +37,11 @@ describe "CourseEnrollment"  do
     @course.students.size.should eql(1)
 
     click_link 'add_student_enrollment'
-    wait_until { page.has_content?('Choose Student') } 
+    wait_until { page.find('#add_student_enrollment_form').visible? }
 
     select "Toni Rtoe", :from => 'course_enrollment_student_id'
-    click_button "Enroll Student"
-    page.should have_content ("Student Already enrolled to course!")
-    sleep 1 #TODO change sleep
+    click_button 'submit_student_button'
+    wait_until { page.should have_content ("Student Already enrolled to course!") } 
     @course.students.size.should eql(1)
   end
 
@@ -49,19 +53,24 @@ describe "CourseEnrollment"  do
     visit course_path(@course)
     @course.students.size.should eql(0)
     click_on 'add_class_group_enrollment'
+    
+    wait_until { page.find('#add_class_group_enrollment_form').visible? }
+    !page.find('#add_class_group_enrollment').visible?
     click_on 'Choose Class Group' 
 
     wait_until { page.has_content?('Math') }
     find("li:contains('Math')").click
-    click_button "Enroll Class Group"
+    click_button "submit_class_group_button"
 
+    wait_until do 
+      !page.find('#add_class_group_enrollment_form').visible? 
+      page.find('#add_class_group_enrollment').visible?  
+    end
     page.should have_content("Johniew")
     page.should have_content("Amon")
-    sleep 1 #TODO change sleep
-    @course.students.size.should eql(2)
-    
     page.should have_content("View Assignments")
-    #TODO check if the students are added to the table visually without redirect
+    page.should have_content("View Exams")
+    @course.students.size.should eql(2)
   end
 
 end

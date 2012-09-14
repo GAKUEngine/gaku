@@ -128,15 +128,15 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
   add_index "course_enrollments", ["course_id"], :name => "index_course_enrollments_on_course_id"
   add_index "course_enrollments", ["student_id"], :name => "index_course_enrollments_on_student_id"
 
-  create_table "course_group_enrollments", :force => true do |t|
-    t.integer "course_id"
-    t.integer "course_group_id"
-  end
-
   create_table "course_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "course_groups_courses", :force => true do |t|
+    t.integer "course_id"
+    t.integer "course_group_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -221,14 +221,14 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
   end
 
   create_table "guardians", :force => true do |t|
-    t.string   "encrypted_name"
-    t.string   "encrypted_surname"
-    t.string   "encrypted_name_reading"
-    t.string   "encrypted_surname_reading"
-    t.string   "encrypted_relationship"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "name_reading"
+    t.string   "surname_reading"
+    t.string   "relationship"
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "guardians_students", :force => true do |t|
@@ -335,8 +335,8 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
     t.string   "encrypted_name"
     t.string   "middle_name"
     t.string   "encrypted_surname"
-    t.string   "encrypted_name_reading",       :default => ""
-    t.string   "encrypted_surname_reading",    :default => ""
+    t.string   "name_reading",                 :default => ""
+    t.string   "surname_reading",              :default => ""
     t.boolean  "gender"
     t.string   "encrypted_phone"
     t.string   "email"

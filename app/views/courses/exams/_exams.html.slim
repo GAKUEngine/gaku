@@ -1,7 +1,7 @@
 .row-fluid
   - if @course.syllabus and @course.syllabus.exams.any?
     - @course.syllabus.exams.each do |exam|
-      = link_to ('<i class="icon-white icon-pencil"></i> ' + exam.name + t("grades.grading")).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span3 btn btn-primary", :params => { :course_id => @course.id, :exam_id => exam.id }
+      = link_to ('<i class="icon-white icon-pencil"></i> ' + exam.name + t("grades.grading")).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span3 btn btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
 .row-fluid
   .span12
     hr

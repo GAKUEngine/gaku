@@ -1,10 +1,6 @@
-=form_for [@class_group, @class_group_enrollment], :url => enroll_student_class_group_students_path, :remote => true do |f|
-  =f.hidden_field :class_group_id, :value => @class_group.id
-  .row-fluid
-		=f.label :students
-		= f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname} ", s.id] }, {:prompt => t('class_groups.choose_student')}
-  .row-fluid
-  	=f.label :seat_number
-  	=f.text_field :seat_number
-  .row-fluid
-		=f.submit t('class_groups.create_class_group_enrollment'), :class => 'span12 btn btn-primary'
+=form_for @class_group_enrollment, :url => enroll_student_class_group_students_path, :remote => true do |f|
+  = f.hidden_field :class_group_id, :value => @class_group.id
+  = hidden_field_tag "student_ids", "", :id => 'student_ids'
+  br
+    = f.submit "Add to class", :id => 'submit_student_button', :class => 'span3 btn btn btn-primary'
+  = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_student_link', :'data-dismiss' => "modal"
