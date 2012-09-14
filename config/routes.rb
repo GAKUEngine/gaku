@@ -96,5 +96,10 @@ GAKUEngine::Application.routes.draw do
   resources :course_groups
 
   root :to => 'home#index'
+  
+
+  namespace :admin do
+    resources :contact_types
+  end
 
 end
