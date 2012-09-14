@@ -102,6 +102,7 @@ en:
     edit_course_group: 'Edit Course Group'
     add_course_group: 'Add Course Group'
     add_course: 'Add Course'
+    course_group_created: 'Course Group Created'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:

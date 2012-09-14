@@ -6,6 +6,7 @@ class CourseGroupsController < ApplicationController
 	def create
 		super do |format|
 			@course_groups = CourseGroup.all
+			flash.now[:notice] = t('course_groups.course_group_created')
 			format.js { render 'create'}
 		end
 	end

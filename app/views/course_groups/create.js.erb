@@ -2,6 +2,7 @@
 	$('#course_group_form_errors').html('<%= escape_javascript(render :partial => "/shared/errors", :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @course_group} ) %>');
 <% else %>
 	$('#course_groups_index_table').html('<%= escape_javascript(render :partial => "/course_groups/course_groups", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course_groups => @course_groups}) %>');
+	$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>")
 <% end %>
 
 $('#add_new_course_group_form form').hide()

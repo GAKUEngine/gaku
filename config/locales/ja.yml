@@ -106,6 +106,7 @@ ja:
     edit_course_group: 'Edit Course Group'
     add_course_group: 'Add Course Group'
     add_course: 'Add Course'
+    course_group_created: 'Course Group Created'
   num_courses:
   add_course: "授業を追加する"
   course_enrollments:
