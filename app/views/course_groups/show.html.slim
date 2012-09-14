@@ -8,10 +8,9 @@
       =form_for [@course_group, CourseGroupEnrollment.new], :html => {:remote => true, :class =>'hide'}  do |f|
     	 =f.select :course_id, Course.all.collect { |s| [s.code, s.id] }, {:prompt => 'Choose Course'}
     	 =f.submit 
-
-
-
 .row-fluid
   .span12.well
   	#course_index_table
 			=render 'courses', :course_group => @course_group
+-if @course_group.course_group_enrollments.count == 0
+  =render 'delete_confirm'

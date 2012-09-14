@@ -1,0 +1,11 @@
+row-fluid
+  .span12
+    #course_group_delete_link
+      =link_to 'Delete', "#", :id => 'delete_link', :class => 'btn btn-danger pull-right'
+  .delete_modal
+    =render 'shared/delete_modal', :target => @course_group
+
+coffee:
+  $('#course_group_delete_link').on 'click', (e)->
+    e.preventDefault()
+    $('#deleteModal').modal('show')
