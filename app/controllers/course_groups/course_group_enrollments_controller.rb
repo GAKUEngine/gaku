@@ -7,6 +7,7 @@ class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 		@course_group_enrollment = @course_group.course_group_enrollments.build(params[:course_group_enrollment])
 		if @course_group_enrollment.save
 			respond_to do |format|
+				flash.now[:notice] = t('course_groups.course_added')
 				format.js { render '/course_groups/course_group_enrollments/create' }
 			end
 		else
