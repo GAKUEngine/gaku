@@ -15,10 +15,8 @@
             th =t("class_groups.name")
             th =t("class_groups.homeroom")
         tbody
-          tr
-            td =@class_group.grade
-            td =@class_group.name
-            td =@class_group.homeroom
+          tr class="class_group_#{@class_group.id}"
+            = render 'shared/fields/class_group_fields', :class_group => @class_group
     .row-fluid.mt-l
       .span12.well
         .tabbable.tabs-right
@@ -58,7 +56,7 @@
       
     .row-fluid
       .span12.well
-        = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn"
+        = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :remote => true
         = link_to t("Back"), class_groups_path, :class => "span6 btn"
 
 #modal_dialogs
