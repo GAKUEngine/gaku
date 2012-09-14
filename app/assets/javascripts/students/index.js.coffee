@@ -332,4 +332,5 @@ $.fn.studentGrid = (options) ->
     $.data(@, "plugin_#{pluginName}").ProcessOptions(options)
 
   return @
+    
 

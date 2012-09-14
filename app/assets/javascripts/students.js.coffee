@@ -9,3 +9,6 @@ $ ->
   $('#new_student_link').on 'click', (event) ->
   	event.preventDefault()
   	$('#new_student_form').slideToggle()
+  	  
+  $('.delete_student').live 'ajax:success', (evt, data, status, xhr) ->
+	  $(this).closest('tr').remove();
