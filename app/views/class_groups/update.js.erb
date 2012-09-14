@@ -1,4 +1,8 @@
 $('#class_group_modal').modal('hide');
 $('#class_group_modal').remove();
-var currentClassGroup = $(".class_group_<%= @class_group.id %>");
-currentClassGroup.html('<%= escape_javascript(render :partial => "class_group_unit", :formats => [:html], :handlers => [:erb, :slim], :locals => {:class_group => @class_group}) %>');
+var currentClassGroupGrade = $(".class_group_<%= @class_group.id %> .grade");
+currentClassGroupGrade.html("<%= @class_group.grade %>")
+var currentClassGroupName = $(".class_group_<%= @class_group.id %> .name");
+currentClassGroupName.html("<%= @class_group.name %>")
+var currentClassGroupHomeRoom = $(".class_group_<%= @class_group.id %> .homeroom");
+currentClassGroupHomeRoom.html("<%= @class_group.homeroom %>")
