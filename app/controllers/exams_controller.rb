@@ -82,9 +82,9 @@ class ExamsController < ApplicationController
             end
           end
         end
-      end    
+      end
     end
-    
+
     # AVARAGE SCORE CALCULATION
     @student_total_scores.each do |student_id, student_exam_score|
       student_exam_score.each do |k, v|
@@ -98,27 +98,26 @@ class ExamsController < ApplicationController
 
     @student_total_scores.each do |k, v|
       v.each do |n, m|
-        variance[n] += ((m - @avarage_scores[n]) ** 2 / @students.count)   
+        variance[n] += ((m - @avarage_scores[n]) ** 2 / @students.count)
       end
     end
 
-   
     #STANDARD DEVIATION CALCULATION FOR EXAM
     standard_deviation = {}
     standard_deviation.default = 0.0
-    
+
     variance.each do |k,v|
       standard_deviation[k] = Math.sqrt(v)
     end
 
-    #DEVIATION CALCULATION 
+    #DEVIATION CALCULATION
     @deviation = Hash.new { |hash,key| hash[key] = {} }
     @students.each do |student|
       @exams.each do |exam|
-        deviation = (((@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / (standard_deviation[exam.id]) * 10) + 50)
+        deviation = (@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / standard_deviation[exam.id] * 10 + 50
         if deviation.nan?
-          @deviation[student.id][exam.id] = 0
-        else 
+          @deviation[student.id][exam.id] = 50
+        else
           @deviation[student.id][exam.id] = deviation
         end
       end
@@ -132,7 +131,7 @@ class ExamsController < ApplicationController
                                      :deviation => @deviation,
                                      :students => Student.decrypt_student_fields(@students)
                                      }}
-      
+
       format.html { render "exams/grading" }
     end
   end
@@ -143,7 +142,7 @@ class ExamsController < ApplicationController
     end
   end
 
-  def update_score    
+  def update_score
     @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
     @exam_portion_score.score = params[:exam_portion_score][:score]
     if @exam_portion_score.save
