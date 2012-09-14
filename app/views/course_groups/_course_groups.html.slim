@@ -10,4 +10,4 @@ table.index.table.table-striped.table-bordered.table-condensed
 				td
 					=link_to t('Show'), course_group, :class => 'btn btn-primary'
 					=link_to t('Edit'), [:edit, course_group], :remote => true, :class => 'btn btn-warning'
-					=link_to t('Delete'), course_group, :method => :delete, :remote => true,  :class => 'btn btn-danger course_group_delete_link'
+					=link_to t('Delete'), course_group, :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger course_group_delete_link'
