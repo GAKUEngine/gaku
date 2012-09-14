@@ -97,8 +97,11 @@ en:
     enroll_class_group: 'Enroll Class Group'
     add_class_group: 'Add Class Group'
     choose_class_group: 'Choose Class Group'
-  course_group:
+  course_groups:
     course_groups: 'Course Groups'
+    edit_course_group: 'Edit Course Group'
+    add_course_group: 'Add Course Group'
+    add_course: 'Add Course'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
