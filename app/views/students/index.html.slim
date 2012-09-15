@@ -17,9 +17,24 @@
       #modal_dialogs
       #new_student_form.hide
         =render 'form'
-    =render 'students/student_chooser', :select_mode => 'multiple'
+    /=render 'students/student_chooser', :select_mode => 'multiple'
+    
+    =form_tag students_path, :method => 'get', :id => 'students_search' do
+      p
+        = text_field_tag :search, params[:search]
+      .row-fluid
+        .span12.well
+          #students_index
+            =render 'students/students'
 
-    .row-fluid
-      .span12.well
-        #class_groups_index
-          =render 'students/students'
+javascript:
+  $(function() {
+    $("#students_index th a").live("click", function() {
+      $.getScript(this.href);
+      return false;
+    });
+    $("#students_search input").keyup(function() {
+      $.get($("#students_search").attr("action"), $("#students_search").serialize(), null, "script");
+      return false;
+    });
+  });

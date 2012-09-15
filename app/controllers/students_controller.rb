@@ -13,16 +13,17 @@ class StudentsController < ApplicationController
   before_filter :load_student,      :only => [:edit, :update, :destroy]
   
   def index
-    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
-    
-    @students_json = sort_students(decrypt_students_fields(@students))
-    
+    @students = Student.search(Student.encrypt_name(params[:search])).includes([:addresses, :class_groups, :class_group_enrollments]).all
+    decrypted_students = decrypt_students_fields(@students)
+    @students_json = sort_students(decrypted_students)
+p @students_json
     if params[:action] == "get_csv_template"
       get_csv_template
       return
     end
 
     respond_to do |format|
+      format.js
       format.html
       format.json do 
         render :json => @students_json.as_json
@@ -146,19 +147,19 @@ class StudentsController < ApplicationController
     end
 
     def sort_students(students_json)
-      if params[:sort]
-        if params[:direction] && params[:direction] == "desc"
-          students_json.sort_by! { |hsh| hsh[params[:sort].to_sym] }
-          students_json.reverse!
-        else
-          students_json.sort_by! { |hsh| hsh[params[:sort].to_sym] }
-        end
+      students_json.sort_by! { |hsh| hsh[sort_column.to_sym] }
+      if sort_direction == "desc"
+        students_json.reverse!
       end
       return students_json
     end
 
     def sort_column
-      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+      if params[:sort]
+        Student.column_names.include?(params[:sort]) || Student.column_names.include?("encrypted_" + params[:sort]) ? params[:sort] : "surname"
+      else
+        "surname"
+      end
     end
 
     def sort_direction

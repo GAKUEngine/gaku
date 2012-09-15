@@ -12,3 +12,5 @@ $ ->
   	  
   $('.delete_student').live 'ajax:success', (evt, data, status, xhr) ->
 	  $(this).closest('tr').remove();
+	    
+
