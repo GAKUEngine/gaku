@@ -8,19 +8,31 @@ describe CoursesController do
     login_admin
   end
 
-  describe "GET :index	" do
+  describe "GET :index  " do
     it "should be successful" do
       get :index
       response.should be_success
     end
-  end 
+  end
 
   describe "POST create" do
-    it "redirects to the new course" do
-      page.stub :save => true
+    subject { post :create, :course => { :code => "Fall2012" } }
 
-      post :create
-      response.should redirect_to(course_url(Course.last))
+    it "redirects to course_url(@course)" do
+      subject.should redirect_to(course_url(assigns(:course)))
+    end
+
+    it "redirects_to :action => :show" do
+      subject.should redirect_to :action => :show,
+                                 :id => assigns(:course).id
+    end
+
+    it "redirects_to(@course)" do
+      subject.should redirect_to(assigns(:course))
+    end
+
+    it "redirects_to /courses/:id" do
+      subject.should redirect_to("/courses/#{assigns(:course).id}")
     end
   end
 
