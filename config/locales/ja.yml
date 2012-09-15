@@ -95,9 +95,9 @@ ja:
     code: "授業コード"
     code_sample: "例：秋2020"
     save: "保存"
-    choose_course:
+    choose_course: "授業を選択"
     enroll_student: "生徒をこの授業に追加する"
-    count:
+    count: "数"
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
@@ -107,8 +107,8 @@ ja:
   add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
-    add:
-    create:
+    add: "追加"
+    create: "作成"
     enrollment: "在籍管理"
     assignment: "割り振り"
   class_group_management: "クラス管理"
@@ -147,6 +147,8 @@ ja:
     percent: "割合"
     rank: "ランク"
     grade: "評価"
+    level10: "10段階"
+    level5: "5段階"
     total: "合計"
     all_exams: "全試験同時採点"
   assignments:
@@ -181,7 +183,7 @@ ja:
       weight: "合計加重率が１００％になるように設定してください。"
     use_weighting: "加重率を使用"
     show: "試験照会"
-    edit: "Edit Exam"
+    edit: "試験を編集"
     exam_created: 'Exam successfully created'
   execution_date: "実行日"
   config:

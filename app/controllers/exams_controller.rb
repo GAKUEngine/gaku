@@ -48,6 +48,12 @@ class ExamsController < ApplicationController
     end
   end
 
+  def FixDigit num, digitNum
+    fixNum = 10 ** digitNum
+    num = (num * fixNum).truncate()
+    return num.to_f / fixNum
+  end
+
   def grading
     @course = Course.find(params[:course_id])
     @students = @course.students #.select("id, surname, name")
@@ -61,8 +67,8 @@ class ExamsController < ApplicationController
 
     @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
     @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
-    @avarage_scores  = {}
-    @avarage_scores.default = 0.0
+    @exam_averages = Hash.new {0.0}
+    @exam_weight_averages = Hash.new {0.0}
     @weighting_score = true
 
     @students.each do |student|
@@ -82,52 +88,71 @@ class ExamsController < ApplicationController
             end
           end
         end
-      end
-    end
-
-    # AVARAGE SCORE CALCULATION
-    @student_total_scores.each do |student_id, student_exam_score|
-      student_exam_score.each do |k, v|
-        @avarage_scores[k] += v / @students.length
-      end
-    end
-
-    # VARIANCE CALCULATION FOR EXAM
-    variance = {}
-    variance.default = 0.0
-
-    @student_total_scores.each do |k, v|
-      v.each do |n, m|
-        variance[n] += ((m - @avarage_scores[n]) ** 2 / @students.count)
-      end
-    end
-
-    #STANDARD DEVIATION CALCULATION FOR EXAM
-    standard_deviation = {}
-    standard_deviation.default = 0.0
-
-    variance.each do |k,v|
-      standard_deviation[k] = Math.sqrt(v)
-    end
-
-    #DEVIATION CALCULATION
-    @deviation = Hash.new { |hash,key| hash[key] = {} }
-    @students.each do |student|
-      @exams.each do |exam|
-        deviation = (@student_total_scores[student.id][exam.id] - @avarage_scores[exam.id]) / standard_deviation[exam.id] * 10 + 50
-        if deviation.nan?
-          @deviation[student.id][exam.id] = 50
-        else
-          @deviation[student.id][exam.id] = deviation
+        @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
+        if exam.use_weighting
+          @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
         end
       end
+    end
+
+    # Exam Averaes Calculation -----↓
+    @exams.each do |exam|
+      @exam_averages[exam.id] = FixDigit @exam_averages[exam.id] / @students.length, 4
+      if exam.use_weighting
+        @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
+      end
+    end
+
+    # Deviation Calculation -----↓
+    @deviation = Hash.new { |hash,key| hash[key] = {} }
+    stdDev = 0.0
+    devMem = 0.0
+    @exams.each do |exam|
+      @students.each do |student|
+        if exam.use_weighting
+          stdDev += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
+        else
+          stdDev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
+        end
+      end
+      stdDev = Math.sqrt stdDev / @students.length
+      @students.each do |student|
+        @deviation[student.id][exam.id] = 0.0
+        if exam.use_weighting
+          devMem = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / stdDev
+        else
+          devMem = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / stdDev
+        end
+
+        if devMem.nan?
+          @deviation[student.id][exam.id] = 50
+        else
+          @deviation[student.id][exam.id] = FixDigit devMem * 10 + 50, 4
+        end
+      end
+    end
+
+    # WIP Grade and Rank Calculation -----↓
+    @exams.each do |exam|
+      scores = []
+      if exam.use_weighting
+        @students.each do |student|
+          scores.push @student_total_weights[student.id][exam.id]
+        end
+      else
+        @students.each do |student|
+          scores.push @student_total_scores[student.id][exam.id]
+        end
+      end
+      scores.sort!().reverse!()
+
     end
 
     respond_to do |format|
       format.json { render :json => {:student_total_scores => @student_total_scores,
                                      :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
                                      :course => @course,
-                                     :avarage_scores => @avarage_scores,
+                                     :exam_averages => @exam_averages,
                                      :deviation => @deviation,
                                      :students => Student.decrypt_student_fields(@students)
                                      }}
