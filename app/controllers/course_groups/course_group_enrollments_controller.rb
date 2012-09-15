@@ -15,6 +15,12 @@ class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 				format.js { render '/course_groups/course_group_enrollments/error' }
 			end
 		end
-
 	end
+
+	def destroy
+		super do |format|
+			format.js { render :nothing => true}
+		end
+	end
+
 end

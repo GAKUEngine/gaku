@@ -13,3 +13,6 @@ $ ->
 
 	$('.course_group_delete_link').live 'ajax:success', ->
 		$(this).closest('tr').remove()
+
+	$('.course_group_enrollment_delete_link').live 'ajax:success', ->
+		$(this).closest('tr').remove()
