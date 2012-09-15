@@ -9,4 +9,4 @@ table.index.table.table-striped.table-bordered.table-condensed
 			tr
 				td =course_group_enrollment.course.code
 				td =course_group_enrollment.course.syllabus.name if course_group_enrollment.course.syllabus
-				td =link_to t('remove'), course_group_course_group_enrollment_path(@course_group, course_group_enrollment), :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'course_group_enrollment_delete_link'
+				td =link_to t('remove'), course_group_course_group_enrollment_path(@course_group, course_group_enrollment), :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger course_group_enrollment_delete_link'
