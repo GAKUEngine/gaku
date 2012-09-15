@@ -11,8 +11,5 @@ $ ->
 		$('#course_group_form_errors').html ''
 		$('#add_new_course_group_form form').slideToggle()
 
-	$('.course_group_delete_link').live 'ajax:success', ->
-		$(this).closest('tr').remove()
-
 	$('.course_group_enrollment_delete_link').live 'ajax:success', ->
 		$(this).closest('tr').remove()
