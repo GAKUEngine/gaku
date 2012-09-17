@@ -3,8 +3,10 @@ table.index.table.table-striped.table-bordered.table-condensed
 		tr
 			th =t('name')
 			th =t('syllabus')
+			th =t('manage')
 	tbody
-		- course_group.courses.each do |course|				
+		- course_group.course_group_enrollments.each do |course_group_enrollment|				
 			tr
-				td =course.code
-				td =course.syllabus.name if course.syllabus
+				td =course_group_enrollment.course.code
+				td =course_group_enrollment.course.syllabus.name if course_group_enrollment.course.syllabus
+				td =link_to t('remove'), course_group_course_group_enrollment_path(@course_group, course_group_enrollment), :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger course_group_enrollment_delete_link'
