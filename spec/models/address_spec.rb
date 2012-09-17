@@ -17,7 +17,9 @@ describe Address do
     it { should have_many(:student_addresses) } 
     it { should have_many(:students) } 
     it { should have_many(:guardian_addresses) } 
-    it { should have_many(:guardians) } 
+    it { should have_many(:guardians) }
+    it { should have_one(:campus) } 
+ 
 
     it { should validate_presence_of(:address1) }
     it { should validate_presence_of(:city) }
