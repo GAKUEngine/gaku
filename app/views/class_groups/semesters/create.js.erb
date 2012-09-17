@@ -1,4 +1,4 @@
-$('#class_group-semesters-table tbody').append('<%= escape_javascript(render :partial => "semester", :formats => [:html], :handlers => [:erb, :slim], :locals => {:semester => @semester}) %>');
+$('#semesters_index tbody').append('<%= escape_javascript(render :partial => "semester", :formats => [:html], :handlers => [:erb, :slim], :locals => {:semester => @semester}) %>');
 
 $('.semesters_count').html('<%= @class_group.semesters.count %>');
 

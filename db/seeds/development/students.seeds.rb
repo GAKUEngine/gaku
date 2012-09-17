@@ -2,3 +2,5 @@
 Student.create(:name => 'John', :surname => 'Doe')
 Student.create(:name => 'Anonime', :surname => 'Anonimized')
 Student.create(:name => 'Amon', :surname => 'Tobin')
+Student.create(:surname => '影月', :name => '零')
+Student.create(:surname => 'スノー', :name => 'サニー')

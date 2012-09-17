@@ -108,11 +108,6 @@ class StudentsController < ApplicationController
 
     def load_before_show
       @new_contact = Contact.new
-      #@new_guardian = Guardian.new
-      #@new_note = Note.new
-      #@new_course_enrollment = CourseEnrollment.new
-      #@notes = Note.all
-      #@class_groups = ClassGroup.all
       @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 

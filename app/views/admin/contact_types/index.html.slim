@@ -1,0 +1,14 @@
+#contact_types
+  .row-fluid
+    .pull-left
+      h4.h4-vm.contacts_count
+        = @contact_types.count != 0 ? t('contact_types.list') + "（" + @contact_types.count.to_s + "）" : t('contact_types.list')
+  .row-fluid
+    table#contact_types_index.index.table.table-striped.table-bordered.table-condensed.student_contact_table
+      thead
+        tr
+          th.btn-inverse =t('contact_types.singular')
+          th.btn-inverse =t('contacts.actions')
+      tbody
+        =render :partial => 'admin/contact_types/contact_type', :collection => @contact_types, :as => 'contact_type'
+    br/ 
