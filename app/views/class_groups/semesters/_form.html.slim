@@ -15,7 +15,7 @@
         = link_to t("cancel"), "", :id => "semester_cancel_link", :class => "span6 btn btn-danger", :style => "min-height:0px"
 
 coffee:
-  $("#semester_cancel").click ->
+  $("#semester_cancel_link").click ->
     $("#add_class_group_semester_link").show()
     $("#add_class_group_semester").html("")
     false    #prevent page from reloading
