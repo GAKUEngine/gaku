@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
     @students = Student.search(Student.encrypt_name(params[:search])).includes([:addresses, :class_groups, :class_group_enrollments]).all
     decrypted_students = decrypt_students_fields(@students)
     @students_json = sort_students(decrypted_students)
-p @students_json
+
     if params[:action] == "get_csv_template"
       get_csv_template
       return
