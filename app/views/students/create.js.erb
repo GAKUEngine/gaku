@@ -1,1 +1,3 @@
 $('#new_student_form').hide()
+$('table#student_index tbody').append('<%= escape_javascript(render :partial => "student", :formats => [:html], :handlers => [:erb, :slim], :locals => {:student => @student_json}) %>')
+$('#new_student_form form')[0].reset();

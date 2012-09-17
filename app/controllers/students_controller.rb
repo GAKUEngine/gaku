@@ -2,25 +2,28 @@ class StudentsController < ApplicationController
   include SheetHelper
   #before_filter :authenticate_user!
 
+  helper_method :sort_column, :sort_direction
+
   inherit_resources
   actions :show, :new, :destroy
 
   before_filter :load_before_index, :only => :index
   before_filter :load_before_show,  :only => :show
   before_filter :load_class_groups, :only => [:new, :edit]
-  before_filter :load_student,      :only => [:edit, :update]
+  before_filter :load_student,      :only => [:edit, :update, :destroy]
   
   def index
-    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
-    
-    @students_json = decrypt_student_fields(@students)
-
+    @students = Student.search(Student.encrypt_name(params[:search])).includes([:addresses, :class_groups, :class_group_enrollments]).all
+    decrypted_students = decrypt_students_fields(@students)
+    @students_json = sort_students(decrypted_students)
+p @students_json
     if params[:action] == "get_csv_template"
       get_csv_template
       return
     end
 
     respond_to do |format|
+      format.js
       format.html
       format.json do 
         render :json => @students_json.as_json
@@ -42,7 +45,9 @@ class StudentsController < ApplicationController
   private :export_csv_index
 
   def create
+
     super do |format|
+      @student_json = decrypt_student_fields(@student.as_json)
       format.js { render }
     end
   end
@@ -78,7 +83,10 @@ class StudentsController < ApplicationController
   end
   
   def destroy
-    destroy! :flash => !request.xhr?
+    if @student.destroy && !request.xhr?
+      flash[:notice] = "Student was successfully destroyed."  
+    end
+    render :nothing => true
   end
 
   def autocomplete_search
@@ -88,7 +96,7 @@ class StudentsController < ApplicationController
     term = Student.encrypt_name(params[:term])
     @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(encrypted_surname || " " || encrypted_name LIKE ?) OR (encrypted_name || " " || encrypted_surname LIKE ?) OR (encrypted_name LIKE ?) OR (encrypted_surname LIKE ?)', "%#{term}%", "%#{term}%", "%#{term}%",  "%#{term}%")
 
-    @students_json = decrypt_student_fields(@students)
+    @students_json = decrypt_students_fields(@students)
 
     render json: @students_json.as_json
   end
@@ -117,16 +125,45 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
 
-    def decrypt_student_fields(students)
+    def decrypt_students_fields(students)
       students_json = students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
       i = 0
       students_json.each {|student|
         student[:name] = @students[i].name
         student[:surname] = @students[i].surname
         student[:phone] = @students[i].phone
+        student[:student] = @students[i]
         i += 1
       }
       return students_json
+    end
+
+    def decrypt_student_fields(student)
+      student[:name] = @student.name
+      student[:surname] = @student.surname
+      student[:phone] = @student.phone
+      student[:student] = @student
+      return student
+    end
+
+    def sort_students(students_json)
+      students_json.sort_by! { |hsh| hsh[sort_column.to_sym] }
+      if sort_direction == "desc"
+        students_json.reverse!
+      end
+      return students_json
+    end
+
+    def sort_column
+      if params[:sort]
+        Student.column_names.include?(params[:sort]) || Student.column_names.include?("encrypted_" + params[:sort]) ? params[:sort] : "surname"
+      else
+        "surname"
+      end
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
 end
