@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.integer  "student_id"
     t.integer  "guardian_id"
     t.integer  "faculty_id"
+    t.integer  "campus_id"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end

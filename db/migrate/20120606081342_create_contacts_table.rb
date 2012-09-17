@@ -10,6 +10,8 @@ class CreateContactsTable < ActiveRecord::Migration
       t.references :student
       t.references :guardian
       t.references :faculty
+      t.references :campus
+
       
       t.timestamps
     end

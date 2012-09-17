@@ -9,6 +9,8 @@ describe Contact do
     it { should belong_to(:contact_type) }
     it { should belong_to(:student) }
     it { should belong_to(:guardian) }
+    it { should belong_to(:campus) }
+
   end
   
 
