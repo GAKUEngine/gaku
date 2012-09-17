@@ -1,0 +1,2 @@
+$('#modal_dialogs').html('<%== escape_javascript(render :partial => "course_groups/course_group_modal", :formats => [:html], :handlers => [:erb, :slim], :course_group => @course_group ) %>');
+$('#edit_course_group_modal').modal('show');
