@@ -2,4 +2,6 @@ $('#course_index_table').html('<%= escape_javascript(render :partial => "/course
 $('#add_course_enrollment_form form').hide()
 $('#course_group_enrollment_course_id').val('')
 
+$('#delete_course_group').html('')
+
 $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>")
