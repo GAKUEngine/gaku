@@ -2,3 +2,5 @@
 Syllabus.create(:name => "Biology Syllabus", :code => "s1")
 Syllabus.create(:name => "Math Syllabus", :code => "s2")
 Syllabus.create(:name => "Literature Syllabus", :code => "s3")
+Syllabus.create(:name => "日本語", :code => "NH")
+Syllabus.create(:name => "メカトロニクス", :code => "MT")
