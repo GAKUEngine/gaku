@@ -13,7 +13,11 @@ class StudentsController < ApplicationController
   before_filter :load_student,      :only => [:edit, :update, :destroy]
   
   def index
-    @students = Student.search(Student.encrypt_name(params[:search])).includes([:addresses, :class_groups, :class_group_enrollments]).all
+    if params[:search] && !params[:search].empty?
+      @students = Student.search(Student.encrypt_name(params[:search]), load: true)
+    else  
+      @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
+    end      
     decrypted_students = decrypt_students_fields(@students)
     @students_json = sort_students(decrypted_students)
 
