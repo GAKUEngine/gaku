@@ -1,0 +1,5 @@
+- model = @course_group || CourseGroup.new
+=form_for model, :html => {:remote => true} do |f|
+	=f.label :name, t('name')
+	=f.text_field :name
+	=f.submit 

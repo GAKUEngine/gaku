@@ -93,8 +93,15 @@ GAKUEngine::Application.routes.draw do
 
   resources :states
 
-  resources :course_groups
+  resources :course_groups do
+    resources :course_group_enrollments, :controller => 'course_groups/course_group_enrollments'
+  end
 
   root :to => 'home#index'
+  
+
+  namespace :admin do
+    resources :contact_types
+  end
 
 end

@@ -1,5 +1,6 @@
--if target.errors.any?
-	ul
-		-target.errors.full_messages.each do |message|
-			li =message
+.alert.alert-error
+	-if target.errors.any?
+		ul
+			-target.errors.full_messages.each do |message|
+				li =message
 			
