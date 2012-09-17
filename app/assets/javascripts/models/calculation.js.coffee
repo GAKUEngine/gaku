@@ -5,12 +5,12 @@ class GAKUEngine.Models.Calculation extends Backbone.Model
 
 	reRenderTableView: ->
 
-		tableView = new GAKUEngine.Views.TableView 
+		tableView = new GAKUEngine.Views.TableView
 												course: @get('course')
 												exams: @get('exams')
 												student_total_scores: @get('student_total_scores')
-												avarage_scores: @get('avarage_scores')
+												exam_averages: @get('exam_averages')
 												deviation: @get('deviation')
 												students: $.parseJSON(@get('students'))
 
-		$('.grading-container').html tableView.render().el		
+		$('.grading-container').html tableView.render().el
