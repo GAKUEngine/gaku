@@ -16,7 +16,6 @@ class StudentsController < ApplicationController
     @students = Student.search(Student.encrypt_name(params[:search])).includes([:addresses, :class_groups, :class_group_enrollments]).all
     decrypted_students = decrypt_students_fields(@students)
     @students_json = sort_students(decrypted_students)
-p @students_json
     if params[:action] == "get_csv_template"
       get_csv_template
       return
@@ -108,11 +107,6 @@ p @students_json
 
     def load_before_show
       @new_contact = Contact.new
-      #@new_guardian = Guardian.new
-      #@new_note = Note.new
-      #@new_course_enrollment = CourseEnrollment.new
-      #@notes = Note.all
-      #@class_groups = ClassGroup.all
       @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 
