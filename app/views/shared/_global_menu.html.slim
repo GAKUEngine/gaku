@@ -22,3 +22,12 @@ ul.nav#menu
       b.caret
     ul.dropdown-menu
       li= link_to t("exams.plural"), exams_path
+
+
+
+  li.dropdown
+    a.dropdown-toggle data-toggle="dropdown" href="#"
+      = t("admin")
+      b.caret
+    ul.dropdown-menu
+      li= link_to t("contact_types.plural"), admin_contact_types_path

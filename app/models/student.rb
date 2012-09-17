@@ -108,6 +108,13 @@ class Student < ActiveRecord::Base
       return students_json.to_json
   end
 
+  def self.search(search)
+    if search
+      where('encrypted_name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 end
 
 

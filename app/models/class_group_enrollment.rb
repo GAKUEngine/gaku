@@ -16,4 +16,6 @@ class ClassGroupEnrollment < ActiveRecord::Base
   has_many :roles
 
   attr_accessible :seat_number, :roles, :class_group_id, :student_id
+  
+  validates :student_id, :uniqueness => {:scope => :class_group_id, :message => "Already enrolled to the class group!"}
 end

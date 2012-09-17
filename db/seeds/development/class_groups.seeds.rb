@@ -2,3 +2,7 @@
 ClassGroup.create(:name => 'Biology')
 ClassGroup.create(:name => 'Math')
 ClassGroup.create(:name => 'Literature')
+ClassGroup.create(:name => 'A組', :grade => 1)
+ClassGroup.create(:name => 'A組', :grade => 2)
+ClassGroup.create(:name => 'さくら組', :grade => 0)
+ClassGroup.create(:name => 'マルチメディア専攻', :grade => 1)

@@ -1,12 +1,16 @@
 .row-fluid
+  .span12
+		=link_to t('course_groups.add_course'), '', :class => 'btn btn-primary', :id =>'add_course_enrollment_link'
+.row-fluid
+  .span12
+    #course_enrollment_form_errors
+    #add_course_enrollment_form
+      =form_for [@course_group, CourseGroupEnrollment.new], :html => {:remote => true, :class =>'hide'}  do |f|
+    	 =f.select :course_id, Course.all.collect { |s| [s.code, s.id] }, {:prompt => 'Choose Course'}
+    	 =f.submit 
+.row-fluid
   .span12.well
-		table.index.table.table-striped.table-bordered.table-condensed
-			thead
-				tr
-					th =t('name')
-					th =t('syllabus')
-			tbody
-				-@course_group.courses.each do |course|				
-					tr
-						td =course.code
-						td =course.syllabus.name if course.syllabus
+  	#course_index_table
+			=render 'courses', :course_group => @course_group
+-if @course_group.course_group_enrollments.count == 0
+  =render 'delete_confirm'
