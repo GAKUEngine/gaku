@@ -21,6 +21,17 @@ class ClassGroups::SemestersController < ApplicationController
     render 'new'  
   end
 
+  def edit
+    @semester = Semester.find(params[:id])
+    render 'edit'
+  end
+
+  def update
+    super do |format|
+      format.js { render }
+    end  
+  end
+
   def destroy
     @semester = Semester.find(params[:id])
     @semester.destroy
