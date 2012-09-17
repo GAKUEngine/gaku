@@ -38,10 +38,6 @@ describe 'ClassGroups' do
 
       click_button 'submit_class_group_button'
 
-      ClassGroup.last.name.should == 'Really awesome class group'
-      ClassGroup.last.grade.should == 2
-      ClassGroup.last.homeroom.should == 'B2'
-
       page.should have_content 'Really awesome class group'
       page.should have_content "2"
       page.should have_content "B2"
@@ -49,6 +45,9 @@ describe 'ClassGroups' do
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
 
+      ClassGroup.last.name.should == 'Really awesome class group'
+      ClassGroup.last.grade.should == 2
+      ClassGroup.last.homeroom.should == 'B2'
     end
 
     it 'should not edit a class group if back button is clicked while editing', :js => true do
@@ -74,16 +73,16 @@ describe 'ClassGroups' do
 
       click_button 'submit_class_group_button'
 
-      ClassGroup.last.name.should == 'Really awesome class group'
-      ClassGroup.last.grade.should == 2
-      ClassGroup.last.homeroom.should == 'B2'
-
       page.should have_content 'Really awesome class group'
       page.should have_content "2"
       page.should have_content "B2"
 
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
+
+      ClassGroup.last.name.should == 'Really awesome class group'
+      ClassGroup.last.grade.should == 2
+      ClassGroup.last.homeroom.should == 'B2'
     end
 
     it 'should delete class group', :js => true do 
