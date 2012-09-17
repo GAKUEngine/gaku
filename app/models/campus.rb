@@ -3,5 +3,6 @@ class Campus < ActiveRecord::Base
 
 	has_many :contacts
 	belongs_to :school
+	belongs_to :address
 
 end

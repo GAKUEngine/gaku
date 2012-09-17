@@ -5,6 +5,7 @@ class CreateCampusTable < ActiveRecord::Migration
   		
   		t.string      :name
   		t.references  :school
+  		t.references  :address
 
   		t.timestamps
   	end  	
