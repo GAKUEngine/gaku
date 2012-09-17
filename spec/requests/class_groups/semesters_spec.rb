@@ -62,6 +62,28 @@ describe 'ClassGroup Semesters' do
         page.should have_content('09/15/2012 - 02/15/2013') }
     end
 
+    it 'should not edit a semester if cancel is clicked', :js => true do
+      click_link 'class_group_semesters_tab_link'
+      @class_group.semesters.count.should == 1
+      page.all('table#semesters_index tbody tr').size.should == 1
+
+      within('table#semesters_index tbody') { click_link('edit_semester_link') }
+      wait_until { find('#semester_modal').visible? }
+
+      select '2012', :from => 'semester_starting_1i'
+      select 'September', :from => 'semester_starting_2i'
+      select '15', :from => 'semester_starting_3i'
+
+      select '2013', :from => 'semester_ending_1i'
+      select 'February', :from => 'semester_ending_2i'
+      select '15', :from => 'semester_ending_3i'
+      click_on 'semester_cancel_link'
+      page.should_not have_content('#semester_modal')
+
+      within('table#semesters_index tbody') { 
+        page.should_not have_content('09/15/2012 - 02/15/2013') }
+    end
+
     it 'should delete a semester from class group', :js => true do
       click_link 'class_group_semesters_tab_link'    
       @class_group.semesters.count.should == 1 
