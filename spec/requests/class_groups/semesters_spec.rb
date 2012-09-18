@@ -42,8 +42,6 @@ describe 'ClassGroup Semesters' do
 
     it 'should edit semester' do
       click_link 'class_group_semesters_tab_link'
-      @class_group.semesters.count.should == 1
-      page.all('table#semesters_index tbody tr').size.should == 1
 
       within('table#semesters_index tbody') { click_link('edit_semester_link') }
       wait_until { find('#semester_modal').visible? }
@@ -56,15 +54,14 @@ describe 'ClassGroup Semesters' do
       select 'February', :from => 'semester_ending_2i'
       select '15', :from => 'semester_ending_3i'
       click_button 'submit_semester_button'
-      page.should_not have_content('#semester_modal')
 
-      within('table#semesters_index tbody') { 
-        page.should have_content('09/15/2012 - 02/15/2013') }
+      within('table#semesters_index tbody') { page.should have_content('09/15/2012 - 02/15/2013') }
+      page.should_not have_content('#semester_modal')
     end
 
     it 'should delete a semester from class group', :js => true do
       click_link 'class_group_semesters_tab_link'    
-      @class_group.semesters.count.should == 1 
+      @class_group.semesters.count.should eql(1) 
       tr_count = page.all('table#semesters_index tbody tr').size
 
       click_link('delete_semester_link') 
