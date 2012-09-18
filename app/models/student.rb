@@ -6,8 +6,8 @@
 #  encrypted_name               :string(255)
 #  middle_name                  :string(255)
 #  encrypted_surname            :string(255)
-#  name_reading                 :string(255)      default("")
-#  surname_reading              :string(255)      default("")
+#  encrypted_name_reading       :string(255)      default("")
+#  encrypted_surname_reading    :string(255)      default("")
 #  gender                       :boolean
 #  encrypted_phone              :string(255)
 #  email                        :string(255)
