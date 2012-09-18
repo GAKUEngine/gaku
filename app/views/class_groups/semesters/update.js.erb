@@ -1,0 +1,4 @@
+$('#semester_modal').modal('hide');
+$('#semester_modal').remove();
+var currentSemesterPeriod = $("#semester_<%= @semester.id %>  .period");
+currentSemesterPeriod.html("<%= @semester.starting.strftime("%m/%d/%Y") + " - " + @semester.ending.strftime("%m/%d/%Y") %>")
