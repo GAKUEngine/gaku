@@ -48,3 +48,5 @@ Gemfile.lock
 public/system/*
 
 routes.txt
+
+elasticsearch*

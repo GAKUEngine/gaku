@@ -19,6 +19,7 @@ class Contact < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :student
   belongs_to :guardian
+  belongs_to :campus
   
   attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
 

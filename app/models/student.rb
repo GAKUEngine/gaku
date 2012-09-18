@@ -30,6 +30,9 @@
 class Student < ActiveRecord::Base
   require 'csv'
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   has_many :course_enrollments
   has_many :courses, :through => :course_enrollments
 
@@ -108,14 +111,4 @@ class Student < ActiveRecord::Base
       return students_json.to_json
   end
 
-  def self.search(search)
-    if search
-      where('encrypted_name LIKE ?', "%#{search}%")
-    else
-      scoped
-    end
-  end
 end
-
-
-

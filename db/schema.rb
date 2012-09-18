@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911001159) do
+ActiveRecord::Schema.define(:version => 20120917101532) do
 
   create_table "addresses", :force => true do |t|
     t.string   "encrypted_address1"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
     t.datetime "updated_at",         :null => false
   end
 
+  create_table "campuses", :force => true do |t|
+    t.string   "name"
+    t.integer  "school_id"
+    t.integer  "address_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "class_group_course_enrollments", :force => true do |t|
     t.integer  "class_group_id"
     t.integer  "course_id"
@@ -106,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
     t.integer  "student_id"
     t.integer  "guardian_id"
     t.integer  "faculty_id"
+    t.integer  "campus_id"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
@@ -305,6 +314,19 @@ ActiveRecord::Schema.define(:version => 20120911001159) do
     t.string   "repeat"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.boolean  "is_primary",     :default => false
+    t.text     "slogan"
+    t.text     "description"
+    t.date     "founded"
+    t.string   "principal"
+    t.string   "vice_principal"
+    t.text     "grades"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "semesters", :force => true do |t|
