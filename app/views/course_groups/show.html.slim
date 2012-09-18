@@ -12,5 +12,4 @@
   .span12.well
   	#course_index_table
 			=render 'courses', :course_group => @course_group
--if @course_group.course_group_enrollments.count == 0
   =render 'delete_confirm'
