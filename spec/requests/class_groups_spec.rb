@@ -9,11 +9,11 @@ describe 'ClassGroups' do
 
   it 'should create and show class group', :js => true do
     ClassGroup.count.should eql(0)
-    click_link 'new_class_group_link'
+    click_link 'new-class-group-link'
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
     fill_in 'class_group_homeroom', :with => 'room#7'
-    click_button 'submit_class_group_button'
+    click_button 'submit-class-group-button'
 
     page.should have_content '7'
     page.should have_content 'Awesome class group'
@@ -29,14 +29,14 @@ describe 'ClassGroups' do
     end
 
     it 'should edit class group from index view', :js => true do 
-      click_link 'edit_class_group_link'
-      wait_until { find('#class_group_modal').visible? }
+      click_link 'edit-class-group-link'
+      wait_until { find('#class-group-modal').visible? }
 
       fill_in 'class_group_grade', :with => '2'
       fill_in 'class_group_name', :with => 'Really awesome class group'
       fill_in 'class_group_homeroom', :with => 'B2'
 
-      click_button 'submit_class_group_button'
+      click_button 'submit-class-group-button'
 
       page.should have_content 'Really awesome class group'
       page.should have_content "2"
@@ -51,8 +51,8 @@ describe 'ClassGroups' do
     end
 
     it 'should not edit a class group if back button is clicked while editing', :js => true do
-      click_link 'edit_class_group_link'
-      wait_until { find('#class_group_modal').visible? }
+      click_link 'edit-class-group-link'
+      wait_until { find('#class-group-modal').visible? }
 
       click_on 'Back'
       @class_group.reload
@@ -65,15 +65,16 @@ describe 'ClassGroups' do
     it 'should edit class group from show view', :js => true do 
       visit class_group_path(@class_group)
       click_link("Edit")
-      wait_until { find('#class_group_modal').visible? }
+      wait_until { find('#class-group-modal').visible? }
 
       fill_in 'class_group_grade', :with => '2'
       fill_in 'class_group_name', :with => 'Really awesome class group'
       fill_in 'class_group_homeroom', :with => 'B2'
 
-      click_button 'submit_class_group_button'
+      click_button 'submit-class-group-button'
 
-      page.should have_content 'Really awesome class group'
+      wait_until { !page.find('#class-group-modal').visible? } 
+      page.should have_content 'Really awesome class group' 
       page.should have_content "2"
       page.should have_content "B2"
 
@@ -87,13 +88,13 @@ describe 'ClassGroups' do
 
     it 'should delete class group', :js => true do 
       ClassGroup.count.should eql(1)
-      tr_count = page.all('table#class_groups_index tbody tr').size
+      tr_count = page.all('table#class-groups-index tbody tr').size
       page.should have_content(@class_group.name)
 
       click_link "delete-class-group-link" 
       page.driver.browser.switch_to.alert.accept
   
-      wait_until { page.all('table#class_groups_index tbody tr').size == tr_count - 1 }
+      wait_until { page.all('table#class-groups-index tbody tr').size == tr_count - 1 }
       page.should_not have_content(@class_group.name)
       ClassGroup.count.should eql(0)
     end

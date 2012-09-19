@@ -1,12 +1,12 @@
 .pull-left
-  h4.h4-vm.semesters_count =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
+  h4.h4-vm.semesters-count =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
 .pull-right
-  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, new_class_group_semester_path(:class_group_id => @class_group.id), :remote => true, :id => 'add_class_group_semester_link', :class => "btn btn-primary"
+  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_semester')).html_safe, new_class_group_semester_path(:class_group_id => @class_group.id), :remote => true, :id => 'new-class-group-semester-link', :class => "btn btn-primary"
 .row-fluid
 hr
 .row-fluid
     .span12
-      table#semesters_index.index.table.table-striped.table-bordered.table-condensed
+      table#semesters-index.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th Period
@@ -14,4 +14,4 @@ hr
         tbody
           =render :partial => 'class_groups/semesters/semester', :collection => @class_group.semesters, :as => :semester 
 
-#add_class_group_semester
+#new-class-group-semester-form

@@ -7,9 +7,9 @@ $ ->
     $('#enrollment_form').slideToggle()
 
 
-  $('#new_class_group_link').on 'click', (event) ->
+  $('#new-class-group-link').on 'click', (event) ->
   	event.preventDefault()
-  	$('#new_class_group_form').slideToggle()
+  	$('#new-class-group-form').slideToggle()
 
 
  	$('#delete-class-group-link').live 'ajax:success', (evt, data, status, xhr) ->

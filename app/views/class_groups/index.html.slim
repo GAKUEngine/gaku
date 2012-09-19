@@ -4,15 +4,15 @@
     .row-fluid
       h3.pull-left = t("class_groups.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("class_groups.new")).html_safe, new_class_group_path, :class => "btn btn-primary", :id => "new_class_group_link", :remote => true
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("class_groups.new")).html_safe, new_class_group_path, :class => "btn btn-primary", :id => "new-class-group-link", :remote => true
     .row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-        #class_groups_index
+        #class-groups-index
           =render 'class_groups/class_groups'
     .row-fluid
-      #new_class_group_form style='display:none'
+      #new-class-group-form style='display:none'
         =render 'form' 
-#modal_dialogs
+#modal-dialogs

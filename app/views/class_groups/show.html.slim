@@ -22,13 +22,13 @@
         .tabbable.tabs-right
           ul.nav.nav-tabs
             li#class_group_students_tab.active
-              a#class_group_enrollments_tab_link data-toggle="tab" href="#class_group_enrollments"
+              a#class-group-enrollments-tab-link data-toggle="tab" href="#class_group_enrollments"
                 =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
             li
-              a#class_group_semesters_tab_link data-toggle="tab" href="#semesters"
+              a#class-group-semesters-tab-link data-toggle="tab" href="#semesters"
                 =t("semesters.semesters")+"（ "+@class_group.semesters.count.to_s+" ）"
             li
-              a#class_group_courses_tab_link data-toggle="tab" href="#courses"
+              a#class-group-courses-tab-link data-toggle="tab" href="#courses"
                 = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
           .tab-content
 
@@ -59,7 +59,7 @@
         = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :remote => true
         = link_to t("Back"), class_groups_path, :class => "span6 btn"
 
-#modal_dialogs
+#modal-dialogs
 
 coffee:
   $ ->
