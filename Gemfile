@@ -7,7 +7,6 @@ gem 'slim-rails'
 gem 'inherited_resources'
 gem 'chosen-rails'
 #gem 'attr_encrypted'
-gem 'tire'
 
 #JS 
 gem 'jquery-rails'
