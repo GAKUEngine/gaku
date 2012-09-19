@@ -12,10 +12,11 @@
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
         = f.submit t("semesters.save"), :id => 'submit_semester_button', :class => "span6 btn btn-primary"
-        = link_to t("cancel"), "", :id => "semester_cancel_link", :class => "span6 btn btn-danger", :style => "min-height:0px"
+        = link_to t("cancel"),"", :id => "semester_cancel_link", :class => "span6 btn btn-danger",:style => "min-height:0px"
 
 coffee:
   $("#semester_cancel_link").click ->
     $("#add_class_group_semester_link").show()
     $("#add_class_group_semester").html("")
+    $("#semester_modal").modal("hide")
     false    #prevent page from reloading
