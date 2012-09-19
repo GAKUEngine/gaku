@@ -206,8 +206,10 @@ en:
   contact_types: 
     singular: "Contact Type"
     plural: "Contact Types"
+    new: "New Contact Type"
+    add: "Add Contact Type"
+    save: "Save Contact Type"
 
-  contact:
   contacts:
     list: "Contacts List"
     new: "New Contact"
