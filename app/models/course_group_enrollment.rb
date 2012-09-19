@@ -13,8 +13,7 @@ class CourseGroupEnrollment < ActiveRecord::Base
 
   attr_accessible :course_id, :course_group_id 
 
-  validates :course_group_id, :uniqueness => {:scope => :course_id, :message => "Already enrolled to course group!"},
-  											:presence => true
-  validates :course_id, :presence => true
+  validates :course_group_id, :presence => true
+  validates :course_id, :uniqueness => {:scope => :course_group_id, :message => "already enrolled to this course group!"}, :presence => true
 
 end

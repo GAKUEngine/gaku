@@ -1,6 +1,7 @@
 class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 	inherit_resources
 
+	before_filter :load_course_group
 
 	def create
 		@course_group = CourseGroup.find(params[:course_group_id])
@@ -18,9 +19,16 @@ class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 	end
 
 	def destroy
-		super do |format|
-			format.js { render :nothing => true}
-		end
+		@course_group_enrollment = CourseGroupEnrollment.find(params[:id])
+    @course_group_enrollment.destroy
+    respond_to do |format|
+      format.js { render 'destroy' }
+    end
 	end
+
+	private 
+		def load_course_group
+      @course_group = CourseGroup.find(params[:course_group_id])
+    end
 
 end
