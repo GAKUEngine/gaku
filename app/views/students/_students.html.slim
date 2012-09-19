@@ -11,7 +11,7 @@ table#student_index.index.table.table-striped.table-bordered.table-condensed
       th.btn-info style="width:94px" = t("manage")
 	    
 	tbody
-	  =render :partial => 'student', :collection => @students_json, :as => 'student'
+	  =render :partial => 'student', :collection => @students, :as => 'student'
 
 = hidden_field_tag :direction, params[:direction]
 = hidden_field_tag :sort, params[:sort]

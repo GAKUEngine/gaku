@@ -23,11 +23,11 @@ class Guardian < ActiveRecord::Base
   attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship, :contacts, :contacts_attributes
   validates :name, :surname, :presence => true
 
-  attr_encrypted :name,             :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  attr_encrypted :surname,          :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  attr_encrypted :name_reading,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  attr_encrypted :surname_reading,   :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  attr_encrypted :relationship,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
+#  attr_encrypted :name,             :key => 'fd8eg8gre67gre87g7rer4erg43e'
+#  attr_encrypted :surname,          :key => 'fd8eg8gre67gre87g7rer4erg43e'
+#  attr_encrypted :name_reading,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
+#  attr_encrypted :surname_reading,   :key => 'fd8eg8gre67gre87g7rer4erg43e'
+#  attr_encrypted :relationship,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
 
   accepts_nested_attributes_for :contacts, :allow_destroy => true
 
