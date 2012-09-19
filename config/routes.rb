@@ -15,12 +15,16 @@ GAKUEngine::Application.routes.draw do
     end
   end
 
-  resources :courses do
+  resources :courses do   
+    
     resources :enrollments, :controller => 'courses/enrollments' do 
       post :enroll_class_group, :on => :member
       post :enroll_student, :on => :collection
     end
+    
     resources :exams do
+      get :export_xls, :on => :collection
+      
       resources :exam_portion_scores
       get :grading, :on => :member
       get :grading, :on => :collection
