@@ -1,4 +1,4 @@
 tr id="enrollment_#{enrollment.id}"
 	td= enrollment.course.code
-	td= link_to "Delete", class_group_class_group_course_enrollment_path(:class_group_id => enrollment.class_group_id, :id =>enrollment.id), :id => 'delete_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'btn btn-mini btn-danger delete_link'
+	td= ajax_link_to_delete class_group_class_group_course_enrollment_path(:class_group_id => enrollment.class_group_id, :id =>enrollment.id), :id => 'delete_link'
   

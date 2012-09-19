@@ -2,5 +2,5 @@
   = f.hidden_field :class_group_id, :value => @class_group.id
   = hidden_field_tag "student_ids", "", :id => 'student_ids'
   br
-    = f.submit "Add to class", :id => 'submit_student_button', :class => 'span3 btn btn btn-primary'
-  = link_to t('cancel'), '#', :class => 'span3 btn btn-danger', :id => 'cancel_student_link', :'data-dismiss' => "modal"
+    = submit_button "Add to class", :id => 'submit_student_button', :class => 'span3 btn btn btn-primary'
+  = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel_student_link'

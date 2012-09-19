@@ -6,8 +6,8 @@
         = f.select :course_id, Course.all.collect { |c| ["#{c.code}", c.id] }, {:prompt => t('courses.choose_course')}, :class => "span12 validate[required]"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
-        = f.submit t("courses.save"), :id => 'submit_course_button', :class => "span6 btn btn-primary"
-        = link_to t("cancel"), "", :id => "course_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+        = submit_button t("courses.save"), :id => 'submit_course_button', :class => "span6 btn btn-primary"
+        = link_to_cancel :id => "course_cancel", :style => "min-height:0px"
 
 coffee:
   $("#course_cancel").click ->

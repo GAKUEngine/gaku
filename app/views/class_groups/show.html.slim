@@ -61,19 +61,11 @@
 
 #modal_dialogs
 
-javascript:
-  $(document).ready(function() {
+coffee:
+  $ ->
+    $('#show_semester_form').click ->
+      $('#show_semester_form').hide()
 
-    $('#show_semester_form').click(function() {
-    $('#show_semester_form').hide()
-     $('#semester_form').toggle('slow', function() {
-      // Animation complete.
-     });
-    });
-    $('#show_course_form').click(function() {
-     $('#course_form').toggle('slow', function() {
-      // Animation complete.
-      $('#new_course').validationEngine();
-     });
-    });
-  });
+    $('#show_course_form').click ->
+      $('#course_form').toggle 'slow', ->
+        $('#new_course').validationEngine()

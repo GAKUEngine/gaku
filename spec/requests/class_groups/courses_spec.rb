@@ -18,7 +18,7 @@ describe 'ClassGroup Courses' do
     select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
     click_button 'submit_course_button'
 
-    wait_until { page.all('#courses_index tbody tr').size == tr_count+1 }
+    wait_until { page.all('#courses_index tbody tr').size == tr_count + 1 }
     within("#courses_index tbody"){
       page.should have_content ("#{@course.code}")
     }

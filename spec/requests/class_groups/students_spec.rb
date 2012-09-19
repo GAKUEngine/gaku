@@ -55,7 +55,7 @@ describe 'ClassGroup Students' do
         @class_group.students.count.should eql(1)
         tr_count = page.all('table#students_index tr').size
 
-        click_link('delete_student_link') 
+        click_link('delete-student-link') 
         page.driver.browser.switch_to.alert.accept
         
         wait_until { page.all('table#students_index tr').size == tr_count - 1 }

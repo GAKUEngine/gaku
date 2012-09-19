@@ -15,7 +15,7 @@ module ApplicationHelper
       :remote => true,
       :method => :delete,
       :data => { :confirm => 'Are you sure?' },
-      :class => 'btn btn-mini btn-danger'
+      :class => 'btn btn-mini btn-danger delete_link'
     }.merge(options)
 
     link_to name, resource, attributes
@@ -27,6 +27,16 @@ module ApplicationHelper
     attributes = {
       :remote => true,
       :class => "mr-xs btn btn-mini btn-warning"
+    }.merge(options)
+
+    link_to name, resource, attributes
+  end 
+
+  def link_to_show(resource, options = {})
+    name = ("<i class='icon-white icon-eye-open'></i>").html_safe
+
+    attributes = {
+      :class => "mr-xs btn btn-mini btn-success"
     }.merge(options)
 
     link_to name, resource, attributes

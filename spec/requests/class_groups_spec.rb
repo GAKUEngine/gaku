@@ -8,7 +8,7 @@ describe 'ClassGroups' do
   end
 
   it 'should create and show class group', :js => true do
-    ClassGroup.count.should == 0
+    ClassGroup.count.should eql(0)
     click_link 'new_class_group_link'
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
@@ -19,7 +19,7 @@ describe 'ClassGroups' do
     page.should have_content 'Awesome class group'
     page.should have_content 'room#7'
     
-    ClassGroup.count.should == 1
+    ClassGroup.count.should eql(1)
   end
 
   context 'show, edit, delete' do
@@ -45,9 +45,9 @@ describe 'ClassGroups' do
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
 
-      ClassGroup.last.name.should == 'Really awesome class group'
-      ClassGroup.last.grade.should == 2
-      ClassGroup.last.homeroom.should == 'B2'
+      ClassGroup.last.name.should eql('Really awesome class group')
+      ClassGroup.last.grade.should eql(2)
+      ClassGroup.last.homeroom.should eql('B2')
     end
 
     it 'should not edit a class group if back button is clicked while editing', :js => true do
@@ -80,9 +80,9 @@ describe 'ClassGroups' do
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
 
-      ClassGroup.last.name.should == 'Really awesome class group'
-      ClassGroup.last.grade.should == 2
-      ClassGroup.last.homeroom.should == 'B2'
+      ClassGroup.last.name.should eql('Really awesome class group')
+      ClassGroup.last.grade.should eql(2)
+      ClassGroup.last.homeroom.should eql('B2')
     end
 
     it 'should delete class group', :js => true do 
@@ -90,7 +90,7 @@ describe 'ClassGroups' do
       tr_count = page.all('table#class_groups_index tbody tr').size
       page.should have_content(@class_group.name)
 
-      click_link "delete_class_group_link" 
+      click_link "delete-class-group-link" 
       page.driver.browser.switch_to.alert.accept
   
       wait_until { page.all('table#class_groups_index tbody tr').size == tr_count - 1 }
