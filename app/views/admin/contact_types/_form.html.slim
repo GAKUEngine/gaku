@@ -1,4 +1,4 @@
-= form_for [:admin, @contact_type], :html => { :id => 'new_contact_type' }, :remote => true do |contact_type_form|
+= form_for [:admin, @contact_type], :html => { :id => 'new-contact-type' }, :remote => true do |contact_type_form|
   - if contact_type_form.object.new_record?
     b= t('contact_types.new')
     .row-fluid.mt-l
@@ -10,11 +10,11 @@
               = contact_type_form.text_field :name, :class => "span12"
           .row-fluid
           .span9
-            =contact_type_form.submit t('contact_types.save'), :id => 'submit_contact_type_button', :class => 'btn btn-primary button span12'
-          = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'contact_type_cancel', :class => 'span3 btn btn-danger', :'data-dismiss' => "modal"
+            =contact_type_form.submit t('contact_types.save'), :id => 'submit-contact-type-button', :class => 'btn btn-primary button span12'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel-contact-type-link', :class => 'span3 btn btn-danger', :'data-dismiss' => "modal"
   
   
 coffee:
-  $("#contact_type_cancel").click ->
-    $(".js-new-contact-type-link").show()
-    $("#js-new-contact-type-form").html("")
+  $("#cancel-contact-type-link").click ->
+    $("#new-contact-type-link").show()
+    $("#new-contact-type-form").html("")

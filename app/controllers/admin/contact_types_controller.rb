@@ -54,6 +54,5 @@ module Admin
         @contact_types = ContactType.all
       end
 
-
   end
 end
