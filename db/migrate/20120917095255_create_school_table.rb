@@ -2,7 +2,6 @@ class CreateSchoolTable < ActiveRecord::Migration
   
   def change
 		create_table :schools do |t|
-  		
   		t.string      :name
   		t.boolean     :is_primary, :default => false
   		t.text  			:slogan
@@ -15,5 +14,4 @@ class CreateSchoolTable < ActiveRecord::Migration
   		t.timestamps
   	end  	
   end
-
 end
