@@ -5,7 +5,7 @@
       h3.pull-left = t("course_groups.list")
       .pull-right
       	#add_new_course_group_button
-        	= link_to ("<i class='icon-white icon-plus'></i> " + t("course_groups.new")).html_safe, new_course_group_path, :class => "btn btn-primary", :id => "new_class_group_link", :remote => true
+        	= link_to ("<i class='icon-white icon-plus'></i> " + t("course_groups.new")).html_safe, new_course_group_path, :class => "btn btn-primary", :id => "new_course_group_link", :remote => true
     .row-fluid
       .span12
         hr/
@@ -16,4 +16,3 @@
     .row-fluid
       #add_new_course_group_form
         =render 'form' 
-#modal_dialogs

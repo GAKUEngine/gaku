@@ -34,8 +34,8 @@ class CourseGroupsController < ApplicationController
 
 	def destroy
 		super do |format|
-    format.js { render 'destroy' }
-  end
+    	format.js { render 'destroy' }
+  	end
   end
 
 	private
