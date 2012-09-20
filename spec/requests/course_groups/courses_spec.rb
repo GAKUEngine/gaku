@@ -35,6 +35,21 @@ describe 'CourseGroup Courses' do
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
+  it 'add a new course / cancel', :js => true do
+    tr_count = page.all('#courses_index_table tbody tr').size
+    click_link 'add_course_enrollment_link'
+    wait_until { page.find('#add_course_enrollment_form').visible? }
+    select "#{@course.code}", :from => 'course_group_enrollment_course_id'
+    find('#course_cancel').click
+
+    page.all('#courses_index_table tbody tr').size.should == tr_count
+
+    within("#courses_index_table tbody"){
+      page.should_not have_content ("#{@course.code}")
+    }
+    CourseGroupEnrollment.count.should == tr_count
+  end
+
   context 'Course group with added course' do
     before do
       @course_group.courses<<@course
