@@ -1,7 +1,14 @@
 class CourseGroupsController < ApplicationController
+	
+	helper_method :sort_column, :sort_direction
+
 	inherit_resources
 
 	before_filter :load_before_show, :only => [:show]
+
+	def index
+    @course_groups = CourseGroup.order( sort_column + " " + sort_direction)
+  end
 
 	def create
 		super do |format|
@@ -27,8 +34,8 @@ class CourseGroupsController < ApplicationController
 
 	def destroy
 		super do |format|
-    format.js { render :nothing => true }
-  end
+    	format.js { render 'destroy' }
+  	end
   end
 
 	private
@@ -37,4 +44,12 @@ class CourseGroupsController < ApplicationController
 		@course_group_enrollment = CourseGroupEnrollment.first
 	end
 
-	end
+	def sort_column
+    ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+  
+end

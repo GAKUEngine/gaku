@@ -1,2 +1,4 @@
 $('#course_groups_index_table').html('<%= escape_javascript(render :partial => "/course_groups/course_groups", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course_groups => @course_groups}) %>');
 $('#edit_course_group_modal').modal('hide');
+var currentCourseGroupName = $(".course_group_<%= @course_group.id %> .name");
+currentCourseGroupName.html("<%= @course_group.name %>")
