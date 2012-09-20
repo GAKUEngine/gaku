@@ -1,7 +1,5 @@
 $ ->
 	# works for contacts and address
-	$('.delete_link').live 'ajax:success', ->
-		$(this).closest('tr').remove()
 
 	$('#new_guardian_contact_link').on 'click', (event)->
 		event.preventDefault()
@@ -14,3 +12,7 @@ $ ->
 			$(@).removeClass('btn-primary')
 
 		$(@).addClass('btn-primary')
+
+	delete_link = $("#delete-student-guardian-address-link")
+	delete_link.live "ajax:success", (evt, data, status, xhr) ->
+		$(this).closest('tr').remove()

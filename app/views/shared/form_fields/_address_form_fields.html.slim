@@ -32,7 +32,3 @@
       .span12
         =address_form.label :past, t('addresses.past')
         =address_form.check_box :past
-.row-fluid
-.span9
-  =address_form.submit t('addresses.save'), :id => 'submit_button', :class => 'btn btn-primary button span12'
-= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'address_cancel', :class => 'span3 btn btn-danger', :'data-dismiss' => "modal"

@@ -17,9 +17,9 @@ $ ->
 
 delete_link = $(".delete_link")
 delete_link.live "ajax:success", (evt, data, status, xhr) ->
-  $(this).closest('tr').remove();
+  $(this).closest('tr').remove()
   
-delete_guardian_link = $(".delete_guardian")
+delete_guardian_link = $("#delete-student-guardian-link")
 delete_guardian_link.live "ajax:success", (evt, data, status, xhr) ->
   $(this).closest('div.guardian_cell').remove();
 

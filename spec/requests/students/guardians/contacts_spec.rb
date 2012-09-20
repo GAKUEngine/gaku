@@ -11,7 +11,7 @@ describe 'Guardian Contacts' do
     @contact_type = Factory(:contact_type, :name => 'mobile')
 
     visit student_path(@student) 
-    click_link 'new_student_guardian_tab_link'
+    click_link 'new-student-guardian-tab-link'
     wait_until { page.has_content?('Guardians List') } 
   end
 
@@ -26,7 +26,7 @@ describe 'Guardian Contacts' do
     click_button 'submit_button'
     wait_until { !page.find('#newGuardianContactModal').visible? }
 
-    click_link 'show_link'
+    click_link 'show-student-guardian-link'
     page.should have_content 'mobile'
     page.should have_content '777'
     @student.guardians.first.contacts.count.should eql(1)
@@ -39,10 +39,10 @@ describe 'Guardian Contacts' do
       mobile2 = Factory(:contact, :data => 321, :contact_type => @contact_type)
       @student.guardians.first.contacts << [ mobile1, mobile2 ]
       @student.reload
+      click_link 'show-student-guardian-link'
     end
 
     it 'should edit contact for student guardian', :js => true do 
-      click_link 'show_link'
       page.should have_content '321'
 
       within('table.guardian_contact_table tr#contact_2') { click_link 'edit_link' }
@@ -56,7 +56,6 @@ describe 'Guardian Contacts' do
     end
 
     it 'should delete a contact for student guardian' do
-      click_link 'show_link'
       page.should have_content '321'
       @student.guardians.first.contacts.size.should eql(2)
       tr_count = page.all('table.index tr').size
@@ -69,8 +68,6 @@ describe 'Guardian Contacts' do
     end
 
     it 'should make a primary contact to student guardian', :js => true do 
-      click_link 'show_link'
-
       @student.guardians.first.contacts.first.is_primary? == true
       @student.guardians.first.contacts.second.is_primary? == false
 

@@ -28,7 +28,7 @@ br/
 .row-fluid
   .span12.well
     h3 Guardian Addresses
-    table#guardian_addresses_idx.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
+    table#student-guardian-addresses-index.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th.btn-inverse style="width:28px"
@@ -44,14 +44,14 @@ br/
         tbody
           =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
     br/
-    =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'add_student_guardian_address_link', :class => 'btn btn-primary new_guardian_address_link'
+    =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'new-student-guardian-address-link', :class => 'btn btn-primary'
 
 
 .row-fluid
   .span12
     =link_to t('Back'), @student, :class => 'btn'
 
-#new_guardian_address_form
+#new-student-guardian-address-form
 
-  #modal_dialogs
+  #modal-dialogs
    
