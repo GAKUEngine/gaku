@@ -106,6 +106,11 @@ GAKUEngine::Application.routes.draw do
 
   namespace :admin do
     resources :contact_types
+    resources :presets do
+      get :students, :on => :collection
+      get :locale, :on => :collection
+      put :update_presets, :on => :collection
+    end
   end
 
 end
