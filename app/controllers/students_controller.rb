@@ -94,6 +94,12 @@ class StudentsController < ApplicationController
     render json: @students_json.as_json
   end
 
+  def load_autocomplete_data
+    @students = Student.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+    p @students.count.inspect
+    render json: @students.map(&params[:column].to_sym).uniq
+  end
+
   private
     def load_before_index
       @student = Student.new

@@ -22,14 +22,12 @@
     = search_form_for @search do |f|
       .field
         = f.label :name_cont, t('name')
-        = f.text_field :name_cont, data: { autocomplete_source: load_autocomplete_data_students_path }
+        = f.text_field :name_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:column => "name") }
       .field
         = f.label :surname_cont, t('surname')
-        = f.text_field :surname_cont, data: { autocomplete_source: load_autocomplete_data_students_path }
+        = f.text_field :surname_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:column => "surname") }
       = hidden_field_tag "autocomplete_field"
-      .actions
-        = f.submit "Search"
-      .row-fluid
-        .span12.well
-          #students_index
-            =render 'students/students'
+    .row-fluid
+      .span12.well
+        #students_index
+          =render 'students/students'
