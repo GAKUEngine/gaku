@@ -16,7 +16,7 @@ describe CourseGroupsController do
   end 
 
   describe "POST create" do
-    pending "should be successful" do
+    it "should be successful" do
       page.stub :save => true
 
       post :create

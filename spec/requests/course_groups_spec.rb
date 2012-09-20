@@ -20,7 +20,27 @@ describe 'CourseGroups' do
     CourseGroup.count.should == 1
   end
 
-  context 'show, edit, delete' do
+  it 'should not add new if name is empty', :js => true do
+
+    click_on 'New Course Group'
+
+    wait_until { find('#add_new_course_group_form').visible? }
+    click_on 'Create Course group'
+
+    page.should have_content('can\'t be blank')
+  end
+
+  it 'should not add new if back is clicked', :js => true do
+    CourseGroup.count.should == 0
+    click_on 'New Course Group'
+
+    wait_until { find('#add_new_course_group_form').visible? }
+    click_on 'Back'
+
+    wait_until { !find('#add_new_course_group_form').visible? }
+  end
+
+  context 'when course group is created' do
     before do 
       @course_group = Factory(:course_group, :name => '2013Courses')
       visit course_groups_path
