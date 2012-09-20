@@ -1,4 +1,4 @@
-= form_for [@syllabus, @exam], :html => {:id => "new_syllabus_exam_form"}, :remote => true do |exam_form|
+= form_for [@syllabus, @exam], :remote => true do |exam_form|
   - if exam_form.object.new_record?
     .row-fluid
       .span12.well
@@ -51,8 +51,7 @@
                       = ep_form.label :adjustments, t('exam_portions.adjustments')
                       = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
           .row-fluid
-            #submit_syllabus_exam
-              = exam_form.submit t('exams.add'), :id => 'submit_button', :class => "span12 btn btn-primary"
+            = exam_form.submit t('exams.add'), :id => 'submit-syllabus-exam-button', :class => "span12 btn btn-primary"
 
 coffee:
-  $('#new_syllabus_exam_form').validationEngine();
+  $('#new-syllabus-exam-form form').validationEngine()

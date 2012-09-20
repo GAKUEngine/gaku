@@ -11,7 +11,7 @@ describe 'ClassGroup Students' do
   context "Class Roster" do
     before do
       visit class_groups_path
-      click_link 'show_class_group_link'
+      click_link 'show-class-group-link'
       click_link 'class-group-enrollments-tab-link'
     end
 

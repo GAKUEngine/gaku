@@ -24,29 +24,29 @@
     .row-fluid
       .span12.well
         .row-fluid
-          #syllabus_exams
+          #syllabus-exams
             .row-fluid
               .pull-left
                 h4 =t('exams.list')
               .pull-right
-                #new_syllabus_exam
-                  = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'add_syllabus_exam_link', :class => "btn btn-primary", :remote => true
+                #new-syllabus-exam
+                  = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'new-syllabus-exam-link', :class => "btn btn-primary", :remote => true
             .row-fluid
               .span12
                 hr
             = render 'syllabuses/exams/exams'
         .row-fluid
-          #syllabus_exam_form style='display:none;padding-top:10px'
+          #new-syllabus-exam-form style='display:none;padding-top:10px'
             =render 'syllabuses/exams/form'
         /.row-fluid
-          #syllabus_assigmnents
+          #syllabus-assigmnents
             = render 'syllabuses/assignments/assignments'
-          #new_assignment
+          #new-syllabus-assignment
             = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
-          #syllabus_assignment_form*{ 'style' => 'display:none;'}
+          #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
             =render 'syllabuses/assignments/form'
     .row-fluid
       .span12.well
-        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :id => 'syllabus_edit_btn', :style => "min-height:0px"
+        = link_to_edit_with_text edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :id => 'edit-syllabus-link', :style => "min-height:0px"
 
-        = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+        = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

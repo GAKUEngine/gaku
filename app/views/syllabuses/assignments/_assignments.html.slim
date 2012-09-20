@@ -2,12 +2,12 @@
   #syllabus-assignments
     b= t('assignments.count')
     |:
-    #assignments-count
+    #syllabus-assignments-count
       = @syllabus.assignments.count
     p
       b= t('assignments.list')
 
-    table
+    table#syllabus-assignments-index
       tbody
         tr
           th= t'assignments.name'
@@ -17,10 +17,3 @@
           
 - else 
   p= t('notice.no_assignments')
-
-javascript:
-  $(document).ready(function() {
-    $(".delete_assignment").live('ajax:success', function(evt, data, status, xhr){
-      $(this).closest('tr').fadeOut();
-    });
-  });
