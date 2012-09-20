@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: class_group_course_enrollments
+#
+#  id             :integer          not null, primary key
+#  class_group_id :integer
+#  course_id      :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class ClassGroupCourseEnrollment < ActiveRecord::Base
   
   belongs_to :class_group
