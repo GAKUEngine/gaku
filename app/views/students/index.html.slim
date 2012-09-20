@@ -19,22 +19,17 @@
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
     
-    =form_tag students_path, :method => 'get', :id => 'students_search' do
-      p
-        = text_field_tag :search, params[:search]
+    = search_form_for @search do |f|
+      .field
+        = f.label :name_cont, t('name')
+        = f.text_field :name_cont, data: { autocomplete_source: load_autocomplete_data_students_path }
+      .field
+        = f.label :surname_cont, t('surname')
+        = f.text_field :surname_cont, data: { autocomplete_source: load_autocomplete_data_students_path }
+      = hidden_field_tag "autocomplete_field"
+      .actions
+        = f.submit "Search"
       .row-fluid
         .span12.well
           #students_index
             =render 'students/students'
-
-javascript:
-  $(function() {
-    $("#students_index th a").live("click", function() {
-      $.getScript(this.href);
-      return false;
-    });
-    $("#students_search input").keyup(function() {
-      $.get($("#students_search").attr("action"), $("#students_search").serialize(), null, "script");
-      return false;
-    });
-  });
