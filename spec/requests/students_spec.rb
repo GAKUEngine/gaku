@@ -13,11 +13,11 @@ describe 'Student' do
       page.should have_content("#{@student.name}")
     end
 
-    pending "should have autocomplete while searching", :js => true do
-      within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
-      fill_in 'student_search', :with => "#{@student.name}"
-      page.all('#students_grid_table tr').size.should eql(2)
-      within ('#students_grid_table'){ page.should have_content("#{@student.name}") }
+    it "should have autocomplete while searching", :js => true do
+      within ('#student_index'){ page.should have_content("#{@student.name}") }
+      fill_in 'q_name_cont', :with => "#{@student.name}"
+      page.all('#student_index tr').size.should eql(2)
+      within ('#student_index'){ page.should have_content("#{@student.name}") }
     end
   end
 
