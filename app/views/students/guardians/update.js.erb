@@ -1,2 +1,2 @@
-$('div#guardian_<%= @guardian.id %>').html('<%= escape_javascript(render :partial => "students/guardians/guardian_unit", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @guardian}) %>');
-$('#editGuardianModal').modal('hide');
+$('div#guardian-<%= @guardian.id %>').html('<%= escape_javascript(render :partial => "students/guardians/guardian_unit", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @guardian}) %>');
+$('#edit-guardian-modal').modal('hide');

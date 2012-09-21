@@ -11,9 +11,9 @@ describe 'Guardian' do
   it "should add and show student guardian", :js => true do
     @student.guardians.size.should eql(0)
     click_link 'new-student-guardian-tab-link'
-    click_link 'new_student_guardian_link'
+    click_link 'new-student-guardian-link'
 
-    wait_until { page.has_content?('Relationship') } 
+    wait_until { find('#new-student-guardian-form').visible? } 
     #required 
     fill_in "guardian_surname", :with => "Doe"
     fill_in "guardian_name", :with => "John"
@@ -22,9 +22,9 @@ describe 'Guardian' do
     fill_in "guardian_name_reading", :with => "Phonetic John"
     fill_in "guardian_relationship", :with => "Father"
 
-    click_button "Save Guardian"
+    click_button "submit-student-guardian-button"
 
-    sleep 1  #TODO Remove sleep
+    wait_until { !page.find('#new-student-guardian-form').visible? }
     page.should have_selector('a', href: "/students/1/guardians/1/edit")
     #required
     page.should have_content("Doe")
@@ -51,13 +51,13 @@ describe 'Guardian' do
 
     it "should edit a student guardian", :js => true do 
       click_link "edit-student-guardian-link" 
-      wait_until { find('#editGuardianModal').visible? } 
+      wait_until { find('#edit-guardian-modal').visible? } 
 
       fill_in 'guardian_name',    :with => 'Edited guardian name'
       fill_in 'guardian_surname', :with => 'Edited guardian surname'
-      click_button 'submit_button'
+      click_button "submit-student-guardian-button"
 
-      wait_until { !page.find('#editGuardianModal').visible? }
+      wait_until { !page.find('#edit-guardian-modal').visible? }
       page.should have_content('Edited guardian name')
       page.should have_content('Edited guardian surname')
     end

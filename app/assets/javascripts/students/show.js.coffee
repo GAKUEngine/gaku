@@ -8,7 +8,7 @@ $ ->
     $(this).closest('tr').remove()
   
   $("#delete-student-guardian-link").live "ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('div.guardian_cell').remove()
+    $(this).closest('div.guardian-cell').remove()
 
   $("#delete-student-contact-link").live "ajax:success", (evt, data, status, xhr) ->
     $(this).closest('tr').remove()

@@ -1,4 +1,4 @@
-= form_for [@student, @guardian], :html => {:id => 'new_student_guardian'}, :remote => true do |guardian_form|
+= form_for [@student, @guardian], :remote => true do |guardian_form|
     - if guardian_form.object.new_record?
       .row-fluid.mt-l
         .span12.well
@@ -8,18 +8,16 @@
             
           .row-fluid
             .span8
-              = guardian_form.submit t("guardians.save"), :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-            =link_to t("cancel"), "", :remote => true, :id => "guardian_cancel", :class => "span4 btn"
+              = guardian_form.submit t("guardians.save"), :id => 'submit-student-guardian-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+            =link_to_cancel :id => "cancel-student-guardian-link", :class => "span4 btn"
 
 coffee:
-  $("#guardian_cancel").click ->
-    $("#add_guardian_link").show()
-    $("#add_new_student_guardian").html("")
+  $("#cancel-student-guardian-link").click ->
+    $("#new-student-guardian-link").show()
+    $("#new-student-guardian-form").html("")
   
-  $("#guardian_save_link").live("ajax:success", (data, status, xhr) ->
-    #add new record to list
-    $("#add_guardian_link").show()
-    $("#add_new_student_guardian").html("")
-  )
+  $("#submit-student-guardian-button").live "ajax:success", (data, status, xhr) ->
+    $("#new-student-guardian-link").show()
+    $("#new-student-guardian-form").html("")
 
-  $('#new_student_guardian').validationEngine()
+  $('#new-student-guardian-form form').validationEngine()
