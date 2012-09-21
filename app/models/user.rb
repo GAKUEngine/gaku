@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+	
+	#in :accessors should be added all settings that user can set and check againts Preset         
+  store :settings, :accessors => [:language]
+
+  #ActiveRecord::Store accessors can be validation as other model attributes 
+  validates :language, :numericality => true
 
   attr_accessible :email, :password, :password_confirmation, :remember_me
 end

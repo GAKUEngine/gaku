@@ -14,19 +14,19 @@
 ActiveRecord::Schema.define(:version => 20120917101532) do
 
   create_table "addresses", :force => true do |t|
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "zipcode"
-    t.string   "state_name"
-    t.string   "title"
+    t.string   "encrypted_address1"
+    t.string   "encrypted_address2"
+    t.string   "encrypted_city"
+    t.string   "encrypted_zipcode"
+    t.string   "encrypted_state_name"
+    t.string   "encrypted_title"
     t.string   "state"
-    t.boolean  "past",       :default => false
+    t.boolean  "past",                 :default => false
     t.integer  "country_id"
     t.integer  "state_id"
     t.integer  "faculty_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "assets", :force => true do |t|
@@ -230,14 +230,14 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
   end
 
   create_table "guardians", :force => true do |t|
-    t.string   "name"
-    t.string   "surname"
-    t.string   "name_reading"
-    t.string   "surname_reading"
-    t.string   "relationship"
+    t.string   "encrypted_name"
+    t.string   "encrypted_surname"
+    t.string   "encrypted_name_reading"
+    t.string   "encrypted_surname_reading"
+    t.string   "encrypted_relationship"
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "guardians_students", :force => true do |t|
@@ -354,13 +354,13 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
   end
 
   create_table "students", :force => true do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.string   "middle_name"
-    t.string   "surname"
-    t.string   "name_reading",                 :default => ""
-    t.string   "surname_reading",              :default => ""
+    t.string   "encrypted_surname"
+    t.string   "encrypted_name_reading",       :default => ""
+    t.string   "encrypted_surname_reading",    :default => ""
     t.boolean  "gender"
-    t.string   "phone"
+    t.string   "encrypted_phone"
     t.string   "email"
     t.date     "birth_date"
     t.date     "admitted"
@@ -391,6 +391,7 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
   create_table "users", :force => true do |t|
     t.boolean  "admin",                  :default => false
     t.string   "locale"
+    t.text     "settings"
     t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
