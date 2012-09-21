@@ -13,7 +13,8 @@ class StudentsController < ApplicationController
   before_filter :load_student,      :only => [:edit, :update, :destroy]
   
   def index
-    @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
+    @search = Student.search(params[:q])
+    @students = @search.result#.includes([:addresses, :class_groups, :class_group_enrollments]).all
     if params[:action] == "get_csv_template"
       get_csv_template
       return
@@ -93,8 +94,9 @@ class StudentsController < ApplicationController
     render json: @students_json.as_json
   end
 
-  def autocomplete_data
-    @data = Student.where("name like ?", "#{params[:term]}")  
+  def load_autocomplete_data
+    @students = Student.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+    render json: @students.map(&params[:column].to_sym).uniq
   end
 
   private

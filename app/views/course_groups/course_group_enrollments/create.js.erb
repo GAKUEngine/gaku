@@ -1,7 +1,4 @@
-$('#course_index_table').html('<%= escape_javascript(render :partial => "/course_groups/courses", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course_group => @course_group}) %>');
-$('#add_course_enrollment_form form').hide()
-$('#course_group_enrollment_course_id').val('')
+ $('#courses_index_table table tbody').append('<%= escape_javascript(render :partial => "course", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @course_group_enrollment}) %>');
 
-$('#delete_course_group').html('')
-
+$('.courses_count').html('<%= @course_group.courses.count != 0 ? t('courses.list') + "（" + @course_group.courses.count.to_s + "）" : t('courses.list') %>');
 $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>")

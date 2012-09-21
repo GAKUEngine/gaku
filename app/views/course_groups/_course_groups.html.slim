@@ -1,12 +1,12 @@
-table.index.table.table-striped.table-bordered.table-condensed
+table#course_groups_index.index.table.table-striped.table-bordered.table-condensed
 	thead
-		tr
-			th =t('name')
-			th =t('manage')
+	  tr
+	    th.btn-inverse = sortable 'name',  t('name')
+	    th.btn-info style="width:94px" = t('manage')
 	tbody
-		- course_groups.each do |course_group|				
-			tr
-				td =course_group.name
-				td
-					=link_to t('Show'), course_group, :class => 'btn btn-primary'
-					=link_to t('Edit'), [:edit, course_group], :remote => true, :class => 'btn btn-warning'
+	  - course_groups.each do |course_group|	
+    	tr class="course_group_#{course_group.id}"
+			  td.name = course_group.name
+			  td
+				  = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, course_group , :id => 'show_course_group_link', :class => "mr-xs btn btn-mini btn-success"
+				  = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, [:edit, course_group], :id => 'edit_course_group_link', :class => "mr-xs btn btn-mini btn-warning", :remote => true

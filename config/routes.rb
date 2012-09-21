@@ -84,6 +84,7 @@ GAKUEngine::Application.routes.draw do
         end
       end
       get :autocomplete_search
+      get :load_autocomplete_data
     end
 
   end

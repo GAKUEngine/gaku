@@ -1,19 +1,45 @@
 .row-fluid
-  .span12
-		=link_to t('course_groups.add_course'), '', :class => 'btn btn-primary', :id =>'add_course_enrollment_link'
-.row-fluid
-  .span12
-    #course_enrollment_form_errors
-    #add_course_enrollment_form
-      =form_for [@course_group, CourseGroupEnrollment.new], :html => {:remote => true, :class =>'hide'}  do |f|
-    	 =f.select :course_id, Course.all.collect { |s| [s.code, s.id] }, {:prompt => 'Choose Course'}
-    	 =f.submit 
-.row-fluid
-  .span12.well
-  	#course_index_table
-			=render 'courses', :course_group => @course_group
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('course_groups.show')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      table.table.table-condensed.table-striped.table-bordered
+        thead
+          tr
+            th =t("course_groups.name")
+        tbody
+          tr class="course_group_#{@course_group.id}"
+            td.name = @course_group.name
+    .row-fluid.mt-l
+      .span12.well       
+            #courses
+              .row-fluid
+                #courses_index_table
+                  =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
+              .row-fluid
+                .span12
+                  #course_enrollment_form_errors
+                  #add_course_enrollment_form.hide
+                    =render 'course_groups/course_group_enrollments/form'
+      
+    .row-fluid
+      .span12.well
+        = link_to t("Edit"), edit_course_group_path(@course_group), :class => "span6 btn", :remote => true
+        = link_to t("Back"), course_groups_path, :class => "span6 btn"
+      =render 'delete_confirm'
+#modal_dialogs
 
-#delete_course_group  
-  -if @course_group.course_group_enrollments.any?
-    =render 'delete_confirm'
-
+javascript:
+  $(document).ready(function() {
+    $('#show_course_form').click(function() {
+     $('#course_form').toggle('slow', function() {
+      // Animation complete.
+      $('#new_course').validationEngine();
+     });
+    });
+  });
