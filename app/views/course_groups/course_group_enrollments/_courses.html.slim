@@ -1,3 +1,7 @@
+.pull-left
+  h4.h4-vm.courses_count =t("courses.list")+"（ "+@course_group.course_group_enrollments.count.to_s+" ）"
+.pull-right
+  =link_to t('course_groups.add_course'), '', :class => 'btn btn-primary', :id =>'add_course_enrollment_link'
 table.index.table.table-striped.table-bordered.table-condensed
 	thead
 		tr
