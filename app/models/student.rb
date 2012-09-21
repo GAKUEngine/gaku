@@ -73,6 +73,10 @@ class Student < ActiveRecord::Base
 
   # methods for json student chooser returning
   
+  def full_name
+    "#{self.surname} #{self.name}"
+  end
+
   def class_group_widget
     cg = self.class_groups.last
     cg.blank? ? nil : cg
