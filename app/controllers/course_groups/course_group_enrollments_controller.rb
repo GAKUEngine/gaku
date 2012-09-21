@@ -1,7 +1,7 @@
 class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 	inherit_resources
 
-	before_filter :load_course_group
+	before_filter :load_course_group, :only => [:create, :destroy]
 
 	def create
 		@course_group = CourseGroup.find(params[:course_group_id])
@@ -30,5 +30,4 @@ class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 		def load_course_group
       @course_group = CourseGroup.find(params[:course_group_id])
     end
-
 end
