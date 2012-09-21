@@ -1,17 +1,7 @@
 td=target.last.contact_type.name if target.last.contact_type
 td=target.last.data
 td=target.last.details
-td class='primary_contact'
+td class='primary-contact'
   ="Primary" if target.last.is_primary?
 td
   ="Emergency" if target.last.is_emergency?
-  
-td class="primary_button"
-  -if target.last.is_primary?
-    =link_to t('contacts.make_primary'), [:make_primary] + target, :data => {:confirm => 'are you sure?'}, :class => 'btn btn-primary make_primary', :remote => true, :method => :post
-  -else
-    = link_to t('contacts.make_primary'), [:make_primary] + target, :id => 'set_primary_link', :data => {:confirm => 'are you sure?'}, :class => 'btn', :remote => true, :method => :post
-    
-  = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, [:edit] + target, :remote => true, :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"
-
-  = link_to ("<i class='icon-white icon-remove'></i>").html_safe, target, :method => :delete, :data => {:confirm => 'Are you sure?'}, :id => 'delete_link', :class => 'btn btn-mini btn-danger delete_link delete_address', :remote => true

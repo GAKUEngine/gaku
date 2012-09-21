@@ -1,6 +1,6 @@
-$('#new_student_contact_tab_link').html('<%= @student.contacts.count != 0 ? t('contacts.contacts') + "（" + @student.contacts.count.to_s + "）" : t('contacts.contacts') %>');
-$('.contacts_count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list') %>');
+$('#new-student-contact-tab-link').html('<%= @student.contacts.count != 0 ? t('contacts.contacts') + "（" + @student.contacts.count.to_s + "）" : t('contacts.contacts') %>');
+$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list') %>');
 
 <%- unless @student.contacts.blank? %>
-	$('.student_contact_table').find('#contact_<%= @student.contacts.first.id %> .make_primary').addClass('btn-primary')
+	$('.student-contact-table').find('#contact_<%= @student.contacts.first.id %> .make_primary').addClass('btn-primary')
 <% end %>
