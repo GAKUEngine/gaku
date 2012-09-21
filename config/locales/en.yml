@@ -202,9 +202,11 @@ en:
     add: "Add Guardian"
     save: "Save Guardian"
     edit: "Edit guardian"
-  contact_type: "Contact Type"
-  contact_types:
-     add:
+
+  contact_types: 
+    singular: "Contact Type"
+    plural: "Contact Types"
+
   contact:
   contacts:
     list: "Contacts List"

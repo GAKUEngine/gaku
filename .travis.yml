@@ -10,6 +10,9 @@ before_script:
 
 script: "DISPLAY=:99.0 bundle exec rake"
 
+services:
+  - elasticsearch
+
 notifications:
   email: false
   irc: "irc.freenode.org#gaku"
