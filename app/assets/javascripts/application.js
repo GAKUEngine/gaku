@@ -7,7 +7,7 @@
 // require self
 //= require jquery
 //= require jquery_ujs
-//= require external/jquery-ui-1.8.18.custom.min.js
+//= require jquery-ui
 //= require kendo2012/kendo.web.min
 //= require bootstrap.min
 //= require chosen-jquery

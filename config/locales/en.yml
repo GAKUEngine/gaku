@@ -100,10 +100,12 @@ en:
   course_groups:
     course_groups: 'Course Groups'
     edit_course_group: 'Edit Course Group'
-    add_course_group: 'Add Course Group'
+    new: 'New Course Group'
     add_course: 'Add Course'
     course_group_created: 'Course Group Created'
     course_added: 'Course added to course group'
+    list: 'Course Groups List'
+    show: 'Course Group'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
@@ -206,8 +208,10 @@ en:
   contact_types: 
     singular: "Contact Type"
     plural: "Contact Types"
+    new: "New Contact Type"
+    add: "Add Contact Type"
+    save: "Save Contact Type"
 
-  contact:
   contacts:
     list: "Contacts List"
     new: "New Contact"
@@ -264,3 +268,7 @@ en:
   notice:
     picture_uploaded: "Picture successfully uploaded"
   import_format: "Import Format"
+
+  helpers:
+    links: 
+      cancel: "Cancel"

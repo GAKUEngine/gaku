@@ -15,22 +15,25 @@ $ ->
     $('#course_form').slideToggle()
       
 
-delete_link = $(".delete_link")
-delete_link.live "ajax:success", (evt, data, status, xhr) ->
-  $(this).closest('tr').remove();
+  delete_link = $(".delete_link")
+  delete_link.live "ajax:success", (evt, data, status, xhr) ->
+    $(this).closest('tr').remove()
   
-delete_guardian_link = $(".delete_guardian")
-delete_guardian_link.live "ajax:success", (evt, data, status, xhr) ->
-  $(this).closest('div.guardian_cell').remove();
 
-$('.new_student_contact_form').hide()
+  $("#delete-student-guardian-link").live "ajax:success", (evt, data, status, xhr) ->
+    $(this).closest('div.guardian_cell').remove()
 
-$('#add_new_student_contact').on 'click', 'a.btn', (event) ->
-	event.preventDefault()
-	$(this).hide()
-	$('.new_student_contact_form').slideDown()
+  $("#delete-student-contact-link").live "ajax:success", (evt, data, status, xhr) ->
+    $(this).closest('tr').remove()
 
-$('.make_primary_address').live 'ajax:success', ->
-  $('.make_primary_address').each ->
-     $(@).removeClass('btn-primary')
-  $(@).addClass('btn-primary')
+
+
+  $('#new-student-contact-link').on 'click', 'a.btn', (event) ->
+	  event.preventDefault()
+	  $(this).hide()
+	  $('#new-student-contact-form').slideDown()
+
+  $('.make-primary-address').live 'ajax:success', ->
+    $('.make-primary-address').each ->
+      $(@).removeClass('btn-primary')
+    $(@).addClass('btn-primary')

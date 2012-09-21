@@ -1,8 +1,8 @@
-$('.student_contact').each(function() {
-	$(this).children('td.primary_contact').html('');
-	$(this).find('.primary_button a').removeClass('btn-primary')
+$('.student-contact').each(function() {
+	$(this).children('td.primary-contact').html('');
+	$(this).find('.primary-button a').removeClass('btn-primary')
 });
 
-var currentContact = $("#contact_<%= @contact.id %>");
-currentContact.children('td.primary_contact').html('Primary');
-currentContact.find('.primary_button a').addClass('btn-primary')
+var currentContact = $("#contact-<%= @contact.id %>");
+currentContact.children('td.primary-contact').html('Primary');
+currentContact.find('.primary-button a').addClass('btn-primary')

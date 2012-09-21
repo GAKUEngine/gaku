@@ -1,17 +1,14 @@
 table#student_index.index.table.table-striped.table-bordered.table-condensed
-	thead
-	  tr
-      th.btn-inverse = student_sortable "surname", t("surname")
-      th.btn-inverse = student_sortable "name", t("name")
+  thead
+    tr
+      th.btn-inverse = sort_link @search, "surname", t("surname")
+      th.btn-inverse = sort_link @search, "name", t("name")
       th.btn-inverse = student_sortable "gender", t('gender')
       th.btn-inverse = student_sortable "class_name", t('class_groups.name')
       th.btn-inverse = student_sortable "seat_number", t('class_group_enrollments.seat_number')
       th.btn-inverse = student_sortable "admitted", t('students.admitted')
       th.btn-inverse = student_sortable "primary_address", t('addresses.primary')
       th.btn-info style="width:94px" = t("manage")
-	    
-	tbody
-	  =render :partial => 'student', :collection => @students_json, :as => 'student'
-
-= hidden_field_tag :direction, params[:direction]
-= hidden_field_tag :sort, params[:sort]
+      
+  tbody
+    =render :partial => 'student', :collection => @students, :as => 'student'

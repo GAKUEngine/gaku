@@ -1,12 +1,12 @@
-$('.guardian_contact_table tbody').html('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
-$(".modal#editContactModal").modal("hide");
+$('#student-guardian-contacts-index tbody').html('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
+$(".modal#edit-contact-modal").modal("hide");
 
 
-$('.guardian_contact').each(function() {
-	$(this).children('td.primary_contact').html('');
-	$(this).find('.primary_button a').removeClass('btn-primary')
+$('.guardian-contact').each(function() {
+	$(this).children('td.primary-contact').html('');
+	$(this).find('.primary-button a').removeClass('btn-primary');
 });
 
-var currentContact = $("#contact_<%= @contact.id %>");
-currentContact.children('td.primary_contact').html('Primary');
-currentContact.find('.primary_button a').addClass('btn-primary')
+var currentContact = $("#contact-<%= @contact.id %>");
+currentContact.children('td.primary-contact').html('Primary');
+currentContact.find('.primary-button a').addClass('btn-primary');

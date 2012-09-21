@@ -3,6 +3,6 @@
     td= assignment.name
     td= assignment.description
     td= assignment.max_score
-    td= link_to 'Show', [@syllabus, assignment]
-    td= link_to 'Edit', edit_syllabus_assignment_path(@syllabus, assignment)
-    td= link_to( 'Destroy', syllabus_assignment_path(@syllabus, assignment), :method => :delete, confirm: 'Are you sure?', :remote => true, :class => 'delete_assignment' )
+    td= link_to t('show'), [@syllabus, assignment], :id => 'show-syllabus-assignment-link'
+    td= link_to t('edit'), edit_syllabus_assignment_path(@syllabus, assignment), :id => 'edit-syllabus-assignment-link'
+    td= ajax_link_to_delete syllabus_assignment_path(@syllabus, assignment), :id => 'delete-syllabus-assignment-link'

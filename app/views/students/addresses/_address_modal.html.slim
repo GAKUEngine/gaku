@@ -1,6 +1,6 @@
 - model = @address || Address.new
 - model_class = model.class
-.modal.hide#editAddressModal wmode="opaque"
+.modal.hide#edit-address-modal wmode="opaque"
 
   = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |address_form| 
 
@@ -8,8 +8,12 @@
         h3 =t("addresses.edit")
       .modal-body
         .row-fluid
-          #validation_errors
+          #validation-errors
         .row-fluid
           = hidden_field_tag :student_id, @student.id
           
         = render 'shared/form_fields/address_form_fields', :address_form => address_form
+        .row-fluid
+          .span9
+            = submit_button t('addresses.save'), :id => 'submit-student-address-button', :class => 'btn btn-primary button span12'
+            = link_to_cancel :id => 'cancel-student-address-link', :class => 'span3 btn btn-danger'

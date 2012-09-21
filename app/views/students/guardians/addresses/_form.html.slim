@@ -5,13 +5,17 @@
       .span12.well
         .span12.well
           = render 'shared/form_fields/address_form_fields', :address_form => address_form 
+          .row-fluid
+            .span9
+              = submit_button t('addresses.save'), :id => 'submit-student-guardian-address-button', :class => 'btn btn-primary button span12'
+              = link_to_cancel :id => 'cancel-student-guardian-address-link', :class => 'span3 btn btn-danger'
   
 = javascript_include_tag 'students/addresses/form'
   
 coffee:
-  $('#new_guardian_address_form').on 'click','#cancel_link', (e)->
+  $('#new-student-guardian-address-form').on 'click','#cancel-student-guardian-address-link', (e)->
     e.preventDefault()
-    $('#add_student_guardian_address_link').show()
-    $('#new_guardian_address_form').hide()  
+    $('#new-student-guardian-address-link').show()
+    $('#new-student-guardian-address-form').hide()  
   
-  $('#new_guardian_address').validationEngine()
+  $('#new-student-guardian-address-form form').validationEngine()

@@ -1,0 +1,9 @@
+=form_tag update_presets_admin_presets_path, :method => :put do
+	-@presets.each_with_index do |preset,i|
+		= fields_for "presets[#{i}]", preset do |preset_fields|
+			=preset_fields.label :content, "#{preset.name.humanize}"
+			=preset_fields.text_field :content, :value => (YAML.load(preset.content) if preset.content)
+			=preset_fields.hidden_field :name, :value => preset.name
+			=preset_fields.hidden_field :id, :value => preset.id
+	br/
+	=submit_tag

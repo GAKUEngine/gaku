@@ -1,0 +1,20 @@
+= form_for [:admin, @contact_type], :html => { :id => 'new-contact-type' }, :remote => true do |contact_type_form|
+  - if contact_type_form.object.new_record?
+    b= t('contact_types.new')
+    .row-fluid.mt-l
+      .span12.well
+        .span12.well
+          .row-fluid.control-group
+            .span12
+              = contact_type_form.label :name, t("contact_types.name")
+              = contact_type_form.text_field :name, :class => "span12"
+          .row-fluid
+          .span9
+            =submit_button t('contact_types.save'), :id => 'submit-contact-type-button', :class => 'btn btn-primary button span12'
+          = link_to_cancel :id => 'cancel-contact-type-link'
+  
+  
+coffee:
+  $("#cancel-contact-type-link").click ->
+    $("#new-contact-type-link").show()
+    $("#new-contact-type-form").html("")

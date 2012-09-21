@@ -11,6 +11,7 @@
 #  student_id      :integer
 #  guardian_id     :integer
 #  faculty_id      :integer
+#  campus_id       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

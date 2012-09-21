@@ -1,6 +1,6 @@
 - model = @contact || Contact.new
 - model_class = model.class
-.modal.hide#editContactModal wmode="opaque"
+.modal.hide#edit-contact-modal wmode="opaque"
   
   = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |contact_form| 
     .modal-header
@@ -13,3 +13,6 @@
         = hidden_field_tag :student_id, @student.id
         
         = render 'shared/form_fields/contact_form_fields', :contact_form => contact_form
+        .row-fluid
+          = submit_button t('contacts.save'), :id => 'submit-student-contact-button', :class => 'btn btn-primary'
+          = link_to_cancel :id => 'cancel-student-contact-link', :class => 'btn'

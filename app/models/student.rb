@@ -6,8 +6,8 @@
 #  encrypted_name               :string(255)
 #  middle_name                  :string(255)
 #  encrypted_surname            :string(255)
-#  name_reading                 :string(255)      default("")
-#  surname_reading              :string(255)      default("")
+#  encrypted_name_reading       :string(255)      default("")
+#  encrypted_surname_reading    :string(255)      default("")
 #  gender                       :boolean
 #  encrypted_phone              :string(255)
 #  email                        :string(255)
@@ -29,9 +29,6 @@
 
 class Student < ActiveRecord::Base
   require 'csv'
-
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
 
   has_many :course_enrollments
   has_many :courses, :through => :course_enrollments
@@ -59,11 +56,11 @@ class Student < ActiveRecord::Base
                   :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
                   :picture, :student_id_number, :student_foreign_id_number
 
-  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :name_reading,     :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :surname_reading,  :key => 'f98gd9regre9gr9gre9gerh'
-  attr_encrypted :phone,            :key => 'f98gd9regre9gr9gre9gerh'
+#  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
+#  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
+#  attr_encrypted :name_reading,     :key => 'f98gd9regre9gr9gre9gerh'
+#  attr_encrypted :surname_reading,  :key => 'f98gd9regre9gr9gre9gerh'
+#  attr_encrypted :phone,            :key => 'f98gd9regre9gr9gre9gerh'
 
 
   has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
@@ -76,6 +73,10 @@ class Student < ActiveRecord::Base
 
   # methods for json student chooser returning
   
+  def full_name
+    "#{self.surname} #{self.name}"
+  end
+
   def class_group_widget
     cg = self.class_groups.last
     cg.blank? ? nil : cg

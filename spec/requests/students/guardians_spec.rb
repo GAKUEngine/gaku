@@ -10,7 +10,7 @@ describe 'Guardian' do
 
   it "should add and show student guardian", :js => true do
     @student.guardians.size.should eql(0)
-    click_link 'new_student_guardian_tab_link'
+    click_link 'new-student-guardian-tab-link'
     click_link 'new_student_guardian_link'
 
     wait_until { page.has_content?('Relationship') } 
@@ -45,12 +45,12 @@ describe 'Guardian' do
       @student.reload
 
       visit student_path(@student) 
-      click_link 'new_student_guardian_tab_link'
+      click_link 'new-student-guardian-tab-link'
       wait_until { page.has_content?('Guardians List') } 
     end
 
     it "should edit a student guardian", :js => true do 
-      click_link "edit_link" 
+      click_link "edit-student-guardian-link" 
       wait_until { find('#editGuardianModal').visible? } 
 
       fill_in 'guardian_name',    :with => 'Edited guardian name'
@@ -66,7 +66,7 @@ describe 'Guardian' do
       @student.guardians.size.should eql(1)
       page.should have_content(@guardian.name)
 
-      click_link 'delete_link' 
+      click_link 'delete-student-guardian-link' 
       page.driver.browser.switch_to.alert.accept
       
       page.should_not have_content(@guardian.name)

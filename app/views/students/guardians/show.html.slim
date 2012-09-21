@@ -3,55 +3,13 @@
     table.table.table-bordered.table-striped
       tbody
         = render 'shared/fields/guardian_fields', :guardian => @guardian
-.row-fluid
-  .span12.well
-    h3 Guardian Contacts
-    table.table.table-striped.table-bordered.table-condensed.guardian_contact_table
-      thead
-        tr
-          th.btn-inverse =t('contact_type')
-          th.btn-inverse =t('contacts.data')
-          th.btn-inverse =t('contacts.details')
-          th.btn-inverse =t('contacts.emergency')
-          th.btn-inverse =t('contacts.actions')
-      tbody
-        =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
-  .row-fluid
-    .span12
-      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new_guardian_contact_link'
-  #new_guardian_contact_form style='display:none' 
-    .row-fluid  
-      .span12.well
-        =render 'students/guardians/contacts/form'
 
+= render 'students/guardians/contacts/contacts'
 br/
-.row-fluid
-  .span12.well
-    h3 Guardian Addresses
-    table#guardian_addresses_idx.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th.btn-inverse style="width:28px"
-              i.icon-white.icon-home
-            th.btn-inverse =t 'addresses.title'
-            th.btn-inverse =t 'addresses.country'
-            th.btn-inverse =t 'addresses.zipcode'
-            th.btn-inverse =t 'addresses.state'
-            th.btn-inverse =t 'addresses.city'
-            th.btn-inverse =t 'addresses.address1'
-            th.btn-inverse =t 'addresses.address2'
-            th.btn-info style="width:61px" =t 'manage'
-        tbody
-          =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
-    br/
-    =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'add_student_guardian_address_link', :class => 'btn btn-primary new_guardian_address_link'
-
+= render 'students/guardians/addresses/addresses'
 
 .row-fluid
   .span12
     =link_to t('Back'), @student, :class => 'btn'
 
-#new_guardian_address_form
-
-  #modal_dialogs
-   
+#modal-dialogs
