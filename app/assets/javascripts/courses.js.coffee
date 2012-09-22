@@ -19,20 +19,23 @@ class CourseActions
 @CourseAct = new CourseActions()
 
 $ ->
-  $('#add_student_enrollment_link').on 'click','.btn', (event)->
+  $('#new-course-student-link').on 'click', (event)->
     event.preventDefault()
-    $('#add_class_group_enrollment_form').hide()
-    $('#add_student_enrollment_link').hide()
-    $('#add_class_group_enrollment_link').show()
-    $('#add_student_enrollment_form').slideToggle()
+    $('#new-course-class-group-form').hide()
+    $('#new-course-class-group-link').show()
+    $('#new-course-student-link').hide()
+    $('#new-course-student-form').slideToggle()
 
 
-  $('#add_class_group_enrollment_link').on 'click', 'a.show_class_enroll_form', (event)->
+  $('#new-course-class-group-link').on 'click', (event)->
     event.preventDefault()
-    $('#add_student_enrollment_form').hide()
-    $('#add_class_group_enrollment_link').hide()
-    $('#add_student_enrollment_link').show()
-    $('#add_class_group_enrollment_form').slideToggle()
+    $('#new-course-student-form').hide()
+    $('#new-course-student-link').show()
+    $('#new-course-class-group-link').hide()
+    $('#new-course-class-group-form').slideToggle()
 
   $(".chzn-select").chosen()
+
+  $('#delete-course-link').live 'ajax:success', (evt, data, status, xhr) ->
+    $(this).closest('tr').remove()
 

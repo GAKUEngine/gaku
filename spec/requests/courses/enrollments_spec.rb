@@ -12,16 +12,16 @@ describe "CourseEnrollment"  do
     visit course_path(@course)
     @course.students.size.should eql(0)
 
-    click_link 'add_student_enrollment'  
-    wait_until { page.find('#add_student_enrollment_form').visible? }
-    !page.find('#add_student_enrollment').visible?
+    click_link 'new-course-student-link'  
+    wait_until { page.find('#new-course-student-form').visible? }
+    !page.find('#new-course-student-link').visible?
 
     select "John Doe", :from => 'course_enrollment_student_id'
-    click_button 'submit_student_button'
+    click_button 'submit-course-student-button'
     
     wait_until do
-      !page.find('#add_student_enrollment_form').visible? 
-      page.find('#add_student_enrollment').visible?
+      !page.find('#new-course-student-form').visible? 
+      page.find('#new-course-student-link').visible?
     end
     page.should have_content("Doe John")
     page.should have_content("View Assignments")
@@ -36,11 +36,11 @@ describe "CourseEnrollment"  do
     page.should have_content("Toni")
     @course.students.size.should eql(1)
 
-    click_link 'add_student_enrollment'
-    wait_until { page.find('#add_student_enrollment_form').visible? }
+    click_link 'new-course-student-link'
+    wait_until { page.find('#new-course-student-form').visible? }
 
     select "Toni Rtoe", :from => 'course_enrollment_student_id'
-    click_button 'submit_student_button'
+    click_button 'submit-course-student-button'
     wait_until { page.should have_content ("Student Already enrolled to course!") } 
     @course.students.size.should eql(1)
   end
@@ -52,19 +52,19 @@ describe "CourseEnrollment"  do
     
     visit course_path(@course)
     @course.students.size.should eql(0)
-    click_on 'add_class_group_enrollment'
+    click_on 'new-course-class-group-link'
     
-    wait_until { page.find('#add_class_group_enrollment_form').visible? }
-    !page.find('#add_class_group_enrollment').visible?
+    wait_until { page.find('#new-course-class-group-form').visible? }
+    !page.find('#new-course-class-group-link').visible?
     click_on 'Choose Class Group' 
 
     wait_until { page.has_content?('Math') }
     find("li:contains('Math')").click
-    click_button "submit_class_group_button"
+    click_button "submit-course-class-group-button"
 
     wait_until do 
-      !page.find('#add_class_group_enrollment_form').visible? 
-      page.find('#add_class_group_enrollment').visible?  
+      !page.find('#new-course-class-group-form').visible? 
+      page.find('#new-course-class-group-link').visible?  
     end
     page.should have_content("Johniew")
     page.should have_content("Amon")
