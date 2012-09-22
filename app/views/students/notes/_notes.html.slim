@@ -1,11 +1,11 @@
-#student_notes
+#student-notes
   .row-fluid
       .pull-left
         h4.h4-vm.notes_count
           = @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list')
   .row-fluid
     .span12
-      table#student-notes-table.index.table.table-striped.table-bordered.table-condensed
+      table#student-notes-index.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th
@@ -15,6 +15,8 @@
         tbody
           =render :partial => 'students/notes/note', :collection => @student.notes, :as => :note 
   hr
-#add_new_student_note
+
 .row-fluid
-  = link_to t("notes.add"), new_student_note_path(@student), :remote => true, :id => "new_student_note_link", :class => "span3 btn btn-primary"
+  = link_to t("notes.add"), new_student_note_path(@student), :remote => true, :id => "new-student-note-link", :class => "span3 btn btn-primary"
+
+#new-student-note-form

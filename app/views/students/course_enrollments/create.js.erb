@@ -1,10 +1,10 @@
-$('#course_enrollments table tbody').append('<%= escape_javascript(render :partial => "course_enrollment", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course => @student.courses.last}) %>');
+$('#student-course-enrollments-index tbody').append('<%= escape_javascript(render :partial => "course_enrollment", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course => @student.courses.last}) %>');
 inner_text = $('.courses_count').text();
 var new_value = parseInt(inner_text) + 1;
-$('.courses_count').html(new_value); 
-$('#new_course_enrollment select').val('');
-$('#add_course_enrollment').html('');
-$('.new_student_course').show();
+$('.student-courses-count').html(new_value); 
+$('#new-student-course-enrollment-form select').val('');
+$('#new-student-course-enrollment-form').html('');
+$('#new-student-course-enrollment-link').show();
 
-$('#new_student_course_tab_link').html('<%= @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural') %>');
-$('.courses_count').html('<%= @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list') %>');
+$('#new-student-course-enrollment-tab-link').html('<%= @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural') %>');
+$('.student-courses-count').html('<%= @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list') %>');

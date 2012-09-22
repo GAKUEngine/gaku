@@ -36,16 +36,10 @@ describe 'Student' do
       visit student_path(@student)
       page.should have_link "Enroll to class"
     end
-  
-    it "should list enrolled courses" do
-      visit student_path(@student)
-      click_link 'new_student_course_tab_link'
-      wait_until { page.has_content?('Courses List') }
-    end
-
+    
     it "should exist enroll_to_course link" do
       visit student_path(@student)
-      click_link 'new_student_course_tab_link'
+      click_link 'new-student-course-enrollment-tab-link'
       wait_until { page.has_content?('Courses List') }
       page.should have_link "Enroll to course"
     end

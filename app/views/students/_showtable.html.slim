@@ -66,7 +66,7 @@
           a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
             = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
-          a#new_student_course_tab_link data-toggle="tab" href="#courses"
+          a#new-student-course-enrollment-tab-link data-toggle="tab" href="#courses"
             = @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural')
       .tab-content
         #addresses.tab-pane.active
