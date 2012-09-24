@@ -12,4 +12,4 @@
 
         = link_to_show student_guardian_path(@student, guardian), :id => 'show-student-guardian-link'
         = ajax_link_to_edit edit_student_guardian_path(@student, guardian), :id => 'edit-student-guardian-link'
-        = ajax_link_to_delete student_guardian_path(@student, guardian), :id => 'delete-student-guardian-link'
+        = ajax_link_to_delete student_guardian_path(@student, guardian), :id => 'delete-student-guardian-link', :class => 'delete-student-guardian-link'

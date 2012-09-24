@@ -15,7 +15,7 @@ module ApplicationHelper
       :remote => true,
       :method => :delete,
       :data => { :confirm => 'Are you sure?' },
-      :class => 'btn btn-mini btn-danger delete_link'
+      :class => 'btn btn-mini btn-danger delete-link'
     }.merge(options)
 
     link_to name, resource, attributes
