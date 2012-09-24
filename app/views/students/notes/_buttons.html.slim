@@ -1,0 +1,4 @@
+td
+	=link_to_show [@student, note], :id => 'show-student-note-link' 
+	=ajax_link_to_edit [:edit, @student, note], :id => 'edit-student-note-link'
+	=ajax_link_to_delete [@student, note], :id => 'delete-student-note-link'

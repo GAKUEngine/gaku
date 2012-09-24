@@ -1,5 +1,5 @@
-$('#guardian_addresses_idx tbody').append('<%= escape_javascript(render :partial => "address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
+$('#student-guardian-addresses-index tbody').append('<%= escape_javascript(render :partial => "address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @address}) %>');
 
-$('#new_guardian_address').hide()
-$('#new_guardian_address')[0].reset()
-$('.new_guardian_address_link').show()
+$('#new-student-guardian-address-form').hide();
+$('#new-student-guardian-address-form form')[0].reset();
+$('#new-student-guardian-address-link').show();

@@ -1,0 +1,7 @@
+$('#contact-types table tbody').append('<%= escape_javascript(render :partial => "contact_type", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact_type => @contact_type}) %>');
+$('.contact-types-count').html('<%= @contact_types.count %>');
+
+$('#new-contact-type-form').html('');
+$('#new-contact-type-link').show();
+
+$('.contact-types-count').html('<%= @contact_types.count != 0 ? t('contact_types.list') + "（" + @contact_types.count.to_s + "）" : t('contact_types.list') %>');

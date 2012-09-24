@@ -13,14 +13,8 @@ class StudentsController < ApplicationController
   before_filter :load_student,      :only => [:edit, :update, :destroy]
   
   def index
-    if params[:search] && !params[:search].empty?
-      @students = Student.search(Student.encrypt_name(params[:search]), load: true)
-    else  
-      @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
-    end      
-    decrypted_students = decrypt_students_fields(@students)
-    @students_json = sort_students(decrypted_students)
-
+    @search = Student.search(params[:q])
+    @students = @search.result#.includes([:addresses, :class_groups, :class_group_enrollments]).all
     if params[:action] == "get_csv_template"
       get_csv_template
       return
@@ -29,9 +23,6 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.js
       format.html
-      format.json do 
-        render :json => @students_json.as_json
-      end  
       format.csv  { export_csv_index(@students) }
     end
   end
@@ -49,9 +40,7 @@ class StudentsController < ApplicationController
   private :export_csv_index
 
   def create
-
     super do |format|
-      @student_json = decrypt_student_fields(@student.as_json)
       format.js { render }
     end
   end
@@ -105,6 +94,11 @@ class StudentsController < ApplicationController
     render json: @students_json.as_json
   end
 
+  def load_autocomplete_data
+    @students = Student.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+    render json: @students.map(&params[:column].to_sym).uniq
+  end
+
   private
     def load_before_index
       @student = Student.new
@@ -124,6 +118,7 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
 
+=begin
     def decrypt_students_fields(students)
       students_json = students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
       i = 0
@@ -152,13 +147,10 @@ class StudentsController < ApplicationController
       end
       return students_json
     end
+=end
 
     def sort_column
-      if params[:sort]
-        Student.column_names.include?(params[:sort]) || Student.column_names.include?("encrypted_" + params[:sort]) ? params[:sort] : "surname"
-      else
-        "surname"
-      end
+      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
     end
 
     def sort_direction

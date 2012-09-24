@@ -3,8 +3,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table :users  do |t|
 
       t.boolean :admin, :default => false
-      t.string :locale
-      
+      t.text    :settings
+
       ## Trackable
       t.integer  :sign_in_count, :default => 0
       t.datetime :current_sign_in_at

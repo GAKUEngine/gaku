@@ -1,0 +1,7 @@
+=form_tag update_presets_admin_presets_path, :method => :put do
+	
+	=fields_for 'presets' do |language|
+		=language.label :language, "Language"
+		=language.text_field :language, :value => @preset_hash[:language]
+
+	=submit_tag 

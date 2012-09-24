@@ -1,16 +1,16 @@
-#student_addresses
+#student-addresses
   .row-fluid
     .pull-left
       h4.h4-vm.addresses_count
         = @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list')
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_address')).html_safe, new_student_address_path(@student), :class => 'new_address_student btn btn-primary', :id => 'new_student_address_link', :remote => true
+      = ajax_link_to_new t('students.add_address'), new_student_address_path(@student), :id => 'new-student-address-link'
   .row-fluid
     .span12
       hr
   .row-fluid
     .span12
-      table.index.table.table-striped.table-bordered.table-condensed
+      table#student-addresses-index.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th.btn-inverse style="width:28px"
@@ -26,4 +26,5 @@
         tbody
           =render :partial => 'students/addresses/address', :collection => @student.addresses, :as => 'address'
 
-#add_new_student_address
+#new-student-address-form
+  #modal-dialogs

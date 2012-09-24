@@ -1,0 +1,21 @@
+=form_tag update_presets_admin_presets_path, :method => :put do
+	
+	=fields_for 'presets' do |students_gender|
+		=students_gender.label :students_gender, "Studet Gender"
+		=students_gender.text_field :students_gender, :value => @preset_hash[:students_gender]
+	
+	=fields_for 'presets' do |address_country|
+		=address_country.label :address_country, "Address Country"
+		=address_country.text_field :address_country, :value => @preset_hash[:address_country]
+
+	=fields_for 'presets' do |address_state|
+		=address_state.label :address_state, "Address State"
+		=address_state.text_field :address_state, :value => @preset_hash[:address_state]
+
+	=fields_for 'presets' do |address_city|
+		=address_city.label :address_city, "Address City"
+		=address_city.text_field :address_city, :value => @preset_hash[:address_city]
+
+	br/
+	=submit_tag 
+

@@ -1,13 +1,18 @@
 class CreateStudents < ActiveRecord::Migration
   def change
     create_table :students do |t|
-      t.string   :encrypted_name
+      t.string   :name
       t.string   :middle_name
-      t.string   :encrypted_surname
-      t.string   :encrypted_name_reading, :default => "" 
-      t.string   :encrypted_surname_reading, :default =>  ""
+      t.string   :surname
+      t.string   :name_reading, :default => ""
+      t.string   :surname_reading, :default =>  ""
       t.boolean  :gender
-      t.string   :encrypted_phone
+      t.string   :phone
+#      t.string   :encrypted_name
+#      t.string   :encrypted_surname
+#      t.string   :encrypted_name_reading, :default => ""
+#      t.string   :encrypted_surname_reading, :default =>  ""
+#      t.string   :encrypted_phone
       t.string   :email
       t.date     :birth_date
       t.date     :admitted

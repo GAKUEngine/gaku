@@ -13,6 +13,3 @@
 .row-fluid
 	=contact_form.label :is_emergency, t('contacts.emergency')
 	=contact_form.check_box :is_emergency
-.row-fluid
-	=contact_form.submit t('contacts.save'), :id => 'submit_button', :class => 'btn btn-primary'
-	= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"

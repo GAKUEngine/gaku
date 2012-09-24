@@ -5,13 +5,13 @@
       .pull-left
         h3 = t("syllabuses.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("syllabuses.new")).html_safe, new_syllabus_path, :class => "btn btn-primary", :id => "new_syllabus_link"
+        = link_to_new t("syllabuses.new"), new_syllabus_path, :id => "new-syllabus-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-        table.index.table.table-striped.table-bordered.table-condensed
+        table#syllabuses-index.index.table.table-striped.table-bordered.table-condensed
           tr
             th.btn-inverse data-field=t('syllabuses.code') = t('syllabuses.code')
             th.btn-inverse data-field=t('syllabuses.name') = t('syllabuses.name')
@@ -25,8 +25,6 @@
               td= syllabus.description
               td= syllabus.credits
               td
-                = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, syllabus, :class => "mr-xs btn btn-mini btn-success", :id => "show"
-
-                = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_syllabus_path(syllabus), :class => "mr-xs btn btn-mini btn-warning", :id => "edit"
-                
-                = link_to ("<i class='icon-white icon-remove'></i>").html_safe, syllabus, :method => :delete, :data => {:confirm => t('confirm_delete')}, :id => "delete", :class => 'btn btn-mini btn-danger delete_link delete_syllabus', :remote => true
+                = link_to_show syllabus, :id => "show-syllabus-link"
+                = link_to_edit  edit_syllabus_path(syllabus), :id => "edit-syllabus-link"
+                = ajax_link_to_delete syllabus, :id => "delete-syllabus-link"

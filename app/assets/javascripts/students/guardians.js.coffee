@@ -1,16 +1,12 @@
 $ ->
-	# works for contacts and address
-	$('.delete_link').live 'ajax:success', ->
-		$(this).closest('tr').remove()
-
-	$('#new_guardian_contact_link').on 'click', (event)->
+	
+	$('#new-student-guardian-contact-link').on 'click', (event)->
 		event.preventDefault()
-		$('#new_guardian_contact_link').hide()
-		$('#new_guardian_contact_form').slideDown()
+		$('#new-student-guardian-contact-link').hide()
+		$('#new-student-guardian-contact-form').slideDown()
 
-
-	$('.make_primary_address').live 'ajax:success', ->
-		$('.make_primary_address').each ->
+	$('.make-primary-address').live 'ajax:success', ->
+		$('.make-primary-address').each ->
 			$(@).removeClass('btn-primary')
 
 		$(@).addClass('btn-primary')

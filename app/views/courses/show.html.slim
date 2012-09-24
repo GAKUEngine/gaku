@@ -12,7 +12,7 @@
     .row-fluid
       .span12.well
         .row-fluid
-            table.table.table-striped.table-bordered.table-condensed.student_contact_table
+            table.table.table-striped.table-bordered.table-condensed.student-contact-table
               thead
                 tr
                   th.btn-inverse =t('courses.code')
@@ -33,21 +33,21 @@
             .tabbable.tabs-right
               ul.nav.nav-tabs
                 li.active
-                  a data-toggle="tab" href="#enrollments" =t("course_enrollments.enrollment")
+                  a data-toggle="tab" href="#course-enrollments" =t("course_enrollments.enrollment")
                 li
-                  a data-toggle="tab" href="#assignments" =t("course_enrollments.assignment")
+                  a data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignment")
                 li
-                  a data-toggle="tab" href="#exams" =t("exams.plural")
+                  a data-toggle="tab" href="#course-exams" =t("exams.plural")
               .tab-content
-                #enrollments.tab-pane.active
+                #course-enrollments.tab-pane.active
                   = render :partial => "courses/enrollments/enrollments"
-                #assignments.tab-pane
+                #course-assignments.tab-pane
                   = render :partial => "courses/assignments/assignments"
-                #exams.tab-pane
+                #course-exams.tab-pane
                   = render :partial => "courses/exams/exams"
     .row-fluid
       .span12.well
-        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_course_path(@course), :class => "span9 btn btn-warning"
-        = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, courses_path, :class => "span3 btn btn-danger"
+        = link_to_edit_with_text [:edit, @course], :id => 'edit-course-link', :class => "span9 btn btn-warning"
+        = link_to_back courses_path, :class => "span3 btn btn-danger"
 
-#modal_dialogs
+#modal-dialogs

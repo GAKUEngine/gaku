@@ -12,6 +12,11 @@
 class Preset < ActiveRecord::Base
   attr_accessible :content, :name
 
+  PRESETS = {
+  	:student => ['students_gender', 'address_country', 'address_state', 'address_city'],
+  	:locale => ['language']
+  }
+
   def self.method_missing(method, *args, &block)
 		return self.send method, *args, &block if self.respond_to? method  
 		
@@ -24,9 +29,8 @@ class Preset < ActiveRecord::Base
 	end
 
 	private
-
 	def self.set(key, value)
-		preset  = Preset.first_or_create(:name => key)
+		preset = Preset.where(:name => key).first_or_initialize
 		preset.update_attribute(:content, value.to_yaml)
 	end
 
@@ -35,5 +39,24 @@ class Preset < ActiveRecord::Base
 		preset.nil? ? nil : YAML.load(preset.content) 
 	end
 
+	def self.load_or_create(presets)
+		@presets = Preset.where(:name => presets)
+		if presets.count == @presets.length
+			@presets
+		else
+			presets.each do |preset|
+				Preset.where(:name => preset).first_or_create
+			end
+			@presets = Preset.where(:name => presets)
+		end
+	end
 
+	def self.load_presets_hash(presets)
+		presets_hash = {}
+		@presets = Preset.where(:name => presets)
+		@presets.each do |preset|
+			presets_hash[preset.name.to_sym] = YAML.load(preset.content) rescue nil
+		end
+		return presets_hash
+	end
 end

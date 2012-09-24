@@ -1,3 +1,1 @@
-<%- if @course_group.course_group_enrollments.count == 0 %>
-	$('#delete_course_group').html('<%= escape_javascript(render :partial => "/course_groups/delete_confirm", :formats => [:html], :handlers => [:erb, :slim]) %>');
-<% end %>
+$('.courses_count').html('<%= @course_group.courses.count != 0 ? t('courses.list') + "（" + @course_group.courses.count.to_s + "）" : t('courses.list') %>');

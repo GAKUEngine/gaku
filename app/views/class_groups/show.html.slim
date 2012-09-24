@@ -15,20 +15,20 @@
             th =t("class_groups.name")
             th =t("class_groups.homeroom")
         tbody
-          tr class="class_group_#{@class_group.id}"
+          tr class="class-group-#{@class_group.id}"
             = render 'shared/fields/class_group_fields', :class_group => @class_group
     .row-fluid.mt-l
       .span12.well
         .tabbable.tabs-right
           ul.nav.nav-tabs
             li#class_group_students_tab.active
-              a#class_group_enrollments_tab_link data-toggle="tab" href="#class_group_enrollments"
+              a#class-group-enrollments-tab-link data-toggle="tab" href="#class_group_enrollments"
                 =t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
             li
-              a#class_group_semesters_tab_link data-toggle="tab" href="#semesters"
+              a#class-group-semesters-tab-link data-toggle="tab" href="#semesters"
                 =t("semesters.semesters")+"（ "+@class_group.semesters.count.to_s+" ）"
             li
-              a#class_group_courses_tab_link data-toggle="tab" href="#courses"
+              a#class-group-courses-tab-link data-toggle="tab" href="#courses"
                 = t("courses.list")+"（ "+@class_group.courses.count.to_s+" ）"
           .tab-content
 
@@ -59,21 +59,13 @@
         = link_to t("Edit"), edit_class_group_path(@class_group), :class => "span6 btn", :remote => true
         = link_to t("Back"), class_groups_path, :class => "span6 btn"
 
-#modal_dialogs
+#modal-dialogs
 
-javascript:
-  $(document).ready(function() {
+coffee:
+  $ ->
+    $('#show_semester_form').click ->
+      $('#show_semester_form').hide()
 
-    $('#show_semester_form').click(function() {
-    $('#show_semester_form').hide()
-     $('#semester_form').toggle('slow', function() {
-      // Animation complete.
-     });
-    });
-    $('#show_course_form').click(function() {
-     $('#course_form').toggle('slow', function() {
-      // Animation complete.
-      $('#new_course').validationEngine();
-     });
-    });
-  });
+    $('#show_course_form').click ->
+      $('#course_form').toggle 'slow', ->
+        $('#new_course').validationEngine()

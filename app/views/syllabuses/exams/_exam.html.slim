@@ -6,8 +6,6 @@
     td= exam.weight
     td= exam.use_weighting
     td
-      = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam, :id => 'show_link', :class => "mr-xs btn btn-mini btn-success"
-
-      = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_path(exam), :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"
-
-      = link_to ("<i class='icon-white icon-remove'></i>").html_safe, syllabus_exam_path(@syllabus, exam), :method => :delete, :data => { confirm: 'Are you sure?' }, :remote => true, :id => 'delete_link', :class => 'btn btn-mini btn-danger delete_exam'
+      = link_to_show exam, :id => 'show-syllabus-exam-link'
+      = link_to_edit [:edit, exam], :id => 'edit-syllabus-exam-link'
+      = ajax_link_to_delete [@syllabus, exam], :id => 'delete-syllabus-exam-link'

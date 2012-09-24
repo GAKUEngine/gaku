@@ -60,13 +60,13 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a#new_student_address_tab_link data-toggle="tab" href="#addresses"
+          a#new-student-address-tab-link data-toggle="tab" href="#addresses"
             = @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
         li
-          a#new_student_guardian_tab_link data-toggle="tab" href="#guardians"
+          a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
             = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
         li
-          a#new_student_course_tab_link data-toggle="tab" href="#courses"
+          a#new-student-course-enrollment-tab-link data-toggle="tab" href="#courses"
             = @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural')
       .tab-content
         #addresses.tab-pane.active
@@ -81,7 +81,7 @@
 .row-fluid
   .span12.well
     .span4
-      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'create_contact', :class => "span12 btn btn-primary", :remote => true }
+      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
       = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning"
     .span4

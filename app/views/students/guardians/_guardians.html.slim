@@ -1,11 +1,11 @@
-#guardians_modal
-#student_guardians
+#guardians-modal
+#student-guardians
   .row-fluid
     .pull-left
-      h4.h4-vm.guardians_count
+      h4.h4-vm.student-guardians-count
         = @student.addresses.count != 0 ? t('guardians.list') + "（" + @student.guardians.count.to_s + "）" : t('guardians.list')
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('guardians.add')).html_safe, new_student_guardian_path(@student), :remote => true, :id => "new_student_guardian_link", :class => "btn btn-primary new_student_guardian"
+      = ajax_link_to_new t('guardians.add'), new_student_guardian_path(@student), :id => "new-student-guardian-link"
   .row-fluid
     .span12
       hr
@@ -28,4 +28,5 @@
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
 
-#add_new_student_guardian
+#new-student-guardian-form
+#modal-dialogs

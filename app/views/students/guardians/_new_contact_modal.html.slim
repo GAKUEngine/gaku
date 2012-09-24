@@ -1,4 +1,4 @@
-.modal.hide#newGuardianContactModal wmode="opaque"
+.modal.hide#new-contact-modal wmode="opaque"
 	.modal-header
 		button.close type="button" data-dismiss="modal"
 			'x
@@ -9,5 +9,5 @@
 			= render 'shared/form_fields/contact_form_fields', :contact_form => contact_form
 
 			.actions
-				=contact_form.submit t('students.create_contact'), :id => 'submit_button', :class => 'btn btn-primary'
-				= link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :id => 'cancel_link', :class => 'btn', :'data-dismiss' => "modal"
+				=contact_form.submit t('students.create_contact'), :id => 'submit-student-guardian-contact-button', :class => 'btn btn-primary'
+				= link_to_cancel :id => 'cancel-student-guardian-contact-link', :class => 'btn'

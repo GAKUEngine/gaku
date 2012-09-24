@@ -1,2 +1,2 @@
-$('#add_new_student_guardian').html('<%= escape_javascript(render :partial => "students/guardians/new", :formats => [:html], :handlers => [:erb, :slim]) %>');
-$('#new_student_contact_link').hide();
+$('#new-student-contact-form').html('<%= escape_javascript(render :partial => "students/contacts/form", :formats => [:html], :handlers => [:erb, :slim], :locals => { :student => @student}) %>');
+$('#new-student-contact-link').hide();

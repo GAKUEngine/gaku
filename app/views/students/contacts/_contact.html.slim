@@ -1,3 +1,11 @@
-tr id="contact_#{contact.id}" class="student_contact"
-  = render 'shared/fields/contact_fields', :target => [@student, contact]
-  
+tr id="contact-#{contact.id}" class="student-contact"
+  -@target = [@student, contact]
+  = render 'shared/fields/contact_fields', :target => @target
+  td class="primary-button"
+    -if @target.last.is_primary?
+      =link_to t('contacts.make_primary'), [:make_primary] + @target, :data => {:confirm => 'are you sure?'}, :class => 'btn btn-primary make-primary', :remote => true, :method => :post
+    -else
+      = link_to t('contacts.make_primary'), [:make_primary] + @target, :id => 'set-primary-link', :data => {:confirm => 'are you sure?'}, :class => 'btn', :remote => true, :method => :post
+
+    = ajax_link_to_edit [:edit] + @target, :id => 'edit-student-contact-link'
+    = ajax_link_to_delete @target, :id => 'delete-student-contact-link'
