@@ -10,14 +10,14 @@ describe 'Note' do
 
   it "should add and show student note", :js => true do
     @student.notes.size.should eql(0)
-    click_link 'new_student_note_link'
+    click_link 'new-student-note-link'
 
-    wait_until { page.has_content?('New Note') } 
+    wait_until { find('#new-student-note-form').visible? } 
     fill_in "note_title", :with => "The note title"
     fill_in "note_content", :with => "The note content"
-    click_button "Save note"
+    click_button "submit-student-note-button"
 
-    sleep 1 #TODO Remove sleep
+    wait_until { !page.find('#new-student-note-form').visible? } 
     page.should have_selector('a', href: "/students/1/notes/1/edit")
     page.should have_content("The note title")
     page.should have_content("The note content")
@@ -26,10 +26,10 @@ describe 'Note' do
   end
 
   it "should not submit new note without filled validated fields", :js => true do 
-    click_link 'new_student_note_link'
+    click_link 'new-student-note-link'
 
     wait_until { page.has_content?('New Note') } 
-    click_button "Save note"
+    click_button "submit-student-note-button"
     @student.notes.size.should eql(0)
   end
 
@@ -40,20 +40,20 @@ describe 'Note' do
     end
 
     it "should edit a student note", :js => true do 
-      click_link 'new_student_note_link'
+      click_link 'new-student-note-link'
 
       wait_until { page.has_content?('New Note') } 
       fill_in "note_title", :with => "The note title"
       fill_in "note_content", :with => "The note content"
-      click_button "Save note"
-      click_link "edit_link" 
+      click_button "submit-student-note-button"
+      click_link "edit-student-note-link" 
 
-      wait_until { find('#editNoteModal').visible? } 
+      wait_until { find('#edit-note-modal').visible? } 
       fill_in 'note_title', :with => 'Edited note title'
       fill_in 'note_content', :with => 'Edited note content'
-      click_button 'submit_button'
+      click_button 'submit-student-note-button'
 
-      wait_until { !page.find('#editNoteModal').visible? }
+      wait_until { !page.find('#edit-note-modal').visible? }
       page.should have_content('Edited note title')
       page.should have_content('Edited note content')
     end
@@ -62,13 +62,13 @@ describe 'Note' do
       @student.notes.size.should eql(1)
       wait_until { page.has_content?('Notes') }
         
-      tr_count = page.all('table.index tr').size
+      tr_count = page.all('table#student-notes-index tr').size
       page.should have_content(@note.title)
       
-      click_link 'delete_link' 
+      click_link 'delete-student-note-link' 
       page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table.index tr').size == tr_count - 1 } 
+      wait_until { page.all('table#student-notes-index tr').size == tr_count - 1 } 
       page.should_not have_content(@note.title)
       @student.notes.size.should eql(0)
     end

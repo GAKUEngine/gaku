@@ -2,9 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  $('#add_new_student_address').on 'click','a.btn', (event) ->
+  $('#new-student-address-link').on 'click','a.btn', (event) ->
     event.preventDefault()
-    $('#new_address_form').slideDown()
+    $('#new-student-address-form').slideDown()
 
   $('#new_student_link').on 'click', (event) ->
     event.preventDefault()

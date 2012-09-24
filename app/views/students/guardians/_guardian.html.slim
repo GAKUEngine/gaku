@@ -1,3 +1,3 @@
 -unless guardian.nil? or guardian.new_record? or !guardian
-  div id="guardian_#{guardian.id}" class="guardian_cell"
+  div id="guardian-#{guardian.id}" class="guardian-cell"
     = render 'students/guardians/guardian_unit', :guardian => guardian

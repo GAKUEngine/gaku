@@ -27,13 +27,13 @@
     .span12.well
       - if params[:action] == 'edit'
         .span6
-          = syllabus_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Show"), @syllabus, :class => "span3 btn btn-success"
+          = syllabus_form.submit nil, :id => 'submit-syllabus-button', :class => "span12 btn btn-primary"
+        = link_to t("Show"), @syllabus, :id => 'show-syllabus-link', :class => "span3 btn btn-success"
         = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger"
       - else
         .span9
-          = syllabus_form.submit nil, :id => 'submit_button', :class => "span12 btn btn-primary"
+          = syllabus_form.submit nil, :id => 'submit-syllabus-button', :class => "span12 btn btn-primary"
         = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger"
         
 coffee:
-  $('#new_syllabus').validationEngine();
+  $('#new-syllabus-form').validationEngine()

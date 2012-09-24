@@ -1,12 +1,12 @@
-$('.guardian_contact_table tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
-$("#new_guardian_contact_link").show();
-$('#new_guardian_contact_form').hide();
-$('#new_guardian_contact_form form')[0].reset();
+$('#student-guardian-contacts-index tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$("#new-student-guardian-contact-link").show();
+$('#new-student-guardian-contact-form').hide();
+$('#new-student-guardian-contact-form form')[0].reset();
 
 <% if @contact.is_primary? %>
-	$('.guardian_contact').each(function() {
-		$(this).find('.make_primary').removeClass('btn-primary')
+	$('.guardian-contact').each(function() {
+		$(this).find('.make-primary').removeClass('btn-primary');
 	});
-	var currentContact = $("#contact_<%= @contact.id %>");
-	currentContact.find('.make_primary').addClass('btn-primary');
+	var currentContact = $("#contact-<%= @contact.id %>");
+	currentContact.find('.make-primary').addClass('btn-primary');
 <% end %>	

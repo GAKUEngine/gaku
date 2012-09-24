@@ -8,7 +8,7 @@ class Students::NotesController < ApplicationController
 
   def new
     @note = Note.new
-    render 'students/notes/new'  
+    render 'new'  
   end
   
   def edit

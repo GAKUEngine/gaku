@@ -1,8 +1,6 @@
-tr class="class_group_#{class_group.id}"
+tr class="class-group-#{class_group.id}"
   = render 'shared/fields/class_group_fields', :class_group => class_group
   td
-	  = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, class_group , :id => 'show_class_group_link', :class => "mr-xs btn btn-mini btn-success"
-	  
-	  = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_class_group_path(class_group), :id => 'edit_class_group_link', :class => "mr-xs btn btn-mini btn-warning", :remote => true
-
-	  = link_to ("<i class='icon-white icon-remove'></i>").html_safe, class_group_path(class_group), :method => :delete, :data => { :confirm => 'Are you sure?' }, :id => 'delete_class_group_link', :class => 'btn btn-mini btn-danger delete_link delete_class_group', :remote => true
+	= link_to_show class_group, :id => 'show-class-group-link'
+	= ajax_link_to_edit edit_class_group_path(class_group), :id => 'edit-class-group-link'
+	= ajax_link_to_delete class_group, :id => 'delete-class-group-link'

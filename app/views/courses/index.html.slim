@@ -5,13 +5,13 @@
       .pull-left
         h3 = t("courses.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("courses.new")).html_safe, new_course_path, :class => "btn btn-primary", :id => "new_course_link"
+        = link_to ("<i class='icon-white icon-plus'></i> " + t("courses.new")).html_safe, new_course_path, :class => "btn btn-primary", :id => "new-course-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-        table.index.table.table-striped.table-bordered.table-condensed
+        table#courses-index.index.table.table-striped.table-bordered.table-condensed
           tr
             th*{"class" => "btn-inverse", "data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
             th*{"class" => "btn-inverse", "data-field" => t(:schedule)} =t('schedule')
@@ -25,8 +25,6 @@
               td
               td= course.students.count
               td 
-                = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, course, :id => 'show_link', :class => "mr-xs btn btn-mini btn-success"
-
-                = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_course_path(course), :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning"
-                
-                = link_to ("<i class='icon-white icon-remove'></i>").html_safe, course, :id => 'delete_link', :class => 'btn btn-mini btn-danger', :data => {:confirm => t('confirm_delete')}, :method => :delete
+                = link_to_show course, :id => 'show-course-link'
+                = link_to_edit edit_course_path(course), :id => 'edit-course-link'
+                = ajax_link_to_delete course_path(course), :id => 'delete-course-link'

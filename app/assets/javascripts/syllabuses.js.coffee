@@ -2,17 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-	$('#new_syllabus_exam').on 'click','a.btn', (event) ->
+	$('#new-syllabus-exam').on 'click','a.btn', (event) ->
     event.preventDefault()
-    $('#syllabus_exam_form').slideToggle()
+    $('#new-syllabus-exam-form').slideToggle()
       
-$ ->
-	$('#new_assignment').on 'click','a.btn', (event) ->
+	$('#new-syllabus-assignment').on 'click','a.btn', (event) ->
     event.preventDefault()
-    $('#syllabus_assignment_form').slideToggle()
+    $('#new-syllabus-assignment-form').slideToggle()
 
-  $('.delete_syllabus').live 'ajax:success', (evt, data, status, xhr) ->
- 		$(this).closest('tr').remove();
+  $('#delete-syllabus-link').live 'ajax:success', ->
+    $(this).closest('tr').remove()
 
-  $('.delete_exam').live 'ajax:success', ->
+  $('#delete-syllabus-exam-link').live 'ajax:success', ->
+    $(this).closest('tr').remove()
+
+  $('#delete-syllabus-assignment-link').live 'ajax:success', ->
     $(this).closest('tr').remove()

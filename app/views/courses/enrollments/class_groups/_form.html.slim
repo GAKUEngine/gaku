@@ -1,9 +1,9 @@
-=form_for @course, :url => enroll_class_group_course_enrollment_path(@course), :remote => true, :method => 'post', :html => {:class => 'add_class_group_to_course', :id => 'enroll_class_group_form'} do |f|
+=form_for @course, :url => enroll_class_group_course_enrollment_path(@course), :remote => true, :method => 'post', :html => {:class => 'add-class-group-to-course', :id => 'enroll-course-class-group-form'} do |f|
   .fields  
     b Choose Class Group
     =f.label :class_group_id
     =f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
   .actions
-    =f.submit t('courses.enroll_class_group'), :id => 'submit_class_group_button', :class => 'btn btn-primary'
+    =f.submit t('courses.enroll_class_group'), :id => 'submit-course-class-group-button', :class => 'btn btn-primary'
   .row-fluid.mt-s
-    = link_to t("cancel"), "", :id => "class_group_cancel_link", :class => "span6 btn btn-danger", :style => "min-height:0px"
+    = link_to_cancel :id => "cancel-course-class-group-link", :class => "span6 btn btn-danger", :style => "min-height:0px"

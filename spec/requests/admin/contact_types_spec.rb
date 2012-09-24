@@ -10,16 +10,29 @@ describe 'ContactTypes' do
 
     it 'should create and show contact type', :js => true do 
       ContactType.count.should eql(0)
-      click_link 'new_contact_type_link'
+      click_link 'new-contact-type-link'
 
-      wait_until { page.find('#js-new-contact-type-form').visible? }
+      wait_until { page.find('#new-contact-type-form').visible? }
+      !page.find('#new-contact-type-link').visible?
       fill_in 'contact_type_name', :with => 'home phone'
-      click_button 'submit_contact_type_button'
+      click_button 'submit-contact-type-button'
 
-      wait_until { !page.find('#js-new-contact-type-form').visible? }
+      wait_until { !page.find('#new-contact-type-form').visible? }
+      page.find('#new-contact-type-link').visible?
       page.should have_content('home phone')
       ContactType.count.should eql(1)
     end 
+
+    it 'should cancel creating contact type', :js => true do 
+    	ContactType.count.should eql(0)
+      click_link 'new-contact-type-link'
+
+      wait_until { page.find('#new-contact-type-form').visible? }
+      click_link 'cancel-contact-type-link'
+
+      wait_until { !page.find('#new-contact-type-form').visible? }
+      ContactType.count.should eql(0)
+    end
   end
 
   context 'index, edit and delete' do 
@@ -29,13 +42,13 @@ describe 'ContactTypes' do
     end
 
   	it 'should edit contact type', :js => true do
-  	  within('table#contact_types_index tbody') { click_link('edit_contact_type_link') }
+  	  within('table#contact-types-index tbody') { click_link('edit-contact-type-link') }
   	  
-  	  wait_until { find('#editContactTypeModal').visible? } 
+  	  wait_until { find('#edit-contact-type-modal').visible? } 
   	  fill_in 'contact_type_name', :with => 'email'
-  	  click_button 'submit_contact_type_button' 
+  	  click_button 'submit-contact-type-button' 
 
-  	  wait_until { !page.find('#editContactTypeModal').visible? }
+  	  wait_until { !page.find('#edit-contact-type-modal').visible? }
   	  page.should have_content('email')
   	  page.should_not have_content('mobile')
   	  ContactType.count.should eql(1)
@@ -43,12 +56,12 @@ describe 'ContactTypes' do
 
   	it 'should delete contact type', :js => true do
       ContactType.count.should eql(1)
-      tr_count = page.all('table#contact_types_index tr').size
+      tr_count = page.all('table#contact-types-index tr').size
 
-      click_link('delete_contact_type_link') 
+      click_link('delete-contact-type-link') 
       page.driver.browser.switch_to.alert.accept
         
-      wait_until { page.all('table#contact_types_index tr').size == tr_count - 1 }
+      wait_until { page.all('table#contact-types-index tr').size == tr_count - 1 }
       ContactType.count.should eql(0)
     end
   end

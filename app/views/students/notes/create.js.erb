@@ -1,11 +1,11 @@
-$('#student-notes-table tbody').append('<%= escape_javascript(render :partial => "note", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @student.notes.last}) %>');
-$('#add_note_form_area form').each(function() {
+$('#student-notes-index tbody').append('<%= escape_javascript(render :partial => "note", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @student.notes.last}) %>');
+$('#new-student-note-form form').each(function() {
 	this.reset();
 });
-$('.notes_count').html('<%= @student.notes.count %>');
+$('.student-notes-count').html('<%= @student.notes.count %>');
 
-$('#add_new_student_note').html('');
-$('#new_student_note_link').show();
+$('#new-student-note-form').html('');
+$('#new-student-note-link').show();
 
-$('#new_student_note_tab_link').html('<%= @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes') %>');
-$('.notes_count').html('<%= @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list') %>');
+$('#new-student-note-tab-link').html('<%= @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes') %>');
+$('.student-notes-count').html('<%= @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list') %>');

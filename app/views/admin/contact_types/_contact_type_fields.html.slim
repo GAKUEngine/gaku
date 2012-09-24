@@ -1,5 +1,4 @@
 td =contact_type.name
 td
-    = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_admin_contact_type_path(contact_type), :id => 'edit_contact_type_link', :remote => true, :class => "mr-xs btn btn-mini btn-warning"
-  
-    = link_to ("<i class='icon-white icon-remove'></i>").html_safe, admin_contact_type_path(contact_type), :method => :delete, :data => { :confirm => 'Are you sure?' }, :id => 'delete_contact_type_link', :class => 'btn btn-mini btn-danger delete_link delete_contact_type', :remote => true
+  = ajax_link_to_edit [:edit, :admin, contact_type], :id => 'edit-contact-type-link'
+  = ajax_link_to_delete [:admin, contact_type], :id => 'delete-contact-type-link'

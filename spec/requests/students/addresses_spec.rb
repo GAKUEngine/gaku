@@ -12,9 +12,9 @@ describe 'Address' do
       Factory(:country, :name => "Japan")
       visit student_path(@student)
 
-      click_link 'new_student_address_tab_link'
-      click_link 'new_student_address_link'
-      wait_until { page.has_content?('New Address') }
+      click_link 'new-student-address-tab-link'
+      click_link 'new-student-address-link'
+      wait_until { find("#new-student-address-form").visible? }
     end
 
     it 'should add and show student address', :js => true do
@@ -28,7 +28,7 @@ describe 'Address' do
       fill_in "address_zipcode", :with => "00359"
       fill_in "address_address2", :with => "Toyota str."
 
-      click_button "submit_button"
+      click_button "submit-student-address-button"
 
       page.should have_selector('a', href: "/students/1/addresses/1/edit")
       #required
@@ -44,7 +44,7 @@ describe 'Address' do
 
     it 'should error if there are empty fields', :js => true do 
       page.should_not have_css('div.address_address1formError')
-      click_button "submit_button"
+      click_button "submit-student-address-button"
       wait_until { page.should have_selector('div.address_address1formError') }
     end
   end
@@ -58,10 +58,10 @@ describe 'Address' do
 
     context 'edit' do
       before do 
-        click_link 'new_student_address_tab_link'
+        click_link 'new-student-address-tab-link'
         wait_until { page.has_content?('Addresses list') } 
-        click_link "edit_link" 
-        wait_until { find('#editAddressModal').visible? }
+        click_link "edit-student-address-link" 
+        wait_until { find('#edit-address-modal').visible? }
       end
 
       it 'should edit a student address', :js => true do 
@@ -69,8 +69,8 @@ describe 'Address' do
         fill_in 'address_city', :with => 'Tokyo'
         fill_in 'address_title', :with => 'Edited address'
 
-        click_button 'submit_button'
-        wait_until { !page.find('#editAddressModal').visible? }
+        click_button 'submit-student-address-button'
+        wait_until { !page.find('#edit-address-modal').visible? }
 
         page.should have_content('Edited street address')
         page.should have_content('Tokyo')
@@ -81,7 +81,7 @@ describe 'Address' do
         fill_in 'address_address1', :with => ''
         fill_in 'address_city', :with => ''
         
-        click_button 'submit_button'
+        click_button 'submit-student-address-button'
 
         page.should have_content('Address1 can\'t be blank')
         page.should have_content('City can\'t be blank')
@@ -89,17 +89,17 @@ describe 'Address' do
     end
 
     it 'should delete a student address', :js => true do
-      click_link 'new_student_address_tab_link'
-      wait_until { page.has_content?('Addresses list') } 
-      tr_count = page.all('table.index tr').size
+      click_link 'new-student-address-tab-link'
+      #wait_until { page.has_content?('Addresses list') } 
+      tr_count = page.all('table#student-addresses-index tr').size
       page.should have_content(@address.address1)
       @student.addresses.size.should eql(0)
       @student.student_addresses.size.should eql(1)
 
-      click_link "delete_link" 
+      click_link "delete-student-address-link" 
       page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table.index tr').size == tr_count - 1 } 
+      wait_until { page.all('table#student-addresses-index tr').size == tr_count - 1 } 
       @student.student_addresses.size.should eql(0)
       @student.addresses.size.should eql(0)
       page.should_not have_content(@address.address1)
@@ -114,10 +114,10 @@ describe 'Address' do
       @student.student_addresses.second.is_primary? == false
 
       visit student_path(@student) 
-      click_link 'new_student_address_tab_link'
-      wait_until { page.has_content?('Addresses list') } 
+      click_link 'new-student-address-tab-link'
+      #wait_until { page.has_content?('Addresses list') } 
 
-      within('table.index tr#address_2') { click_link 'set_primary_link' }
+      within('table#student-addresses-index tr#address-2') { click_link 'set_primary_link' }
 
       @student.student_addresses.first.is_primary? == false
       @student.student_addresses.second.is_primary? == true

@@ -1,12 +1,12 @@
-#contact_types
+#contact-types
   .row-fluid
     .pull-left
-      h4.h4-vm.contact_types_count
+      h4.h4-vm.contact-types-count
         = @contact_types.count != 0 ? t('contact_types.list') + "（" + @contact_types.count.to_s + "）" : t('contact_types.list')
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('contact_types.add')).html_safe, new_admin_contact_type_path, :class => 'js-new-contact-type-link btn btn-primary', :id => 'new_contact_type_link', :remote => true
+      =link_to ("<i class='icon-white icon-plus'></i> " + t('contact_types.add')).html_safe, new_admin_contact_type_path, :class => 'btn btn-primary', :id => 'new-contact-type-link', :remote => true
   .row-fluid
-    table#contact_types_index.index.table.table-striped.table-bordered.table-condensed.student_contact_table
+    table#contact-types-index.index.table.table-striped.table-bordered.table-condensed
       thead
         tr
           th.btn-inverse =t('contact_types.singular')
@@ -15,4 +15,4 @@
         =render :partial => 'admin/contact_types/contact_type', :collection => @contact_types, :as => 'contact_type'
     br/
 
-#js-new-contact-type-form
+#new-contact-type-form

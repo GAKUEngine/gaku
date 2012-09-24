@@ -34,12 +34,8 @@
       =render 'delete_confirm'
 #modal_dialogs
 
-javascript:
-  $(document).ready(function() {
-    $('#show_course_form').click(function() {
-     $('#course_form').toggle('slow', function() {
-      // Animation complete.
-      $('#new_course').validationEngine();
-     });
-    });
-  });
+coffee:
+  $ ->
+    $('#show_course_form').click ->
+      $('#course_form').toggle 'slow', ->
+        $('#new_course').validationEngine()

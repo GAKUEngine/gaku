@@ -3,17 +3,17 @@
     h4.h4-vm = t("num_enrolled") + "（ " + @course.students.count.to_s + " ）"
   .pull-right
 
-    #add_student_enrollment_link.pull-right
-      = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, "", :id => "add_student_enrollment", :class => "btn btn-primary", :remote => true
+    #new-course-student-div.pull-right
+      = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, "", :id => "new-course-student-link", :class => "btn btn-primary", :remote => true
 
-    #add_class_group_enrollment_link.pull-right.mr-s
-      = link_to ("<i class='icon-white icon-plus'></i> " + t('courses.add_class_group')).html_safe, "", :class => 'show_class_enroll_form btn btn-primary', :id => 'add_class_group_enrollment', :remote => true
+    #new-course-class-group-div.pull-right.mr-s
+      = link_to ("<i class='icon-white icon-plus'></i> " + t('courses.add_class_group')).html_safe, "", :class => 'btn btn-primary', :id => 'new-course-class-group-link', :remote => true
 
 .row-fluid
   .span12
     hr
 .row-fluid  
-  table#enrolled_students_grid.table.table-condensed.table-striped.table-bordered
+  table#course-students-index.table.table-condensed.table-striped.table-bordered
     thead
       tr
         th.btn-inverse*{"data-field" => t("students.name")}
@@ -24,18 +24,18 @@
           = t("grades.total_points")
         th.btn-inverse*{"data-field" => t("grades.rank")}
           = t("grades.rank")
-        /<th data-field='<haml:loud> t :manage </haml:loud>'><haml:loud> t :manage </haml:loud></th>
     tbody
       =render :partial => 'courses/enrollments/enrolled', :collection => @course.students, :as => :enrollment
 .row-fluid
   /Modalでもいいかも。
 
-  #add_student_enrollment_form style='display:none' 
+  #new-course-student-form style='display:none' 
     =render :partial => 'courses/enrollments/students/form', :course => @course
 
-  #add_class_group_enrollment_form style='display:none' 
+  #new-course-class-group-form style='display:none' 
     =render :partial => 'courses/enrollments/class_groups/form', :course => @course, :new_course_enrollment => @new_course_enrollment
-    
+
+#modal-dialogs 
 
 coffee:
-  $('#enroll_student_form').validationEngine();
+  $('#new-course-student-form form').validationEngine()

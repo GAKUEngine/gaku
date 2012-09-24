@@ -1,7 +1,6 @@
 -unless semester.nil? or semester.new_record? or !semester
-	tr id="semester_#{semester.id}"
+	tr id="semester-#{semester.id}"
 	  = render 'shared/fields/semester_fields', :semester => semester
-
-	  td =link_to t("edit"), edit_class_group_semester_path(@class_group, semester), :id => 'edit_semester_link', :remote => true
-
-      td =link_to t("delete"), class_group_semester_path(@class_group, semester), :id => 'delete_semester_link', :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => 'delete_link delete_semester'
+      td
+	    =ajax_link_to_edit edit_class_group_semester_path(@class_group, semester), :id => 'edit-semester-link'
+        =ajax_link_to_delete class_group_semester_path(@class_group, semester), :id => 'delete-semester-link'
