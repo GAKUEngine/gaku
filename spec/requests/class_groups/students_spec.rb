@@ -13,6 +13,7 @@ describe 'ClassGroup Students' do
       visit class_groups_path
       click_link 'show-class-group-link'
       click_link 'class-group-enrollments-tab-link'
+      ClassGroupEnrollment.count.should == 0
     end
 
     it 'should add and show student to a class group', :js => true do
@@ -25,6 +26,7 @@ describe 'ClassGroup Students' do
       within('#students-index'){ page.should have_content("#{@student1.name}") }
       within('.enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
+      ClassGroupEnrollment.count.should == 1
     end
 
     it 'should not add a student if cancel is selected', :js => true do
@@ -37,6 +39,7 @@ describe 'ClassGroup Students' do
       within('#students-index'){ page.should_not have_content("#{@student1.name}") }
       within('.enrollments-count'){ page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
+      ClassGroupEnrollment.count.should == 0
     end
 
     pending 'should search students', :js => true do
@@ -58,6 +61,7 @@ describe 'ClassGroup Students' do
         visit class_group_path(@class_group)
         within('.enrollments-count'){ page.should have_content("1") }
         within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
+        ClassGroupEnrollment.count.should == 1
       end
 
       it 'should not show a student for adding if it is already added', :js => true do
@@ -78,6 +82,7 @@ describe 'ClassGroup Students' do
         @class_group.students.count.should eql(0)
         within('.enrollments-count'){ page.should_not have_content("1") }
         within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
+        ClassGroupEnrollment.count.should == 0
       end
     end
   end
