@@ -26,14 +26,18 @@ describe 'ClassGroup Semesters' do
     click_button 'submit-semester-button'
 
     wait_until { !page.find('#new-class-group-semester-form').visible? }
-    page.should have_content('09/28/2012 - 12/20/2012')
+    within('#semesters-index'){ page.should have_content('09/28/2012 - 12/20/2012') }
     @class_group.semesters.count.should eql(1)
+    within('.semesters-count'){ page.should have_content('1') }
   end
 
   context 'Class group with added semester', :js => true do
     before do
       @class_group.semesters << @semester
       visit class_group_path(@class_group)
+
+      click_link 'class-group-semesters-tab-link'
+      within('.semesters-count'){ page.should have_content('1') }
     end
 
     pending 'should not add a semester if it is already added' do 
@@ -41,8 +45,7 @@ describe 'ClassGroup Semesters' do
     end
 
     it 'should edit semester' do
-      click_link 'class-group-semesters-tab-link'
-
+      
       within('table#semesters-index tbody') { click_link('edit-semester-link') }
       wait_until { find('#semester-modal').visible? }
 
@@ -60,7 +63,6 @@ describe 'ClassGroup Semesters' do
     end
 
     it 'should not edit a semester if cancel is clicked', :js => true do
-      click_link 'class-group-semesters-tab-link'
       @class_group.semesters.count.should eql(1)
       page.all('table#semesters-index tbody tr').size.should eql(1)
 
@@ -82,7 +84,6 @@ describe 'ClassGroup Semesters' do
     end
 
     it 'should delete a semester from class group', :js => true do
-      click_link 'class-group-semesters-tab-link'    
       @class_group.semesters.count.should eql(1) 
       tr_count = page.all('table#semesters-index tbody tr').size
 
@@ -91,6 +92,7 @@ describe 'ClassGroup Semesters' do
  
       wait_until { page.all('table#semesters-index tbody tr').size == tr_count - 1 }
       @class_group.semesters.count.should eql(0)
+      within('.semesters-count'){ page.should_not have_content('1') }
     end
   end
 
