@@ -1,0 +1,2 @@
+$('#edit-exam-modal').modal('hide');
+$('table#exams-index tbody').html('<%= escape_javascript(render :partial => "exams/exams", :formats => [:html], :handlers => [:erb, :slim],  :as => :exam, :collection => @exams) %>');
