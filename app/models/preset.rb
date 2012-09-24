@@ -51,5 +51,12 @@ class Preset < ActiveRecord::Base
 		end
 	end
 
-
+	def self.load_presets_hash(presets)
+		presets_hash = {}
+		@presets = Preset.where(:name => presets)
+		@presets.each do |preset|
+			presets_hash[preset.name.to_sym] = YAML.load(preset.content) rescue nil
+		end
+		return presets_hash
+	end
 end
