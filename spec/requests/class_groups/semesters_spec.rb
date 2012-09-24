@@ -31,6 +31,19 @@ describe 'ClassGroup Semesters' do
     within('.semesters-count'){ page.should have_content('1') }
   end
 
+  it 'should not add a semester if cancel btn is clicked', :js => true do
+    @class_group.semesters.count.should eql(0)
+    click_link 'new-class-group-semester-link'
+    wait_until { page.find('#new-class-group-semester-form').visible? }
+
+    click_on 'cancel-semester-link'
+
+    wait_until { !page.find('#new-class-group-semester-form').visible? }
+  
+    @class_group.semesters.count.should eql(0)
+    within('.semesters-count'){ page.should_not have_content('1') }
+  end
+
   context 'Class group with added semester', :js => true do
     before do
       @class_group.semesters << @semester
