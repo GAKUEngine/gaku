@@ -1,4 +1,4 @@
 tr
 				td =enrollment.course.code
 				td =enrollment.course.syllabus.name if enrollment.course.syllabus
-				td =link_to t('remove'), course_group_course_group_enrollment_path(@course_group, enrollment), :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger course_group_enrollment_delete_link'
+				td =ajax_link_to_delete course_group_course_group_enrollment_path(@course_group, enrollment)
