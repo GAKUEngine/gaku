@@ -80,7 +80,8 @@ describe 'Contact' do
 
       click_link 'delete-student-contact-link' 
       page.driver.browser.switch_to.alert.accept
-
+      
+      sleep 10
       wait_until { page.all('table#student-contacts-index tr').size == tr_count - 1 }
       @student.guardians.size.should eql(0)
       page.should_not have_content(@contact.data)

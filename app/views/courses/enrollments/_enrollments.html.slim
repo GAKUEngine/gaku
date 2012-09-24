@@ -2,13 +2,11 @@
   .pull-left
     h4.h4-vm = t("num_enrolled") + "（ " + @course.students.count.to_s + " ）"
   .pull-right
-
     #new-course-student-div.pull-right
-      = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, "", :id => "new-course-student-link", :class => "btn btn-primary", :remote => true
+      = ajax_link_to_new t('add_student'), "", :id => "new-course-student-link"
 
     #new-course-class-group-div.pull-right.mr-s
-      = link_to ("<i class='icon-white icon-plus'></i> " + t('courses.add_class_group')).html_safe, "", :class => 'btn btn-primary', :id => 'new-course-class-group-link', :remote => true
-
+      = ajax_link_to_new t('courses.add_class_group'), "", :id => 'new-course-class-group-link'
 .row-fluid
   .span12
     hr

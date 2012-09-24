@@ -17,6 +17,6 @@
   hr
 
 .row-fluid
-  = link_to t("notes.add"), new_student_note_path(@student), :remote => true, :id => "new-student-note-link", :class => "span3 btn btn-primary"
+  = ajax_link_to_new t("notes.add"), new_student_note_path(@student), :id => "new-student-note-link", :class => "span3"
 
 #new-student-note-form

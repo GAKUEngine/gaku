@@ -35,7 +35,3 @@ $ ->
     $('#new-course-class-group-form').slideToggle()
 
   $(".chzn-select").chosen()
-
-  $('#delete-course-link').live 'ajax:success', (evt, data, status, xhr) ->
-    $(this).closest('tr').remove()
-

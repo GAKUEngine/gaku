@@ -20,7 +20,6 @@ class ClassGroups::StudentsController < ApplicationController
     render 'new'  
   end
 
-  # creating class_enrollment from students/show
   def enroll_student
     if params[:student_ids] && params[:student_ids] != ""
       student_ids = params[:student_ids].split(",")

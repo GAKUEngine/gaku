@@ -3,7 +3,7 @@
     = render 'shared/fields/address_fields', :address => address
 
     td
-      = ajax_link_to_edit edit_student_guardian_address_path(@student, @guardian, address), :id => 'edit-student-guardian-address-link'
-      = ajax_link_to_delete student_guardian_address_path(@student, @guardian, address), :id => 'delete-student-guardian-address-link'
+      = ajax_link_to_edit [:edit, @student, @guardian, address], :id => 'edit-student-guardian-address-link'
+      = ajax_link_to_delete [@student, @guardian, address], :id => 'delete-student-guardian-address-link'
 
 #modal-dialogs
