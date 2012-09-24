@@ -3,7 +3,6 @@ class ExamsController < ApplicationController
   #before_filter :authenticate_user!
   before_filter :load_exam, :only => [:show, :destroy, :create_exam_portion]
   before_filter :load_before_show, :only => :show
-
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -115,6 +114,19 @@ class ExamsController < ApplicationController
   def show
     super do |format|
       format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
+    end
+  end
+
+  def edit 
+    super do |format|
+      format.js { render 'edit'}
+    end
+  end
+
+  def update
+    super do |format|
+      @exams = Exam.all
+      format.js { render 'update'}
     end
   end
 

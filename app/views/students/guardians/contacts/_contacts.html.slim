@@ -13,7 +13,7 @@
         =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
   .row-fluid
     .span12
-      =link_to t('students.add_contact'), '#', :class => 'btn btn-primary', :id => 'new-student-guardian-contact-link'
+      =ajax_link_to_new t('students.add_contact'), '#', :id => 'new-student-guardian-contact-link'
   #new-student-guardian-contact-form style='display:none' 
     .row-fluid  
       .span12.well

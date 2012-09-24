@@ -29,7 +29,7 @@
       
     .row-fluid
       .span12.well
-        = link_to t("Edit"), edit_course_group_path(@course_group), :class => "span6 btn", :remote => true
+        = link_to t("Edit"), [:edit, @course_group], :class => "span6 btn", :remote => true
         = link_to t("Back"), course_groups_path, :class => "span6 btn"
       =render 'delete_confirm'
 #modal_dialogs
