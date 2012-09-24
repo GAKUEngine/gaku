@@ -20,6 +20,8 @@ describe 'ClassGroup Courses' do
 
     wait_until { page.all('#courses-index tbody tr').size == tr_count + 1 }
     within("#courses-index tbody"){ page.should have_content ("#{@course.code}") }
+    within(".courses-count"){ page.should have_content("1") }
+    within('#class-group-courses-tab-link'){ page.should have_content("1") }
     ClassGroupCourseEnrollment.count.should eql(1)
   end
 
@@ -46,7 +48,8 @@ describe 'ClassGroup Courses' do
       @class_group.courses << @course
       visit class_group_path(@class_group)
       click_link 'class-group-courses-tab-link'
-      
+      within(".courses-count"){ page.should have_content("1") }
+      within('#class-group-courses-tab-link'){ page.should have_content("1") }
     end
 
     it 'should not add a course if it is already added', :js => true do  
@@ -71,6 +74,8 @@ describe 'ClassGroup Courses' do
       page.driver.browser.switch_to.alert.accept
       
       within("#courses-index tbody"){ page.should_not have_content("#{@course.code}") }
+      within(".courses-count"){ page.should_not have_content("1") }
+      within('#class-group-courses-tab-link'){ page.should_not have_content("1") }
       ClassGroupCourseEnrollment.count.should eql(0)
       @class_group.courses.count.should eql(0)
     end
