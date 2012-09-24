@@ -38,7 +38,7 @@ describe 'Courses' do
     end
 
     it "should edit a course" do
-      within('#courses-index  tr:nth-child(2)') { click_link "edit-course-link" }
+      within('#courses-index tr:nth-child(2)') { click_link "edit-course-link" }
 
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
@@ -53,7 +53,7 @@ describe 'Courses' do
     it "should edit a course from show" do
       within('#courses-index  tr:nth-child(2)') { click_link "show-course-link" }
       page.should have_content("Show")
-
+      
       click_link 'edit-course-link'
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
