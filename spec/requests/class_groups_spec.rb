@@ -73,7 +73,6 @@ describe 'ClassGroups' do
 
       click_button 'submit-class-group-button'
 
-      wait_until { !page.find('#class-group-modal').visible? } 
       page.should have_content 'Really awesome class group' 
       page.should have_content "2"
       page.should have_content "B2"
