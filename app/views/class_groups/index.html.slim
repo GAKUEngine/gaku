@@ -4,7 +4,7 @@
     .row-fluid
       h3.pull-left = t("class_groups.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("class_groups.new")).html_safe, new_class_group_path, :class => "btn btn-primary", :id => "new-class-group-link", :remote => true
+        = ajax_link_to_new t("class_groups.new"), new_class_group_path,:id => "new-class-group-link"
     .row-fluid
       .span12
         hr/

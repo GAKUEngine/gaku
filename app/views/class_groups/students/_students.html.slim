@@ -4,7 +4,7 @@
       h4.h4-vm.enrollments-count
         = t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
     .pull-right
-      = link_to ("<i class='icon-white icon-plus'></i> " + t('add_student')).html_safe, new_class_group_student_path(:class_group_id => @class_group.id), :remote => true, :id => 'new-class-group-student-link', :class => "btn btn-primary"
+      = ajax_link_to_new t('add_student'), new_class_group_student_path(:class_group_id => @class_group.id), :id => 'new-class-group-student-link'
   .row-fluid
     .span12
       hr
