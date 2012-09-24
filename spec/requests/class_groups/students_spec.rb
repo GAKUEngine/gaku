@@ -23,6 +23,8 @@ describe 'ClassGroup Students' do
       wait_until { !page.find('#student-modal').visible? }
 
       page.should have_content("#{@student1.name}")
+      within('.enrollments-count'){ page.should have_content("1") }
+      within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
     end
 
     pending 'should search students', :js => true do
@@ -42,6 +44,8 @@ describe 'ClassGroup Students' do
       before do
         @class_group.students << @student1
         visit class_group_path(@class_group)
+        within('.enrollments-count'){ page.should have_content("1") }
+        within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
       end
 
       it 'should not show a student for adding if it is already added', :js => true do
@@ -60,6 +64,8 @@ describe 'ClassGroup Students' do
         
         wait_until { page.all('table#students-index tr').size == tr_count - 1 }
         @class_group.students.count.should eql(0)
+        within('.enrollments-count'){ page.should_not have_content("1") }
+        within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
       end
     end
   end
