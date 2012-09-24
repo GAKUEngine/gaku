@@ -31,6 +31,16 @@ describe 'ClassGroup Courses' do
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
+  it 'should not add a course if cancel btn is selected', :js => true do
+    click_link 'new-class-group-course-link'
+    wait_until { page.find('#new-class-group-course-form').visible? }
+    click_on 'cancel-course-link'
+    wait_until { !page.find('#new-class-group-course-form').visible? }
+    within("#courses-index tbody"){ page.should_not have_content ("#{@course.code}") }
+    ClassGroupCourseEnrollment.count.should eql(0)
+    @class_group.courses.count.should eql(0)
+  end
+
   context 'Class group with added course' do
     before do
       @class_group.courses << @course
