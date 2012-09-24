@@ -14,9 +14,12 @@ class CoursesController < ApplicationController
     end
   end
 
-  #def destroy
-  #  destroy! :flash => !request.xhr?
-  #end
+  def destroy
+    super do |format|
+      format.js { render :nothing => true}
+    end
+
+  end
 
   private
   

@@ -1,2 +1,3 @@
 $('tr#note-<%= @note.id %>').html('<%= escape_javascript(render :partial => "shared/fields/note_fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
+$('tr#note-<%= @note.id %>').append('<%= escape_javascript(render :partial => "students/notes/buttons", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
 $("#edit-note-modal").modal('hide');
