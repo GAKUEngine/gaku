@@ -47,7 +47,7 @@
                   = render :partial => "courses/exams/exams"
     .row-fluid
       .span12.well
-        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_course_path(@course), :class => "span9 btn btn-warning"
-        = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, courses_path, :class => "span3 btn btn-danger"
+        = link_to_edit_with_text [:edit, @course], :id => 'edit-course-link', :class => "span9 btn btn-warning"
+        = link_to_back courses_path, :class => "span3 btn btn-danger"
 
 #modal-dialogs

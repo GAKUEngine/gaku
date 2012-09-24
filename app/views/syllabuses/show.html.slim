@@ -47,6 +47,6 @@
             =render 'syllabuses/assignments/form'
     .row-fluid
       .span12.well
-        = link_to_edit_with_text edit_syllabus_path(@syllabus), :class => "span9 btn btn-warning", :id => 'edit-syllabus-link', :style => "min-height:0px"
+        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning", :id => 'edit-syllabus-link', :style => "min-height:0px"
 
         = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

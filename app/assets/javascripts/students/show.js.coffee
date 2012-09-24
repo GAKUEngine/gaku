@@ -3,19 +3,9 @@ add_guardian.live "ajax:success", (data, status, xhr) ->
   $('#add_guardian_form_area').html(status)
   add_guardian.hide()
 
-$ ->     
-  $(".delete_link").live "ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').remove()
-  
-  $("#delete-student-guardian-link").live "ajax:success", (evt, data, status, xhr) ->
+$ ->       
+  $(".delete-student-guardian-link").live "ajax:success", (evt, data, status, xhr) ->
     $(this).closest('div.guardian-cell').remove()
-
-  $("#delete-student-contact-link").live "ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').remove()
-
-  $("#delete-student-note-link").live "ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').remove()
-
 
   #$("#new-student-note-link").live "ajax:success", (date, status, xhr) ->
   #  $('#new-student-note-form').html(status)

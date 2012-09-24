@@ -17,6 +17,6 @@
         tbody
           =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
     br/
-    =link_to t('addresses.add') , new_student_guardian_address_path(@student, @guardian), :remote => true, :id => 'new-student-guardian-address-link', :class => 'btn btn-primary'
+    = ajax_link_to_new t('addresses.add'), new_student_guardian_address_path(@student, @guardian), :id => 'new-student-guardian-address-link'
     
 #new-student-guardian-address-form

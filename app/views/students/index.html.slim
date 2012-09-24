@@ -6,8 +6,8 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.import")).html_safe, "students/importer", :class => "mr-s btn btn-primary", :id => "import_students_link"
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.new")).html_safe, new_student_path, :class => "btn btn-primary", :id => "new_student_link"
+        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import_students_link"
+        = link_to_new t("students.new"), new_student_path, :id => "new_student_link"
     .row-fluid
       .span12
         hr/
