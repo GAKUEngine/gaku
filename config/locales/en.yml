@@ -125,6 +125,7 @@ en:
     choose_student: 'Choose Student'
     create_class_group_enrollment: 'Create Class Enrollment'
     none: "None"
+    save: "Save Class"
   class_group_enrollments:
     list: "Class Roster"
     new: "New class enrollment"
