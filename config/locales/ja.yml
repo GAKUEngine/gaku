@@ -129,6 +129,7 @@ ja:
     homeroom: "主要教室"
     choose_student: '生徒選択'
     create_class_group_enrollment: ''
+    save: "Save Class"
   class_group_enrollments:
     list: "クラス名簿"
     new: "新規クラス"

@@ -13,8 +13,5 @@ $ ->
 
 		$(@).addClass('btn-primary')
 
-	$("#delete-student-guardian-address-link").live "ajax:success", (evt, data, status, xhr) ->
-		$(this).closest('tr').remove()
-
-	$("#delete-student-guardian-contact-link").live "ajax:success", (evt, data, status, xhr) ->
+	$(".delete-student-guardian-address").live "ajax:success", (evt, data, status, xhr) ->
 		$(this).closest('tr').remove()
