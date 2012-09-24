@@ -22,9 +22,21 @@ describe 'ClassGroup Students' do
       click_button 'submit-student-button'
       wait_until { !page.find('#student-modal').visible? }
 
-      page.should have_content("#{@student1.name}")
+      within('#students-index'){ page.should have_content("#{@student1.name}") }
       within('.enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
+    end
+
+    it 'should not add a student if cancel is selected', :js => true do
+      click_link 'new-class-group-student-link'
+      wait_until { page.find('#student-modal').visible? }
+      check "#{@student1.id}"
+      click_on 'cancel-student-link'
+      wait_until { !page.find('#student-modal').visible? }
+
+      within('#students-index'){ page.should_not have_content("#{@student1.name}") }
+      within('.enrollments-count'){ page.should_not have_content("1") }
+      within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
     end
 
     pending 'should search students', :js => true do
