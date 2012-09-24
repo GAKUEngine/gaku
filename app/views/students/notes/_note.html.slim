@@ -2,6 +2,6 @@
 	tr id="note-#{note.id}"
 	  = render 'shared/fields/note_fields', :note => note
 	  td
-	    = link_to_show student_note_path(@student, note), :id => 'show-student-note-link' 
-      = ajax_link_to_edit edit_student_note_path(@student, note), :id => 'edit-student-note-link'
-      = ajax_link_to_delete student_note_path(@student, note), :id => 'delete-student-note-link'
+	  	=link_to_show [@student, note], :id => 'show-student-note-link' 
+	  	=ajax_link_to_edit [:edit, @student, note], :id => 'edit-student-note-link'
+	  	=ajax_link_to_delete [@student, note], :id => 'delete-student-note-link'
