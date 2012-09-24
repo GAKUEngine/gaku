@@ -17,6 +17,8 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   none: "None"
+  date_placeholder: "YYYY-MM-DD"
+  search: "Search"
   addresses:
     addresses: "Addresses"
     new: "New Address"

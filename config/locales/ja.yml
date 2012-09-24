@@ -20,6 +20,8 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   none: "未登録"
+  date_placeholder: "YYYY-MM-DD"
+  search: "Search"
   addresses:
     save: "住所を保存"
     addresses: "住所"
