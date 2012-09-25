@@ -6,16 +6,16 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import_students_link"
-        = link_to_new t("students.new"), new_student_path, :id => "new_student_link"
+        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import-students-link"
+        = link_to_new t("students.new"), new_student_path, :id => "new-student-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
       .pull-right
-        = link_to "CSV Export", "students.csv"
-      #modal_dialogs
-      #new_student_form.hide
+        = link_to "CSV Export", "students.csv", :id => 'export-students-link'
+      #modal-dialogs
+      #new-student-form.hide
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
     
@@ -41,5 +41,5 @@
       = hidden_field_tag "autocomplete_field"
     .row-fluid
       .span12.well
-        #students_index
+        #students-index
           =render 'students/students'

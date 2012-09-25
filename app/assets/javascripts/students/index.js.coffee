@@ -21,7 +21,7 @@ class StudentGrid extends BuHin
   defColWidth: 128
 
   _columns: () ->
-    switch $('#student_grid').data('select-mode')
+    switch $('#student-grid').data('select-mode')
       when 'multiple'
         return [
                 {

@@ -1,4 +1,15 @@
 en:
+  fields:
+    name: "name"
+    surname: "surname"
+    name_reading: "name_reading"
+    surname_reading: "surname_reading"
+    gender: "gender"
+    phone: "phone"
+    email: "email"
+    birth_date: "birth_date"
+    admitted: "admitted"
+
   hello: "Hello world"
   comname: "GAKU-Engine"
   Show: "Show"
