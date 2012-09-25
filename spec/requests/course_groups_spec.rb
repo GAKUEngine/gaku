@@ -8,7 +8,7 @@ describe 'CourseGroups' do
   end
 
   it 'should create and show a course group', :js => true do
-    CourseGroup.count.should == 0
+    CourseGroup.count.should eql(0)
     click_on 'New Course Group'
 
     wait_until { find("#add_new_course_group_form").visible? }
@@ -17,11 +17,10 @@ describe 'CourseGroups' do
 
     page.should have_content 'Course Group Created'
     within ('#course_groups_index_table') { page.should have_content 'MathCourses2012' }
-    CourseGroup.count.should == 1
+    CourseGroup.count.should  eql(1)
   end
 
   it 'should not add new if name is empty', :js => true do
-
     click_on 'New Course Group'
 
     wait_until { find('#add_new_course_group_form').visible? }
@@ -31,7 +30,7 @@ describe 'CourseGroups' do
   end
 
   it 'should not add new if back is clicked', :js => true do
-    CourseGroup.count.should == 0
+    CourseGroup.count.should eql(0)
     click_on 'New Course Group'
 
     wait_until { find('#add_new_course_group_form').visible? }
@@ -55,13 +54,12 @@ describe 'CourseGroups' do
       
       click_button 'Update Course group'
 
-      within ('#course_groups_index_table') { 
+      within ('#course_groups_index_table') do
         page.should have_content '2012 Courses'
         page.should_not have_content '2013Courses'
-      }
+      end
 
-      CourseGroup.last.name.should == '2012 Courses'
-      
+      CourseGroup.last.name.should eql('2012 Courses')
     end
 
     it 'should not edit a class group if back button is clicked while editing', :js => true do
@@ -72,25 +70,24 @@ describe 'CourseGroups' do
       find('.close').click
       
       within ('#course_groups_index_table') { page.should have_content '2013Courses' }
-      CourseGroup.last.name.should == '2013Courses'
+      CourseGroup.last.name.should eql('2013Courses')
     end
 
     it 'should edit course group from show view', :js => true do #TODO to be implemented
-      CourseGroup.count.should == 1
+      CourseGroup.count.should eql(1)
       visit course_group_path(@course_group)
       click_link("Edit")
-      wait_until { find('#edit_course_group_modal').visible? }
 
+      wait_until { find('#edit_course_group_modal').visible? }
       fill_in 'course_group_name', :with => '2012 Courses'
-      
       click_button 'Update Course group'
 
-      within ('.table') { 
+      within ('.table') do 
         page.should have_content '2012 Courses'
         page.should_not have_content '2013Courses'
-      }
+      end
 
-      CourseGroup.last.name.should == '2012 Courses'
+      CourseGroup.last.name.should eql('2012 Courses')
     end
 
     it 'should delete the course group', :js => true do 
@@ -98,13 +95,12 @@ describe 'CourseGroups' do
       visit course_group_path(@course_group)
       wait_until { page.should have_content('Add Course') } 
       click_on "delete_link"
-      within (".delete_modal") { click_on "Delete" }
+      within(".delete-modal") { click_on "Delete" }
       page.driver.browser.switch_to.alert.accept
       
       wait_until { page.should have_content 'was successfully destroyed.' }
       within('#course_groups_index_table tbody') { page.should_not have_content(@course_group.name) }
-      CourseGroup.all.count.should == 0
-      
+      CourseGroup.all.count.should eql(0)
     end
 
     it 'should return to class_groups index when back selected' do 
@@ -118,5 +114,6 @@ describe 'CourseGroups' do
       page.should have_content ('Course Group')
       page.should have_content ('Courses List')
     end
+    
   end
 end
