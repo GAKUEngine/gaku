@@ -1,8 +1,6 @@
-tr class="student_#{student.id.to_s}"
+tr class="student-#{student.id.to_s}"
   = render 'shared/fields/student_fields', :student => student
   td
-	  = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, student , :id => 'show_link', :class => "mr-xs btn btn-mini btn-success"
-	  
-	  = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_student_path(student), :id => 'edit_link', :class => "mr-xs btn btn-mini btn-warning", :remote => true
-
-	  = link_to ("<i class='icon-white icon-remove'></i>").html_safe, student_path(student), :method => :delete, :data => { :confirm => 'Are you sure?' }, :id => 'delete_link', :class => 'btn btn-mini btn-danger delete_link delete_student', :remote => true
+	  = link_to_show student , :id => 'show-student-link'
+	  = ajax_link_to_edit [:edit, student], :id => 'edit-student-link'
+	  = ajax_link_to_delete student, :id => 'delete-student-link'

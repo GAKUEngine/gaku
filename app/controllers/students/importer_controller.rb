@@ -34,14 +34,13 @@ class Students::ImporterController < ApplicationController
       if params[:importer][:data_file].content_type == 'application/vnd.ms-excel'
         case params[:importer][:importer_type]
         when "GAKU Engine"
-          import_sheet_student_list()
-
+          import_sheet_student_list
         when "SchoolStation"
-          import_school_station_student_list()
+          import_school_station_student_list
         end
 
       elsif params[:importer][:data_file].content_type == "text/csv"
-          import_csv_student_list()
+          import_csv_student_list
       end
     end
   end
