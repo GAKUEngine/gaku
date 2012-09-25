@@ -45,6 +45,7 @@ GAKUEngine::Application.routes.draw do
   resources :syllabuses do
     resources :assignments, :controller => 'syllabuses/assignments' 
     resources :exams, :controller => 'syllabuses/exams'
+    resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
   end
 
   resources :students do
@@ -111,6 +112,12 @@ GAKUEngine::Application.routes.draw do
       get :students, :on => :collection
       get :locale, :on => :collection
       put :update_presets, :on => :collection
+    end
+
+    resources :disposals do
+      collection do
+        get :exams
+      end
     end
   end
 
