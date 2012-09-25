@@ -45,6 +45,7 @@ GAKUEngine::Application.routes.draw do
   resources :syllabuses do
     resources :assignments, :controller => 'syllabuses/assignments' 
     resources :exams, :controller => 'syllabuses/exams'
+    resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
   end
 
   resources :students do
