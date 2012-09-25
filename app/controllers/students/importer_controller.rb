@@ -48,21 +48,21 @@ class Students::ImporterController < ApplicationController
 
   def import_csv_student_list
     @rowcount = 0
-    @csv_data = nil
-    @status = "OPENING_FILE"
+    @created_students = 0
     @csv_data = params[:importer][:data_file].read.force_encoding("UTF-8")
+
     CSV.parse(@csv_data) do |row|
       case @rowcount
-      when 0 #field index
-        #get mapping
-        #TODO
-      when 1 #titles
-        #ignore
-      else #process record
-        Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
+        when 0
+          #TODO get mapping of field index
+        else 
+          unless row.empty?
+            Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
+            @created_students += 1
+          end
+        end
+        @rowcount += 1
       end
-      @rowcount += 1
-    end
     render :student_import_preview
   end
 

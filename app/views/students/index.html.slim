@@ -13,7 +13,7 @@
         hr/
     .row-fluid
       .pull-right
-        = link_to "CSV Export", "students.csv"
+        = link_to "CSV Export", "students.csv", :id => 'student-export-csv-link'
       #modal_dialogs
       #new_student_form.hide
         =render 'form'
