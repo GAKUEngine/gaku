@@ -1,0 +1,9 @@
+- unless exam.nil? || exam.new_record? || !exam
+  tr
+    td= exam.name
+    td= exam.description
+    td= exam.adjustments
+    td= exam.weight
+    td= exam.use_weighting
+    td
+      = ajax_link_to_delete exam , :id => 'delete-syllabus-exam-link'

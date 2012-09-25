@@ -113,6 +113,12 @@ GAKUEngine::Application.routes.draw do
       get :locale, :on => :collection
       put :update_presets, :on => :collection
     end
+
+    resources :disposals do
+      collection do
+        get :exams
+      end
+    end
   end
 
 end
