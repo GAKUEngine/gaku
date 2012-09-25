@@ -193,6 +193,13 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "exam_syllabuses", :force => true do |t|
+    t.integer  "exam_id"
+    t.integer  "syllabus_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "exams", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -202,11 +209,6 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.integer  "grading_method_id"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
-  end
-
-  create_table "exams_syllabuses", :force => true do |t|
-    t.integer "exam_id"
-    t.integer "syllabus_id"
   end
 
   create_table "faculties", :force => true do |t|

@@ -18,7 +18,8 @@ class Exam < ActiveRecord::Base
   has_many :exam_scores 
   has_many :exam_portions
   has_many :exam_portion_scores, :through => :exam_portions
-  has_and_belongs_to_many :syllabuses
+  has_many :exam_syllabuses
+  has_many :syllabuses, :through => :exam_syllabuses 
   belongs_to :grading_method
 
   has_many :attendances, :as => :attendancable
