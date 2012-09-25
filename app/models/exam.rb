@@ -33,6 +33,9 @@ class Exam < ActiveRecord::Base
 
   after_create :build_default_exam_portion
 
+  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+
+
   def max_score
     maxScore = 0.0
     self.exam_portions.each do |portion|
