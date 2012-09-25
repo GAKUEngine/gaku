@@ -95,8 +95,8 @@ class StudentsController < ApplicationController
   end
 
   def load_autocomplete_data
-    @students = Student.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
-    render json: @students.map(&params[:column].to_sym).uniq
+    @result = params[:class_name].capitalize.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+    render json: @result.map(&params[:column].to_sym).uniq
   end
 
   private

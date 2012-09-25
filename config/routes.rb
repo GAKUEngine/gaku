@@ -63,6 +63,7 @@ GAKUEngine::Application.routes.draw do
 
     resources :addresses, :controller => 'students/addresses' do
       post :make_primary, :on => :member
+      get :load_autocomplete_data
     end
     resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member

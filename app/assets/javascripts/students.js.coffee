@@ -22,6 +22,12 @@ $ ->
       $(this).val(ui.item.value);
       $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
 
+  $('#q_addresses_title_cont').autocomplete
+    source: $('#q_addresses_title_cont').data('autocomplete-source')
+    select: (event, ui) ->
+      $(this).val(ui.item.value);
+      $.get($("#student_search").attr("action"), $("#student_search").serialize(), null, "script");
+      
   $("#students-index th a").live 'click', (event) ->
     $.getScript(this.href)
     return false
