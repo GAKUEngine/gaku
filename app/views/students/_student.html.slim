@@ -1,6 +1,6 @@
 tr class="student-#{student.id.to_s}"
   = render 'shared/fields/student_fields', :student => student
   td
-	  = link_to_show student , :id => 'show-student-link'
-	  = ajax_link_to_edit [:edit, student], :id => 'edit-student-link'
-	  = ajax_link_to_delete student, :id => 'delete-student-link'
+	  = link_to_show student
+	  = ajax_link_to_edit [:edit, student]
+	  = ajax_link_to_delete student

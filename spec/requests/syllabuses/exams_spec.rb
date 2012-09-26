@@ -10,7 +10,7 @@ describe 'Syllabus Exams' do
 
   context "add and show exams" do
     before do 
-      within('table.index tr:nth-child(2)') { click_link "show-syllabus-link" }
+      within('table.index tr:nth-child(2)') { find(".show-link").click }
       page.should have_content("No Exams")
       click_link 'new-syllabus-exam-link'
       wait_until { find('#new-syllabus-exam-form').visible? }
@@ -50,7 +50,7 @@ describe 'Syllabus Exams' do
     end
 
     it 'should edit exam' do 
-      click_link 'edit-syllabus-exam-link'
+      find('.edit-link').click
       current_url.should == edit_exam_url(:id => @exam.id)
       fill_in 'exam_name', :with => 'Ruby Exam'
       click_button 'submit_button' #FIXME Fix this id
@@ -60,7 +60,7 @@ describe 'Syllabus Exams' do
     end
 
     it 'should show exam'  do 
-      click_link 'show-syllabus-exam-link'
+      find('.show-link').click
       page.should have_content('Show Exam')
       page.should have_content('Exam portions list')
       page.should have_content('Astronomy Exam')
@@ -72,7 +72,7 @@ describe 'Syllabus Exams' do
       tr_count = page.all('table#syllabus-exams-index tr').size
       page.should have_content(@exam.name)
 
-      click_link "delete-syllabus-exam-link" 
+      find(".delete-link").click 
       page.driver.browser.switch_to.alert.accept
       
       wait_until { page.all('table#syllabus-exams-index tr').size == tr_count - 1 }

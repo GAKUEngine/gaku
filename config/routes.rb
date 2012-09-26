@@ -45,6 +45,7 @@ GAKUEngine::Application.routes.draw do
   resources :syllabuses do
     resources :assignments, :controller => 'syllabuses/assignments' 
     resources :exams, :controller => 'syllabuses/exams'
+    resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
   end
 
   resources :students do
@@ -63,7 +64,6 @@ GAKUEngine::Application.routes.draw do
 
     resources :addresses, :controller => 'students/addresses' do
       post :make_primary, :on => :member
-      get :load_autocomplete_data
     end
     resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member
@@ -112,6 +112,12 @@ GAKUEngine::Application.routes.draw do
       get :students, :on => :collection
       get :locale, :on => :collection
       put :update_presets, :on => :collection
+    end
+
+    resources :disposals do
+      collection do
+        get :exams
+      end
     end
   end
 

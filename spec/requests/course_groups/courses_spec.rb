@@ -53,7 +53,6 @@ describe 'CourseGroup Courses' do
     end
 
     it 'should not add a course if it is already added', :js => true do  
-      
       click_link 'new-course-group-enrollment-link'
       wait_until { page.find('#new-course-group-enrollment-form').visible? }
       select "#{@course.code}", :from => 'course_group_enrollment_course_id'
@@ -69,7 +68,7 @@ describe 'CourseGroup Courses' do
       within('.course-group-enrollments-count') { page.should have_content('1') }
       within("#course-group-enrollments-index tbody") { page.should have_content ("#{@course.code}") }
         
-      click_link 'delete-course-group-enrollment-link'
+      find('.delete-link').click
       page.driver.browser.switch_to.alert.accept
       
       within("#course-group-enrollments-index tbody") { page.should_not have_content("#{@course.code}") }

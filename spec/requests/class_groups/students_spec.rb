@@ -11,7 +11,7 @@ describe 'ClassGroup Students' do
   context "Class Roster" do
     before do
       visit class_groups_path
-      click_link 'show-class-group-link'
+      find('.show-link').click
       click_link 'class-group-enrollments-tab-link'
       ClassGroupEnrollment.count.should == 0
     end
@@ -75,13 +75,13 @@ describe 'ClassGroup Students' do
         @class_group.students.count.should eql(1)
         tr_count = page.all('table#students-index tr').size
 
-        click_link('delete-student-link') 
+        find('.delete-link').click 
         page.driver.browser.switch_to.alert.accept
         
         wait_until { page.all('table#students-index tr').size == tr_count - 1 }
         @class_group.students.count.should eql(0)
-        within('.enrollments-count'){ page.should_not have_content("1") }
-        within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
+        within('.enrollments-count') { page.should_not have_content("1") }
+        within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
         ClassGroupEnrollment.count.should == 0
       end
     end

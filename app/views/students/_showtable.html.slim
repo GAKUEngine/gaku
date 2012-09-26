@@ -83,7 +83,7 @@
     .span4
       = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
-      = link_to_edit_with_text [:edit, @student], :id => 'edit-student-link', :class => "span12 btn btn-warning"
+      = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link"
     .span4
       = link_to_back students_path, :class => "span12 btn"
 

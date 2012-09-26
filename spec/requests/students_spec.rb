@@ -30,6 +30,7 @@ describe 'Student' do
           page.should have_content("John") 
           page.should have_content("Johny")
         end
+        sleep 0.5 #FIXME
         page.all('#students-index tr').size.should eql(3)
       end
       
@@ -47,7 +48,7 @@ describe 'Student' do
     it "should edit an existing student", :js => true do
       visit student_path(@student)
       page.should have_content("#{@student.name}")
-      click_link 'edit-student-link'
+      find('.edit-link').click
       page.should have_content("Edit")
       fill_in "student_surname", :with => "Kostova"
       fill_in "student_name", :with => "Marta"
@@ -61,7 +62,7 @@ describe 'Student' do
       visit student_path(@student)
       student_count = Student.all.count
       page.should have_content("#{@student.name}")
-      click_link 'delete-student-link'
+      find('#delete-student-link').click
       
       within(".delete_modal") { click_on "Delete" }
       page.driver.browser.switch_to.alert.accept

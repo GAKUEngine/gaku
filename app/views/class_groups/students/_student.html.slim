@@ -2,4 +2,4 @@ tr id="enrollment-#{enrollment.id}"
   td= enrollment.student.surname
   td= enrollment.student.name
   td
-    = ajax_link_to_delete class_group_student_path(:class_group_id => enrollment.class_group_id, :id => enrollment.student_id,:class_group_enrollment => enrollment.id), :id => 'delete-student-link'	  	
+    = ajax_link_to_delete class_group_student_path(:class_group_id => enrollment.class_group_id, :id => enrollment.student_id,:class_group_enrollment => enrollment.id)  	

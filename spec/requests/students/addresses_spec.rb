@@ -60,7 +60,7 @@ describe 'Address' do
       before do 
         click_link 'new-student-address-tab-link'
         wait_until { page.has_content?('Addresses list') } 
-        click_link "edit-student-address-link" 
+        find(".edit-link").click 
         wait_until { find('#edit-address-modal').visible? }
       end
 
@@ -96,7 +96,7 @@ describe 'Address' do
       @student.addresses.size.should eql(0)
       @student.student_addresses.size.should eql(1)
 
-      click_link "delete-student-address-link" 
+      find(".delete-link").click 
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table#student-addresses-index tr').size == tr_count - 1 } 

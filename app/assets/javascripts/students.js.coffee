@@ -28,6 +28,7 @@ $ ->
       $(this).val(ui.item.value);
       $.get($("#student_search").attr("action"), $("#student_search").serialize(), null, "script");
       
+      
   $("#students-index th a").live 'click', (event) ->
     $.getScript(this.href)
     return false

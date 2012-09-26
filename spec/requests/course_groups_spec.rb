@@ -46,8 +46,7 @@ describe 'CourseGroups' do
     end
 
     it 'should edit course group from index view', :js => true do 
-      
-      within('#course-groups-index tbody') { find('#edit-course-group-link').click }
+      within('#course-groups-index tbody') { find('.edit-link').click }
       wait_until { find('#edit-course-group-modal').visible? }
 
       fill_in 'course_group_name', :with => '2012 Courses'
@@ -76,7 +75,7 @@ describe 'CourseGroups' do
     it 'should edit course group from show view', :js => true do #TODO to be implemented
       CourseGroup.count.should eql(1)
       visit course_group_path(@course_group)
-      click_link("edit-course-group-link")
+      find(".edit-link").click
 
       wait_until { find('#edit-course-group-modal').visible? }
       fill_in 'course_group_name', :with => '2012 Courses'

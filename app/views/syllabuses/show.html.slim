@@ -42,11 +42,10 @@
           #syllabus-assigmnents
             = render 'syllabuses/assignments/assignments'
           #new-syllabus-assignment
-            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
+            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
           #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
             =render 'syllabuses/assignments/form'
     .row-fluid
       .span12.well
-        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning", :id => 'edit-syllabus-link', :style => "min-height:0px"
-
+        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px"
         = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

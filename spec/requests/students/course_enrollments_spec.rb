@@ -35,7 +35,7 @@ describe 'CourseEnrollments' do
     page.should have_content(@course.code)
     @student.courses.size.should eql(1)
 
-    click_link 'delete-student-course-enrollment-link' 
+    find('.delete-link').click 
     page.driver.browser.switch_to.alert.accept
 
     wait_until { page.all('table#student-course-enrollments-index tr').size == tr_count - 1 }

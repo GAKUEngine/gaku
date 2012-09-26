@@ -38,7 +38,7 @@ describe 'Courses' do
     end
 
     it "should edit a course" do
-      within('#courses-index tr:nth-child(2)') { click_link "edit-course-link" }
+      within('#courses-index tr:nth-child(2)') { find(".edit-link").click }
 
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
@@ -51,10 +51,10 @@ describe 'Courses' do
     end
 
     it "should edit a course from show" do
-      within('#courses-index  tr:nth-child(2)') { click_link "show-course-link" }
+      within('#courses-index  tr:nth-child(2)') { find(".show-link").click }
       page.should have_content("Show")
       
-      click_link 'edit-course-link'
+      find('.edit-link').click
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
@@ -71,7 +71,7 @@ describe 'Courses' do
       page.should have_content(@course.code)
       tr_count = page.all('table#courses-index tr').size
       
-      within('table#courses-index tr:nth-child(2)') { click_link "delete-course-link" }
+      within('table#courses-index tr:nth-child(2)') { find(".delete-link").click }
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table#courses-index tr').size == tr_count - 1 }
