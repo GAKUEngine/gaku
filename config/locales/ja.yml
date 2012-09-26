@@ -84,6 +84,9 @@ ja:
     name_sample: "[例: 化学A]"
     description: "科目説明"
     credits: "単位数"
+    choose_exam: 'Choose Exam'
+    add_exam: 'Add Exam'
+    add_existing_exam: 'Add Existing Exam'
   course_management: "授業管理"
   course: "授業"
   courses:
