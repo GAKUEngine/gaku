@@ -13,29 +13,29 @@
           tr
             th =t("course_groups.name")
         tbody
-          tr class="course_group_#{@course_group.id}"
+          tr class="course-group-#{@course_group.id}"
             td.name = @course_group.name
     .row-fluid.mt-l
       .span12.well       
             #courses
               .row-fluid
-                #courses_index_table
+                #course-group-enrollments-index
                   =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
               .row-fluid
                 .span12
-                  #course_enrollment_form_errors
-                  #add_course_enrollment_form.hide
+                  #course-group-enrollment-form-errors
+                  #new-course-group-enrollment-form.hide
                     =render 'course_groups/course_group_enrollments/form'
       
     .row-fluid
       .span12.well
-        = link_to t("Edit"), [:edit, @course_group], :class => "span6 btn", :remote => true
-        = link_to t("Back"), course_groups_path, :class => "span6 btn"
+        = link_to t("Edit"), [:edit, @course_group], :id => 'edit-course-group-link', :class => "span6 btn", :remote => true
+        = link_to_back course_groups_path, :class => "span6 btn"
       =render 'delete_confirm'
-#modal_dialogs
+#modal-dialogs
 
 coffee:
   $ ->
-    $('#show_course_form').click ->
-      $('#course_form').toggle 'slow', ->
-        $('#new_course').validationEngine()
+    $('#show-course-form').click ->
+      $('#new-course-group-form').toggle 'slow', ->
+        $('#new-course-group-form form').validationEngine()

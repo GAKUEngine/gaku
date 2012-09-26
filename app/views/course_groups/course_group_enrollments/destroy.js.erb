@@ -1,1 +1,1 @@
-$('.courses_count').html('<%= @course_group.courses.count != 0 ? t('courses.list') + "（" + @course_group.courses.count.to_s + "）" : t('courses.list') %>');
+$('.course-group-enrollments-count').html('<%= @course_group.courses.count != 0 ? t('courses.list') + "（" + @course_group.courses.count.to_s + "）" : t('courses.list') %>');
