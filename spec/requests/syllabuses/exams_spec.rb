@@ -74,10 +74,9 @@ describe 'Syllabus Exams' do
 
       click_link "delete-syllabus-exam-link" 
       page.driver.browser.switch_to.alert.accept
-      
       wait_until { page.all('table#syllabus-exams-index tr').size == tr_count - 1 }
+      page.all('table#syllabus-exams-index').should_not have_content(@exam.name) 
       @syllabus.exams.reload 
-      page.should_not have_content(@exam.name)
       @syllabus.exams.size.should eql(0) 
     end
   end
