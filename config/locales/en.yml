@@ -93,6 +93,9 @@ en:
     name_sample: "[EX: Science A]"
     description: "Course Description"
     credits: "Credits"
+    choose_exam: 'Choose Exam'
+    add_exam: 'Add Exam'
+    add_existing_exam: 'Add Existing Exam'
   course_management: 'Course Management'
   course: "Course"
   courses:

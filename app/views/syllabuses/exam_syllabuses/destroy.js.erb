@@ -1,0 +1,2 @@
+	$('#add-existing-exam-form').html('<%= escape_javascript(render :partial => "syllabuses/exams/select_form", :formats => [:html], :handlers => [:erb, :slim], :locals => {:syllabus => @syllabus}) %>');
+	$('#add-existing-exam-form').hide()
