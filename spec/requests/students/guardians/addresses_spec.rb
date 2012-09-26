@@ -18,7 +18,7 @@ describe 'Guardian Addresses' do
   it "should add and show address to a student guardian", :js => true do 
     @student.guardians.first.addresses.count.should eql(0)
 
-    click_link 'show-student-guardian-link' 
+    find('.show-link').click 
     click_link 'new-student-guardian-address-link'
     
     wait_until { page.has_content?('New Address') }
@@ -47,7 +47,7 @@ describe 'Guardian Addresses' do
       Factory(:country, :name => "Brasil")
       #page.should have_content 'Bulgaria'
 
-      within('table#student-guardian-addresses-index tr#address-2') { click_link 'edit-student-guardian-address-link' }
+      within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
       wait_until { find('#edit-address-modal').visible? }
 
       select 'Brasil', :from => 'country_dropdown'
@@ -66,7 +66,7 @@ describe 'Guardian Addresses' do
       @student.guardians.first.addresses.size.should eql(2)
 
       within("table#student-guardian-addresses-index tr#address-#{@student.guardians.first.addresses.last.id}") do 
-        click_link 'delete-student-guardian-address-link'
+        find('.delete-link').click
       end
       page.driver.browser.switch_to.alert.accept
 

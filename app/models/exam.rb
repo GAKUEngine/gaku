@@ -18,7 +18,8 @@ class Exam < ActiveRecord::Base
   has_many :exam_scores 
   has_many :exam_portions
   has_many :exam_portion_scores, :through => :exam_portions
-  has_and_belongs_to_many :syllabuses
+  has_many :exam_syllabuses
+  has_many :syllabuses, :through => :exam_syllabuses 
   belongs_to :grading_method
 
   has_many :attendances, :as => :attendancable
@@ -31,6 +32,9 @@ class Exam < ActiveRecord::Base
   validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
 
   after_create :build_default_exam_portion
+
+  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+
 
   def max_score
     maxScore = 0.0

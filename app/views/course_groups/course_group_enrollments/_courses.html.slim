@@ -1,8 +1,8 @@
 .pull-left
-  h4.h4-vm.courses_count =t("courses.list")+"（ "+@course_group.course_group_enrollments.count.to_s+" ）"
+  h4.h4-vm.course-group-enrollments-count =t("courses.list")+"（ "+@course_group.course_group_enrollments.count.to_s+" ）"
 .pull-right
-  =link_to t('course_groups.add_course'), '', :class => 'btn btn-primary', :id =>'add_course_enrollment_link'
-table.index.table.table-striped.table-bordered.table-condensed
+  =link_to t('course_groups.add_course'), '', :class => 'btn btn-primary', :id =>'new-course-group-enrollment-link'
+table#course-group-enrollments-index.index.table.table-striped.table-bordered.table-condensed
 	thead
 		tr
 			th =t('name')
@@ -13,4 +13,4 @@ table.index.table.table-striped.table-bordered.table-condensed
 			tr
 				td =course_group_enrollment.course.code
 				td =course_group_enrollment.course.syllabus.name if course_group_enrollment.course.syllabus
-				td =link_to t('remove'), course_group_course_group_enrollment_path(@course_group, course_group_enrollment), :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger course_group_enrollment_delete_link'
+				td =link_to t('remove'), [@course_group, course_group_enrollment], :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger delete-link' , :id => 'delete-course-group-enrollment-link'

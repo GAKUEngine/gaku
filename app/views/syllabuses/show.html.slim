@@ -31,22 +31,27 @@
               .pull-right
                 #new-syllabus-exam
                   = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'new-syllabus-exam-link', :class => "btn btn-primary", :remote => true
+                #add-existing-exam
+                   = link_to ("<i class='icon-white icon-plus'></i> " + t('syllabuses.add_existing_exam')).html_safe, '', :id => 'add-existing-exam-link', :class => "btn btn-primary", :remote => true
             .row-fluid
               .span12
                 hr
             = render 'syllabuses/exams/exams'
         .row-fluid
+          br/
+          #add-existing-exam-form-errors
+          #add-existing-exam-form style='display:none;padding-top:10px'
+            =render 'syllabuses/exams/select_form'
           #new-syllabus-exam-form style='display:none;padding-top:10px'
             =render 'syllabuses/exams/form'
         /.row-fluid
           #syllabus-assigmnents
             = render 'syllabuses/assignments/assignments'
           #new-syllabus-assignment
-            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new_assignment_link', :class => 'btn'}
+            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
           #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
             =render 'syllabuses/assignments/form'
     .row-fluid
       .span12.well
-        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning", :id => 'edit-syllabus-link', :style => "min-height:0px"
-
+        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px"
         = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"

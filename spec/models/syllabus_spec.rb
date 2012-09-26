@@ -6,8 +6,9 @@ describe Syllabus do
   	it { should have_valid_factory(:syllabus) }
 
     it { should have_many(:courses) }
-    it { should have_many(:assignments) } 
-    it { should have_and_belong_to_many(:exams) } 
+    it { should have_many(:assignments) }
+    it { should have_many(:exam_syllabuses) } 
+    it { should have_many(:exams) } 
     it { should have_many(:lesson_plans) } 
   end
   

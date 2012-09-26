@@ -9,3 +9,8 @@ $ ->
 	$('#new-syllabus-assignment').on 'click','a.btn', (event) ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slideToggle()
+
+
+  $('#add-existing-exam').on 'click', 'a.btn', (event)->
+  	event.preventDefault()
+  	$('#add-existing-exam-form').slideToggle()

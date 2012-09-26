@@ -6,11 +6,11 @@
         = f.select :course_id, Course.all.collect { |c| ["#{c.code}", c.id] }, {:prompt => t('courses.choose_course')}, :class => "span12 validate[required]"
         = f.hidden_field :course_group_id, :value => @course_group.id
       .row-fluid.mt-s
-        = f.submit t("courses.save"), :id => 'submit_course_button', :class => "span6 btn btn-primary"
-        = link_to t("cancel"), "", :id => "course_cancel", :class => "span6 btn btn-danger", :style => "min-height:0px"
+        = f.submit t("courses.save"), :id => 'submit-course-group-enrollment-button', :class => "span6 btn btn-primary"
+        = link_to_cancel :id => "course-group-enrollment-cancel-link", :class => "span6 btn btn-danger", :style => "min-height:0px"
 
 coffee:
-  $("#course_cancel").click ->
-    $("#add_course_enrollment_form").hide()
-    $("#course_enrollment_form_errors").html('')
+  $("#cancel-course-group-enrollment-link").click ->
+    $("#new-course-group-enrollment-form").hide()
+    $("#course-group-enrollment-form-errors").html('')
     false    #prevent page from reloading

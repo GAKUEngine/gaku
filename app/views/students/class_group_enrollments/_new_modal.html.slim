@@ -1,6 +1,6 @@
 - model = @class_group_enrollment || ClassGroupEnrollment.new
 - model_class = model.class
-.modal.hide#newClassGroupEnrollmentModal wmode="opaque"
+.modal.hide#new-class-group-enrollment-modal wmode="opaque"
   
   = form_for([@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |f|
     .modal-header
@@ -17,10 +17,10 @@
             tbody
               tr
                 th =t("class_groups.name")
-                td#table_class_enrollment_name =@student.class_group_enrollments.last.class_group.name if @student.class_groups.any?
+                td#class-enrollment-name =@student.class_group_enrollments.last.class_group.name if @student.class_groups.any?
               tr
                 th =t("class_group_enrollments.seat_number")
-                td#table_class_enrollment_seat_number =@student.class_group_enrollments.last.seat_number if @student.class_groups.any?
+                td#class-enrollment-seat-number =@student.class_group_enrollments.last.seat_number if @student.class_groups.any?
       .validation-error
       .form-inputs
         .field
@@ -33,6 +33,6 @@
         br/
         .actions
           =f.submit t('class_groups.create_class_group_enrollment'), :class => 'btn btn btn-primary'
-          = link_to t('.cancel', :default => t("helpers.links.cancel")), '#', :class => 'btn', :'data-dismiss' => "modal"
+          = link_to_cancel 
 
 

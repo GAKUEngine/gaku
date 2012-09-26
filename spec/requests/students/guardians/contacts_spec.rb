@@ -26,14 +26,14 @@ describe 'Guardian Contacts' do
     click_button 'submit-student-guardian-contact-button'
     wait_until { !page.find('#new-contact-modal').visible? }
 
-    click_link 'show-student-guardian-link'
+    find('.show-link').click
     page.should have_content 'mobile'
     page.should have_content '777'
     @student.guardians.first.contacts.count.should eql(1)
   end
 
   it "should add and show contact to a student guardian thru slide form", :js => true do 
-    click_link 'show-student-guardian-link'
+    find('.show-link').click
     @student.guardians.first.contacts.count.should eql(0)
     click_link "new-student-guardian-contact-link"
 
@@ -56,13 +56,13 @@ describe 'Guardian Contacts' do
       mobile2 = Factory(:contact, :data => 321, :contact_type => @contact_type)
       @student.guardians.first.contacts << [ mobile1, mobile2 ]
       @student.reload
-      click_link 'show-student-guardian-link'
+      find('.show-link').click
     end
 
     it 'should edit contact for student guardian', :js => true do 
       page.should have_content '321'
 
-      within('table#student-guardian-contacts-index tr#contact-2') { click_link 'edit-student-guardian-contact-link' }
+      within('table#student-guardian-contacts-index tr#contact-2') { find('.edit-link').click }
       wait_until { find('#edit-contact-modal').visible? } 
 
       fill_in 'contact_data', :with => '777'
@@ -76,8 +76,7 @@ describe 'Guardian Contacts' do
       page.should have_content '321'
       @student.guardians.first.contacts.size.should eql(2)
       tr_count = page.all('table.index tr').size
-      #within('table.index tr#contact-1') { click_link 'delete-student-guardian-contact-link' }
-      click_link 'delete-student-guardian-contact-link'
+      find('.delete-link').click
 
       wait_until { page.all('table.index tr').size == tr_count - 1 } 
       @student.guardians.first.contacts.size.should eql(1)

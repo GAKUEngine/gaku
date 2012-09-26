@@ -48,12 +48,12 @@ describe 'ClassGroup Courses' do
       @class_group.courses << @course
       visit class_group_path(@class_group)
       click_link 'class-group-courses-tab-link'
-      within(".courses-count"){ page.should have_content("1") }
-      within('#class-group-courses-tab-link'){ page.should have_content("1") }
+
+      within(".courses-count") { page.should have_content("1") }
+      within('#class-group-courses-tab-link') { page.should have_content("1") }
     end
 
     it 'should not add a course if it is already added', :js => true do  
-      
       click_link 'new-class-group-course-link'
       wait_until { page.find('#new-class-group-course-form').visible? }
       select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
@@ -69,7 +69,7 @@ describe 'ClassGroup Courses' do
       page.all('#courses-index tbody tr').size.should eql(1)
       within("#courses-index tbody") do
         page.should have_content ("#{@course.code}")
-        click_on "delete-course-link"
+        find(".delete-link").click
       end
       page.driver.browser.switch_to.alert.accept
       

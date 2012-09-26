@@ -4,16 +4,18 @@
     .row-fluid
       h3.pull-left = t("course_groups.list")
       .pull-right
-      	#add_new_course_group_button
-        	= link_to ("<i class='icon-white icon-plus'></i> " + t("course_groups.new")).html_safe, new_course_group_path, :class => "btn btn-primary", :id => "new_course_group_link", :remote => true
+      	#new-course-group
+        	= ajax_link_to_new t("course_groups.new"), new_course_group_path, :id => "new-course-group-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-        #course_groups_index_table
+        #course-groups-index
           =render 'course_groups', :course_groups => @course_groups
     .row-fluid
-      #course_group_form_errors
-      #add_new_course_group_form style='display:none'
+      #course-group-form-errors
+      #new-course-group-form style='display:none'
         =render 'form' 
+
+#modal-dialogs

@@ -50,7 +50,7 @@ describe 'Guardian' do
     end
 
     it "should edit a student guardian", :js => true do 
-      click_link "edit-student-guardian-link" 
+      find(".edit-link").click 
       wait_until { find('#edit-guardian-modal').visible? } 
 
       fill_in 'guardian_name',    :with => 'Edited guardian name'
@@ -66,7 +66,7 @@ describe 'Guardian' do
       @student.guardians.size.should eql(1)
       page.should have_content(@guardian.name)
 
-      click_link 'delete-student-guardian-link' 
+      find('.delete-student-guardian-link').click 
       page.driver.browser.switch_to.alert.accept
       
       page.should_not have_content(@guardian.name)

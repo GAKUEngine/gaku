@@ -58,8 +58,9 @@ describe 'ClassGroup Semesters' do
     end
 
     it 'should edit semester' do
-      
-      within('table#semesters-index tbody') { click_link('edit-semester-link') }
+      click_link 'class-group-semesters-tab-link'
+      within('table#semesters-index tbody') { find('.edit-link').click }
+
       wait_until { find('#semester-modal').visible? }
 
       select '2012', :from => 'semester_starting_1i'
@@ -79,7 +80,7 @@ describe 'ClassGroup Semesters' do
       @class_group.semesters.count.should eql(1)
       page.all('table#semesters-index tbody tr').size.should eql(1)
 
-      within('table#semesters-index tbody') { click_link('edit-semester-link') }
+      within('table#semesters-index tbody') { find('.edit-link').click }
       wait_until { find('#semester-modal').visible? }
 
       select '2012', :from => 'semester_starting_1i'
@@ -100,7 +101,7 @@ describe 'ClassGroup Semesters' do
       @class_group.semesters.count.should eql(1) 
       tr_count = page.all('table#semesters-index tbody tr').size
 
-      click_link('delete-semester-link') 
+      find('.delete-link').click 
       page.driver.browser.switch_to.alert.accept
  
       wait_until { page.all('table#semesters-index tbody tr').size == tr_count - 1 }
