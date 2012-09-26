@@ -1,8 +1,9 @@
-table#student_index.index.table.table-striped.table-bordered.table-condensed
+table#students-index.index.table.table-striped.table-bordered.table-condensed
   thead
     tr
       th.btn-inverse = sort_link @search, "surname", t("surname")
       th.btn-inverse = sort_link @search, "name", t("name")
+      th.btn-inverse = student_sortable "birth_date", t('birth')
       th.btn-inverse = student_sortable "gender", t('gender')
       th.btn-inverse = student_sortable "class_name", t('class_groups.name')
       th.btn-inverse = student_sortable "seat_number", t('class_group_enrollments.seat_number')

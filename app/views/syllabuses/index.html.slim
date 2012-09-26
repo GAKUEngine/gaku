@@ -25,6 +25,6 @@
               td= syllabus.description
               td= syllabus.credits
               td
-                = link_to_show syllabus, :id => "show-syllabus-link"
-                = link_to_edit  edit_syllabus_path(syllabus), :id => "edit-syllabus-link"
-                = ajax_link_to_delete syllabus, :id => "delete-syllabus-link"
+                = link_to_show syllabus
+                = link_to_edit edit_syllabus_path(syllabus)
+                = ajax_link_to_delete syllabus

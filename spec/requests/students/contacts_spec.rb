@@ -38,7 +38,7 @@ describe 'Contact' do
     it "should edit a student contact", :js => true do 
       visit student_path(@student)
       wait_until { page.has_content?('Contacts list') } 
-      click_link "edit-student-contact-link" 
+      find(".edit-link").click 
       wait_until { find('#edit-contact-modal').visible? } 
 
       fill_in 'contact_data', :with => 'example@genshin.org'
@@ -78,10 +78,9 @@ describe 'Contact' do
       page.should have_content(@contact.data)
       @student.contacts.size.should eql(1)
 
-      click_link 'delete-student-contact-link' 
+      find('.delete-link').click 
       page.driver.browser.switch_to.alert.accept
       
-      sleep 10
       wait_until { page.all('table#student-contacts-index tr').size == tr_count - 1 }
       @student.guardians.size.should eql(0)
       page.should_not have_content(@contact.data)

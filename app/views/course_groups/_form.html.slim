@@ -7,5 +7,5 @@
 	        = f.text_field :name, :class => "span12"
 			.row-fluid
 			  .span12
-			    = f.submit nil, :id => 'submit_course_group_button', :class => "span6 btn btn-primary"
-			    = link_to t(:Back), course_groups_path,:id =>'cancel_add_course_group_btn', :class => "span3 btn"
+			    = f.submit nil, :id => 'submit-course-group-button', :class => "span6 btn btn-primary"
+			    = link_to_back course_groups_path, :class => "span3 btn"

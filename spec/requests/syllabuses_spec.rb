@@ -15,7 +15,7 @@ describe 'Syllabus' do
       within('table#syllabuses-index tr:nth-child(2)') { page.should have_content("bio") }
       
       # show
-      within('table#syllabuses-index tr:nth-child(2)') { click_link "show-syllabus-link" }
+      within('table#syllabuses-index tr:nth-child(2)') { find(".show-link").click }
 
       #TODO Make a real check when view is finished
       page.should have_content("Syllabus")
@@ -42,7 +42,7 @@ describe 'Syllabus' do
     end
 
     it "should edit a syllabus" do 
-      within('table#syllabuses-index tr:nth-child(2)') { click_link "edit-syllabus-link" }
+      within('table#syllabuses-index tr:nth-child(2)') { find(".edit-link").click }
       fill_in "syllabus_name", :with => "Biology1"
       fill_in "syllabus_code", :with => "bio1"
       fill_in "syllabus_description", :with => "Biology Description"
@@ -59,8 +59,8 @@ describe 'Syllabus' do
     end
 
     it "should redirect to edit view when click on Edit button in show view" do
-      within('table.index tr:nth-child(2)') { click_link "show-syllabus-link" }
-      click_on "edit-syllabus-link"
+      within('table.index tr:nth-child(2)') { find(".show-link").click }
+      find(".edit-link").click
       page.should have_content("Edit Syllabus")
     end
   end
@@ -68,12 +68,11 @@ describe 'Syllabus' do
   it "should delete a syllabus" do
     Syllabus.count.should eql(1)
     tr_count =  page.all('table#syllabuses-index tr').size
-    within('table#syllabuses-index  tr:nth-child(2)') { click_link "delete-syllabus-link" }
+    within('table#syllabuses-index  tr:nth-child(2)') { find(".delete-link").click }
       
     wait_until { page.all('table#syllabuses-index tr').size == tr_count - 1 }
     page.should_not have_content("#{@syllabus.code}")
     Syllabus.count.should eql(0)
   end
-
 
 end

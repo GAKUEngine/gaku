@@ -16,7 +16,8 @@ class Syllabus < ActiveRecord::Base
   has_many :courses
   has_many :assignments
   has_many :lesson_plans
-  has_and_belongs_to_many :exams
+  has_many :exam_syllabuses
+  has_many :exams, :through => :exam_syllabuses 
 
   attr_accessible :name, :code, :description, :credits, :exams , :exams_attributes, :assignments, :assignments_attributes
 

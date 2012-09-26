@@ -1,11 +1,11 @@
 .row-fluid
   .span12.well
     .span9
-      table.table.table-bordered.table-striped
+      table#students-index.table.table-bordered.table-striped
         tbody
           tr
             th.btn-c1 width="20%" =t("class")
-            td#student_class_group_enrollment
+            td#student-class-group-enrollment
               - if @student.class_groups.last
                 - if @student.class_groups.last.grade
                   = @student.class_groups.last.grade.to_s
@@ -47,10 +47,10 @@
         h4 =t("students.picture")
       .row-fluid.mt-s
         .span12.pagination-centered
-          = image_tag @student.picture.url(:thumb), :id => "student_picture"
+          = image_tag @student.picture.url(:thumb), :id => "student-picture"
       .row-fluid.mt-s
-        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload_picture_link", :class => "span12 btn"
-        div id="upload_picture" style="display:none;"
+        = button_to t('pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-student-picture-link", :class => "span12 btn"
+        div id="upload-student-picture" style="display:none;"
           = render 'upload_picture'
 .row-fluid
   .span12.well
@@ -83,23 +83,23 @@
     .span4
       = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
-      = link_to t('Edit'), edit_student_path(@student), :class => "span12 btn btn-warning"
+      = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link"
     .span4
-      = link_to t("Back"), students_path, :class => "span12 btn"
+      = link_to_back students_path, :class => "span12 btn"
 
 row-fluid
   .span12
-    #student_delete_link
-      =link_to 'Delete', "#", :id => 'delete_link', :class => 'btn btn-danger pull-right'
+    #delete-student
+      =link_to 'Delete', "#", :id => 'delete-student-link', :class => 'btn btn-danger pull-right'
   .delete_modal
     =render 'shared/delete_modal', :target => @student
 
-#modal_dialogs
+#modal-dialogs
 
 coffee:
-  $("#upload_picture_link").click ->
-    $("#upload_picture").toggle()
+  $("#upload-student-picture-link").click ->
+    $("#upload-student-picture").toggle()
 
-  $('#student_delete_link').on 'click', (e)->
+  $('#delete-student-link').on 'click', (e)->
     e.preventDefault()
-    $('#deleteModal').modal('show')
+    $('#delete-modal').modal('show')

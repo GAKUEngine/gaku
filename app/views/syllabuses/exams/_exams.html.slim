@@ -9,8 +9,8 @@
         th.btn-inverse =t 'exams.use_weighting'
         th.btn-info style="width:94px" =t 'manage'
     tbody
-      - if @syllabus.exams.any?
-        = render :partial => 'syllabuses/exams/exam', :collection => @syllabus.exams, :as => :exam
+      - if @syllabus.exam_syllabuses.any?
+        = render :partial => 'syllabuses/exams/exam', :collection => @syllabus.exam_syllabuses, :as => :exam_syllabus
       - else
         .alert.alert-danger.no-exam-msg
           = t('notice.no_exams')

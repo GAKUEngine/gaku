@@ -20,6 +20,8 @@ ja:
   phonetic_reading: "ﾌﾘｶﾞﾅ"
   address: "住所"
   none: "未登録"
+  date_placeholder: "YYYY-MM-DD"
+  search: "Search"
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -84,6 +86,9 @@ ja:
     name_sample: "[例: 化学A]"
     description: "科目説明"
     credits: "単位数"
+    choose_exam: 'Choose Exam'
+    add_exam: 'Add Exam'
+    add_existing_exam: 'Add Existing Exam'
   course_management: "授業管理"
   course: "授業"
   courses:

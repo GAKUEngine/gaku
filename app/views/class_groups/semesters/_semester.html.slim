@@ -2,5 +2,5 @@
 	tr id="semester-#{semester.id}"
 	  = render 'shared/fields/semester_fields', :semester => semester
       td
-	    =ajax_link_to_edit [:edit, @class_group, semester], :id => 'edit-semester-link'
-        =ajax_link_to_delete [@class_group, semester], :id => 'delete-semester-link'
+	    =ajax_link_to_edit [:edit, @class_group, semester]
+        =ajax_link_to_delete [@class_group, semester]

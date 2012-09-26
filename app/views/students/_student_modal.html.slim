@@ -1,4 +1,4 @@
-#student_modal.modal.hide
+#student-modal.modal.hide
   .modal-header
     button type="button" class="close" data-dismiss="modal" ×
     h1 Edit Student
@@ -57,5 +57,5 @@
 		  .row-fluid
 		    .span12.well
 		      .span9
-		        = form.submit nil, :class => "span12 btn btn-primary update_student"
-		      = link_to t("Back"), students_path, :class => "span3 btn"
+		        = form.submit nil, :id => 'submit-student-link', :class => "span12 btn btn-primary update_student"
+		      = link_to_back students_path, :class => "span3 btn"

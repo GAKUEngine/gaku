@@ -1,0 +1,9 @@
+=form_for [@syllabus, ExamSyllabus.new], :url => syllabus_exam_syllabuses_path(@syllabus), :remote => true, :method => 'post', :html => {:class => 'add-existing-exam-to-syllabus', :id => 'add-existing-exam-to-syllabus-form'} do |f|
+  .fields  
+    b =t('syllabuses.choose_exam')
+    =f.label :exam_id
+    =f.select :exam_id, Exam.all.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]},{:prompt => t('syllabuses.choose_exam')}, {:class => 'chzn-select'}
+  .actions
+    =f.submit t('syllabuses.add_exam'), :id => 'submit-existing-exam-to-syllabus', :class => 'btn btn-primary'
+  .row-fluid.mt-s
+    = link_to_cancel :id => "cancel-exam-syllabus-link", :class => "span6 btn btn-danger", :style => "min-height:0px"

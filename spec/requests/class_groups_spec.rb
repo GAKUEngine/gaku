@@ -29,7 +29,7 @@ describe 'ClassGroups' do
     end
 
     it 'should edit class group from index view', :js => true do 
-      click_link 'edit-class-group-link'
+      find('.edit-link').click
       wait_until { find('#class-group-modal').visible? }
 
       fill_in 'class_group_grade', :with => '2'
@@ -51,7 +51,7 @@ describe 'ClassGroups' do
     end
 
     it 'should not edit a class group if back button is clicked while editing', :js => true do
-      click_link 'edit-class-group-link'
+      find('.edit-link').click
       wait_until { find('#class-group-modal').visible? }
 
       click_on 'Back'
@@ -90,7 +90,7 @@ describe 'ClassGroups' do
       tr_count = page.all('table#class-groups-index tbody tr').size
       page.should have_content(@class_group.name)
 
-      click_link "delete-class-group-link" 
+      find(".delete-link").click 
       page.driver.browser.switch_to.alert.accept
   
       wait_until { page.all('table#class-groups-index tbody tr').size == tr_count - 1 }

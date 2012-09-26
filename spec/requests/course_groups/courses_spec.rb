@@ -10,77 +10,70 @@ describe 'CourseGroup Courses' do
   end
 
   it 'should add and show course to a course group', :js => true do
-    CourseGroupEnrollment.count.should == 0
-    tr_count = page.all('#courses_index_table tbody tr').size
-    click_link 'add_course_enrollment_link'
+    CourseGroupEnrollment.count.should eql(0)
+    tr_count = page.all('#course-group-enrollments-index tbody tr').size
+    click_link 'new-course-group-enrollment-link'
 
-    wait_until { page.find('#add_course_enrollment_form').visible? }
+    wait_until { page.find('#new-course-group-enrollment-form').visible? }
     select "#{@course.code}", :from => 'course_group_enrollment_course_id'
-    click_button 'submit_course_button'
+    click_button 'submit-course-group-enrollment-button'
 
-    wait_until { page.all('#courses_index_table tbody tr').size == tr_count+1 }
-    within("#courses_index_table tbody"){
-      page.should have_content ("#{@course.code}")
-    }
-    within('.courses_count') { page.should have_content('1') }
-    CourseGroupEnrollment.count.should == 1
+    wait_until { page.all('#course-group-enrollments-index tbody tr').size == tr_count+1 }
+    within("#course-group-enrollments-index tbody") { page.should have_content ("#{@course.code}") }
+    within('.course-group-enrollments-count') { page.should have_content('1') }
+    CourseGroupEnrollment.count.should eql(1)
 
   end
 
   it 'should not add a course if course code is empty', :js => true do
-    click_link 'add_course_enrollment_link'
-    wait_until { page.find('#add_course_enrollment_form').visible? }
-    click_button 'submit_course_button'
+    click_link 'new-course-group-enrollment-link'
+    wait_until { page.find('#new-course-group-enrollment-form').visible? }
+    click_button 'submit-course-group-enrollment-button'
 
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
   it 'add a new course / cancel', :js => true do
-    tr_count = page.all('#courses_index_table tbody tr').size
-    click_link 'add_course_enrollment_link'
-    wait_until { page.find('#add_course_enrollment_form').visible? }
+    tr_count = page.all('#course-group-enrollments-index tbody tr').size
+    click_link 'new-course-group-enrollment-link'
+    wait_until { page.find('#new-course-group-enrollment-form').visible? }
     select "#{@course.code}", :from => 'course_group_enrollment_course_id'
-    find('#course_cancel').click
+    click_link 'course-group-enrollment-cancel-link'
 
-    page.all('#courses_index_table tbody tr').size.should == tr_count
+    page.all('#course-group-enrollments-index tbody tr').size.should == tr_count
 
-    within("#courses_index_table tbody"){
-      page.should_not have_content ("#{@course.code}")
-    }
-    CourseGroupEnrollment.count.should == tr_count
+    within("#course-group-enrollments-index tbody") { page.should_not have_content ("#{@course.code}") }
+    CourseGroupEnrollment.count.should eql(tr_count)
   end
 
   context 'Course group with added course' do
     before do
-      @course_group.courses<<@course
+      @course_group.courses << @course
       visit course_group_path(@course_group)
     end
 
     it 'should not add a course if it is already added', :js => true do  
-      
-      click_link 'add_course_enrollment_link'
-      wait_until { page.find('#add_course_enrollment_form').visible? }
+      click_link 'new-course-group-enrollment-link'
+      wait_until { page.find('#new-course-group-enrollment-form').visible? }
       select "#{@course.code}", :from => 'course_group_enrollment_course_id'
-      click_button 'submit_course_button'
+      click_button 'submit-course-group-enrollment-button'
 
       wait_until { page.should have_content("Course already enrolled to this course group!") }
-      
     end
 
     it 'should delete a course from course group', :js => true do  
-      CourseGroupEnrollment.count.should == 1
-      @course_group.courses.count.should == 1
-      page.all('#courses_index_table tbody tr').size.should == 1
-      within('.courses_count') { page.should have_content('1') }
-      within("#courses_index_table tbody"){
-        page.should have_content ("#{@course.code}")
-        find('.course_group_enrollment_delete_link').click
-      }
+      CourseGroupEnrollment.count.should eql(1)
+      @course_group.courses.count.should eql(1)
+      page.all('#course-group-enrollments-index tbody tr').size.should eql(1)
+      within('.course-group-enrollments-count') { page.should have_content('1') }
+      within("#course-group-enrollments-index tbody") { page.should have_content ("#{@course.code}") }
+        
+      find('.delete-link').click
       page.driver.browser.switch_to.alert.accept
       
-      within("#courses_index_table tbody"){ page.should_not have_content("#{@course.code}") }
-      CourseGroupEnrollment.count.should == 0
-      @course_group.courses.count.should == 0
+      within("#course-group-enrollments-index tbody") { page.should_not have_content("#{@course.code}") }
+      CourseGroupEnrollment.count.should eql(0)
+      @course_group.courses.count.should eql(0)
     end
   end
 

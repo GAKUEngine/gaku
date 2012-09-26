@@ -46,7 +46,7 @@ describe 'Note' do
       fill_in "note_title", :with => "The note title"
       fill_in "note_content", :with => "The note content"
       click_button "submit-student-note-button"
-      click_link "edit-student-note-link" 
+      find(".edit-link").click 
 
       wait_until { find('#edit-note-modal').visible? } 
       fill_in 'note_title', :with => 'Edited note title'
@@ -65,7 +65,7 @@ describe 'Note' do
       tr_count = page.all('table#student-notes-index tr').size
       page.should have_content(@note.title)
       
-      click_link 'delete-student-note-link' 
+      find('.delete-link').click 
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table#student-notes-index tr').size == tr_count - 1 } 

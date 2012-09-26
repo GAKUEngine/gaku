@@ -1,4 +1,4 @@
 tr
-				td =enrollment.course.code
-				td =enrollment.course.syllabus.name if enrollment.course.syllabus
-				td =ajax_link_to_delete course_group_course_group_enrollment_path(@course_group, enrollment)
+	td =enrollment.course.code
+	td =enrollment.course.syllabus.name if enrollment.course.syllabus
+	td =ajax_link_to_delete [@course_group, enrollment]

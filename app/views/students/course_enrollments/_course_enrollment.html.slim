@@ -2,4 +2,4 @@
   tr id="course-enrollment-#{course.id}"
     td= course.id
     td= course.code
-    td= ajax_link_to_delete student_course_enrollment_path(@student, course.course_enrollments.where(:course_id => course.id, :student_id => @student.id).first.id), :id => 'delete-student-course-enrollment-link'
+    td= ajax_link_to_delete student_course_enrollment_path(@student, course.course_enrollments.where(:course_id => course.id, :student_id => @student.id).first.id)
