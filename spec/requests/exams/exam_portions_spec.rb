@@ -12,6 +12,8 @@ describe 'Exam portions' do
       page.should have_content( 'Exam portions list ( 1 )' )
       within('#exam-exam_portions') { page.should have_content ("#{@exam.exam_portions.first.name}") }
       page.all('#exam-exam_portions table tbody tr').size.should == 1
+      page.should have_content("#{@exam.exam_portions.first.name}"+' Weight')
+      page.should have_content('Total Weight')
     end
 
     it 'should add a portion', :js => true do
@@ -19,9 +21,12 @@ describe 'Exam portions' do
       wait_until { find('#exam_exam_portions_form').visible? }
       fill_in 'exam_exam_portions_attributes_1_name', :with => 'Ubuntu'
       click_on 'Create Exam portion'
-      wait_until { page.all('#exam-exam_portions table tbody tr').size.should == 2 }
+      wait_until { !find('#exam_exam_portions_form').visible? }
       @exam.exam_portions.count.should == 2
-      #page.should have_content( 'Exam portions list ( 2 )' ) TODO
+      page.all('#exam-exam_portions table tbody tr').size.should == 2
+      within('#exam-exam_portions table'){ page.should have_content('Ubuntu') }
+      page.should have_content( 'Exam portions list ( 2 )' )
+      page.should have_content('Ubuntu Weight')
     end
     #TODO Test exam use weighting - show weighting widget
     #TODO Test exam not use weighting - hide weighting widget
