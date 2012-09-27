@@ -35,22 +35,23 @@ class CourseGroupsController < ApplicationController
 	def destroy
 		@course_group = CourseGroup.unscoped.find(params[:id])
 		@course_group.destroy
+		flash.now[:notice] = t('course_groups.course_group_delete')
 		respond_to do |format|
-    	format.js { render :nothing => true }
+    	format.js { render 'destroy' }
   	end
   end
 
   def soft_delete
    	@course_group = CourseGroup.find(params[:id])
   	@course_group.update_attribute('is_deleted', 'true')
-  	redirect_to course_groups_path, :notice => 'Course group deleted. Call administrator for recovery'
+  	redirect_to course_groups_path, :notice => t('course_groups.course_group_delete')
   end
 
   def recovery
   	@course_group = CourseGroup.unscoped.find(params[:id])
   	@course_group.update_attribute('is_deleted', 'false')
   	@course_groups = CourseGroup.where(:is_deleted => true)
-  	flash.now[:notice] = 'Course Group Recovered'
+  	flash.now[:notice] = t('course_groups.course_group_recover')
   	respond_to do |format|
   		format.js { render 'recovery' } 
   	end
