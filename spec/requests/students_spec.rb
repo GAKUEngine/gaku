@@ -30,6 +30,7 @@ describe 'Student' do
           page.should have_content("John") 
           page.should have_content("Johny")
         end
+        sleep(1)
         page.all('#students-index tr').size.should eql(3)
       end
       
