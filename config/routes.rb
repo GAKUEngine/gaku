@@ -101,6 +101,7 @@ GAKUEngine::Application.routes.draw do
 
   resources :course_groups do
     resources :course_group_enrollments, :controller => 'course_groups/course_group_enrollments'
+    delete 'soft_delete', :on => :member
   end
 
   root :to => 'home#index'

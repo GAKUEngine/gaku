@@ -38,6 +38,12 @@ class CourseGroupsController < ApplicationController
   	end
   end
 
+  def soft_delete
+   	@course_group = CourseGroup.find(params[:id])
+  	@course_group.update_attribute('is_deleted', 'true')
+  	redirect_to course_groups_path, :notice => 'Course group deleted. Call administrator for recovery'
+  end
+
 	private
 
 	def load_before_show
