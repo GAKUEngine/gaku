@@ -38,7 +38,7 @@ describe CourseGroupsController do
 
     it "sets the flash" do
       delete :destroy, :id => course_group
-      controller.should set_the_flash
+      controller.should set_the_flash.now
     end
   end
 end
