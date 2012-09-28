@@ -52,6 +52,8 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
+    import: "生徒情報をCSVからインポート"
+    export: "生徒情報をCSVで保存"
     id: "生徒番号"
     show: "生徒照会"
     new: "新規生徒登録"
