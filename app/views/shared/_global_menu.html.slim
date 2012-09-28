@@ -14,20 +14,16 @@ ul.nav#menu
     ul.dropdown-menu
       li= link_to t("syllabuses.plural"), syllabuses_path
       li= link_to t("courses.plural"), courses_path
-      li= link_to t('course_group.course_groups'), course_groups_path
-
+      li= link_to t('course_groups.course_groups'), course_groups_path
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("exam_management")
       b.caret
     ul.dropdown-menu
       li= link_to t("exams.plural"), exams_path
-
-
-
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
-      = t("admin")
+      = t("admin.admin")
       b.caret
     ul.dropdown-menu
       li= link_to t("contact_types.plural"), admin_contact_types_path
@@ -35,3 +31,4 @@ ul.nav#menu
       li= link_to 'Locale Preset', locale_admin_presets_path
       li= link_to 'Class Group Disposals', course_groups_admin_disposals_path
       li= link_to 'Exam Disposals', exams_admin_disposals_path
+
