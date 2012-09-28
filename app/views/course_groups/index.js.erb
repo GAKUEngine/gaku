@@ -1,0 +1,1 @@
+$('#course-groups-index').html('<%= escape_javascript(render :partial => "/course_groups/course_groups", :formats => [:html], :handlers => [:erb, :slim], :locals => {:course_groups => @course_groups}) %>');

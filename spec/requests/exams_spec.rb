@@ -68,7 +68,7 @@ describe 'Exams' do
         within('#exams-index') { page.should have_content('Biology 2012') }
       end
 
-      it 'should show validation msgs on edit', :js => true do
+      it 'should show validation msgs on index/edit', :js => true do
         within('#exams-index') { find('#edit-exam-link').click }
         wait_until{ page.find('#edit-exam-modal').visible? }
         fill_in 'exam_name', :with => ''
@@ -85,6 +85,16 @@ describe 'Exams' do
         click_button 'submit_button'
         wait_until { page.should have_content('was successfully updated.') }
         page.should have_content('Biology 2012')
+      end
+
+      it 'should show validation msgs on view/edit', :js => true do
+        within('#exams-index') { find('#show-exam-link').click }
+        page.should have_content('Show Exam')
+        click_on "Edit"
+        page.should have_content('Edit Exam')
+        fill_in 'exam_name', :with => ''
+        click_button 'submit_button'
+        wait_until { page.should have_content('This field is required') }
       end
 
       it 'should delete an exam', :js => true do

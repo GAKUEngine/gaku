@@ -14,7 +14,7 @@
       
 javascript:
   $(document).ready(function() {
-    $(".delete_exam_portion_link").live('ajax:success', function(evt, data, status, xhr){
+    $(".delete-exam-portion-link").live('ajax:success', function(evt, data, status, xhr){
       $(this).closest('tr').fadeOut();
     });
   });
