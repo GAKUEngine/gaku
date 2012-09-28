@@ -1,4 +1,22 @@
 en:
+  admin:
+    admin: "admin"
+    plural: "admin"
+    presets:
+      student: "Student Preset"
+      locale: "Locale Preset"
+
+  fields:
+    name: "name"
+    surname: "surname"
+    name_reading: "name_reading"
+    surname_reading: "surname_reading"
+    gender: "gender"
+    phone: "phone"
+    email: "email"
+    birth_date: "birth_date"
+    admitted: "admitted"
+
   hello: "Hello world"
   comname: "GAKU-Engine"
   Show: "Show"
@@ -17,6 +35,8 @@ en:
   phonetic_reading: "Phonetic Reading"
   address: "Address"
   none: "None"
+  date_placeholder: "YYYY-MM-DD"
+  search: "Search"
   addresses:
     addresses: "Addresses"
     new: "New Address"
@@ -54,6 +74,8 @@ en:
     phone: "Phone #"
     email: "E-Mail"
     birth: "Birth Date"
+    birth_between: "Birth date between"
+    birth_and: "and"
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
@@ -80,6 +102,9 @@ en:
     name_sample: "[EX: Science A]"
     description: "Course Description"
     credits: "Credits"
+    choose_exam: 'Choose Exam'
+    add_exam: 'Add Exam'
+    add_existing_exam: 'Add Existing Exam'
   course_management: 'Course Management'
   course: "Course"
   courses:
@@ -106,6 +131,8 @@ en:
     course_added: 'Course added to course group'
     list: 'Course Groups List'
     show: 'Course Group'
+    course_group_recover: 'Course Group Recovered'
+    course_group_delete: 'Course group was successfully destroyed.'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
@@ -125,6 +152,7 @@ en:
     choose_student: 'Choose Student'
     create_class_group_enrollment: 'Create Class Enrollment'
     none: "None"
+    save: "Save Class"
   class_group_enrollments:
     list: "Class Roster"
     new: "New class enrollment"
@@ -205,7 +233,7 @@ en:
     save: "Save Guardian"
     edit: "Edit guardian"
 
-  contact_types: 
+  contact_types:
     singular: "Contact Type"
     plural: "Contact Types"
     new: "New Contact Type"
@@ -270,5 +298,5 @@ en:
   import_format: "Import Format"
 
   helpers:
-    links: 
+    links:
       cancel: "Cancel"

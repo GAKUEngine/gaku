@@ -48,7 +48,7 @@ class Students::Guardians::AddressesController < ApplicationController
           format.js { render }
         end
       else
-        render :nothing => true
+        render 'destroy'
       end
     end
   end

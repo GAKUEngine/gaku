@@ -10,6 +10,6 @@
       .row-fluid.mt-m
         = link_to ("<i class='icon-white icon-plus'></i> " + t('students.add_contact')).html_safe,  new_contact_student_guardian_path(@student, guardian), :id => 'new-student-guardian-contact-link', :class => "span3 btn btn-primary", :remote => true, :data => { :target => '#newGuardianContanctModal', :toggle => 'modal' }  
 
-        = link_to_show student_guardian_path(@student, guardian), :id => 'show-student-guardian-link'
-        = ajax_link_to_edit edit_student_guardian_path(@student, guardian), :id => 'edit-student-guardian-link'
-        = ajax_link_to_delete student_guardian_path(@student, guardian), :id => 'delete-student-guardian-link'
+        = link_to_show [@student, guardian]
+        = ajax_link_to_edit [:edit, @student, guardian]
+        = ajax_link_to_delete [@student, guardian], :class => 'delete-student-guardian-link'

@@ -1,3 +1,4 @@
+<script src="">
 <div class='row-fluid'>
 	 <div class='span12 well pull-left'>
 	 	<table class='exam_grid table table-striped table-bordered table-condensed'>

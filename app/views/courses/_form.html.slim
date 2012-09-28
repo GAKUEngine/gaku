@@ -20,10 +20,10 @@
     .span12.well
       - if params[:action] == 'edit'
         .span6
-          = course_form.submit nil, :class => "span12 btn btn-primary"
-        = link_to t("Show"), @course, :class => "span3 btn btn-success"
+          = course_form.submit nil, :id => 'submit-course-button', :class => "span12 btn btn-primary"
+        = link_to t("Show"), @course, :id => 'show-course-link', :class => "span3 btn btn-success"
         = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"
       - else
         .span9
-          = course_form.submit nil, :class => "span12 btn btn-primary"
+          = course_form.submit nil, :id => 'submit-course-button', :class => "span12 btn btn-primary"
         = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"

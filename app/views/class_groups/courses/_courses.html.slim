@@ -1,7 +1,7 @@
 .pull-left
   h4.h4-vm.courses-count =t("courses.list")+"（ "+@class_group.class_group_course_enrollments.count.to_s+" ）"
 .pull-right
-  = link_to ("<i class='icon-white icon-plus'></i> " + t('add_course')).html_safe, new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :remote => true, :id => 'new-class-group-course-link', :class => "btn btn-primary"
+  = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 .row-fluid
 hr
 .row-fluid

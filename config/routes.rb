@@ -45,6 +45,7 @@ GAKUEngine::Application.routes.draw do
   resources :syllabuses do
     resources :assignments, :controller => 'syllabuses/assignments' 
     resources :exams, :controller => 'syllabuses/exams'
+    resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
   end
 
   resources :students do
@@ -100,6 +101,10 @@ GAKUEngine::Application.routes.draw do
 
   resources :course_groups do
     resources :course_group_enrollments, :controller => 'course_groups/course_group_enrollments'
+    member do
+      delete 'soft_delete'
+      get 'recovery'
+    end
   end
 
   root :to => 'home#index'
@@ -111,6 +116,13 @@ GAKUEngine::Application.routes.draw do
       get :students, :on => :collection
       get :locale, :on => :collection
       put :update_presets, :on => :collection
+    end
+
+    resources :disposals do
+      collection do
+        get :exams
+        get :course_groups
+      end
     end
   end
 

@@ -1,11 +1,11 @@
 / for getting select mode in js. please don`t remove /
 - if defined?(select_mode)
-    #student_grid data-select-mode="#{select_mode}"
+    #student-grid data-select-mode="#{select_mode}"
 - else
-    #student_grid
+    #student-grid
 .row-fluid
   .span12
-    input*{'data-autocomplete-source' => "#{autocomplete_search_students_path}"} class='student_search' id='student_search'     
+    input*{'data-autocomplete-source' => "#{autocomplete_search_students_path}"} class='search-students' id='search-students'     
 .row-fluid
   .span12
     div#table-checkboxes
@@ -16,5 +16,5 @@
   .span12
     - if defined?(select_mode)
       b =select_mode
-    #students_grid_table  
+    #students-grid-table  
       #grid.span12

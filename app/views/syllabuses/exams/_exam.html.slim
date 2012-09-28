@@ -1,11 +1,11 @@
-- unless exam.nil? || exam.new_record? || !exam
+- unless exam_syllabus.exam.nil? || exam_syllabus.exam.new_record? || !exam_syllabus.exam
   tr
-    td= exam.name
-    td= exam.description
-    td= exam.adjustments
-    td= exam.weight
-    td= exam.use_weighting
+    td= exam_syllabus.exam.name
+    td= exam_syllabus.exam.description
+    td= exam_syllabus.exam.adjustments
+    td= exam_syllabus.exam.weight
+    td= exam_syllabus.exam.use_weighting
     td
-      = link_to_show exam, :id => 'show-syllabus-exam-link'
-      = link_to_edit edit_exam_path(exam), :id => 'edit-syllabus-exam-link'
-      = ajax_link_to_delete syllabus_exam_path(@syllabus, exam), :id => 'delete-syllabus-exam-link'
+      = link_to_show exam_syllabus.exam
+      = link_to_edit [:edit, exam_syllabus.exam]
+      = ajax_link_to_delete [@syllabus, exam_syllabus]

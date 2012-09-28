@@ -6,28 +6,22 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.import")).html_safe, "students/importer", :class => "mr-s btn btn-primary", :id => "import_students_link"
-        = link_to ("<i class='icon-white icon-plus'></i> " + t("students.new")).html_safe, new_student_path, :class => "btn btn-primary", :id => "new_student_link"
+        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import-students-link"
+        = link_to_new t("students.new"), new_student_path, :id => "new-student-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
       .pull-right
-        = link_to "CSV Export", "students.csv"
-      #modal_dialogs
-      #new_student_form.hide
+        = link_to "CSV Export", "students.csv", :id => 'export-students-link'
+      #modal-dialogs
+      #new-student-form.hide
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
-    
-    = search_form_for @search do |f|
-      .field
-        = f.label :name_cont, t('name')
-        = f.text_field :name_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:column => "name") }
-      .field
-        = f.label :surname_cont, t('surname')
-        = f.text_field :surname_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:column => "surname") }
-      = hidden_field_tag "autocomplete_field"
+ 
+    =render 'students/search/form'
+
     .row-fluid
       .span12.well
-        #students_index
+        #students-index
           =render 'students/students'

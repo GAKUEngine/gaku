@@ -10,11 +10,7 @@ $ ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slideToggle()
 
-  $('#delete-syllabus-link').live 'ajax:success', ->
-    $(this).closest('tr').remove()
 
-  $('#delete-syllabus-exam-link').live 'ajax:success', ->
-    $(this).closest('tr').remove()
-
-  $('#delete-syllabus-assignment-link').live 'ajax:success', ->
-    $(this).closest('tr').remove()
+  $('#add-existing-exam').on 'click', 'a.btn', (event)->
+  	event.preventDefault()
+  	$('#add-existing-exam-form').slideToggle()

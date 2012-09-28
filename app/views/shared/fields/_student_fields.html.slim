@@ -1,7 +1,8 @@
 td = student.surname
 td = student.name
-td =
-td =
-td
-td
+td = student.birth_date
+td = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
+td = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
+td = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
+td = student.admitted
 td = student.address_widget

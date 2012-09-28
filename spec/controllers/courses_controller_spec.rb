@@ -45,17 +45,4 @@ describe CoursesController do
       response.should redirect_to(course_url(course))
     end
   end
-
-  describe "destroying a course" do
-
-    it "doesn't set the flash on xhr requests'" do
-      xhr :delete, :destroy, :id => course
-      controller.should_not set_the_flash
-    end
-
-    it "sets the flash" do
-      delete :destroy, :id => course
-      controller.should set_the_flash
-    end
-  end
 end

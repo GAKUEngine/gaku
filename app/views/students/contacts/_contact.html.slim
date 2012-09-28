@@ -7,5 +7,5 @@ tr id="contact-#{contact.id}" class="student-contact"
     -else
       = link_to t('contacts.make_primary'), [:make_primary] + @target, :id => 'set-primary-link', :data => {:confirm => 'are you sure?'}, :class => 'btn', :remote => true, :method => :post
 
-    = ajax_link_to_edit [:edit] + @target, :id => 'edit-student-contact-link', :class => "mr-xs btn btn-mini btn-warning"
-    = ajax_link_to_delete @target, :id => 'delete-student-contact-link', :class => 'btn btn-mini btn-danger'
+    = ajax_link_to_edit [:edit] + @target
+    = ajax_link_to_delete @target

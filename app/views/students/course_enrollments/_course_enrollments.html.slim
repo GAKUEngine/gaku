@@ -16,7 +16,7 @@
 hr
 #new-student-course-enrollment-form
 .row_fluid
-  = link_to t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link", :class => "span3 btn btn-primary new_student_course", :remote => true
+  = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link", :class => "span3"
 hr
 
 coffee:

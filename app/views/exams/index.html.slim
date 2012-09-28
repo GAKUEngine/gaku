@@ -1,4 +1,15 @@
 h1= t("exams.list")
 = link_to t('exams.new'), new_exam_path, :class => "make-button", :id => "new_exam_link"
-= render :partial => "mockups/exam_searchbox"
-= render :partial => "mockups/course_exam_list"
+
+.row-fluid
+  .span12.well
+    table#exams-index.index.table.table-striped.table-bordered.table-condensed
+	    thead
+		    tr	
+		    	th class='btn-inverse' Exam name
+		    	th class='btn-inverse' Adjustment
+		    	th class='btn-inverse' Weight
+		    	th class='btn-inverse' Use weighting
+		    	th class='btn-info' Options
+			tbody
+				=render :partial => 'exams/exams',  :as => :exam, :collection => @exams

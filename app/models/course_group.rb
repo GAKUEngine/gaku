@@ -15,4 +15,6 @@ class CourseGroup < ActiveRecord::Base
   has_many :courses, :through => :course_group_enrollments
 
   validates :name, :presence => true
+
+  default_scope :conditions => { :is_deleted => false }
 end

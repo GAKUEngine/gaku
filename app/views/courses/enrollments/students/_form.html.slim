@@ -1,4 +1,4 @@
-= form_for [@course, @new_course_enrollment], :html => {:id => "enroll_student_form"},:url => enroll_student_course_enrollments_path(@course) , :remote => true do |f|
+= form_for [@course, @new_course_enrollment], :html => {:id => "enroll-course-student-form"},:url => enroll_student_course_enrollments_path(@course) , :remote => true do |f|
   = f.hidden_field :course_id, :value => @course.id
   .row-fluid
     .span4.well.mt-l style="margin-bottom:0px"
@@ -7,5 +7,5 @@
         = f.select :student_id, Student.all.collect { |s| ["#{s.name} #{s.surname}", s.id] }, {:prompt => 'Choose Student'}, :class => "validate[required]"
         
       .row-fluid.mt-s
-        = f.submit t("courses.enroll_student"), :id => 'submit_student_button', :class => 'span12 btn btn-primary'
-      = link_to t("cancel"), "", :id => "student_cancel_link", :class => "span6 btn btn-danger", :style => "min-height:0px"
+        = f.submit t("courses.enroll_student"), :id => 'submit-course-student-button', :class => 'span12 btn btn-primary'
+      = link_to_cancel :id => "cancel-course-student-link", :class => "span6 btn btn-danger", :style => "min-height:0px"
