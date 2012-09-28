@@ -27,7 +27,7 @@
       .span12.well
         .row-fluid
           .pull-left
-            h4.h4-vm =t('exam_portions.list') + "（ " + @exam.exam_portions.count.to_s + " ）"
+            h4.h4-vm =t('exam_portions.list') + " ( " + @exam.exam_portions.count.to_s + " )"
           .pull-right
             #add_exam_exam_portion
               =link_to ('<i class="icon-white icon-plus"></i> '+t('exams.add_portion')).html_safe, new_exam_exam_portion_path(@exam), :class => 'btn btn-primary'
