@@ -17,6 +17,8 @@
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
 
+    =render 'students/search/form'
+
     = search_form_for @search, :html => {:id => 'search-students'} do |f|
       .row-fluid
         .span12.well
@@ -37,6 +39,7 @@
               = f.label :addresses_title_cont, t('address')
               = f.text_field :addresses_title_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "title") }
       = hidden_field_tag "autocomplete_field"
+
     .row-fluid
       .span12.well
         #students-index

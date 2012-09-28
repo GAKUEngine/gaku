@@ -47,10 +47,9 @@ describe 'CourseGroups' do
 
     it 'should edit course group from index view', :js => true do 
       within('#course-groups-index tbody') { find('.edit-link').click }
-      wait_until { find('#edit-course-group-modal').visible? }
 
+      wait_until { find('#edit-course-group-modal').visible? }
       fill_in 'course_group_name', :with => '2012 Courses'
-      
       click_button 'submit-course-group-button'
 
       within ('#course-groups-index') do

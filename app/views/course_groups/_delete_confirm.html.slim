@@ -3,8 +3,8 @@ row-fluid
     #course-group-delete
       =link_to 'Delete', "#", :id => 'delete-course-group-link', :class => 'pull-right'
   .delete-modal
-    =render 'shared/delete_modal', :target => @course_group
-
+    =render 'shared/delete_modal', :target => [:soft_delete, @course_group]
+    
 coffee:
   $('#delete-course-group-link').on 'click', (e)->
     e.preventDefault()

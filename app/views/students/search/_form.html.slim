@@ -1,0 +1,21 @@
+= search_form_for @search, :html => {:id => 'search-students'} do |f|
+  .row-fluid
+    .span12.well
+      h4= t('search')
+      .tabbable.tabs-right
+        ul.nav.nav-tabs
+          li.active
+            a#student-search-tab data-toggle="tab" href="#student"
+              = t('student')
+          li
+            a#student-address-search-tab data-toggle="tab" href="#address"
+              = t('address')
+        .tab-content
+          #student.tab-pane.active
+            = render :partial => 'students/search/student', :locals => {:f => f}
+          #address.tab-pane
+            = render :partial => 'students/search/address', :locals => {:f => f}
+  = hidden_field_tag "autocomplete_field"
+    
+        
+  

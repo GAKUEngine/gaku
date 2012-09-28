@@ -133,6 +133,8 @@ en:
     course_added: 'Course added to course group'
     list: 'Course Groups List'
     show: 'Course Group'
+    course_group_recover: 'Course Group Recovered'
+    course_group_delete: 'Course group was successfully destroyed.'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
