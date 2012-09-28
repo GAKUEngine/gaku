@@ -6,6 +6,10 @@ $('#exam_exam_portions_form form').each (function(){
 $('#exam-exam_portions table tbody').append('<%= escape_javascript(render :partial => "exams/exam_portions/show", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_portion => @exam.exam_portions.last}) %>');
 $('.exam-portions-count').html("<%= t('exam_portions.list') + ' ( ' + @exam.exam_portions.count.to_s + ' )' %>");
 <% if @exam.use_weighting? %>
-  $('.weight-check-widget').html('');
-  $('.weight-check-widget').html('<%= escape_javascript(render :partial => "weight_check_widget", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam => @exam} ) %>');
+  $('.exam-portions-weight thead tr').append('<th class="btn-warning"> <%= @exam.exam_portions.last.name+ " " + t("exams.weight") %> </th>')
+  $('.exam-portions-weight tbody tr').append('<%= escape_javascript(render :partial => "exams/exam_portions/exam_portion_weight_td", :formats => [:html], :handlers => [:erb, :slim], :locals => {:portion => @exam.exam_portions.last}) %>')
+  var total = $('#weight-total').text();
+  var totalFl = parseFloat(total)+ <%= @exam.exam_portions.last.weight.to_f %>;
+  $("#weight-total").html(totalFl);
+
 <% end %>

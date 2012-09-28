@@ -20,6 +20,7 @@ describe 'Exam portions' do
       find('#add_exam_exam_portion a').click
       wait_until { find('#exam_exam_portions_form').visible? }
       fill_in 'exam_exam_portions_attributes_1_name', :with => 'Ubuntu'
+      fill_in 'exam_exam_portions_attributes_1_weight', :with => 100.6
       click_on 'Create Exam portion'
       wait_until { !find('#exam_exam_portions_form').visible? }
       @exam.exam_portions.count.should == 2
@@ -27,6 +28,7 @@ describe 'Exam portions' do
       within('#exam-exam_portions table'){ page.should have_content('Ubuntu') }
       page.should have_content( 'Exam portions list ( 2 )' )
       page.should have_content('Ubuntu Weight')
+      within('#weight-total'){ page.should have_content ("200.6") }
     end
     #TODO Test exam use weighting - show weighting widget
     #TODO Test exam not use weighting - hide weighting widget
