@@ -30,7 +30,7 @@ describe 'Student' do
           page.should have_content("John") 
           page.should have_content("Johny")
         end
-        sleep 0.5 #FIXME
+        sleep 1 #FIXME
         page.all('#students-index tr').size.should eql(3)
       end
       

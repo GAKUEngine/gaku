@@ -1,4 +1,11 @@
 en:
+  admin:
+    admin: "admin"
+    plural: "admin"
+    presets:
+      student: "Student Preset"
+      locale: "Locale Preset"
+
   fields:
     name: "name"
     surname: "surname"
@@ -67,6 +74,8 @@ en:
     phone: "Phone #"
     email: "E-Mail"
     birth: "Birth Date"
+    birth_between: "Birth date between"
+    birth_and: "and"
     admitted: "Admitted"
     graduated: "Graduated"
     add_address: "Add Address"
@@ -122,6 +131,8 @@ en:
     course_added: 'Course added to course group'
     list: 'Course Groups List'
     show: 'Course Group'
+    course_group_recover: 'Course Group Recovered'
+    course_group_delete: 'Course group was successfully destroyed.'
   num_courses: "Number of courses"
   add_course: "Add course"
   course_enrollments:
@@ -222,7 +233,7 @@ en:
     save: "Save Guardian"
     edit: "Edit guardian"
 
-  contact_types: 
+  contact_types:
     singular: "Contact Type"
     plural: "Contact Types"
     new: "New Contact Type"
@@ -287,5 +298,5 @@ en:
   import_format: "Import Format"
 
   helpers:
-    links: 
+    links:
       cancel: "Cancel"
