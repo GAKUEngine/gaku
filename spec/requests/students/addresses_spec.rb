@@ -7,7 +7,7 @@ describe 'Address' do
     @student = Factory(:student)
   end
 
-  context 'add' do 
+  context 'new' do 
     before do 
       Factory(:country, :name => "Japan")
       visit student_path(@student)
@@ -18,6 +18,8 @@ describe 'Address' do
     end
 
     it 'should add and show student address', :js => true do
+      !page.find("#new-student-address-link").visible?
+      tr_count = page.all('table#student-addresses-index tr').size
       @student.addresses.size.should eql(0)
       #required
       select "Japan", :from => 'country_dropdown'
@@ -39,6 +41,9 @@ describe 'Address' do
       page.should have_content("John Doe main address")
       page.should have_content("00359")
       page.should have_content("Toyota str.")
+      page.all('table#student-addresses-index tr').size == tr_count + 1
+      within('.student-addresses-count') { page.should have_content('Addresses list(1)') }
+      within('#new-student-address-tab-link') { page.should have_content('Addresses(1)') }
       @student.addresses.size.should eql(1)
     end
 
@@ -46,6 +51,12 @@ describe 'Address' do
       page.should_not have_css('div.address_address1formError')
       click_button "submit-student-address-button"
       wait_until { page.should have_selector('div.address_address1formError') }
+    end
+
+    it 'should cancel adding address', :js => true do 
+      click_link 'cancel-student-address-link'
+      wait_until { !page.find("#new-student-address-form").visible? }
+      find("#new-student-address-link").visible? 
     end
   end
 
@@ -86,6 +97,11 @@ describe 'Address' do
         page.should have_content('Address1 can\'t be blank')
         page.should have_content('City can\'t be blank')
       end
+
+      it 'should cancel editting', :js => true do 
+        click_link 'cancel-student-address-link'
+        wait_until { !page.find('#edit-address-modal').visible? }
+      end
     end
 
     it 'should delete a student address', :js => true do
@@ -100,9 +116,12 @@ describe 'Address' do
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table#student-addresses-index tr').size == tr_count - 1 } 
+      within('.student-addresses-count') { page.should_not have_content('Addresses list(1)') }
+      within('#new-student-address-tab-link') { page.should_not have_content('Addresses(1)') }
+      page.should_not have_content(@address.address1)
       @student.student_addresses.size.should eql(0)
       @student.addresses.size.should eql(0)
-      page.should_not have_content(@address.address1)
+      
     end
 
     it 'should set primary address', :js => true do 
