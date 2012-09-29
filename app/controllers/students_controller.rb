@@ -20,6 +20,8 @@ class StudentsController < ApplicationController
       return
     end
 
+    params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+
     respond_to do |format|
       format.js
       format.html
@@ -40,6 +42,7 @@ class StudentsController < ApplicationController
   private :export_csv_index
 
   def create
+    params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
     super do |format|
       format.js { render }
     end
