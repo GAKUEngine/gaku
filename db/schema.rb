@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.string   "address2"
     t.string   "city"
     t.string   "zipcode"
-    t.string   "state"
     t.string   "state_name"
     t.string   "title"
+    t.string   "state"
     t.boolean  "past",       :default => false
     t.integer  "country_id"
     t.integer  "state_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.integer  "student_id"
     t.integer  "guardian_id"
     t.integer  "faculty_id"
+    t.integer  "campus_id"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
@@ -193,20 +194,23 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "exam_syllabuses", :force => true do |t|
+    t.integer  "exam_id"
+    t.integer  "syllabus_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "exams", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.text     "adjustments"
     t.float    "weight"
     t.boolean  "use_weighting",     :default => false
+    t.boolean  "is_standalone",     :default => false
     t.integer  "grading_method_id"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
-  end
-
-  create_table "exams_syllabuses", :force => true do |t|
-    t.integer "exam_id"
-    t.integer "syllabus_id"
   end
 
   create_table "faculties", :force => true do |t|
@@ -290,8 +294,9 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.string   "title"
     t.text     "content"
     t.integer  "student_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "presets", :force => true do |t|
@@ -340,8 +345,8 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.string  "name"
     t.string  "abbr"
     t.string  "name_ascii"
-    t.integer "country_numcode"
     t.integer "code"
+    t.integer "country_numcode"
   end
 
   create_table "student_addresses", :force => true do |t|
@@ -389,6 +394,7 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
 
   create_table "users", :force => true do |t|
     t.boolean  "admin",                  :default => false
+    t.text     "settings"
     t.string   "locale"
     t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
