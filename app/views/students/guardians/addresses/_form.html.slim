@@ -13,7 +13,7 @@
 = javascript_include_tag 'students/addresses/form'
   
 coffee:
-  $('#new-student-guardian-address-form').on 'click','#cancel-student-guardian-address-link', (e)->
+  $(#cancel-student-guardian-address-link').click ->
     e.preventDefault()
     $('#new-student-guardian-address-link').show()
     $('#new-student-guardian-address-form').hide()  
