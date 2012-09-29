@@ -14,23 +14,39 @@ describe 'Guardian Addresses' do
     click_link 'new-student-guardian-tab-link'
     wait_until { page.has_content?('Guardians List') } 
   end
+  
+  context 'new' do 
+    it "should add and show address to a student guardian", :js => true do 
+      @student.guardians.first.addresses.count.should eql(0)
 
-  it "should add and show address to a student guardian", :js => true do 
-    @student.guardians.first.addresses.count.should eql(0)
+      find('.show-link').click
+      tr_count = page.all('table#student-guardian-addresses-index tr').size 
+      click_link 'new-student-guardian-address-link'
+      
+      wait_until { find('#new-student-guardian-address-form').visible? }
+      !page.find('#new-student-guardian-address-link').visible? 
+      select 'Japan', :from => 'country_dropdown'
+      fill_in 'address_address1', :with => 'Subaru str.'
+      fill_in 'address_city', :with => 'Nagoya'
+      click_button 'submit-student-guardian-address-button'
 
-    find('.show-link').click 
-    click_link 'new-student-guardian-address-link'
-    
-    wait_until { page.has_content?('New Address') }
-    select 'Japan', :from => 'country_dropdown'
-    fill_in 'address_address1', :with => 'Subaru str.'
-    fill_in 'address_city', :with => 'Nagoya'
-    click_button 'submit-student-guardian-address-button'
+      wait_until { !page.find('#new-student-guardian-address-form').visible? }
+      page.should have_content('Japan')
+      page.should have_content('Nagoya')
+      page.should have_content('Subaru str.')
+      page.all('table#student-guardian-addresses-index tr').size == tr_count + 1
+      within('.student-guardian-addresses-count') { page.should have_content('Addresses list(1)') }
+      @student.guardians.first.addresses.count.should  eql(1)
+    end
 
-    page.should have_content('Japan')
-    page.should have_content('Nagoya')
-    page.should have_content('Subaru str.')
-    @student.guardians.first.addresses.count.should  eql(1)
+    it 'should cancel adding', :js => true do 
+      find('.show-link').click
+      click_link 'new-student-guardian-address-link'
+
+      wait_until { find('#new-student-guardian-address-form').visible? }
+      click_link 'cancel-student-guardian-address-link'
+      wait_until { !page.find('#new-student-guardian-address-form').visible? }
+    end 
   end
 
   context 'edit, delete, set primary' do 
@@ -39,13 +55,12 @@ describe 'Guardian Addresses' do
       address1 = Factory(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
       address2 = Factory(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
       @student.guardians.first.addresses << [ address1, address2 ]
-      #@student.reload
       visit student_guardian_path(@student, @student.guardians.first)
     end
 
     it 'should edit address for student guardian', :js => true do 
       Factory(:country, :name => "Brasil")
-      #page.should have_content 'Bulgaria'
+      page.should have_content 'Bulgaria'
 
       within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
       wait_until { find('#edit-address-modal').visible? }
@@ -55,13 +70,22 @@ describe 'Guardian Addresses' do
       fill_in 'address_city', :with => 'Brasilia'
 
       click_button 'submit-student-guardian-address-button'
-      
+      wait_until { !page.find('#edit-address-modal').visible? }
       page.should have_content 'Brasil'
-      #FIXME page.should_not have_content 'Bulgaria'
+      page.should_not have_content 'Bulgaria'
+    end
+
+    it 'should cancel edit', :js => true do 
+      within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
+      wait_until { find('#edit-address-modal').visible? }
+      
+      click_link 'cancel-student-guardian-address-link'
+      wait_until { !page.find('#edit-address-modal').visible? }
     end
 
     it 'should delete address for student guardian', :js => true do 
       tr_count = page.all('table#student-guardian-addresses-index tr').size
+      within('.student-guardian-addresses-count') { page.should have_content('Addresses list(2)') }
       page.should have_content('Bulgaria')
       @student.guardians.first.addresses.size.should eql(2)
 
@@ -71,8 +95,9 @@ describe 'Guardian Addresses' do
       page.driver.browser.switch_to.alert.accept
 
       wait_until { page.all('table#student-guardian-addresses-index tr').size == tr_count - 1 } 
-      @student.guardians.first.addresses.size.should eql(1)
+      within('.student-guardian-addresses-count') { page.should_not have_content('Addresses list(2)') }
       page.should_not have_content('Bulgaria')
+      @student.guardians.first.addresses.size.should eql(1)
     end
 
  
