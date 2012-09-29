@@ -12,7 +12,7 @@ class Students::Guardians::AddressesController < ApplicationController
 
 	def new
 		super do |format|
-			format.js {render 'students/guardians/addresses/new'}
+			format.js { render 'students/guardians/addresses/new' }
 		end	
 	end
 
@@ -27,7 +27,7 @@ class Students::Guardians::AddressesController < ApplicationController
   
   def edit
     super do |format|
-      format.js {render 'students/guardians/addresses/edit'}  
+      format.js { render 'students/guardians/addresses/edit' }  
     end  
   end
 
