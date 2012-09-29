@@ -1,4 +1,4 @@
-$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list') %>');
+$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
 
 <%- unless @student.contacts.blank? %>
 	$('.student-contact-table').find('#contact-<%= @student.contacts.first.id %> .make_primary').addClass('btn-primary');

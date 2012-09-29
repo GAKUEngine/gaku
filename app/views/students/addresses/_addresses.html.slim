@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-addresses-count
-        = @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list')
+        = @student.addresses.count != 0 ? t('addresses.list') + "(" + @student.addresses.count.to_s + ")" : t('addresses.list')
     .pull-right
       = ajax_link_to_new t('students.add_address'), new_student_address_path(@student), :id => 'new-student-address-link'
   .row-fluid

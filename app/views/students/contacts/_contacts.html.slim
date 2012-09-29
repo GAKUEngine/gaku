@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-contacts-count
-        = @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list')
+        = @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list')
   .row-fluid
     table#student-contacts-index.index.table.table-striped.table-bordered.table-condensed
       thead

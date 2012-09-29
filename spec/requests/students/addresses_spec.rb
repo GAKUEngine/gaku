@@ -106,8 +106,9 @@ describe 'Address' do
 
     it 'should delete a student address', :js => true do
       click_link 'new-student-address-tab-link'
-      #wait_until { page.has_content?('Addresses list') } 
       tr_count = page.all('table#student-addresses-index tr').size
+      within('#new-student-address-tab-link') { page.should have_content('Addresses(1)') }
+      within('#new-student-address-tab-link') { page.should have_content('Addresses(1)') }
       page.should have_content(@address.address1)
       @student.addresses.size.should eql(0)
       @student.student_addresses.size.should eql(1)

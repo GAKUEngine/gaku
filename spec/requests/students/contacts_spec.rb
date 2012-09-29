@@ -94,9 +94,9 @@ describe 'Contact' do
 
     it "should delete a student contact", :js => true do
       visit student_path(@student)
-      wait_until { page.has_content?('Contacts list') } 
-      
+
       tr_count = page.all('table#student-contacts-index tr').size
+      within('.student-contacts-count') { page.should have_content('Contacts list(1)') }
       page.should have_content(@contact.data)
       @student.contacts.size.should eql(1)
 

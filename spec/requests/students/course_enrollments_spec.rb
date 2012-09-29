@@ -46,6 +46,8 @@ describe 'CourseEnrollments' do
     wait_until { page.has_content?('Courses list') }
 
     tr_count = page.all('table#student-course-enrollments-index tr').size
+    within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
+    within('#new-student-course-enrollment-tab-link') { page.should have_content('Courses(1)') }
     page.should have_content(@course.code)
     @student.courses.size.should eql(1)
 
