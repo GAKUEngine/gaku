@@ -24,7 +24,7 @@ class Exam < ActiveRecord::Base
 
   has_many :attendances, :as => :attendancable
 
-  attr_accessible :name, :description, :weight, :use_weighting, :adjustments, :exam_portions_attributes
+  attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
 
@@ -33,7 +33,7 @@ class Exam < ActiveRecord::Base
 
   after_create :build_default_exam_portion
 
-  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 } if Exam.column_names.include?('is_standalone')
+  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
 
 
   def max_score
