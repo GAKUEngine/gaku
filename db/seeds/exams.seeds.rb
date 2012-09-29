@@ -1,0 +1,1 @@
+Exam.create(:name => 'Biology Exam')

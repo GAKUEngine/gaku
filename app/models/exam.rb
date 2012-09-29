@@ -33,7 +33,7 @@ class Exam < ActiveRecord::Base
 
   after_create :build_default_exam_portion
 
-  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+  scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 } if Exam.column_names.include?('is_standalone')
 
 
   def max_score
@@ -47,7 +47,12 @@ class Exam < ActiveRecord::Base
 
   private
     def build_default_exam_portion
-      exam_portion = self.exam_portions.first
+      if self.exam_portions.any? 
+        exam_portion = self.exam_portions.first
+      else 
+        exam_portion = self.exam_portions.create(:name => self.name)
+      end
+
       exam_portion.is_master = true
       if self.name == ""
         exam_portion.name = self.name
