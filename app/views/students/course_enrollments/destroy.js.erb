@@ -1,2 +1,2 @@
-$('#new-student-course-enreollment-tab-link').html('<%= @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural') %>');
-$('.student-courses-count').html('<%= @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list') %>');
+$('#new-student-course-enrollment-tab-link').html('<%= @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural') %>');
+$('.student-course-enrollments-count').html('<%= @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list') %>');

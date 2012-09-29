@@ -3,6 +3,9 @@
     .pull-left
       h4.h4-vm.student-course-enrollments-count
         = @student.courses.count != 0 ? t('courses.list') + "（" + @student.courses.count.to_s + "）" : t('courses.list')
+
+    .pull-right
+      = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link"
   .row-fluid
     .span12
       table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed
@@ -13,11 +16,8 @@
             th =t("options")
         tbody
           = render :partial => 'students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
-hr
+
 #new-student-course-enrollment-form
-.row_fluid
-  = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link", :class => "span3"
-hr
 
 coffee:
   $("#new-student-course-enrollment-link").click ->
@@ -27,4 +27,3 @@ coffee:
   $("#cancel-student-course-enrollment-link").click ->
     $("#new-student-course-enrollment-form").hide()
     $("#new-student-course-enrollment-link").show()
-  

@@ -111,7 +111,7 @@ en:
     plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Courses List"
+    list: "Courses list"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"

@@ -10,17 +10,11 @@
   .row-fluid style="margin-top:10px"
     .span8
 		  = course_enrollment_form.submit t('course_enrollments.create'), :id => 'submit-student-course-enrollment-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-    = link_to_cancel :id => "cancel-student-course-enrollment_link", :class => "span4 btn btn-danger"
+    = link_to_cancel :id => "cancel-student-course-enrollment-link", :class => "span4 btn btn-danger"
 
 coffee:
-  $("#guardian_cancel").click ->
-    $("#new_student_course_link").show()
-    $("#add_new_student_guardian").html("")
-  
-  $("#guardian_save_link").live("ajax:success", (data, status, xhr) ->
-    #add new record to list
-    $("#add_guardian_link").show()
-    $("#add_new_student_guardian").html("")
-  )
+  $("#cancel-student-course-enrollment-link").click ->
+    $("#new-student-course-enrollment-link").show()
+    $("#new-student-course-enrollment-form").html("")
 
   $('#new-student-course-enrollment-form form').validationEngine()
