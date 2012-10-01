@@ -2,9 +2,8 @@
   $('#course-students-index tbody').append('<%= escape_javascript(render :partial => "courses/enrollments/enrolled", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => enrollment}) %>');
 <% } %>
 $('#new-course-class-group-link').show();
-var flashError = "<%=flash.now[:error]%>";
-if (flashError){
-  $(".flash-error").html(flashError);
-}else{
+<% if flash.any? %>
+	$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+<% else %>
   $(".flash-error").html("");
-}
+<% end %>
