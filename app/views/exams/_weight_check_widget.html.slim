@@ -20,17 +20,3 @@
         th.btn-inverse = t("exams.total_weight")
       tbody
       td#weight-total.vm = total
-
-javascript:
-  $('.exam-portion-weight').change(function() {
-    var sum = 0
-    $('.exam-portion-weight').each(function() {
-      //add only if the value is number
-      if(!isNaN(this.value) && this.value.length!=0) {
-        sum += parseFloat(this.value);
-      }
-      //TODO change model weight too
-    });
-    $('#weight-total').text(sum);
-  });
-  
