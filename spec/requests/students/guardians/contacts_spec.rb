@@ -12,7 +12,7 @@ describe 'Guardian Contacts' do
 
     visit student_path(@student) 
     click_link 'new-student-guardian-tab-link'
-    wait_until { page.has_content?('Guardians List') } 
+    wait_until { page.has_content?('Guardians list') } 
   end
 
   context 'new' do 
