@@ -3,7 +3,7 @@ class ExamPortionsController < ApplicationController
   inherit_resources
 
   actions :index, :show, :new, :create, :update, :edit, :destroy
-  before_filter :load_exam, :only => [:show, :edit, :update ]
+  before_filter :load_exam, :only => [:show, :edit, :update, :destroy ]
 
   def show
     super do |format|
@@ -28,8 +28,8 @@ class ExamPortionsController < ApplicationController
     #destroy! :flash => !request.xhr?
     @exam_portion = ExamPortion.find(params[:id])
     @exam_portion.destroy
-    respond_to do |format|
-        format.js { render :nothing => true }
+    super do |format|
+      format.js { render 'exams/exam_portions/destroy' }
     end
   end
 

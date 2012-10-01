@@ -30,6 +30,7 @@ describe 'Exam portions' do
       page.should have_content('Ubuntu Weight')
       within('#weight-total'){ page.should have_content ("200.6") }
     end
+
     #TODO Test exam use weighting - show weighting widget
     #TODO Test exam not use weighting - hide weighting widget
 
@@ -39,13 +40,19 @@ describe 'Exam portions' do
       fill_in 'exam_portion_name', :with => 'MacOS'
       click_on 'Save exam portion'
       wait_until { !find('#editExamPortionModal').visible? }
-      within("#exam_portion_#{@exam.exam_portions.first.id}"){ page.should have_content('MacOS') } #TODO 
+      within("#exam_portion_#{@exam.exam_portions.first.id}"){ page.should have_content('MacOS') } 
     end
 
     pending 'should show a portion' do
     end
-
-    pending 'should delete a portion' do
+    
+    it 'should delete a portion', :js => true do
+      exam_portion_id = @exam.exam_portions.first.id
+      within("#exam-exam_portions table tbody tr"){ find('.delete-exam-portion-link').click }
+      page.driver.browser.switch_to.alert.accept
+      wait_until { !page.find("#exam_portion_#{exam_portion_id}").visible? }
+      @exam.exam_portions.count.should == 0
+      page.should have_content( 'Exam portions list ( 0 )' )
     end
 
 
