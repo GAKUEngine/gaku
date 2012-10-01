@@ -395,6 +395,7 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
   create_table "users", :force => true do |t|
     t.boolean  "admin",                  :default => false
     t.text     "settings"
+    t.string   "locale"
     t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"

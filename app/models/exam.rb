@@ -24,7 +24,7 @@ class Exam < ActiveRecord::Base
 
   has_many :attendances, :as => :attendancable
 
-  attr_accessible :name, :description, :weight, :use_weighting, :adjustments, :exam_portions_attributes
+  attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes
 
   accepts_nested_attributes_for :exam_portions
 
@@ -47,7 +47,12 @@ class Exam < ActiveRecord::Base
 
   private
     def build_default_exam_portion
-      exam_portion = self.exam_portions.first
+      if self.exam_portions.any? 
+        exam_portion = self.exam_portions.first
+      else 
+        exam_portion = self.exam_portions.create(:name => self.name)
+      end
+
       exam_portion.is_master = true
       if self.name == ""
         exam_portion.name = self.name

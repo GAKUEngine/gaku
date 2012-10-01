@@ -9,4 +9,8 @@
 	  = link_to_cancel  :id => 'cancel-student-guardian-contact-link', :class => 'btn'
 
 coffee:
+  $("#cancel-student-guardian-contact-link").click ->
+    $("#new-student-guardian-contact-link").show()
+    $("#new-student-guardian-contact-form").html("")
+
   $('.new-student-guardian-contact-form').validationEngine()
