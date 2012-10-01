@@ -102,6 +102,12 @@ module ApplicationHelper
     button_tag(content_tag('span', text), attributes)
   end
 
+
+   
+  def print_count(object, text)
+    object.count != 0 ? text + "(" + object.count.to_s + ")" : text
+  end
+
   def sortable(column, title = nil)
   	direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
   	css_class = column == sort_column ? "current #{sort_direction}" : nil
