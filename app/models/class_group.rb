@@ -21,4 +21,5 @@ class ClassGroup < ActiveRecord::Base
   has_many :semesters
   
   attr_accessible :name, :grade, :homeroom
+
 end
