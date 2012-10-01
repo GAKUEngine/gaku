@@ -67,7 +67,7 @@ describe 'Courses' do
 
     it "should delete a course" do
       @syllabus.courses.count.should eql(1)
-      page.should have_content("Courses List")
+      page.should have_content("Courses list")
       page.should have_content(@course.code)
       tr_count = page.all('table#courses-index tr').size
       

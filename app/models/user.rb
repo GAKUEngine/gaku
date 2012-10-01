@@ -26,10 +26,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 	
 	#in :accessors should be added all settings that user can set and check againts Preset         
-  store :settings, :accessors => [:locale]
+  #store :settings, :accessors => [:locale]
 
   #ActiveRecord::Store accessors can be validated as other model attributes 
   # validates :language, :numericality => true
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :locale
 end

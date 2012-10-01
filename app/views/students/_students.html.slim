@@ -1,6 +1,7 @@
 table#students-index.index.table.table-striped.table-bordered.table-condensed
   thead
     tr
+      th
       th.btn-inverse = sort_link @search, "surname", t("surname")
       th.btn-inverse = sort_link @search, "name", t("name")
       th.btn-inverse = student_sortable "birth_date", t('birth')
@@ -13,3 +14,44 @@ table#students-index.index.table.table-striped.table-bordered.table-condensed
       
   tbody
     =render :partial => 'student', :collection => @students, :as => 'student'
+
+
+javascript:
+  
+  $("input.student-check").change (function() {
+    var thisCheck = $(this);
+    if (thisCheck.is (':checked'))
+    {
+      surname = $(this).closest('tr').find('td.surname').text();
+      name = $(this).closest('tr').find('td.name').text();
+      $('#students-checked').append("<tr class=" + $(this).closest('tr').attr('class') + "><td>" + name + "</td><td>" + surname + "</td></tr>"); 
+      $('#selected-students').append('<input type="hidden" name="selected_students[]" value="' + $(this).closest('tr').attr('class') + '" />');
+      $('#students-checked-div').slideDown();
+      chosen_trs = $('#chosen-table').find('tbody tr');
+      $('.chosen-count').html('(' + chosen_trs.length + ')')
+    }else{
+      $('#students-checked tr.' + $(this).closest('tr').attr('class')).remove();
+      if($('#students-checked tr').length == 0){
+        $('#students-checked-div').slideUp();
+      }else {
+        chosen_trs = $('#chosen-table').find('tbody tr');
+        $('.chosen-count').html('(' + chosen_trs.length + ')')
+      }
+    }
+  });
+
+  $('.show-chosen-table').click (function(event) {
+    event.preventDefault();
+    $('.show-chosen-table').hide();
+    $('.hide-chosen-table').show();
+    $('#chosen-table').show();
+    $('#chosen-actions').show();
+  });
+  $('.hide-chosen-table').click (function(event) {
+    event.preventDefault();
+    $('.hide-chosen-table').hide();
+    $('.show-chosen-table').show();
+    $('#chosen-table').hide();
+    $('#chosen-actions').hide();
+  });
+  

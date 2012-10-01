@@ -61,13 +61,13 @@
       ul.nav.nav-tabs
         li.active
           a#new-student-address-tab-link data-toggle="tab" href="#addresses"
-            = @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses')
+            = @student.addresses.count != 0 ? t('addresses.addresses') + "(" + @student.addresses.count.to_s + ")" : t('addresses.addresses')
         li
           a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
-            = @student.guardians.count != 0 ? t('guardians.guardians') + "（" + @student.guardians.count.to_s + "）" : t('guardians.guardians')
+            = @student.guardians.count != 0 ? t('guardians.guardians') + "(" + @student.guardians.count.to_s + ")" : t('guardians.guardians')
         li
           a#new-student-course-enrollment-tab-link data-toggle="tab" href="#courses"
-            = @student.courses.count != 0 ? t('courses.plural') + "（" + @student.courses.count.to_s + "）" : t('courses.plural')
+            = @student.courses.count != 0 ? t('courses.plural') + "(" + @student.courses.count.to_s + ")" : t('courses.plural')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'students/addresses/addresses'
