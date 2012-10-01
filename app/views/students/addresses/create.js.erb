@@ -1,5 +1,4 @@
 $('#student-addresses-index tbody').append('<%= escape_javascript(render :partial => "address", :formats => [:html], :handlers => [:erb, :slim], :locals => {:address => @student.addresses.last}) %>');
-$('.student-addresses-count').html('<%= @student.addresses.count %>');
 
 <%- if @student.addresses.count == 1%>
 	$('#student-addresses-index tbody tr td.primary_address a').first().addClass('btn-primary')
@@ -8,5 +7,5 @@ $('.student-addresses-count').html('<%= @student.addresses.count %>');
 $('#new-student-address-form').html('');
 $('#new-student-address-link').show();
 
-$('#new-student-address-tab-link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "（" + @student.addresses.count.to_s + "）" : t('addresses.addresses') %>');
-$('.addresses-count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "（" + @student.addresses.count.to_s + "）" : t('addresses.list') %>');
+$('#new-student-address-tab-link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "(" + @student.addresses.count.to_s + ")" : t('addresses.addresses')%>');
+$('.student-addresses-count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "(" + @student.addresses.count.to_s + ")" : t('addresses.list')%>');

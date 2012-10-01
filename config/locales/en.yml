@@ -37,6 +37,7 @@ en:
   none: "None"
   date_placeholder: "YYYY-MM-DD"
   search: "Search"
+  hide: "Hide"
   addresses:
     addresses: "Addresses"
     new: "New Address"
@@ -64,6 +65,8 @@ en:
   teacher: "Instructor"
   student: "Student"
   students:
+    import: "CSV Import"
+    export: "CSV Export"
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
@@ -85,6 +88,7 @@ en:
     add_contact: "Add Contact"
     create_contact: "Create Contact"
     contact_type: 'Contact Type'
+    chosen_students: "Chosen students"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -111,7 +115,7 @@ en:
     plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Courses List"
+    list: "Courses list"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
@@ -227,7 +231,7 @@ en:
   guardian: "Guardian"
   guardians:
     guardians: "Guardians"
-    list: "Guardians List"
+    list: "Guardians list"
     relationship: "Relationship"
     add: "Add Guardian"
     save: "Save Guardian"
@@ -254,7 +258,7 @@ en:
   note: "Notes"
   notes:
     notes: "Notes"
-    list: "Notes List"
+    list: "Notes list"
     title: "Note Title"
     content: "Content"
     new: "New Note"
@@ -294,11 +298,9 @@ en:
     master: "Master exam portion"
     save: "Save exam portion"
   options: "Options"
-
   notice:
     picture_uploaded: "Picture successfully uploaded"
   import_format: "Import Format"
-
   helpers:
     links:
       cancel: "Cancel"

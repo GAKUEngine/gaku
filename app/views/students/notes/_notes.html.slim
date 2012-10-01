@@ -1,8 +1,10 @@
 #student-notes
   .row-fluid
       .pull-left
-        h4.h4-vm.notes_count
+        h4.h4-vm.student-notes-count
           = @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list')
+      .pull-right
+          = ajax_link_to_new t("notes.add"), new_student_note_path(@student), :id => "new-student-note-link"
   .row-fluid
     .span12
       table#student-notes-index.index.table.table-striped.table-bordered.table-condensed
@@ -11,12 +13,8 @@
             th
             th =t("notes.title")
             th =t("notes.content")
-            th =t("options")
+            th.btn-info style="width:100px" =t 'manage'
         tbody
           =render :partial => 'students/notes/note', :collection => @student.notes, :as => :note 
   hr
-
-.row-fluid
-  = ajax_link_to_new t("notes.add"), new_student_note_path(@student), :id => "new-student-note-link", :class => "span3"
-
 #new-student-note-form

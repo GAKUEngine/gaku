@@ -7,5 +7,4 @@ $('.student-notes-count').html('<%= @student.notes.count %>');
 $('#new-student-note-form').html('');
 $('#new-student-note-link').show();
 
-$('#new-student-note-tab-link').html('<%= @student.notes.count != 0 ? t('notes.notes') + "（" + @student.notes.count.to_s + "）" : t('notes.notes') %>');
-$('.student-notes-count').html('<%= @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list') %>');
+$('.student-notes-count').html('<%= @student.notes.count != 0 ? t('notes.list') + "(" + @student.notes.count.to_s + ")" : t('notes.list') %>');

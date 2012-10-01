@@ -1,22 +1,27 @@
-.row-fluid
-  .span12.well
-    h3 Guardian Addresses
-    table#student-guardian-addresses-index.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th.btn-inverse style="width:28px"
-              i.icon-white.icon-home
-            th.btn-inverse =t 'addresses.title'
-            th.btn-inverse =t 'addresses.country'
-            th.btn-inverse =t 'addresses.zipcode'
-            th.btn-inverse =t 'addresses.state'
-            th.btn-inverse =t 'addresses.city'
-            th.btn-inverse =t 'addresses.address1'
-            th.btn-inverse =t 'addresses.address2'
-            th.btn-info style="width:61px" =t 'manage'
-        tbody
-          =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
-    br/
-    = ajax_link_to_new t('addresses.add'), new_student_guardian_address_path(@student, @guardian), :id => 'new-student-guardian-address-link'
-    
+#student-guardian-addresses
+  .row-fluid
+    .pull-left
+      h4.h4-vm.student-guardian-addresses-count
+        = @guardian.addresses.count != 0 ? t('addresses.list') + "(" + @guardian.addresses.count.to_s + ")" : t('addresses.list')
+    .pull-right
+      = ajax_link_to_new t('addresses.add'), new_student_guardian_address_path(@student, @guardian), :id => 'new-student-guardian-address-link'
+
+  .row-fluid
+    .span12
+      table#student-guardian-addresses-index.guardian_address_table.index.table.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.btn-inverse style="width:28px"
+                i.icon-white.icon-home
+              th.btn-inverse =t 'addresses.title'
+              th.btn-inverse =t 'addresses.country'
+              th.btn-inverse =t 'addresses.zipcode'
+              th.btn-inverse =t 'addresses.state'
+              th.btn-inverse =t 'addresses.city'
+              th.btn-inverse =t 'addresses.address1'
+              th.btn-inverse =t 'addresses.address2'
+              th.btn-info style="width:61px" =t 'manage'
+          tbody
+            =render :partial => 'students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
+br/   
 #new-student-guardian-address-form

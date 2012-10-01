@@ -4,7 +4,15 @@ ja:
     plural: "複数"
     presets:
       student: "生徒用プリセット"
+      students:
+        gender: "生徒の性別"
+        country: "国"
+        state: "県"
+        city: "市・区"
       locale: "ロケール用プリセット"
+      save: "プリセットを保存"
+    course_groups_diposals: "授業グループ削除"
+    exams_disposals: "試験削除"
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -26,6 +34,7 @@ ja:
   none: "未登録"
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
+  hide: "Hide"
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -52,6 +61,8 @@ ja:
   teacher: "教師"
   student: "生徒"
   students:
+    import: "生徒情報をCSVからインポート"
+    export: "生徒情報をCSVで保存"
     id: "生徒番号"
     show: "生徒照会"
     new: "新規生徒登録"
@@ -75,6 +86,7 @@ ja:
     create_contact: "連絡先を作成"
     choose_gender: '性別を選択してください'
     class_group_enrollment: "登録されているクラス"
+    chosen_students: "Chosen students"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -242,7 +254,7 @@ ja:
     details: "詳細"
     primary: "主要"
     emergency: "緊急"
-    actions: "Actions"
+    actions: "アクション"
     make_primary: "優先度指定"
     list: "連絡先一覧"
     contacts: "連絡先"

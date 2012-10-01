@@ -10,3 +10,5 @@ $('#new-student-guardian-contact-form form')[0].reset();
 	var currentContact = $("#contact-<%= @contact.id %>");
 	currentContact.find('.make-primary').addClass('btn-primary');
 <% end %>	
+
+$('.student-guardian-contacts-count').html('<%= @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list')%>');

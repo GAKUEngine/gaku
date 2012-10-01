@@ -4,6 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.boolean :admin, :default => false
       t.text    :settings
+      t.string  :locale
 
       ## Trackable
       t.integer  :sign_in_count, :default => 0
