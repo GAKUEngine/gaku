@@ -1,10 +1,10 @@
-$('#student-contacts-index tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
+$('#student-contacts-index tbody').append("<%= escape_javascript(render :partial => 'contact', :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>");
 $("#new-student-contact-link").show();
 $('#new-student-contact-form').hide();
-$('#new-student-contact-form')[0].reset();
+$("#new-student-contact-form form")[0].reset();
 
-
-<% if @contact.is_primary? %>
+<%- if @contact.is_primary? %>
 	$('.student-contact').each(function() {
 		$(this).children('td.primary-contact').html('');
 		$(this).find('.primary-button a').removeClass('btn-primary');
@@ -15,4 +15,3 @@ $('#new-student-contact-form')[0].reset();
 	currentContact.find('.primary-button a').addClass('btn-primary');
 <% end %>
 
-$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
