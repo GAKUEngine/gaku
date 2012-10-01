@@ -38,4 +38,17 @@ class ClassGroupEnrollmentsController < ApplicationController
     render json: @students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
   end
 
+  def enroll_students
+    
+    params[:selected_students].each {|student|
+      student_id = student.split("-")[1].to_i
+      class_group_enrollment = ClassGroupEnrollment.new(:class_group_id => params[:class_group_id], :student_id => student_id)
+      # handle not saving course enrollment
+      class_group_enrollment.save!
+    }
+    respond_to do |format|
+      format.js { render :nothing => true, :notice => 'fafafafafafa' }
+    end
+  end
+
 end

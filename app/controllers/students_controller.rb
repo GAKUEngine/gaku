@@ -20,6 +20,8 @@ class StudentsController < ApplicationController
       return
     end
 
+    @class_groups = ClassGroup.all
+
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
     respond_to do |format|
