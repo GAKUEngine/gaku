@@ -1,17 +1,20 @@
-$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
-$('#student-contacts-index tbody').append("<%= escape_javascript(render :partial => 'contact', :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>");
-$("#new-student-contact-link").show();
-$('#new-student-contact-form').hide();
-$("#new-student-contact-form form")[0].reset();
+<%- if @contact.errors.any? %>
+	$('#new-student-contact-form-errors').html('<%= escape_javascript(render :partial => "/shared/errors", :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @contact} ) %>');
+<%- else %>
+	$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
+	$('#student-contacts-index tbody').append("<%= escape_javascript(render :partial => 'contact', :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>");
+	$("#new-student-contact-link").show();
+	$('#new-student-contact-form').hide();
+	$("#new-student-contact-form form")[0].reset();
+	$('#new-student-contact-form-errors').html('');
+	<%- if @contact.is_primary? %>
+		$('.student-contact').each(function() {
+			$(this).children('td.primary-contact').html('');
+			$(this).find('.primary-button a').removeClass('btn-primary');
+		});
 
-<%- if @contact.is_primary? %>
-	$('.student-contact').each(function() {
-		$(this).children('td.primary-contact').html('');
-		$(this).find('.primary-button a').removeClass('btn-primary');
-	});
-
-	var currentContact = $("#contact-<%= @contact.id %>");
-	currentContact.children('td.primary-contact').html('Primary');
-	currentContact.find('.primary-button a').addClass('btn-primary');
+		var currentContact = $("#contact-<%= @contact.id %>");
+		currentContact.children('td.primary-contact').html('Primary');
+		currentContact.find('.primary-button a').addClass('btn-primary');
+	<% end %>
 <% end %>
-
