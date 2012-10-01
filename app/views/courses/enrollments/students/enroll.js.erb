@@ -2,3 +2,6 @@ $('#course-students-index tbody').append('<%= escape_javascript(render :partial 
 $('#course-enrollment-student-id').val('');
 $('#new-course-student-form').hide();
 $('#new-course-student-link').show();
+
+$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students, t("course_enrollments.enrollments")) %>');
+$('.course-students-count').html('<%= print_count(@course.students, t("students.list")) %>');
