@@ -1,7 +1,11 @@
-=form_tag update_presets_admin_presets_path, :method => :put do
-	
-	=fields_for 'presets' do |language|
-		=language.label :language, "Language"
-		=language.text_field :language, :value => @preset_hash[:language]
+.row-fluid
+  .span12.well
+    =form_tag update_presets_admin_presets_path, :method => :put do
 
-	=submit_tag 
+    	=fields_for 'presets' do |language|
+    		=language.label :language, "Language"
+    		=language.text_field :language, :value => @preset_hash[:language]
+
+.row-fluid
+  .span12.well
+    =submit_tag t('admin.presets.save'), :class => 'btn btn-primary'
