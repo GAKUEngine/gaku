@@ -15,4 +15,4 @@ $('#new-student-contact-form')[0].reset();
 	currentContact.find('.primary-button a').addClass('btn-primary');
 <% end %>
 
-$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
+$('.student-contacts-count').html('<%= print_count(@student.contacts, t("contacts.list")) %>');

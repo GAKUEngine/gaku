@@ -2,9 +2,9 @@ $('#student-notes-index tbody').append('<%= escape_javascript(render :partial =>
 $('#new-student-note-form form').each(function() {
 	this.reset();
 });
-$('.student-notes-count').html('<%= @student.notes.count %>');
 
 $('#new-student-note-form').html('');
 $('#new-student-note-link').show();
 
-$('.student-notes-count').html('<%= @student.notes.count != 0 ? t('notes.list') + "(" + @student.notes.count.to_s + ")" : t('notes.list') %>');
+$('#new-student-note-tab-link').html('<%= print_count(@student.notes, t('notes.notes')) %>');
+$('.student-notes-count').html('<%= print_count(@student.notes, t('notes.list')) %>');

@@ -7,5 +7,5 @@ $('#student-addresses-index tbody').append('<%= escape_javascript(render :partia
 $('#new-student-address-form').html('');
 $('#new-student-address-link').show();
 
-$('#new-student-address-tab-link').html('<%= @student.addresses.count != 0 ? t('addresses.addresses') + "(" + @student.addresses.count.to_s + ")" : t('addresses.addresses')%>');
-$('.student-addresses-count').html('<%= @student.addresses.count != 0 ? t('addresses.list') + "(" + @student.addresses.count.to_s + ")" : t('addresses.list')%>');
+$('#new-student-address-tab-link').html('<%= print_count(@student.addresses, t('addresses.addresses')) %>');
+$('.student-addresses-count').html('<%= print_count(@student.addresses, t('addresses.list')) %>');

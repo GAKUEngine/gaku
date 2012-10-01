@@ -4,4 +4,4 @@ $('#new-student-guardian-address-form').hide();
 $('#new-student-guardian-address-form form')[0].reset();
 $('#new-student-guardian-address-link').show();
 
-$('.student-guardian-addresses-count').html('<%= @guardian.addresses.count != 0 ? t('addresses.list') + "(" + @guardian.addresses.count.to_s + ")" : t('addresses.list')%>');
+$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses, t('addresses.list')) %>');
