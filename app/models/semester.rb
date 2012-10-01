@@ -15,6 +15,7 @@ class Semester < ActiveRecord::Base
   
   attr_accessible :starting, :ending, :class_group_id 
 
+  validates :class_group_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semesters.uniqueness')}
   validate :ending_after_starting
 
   private

@@ -270,6 +270,7 @@ en:
     ending:   "Ending"
     save: "Save semester"
     ending_after_starting: 'should be after Starting'
+    uniqueness: "have this semester added"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
   notice:
