@@ -1,9 +1,9 @@
 <%- if @exam_syllabus.errors.any? %>
-	$('#add-existing-exam-form-errors').html('<%= escape_javascript(render :partial => "/shared/errors", :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @exam_syllabus} ) %>');
+	$('#add-existing-exam-form-errors').html('<%= render_js_partial("/shared/errors", {:target => @exam_syllabus}) %>');
 <%- else %>
-	$('#add-existing-exam-form').html('<%= escape_javascript(render :partial => "syllabuses/exams/select_form", :formats => [:html], :handlers => [:erb, :slim], :locals => {:syllabus => @syllabus}) %>');
-	$('#add-existing-exam-form').hide()
+	$('#add-existing-exam-form').html('<%= render_js_partial("syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
+	$('#add-existing-exam-form').hide();
 
-$('#syllabus-exams-index tbody').append('<%= escape_javascript(render :partial => "syllabuses/exams/exam", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
-$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+  $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
+  $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
 <% end %>

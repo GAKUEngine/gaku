@@ -1,4 +1,4 @@
-$('#student-guardian-contacts-index tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$('#student-guardian-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 $("#new-student-guardian-contact-link").show();
 $('#new-student-guardian-contact-form').hide();
 $('#new-student-guardian-contact-form form')[0].reset();
@@ -11,4 +11,4 @@ $('#new-student-guardian-contact-form form')[0].reset();
 	currentContact.find('.make-primary').addClass('btn-primary');
 <% end %>	
 
-$('.student-guardian-contacts-count').html('<%= @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list')%>');
+$('.student-guardian-contacts-count').html('<%= print_count(@guardian.contacts, t("contacts.list")) %>');

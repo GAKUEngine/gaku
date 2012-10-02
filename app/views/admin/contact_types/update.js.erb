@@ -1,2 +1,2 @@
-$('tr#contact-type-<%= @contact_type.id %>').html('<%= escape_javascript(render :partial => "contact_type_fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact_type => @contact_type}) %>');
+$('tr#contact-type-<%= @contact_type.id %>').html('<%= render_js_partial("contact_type_fields", {:contact_type => @contact_type}) %>');
 $("#edit-contact-type-modal").modal("hide");

@@ -2,7 +2,7 @@
   .row-fluid
       .pull-left
         h4.h4-vm.student-notes-count
-          = @student.notes.count != 0 ? t('notes.list') + "（" + @student.notes.count.to_s + "）" : t('notes.list')
+          = print_count(@student.notes, t('notes.list'))
       .pull-right
           = ajax_link_to_new t("notes.add"), new_student_note_path(@student), :id => "new-student-note-link"
   .row-fluid

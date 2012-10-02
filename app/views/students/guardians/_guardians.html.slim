@@ -3,7 +3,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardians-count
-        = @student.guardians.count != 0 ? t('guardians.list') + "(" + @student.guardians.count.to_s + ")" : t('guardians.list')
+        = print_count(@student.guardians, t('guardians.list'))
     .pull-right
       = ajax_link_to_new t('guardians.add'), new_student_guardian_path(@student), :id => "new-student-guardian-link"
   .row-fluid

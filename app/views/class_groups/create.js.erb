@@ -1,2 +1,2 @@
-$('table#class-groups-index tbody').append('<%= escape_javascript(render :partial => "class_group", :formats => [:html], :handlers => [:erb, :slim], :locals => {:class_group => @class_group}) %>')
+$('table#class-groups-index tbody').append('<%= render_js_partial("class_group", {:class_group => @class_group}) %>');
 $('#new-class-group-form form')[0].reset();
