@@ -1,2 +1,2 @@
-$('tr#student-<%= @student.id %>').html('<%= escape_javascript(render :partial => "shared/fields/student_fields", :formats => [:html], :handlers => [:erb, :slim], :locals => {:student => @student}) %>');
+$('tr#student-<%= @student.id %>').html('<%= render_js_partial("shared/fields/student_fields", {:student => @student}) %>');
 $('#edit-student-modal').modal('hide');

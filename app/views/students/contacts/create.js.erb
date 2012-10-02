@@ -1,4 +1,4 @@
-$('#student-contacts-index tbody').append('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>');
+$('#student-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 $("#new-student-contact-link").show();
 $('#new-student-contact-form').hide();
 $('#new-student-contact-form')[0].reset();

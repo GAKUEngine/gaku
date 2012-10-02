@@ -1,4 +1,4 @@
-$('#student-notes-index tbody').append('<%= escape_javascript(render :partial => "note", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @student.notes.last}) %>');
+$('#student-notes-index tbody').append('<%= render_js_partial("note", {:note => @student.notes.last}) %>');
 $('#new-student-note-form form').each(function() {
 	this.reset();
 });
