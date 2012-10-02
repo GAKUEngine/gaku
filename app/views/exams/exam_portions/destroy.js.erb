@@ -2,3 +2,5 @@ $(".delete-exam-portion-link").live('ajax:success', function(evt, data, status, 
       $(this).closest('tr').fadeOut();
 });
 $('.exam-portions-count').html("<%= t('exam_portions.list') + ' ( ' + @exam.exam_portions.count.to_s + ' )' %>");
+$('[data-id=<%= @portion_id %>]').remove();
+//TODO count total weight

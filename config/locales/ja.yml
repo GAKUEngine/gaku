@@ -299,4 +299,5 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
+    show: "Show Exam Portion"
   import_format: "インポート形式"

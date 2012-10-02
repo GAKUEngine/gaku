@@ -26,7 +26,9 @@ class ExamPortionsController < ApplicationController
 
   def destroy
     #destroy! :flash => !request.xhr?
+
     @exam_portion = ExamPortion.find(params[:id])
+    @portion_id = @exam_portion.id
     @exam_portion.destroy
     super do |format|
       format.js { render 'exams/exam_portions/destroy' }

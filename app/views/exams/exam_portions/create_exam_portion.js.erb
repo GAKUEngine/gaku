@@ -8,7 +8,14 @@ $('#exam-exam_portions table tbody').append('<%= render_js_partial("exams/exam_p
 $('.exam-portions-count').html("<%= t('exam_portions.list') + ' ( ' + @exam.exam_portions.count.to_s + ' )' %>");
 
 <% if @exam.use_weighting? %>
-  $('.exam-portions-weight thead tr').append('<th class="btn-warning"> <%= @exam.exam_portions.last.name+ " " + t("exams.weight") %> </th>')
+  
+  //if no portion added yet
+  if($('.exam-portions-weight thead tr').length==0){
+    $('.exam-portions-weight thead').append('<tr></tr>');
+    $('.exam-portions-weight tbody').append('<tr></tr>');
+  }
+
+  $('.exam-portions-weight thead tr').append('<th class="btn-warning" data-id=<%= @exam.exam_portions.last.id%>> <%= @exam.exam_portions.last.name+ " " + t("exams.weight") %> </th>')
   $('.exam-portions-weight tbody tr').append('<%= render_js_partial("exams/exam_portions/exam_portion_weight_td", {:portion => @exam.exam_portions.last}) %>')
   var total = $('#weight-total').text();
   var totalFl = parseFloat(total)+ <%= @exam.exam_portions.last.weight.to_f %>;

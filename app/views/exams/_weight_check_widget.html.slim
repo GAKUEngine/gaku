@@ -8,7 +8,7 @@
       thead
         - exam.exam_portions.each_with_index do |portion, i|
           - if i < exam.exam_portions.size - 1
-            th.btn-warning = portion.name+ " " + t("exams.weight")
+            th.btn-warning*{'data-id' =>portion.id} = portion.name+ " " + t("exams.weight")
       tbody
         - exam.exam_portions.each_with_index do |portion, i|
           - if i < exam.exam_portions.size - 1

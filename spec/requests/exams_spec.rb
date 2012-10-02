@@ -76,6 +76,15 @@ describe 'Exams' do
         wait_until { page.should have_content 'This field is required' }
       end
 
+      it 'should show weighting widget' do
+        within('#exams-index') { find('#show-exam-link').click }
+        page.should have_content('Weight')
+        page.should have_content('Total Weight')
+      end
+
+      pending 'should hide weighting widget' do
+      end
+
       it 'should edit exam from show view', :js => true do
         within('#exams-index') { find('#show-exam-link').click }
         page.should have_content('Show Exam')
