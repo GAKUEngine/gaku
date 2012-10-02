@@ -19,27 +19,6 @@
 
     =render 'students/search/form'
 
-    = search_form_for @search, :html => {:id => 'search-students'} do |f|
-      .row-fluid
-        .span12.well
-          h4= t('search')
-          .row-fluid
-            .span3
-              = f.label :surname_cont, t('surname')
-              = f.text_field :surname_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "surname") }
-            .span3
-              = f.label :name_cont, t('given_name')
-              = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
-            .span3
-              = f.label :birth_date_gteq, t("students.birth_between")
-              = f.text_field :birth_date_gteq, :placeholder => t('date_placeholder'), :class => 'span12'
-              = f.label :birth_date_lteq, t("students.birth_and")
-              = f.text_field :birth_date_lteq, :placeholder => t('date_placeholder'), :class => 'span12'
-            .span3
-              = f.label :addresses_title_cont, t('address')
-              = f.text_field :addresses_title_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "title") }
-      = hidden_field_tag "autocomplete_field"
-
     .row-fluid
       .span12.well
         #students-index
