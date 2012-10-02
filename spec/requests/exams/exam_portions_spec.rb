@@ -34,7 +34,7 @@ describe 'Exam portions' do
     #TODO Test exam use weighting - show weighting widget
     #TODO Test exam not use weighting - hide weighting widget
 
-    pending 'should edit a portion', :js => true do
+    it 'should edit a portion', :js => true do
       within("#exam-exam_portions table tbody tr"){ find('.edit-exam-portion-link').click }
       wait_until { find('#editExamPortionModal').visible? }
       fill_in 'exam_portion_name', :with => 'MacOS'
