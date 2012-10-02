@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "errors_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:errors => @errors}) %>');
+$('#modal_dialogs').html('<%== render_js_partial("errors_modal", {:errors => @errors}) %>');
 $('#errors-modal').modal('show');

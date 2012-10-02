@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "student_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:class_group_enrollment => @class_group_enrollment}) %>');
+$('#modal_dialogs').html('<%== render_js_partial("student_modal", {:class_group_enrollment => @class_group_enrollment}) %>');
 $('#student-modal').modal('show');

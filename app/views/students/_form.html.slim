@@ -54,7 +54,7 @@
     .span12.well
       .span9
         = form.submit nil, :id => 'submit-student-button', :class => "span12 btn btn-primary"
-      = link_to_back students_path, :class => "span3 btn"
+      = link_to_back students_path, :id => 'back-student-link', :class => "span3 btn"
 
 coffee:
   $('.datepicker').datepicker(

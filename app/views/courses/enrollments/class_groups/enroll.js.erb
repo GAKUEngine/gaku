@@ -1,10 +1,14 @@
 <% @not_added_students.each {|enrollment| %>
-  $('#course-students-index tbody').append('<%= escape_javascript(render :partial => "courses/enrollments/enrolled", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => enrollment}) %>');
+  $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment}) %>');
 <% } %>
 $('#new-course-class-group-link').show();
+
 var flashError = "<%=flash.now[:error]%>";
 if (flashError){
   $(".flash-error").html(flashError);
 }else{
   $(".flash-error").html("");
 }
+
+$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students, t("course_enrollments.enrollments")) %>');
+$('.course-students-count').html('<%= print_count(@course.students, t("students.list")) %>');
