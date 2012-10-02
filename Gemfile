@@ -66,9 +66,9 @@ group :test do
   gem 'guard-bundler'
   gem 'guard-spork'
   
-  platforms :darwin do
+  if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
-  end 
+  end
 end
 
 unless ENV["CI"]
