@@ -6,12 +6,14 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to_new t("students.import"), "students/importer", :class => "mr-s btn btn-primary", :id => "import-students-link"
+        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import-students-link"
         = link_to_new t("students.new"), new_student_path, :id => "new-student-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
+      .pull-right
+        = link_to "CSV Export", "students.csv", :id => 'export-students-link'
       #modal-dialogs
       #new-student-form.hide
         =render 'form'
@@ -19,9 +21,22 @@
 
     =render 'students/search/form'
 
+    .row-fluid.hide#students-checked-div
+      .span6.well
+        h4.pull-left = t("students.chosen_students")
+        h4.chosen-count.pull-left
+        .table-action.show-chosen-table.pull-right = link_to t('show'),"JavaScript:void(0);", :remote => true
+        .table-action.hide-chosen-table.pull-right.hide = link_to t('hide'),"JavaScript:void(0);", :remote => true
+        table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
+          thead
+            tr
+              th.btn-inverse = sort_link @search, "surname", t("surname")
+              th.btn-inverse = sort_link @search, "name", t("name")
+          tbody#students-checked
+        #chosen-actions.hide
+          = link_to "Enroll to class", "", :class => "btn btn-primary pull-right"
+          = link_to "Enrol to course", "", :class => "btn btn-primary pull-right"
     .row-fluid
       .span12.well
         #students-index
           =render 'students/students'
-          .pull-right
-            = link_to t("students.export"), "students.csv", :id => 'export-students-link'

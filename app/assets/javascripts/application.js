@@ -19,7 +19,6 @@
 //= require buhin/buhin.js.coffee
 //= require libgakuengine.js.coffee
 
-// require external/jquery-1.7.1.min.js
 // require gakuengine.js.coffee
 // require external/globalize.min.js
 // require external/cultures/globalize.cultures.js

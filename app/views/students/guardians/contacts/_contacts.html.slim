@@ -1,20 +1,26 @@
-.row-fluid
-  .span12.well
-    h3 Guardian Contacts
-    table#student-guardian-contacts-index.table.table-striped.table-bordered.table-condensed.guardian_contact_table
-      thead
-        tr
-          th.btn-inverse =t('contact_type')
-          th.btn-inverse =t('contacts.data')
-          th.btn-inverse =t('contacts.details')
-          th.btn-inverse =t('contacts.emergency')
-          th.btn-inverse =t('contacts.actions')
-      tbody
-        =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
+#student-guardian-contacts
   .row-fluid
-    .span12
+    .pull-left
+      h4.h4-vm.student-guardian-contacts-count
+        = @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list')
+    .pull-right
       =ajax_link_to_new t('students.add_contact'), '#', :id => 'new-student-guardian-contact-link'
-  #new-student-guardian-contact-form style='display:none' 
-    .row-fluid  
-      .span12.well
-        =render 'students/guardians/contacts/form'
+
+  .row-fluid
+    .span12    
+      table#student-guardian-contacts-index.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th.btn-inverse =t('contact_type')
+            th.btn-inverse =t('contacts.data')
+            th.btn-inverse =t('contacts.details')
+            th.btn-inverse =t('contacts.primary')
+            th.btn-inverse =t('contacts.emergency')
+            th.btn-info style="width:180px" =t 'manage'
+        tbody
+          =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
+      
+#new-student-guardian-contact-form style='display:none' 
+  .row-fluid  
+    .span12.well
+      =render 'students/guardians/contacts/form'

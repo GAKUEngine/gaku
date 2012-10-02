@@ -36,6 +36,7 @@ ja:
   none: "未登録"
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
+  hide: "Hide"
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -87,6 +88,7 @@ ja:
     create_contact: "連絡先を作成"
     choose_gender: '性別を選択してください'
     class_group_enrollment: "登録されているクラス"
+    chosen_students: "Chosen students"
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"

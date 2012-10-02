@@ -1,3 +1,4 @@
 <%-if  @guardian.contacts.any? %>
 	$('#student-guardian-contacts-index').find('#contact-<%= @guardian.contacts.first.id %> .make-primary').addClass('btn-primary');
 <% end %>
+$('.student-guardian-contacts-count').html('<%= @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list') %>');

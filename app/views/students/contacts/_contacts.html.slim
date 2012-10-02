@@ -2,7 +2,10 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-contacts-count
-        = @student.contacts.count != 0 ? t('contacts.list') + "（" + @student.contacts.count.to_s + "）" : t('contacts.list')
+        = @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list')
+    .pull-right
+        = ajax_link_to_new t('students.add_contact'), new_student_contact_path(@student), :id => 'new-student-contact-link'
+
   .row-fluid
     table#student-contacts-index.index.table.table-striped.table-bordered.table-condensed
       thead
@@ -12,11 +15,9 @@
           th.btn-inverse =t('contacts.details')
           th.btn-inverse =t('contacts.primary')
           th.btn-inverse =t('contacts.emergency')
-          th.btn-inverse =t('contacts.actions')
+          th.btn-info style="width:180px" =t 'manage'
       tbody
         =render :partial => 'students/contacts/contact', :collection => @student.contacts, :as => 'contact'
     br/ 
-
-    = ajax_link_to_new t('students.add_contact'), new_student_contact_path(@student), :id => 'new-student-contact-link'
     
     #new-student-contact-form
