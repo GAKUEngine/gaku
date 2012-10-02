@@ -1,4 +1,9 @@
 $('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("exams/exam_portions/exam_portion", {:exam_portion => @exam_portion}) %>');
 $("#editExamPortionModal").modal('hide');
-//TODO count total weight
-//TODO change weight to get changes
+$('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
+
+var sum = 0;
+    $('.exam-portion-weight').each(function() {
+        sum += Number($(this).val());
+    });
+$('#weight-total').text(sum);
