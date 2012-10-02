@@ -1,3 +1,3 @@
-$('#course-group-enrollments-index table tbody').append('<%= escape_javascript(render :partial => "course", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @course_group_enrollment}) %>');
+$('#course-group-enrollments-index table tbody').append('<%= render_js_partial("course", {:enrollment => @course_group_enrollment}) %>');
 $('.course-group-enrollments-count').html('<%= @course_group.courses.count != 0 ? t('courses.list') + "（" + @course_group.courses.count.to_s + "）" : t('courses.list') %>');
 $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
