@@ -4,5 +4,5 @@ $('.semesters-count').html('<%= @class_group.semesters.count %>');
 $('#new-class-group-semester-form').html('');
 $('#new-class-group-semester-link').show();
 
-$('#class-group-semesters-tab-link').html('<%= @class_group.semesters.count != 0 ? t('semesters.semesters') + "（" + @class_group.semesters.count.to_s + "）" : t('semesters.semesters') %>');
-$('.semesters-count').html('<%= @class_group.semesters.count != 0 ? t('semesters.list') + "（" + @class_group.semesters.count.to_s + "）" : t('semesters.list') %>');
+$('#class-group-semesters-tab-link').html('<%= print_count(@class_group.semesters, t("semesters.semesters")) %>');
+$('.semesters-count').html('<%= print_count(@class_group.semesters, t("semesters.list")) %>');
