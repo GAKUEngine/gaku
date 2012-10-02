@@ -5,7 +5,7 @@
       	= students_gender.label :students_gender, t('admin.presets.students.gender')
       	= students_gender.text_field :students_gender, :value => @preset_hash[:students_gender]
       = fields_for 'presets' do |address_country|
-      	= address_country.label :address_country, t('admin.presets.students.county')
+      	= address_country.label :address_country, t('admin.presets.students.country')
       	= address_country.text_field :address_country, :value => @preset_hash[:address_country]
       = fields_for 'presets' do |address_state|
       	= address_state.label :address_state, t('admin.presets.students.state')
