@@ -8,12 +8,9 @@ describe 'Exam portions' do
       @exam = Factory(:exam, :name => "Unix")
       visit exam_path(@exam)
       Exam.count.should == 1
-      @exam.exam_portions.count.should == 1
-      page.should have_content( 'Exam portions list ( 1 )' )
-      within('#exam-exam_portions') { page.should have_content ("#{@exam.exam_portions.first.name}") }
-      page.all('#exam-exam_portions table tbody tr').size.should == 1
-      page.should have_content("#{@exam.exam_portions.first.name}"+' Weight')
-      page.should have_content('Total Weight')
+      @exam.exam_portions.count.should == 0
+      page.should have_content( 'Exam portions list ( 0 )' )
+      
     end
 
     it 'should add a portion', :js => true do
@@ -23,12 +20,21 @@ describe 'Exam portions' do
       fill_in 'exam_exam_portions_attributes_1_weight', :with => 100.6
       click_on 'Create Exam portion'
       wait_until { !find('#exam_exam_portions_form').visible? }
-      @exam.exam_portions.count.should == 2
-      page.all('#exam-exam_portions table tbody tr').size.should == 2
-      within('#exam-exam_portions table'){ page.should have_content('Ubuntu') }
-      page.should have_content( 'Exam portions list ( 2 )' )
-      page.should have_content('Ubuntu Weight')
-      within('#weight-total'){ page.should have_content ("200.6") }
+      @exam.exam_portions.count.should == 1
+      page.should have_content( 'Exam portions list ( 1 )' )
+      
+      page.all('#exam-exam_portions table tbody tr').size.should == 1
+      within('#exam-exam_portions') { page.should have_content ("#{@exam.exam_portions.first.name}") }
+      page.should have_content("#{@exam.exam_portions.first.name}"+' Weight')
+      page.should have_content('Total Weight')
+      within('#weight-total'){ page.should have_content ("100.6") }
+    end
+
+    pending 'should show weighting widget' do
+
+    end
+
+    pending 'should hide weighting widget' do
     end
 
     #TODO Test exam use weighting - show weighting widget
