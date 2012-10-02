@@ -47,7 +47,7 @@ class ClassGroupEnrollmentsController < ApplicationController
       class_group_enrollment.save!
     }
     respond_to do |format|
-      format.js { render :nothing => true, :notice => 'fafafafafafa' }
+      format.js { render :nothing => true }
     end
   end
 
