@@ -1,2 +1,2 @@
-$('#class-group-courses-tab-link').html('<%= @class_group.courses.count != 0 ? t('courses.courses') + "（" + @class_group.courses.count.to_s + "）" : t('courses.courses') %>');
-$('.courses-count').html('<%= @class_group.courses.count != 0 ? t('courses.list') + "（" + @class_group.courses.count.to_s + "）" : t('courses.list') %>');
+$('#class-group-courses-tab-link').html('<%= print_count(@class_group.courses, t("courses.courses")) %>');
+$('.courses-count').html('<%= print_count(@class_group.courses, t("courses.list")) %>');
