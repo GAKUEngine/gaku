@@ -65,6 +65,10 @@ group :test do
   gem 'guard-rspec', '~> 0.6.0'
   gem 'guard-bundler'
   gem 'guard-spork'
+  
+  platforms :darwin do
+    gem 'growl'
+  end 
 end
 
 unless ENV["CI"]
