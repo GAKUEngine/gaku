@@ -82,7 +82,14 @@ describe 'Exams' do
         page.should have_content('Total Weight')
       end
 
-      pending 'should hide weighting widget' do
+      it 'should hide weighting widget',:js => true do
+        within('#exams-index') { find('#edit-exam-link').click }
+        wait_until{ page.find('#edit-exam-modal').visible? }
+        uncheck 'Use Weighting'
+        click_button 'submit_button'
+        wait_until{ !page.find('#edit-exam-modal').visible? }
+        page.should_not have_content('Total Weight')
+        page.should have_no_selector(:content,'.weight-check-widget')
       end
 
       it 'should edit exam from show view', :js => true do
