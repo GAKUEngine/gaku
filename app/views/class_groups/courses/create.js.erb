@@ -1,7 +1,7 @@
-$('#new-class-group-course-form').html('')
-$('#new-class-group-course-link').show()
- 
-$('table#courses-index tbody').append('<%= escape_javascript(render :partial => "course", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @class_group_course_enrollment}) %>');
+$('#new-class-group-course-form').html('');
+$('#new-class-group-course-link').show();
+
+$('table#courses-index tbody').append('<%= render_js_partial("course", {:enrollment => @class_group_course_enrollment}) %>');
 
 $('#class-group-courses-tab-link').html('<%= @class_group.courses.count != 0 ? t('courses.courses') + "（" + @class_group.courses.count.to_s + "）" : t('courses.courses') %>');
 $('.courses-count').html('<%= @class_group.courses.count != 0 ? t('courses.list') + "（" + @class_group.courses.count.to_s + "）" : t('courses.list') %>');
