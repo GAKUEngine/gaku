@@ -1,4 +1,5 @@
-$('#course-students-index tbody').append('<%= escape_javascript(render :partial => "courses/enrollments/enrolled", :formats => [:html], :handlers => [:erb, :slim], :locals => {:enrollment => @course_enrollment.student}) %>');
+$('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => @course_enrollment.student}) %>');
+
 $('#course-enrollment-student-id').val('');
 $('#new-course-student-form').hide();
 $('#new-course-student-link').show();
