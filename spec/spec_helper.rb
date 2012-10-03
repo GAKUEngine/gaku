@@ -58,6 +58,7 @@ Spork.each_run do
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     #config.include RSpecSupport::ControllerHelpers, :type => :controller
+    config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
   end
 
