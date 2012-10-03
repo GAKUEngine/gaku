@@ -29,8 +29,10 @@ describe 'Student' do
         click_link('Show')
         wait_until { find('#chosen-table').visible? }
         page.should have_content("#{@student.name}")
-        page.should have_content('Enroll to class')
-        page.should have_content('Enrol to course')
+        #page.should have_content('Enroll to class')
+        #page.should have_content('Enroll to course')
+        page.should have_selector("input", :value => "Enroll to class")
+        page.should have_selector("input", :value => "Enroll to course")
         
         click_link('Hide')
         wait_until { !page.find('#chosen-table').visible? }
