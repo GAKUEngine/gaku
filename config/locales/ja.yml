@@ -275,6 +275,8 @@ ja:
     starting:
     ending:
     save: "保存"
+    ending_after_starting: 'should be after Starting'
+    uniqueness: "have this semester added"
   num_semesters:
   add_semester: "学期を追加する"
   options: "オプション"
