@@ -8,9 +8,4 @@
 	  = submit_button t('contacts.save'), :id => 'submit-student-contact-button', :class => 'btn btn-primary'
 	  = link_to_cancel :id => 'cancel-student-contact-link', :class => 'btn'
 
-coffee:
-  $("#cancel-student-contact-link").click ->
-    $("#new-student-contact-link").show()
-    $("#new-student-contact-form").html("")
-
-  $('new-student-contact-form form').validationEngine()
+= javascript_include_tag 'students/contacts'

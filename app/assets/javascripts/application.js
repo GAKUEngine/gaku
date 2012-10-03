@@ -13,6 +13,7 @@
 //= require chosen-jquery
 //= require i18n
 //= require i18n/translations
+//=	require combobox
 
 //= require tbs_datepicker/js/bootstrap-datepicker
 

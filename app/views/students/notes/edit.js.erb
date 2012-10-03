@@ -1,2 +1,2 @@
-$('#modal-dialogs').html('<%== escape_javascript(render :partial => "note_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
+$('#modal-dialogs').html('<%== render_js_partial("note_modal", {:note => @note}) %>');
 $('#edit-note-modal').modal('show');

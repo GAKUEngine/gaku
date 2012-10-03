@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardian-contacts-count
-        = @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list')
+        =print_count(@guardian.contacts, t('contacts.list'))
     .pull-right
       =ajax_link_to_new t('students.add_contact'), '#', :id => 'new-student-guardian-contact-link'
 

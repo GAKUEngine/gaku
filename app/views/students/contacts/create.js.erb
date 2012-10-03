@@ -1,12 +1,13 @@
 <%- if @contact.errors.any? %>
-	$('#new-student-contact-form-errors').html('<%= escape_javascript(render :partial => "/shared/errors", :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @contact} ) %>');
+	$('#new-student-contact-form-errors').html('<%= render_js_partial("/shared/errors", {:target => @contact}) %>');
 <%- else %>
-	$('.student-contacts-count').html('<%= @student.contacts.count != 0 ? t('contacts.list') + "(" + @student.contacts.count.to_s + ")" : t('contacts.list') %>');
-	$('#student-contacts-index tbody').append("<%= escape_javascript(render :partial => 'contact', :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact => @contact}) %>");
+  $('.student-contacts-count').html('<%= print_count(@student.contacts, t("contacts.list")) %>');
+  $('#student-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 	$("#new-student-contact-link").show();
-	$('#new-student-contact-form').hide();
+	$('#new-student-contact-form').slideToggle();
 	$("#new-student-contact-form form")[0].reset();
-	$('#new-student-contact-form-errors').html('');
+	$('#new-student-contact-form-errors').slideToggle();
+
 	<%- if @contact.is_primary? %>
 		$('.student-contact').each(function() {
 			$(this).children('td.primary-contact').html('');
