@@ -308,6 +308,7 @@ en:
     master: "Master exam portion"
     save: "Save exam portion"
     show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   options: "Options"
   notice:
     picture_uploaded: "Picture successfully uploaded"

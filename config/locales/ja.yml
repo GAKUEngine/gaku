@@ -307,4 +307,5 @@ ja:
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
     show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   import_format: "インポート形式"
