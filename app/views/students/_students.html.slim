@@ -25,12 +25,13 @@ javascript:
       surname = $(this).closest('tr').find('td.surname').text();
       name = $(this).closest('tr').find('td.name').text();
       $('#students-checked').append("<tr class=" + $(this).closest('tr').attr('class') + "><td>" + name + "</td><td>" + surname + "</td></tr>"); 
-      $('#selected-students').append('<input type="hidden" name="selected_students[]" value="' + $(this).closest('tr').attr('class') + '" />');
+      $('#selected-students, #enroll_students_form').append('<input type="hidden" name="selected_students[]" value="' + $(this).closest('tr').attr('class') + '" class="' + $(this).closest('tr').attr('class') + '"/>');
       $('#students-checked-div').slideDown();
       chosen_trs = $('#chosen-table').find('tbody tr');
       $('.chosen-count').html('(' + chosen_trs.length + ')')
     }else{
       $('#students-checked tr.' + $(this).closest('tr').attr('class')).remove();
+      $('#selected-students, #enroll_students_form').find('input.' + $(this).closest('tr').attr('class')).remove();
       if($('#students-checked tr').length == 0){
         $('#students-checked-div').slideUp();
       }else {

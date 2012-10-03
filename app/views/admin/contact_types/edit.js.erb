@@ -1,2 +1,2 @@
-$('#modal_dialogs').html('<%== escape_javascript(render :partial => "contact_type_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:contact_type => @contact_type}) %>');
+$('#modal_dialogs').html('<%== render_js_partial("contact_type_modal", {:contact_type => @contact_type}) %>');
 $('#edit-contact-type-modal').modal('show');

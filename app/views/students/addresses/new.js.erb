@@ -1,2 +1,2 @@
-$('#new-student-address-form').html('<%= escape_javascript(render :partial => "form", :formats => [:html], :handlers => [:erb, :slim]) %>');
+$('#new-student-address-form').html('<%= render_js_partial("form") %>');
 $('#new-student-address-link').hide();

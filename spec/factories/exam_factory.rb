@@ -5,4 +5,5 @@ Factory.define :exam do |f|
   f.after_build do |exam|
     exam.exam_portions << Factory.build(:exam_portion, :exam => exam)
   end
+
 end

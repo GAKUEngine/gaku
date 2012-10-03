@@ -1,2 +1,4 @@
-$('#new-student-contact-form').html('<%= escape_javascript(render :partial => "students/contacts/form", :formats => [:html], :handlers => [:erb, :slim], :locals => { :student => @student}) %>');
+$('#new-student-contact-form').html('<%= render_js_partial("students/contacts/form", { :student => @student}) %>');
+
+$('#new-student-contact-form').show();
 $('#new-student-contact-link').hide();

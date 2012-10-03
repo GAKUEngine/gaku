@@ -1,2 +1,2 @@
-$('#new-student-course-enrollment-form').html('<%= escape_javascript(render :partial => "form", :formats => [:html], :handlers => [:erb, :slim]) %>');
+$('#new-student-course-enrollment-form').html('<%= render_js_partial("form") %>');
 $('#new-student-course-enrollment-link').hide();

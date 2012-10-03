@@ -2,6 +2,5 @@ $('#new-syllabus-assignment-form').slideToggle();
 $('#new-syllabus-assignment-form form').each (function(){
   this.reset();
 });
-$('#syllabus-assignments-index tbody').append('<%= escape_javascript(render :partial => "syllabuses/assignments/assignment", :formats => [:html], :handlers => [:erb, :slim], :locals => {:assignment => @syllabus.assignments.last}) %>');
-$('#syllabus-assignments-count').html('<%= @syllabus.assignments.count %>')
-
+$('#syllabus-assignments-index tbody').append('<%= render_js_partial("syllabuses/assignments/assignment", {:assignment => @syllabus.assignments.last}) %>');
+$('#syllabus-assignments-count').html('<%= @syllabus.assignments.count %>');

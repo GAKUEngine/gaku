@@ -30,3 +30,7 @@ $ ->
   $("#search-students select").on 'change', (event) ->
     $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
     return false
+
+  $("#cancel-student-link").click ->
+    $("#new-student-link").show()
+    $("#new-student-form").slideToggle()

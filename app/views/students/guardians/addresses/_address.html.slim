@@ -1,6 +1,6 @@
 -unless address.nil? or address.new_record? or !address
   tr id="address-#{address.id}"
-    = render 'shared/fields/address_fields', :address => address
+    = render 'shared/fields/address_fields', :address => address, :target => [@student, @guardian, address]
 
     td
       = ajax_link_to_edit [:edit, @student, @guardian, address]

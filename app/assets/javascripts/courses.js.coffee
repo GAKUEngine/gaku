@@ -34,4 +34,12 @@ $ ->
     $('#new-course-class-group-link').hide()
     $('#new-course-class-group-form').slideToggle()
 
+  $("#cancel-course-student-link").click ->
+    $("#new-course-student-link").show()
+    $("#new-course-student-form").html("")
+
+  $("#cancel-course-class-group-link").click ->
+    $("#new-course-class-group-link").show()
+    $("#new-course-class-group-form").html("")
+
   $(".chzn-select").chosen()

@@ -70,7 +70,7 @@ en:
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
-    list: "Students List"
+    list: "Students list"
     surname: "Surname"
     name: "Name"
     address: "Address"
@@ -88,6 +88,8 @@ en:
     add_contact: "Add Contact"
     create_contact: "Create Contact"
     contact_type: 'Contact Type'
+    birth_between: "Birth date between"
+    birth_and: "and"
     chosen_students: "Chosen students"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
@@ -273,6 +275,8 @@ en:
     starting: "Starting"
     ending:   "Ending"
     save: "Save semester"
+    ending_after_starting: 'should be after Starting'
+    uniqueness: "have this semester added"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
   notice:
@@ -295,6 +299,7 @@ en:
     is_master: "Master"
     master: "Master exam portion"
     save: "Save exam portion"
+    show: "Show Exam Portion"
   options: "Options"
   notice:
     picture_uploaded: "Picture successfully uploaded"

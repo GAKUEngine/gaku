@@ -72,7 +72,7 @@ describe 'Guardian Addresses' do
       click_button 'submit-student-guardian-address-button'
       wait_until { !page.find('#edit-address-modal').visible? }
       page.should have_content 'Brasil'
-      page.should_not have_content 'Bulgaria'
+      page.all('table#guardian_address_table').should_not have_content 'Bulgaria'
     end
 
     it 'should cancel edit', :js => true do 
