@@ -15,6 +15,12 @@ class AttachmentsController < ApplicationController
 		end
 	end
 
+	def destroy 
+		super do |format|
+			format.js { render :nothing => true }
+		end
+	end
+
 	def download
 		@attachment = Attachment.find(params[:id])
 		send_file @attachment.asset.path 

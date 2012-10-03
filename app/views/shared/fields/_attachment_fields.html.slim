@@ -6,5 +6,4 @@ tr
   td =number_to_human_size attachment.asset_file_size
   td
     = link_to ("<i class='icon-white icon-download'></i>").html_safe, [:download, attachment], :class => 'btn btn-mini btn-success', :style => 'margin-right:5px'
-
-    = link_to ("<i class='icon-white icon-remove'></i>").html_safe, attachment, :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "btn btn-mini btn-danger", :style => 'margin-right:5px'
+    =ajax_link_to_delete attachment, :id => 'exam-portion-attachment-delete'
