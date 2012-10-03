@@ -35,12 +35,17 @@
           tbody#students-checked
         #chosen-actions.hide
           .span12 style="margin-top:10px;"
-            = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll_students_form", :remote => true) do
-              .span6
+            = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
+              .span8
                 = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class_group-select"}
                 
               = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
-          
+          .span12 style="margin-top:10px;"
+            = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+              .span8
+                = select_tag "course_id", options_from_collection_for_select(@courses, "id", "code"), {:class => "class_group-select"}
+                
+              = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
     .row-fluid
       .span12.well
         #students-index
@@ -51,3 +56,8 @@ javascript:
   
 
   $(".class_group-select").combobox();
+
+css:
+  .class_group-select 
+    position:relative;
+    top:6px;

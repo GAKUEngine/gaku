@@ -41,6 +41,12 @@ GAKUEngine::Application.routes.draw do
     end
 
   end
+
+  resources :course_enrollments do
+    collection do
+      post :enroll_students
+    end
+  end
   
   resources :exam_portion_scores
 
