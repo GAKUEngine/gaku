@@ -11,10 +11,4 @@
               = link_to_cancel :id => 'cancel-student-guardian-address-link', :class => 'span3 btn btn-danger'
   
 = javascript_include_tag 'students/addresses/form'
-  
-coffee:
-  $('#cancel-student-guardian-address-link').click ->
-    $('#new-student-guardian-address-link').show()
-    $('#new-student-guardian-address-form').hide()
-  
-  $('#new-student-guardian-address-form form').validationEngine()
+= javascript_include_tag 'students/guardians/addresses'

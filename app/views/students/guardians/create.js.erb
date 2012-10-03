@@ -1,6 +1,6 @@
 $('.guardians_list').append('<%= render_js_partial("guardian", {:guardian => @student.guardians.last}) %>');
 
-$('#new-student-guardian-form').html('');
+$('#new-student-guardian-form').slideToggle();
 $('#new-student-guardian-link').show();
 
 $('#new-student-guardian-tab-link').html('<%= print_count(@student.guardians, t("guardians.guardians")) %>');

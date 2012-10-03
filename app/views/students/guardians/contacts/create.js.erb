@@ -1,6 +1,6 @@
 $('#student-guardian-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 $("#new-student-guardian-contact-link").show();
-$('#new-student-guardian-contact-form').hide();
+$('#new-student-guardian-contact-form').slideToggle();
 $('#new-student-guardian-contact-form form')[0].reset();
 
 <% if @contact.is_primary? %>

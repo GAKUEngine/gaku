@@ -27,6 +27,3 @@ $ ->
 					stateLabel.after stateSelect
 					$.each data, (i, data) ->
 						stateSelect.append('<option value="' + data.name + '">' + data.name + '</option>')
-
-
-

@@ -95,11 +95,3 @@ row-fluid
     =render 'shared/delete_modal', :target => @student
 
 #modal-dialogs
-
-coffee:
-  $("#upload-student-picture-link").click ->
-    $("#upload-student-picture").toggle()
-
-  $('#delete-student-link').on 'click', (e)->
-    e.preventDefault()
-    $('#delete-modal').modal('show')
