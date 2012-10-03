@@ -37,6 +37,9 @@ ja:
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
   hide: "Hide"
+  description: 'Description'
+  attachments:
+    asset: 'Asset'
   addresses:
     save: "住所を保存"
     addresses: "住所"

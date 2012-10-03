@@ -38,6 +38,14 @@ en:
   date_placeholder: "YYYY-MM-DD"
   search: "Search"
   hide: "Hide"
+  description: 'Description'
+  attachments:
+    assets: 'Assets'
+    file_name: 'File name'
+    file_type: 'File type'
+    file_size: 'File size'
+    new_attachment: "New Attachment"
+    create_attachment: 'Create Attachment'
   addresses:
     addresses: "Addresses"
     new: "New Address"
