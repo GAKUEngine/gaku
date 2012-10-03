@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ExamsController do
 
-  let(:exam) { FactoryGirl.create(:exam) }
+  let(:exam) { create(:exam) }
 
   before do
     login_admin

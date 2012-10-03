@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ExamPortion do
 	
   context "validations" do 
-  	let(:exam_portion) { Factory(:exam_portion) }
+  	let(:exam_portion) { create(:exam_portion) }
     it { should have_valid_factory(:exam_portion) }
     it { should belong_to(:exam) }
     it { should have_many(:exam_schedules) }

@@ -5,9 +5,9 @@ describe 'Student' do
 
   context "existing students" do
     before do 
-      @student = Factory(:student, :name => 'John', :surname => 'Doe')
-      @student2 = Factory(:student, :name => 'Susumu', :surname => 'Yokota')
-      @student3 = Factory(:student, :name => 'Johny', :surname => 'Bravo')
+      @student = create(:student, :name => 'John', :surname => 'Doe')
+      @student2 = create(:student, :name => 'Susumu', :surname => 'Yokota')
+      @student3 = create(:student, :name => 'Johny', :surname => 'Bravo')
       visit students_path
     end
 
@@ -116,7 +116,7 @@ describe 'Student' do
 
     it 'should enroll to class', :js => true do 
       ClassGroupEnrollment.count.should eql(0)
-      Factory(:class_group, :name => 'Biology')
+      create(:class_group, :name => 'Biology')
       visit student_path(@student)
       click_link 'enroll-student-link'
       wait_until { find('#new-class-group-enrollment-modal').visible? }

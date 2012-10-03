@@ -4,7 +4,7 @@ FactoryGirl.define do
     weight 4
     use_weighting true
     after_build do |exam|
-      exam_portions << FactoryGirl.build(:exam_portion, :exam => exam)
+      exam.exam_portions << FactoryGirl.build(:exam_portion, :exam => exam)
     end
   end
 end

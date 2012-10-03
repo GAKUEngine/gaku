@@ -4,8 +4,8 @@ describe 'CourseGroup Courses' do
   stub_authorization!
   
   before do
-    @course_group = Factory(:course_group, :name => "math 2012 courses")
-    @course = Factory(:course, :code => 'Math2012')
+    @course_group = create(:course_group, :name => "math 2012 courses")
+    @course = create(:course, :code => 'Math2012')
     visit course_group_path(@course_group)
   end
 
