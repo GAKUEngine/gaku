@@ -33,11 +33,12 @@
             .tabbable.tabs-right
               ul.nav.nav-tabs
                 li.active
-                  a data-toggle="tab" href="#course-enrollments" =t("course_enrollments.enrollment")
+                  a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments" 
+                    = print_count(@course.students, t("course_enrollments.enrollments"))
                 li
-                  a data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignment")
+                  a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignments")
                 li
-                  a data-toggle="tab" href="#course-exams" =t("exams.plural")
+                  a#new-course-exam-link data-toggle="tab" href="#course-exams" =t("exams.plural")
               .tab-content
                 #course-enrollments.tab-pane.active
                   = render :partial => "courses/enrollments/enrollments"

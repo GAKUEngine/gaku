@@ -1,4 +1,4 @@
-tr class="student-#{student.id.to_s}"
+tr id="student-#{student.id}"
   = render 'shared/fields/student_fields', :student => student
   td
 	  = link_to_show student

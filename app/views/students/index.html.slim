@@ -18,7 +18,7 @@
       #new-student-form.hide
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
- 
+
     =render 'students/search/form'
 
     .row-fluid.hide#students-checked-div
@@ -50,14 +50,4 @@
       .span12.well
         #students-index
           =render 'students/students'
-
-
-javascript:
-  
-
   $(".class_group-select").combobox();
-
-css:
-  .class_group-select 
-    position:relative;
-    top:6px;

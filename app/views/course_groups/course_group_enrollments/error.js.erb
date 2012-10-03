@@ -1,2 +1,2 @@
-$('#course-group-enrollment-form-errors').html('<%= escape_javascript(render :partial => "/shared/errors", :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @course_group_enrollment} ) %>');
+$('#course-group-enrollment-form-errors').html('<%= render_js_partial("/shared/errors", {:target => @course_group_enrollment} ) %>');
 $('#course-group-enrollment-course-id').val('');

@@ -34,7 +34,6 @@ describe 'Courses' do
       
       page.should have_content('Course Code')
       page.should have_content('bio')
-      page.should have_content('Number Enrolled')
     end
 
     it "should edit a course" do

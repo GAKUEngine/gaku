@@ -10,6 +10,8 @@ ja:
         state: "県"
         city: "市・区"
       locale: "ロケール用プリセット"
+      locales:
+        language: "言語"
       save: "プリセットを保存"
     course_groups_diposals: "授業グループ削除"
     exams_disposals: "試験削除"
@@ -301,4 +303,5 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
+    show: "Show Exam Portion"
   import_format: "インポート形式"
