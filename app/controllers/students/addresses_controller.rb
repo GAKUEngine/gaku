@@ -59,7 +59,6 @@ class Students::AddressesController < ApplicationController
     @student = Student.find(params[:student_id])
     @address = Address.find(params[:id])
     @student_address = StudentAddress.find_by_student_id_and_address_id(@student.id,@address.id)
-    raise params.inspect
     @student_address.make_primary
     render :nothing => true
   end
