@@ -161,8 +161,8 @@ describe 'Student' do
     end
 
     it 'should cancel creating' do 
-      click_link 'back-student-link'
-      current_path.should == students_path
+      click_link 'cancel-student-link'
+      wait_until { !page.find('#new-student-form').visible? }
     end
   end
 
