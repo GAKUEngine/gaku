@@ -15,7 +15,9 @@ html
     = render :partial => 'shared/modal_config'
     = render :partial => "shared/menubar"
     .container-fluid
-      = render :partial => "shared/flash"
+      #notice
+        = render :partial => "shared/flash"
+      #errors
       = yield
       = javascript_include_tag "gakuengine"
 
