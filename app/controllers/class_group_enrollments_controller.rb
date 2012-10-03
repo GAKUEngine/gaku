@@ -39,16 +39,34 @@ class ClassGroupEnrollmentsController < ApplicationController
   end
 
   def enroll_students
-    
+    params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+    @err_enrollments = []
+    @enrollments = []
     params[:selected_students].each {|student|
       student_id = student.split("-")[1].to_i
-      class_group_enrollment = ClassGroupEnrollment.new(:class_group_id => params[:class_group_id], :student_id => student_id)
-      # handle not saving course enrollment
-      class_group_enrollment.save!
+      class_group_enrollment = ClassGroupEnrollment.new(:class_group_id => params[:class_group_id], :student_id => student_id)   
+      if  class_group_enrollment.save
+        @enrollments << class_group_enrollment
+      else
+        @err_enrollments << class_group_enrollment
+      end
     }
-    respond_to do |format|
-      format.js { render :nothing => true }
+    notice = ""
+    if !@enrollments.empty?
+      
+      @enrollments.each {|enrollment|
+        student = Student.find(enrollment.student_id)
+        notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'>Successfully enrolled.</span>" + "</p>"
+      }
     end
+    if !@err_enrollments.empty?
+      
+      @err_enrollments.each {|enrollment|
+        student = Student.find(enrollment.student_id)
+        notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
+      }
+    end
+    render 'shared/notice', :locals => {:notice => notice}
   end
 
 end
