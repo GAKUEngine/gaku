@@ -18,7 +18,7 @@
       #new-student-form.hide
         =render 'form'
     /=render 'students/student_chooser', :select_mode => 'multiple'
- 
+
     =render 'students/search/form'
 
     .row-fluid.hide#students-checked-div
@@ -37,7 +37,7 @@
           .span12 style="margin-top:10px;"
             = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll_students_form", :remote => true) do
               .span6
-                = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class_group-select"}
+                = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class-group-select"}
                 
               = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
           
@@ -46,8 +46,5 @@
         #students-index
           =render 'students/students'
 
-
-javascript:
-  
-
-  $(".class_group-select").combobox();
+coffee:
+  $(".class-group-select").combobox()

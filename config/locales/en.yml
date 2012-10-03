@@ -88,6 +88,8 @@ en:
     add_contact: "Add Contact"
     create_contact: "Create Contact"
     contact_type: 'Contact Type'
+    birth_between: "Birth date between"
+    birth_and: "and"
     chosen_students: "Chosen students"
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
