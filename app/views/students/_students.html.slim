@@ -20,18 +20,19 @@ javascript:
   
   $("input.student-check").change (function() {
     var thisCheck = $(this);
+    var thisId = $(this).closest('tr').attr('id');
     if (thisCheck.is (':checked'))
     {
       surname = $(this).closest('tr').find('td.surname').text();
       name = $(this).closest('tr').find('td.name').text();
-      $('#students-checked').append("<tr class=" + $(this).closest('tr').attr('class') + "><td>" + name + "</td><td>" + surname + "</td></tr>"); 
-      $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').append('<input type="hidden" name="selected_students[]" value="' + $(this).closest('tr').attr('class') + '" class="' + $(this).closest('tr').attr('class') + '"/>');
+      $('#students-checked').append("<tr class=" + thisId + "><td>" + name + "</td><td>" + surname + "</td></tr>"); 
+      $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>');
       $('#students-checked-div').slideDown();
       chosen_trs = $('#chosen-table').find('tbody tr');
       $('.chosen-count').html('(' + chosen_trs.length + ')')
     }else{
-      $('#students-checked tr.' + $(this).closest('tr').attr('class')).remove();
-      $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find('input.' + $(this).closest('tr').attr('class')).remove();
+      $('#students-checked tr.' + thisId).remove();
+      $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find('input.' + thisId).remove();
       if($('#students-checked tr').length == 0){
         $('#students-checked-div').slideUp();
       }else {

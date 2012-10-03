@@ -8,6 +8,6 @@ $('.semesters-count').html('<%= print_count(@class_group.semesters, t("semesters
 <%- if @semester.errors.any? %>
 	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("/shared/errors", {:target => @semester}) %>');
 <%- else %>
-	$('#new-class-group-semester-form').html('');
-	$('#new-class-group-semester-form-errors').html('');
+	$('#new-class-group-semester-form').slideToggle();
+	$('#new-class-group-semester-form-errors').slideToggle();
 <% end %>

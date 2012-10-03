@@ -1,12 +1,20 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-	$('#add_student_enrollment').on 'click','a.btn', (event) ->
-    event.preventDefault()
-    $('#enrollment_form').slideToggle()
-
 
   $('#new-class-group-link').on 'click', (event) ->
   	event.preventDefault()
   	$('#new-class-group-form').slideToggle()
+
+  $("#cancel-course-link").click ->
+    $("#new-class-group-course-link").show()
+    $("#new-class-group-course-form").html('')
+    false    #prevent page from reloading
+
+  $("#cancel-semester-link").click ->
+    $("#new-class-group-semester-link").show()
+    $("#new-class-group-semester-form").html("")
+    $("#semester-modal").modal("hide")
+    false    #prevent page from reloading
+
+  deleteLink= $(".delete_link")
+  deleteLink.live "ajax:success", (evt, data, status, xhr) ->
+    $(this).closest('tr').remove()

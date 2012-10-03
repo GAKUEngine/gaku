@@ -9,8 +9,4 @@
         = submit_button t("courses.save"), :id => 'submit-course-button', :class => "span6 btn btn-primary"
         = link_to_cancel :id => "cancel-course-link", :style => "min-height:0px"
 
-coffee:
-  $("#cancel-course-link").click ->
-    $("#new-class-group-course-link").show()
-    $("#new-class-group-course-form").html('')
-    false    #prevent page from reloading
+= javascript_include_tag 'class_groups'

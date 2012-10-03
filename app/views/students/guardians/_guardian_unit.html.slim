@@ -13,3 +13,5 @@
         = link_to_show [@student, guardian]
         = ajax_link_to_edit [:edit, @student, guardian]
         = ajax_link_to_delete [@student, guardian], :class => 'delete-student-guardian-link'
+        
+= javascript_include_tag 'students/guardians'
