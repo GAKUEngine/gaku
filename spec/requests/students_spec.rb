@@ -61,20 +61,24 @@ describe 'Student' do
       end 
     end
 
-    it "should edit an existing student", :js => true do
+    it "should edit an existing student from show", :js => true do
       visit student_path(@student)
       page.should have_content("#{@student.name}")
       find('.edit-link').click
-      page.should have_content("Edit")
+      wait_until { find('#edit-student-modal').visible? }
       fill_in "student_surname", :with => "Kostova"
       fill_in "student_name", :with => "Marta"
       click_button 'submit-student-button'
+      wait_until { !page.find('#edit-student-modal').visible? }
 
-      page.should have_content("Kostova Marta")
+      page.should have_content("Kostova")
+      page.should have_content("Marta")
+      @student.reload
       @student.name.should eql("Marta") 
+      @student.surname.should eql("Kostova") 
     end
 
-    it "should edit an existing student thru modal", :js => true do
+    it "should edit an existing student from index", :js => true do
       visit students_path
       page.should have_content("#{@student.name}")
       find('.edit-link').click
