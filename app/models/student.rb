@@ -36,6 +36,9 @@ class Student < ActiveRecord::Base
   has_many :class_group_enrollments
   has_many :class_groups, :through => :class_group_enrollments
 
+  has_many :student_specialties
+  has_many :specialities, :through => :student_specialties
+
   #FIXME maybe it should be reversed
   has_many :exam_portion_scores
   has_many :assignment_scores
