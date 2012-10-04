@@ -1,46 +1,7 @@
 .row-fluid
   .span12.well
-    .span9
-      table#students-index.table.table-bordered.table-striped
-        tbody
-          tr
-            th.btn-c1 width="20%" =t("class")
-            td#student-class-group-enrollment
-              - if @student.class_groups.last
-                - if @student.class_groups.last.grade
-                  = @student.class_groups.last.grade.to_s
-                  - if @student.class_groups.last.name
-                    = " - "
-                - if @student.class_groups.last.name
-                  = @student.class_groups.last.name
-                - if @student.class_group_enrollments.last.seat_number
-                  = "（" + t("class_group_enrollments.seat_number") + ": " + @student.class_group_enrollments.last.seat_number.to_s + "）"
-              - else
-                = t("none")
-          - if @student.name_reading != ""
-            tr
-              th.btn-c2 =t("phonetic_reading")
-              td.vm
-                = @student.surname_reading + " " + @student.name_reading
-          tr
-            th.btn-c2 =t("name")
-            td.vm style="font-size:16pt"
-              = @student.surname + " " + @student.name
-          tr
-            th.btn-c2 =t("gender")
-            td = gender(@student)
-          tr
-            th.btn-c2 =t("students.birth")
-            td =@student.birth_date
-          tr
-            th.btn-c1 =t("students.phone")
-            td =@student.phone
-          tr
-            th.btn-c1 =t("students.email")
-            td =@student.email
-          tr
-            th.btn-c2 =t("students.admitted")
-            td =@student.admitted
+    .span9.student-index
+      = render 'students/student_index', :student => @student
 
     .span3.well
       .row-fluid.pagination-centered
@@ -83,7 +44,7 @@
     .span4
       = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
-      = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link"
+      = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link", :remote => true
     .span4
       = link_to_back students_path, :class => "span12 btn"
 

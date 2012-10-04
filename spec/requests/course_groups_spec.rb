@@ -41,7 +41,7 @@ describe 'CourseGroups' do
 
   context 'when course group is created' do
     before do 
-      @course_group = Factory(:course_group, :name => '2013Courses')
+      @course_group = create(:course_group, :name => '2013Courses')
       visit course_groups_path
     end
 

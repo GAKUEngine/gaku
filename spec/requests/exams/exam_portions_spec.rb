@@ -5,7 +5,7 @@ describe 'Exam portions' do
 
   context 'exam/show' do
     before do
-      @exam = Factory(:exam, :name => "Unix")
+      @exam = create(:exam, :name => "Unix")
       visit exam_path(@exam)
       Exam.count.should == 1
       @exam.exam_portions.count.should == 1

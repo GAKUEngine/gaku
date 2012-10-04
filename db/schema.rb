@@ -348,7 +348,7 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
   create_table "specialties", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "mayor_only"
+    t.boolean "mayor_only",  :default => false
   end
 
   create_table "states", :force => true do |t|
@@ -370,7 +370,7 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
   create_table "student_specialties", :force => true do |t|
     t.integer "student_id"
     t.integer "specialty_id"
-    t.boolean "is_mayor"
+    t.boolean "is_mayor",     :default => true
   end
 
   create_table "students", :force => true do |t|

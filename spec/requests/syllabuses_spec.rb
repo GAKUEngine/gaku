@@ -4,7 +4,7 @@ describe 'Syllabus' do
   stub_authorization!
 
   before do
-    @syllabus = Factory(:syllabus, :name => 'Biology', :code => 'bio')
+    @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
     visit syllabuses_path
   end
 

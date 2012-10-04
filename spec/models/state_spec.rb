@@ -20,13 +20,13 @@ describe State do
   end
 
   it "can find a state by name or abbr" do
-    state = Factory(:state, :name => "California", :abbr => "CA")
+    state = create(:state, :name => "California", :abbr => "CA")
     State.find_all_by_name_or_abbr("California").should include(state)
     State.find_all_by_name_or_abbr("CA").should include(state)
   end
 
   it "can find all states group by country numcode" do
-    state = Factory(:state)
+    state = create(:state)
     State.states_group_by_country_numcode.should == { state.country_numcode.to_s => [[state.id, state.name]] }
   end
 end

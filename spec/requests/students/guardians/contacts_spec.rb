@@ -4,11 +4,11 @@ describe 'Guardian Contacts' do
   stub_authorization!
 
   before(:each) do
-    @student = Factory(:student)
-    @guardian = Factory(:guardian)
+    @student = create(:student)
+    @guardian = create(:guardian)
     @student.guardians << @guardian
     @student.reload
-    @contact_type = Factory(:contact_type, :name => 'mobile')
+    @contact_type = create(:contact_type, :name => 'mobile')
 
     visit student_path(@student) 
     click_link 'new-student-guardian-tab-link'
@@ -76,8 +76,8 @@ describe 'Guardian Contacts' do
   context 'edit, delete and set primary' do 
 
     before do 
-      mobile1 = Factory(:contact, :data => 123, :contact_type => @contact_type)
-      mobile2 = Factory(:contact, :data => 321, :contact_type => @contact_type)
+      mobile1 = create(:contact, :data => 123, :contact_type => @contact_type)
+      mobile2 = create(:contact, :data => 321, :contact_type => @contact_type)
       @student.guardians.first.contacts << [ mobile1, mobile2 ]
       @student.reload
       find('.show-link').click

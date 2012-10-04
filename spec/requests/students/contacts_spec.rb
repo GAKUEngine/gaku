@@ -4,8 +4,8 @@ describe 'Contact' do
   stub_authorization!
 
   before do
-    @student = Factory(:student)
-    @contact_type = Factory(:contact_type, :name => 'email')
+    @student = create(:student)
+    @contact_type = create(:contact_type, :name => 'email')
   end
 
   context 'new' do 
@@ -44,7 +44,7 @@ describe 'Contact' do
 
   context "edit, delete, set primary" do 
     before(:each) do 
-      @contact = Factory(:contact, :contact_type => @contact_type)
+      @contact = create(:contact, :contact_type => @contact_type)
       @student.contacts << @contact 
     end
 
@@ -70,8 +70,9 @@ describe 'Contact' do
     end
 
 
-    pending "should set contact as primary", :js => true do 
-      contact2 = Factory(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
+    it "should set contact as primary", :js => true do 
+      contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
+
       @student.contacts << contact2
       
       visit student_path(@student) 

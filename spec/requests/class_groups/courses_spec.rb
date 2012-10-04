@@ -4,8 +4,8 @@ describe 'ClassGroup Courses' do
   stub_authorization!
   
   before do
-    @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-    @course = Factory(:course, :code => 'Math2012')
+    @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
+    @course = create(:course, :code => 'Math2012')
     visit class_group_path(@class_group)
     click_link 'class-group-courses-tab-link'
   end

@@ -4,7 +4,7 @@ describe "Student Images" do
   stub_authorization!
   
   before do
-    @student = Factory(:student)
+    @student = create(:student)
     visit student_path(@student)
   end
 
