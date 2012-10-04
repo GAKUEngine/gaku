@@ -4,10 +4,10 @@ describe "CourseExams"  do
   stub_authorization!
 
   before do
-    @syllabus = Factory(:syllabus) 
-    @course = Factory(:course)
-    @student = Factory(:student)
-    @exam = Factory(:exam, :name => 'Math')
+    @syllabus = create(:syllabus) 
+    @course = create(:course)
+    @student = create(:student)
+    @exam = create(:exam, :name => 'Math')
     @syllabus.exams << @exam
     @course.students << @student
     @syllabus.courses << @course

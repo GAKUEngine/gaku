@@ -54,7 +54,7 @@ describe 'Exams' do
   
     context 'with added exam' do
       before do
-        @exam = Factory(:exam, :name => "Linux")
+        @exam = create(:exam, :name => "Linux")
         visit exams_path
         Exam.count.should == 1
       end

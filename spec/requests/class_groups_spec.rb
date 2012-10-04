@@ -24,7 +24,7 @@ describe 'ClassGroups' do
 
   context 'show, edit, delete' do
     before do 
-      @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
+      @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
       visit class_groups_path
     end
 

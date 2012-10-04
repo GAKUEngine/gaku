@@ -4,8 +4,8 @@ describe 'CourseEnrollments' do
   stub_authorization!
   
   before do
-    @student = Factory(:student)
-    @course = Factory(:course, :code => 'fall2050')
+    @student = create(:student)
+    @course = create(:course, :code => 'fall2050')
     visit student_path(@student) 
   end
 

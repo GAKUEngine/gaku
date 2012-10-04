@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Exam do
 
   context "validations" do 
-  	let(:exam) { Factory(:exam) }
+  	let(:exam) { create(:exam) }
 
     it { should have_valid_factory(:exam) }
     it { should have_many(:exam_scores) }

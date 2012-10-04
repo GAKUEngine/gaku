@@ -37,7 +37,7 @@ describe 'ContactTypes' do
 
   context 'index, edit and delete' do 
     before do
-      @contact_type = Factory(:contact_type, :name => 'mobile') 
+      @contact_type = create(:contact_type, :name => 'mobile') 
       visit admin_contact_types_path
     end
 

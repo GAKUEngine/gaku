@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CoursesController do
 
-  let(:course) { FactoryGirl.create(:course) }
+  let(:course) { create(:course) }
 
   before do
     login_admin
