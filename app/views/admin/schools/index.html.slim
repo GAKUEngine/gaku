@@ -1,0 +1,24 @@
+#admin-schools
+  .row-fluid
+    .pull-left
+      h4.h4-vm.schools-count
+        = print_count(@schools, t('schools.list'))
+    .pull-right
+      = ajax_link_to_new t('schools.add'), new_admin_school_path(@school), :id => 'new-admin-school-link'
+  .row-fluid
+    table#admin-schools-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('schools.name')
+          th.btn-inverse =t('schools.slogan')
+          th.btn-inverse =t('schools.description')
+          th.btn-inverse =t('schools.founded')
+          th.btn-inverse =t('schools.principal')
+          th.btn-inverse =t('schools.vice_principal')
+          th.btn-inverse =t('schools.grades')
+          th.btn-inverse =t('contacts.actions')
+      tbody
+        =render :partial => 'admin/schools/school', :collection => @schools, :as => 'school'
+    br/
+#modal-dialogs
+#new-admin-school

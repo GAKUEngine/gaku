@@ -120,6 +120,7 @@ GAKUEngine::Application.routes.draw do
 
   namespace :admin do
     resources :contact_types
+    resources :schools
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection

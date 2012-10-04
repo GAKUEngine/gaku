@@ -1,0 +1,6 @@
+$('#admin-schools-index tbody').append('<%= render_js_partial("school", {:school => @school}) %>');
+
+$('#new-admin-school').slideToggle();
+$('#new-admin-school-link').show();
+
+$('.admin-schools-count').html('<%= print_count(@schools, t("schools.list")) %>');

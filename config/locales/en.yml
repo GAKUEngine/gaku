@@ -247,7 +247,6 @@ en:
     save: "Save Contact Type"
 
   contacts:
-    list: "Contacts List"
     new: "New Contact"
     save: "Save Contact"
     data: "Data"
@@ -257,6 +256,25 @@ en:
     actions: 'Actions'
     list: "Contacts list"
     contacts: "Contacts"
+
+  schools:
+    singular: "School"
+    plural: "Schools"
+    add: "Add School"
+    edit: "Edit School"
+    list: "School list"
+    new: "New School"
+    save: "Save School"
+    name: "Name"
+    slogan: "Slogan"
+    description: "Description"
+    founded: "Founded"
+    principal: "Principal"
+    vice_principal: "Vice Principal"
+    grades: "Grades"
+    primary: "Primary"
+
+  
   note: "Notes"
   notes:
     notes: "Notes"
