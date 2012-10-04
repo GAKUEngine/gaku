@@ -1,7 +1,8 @@
 en:
   admin:
-    admin: "admin"
-    plural: "admin"
+    admin: "Admin"
+    schools: "Schools"
+    contact_types: "Contact Types"
     presets:
       student: "Student Preset"
       locale: "Locale Preset"
