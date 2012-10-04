@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SyllabusesController do
 
-  let(:syllabus) { FactoryGirl.create(:syllabus) }
+  let(:syllabus) { create(:syllabus) }
 
   before do
     login_admin

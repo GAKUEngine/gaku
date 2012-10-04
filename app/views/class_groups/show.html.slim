@@ -60,12 +60,3 @@
         = link_to t("Back"), class_groups_path, :class => "span6 btn"
 
 #modal-dialogs
-
-coffee:
-  $ ->
-    $('#show_semester_form').click ->
-      $('#show_semester_form').hide()
-
-    $('#show_course_form').click ->
-      $('#course_form').toggle 'slow', ->
-        $('#new_course').validationEngine()

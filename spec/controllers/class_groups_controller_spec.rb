@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ClassGroupsController do
 
-  let(:class_group) { FactoryGirl.create(:class_group) }
+  let(:class_group) { create(:class_group) }
 
   before do
     login_admin

@@ -4,11 +4,11 @@ describe "CourseEnrollment"  do
   stub_authorization!
 
   before do
-    @course = Factory(:course)
+    @course = create(:course)
   end
   context 'student' do 
     it "should enroll and show student", :js => true do
-      Factory(:student, :name => "John", :surname => "Doe")
+      create(:student, :name => "John", :surname => "Doe")
       visit course_path(@course)
       tr_count = page.all('table#course-students-index tr').size
       @course.students.size.should eql(0)
@@ -34,8 +34,8 @@ describe "CourseEnrollment"  do
     end
 
     it "should enroll student only once for a course", :js => true  do
-      Factory(:student, :id => "123", :name => "Toni", :surname => "Rtoe")
-      Factory(:course_enrollment, :student_id => "123", :course_id => @course.id)
+      create(:student, :id => "123", :name => "Toni", :surname => "Rtoe")
+      create(:course_enrollment, :student_id => "123", :course_id => @course.id)
       visit course_path(@course)
       page.should have_content("Toni")
       @course.students.size.should eql(1)
@@ -64,9 +64,9 @@ describe "CourseEnrollment"  do
 
   context 'class group' do 
     it "should enroll a class group", :js => true do 
-      class_group = Factory(:class_group, :name => "Math")
-      student1 = Factory(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
-      student2 = Factory(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
+      class_group = create(:class_group, :name => "Math")
+      student1 = create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
+      student2 = create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
       
       visit course_path(@course)
       @course.students.size.should eql(0)

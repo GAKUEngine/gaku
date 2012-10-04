@@ -14,9 +14,4 @@
         = submit_button t("semesters.save"), :id => 'submit-semester-button', :class => "span6 btn btn-primary"
         = link_to_cancel  :id => "cancel-semester-link",:style => "min-height:0px"
 
-coffee:
-  $("#cancel-semester-link").click ->
-    $("#new-class-group-semester-link").show()
-    $("#new-class-group-semester-form").html("")
-    $("#semester-modal").modal("hide")
-    false    #prevent page from reloading
+= javascript_include_tag 'class_groups'

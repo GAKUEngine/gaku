@@ -20,8 +20,3 @@
           =render :partial => 'class_groups/students/student', :collection => @class_group.class_group_enrollments, :as => 'enrollment'
           
 #new-class-group-student-form
-
-coffee:
-  deleteLink= $(".delete_link")
-  deleteLink.live "ajax:success", (evt, data, status, xhr) ->
-    $(this).closest('tr').remove()

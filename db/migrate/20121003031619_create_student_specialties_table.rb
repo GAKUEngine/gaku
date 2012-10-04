@@ -3,7 +3,7 @@ class CreateStudentSpecialtiesTable < ActiveRecord::Migration
   	create_table :student_specialties do |t|
   		t.references :student
   		t.references :specialty
-  		t.boolean    :is_mayor
+  		t.boolean    :is_mayor, :default => true
   	end
   end
 end
