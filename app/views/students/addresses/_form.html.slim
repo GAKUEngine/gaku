@@ -1,4 +1,4 @@
-= form_for [@student, @address], :remote => true do |address_form|
+= form_for [@student, @address], :html => {:id => 'new-student-address-form'}, :remote => true do |address_form|
   - if address_form.object.new_record?
     b= t('addresses.new')
     .row-fluid.mt-l
