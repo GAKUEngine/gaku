@@ -71,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
     t.string   "name"
     t.integer  "school_id"
     t.integer  "address_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "is_master",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "class_group_course_enrollments", :force => true do |t|
