@@ -1,0 +1,39 @@
+.row-fluid
+  .span6
+    = form.label :class_group_id, t("class"), :class => "control-label"
+    = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+.row-fluid
+  .span3
+    = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
+    span.label.label-important.pull-right =t 'required'
+    = form.text_field :surname, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+  .span3
+    = form.label :name, t("name")+" ("+t("given_name")+")", :class => "control-label pull-left"
+    span.label.label-important.pull-right =t 'required'
+    = form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+  .span3
+    = form.label :surname_reading, t("phonetic_reading") + " ("+t("surname")+")", :class => "control-label pull-left"
+    = form.text_field :surname_reading, :class => "span12"
+  .span3
+    = form.label :name_reading, t("phonetic_reading") + " ("+t("given_name")+")", :class => "control-label pull-left"
+    = form.text_field :name_reading, :class => "span12"
+.row-fluid
+  .span3
+    = form.label :birth_date, t("birth"), :class => "control-label"
+    = form.text_field :birth_date, :class => "span12 datepicker"
+  .span3
+    = form.label :gender, t("gender")
+    = form.select :gender, {t("genders.female") => false , t("genders.male") => true}, {:prompt => t('students.choose_gender')}, :class => "span12"
+  .span3
+    = form.label :phone, t("phone"), :class => "control-label pull-left"
+    = form.text_field :phone, :class => "span12"
+  .span3
+    = form.label :email, t("email"), :class => "control-label pull-left"
+    = form.text_field :email, :class => "span12"
+.row-fluid
+  .span6
+    = form.label :admitted, t("admitted"), :class => "control-label"
+    = form.text_field :admitted, :class => "span12 datepicker"
+  /.span6/
+    = form.label :graduated, t("graduated"), :class => "control-label"
+    = form.text_field :graduated, :class => "span12"

@@ -4,7 +4,7 @@ describe 'Note' do
   stub_authorization!
   
   before do
-    @student = Factory(:student)
+    @student = create(:student)
     visit student_path(@student) 
   end
 
@@ -52,7 +52,7 @@ describe 'Note' do
 
   context "edit and delete" do 
     before do 
-      @note = Factory(:note, :student_id => @student)
+      @note = create(:note, :student_id => @student)
       visit student_path(@student)
     end
 

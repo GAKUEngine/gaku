@@ -1,1 +1,3 @@
-$('#student-modal').modal('hide');
+$('tr#student-<%= @student.id %>').html('<%= render_js_partial("student_tds", {:student => @student}) %>'); // update from index
+$('.student-index').html('<%= render_js_partial("student_index", {:student => @student}) %>'); //update from show
+$('#edit-student-modal').modal('hide');

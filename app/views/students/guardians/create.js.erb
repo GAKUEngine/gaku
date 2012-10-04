@@ -1,7 +1,7 @@
-$('.guardians_list').append('<%= escape_javascript(render :partial => "guardian", :formats => [:html], :handlers => [:erb, :slim], :locals => {:guardian => @student.guardians.last}) %>');
-$('.student-guardians-count').html('<%= @student.guardians.count%>');
-$('#new-student-guardian-form').html('');
+$('.guardians_list').append('<%= render_js_partial("guardian", {:guardian => @student.guardians.last}) %>');
+
+$('#new-student-guardian-form').slideToggle();
 $('#new-student-guardian-link').show();
 
-$('#new-student-guardian-tab-link').html('<%= @student.guardians.count != 0 ? t('guardians.guardians') + "(" + @student.guardians.count.to_s + ")" : t('guardians.guardians') %>');
-$('.student-guardians-count').html('<%= @student.guardians.count != 0 ? t('guardians.list') + "(" + @student.guardians.count.to_s + ")" : t('guardians.list') %>');
+$('#new-student-guardian-tab-link').html('<%= print_count(@student.guardians, t("guardians.guardians")) %>');
+$('.student-guardians-count').html('<%= print_count(@student.guardians, t("guardians.list")) %>');

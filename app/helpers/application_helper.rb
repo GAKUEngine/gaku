@@ -8,6 +8,7 @@ module ApplicationHelper
     link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  #needs id, because it is unique
   def ajax_link_to_new(text, resource, options = {})
     name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
 
@@ -19,6 +20,24 @@ module ApplicationHelper
     link_to name, resource, attributes
   end
 
+  #needs id
+  def link_to_new(text, resource, options = {})
+    name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
+    attributes = {
+      :class => "btn btn-primary"
+    }.merge(options)
+
+    link_to name, resource, attributes
+  end
+
+  #needs id
+  def submit_button(text, options={})
+    attributes = {
+      :type => 'submit'
+    }.merge(options)
+
+    button_tag(content_tag('span', text), attributes)
+  end
 
   def ajax_link_to_delete(resource, options = {})
     name = ("<i class='icon-white icon-remove'></i>").html_safe
@@ -44,15 +63,8 @@ module ApplicationHelper
     link_to name, resource, attributes
   end
   
-  def link_to_new(text, resource, options = {})
-    name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
-    attributes = {
-      :class => "btn btn-primary"
-    }.merge(options)
 
-    link_to name, resource, attributes
-  end
-
+  # Edit button with only pencil image - without text
   def link_to_edit(resource, options = {})
     name = ("<i class='icon-white icon-pencil'></i>").html_safe
     attributes = {
@@ -62,6 +74,7 @@ module ApplicationHelper
     link_to name, resource, attributes
   end   
 
+  # Edit button with text "Edit" and pencil image
   def link_to_edit_with_text(resource, options = {})
     name = ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe
     attributes = {
@@ -100,6 +113,18 @@ module ApplicationHelper
     }.merge(options)
 
     button_tag(content_tag('span', text), attributes)
+  end
+
+  def print_count(object, text)
+    object.count != 0 ? text + "(" + object.count.to_s + ")" : text
+  end
+
+  def render_js_partial(partial, locals = {})
+    unless locals == {}
+      escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim], :locals => locals) 
+    else
+      escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim]) 
+    end
   end
 
   def sortable(column, title = nil)

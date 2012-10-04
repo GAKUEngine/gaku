@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardian-contacts-count
-        = @guardian.contacts.count != 0 ? t('contacts.list') + "(" + @guardian.contacts.count.to_s + ")" : t('contacts.list')
+        =print_count(@guardian.contacts, t('contacts.list'))
     .pull-right
       =ajax_link_to_new t('students.add_contact'), '#', :id => 'new-student-guardian-contact-link'
 
@@ -11,12 +11,13 @@
       table#student-guardian-contacts-index.table.table-striped.table-bordered.table-condensed
         thead
           tr
+            th.btn-inverse style="width:28px"
+              i.icon-white.icon-home
             th.btn-inverse =t('contact_type')
             th.btn-inverse =t('contacts.data')
             th.btn-inverse =t('contacts.details')
-            th.btn-inverse =t('contacts.primary')
             th.btn-inverse =t('contacts.emergency')
-            th.btn-info style="width:180px" =t 'manage'
+            th.btn-info style="width:71px" =t 'manage'
         tbody
           =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
       

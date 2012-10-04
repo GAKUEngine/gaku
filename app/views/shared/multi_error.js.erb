@@ -1,0 +1,2 @@
+$("#errors").html("<%= escape_javascript(render :partial => 'shared/multi_errors', :locals => {:err_objects => err_objects}) %>");
+$("#errors").show(3);

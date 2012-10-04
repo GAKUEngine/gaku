@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe StudentsController do
 
-  let(:student) { FactoryGirl.create(:student) }
-  let(:country) { Factory(:country) }
+  let(:student) { create(:student) }
+  let(:country) { create(:country) }
 
   before do
     login_admin

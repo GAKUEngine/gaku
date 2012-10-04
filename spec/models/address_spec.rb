@@ -4,8 +4,8 @@ describe Address do
 
   context "validation" do
     let(:country) { mock_model(Country, :states => [state]) }
-    let(:state) { stub_model(State, :name => 'maryland', :abbr => 'md') }
-    let(:address) { FactoryGirl.build(:address, :country => country) }
+    let(:state)   { stub_model(State, :name => 'maryland', :abbr => 'md') }
+    let(:address) { build(:address, :country => country) }
 
     before do
       country.states.stub :find_all_by_name_or_abbr => [state]
@@ -35,7 +35,7 @@ describe Address do
   context ".default" do
     before do
       @default_country_id = AppConfig[:default_country_id]
-      new_country = Factory(:country)
+      new_country = create(:country)
       AppConfig[:default_country_id] = new_country.id
     end
 

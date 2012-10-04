@@ -1,7 +1,5 @@
 td=target.last.contact_type.name if target.last.contact_type
 td=target.last.data
 td=target.last.details
-td class='primary-contact'
-  ="Primary" if target.last.is_primary?
 td
   ="Emergency" if target.last.is_emergency?

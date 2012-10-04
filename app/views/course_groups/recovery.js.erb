@@ -1,2 +1,2 @@
-$('#course-groups-deleted-index').html('<%= escape_javascript(render :partial => "admin/disposals/course_groups", :formats => [:html], :handlers => [:erb, :slim],  :course_groups => @course_groups) %>');
+$('#course-groups-deleted-index').html('<%= render_js_partial("admin/disposals/course_groups", {:course_groups => @course_groups}) %>');
 $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");

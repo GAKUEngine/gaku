@@ -70,7 +70,7 @@ en:
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
-    list: "Students List"
+    list: "Students list"
     surname: "Surname"
     name: "Name"
     address: "Address"
@@ -275,6 +275,8 @@ en:
     starting: "Starting"
     ending:   "Ending"
     save: "Save semester"
+    ending_after_starting: 'should be after Starting'
+    uniqueness: "have this semester added"
   num_semesters: "Number of semesters"
   add_semester: "Add a semester"
   notice:
@@ -297,6 +299,7 @@ en:
     is_master: "Master"
     master: "Master exam portion"
     save: "Save exam portion"
+    show: "Show Exam Portion"
   options: "Options"
   notice:
     picture_uploaded: "Picture successfully uploaded"

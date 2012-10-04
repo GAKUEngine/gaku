@@ -4,11 +4,11 @@ describe 'Guardian Addresses' do
   stub_authorization!
 
   before(:each) do
-    @student = Factory(:student)
-    @guardian = Factory(:guardian)
+    @student = create(:student)
+    @guardian = create(:guardian)
     @student.guardians << @guardian
     @student.reload
-    @country = Factory(:country, :name => "Japan")
+    @country = create(:country, :name => "Japan")
 
     visit student_path(@student) 
     click_link 'new-student-guardian-tab-link'
@@ -51,15 +51,15 @@ describe 'Guardian Addresses' do
 
   context 'edit, delete, set primary' do 
     before do 
-      bulgaria = Factory(:country, :name => "Bulgaria")
-      address1 = Factory(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
-      address2 = Factory(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
+      bulgaria = create(:country, :name => "Bulgaria")
+      address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
+      address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
       @student.guardians.first.addresses << [ address1, address2 ]
       visit student_guardian_path(@student, @student.guardians.first)
     end
 
     it 'should edit address for student guardian', :js => true do 
-      Factory(:country, :name => "Brasil")
+      create(:country, :name => "Brasil")
       page.should have_content 'Bulgaria'
 
       within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
@@ -72,7 +72,7 @@ describe 'Guardian Addresses' do
       click_button 'submit-student-guardian-address-button'
       wait_until { !page.find('#edit-address-modal').visible? }
       page.should have_content 'Brasil'
-      page.should_not have_content 'Bulgaria'
+      page.all('table#guardian_address_table').should_not have_content 'Bulgaria'
     end
 
     it 'should cancel edit', :js => true do 

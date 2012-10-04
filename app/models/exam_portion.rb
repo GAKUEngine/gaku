@@ -22,7 +22,7 @@ class ExamPortion < ActiveRecord::Base
 
   has_many :exam_schedules
   has_many :exam_portion_scores
-  has_many :assets
+  has_many :attachments, :as => :attachable
 
   attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments
 

@@ -4,7 +4,7 @@ describe 'Syllabus Exams' do
   stub_authorization!
 
   before do
-    @syllabus = Factory(:syllabus, :name => 'Biology', :code => 'bio')
+    @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
     visit syllabuses_path
   end
 
@@ -44,7 +44,7 @@ describe 'Syllabus Exams' do
 
   context 'show, edit, delete' do 
     before do 
-      @exam = Factory(:exam, :name => 'Astronomy Exam')
+      @exam = create(:exam, :name => 'Astronomy Exam')
       @syllabus.exams << @exam
       visit syllabus_path(@syllabus)
     end

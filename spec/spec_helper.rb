@@ -58,12 +58,13 @@ Spork.each_run do
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     #config.include RSpecSupport::ControllerHelpers, :type => :controller
+    config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
   end
 
   RSpec::Matchers.define :have_valid_factory do |factory_name|
     match do |model|
-      Factory(factory_name).new_record?.should be_false
+      create(factory_name).new_record?.should be_false
     end
   end
 

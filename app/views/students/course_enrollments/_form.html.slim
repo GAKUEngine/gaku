@@ -12,9 +12,4 @@
 		  = course_enrollment_form.submit t('course_enrollments.create'), :id => 'submit-student-course-enrollment-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
     = link_to_cancel :id => "cancel-student-course-enrollment-link", :class => "span4 btn btn-danger"
 
-coffee:
-  $("#cancel-student-course-enrollment-link").click ->
-    $("#new-student-course-enrollment-link").show()
-    $("#new-student-course-enrollment-form").html("")
-
-  $('#new-student-course-enrollment-form form').validationEngine()
+= javascript_include_tag 'students/course_enrollments'

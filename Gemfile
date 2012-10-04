@@ -53,18 +53,22 @@ group :test do
   gem 'mysql2'
   gem 'spork', '~> 1.0rc'
   gem 'rspec-rails', '~> 2.10.1'
-  gem 'factory_girl_rails', '~> 1.7.0'
+  gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'database_cleaner', '0.7.1'
+  gem 'database_cleaner', '~> 0.7.2'
   gem 'launchy'
   
   gem 'guard'
-  gem 'guard-rspec', '~> 0.6.0'
+  gem 'guard-rspec', '~> 0.7.0'
   gem 'guard-bundler'
   gem 'guard-spork'
+  
+  if RUBY_PLATFORM =~ /darwin/
+    gem 'growl'
+  end
 end
 
 unless ENV["CI"]

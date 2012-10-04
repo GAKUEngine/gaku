@@ -1,2 +1,9 @@
-$('tr#exam_portion_<%= @exam_portion.id %>').html('<%= escape_javascript(render :partial => "exams/exam_portions/exam_portion", :formats => [:html], :handlers => [:erb, :slim], :locals => {:exam_portion => @exam_portion}) %>');
-$("#editExamPortionModal").modal('hide')
+$('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("exams/exam_portions/exam_portion", {:exam_portion => @exam_portion}) %>');
+$("#editExamPortionModal").modal('hide');
+$('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
+
+var sum = 0;
+    $('.exam-portion-weight').each(function() {
+        sum += Number($(this).val());
+    });
+$('#weight-total').text(sum);

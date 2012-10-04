@@ -37,6 +37,14 @@ GAKUEngine::Application.routes.draw do
     collection do 
       get :filtered_students
       get :autocomplete_filtered_students
+      post :enroll_students
+    end
+
+  end
+
+  resources :course_enrollments do
+    collection do
+      post :enroll_students
     end
   end
   

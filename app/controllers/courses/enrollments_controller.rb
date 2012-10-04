@@ -27,6 +27,8 @@ class Courses::EnrollmentsController < ApplicationController
         show_flash_error_for_enroll(@course, 'Selected Class Group is empty') and return
       else
         @not_added_students = @class_group.students - @course.students
+        logger.debug "CG: #{@class_group.students.inspect}"
+        logger.debug "C: #{@course.students.inspect}"
         if @not_added_students.empty? 
           show_flash_error_for_enroll(@course, 'All students are already added to the course') and return 
         end
@@ -43,9 +45,9 @@ class Courses::EnrollmentsController < ApplicationController
 
   def show_flash_error_for_enroll(respond_with_var,message)
     respond_with(respond_with_var) do |format|
-      flash.now[:error] = message
+      flash.now[:notice] = message
       format.html { render :nothing => true }
-      format.js
+      format.js { render 'courses/enrollments/class_groups/enroll'}
     end
   end
 

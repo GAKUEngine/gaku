@@ -1,2 +1,2 @@
-$('#modal-dialogs').html('<%== escape_javascript(render :partial => "contact_modal", :formats => [:html], :handlers => [:erb, :slim], :locals => {:note => @note}) %>');
+$('#modal-dialogs').html('<%== render_js_partial("contact_modal", {:note => @note}) %>');
 $('#edit-contact-modal').modal('show');
