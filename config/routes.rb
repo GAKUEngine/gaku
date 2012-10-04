@@ -132,12 +132,17 @@ GAKUEngine::Application.routes.draw do
       collection do
         get :exams
         get :course_groups
+        get :attachments
       end
     end
   end
 
   resources :attachments do
-    get 'download', :on => :member
+    member do 
+      get 'download'
+      delete 'soft_delete'
+      get 'recovery'
+    end
   end
 
 end

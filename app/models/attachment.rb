@@ -7,4 +7,7 @@ class Attachment < ActiveRecord::Base
 	has_attached_file :asset
 
 	validates :name, :presence => true
+
+	default_scope :conditions => { :is_deleted => false }
+
 end

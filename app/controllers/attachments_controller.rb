@@ -21,9 +21,24 @@ class AttachmentsController < ApplicationController
 		end
 	end
 
+	def soft_delete
+		@attachment = Attachment.find(params[:id])
+		@attachment.update_attribute(:is_deleted, true)
+		render :nothing => true
+	end
+
 	def download
 		@attachment = Attachment.find(params[:id])
 		send_file @attachment.asset.path 
+	end
+
+	def recovery
+		@attachment = Attachment.unscoped.find(params[:id])
+		@attachment.update_attribute(:is_deleted, false)
+		flash.now[:notice] = t('attachments.attachment_recovered')
+		respond_to do |format|
+			format.js { render 'admin/disposals/recover_attachment'}
+		end
 	end
 
 	private
