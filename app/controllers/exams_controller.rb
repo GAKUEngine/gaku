@@ -233,9 +233,9 @@ class ExamsController < ApplicationController
     end
 
     # WIP Grade and Rank Calculation -----↓
-
     @grades = Hash.new { |hash,key| hash[key] = {} }
-    gradeLevels = [1000, 66, 62, 58, 55, 59, 45, 37, 0]
+    gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
+    gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
 
     @ranks = Hash.new { |hash,key| hash[key] = {} }
     rankLevels = [15, 20]
@@ -257,9 +257,9 @@ class ExamsController < ApplicationController
 
       # Grade Calculation -----↓
       gradePoint = 10
-      gradeLevels.each_with_index do |glevel, i|
+      gradeLevels_Deviation.each_with_index do |glevel, i|
         @students.each do |student|
-          if gradeLevels[i] > @deviation[student.id][exam.id] && gradeLevels[i+1] <= @deviation[student.id][exam.id]
+          if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
             @grades[exam.id][student.id] = gradePoint
             puts "grade dayo------------------------"
             puts @grades[exam.id][student.id]
@@ -274,7 +274,7 @@ class ExamsController < ApplicationController
         @ranks[exam.id][student.id] = 3
       end
       rankNums = []
-      rankLevels.each_with_index do |rlevel, i|
+      rankLevels.each do |rlevel|
         rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
       end
       rankNums.each do |rnum|
