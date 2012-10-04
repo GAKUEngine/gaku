@@ -6,14 +6,12 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import-students-link"
+        = link_to_new t("students.import"), "students/importer", :class => "btn btn-primary mr-s", :id => "import-students-link"
         = link_to_new t("students.new"), new_student_path, :id => "new-student-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
-      .pull-right
-        = link_to "CSV Export", "students.csv", :id => 'export-students-link'
       #modal-dialogs
       #new-student-form.hide
         =render 'form'
@@ -40,3 +38,5 @@
       .span12.well
         #students-index
           =render 'students/students'
+          .pull-right
+            = link_to "CSV Export", "students.csv", :id => 'export-students-link', :class => "btn btn-mini btn-primary"
