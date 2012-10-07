@@ -1,0 +1,24 @@
+#admin-school-campus-contacts
+  .row-fluid
+    .pull-left
+      h4.h4-vm.admin-school-campus-contacts-count
+        = print_count(@campus.contacts, t('contacts.list'))
+    .pull-right
+        = ajax_link_to_new t('campuses.add_contact'), new_admin_school_campus_contact_path(@campus.school, @campus), :id => 'new-admin-school-campus-contact-link'
+
+  .row-fluid
+    table#admin-school-campus-contacts-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse style="width:28px; height:28px"
+              i.icon-white.icon-home
+          th.btn-inverse =t('contact_type')
+          th.btn-inverse =t('contacts.data')
+          th.btn-inverse =t('contacts.details')
+          th.btn-inverse =t('contacts.emergency')
+          th.btn-info style='width:61px' =t 'manage'
+      tbody
+        =render :partial => 'admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'
+    br/ 
+    #new-admin-school-campus-contact-form-errors
+    #new-admin-school-campus-contact

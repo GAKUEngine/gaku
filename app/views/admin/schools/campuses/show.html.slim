@@ -4,6 +4,9 @@
       tbody
         tr
           td = @campus.name
+
+= render 'admin/schools/campuses/contacts/contacts'
+
 .row-fluid
   .span12
     =link_to t('Back'), admin_school_campuses_path, :class => 'btn'
