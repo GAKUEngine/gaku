@@ -2,7 +2,10 @@ $ ->
 
   $('#new-class-group-link').on 'click', (event) ->
   	event.preventDefault()
-  	$('#new-class-group-form').slideToggle()
+  	$('#new-class_group').slideToggle()
+
+  $("#cancel-class_group-link").click ->
+    $('#new-class_group').slideToggle()
 
   $("#cancel-course-link").click ->
     $("#new-class-group-course-link").show()

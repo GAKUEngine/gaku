@@ -22,6 +22,15 @@ describe 'ClassGroups' do
     ClassGroup.count.should eql(1)
   end
 
+  it 'should not create and show if cancel is clicked', :js => true do
+    ClassGroup.count.should eql(0)
+    click_link 'new-class-group-link'
+    wait_until { page.find('#new-class_group').visible? }
+    click_on 'Cancel'
+    wait_until { !page.find('#new-class_group').visible? }
+    ClassGroup.count.should eql(0)
+  end
+
   context 'show, edit, delete' do
     before do 
       @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
@@ -54,7 +63,7 @@ describe 'ClassGroups' do
       find('.edit-link').click
       wait_until { find('#class-group-modal').visible? }
 
-      click_on 'Back'
+      click_on 'Cancel'
       @class_group.reload
 
       page.should have_content "#{@class_group.name}"

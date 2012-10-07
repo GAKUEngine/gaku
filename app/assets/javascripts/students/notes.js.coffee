@@ -1,5 +1,5 @@
 $ ->
-  $('#new-student-note-form form').validationEngine()
+  $('#new-student-note form').validationEngine()
 
   $("#submit-student-note-button").live "ajax:success", (data, status, xhr)->
     #add new record to list
