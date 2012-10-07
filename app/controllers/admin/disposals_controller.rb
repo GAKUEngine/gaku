@@ -9,6 +9,10 @@ class Admin::DisposalsController < Admin::BaseController
 		@course_groups = CourseGroup.where(:is_deleted => true).order(sort_column + " " + sort_direction)
 	end
 
+	def attachments
+		@attachments = Attachment.where(:is_deleted => true).order(sort_column + " " + sort_direction)
+	end
+
 	 def sort_column
       Student.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end

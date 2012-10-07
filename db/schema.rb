@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
   create_table "attachments", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.boolean  "is_deleted",         :default => false
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.string   "asset_file_name"

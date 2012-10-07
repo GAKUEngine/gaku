@@ -102,7 +102,9 @@ GAKUEngine::Application.routes.draw do
     put :create_exam_portion, :on => :member  
 
     resources :exam_scores
-    resources :exam_portions
+    resources :exam_portions do
+      resources :attachments, :only => [:create]
+    end
   end
 
   resources :states
@@ -137,7 +139,16 @@ GAKUEngine::Application.routes.draw do
       collection do
         get :exams
         get :course_groups
+        get :attachments
       end
+    end
+  end
+
+  resources :attachments do
+    member do 
+      get 'download'
+      delete 'soft_delete'
+      get 'recovery'
     end
   end
 

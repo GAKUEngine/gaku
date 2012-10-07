@@ -1,0 +1,26 @@
+.row-fluid
+  .span12.well
+    table.disposals-attachment-index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('name')
+          th.btn-inverse =t('description')
+          th.btn-inverse =t('attachments.asset_type')
+          th.btn-inverse =t('attachments.file_name')
+          th.btn-inverse =t('attachments.file_type')
+          th.btn-inverse =t('attachments.file_size')
+          th.btn-info width="70px" =t 'manage'
+      tbody
+        -@attachments.each do |attachment|
+          tr
+            td =attachment.name 
+            td =attachment.description
+            td =attachment.attachable_type
+            td =attachment.asset_file_name
+            td =attachment.asset_content_type
+            td =number_to_human_size attachment.asset_file_size
+            td
+              = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, attachment], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true, :style => 'margin-left:5px'
+              = ajax_link_to_delete attachment , :id => 'delete-disposal-attachments-link'
+
+          

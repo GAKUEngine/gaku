@@ -39,6 +39,16 @@ en:
   date_placeholder: "YYYY-MM-DD"
   search: "Search"
   hide: "Hide"
+  description: 'Description'
+  attachments:
+    assets: 'Assets'
+    file_name: 'File name'
+    file_type: 'File type'
+    file_size: 'File size'
+    new_attachment: "New Attachment"
+    create_attachment: 'Create Attachment'
+    attachment_recovered: 'Attachment recovered'
+    asset_type: 'Asset type'
   addresses:
     addresses: "Addresses"
     new: "New Address"
@@ -332,6 +342,7 @@ en:
     master: "Master exam portion"
     save: "Save exam portion"
     show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   options: "Options"
   notice:
     picture_uploaded: "Picture successfully uploaded"
