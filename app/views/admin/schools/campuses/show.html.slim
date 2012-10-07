@@ -1,0 +1,11 @@
+.row-fluid
+  .span12.well
+    table.table.table-bordered.table-striped
+      tbody
+        tr
+          td = @campus.name
+.row-fluid
+  .span12
+    =link_to t('Back'), admin_school_campuses_path, :class => 'btn'
+
+#modal-dialogs

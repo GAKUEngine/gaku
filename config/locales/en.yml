@@ -276,7 +276,19 @@ en:
     primary: "Primary"
     campuses: "Campuses"
 
-  
+  campuses:
+    singular: "Campus"
+    plural: "Campuses"
+    add: "Add Campus"
+    edit: "Edit Campus"
+    list: "Campus list"
+    new: "New Campus"
+    save: "Save Campus"
+    name: "Name"
+    address: "Campus Address"
+    contacs: "Campus Contacts"
+    primary: "Primary"
+
   note: "Notes"
   notes:
     notes: "Notes"

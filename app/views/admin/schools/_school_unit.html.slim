@@ -1,11 +1,5 @@
-td =school.name
-td =school.campuses.count
-td =school.slogan
-td =school.description
-td =school.founded
-td =school.principal
-td =school.vice_principal
-td =school.grades
+= render 'school_fields', :school => school
 td
+  = link_to_show [:admin, school]
   = ajax_link_to_edit [:edit, :admin, school]
   = ajax_link_to_delete [:admin, school]

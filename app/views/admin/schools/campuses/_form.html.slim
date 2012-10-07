@@ -1,0 +1,13 @@
+= form_for [:admin, @school, @campus] do |campus_form|
+  .row-fluid.mt-l
+    .span12.well
+      .span12.well
+        .row-fluid
+          =campus_form.label :name
+          =campus_form.text_field :name
+        .row-fluid
+          .span9
+            = submit_button t('campuses.save'), :id => 'submit-admin-school-campus-button', :class => 'btn btn-primary button span12'
+            = link_to_back admin_school_campuses_path, :id => 'back-admin-school-campus-link'
+  
+= javascript_include_tag 'admin/schools/campuses'
