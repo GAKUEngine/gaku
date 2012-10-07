@@ -52,7 +52,7 @@ end
 group :test do
   gem 'mysql2'
   gem 'spork', '~> 1.0rc'
-  gem 'rspec-rails', '~> 2.10.1'
+  gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'
