@@ -23,7 +23,7 @@ class CreateStudents < ActiveRecord::Migration
 
       t.references :user
       t.references :faculty
-
+      t.references :commute_method
       t.timestamps
     end
   end
