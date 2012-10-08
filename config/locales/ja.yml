@@ -3,6 +3,8 @@ ja:
     admin: "管理者"
     plural: "複数"
     presets:
+      save: 'Save'
+      updated: 'Presets Updated'
       student: "生徒用プリセット"
       students:
         gender: "生徒の性別"
@@ -38,6 +40,10 @@ ja:
   search: "検索"
   hide: "Hide"
   description: 'Description'
+  admin:
+    presets:
+      save: 'Save'
+      gender: 'Gender'
   attachments:
     assets: 'Assets'
     file_name: 'File name'
