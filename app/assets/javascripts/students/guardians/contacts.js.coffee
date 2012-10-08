@@ -3,6 +3,7 @@ $ ->
 
   $('#new-student-guardian-contact-link').on 'click', (event)->
     event.preventDefault()
+    $(this).hide()
     $('#new-student-guardian-contact-link').hide()
     $('#new-student-guardian-contact form').slideToggle()
 

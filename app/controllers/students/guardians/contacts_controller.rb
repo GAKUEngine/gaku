@@ -4,8 +4,16 @@ class Students::Guardians::ContactsController < ApplicationController
 	
 	actions :index, :show, :new, :create, :update, :edit, :destroy
 
-	before_filter :load_guardian, :only => [:edit, :update, :create, :create_modal, :destroy, :show]
-  before_filter :load_before_show, :only => [:edit, :update, :create, :create_modal, :show]
+	before_filter :load_guardian, :only => [:new, :create, :create_modal, :edit, :update, :destroy, :show]
+  before_filter :load_student, :only => [:new, :create, :create_modal, :edit, :update , :show]
+
+
+  def new
+    @contact = Contact.new
+    super do |format|
+      format.js { render 'students/guardians/contacts/new' }
+    end 
+  end
 
   def create
     @contact = @guardian.contacts.build(params[:contact])
@@ -66,7 +74,7 @@ class Students::Guardians::ContactsController < ApplicationController
   	@guardian = Guardian.find(params[:guardian_id])
   end
 
-  def load_before_show
+  def load_student
     @student = Student.find(params[:student_id])
   end
 end
