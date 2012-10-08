@@ -4,10 +4,11 @@ class Students::GuardiansController < ApplicationController
 
   inherit_resources
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  actions :index, :show
 
-  before_filter :load_student, :only => [ :new,:show, :create, :edit, :update, :destroy ]
+  before_filter :load_student, :only => [:new, :show, :create, :edit, :update, :destroy]
   before_filter :load_primary_address, :only => :show
+  
   def new
     @guardian = Guardian.new
     render 'new'  
@@ -15,7 +16,7 @@ class Students::GuardiansController < ApplicationController
   
   def edit
     super do |format|
-      format.js {render 'edit'}  
+      format.js { render 'edit' }  
     end  
   end
 
@@ -45,7 +46,7 @@ class Students::GuardiansController < ApplicationController
   	@contact = Contact.new
   
   	respond_to do |format|
-  		format.js {render 'new_contact'}
+  		format.js { render 'new_contact' }
   	end
   end
 
@@ -60,4 +61,3 @@ class Students::GuardiansController < ApplicationController
     end
 
 end
-
