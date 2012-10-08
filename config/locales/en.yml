@@ -6,7 +6,13 @@ en:
     presets:
       student: "Student Preset"
       locale: "Locale Preset"
-
+      save: 'Save'
+      updated: 'Presets Updated'
+      students:
+        gender: 'Gender'
+        country: 'Country'
+        state: 'State'
+        city: 'City'
   fields:
     name: "name"
     surname: "surname"

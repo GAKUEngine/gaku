@@ -3,9 +3,9 @@ module Admin
 
   	inherit_resources
 
-  	def students  		
-  		@preset_hash =  Preset.load_presets_hash(Preset::PRESETS[:student]) 
-  	end
+  	def students  		  	
+    	@preset_hash =  Preset.load_presets_hash(Preset::PRESETS[:student])
+    end
 
   	def locale
       @preset_hash =  Preset.load_presets_hash(Preset::PRESETS[:locale]) 
@@ -19,7 +19,7 @@ module Admin
         end
       end
 
-  		redirect_to :back, :notice => 'Presets updated'
+  		redirect_to :back, :notice => t('admin.presets.updated')
       # preset_names = []
       # preset_contents = {}
       # params[:presets].each do |preset_params|
