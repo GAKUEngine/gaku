@@ -2,16 +2,15 @@ class Students::Guardians::ContactsController < ApplicationController
 	
 	inherit_resources
 	
-	actions :index, :show, :new, :create, :update, :edit, :destroy
+	actions :index, :show
 
 	before_filter :load_guardian, :only => [:new, :create, :create_modal, :edit, :update, :destroy, :show]
   before_filter :load_student, :only => [:new, :create, :create_modal, :edit, :update , :show]
 
-
   def new
     @contact = Contact.new
     super do |format|
-      format.js { render 'students/guardians/contacts/new' }
+      format.js { render 'new' }
     end 
   end
 
@@ -20,7 +19,7 @@ class Students::Guardians::ContactsController < ApplicationController
     if @contact.save
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       respond_to do |format|
-        format.js { render 'students/guardians/contacts/create', :notice => 'Contact Created' }
+        format.js { render 'create', :notice => 'Contact Created' }
       end
     end
   end
@@ -31,14 +30,14 @@ class Students::Guardians::ContactsController < ApplicationController
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       respond_to do |format|
         flash.now[:notice] = 'Contact Created'
-        format.js { render 'students/guardians/contacts/create_modal'}
+        format.js { render 'create_modal' }
       end
     end
   end
 
   def edit
     super do |format|
-      format.js { render 'students/guardians/contacts/edit' }  
+      format.js { render 'edit' }  
     end  
   end
 
@@ -46,7 +45,7 @@ class Students::Guardians::ContactsController < ApplicationController
     super do |format|
       @contacts = Contact.where(:guardian_id => params[:guardian_id])
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
-      format.js { render 'students/guardians/contacts/update' }
+      format.js { render 'update' }
     end  
   end
 
@@ -56,7 +55,7 @@ class Students::Guardians::ContactsController < ApplicationController
       if @contact.is_primary?
         @guardian.contacts.first.make_primary_guardian if @guardian.contacts.any?
       end
-        format.js { render 'students/guardians/contacts/destroy' }
+        format.js { render 'destroy' }
     end
   end 
 
@@ -64,17 +63,17 @@ class Students::Guardians::ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @contact.make_primary_guardian
     respond_with(@contact) do |format|
-      format.js { render 'students/guardians/contacts/make_primary' }
+      format.js { render 'make_primary' }
     end
   end
 
   private
 
-  def load_guardian
-  	@guardian = Guardian.find(params[:guardian_id])
-  end
+    def load_guardian
+  	  @guardian = Guardian.find(params[:guardian_id])
+    end
 
-  def load_student
-    @student = Student.find(params[:student_id])
-  end
+    def load_student
+      @student = Student.find(params[:student_id])
+    end
 end
