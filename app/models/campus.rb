@@ -17,6 +17,6 @@ class Campus < ActiveRecord::Base
 	belongs_to :school
 	belongs_to :address
 
-	attr_accessible :name, :school_id, :address_id
+	attr_accessible :name, :school_id, :address_id, :is_master
 
 end

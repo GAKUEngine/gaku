@@ -1,0 +1,2 @@
+$('tr#campus-<%= @campus.id %>').html('<%= render_js_partial("campus_unit", {:campus => @campus, :school => @school}) %>');
+$("#edit-campus-modal").modal("hide");

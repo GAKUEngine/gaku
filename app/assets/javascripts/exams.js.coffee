@@ -2,6 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  $('#add_exam_exam_portion').on 'click','a.btn', (event) ->
-	    event.preventDefault()
-	    $('#exam_exam_portions_form').slideToggle()
+	
+	$('#exam_use_weighting').on 'click', ->
+		if $(@).is(':checked')
+			$('#exam_weight').attr('class','validate[required, custom[integer]min[0]] span12')
+		else
+			$('#exam_weight').attr('class','span12')
+			$('.exam_weightformError').remove()
+
+  
+	$('#add_exam_exam_portion').on 'click','a.btn', (event) ->
+		event.preventDefault()
+		$('#exam_exam_portions_form').slideToggle()
+
+

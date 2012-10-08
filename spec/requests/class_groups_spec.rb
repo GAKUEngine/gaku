@@ -8,7 +8,7 @@ describe 'ClassGroups' do
   end
 
   it 'should create and show class group', :js => true do
-    ClassGroup.count.should eql(0)
+    ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
@@ -19,7 +19,17 @@ describe 'ClassGroups' do
     page.should have_content 'Awesome class group'
     page.should have_content 'room#7'
     
-    ClassGroup.count.should eql(1)
+    ClassGroup.count.should eq 1
+  end
+
+  it 'should cancel creating', :js => true do
+    ClassGroup.count.should eq 0
+    click_link 'new-class-group-link'
+    wait_until { page.find('#new-class-group').visible? }
+
+    click_on 'cancel-class-group-link'
+    wait_until { !page.find('#new-class-group').visible? }
+    ClassGroup.count.should eq 0
   end
 
   context 'show, edit, delete' do
@@ -45,21 +55,17 @@ describe 'ClassGroups' do
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
 
-      ClassGroup.last.name.should eql('Really awesome class group')
-      ClassGroup.last.grade.should eql(2)
-      ClassGroup.last.homeroom.should eql('B2')
+      ClassGroup.last.name.should eq 'Really awesome class group'
+      ClassGroup.last.grade.should eq 2
+      ClassGroup.last.homeroom.should eq 'B2'
     end
 
-    it 'should not edit a class group if back button is clicked while editing', :js => true do
+    it 'should cancel editting', :js => true do
       find('.edit-link').click
       wait_until { find('#class-group-modal').visible? }
 
-      click_on 'Back'
-      @class_group.reload
-
-      page.should have_content "#{@class_group.name}"
-      page.should have_content "#{@class_group.grade}"
-      page.should have_content "#{@class_group.homeroom}"
+      click_on 'cancel-class-group-link'
+      wait_until { !page.find('#class-group-modal').visible? }
     end
 
     it 'should edit class group from show view', :js => true do 
@@ -80,13 +86,13 @@ describe 'ClassGroups' do
       page.should_not have_content 'Not so awesome class group'
       page.should_not have_content 'A1'
 
-      ClassGroup.last.name.should eql('Really awesome class group')
-      ClassGroup.last.grade.should eql(2)
-      ClassGroup.last.homeroom.should eql('B2')
+      ClassGroup.last.name.should eq 'Really awesome class group'
+      ClassGroup.last.grade.should eq 2
+      ClassGroup.last.homeroom.should eq 'B2'
     end
 
     it 'should delete class group', :js => true do 
-      ClassGroup.count.should eql(1)
+      ClassGroup.count.should eq 1
       tr_count = page.all('table#class-groups-index tbody tr').size
       page.should have_content(@class_group.name)
 
@@ -95,7 +101,7 @@ describe 'ClassGroups' do
   
       wait_until { page.all('table#class-groups-index tbody tr').size == tr_count - 1 }
       page.should_not have_content(@class_group.name)
-      ClassGroup.count.should eql(0)
+      ClassGroup.count.should eq 0
     end
 
     it 'should return to class_groups index when back selected' do

@@ -1,4 +1,4 @@
-= form_for [@student, @note], :remote => true do |note_form|
+= form_for [@student, @note], :html => {:id => 'new-student-note-form'},:remote => true do |note_form|
   - if note_form.object.new_record?
     .row-fluid.control-group
       .span12

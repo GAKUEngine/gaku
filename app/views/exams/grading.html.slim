@@ -7,6 +7,8 @@ javascript:
   var exam_averages = '#{@exam_averages.to_json.to_s.html_safe}'
   var deviation = '#{@deviation.to_json.to_s.html_safe}'
   var students = '#{Student.decrypt_student_fields(@students).to_s.html_safe}'
+  var grades = '#{@grades.to_json.to_s.html_safe}'
+  var ranks = '#{@ranks.to_json.to_s.html_safe}'
 coffee:
   $(document).ready ->
 
@@ -28,7 +30,7 @@ coffee:
       fixH = $(".exam_grid").height()
       if fixH > $(window).height() - $(".exam_grid").offset().top - 40
         fixH = $(window).height() - $(".exam_grid").offset().top - 40
-      $('.exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3})
+      #$('.exam_grid').tablefix({width: fixW, height: fixH, fixRows: 2, fixCols: 3})
 
     router = new GAKUEngine.Routers.ExamsRouter
       exams: $.parseJSON(examsForGrade)
@@ -37,5 +39,6 @@ coffee:
       exam_averages: $.parseJSON(exam_averages)
       deviation: $.parseJSON(deviation)
       students: $.parseJSON(students)
+      grades: $.parseJSON(grades)
+      ranks: $.parseJSON(ranks)
     Backbone.history.start()
-    #TableFix()
