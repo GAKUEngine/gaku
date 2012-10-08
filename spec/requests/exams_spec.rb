@@ -51,81 +51,81 @@ describe 'Exams' do
       page.should_not have_content "was successfully created"
       Exam.count.should == 0
     end 
-  
-    context 'with added exam' do
-      before do
-        @exam = create(:exam, :name => "Linux")
-        visit exams_path
-        Exam.count.should == 1
-      end
+  end
 
-      it 'should edit exam from index', :js => true do
-        within('#exams-index') { find('#edit-exam-link').click }
-        wait_until{ page.find('#edit-exam-modal').visible? }
-        fill_in 'exam_name', :with => 'Biology 2012'
-        click_button 'submit_button'
-        wait_until{ !page.find('#edit-exam-modal').visible? }
-        within('#exams-index') { page.should have_content('Biology 2012') }
-      end
-
-      it 'should show validation msgs on index/edit', :js => true do
-        within('#exams-index') { find('#edit-exam-link').click }
-        wait_until{ page.find('#edit-exam-modal').visible? }
-        fill_in 'exam_name', :with => ''
-        click_button 'submit_button'
-        wait_until { page.should have_content 'This field is required' }
-      end
-
-      it 'should show weighting widget' do
-        within('#exams-index') { find('#show-exam-link').click }
-        page.should have_content('Weight')
-        page.should have_content('Total Weight')
-      end
-
-      it 'should hide weighting widget',:js => true do
-        within('#exams-index') { find('#edit-exam-link').click }
-        wait_until{ page.find('#edit-exam-modal').visible? }
-        uncheck 'Use Weighting'
-        click_button 'submit_button'
-        wait_until{ !page.find('#edit-exam-modal').visible? }
-        page.should_not have_content('Total Weight')
-        page.should have_no_selector(:content,'.weight-check-widget')
-      end
-
-      it 'should edit exam from show view', :js => true do
-        within('#exams-index') { find('#show-exam-link').click }
-        page.should have_content('Show Exam')
-        click_on "Edit"
-        page.should have_content('Edit Exam')
-        fill_in 'exam_name', :with => 'Biology 2012'
-        click_button 'submit_button'
-        wait_until { page.should have_content('was successfully updated.') }
-        page.should have_content('Biology 2012')
-      end
-
-      it 'should show validation msgs on view/edit', :js => true do
-        within('#exams-index') { find('#show-exam-link').click }
-        page.should have_content('Show Exam')
-        click_on "Edit"
-        page.should have_content('Edit Exam')
-        fill_in 'exam_name', :with => ''
-        click_button 'submit_button'
-        wait_until { page.should have_content('This field is required') }
-      end
-
-      it 'should delete an exam', :js => true do
-        within('#exams-index') { find('#delete-exam-link').click }
-        page.driver.browser.switch_to.alert.accept
-        page.should_not have_content("#{@exam.name}")
-        Exam.count.should == 0
-      end
-
-      it 'should return to exams index when back selected' do
-        visit exam_path(@exam)
-        click_on 'Back'
-        page.should have_content('Exams List')
-      end
-  
+  context 'with added exam' do
+    before do
+      @exam = create(:exam, :name => "Linux")
+      visit exams_path
+      Exam.count.should == 1
     end
+
+    it 'should edit exam from index', :js => true do
+      within('#exams-index') { find('#edit-exam-link').click }
+      wait_until{ page.find('#edit-exam-modal').visible? }
+      fill_in 'exam_name', :with => 'Biology 2012'
+      click_button 'submit_button'
+      wait_until{ !page.find('#edit-exam-modal').visible? }
+      within('#exams-index') { page.should have_content('Biology 2012') }
+    end
+
+    it 'should show validation msgs on index/edit', :js => true do
+      within('#exams-index') { find('#edit-exam-link').click }
+      wait_until{ page.find('#edit-exam-modal').visible? }
+      fill_in 'exam_name', :with => ''
+      click_button 'submit_button'
+      wait_until { page.should have_content 'This field is required' }
+    end
+
+    it 'should show weighting widget' do
+      within('#exams-index') { find('#show-exam-link').click }
+      page.should have_content('Weight')
+      page.should have_content('Total Weight')
+    end
+
+    it 'should hide weighting widget',:js => true do
+      within('#exams-index') { find('#edit-exam-link').click }
+      wait_until{ page.find('#edit-exam-modal').visible? }
+      uncheck 'Use Weighting'
+      click_button 'submit_button'
+      wait_until{ !page.find('#edit-exam-modal').visible? }
+      page.should_not have_content('Total Weight')
+      page.should have_no_selector(:content,'.weight-check-widget')
+    end
+
+    it 'should edit exam from show view', :js => true do
+      within('#exams-index') { find('#show-exam-link').click }
+      page.should have_content('Show Exam')
+      click_on "Edit"
+      page.should have_content('Edit Exam')
+      fill_in 'exam_name', :with => 'Biology 2012'
+      click_button 'submit_button'
+      wait_until { page.should have_content('was successfully updated.') }
+      page.should have_content('Biology 2012')
+    end
+
+    it 'should show validation msgs on view/edit', :js => true do
+      within('#exams-index') { find('#show-exam-link').click }
+      page.should have_content('Show Exam')
+      click_on "Edit"
+      page.should have_content('Edit Exam')
+      fill_in 'exam_name', :with => ''
+      click_button 'submit_button'
+      wait_until { page.should have_content('This field is required') }
+    end
+
+    it 'should delete an exam', :js => true do
+      within('#exams-index') { find('#delete-exam-link').click }
+      page.driver.browser.switch_to.alert.accept
+      page.should_not have_content("#{@exam.name}")
+      Exam.count.should == 0
+    end
+
+    it 'should return to exams index when back selected' do
+      visit exam_path(@exam)
+      click_on 'Back'
+      page.should have_content('Exams List')
+    end
+    
   end
 end
