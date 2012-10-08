@@ -68,6 +68,7 @@ group :test do
   
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
+    gem 'rb-fsevent', '~> 0.9.1' #guard dependency
   end
 end
 
