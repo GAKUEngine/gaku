@@ -18,7 +18,6 @@ describe 'Address' do
     end
 
     it 'should add and show student address', :js => true do
-      !page.find("#new-student-address-link").visible?
       tr_count = page.all('table#student-addresses-index tr').size
       @student.addresses.size.should eql(0)
       #required
@@ -57,7 +56,11 @@ describe 'Address' do
       click_link 'cancel-student-address-link'
       sleep 1
       wait_until { !page.find("#new-student-address-form").visible? }
-      find("#new-student-address-link").visible? 
+      find("#new-student-address-link").visible?
+       
+      click_link 'new-student-address-link'
+      wait_until { find("#new-student-address-form").visible? }
+      !page.find("#new-student-address-link").visible?
     end
   end
 

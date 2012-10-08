@@ -1,5 +1,5 @@
 - model = @contact || Contact.new
-=form_for [@student, model], :remote => true, :html => { :class => 'new_student_contact_form' } do |contact_form|
+=form_for [@student, model], :remote => true do |contact_form|
   .row-fluid 
     .span12
       b= t('contacts.new') 

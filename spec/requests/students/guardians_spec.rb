@@ -12,7 +12,7 @@ describe 'Guardian' do
     before do 
       click_link 'new-student-guardian-tab-link'
       click_link 'new-student-guardian-link'
-      wait_until { find('#new-student-guardian-form').visible? } 
+      wait_until { find('#new-student-guardian form').visible? } 
     end
 
     it "should add and show student guardian", :js => true do
@@ -29,7 +29,7 @@ describe 'Guardian' do
 
       click_button "submit-student-guardian-button"
 
-      wait_until { !page.find('#new-student-guardian-form').visible? }
+      wait_until { !page.find('#new-student-guardian form').visible? }
       page.should have_selector('a', href: "/students/1/guardians/1/edit")
       #required
       page.should have_content("Doe")
@@ -46,8 +46,12 @@ describe 'Guardian' do
 
     it 'should cancel adding', :js => true do
       click_link 'cancel-student-guardian-link'
-      wait_until { !page.find('#new-student-guardian-form').visible? }  
+      wait_until { !page.find('#new-student-guardian form').visible? }  
       find('#new-student-guardian-link').visible?
+
+      click_link 'new-student-guardian-link'
+      wait_until { find('#new-student-guardian form').visible? }  
+      !page.find('#new-student-guardian-link').visible?
     end
   end
 

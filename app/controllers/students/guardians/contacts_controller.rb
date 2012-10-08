@@ -7,7 +7,6 @@ class Students::Guardians::ContactsController < ApplicationController
 	before_filter :load_guardian, :only => [:edit, :update, :create, :create_modal, :destroy, :show]
   before_filter :load_before_show, :only => [:edit, :update, :create, :create_modal, :show]
 
-
   def create
     @contact = @guardian.contacts.build(params[:contact])
     if @contact.save
