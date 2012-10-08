@@ -13,6 +13,9 @@ GAKUEngine::Application.routes.draw do
         get :autocomplete_filtered_students
       end
     end
+    member do
+      get :student_chooser
+    end
   end
 
   resources :courses do   
