@@ -1,7 +1,8 @@
 en:
   admin:
-    admin: "admin"
-    plural: "admin"
+    admin: "Admin"
+    schools: "Schools"
+    contact_types: "Contact Types"
     presets:
       student: "Student Preset"
       locale: "Locale Preset"
@@ -257,7 +258,6 @@ en:
     save: "Save Contact Type"
 
   contacts:
-    list: "Contacts List"
     new: "New Contact"
     save: "Save Contact"
     data: "Data"
@@ -267,6 +267,38 @@ en:
     actions: 'Actions'
     list: "Contacts list"
     contacts: "Contacts"
+
+  schools:
+    singular: "School"
+    plural: "Schools"
+    add: "Add School"
+    edit: "Edit School"
+    list: "School list"
+    new: "New School"
+    save: "Save School"
+    name: "Name"
+    slogan: "Slogan"
+    description: "Description"
+    founded: "Founded"
+    principal: "Principal"
+    vice_principal: "Vice Principal"
+    grades: "Grades"
+    primary: "Primary"
+    campuses: "Campuses"
+
+  campuses:
+    singular: "Campus"
+    plural: "Campuses"
+    add: "Add Campus"
+    edit: "Edit Campus"
+    list: "Campus list"
+    new: "New Campus"
+    save: "Save Campus"
+    name: "Name"
+    address: "Campus Address"
+    contacs: "Campus Contacts"
+    primary: "Primary"
+
   note: "Notes"
   notes:
     notes: "Notes"

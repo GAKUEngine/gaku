@@ -122,6 +122,13 @@ GAKUEngine::Application.routes.draw do
 
   namespace :admin do
     resources :contact_types
+    resources :schools do 
+      resources :campuses, :controller => 'schools/campuses' do
+        resources :contacts, :controller => 'schools/campuses/contacts' do
+          post :make_primary, :on => :member
+        end
+      end
+    end
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection

@@ -1,0 +1,4 @@
+h1 = t('campuses.edit')
+= render 'form'
+= link_to t('campuses.show'), [:edit, :admin, @school, @campus]
+= link_to t('back'), admin_school_campuses_path(@school)

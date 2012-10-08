@@ -12,9 +12,5 @@
           .span9
             =submit_button t('contact_types.save'), :id => 'submit-contact-type-button', :class => 'btn btn-primary button span12'
           = link_to_cancel :id => 'cancel-contact-type-link'
-  
-  
-coffee:
-  $("#cancel-contact-type-link").click ->
-    $("#new-contact-type-link").show()
-    $("#new-contact-type-form").html("")
+
+= javascript_include_tag 'admin/contact_types'

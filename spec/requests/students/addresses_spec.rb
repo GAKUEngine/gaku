@@ -55,6 +55,7 @@ describe 'Address' do
 
     it 'should cancel adding address', :js => true do 
       click_link 'cancel-student-address-link'
+      sleep 1
       wait_until { !page.find("#new-student-address-form").visible? }
       find("#new-student-address-link").visible? 
     end

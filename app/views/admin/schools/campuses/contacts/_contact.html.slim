@@ -1,0 +1,11 @@
+tr id="contact-#{contact.id}" class="campus-contact"
+  -@target = [@campus.school, @campus, contact]
+  td class="primary-button" width="28px"
+    -if @target.last.is_primary?
+      = link_to ("<i class='icon-white icon-ok'></i>").html_safe, [:make_primary, :admin] + @target, :data => {:confirm => 'are you sure?'}, :class => 'btn btn-mini btn-primary make-primary', :remote => true, :method => :post
+    -else
+      = link_to ("<i class='icon-white icon-ok'></i>").html_safe, [:make_primary, :admin] + @target, :id => 'set-primary-link', :data => {:confirm => 'are you sure?'}, :class => 'btn btn-mini', :remote => true, :method => :post
+  = render 'shared/fields/contact_fields', :target => @target
+  td 
+    = ajax_link_to_edit [:edit, :admin] + @target
+    = ajax_link_to_delete [:admin] + @target
