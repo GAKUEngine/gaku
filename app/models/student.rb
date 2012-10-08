@@ -44,6 +44,7 @@ class Student < ActiveRecord::Base
   has_many :assignment_scores
 
   belongs_to :user
+  belongs_to :commute_method
 
   has_many :student_addresses
   has_many :addresses, :through => :student_addresses
