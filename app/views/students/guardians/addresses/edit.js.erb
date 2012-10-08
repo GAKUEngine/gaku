@@ -1,2 +1,2 @@
-$('#modal-dialogs').html('<%== render_js_partial("students/guardians/addresses/address_modal", {:address => @address}) %>');
+$('#modal-dialogs').html('<%= render_js_partial("address_modal", {:address => @address}) %>');
 $('#edit-address-modal').modal('show');
