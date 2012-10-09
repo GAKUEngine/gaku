@@ -1,10 +1,6 @@
 class Students::ClassGroupEnrollmentsController < ApplicationController
 
-  inherit_resources
-
-  actions :index, :show, :new, :create, :update, :edit, :destroy
-
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
+  before_filter :load_student, :only => [:new, :create]
 
   def new
     @class_group_enrollment = ClassGroupEnrollment.new
