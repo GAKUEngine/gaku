@@ -3,7 +3,8 @@
     h4.h4-vm.course-students-count = print_count(@course.students, t("students.list"))
   .pull-right
     #new-course-student-div.pull-right
-      = ajax_link_to_new t('add_student'), "", :id => "new-course-student-link"
+      /= ajax_link_to_new t('add_student'), "", :id => "new-course-student-link"
+      = ajax_link_to_new t('add_student'), student_chooser_course_path(:course_id => @course.id), :id => 'new-course-student-link'
 
     #new-course-class-group-div.pull-right.mr-s
       = ajax_link_to_new t('courses.add_class_group'), "", :id => 'new-course-class-group-link'

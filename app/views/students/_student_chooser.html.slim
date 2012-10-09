@@ -19,6 +19,12 @@
           = hidden_field_tag "source", "class_groups"
           h4 = "Adding students to " + @class_group.name
           = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
+      -elsif !@course.nil?
+        = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+          = hidden_field_tag "course_id", @course.id
+          = hidden_field_tag "source", "courses"
+          h4 = "Adding students to " + @course.code
+          = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
       - else
         .span12 style="margin-top:10px;"
           = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
