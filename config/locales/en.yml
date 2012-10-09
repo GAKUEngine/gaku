@@ -82,8 +82,6 @@ en:
   teacher: "Instructor"
   student: "Student"
   students:
-    import: "CSV Import"
-    export: "CSV Export"
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
@@ -356,3 +354,7 @@ en:
   helpers:
     links:
       cancel: "Cancel"
+
+  csv:
+    import: "CSV Import"
+    export: "CSV Export"

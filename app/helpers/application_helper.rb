@@ -8,6 +8,14 @@ module ApplicationHelper
     link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def button(text, resource, options = {})
+    attributes = {
+      :class => "btn btn-primary"
+    }.merge(options)
+
+    link_to text, resource, attributes
+  end
+
   def link_to_file(text, resource, options = {})
     name = ("<i class='icon-white icon-file'></i>" + text).html_safe
     attributes = {

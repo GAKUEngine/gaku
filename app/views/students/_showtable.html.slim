@@ -16,33 +16,14 @@
 .row-fluid
   .span12.well
     = render :partial => 'students/contacts/contacts'
-.row-fluid
-  .span12.well
-    .tabbable.tabs-right
-      ul.nav.nav-tabs
-        li.active
-          a#new-student-address-tab-link data-toggle="tab" href="#addresses"
-            = print_count(@student.addresses, t('addresses.addresses'))
-        li
-          a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
-            = print_count(@student.guardians, t('guardians.guardians'))
-        li
-          a#new-student-course-enrollment-tab-link data-toggle="tab" href="#courses"
-            = print_count(@student.courses, t('courses.plural'))
-      .tab-content
-        #addresses.tab-pane.active
-          = render :partial => 'students/addresses/addresses'
-        #guardians.tab-pane
-          = render :partial => 'students/guardians/guardians'
-        #courses.tab-pane
-          = render :partial => 'students/course_enrollments/course_enrollments'
+= render :partial => 'students/tab_menu'
 .row-fluid
   .span12.well
     = render :partial => 'students/notes/notes'
 .row-fluid
   .span12.well
     .span4
-      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student),  { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
+      = link_to t("enroll_to_class"), new_student_class_group_enrollment_path(@student), { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
       = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link", :remote => true
     .span4
