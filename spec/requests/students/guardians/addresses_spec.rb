@@ -16,21 +16,22 @@ describe 'Guardian Addresses' do
   end
   
   context 'new' do 
+    before do 
+      find('.show-link').click
+      click_link 'new-student-guardian-address-link'
+      wait_until { find('#new-student-guardian-address form').visible? }
+    end
+
     it "should add and show address to a student guardian", :js => true do 
       @student.guardians.first.addresses.count.should eql(0)
-
-      find('.show-link').click
       tr_count = page.all('table#student-guardian-addresses-index tr').size 
-      click_link 'new-student-guardian-address-link'
       
-      wait_until { find('#new-student-guardian-address-form').visible? }
-      !page.find('#new-student-guardian-address-link').visible? 
       select 'Japan', :from => 'country_dropdown'
       fill_in 'address_address1', :with => 'Subaru str.'
       fill_in 'address_city', :with => 'Nagoya'
       click_button 'submit-student-guardian-address-button'
 
-      wait_until { !page.find('#new-student-guardian-address-form').visible? }
+      wait_until { !page.find('#new-student-guardian-address form').visible? }
       page.should have_content('Japan')
       page.should have_content('Nagoya')
       page.should have_content('Subaru str.')
@@ -40,12 +41,13 @@ describe 'Guardian Addresses' do
     end
 
     it 'should cancel adding', :js => true do 
-      find('.show-link').click
-      click_link 'new-student-guardian-address-link'
-
-      wait_until { find('#new-student-guardian-address-form').visible? }
       click_link 'cancel-student-guardian-address-link'
-      wait_until { !page.find('#new-student-guardian-address-form').visible? }
+      wait_until { !page.find('#new-student-guardian-address form').visible? }
+      find('#new-student-guardian-address-link').visible?
+
+      click_link 'new-student-guardian-address-link'
+      wait_until { find('#new-student-guardian-address form').visible? }
+      !page.find('#new-student-guardian-address-link').visible?
     end 
   end
 

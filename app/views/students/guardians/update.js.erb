@@ -1,2 +1,2 @@
-$('div#guardian-<%= @guardian.id %>').html('<%= render_js_partial("students/guardians/guardian_unit", {:guardian => @guardian}) %>');
+$('div#guardian-<%= @guardian.id %>').html('<%= render_js_partial("guardian_unit", {:guardian => @guardian}) %>');
 $('#edit-guardian-modal').modal('hide');

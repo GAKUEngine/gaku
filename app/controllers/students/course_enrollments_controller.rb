@@ -1,10 +1,9 @@
 class Students::CourseEnrollmentsController < ApplicationController
 
   inherit_resources
+  actions :create, :update, :edit, :destroy
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
-
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
+  before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
 
   def new
     @course_enrollment = CourseEnrollment.new
@@ -24,7 +23,7 @@ class Students::CourseEnrollmentsController < ApplicationController
 
   def edit
     super do |format|
-      format.js {render 'edit'}  
+      format.js { render 'edit' }  
     end  
   end
 

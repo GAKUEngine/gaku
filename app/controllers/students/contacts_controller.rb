@@ -1,15 +1,14 @@
 class Students::ContactsController < ApplicationController
 
   inherit_resources
+  actions :new, :create, :update, :edit, :destroy
 
-  actions :index, :show, :create, :update, :edit, :destroy
-
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
+  before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
 
   def new
     @contact = Contact.new
     super do |format|
-      format.js {render 'new'}
+      format.js { render 'new' }
     end 
   end
   
@@ -44,20 +43,14 @@ class Students::ContactsController < ApplicationController
       else
         format.js { render 'destroy' }
       end
-
     end
   end 
 
   def make_primary
     @contact = Contact.find(params[:id])
-    if params[:guardian_id]
-      #handle guardian contact make primary
-    else
-      #handle student contact make primary
-      @contact.make_primary_student
-      respond_with(@contact) do |format|
-        format.js { render 'make_primary' }
-      end
+    @contact.make_primary_student
+    respond_with(@contact) do |format|
+      format.js { render 'make_primary' }
     end
   end
 
