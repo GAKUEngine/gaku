@@ -145,6 +145,7 @@ ja:
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
+    course_created: 'Course was successfully created'
   course_groups:
     course_groups: '授業グループ'
     edit_course_group: '授業グループを編集'
@@ -182,7 +183,7 @@ ja:
     current_enrollment:
     none: "None"
   commute_methods:
-    created: 'Commute method was created successfully'
+    created: 'Commute method was successfully created'
     updated: 'Commute method was updated'
   grades:
     combined: "全試験合計"

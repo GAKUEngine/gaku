@@ -10,21 +10,18 @@
       .span12
         hr/
     .row-fluid
+      #new-course.hide
+        =render 'form'
+    .row-fluid
       .span12.well
         table#courses-index.index.table.table-striped.table-bordered.table-condensed
-          tr
-            th*{"class" => "btn-inverse", "data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
-            th*{"class" => "btn-inverse", "data-field" => t(:schedule)} =t('schedule')
-            th*{"class" => "btn-inverse", "data-field" => t(:teacher)} =t('teacher')
-            th*{"class" => "btn-inverse", "data-field" => t(:num_enrolled)} =t('num_enrolled')
-            th.btn-info style="width:94px" = t(:manage)
-          - @courses.each do |course|
+          thead
             tr
-              td= "[#{course.syllabus.code}]: #{course.syllabus.name}-#{course.code}"  if course.syllabus
-              td
-              td
-              td= course.students.count
-              td 
-                = link_to_show course, :id => 'show-course-link'
-                = link_to_edit edit_course_path(course), :id => 'edit-course-link'
-                = ajax_link_to_delete course_path(course), :id => 'delete-course-link'
+              th*{"class" => "btn-inverse", "data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
+              th*{"class" => "btn-inverse", "data-field" => t(:schedule)} =t('schedule')
+              th*{"class" => "btn-inverse", "data-field" => t(:teacher)} =t('teacher')
+              th*{"class" => "btn-inverse", "data-field" => t(:num_enrolled)} =t('num_enrolled')
+              th.btn-info style="width:94px" = t(:manage)
+          - @courses.each do |course|
+            =render 'course_unit', :course => course
+    

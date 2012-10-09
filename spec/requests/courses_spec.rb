@@ -8,20 +8,20 @@ describe 'Courses' do
     visit courses_path
   end
 
-  context "creating new course" do 
-    it "should create new course" do 
-      click_link "new-course-link"
+  it "create new course", :js => true do 
+    click_link "new-course-link"
 
-      fill_in 'course_code', :with => 'SUMMER2012'
-      page.select "#{@syllabus.name}", :from => 'course_syllabus_id'
-      click_button 'submit-course-button'
+    fill_in 'course_code', :with => 'SUMMER2012'
+    page.select "#{@syllabus.name}", :from => 'course_syllabus_id'
+    click_button 'submit-course-button'
 
-      page.should have_content "was successfully created"
-      page.should have_content("#{@syllabus.name}")
-    end
+    page.should have_content "was successfully created"
+    page.should have_content("#{@syllabus.name}")
   end
 
-  context "index, edit, delete", :js => true do
+  pending 'not create without required fields'
+
+  context "with course added" do
     before do
       @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
       @course = create(:course, :syllabus => @syllabus) 
@@ -29,11 +29,11 @@ describe 'Courses' do
     end
 
     it "should list and show existing courses" do
-      within("#courses-index tbody tr td") { page.should have_content("bio") }
+      within("#courses-index") { page.should have_content("biology") }
       within('#courses-index tr:nth-child(2)') { click_link "show-course-link" }
       
       page.should have_content('Course Code')
-      page.should have_content('bio')
+      page.should have_content('biology')
     end
 
     it "should edit a course" do
@@ -64,19 +64,18 @@ describe 'Courses' do
       page.should have_content "biology2013"
     end
 
-    it "should delete a course" do
-      @syllabus.courses.count.should eql(1)
+    it "should delete a course", :js => true do
+      @syllabus.courses.count.should eq 1
       page.should have_content("Courses list")
       page.should have_content(@course.code)
-      tr_count = page.all('table#courses-index tr').size
+      tr_count = page.all('table#courses-index tbody tr').size
       
-      within('table#courses-index tr:nth-child(2)') { find(".delete-link").click }
+      within('table#courses-index tbody tr') { find(".delete-link").click }
       page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table#courses-index tr').size == tr_count - 1 }
+      wait_until { page.all('table#courses-index tbody tr').size == tr_count - 1 }
       page.should_not have_content(@course.code)
-      @syllabus.courses.count.should eql(0)
+      @syllabus.courses.count.should eq 0
     end
   end
-
 end
