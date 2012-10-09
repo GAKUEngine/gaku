@@ -1,16 +1,17 @@
 #student-contacts
   .row-fluid
     .pull-left
-      h4.h4-vm.student-contacts-count
+      h4.mt-xs.mb-0.student-contacts-count
         = print_count(@student.contacts, t('contacts.list'))
     .pull-right
         = ajax_link_to_new t('students.add_contact'), new_student_contact_path(@student), :id => 'new-student-contact-link'
-
   .row-fluid
-    table#student-contacts-index.index.table.table-striped.table-bordered.table-condensed
+    hr
+  .row-fluid
+    table#student-contacts-index.table.table-striped.table-bordered.table-condensed
       thead
         tr
-          th.btn-inverse style="width:28px; height:28px"
+          th.btn-inverse style="width:28px"
               i.icon-white.icon-home
           th.btn-inverse =t('contact_type')
           th.btn-inverse =t('contacts.data')
@@ -19,6 +20,6 @@
           th.btn-info style='width:61px' =t 'manage'
       tbody
         =render :partial => 'students/contacts/contact', :collection => @student.contacts, :as => 'contact'
-    br/ 
+    br/
     #new-student-contact-form-errors
     #new-student-contact-form

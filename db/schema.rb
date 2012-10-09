@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "assets", :force => true do |t|
+    t.integer  "exam_portion_id"
+    t.integer  "lesson_plan_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "assignment_scores", :force => true do |t|
     t.integer  "score"
     t.integer  "student_id"
@@ -72,9 +79,8 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
     t.string   "name"
     t.integer  "school_id"
     t.integer  "address_id"
-    t.boolean  "is_master",  :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "class_group_course_enrollments", :force => true do |t|

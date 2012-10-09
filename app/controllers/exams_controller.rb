@@ -147,8 +147,6 @@ class ExamsController < ApplicationController
       num = num.truncate
       num = num.to_f / fixNum.to_f
     end
-    puts "trancate-----------------"
-    puts num
     return num
   end
 
@@ -200,8 +198,6 @@ class ExamsController < ApplicationController
         @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
-    puts "exam_averages-------------------"
-    puts @exam_averages[0]
 
     # Deviation Calculation -----↓
     @deviation = Hash.new { |hash,key| hash[key] = {} }
@@ -252,8 +248,6 @@ class ExamsController < ApplicationController
         end
       end
       scores.sort!().reverse!()
-      puts "scores--------------------"
-      puts scores
 
       # Grade Calculation -----↓
       gradePoint = 10
@@ -261,8 +255,6 @@ class ExamsController < ApplicationController
         @students.each do |student|
           if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
             @grades[exam.id][student.id] = gradePoint
-            puts "grade dayo------------------------"
-            puts @grades[exam.id][student.id]
           end
         end
         gradePoint -= 1

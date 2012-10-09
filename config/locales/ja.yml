@@ -149,7 +149,7 @@ ja:
   add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
-    add: "追加"
+    add: "在籍授業を追加"
     create: "作成"
     enrollment: "在籍管理"
     assignment: "割り振り"

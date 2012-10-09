@@ -1,7 +1,7 @@
 #student-addresses
   .row-fluid
     .pull-left
-      h4.h4-vm.student-addresses-count
+      h4.mt-xs.mb-0.student-addresses-count
         = print_count(@student.addresses, t('addresses.list'))
     .pull-right
       = ajax_link_to_new t('students.add_address'), new_student_address_path(@student), :id => 'new-student-address-link'
