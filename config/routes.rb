@@ -60,6 +60,7 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :students do
+    resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
         post :create_modal, :on => :collection
@@ -154,5 +155,6 @@ GAKUEngine::Application.routes.draw do
       get 'recovery'
     end
   end
+
 
 end

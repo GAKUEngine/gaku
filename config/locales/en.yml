@@ -32,6 +32,8 @@ en:
   Delete: "Delete"
   Back: "Back"
   cancel: "Cancel"
+  add: 'Add'
+  default: 'Default'
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -106,6 +108,7 @@ en:
     birth_between: "Birth date between"
     birth_and: "and"
     chosen_students: "Chosen students"
+    commute_method: 'Commute Method'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -181,6 +184,9 @@ en:
     class_groups: "Class groups"
     current_enrollment: "Current enrollment"
     enrollments_count: "Enrollments count"
+  commute_methods:
+    created: 'Commute method was created successfully'
+    updated: 'Commute method was updated'
   grades:
     grading: "Grading"
     weighting: "Weight"
