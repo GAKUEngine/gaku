@@ -1,4 +1,4 @@
 class CommuteMethodType < ActiveRecord::Base
-	has_many :commute_method_types
+	has_many :commute_methods
 
 end
