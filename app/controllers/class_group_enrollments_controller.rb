@@ -68,7 +68,7 @@ class ClassGroupEnrollmentsController < ApplicationController
     end
     if params[:source] == "class_groups"
       @class_group = ClassGroup.find(params[:class_group_id])
-      render 'class_groups/students/enroll_students'
+      render 'class_groups/students/enroll_students', :locals => {:notice => notice}
     else
       render 'shared/notice', :locals => {:notice => notice}
     end
