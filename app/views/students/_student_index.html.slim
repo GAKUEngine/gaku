@@ -38,3 +38,14 @@ table#student-index.table.table-bordered.table-striped
           tr
             th.btn-c2 =t("students.admitted")
             td =student.admitted
+          tr
+            th.btn-c2 =t('students.commute_method')
+            td
+              #student-commute-method
+                #student-commute-method-form
+                -if student.commute_method
+                  =render 'students/commute_methods/commute_method', :student => student
+                -else
+                  =link_to t("add"), new_student_commute_method_path(student, CommuteMethod.new), :remote => true,:id => 'new-student-commute-method-link'
+
+

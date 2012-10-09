@@ -1,0 +1,4 @@
+=form_for [@student, @commute_method], :remote => true do |f|
+	=f.select :commute_method_type_id, CommuteMethodType.all.collect{|s| [s.name.capitalize, s.id]}, :prompt => t('default')
+	=f.submit nil, :class => 'btn btn-primary'
+	=link_to t('cancel'), "",:id => 'cancel-commute-method-link', :class => 'btn'
