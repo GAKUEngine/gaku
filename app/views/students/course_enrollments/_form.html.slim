@@ -1,15 +1,15 @@
 =form_for [@student, @course_enrollment], :remote => true do |course_enrollment_form|
-  .row-fluid.control-group
-    .span12
-       b= t('courses.new')
-  .row-fluid
-    = course_enrollment_form.hidden_field :student_id, :value => @student.id
+  b= t('courses.new')
+  .row-fluid.mt-l
+    .span12.well
+      = render 'shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
 
-  = render 'shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
-  
-  .row-fluid style="margin-top:10px"
-    .span8
-		  = course_enrollment_form.submit t('course_enrollments.create'), :id => 'submit-student-course-enrollment-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
-    = link_to_cancel :id => "cancel-student-course-enrollment-link", :class => "span4 btn btn-danger"
+      = course_enrollment_form.hidden_field :student_id, :value => @student.id
+
+      .row-fluid style="margin-top:10px"
+        .span12
+          .span6
+            = submit_button t('course_enrollments.create'), :id => 'submit-student-course-enrollment-button'
+          = link_to_cancel :id => "cancel-student-course-enrollment-link"
 
 = javascript_include_tag 'students/course_enrollments'

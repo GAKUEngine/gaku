@@ -148,8 +148,6 @@ class ExamsController < ApplicationController
       num = num.truncate
       num = num.to_f / fixNum.to_f
     end
-    puts "trancate-----------------"
-    puts num
     return num
   end
 

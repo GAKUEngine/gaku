@@ -1,15 +1,14 @@
-= form_for [@student, @note], :html => {:id => 'new-student-note-form'},:remote => true do |note_form|
+= form_for [@student, @note], :remote => true do |note_form|
   - if note_form.object.new_record?
-    .row-fluid.control-group
-      .span12
-        b= t('notes.new')
+    b= t('notes.new')
+    .row-fluid.mt-l
+      .span12.well
+        = render 'shared/form_fields/note_form_fields', :note_form => note_form
 
-    = render 'shared/form_fields/note_form_fields', :note_form => note_form
-
-    .row-fluid
-      .span12
-        .span6 
-          = note_form.submit t("notes.save"), :id => "submit-student-note-button", :class => "span12 btn btn-primary"
-        = link_to_cancel :id => "cancel-student-note-link"
+        .row-fluid
+          .span12
+            .span6 
+              = submit_button t("notes.save"), :id => "submit-student-note-button"
+            = link_to_cancel :id => "cancel-student-note-link"
 
 = javascript_include_tag 'students/notes'

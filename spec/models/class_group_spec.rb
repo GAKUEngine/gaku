@@ -8,6 +8,9 @@ describe ClassGroup do
     it { should have_many(:students) }
     it { should have_many(:courses) }
     it { should have_many(:semesters) }
+    it "is invalid without name" do
+      FactoryGirl.build(:class_group, name: nil).should_not be_valid
+    end
   end
   
 end

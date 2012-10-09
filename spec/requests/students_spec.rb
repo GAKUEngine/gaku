@@ -150,7 +150,7 @@ describe 'Student' do
     before do 
       visit students_path
       click_link "new-student-link"
-      wait_until { find('#new-student-form').visible? }
+      wait_until { find('#new-student form').visible? }
     end
 
     it "should create new student" do 
@@ -158,14 +158,14 @@ describe 'Student' do
       fill_in "student_surname", :with => "Doe"
       click_button "submit-student-button"
 
-      wait_until { !page.find('#new-student-form').visible? }
+      wait_until { !page.find('#new-student form').visible? }
       page.should have_content("John")
       Student.all.count.should eql(1)
     end
 
     it 'should cancel creating' do 
       click_link 'cancel-student-link'
-      wait_until { !page.find('#new-student-form').visible? }
+      wait_until { !page.find('#new-student form').visible? }
     end
   end
 

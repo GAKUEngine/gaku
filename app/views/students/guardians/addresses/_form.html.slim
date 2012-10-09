@@ -3,12 +3,12 @@
     b= t('addresses.new')
     .row-fluid.mt-l
       .span12.well
-        .span12.well
-          = render 'shared/form_fields/address_form_fields', :address_form => address_form 
-          .row-fluid
-            .span9
-              = submit_button t('addresses.save'), :id => 'submit-student-guardian-address-button', :class => 'btn btn-primary button span12'
-              = link_to_cancel :id => 'cancel-student-guardian-address-link', :class => 'span3 btn btn-danger'
+        = render 'shared/form_fields/address_form_fields', :address_form => address_form 
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('addresses.save'), :id => 'submit-student-guardian-address-button'
+            = link_to_cancel :id => 'cancel-student-guardian-address-link'
   
 = javascript_include_tag 'students/addresses/form'
 = javascript_include_tag 'students/guardians/addresses'

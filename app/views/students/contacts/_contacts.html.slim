@@ -1,5 +1,6 @@
 #student-contacts
   .row-fluid
+    #new-student-contact
     .pull-left
       h4.h4-vm.student-contacts-count
         = print_count(@student.contacts, t('contacts.list'))
@@ -21,4 +22,3 @@
         =render :partial => 'students/contacts/contact', :collection => @student.contacts, :as => 'contact'
     br/ 
     #new-student-contact-form-errors
-    #new-student-contact
