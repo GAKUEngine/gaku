@@ -19,11 +19,18 @@ describe 'ClassGroup Students' do
     it 'should add and show student to a class group', :js => true do
       click_link 'new-class-group-student-link'
       wait_until { page.find('#student-modal').visible? }
-      check "#{@student1.id}"
-      click_button 'submit-student-button'
+      find(:css, "input#student-#{@student1.id}").set(true)
+      wait_until { find('#students-checked-div').visible? }
+      within('#students-checked-div') do 
+        page.should have_content('Chosen students(1)')
+        click_link('Show')
+        wait_until { find('#chosen-table').visible? }
+        page.should have_content("#{@student1.name}")
+        click_button 'Enroll to class'
+      end
       wait_until { !page.find('#student-modal').visible? }
 
-      within('#students-index'){ page.should have_content("#{@student1.name}") }
+      within('#class_group-students-index'){ page.should have_content("#{@student1.name}") }
       within('.enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
       ClassGroupEnrollment.count.should == 1
@@ -32,11 +39,18 @@ describe 'ClassGroup Students' do
     it 'should not add a student if cancel is selected', :js => true do
       click_link 'new-class-group-student-link'
       wait_until { page.find('#student-modal').visible? }
-      check "#{@student1.id}"
+      find(:css, "input#student-#{@student1.id}").set(true)
+      wait_until { find('#students-checked-div').visible? }
+      within('#students-checked-div') do 
+        page.should have_content('Chosen students(1)')
+        click_link('Show')
+        wait_until { find('#chosen-table').visible? }
+        page.should have_content("#{@student1.name}")
+      end
       click_on 'cancel-student-link'
       wait_until { !page.find('#student-modal').visible? }
 
-      within('#students-index'){ page.should_not have_content("#{@student1.name}") }
+      within('#class_group-students-index'){ page.should_not have_content("#{@student1.name}") }
       within('.enrollments-count'){ page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should_not have_content("1") }
       ClassGroupEnrollment.count.should == 0
@@ -49,10 +63,10 @@ describe 'ClassGroup Students' do
       click_link 'new-class-group-student-link'
       wait_until { page.find('#student-modal').visible? }
 
-      table_rows = page.all('div#students-index table tr').size
+      table_rows = page.all('div#class_group-students-index table tr').size
       fill_in 'student_search', :with => 'Sus'
      
-      wait_until { page.all('div#students-index table tr').size == table_rows - 2 } 
+      wait_until { page.all('div#class_group-students-index table tr').size == table_rows - 2 } 
     end
 
     context "Class Roster with added student" do
@@ -64,7 +78,7 @@ describe 'ClassGroup Students' do
         ClassGroupEnrollment.count.should == 1
       end
 
-      it 'should not show a student for adding if it is already added', :js => true do
+      pending 'should not show a student for adding if it is already added', :js => true do
         click_link 'new-class-group-student-link'
         wait_until { page.find('#student-modal').visible? }
         within('#student-modal') { page.should_not have_content("#{@student1.name}") }
@@ -73,12 +87,12 @@ describe 'ClassGroup Students' do
       it 'should delete a student from a class group', :js => true do
         click_link 'class-group-enrollments-tab-link'
         @class_group.students.count.should eql(1)
-        tr_count = page.all('table#students-index tr').size
+        tr_count = page.all('table#class_group-students-index tr').size
 
         find('.delete-link').click 
         page.driver.browser.switch_to.alert.accept
         
-        wait_until { page.all('table#students-index tr').size == tr_count - 1 }
+        wait_until { page.all('table#class_group-students-index tr').size == tr_count - 1 }
         @class_group.students.count.should eql(0)
         within('.enrollments-count') { page.should_not have_content("1") }
         within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }

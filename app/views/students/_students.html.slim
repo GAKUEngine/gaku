@@ -10,10 +10,11 @@ table#students-index.index.table.table-striped.table-bordered.table-condensed
       th.btn-inverse = student_sortable "seat_number", t('class_group_enrollments.seat_number')
       th.btn-inverse = student_sortable "admitted", t('students.admitted')
       th.btn-inverse = student_sortable "primary_address", t('addresses.primary')
-      th.btn-info style="width:94px" = t("manage")
+      - if params[:controller] == "students"
+        th.btn-info style="width:94px" = t("manage")
       
   tbody
-    =render :partial => 'student', :collection => @students, :as => 'student'
+    =render :partial => 'students/student', :collection => @students, :as => 'student'
 
 
 javascript:
