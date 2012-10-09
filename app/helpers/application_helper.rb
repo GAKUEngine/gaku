@@ -52,6 +52,18 @@ module ApplicationHelper
     link_to name, resource, attributes
   end
 
+  def ajax_link_to_make_primary(resource, options = {})
+    name = ("<i class='icon-white icon-ok'></i>").html_safe
+
+    attributes = {
+      :remote => true,
+      :method => :post,
+      :data => { :confirm => 'Are you sure?' },
+    }.merge(options)
+
+    link_to name, resource, attributes
+  end
+
   def ajax_link_to_edit(resource, options = {})
     name = ("<i class='icon-white icon-pencil'></i>").html_safe
 
