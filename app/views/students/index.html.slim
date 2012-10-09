@@ -1,18 +1,15 @@
 - content_for :title, t("students.list")
+
 .row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .pull-left
-        h4.mt-xs.mb-0 = t("students.list")
-      .pull-right
-        = button t("csv.import"), "students/importer", :id => "import-students-link"
-        = button t("csv.export"), "students.csv", :id => 'export-students-link'
-        = ajax_link_to_new t("students.new"), new_student_path, :id => "new-student-link"
-    .row-fluid
-      .span12
-        hr/
-      #modal-dialogs
-      #new-student
-      
+  .pull-left
+    h4.mt-xs.mb-0 = t("students.list")
+  .pull-right
+    = button t("csv.import"), "students/importer", :id => "import-students-link"
+    = button t("csv.export"), "students.csv", :id => 'export-students-link'
+    = ajax_link_to_new t("students.new"), new_student_path, :id => "new-student-link"
+#new-student
+.row-fluid
+  .span12
+    hr/
+  #modal-dialogs 
   =render 'student_chooser'
