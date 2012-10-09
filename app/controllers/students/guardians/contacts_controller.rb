@@ -1,8 +1,7 @@
 class Students::Guardians::ContactsController < ApplicationController
 	
 	inherit_resources
-	
-	actions :index, :show
+  actions :new, :update, :edit, :destroy
 
 	before_filter :load_guardian, :only => [:new, :create, :create_modal, :edit, :update, :destroy, :show]
   before_filter :load_student, :only => [:new, :create, :create_modal, :edit, :update , :show]

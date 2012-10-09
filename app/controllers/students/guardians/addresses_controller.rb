@@ -1,14 +1,12 @@
 class Students::Guardians::AddressesController < ApplicationController
 	
 	inherit_resources
-	
-	actions :index, :show
+  actions :new, :create, :edit, :update
 
   before_filter :load_address, :only => [:destroy, :make_primary]
 	before_filter :load_student, :only => [:new, :create, :edit, :update]
 	before_filter :load_guardian, :only => [:new, :create, :edit, :update, :destroy, :make_primary]
 	before_filter :load_primary_address, :only => [:update, :destroy]
-
 
 	def new
     @address = Address.new

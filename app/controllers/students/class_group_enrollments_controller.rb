@@ -1,5 +1,8 @@
 class Students::ClassGroupEnrollmentsController < ApplicationController
 
+  inherit_resources
+  actions :destroy
+
   before_filter :load_student, :only => [:new, :create]
 
   def new

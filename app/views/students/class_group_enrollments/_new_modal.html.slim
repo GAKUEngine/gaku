@@ -2,7 +2,7 @@
 - model_class = model.class
 .modal.hide#new-class-group-enrollment-modal wmode="opaque"
   
-  = form_form [@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |f|
+  = form_for [@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |f|
     .modal-header
       button.close type="button" data-dismiss="modal"
         'x

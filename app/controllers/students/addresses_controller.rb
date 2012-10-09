@@ -2,7 +2,7 @@ class Students::AddressesController < ApplicationController
 
   inherit_resources
 
-  actions :index, :show
+  actions :edit, :create, :update
 
   before_filter :load_address, :only => :destroy
   before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
