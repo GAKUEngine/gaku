@@ -20,6 +20,7 @@ describe Student do
     it { should have_many(:exam_portion_scores) }
     it { should have_many(:student_specialties) }
     it { should have_many(:specialities) }
+    it { should belong_to(:commute_method)}
 
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:surname) }
