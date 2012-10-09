@@ -124,7 +124,7 @@ module ApplicationHelper
   def link_to_cancel(options = {})
     name = t('.cancel', :default => t("helpers.links.cancel"))
     attributes = {
-      :class => 'span3 btn btn-danger',
+      :class => "span3 btn btn-danger",
       :'data-dismiss' => "modal"
     }.merge(options)
 
@@ -138,7 +138,8 @@ module ApplicationHelper
 
   def submit_button(text, options={})
     attributes = {
-      :type => 'submit'
+      :type => 'submit',
+      :class => 'span12 btn btn-primary button'
     }.merge(options)
 
     button_tag(content_tag('span', text), attributes)

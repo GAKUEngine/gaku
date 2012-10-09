@@ -247,6 +247,7 @@ en:
     save: "Save profile"
   guardian: "Guardian"
   guardians:
+    new: "New Guardian"
     guardians: "Guardians"
     list: "Guardians list"
     relationship: "Relationship"

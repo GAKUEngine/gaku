@@ -1,5 +1,6 @@
 #guardians-modal
 #student-guardians
+  #new-student-guardian
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardians-count
@@ -27,6 +28,4 @@
             th =t("options")
         tbody
           =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
-
-#new-student-guardian
 #modal-dialogs

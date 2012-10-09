@@ -1,4 +1,5 @@
 #student-guardian-contacts
+  #new-student-guardian-contact 
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardian-contacts-count
@@ -20,5 +21,3 @@
             th.btn-info style="width:71px" =t 'manage'
         tbody
           =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
-      
-#new-student-guardian-contact 
