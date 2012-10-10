@@ -22,4 +22,5 @@ class ClassGroup < ActiveRecord::Base
   
   attr_accessible :name, :grade, :homeroom
 
+  validates :name, :presence => true
 end

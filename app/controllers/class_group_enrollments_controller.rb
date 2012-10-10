@@ -66,7 +66,12 @@ class ClassGroupEnrollmentsController < ApplicationController
         notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
       }
     end
-    render 'shared/notice', :locals => {:notice => notice}
+    if params[:source] == "class_groups"
+      @class_group = ClassGroup.find(params[:class_group_id])
+      render 'class_groups/students/enroll_students', :locals => {:notice => notice}
+    else
+      render 'shared/notice', :locals => {:notice => notice}
+    end
   end
 
 end

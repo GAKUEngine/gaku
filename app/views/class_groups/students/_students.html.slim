@@ -4,13 +4,13 @@
       h4.h4-vm.enrollments-count
         = t("class_group_enrollments.list")+"（ "+@class_group.class_group_enrollments.count.to_s+" ）"
     .pull-right
-      = ajax_link_to_new t('add_student'), new_class_group_student_path(:class_group_id => @class_group.id), :id => 'new-class-group-student-link'
+      = ajax_link_to_new t('add_student'), student_chooser_class_group_path(:class_group_id => @class_group.id), :id => 'new-class-group-student-link'
   .row-fluid
     .span12
       hr
   .row-fluid
     .span12
-      table#students-index.index.table.table-striped.table-bordered.table-condensed
+      table#class_group-students-index.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th.btn-inverse =t 'student.surname'
@@ -18,5 +18,3 @@
             th.btn-info style="width:61px" =t 'manage'
         tbody
           =render :partial => 'class_groups/students/student', :collection => @class_group.class_group_enrollments, :as => 'enrollment'
-          
-#new-class-group-student-form

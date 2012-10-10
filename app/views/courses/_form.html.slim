@@ -1,7 +1,7 @@
-= form_for(@course) do |course_form|
+= form_for @course, :remote => true do |course_form|
   - if @course.errors.any?
     .alert.alert-error
-      h2
+      strong
         = pluralize(@course.errors.count, "error")
         | prohibited this course from being saved:
       ul
@@ -25,5 +25,5 @@
         = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"
       - else
         .span9
-          = course_form.submit nil, :id => 'submit-course-button', :class => "span12 btn btn-primary"
-        = link_to t("Back"), courses_path, :class => "span3 btn btn-danger"
+          = course_form.submit nil, :id => 'submit-course-button', :class => "span6 btn btn-primary"
+          = link_to_cancel :id => "cancel-course-link", :style => "min-height:0px"

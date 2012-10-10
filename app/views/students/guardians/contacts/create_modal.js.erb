@@ -1,3 +1,3 @@
 $('#new-contact-modal').modal('hide');
 $('.flash-error').html('<%= render "shared/flash", :notice => flash.now[:notice] %>');
-$('.student-guardian-addresses-count').html('<%= @guardian.addresses.count != 0 ? t('addresses.list') + "(" + @guardian.addresses.count.to_s + ")" : t('addresses.list')%>');
+$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses, t("addresses.list")) %>');

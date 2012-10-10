@@ -13,6 +13,9 @@ GAKUEngine::Application.routes.draw do
         get :autocomplete_filtered_students
       end
     end
+    member do
+      get :student_chooser
+    end
   end
 
   resources :courses do   
@@ -30,6 +33,9 @@ GAKUEngine::Application.routes.draw do
       get :grading, :on => :collection
       put :update_score, :on => :member
       get :calculations, :on => :member
+    end
+    member do
+      get :student_chooser
     end
   end
 
@@ -57,6 +63,7 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :students do
+    resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
         post :create_modal, :on => :collection
@@ -151,5 +158,6 @@ GAKUEngine::Application.routes.draw do
       get 'recovery'
     end
   end
+
 
 end

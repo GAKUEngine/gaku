@@ -8,11 +8,13 @@
       ul
         - @student.errors.full_messages.each do |msg|
           li= msg
-  .row-fluid
+  .row-fluid.mt-l
     .span12.well
       =render :partial => 'student_form_fields', :locals => { :form => form }
-  .row-fluid
-    .span12.well
-      .span9
-        = form.submit nil, :id => 'submit-student-button', :class => "span12 btn btn-primary"
-      = link_to_cancel :id => 'cancel-student-link', :class => "span3 btn"
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t('students.create'), :id => 'submit-student-button'
+          = link_to_cancel :id => 'cancel-student-link'
+
+= javascript_include_tag 'students'

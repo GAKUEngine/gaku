@@ -19,12 +19,12 @@ describe 'CourseEnrollments' do
       @student.courses.size.should eql(0)
       tr_count = page.all('table#student-course-enrollments-index tr').size
 
-      wait_until { find('#new-student-course-enrollment-form').visible? } 
+      wait_until { find('#new-student-course-enrollment form').visible? } 
 
       select "fall2050", :from => 'course_enrollment_course_id'
       click_button "submit-student-course-enrollment-button"
       
-      wait_until { !page.find('#new-student-course-enrollment-form').visible? } 
+      wait_until { !page.find('#new-student-course-enrollment form').visible? } 
       page.should have_content("fall2050")
       page.all('table#student-course-enrollments-index tr').size == tr_count + 1
       within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
@@ -34,7 +34,12 @@ describe 'CourseEnrollments' do
 
     it 'should cancel adding', :js => true do 
       click_link 'cancel-student-course-enrollment-link'
-      wait_until { !page.find('#new-student-course-enrollment-form').visible? } 
+      wait_until { !page.find('#new-student-course-enrollment form').visible? } 
+      find('#new-student-course-enrollment-link').visible?
+
+      click_link 'new-student-course-enrollment-link'
+      wait_until { find('#new-student-course-enrollment form').visible? } 
+      !page.find('#new-student-course-enrollment-link').visible? 
     end
   end
 

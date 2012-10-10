@@ -126,6 +126,7 @@ class ExamsController < ApplicationController
   def update
     super do |format|
       @exams = Exam.all
+      flash.now[:notice] = 'Exam was successfully updated.'
       format.js { render 'update'}
     end
   end
@@ -147,8 +148,6 @@ class ExamsController < ApplicationController
       num = num.truncate
       num = num.to_f / fixNum.to_f
     end
-    puts "trancate-----------------"
-    puts num
     return num
   end
 

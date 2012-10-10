@@ -26,6 +26,20 @@ class ClassGroupsController < ApplicationController
     end
   end
 
+  def student_chooser
+    @class_group = ClassGroup.find(params[:class_group_id])
+    @search = Student.search(params[:q])
+    @students = @search.result
+
+    @class_groups = ClassGroup.all
+
+    params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update
     super do |format|
       format.js { render }

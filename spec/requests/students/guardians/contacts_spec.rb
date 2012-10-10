@@ -16,60 +16,70 @@ describe 'Guardian Contacts' do
   end
 
   context 'new' do 
-    it "should add and show contact to a student guardian thru modal", :js => true do 
-      @student.guardians.first.contacts.count.should eql(0)
-      tr_count = page.all('table#student-guardian-contacts-index tr').size
-      click_link "new-student-guardian-contact-link"
+    context 'thru modal' do 
+      it "should add and show contact to a student guardian thru modal", :js => true do 
+        @student.guardians.first.contacts.count.should eql(0)
+        tr_count = page.all('table#student-guardian-contacts-index tr').size
+        click_link "new-student-guardian-contact-link"
 
-      wait_until { find('#new-contact-modal').visible? } 
-      select 'mobile', :from => 'contact_contact_type_id'
-      fill_in 'contact_data',    :with => '777'
+        wait_until { find('#new-contact-modal').visible? } 
+        select 'mobile', :from => 'contact_contact_type_id'
+        fill_in 'contact_data',    :with => '777'
 
-      click_button 'submit-student-guardian-contact-button'
-      wait_until { !page.find('#new-contact-modal').visible? }
+        click_button 'submit-student-guardian-contact-button'
+        wait_until { !page.find('#new-contact-modal').visible? }
 
-      find('.show-link').click
-      page.should have_content 'mobile'
-      page.should have_content '777'
-      @student.guardians.first.contacts.count.should eql(1)
+        find('.show-link').click
+        page.should have_content 'mobile'
+        page.should have_content '777'
+        @student.guardians.first.contacts.count.should eql(1)
+      end
+
+      it 'should cancel adding thru modal', :js => true do 
+        click_link "new-student-guardian-contact-link"
+        wait_until { find('#new-contact-modal').visible? }
+
+        click_link 'cancel-student-guardian-contact-link'
+        wait_until { !page.find('#new-contact-modal').visible? }
+      end
     end
+    
+    context 'thru slide form' do 
+      it "should add and show contact to a student guardian thru slide form", :js => true do 
+        find('.show-link').click
+        @student.guardians.first.contacts.count.should eql(0)
+        tr_count = page.all('table#student-guardian-contacts-index tr').size
 
-    it 'should cancel adding thru modal', :js => true do 
-      click_link "new-student-guardian-contact-link"
-      wait_until { find('#new-contact-modal').visible? }
+        click_link "new-student-guardian-contact-link"
 
-      click_link 'cancel-student-guardian-contact-link'
-      wait_until { !page.find('#new-contact-modal').visible? }
-    end
+        wait_until { find('#new-student-guardian-contact form').visible? } 
+        select 'mobile', :from => 'contact_contact_type_id'
+        fill_in 'contact_data',    :with => '777'
 
-    it "should add and show contact to a student guardian thru slide form", :js => true do 
-      find('.show-link').click
-      @student.guardians.first.contacts.count.should eql(0)
-      tr_count = page.all('table#student-guardian-contacts-index tr').size
+        click_button 'submit-student-guardian-contact-button'
 
-      click_link "new-student-guardian-contact-link"
+        wait_until { !page.find('#new-student-guardian-contact form').visible? }
+        page.should have_content 'mobile'
+        page.should have_content '777'
+        page.all('table#student-guardian-contacts-index tr').size == tr_count + 1
+        within('.student-guardian-contacts-count') { page.should have_content('Contacts list(1)') }
+        @student.guardians.first.contacts.count.should eql(1)
+      end
 
-      wait_until { find('#new-student-guardian-contact-form').visible? } 
-      select 'mobile', :from => 'contact_contact_type_id'
-      fill_in 'contact_data',    :with => '777'
+      it 'should cancel adding thru slide form', :js => true do 
+        find('.show-link').click
+        click_link "new-student-guardian-contact-link"
+        wait_until { find('#new-student-guardian-contact form').visible? }
+        !page.find('#new-student-guardian-contact-link').visible?
 
-      click_button 'submit-student-guardian-contact-button'
+        click_link 'cancel-student-guardian-contact-link'
+        wait_until { !page.find('#new-student-guardian-contact form').visible? }
+        find('#new-student-guardian-contact-link').visible?
 
-      wait_until { !page.find('#new-student-guardian-contact-form').visible? }
-      page.should have_content 'mobile'
-      page.should have_content '777'
-      page.all('table#student-guardian-contacts-index tr').size == tr_count + 1
-      within('.student-guardian-contacts-count') { page.should have_content('Contacts list(1)') }
-      @student.guardians.first.contacts.count.should eql(1)
-    end
-
-    it 'should cancel adding thru slide form', :js => true do 
-      find('.show-link').click
-      click_link "new-student-guardian-contact-link"
-
-      wait_until { find('#new-student-guardian-contact-form').visible? }
-      click_link 'cancel-student-guardian-contact-link'
-      wait_until { !page.find('#new-student-guardian-contact-form').visible? }
+        click_link "new-student-guardian-contact-link"
+        wait_until { find('#new-student-guardian-contact form').visible? }
+        !page.find('#new-student-guardian-contact-link').visible?
+      end
     end
   end
 

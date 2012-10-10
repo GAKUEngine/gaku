@@ -7,7 +7,7 @@ describe 'ClassGroups' do
     visit class_groups_path
   end
 
-  it 'should create and show class group', :js => true do
+  it 'creates and shows class group', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
     fill_in 'class_group_grade', :with => '7'
@@ -22,7 +22,14 @@ describe 'ClassGroups' do
     ClassGroup.count.should eq 1
   end
 
-  it 'should cancel creating', :js => true do
+  it 'not create a class group without name given' , :js => true do
+    ClassGroup.count.should eq 0
+    click_link 'new-class-group-link'
+    click_button 'submit-class-group-button'
+    page.should have_content ('field is required')
+  end
+
+  it 'cancel creating', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
     wait_until { page.find('#new-class-group').visible? }

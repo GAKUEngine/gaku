@@ -15,7 +15,7 @@
           = f.number_field :grade, :class => "span12"
         .span4
           = f.label :name, t("class_groups.name")
-          = f.text_field :name, :class => "span12"
+          = f.text_field :name, :class => "span12 validate[required]"
         .span4
           = f.label :homeroom, t("class_groups.homeroom")
           = f.text_field :homeroom, :class => "span12"
