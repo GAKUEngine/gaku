@@ -4,7 +4,7 @@ describe 'Courses' do
   stub_authorization!
 
   before do
-    @syllabus = Factory(:syllabus, :name => 'biology2012', :code => 'bio')
+    @syllabus = create(:syllabus, :name => 'biology2012', :code => 'bio')
     visit courses_path
   end
 
@@ -23,8 +23,8 @@ describe 'Courses' do
 
   context "index, edit, delete", :js => true do
     before do
-      @syllabus2 = Factory(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
-      @course = Factory(:course, :syllabus => @syllabus) 
+      @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
+      @course = create(:course, :syllabus => @syllabus) 
       visit courses_path
     end
 

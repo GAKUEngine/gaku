@@ -8,7 +8,7 @@
       thead
         - exam.exam_portions.each_with_index do |portion, i|
           - if i < exam.exam_portions.size - 1
-            th.btn-warning = portion.name+ " " + t("exams.weight")
+            th.btn-warning*{'data-id' =>portion.id} = portion.name+ " " + t("exams.weight")
       tbody
         - exam.exam_portions.each_with_index do |portion, i|
           - if i < exam.exam_portions.size - 1
@@ -20,17 +20,3 @@
         th.btn-inverse = t("exams.total_weight")
       tbody
       td#weight-total.vm = total
-
-javascript:
-  $('.exam-portion-weight').change(function() {
-    var sum = 0
-    $('.exam-portion-weight').each(function() {
-      //add only if the value is number
-      if(!isNaN(this.value) && this.value.length!=0) {
-        sum += parseFloat(this.value);
-      }
-      //TODO change model weight too
-    });
-    $('#weight-total').text(sum);
-  });
-  

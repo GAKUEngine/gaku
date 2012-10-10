@@ -5,9 +5,9 @@ describe 'Student' do
 
   context "existing students" do
     before do 
-      @student = Factory(:student, :name => 'John', :surname => 'Doe')
-      @student2 = Factory(:student, :name => 'Susumu', :surname => 'Yokota')
-      @student3 = Factory(:student, :name => 'Johny', :surname => 'Bravo')
+      @student = create(:student, :name => 'John', :surname => 'Doe')
+      @student2 = create(:student, :name => 'Susumu', :surname => 'Yokota')
+      @student3 = create(:student, :name => 'Johny', :surname => 'Bravo')
       visit students_path
     end
 
@@ -29,9 +29,8 @@ describe 'Student' do
         click_link('Show')
         wait_until { find('#chosen-table').visible? }
         page.should have_content("#{@student.name}")
-        page.should have_content('Enroll to class')
-        page.should have_content('Enrol to course')
-        
+        page.should have_button('Enroll to class')
+        page.should have_button('Enroll to course')
         click_link('Hide')
         wait_until { !page.find('#chosen-table').visible? }
       end
@@ -46,7 +45,7 @@ describe 'Student' do
           page.should have_content("John") 
           page.should have_content("Johny")
         end
-        sleep 1 #FIXME
+        sleep 2 #FIXME
         page.all('#students-index tr').size.should eql(3)
       end
       
@@ -61,20 +60,24 @@ describe 'Student' do
       end 
     end
 
-    it "should edit an existing student", :js => true do
+    it "should edit an existing student from show", :js => true do
       visit student_path(@student)
       page.should have_content("#{@student.name}")
       find('.edit-link').click
-      page.should have_content("Edit")
+      wait_until { find('#edit-student-modal').visible? }
       fill_in "student_surname", :with => "Kostova"
       fill_in "student_name", :with => "Marta"
       click_button 'submit-student-button'
+      wait_until { !page.find('#edit-student-modal').visible? }
 
-      page.should have_content("Kostova Marta")
+      page.should have_content("Kostova")
+      page.should have_content("Marta")
+      @student.reload
       @student.name.should eql("Marta") 
+      @student.surname.should eql("Kostova") 
     end
 
-    it "should edit an existing student thru modal", :js => true do
+    it "should edit an existing student from index", :js => true do
       visit students_path
       page.should have_content("#{@student.name}")
       find('.edit-link').click
@@ -116,7 +119,7 @@ describe 'Student' do
 
     it 'should enroll to class', :js => true do 
       ClassGroupEnrollment.count.should eql(0)
-      Factory(:class_group, :name => 'Biology')
+      create(:class_group, :name => 'Biology')
       visit student_path(@student)
       click_link 'enroll-student-link'
       wait_until { find('#new-class-group-enrollment-modal').visible? }
@@ -161,8 +164,8 @@ describe 'Student' do
     end
 
     it 'should cancel creating' do 
-      click_link 'back-student-link'
-      current_path.should == students_path
+      click_link 'cancel-student-link'
+      wait_until { !page.find('#new-student-form').visible? }
     end
   end
 

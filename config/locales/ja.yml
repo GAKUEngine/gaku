@@ -37,6 +37,16 @@ ja:
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
   hide: "Hide"
+  description: 'Description'
+  attachments:
+    assets: 'Assets'
+    file_name: 'File name'
+    file_type: 'File type'
+    file_size: 'File size'
+    new_attachment: "New Attachment"
+    create_attachment: 'Create Attachment'
+    attachment_recovered: 'Attachment recovered'
+    asset_type: 'Asset type'
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -277,6 +287,8 @@ ja:
     starting:
     ending:
     save: "保存"
+    ending_after_starting: 'should be after Starting'
+    uniqueness: "have this semester added"
   num_semesters:
   add_semester: "学期を追加する"
   options: "オプション"
@@ -301,4 +313,6 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
+    show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   import_format: "インポート形式"

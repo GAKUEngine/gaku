@@ -6,14 +6,12 @@
       .pull-left
         h4.mt-xs.mb-0 = t("students.list")
       .pull-right
-        = link_to_new t("students.import"), "students/importer", :class => "mr-s", :id => "import-students-link"
+        = link_to_new t("students.import"), "students/importer", :class => "btn btn-primary mr-s", :id => "import-students-link"
         = link_to_new t("students.new"), new_student_path, :id => "new-student-link"
     .row-fluid
       .span12
         hr/
     .row-fluid
-      .pull-right
-        = link_to "CSV Export", "students.csv", :id => 'export-students-link'
       #modal-dialogs
       #new-student-form.hide
         =render 'form'
@@ -25,8 +23,8 @@
       .span6.well
         h4.pull-left = t("students.chosen_students")
         h4.chosen-count.pull-left
-        .table-action.show-chosen-table.pull-right = link_to t('show'),"JavaScript:void(0);", :remote => true
-        .table-action.hide-chosen-table.pull-right.hide = link_to t('hide'),"JavaScript:void(0);", :remote => true
+        .table-action.show-chosen-table.pull-right = link_to t('show'),"", :remote => true
+        .table-action.hide-chosen-table.pull-right.hide = link_to t('hide'),"", :remote => true
         table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
           thead
             tr
@@ -34,9 +32,24 @@
               th.btn-inverse = sort_link @search, "name", t("name")
           tbody#students-checked
         #chosen-actions.hide
-          = link_to "Enroll to class", "", :class => "btn btn-primary pull-right"
-          = link_to "Enrol to course", "", :class => "btn btn-primary pull-right"
+          .span12 style="margin-top:10px;"
+            = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
+              .span8
+                = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class_group-select"}
+
+              = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
+          .span12 style="margin-top:10px;"
+            = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+              .span8
+                = select_tag "course_id", options_from_collection_for_select(@courses, "id", "code"), {:class => "class_group-select"}
+
+              = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
     .row-fluid
       .span12.well
         #students-index
           =render 'students/students'
+          .pull-right
+            = link_to "CSV Export", "students.csv", :id => 'export-students-link', :class => "btn btn-mini btn-primary"
+
+javascript:
+  $(".class_group-select").combobox()

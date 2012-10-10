@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917101532) do
+ActiveRecord::Schema.define(:version => 20121003083905) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -27,13 +27,6 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.integer  "faculty_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-  end
-
-  create_table "assets", :force => true do |t|
-    t.integer  "exam_portion_id"
-    t.integer  "lesson_plan_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
   end
 
   create_table "assignment_scores", :force => true do |t|
@@ -53,6 +46,18 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "attachments", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "is_deleted",         :default => false
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+  end
+
   create_table "attendances", :force => true do |t|
     t.string   "reason"
     t.text     "description"
@@ -67,8 +72,9 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.string   "name"
     t.integer  "school_id"
     t.integer  "address_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "is_master",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "class_group_course_enrollments", :force => true do |t|
@@ -341,6 +347,12 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "specialties", :force => true do |t|
+    t.string  "name"
+    t.text    "description"
+    t.boolean "mayor_only",  :default => false
+  end
+
   create_table "states", :force => true do |t|
     t.string  "name"
     t.string  "abbr"
@@ -355,6 +367,12 @@ ActiveRecord::Schema.define(:version => 20120917101532) do
     t.boolean  "is_primary", :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "student_specialties", :force => true do |t|
+    t.integer "student_id"
+    t.integer "specialty_id"
+    t.boolean "is_mayor",     :default => true
   end
 
   create_table "students", :force => true do |t|

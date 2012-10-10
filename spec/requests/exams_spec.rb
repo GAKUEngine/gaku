@@ -54,7 +54,7 @@ describe 'Exams' do
   
     context 'with added exam' do
       before do
-        @exam = Factory(:exam, :name => "Linux")
+        @exam = create(:exam, :name => "Linux")
         visit exams_path
         Exam.count.should == 1
       end
@@ -74,6 +74,22 @@ describe 'Exams' do
         fill_in 'exam_name', :with => ''
         click_button 'submit_button'
         wait_until { page.should have_content 'This field is required' }
+      end
+
+      it 'should show weighting widget' do
+        within('#exams-index') { find('#show-exam-link').click }
+        page.should have_content('Weight')
+        page.should have_content('Total Weight')
+      end
+
+      it 'should hide weighting widget',:js => true do
+        within('#exams-index') { find('#edit-exam-link').click }
+        wait_until{ page.find('#edit-exam-modal').visible? }
+        uncheck 'Use Weighting'
+        click_button 'submit_button'
+        wait_until{ !page.find('#edit-exam-modal').visible? }
+        page.should_not have_content('Total Weight')
+        page.should have_no_selector(:content,'.weight-check-widget')
       end
 
       it 'should edit exam from show view', :js => true do

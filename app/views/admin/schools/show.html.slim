@@ -1,0 +1,10 @@
+.row-fluid
+  .span12.well
+    table.table.table-bordered.table-striped
+      tbody
+        tr
+          = render 'school_fields', :school => @school
+
+.row-fluid
+  .span12
+    =link_to t('Back'), @schools, :class => 'btn'

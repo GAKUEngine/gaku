@@ -1,0 +1,7 @@
+tr id="campus-#{campus.id}"
+  td 
+  td = campus.name
+  td
+    = link_to_show [:admin, @school, campus]
+    = ajax_link_to_edit [:edit, :admin, @school, campus]
+    = ajax_link_to_delete [:admin, @school, campus]

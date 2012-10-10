@@ -1,9 +1,9 @@
 $('#student-notes-index tbody').append('<%= render_js_partial("note", {:note => @student.notes.last}) %>');
-$('#new-student-note-form form').each(function() {
+$('#new-student-note form').each(function() {
 	this.reset();
 });
 
-$('#new-student-note-form').html('');
+$('#new-student-note-form').slideToggle();
 $('#new-student-note-link').show();
 
 $('#new-student-note-tab-link').html('<%= print_count(@student.notes, t('notes.notes')) %>');

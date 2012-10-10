@@ -11,13 +11,4 @@
               = guardian_form.submit t("guardians.save"), :id => 'submit-student-guardian-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
             =link_to_cancel :id => "cancel-student-guardian-link", :class => "span4 btn"
 
-coffee:
-  $("#cancel-student-guardian-link").click ->
-    $("#new-student-guardian-link").show()
-    $("#new-student-guardian-form").html("")
-  
-  $("#submit-student-guardian-button").live "ajax:success", (data, status, xhr) ->
-    $("#new-student-guardian-link").show()
-    $("#new-student-guardian-form").html("")
-
-  $('#new-student-guardian-form form').validationEngine()
+= javascript_include_tag 'students/guardians'

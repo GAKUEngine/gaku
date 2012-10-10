@@ -3,12 +3,11 @@
 <% } %>
 $('#new-course-class-group-link').show();
 
-var flashError = "<%=flash.now[:error]%>";
-if (flashError){
-  $(".flash-error").html(flashError);
-}else{
-  $(".flash-error").html("");
-}
-
 $('#new-course-enrollment-tab-link').html('<%= print_count(@course.students, t("course_enrollments.enrollments")) %>');
 $('.course-students-count').html('<%= print_count(@course.students, t("students.list")) %>');
+
+<% if flash.any? %>
+	$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+<% else %>
+  $(".flash-error").html("");
+<% end %>

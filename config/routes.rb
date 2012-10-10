@@ -37,6 +37,14 @@ GAKUEngine::Application.routes.draw do
     collection do 
       get :filtered_students
       get :autocomplete_filtered_students
+      post :enroll_students
+    end
+
+  end
+
+  resources :course_enrollments do
+    collection do
+      post :enroll_students
     end
   end
   
@@ -94,7 +102,9 @@ GAKUEngine::Application.routes.draw do
     put :create_exam_portion, :on => :member  
 
     resources :exam_scores
-    resources :exam_portions
+    resources :exam_portions do
+      resources :attachments, :only => [:create]
+    end
   end
 
   resources :states
@@ -112,6 +122,13 @@ GAKUEngine::Application.routes.draw do
 
   namespace :admin do
     resources :contact_types
+    resources :schools do 
+      resources :campuses, :controller => 'schools/campuses' do
+        resources :contacts, :controller => 'schools/campuses/contacts' do
+          post :make_primary, :on => :member
+        end
+      end
+    end
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
@@ -122,7 +139,16 @@ GAKUEngine::Application.routes.draw do
       collection do
         get :exams
         get :course_groups
+        get :attachments
       end
+    end
+  end
+
+  resources :attachments do
+    member do 
+      get 'download'
+      delete 'soft_delete'
+      get 'recovery'
     end
   end
 

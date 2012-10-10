@@ -11,13 +11,13 @@ class ExamsController < ApplicationController
   def export_xls
     @course = Course.find(params[:course_id])
     @students = @course.students
-    
+
     book = Spreadsheet::Workbook.new
     summary_sheet = book.create_worksheet
     summary_sheet.name = 'Exam Summary Sheet'
     @exams = @course.syllabus.exams
     @exams.each do |exam|
-      
+
       #dynamicly merging cells
       exam_portion_count = exam.exam_portions.count
 
@@ -32,8 +32,8 @@ class ExamsController < ApplicationController
 
       exam_sheet.merge_cells(1,0,1,3)
       exam_sheet.merge_cells(1,4,1,3 + exam_portion_count)
-      
-      
+
+
       #first info row
       exam_sheet.row(0)[0] = 'Course Code:'
       exam_sheet.row(0)[1] = @course.code
@@ -61,25 +61,25 @@ class ExamsController < ApplicationController
       @students.each_with_index do |student, index|
         exam_sheet.row(3 + index)[0] = student.id
         # exam_sheet.row(2 + index)[0] = ?  - class
-        # exam_sheet.row(2 + index)[1] = ?  - seat number  
+        # exam_sheet.row(2 + index)[1] = ?  - seat number
         exam_sheet.row(3 + index)[3] = student.full_name
 
-        
+
 
         # studens/exam_portion score matrix
         exam.exam_portions.each_with_index do |portion, portion_index|
 
-          #this method should be improved. many queries to db 
+          #this method should be improved. many queries to db
           portion_score = student.exam_portion_scores.where(:exam_portion_id => portion.id).first
 
           exam_sheet.row(3 + index)[(4 + portion_index.to_i)] = portion_score.score rescue ''
         end
       end
- 
+
     end
 
-    spreadsheet = StringIO.new 
-    book.write spreadsheet 
+    spreadsheet = StringIO.new
+    book.write spreadsheet
     send_data spreadsheet.string, :filename => "#{@course.code}.xls", :type =>  "application/vnd.ms-excel"
   end
 
@@ -117,7 +117,7 @@ class ExamsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     super do |format|
       format.js { render 'edit'}
     end
@@ -140,8 +140,16 @@ class ExamsController < ApplicationController
 
   def FixDigit num, digitNum
     fixNum = 10 ** digitNum
-    num = (num * fixNum).truncate()
-    return num.to_f / fixNum
+    num = num * fixNum
+    if num.nan?
+      num = 0
+    else
+      num = num.truncate
+      num = num.to_f / fixNum.to_f
+    end
+    puts "trancate-----------------"
+    puts num
+    return num
   end
 
   def grading
@@ -151,8 +159,8 @@ class ExamsController < ApplicationController
       @exams = Exam.find_all_by_id(params[:id])
     else
       @exams = @course.syllabus.exams.all
-      #TODO calculate all grades and put them in here
-      @grades = 1
+      # TODO calculate all grades and put them in here
+      # @grades = 1
     end
 
     @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
@@ -192,6 +200,8 @@ class ExamsController < ApplicationController
         @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
+    puts "exam_averages-------------------"
+    puts @exam_averages[0]
 
     # Deviation Calculation -----↓
     @deviation = Hash.new { |hash,key| hash[key] = {} }
@@ -223,19 +233,65 @@ class ExamsController < ApplicationController
     end
 
     # WIP Grade and Rank Calculation -----↓
+    @grades = Hash.new { |hash,key| hash[key] = {} }
+    gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
+    gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
+
+    @ranks = Hash.new { |hash,key| hash[key] = {} }
+    rankLevels = [15, 20]
+
     @exams.each do |exam|
       scores = []
       if exam.use_weighting
         @students.each do |student|
-          scores.push @student_total_weights[student.id][exam.id]
+          scores.push [@student_total_weights[student.id][exam.id], student.id]
         end
       else
         @students.each do |student|
-          scores.push @student_total_scores[student.id][exam.id]
+          scores.push [@student_total_scores[student.id][exam.id], student.id]
         end
       end
       scores.sort!().reverse!()
+      puts "scores--------------------"
+      puts scores
 
+      # Grade Calculation -----↓
+      gradePoint = 10
+      gradeLevels_Deviation.each_with_index do |glevel, i|
+        @students.each do |student|
+          if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
+            @grades[exam.id][student.id] = gradePoint
+            puts "grade dayo------------------------"
+            puts @grades[exam.id][student.id]
+          end
+        end
+        gradePoint -= 1
+      end
+
+      # Rank Calculation -----↓
+      rankPoint = 5
+      @students.each do |student|
+        @ranks[exam.id][student.id] = 3
+      end
+      rankNums = []
+      rankLevels.each do |rlevel|
+        rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
+      end
+      rankNums.each do |rnum|
+        i = 0
+        while i < rnum && scores.length != 0
+          @ranks[exam.id][scores.shift[1]] = rankPoint
+          i += 1
+        end
+        rankPoint -= 1
+      end
+      scores.each do |score|
+        if @grades[exam.id][socre[1]] == 3
+          @ranks[exam.id][score[1]] == 2
+        elsif @grades[exam.id][socre[1]] < 3
+          @ranks[exam.id][score[1]] == 1
+        end
+      end
     end
 
     respond_to do |format|
@@ -244,7 +300,9 @@ class ExamsController < ApplicationController
                                      :course => @course,
                                      :exam_averages => @exam_averages,
                                      :deviation => @deviation,
-                                     :students => Student.decrypt_student_fields(@students)
+                                     :students => Student.decrypt_student_fields(@students),
+                                     :grades => @grades,
+                                     :ranks => @ranks
                                      }}
 
       format.html { render "exams/grading" }

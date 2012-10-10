@@ -7,7 +7,7 @@ describe LessonPlan do
 
   	it { should have_many(:lessons) }
   	it { should have_many(:notes) }
-  	it { should have_many(:assets) }
+  	it { should have_many(:attachments) }
   	it { should belong_to(:syllabus) }
 
   	it { should allow_mass_assignment_of :title }

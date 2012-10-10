@@ -4,7 +4,7 @@ describe 'Guardian' do
   stub_authorization!
 
   before do
-    @student = Factory(:student)
+    @student = create(:student)
     visit student_path(@student)
   end
 
@@ -53,7 +53,7 @@ describe 'Guardian' do
 
   context "edit and delete" do 
     before(:each) do 
-      @guardian = Factory(:guardian)
+      @guardian = create(:guardian)
       @student.guardians << @guardian
       @student.reload
 

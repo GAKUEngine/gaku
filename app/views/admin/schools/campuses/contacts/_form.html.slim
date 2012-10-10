@@ -1,0 +1,11 @@
+- model = @contact || Contact.new
+= form_for [:admin, school, campus, model], :remote => true do |contact_form|
+  .row-fluid 
+    .span12
+      b= t('contacts.new') 
+    = render 'shared/form_fields/contact_form_fields', :contact_form => contact_form
+    .row-fluid
+	  = submit_button t('contacts.save'), :id => 'submit-admin-school-campus-contact-button', :class => 'btn btn-primary'
+	  = link_to_cancel :id => 'cancel-admin-school-campus-contact-link', :class => 'btn'
+
+= javascript_include_tag 'admin/schools/campuses/contacts'

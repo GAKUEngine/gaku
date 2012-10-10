@@ -20,6 +20,7 @@ guard 'rspec', :version => 2, :spec_paths => %w(spec),
   watch("app/controllers/application_controller.rb")  { "spec/controllers" }
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
+  watch(%r{^app/assets/javascripts/(.+)/.*\.(js|coffee|erb)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
 end
 
 guard 'bundler' do

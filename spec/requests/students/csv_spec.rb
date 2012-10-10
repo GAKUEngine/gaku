@@ -5,8 +5,8 @@ describe 'CSV' do
 
   context 'download' do 
     it 'should export students as CSV' do
-      Factory(:student, :name => 'John', :surname => 'Doe')
-      Factory(:student, :name => 'Susumu', :surname => 'Yokota')
+      create(:student, :name => 'John', :surname => 'Doe')
+      create(:student, :name => 'Susumu', :surname => 'Yokota')
       visit students_path
 
       click_link 'export-students-link'

@@ -4,8 +4,8 @@ describe 'ClassGroup Students' do
   stub_authorization!
 
   before do
-    @class_group = Factory(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
-    @student1 = Factory(:student, :name => 'Susumu', :surname => 'Yokota')
+    @class_group = create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
+    @student1 = create(:student, :name => 'Susumu', :surname => 'Yokota')
   end
 
   context "Class Roster" do
@@ -43,8 +43,8 @@ describe 'ClassGroup Students' do
     end
 
     pending 'should search students', :js => true do
-      student2 = Factory(:student, :name => 'Kenji', :surname => 'Kita')
-      student3 = Factory(:student, :name => 'Chikuhei', :surname => 'Nakajima')
+      student2 = create(:student, :name => 'Kenji', :surname => 'Kita')
+      student3 = create(:student, :name => 'Chikuhei', :surname => 'Nakajima')
 
       click_link 'new-class-group-student-link'
       wait_until { page.find('#student-modal').visible? }

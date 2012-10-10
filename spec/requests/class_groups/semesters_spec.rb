@@ -4,8 +4,8 @@ describe 'ClassGroup Semesters' do
   stub_authorization!
   
   before do
-    @class_group = Factory(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-    @semester = Factory(:semester)
+    @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
+    @semester = create(:semester)
     visit class_group_path(@class_group)
     click_link 'class-group-semesters-tab-link'
   end

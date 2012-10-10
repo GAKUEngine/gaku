@@ -10,9 +10,8 @@ class ClassGroups::SemestersController < ApplicationController
   
   def create
     super do |format|
-      if @class_group.semesters << @semester
-        format.js { render 'create' }  
-      end
+      @class_group.semesters << @semester
+      format.js { render 'create' }  
     end 
   end
 

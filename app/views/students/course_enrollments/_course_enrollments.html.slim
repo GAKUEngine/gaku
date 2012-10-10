@@ -16,14 +16,4 @@
             th =t("options")
         tbody
           = render :partial => 'students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
-
 #new-student-course-enrollment-form
-
-coffee:
-  $("#new-student-course-enrollment-link").click ->
-    $("#new-student-course-enrollment-link").hide()
-    $("#new-student-course-enrollment-form").show()
-
-  $("#cancel-student-course-enrollment-link").click ->
-    $("#new-student-course-enrollment-form").hide()
-    $("#new-student-course-enrollment-link").show()

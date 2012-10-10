@@ -4,12 +4,12 @@ describe 'Address' do
   stub_authorization!
   
   before do
-    @student = Factory(:student)
+    @student = create(:student)
   end
 
   context 'new' do 
     before do 
-      Factory(:country, :name => "Japan")
+      create(:country, :name => "Japan")
       visit student_path(@student)
 
       click_link 'new-student-address-tab-link'
@@ -55,6 +55,7 @@ describe 'Address' do
 
     it 'should cancel adding address', :js => true do 
       click_link 'cancel-student-address-link'
+      sleep 1
       wait_until { !page.find("#new-student-address-form").visible? }
       find("#new-student-address-link").visible? 
     end
@@ -62,8 +63,8 @@ describe 'Address' do
 
   context 'edit and delete, set_primary' do 
     before(:each) do 
-      @address = Factory(:address)
-      Factory(:student_address, :student => @student, :address => @address)
+      @address = create(:address)
+      create(:student_address, :student => @student, :address => @address)
       visit student_path(@student)
     end
 
@@ -126,9 +127,9 @@ describe 'Address' do
     end
 
     it 'should set primary address', :js => true do 
-      bulgaria = Factory(:country, :name => 'Bulgaria')
-      @address2 = Factory(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
-      Factory(:student_address, :student => @student, :address => @address2)
+      bulgaria = create(:country, :name => 'Bulgaria')
+      @address2 = create(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
+      create(:student_address, :student => @student, :address => @address2)
     
       @student.student_addresses.first.is_primary? == true
       @student.student_addresses.second.is_primary? == false

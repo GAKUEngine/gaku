@@ -1,4 +1,4 @@
-= form_for [@student, @note], :remote => true do |note_form|
+= form_for [@student, @note], :html => {:id => 'new-student-note-form'},:remote => true do |note_form|
   - if note_form.object.new_record?
     .row-fluid.control-group
       .span12
@@ -11,16 +11,5 @@
         .span6 
           = note_form.submit t("notes.save"), :id => "submit-student-note-button", :class => "span12 btn btn-primary"
         = link_to_cancel :id => "cancel-student-note-link"
-        
-coffee:
-  $ -> 
-    $("#cancel-student-note-link").click ->
-      $("#new-student-note-link").show()
-      $("#new-student-note-form").html("")
-  
-    $("#submit-student-note-button").live "ajax:success", (data, status, xhr)->
-      #add new record to list
-      $("#new-student-note-link").show()
-      $("#new-student-note-form").html("")
 
-    $('#new-student-note-form form').validationEngine()
+= javascript_include_tag 'students/notes'

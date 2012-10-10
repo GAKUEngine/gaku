@@ -1,6 +1,6 @@
 -unless semester.nil? or semester.new_record? or !semester
 	tr id="semester-#{semester.id}"
-	  = render 'shared/fields/semester_fields', :semester => semester
-      td
-	    =ajax_link_to_edit [:edit, @class_group, semester]
-        =ajax_link_to_delete [@class_group, semester]
+		= render 'shared/fields/semester_fields', :semester => semester
+		td
+			=ajax_link_to_edit [:edit, @class_group, semester]
+			=ajax_link_to_delete [@class_group, semester]

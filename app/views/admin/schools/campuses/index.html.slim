@@ -1,0 +1,22 @@
+#admin-school-campuses
+  .row-fluid
+    .pull-left
+      h4.h4-vm.admin-school-campuses-count
+        = print_count(@school.campuses, t('campuses.list'))
+    .pull-right
+      = link_to_new t('campuses.add'), new_admin_school_campus_path(@school), :id => 'new-admin-school-campus-link'
+
+  .row-fluid
+    .span12
+      table#admin-school-campuses-index.index.table.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.btn-inverse style="width:28px"
+                i.icon-white.icon-home
+              th.btn-inverse =t 'campuses.name'
+              th.btn-info style="width:90px" =t 'manage'
+          tbody
+            =render :partial => 'admin/schools/campuses/campus', :collection => @school.campuses, :as => 'campus'
+br/   
+#modal-dialogs
+#new-admin-school-campus
