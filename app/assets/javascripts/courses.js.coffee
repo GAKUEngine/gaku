@@ -35,7 +35,6 @@ $ ->
     $('#new-course-student-link').hide()
     $('#new-course-student-form').slideToggle()
 
-
   $('#new-course-class-group-link').on 'click', (event)->
     event.preventDefault()
     $('#new-course-student-form').hide()

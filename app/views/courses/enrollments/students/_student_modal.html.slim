@@ -1,0 +1,9 @@
+
+- model = @course_enrollment || CourseEnrollment.new
+- model_class = model.class
+.modal.hide#student-modal wmode="opaque" style="display: block;padding: 41px;position: absolute;left: 500px;top: 300px;width:auto;height:auto;text-align:center;"
+
+  =render 'students/student_chooser'
+  = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-course-student-link'
+
+  

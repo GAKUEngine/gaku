@@ -34,6 +34,9 @@ GAKUEngine::Application.routes.draw do
       put :update_score, :on => :member
       get :calculations, :on => :member
     end
+    member do
+      get :student_chooser
+    end
   end
 
   resources :class_group_enrollments do
