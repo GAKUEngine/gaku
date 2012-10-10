@@ -1,9 +1,5 @@
 <%- if params[:action] == 'create' %>
-
-$('#new-student-address-form #validation-errors').html("<%= escape_javascript(render :partial => 'shared/errors', :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @address}) %>")
-
+  $('#validation-errors').html("<%= render_js_partial('shared/errors', {:target => @address}) %>");
 <%- elsif params[:action] == 'update' %>
-
-$('#edit-address-modal #validation-errors').html("<%= escape_javascript(render :partial => 'shared/errors', :formats => [:html], :handlers => [:erb, :slim], :locals => {:target => @address}) %>")
-
+  $('#validation-errors').html("<%= render_js_partial('shared/errors', {:target => @address}) %>");
 <% end %>

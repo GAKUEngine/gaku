@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
   create_table "attachments", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.boolean  "is_deleted",         :default => false
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.string   "asset_file_name"
@@ -71,8 +72,9 @@ ActiveRecord::Schema.define(:version => 20121003083905) do
     t.string   "name"
     t.integer  "school_id"
     t.integer  "address_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "is_master",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "class_group_course_enrollments", :force => true do |t|

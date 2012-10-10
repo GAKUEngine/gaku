@@ -6,6 +6,7 @@ class ExamPortionsController < ApplicationController
   before_filter :load_exam, :only => [:show, :edit, :update, :destroy ]
 
   def show
+    @attachment = Attachment.new
     super do |format|
       format.html {render 'exams/exam_portions/show'}
     end

@@ -1,5 +1,6 @@
 =t 'exam_portions.show'
 .row-fluid
+  .span12
     table.table.table-striped.table-bordered.table-condensed
       thead
         tr
@@ -20,3 +21,35 @@
             = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-success", :style => "margin-right:5px"
             = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-warning", :style => "margin-right:5px", :remote => true
             = link_to ("<i class='icon-white icon-remove'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "delete_exam_portion_link btn btn-mini btn-danger"
+.row-fluid
+  .span12
+    h4 Attachment index
+    #new-exam-portion-attachment-link
+      =link_to ("<i class='icon-plus icon-white'></i> " + t('attachments.new_attachment')).html_safe, "#", :class => 'btn btn-primary pull-right'
+br/
+.row-fluid
+  #new-exam-portion-attachment-form.hide
+    .span12.well
+      =form_for [@exam, @exam_portion, @attachment], :remote => true do |f|
+          =f.label :name, t('name')
+          =f.text_field :name
+          =f.label :description, t('description')
+          =f.text_area :description, :rows => 8
+          =f.label :asset, t('attachments.asset')
+          =f.file_field :asset
+          br
+          =f.submit t('attachments.create_attachment'), :class => 'btn btn-primary'
+.row-fluid
+  .span12.well
+    table.exam-portion-attachment-index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('name')
+          th.btn-inverse =t('description')
+          th.btn-inverse =t('attachments.file_name')
+          th.btn-inverse =t('attachments.file_type')
+          th.btn-inverse =t('attachments.file_size')
+          th.btn-info width="70px" =t 'manage'
+      tbody
+        =render :partial => 'shared/fields/attachment_fields', :collection => @exam_portion.attachments, :as => :attachment
+          

@@ -1,0 +1,9 @@
+tr
+  td =attachment.name 
+  td =attachment.description
+  td =attachment.asset_file_name
+  td =attachment.asset_content_type
+  td =number_to_human_size attachment.asset_file_size
+  td
+    = link_to ("<i class='icon-white icon-download'></i>").html_safe, [:download, attachment], :class => 'btn btn-mini btn-success', :style => 'margin-right:5px'
+    =ajax_link_to_delete [:soft_delete, attachment], :id => 'exam-portion-attachment-delete'

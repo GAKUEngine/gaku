@@ -9,17 +9,20 @@ describe 'Note' do
   end
 
   context 'new' do
+    before do 
+      click_link 'new-student-note-link'
+      wait_until { find('#new-student-note form').visible? }
+    end
+
     it "should add and show student note", :js => true do
       @student.notes.size.should eql(0)
       tr_count = page.all('table#student-notes-index tr').size
-      click_link 'new-student-note-link'
-
-      wait_until { find('#new-student-note-form').visible? } 
+ 
       fill_in "note_title", :with => "The note title"
       fill_in "note_content", :with => "The note content"
       click_button "submit-student-note-button"
 
-      wait_until { !page.find('#new-student-note-form').visible? } 
+      wait_until { !page.find('#new-student-note form').visible? } 
       page.should have_selector('a', href: "/students/1/notes/1/edit")
       page.should have_content("The note title")
       page.should have_content("The note content")
@@ -30,9 +33,6 @@ describe 'Note' do
     end
 
     it "should error if there are empty fields", :js => true do 
-      click_link 'new-student-note-link'
-
-      wait_until { find('#new-student-note-form').visible? } 
       click_button "submit-student-note-button"
       wait_until do
          page.should have_selector('div.note_titleformError') 
@@ -42,11 +42,13 @@ describe 'Note' do
     end
 
     it 'should cancel adding', :js => true do 
-      click_link 'new-student-note-link'
-
-      wait_until { find('#new-student-note-form').visible? }
       click_link 'cancel-student-note-link'
-      wait_until { !page.find('#new-student-note-form').visible? }
+      wait_until { !page.find('#new-student-note form').visible? }
+      find('#new-student-note-link').visible?
+
+      click_link 'new-student-note-link'
+      wait_until { find('#new-student-note form').visible? }
+      !page.find('#new-student-note-link').visible?
     end
   end
 

@@ -7,45 +7,7 @@
     .row-fluid
       .span12
         hr/
-    .row-fluid
-      .span12.well
-        .row-fluid
-          table.table.table-striped.table-bordered.table-condensed
-            tbody
-              tr
-                th.btn-inverse =t('exams.name')
-                td =@exam.name
-                th.btn-inverse =t('exams.weight')
-                td =@exam.weight
-              tr
-                th.btn-inverse =t('exams.description')
-                td colspan="3" =@exam.description
-              tr
-                th.btn-inverse =t('exams.adjustments')
-                td colspan="3" =@exam.adjustments
-    .row-fluid
-      .span12.well
-        .row-fluid
-          .pull-left
-            h4.h4-vm.exam-portions-count =t('exam_portions.list') + " ( " + @exam.exam_portions.count.to_s + " )"
-          .pull-right
-            #add_exam_exam_portion
-              =link_to ('<i class="icon-white icon-plus"></i> '+t('exams.add_portion')).html_safe, new_exam_exam_portion_path(@exam), :class => 'btn btn-primary'
-        .row-fluid
-          .span12
-            hr
-        .row-fluid
-          div id='exam_exam_portions_form' style='display:none; margin-bottom:20px'
-            =render 'exams/exam_portions/exam_portion_form'
-        .row-fluid
-          #exam-exam_portions
-            =render 'exams/exam_portions/exam_portions'
-        - if @exam.use_weighting
-          .row-fluid.weight-check-widget
-            =render 'weight_check_widget', :exam => @exam
-    .row-fluid
-      .span12.well
-        = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_exam_path(@exam), :class => "span9 btn btn-warning"
-        = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, exams_path, :class => "span3 btn btn-danger"
+    #exam-show
+      =render 'exams/exam_show', :exam => @exam
 
 #modal_dialogs

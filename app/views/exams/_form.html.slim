@@ -20,7 +20,7 @@
             = f.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
           .span3
             = f.label :weight, t("exams.weight")
-            = f.number_field :weight, :class => " validate[custom[integer]min[0]] span12", "data-prompt-position" => "bottomRight:5"
+            = f.number_field :weight, :class => "span12", "data-prompt-position" => "bottomRight:5"
         .row-fluid
           .span6
             = f.label :description, t("exams.description")
@@ -61,9 +61,11 @@
               .span6
                 = ep_form.label :adjustments, t('exam_portions.adjustments')
                 = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
-  .row-fluid
-    .span12.well
+  .row-fluid.well
+    .span9
       = f.submit nil, :id => 'submit_button', :class => "span12 btn btn-primary"
+    .span3
+      =link_to t('back'), exams_path ,:id => 'submit_button', :class => "span12 btn"
 
 coffee:
   $('.new_exam').validationEngine();

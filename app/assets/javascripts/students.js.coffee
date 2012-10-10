@@ -4,20 +4,20 @@
 $ ->
 
   #student
-  $('#new-student-form form').validationEngine()
+  $('#new-student-form').validationEngine()
 
   $('#new-student-link').on 'click', (event) ->
     event.preventDefault()
-    $('#new-student-form').slideToggle()
+    $(this).hide()
+    $('#new-student form').slideToggle()
 
   $("#cancel-student-link").click ->
     $("#new-student-link").show()
-    $("#new-student-form").slideToggle()
+    $("#new-student form").slideToggle()
 
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()
     $('#delete-modal').modal('show')
-
 
   $("#upload-student-picture-link").click ->
     $("#upload-student-picture").toggle()

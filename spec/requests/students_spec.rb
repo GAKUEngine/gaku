@@ -29,11 +29,8 @@ describe 'Student' do
         click_link('Show')
         wait_until { find('#chosen-table').visible? }
         page.should have_content("#{@student.name}")
-        #page.should have_content('Enroll to class')
-        #page.should have_content('Enroll to course')
-        page.should have_selector("input", :value => "Enroll to class")
-        page.should have_selector("input", :value => "Enroll to course")
-        
+        page.should have_button('Enroll to class')
+        page.should have_button('Enroll to course')
         click_link('Hide')
         wait_until { !page.find('#chosen-table').visible? }
       end
@@ -48,7 +45,7 @@ describe 'Student' do
           page.should have_content("John") 
           page.should have_content("Johny")
         end
-        sleep 1 #FIXME
+        sleep 2 #FIXME
         page.all('#students-index tr').size.should eql(3)
       end
       
@@ -153,7 +150,7 @@ describe 'Student' do
     before do 
       visit students_path
       click_link "new-student-link"
-      wait_until { find('#new-student-form').visible? }
+      wait_until { find('#new-student form').visible? }
     end
 
     it "should create new student" do 
@@ -161,14 +158,14 @@ describe 'Student' do
       fill_in "student_surname", :with => "Doe"
       click_button "submit-student-button"
 
-      wait_until { !page.find('#new-student-form').visible? }
+      wait_until { !page.find('#new-student form').visible? }
       page.should have_content("John")
       Student.all.count.should eql(1)
     end
 
     it 'should cancel creating' do 
       click_link 'cancel-student-link'
-      wait_until { !page.find('#new-student-form').visible? }
+      wait_until { !page.find('#new-student form').visible? }
     end
   end
 

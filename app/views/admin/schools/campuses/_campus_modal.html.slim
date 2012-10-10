@@ -1,0 +1,16 @@
+#edit-campus-modal.modal.hide wmode="opaque"
+
+  = form_for([:admin, @school, @campus], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |campus_form| 
+
+      .modal-header
+        h3 =t("campuses.edit")
+      .modal-body
+        .row-fluid
+          #validation-errors
+        .row-fluid
+          = campus_form.label :name, t("campuses.name")
+          = campus_form.text_field :name, :class => "span12"    
+        .row-fluid
+          .span9
+            =submit_button t('campuses.save'), :id => 'submit-admin-school-campus-button', :class => 'btn btn-primary button span12'
+          = link_to_cancel :id => 'cancel--admin-school-campus-link'

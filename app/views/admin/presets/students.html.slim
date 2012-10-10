@@ -1,18 +1,18 @@
-.row-fluid
-  .span12.well
-    = form_tag update_presets_admin_presets_path, :method => :put do
+=form_tag update_presets_admin_presets_path, :method => :put do
+  .row-fluid
+    .span12.well
       = fields_for 'presets' do |students_gender|
-      	= students_gender.label :students_gender, t('admin.presets.students.gender')
-      	= students_gender.text_field :students_gender, :value => @preset_hash[:students_gender]
+        = students_gender.label :students_gender, t('admin.presets.students.gender')
+        = students_gender.select :students_gender,  options_for_select([[t('genders.male'), true], [t('genders.female'),false]], :selected => @preset_hash[:students_gender]), :prompt => t('students.choose_gender')
       = fields_for 'presets' do |address_country|
-      	= address_country.label :address_country, t('admin.presets.students.country')
-      	= address_country.text_field :address_country, :value => @preset_hash[:address_country]
+        = address_country.label :address_country, t('admin.presets.students.country')
+        = address_country.select :address_country, options_for_select(Country.all.sort_by(&:name).collect{|s| [s.name, s.id]},:selected => @preset_hash[:address_country]), {:prompt => t('addresses.choose_country')}
       = fields_for 'presets' do |address_state|
-      	= address_state.label :address_state, t('admin.presets.students.state')
-      	= address_state.text_field :address_state, :value => @preset_hash[:address_state]
+        = address_state.label :address_state, t('admin.presets.students.state')
+        = address_state.text_field :address_state, :value => @preset_hash[:address_state]
       = fields_for 'presets' do |address_city|
-      	= address_city.label :address_city, t('admin.presets.students.city')
-      	= address_city.text_field :address_city, :value => @preset_hash[:address_city]
-.row-fluid
-  .span12.well
-  	= submit_tag t('admin.presets.save'), :class => 'btn btn-primary'
+        = address_city.label :address_city, t('admin.presets.students.city')
+        = address_city.text_field :address_city, :value => @preset_hash[:address_city]
+  .row-fluid
+    .span12.well          
+      =submit_tag t('admin.presets.save'), :class => 'btn btn-primary'

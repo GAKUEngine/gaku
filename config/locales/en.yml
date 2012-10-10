@@ -1,11 +1,18 @@
 en:
   admin:
-    admin: "admin"
-    plural: "admin"
+    admin: "Admin"
+    schools: "Schools"
+    contact_types: "Contact Types"
     presets:
       student: "Student Preset"
       locale: "Locale Preset"
-
+      save: 'Save'
+      updated: 'Presets Updated'
+      students:
+        gender: 'Gender'
+        country: 'Country'
+        state: 'State'
+        city: 'City'
   fields:
     name: "name"
     surname: "surname"
@@ -38,6 +45,16 @@ en:
   date_placeholder: "YYYY-MM-DD"
   search: "Search"
   hide: "Hide"
+  description: 'Description'
+  attachments:
+    assets: 'Assets'
+    file_name: 'File name'
+    file_type: 'File type'
+    file_size: 'File size'
+    new_attachment: "New Attachment"
+    create_attachment: 'Create Attachment'
+    attachment_recovered: 'Attachment recovered'
+    asset_type: 'Asset type'
   addresses:
     addresses: "Addresses"
     new: "New Address"
@@ -65,8 +82,6 @@ en:
   teacher: "Instructor"
   student: "Student"
   students:
-    import: "CSV Import"
-    export: "CSV Export"
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
@@ -232,6 +247,7 @@ en:
     save: "Save profile"
   guardian: "Guardian"
   guardians:
+    new: "New Guardian"
     guardians: "Guardians"
     list: "Guardians list"
     relationship: "Relationship"
@@ -247,7 +263,6 @@ en:
     save: "Save Contact Type"
 
   contacts:
-    list: "Contacts List"
     new: "New Contact"
     save: "Save Contact"
     data: "Data"
@@ -257,6 +272,38 @@ en:
     actions: 'Actions'
     list: "Contacts list"
     contacts: "Contacts"
+
+  schools:
+    singular: "School"
+    plural: "Schools"
+    add: "Add School"
+    edit: "Edit School"
+    list: "School list"
+    new: "New School"
+    save: "Save School"
+    name: "Name"
+    slogan: "Slogan"
+    description: "Description"
+    founded: "Founded"
+    principal: "Principal"
+    vice_principal: "Vice Principal"
+    grades: "Grades"
+    primary: "Primary"
+    campuses: "Campuses"
+
+  campuses:
+    singular: "Campus"
+    plural: "Campuses"
+    add: "Add Campus"
+    edit: "Edit Campus"
+    list: "Campus list"
+    new: "New Campus"
+    save: "Save Campus"
+    name: "Name"
+    address: "Campus Address"
+    contacs: "Campus Contacts"
+    primary: "Primary"
+
   note: "Notes"
   notes:
     notes: "Notes"
@@ -300,6 +347,7 @@ en:
     master: "Master exam portion"
     save: "Save exam portion"
     show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   options: "Options"
   notice:
     picture_uploaded: "Picture successfully uploaded"
@@ -307,3 +355,7 @@ en:
   helpers:
     links:
       cancel: "Cancel"
+
+  csv:
+    import: "CSV Import"
+    export: "CSV Export"

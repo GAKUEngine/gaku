@@ -1,8 +1,5 @@
-- model = @address || Address.new
-- model_class = model.class
 .modal.hide#edit-address-modal wmode="opaque"
-
-  = form_for([@student, @guardian, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |address_form| 
+  = form_for [@student, @guardian, @address], :remote => true, :html => { :'data-type' => 'script', :class => 'form-horizontal' } do |address_form| 
 
       .modal-header
         h3 =t("addresses.edit")

@@ -3,6 +3,8 @@ ja:
     admin: "管理者"
     plural: "複数"
     presets:
+      save: 'Save'
+      updated: 'Presets Updated'
       student: "生徒用プリセット"
       students:
         gender: "生徒の性別"
@@ -37,6 +39,20 @@ ja:
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
   hide: "Hide"
+  description: 'Description'
+  admin:
+    presets:
+      save: 'Save'
+      gender: 'Gender'
+  attachments:
+    assets: 'Assets'
+    file_name: 'File name'
+    file_type: 'File type'
+    file_size: 'File size'
+    new_attachment: "New Attachment"
+    create_attachment: 'Create Attachment'
+    attachment_recovered: 'Attachment recovered'
+    asset_type: 'Asset type'
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -304,4 +320,5 @@ ja:
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
     show: "Show Exam Portion"
+    attached_file_count: 'Attached file count'
   import_format: "インポート形式"

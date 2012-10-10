@@ -8,6 +8,23 @@ module ApplicationHelper
     link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def button(text, resource, options = {})
+    attributes = {
+      :class => "btn btn-primary"
+    }.merge(options)
+
+    link_to text, resource, attributes
+  end
+
+  def link_to_file(text, resource, options = {})
+    name = ("<i class='icon-white icon-file'></i>" + text).html_safe
+    attributes = {
+      :class => "btn btn-primary"
+    }.merge(options)
+
+    link_to name, resource, attributes
+  end
+
   #needs id, because it is unique
   def ajax_link_to_new(text, resource, options = {})
     name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
@@ -47,6 +64,18 @@ module ApplicationHelper
       :method => :delete,
       :data => { :confirm => 'Are you sure?' },
       :class => 'btn btn-mini btn-danger delete-link'
+    }.merge(options)
+
+    link_to name, resource, attributes
+  end
+
+  def ajax_link_to_make_primary(resource, options = {})
+    name = ("<i class='icon-white icon-ok'></i>").html_safe
+
+    attributes = {
+      :remote => true,
+      :method => :post,
+      :data => { :confirm => 'Are you sure?' },
     }.merge(options)
 
     link_to name, resource, attributes
@@ -95,7 +124,7 @@ module ApplicationHelper
   def link_to_cancel(options = {})
     name = t('.cancel', :default => t("helpers.links.cancel"))
     attributes = {
-      :class => 'span3 btn btn-danger',
+      :class => "span3 btn btn-danger",
       :'data-dismiss' => "modal"
     }.merge(options)
 
@@ -109,7 +138,8 @@ module ApplicationHelper
 
   def submit_button(text, options={})
     attributes = {
-      :type => 'submit'
+      :type => 'submit',
+      :class => 'span12 btn btn-primary button'
     }.merge(options)
 
     button_tag(content_tag('span', text), attributes)
