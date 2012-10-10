@@ -14,14 +14,7 @@
         =render 'form'
     .row-fluid
       .span12.well
-        table#courses-index.index.table.table-striped.table-bordered.table-condensed
-          thead
-            tr
-              th*{"class" => "btn-inverse", "data-field" => "#{t('syllabuses.code')}-#{t(:syllabus)}-#{t('courses.code')}-[#{t('syllabuses.code')}]: #{t(:syllabus)}-#{t('courses.code')}"} =t('syllabuses.code')
-              th*{"class" => "btn-inverse", "data-field" => t(:schedule)} =t('schedule')
-              th*{"class" => "btn-inverse", "data-field" => t(:teacher)} =t('teacher')
-              th*{"class" => "btn-inverse", "data-field" => t(:num_enrolled)} =t('num_enrolled')
-              th.btn-info style="width:94px" = t(:manage)
-          - @courses.each do |course|
-            =render 'course_unit', :course => course
+        #courses-index
+          =render 'courses/courses'
+#modal-dialogs
     

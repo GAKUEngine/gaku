@@ -17,6 +17,12 @@ class CoursesController < ApplicationController
     end
   end
 
+  def edit
+    super do |format|
+      format.js { render }
+    end
+  end
+
   def show
     super do |format|
       format.json { render :json => @course.as_json(:include => 'students') }
@@ -37,6 +43,12 @@ class CoursesController < ApplicationController
     end
   end
 
+  def update
+    super do |format|
+      format.js { render }
+    end  
+  end
+  
   def destroy
     super do |format|
       format.js { render :nothing => true}

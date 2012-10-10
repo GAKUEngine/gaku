@@ -30,27 +30,26 @@ describe 'Courses' do
 
     it "should list and show existing courses" do
       within("#courses-index") { page.should have_content("biology") }
-      within('#courses-index tr:nth-child(2)') { click_link "show-course-link" }
+      within('#courses-index tbody tr') { find(".show-link").click }
       
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
 
-    it "should edit a course" do
-      within('#courses-index tr:nth-child(2)') { find(".edit-link").click }
+    it "should edit a course", :js => true  do
+      within('#courses-index tbody tr') { find(".edit-link").click }
 
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
       click_button 'submit-course-button'
 
-      page.should have_content "was successfully updated"
       page.should have_content "biology2013Syllabus"
       page.should have_content "biology2013"
     end
 
     it "should edit a course from show" do
-      within('#courses-index  tr:nth-child(2)') { find(".show-link").click }
+      within('#courses-index tbody tr') { find(".show-link").click }
       page.should have_content("Show")
       
       find('.edit-link').click

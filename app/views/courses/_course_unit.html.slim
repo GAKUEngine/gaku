@@ -1,9 +1,5 @@
-tr
-  td= "[#{course.syllabus.code}]: #{course.syllabus.name}-#{course.code}"  if course.syllabus
-  td
-  td
-  td= course.students.count
-  td 
-    = link_to_show course, :id => 'show-course-link'
-    = link_to_edit edit_course_path(course), :id => 'edit-course-link'
-    = ajax_link_to_delete course_path(course), :id => 'delete-course-link'
+= render 'shared/fields/course_fields', :course => course
+td
+  = link_to_show course
+  = ajax_link_to_edit edit_course_path(course)
+  = ajax_link_to_delete course
