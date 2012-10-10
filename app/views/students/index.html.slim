@@ -49,7 +49,7 @@
         #students-index
           =render 'students/students'
           .pull-right
-            = link_to "CSV Export", "students.csv", :id => 'export-students-link', :class => "btn btn-mini btn-primary"
+            = link_to t("students.export"), "students.csv", :id => 'export-students-link', :class => "btn btn-mini"
 
 javascript:
   $(".class_group-select").combobox()
