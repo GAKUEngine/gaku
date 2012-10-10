@@ -1,0 +1,5 @@
+$('#course-modal').modal('hide');
+$('#course-modal').remove();
+
+var currentCourseSyllabus= $(".course-<%= @course.id %> .syllabus");
+currentCourseSyllabus.html( "[<%= @course.syllabus.code + "]:" +  @course.syllabus.name + "-" + @course.code %>");  

@@ -19,6 +19,22 @@ class CourseActions
 @CourseAct = new CourseActions()
 
 $ ->
+  $('#new-course-link').on 'click', (event) ->
+    event.preventDefault()
+    $('#new-course').slideToggle()
+
+  $('#new-course form').validationEngine()
+    
+  $("#cancel-course-link").click ->
+    $('#new-course').slideToggle()
+
+  $('#new-course-student-link').on 'click', (event)->
+    event.preventDefault()
+    $('#new-course-class-group-form').hide()
+    $('#new-course-class-group-link').show()
+    $('#new-course-student-link').hide()
+    $('#new-course-student-form').slideToggle()
+
   $('#new-course-class-group-link').on 'click', (event)->
     event.preventDefault()
     $('#new-course-student-form').hide()
