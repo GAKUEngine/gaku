@@ -1,3 +1,3 @@
-$('#new-student-form').slideToggle();
-$('#new-student-form form')[0].reset();
+$('#new-student form').slideToggle();
+$('#new-student form')[0].reset();
 $('#students-index tbody').append('<%= render_js_partial("student", {:student => @student}) %>');

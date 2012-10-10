@@ -4,6 +4,8 @@ $ ->
   	event.preventDefault()
   	$('#new-class-group').slideToggle()
 
+  $('#new-class-group form').validationEngine()
+    
   $("#cancel-class-group-link").click ->
     $('#new-class-group').slideToggle()
 

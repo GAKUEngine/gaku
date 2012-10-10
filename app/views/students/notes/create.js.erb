@@ -3,7 +3,7 @@ $('#new-student-note form').each(function() {
 	this.reset();
 });
 
-$('#new-student-note-form').slideToggle();
+$('#new-student-note form').slideToggle();
 $('#new-student-note-link').show();
 
 $('#new-student-note-tab-link').html('<%= print_count(@student.notes, t('notes.notes')) %>');

@@ -1,11 +1,12 @@
-- model = @contact || Contact.new
-=form_for([@student, @guardian, model], :remote => true, :html => { :class => 'new-student-guardian-contact-form' }) do |contact_form|
-  .row-fluid 
-    .span12
-      b= t('contacts.new') 
-    = render 'shared/form_fields/contact_form_fields',  :contact_form => contact_form
-    .row-fluid
-	  = submit_button t('contacts.save'), :id => 'submit-student-guardian-contact-button', :class => 'btn btn-primary'
-	  = link_to_cancel  :id => 'cancel-student-guardian-contact-link', :class => 'btn'
-
+=form_for [@student, @guardian, @contact], :remote => true do |contact_form|
+  b= t('contacts.new')
+  .row-fluid.mt-l 
+    .span12.well
+      = render 'shared/form_fields/contact_form_fields', :contact_form => contact_form
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t('contacts.save'), :id => 'submit-student-guardian-contact-button'
+          = link_to_cancel  :id => 'cancel-student-guardian-contact-link'
+          
 = javascript_include_tag 'students/guardians/contacts'

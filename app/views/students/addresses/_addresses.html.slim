@@ -1,5 +1,6 @@
 #student-addresses
   .row-fluid
+    #new-student-address
     .pull-left
       h4.mt-xs.mb-0.student-addresses-count
         = print_count(@student.addresses, t('addresses.list'))
@@ -26,5 +27,5 @@
         tbody
           =render :partial => 'students/addresses/address', :collection => @student.addresses, :as => 'address'
 
-#new-student-address
+
 #modal-dialogs
