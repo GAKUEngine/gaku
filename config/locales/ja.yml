@@ -3,7 +3,7 @@ ja:
     admin: "管理者"
     plural: "複数"
     presets:
-      save: 'Save'
+      save: 'プリセットを保存'
       updated: '更新用プリセット'
       student: "生徒用プリセット"
       students:
