@@ -14,7 +14,7 @@ describe 'ClassGroup Courses' do
     ClassGroupCourseEnrollment.count.should eql(0)
     tr_count = page.all('#courses-index tbody tr').size
     click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course-form').visible? }
+    wait_until { page.find('#new-class-group-course form').visible? }
     select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
     click_button 'submit-course-button'
 
@@ -27,20 +27,22 @@ describe 'ClassGroup Courses' do
 
   it 'should not add a course if course code is empty', :js => true do
     click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course-form').visible? }
+    wait_until { page.find('#new-class-group-course form').visible? }
     click_button 'submit-course-button'
 
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
-  it 'should not add a course if cancel btn is selected', :js => true do
+  it 'should cancel adding', :js => true do
     click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course-form').visible? }
+    wait_until { page.find('#new-class-group-course form').visible? }
     click_on 'cancel-course-link'
-    wait_until { !page.find('#new-class-group-course-form').visible? }
+
+    wait_until { !page.find('#new-class-group-course form').visible? }
     within("#courses-index tbody"){ page.should_not have_content ("#{@course.code}") }
-    ClassGroupCourseEnrollment.count.should eql(0)
-    @class_group.courses.count.should eql(0)
+
+    click_link 'new-class-group-course-link'
+    wait_until { page.find('#new-class-group-course form').visible? }
   end
 
   context 'Class group with added course' do
@@ -55,7 +57,7 @@ describe 'ClassGroup Courses' do
 
     it 'should not add a course if it is already added', :js => true do  
       click_link 'new-class-group-course-link'
-      wait_until { page.find('#new-class-group-course-form').visible? }
+      wait_until { page.find('#new-class-group-course form').visible? }
       select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
       click_button 'submit-course-button'
 
