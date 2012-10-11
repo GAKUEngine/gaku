@@ -128,6 +128,7 @@ GAKUEngine::Application.routes.draw do
 
 
   namespace :admin do
+    resources :commute_method_types
     resources :contact_types
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do

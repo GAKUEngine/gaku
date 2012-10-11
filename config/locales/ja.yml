@@ -2,7 +2,10 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    schools: "Schools"
     disposals: 'Disposals'
+    types: 'Types'
+    contact_types: "Contact Types"
     presets:
       presets: "Presets"
       save: 'プリセットを保存'
@@ -187,6 +190,14 @@ ja:
   commute_methods:
     created: '通学手段が作成されました。'
     updated: '通学手段が更新されました。'
+  commute_method_types:
+    plural: "Commute Method Types"
+    singular: "Commute Method Type"
+    save: 'Save Commute Method Type'
+    new: 'New Commute Method Type'
+    edit: 'Edit Commute Method Type'
+    list: 'Commute Method Types List'
+    add: 'Add Commute Method Type'
   grades:
     combined: "全試験合計"
     grading: "を採点"
