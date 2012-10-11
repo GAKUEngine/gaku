@@ -308,33 +308,33 @@ class ExamsController < ApplicationController
     end
   end
 
-  def update_score
-    puts "!!!UPDATE!!!"
-    @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
-    @exam_portion_score.score = params[:exam_portion_score][:score]
-    if @exam_portion_score.save
-      @student_id = Student.find(params[:exam_portion_score][:student_id]).id
-      exam = Exam.find(params[:id])
-      exam_portions = exam.exam_portions
-      @exam_id = exam.id.to_s
-      exam_portions_ids = exam_portions.pluck(:id)
-      student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
-      student_scores = student_exam_portion_scores.pluck(:score)
-      @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
-
-      @student_weights_total = 0.0
-      if exam.use_weighting
-        student_exam_portion_scores.each do |eps|
-          @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
-        end
-      end
-
-      respond_to do |format|
-          format.js { render 'update_score' }
-          format.js { render :json => @exam_portion_score}
-        end
-      end
-  end
+  # def update_score
+    # @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
+    # @exam_portion_score.score = params[:exam_portion_score][:score]
+    # if @exam_portion_score.save
+      # @student_id = Student.find(params[:exam_portion_score][:student_id]).id
+      # exam = Exam.find(params[:id])
+      # exam_portions = exam.exam_portions
+      # @exam_id = exam.id.to_s
+      # exam_portions_ids = exam_portions.pluck(:id)
+      # student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
+      # student_scores = student_exam_portion_scores.pluck(:score)
+      # @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
+#
+      # @student_weights_total = 0.0
+      # if exam.use_weighting
+        # student_exam_portion_scores.each do |eps|
+          # @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
+        # end
+      # end
+#
+      # respond_to do |format|
+          # format.js { render 'update_score' }
+          # format.js { render :json => @exam_portion_score}
+        # end
+      # end
+    # end
+  # end
 
   private
     def load_exam
