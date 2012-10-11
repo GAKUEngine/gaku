@@ -4,6 +4,7 @@ en:
     schools: "Schools"
     contact_types: "Contact Types"
     disposals: 'Disposals'
+    types: 'Types'
     presets:
       presets: "Presets"
       student: "Student Preset"

@@ -26,8 +26,12 @@ ul.nav#menu
       = t("admin.admin")
       b.caret
     ul.dropdown-menu
-      li= link_to t("admin.contact_types"), admin_contact_types_path
       li= link_to t("admin.schools"), admin_schools_path
+      li.dropdown-submenu
+        a tabindex='-1' href='#' =t('admin.presets.types')
+        ul.dropdown-menu
+          li= link_to t("admin.contact_types"), admin_contact_types_path
+          li= link_to t("commute_method_types.plural"), admin_commute_method_types_path
       li.dropdown-submenu
         a tabindex='-1' href='#' =t('admin.presets.presets')
         ul.dropdown-menu

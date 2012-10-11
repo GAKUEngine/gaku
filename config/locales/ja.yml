@@ -2,7 +2,10 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    schools: "Schools"
     disposals: 'Disposals'
+    types: 'Types'
+    contact_types: "Contact Types"
     presets:
       presets: "Presets"
       save: 'Save'
