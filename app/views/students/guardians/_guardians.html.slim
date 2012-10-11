@@ -3,7 +3,7 @@
   #new-student-guardian
   .row-fluid
     .pull-left
-      h4.h4-vm.student-guardians-count
+      h4.mt-xs.mb-0.student-guardians-count
         = print_count(@student.guardians, t('guardians.list'))
     .pull-right
       = ajax_link_to_new t('guardians.add'), new_student_guardian_path(@student), :id => "new-student-guardian-link"
@@ -15,7 +15,7 @@
       .row-fluid
         .span12.well.guardians_list
           =render :partial => 'students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
-      
+
       /table.table.table-striped.table-bordered.table-condensed
         thead
           tr
