@@ -6,7 +6,8 @@ $ ->
     $("#new-student-guardian-link").hide()
     $("#new-student-guardian form").slideToggle()
 
-  $("#cancel-student-guardian-link").click ->
+  $("#cancel-student-guardian-link").on 'click', (e)->
+    e.preventDefault()
     $("#new-student-guardian-link").show()
     $("#new-student-guardian form").slideToggle()  
 

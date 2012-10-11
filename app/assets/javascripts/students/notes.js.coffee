@@ -6,6 +6,7 @@ $ ->
     $("#new-student-note-link").show()
     $("#new-student-note form").slideToggle()
 
-  $("#cancel-student-note-link").click ->
-    $("#new-student-note-link").show()
-    $("#new-student-note form").slideToggle()
+	$("#cancel-student-note-link").on 'click', (e) ->
+		e.preventDefault()
+		$("#new-student-note-link").show()
+		$("#new-student-note form").slideToggle()
