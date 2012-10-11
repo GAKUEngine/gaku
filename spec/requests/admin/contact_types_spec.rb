@@ -9,6 +9,7 @@ describe 'ContactTypes' do
     end
 
     it 'should create and show contact type', :js => true do 
+      tr_count = page.all('table#admin-contact-types-index tr').size
       ContactType.count.should eq 0
       click_link 'new-admin-contact-type-link'
 
@@ -20,6 +21,8 @@ describe 'ContactTypes' do
       wait_until { !page.find('#new-admin-contact-type form').visible? }
       page.find('#new-admin-contact-type-link').visible?
       page.should have_content('home phone')
+      page.all('table#admin-contact-types-index tr').size == tr_count + 1
+      within('.admin-contact-types-count') { page.should have_content('Contact Types list(1)') }
       ContactType.count.should eq 1 
     end 
 
@@ -55,14 +58,25 @@ describe 'ContactTypes' do
   	  ContactType.count.should eq 1
   	end
 
+    it 'should cancel editting', :js => true do 
+      within('table#admin-contact-types-index tbody') { find('.edit-link').click }
+      wait_until { find('#edit-contact-type-modal').visible? }
+
+      click_link 'cancel-admin-contact-type-link'
+      wait_until { !page.find('#edit-contact-type-modal').visible? }
+    end
+
+
   	it 'should delete contact type', :js => true do
       ContactType.count.should eq 1
+      within('.admin-contact-types-count') { page.should have_content('Contact Types list(1)') }
       tr_count = page.all('table#admin-contact-types-index tr').size
 
       find('.delete-link').click
       page.driver.browser.switch_to.alert.accept
         
       wait_until { page.all('table#admin-contact-types-index tr').size == tr_count - 1 }
+      within('.admin-contact-types-count') { page.should_not have_content('Contact Types list(1)') }
       ContactType.count.should eq 0
     end
   end

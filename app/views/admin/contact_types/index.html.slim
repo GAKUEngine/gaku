@@ -2,7 +2,7 @@
   #new-admin-contact-type
   .row-fluid
     .pull-left
-      h4.h4-vm.contact-types-count
+      h4.h4-vm.admin-contact-types-count
         = print_count(@contact_types, t('contact_types.list'))
     .pull-right
       =ajax_link_to_new t('contact_types.add'), new_admin_contact_type_path, :id => 'new-admin-contact-type-link'
