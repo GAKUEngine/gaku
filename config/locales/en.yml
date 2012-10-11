@@ -3,7 +3,10 @@ en:
     admin: "Admin"
     schools: "Schools"
     contact_types: "Contact Types"
+    disposals: 'Disposals'
+    types: 'Types'
     presets:
+      presets: "Presets"
       student: "Student Preset"
       locale: "Locale Preset"
       save: 'Save'
@@ -188,6 +191,14 @@ en:
   commute_methods:
     created: 'Commute method was successfully created'
     updated: 'Commute method was updated'
+  commute_method_types:
+    plural: "Commute Method Types"
+    singular: "Commute Method Type"
+    save: 'Save Commute Method Type'
+    new: 'New Commute Method Type'
+    edit: 'Edit Commute Method Type'
+    list: 'Commute Method Types List'
+    add: 'Add Commute Method Type'
   grades:
     grading: "Grading"
     weighting: "Weight"
