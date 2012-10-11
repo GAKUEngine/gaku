@@ -32,6 +32,8 @@ en:
   Delete: "Delete"
   Back: "Back"
   cancel: "Cancel"
+  add: 'Add'
+  default: 'Default'
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -106,6 +108,7 @@ en:
     birth_between: "Birth date between"
     birth_and: "and"
     chosen_students: "Chosen students"
+    commute_method: 'Commute Method'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -143,6 +146,7 @@ en:
     enroll_class_group: 'Enroll Class Group'
     add_class_group: 'Add Class Group'
     choose_class_group: 'Choose Class Group'
+    course_created: 'Course was successfully created'
   course_groups:
     course_groups: 'Course Groups'
     edit_course_group: 'Edit Course Group'
@@ -181,6 +185,9 @@ en:
     class_groups: "Class groups"
     current_enrollment: "Current enrollment"
     enrollments_count: "Enrollments count"
+  commute_methods:
+    created: 'Commute method was successfully created'
+    updated: 'Commute method was updated'
   grades:
     grading: "Grading"
     weighting: "Weight"
@@ -226,7 +233,7 @@ en:
     use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
-    exam_created: 'Exam successfully created'
+    exam_created: 'Exam was successfully created'
   config:
     label: "Config"
     close: "Close"
@@ -350,7 +357,7 @@ en:
     attached_file_count: 'Attached file count'
   options: "Options"
   notice:
-    picture_uploaded: "Picture successfully uploaded"
+    picture_uploaded: "Picture was successfully uploaded"
   import_format: "Import Format"
   helpers:
     links:

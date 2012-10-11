@@ -34,6 +34,9 @@ GAKUEngine::Application.routes.draw do
       put :update_score, :on => :member
       get :calculations, :on => :member
     end
+    member do
+      get :student_chooser
+    end
   end
 
   resources :class_group_enrollments do
@@ -60,6 +63,7 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :students do
+    resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
         post :create_modal, :on => :collection
@@ -154,5 +158,6 @@ GAKUEngine::Application.routes.draw do
       get 'recovery'
     end
   end
+
 
 end

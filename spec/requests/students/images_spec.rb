@@ -14,7 +14,7 @@ describe "Student Images" do
       absolute_path = Rails.root + "spec/support/120x120.jpg"
       attach_file('student_picture', absolute_path)
       click_button "Upload"
-      page.should have_content("Picture successfully uploaded")
+      page.should have_content("Picture was successfully uploaded")
     end
   end
   

@@ -32,7 +32,6 @@ class ClassGroupsController < ApplicationController
     @students = @search.result
 
     @class_groups = ClassGroup.all
-    @courses = Course.all
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

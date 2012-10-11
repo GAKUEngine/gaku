@@ -25,6 +25,8 @@ ja:
   Destroy: "削除"
   Delete: "消去"
   Back: "戻る"
+  add: 'Add'
+  default: 'Default'
   cancel: "キャンセル"
   required: "必須"
   manage: "管理"
@@ -105,6 +107,7 @@ ja:
     choose_gender: '性別を選択して'
     class_group_enrollment: "登録されているクラス"
     chosen_students: "生徒を選択して下さい"
+    commute_method: '通学手段'
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -142,6 +145,7 @@ ja:
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
+    course_created: 'Course was successfully created'
   course_groups:
     course_groups: '授業グループ'
     edit_course_group: '授業グループを編集'
@@ -178,6 +182,9 @@ ja:
     class_groups: "クラス"
     current_enrollment: "現在在籍しているクラス"
     none: "在籍しているクラスが有りません。"
+  commute_methods:
+    created: '通学手段が作成されました。'
+    updated: '通学手段が更新されました。'
   grades:
     combined: "全試験合計"
     grading: "を採点"

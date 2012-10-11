@@ -27,7 +27,12 @@ class CourseEnrollmentsController < ApplicationController
         notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
       }
     end
-    render 'shared/notice', :locals => {:notice => notice}
+    if params[:source] == "courses"
+      @course = Course.find(params[:course_id])
+      render 'courses/enrollments/students/enroll_students', :locals => {:notice => notice}
+    else
+      render 'shared/notice', :locals => {:notice => notice}
+    end
   end
 
 end
