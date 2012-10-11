@@ -243,6 +243,10 @@ ja:
     show: "試験照会"
     edit: "試験を編集"
     exam_created: '試験作成に成功しました。'
+    grading_method: "評価方法"
+    grading_methods:
+      deviation: "偏差値"
+      percent: "割合"
   execution_date: "実行日"
   config:
     label: "設定"
