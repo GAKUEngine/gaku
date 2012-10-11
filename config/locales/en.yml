@@ -3,7 +3,9 @@ en:
     admin: "Admin"
     schools: "Schools"
     contact_types: "Contact Types"
+    disposals: 'Disposals'
     presets:
+      presets: "Presets"
       student: "Student Preset"
       locale: "Locale Preset"
       save: 'Save'

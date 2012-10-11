@@ -2,7 +2,9 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    disposals: 'Disposals'
     presets:
+      presets: "Presets"
       save: 'Save'
       updated: 'Presets Updated'
       student: "生徒用プリセット"
