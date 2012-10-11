@@ -1,23 +1,23 @@
-.row-fluid.cnntrol-group
+.row-fluid
 	.span3
 	  = f.label :addresses_title_cont, t('addresses.title')
-	  = f.text_field :addresses_title_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "title") }
+	  = f.text_field :addresses_title_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "title") }
 	.span3
 		= f.label :addresses_country_id_eq, t('addresses.country')
 		= f.select :addresses_country_id_eq, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
 	.span3
 	  = f.label :addresses_zipcode_cont, t('addresses.zipcode')
-	  = f.text_field :addresses_zipcode_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "zipcode") }
+	  = f.text_field :addresses_zipcode_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "zipcode") }
 	.span3
 	  = f.label :addresses_state_name_cont, t('addresses.state')
-	  = f.text_field :addresses_state_name_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "state_name") }
-.row-fluid.cnntrol-group
+	  = f.text_field :addresses_state_name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "state_name") }
+.row-fluid
 	.span3
 	  = f.label :addresses_city_cont, t('addresses.city')
-	  = f.text_field :addresses_city_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "city") }
+	  = f.text_field :addresses_city_cont, :style => "margin-bottom:0px", :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "city") }
 	.span3
 		= f.label :addresses_address1_cont, t('addresses.address1')
-		= f.text_field :addresses_address1_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "address1") }
+		= f.text_field :addresses_address1_cont, :style => "margin-bottom:0px", :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "address1") }
 	.span3
 		= f.label :addresses_address2_cont, t('addresses.address2')
-		= f.text_field :addresses_address2_cont, :class => 'js-autocomplete', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "address2") }
+		= f.text_field :addresses_address2_cont, :style => "margin-bottom:0px", :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "address2") }

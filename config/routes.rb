@@ -3,11 +3,11 @@ GAKUEngine::Application.routes.draw do
   devise_for :installs
   devise_for :users
 
-  resources :class_groups do 
+  resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
-    resources :students, :controller => 'class_groups/students' do 
-      collection do 
+    resources :students, :controller => 'class_groups/students' do
+      collection do
         post :enroll_student
         get :filtered_students
         get :autocomplete_filtered_students
@@ -18,16 +18,16 @@ GAKUEngine::Application.routes.draw do
     end
   end
 
-  resources :courses do   
-    
-    resources :enrollments, :controller => 'courses/enrollments' do 
+  resources :courses do
+
+    resources :enrollments, :controller => 'courses/enrollments' do
       post :enroll_class_group, :on => :member
       post :enroll_student, :on => :collection
     end
-    
+
     resources :exams do
       get :export_xls, :on => :collection
-      
+
       resources :exam_portion_scores
       get :grading, :on => :member
       get :grading, :on => :collection
@@ -40,7 +40,7 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :class_group_enrollments do
-    collection do 
+    collection do
       get :filtered_students
       get :autocomplete_filtered_students
       post :enroll_students
@@ -53,11 +53,11 @@ GAKUEngine::Application.routes.draw do
       post :enroll_students
     end
   end
-  
+
   resources :exam_portion_scores
 
   resources :syllabuses do
-    resources :assignments, :controller => 'syllabuses/assignments' 
+    resources :assignments, :controller => 'syllabuses/assignments'
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
   end
@@ -73,7 +73,7 @@ GAKUEngine::Application.routes.draw do
       resources :addresses, :controller => 'students/guardians/addresses' do
         post :make_primary, :on => :member
       end
-      
+
       get :new_contact, :on => :member
     end
 
@@ -91,7 +91,7 @@ GAKUEngine::Application.routes.draw do
     resources :courses
 
 
-    collection do 
+    collection do
       resources :importer, :controller => "students/importer" do
         collection do
           get :get_csv_template
@@ -105,8 +105,8 @@ GAKUEngine::Application.routes.draw do
 
   end
 
-  resources :exams do 
-    put :create_exam_portion, :on => :member  
+  resources :exams do
+    put :create_exam_portion, :on => :member
 
     resources :exam_scores
     resources :exam_portions do
@@ -125,12 +125,12 @@ GAKUEngine::Application.routes.draw do
   end
 
   root :to => 'home#index'
-  
+
 
   namespace :admin do
     resources :commute_method_types
     resources :contact_types
-    resources :schools do 
+    resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
         resources :contacts, :controller => 'schools/campuses/contacts' do
           post :make_primary, :on => :member
@@ -153,12 +153,13 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :attachments do
-    member do 
+    member do
       get 'download'
       delete 'soft_delete'
       get 'recovery'
     end
   end
 
+  resource :grading_methods
 
 end

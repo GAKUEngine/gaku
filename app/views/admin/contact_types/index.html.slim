@@ -1,18 +1,18 @@
-#contact-types
+#admin-contact-types
+  #new-admin-contact-type
   .row-fluid
     .pull-left
-      h4.h4-vm.contact-types-count
-        = @contact_types.count != 0 ? t('contact_types.list') + "（" + @contact_types.count.to_s + "）" : t('contact_types.list')
+      h4.h4-vm.admin-contact-types-count
+        = print_count(@contact_types, t('contact_types.list'))
     .pull-right
-      =link_to ("<i class='icon-white icon-plus'></i> " + t('contact_types.add')).html_safe, new_admin_contact_type_path, :class => 'btn btn-primary', :id => 'new-contact-type-link', :remote => true
+      =ajax_link_to_new t('contact_types.add'), new_admin_contact_type_path, :id => 'new-admin-contact-type-link'
   .row-fluid
-    table#contact-types-index.index.table.table-striped.table-bordered.table-condensed
+    table#admin-contact-types-index.index.table.table-striped.table-bordered.table-condensed
       thead
         tr
           th.btn-inverse =t('contact_types.singular')
-          th.btn-inverse =t('contacts.actions')
+          th.btn-info style="width:61px" =t('manage')
       tbody
         =render :partial => 'admin/contact_types/contact_type', :collection => @contact_types, :as => 'contact_type'
     br/
 #modal-dialogs
-#new-contact-type-form

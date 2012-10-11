@@ -2,17 +2,21 @@
   .row-fluid
     #new-student-course-enrollment
     .pull-left
-      h4.h4-vm.student-course-enrollments-count
-        = print_count(@student.courses, t('courses.list'))
+      h4.mt-xs.mb-0.student-course-enrollments-count
+        = @student.courses.count != 0 ? t('courses.list') + "(" + @student.courses.count.to_s + ")" : t('courses.list')
     .pull-right
       = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link"
 
   .row-fluid
-    table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed
-      thead
-        tr
-          th
-          th =t("courses.code")
-          th =t("options")
-      tbody
-        = render :partial => 'students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
+    hr
+  .row-fluid
+    .span12
+      table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th
+            th =t("courses.code")
+            th =t("options")
+        tbody
+          = render :partial => 'students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
+#new-student-course-enrollment-form

@@ -279,6 +279,7 @@ en:
     new: "New Contact Type"
     add: "Add Contact Type"
     save: "Save Contact Type"
+    list: "Contact Types list"
 
   contacts:
     new: "New Contact"

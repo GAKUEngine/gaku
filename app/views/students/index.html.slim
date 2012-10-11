@@ -4,12 +4,12 @@
   .pull-left
     h4.mt-xs.mb-0 = t("students.list")
   .pull-right
-    = button t("csv.import"), "students/importer", :id => "import-students-link"
-    = button t("csv.export"), "students.csv", :id => 'export-students-link'
-    = ajax_link_to_new t("students.new"), new_student_path, :id => "new-student-link"
+    = ajax_link_to_new t("students.new"), new_student_path, :id => "new-student-link", :class => 'mr-s btn btn-primary'
+    = button t("students.import"), "students/importer", :id => "import-students-link", :class => 'mr-s btn btn-primary'
+    = button t("students.export"), "students.csv", :id => 'export-students-link', :class => 'btn'
 #new-student
 .row-fluid
   .span12
     hr/
-  #modal-dialogs 
+  #modal-dialogs
   =render 'student_chooser'
