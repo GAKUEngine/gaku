@@ -1,6 +1,6 @@
-$('#contact-types table tbody').append('<%= render_js_partial("contact_type", {:contact_type => @contact_type}) %>');
+$('#admin-contact-types-index tbody').append('<%= render_js_partial("contact_type", {:contact_type => @contact_type}) %>');
 
-$('#new-contact-type-form').slideToggle();
-$('#new-contact-type-link').show();
+$('#new-admin-contact-type form').slideToggle();
+$('#new-admin-contact-type-link').show();
 
-$('.contact-types-count').html('<%= print_count(@contact_types, t("contact_types.list")) %>');
+$('.admin-contact-types-count').html('<%= print_count(@contact_types, t("contact_types.list")) %>');

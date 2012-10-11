@@ -2,17 +2,17 @@
 - model_class = model.class
 #edit-contact-type-modal.modal.hide wmode="opaque"
 
-  = form_for([:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |contact_type_form| 
+  = form_for [:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |contact_type_form| 
 
       .modal-header
         h3 =t("contact_types.edit")
       .modal-body
         .row-fluid
-          #validation_errors
+          #validation-errors
         .row-fluid
           = contact_type_form.label :name, t("contact_types.name")
           = contact_type_form.text_field :name, :class => "span12"    
         .row-fluid
           .span9
-            =submit_button t('contact_types.save'), :id => 'submit-contact-type-button', :class => 'btn btn-primary button span12'
-          = link_to_cancel :id => 'cancel-contact-type-link'
+            =submit_button t('contact_types.save'), :id => 'submit-admin-contact-type-button'
+          = link_to_cancel :id => 'cancel-admin-contact-type-link'
