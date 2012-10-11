@@ -1,0 +1,19 @@
+- model = @commute_method_type || CommuteMethodType.new
+- model_class = model.class
+#edit-commute-method-type-modal.modal.hide wmode="opaque"
+
+  = form_for([:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |commute_method_type_form| 
+
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" ×
+        h3 =t("commute_method_types.edit")
+      .modal-body
+        .row-fluid
+          #validation_errors
+        .row-fluid
+          = commute_method_type_form.label :name, t("name")
+          = commute_method_type_form.text_field :name, :class => "span12"
+        br/    
+        .row-fluid
+          =submit_button t('commute_method_types.save'), :id => 'submit-commute-method-type-button', :class => 'btn btn-primary button span9'
+          = link_to_cancel :id => 'cancel-commute-method-type-link', :class => 'btn btn-warning span3'
