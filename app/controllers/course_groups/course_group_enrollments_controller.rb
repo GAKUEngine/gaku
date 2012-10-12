@@ -1,7 +1,11 @@
 class CourseGroups::CourseGroupEnrollmentsController < ApplicationController
 	inherit_resources
 
-	before_filter :load_course_group, :only => [:create, :destroy]
+	before_filter :load_course_group, :only => [:new, :create, :destroy]
+
+	def new
+		render 'new'
+	end
 
 	def create
 		@course_group = CourseGroup.find(params[:course_group_id])

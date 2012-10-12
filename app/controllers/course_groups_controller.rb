@@ -6,6 +6,11 @@ class CourseGroupsController < ApplicationController
 
 	before_filter :load_before_show, :only => [:show]
 
+	def new
+    @course_group = CourseGroup.new
+    render 'new'  
+  end
+
 	def index
     @course_groups = CourseGroup.order( sort_column + " " + sort_direction)
   end

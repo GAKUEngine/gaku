@@ -15,15 +15,6 @@ describe CourseGroupsController do
     end
   end 
 
-  describe "POST create" do
-    it "should be successful" do
-      page.stub :save => true
-
-      post :create
-      response.should be_success
-    end
-  end
-
   describe "PUT update" do
 
     it "redirects to the course group" do
