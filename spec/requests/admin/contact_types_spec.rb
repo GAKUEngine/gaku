@@ -29,7 +29,7 @@ describe 'ContactTypes' do
     it 'should cancel creating contact type', :js => true do 
       click_link 'new-admin-contact-type-link'
 
-      wait_until { page.find('#new-admin-contact-type form').visible? }
+      wait_until { page.find('#cancel-admin-contact-type-link').visible? }
       click_link 'cancel-admin-contact-type-link'
 
       wait_until { !page.find('#new-admin-contact-type form').visible? }
