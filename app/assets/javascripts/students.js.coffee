@@ -4,17 +4,16 @@
 $ ->
 
   #student
-  $('#new-student-form').validationEngine()
+  $('#new-student form').validationEngine()
 
-  # $('#new-student-link').on 'click', (event) ->
-  #   event.preventDefault()
-  #   $(this).hide()
-  #   $('#new-student form').slideToggle()
-
-  $("#new-student").on 'click',"#cancel-student-link", (e)->
+  $('#new-student-link').on 'click', (e) ->
     e.preventDefault()
-    $("#new-student-link").show()
-    $("#new-student").slideToggle()
+    $(this).hide()
+    $('#new-student').slideToggle()
+
+  $('#cancel-student-link').on 'click', (e) ->
+    $('#new-student').slideToggle()
+    $('#new-student-link').show()
 
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()
