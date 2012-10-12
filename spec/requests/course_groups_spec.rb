@@ -33,7 +33,7 @@ describe 'CourseGroups' do
     CourseGroup.count.should eql(0)
     click_on 'new-course-group-link'
 
-    wait_until { find('#new-course-group-link').visible? }
+    wait_until { find('#new-course-group-form').visible? }
     click_on 'Back'
 
     wait_until { !find('#new-course-group-form').visible? }
