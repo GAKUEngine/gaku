@@ -1,12 +1,7 @@
 $ ->
   $('#new-student-note form').validationEngine()
 
-  $("#submit-student-note-button").live "ajax:success", (data, status, xhr)->
-    #add new record to list
-    $("#new-student-note-link").show()
-    $("#new-student-note form").slideToggle()
-
 	$("#cancel-student-note-link").on 'click', (e) ->
 		e.preventDefault()
 		$("#new-student-note-link").show()
-		$("#new-student-note form").slideToggle()
+		$("#new-student-note").slideToggle()
