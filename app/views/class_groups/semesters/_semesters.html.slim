@@ -1,12 +1,15 @@
-.pull-left
-  h4.h4-vm.semesters-count =t("semesters.list")+"（ "+@class_group.semesters.count.to_s+" ）"
-.pull-right
-  = ajax_link_to_new t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :id => 'new-class-group-semester-link'
+.row-fluid
+  #new-class-group-semester
+  .pull-left
+    h4.h4-vm.class-group-semesters-count 
+      =print_count(@class_group.semesters, t("semesters.list"))
+  .pull-right
+    = ajax_link_to_new t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :id => 'new-class-group-semester-link'
 .row-fluid
 hr
 .row-fluid
     .span12
-      table#semesters-index.index.table.table-striped.table-bordered.table-condensed
+      table#class-group-semesters-index.index.table.table-striped.table-bordered.table-condensed
         thead
           tr
             th Period
@@ -15,4 +18,3 @@ hr
           =render :partial => 'class_groups/semesters/semester', :collection => @class_group.semesters, :as => :semester 
 br/
 #new-class-group-semester-form-errors
-#new-class-group-semester-form

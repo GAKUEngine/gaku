@@ -1,5 +1,5 @@
 = form_for [@class_group, @semester], { :remote => true } do |f|
-  .row-fluid
+  .row-fluid.mt-l
     .span12.well 
       .row-fluid
         /後でカレンダーにする
@@ -11,7 +11,7 @@
           = f.date_select :ending, :class => "span12"
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid.mt-s
-        = submit_button t("semesters.save"), :id => 'submit-semester-button', :class => "span6 btn btn-primary"
-        = link_to_cancel  :id => "cancel-semester-link",:style => "min-height:0px"
+        = submit_button t("semesters.save"), :id => 'submit-class-group-semester-button', :class => "span6 btn btn-primary"
+        = link_to_cancel  :id => "cancel-class-group-semester-link",:style => "min-height:0px"
 
 = javascript_include_tag 'class_groups'

@@ -10,11 +10,14 @@ describe 'ClassGroups' do
   it 'creates and shows class group', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
+
+    wait_until { page.find('#new-class-group form').visible? }
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
     fill_in 'class_group_homeroom', :with => 'room#7'
     click_button 'submit-class-group-button'
 
+    wait_until { !page.find('#new-class-group form').visible? }
     page.should have_content '7'
     page.should have_content 'Awesome class group'
     page.should have_content 'room#7'
@@ -32,10 +35,10 @@ describe 'ClassGroups' do
   it 'cancel creating', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
-    wait_until { page.find('#new-class-group').visible? }
+    wait_until { page.find('#new-class-group form').visible? }
 
     click_on 'cancel-class-group-link'
-    wait_until { !page.find('#new-class-group').visible? }
+    wait_until { !page.find('#new-class-group form').visible? }
     ClassGroup.count.should eq 0
   end
 

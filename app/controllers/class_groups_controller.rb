@@ -9,7 +9,11 @@ class ClassGroupsController < ApplicationController
   before_filter :load_before_index, :only => :index
   before_filter :load_class_group,  :only => :destroy
 
-
+  def new
+    @class_group = ClassGroup.new
+    render 'new'
+  end
+  
   def index
     @class_groups = ClassGroup.order( sort_column + " " + sort_direction)
   end
