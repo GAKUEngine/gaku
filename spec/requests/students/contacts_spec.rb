@@ -36,6 +36,7 @@ describe 'Contact' do
     end
 
     it 'should cancel adding contact', :js => true do
+      wait_until { page.find('#cancel-student-contact-link').visible? }
       click_link 'cancel-student-contact-link'
       wait_until { !page.find('#new-student-contact form').visible? }
       find('#new-student-contact-link').visible?
