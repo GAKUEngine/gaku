@@ -15,5 +15,6 @@
           = commute_method_type_form.text_field :name, :class => "span12"
         br/    
         .row-fluid
-          =submit_button t('commute_method_types.save'), :id => 'submit-commute-method-type-button', :class => 'btn btn-primary button span9'
-          = link_to_cancel :id => 'cancel-commute-method-type-link', :class => 'btn btn-warning span3'
+          .span9
+            =submit_button t('commute_method_types.save'), :id => 'submit-commute-method-type-button'
+          = link_to_cancel :id => 'cancel-commute-method-type-link'

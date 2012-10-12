@@ -6,14 +6,15 @@ $ ->
   #student
   $('#new-student-form').validationEngine()
 
-  $('#new-student-link').on 'click', (event) ->
-    event.preventDefault()
-    $(this).hide()
-    $('#new-student form').slideToggle()
+  # $('#new-student-link').on 'click', (event) ->
+  #   event.preventDefault()
+  #   $(this).hide()
+  #   $('#new-student form').slideToggle()
 
-  $("#cancel-student-link").click ->
+  $("#new-student").on 'click',"#cancel-student-link", (e)->
+    e.preventDefault()
     $("#new-student-link").show()
-    $("#new-student form").slideToggle()
+    $("#new-student").slideToggle()
 
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()

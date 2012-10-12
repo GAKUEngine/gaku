@@ -44,15 +44,8 @@ class AttachmentsController < ApplicationController
 	private
 
 	def find_attachable
-		# extract all params with _id
-		resource_params = params.select{|p| p =~ /(.+)_id$/ }
-		# get last param with _id to find attachable(need when there are more than one _id)
-		resource_params.each_with_index do |(k,v), i|
-   	  if i == resource_params.length - 1
-   			return $1.classify.constantize.find(v) if k =~ /(.+)_id$/
-    	end
-  	end
-  	nil
+		klass = [ExamPortion].detect {|c| params["#{c.name.underscore}_id"]}
+		@commentable = klass.find(params["#{klass.name.underscore}_id"])
 	end
 
 end
