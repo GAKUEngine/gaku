@@ -39,7 +39,6 @@ class Student < ActiveRecord::Base
   has_many :student_specialties
   has_many :specialities, :through => :student_specialties
 
-  #FIXME maybe it should be reversed
   has_many :exam_portion_scores
   has_many :assignment_scores
 
@@ -55,6 +54,8 @@ class Student < ActiveRecord::Base
 
   has_many :attendances
   has_many :enrollment_statuses
+
+  has_associated_audits
 
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                   :class_groups, :class_group_ids, :class_groups_attributes,
