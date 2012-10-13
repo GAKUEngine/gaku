@@ -3,11 +3,12 @@ source 'https://rubygems.org'
 #Rails
 gem 'rails', '~> 3.2.4'
 gem 'rails-i18n'
+gem 'audited-activerecord', '~> 3.0'
 gem 'slim-rails'
 gem 'inherited_resources'
 gem 'chosen-rails'
-#gem 'attr_encrypted'
 gem 'ransack'
+#gem 'attr_encrypted'
 
 #JS 
 gem 'jquery-rails'
