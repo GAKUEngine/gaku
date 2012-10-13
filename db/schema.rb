@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20121013094412) do
 
   create_table "enrollment_statuses", :force => true do |t|
     t.integer  "enrollment_status_type_id"
+    t.integer  "student_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
