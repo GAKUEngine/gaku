@@ -3,6 +3,7 @@ en:
     admin: "Admin"
     schools: "Schools"
     contact_types: "Contact Types"
+    enrollment_status_types: "Enrollment Status Types"
     disposals: 'Disposals'
     types: 'Types'
     presets:
