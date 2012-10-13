@@ -149,6 +149,10 @@ module ApplicationHelper
     object.count != 0 ? text + "(" + object.count.to_s + ")" : text
   end
 
+  def print_count_new(count, text)
+    count != 0 ? text + "(" + count.to_s + ")" : text
+  end
+
   def render_js_partial(partial, locals = {})
     unless locals == {}
       escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim], :locals => locals) 

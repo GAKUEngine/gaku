@@ -1,0 +1,17 @@
+= form_for [:admin, @enrollment_status_type], :remote => true do |enrollment_status_type_form|
+  - if enrollment_status_type_form.object.new_record?
+    b= t('enrollment_status_types.new')
+    .row-fluid.mt-l
+      .span12.well
+          = enrollment_status_type_form.label :name, t("enrollment_status_types.name")
+          = enrollment_status_type_form.text_field :name, :class => "span12"
+
+          = enrollment_status_type_form.label :is_active, t('enrollment_status_types.active')
+          = enrollment_status_type_form.check_box :is_active
+          .row-fluid
+            .span12
+              .span6
+                =submit_button t('enrollment_status_types.save'), :id => 'submit-admin-enrollment-status-type-button'
+              = link_to_cancel :id => 'cancel-admin-enrollment-status-type-link'
+
+= javascript_include_tag 'admin/enrollment_status_types'

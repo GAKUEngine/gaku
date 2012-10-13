@@ -323,6 +323,15 @@ en:
     contacs: "Campus Contacts"
     primary: "Primary"
 
+  enrollment_status_types:
+    singular: "Enrollment Status Type"
+    plural: "Enrollment Status Types"
+    new: "New Enrollment Status Type"
+    add: "Add Enrollment Status Type"
+    save: "Save Enrollment Status Type"
+    list: "Enrollment Status Types list"
+    active: "Active"
+
   note: "Notes"
   notes:
     notes: "Notes"
