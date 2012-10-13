@@ -4,6 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean          default(FALSE)
+#  settings               :text
 #  locale                 :string(255)
 #  sign_in_count          :integer          default(0)
 #  current_sign_in_at     :datetime
