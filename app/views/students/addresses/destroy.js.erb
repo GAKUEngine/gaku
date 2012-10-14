@@ -1,6 +1,6 @@
-$('#new-student-address-tab-link').html('<%= print_count(@student.addresses, t('addresses.addresses')) %>');
-$('.student-addresses-count').html('<%= print_count(@student.addresses, t('addresses.list')) %>');
+$('#new-student-address-tab-link').html('<%= print_count(@student.addresses.count, t('addresses.addresses')) %>');
+$('.student-addresses-count').html('<%= print_count(@student.addresses.count, t('addresses.list')) %>');
 
 <%- unless @student.addresses.blank? %>
-	$('#address-<%= @student.addresses.first.id%> td a').addClass('btn-primary');
+	$('#address-<%= @student.addresses.first.id %> td a').addClass('btn-primary');
 <% end %>

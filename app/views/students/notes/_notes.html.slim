@@ -2,7 +2,7 @@
   .row-fluid
       .pull-left
         h4.mt-xs.mb-0.student-notes-count
-          = print_count(@student.notes, t('notes.list'))
+          = print_count(@student.notes.count, t('notes.list'))
       .pull-right
           = ajax_link_to_new t("notes.add"), new_student_note_path(@student), :id => "new-student-note-link"
   .row-fludi

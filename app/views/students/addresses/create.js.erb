@@ -7,5 +7,5 @@ $('#student-addresses-index tbody').append('<%= render_js_partial("address", {:a
 $('#new-student-address').slideToggle();
 $('#new-student-address-link').show();
 
-$('#new-student-address-tab-link').html('<%= print_count(@student.addresses, t('addresses.addresses')) %>');
-$('.student-addresses-count').html('<%= print_count(@student.addresses, t('addresses.list')) %>');
+$('#new-student-address-tab-link').html('<%= print_count(@student.addresses.count, t('addresses.addresses')) %>');
+$('.student-addresses-count').html('<%= print_count(@student.addresses.count, t('addresses.list')) %>');

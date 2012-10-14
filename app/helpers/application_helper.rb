@@ -145,8 +145,8 @@ module ApplicationHelper
     button_tag(content_tag('span', text), attributes)
   end
 
-  def print_count(object, text)
-    object.count != 0 ? text + "(" + object.count.to_s + ")" : text
+  def print_count(count, text)
+    count != 0 ? text + "(" + count.to_s + ")" : text
   end
 
   def print_count_new(count, text)
