@@ -2,7 +2,7 @@
   #new-class-group-course
   .pull-left
     h4.h4-vm.courses-count 
-      =print_count(@class_group.class_group_course_enrollments, t("courses.list"))
+      =print_count(@class_group.class_group_course_enrollments.count, t("courses.list"))
   .pull-right
     = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 
