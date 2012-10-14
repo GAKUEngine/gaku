@@ -6,6 +6,7 @@ module Admin
     actions :index, :show, :new, :create, :update, :edit, :destroy
 
     before_filter :load_school, :only => [:edit, :update, :destroy]
+    before_filter :schools_count, :only => [:create, :destroy]
 
     def new
       @school = School.new
@@ -50,8 +51,8 @@ module Admin
         @school = School.find(params[:id])
       end
 
-      def load_schools
-        @schools = School.all
+      def schools_count
+        @schools_count = School.count
       end
 
   end

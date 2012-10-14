@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.admin-school-campuses-count
-        = print_count(@school.campuses, t('campuses.list'))
+        = print_count(@school.campuses.count, t('campuses.list'))
     .pull-right
       = link_to_new t('campuses.add'), new_admin_school_campus_path(@school), :id => 'new-admin-school-campus-link'
 

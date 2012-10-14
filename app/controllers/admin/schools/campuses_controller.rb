@@ -5,8 +5,8 @@ module Admin
 
     actions :index, :show, :new, :create, :update, :edit, :destroy
 
-    before_filter :load_campus, :only => [ :destroy, :update, :show ]
-    before_filter :load_school, :only => [ :index, :new, :create, :edit, :update, :show, :destroy ]
+    before_filter :load_campus, :only => [:destroy, :update, :show]
+    before_filter :load_school, :only => [:index, :new, :create, :edit, :update, :show, :destroy]
     
     def create
       @campus = Campus.new(params[:campus])
