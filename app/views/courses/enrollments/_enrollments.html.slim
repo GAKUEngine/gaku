@@ -1,6 +1,6 @@
 .row-fluid
   .pull-left
-    h4.h4-vm.course-students-count = print_count(@course.students, t("students.list"))
+    h4.h4-vm.course-students-count = print_count(@course.students.count, t("students.list"))
   .pull-right
     #new-course-student-div.pull-right
       /= ajax_link_to_new t('add_student'), "", :id => "new-course-student-link"
