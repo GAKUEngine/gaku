@@ -12,7 +12,7 @@
     .row-fluid
       .span12.well
         .row-fluid
-            table.table.table-striped.table-bordered.table-condensed.student-contact-table
+            table.table.table-striped.table-bordered.table-condensed.course-table
               thead
                 tr
                   th.btn-inverse =t('courses.code')
@@ -48,5 +48,5 @@
                   = render :partial => "courses/exams/exams"
     .row-fluid
       .span12.well
-        = link_to_edit_with_text [:edit, @course], :class => "span9 btn btn-warning edit-link"
+        = link_to_edit_with_text [:edit, @course], :class => "span9 btn btn-warning edit-link", :remote => true
         = link_to_back courses_path, :class => "span3 btn btn-danger"

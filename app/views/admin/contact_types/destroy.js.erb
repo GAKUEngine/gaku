@@ -1,1 +1,2 @@
-$('.admin-contact-types-count').html('<%= print_count(@contact_types, t("contact_types.list")) %>');
+$('.admin-contact-types-count').html('<%= print_count(ContactType.all, t("contact_types.list")) %>');
+$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
