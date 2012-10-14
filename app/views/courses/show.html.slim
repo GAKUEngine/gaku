@@ -34,7 +34,7 @@
               ul.nav.nav-tabs
                 li.active
                   a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments" 
-                    = print_count(@course.students, t("course_enrollments.enrollments"))
+                    = print_count(@course.students.count, t("course_enrollments.enrollments"))
                 li
                   a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignments")
                 li
