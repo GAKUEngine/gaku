@@ -1,29 +1,11 @@
 class Students::NotesController < ApplicationController
   
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
+  respond_to :js, :html 
 
-  def new
-    @note = Note.new
-    render 'new'  
-  end
-  
-  def edit
-    super do |format|
-      format.js {render 'edit'}  
-    end  
-  end
-
-  def show
-    @student = Student.find(params[:student_id])
-    @note = Note.find(params[:id])
-    super do |format|
-      format.js {render 'show'}  
-    end  
-  end
+  before_filter :load_student
 
   def create
     super do |format|
@@ -33,19 +15,6 @@ class Students::NotesController < ApplicationController
     end  
   end
   
-  def update
-    super do |format|
-      format.js { render 'update' }  
-    end  
-  end
-
-  def destroy
-    @note = Note.find(params[:id])
-    @note.destroy
-    respond_to do |format|
-      format.js { render 'destroy' }
-    end
-  end
 
   private 
     def load_student
