@@ -6,10 +6,10 @@ module Admin
 
     respond_to :js, :html
 
-    before_filter :load_enrollment_status_types_count, :only => [:create, :destroy]
+    before_filter :enrollment_status_types_count, :only => [:create, :destroy]
 
     private
-      def load_enrollment_status_types_count
+      def enrollment_status_types_count
         @enrollment_status_types_count = EnrollmentStatusType.count
       end
   end

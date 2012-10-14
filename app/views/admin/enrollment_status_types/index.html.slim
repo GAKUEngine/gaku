@@ -3,7 +3,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.admin-enrollment-status-types-count
-        = print_count(@enrollment_status_types, t('enrollment_status_types.list'))
+        = print_count(@enrollment_status_types.count, t('enrollment_status_types.list'))
     .pull-right
       =ajax_link_to_new t('enrollment_status_types.add'), new_admin_enrollment_status_type_path, :id => 'new-admin-enrollment-status-type-link'
   .row-fluid
