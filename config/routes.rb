@@ -159,6 +159,8 @@ GAKUEngine::Application.routes.draw do
     end
   end
 
-  resource :grading_methods
+  resource :grading_methods do
+    get 'index'
+  end
 
 end

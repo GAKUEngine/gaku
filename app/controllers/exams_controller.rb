@@ -282,7 +282,20 @@ class ExamsController < ApplicationController
         if @grades[exam.id][socre[1]] == 3
           @ranks[exam.id][score[1]] == 2
         elsif @grades[exam.id][socre[1]] < 3
-          @ranks[exam.id][score[1]] == 1
+     respond_to do |format|
+      format.json { render :json => {:student_total_scores => @student_total_scores,
+                                     :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
+                                     :course => @course,
+                                     :exam_averages => @exam_averages,
+                                     :deviation => @deviation,
+                                     :students => Student.decrypt_student_fields(@students),
+                                     :grades => @grades,
+                                     :ranks => @ranks
+                                     }}
+
+      format.html { render "exams/grading" }
+    end
+         @ranks[exam.id][score[1]] == 1
         end
       end
     end
