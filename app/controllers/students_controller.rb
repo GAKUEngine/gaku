@@ -118,6 +118,7 @@ class StudentsController < ApplicationController
     def load_before_show
       @new_contact = Contact.new
       @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      @notable = Student.find(params[:id])
     end
 
     def load_class_groups
@@ -127,6 +128,7 @@ class StudentsController < ApplicationController
 
     def load_student
       @student = Student.find(params[:id])
+
     end
 
 =begin
