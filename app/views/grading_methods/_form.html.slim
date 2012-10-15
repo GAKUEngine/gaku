@@ -1,0 +1,14 @@
+= form_for @grading_method do |grading_method_form|
+  .row-fluid
+    .span4
+      = grading_method_form.label :name, '名前'
+      = grading_method_form.text_field :name, :class => 'span12'
+    .span4
+      = grading_method_form.label :description, '説明'
+      = grading_method_form.text_field :description, :class => 'span12'
+    .span4
+      = grading_method_form.label :method, '方法'
+      = grading_method_form.text_field :method, :class => 'span12'
+  .row-fluid
+    = grading_method_form.submit
+end

@@ -13,6 +13,9 @@
                 .span9
                   = exam_form.label :name, t("exams.name")
                   = exam_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+                .span3
+                  = exam_form.label :grading_method, t("exams.grading_method")
+                  /= exam_form.select :grading_method, {t("exams.grading_methods.deviation") => "1", t("exams.grading_methods.percent") => "2"}
               .row-fluid
                 .span6
                   = exam_form.label :description, t("exams.description")

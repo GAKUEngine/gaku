@@ -1,2 +1,20 @@
-h1 GradingMethods#index
-p Find me in app/views/grading_methods/index.html.slim
+.row-fluid
+  .pull-left
+    h4.mt-xs.mb-0 = t("exams.grading_method")
+  .pull-right
+    = link_to_new t("exams.grading_method.new"), new_grading_methods_path, :id => "new-gradig_method-link"
+.row-fluid
+  hr
+.row-fluid
+  .span12.well
+    table.table.table-bordered.table-striped.table-condensed
+      thead
+        tr
+          th id
+          th name
+      tbody
+        - @grading_methods.each do |grading_method|
+          tr
+            td = grading_method.id
+            td = grading_method.name
+        end
