@@ -1,5 +1,6 @@
 $('#student-contacts-index tbody').html('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
 $(".modal#edit-contact-modal").modal("hide");
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 
 $('.student-contact').each(function() {
 	$(this).children('td.primary-contact').html('');

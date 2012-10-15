@@ -58,6 +58,7 @@ class ClassGroupEnrollmentsController < ApplicationController
         student = Student.find(enrollment.student_id)
         notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'>Successfully enrolled.</span>" + "</p>"
       }
+      flash.now[:success] = notice.html_safe
     end
     if !@err_enrollments.empty?
       
@@ -65,12 +66,14 @@ class ClassGroupEnrollmentsController < ApplicationController
         student = Student.find(enrollment.student_id)
         notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
       }
+      flash.now[:error] = notice.html_safe
     end
     if params[:source] == "class_groups"
       @class_group = ClassGroup.find(params[:class_group_id])
-      render 'class_groups/students/enroll_students', :locals => {:notice => notice}
+      render 'class_groups/students/enroll_students'
     else
-      render 'shared/notice', :locals => {:notice => notice}
+      flash.now[:notice] = notice.html_safe
+      render :partial => 'shared/flash', :locals => {:flash => flash}
     end
   end
 

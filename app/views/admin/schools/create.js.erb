@@ -3,4 +3,6 @@ $('#admin-schools-index tbody').append('<%= render_js_partial("school", {:school
 $('#new-admin-school').slideToggle();
 $('#new-admin-school-link').show();
 
+
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 $('.admin-schools-count').html('<%= print_count(@schools_count + 1, t("schools.list")) %>');

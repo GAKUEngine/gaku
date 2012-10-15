@@ -1,3 +1,4 @@
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 $('.student-contacts-count').html('<%= print_count(@student.contacts.count, t("contacts.list")) %>');
 
 <%- unless @student.contacts.blank? %>
