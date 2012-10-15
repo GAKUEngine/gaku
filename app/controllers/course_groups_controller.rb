@@ -8,7 +8,6 @@ class CourseGroupsController < ApplicationController
   respond_to :js, :html
 
   before_filter :load_before_index, :only => [:index]
-  before_filter :load_before_show, :only => [:show]
 
   before_filter :course_group_enrollment,  :only => [:show]
   before_filter :course_groups, :only => [:update]
