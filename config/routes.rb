@@ -84,7 +84,7 @@ GAKUEngine::Application.routes.draw do
       post :make_primary, :on => :member
     end
 
-    resources :notes, :controller => 'students/notes'
+    resources :notes#, :controller => 'students/notes'
     resources :course_enrollments, :controller => 'students/course_enrollments'
     resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
     resources :exams
