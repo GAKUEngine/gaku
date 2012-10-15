@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
 	
 	inherit_resources
-
+	actions :index, :show, :new, :create, :update, :edit, :destroy
 
 	def create
 		@attachable = find_attachable 
@@ -10,7 +10,7 @@ class AttachmentsController < ApplicationController
 			if @attachment.save
 				format.html { redirect_to :back, :notice => 'Asset upload was successful!' }
 			else
-				format.html { redirect_to :back, :error => 'Error when upload asset'}
+				format.html { redirect_to :back, :error => 'Error when upload asset' }
 			end
 		end
 	end
@@ -43,9 +43,9 @@ class AttachmentsController < ApplicationController
 
 	private
 
-	def find_attachable
-		klass = [ExamPortion].detect {|c| params["#{c.name.underscore}_id"]}
-		@commentable = klass.find(params["#{klass.name.underscore}_id"])
-	end
+	  def find_attachable
+		  klass = [ExamPortion].detect {|c| params["#{c.name.underscore}_id"]}
+		  @commentable = klass.find(params["#{klass.name.underscore}_id"])
+	  end
 
 end
