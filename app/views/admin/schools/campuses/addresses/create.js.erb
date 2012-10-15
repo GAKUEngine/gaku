@@ -1,0 +1,4 @@
+$('#admin-school-campus-addresses-index tbody').append('<%= render_js_partial("address", {:address => @address}) %>');
+
+$('#new-admin-school-campus-address form').slideToggle();
+$('#new-admin-school-campus-address form')[0].reset();

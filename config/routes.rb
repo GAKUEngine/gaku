@@ -136,6 +136,7 @@ GAKUEngine::Application.routes.draw do
         resources :contacts, :controller => 'schools/campuses/contacts' do
           post :make_primary, :on => :member
         end
+        resources :addresses, :controller => 'schools/campuses/addresses' 
       end
     end
     resources :presets do

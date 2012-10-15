@@ -63,6 +63,7 @@ en:
     asset_type: 'Asset type'
   addresses:
     addresses: "Addresses"
+    singular: "Address"
     new: "New Address"
     add: "Add Address"
     zipcode: "ZIP Code"
