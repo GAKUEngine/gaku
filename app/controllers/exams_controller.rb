@@ -1,11 +1,10 @@
 class ExamsController < ApplicationController
 
-  #before_filter :authenticate_user!
-  before_filter :load_exam, :only => [:show, :destroy, :create_exam_portion]
-  before_filter :load_before_show, :only => :show
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
+
+  before_filter :exam, :only => [:show, :destroy, :create_exam_portion]
+  before_filter :load_before_show, :only => :show
 
 
   def export_xls
@@ -43,10 +42,6 @@ class ExamsController < ApplicationController
       exam_sheet.row(0)[5] = exam.name
       exam_sheet.row(0)[6] = 'Exam ID:'
       exam_sheet.row(0)[7] = exam.id
-
-
-
-
 
 
       # table header cells
@@ -132,10 +127,9 @@ class ExamsController < ApplicationController
   end
 
   def destroy
-    #destroy! :flash => !request.xhr?
     @exam.destroy
     respond_to do |format|
-        format.js { render :nothing => true }
+      format.js { render :nothing => true }
     end
   end
 
@@ -337,7 +331,7 @@ class ExamsController < ApplicationController
   # end
 
   private
-    def load_exam
+    def exam
       @exam = Exam.find(params[:id])
     end
 
