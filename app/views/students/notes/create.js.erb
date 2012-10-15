@@ -8,3 +8,4 @@ $('#new-student-note-link').show();
 
 $('#new-student-note-tab-link').html('<%= print_count(@student.notes, t('notes.notes')) %>');
 $('.student-notes-count').html('<%= print_count(@student.notes, t('notes.list')) %>');
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

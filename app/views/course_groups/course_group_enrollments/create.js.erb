@@ -2,4 +2,4 @@ $('#course-group-enrollments-index table tbody').append('<%= render_js_partial("
 
 $('.course-group-enrollments-count').html('<%= print_count(@course_group.courses, t("courses.list")) %>');
 
-$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

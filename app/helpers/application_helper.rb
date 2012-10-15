@@ -169,4 +169,13 @@ module ApplicationHelper
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
   end
 
+  def flash_color(type)
+    case type
+      when :notice then "alert alert-info"
+      when :success then "alert alert-success"
+      when :error then "alert alert-error"
+      when :alert then "alert alert-error" 
+    end 
+  end
+
 end

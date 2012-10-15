@@ -4,3 +4,5 @@ $('#new-admin-school').slideToggle();
 $('#new-admin-school-link').show();
 
 $('.admin-schools-count').html('<%= print_count(@schools, t("schools.list")) %>');
+
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

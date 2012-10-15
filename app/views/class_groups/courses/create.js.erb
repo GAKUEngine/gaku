@@ -5,3 +5,4 @@ $('table#courses-index tbody').append('<%= render_js_partial("course", {:enrollm
 
 $('#class-group-courses-tab-link').html('<%= print_count(@class_group.courses, t("courses.courses")) %>');
 $('.courses-count').html('<%= print_count(@class_group.courses, t("courses.list")) %>');
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

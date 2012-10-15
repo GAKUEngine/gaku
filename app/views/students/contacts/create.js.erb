@@ -7,6 +7,8 @@
 	$('#new-student-contact').slideToggle();
 	$("#new-student-contact form")[0].reset();
 	$('#new-student-contact-form-errors').slideToggle();
+	$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+
 
 	<%- if @contact.is_primary? %>
 		$('.student-contact').each(function() {

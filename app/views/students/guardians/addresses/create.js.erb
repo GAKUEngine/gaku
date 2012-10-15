@@ -5,3 +5,4 @@ $('#new-student-guardian-address form')[0].reset();
 $('#new-student-guardian-address-link').show();
 
 $('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses, t('addresses.list')) %>');
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

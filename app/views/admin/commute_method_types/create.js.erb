@@ -4,5 +4,4 @@ $('#new-commute-method-type-form').slideToggle()
 $('#new-commute-method-type-link').show();
 
 $('.commute-method-types-count').html('<%= print_count(CommuteMethodType.all, t("commute_method_types.list")) %>');
-
-  $('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
