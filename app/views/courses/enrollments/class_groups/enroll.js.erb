@@ -3,8 +3,8 @@
 <% } %>
 $('#new-course-class-group-link').show();
 
-$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students, t("course_enrollments.enrollments")) %>');
-$('.course-students-count').html('<%= print_count(@course.students, t("students.list")) %>');
+$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');
+$('.course-students-count').html('<%= print_count(@course.students.count, t("students.list")) %>');
 
 <% if flash.any? %>
 	$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");

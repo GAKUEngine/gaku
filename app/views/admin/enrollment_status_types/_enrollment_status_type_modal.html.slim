@@ -1,0 +1,19 @@
+#edit-enrollment-status-type-modal.modal.hide wmode="opaque"
+
+  = form_for [:admin, @enrollment_status_type], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |enrollment_status_type_form| 
+
+      .modal-header
+        h3 =t("enrollment_status_types.edit")
+      .modal-body
+        .row-fluid
+          #validation-errors
+        .row-fluid
+          = enrollment_status_type_form.label :name, t("enrollment_status_types.name")
+          = enrollment_status_type_form.text_field :name, :class => "span12"  
+
+          = enrollment_status_type_form.label :is_active, t('enrollment_status_types.active')
+          = enrollment_status_type_form.check_box :is_active  
+        .row-fluid
+          .span9
+            =submit_button t('enrollment_status_types.save'), :id => 'submit-admin-enrollment-status-type-button'
+          = link_to_cancel :id => 'cancel-admin-enrollment-status-type-link'

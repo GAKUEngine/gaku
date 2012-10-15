@@ -1,0 +1,15 @@
+= form_for [:admin, @commute_method_type], :remote => true do |commute_method_type_form|
+  - if commute_method_type_form.object.new_record?
+    b= t('commute_method_types.new')
+    .row-fluid.mt-l
+      .span12.well
+        .span12.well
+          .row-fluid.control-group
+            .span12
+              = commute_method_type_form.label :name, t("name")
+              = commute_method_type_form.text_field :name, :class => "span12"
+          .row-fluid
+            .span12
+              .span6
+                =submit_button t('commute_method_types.save'), :id => 'submit-admin-commute-method-type-button'
+              =link_to_cancel :id => 'cancel-admin-commute-method-type-link'

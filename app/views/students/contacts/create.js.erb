@@ -1,10 +1,10 @@
 <%- if @contact.errors.any? %>
-	$('#new-student-contact-form-errors').html('<%= render_js_partial("/shared/errors", {:target => @contact}) %>');
+	$('#new-student-contact-form-errors').html('<%= render_js_partial("shared/errors", {:target => @contact}) %>');
 <%- else %>
-  $('.student-contacts-count').html('<%= print_count(@student.contacts, t("contacts.list")) %>');
+  $('.student-contacts-count').html('<%= print_count(@student.contacts.count, t("contacts.list")) %>');
   $('#student-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 	$("#new-student-contact-link").show();
-	$('#new-student-contact form').slideToggle();
+	$('#new-student-contact').slideToggle();
 	$("#new-student-contact form")[0].reset();
 	$('#new-student-contact-form-errors').slideToggle();
 

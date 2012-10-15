@@ -1,4 +1,4 @@
-class CreateCommuteMethodTable < ActiveRecord::Migration
+class CreateCommuteMethodsTable < ActiveRecord::Migration
   def change
   	create_table :commute_methods do |t|
   		t.text :details

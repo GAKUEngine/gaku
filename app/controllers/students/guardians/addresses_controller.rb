@@ -3,17 +3,12 @@ class Students::Guardians::AddressesController < ApplicationController
 	inherit_resources
   actions :new, :create, :edit, :update
 
+  respond_to :js, :html
+
   before_filter :load_address, :only => [:destroy, :make_primary]
 	before_filter :load_student, :only => [:new, :create, :edit, :update]
-	before_filter :load_guardian, :only => [:new, :create, :edit, :update, :destroy, :make_primary]
+	before_filter :load_guardian
 	before_filter :load_primary_address, :only => [:update, :destroy]
-
-	def new
-    @address = Address.new
-		super do |format|
-			format.js { render 'new' }
-		end	
-	end
 
 	def create
     super do |format|
@@ -21,18 +16,6 @@ class Students::Guardians::AddressesController < ApplicationController
         @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
         format.js { render 'create' }  
       end
-    end  
-  end
-  
-  def edit
-    super do |format|
-      format.js { render 'edit' }  
-    end  
-  end
-
-  def update
-    super do |format|
-      format.js { render 'update' }  
     end  
   end
 

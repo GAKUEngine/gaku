@@ -1,14 +1,11 @@
 class Students::CourseEnrollmentsController < ApplicationController
 
   inherit_resources
-  actions :create, :update, :edit, :destroy
+  actions :new, :create, :update, :edit, :destroy
 
-  before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
+  respond_to :js, :html
 
-  def new
-    @course_enrollment = CourseEnrollment.new
-    render 'new'  
-  end
+  before_filter :load_student
 
   def create
     super do |format|
@@ -20,24 +17,6 @@ class Students::CourseEnrollmentsController < ApplicationController
       end
     end  
   end
-
-  def edit
-    super do |format|
-      format.js { render 'edit' }  
-    end  
-  end
-
-  def update
-    super do |format|
-      format.js { render 'update' }  
-    end  
-  end
-
-  def destroy
-    super do |format|
-      format.js { render 'destroy' }
-    end
-  end 
 
   private 
     def load_student

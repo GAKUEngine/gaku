@@ -1,0 +1,3 @@
+$('tr#commute-method-type-<%= @commute_method_type.id %>').html('<%= render_js_partial("commute_method_type_fields", {:commute_method_type => @commute_method_type}) %>');
+$("#edit-commute-method-type-modal").modal("hide");
+$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");

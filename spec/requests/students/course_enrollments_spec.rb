@@ -32,7 +32,8 @@ describe 'CourseEnrollments' do
       @student.courses.size.should eql(1)
     end
 
-    it 'should cancel adding', :js => true do 
+    it 'should cancel adding', :js => true do
+      wait_until { page.find('#cancel-student-course-enrollment-link').visible? } 
       click_link 'cancel-student-course-enrollment-link'
       wait_until { !page.find('#new-student-course-enrollment form').visible? } 
       find('#new-student-course-enrollment-link').visible?

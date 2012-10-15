@@ -2,18 +2,12 @@ module Admin
   class Schools::Campuses::ContactsController < ApplicationController
 
     inherit_resources
-
     actions :index, :show, :create, :update, :edit, :destroy
+
+    respond_to :js, :html
 
     before_filter :load_campus, :only => [ :new, :create, :edit, :update, :destroy ]
 
-    def new
-      @contact = Contact.new
-      super do |format|
-        format.js { render 'new' }
-      end 
-    end
-    
     def create
       super do |format|
         if @contact.save && @campus.contacts << @contact
@@ -21,12 +15,6 @@ module Admin
         end
         format.js { render 'create' }
       end
-    end
-
-    def edit
-      super do |format|
-        format.js { render 'edit' }  
-      end  
     end
 
     def update

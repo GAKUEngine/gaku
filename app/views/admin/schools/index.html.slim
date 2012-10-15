@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.schools-count
-        = print_count(@schools, t('schools.list'))
+        = print_count(@schools.count, t('schools.list'))
     .pull-right
       = ajax_link_to_new t('schools.add'), new_admin_school_path(@school), :id => 'new-admin-school-link'
   .row-fluid

@@ -1,11 +1,11 @@
-$("#class-group-students table tbody").html('');
+$("#class-group-students-index tbody").html('');
 
 <% @class_group.class_group_enrollments.each {|enrollment| %>
-  $('#class-group-students table tbody').append('<%= render_js_partial("class_groups/students/student", {:enrollment => enrollment}) %>');
+  $('#class-group-students-index tbody').append('<%= render_js_partial("class_groups/students/student", {:enrollment => enrollment}) %>');
 <% } %>
 
-$('#class-group-enrollments-tab-link').html('<%= print_count(@class_group.class_group_enrollments, t("class_group_enrollments.list")) %>');
-$('.enrollments-count').html('<%= print_count(@class_group.class_group_enrollments, t("class_group_enrollments.list")) %>');
+$('#class-group-enrollments-tab-link').html('<%= print_count(@class_group.class_group_enrollments.count, t("class_group_enrollments.list")) %>');
+$('.class-group-enrollments-count').html('<%= print_count(@class_group.class_group_enrollments.count, t("class_group_enrollments.list")) %>');
 
 $('#student-modal').modal('hide');
 $("#notice").html("<%= escape_javascript(render :partial => 'shared/flash', :locals => {:notice => notice}) %>");

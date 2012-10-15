@@ -8,6 +8,7 @@
 #  adjustments       :text
 #  weight            :float
 #  use_weighting     :boolean          default(FALSE)
+#  is_standalone     :boolean          default(FALSE)
 #  grading_method_id :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
