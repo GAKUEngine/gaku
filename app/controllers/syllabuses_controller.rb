@@ -1,27 +1,15 @@
 class SyllabusesController < ApplicationController
 
-  #before_filter :authenticate_user!
-
-  before_filter :load_syllabus,    :only  => [:create_exam, :create_assignment, :show]
+  before_filter :syllabus, :only  => :show
   before_filter :load_before_show, :only => :show
 
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  def destroy
-    destroy! :flash => !request.xhr?
-  end
-
-  def update
-    super do |format|
-      format.js
-    end  
-  end
-
+  respond_to :js, :html
 
   private
-    def load_syllabus 
+    def syllabus 
     	@syllabus = Syllabus.find(params[:id])
     end
 
