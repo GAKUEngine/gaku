@@ -9,12 +9,10 @@ module Admin
     before_filter :load_school
     
     def create
-      @campus = Campus.new(params[:campus])
-      if @campus.save
-        @school.campuses << @campus 
-        redirect_to admin_school_campuses_path(@school)
-      else
-        render :new
+      super do |format|
+        if @campus.save && @school.campuses << @campus 
+          format.js { render 'create' }
+        end
       end
     end
 

@@ -3,31 +3,15 @@ class ClassGroupsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   inherit_resources
+  actions :show, :new, :create, :edit, :update
 
-  actions :show, :new
+  respond_to :js, :html
 
   before_filter :load_before_index, :only => :index
-  before_filter :load_class_group,  :only => :destroy
+  before_filter :class_group,  :only => :destroy
 
-  def new
-    @class_group = ClassGroup.new
-    render 'new'
-  end
-  
   def index
-    @class_groups = ClassGroup.order( sort_column + " " + sort_direction)
-  end
-
-  def create
-    super do |format|
-      format.js { render }
-    end
-  end
-
-  def edit
-    super do |format|
-      format.js { render }
-    end
+    @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
   end
 
   def student_chooser
@@ -44,12 +28,6 @@ class ClassGroupsController < ApplicationController
     end
   end
 
-  def update
-    super do |format|
-      format.js { render }
-    end  
-  end
-
   def destroy
     if @class_group.destroy && !request.xhr?
       flash[:notice] = "Class Group Destroyed"  
@@ -63,7 +41,7 @@ class ClassGroupsController < ApplicationController
       @class_group = ClassGroup.new
     end
 
-    def load_class_group
+    def class_group
       @class_group = ClassGroup.find(params[:id])
     end
 

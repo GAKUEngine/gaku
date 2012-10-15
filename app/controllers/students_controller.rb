@@ -1,20 +1,17 @@
 class StudentsController < ApplicationController
   include SheetHelper
-  #before_filter :authenticate_user!
 
   helper_method :sort_column, :sort_direction
 
   inherit_resources
   actions :show, :new, :destroy
 
+  respond_to :js, :html
+
   before_filter :load_before_index, :only => :index
   before_filter :load_before_show,  :only => :show
-  before_filter :load_class_groups, :only => [:new, :edit]
-  before_filter :load_student,      :only => [:edit, :update, :destroy]
-
-  def new
-    @student = Student.new
-  end
+  before_filter :class_groups,      :only => [:new, :edit]
+  before_filter :student,           :only => [:edit, :update, :destroy]
   
   def index
     @search = Student.search(params[:q])
@@ -50,12 +47,6 @@ class StudentsController < ApplicationController
 
   def create
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-    super do |format|
-      format.js { render }
-    end
-  end
-
-  def edit
     super do |format|
       format.js { render }
     end
@@ -119,13 +110,21 @@ class StudentsController < ApplicationController
       @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
     end
 
-    def load_class_groups
+    def class_groups
       @class_groups = ClassGroup.all
       @class_group_id ||= params[:class_group_id]
     end
 
-    def load_student
+    def student
       @student = Student.find(params[:id])
+    end
+
+    def sort_column
+      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
 =begin
@@ -158,13 +157,5 @@ class StudentsController < ApplicationController
       return students_json
     end
 =end
-
-    def sort_column
-      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-    end
 
 end

@@ -1,4 +1,5 @@
 class Syllabuses::AssignmentsController < ApplicationController
+
   def create
     if @syllabus.update_attributes(params[:syllabus])
       respond_to do |format|
@@ -6,4 +7,5 @@ class Syllabuses::AssignmentsController < ApplicationController
       end
     end  
   end
+  
 end
