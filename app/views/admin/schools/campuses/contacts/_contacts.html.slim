@@ -1,5 +1,6 @@
 #admin-school-campus-contacts
   .row-fluid
+    #new-admin-school-campus-contact
     .pull-left
       h4.h4-vm.admin-school-campus-contacts-count
         = print_count(@campus.contacts.count, t('contacts.list'))
@@ -21,4 +22,3 @@
         =render :partial => 'admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'
     br/ 
     #new-admin-school-campus-contact-form-errors
-    #new-admin-school-campus-contact
