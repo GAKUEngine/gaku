@@ -1,11 +1,14 @@
 #student-course-enrollments
   .row-fluid
+    #new-student-course-enrollment.hide
     .pull-left
-      h4.h4-vm.student-course-enrollments-count
-        = @student.courses.count != 0 ? t('courses.list') + "(" + @student.courses.count.to_s + ")" : t('courses.list')
-
+      h4.mt-xs.mb-0.student-course-enrollments-count
+        = print_count(@student.courses.count, t('courses.list'))
     .pull-right
       = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link"
+
+  .row-fluid
+    hr
   .row-fluid
     .span12
       table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed

@@ -19,7 +19,7 @@ describe ClassGroupsController do
     it "redirects to the new class group" do
       page.stub :save => true
 
-      post :create
+      post :create, class_group: attributes_for(:class_group)
       response.should redirect_to(class_group_url(ClassGroup.last))
     end
   end

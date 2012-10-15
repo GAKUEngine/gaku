@@ -1,10 +1,11 @@
 #student-guardian-contacts
+  #new-student-guardian-contact 
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardian-contacts-count
-        =print_count(@guardian.contacts, t('contacts.list'))
+        =print_count(@guardian.contacts.count, t('contacts.list'))
     .pull-right
-      =ajax_link_to_new t('students.add_contact'), '#', :id => 'new-student-guardian-contact-link'
+      =ajax_link_to_new t('students.add_contact'), new_student_guardian_contact_path(@student, @guardian), :id => 'new-student-guardian-contact-link'
 
   .row-fluid
     .span12    
@@ -20,8 +21,3 @@
             th.btn-info style="width:71px" =t 'manage'
         tbody
           =render :partial => 'students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
-      
-#new-student-guardian-contact-form style='display:none' 
-  .row-fluid  
-    .span12.well
-      =render 'students/guardians/contacts/form'

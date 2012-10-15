@@ -1,22 +1,12 @@
 class Students::AddressesController < ApplicationController
 
   inherit_resources
+  actions :index, :show, :new, :update, :edit
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  respond_to :js, :html
 
   before_filter :load_address, :only => :destroy
-  before_filter :load_student, :only => [ :new, :create, :edit, :update, :destroy ]
-
-  def new
-    @address = Address.new
-    render 'new'  
-  end
-  
-  def edit
-    super do |format|
-      format.js {render 'edit'}  
-    end  
-  end
+  before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
 
   def create
     super do |format|
@@ -25,7 +15,7 @@ class Students::AddressesController < ApplicationController
           format.js { render 'create' }  
         end
       else
-        format.js {render 'validation_errors'}
+        format.js  { render 'validation_errors' }
       end
     end  
   end
@@ -36,7 +26,7 @@ class Students::AddressesController < ApplicationController
       if @address.save
         format.js { render 'update' }
       else
-        format.js { render 'validation_errors'}
+        format.js { render 'validation_errors' }
       end  
     end  
   end

@@ -8,5 +8,5 @@ table#course-groups-index.index.table.table-striped.table-bordered.table-condens
     	tr class="course-group-#{course_group.id}"
 			  td.name = course_group.name
 			  td
-				  = link_to_show course_group , :id => 'show-course-group-link'
-				  = ajax_link_to_edit [:edit, course_group], :id => 'edit-course-group-link'
+				  = link_to_show course_group
+				  = ajax_link_to_edit [:edit, course_group]

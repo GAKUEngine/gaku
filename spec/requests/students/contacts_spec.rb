@@ -18,14 +18,14 @@ describe 'Contact' do
       tr_count = page.all('table#student-contacts-index tr').size
       @student.contacts.size.should eql(0)
       
-      wait_until { find('#new-student-contact-form').visible? } 
+      wait_until { find('#new-student-contact form').visible? } 
 
       select 'email', :from => 'contact_contact_type_id'
       fill_in "contact_data", :with => "The contact data"
       fill_in "contact_details", :with => "The contact details"
       click_button "submit-student-contact-button"
       
-      wait_until { !page.find('#new-student-contact-form').visible? }
+      wait_until { !page.find('#new-student-contact form').visible? }
       page.should have_selector('a', href: "/students/1/contacts/1/edit")
       page.should have_content("The contact data")
       page.should have_content("The contact details")
@@ -36,8 +36,14 @@ describe 'Contact' do
     end
 
     it 'should cancel adding contact', :js => true do
+      wait_until { page.find('#cancel-student-contact-link').visible? }
       click_link 'cancel-student-contact-link'
-      wait_until { !page.find('#new-student-contact-form').visible? }
+      wait_until { !page.find('#new-student-contact form').visible? }
+      find('#new-student-contact-link').visible?
+
+      click_link 'new-student-contact-link'
+      wait_until { find('#new-student-contact form').visible? }
+      !page.find('#new-student-contact-link').visible?
     end
   end
 

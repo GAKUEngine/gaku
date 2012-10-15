@@ -1,1 +1,1 @@
-$('.course-group-enrollments-count').html('<%= print_count(@course_group.courses, t("courses.list")) %>');
+$('.course-group-enrollments-count').html('<%= print_count(@course_group.courses.count, t("courses.list")) %>');

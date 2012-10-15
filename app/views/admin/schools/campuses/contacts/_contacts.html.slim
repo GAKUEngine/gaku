@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.admin-school-campus-contacts-count
-        = print_count(@campus.contacts, t('contacts.list'))
+        = print_count(@campus.contacts.count, t('contacts.list'))
     .pull-right
         = ajax_link_to_new t('campuses.add_contact'), new_admin_school_campus_contact_path(@campus.school, @campus), :id => 'new-admin-school-campus-contact-link'
 

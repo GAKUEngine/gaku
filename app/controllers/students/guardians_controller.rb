@@ -1,23 +1,12 @@
 class Students::GuardiansController < ApplicationController
 
-  #before_filter :authenticate_user!
-
   inherit_resources
+  actions :new, :edit, :update, :destroy, :index, :show
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  respond_to :js, :html
 
-  before_filter :load_student, :only => [ :new,:show, :create, :edit, :update, :destroy ]
+  before_filter :load_student
   before_filter :load_primary_address, :only => :show
-  def new
-    @guardian = Guardian.new
-    render 'new'  
-  end
-  
-  def edit
-    super do |format|
-      format.js {render 'edit'}  
-    end  
-  end
 
   def create
     super do |format|
@@ -26,18 +15,6 @@ class Students::GuardiansController < ApplicationController
       end
     end  
   end
-  
-  def update
-    super do |format|
-      format.js { render 'update' }  
-    end  
-  end
-
-  def destroy
-    super do |format|
-      format.js { render 'destroy' }
-    end
-  end
 
   def new_contact
   	@student = Student.find(params[:student_id])
@@ -45,7 +22,7 @@ class Students::GuardiansController < ApplicationController
   	@contact = Contact.new
   
   	respond_to do |format|
-  		format.js {render 'new_contact'}
+  		format.js { render 'new_contact' }
   	end
   end
 
@@ -60,4 +37,3 @@ class Students::GuardiansController < ApplicationController
     end
 
 end
-

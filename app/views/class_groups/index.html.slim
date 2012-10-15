@@ -2,6 +2,7 @@
   .span1
   .span10
     .row-fluid
+      #new-class-group
       h3.pull-left = t("class_groups.list")
       .pull-right
         = ajax_link_to_new t("class_groups.new"), new_class_group_path,:id => "new-class-group-link"
@@ -13,6 +14,3 @@
         #class-groups-index
           =render 'class_groups/class_groups'
     .row-fluid
-      #new-class-group.hide
-        =render 'form'
-#modal-dialogs

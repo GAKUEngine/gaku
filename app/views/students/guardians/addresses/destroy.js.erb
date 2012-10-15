@@ -2,4 +2,4 @@
 	$('#address-<%= @guardian.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 
-$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses, t('addresses.list')) %>');
+$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses.count, t('addresses.list')) %>');

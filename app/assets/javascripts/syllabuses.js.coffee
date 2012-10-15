@@ -2,15 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-	$('#new-syllabus-exam').on 'click','a.btn', (event) ->
+	$('#new-syllabus-exam-link').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-exam-form').slideToggle()
-      
-	$('#new-syllabus-assignment').on 'click','a.btn', (event) ->
+
+	$('#new-syllabus-assignment').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slideToggle()
 
-  $('#add-existing-exam').on 'click', 'a.btn', (event)->
+  $('#add-existing-exam-link').on 'click', (event) ->
   	event.preventDefault()
   	$('#add-existing-exam-form').slideToggle()
 

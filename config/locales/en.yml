@@ -3,10 +3,20 @@ en:
     admin: "Admin"
     schools: "Schools"
     contact_types: "Contact Types"
+    enrollment_status_types: "Enrollment Status Types"
+    disposals: 'Disposals'
+    types: 'Types'
     presets:
+      presets: "Presets"
       student: "Student Preset"
       locale: "Locale Preset"
-
+      save: 'Save'
+      updated: 'Presets Updated'
+      students:
+        gender: 'Gender'
+        country: 'Country'
+        state: 'State'
+        city: 'City'
   fields:
     name: "name"
     surname: "surname"
@@ -26,6 +36,8 @@ en:
   Delete: "Delete"
   Back: "Back"
   cancel: "Cancel"
+  add: 'Add'
+  default: 'Default'
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
@@ -76,8 +88,6 @@ en:
   teacher: "Instructor"
   student: "Student"
   students:
-    import: "CSV Import"
-    export: "CSV Export"
     show: "Show Students"
     new: "Register New Student"
     edit: "Edit"
@@ -102,6 +112,7 @@ en:
     birth_between: "Birth date between"
     birth_and: "and"
     chosen_students: "Chosen students"
+    commute_method: 'Commute Method'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -139,6 +150,7 @@ en:
     enroll_class_group: 'Enroll Class Group'
     add_class_group: 'Add Class Group'
     choose_class_group: 'Choose Class Group'
+    course_created: 'Course was successfully created'
   course_groups:
     course_groups: 'Course Groups'
     edit_course_group: 'Edit Course Group'
@@ -177,6 +189,17 @@ en:
     class_groups: "Class groups"
     current_enrollment: "Current enrollment"
     enrollments_count: "Enrollments count"
+  commute_methods:
+    created: 'Commute method was successfully created'
+    updated: 'Commute method was updated'
+  commute_method_types:
+    plural: "Commute Method Types"
+    singular: "Commute Method Type"
+    save: 'Save Commute Method Type'
+    new: 'New Commute Method Type'
+    edit: 'Edit Commute Method Type'
+    list: 'Commute Method Types list'
+    add: 'Add Commute Method Type'
   grades:
     grading: "Grading"
     weighting: "Weight"
@@ -222,7 +245,7 @@ en:
     use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
-    exam_created: 'Exam successfully created'
+    exam_created: 'Exam was successfully created'
   config:
     label: "Config"
     close: "Close"
@@ -243,6 +266,7 @@ en:
     save: "Save profile"
   guardian: "Guardian"
   guardians:
+    new: "New Guardian"
     guardians: "Guardians"
     list: "Guardians list"
     relationship: "Relationship"
@@ -256,6 +280,7 @@ en:
     new: "New Contact Type"
     add: "Add Contact Type"
     save: "Save Contact Type"
+    list: "Contact Types list"
 
   contacts:
     new: "New Contact"
@@ -298,6 +323,15 @@ en:
     address: "Campus Address"
     contacs: "Campus Contacts"
     primary: "Primary"
+
+  enrollment_status_types:
+    singular: "Enrollment Status Type"
+    plural: "Enrollment Status Types"
+    new: "New Enrollment Status Type"
+    add: "Add Enrollment Status Type"
+    save: "Save Enrollment Status Type"
+    list: "Enrollment Status Types list"
+    active: "Active"
 
   note: "Notes"
   notes:
@@ -345,8 +379,12 @@ en:
     attached_file_count: 'Attached file count'
   options: "Options"
   notice:
-    picture_uploaded: "Picture successfully uploaded"
+    picture_uploaded: "Picture was successfully uploaded"
   import_format: "Import Format"
   helpers:
     links:
       cancel: "Cancel"
+
+  csv:
+    import: "CSV Import"
+    export: "CSV Export"

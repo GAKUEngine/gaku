@@ -1,0 +1,6 @@
+$('#admin-enrollment-status-types-index tbody').append('<%= render_js_partial("enrollment_status_type", {:enrollment_status_type => @enrollment_status_type}) %>');
+
+$('#new-admin-enrollment-status-type form').slideToggle();
+$('#new-admin-enrollment-status-type-link').show();
+
+$('.admin-enrollment-status-types-count').html('<%= print_count(@enrollment_status_types_count + 1, t("enrollment_status_types.list")) %>');

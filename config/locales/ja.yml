@@ -2,7 +2,14 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    schools: "Schools"
+    disposals: 'Disposals'
+    types: 'Types'
+    contact_types: "Contact Types"
     presets:
+      presets: "Presets"
+      save: 'プリセットを保存'
+      updated: '更新用プリセット'
       student: "生徒用プリセット"
       students:
         gender: "生徒の性別"
@@ -23,6 +30,8 @@ ja:
   Destroy: "削除"
   Delete: "消去"
   Back: "戻る"
+  add: 'Add'
+  default: 'Default'
   cancel: "キャンセル"
   required: "必須"
   manage: "管理"
@@ -36,17 +45,21 @@ ja:
   none: "未登録"
   date_placeholder: "YYYY-MM-DD"
   search: "検索"
-  hide: "Hide"
-  description: 'Description'
+  hide: "非表示"
+  description: '説明'
+  admin:
+    presets:
+      save: '保存'
+      gender: '性別'
   attachments:
-    assets: 'Assets'
-    file_name: 'File name'
-    file_type: 'File type'
-    file_size: 'File size'
-    new_attachment: "New Attachment"
-    create_attachment: 'Create Attachment'
-    attachment_recovered: 'Attachment recovered'
-    asset_type: 'Asset type'
+    assets: 'アセット'
+    file_name: 'ファイルの名前'
+    file_type: 'ファイルの種類'
+    file_size: 'ファイルの容量'
+    new_attachment: "新しい追加ファイル"
+    create_attachment: '追加ファイルを作成'
+    attachment_recovered: '追加ファイルを削除'
+    asset_type: 'アセットの種別'
   addresses:
     save: "住所を保存"
     addresses: "住所"
@@ -96,9 +109,10 @@ ja:
     picture_uploaded: '写真を追加'
     add_contact: "連絡先を追加"
     create_contact: "連絡先を作成"
-    choose_gender: '性別を選択してください'
+    choose_gender: '性別を選択して'
     class_group_enrollment: "登録されているクラス"
-    chosen_students: "Chosen students"
+    chosen_students: "生徒を選択して下さい"
+    commute_method: '通学手段'
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -136,6 +150,7 @@ ja:
     enroll_class_group: 'クラスを登録'
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
+    course_created: 'Course was successfully created'
   course_groups:
     course_groups: '授業グループ'
     edit_course_group: '授業グループを編集'
@@ -149,7 +164,7 @@ ja:
   add_course: "授業を追加する"
   course_enrollments:
     list: "授業在籍一覧"
-    add: "追加"
+    add: "在籍授業を追加"
     create: "作成"
     enrollment: "在籍管理"
     assignment: "割り振り"
@@ -164,14 +179,25 @@ ja:
     homeroom: "主要教室"
     choose_student: '生徒選択'
     create_class_group_enrollment: ''
-    save: "Save Class"
+    save: "クラスを保存"
   class_group_enrollments:
     list: "クラス名簿"
     new: "新規クラス"
     seat_number: "出席番号"
     class_groups: "クラス"
-    current_enrollment:
-    none: "None"
+    current_enrollment: "現在在籍しているクラス"
+    none: "在籍しているクラスが有りません。"
+  commute_methods:
+    created: '通学手段が作成されました。'
+    updated: '通学手段が更新されました。'
+  commute_method_types:
+    plural: "Commute Method Types"
+    singular: "Commute Method Type"
+    save: 'Save Commute Method Type'
+    new: 'New Commute Method Type'
+    edit: 'Edit Commute Method Type'
+    list: 'Commute Method Types List'
+    add: 'Add Commute Method Type'
   grades:
     combined: "全試験合計"
     grading: "を採点"
@@ -228,6 +254,10 @@ ja:
     show: "試験照会"
     edit: "試験を編集"
     exam_created: '試験作成に成功しました。'
+    grading_method: "評価方法"
+    grading_methods:
+      deviation: "偏差値"
+      percent: "割合"
   execution_date: "実行日"
   config:
     label: "設定"
@@ -288,12 +318,12 @@ ja:
     ending:
     save: "保存"
     ending_after_starting: 'should be after Starting'
-    uniqueness: "have this semester added"
+    uniqueness: "同じ学期が既に存在しています。"
   num_semesters:
   add_semester: "学期を追加する"
   options: "オプション"
   notice:
-    no_assignments: "No assignments, assign one first"
+    no_assignments: "ログインされていません。ログインをしてからもう一度実行して下さい。"
     no_exams: "試験が登録されていません、新しく試験を追加して下さい。"
   select: "選択"
   pictures:
@@ -313,6 +343,6 @@ ja:
     is_master: "マスター"
     master: "試験要素内容（マスター）"
     save: 試験要素を保存"
-    show: "Show Exam Portion"
-    attached_file_count: 'Attached file count'
+    show: "試験要素を表示"
+    attached_file_count: '追加ファイル数'
   import_format: "インポート形式"

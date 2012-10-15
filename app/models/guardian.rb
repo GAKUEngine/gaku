@@ -2,15 +2,15 @@
 #
 # Table name: guardians
 #
-#  id                        :integer          not null, primary key
-#  encrypted_name            :string(255)
-#  encrypted_surname         :string(255)
-#  encrypted_name_reading    :string(255)
-#  encrypted_surname_reading :string(255)
-#  encrypted_relationship    :string(255)
-#  user_id                   :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  surname         :string(255)
+#  name_reading    :string(255)
+#  surname_reading :string(255)
+#  relationship    :string(255)
+#  user_id         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 class Guardian < ActiveRecord::Base

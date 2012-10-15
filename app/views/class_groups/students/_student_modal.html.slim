@@ -1,26 +1,7 @@
+
 - model = @class_group_enrollment || ClassGroupEnrollment.new
 - model_class = model.class
-.modal.hide#student-modal wmode="opaque" style="display: block;padding: 41px;width: auto;height: auto;"
+.modal.hide#student-modal wmode="opaque" style="display: block;padding: 41px;position: absolute;left: 500px;top: 300px;width:auto;height:auto;text-align:center;"
 
-  =render 'student_chooser', :select_mode => 'multiple'
-
-  =render 'form'
-
-= javascript_include_tag "class_groups/student_chooser"
-
-coffee:
-  $('#grid').studentChooser()
-
-  student_ids = []
-  $("input:checkbox.student_check").live 'click', -> 
-    checkedStatus = this.checked
-    if checkedStatus == true
-      student_ids.push(this.value)
-    else
-      indexOfStudent = student_ids.indexOf(this.id)
-      student_ids.splice(indexOfStudent, 1)
-    $('input#student_ids').val(student_ids)
-
-/ added temporary to shorten the table
-css:
-  div#grid { height:auto!important; }
+  = render 'students/student_chooser'
+  = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-class-group-student-link'

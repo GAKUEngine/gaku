@@ -13,7 +13,9 @@ class Admin::DisposalsController < Admin::BaseController
 		@attachments = Attachment.where(:is_deleted => true).order(sort_column + " " + sort_direction)
 	end
 
-	 def sort_column
+	private
+
+	  def sort_column
       Student.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
 

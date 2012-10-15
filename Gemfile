@@ -3,11 +3,12 @@ source 'https://rubygems.org'
 #Rails
 gem 'rails', '~> 3.2.4'
 gem 'rails-i18n'
+gem 'audited-activerecord', '~> 3.0'
 gem 'slim-rails'
 gem 'inherited_resources'
 gem 'chosen-rails'
-#gem 'attr_encrypted'
 gem 'ransack'
+#gem 'attr_encrypted'
 
 #JS 
 gem 'jquery-rails'
@@ -52,7 +53,7 @@ end
 group :test do
   gem 'mysql2'
   gem 'spork', '~> 1.0rc'
-  gem 'rspec-rails', '~> 2.10.1'
+  gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'
@@ -68,6 +69,7 @@ group :test do
   
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
+    gem 'rb-fsevent', '~> 0.9.1' #guard dependency
   end
 end
 

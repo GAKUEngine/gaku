@@ -3,13 +3,13 @@
 # Table name: students
 #
 #  id                           :integer          not null, primary key
-#  encrypted_name               :string(255)
+#  name                         :string(255)
 #  middle_name                  :string(255)
-#  encrypted_surname            :string(255)
-#  encrypted_name_reading       :string(255)      default("")
-#  encrypted_surname_reading    :string(255)      default("")
+#  surname                      :string(255)
+#  name_reading                 :string(255)      default("")
+#  surname_reading              :string(255)      default("")
 #  gender                       :boolean
-#  encrypted_phone              :string(255)
+#  phone                        :string(255)
 #  email                        :string(255)
 #  birth_date                   :date
 #  admitted                     :date
@@ -19,6 +19,7 @@
 #  national_registration_number :string(255)
 #  user_id                      :integer
 #  faculty_id                   :integer
+#  commute_method_id            :integer
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #  picture_file_name            :string(255)
@@ -39,11 +40,11 @@ class Student < ActiveRecord::Base
   has_many :student_specialties
   has_many :specialities, :through => :student_specialties
 
-  #FIXME maybe it should be reversed
   has_many :exam_portion_scores
   has_many :assignment_scores
 
   belongs_to :user
+  belongs_to :commute_method
 
   has_many :student_addresses
   has_many :addresses, :through => :student_addresses
@@ -53,6 +54,9 @@ class Student < ActiveRecord::Base
   has_many :notes
 
   has_many :attendances
+  has_many :enrollment_statuses
+
+  has_associated_audits
 
   attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                   :class_groups, :class_group_ids, :class_groups_attributes,

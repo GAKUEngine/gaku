@@ -1,22 +1,17 @@
 class Students::ClassGroupEnrollmentsController < ApplicationController
 
   inherit_resources
+  actions :new, :destroy
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy
+  respond_to :js, :html
 
-  before_filter :load_student, :only => [ :new, :create, :edit, :update ]
-
-  def new
-    @class_group_enrollment = ClassGroupEnrollment.new
-    render 'new'
-  end
+  before_filter :load_student, :only => [:new, :create]
 
   def create
     @class_group_enrollment = ClassGroupEnrollment.new(params[:class_group_enrollment])
     respond_to do |format|
       if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
         @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)        
-
         format.js { render 'create' }  
       else
         @errors = @course_enrollment.errors

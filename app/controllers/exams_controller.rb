@@ -126,6 +126,7 @@ class ExamsController < ApplicationController
   def update
     super do |format|
       @exams = Exam.all
+      flash.now[:notice] = 'Exam was successfully updated.'
       format.js { render 'update'}
     end
   end
@@ -147,8 +148,6 @@ class ExamsController < ApplicationController
       num = num.truncate
       num = num.to_f / fixNum.to_f
     end
-    puts "trancate-----------------"
-    puts num
     return num
   end
 
@@ -200,8 +199,6 @@ class ExamsController < ApplicationController
         @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
-    puts "exam_averages-------------------"
-    puts @exam_averages[0]
 
     # Deviation Calculation -----↓
     @deviation = Hash.new { |hash,key| hash[key] = {} }
@@ -252,8 +249,6 @@ class ExamsController < ApplicationController
         end
       end
       scores.sort!().reverse!()
-      puts "scores--------------------"
-      puts scores
 
       # Grade Calculation -----↓
       gradePoint = 10
@@ -261,8 +256,6 @@ class ExamsController < ApplicationController
         @students.each do |student|
           if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
             @grades[exam.id][student.id] = gradePoint
-            puts "grade dayo------------------------"
-            puts @grades[exam.id][student.id]
           end
         end
         gradePoint -= 1
@@ -315,32 +308,33 @@ class ExamsController < ApplicationController
     end
   end
 
-  def update_score
-    @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
-    @exam_portion_score.score = params[:exam_portion_score][:score]
-    if @exam_portion_score.save
-      @student_id = Student.find(params[:exam_portion_score][:student_id]).id
-      exam = Exam.find(params[:id])
-      exam_portions = exam.exam_portions
-      @exam_id = exam.id.to_s
-      exam_portions_ids = exam_portions.pluck(:id)
-      student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
-      student_scores = student_exam_portion_scores.pluck(:score)
-      @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
-
-      @student_weights_total = 0.0
-      if exam.use_weighting
-        student_exam_portion_scores.each do |eps|
-          @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
-        end
-      end
-
-      respond_to do |format|
-          format.js { render 'update_score' }
-          format.js { render :json => @exam_portion_score}
-        end
-      end
-  end
+  # def update_score
+    # @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
+    # @exam_portion_score.score = params[:exam_portion_score][:score]
+    # if @exam_portion_score.save
+      # @student_id = Student.find(params[:exam_portion_score][:student_id]).id
+      # exam = Exam.find(params[:id])
+      # exam_portions = exam.exam_portions
+      # @exam_id = exam.id.to_s
+      # exam_portions_ids = exam_portions.pluck(:id)
+      # student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
+      # student_scores = student_exam_portion_scores.pluck(:score)
+      # @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
+#
+      # @student_weights_total = 0.0
+      # if exam.use_weighting
+        # student_exam_portion_scores.each do |eps|
+          # @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
+        # end
+      # end
+#
+      # respond_to do |format|
+          # format.js { render 'update_score' }
+          # format.js { render :json => @exam_portion_score}
+        # end
+      # end
+    # end
+  # end
 
   private
     def load_exam

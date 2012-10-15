@@ -1,20 +1,50 @@
-/ for getting select mode in js. please don`t remove /
-- if defined?(select_mode)
-    #student-grid data-select-mode="#{select_mode}"
-- else
-    #student-grid
+=render 'students/search/form'
+
+.row-fluid.hide#students-checked-div
+  .span6.well
+    h4.pull-left = t("students.chosen_students")
+    h4.chosen-count.pull-left
+    .table-action.show-chosen-table.pull-right = link_to t('show'),nil
+    .table-action.hide-chosen-table.pull-right.hide = link_to t('hide'),nil
+    table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
+      thead
+        tr
+          th.btn-inverse = sort_link @search, "surname", t("surname")
+          th.btn-inverse = sort_link @search, "name", t("name")
+      tbody#students-checked
+    #chosen-actions.hide
+      - if !@class_group.nil?
+        = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
+          = hidden_field_tag "class_group_id", @class_group.id
+          = hidden_field_tag "source", "class_groups"
+          h4 = "Adding students to " + @class_group.name
+          = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
+      -elsif !@course.nil?
+        = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+          = hidden_field_tag "course_id", @course.id
+          = hidden_field_tag "source", "courses"
+          h4 = "Adding students to " + @course.code
+          = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
+      - else
+        .span12 style="margin-top:10px;"
+          = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
+            .span8
+              = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class_group-select"}
+              
+            = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
+        .span12 style="margin-top:10px;"
+          = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+            .span8
+              = select_tag "course_id", options_from_collection_for_select(@courses, "id", "code"), {:class => "class_group-select"}
+            
+          = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
 .row-fluid
-  .span12
-    input*{'data-autocomplete-source' => "#{autocomplete_search_students_path}"} class='search-students' id='search-students'     
-.row-fluid
-  .span12
-    div#table-checkboxes
-.row-fluid
-  .span12
-    hr/
-.row-fluid
-  .span12
-    - if defined?(select_mode)
-      b =select_mode
-    #students-grid-table  
-      #grid.span12
+  .span12.well
+    #students-index
+      =render 'students/students'
+= javascript_include_tag "student_chooser"
+
+
+javascript:
+  $(".class_group-select").combobox();
+

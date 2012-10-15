@@ -1,6 +1,0 @@
-=form_for @class_group_enrollment, :url => enroll_student_class_group_students_path, :remote => true do |f|
-  = f.hidden_field :class_group_id, :value => @class_group.id
-  = hidden_field_tag "student_ids", "", :id => 'student_ids'
-  br
-    = submit_button "Add to class", :id => 'submit-student-button', :class => 'span3 btn btn btn-primary'
-  = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-student-link'

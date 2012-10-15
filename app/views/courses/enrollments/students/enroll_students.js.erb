@@ -1,0 +1,13 @@
+$("#course-students-index tbody").html('');
+
+<% @course.course_enrollments.each {|enrollment| %>
+  $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment.student}) %>');
+<% } %>
+
+$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');
+$('.course-students-count').html('<%= print_count(@course.students.count, t("students.list")) %>');
+
+
+$('#student-modal').modal('hide');
+$("#notice").html("<%= escape_javascript(render :partial => 'shared/flash', :locals => {:notice => notice}) %>");
+$("#notice").show(3);

@@ -11,6 +11,10 @@ class StudentsController < ApplicationController
   before_filter :load_before_show,  :only => :show
   before_filter :load_class_groups, :only => [:new, :edit]
   before_filter :load_student,      :only => [:edit, :update, :destroy]
+
+  def new
+    @student = Student.new
+  end
   
   def index
     @search = Student.search(params[:q])

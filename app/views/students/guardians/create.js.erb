@@ -1,7 +1,7 @@
 $('.guardians_list').append('<%= render_js_partial("guardian", {:guardian => @student.guardians.last}) %>');
 
-$('#new-student-guardian-form').slideToggle();
+$('#new-student-guardian').slideToggle();
 $('#new-student-guardian-link').show();
 
-$('#new-student-guardian-tab-link').html('<%= print_count(@student.guardians, t("guardians.guardians")) %>');
-$('.student-guardians-count').html('<%= print_count(@student.guardians, t("guardians.list")) %>');
+$('#new-student-guardian-tab-link').html('<%= print_count(@student.guardians.count, t("guardians.guardians")) %>');
+$('.student-guardians-count').html('<%= print_count(@student.guardians.count, t("guardians.list")) %>');

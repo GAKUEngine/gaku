@@ -28,27 +28,19 @@ class Contact < ActiveRecord::Base
 
   before_save :ensure_first_primary, :on => :create
 
-
-  def make_primary_student
-    self.update_attributes(:is_primary => true)
-    user_contacts = Contact.where(:student_id => self.student_id)
-    user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
-  end
-
-  def make_primary_guardian
-    self.update_attributes(:is_primary => true)
-    user_contacts = Contact.where(:guardian_id => self.guardian_id)
-    user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
-  end
-
-  def make_primary_campus
-    self.update_attributes(:is_primary => true)
-    user_contacts = Contact.where(:campus_id => self.campus_id)
-    user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
-  end
-
-
   private
+  
+  def method_missing(method, *args, &block)
+    if ['make_primary_campus','make_primary_guardian', 'make_primary_student'].include?(method.to_s)
+      foreign_key_sym = (method.to_s.split('_').last + '_id').to_sym
+      
+      self.update_attributes(:is_primary => true)
+      user_contacts = Contact.where(foreign_key_sym => self.send(foreign_key_sym))
+      user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
+    else
+      super
+    end
+  end
 
   def ensure_first_primary
   	if self.student_id

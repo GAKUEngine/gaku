@@ -2,7 +2,9 @@
   .span1
   .span10
     .row-fluid
-      h3.pull-left = t("course_groups.list")
+      #new-course-group
+      .pull-left 
+        h3 = t("course_groups.list")
       .pull-right
       	#new-course-group
         	= ajax_link_to_new t("course_groups.new"), new_course_group_path, :id => "new-course-group-link"
@@ -15,7 +17,3 @@
           =render 'course_groups', :course_groups => @course_groups
     .row-fluid
       #course-group-form-errors
-      #new-course-group-form style='display:none'
-        =render 'form' 
-
-#modal-dialogs

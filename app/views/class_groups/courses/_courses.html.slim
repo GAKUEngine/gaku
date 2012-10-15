@@ -1,17 +1,20 @@
-.pull-left
-  h4.h4-vm.courses-count =t("courses.list")+"（ "+@class_group.class_group_course_enrollments.count.to_s+" ）"
-.pull-right
-  = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 .row-fluid
-hr
+  #new-class-group-course
+  .pull-left
+    h4.h4-vm.courses-count 
+      =print_count(@class_group.class_group_course_enrollments.count, t("courses.list"))
+  .pull-right
+    = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
+
 .row-fluid
-    .span12
-      table#courses-index.index.table.table-striped.table-bordered.table-condensed 
-        thead
-          tr
-            th.btn-inverse =t 'course.code'
-            th.btn-info style="width:61px" =t 'manage'
-        tbody
-          =render :partial => 'class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
-          
-#new-class-group-course-form
+  .span12
+    hr
+.row-fluid
+  .span12
+    table#courses-index.index.table.table-striped.table-bordered.table-condensed 
+      thead
+        tr
+          th.btn-inverse =t 'course.code'
+          th.btn-info style="width:61px" =t 'manage'
+      tbody
+        =render :partial => 'class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
