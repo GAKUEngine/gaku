@@ -1,12 +1,9 @@
 class ClassGroups::CoursesController < ApplicationController
 
-  #before_filter :authenticate_user!
-
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_class_group, :only => [ :new, :create, :edit, :update, :destroy ]
+  before_filter :load_class_group, :only => [:new, :create, :edit, :update, :destroy]
 
   def destroy
     @class_group_course_enrollment = ClassGroupCourseEnrollment.find(params[:id])

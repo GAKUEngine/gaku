@@ -1,16 +1,9 @@
 class ClassGroups::StudentsController < ApplicationController
 
-  #before_filter :authenticate_user!
-
   inherit_resources
+  actions :index, :show, :create, :update, :edit, :delete
 
-  actions :index, :show, :new, :create, :update, :edit, :destroy, :delete
-
-  def create
-  	super do |format|
-  		format.js { render 'create' }
-  	end
-  end
+  respond_to :js, :html
 
   def new
     @class_group =  ClassGroup.find(params[:class_group_id])
