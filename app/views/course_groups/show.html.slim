@@ -19,13 +19,13 @@
       .span12.well       
             #courses
               .row-fluid
-                #course-group-enrollments-index
-                  =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
-              .row-fluid
                 .span12
                   #course-group-enrollment-form-errors
-                  #new-course-group-enrollment-form.hide
+                  #new-course-group-enrollment.hide
                     =render 'course_groups/course_group_enrollments/form'
+              .row-fluid
+                #course-group-enrollments-index
+                  =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
       
     .row-fluid
       .span12.well

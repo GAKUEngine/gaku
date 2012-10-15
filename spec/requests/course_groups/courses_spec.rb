@@ -34,16 +34,16 @@ describe 'CourseGroup Courses' do
   end
 
   it 'should cancel adding', :js => true do
-    tr_count = page.all('#course-group-enrollments-index tbody tr').size
     click_link 'new-course-group-enrollment-link'
-    wait_until { page.find('#new-course-group-enrollment form').visible? }
-    select "#{@course.code}", :from => 'course_group_enrollment_course_id'
-    click_link 'course-group-enrollment-cancel-link'
+    wait_until { page.find('#new-course-group-enrollment').visible? }
+    click_link 'cancel-course-group-enrollment-link'
+    wait_until { !page.find('#new-course-group-enrollment').visible? }
 
-    page.all('#course-group-enrollments-index tbody tr').size.should eq tr_count
-
-    within("#course-group-enrollments-index tbody") { page.should_not have_content ("#{@course.code}") }
-    CourseGroupEnrollment.count.should eq tr_count
+    find("#new-course-group-enrollment-link").visible?
+       
+    click_link 'new-course-group-enrollment-link'
+    wait_until { find("#new-course-group-enrollment").visible? }
+    !page.find("#new-course-group-enrollment-link").visible?
   end
 
   context 'Course group with added course' do
