@@ -1,2 +1,2 @@
-$('.admin-school-campuses-count').html('<%= print_count(@school.campuses, t("campuses.list")) %>');
+$('.admin-school-campuses-count').html('<%= print_count(@school.campuses.count, t("campuses.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

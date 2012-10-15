@@ -1,0 +1,2 @@
+$('tr#address-<%= @address.id %>').html('<%= render_js_partial("shared/fields/address_fields", {:address => @address, :target => [@student, @guardian, @address]}) %>');
+$("#edit-address-modal").modal("hide");
