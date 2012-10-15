@@ -34,9 +34,3 @@
       =render 'delete_confirm'
        
 #modal-dialogs
-
-coffee:
-  $ ->
-    $('#show-course-form').click ->
-      $('#new-course-group-form').toggle 'slow', ->
-        $('#new-course-group-form form').validationEngine()

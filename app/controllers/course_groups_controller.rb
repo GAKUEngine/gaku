@@ -4,7 +4,8 @@ class CourseGroupsController < ApplicationController
 
 	inherit_resources
 
-	before_filter :load_before_show, :only => [:show]
+  before_filter :load_before_index, :only => [:index]
+  before_filter :load_before_show, :only => [:show]
 
 	def new
     @course_group = CourseGroup.new
@@ -63,6 +64,9 @@ class CourseGroupsController < ApplicationController
   end
 
 	private
+  def load_before_index
+    @course_group = CourseGroup.new
+  end
 
 	def load_before_show
 		@course_group_enrollment = CourseGroupEnrollment.first

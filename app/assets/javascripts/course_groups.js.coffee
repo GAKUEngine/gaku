@@ -1,15 +1,11 @@
 $ ->
-	$('#new-course-group-link').on 'click', (e)->
-		e.preventDefault()
-		$('#course-group-form-errors').html ''
-		$('#new-course-group form').slideToggle()
-		$('#new-course-group-link').hide()
 
 	$('#cancel-course-group-link').on 'click', (e) ->
 		e.preventDefault()
-		$('#new-course-group form').slideToggle()
+		$('#new-course-group').slideToggle()
 		$('#course-group-form-errors').html ''
 		$('#new-course-group-link').show()
+
 
 
 	$('#new-course-group-enrollment-link').on 'click', (e)->
