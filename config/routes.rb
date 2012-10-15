@@ -6,6 +6,7 @@ GAKUEngine::Application.routes.draw do
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
+    resources :notes
     resources :students, :controller => 'class_groups/students' do
       collection do
         post :enroll_student

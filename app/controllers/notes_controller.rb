@@ -54,7 +54,7 @@ private
 	def load_notable
 		#resource, id = request.path.split('/')[1, 2]
 		#@notable = resource.singularize.classify.constantize.find(id)
-    klass = [Student, LessonPlan, Syllabus].detect { |c| params["#{c.name.underscore}_id"] }
+    klass = [Student, LessonPlan, Syllabus, ClassGroup].detect { |c| params["#{c.name.underscore}_id"] }
     @notable = klass.find(params["#{klass.name.underscore}_id"])
     @notable_resource = @notable.class.to_s.downcase
 	end
