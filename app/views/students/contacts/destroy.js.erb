@@ -1,5 +1,5 @@
-$('.student-contacts-count').html('<%= print_count(@student.contacts, t("contacts.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+$('.student-contacts-count').html('<%= print_count(@student.contacts.count, t("contacts.list")) %>');
 
 <%- unless @student.contacts.blank? %>
 	$('.student-contact-table').find('#contact-<%= @student.contacts.first.id %> .make_primary').addClass('btn-primary');

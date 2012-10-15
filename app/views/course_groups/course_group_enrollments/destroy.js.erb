@@ -1,2 +1,2 @@
-$('.course-group-enrollments-count').html('<%= print_count(@course_group.courses, t("courses.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+$('.course-group-enrollments-count').html('<%= print_count(@course_group.courses.count, t("courses.list")) %>');

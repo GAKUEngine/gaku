@@ -4,8 +4,8 @@ $("#course-students-index tbody").html('');
   $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment.student}) %>');
 <% } %>
 
-$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students, t("course_enrollments.enrollments")) %>');
-$('.course-students-count').html('<%= print_count(@course.students, t("students.list")) %>');
+$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');
+$('.course-students-count').html('<%= print_count(@course.students.count, t("students.list")) %>');
 
 
 $('#student-modal').modal('hide');

@@ -2,7 +2,7 @@
   #new-class-group-semester
   .pull-left
     h4.h4-vm.class-group-semesters-count 
-      =print_count(@class_group.semesters, t("semesters.list"))
+      =print_count(@class_group.semesters.count, t("semesters.list"))
   .pull-right
     = ajax_link_to_new t('add_semester'), new_class_group_semester_path(:class_group_id => @class_group.id), :id => 'new-class-group-semester-link'
 .row-fluid

@@ -6,6 +6,7 @@
 #  name       :string(255)
 #  school_id  :integer
 #  address_id :integer
+#  is_master  :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

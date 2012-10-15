@@ -1,7 +1,8 @@
-$('#commute-method-types table tbody').append('<%= render_js_partial("commute_method_type", {:commute_method_type => @commute_method_type}) %>');
+$('#admin-commute-method-types table tbody').append('<%= render_js_partial("commute_method_type", {:commute_method_type => @commute_method_type}) %>');
 
-$('#new-commute-method-type-form').slideToggle()
-$('#new-commute-method-type-link').show();
+$('#new-admin-commute-method-type form').slideToggle()
+$('#new-admin-commute-method-type-link').show();
 
-$('.commute-method-types-count').html('<%= print_count(CommuteMethodType.all, t("commute_method_types.list")) %>');
+$('.admin-commute-method-types-count').html('<%= print_count(@commute_method_types_count + 1, t("commute_method_types.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+

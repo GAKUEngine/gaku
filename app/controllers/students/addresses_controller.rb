@@ -1,22 +1,12 @@
 class Students::AddressesController < ApplicationController
 
   inherit_resources
+  actions :index, :show, :new, :update, :edit
 
-  actions :edit, :create, :update
+  respond_to :js, :html
 
   before_filter :load_address, :only => :destroy
   before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
-
-  def new
-    @address = Address.new
-    render 'new'  
-  end
-  
-  def edit
-    super do |format|
-      format.js { render 'edit' }  
-    end  
-  end
 
   def create
     super do |format|

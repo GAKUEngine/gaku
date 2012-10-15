@@ -1,21 +1,19 @@
-#commute-method-types
-	#new-commute-method-type-form style='display:none'
+#admin-commute-method-types
+	#new-admin-commute-method-type style='display:none'
 	.row-fluid
 		.pull-left
-			h4.h4-vm.commute-method-types-count
-				= @commute_method_types.count != 0 ? print_count(@commute_method_types, t("commute_method_types.list")) : t('commute_method_types.list')	
+			h4.h4-vm.admin-commute-method-types-count
+				= print_count(@commute_method_types.count, t('commute_method_types.list'))	
 		.pull-right
-			=link_to ("<i class='icon-white icon-plus'></i> " + t('commute_method_types.add')).html_safe, new_admin_commute_method_type_path, :class => 'btn btn-primary', :id => 'new-commute-method-type-link', :remote => true
+			=ajax_link_to_new t('commute_method_types.new'), new_admin_commute_method_type_path, :id => 'new-admin-commute-method-type-link'
 	.row-fluid
 		span12
 	.row-fluid
 		.span12
-			table#commute-method-types-index.index.table.table-striped.table-bordered.table-condensed
+			table#admin-commute-method-types-index.index.table.table-striped.table-bordered.table-condensed
 			  thead
 			    tr
 			      th.btn-inverse =t('commute_method_types.plural')
 			      th.btn-inverse style="width:61px" =t('manage')
 			    tbody
 			    	=render :partial => 'commute_method_type', :collection => @commute_method_types, :as => :commute_method_type 
-
-#modal-dialogs

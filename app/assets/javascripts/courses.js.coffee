@@ -48,6 +48,6 @@ $ ->
 
   $("#cancel-course-class-group-link").click ->
     $("#new-course-class-group-link").show()
-    $("#new-course-class-group-form").html("")
+    $("#new-course-class-group-form").slideToggle()
 
   $(".chzn-select").chosen()

@@ -1,2 +1,2 @@
-$('.commute-method-types-count').html('<%= print_count(CommuteMethodType.all, t("commute_method_types.list")) %>');
+$('.admin-commute-method-types-count').html('<%= print_count(@commute_method_types_count - 1, t("commute_method_types.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

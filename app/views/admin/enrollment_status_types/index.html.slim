@@ -1,0 +1,18 @@
+#admin-enrollment-status-types
+  #new-admin-enrollment-status-type
+  .row-fluid
+    .pull-left
+      h4.h4-vm.admin-enrollment-status-types-count
+        = print_count(@enrollment_status_types.count, t('enrollment_status_types.list'))
+    .pull-right
+      =ajax_link_to_new t('enrollment_status_types.add'), new_admin_enrollment_status_type_path, :id => 'new-admin-enrollment-status-type-link'
+  .row-fluid
+    table#admin-enrollment-status-types-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('enrollment_status_types.singular')
+          th.btn-inverse =t('enrollment_status_types.active')
+          th.btn-info style="width:61px" =t('manage')
+      tbody
+        =render :partial => 'admin/enrollment_status_types/enrollment_status_type', :collection => @enrollment_status_types, :as => 'enrollment_status_type'
+    br/

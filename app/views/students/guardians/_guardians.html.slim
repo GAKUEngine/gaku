@@ -4,7 +4,7 @@
   .row-fluid
     .pull-left
       h4.mt-xs.mb-0.student-guardians-count
-        = print_count(@student.guardians, t('guardians.list'))
+        = print_count(@student.guardians.count, t('guardians.list'))
     .pull-right
       = ajax_link_to_new t('guardians.add'), new_student_guardian_path(@student), :id => "new-student-guardian-link"
   .row-fluid

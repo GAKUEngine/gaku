@@ -1,2 +1,2 @@
-$('.admin-contact-types-count').html('<%= print_count(ContactType.all, t("contact_types.list")) %>');
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+$('.admin-contact-types-count').html('<%= print_count(@contact_types_count - 1, t("contact_types.list")) %>');

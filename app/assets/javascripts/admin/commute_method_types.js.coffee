@@ -1,5 +1,5 @@
 $ ->
-	$('#new-commute-method-type-form').on 'click','#cancel-commute-method-type-link', (e)->
+	$('#new-admin-commute-method-type').on 'click','#cancel-admin-commute-method-type-link', (e)->
 		e.preventDefault()
-		$("#new-commute-method-type-link").show()
-		$("#new-commute-method-type-form").slideToggle().html('')
+		$("#new-admin-commute-method-type-link").show()
+		$("#new-admin-commute-method-type form").slideToggle().html('')

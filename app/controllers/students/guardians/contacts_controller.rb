@@ -3,15 +3,10 @@ class Students::Guardians::ContactsController < ApplicationController
 	inherit_resources
   actions :new, :update, :edit, :destroy
 
-	before_filter :load_guardian, :only => [:new, :create, :create_modal, :edit, :update, :destroy, :show]
-  before_filter :load_student, :only => [:new, :create, :create_modal, :edit, :update , :show]
+  respond_to :js, :html
 
-  def new
-    @contact = Contact.new
-    super do |format|
-      format.js { render 'new' }
-    end 
-  end
+	before_filter :load_guardian
+  before_filter :load_student
 
   def create
     @contact = @guardian.contacts.build(params[:contact])
@@ -34,12 +29,6 @@ class Students::Guardians::ContactsController < ApplicationController
     end
   end
 
-  def edit
-    super do |format|
-      format.js { render 'edit' }  
-    end  
-  end
-
   def update
     super do |format|
       @contacts = Contact.where(:guardian_id => params[:guardian_id])
@@ -47,7 +36,6 @@ class Students::Guardians::ContactsController < ApplicationController
       format.js { render 'update' }
     end  
   end
-
 
    def destroy
     super do |format|

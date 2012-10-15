@@ -12,4 +12,4 @@ $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash)
 	currentContact.find('.make-primary').addClass('btn-primary');
 <% end %>	
 
-$('.student-guardian-contacts-count').html('<%= print_count(@guardian.contacts, t("contacts.list")) %>');
+$('.student-guardian-contacts-count').html('<%= print_count(@guardian.contacts.count, t("contacts.list")) %>');

@@ -1,11 +1,12 @@
-= form_for(@course_group || CourseGroup.new, :remote => true) do |f|
-	.row-fluid
-	  .span12.well
-	    .row-fluid
-	      .span4
-	        = f.label :name, t("course_groups.name")
-	        = f.text_field :name, :class => "span12"
-			.row-fluid
-			  .span12
-			    = f.submit nil, :id => 'submit-course-group-button', :class => "span6 btn btn-primary"
-			    = link_to_back course_groups_path, :class => "span3 btn"
+= form_for @course_group, :remote => true do |f|
+  .row-fluid.mt-l
+    .span12.well
+      = f.label :name, t("course_groups.name")
+      = f.text_field :name, :class => "span12"
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t('course_groups.save'), :id => 'submit-course-group-button'
+          = link_to_cancel :id => 'cancel-course-group-link'
+
+= javascript_include_tag 'course_groups'
