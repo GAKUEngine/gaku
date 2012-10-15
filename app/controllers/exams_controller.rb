@@ -234,6 +234,7 @@ class ExamsController < ApplicationController
     gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
     gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
 
+
     @ranks = Hash.new { |hash,key| hash[key] = {} }
     rankLevels = [15, 20]
 
@@ -251,7 +252,9 @@ class ExamsController < ApplicationController
       scores.sort!().reverse!()
 
       # Grade Calculation -----↓
+      gradingMethod = 1
       gradePoint = 10
+
       gradeLevels_Deviation.each_with_index do |glevel, i|
         @students.each do |student|
           if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
