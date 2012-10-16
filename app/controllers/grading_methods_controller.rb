@@ -1,4 +1,5 @@
 class GradingMethodsController < ApplicationController
+
   def index
     @grading_methods = GradingMethod.all
   end
@@ -14,7 +15,7 @@ class GradingMethodsController < ApplicationController
   def create
     @grading_method = GradingMethod.new(params[:grading_method])
     if @grading_method.save
-      redirect_to @grading_method, notice: "Successfully created grading_method"
+      redirect_to grading_methods_path, notice: "Successfully created grading_method"
     else
       render :new
     end
