@@ -1,0 +1,9 @@
+tr
+  td= link_to syllabus.code, edit_syllabus_path(syllabus)
+  td= syllabus.name
+  td= syllabus.description
+  td= syllabus.credits
+  td
+    = link_to_show syllabus
+    = link_to_edit edit_syllabus_path(syllabus)
+    = ajax_link_to_delete syllabus
