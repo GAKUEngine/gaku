@@ -5,10 +5,12 @@
       .pull-left
         h3 = t("syllabuses.list")
       .pull-right
-        = link_to_new t("syllabuses.new"), new_syllabus_path, :id => "new-syllabus-link"
+        = link_to_new t("syllabuses.new"), '', :id => "new-syllabus-link"
     .row-fluid
       .span12
         hr/
+      #new-syllabus.hide
+        =render 'form'
     .row-fluid
       .span12.well
         table#syllabuses-index.index.table.table-striped.table-bordered.table-condensed
