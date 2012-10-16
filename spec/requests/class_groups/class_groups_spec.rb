@@ -38,7 +38,7 @@ describe 'ClassGroups' do
   it 'cancel creating', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
-    wait_until { page.find('#new-class-group form').visible? }
+    wait_until { page.find('#cancel-class-group-link').visible? }
 
     click_on 'cancel-class-group-link'
     wait_until { !page.find('#new-class-group form').visible? }
