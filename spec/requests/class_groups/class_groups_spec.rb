@@ -28,6 +28,9 @@ describe 'ClassGroups' do
   it 'not create a class group without name given' , :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
+    
+    wait_until { page.find('#submit-class-group-button').visible? }
+    
     click_button 'submit-class-group-button'
     page.should have_content ('field is required')
   end
@@ -35,7 +38,7 @@ describe 'ClassGroups' do
   it 'cancel creating', :js => true do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
-    wait_until { page.find('#new-class-group form').visible? }
+    wait_until { page.find('#cancel-class-group-link').visible? }
 
     click_on 'cancel-class-group-link'
     wait_until { !page.find('#new-class-group form').visible? }

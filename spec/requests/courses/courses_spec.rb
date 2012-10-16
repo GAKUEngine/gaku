@@ -66,11 +66,13 @@ describe 'Courses' do
       page.should have_content "biology2013"
     end
 
-    it "should edit a course from show" do
+    it "should edit a course from show", :js => true do
       within('#courses-index tbody tr') { find(".show-link").click }
       page.should have_content("Show")
       
       find('.edit-link').click
+      wait_until { find('#course-modal').visible? }
+      
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
