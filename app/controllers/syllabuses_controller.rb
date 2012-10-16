@@ -16,13 +16,14 @@ class SyllabusesController < ApplicationController
   def update
     super do |format|
       format.js
-    end  
+    end
   end
 
 
   private
-    def load_syllabus 
+    def load_syllabus
     	@syllabus = Syllabus.find(params[:id])
+    	@grading_methods = GradingMethod.all
     end
 
     def load_before_show
