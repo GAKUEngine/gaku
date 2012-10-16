@@ -21,6 +21,7 @@ class Exam < ActiveRecord::Base
   has_many :exam_syllabuses
   has_many :syllabuses, :through => :exam_syllabuses 
   belongs_to :grading_method
+  has_many :notes, as: :notable 
 
   has_many :attendances, :as => :attendancable
 
