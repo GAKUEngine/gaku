@@ -18,7 +18,8 @@ after :countries, :contact_types do
 
 	student.contacts << [student_email, student_home_phone, student_mobile_phone]
 	
-	note = Note.create(:title => 'Excellent', :content => 'Excellent student', :student_id => student.id)
+	note = Note.create(:title => 'Excellent', :content => 'Excellent student')
+	student.notes << note
 	
 	#guardian
 	guardian = Guardian.create(:name => Faker::Name.first_name, :surname => Faker::Name.last_name)
