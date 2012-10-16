@@ -8,6 +8,7 @@ class ClassGroupsController < ApplicationController
   respond_to :js, :html
 
   before_filter :load_before_index, :only => :index
+  before_filter :load_before_show, :only => :show
   before_filter :class_group,  :only => :destroy
 
   def index
@@ -37,12 +38,16 @@ class ClassGroupsController < ApplicationController
   
   private
 
+    def class_group
+      @class_group = ClassGroup.find(params[:id])
+    end
+
     def load_before_index
       @class_group = ClassGroup.new
     end
 
-    def class_group
-      @class_group = ClassGroup.find(params[:id])
+    def load_before_show
+      @notable = ClassGroup.find(params[:id])
     end
 
     def sort_column

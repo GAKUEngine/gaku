@@ -1,0 +1,21 @@
+.row-fluid
+    .pull-left
+      h4.mt-xs.mb-0 *{:class => [ @notable.class.to_s.downcase + '-notes-count' ]}
+        = print_count(@notable.notes, t('notes.list'))
+    .pull-right
+        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => "new-" + @notable.class.to_s.downcase + "-note-link"
+.row-fludi
+  hr
+.row-fludi
+  div *{:id => ['new-' + @notable.class.to_s.downcase + '-note'] }
+.row-fluid
+  .span12
+    table.index.table.table-striped.table-bordered.table-condensed *{:id => [ @notable.class.to_s.downcase + '-notes-index']}
+      thead
+        tr
+          th
+          th =t("notes.title")
+          th =t("notes.content")
+          th.btn-info style="width:100px" =t 'manage'
+      tbody
+        =render :partial => 'notes/note', :collection => @notable.notes, :as => :note

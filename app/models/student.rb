@@ -51,7 +51,7 @@ class Student < ActiveRecord::Base
 
   has_and_belongs_to_many :guardians
   has_many :contacts
-  has_many :notes
+  has_many :notes, as: :notable
 
   has_many :attendances
   has_many :enrollment_statuses

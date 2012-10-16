@@ -4,10 +4,10 @@ class CreateNotesTable < ActiveRecord::Migration
       t.string   :title
       t.text     :content
 
-      t.references :student
-      t.references :lesson_plan
+      t.belongs_to :notable, polymorphic: true
 
       t.timestamps
     end 
+    add_index :notes, [:notable_id, :notable_type]
   end
 end
