@@ -64,6 +64,7 @@ class CoursesController < ApplicationController
 
 	  def load_before_show
 		  @new_course_enrollment = CourseEnrollment.new
+      @notable = Course.find(params[:id])
 	  end
 
     def sort_column
