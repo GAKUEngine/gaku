@@ -36,5 +36,9 @@ module ApplicationHelper
     end 
   end
 
+  def render_flash
+    escape_javascript(render 'shared/flash', :flash => flash)
+  end
+
 end
 
