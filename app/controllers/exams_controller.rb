@@ -121,6 +121,7 @@ class ExamsController < ApplicationController
   def update
     super do |format|
       @exams = Exam.all
+      @notable = exam
       flash.now[:notice] = 'Exam was successfully updated.'
       format.js { render 'update'}
     end
