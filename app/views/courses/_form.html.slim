@@ -7,23 +7,17 @@
       ul
         - @course.errors.full_messages.each do |msg|
           li= msg
-  .row-fluid
+  .row-fluid.mt-l
     .span12.well
+      .span6
+        = course_form.label :syllabus_id, t("syllabus")
+        = course_form.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }, {}, :class => "span12"
+      .span6
+        = course_form.label :code, t('courses.code')
+        = course_form.text_field :code, :placeholder => t('courses.code_sample'), :class => "span12"
+
       .row-fluid
-        .span6
-          = course_form.label :syllabus_id, t("syllabus")
-          = course_form.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }, {}, :class => "span12"
-        .span6
-          = course_form.label :code, t('courses.code')
-          = course_form.text_field :code, :placeholder => t('courses.code_sample'), :class => "span12"
-  .row-fluid
-    .span12.well
-      - if params[:action] == 'edit'
-        .span6
-          = course_form.submit nil, :id => 'submit-course-button', :class => "span12 btn btn-primary"
-        = link_to t("Show"), @course, :id => 'show-course-link', :class => "span3 btn btn-success"
-        = link_to_cancel :class => "span3 btn btn-danger"
-      - else
-        .span9
-          = course_form.submit nil, :id => 'submit-course-button', :class => "span6 btn btn-primary"
-          = link_to_cancel :id => "cancel-course-link", :style => "min-height:0px"
+        .span12
+          .span6
+            = submit_button t('courses.save'), :id => 'submit-course-button'
+          = link_to_cancel :id => "cancel-course-link"

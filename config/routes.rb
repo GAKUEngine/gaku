@@ -6,6 +6,7 @@ GAKUEngine::Application.routes.draw do
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
+    resources :notes
     resources :students, :controller => 'class_groups/students' do
       collection do
         post :enroll_student
@@ -19,7 +20,8 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :courses do
-
+    
+    resources :notes
     resources :enrollments, :controller => 'courses/enrollments' do
       post :enroll_class_group, :on => :member
       post :enroll_student, :on => :collection
@@ -60,6 +62,7 @@ GAKUEngine::Application.routes.draw do
     resources :assignments, :controller => 'syllabuses/assignments'
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
+    resources :notes
   end
 
   resources :students do
@@ -84,7 +87,7 @@ GAKUEngine::Application.routes.draw do
       post :make_primary, :on => :member
     end
 
-    resources :notes, :controller => 'students/notes'
+    resources :notes#, :controller => 'students/notes'
     resources :course_enrollments, :controller => 'students/course_enrollments'
     resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
     resources :exams
@@ -162,6 +165,8 @@ GAKUEngine::Application.routes.draw do
     end
   end
 
-  resource :grading_methods
+  resource :grading_methods do
+    get 'index'
+  end
 
 end

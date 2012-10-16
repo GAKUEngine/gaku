@@ -4,5 +4,6 @@ $('#new-student-course-enrollment form select').val('');
 $('#new-student-course-enrollment').slideToggle();
 $('#new-student-course-enrollment-link').show();
 
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 $('#new-student-course-enrollment-tab-link').html('<%= print_count(@student.courses.count, t("courses.plural")) %>');
 $('.student-course-enrollments-count').html('<%= print_count(@student.courses.count, t("courses.list")) %>');

@@ -190,7 +190,7 @@ class ExamsController < ApplicationController
     @exams.each do |exam|
       @exam_averages[exam.id] = FixDigit @exam_averages[exam.id] / @students.length, 4
       if exam.use_weighting
-        @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
+        @exam_weight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
 
@@ -228,6 +228,7 @@ class ExamsController < ApplicationController
     gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
     gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
 
+
     @ranks = Hash.new { |hash,key| hash[key] = {} }
     rankLevels = [15, 20]
 
@@ -245,7 +246,9 @@ class ExamsController < ApplicationController
       scores.sort!().reverse!()
 
       # Grade Calculation -----↓
+      gradingMethod = 1
       gradePoint = 10
+
       gradeLevels_Deviation.each_with_index do |glevel, i|
         @students.each do |student|
           if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
@@ -276,7 +279,20 @@ class ExamsController < ApplicationController
         if @grades[exam.id][socre[1]] == 3
           @ranks[exam.id][score[1]] == 2
         elsif @grades[exam.id][socre[1]] < 3
-          @ranks[exam.id][score[1]] == 1
+     respond_to do |format|
+      format.json { render :json => {:student_total_scores => @student_total_scores,
+                                     :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
+                                     :course => @course,
+                                     :exam_averages => @exam_averages,
+                                     :deviation => @deviation,
+                                     :students => Student.decrypt_student_fields(@students),
+                                     :grades => @grades,
+                                     :ranks => @ranks
+                                     }}
+
+      format.html { render "exams/grading" }
+    end
+         @ranks[exam.id][score[1]] == 1
         end
       end
     end

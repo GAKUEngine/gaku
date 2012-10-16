@@ -54,7 +54,7 @@ describe 'Note' do
 
   context "edit and delete" do 
     before do 
-      @note = create(:note, :student_id => @student)
+      @note = create(:note, :notable => @student)
       visit student_path(@student)
     end
 

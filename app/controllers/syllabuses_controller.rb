@@ -34,6 +34,7 @@ class SyllabusesController < ApplicationController
       @exam = Exam.new
       @exam.exam_portions.build
       @syllabus.assignments.build
+      @notable = @syllabus
     end
 
 end

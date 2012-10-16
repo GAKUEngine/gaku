@@ -2,3 +2,4 @@ $('#new-student').slideToggle();
 $('#new-student form')[0].reset();
 $('#students-index tbody').append('<%= render_js_partial("student", {:student => @student}) %>');
 $('#new-student-link').show();
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

@@ -3,5 +3,6 @@ $('#new-class-group-course-link').show();
 
 $('table#courses-index tbody').append('<%= render_js_partial("course", {:enrollment => @class_group_course_enrollment}) %>');
 
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 $('#class-group-courses-tab-link').html('<%= print_count(@class_group.courses.count, t("courses.courses")) %>');
 $('.courses-count').html('<%= print_count(@class_group.courses.count, t("courses.list")) %>');

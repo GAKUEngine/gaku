@@ -7,21 +7,39 @@ describe 'Courses' do
     @syllabus = create(:syllabus, :name => 'biology2012', :code => 'bio')
     visit courses_path
   end
+  
+  context 'new' do 
+    before do 
+      click_link "new-course-link"
+      wait_until { find('#new-course').visible? }
+    end
 
-  it "create new course", :js => true do 
-    click_link "new-course-link"
+    it "create new course", :js => true do
+      Course.count.should eq 0 
+      
+      fill_in 'course_code', :with => 'SUMMER2012'
+      select "#{@syllabus.name}", :from => 'course_syllabus_id'
+      click_button 'submit-course-button'
 
-    fill_in 'course_code', :with => 'SUMMER2012'
-    page.select "#{@syllabus.name}", :from => 'course_syllabus_id'
-    click_button 'submit-course-button'
+      wait_until { !page.find('#new-course').visible? }
+      page.should have_content "was successfully created"
+      page.should have_content("#{@syllabus.name}")
+      Course.count.should eq 1 
+    end
 
-    page.should have_content "was successfully created"
-    page.should have_content("#{@syllabus.name}")
+    it 'should cancel creating', :js => true do
+      click_link 'cancel-course-link'
+      wait_until { !page.find('#new-course').visible? }
+
+      click_link "new-course-link"
+      wait_until { find('#new-course').visible? }
+    end
+
+    pending 'not create without required fields'
+
   end
 
-  pending 'not create without required fields'
-
-  context "with course added" do
+  context "existing course" do
     before do
       @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
       @course = create(:course, :syllabus => @syllabus) 

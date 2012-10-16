@@ -1,13 +1,9 @@
 $ ->
-  $('#new-class-group-link').on 'click', (event) ->
-    event.preventDefault()
-    $(this).hide()
-    $('#new-class-group form').slideToggle()
-
   $('#new-class-group form').validationEngine()
     
-  $("#cancel-class-group-link").click ->
-    $('#new-class-group form').slideToggle()
+  $("#cancel-class-group-link").on 'click', (event)->
+    event.preventDefault()
+    $('#new-class-group').slideToggle()
     $("#new-class-group-link").show()
 
   $("#cancel-course-link").click ->

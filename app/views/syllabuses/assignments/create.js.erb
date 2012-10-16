@@ -4,3 +4,4 @@ $('#new-syllabus-assignment-form form').each (function(){
 });
 $('#syllabus-assignments-index tbody').append('<%= render_js_partial("syllabuses/assignments/assignment", {:assignment => @syllabus.assignments.last}) %>');
 $('#syllabus-assignments-count').html('<%= @syllabus.assignments.count %>');
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

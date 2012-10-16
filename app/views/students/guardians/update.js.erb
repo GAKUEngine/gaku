@@ -1,2 +1,3 @@
 $('div#guardian-<%= @guardian.id %>').html('<%= render_js_partial("guardian_unit", {:guardian => @guardian}) %>');
 $('#edit-guardian-modal').modal('hide');
+$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");

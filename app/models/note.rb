@@ -12,8 +12,7 @@
 #
 
 class Note < ActiveRecord::Base
-  belongs_to :student
-  belongs_to :lesson_plan
+  belongs_to :notable, polymorphic: true
   
-  attr_accessible :title, :content, :student_id
+  attr_accessible :title, :content
 end
