@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
   before_filter :load_before_show,  :only => :show
   before_filter :class_groups,      :only => [:new, :edit]
   before_filter :student,           :only => [:edit, :update, :destroy]
+  before_filter :students_count,    :only => [:create, :destroy]
   
   def index
     @search = Student.search(params[:q])
@@ -80,7 +81,7 @@ class StudentsController < ApplicationController
     if @student.destroy && !request.xhr?
       flash[:notice] = "Student was successfully destroyed."  
     end
-    render :nothing => true
+    redirect_to students_path
   end
 
   def autocomplete_search
@@ -118,7 +119,10 @@ class StudentsController < ApplicationController
 
     def student
       @student = Student.find(params[:id])
+    end
 
+    def students_count
+      @students_count = Student.count
     end
 
     def sort_column

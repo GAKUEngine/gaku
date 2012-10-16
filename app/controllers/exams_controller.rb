@@ -190,7 +190,7 @@ class ExamsController < ApplicationController
     @exams.each do |exam|
       @exam_averages[exam.id] = FixDigit @exam_averages[exam.id] / @students.length, 4
       if exam.use_weighting
-        @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
+        @exam_weight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
 

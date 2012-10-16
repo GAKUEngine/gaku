@@ -7,7 +7,7 @@
 .row-fludi
   hr
 .row-fludi
-  div *{:id => ['new-' + @notable.class.to_s.downcase + '-note'] }
+  div *{:id => ['new-note'], :class => 'hide' }
 .row-fluid
   .span12
     table.index.table.table-striped.table-bordered.table-condensed *{:id => [ @notable.class.to_s.downcase + '-notes-index']}

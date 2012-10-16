@@ -27,7 +27,8 @@ describe 'CourseGroup Courses' do
 
   it 'should not add a course if course code is empty', :js => true do
     click_link 'new-course-group-enrollment-link'
-    wait_until { page.find('#new-course-group-enrollment form').visible? }
+    
+    wait_until { find('#submit-course-group-enrollment-button').visible? }
     click_button 'submit-course-group-enrollment-button'
 
     wait_until { page.has_content?('Course can\'t be blank') }
@@ -35,7 +36,8 @@ describe 'CourseGroup Courses' do
 
   it 'should cancel adding', :js => true do
     click_link 'new-course-group-enrollment-link'
-    wait_until { page.find('#new-course-group-enrollment').visible? }
+
+    wait_until { find('#cancel-course-group-enrollment-link').visible? }
     click_link 'cancel-course-group-enrollment-link'
     wait_until { !page.find('#new-course-group-enrollment').visible? }
 

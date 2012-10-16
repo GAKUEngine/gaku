@@ -21,6 +21,7 @@ class Course < ActiveRecord::Base
   has_many :class_group_course_enrollments, :dependent => :destroy
   has_many :class_groups, :through => :class_group_course_enrollments
   
+  has_many :notes, as: :notable 
   has_many :exam_schedules
   belongs_to :syllabus
   belongs_to :class_group
