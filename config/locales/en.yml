@@ -62,6 +62,8 @@ en:
     attachment_recovered: 'Attachment recovered'
     asset_type: 'Asset type'
   addresses:
+    created: 'Address was successfully created.'
+    destroyed: 'Address was successfully destroyed.'
     addresses: "Addresses"
     singular: "Address"
     new: "New Address"
