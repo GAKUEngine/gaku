@@ -153,7 +153,10 @@ describe 'Student' do
     before do 
       visit students_path
       click_link "new-student-link"
-      wait_until { page.find('#new-student').visible? }
+      wait_until do 
+        find('#new-student').visible? 
+        find('#submit-student-button').visible?
+      end
     end
 
     it "should create new student" do 
@@ -168,6 +171,14 @@ describe 'Student' do
       page.should have_content("John")
       within('.students-count') { page.should have_content('Students list(1)') }
       Student.count.should eq 1
+    end
+        
+    it 'should error if there are empty fields', :js => true do 
+      click_button "submit-student-button"
+      wait_until do
+        page.should have_selector('div.student_surnameformError')
+        page.should have_selector('div.student_nameformError') 
+      end
     end
 
     it 'should cancel creating' do 
