@@ -14,7 +14,7 @@ describe 'Address' do
 
       click_link 'new-student-address-tab-link'
       click_link 'new-student-address-link'
-      wait_until { find("#new-student-address form").visible? }
+      wait_until { find("#submit-student-address-button").visible? }
     end
 
     it 'should add and show student address', :js => true do
