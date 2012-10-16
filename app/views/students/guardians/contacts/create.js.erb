@@ -1,6 +1,6 @@
 $('#student-guardian-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
 $("#new-student-guardian-contact-link").show();
-$('#new-student-guardian-contact form').slideToggle();
+$('#new-student-guardian-contact').slideToggle();
 $('#new-student-guardian-contact form')[0].reset();
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 
