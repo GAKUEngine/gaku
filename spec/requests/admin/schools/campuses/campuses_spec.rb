@@ -25,7 +25,8 @@ describe 'Campuses' do
       @school.campuses.count.should eq 2
     end 
 
-    pending 'should cancel creating', :js => true do 
+    it 'should cancel creating', :js => true do
+      wait_until { !page.find('#cancel-admin-school-campus-link').visible? }
       click_link 'cancel-admin-school-campus-link'
 
       wait_until { !page.find('#new-admin-school-campus').visible? }
