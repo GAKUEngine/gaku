@@ -11,7 +11,7 @@ describe 'Courses' do
   context 'new' do 
     before do 
       click_link "new-course-link"
-      wait_until { find('#new-course').visible? }
+      wait_until { find('#submit-course-button').visible? }
     end
 
     it "create new course", :js => true do

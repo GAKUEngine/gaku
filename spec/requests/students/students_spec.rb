@@ -105,16 +105,19 @@ describe 'Student' do
     end
     
     it 'should delete an existing student', :js => true do
-      visit student_path(@student)
-      student_count = Student.all.count
-      page.should have_content("#{@student.name}")
+      visit student_path(@student2)
+      student_count = Student.count
+      page.should have_content("#{@student2.name}")
       find('#delete-student-link').click
       
       within(".delete_modal") { click_on "Delete" }
       page.driver.browser.switch_to.alert.accept
       
-      page.should_not have_content("#{@student.name}")
-      Student.all.count.should == student_count - 1
+      wait_until { page.should have_content('successfully destroyed') }
+      page.should_not have_content("#{@student2.name}")
+      within('.students-count') { page.should_not have_content('Students list(#{student_count - 1})') }
+      current_path.should eq students_path
+      Student.count.should eq(student_count - 1)
     end
 
     it 'should enroll to class', :js => true do 
@@ -146,26 +149,44 @@ describe 'Student' do
 
   end
 
-  context "new student", :js => true do 
+  context "new", :js => true do 
     before do 
       visit students_path
       click_link "new-student-link"
-      wait_until { page.find('#new-student').visible? }
+      wait_until do 
+        find('#new-student').visible? 
+        find('#submit-student-button').visible?
+      end
     end
 
     it "should create new student" do 
+      Student.count.should eq 0
+      within('.students-count') { page.should have_content('Students list') }
+
       fill_in "student_name", :with => "John"
       fill_in "student_surname", :with => "Doe"
       click_button "submit-student-button"
 
       wait_until { !page.find('#new-student').visible? }
       page.should have_content("John")
-      Student.all.count.should eq 1
+      within('.students-count') { page.should have_content('Students list(1)') }
+      Student.count.should eq 1
+    end
+        
+    it 'should error if there are empty fields', :js => true do 
+      click_button "submit-student-button"
+      wait_until do
+        page.should have_selector('div.student_surnameformError')
+        page.should have_selector('div.student_nameformError') 
+      end
     end
 
     it 'should cancel creating' do 
       click_link 'cancel-student-link'
       wait_until { !page.find('#new-student').visible? }
+
+      click_link "new-student-link"
+      wait_until { page.find('#new-student').visible? }
     end
   end
 

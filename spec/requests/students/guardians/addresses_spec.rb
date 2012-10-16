@@ -19,7 +19,7 @@ describe 'Guardian Addresses' do
     before do 
       find('.show-link').click
       click_link 'new-student-guardian-address-link'
-      wait_until { find('#new-student-guardian-address form').visible? }
+      wait_until { find('#submit-student-guardian-address-button').visible? }
     end
 
     it "should add and show address to a student guardian", :js => true do 
