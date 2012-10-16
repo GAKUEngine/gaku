@@ -1,10 +1,10 @@
 $('#<%= notable_resource %>-notes-index tbody').append('<%= render_js_partial("note", {:note => @notable.notes.last}) %>');
-$('#new-<%= notable_resource %>-note form').each(function() {
+$('#new-note form').each(function() {
 	this.reset();
 });
 
-$('#new-<%= notable_resource %>-note form').slideToggle();
-$('#new-<%= notable_resource %>-note-link').show();
+$('#new-note').slideToggle();
+$('#new-note-link').show();
 
 $('#new-<%= notable_resource %>-note-tab-link').html('<%= print_count(@notable.notes, t('notes.notes')) %>');
 $('.<%= notable_resource %>-notes-count').html('<%= print_count(@notable.notes, t('notes.list')) %>');
