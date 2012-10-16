@@ -26,8 +26,8 @@ describe 'Schools' do
     it 'should cancel creating school', :js => true do 
     	School.count.should eq 0
       click_link 'new-admin-school-link'
-
-      wait_until { page.find('#new-admin-school').visible? }
+      
+      wait_until { page.find('#cancel-admin-school-link').visible? }
       click_link 'cancel-admin-school-link'
 
       wait_until { !page.find('#new-admin-school').visible? }
