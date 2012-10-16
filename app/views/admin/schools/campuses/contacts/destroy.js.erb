@@ -2,5 +2,5 @@
 	$('#admin-school-campus-contacts-index').find('#contact-<%= @campus.contacts.first.id %> .make-primary').addClass('btn-primary');
 <% end %>
 
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 $('.admin-school-campus-contacts-count').html('<%= print_count(@campus.contacts.count, t("contacts.list")) %>');

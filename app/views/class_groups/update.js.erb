@@ -1,6 +1,6 @@
 $('#class-group-modal').modal('hide');
 $('#class-group-modal').remove();
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 
 
 

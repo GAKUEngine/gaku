@@ -2,7 +2,7 @@ $('#class-group-semesters-index tbody').append('<%= render_js_partial("semester"
 
 $('#new-class-group-semester-link').show();
 
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 $('#class-group-semesters-tab-link').html('<%= print_count(@class_group.semesters.count, t("semesters.semesters")) %>');
 $('.class-group-semesters-count').html('<%= print_count(@class_group.semesters.count, t("semesters.list")) %>');
 

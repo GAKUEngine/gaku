@@ -5,5 +5,5 @@
 	$('#add-existing-exam-form').slideToggle();
 
   $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
-	$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+	showNotice("<%= render_flash %>");
 <% end %>

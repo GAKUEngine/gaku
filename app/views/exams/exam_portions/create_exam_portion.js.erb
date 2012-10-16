@@ -2,7 +2,7 @@ $('#exam_exam_portions_form').slideToggle();
 $('#exam_exam_portions_form form').each (function(){
   this.reset();
 });
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 
 $('#exam-exam_portions table tbody').append('<%= render_js_partial("exams/exam_portions/show", {:exam_portion => @exam.exam_portions.last}) %>');
 

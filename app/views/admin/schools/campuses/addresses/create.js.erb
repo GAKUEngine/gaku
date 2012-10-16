@@ -3,3 +3,5 @@ $('#admin-school-campus-addresses-index tbody').append('<%= render_js_partial("a
 $('#new-admin-school-campus-address-link').show()
 $('#new-admin-school-campus-address').slideToggle();
 $('#new-admin-school-campus-address form')[0].reset();
+
+showNotice("<%= render_flash %>")

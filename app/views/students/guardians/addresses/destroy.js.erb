@@ -3,4 +3,4 @@
 <% end %>
 
 $('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses.count, t('addresses.list')) %>');
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
