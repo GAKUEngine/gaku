@@ -1,9 +1,9 @@
 .row-fluid
     .pull-left
       h4.mt-xs.mb-0 *{:class => [ @notable.class.to_s.downcase + '-notes-count' ]}
-        = print_count(@notable.notes, t('notes.list'))
-    .pull-right#new-note-button
-        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => "new-note-link"
+        = print_count(@notable.notes.count, t('notes.list'))
+    .pull-right
+        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => "new-" + @notable.class.to_s.downcase + "-note-link"
 .row-fludi
   hr
 .row-fludi
