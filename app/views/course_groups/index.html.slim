@@ -2,18 +2,17 @@
   .span1
   .span10
     .row-fluid
-      #new-course-group
       .pull-left 
         h3 = t("course_groups.list")
       .pull-right
-      	#new-course-group
-        	= ajax_link_to_new t("course_groups.new"), new_course_group_path, :id => "new-course-group-link"
+        = ajax_link_to_new t("course_groups.new"), new_course_group_path, :id => "new-course-group-link"
     .row-fluid
+      #course-group-form-errors
+      #new-course-group.hide
+        =render 'form'
       .span12
         hr/
     .row-fluid
       .span12.well
         #course-groups-index
-          =render 'course_groups', :course_groups => @course_groups
-    .row-fluid
-      #course-group-form-errors
+          =render 'course_groups', :course_groups => @course_groups    

@@ -7,6 +7,8 @@ class CourseGroupsController < ApplicationController
 
   respond_to :js, :html
 
+  before_filter :load_before_index, :only => [:index]
+
   before_filter :course_group_enrollment,  :only => [:show]
   before_filter :course_groups, :only => [:update]
 
@@ -47,7 +49,10 @@ class CourseGroupsController < ApplicationController
     end
   end
 
-  private
+	private
+    def load_before_index
+      @course_group = CourseGroup.new
+    end
 
     def course_group_enrollment
       @course_group_enrollment = CourseGroupEnrollment.first
