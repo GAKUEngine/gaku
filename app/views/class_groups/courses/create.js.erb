@@ -1,4 +1,4 @@
-$('#new-class-group-course form').slideToggle();
+$('#new-class-group-course').slideToggle();
 $('#new-class-group-course-link').show();
 
 $('table#courses-index tbody').append('<%= render_js_partial("course", {:enrollment => @class_group_course_enrollment}) %>');

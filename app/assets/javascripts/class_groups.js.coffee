@@ -6,10 +6,10 @@ $ ->
     $('#new-class-group').slideToggle()
     $("#new-class-group-link").show()
 
-  $("#cancel-course-link").click ->
+  $("#cancel-course-link").on 'click', (e)->
+    event.preventDefault()
     $("#new-class-group-course-link").show()
-    $("#new-class-group-course form").slideToggle()
-    false    #prevent page from reloading
+    $("#new-class-group-course").slideToggle()
 
   $("#cancel-class-group-semester-link").on 'click', (event)->
     event.preventDefault()
