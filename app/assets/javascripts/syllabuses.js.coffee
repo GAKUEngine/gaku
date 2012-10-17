@@ -4,25 +4,44 @@
 $ ->
   $('#new-syllabus-exam-link').on 'click', (event) ->
     event.preventDefault()
-    $('#new-syllabus-exam-form').slideToggle()
+    $(@).hide()
+    $('#add-existing-exam').slideUp ->
+      $('#new-syllabus-exam').slideToggle() 
+      $('#add-existing-exam-link').show()
 
+  $('#add-existing-exam-link').on 'click', (event) ->
+    event.preventDefault()
+    $(@).hide()
+    $('#new-syllabus-exam').slideUp ->
+      $('#add-existing-exam').slideToggle()
+      $('#new-syllabus-exam-link').show()
+  
   $('#new-syllabus-assignment').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slideToggle()
 
-  $('#add-existing-exam-link').on 'click', (event) ->
-    event.preventDefault()
-    $('#add-existing-exam-form').slideToggle()
 
-  $('#new-syllabus-exam-form form').validationEngine()
+  $('#new-syllabus-exam form').validationEngine()
 
   $('#new-syllabus form').validationEngine()
 
   $('#new-syllabus-link').click (e)->
     e.preventDefault()
-    $('#new-syllabus-link').hide()
+    $(@).hide()
     $('#new-syllabus').slideToggle()
+    
   
-  $('#cancel-syllabus-link').click ->
+  $('#cancel-syllabus-link').on 'click', (event)->
+    event.preventDefault()
     $('#new-syllabus').slideToggle()
     $('#new-syllabus-link').show()
+
+  $('#cancel-exam-syllabus-link').on 'click', (event)->
+    event.preventDefault()
+    $('#add-existing-exam').slideToggle()
+    $('#add-existing-exam-link').show()
+
+  $('#cancel-new-exam-syllabus-link').on 'click', (event) ->
+    event.preventDefault()
+    $('#new-syllabus-exam').slideToggle()
+    $('#new-syllabus-exam-link').show()
