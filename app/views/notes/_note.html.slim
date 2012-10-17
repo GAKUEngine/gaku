@@ -1,0 +1,4 @@
+-unless note.nil? or note.new_record? or !note
+	tr id="note-#{note.id}"
+	  = render 'shared/fields/note_fields', :note => note
+	  = render 'notes/buttons', :note => note

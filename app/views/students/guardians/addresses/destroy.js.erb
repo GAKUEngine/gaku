@@ -3,3 +3,4 @@
 <% end %>
 
 $('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses.count, t('addresses.list')) %>');
+showNotice("<%= render_flash %>");

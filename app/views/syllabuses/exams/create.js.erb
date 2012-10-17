@@ -6,4 +6,4 @@ $('#new-syllabus-exam-form form').each (function(){
 $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
 $('#syllabus-exams-count').html('<%= @syllabus.exams.count %>');
 $('.no-exam-msg').remove();
-$('.flash-error').html('<%=  render_js_partial("shared/flash") %>');
+showNotice("<%= render_flash %>");

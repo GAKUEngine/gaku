@@ -19,6 +19,7 @@ class ClassGroup < ActiveRecord::Base
   has_many :courses, :through => :class_group_course_enrollments
   
   has_many :semesters
+  has_many :notes, as: :notable 
   
   attr_accessible :name, :grade, :homeroom
 

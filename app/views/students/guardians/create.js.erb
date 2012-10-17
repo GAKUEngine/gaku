@@ -5,3 +5,4 @@ $('#new-student-guardian-link').show();
 
 $('#new-student-guardian-tab-link').html('<%= print_count(@student.guardians.count, t("guardians.guardians")) %>');
 $('.student-guardians-count').html('<%= print_count(@student.guardians.count, t("guardians.list")) %>');
+showNotice("<%= render_flash %>");

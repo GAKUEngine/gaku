@@ -1,0 +1,25 @@
+#admin-school-campus-addresses
+  #new-admin-school-campus-address.hide
+  .row-fluid
+    .pull-left
+      h4.h4-vm
+        = t('addresses.singular')
+    .pull-right
+      = ajax_link_to_new t('addresses.add'), new_admin_school_campus_address_path(@school, @campus), :id => 'new-admin-school-campus-address-link' if @campus.address.nil?
+
+  .row-fluid
+    .span12
+      table#admin-school-campus-addresses-index.index.table.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.btn-inverse =t 'addresses.title'
+              th.btn-inverse =t 'addresses.country'
+              th.btn-inverse =t 'addresses.zipcode'
+              th.btn-inverse =t 'addresses.state'
+              th.btn-inverse =t 'addresses.city'
+              th.btn-inverse =t 'addresses.address1'
+              th.btn-inverse =t 'addresses.address2'
+              th.btn-info style="width:61px" =t 'manage'
+          tbody
+            =render :partial => 'admin/schools/campuses/addresses/address', :locals => {:address => @campus.address}
+br/   

@@ -1,5 +1,8 @@
 $('#class-group-modal').modal('hide');
 $('#class-group-modal').remove();
+showNotice("<%= render_flash %>");
+
+
 
 var currentClassGroupGrade = $(".class-group-<%= @class_group.id %> .grade");
 currentClassGroupGrade.html("<%= @class_group.grade %>");

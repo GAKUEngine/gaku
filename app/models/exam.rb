@@ -16,16 +16,17 @@
 
 class Exam < ActiveRecord::Base
 
-  has_many :exam_scores 
+  has_many :exam_scores
   has_many :exam_portions
   has_many :exam_portion_scores, :through => :exam_portions
   has_many :exam_syllabuses
-  has_many :syllabuses, :through => :exam_syllabuses 
+  has_many :syllabuses, :through => :exam_syllabuses
   belongs_to :grading_method
+  has_many :notes, as: :notable 
 
   has_many :attendances, :as => :attendancable
 
-  attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes
+  attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes, :grading_method_id
 
   accepts_nested_attributes_for :exam_portions
 
@@ -42,15 +43,15 @@ class Exam < ActiveRecord::Base
     self.exam_portions.each do |portion|
       maxScore += portion.max_score
     end
-    
+
     return maxScore
   end
 
   private
     def build_default_exam_portion
-      if self.exam_portions.any? 
+      if self.exam_portions.any?
         exam_portion = self.exam_portions.first
-      else 
+      else
         exam_portion = self.exam_portions.create(:name => self.name)
       end
 

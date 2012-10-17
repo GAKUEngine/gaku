@@ -12,12 +12,11 @@ describe 'Guardian' do
     before do 
       click_link 'new-student-guardian-tab-link'
       click_link 'new-student-guardian-link'
-      wait_until { find('#new-student-guardian form').visible? } 
+      wait_until { find('#submit-student-guardian-button').visible? } 
     end
 
     it "should add and show student guardian", :js => true do
       @student.guardians.size.should eql(0)
-      !page.find('#new-student-guardian-link').visible?
 
       #required 
       fill_in "guardian_surname", :with => "Doe"

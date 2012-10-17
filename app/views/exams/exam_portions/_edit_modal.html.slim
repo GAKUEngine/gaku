@@ -1,6 +1,6 @@
 - model = @exam_portion || ExamPortion.new
 - model_class = model.class
-.modal.hide#editExamPortionModal wmode="opaque"
+.modal.hide#edit-exam-portion-modal wmode="opaque"
   
   = form_for([@exam, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |ep_form| 
 

@@ -16,7 +16,8 @@ html
     = render :partial => "shared/menubar"
     .container-fluid
       #notice
-        = render :partial => "shared/flash"
+        -unless flash.empty?
+          = render "shared/flash", :flash => flash
       #errors
       = yield
       = javascript_include_tag "gakuengine"

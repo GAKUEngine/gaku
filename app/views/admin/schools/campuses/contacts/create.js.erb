@@ -10,6 +10,8 @@
 	$("#new-admin-school-campus-contact form")[0].reset();
 	$('#new-admin-school-campus-contact-form-errors').slideToggle();
 
+	showNotice("<%= render_flash %>")
+	
 	<%- if @contact.is_primary? %>
 		$('.campus-contact').each(function() {
 			$(this).children('td.primary-contact').html('');

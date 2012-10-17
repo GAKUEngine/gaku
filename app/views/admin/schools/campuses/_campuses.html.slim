@@ -1,10 +1,11 @@
 #admin-school-campuses
   .row-fluid
+    #new-admin-school-campus.hide
     .pull-left
       h4.h4-vm.admin-school-campuses-count
         = print_count(@school.campuses.count, t('campuses.list'))
     .pull-right
-      = link_to_new t('campuses.add'), new_admin_school_campus_path(@school), :id => 'new-admin-school-campus-link'
+      = ajax_link_to_new t('campuses.add'), new_admin_school_campus_path(@school), :id => 'new-admin-school-campus-link'
 
   .row-fluid
     .span12
@@ -17,6 +18,3 @@
               th.btn-info style="width:90px" =t 'manage'
           tbody
             =render :partial => 'admin/schools/campuses/campus', :collection => @school.campuses, :as => 'campus'
-br/   
-#modal-dialogs
-#new-admin-school-campus

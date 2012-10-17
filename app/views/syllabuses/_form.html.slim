@@ -1,4 +1,4 @@
-= form_for(@syllabus) do |syllabus_form|
+= form_for @syllabus, :remote => true do |syllabus_form|
   - if @syllabus.errors.any?
     .alert.alert-error
       strong
@@ -27,10 +27,10 @@
     .span12.well
       - if params[:action] == 'edit'
         .span6
-          = syllabus_form.submit nil, :id => 'submit-syllabus-button', :class => "span12 btn btn-primary"
+          = syllabus_form.submit nil, :url => syllabus_path(@syllabus) , :id => 'submit-syllabus-button', :class => "span6 btn btn-primary"
         = link_to t("Show"), @syllabus, :id => 'show-syllabus-link', :class => "span3 btn btn-success"
         = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger"
       - else
         .span9
-          = syllabus_form.submit nil, :id => 'submit-syllabus-button', :class => "span12 btn btn-primary"
-        = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger"
+          = syllabus_form.submit nil , :id => 'submit-syllabus-button', :class => "span6 btn btn-primary"
+          = link_to_cancel :id => "cancel-syllabus-link"

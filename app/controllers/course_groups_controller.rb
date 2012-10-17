@@ -1,79 +1,73 @@
 class CourseGroupsController < ApplicationController
-	
-	helper_method :sort_column, :sort_direction
+  
+  helper_method :sort_column, :sort_direction
 
-	inherit_resources
+  inherit_resources
+  actions :show, :new, :create, :update, :edit, :destroy
 
-	before_filter :load_before_show, :only => [:show]
+  respond_to :js, :html
 
-	def new
-    @course_group = CourseGroup.new
-    render 'new'  
-  end
+  before_filter :load_before_index, :only => [:index]
 
-	def index
+  before_filter :course_group_enrollment,  :only => [:show]
+  before_filter :course_groups, :only => [:update]
+
+  def index
     @course_groups = CourseGroup.order( sort_column + " " + sort_direction)
   end
 
-	def create
-		super do |format|
-			@course_groups = CourseGroup.all
-			flash.now[:notice] = t('course_groups.course_group_created')
-			format.js { render 'create'}
-		end
-	end
+  def create
+    super do |format|
+      course_groups
+      flash.now[:notice] = t('course_groups.course_group_created')
+      format.js { render 'create' }
+    end
+  end
 
-	def edit
-		super do |format|
-			format.js { render 'edit' }
-		end
-	end
-
-	def update
-		super do |format|
-			@course_groups = CourseGroup.all
-			format.js { render 'update'}
-		end
-	
-	end
-
-	def destroy
-		@course_group = CourseGroup.unscoped.find(params[:id])
-		@course_group.destroy
-		flash.now[:notice] = t('course_groups.course_group_delete')
-		respond_to do |format|
-    	format.js { render 'destroy' }
-  	end
+  def destroy
+    @course_group = CourseGroup.unscoped.find(params[:id])
+    @course_group.destroy
+    flash.now[:notice] = t('course_groups.course_group_delete')
+    respond_to do |format|
+      format.js { render 'destroy' }
+    end
   end
 
   def soft_delete
-   	@course_group = CourseGroup.find(params[:id])
-  	@course_group.update_attribute('is_deleted', 'true')
-  	redirect_to course_groups_path, :notice => t('course_groups.course_group_delete')
+    @course_group = CourseGroup.find(params[:id])
+    @course_group.update_attribute('is_deleted', 'true')
+    redirect_to course_groups_path, :notice => t('course_groups.course_group_delete')
   end
 
   def recovery
-  	@course_group = CourseGroup.unscoped.find(params[:id])
-  	@course_group.update_attribute('is_deleted', 'false')
-  	@course_groups = CourseGroup.where(:is_deleted => true)
-  	flash.now[:notice] = t('course_groups.course_group_recover')
-  	respond_to do |format|
-  		format.js { render 'recovery' } 
-  	end
+    @course_group = CourseGroup.unscoped.find(params[:id])
+    @course_group.update_attribute('is_deleted', 'false')
+    @course_groups = CourseGroup.where(:is_deleted => true)
+    flash.now[:notice] = t('course_groups.course_group_recover')
+    respond_to do |format|
+      format.js { render 'recovery' } 
+    end
   end
 
 	private
+    def load_before_index
+      @course_group = CourseGroup.new
+    end
 
-	def load_before_show
-		@course_group_enrollment = CourseGroupEnrollment.first
-	end
+    def course_group_enrollment
+      @course_group_enrollment = CourseGroupEnrollment.first
+    end
 
-	def sort_column
-    ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
+    def course_groups
+      @course_groups = CourseGroup.all
+    end
 
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-  end
+    def sort_column
+      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
   
 end
