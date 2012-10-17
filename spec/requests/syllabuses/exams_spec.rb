@@ -4,6 +4,7 @@ describe 'Syllabus Exams' do
   stub_authorization!
 
   before do
+    @exam = create(:exam)
     @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
     visit syllabuses_path
   end
@@ -13,7 +14,7 @@ describe 'Syllabus Exams' do
       within('table.index tr:nth-child(2)') { find(".show-link").click }
       page.should have_content("No Exams")
       click_link 'new-syllabus-exam-link'
-      wait_until { find('#new-syllabus-exam-form').visible? }
+      wait_until { find('#new-syllabus-exam').visible? }
     end
 
     it "should add and show exams", :js => true  do
@@ -23,7 +24,7 @@ describe 'Syllabus Exams' do
       fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
       click_button 'submit-syllabus-exam-button'
 
-      wait_until { !page.find('#new-syllabus-exam-form').visible? }
+      wait_until { !page.find('#new-syllabus-exam').visible? }
       page.should have_content('Biology Exam')
       page.should_not have_content("No Exams")
       @syllabus.exams.count.should eql(1)
@@ -39,6 +40,21 @@ describe 'Syllabus Exams' do
       end
 
       @syllabus.exams.count.should eql(0)
+    end
+
+    it "add existing exam to syllabus", :js => true do
+      tr_count = page.all('table#syllabus-exams-index tr').size
+
+      click_link "add-existing-exam-link"
+      wait_until { find('#submit-existing-exam-to-syllabus').visible? }  
+
+      select @exam.name, :from => 'exam_syllabus_exam_id'
+      click_button "submit-existing-exam-to-syllabus"
+      wait_until { page.all('table#syllabus-exams-index tr').size == tr_count + 1 }
+
+      page.find('#syllabus-exams-index').should have_content(@exam.name)
+      wait_until { !find('#add-existing-exam').visible? } 
+      page.should have_content("Exam added to Syllabus")     
     end 
   end
 
@@ -80,5 +96,8 @@ describe 'Syllabus Exams' do
       @syllabus.exams.size.should eql(0) 
     end
   end
+
+
+
   
 end
