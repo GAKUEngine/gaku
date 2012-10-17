@@ -43,18 +43,18 @@ describe 'Syllabus Exams' do
     end
 
     it "add existing exam to syllabus", :js => true do
-      tr_count = page.all('table#syllabus-exams-index tr').size
 
-      click_link "add-existing-exam-link"
-      wait_until { find('#submit-existing-exam-to-syllabus').visible? }  
-
+      click_link "add-existing-exam-link" 
+      wait_until_visible('#submit-existing-exam-to-syllabus')
+      
       select @exam.name, :from => 'exam_syllabus_exam_id'
-      click_button "submit-existing-exam-to-syllabus"
-      wait_until { page.all('table#syllabus-exams-index tr').size == tr_count + 1 }
-
+      click_button "submit-existing-exam-to-syllabus"      
+      
+      ensure_create_is_working('table#syllabus-exams-index tr')
       page.find('#syllabus-exams-index').should have_content(@exam.name)
-      wait_until { !find('#add-existing-exam').visible? } 
-      page.should have_content("Exam added to Syllabus")     
+      flash("Exam added to Syllabus")     
+
+      wait_until_invisible('#add-existing-exam') 
     end 
   end
 
