@@ -44,18 +44,9 @@ describe "CourseEnrollment"  do
 
       click_link 'new-course-student-link'  
       wait_until { page.find('#student-modal').visible? }
-      find(:css, "input#student-#{@student.id}").set(true)
-      wait_until { find('#students-checked-div').visible? }
-      within('#students-checked-div') do 
-        page.should have_content('Chosen students(1)')
-        click_link('Show')
-        wait_until { find('#chosen-table').visible? }
-        page.should have_content("#{@student.name}")
-        click_button 'Enroll to course'
+      within('tr#student-' + @student.id.to_s) do
+        page.should have_selector("img.enrolled")
       end
-      wait_until { !page.find('#student-modal').visible? }
-      wait_until { page.should have_content ("Student Already enrolled to course!") } 
-      @course.students.size.should eql(1)
     end
 
     it 'should cancel enrolling a student', :js => true do 
