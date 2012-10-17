@@ -31,17 +31,20 @@
               .pull-right
                 = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'new-syllabus-exam-link', :class => "btn btn-primary mr-s", :remote => true
                 = link_to ("<i class='icon-white icon-plus'></i> " + t('syllabuses.add_existing_exam')).html_safe, '', :id => 'add-existing-exam-link', :class => "btn btn-primary", :remote => true
+            
+            .row-fluid
+              .span12
+                #add-existing-exam-form-errors
+                #add-existing-exam-form style='display:none;padding-top:10px'
+                  =render 'syllabuses/exams/select_form'
+                #new-syllabus-exam-form style='display:none;padding-top:10px'
+                  =render 'syllabuses/exams/form'
             .row-fluid
               .span12
                 hr
             = render 'syllabuses/exams/exams'
         .row-fluid
           br/
-          #add-existing-exam-form-errors
-          #add-existing-exam-form style='display:none;padding-top:10px'
-            =render 'syllabuses/exams/select_form'
-          #new-syllabus-exam-form style='display:none;padding-top:10px'
-            =render 'syllabuses/exams/form'
         /.row-fluid
           #syllabus-assigmnents
             = render 'syllabuses/assignments/assignments'
