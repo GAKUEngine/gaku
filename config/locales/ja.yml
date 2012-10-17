@@ -135,6 +135,7 @@ ja:
     choose_exam: '試験を選択'
     add_exam: '試験を追加'
     add_existing_exam: '既存の試験を追加'
+    save: 'Save Syllabus'
   course_management: "授業管理"
   course: "授業"
   courses:

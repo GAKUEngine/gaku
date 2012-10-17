@@ -31,6 +31,6 @@
         = link_to t("Show"), @syllabus, :id => 'show-syllabus-link', :class => "span3 btn btn-success"
         = link_to t("Back"), syllabuses_path, :class => "span3 btn btn-danger"
       - else
-        .span9
-          = syllabus_form.submit nil , :id => 'submit-syllabus-button', :class => "span6 btn btn-primary"
-          = link_to_cancel :id => "cancel-syllabus-link"
+        .span6
+          = submit_button t('syllabuses.save'), :id => 'submit-syllabus-button'
+        = link_to_cancel :id => "cancel-syllabus-link"
