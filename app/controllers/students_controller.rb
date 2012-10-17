@@ -24,6 +24,7 @@ class StudentsController < ApplicationController
 
     @class_groups = ClassGroup.all
     @courses = Course.all
+    @enrolled_students = params[:enrolled_students]
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

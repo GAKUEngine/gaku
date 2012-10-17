@@ -16,6 +16,7 @@
           #address.tab-pane
             = render :partial => 'students/search/address', :locals => {:f => f}
   = hidden_field_tag "autocomplete_field"
+  = hidden_field_tag "enrolled_students", @enrolled_students 
   #selected-students.hide
 
 
