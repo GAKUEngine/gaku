@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe 'Campuses' do
 
-  form = '#new-admin-school-campus'
-  new_link = '#new-admin-school-campus-link'
-  modal = '#edit-campus-modal'
+  form           = '#new-admin-school-campus'
+  new_link       = '#new-admin-school-campus-link'
+  modal          = '#edit-campus-modal'
 
-  submit_button = '#submit-admin-school-campus-button'
-  cancel_link = '#cancel-admin-school-campus-link'
+  submit_button  = '#submit-admin-school-campus-button'
+  cancel_link    = '#cancel-admin-school-campus-link'
   
-  table = 'table#admin-school-campuses-index'
-  table_rows = 'table#admin-school-campuses-index tr'
+  table          = '#admin-school-campuses-index'
+  table_rows     = '#admin-school-campuses-index tr'
 
   stub_authorization!
 
@@ -19,12 +19,13 @@ describe 'Campuses' do
     visit admin_school_path(@school)
   end
 
-  context 'create and show' do
+  context 'new', :js => true do
     before do 
       click new_link
       wait_until_visible submit_button
     end
-    it 'should create and show school campus', :js => true do 
+
+    it 'should create and show school campus' do 
       @school.campuses.count.should eq 1
 
       fill_in 'campus_name', :with => 'Nagoya Campus'
@@ -32,11 +33,11 @@ describe 'Campuses' do
 
       wait_until_invisible form
 
-      page.should have_content('Nagoya Campus')
+      page.should have_content 'Nagoya Campus'
       @school.campuses.count.should eq 2
     end 
 
-    it 'should cancel creating', :js => true do
+    it 'should cancel creating' do
       click cancel_link
 
       wait_until_invisible form
@@ -46,9 +47,9 @@ describe 'Campuses' do
     end
   end
 
-  context 'index, edit and delete' do 
+  context 'existing', :js => true do 
 
-    it 'should edit school campus', :js => true do
+    it 'should edit school campus' do
       within(table) { click edit_link }
       
       wait_until_visible modal 
@@ -63,14 +64,11 @@ describe 'Campuses' do
       @school.campuses.count.should eq 1
     end
 
-    it 'should delete school', :js => true do
+    it 'should delete school' do
       @school.campuses.count.should eq 1 
-      tr_count = size_of table_rows
+      
+      ensure_delete_is_working(delete_link, table_rows)
 
-      click delete_link 
-      accept_alert
-        
-      wait_until { size_of(table_rows) == tr_count - 1 }
       @school.campuses.count.should eq 0
     end
   end
