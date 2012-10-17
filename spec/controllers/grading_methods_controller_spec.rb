@@ -10,7 +10,7 @@ describe GradingMethodsController do
   end
 
   describe "GET 'show'" do
-    it "returns http success" do
+    pending "returns http success" do
       get 'show'
       response.should be_success
     end
@@ -24,7 +24,7 @@ describe GradingMethodsController do
   end
 
   describe "GET 'edit'" do
-    it "returns http success" do
+    pending "returns http success" do
       get 'edit'
       response.should be_success
     end
