@@ -23,6 +23,7 @@ $ ->
     $('#new-syllabus-link').hide()
     $('#new-syllabus').slideToggle()
   
-  $('#cancel-syllabus-link').click ->
+  $('#cancel-syllabus-link').on 'click', (event)->
+    event.preventDefault()
     $('#new-syllabus').slideToggle()
     $('#new-syllabus-link').show()
