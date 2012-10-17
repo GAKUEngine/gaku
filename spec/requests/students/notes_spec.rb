@@ -11,7 +11,7 @@ describe 'Note' do
   context 'new' do
     before do 
       click_link 'new-student-note-link'
-      wait_until { find('#new-note form').visible? }
+      wait_until { find("#submit-student-note-button").visible? }
     end
 
     it "should add and show student note", :js => true do

@@ -13,8 +13,7 @@ describe 'ContactTypes' do
       ContactType.count.should eq 0
       click_link 'new-admin-contact-type-link'
 
-      wait_until { page.find('#new-admin-contact-type form').visible? }
-      !page.find('#new-admin-contact-type-link').visible?
+      wait_until { find('#submit-admin-contact-type-button').visible? }
       fill_in 'contact_type_name', :with => 'home phone'
       click_button 'submit-admin-contact-type-button'
 

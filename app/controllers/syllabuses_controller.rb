@@ -29,12 +29,13 @@ class SyllabusesController < ApplicationController
     end
 
     def load_before_show
+      syllabus
+      
       @exam = Exam.new
       @exam.exam_portions.build
       @syllabus.assignments.build
       @notable = @syllabus
-      
-      syllabus
+
       grading_methods
     end
 
