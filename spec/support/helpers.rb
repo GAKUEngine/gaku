@@ -38,6 +38,10 @@ module Helpers
       wait_until { size_of(table_rows) == tr_count - 1 }
     end
 
+    def flash(text)
+      page.should have_selector("#notice", :text => text)
+    end
+
   end
 end
 
