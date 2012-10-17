@@ -8,5 +8,4 @@ $('#class-group-enrollments-tab-link').html('<%= print_count(@class_group.class_
 $('.class-group-enrollments-count').html('<%= print_count(@class_group.class_group_enrollments.count, t("class_group_enrollments.list")) %>');
 
 $('#student-modal').modal('hide');
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>") 
-$("#notice").show(3);
+showNotice("<%= render_flash %>");

@@ -1,6 +1,6 @@
 $('#course-modal').modal('hide');
 $('#course-modal').remove();
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 
 //update from index page
 $(".course-<%= @course.id %> .syllabus").html( "[<%= @course.syllabus.code + "]:" +  @course.syllabus.name + "-" + @course.code %>");

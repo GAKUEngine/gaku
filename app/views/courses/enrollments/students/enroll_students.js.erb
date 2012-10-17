@@ -9,5 +9,5 @@ $('.course-students-count').html('<%= print_count(@course.students.count, t("stu
 
 
 $('#student-modal').modal('hide');
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash).html_safe %>");
-$("#notice").show(3);
+showNotice("<%= render_flash %>");
+

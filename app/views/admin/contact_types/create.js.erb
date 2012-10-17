@@ -3,5 +3,5 @@ $('#admin-contact-types-index tbody').append('<%= render_js_partial("contact_typ
 $('#new-admin-contact-type').slideToggle();
 $('#new-admin-contact-type-link').show();
 
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 $('.admin-contact-types-count').html('<%= print_count(@contact_types_count + 1, t("contact_types.list")) %>');

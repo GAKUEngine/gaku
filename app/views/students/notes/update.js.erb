@@ -1,4 +1,4 @@
 $('tr#note-<%= @note.id %>').html('<%= render_js_partial("shared/fields/note_fields", {:note => @note}) %>');
 $('tr#note-<%= @note.id %>').append('<%= render_js_partial("buttons", {:note => @note}) %>');
 $("#edit-note-modal").modal('hide');
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");

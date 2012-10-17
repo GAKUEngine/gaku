@@ -35,6 +35,7 @@ describe 'Contact' do
     end
 
     it 'should cancel adding contact', :js => true do
+      wait_until { page.find('#cancel-admin-school-campus-contact-link').visible? }
       click_link 'cancel-admin-school-campus-contact-link'
       wait_until { !page.find('#new-admin-school-campus-contact').visible? }
     end

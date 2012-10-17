@@ -1,2 +1,3 @@
 $('#new-<%= notable_resource %>-note-tab-link').html('<%= print_count(@notable.notes.count, t('notes.notes')) %>');
 $('.<%= notable_resource %>-notes-count').html('<%= print_count(@notable.notes.count, t('notes.list')) %>');
+showNotice("<%= render_flash %>");

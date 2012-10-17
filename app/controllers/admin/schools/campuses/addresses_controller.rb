@@ -11,19 +11,20 @@ module Admin
   	before_filter :campus
 
   	def create  
-      super do |format|
-        @address = Address.create(params[:address])
-        @campus.address = @address
+      @address = Address.create(params[:address])
+      @campus.address = @address
+      respond_to do |format|
         if @campus.save
+          flash.now[:notice] = t('addresses.created')
           format.js { render 'create' }  
         end
       end
     end
 
-
     def destroy
       @campus.address.destroy
       respond_to do |format|
+        flash.now[:notice] = t('addresses.destroyed')
         format.js { render 'destroy' }
       end
     end

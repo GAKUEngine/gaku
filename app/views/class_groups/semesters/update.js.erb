@@ -2,4 +2,4 @@ $('#semester-modal').modal('hide');
 $('#semester-modal').remove();
 var currentSemesterPeriod = $("#semester-<%= @semester.id %>  .period");
 currentSemesterPeriod.html("<%= @semester.starting.strftime("%m/%d/%Y") + " - " + @semester.ending.strftime("%m/%d/%Y") %>")
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");

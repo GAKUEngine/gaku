@@ -1,2 +1,2 @@
-$('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
+showNotice("<%= render_flash %>");
 $('.admin-contact-types-count').html('<%= print_count(@contact_types_count - 1, t("contact_types.list")) %>');

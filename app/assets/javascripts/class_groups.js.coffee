@@ -6,18 +6,13 @@ $ ->
     $('#new-class-group').slideToggle()
     $("#new-class-group-link").show()
 
-  $("#cancel-course-link").click ->
-    $("#new-class-group-course-link").show()
-    $("#new-class-group-course form").slideToggle()
-    false    #prevent page from reloading
-
-  $('#new-class-group-semester-link').on 'click', (event) ->
+  $("#cancel-course-link").on 'click', (e)->
     event.preventDefault()
-    $(this).hide()
-    $('#new-class-group-semester form').slideToggle()
+    $("#new-class-group-course-link").show()
+    $("#new-class-group-course").slideToggle()
 
-  $("#cancel-class-group-semester-link").click ->
+  $("#cancel-class-group-semester-link").on 'click', (event)->
+    event.preventDefault()
     $("#new-class-group-semester-link").show()
-    $("#new-class-group-semester form").slideToggle()
+    $("#new-class-group-semester").slideToggle()
     $("#semester-modal").modal("hide")
-    false    #prevent page from reloading
