@@ -1,80 +1,112 @@
 <div class='row-fluid'>
-	 <div class='span12 well pull-left'>
-	 	<table class='exam_grid table table-striped table-bordered table-condensed'>
-	 		<thead>
-	 			<tr>
-	 				<th class='btn-primary' colspan='3'><%= I18n.t("student") %></td>
-					<% for exam in @exams: %>
-						<th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'><%= exam.name %></th>
-					<% end %>
-	 			</tr>
-	 			<tr>
-	 				<th class='btn-info' style="width:60px"><%= I18n.t("class") %></th>
+  <div class='span12 well pull-left'>
+    <table class='exam_grid table table-striped table-bordered table-condensed'>
+      <thead>
+        <tr>
+          <th class='btn-primary' colspan='3'><%= I18n.t("student") %></td>
+          <% for exam in @exams: %>
+            <th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'><%= exam.name %></th>
+          <% end %>
+        </tr>
+        <tr>
+          <th class='btn-info' style="width:60px"><%= I18n.t("class") %></th>
           <th class='btn-info' style="width:60px"><%= I18n.t("class_group_enrollments.seat_number") %></th>
           <th class='btn-info' style="width:150px"><%= I18n.t("students.name") %></th>
           <% for exam in @exams: %>
-          	<% for portion in exam.exam_portions: %>
-          		<% if exam.use_weighting : %>
-          			<th class='btn-warning' style="width:30px">【 <%= portion.name %> 】</th>
+            <% for portion in exam.exam_portions: %>
+              <% if exam.use_weighting : %>
+                <th class='btn-warning' style="width:30px">【 <%= portion.name %> 】</th>
                 <br/>
-	          		<!-- More work HERE -->
-          		<% else : %>
-          			<th class='btn-warning' style="width:30px">
-          			  【 <%= portion.name %> 】
-                	<br/>
-                  <%= portion.max_score %>
-          			</th>
-          		<% end %>
-          		<% end %>
-          	<% end %>
-          		<th id='total_points_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.total_points") %></th>
-          		<% if exam.use_weighting : %>
-          			<td id='weighting_total_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.weighting_total") %></td>
-          		<% end %>
-          		<th class='btn-inverse'><%= I18n.t("grades.deviation") %></th>
-              <th id='grade_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level10") %>
-              <th id='rank_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level5") %>
-	 			</tr>
-	 		</thead>
-	 		<tbody>
-				<% for student in @students: %>
-					<tr class='student_<%= student.id %>'>
-						<td class="vm-tc"><%= "class"%></td>
-						<td class="vm-tc"><%= "seat_number" %></td>
-						<td class="vm"><%= student.surname + " " + student.name %></td>
-						<% for exam in @exams: %>
-	          	<% for portion in exam.exam_portions: %>
-	          		<% for score in portion.exam_portion_scores: %>
-		          		<% if score.student_id == student.id : %>
-		          			<td>
-		          				<form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
-												<input style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'/>
-											</form>
-			          		</td>
-			          	<% end %>
-		          	<% end %>
-	          	<% end %>
-						<td class="vm-tr"><%= @student_total_scores[student.id][exam.id] %></td>
-          	<% end %>
-						<td class="vm-tr"><%= @deviation[student.id][exam.id] %></td>
-						<td class="vm-tr"><%= @grades[exam.id][student.id] %></td>
-						<td class="vm-tr"><%= @ranks[exam.id][student.id] %></td>
-					</tr>
-				<% end %>
-		 		<tr class='total_row'>
-		 			<td colspan='3'></td>
+              <!-- More work HERE -->
+              <% else : %>
+              <th class='btn-warning' style="width:30px">
+                【 <%= portion.name %> 】
+                <br/>
+                <%= portion.max_score %>
+              </th>
+            <% end %>
+          <% end %>
+          <th id='total_points_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.total_points") %></th>
+          <% if exam.use_weighting : %>
+            <td id='weighting_total_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.weighting_total") %></td>
+          <% end %>
+          <th class='btn-inverse'><%= I18n.t("grades.deviation") %></th>
+          <th id='grade_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level10") %>
+          <th id='rank_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level5") %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for student in @students: %>
+          <tr class='student_<%= student.id %>'>
+            <td class="vm-tc"><%= "class"%></td>
+            <td class="vm-tc"><%= "seat_number" %></td>
+            <td class="vm"><%= student.surname + " " + student.name %></td>
+            <% for exam in @exams: %>
+              <% for portion in exam.exam_portions: %>
+                <% for score in portion.exam_portion_scores: %>
+                  <% if score.student_id == student.id : %>
+                    <td>
+                      <form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
+                        <input style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'/>
+                      </form>
+                    </td>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <td class="vm-tr"><%= @student_total_scores[student.id][exam.id] %></td>
+            <% end %>
+            <td class="vm-tr"><%= @deviation[student.id][exam.id] %></td>
+            <td class="vm-tr"><%= @grades[exam.id][student.id] %></td>
+            <td class="vm-tr"><%= @ranks[exam.id][student.id] %></td>
+          </tr>
+        <% end %>
+        <tr class='total_row'>
+          <td colspan='3'></td>
           <% for exam in @exams: %>
-	          <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"><%= I18n.t("grades.average") %></thead>
-
-          	<td class="vm-tr">
-          		<%= @exam_averages[exam.id] %>
-          	</td>
+            <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"><%= I18n.t("grades.average") %></thead>
+            <td class="vm-tr">
+              <%= @exam_averages[exam.id] %>
+            </td>
           <% end %>
           <td></td>
           <td></td>
           <td></td>
-		 		</tr>
-	 		</tbody>
-	 	</table>
-	</div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<script>
+  console.log("aaaaaaaaaaaa")
+
+  var tableSizeFix;
+  tableSizeFix = function() {
+    var fixH, fixW;
+    $("html").css("overflow-x", "hidden");
+    $("html").css("overflow-y", "hidden");
+    fixW = 303;
+    fixW += $(".btn-warning").length * 131;
+    if ($(".exam_infos").length > 1) {
+      fixW += ($(".btn-inverse").length - 1) * 76;
+      fixW += 302;
+    } else {
+      fixW += $(".btn-inverse").length * 76;
+    }
+    $(".exam_grid").width(fixW);
+    if (fixW > $(window).width() - 80) {
+      fixW = $(window).width() - 80;
+    }
+    fixH = $(".exam_grid").height();
+    if (fixH > $(window).height() - $(".exam_grid").offset().top - 40) {
+      fixH = $(window).height() - $(".exam_grid").offset().top - 40;
+    }
+    // return $('.exam_grid').tablefix({
+      // width: fixW,
+      // height: fixH,
+      // fixRows: 2,
+      // fixCols: 3
+    // });
+  }
+  // tableSizeFix();
+</script>
