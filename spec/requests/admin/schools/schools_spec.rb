@@ -1,67 +1,85 @@
 require 'spec_helper'
 
 describe 'Schools' do
+
+  form           = '#new-admin-school'
+  new_link       = '#new-admin-school-link'
+  modal          = '#edit-school-modal'
+
+  submit_button  = '#submit-admin-school-button'
+  cancel_link    = '#cancel-admin-school-link'
+  
+  table          = '#admin-schools-index'
+  table_rows     = '#admin-schools-index tr'
+  count_div      = '.admin-schools-count'
+
   stub_authorization!
 
-  context 'create and show' do
+  context 'new', :js => true do
   	before do 
   	  visit admin_schools_path
+      click new_link
+      wait_until_visible submit_button
     end
 
-    it 'should create and show school', :js => true do 
+    it 'creates and shows school' do 
       School.count.should eq 0
-      click_link 'new-admin-school-link'
 
-      wait_until { page.find('#new-admin-school').visible? }
-      !page.find('#new-admin-school-link').visible?
       fill_in 'school_name', :with => 'Nagoya University'
-      click_button 'submit-admin-school-button'
+      click submit_button
 
-      wait_until { !page.find('#new-admin-school').visible? }
-      page.find('#new-admin-school-link').visible?
+      wait_until_invisible form
       page.should have_content('Nagoya University')
+      within(count_div) { page.should have_content('Schools list(1)') }
       School.count.should eq 1
     end 
 
-    it 'should cancel creating school', :js => true do 
-    	School.count.should eq 0
-      click_link 'new-admin-school-link'
-      
-      wait_until { page.find('#cancel-admin-school-link').visible? }
-      click_link 'cancel-admin-school-link'
+    it 'cancels creating' do 
+      click cancel_link
+      wait_until_invisible form
 
-      wait_until { !page.find('#new-admin-school').visible? }
-      School.count.should eq 0
+      click new_link
+      wait_until_visible submit_button
     end
   end
 
-  context 'index, edit and delete' do 
+  context 'existing', :js => true do 
     before do
       @school = create(:school, :name => 'Varna Technical University') 
       visit admin_schools_path
     end
 
-  	it 'should edit school', :js => true do
-  	  within('table#admin-schools-index tbody') { find('.edit-link').click }
-  	  
-  	  wait_until { find('#edit-admin-school-modal').visible? } 
-  	  fill_in 'school_name', :with => 'Sofia Technical University'
-  	  click_button 'submit-admin-school-button' 
+    context 'edit' do 
+      before do 
+        within(table) { click edit_link }
+        wait_until_visible modal 
+      end
 
-  	  wait_until { !page.find('#edit-admin-school-modal').visible? }
-  	  page.should have_content('Sofia Technical University')
-  	  page.should_not have_content('Varna Technical University')
-  	  School.count.should eq 1
-  	end
+    	it 'edits school'  do
+    	  fill_in 'school_name', :with => 'Sofia Technical University'
+    	  click submit_button
 
-  	it 'should delete school', :js => true do
+    	  wait_until_invisible modal
+    	  page.should have_content('Sofia Technical University')
+    	  page.should_not have_content('Varna Technical University')
+    	  School.count.should eq 1
+    	end
+
+      it 'cancels editting' do 
+        click cancel_link
+        wait_until_invisible modal
+      end
+    end
+
+  	it 'deletes school' do
       School.count.should eq 1 
-      tr_count = page.all('table#admin-schools-index tr').size
+      within(count_div) { page.should have_content('Schools list(1)') }
+      page.should have_content(@school.name)
 
-      find('.delete-link').click 
-      page.driver.browser.switch_to.alert.accept
-        
-      wait_until { page.all('table#admin-schools-index tr').size == tr_count - 1 }
+      ensure_delete_is_working(delete_link, table_rows)
+
+      within(count_div) { page.should_not have_content('Schools list(1)') }
+      page.should_not have_content(@school.name)
       School.count.should eq 0
     end
   end
