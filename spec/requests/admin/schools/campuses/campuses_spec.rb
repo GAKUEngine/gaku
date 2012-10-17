@@ -25,50 +25,55 @@ describe 'Campuses' do
       wait_until_visible submit_button
     end
 
-    it 'should create and show school campus' do 
+    it 'creates and shows school campus' do 
       @school.campuses.count.should eq 1
 
       fill_in 'campus_name', :with => 'Nagoya Campus'
       click submit_button
 
       wait_until_invisible form
-
       page.should have_content 'Nagoya Campus'
       @school.campuses.count.should eq 2
     end 
 
-    it 'should cancel creating' do
+    it 'cancels creating' do
       click cancel_link
-
       wait_until_invisible form
-      click new_link
 
+      click new_link
       wait_until_visible submit_button
     end
   end
 
   context 'existing', :js => true do 
-
-    it 'should edit school campus' do
-      within(table) { click edit_link }
-      
-      wait_until_visible modal 
-      fill_in 'campus_name', :with => 'Nagoya Campus'
-      click submit_button 
-
-      wait_until_invisible modal
-      within(table) do 
-        page.should have_content('Nagoya Campus')
-        page.should_not have_content('Nagoya University') 
+    
+    context 'edit' do 
+      before do 
+        within(table) { click edit_link }
+        wait_until_visible modal 
       end
-      @school.campuses.count.should eq 1
+
+      it 'edits school campus' do
+        fill_in 'campus_name', :with => 'Nagoya Campus'
+        click submit_button 
+
+        wait_until_invisible modal
+        within(table) do 
+          page.should have_content('Nagoya Campus')
+          page.should_not have_content('Nagoya University') 
+        end
+        @school.campuses.count.should eq 1
+      end
+
+      it 'cancels editting' do 
+        click cancel_link
+        wait_until_invisible modal
+      end
     end
 
-    it 'should delete school' do
+    it 'deletes school' do
       @school.campuses.count.should eq 1 
-      
       ensure_delete_is_working(delete_link, table_rows)
-
       @school.campuses.count.should eq 0
     end
   end
