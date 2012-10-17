@@ -9,6 +9,6 @@ $('.class-group-semesters-count').html('<%= print_count(@class_group.semesters.c
 <%- if @semester.errors.any? %>
 	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("shared/errors", {:target => @semester}) %>');
 <%- else %>
-	$('#new-class-group-semester form').slideToggle();
+	$('#new-class-group-semester').slideToggle();
 	$('#new-class-group-semester-form-errors').slideToggle();
 <% end %>

@@ -11,13 +11,8 @@ $ ->
     $("#new-class-group-course form").slideToggle()
     false    #prevent page from reloading
 
-  $('#new-class-group-semester-link').on 'click', (event) ->
+  $("#cancel-class-group-semester-link").on 'click', (event)->
     event.preventDefault()
-    $(this).hide()
-    $('#new-class-group-semester form').slideToggle()
-
-  $("#cancel-class-group-semester-link").click ->
     $("#new-class-group-semester-link").show()
-    $("#new-class-group-semester form").slideToggle()
+    $("#new-class-group-semester").slideToggle()
     $("#semester-modal").modal("hide")
-    false    #prevent page from reloading
