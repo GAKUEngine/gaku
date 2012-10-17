@@ -253,6 +253,7 @@ class ExamsController < ApplicationController
 
       @grading_method = GradingMethod.find(exam.grading_method_id)
       puts "@grading_method-------------"
+      puts @grading_method.name
       puts @grading_method.method
 
       # WIP Fix Grade Calculation -----↓
