@@ -28,7 +28,7 @@ describe 'Syllabus' do
     it "should create new syllabus" do 
       click_link "new-syllabus-link"
       tr_count = page.all('table#syllabuses-index tr').size
-      wait_until { page.should have_css('#new-syllabus', :visible => true) }
+      wait_until { find("#submit-syllabus-button").visible? }
       fill_in "syllabus_name", :with => "Syllabus1"
       fill_in "syllabus_code", :with => "code1"
       fill_in "syllabus_description", :with => "Syllabus Description"
@@ -41,7 +41,7 @@ describe 'Syllabus' do
 
     it "should not submit invalid syllabus", :js => true do 
       click_link "new-syllabus-link"
-      wait_until { page.find('#new-syllabus').visible? }
+      wait_until { find("#submit-syllabus-button").visible? }
       click_button "submit-syllabus-button"
       page.should have_content "This field is required"
       page.should_not have_content "was successfully created"

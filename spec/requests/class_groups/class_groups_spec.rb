@@ -11,7 +11,7 @@ describe 'ClassGroups' do
     ClassGroup.count.should eq 0
     click_link 'new-class-group-link'
 
-    wait_until { page.find('#new-class-group form').visible? }
+    wait_until { find('#submit-class-group-button').visible? }
     fill_in 'class_group_grade', :with => '7'
     fill_in 'class_group_name', :with => 'Awesome class group'
     fill_in 'class_group_homeroom', :with => 'room#7'
