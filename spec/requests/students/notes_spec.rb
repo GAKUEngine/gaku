@@ -11,7 +11,7 @@ describe 'Note' do
   context 'new' do
     before do 
       click_link 'new-student-note-link'
-      wait_until { find('#new-student-note form').visible? }
+      wait_until { find('#new-note form').visible? }
     end
 
     it "should add and show student note", :js => true do
@@ -22,7 +22,7 @@ describe 'Note' do
       fill_in "note_content", :with => "The note content"
       click_button "submit-student-note-button"
 
-      wait_until { !page.find('#new-student-note form').visible? } 
+      wait_until { !page.find('#new-note form').visible? } 
       page.should have_selector('a', href: "/students/1/notes/1/edit")
       page.should have_content("The note title")
       page.should have_content("The note content")
@@ -42,12 +42,12 @@ describe 'Note' do
     end
 
     it 'should cancel adding', :js => true do 
-      click_link 'cancel-student-note-link'
-      wait_until { !page.find('#new-student-note form').visible? }
+      click_link 'cancel-note-link'
+      wait_until { !page.find('#new-note form').visible? }
       find('#new-student-note-link').visible?
 
       click_link 'new-student-note-link'
-      wait_until { find('#new-student-note form').visible? }
+      wait_until { find('#new-note form').visible? }
       !page.find('#new-student-note-link').visible?
     end
   end

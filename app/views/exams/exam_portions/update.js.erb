@@ -1,5 +1,5 @@
 $('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("exams/exam_portions/exam_portion", {:exam_portion => @exam_portion}) %>');
-$("#editExamPortionModal").modal('hide');
+$("#edit-exam-portion-modal").modal('hide');
 $('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
 $('#notice').html("<%= escape_javascript(render 'shared/flash', :flash => flash) %>");
 

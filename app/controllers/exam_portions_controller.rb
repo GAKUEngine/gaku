@@ -20,6 +20,12 @@ class ExamPortionsController < ApplicationController
     end  
   end
 
+  def update
+    super do |format|
+      format.js { render 'exams/exam_portions/update' }  
+    end 
+  end
+
   def destroy
     @exam_portion = ExamPortion.find(params[:id])
     @portion_id = @exam_portion.id

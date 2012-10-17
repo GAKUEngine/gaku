@@ -111,6 +111,7 @@ GAKUEngine::Application.routes.draw do
   resources :exams do
     put :create_exam_portion, :on => :member
 
+    resources :notes
     resources :exam_scores
     resources :exam_portions do
       resources :attachments, :only => [:create]
