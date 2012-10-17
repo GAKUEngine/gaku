@@ -1,3 +1,4 @@
 $('#courses-index tbody').append('<%= render_js_partial("course_unit", {:course => @course}) %>');
 $('#new-course').slideToggle();
-$('.flash-error').html("<%= render_js_partial('shared/flash', {:notice => flash[:notice]}) %>");
+$('#new-course-link').show();
+showNotice("<%= render_flash %>");

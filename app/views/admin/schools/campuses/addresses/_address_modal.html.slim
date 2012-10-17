@@ -1,0 +1,16 @@
+.modal.hide#edit-address-modal wmode="opaque"
+  = form_for [:admin, @school, @campus, @address], :remote => true, :html => { :'data-type' => 'script', :class => 'form-horizontal' } do |address_form| 
+
+      .modal-header
+        h3 =t("addresses.edit")
+      .modal-body
+        .row-fluid
+          .validation-error
+        .row-fluid
+          = hidden_field_tag :campus_id, @campus.id
+
+        = render 'shared/form_fields/address_form_fields', :address_form => address_form
+        .row-fluid
+          .span9
+            = submit_button t('addresses.save'), :id => 'submit-admin-school-campus-address-button'
+            = link_to_cancel :id => 'cancel-admin-school-campus-address-link'

@@ -1,11 +1,10 @@
 class ExamsController < ApplicationController
 
-  #before_filter :authenticate_user!
-  before_filter :load_exam, :only => [:show, :destroy, :create_exam_portion]
-  before_filter :load_before_show, :only => :show
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
+
+  before_filter :exam, :only => [:show, :destroy, :create_exam_portion]
+  before_filter :load_before_show, :only => :show
 
 
   def export_xls
@@ -43,10 +42,6 @@ class ExamsController < ApplicationController
       exam_sheet.row(0)[5] = exam.name
       exam_sheet.row(0)[6] = 'Exam ID:'
       exam_sheet.row(0)[7] = exam.id
-
-
-
-
 
 
       # table header cells
@@ -126,16 +121,16 @@ class ExamsController < ApplicationController
   def update
     super do |format|
       @exams = Exam.all
+      @notable = exam
       flash.now[:notice] = 'Exam was successfully updated.'
       format.js { render 'update'}
     end
   end
 
   def destroy
-    #destroy! :flash => !request.xhr?
     @exam.destroy
     respond_to do |format|
-        format.js { render :nothing => true }
+      format.js { render :nothing => true }
     end
   end
 
@@ -196,7 +191,7 @@ class ExamsController < ApplicationController
     @exams.each do |exam|
       @exam_averages[exam.id] = FixDigit @exam_averages[exam.id] / @students.length, 4
       if exam.use_weighting
-        @exam_wight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
+        @exam_weight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
       end
     end
 
@@ -251,17 +246,38 @@ class ExamsController < ApplicationController
       end
       scores.sort!().reverse!()
 
-      # Grade Calculation -----↓
+      # @grading_method = GradingMethod.find(exam.grading_method_id)
+      # puts "@grading_method-------------"
+      # puts @grading_method.name
+      # eval @grading_method.method
+
+      # WIP Fix Grade Calculation -----↓
       gradingMethod = 1
       gradePoint = 10
-
-      gradeLevels_Deviation.each_with_index do |glevel, i|
-        @students.each do |student|
-          if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
-            @grades[exam.id][student.id] = gradePoint
+      case gradingMethod
+      when 1
+        gradeLevels_Deviation.each_with_index do |glevel, i|
+          @students.each do |student|
+            if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
+              @grades[exam.id][student.id] = gradePoint
+            end
           end
+          gradePoint -= 1
         end
-        gradePoint -= 1
+      when 2
+        scoresMem = scores.clone
+        gradeNums = []
+        gradeLevels_Percent.each do |glevel|
+          gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
+        end
+        gradeNums.each do |gnum|
+          i = 0
+          while i < gnum && scoresMem.length != 0
+            @grades[exam.id][scoresMem.shift[1]] = gradePoint
+            i += 1
+          end
+          gradePoint -= 1
+        end
       end
 
       # Rank Calculation -----↓
@@ -283,26 +299,12 @@ class ExamsController < ApplicationController
       end
       scores.each do |score|
         if @grades[exam.id][socre[1]] == 3
-          @ranks[exam.id][score[1]] == 2
+          @ranks[exam.id][score[1]] = 2
         elsif @grades[exam.id][socre[1]] < 3
-     respond_to do |format|
-      format.json { render :json => {:student_total_scores => @student_total_scores,
-                                     :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
-                                     :course => @course,
-                                     :exam_averages => @exam_averages,
-                                     :deviation => @deviation,
-                                     :students => Student.decrypt_student_fields(@students),
-                                     :grades => @grades,
-                                     :ranks => @ranks
-                                     }}
-
-      format.html { render "exams/grading" }
-    end
-         @ranks[exam.id][score[1]] == 1
+          @ranks[exam.id][score[1]] = 1
         end
       end
     end
-
     respond_to do |format|
       format.json { render :json => {:student_total_scores => @student_total_scores,
                                      :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
@@ -353,11 +355,12 @@ class ExamsController < ApplicationController
   # end
 
   private
-    def load_exam
+    def exam
       @exam = Exam.find(params[:id])
     end
 
     def load_before_show
       @exam.exam_portions.build
+      @notable = @exam
     end
 end

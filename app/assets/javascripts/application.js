@@ -20,7 +20,7 @@
 //= require buhin/buhin.js.coffee
 //= require libgakuengine.js.coffee
 
-// require gakuengine.js.coffee
+//= require gakuengine.js.coffee
 // require external/globalize.min.js
 // require external/cultures/globalize.cultures.js
 

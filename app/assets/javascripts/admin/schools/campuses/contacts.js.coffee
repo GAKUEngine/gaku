@@ -1,4 +1,5 @@
 $ ->
-	$("#cancel-admin-school-campus-contact-link").click ->
-    $("#new-admin-school-campus-contact-link").show()
-    $("#new-admin-school-campus-contact").slideToggle()
+	$("#cancel-admin-school-campus-contact-link").on 'click', (event) ->
+		event.preventDefault()
+		$("#new-admin-school-campus-contact-link").show()
+		$("#new-admin-school-campus-contact").slideToggle()

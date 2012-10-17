@@ -1,3 +1,3 @@
 $('tr#contact-type-<%= @contact_type.id %>').html('<%= render_js_partial("contact_type_fields", {:contact_type => @contact_type}) %>');
 $("#edit-contact-type-modal").modal("hide");
-$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+showNotice("<%= render_flash %>");

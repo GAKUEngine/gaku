@@ -1,5 +1,6 @@
 $('#course-modal').modal('hide');
 $('#course-modal').remove();
+showNotice("<%= render_flash %>");
 
 //update from index page
 $(".course-<%= @course.id %> .syllabus").html( "[<%= @course.syllabus.code + "]:" +  @course.syllabus.name + "-" + @course.code %>");

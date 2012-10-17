@@ -61,6 +61,8 @@ ja:
     attachment_recovered: '追加ファイルを削除'
     asset_type: 'アセットの種別'
   addresses:
+    created: 'Address was successfully created.'
+    destroyed: 'Address was successfully destroyed.'
     save: "住所を保存"
     addresses: "住所"
     add: "住所を追加"

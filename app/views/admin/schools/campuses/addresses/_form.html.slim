@@ -1,0 +1,14 @@
+= form_for [:admin, @school, @campus, @address], :remote => true do |address_form|
+  - if address_form.object.new_record?
+    b= t('addresses.new')
+    .row-fluid.mt-l
+      .span12.well
+        = render 'shared/form_fields/address_form_fields', :address_form => address_form 
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('addresses.save'), :id => 'submit-admin-school-campus-address-button'
+            = link_to_cancel :id => 'cancel-admin-school-campus-address-link'
+  
+= javascript_include_tag 'shared/address'
+= javascript_include_tag 'admin/schools/campuses/addresses'

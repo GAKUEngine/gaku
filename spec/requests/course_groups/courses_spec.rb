@@ -27,23 +27,25 @@ describe 'CourseGroup Courses' do
 
   it 'should not add a course if course code is empty', :js => true do
     click_link 'new-course-group-enrollment-link'
-    wait_until { page.find('#new-course-group-enrollment form').visible? }
+    
+    wait_until { find('#submit-course-group-enrollment-button').visible? }
     click_button 'submit-course-group-enrollment-button'
 
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
   it 'should cancel adding', :js => true do
-    tr_count = page.all('#course-group-enrollments-index tbody tr').size
     click_link 'new-course-group-enrollment-link'
-    wait_until { page.find('#new-course-group-enrollment form').visible? }
-    select "#{@course.code}", :from => 'course_group_enrollment_course_id'
-    click_link 'course-group-enrollment-cancel-link'
 
-    page.all('#course-group-enrollments-index tbody tr').size.should eq tr_count
+    wait_until { find('#cancel-course-group-enrollment-link').visible? }
+    click_link 'cancel-course-group-enrollment-link'
+    wait_until { !page.find('#new-course-group-enrollment').visible? }
 
-    within("#course-group-enrollments-index tbody") { page.should_not have_content ("#{@course.code}") }
-    CourseGroupEnrollment.count.should eq tr_count
+    find("#new-course-group-enrollment-link").visible?
+       
+    click_link 'new-course-group-enrollment-link'
+    wait_until { find("#new-course-group-enrollment").visible? }
+    !page.find("#new-course-group-enrollment-link").visible?
   end
 
   context 'Course group with added course' do

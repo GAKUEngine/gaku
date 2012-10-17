@@ -1,4 +1,8 @@
 $('#new-student').slideToggle();
 $('#new-student form')[0].reset();
-$('#students-index tbody').append('<%= render_js_partial("student", {:student => @student}) %>');
 $('#new-student-link').show();
+
+$('#students-index tbody').append('<%= render_js_partial("student", {:student => @student}) %>');
+$('.students-count').html('<%= print_count(@students_count + 1, t("students.list")) %>');
+
+showNotice("<%= render_flash %>");

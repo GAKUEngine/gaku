@@ -1,42 +1,17 @@
 class ClassGroups::SemestersController < ApplicationController
 
-  #before_filter :authenticate_user!
-
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :load_class_group, :only => [ :new, :create, :edit, :update, :destroy ]
+  respond_to :js, :html
+
+  before_filter :load_class_group, :only => [:new, :create, :edit, :update, :destroy]
   
   def create
     super do |format|
       @class_group.semesters << @semester
       format.js { render 'create' }  
     end 
-  end
-
-  def new
-    @semester = Semester.new
-    render 'new'  
-  end
-
-  def edit
-    @semester = Semester.find(params[:id])
-    render 'edit'
-  end
-
-  def update
-    super do |format|
-      format.js { render }
-    end  
-  end
-
-  def destroy
-    @semester = Semester.find(params[:id])
-    @semester.destroy
-    respond_to do |format|
-      format.js { render 'destroy' }
-    end
   end
   
   private 

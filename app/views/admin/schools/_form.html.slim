@@ -6,9 +6,9 @@
         .span12.well
           = render 'school_form_fields', :school_form => school_form
           .row-fluid
-            .span9
-              = submit_button t('schools.save'), :id => 'submit-admin-school-button', :class => 'btn btn-primary button span9'
-            .span9
+            .span12
+              .span6 
+                = submit_button t('schools.save'), :id => 'submit-admin-school-button'
               = link_to_cancel :id => 'cancel-admin-school-link'
 
 = javascript_include_tag 'admin/schools'

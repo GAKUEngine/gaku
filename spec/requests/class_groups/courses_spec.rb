@@ -33,7 +33,7 @@ describe 'ClassGroup Courses' do
     wait_until { page.has_content?('Course can\'t be blank') }
   end
 
-  it 'should cancel adding', :js => true do
+  pending 'should cancel adding', :js => true do
     click_link 'new-class-group-course-link'
     wait_until { page.find('#new-class-group-course form').visible? }
     click_on 'cancel-course-link'

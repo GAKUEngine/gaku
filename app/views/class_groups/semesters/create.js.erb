@@ -2,12 +2,13 @@ $('#class-group-semesters-index tbody').append('<%= render_js_partial("semester"
 
 $('#new-class-group-semester-link').show();
 
+showNotice("<%= render_flash %>");
 $('#class-group-semesters-tab-link').html('<%= print_count(@class_group.semesters.count, t("semesters.semesters")) %>');
 $('.class-group-semesters-count').html('<%= print_count(@class_group.semesters.count, t("semesters.list")) %>');
 
 <%- if @semester.errors.any? %>
 	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("shared/errors", {:target => @semester}) %>');
 <%- else %>
-	$('#new-class-group-semester form').slideToggle();
+	$('#new-class-group-semester').slideToggle();
 	$('#new-class-group-semester-form-errors').slideToggle();
 <% end %>

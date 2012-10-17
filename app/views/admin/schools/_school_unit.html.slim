@@ -1,6 +1,5 @@
 = render 'school_fields', :school => school
 td
-  /= link_to_show [:admin, school]
-  = link_to t('campuses.plural'), admin_school_campuses_path(school)
+  = link_to_show [:admin, school]
   = ajax_link_to_edit [:edit, :admin, school]
   = ajax_link_to_delete [:admin, school]

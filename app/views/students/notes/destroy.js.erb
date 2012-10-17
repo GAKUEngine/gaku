@@ -1,2 +1,3 @@
 $('#new-student-note-tab-link').html('<%= print_count(@student.notes.count, t('notes.notes')) %>');
 $('.student-notes-count').html('<%= print_count(@student.notes.count, t('notes.list')) %>');
+showNotice("<%= render_flash %>");

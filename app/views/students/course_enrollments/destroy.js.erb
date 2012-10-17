@@ -1,2 +1,3 @@
 $('#new-student-course-enrollment-tab-link').html('<%= print_count(@student.courses.count, t("courses.plural"))  %>');
 $('.student-course-enrollments-count').html('<%= print_count(@student.courses.count, t("courses.list")) %>');
+showNotice("<%= render_flash %>");

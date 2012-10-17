@@ -4,3 +4,4 @@ $('#new-admin-enrollment-status-type form').slideToggle();
 $('#new-admin-enrollment-status-type-link').show();
 
 $('.admin-enrollment-status-types-count').html('<%= print_count(@enrollment_status_types_count + 1, t("enrollment_status_types.list")) %>');
+showNotice("<%= render_flash %>");

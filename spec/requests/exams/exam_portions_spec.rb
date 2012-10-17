@@ -31,11 +31,11 @@ describe 'Exam portions' do
 
     it 'should edit a portion', :js => true do
       within("#exam-exam_portions table tbody tr"){ find('.edit-exam-portion-link').click }
-      wait_until { find('#editExamPortionModal').visible? }
+      wait_until { find('#edit-exam-portion-modal').visible? }
       fill_in 'exam_portion_name', :with => 'MacOS'
       fill_in 'exam_portion_weight', :with => 50.6
       click_on 'Save exam portion'
-      wait_until { !find('#editExamPortionModal').visible? }
+      wait_until { !find('#edit-exam-portion-modal').visible? }
       within("#exam-exam_portions"){ page.should have_content('MacOS') }
       within("#exam-exam_portions"){ page.should have_content('50.6') }
       within('#weight-total'){ page.should have_content ("50.6") }

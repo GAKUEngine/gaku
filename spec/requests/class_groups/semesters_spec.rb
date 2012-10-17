@@ -34,7 +34,8 @@ describe 'ClassGroup Semesters' do
   it 'should not add a semester if cancel btn is clicked', :js => true do
     @class_group.semesters.count.should eq 0
     click_link 'new-class-group-semester-link'
-    wait_until { page.find('#new-class-group-semester form').visible? }
+
+    wait_until { page.find('#cancel-class-group-semester-link').visible? }
 
     click_on 'cancel-class-group-semester-link'
 

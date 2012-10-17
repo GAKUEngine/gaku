@@ -62,7 +62,10 @@ en:
     attachment_recovered: 'Attachment recovered'
     asset_type: 'Asset type'
   addresses:
+    created: 'Address was successfully created.'
+    destroyed: 'Address was successfully destroyed.'
     addresses: "Addresses"
+    singular: "Address"
     new: "New Address"
     add: "Add Address"
     zipcode: "ZIP Code"
@@ -298,7 +301,7 @@ en:
     plural: "Schools"
     add: "Add School"
     edit: "Edit School"
-    list: "School list"
+    list: "Schools list"
     new: "New School"
     save: "Save School"
     name: "Name"
@@ -316,7 +319,7 @@ en:
     plural: "Campuses"
     add: "Add Campus"
     edit: "Edit Campus"
-    list: "Campus list"
+    list: "Campuses list"
     new: "New Campus"
     save: "Save Campus"
     name: "Name"
