@@ -5,15 +5,15 @@ $ ->
   $('#new-syllabus-exam-link').on 'click', (event) ->
     event.preventDefault()
     $(@).hide()
-    $('#add-existing-exam').slideUp ->
+    $('#new-existing-exam').slideUp ->
       $('#new-syllabus-exam').slideToggle() 
-      $('#add-existing-exam-link').show()
+      $('#new-existing-exam-link').show()
 
-  $('#add-existing-exam-link').on 'click', (event) ->
+  $('#new-existing-exam-link').on 'click', (event) ->
     event.preventDefault()
     $(@).hide()
     $('#new-syllabus-exam').slideUp ->
-      $('#add-existing-exam').slideToggle()
+      $('#new-existing-exam').slideToggle()
       $('#new-syllabus-exam-link').show()
   
   $('#new-syllabus-assignment').on 'click', (event) ->
@@ -36,12 +36,12 @@ $ ->
     $('#new-syllabus').slideToggle()
     $('#new-syllabus-link').show()
 
-  $('#cancel-exam-syllabus-link').on 'click', (event)->
+  $('#cancel-existing-exam-link').on 'click', (event)->
     event.preventDefault()
-    $('#add-existing-exam').slideToggle()
-    $('#add-existing-exam-link').show()
+    $('#new-existing-exam').slideToggle()
+    $('#new-existing-exam-link').show()
 
-  $('#cancel-new-exam-syllabus-link').on 'click', (event) ->
+  $('#cancel-syllabus-exam-link').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-exam').slideToggle()
     $('#new-syllabus-exam-link').show()

@@ -1,9 +1,9 @@
 <%- if @exam_syllabus.errors.any? %>
-	$('#add-existing-exam-errors').html('<%= render_js_partial("/shared/errors", {:target => @exam_syllabus}) %>');
+	$('#new-existing-exam-errors').html('<%= render_js_partial("/shared/errors", {:target => @exam_syllabus}) %>');
 <%- else %>
-	$('#add-existing-exam').html('<%= render_js_partial("syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
-	$('#add-existing-exam').slideToggle();
-	$('#add-existing-exam-link').show()
+	$('#new-existing-exam').html('<%= render_js_partial("syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
+	$('#new-existing-exam').slideToggle();
+	$('#new-existing-exam-link').show()
 
   $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
 	showNotice("<%= render_flash %>");

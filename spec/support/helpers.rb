@@ -5,6 +5,10 @@ module Helpers
       '.edit-link'
     end
 
+    def show_link 
+      '.show-link'
+    end
+
     def delete_link 
       '.delete-link'
     end
@@ -23,6 +27,14 @@ module Helpers
 
     def wait_until_invisible(selector)
       wait_until { !page.find(selector).visible? }
+    end
+
+    def visible?(selector)
+      find(selector).visible?
+    end
+
+    def invisible?(selector) 
+      !page.find(selector).visible?
     end
 
     def click(selector)
