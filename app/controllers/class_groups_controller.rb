@@ -9,7 +9,7 @@ class ClassGroupsController < ApplicationController
 
   before_filter :load_before_index, :only => :index
   before_filter :load_before_show, :only => :show
-  before_filter :class_group,  :only => :destroy
+  before_filter :class_group,  :only => [:destroy, :show]
 
   def index
     @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
@@ -48,6 +48,8 @@ class ClassGroupsController < ApplicationController
 
     def load_before_show
       @notable = ClassGroup.find(params[:id])
+      @course = Course.new
+      @class_group_course_enrollment = ClassGroupCourseEnrollment.new
     end
 
     def sort_column
