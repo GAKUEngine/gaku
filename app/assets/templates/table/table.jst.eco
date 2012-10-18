@@ -78,8 +78,10 @@
 </div>
 
 <script>
-  console.log("aaaaaaaaaaaa")
+$(document).ready(function(){
 
+  // console.log($(".exam_grid"));
+  // console.log($(".exam_grid").width());
   var tableSizeFix;
   tableSizeFix = function() {
     var fixH, fixW;
@@ -87,7 +89,7 @@
     $("html").css("overflow-y", "hidden");
     fixW = 303;
     fixW += $(".btn-warning").length * 131;
-    if ($(".exam_infos").length > 1) {
+    if (<%= @exams.length %> > 1) {
       fixW += ($(".btn-inverse").length - 1) * 76;
       fixW += 302;
     } else {
@@ -107,6 +109,8 @@
       // fixRows: 2,
       // fixCols: 3
     // });
+    console.log($(".exam_grid").width());
   }
   // tableSizeFix();
+});
 </script>
