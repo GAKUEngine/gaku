@@ -10,6 +10,7 @@ class ClassGroupsController < ApplicationController
   before_filter :load_before_index, :only => :index
   before_filter :load_before_show, :only => :show
   before_filter :class_group,  :only => [:destroy, :show]
+  before_filter :class_groups_count, :only => [:create, :destroy]
 
   def index
     @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
@@ -32,11 +33,11 @@ class ClassGroupsController < ApplicationController
   end
 
   def destroy
-    if @class_group.destroy && !request.xhr?
-      flash[:notice] = "Class Group Destroyed"  
+    super do |format|
+      format.js { render }
     end
-    render :nothing => true
   end
+
   
   private
 
@@ -61,5 +62,8 @@ class ClassGroupsController < ApplicationController
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
-
+    
+    def class_groups_count
+        @class_groups_count = ClassGroup.count
+    end
 end

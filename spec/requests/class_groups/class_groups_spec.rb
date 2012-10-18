@@ -125,7 +125,7 @@ describe 'ClassGroups' do
         }.to change(ClassGroup,:count).by -1 
     
       page.should_not have_content(@class_group.name)
-      #page.should have_content 'successfully destroyed' //TODO
+      page.should have_content 'successfully destroyed'
     end
 
     it 'returns to class_groups via Back button' do
