@@ -1,4 +1,6 @@
--if @selected_students 
+-if @enrolled_students && @enrolled_students.include?(student.id.to_s)
+	td = image_tag 'check.png', :class => 'enrolled'
+-elsif @selected_students 
   td = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
 -else
   td = check_box_tag "","", false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"

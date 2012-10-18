@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
   
   def index
     @search = Student.search(params[:q])
-    @students = @search.result#.includes([:addresses, :class_groups, :class_group_enrollments]).all
+    @students = @search.result(:distinct => true)#.includes([:addresses, :class_groups, :class_group_enrollments]).all
     if params[:action] == "get_csv_template"
       get_csv_template
       return
@@ -24,6 +24,7 @@ class StudentsController < ApplicationController
 
     @class_groups = ClassGroup.all
     @courses = Course.all
+    @enrolled_students = params[:enrolled_students]
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
