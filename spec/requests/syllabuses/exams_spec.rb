@@ -9,6 +9,68 @@ describe 'Syllabus Exams' do
     visit syllabuses_path
   end
 
+  context "add existing exam" do
+    before do
+      within('table.index tr:nth-child(2)') { find(".show-link").click }
+      page.should have_content("No Exams")
+    end
+
+    it "add existing exam to syllabus", :js => true do
+
+      click_link "add-existing-exam-link" 
+      wait_until_visible('#submit-existing-exam-to-syllabus')
+      
+      select @exam.name, :from => 'exam_syllabus_exam_id'
+      click_button "submit-existing-exam-to-syllabus"      
+      
+      ensure_create_is_working('table#syllabus-exams-index tr')
+      page.find('#syllabus-exams-index').should have_content(@exam.name)
+      flash("Exam added to Syllabus")     
+
+      wait_until_invisible('#add-existing-exam') 
+    end 
+
+    it "cancel adding existing exam to syllabus", :js => true do
+      click "#add-existing-exam-link" 
+      wait_until_visible '#cancel-exam-syllabus-link'
+      wait_until_invisible '#add-existing-exam-link'
+      
+      click '#cancel-exam-syllabus-link'
+      wait_until_invisible '#add-existing-exam'
+      wait_until_visible '#add-existing-exam-link' 
+    end
+
+    it "click on add-existing-exam-link hide new-syllabus-exam form when is visible", :js => true do
+      click_link 'new-syllabus-exam-link'
+      wait_until_visible '#new-syllabus-exam'
+      
+      click_link "add-existing-exam-link" 
+      
+      wait_until_invisible '#new-syllabus-exam'
+      wait_until_visible '#new-syllabus-exam-link'
+
+      wait_until_visible '#add-existing-exam'
+      wait_until_invisible '#add-existing-exam-link'
+    end
+
+    it "click on new-syllabus-exam-link hide add-existing-exam form when is visible", :js => true do
+      click '#add-existing-exam-link'
+      wait_until_visible '#add-existing-exam'
+
+      click '#new-syllabus-exam-link'
+
+      wait_until_visible '#add-existing-exam-link'
+      wait_until_invisible '#add-existing-exam'
+
+      wait_until_visible '#new-syllabus-exam'
+      wait_until_invisible '#new-syllabus-exam-link'
+
+
+    end
+
+
+  end
+
   context "add and show exams" do
     before do 
       within('table.index tr:nth-child(2)') { find(".show-link").click }
@@ -42,20 +104,15 @@ describe 'Syllabus Exams' do
       @syllabus.exams.count.should eql(0)
     end
 
-    it "add existing exam to syllabus", :js => true do
-
-      click_link "add-existing-exam-link" 
-      wait_until_visible('#submit-existing-exam-to-syllabus')
+    it "cancel creating exam to syllabus", :js => true do
+      wait_until_visible '#cancel-new-exam-syllabus-link'
+      wait_until_invisible '#new-syllabus-exam-link'
       
-      select @exam.name, :from => 'exam_syllabus_exam_id'
-      click_button "submit-existing-exam-to-syllabus"      
-      
-      ensure_create_is_working('table#syllabus-exams-index tr')
-      page.find('#syllabus-exams-index').should have_content(@exam.name)
-      flash("Exam added to Syllabus")     
+      click '#cancel-new-exam-syllabus-link'
+      wait_until_invisible '#new-syllabus-exam'
+      wait_until_visible '#new-syllabus-exam-link'
+    end
 
-      wait_until_invisible('#add-existing-exam') 
-    end 
   end
 
   context 'show, edit, delete' do 
