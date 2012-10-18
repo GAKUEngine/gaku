@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Note' do
+describe 'Student Notes' do
   stub_authorization!
   
   before do
@@ -10,7 +10,7 @@ describe 'Note' do
 
   context 'new' do
     before do 
-      click_link 'new-student-note-link'
+      click_link 'new-note-link'
       wait_until { find("#submit-student-note-button").visible? }
     end
 
@@ -44,11 +44,11 @@ describe 'Note' do
     it 'should cancel adding', :js => true do 
       click_link 'cancel-note-link'
       wait_until { !page.find('#new-note form').visible? }
-      find('#new-student-note-link').visible?
+      find('#new-note-link').visible?
 
-      click_link 'new-student-note-link'
+      click_link 'new-note-link'
       wait_until { find('#new-note form').visible? }
-      !page.find('#new-student-note-link').visible?
+      !page.find('#new-note-link').visible?
     end
   end
 
