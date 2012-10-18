@@ -3,8 +3,9 @@ class ExamsController < ApplicationController
   inherit_resources
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :exam, :only => [:show, :destroy, :create_exam_portion]
+  before_filter :exam, :only => [:show, :create_exam_portion]
   before_filter :load_before_show, :only => :show
+  before_filter :load_before_new, :only => :new
 
 
   def export_xls
@@ -102,10 +103,14 @@ class ExamsController < ApplicationController
   end
 
   def new
-    @exam = Exam.new
-    @master_portion = @exam.exam_portions.new
-    respond_to do |format|
+    super do |format|
       format.js { render 'new'}
+    end
+  end
+
+  def create
+    super do |format|
+      format.js { render 'create' }
     end
   end
 
@@ -131,9 +136,8 @@ class ExamsController < ApplicationController
   end
 
   def destroy
-    @exam.destroy
-    respond_to do |format|
-      format.js { render :nothing => true }
+    super do |format|
+      format.js { render 'destroy' }
     end
   end
 
@@ -327,6 +331,13 @@ class ExamsController < ApplicationController
     respond_to do |format|
       format.json {render :json => {:hello => :world}}
     end
+  end
+
+  private
+
+  def load_before_new
+    @exam = Exam.new
+    @master_portion = @exam.exam_portions.new
   end
 
   # def update_score
