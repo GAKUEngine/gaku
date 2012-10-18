@@ -1,6 +1,10 @@
-h1= t("exams.list")
-= link_to t('exams.new'), new_exam_path, :class => "make-button", :id => "new_exam_link"
-
+#new-exam.hide
+.row-fluid
+  .pull-left
+    h4.h4-vm.exam-count
+      = print_count(@exams.count, t('exams.list'))
+  .pull-right
+    =ajax_link_to_new t('exams.add'), new_exam_path, :id => 'new-exam-link'
 .row-fluid
   .span12.well
     table#exams-index.index.table.table-striped.table-bordered.table-condensed
