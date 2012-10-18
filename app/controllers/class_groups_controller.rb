@@ -22,6 +22,8 @@ class ClassGroupsController < ApplicationController
 
     @class_groups = ClassGroup.all
 
+    @enrolled_students = @class_group.students.map {|i| i.id.to_s }
+
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
     respond_to do |format|
