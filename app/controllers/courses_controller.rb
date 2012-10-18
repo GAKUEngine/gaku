@@ -30,6 +30,8 @@ class CoursesController < ApplicationController
 
     @courses = Course.all
 
+    @enrolled_students = @course.students.map {|i| i.id.to_s }
+
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
     respond_to do |format|
