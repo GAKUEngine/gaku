@@ -1,4 +1,5 @@
 $('table#class-groups-index tbody').append('<%= render_js_partial("class_group", {:class_group => @class_group}) %>');
 $('#new-class-group form')[0].reset();
-$('#new-class-group form').slideToggle();
+$('#new-class-group').slideToggle();
 $('#new-class-group-link').show();
+showNotice("<%= render_flash %>");

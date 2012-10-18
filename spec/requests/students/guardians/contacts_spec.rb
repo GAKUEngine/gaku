@@ -69,7 +69,7 @@ describe 'Guardian Contacts' do
       it 'should cancel adding thru slide form', :js => true do 
         find('.show-link').click
         click_link "new-student-guardian-contact-link"
-        wait_until { find('#new-student-guardian-contact form').visible? }
+        wait_until { find('#submit-student-guardian-contact-button').visible? }
         !page.find('#new-student-guardian-contact-link').visible?
 
         click_link 'cancel-student-guardian-contact-link'

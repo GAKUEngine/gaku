@@ -1,35 +1,42 @@
 class SyllabusesController < ApplicationController
 
-  #before_filter :authenticate_user!
-
-  before_filter :load_syllabus,    :only  => [:create_exam, :create_assignment, :show]
-  before_filter :load_before_show, :only => :show
+  before_filter :load_before_index, :only => :index
+  before_filter :load_before_show,  :only => :show
 
   inherit_resources
-
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  def destroy
-    destroy! :flash => !request.xhr?
-  end
+  respond_to :js, :html
 
-  def update
+  def destroy
     super do |format|
-      format.js
+      format.js { render :nothing => true }
     end
   end
 
-
   private
-    def load_syllabus
+
+    def load_before_index
+      @syllabus = Syllabus.new
+    end
+
+    def syllabus 
     	@syllabus = Syllabus.find(params[:id])
-    	@grading_methods = GradingMethod.all
+    end
+
+    def grading_methods
+      @grading_methods = GradingMethod.all
     end
 
     def load_before_show
+      syllabus
+      
       @exam = Exam.new
       @exam.exam_portions.build
       @syllabus.assignments.build
+      @notable = @syllabus
+
+      grading_methods
     end
 
 end

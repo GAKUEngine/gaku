@@ -1,3 +1,4 @@
+showNotice("<%= render_flash %>");
 $('.student-contacts-count').html('<%= print_count(@student.contacts.count, t("contacts.list")) %>');
 
 <%- unless @student.contacts.blank? %>

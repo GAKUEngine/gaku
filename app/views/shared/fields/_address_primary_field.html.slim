@@ -1,0 +1,5 @@
+td class='primary_address'
+  -if !@primary_address.blank? && @primary_address.address.id == address.id
+    = link_to ("<i class='icon-white icon-ok'></i>").html_safe, [:make_primary] + target, :remote => true, :class => 'span12 btn btn-mini btn-primary make-primary-address', :method => :post
+  -else
+    = link_to ("<i class='icon-white icon-ok'></i>").html_safe, [:make_primary] + target, :remote => true, :id => 'set_primary_link', :class => 'span12 btn btn-mini make-primary-address', :method => :post

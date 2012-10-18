@@ -1,5 +1,6 @@
 #admin-schools
   .row-fluid
+    #new-admin-school.hide
     .pull-left
       h4.h4-vm.schools-count
         = print_count(@schools.count, t('schools.list'))
@@ -21,5 +22,3 @@
       tbody
         =render :partial => 'admin/schools/school', :collection => @schools, :as => 'school'
     br/
-#modal-dialogs
-#new-admin-school

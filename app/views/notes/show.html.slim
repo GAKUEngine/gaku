@@ -1,0 +1,16 @@
+-unless @note.nil? or @note.new_record? or !@note
+  .row-fluid
+    .span12.well
+      table.index.table.table-striped.table-bordered.table-condensed *{:id => [ @notable_resource + '-note-table']}
+        thead
+          tr
+            th
+            th =t("notes.title")
+            th =t("notes.content")
+        tbody
+          td =@note.id
+          td =@note.title
+          td =@note.content
+  .row-fluid
+    .span12.well
+      = link_to_back :back, :class => "span3 btn btn-danger"

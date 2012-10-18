@@ -1,0 +1,19 @@
+- model = @note || Note.new
+- model_class = model.class
+.modal.hide#edit-note-modal wmode="opaque"
+  
+  = form_for [@notable, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |note_form| 
+    .modal-header
+      button.close type="button" data-dismiss="modal" x
+      h3= t("notes.edit")
+    .modal-body
+      .validation-error
+      .form-inputs
+
+        = render 'shared/form_fields/note_form_fields', :note_form => note_form
+
+        .row-fluid
+          .span12
+            .span6 
+              = note_form.submit t("notes.save"), :id => 'submit-' + @notable_resource + '-note-button', :class => "span12 btn btn-primary", :style => "min-height:0px; float: left;"
+              = link_to_cancel :id => 'cancel-' + @notable_resource + '-note-link', :class => 'btn'

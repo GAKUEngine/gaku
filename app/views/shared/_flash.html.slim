@@ -1,6 +1,4 @@
-- if notice
-  .alert.alert-info
-    button.close{data-dismiss="alert"} ×
-    =raw notice
-
-.flash-error
+-flash.each do |type, message|
+	div class="fade in #{flash_color(type)}"
+	  button class='close' data-dismiss='alert' ×
+	  =message

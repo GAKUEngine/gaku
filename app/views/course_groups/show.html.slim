@@ -19,24 +19,16 @@
       .span12.well       
             #courses
               .row-fluid
-                #course-group-enrollments-index
-                  =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
-              .row-fluid
                 .span12
                   #course-group-enrollment-form-errors
-                  #new-course-group-enrollment-form.hide
+                  #new-course-group-enrollment.hide
                     =render 'course_groups/course_group_enrollments/form'
+              .row-fluid
+                #course-group-enrollments-index
+                  =render 'course_groups/course_group_enrollments/courses', :course_group => @course_group
       
     .row-fluid
       .span12.well
         = link_to t("Edit"), [:edit, @course_group], :class => "span6 btn edit-link", :remote => true
         = link_to_back course_groups_path, :class => "span6 btn"
       =render 'delete_confirm'
-       
-#modal-dialogs
-
-coffee:
-  $ ->
-    $('#show-course-form').click ->
-      $('#new-course-group-form').toggle 'slow', ->
-        $('#new-course-group-form form').validationEngine()

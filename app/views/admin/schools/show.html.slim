@@ -4,7 +4,12 @@
       tbody
         tr
           = render 'school_fields', :school => @school
-
+br/
+= render 'admin/schools/campuses/campuses'
+br/
 .row-fluid
-  .span12
-    =link_to t('Back'), @schools, :class => 'btn'
+  .span12.well
+    .span4
+      = link_to_edit_with_text [:edit, :admin, @school], :class => "span12 btn btn-warning edit-link", :remote => true
+    .span4
+      = link_to_back admin_schools_path, :class => "span12 btn"

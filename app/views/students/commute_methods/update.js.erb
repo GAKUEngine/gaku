@@ -1,2 +1,2 @@
 $('#student-commute-method-form').html('<%= render_js_partial("/students/commute_methods/commute_method", :student => @student) %>');
-$('.flash-error').html("<%= escape_javascript(render 'shared/flash', :notice => flash[:notice]) %>");
+showNotice("<%= render_flash %>");

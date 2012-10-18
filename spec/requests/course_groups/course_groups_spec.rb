@@ -24,7 +24,7 @@ describe 'CourseGroups' do
     it 'should not add new if name is empty', :js => true do
       click_link 'new-course-group-link'
 
-      wait_until { find("#new-course-group form").visible? }
+      wait_until { find('#submit-course-group-button').visible? }
       click_button 'submit-course-group-button'
 
       page.should have_content('can\'t be blank')
@@ -33,7 +33,7 @@ describe 'CourseGroups' do
     it 'should cancel adding', :js => true do
       click_link 'new-course-group-link'
 
-      wait_until { find('#new-course-group form').visible? }
+      wait_until { find('#cancel-course-group-link').visible? }
       click_link 'cancel-course-group-link'
 
       wait_until { !find('#new-course-group form').visible? }
