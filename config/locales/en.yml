@@ -250,6 +250,7 @@ en:
     show: "Show Exam"
     edit: "Edit Exam"
     exam_created: 'Exam was successfully created'
+    save: 'Save Exam'
   config:
     label: "Config"
     close: "Close"

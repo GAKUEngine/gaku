@@ -104,6 +104,9 @@ class ExamsController < ApplicationController
   def new
     @exam = Exam.new
     @master_portion = @exam.exam_portions.new
+    respond_to do |format|
+      format.js { render 'new'}
+    end
   end
 
   def show

@@ -26,6 +26,17 @@ describe 'Exams' do
       Exam.count.should == 1
     end
 
+    it "should cancel create new exam", :js => true do
+      click '#new-exam-link'
+      wait_until_visible '#cancel-exam-link'
+      click '#cancel-exam-link'
+      wait_until_invisible '#new-exam'
+      wait_until_visible '#new-exam-link'
+
+      click '#new-exam-link'
+      wait_until_visible '#new-exam form'
+    end
+
     it 'should not submit new exam without filled validated fields' do
       Exam.count.should == 0
       click_link 'new_exam_link'

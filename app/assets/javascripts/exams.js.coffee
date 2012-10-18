@@ -14,4 +14,10 @@ $(document).ready ->
 		event.preventDefault()
 		$('#exam_exam_portions_form').slideToggle()
 
+	# cancel new exam form
+	$('#new-exam').on 'click','#cancel-exam-link', (event)->
+		event.preventDefault()
+		$('#new-exam').slideToggle()
+		$('#new-exam-link').show()
+
 

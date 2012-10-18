@@ -261,6 +261,7 @@ ja:
     grading_methods:
       deviation: "偏差値"
       percent: "割合"
+    save: 'Save Exam'
   execution_date: "実行日"
   config:
     label: "設定"
