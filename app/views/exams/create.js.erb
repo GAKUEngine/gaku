@@ -1,0 +1,5 @@
+showNotice("<%= render_flash %>");
+
+$('#exams-index tbody').append('<%= render_js_partial("exam", {:exam => @exam}) %>');
+$('#new-exam').slideToggle()
+$('#new-exam-link').show()

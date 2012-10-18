@@ -3,27 +3,37 @@ require 'spec_helper'
 describe 'Exams' do
   stub_authorization!
 
+  table_rows = '#exams-index tbody tr'
+
   before do
     visit exams_path
   end
 
   context 'not added exam' do
 
-    it 'should create new exam' do  #TODO Add execution_date and data
-      Exam.count.should == 0
-      click_link 'new_exam_link'
-      fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_weight', :with => 1 
-      fill_in 'exam_description', :with => "Good work"
+    it 'should create new exam', :js => true do  #TODO Add execution_date and data
+      tr_count = page.all(table_rows).size
 
-      fill_in 'exam_exam_portions_attributes_0_name', :with => 'Exam Portion 1'
-      fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-      fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
-      fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-      click_button 'Create Exam'  
+      expect do
 
-      page.should have_content "was successfully created"
-      Exam.count.should == 1
+        click '#new-exam-link'
+        wait_until_visible '#submit-exam-button'
+
+        fill_in 'exam_name', :with => 'Biology Exam'
+        fill_in 'exam_weight', :with => 1 
+        fill_in 'exam_description', :with => "Good work"
+
+        fill_in 'exam_exam_portions_attributes_0_name', :with => 'Exam Portion 1'
+        fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
+        fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
+        fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
+      
+        click '#submit-exam-button'
+
+      end.to change(Exam, :count).by(1)
+      
+      flash "was successfully created"
+      wait_until { page.all(table_rows).size == tr_count + 1 }
     end
 
     it "should cancel create new exam", :js => true do
