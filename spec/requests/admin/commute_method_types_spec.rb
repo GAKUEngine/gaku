@@ -28,14 +28,15 @@ describe 'CommuteMethodTypes' do
 
     it 'should cancel creating commute method type', :js => true do 
       click_link 'new-admin-commute-method-type-link'
-
+      
       wait_until { page.find('#cancel-admin-commute-method-type-link').visible? }
+      
       click_link 'cancel-admin-commute-method-type-link'
 
-      wait_until { !page.find('#new-admin-commute-method-type form').visible? }
+      wait_until { !page.find('#new-admin-commute-method-type').visible? }
       click_link 'new-admin-commute-method-type-link'
   
-      wait_until { page.find('#new-admin-commute-method-type form').visible? }
+      wait_until { page.find('#new-admin-commute-method-type').visible? }
     end
   end
 
@@ -60,7 +61,7 @@ describe 'CommuteMethodTypes' do
 
     it 'should cancel editting', :js => true do 
       within('table#admin-commute-method-types-index tbody') { find('.edit-link').click }
-      wait_until { find('#edit-commute-method-type-modal').visible? }
+      wait_until { find('#cancel-admin-commute-method-type-link').visible? }
 
       click_link 'cancel-admin-commute-method-type-link'
       wait_until { !page.find('#edit-commute-method-type-modal').visible? }
