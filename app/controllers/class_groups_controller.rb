@@ -52,6 +52,7 @@ class ClassGroupsController < ApplicationController
     def load_before_show
       @notable = ClassGroup.find(params[:id])
       @course = Course.new
+      @semester = Semester.new
       @class_group_course_enrollment = ClassGroupCourseEnrollment.new
     end
 
