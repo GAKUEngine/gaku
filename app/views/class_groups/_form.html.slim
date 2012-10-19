@@ -17,6 +17,7 @@
           = class_group_form.number_field :grade, :class => "span12"
         .span4
           = class_group_form.label :name, t("class_groups.name")
+          = required_field
           = class_group_form.text_field :name, :class => "span12 validate[required]"
         .span4
           = class_group_form.label :homeroom, t("class_groups.homeroom")
