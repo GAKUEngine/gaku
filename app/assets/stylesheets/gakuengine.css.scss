@@ -81,6 +81,10 @@ td.vm-tr {
 }
 
 //bootstrap fix ----------
+.btn-inverse a {
+  color: white;
+}
+
 .row-fluid a[class*='span']  {
   min-height:0px;
 }
