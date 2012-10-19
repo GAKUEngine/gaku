@@ -28,19 +28,18 @@ describe 'Contact' do
     end
 
     it "creates and shows contact" do
-      @school.campuses.first.contacts.size.should eq 0
-      
-      select 'email', :from => 'contact_contact_type_id'
-      fill_in "contact_data", :with => "The contact data"
-      fill_in "contact_details", :with => "The contact details"
-      click submit_button
-      
-      wait_until_invisible form
+        expect do 
+        select 'email', :from => 'contact_contact_type_id'
+        fill_in "contact_data", :with => "The contact data"
+        fill_in "contact_details", :with => "The contact details"
+        click submit_button
+        wait_until_invisible form
+      end.to change(@school.campuses.first.contacts, :count).by 1
+
       page.should have_content("The contact data")
       page.should have_content("The contact details")
       within(count_div) { page.should have_content('Contacts list(1)') }
-      @school.reload
-      @school.campuses.first.contacts.size.should eq 1
+      flash_created?
     end
 
     it 'cancels creating' do
@@ -71,6 +70,7 @@ describe 'Contact' do
 
         wait_until_invisible modal
         page.should have_content('example@genshin.org')
+        flash_updated?
       end
 
       it 'cancels editting' do 
@@ -101,13 +101,14 @@ describe 'Contact' do
 
       within(count_div) { page.should have_content('Contacts list(1)') }
       page.should have_content(@contact.data)
-      @school.campuses.first.contacts.size.should eq 1
+      
+      expect do 
+        ensure_delete_is_working(delete_link, table_rows)
+      end.to change(@school.campuses.first.contacts, :count).by -1
 
-      ensure_delete_is_working(delete_link, table_rows)
-
-      within(count_div) { page.should_not have_content('Contacts list(1)') }
-      @school.campuses.first.contacts.size.should eq 0
       page.should_not have_content(@contact.data)
+      within(count_div) { page.should_not have_content('Contacts list(1)') }
+      flash_destroyed?
     end
   end
 end
