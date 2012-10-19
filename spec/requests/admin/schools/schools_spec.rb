@@ -23,15 +23,16 @@ describe 'Schools' do
     end
 
     it 'creates and shows school' do 
-      School.count.should eq 0
+      expect do 
+        fill_in 'school_name', :with => 'Nagoya University'
+        click submit_button
 
-      fill_in 'school_name', :with => 'Nagoya University'
-      click submit_button
+        wait_until_invisible form
+      end.to change(School, :count).by 1
 
-      wait_until_invisible form
       page.should have_content('Nagoya University')
       within(count_div) { page.should have_content('Schools list(1)') }
-      School.count.should eq 1
+      flash_created?
     end 
 
     it 'cancels creating' do 
@@ -62,7 +63,7 @@ describe 'Schools' do
     	  wait_until_invisible modal
     	  page.should have_content('Sofia Technical University')
     	  page.should_not have_content('Varna Technical University')
-    	  School.count.should eq 1
+    	  flash_updated?
     	end
 
       it 'cancels editting' do 
@@ -72,15 +73,16 @@ describe 'Schools' do
     end
 
   	it 'deletes school' do
-      School.count.should eq 1 
       within(count_div) { page.should have_content('Schools list(1)') }
       page.should have_content(@school.name)
 
-      ensure_delete_is_working(delete_link, table_rows)
+      expect do 
+        ensure_delete_is_working(delete_link, table_rows) 
+      end.to change(School, :count).by -1
 
       within(count_div) { page.should_not have_content('Schools list(1)') }
       page.should_not have_content(@school.name)
-      School.count.should eq 0
+      flash_destroyed?
     end
   end
 

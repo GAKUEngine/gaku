@@ -10,6 +10,7 @@ describe 'ClassGroups' do
   submit_button = '#submit-class-group-button'
   
   table_rows    = 'table#class-groups-index tbody tr'
+  count_div     = '.class_groups-count'
 
   stub_authorization!
 
@@ -35,7 +36,8 @@ describe 'ClassGroups' do
       page.should have_content '7'
       page.should have_content 'Awesome class group'
       page.should have_content 'room#7'
-      flash 'successfully created'
+      within(count_div) { page.should have_content('Class Groups list(1)') }
+      flash_created?
     end
 
     it "errors without required fields" do
@@ -84,7 +86,7 @@ describe 'ClassGroups' do
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
-        flash 'successfully updated'
+        flash_updated?
       end
 
       it 'cancels editting' do
@@ -114,19 +116,21 @@ describe 'ClassGroups' do
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
-        flash 'successfully updated'
+        flash_updated?
       end
     end
 
     it 'deletes a class group', :js => true do 
       page.should have_content(@class_group.name)
+      within(count_div) { page.should have_content('Class Groups list(1)') }
 
       expect do
         ensure_delete_is_working(delete_link,table_rows)
       end.to change(ClassGroup,:count).by -1 
     
       page.should_not have_content(@class_group.name)
-      flash 'successfully destroyed'
+      within(count_div) { page.should_not have_content('Class Groups list(1)') }
+      flash_destroyed?
     end
 
     it 'returns to class_groups via Back button' do

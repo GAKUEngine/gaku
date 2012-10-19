@@ -11,6 +11,7 @@ describe 'Campuses' do
   
   table          = '#admin-school-campuses-index'
   table_rows     = '#admin-school-campuses-index tr'
+  count_div      = '.admin-school-campuses-count'
 
   stub_authorization!
 
@@ -25,15 +26,18 @@ describe 'Campuses' do
       wait_until_visible submit_button
     end
 
-    it 'creates and shows school campus' do 
-      @school.campuses.count.should eq 1
+    it 'creates and shows campus' do 
+      within(count_div) { page.should have_content('Campuses list(1)') }
 
-      fill_in 'campus_name', :with => 'Nagoya Campus'
-      click submit_button
+      expect do 
+        fill_in 'campus_name', :with => 'Nagoya Campus'
+        click submit_button
+        wait_until_invisible form
+      end.to change(@school.campuses, :count).by 1
 
-      wait_until_invisible form
       page.should have_content 'Nagoya Campus'
-      @school.campuses.count.should eq 2
+      within(count_div) { page.should have_content('Campuses list(2)') }
+      flash_created?
     end 
 
     it 'cancels creating' do
@@ -53,7 +57,7 @@ describe 'Campuses' do
         wait_until_visible modal 
       end
 
-      it 'edits school campus' do
+      it 'edits campus' do
         fill_in 'campus_name', :with => 'Nagoya Campus'
         click submit_button 
 
@@ -62,7 +66,7 @@ describe 'Campuses' do
           page.should have_content('Nagoya Campus')
           page.should_not have_content('Nagoya University') 
         end
-        @school.campuses.count.should eq 1
+        flash_updated?
       end
 
       it 'cancels editting' do 
@@ -71,10 +75,17 @@ describe 'Campuses' do
       end
     end
 
-    it 'deletes school' do
-      @school.campuses.count.should eq 1 
-      ensure_delete_is_working(delete_link, table_rows)
-      @school.campuses.count.should eq 0
+    it 'deletes campus' do
+      within(table) { page.should have_content("Nagoya University") }
+      within(count_div) { page.should have_content('Campuses list(1)') }
+
+      expect do 
+        ensure_delete_is_working(delete_link, table_rows)
+      end.to change(@school.campuses, :count).by -1
+
+      within(table) { page.should_not have_content("Nagoya University") }
+      within(count_div) { page.should_not have_content('Campuses list(1)') }
+      flash_destroyed?
     end
   end
 
