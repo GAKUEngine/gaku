@@ -111,7 +111,7 @@ describe 'CourseGroups' do
     it 'should redirect to show view when show btn selected' do
       within('#course-groups-index tbody') { find('.show-link').click }
       page.should have_content ('Course Group')
-      page.should have_content ('Courses list')
+      page.should have_content ('Courses List')
     end
     
   end
