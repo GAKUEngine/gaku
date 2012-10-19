@@ -25,7 +25,7 @@ describe 'Syllabus Exams' do
 
   context "existing exam" do
     before do
-      within('table.index tr:nth-child(2)') { click show_link }
+      within('table.index tbody tr:nth-child(1)') { click show_link }
       page.should have_content("No Exams")
     end
 
@@ -58,7 +58,7 @@ describe 'Syllabus Exams' do
   context "new exam" do
     context 'new' do 
       before do 
-        within('table.index tr:nth-child(2)') { click show_link }
+        within('table.index tbody tr:nth-child(1)') { click show_link }
         page.should have_content("No Exams")
         click new_link
         wait_until_visible submit_button
@@ -144,8 +144,8 @@ describe 'Syllabus Exams' do
 
   context 'links hiding' do
     before do 
-      within('table.index tr:nth-child(2)') { click show_link }
-    end
+      within('table.index tbody tr:nth-child(1)') { click show_link }
+    end 
 
     it "clicking on new-existing-exam-link hides new-exam-form", :js => true do
       click new_link
