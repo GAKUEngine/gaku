@@ -32,6 +32,8 @@ describe 'Exams' do
         click '#submit-exam-button'
 
       end.to change(Exam, :count).by(1)
+
+      flash 'was successfully created'
       
       flash "was successfully created"
       wait_until { page.all(table_rows).size == tr_count + 1 }
@@ -151,6 +153,8 @@ describe 'Exams' do
       end.to change(Exam, :count).by(-1)
       
       within(count_div) { page.should_not have_content('Exams List(1)') }
+      flash 'was successfully destroyed'
+
     end
 
     it 'should return to exams index when back selected' do
