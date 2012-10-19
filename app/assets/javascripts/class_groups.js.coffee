@@ -6,7 +6,7 @@ $ ->
     $('#new-class-group').slideToggle()
     $("#new-class-group-link").show()
 
-  $("#cancel-course-link").on 'click', (e)->
+  $("#cancel-class-group-course-link").on 'click', (e)->
     event.preventDefault()
     $("#new-class-group-course-link").show()
     $("#new-class-group-course").slideToggle()

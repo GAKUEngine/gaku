@@ -34,15 +34,14 @@ describe 'ClassGroup Courses' do
   end
 
   pending 'should cancel adding', :js => true do
-    click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course form').visible? }
-    click_on 'cancel-course-link'
+    click '#new-class-group-course-link'
+    wait_until_visible('#new-class-group-course')
 
-    wait_until { !page.find('#new-class-group-course form').visible? }
-    within("#courses-index tbody"){ page.should_not have_content ("#{@course.code}") }
+    click '#cancel-class-group-course-link'
+    wait_until_invisible('#new-class-group-course')
 
     click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course form').visible? }
+    wait_until_visible('#new-class-group-course')
   end
 
   context 'Class group with added course' do

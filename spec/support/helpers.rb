@@ -5,6 +5,10 @@ module Helpers
       '.edit-link'
     end
 
+    def show_link 
+      '.show-link'
+    end
+
     def delete_link 
       '.delete-link'
     end
@@ -25,6 +29,14 @@ module Helpers
       wait_until { !page.find(selector).visible? }
     end
 
+    def visible?(selector)
+      find(selector).visible?
+    end
+
+    def invisible?(selector) 
+      !page.find(selector).visible?
+    end
+
     def click(selector)
       find(selector).click
     end
@@ -36,6 +48,19 @@ module Helpers
       accept_alert
         
       wait_until { size_of(table_rows) == tr_count - 1 }
+    end
+
+    def ensure_create_is_working(table_rows)
+      tr_count = size_of table_rows
+      wait_until { size_of(table_rows) == tr_count + 1 }
+    end
+
+    def flash(text)
+      page.should have_selector("#notice", :text => text)
+    end
+
+    def flash_error_for(field)
+      page.should have_selector("div.#{field}formError")
     end
 
   end

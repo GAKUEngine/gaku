@@ -1,4 +1,6 @@
 en:
+  menu: 
+    class_groups: "Class Listing"
   admin:
     admin: "Admin"
     schools: "Schools"
@@ -136,6 +138,7 @@ en:
     choose_exam: 'Choose Exam'
     add_exam: 'Add Exam'
     add_existing_exam: 'Add Existing Exam'
+    save: 'Save Syllabus'
   course_management: 'Course Management'
   course: "Course"
   courses:
@@ -176,7 +179,7 @@ en:
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
-    list: "Class Listing"
+    list: "Class Groups list"
     new: "New Class"
     name: "Class Name"
     grade: "Grade"

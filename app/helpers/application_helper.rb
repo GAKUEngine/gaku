@@ -3,6 +3,10 @@ module ApplicationHelper
   include LinkToHelper
   include SortHelper
 
+  def required_field
+    ('<span class= "label label-important pull-right">' + t('required') + '</span>').html_safe 
+  end
+
   def print_count(count, text)
     count != 0 ? text + "(" + count.to_s + ")" : text
   end
@@ -38,6 +42,12 @@ module ApplicationHelper
 
   def render_flash
     escape_javascript(render 'shared/flash', :flash => flash)
+  end
+
+  def title(text)
+    content_for(:title) do 
+      text
+    end
   end
 
 end

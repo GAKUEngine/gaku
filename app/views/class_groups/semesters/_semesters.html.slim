@@ -1,5 +1,6 @@
 .row-fluid
   #new-class-group-semester.hide
+    = render 'class_groups/semesters/form'
   .pull-left
     h4.h4-vm.class-group-semesters-count 
       =print_count(@class_group.semesters.count, t("semesters.list"))

@@ -1,7 +1,24 @@
 .row-fluid
+  h4 = t("admissions.select.course")
+.row-fluid
   .span6
-    = form.label :class_group_id, t("class"), :class => "control-label"
-    = form.collection_select :class_group_ids, ClassGroup.all, :id, :name, {}, {:class => 'span12'}
+    = form.label :faculty_id, t("admissions.candidates.course"), :class => "control-label"
+    = form.collection_select :faculty_id, Faculty.all, :id, :name, {}, {:class => 'span12'}
+.row-fluid
+  h4 = t("admissions.selects.department")
+.row-fluid
+  .span6
+    = form.label :first_choice, t("admissions.candidates.first_choice"), :class => "control-label"
+    = collection_select :first_choice, :id, Faculty.all, :id, :name, {}, {:class => 'span12'}
+  .span6
+    = form.label :second_choice, t("admissions.candidates.second_choice"), :class => "control-label"
+    = collection_select :second_choice, :id, Faculty.all, :id, :name, {}, {:class => 'span12'}
+.row-fluid
+  h4 = t("admissions.inputs.candidate")
+.row-fluid
+  .span6
+    = form.label :class_group_id, t("admissions.candidates.junior_high_school"), :class => "control-label"
+    = form.collection_select :class_group_ids, School.all, :id, :name, {}, {:class => 'span12'}
 .row-fluid
   .span3
     = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
@@ -30,7 +47,7 @@
   .span3
     = form.label :email, t("email"), :class => "control-label pull-left"
     = form.text_field :email, :class => "span12"
-.row-fluid
+/.row-fluid
   .span6
     = form.label :admitted, t("admitted"), :class => "control-label"
     = form.text_field :admitted, :class => "span12 datepicker"
