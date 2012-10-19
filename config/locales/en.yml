@@ -237,7 +237,7 @@ en:
     plural: "Exams"
     new: "New Exam"
     new_exam: "New Exam Contents"
-    add: "Add exam"
+    add: "Add Exam"
     list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
@@ -252,6 +252,7 @@ en:
     show: "Show Exam"
     edit: "Edit Exam"
     exam_created: 'Exam was successfully created'
+    save: 'Save Exam'
   config:
     label: "Config"
     close: "Close"

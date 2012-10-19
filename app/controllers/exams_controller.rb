@@ -3,9 +3,10 @@ class ExamsController < ApplicationController
   inherit_resources
   actions :index, :show, :new, :create, :update, :edit, :destroy
 
-  before_filter :exam, :only => [:show, :destroy, :create_exam_portion]
+  before_filter :exam, :only => [:show, :create_exam_portion]
   before_filter :load_before_show, :only => :show
-
+  before_filter :load_before_new, :only => :new
+  before_filter :exams_count, :only => [:create, :destroy]
 
   def export_xls
     @course = Course.find(params[:course_id])
@@ -102,8 +103,15 @@ class ExamsController < ApplicationController
   end
 
   def new
-    @exam = Exam.new
-    @master_portion = @exam.exam_portions.new
+    super do |format|
+      format.js { render 'new'}
+    end
+  end
+
+  def create
+    super do |format|
+      format.js { render 'create' }
+    end
   end
 
   def show
@@ -128,9 +136,8 @@ class ExamsController < ApplicationController
   end
 
   def destroy
-    @exam.destroy
-    respond_to do |format|
-      format.js { render :nothing => true }
+    super do |format|
+      format.js { render 'destroy' }
     end
   end
 
@@ -326,6 +333,13 @@ class ExamsController < ApplicationController
     end
   end
 
+  private
+
+  def load_before_new
+    @exam = Exam.new
+    @master_portion = @exam.exam_portions.new
+  end
+
   # def update_score
     # @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
     # @exam_portion_score.score = params[:exam_portion_score][:score]
@@ -362,5 +376,9 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
       @notable = @exam
+    end
+
+    def exams_count 
+      @exams_count = Exam.count
     end
 end
