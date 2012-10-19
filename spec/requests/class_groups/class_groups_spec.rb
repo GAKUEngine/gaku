@@ -10,6 +10,7 @@ describe 'ClassGroups' do
   submit_button = '#submit-class-group-button'
   
   table_rows    = 'table#class-groups-index tbody tr'
+  count_div     = '.class_groups-count'
 
   stub_authorization!
 
@@ -35,6 +36,7 @@ describe 'ClassGroups' do
       page.should have_content '7'
       page.should have_content 'Awesome class group'
       page.should have_content 'room#7'
+      within(count_div) { page.should have_content('Class Groups list(1)') }
       flash 'successfully created'
     end
 
@@ -120,12 +122,14 @@ describe 'ClassGroups' do
 
     it 'deletes a class group', :js => true do 
       page.should have_content(@class_group.name)
+      within(count_div) { page.should have_content('Class Groups list(1)') }
 
       expect do
         ensure_delete_is_working(delete_link,table_rows)
       end.to change(ClassGroup,:count).by -1 
     
       page.should_not have_content(@class_group.name)
+      within(count_div) { page.should_not have_content('Class Groups list(1)') }
       flash 'successfully destroyed'
     end
 
