@@ -1,4 +1,6 @@
 en:
+  menu: 
+    class_groups: "Class Listing"
   admin:
     admin: "Admin"
     schools: "Schools"
@@ -177,7 +179,7 @@ en:
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
-    list: "Class Listing"
+    list: "Class Groups list"
     new: "New Class"
     name: "Class Name"
     grade: "Grade"
