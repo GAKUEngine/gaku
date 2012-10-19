@@ -40,7 +40,6 @@ spec/dummy
 *.swp
 *.swo
 *.orig
-Gemfile.lock
 .rvmrc
 .yardoc/**
 

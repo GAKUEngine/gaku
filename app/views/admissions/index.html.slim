@@ -1,0 +1,17 @@
+- content_for :title, t("admissions.candidates.list")
+
+.row-fluid
+  .pull-left
+    h4.mt-xs.mb-0.students-count
+      = print_count(@students.count, t("admissions.candidates.list"))
+  .pull-right
+    = ajax_link_to_new t("admissions.candidates.new"), new_student_path, :id => "new-student-link", :class => 'mr-s btn btn-primary'
+    /= button t("students.import"), "students/importer", :id => "import-students-link", :class => 'mr-s btn btn-primary'
+    = button t("admissions.candidates.export"), "students.csv", :id => 'export-students-link', :class => 'btn'
+.row-fluid
+  #new-student.hide
+    = render 'form'
+.row-fluid
+  .span12
+    hr/
+  =render 'student_chooser'

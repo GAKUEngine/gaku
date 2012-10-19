@@ -1,6 +1,6 @@
 tr id="student-#{student.id}"
   = render 'shared/fields/student_fields', :student => student
-  -if params[:controller] == "students"
+  -if params[:controller] == "students" or params[:controller] == "admissions"
     td
       = link_to_show student
-      = ajax_link_to_edit [:edit, student]
+      = ajax_link_to_edit [:edit, student], :style => "margin:0px"

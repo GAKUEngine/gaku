@@ -1,7 +1,10 @@
 GAKUEngine::Application.routes.draw do
 
+
   devise_for :installs
   devise_for :users
+
+  resources :admissions
 
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
@@ -20,7 +23,6 @@ GAKUEngine::Application.routes.draw do
   end
 
   resources :courses do
-    
     resources :notes
     resources :enrollments, :controller => 'courses/enrollments' do
       post :enroll_class_group, :on => :member
@@ -140,7 +142,7 @@ GAKUEngine::Application.routes.draw do
         resources :contacts, :controller => 'schools/campuses/contacts' do
           post :make_primary, :on => :member
         end
-        resources :addresses, :controller => 'schools/campuses/addresses' 
+        resources :addresses, :controller => 'schools/campuses/addresses'
       end
     end
     resources :presets do

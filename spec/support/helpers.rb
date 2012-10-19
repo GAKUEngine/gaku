@@ -59,6 +59,10 @@ module Helpers
       page.should have_selector("#notice", :text => text)
     end
 
+    def flash_error_for(field)
+      page.should have_selector("div.#{field}formError")
+    end
+
   end
 end
 
