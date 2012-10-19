@@ -26,7 +26,8 @@ $ ->
 
   $('#new-course form').validationEngine()
     
-  $("#cancel-course-link").click ->
+  $("#cancel-course-link").on 'click', (event)->
+    event.preventDefault()
     $('#new-course').slideToggle()
     $('#new-course-link').show()
 
