@@ -37,7 +37,7 @@ describe 'ClassGroups' do
       page.should have_content 'Awesome class group'
       page.should have_content 'room#7'
       within(count_div) { page.should have_content('Class Groups list(1)') }
-      flash 'successfully created'
+      flash_created?
     end
 
     it "errors without required fields" do
@@ -86,7 +86,7 @@ describe 'ClassGroups' do
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
-        flash 'successfully updated'
+        flash_updated?
       end
 
       it 'cancels editting' do
@@ -116,7 +116,7 @@ describe 'ClassGroups' do
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
-        flash 'successfully updated'
+        flash_updated?
       end
     end
 
@@ -130,7 +130,7 @@ describe 'ClassGroups' do
     
       page.should_not have_content(@class_group.name)
       within(count_div) { page.should_not have_content('Class Groups list(1)') }
-      flash 'successfully destroyed'
+      flash_destroyed?
     end
 
     it 'returns to class_groups via Back button' do

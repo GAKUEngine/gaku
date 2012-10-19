@@ -37,7 +37,7 @@ describe 'Campuses' do
 
       page.should have_content 'Nagoya Campus'
       within(count_div) { page.should have_content('Campuses list(2)') }
-      flash 'successfully created'
+      flash_created?
     end 
 
     it 'cancels creating' do
@@ -66,7 +66,7 @@ describe 'Campuses' do
           page.should have_content('Nagoya Campus')
           page.should_not have_content('Nagoya University') 
         end
-        flash 'successfully updated'
+        flash_updated?
       end
 
       it 'cancels editting' do 
@@ -85,7 +85,7 @@ describe 'Campuses' do
 
       within(table) { page.should_not have_content("Nagoya University") }
       within(count_div) { page.should_not have_content('Campuses list(1)') }
-      flash 'successfully destroyed'
+      flash_destroyed?
     end
   end
 
