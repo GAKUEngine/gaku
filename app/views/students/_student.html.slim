@@ -3,4 +3,4 @@ tr id="student-#{student.id}"
   -if params[:controller] == "students" or params[:controller] == "admissions"
     td
       = link_to_show student
-      = ajax_link_to_edit [:edit, student]
+      = ajax_link_to_edit [:edit, student], :style => "margin:0px"
