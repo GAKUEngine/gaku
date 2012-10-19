@@ -10,6 +10,9 @@
           = print_count(@courses.count, t('courses.list'))
       .pull-right
         = link_to_new t("courses.new"), new_course_path, :id => "new-course-link"
+    row-fluid
+      .span12
+        hr/
     .row-fluid
       .span12.well
           =render 'courses/courses'
