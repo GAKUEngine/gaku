@@ -47,30 +47,31 @@ describe 'Exams' do
       wait_until_visible '#new-exam form'
     end
 
-    it 'should not submit new exam without filled validated fields' do
-      Exam.count.should == 0
-      click_link 'new_exam_link'
-      # input only exam_portion fields to check validation on exam
-      fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-      fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
-      fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-      click_button 'Create Exam'  
+    it 'should not submit new exam without filled validated fields', :js => true do
+      expect do
+        click '#new-exam-link'
+        # input only exam_portion fields to check validation on exam
+        fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
+        fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
+        fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
+        
+        click '#submit-exam-button' 
+      end.to_not change(Exam, :count).by(1)
 
       page.should_not have_content "was successfully created"
-      Exam.count.should == 0
     end 
 
     it 'should not submit new exam without filled validated fields for exam_portion' do
-      Exam.count.should == 0
-      click_link 'new_exam_link'
-      # input only exam fields to check validation on exam
-      fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_weight', :with => 1 
-      fill_in 'exam_description', :with => "Good work"
-      click_button 'Create Exam'  
-
+      expect do
+        click '#new-exam-link'
+        # input only exam fields to check validation on exam
+        fill_in 'exam_name', :with => 'Biology Exam'
+        fill_in 'exam_weight', :with => 1 
+        fill_in 'exam_description', :with => "Good work"
+        click '#submit-exam-button'  
+      end.to_not change(Exam, :count).by(1)
+      
       page.should_not have_content "was successfully created"
-      Exam.count.should == 0
     end 
   end
 
@@ -83,11 +84,13 @@ describe 'Exams' do
 
     it 'should edit exam from index', :js => true do
       within('#exams-index') { find('#edit-exam-link').click }
-      wait_until{ page.find('#edit-exam-modal').visible? }
+      wait_until_visible '#edit-exam-modal'
       fill_in 'exam_name', :with => 'Biology 2012'
-      click_button 'submit_button'
-      wait_until{ !page.find('#edit-exam-modal').visible? }
+      click '#submit_button'
+      wait_until_invisible '#edit-exam-modal'
+    
       within('#exams-index') { page.should have_content('Biology 2012') }
+      flash 'was successfully updated'
     end
 
     it 'should show validation msgs on index/edit', :js => true do
