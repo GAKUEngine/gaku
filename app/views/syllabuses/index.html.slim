@@ -2,8 +2,9 @@
   .span1
   .span10
     .row-fluid
-      .pull-left
-        h4 = t("syllabuses.list")
+      .pull-left 
+          h4.mt-xs.mb-0.class_groups-count 
+            = print_count(@syllabuses.count, t("syllabusess.list"))
       .pull-right
         = link_to_new t("syllabuses.new"), '', :id => "new-syllabus-link"
     .row-fluid
