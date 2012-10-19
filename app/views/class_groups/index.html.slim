@@ -3,7 +3,9 @@
   .span10
     .row-fluid
       #new-class-group.hide
-      h3.pull-left = t("class_groups.list")
+      .pull-left 
+        h4.mt-xs.mb-0.class_groups-count 
+          = print_count(@class_groups.count, t("class_groups.list"))
       .pull-right
         = ajax_link_to_new t("class_groups.new"), new_class_group_path,:id => "new-class-group-link"
     .row-fluid
