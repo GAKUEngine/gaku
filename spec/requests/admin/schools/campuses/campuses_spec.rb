@@ -85,6 +85,7 @@ describe 'Campuses' do
 
       within(table) { page.should_not have_content("Nagoya University") }
       within(count_div) { page.should_not have_content('Campuses list(1)') }
+      flash 'successfully destroyed'
     end
   end
 
