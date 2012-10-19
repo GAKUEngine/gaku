@@ -1,126 +1,138 @@
 require 'spec_helper'
 
 describe 'ClassGroups' do
+  
+  form          = '#new-class-group'
+  new_link      = '#new-class-group-link'
+  modal         = '#class-group-modal'
+  
+  cancel_link   = '#cancel-class-group-link'
+  submit_button = '#submit-class-group-button'
+  
+  table_rows    = 'table#class-groups-index tbody tr'
+
   stub_authorization!
 
   before do
     visit class_groups_path
   end
 
-  it 'creates and shows class group', :js => true do
-    ClassGroup.count.should eq 0
-    click_link 'new-class-group-link'
+  context 'new', :js => true do
+    before do 
+      click new_link
+      wait_until_visible submit_button
+    end
 
-    wait_until { find('#submit-class-group-button').visible? }
-    fill_in 'class_group_grade', :with => '7'
-    fill_in 'class_group_name', :with => 'Awesome class group'
-    fill_in 'class_group_homeroom', :with => 'room#7'
-    click_button 'submit-class-group-button'
+    it 'creates and shows class group', :js => true do
+      expect do
+        fill_in 'class_group_grade', :with => '7'
+        fill_in 'class_group_name', :with => 'Awesome class group'
+        fill_in 'class_group_homeroom', :with => 'room#7'
+        click submit_button
+        wait_until_invisible form 
+      end.to change(ClassGroup, :count).by 1 
+      
+      page.should have_content '7'
+      page.should have_content 'Awesome class group'
+      page.should have_content 'room#7'
+      flash 'successfully created'
+    end
 
-    wait_until { !page.find('#new-class-group form').visible? }
-    page.should have_content '7'
-    page.should have_content 'Awesome class group'
-    page.should have_content 'room#7'
-    
-    ClassGroup.count.should eq 1
+    it "errors without required fields" do
+      click submit_button
+      page.should have_content('field is required')
+      flash_error_for 'class_group_name'
+    end
+
+    it 'cancels creating' do
+      click cancel_link
+      wait_until_invisible form
+      visible? new_link 
+
+      click new_link
+      wait_until_visible submit_button
+    end
   end
-
-  it 'not create a class group without name given' , :js => true do
-    ClassGroup.count.should eq 0
-    click_link 'new-class-group-link'
-    
-    wait_until { page.find('#submit-class-group-button').visible? }
-    
-    click_button 'submit-class-group-button'
-    page.should have_content ('field is required')
-  end
-
-  it 'cancel creating', :js => true do
-    ClassGroup.count.should eq 0
-    click_link 'new-class-group-link'
-    wait_until { page.find('#cancel-class-group-link').visible? }
-
-    click_on 'cancel-class-group-link'
-    wait_until { !page.find('#new-class-group form').visible? }
-    ClassGroup.count.should eq 0
-  end
-
-  context 'show, edit, delete' do
+  
+  context 'existing' do
     before do 
       @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
       visit class_groups_path
     end
 
-    it 'should edit class group from index view', :js => true do 
-      find('.edit-link').click
-      wait_until { find('#class-group-modal').visible? }
+    context 'edit', :js => true do
+      before do
+        click edit_link
+        wait_until_visible modal
+      end
 
-      fill_in 'class_group_grade', :with => '2'
-      fill_in 'class_group_name', :with => 'Really awesome class group'
-      fill_in 'class_group_homeroom', :with => 'B2'
+      it 'edits a class group' do 
+        fill_in 'class_group_grade',    :with => '2'
+        fill_in 'class_group_name',     :with => 'Really awesome class group'
+        fill_in 'class_group_homeroom', :with => 'B2'
 
-      click_button 'submit-class-group-button'
+        click submit_button
 
-      page.should have_content 'Really awesome class group'
-      page.should have_content "2"
-      page.should have_content "B2"
+        page.should have_content 'Really awesome class group'
+        page.should have_content "2"
+        page.should have_content "B2"
 
-      page.should_not have_content 'Not so awesome class group'
-      page.should_not have_content 'A1'
+        page.should_not have_content 'Not so awesome class group'
+        page.should_not have_content 'A1'
 
-      ClassGroup.last.name.should eq 'Really awesome class group'
-      ClassGroup.last.grade.should eq 2
-      ClassGroup.last.homeroom.should eq 'B2'
+        edited_class_group = ClassGroup.last
+        edited_class_group.name.should eq 'Really awesome class group'
+        edited_class_group.grade.should eq 2
+        edited_class_group.homeroom.should eq 'B2'
+        flash 'successfully updated'
+      end
+
+      it 'cancels editting' do
+        click cancel_link
+        wait_until_invisible modal
+      end
+
+      it 'edits a class group from show view' do 
+        visit class_group_path(@class_group)
+        click edit_link
+        wait_until_visible modal 
+
+        fill_in 'class_group_grade',    :with => '2'
+        fill_in 'class_group_name',     :with => 'Really awesome class group'
+        fill_in 'class_group_homeroom', :with => 'B2'
+
+        click submit_button
+
+        page.should have_content 'Really awesome class group' 
+        page.should have_content "2"
+        page.should have_content "B2"
+
+        page.should_not have_content 'Not so awesome class group'
+        page.should_not have_content 'A1'
+
+        edited_class_group = ClassGroup.last
+        edited_class_group.name.should eq 'Really awesome class group'
+        edited_class_group.grade.should eq 2
+        edited_class_group.homeroom.should eq 'B2'
+        flash 'successfully updated'
+      end
     end
 
-    it 'should cancel editting', :js => true do
-      find('.edit-link').click
-      wait_until { find('#class-group-modal').visible? }
-
-      click_on 'cancel-class-group-link'
-      wait_until { !page.find('#class-group-modal').visible? }
-    end
-
-    it 'should edit class group from show view', :js => true do 
-      visit class_group_path(@class_group)
-      click_link("Edit")
-      wait_until { find('#class-group-modal').visible? }
-
-      fill_in 'class_group_grade', :with => '2'
-      fill_in 'class_group_name', :with => 'Really awesome class group'
-      fill_in 'class_group_homeroom', :with => 'B2'
-
-      click_button 'submit-class-group-button'
-
-      page.should have_content 'Really awesome class group' 
-      page.should have_content "2"
-      page.should have_content "B2"
-
-      page.should_not have_content 'Not so awesome class group'
-      page.should_not have_content 'A1'
-
-      ClassGroup.last.name.should eq 'Really awesome class group'
-      ClassGroup.last.grade.should eq 2
-      ClassGroup.last.homeroom.should eq 'B2'
-    end
-
-    it 'should delete class group', :js => true do 
-      ClassGroup.count.should eq 1
-      tr_count = page.all('table#class-groups-index tbody tr').size
+    it 'deletes a class group', :js => true do 
       page.should have_content(@class_group.name)
 
-      find(".delete-link").click 
-      page.driver.browser.switch_to.alert.accept
-  
-      wait_until { page.all('table#class-groups-index tbody tr').size == tr_count - 1 }
+      expect do
+        ensure_delete_is_working(delete_link,table_rows)
+      end.to change(ClassGroup,:count).by -1 
+    
       page.should_not have_content(@class_group.name)
-      ClassGroup.count.should eq 0
+      flash 'successfully destroyed'
     end
 
-    it 'should return to class_groups index when back selected' do
+    it 'returns to class_groups via Back button' do
       visit class_group_path(@class_group)
-      click_on('Back')
-      page.should have_content ('Class Listing')
+      click_on 'back-class-group-link' 
+      current_path.should eq class_groups_path
     end
   end
 end

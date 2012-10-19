@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class AdmissionsController < ApplicationController
   include SheetHelper
 
   helper_method :sort_column, :sort_direction
@@ -13,10 +13,10 @@ class StudentsController < ApplicationController
   before_filter :class_groups,      :only => [:new, :edit]
   before_filter :student,           :only => [:edit, :update, :destroy]
   before_filter :students_count,    :only => [:create, :destroy]
-  
+
   def index
     @search = Student.search(params[:q])
-    @students = @search.result(:distinct => true)#.includes([:addresses, :class_groups, :class_group_enrollments]).all
+    @students = @search.result#.includes([:addresses, :class_groups, :class_group_enrollments]).all
     if params[:action] == "get_csv_template"
       get_csv_template
       return
@@ -24,7 +24,6 @@ class StudentsController < ApplicationController
 
     @class_groups = ClassGroup.all
     @courses = Course.all
-    @enrolled_students = params[:enrolled_students]
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
@@ -61,7 +60,7 @@ class StudentsController < ApplicationController
           if !params[:student][:addresses_attributes].nil?
             format.js { render 'students/addresses/create' }
           elsif !params[:student][:notes_attributes].nil?
-            format.js { render 'students/notes/create' }             
+            format.js { render 'students/notes/create' }
           else
             if !params[:student][:picture].blank?
               format.html { redirect_to @student, :notice => t('notice.picture_uploaded')}
@@ -70,17 +69,17 @@ class StudentsController < ApplicationController
             end
           end
         end
-        format.html { redirect_to @student } 
+        format.html { redirect_to @student }
       end
-      
+
     else
       render :edit
     end
   end
-  
+
   def destroy
     if @student.destroy && !request.xhr?
-      flash[:notice] = "Student was successfully destroyed."  
+      flash[:notice] = "Student was successfully destroyed."
     end
     redirect_to students_path
   end

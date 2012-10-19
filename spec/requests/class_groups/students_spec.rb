@@ -78,10 +78,12 @@ describe 'ClassGroup Students' do
         ClassGroupEnrollment.count.should eq 1
       end
 
-      pending 'should not show a student for adding if it is already added', :js => true do
+      pending 'should enroll student only once for a class group', :js => true do
         click_link 'new-class-group-student-link'
         wait_until { page.find('#student-modal').visible? }
-        within('#student-modal') { page.should_not have_content("#{@student1.name}") }
+        within('tr#student-' + @student1.id.to_s) do
+          page.should have_selector("img.enrolled")
+        end
       end
 
       it 'should delete a student from a class group', :js => true do

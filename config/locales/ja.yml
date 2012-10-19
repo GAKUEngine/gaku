@@ -1,4 +1,21 @@
 ja:
+  admissions:
+    manage_admissions: "入学管理"
+    candidates:
+      candidate: "志願者"
+      list: "入学志願者一覧"
+      new: "新規志望者登録"
+      export: "志望者情報をCSVで保存"
+      course: "志望コース"
+      faculty: "志望学部"
+      junior_high_school: "出身中学校"
+      first_choice: "第一希望"
+      second_choice: "第二希望"
+    inputs:
+      candidate: "志願者の情報を入力"
+    selects:
+      course: "志望コースを選択"
+      department: "志望学科を選択"
   admin:
     admin: "管理者"
     plural: "複数"
@@ -135,6 +152,7 @@ ja:
     choose_exam: '試験を選択'
     add_exam: '試験を追加'
     add_existing_exam: '既存の試験を追加'
+    save: 'Save Syllabus'
   course_management: "授業管理"
   course: "授業"
   courses:

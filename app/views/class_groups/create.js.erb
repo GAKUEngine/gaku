@@ -2,4 +2,5 @@ $('table#class-groups-index tbody').append('<%= render_js_partial("class_group",
 $('#new-class-group form')[0].reset();
 $('#new-class-group').slideToggle();
 $('#new-class-group-link').show();
+$('.class_groups-count').html('<%= print_count(@class_groups_count + 1, t("class_groups.list")) %>');
 showNotice("<%= render_flash %>");

@@ -40,5 +40,11 @@ module ApplicationHelper
     escape_javascript(render 'shared/flash', :flash => flash)
   end
 
+  def title(text)
+    content_for(:title) do 
+      text
+    end
+  end
+
 end
 
