@@ -4,6 +4,7 @@ describe 'Exams' do
   stub_authorization!
 
   table_rows = '#exams-index tbody tr'
+  count_div = '.exams-count'
 
   before do
     visit exams_path
@@ -34,6 +35,8 @@ describe 'Exams' do
       
       flash "was successfully created"
       wait_until { page.all(table_rows).size == tr_count + 1 }
+      within(count_div) { page.should have_content('Exams List(1)') }
+
     end
 
     it "should cancel create new exam", :js => true do
@@ -139,10 +142,15 @@ describe 'Exams' do
     end
 
     it 'should delete an exam', :js => true do
-      within('#exams-index') { find('#delete-exam-link').click }
-      page.driver.browser.switch_to.alert.accept
-      page.should_not have_content("#{@exam.name}")
-      Exam.count.should == 0
+      within(count_div) { page.should have_content('Exams List(1)') }
+
+      expect do
+        within('#exams-index') { find('#delete-exam-link').click }
+        page.driver.browser.switch_to.alert.accept
+        page.should_not have_content("#{@exam.name}")
+      end.to change(Exam, :count).by(-1)
+      
+      within(count_div) { page.should_not have_content('Exams List(1)') }
     end
 
     it 'should return to exams index when back selected' do

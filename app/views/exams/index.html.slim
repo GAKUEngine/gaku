@@ -1,7 +1,7 @@
 #new-exam.hide
 .row-fluid
   .pull-left
-    h4.h4-vm.exam-count
+    h4.h4-vm.exams-count
       = print_count(@exams.count, t('exams.list'))
   .pull-right
     =ajax_link_to_new t('exams.add'), new_exam_path, :id => 'new-exam-link'

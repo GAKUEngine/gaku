@@ -1,5 +1,6 @@
-showNotice("<%= render_flash %>");
-
 $('#exams-index tbody').append('<%= render_js_partial("exam", {:exam => @exam}) %>');
+$('.exams-count').html('<%= print_count(@exams_count + 1, t("exams.list")) %>');
+
+showNotice("<%= render_flash %>");
 $('#new-exam').slideToggle()
 $('#new-exam-link').show()

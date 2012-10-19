@@ -6,7 +6,7 @@ class ExamsController < ApplicationController
   before_filter :exam, :only => [:show, :create_exam_portion]
   before_filter :load_before_show, :only => :show
   before_filter :load_before_new, :only => :new
-
+  before_filter :exams_count, :only => [:create, :destroy]
 
   def export_xls
     @course = Course.find(params[:course_id])
@@ -376,5 +376,9 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
       @notable = @exam
+    end
+
+    def exams_count 
+      @exams_count = Exam.count
     end
 end
