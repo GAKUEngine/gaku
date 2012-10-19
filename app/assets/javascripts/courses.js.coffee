@@ -19,14 +19,10 @@ class CourseActions
 @CourseAct = new CourseActions()
 
 $ ->
-  $('#new-course-link').on 'click', (event) ->
-    event.preventDefault()
-    $(this).hide()
-    $('#new-course').slideToggle()
 
   $('#new-course form').validationEngine()
     
-  $("#cancel-course-link").on 'click', (event)->
+  $("#new-course").on 'click',"#cancel-course-link", (event)->
     event.preventDefault()
     $('#new-course').slideToggle()
     $('#new-course-link').show()
