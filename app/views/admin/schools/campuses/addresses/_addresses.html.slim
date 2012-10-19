@@ -5,7 +5,7 @@
       h4.h4-vm
         = t('addresses.singular')
     .pull-right
-      = ajax_link_to_new t('addresses.add'), new_admin_school_campus_address_path(@school, @campus), :id => 'new-admin-school-campus-address-link' if @campus.address.nil?
+      = ajax_link_to_new t('addresses.add'), new_admin_school_campus_address_path(@school, @campus), :id => 'new-admin-school-campus-address-link', :class => @campus.address.nil? ? "btn btn-primary" : 'btn btn-primary hide'
 
   .row-fluid
     .span12

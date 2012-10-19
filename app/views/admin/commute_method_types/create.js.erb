@@ -1,6 +1,6 @@
 $('#admin-commute-method-types table tbody').append('<%= render_js_partial("commute_method_type", {:commute_method_type => @commute_method_type}) %>');
 
-$('#new-admin-commute-method-type form').slideToggle()
+$('#new-admin-commute-method-type').slideToggle()
 $('#new-admin-commute-method-type-link').show();
 
 $('.admin-commute-method-types-count').html('<%= print_count(@commute_method_types_count + 1, t("commute_method_types.list")) %>');
