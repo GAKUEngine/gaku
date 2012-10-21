@@ -118,20 +118,20 @@ module Helpers
       wait_until_invisible modal
     end
 
-    def flash(text)
+    def flash?(text)
       page.should have_selector("#notice", :text => text)
     end
 
     def flash_created?
-      flash 'successfully created'
+      flash? 'successfully created'
     end
 
     def flash_updated?
-      flash 'successfully updated'
+      flash? 'successfully updated'
     end
 
     def flash_destroyed?
-      flash 'successfully destroyed'
+      flash? 'successfully destroyed'
     end
 
     def flash_error_for(field)
