@@ -1,58 +1,44 @@
 require 'spec_helper'
 
 describe 'ClassGroups' do
-  
-  form          = '#new-class-group'
-  new_link      = '#new-class-group-link'
-  modal         = '#class-group-modal'
-  
-  cancel_link   = '#cancel-class-group-link'
-  submit_button = '#submit-class-group-button'
-  
-  table_rows    = 'table#class-groups-index tbody tr'
-  count_div     = '.class_groups-count'
 
   stub_authorization!
 
-  before do
-    visit class_groups_path
+  before :all do 
+    Helpers::Request.resource("class-group") 
   end
 
   context 'new', :js => true do
-    before do 
+    before do
+      visit class_groups_path 
       click new_link
-      wait_until_visible submit_button
+      wait_until_visible submit
     end
 
     it 'creates and shows class group', :js => true do
       expect do
-        fill_in 'class_group_grade', :with => '7'
-        fill_in 'class_group_name', :with => 'Awesome class group'
+        fill_in 'class_group_grade',    :with => '7'
+        fill_in 'class_group_name',     :with => 'Awesome class group'
         fill_in 'class_group_homeroom', :with => 'room#7'
-        click submit_button
+        click submit
         wait_until_invisible form 
       end.to change(ClassGroup, :count).by 1 
       
       page.should have_content '7'
       page.should have_content 'Awesome class group'
       page.should have_content 'room#7'
-      within(count_div) { page.should have_content('Class Groups list(1)') }
+      within(count_div) { page.should have_content 'Class Groups list(1)' }
       flash_created?
     end
 
     it "errors without required fields" do
-      click submit_button
-      page.should have_content('field is required')
+      click submit
+      page.should have_content 'field is required'
       flash_error_for 'class_group_name'
     end
 
     it 'cancels creating' do
-      click cancel_link
-      wait_until_invisible form
-      visible? new_link 
-
-      click new_link
-      wait_until_visible submit_button
+      ensure_cancel_creating_is_working
     end
   end
   
@@ -73,7 +59,7 @@ describe 'ClassGroups' do
         fill_in 'class_group_name',     :with => 'Really awesome class group'
         fill_in 'class_group_homeroom', :with => 'B2'
 
-        click submit_button
+        click submit
 
         page.should have_content 'Really awesome class group'
         page.should have_content "2"
@@ -90,8 +76,7 @@ describe 'ClassGroups' do
       end
 
       it 'cancels editting' do
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
 
       it 'edits a class group from show view' do 
@@ -103,7 +88,7 @@ describe 'ClassGroups' do
         fill_in 'class_group_name',     :with => 'Really awesome class group'
         fill_in 'class_group_homeroom', :with => 'B2'
 
-        click submit_button
+        click submit
 
         page.should have_content 'Really awesome class group' 
         page.should have_content "2"
@@ -121,15 +106,15 @@ describe 'ClassGroups' do
     end
 
     it 'deletes a class group', :js => true do 
-      page.should have_content(@class_group.name)
-      within(count_div) { page.should have_content('Class Groups list(1)') }
+      page.should have_content @class_group.name
+      within(count_div) { page.should have_content 'Class Groups list(1)' }
 
       expect do
-        ensure_delete_is_working(delete_link,table_rows)
+        ensure_delete_is_working
       end.to change(ClassGroup,:count).by -1 
     
-      page.should_not have_content(@class_group.name)
-      within(count_div) { page.should_not have_content('Class Groups list(1)') }
+      page.should_not have_content @class_group.name
+      within(count_div) { page.should_not have_content 'Class Groups list(1)' }
       flash_destroyed?
     end
 

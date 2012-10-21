@@ -2,19 +2,12 @@ require 'spec_helper'
 
 describe 'Contact' do
 
-  form           = '#new-admin-school-campus-contact'
-  new_link       = '#new-admin-school-campus-contact-link'
-  modal          = '#edit-contact-modal'
-
-  submit_button  = '#submit-admin-school-campus-contact-button'
-  cancel_link    = '#cancel-admin-school-campus-contact-link'
-  
-  table          = '#admin-school-campus-contacts-index'
-  table_rows     = '#admin-school-campus-contacts-index tr'
-  count_div      = '.admin-school-campus-contacts-count'
-
   stub_authorization!
 
+  before :all do 
+    Helpers::Request.resource("admin-school-campus-contact")
+  end
+  
   before do
     @school = create(:school)
     @contact_type = create(:contact_type, :name => 'email')
@@ -24,7 +17,7 @@ describe 'Contact' do
     before do 
       visit admin_school_campus_path(@school, @school.campuses.first) 
       click new_link
-      wait_until_visible submit_button
+      wait_until_visible submit
     end
 
     it "creates and shows contact" do
@@ -32,22 +25,18 @@ describe 'Contact' do
         select 'email', :from => 'contact_contact_type_id'
         fill_in "contact_data", :with => "The contact data"
         fill_in "contact_details", :with => "The contact details"
-        click submit_button
+        click submit
         wait_until_invisible form
       end.to change(@school.campuses.first.contacts, :count).by 1
 
-      page.should have_content("The contact data")
-      page.should have_content("The contact details")
-      within(count_div) { page.should have_content('Contacts list(1)') }
+      page.should have_content "The contact data"
+      page.should have_content "The contact details"
+      within(count_div) { page.should have_content 'Contacts list(1)' }
       flash_created?
     end
 
     it 'cancels creating' do
-      click cancel_link
-      wait_until_invisible form
-
-      click new_link
-      wait_until_visible submit_button
+      ensure_cancel_creating_is_working
     end
   end
 
@@ -66,16 +55,15 @@ describe 'Contact' do
 
       it "edits contact" do 
         fill_in 'contact_data', :with => 'example@genshin.org'
-        click submit_button
+        click submit
 
         wait_until_invisible modal
-        page.should have_content('example@genshin.org')
+        page.should have_content 'example@genshin.org' 
         flash_updated?
       end
 
       it 'cancels editting' do 
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
     end
 
@@ -99,15 +87,15 @@ describe 'Contact' do
     it "deletes contact" do
       visit admin_school_campus_path(@school, @school.campuses.first)
 
-      within(count_div) { page.should have_content('Contacts list(1)') }
+      within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content(@contact.data)
       
       expect do 
-        ensure_delete_is_working(delete_link, table_rows)
+        ensure_delete_is_working
       end.to change(@school.campuses.first.contacts, :count).by -1
 
       page.should_not have_content(@contact.data)
-      within(count_div) { page.should_not have_content('Contacts list(1)') }
+      within(count_div) { page.should_not have_content 'Contacts list(1)' }
       flash_destroyed?
     end
   end

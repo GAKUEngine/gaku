@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe 'EnrollmentStatusTypes' do
+
+  form           = '#new-admin-enrollment-status-type'
+  new_link       = '#new-admin-enrollment-status-type-link'
+  modal          = '#edit-enrollment-status-type-modal'
+
+  submit_button  = '#submit-admin-enrollment-status-type-button'
+  cancel_link    = '#cancel-admin-enrollment-status-type-link'
+  
+  table          = '#admin-enrollment-status-types-index'
+  table_rows     = '#admin-enrollment-status-types-index tr'
+  count_div      = '.admin-enrollment-status-types-count'
+
   stub_authorization!
 
   context 'create and show' do

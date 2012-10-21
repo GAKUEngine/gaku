@@ -1,46 +1,35 @@
 require 'spec_helper'
 
 describe 'Schools' do
-
-  form           = '#new-admin-school'
-  new_link       = '#new-admin-school-link'
-  modal          = '#edit-school-modal'
-
-  submit_button  = '#submit-admin-school-button'
-  cancel_link    = '#cancel-admin-school-link'
   
-  table          = '#admin-schools-index'
-  table_rows     = '#admin-schools-index tr'
-  count_div      = '.admin-schools-count'
-
   stub_authorization!
+  
+  before :all do
+    Helpers::Request.resource("admin-school") 
+  end
 
   context 'new', :js => true do
-  	before do 
-  	  visit admin_schools_path
+    before do 
+      visit admin_schools_path
       click new_link
-      wait_until_visible submit_button
+      wait_until_visible submit
     end
 
     it 'creates and shows school' do 
       expect do 
         fill_in 'school_name', :with => 'Nagoya University'
-        click submit_button
+        click submit
 
         wait_until_invisible form
       end.to change(School, :count).by 1
 
-      page.should have_content('Nagoya University')
-      within(count_div) { page.should have_content('Schools list(1)') }
+      page.should have_content 'Nagoya University'
+      within(count_div) { page.should have_content 'Schools list(1)' }
       flash_created?
     end 
 
     it 'cancels creating' do 
-      click cancel_link
-      wait_until_invisible form
-
-      click new_link
-      wait_until_visible submit_button
+      ensure_cancel_creating_is_working
     end
   end
 
@@ -56,32 +45,31 @@ describe 'Schools' do
         wait_until_visible modal 
       end
 
-    	it 'edits school'  do
-    	  fill_in 'school_name', :with => 'Sofia Technical University'
-    	  click submit_button
+      it 'edits school'  do
+        fill_in 'school_name', :with => 'Sofia Technical University'
+        click submit
 
-    	  wait_until_invisible modal
-    	  page.should have_content('Sofia Technical University')
-    	  page.should_not have_content('Varna Technical University')
-    	  flash_updated?
-    	end
+        wait_until_invisible modal
+        page.should have_content 'Sofia Technical University'
+        page.should_not have_content 'Varna Technical University'
+        flash_updated?
+      end
 
       it 'cancels editting' do 
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
     end
 
-  	it 'deletes school' do
-      within(count_div) { page.should have_content('Schools list(1)') }
-      page.should have_content(@school.name)
+    it 'deletes school' do
+      within(count_div) { page.should have_content 'Schools list(1)' }
+      page.should have_content @school.name
 
       expect do 
-        ensure_delete_is_working(delete_link, table_rows) 
+        ensure_delete_is_working 
       end.to change(School, :count).by -1
 
-      within(count_div) { page.should_not have_content('Schools list(1)') }
-      page.should_not have_content(@school.name)
+      within(count_div) { page.should_not have_content 'Schools list(1)' }
+      page.should_not have_content @school.name
       flash_destroyed?
     end
   end
