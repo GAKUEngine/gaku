@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Contact' do
+describe 'Admin School Campus Contact' do
 
   stub_authorization!
 
@@ -20,7 +20,7 @@ describe 'Contact' do
       wait_until_visible submit
     end
 
-    it "creates and shows contact" do
+    it "creates and shows" do
         expect do 
         select 'email', :from => 'contact_contact_type_id'
         fill_in "contact_data", :with => "The contact data"
@@ -53,7 +53,7 @@ describe 'Contact' do
         wait_until_visible modal
       end
 
-      it "edits contact" do 
+      it "edits" do 
         fill_in 'contact_data', :with => 'example@genshin.org'
         click submit
 
@@ -67,7 +67,7 @@ describe 'Contact' do
       end
     end
 
-    it "sets contact as primary" do 
+    it "sets as primary" do 
       contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
 
       @school.campuses.first.contacts << contact2
@@ -84,7 +84,7 @@ describe 'Contact' do
       @school.campuses.first.contacts.second.is_primary? == true
     end
 
-    it "deletes contact" do
+    it "deletes" do
       visit admin_school_campus_path(@school, @school.campuses.first)
 
       within(count_div) { page.should have_content 'Contacts list(1)' }

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'ContactTypes' do
+describe 'Admin ContactTypes' do
 
   stub_authorization!
 
@@ -15,7 +15,7 @@ describe 'ContactTypes' do
       wait_until_visible submit
     end
 
-    it 'creates and shows contact type' do
+    it 'creates and shows' do
       expect do 
         fill_in 'contact_type_name', :with => 'home phone'
         click submit
@@ -44,7 +44,7 @@ describe 'ContactTypes' do
         wait_until_visible modal
       end
 
-      it 'edits contact type' do
+      it 'edits' do
         fill_in 'contact_type_name', :with => 'email'
         click submit 
 
@@ -59,7 +59,7 @@ describe 'ContactTypes' do
       end
     end
 
-    it 'deletes contact type', :js => true do
+    it 'deletes', :js => true do
       page.should have_content @contact_type.name
       within(count_div) { page.should have_content 'Contact Types list(1)' }
 

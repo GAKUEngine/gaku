@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Campuses' do
+describe 'Admin School Campuses' do
   
   stub_authorization!
 
@@ -19,7 +19,7 @@ describe 'Campuses' do
       wait_until_visible submit
     end
 
-    it 'creates and shows campus' do 
+    it 'creates and shows' do 
       within(count_div) { page.should have_content 'Campuses list(1)' }
 
       expect do 
@@ -46,7 +46,7 @@ describe 'Campuses' do
         wait_until_visible modal 
       end
 
-      it 'edits campus' do
+      it 'edits' do
         fill_in 'campus_name', :with => 'Nagoya Campus'
         click submit 
 
@@ -63,7 +63,7 @@ describe 'Campuses' do
       end
     end
 
-    it 'deletes campus' do
+    it 'deletes' do
       within(table) { page.should have_content "Nagoya University" }
       within(count_div) { page.should have_content 'Campuses list(1)' }
 

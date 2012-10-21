@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'CommuteMethodTypes' do
+describe 'Admin CommuteMethodTypes' do
 
   stub_authorization!
 
@@ -15,7 +15,7 @@ describe 'CommuteMethodTypes' do
       wait_until_visible submit
     end
 
-    it 'creates and shows commute method type' do 
+    it 'creates and shows' do 
       expect do 
         fill_in 'commute_method_type_name', :with => 'car'
         click submit
@@ -44,7 +44,7 @@ describe 'CommuteMethodTypes' do
         wait_until_visible modal 
       end
 
-    	it 'edits commute method type' do
+    	it 'edits' do
     	  fill_in 'commute_method_type_name', :with => 'car'
     	  click submit
 
@@ -59,7 +59,7 @@ describe 'CommuteMethodTypes' do
       end
     end
 
-  	it 'deletes commute method type', :js => true do
+  	it 'deletes', :js => true do
       page.should have_content @commute_method_type.name
       within(count_div) { page.should have_content 'Commute Method Types list(1)' }
 

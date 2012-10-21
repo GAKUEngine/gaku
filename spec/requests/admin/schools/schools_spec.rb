@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Schools' do
+describe 'Admin Schools' do
   
   stub_authorization!
   
@@ -15,7 +15,7 @@ describe 'Schools' do
       wait_until_visible submit
     end
 
-    it 'creates and shows school' do 
+    it 'creates and shows' do 
       expect do 
         fill_in 'school_name', :with => 'Nagoya University'
         click submit
@@ -45,7 +45,7 @@ describe 'Schools' do
         wait_until_visible modal 
       end
 
-      it 'edits school'  do
+      it 'edits'  do
         fill_in 'school_name', :with => 'Sofia Technical University'
         click submit
 
@@ -60,7 +60,7 @@ describe 'Schools' do
       end
     end
 
-    it 'deletes school' do
+    it 'deletes' do
       within(count_div) { page.should have_content 'Schools list(1)' }
       page.should have_content @school.name
 
