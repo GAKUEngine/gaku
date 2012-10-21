@@ -21,7 +21,7 @@ describe 'ClassGroup Semesters' do
       wait_until_visible submit
     end
 
-    it 'creates and shows semester' do  
+    it 'creates and shows' do  
       expect do
         select '2012',      :from => 'semester_starting_1i'
         select 'September', :from => 'semester_starting_2i'
@@ -53,7 +53,7 @@ describe 'ClassGroup Semesters' do
       within(count_div) { page.should have_content '1' }
     end
 
-    pending "doesn't create a semester if it is already created" do 
+    pending "errors if already exists" do 
       #TODO needs to be implemeted in the main logic
     end
 
@@ -63,7 +63,7 @@ describe 'ClassGroup Semesters' do
         wait_until_visible modal
       end
 
-      it 'edits semester' do
+      it 'edits' do
         select '2012',      :from => 'semester_starting_1i'
         select 'September', :from => 'semester_starting_2i'
         select '15',        :from => 'semester_starting_3i'
@@ -84,7 +84,7 @@ describe 'ClassGroup Semesters' do
       end
     end
 
-    it 'deletes semester', :js => true do
+    it 'deletes', :js => true do
       page.should have_content '10/21/2012 - 11/21/2012'
       within(count_div) { page.should have_content 'Semesters list(1)' }
       within(tab_link) { page.should have_content 'Semesters(1)' }

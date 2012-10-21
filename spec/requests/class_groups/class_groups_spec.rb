@@ -15,7 +15,7 @@ describe 'ClassGroups' do
       wait_until_visible submit
     end
 
-    it 'creates and shows class group', :js => true do
+    it 'creates and shows', :js => true do
       expect do
         fill_in 'class_group_grade',    :with => '7'
         fill_in 'class_group_name',     :with => 'Awesome class group'
@@ -54,7 +54,7 @@ describe 'ClassGroups' do
         wait_until_visible modal
       end
 
-      it 'edits a class group' do 
+      it 'edits' do 
         fill_in 'class_group_grade',    :with => '2'
         fill_in 'class_group_name',     :with => 'Really awesome class group'
         fill_in 'class_group_homeroom', :with => 'B2'
@@ -79,7 +79,7 @@ describe 'ClassGroups' do
         ensure_cancel_modal_is_working
       end
 
-      it 'edits a class group from show view' do 
+      it 'edits from show view' do 
         visit class_group_path(@class_group)
         click edit_link
         wait_until_visible modal 
@@ -105,7 +105,7 @@ describe 'ClassGroups' do
       end
     end
 
-    it 'deletes a class group', :js => true do 
+    it 'deletes', :js => true do 
       page.should have_content @class_group.name
       within(count_div) { page.should have_content 'Class Groups list(1)' }
 
@@ -117,11 +117,6 @@ describe 'ClassGroups' do
       within(count_div) { page.should_not have_content 'Class Groups list(1)' }
       flash_destroyed?
     end
-
-    it 'returns to class_groups via Back button' do
-      visit class_group_path(@class_group)
-      click_on 'back-class-group-link' 
-      current_path.should eq class_groups_path
-    end
+    
   end
 end

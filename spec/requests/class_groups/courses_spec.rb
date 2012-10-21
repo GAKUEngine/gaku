@@ -21,7 +21,7 @@ describe 'ClassGroup Courses' do
       wait_until_visible submit
     end
 
-    it 'creates and shows course' do
+    it 'creates and shows' do
       expect do
         select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
         click submit
@@ -34,7 +34,7 @@ describe 'ClassGroup Courses' do
       flash_created?
     end
 
-    it "doesn't create without required fields" do
+    it "errors without required fields" do
       click submit
       wait_until { page.has_content? 'Course can\'t be blank' }
     end
@@ -54,7 +54,7 @@ describe 'ClassGroup Courses' do
       within(tab_link) { page.should have_content "1" }
     end
 
-    it "doesn't adds a course 2 times" do  
+    it "doesn't add a course 2 times" do  
       click new_link
       wait_until_visible form
       select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
@@ -62,7 +62,7 @@ describe 'ClassGroup Courses' do
       wait_until { page.should have_content "Course Already enrolled to the class group!" }   
     end
 
-    it 'deletes a course' do 
+    it 'deletes' do 
       within(table) { page.should have_content "#{@course.code}" }
       within(count_div) { page.should have_content "Courses list(1)" }
       within(tab_link) { page.should have_content "Courses(1)" }
