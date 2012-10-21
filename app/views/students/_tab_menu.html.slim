@@ -3,8 +3,8 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li.active
-          a#new-student-address-tab-link data-toggle="tab" href="#addresses"
-            = print_count(@student.addresses.count, t('addresses.addresses'))
+          a#student-addresses-tab-link data-toggle="tab" href="#addresses"
+            = print_count(@student.addresses.count, t('addresses.plural'))
         li
           a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
             = print_count(@student.guardians.count, t('guardians.guardians'))
