@@ -353,7 +353,7 @@ en:
     edit: "Edit note"
   class: Class
   semesters:
-    semesters: "Semesters"
+    plural: "Semesters"
     list: "Semesters list"
     starting: "Starting"
     ending:   "Ending"

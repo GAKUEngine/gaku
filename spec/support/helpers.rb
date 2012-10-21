@@ -17,6 +17,10 @@ module Helpers
     def self.get
       @@resource
     end
+
+    def tab_link
+      "##{@@resource_plural}-tab-link"
+    end
     
     def form
       "#new-#{@@resource}" 

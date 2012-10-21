@@ -1,18 +1,12 @@
 require 'spec_helper'
 
 describe 'ClassGroup Courses' do
-  
-  form          = '#new-class-group-course'
-  new_link      = '#new-class-group-course-link'
-  
-  cancel_link   = '#cancel-class-group-course-link'
-  submit_button = '#submit-course-button'
-  
-  table_rows    = 'table#courses-index tbody tr'
-  count_div     = '.courses-count'
-  tab_link      = '#class-group-courses-tab-link'
 
   stub_authorization!
+
+  before :all do
+    Helpers::Request.resource("class-group-course") 
+  end
   
   before do
     @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
@@ -21,40 +15,33 @@ describe 'ClassGroup Courses' do
     click tab_link
   end
 
-  it 'add and show course to a class group', :js => true do
+  context 'new', :js => true do 
+    before do 
+      click new_link
+      wait_until_visible submit
+    end
+
+    it 'creates and shows course' do
+      expect do
+        select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
+        click submit
+        wait_until_invisible form
+      end.to change(ClassGroupCourseEnrollment, :count).by 1
     
-    click new_link
-    wait_until_visible form
-    expect do
-      select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
-      click submit_button
-      wait_until_invisible form
-    end.to change(ClassGroupCourseEnrollment, :count).by 1
-  
-    size_of(table_rows).should eq 1
-    within("#courses-index tbody"){ page.should have_content ("#{@course.code}") }
-    within(count_div){ page.should have_content("1") }
-    within(tab_link){ page.should have_content("1") }
+      within(table) { page.should have_content "#{@course.code}" }
+      within(count_div) { page.should have_content "Courses list(1)" }
+      within(tab_link) { page.should have_content "Courses(1)" }
+      flash_created?
+    end
 
-  end
+    it "doesn't create without required fields" do
+      click submit
+      wait_until { page.has_content? 'Course can\'t be blank' }
+    end
 
-  it 'not add a course if course code is empty', :js => true do
-    click new_link
-    wait_until_visible form
-    click submit_button
-
-    wait_until { page.has_content?('Course can\'t be blank') }
-  end
-
-  pending 'cancel adding', :js => true do
-    click new_link
-    wait_until_visible form
-
-    click cancel_link
-    wait_until_invisible form
-
-    click new_link
-    wait_until_visible form
+    it 'cancels creating' do
+      ensure_cancel_creating_is_working
+    end
   end
 
   context 'existing', :js => true do
@@ -63,27 +50,31 @@ describe 'ClassGroup Courses' do
       visit class_group_path(@class_group)
       click tab_link
 
-      within(count_div) { page.should have_content("1") }
-      within(tab_link) { page.should have_content("1") }
-      size_of(table_rows).should eq 1
+      within(count_div) { page.should have_content "1" }
+      within(tab_link) { page.should have_content "1" }
     end
 
-    it 'not add a course 2 times' do  
+    it "doesn't adds a course 2 times" do  
       click new_link
       wait_until_visible form
       select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
-      click submit_button
-      wait_until { page.should have_content("Course Already enrolled to the class group!") }   
+      click submit
+      wait_until { page.should have_content "Course Already enrolled to the class group!" }   
     end
 
-    it 'delete a course from a class group' do  
+    it 'deletes a course' do 
+      within(table) { page.should have_content "#{@course.code}" }
+      within(count_div) { page.should have_content "Courses list(1)" }
+      within(tab_link) { page.should have_content "Courses(1)" }
+
       expect do
-        ensure_delete_is_working(delete_link, table_rows)
+        ensure_delete_is_working
       end.to change(ClassGroupCourseEnrollment, :count).by -1
   
-      within("#courses-index tbody"){ page.should_not have_content("#{@course.code}") }
-      within(count_div){ page.should_not have_content("1") }
-      within(tab_link){ page.should_not have_content("1") }
+      within(table) { page.should_not have_content "#{@course.code}" }
+      within(count_div) { page.should_not have_content "Courses list(1)" }
+      within(tab_link) { page.should_not have_content "Courses(1)" }
+      flash_destroyed?
     end
   end
 
