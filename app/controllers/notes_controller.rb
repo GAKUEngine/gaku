@@ -55,7 +55,7 @@ private
 		#@notable = resource.singularize.classify.constantize.find(id)
     klass = [Student, LessonPlan, Syllabus, ClassGroup, Course, Exam].detect { |c| params["#{c.name.underscore}_id"] }
     @notable = klass.find(params["#{klass.name.underscore}_id"])
-    @notable_resource = @notable.class.to_s.downcase
+    @notable_resource = @notable.class.to_s.underscore
 	end
 
 end
