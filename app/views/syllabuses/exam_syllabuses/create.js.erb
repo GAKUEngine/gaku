@@ -5,6 +5,7 @@
 	$('#new-existing-exam').slideToggle();
 	$('#new-existing-exam-link').show()
 
+	$('.exams-count').html('<%= print_count(@syllabus.exams.count, t("exams.list")) %>');
   $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
 	showNotice("<%= render_flash %>");
 <% end %>

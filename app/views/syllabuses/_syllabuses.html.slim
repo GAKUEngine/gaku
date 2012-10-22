@@ -1,0 +1,10 @@
+table#syllabuses-index.index.table.table-striped.table-bordered.table-condensed
+  thead
+    tr
+      th.btn-inverse data-field=t('syllabuses.code') = t('syllabuses.code')
+      th.btn-inverse data-field=t('syllabuses.name') = t('syllabuses.name')
+      th.btn-inverse data-field=t('syllabuses.description') = t('syllabuses.description')
+      th.btn-inverse data-field=t('syllabuses.credits') = t('syllabuses.credits')
+      th.btn-info data-field=t('manage') style="width:94px" = t('manage')
+  tbody
+    =render :partial => 'syllabus', :collection => @syllabuses, :as => 'syllabus'

@@ -9,25 +9,24 @@
         hr/
     .row-fluid
       .span12.well
-        table.table.table-striped.table-bordered
-          tbody
+        table.table.table-condensed.table-striped.table-bordered
+          thead
             tr
-              th =t("syllabuses.code") + "：" + @syllabus.code.to_s
-              th =t("syllabuses.name") + "：" + @syllabus.name
-              th =t("syllabuses.credits") + "：" + @syllabus.credits.to_s
-              th
-                =t('exams.count') + "："
-                span#exams-count =@syllabus.exams.count
-            tr
+              th =t("syllabuses.code")
+              th =t("syllabuses.name")
+              th =t("syllabuses.credits")
               th =t("syllabuses.description")
-              td colspan="3" =@syllabus.description
+          tbody
+            tr class="syllabus-#{@syllabus.id}"
+              = render 'shared/fields/syllabus_fields', :syllabus => @syllabus
     .row-fluid
       .span12.well
         .row-fluid
           #syllabus-exams
             .row-fluid
               .pull-left
-                h4 =t('exams.list')
+                h4.mt-xs.mb-0.exams-count 
+                  = print_count(@syllabus.exams.count, t("exams.list"))
               .pull-right
                 = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'new-syllabus-exam-link', :class => "btn btn-primary mr-s", :remote => true
 
@@ -60,5 +59,6 @@
           = render :partial => 'notes/index'
     .row-fluid
       .span12.well
-        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px"
+        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px", :remote => true
         = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+        .row-fluid

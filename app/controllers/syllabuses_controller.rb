@@ -2,6 +2,7 @@ class SyllabusesController < ApplicationController
 
   before_filter :load_before_index, :only => :index
   before_filter :load_before_show,  :only => :show
+  before_filter :syllabuses_count, :only => [:create, :destroy]
 
   inherit_resources
   actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -10,7 +11,7 @@ class SyllabusesController < ApplicationController
 
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      format.js { render }
     end
   end
 
@@ -37,6 +38,10 @@ class SyllabusesController < ApplicationController
       @notable = @syllabus
 
       grading_methods
+    end
+
+    def syllabuses_count
+      @syllabuses_count = Syllabus.count
     end
 
 end

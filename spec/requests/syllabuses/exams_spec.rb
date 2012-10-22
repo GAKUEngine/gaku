@@ -21,11 +21,11 @@ describe 'Syllabus Exams' do
 
   context "existing exam" do
     before do
-      within('table.index tr:nth-child(2)') { click show_link }
+      within('table.index tbody tr:nth-child(1)') { click show_link }
       page.should have_content "No Exams"
     end
 
-    it "adds existing exam to syllabus", :js => true do
+    it "adds existing exam", :js => true do
       click new_existing_exam_link 
       wait_until_visible submit_existing_exam_button
       
@@ -35,12 +35,12 @@ describe 'Syllabus Exams' do
       #ensure_create_is_working table_rows
 
       page.should have_content @exam.name
-      flash("Exam added to Syllabus")     
+      flash? "Exam added to Syllabus"     
 
       wait_until_invisible existing_exam_form
     end 
 
-    it "cancels adding existing exam to syllabus", :js => true do
+    it "cancels adding existing exam", :js => true do
       click new_existing_exam_link 
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -54,13 +54,13 @@ describe 'Syllabus Exams' do
   context "new exam" do
     context 'new' do 
       before do 
-        within('table.index tr:nth-child(2)') { click show_link }
+        within('table.index tbody tr:nth-child(1)') { click show_link }
         page.should have_content "No Exams"
         click new_link
         wait_until_visible submit
       end
 
-      it "creates and shows exams", :js => true  do    
+      it "creates and shows", :js => true  do    
         expect do  
           #required
           fill_in 'exam_name', :with => 'Biology Exam'
@@ -71,15 +71,16 @@ describe 'Syllabus Exams' do
 
         page.should have_content "Biology Exam"
         page.should_not have_content "No Exams"
+        flash_created?
       end
 
-      it 'errors if the required fields are empty', :js => true do 
+      it 'errors without the required fields', :js => true do 
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
         click submit
 
         wait_until do 
-          page.should have_selector 'div.exam_nameformError' 
-          page.should have_selector 'div.exam_exam_portions_attributes_0_nameformError' 
+          flash_error_for 'exam_name' 
+          flash_error_for 'exam_exam_portions_attributes_0_name' 
         end
 
         @syllabus.exams.count.should eq 0
@@ -97,7 +98,7 @@ describe 'Syllabus Exams' do
         visit syllabus_path(@syllabus)
       end
 
-      it 'edits exam' do 
+      it 'edits' do 
         click edit_link
         current_url.should eq edit_exam_url(:id => @exam.id)
         fill_in 'exam_name', :with => 'Ruby Exam'
@@ -107,9 +108,10 @@ describe 'Syllabus Exams' do
 
         page.should have_content 'Ruby Exam'
         current_url.should eq exam_url(:id => @exam.id)
+        flash_updated?
       end
 
-      it 'shows exam'  do 
+      it 'shows'  do 
         click show_link
         page.should have_content 'Show Exam'
         page.should have_content 'Exam portions list'
@@ -117,24 +119,25 @@ describe 'Syllabus Exams' do
         current_url.should == exam_url(:id => @exam.id)
       end
 
-      it 'deletes exam', :js => true do
+      it 'deletes', :js => true do
         page.should have_content @exam.name
          
         expect do 
           ensure_delete_is_working
         end.to change(@syllabus.exams, :count).by -1
      
-        page.should_not have_content @exam.name 
+        page.should_not have_content @exam.name
+        flash_destroyed? 
       end
     end
   end
 
   context 'links hiding' do
     before do 
-      within('table.index tr:nth-child(2)') { click show_link }
-    end
+      within('table.index tbody tr:nth-child(1)') { click show_link }
+    end 
 
-    it "clicking on new-existing-exam-link hides new-exam-form", :js => true do
+    it "clicking on new-existing-exam-link hides new-exam form", :js => true do
       click new_link
       wait_until_visible form
       
@@ -146,7 +149,7 @@ describe 'Syllabus Exams' do
       visible? new_link
     end
 
-    it "click on new-syllabus-exam-link hide add-existing-exam form when is visible", :js => true do
+    it "clicking on new-syllabus-exam-link hides add-existing-exam form", :js => true do
       click new_existing_exam_link
       wait_until_visible existing_exam_form
 
