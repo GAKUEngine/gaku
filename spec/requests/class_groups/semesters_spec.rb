@@ -43,6 +43,20 @@ describe 'ClassGroup Semesters' do
     it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it 'errors if ending date is <= starting date' do
+      select '2012',      :from => 'semester_starting_1i'
+      select 'October', :from => 'semester_starting_2i'
+      select '15',        :from => 'semester_starting_3i'
+
+      select '2012',      :from => 'semester_ending_1i'
+      select 'October',  :from => 'semester_ending_2i'
+      select '15',        :from => 'semester_ending_3i'
+      click submit
+
+      within('#semesters') { page.should have_content 'Ending should be after Starting' }
+    end
+
   end
 
   context 'existing', :js => true do
@@ -51,10 +65,22 @@ describe 'ClassGroup Semesters' do
       visit class_group_path(@class_group)
       click tab_link
       within(count_div) { page.should have_content '1' }
+      within(tab_link) { page.should have_content 'Semesters(1)' }
     end
 
-    pending "errors if already exists" do 
-      #TODO needs to be implemeted in the main logic
+    it "errors if already exists" do 
+      click new_link
+      wait_until_visible submit
+
+      select '2012',      :from => 'semester_starting_1i'
+      select 'October', :from => 'semester_starting_2i'
+      select '21',        :from => 'semester_starting_3i'
+
+      select '2012',      :from => 'semester_ending_1i'
+      select 'November',  :from => 'semester_ending_2i'
+      select '21',        :from => 'semester_ending_3i'
+      click submit
+      within('#semesters') { page.should have_content 'Class group have this semester added' }
     end
 
     context 'edit', :js => true do
@@ -81,6 +107,45 @@ describe 'ClassGroup Semesters' do
 
       it 'cancels editing' do
         ensure_cancel_modal_is_working
+      end
+
+      context '2 existing' do
+        before do
+          @semester2 = create(:semester, :starting => "2013-01-21", :ending => "2013-06-21")
+          @class_group.semesters << @semester2
+          visit class_group_path(@class_group)
+          click tab_link 
+          within(count_div) { page.should have_content '2' }
+          within(tab_link) { page.should have_content 'Semesters(2)' }
+
+          within("table tr#semester-#{@semester2.id}") { click edit_link }
+          wait_until_visible modal
+        end
+
+        it 'errors if already exists' do
+          select '2012',      :from => 'semester_starting_1i'
+          select 'October', :from => 'semester_starting_2i'
+          select '21',        :from => 'semester_starting_3i'
+
+          select '2012',      :from => 'semester_ending_1i'
+          select 'November',  :from => 'semester_ending_2i'
+          select '21',        :from => 'semester_ending_3i'
+          click submit
+          within(modal) { page.should have_content 'Class group have this semester added' }
+        end
+
+        it 'errors if ending is <= starting' do
+          select '2012',      :from => 'semester_starting_1i'
+          select 'October', :from => 'semester_starting_2i'
+          select '15',        :from => 'semester_starting_3i'
+
+          select '2012',      :from => 'semester_ending_1i'
+          select 'October',  :from => 'semester_ending_2i'
+          select '15',        :from => 'semester_ending_3i'
+          click submit
+          
+          within(modal) { page.should have_content 'Ending should be after Starting' }
+        end
       end
     end
 

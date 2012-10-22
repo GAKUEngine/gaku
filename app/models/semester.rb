@@ -21,7 +21,7 @@ class Semester < ActiveRecord::Base
   private
 
   def ending_after_starting
-  	if self.starting > self.ending
+  	if self.starting >= self.ending
 			errors.add(:ending, I18n.t('semesters.ending_after_starting'))
   	end
   end
