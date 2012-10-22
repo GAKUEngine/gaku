@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Course Notes' do
+describe 'Syllabus Notes' do
 
   stub_authorization!
 
