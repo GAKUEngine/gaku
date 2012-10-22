@@ -17,7 +17,6 @@ class GAKUEngine.Models.Calculation extends Backbone.Model
 
     $('.grading-container').html tableView.render().el
 
-    console.log $(".exam_grid")
     tableSizeFix = ->
       $("html").css "overflow-x", "hidden"
       $("html").css "overflow-y", "hidden"
