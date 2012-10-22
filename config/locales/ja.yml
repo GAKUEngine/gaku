@@ -132,6 +132,7 @@ ja:
     class_group_enrollment: "登録されているクラス"
     chosen_students: "生徒を選択して下さい"
     commute_method: '通学手段'
+    updated: 'Student was successfully updated.'
   add_student: "生徒を追加する"
   enroll_to_class: "クラスに登録"
   schedule: "定刻"
@@ -171,6 +172,7 @@ ja:
     add_class_group: 'クラスを追加'
     choose_class_group: 'クラスを選択'
     course_created: 'Course was successfully created'
+    course_destroyed: 'Course was successfully destroyed.'
   course_groups:
     course_groups: '授業グループ'
     edit_course_group: '授業グループを編集'
@@ -279,6 +281,7 @@ ja:
       deviation: "偏差値"
       percent: "割合"
     save: 'Save Exam'
+    destroyed: 'Exam was successfully destroyed.'
   execution_date: "実行日"
   config:
     label: "設定"

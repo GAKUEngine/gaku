@@ -3,7 +3,7 @@ class Syllabuses::ExamsController < ApplicationController
   inherit_resources
   actions :index, :show, :new, :update, :edit, :destroy
 
-  respond_to :js, :html
+  # respond_to :js, :html
 
   def create
  	  @syllabus = Syllabus.find(params[:syllabus_id])

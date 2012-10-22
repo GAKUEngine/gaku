@@ -8,6 +8,7 @@ class ClassGroups::CoursesController < ApplicationController
   def destroy
     @class_group_course_enrollment = ClassGroupCourseEnrollment.find(params[:id])
     @class_group_course_enrollment.destroy
+    flash.now[:notice] = t('courses.course_destroyed')
     respond_to do |format|
       format.js { render 'destroy' }
     end

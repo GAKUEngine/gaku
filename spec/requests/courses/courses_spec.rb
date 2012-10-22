@@ -32,7 +32,7 @@ describe 'Courses' do
       within(count_div) { page.should have_content('Courses List(1)') }
       wait_until_invisible '#new-course'
       
-      flash "was successfully created"
+      flash_created?
       
       within('#courses-index') { page.should have_content(@syllabus.name) }
       
@@ -90,7 +90,7 @@ describe 'Courses' do
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
       click_button 'submit-course-button'
 
-      flash "was successfully updated"
+      flash_updated?
       page.should have_content "biology2013Syllabus"
       page.should have_content "biology2013"
     end
@@ -106,7 +106,7 @@ describe 'Courses' do
         wait_until { page.all(table_rows).size == tr_count - 1 }
       end.to change(Course, :count).by(-1)
       
-      flash "was successfully destroyed"
+      flash_destroyed?
       within(count_div) { page.should_not have_content('Courses List(1)') }
       page.should_not have_content(@course.code)
     end

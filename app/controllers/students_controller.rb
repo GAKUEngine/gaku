@@ -56,6 +56,7 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update_attributes(params[:student])
+      flash.now[:notice] = t('students.updated')
       respond_to do |format|
         unless params[:student].nil?
           if !params[:student][:addresses_attributes].nil?

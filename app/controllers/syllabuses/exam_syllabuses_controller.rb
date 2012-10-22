@@ -5,6 +5,7 @@ class Syllabuses::ExamSyllabusesController < ApplicationController
 		@exam_syllabus = ExamSyllabus.find(params[:id])
 		@exam_syllabus.destroy
 		
+		flash.now[:notice] = 'Exam was successfully destroyed.'
 		respond_to do |format|
 			format.js { render 'destroy' }
 		end

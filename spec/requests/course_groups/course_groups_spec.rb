@@ -23,7 +23,7 @@ describe 'CourseGroups' do
         click '#submit-course-group-button'
       end.to change(CourseGroup, :count).by(1)
 
-      flash 'was successfully created'
+      flash_created?
       within(count_div) { page.should have_content('Course Groups List(1)') }
       within ('#course-groups-index') { page.should have_content 'MathCourses2012' }
       wait_until { page.all(table_rows).size == tr_count + 1 }
@@ -72,7 +72,7 @@ describe 'CourseGroups' do
       end
 
       CourseGroup.last.name.should eql('2012 Courses')
-      flash 'was successfully updated'
+      flash_updated?
     end
 
     it 'cancel editting', :js => true do
@@ -108,7 +108,7 @@ describe 'CourseGroups' do
       within(".delete-modal") { click_on "Delete" }
       page.driver.browser.switch_to.alert.accept
       
-      flash 'was successfully destroyed.'
+      flash_destroyed?
       within('#course-groups-index tbody') { page.should_not have_content(@course_group.name) }
       CourseGroup.all.count.should eq 0
     end
