@@ -1,5 +1,11 @@
 - content_for :title, t("admissions.candidates.list")
-
+.row-fluid
+  .span3
+    = label :school_id, t("admissions.candidates.junior_high_school")
+    = select_tag :name, nil, :class => "span12"
+  .span3
+    = label :school_id, t("admissions.candidates.junior_high_school")
+    = select_tag :name, nil, :class => "span12"
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0.students-count
