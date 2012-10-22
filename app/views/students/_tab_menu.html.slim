@@ -9,7 +9,7 @@
           a#new-student-guardian-tab-link data-toggle="tab" href="#guardians"
             = print_count(@student.guardians.count, t('guardians.guardians'))
         li
-          a#new-student-course-enrollment-tab-link data-toggle="tab" href="#courses"
+          a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
             = print_count(@student.courses.count, t('courses.plural'))
       .tab-content
         #addresses.tab-pane.active

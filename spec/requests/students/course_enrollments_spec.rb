@@ -1,7 +1,11 @@
 require 'spec_helper'
 
-describe 'CourseEnrollments' do
+describe 'Student CourseEnrollments' do
   stub_authorization!
+
+  before :all do
+    Helpers::Request.resource("student-course-enrollment") 
+  end
   
   before do
     @student = create(:student)
@@ -9,62 +13,49 @@ describe 'CourseEnrollments' do
     visit student_path(@student) 
   end
 
-  context 'new' do 
+  context 'new', :js => true do 
     before do 
-      click_link 'new-student-course-enrollment-tab-link'
-      click_link 'new-student-course-enrollment-link'
+      click tab_link
+      click new_link
+      wait_until_visible submit
     end
 
-    it "should add and show student course", :js => true do\
-      @student.courses.size.should eql(0)
-      tr_count = page.all('table#student-course-enrollments-index tr').size
+    it "creates and shows" do
+      expect do 
+        select "fall2050", :from => 'course_enrollment_course_id'
+        click submit
+        wait_until_invisible form
+      end.to change(@student.courses, :count).by 1
 
-      wait_until { find('#new-student-course-enrollment form').visible? } 
-
-      select "fall2050", :from => 'course_enrollment_course_id'
-      click_button "submit-student-course-enrollment-button"
-      
-      wait_until { !page.find('#new-student-course-enrollment form').visible? } 
-      page.should have_content("fall2050")
-      page.all('table#student-course-enrollments-index tr').size == tr_count + 1
-      within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
-      within('#new-student-course-enrollment-tab-link') { page.should have_content('Courses(1)') }
-      @student.courses.size.should eql(1)
+      page.should have_content "fall2050"
+      within(count_div) { page.should have_content 'Courses list(1)' }
+      within(tab_link)  { page.should have_content 'Courses(1)' }
+      flash_created?
     end
 
-    it 'should cancel adding', :js => true do
-      wait_until { page.find('#cancel-student-course-enrollment-link').visible? } 
-      click_link 'cancel-student-course-enrollment-link'
-      wait_until { !page.find('#new-student-course-enrollment form').visible? } 
-      find('#new-student-course-enrollment-link').visible?
-
-      click_link 'new-student-course-enrollment-link'
-      wait_until { find('#new-student-course-enrollment form').visible? } 
-      !page.find('#new-student-course-enrollment-link').visible? 
+    it 'cancels creating' do
+      ensure_cancel_creating_is_working 
     end
   end
 
-  it "should delete a student course", :js => true do
+  it "deletes", :js => true do
     @student.courses << @course
 
     visit student_path(@student) 
-    click_link 'new-student-course-enrollment-tab-link'
-    wait_until { page.has_content?('Courses list') }
+    click tab_link
 
-    tr_count = page.all('table#student-course-enrollments-index tr').size
-    within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
-    within('#new-student-course-enrollment-tab-link') { page.should have_content('Courses(1)') }
-    page.should have_content(@course.code)
-    @student.courses.size.should eql(1)
+    within(count_div) { page.should have_content 'Courses list(1)' }
+    within(tab_link)  { page.should have_content 'Courses(1)' }
+    page.should have_content @course.code
 
-    find('.delete-link').click 
-    page.driver.browser.switch_to.alert.accept
+    expect do 
+      ensure_delete_is_working
+    end.to change(@student.courses, :count).by -1
 
-    wait_until { page.all('table#student-course-enrollments-index tr').size == tr_count - 1 }
-    within('.student-course-enrollments-count') { page.should_not have_content('Courses list(1)') }
-    within('#new-student-course-enrollment-tab-link') { page.should_not have_content('Courses(1)') }
-    @student.courses.size.should eql(0)
-    page.should_not have_content(@course.code)
+    within(count_div) { page.should_not have_content 'Courses list(1)' }
+    within(tab_link)  { page.should_not have_content 'Courses(1)' }
+    page.should_not have_content @course.code
+    flash_destroyed?
   end
   
 end

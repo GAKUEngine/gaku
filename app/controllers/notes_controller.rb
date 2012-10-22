@@ -19,6 +19,7 @@ class NotesController < ApplicationController
   def create
   	@note = @notable.notes.new(params[:note])
   	@note.save
+    flash.now[:notice] = t('notes.created')
   	render 'create', :locals => {:notable_resource => @notable_resource}
   end
 
@@ -44,6 +45,7 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
+    flash.now[:notice] = t('notes.destroyed')
     respond_to do |format|
       format.js { render 'destroy', :locals => {:notable_resource => @notable_resource} }
     end
@@ -55,7 +57,7 @@ private
 		#@notable = resource.singularize.classify.constantize.find(id)
     klass = [Student, LessonPlan, Syllabus, ClassGroup, Course, Exam].detect { |c| params["#{c.name.underscore}_id"] }
     @notable = klass.find(params["#{klass.name.underscore}_id"])
-    @notable_resource = @notable.class.to_s.downcase
+    @notable_resource = @notable.class.to_s.underscore
 	end
 
 end

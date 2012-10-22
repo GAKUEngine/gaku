@@ -9,6 +9,9 @@ module Helpers
       result * "-"
     end
 
+    @@resource = ''
+    @@resource_plural = ''
+
     def self.resource(x)
       @@resource = x
       @@resource_plural = plural(x)

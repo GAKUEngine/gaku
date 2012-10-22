@@ -351,6 +351,8 @@ en:
     delete: "Delete Note"
     save: "Save note"
     edit: "Edit note"
+    created: 'Note was successfully created.'
+    destroyed: 'Note was successfully destroyed.'
   class: Class
   semesters:
     plural: "Semesters"
