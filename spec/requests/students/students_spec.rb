@@ -1,149 +1,167 @@
 require 'spec_helper'
 
-describe 'Student' do
+describe 'Students' do
+
   stub_authorization!
 
-  context "existing students" do
+  before :all do
+    Helpers::Request.resource("student") 
+  end
+
+  context "existing" do
     before do 
-      @student = create(:student, :name => 'John', :surname => 'Doe')
+      @student  = create(:student, :name => 'John', :surname => 'Doe')
       @student2 = create(:student, :name => 'Susumu', :surname => 'Yokota')
       @student3 = create(:student, :name => 'Johny', :surname => 'Bravo')
       visit students_path
     end
 
-    it "should list existing students" do
-      page.all('#students-index tr').size.should eql(4)
-      page.should have_content("#{@student.name}")
-      page.should have_content("#{@student.surname}")
-      page.should have_content("#{@student2.name}")
-      page.should have_content("#{@student2.surname}")
-      page.should have_content("#{@student3.name}")
-      page.should have_content("#{@student3.surname}")
+    it "lists" do
+      size_of(table_rows).should eq 4
+      page.should have_content "#{@student.name}"
+      page.should have_content "#{@student.surname}"
+      page.should have_content "#{@student2.name}"
+      page.should have_content "#{@student2.surname}" 
+      page.should have_content "#{@student3.name}" 
+      page.should have_content "#{@student3.surname}"
     end
 
-    it 'should choose students', :js => true do 
+    it 'chooses students', :js => true do 
       find(:css, "input#student-#{@student.id}").set(true)
-      wait_until { find('#students-checked-div').visible? }
+      wait_until_visible '#students-checked-div'
+
       within('#students-checked-div') do 
-        page.should have_content('Chosen students(1)')
-        click_link('Show')
-        wait_until { find('#chosen-table').visible? }
-        page.should have_content("#{@student.name}")
-        page.should have_button('Enroll to class')
-        page.should have_button('Enroll to course')
-        click_link('Hide')
-        wait_until { !page.find('#chosen-table').visible? }
+        page.should have_content 'Chosen students(1)'
+        click_link 'Show'
+        wait_until_visible '#chosen-table'
+        page.should have_content "#{@student.name}"
+        page.should have_button 'Enroll to class'
+        page.should have_button 'Enroll to course'
+        click_link 'Hide'
+        wait_until_invisible '#chosen-table'
       end
     end
 
-    it "should have autocomplete while searching", :js => true do
-      page.all('#students-index tr').size.should eql(4)
+    it "has autocomplete while searching", :js => true do
+      size_of(table_rows).should eq 4
 
       fill_in 'q_name_cont', :with => "J"
       wait_until do  
-        within ('#students-index') do
-          page.should have_content("John") 
-          page.should have_content("Johny")
+        within(table) do
+          page.should have_content "John" 
+          page.should have_content "Johny"
         end
         sleep 2 #FIXME
-        page.all('#students-index tr').size.should eql(3)
+        size_of(table_rows).should eq 3
       end
       
 
       fill_in 'q_surname_cont', :with => "B"
       wait_until do 
-        within ('#students-index') do
-          page.should have_content("Johny")
-          page.should have_content("Bravo")
+        within(table) do
+          page.should have_content "Johny"
+          page.should have_content "Bravo"
         end
-        page.all('#students-index tr').size.should eql(2)
+        size_of(table_rows).should eq 2
       end 
     end
 
-    it "should edit an existing student from show", :js => true do
-      visit student_path(@student)
-      page.should have_content("#{@student.name}")
-      find('.edit-link').click
-      wait_until { find('#edit-student-modal').visible? }
-      fill_in "student_surname", :with => "Kostova"
-      fill_in "student_name", :with => "Marta"
-      click_button 'submit-student-button'
-      wait_until { !page.find('#edit-student-modal').visible? }
+    context 'edit from show view', :js => true do 
+      before do
+        visit student_path(@student)        
+        click edit_link
+        wait_until_visible modal 
+      end
 
-      page.should have_content("Kostova")
-      page.should have_content("Marta")
-      @student.reload
-      @student.name.should eql("Marta") 
-      @student.surname.should eql("Kostova") 
+      it "edits from show view" do
+        fill_in "student_surname", :with => "Kostova"
+        fill_in "student_name",    :with => "Marta"
+        click submit
+        wait_until_invisible modal
+
+        page.should have_content "Kostova"
+        page.should have_content "Marta"
+        @student.reload
+        @student.name.should eq "Marta" 
+        @student.surname.should eq "Kostova"
+        flash_updated? 
+      end
+
+      it 'cancels editting' do
+        ensure_cancel_modal_is_working 
+      end
+
     end
 
-    it "should edit an existing student from index", :js => true do
-      visit students_path
-      page.should have_content("#{@student.name}")
-      find('.edit-link').click
-      
-      wait_until { find('#edit-student-modal').visible? }
-      fill_in "student_surname", :with => "Kostova"
-      fill_in "student_name", :with => "Marta"
-      click_button 'submit-student-button'
-      wait_until { !page.find('#edit-student-modal').visible? }
+    context 'edit from index view', :js => true do
+      before do
+        visit students_path        
+        click edit_link
+        wait_until_visible modal 
+      end
 
-      page.should have_content("Kostova")
-      page.should have_content("Marta")
-      @student.reload
-      @student.name.should eql("Marta") 
-      @student.surname.should eql("Kostova") 
-    end
+      it "edits from index view" do
+        fill_in "student_surname", :with => "Kostova"
+        fill_in "student_name",    :with => "Marta"
+        click submit
+        wait_until_invisible modal
 
-    it 'should cancel editting', :js => true do
-      visit students_path
-      find('.edit-link').click
+        page.should have_content "Kostova"
+        page.should have_content "Marta"
+        @student.reload
+        @student.name.should eq "Marta" 
+        @student.surname.should eq "Kostova"
+        flash_updated? 
+      end
 
-      wait_until { find('#edit-student-modal').visible? }
-      click_link 'back-student-link'
-      current_path.should == students_path
+      it 'cancels editting' do
+        ensure_cancel_modal_is_working
+      end
     end
     
-    it 'should delete an existing student', :js => true do
+    it 'deletes', :js => true do
       visit student_path(@student2)
       student_count = Student.count
-      page.should have_content("#{@student2.name}")
-      find('#delete-student-link').click
+      page.should have_content "#{@student2.name}"
       
-      within(".delete_modal") { click_on "Delete" }
-      page.driver.browser.switch_to.alert.accept
-      
-      wait_until { page.should have_content('successfully destroyed') }
-      page.should_not have_content("#{@student2.name}")
-      within('.students-count') { page.should_not have_content('Students list(#{student_count - 1})') }
+      expect do 
+        click '#delete-student-link'     
+        within(modal) { click_on "Delete" }
+        accept_alert
+        wait_until { flash_destroyed? }
+      end.to change(Student, :count).by -1
+
+      page.should_not have_content "#{@student2.name}"
+      within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
       current_path.should eq students_path
-      Student.count.should eq(student_count - 1)
     end
 
-    it 'should enroll to class', :js => true do 
-      ClassGroupEnrollment.count.should eql(0)
+    it 'enrolls to class', :js => true do 
       create(:class_group, :name => 'Biology')
       visit student_path(@student)
-      click_link 'enroll-student-link'
-      wait_until { find('#new-class-group-enrollment-modal').visible? }
+      
+      expect do 
+        click_on 'enroll-student-link'
+        wait_until_visible modal
 
-      select 'Biology', :from => 'class_group_enrollment_class_group_id'
-      fill_in 'class_group_enrollment_seat_number', :with => '77'
-      click_button "Create Class Enrollment"
-      click_link 'Cancel'
+        select 'Biology', :from => 'class_group_enrollment_class_group_id'
+        fill_in 'class_group_enrollment_seat_number', :with => '77'
+        click_on "Create Class Enrollment"
+      end.to change(ClassGroupEnrollment, :count).by 1
 
-      wait_until { !page.find('#new-class-group-enrollment-modal').visible? }
-      click_link 'enroll-student-link'
+      click_on 'Cancel'
+      wait_until_invisible modal
+
+      click_on 'enroll-student-link'
       within('#new-class-group-enrollment-modal') do
-        page.should have_content('Biology')
-        page.should have_content('77')
+        page.should have_content 'Biology'
+        page.should have_content '77'
       end
-      ClassGroupEnrollment.count.should eql(1)
 
       visit student_path(@student)
-      within('.table td#student-class-group-enrollment') do 
-        page.should have_content('Biology')
-        page.should have_content('77')
+      within('td#student-class-group-enrollment') do 
+        page.should have_content 'Biology'
+        page.should have_content '77'
       end
     end
 
@@ -152,41 +170,33 @@ describe 'Student' do
   context "new", :js => true do 
     before do 
       visit students_path
-      click_link "new-student-link"
-      wait_until do 
-        find('#new-student').visible? 
-        find('#submit-student-button').visible?
-      end
+      click new_link
+      wait_until_visible submit
     end
 
-    it "should create new student" do 
-      Student.count.should eq 0
-      within('.students-count') { page.should have_content('Students list') }
+    it "creates and shows" do 
+      expect do 
+        fill_in "student_name", :with => "John"
+        fill_in "student_surname", :with => "Doe"
+        click_button "submit-student-button"
+        wait_until_invisible form
+      end.to change(Student, :count).by 1
 
-      fill_in "student_name", :with => "John"
-      fill_in "student_surname", :with => "Doe"
-      click_button "submit-student-button"
-
-      wait_until { !page.find('#new-student').visible? }
-      page.should have_content("John")
-      within('.students-count') { page.should have_content('Students list(1)') }
-      Student.count.should eq 1
+      page.should have_content "John"
+      within(count_div) { page.should have_content 'Students list(1)' }
+      flash_created?
     end
         
-    it 'should error if there are empty fields', :js => true do 
-      click_button "submit-student-button"
+    it 'errors without required fields' do 
+      click submit
       wait_until do
-        page.should have_selector('div.student_surnameformError')
-        page.should have_selector('div.student_nameformError') 
+        page.should have_selector 'div.student_surnameformError'
+        page.should have_selector 'div.student_nameformError'
       end
     end
 
-    it 'should cancel creating' do 
-      click_link 'cancel-student-link'
-      wait_until { !page.find('#new-student').visible? }
-
-      click_link "new-student-link"
-      wait_until { page.find('#new-student').visible? }
+    it 'cancels creating' do 
+      ensure_cancel_creating_is_working
     end
   end
 

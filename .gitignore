@@ -49,3 +49,5 @@ public/system/*
 routes.txt
 
 elasticsearch*
+
+Gemfile.lock

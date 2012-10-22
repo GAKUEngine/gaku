@@ -1,84 +1,75 @@
 require 'spec_helper'
 
-describe 'CommuteMethodTypes' do
+describe 'Admin CommuteMethodTypes' do
+
   stub_authorization!
 
-  context 'create and show' do
+  before :all do 
+    Helpers::Request.resource("admin-commute-method-type")
+  end
+
+  context 'new', :js => true do
   	before do 
   	  visit admin_commute_method_types_path
+      click new_link
+      wait_until_visible submit
     end
 
-    it 'should create and show commute method type', :js => true do 
-      tr_count = page.all('table#admin-commute-method-types-index tr').size
-      CommuteMethodType.count.should eq 0
-      click_link 'new-admin-commute-method-type-link'
+    it 'creates and shows' do 
+      expect do 
+        fill_in 'commute_method_type_name', :with => 'car'
+        click submit
+        wait_until_invisible form
+      end.to change(CommuteMethodType, :count).by 1
 
-      wait_until { page.find('#new-admin-commute-method-type form').visible? }
-      !page.find('#new-admin-commute-method-type-link').visible?
-      fill_in 'commute_method_type_name', :with => 'car'
-      click_button 'submit-admin-commute-method-type-button'
-
-      wait_until { !page.find('#new-admin-commute-method-type form').visible? }
-      page.find('#new-admin-commute-method-type-link').visible?
-      page.should have_content('car')
-      page.all('table#admin-commute-method-types-index tr').size == tr_count + 1
-      within('.admin-commute-method-types-count') { page.should have_content('Commute Method Types list(1)') }
-      CommuteMethodType.count.should eq 1 
+      page.should have_content 'car'
+      within(count_div) { page.should have_content 'Commute Method Types list(1)' }
+      flash_created?
     end 
 
-    it 'should cancel creating commute method type', :js => true do 
-      click_link 'new-admin-commute-method-type-link'
-      
-      wait_until { page.find('#cancel-admin-commute-method-type-link').visible? }
-      
-      click_link 'cancel-admin-commute-method-type-link'
-
-      wait_until { !page.find('#new-admin-commute-method-type').visible? }
-      click_link 'new-admin-commute-method-type-link'
-  
-      wait_until { page.find('#new-admin-commute-method-type').visible? }
+    it 'cancels creating' do 
+      ensure_cancel_creating_is_working
     end
   end
 
-  context 'index, edit and delete' do 
+  context 'existing' do 
     before do
       @commute_method_type = create(:commute_method_type, :name => 'metro') 
       visit admin_commute_method_types_path
     end
 
-  	it 'should edit commute method type', :js => true do
-  	  within('table#admin-commute-method-types-index tbody') { find('.edit-link').click }
-  	  
-  	  wait_until { find('#edit-commute-method-type-modal').visible? } 
-  	  fill_in 'commute_method_type_name', :with => 'car'
-  	  click_button 'submit-admin-commute-method-type-button' 
+    context 'edit', :js => true do 
+      before do 
+        within(table) { click edit_link }
+        wait_until_visible modal 
+      end
 
-  	  wait_until { !page.find('#edit-commute-method-type-modal').visible? }
-  	  page.should have_content('car')
-  	  page.should_not have_content('metro')
-  	  CommuteMethodType.count.should eq 1
-  	end
+    	it 'edits' do
+    	  fill_in 'commute_method_type_name', :with => 'car'
+    	  click submit
 
-    it 'should cancel editting', :js => true do 
-      within('table#admin-commute-method-types-index tbody') { find('.edit-link').click }
-      wait_until { find('#cancel-admin-commute-method-type-link').visible? }
+    	  wait_until_invisible modal
+    	  page.should have_content 'car'
+    	  page.should_not have_content 'metro'
+        flash_updated?
+    	end
 
-      click_link 'cancel-admin-commute-method-type-link'
-      wait_until { !page.find('#edit-commute-method-type-modal').visible? }
+      it 'cancels editting' do 
+        ensure_cancel_modal_is_working
+      end
     end
 
+  	it 'deletes', :js => true do
+      page.should have_content @commute_method_type.name
+      within(count_div) { page.should have_content 'Commute Method Types list(1)' }
 
-  	it 'should delete commute method type', :js => true do
-      CommuteMethodType.count.should eq 1
-      within('.admin-commute-method-types-count') { page.should have_content('Commute Method Types list(1)') }
-      tr_count = page.all('table#admin-commute-method-types-index tr').size
-
-      find('.delete-link').click
-      page.driver.browser.switch_to.alert.accept
+      expect do
+        ensure_delete_is_working 
+      end.to change(CommuteMethodType, :count).by -1
         
-      wait_until { page.all('table#admin-commute-method-types-index tr').size == tr_count - 1 }
-      within('.admin-commute-method-types-count') { page.should_not have_content('Commute Method Types list(1)') }
-      CommuteMethodType.count.should eq 0
+      within(count_div) { page.should_not have_content 'Commute Method Types list(1)' }
+      page.should_not have_content @commute_method_type.name
+      flash_destroyed?
     end
   end
 

@@ -5,6 +5,6 @@ $('#new-syllabus-exam form').each (function(){
 });
 
 $('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
-$('#syllabus-exams-count').html('<%= @syllabus.exams.count %>');
+$('.exams-count').html('<%= print_count(@syllabus.exams.count, t("exams.list")) %>');
 $('.no-exam-msg').remove();
 showNotice("<%= render_flash %>");

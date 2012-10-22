@@ -1,20 +1,13 @@
 require 'spec_helper'
 
-describe 'Contact' do
-
-  form           = '#new-admin-school-campus-contact'
-  new_link       = '#new-admin-school-campus-contact-link'
-  modal          = '#edit-contact-modal'
-
-  submit_button  = '#submit-admin-school-campus-contact-button'
-  cancel_link    = '#cancel-admin-school-campus-contact-link'
-  
-  table          = '#admin-school-campus-contacts-index'
-  table_rows     = '#admin-school-campus-contacts-index tr'
-  count_div      = '.admin-school-campus-contacts-count'
+describe 'Admin School Campus Contact' do
 
   stub_authorization!
 
+  before :all do 
+    Helpers::Request.resource("admin-school-campus-contact")
+  end
+  
   before do
     @school = create(:school)
     @contact_type = create(:contact_type, :name => 'email')
@@ -24,31 +17,26 @@ describe 'Contact' do
     before do 
       visit admin_school_campus_path(@school, @school.campuses.first) 
       click new_link
-      wait_until_visible submit_button
+      wait_until_visible submit
     end
 
-    it "creates and shows contact" do
-      @school.campuses.first.contacts.size.should eq 0
-      
-      select 'email', :from => 'contact_contact_type_id'
-      fill_in "contact_data", :with => "The contact data"
-      fill_in "contact_details", :with => "The contact details"
-      click submit_button
-      
-      wait_until_invisible form
-      page.should have_content("The contact data")
-      page.should have_content("The contact details")
-      within(count_div) { page.should have_content('Contacts list(1)') }
-      @school.reload
-      @school.campuses.first.contacts.size.should eq 1
+    it "creates and shows" do
+        expect do 
+        select 'email', :from => 'contact_contact_type_id'
+        fill_in "contact_data", :with => "The contact data"
+        fill_in "contact_details", :with => "The contact details"
+        click submit
+        wait_until_invisible form
+      end.to change(@school.campuses.first.contacts, :count).by 1
+
+      page.should have_content "The contact data"
+      page.should have_content "The contact details"
+      within(count_div) { page.should have_content 'Contacts list(1)' }
+      flash_created?
     end
 
     it 'cancels creating' do
-      click cancel_link
-      wait_until_invisible form
-
-      click new_link
-      wait_until_visible submit_button
+      ensure_cancel_creating_is_working
     end
   end
 
@@ -65,21 +53,21 @@ describe 'Contact' do
         wait_until_visible modal
       end
 
-      it "edits contact" do 
+      it "edits" do 
         fill_in 'contact_data', :with => 'example@genshin.org'
-        click submit_button
+        click submit
 
         wait_until_invisible modal
-        page.should have_content('example@genshin.org')
+        page.should have_content 'example@genshin.org' 
+        flash_updated?
       end
 
       it 'cancels editting' do 
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
     end
 
-    it "sets contact as primary" do 
+    it "sets as primary" do 
       contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
 
       @school.campuses.first.contacts << contact2
@@ -96,18 +84,19 @@ describe 'Contact' do
       @school.campuses.first.contacts.second.is_primary? == true
     end
 
-    it "deletes contact" do
+    it "deletes" do
       visit admin_school_campus_path(@school, @school.campuses.first)
 
-      within(count_div) { page.should have_content('Contacts list(1)') }
+      within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content(@contact.data)
-      @school.campuses.first.contacts.size.should eq 1
+      
+      expect do 
+        ensure_delete_is_working
+      end.to change(@school.campuses.first.contacts, :count).by -1
 
-      ensure_delete_is_working(delete_link, table_rows)
-
-      within(count_div) { page.should_not have_content('Contacts list(1)') }
-      @school.campuses.first.contacts.size.should eq 0
       page.should_not have_content(@contact.data)
+      within(count_div) { page.should_not have_content 'Contacts list(1)' }
+      flash_destroyed?
     end
   end
 end

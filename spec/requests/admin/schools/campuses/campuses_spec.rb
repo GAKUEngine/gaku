@@ -1,18 +1,12 @@
 require 'spec_helper'
 
-describe 'Campuses' do
-
-  form           = '#new-admin-school-campus'
-  new_link       = '#new-admin-school-campus-link'
-  modal          = '#edit-campus-modal'
-
-  submit_button  = '#submit-admin-school-campus-button'
-  cancel_link    = '#cancel-admin-school-campus-link'
+describe 'Admin School Campuses' do
   
-  table          = '#admin-school-campuses-index'
-  table_rows     = '#admin-school-campuses-index tr'
-
   stub_authorization!
+
+  before :all do
+    Helpers::Request.resource("admin-school-campus")
+  end
 
   before do 
     @school = create(:school, :name => 'Nagoya University')
@@ -22,26 +16,25 @@ describe 'Campuses' do
   context 'new', :js => true do
     before do 
       click new_link
-      wait_until_visible submit_button
+      wait_until_visible submit
     end
 
-    it 'creates and shows school campus' do 
-      @school.campuses.count.should eq 1
+    it 'creates and shows' do 
+      within(count_div) { page.should have_content 'Campuses list(1)' }
 
-      fill_in 'campus_name', :with => 'Nagoya Campus'
-      click submit_button
+      expect do 
+        fill_in 'campus_name', :with => 'Nagoya Campus'
+        click submit
+        wait_until_invisible form
+      end.to change(@school.campuses, :count).by 1
 
-      wait_until_invisible form
       page.should have_content 'Nagoya Campus'
-      @school.campuses.count.should eq 2
+      within(count_div) { page.should have_content 'Campuses list(2)' }
+      flash_created?
     end 
 
     it 'cancels creating' do
-      click cancel_link
-      wait_until_invisible form
-
-      click new_link
-      wait_until_visible submit_button
+      ensure_cancel_creating_is_working
     end
   end
 
@@ -53,28 +46,34 @@ describe 'Campuses' do
         wait_until_visible modal 
       end
 
-      it 'edits school campus' do
+      it 'edits' do
         fill_in 'campus_name', :with => 'Nagoya Campus'
-        click submit_button 
+        click submit 
 
         wait_until_invisible modal
         within(table) do 
-          page.should have_content('Nagoya Campus')
-          page.should_not have_content('Nagoya University') 
+          page.should have_content 'Nagoya Campus'
+          page.should_not have_content 'Nagoya University' 
         end
-        @school.campuses.count.should eq 1
+        flash_updated?
       end
 
       it 'cancels editting' do 
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
     end
 
-    it 'deletes school' do
-      @school.campuses.count.should eq 1 
-      ensure_delete_is_working(delete_link, table_rows)
-      @school.campuses.count.should eq 0
+    it 'deletes' do
+      within(table) { page.should have_content "Nagoya University" }
+      within(count_div) { page.should have_content 'Campuses list(1)' }
+
+      expect do 
+        ensure_delete_is_working
+      end.to change(@school.campuses, :count).by -1
+
+      within(table) { page.should_not have_content "Nagoya University" }
+      within(count_div) { page.should_not have_content 'Campuses list(1)' }
+      flash_destroyed?
     end
   end
 

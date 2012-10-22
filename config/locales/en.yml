@@ -1,4 +1,6 @@
 en:
+  menu: 
+    class_groups: "Class Listing"
   admin:
     admin: "Admin"
     schools: "Schools"
@@ -64,7 +66,7 @@ en:
   addresses:
     created: 'Address was successfully created.'
     destroyed: 'Address was successfully destroyed.'
-    addresses: "Addresses"
+    plural: "Addresses"
     singular: "Address"
     new: "New Address"
     add: "Add Address"
@@ -177,7 +179,7 @@ en:
   class_group_management: "Class Management"
   class_groups:
     plural: "Class Groups"
-    list: "Class Listing"
+    list: "Class Groups list"
     new: "New Class"
     name: "Class Name"
     grade: "Grade"
@@ -235,7 +237,7 @@ en:
     plural: "Exams"
     new: "New Exam"
     new_exam: "New Exam Contents"
-    add: "Add exam"
+    add: "Add Exam"
     list: "Exams List"
     view: "View Exams"
     select: "Select Exam"
@@ -250,6 +252,7 @@ en:
     show: "Show Exam"
     edit: "Edit Exam"
     exam_created: 'Exam was successfully created'
+    save: 'Save Exam'
   config:
     label: "Config"
     close: "Close"
@@ -350,7 +353,7 @@ en:
     edit: "Edit note"
   class: Class
   semesters:
-    semesters: "Semesters"
+    plural: "Semesters"
     list: "Semesters list"
     starting: "Starting"
     ending:   "Ending"
