@@ -80,7 +80,7 @@ describe 'Syllabus' do
         edited_syllabus.name.should eq 'Maths'
         edited_syllabus.code.should eq 'math'
         edited_syllabus.description.should eq 'Maths Description'
-        flash 'successfully updated'
+        flash_updated?
       end
 
       it 'cancels editting' do
@@ -109,7 +109,7 @@ describe 'Syllabus' do
         edited_syllabus.name.should eq 'Maths'
         edited_syllabus.code.should eq 'math'
         edited_syllabus.description.should eq 'Maths Description'
-        flash 'successfully updated'
+        flash_updated?
       end
     end
   end

@@ -33,12 +33,9 @@ describe 'Exams' do
 
       end.to change(Exam, :count).by(1)
 
-      flash 'was successfully created'
-      
-      flash "was successfully created"
       wait_until { page.all(table_rows).size == tr_count + 1 }
       within(count_div) { page.should have_content('Exams List(1)') }
-
+      flash_created?
     end
 
     it "should cancel create new exam", :js => true do
@@ -53,17 +50,14 @@ describe 'Exams' do
     end
 
     it 'should not submit new exam without filled validated fields', :js => true do
-      expect do
-        click '#new-exam-link'
-        # input only exam_portion fields to check validation on exam
-        fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-        fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
-        fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-        
-        click '#submit-exam-button' 
-      end.to_not change(Exam, :count).by(1)
-
-      page.should_not have_content "was successfully created"
+      click '#new-exam-link'
+      wait_until_visible '#submit-exam-button'
+      # input only exam_portion fields to check validation on exam
+      fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
+      fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
+      fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
+      
+      click '#submit-exam-button' 
     end 
 
     it 'should not submit new exam without filled validated fields for exam_portion' do
@@ -95,7 +89,7 @@ describe 'Exams' do
       wait_until_invisible '#edit-exam-modal'
     
       within('#exams-index') { page.should have_content('Biology 2012') }
-      flash 'was successfully updated'
+      flash_updated?
     end
 
     it 'should show validation msgs on index/edit', :js => true do
@@ -153,7 +147,7 @@ describe 'Exams' do
       end.to change(Exam, :count).by(-1)
       
       within(count_div) { page.should_not have_content('Exams List(1)') }
-      flash 'was successfully destroyed'
+      flash_destroyed?
 
     end
 
