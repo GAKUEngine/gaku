@@ -1,6 +1,6 @@
 $ ->
   
-  $('#cancel-course-group-link').on 'click', (e) ->
+  $('#new-course-group').on 'click','#cancel-course-group-link', (e) ->
     e.preventDefault()
     $('#new-course-group').slideToggle()
     $('#course-group-form-errors').html ''

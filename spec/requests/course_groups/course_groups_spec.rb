@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe 'CourseGroups' do
+  
+  table_rows = '#course-groups-index tbody tr'
+  count_div = '.course-groups-count'
+
   stub_authorization!
 
   before do
@@ -9,16 +13,21 @@ describe 'CourseGroups' do
 
   context 'new' do 
     it 'should create and show a course group', :js => true do
-      CourseGroup.count.should eq 0
-      click_link 'new-course-group-link'
+      tr_count = page.all(table_rows).size
 
-      wait_until { find("#new-course-group form").visible? }
-      fill_in 'course_group_name', :with => 'MathCourses2012'
-      click_on 'submit-course-group-button'
+      expect do
+        click '#new-course-group-link'
 
-      page.should have_content 'Course Group Created'
+        wait_until_visible "#new-course-group form"
+        fill_in 'course_group_name', :with => 'MathCourses2012'
+        click '#submit-course-group-button'
+      end.to change(CourseGroup, :count).by(1)
+
+      flash 'was successfully created'
+      within(count_div) { page.should have_content('Course Groups List(1)') }
       within ('#course-groups-index') { page.should have_content 'MathCourses2012' }
-      CourseGroup.count.should  eq 1
+      wait_until { page.all(table_rows).size == tr_count + 1 }
+
     end
 
     it 'should not add new if name is empty', :js => true do
@@ -50,18 +59,20 @@ describe 'CourseGroups' do
     end
 
     it 'should edit course group from index view', :js => true do 
+      
       within('#course-groups-index tbody') { find('.edit-link').click }
 
-      wait_until { find('#edit-course-group-modal').visible? }
+      wait_until_visible '#edit-course-group-modal'
       fill_in 'course_group_name', :with => '2012 Courses'
-      click_button 'submit-course-group-button'
+      click '#submit-course-group-button'
 
-      within ('#course-groups-index') do
+      within ('#course-groups-index tbody') do
         page.should have_content '2012 Courses'
         page.should_not have_content '2013Courses'
       end
 
       CourseGroup.last.name.should eql('2012 Courses')
+      flash 'was successfully updated'
     end
 
     it 'cancel editting', :js => true do
@@ -97,7 +108,7 @@ describe 'CourseGroups' do
       within(".delete-modal") { click_on "Delete" }
       page.driver.browser.switch_to.alert.accept
       
-      wait_until { page.should have_content 'was successfully destroyed.' }
+      flash 'was successfully destroyed.'
       within('#course-groups-index tbody') { page.should_not have_content(@course_group.name) }
       CourseGroup.all.count.should eq 0
     end
