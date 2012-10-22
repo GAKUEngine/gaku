@@ -27,7 +27,7 @@ describe 'CourseEnrollments' do
       wait_until { !page.find('#new-student-course-enrollment form').visible? } 
       page.should have_content("fall2050")
       page.all('table#student-course-enrollments-index tr').size == tr_count + 1
-      within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
+      within('.student-course-enrollments-count') { page.should have_content('Courses List(1)') }
       within('#new-student-course-enrollment-tab-link') { page.should have_content('Courses(1)') }
       @student.courses.size.should eql(1)
     end
@@ -49,10 +49,10 @@ describe 'CourseEnrollments' do
 
     visit student_path(@student) 
     click_link 'new-student-course-enrollment-tab-link'
-    wait_until { page.has_content?('Courses list') }
+    wait_until { page.has_content?('Courses List') }
 
     tr_count = page.all('table#student-course-enrollments-index tr').size
-    within('.student-course-enrollments-count') { page.should have_content('Courses list(1)') }
+    within('.student-course-enrollments-count') { page.should have_content('Courses List(1)') }
     within('#new-student-course-enrollment-tab-link') { page.should have_content('Courses(1)') }
     page.should have_content(@course.code)
     @student.courses.size.should eql(1)
