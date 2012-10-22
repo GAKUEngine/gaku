@@ -130,6 +130,7 @@ class ExamsController < ApplicationController
     super do |format|
       @exams = Exam.all
       @notable = exam
+      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
       flash.now[:notice] = 'Exam was successfully updated.'
       format.js { render 'update'}
     end
@@ -376,6 +377,7 @@ class ExamsController < ApplicationController
     def load_before_show
       @exam.exam_portions.build
       @notable = @exam
+      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
     end
 
     def exams_count 
