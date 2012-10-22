@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Student Images" do
+
   stub_authorization!
   
   before do
@@ -8,13 +9,13 @@ describe "Student Images" do
     visit student_path(@student)
   end
 
-  context "uploading and editing an image", :js => true do
-    it "should allow to upload and edit an image for a student" do
+  context "uploading", :js => true do
+    it "uploads" do
       click_button "Change picture"
       absolute_path = Rails.root + "spec/support/120x120.jpg"
-      attach_file('student_picture', absolute_path)
+      attach_file 'student_picture', absolute_path
       click_button "Upload"
-      page.should have_content("Picture was successfully uploaded")
+      flash? "Picture was successfully uploaded"
     end
   end
   
