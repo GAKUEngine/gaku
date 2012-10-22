@@ -2,7 +2,7 @@
   #new-class-group-course.hide
     = render 'class_groups/courses/form'
   .pull-left
-    h4.h4-vm.courses-count 
+    h4.h4-vm.class-group-courses-count 
       =print_count(@class_group.class_group_course_enrollments.count, t("courses.list"))
   .pull-right
     = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
@@ -12,7 +12,7 @@
     hr
 .row-fluid
   .span12
-    table#courses-index.index.table.table-striped.table-bordered.table-condensed 
+    table#class-group-courses-index.index.table.table-striped.table-bordered.table-condensed 
       thead
         tr
           th.btn-inverse =t 'course.code'

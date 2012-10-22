@@ -1,82 +1,75 @@
 require 'spec_helper'
 
-describe 'ContactTypes' do
+describe 'Admin ContactTypes' do
+
   stub_authorization!
 
-  context 'create and show' do
-  	before do 
-  	  visit admin_contact_types_path
+  before :all do
+    Helpers::Request.resource("admin-contact-type") 
+  end
+
+  context 'new', :js => true do
+    before do 
+      visit admin_contact_types_path
+      click new_link
+      wait_until_visible submit
     end
 
-    it 'should create and show contact type', :js => true do 
-      tr_count = page.all('table#admin-contact-types-index tr').size
-      ContactType.count.should eq 0
-      click_link 'new-admin-contact-type-link'
+    it 'creates and shows' do
+      expect do 
+        fill_in 'contact_type_name', :with => 'home phone'
+        click submit
+        wait_until_invisible form
+      end.to change(ContactType, :count).by 1
 
-      wait_until { find('#submit-admin-contact-type-button').visible? }
-      fill_in 'contact_type_name', :with => 'home phone'
-      click_button 'submit-admin-contact-type-button'
-
-      wait_until { !page.find('#new-admin-contact-type form').visible? }
-      page.find('#new-admin-contact-type-link').visible?
-      page.should have_content('home phone')
-      page.all('table#admin-contact-types-index tr').size == tr_count + 1
-      within('.admin-contact-types-count') { page.should have_content('Contact Types list(1)') }
-      ContactType.count.should eq 1 
+      page.should have_content 'home phone'
+      within(count_div) { page.should have_content 'Contact Types list(1)' }
+      flash_created?
     end 
 
-    it 'should cancel creating contact type', :js => true do 
-      click_link 'new-admin-contact-type-link'
-
-      wait_until { page.find('#cancel-admin-contact-type-link').visible? }
-      click_link 'cancel-admin-contact-type-link'
-
-      wait_until { !page.find('#new-admin-contact-type form').visible? }
-      click_link 'new-admin-contact-type-link'
-  
-      wait_until { page.find('#new-admin-contact-type form').visible? }
+    it 'cancels creating' do 
+      ensure_cancel_creating_is_working
     end
   end
 
-  context 'index, edit and delete' do 
+  context 'existing' do 
     before do
       @contact_type = create(:contact_type, :name => 'mobile') 
       visit admin_contact_types_path
     end
 
-  	it 'should edit contact type', :js => true do
-  	  within('table#admin-contact-types-index tbody') { find('.edit-link').click }
-  	  
-  	  wait_until { find('#edit-contact-type-modal').visible? } 
-  	  fill_in 'contact_type_name', :with => 'email'
-  	  click_button 'submit-admin-contact-type-button' 
+    context 'edit', :js => true do 
+      before do 
+        within(table) { click edit_link }
+        wait_until_visible modal
+      end
 
-  	  wait_until { !page.find('#edit-contact-type-modal').visible? }
-  	  page.should have_content('email')
-  	  page.should_not have_content('mobile')
-  	  ContactType.count.should eq 1
-  	end
+      it 'edits' do
+        fill_in 'contact_type_name', :with => 'email'
+        click submit 
 
-    it 'should cancel editting', :js => true do 
-      within('table#admin-contact-types-index tbody') { find('.edit-link').click }
-      wait_until { find('#edit-contact-type-modal').visible? }
+        wait_until_invisible modal
+        page.should have_content 'email'
+        page.should_not have_content 'mobile'
+        flash_updated?
+      end
 
-      click_link 'cancel-admin-contact-type-link'
-      wait_until { !page.find('#edit-contact-type-modal').visible? }
+      it 'cancels editting' do
+        ensure_cancel_modal_is_working
+      end
     end
 
+    it 'deletes', :js => true do
+      page.should have_content @contact_type.name
+      within(count_div) { page.should have_content 'Contact Types list(1)' }
 
-  	it 'should delete contact type', :js => true do
-      ContactType.count.should eq 1
-      within('.admin-contact-types-count') { page.should have_content('Contact Types list(1)') }
-      tr_count = page.all('table#admin-contact-types-index tr').size
+      expect do 
+        ensure_delete_is_working
+      end.to change(ContactType, :count).by -1
 
-      find('.delete-link').click
-      page.driver.browser.switch_to.alert.accept
-        
-      wait_until { page.all('table#admin-contact-types-index tr').size == tr_count - 1 }
-      within('.admin-contact-types-count') { page.should_not have_content('Contact Types list(1)') }
-      ContactType.count.should eq 0
+      within(count_div) { page.should_not have_content 'Contact Types list(1)' }
+      page.should_not have_content @contact_type.name
+      flash_destroyed?
     end
   end
 

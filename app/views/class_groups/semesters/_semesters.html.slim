@@ -1,4 +1,6 @@
 .row-fluid
+  br/
+  #new-class-group-semester-form-errors
   #new-class-group-semester.hide
     = render 'class_groups/semesters/form'
   .pull-left
@@ -17,5 +19,3 @@ hr
             th =t("options")
         tbody
           =render :partial => 'class_groups/semesters/semester', :collection => @class_group.semesters, :as => :semester 
-br/
-#new-class-group-semester-form-errors
