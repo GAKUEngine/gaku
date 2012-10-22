@@ -7,10 +7,8 @@ class CourseGroupsController < ApplicationController
 
   respond_to :js, :html
 
-  before_filter :load_before_index, :only => [:index]
-
   before_filter :course_group_enrollment,  :only => [:show]
-  before_filter :course_groups, :only => [:update]
+  before_filter :course_groups_count, :only => [:create]
 
   def index
     @course_groups = CourseGroup.order( sort_column + " " + sort_direction)
@@ -18,8 +16,6 @@ class CourseGroupsController < ApplicationController
 
   def create
     super do |format|
-      course_groups
-      flash.now[:notice] = t('course_groups.course_group_created')
       format.js { render 'create' }
     end
   end
@@ -50,16 +46,13 @@ class CourseGroupsController < ApplicationController
   end
 
 	private
-    def load_before_index
-      @course_group = CourseGroup.new
-    end
 
     def course_group_enrollment
       @course_group_enrollment = CourseGroupEnrollment.first
     end
 
-    def course_groups
-      @course_groups = CourseGroup.all
+    def course_groups_count
+      @course_groups_count = CourseGroup.count
     end
 
     def sort_column

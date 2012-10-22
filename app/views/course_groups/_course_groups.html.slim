@@ -1,12 +1,8 @@
+/ user for index ajax sorting
 table#course-groups-index.index.table.table-striped.table-bordered.table-condensed
 	thead
 	  tr
 	    th.btn-inverse = sortable 'name',  t('name')
 	    th.btn-info style="width:94px" = t('manage')
 	tbody
-	  - course_groups.each do |course_group|	
-    	tr class="course-group-#{course_group.id}"
-			  td.name = course_group.name
-			  td
-				  = link_to_show course_group
-				  = ajax_link_to_edit [:edit, course_group]
+	  =render :partial => 'course_group', :collection => @course_groups, :as => :course_group

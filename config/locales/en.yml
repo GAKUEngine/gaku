@@ -118,6 +118,7 @@ en:
     birth_and: "and"
     chosen_students: "Chosen students"
     commute_method: 'Commute Method'
+    updated: 'Student was successfully updated.'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
@@ -145,7 +146,7 @@ en:
     plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
-    list: "Courses list"
+    list: "Courses List"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     save: "Save course"
@@ -157,6 +158,7 @@ en:
     add_class_group: 'Add Class Group'
     choose_class_group: 'Choose Class Group'
     course_created: 'Course was successfully created'
+    course_destroyed: 'Course was successfully destroyed.'
   course_groups:
     course_groups: 'Course Groups'
     edit_course_group: 'Edit Course Group'
@@ -252,6 +254,7 @@ en:
     show: "Show Exam"
     edit: "Edit Exam"
     exam_created: 'Exam was successfully created'
+    destroyed: 'Exam was successfully destroyed.'
     save: 'Save Exam'
   config:
     label: "Config"
