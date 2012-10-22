@@ -34,6 +34,7 @@ class Students::AddressesController < ApplicationController
   def destroy
     @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
     if @address.destroy
+      flash.now[:notice] = t('addresses.destroyed')
       if @address.id == @primary_address_id
         @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
         respond_to do |format|

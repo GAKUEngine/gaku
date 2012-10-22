@@ -9,11 +9,11 @@ class CoursesController < ApplicationController
 
   before_filter :load_before_show,  :only => :show
   before_filter :load_before_index, :only => :index
+  before_filter :courses_count, :only => [:create, :destroy]
 
   def create
     super do |format|
-      flash.now[:notice] = t('courses.course_created')
-      format.js { render }
+      format.js { render 'create' }
     end
   end
 
@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
   
   def destroy
     super do |format|
-      format.js { render :nothing => true }
+      format.js { render 'destroy' }
     end
   end
 
@@ -56,6 +56,10 @@ class CoursesController < ApplicationController
       @notable = Course.find(params[:id])
       @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
 	  end
+
+    def courses_count
+      @courses_count = Course.count
+    end
 
     def sort_column
       Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'

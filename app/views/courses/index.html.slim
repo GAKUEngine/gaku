@@ -2,17 +2,16 @@
   .span1
   .span10
     .row-fluid
-      .pull-left
-        h3 = t("courses.list")
-      .pull-right
-        = link_to_new t("courses.new"), new_course_path, :id => "new-course-link"
+      #new-course.hide
     .row-fluid
+      .pull-left
+        h4.h4-vm.courses-count
+          = print_count(@courses.count, t('courses.list'))
+      .pull-right
+        = ajax_link_to_new t("courses.new"), new_course_path, :id => "new-course-link"
+    row-fluid
       .span12
         hr/
     .row-fluid
-      #new-course.hide
-        =render 'form'
-    .row-fluid
       .span12.well
-        #courses-index
           =render 'courses/courses'

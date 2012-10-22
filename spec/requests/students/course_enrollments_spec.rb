@@ -40,7 +40,6 @@ describe 'Student CourseEnrollments' do
 
   it "deletes", :js => true do
     @student.courses << @course
-
     visit student_path(@student) 
     click tab_link
 
