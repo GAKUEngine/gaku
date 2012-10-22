@@ -43,6 +43,20 @@ describe 'ClassGroup Semesters' do
     it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it 'errors if ending date is <= starting date' do
+      select '2012',      :from => 'semester_starting_1i'
+      select 'October', :from => 'semester_starting_2i'
+      select '15',        :from => 'semester_starting_3i'
+
+      select '2012',      :from => 'semester_ending_1i'
+      select 'October',  :from => 'semester_ending_2i'
+      select '15',        :from => 'semester_ending_3i'
+      click submit
+
+      within('#semesters') { page.should have_content 'Ending should be after Starting' }
+    end
+
   end
 
   context 'existing', :js => true do
@@ -53,8 +67,19 @@ describe 'ClassGroup Semesters' do
       within(count_div) { page.should have_content '1' }
     end
 
-    pending "errors if already exists" do 
-      #TODO needs to be implemeted in the main logic
+    it "errors if already exists" do 
+      click new_link
+      wait_until_visible submit
+       
+      select '2012',      :from => 'semester_starting_1i'
+      select 'October', :from => 'semester_starting_2i'
+      select '21',        :from => 'semester_starting_3i'
+
+      select '2012',      :from => 'semester_ending_1i'
+      select 'November',  :from => 'semester_ending_2i'
+      select '21',        :from => 'semester_ending_3i'
+      click submit
+      within('#semesters') { page.should have_content 'Class group have this semester added' }
     end
 
     context 'edit', :js => true do
