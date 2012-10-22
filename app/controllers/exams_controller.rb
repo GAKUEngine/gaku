@@ -43,7 +43,6 @@ class ExamsController < ApplicationController
       exam_sheet.row(0)[6] = 'Exam ID:'
       exam_sheet.row(0)[7] = exam.id
 
-
       # table header cells
       exam_sheet.row(1).concat ['Student','','','', "#{exam.name}"]
       exam_sheet.row(2).concat ['id','Class', 'Seat Number','Name']
@@ -51,15 +50,12 @@ class ExamsController < ApplicationController
         exam_sheet.row(2)[4 + index] = portion.name
       end
 
-
       #students info section
       @students.each_with_index do |student, index|
         exam_sheet.row(3 + index)[0] = student.id
         # exam_sheet.row(2 + index)[0] = ?  - class
         # exam_sheet.row(2 + index)[1] = ?  - seat number
         exam_sheet.row(3 + index)[3] = student.full_name
-
-
 
         # studens/exam_portion score matrix
         exam.exam_portions.each_with_index do |portion, portion_index|
@@ -70,15 +66,12 @@ class ExamsController < ApplicationController
           exam_sheet.row(3 + index)[(4 + portion_index.to_i)] = portion_score.score rescue ''
         end
       end
-
     end
 
     spreadsheet = StringIO.new
     book.write spreadsheet
     send_data spreadsheet.string, :filename => "#{@course.code}.xls", :type =>  "application/vnd.ms-excel"
   end
-
-
 
   def index
     if params[:course_id]
@@ -292,7 +285,11 @@ class ExamsController < ApplicationController
       rankNums.each do |rnum|
         i = 0
         while i < rnum && scores.length != 0
-          @ranks[exam.id][scores.shift[1]] = rankPoint
+          scoreMem = scores.shift()
+          @ranks[exam.id][scoreMem[1]] = rankPoint
+          if scores.length != 0 and scoreMem[0] == scores[0][0]
+            rnum += 1
+          end
           i += 1
         end
         rankPoint -= 1
