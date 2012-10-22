@@ -12,4 +12,7 @@
             .span6
               = link_to_cancel :id => "cancel-" + @notable_resource + "-note-link"
 
+javascript:
+  window.notable_resource = '#{@notable_resource}';
+            
 = javascript_include_tag 'notes'
