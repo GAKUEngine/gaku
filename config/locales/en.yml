@@ -136,6 +136,7 @@ en:
     choose_exam: 'Choose Exam'
     add_exam: 'Add Exam'
     add_existing_exam: 'Add Existing Exam'
+    save: 'Save Syllabus'
   course_management: 'Course Management'
   course: "Course"
   courses:

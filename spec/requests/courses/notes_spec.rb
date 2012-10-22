@@ -1,44 +1,44 @@
 require 'spec_helper'
 
-describe 'Student Notes' do
+describe 'Course Notes' do
   stub_authorization!
   
   before do
-    @student = create(:student)
-    visit student_path(@student) 
+    @course = create(:course)
+    visit course_path(@course) 
   end
 
   context 'new' do
     before do 
       click_link 'new-note-link'
-      wait_until { find("#submit-student-note-button").visible? }
+      wait_until { find("#submit-course-note-button").visible? }
     end
 
-    it "should add and show student note", :js => true do
-      @student.notes.size.should eql(0)
-      tr_count = page.all('table#student-notes-index tr').size
+    it "should add and show course note", :js => true do
+      @course.notes.size.should eql(0)
+      tr_count = page.all('table#course-notes-index tr').size
  
       fill_in "note_title", :with => "The note title"
       fill_in "note_content", :with => "The note content"
-      click_button "submit-student-note-button"
+      click_button "submit-course-note-button"
 
       wait_until { !page.find('#new-note form').visible? } 
-      page.should have_selector('a', href: "/students/1/notes/1/edit")
+      page.should have_selector('a', href: "/courses/1/notes/1/edit")
       page.should have_content("The note title")
       page.should have_content("The note content")
-      page.all('table#student-notes-index tr').size == tr_count + 1
-      within('.student-notes-count') { page.should have_content('Notes list(1)') }
-      @student.reload
-      @student.notes.size.should eql(1)
+      page.all('table#course-notes-index tr').size == tr_count + 1
+      within('.course-notes-count') { page.should have_content('Notes list(1)') }
+      @course.reload
+      @course.notes.size.should eql(1)
     end
 
     it "should error if there are empty fields", :js => true do 
-      click_button "submit-student-note-button"
+      click_button "submit-course-note-button"
       wait_until do
          page.should have_selector('div.note_titleformError') 
          page.should have_selector('div.note_contentformError') 
       end
-      @student.notes.size.should eql(0)
+      @course.notes.size.should eql(0)
     end
 
     it 'should cancel adding', :js => true do 
@@ -54,17 +54,17 @@ describe 'Student Notes' do
 
   context "edit and delete" do 
     before do 
-      @note = create(:note, :notable => @student)
-      visit student_path(@student)
+      @note = create(:note, :notable => @course)
+      visit course_path(@course)
     end
 
-    it "should edit a student note", :js => true do 
+    it "should edit a course note", :js => true do 
       find(".edit-link").click 
 
       wait_until { find('#edit-note-modal').visible? } 
       fill_in 'note_title', :with => 'Edited note title'
       fill_in 'note_content', :with => 'Edited note content'
-      click_button 'submit-student-note-button'
+      click_button 'submit-course-note-button'
 
       wait_until { !page.find('#edit-note-modal').visible? }
       page.should have_content('Edited note title')
@@ -75,25 +75,24 @@ describe 'Student Notes' do
       find(".edit-link").click
 
       wait_until { find('#edit-note-modal').visible? }
-      click_link 'cancel-student-note-link'
+      click_link 'cancel-course-note-link'
       wait_until { !page.find('#edit-note-modal').visible? }
     end
 
-    it "should delete a student note", :js => true do
-      @student.notes.size.should eql(1)
+    it "should delete a course note", :js => true do
+      @course.notes.size.should eql(1)
       wait_until { page.has_content?('Notes') }
         
-      tr_count = page.all('table#student-notes-index tr').size
+      tr_count = page.all('table#course-notes-index tr').size
       page.should have_content(@note.title)
       
       find('.delete-link').click 
       page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table#student-notes-index tr').size == tr_count - 1 } 
-      within('.student-notes-count') { page.should_not have_content('Notes list(1)') }
+      wait_until { page.all('table#course-notes-index tr').size == tr_count - 1 } 
+      within('.course-notes-count') { page.should_not have_content('Notes list(1)') }
       page.should_not have_content(@note.title)
-      @student.notes.size.should eql(0)
+      @course.notes.size.should eql(0)
     end
   end
-
 end

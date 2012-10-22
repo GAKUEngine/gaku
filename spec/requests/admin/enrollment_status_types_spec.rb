@@ -29,7 +29,7 @@ describe 'EnrollmentStatusTypes' do
     it 'should cancel creating enrollment status type', :js => true do 
       click_link 'new-admin-enrollment-status-type-link'
 
-      wait_until { page.find('#new-admin-enrollment-status-type form').visible? }
+      wait_until { page.find('#cancel-admin-enrollment-status-type-link').visible? }
       click_link 'cancel-admin-enrollment-status-type-link'
 
       wait_until { !page.find('#new-admin-enrollment-status-type form').visible? }
