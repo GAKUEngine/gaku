@@ -1,16 +1,16 @@
 .row-fluid
     .pull-left
-      h4.mt-xs.mb-0 *{:class => @notable.class.to_s.downcase + '-notes-count'}
+      h4.mt-xs.mb-0 *{:class => @notable_resource + '-notes-count'}
         = print_count(@notable.notes.count, t('notes.list'))
     .pull-right
-        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => 'new-' + @notable.class.to_s.underscore + '-note-link'
+        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => 'new-' + @notable_resource + '-note-link'
 .row-fluid
   hr
 .row-fluid
-  .hide *{:id => 'new-' + @notable.class.to_s.underscore + '-note'}
+  .hide *{:id => 'new-' + @notable_resource + '-note'}
 .row-fluid
   .span12
-    table.index.table.table-striped.table-bordered.table-condensed *{:id =>  @notable.class.to_s.downcase + '-notes-index'}
+    table.index.table.table-striped.table-bordered.table-condensed *{:id =>  @notable_resource + '-notes-index'}
       thead
         tr
           th

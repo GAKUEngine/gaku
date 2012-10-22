@@ -1,12 +1,13 @@
 $ ->
-  $('#new-note form').validationEngine()
+  
+  $("#new-" + notable_resource + "-note form").validationEngine()
 
-  $("#submit-student-note-button").live "ajax:success", (data, status, xhr)->
+  $("#submit-" + notable_resource + "-note-button").live "ajax:success", (data, status, xhr)->
     #add new record to list
-    $("#new-student-note-link").show()
-    $("#new-student-note form").slideToggle()
+    $("#new-" + notable_resource + "-note-link").show()
+    $("#new-" + notable_resource + "-note form").slideToggle()
 
-	$("#cancel-note-link").on 'click', (event)->
-		event.preventDefault()
-		$("#new-note-link").show()
-		$("#new-note").slideToggle()
+  $("#cancel-" + notable_resource + "-note-link").on 'click', (event)->
+    event.preventDefault()
+    $("#new-" + notable_resource + "-note-link").show()
+    $("#new-" + notable_resource + "-note").slideToggle()

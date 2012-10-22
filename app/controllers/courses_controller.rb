@@ -54,6 +54,7 @@ class CoursesController < ApplicationController
 	  def load_before_show
 		  @new_course_enrollment = CourseEnrollment.new
       @notable = Course.find(params[:id])
+      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
 	  end
 
     def courses_count
