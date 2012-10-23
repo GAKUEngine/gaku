@@ -27,6 +27,7 @@ class Students::Guardians::AddressesController < ApplicationController
       if @address.id == @primary_address_id
         @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
         respond_to do |format|
+          flash.now[:notice] = t('addresses.destroyed')
           format.js { render }
         end
       else
