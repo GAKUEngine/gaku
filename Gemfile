@@ -48,6 +48,7 @@ group :development do
   gem 'hirb'
   gem 'awesome_print'
   gem 'highline'
+  gem 'rails-footnotes', '>= 3.7.5.rc4'
 end
 
 group :test do
