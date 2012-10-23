@@ -29,7 +29,7 @@ describe 'ClassGroup Courses' do
       end.to change(ClassGroupCourseEnrollment, :count).by 1
     
       within(table) { page.should have_content "#{@course.code}" }
-      within(count_div) { page.should have_content "Courses List(1)" }
+      within(count_div) { page.should have_content "Courses list(1)" }
       within(tab_link) { page.should have_content "Courses(1)" }
       flash_created?
     end
@@ -64,7 +64,7 @@ describe 'ClassGroup Courses' do
 
     it 'deletes' do 
       within(table) { page.should have_content "#{@course.code}" }
-      within(count_div) { page.should have_content "Courses List(1)" }
+      within(count_div) { page.should have_content "Courses list(1)" }
       within(tab_link) { page.should have_content "Courses(1)" }
 
       expect do
@@ -72,7 +72,7 @@ describe 'ClassGroup Courses' do
       end.to change(ClassGroupCourseEnrollment, :count).by -1
   
       within(table) { page.should_not have_content "#{@course.code}" }
-      within(count_div) { page.should_not have_content "Courses List(1)" }
+      within(count_div) { page.should_not have_content "Courses list(1)" }
       within(tab_link) { page.should_not have_content "Courses(1)" }
       flash_destroyed?
     end
