@@ -75,6 +75,7 @@ describe 'Student Guardian Addresses' do
         wait_until_invisible modal
         page.should have_content 'Brasil'
         within(table) { page.should_not have_content 'Japan' }
+        flash_updated?
       end
 
       it 'cancels edit' do 
@@ -83,7 +84,6 @@ describe 'Student Guardian Addresses' do
   end
 
     it 'deletes', :js => true do 
-      sleep 5 
       page.should have_content 'Japan'
       within(count_div) { page.should have_content 'Addresses list(1)' }
       
@@ -91,9 +91,9 @@ describe 'Student Guardian Addresses' do
         ensure_delete_is_working
       end.to change(@student.guardians.first.addresses, :count).by -1
       
-      sleep 5 
       within(count_div) { page.should_not have_content 'Addresses list(1)' }
       page.should_not have_content 'Japan'
+      flash_destroyed?
     end
 
     it 'sets primary', :js => true do 
