@@ -118,7 +118,7 @@ describe 'Student Guardian Contacts' do
       end.to change(@student.guardians.first.contacts, :count).by -1
 
       within(count_div) { page.should_not have_content 'Contacts list(1)' }
-      page.should_not have_content '123'
+      page.find(table).should_not have_content '123'
       flash_destroyed?
     end
 
