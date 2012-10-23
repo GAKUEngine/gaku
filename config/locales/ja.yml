@@ -324,6 +324,7 @@ ja:
     make_primary: "優先度指定"
     list: "連絡先一覧"
     contacts: "連絡先"
+    contact_created: 'Contact successfully created.'
   note: "備考"
   notes:
     notes: "備考"

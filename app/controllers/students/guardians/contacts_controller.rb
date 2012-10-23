@@ -13,7 +13,8 @@ class Students::Guardians::ContactsController < ApplicationController
     if @contact.save
       @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
       respond_to do |format|
-        format.js { render 'create', :notice => 'Contact Created' }
+        flash.now[:notice] = t('contacts.contact_created')
+        format.js { render 'create' }
       end
     end
   end
