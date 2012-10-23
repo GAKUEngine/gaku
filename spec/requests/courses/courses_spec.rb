@@ -49,18 +49,21 @@ describe 'Courses' do
       @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
       @course = create(:course, :syllabus => @syllabus) 
       visit courses_path
+      within(count_div) { page.should have_content('Courses list(1)') }
     end
 
     it "lists and shows existing courses" do
-      within(table) { page.should have_content("biology") }
-      within(table_rows) { click show_link }
+      within(table) do
+        page.should have_content("biology")
+        click show_link
+      end
       
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
 
     it 'shows validation messages upon edit', :js => true do
-      within(table_rows) { click edit_link }
+      within(table) { click edit_link }
 
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => ''
@@ -69,7 +72,7 @@ describe 'Courses' do
     end
 
     it "edits a course", :js => true  do
-      within(table_rows) { click edit_link }
+      within(table) { click edit_link }
 
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
@@ -82,7 +85,7 @@ describe 'Courses' do
     end
 
     it "should edit a course from show", :js => true do
-      within(table_rows) { click show_link }
+      within(table) { click show_link }
       page.should have_content("Show")
       
       click edit_link
@@ -95,19 +98,19 @@ describe 'Courses' do
 
       page.should have_content "biology2013Syllabus"
       page.should have_content "biology2013"
+      
       flash_updated?
     end
 
     it "should delete a course", :js => true do
-      within(count_div) { page.should have_content('Courses list(1)') }
-      within(table_rows) { page.should have_content(@course.code) }
-      
+
+      within(table) { page.should have_content(@course.code) }
       expect do     
         ensure_delete_is_working
       end.to change(Course, :count).by -1
       
       within(count_div) { page.should_not have_content('Courses list(1)') }
-      within(table_rows) { page.should_not have_content(@course.code) }
+      within(table) { page.should_not have_content(@course.code) }
       flash_destroyed?
     end
   end
