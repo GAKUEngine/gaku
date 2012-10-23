@@ -1,7 +1,14 @@
 require 'spec_helper'
 
-describe 'Guardian Addresses' do
+describe 'Student Guardian Addresses' do
+
   stub_authorization!
+
+  tab_link = "#student-guardians-tab-link"
+
+  before :all do
+    Helpers::Request.resource("student-guardian-address")
+  end
 
   before(:each) do
     @student = create(:student)
@@ -11,99 +18,91 @@ describe 'Guardian Addresses' do
     @country = create(:country, :name => "Japan")
 
     visit student_path(@student) 
-    click_link 'new-student-guardian-tab-link'
-    wait_until { page.has_content?('Guardians list') } 
+    click tab_link
+    wait_until { page.has_content? 'Guardians list' } 
   end
   
-  context 'new' do 
+  context 'new', :js => true do 
     before do 
-      find('.show-link').click
-      click_link 'new-student-guardian-address-link'
-      wait_until { find('#submit-student-guardian-address-button').visible? }
+      click show_link
+      click new_link
+      wait_until_visible submit
     end
 
-    it "should add and show address to a student guardian", :js => true do 
-      @student.guardians.first.addresses.count.should eql(0)
-      tr_count = page.all('table#student-guardian-addresses-index tr').size 
-      
-      select 'Japan', :from => 'country_dropdown'
-      fill_in 'address_address1', :with => 'Subaru str.'
-      fill_in 'address_city', :with => 'Nagoya'
-      click_button 'submit-student-guardian-address-button'
+    it "creates and shows" do 
+      expect do 
+        #required
+        select 'Japan',              :from => 'country_dropdown'
+        fill_in 'address_address1',  :with => 'Subaru str.'
+        fill_in 'address_city',      :with => 'Nagoya'
+        click submit
+        wait_until_invisible form
+      end.to change(@student.guardians.first.addresses, :count).by 1
 
-      wait_until { !page.find('#new-student-guardian-address form').visible? }
-      page.should have_content('Japan')
-      page.should have_content('Nagoya')
-      page.should have_content('Subaru str.')
-      page.all('table#student-guardian-addresses-index tr').size == tr_count + 1
-      within('.student-guardian-addresses-count') { page.should have_content('Addresses list(1)') }
-      @student.guardians.first.addresses.count.should  eql(1)
+      page.should have_content 'Japan'
+      page.should have_content 'Nagoya'
+      page.should have_content 'Subaru str.'
+
+      within(count_div) { page.should have_content 'Addresses list(1)' }
+      flash_created?
     end
 
-    it 'should cancel adding', :js => true do 
-      click_link 'cancel-student-guardian-address-link'
-      wait_until { !page.find('#new-student-guardian-address form').visible? }
-      find('#new-student-guardian-address-link').visible?
-
-      click_link 'new-student-guardian-address-link'
-      wait_until { find('#new-student-guardian-address form').visible? }
-      !page.find('#new-student-guardian-address-link').visible?
+    it 'cancels creating' do 
+      ensure_cancel_creating_is_working
     end 
   end
 
-  context 'edit, delete, set primary' do 
+  context 'existing' do 
     before do 
-      bulgaria = create(:country, :name => "Bulgaria")
       address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
-      address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
-      @student.guardians.first.addresses << [ address1, address2 ]
+      @student.guardians.first.addresses <<  address1
       visit student_guardian_path(@student, @student.guardians.first)
     end
 
-    it 'should edit address for student guardian', :js => true do 
-      create(:country, :name => "Brasil")
-      page.should have_content 'Bulgaria'
-
-      within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
-      wait_until { find('#edit-address-modal').visible? }
-
-      select 'Brasil', :from => 'country_dropdown'
-      fill_in 'address_address1', :with => 'Rio str.'
-      fill_in 'address_city', :with => 'Brasilia'
-
-      click_button 'submit-student-guardian-address-button'
-      wait_until { !page.find('#edit-address-modal').visible? }
-      page.should have_content 'Brasil'
-      page.all('table#guardian_address_table').should_not have_content 'Bulgaria'
-    end
-
-    it 'should cancel edit', :js => true do 
-      within('table#student-guardian-addresses-index tr#address-2') { find('.edit-link').click }
-      wait_until { find('#edit-address-modal').visible? }
-      
-      click_link 'cancel-student-guardian-address-link'
-      wait_until { !page.find('#edit-address-modal').visible? }
-    end
-
-    it 'should delete address for student guardian', :js => true do 
-      tr_count = page.all('table#student-guardian-addresses-index tr').size
-      within('.student-guardian-addresses-count') { page.should have_content('Addresses list(2)') }
-      page.should have_content('Bulgaria')
-      @student.guardians.first.addresses.size.should eql(2)
-
-      within("table#student-guardian-addresses-index tr#address-#{@student.guardians.first.addresses.last.id}") do 
-        find('.delete-link').click
+    context 'edit', :js => true do 
+      before do 
+        create(:country, :name => "Brasil")
+        within(table) { click edit_link }
+        wait_until_visible modal
       end
-      page.driver.browser.switch_to.alert.accept
 
-      wait_until { page.all('table#student-guardian-addresses-index tr').size == tr_count - 1 } 
-      within('.student-guardian-addresses-count') { page.should_not have_content('Addresses list(2)') }
-      page.should_not have_content('Bulgaria')
-      @student.guardians.first.addresses.size.should eql(1)
+      it 'edits' do 
+        select 'Brasil',            :from => 'country_dropdown'
+        fill_in 'address_address1', :with => 'Rio str.'
+        fill_in 'address_city',     :with => 'Brasilia'
+
+        click submit
+        wait_until_invisible modal
+        page.should have_content 'Brasil'
+        within(table) { page.should_not have_content 'Japan' }
+      end
+
+      it 'cancels edit' do 
+        ensure_cancel_modal_is_working
+      end
+  end
+
+    it 'deletes', :js => true do 
+      sleep 5 
+      page.should have_content 'Japan'
+      within(count_div) { page.should have_content 'Addresses list(1)' }
+      
+      expect do
+        ensure_delete_is_working
+      end.to change(@student.guardians.first.addresses, :count).by -1
+      
+      sleep 5 
+      within(count_div) { page.should_not have_content 'Addresses list(1)' }
+      page.should_not have_content 'Japan'
     end
 
- 
-    it 'should set primary address for student guardian', :js => true do 
+    it 'sets primary', :js => true do 
+      bulgaria = create(:country, :name => "Bulgaria")
+      address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
+      @student.guardians.first.addresses <<  address2
+
+      visit student_guardian_path(@student, @student.guardians.first)
+
       @student.guardians.first.guardian_addresses.first.is_primary? == true
       @student.guardians.first.guardian_addresses.second.is_primary? == false
 
@@ -113,6 +112,5 @@ describe 'Guardian Addresses' do
       @student.guardians.first.guardian_addresses.second.is_primary? == true
     end
   end
-  
   
 end
