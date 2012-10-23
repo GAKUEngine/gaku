@@ -3,53 +3,74 @@ require 'spec_helper'
 describe 'Exams' do
   stub_authorization!
 
+  table_rows = '#exams-index tbody tr'
+  count_div = '.exams-count'
+
   before do
     visit exams_path
   end
 
   context 'not added exam' do
 
-    it 'should create new exam' do  #TODO Add execution_date and data
-      Exam.count.should == 0
-      click_link 'new_exam_link'
-      fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_weight', :with => 1 
-      fill_in 'exam_description', :with => "Good work"
+    it 'should create new exam', :js => true do  #TODO Add execution_date and data
+      tr_count = page.all(table_rows).size
 
-      fill_in 'exam_exam_portions_attributes_0_name', :with => 'Exam Portion 1'
-      fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-      fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
-      fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-      click_button 'Create Exam'  
+      expect do
 
-      page.should have_content "was successfully created"
-      Exam.count.should == 1
+        click '#new-exam-link'
+        wait_until_visible '#submit-exam-button'
+
+        fill_in 'exam_name', :with => 'Biology Exam'
+        fill_in 'exam_weight', :with => 1 
+        fill_in 'exam_description', :with => "Good work"
+
+        fill_in 'exam_exam_portions_attributes_0_name', :with => 'Exam Portion 1'
+        fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
+        fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
+        fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
+      
+        click '#submit-exam-button'
+
+      end.to change(Exam, :count).by(1)
+
+      wait_until { page.all(table_rows).size == tr_count + 1 }
+      within(count_div) { page.should have_content('Exams List(1)') }
+      flash_created?
     end
 
-    it 'should not submit new exam without filled validated fields' do
-      Exam.count.should == 0
-      click_link 'new_exam_link'
+    it "should cancel create new exam", :js => true do
+      click '#new-exam-link'
+      wait_until_visible '#cancel-exam-link'
+      click '#cancel-exam-link'
+      wait_until_invisible '#new-exam'
+      wait_until_visible '#new-exam-link'
+
+      click '#new-exam-link'
+      wait_until_visible '#new-exam form'
+    end
+
+    it 'should not submit new exam without filled validated fields', :js => true do
+      click '#new-exam-link'
+      wait_until_visible '#submit-exam-button'
       # input only exam_portion fields to check validation on exam
       fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
       fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1 
       fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-      click_button 'Create Exam'  
-
-      page.should_not have_content "was successfully created"
-      Exam.count.should == 0
+      
+      click '#submit-exam-button' 
     end 
 
     it 'should not submit new exam without filled validated fields for exam_portion' do
-      Exam.count.should == 0
-      click_link 'new_exam_link'
-      # input only exam fields to check validation on exam
-      fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_weight', :with => 1 
-      fill_in 'exam_description', :with => "Good work"
-      click_button 'Create Exam'  
-
+      expect do
+        click '#new-exam-link'
+        # input only exam fields to check validation on exam
+        fill_in 'exam_name', :with => 'Biology Exam'
+        fill_in 'exam_weight', :with => 1 
+        fill_in 'exam_description', :with => "Good work"
+        click '#submit-exam-button'  
+      end.to_not change(Exam, :count).by(1)
+      
       page.should_not have_content "was successfully created"
-      Exam.count.should == 0
     end 
   end
 
@@ -62,11 +83,13 @@ describe 'Exams' do
 
     it 'should edit exam from index', :js => true do
       within('#exams-index') { find('#edit-exam-link').click }
-      wait_until{ page.find('#edit-exam-modal').visible? }
+      wait_until_visible '#edit-exam-modal'
       fill_in 'exam_name', :with => 'Biology 2012'
-      click_button 'submit_button'
-      wait_until{ !page.find('#edit-exam-modal').visible? }
+      click '#submit_button'
+      wait_until_invisible '#edit-exam-modal'
+    
       within('#exams-index') { page.should have_content('Biology 2012') }
+      flash_updated?
     end
 
     it 'should show validation msgs on index/edit', :js => true do
@@ -115,10 +138,17 @@ describe 'Exams' do
     end
 
     it 'should delete an exam', :js => true do
-      within('#exams-index') { find('#delete-exam-link').click }
-      page.driver.browser.switch_to.alert.accept
-      page.should_not have_content("#{@exam.name}")
-      Exam.count.should == 0
+      within(count_div) { page.should have_content('Exams List(1)') }
+
+      expect do
+        within('#exams-index') { find('#delete-exam-link').click }
+        page.driver.browser.switch_to.alert.accept
+        page.should_not have_content("#{@exam.name}")
+      end.to change(Exam, :count).by(-1)
+      
+      within(count_div) { page.should_not have_content('Exams List(1)') }
+      flash_destroyed?
+
     end
 
     it 'should return to exams index when back selected' do

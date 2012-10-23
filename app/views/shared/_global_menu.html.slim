@@ -1,14 +1,15 @@
 ul.nav#menu
   li
     = link_to t("students.list"), students_path
-  li
-    = link_to t("class_groups.list"), class_groups_path
-  /li.dropdown
+
+  li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("class_group_management")
       b.caret
     ul.dropdown-menu
-      li= link_to t("class_groups.list"), class_groups_path
+      li= link_to t("menu.class_groups"), class_groups_path
+
+
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("course_management")
@@ -17,18 +18,24 @@ ul.nav#menu
       li= link_to t("syllabuses.plural"), syllabuses_path
       li= link_to t("courses.plural"), courses_path
       li= link_to t('course_groups.course_groups'), course_groups_path
+
+
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("exam_management")
       b.caret
     ul.dropdown-menu
       li= link_to t("exams.plural"), exams_path
+
+
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("admissions.manage_admissions")
       b.caret
     ul.dropdown-menu
       li= link_to t("admissions.candidates.list"), admissions_path
+
+      
   li.dropdown
     a.dropdown-toggle data-toggle="dropdown" href="#"
       = t("admin.admin")

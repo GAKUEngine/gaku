@@ -1,4 +1,4 @@
-$('#new-student-address-tab-link').html('<%= print_count(@student.addresses.count, t('addresses.addresses')) %>');
+$('#student-addresses-tab-link').html('<%= print_count(@student.addresses.count, t('addresses.addresses')) %>');
 $('.student-addresses-count').html('<%= print_count(@student.addresses.count, t('addresses.list')) %>');
 showNotice("<%= render_flash %>");
 

@@ -1,84 +1,80 @@
 require 'spec_helper'
 
 describe 'ClassGroup Courses' do
+
   stub_authorization!
+
+  before :all do
+    Helpers::Request.resource("class-group-course") 
+  end
   
   before do
     @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
     @course = create(:course, :code => 'Math2012')
     visit class_group_path(@class_group)
-    click_link 'class-group-courses-tab-link'
+    click tab_link
   end
 
-  it 'should add and show course to a class group', :js => true do
-    ClassGroupCourseEnrollment.count.should eql(0)
-    tr_count = page.all('#courses-index tbody tr').size
-    click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course form').visible? }
-    select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
-    click_button 'submit-course-button'
+  context 'new', :js => true do 
+    before do 
+      click new_link
+      wait_until_visible submit
+    end
 
-    wait_until { page.all('#courses-index tbody tr').size == tr_count + 1 }
-    within("#courses-index tbody"){ page.should have_content ("#{@course.code}") }
-    within(".courses-count"){ page.should have_content("1") }
-    within('#class-group-courses-tab-link'){ page.should have_content("1") }
-    ClassGroupCourseEnrollment.count.should eql(1)
+    it 'creates and shows' do
+      expect do
+        select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
+        click submit
+        wait_until_invisible form
+      end.to change(ClassGroupCourseEnrollment, :count).by 1
+    
+      within(table) { page.should have_content "#{@course.code}" }
+      within(count_div) { page.should have_content "Courses list(1)" }
+      within(tab_link) { page.should have_content "Courses(1)" }
+      flash_created?
+    end
+
+    it "errors without required fields" do
+      click submit
+      wait_until { page.has_content? 'Course can\'t be blank' }
+    end
+
+    it 'cancels creating' do
+      ensure_cancel_creating_is_working
+    end
   end
 
-  it 'should not add a course if course code is empty', :js => true do
-    click_link 'new-class-group-course-link'
-    wait_until { page.find('#new-class-group-course form').visible? }
-    click_button 'submit-course-button'
-
-    wait_until { page.has_content?('Course can\'t be blank') }
-  end
-
-  pending 'should cancel adding', :js => true do
-    click '#new-class-group-course-link'
-    wait_until_visible('#new-class-group-course')
-
-    click '#cancel-class-group-course-link'
-    wait_until_invisible('#new-class-group-course')
-
-    click_link 'new-class-group-course-link'
-    wait_until_visible('#new-class-group-course')
-  end
-
-  context 'Class group with added course' do
+  context 'existing', :js => true do
     before do
       @class_group.courses << @course
       visit class_group_path(@class_group)
-      click_link 'class-group-courses-tab-link'
+      click tab_link
 
-      within(".courses-count") { page.should have_content("1") }
-      within('#class-group-courses-tab-link') { page.should have_content("1") }
+      within(count_div) { page.should have_content "1" }
+      within(tab_link) { page.should have_content "1" }
     end
 
-    it 'should not add a course if it is already added', :js => true do  
-      click_link 'new-class-group-course-link'
-      wait_until { page.find('#new-class-group-course form').visible? }
+    it "doesn't add a course 2 times" do  
+      click new_link
+      wait_until_visible form
       select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
-      click_button 'submit-course-button'
-
-      wait_until { page.should have_content("Course Already enrolled to the class group!") }
-      
+      click submit
+      wait_until { page.should have_content "Course Already enrolled to the class group!" }   
     end
 
-    it 'should delete a course from class group', :js => true do  
-      ClassGroupCourseEnrollment.count.should eql(1)
-      @class_group.courses.count.should eql(1)
-      page.all('#courses-index tbody tr').size.should eql(1)
-      within("#courses-index tbody") do
-        page.should have_content ("#{@course.code}")
-        find(".delete-link").click
-      end
-      page.driver.browser.switch_to.alert.accept
-      
-      within("#courses-index tbody"){ page.should_not have_content("#{@course.code}") }
-      within(".courses-count"){ page.should_not have_content("1") }
-      within('#class-group-courses-tab-link'){ page.should_not have_content("1") }
-      ClassGroupCourseEnrollment.count.should eql(0)
-      @class_group.courses.count.should eql(0)
+    it 'deletes' do 
+      within(table) { page.should have_content "#{@course.code}" }
+      within(count_div) { page.should have_content "Courses list(1)" }
+      within(tab_link) { page.should have_content "Courses(1)" }
+
+      expect do
+        ensure_delete_is_working
+      end.to change(ClassGroupCourseEnrollment, :count).by -1
+  
+      within(table) { page.should_not have_content "#{@course.code}" }
+      within(count_div) { page.should_not have_content "Courses list(1)" }
+      within(tab_link) { page.should_not have_content "Courses(1)" }
+      flash_destroyed?
     end
   end
 

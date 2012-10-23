@@ -1,119 +1,103 @@
 require 'spec_helper'
 
-describe 'Contact' do
+describe 'Student Contacts' do
+
   stub_authorization!
+
+  before :all do 
+    Helpers::Request.resource("student-contact")
+  end
 
   before do
     @student = create(:student)
     @contact_type = create(:contact_type, :name => 'email')
   end
 
-  context 'new' do 
+  context 'new', :js => true do 
     before do 
       visit student_path(@student) 
-      click_link 'new-student-contact-link'
+      click new_link
+      wait_until_visible submit
     end
 
-    it "should add and show student contact", :js => true do
-      tr_count = page.all('table#student-contacts-index tr').size
-      @student.contacts.size.should eql(0)
+    it "adds and shows" do
+      expect do 
+        select 'email',            :from => 'contact_contact_type_id'
+        fill_in "contact_data",    :with => "The contact data"
+        fill_in "contact_details", :with => "The contact details"
+        click submit
+        wait_until_invisible form
+      end.to change(@student.contacts, :count).by 1 
       
-      wait_until { find('#new-student-contact form').visible? } 
-
-      select 'email', :from => 'contact_contact_type_id'
-      fill_in "contact_data", :with => "The contact data"
-      fill_in "contact_details", :with => "The contact details"
-      click_button "submit-student-contact-button"
-      
-      wait_until { !page.find('#new-student-contact form').visible? }
-      page.should have_selector('a', href: "/students/1/contacts/1/edit")
-      page.should have_content("The contact data")
-      page.should have_content("The contact details")
-      page.all('table#student-contacts-index tr').size == tr_count + 1
-      within('.student-contacts-count') { page.should have_content('Contacts list(1)') }
-      @student.reload
-      @student.contacts.size.should eql(1)
+      page.should have_content "The contact data"
+      page.should have_content "The contact details"
+      within(count_div) { page.should have_content 'Contacts list(1)' }
+      flash_created?
     end
 
-    it 'should cancel adding contact', :js => true do
-      wait_until { page.find('#cancel-student-contact-link').visible? }
-      click_link 'cancel-student-contact-link'
-      wait_until { !page.find('#new-student-contact form').visible? }
-      find('#new-student-contact-link').visible?
-
-      click_link 'new-student-contact-link'
-      wait_until { find('#new-student-contact form').visible? }
-      !page.find('#new-student-contact-link').visible?
+    it 'cancels creating' do
+      ensure_cancel_creating_is_working
     end
   end
 
 
-  context "edit, delete, set primary" do 
+  context "existing" do 
     before(:each) do 
       @contact = create(:contact, :contact_type => @contact_type)
       @student.contacts << @contact 
     end
 
-    it "should edit a student contact", :js => true do 
-      visit student_path(@student)
-      wait_until { page.has_content?('Contacts list') } 
-      find(".edit-link").click 
-      wait_until { find('#edit-contact-modal').visible? } 
+    context 'edit', :js => true do 
+      before do 
+        visit student_path(@student)
+        within(table) { click edit_link }
+        wait_until_visible modal
+      end
 
-      fill_in 'contact_data', :with => 'example@genshin.org'
-      click_button 'submit-student-contact-button'
+      it "edits" do 
+        fill_in 'contact_data', :with => 'example@genshin.org'
+        click submit
 
-      wait_until { !page.find('#edit-contact-modal').visible? }
-      page.should have_content('example@genshin.org')
+        wait_until_invisible modal
+        page.should have_content 'example@genshin.org'
+        flash_updated?
+      end
+
+      it 'cancels editting' do 
+        ensure_cancel_modal_is_working
+      end
     end
 
-    it 'should cancel editting', :js => true do 
-      visit student_path(@student)
-      find(".edit-link").click 
 
-      click_link 'cancel-student-contact-link'
-      wait_until { !page.find('#edit-contact-modal').visible? }
-    end
-
-
-    it "should set contact as primary", :js => true do 
+    it "sets primary", :js => true do 
       contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
-
       @student.contacts << contact2
       
       visit student_path(@student) 
-      wait_until { page.has_content?('Contacts list') } 
      
-      # within('table#student-contacts-index tr#contact-1 td.primary-contact') { page.should have_content('Primary')}
-      # within('table#student-contacts-index tr#contact-2 td.primary-contact') { page.should_not have_content('Primary')}
-
       @student.contacts.first.is_primary? == true
       @student.contacts.second.is_primary? == false
 
-      within('table#student-contacts-index tr#contact-2') { click_link 'set-primary-link' }
-      page.driver.browser.switch_to.alert.accept
+      within("#{table} tr#contact-2") { click_link 'set-primary-link' }
+      accept_alert
 
-      # within('table#student-contacts-index tr#contact-1 td.primary-contact') { page.should_not have_content('Primary')}
-      # within('table#student-contacts-index tr#contact-2 td.primary-contact') { page.should have_content('Primary')}
       @student.contacts.first.is_primary? == false
       @student.contacts.second.is_primary? == true
     end
 
-    it "should delete a student contact", :js => true do
+    it "deletes", :js => true do
       visit student_path(@student)
 
-      tr_count = page.all('table#student-contacts-index tr').size
-      within('.student-contacts-count') { page.should have_content('Contacts list(1)') }
-      page.should have_content(@contact.data)
-      @student.contacts.size.should eql(1)
-
-      find('.delete-link').click 
-      page.driver.browser.switch_to.alert.accept
+      within(count_div) { page.should have_content 'Contacts list(1)' }
+      page.should have_content @contact.data
+       
+      expect do 
+        ensure_delete_is_working
+      end.to change(@student.contacts, :count).by -1
       
-      wait_until { page.all('table#student-contacts-index tr').size == tr_count - 1 }
-      within('.student-contacts-count') { page.should_not have_content('Contacts list(1)') }
-      @student.contacts.size.should eql(0)
-      page.should_not have_content(@contact.data)
+      within(count_div) { page.should_not have_content 'Contacts list(1)' }
+      page.should_not have_content @contact.data
+      flash_destroyed?
     end
   end
 end
