@@ -1,0 +1,9 @@
+td= exam_syllabus.exam.name
+td= exam_syllabus.exam.description
+td= exam_syllabus.exam.adjustments
+td= exam_syllabus.exam.weight
+td= exam_syllabus.exam.use_weighting
+td
+  = link_to_show exam_syllabus.exam
+  = ajax_link_to_edit [:edit, exam_syllabus.syllabus, exam_syllabus.exam]
+  = ajax_link_to_delete [exam_syllabus.syllabus, exam_syllabus]

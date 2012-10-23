@@ -43,7 +43,7 @@
             .row-fluid
               .span9
                 = ep_form.label :name, t('exam_portions.name')
-                = ep_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+                = ep_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => t('exams.exam')
               .span3
                 = ep_form.label :weight, t('exam_portions.weight')
                 = ep_form.number_field :weight, :class => "span12"
