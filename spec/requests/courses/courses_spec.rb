@@ -29,7 +29,7 @@ describe 'Courses' do
       end.to change(Course, :count).by(1)
 
 
-      within(count_div) { page.should have_content('Courses List(1)') }
+      within(count_div) { page.should have_content('Courses list(1)') }
       wait_until_invisible '#new-course'
       
       flash_created?
@@ -97,7 +97,7 @@ describe 'Courses' do
 
     it "should delete a course", :js => true do
       tr_count = page.all(table_rows).size
-      within(count_div) { page.should have_content('Courses List(1)') }
+      within(count_div) { page.should have_content('Courses list(1)') }
       page.should have_content(@course.code)
       
       expect do     
