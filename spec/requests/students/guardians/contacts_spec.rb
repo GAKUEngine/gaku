@@ -99,7 +99,7 @@ describe 'Student Guardian Contacts' do
 
         wait_until_invisible modal
         page.should have_content '777'
-        page.should_not have_content '123'
+        page.find(table).should_not have_content '123'
         flash_updated?
       end
 
