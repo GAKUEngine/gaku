@@ -247,12 +247,14 @@ class ExamsController < ApplicationController
       end
       scores.sort!().reverse!()
 
+
+      # WIP Grade Calculation -----↓
+
       # @grading_method = GradingMethod.find(exam.grading_method_id)
       # puts "@grading_method-------------"
       # puts @grading_method.name
       # eval @grading_method.method
 
-      # WIP Fix Grade Calculation -----↓
       gradingMethod = 1
       gradePoint = 10
       case gradingMethod
