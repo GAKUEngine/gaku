@@ -98,16 +98,16 @@ describe 'Syllabus Exams' do
         visit syllabus_path(@syllabus)
       end
 
-      it 'edits' do 
+      it 'edits', :js => true do 
         click edit_link
-        current_url.should eq edit_exam_url(:id => @exam.id)
+
         fill_in 'exam_name', :with => 'Ruby Exam'
         
         #click submit_button
-        click_button 'submit_button' #FIXME Fix this id
+        click '#submit-syllabus-exam-button' #FIXME Fix this id
 
         page.should have_content 'Ruby Exam'
-        current_url.should eq exam_url(:id => @exam.id)
+        # current_url.should eq exam_url(:id => @exam.id)
         flash_updated?
       end
 
