@@ -14,7 +14,7 @@
         = course_form.select :syllabus_id, Syllabus.all.collect { |s| [s.name, s.id] }, {}, :class => "span12"
       .span6
         = course_form.label :code, t('courses.code')
-        = course_form.text_field :code, :placeholder => t('courses.code_sample'), :class => "span12"
+        = course_form.text_field :code, :placeholder => t('courses.code_sample'), :class => "span12 validate[required]"
 
       .row-fluid
         .span12
