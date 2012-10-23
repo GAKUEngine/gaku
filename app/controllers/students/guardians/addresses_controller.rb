@@ -13,7 +13,7 @@ class Students::Guardians::AddressesController < ApplicationController
 	def create
     super do |format|
       if @guardian.addresses << @address
-        @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
+        load_primary_address        
         format.js { render 'create' }  
       end
     end  
@@ -57,8 +57,7 @@ class Students::Guardians::AddressesController < ApplicationController
     end
 
 	  def load_primary_address
-		  @guardian = Guardian.find(params[:guardian_id])
-      @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
+      @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
     end
 
 end
