@@ -86,13 +86,11 @@ describe 'Student Guardian Addresses' do
     it 'deletes', :js => true do 
       page.should have_content 'Japan'
       within(count_div) { page.should have_content 'Addresses list(1)' }
-      
       expect do
         ensure_delete_is_working
       end.to change(@student.guardians.first.addresses, :count).by -1
-      
       within(count_div) { page.should_not have_content 'Addresses list(1)' }
-      page.should_not have_content 'Japan'
+      page.find(table).should_not have_content 'Japan'
       flash_destroyed?
     end
 

@@ -302,7 +302,7 @@ en:
     actions: 'Actions'
     list: "Contacts list"
     contacts: "Contacts"
-
+    contact_created: 'Contact successfully created.'
   schools:
     singular: "School"
     plural: "Schools"
