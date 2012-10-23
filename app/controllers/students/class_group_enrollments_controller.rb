@@ -14,7 +14,7 @@ class Students::ClassGroupEnrollmentsController < ApplicationController
         @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)        
         format.js { render 'create' }  
       else
-        @errors = @course_enrollment.errors
+        @errors = @class_group_enrollment.errors
         format.js { render 'error' }
       end
     end  
