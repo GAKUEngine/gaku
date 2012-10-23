@@ -84,7 +84,7 @@ describe 'Courses' do
       flash_updated?
     end
 
-    it "should edit a course from show", :js => true do
+    it "edits a course from show", :js => true do
       within(table) { click show_link }
       page.should have_content("Show")
       

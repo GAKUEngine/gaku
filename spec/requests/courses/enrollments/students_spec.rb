@@ -3,10 +3,16 @@ require 'spec_helper'
 describe "CourseEnrollment"  do
   stub_authorization!
 
-  before do
-    @course = create(:course)
+  before :all do
+    Helpers::Request.resource("course-student") 
   end
-  context 'student' do 
+
+  context 'student' do
+
+    before do
+      @course = create(:course)
+    end
+     
     it "should enroll and show student", :js => true do
       @student = create(:student, :name => "John", :surname => "Doe")
       visit course_path(@course)
@@ -56,52 +62,6 @@ describe "CourseEnrollment"  do
 
       click_link 'cancel-course-student-link'
       wait_until { !page.find('#student-modal').visible? }
-    end
-  end
-
-  context 'class group' do 
-    it "should enroll a class group", :js => true do 
-      class_group = create(:class_group, :name => "Math")
-      student1 = create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
-      student2 = create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
-      
-      visit course_path(@course)
-      @course.students.size.should eql(0)
-      click_on 'new-course-class-group-link'
-      
-      wait_until { page.find('#new-course-class-group-form').visible? }
-      !page.find('#new-course-class-group-link').visible?
-      click_on 'Choose Class Group' 
-
-      wait_until { page.has_content?('Math') }
-      find("li:contains('Math')").click
-      click_button "submit-course-class-group-button"
-
-      wait_until do 
-        !page.find('#new-course-class-group-form').visible? 
-        page.find('#new-course-class-group-link').visible?  
-      end
-      page.should have_content("Johniew")
-      page.should have_content("Amon")
-      page.should have_content("View Assignments")
-      page.should have_content("View Exams")
-      @course.students.size.should eql(2)
-    end
-
-    pending 'should show error message if the students exist when enrolling class group' do
-    end
-
-    it 'should cancel enrolling a class group', :js => true do 
-      visit course_path(@course)
-      click_link 'new-course-class-group-link'
-      
-      wait_until { find('#new-course-class-group-form').visible? }
-      sleep 1 #FIXME
-      click_link 'cancel-course-class-group-link'
-      wait_until do
-        !page.find('#new-course-class-group-form').visible? 
-        page.find('#new-course-class-group-link').visible?
-      end
     end
   end
 
