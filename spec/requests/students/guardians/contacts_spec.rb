@@ -80,8 +80,8 @@ describe 'Student Guardian Contacts' do
 
   context 'existing' do 
     before do 
-      mobile1 = create(:contact, :data => 123, :contact_type => @contact_type)
-      @student.guardians.first.contacts << mobile1
+      @mobile1 = create(:contact, :data => 123, :contact_type => @contact_type)
+      @student.guardians.first.contacts << @mobile1
       @student.reload
     end
     
@@ -120,6 +120,28 @@ describe 'Student Guardian Contacts' do
       within(count_div) { page.should_not have_content 'Contacts list(1)' }
       page.find(table).should_not have_content '123'
       flash_destroyed?
+    end
+
+    it "delete primary", :js => true do
+      mobile2 = create(:contact, :data => 321, :contact_type => @contact_type)
+      @student.guardians.first.contacts << mobile2
+
+      visit student_guardian_path(@student, @student.guardians.first)
+
+      contact1_tr = "#contact-#{@mobile1.id}"
+      contact2_tr = "#contact-#{mobile2.id}"
+
+      click "#{contact2_tr} td.primary-button a"
+      accept_alert
+
+      page.find("#{contact2_tr} td.primary-button a.btn-primary")
+
+      click "#{contact2_tr} .delete-link"
+      accept_alert
+
+      page.find("#{contact1_tr} td.primary-button a.btn-primary")
+
+      @student.guardians.first.contacts.first.is_primary? == true
     end
 
     it 'sets primary', :js => true do 
