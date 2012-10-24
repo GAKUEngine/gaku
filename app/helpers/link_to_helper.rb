@@ -67,7 +67,7 @@ module LinkToHelper
     attributes = {
       :remote => true,
       :method => :post,
-      :data => { :confirm => 'Are you sure?' },
+      :data => { :confirm => t('confirm') },
     }.merge(options)
     link_to name, resource, attributes
   end
