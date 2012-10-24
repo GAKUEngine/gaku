@@ -7,7 +7,7 @@ class Students::AddressesController < ApplicationController
 
   before_filter :load_address, :only => :destroy
   before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
-
+  before_filter :load_primary_address, :only => [:destroy]
   def create
     super do |format|
       if @address.save
@@ -32,10 +32,9 @@ class Students::AddressesController < ApplicationController
   end
 
   def destroy
-    @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
     if @address.destroy
       flash.now[:notice] = t('addresses.destroyed')
-      if @address.id == @primary_address_id
+      if @address.id == @primary_address.address_id
         @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
         respond_to do |format|
           format.js { render }
@@ -61,6 +60,10 @@ class Students::AddressesController < ApplicationController
 
     def load_student
       @student = Student.find(params[:student_id])
+    end
+
+    def load_primary_address
+      @primary_address = @student.student_addresses.find_by_is_primary(true)
     end
 
 end
