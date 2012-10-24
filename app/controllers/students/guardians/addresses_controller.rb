@@ -20,8 +20,6 @@ class Students::Guardians::AddressesController < ApplicationController
   end
 
   def destroy 
-    @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
-    #logger.debug "@primary_address_id: #{@primary_address_id} || @address.id: #{@address.id}"
     if @address.destroy
 
       if @address.id == @primary_address_id

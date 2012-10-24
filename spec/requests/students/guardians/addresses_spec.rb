@@ -54,8 +54,8 @@ describe 'Student Guardian Addresses' do
 
   context 'existing' do 
     before do 
-      address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
-      @student.guardians.first.addresses <<  address1
+      @address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
+      @student.guardians.first.addresses <<  @address1
       visit student_guardian_path(@student, @student.guardians.first)
     end
 
@@ -92,6 +92,26 @@ describe 'Student Guardian Addresses' do
       within(count_div) { page.should_not have_content 'Addresses list(1)' }
       page.find(table).should_not have_content 'Japan'
       flash_destroyed?
+    end
+
+    it "delete primary", :js => true do
+      bulgaria = create(:country, :name => "Bulgaria")
+      address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
+      @student.guardians.first.addresses <<  address2
+      address1_tr = "#address-#{@address1.id}"
+      address2_tr = "#address-#{address2.id}"
+      visit student_guardian_path(@student, @student.guardians.first)
+      
+      click "#{address2_tr} a"
+  
+      page.find("#{address2_tr} .primary_address a.btn-primary")
+
+      click "#{address2_tr} .delete-link"
+      accept_alert
+
+      page.find("#{address1_tr} .primary_address a.btn-primary")
+
+      @student.guardians.first.guardian_addresses.first.is_primary? == true
     end
 
     it 'sets primary', :js => true do 
