@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #Rails
-gem 'rails', '~> 3.2.4'
+gem 'rails', '~> 3.2.8'
 gem 'rails-i18n'
 gem 'audited-activerecord', '~> 3.0'
 gem 'slim-rails'
@@ -57,14 +57,14 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
-  gem 'shoulda-matchers', '~> 1.0.0'
+  gem 'shoulda-matchers'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'database_cleaner', '~> 0.7.2'
+  gem 'database_cleaner'
   gem 'launchy'
   
   gem 'guard'
-  gem 'guard-rspec', '~> 0.7.0'
+  gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
   

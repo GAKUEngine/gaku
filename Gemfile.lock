@@ -83,7 +83,7 @@ GEM
     coffee-script-source (1.3.3)
     columnize (0.3.6)
     commonjs (0.2.6)
-    database_cleaner (0.7.2)
+    database_cleaner (0.9.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -123,8 +123,9 @@ GEM
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
-    guard-rspec (0.7.3)
-      guard (>= 0.10.0)
+    guard-rspec (2.1.0)
+      guard (>= 1.1)
+      rspec (~> 2.11)
     guard-spork (1.2.1)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
@@ -289,7 +290,8 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    shoulda-matchers (1.0.0)
+    shoulda-matchers (1.4.1)
+      activesupport (>= 3.0.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -348,7 +350,7 @@ DEPENDENCIES
   capybara
   chosen-rails
   coffee-rails (~> 3.2.1)
-  database_cleaner (~> 0.7.2)
+  database_cleaner
   devise (~> 2.1)
   devise-i18n
   execjs
@@ -357,7 +359,7 @@ DEPENDENCIES
   gaku_engine!
   guard
   guard-bundler
-  guard-rspec (~> 0.7.0)
+  guard-rspec
   guard-spork
   highline
   hirb
@@ -370,7 +372,7 @@ DEPENDENCIES
   less
   mysql2
   paperclip
-  rails (~> 3.2.4)
+  rails (~> 3.2.8)
   rails-erd
   rails-footnotes (>= 3.7.5.rc4)
   rails-i18n
@@ -383,7 +385,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   seedbank
   selenium-webdriver
-  shoulda-matchers (~> 1.0.0)
+  shoulda-matchers
   simplecov
   slim-rails
   spork (~> 1.0rc)
