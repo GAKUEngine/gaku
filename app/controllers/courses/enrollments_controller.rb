@@ -45,7 +45,7 @@ class Courses::EnrollmentsController < ApplicationController
 
   def show_flash_error_for_enroll(respond_with_var,message)
     respond_with(respond_with_var) do |format|
-      flash.now[:notice] = message
+      @course.errors[:base]<< message
       format.html { render :nothing => true }
       format.js { render 'courses/enrollments/class_groups/enroll'}
     end

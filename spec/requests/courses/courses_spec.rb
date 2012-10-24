@@ -2,53 +2,46 @@ require 'spec_helper'
 
 describe 'Courses' do
 
-
-  table_rows = '#courses-index tbody tr'
-  count_div = '.courses-count'
-
   stub_authorization!
 
+  before :all do
+    Helpers::Request.resource("course") 
+  end
+
   before do
-    @syllabus = create(:syllabus, :name => 'biology2012', :code => 'bio')
-    visit courses_path
+    @syllabus = create(:syllabus, :name => 'biology2012', :code => 'bio') 
   end
   
-  context 'new' do 
+  context '#new', :js => true do 
     before do 
-      click "#new-course-link"
-      wait_until_visible '#submit-course-button' 
+      visit courses_path
+      click new_link
+      wait_until_visible submit
     end
 
-    it "create new course", :js => true do
-      tr_count = page.all(table_rows).size
-
+    it "creates new course" do
+      
       expect do      
         fill_in 'course_code', :with => 'SUMMER2012'
         select "#{@syllabus.name}", :from => 'course_syllabus_id'
-        click '#submit-course-button'
-      end.to change(Course, :count).by(1)
-
+        click submit
+        wait_until_invisible form
+        within(table) { page.should have_content(@syllabus.name) }
+      end.to change(Course, :count).by 1
 
       within(count_div) { page.should have_content('Courses list(1)') }
-      wait_until_invisible '#new-course'
-      
+      wait_until_invisible '#new-course'     
       flash_created?
-      
-      within('#courses-index') { page.should have_content(@syllabus.name) }
-      
-      wait_until { page.all(table_rows).size == tr_count + 1 }
     end
 
-    it 'should cancel creating', :js => true do
-      click '#cancel-course-link'
-      wait_until_invisible '#new-course'
-
-      click "#new-course-link"
-      wait_until_visible '#new-course'
+    it 'doesn\'t create without required fields' do
+      click submit
+      page.should have_content('is required')
     end
 
-    pending 'not create without required fields'
-
+    it 'cancels creating' do
+      ensure_cancel_creating_is_working 
+    end
   end
 
   context "existing course" do
@@ -56,59 +49,71 @@ describe 'Courses' do
       @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
       @course = create(:course, :syllabus => @syllabus) 
       visit courses_path
+      within(count_div) { page.should have_content('Courses list(1)') }
     end
 
-    it "should list and show existing courses" do
-      within("#courses-index") { page.should have_content("biology") }
-      within('#courses-index tbody tr') { find(".show-link").click }
+    it "lists and shows existing courses" do
+      within(table) do
+        page.should have_content("biology")
+        click show_link
+      end
       
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
 
-    it "should edit a course", :js => true  do
-      within('#courses-index tbody tr') { find(".edit-link").click }
+    it 'shows validation messages upon edit', :js => true do
+      within(table) { click edit_link }
 
       page.should have_content("Edit Course") 
-      fill_in 'course_code', :with => 'biology2013'
-      page.select "biology2013Syllabus", :from => 'course_syllabus_id'
-      click_button 'submit-course-button'
-
-      page.should have_content "biology2013Syllabus"
-      page.should have_content "biology2013"
+      fill_in 'course_code', :with => ''
+      click submit
+      page.should have_content('is required')
     end
 
-    it "should edit a course from show", :js => true do
-      within('#courses-index tbody tr') { find(".show-link").click }
+    it "edits a course", :js => true  do
+      within(table) { click edit_link }
+
+      page.should have_content("Edit Course") 
+      fill_in 'course_code', :with => 'biology2013'
+      page.select "biology2013Syllabus", :from => 'course_syllabus_id'
+      click submit
+
+      page.should have_content "biology2013Syllabus"
+      page.should have_content "biology2013"
+      flash_updated?
+    end
+
+    it "edits a course from show", :js => true do
+      within(table) { click show_link }
       page.should have_content("Show")
       
-      find('.edit-link').click
-      wait_until { find('#course-modal').visible? }
+      click edit_link
+      wait_until_visible(modal)
       
       page.should have_content("Edit Course") 
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
-      click_button 'submit-course-button'
+      click submit
 
-      flash_updated?
       page.should have_content "biology2013Syllabus"
       page.should have_content "biology2013"
+      
+      flash_updated?
     end
 
     it "should delete a course", :js => true do
       tr_count = page.all(table_rows).size
       within(count_div) { page.should have_content('Courses list(1)') }
-      page.should have_content(@course.code)
-      
+      within(table) { page.should have_content(@course.code) }
+
       expect do     
-        within('table#courses-index tbody tr') { click ".delete-link" }
-        page.driver.browser.switch_to.alert.accept
-        wait_until { page.all(table_rows).size == tr_count - 1 }
-      end.to change(Course, :count).by(-1)
+        ensure_delete_is_working
+      end.to change(Course, :count).by -1
       
+      within(count_div) { page.should_not have_content('Courses list(1)') }
+      within(table) { page.should_not have_content(@course.code) }
       flash_destroyed?
-      within(count_div) { page.should_not have_content('Courses List(1)') }
-      page.should_not have_content(@course.code)
     end
   end
 end

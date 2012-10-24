@@ -1,13 +1,16 @@
-<% @not_added_students.each {|enrollment| %>
+
+<%- if @course.errors.any? %>
+  $('#new-course-class-group-form-errors').html('<%= render_js_partial("shared/errors", {:target => @course}) %>');
+<%- else %>
+  $("#new-course-class-group-form-errors").html("");
+  <% @not_added_students.each {|enrollment| %>
   $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment}) %>');
-<% } %>
-$('#new-course-class-group-link').show();
+  <% } %>
 
-$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');
-$('.course-students-count').html('<%= print_count(@course.students.count, t("students.list")) %>');
+  $('#new-course-class-group-link').show();
+  $('#new-course-class-group').slideToggle();
 
-<% if flash.any? %>
-	showNotice("<%= render_flash %>");
-<% else %>
-  $("#notice").html("");
+  $('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');
+  $('.course-students-count').html('<%= print_count(@course.students.count, t("students.list")) %>');
 <% end %>
+showNotice("<%= render_flash %>");
