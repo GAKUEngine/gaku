@@ -11,3 +11,4 @@ $('.guardian-contact').each(function() {
 var currentContact = $("#contact-<%= @contact.id %>");
 currentContact.children('td.primary-contact').html('Primary');
 currentContact.find('.primary-button a').addClass('btn-primary');
+$('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
