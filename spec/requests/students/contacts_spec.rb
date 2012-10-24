@@ -85,6 +85,26 @@ describe 'Student Contacts' do
       @student.contacts.second.is_primary? == true
     end
 
+    it "delete primary", :js => true do
+      contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
+      @student.contacts << contact2
+
+      contact1_tr = "#contact-#{@contact.id}"
+      contact2_tr = "#contact-#{contact2.id}"
+      
+      visit student_path(@student)
+
+      click "#{contact2_tr} td.primary-button a"
+      accept_alert
+      page.find("#{contact2_tr} td.primary-button a.btn-primary")
+
+      click "#{contact2_tr} .delete-link"
+      accept_alert
+      
+      page.find("#{contact1_tr} .primary-button a.btn-primary")
+      @student.contacts.first.is_primary? == true 
+    end
+
     it "deletes", :js => true do
       visit student_path(@student)
 
