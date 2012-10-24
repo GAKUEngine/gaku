@@ -103,7 +103,8 @@ describe 'Student Guardian Addresses' do
       visit student_guardian_path(@student, @student.guardians.first)
       
       click "#{address2_tr} a"
-  
+      accept_alert
+
       page.find("#{address2_tr} .primary_address a.btn-primary")
 
       click "#{address2_tr} .delete-link"
@@ -125,7 +126,8 @@ describe 'Student Guardian Addresses' do
       @student.guardians.first.guardian_addresses.second.is_primary? == false
 
       within('table#student-guardian-addresses-index tr#address-2') { click_link 'set_primary_link' }
-
+      accept_alert
+      
       @student.guardians.first.guardian_addresses.first.is_primary? == false
       @student.guardians.first.guardian_addresses.second.is_primary? == true
     end

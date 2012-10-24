@@ -54,6 +54,7 @@ en:
   search: "Search"
   hide: "Hide"
   description: 'Description'
+  confirm: 'Are you sure?'
   attachments:
     assets: 'Assets'
     file_name: 'File name'

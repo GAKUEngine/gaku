@@ -64,6 +64,7 @@ ja:
   search: "検索"
   hide: "非表示"
   description: '説明'
+  cofirm: 'Are you sure?'
   admin:
     presets:
       save: '保存'
