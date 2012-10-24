@@ -1,4 +1,4 @@
-class Students::ContactsController < ApplicationController
+  class Students::ContactsController < ApplicationController
 
   inherit_resources
   actions :new, :create, :update, :edit, :destroy
