@@ -134,6 +134,7 @@ describe 'Address' do
 
 
       click "#{address2_tr} a"
+      accept_alert
       page.find("#{address2_tr} .primary_address a.btn-primary")
 
       click "#{address2_tr} .delete-link"
@@ -156,7 +157,8 @@ describe 'Address' do
       click tab_link
       
       within("#{table} tr#address-2") { click_link 'set_primary_link' }
-
+      accept_alert
+      
       @student.student_addresses.first.is_primary? == false
       @student.student_addresses.second.is_primary? == true
     end
