@@ -10,7 +10,7 @@ describe 'Syllabus Notes' do
   
   before do
     @syllabus = create(:syllabus)
-    visit syllabus_path(@syllabus) 
+    visit gaku.syllabus_path(@syllabus) 
   end
 
   context 'new', :js => true do
@@ -49,7 +49,7 @@ describe 'Syllabus Notes' do
   context "existing", :js => true do 
     before do 
       @note = create(:note, :notable => @syllabus)
-      visit syllabus_path(@syllabus)
+      visit gaku.syllabus_path(@syllabus)
     end
 
     context 'edit' do 

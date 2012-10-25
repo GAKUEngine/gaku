@@ -16,7 +16,7 @@ describe 'Syllabus Exams' do
   before do
     @exam = create(:exam)
     @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
-    visit syllabuses_path
+    visit gaku.syllabuses_path
   end
 
   context "existing exam" do
@@ -95,7 +95,7 @@ describe 'Syllabus Exams' do
       before do 
         @exam = create(:exam, :name => 'Astronomy Exam')
         @syllabus.exams << @exam
-        visit syllabus_path(@syllabus)
+        visit gaku.syllabus_path(@syllabus)
       end
 
       it 'edits', :js => true do 
