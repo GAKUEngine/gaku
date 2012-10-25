@@ -5,6 +5,9 @@ require 'ransack'
 require 'jquery-rails'
 require 'devise'
 require 'cancan'
+require 'audited-activerecord'
+require 'inherited_resources'
+require 'slim-rails'
 
 module Gaku
 

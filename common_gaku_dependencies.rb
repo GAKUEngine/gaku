@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 #Rails
-gem 'slim-rails'
-gem 'inherited_resources'
 gem 'chosen-rails'
 #gem 'attr_encrypted'
 
