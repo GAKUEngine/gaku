@@ -2,7 +2,7 @@ module Gaku
   module Core
     class Engine < ::Rails::Engine
       isolate_namespace Gaku
-      engine_name 'gaku_engine'
+      engine_name 'gaku'
 
       config.autoload_paths += %W(#{config.root}/lib)
       

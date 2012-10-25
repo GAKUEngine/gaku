@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
   s.add_dependency 'rails', '~> 3.2.8'
+  s.add_dependency 'highline', '= 1.6.11'
 end
