@@ -37,44 +37,18 @@ module Gaku
     #  template 'config/initializers/gaku.rb', 'config/initializers/gaku.rb'
     #end
 
-    #def config_spree_yml
-    #  create_file "config/spree.yml" do
-    #    settings = { 'version' => Spree.version }
-
-    #    settings.to_yaml
-    #  end
-    #end
-
     def remove_unneeded_files
       remove_file "public/index.html"
     end
-=begin
-    def additional_tweaks
-      return unless File.exists? 'public/robots.txt'
-      append_file "public/robots.txt", <<-ROBOTS
-User-agent: *
-Disallow: /checkouts
-Disallow: /orders
-Disallow: /countries
-Disallow: /line_items
-Disallow: /password_resets
-Disallow: /states
-Disallow: /user_sessions
-Disallow: /users
-      ROBOTS
-    end
-=end
+
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
-        empty_directory "app/assets/#{path}/"
-        #empty_directory "app/assets/#{path}/admin"
+        empty_directory "app/assets/#{path}"
       end
 
       template "app/assets/javascripts/all.js"
-      #template "app/assets/javascripts/admin/all.js"
       #template "app/assets/stylesheets/all.css"
-      #template "app/assets/stylesheets/admin/all.css"
     end
 
     def create_overrides_directory
@@ -154,21 +128,21 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def load_sample_data
       if @load_sample_data
         say_status :loading, "sample data"
-        quietly { rake 'spree_sample:load' }
+        quietly { rake 'gaku_sample:load' }
       else
-        say_status :skipping, "sample data (you can always run rake spree_sample:load)"
+        say_status :skipping, "sample data (you can always run rake gaku_sample:load)"
       end
     end
 
     def notify_about_routes
       insert_into_file File.join('config', 'routes.rb'), :after => "Application.routes.draw do\n" do
         %Q{
-  # This line mounts Spree's routes at the root of your application.
-  # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
+  # This line mounts Gaku's routes at the root of your application.
+  # This means, any requests to URLs such as /students, will go to Gaku::StudentsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
   #
-  # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
-  mount Spree::Core::Engine, :at => '/'
+  # We ask that you don't use the :as option here, as Gaku relies on it being the default of "gaku"
+  mount Gaku::Core::Engine, :at => '/'
         }
       end
 
@@ -176,14 +150,14 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
         puts "*" * 50
         puts "We added the following line to your application's config/routes.rb file:"
         puts " "
-        puts "    mount Spree::Core::Engine, :at => '/'"
+        puts "    mount Gaku::Core::Engine, :at => '/'"
       end
     end
 
     def complete
       unless options[:quiet]
         puts "*" * 50
-        puts "Spree has been installed successfully. You're all ready to go!"
+        puts "Gaku has been installed successfully. You're all ready to go!"
         puts " "
         puts "Enjoy!"
       end

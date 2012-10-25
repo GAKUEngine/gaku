@@ -5,7 +5,6 @@ require 'spork'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
-  #require File.expand_path("../../config/environment", __FILE__)
   require File.expand_path("../dummy/config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
@@ -22,20 +21,6 @@ Spork.each_run do
   # This code will be run each time you run your specs.
   #Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
-
-  # reload all the models
-  #Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
-  #  load model 
-  #end
-
-  # reload all factories
- #FactoryGirl.factories.clear
-  #Dir.glob("#{::Rails.root}/spec/factories/*.rb").each do |file|
-  #  load "#{file}"
-  #end
-
-  #GAKUEngine::Application.reload_routes!
-  Capybara.default_wait_time = 5 
 
   RSpec.configure do |config|
     config.mock_with :rspec
@@ -60,7 +45,6 @@ Spork.each_run do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
-    #config.include RSpecSupport::ControllerHelpers, :type => :controller
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
     config.include Gaku::Core::UrlHelpers

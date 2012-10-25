@@ -24,8 +24,6 @@ module Gaku
   end
 end
 
-#require 'spree/core/ext/active_record'
-
 require 'gaku/core/delegate_belongs_to'
 require 'gaku/core/version'
 require 'gaku/core/engine'
