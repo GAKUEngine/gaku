@@ -1,13 +1,9 @@
 source 'https://rubygems.org'
 
 #Rails
-gem 'rails', '~> 3.2.8'
-gem 'rails-i18n'
-gem 'audited-activerecord', '~> 3.0'
 gem 'slim-rails'
 gem 'inherited_resources'
 gem 'chosen-rails'
-gem 'ransack'
 #gem 'attr_encrypted'
 
 #JS 
@@ -19,13 +15,8 @@ gem 'therubyracer'
 gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
 gem 'backbone-on-rails'
 
-#gem 'devise', :git => "git://github.com/plataformatec/devise.git"
-gem 'devise', '~> 2.1'
 gem 'devise-i18n'
-gem 'cancan'
 
-gem 'paperclip'
-gem 'app_config'
 gem 'seedbank'
 gem 'spreadsheet'
 gem 'roo' #TODO consider other options for roo?

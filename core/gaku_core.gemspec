@@ -16,5 +16,13 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
   s.add_dependency 'rails', '~> 3.2.8'
+  s.add_dependency 'rails-i18n'
+  s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'highline', '= 1.6.11'
+  s.add_dependency 'paperclip'
+  s.add_dependency 'ransack'
+  s.add_dependency 'devise'
+  s.add_dependency 'cancan'
+  s.add_dependency 'app_config'
+  s.add_dependency 'eco'
 end
