@@ -10,7 +10,7 @@ describe 'ClassGroup Students' do
 
   context "Class Roster" do
     before do
-      visit class_groups_path
+      visit gaku.class_groups_path
       find('.show-link').click
       click_link 'class-group-enrollments-tab-link'
       ClassGroupEnrollment.count.should eq 0
@@ -72,7 +72,7 @@ describe 'ClassGroup Students' do
     context "Class Roster with added student" do
       before do
         @class_group.students << @student1
-        visit class_group_path(@class_group)
+        visit gaku.class_group_path(@class_group)
         within('.class-group-enrollments-count'){ page.should have_content("1") }
         within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
         ClassGroupEnrollment.count.should eq 1

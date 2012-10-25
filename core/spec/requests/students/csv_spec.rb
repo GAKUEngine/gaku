@@ -8,7 +8,7 @@ describe 'Student CSV' do
     it 'exports as CSV' do
       create(:student, :name => 'John', :surname => 'Doe')
       create(:student, :name => 'Susumu', :surname => 'Yokota')
-      visit students_path
+      visit gaku.students_path
 
       click_link 'export-students-link'
       page.response_headers['Content-Type'].should eq "text/csv"
@@ -18,7 +18,7 @@ describe 'Student CSV' do
     end
 
     it 'downloads registration CSV' do 
-      visit students_path
+      visit gaku.students_path
       click_link 'import-students-link'
       click_link 'get_registration_csv'
 
@@ -29,7 +29,7 @@ describe 'Student CSV' do
 
   context 'upload' do 
     it 'imports from CSV' do
-      visit students_path
+      visit gaku.students_path
 
       expect do 
         click_link 'import-students-link'

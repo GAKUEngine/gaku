@@ -6,7 +6,7 @@ describe "Student Images" do
   
   before do
     @student = create(:student)
-    visit student_path(@student)
+    visit gaku.student_path(@student)
   end
 
   context "uploading", :js => true do

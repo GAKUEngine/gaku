@@ -6,7 +6,7 @@ describe 'Exam portions' do
   context 'exam/show' do
     before do
       @exam = create(:exam, :name => "Unix")
-      visit exam_path(@exam)
+      visit gaku.exam_path(@exam)
       Exam.count.should == 1
       @exam.exam_portions.count.should == 1
       page.should have_content( 'Exam portions list ( 1 )' )

@@ -7,7 +7,7 @@ describe 'Exams' do
   count_div = '.exams-count'
 
   before do
-    visit exams_path
+    visit gaku.exams_path
   end
 
   context 'not added exam' do
@@ -77,7 +77,7 @@ describe 'Exams' do
   context 'with added exam' do
     before do
       @exam = create(:exam, :name => "Linux")
-      visit exams_path
+      visit gaku.exams_path
       Exam.count.should == 1
     end
 
@@ -152,7 +152,7 @@ describe 'Exams' do
     end
 
     it 'should return to exams index when back selected' do
-      visit exam_path(@exam)
+      visit gaku.exam_path(@exam)
       click_on 'Back'
       page.should have_content('Exams List')
     end

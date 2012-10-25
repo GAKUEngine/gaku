@@ -15,7 +15,7 @@ describe 'Admin School Campus Contact' do
 
   context 'new', :js => true do 
     before do 
-      visit admin_school_campus_path(@school, @school.campuses.first) 
+      visit gaku.admin_school_campus_path(@school, @school.campuses.first) 
       click new_link
       wait_until_visible submit
     end
@@ -48,7 +48,7 @@ describe 'Admin School Campus Contact' do
 
     context 'edit' do 
       before do 
-        visit admin_school_campus_path(@school, @school.campuses.first)
+        visit gaku.admin_school_campus_path(@school, @school.campuses.first)
         click edit_link
         wait_until_visible modal
       end
@@ -72,7 +72,7 @@ describe 'Admin School Campus Contact' do
 
       @school.campuses.first.contacts << contact2
       
-      visit admin_school_campus_path(@school, @school.campuses.first)
+      visit gaku.admin_school_campus_path(@school, @school.campuses.first)
 
       @school.campuses.first.contacts.first.is_primary? == true
       @school.campuses.first.contacts.second.is_primary? == false
@@ -85,7 +85,7 @@ describe 'Admin School Campus Contact' do
     end
 
     it "deletes" do
-      visit admin_school_campus_path(@school, @school.campuses.first)
+      visit gaku.admin_school_campus_path(@school, @school.campuses.first)
 
       within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content(@contact.data)

@@ -10,7 +10,7 @@ describe 'Admin Schools' do
 
   context 'new', :js => true do
     before do 
-      visit admin_schools_path
+      visit gaku.admin_schools_path
       click new_link
       wait_until_visible submit
     end
@@ -36,7 +36,7 @@ describe 'Admin Schools' do
   context 'existing', :js => true do 
     before do
       @school = create(:school, :name => 'Varna Technical University') 
-      visit admin_schools_path
+      visit gaku.admin_schools_path
     end
 
     context 'edit' do 

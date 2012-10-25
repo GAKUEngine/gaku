@@ -6,7 +6,7 @@ describe 'CourseGroup Courses' do
   before do
     @course_group = create(:course_group, :name => "math 2012 courses")
     @course = create(:course, :code => 'Math2012')
-    visit course_group_path(@course_group)
+    visit gaku.course_group_path(@course_group)
   end
 
   it 'should add and show course to a course group', :js => true do
@@ -51,7 +51,7 @@ describe 'CourseGroup Courses' do
   context 'Course group with added course' do
     before do
       @course_group.courses << @course
-      visit course_group_path(@course_group)
+      visit gaku.course_group_path(@course_group)
     end
 
     it 'should not add a course if it is already added', :js => true do  

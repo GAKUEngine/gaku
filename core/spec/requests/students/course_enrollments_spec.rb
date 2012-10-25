@@ -10,7 +10,7 @@ describe 'Student CourseEnrollments' do
   before do
     @student = create(:student)
     @course = create(:course, :code => 'fall2050')
-    visit student_path(@student) 
+    visit gaku.student_path(@student) 
   end
 
   context 'new', :js => true do 
@@ -40,7 +40,7 @@ describe 'Student CourseEnrollments' do
 
   it "deletes", :js => true do
     @student.courses << @course
-    visit student_path(@student) 
+    visit gaku.student_path(@student) 
 
     click tab_link
 

@@ -8,7 +8,7 @@ describe 'CourseGroups' do
   stub_authorization!
 
   before do
-    visit course_groups_path
+    visit gaku.course_groups_path
   end
 
   context 'new' do 
@@ -55,7 +55,7 @@ describe 'CourseGroups' do
   context 'existing course group' do
     before do 
       @course_group = create(:course_group, :name => '2013Courses')
-      visit course_groups_path
+      visit gaku.course_groups_path
     end
 
     it 'should edit course group from index view', :js => true do 
@@ -85,7 +85,7 @@ describe 'CourseGroups' do
 
     it 'should edit course group from show view', :js => true do #TODO to be implemented
       CourseGroup.count.should eq 1
-      visit course_group_path(@course_group)
+      visit gaku.course_group_path(@course_group)
       find(".edit-link").click
 
       wait_until { find('#edit-course-group-modal').visible? }
@@ -102,7 +102,7 @@ describe 'CourseGroups' do
 
     it 'should delete the course group', :js => true do 
       CourseGroup.count.should eq 1
-      visit course_group_path(@course_group)
+      visit gaku.course_group_path(@course_group)
       wait_until { page.should have_content('Add Course') } 
       click_on "delete-course-group-link"
       within(".delete-modal") { click_on "Delete" }
@@ -114,7 +114,7 @@ describe 'CourseGroups' do
     end
 
     it 'should return to class_groups index when back selected' do 
-      visit course_group_path(@course_group)
+      visit gaku.course_group_path(@course_group)
       click_on('Back')
       page.should have_content ('Course Groups List')
     end

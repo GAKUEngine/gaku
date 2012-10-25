@@ -14,7 +14,7 @@ describe "CourseExams"  do
   end
 
   it "should show grading link", :js => true do
-    visit course_path(@course)
+    visit gaku.course_path(@course)
 
     click_link 'Exams'
     @course.students.size.should eql(1) 
@@ -24,7 +24,7 @@ describe "CourseExams"  do
   end
 
   it "should show all grading link", :js => true do
-    visit course_path(@course)
+    visit gaku.course_path(@course)
 
     click_link 'Exams'
     @course.students.size.should eql(1) 

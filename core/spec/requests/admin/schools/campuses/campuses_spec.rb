@@ -10,7 +10,7 @@ describe 'Admin School Campuses' do
 
   before do 
     @school = create(:school, :name => 'Nagoya University')
-    visit admin_school_path(@school)
+    visit gaku.admin_school_path(@school)
   end
 
   context 'new', :js => true do

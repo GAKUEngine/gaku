@@ -15,7 +15,7 @@ describe "CourseEnrollment"  do
      
     it "should enroll and show student", :js => true do
       @student = create(:student, :name => "John", :surname => "Doe")
-      visit course_path(@course)
+      visit gaku.course_path(@course)
       tr_count = page.all('table#course-students-index tr').size
       @course.students.size.should eql(0)
 
@@ -44,7 +44,7 @@ describe "CourseEnrollment"  do
     it "should enroll student only once for a course", :js => true  do
       @student = create(:student, :id => "123", :name => "Toni", :surname => "Rtoe")
       create(:course_enrollment, :student_id => "123", :course_id => @course.id)
-      visit course_path(@course)
+      visit gaku.course_path(@course)
       page.should have_content("Toni")
       @course.students.size.should eql(1)
 
@@ -56,7 +56,7 @@ describe "CourseEnrollment"  do
     end
 
     it 'should cancel enrolling a student', :js => true do 
-      visit course_path(@course)
+      visit gaku.course_path(@course)
       click_link 'new-course-student-link'
       wait_until { page.find('#student-modal').visible? }
 

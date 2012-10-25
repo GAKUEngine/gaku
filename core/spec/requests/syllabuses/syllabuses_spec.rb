@@ -15,7 +15,7 @@ describe 'Syllabus' do
 
   before do
     @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
-    visit syllabuses_path
+    visit gaku.syllabuses_path
   end
 
   context "list and show syllabuses" do
@@ -89,7 +89,7 @@ describe 'Syllabus' do
       end
 
       it 'edits a syllabus from show view' do 
-        visit syllabus_path(@syllabus)
+        visit gaku.syllabus_path(@syllabus)
         click edit_link
         wait_until_visible modal 
 

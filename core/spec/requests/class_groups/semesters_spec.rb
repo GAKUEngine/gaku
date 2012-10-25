@@ -11,7 +11,7 @@ describe 'ClassGroup Semesters' do
   before do
     @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
     @semester = create(:semester, :starting => "2012-10-21", :ending => "2012-11-21")
-    visit class_group_path(@class_group)
+    visit gaku.class_group_path(@class_group)
     click tab_link
   end
 
@@ -62,7 +62,7 @@ describe 'ClassGroup Semesters' do
   context 'existing', :js => true do
     before do
       @class_group.semesters << @semester
-      visit class_group_path(@class_group)
+      visit gaku.class_group_path(@class_group)
       click tab_link
       within(count_div) { page.should have_content '1' }
       within(tab_link) { page.should have_content 'Semesters(1)' }
@@ -113,7 +113,7 @@ describe 'ClassGroup Semesters' do
         before do
           @semester2 = create(:semester, :starting => "2013-01-21", :ending => "2013-06-21")
           @class_group.semesters << @semester2
-          visit class_group_path(@class_group)
+          visit gaku.class_group_path(@class_group)
           click tab_link 
           within(count_div) { page.should have_content '2' }
           within(tab_link) { page.should have_content 'Semesters(2)' }

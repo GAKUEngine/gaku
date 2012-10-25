@@ -13,7 +13,7 @@ describe 'Students' do
       @student  = create(:student, :name => 'John', :surname => 'Doe')
       @student2 = create(:student, :name => 'Susumu', :surname => 'Yokota')
       @student3 = create(:student, :name => 'Johny', :surname => 'Bravo')
-      visit students_path
+      visit gaku.students_path
     end
 
     it "lists" do
@@ -68,7 +68,7 @@ describe 'Students' do
 
     context 'edit from show view', :js => true do 
       before do
-        visit student_path(@student)        
+        visit gaku.student_path(@student)        
         click edit_link
         wait_until_visible modal 
       end
@@ -95,7 +95,7 @@ describe 'Students' do
 
     context 'edit from index view', :js => true do
       before do
-        visit students_path        
+        visit gaku.students_path        
         click edit_link
         wait_until_visible modal 
       end
@@ -120,7 +120,7 @@ describe 'Students' do
     end
     
     it 'deletes', :js => true do
-      visit student_path(@student2)
+      visit gaku.student_path(@student2)
       student_count = Student.count
       page.should have_content "#{@student2.name}"
       
@@ -138,7 +138,7 @@ describe 'Students' do
 
     it 'enrolls to class', :js => true do 
       create(:class_group, :name => 'Biology')
-      visit student_path(@student)
+      visit gaku.student_path(@student)
       
       expect do 
         click_on 'enroll-student-link'
@@ -158,7 +158,7 @@ describe 'Students' do
         page.should have_content '77'
       end
 
-      visit student_path(@student)
+      visit gaku.student_path(@student)
       within('td#student-class-group-enrollment') do 
         page.should have_content 'Biology'
         page.should have_content '77'
@@ -169,7 +169,7 @@ describe 'Students' do
 
   context "new", :js => true do 
     before do 
-      visit students_path
+      visit gaku.students_path
       click new_link
       wait_until_visible submit
     end

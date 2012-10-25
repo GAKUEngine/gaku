@@ -10,7 +10,7 @@ describe 'Admin CommuteMethodTypes' do
 
   context 'new', :js => true do
   	before do 
-  	  visit admin_commute_method_types_path
+  	  visit gaku.admin_commute_method_types_path
       click new_link
       wait_until_visible submit
     end
@@ -35,7 +35,7 @@ describe 'Admin CommuteMethodTypes' do
   context 'existing' do 
     before do
       @commute_method_type = create(:commute_method_type, :name => 'metro') 
-      visit admin_commute_method_types_path
+      visit gaku.admin_commute_method_types_path
     end
 
     context 'edit', :js => true do 

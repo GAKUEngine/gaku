@@ -10,7 +10,7 @@ describe "CourseEnrollment", :js => true  do
 
   before do
     @course = create(:course)
-    visit course_path(@course)
+    visit gaku.course_path(@course)
   end
 
   it 'errors if no class_group is selected' do
@@ -24,7 +24,7 @@ describe "CourseEnrollment", :js => true  do
 
   it 'errors if selected class group is empty' do
     class_group = create(:class_group, :name => "Math")
-    visit course_path(@course)
+    visit gaku.course_path(@course)
 
     click new_link
     
@@ -52,7 +52,7 @@ describe "CourseEnrollment", :js => true  do
       @student1 = create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
       @student2 = create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
 
-      visit course_path(@course)
+      visit gaku.course_path(@course)
     end
 
     it "enrolls a class group", :js => true do 
@@ -83,7 +83,7 @@ describe "CourseEnrollment", :js => true  do
 
       @course.students<<@student1
       @course.students<<@student2
-      visit course_path(@course)
+      visit gaku.course_path(@course)
 
       click new_link
       

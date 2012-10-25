@@ -15,7 +15,7 @@ describe 'Student Contacts' do
 
   context 'new', :js => true do 
     before do 
-      visit student_path(@student) 
+      visit gaku.student_path(@student) 
       click new_link
       wait_until_visible submit
     end
@@ -49,7 +49,7 @@ describe 'Student Contacts' do
 
     context 'edit', :js => true do 
       before do 
-        visit student_path(@student)
+        visit gaku.student_path(@student)
         within(table) { click edit_link }
         wait_until_visible modal
       end
@@ -73,7 +73,7 @@ describe 'Student Contacts' do
       contact2 = create(:contact, :data => 'gaku2@example.com', :contact_type => @contact_type)
       @student.contacts << contact2
       
-      visit student_path(@student) 
+      visit gaku.student_path(@student) 
      
       @student.contacts.first.is_primary? == true
       @student.contacts.second.is_primary? == false
@@ -86,7 +86,7 @@ describe 'Student Contacts' do
     end
 
     it "deletes", :js => true do
-      visit student_path(@student)
+      visit gaku.student_path(@student)
 
       within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content @contact.data

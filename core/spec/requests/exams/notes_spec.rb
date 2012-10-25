@@ -10,7 +10,7 @@ describe 'Exam Notes' do
   
   before do
     @exam = create(:exam)
-    visit exam_path(@exam) 
+    visit gaku.exam_path(@exam) 
   end
 
   context 'new', :js => true do
@@ -49,7 +49,7 @@ describe 'Exam Notes' do
   context "existing", :js => true do 
     before do 
       @note = create(:note, :notable => @exam)
-      visit exam_path(@exam)
+      visit gaku.exam_path(@exam)
     end
 
     context 'edit' do 

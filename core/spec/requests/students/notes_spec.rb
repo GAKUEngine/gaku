@@ -10,7 +10,7 @@ describe 'Student Notes' do
   
   before do
     @student = create(:student)
-    visit student_path(@student) 
+    visit gaku.student_path(@student) 
   end
 
   context 'new', :js => true do
@@ -49,7 +49,7 @@ describe 'Student Notes' do
   context "existing", :js => true do 
     before do 
       @note = create(:note, :notable => @student)
-      visit student_path(@student)
+      visit gaku.student_path(@student)
     end
 
     context 'edit' do 

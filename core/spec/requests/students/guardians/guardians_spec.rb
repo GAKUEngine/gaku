@@ -13,7 +13,7 @@ describe 'Student Guardians' do
 
   before do
     @student = create(:student)
-    visit student_path(@student)
+    visit gaku.student_path(@student)
   end
 
   context 'new', :js => true do 
@@ -60,7 +60,7 @@ describe 'Student Guardians' do
       @student.guardians << @guardian
       @student.reload
 
-      visit student_path(@student) 
+      visit gaku.student_path(@student) 
       click tab_link
       wait_until { page.has_content? 'Guardians list' } 
     end

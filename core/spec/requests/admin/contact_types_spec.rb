@@ -35,7 +35,7 @@ describe 'Admin ContactTypes' do
   context 'existing' do 
     before do
       @contact_type = create(:contact_type, :name => 'mobile') 
-      visit admin_contact_types_path
+      visit gaku.admin_contact_types_path
     end
 
     context 'edit', :js => true do 

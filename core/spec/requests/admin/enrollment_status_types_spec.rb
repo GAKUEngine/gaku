@@ -10,7 +10,7 @@ describe 'Admin EnrollmentStatusTypes' do
 
   context 'new', :js => true do
   	before do 
-  	  visit admin_enrollment_status_types_path
+  	  visit gaku.admin_enrollment_status_types_path
       click new_link
       wait_until_visible submit
     end
@@ -35,7 +35,7 @@ describe 'Admin EnrollmentStatusTypes' do
   context 'existing' do 
     before do
       @enrollment_status_type = create(:enrollment_status_type, :name => 'Admitted') 
-      visit admin_enrollment_status_types_path
+      visit gaku.admin_enrollment_status_types_path
     end
     
     context 'edit', :js => true do 

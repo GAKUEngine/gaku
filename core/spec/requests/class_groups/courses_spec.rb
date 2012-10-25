@@ -11,7 +11,7 @@ describe 'ClassGroup Courses' do
   before do
     @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
     @course = create(:course, :code => 'Math2012')
-    visit class_group_path(@class_group)
+    visit gaku.class_group_path(@class_group)
     click tab_link
   end
 
@@ -47,7 +47,7 @@ describe 'ClassGroup Courses' do
   context 'existing', :js => true do
     before do
       @class_group.courses << @course
-      visit class_group_path(@class_group)
+      visit gaku.class_group_path(@class_group)
       click tab_link
 
       within(count_div) { page.should have_content "1" }

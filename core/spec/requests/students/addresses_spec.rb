@@ -68,7 +68,7 @@ describe 'Address' do
     before(:each) do 
       @address = create(:address)
       create(:student_address, :student => @student, :address => @address)
-      visit student_path(@student)
+      visit gaku.student_path(@student)
       click tab_link
       wait_until { page.has_content?('Addresses list') } 
     end
@@ -131,7 +131,7 @@ describe 'Address' do
       @student.student_addresses.first.is_primary? == true
       @student.student_addresses.second.is_primary? == false
 
-      visit student_path(@student) 
+      visit gaku.student_path(@student) 
       click tab_link
       
       within("#{table} tr#address-2") { click_link 'set_primary_link' }

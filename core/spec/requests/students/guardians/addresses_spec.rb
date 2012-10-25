@@ -17,7 +17,7 @@ describe 'Student Guardian Addresses' do
     @student.reload
     @country = create(:country, :name => "Japan")
 
-    visit student_path(@student) 
+    visit gaku.student_path(@student) 
     click tab_link
     wait_until { page.has_content? 'Guardians list' } 
   end
@@ -56,7 +56,7 @@ describe 'Student Guardian Addresses' do
     before do 
       address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
       @student.guardians.first.addresses <<  address1
-      visit student_guardian_path(@student, @student.guardians.first)
+      visit gaku.student_guardian_path(@student, @student.guardians.first)
     end
 
     context 'edit', :js => true do 
@@ -99,7 +99,7 @@ describe 'Student Guardian Addresses' do
       address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
       @student.guardians.first.addresses <<  address2
 
-      visit student_guardian_path(@student, @student.guardians.first)
+      visit gaku.student_guardian_path(@student, @student.guardians.first)
 
       @student.guardians.first.guardian_addresses.first.is_primary? == true
       @student.guardians.first.guardian_addresses.second.is_primary? == false

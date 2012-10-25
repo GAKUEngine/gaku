@@ -10,7 +10,7 @@ describe 'ClassGroup Notes' do
   
   before do
     @class_group = create(:class_group)
-    visit class_group_path(@class_group) 
+    visit gaku.class_group_path(@class_group) 
   end
 
   context 'new', :js => true do
@@ -49,7 +49,7 @@ describe 'ClassGroup Notes' do
   context "existing", :js => true do 
     before do 
       @note = create(:note, :notable => @class_group)
-      visit class_group_path(@class_group)
+      visit gaku.class_group_path(@class_group)
     end
 
     context 'edit' do 

@@ -10,7 +10,7 @@ describe 'ClassGroups' do
 
   context 'new', :js => true do
     before do
-      visit class_groups_path 
+      visit gaku.class_groups_path 
       click new_link
       wait_until_visible submit
     end
@@ -45,7 +45,7 @@ describe 'ClassGroups' do
   context 'existing' do
     before do 
       @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-      visit class_groups_path
+      visit gaku.class_groups_path
     end
 
     context 'edit', :js => true do

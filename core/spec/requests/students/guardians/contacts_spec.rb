@@ -17,7 +17,7 @@ describe 'Student Guardian Contacts' do
     @student.reload
     @contact_type = create(:contact_type, :name => 'mobile')
 
-    visit student_path(@student) 
+    visit gaku.student_path(@student) 
     click tab_link
     wait_until { page.has_content? 'Guardians list' } 
   end

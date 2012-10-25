@@ -14,7 +14,7 @@ describe 'Courses' do
   
   context '#new', :js => true do 
     before do 
-      visit courses_path
+      visit gaku.courses_path
       click new_link
       wait_until_visible submit
     end
@@ -48,7 +48,7 @@ describe 'Courses' do
     before do
       @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
       @course = create(:course, :syllabus => @syllabus) 
-      visit courses_path
+      visit gaku.courses_path
       within(count_div) { page.should have_content('Courses list(1)') }
     end
 
