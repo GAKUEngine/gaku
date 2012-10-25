@@ -11,6 +11,10 @@ The kanji for "learning" is 学[gaku]. So literally GAKU Engine alone means "Lea
 
 For the English we also chose to treat GAKU as an acronym, which can be seen above. You know, because confusing acronyms are radical to the max.
 
+License
+-------
+This software is dual licensed under the GNU GPL version 3 and the AGPL version 3. Separate licenses are available upon consultation. Please contact info@genshin.org for details.
+
 What does it do?
 ----------------
 It allows for full student management, grading etc. It's bascally what all student grading tools are but it's unique in that:
@@ -27,11 +31,8 @@ Notes
 1. Schools can use it for free - though ideally we want schools to hire developers on maintenance contracts so the software can be improved and schools don't need to worry about the system being poorly maintained by untrained internal staff.
 2. Part of the reason GAKU Engine was created was to eliminate dependence on commercial licenses from certain companies.
 	- These licenses are expensive, and many school management systems are built on and rely on them. 
-	- The problem is some companies have created organizations (specifically the BSA) that actively go after schools for license infringement.
-	- Schools are particularly easy targets as they often have a lot of computers and very rarely have license management schemes. 
-	- Don't take this lightly - a school we spoke to was strong armed into paying the equivilent of 6 teachers simply because they hadn't kept complete records.
-	- The school we spoke to appears to have made it off lightly. Other accounts from schools reveal much worse. Reguardless of weather or not you choose to use GAKU Engine we recommend you take these factors into consideration and avoid all vendors associated with organizations like the BSA.
-	- Far more than that just your back end systems we recommend switching to OSS software on your workstations, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc.
+	- The problem is some companies have created organizations that actively go after schools for license infringement.
+	- Though unrelated to GAKU Engine core, we recommend switching to OSS software on school workstations as well, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc. This will reduce cost and eliminate the risk of having bad licenses.
 
 Development Status
 ------------------
