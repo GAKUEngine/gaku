@@ -1,4 +1,0 @@
-module Admin::PresetsHelper
-
-
-end

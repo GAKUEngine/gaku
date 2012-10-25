@@ -1,0 +1,174 @@
+Gaku::Core::Engine.routes.draw do        
+
+  #devise_for :installs
+  #devise_for :users
+
+  resources :admissions
+
+  resources :class_groups do
+    resources :semesters, :controller => 'class_groups/semesters'
+    resources :class_group_course_enrollments, :controller => 'class_groups/courses'
+    resources :notes
+    resources :students, :controller => 'class_groups/students' do
+      collection do
+        post :enroll_student
+        get :filtered_students
+        get :autocomplete_filtered_students
+      end
+    end
+    member do
+      get :student_chooser
+    end
+  end
+
+  resources :courses do
+    resources :notes
+    resources :enrollments, :controller => 'courses/enrollments' do
+      post :enroll_class_group, :on => :member
+      post :enroll_student, :on => :collection
+    end
+
+    resources :exams do
+      get :export_xls, :on => :collection
+
+      resources :exam_portion_scores
+      get :grading, :on => :member
+      get :grading, :on => :collection
+      put :update_score, :on => :member
+      get :calculations, :on => :member
+    end
+    member do
+      get :student_chooser
+    end
+  end
+
+  resources :class_group_enrollments do
+    collection do
+      get :filtered_students
+      get :autocomplete_filtered_students
+      post :enroll_students
+    end
+
+  end
+
+  resources :course_enrollments do
+    collection do
+      post :enroll_students
+    end
+  end
+
+  resources :exam_portion_scores
+
+  resources :syllabuses do
+    resources :assignments, :controller => 'syllabuses/assignments'
+    resources :exams, :controller => 'syllabuses/exams'
+    resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
+    resources :notes
+  end
+
+  resources :students do
+    resources :commute_methods, :controller => 'students/commute_methods'
+    resources :guardians, :controller => 'students/guardians' do
+      resources :contacts, :controller => 'students/guardians/contacts' do
+        post :create_modal, :on => :collection
+        post :make_primary, :on => :member
+      end
+
+      resources :addresses, :controller => 'students/guardians/addresses' do
+        post :make_primary, :on => :member
+      end
+
+      get :new_contact, :on => :member
+    end
+
+    resources :addresses, :controller => 'students/addresses' do
+      post :make_primary, :on => :member
+    end
+    resources :contacts, :controller => 'students/contacts' do
+      post :make_primary, :on => :member
+    end
+
+    resources :notes#, :controller => 'students/notes'
+    resources :course_enrollments, :controller => 'students/course_enrollments'
+    resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
+    resources :exams
+    resources :courses
+
+
+    collection do
+      resources :importer, :controller => "students/importer" do
+        collection do
+          get :get_csv_template
+          get :get_sheet_template
+          post :import_student_list
+        end
+      end
+      get :autocomplete_search
+      get :load_autocomplete_data
+    end
+
+  end
+
+  resources :exams do
+    put :create_exam_portion, :on => :member
+
+    resources :notes
+    resources :exam_scores
+    resources :exam_portions do
+      resources :attachments, :only => [:create]
+    end
+  end
+
+  resources :states
+
+  resources :course_groups do
+    resources :course_group_enrollments, :controller => 'course_groups/course_group_enrollments'
+    member do
+      delete 'soft_delete'
+      get 'recovery'
+    end
+  end
+
+  root :to => 'home#index'
+
+
+  namespace :admin do
+    resources :commute_method_types
+    resources :contact_types
+    resources :enrollment_status_types
+    resources :schools do
+      resources :campuses, :controller => 'schools/campuses' do
+        resources :contacts, :controller => 'schools/campuses/contacts' do
+          post :make_primary, :on => :member
+        end
+        resources :addresses, :controller => 'schools/campuses/addresses'
+      end
+    end
+    resources :presets do
+      get :students, :on => :collection
+      get :locale, :on => :collection
+      put :update_presets, :on => :collection
+    end
+
+    resources :disposals do
+      collection do
+        get :exams
+        get :course_groups
+        get :attachments
+      end
+    end
+  end
+
+  resources :attachments do
+    member do
+      get 'download'
+      delete 'soft_delete'
+      get 'recovery'
+    end
+  end
+
+  resource :grading_methods do
+    get 'index'
+  end
+
+end
