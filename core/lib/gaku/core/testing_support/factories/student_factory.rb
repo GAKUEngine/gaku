@@ -1,5 +1,5 @@
-FactoryGirl.define do
-  factory :student do
+FactoryGirl.define  do
+  factory :student, :class => Gaku::Student do
     name { Faker::Name.first_name }
     surname { Faker::Name.last_name }
     name_reading { Faker::Name.first_name }

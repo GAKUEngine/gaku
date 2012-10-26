@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :school do
+  factory :school, :class => Gaku::School do
     name "Nagoya City University"
     slogan "Draw the individual potencial"
     description "Nagoya University description"
