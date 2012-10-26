@@ -18,7 +18,7 @@
 .row-fluid
   .span6
     = form.label :class_group_id, t("admissions.candidates.junior_high_school"), :class => "control-label"
-    = form.collection_select :class_group_ids, School.all, :id, :name, {}, {:class => 'span12'}
+    = form.text_field :surname, :class => "span12"
 .row-fluid
   .span3
     = form.label :surname, t("name")+" ("+t("surname")+")", :class => "control-label pull-left"
