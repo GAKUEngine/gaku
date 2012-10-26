@@ -11,7 +11,19 @@ PATH
     gaku (0.0.1)
       gaku_core (= 0.0.1)
     gaku_core (0.0.1)
+      app_config
+      audited-activerecord (~> 3.0)
+      cancan
+      devise
+      eco
+      highline (= 1.6.11)
+      inherited_resources
+      jquery-rails (~> 2.0)
+      paperclip
       rails (~> 3.2.8)
+      rails-i18n
+      ransack
+      slim-rails
 
 GEM
   remote: https://rubygems.org/
@@ -54,7 +66,7 @@ GEM
       activerecord (~> 3.0)
       audited (= 3.0.0)
     awesome_print (1.1.0)
-    backbone-on-rails (0.9.2.2)
+    backbone-on-rails (0.9.2.3)
       eco
       ejs
       jquery-rails
@@ -135,7 +147,7 @@ GEM
       spork (>= 0.8.4)
       sys-proctable
     has_scope (0.5.1)
-    highline (1.6.15)
+    highline (1.6.11)
     hike (1.2.1)
     hirb (0.7.0)
     httpauth (0.2.0)
@@ -345,16 +357,12 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  app_config
-  audited-activerecord (~> 3.0)
   awesome_print
   backbone-on-rails
-  cancan
   capybara
   chosen-rails
   coffee-rails (~> 3.2.1)
   database_cleaner
-  devise (~> 2.1)
   devise-i18n
   execjs
   factory_girl_rails (~> 3.2.0)
@@ -367,19 +375,14 @@ DEPENDENCIES
   highline
   hirb
   i18n-js!
-  inherited_resources
   jquery-rails
   jquery-ui-rails
   kendoui-rails
   launchy
   less
   mysql2
-  paperclip
-  rails (~> 3.2.8)
   rails-erd
   rails-footnotes (>= 3.7.5.rc4)
-  rails-i18n
-  ransack
   rcov
   roo
   rspec-rails
@@ -390,7 +393,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simplecov
-  slim-rails
   spork (~> 1.0rc)
   spreadsheet
   sqlite3
