@@ -21,7 +21,7 @@ describe 'Admin ContactTypes' do
         fill_in 'contact_type_name', :with => 'home phone'
         click submit
         wait_until_invisible form
-      end.to change(ContactType, :count).by 1
+      end.to change(Gaku::ContactType, :count).by 1
 
       page.should have_content 'home phone'
       within(count_div) { page.should have_content 'Contact Types list(1)' }
@@ -66,7 +66,7 @@ describe 'Admin ContactTypes' do
 
       expect do 
         ensure_delete_is_working
-      end.to change(ContactType, :count).by -1
+      end.to change(Gaku::ContactType, :count).by -1
 
       within(count_div) { page.should_not have_content 'Contact Types list(1)' }
       page.should_not have_content @contact_type.name
