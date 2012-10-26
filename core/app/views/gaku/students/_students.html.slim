@@ -15,6 +15,6 @@ table#students-index.index.table.table-striped.table-bordered.table-condensed
         th.btn-info style="width:62px" = t("manage")
 
   tbody
-    =render :partial => 'students/student', :collection => @students, :as => 'student'
+    =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
 = javascript_include_tag 'students/selected_students'

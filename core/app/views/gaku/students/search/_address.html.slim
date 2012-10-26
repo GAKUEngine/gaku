@@ -4,7 +4,7 @@
 	  = f.text_field :addresses_title_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "title") }
 	.span3
 		= f.label :addresses_country_id_eq, t('addresses.country')
-		= f.select :addresses_country_id_eq, Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
+		= f.select :addresses_country_id_eq, Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
 	.span3
 	  = f.label :addresses_zipcode_cont, t('addresses.zipcode')
 	  = f.text_field :addresses_zipcode_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => 'address', :column => "zipcode") }
