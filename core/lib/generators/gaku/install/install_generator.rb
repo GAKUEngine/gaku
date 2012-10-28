@@ -47,7 +47,7 @@ module Gaku
         empty_directory "app/assets/#{path}"
       end
 
-      #template "app/assets/javascripts/all.js"
+      template "app/assets/javascripts/all.js"
       template "app/assets/stylesheets/all.css"
     end
 

@@ -80,7 +80,7 @@ describe 'ClassGroups' do
       end
 
       it 'edits from show view' do 
-        visit class_group_path(@class_group)
+        visit gaku.class_group_path(@class_group)
         click edit_link
         wait_until_visible modal 
 
@@ -111,7 +111,7 @@ describe 'ClassGroups' do
 
       expect do
         ensure_delete_is_working
-      end.to change(ClassGroup,:count).by -1 
+      end.to change(Gaku::ClassGroup,:count).by -1 
     
       page.should_not have_content @class_group.name
       within(count_div) { page.should_not have_content 'Class Groups list(1)' }
