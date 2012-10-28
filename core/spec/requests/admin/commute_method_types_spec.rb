@@ -20,7 +20,7 @@ describe 'Admin CommuteMethodTypes' do
         fill_in 'commute_method_type_name', :with => 'car'
         click submit
         wait_until_invisible form
-      end.to change(CommuteMethodType, :count).by 1
+      end.to change(Gaku::CommuteMethodType, :count).by 1
 
       page.should have_content 'car'
       within(count_div) { page.should have_content 'Commute Method Types list(1)' }
@@ -65,7 +65,7 @@ describe 'Admin CommuteMethodTypes' do
 
       expect do
         ensure_delete_is_working 
-      end.to change(CommuteMethodType, :count).by -1
+      end.to change(Gaku::CommuteMethodType, :count).by -1
         
       within(count_div) { page.should_not have_content 'Commute Method Types list(1)' }
       page.should_not have_content @commute_method_type.name

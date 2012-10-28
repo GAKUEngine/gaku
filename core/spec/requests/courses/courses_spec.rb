@@ -27,7 +27,7 @@ describe 'Courses' do
         click submit
         wait_until_invisible form
         within(table) { page.should have_content(@syllabus.name) }
-      end.to change(Course, :count).by 1
+      end.to change(Gaku::Course, :count).by 1
 
       within(count_div) { page.should have_content('Courses list(1)') }
       wait_until_invisible '#new-course'     
@@ -109,7 +109,7 @@ describe 'Courses' do
 
       expect do     
         ensure_delete_is_working
-      end.to change(Course, :count).by -1
+      end.to change(Gaku::Course, :count).by -1
       
       within(count_div) { page.should_not have_content('Courses list(1)') }
       within(table) { page.should_not have_content(@course.code) }

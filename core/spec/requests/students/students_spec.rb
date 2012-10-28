@@ -121,7 +121,7 @@ describe 'Students' do
     
     it 'deletes', :js => true do
       visit gaku.student_path(@student2)
-      student_count = Student.count
+      student_count = Gaku::Student.count
       page.should have_content "#{@student2.name}"
       
       expect do 
@@ -147,7 +147,7 @@ describe 'Students' do
         select 'Biology', :from => 'class_group_enrollment_class_group_id'
         fill_in 'class_group_enrollment_seat_number', :with => '77'
         click_on "Create Class Enrollment"
-      end.to change(ClassGroupEnrollment, :count).by 1
+      end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 
       click_on 'Cancel'
       wait_until_invisible modal
@@ -180,7 +180,7 @@ describe 'Students' do
         fill_in "student_surname", :with => "Doe"
         click_button "submit-student-button"
         wait_until_invisible form
-      end.to change(Student, :count).by 1
+      end.to change(Gaku::Student, :count).by 1
 
       page.should have_content "John"
       within(count_div) { page.should have_content 'Students list(1)' }

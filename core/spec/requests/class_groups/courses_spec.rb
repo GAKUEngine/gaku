@@ -26,7 +26,7 @@ describe 'ClassGroup Courses' do
         select "#{@course.code}", :from => 'class_group_course_enrollment_course_id'
         click submit
         wait_until_invisible form
-      end.to change(ClassGroupCourseEnrollment, :count).by 1
+      end.to change(Gaku::ClassGroupCourseEnrollment, :count).by 1
     
       within(table) { page.should have_content "#{@course.code}" }
       within(count_div) { page.should have_content "Courses list(1)" }
@@ -69,7 +69,7 @@ describe 'ClassGroup Courses' do
 
       expect do
         ensure_delete_is_working
-      end.to change(ClassGroupCourseEnrollment, :count).by -1
+      end.to change(Gaku::ClassGroupCourseEnrollment, :count).by -1
   
       within(table) { page.should_not have_content "#{@course.code}" }
       within(count_div) { page.should_not have_content "Courses list(1)" }
