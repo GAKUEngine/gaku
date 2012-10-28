@@ -40,18 +40,6 @@ body {
   padding: 10px;
 }
 
-.mt-xs { margin-top: 5px }
-.mt-s { margin-top: 10px }
-.mt-m { margin-top: 15px }
-.mt-l { margin-top: 20px }
-
-.mr-xs { margin-right: 5px }
-.mr-s { margin-right: 10px }
-.mr-m { margin-right: 15px }
-.mr-l { margin-right: 20px }
-
-.mb-0 { margin-bottom: 0px }
-
 .h4-vm {
   height:28px;
   line-height:28px;
@@ -158,9 +146,21 @@ form {
   .well {
     background-color: white;
     margin-bottom: 0px;
-    .well{
+    .well {
       background-color: whiteSmoke;
       margin-bottom: 20px;
     }
   }
 }
+
+.mt-xs { margin-top: 5px }
+.mt-s { margin-top: 10px }
+.mt-m { margin-top: 15px }
+.mt-l { margin-top: 20px }
+
+.mr-xs { margin-right: 5px }
+.mr-s { margin-right: 10px }
+.mr-m { margin-right: 15px }
+.mr-l { margin-right: 20px }
+
+.mb-0 { margin-bottom: 0px }
