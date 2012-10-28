@@ -1,0 +1,10 @@
+<%- if @course.errors.any? %>
+
+<% else %>
+	$('#courses-index tbody').append('<%= render_js_partial("course", {:course => @course}) %>');
+	$('.courses-count').html('<%= print_count(@courses_count + 1, t("courses.list")) %>');
+
+	$('#new-course').slideToggle();
+	$('#new-course-link').show();
+	showNotice("<%= render_flash %>");
+<% end %>

@@ -1,0 +1,64 @@
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('syllabuses.show')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+        table.table.table-condensed.table-striped.table-bordered
+          thead
+            tr
+              th =t("syllabuses.code")
+              th =t("syllabuses.name")
+              th =t("syllabuses.credits")
+              th =t("syllabuses.description")
+          tbody
+            tr class="syllabus-#{@syllabus.id}"
+              = render 'shared/fields/syllabus_fields', :syllabus => @syllabus
+    .row-fluid
+      .span12.well
+        .row-fluid
+          #syllabus-exams
+            .row-fluid
+              .pull-left
+                h4.mt-xs.mb-0.exams-count 
+                  = print_count(@syllabus.exams.count, t("exams.list"))
+              .pull-right
+                = link_to ("<i class='icon-white icon-plus'></i> " + t('exams.new')).html_safe, '', :id => 'new-syllabus-exam-link', :class => "btn btn-primary mr-s", :remote => true
+
+                = link_to ("<i class='icon-white icon-plus'></i> " + t('syllabuses.add_existing_exam')).html_safe, '', :id => 'new-existing-exam-link', :class => "btn btn-primary", :remote => true
+            
+            .row-fluid
+              .span12
+                #new-existing-exam-errors
+                #new-existing-exam style='display:none;padding-top:10px'
+                  =render 'syllabuses/exams/select_form'
+
+                #new-syllabus-exam style='display:none;padding-top:10px'
+                  =render 'syllabuses/exams/form'
+            .row-fluid
+              .span12
+                hr
+            = render 'syllabuses/exams/exams'
+        .row-fluid
+          br/
+        /.row-fluid
+          #syllabus-assigmnents
+            = render 'syllabuses/assignments/assignments'
+          #new-syllabus-assignment
+            = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
+          #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
+            =render 'syllabuses/assignments/form'
+    .row-fluid
+      .span12.well
+        #syllabus-notes
+          = render :partial => 'notes/notes'
+    .row-fluid
+      .span12.well
+        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px", :remote => true
+        = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
+        .row-fluid

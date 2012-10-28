@@ -1,0 +1,4 @@
+- unless exam_syllabus.exam.nil? || exam_syllabus.exam.new_record? || !exam_syllabus.exam
+  tr id="exam-#{exam_syllabus.exam.id}"
+    =render 'syllabuses/exams/exam_fields', :exam_syllabus => exam_syllabus
+    
