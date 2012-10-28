@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LessonPlan do
+describe Gaku::LessonPlan do
 
   context "validations" do 
   	it { should have_valid_factory(:lesson_plan) }

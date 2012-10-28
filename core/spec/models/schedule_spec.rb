@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Schedule do
+describe Gaku::Schedule do
 
   context "validations" do 
   	it { should have_valid_factory(:schedule) }

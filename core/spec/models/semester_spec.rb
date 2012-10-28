@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Semester do
+describe Gaku::Semester do
 
   context "validations" do 
   	it { should have_valid_factory(:semester) }

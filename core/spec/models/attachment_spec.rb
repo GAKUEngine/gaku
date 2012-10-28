@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Attachment do
+describe Gaku::Attachment do
 
   context "validations" do 
   	pending { should have_valid_factory(:attachment) }

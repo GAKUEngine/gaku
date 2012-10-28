@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Guardian do
+describe Gaku::Guardian do
 
   context "validations" do 
-  	let(:guardian) { stub_model(Guardian) }
+  	let(:guardian) { stub_model(Gaku::Guardian) }
 
   	it { should have_valid_factory(:guardian) }
     it { should belong_to(:user) }

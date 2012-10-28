@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CourseEnrollment do
+describe Gaku::CourseEnrollment do
 
   context "validations" do 
     it { should have_valid_factory(:course_enrollment) }

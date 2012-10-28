@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Campus do
+describe Gaku::Campus do
 	context "validations" do
 		it { should have_valid_factory(:campus) }
 		it { should belong_to(:school) }

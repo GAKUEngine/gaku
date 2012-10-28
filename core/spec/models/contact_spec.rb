@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Contact do
+describe Gaku::Contact do
 
 	let(:student) { create(:student) }
 
@@ -42,7 +42,7 @@ describe Contact do
       contact2 = create(:contact, :student_id => student.id)
       contact2.make_primary_student
       # get again refreshed contact1 from database
-      contact1_db = Contact.find(contact1.id)
+      contact1_db = Gaku::Contact.find(contact1.id)
       contact1_db.should_not be_is_primary
     end
   end
