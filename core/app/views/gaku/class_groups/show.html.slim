@@ -16,7 +16,7 @@
             th =t("class_groups.homeroom")
         tbody
           tr class="class-group-#{@class_group.id}"
-            = render 'shared/fields/class_group_fields', :class_group => @class_group
+            = render 'gaku/shared/fields/class_group_fields', :class_group => @class_group
     .row-fluid.mt-l
       .span12.well
         .tabbable.tabs-right
@@ -34,26 +34,26 @@
 
             #class_group_enrollments.tab-pane.active
               .row-fluid#class_group_enrollments_list
-                =render 'class_groups/students/students'
+                =render 'gaku/class_groups/students/students'
               .row-fluid
                 div id='enrollment_form' style='display:none'
 
             #semesters.tab-pane
               .row-fluid
-                = render 'class_groups/semesters/semesters'
+                = render 'gaku/class_groups/semesters/semesters'
               .row-fluid
                 div id="semester_form" style="display:none"
                   
             #courses.tab-pane
               .row-fluid
-                = render 'class_groups/courses/courses'
+                = render 'gaku/class_groups/courses/courses'
               .row-fluid
                 div id="course_form" style="display:none"
     
     .row-fluid
       .span12.well
         #class-group-notes
-          = render :partial => 'notes/notes'
+          = render :partial => 'gaku/notes/notes'
           
     .row-fluid
       .span12.well

@@ -1,6 +1,6 @@
 showNotice("<%= render_flash %>");
 <%- if @semester.errors.any? %>
-  $('#class-group-semester-form-errors').html('<%= render_js_partial("shared/errors", {:target => @semester}) %>');
+  $('#class-group-semester-form-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>');
 <%- else %>
   $('#class-group-semester-form-errors').html('');
   $('#semester-modal').modal('hide');

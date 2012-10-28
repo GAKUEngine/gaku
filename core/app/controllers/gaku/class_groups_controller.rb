@@ -32,13 +32,6 @@ module Gaku
         format.js
       end
     end
-
-    def destroy
-      super do |format|
-        format.js { render }
-      end
-    end
-
     
     private
 

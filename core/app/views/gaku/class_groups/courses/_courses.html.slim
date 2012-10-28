@@ -1,6 +1,6 @@
 .row-fluid
   #new-class-group-course.hide
-    = render 'class_groups/courses/form'
+    = render 'form'
   .pull-left
     h4.h4-vm.class-group-courses-count 
       =print_count(@class_group.class_group_course_enrollments.count, t("courses.list"))
@@ -18,4 +18,4 @@
           th.btn-inverse =t 'course.code'
           th.btn-info style="width:61px" =t 'manage'
       tbody
-        =render :partial => 'class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
+        =render :partial => 'gaku/class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
