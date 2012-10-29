@@ -50,6 +50,7 @@ module Gaku
       
       def load_before_index
         @course = Course.new
+        @syllabuses = Syllabus.all
       end
 
   	  def load_before_show
