@@ -55,6 +55,7 @@ module Gaku
 
   	  def load_before_show
   		  @new_course_enrollment = CourseEnrollment.new
+        @class_groups = ClassGroup.all
         @notable = Course.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
   	  end

@@ -5,7 +5,7 @@
     .span12.well
     
       = f.label :class_group_id
-      = f.select :class_group_id, ClassGroup.all.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
+      = f.select :class_group_id, @class_groups.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
   .row-fluid
     .span12
       .span6

@@ -41,16 +41,16 @@
                   a#new-course-exam-link data-toggle="tab" href="#course-exams" =t("exams.plural")
               .tab-content
                 #course-enrollments.tab-pane.active
-                  = render :partial => "courses/enrollments/enrollments"
+                  = render :partial => "gaku/courses/enrollments/enrollments"
                 #course-assignments.tab-pane
-                  = render :partial => "courses/assignments/assignments"
+                  = render :partial => "gaku/courses/assignments/assignments"
                 #course-exams.tab-pane
-                  = render :partial => "courses/exams/exams"
+                  = render :partial => "gaku/courses/exams/exams"
 
     .row-fluid
       .span12.well
         #course-notes
-          = render :partial => 'notes/notes'
+          = render :partial => 'gaku/notes/notes'
 
     .row-fluid
       .span12.well
