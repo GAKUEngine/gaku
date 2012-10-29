@@ -34,6 +34,8 @@ module Gaku
         syllabus
         
         @exam = Exam.new
+        @exam_syllabus = ExamSyllabus.new
+        @exams = Exam.all
         @exam.exam_portions.build
         @syllabus.assignments.build
         @notable = @syllabus

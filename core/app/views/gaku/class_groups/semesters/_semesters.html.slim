@@ -2,7 +2,7 @@
   br/
   #new-class-group-semester-form-errors
   #new-class-group-semester.hide
-    = render 'form'
+    = render 'gaku/class_groups/semesters/form'
   .pull-left
     h4.h4-vm.class-group-semesters-count 
       =print_count(@class_group.semesters.count, t("semesters.list"))
