@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'gaku_core', version
+  s.add_dependency 'gaku_admission', version
 
 end
