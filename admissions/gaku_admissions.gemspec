@@ -4,7 +4,7 @@ version = File.read(File.expand_path("../../GAKU_ENGINE_VERSION", __FILE__)).str
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
-  s.name         = 'gaku_admission'
+  s.name         = 'gaku_admissions'
   s.version      = version
   s.summary      = 'Admission management for GAKU Engine'
   s.description  = ""

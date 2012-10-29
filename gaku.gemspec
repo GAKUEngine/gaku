@@ -4,7 +4,7 @@ version = File.read(File.expand_path("../GAKU_ENGINE_VERSION",__FILE__)).strip
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku'
-  s.version      = '0.0.1'
+  s.version      = version
   s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
   s.description  = "It allows for full student management, grading etc. It's bascally what all student grading tools are with some unique features"
   s.required_ruby_version = '>= 1.8.7'
@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'gaku_core', version
-  s.add_dependency 'gaku_admission', version
+  s.add_dependency 'gaku_admissions', version
 
 end

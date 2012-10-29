@@ -9,7 +9,7 @@ RSpec::Core::RakeTask.new
 
 task :default => :spec
 
-spec = eval(File.read('gaku_admission.gemspec'))
+spec = eval(File.read('gaku_admissions.gemspec'))
 
 Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
@@ -18,11 +18,11 @@ end
 desc 'Release to gemcutter'
 task :release do
   version = File.read(File.expand_path('../../GAKU_ENGINE_VERSION', __FILE__)).strip
-  cmd = 'cd pkg && gem push gaku_admission-#{version}.gem'; puts cmd; system cmd
+  cmd = 'cd pkg && gem push gaku_admissions-#{version}.gem'; puts cmd; system cmd
 end
 
 desc 'Generates a dummy app for testing'
 task :test_app do
-  ENV['LIB_NAME'] = 'gaku/admission'
+  ENV['LIB_NAME'] = 'gaku/admissions'
   Rake::Task['common:test_app'].invoke
 end

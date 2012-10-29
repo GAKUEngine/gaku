@@ -1,8 +1,8 @@
 module Gaku
-  module Admission
+  module Admissions
     class Engine < Rails::Engine
       isolate_namespace Gaku
-      engine_name 'gaku_admission'
+      engine_name 'gaku_admissions'
 
       def self.activate
         Dir.glob(File.join(File.dirname(__FILE__), "../../../app/**/*_decorator*.rb")) do |c|

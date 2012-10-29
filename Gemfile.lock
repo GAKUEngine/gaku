@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     gaku (0.0.1)
+      gaku_admissions (= 0.0.1)
+      gaku_core (= 0.0.1)
+    gaku_admissions (0.0.1)
       gaku_core (= 0.0.1)
     gaku_core (0.0.1)
       app_config
