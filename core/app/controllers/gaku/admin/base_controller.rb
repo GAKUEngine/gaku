@@ -2,9 +2,9 @@ module Gaku
   module Admin
     class BaseController < ApplicationController
 
-      #layout '/layouts/admin'
+      layout 'gaku/layouts/gaku'
 
-      before_filter :authorize_admin
+      # before_filter :authorize_admin
 
       protected
         def authorize_admin

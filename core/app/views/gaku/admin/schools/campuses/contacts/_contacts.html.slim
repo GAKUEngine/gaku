@@ -19,6 +19,6 @@
           th.btn-inverse =t('contacts.emergency')
           th.btn-info style='width:61px' =t 'manage'
       tbody
-        =render :partial => 'admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'
+        =render :partial => 'gaku/admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'
     br/ 
     #new-admin-school-campus-contact-form-errors
