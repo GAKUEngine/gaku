@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :address do
+  factory :address, :class => Gaku::Address do
     address1 '10 Lovely Street'
     address2 'Northwest'
     city   'Herndon'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Exam do
+describe Gaku::Exam do
 
   context "validations" do 
   	let(:exam) { create(:exam) }

@@ -1,6 +1,6 @@
 showNotice("<%= render_flash %>");
 <%- if @semester.errors.any? %>
-	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("shared/errors", {:target => @semester}) %>');
+	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>');
 <%- else %>
   $('#class-group-semesters-index tbody').append('<%= render_js_partial("semester", {:semester => @semester}) %>');
 	$('#new-class-group-semester').slideToggle();

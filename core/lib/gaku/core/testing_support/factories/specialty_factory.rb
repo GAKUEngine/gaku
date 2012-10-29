@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :specialty do
+  factory :specialty, :class => Gaku::Specialty do
     name "Biology Specialty"
     description "Biology Specialty Description"
     mayor_only 0

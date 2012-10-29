@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Attendance do
+describe Gaku::Attendance do
 
   context "validations" do 
   	it { should have_valid_factory(:attendance) }

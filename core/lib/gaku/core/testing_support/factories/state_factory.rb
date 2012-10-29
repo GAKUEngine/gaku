@@ -1,9 +1,9 @@
 FactoryGirl.define do
-  factory :state do
+  factory :state, :class => Gaku::State do
     name 'Alabama'
     abbr 'AL'
     country do |country|
-      if usa = Country.find_by_numcode(840)
+      if usa = Gaku::Country.find_by_numcode(840)
         country = usa
       else
         country.association(:country)

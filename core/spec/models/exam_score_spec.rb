@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExamScore do
+describe Gaku::ExamScore do
 
   context "validations" do 
   	let(:exam_score) { create(:exam_score) }

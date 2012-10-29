@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :syllabus do
+  factory :syllabus, :class => Gaku::Syllabus do
     name { Faker::Name.name }
     code "12345"
     description "Short description"

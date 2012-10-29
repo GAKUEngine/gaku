@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ContactType do
+describe Gaku::ContactType do
 
   context "validations" do 
   	it { should have_valid_factory(:contact_type) }

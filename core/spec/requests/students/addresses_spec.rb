@@ -123,6 +123,28 @@ describe 'Address' do
       flash_destroyed?
     end
 
+    it "delete primary", :js => true do
+      bulgaria = create(:country, :name => 'Bulgaria')
+      @address2 = create(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
+      create(:student_address, :student => @student, :address => @address2)
+      address1_tr = "#address-#{@address.id}"
+      address2_tr = "#address-#{@address2.id}"
+
+      visit student_path(@student)
+
+
+      click "#{address2_tr} a"
+      accept_alert
+      page.find("#{address2_tr} .primary_address a.btn-primary")
+
+      click "#{address2_tr} .delete-link"
+      accept_alert
+      
+      page.find("#{address1_tr} .primary_address a.btn-primary")
+
+      @student.student_addresses.first.is_primary? == true
+    end
+
     it 'sets primary', :js => true do 
       bulgaria = create(:country, :name => 'Bulgaria')
       @address2 = create(:address, :address1 => 'Maria Luiza blvd.', :city => 'Varna', :country => bulgaria)
@@ -135,7 +157,8 @@ describe 'Address' do
       click tab_link
       
       within("#{table} tr#address-2") { click_link 'set_primary_link' }
-
+      accept_alert
+      
       @student.student_addresses.first.is_primary? == false
       @student.student_addresses.second.is_primary? == true
     end

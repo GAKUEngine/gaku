@@ -18,4 +18,4 @@
           th =t("notes.content")
           th.btn-info style="width:100px" =t 'manage'
       tbody
-        =render :partial => 'notes/note', :collection => @notable.notes, :as => :note
+        =render :partial => 'gaku/notes/note', :collection => @notable.notes, :as => :note

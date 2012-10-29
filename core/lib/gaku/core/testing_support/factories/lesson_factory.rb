@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :lesson do
+  factory :lesson, :class => Gaku::Lesson do
   end
 end
