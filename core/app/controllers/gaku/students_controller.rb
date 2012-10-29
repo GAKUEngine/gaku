@@ -110,6 +110,7 @@ module Gaku
       end
 
       def load_before_show
+        @new_commute_method = CommuteMethod.new
         @new_contact = Contact.new
         @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
         @notable = Student.find(params[:id])
