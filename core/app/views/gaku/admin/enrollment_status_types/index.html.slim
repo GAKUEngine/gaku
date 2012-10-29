@@ -14,5 +14,5 @@
           th.btn-inverse =t('enrollment_status_types.active')
           th.btn-info style="width:61px" =t('manage')
       tbody
-        =render :partial => 'admin/enrollment_status_types/enrollment_status_type', :collection => @enrollment_status_types, :as => 'enrollment_status_type'
+        =render :partial => 'gaku/admin/enrollment_status_types/enrollment_status_type', :collection => @enrollment_status_types, :as => 'enrollment_status_type'
     br/
