@@ -3,3 +3,6 @@ $ ->
 	window.showNotice = (notice)->
 		$('#notice').html(notice).delay(3000).fadeOut ->
 			$(@).html('').show()
+ 
+  $('.delete-link').live 'ajax:success', (evt, data, status, xhr) ->
+    $(this).closest('tr').remove()

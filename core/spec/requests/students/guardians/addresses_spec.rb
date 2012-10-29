@@ -54,15 +54,9 @@ describe 'Student Guardian Addresses' do
 
   context 'existing' do 
     before do 
-<<<<<<< HEAD:core/spec/requests/students/guardians/addresses_spec.rb
       address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
       @student.guardians.first.addresses <<  address1
       visit gaku.student_guardian_path(@student, @student.guardians.first)
-=======
-      @address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
-      @student.guardians.first.addresses <<  @address1
-      visit student_guardian_path(@student, @student.guardians.first)
->>>>>>> dd1edf42b437c80c6a2d81a02de77e425e4f7264:spec/requests/students/guardians/addresses_spec.rb
     end
 
     context 'edit', :js => true do 
