@@ -1,1 +1,2 @@
-require 'core/delegate_belongs_to'
+require 'gaku_core'
+
