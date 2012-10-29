@@ -18,7 +18,7 @@
               th =t("syllabuses.description")
           tbody
             tr class="syllabus-#{@syllabus.id}"
-              = render 'shared/fields/syllabus_fields', :syllabus => @syllabus
+              = render 'gaku/shared/fields/syllabus_fields', :syllabus => @syllabus
     .row-fluid
       .span12.well
         .row-fluid
@@ -36,27 +36,27 @@
               .span12
                 #new-existing-exam-errors
                 #new-existing-exam style='display:none;padding-top:10px'
-                  =render 'syllabuses/exams/select_form'
+                  =render 'gaku/syllabuses/exams/select_form'
 
                 #new-syllabus-exam style='display:none;padding-top:10px'
-                  =render 'syllabuses/exams/form'
+                  =render 'gaku/syllabuses/exams/form'
             .row-fluid
               .span12
                 hr
-            = render 'syllabuses/exams/exams'
+            = render 'gaku/syllabuses/exams/exams'
         .row-fluid
           br/
         /.row-fluid
           #syllabus-assigmnents
-            = render 'syllabuses/assignments/assignments'
+            = render 'gaku/syllabuses/assignments/assignments'
           #new-syllabus-assignment
             = link_to t('assignments.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
           #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
-            =render 'syllabuses/assignments/form'
+            =render 'gaku/syllabuses/assignments/form'
     .row-fluid
       .span12.well
         #syllabus-notes
-          = render :partial => 'notes/notes'
+          = render :partial => 'gaku/notes/notes'
     .row-fluid
       .span12.well
         = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px", :remote => true
