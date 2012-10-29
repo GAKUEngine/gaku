@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Country do
+describe Gaku::Country do
 
   context "validations" do 
     it { should have_valid_factory(:country) }

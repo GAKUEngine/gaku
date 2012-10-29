@@ -21,7 +21,7 @@ describe 'Admin Schools' do
         click submit
 
         wait_until_invisible form
-      end.to change(School, :count).by 1
+      end.to change(Gaku::School, :count).by 1
 
       page.should have_content 'Nagoya University'
       within(count_div) { page.should have_content 'Schools list(1)' }
@@ -66,7 +66,7 @@ describe 'Admin Schools' do
 
       expect do 
         ensure_delete_is_working 
-      end.to change(School, :count).by -1
+      end.to change(Gaku::School, :count).by -1
 
       within(count_div) { page.should_not have_content 'Schools list(1)' }
       page.should_not have_content @school.name

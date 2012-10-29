@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StudentAddress do
+describe Gaku::StudentAddress do
 
   context "validations" do 
     it { should have_valid_factory(:student_address) }

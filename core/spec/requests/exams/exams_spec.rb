@@ -31,7 +31,7 @@ describe 'Exams' do
       
         click '#submit-exam-button'
 
-      end.to change(Exam, :count).by(1)
+      end.to change(Gaku::Exam, :count).by(1)
 
       wait_until { page.all(table_rows).size == tr_count + 1 }
       within(count_div) { page.should have_content('Exams List(1)') }
@@ -68,7 +68,7 @@ describe 'Exams' do
         fill_in 'exam_weight', :with => 1 
         fill_in 'exam_description', :with => "Good work"
         click '#submit-exam-button'  
-      end.to_not change(Exam, :count).by(1)
+      end.to_not change(Gaku::Exam, :count).by(1)
       
       page.should_not have_content "was successfully created"
     end 
@@ -78,7 +78,7 @@ describe 'Exams' do
     before do
       @exam = create(:exam, :name => "Linux")
       visit gaku.exams_path
-      Exam.count.should == 1
+      Gaku::Exam.count.should == 1
     end
 
     it 'should edit exam from index', :js => true do
@@ -144,7 +144,7 @@ describe 'Exams' do
         within('#exams-index') { find('#delete-exam-link').click }
         page.driver.browser.switch_to.alert.accept
         page.should_not have_content("#{@exam.name}")
-      end.to change(Exam, :count).by(-1)
+      end.to change(Gaku::Exam, :count).by(-1)
       
       within(count_div) { page.should_not have_content('Exams List(1)') }
       flash_destroyed?

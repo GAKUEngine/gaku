@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Address do
+describe Gaku::Address do
 
   context "validation" do
-    let(:country) { mock_model(Country, :states => [state]) }
-    let(:state)   { stub_model(State, :name => 'maryland', :abbr => 'md') }
+    let(:country) { mock_model(Gaku::Country, :states => [state]) }
+    let(:state)   { stub_model(Gaku::State, :name => 'maryland', :abbr => 'md') }
     let(:address) { build(:address, :country => country) }
 
     before do
@@ -43,31 +43,31 @@ describe Address do
       AppConfig[:default_country_id] = @default_country_id
     end
     it "sets up a new record with Spree::Config[:default_country_id]" do
-      Address.default.country.should == Country.find(AppConfig[:default_country_id])
+      Gaku::Address.default.country.should == Gaku::Country.find(AppConfig[:default_country_id])
     end
 
     # Regression test for #1142
     it "uses the first available country if :default_country_id is set to an invalid value" do
       AppConfig[:default_country_id] = "0"
-      Address.default.country.should == Country.first
+      Gaku::Address.default.country.should == Gaku::Country.first
     end
   end
 
   context '#state_text' do
     context 'state is blank' do
-      let(:address) { stub_model(Address, :state => nil, :state_name => 'virginia') }
+      let(:address) { stub_model(Gaku::Address, :state => nil, :state_name => 'virginia') }
       specify { address.state_text.should == 'virginia' }
     end
 
     context 'both name and abbr is present' do
-      let(:state) { stub_model(State, :name => 'virginia', :abbr => 'va') }
-      let(:address) { stub_model(Address, :state => state) }
+      let(:state) { stub_model(Gaku::State, :name => 'virginia', :abbr => 'va') }
+      let(:address) { stub_model(Gaku::Address, :state => state) }
       specify { address.state_text.should == 'va' }
     end
 
     context 'only name is present' do
-      let(:state) { stub_model(State, :name => 'virginia', :abbr => nil) }
-      let(:address) { stub_model(Address, :state => state) }
+      let(:state) { stub_model(Gaku::State, :name => 'virginia', :abbr => nil) }
+      let(:address) { stub_model(Gaku::Address, :state => state) }
       specify { address.state_text.should == 'virginia' }
     end
   end

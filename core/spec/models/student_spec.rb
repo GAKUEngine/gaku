@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Student do
+describe Gaku::Student do
 
   context "validations" do 
-    let(:student) { stub_model(Student) }
+    let(:student) { stub_model(Gaku::Student) }
 
   	it { should have_valid_factory(:student) }
 

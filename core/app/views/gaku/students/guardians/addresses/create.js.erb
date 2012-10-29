@@ -1,4 +1,4 @@
-$('#student-guardian-addresses-index tbody').append('<%= render_js_partial("address", {:address => @address}) %>');
+$('#student-guardian-addresses-index tbody').append('<%= render_js_partial("address", {:address => @address, :primary_address => @primary_address}) %>');
 
 $('#new-student-guardian-address').slideToggle();
 $('#new-student-guardian-address form')[0].reset();

@@ -42,7 +42,7 @@ module Gaku
     end
 
     def render_flash
-      escape_javascript(render 'shared/flash', :flash => flash)
+      escape_javascript(render 'gaku/shared/flash', :flash => flash)
     end
 
     def title(text)

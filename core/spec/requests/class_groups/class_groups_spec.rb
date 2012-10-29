@@ -22,7 +22,7 @@ describe 'ClassGroups' do
         fill_in 'class_group_homeroom', :with => 'room#7'
         click submit
         wait_until_invisible form 
-      end.to change(ClassGroup, :count).by 1 
+      end.to change(Gaku::ClassGroup, :count).by 1 
       
       page.should have_content '7'
       page.should have_content 'Awesome class group'
@@ -68,7 +68,7 @@ describe 'ClassGroups' do
         page.should_not have_content 'Not so awesome class group'
         page.should_not have_content 'A1'
 
-        edited_class_group = ClassGroup.last
+        edited_class_group = Gaku::ClassGroup.last
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
@@ -80,7 +80,7 @@ describe 'ClassGroups' do
       end
 
       it 'edits from show view' do 
-        visit class_group_path(@class_group)
+        visit gaku.class_group_path(@class_group)
         click edit_link
         wait_until_visible modal 
 
@@ -97,7 +97,7 @@ describe 'ClassGroups' do
         page.should_not have_content 'Not so awesome class group'
         page.should_not have_content 'A1'
 
-        edited_class_group = ClassGroup.last
+        edited_class_group = Gaku::ClassGroup.last
         edited_class_group.name.should eq 'Really awesome class group'
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
@@ -111,7 +111,7 @@ describe 'ClassGroups' do
 
       expect do
         ensure_delete_is_working
-      end.to change(ClassGroup,:count).by -1 
+      end.to change(Gaku::ClassGroup,:count).by -1 
     
       page.should_not have_content @class_group.name
       within(count_div) { page.should_not have_content 'Class Groups list(1)' }

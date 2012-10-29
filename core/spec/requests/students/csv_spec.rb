@@ -37,7 +37,7 @@ describe 'Student CSV' do
         absolute_path = Rails.root + "spec/support/students.csv"
         attach_file 'importer_data_file', absolute_path
         click_button 'Submit'
-      end.to change(Student, :count).by 2
+      end.to change(Gaku::Student, :count).by 2
 
       page.should have_content 'created students:2'
     end
