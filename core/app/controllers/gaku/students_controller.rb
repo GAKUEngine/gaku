@@ -114,7 +114,7 @@ module Gaku
         @new_contact = Contact.new
         @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
         @notable = Student.find(params[:id])
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
       end
 
       def class_groups
