@@ -14,6 +14,7 @@ module Gaku
     belongs_to :course
     validates :student_id, :uniqueness => {:scope => :course_id, :message => "Already enrolled to course!"}
 
+    attr_accessible :student_id, :course_id
     #scope 
 
     #def self.get_enrolled(course_id)

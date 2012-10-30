@@ -32,9 +32,9 @@ module Gaku
       end
       if params[:source] == "courses"
         @course = Course.find(params[:course_id])
-        render 'courses/enrollments/students/enroll_students'
+        render 'gaku/courses/enrollments/students/enroll_students'
       else
-        render 'shared/flash', :flash => flash
+        render 'gaku/shared/flash', :flash => flash
       end
     end
 

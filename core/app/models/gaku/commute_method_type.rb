@@ -9,5 +9,7 @@ module Gaku
 	class CommuteMethodType < ActiveRecord::Base
 		has_many :commute_methods
 
+		attr_accessible :name
+
 	end
 end

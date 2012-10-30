@@ -8,7 +8,7 @@ module Gaku
       @course = Course.find(params[:course_enrollment][:course_id])
       if @course_enrollment.save
         respond_with(@course_enrollment) do |format|
-          format.js { render 'courses/enrollments/students/enroll' }
+          format.js { render 'gaku/courses/enrollments/students/enroll' }
         end
       else
         @errors = @course_enrollment.errors
@@ -28,15 +28,13 @@ module Gaku
           show_flash_error_for_enroll(@course, 'Selected Class Group is empty') and return
         else
           @not_added_students = @class_group.students - @course.students
-          logger.debug "CG: #{@class_group.students.inspect}"
-          logger.debug "C: #{@course.students.inspect}"
           if @not_added_students.empty? 
             show_flash_error_for_enroll(@course, 'All students are already added to the course') and return 
           end
         end
         @course.enroll_class_group(@class_group)
         respond_to do |format|
-          format.js { render 'courses/enrollments/class_groups/enroll' }
+          format.js { render 'gaku/courses/enrollments/class_groups/enroll' }
         end
       else
         show_flash_error_for_enroll(@course,'No Class Group selected')
@@ -48,7 +46,7 @@ module Gaku
       respond_with(respond_with_var) do |format|
         @course.errors[:base]<< message
         format.html { render :nothing => true }
-        format.js { render 'courses/enrollments/class_groups/enroll'}
+        format.js { render 'gaku/courses/enrollments/class_groups/enroll'}
       end
     end
 

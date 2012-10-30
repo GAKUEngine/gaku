@@ -8,7 +8,7 @@ module Gaku
 
     def index
       @importer_types = ["GAKU Engine", "SchoolStation"]
-      render "students/importer/index"
+      render "gaku/students/importer/index"
     end
 
     def get_csv_template

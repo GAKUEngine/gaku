@@ -1,7 +1,7 @@
 $("#course-students-index tbody").html('');
 
 <% @course.course_enrollments.each {|enrollment| %>
-  $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment.student}) %>');
+  $('#course-students-index tbody').append('<%= render_js_partial("gaku/courses/enrollments/enrolled", {:enrollment => enrollment.student}) %>');
 <% } %>
 
 $('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t("course_enrollments.enrollments")) %>');

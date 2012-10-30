@@ -91,7 +91,7 @@ module Gaku
     def create_exam_portion
       if @exam.update_attributes(params[:exam])
         respond_to do |format|
-          format.js {render 'exams/exam_portions/create_exam_portion'}
+          format.js {render 'gaku/exams/exam_portions/create_exam_portion'}
         end
       end
     end
@@ -377,7 +377,7 @@ module Gaku
       def load_before_show
         @exam.exam_portions.build
         @notable = @exam
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
       end
 
       def exams_count 

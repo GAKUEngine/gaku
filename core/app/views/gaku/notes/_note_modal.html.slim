@@ -1,4 +1,4 @@
-- model = @note || Note.new
+- model = @note || Gaku::Note.new
 - model_class = model.class
 .modal.hide#edit-note-modal wmode="opaque"
   
@@ -10,7 +10,7 @@
       .validation-error
       .form-inputs
 
-        = render 'shared/form_fields/note_form_fields', :note_form => note_form
+        = render 'gaku/shared/form_fields/note_form_fields', :note_form => note_form
 
         .row-fluid
           .span12

@@ -92,7 +92,7 @@ describe 'Student Contacts' do
       contact1_tr = "#contact-#{@contact.id}"
       contact2_tr = "#contact-#{contact2.id}"
       
-      visit student_path(@student)
+      visit gaku.student_path(@student)
 
       click "#{contact2_tr} td.primary-button a"
       accept_alert
