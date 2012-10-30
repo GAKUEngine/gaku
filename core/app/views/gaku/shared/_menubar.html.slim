@@ -3,6 +3,6 @@
     .container-fluid
       a.brand href=root_path = image_tag('gaku-logo.png') 
       - if user_signed_in?
-        = render :partial => "gaku/shared/global_menu"
+        = render :partial => "gaku/shared/menu/global"
         = render :partial => "gaku/shared/login_widget"
         /= render :partial => "shared/language_bar"
