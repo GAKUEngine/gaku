@@ -31,7 +31,7 @@ Installation
 Create a new Rails application.
 
     $ gem install rails -v 3.2.8
-    $ rails _3.2.8_ new my_store
+    $ rails _3.2.8_ new my_school
 
 Or use existing one.
 
