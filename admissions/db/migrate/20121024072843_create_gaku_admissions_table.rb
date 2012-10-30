@@ -3,6 +3,9 @@ class CreateGakuAdmissionsTable < ActiveRecord::Migration
     create_table :gaku_admissions do |t|
       t.boolean     :admitted
       t.references  :student
+      t.references  :scholarship_status
+
+      t.timestamps
     end
   end
 end

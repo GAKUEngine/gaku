@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CourseGroupsController do
+describe Gaku::CourseGroupsController do
 
   let(:course_group) { create(:course_group) }
 
@@ -8,9 +8,9 @@ describe CourseGroupsController do
     login_admin
   end
 
-  describe "GET :index	" do
+  describe "GET index" do
     it "should be successful" do
-      get :index
+      gaku_get :index
       response.should be_success
     end
   end 
@@ -20,7 +20,7 @@ describe CourseGroupsController do
     it "redirects to the course group" do
       page.stub :update_attributes => true
 
-      post :update, :id => course_group.id
+      gaku_post :update, :id => course_group.id
       response.should redirect_to(course_group_url(course_group))
     end
   end
@@ -28,7 +28,7 @@ describe CourseGroupsController do
   describe "destroying a course group" do
 
     it "sets the flash" do
-      delete :destroy, :id => course_group
+      gaku_delete :destroy, :id => course_group
       controller.should set_the_flash.now
     end
   end
