@@ -1,4 +1,4 @@
-class CreateClassGroupEnrollments < ActiveRecord::Migration
+class CreateGakuClassGroupEnrollments < ActiveRecord::Migration
   def change
     create_table :gaku_class_group_enrollments do |t|
       t.references :class_group

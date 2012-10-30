@@ -4,7 +4,7 @@ $('#new-syllabus-exam form').each (function(){
   this.reset();
 });
 
-$('#syllabus-exams-index tbody').append('<%= render_js_partial("syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
+$('#syllabus-exams-index tbody').append('<%= render_js_partial("gaku/syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
 $('.exams-count').html('<%= print_count(@syllabus.exams.count, t("exams.list")) %>');
 $('.no-exam-msg').remove();
 showNotice("<%= render_flash %>");
