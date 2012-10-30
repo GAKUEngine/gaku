@@ -1,4 +1,4 @@
-class ChangeStateCountryIdToNumCode < ActiveRecord::Migration
+class ChangeGakuStateCountryIdToNumCode < ActiveRecord::Migration
   def up
     rename_column :gaku_states, :country_id, :country_numcode
   end

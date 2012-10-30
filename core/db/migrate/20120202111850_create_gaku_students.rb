@@ -21,9 +21,9 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
 
-      t.references :gaku_user
-      t.references :gaku_faculty
-      t.references :gaku_commute_method
+      t.references :user
+      t.references :faculty
+      t.references :commute_method
       t.timestamps
     end
   end
