@@ -10,5 +10,6 @@ describe Gaku::Admission do
     it { should have_many :specialty_applications }
     it { should have_many :admission_phase_records }
     it { should have_many :admission_methods }
+    it { should have_many :notes }
   end
 end

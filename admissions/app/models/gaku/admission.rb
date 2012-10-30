@@ -7,5 +7,6 @@ module Gaku
     has_many :specialty_applications
     has_many :admission_methods
     has_many :admission_phase_records
+    has_many :notes, as: :notable
   end
 end
