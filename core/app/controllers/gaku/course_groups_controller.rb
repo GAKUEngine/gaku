@@ -8,7 +8,7 @@ module Gaku
 
     respond_to :js, :html
 
-    before_filter :course_group_enrollment,  :only => [:show]
+    before_filter :before_show,  :only => [:show]
     before_filter :course_groups_count, :only => [:create]
 
     def index
@@ -48,8 +48,9 @@ module Gaku
 
   	private
 
-      def course_group_enrollment
-        @course_group_enrollment = CourseGroupEnrollment.first
+      def before_show
+        @course_group_enrollment = CourseGroupEnrollment.new
+        @courses = Course.all
       end
 
       def course_groups_count

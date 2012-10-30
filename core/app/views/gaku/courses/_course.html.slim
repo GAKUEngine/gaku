@@ -1,5 +1,5 @@
 tr class="course-#{course.id}"
-  = render 'shared/fields/course_fields', :course => course
+  = render 'gaku/shared/fields/course_fields', :course => course
   td
     = link_to_show course
     = ajax_link_to_edit [:edit, course]

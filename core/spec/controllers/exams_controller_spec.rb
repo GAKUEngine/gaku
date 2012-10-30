@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExamsController do
+describe Gaku::ExamsController do
 
   let(:exam) { create(:exam) }
 
@@ -10,7 +10,7 @@ describe ExamsController do
 
   describe "GET :index	" do
     it "should be successful" do
-      get :index
+      gaku_get :index
       response.should be_success
     end
   end 
@@ -19,10 +19,10 @@ describe ExamsController do
     it "redirects to the new exam" do
       page.stub :save => true
 
-      exam = mock_model(Exam,:attributes => true, :save => true)
-      Exam.stub(:new) { exam }
-      post :create
-      response.should redirect_to(exam_url(exam))
+      exam = mock_model(Gaku::Exam,:attributes => true, :save => true)
+      Gaku::Exam.stub(:new) { exam }
+      gaku_post :create
+      response.should redirect_to(gaku.exam_path(exam))
     end
   end
 
@@ -31,16 +31,9 @@ describe ExamsController do
     it "redirects to the exam" do
       page.stub :update_attributes => true
 
-      post :update, :id => exam.id
-      response.should redirect_to(exam_url(exam))
+      gaku_post :update, :id => exam.id
+      response.should redirect_to(gaku.exam_url(exam))
     end
   end
 
-  describe "destroying an exam" do
-
-    it "doesn't set the flash on xhr requests'" do
-      xhr :delete, :destroy, :id => exam.id
-      controller.should_not set_the_flash
-    end
-  end
 end
