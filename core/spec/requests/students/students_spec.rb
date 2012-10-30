@@ -129,7 +129,7 @@ describe 'Students' do
         within(modal) { click_on "Delete" }
         accept_alert
         wait_until { flash_destroyed? }
-      end.to change(Student, :count).by -1
+      end.to change(Gaku::Student, :count).by -1
 
       page.should_not have_content "#{@student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
