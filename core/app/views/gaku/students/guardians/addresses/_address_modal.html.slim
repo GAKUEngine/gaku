@@ -9,7 +9,7 @@
         .row-fluid
           = hidden_field_tag :student_id, @student.id
 
-        = render 'shared/form_fields/address_form_fields', :address_form => address_form
+        = render 'gaku/shared/form_fields/address_form_fields', :address_form => address_form
         .row-fluid
           .span9
             = submit_button t('addresses.save'), :id => 'submit-student-guardian-address-button', :class => 'btn btn-primary button span12'
