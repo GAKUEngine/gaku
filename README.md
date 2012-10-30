@@ -62,7 +62,7 @@ You can always perform the steps later.
 Run Gaku Engine
 ---------------
 		
-    $rails s 
+    $ rails s 
 
 
 Visit http://localhost:3000
