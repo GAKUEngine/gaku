@@ -13,6 +13,7 @@ describe 'Student Guardian Addresses' do
   before(:each) do
     @student = create(:student)
     @guardian = create(:guardian)
+    raise @student.guardians.inspect
     @student.guardians << @guardian
     @student.reload
     @country = create(:country, :name => "Japan")

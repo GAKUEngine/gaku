@@ -130,7 +130,7 @@ describe 'Address' do
       address1_tr = "#address-#{@address.id}"
       address2_tr = "#address-#{@address2.id}"
 
-      visit student_path(@student)
+      visit gaku.student_path(@student)
 
 
       click "#{address2_tr} a"
