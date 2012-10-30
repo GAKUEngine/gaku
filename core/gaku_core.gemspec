@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancan'
   s.add_dependency 'app_config'
   s.add_dependency 'eco'
+  s.add_dependency 'ruby-debug19'
 end

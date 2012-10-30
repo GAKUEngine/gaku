@@ -1,6 +1,6 @@
 #new-course-class-group-form-errors
 #new-course-class-group style='display:none' 
-  =render :partial => 'courses/enrollments/class_groups/form', :course => @course, :new_course_enrollment => @new_course_enrollment
+  =render :partial => 'gaku/courses/enrollments/class_groups/form', :course => @course, :new_course_enrollment => @new_course_enrollment
 .row-fluid
   .pull-left
     h4.h4-vm.course-students-count 
@@ -28,7 +28,7 @@
           th.btn-inverse*{"data-field" => t("grades.rank")}
             = t("grades.rank")
       tbody
-        =render :partial => 'courses/enrollments/enrolled', :collection => @course.students, :as => :enrollment
+        =render :partial => 'gaku/courses/enrollments/enrolled', :collection => @course.students, :as => :enrollment
 .row-fluid
   /Modalでもいいかも。
 

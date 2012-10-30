@@ -13,8 +13,8 @@
             = print_count(@student.courses.count, t('courses.plural'))
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'students/addresses/addresses'
+          = render :partial => 'gaku/students/addresses/addresses'
         #guardians.tab-pane
-          = render :partial => 'students/guardians/guardians'
+          = render :partial => 'gaku/students/guardians/guardians'
         #courses.tab-pane
-          = render :partial => 'students/course_enrollments/course_enrollments'
+          = render :partial => 'gaku/students/course_enrollments/course_enrollments'

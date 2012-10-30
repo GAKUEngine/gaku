@@ -27,18 +27,18 @@
         hr
     .row-fluid
       div id='exam_exam_portions_form' style='display:none; margin-bottom:20px'
-        =render 'exams/exam_portions/exam_portion_form'
+        =render 'gaku/exams/exam_portions/exam_portion_form'
     .row-fluid
       #exam-exam_portions
-        =render 'exams/exam_portions/exam_portions'
+        =render 'gaku/exams/exam_portions/exam_portions'
     - if @exam.use_weighting
       .row-fluid.weight-check-widget
-        =render 'weight_check_widget', :exam => @exam
+        =render 'gaku/weight_check_widget', :exam => @exam
 
 .row-fluid
   .span12.well
     #exam-notes
-      = render :partial => 'notes/notes'
+      = render :partial => 'gaku/notes/notes'
 
 .row-fluid
   .span12.well
