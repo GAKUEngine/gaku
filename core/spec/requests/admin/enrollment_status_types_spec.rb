@@ -20,7 +20,7 @@ describe 'Admin EnrollmentStatusTypes' do
         fill_in 'enrollment_status_type_name', :with => 'Enrolled'
         click submit 
         wait_until_invisible form
-      end.to change(EnrollmentStatusType, :count).by 1
+      end.to change(Gaku::EnrollmentStatusType, :count).by 1
 
       within(table) { page.should have_content 'Enrolled' }
       within(count_div) { page.should have_content 'Enrollment Status Types list(1)' }
@@ -66,7 +66,7 @@ describe 'Admin EnrollmentStatusTypes' do
 
       expect do
         ensure_delete_is_working 
-      end.to change(EnrollmentStatusType, :count).by -1
+      end.to change(Gaku::EnrollmentStatusType, :count).by -1
 
       within(count_div) { page.should_not have_content 'Enrollment Status Types list(1)' }
       page.should_not have_content @enrollment_status_type.name

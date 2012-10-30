@@ -21,7 +21,7 @@ describe 'CourseGroups' do
         wait_until_visible "#new-course-group form"
         fill_in 'course_group_name', :with => 'MathCourses2012'
         click '#submit-course-group-button'
-      end.to change(CourseGroup, :count).by(1)
+      end.to change(Gaku::CourseGroup, :count).by(1)
 
       flash_created?
       within(count_div) { page.should have_content('Course Groups List(1)') }
@@ -71,7 +71,7 @@ describe 'CourseGroups' do
         page.should_not have_content '2013Courses'
       end
 
-      CourseGroup.last.name.should eql('2012 Courses')
+      Gaku::CourseGroup.last.name.should eql('2012 Courses')
       flash_updated?
     end
 
@@ -84,7 +84,7 @@ describe 'CourseGroups' do
     end
 
     it 'should edit course group from show view', :js => true do #TODO to be implemented
-      CourseGroup.count.should eq 1
+     Gaku::CourseGroup.count.should eq 1
       visit gaku.course_group_path(@course_group)
       find(".edit-link").click
 
@@ -96,12 +96,12 @@ describe 'CourseGroups' do
         page.should have_content '2012 Courses'
         page.should_not have_content '2013Courses'
       end
-      CourseGroup.count.should eq 1
-      CourseGroup.last.name.should eq '2012 Courses'
+      Gaku::CourseGroup.count.should eq 1
+      Gaku::CourseGroup.last.name.should eq '2012 Courses'
     end
 
     it 'should delete the course group', :js => true do 
-      CourseGroup.count.should eq 1
+      Gaku::CourseGroup.count.should eq 1
       visit gaku.course_group_path(@course_group)
       wait_until { page.should have_content('Add Course') } 
       click_on "delete-course-group-link"
@@ -110,7 +110,7 @@ describe 'CourseGroups' do
       
       flash_destroyed?
       within('#course-groups-index tbody') { page.should_not have_content(@course_group.name) }
-      CourseGroup.all.count.should eq 0
+      Gaku::CourseGroup.all.count.should eq 0
     end
 
     it 'should return to class_groups index when back selected' do 

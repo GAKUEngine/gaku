@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StudentSpecialty do
+describe Gaku::StudentSpecialty do
 
   context "validations" do 
   	it { should have_valid_factory(:student_specialty) }

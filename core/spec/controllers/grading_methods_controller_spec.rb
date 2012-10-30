@@ -1,31 +1,31 @@
 require 'spec_helper'
 
-describe GradingMethodsController do
+describe Gaku::GradingMethodsController do
 
-  describe "GET 'index'" do
+  describe "GET index" do
     it "returns http success" do
-      get 'index'
+      gaku_get :index
       response.should be_success
     end
   end
 
-  describe "GET 'show'" do
+  describe "GET show" do
     pending "returns http success" do
-      get 'show'
+      gaku_get :show
       response.should be_success
     end
   end
 
-  describe "GET 'new'" do
+  describe "GET new" do
     it "returns http success" do
-      get 'new'
+      gaku_get :new
       response.should be_success
     end
   end
 
-  describe "GET 'edit'" do
+  describe "GET edit" do
     pending "returns http success" do
-      get 'edit'
+      gaku_get :edit
       response.should be_success
     end
   end

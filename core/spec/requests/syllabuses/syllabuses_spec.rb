@@ -46,7 +46,7 @@ describe 'Syllabus' do
       wait_until { !page.find('#new-syllabus').visible? }
       page.find('#new-syllabus-link').visible?
       page.all('table#syllabuses-index tbody tr').size.should eq tr_count+1
-      Syllabus.count.should eq 2
+      Gaku::Syllabus.count.should eq 2
     end
 
     it "should not submit invalid syllabus", :js => true do 
@@ -76,7 +76,7 @@ describe 'Syllabus' do
         page.should_not have_content "Biology"
         page.should_not have_content 'bio'
 
-        edited_syllabus = Syllabus.last
+        edited_syllabus = Gaku::Syllabus.last
         edited_syllabus.name.should eq 'Maths'
         edited_syllabus.code.should eq 'math'
         edited_syllabus.description.should eq 'Maths Description'
@@ -105,7 +105,7 @@ describe 'Syllabus' do
         page.should_not have_content "Biology"
         page.should_not have_content 'bio'
 
-        edited_syllabus = Syllabus.last
+        edited_syllabus = Gaku::Syllabus.last
         edited_syllabus.name.should eq 'Maths'
         edited_syllabus.code.should eq 'math'
         edited_syllabus.description.should eq 'Maths Description'
@@ -115,13 +115,13 @@ describe 'Syllabus' do
   end
 
   it "should delete a syllabus" do
-    Syllabus.count.should eql(1)
+    Gaku::Syllabus.count.should eql(1)
     tr_count =  page.all('table#syllabuses-index tbody tr').size
     within('table#syllabuses-index tbody tr:nth-child(1)') { find(".delete-link").click }
       
     wait_until { page.all('table#syllabuses-index tbody tr').size == tr_count - 1 }
     page.should_not have_content("#{@syllabus.code}")
-    Syllabus.count.should eql(0)
+    Gaku::Syllabus.count.should eql(0)
   end
 
 end

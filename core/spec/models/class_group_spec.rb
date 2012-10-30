@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ClassGroup do
+describe Gaku::ClassGroup do
 
   context "validations" do 
   	it { should have_valid_factory(:class_group) }

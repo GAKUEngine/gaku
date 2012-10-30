@@ -1,4 +1,4 @@
-=render 'students/search/form'
+=render 'gaku/students/search/form'
 
 .row-fluid.hide#students-checked-div
   .span6.well
@@ -19,7 +19,7 @@
           = hidden_field_tag "source", "class_groups"
           h4 = "Adding students to " + @class_group.name
           = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
-      -elsif !@course.nil?
+      - elsif !@course.nil?
         = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
           = hidden_field_tag "course_id", @course.id
           = hidden_field_tag "source", "courses"
@@ -38,15 +38,15 @@
 
           = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
 .row-fluid
-  .span12.well
+  .span12.well style="margin-bottom:0px"
     /#students-index
-      =render 'students/students'
+      =render 'gaku/students/students'
     #state1.span6
       h4 State1
-      =render 'students/students'
+      =render 'gaku/students/students'
     #state2.span6
       h4 State2
-      =render 'students/students'
+      =render 'gaku/students/students'
 = javascript_include_tag "student_chooser"
 
 

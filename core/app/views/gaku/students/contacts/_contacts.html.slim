@@ -20,7 +20,7 @@
           th.btn-inverse =t('contacts.emergency')
           th.btn-info style='width:61px' =t 'manage'
       tbody
-        =render :partial => 'students/contacts/contact', :collection => @student.contacts, :as => 'contact'
+        =render :partial => 'gaku/students/contacts/contact', :collection => @student.contacts, :as => 'contact'
     br/
     #new-student-contact-form-errors
     #new-student-contact-form

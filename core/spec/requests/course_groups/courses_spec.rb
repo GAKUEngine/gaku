@@ -10,7 +10,7 @@ describe 'CourseGroup Courses' do
   end
 
   it 'should add and show course to a course group', :js => true do
-    CourseGroupEnrollment.count.should eq 0
+    Gaku::CourseGroupEnrollment.count.should eq 0
     tr_count = page.all('#course-group-enrollments-index tbody tr').size
     click_link 'new-course-group-enrollment-link'
 
@@ -21,7 +21,7 @@ describe 'CourseGroup Courses' do
     wait_until { page.all('#course-group-enrollments-index tbody tr').size == tr_count+1 }
     within("#course-group-enrollments-index tbody") { page.should have_content ("#{@course.code}") }
     within('.course-group-enrollments-count') { page.should have_content('1') }
-    CourseGroupEnrollment.count.should eq 1
+    Gaku::CourseGroupEnrollment.count.should eq 1
 
   end
 
@@ -64,7 +64,7 @@ describe 'CourseGroup Courses' do
     end
 
     it 'should delete a course from course group', :js => true do  
-      CourseGroupEnrollment.count.should eq 1
+      Gaku::CourseGroupEnrollment.count.should eq 1
       @course_group.courses.count.should eq 1
       page.all('#course-group-enrollments-index tbody tr').size.should eql(1)
       within('.course-group-enrollments-count') { page.should have_content('1') }
@@ -74,7 +74,7 @@ describe 'CourseGroup Courses' do
       page.driver.browser.switch_to.alert.accept
       
       within("#course-group-enrollments-index tbody") { page.should_not have_content("#{@course.code}") }
-      CourseGroupEnrollment.count.should eq 0
+      Gaku::CourseGroupEnrollment.count.should eq 0
       @course_group.courses.count.should eq 0
     end
   end

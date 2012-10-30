@@ -1,5 +1,5 @@
 tr class="syllabus-#{syllabus.id}"
-	= render 'shared/fields/syllabus_fields', :syllabus => syllabus
+	= render 'gaku/shared/fields/syllabus_fields', :syllabus => syllabus
 	td
 	  = link_to_show syllabus
 	  = ajax_link_to_edit [:edit, syllabus]

@@ -4,8 +4,8 @@ ja:
     candidates:
       candidate: "志願者"
       list: "入学志願者一覧"
-      new: "新規志望者登録"
-      export: "志望者情報をCSVで保存"
+      new: "新規志願者登録"
+      export: "志願者情報をCSVで保存"
       course: "志望コース"
       faculty: "志望学部"
       junior_high_school: "出身中学校"
@@ -64,6 +64,7 @@ ja:
   search: "検索"
   hide: "非表示"
   description: '説明'
+  cofirm: 'Are you sure?'
   admin:
     presets:
       save: '保存'

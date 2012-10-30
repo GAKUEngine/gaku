@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SyllabusesController do
+describe Gaku::SyllabusesController do
 
   let(:syllabus) { create(:syllabus) }
 
@@ -8,9 +8,9 @@ describe SyllabusesController do
     login_admin
   end
 
-  describe "GET :index	" do
+  describe "GET index" do
     it "should be successful" do
-      get :index
+      gaku_get :index
       response.should be_success
     end
   end 
@@ -19,8 +19,8 @@ describe SyllabusesController do
     it "redirects to the new syllabus" do
       page.stub :save => true
 
-      post :create, :syllabus => {:name => syllabus.name, :code => syllabus.code}
-      response.should redirect_to(syllabus_url(Syllabus.last))
+      gaku_post :create, :syllabus => {:name => syllabus.name, :code => syllabus.code}
+      response.should redirect_to(gaku.syllabus_url(Syllabus.last))
     end
   end
 
@@ -29,8 +29,8 @@ describe SyllabusesController do
     it "redirects to the syllabus" do
       page.stub :update_attributes => true
 
-      post :update, :id => syllabus.id
-      response.should redirect_to(syllabus_url(syllabus))
+      gaku_post :update, :id => syllabus.id
+      response.should redirect_to(gaku.syllabus_url(syllabus))
     end
   end
 

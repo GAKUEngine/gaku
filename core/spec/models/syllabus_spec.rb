@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Syllabus do
+describe Gaku::Syllabus do
 
   context "validations" do 
   	it { should have_valid_factory(:syllabus) }

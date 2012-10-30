@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CommuteMethodType do
+describe Gaku::CommuteMethodType do
 
   context "validations" do 
     it { should have_many(:commute_methods) }

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExamSyllabus do
+describe Gaku::ExamSyllabus do
 
   context "validations" do 
     it { should belong_to(:exam) }

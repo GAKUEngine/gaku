@@ -94,6 +94,27 @@ describe 'Student Guardian Addresses' do
       flash_destroyed?
     end
 
+    it "delete primary", :js => true do
+      bulgaria = create(:country, :name => "Bulgaria")
+      address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
+      @student.guardians.first.addresses <<  address2
+      address1_tr = "#address-#{@address1.id}"
+      address2_tr = "#address-#{address2.id}"
+      visit student_guardian_path(@student, @student.guardians.first)
+      
+      click "#{address2_tr} a"
+      accept_alert
+
+      page.find("#{address2_tr} .primary_address a.btn-primary")
+
+      click "#{address2_tr} .delete-link"
+      accept_alert
+
+      page.find("#{address1_tr} .primary_address a.btn-primary")
+
+      @student.guardians.first.guardian_addresses.first.is_primary? == true
+    end
+
     it 'sets primary', :js => true do 
       bulgaria = create(:country, :name => "Bulgaria")
       address2 = create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna')
@@ -105,7 +126,8 @@ describe 'Student Guardian Addresses' do
       @student.guardians.first.guardian_addresses.second.is_primary? == false
 
       within('table#student-guardian-addresses-index tr#address-2') { click_link 'set_primary_link' }
-
+      accept_alert
+      
       @student.guardians.first.guardian_addresses.first.is_primary? == false
       @student.guardians.first.guardian_addresses.second.is_primary? == true
     end

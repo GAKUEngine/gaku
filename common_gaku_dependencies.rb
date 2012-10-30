@@ -10,8 +10,8 @@ gem 'jquery-ui-rails'
 gem 'kendoui-rails'
 gem 'execjs'
 gem 'therubyracer'
-gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
-gem 'backbone-on-rails'
+#gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
+#gem 'backbone-on-rails'
 
 gem 'devise-i18n'
 

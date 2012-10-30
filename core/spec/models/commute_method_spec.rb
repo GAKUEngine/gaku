@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CommuteMethod do
+describe Gaku::CommuteMethod do
 
   context "validations" do 
     it { should have_one(:student) }

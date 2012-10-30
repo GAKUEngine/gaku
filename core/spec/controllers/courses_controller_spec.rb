@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CoursesController do
+describe Gaku::CoursesController do
 
   let(:course) { create(:course) }
 
@@ -8,15 +8,15 @@ describe CoursesController do
     login_admin
   end
 
-  describe "GET :index  " do
+  describe "GET index" do
     it "should be successful" do
-      get :index
+      gaku_get :index
       response.should be_success
     end
   end
 
   describe "POST create" do
-    subject { post :create, :course => { :code => "Fall2012" } }
+    subject { gaku_post :create, :course => { :code => "Fall2012" } }
 
     it "redirects to course_url(@course)" do
       subject.should redirect_to(course_url(assigns(:course)))
@@ -41,7 +41,7 @@ describe CoursesController do
     it "redirects to the course" do
       page.stub :update_attributes => true
 
-      post :update, :id => course.id
+      gaku_post :update, :id => course.id
       response.should redirect_to(course_url(course))
     end
   end

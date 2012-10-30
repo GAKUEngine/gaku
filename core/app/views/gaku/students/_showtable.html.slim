@@ -1,7 +1,7 @@
 .row-fluid
   .span12.well
     .span9.student-index
-      = render 'students/student_index', :student => @student
+      = render 'gaku/students/student_index', :student => @student
 
     .span3.well
       .row-fluid.pagination-centered
@@ -15,12 +15,12 @@
           = render 'upload_picture'
 .row-fluid
   .span12.well
-    = render :partial => 'students/contacts/contacts'
-= render :partial => 'students/tab_menu'
+    = render :partial => 'gaku/students/contacts/contacts'
+= render :partial => 'gaku/students/tab_menu'
 .row-fluid
   .span12.well
     #student-notes
-      = render :partial => 'notes/notes'
+      = render :partial => 'gaku/notes/notes'
 .row-fluid
   .span12.well
     .span4
@@ -35,4 +35,4 @@ row-fluid
     #delete-student
       =link_to 'Delete', "#", :id => 'delete-student-link', :class => 'btn btn-danger pull-right'
   .delete_modal
-    =render 'shared/delete_modal', :target => @student
+    =render 'gaku/shared/delete_modal', :target => @student

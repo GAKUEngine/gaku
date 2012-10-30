@@ -13,7 +13,7 @@ describe 'ClassGroup Students' do
       visit gaku.class_groups_path
       find('.show-link').click
       click_link 'class-group-enrollments-tab-link'
-      ClassGroupEnrollment.count.should eq 0
+      Gaku::ClassGroupEnrollment.count.should eq 0
     end
 
     it 'should add and show student to a class group', :js => true do
@@ -33,7 +33,7 @@ describe 'ClassGroup Students' do
       within('#class-group-students-index'){ page.should have_content("#{@student1.name}") }
       within('.class-group-enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
-      ClassGroupEnrollment.count.should eq 1
+      Gaku::ClassGroupEnrollment.count.should eq 1
     end
 
     it 'should not add a student if cancel is selected', :js => true do
@@ -53,7 +53,7 @@ describe 'ClassGroup Students' do
       within('#class-group-students-index') { page.should_not have_content("#{@student1.name}") }
       within('.class-group-enrollments-count') { page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
-      ClassGroupEnrollment.count.should eq 0
+      Gaku::ClassGroupEnrollment.count.should eq 0
     end
 
     pending 'should search students', :js => true do
@@ -75,7 +75,7 @@ describe 'ClassGroup Students' do
         visit gaku.class_group_path(@class_group)
         within('.class-group-enrollments-count'){ page.should have_content("1") }
         within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
-        ClassGroupEnrollment.count.should eq 1
+        Gaku::ClassGroupEnrollment.count.should eq 1
       end
 
       pending 'should enroll student only once for a class group', :js => true do
@@ -98,7 +98,7 @@ describe 'ClassGroup Students' do
         @class_group.students.count.should eq 0
         within('.class-group-enrollments-count') { page.should_not have_content("1") }
         within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
-        ClassGroupEnrollment.count.should eq 0
+        Gaku::ClassGroupEnrollment.count.should eq 0
       end
     end
   end

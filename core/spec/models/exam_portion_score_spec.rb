@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExamPortionScore do
+describe Gaku::ExamPortionScore do
 
   context "validations" do 
   	let(:exam_portion_score) { create(:exam_portion_score) }
