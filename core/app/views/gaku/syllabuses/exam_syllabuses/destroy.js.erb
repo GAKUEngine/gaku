@@ -1,4 +1,4 @@
-$('#new-existing-exam-form').html('<%= render_js_partial("syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
+$('#new-existing-exam-form').html('<%= render_js_partial("gaku/syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
 $('#new-existing-exam-form').slideToggle();
 $('.exams-count').html('<%= print_count(@syllabus.exams.count, t("exams.list")) %>');
 showNotice("<%= render_flash %>");
