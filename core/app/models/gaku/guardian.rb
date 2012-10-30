@@ -17,7 +17,7 @@ module Gaku
     belongs_to :user
     has_many :guardian_addresses
     has_many :addresses, :through => :guardian_addresses
-    has_and_belongs_to_many :students
+    has_and_belongs_to_many :students, :join_table => :gaku_guardians_students
     has_many :contacts
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship, :contacts, :contacts_attributes
