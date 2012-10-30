@@ -13,7 +13,7 @@
         - exam.exam_portions.each_with_index do |portion, i|
           - if i < exam.exam_portions.size - 1
             - total += portion.weight
-            =render 'exams/exam_portions/exam_portion_weight_td', :portion =>portion
+            =render 'gaku/exams/exam_portions/exam_portion_weight_td', :portion =>portion
         
     table.table.table-striped.table-bordered.table-condensed.exam-portions-total-weight
       thead
