@@ -10,7 +10,7 @@
 //= require jquery-ui
 //= require gaku/kendo2012/kendo.web.min
 //= require gaku/bootstrap.min
-// require chosen-jquery
+//= require chosen-jquery
 // require gaku/i18n
 // require gaku/i18n/translations
 //=	require gaku/combobox
