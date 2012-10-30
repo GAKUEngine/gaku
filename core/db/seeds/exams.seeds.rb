@@ -1,3 +1,3 @@
-Exam.create(:name => 'Biology Exam')
-Exam.create(:name => 'Math Exam')
-Exam.create(:name => 'Literature Exam')
+Gaku::Exam.create(:name => 'Biology Exam')
+Gaku::Exam.create(:name => 'Math Exam')
+Gaku::Exam.create(:name => 'Literature Exam')
