@@ -1,4 +1,4 @@
-class CreateStudents < ActiveRecord::Migration
+class CreateGakuStudents < ActiveRecord::Migration
   def change
     create_table :gaku_students do |t|
       t.string   :name
@@ -21,9 +21,9 @@ class CreateStudents < ActiveRecord::Migration
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
 
-      t.references :user
-      t.references :faculty
-      t.references :commute_method
+      t.references :gaku_user
+      t.references :gaku_faculty
+      t.references :gaku_commute_method
       t.timestamps
     end
   end
