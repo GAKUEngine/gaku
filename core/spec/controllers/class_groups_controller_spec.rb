@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ClassGroupsController do
+describe Gaku::ClassGroupsController do
 
   let(:class_group) { create(:class_group) }
 
@@ -8,9 +8,9 @@ describe ClassGroupsController do
     login_admin
   end
 
-  describe "GET :index	" do
+  describe "GET index" do
     it "should be successful" do
-      get :index
+      gaku_get :index
       response.should be_success
     end
   end 
@@ -19,7 +19,7 @@ describe ClassGroupsController do
     it "redirects to the new class group" do
       page.stub :save => true
 
-      post :create, class_group: attributes_for(:class_group)
+      gaku_post :create, class_group: attributes_for(:class_group)
       response.should redirect_to(class_group_url(ClassGroup.last))
     end
   end
@@ -29,20 +29,14 @@ describe ClassGroupsController do
     it "redirects to the class group" do
       page.stub :update_attributes => true
 
-      post :update, :id => class_group.id
+      gaku_post :update, :id => class_group.id
       response.should redirect_to(class_group_url(class_group))
     end
   end
 
   describe "destroying a class group" do
-
-    it "doesn't set the flash on xhr requests'" do
-      xhr :delete, :destroy, :id => class_group
-      controller.should_not set_the_flash
-    end
-
     it "sets the flash" do
-      delete :destroy, :id => class_group
+      gaku_delete :destroy, :id => class_group
       controller.should set_the_flash
     end
   end

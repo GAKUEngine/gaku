@@ -13,6 +13,7 @@ Spork.prefork do
   require 'factory_girl_rails'
   require 'gaku/core/testing_support/factories'
   require 'gaku/core/url_helpers'
+  require 'gaku/core/testing_support/controller_requests'
 end
 
 
@@ -48,6 +49,7 @@ Spork.each_run do
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
     config.include Gaku::Core::UrlHelpers
+    config.include Gaku::Core::TestingSupport::ControllerRequests, :type => :controller
   end
 
   RSpec::Matchers.define :have_valid_factory do |factory_name|
