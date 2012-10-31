@@ -1,34 +1,32 @@
 module Gaku
   class Students::Guardians::AddressesController < ApplicationController
-  	
-  	inherit_resources
+    
+    inherit_resources
     actions :new, :create, :edit, :update
 
     respond_to :js, :html
 
     before_filter :load_address, :only => [:destroy, :make_primary]
-  	before_filter :load_student, :only => [:new, :create, :edit, :update]
-  	before_filter :load_guardian
-  	before_filter :load_primary_address, :only => [:update, :destroy]
+    before_filter :load_student, :only => [:new, :create, :edit, :update]
+    before_filter :load_guardian
+    before_filter :load_primary_address, :only => [:update, :destroy]
 
-  	def create
+    def create
       super do |format|
         if @guardian.addresses << @address
-          @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
+          load_primary_address        
           format.js { render 'create' }  
         end
       end  
     end
 
     def destroy 
-      @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
-      #logger.debug "@primary_address_id: #{@primary_address_id} || @address.id: #{@address.id}"
       if @address.destroy
 
+        flash.now[:notice] = t('addresses.destroyed')
         if @address.id == @primary_address_id
           @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
           respond_to do |format|
-            flash.now[:notice] = t('addresses.destroyed')
             format.js { render }
           end
         else
@@ -57,9 +55,8 @@ module Gaku
         @guardian = Guardian.find(params[:guardian_id])
       end
 
-  	  def load_primary_address
-  		  @guardian = Guardian.find(params[:guardian_id])
-        @primary_address_id = @guardian.guardian_addresses.find_by_is_primary(true).address.id rescue nil
+      def load_primary_address
+        @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
       end
 
   end
