@@ -133,7 +133,7 @@ describe 'Students' do
 
       page.should_not have_content "#{@student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
-      current_path.should eq students_path
+      current_path.should eq gaku.students_path
     end
 
     it 'enrolls to class', :js => true do 
