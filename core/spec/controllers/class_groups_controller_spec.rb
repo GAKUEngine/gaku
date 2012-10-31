@@ -20,7 +20,7 @@ describe Gaku::ClassGroupsController do
       page.stub :save => true
 
       gaku_post :create, class_group: attributes_for(:class_group)
-      response.should redirect_to(class_group_url(ClassGroup.last))
+      response.should redirect_to(class_group_url(Gaku::ClassGroup.last))
     end
   end
 
