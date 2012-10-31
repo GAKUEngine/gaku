@@ -126,7 +126,7 @@ describe 'Student Guardian Contacts' do
       mobile2 = create(:contact, :data => 321, :contact_type => @contact_type)
       @student.guardians.first.contacts << mobile2
 
-      visit student_guardian_path(@student, @student.guardians.first)
+      visit gaku.student_guardian_path(@student, @student.guardians.first)
 
       contact1_tr = "#contact-#{@mobile1.id}"
       contact2_tr = "#contact-#{mobile2.id}"
