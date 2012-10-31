@@ -42,6 +42,10 @@ Spork.each_run do
       DatabaseCleaner.clean
     end
 
+    config.before(:each) do
+      @routes = Gaku::Core::Engine.routes
+    end
+
     config.use_transactional_fixtures = false
     config.infer_base_class_for_anonymous_controllers = false
 
