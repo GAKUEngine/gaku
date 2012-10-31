@@ -116,6 +116,7 @@ describe 'Syllabus Exams' do
         page.should have_content 'Show Exam'
         page.should have_content 'Exam portions list'
         page.should have_content 'Astronomy Exam'
+        current_url.should == gaku.exam_url(:id => @exam.id,:host => 'www.example.com')
       end
 
       it 'deletes', :js => true do

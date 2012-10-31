@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #Rails
-gem 'chosen-rails'
+#gem 'chosen-rails'
 #gem 'attr_encrypted'
 
 #JS 

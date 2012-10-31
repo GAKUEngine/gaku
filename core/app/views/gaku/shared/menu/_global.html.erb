@@ -1,0 +1,51 @@
+<ul class="nav" id="menu">
+  <li><%= link_to t("students.list"), students_path %></li>
+
+  <li class="dropdown" data-hook="class_groups_menu">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= t("class_group_management") %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li data-hook="class_groups"><%= link_to t("menu.class_groups"), class_groups_path %></li>
+    </ul>
+  </li>
+
+
+  <li class="dropdown" data-hook="courses_menu">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= t("course_management") %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li data-hook="syllabuses"><%= link_to t("syllabuses.plural"), syllabuses_path %></li>
+      <li data-hook="courses"><%= link_to t("courses.plural"), courses_path %></li>
+      <li data-hook="course_groups"><%= link_to t('course_groups.course_groups'), course_groups_path %></li>
+    </ul>
+  </li>
+
+
+  <li class="dropdown" data-hook="exams_menu">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= t("exam_management") %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li data-hook="exams"><%= link_to t("exams.plural"), exams_path %></li>
+    </ul>
+  </li>
+
+
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= t("admissions.manage_admissions") %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to t("admissions.candidates.list"), admissions_path %></li>
+    </ul>
+  </li>
+
+  <%= render :partial => 'gaku/shared/menu/admin' %>
+
+</ul>
