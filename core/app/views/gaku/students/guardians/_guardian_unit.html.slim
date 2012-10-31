@@ -5,7 +5,7 @@
         table.table.table-bordered.table-striped
           tbody
             
-            = render 'shared/fields/guardian_fields', :guardian => guardian
+            = render 'gaku/shared/fields/guardian_fields', :guardian => guardian
 
       .row-fluid.mt-m
         = ajax_link_to_new t('students.add_contact'), new_contact_student_guardian_path(@student, guardian), :id => 'new-student-guardian-contact-link'
@@ -15,4 +15,4 @@
         
         = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
         
-= javascript_include_tag 'students/guardians'
+= javascript_include_tag 'gaku/students/guardians'

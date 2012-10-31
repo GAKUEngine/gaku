@@ -3,7 +3,7 @@
       b= t('guardians.new')
       .row-fluid.mt-l
         .span12.well
-          = render 'shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
+          = render 'gaku/shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
             
           .row-fluid
             .span12
@@ -11,4 +11,4 @@
                 = submit_button t("guardians.save"), :id => 'submit-student-guardian-button'
               =link_to_cancel :id => "cancel-student-guardian-link"
 
-= javascript_include_tag 'students/guardians'
+= javascript_include_tag 'gaku/students/guardians'

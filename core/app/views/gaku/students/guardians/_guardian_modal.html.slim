@@ -1,4 +1,4 @@
-- model = @guardian || Guardian.new
+- model = @guardian || Gaku::Guardian.new
 - model_class = model.class
 .modal.hide#edit-guardian-modal wmode="opaque"
   
@@ -13,7 +13,7 @@
         = hidden_field_tag :student_id, @student.id
         .row-fluid.control-group
           
-          = render 'shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
+          = render 'gaku/shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
 
         .row-fluid style="margin-top:10px"
           .span8

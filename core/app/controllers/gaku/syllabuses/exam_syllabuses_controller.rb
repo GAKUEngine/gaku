@@ -6,6 +6,7 @@ module Gaku
 			@exam_syllabus = ExamSyllabus.find(params[:id])
 			@exam_syllabus.destroy
 			@exams = Exam.all
+
 			flash.now[:notice] = 'Exam was successfully destroyed.'
 			respond_to do |format|
 				format.js { render 'destroy' }
@@ -17,7 +18,6 @@ module Gaku
 			@exams = Exam.all
 			@exam_syllabus = @syllabus.exam_syllabuses.build(params[:exam_syllabus])
 			@exam_syllabus.save
-			
 			respond_to do |format|
 				flash.now[:notice] = 'Exam added to Syllabus'
 				format.js { render 'create' }

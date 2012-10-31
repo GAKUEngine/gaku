@@ -126,7 +126,7 @@ describe 'Syllabus Exams' do
           ensure_delete_is_working
         end.to change(@syllabus.exams, :count).by -1
      
-        page.should_not have_content @exam.name
+        within(table){ page.should_not have_content @exam.name }
         flash_destroyed? 
       end
     end
