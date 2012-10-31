@@ -1,11 +1,13 @@
-<li class="dropdown" data-hook="admin_menu">
+<li class="dropdown" data-hook="admin_menu" id="admin_menu">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
     <%= t("admin.admin") %>
     <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
+    
     <li data-hook="schools"><%= link_to t("admin.schools"), admin_schools_path %></li>
-    <li class="dropdown-submenu">
+    
+    <li class="dropdown-submenu" data-hook="types_sub_menu">
       <a tabindex='-1' href='#'><%= t('admin.presets.types') %></a>
       <ul class="dropdown-menu">
         <li data-hook="contact_types"><%= link_to t("admin.contact_types"), admin_contact_types_path %></li>
@@ -17,14 +19,16 @@
         </li>
       </ul>
     </li>
-    <li class="dropdown-submenu">
+
+    <li class="dropdown-submenu" data-hook="presets_sub_menu">
       <a tabindex='-1' href='#'><%= t('admin.presets.presets') %></a>
       <ul class="dropdown-menu">
         <li data-hook="student_presets"><%= link_to t("admin.presets.student"), students_admin_presets_path %></li>
         <li data-hook="locale_presets"><%= link_to t("admin.presets.locale"), locale_admin_presets_path %></li>
       </ul>
     </li>
-    <li class="dropdown-submenu">
+
+    <li class="dropdown-submenu" data-hook="disposals_sub_menu">
       <a tabindex='-1' href='#'><%= t('admin.disposals') %></a>
       <ul class="dropdown-menu">
         <li data-hook="exam_disposals"><%= link_to t("admin.exams_disposals"), exams_admin_disposals_path %></li>
@@ -36,5 +40,6 @@
         </li>
       </ul>
     </li>
+
   </ul>
 </li>

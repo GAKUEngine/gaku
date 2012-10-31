@@ -51,9 +51,9 @@ module Gaku
       template "app/assets/stylesheets/all.css"
     end
 
-    #def create_overrides_directory
-    #  empty_directory "app/overrides"
-    #zend
+    def create_overrides_directory
+      empty_directory "app/overrides"
+    end
 
     def configure_application
       application <<-APP
