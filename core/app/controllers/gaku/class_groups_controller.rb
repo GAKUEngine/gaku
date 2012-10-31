@@ -45,7 +45,7 @@ module Gaku
 
       def load_before_show
         @notable = ClassGroup.find(params[:id])
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
         @course = Course.new
         @courses = Course.all
         @semester = Semester.new
