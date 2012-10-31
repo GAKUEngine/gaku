@@ -24,17 +24,24 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface', '>= 0.9.0'
   s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'inherited_resources'
+
   s.add_dependency 'jquery-rails', '~> 2.0'
+  s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'i18n-js'
   s.add_dependency 'chosen-rails'
   s.add_dependency 'backbone-on-rails'
   s.add_dependency 'underscore'
+  #s.add_dependency 'kendoui-rails'
+
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'paperclip'
   s.add_dependency 'ransack'
-  s.add_dependency 'devise'
-  s.add_dependency 'cancan'
+  s.add_dependency 'seedbank'
+  s.add_dependency 'spreadsheet'
+  s.add_dependency 'roo'
   s.add_dependency 'app_config'
-  s.add_dependency 'eco'
-  s.add_dependency 'ruby-debug19'
+
+  s.add_dependency 'devise'
+  s.add_dependency 'devise-i18n'
+  s.add_dependency 'cancan'
 end
