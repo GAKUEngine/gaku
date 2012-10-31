@@ -1,8 +1,8 @@
-= form_for [@syllabus, @exam_syllabus], :url => syllabus_exam_syllabuses_path(@syllabus), :remote => true, :method => 'post' do |f|
-  .fields  
+= form_for [@syllabus, Gaku::ExamSyllabus.new], :url => syllabus_exam_syllabuses_path(@syllabus), :remote => true, :method => 'post' do |f|
+  .fields
     b =t('syllabuses.choose_exam')
     =f.label :exam_id
-    =f.select :exam_id, @exams.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]},{:prompt => t('syllabuses.choose_exam')}, {:class => 'chzn-select'}
+    =f.select :exam_id, Gaku::Exam.all.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]},{:prompt => t('syllabuses.choose_exam')}, {:class => 'chzn-select'}
   .actions
 		.row-fluid
 			.span12
