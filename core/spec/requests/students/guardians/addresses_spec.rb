@@ -13,7 +13,6 @@ describe 'Student Guardian Addresses' do
   before(:each) do
     @student = create(:student)
     @guardian = create(:guardian)
-    raise @student.guardians.inspect
     @student.guardians << @guardian
     @student.reload
     @country = create(:country, :name => "Japan")
@@ -55,8 +54,8 @@ describe 'Student Guardian Addresses' do
 
   context 'existing' do 
     before do 
-      address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
-      @student.guardians.first.addresses <<  address1
+      @address1 = create(:address, :address1 => 'Toyota str.', :country => @country, :city => 'Nagoya')
+      @student.guardians.first.addresses <<  @address1
       visit gaku.student_guardian_path(@student, @student.guardians.first)
     end
 
@@ -74,7 +73,7 @@ describe 'Student Guardian Addresses' do
 
         click submit
         wait_until_invisible modal
-        page.should have_content 'Brasil'
+        wait_until { page.should have_content 'Brasil' }
         within(table) { page.should_not have_content 'Japan' }
         flash_updated?
       end
@@ -101,7 +100,7 @@ describe 'Student Guardian Addresses' do
       @student.guardians.first.addresses <<  address2
       address1_tr = "#address-#{@address1.id}"
       address2_tr = "#address-#{address2.id}"
-      visit student_guardian_path(@student, @student.guardians.first)
+      visit gaku.student_guardian_path(@student, @student.guardians.first)
       
       click "#{address2_tr} a"
       accept_alert

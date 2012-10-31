@@ -39,8 +39,7 @@ module Gaku
         @exam.exam_portions.build
         @syllabus.assignments.build
         @notable = @syllabus
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
-
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
         grading_methods
       end
 
