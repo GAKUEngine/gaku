@@ -6,10 +6,12 @@
         ul.nav.nav-tabs
           li.active
             a#student-search-tab data-toggle="tab" href="#student"
-              -if params[:controller] == "students"
+              -if params[:controller] == "gaku/students"
                 = t('student')
-              -if params[:controller] == "admissions"
+              -elsif params[:controller] == "gaku/admissions"
                 = t('admissions.candidates.candidate')
+              -else
+                = t('student') 
           li
             a#student-address-search-tab data-toggle="tab" href="#address"
               = t('address')
