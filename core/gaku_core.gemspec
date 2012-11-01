@@ -7,14 +7,14 @@ Gem::Specification.new do |s|
   s.version      = version
   s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
   s.description  = "It allows for full student management, grading etc. It's bascally what all student grading tools are with some unique features"
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.2'
 
-  s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov']
+  s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov', 'Radoslav Georgiev', 'Marta Kostova']
   s.email        = 'info@genshin.org'
   s.homepage     = 'http://github.com/Genshin/GAKUEngine'
 
   s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
-  s.test_files   = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
   
