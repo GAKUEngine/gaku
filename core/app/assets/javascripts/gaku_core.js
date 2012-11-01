@@ -28,8 +28,8 @@
 
 //= require gaku/jquery_validation_engine/jquery.validationEngine.js
 //= require gaku/jquery_validation_engine/languages/jquery.validationEngine-en.js
-// require underscore
-// require backbone
+//= require underscore
+//= require backbone
 //
 // require .//gaku_engine
 // require_tree ..//templates
