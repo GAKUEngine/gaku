@@ -1,0 +1,20 @@
+home_phone:
+  name: "Home Phone"
+work_phone: 
+  name: "Work Phone"
+mobile_phone: 
+  name: "Mobile Phone"
+phone: 
+  name: "Phone"
+email:
+  name: "Email"
+mobile_mail: 
+  name: "Mobile Mail"
+skype: 
+  name: "Skype"
+google_plus: 
+  name: "Google Plus"
+facebook: 
+  name: "Facebook"
+twitter: 
+  name: "Twitter"

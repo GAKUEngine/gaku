@@ -100,7 +100,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def run_migrations
       if @run_migrations
         say_status :running, "migrations"
-        quietly { rake 'db:migrate' }
+        rake 'db:migrate' 
       else
         say_status :skipping, "migrations (don't forget to run rake db:migrate)"
       end
@@ -128,7 +128,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def load_sample_data
       if @load_sample_data
         say_status :loading, "sample data"
-        quietly { rake 'gaku_sample:load' }
+        rake 'gaku_sample:load' 
       else
         say_status :skipping, "sample data (you can always run rake gaku_sample:load)"
       end

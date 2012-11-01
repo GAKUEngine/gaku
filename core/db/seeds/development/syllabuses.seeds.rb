@@ -1,6 +1,0 @@
-#ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'syllabuses')
-Gaku::Syllabus.create(:name => "Biology Syllabus", :code => "s1")
-Gaku::Syllabus.create(:name => "Math Syllabus", :code => "s2")
-Gaku::Syllabus.create(:name => "Literature Syllabus", :code => "s3")
-Gaku::Syllabus.create(:name => "日本語", :code => "NH")
-Gaku::Syllabus.create(:name => "メカトロニクス", :code => "MT")
