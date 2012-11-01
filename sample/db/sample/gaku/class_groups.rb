@@ -1,4 +1,5 @@
-#ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'class_groups')
+# encoding: utf-8
+
 Gaku::ClassGroup.create(:name => 'Biology')
 Gaku::ClassGroup.create(:name => 'Math')
 Gaku::ClassGroup.create(:name => 'Literature')
