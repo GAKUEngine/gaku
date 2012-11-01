@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails', '~> 2.0'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'i18n-js'
-  s.add_dependency 'chosen-rails'
   s.add_dependency 'backbone-on-rails'
   s.add_dependency 'underscore'
   #s.add_dependency 'kendoui-rails'

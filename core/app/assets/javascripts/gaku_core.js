@@ -10,9 +10,9 @@
 //= require jquery-ui
 //= require gaku/kendo2012/kendo.web.min
 //= require gaku/bootstrap.min
-// require chosen-jquery
-// require gaku/i18n
-// require gaku/i18n/translations
+//= require chosen-jquery
+// require i18n
+// require i18n/translations
 //=	require gaku/combobox
 
 //= require gaku/tbs_datepicker/js/bootstrap-datepicker
