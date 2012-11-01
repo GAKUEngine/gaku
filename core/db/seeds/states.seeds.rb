@@ -1,1 +1,1 @@
-ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'states')
+ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'gaku_states')

@@ -1,5 +1,6 @@
 require 'rails/all'
 require 'rails/generators'
+require 'deface'
 require 'paperclip'
 require 'ransack'
 require 'jquery-rails'

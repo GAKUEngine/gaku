@@ -1,1 +1,1 @@
-ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'countries')
+ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/default/", 'gaku_countries')
