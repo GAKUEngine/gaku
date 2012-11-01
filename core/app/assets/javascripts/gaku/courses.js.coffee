@@ -43,4 +43,4 @@ $ ->
     $("#new-course-class-group").slideToggle()
     $("#new-course-class-group-form-errors").html("");
       
-  $(".chzn-select").chosen()
+  # $(".chzn-select").chosen()
