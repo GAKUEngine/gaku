@@ -3,12 +3,11 @@ source 'https://rubygems.org'
 #DB
 gem 'mysql2'
 gem 'pg'
-#gem 'sqlite3'
+gem 'sqlite3'
 
 #JS
 gem 'execjs'
 gem 'therubyracer'
-
 
 group :production do
   gem 'unicorn' 
