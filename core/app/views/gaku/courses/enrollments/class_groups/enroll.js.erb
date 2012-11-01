@@ -1,10 +1,10 @@
 
 <%- if @course.errors.any? %>
-  $('#new-course-class-group-form-errors').html('<%= render_js_partial("shared/errors", {:target => @course}) %>');
+  $('#new-course-class-group-form-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @course}) %>');
 <%- else %>
   $("#new-course-class-group-form-errors").html("");
   <% @not_added_students.each {|enrollment| %>
-  $('#course-students-index tbody').append('<%= render_js_partial("courses/enrollments/enrolled", {:enrollment => enrollment}) %>');
+  $('#course-students-index tbody').append('<%= render_js_partial("gaku/courses/enrollments/enrolled", {:enrollment => enrollment}) %>');
   <% } %>
 
   $('#new-course-class-group-link').show();

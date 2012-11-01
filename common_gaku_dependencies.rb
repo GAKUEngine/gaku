@@ -1,23 +1,13 @@
 source 'https://rubygems.org'
 
-#Rails
-gem 'chosen-rails'
-#gem 'attr_encrypted'
+#DB
+gem 'mysql2'
+gem 'pg'
+gem 'sqlite3'
 
-#JS 
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'kendoui-rails'
+#JS
 gem 'execjs'
 gem 'therubyracer'
-#gem 'i18n-js', :git => "git://github.com/fnando/i18n-js.git"
-#gem 'backbone-on-rails'
-
-gem 'devise-i18n'
-
-gem 'seedbank'
-gem 'spreadsheet'
-gem 'roo' #TODO consider other options for roo?
 
 group :production do
   gem 'unicorn' 
@@ -25,23 +15,20 @@ end
 
 group :assets do
   gem 'less'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 3.2'
+  gem 'coffee-rails', '~> 3.2'
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
-  gem 'sqlite3'
   gem 'annotate'
   gem "rails-erd"
   gem 'hirb'
   gem 'awesome_print'
-  gem 'highline'
   gem 'rails-footnotes', '>= 3.7.5.rc4'
 end
 
 group :test do
-  gem 'mysql2'
   gem 'spork', '~> 1.0rc'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 3.2.0'

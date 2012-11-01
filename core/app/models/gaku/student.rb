@@ -49,7 +49,7 @@ module Gaku
     has_many :student_addresses
     has_many :addresses, :through => :student_addresses
 
-    has_and_belongs_to_many :guardians
+    has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
     has_many :contacts
     has_many :notes, as: :notable
 

@@ -14,17 +14,17 @@
     .span12
       .row-fluid
         .span12.well.guardians_list
-          =render :partial => 'students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
+          =render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
 
-      /table.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th
-            th =t("name")+" ("+t("surname")+")"
-            th =t("name")+" ("+t("given_name")+")"
-            th =t("phonetic_reading") + " ("+t("surname")+")"
-            th =t("phonetic_reading") + " ("+t("name")+")"
-            th =t("guardians.relationship")
-            th =t("options")
-        tbody
-          =render :partial => 'students/guardian', :collection => @student.guardians, :as => 'guardian'
+      / table.table.table-striped.table-bordered.table-condensed
+      /   thead
+      /     tr
+      /       th
+      /       th =t("name")+" ("+t("surname")+")"
+      /       th =t("name")+" ("+t("given_name")+")"
+      /       th =t("phonetic_reading") + " ("+t("surname")+")"
+      /       th =t("phonetic_reading") + " ("+t("name")+")"
+      /       th =t("guardians.relationship")
+      /       th =t("options")
+      /   tbody
+      /     / =render :partial => 'gaku/students/guardian', :collection => @student.guardians, :as => 'guardian'

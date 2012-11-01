@@ -34,7 +34,7 @@ describe 'Student CSV' do
       expect do 
         click_link 'import-students-link'
         select "GAKU Engine", :from => 'importer_importer_type'
-        absolute_path = Rails.root + "spec/support/students.csv"
+        absolute_path = Rails.root + "../support/students.csv"
         attach_file 'importer_data_file', absolute_path
         click_button 'Submit'
       end.to change(Gaku::Student, :count).by 2

@@ -11,10 +11,10 @@ table#students-index.index.table.table-striped.table-bordered.table-condensed
       th.btn-inverse = student_sortable "seat_number", t('class_group_enrollments.seat_number')
       th.btn-inverse = student_sortable "admitted", t('students.admitted')
       th.btn-inverse = student_sortable "primary_address", t('addresses.primary')
-      - if params[:controller] == "students" or params[:controller] == "admissions"
+      - if params[:controller] == "gaku/students" or params[:controller] == "gaku/admissions"
         th.btn-info style="width:62px" = t("manage")
 
   tbody
     =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
-= javascript_include_tag 'students/selected_students'
+= javascript_include_tag 'gaku/students/selected_students'

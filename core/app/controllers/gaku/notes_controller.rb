@@ -54,10 +54,15 @@ module Gaku
 
   private
   	def load_notable
-      klass = [Student, LessonPlan, Syllabus, ClassGroup, Course, Exam].detect { |c| params["#{c.name.underscore}_id"] }
-      @notable = klass.find(params["#{klass.name.underscore}_id"])
-      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
-  	end
+      unnamespaced_klass = ''
+      klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c| 
+        unnamespaced_klass = c.to_s.split("::")
+        params["#{unnamespaced_klass[1].underscore}_id"]
+      end
+
+      @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+    end
 
   end
 end

@@ -71,10 +71,10 @@ module Gaku
       end
       if params[:source] == "class_groups"
         @class_group = ClassGroup.find(params[:class_group_id])
-        render 'class_groups/students/enroll_students'
+        render 'gaku/class_groups/students/enroll_students'
       else
         flash.now[:notice] = notice.html_safe
-        render :partial => 'shared/flash', :locals => {:flash => flash}
+        render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
       end
     end
 

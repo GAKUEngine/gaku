@@ -2,7 +2,7 @@ module Gaku
   class SyllabusesController < ApplicationController
 
     before_filter :load_before_index, :only => :index
-    before_filter :load_before_show,  :only => :show
+    before_filter :load_before_show,  :only => [:show, :destroy]
     before_filter :syllabuses_count, :only => [:create, :destroy]
 
     inherit_resources
@@ -35,12 +35,10 @@ module Gaku
         
         @exam = Exam.new
         @exam_syllabus = ExamSyllabus.new
-        @exams = Exam.all
         @exam.exam_portions.build
         @syllabus.assignments.build
         @notable = @syllabus
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
-
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
         grading_methods
       end
 

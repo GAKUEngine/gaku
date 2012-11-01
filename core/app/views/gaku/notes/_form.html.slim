@@ -3,7 +3,7 @@
     b= t('notes.new')
     .row-fluid.mt-l
       .span12.well style="margin-bottom:20px"
-        = render 'shared/form_fields/note_form_fields', :note_form => note_form
+        = render 'gaku/shared/form_fields/note_form_fields', :note_form => note_form
 
         .row-fluid
           .span12
@@ -15,4 +15,4 @@
 javascript:
   window.notable_resource = '#{@notable_resource}';
             
-= javascript_include_tag 'notes'
+= javascript_include_tag 'gaku/notes'

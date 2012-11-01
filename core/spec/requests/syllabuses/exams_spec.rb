@@ -116,7 +116,7 @@ describe 'Syllabus Exams' do
         page.should have_content 'Show Exam'
         page.should have_content 'Exam portions list'
         page.should have_content 'Astronomy Exam'
-        current_url.should == exam_url(:id => @exam.id)
+        current_url.should == gaku.exam_url(:id => @exam.id,:host => 'www.example.com')
       end
 
       it 'deletes', :js => true do
@@ -126,7 +126,7 @@ describe 'Syllabus Exams' do
           ensure_delete_is_working
         end.to change(@syllabus.exams, :count).by -1
      
-        page.should_not have_content @exam.name
+        within(table){ page.should_not have_content @exam.name }
         flash_destroyed? 
       end
     end

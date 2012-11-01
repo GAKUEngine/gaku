@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'gaku_core', version
   s.add_dependency 'gaku_admissions', version
-
+  s.add_dependency 'gaku_sample', version
 end

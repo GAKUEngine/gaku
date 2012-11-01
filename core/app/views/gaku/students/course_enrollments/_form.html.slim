@@ -2,7 +2,7 @@
   b= t('courses.new')
   .row-fluid.mt-l
     .span12.well
-      = render 'shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
+      = render 'gaku/shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
 
       = course_enrollment_form.hidden_field :student_id, :value => @student.id
 
@@ -12,4 +12,4 @@
             = submit_button t('course_enrollments.create'), :id => 'submit-student-course-enrollment-button'
           = link_to_cancel :id => "cancel-student-course-enrollment-link"
 
-= javascript_include_tag 'students/course_enrollments'
+= javascript_include_tag 'gaku/students/course_enrollments'
