@@ -5,7 +5,7 @@ describe 'Admin Schools' do
   stub_authorization!
   
   before :all do
-    Helpers::Request.resource("admin-school") 
+    Gaku::Core::Helpers::Request.resource("admin-school") 
   end
 
   context 'new', :js => true do

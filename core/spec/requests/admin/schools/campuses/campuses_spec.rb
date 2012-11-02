@@ -5,7 +5,7 @@ describe 'Admin School Campuses' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("admin-school-campus")
+    Gaku::Core::Helpers::Request.resource("admin-school-campus")
   end
 
   before do 

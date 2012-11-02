@@ -5,7 +5,7 @@ describe 'ClassGroup Courses' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("class-group-course") 
+    set_resource "class-group-course" 
   end
   
   before do

@@ -5,7 +5,7 @@ describe 'ClassGroup Semesters' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("class-group-semester")
+    set_resource "class-group-semester"
   end
   
   before do
