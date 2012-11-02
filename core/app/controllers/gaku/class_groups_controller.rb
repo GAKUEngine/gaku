@@ -4,7 +4,7 @@ module Gaku
     helper_method :sort_column, :sort_direction
     
     inherit_resources
-    actions :show, :new, :create, :edit, :update
+    actions :show, :new, :create, :edit, :update, :destroy
 
     respond_to :js, :html
 

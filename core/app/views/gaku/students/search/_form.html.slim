@@ -8,8 +8,14 @@
             a#student-search-tab data-toggle="tab" href="#student"
               -if params[:controller] == "gaku/students"
                 = t('student')
+<<<<<<< HEAD
               -if params[:controller] == "gaku/admissions"
+=======
+              -elsif params[:controller] == "gaku/admissions"
+>>>>>>> Genshin/master
                 = t('admissions.candidates.candidate')
+              -else
+                = t('student') 
           li
             a#student-address-search-tab data-toggle="tab" href="#address"
               = t('address')

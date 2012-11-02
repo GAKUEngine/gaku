@@ -3,9 +3,9 @@ module Gaku
 
 		def destroy
 			@syllabus = Syllabus.find(params[:syllabus_id])
-			@exam_syllabus = ExamSyllabus.find(params[:id])
-			@exam_syllabus.destroy
-			@exams = Exam.all
+			exam_syllabus = ExamSyllabus.find(params[:id])
+			exam_syllabus.destroy
+		
 
 			flash.now[:notice] = 'Exam was successfully destroyed.'
 			respond_to do |format|

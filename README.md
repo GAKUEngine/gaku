@@ -38,7 +38,7 @@ Or use existing one.
 Add Gaku Engine to your Gemfile.
 
 ```ruby
-gem 'gaku', :git => 'git@github.com:Genshin/GAKUEngine.git'
+gem 'gaku', :git => 'git://github.com/Genshin/GAKUEngine.git'
 ```
 
 Update your bundle
