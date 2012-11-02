@@ -31,9 +31,9 @@
 // require underscore
 // require backbone
 //
-// require .//gaku_engine
-// require_tree ..//templates
-// require_tree .//models
-// require_tree .//collections
-// require_tree .//views
-// require_tree ./routers
+//= require ./gaku/gaku_engine
+//= require_tree ../templates
+//= require_tree .//gaku/models
+//= require_tree .//gaku/collections
+//= require_tree .//gaku/views
+//= require_tree .//gaku/routers

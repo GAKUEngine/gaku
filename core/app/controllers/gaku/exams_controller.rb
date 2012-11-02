@@ -324,7 +324,7 @@ module Gaku
                                        :ranks => @ranks
                                        }}
 
-        format.html { render "exams/grading" }
+        format.html { render "gaku/exams/grading" }
       end
     end
 
@@ -380,7 +380,7 @@ module Gaku
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
       end
 
-      def exams_count 
+      def exams_count
         @exams_count = Exam.count
       end
   end

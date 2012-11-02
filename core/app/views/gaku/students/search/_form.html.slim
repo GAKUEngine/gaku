@@ -6,9 +6,9 @@
         ul.nav.nav-tabs
           li.active
             a#student-search-tab data-toggle="tab" href="#student"
-              -if params[:controller] == "students"
+              -if params[:controller] == "gaku/students"
                 = t('student')
-              -if params[:controller] == "admissions"
+              -if params[:controller] == "gaku/admissions"
                 = t('admissions.candidates.candidate')
           li
             a#student-address-search-tab data-toggle="tab" href="#address"
@@ -19,7 +19,7 @@
           #address.tab-pane
             = render :partial => 'gaku/students/search/address', :locals => {:f => f}
   = hidden_field_tag "autocomplete_field"
-  = hidden_field_tag "enrolled_students", @enrolled_students 
+  = hidden_field_tag "enrolled_students", @enrolled_students
   #selected-students.hide
 
 
