@@ -1,5 +1,5 @@
 module Gaku
-  class StudentsController < ApplicationController
+  class StudentsController < GakuController
     include SheetHelper
 
     helper_method :sort_column, :sort_direction

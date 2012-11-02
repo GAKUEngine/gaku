@@ -1,5 +1,5 @@
 module Gaku
-  class SyllabusesController < ApplicationController
+  class SyllabusesController < GakuController
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show,  :only => [:show, :destroy]

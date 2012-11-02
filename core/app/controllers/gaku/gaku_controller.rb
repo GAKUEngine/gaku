@@ -1,5 +1,5 @@
 module Gaku
-  class ApplicationController < ActionController::Base
+  class GakuController < ActionController::Base
     #before_filter :set_locale
     protect_from_forgery
     layout :resolve_layout
