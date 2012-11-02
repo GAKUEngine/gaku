@@ -19,7 +19,7 @@ html
         -unless flash.empty?
           = render "gaku/shared/flash", :flash => flash
       #errors
-      = yield
-      = javascript_include_tag "gaku/gakuengine"
-
       #modal-dialogs
+      = yield
+
+      

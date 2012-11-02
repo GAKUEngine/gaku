@@ -12,17 +12,17 @@
 //= require chosen-jquery
 //= require underscore
 //= require backbone
-//= require_tree .//backbone
-
 // require i18n
 // require i18n/translations
 
-//= require tbs_datepicker/js/bootstrap-datepicker
+//= require gaku/gaku_engine.js.coffee
+
 //= require buhin/buhin.js.coffee
 //= require tablefix
 //=	require combobox
+//= require tbs_datepicker/js/bootstrap-datepicker
 //= require jquery_validation_engine/jquery.validationEngine
 //= require jquery_validation_engine/languages/jquery.validationEngine-en
 
 //= require gaku/grading_widget.js.coffee
-//= require gaku/gaku_engine.js.coffee
+//= require_tree .//backbone
