@@ -78,7 +78,7 @@ namespace :gem do
 end
 
 namespace :gem do
-  desc "Release all gems to gemcutter. Package spree components, then push spree"
+  desc "Release all gems to gemcutter. Package gaku components, then push gaku"
   task :release do
     version = File.read(File.expand_path("../GAKU_ENGINE_VERSION", __FILE__)).strip
 

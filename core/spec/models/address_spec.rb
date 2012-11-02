@@ -42,7 +42,7 @@ describe Gaku::Address do
     after do
       AppConfig[:default_country_id] = @default_country_id
     end
-    it "sets up a new record with Spree::Config[:default_country_id]" do
+    it "sets up a new record with Gaku::Config[:default_country_id]" do
       Gaku::Address.default.country.should == Gaku::Country.find(AppConfig[:default_country_id])
     end
 
