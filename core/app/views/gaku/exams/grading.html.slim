@@ -6,7 +6,7 @@ javascript:
   var student_total_scores = '#{@student_total_scores.to_json.to_s.html_safe}'
   var exam_averages = '#{@exam_averages.to_json.to_s.html_safe}'
   var deviation = '#{@deviation.to_json.to_s.html_safe}'
-  var students = '#{Student.decrypt_student_fields(@students).to_s.html_safe}'
+  var students = '#{Gaku::Student.decrypt_student_fields(@students).to_s.html_safe}'
   var grades = '#{@grades.to_json.to_s.html_safe}'
   var ranks = '#{@ranks.to_json.to_s.html_safe}'
 
