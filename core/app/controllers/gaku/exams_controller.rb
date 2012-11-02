@@ -324,7 +324,7 @@ module Gaku
                                        :ranks => @ranks
                                        }}
 
-        format.html { render "exams/grading" }
+        format.html { render "gaku/exams/grading" }
       end
     end
 

@@ -5,12 +5,13 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'gaku_sample'
   s.version     = version
-  s.summary     = 'Sample data (including images) for use with Gaku.'
-  s.description = 'Required dependency for Gaku'
+  s.summary     = 'Sample data for use with GAKU Engine'
+  s.description = 'Required dependency for GAKU Engine'
 
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.2'
   s.author      = 'Vassil Kalkov'
   s.email       = 'info@genshin.org'
+  s.homepage    = 'http://github.com/Genshin/GAKUEngine'
 
   s.files        = Dir['LICENSE', 'README.md', 'lib/**/*', 'db/**/*']
   s.require_path = 'lib'
