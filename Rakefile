@@ -9,7 +9,7 @@ rescue LoadError
   exit
 end
 
-spec = eval(File.read('gaku.gemspec'))
+spec = eval(File.read('gaku_engine.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
