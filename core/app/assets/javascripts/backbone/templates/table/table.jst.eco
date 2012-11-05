@@ -3,15 +3,15 @@
     <table class='exam_grid table table-striped table-bordered table-condensed'>
       <thead>
         <tr>
-          <th class='btn-primary' colspan='3'><%= I18n.t("student") %></td>
+          <th class='btn-primary' colspan='3'><%= ("student") %></td>
           <% for exam in @exams: %>
             <th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'><%= exam.name %></th>
           <% end %>
         </tr>
         <tr>
-          <th class='btn-info' style="width:60px"><%= I18n.t("class") %></th>
-          <th class='btn-info' style="width:60px"><%= I18n.t("class_group_enrollments.seat_number") %></th>
-          <th class='btn-info' style="width:150px"><%= I18n.t("students.name") %></th>
+          <th class='btn-info' style="width:60px"><%= ("class") %></th>
+          <th class='btn-info' style="width:60px"><%= ("class_group_enrollments.seat_number") %></th>
+          <th class='btn-info' style="width:150px"><%= ("students.name") %></th>
           <% for exam in @exams: %>
             <% for portion in exam.exam_portions: %>
               <% if exam.use_weighting : %>
@@ -26,13 +26,13 @@
               </th>
             <% end %>
           <% end %>
-          <th id='total_points_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.total_points") %></th>
+          <th id='total_points_title' class='btn-inverse' style="width:65px"><%= ("grades.total_points") %></th>
           <% if exam.use_weighting : %>
-            <td id='weighting_total_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.weighting_total") %></td>
+            <td id='weighting_total_title' class='btn-inverse' style="width:65px"><%= ("grades.weighting_total") %></td>
           <% end %>
-          <th class='btn-inverse'><%= I18n.t("grades.deviation") %></th>
-          <th id='grade_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level10") %>
-          <th id='rank_title' class='btn-inverse' style="width:65px"><%= I18n.t("grades.level5") %>
+          <th class='btn-inverse'><%= ("grades.deviation") %></th>
+          <th id='grade_title' class='btn-inverse' style="width:65px"><%= ("grades.level10") %>
+          <th id='rank_title' class='btn-inverse' style="width:65px"><%= ("grades.level5") %>
         </tr>
       </thead>
       <tbody>
@@ -63,7 +63,7 @@
         <tr class='total_row'>
           <td colspan='3'></td>
           <% for exam in @exams: %>
-            <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"><%= I18n.t("grades.average") %></thead>
+            <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"><%= ("grades.average") %></thead>
             <td class="vm-tr">
               <%= @exam_averages[exam.id] %>
             </td>

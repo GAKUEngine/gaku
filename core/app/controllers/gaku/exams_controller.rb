@@ -1,8 +1,10 @@
+require 'grading/calculations'
 module Gaku
   class ExamsController < ApplicationController
-
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
+    
+    include ::Gaku::Calculations
 
     before_filter :exam, :only => [:show, :create_exam_portion]
     before_filter :load_before_show, :only => :show
@@ -306,23 +308,24 @@ module Gaku
           rankPoint -= 1
         end
         scores.each do |score|
-          if @grades[exam.id][socre[1]] == 3
+          if @grades[exam.id][score[1]] == 3
             @ranks[exam.id][score[1]] = 2
-          elsif @grades[exam.id][socre[1]] < 3
+          elsif @grades[exam.id][score[1]] < 3
             @ranks[exam.id][score[1]] = 1
           end
         end
       end
       respond_to do |format|
-        format.json { render :json => {:student_total_scores => @student_total_scores,
-                                       :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
-                                       :course => @course,
-                                       :exam_averages => @exam_averages,
-                                       :deviation => @deviation,
-                                       :students => Student.decrypt_student_fields(@students),
-                                       :grades => @grades,
-                                       :ranks => @ranks
-                                       }}
+        format.json { render :json => {
+          :student_total_scores => @student_total_scores.as_json(),
+          :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }},:root => false),
+          :course => @course.as_json(:root => false),
+          :exam_averages => @exam_averages.as_json(:root => false),
+          :deviation => @deviation.as_json(:root => false),
+          :students => @students.to_json(:root => false),
+          :grades => @grades.as_json(:root => false),
+          :ranks => @ranks.as_json(:root => false)
+                                     }}
 
         format.html { render "gaku/exams/grading" }
       end
