@@ -1,8 +1,10 @@
+require 'grading/calculations'
 module Gaku
   class ExamsController < ApplicationController
-
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
+    
+    include ::Gaku::Calculations
 
     before_filter :exam, :only => [:show, :create_exam_portion]
     before_filter :load_before_show, :only => :show
