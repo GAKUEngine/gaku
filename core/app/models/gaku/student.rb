@@ -61,7 +61,6 @@ module Gaku
     has_many :achievements
     has_many :school_histories
 
-    has_associated_audits
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
@@ -82,6 +81,9 @@ module Gaku
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :notes, :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
+
+    has_associated_audits
+    audited
 
     # methods for json student chooser returning
     
