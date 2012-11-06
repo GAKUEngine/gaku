@@ -4,6 +4,7 @@ class CreateGakuAchievements < ActiveRecord::Migration
   		t.string      :name
   		t.text        :description
   		t.references  :student
+  		t.references  :school
 
   		t.timestamps
   	end

@@ -19,6 +19,7 @@ module Gaku
 
   	has_many :campuses
     has_many :simple_grades
+    has_many :achievements
 
   	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades
     
