@@ -59,6 +59,7 @@ module Gaku
     belongs_to :scholarship_status
     has_many :simple_grades
     has_many :achievements
+    has_many :school_histories
 
     has_associated_audits
 
