@@ -23,7 +23,7 @@ describe Gaku::Student do
     it { should have_many :simple_grades }
     it { should have_many :achievements }
 
-    it { should have_one :scholarship_status }
+    it { should belong_to :scholarship_status }
 
     it { should have_and_belong_to_many(:guardians) }
 

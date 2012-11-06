@@ -3,6 +3,6 @@ require 'spec_helper'
 describe Gaku::ScholarshipStatus do
 
   context "validations" do 
-  	it { should belong_to :student }
+  	it { should have_many :students }
   end
 end
