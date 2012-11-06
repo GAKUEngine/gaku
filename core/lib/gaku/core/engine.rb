@@ -7,7 +7,7 @@ module Gaku
       config.autoload_paths += %W(#{config.root}/lib)
       
       config.to_prepare do
-        ApplicationController.helper(ApplicationHelper)
+        GakuController.helper(GakuHelper)
       end
 
       def self.activate

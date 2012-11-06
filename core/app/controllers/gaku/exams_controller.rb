@@ -1,5 +1,5 @@
 module Gaku
-  class ExamsController < ApplicationController
+  class ExamsController < GakuController
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
     

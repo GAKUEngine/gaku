@@ -1,5 +1,5 @@
 module Gaku
-	class Students::CommuteMethodsController < ApplicationController
+	class Students::CommuteMethodsController < GakuController
 
 		inherit_resources
 

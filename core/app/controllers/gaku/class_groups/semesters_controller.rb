@@ -1,5 +1,5 @@
 module Gaku
-  class ClassGroups::SemestersController < ApplicationController
+  class ClassGroups::SemestersController < GakuController
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy

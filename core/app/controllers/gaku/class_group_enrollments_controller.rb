@@ -1,5 +1,5 @@
 module Gaku
-  class ClassGroupEnrollmentsController < ApplicationController
+  class ClassGroupEnrollmentsController < GakuController
 
     def filtered_students
       @class_group_enrolled_students = ClassGroupEnrollment.where(:class_group_id => params[:class_group_id]).pluck(:student_id)

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 module Gaku
-  class Students::ImporterController < ApplicationController
+  class Students::ImporterController < GakuController
     include SheetHelper
     #require 'importers/school_station'
     require 'spreadsheet'

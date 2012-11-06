@@ -1,5 +1,5 @@
 module Gaku
-  class Students::ClassGroupEnrollmentsController < ApplicationController
+  class Students::ClassGroupEnrollmentsController < GakuController
 
     inherit_resources
     actions :new, :destroy

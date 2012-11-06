@@ -1,5 +1,5 @@
 module Gaku
-  class Students::NotesController < ApplicationController
+  class Students::NotesController < GakuController
     
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy

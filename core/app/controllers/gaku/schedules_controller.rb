@@ -1,5 +1,5 @@
 module Gaku
-	class SchedulesController < ApplicationController
+	class SchedulesController < GakuController
 
 	  #before_filter :authenticate_user!
 

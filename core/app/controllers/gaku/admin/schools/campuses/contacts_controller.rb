@@ -1,6 +1,6 @@
 module Gaku
   module Admin
-    class Schools::Campuses::ContactsController < ApplicationController
+    class Schools::Campuses::ContactsController < GakuController
 
       inherit_resources
       actions :index, :show, :create, :update, :edit, :destroy
