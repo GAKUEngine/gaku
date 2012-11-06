@@ -13,14 +13,14 @@
     .span12.well
       .row-fluid
         .span4
-          = class_group_form.label :grade, t("class_groups.grade")
+          = class_group_form.label :grade, t("class_groups.grade"), :class => "control-label pull-left"
           = class_group_form.number_field :grade, :class => "span12"
         .span4
-          = class_group_form.label :name, t("class_groups.name")
+          = class_group_form.label :name, t("class_groups.name"), :class => "control-label pull-left"
           = required_field
           = class_group_form.text_field :name, :class => "span12 validate[required]"
         .span4
-          = class_group_form.label :homeroom, t("class_groups.homeroom")
+          = class_group_form.label :homeroom, t("class_groups.homeroom"), :class => "control-label pull-left"
           = class_group_form.text_field :homeroom, :class => "span12"
       .row-fluid
         .span12

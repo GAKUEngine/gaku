@@ -1,5 +1,5 @@
 module Gaku
-  class Courses::EnrollmentsController < ApplicationController
+  class Courses::EnrollmentsController < GakuController
 
     respond_to :js
 

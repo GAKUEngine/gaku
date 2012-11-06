@@ -1,5 +1,5 @@
 module Gaku
-  class ExamPortionScoresController < ApplicationController
+  class ExamPortionScoresController < GakuController
     inherit_resources
 
     respond_to :js, :json, :html

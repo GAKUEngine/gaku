@@ -1,5 +1,5 @@
 module Gaku
-	class AttachmentsController < ApplicationController
+	class AttachmentsController < GakuController
 		
 		inherit_resources
 		actions :index, :show, :new, :create, :update, :edit, :destroy
