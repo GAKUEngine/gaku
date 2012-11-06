@@ -56,6 +56,8 @@ module Gaku
     has_many :attendances
     has_many :enrollment_statuses
 
+    has_one :scholarship_status
+
     has_associated_audits
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
