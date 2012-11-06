@@ -3,7 +3,7 @@ class CreateGakuAchievements < ActiveRecord::Migration
   	create_table :gaku_achievements do |t|
   		t.string      :name
   		t.text        :description
-  		t.references  :past_school
+  		t.references  :student
 
   		t.timestamps
   	end

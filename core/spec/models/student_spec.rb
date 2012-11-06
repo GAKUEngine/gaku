@@ -21,6 +21,7 @@ describe Gaku::Student do
     it { should have_many(:student_specialties) }
     it { should have_many(:specialities) }
     it { should have_many :simple_grades }
+    it { should have_many :achievements }
 
     it { should have_one :scholarship_status }
 
