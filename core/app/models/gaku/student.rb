@@ -66,7 +66,7 @@ module Gaku
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
-                    :picture, :student_id_number, :student_foreign_id_number
+                    :picture, :student_id_number, :student_foreign_id_number, :scholarship_status_id
 
   #  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
   #  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
