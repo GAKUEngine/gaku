@@ -57,6 +57,7 @@ module Gaku
     has_many :enrollment_statuses
 
     has_one :scholarship_status
+    has_many :simple_grades
 
     has_associated_audits
 

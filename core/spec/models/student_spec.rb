@@ -20,6 +20,7 @@ describe Gaku::Student do
     it { should have_many(:exam_portion_scores) }
     it { should have_many(:student_specialties) }
     it { should have_many(:specialities) }
+    it { should have_many :simple_grades }
 
     it { should have_one :scholarship_status }
 

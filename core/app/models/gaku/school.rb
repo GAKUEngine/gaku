@@ -18,6 +18,7 @@ module Gaku
   class School < ActiveRecord::Base
 
   	has_many :campuses
+    has_many :simple_grades
 
   	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades
     

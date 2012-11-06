@@ -4,6 +4,7 @@ describe Gaku::School do
 	context "validations" do
 		it { should have_valid_factory(:school) }
 		it { should have_many (:campuses) }
+		it { should have_many :simple_grades }
 
 		it { should allow_mass_assignment_of :name }
 		it { should allow_mass_assignment_of :is_primary }
