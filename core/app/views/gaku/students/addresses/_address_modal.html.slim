@@ -2,6 +2,8 @@
   = form_for [@student, @address], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |address_form| 
 
       .modal-header
+        button.close type="button" data-dismiss="modal"
+          'x
         h3 =t("addresses.edit")
       .modal-body
         .row-fluid
