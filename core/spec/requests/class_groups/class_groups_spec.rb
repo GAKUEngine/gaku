@@ -5,7 +5,7 @@ describe 'ClassGroups' do
   stub_authorization!
 
   before :all do 
-    Helpers::Request.resource("class-group") 
+    set_resource("class-group") 
   end
 
   context 'new', :js => true do

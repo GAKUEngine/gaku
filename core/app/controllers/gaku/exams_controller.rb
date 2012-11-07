@@ -1,8 +1,9 @@
 module Gaku
   class ExamsController < ApplicationController
-
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
+    
+    include Gaku::Core::Grading::Calculations
 
     before_filter :exam, :only => [:show, :create_exam_portion]
     before_filter :load_before_show, :only => :show
@@ -136,194 +137,27 @@ module Gaku
       end
     end
 
-    def FixDigit num, digitNum
-      fixNum = 10 ** digitNum
-      num = num * fixNum
-      if num.nan?
-        num = 0
-      else
-        num = num.truncate
-        num = num.to_f / fixNum.to_f
-      end
-      return num
-    end
-
     def grading
       @course = Course.find(params[:course_id])
       @students = @course.students #.select("id, surname, name")
-      if params[:id] != nil
-        @exams = Exam.find_all_by_id(params[:id])
-      else
-        @exams = @course.syllabus.exams.all
-        # TODO calculate all grades and put them in here
-        # @grades = 1
-      end
+      find_exams
+      
+      calculate_totals
+      calculate_exam_avarages
+      calculate_deviation
+      calculate_rank_and_grade
 
-      @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
-      @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
-      @exam_averages = Hash.new {0.0}
-      @exam_weight_averages = Hash.new {0.0}
-      @weighting_score = true
-
-      @students.each do |student|
-        @exams.each do |exam|
-          @student_total_scores[student.id][exam.id] = 0.0
-          @student_total_weights[student.id][exam.id] = 0.0
-          exam.exam_portions.each do |portion|
-            if student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
-              score = ExamPortionScore.new
-              score.student_id = student.id
-              score.exam_portion_id = portion.id
-              score.save
-            else
-              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
-              if exam.use_weighting
-                @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
-              end
-            end
-          end
-          @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
-          if exam.use_weighting
-            @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
-          end
-        end
-      end
-
-      # Exam Averaes Calculation -----↓
-      @exams.each do |exam|
-        @exam_averages[exam.id] = FixDigit @exam_averages[exam.id] / @students.length, 4
-        if exam.use_weighting
-          @exam_weight_averages[exam.id] = FixDigit @exam_weight_averages[exam.id] / @students.length, 4
-        end
-      end
-
-      # Deviation Calculation -----↓
-      @deviation = Hash.new { |hash,key| hash[key] = {} }
-      stdDev = 0.0
-      devMem = 0.0
-      @exams.each do |exam|
-        @students.each do |student|
-          if exam.use_weighting
-            stdDev += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
-          else
-            stdDev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
-          end
-        end
-        stdDev = Math.sqrt stdDev / @students.length
-        @students.each do |student|
-          @deviation[student.id][exam.id] = 0.0
-          if exam.use_weighting
-            devMem = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / stdDev
-          else
-            devMem = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / stdDev
-          end
-
-          if devMem.nan?
-            @deviation[student.id][exam.id] = 50
-          else
-            @deviation[student.id][exam.id] = FixDigit devMem * 10 + 50, 4
-          end
-        end
-      end
-
-      # WIP Grade and Rank Calculation -----↓
-      @grades = Hash.new { |hash,key| hash[key] = {} }
-      gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
-      gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
-
-
-      @ranks = Hash.new { |hash,key| hash[key] = {} }
-      rankLevels = [15, 20]
-
-      @exams.each do |exam|
-        scores = []
-        if exam.use_weighting
-          @students.each do |student|
-            scores.push [@student_total_weights[student.id][exam.id], student.id]
-          end
-        else
-          @students.each do |student|
-            scores.push [@student_total_scores[student.id][exam.id], student.id]
-          end
-        end
-        scores.sort!().reverse!()
-
-
-        # WIP Grade Calculation -----↓
-
-        # @grading_method = GradingMethod.find(exam.grading_method_id)
-        # puts "@grading_method-------------"
-        # puts @grading_method.name
-        # eval @grading_method.method
-
-        gradingMethod = 1
-        gradePoint = 10
-        case gradingMethod
-        when 1
-          gradeLevels_Deviation.each_with_index do |glevel, i|
-            @students.each do |student|
-              if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
-                @grades[exam.id][student.id] = gradePoint
-              end
-            end
-            gradePoint -= 1
-          end
-        when 2
-          scoresMem = scores.clone
-          gradeNums = []
-          gradeLevels_Percent.each do |glevel|
-            gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
-          end
-          gradeNums.each do |gnum|
-            i = 0
-            while i < gnum && scoresMem.length != 0
-              @grades[exam.id][scoresMem.shift[1]] = gradePoint
-              i += 1
-            end
-            gradePoint -= 1
-          end
-        end
-
-        # Rank Calculation -----↓
-        rankPoint = 5
-        @students.each do |student|
-          @ranks[exam.id][student.id] = 3
-        end
-        rankNums = []
-        rankLevels.each do |rlevel|
-          rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
-        end
-        rankNums.each do |rnum|
-          i = 0
-          while i < rnum && scores.length != 0
-            scoreMem = scores.shift()
-            @ranks[exam.id][scoreMem[1]] = rankPoint
-            if scores.length != 0 and scoreMem[0] == scores[0][0]
-              rnum += 1
-            end
-            i += 1
-          end
-          rankPoint -= 1
-        end
-        scores.each do |score|
-          if @grades[exam.id][socre[1]] == 3
-            @ranks[exam.id][score[1]] = 2
-          elsif @grades[exam.id][socre[1]] < 3
-            @ranks[exam.id][score[1]] = 1
-          end
-        end
-      end
       respond_to do |format|
-        format.json { render :json => {:student_total_scores => @student_total_scores,
-                                       :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }}),
-                                       :course => @course,
-                                       :exam_averages => @exam_averages,
-                                       :deviation => @deviation,
-                                       :students => Student.decrypt_student_fields(@students),
-                                       :grades => @grades,
-                                       :ranks => @ranks
-                                       }}
-
+        format.json { render :json => {
+          :student_total_scores => @student_total_scores.as_json(),
+          :exams => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores }},:root => false),
+          :course => @course.as_json(:root => false),
+          :exam_averages => @exam_averages.as_json(:root => false),
+          :deviation => @deviation.as_json(:root => false),
+          :students => @students.to_json(:root => false),
+          :grades => @grades.as_json(:root => false),
+          :ranks => @ranks.as_json(:root => false)
+        }}
         format.html { render "gaku/exams/grading" }
       end
     end
@@ -382,6 +216,16 @@ module Gaku
 
       def exams_count 
         @exams_count = Exam.count
+      end
+
+      def find_exams
+        if params[:id] != nil
+          @exams = Exam.find_all_by_id(params[:id])
+        else
+          @exams = @course.syllabus.exams.all
+          # TODO calculate all grades and put them in here
+          # @grades = 1
+        end
       end
   end
 end

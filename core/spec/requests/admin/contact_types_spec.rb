@@ -5,7 +5,7 @@ describe 'Admin ContactTypes' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("admin-contact-type") 
+    set_resource "admin-contact-type" 
   end
 
   context 'new', :js => true do

@@ -1,18 +1,16 @@
 module Gaku
   class ApplicationController < ActionController::Base
-    #before_filter :set_locale
+    before_filter :set_locale
     protect_from_forgery
     layout :resolve_layout
 
     private
 
-    def resolve_layout
-      # some logic depending on current request
-      path_to_layout =  "gaku/layouts/gaku"
-      return path_to_layout
-    end
-
-     
+      def resolve_layout
+        # some logic depending on current request
+        path_to_layout =  "gaku/layouts/gaku"
+        return path_to_layout
+      end
 
       def set_locale
         if current_user && params[:locale]

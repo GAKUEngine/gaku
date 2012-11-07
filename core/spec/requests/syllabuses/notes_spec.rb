@@ -5,7 +5,7 @@ describe 'Syllabus Notes' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("syllabus-note")
+    set_resource "syllabus-note"
   end
   
   before do

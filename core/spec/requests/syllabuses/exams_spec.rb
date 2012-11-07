@@ -10,7 +10,7 @@ describe 'Syllabus Exams' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource('syllabus-exam') 
+    set_resource 'syllabus-exam'
   end
 
   before do

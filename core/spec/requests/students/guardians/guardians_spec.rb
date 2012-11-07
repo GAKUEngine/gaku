@@ -8,7 +8,7 @@ describe 'Student Guardians' do
   delete_link = ".delete-student-guardian-link"
 
   before :all do
-    Helpers::Request.resource("student-guardian") 
+    set_resource "student-guardian"
   end
 
   before do

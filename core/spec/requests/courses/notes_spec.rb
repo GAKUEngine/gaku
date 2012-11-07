@@ -5,7 +5,7 @@ describe 'Course Notes' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("course-note")
+    set_resource "course-note"
   end
   
   before do

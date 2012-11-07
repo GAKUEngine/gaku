@@ -5,7 +5,7 @@ describe 'Admin EnrollmentStatusTypes' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("admin-enrollment-status-type") 
+    set_resource "admin-enrollment-status-type" 
   end 
 
   context 'new', :js => true do

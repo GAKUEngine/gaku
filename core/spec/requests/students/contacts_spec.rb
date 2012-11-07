@@ -5,7 +5,7 @@ describe 'Student Contacts' do
   stub_authorization!
 
   before :all do 
-    Helpers::Request.resource("student-contact")
+    set_resource "student-contact"
   end
 
   before do

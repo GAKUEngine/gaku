@@ -9,9 +9,6 @@ html
     = javascript_include_tag params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.js")
     = csrf_meta_tags
   body
-    javascript:
-      I18n.defaultLocale = "#{{I18n.default_locale}}";
-      I18n.locale = "#{{I18n.locale}}";
     = render :partial => 'gaku/shared/modal_config'
     = render :partial => "gaku/shared/menubar"
     .container-fluid
