@@ -1,18 +1,40 @@
-= form_for [:admin, @admission_method, @admission_phase], :remote => true do |admission_method_form|
+= nested_form_for [:admin, @admission_method, @admission_phase], :remote => true do |admission_phase_form|
   b= t('admission_methods.new')
   .row-fluid.mt-l
     .span12.well
       .span12.well
-        =admission_method_form.label :name
-        =admission_method_form.text_field :name, :class => "span12"
-        =admission_method_form.label :order
-        =admission_method_form.number_field :order, :class => "span12"
-        =admission_method_form.label :phase_handler
-        =admission_method_form.number_field :phase_handler, :class => "span12"
+        =admission_phase_form.label t('admission_phases.name')
+        =admission_phase_form.text_field :name, :class => "span12"
+        =admission_phase_form.label t('admission_phases.order')
+        =admission_phase_form.number_field :order, :class => "span12"
+        =admission_phase_form.label t('admission_phases.phase_handler')
+        =admission_phase_form.number_field :phase_handler, :class => "span12"
+      .span12.well[style="margin-left: 0px; margin-top: 20px;"]
+        = admission_phase_form.fields_for :admission_phase_states do |state_form|
+          = state_form.label t('admission_phase_states.name')
+          = state_form.text_field :name
+          = state_form.label t('admission_phase_states.can_progress')
+          = state_form.check_box :can_progress
+          = state_form.label t('admission_phase_states.can_admit')
+          = state_form.check_box :can_admit
+          = state_form.label t('admission_phase_states.auto_admit')
+          = state_form.check_box :auto_admit
+          = state_form.link_to_remove t('admission_phase_states.remove')
+        p= admission_phase_form.link_to_add t('admission_phase_states.add'), :admission_phase_states
+      .span12.well[style="margin-left: 0px; margin-top: 20px;"]
         .row-fluid
           .span12
             .span6
-              = submit_button t('admission_methods.save'), :id => 'submit-admin-admission-method-admission-phase-button'
+              = submit_button t('admission_phases.save'), :id => 'submit-admin-admission-method-admission-phase-button'
             = link_to_cancel :id => 'cancel-admin-admission-method-admission-phase-link'
-  
-= javascript_include_tag 'gaku/admin/gaku_admissions'
+
+css:
+  .fields label, .fields input {
+    display:inline;
+  }
+  .fields label {
+    margin-right:10px;
+  }
+  .fields input {
+    margin-right:30px;
+  }

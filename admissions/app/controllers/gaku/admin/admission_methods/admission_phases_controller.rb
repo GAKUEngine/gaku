@@ -18,6 +18,10 @@ module Gaku
         end
       end
 
+      def show_phase_states
+        @admission_phase = AdmissionPhase.find(params[:id])
+      end
+
       private
         def load_admission_method
           @admission_method = AdmissionMethod.find(params[:admission_method_id])

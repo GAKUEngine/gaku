@@ -3,7 +3,7 @@
     #new-admin-admission-method-admission-phase.hide
     .pull-left
       h4.h4-vm.admin-admission-method-admission-phases-count
-        = print_count(@admission_method.admission_phases.count, t('admission_methods.list'))
+        = print_count(@admission_method.admission_phases.count, t('admission_phases.list'))
     .pull-right
         = ajax_link_to_new t('admission_phases.add'), new_admin_admission_method_admission_phase_path(@admission_method), :id => 'new-admin-admission-method-admission-phase-link'
 
@@ -14,6 +14,7 @@
           th.btn-inverse =t('admission_phases.singular')
           th.btn-inverse =t('admission_phases.order')
           th.btn-inverse =t('admission_phases.phase_handler')
+          th.btn-inverse =t('admission_phase_states.plural')
           th.btn-info style='width:61px' =t 'manage'
       tbody
         =render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase', :collection => @admission_method.admission_phases, :as => 'admission_phase'
