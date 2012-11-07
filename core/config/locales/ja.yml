@@ -383,3 +383,17 @@ ja:
     add: "Add Admission Method"
     save: "Save Admission Method"
     list: "Admission Methods list"
+    edit: "Edit Admission Method"
+    name: "Method name"
+
+  admission_phases:
+    singular: "Admission Phase"
+    plural: "Admission Phases"
+    new: "New Admission Phase"
+    add: "Add Admission Phase"
+    save: "Save Admission Phase"
+    list: "Admission Phases list"
+    edit: "Edit Admission Phase"
+    order: "Order"
+    phase_handler: "Phase handler"
+    name: "Phase name"

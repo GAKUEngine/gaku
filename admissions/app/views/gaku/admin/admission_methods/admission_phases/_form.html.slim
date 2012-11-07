@@ -1,0 +1,18 @@
+= form_for [:admin, @admission_method, @admission_phase], :remote => true do |admission_method_form|
+  b= t('admission_methods.new')
+  .row-fluid.mt-l
+    .span12.well
+      .span12.well
+        =admission_method_form.label :name
+        =admission_method_form.text_field :name, :class => "span12"
+        =admission_method_form.label :order
+        =admission_method_form.number_field :order, :class => "span12"
+        =admission_method_form.label :phase_handler
+        =admission_method_form.number_field :phase_handler, :class => "span12"
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('admission_methods.save'), :id => 'submit-admin-admission-method-admission-phase-button'
+            = link_to_cancel :id => 'cancel-admin-admission-method-admission-phase-link'
+  
+= javascript_include_tag 'gaku/admin/gaku_admissions'

@@ -1,0 +1,24 @@
+#edit-admission-method-admission-phase-modal.modal.hide wmode="opaque"
+
+  = form_for([:admin, @admission_method, @admission_phase], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |admission_phase_form| 
+
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          'x
+        h3 =t("admission_phases.edit")
+      .modal-body
+        .row-fluid
+          #validation-errors
+        .row-fluid
+          = admission_phase_form.label :name, t("admission_phases.name")
+          = admission_phase_form.text_field :name, :class => "span12"    
+        .row-fluid
+          = admission_phase_form.label :order, t("admission_phases.order")
+          = admission_phase_form.number_field :order, :class => "span12" 
+          .row-fluid
+          = admission_phase_form.label :phase_handler, t("admission_phases.phase_handler")
+          = admission_phase_form.number_field :phase_handler, :class => "span12" 
+        .row-fluid
+          .span9
+            =submit_button t('admission_phases.save'), :id => 'submit-admin-admission-method-admission-phase-button', :class => 'btn btn-primary button span12'
+          = link_to_cancel :id => 'cancel-admin-admission-method-admission-phase-link'

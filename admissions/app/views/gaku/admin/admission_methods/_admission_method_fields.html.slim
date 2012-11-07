@@ -1,4 +1,5 @@
 td =admission_method.name
 td
+  = link_to_show [:admin, admission_method]
   = ajax_link_to_edit [:edit, :admin, admission_method]
   = ajax_link_to_delete [:admin, admission_method]

@@ -1,0 +1,21 @@
+#admin-admission-method-admission-phases
+  .row-fluid
+    #new-admin-admission-method-admission-phase.hide
+    .pull-left
+      h4.h4-vm.admin-admission-method-admission-phases-count
+        = print_count(@admission_method.admission_phases.count, t('admission_methods.list'))
+    .pull-right
+        = ajax_link_to_new t('admission_phases.add'), new_admin_admission_method_admission_phase_path(@admission_method), :id => 'new-admin-admission-method-admission-phase-link'
+
+  .row-fluid
+    table#admin-admission-method-admission-phases-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('admission_phases.singular')
+          th.btn-inverse =t('admission_phases.order')
+          th.btn-inverse =t('admission_phases.phase_handler')
+          th.btn-info style='width:61px' =t 'manage'
+      tbody
+        =render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase', :collection => @admission_method.admission_phases, :as => 'admission_phase'
+    br/ 
+    #new-admin-admission-method-admission-phase-form-errors

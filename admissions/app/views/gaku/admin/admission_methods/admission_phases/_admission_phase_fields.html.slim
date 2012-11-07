@@ -1,0 +1,6 @@
+td =admission_phase.name
+td =admission_phase.order
+td =admission_phase.phase_handler
+td
+  = ajax_link_to_edit [:edit, :admin, @admission_method, admission_phase]
+  = ajax_link_to_delete [:admin, @admission_method, admission_phase]
