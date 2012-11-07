@@ -8,6 +8,7 @@ en:
     enrollment_status_types: "Enrollment Status Types"
     disposals: 'Disposals'
     types: 'Types'
+    admission_methods: "Admission Methods"
     presets:
       presets: "Presets"
       student: "Student Preset"
@@ -401,3 +402,11 @@ en:
   csv:
     import: "CSV Import"
     export: "CSV Export"
+
+  admission_methods:
+    singular: "Admission Method"
+    plural: "Admission Methods"
+    new: "New Admission Method"
+    add: "Add Admission Method"
+    save: "Save Admission Method"
+    list: "Admission Methods list"

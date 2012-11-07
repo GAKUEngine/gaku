@@ -23,6 +23,7 @@ ja:
     disposals: 'Disposals'
     types: 'Types'
     contact_types: "Contact Types"
+    admission_methods: "Admission Methods"
     presets:
       presets: "Presets"
       save: 'プリセットを保存'
@@ -374,3 +375,11 @@ ja:
     show: "試験要素を表示"
     attached_file_count: '追加ファイル数'
   import_format: "インポート形式"
+
+  admission_methods:
+    singular: "Admission Method"
+    plural: "Admission Methods"
+    new: "New Admission Method"
+    add: "Add Admission Method"
+    save: "Save Admission Method"
+    list: "Admission Methods list"
