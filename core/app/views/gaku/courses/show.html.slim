@@ -38,7 +38,8 @@
                 li
                   a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignments")
                 li
-                  a#new-course-exam-link data-toggle="tab" href="#course-exams" =t("exams.plural")
+                  a#new-course-exam-link data-toggle="tab" href="#course-exams" 
+                    = !@course.syllabus.nil? ? print_count(@course.syllabus.exams.count, t("exams.plural")) : t("exams.plural")
               .tab-content
                 #course-enrollments.tab-pane.active
                   = render :partial => "gaku/courses/enrollments/enrollments"

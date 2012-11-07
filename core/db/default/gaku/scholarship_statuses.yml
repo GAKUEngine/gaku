@@ -1,0 +1,10 @@
+self_paid:
+  name: "Self Paid"
+government:
+  name: "Government Scholarship"
+school:
+  name: "School Scholarship"
+organization: 
+  name: "Organizational Scholarship"
+charity: 
+  name: "Charity Scholarship"      

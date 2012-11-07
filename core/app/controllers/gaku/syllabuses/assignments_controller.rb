@@ -1,5 +1,5 @@
 module Gaku
-	class Syllabuses::AssignmentsController < ApplicationController
+	class Syllabuses::AssignmentsController < GakuController
 
 	  def create
 	    if @syllabus.update_attributes(params[:syllabus])

@@ -1,5 +1,5 @@
 module Gaku
-  module ApplicationHelper
+  module GakuHelper
 
     include LinkToHelper
     include SortHelper

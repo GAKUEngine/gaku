@@ -1,5 +1,5 @@
 module Gaku
-  class CoursesController < ApplicationController
+  class CoursesController < GakuController
   	
     helper_method :sort_column, :sort_direction
 

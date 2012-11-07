@@ -56,12 +56,16 @@ module Gaku
     has_many :attendances
     has_many :enrollment_statuses
 
-    has_associated_audits
+    belongs_to :scholarship_status
+    has_many :simple_grades
+    has_many :achievements
+    has_many :school_histories
+
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
-                    :picture, :student_id_number, :student_foreign_id_number
+                    :picture, :student_id_number, :student_foreign_id_number, :scholarship_status_id
 
   #  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
   #  attr_encrypted :surname,          :key => 'f98gd9regre9gr9gre9gerh'
@@ -78,10 +82,17 @@ module Gaku
     accepts_nested_attributes_for :notes, :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
 
+    has_associated_audits
+    audited
+
     # methods for json student chooser returning
     
     def full_name
       "#{self.surname} #{self.name}"
+    end
+
+    def scholarship
+      scholarship_status.nil? ? "" : scholarship_status.name
     end
 
     def class_group_widget
