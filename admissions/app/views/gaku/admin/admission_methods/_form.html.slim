@@ -1,0 +1,12 @@
+= form_for [:admin, @admission_method], :remote => true do |admission_method_form|
+  - if admission_method_form.object.new_record?
+    b= t('admission_methods.new')
+    .row-fluid.mt-l
+      .span12.well
+          = admission_method_form.label :name, t("admission_methods.name")
+          = admission_method_form.text_field :name, :class => "span12"
+          .row-fluid
+            .span12
+              .span6
+                =submit_button t('admission_methods.save'), :id => 'submit-admin-admission-method-button'
+              = link_to_cancel :id => 'cancel-admin-admission-method-link'

@@ -23,6 +23,7 @@ ja:
     disposals: 'Disposals'
     types: 'Types'
     contact_types: "Contact Types"
+    admission_methods: "Admission Methods"
     presets:
       presets: "Presets"
       save: 'プリセットを保存'
@@ -374,3 +375,40 @@ ja:
     show: "試験要素を表示"
     attached_file_count: '追加ファイル数'
   import_format: "インポート形式"
+
+  admission_methods:
+    singular: "Admission Method"
+    plural: "Admission Methods"
+    new: "New Admission Method"
+    add: "Add Admission Method"
+    save: "Save Admission Method"
+    list: "Admission Methods list"
+    edit: "Edit Admission Method"
+    name: "Method name"
+
+  admission_phases:
+    singular: "Admission Phase"
+    plural: "Admission Phases"
+    new: "New Admission Phase"
+    add: "Add Admission Phase"
+    save: "Save Admission Phase"
+    list: "Admission Phases list"
+    edit: "Edit Admission Phase"
+    order: "Order"
+    phase_handler: "Phase handler"
+    name: "Phase name"
+
+    admission_phase_states:
+    singular: "Admission Phase State"
+    plural: "Admission Phase States"
+    new: "New Admission Phase State"
+    add: "Add Admission Phase State"
+    save: "Save Admission Phase State"
+    list: "Admission Phase States list"
+    edit: "Edit Admission Phase State"
+    order: "Order"
+    name: "State name"
+    can_progress: "Can progress"
+    can_admit: "Can admit"
+    auto_admit: "Auto admit"
+    remove: "Remove state"
