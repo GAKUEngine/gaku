@@ -398,7 +398,7 @@ ja:
     phase_handler: "Phase handler"
     name: "Phase name"
 
-    admission_phase_states:
+  admission_phase_states:
     singular: "Admission Phase State"
     plural: "Admission Phase States"
     new: "New Admission Phase State"
