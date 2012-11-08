@@ -1,6 +1,6 @@
 module Gaku
   module Admin
-    class BaseController < ApplicationController
+    class BaseController < GakuController
 
       layout 'gaku/layouts/gaku'
 

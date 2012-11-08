@@ -1,0 +1,56 @@
+- content_for :title, t("admissions.candidates.list")
+.row-fluid
+  h4.mt-xs.mb-0 = t("admissions.candidates.list")
+.row-fluid
+  hr
+.row-fluid
+  .span12.well
+    .row-fluid
+      .span6
+        = select :time, :id, {"2012:秋" => "2012/10/00", "2013:春" => "2013/04/00"}, {:prompt => "入学時期選択してください。"}, :class => "span12"
+      .span6
+        = select :variety, :id, {"一般入試" => "general", "推薦入試" => "recommend"}, {:prompt => "入学種別選択してください。"}, :class => "span12"
+    .row-fluid.mt-s
+      .span12.well
+        .row-fluid
+          .pull-left
+            h4.mt-xs.mb-0 2012年【春期：一般】
+          .pull-left
+            h4.mt-xs.mb-0.students-count
+              /= print_count(@students.count, "合計志願者数：")
+          .pull-right
+            = ajax_link_to_new t("admissions.candidates.new"), new_student_path, :id => "new-student-link", :class => 'mr-s btn btn-primary'
+
+            = button t("admissions.candidates.export"), "students.csv", :id => 'export-students-link', :class => 'btn'
+        hr
+        .tabbable.mt-s
+          ul.nav.nav-tabs
+            li.active
+              a href="#phase1" data-toggle="tab"
+                = "Phase1 "
+            li style="margin:8px 15px 0px 15px"
+              i.icon-arrow-right style="background-image:url('/assets/bootstrap/glyphicons-halflings.png')"
+            li
+              a href="#phase2" data-toggle="tab"
+                = "Phase2"
+            li style="margin:8px 15px 0px 15px"
+              i.icon-arrow-right style="background-image:url('/assets/bootstrap/glyphicons-halflings.png')"
+            li
+              a href="#phase3" data-toggle="tab"
+                = "Phase3"
+          .tab-content
+            #phase1.tab-pane.active
+              .row-fluid.mt-l
+                #new-student.hide
+                  /= render 'form'
+                =render 'student_chooser'
+            #phase2.tab-pane
+              .row-fluid.mt-l
+                #new-student.hide
+                  /= render 'form'
+                =render 'student_chooser'
+            #phase3.tab-pane
+              .row-fluid.mt-l
+                #new-student.hide
+                  /= render 'form'
+                =render 'student_chooser'

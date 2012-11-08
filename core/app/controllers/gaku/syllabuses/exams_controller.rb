@@ -1,5 +1,5 @@
 module Gaku
-  class Syllabuses::ExamsController < ApplicationController
+  class Syllabuses::ExamsController < GakuController
 
     inherit_resources
     actions :index, :show, :new, :update, :edit, :destroy

@@ -1,5 +1,5 @@
 module Gaku
-  class GradingMethodsController < ApplicationController
+  class GradingMethodsController < GakuController
 
     def index
       @grading_methods = GradingMethod.all

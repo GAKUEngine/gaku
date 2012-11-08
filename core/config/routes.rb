@@ -12,7 +12,7 @@ Gaku::Core::Engine.routes.draw do
   }
   
 
-  resources :admissions
+  #resources :admissions
 
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'

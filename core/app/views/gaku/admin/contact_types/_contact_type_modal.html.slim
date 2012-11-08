@@ -5,6 +5,7 @@
   = form_for [:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |contact_type_form| 
 
       .modal-header
+        button type="button" class="close" data-dismiss="modal" ×
         h3 =t("contact_types.edit")
       .modal-body
         .row-fluid
