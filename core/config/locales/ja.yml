@@ -19,6 +19,7 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    school_details: 'School Details'
     schools: "Schools"
     disposals: 'Disposals'
     types: 'Types'
@@ -339,6 +340,26 @@ ja:
     created: 'Note was successfully created.'
     destroyed: 'Note was successfully destroyed.'
   class: "クラス"
+  schools:
+    singular: "School"
+    plural: "Schools"
+    add: "Add School"
+    edit: "Edit School"
+    list: "Schools list"
+    new: "New School"
+    save: "Save School"
+    name: "Name"
+    slogan: "Slogan"
+    description: "Description"
+    founded: "Founded"
+    principal: "Principal"
+    vice_principal: "Vice Principal"
+    grades: "Grades"
+    primary: "Primary"
+    campuses: "Campuses"
+    code: 'Code'
+    edit_master: 'Edit Master School'
+    master_school: 'Master School'
   semesters:
     semesters: "学期"
     list: "学期リスト"

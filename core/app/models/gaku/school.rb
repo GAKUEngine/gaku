@@ -21,10 +21,10 @@ module Gaku
     has_many :simple_grades
     has_many :achievements
 
-  	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades
+  	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code
     
     after_create :build_default_campus 
-   
+  
   	private
       def build_default_campus
         if self.campuses.any? 

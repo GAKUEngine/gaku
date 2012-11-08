@@ -1,0 +1,31 @@
+#admin-master-school
+.row-fluid
+  .span6
+    table.index.table.table-striped.table-bordered.table-condensed
+      tr
+        th.btn-c1  width="25%" =t('schools.master_school')
+        td =@master_school.name if @master_school
+      tr
+        th.btn-c2 =t('schools.code')
+        td =@master_school.grades if @master_school
+      tr
+        th.btn-c2 =t('schools.campuses')
+        td =@master_school.campuses.count if @master_school
+      tr
+        th.btn-c2 =t("schools.slogan")
+        td =@master_school.slogan if @master_school
+      tr
+        th.btn-c2 =t("schools.founded")
+        td =@master_school.founded if @master_school
+      tr
+        th.btn-c2 =t("schools.description")
+        td =@master_school.description if @master_school
+      tr
+        th.btn-c2 =t("schools.principal")
+        td =@master_school.principal if @master_school
+      tr
+        th.btn-c2 =t("schools.vice_principal")
+        td =@master_school.vice_principal if @master_school
+      tr
+        th.btn-c2 =t("schools.grades")
+        td =@master_school.grades if @master_school

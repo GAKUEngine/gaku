@@ -3,6 +3,7 @@ en:
     class_groups: "Class Listing"
   admin:
     admin: "Admin"
+    school_details: 'School Details'
     schools: "Schools"
     contact_types: "Contact Types"
     enrollment_status_types: "Enrollment Status Types"
@@ -321,6 +322,9 @@ en:
     grades: "Grades"
     primary: "Primary"
     campuses: "Campuses"
+    code: 'Code'
+    edit_master: 'Edit Master School'
+    master_school: 'Master School'
 
   campuses:
     singular: "Campus"
