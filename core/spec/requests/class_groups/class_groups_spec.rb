@@ -118,9 +118,8 @@ describe 'ClassGroups' do
       flash_destroyed?
     end
 
-    it 'returns to class groups index when back is selected', :js => true do 
-      visit gaku.class_groups_path(@class_group)
-      sleep 5
+    it 'returns to class groups index when back is selected' do 
+      visit gaku.class_group_path(@class_group)
       click_link('back-class-group-link')
       page.should have_content ('Class Groups list')
     end
