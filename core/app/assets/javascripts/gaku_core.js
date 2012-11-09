@@ -15,8 +15,6 @@
 // require i18n
 // require i18n/translations
 
-//= require jquery_nested_form
-
 //= require gaku/gaku_engine.js.coffee
 
 //= require buhin/buhin.js.coffee
