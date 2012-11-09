@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "CourseExams"  do
+describe "CourseExams", :js => true  do
   stub_authorization!
 
   before do
@@ -11,25 +11,24 @@ describe "CourseExams"  do
     @syllabus.exams << @exam
     @course.students << @student
     @syllabus.courses << @course
-  end
 
-  it "should show grading link", :js => true do
+    @course.students.size.should eq 1 
+    @syllabus.courses.size.should eq 1
+    @syllabus.exams.size.should eq 1
+
     visit gaku.course_path(@course)
 
     click_link 'Exams'
-    @course.students.size.should eql(1) 
-    @syllabus.courses.size.should eql(1)
-    @syllabus.exams.size.should eql(1)
+    
+  end
+  
+  it "shows grading link" do
     click_link 'Grading'
+    #TODO check redirection
   end
 
-  it "should show all grading link", :js => true do
-    visit gaku.course_path(@course)
-
-    click_link 'Exams'
-    @course.students.size.should eql(1) 
-    @syllabus.courses.size.should eql(1)
-    @syllabus.exams.size.should eql(1)
+  it "shows all grading link" do
     click_link 'All Exams'
+    #TODO check redirection
   end
 end
