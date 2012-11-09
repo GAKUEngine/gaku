@@ -1,0 +1,18 @@
+= form_for [:admin, @admission_period], :remote => true do |admission_period_form|
+  - if admission_period_form.object.new_record?
+    b= t('admission_periods.new')
+    .row-fluid.mt-l
+      .span12.well
+        = admission_period_form.label :name, t("admission_periods.name")
+        = admission_period_form.text_field :name, :class => "span12"
+        = admission_period_form.label :rolling, t("admission_periods.rolling")
+        = admission_period_form.check_box :rolling
+        = admission_period_form.label :seat_limit, t("admission_periods.seat_limit")
+        = admission_period_form.number_field :seat_limit
+        = admission_period_form.label :admitted_on, t("admission_periods.admitted_on")
+        = admission_period_form.date_select :admitted_on
+        .row-fluid
+          .span12
+            .span6
+              =submit_button t('admission_periods.save'), :id => 'submit-admin-admission-period-button'
+            = link_to_cancel :id => 'cancel-admin-admission-period-link'

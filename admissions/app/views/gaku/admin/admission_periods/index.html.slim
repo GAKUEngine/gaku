@@ -1,0 +1,20 @@
+#admin-admission-periods
+  #new-admin-admission-period.hide
+  .row-fluid
+    .pull-left
+      h4.h4-vm.admin-admission-periods-count
+        = print_count(@admission_periods.count, t('admission_periods.list'))
+    .pull-right
+      =ajax_link_to_new t('admission_periods.add'), new_admin_admission_period_path, :id => 'new-admin-admission-period-link'
+  .row-fluid
+    table#admin-admission-periods-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse =t('admission_periods.singular')
+          th.btn-inverse =t('admission_periods.rolling')
+          th.btn-inverse =t('admission_periods.seat_limit')
+          th.btn-inverse =t('admission_periods.admitted_on')
+          th.btn-info style="width:61px" =t('manage')
+      tbody
+        =render :partial => 'admission_period', :collection => @admission_periods, :as => 'admission_period'
+    br/

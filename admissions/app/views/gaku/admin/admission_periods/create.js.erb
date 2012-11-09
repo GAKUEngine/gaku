@@ -1,0 +1,7 @@
+$('#admin-admission-periods-index tbody').append('<%= render_js_partial("admission_period", {:admission_period => @admission_period}) %>');
+
+$('#new-admin-admission-period').slideToggle();
+$('#new-admin-admission-period-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-admission-periods-count').html('<%= print_count(@admission_periods_count + 1, t("admission_periods.list")) %>');
