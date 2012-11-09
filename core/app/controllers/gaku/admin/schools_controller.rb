@@ -11,6 +11,8 @@ module Gaku
       before_filter :master_school, :only => [:index, :school_details, :edit_master]
 
       def school_details
+        @school = @master_school
+        render 'show'
       end
 
       def edit_master
