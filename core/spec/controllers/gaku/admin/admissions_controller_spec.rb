@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gaku::AdmissionsController do
+describe Gaku::Admin::AdmissionsController do
 
   describe "GET 'index'" do
     it "returns http success" do

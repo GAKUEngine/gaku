@@ -9,6 +9,7 @@ en:
     enrollment_status_types: "Enrollment Status Types"
     disposals: 'Disposals'
     types: 'Types'
+    admission_methods: "Admission Methods"
     presets:
       presets: "Presets"
       student: "Student Preset"
@@ -405,3 +406,41 @@ en:
   csv:
     import: "CSV Import"
     export: "CSV Export"
+
+  admission_methods:
+    singular: "Admission Method"
+    plural: "Admission Methods"
+    new: "New Admission Method"
+    add: "Add Admission Method"
+    save: "Save Admission Method"
+    list: "Admission Methods list"
+    edit: "Edit Admission Method"
+    name: "Method name"
+
+
+  admission_phases:
+    singular: "Admission Phase"
+    plural: "Admission Phases"
+    new: "New Admission Phase"
+    add: "Add Admission Phase"
+    save: "Save Admission Phase"
+    list: "Admission Phases list"
+    edit: "Edit Admission Phase"
+    order: "Order"
+    phase_handler: "Phase handler"
+    name: "Phase name"
+
+  admission_phase_states:
+    singular: "Admission Phase State"
+    plural: "Admission Phase States"
+    new: "New Admission Phase State"
+    add: "Add Admission Phase State"
+    save: "Save Admission Phase State"
+    list: "Admission Phase States list"
+    edit: "Edit Admission Phase State"
+    order: "Order"
+    name: "State name"
+    can_progress: "Can progress"
+    can_admit: "Can admit"
+    auto_admit: "Auto admit"
+    remove: "Remove state"
