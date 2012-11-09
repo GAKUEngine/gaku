@@ -166,6 +166,10 @@ Gaku::Core::Engine.routes.draw do
         get :attachments
       end
     end
+  
+    match 'school_details' => 'schools#school_details', :via => :get
+    match 'school_details/edit' => 'schools#edit_master', :via => :get
+
   end
 
   resources :attachments do
@@ -179,5 +183,6 @@ Gaku::Core::Engine.routes.draw do
   resource :grading_methods do
     get 'index'
   end
+
 
 end
