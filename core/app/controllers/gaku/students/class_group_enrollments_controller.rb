@@ -13,11 +13,9 @@ module Gaku
       respond_to do |format|
         if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
           @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)        
-          format.js { render 'create' }  
-        else
-          @errors = @class_group_enrollment.errors
-          format.js { render 'error' }
         end
+        flash.now[:notice] = t('class_group_enrollments.student_enrolled')
+        format.js { render 'create' }  
       end  
     end
 

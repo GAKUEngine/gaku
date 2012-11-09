@@ -200,6 +200,7 @@ en:
     class_groups: "Class groups"
     current_enrollment: "Current enrollment"
     enrollments_count: "Enrollments count"
+    student_enrolled: "Student enrolled to class group"
   commute_methods:
     created: 'Commute method was successfully created'
     updated: 'Commute method was updated'
