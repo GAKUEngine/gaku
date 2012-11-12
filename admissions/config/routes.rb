@@ -8,6 +8,7 @@ Gaku::Core::Engine.routes.prepend do
         end
       end
     end
+    resources :admission_periods
 	end
 
 end
