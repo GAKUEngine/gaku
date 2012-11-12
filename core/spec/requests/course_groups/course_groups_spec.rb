@@ -8,7 +8,7 @@ describe 'CourseGroups' do
     set_resource("course-group")
   end
 
-  context 'new', :js => true do 
+  context '#new', :js => true do 
     before do
       visit gaku.course_groups_path
       click new_link
@@ -32,7 +32,7 @@ describe 'CourseGroups' do
       page.should have_content('can\'t be blank')
     end
 
-    it 'should cancel adding' do
+    it 'cancels adding' do
       ensure_cancel_creating_is_working
     end
   end
@@ -43,7 +43,7 @@ describe 'CourseGroups' do
       visit gaku.course_groups_path
     end
 
-    context "edit", :js => true do
+    context '#edit', :js => true do
       before do
         click edit_link
         wait_until_visible submit
@@ -62,7 +62,7 @@ describe 'CourseGroups' do
         flash_updated?
       end
 
-      it 'cancel editting' do
+      it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
 
@@ -88,26 +88,31 @@ describe 'CourseGroups' do
 
       page.should have_content @course_group.name
 
-      click_on "delete-course-group-link"
+      click '#delete-course-group-link'
       within(".delete-modal") { click_on "Delete" }
-      page.driver.browser.switch_to.alert.accept
+      accept_alert
     
       page.should_not have_content 'Course Groups List(1)'
       page.should_not have_content @course_group.name
       flash_destroyed?
     end
 
-    it 'should return to course_groups index when back selected' do 
-      visit gaku.course_group_path(@course_group)
-      click_on('Back')
-      page.should have_content ('Course Groups List')
+    context "when select back btn" do
+      it 'returns to index view' do 
+        visit gaku.course_group_path(@course_group)
+        click_on('Back')
+        page.should have_content ('Course Groups List')
+      end
     end
 
-    it 'should redirect to show view when show btn selected' do
-      within(table) { click show_link }
-      page.should have_content ('Course Group')
-      page.should have_content ('Courses list')
+    context "when select show btn" do
+      it 'redirects to show view' do
+        within(table) { click show_link }
+        page.should have_content ('Course Group')
+        page.should have_content ('Courses list')
+      end
     end
+    
     
   end
 end

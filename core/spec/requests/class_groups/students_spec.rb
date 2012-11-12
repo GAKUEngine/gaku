@@ -12,7 +12,7 @@ describe 'ClassGroup Students' do
     @student1 = create(:student, :name => 'Susumu', :surname => 'Yokota')
   end
 
-  context "new" do
+  context "#new" do
     before do
       visit gaku.class_groups_path
       click show_link
@@ -62,8 +62,8 @@ describe 'ClassGroup Students' do
     end
   end
 
-  context "search" do
-    it 'should search students', :js => true do
+  context "#search " do
+    it 'searches students', :js => true do
       visit gaku.class_groups_path
       click show_link
       click_link 'class-group-enrollments-tab-link'
@@ -80,7 +80,7 @@ describe 'ClassGroup Students' do
     end
   end
 
-  context "student added" do
+  context "when student is added" do
     before do
       @class_group.students << @student1
       visit gaku.class_group_path(@class_group)
@@ -89,7 +89,7 @@ describe 'ClassGroup Students' do
       Gaku::ClassGroupEnrollment.count.should eq 1
     end
 
-    it 'should enroll student only once for a class group', :js => true do
+    it 'enrolls student only once', :js => true do
       click new_link
       wait_until { page.find('#student-modal').visible? }
       within('tr#student-' + @student1.id.to_s) do
@@ -97,7 +97,7 @@ describe 'ClassGroup Students' do
       end
     end
 
-    it 'should delete a student from a class group', :js => true do
+    it 'deletes', :js => true do
       click_link 'class-group-enrollments-tab-link'
       
       ensure_delete_is_working
