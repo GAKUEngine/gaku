@@ -3,6 +3,7 @@ class CreateGakuAdmissionMethods < ActiveRecord::Migration
   	create_table :gaku_admission_methods do |t|
       t.string      :name
       t.references  :admission
+      t.references  :admission_period
 
       t.timestamps
   	end

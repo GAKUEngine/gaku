@@ -4,6 +4,7 @@ td =admission_period.name
 - else
   td
 td =admission_period.seat_limit
+td = link_to t('admission_methods.list'), show_methods_admin_admission_period_path(admission_period), :remote => true
 td =admission_period.admitted_on
 td
   = ajax_link_to_edit [:edit, :admin, admission_period]
