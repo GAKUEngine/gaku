@@ -1,0 +1,16 @@
+.tabbable.mt-s
+  ul.nav.nav-tabs
+    - admission_method.admission_phases.each_with_index do |phase, index|
+      li *{:class => ("active" if index == 0)}
+        a href="#phase_#{phase.id.to_s}" data-toggle="tab"
+          = phase.name
+      - if index < admission_method.admission_phases.count-1
+        li style="margin:8px 15px 0px 15px"
+          i.icon-arrow-right style="background-image:url('/assets/bootstrap/glyphicons-halflings.png')"
+  .tab-content
+    - admission_method.admission_phases.each_with_index do |phase, index|
+      div.tab-pane *{:id => "phase_#{phase.id.to_s}", :class => ("active" if index == 0)}
+        .row-fluid.mt-l
+          #new-student.hide
+            /= render 'form'
+          =render 'student_chooser', :admission_phase_states => phase.admission_phase_states
