@@ -433,3 +433,16 @@ ja:
     can_admit: "Can admit"
     auto_admit: "Auto admit"
     remove: "Remove state"
+
+  admission_periods:
+    singular: "Admission Period"
+    plural: "Admission Periods"
+    new: "New Admission PPeriod"
+    add: "Add Admission Period"
+    save: "Save Admission Period"
+    list: "Admission Periods list"
+    edit: "Edit Admission Period"
+    name: "Period name"
+    rolling: "Rolling"
+    seat_limit: "Seat Limit"
+    admitted_on: "Admitted On"
