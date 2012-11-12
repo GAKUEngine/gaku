@@ -3,23 +3,26 @@ require 'spec_helper'
 describe 'Exam portions' do
   stub_authorization!
 
+  before :all do
+    set_resource "exam-exam-portion" 
+  end
+
   context 'exam/show' do
     before do
       @exam = create(:exam, :name => "Unix")
       visit gaku.exam_path(@exam)
-      Gaku::Exam.count.should == 1
       @exam.exam_portions.count.should == 1
       page.should have_content( 'Exam portions list ( 1 )' )
       
     end
 
-    it 'should add a portion', :js => true do
-      find('#add_exam_exam_portion a').click
-      wait_until { find('#exam_exam_portions_form').visible? }
+    it 'adds a portion', :js => true do
+      click new_link
+      wait_until_visible form
       fill_in "exam_exam_portions_attributes_1_name", :with => 'Ubuntu'
       fill_in 'exam_exam_portions_attributes_1_weight', :with => 100.6
       click_on 'Create Exam portion'
-      wait_until { !find('#exam_exam_portions_form').visible? }
+      wait_until_invisible form
       @exam.exam_portions.count.should == 2
       page.should have_content( 'Exam portions list ( 2 )' )
       page.all('#exam-exam_portions table tbody tr').size.should == 2
