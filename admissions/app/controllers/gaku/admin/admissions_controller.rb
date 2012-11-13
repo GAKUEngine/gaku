@@ -8,6 +8,7 @@ module Gaku
       helper_method :sort_column, :sort_direction
 
       before_filter :load_before_index, :only => [:index, :change_admission_period, :change_admission_method]
+      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method]
       before_filter :load_search_object
 
       def change_admission_period
@@ -17,6 +18,12 @@ module Gaku
 
       def change_admission_method
         @admission_method = AdmissionMethod.find(params[:admission_method])
+      end
+
+      def index
+        
+        #raise @students.find_all { |h| h[:state_id] == 1 }.map { |i| i[:student] }.inspect
+        #raise @students.inspect
       end
 
       private
@@ -33,6 +40,17 @@ module Gaku
 
         def load_search_object
           @search = Student.search(params[:q])
+        end
+
+        def load_state_records
+          @students = []
+          @state_records = AdmissionPhaseRecord.all
+          @state_records.each {|record|
+            @students << {
+              :state_id => record.admission_phase_state_id,
+              :student => record.admission.student
+            }
+          }
         end
 
         def sort_column

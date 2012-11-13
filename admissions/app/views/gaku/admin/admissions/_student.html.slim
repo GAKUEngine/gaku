@@ -1,0 +1,5 @@
+tr id="student-#{student.id}"
+  = render 'gaku/admin/admissions/student_fields', :student => student
+  td
+    = select_tag :state_select, options_from_collection_for_select(state.admission_phase.admission_phase_states, :id, :name, state.id), :style=> "width:140px;"
+    //= state.admission_phase.admission_phase_states.count
