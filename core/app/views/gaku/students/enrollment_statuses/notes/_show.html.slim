@@ -13,4 +13,5 @@
 
 	p
 		= ajax_link_to_edit [:edit, @student, @enrollment_status, @note]
+		= ajax_link_to_delete [@student, @enrollment_status, @note], :class => 'mr-xs btn btn-mini btn-danger'
 		= ajax_link_to_back student_enrollment_status_notes_path(@student, @enrollment_status), :class => 'btn btn-mini' 
