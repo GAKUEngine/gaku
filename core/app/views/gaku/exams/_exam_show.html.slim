@@ -18,7 +18,7 @@
   .span12.well
     .row-fluid
       .pull-left
-        h4.h4-vm.exam-portions-count =t('exam_portions.list') + " ( " + @exam.exam_portions.count.to_s + " )"
+        h4.h4-vm.exam-exam-portions-count =t('exam_portions.list') + " ( " + @exam.exam_portions.count.to_s + " )"
       .pull-right
         =ajax_link_to_new t('exams.add_portion'), new_exam_exam_portion_path(@exam), :id => 'new-exam-exam-portion-link'
     .row-fluid
@@ -28,7 +28,7 @@
       #new-exam-exam-portion.hide style='margin-bottom:20px'
         =render 'gaku/exams/exam_portions/exam_portion_form'
     .row-fluid
-      #exam-exam_portions
+      #exam-exam-portions
         =render 'gaku/exams/exam_portions/exam_portions'
     - if @exam.use_weighting
       .row-fluid.weight-check-widget
