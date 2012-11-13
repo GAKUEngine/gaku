@@ -101,6 +101,15 @@ module Gaku
       link_to name, resource, attributes
     end  
 
+ def ajax_link_to_show(resource, options = {})
+      name = ("<i class='icon-white icon-eye-open'></i>").html_safe
+      attributes = {
+        :remote => true,
+        :class => "mr-xs btn btn-mini btn-success show-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end   
+
     def link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
       attributes = {
@@ -116,6 +125,16 @@ module Gaku
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
+    end 
+    
+    def ajax_link_to_back(resource, options = {})
+      name = ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe
+      attributes = {
+        :class => "btn",
+        :remote => true
+      }.merge(options)
+
+      link_to name, resource, attributes
     end 
 
     def link_to_back(resource, options = {})

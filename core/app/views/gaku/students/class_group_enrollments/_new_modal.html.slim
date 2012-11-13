@@ -32,5 +32,9 @@
           = f.text_field :seat_number
         br/
         .actions
-          = f.submit t('class_groups.create_class_group_enrollment'), :class => 'btn btn btn-primary'
-          = link_to_cancel 
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('class_groups.create_class_group_enrollment'), :id => 'submit-course-button'
+            = link_to_cancel :id => "cancel-enroll-student-link"
+

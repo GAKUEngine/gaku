@@ -76,6 +76,9 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+    resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
+      resources :notes, :controller => 'students/enrollment_statuses/notes'
+    end
     resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
