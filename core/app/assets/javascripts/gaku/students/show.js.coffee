@@ -19,3 +19,9 @@ $ ->
 	 		$('#edit-student-commute-method-link').show()
 	 		$('#student-commute-method-form').html('')
 
+  $('#student-enrollment-status').on 'click', '#cancel-enrollment-status-link', (event) ->
+    event.preventDefault()
+    $('#enrolled-status').show()
+    $('#edit-student-enrollment-status-link').show()
+    $('#student-enrollment-status-form').html('')
+

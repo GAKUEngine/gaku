@@ -1,6 +1,6 @@
 module Gaku 
   module Admin
-  	class PresetsController < ApplicationController
+  	class PresetsController < Admin::BaseController
 
     	inherit_resources
 

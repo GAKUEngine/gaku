@@ -117,6 +117,17 @@ describe 'ClassGroups' do
       within(count_div) { page.should_not have_content 'Class Groups list(1)' }
       flash_destroyed?
     end
+
+    it 'returns to class groups index when back is selected' do 
+      visit gaku.class_group_path(@class_group)
+      click_link('back-class-group-link')
+      page.should have_content ('Class Groups list')
+    end
+
+    it 'redirects to show view when show btn selected' do
+      within(table) { click show_link }
+      page.should have_content ('Show')
+    end
     
   end
 end

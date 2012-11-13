@@ -1,3 +1,4 @@
+- @school ||= school
 = form_for [:admin, @school], :remote => true do |school_form|
   - if school_form.object.new_record?
     b= t('schools.new')

@@ -3,6 +3,7 @@ en:
     class_groups: "Class Listing"
   admin:
     admin: "Admin"
+    school_details: 'School Details'
     schools: "Schools"
     contact_types: "Contact Types"
     enrollment_status_types: "Enrollment Status Types"
@@ -200,6 +201,7 @@ en:
     class_groups: "Class groups"
     current_enrollment: "Current enrollment"
     enrollments_count: "Enrollments count"
+    student_enrolled: "Student enrolled to class group"
   commute_methods:
     created: 'Commute method was successfully created'
     updated: 'Commute method was updated'
@@ -323,6 +325,9 @@ en:
     grades: "Grades"
     primary: "Primary"
     campuses: "Campuses"
+    code: 'Code'
+    edit_master: 'Edit Master School'
+    master_school: 'Master School'
 
   campuses:
     singular: "Campus"
@@ -454,3 +459,4 @@ en:
     rolling: "Rolling"
     seat_limit: "Seat Limit"
     admitted_on: "Admitted On"
+
