@@ -2,3 +2,5 @@
 span#enrolled-status style='margin-right:3px'  
   =student.enrollment_status.enrollment_status_type.name
 =link_to 'Change Enrollment Status', edit_student_enrollment_status_path(student, student.enrollment_status), :remote => true, :id => 'edit-student-enrollment-status-link'
+=" | " 
+=link_to 'Notes', student_enrollment_status_notes_path(student, student.enrollment_status), :remote => true
