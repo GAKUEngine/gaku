@@ -4,6 +4,7 @@ Gaku::Core::Engine.routes.prepend do
       collection do
         post :change_admission_period
         post :change_admission_method
+        post :change_student_state
       end
     end
     resources :admission_methods do
