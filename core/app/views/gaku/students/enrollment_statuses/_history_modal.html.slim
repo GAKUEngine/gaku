@@ -1,0 +1,35 @@
+#history-enrollment-status-modal.modal.hide
+	.modal-header
+	  button type="button" class="close" data-dismiss="modal" ×
+	  h4 Enrollment Status History
+	.modal-body
+		.row-fluid
+			.span12
+				table.table.table-striped.table-bordered.table-condensed
+					thead
+						tr
+							th Status
+							th From
+							th To
+							th Notes
+					tbody
+						-@enrollment_status.audits.each_with_index do |audit, i|
+							tr
+								-if audit == @enrollment_status.audits.first
+									- est = @enrollment_status_types.detect {|type| type.id == audit.audited_changes['enrollment_status_type_id'][0] }
+								-else
+									- est = @enrollment_status_types.detect {|type| type.id == audit.audited_changes['enrollment_status_type_id'][1] }
+								td = est.name
+								td = audit.created_at.strftime("%Y.%m.%d-%H:%M:%S")
+								td = @enrollment_status.audits[i + 1].created_at.strftime("%Y.%m.%d-%H:%M:%S") unless audit == @enrollment_status.audits.last
+								- enrollment_status_notes = []
+								- @enrollment_status.notes.each do |note|
+									-if audit != @enrollment_status.audits.last
+										- if (audit.created_at..@enrollment_status.audits[i + 1].created_at).cover?(note.created_at)
+											- enrollment_status_notes.append note
+									-else
+										- if (audit.created_at..Time.now).cover?(note.created_at)
+											- enrollment_status_notes.append note
+
+								td =enrollment_status_notes.count
+
