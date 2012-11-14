@@ -1,0 +1,8 @@
+-unless note.nil? or note.new_record? or !note
+	tr id="note-#{note.id}"
+    td =truncate note.title, :length => 25
+    td =truncate note.content, :length => 30
+    td
+			=ajax_link_to_show [@student, @enrollment_status, note]
+			=ajax_link_to_edit [:edit, @student, @enrollment_status, note]
+			=ajax_link_to_delete [@student, @enrollment_status, note]

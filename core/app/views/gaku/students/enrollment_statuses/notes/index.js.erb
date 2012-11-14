@@ -1,0 +1,6 @@
+$('#modal-dialogs').html("<%= render_js_partial('gaku/students/enrollment_statuses/notes/modal') %>");
+$('#notes-modal').html("<%= render_js_partial('gaku/students/enrollment_statuses/notes/index') %>");
+
+$('.modal-backdrop').remove()
+$('#notes-modal').modal('show');	
+

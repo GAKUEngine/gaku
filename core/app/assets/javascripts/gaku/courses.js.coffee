@@ -38,7 +38,8 @@ $ ->
     $("#new-course-student-link").show()
     $("#new-course-student-form").html("")
 
-  $("#cancel-course-class-group-link").click ->
+  $("#cancel-course-class-group-link").on 'click', (event)->
+    event.preventDefault()
     $("#new-course-class-group-link").show()
     $("#new-course-class-group").slideToggle()
     $("#new-course-class-group-form-errors").html("");
