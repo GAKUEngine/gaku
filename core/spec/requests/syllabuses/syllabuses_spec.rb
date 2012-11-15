@@ -1,74 +1,77 @@
 require 'spec_helper'
 
 describe 'Syllabus' do
-  form          = '#new-syllabus'
-  new_link      = '#new-syllabus-link'
-  modal         = '#syllabus-modal'
-  
-  cancel_link   = '#cancel-syllabus-link'
-  submit_button = '#submit-syllabus-button'
-  
-  table_rows    = 'table#syllabuses-index tbody tr'
-  count_div     = '.syllabuses-count'
 
   stub_authorization!
-
+  let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
   before do
-    @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
-    visit gaku.syllabuses_path
+    set_resource "syllabus" 
   end
 
-  context "list and show syllabuses" do
-    it "should list and show existing syllabuses" do
-      page.should have_content("List Syllabuses")
-      within('table#syllabuses-index tbody tr:nth-child(1)') { page.should have_content("Biology") }
-      within('table#syllabuses-index tbody tr:nth-child(1)') { page.should have_content("bio") }
+  context '#new ', :js => true do 
+    before do
+      visit gaku.syllabuses_path
+      click new_link
+      wait_until_visible submit
+    end
+    it "creates" do 
+      tr_count = size_of(table_rows)
+      expect do
+        fill_in "syllabus_name", :with => "Syllabus1"
+        fill_in "syllabus_code", :with => "code1"
+        fill_in "syllabus_description", :with => "Syllabus Description"
+        click submit
+        wait_until_invisible submit
+      end.to change(Gaku::Syllabus, :count).by 1
       
-      # show
-      within('table#syllabuses-index tbody tr:nth-child(1)') { find(".show-link").click }
-
-      #TODO Make a real check when view is finished
-      page.should have_content("Syllabus")
-      page.should have_content("Biology")
-      page.should have_content("bio")
-    end
-  end
-
-  context "create and edit syllabus", :js => true do 
-    it "should create new syllabus" do 
-      click_link "new-syllabus-link"
-      tr_count = page.all('table#syllabuses-index tbody tr').size
-      wait_until { find("#submit-syllabus-button").visible? }
-      fill_in "syllabus_name", :with => "Syllabus1"
-      fill_in "syllabus_code", :with => "code1"
-      fill_in "syllabus_description", :with => "Syllabus Description"
-      click_button "submit-syllabus-button"
-      wait_until { !page.find('#new-syllabus').visible? }
-      page.find('#new-syllabus-link').visible?
-      page.all('table#syllabuses-index tbody tr').size.should eq tr_count+1
-      Gaku::Syllabus.count.should eq 2
+      page.find(new_link).visible?
+      size_of(table_rows).should eq tr_count+1
     end
 
-    it "should not submit invalid syllabus", :js => true do 
-      click_link "new-syllabus-link"
-      wait_until { find("#submit-syllabus-button").visible? }
-      click_button "submit-syllabus-button"
+    it "errors without required fields" do 
+      click submit
       page.should have_content "This field is required"
       page.should_not have_content "was successfully created"
     end
+    it "cancels adding" do
+      ensure_cancel_creating_is_working
+    end
+  end
 
-    context 'edit', :js => true do
+  context 'existing' do
+    before do
+      syllabus
+      visit gaku.syllabuses_path
+    end
+    context "lists" do
+      it "lists existing syllabuses" do
+        page.should have_content("List Syllabuses")
+
+        within(table) { 
+          page.should have_content("Biology")
+          page.should have_content("bio") 
+        }
+        size_of(table_rows).should eq 2
+      end
+
+      it 'shows' do
+        within(table) { click show_link }
+        current_path.should == "/syllabuses/#{syllabus.id}"
+      end
+    end
+    context '#edit ', :js => true do
       before do
+        syllabus
         click edit_link
         wait_until_visible modal
       end
 
-      it 'edits a syllabus' do 
+      it 'edits' do 
         fill_in "syllabus_name", :with => "Maths"
         fill_in "syllabus_code", :with => "math"
         fill_in "syllabus_description", :with => "Maths Description"
 
-        click submit_button
+        click submit
 
         page.should have_content("Maths")
         page.should have_content("math")
@@ -84,12 +87,11 @@ describe 'Syllabus' do
       end
 
       it 'cancels editting' do
-        click cancel_link
-        wait_until_invisible modal
+        ensure_cancel_modal_is_working
       end
 
-      it 'edits a syllabus from show view' do 
-        visit gaku.syllabus_path(@syllabus)
+      it 'edits from show view' do 
+        visit gaku.syllabus_path(syllabus)
         click edit_link
         wait_until_visible modal 
 
@@ -97,7 +99,7 @@ describe 'Syllabus' do
         fill_in "syllabus_code", :with => "math"
         fill_in "syllabus_description", :with => "Maths Description"
 
-        click submit_button
+        click submit
 
         page.should have_content("Maths")
         page.should have_content("math")
@@ -112,16 +114,15 @@ describe 'Syllabus' do
         flash_updated?
       end
     end
-  end
 
-  it "should delete a syllabus" do
-    Gaku::Syllabus.count.should eql(1)
-    tr_count =  page.all('table#syllabuses-index tbody tr').size
-    within('table#syllabuses-index tbody tr:nth-child(1)') { find(".delete-link").click }
-      
-    wait_until { page.all('table#syllabuses-index tbody tr').size == tr_count - 1 }
-    page.should_not have_content("#{@syllabus.code}")
-    Gaku::Syllabus.count.should eql(0)
-  end
+    it "deletes", :js => true do
+      expect do
+        ensure_delete_is_working
+      end.to change(Gaku::Syllabus, :count).by -1
 
+      page.should_not have_content("#{syllabus.code}")
+    end
+
+  end
+  
 end

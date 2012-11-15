@@ -1,0 +1,2 @@
+$('#admission-method-selection').html('<%= render_js_partial("method", {:admission_methods => @admission_methods}) %>');
+$('#admission-phases').html('<%= render_js_partial("phases", {:admission_method => @admission_methods.first}) %>');

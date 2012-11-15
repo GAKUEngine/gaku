@@ -12,41 +12,16 @@
           th.btn-inverse = sort_link @search, "surname", t("surname")
           th.btn-inverse = sort_link @search, "name", t("name")
       tbody#students-checked
-    #chosen-actions.hide
-      - if !@class_group.nil?
-        = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
-          = hidden_field_tag "class_group_id", @class_group.id
-          = hidden_field_tag "source", "class_groups"
-          h4 = "Adding students to " + @class_group.name
-          = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
-      - elsif !@course.nil?
-        = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
-          = hidden_field_tag "course_id", @course.id
-          = hidden_field_tag "source", "courses"
-          h4 = "Adding students to " + @course.code
-          = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
-      - else
-        .span12 style="margin-top:10px;"
-          = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
-            .span8
-              = select_tag "class_group_id", options_from_collection_for_select(@class_groups, "id", "name"), {:class => "class_group-select"}
-            = submit_tag t('enroll_to_class'), :class => 'btn btn-primary'
-        .span12 style="margin-top:10px;"
-          = form_tag( enroll_students_course_enrollments_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
-            .span8
-              = select_tag "course_id", options_from_collection_for_select(@courses, "id", "code"), {:class => "class_group-select"}
-
-          = submit_tag t('course_enrollments.add'), :class => 'btn btn-primary'
+    
 .row-fluid
   .span12.well style="margin-bottom:0px"
     /#students-index
       =render 'gaku/students/students'
-    #state1.span6
-      h4 State1
-      =render 'gaku/students/students'
-    #state2.span6
-      h4 State2
-      =render 'gaku/students/students'
+    - admission_phase_states.each_with_index do |state, index|
+      .span6 *{:id => "state" + state.id.to_s, :style => ("margin-left:0;" if index%2 == 0)}
+        h4 
+          = state.name
+        =render 'gaku/students/students'
 = javascript_include_tag "student_chooser"
 
 
