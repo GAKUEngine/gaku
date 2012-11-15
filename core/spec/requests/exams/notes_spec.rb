@@ -76,7 +76,7 @@ describe 'Exam Notes' do
     it "deletes" do
       page.should have_content note.title
       within(count_div) { page.should have_content 'Notes list(1)' }
-
+      
       expect do 
         ensure_delete_is_working
       end.to change(exam.notes, :count).by -1
