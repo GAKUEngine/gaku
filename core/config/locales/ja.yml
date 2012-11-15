@@ -67,6 +67,8 @@ ja:
   hide: "非表示"
   description: '説明'
   cofirm: 'Are you sure?'
+  history: 'History'
+  revert: 'Revert'
   admin:
     presets:
       save: '保存'

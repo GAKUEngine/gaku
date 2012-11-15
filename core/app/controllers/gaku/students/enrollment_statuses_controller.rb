@@ -4,7 +4,7 @@ module Gaku
 
   	respond_to :js, :html
 
-  	before_filter :load_student, :only => [:edit, :update]
+  	before_filter :load_student, :only => [:revert, :edit, :update]
   
   	def history
   		@enrollment_status_types = EnrollmentStatusType.all
@@ -13,6 +13,17 @@ module Gaku
   			format.js { render 'history' }
   		end
   	end
+
+    def revert 
+      @enrollment_status = EnrollmentStatus.find(params[:id])
+      prev_enrollment_status_type_id = @enrollment_status.audits.last.audited_changes["enrollment_status_type_id"][0]
+      @enrollment_status.update_attribute(:enrollment_status_type_id, prev_enrollment_status_type_id)
+      @enrollment_status.audits.last(2).each {|s| s.destroy}
+
+      respond_with(@enrollment_status) do |format| 
+        format.js { render 'revert' }
+      end
+    end
 
   	private
 

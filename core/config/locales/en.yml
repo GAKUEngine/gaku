@@ -57,6 +57,8 @@ en:
   hide: "Hide"
   description: 'Description'
   confirm: 'Are you sure?'
+  history: 'History'
+  revert: 'Revert'
   attachments:
     assets: 'Assets'
     file_name: 'File name'
