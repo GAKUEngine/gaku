@@ -5,14 +5,6 @@ gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
 
-#JS
-gem 'execjs'
-gem 'therubyracer'
-
-group :production do
-  gem 'unicorn' 
-end
-
 group :assets do
   gem 'less'
   gem 'sass-rails',   '~> 3.2'
@@ -23,9 +15,6 @@ end
 group :development do
   gem 'annotate'
   gem "rails-erd"
-  gem 'hirb'
-  gem 'awesome_print'
-  gem 'rails-footnotes', '>= 3.7.5.rc4'
 end
 
 group :test do
