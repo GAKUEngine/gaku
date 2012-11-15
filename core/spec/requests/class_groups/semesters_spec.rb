@@ -4,7 +4,7 @@ describe 'ClassGroup Semesters' do
 
   stub_authorization!
   
-  let!(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
+  let(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
   let(:semester) { create(:semester, :starting => "2012-10-21", :ending => "2012-11-21") }
   let(:semester2) { create(:semester, :starting => "2013-01-21", :ending => "2013-06-21") }
 
@@ -13,6 +13,7 @@ describe 'ClassGroup Semesters' do
   end
   
   before do
+    class_group
     visit gaku.class_group_path(class_group)
     click tab_link
   end

@@ -3,17 +3,20 @@ require 'spec_helper'
 describe 'ClassGroup Students' do
   stub_authorization!
 
+  let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
+  let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
+
   before :all do
     set_resource "class-group-student" 
   end
 
   before do
-    @class_group = create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1')
-    @student1 = create(:student, :name => 'Susumu', :surname => 'Yokota')
+    class_group
   end
 
   context "#new" do
     before do
+      student1
       visit gaku.class_groups_path
       click show_link
       click_link 'class-group-enrollments-tab-link'
@@ -24,18 +27,18 @@ describe 'ClassGroup Students' do
 
     it 'adds and shows a student', :js => true do
       expect do
-        find(:css, "input#student-#{@student1.id}").set(true)
+        find(:css, "input#student-#{student1.id}").set(true)
         wait_until_visible('#students-checked-div')
         within('#students-checked-div') do 
           page.should have_content('Chosen students(1)')
           click_link('Show')
           wait_until_visible('#chosen-table')
-          page.should have_content("#{@student1.name}")
+          page.should have_content("#{student1.name}")
           click_button 'Enroll to class'
         end
         wait_until_invisible('#student-modal')
 
-        within(table){ page.should have_content("#{@student1.name}") }
+        within(table){ page.should have_content("#{student1.name}") }
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
       
       within('.class-group-enrollments-count'){ page.should have_content("1") }
@@ -44,19 +47,19 @@ describe 'ClassGroup Students' do
 
     it 'cancels adding', :js => true do
       expect do
-        find(:css, "input#student-#{@student1.id}").set(true)
+        find(:css, "input#student-#{student1.id}").set(true)
         wait_until_visible('#students-checked-div')
         within('#students-checked-div') do 
           page.should have_content('Chosen students(1)')
           click_link('Show')
           wait_until { find('#chosen-table').visible? }
-          page.should have_content("#{@student1.name}")
+          page.should have_content("#{student1.name}")
         end
         click cancel_link
         wait_until_invisible('#student-modal')
       end.to change(Gaku::ClassGroupEnrollment, :count).by 0
       
-      within(table) { page.should_not have_content("#{@student1.name}") }
+      within(table) { page.should_not have_content("#{student1.name}") }
       within('.class-group-enrollments-count') { page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
     end
@@ -82,8 +85,8 @@ describe 'ClassGroup Students' do
 
   context "when student is added" do
     before do
-      @class_group.students << @student1
-      visit gaku.class_group_path(@class_group)
+      class_group.students << student1
+      visit gaku.class_group_path(class_group)
       within('.class-group-enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
       Gaku::ClassGroupEnrollment.count.should eq 1
@@ -92,7 +95,7 @@ describe 'ClassGroup Students' do
     it 'enrolls student only once', :js => true do
       click new_link
       wait_until { page.find('#student-modal').visible? }
-      within('tr#student-' + @student1.id.to_s) do
+      within('tr#student-' + student1.id.to_s) do
         page.should have_selector("img.enrolled")
       end
     end
