@@ -145,6 +145,7 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :system_tools
     resources :commute_method_types
     resources :contact_types
     resources :enrollment_status_types
