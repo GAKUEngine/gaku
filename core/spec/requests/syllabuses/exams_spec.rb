@@ -2,25 +2,27 @@ require 'spec_helper'
 
 describe 'Syllabus Exams' do
  
+  stub_authorization!
+
+  let(:exam) { create(:exam) }
+  let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
+  let(:exam) { create(:exam, :name => 'Astronomy Exam') }
+
   existing_exam_form           = '#new-existing-exam'
   new_existing_exam_link       = '#new-existing-exam-link'
   submit_existing_exam_button  = '#submit-existing-exam-button'
   cancel_existing_exam_link    = '#cancel-existing-exam-link'
 
-  stub_authorization!
-
   before :all do
     set_resource 'syllabus-exam'
   end
 
-  before do
-    @exam = create(:exam)
-    @syllabus = create(:syllabus, :name => 'Biology', :code => 'bio')
-    visit gaku.syllabuses_path
-  end
-
   context "existing exam" do
     before do
+      exam
+      syllabus
+      visit gaku.syllabuses_path
+
       within('table.index tbody tr:nth-child(1)') { click show_link }
       page.should have_content "No Exams"
     end
@@ -29,12 +31,12 @@ describe 'Syllabus Exams' do
       click new_existing_exam_link 
       wait_until_visible submit_existing_exam_button
       
-      select @exam.name, :from => 'exam_syllabus_exam_id'
+      select exam.name, :from => 'exam_syllabus_exam_id'
       click submit_existing_exam_button      
       
       #ensure_create_is_working table_rows
 
-      page.should have_content @exam.name
+      page.should have_content exam.name
       flash? "Exam added to Syllabus"     
 
       wait_until_invisible existing_exam_form
@@ -53,7 +55,9 @@ describe 'Syllabus Exams' do
 
   context "new exam" do
     context 'new' do 
-      before do 
+      before do
+        syllabus
+        visit gaku.syllabuses_path 
         within('table.index tbody tr:nth-child(1)') { click show_link }
         page.should have_content "No Exams"
         click new_link
@@ -67,7 +71,7 @@ describe 'Syllabus Exams' do
           fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
           click submit
           wait_until_invisible form
-        end.to change(@syllabus.exams, :count).by 1
+        end.to change(syllabus.exams, :count).by 1
 
         page.should have_content "Biology Exam"
         page.should_not have_content "No Exams"
@@ -83,7 +87,7 @@ describe 'Syllabus Exams' do
           flash_error_for 'exam_exam_portions_attributes_0_name' 
         end
 
-        @syllabus.exams.count.should eq 0
+        syllabus.exams.count.should eq 0
       end
 
       it "cancels creating", :js => true do
@@ -93,21 +97,19 @@ describe 'Syllabus Exams' do
 
     context 'created exam' do 
       before do 
-        @exam = create(:exam, :name => 'Astronomy Exam')
-        @syllabus.exams << @exam
-        visit gaku.syllabus_path(@syllabus)
+        syllabus.exams << exam
+        visit gaku.syllabus_path(syllabus)
       end
 
       it 'edits', :js => true do 
         click edit_link
+        wait_until_visible modal 
 
         fill_in 'exam_name', :with => 'Ruby Exam'
-        
-        #click submit_button
-        click '#submit-syllabus-exam-button' #FIXME Fix this id
+        click submit
 
         page.should have_content 'Ruby Exam'
-        # current_url.should eq exam_url(:id => @exam.id)
+
         flash_updated?
       end
 
@@ -116,17 +118,17 @@ describe 'Syllabus Exams' do
         page.should have_content 'Show Exam'
         page.should have_content 'Exam portions list'
         page.should have_content 'Astronomy Exam'
-        current_url.should == gaku.exam_url(:id => @exam.id,:host => 'www.example.com')
+        current_path.should == gaku.exam_path(:id => exam.id)
       end
 
       it 'deletes', :js => true do
-        page.should have_content @exam.name
+        page.should have_content exam.name
          
         expect do 
           ensure_delete_is_working
-        end.to change(@syllabus.exams, :count).by -1
+        end.to change(syllabus.exams, :count).by -1
      
-        within(table){ page.should_not have_content @exam.name }
+        within(table){ page.should_not have_content exam.name }
         flash_destroyed? 
       end
     end
@@ -134,6 +136,8 @@ describe 'Syllabus Exams' do
 
   context 'links hiding' do
     before do 
+      syllabus
+      visit gaku.syllabuses_path
       within('table.index tbody tr:nth-child(1)') { click show_link }
     end 
 
