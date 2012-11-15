@@ -1,6 +1,12 @@
 Gaku::Core::Engine.routes.prepend do
 	namespace :admin do 
-		resources :admissions
+		resources :admissions do
+      collection do
+        post :change_admission_period
+        post :change_admission_method
+        post :change_student_state
+      end
+    end
     resources :admission_methods do
       resources :admission_phases, :controller => 'admission_methods/admission_phases' do
         member do

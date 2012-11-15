@@ -61,6 +61,8 @@ module Gaku
     has_many :achievements
     has_many :school_histories
 
+    has_one :admission
+
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
