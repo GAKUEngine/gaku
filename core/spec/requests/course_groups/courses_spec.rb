@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'CourseGroup Courses' do
   stub_authorization!
   
-  course_group = create(:course_group, :name => "math 2012 courses")
-  course = create(:course, :code => 'Math2012')
+  let(:course_group) { create(:course_group, :name => "math 2012 courses") }
+  let(:course) { create(:course, :code => 'Math2012') }
 
   before :all do
     set_resource "course-group-enrollment" 
