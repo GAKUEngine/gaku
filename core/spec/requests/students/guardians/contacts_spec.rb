@@ -4,6 +4,12 @@ describe 'Student Guardian Contacts' do
 
   stub_authorization!
 
+  let(:student) { create(:student) }
+  let(:guardian) { create(:guardian) }
+  let(:contact_type) { create(:contact_type, :name => 'mobile') }
+  let(:mobile1) { create(:contact, :data => 123, :contact_type => contact_type) }
+  let(:mobile2) { create(:contact, :data => 321, :contact_type => contact_type) }
+
   tab_link = "#student-guardians-tab-link"
 
   before :all do
@@ -11,13 +17,10 @@ describe 'Student Guardian Contacts' do
   end
 
   before(:each) do
-    @student = create(:student)
-    @guardian = create(:guardian)
-    @student.guardians << @guardian
-    @student.reload
-    @contact_type = create(:contact_type, :name => 'mobile')
-
-    visit gaku.student_path(@student) 
+    contact_type
+    student.guardians << guardian
+    visit gaku.student_path(student) 
+    
     click tab_link
     wait_until { page.has_content? 'Guardians list' } 
   end
@@ -30,14 +33,14 @@ describe 'Student Guardian Contacts' do
         wait_until_visible modal
       end
 
-      it "creates and shows" do  
+      it "creates and shows" do 
         expect do 
           select 'mobile',           :from => 'contact_contact_type_id'
           fill_in 'contact_data',    :with => '777'
 
           click submit
           wait_until_invisible modal
-        end.to change(@student.guardians.first.contacts, :count).by 1
+        end.to change(student.guardians.first.contacts, :count).by 1
 
         click show_link
         page.should have_content 'mobile'
@@ -45,7 +48,7 @@ describe 'Student Guardian Contacts' do
         within(count_div) { page.should have_content 'Contacts list(1)' }
       end
 
-      it 'cancels creating thru modal' do 
+      it 'cancels creating' do 
         ensure_cancel_modal_is_working
       end
     end
@@ -64,7 +67,7 @@ describe 'Student Guardian Contacts' do
 
           click submit
          wait_until_invisible form
-        end.to change(@student.guardians.first.contacts, :count).by 1
+        end.to change(student.guardians.first.contacts, :count).by 1
 
         page.should have_content 'mobile'
         page.should have_content '777'
@@ -80,9 +83,8 @@ describe 'Student Guardian Contacts' do
 
   context 'existing' do 
     before do 
-      @mobile1 = create(:contact, :data => 123, :contact_type => @contact_type)
-      @student.guardians.first.contacts << @mobile1
-      @student.reload
+      student.guardians.first.contacts << mobile1
+      student.reload
     end
     
     context 'edit', :js => true do 
@@ -115,7 +117,7 @@ describe 'Student Guardian Contacts' do
 
       expect do
         ensure_delete_is_working 
-      end.to change(@student.guardians.first.contacts, :count).by -1
+      end.to change(student.guardians.first.contacts, :count).by -1
 
       within(count_div) { page.should_not have_content 'Contacts list(1)' }
       page.find(table).should_not have_content '123'
@@ -123,12 +125,11 @@ describe 'Student Guardian Contacts' do
     end
 
     it "delete primary", :js => true do
-      mobile2 = create(:contact, :data => 321, :contact_type => @contact_type)
-      @student.guardians.first.contacts << mobile2
+      student.guardians.first.contacts << mobile2
 
-      visit gaku.student_guardian_path(@student, @student.guardians.first)
+      visit gaku.student_guardian_path(student, student.guardians.first)
 
-      contact1_tr = "#contact-#{@mobile1.id}"
+      contact1_tr = "#contact-#{mobile1.id}"
       contact2_tr = "#contact-#{mobile2.id}"
 
       click "#{contact2_tr} td.primary-button a"
@@ -141,24 +142,24 @@ describe 'Student Guardian Contacts' do
 
       page.find("#{contact1_tr} td.primary-button a.btn-primary")
 
-      @student.guardians.first.contacts.first.is_primary? == true
+      student.guardians.first.contacts.first.is_primary? == true
     end
 
     it 'sets primary', :js => true do 
-      mobile2 = create(:contact, :data => 321, :contact_type => @contact_type)
-      @student.guardians.first.contacts << mobile2
+
+      student.guardians.first.contacts << mobile2
       click show_link
 
-      @student.guardians.first.contacts.first.is_primary? == true
-      @student.guardians.first.contacts.second.is_primary? == false
+      student.guardians.first.contacts.first.is_primary? == true
+      student.guardians.first.contacts.second.is_primary? == false
 
-      within("#{table} tr#contact-#{@student.guardians.first.contacts.second.id}") do
+      within("#{table} tr#contact-#{student.guardians.first.contacts.second.id}") do
         click_link 'set-primary-link' 
       end 
       accept_alert
 
-      @student.guardians.first.contacts.first.is_primary? == false
-      @student.guardians.first.contacts.second.is_primary? == true
+      student.guardians.first.contacts.first.is_primary? == false
+      student.guardians.first.contacts.second.is_primary? == true
     end
 
   end
