@@ -163,6 +163,7 @@ Gaku::Core::Engine.routes.draw do
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
+      get :grading, :on => :collection      
       put :update_presets, :on => :collection
     end
 

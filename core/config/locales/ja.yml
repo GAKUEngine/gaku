@@ -29,6 +29,10 @@ ja:
       presets: "Presets"
       save: 'プリセットを保存'
       updated: '更新用プリセット'
+      grading:
+        grading: 'Grading Preset'
+        grading_method: 'Grading Method'
+        grading_scheme: 'Grading Scheme'
       student: "生徒用プリセット"
       students:
         gender: "生徒の性別"

@@ -24,6 +24,7 @@
       <a tabindex='-1' href='#'><%= t('admin.presets.presets') %></a>
       <ul class="dropdown-menu">
         <li data-hook="student_presets"><%= link_to t("admin.presets.student"), students_admin_presets_path %></li>
+        <li data-hook="grading_presets"><%= link_to t("admin.presets.grading.grading"), grading_admin_presets_path %></li>
         <li data-hook="locale_presets"><%= link_to t("admin.presets.locale"), locale_admin_presets_path %></li>
       </ul>
     </li>
