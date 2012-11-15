@@ -11,7 +11,6 @@ describe 'Admin ContactTypes' do
   context 'new', :js => true do
     before do 
       visit gaku.admin_contact_types_path
-      sleep 10
       click new_link
       wait_until_visible submit
     end

@@ -9,6 +9,12 @@ module Gaku
 
       before_filter :admission_periods_count, :only => [:create, :destroy]
 
+      def show_methods
+        @admission_period = AdmissionPeriod.find(params[:id])
+        @admission_methods = @admission_period.admission_methods
+      end
+
+
       private
         def admission_periods_count 
           @admission_periods_count = AdmissionPeriod.count
