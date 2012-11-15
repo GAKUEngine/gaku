@@ -212,6 +212,7 @@ ja:
     class_groups: "クラス"
     current_enrollment: "現在在籍しているクラス"
     none: "在籍しているクラスが有りません。"
+    student_enrolled: "Student enrolled to class group"
   commute_methods:
     created: '通学手段が作成されました。'
     updated: '通学手段が更新されました。'

@@ -13,6 +13,9 @@ module Gaku
 		belongs_to :enrollment_status_type
 		belongs_to :student
 
+		has_many :notes, as: :notable 
+
+
 		audited :associated_with => :student
 		
 		attr_accessible :enrollment_status_type_id, :student_id

@@ -1,0 +1,10 @@
+= form_for [@student, @enrollment_status, @note], :remote => true do |note_form|
+  .row-fluid.mt-l
+    .span12.well style="margin-bottom:20px"
+      = render 'gaku/shared/form_fields/note_form_fields', :note_form => note_form
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t("notes.save"), :id => "submit-modal-student-enrollment-status-note-button"
+          .span6
+            = ajax_link_to_back  student_enrollment_status_notes_path(@student, @enrollment_status)

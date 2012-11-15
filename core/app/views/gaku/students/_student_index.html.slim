@@ -39,6 +39,14 @@ table#student-index.table.table-bordered.table-striped
       th.btn-c2 =t("students.admitted")
       td =student.admitted
     tr
+      th.btn-c2 Enrollment Status
+      td.vm
+        #student-enrollment-status 
+          =render 'gaku/students/enrollment_statuses/enrollment_status', :student => student if student.enrollment_status
+    tr
+      th.btn-c2 =t("students.scholarship_status")
+      td =student.scholarship
+    tr
       th.btn-c2 =t('students.commute_method')
       td
         #student-commute-method
@@ -47,6 +55,3 @@ table#student-index.table.table-bordered.table-striped
             =render 'gaku/students/commute_methods/commute_method', :student => student
           -else
             =link_to t("add"), new_student_commute_method_path(student, @new_commute_method), :remote => true,:id => 'new-student-commute-method-link'
-    tr
-      th.btn-c2 =t("students.scholarship_status")
-      td =student.scholarship

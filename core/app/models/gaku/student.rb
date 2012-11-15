@@ -85,6 +85,10 @@ module Gaku
     has_associated_audits
     audited
 
+    def enrollment_status
+      self.enrollment_statuses.first 
+    end
+
     # methods for json student chooser returning
     
     def full_name
