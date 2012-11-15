@@ -4,10 +4,11 @@ describe 'Student CSV' do
 
   stub_authorization!
 
+  let!(:student) { create(:student, :name => 'John', :surname => 'Doe') }
+  let!(:student2) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
+
   context 'download' do 
     it 'exports as CSV' do
-      create(:student, :name => 'John', :surname => 'Doe')
-      create(:student, :name => 'Susumu', :surname => 'Yokota')
       visit gaku.students_path
 
       click_link 'export-students-link'
