@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'ClassGroup Students' do
+  
   stub_authorization!
 
   let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }

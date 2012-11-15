@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ClassGroup Notes' do
 
   stub_authorization!
+  
   let(:class_group) { create(:class_group) }
   let(:note) { create(:note, :notable => class_group) }
 
