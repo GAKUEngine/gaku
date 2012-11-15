@@ -5,6 +5,9 @@ gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
 
+gem 'execjs'
+gem 'therubyracer'
+
 group :assets do
   gem 'less'
   gem 'sass-rails',   '~> 3.2'
