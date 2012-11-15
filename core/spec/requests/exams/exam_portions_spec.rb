@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe 'Exam portions' do
+  
   stub_authorization!
+
+  let(:exam) { create(:exam, :name => "Unix") }
 
   before :all do
     set_resource "exam-exam-portion" 
@@ -9,13 +12,12 @@ describe 'Exam portions' do
 
   context 'exam/show ' do
     before do
-      @exam = create(:exam, :name => "Unix")
-      visit gaku.exam_path(@exam)
-      @exam.exam_portions.count.should == 1
+      visit gaku.exam_path(exam)
+      exam.exam_portions.count.should == 1
       within (count_div) { page.should have_content( 'Exam portions list ( 1 )' ) }
     end
 
-    context '#add', :js => true do
+    context '#add ', :js => true do
       before do
         click new_link
         wait_until_visible submit
@@ -26,7 +28,7 @@ describe 'Exam portions' do
           fill_in 'exam_exam_portions_attributes_1_weight', :with => 100.6
           click submit
           wait_until_invisible form
-        end.to change(@exam.exam_portions,:count).by 1
+        end.to change(exam.exam_portions,:count).by 1
         
         within(count_div) { page.should have_content( 'Exam portions list ( 2 )' ) }
         size_of(table_rows).should == 3
@@ -66,11 +68,11 @@ describe 'Exam portions' do
     
     it 'deletes a portion', :js => true do
       weight_total = find('#weight-total').text
-      exam_portion_name = @exam.exam_portions.first.name
+      exam_portion_name = exam.exam_portions.first.name
       expect do
         ensure_delete_is_working
       end.to change(Gaku::ExamPortion, :count).by -1
-      @exam.exam_portions.count.should == 0
+      exam.exam_portions.count.should == 0
       within(count_div) { page.should have_content( 'Exam portions list ( 0 )' ) }
       page.should_not have_content("#{exam_portion_name} Weight")
       within('#weight-total'){ page.should_not have_content ("#{weight_total}") }
