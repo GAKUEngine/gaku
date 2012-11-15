@@ -4,6 +4,8 @@ describe 'Course Notes' do
 
   stub_authorization!
 
+  let(:course) { }
+
   before :all do
     set_resource "course-note"
   end
