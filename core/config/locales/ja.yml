@@ -45,6 +45,9 @@ ja:
       save: "プリセットを保存"
     course_groups_diposals: "授業グループ削除"
     exams_disposals: "試験削除"
+    presets:
+      save: '保存'
+      gender: '性別'
   class_groups:
     list: "クラス表"
   hello: "ハローワールド"
@@ -55,11 +58,11 @@ ja:
   Destroy: "削除"
   Delete: "消去"
   Back: "戻る"
-  add: 'Add'
-  default: 'Default'
+  add: '追加'
+  default: 'デフェルト'
   cancel: "キャンセル"
   required: "必須"
-  manage: "管理"
+  manage: "管理する"
   confirm_delete: "本当に削除しますか?"
   panel: "パネル"
   name: "氏名"
@@ -73,10 +76,6 @@ ja:
   hide: "非表示"
   description: '説明'
   cofirm: 'Are you sure?'
-  admin:
-    presets:
-      save: '保存'
-      gender: '性別'
   attachments:
     assets: 'アセット'
     file_name: 'ファイルの名前'

@@ -1,6 +1,4 @@
 en:
-  menu:
-    class_groups: "Class Listing"
   admin:
     admin: "Admin"
     administration: "Administration"
@@ -33,7 +31,8 @@ en:
     email: "email"
     birth_date: "birth_date"
     admitted: "admitted"
-
+  class_groups:
+    list: "Class Listing"
   hello: "Hello world"
   comname: "GAKU-Engine"
   Show: "Show"
