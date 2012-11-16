@@ -7,7 +7,7 @@ describe 'Student Guardian Addresses' do
   tab_link = "#student-guardians-tab-link"
 
   before :all do
-    Helpers::Request.resource("student-guardian-address")
+    set_resource "student-guardian-address"
   end
 
   before(:each) do

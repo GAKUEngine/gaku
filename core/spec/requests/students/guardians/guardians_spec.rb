@@ -3,12 +3,9 @@ require 'spec_helper'
 describe 'Student Guardians' do
 
   stub_authorization!
-
-  tab_link = "#student-guardians-tab-link"
-  delete_link = ".delete-student-guardian-link"
-
+  
   before :all do
-    Helpers::Request.resource("student-guardian") 
+    set_resource "student-guardian"
   end
 
   before do
@@ -93,9 +90,9 @@ describe 'Student Guardians' do
       within(tab_link)  { page.should have_content 'Guardians(1)' }
 
       expect do 
-        click delete_link 
+        click '.delete-student-guardian-link' 
         accept_alert
-        wait_until { within("#student-guardians") { page.should_not have_content @guardian.name } }
+        within("#student-guardians") { page.should_not have_content @guardian.name }
       end.to change(@student.guardians, :count).by -1
 
       within(count_div) { page.should_not have_content 'Guardians list(1)' }

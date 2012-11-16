@@ -5,7 +5,7 @@ describe 'Students' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("student") 
+    set_resource "student"
   end
 
   context "existing" do

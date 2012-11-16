@@ -1,5 +1,5 @@
 module Gaku
-	class AssignmentsController < ApplicationController
+	class AssignmentsController < GakuController
 
 	  inherit_resources
 	  actions :index, :show, :new, :create, :update, :edit, :destroy

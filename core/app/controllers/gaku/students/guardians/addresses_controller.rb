@@ -1,5 +1,5 @@
 module Gaku
-  class Students::Guardians::AddressesController < ApplicationController
+  class Students::Guardians::AddressesController < GakuController
     
     inherit_resources
     actions :new, :create, :edit, :update

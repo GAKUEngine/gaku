@@ -4,7 +4,7 @@ describe "CourseEnrollment"  do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("course-student") 
+    set_resource "course-student" 
   end
 
   context 'student' do

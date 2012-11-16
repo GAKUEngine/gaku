@@ -20,7 +20,7 @@ describe "CourseExams"  do
     @course.students.size.should eql(1) 
     @syllabus.courses.size.should eql(1)
     @syllabus.exams.size.should eql(1)
-    click_link 'MathGrading'
+    click_link 'Grading'
   end
 
   it "should show all grading link", :js => true do

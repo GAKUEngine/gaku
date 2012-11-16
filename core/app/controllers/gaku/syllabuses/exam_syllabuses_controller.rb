@@ -1,5 +1,5 @@
 module Gaku
-	class Syllabuses::ExamSyllabusesController < ApplicationController
+	class Syllabuses::ExamSyllabusesController < GakuController
 
 		def destroy
 			@syllabus = Syllabus.find(params[:syllabus_id])

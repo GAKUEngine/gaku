@@ -10,7 +10,8 @@ class CreateGakuSchoolsTable < ActiveRecord::Migration
   		t.string			:principal
   		t.string			:vice_principal
   		t.text				:grades
-
+      t.string      :code
+      
   		t.timestamps
   	end  	
   end

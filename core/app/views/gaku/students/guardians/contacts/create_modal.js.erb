@@ -1,4 +1,6 @@
 $('#new-contact-modal').modal('hide');
-
 showNotice("<%= render_flash %>");
-$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses.count, t("addresses.list")) %>');
+
+<% if @guardian.primary_contact.is_primary? %>
+	$('td#primary-contact').html('<%= "#{@guardian.primary_contact.contact_type.name}: #{@guardian.primary_contact.data} (#{@guardian.primary_contact.details})" %>')
+<% end %>

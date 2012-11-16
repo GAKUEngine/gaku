@@ -5,7 +5,7 @@ describe 'ClassGroup Notes' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("class-group-note")
+    set_resource "class-group-note"
   end
   
   before do

@@ -3,7 +3,7 @@ require 'gaku/core/custom_fixtures'
 
 namespace :db do
   desc %q{Loads a specified fixture file:
-For .yml/.csv use rake db:load_file[spree/filename.yml,/absolute/path/to/parent/]
+For .yml/.csv use rake db:load_file[gaku/filename.yml,/absolute/path/to/parent/]
 For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
 
   task :load_file , [:file, :dir] => :environment do |t, args|
@@ -86,7 +86,7 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
       model.reset_column_information
     end
 
-    load_defaults  = Spree::Country.count == 0
+    load_defaults  = Gaku::Country.count == 0
     unless load_defaults    # ask if there are already Countries => default data hass been loaded
       load_defaults = agree('Countries present, load sample data anyways? [y/n]: ')
     end
@@ -104,7 +104,7 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
     if load_sample
       #prevent errors for missing attributes (since rails 3.1 upgrade)
 
-      Rake::Task["spree_sample:load"].invoke
+      Rake::Task["gaku_sample:load"].invoke
     end
 
     puts "Bootstrap Complete.\n\n"

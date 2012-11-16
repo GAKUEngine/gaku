@@ -40,4 +40,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise'
   s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan'
+
+  s.add_dependency 'nested_form'
 end

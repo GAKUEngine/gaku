@@ -39,6 +39,14 @@ table#student-index.table.table-bordered.table-striped
       th.btn-c2 =t("students.admitted")
       td =student.admitted
     tr
+      th.btn-c2 Enrollment Status
+      td.vm
+        #student-enrollment-status 
+          =render 'gaku/students/enrollment_statuses/enrollment_status', :student => student if student.enrollment_status
+    tr
+      th.btn-c2 =t("students.scholarship_status")
+      td =student.scholarship
+    tr
       th.btn-c2 =t('students.commute_method')
       td
         #student-commute-method

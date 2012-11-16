@@ -12,7 +12,7 @@ Gaku::Core::Engine.routes.draw do
   }
 
 
-  resources :admissions
+  #resources :admissions
 
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
@@ -76,6 +76,9 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+    resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
+      resources :notes, :controller => 'students/enrollment_statuses/notes'
+    end
     resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
@@ -166,6 +169,10 @@ Gaku::Core::Engine.routes.draw do
         get :attachments
       end
     end
+  
+    match 'school_details' => 'schools#school_details', :via => :get
+    match 'school_details/edit' => 'schools#edit_master', :via => :get
+
   end
 
   resources :attachments do
@@ -179,5 +186,6 @@ Gaku::Core::Engine.routes.draw do
   resource :grading_methods do
     get 'index'
   end
+
 
 end

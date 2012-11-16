@@ -4,6 +4,10 @@
     = school_form.text_field :name, :class => "span12"
 .row-fluid.control-group
   .span12
+    = school_form.label :code, t('schools.code')
+    = school_form.text_field :code, :class => "span12"
+.row-fluid.control-group
+  .span12
     = school_form.label :slogan, t("schools.slogan")
     = school_form.text_field :slogan, :class => "span12"
 .row-fluid.control-group

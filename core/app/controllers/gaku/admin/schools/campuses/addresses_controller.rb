@@ -1,6 +1,6 @@
 module Gaku
   module Admin
-    class Schools::Campuses::AddressesController < ApplicationController
+    class Schools::Campuses::AddressesController < GakuController
     	
     	inherit_resources
       actions :new, :edit, :update, :destoy
