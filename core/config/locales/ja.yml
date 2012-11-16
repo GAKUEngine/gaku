@@ -24,10 +24,13 @@ ja:
     administrator: "管理者"
     plural: "管理"
     school_details: '学校詳細'
-    schools: "学校"
+    schools: "学校一覧"
     disposals: '排除処理'
-    types: '分類'
-    contact_types: "連絡類"
+    types:
+      types: '種類と分類'
+      contact: "連絡先の種類"
+      enrollment_status: "在学状況種別"
+      commute_methods: "通学方法分類"
     admission_methods: "入学方法"
     presets:
       presets: "プリセット"
@@ -43,13 +46,9 @@ ja:
       locales:
         language: "言語"
       save: "プリセットを保存"
+      gender: '性別'
     course_groups_diposals: "授業グループ削除"
     exams_disposals: "試験削除"
-    presets:
-      save: '保存'
-      gender: '性別'
-  class_groups:
-    list: "クラス表"
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
