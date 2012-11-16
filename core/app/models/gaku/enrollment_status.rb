@@ -43,7 +43,7 @@ module Gaku
     private
 
     def audit_status_type_name(audit, enrollment_status_types)
-      position = audit == self.audits.first ? 0 : 1
+      position = first_audit?(audit) ? 0 : 1
       enrollment_status_types.detect {|type| type.id == audit.audited_changes["enrollment_status_type_id"][position] }.name     
     end
 
@@ -58,6 +58,10 @@ module Gaku
       end
 
       return enrollment_status_notes
+    end
+
+    def first_audit?(audit)
+      audit == self.audits.first
     end
 
     def last_audit?(audit)
