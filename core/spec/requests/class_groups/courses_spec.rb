@@ -5,7 +5,7 @@ describe 'ClassGroup Courses' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("class-group-course") 
+    set_resource "class-group-course" 
   end
   
   before do
@@ -39,7 +39,7 @@ describe 'ClassGroup Courses' do
       wait_until { page.has_content? 'Course can\'t be blank' }
     end
 
-    it 'cancels creating' do
+    pending 'cancels creating' do
       ensure_cancel_creating_is_working
     end
   end

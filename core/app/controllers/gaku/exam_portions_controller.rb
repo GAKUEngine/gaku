@@ -1,5 +1,5 @@
 module Gaku
-  class ExamPortionsController < ApplicationController
+  class ExamPortionsController < GakuController
   	
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -7,6 +7,12 @@ module Gaku
     respond_to :js, :html
 
     before_filter :exam, :only => [:show, :edit, :update, :destroy ]
+
+    def new
+      super do |format|
+        format.js { render 'gaku/exams/exam_portions/new' }
+      end
+    end
 
     def show
       @attachment = Attachment.new

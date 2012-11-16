@@ -5,7 +5,7 @@ describe 'Admin CommuteMethodTypes' do
   stub_authorization!
 
   before :all do 
-    Helpers::Request.resource("admin-commute-method-type")
+    set_resource "admin-commute-method-type"
   end
 
   context 'new', :js => true do

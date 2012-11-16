@@ -1,5 +1,5 @@
 module Gaku
-	class StatesController < ApplicationController
+	class StatesController < GakuController
 		respond_to :json
 
 		def index

@@ -1,5 +1,5 @@
 module Gaku
-  class NotesController < ApplicationController
+  class NotesController < GakuController
 
   	before_filter :load_notable
     

@@ -1,5 +1,5 @@
 module Gaku
-	class HomeController < ApplicationController
+	class HomeController < GakuController
 
 	  def index
 	    unless user_signed_in?

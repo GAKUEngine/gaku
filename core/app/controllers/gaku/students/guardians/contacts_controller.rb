@@ -1,5 +1,5 @@
 module Gaku
-  class Students::Guardians::ContactsController < ApplicationController
+  class Students::Guardians::ContactsController < GakuController
   	
   	inherit_resources
     actions :new, :update, :edit, :destroy
@@ -25,7 +25,7 @@ module Gaku
       if @contact.save
         @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
         respond_to do |format|
-          flash.now[:notice] = 'Contact Created'
+          flash.now[:notice] = t('contacts.contact_created')
           format.js { render 'create_modal' }
         end
       end

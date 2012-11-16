@@ -4,7 +4,7 @@ describe 'Address' do
   stub_authorization!
 
   before :all do 
-    Helpers::Request.resource("student-address")
+    set_resource "student-address"
   end
   
   before do

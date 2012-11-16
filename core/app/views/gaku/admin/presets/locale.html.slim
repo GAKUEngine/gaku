@@ -1,11 +1,10 @@
-.row-fluid
-  .span12.well
-    =form_tag update_presets_admin_presets_path, :method => :put do
-
+=form_tag update_presets_admin_presets_path, :method => :put do
+	.row-fluid
+  	.span12.well
     	=fields_for 'presets' do |language|
     		=language.label :language, "Language"
     		=language.text_field :language, :value => @preset_hash[:language]
+	.row-fluid
+		.span12.well
+			=submit_tag t('admin.presets.save'), :class => 'btn btn-primary'
 
-.row-fluid
-  .span12.well
-    =submit_tag t('admin.presets.save'), :class => 'btn btn-primary'

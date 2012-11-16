@@ -4,7 +4,7 @@
     <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
-    
+    <li data-hook="school_details"><%= link_to t('admin.school_details'), admin_school_details_path %></li>
     <li data-hook="schools"><%= link_to t("admin.schools"), admin_schools_path %></li>
     
     <li class="dropdown-submenu" data-hook="types_sub_menu">
@@ -40,6 +40,14 @@
         </li>
       </ul>
     </li>
+
+    <li class="dropdown-submenu" data-hook="system_tools_sub_menu">
+      <a tabindex='-1' href='#'><%= t('admin.system.system_tools') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="student_presets"><%= link_to t("admin.system.backup"), admin_system_tools_path %></li>
+      </ul>
+    </li>
+
 
   </ul>
 </li>

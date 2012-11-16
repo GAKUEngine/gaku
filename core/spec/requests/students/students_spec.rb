@@ -5,7 +5,7 @@ describe 'Students' do
   stub_authorization!
 
   before :all do
-    Helpers::Request.resource("student") 
+    set_resource "student"
   end
 
   context "existing" do
@@ -46,34 +46,32 @@ describe 'Students' do
       size_of(table_rows).should eq 4
 
       fill_in 'q_name_cont', :with => "J"
-      wait_until do  
-        within(table) do
-          page.should have_content "John" 
-          page.should have_content "Johny"
-        end
-        sleep 2 #FIXME
-        size_of(table_rows).should eq 3
+      wait_for_ajax
+      
+      size_of(table_rows).should eq 3
+      within(table) do
+        page.should have_content "John" 
+        page.should have_content "Johny"
       end
       
-
       fill_in 'q_surname_cont', :with => "B"
-      wait_until do 
-        within(table) do
-          page.should have_content "Johny"
-          page.should have_content "Bravo"
-        end
-        size_of(table_rows).should eq 2
+      wait_for_ajax
+      
+      size_of(table_rows).should eq 2
+      within(table) do
+        page.should have_content "Johny"
+        page.should have_content "Bravo"
       end 
     end
 
-    context 'edit from show view', :js => true do 
+    context '#edit from show view', :js => true do 
       before do
         visit gaku.student_path(@student)        
         click edit_link
         wait_until_visible modal 
       end
 
-      it "edits from show view" do
+      it "edits " do
         fill_in "student_surname", :with => "Kostova"
         fill_in "student_name",    :with => "Marta"
         click submit
@@ -93,14 +91,14 @@ describe 'Students' do
 
     end
 
-    context 'edit from index view', :js => true do
+    context '#edit from index view', :js => true do
       before do
         visit gaku.students_path        
         click edit_link
         wait_until_visible modal 
       end
 
-      it "edits from index view" do
+      it "edits" do
         fill_in "student_surname", :with => "Kostova"
         fill_in "student_name",    :with => "Marta"
         click submit
@@ -147,10 +145,9 @@ describe 'Students' do
         select 'Biology', :from => 'class_group_enrollment_class_group_id'
         fill_in 'class_group_enrollment_seat_number', :with => '77'
         click_on "Create Class Enrollment"
+        click_on 'Cancel'
+        wait_until_invisible modal
       end.to change(Gaku::ClassGroupEnrollment, :count).by 1
-
-      click_on 'Cancel'
-      wait_until_invisible modal
 
       click_on 'enroll-student-link'
       within('#new-class-group-enrollment-modal') do

@@ -1,5 +1,5 @@
 module Gaku
-  class CourseEnrollmentsController < ApplicationController
+  class CourseEnrollmentsController < GakuController
 
      def enroll_students
       @err_enrollments = []

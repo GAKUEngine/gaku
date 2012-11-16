@@ -19,10 +19,12 @@ ja:
   admin:
     admin: "管理者"
     plural: "複数"
+    school_details: 'School Details'
     schools: "Schools"
     disposals: 'Disposals'
     types: 'Types'
     contact_types: "Contact Types"
+    admission_methods: "Admission Methods"
     presets:
       presets: "Presets"
       save: 'プリセットを保存'
@@ -210,6 +212,7 @@ ja:
     class_groups: "クラス"
     current_enrollment: "現在在籍しているクラス"
     none: "在籍しているクラスが有りません。"
+    student_enrolled: "Student enrolled to class group"
   commute_methods:
     created: '通学手段が作成されました。'
     updated: '通学手段が更新されました。'
@@ -339,6 +342,26 @@ ja:
     created: 'Note was successfully created.'
     destroyed: 'Note was successfully destroyed.'
   class: "クラス"
+  schools:
+    singular: "School"
+    plural: "Schools"
+    add: "Add School"
+    edit: "Edit School"
+    list: "Schools list"
+    new: "New School"
+    save: "Save School"
+    name: "Name"
+    slogan: "Slogan"
+    description: "Description"
+    founded: "Founded"
+    principal: "Principal"
+    vice_principal: "Vice Principal"
+    grades: "Grades"
+    primary: "Primary"
+    campuses: "Campuses"
+    code: 'Code'
+    edit_master: 'Edit Master School'
+    master_school: 'Master School'
   semesters:
     semesters: "学期"
     list: "学期リスト"
@@ -374,3 +397,53 @@ ja:
     show: "試験要素を表示"
     attached_file_count: '追加ファイル数'
   import_format: "インポート形式"
+
+  admission_methods:
+    singular: "Admission Method"
+    plural: "Admission Methods"
+    new: "New Admission Method"
+    add: "Add Admission Method"
+    save: "Save Admission Method"
+    list: "Admission Methods list"
+    edit: "Edit Admission Method"
+    name: "Method name"
+
+  admission_phases:
+    singular: "Admission Phase"
+    plural: "Admission Phases"
+    new: "New Admission Phase"
+    add: "Add Admission Phase"
+    save: "Save Admission Phase"
+    list: "Admission Phases list"
+    edit: "Edit Admission Phase"
+    order: "Order"
+    phase_handler: "Phase handler"
+    name: "Phase name"
+
+  admission_phase_states:
+    singular: "Admission Phase State"
+    plural: "Admission Phase States"
+    new: "New Admission Phase State"
+    add: "Add Admission Phase State"
+    save: "Save Admission Phase State"
+    list: "Admission Phase States list"
+    edit: "Edit Admission Phase State"
+    order: "Order"
+    name: "State name"
+    can_progress: "Can progress"
+    can_admit: "Can admit"
+    auto_admit: "Auto admit"
+    remove: "Remove state"
+
+  admission_periods:
+    singular: "Admission Period"
+    plural: "Admission Periods"
+    new: "New Admission PPeriod"
+    add: "Add Admission Period"
+    save: "Save Admission Period"
+    list: "Admission Periods list"
+    edit: "Edit Admission Period"
+    name: "Period name"
+    rolling: "Rolling"
+    seat_limit: "Seat Limit"
+    admitted_on: "Admitted On"
