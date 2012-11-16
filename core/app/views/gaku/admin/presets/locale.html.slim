@@ -3,7 +3,7 @@
   	.span12.well
     	=fields_for 'presets' do |language|
     		=language.label :language, "Language"
-    		=language.text_field :language, :value => @preset_hash[:language]
+    		=language.select :language,options_for_select(I18n.available_locales, :selected => @preset_hash[:language])
 	.row-fluid
 		.span12.well
 			=submit_tag t('admin.presets.save'), :class => 'btn btn-primary'
