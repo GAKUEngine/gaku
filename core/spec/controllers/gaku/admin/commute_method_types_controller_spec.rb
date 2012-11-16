@@ -47,9 +47,9 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
   describe "DELETE #destroy" do
     it "deletes the commute method type" do
-      @commute_method_type = create(:commute_method_type)
+      commute_method_type
       expect{
-        gaku_delete :destroy, id: @commute_method_type
+        gaku_delete :destroy, id: commute_method_type
       }.to change(Gaku::CommuteMethodType, :count).by -1
 
       controller.should set_the_flash
