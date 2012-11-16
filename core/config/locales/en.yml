@@ -1,8 +1,10 @@
 en:
-  menu: 
+  menu:
     class_groups: "Class Listing"
   admin:
     admin: "Admin"
+    administration: "Administration"
+    administrator: "Administrator"
     school_details: 'School Details'
     schools: "Schools"
     contact_types: "Contact Types"

@@ -1,4 +1,6 @@
 ja:
+  languages:
+    ja: "日本語"
   admissions:
     manage_admissions: "入学管理"
     candidates:
@@ -17,16 +19,18 @@ ja:
       course: "志望コースを選択"
       department: "志望学科を選択"
   admin:
-    admin: "管理者"
-    plural: "複数"
-    school_details: 'School Details'
-    schools: "Schools"
-    disposals: 'Disposals'
-    types: 'Types'
-    contact_types: "Contact Types"
-    admission_methods: "Admission Methods"
+    admin: "管理"
+    administration: "管理"
+    administrator: "管理者"
+    plural: "管理"
+    school_details: '学校詳細'
+    schools: "学校"
+    disposals: '排除処理'
+    types: '分類'
+    contact_types: "連絡類"
+    admission_methods: "入学方法"
     presets:
-      presets: "Presets"
+      presets: "プリセット"
       save: 'プリセットを保存'
       updated: '更新用プリセット'
       student: "生徒用プリセット"
@@ -41,6 +45,8 @@ ja:
       save: "プリセットを保存"
     course_groups_diposals: "授業グループ削除"
     exams_disposals: "試験削除"
+  class_groups:
+    list: "クラス表"
   hello: "ハローワールド"
   comname: "学園陣"
   Show: "表示"
@@ -81,8 +87,8 @@ ja:
     attachment_recovered: '追加ファイルを削除'
     asset_type: 'アセットの種別'
   addresses:
-    created: 'Address was successfully created.'
-    destroyed: 'Address was successfully destroyed.'
+    created: '住所を登録しました。'
+    destroyed: '住所を削除しました。'
     save: "住所を保存"
     addresses: "住所"
     add: "住所を追加"
