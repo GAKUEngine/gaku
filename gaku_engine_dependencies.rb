@@ -8,6 +8,8 @@ gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
 
+gem 'rails-i18n'
+
 group :assets do
   gem 'less'
   gem 'sass-rails',   '~> 3.2'
