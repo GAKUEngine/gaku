@@ -8,6 +8,12 @@ module Gaku
 
     before_filter :exam, :only => [:show, :edit, :update, :destroy ]
 
+    def new
+      super do |format|
+        format.js { render 'gaku/exams/exam_portions/new' }
+      end
+    end
+
     def show
       @attachment = Attachment.new
       super do |format|

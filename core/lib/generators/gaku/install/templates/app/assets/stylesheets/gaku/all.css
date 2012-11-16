@@ -4,9 +4,9 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *
 <% if options[:lib_name] == 'gaku' %>
- *= require gaku_core
+ *= require gaku/gaku_core
 <% else %>
- *= require <%= options[:lib_name].gsub("/", "_") %>
+ *= require gaku/<%= options[:lib_name].gsub("/", "_") %>
 <% end %>
  *= require_self
 */

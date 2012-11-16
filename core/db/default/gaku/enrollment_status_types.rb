@@ -1,17 +1,17 @@
 types = { 
 	:'Admitted' 										=> true,
 	:'Enrolled' 										=> true,
-	:'Inactive' 										=> true,
 	:'Visiting' 										=> true,
 	:'Re-Admitted' 									=> true,
 	:'On Exchange' 									=> true,
+  :'Inactive' 										=> false,
 	:'Pre-Admission' 								=> false,
 	:'Graduated' 										=> false,
 	:'Re-Enrolled'									=> false,
 	:'Suspended' 										=> false,
 	:'Expelled' 										=> false,
 	:'Drop Out' 										=> false,
-	:'On Leave / Temporary Absence' => false
+	:'On Leave/Temporary Absence'   => false
 }
 
 types.each do |name, active_state|

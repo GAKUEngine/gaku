@@ -1,0 +1,11 @@
+td =admission_period.name
+- if admission_period.rolling
+  td.vm-tc = image_tag 'check.png'
+- else
+  td
+td =admission_period.seat_limit
+td = link_to t('admission_methods.list'), show_methods_admin_admission_period_path(admission_period), :remote => true
+td =admission_period.admitted_on
+td
+  = ajax_link_to_edit [:edit, :admin, admission_period]
+  = ajax_link_to_delete [:admin, admission_period]

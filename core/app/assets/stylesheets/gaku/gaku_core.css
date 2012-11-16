@@ -19,4 +19,5 @@
  *= require gaku/tbs_datepicker/css/datepicker
  *= require gaku/jquery_validation_engine/validationEngine.jquery.css
  * require chosen
+ *= require gaku/devise/sessions.css
 */
