@@ -22,16 +22,16 @@ module Gaku
   
     def history
       @enrollment_status_types   = EnrollmentStatusType.all
-      @enrollment_status_history = Hash.new { |hash,key| hash[key] = {} } 
+      enrollment_status_history = Hash.new { |hash,key| hash[key] = {} } 
 
       self.audits.each_with_index do |audit,i|
-        @enrollment_status_history[i][:notes]      = notes_for_audit(audit, i)
-        @enrollment_status_history[i][:ended_at]   = audit_end_at(i) unless last_audit?(audit)
-        @enrollment_status_history[i][:type_name]  = audit_status_type_name(audit, @enrollment_status_types)      
-        @enrollment_status_history[i][:created_at] = audit_created_at(audit)
+        enrollment_status_history[i][:notes]      = notes_for_audit(audit, i)
+        enrollment_status_history[i][:ended_at]   = audit_end_at(i) unless last_audit?(audit)
+        enrollment_status_history[i][:type_name]  = audit_status_type_name(audit, @enrollment_status_types)      
+        enrollment_status_history[i][:created_at] = audit_created_at(audit)
       end
 
-      return @enrollment_status_history
+      return enrollment_status_history
     end
 
     def revert
