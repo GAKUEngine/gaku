@@ -1,14 +1,19 @@
 en:
-  menu: 
-    class_groups: "Class Listing"
+  languages:
+    en: "English"
+    ja: "日本語[Japanese]"
   admin:
     admin: "Admin"
+    administration: "Administration"
+    administrator: "Administrator"
     school_details: 'School Details'
     schools: "Schools"
-    contact_types: "Contact Types"
-    enrollment_status_types: "Enrollment Status Types"
     disposals: 'Disposals'
-    types: 'Types'
+    types:
+      types: 'Types & Methods'
+      contact: "Contact Types"
+      enrollment_status: "Enrollment Status Types"
+      commute_methods: "Commute Methods"
     admission_methods: "Admission Methods"
     admission_periods: "Admission Periods"
     presets:
@@ -32,7 +37,8 @@ en:
     email: "email"
     birth_date: "birth_date"
     admitted: "admitted"
-
+  class_groups:
+    list: "Class Listing"
   hello: "Hello world"
   comname: "GAKU-Engine"
   Show: "Show"
