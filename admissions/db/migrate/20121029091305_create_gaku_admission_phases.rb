@@ -4,6 +4,7 @@ class CreateGakuAdmissionPhases < ActiveRecord::Migration
   		t.string      :name
   		t.integer     :order
   		t.integer     :phase_handler
+      t.text        :phase_handler_arguments
   		t.references  :admission_method
 
   		t.timestamps

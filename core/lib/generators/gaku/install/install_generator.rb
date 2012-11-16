@@ -44,11 +44,11 @@ module Gaku
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
-        empty_directory "app/assets/#{path}"
+        empty_directory "app/assets/#{path}/gaku"
       end
 
-      template "app/assets/javascripts/all.js"
-      template "app/assets/stylesheets/all.css"
+      template "app/assets/javascripts/gaku/all.js"
+      template "app/assets/stylesheets/gaku/all.css"
     end
 
     def create_overrides_directory

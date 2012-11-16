@@ -1,0 +1,1 @@
+$('#admission-phases').html('<%= render_js_partial("phases", {:admission_method => @admission_method}) %>');

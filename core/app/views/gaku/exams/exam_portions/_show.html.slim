@@ -8,6 +8,6 @@
     td= exam_portion.attachments.count
 
     td
-      = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-success show-exam-portion-link", :style => "margin-right:5px"
-      = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, exam_portion), :class => "btn btn-mini btn-warning edit-exam-portion-link", :style => "margin-right:5px", :remote => true
-      = link_to ("<i class='icon-white icon-remove'></i>").html_safe, exam_exam_portion_path(@exam, exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "btn btn-mini btn-danger delete-exam-portion-link"
+      = link_to_show [@exam, exam_portion], :id => "show-exam-exam-portion-link"
+      = link_to_edit [:edit, @exam, exam_portion], :id => "edit-exam-exam-portion-link", :remote => true
+      = ajax_link_to_delete [@exam, exam_portion], :id => "delete-exam-exam-portion-link"

@@ -115,6 +115,12 @@ module Gaku
           wait_until_invisible modal
         end
 
+        def wait_for_ajax(timeout = Capybara.default_wait_time)
+          page.wait_until(timeout) do
+            page.evaluate_script 'jQuery.active == 0'
+          end
+        end
+
         private
           def plural(text)
             a = []
