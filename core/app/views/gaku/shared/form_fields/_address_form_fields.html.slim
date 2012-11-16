@@ -5,7 +5,7 @@
 .row-fluid.control-group
   .span6
     = address_form.label :country, t("addresses.country"), :class => "control-label"
-    = address_form.select :country_id, Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country')}, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
+    = address_form.select :country_id, Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country'), :selected => Gaku::Preset.get('address_country') }, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
   .span6
     = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
     .row-fluid
@@ -16,11 +16,11 @@
 .row-fluid
   .span3
     / class state_label for handling changing state input with state dropdown/
-    = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label" 
-    = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown"
+    = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label"
+    = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown", :value => Gaku::Preset.get('address_state')
   .span3
     = address_form.label :city, t("addresses.city"), :class => "control-label"
-    = address_form.text_field :city, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+    = address_form.text_field :city, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => Gaku::Preset.get('address_city')
   .span3
     = address_form.label :address1, t("addresses.address1"), :class => "control-label"
     = address_form.text_field :address1, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
@@ -32,3 +32,6 @@
       .span12
         =address_form.label :past, t('addresses.past')
         =address_form.check_box :past
+
+javascript:
+  var state_preset = '#{Gaku::Preset.get("address_state")}'

@@ -78,6 +78,10 @@ Gaku::Core::Engine.routes.draw do
   resources :students do
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
+      member do 
+        get :history
+        get :revert
+      end
     end
     resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
@@ -160,6 +164,7 @@ Gaku::Core::Engine.routes.draw do
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
+      get :grading, :on => :collection      
       put :update_presets, :on => :collection
     end
 

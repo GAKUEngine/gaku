@@ -22,6 +22,10 @@ en:
       locale: "Locale Preset"
       save: 'Save'
       updated: 'Presets Updated'
+      grading:
+        grading: 'Grading Preset'
+        grading_method: 'Grading Method'
+        grading_scheme: 'Grading Scheme'
       students:
         gender: 'Gender'
         country: 'Country'
@@ -64,6 +68,8 @@ en:
   hide: "Hide"
   description: 'Description'
   confirm: 'Are you sure?'
+  history: 'History'
+  revert: 'Revert'
   attachments:
     assets: 'Assets'
     file_name: 'File name'
