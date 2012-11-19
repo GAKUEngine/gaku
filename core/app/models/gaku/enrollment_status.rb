@@ -51,13 +51,15 @@ module Gaku
       enrollment_status_notes = []
 
       self.notes.each do |note|
-        ended_at = last_audit?(audit) ? Time.now : self.audits[index + 1].created_at 
-        if (audit.created_at..ended_at).cover?(note.created_at)
-          enrollment_status_notes.append note
-        end             
+        ended_at = last_audit?(audit) ? Time.now : prevous_audit(index).created_at 
+        enrollment_status_notes.append(note) if (audit.created_at..ended_at).cover?(note.created_at)
       end
 
       return enrollment_status_notes
+    end
+
+    def prevous_audit(index)
+      self.audits[index + 1]
     end
 
     def first_audit?(audit)
