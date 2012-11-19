@@ -3,14 +3,16 @@ require 'spec_helper'
 describe 'ClassGroup Notes' do
 
   stub_authorization!
+  let(:class_group) { create(:class_group) }
+  let(:note) { create(:note, :notable => class_group) }
 
   before :all do
     set_resource "class-group-note"
   end
   
   before do
-    @class_group = create(:class_group)
-    visit gaku.class_group_path(@class_group) 
+    class_group
+    visit gaku.class_group_path(class_group) 
   end
 
   context 'new', :js => true do
@@ -25,7 +27,7 @@ describe 'ClassGroup Notes' do
         fill_in "note_content", :with => "The note content"
         click submit
         wait_until_invisible form
-      end.to change(@class_group.notes, :count).by 1
+      end.to change(class_group.notes, :count).by 1
        
       page.should have_content "The note title"
       page.should have_content "The note content"
@@ -48,8 +50,8 @@ describe 'ClassGroup Notes' do
 
   context "existing", :js => true do 
     before do 
-      @note = create(:note, :notable => @class_group)
-      visit gaku.class_group_path(@class_group)
+      note
+      visit gaku.class_group_path(class_group)
     end
 
     context 'edit' do 
@@ -75,15 +77,15 @@ describe 'ClassGroup Notes' do
     end
 
     it "deletes" do
-      page.should have_content @note.title
+      page.should have_content note.title
       within(count_div) { page.should have_content 'Notes list(1)' }
 
       expect do 
         ensure_delete_is_working
-      end.to change(@class_group.notes, :count).by -1
+      end.to change(class_group.notes, :count).by -1
       
       within(count_div) { page.should_not have_content 'Notes list(1)' }
-      page.should_not have_content @note.title
+      page.should_not have_content note.title
       flash_destroyed?
     end
   end

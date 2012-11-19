@@ -3,15 +3,17 @@ require 'spec_helper'
 describe 'ClassGroup Semesters' do
 
   stub_authorization!
+  
+  let!(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
+  let(:semester) { create(:semester, :starting => "2012-10-21", :ending => "2012-11-21") }
+  let(:semester2) { create(:semester, :starting => "2013-01-21", :ending => "2013-06-21") }
 
   before :all do
     set_resource "class-group-semester"
   end
   
   before do
-    @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
-    @semester = create(:semester, :starting => "2012-10-21", :ending => "2012-11-21")
-    visit gaku.class_group_path(@class_group)
+    visit gaku.class_group_path(class_group)
     click tab_link
   end
 
@@ -32,7 +34,7 @@ describe 'ClassGroup Semesters' do
         select '20',        :from => 'semester_ending_3i'
         click submit
         wait_until_invisible form
-      end.to change(@class_group.semesters,:count).by 1
+      end.to change(class_group.semesters,:count).by 1
       
       within(table) { page.should have_content '09/28/2012 - 12/20/2012' }
       within(count_div) { page.should have_content 'Semesters list(1)' }
@@ -61,8 +63,8 @@ describe 'ClassGroup Semesters' do
 
   context 'existing', :js => true do
     before do
-      @class_group.semesters << @semester
-      visit gaku.class_group_path(@class_group)
+      class_group.semesters << semester
+      visit gaku.class_group_path(class_group)
       click tab_link
       within(count_div) { page.should have_content '1' }
       within(tab_link) { page.should have_content 'Semesters(1)' }
@@ -111,14 +113,13 @@ describe 'ClassGroup Semesters' do
 
       context '2 existing' do
         before do
-          @semester2 = create(:semester, :starting => "2013-01-21", :ending => "2013-06-21")
-          @class_group.semesters << @semester2
-          visit gaku.class_group_path(@class_group)
+          class_group.semesters << semester2
+          visit gaku.class_group_path(class_group)
           click tab_link 
           within(count_div) { page.should have_content '2' }
           within(tab_link) { page.should have_content 'Semesters(2)' }
 
-          within("table tr#semester-#{@semester2.id}") { click edit_link }
+          within("table tr#semester-#{semester2.id}") { click edit_link }
           wait_until_visible modal
         end
 
@@ -156,7 +157,7 @@ describe 'ClassGroup Semesters' do
 
       expect do
         ensure_delete_is_working
-      end.to change(@class_group.semesters,:count).by -1
+      end.to change(class_group.semesters,:count).by -1
       
       within(count_div) { page.should_not have_content 'Semesters list(1)' }
       within(tab_link) { page.should_not have_content 'Semesters(1)' }

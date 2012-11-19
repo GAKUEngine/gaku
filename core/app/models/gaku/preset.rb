@@ -14,8 +14,19 @@ module Gaku
 
 	  PRESETS = {
 	  	:student => ['students_gender', 'address_country', 'address_state', 'address_city'],
-	  	:locale => ['language']
+	  	:locale => ['language'],
+	  	:grading => ['grading_method', 'grading_scheme']
 	  }
+
+	  def self.save_presets(params)
+	  	ActiveRecord::Base.transaction do
+        params.each do |preset|
+          self.send(:set, preset[0], preset[1])
+        end
+      end
+    end
+
+
 
 	  def self.method_missing(method, *args, &block)
 			return self.send method, *args, &block if self.respond_to? method  
@@ -28,7 +39,9 @@ module Gaku
 			end
 		end
 
+
 		private
+		
 		def self.set(key, value)
 			preset = Preset.where(:name => key).first_or_initialize
 			preset.update_attribute(:content, value.to_yaml)
