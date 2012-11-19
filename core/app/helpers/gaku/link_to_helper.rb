@@ -128,7 +128,7 @@ module Gaku
     end 
     
     def ajax_link_to_back(resource, options = {})
-      name = ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe
+      name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
         :class => "btn",
         :remote => true
@@ -138,7 +138,7 @@ module Gaku
     end 
 
     def link_to_back(resource, options = {})
-      name = ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe
+      name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       link_to name, resource, options
     end   
 

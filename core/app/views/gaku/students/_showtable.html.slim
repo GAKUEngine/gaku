@@ -33,6 +33,6 @@
 row-fluid
   .span12
     #delete-student
-      =link_to 'Delete', "#", :id => 'delete-student-link', :class => 'btn btn-danger pull-right'
+      =ajax_link_to_delete "#", :id => 'delete-student-link', :class => 'btn btn-danger pull-right'
   .delete_modal
     =render 'gaku/shared/delete_modal', :target => @student

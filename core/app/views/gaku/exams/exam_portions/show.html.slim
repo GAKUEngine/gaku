@@ -18,9 +18,9 @@
           td =@exam_portion.problem_count
           td =@exam_portion.is_master
           td
-            = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-success", :style => "margin-right:5px"
-            = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-warning", :style => "margin-right:5px", :remote => true
-            = link_to ("<i class='icon-white icon-remove'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "delete_exam_portion_link btn btn-mini btn-danger"
+            = link_to_show [@exam, @exam_portion]
+            = ajax_link_to_edit [:edit, @exam, @exam_portion]
+            = ajax_link_to_delete [@exam, @exam_portion]
 .row-fluid
   .span12
     h4 Attachment index

@@ -42,4 +42,4 @@
 .row-fluid
   .span12.well
     = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_exam_path(@exam),:remote => true, :class => "span9 btn btn-warning"
-    = link_to ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe, exams_path, :class => "span3 btn btn-danger"
+    = link_to_back exams_path, :class => "span3 btn btn-danger"

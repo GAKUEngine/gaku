@@ -45,14 +45,15 @@ en:
     list: "Class Listing"
   hello: "Hello world"
   comname: "GAKU-Engine"
-  Show: "Show"
-  Edit: "Edit"
-  Destroy: "Destroy"
-  Delete: "Delete"
-  Back: "Back"
+  show: "Show"
+  edit: "Edit"
+  destroy: "Destroy"
+  delete: "Delete"
+  back: "Back"
   cancel: "Cancel"
   add: 'Add'
   default: 'Default'
+  
   required:
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
