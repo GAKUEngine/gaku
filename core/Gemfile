@@ -1,3 +1,10 @@
 eval(File.read(File.dirname(__FILE__) + '/../gaku_engine_dependencies.rb'))
 
 gemspec
+
+group :development do
+  gem "jeweler"
+  gem 'i18n-spec'
+  gem 'localeapp'
+end
+
