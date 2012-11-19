@@ -93,8 +93,8 @@ module Gaku
 
         def ensure_delete_is_working
           tr_count = size_of table_rows
-
-          click delete_link 
+          within(table) { click delete_link }
+          
           accept_alert
             
           wait_until { size_of(table_rows) == tr_count - 1 }

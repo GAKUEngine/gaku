@@ -7,8 +7,8 @@
 //= require jquery
 //= require jquery_ujs
 <% if options[:lib_name] == 'gaku' %>
-//= require gaku_core
+//= require gaku/gaku_core
 <% else %>
-//= require <%= options[:lib_name].gsub("/", "_") %>
+//= require gaku/<%= options[:lib_name].gsub("/", "_") %>
 <% end %>
 //= require_tree .

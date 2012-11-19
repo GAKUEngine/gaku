@@ -4,17 +4,16 @@ describe 'Course Notes' do
 
   stub_authorization!
 
+  let(:course) { create(:course) }
+  let(:note) { create(:note, :notable => course) }
+
   before :all do
     set_resource "course-note"
-  end
-  
-  before do
-    @course = create(:course)
-    visit gaku.course_path(@course) 
   end
 
   context 'new', :js => true do
     before do 
+      visit gaku.course_path(course)
       click new_link
       wait_until_visible submit
     end
@@ -25,7 +24,7 @@ describe 'Course Notes' do
         fill_in "note_content", :with => "The note content"
         click submit
         wait_until_invisible form
-      end.to change(@course.notes, :count).by 1
+      end.to change(course.notes, :count).by 1
        
       page.should have_content "The note title"
       page.should have_content "The note content"
@@ -48,8 +47,8 @@ describe 'Course Notes' do
 
   context "existing", :js => true do 
     before do 
-      @note = create(:note, :notable => @course)
-      visit gaku.course_path(@course)
+      note
+      visit gaku.course_path(course)
     end
 
     context 'edit' do 
@@ -75,15 +74,15 @@ describe 'Course Notes' do
     end
 
     it "deletes" do
-      page.should have_content @note.title
+      page.should have_content note.title
       within(count_div) { page.should have_content 'Notes list(1)' }
 
       expect do 
         ensure_delete_is_working
-      end.to change(@course.notes, :count).by -1
+      end.to change(course.notes, :count).by -1
       
       within(count_div) { page.should_not have_content 'Notes list(1)' }
-      page.should_not have_content @note.title
+      page.should_not have_content note.title
       flash_destroyed?
     end
   end

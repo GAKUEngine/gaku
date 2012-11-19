@@ -4,9 +4,10 @@ describe "Student Images" do
 
   stub_authorization!
   
-  before do
-    @student = create(:student)
-    visit gaku.student_path(@student)
+  let(:student) { create(:student) }
+  
+  before do 
+    visit gaku.student_path(student)
   end
 
   context "uploading", :js => true do

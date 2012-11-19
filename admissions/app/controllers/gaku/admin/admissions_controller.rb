@@ -20,6 +20,18 @@ module Gaku
         @admission_method = AdmissionMethod.find(params[:admission_method])
       end
 
+      def change_student_state
+        @state = AdmissionPhaseState.find(params[:state_id])
+        @student = Student.find(params[:student_id])
+        @admission_record = @student.admission.admission_phase_records.first
+        if !(@state.id == @admission_record.admission_phase_state_id)
+          @old_state_id = @admission_record.admission_phase_state_id
+          @admission_record.admission_phase_state_id = @state.id
+          @admission_record.save
+          render 'change_student_state'
+        end
+      end
+
       def index
         
         #raise @students.find_all { |h| h[:state_id] == 1 }.map { |i| i[:student] }.inspect

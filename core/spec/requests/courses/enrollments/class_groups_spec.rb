@@ -1,20 +1,21 @@
 require 'spec_helper'
 
 describe "CourseEnrollment"  do
+  
   stub_authorization!
+
+  let(:course) { create(:course) }
+  let(:class_group) { create(:class_group, :name => "Math") }
+  let(:student1) { create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id]) }
+  let(:student2) { create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id]) }
 
   before :all do
     set_resource "course-class-group"
   end
 
-
-  before do
-    @course = create(:course)
-    visit gaku.course_path(@course)
-  end
-
   context 'no existing class group', :js => true do 
     before do 
+      visit gaku.course_path(course)
       click new_link
       wait_until_visible submit
     end
@@ -31,8 +32,8 @@ describe "CourseEnrollment"  do
 
   context 'empty class group', :js => true do 
     it 'errors if class group is empty' do
-      class_group = create(:class_group, :name => "Math")
-      visit gaku.course_path(@course)
+      class_group
+      visit gaku.course_path(course)
 
       click new_link
       
@@ -46,10 +47,10 @@ describe "CourseEnrollment"  do
 
   context 'class group with 2 students', :js => true do
     before do
-      class_group = create(:class_group, :name => "Math")
-      @student1 = create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id])
-      @student2 = create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id])
-      visit gaku.course_path(@course)
+      class_group
+      student1
+      student2
+      visit gaku.course_path(course)
     end
 
     it "enrolls a class group" do 
@@ -60,7 +61,7 @@ describe "CourseEnrollment"  do
         select 'Math', :from => 'course_class_group_id'
         click submit
         wait_until_invisible(form) 
-      end.to change(@course.students, :count).by 2
+      end.to change(course.students, :count).by 2
       
       page.should have_content "Johniew"
       page.should have_content "Amon"
@@ -70,9 +71,9 @@ describe "CourseEnrollment"  do
     end
 
     it 'errors if all students are already added' do
-      @course.students << @student1
-      @course.students << @student2
-      visit gaku.course_path(@course)
+      course.students << student1
+      course.students << student2
+      visit gaku.course_path(course)
 
       click new_link
       
