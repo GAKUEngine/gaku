@@ -135,6 +135,7 @@ en:
     chosen_students: "Chosen students"
     commute_method: 'Commute Method'
     updated: 'Student was successfully updated.'
+    no_class_group: 'No Assigned Class Group'
   add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
