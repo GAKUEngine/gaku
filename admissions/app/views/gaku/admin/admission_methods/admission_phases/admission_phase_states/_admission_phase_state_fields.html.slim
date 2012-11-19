@@ -7,6 +7,10 @@ td =state.name
   td.vm-tc = image_tag 'check.png'
 - else
   td
+- if state.auto_progress
+  td.vm-tc = image_tag 'check.png'
+- else
+  td
 - if state.auto_admit
   td.vm-tc = image_tag 'check.png'
 - else
