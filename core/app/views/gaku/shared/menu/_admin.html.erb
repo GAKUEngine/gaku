@@ -8,14 +8,14 @@
     <li data-hook="schools"><%= link_to t("admin.schools"), admin_schools_path %></li>
     
     <li class="dropdown-submenu" data-hook="types_sub_menu">
-      <a tabindex='-1' href='#'><%= t('admin.presets.types') %></a>
+      <a tabindex='-1' href='#'><%= t('admin.types.types') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="contact_types"><%= link_to t("admin.contact_types"), admin_contact_types_path %></li>
+        <li data-hook="contact_types"><%= link_to t("admin.types.contact"), admin_contact_types_path %></li>
         <li data-hook="enrollment_status_types">
-          <%= link_to t("admin.enrollment_status_types"), admin_enrollment_status_types_path %>
+          <%= link_to t("admin.types.enrollment_status"), admin_enrollment_status_types_path %>
         </li>
         <li data-hook="commute_method_types">
-          <%= link_to t("commute_method_types.plural"), admin_commute_method_types_path %>
+          <%= link_to t("admin.types.commute_methods"), admin_commute_method_types_path %>
         </li>
       </ul>
     </li>
@@ -24,6 +24,7 @@
       <a tabindex='-1' href='#'><%= t('admin.presets.presets') %></a>
       <ul class="dropdown-menu">
         <li data-hook="student_presets"><%= link_to t("admin.presets.student"), students_admin_presets_path %></li>
+        <li data-hook="grading_presets"><%= link_to t("admin.presets.grading.grading"), grading_admin_presets_path %></li>
         <li data-hook="locale_presets"><%= link_to t("admin.presets.locale"), locale_admin_presets_path %></li>
       </ul>
     </li>
@@ -40,6 +41,14 @@
         </li>
       </ul>
     </li>
+
+    <li class="dropdown-submenu" data-hook="system_tools_sub_menu">
+      <a tabindex='-1' href='#'><%= t('admin.system.system_tools') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="student_presets"><%= link_to t("admin.system.backup"), admin_system_tools_path %></li>
+      </ul>
+    </li>
+
 
   </ul>
 </li>

@@ -1,34 +1,28 @@
 ja:
-  admissions:
-    manage_admissions: "入学管理"
-    candidates:
-      candidate: "志願者"
-      list: "入学志願者一覧"
-      new: "新規志願者登録"
-      export: "志願者情報をCSVで保存"
-      course: "志望コース"
-      faculty: "志望学部"
-      junior_high_school: "出身中学校"
-      first_choice: "第一希望"
-      second_choice: "第二希望"
-    inputs:
-      candidate: "志願者の情報を入力"
-    selects:
-      course: "志望コースを選択"
-      department: "志望学科を選択"
+  languages:
+    en: "English[英語]"
+    ja: "日本語"
   admin:
-    admin: "管理者"
-    plural: "複数"
-    school_details: 'School Details'
-    schools: "Schools"
-    disposals: 'Disposals'
-    types: 'Types'
-    contact_types: "Contact Types"
-    admission_methods: "Admission Methods"
+    admin: "管理"
+    administration: "管理"
+    administrator: "管理者"
+    school_details: '学校詳細'
+    schools: "学校一覧"
+    disposals: '排除処理'
+    types:
+      types: '種類・分類・方法'
+      contact: "連絡先の種類"
+      enrollment_status: "在学状況種別"
+      commute_methods: "通学方法分類"
+    admission_methods: "入学方法"
     presets:
-      presets: "Presets"
+      presets: "プリセット"
       save: 'プリセットを保存'
       updated: '更新用プリセット'
+      grading:
+        grading: 'Grading Preset'
+        grading_method: 'Grading Method'
+        grading_scheme: 'Grading Scheme'
       student: "生徒用プリセット"
       students:
         gender: "生徒の性別"
@@ -39,6 +33,7 @@ ja:
       locales:
         language: "言語"
       save: "プリセットを保存"
+      gender: '性別'
     course_groups_diposals: "授業グループ削除"
     exams_disposals: "試験削除"
   hello: "ハローワールド"
@@ -49,11 +44,11 @@ ja:
   Destroy: "削除"
   Delete: "消去"
   Back: "戻る"
-  add: 'Add'
-  default: 'Default'
+  add: '追加'
+  default: 'デフェルト'
   cancel: "キャンセル"
   required: "必須"
-  manage: "管理"
+  manage: "管理する"
   confirm_delete: "本当に削除しますか?"
   panel: "パネル"
   name: "氏名"
@@ -67,6 +62,8 @@ ja:
   hide: "非表示"
   description: '説明'
   cofirm: 'Are you sure?'
+  history: 'History'
+  revert: 'Revert'
   admin:
     presets:
       save: '保存'
@@ -81,8 +78,8 @@ ja:
     attachment_recovered: '追加ファイルを削除'
     asset_type: 'アセットの種別'
   addresses:
-    created: 'Address was successfully created.'
-    destroyed: 'Address was successfully destroyed.'
+    created: '住所を登録しました。'
+    destroyed: '住所を削除しました。'
     save: "住所を保存"
     addresses: "住所"
     add: "住所を追加"
@@ -292,7 +289,7 @@ ja:
     close: "閉じる"
     save: "変更を保存"
     help:
-      language: 使用する言語を選択してください。
+      language: "使用する言語を選択してください。"
   language: "言語"
   and: "と"
   submit: "登録する"
@@ -393,7 +390,7 @@ ja:
     use_weighting: "加重率を使用"
     is_master: "マスター"
     master: "試験要素内容（マスター）"
-    save: 試験要素を保存"
+    save: "試験要素を保存"
     show: "試験要素を表示"
     attached_file_count: '追加ファイル数'
   import_format: "インポート形式"
@@ -448,3 +445,20 @@ ja:
     seat_limit: "Seat Limit"
     admitted_on: "Admitted On"
 
+  admissions:
+    manage_admissions: "入学管理"
+    candidates:
+      candidate: "志願者"
+      list: "入学志願者一覧"
+      new: "新規志願者登録"
+      export: "志願者情報をCSVで保存"
+      course: "志望コース"
+      faculty: "志望学部"
+      junior_high_school: "出身中学校"
+      first_choice: "第一希望"
+      second_choice: "第二希望"
+    inputs:
+      candidate: "志願者の情報を入力"
+    selects:
+      course: "志望コースを選択"
+      department: "志望学科を選択"

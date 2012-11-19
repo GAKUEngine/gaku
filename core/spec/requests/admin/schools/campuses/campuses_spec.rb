@@ -4,13 +4,14 @@ describe 'Admin School Campuses' do
   
   stub_authorization!
 
+  let(:school) { create(:school, :name => 'Nagoya University') }
+
   before :all do
     set_resource "admin-school-campus"
   end
 
   before do 
-    @school = create(:school, :name => 'Nagoya University')
-    visit gaku.admin_school_path(@school)
+    visit gaku.admin_school_path(school)
   end
 
   context 'new', :js => true do
@@ -26,7 +27,7 @@ describe 'Admin School Campuses' do
         fill_in 'campus_name', :with => 'Nagoya Campus'
         click submit
         wait_until_invisible form
-      end.to change(@school.campuses, :count).by 1
+      end.to change(school.campuses, :count).by 1
 
       page.should have_content 'Nagoya Campus'
       within(count_div) { page.should have_content 'Campuses list(2)' }
@@ -69,7 +70,7 @@ describe 'Admin School Campuses' do
 
       expect do 
         ensure_delete_is_working
-      end.to change(@school.campuses, :count).by -1
+      end.to change(school.campuses, :count).by -1
 
       within(table) { page.should_not have_content "Nagoya University" }
       within(count_div) { page.should_not have_content 'Campuses list(1)' }

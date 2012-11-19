@@ -93,8 +93,8 @@ module Gaku
 
         def ensure_delete_is_working
           tr_count = size_of table_rows
-
-          click delete_link 
+          within(table) { click delete_link }
+          
           accept_alert
             
           wait_until { size_of(table_rows) == tr_count - 1 }
@@ -113,6 +113,12 @@ module Gaku
         def ensure_cancel_modal_is_working
           click cancel_link
           wait_until_invisible modal
+        end
+
+        def wait_for_ajax(timeout = Capybara.default_wait_time)
+          page.wait_until(timeout) do
+            page.evaluate_script 'jQuery.active == 0'
+          end
         end
 
         private
