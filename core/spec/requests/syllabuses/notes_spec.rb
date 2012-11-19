@@ -4,17 +4,16 @@ describe 'Syllabus Notes' do
 
   stub_authorization!
 
+  let(:syllabus) { create(:syllabus) }
+  let(:note) { create(:note, :notable => syllabus) }
+
   before :all do
     set_resource "syllabus-note"
   end
-  
-  before do
-    @syllabus = create(:syllabus)
-    visit gaku.syllabus_path(@syllabus) 
-  end
 
   context 'new', :js => true do
-    before do 
+    before do
+      visit gaku.syllabus_path(syllabus)  
       click new_link
       wait_until_visible submit
     end
@@ -25,7 +24,7 @@ describe 'Syllabus Notes' do
         fill_in "note_content", :with => "The note content"
         click submit
         wait_until_invisible form
-      end.to change(@syllabus.notes, :count).by 1
+      end.to change(syllabus.notes, :count).by 1
        
       page.should have_content "The note title"
       page.should have_content "The note content"
@@ -48,8 +47,8 @@ describe 'Syllabus Notes' do
 
   context "existing", :js => true do 
     before do 
-      @note = create(:note, :notable => @syllabus)
-      visit gaku.syllabus_path(@syllabus)
+      note
+      visit gaku.syllabus_path(syllabus)
     end
 
     context 'edit' do 
@@ -75,15 +74,15 @@ describe 'Syllabus Notes' do
     end
 
     it "deletes" do
-      page.should have_content @note.title
+      page.should have_content note.title
       within(count_div) { page.should have_content 'Notes list(1)' }
 
       expect do 
         ensure_delete_is_working
-      end.to change(@syllabus.notes, :count).by -1
+      end.to change(syllabus.notes, :count).by -1
       
       within(count_div) { page.should_not have_content 'Notes list(1)' }
-      page.should_not have_content @note.title
+      page.should_not have_content note.title
       flash_destroyed?
     end
   end

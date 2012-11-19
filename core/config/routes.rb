@@ -38,13 +38,18 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :exams do
-      get :export_xls, :on => :collection
-
       resources :exam_portion_scores
-      get :grading, :on => :member
-      get :grading, :on => :collection
-      put :update_score, :on => :member
-      get :calculations, :on => :member
+      collection do
+        get :grading
+        get :export_xls
+      end
+
+      member do
+        get :grading
+        put :update_score
+        get :calculations
+      end
+      
     end
     member do
       get :student_chooser

@@ -4,6 +4,8 @@ describe 'Admin ContactTypes' do
 
   stub_authorization!
 
+  let(:contact_type) { create(:contact_type, :name => 'mobile') }
+
   before :all do
     set_resource "admin-contact-type" 
   end
@@ -34,7 +36,7 @@ describe 'Admin ContactTypes' do
 
   context 'existing' do 
     before do
-      @contact_type = create(:contact_type, :name => 'mobile') 
+      contact_type
       visit gaku.admin_contact_types_path
     end
 
@@ -60,7 +62,7 @@ describe 'Admin ContactTypes' do
     end
 
     it 'deletes', :js => true do
-      page.should have_content @contact_type.name
+      page.should have_content contact_type.name
       within(count_div) { page.should have_content 'Contact Types list(1)' }
 
       expect do 
@@ -68,7 +70,7 @@ describe 'Admin ContactTypes' do
       end.to change(Gaku::ContactType, :count).by -1
 
       within(count_div) { page.should_not have_content 'Contact Types list(1)' }
-      page.should_not have_content @contact_type.name
+      page.should_not have_content contact_type.name
       flash_destroyed?
     end
   end

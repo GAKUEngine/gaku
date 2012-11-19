@@ -4,12 +4,12 @@ describe 'ClassGroup Courses' do
 
   stub_authorization!
 
+  let(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
+  let(:course) { create(:course, :code => 'Math2012') }
+
   before :all do
     set_resource "class-group-course" 
   end
-  
-  let(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
-  let(:course) { create(:course, :code => 'Math2012') }
    
   context 'new', :js => true do 
     before do 

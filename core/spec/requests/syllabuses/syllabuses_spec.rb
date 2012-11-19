@@ -3,7 +3,9 @@ require 'spec_helper'
 describe 'Syllabus' do
 
   stub_authorization!
+
   let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
+  
   before do
     set_resource "syllabus" 
   end
