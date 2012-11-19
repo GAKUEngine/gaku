@@ -410,6 +410,7 @@ en:
     save: "Save exam portion"
     show: "Show Exam Portion"
     attached_file_count: 'Attached file count'
+    created: 'Exam portion was successfully created.'
   options: "Options"
   notice:
     picture_uploaded: "Picture was successfully uploaded"

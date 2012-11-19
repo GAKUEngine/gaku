@@ -92,6 +92,7 @@ module Gaku
     def create_exam_portion
       if @exam.update_attributes(params[:exam])
         respond_to do |format|
+          flash.now[:notice] = t('exam_portions.created')
           format.js {render 'gaku/exams/exam_portions/create_exam_portion'}
         end
       end
