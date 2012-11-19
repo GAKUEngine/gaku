@@ -8,7 +8,7 @@ module Gaku
     has_many :specialty_applications
     has_many :admission_phase_records
     has_many :exam_scores
-    has_many :files
+    has_many :attachments, as: :attachable
     has_many :notes, as: :notable
 
     has_one :school_history
