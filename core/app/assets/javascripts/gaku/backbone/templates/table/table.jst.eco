@@ -18,7 +18,6 @@
                 <th class='btn-warning' style="width:30px">
                   【 <%= portion.name %> 】
                 </th>
-                <br/>
               <!-- More work HERE -->
               <% else : %>
               <th class='btn-warning' style="width:30px">
