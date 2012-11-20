@@ -14,16 +14,18 @@ $ ->
 
 				stateDropdownName = stateDropdown.attr('name')
 				stateSelect = $('<select class="span12 state_select" name="' + stateDropdownName + '"> ')
-				
-				#console.log(data)
-				#console.log($.isEmptyObject(data))
+
 
 				if $.isEmptyObject(data) 
 					$('.state_select').remove()
+					stateDropdown.attr('value', state_preset)
 					stateLabel.after stateDropdown
 				else
 					stateDropdown.remove()
 					$('.state_select').remove()
 					stateLabel.after stateSelect
 					$.each data, (i, data) ->
-						stateSelect.append('<option value="' + data.name + '">' + data.name + '</option>')
+						if state_preset == data.state.name
+							stateSelect.append('<option selected="selected" value="' + data.state.name + '">' + data.state.name + '</option>')
+						else
+							stateSelect.append('<option value="' + data.state.name + '">' + data.state.name + '</option>')

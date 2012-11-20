@@ -1,33 +1,29 @@
 require 'spec_helper'
 
-describe "CourseExams", :js => true  do
+describe "CourseExams"  do
   stub_authorization!
 
-  before do
-    @syllabus = create(:syllabus) 
-    @course = create(:course)
-    @student = create(:student)
-    @exam = create(:exam, :name => 'Math')
-    @syllabus.exams << @exam
-    @course.students << @student
-    @syllabus.courses << @course
+  let(:syllabus) { create(:syllabus) }
+  let(:course) { create(:course) }
+  let(:student) { create(:student) }
+  let(:exam) { create(:exam, :name => 'Math') }
 
-    @course.students.size.should eq 1 
-    @syllabus.courses.size.should eq 1
-    @syllabus.exams.size.should eq 1
+  before do   
+    syllabus.exams << exam
+    course.students << student
+    syllabus.courses << course
 
-    visit gaku.course_path(@course)
+    visit gaku.course_path(course)
 
     click_link 'Exams'
-    
   end
   
   it "shows grading link" do
     click_link 'Grading'
-    #TODO check redirection
+    current_path.should eq "/courses/#{course.id}/exams/#{exam.id}/grading"
   end
 
-  it "shows all grading link" do
+  pending "shows all grading link" do
     click_link 'All Exams'
     #TODO check redirection
   end

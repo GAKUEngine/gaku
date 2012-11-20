@@ -4,16 +4,17 @@ describe 'Courses' do
 
   stub_authorization!
 
+  let(:syllabus) { create(:syllabus, :name => 'biology2012', :code => 'bio') }
+  let(:syllabus2) { create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology') }
+  let(:course) { create(:course, :syllabus => syllabus) }
+
   before :all do
     set_resource "course"
-  end
-
-  before do
-    @syllabus = create(:syllabus, :name => 'biology2012', :code => 'bio') 
   end
   
   context '#new', :js => true do 
     before do 
+      syllabus
       visit gaku.courses_path
       click new_link
       wait_until_visible submit
@@ -23,10 +24,10 @@ describe 'Courses' do
       
       expect do      
         fill_in 'course_code', :with => 'SUMMER2012'
-        select "#{@syllabus.name}", :from => 'course_syllabus_id'
+        select "#{syllabus.name}", :from => 'course_syllabus_id'
         click submit
         wait_until_invisible form
-        within(table) { page.should have_content(@syllabus.name) }
+        within(table) { page.should have_content(syllabus.name) }
       end.to change(Gaku::Course, :count).by 1
 
       within(count_div) { page.should have_content('Courses list(1)') }
@@ -46,8 +47,8 @@ describe 'Courses' do
 
   context "existing course" do
     before do
-      @syllabus2 = create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology')
-      @course = create(:course, :syllabus => @syllabus) 
+      course
+      syllabus2
       visit gaku.courses_path
       within(count_div) { page.should have_content('Courses list(1)') }
     end
@@ -105,14 +106,14 @@ describe 'Courses' do
     it "should delete a course", :js => true do
       tr_count = page.all(table_rows).size
       within(count_div) { page.should have_content('Courses list(1)') }
-      within(table) { page.should have_content(@course.code) }
+      within(table) { page.should have_content(course.code) }
 
       expect do     
         ensure_delete_is_working
       end.to change(Gaku::Course, :count).by -1
       
       within(count_div) { page.should_not have_content('Courses list(1)') }
-      within(table) { page.should_not have_content(@course.code) }
+      within(table) { page.should_not have_content(course.code) }
       flash_destroyed?
     end
   end

@@ -4,6 +4,8 @@ describe 'CourseGroups' do
   
   stub_authorization!
 
+  let(:course_group) { create(:course_group, :name => '2013Courses') }
+
   before :all do
     set_resource("course-group")
   end
@@ -39,7 +41,7 @@ describe 'CourseGroups' do
 
   context 'existing' do
     before do 
-      @course_group = create(:course_group, :name => '2013Courses')
+      course_group
       visit gaku.course_groups_path
     end
 
@@ -67,7 +69,7 @@ describe 'CourseGroups' do
       end
 
       it 'edits from show' do
-        visit gaku.course_group_path(@course_group)
+        visit gaku.course_group_path(course_group)
         click edit_link
         wait_until_visible submit 
 
@@ -84,22 +86,22 @@ describe 'CourseGroups' do
     end
     
     it 'deletes', :js => true do 
-      visit gaku.course_group_path(@course_group)
+      visit gaku.course_group_path(course_group)
 
-      page.should have_content @course_group.name
+      page.should have_content course_group.name
 
       click '#delete-course-group-link'
       within(".delete-modal") { click_on "Delete" }
       accept_alert
     
       page.should_not have_content 'Course Groups List(1)'
-      page.should_not have_content @course_group.name
+      page.should_not have_content course_group.name
       flash_destroyed?
     end
 
     context "when select back btn" do
       it 'returns to index view' do 
-        visit gaku.course_group_path(@course_group)
+        visit gaku.course_group_path(course_group)
         click_on('Back')
         page.should have_content ('Course Groups List')
       end
