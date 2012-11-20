@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  s.add_dependency 'rails-i18n'
   s.add_dependency 'gaku_core', version
   s.add_dependency 'gaku_admissions', version
   s.add_dependency 'gaku_sample', version
