@@ -1,6 +1,6 @@
-class GAKUEngine.Views.TableView extends Backbone.View
+class GAKUEngine.Views.ExamTableView extends Backbone.View
 
-  template: JST['gaku/backbone/templates/table/table']
+  template: JST['gaku/backbone/templates/tables/exam_table']
 
   events:
     'blur .portion_score_update': 'validatePortion'
