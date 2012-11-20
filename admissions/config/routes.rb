@@ -9,6 +9,9 @@ Gaku::Core::Engine.routes.prepend do
     end
     resources :admission_methods do
       resources :admission_phases, :controller => 'admission_methods/admission_phases' do
+        resources :admission_phase_states, :controller => 'admission_methods/admission_phases/admission_phase_states' do
+          post :make_default, :on => :member
+        end
         member do
           get :show_phase_states
         end
