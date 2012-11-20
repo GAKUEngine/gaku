@@ -144,7 +144,7 @@ module Gaku
       find_exams
       
       calculate_totals
-      calculate_exam_avarages
+      calculate_exam_averages
       calculate_deviation
       calculate_rank_and_grade
 
@@ -215,7 +215,7 @@ module Gaku
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
       end
 
-      def exams_count 
+      def exams_count
         @exams_count = Exam.count
       end
 

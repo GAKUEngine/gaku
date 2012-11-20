@@ -7,7 +7,7 @@ class GAKUEngine.Routers.ExamsRouter extends Backbone.Router
     '': 'index'
 
   index: ->
-    @tableView = new GAKUEngine.Views.TableView
+    @tableView = new GAKUEngine.Views.ExamTableView
       course: @options.course
       exams: @options.exams
       student_total_scores: @options.student_total_scores

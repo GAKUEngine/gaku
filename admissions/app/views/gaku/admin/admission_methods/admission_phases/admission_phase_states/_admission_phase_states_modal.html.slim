@@ -11,6 +11,7 @@
             th.btn-inverse =t('admission_phase_states.singular')
             th.btn-inverse =t('admission_phase_states.can_progress')
             th.btn-inverse =t('admission_phase_states.can_admit')
+            th.btn-inverse =t('admission_phase_states.auto_progress')
             th.btn-inverse =t('admission_phase_states.auto_admit')
           tbody
             =render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase_states/admission_phase_state', :collection => admission_phase.admission_phase_states, :as => 'state'
