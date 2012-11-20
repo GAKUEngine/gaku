@@ -37,7 +37,6 @@
             offsetX = cell.position().left + 1
             offsetY = cell.parent("tr").position().top + 1
             false
-
         false  if indexY is fixRows
 
       # テーブルの分割と初期化
