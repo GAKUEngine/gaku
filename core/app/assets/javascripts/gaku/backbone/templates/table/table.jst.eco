@@ -1,13 +1,5 @@
 <div class='row-fluid'>
   <div class='span12 well pull-left'>
-    <table class="table table-striped table-bordered table-condensed">
-      <thead>
-        <th>AAA</th>
-      </thead>
-      <tbody>
-        <td>aaa</td>
-      </tbody>
-    </table>
     <table class='exam_grid table table-striped table-bordered table-condensed'>
       <thead>
         <tr>
