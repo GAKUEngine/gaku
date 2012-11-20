@@ -9,7 +9,6 @@ hr
       thead
         tr
           th =t("notes.title")
-          th =t("notes.content")
-          th.btn-info style="width:100px" =t 'manage'
+          th.btn-info style="width:25px;text-align:center" =t 'manage'
       tbody
       	=render :partial => 'note', :collection => @notes, :as => :note

@@ -23,6 +23,7 @@
 //= require tbs_datepicker/js/bootstrap-datepicker
 //= require jquery_validation_engine/jquery.validationEngine
 //= require jquery_validation_engine/languages/jquery.validationEngine-en
+//= require jquery.dataTables
 
 //= require gaku/grading_widget.js.coffee
 //= require_tree .//backbone

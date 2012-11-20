@@ -10,7 +10,7 @@
         th.btn-info style="width:94px" =t 'manage'
     tbody
       - if @exams.any?
-        = render :partial => 'admin/disposals/exam', :collection => @exams, :as => :exam
+        = render :partial => 'gaku/admin/disposals/exam', :collection => @exams, :as => :exam
       - else
         .alert.alert-danger.no-exam-msg
           = t('notice.no_exams')

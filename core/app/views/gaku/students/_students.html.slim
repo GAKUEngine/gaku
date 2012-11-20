@@ -1,16 +1,16 @@
-table#students-index.index.table.table-striped.table-bordered.table-condensed
+table#students-index-table.index.table.table-striped.table-bordered.table-condensed.tablesorter
   thead
     tr
       th.btn-inverse style="width:24px;"
         i.icon-check.icon-white
-      th.btn-inverse = sort_link @search, "surname", t("surname")
-      th.btn-inverse = sort_link @search, "name", t("name")
-      th.btn-inverse = student_sortable "birth_date", t('birth')
-      th.btn-inverse = student_sortable "gender", t('gender')
-      th.btn-inverse = student_sortable "class_name", t('class_groups.name')
-      th.btn-inverse = student_sortable "seat_number", t('class_group_enrollments.seat_number')
-      th.btn-inverse = student_sortable "admitted", t('students.admitted')
-      th.btn-inverse = student_sortable "primary_address", t('addresses.primary')
+      th.btn-inverse = t("surname")
+      th.btn-inverse = t("name")
+      th.btn-inverse = t('birth')
+      th.btn-inverse = t('gender')
+      th.btn-inverse = t('class_groups.name')
+      th.btn-inverse = t('class_group_enrollments.seat_number')
+      th.btn-inverse = t('students.admitted')
+      th.btn-inverse = t('addresses.primary')
       - if params[:controller] == "gaku/students" or params[:controller] == "gaku/admissions"
         th.btn-info style="width:62px" = t("manage")
 
@@ -18,3 +18,16 @@ table#students-index.index.table.table-striped.table-bordered.table-condensed
     =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
 = javascript_include_tag 'gaku/students/selected_students'
+
+javascript:
+  $(document).ready(function() { 
+    $("#students-index-table").dataTable( {
+      "bPaginate": false,
+      "bLengthChange": false,
+      "bFilter": false,
+      "bInfo": false,
+      "bAutoWidth": false,
+      "aoColumns"   : [{"bSortable": false}, null, null, null, null, null, null, null, null, {"bSortable": false}],
+      "asStripClasses": null //To remove "odd"/"event" zebra classes
+    } );
+  }); 

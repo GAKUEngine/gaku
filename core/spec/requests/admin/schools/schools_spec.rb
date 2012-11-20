@@ -4,6 +4,8 @@ describe 'Admin Schools' do
   
   stub_authorization!
   
+  let(:school) { create(:school, :name => 'Varna Technical University') }
+
   before :all do
     set_resource "admin-school" 
   end
@@ -35,7 +37,7 @@ describe 'Admin Schools' do
 
   context 'existing', :js => true do 
     before do
-      @school = create(:school, :name => 'Varna Technical University') 
+      school 
       visit gaku.admin_schools_path
     end
 
@@ -62,14 +64,14 @@ describe 'Admin Schools' do
 
     it 'deletes' do
       within(count_div) { page.should have_content 'Schools list(1)' }
-      page.should have_content @school.name
+      page.should have_content school.name
 
       expect do 
         ensure_delete_is_working 
       end.to change(Gaku::School, :count).by -1
 
       within(count_div) { page.should_not have_content 'Schools list(1)' }
-      page.should_not have_content @school.name
+      page.should_not have_content school.name
       flash_destroyed?
     end
   end

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ClassGroups' do
 
   stub_authorization!
+  let(:class_group){ create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
 
   before :all do 
     set_resource("class-group") 
@@ -44,7 +45,7 @@ describe 'ClassGroups' do
   
   context 'existing' do
     before do 
-      @class_group = create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1')
+      class_group
       visit gaku.class_groups_path
     end
 
@@ -80,7 +81,7 @@ describe 'ClassGroups' do
       end
 
       it 'edits from show view' do 
-        visit gaku.class_group_path(@class_group)
+        visit gaku.class_group_path(class_group)
         click edit_link
         wait_until_visible modal 
 
@@ -106,20 +107,20 @@ describe 'ClassGroups' do
     end
 
     it 'deletes', :js => true do 
-      page.should have_content @class_group.name
+      page.should have_content class_group.name
       within(count_div) { page.should have_content 'Class Groups list(1)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::ClassGroup,:count).by -1 
     
-      page.should_not have_content @class_group.name
+      page.should_not have_content class_group.name
       within(count_div) { page.should_not have_content 'Class Groups list(1)' }
       flash_destroyed?
     end
 
     it 'returns to class groups index when back is selected' do 
-      visit gaku.class_group_path(@class_group)
+      visit gaku.class_group_path(class_group)
       click_link('back-class-group-link')
       page.should have_content ('Class Groups list')
     end
