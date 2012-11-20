@@ -8,11 +8,7 @@
             a#student-search-tab data-toggle="tab" href="#student"
               -if params[:controller] == "gaku/students"
                 = t('student')
-<<<<<<< HEAD
-              -if params[:controller] == "gaku/admissions"
-=======
               -elsif params[:controller] == "gaku/admissions"
->>>>>>> Genshin/master
                 = t('admissions.candidates.candidate')
               -else
                 = t('student') 
@@ -27,5 +23,3 @@
   = hidden_field_tag "autocomplete_field"
   = hidden_field_tag "enrolled_students", @enrolled_students
   #selected-students.hide
-
-
