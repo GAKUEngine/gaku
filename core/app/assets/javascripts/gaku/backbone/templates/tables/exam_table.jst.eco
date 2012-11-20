@@ -15,12 +15,12 @@
           <% for exam in @exams: %>
             <% for portion in exam.exam_portions: %>
               <% if exam.use_weighting : %>
-                <th class='btn-warning' style="width:30px">
+                <th class='btn-warning' style="width: 80px">
                   【 <%= portion.name %> 】
                 </th>
               <!-- More work HERE -->
               <% else : %>
-              <th class='btn-warning' style="width:30px">
+              <th class='btn-warning' style="width: 80px">
                 【 <%= portion.name %> 】
                 <br/>
                 <%= portion.max_score %>
@@ -46,10 +46,13 @@
               <% for portion in exam.exam_portions: %>
                 <% for score in portion.exam_portion_scores: %>
                   <% if score.student_id == student.id : %>
-                    <td>
-                      <form class='portion_score_update' name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
+                    <td align="left">
+                      <form class='portion_score_update pull-left' style="float: left; margin-right: 50px" name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
                         <input style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'/>
                       </form>
+                      <div class="pull-right btn" style="margin-left: -50px">
+                        <i class="icon-ok"></i>
+                      </div>
                     </td>
                   <% end %>
                 <% end %>
@@ -69,7 +72,6 @@
               <%= @exam_averages[exam.id] %>
             </td>
           <% end %>
-          <td></td>
           <td></td>
           <td></td>
         </tr>
