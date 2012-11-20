@@ -143,7 +143,7 @@ module Gaku
       find_exams
       
       calculate_totals
-      calculate_exam_avarages
+      calculate_exam_averages
       calculate_deviation
       calculate_rank_and_grade
 
