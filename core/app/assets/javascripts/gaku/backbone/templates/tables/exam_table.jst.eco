@@ -3,79 +3,20 @@
     <table class='exam_grid table table-striped table-bordered table-condensed'>
       <thead>
         <tr>
-          <th class='btn-primary' colspan='3'><%= ("student") %></td>
-          <% for exam in @exams: %>
-            <th class='exam_infos btn-success' colspan='<%= exam.exam_portions.length + 5 %>'><%= exam.name %></th>
-          <% end %>
-        </tr>
-        <tr>
-          <th class='btn-info' style="width:60px"><%= ("class") %></th>
-          <th class='btn-info' style="width:60px"><%= ("class_group_enrollments.seat_number") %></th>
-          <th class='btn-info' style="width:150px"><%= ("students.name") %></th>
-          <% for exam in @exams: %>
-            <% for portion in exam.exam_portions: %>
-              <% if exam.use_weighting : %>
-                <th class='btn-warning' style="width: 80px">
-                  【 <%= portion.name %> 】
-                </th>
-              <!-- More work HERE -->
-              <% else : %>
-              <th class='btn-warning' style="width: 80px">
-                【 <%= portion.name %> 】
-                <br/>
-                <%= portion.max_score %>
-              </th>
+          <th class='btn-primary'>Student </th>
+          <th class='btn-success' colspan='3'>   
+            <% for exam in @exams: %>
+              <%= exam.name %></th>
             <% end %>
-          <% end %>
-          <th id='total_points_title' class='btn-inverse' style="width:65px"><%= ("grades.total_points") %></th>
-          <% if exam.use_weighting : %>
-            <td id='weighting_total_title' class='btn-inverse' style="width:65px"><%= ("grades.weighting_total") %></td>
-          <% end %>
-          <th class='btn-inverse'><%= ("grades.deviation") %></th>
-          <th id='grade_title' class='btn-inverse' style="width:65px"><%= ("grades.level10") %>
-          <th id='rank_title' class='btn-inverse' style="width:65px"><%= ("grades.level5") %>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <% for student in @students: %>
-          <tr class='student_<%= student.id %>'>
-            <td class="vm-tc"><%= "class"%></td>
-            <td class="vm-tc"><%= "seat_number" %></td>
-            <td class="vm"><%= student.surname + " " + student.name %></td>
-            <% for exam in @exams: %>
-              <% for portion in exam.exam_portions: %>
-                <% for score in portion.exam_portion_scores: %>
-                  <% if score.student_id == student.id : %>
-                    <td align="left">
-                      <form class='portion_score_update pull-left' style="float: left; margin-right: 50px" name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
-                        <input style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'/>
-                      </form>
-                      <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>">
-                        <i class="icon-ok"></i>
-                      </div>
-                    </td>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <td class="vm-tr"><%= @student_total_scores[student.id][exam.id] %></td>
-            <% end %>
-            <td class="vm-tr"><%= @deviation[student.id][exam.id] %></td>
-            <td class="vm-tr"><%= @grades[exam.id][student.id] %></td>
-            <td class="vm-tr"><%= @ranks[exam.id][student.id] %></td>
-          </tr>
-        <% end %>
-        <tr class='total_row'>
-          <td colspan='3'></td>
-          <% for exam in @exams: %>
-            <th class='btn-primary' colspan="<%= exam.exam_portions.length %>"><%= ("grades.average") %></thead>
-            <td class="vm-tr">
-              <%= @exam_averages[exam.id] %>
-            </td>
-          <% end %>
-          <td></td>
-          <td></td>
+        <tr>
+          <td id='exam-grading-user'>1</td>
+          <td id='exam-grading-score'>2</td>
+          <td id='exam-grading-calculations'>3</td>
         </tr>
-      </tbody>
-    </table>
+    <table>
   </div>
 </div>
