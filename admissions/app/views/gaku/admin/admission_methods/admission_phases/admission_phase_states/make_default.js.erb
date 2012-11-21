@@ -1,0 +1,8 @@
+$('.admission-phase-state').each(function() {
+  $(this).children('td.primary-contact').html('');
+  $(this).find('.primary-button a').removeClass('btn-primary');
+});
+
+var currentContact = $("#admission-method-admission-phase-state-<%= @state.id %>");
+currentContact.children('td.primary-contact').html('Primary');
+currentContact.find('.primary-button a').addClass('btn-primary');

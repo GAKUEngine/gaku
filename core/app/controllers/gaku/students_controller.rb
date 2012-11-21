@@ -100,7 +100,8 @@ module Gaku
     end
 
     def load_autocomplete_data
-      @result = params[:class_name].capitalize.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+      object = "Gaku::" + params[:class_name].capitalize
+      @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
