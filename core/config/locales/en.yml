@@ -383,13 +383,6 @@ en:
   hello: Hello world
   helpers:
     links:
-<<<<<<< HEAD
-      cancel: "Cancel"
-
-  csv:
-    import: "CSV Import"
-    export: "CSV Export"
-=======
       cancel: Cancel
   hide: Hide
   import_format: Import Format
