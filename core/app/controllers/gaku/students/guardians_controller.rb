@@ -9,6 +9,7 @@ module Gaku
     before_filter :student
     before_filter :primary_address, :only => :show
     before_filter :load_before_new_contact, :only => :new_contact
+    before_filter :count, :only => [:create,:destroy]
 
     def create
       super do |format|
@@ -41,12 +42,16 @@ module Gaku
     end
 
     def primary_address
-      @guardian = Guardian.find(params[:id])
+      guardian
       @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
     end
 
     def contact_types
       @contact_types = ContactType.all
+    end
+
+    def count 
+      @count = @student.guardians.count
     end
 
   end

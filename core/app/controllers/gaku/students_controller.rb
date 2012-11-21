@@ -1,20 +1,17 @@
 module Gaku
   class StudentsController < GakuController
     include SheetHelper
-
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    #actions :show, :new, :destroy
-
     respond_to :js, :html
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show,  :only => :show
     before_filter :class_groups,      :only => [:new, :edit]
     before_filter :student,           :only => [:edit, :update, :destroy]
-    before_filter :students_count,    :only => [:create, :destroy]
-    before_filter :selected_students, :only => :create
+    before_filter :count,             :only => [:create, :destroy]
+    before_filter :selected_students, :only => [:create,:index]
     
     def index
       @search = Student.search(params[:q])
@@ -23,31 +20,14 @@ module Gaku
         get_csv_template
         return
       end
-
-      @class_groups = ClassGroup.all
-      @courses = Course.all
       @enrolled_students = params[:enrolled_students]
-
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
+  
       respond_to do |format|
         format.js
         format.html
         format.csv  { export_csv_index(@students) }
       end
     end
-
-    def export_csv_index(students, field_order = ["surname", "name"])
-      filename = "Students.csv"
-      content = CSV.generate do |csv|
-        csv << translate_fields(field_order)
-        students.each do |student|
-          csv << student.attributes.values_at(*field_order)
-        end
-      end
-      send_data content, :filename => filename
-    end
-    private :export_csv_index
 
     #def create
       #params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
@@ -59,7 +39,7 @@ module Gaku
     def update
       if @student.update_attributes(params[:student])
         #flash.now[:notice] = t('notice.updated', :resource => resource_name)
-        respond_to do |format|
+        respond_with(student) do |format|
           unless params[:student].nil?
             if !params[:student][:addresses_attributes].nil?
               format.js { render 'students/addresses/create' }
@@ -67,9 +47,9 @@ module Gaku
               format.js { render 'students/notes/create' }             
             else
               if !params[:student][:picture].blank?
-                format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t(:picture)) }
+                format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
               else
-                format.js { render}
+                format.js { render }
               end
             end
           end
@@ -82,10 +62,12 @@ module Gaku
     end
     
     def destroy
-      if @student.destroy && !request.xhr?
-        flash[:notice] = t('notice.removed', :resource => resource_name)  
+      if @student.destroy #&& !request.xhr?
+        #flash[:notice] = t('notice.removed', :resource => resource_name)  
+        respond_with(@student) do 
+          format.html { redirect_to students_path }
+        end
       end
-      redirect_to students_path
     end
 
     def autocomplete_search
@@ -94,9 +76,7 @@ module Gaku
       # work only on sqlite3 and postgresql
       term = Student.encrypt_name(params[:term])
       @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(encrypted_surname || " " || encrypted_name LIKE ?) OR (encrypted_name || " " || encrypted_surname LIKE ?) OR (encrypted_name LIKE ?) OR (encrypted_surname LIKE ?)', "%#{term}%", "%#{term}%", "%#{term}%",  "%#{term}%")
-
       @students_json = decrypt_students_fields(@students)
-
       render json: @students_json.as_json
     end
 
@@ -106,6 +86,18 @@ module Gaku
     end
 
     private
+
+      def export_csv_index(students, field_order = ["surname", "name"])
+        filename = "Students.csv"
+        content = CSV.generate do |csv|
+          csv << translate_fields(field_order)
+          students.each do |student|
+            csv << student.attributes.values_at(*field_order)
+          end
+        end
+        send_data content, :filename => filename
+      end
+      
       def class_name
         params[:class_name].capitalize.constantize
       end
@@ -116,6 +108,8 @@ module Gaku
 
       def load_before_index
         @student = Student.new
+        @class_groups = ClassGroup.all
+        @courses = Course.all
       end
 
       def load_before_show
@@ -135,8 +129,8 @@ module Gaku
         @student = Student.find(params[:id])
       end
 
-      def students_count
-        @students_count = Student.count
+      def count
+        @count = Student.count
       end
 
       def sort_column

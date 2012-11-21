@@ -3,7 +3,7 @@
     = render 'gaku/class_groups/courses/form'
   .pull-left
     h4.h4-vm.class-group-courses-count 
-      =print_count(@class_group.class_group_course_enrollments.count, t('course.list'))
+      =print_count(@class_group.class_group_course_enrollments.count, t_course_list)
   .pull-right
     = ajax_link_to_new t('course.add'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 

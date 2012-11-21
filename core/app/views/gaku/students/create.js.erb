@@ -3,6 +3,6 @@ $('#new-student form')[0].reset();
 $('#new-student-link').show();
 
 $('#students-index tbody').append('<%= render_js_partial("student", {:student => @student}) %>');
-$('.students-count').html("<%= print_count(@students_count + 1, t('student.list')) %>");
+$('.students-count').html("<%= print_count(@count + 1, t_student_list) %>");
 
 showNotice("<%= render_flash %>");

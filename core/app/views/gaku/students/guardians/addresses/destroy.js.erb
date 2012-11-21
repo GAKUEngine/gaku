@@ -2,5 +2,5 @@
 	$('#address-<%= @guardian.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 
-$('.student-guardian-addresses-count').html('<%= print_count(@guardian.addresses.count, t('address.list')) %>');
+$('.student-guardian-addresses-count').html('<%= print_count(@count-1, t_address_list) %>');
 showNotice("<%= render_flash %>");

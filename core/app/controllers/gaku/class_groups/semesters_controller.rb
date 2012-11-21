@@ -1,7 +1,5 @@
 module Gaku
   class ClassGroups::SemestersController < GakuController
-  	include Gaku::ClassGroups::SemestersHelper
-
     inherit_resources
     respond_to :js, :html
     belongs_to :class_group, :parent_class => Gaku::ClassGroup

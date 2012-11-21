@@ -119,7 +119,7 @@ module Gaku
     end   
 
     def link_to_cancel(options = {})
-      name = t('.cancel', :default => t("helpers.links.cancel"))
+      name = t('cancel')
       attributes = {
         :class => "span3 btn btn-danger",
         :'data-dismiss' => "modal"

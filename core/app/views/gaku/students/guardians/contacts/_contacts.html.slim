@@ -3,7 +3,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.student-guardian-contacts-count
-        = print_count(@guardian.contacts.count, t('contact.list'))
+        = print_count(@guardian.contacts.count, t_contact_list)
     .pull-right
       = ajax_link_to_new t('contact.add'), new_student_guardian_contact_path(@student, @guardian), :id => 'new-student-guardian-contact-link'
 

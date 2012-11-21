@@ -1,13 +1,12 @@
 module Gaku
   class Students::AddressesController < GakuController
-
     inherit_resources
     actions :index, :show, :new, :update, :edit
-
     respond_to :js, :html
-
+    
+    before_filter :student
     before_filter :address, :only => [:destroy, :make_primary]
-    before_filter :student, :only => [:new, :create, :edit, :update, :destroy, :make_primary]
+    before_filter :count, :only => [:create, :destroy]
 
     def create
       super do |format|
@@ -35,10 +34,10 @@ module Gaku
     def destroy
       @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
       if @address.destroy
-        flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
+        #flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
         if @address.id == @primary_address_id
           @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
-          respond_to do |format|
+          respond_with(@address) do |format|
             format.js { render }
           end
         else
@@ -65,6 +64,10 @@ module Gaku
 
     def resource_name
       t('address.singular')
+    end
+
+    def count
+      @count = @student.addresses.count
     end
 
   end

@@ -10,11 +10,12 @@ module Gaku
     before_filter :student, :only => [:new, :create, :edit, :update]
     before_filter :guardian
     before_filter :primary_address, :only => [:update, :destroy]
+    before_filter :count, :only => [:create,:destroy]
 
     def create
       super do |format|
         if @guardian.addresses << @address
-          load_primary_address        
+          primary_address        
           format.js { render 'create' }  
         end
       end  
@@ -23,14 +24,16 @@ module Gaku
     def destroy 
       if @address.destroy
 
-        flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
+        #flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
         if @address.id == @primary_address_id
           @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
           respond_to do |format|
             format.js { render }
           end
         else
-          render 'destroy'
+          respond_with(@address) do |format|
+            format.js { render 'destroy'}
+          end
         end
       end
     end
@@ -61,6 +64,10 @@ module Gaku
 
       def resource_name
         t('address.singular')
+      end
+
+      def count
+        @count = @guardian.addresses.count
       end
 
   end

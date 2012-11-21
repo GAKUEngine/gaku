@@ -4,5 +4,5 @@ $('#new-class-group-course-link').show();
 $('#class-group-courses-index tbody').append('<%= render_js_partial("course", {:enrollment => @class_group_course_enrollment}) %>');
 
 showNotice("<%= render_flash %>");
-$('#class-group-courses-tab-link').html('<%= print_count(@count+1, t_plural) %>');
-$('.class-group-courses-count').html('<%= print_count(@count+1, t_list) %>');
+$('#class-group-courses-tab-link').html('<%= print_count(@count+1, t_course_plural) %>');
+$('.class-group-courses-count').html('<%= print_count(@count+1, t_course_list) %>');

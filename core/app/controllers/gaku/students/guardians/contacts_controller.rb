@@ -10,6 +10,7 @@ module Gaku
     before_filter :student
     before_filter :contact, :only => :make_primary 
     before_filter :contact_types, :only => [:new, :edit]
+    before_filter :count, :only => [:create, :destroy]
 
     def create
       @contact = @guardian.contacts.build(params[:contact])
@@ -77,6 +78,10 @@ module Gaku
 
     def resource_name
       t('contact.singular')
+    end
+
+    def count 
+      @count = @guardian.contacts.count
     end
   end
 end

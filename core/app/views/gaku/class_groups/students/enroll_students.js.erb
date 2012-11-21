@@ -4,8 +4,8 @@ $("#class-group-students-index tbody").html('');
   $('#class-group-students-index tbody').append('<%= render_js_partial("gaku/class_groups/students/student", {:enrollment => enrollment}) %>');
 <% } %>
 
-$('#class-group-enrollments-tab-link').html('<%= print_count(@class_group.class_group_enrollments.count, @title[:plural]) %>');
-$('.class-group-enrollments-count').html('<%= print_count(@class_group.class_group_enrollments.count, @title[:list]) %>');
+$('#class-group-enrollments-tab-link').html('<%= print_count(@count, t_student_plural) %>');
+$('.class-group-enrollments-count').html('<%= print_count(@count, t_student_list) %>');
 
 $('#student-modal').modal('hide');
 showNotice("<%= render_flash %>");

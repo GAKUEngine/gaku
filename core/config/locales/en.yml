@@ -8,12 +8,12 @@ en:
   flash:
     actions:
       create:
-        notice: "%{resource_name} was fucking created."
+        notice: "%{resource_name} was successfully created!"
       update:
-        notice: "%{resource_name} was successfully updated."
+        notice: "%{resource_name} was successfully updated!"
       destroy:
-        notice: "%{resource_name} was successfully destroyed."
-        alert: "%{resource_name} could not be destroyed."
+        notice: "%{resource_name} was successfully destroyed!"
+        alert: "%{resource_name} could not be destroyed!"
 
   notice:
     uploaded: "%{resource} has been successfully uploaded!"
@@ -54,14 +54,7 @@ en:
         state: 'State'
         city: 'City'
 
-  #fields:
-  #  name: "name"
-  #  surname: "surname"
-  #  name_reading: "name_reading"
-  #  surname_reading: "surname_reading"
-  #  gender: "gender"
-  #  phone: "phone"
-  #  email: "email"
+
   
   #class_groups:
   #  list: "Class Listing"
@@ -169,7 +162,7 @@ en:
     show: "Show Students"
     new: "Register New Student"
     create: "Create Student"
-    add: "Add student"
+    add: "Add Student"
     edit: "Edit"
     list: "Students list"
     enroll: "Enroll Student"
@@ -189,6 +182,10 @@ en:
     commute_method: 'Commute Method'
     import: "Import Students"
     export: "Export Students"
+    registration:
+      csv: "Registration CSV"
+      sheet: "Registration Sheet"
+
 
 
   #add_student: "Add Student"
@@ -225,8 +222,8 @@ en:
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
     options: "Options"
-    save: "Save course"
-    add: "Add course"
+    save: "Save Course"
+    add: "Add Course"
     management: "Course Management"
     #choose_course: "Choose course"
     choose: "Choose Course"
@@ -263,7 +260,8 @@ en:
     plural: "Class Groups"
     singular: "Class Group" 
     list: "Class Groups list"
-    new: "New Class"
+    new: "New Class Group"
+    edit: "Edit Class Group"
     name: "Class Name"
     grade: "Grade"
     homeroom: "Home Room"
@@ -507,3 +505,11 @@ en:
   csv:
     import: "CSV Import"
     export: "CSV Export"
+    fields:
+      name: "name"
+      surname: "surname"
+      name_reading: "name_reading"
+      surname_reading: "surname_reading"
+      gender: "gender"
+      phone: "phone"
+      email: "email"

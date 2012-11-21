@@ -2,7 +2,7 @@
   .row-fluid
     .pull-left
       h4.h4-vm.class-group-enrollments-count
-        = print_count(@class_group.class_group_enrollments.count, t('class_group_enrollment.list'))
+        = print_count(@class_group.class_group_enrollments.count, t_student_list)
     .pull-right
       = ajax_link_to_new t('student.add'), student_chooser_class_group_path(:class_group_id => @class_group.id), :id => 'new-class-group-student-link'
   .row-fluid

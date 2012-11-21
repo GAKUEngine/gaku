@@ -23,6 +23,6 @@
             th.btn-inverse = t('address.city')
             th.btn-inverse = t('address.address1')
             th.btn-inverse = t('address.address2')
-            th.btn-info style="width:61px" =t 'manage'
+            th.btn-info style="width:61px" = t('manage')
         tbody
           =render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'
