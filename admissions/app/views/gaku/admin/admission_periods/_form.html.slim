@@ -12,17 +12,12 @@
         = admission_period_form.label :admitted_on, t("admission_periods.admitted_on")
         = admission_period_form.date_select :admitted_on
       .span12.well[style="margin-left: 0px; margin-top: 20px;"]
-        = admission_period_form.fields_for :admission_methods do |method_form|
+        = admission_period_form.fields_for :period_method_associations do |method_form|
           = method_form.label :name, t("admission_methods.name")
-          = method_form.text_field :name, :class => "span12"
+          = method_form.collection_select(:admission_method_id, Gaku::AdmissionMethod.all(:order => 'name'), :id, :name, { :prompt => 'Select Admission Method' })
           = method_form.link_to_remove t('admission_methods.remove')
-        p= admission_period_form.link_to_add t('admission_methods.add'), :admission_methods
+        p= admission_period_form.link_to_add t('admission_methods.add'), :period_method_associations
       .span12.well[style="margin-left: 0px; margin-top: 20px;"]
-        = admission_period_form.fields_for :admission_methods do |method_form|
-          = method_form.label :name, t("admission_methods.name")
-          = method_form.collection_select(:id, Gaku::AdmissionMethod.all(:order => 'name'), :id, :name, { :prompt => 'Select Admission Method' })
-          = method_form.link_to_remove t('admission_methods.remove')
-        p= admission_period_form.link_to_add t('admission_methods.add2'), :admission_methods
         .row-fluid
           .span12
             .span6
