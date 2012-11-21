@@ -3,9 +3,9 @@
     = render 'gaku/class_groups/courses/form'
   .pull-left
     h4.h4-vm.class-group-courses-count 
-      =print_count(@class_group.class_group_course_enrollments.count, t("courses.list"))
+      =print_count(@class_group.class_group_course_enrollments.count, t('course.list'))
   .pull-right
-    = ajax_link_to_new t('add_course'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
+    = ajax_link_to_new t('course.add'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 
 .row-fluid
   .span12
@@ -15,7 +15,7 @@
     table#class-group-courses-index.index.table.table-striped.table-bordered.table-condensed 
       thead
         tr
-          th.btn-inverse =t 'course.code'
+          th.btn-inverse = t('course.code')
           th.btn-info style="width:61px" =t 'manage'
       tbody
         =render :partial => 'gaku/class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'

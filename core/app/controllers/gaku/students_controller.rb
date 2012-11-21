@@ -5,7 +5,7 @@ module Gaku
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    actions :show, :new, :destroy
+    #actions :show, :new, :destroy
 
     respond_to :js, :html
 
@@ -14,6 +14,7 @@ module Gaku
     before_filter :class_groups,      :only => [:new, :edit]
     before_filter :student,           :only => [:edit, :update, :destroy]
     before_filter :students_count,    :only => [:create, :destroy]
+    before_filter :selected_students, :only => :create
     
     def index
       @search = Student.search(params[:q])
@@ -48,16 +49,16 @@ module Gaku
     end
     private :export_csv_index
 
-    def create
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-      super do |format|
-        format.js { render }
-      end
-    end
+    #def create
+      #params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+    #  super do |format|
+    #    format.js { render }
+    #  end
+    #end
 
     def update
       if @student.update_attributes(params[:student])
-        flash.now[:notice] = t('students.updated')
+        #flash.now[:notice] = t('notice.updated', :resource => resource_name)
         respond_to do |format|
           unless params[:student].nil?
             if !params[:student][:addresses_attributes].nil?
@@ -66,7 +67,7 @@ module Gaku
               format.js { render 'students/notes/create' }             
             else
               if !params[:student][:picture].blank?
-                format.html { redirect_to @student, :notice => t('notice.picture_uploaded')}
+                format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t(:picture)) }
               else
                 format.js { render}
               end
@@ -82,7 +83,7 @@ module Gaku
     
     def destroy
       if @student.destroy && !request.xhr?
-        flash[:notice] = "Student was successfully destroyed."  
+        flash[:notice] = t('notice.removed', :resource => resource_name)  
       end
       redirect_to students_path
     end
@@ -100,11 +101,19 @@ module Gaku
     end
 
     def load_autocomplete_data
-      @result = params[:class_name].capitalize.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+      @result = class_name.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
     private
+      def class_name
+        params[:class_name].capitalize.constantize
+      end
+
+      def selected_students
+        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+      end
+
       def load_before_index
         @student = Student.new
       end
@@ -136,6 +145,10 @@ module Gaku
 
       def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      end
+
+      def resource_name 
+        t('student.singular')
       end
 
 =begin

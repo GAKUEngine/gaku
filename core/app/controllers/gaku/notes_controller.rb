@@ -20,20 +20,20 @@ module Gaku
     def create
     	@note = @notable.notes.new(params[:note])
     	@note.save
-      flash.now[:notice] = t('notes.created')
+      flash.now[:notice] = t('notice.created', :resource => resource_name)
     	render 'create', :locals => {:notable_resource => @notable_resource}
     end
 
     def edit
       super do |format|
-        format.js {render 'edit'}  
+        format.js { render 'edit' }  
       end  
     end
 
     def show
       @note = Note.find(params[:id])
       super do |format|
-        format.js {render 'show'}  
+        format.js { render 'show' }  
       end  
     end
     
@@ -46,7 +46,7 @@ module Gaku
     def destroy
       @note = Note.find(params[:id])
       @note.destroy
-      flash.now[:notice] = t('notes.destroyed')
+      flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
       respond_to do |format|
         format.js { render 'destroy', :locals => {:notable_resource => @notable_resource} }
       end
@@ -62,6 +62,10 @@ module Gaku
 
       @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+    end
+
+    def resource_name
+      t('note.singular')
     end
 
   end

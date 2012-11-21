@@ -1,14 +1,14 @@
 .span3
-  = f.label :surname_cont, t('surname')
+  = f.label :surname_cont, t(:surname)
   = f.text_field :surname_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "surname") }
 .span3
-  = f.label :name_cont, t('given_name')
+  = f.label :name_cont, t(:given_name)
   = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
 .span3
-  = f.label :birth_date_gteq, t("students.birth_between")
+  = f.label :birth_date_gteq, t(:birth_between)
   = f.text_field :birth_date_gteq, :class => 'span12', :placeholder => t('date_placeholder')
-  = f.label :birth_date_lteq, t("students.birth_and")
-  = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t('date_placeholder')
+  = f.label :birth_date_lteq, t(:birth_and)
+  = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t(:date_placeholder)
 - if params[:controller] == "admissions"
   .span3
     = f.label :school_id, t("admissions.candidates.junior_high_school")

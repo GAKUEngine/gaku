@@ -1,6 +1,8 @@
 module Gaku
   class ClassGroupEnrollmentsController < GakuController
 
+    before_filter :title , :only => :enroll_students
+
     def filtered_students
       @class_group_enrolled_students = ClassGroupEnrollment.where(:class_group_id => params[:class_group_id]).pluck(:student_id)
      
@@ -76,6 +78,12 @@ module Gaku
         flash.now[:notice] = notice.html_safe
         render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
       end
+    end
+
+    private
+
+    def title 
+      @title = { :list => t("class_group_enrollment.list"), :plural => t("class_group_enrollment.plural")}
     end
 
   end

@@ -6,6 +6,6 @@ showNotice("<%= render_flash %>");
 	$('#new-class-group-semester').slideToggle();
 	$('#new-class-group-semester-form-errors').html('');
   $('#new-class-group-semester-link').show();
-  $('#class-group-semesters-tab-link').html('<%= print_count(@class_group.semesters.count, t("semesters.semesters")) %>');
-  $('.class-group-semesters-count').html('<%= print_count(@class_group.semesters.count, t("semesters.list")) %>');
+  $('#class-group-semesters-tab-link').html("<%= print_count(@count+1, t_plural) %>");
+  $('.class-group-semesters-count').html("<%= print_count(@count+1, t_list) %>");
 <% end %>

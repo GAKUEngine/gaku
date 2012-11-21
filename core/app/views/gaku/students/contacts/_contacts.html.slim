@@ -3,9 +3,9 @@
     #new-student-contact.hide
     .pull-left
       h4.mt-xs.mb-0.student-contacts-count
-        = print_count(@student.contacts.count, t('contacts.list'))
+        = print_count(@student.contacts.count, t('contact.list'))
     .pull-right
-        = ajax_link_to_new t('students.add_contact'), new_student_contact_path(@student), :id => 'new-student-contact-link'
+        = ajax_link_to_new t('contact.add'), new_student_contact_path(@student), :id => 'new-student-contact-link'
   .row-fluid
     hr
   .row-fluid
@@ -14,10 +14,10 @@
         tr
           th.btn-inverse style="width:28px"
               i.icon-white.icon-home
-          th.btn-inverse =t('contact_type')
-          th.btn-inverse =t('contacts.data')
-          th.btn-inverse =t('contacts.details')
-          th.btn-inverse =t('contacts.emergency')
+          th.btn-inverse =t('contact_type.singular')
+          th.btn-inverse =t('contact.data')
+          th.btn-inverse =t('contact.details')
+          th.btn-inverse =t('contact.emergency')
           th.btn-info style='width:61px' =t 'manage'
       tbody
         =render :partial => 'gaku/students/contacts/contact', :collection => @student.contacts, :as => 'contact'

@@ -7,7 +7,7 @@ module Gaku
       fields = f.fields_for(association, new_object, child_index: id) do |builder|
         render(association.to_s.singularize + "_fields", f: builder)
       end
-      link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+      link_to(("<i class='icon-plus icon-white'></i> " + name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
     end
 
     def button(text, resource, options = {})
@@ -57,7 +57,7 @@ module Gaku
       attributes = {
         :remote => true,
         :method => :delete,
-        :data => { :confirm => 'Are you sure?' },
+        :data => { :confirm => t(:are_you_sure) },
         :class => 'btn btn-mini btn-danger delete-link'
       }.merge(options)
       link_to name, resource, attributes
@@ -68,7 +68,7 @@ module Gaku
       attributes = {
         :remote => true,
         :method => :post,
-        :data => { :confirm => 'Are you sure?' },
+        :data => { :confirm => t(:are_you_sure) },
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -94,7 +94,7 @@ module Gaku
 
     # Edit button with text "Edit" and pencil image
     def link_to_edit_with_text(resource, options = {})
-      name = ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe
+      name = ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe
       attributes = {
         :class => "edit-link"
       }.merge(options)

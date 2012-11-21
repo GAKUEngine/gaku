@@ -1,10 +1,12 @@
 module Gaku
   class ClassGroups::CoursesController < GakuController
+    include Gaku::ClassGroups::CoursesHelper
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
 
-    before_filter :load_class_group, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :class_group, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :count, :only => [:create, :destroy]
 
     def destroy
       @class_group_course_enrollment = ClassGroupCourseEnrollment.find(params[:id])
@@ -36,9 +38,14 @@ module Gaku
     end
 
     private 
-      def load_class_group
-        @class_group = ClassGroup.find(params[:class_group_id])
-      end
+
+    def class_group
+      @class_group = ClassGroup.find(params[:class_group_id])
+    end
+
+    def count
+      @count = @class_group.courses.count
+    end
 
 
   end

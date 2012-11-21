@@ -32,20 +32,20 @@
     <li class="dropdown-submenu" data-hook="disposals_sub_menu">
       <a tabindex='-1' href='#'><%= t('admin.disposals') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="exam_disposals"><%= link_to t("admin.exams_disposals"), exams_admin_disposals_path %></li>
+        <li data-hook="exam_disposals"><%= link_to t("menu.admin.exam_disposals"), exams_admin_disposals_path %></li>
         <li data-hook="attachment_disposals">
-          <%= link_to t("admin.attachments_diposals"), attachments_admin_disposals_path %>
+          <%= link_to t("menu.admin.attachment_disposals"), attachments_admin_disposals_path %>
         </li>
         <li data-hook="course_group_disposals">
-          <%= link_to t("admin.course_groups_diposals"), course_groups_admin_disposals_path %>
+          <%= link_to t("menu.admin.course_group_disposals"), course_groups_admin_disposals_path %>
         </li>
       </ul>
     </li>
 
     <li class="dropdown-submenu" data-hook="system_tools_sub_menu">
-      <a tabindex='-1' href='#'><%= t('admin.system.system_tools') %></a>
+      <a tabindex='-1' href='#'><%= t('menu.admin.system.system_tools') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="student_presets"><%= link_to t("admin.system.backup"), admin_system_tools_path %></li>
+        <li data-hook="student_presets"><%= link_to t("menu.admin.system.backup"), admin_system_tools_path %></li>
       </ul>
     </li>
 

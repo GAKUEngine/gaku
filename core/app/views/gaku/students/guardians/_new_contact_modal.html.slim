@@ -2,7 +2,7 @@
   .modal-header
     button.close type="button" data-dismiss="modal"
       'x
-    h3 = "New Guardian Contact"
+    h3 = t('contact.new')
   .modal-body
     = form_for [@student, @guardian, @contact], :url => create_modal_student_guardian_contacts_path(@student, @guardian, @contact), :remote => true do |contact_form|
 
@@ -10,5 +10,5 @@
 
       .actions
         .span8
-          = submit_button t('students.create_contact'), :id => 'submit-student-guardian-contact-button'
+          = submit_button t('contact.create'), :id => 'submit-student-guardian-contact-button'
         = link_to_cancel :id => 'cancel-student-guardian-contact-link'

@@ -6,8 +6,8 @@ module Gaku
 
     respond_to :js, :html
 
-    before_filter :load_address, :only => :destroy
-    before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :address, :only => [:destroy, :make_primary]
+    before_filter :student, :only => [:new, :create, :edit, :update, :destroy, :make_primary]
 
     def create
       super do |format|
@@ -35,7 +35,7 @@ module Gaku
     def destroy
       @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
       if @address.destroy
-        flash.now[:notice] = t('addresses.destroyed')
+        flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
         if @address.id == @primary_address_id
           @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
           respond_to do |format|
@@ -48,21 +48,24 @@ module Gaku
     end
 
     def make_primary
-      @student = Student.find(params[:student_id])
-      @address = Address.find(params[:id])
-      @student_address = StudentAddress.find_by_student_id_and_address_id(@student.id,@address.id)
-      @student_address.make_primary
+      student_address = StudentAddress.find_by_student_id_and_address_id(@student.id, @address.id)
+      student_address.make_primary
       render :nothing => true
     end
 
     private
-      def load_address
-        @address = Address.find(params[:id])
-      end
+    
+    def address
+      @address = Address.find(params[:id])
+    end
 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+    def student
+      @student = Student.find(params[:student_id])
+    end
+
+    def resource_name
+      t('address.singular')
+    end
 
   end
 end
