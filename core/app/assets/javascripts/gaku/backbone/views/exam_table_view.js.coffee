@@ -1,14 +1,19 @@
-class GAKUEngine.Views.TableView extends Backbone.View
+class GAKUEngine.Views.ExamTableView extends Backbone.View
 
-  template: JST['gaku/backbone/templates/table/table']
+  template: JST['gaku/backbone/templates/tables/exam_table']
 
   events:
     'blur .portion_score_update': 'validatePortion'
     'click .portion_score_update input': 'removeBorder'
+    'click .portion_set_attendance' : 'setPortionAttendance'
 
   render: ->
     $(this.el).html @template(course: @options.course, exams: @options.exams, student_total_scores: @options.student_total_scores, exam_averages: @options.exam_averages, deviation: @options.deviation, students: @options.students, grades: @options.grades, ranks: @options.ranks)
     @
+
+  setPortionAttendance: (event)->
+    currentTarget = $(event.currentTarget)
+    alert "attendance modal here"
 
   validatePortion: (event)->
     currentTarget = $(event.currentTarget)
