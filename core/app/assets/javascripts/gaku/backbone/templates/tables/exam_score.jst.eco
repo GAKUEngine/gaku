@@ -37,12 +37,11 @@
       </tr>
     <% end %>
     <tr class='total_row'>
-        <% for exam in @exams: %>
-          <th class='btn-primary' colspan="<%= exam.exam_portions.length %>">
-            Avarages:
-          </th>
-        <% end %>
-      </td>
+      <% for exam in @exams: %>
+        <th class='btn-primary' colspan="<%= exam.exam_portions.length %>">
+          Avarages:
+        </th>
+      <% end %>
     </tr>
   </tbody>
 </table>

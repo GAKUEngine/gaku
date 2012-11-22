@@ -14,10 +14,5 @@
         <td class="vm"><%= student.surname + " " + student.name %></td>
       <tr/>
     <% end %>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
