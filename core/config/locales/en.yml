@@ -451,6 +451,7 @@ en:
     can_progress: "Can progress"
     can_admit: "Can admit"
     auto_admit: "Auto admit"
+    auto_progress: 'Auto progress'
     remove: "Remove state"
 
   admission_periods:
