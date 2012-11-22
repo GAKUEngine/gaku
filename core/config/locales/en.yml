@@ -76,9 +76,10 @@ en:
     students: "Students"
     exams: "Exam Management"
     admin:
-      exam_disposals: "Exam Disposals"
-      attachment_disposals: "Attachment Disposals"
-      course_group_disposals: "Course Group Disposals"
+      disposals:
+        exam: "Exam Disposals"
+        attachment: "Attachment Disposals"
+        course_group: "Course Group Disposals"
 
       system:
         system_tools: "System Tools"
@@ -119,14 +120,16 @@ en:
   confirm: 'Are you sure?'
   history: 'History'
   revert: 'Revert'
-  attachments:
+  attachment:
     assets: 'Assets'
+    name: "Name"
+    description: "Description"
     file_name: 'File name'
     file_type: 'File type'
     file_size: 'File size'
-    new_attachment: "New Attachment"
-    create_attachment: 'Create Attachment'
-    attachment_recovered: 'Attachment recovered'
+    new: "New Attachment"
+    create: 'Create Attachment'
+    #recovered: 'Attachment recovered'
     asset_type: 'Asset type'
 
   address:
