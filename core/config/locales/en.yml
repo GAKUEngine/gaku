@@ -440,7 +440,7 @@ en:
     list: "Contacts list"
     #contacts: "Contacts"
 
-  schools:
+  school:
     singular: "School"
     plural: "Schools"
     add: "Add School"
@@ -459,9 +459,9 @@ en:
     campuses: "Campuses"
     code: 'Code'
     edit_master: 'Edit Master School'
-    master_school: 'Master School'
+    master: 'Master School'
 
-  campuses:
+  campus:
     singular: "Campus"
     plural: "Campuses"
     add: "Add Campus"

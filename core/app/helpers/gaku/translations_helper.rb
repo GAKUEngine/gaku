@@ -65,5 +65,13 @@ module Gaku
       t('course_group.list')
     end
 
+    def t_school_list
+      t('school.list')
+    end
+
+    def t_campus_list
+      t('campus.list')
+    end
+
   end
 end
