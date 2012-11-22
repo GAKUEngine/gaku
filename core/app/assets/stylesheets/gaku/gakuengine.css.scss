@@ -118,6 +118,27 @@ table.table{
   background-color: #e2f3e7;
 }
 
+.exam-frame-table {
+  padding: 0px;
+  
+  tbody {
+    tr {
+      td {
+        padding: 0px;
+      }
+    }
+    tr:hover {
+      td {
+        background-color: white;
+      }
+    }
+  }
+}
+.exam-parts {
+  border: none;
+  padding: 0px;
+}
+
 span.required {
   color: $c_red;
   font-weight: bold;
