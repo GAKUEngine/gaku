@@ -4,23 +4,23 @@
       table.table.table-striped.table-bordered.table-condensed
         tbody
           tr
-            th.btn-inverse =t('exams.name')
-            td =@exam.name
-            th.btn-inverse =t('exams.weight')
-            td =@exam.weight
+            th.btn-inverse = t('exam.name')
+            td = @exam.name
+            th.btn-inverse = t('exam.weight')
+            td = @exam.weight
           tr
-            th.btn-inverse =t('exams.description')
-            td colspan="3" =@exam.description
+            th.btn-inverse = t('exam.description')
+            td colspan="3" = @exam.description
           tr
-            th.btn-inverse =t('exams.adjustments')
-            td colspan="3" =@exam.adjustments
+            th.btn-inverse = t('exam.adjustments')
+            td colspan="3" = @exam.adjustments
 .row-fluid
   .span12.well
     .row-fluid
       .pull-left
-        h4.h4-vm.exam-exam-portions-count =t('exam_portions.list') + " ( " + @exam.exam_portions.count.to_s + " )"
+        h4.h4-vm.exam-exam-portions-count = t('exam_portion.list') + " ( " + @exam.exam_portions.count.to_s + " )"
       .pull-right
-        =ajax_link_to_new t('exams.add_portion'), new_exam_exam_portion_path(@exam), :id => 'new-exam-exam-portion-link'
+        = ajax_link_to_new t('exam.add_portion'), new_exam_exam_portion_path(@exam), :id => 'new-exam-exam-portion-link'
     .row-fluid
       .span12
         hr
@@ -41,5 +41,5 @@
 
 .row-fluid
   .span12.well
-    = link_to ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe, edit_exam_path(@exam),:remote => true, :class => "span9 btn btn-warning"
+    = link_to ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe, edit_exam_path(@exam),:remote => true, :class => "span9 btn btn-warning"
     = link_to_back exams_path, :class => "span3 btn btn-danger"

@@ -2,7 +2,7 @@ en:
   languages:
     en: "English"
     ja: "日本語[Japanese]"
-  
+
   #inherited_resources
   #https://github.com/plataformatec/responders/blob/master/lib/responders/flash_responder.rb
   flash:
@@ -21,8 +21,11 @@ en:
     destroyed: "%{resource} has been successfully destroyed!"
     updated: "%{resource} has been successfully updated!"
     enrolled: "%{resource} has been successfully enrolled to %{to}!"
-    no_assignments: "No assignments, assign one first"
-    no_exams: "No exams, assign one first"
+    added: "%{resource} has been successfully added!"
+    removed: "%{resource} has been successfully removed!"
+    #no_assignments: "No assignments, assign one first"
+    #no_exams: "No exams, assign one first"
+    no_resource_assign_first: "No %{resource}, assign one first"
 
   admin:
     admin: "Admin"
@@ -55,19 +58,19 @@ en:
         city: 'City'
 
 
-  
+
   #class_groups:
   #  list: "Class Listing"
 
   menu:
-    students: "Students"  
+    students: "Students"
     exams: "Exam Management"
-    admin: 
+    admin:
       exam_disposals: "Exam Disposals"
       attachment_disposals: "Attachment Disposals"
       course_group_disposals: "Course Group Disposals"
-      
-      system: 
+
+      system:
         system_tools: "System Tools"
         backup: "Backup"
 
@@ -81,7 +84,7 @@ en:
   cancel: "Cancel"
   add: 'Add'
   default: 'Default'
-  
+
   birth_date: "Birth Date"
   title: "Title"
 
@@ -149,7 +152,7 @@ en:
 
   commute_method: "Commute Method"
   picture: "Picture"
-  
+
   birth: "Birth Date"
   teacher: "Instructor"
 
@@ -170,9 +173,9 @@ en:
     #phone: "Phone #"
     #email: "E-Mail"
     #birth: "Birth Date"
-    
+
     #add_address: "Add Address"
-    
+
     class_group_enrollment: "Class enrollment"
     #create_contact: "Create Contact"
     #contact_type: 'Contact Type'
@@ -193,11 +196,12 @@ en:
   schedule: "Schedule"
   num_enrolled: "Number Enrolled"
   combined_code: "Combined Code"
-  syllabus: "Syllabus"
+  #syllabus: "Syllabus"
 
-  syllabuses:
+  syllabus:
+    singular: "Syllabus"
     plural: "Syllabuses"
-    show: "Syllabus"
+    show: "Show Syllabus"
     new: "New Syllabus"
     edit: "Edit Syllabus"
     list: "List Syllabuses"
@@ -206,9 +210,9 @@ en:
     name_sample: "[EX: Science A]"
     description: "Course Description"
     credits: "Credits"
-    choose_exam: 'Choose Exam'
-    add_exam: 'Add Exam'
-    add_existing_exam: 'Add Existing Exam'
+    #choose_exam: 'Choose Exam'
+    #add_exam: 'Add Exam'
+    #add_existing_exam: 'Add Existing Exam'
     save: 'Save Syllabus'
 
   #course_management: 'Course Management'
@@ -258,7 +262,7 @@ en:
 
   class_group:
     plural: "Class Groups"
-    singular: "Class Group" 
+    singular: "Class Group"
     list: "Class Groups list"
     new: "New Class Group"
     edit: "Edit Class Group"
@@ -307,7 +311,7 @@ en:
     rank: "Rank/Grade"
     total: "Total"
 
-  assignments:
+  assignment:
     plural: "Assignments"
     new: "New Assignment"
     add: "Add Assignment"
@@ -319,9 +323,10 @@ en:
     description: "Description"
     max_score: "Maximum score"
 
-  exams:
-    exam: 'Exam'
+  exam:
+    #exam: 'Exam'
     plural: "Exams"
+    singular: "Exam"
     new: "New Exam"
     new_exam: "New Exam Contents"
     add: "Add Exam"
@@ -329,12 +334,16 @@ en:
     view: "View Exams"
     select: "Select Exam"
     choose_schedule: "Choose Schedule"
+    choose: 'Choose Exam'
+    add_existing: 'Add Existing Exam'
     add_portion: 'Add Portion'
     count: "Exams Count"
+    grading_method: "Grading Method"
     name: "Exam name"
     description: "Description"
     adjustments: "Adjustments"
     weight: "Weight"
+    total_weight: "Total Weight"
     use_weighting: "Use Weighting"
     show: "Show Exam"
     edit: "Edit Exam"
@@ -352,7 +361,7 @@ en:
   submit: "Submit"
 
   user:
-    info: "User info" 
+    info: "User info"
 
   gender:
     label: "Sex"
@@ -474,13 +483,13 @@ en:
     edit: "Edit Semester"
   #num_semesters: "Number of semesters"
   #add_semester: "Add a semester"
-    
+
   select: "Select"
   period: "Period"
   pictures:
     change: "Change picture"
     upload: "Upload"
-  exam_portions:
+  exam_portion:
     list: "Exam portions list"
     count: "Exam portions count"
     name: "Portion name"

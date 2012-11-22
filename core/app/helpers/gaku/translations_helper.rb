@@ -48,6 +48,14 @@ module Gaku
     def t_guardian_list
       t('guardian.list')
     end
-       
+
+    def t_syllabus_list
+      t('syllabus.list')
+    end
+
+    def t_exam_list
+      t('exam.list')
+    end
+
   end
 end

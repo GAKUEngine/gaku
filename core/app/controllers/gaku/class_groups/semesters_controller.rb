@@ -9,8 +9,8 @@ module Gaku
     private
 
     def count
-    	class_group = ClassGroup.find(params[:class_group_id])
-    	@count = class_group.semesters.count   		    
+      class_group = ClassGroup.find(params[:class_group_id])
+      @count = class_group.semesters.count
     end
 
   end

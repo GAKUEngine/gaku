@@ -12,10 +12,10 @@
 module Gaku
   class Semester < ActiveRecord::Base
     belongs_to :class_group
-    
-    attr_accessible :starting, :ending, :class_group_id 
 
-    validates :class_group_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semester.uniqueness')}
+    attr_accessible :starting, :ending, :class_group_id
+
+    validates :class_gorup_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semester.uniqueness')}
     validate :ending_after_starting
 
     private
