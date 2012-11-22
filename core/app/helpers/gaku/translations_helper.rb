@@ -81,5 +81,9 @@ module Gaku
       t('enrollment_status_type.list')
     end
 
+    def t_commute_method_type_list
+      t('commute_method_type.list')
+    end
+
   end
 end

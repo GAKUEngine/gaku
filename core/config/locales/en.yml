@@ -312,7 +312,7 @@ en:
     count: "Enrollments count"
     #student_enrolled: "Student enrolled to class group"
 
-  commute_method_types:
+  commute_method_type:
     plural: "Commute Method Types"
     singular: "Commute Method Type"
     save: 'Save Commute Method Type'
@@ -320,6 +320,7 @@ en:
     edit: 'Edit Commute Method Type'
     list: 'Commute Method Types list'
     add: 'Add Commute Method Type'
+    name: "Name"
 
   grade:
     all_exams: "All Exams"
