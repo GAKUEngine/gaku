@@ -2,7 +2,7 @@
 table#course-groups-index.index.table.table-striped.table-bordered.table-condensed
 	thead
 	  tr
-	    th.btn-inverse = sortable 'name',  t('name')
+	    th.btn-inverse = sortable 'name',  t('course_group.name')
 	    th.btn-info style="width:94px" = t('manage')
 	tbody
 	  =render :partial => 'course_group', :collection => @course_groups, :as => :course_group

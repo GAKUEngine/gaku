@@ -61,5 +61,9 @@ module Gaku
       t('course.list')
     end
 
+    def t_course_group_list
+      t('course_group.list')
+    end
+
   end
 end

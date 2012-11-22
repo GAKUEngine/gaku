@@ -23,6 +23,7 @@ en:
     enrolled: "%{resource} has been successfully enrolled to %{to}!"
     added: "%{resource} has been successfully added!"
     removed: "%{resource} has been successfully removed!"
+    recovered: "%{resource} has been successfully recovered"
     #no_assignments: "No assignments, assign one first"
     #no_exams: "No exams, assign one first"
     no_resource_assign_first: "No %{resource}, assign one first"
@@ -231,6 +232,7 @@ en:
     show: "Show Course"
     list: "Courses list"
     code: "Course Code"
+    name: "Course Name"
     code_sample: "[EX: FALL2020]"
     combined_code: "Combined Code"
     options: "Options"
@@ -245,11 +247,15 @@ en:
     #add_class_group: 'Add Class Group'
     #choose_class_group: 'Choose Class Group'
 
-  course_groups:
-    course_groups: 'Course Groups'
-    edit_course_group: 'Edit Course Group'
+  course_group:
+    singular: "Course Group"
+    plural: 'Course Groups'
+    #edit_course_group: 'Edit Course Group'
     new: 'New Course Group'
-    add_course: 'Add Course'
+    edit: "Edit Course Group"
+    save: "Save Course Group"
+    name: "Name"
+    #add_course: 'Add Course'
     #course_group_created: 'Course Group Created'
     #course_added: 'Course added to course group'
     list: 'Course Groups List'
