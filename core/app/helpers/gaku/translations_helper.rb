@@ -73,5 +73,9 @@ module Gaku
       t('campus.list')
     end
 
+    def t_contact_type_list
+      t('contact_type.list')
+    end
+
   end
 end

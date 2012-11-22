@@ -420,6 +420,8 @@ en:
     plural: "Contact Types"
     new: "New Contact Type"
     add: "Add Contact Type"
+    edit: "Edit Contact Type"
+    name: "Name"
     save: "Save Contact Type"
     list: "Contact Types list"
     choose: "Choose Contact Type"
