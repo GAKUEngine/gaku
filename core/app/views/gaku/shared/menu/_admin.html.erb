@@ -1,12 +1,12 @@
 <li class="dropdown" data-hook="admin_menu">
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
     <%= t("admin.admin") %>
     <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
     <li data-hook="school_details"><%= link_to t('admin.school_details'), admin_school_details_path %></li>
     <li data-hook="schools"><%= link_to t("admin.schools"), admin_schools_path %></li>
-    
+
     <li class="dropdown-submenu" data-hook="types_sub_menu">
       <a tabindex='-1' href='#'><%= t('admin.types.types') %></a>
       <ul class="dropdown-menu">
@@ -21,11 +21,11 @@
     </li>
 
     <li class="dropdown-submenu" data-hook="presets_sub_menu">
-      <a tabindex='-1' href='#'><%= t('admin.presets.presets') %></a>
+      <a tabindex='-1' href='#'><%= t('admin.preset.plural') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="student_presets"><%= link_to t("admin.presets.student"), students_admin_presets_path %></li>
-        <li data-hook="grading_presets"><%= link_to t("admin.presets.grading.grading"), grading_admin_presets_path %></li>
-        <li data-hook="locale_presets"><%= link_to t("admin.presets.locale"), locale_admin_presets_path %></li>
+        <li data-hook="student_presets"><%= link_to t("admin.preset.items.student"), students_admin_presets_path %></li>
+        <li data-hook="grading_presets"><%= link_to t("admin.preset.items.grading"), grading_admin_presets_path %></li>
+        <li data-hook="locale_presets"><%= link_to t("admin.preset.items.locale"), locale_admin_presets_path %></li>
       </ul>
     </li>
 
