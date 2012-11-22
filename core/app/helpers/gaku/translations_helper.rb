@@ -77,5 +77,9 @@ module Gaku
       t('contact_type.list')
     end
 
+    def t_enrollment_status_type_list
+      t('enrollment_status_type.list')
+    end
+
   end
 end

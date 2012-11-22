@@ -476,12 +476,14 @@ en:
     contacs: "Campus Contacts"
     primary: "Primary"
 
-  enrollment_status_types:
+  enrollment_status_type:
     singular: "Enrollment Status Type"
     plural: "Enrollment Status Types"
     new: "New Enrollment Status Type"
     add: "Add Enrollment Status Type"
+    edit: "Edin Enrollment Status Type"
     save: "Save Enrollment Status Type"
+    name: "Name"
     list: "Enrollment Status Types list"
     active: "Active"
 
