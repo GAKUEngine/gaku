@@ -57,5 +57,9 @@ module Gaku
       t('exam.list')
     end
 
+    def t_course_list
+      t('course.list')
+    end
+
   end
 end

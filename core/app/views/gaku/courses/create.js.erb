@@ -2,7 +2,7 @@
 
 <% else %>
 	$('#courses-index tbody').append('<%= render_js_partial("course", {:course => @course}) %>');
-	$('.courses-count').html('<%= print_count(@courses_count + 1, t("courses.list")) %>');
+	$('.courses-count').html('<%= print_count(@count+1, t_course_list) %>');
 
 	$('#new-course').slideToggle();
 	$('#new-course-link').show();

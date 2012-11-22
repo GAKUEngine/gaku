@@ -27,6 +27,11 @@ en:
     #no_exams: "No exams, assign one first"
     no_resource_assign_first: "No %{resource}, assign one first"
 
+  alert:
+    empty: "%{resource} is empty!"
+    already_added: "%{resource} are already added!"
+    not_selected: "No %{resource} selected!"
+
   admin:
     admin: "Admin"
     administration: "Administration"
@@ -169,6 +174,7 @@ en:
     edit: "Edit"
     list: "Students list"
     enroll: "Enroll Student"
+    name: "Name"
     #address: "Address"
     #phone: "Phone #"
     #email: "E-Mail"
@@ -195,7 +201,7 @@ en:
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
   num_enrolled: "Number Enrolled"
-  combined_code: "Combined Code"
+  #combined_code: "Combined Code"
   #syllabus: "Syllabus"
 
   syllabus:
@@ -222,9 +228,11 @@ en:
     plural: "Courses"
     new: "New Course"
     edit: "Edit Course"
+    show: "Show Course"
     list: "Courses list"
     code: "Course Code"
     code_sample: "[EX: FALL2020]"
+    combined_code: "Combined Code"
     options: "Options"
     save: "Save Course"
     add: "Add Course"
@@ -252,11 +260,21 @@ en:
   add_course: "Add course"
 
   course_enrollment:
+    singular: "Course Enrollment"
+    plural: "Course Enrollments"
     list: "Enrollments"
     add: "Enroll to course"
     create: "Create enrollment"
-    enrollment: "Enrollment"
-    assignment: "Assignment"
+    #enrollment: "Enrollment"
+    #assignment: "Assignment"
+
+  enrollment:
+    singular: "Enrollment"
+    plural: "Enrollments"
+
+  assignment:
+    singular: "Assignment"
+    plural: "Assignments"
 
   class_group_management: "Class Management"
 
@@ -266,11 +284,13 @@ en:
     list: "Class Groups list"
     new: "New Class Group"
     edit: "Edit Class Group"
+    add: "Add Class Group"
     name: "Class Name"
     grade: "Grade"
     homeroom: "Home Room"
     #choose_student: 'Choose Student'
     choose: "Choose Class Group"
+    enroll: "Enroll Class Group"
     #create_class_group_enrollment: 'Create Class Enrollment'
     none: "None"
     save: "Save Class"
@@ -295,7 +315,8 @@ en:
     list: 'Commute Method Types list'
     add: 'Add Commute Method Type'
 
-  grades:
+  grade:
+    all_exams: "All Exams"
     grading: "Grading"
     weighting: "Weight"
     weighting_portion: "Weighting"

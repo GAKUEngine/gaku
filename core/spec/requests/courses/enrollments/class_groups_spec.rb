@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "CourseEnrollment"  do
-  
+
   stub_authorization!
 
   let(:course) { create(:course) }
@@ -13,8 +13,8 @@ describe "CourseEnrollment"  do
     set_resource "course-class-group"
   end
 
-  context 'no existing class group', :js => true do 
-    before do 
+  context 'no existing class group', :js => true do
+    before do
       visit gaku.course_path(course)
       click new_link
       wait_until_visible submit
@@ -25,23 +25,23 @@ describe "CourseEnrollment"  do
       page.should have_content 'No Class Group selected'
     end
 
-    it 'cancels enrolling' do 
-      ensure_cancel_creating_is_working 
+    it 'cancels enrolling' do
+      ensure_cancel_creating_is_working
     end
   end
 
-  context 'empty class group', :js => true do 
+  context 'empty class group', :js => true do
     it 'errors if class group is empty' do
       class_group
       visit gaku.course_path(course)
 
       click new_link
-      
+
       wait_until_visible(submit)
       select 'Math', :from => 'course_class_group_id'
       click submit
 
-      page.should have_content 'Selected Class Group is empty'
+      page.should have_content 'Class Group is empty'
     end
   end
 
@@ -53,16 +53,16 @@ describe "CourseEnrollment"  do
       visit gaku.course_path(course)
     end
 
-    it "enrolls a class group" do 
+    it "enrolls a class group" do
         click new_link
         wait_until_visible(submit)
-  
+
       expect do
         select 'Math', :from => 'course_class_group_id'
         click submit
-        wait_until_invisible(form) 
+        wait_until_invisible(form)
       end.to change(course.students, :count).by 2
-      
+
       page.should have_content "Johniew"
       page.should have_content "Amon"
       page.should have_content "View Assignments"
@@ -76,14 +76,14 @@ describe "CourseEnrollment"  do
       visit gaku.course_path(course)
 
       click new_link
-      
+
       wait_until_visible(form)
       wait_until_invisible(new_link)
       select 'Math', :from => 'course_class_group_id'
       click submit
 
-      page.should have_content 'All students are already added to the course'
+      page.should have_content 'are already added'
     end
-  
+
   end
 end

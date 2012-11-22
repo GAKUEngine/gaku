@@ -1,22 +1,16 @@
 module Gaku
   class CoursesController < GakuController
-  	
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
-
+    #actions :index, :show, :new, :create, :update, :edit, :destroy
     respond_to :js, :html
 
-    before_filter :load_before_show,  :only => :show
-    before_filter :load_before_index, :only => :index
-    before_filter :courses_count, :only => [:create, :destroy]
-
-    def create
-      super do |format|
-        format.js { render 'create' }
-      end
-    end
+    before_filter :before_show,  :only => :show
+    before_filter :before_index, :only => :index
+    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :before_student_chooser, :only => :student_chooser
 
     def show
       super do |format|
@@ -25,43 +19,42 @@ module Gaku
     end
 
     def student_chooser
-      @course = Course.find(params[:course_id])
-      @search = Student.search(params[:q])
-      @students = @search.result
-
-      @courses = Course.all
-
       @enrolled_students = @course.students.map {|i| i.id.to_s }
-
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
+      selected_students
       respond_to do |format|
         format.js
       end
     end
-    
-    def destroy
-      super do |format|
-        format.js { render 'destroy' }
-      end
-    end
+
 
     private
-      
-      def load_before_index
+
+      def count
+        @count = Course.count
+      end
+
+      def before_student_chooser
+        @course = Course.find(params[:course_id])
+        @courses = Course.all
+
+        @search = Student.search(params[:q])
+        @students = @search.result
+      end
+
+      def before_index
         @course = Course.new
         @syllabuses = Syllabus.all
       end
 
-  	  def load_before_show
+  	  def before_show
   		  @new_course_enrollment = CourseEnrollment.new
         @class_groups = ClassGroup.all
         @notable = Course.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
   	  end
 
-      def courses_count
-        @courses_count = Course.count
+      def selected_students
+        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
       end
 
       def sort_column
