@@ -24,3 +24,16 @@ $ ->
     
   $('.datepicker').datepicker(format:'yyyy/mm/dd')
   $(".class-group-select").combobox()
+
+  $("#students-index-table").dataTable
+      bPaginate: false
+      bLengthChange: false
+      bFilter: false
+      bInfo: false
+      bAutoWidth: false
+      aoColumns: [
+        bSortable: false
+        , null, null, null, null, null, null, null, null,
+        bSortable: false
+      ]
+      asStripClasses: null #To remove "odd"/"event" zebra classes

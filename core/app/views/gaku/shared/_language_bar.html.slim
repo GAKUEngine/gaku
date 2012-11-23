@@ -4,5 +4,5 @@ ul.nav
       = t("language")
       b.caret
     ul.dropdown-menu
-      li= link_to "日本語", :locale => 'ja'
+      li= link_to "日本語", I18n.default_locale => 'ja'
       li= link_to "English", :locale => 'en'

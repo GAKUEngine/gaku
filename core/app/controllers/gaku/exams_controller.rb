@@ -113,7 +113,7 @@ module Gaku
       find_exams
 
       calculate_totals
-      calculate_exam_avarages
+      calculate_exam_averages
       calculate_deviation
       calculate_rank_and_grade
 
@@ -169,7 +169,7 @@ module Gaku
 
       def portions_count
         @portions_count = @exam.exam_portions.count
-      end
+     end
 
       def find_exams
         if params[:id] != nil

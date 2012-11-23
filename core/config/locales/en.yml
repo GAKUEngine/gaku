@@ -324,9 +324,7 @@ en:
     save: 'Save Exam'
 
   config:
-    label: "Config"
-    close: "Close"
-    save: "Save changes"
+    close: Close
     help:
       language: "Choose your Language"
 

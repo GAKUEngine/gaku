@@ -155,6 +155,7 @@ describe 'Students' do
       end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 
       click_on 'enroll-student-link'
+      wait_until_visible '#new-class-group-enrollment-modal'
       within('#new-class-group-enrollment-modal') do
         page.should have_content 'Biology'
         page.should have_content '77'

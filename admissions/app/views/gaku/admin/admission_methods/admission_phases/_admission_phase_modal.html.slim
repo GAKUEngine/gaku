@@ -4,7 +4,7 @@
 
       .modal-header
         button.close type="button" data-dismiss="modal"
-          'x
+          |x
         h3 =t("admission_phases.edit")
       .modal-body
         .row-fluid
@@ -20,7 +20,7 @@
           = admission_phase_form.number_field :phase_handler, :class => "span12" 
         h3 States
         = admission_phase_form.fields_for :admission_phase_states do |state_form|
-          .well
+          .well.state
             .row-fluid
               = state_form.label t('admission_phase_states.name')
               = state_form.text_field :name
@@ -30,6 +30,9 @@
             .row-fluid
               = state_form.label t('admission_phase_states.can_admit')
               = state_form.check_box :can_admit
+            .row-fluid
+              = state_form.label t('admission_phase_states.auto_progress')
+              = state_form.check_box :auto_progress
             .row-fluid
               = state_form.label t('admission_phase_states.auto_admit')
               = state_form.check_box :auto_admit

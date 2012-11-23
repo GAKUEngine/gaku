@@ -1,4 +1,4 @@
-Gaku::Core::Engine.routes.draw do        
+Gaku::Core::Engine.routes.draw do
 
   #devise_for :installs
   devise_for :users, {
@@ -10,7 +10,7 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
-  
+
 
   #resources :admissions
 
@@ -32,7 +32,7 @@ Gaku::Core::Engine.routes.draw do
 
   resources :courses do
     resources :notes
-    resources :enrollments, :controller => 'courses/enrollments' do
+    resources :enrollments, :controller => 'gaku/courses/enrollments' do
       post :enroll_class_group, :on => :member
       post :enroll_student, :on => :collection
     end

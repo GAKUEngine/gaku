@@ -29,13 +29,6 @@ module Gaku
       end
     end
 
-    #def create
-      #params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-    #  super do |format|
-    #    format.js { render }
-    #  end
-    #end
-
     def update
       if @student.update_attributes(params[:student])
         #flash.now[:notice] = t('notice.updated', :resource => resource_name)
@@ -81,7 +74,8 @@ module Gaku
     end
 
     def load_autocomplete_data
-      @result = class_name.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+      object = "Gaku::" + params[:class_name].capitalize
+      @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
@@ -144,37 +138,6 @@ module Gaku
       def resource_name
         t('student.singular')
       end
-
-=begin
-      def decrypt_students_fields(students)
-        students_json = students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
-        i = 0
-        students_json.each {|student|
-          student[:name] = @students[i].name
-          student[:surname] = @students[i].surname
-          student[:phone] = @students[i].phone
-          student[:student] = @students[i]
-          i += 1
-        }
-        return students_json
-      end
-
-      def decrypt_student_fields(student)
-        student[:name] = @student.name
-        student[:surname] = @student.surname
-        student[:phone] = @student.phone
-        student[:student] = @student
-        return student
-      end
-
-      def sort_students(students_json)
-        students_json.sort_by! { |hsh| hsh[sort_column.to_sym] }
-        if sort_direction == "desc"
-          students_json.reverse!
-        end
-        return students_json
-      end
-=end
 
   end
 end
