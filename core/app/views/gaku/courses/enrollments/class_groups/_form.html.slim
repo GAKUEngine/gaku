@@ -3,11 +3,11 @@
   b Choose Class Group
   .row-fluid.mt-l
     .span12.well
-    
+
       = f.label :class_group_id
-      = f.select :class_group_id, @class_groups.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
+      = f.select :class_group_id, @class_groups.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('class_group.choose')}, {:class => 'chzn-select'}
   .row-fluid
     .span12
       .span6
-        = submit_button t('courses.enroll_class_group'), :id => 'submit-course-class-group-button'
+        = submit_button t('class_group.enroll'), :id => 'submit-course-class-group-button'
       = link_to_cancel :id => "cancel-course-class-group-link"

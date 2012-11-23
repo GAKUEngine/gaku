@@ -2,5 +2,5 @@
 	tr id="semester-#{semester.id}"
 		= render 'gaku/shared/fields/semester_fields', :semester => semester
 		td
-			=ajax_link_to_edit [:edit, @class_group, semester]
-			=ajax_link_to_delete [@class_group, semester]
+			= ajax_link_to_edit [:edit, @class_group, semester]
+			= ajax_link_to_delete [@class_group, semester]

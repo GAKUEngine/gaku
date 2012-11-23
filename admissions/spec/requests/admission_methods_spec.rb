@@ -8,17 +8,17 @@ describe 'Admin Admission Methods' do
 
   before do
     set_resource "admin-admission-method"
+    visit gaku.admin_admission_methods_path
   end
 
   context 'new', :js => true do
     before do
-      visit gaku.admin_admission_methods_path
       click new_link
       wait_until_visible submit
     end
 
     it 'creates and shows' do 
-      expect do 
+      expect do
         fill_in 'admission_method_name', :with => 'Standart'
         click submit
         wait_until_invisible form
@@ -32,13 +32,14 @@ describe 'Admin Admission Methods' do
     it 'cancels creating' do 
       ensure_cancel_creating_is_working
     end
+
   end
 
   context 'existing' do 
 
     before do
       admission_method
-      visit gaku.admin_admission_method_path(admission_method)
+      visit gaku.admin_admission_methods_path
     end
 
     context '#edit ', :js => true do 

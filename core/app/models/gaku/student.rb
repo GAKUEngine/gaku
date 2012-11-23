@@ -83,6 +83,7 @@ module Gaku
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :notes, :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
+    accepts_nested_attributes_for :contacts, :allow_destroy => true
 
     has_associated_audits
     audited

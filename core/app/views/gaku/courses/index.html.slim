@@ -7,9 +7,9 @@
     .row-fluid
       .pull-left
         h4.h4-vm.courses-count
-          = print_count(@courses.count, t('courses.list'))
+          = print_count(@count, t('course.list'))
       .pull-right
-        = ajax_link_to_new t("courses.new"), new_course_path, :id => "new-course-link"
+        = ajax_link_to_new t('course.new'), new_course_path, :id => "new-course-link"
     row-fluid
       .span12
         hr/

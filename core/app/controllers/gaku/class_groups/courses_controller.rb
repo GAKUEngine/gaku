@@ -1,16 +1,15 @@
 module Gaku
   class ClassGroups::CoursesController < GakuController
-
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
 
-    before_filter :load_class_group, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :class_group, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :count, :only => [:create, :destroy]
 
     def destroy
       @class_group_course_enrollment = ClassGroupCourseEnrollment.find(params[:id])
       @class_group_course_enrollment.destroy
-      flash.now[:notice] = t('courses.course_destroyed')
-      respond_to do |format|
+      respond_with(@class_group_course_enrollment) do |format|
         format.js { render 'destroy' }
       end
     end
@@ -36,10 +35,14 @@ module Gaku
     end
 
     private 
-      def load_class_group
-        @class_group = ClassGroup.find(params[:class_group_id])
-      end
 
+    def class_group
+      @class_group = ClassGroup.find(params[:class_group_id])
+    end
+
+    def count
+      @count = @class_group.courses.count
+    end
 
   end
 end

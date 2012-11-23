@@ -1,7 +1,7 @@
 module Gaku
   module Admin
     class Schools::Campuses::AddressesController < GakuController
-    	
+
     	inherit_resources
       actions :new, :edit, :update, :destoy
 
@@ -11,13 +11,13 @@ module Gaku
     	before_filter :school, :only => [:new, :create, :edit, :update]
     	before_filter :campus
 
-    	def create  
+    	def create
         @address = Address.create(params[:address])
         @campus.address = @address
         respond_to do |format|
           if @campus.save
-            flash.now[:notice] = t('addresses.created')
-            format.js { render 'create' }  
+            flash.now[:notice] = t('notice.created', :resource => t('address.singular'))
+            format.js { render 'create' }
           end
         end
       end
@@ -25,11 +25,11 @@ module Gaku
       def destroy
         @campus.address.destroy
         respond_to do |format|
-          flash.now[:notice] = t('addresses.destroyed')
+          flash.now[:notice] = t('notice.destroyed', :resource => t('address.singular') )
           format.js { render 'destroy' }
         end
       end
-      
+
       private
 
         def address
@@ -43,6 +43,7 @@ module Gaku
         def campus
           @campus = Campus.find(params[:campus_id])
         end
+
     end
   end
 end

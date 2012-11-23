@@ -32,12 +32,14 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
-  
+
+  gem 'poltergeist'
+
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
-  
+
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency

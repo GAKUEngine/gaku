@@ -6,7 +6,10 @@ module Gaku
 
     respond_to :js, :html
 
-    before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :student, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :contact, :only => :make_primary
+    before_filter :contact_types, :only => [:new, :edit]
+    before_filter :count, :only => [:create,:destroy]
     
     def create
       super do |format|
@@ -37,16 +40,28 @@ module Gaku
     end 
 
     def make_primary
-      @contact = Contact.find(params[:id])
       @contact.make_primary_student
       respond_with(@contact) do |format|
         format.js { render 'make_primary' }
       end
     end
 
-    private 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+    private
+
+    def student
+      @student = Student.find(params[:student_id])
+    end
+
+    def contact
+      @contact = Contact.find(params[:id])
+    end
+
+    def contact_types
+      @contact_types = Gaku::ContactType.all
+    end
+
+    def count
+      @count = @student.contacts.count
+    end
   end
 end

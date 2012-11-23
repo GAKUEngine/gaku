@@ -1,10 +1,10 @@
 table#course-groups-index.index.table.table-striped.table-bordered.table-condensed
 	thead
 	  tr
-	    th.btn-inverse = sortable 'name',  t('name')
+	    th.btn-inverse = sortable 'name',  t('course_group.name')
 	    th.btn-info style="width:94px" = t('manage')
 	tbody
-	  - @course_groups.each do |course_group|	
+	  - @course_groups.each do |course_group|
     	tr class="course-group-#{course_group.id}"
 			  td.name = course_group.name
 			  td

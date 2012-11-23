@@ -3,9 +3,9 @@
     #new-student-address.hide
     .pull-left
       h4.mt-xs.mb-0.student-addresses-count
-        = print_count(@student.addresses.count, t('addresses.list'))
+        = print_count(@student.addresses.count, t('address.list'))
     .pull-right
-      = ajax_link_to_new t('students.add_address'), new_student_address_path(@student), :id => 'new-student-address-link'
+      = ajax_link_to_new t('address.add'), new_student_address_path(@student), :id => 'new-student-address-link'
   .row-fluid
     .span12
       hr
@@ -16,13 +16,13 @@
           tr
             th.btn-inverse style="width:28px"
               i.icon-white.icon-home
-            th.btn-inverse =t 'addresses.title'
-            th.btn-inverse =t 'addresses.country'
-            th.btn-inverse =t 'addresses.zipcode'
-            th.btn-inverse =t 'addresses.state'
-            th.btn-inverse =t 'addresses.city'
-            th.btn-inverse =t 'addresses.address1'
-            th.btn-inverse =t 'addresses.address2'
-            th.btn-info style="width:61px" =t 'manage'
+            th.btn-inverse = t('address.title')
+            th.btn-inverse = t('address.country')
+            th.btn-inverse = t('address.zipcode')
+            th.btn-inverse = t('address.state')
+            th.btn-inverse = t('address.city')
+            th.btn-inverse = t('address.address1')
+            th.btn-inverse = t('address.address2')
+            th.btn-info style="width:61px" = t('manage')
         tbody
           =render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'

@@ -8,4 +8,4 @@
         - @course_enrollment.errors.full_messages.each do |msg|
           li= msg
 
-    = link_to t('.cancel', :default => t("ok")), '#', :class => 'btn', :'data-dismiss' => "modal"
+    = link_to_cancel
