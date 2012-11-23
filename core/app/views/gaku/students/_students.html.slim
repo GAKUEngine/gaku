@@ -18,16 +18,4 @@ table#students-index-table.index.table.table-striped.table-bordered.table-conden
     =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
 = javascript_include_tag 'gaku/students/selected_students'
-
-javascript:
-  $(document).ready(function() { 
-    $("#students-index-table").dataTable( {
-      "bPaginate": false,
-      "bLengthChange": false,
-      "bFilter": false,
-      "bInfo": false,
-      "bAutoWidth": false,
-      "aoColumns"   : [{"bSortable": false}, null, null, null, null, null, null, null, null, {"bSortable": false}],
-      "asStripClasses": null //To remove "odd"/"event" zebra classes
-    } );
-  }); 
+= javascript_include_tag 'gaku/students/datatable'
