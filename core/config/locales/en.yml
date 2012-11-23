@@ -25,8 +25,6 @@ en:
     added: "%{resource} has been successfully added!"
     removed: "%{resource} has been successfully removed!"
     recovered: "%{resource} has been successfully recovered"
-    #no_assignments: "No assignments, assign one first"
-    #no_exams: "No exams, assign one first"
     no_resource_assign_first: "No %{resource}, assign one first"
 
   alert:
@@ -55,9 +53,7 @@ en:
         grading: "Grading Preset"
       plural: "Presets"
       singular: "Preset"
-
       save: 'Save'
-      #updated: 'Presets Updated'
       grading:
         grading_method: 'Grading Method'
         grading_scheme: 'Grading Scheme'
@@ -66,24 +62,6 @@ en:
         country: 'Country'
         state: 'State'
         city: 'City'
-
-
-
-  #class_groups:
-  #  list: "Class Listing"
-
-  menu:
-    students: "Students"
-    exams: "Exam Management"
-    admin:
-      disposals:
-        exam: "Exam Disposals"
-        attachment: "Attachment Disposals"
-        course_group: "Course Group Disposals"
-
-      system:
-        system_tools: "System Tools"
-        backup: "Backup"
 
   hello: "Hello world"
   comname: "GAKU-Engine"
@@ -95,23 +73,18 @@ en:
   cancel: "Cancel"
   add: 'Add'
   default: 'Default'
-
   birth_date: "Birth Date"
   title: "Title"
-
   required: "required"
   manage: "Manage"
   confirm_delete: "Really Delete this record?"
   panel: "Panel"
-
   name: "Name"
   surname: "Surname"
   given_name: "Given Name"
   phonetic_reading: "Phonetic Reading"
   surname_reading: "Surname Reading"
   name_reading: "Name Reading"
-
-  #address: "Address"
   none: "None"
   date_placeholder: "YYYY-MM-DD"
   search: "Search"
@@ -120,6 +93,7 @@ en:
   confirm: 'Are you sure?'
   history: 'History'
   revert: 'Revert'
+
   attachment:
     assets: 'Assets'
     name: "Name"
@@ -129,7 +103,6 @@ en:
     file_size: 'File size'
     new: "New Attachment"
     create: 'Create Attachment'
-    #recovered: 'Attachment recovered'
     asset_type: 'Asset type'
 
   address:
@@ -165,10 +138,8 @@ en:
 
   commute_method: "Commute Method"
   picture: "Picture"
-
   birth: "Birth Date"
   teacher: "Instructor"
-
   are_you_sure: "Are you sure?"
 
 
@@ -183,16 +154,7 @@ en:
     list: "Students list"
     enroll: "Enroll Student"
     name: "Name"
-    #address: "Address"
-    #phone: "Phone #"
-    #email: "E-Mail"
-    #birth: "Birth Date"
-
-    #add_address: "Add Address"
-
     class_group_enrollment: "Class enrollment"
-    #create_contact: "Create Contact"
-    #contact_type: 'Contact Type'
     birth_between: "Birth date between"
     birth_and: "and"
     chosen_students: "Chosen students"
@@ -204,13 +166,10 @@ en:
       sheet: "Registration Sheet"
 
 
-
-  #add_student: "Add Student"
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
   num_enrolled: "Number Enrolled"
-  #combined_code: "Combined Code"
-  #syllabus: "Syllabus"
+
 
   syllabus:
     singular: "Syllabus"
@@ -224,12 +183,7 @@ en:
     name_sample: "[EX: Science A]"
     description: "Course Description"
     credits: "Credits"
-    #choose_exam: 'Choose Exam'
-    #add_exam: 'Add Exam'
-    #add_existing_exam: 'Add Existing Exam'
     save: 'Save Syllabus'
-
-  #course_management: 'Course Management'
 
   course:
     singular: "Course"
@@ -246,25 +200,16 @@ en:
     save: "Save Course"
     add: "Add Course"
     management: "Course Management"
-    #choose_course: "Choose course"
     choose: "Choose Course"
-    #enroll_student: "Enroll Student"
     count: "Courses count"
-    #enroll_class_group: 'Enroll Class Group'
-    #add_class_group: 'Add Class Group'
-    #choose_class_group: 'Choose Class Group'
 
   course_group:
     singular: "Course Group"
     plural: 'Course Groups'
-    #edit_course_group: 'Edit Course Group'
     new: 'New Course Group'
     edit: "Edit Course Group"
     save: "Save Course Group"
     name: "Name"
-    #add_course: 'Add Course'
-    #course_group_created: 'Course Group Created'
-    #course_added: 'Course added to course group'
     list: 'Course Groups List'
     show: 'Course Group'
     course_group_recover: 'Course Group Recovered'
@@ -278,8 +223,6 @@ en:
     list: "Enrollments"
     add: "Enroll to course"
     create: "Create enrollment"
-    #enrollment: "Enrollment"
-    #assignment: "Assignment"
 
   enrollment:
     singular: "Enrollment"
@@ -301,10 +244,8 @@ en:
     name: "Class Name"
     grade: "Grade"
     homeroom: "Home Room"
-    #choose_student: 'Choose Student'
     choose: "Choose Class Group"
     enroll: "Enroll Class Group"
-    #create_class_group_enrollment: 'Create Class Enrollment'
     none: "None"
     save: "Save Class"
     show: "Show"
@@ -314,10 +255,8 @@ en:
     list: "Class Roster"
     new: "New class enrollment"
     seat_number: "Seat number"
-    #class_groups: "Class groups"
     current: "Current enrollment"
     count: "Enrollments count"
-    #student_enrolled: "Student enrolled to class group"
 
   commute_method_type:
     plural: "Commute Method Types"
@@ -359,7 +298,6 @@ en:
     max_score: "Maximum score"
 
   exam:
-    #exam: 'Exam'
     plural: "Exams"
     singular: "Exam"
     new: "New Exam"
@@ -391,7 +329,6 @@ en:
     help:
       language: "Choose your Language"
 
-  #language: "Language"
   and: " and "
   submit: "Submit"
 
@@ -448,7 +385,6 @@ en:
     primary: "Primary"
     emergency: "Emergency"
     list: "Contacts list"
-    #contacts: "Contacts"
 
   school:
     singular: "School"
@@ -520,8 +456,6 @@ en:
     number: "Number of Semesters"
     add: "Add Semester"
     edit: "Edit Semester"
-  #num_semesters: "Number of semesters"
-  #add_semester: "Add a semester"
 
   select: "Select"
   period: "Period"
