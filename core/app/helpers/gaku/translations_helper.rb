@@ -85,5 +85,9 @@ module Gaku
       t('commute_method_type.list')
     end
 
+    def t_exam_portion_list
+      t('exam_portion.list')
+    end
+
   end
 end

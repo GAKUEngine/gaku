@@ -2,13 +2,17 @@ module Gaku
   class ExamsController < GakuController
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
-    
+    respond_to :html, :js
+
     include Gaku::Core::Grading::Calculations
 
     before_filter :exam, :only => [:show, :create_exam_portion]
-    before_filter :load_before_show, :only => :show
-    before_filter :load_before_new, :only => :new
-    before_filter :exams_count, :only => [:create, :destroy]
+    before_filter :before_show, :only => :show
+    before_filter :before_new, :only => :new
+    before_filter :before_update, :only => :update
+    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :portions_count, :only => :create_exam_portion
+
 
     def export_xls
       @course = Course.find(params[:course_id])
@@ -80,7 +84,7 @@ module Gaku
       if params[:course_id]
         @exams = Course.find(params[:course_id]).syllabus.exams
       else
-        @exams = Exam.all()
+        @exams = Exam.all
       end
 
       respond_to do |format|
@@ -97,43 +101,9 @@ module Gaku
       end
     end
 
-    def new
-      super do |format|
-        format.js { render 'new'}
-      end
-    end
-
-    def create
-      super do |format|
-        format.js { render 'create' }
-      end
-    end
-
     def show
       super do |format|
         format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
-      end
-    end
-
-    def edit
-      super do |format|
-        format.js { render 'edit'}
-      end
-    end
-
-    def update
-      super do |format|
-        @exams = Exam.all
-        @notable = exam
-        @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
-        flash.now[:notice] = 'Exam was successfully updated.'
-        format.js { render 'update'}
-      end
-    end
-
-    def destroy
-      super do |format|
-        format.js { render 'destroy' }
       end
     end
 
@@ -141,7 +111,7 @@ module Gaku
       @course = Course.find(params[:course_id])
       @students = @course.students #.select("id, surname, name")
       find_exams
-      
+
       calculate_totals
       calculate_exam_avarages
       calculate_deviation
@@ -170,52 +140,35 @@ module Gaku
 
     private
 
-    def load_before_new
+    def before_new
       @exam = Exam.new
       @master_portion = @exam.exam_portions.new
     end
 
-    # def update_score
-      # @exam_portion_score = ExamPortionScore.find_or_create_by_student_id_and_exam_portion_id(params[:exam_portion_score][:student_id], params[:exam_portion_score][:exam_portion_id])
-      # @exam_portion_score.score = params[:exam_portion_score][:score]
-      # if @exam_portion_score.save
-        # @student_id = Student.find(params[:exam_portion_score][:student_id]).id
-        # exam = Exam.find(params[:id])
-        # exam_portions = exam.exam_portions
-        # @exam_id = exam.id.to_s
-        # exam_portions_ids = exam_portions.pluck(:id)
-        # student_exam_portion_scores = ExamPortionScore.where(:student_id => params[:exam_portion_score][:student_id] , :exam_portion_id => exam_portions_ids )
-        # student_scores = student_exam_portion_scores.pluck(:score)
-        # @student_total_score = student_scores.inject{|sum,x| sum + x.to_f }
-  #
-        # @student_weights_total = 0.0
-        # if exam.use_weighting
-          # student_exam_portion_scores.each do |eps|
-            # @student_weights_total += eps.score.to_f * (eps.exam_portion.weight.to_f / 100)
-          # end
-        # end
-  #
-        # respond_to do |format|
-            # format.js { render 'update_score' }
-            # format.js { render :json => @exam_portion_score}
-          # end
-        # end
-      # end
-    # end
+    def before_update
+      @exams = Exam.all
+      @notable = exam
+      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
+    end
+
 
     private
       def exam
         @exam = Exam.find(params[:id])
       end
 
-      def load_before_show
+      def before_show
         @exam.exam_portions.build
         @notable = @exam
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
       end
 
-      def exams_count 
-        @exams_count = Exam.count
+      def count
+        @count = Exam.count
+      end
+
+      def portions_count
+        @portions_count = @exam.exam_portions.count
       end
 
       def find_exams

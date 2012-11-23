@@ -18,7 +18,7 @@
   .span12.well
     .row-fluid
       .pull-left
-        h4.h4-vm.exam-exam-portions-count = t('exam_portion.list') + " ( " + @exam.exam_portions.count.to_s + " )"
+        h4.h4-vm.exam-exam-portions-count = print_count(@exam.exam_portions.count, t_exam_portion_list)
       .pull-right
         = ajax_link_to_new t('exam.add_portion'), new_exam_exam_portion_path(@exam), :id => 'new-exam-exam-portion-link'
     .row-fluid
@@ -41,5 +41,5 @@
 
 .row-fluid
   .span12.well
-    = link_to ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe, edit_exam_path(@exam),:remote => true, :class => "span9 btn btn-warning"
+    = link_to_edit_with_text [:edit,@exam], :remote => true, :class => "span9 btn btn-warning"
     = link_to_back exams_path, :class => "span3 btn btn-danger"
