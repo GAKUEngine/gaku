@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class='btn-info' style="width:60px">Class</th>
-      <th class='btn-info' style="width:60px">Seat Number</th>
+      <th class='btn-info' style="width:60px">Seat_Number</th>
       <th class='btn-info' style="width:150px">Name </th>
     </tr>
   </thead>
