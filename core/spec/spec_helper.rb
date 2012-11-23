@@ -12,6 +12,9 @@ Spork.prefork do
   require 'active_record/fixtures'
   require 'factory_girl_rails'
 
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist if ENV['PHANTOMJS']
+
   require 'gaku/core/testing_support/env'
   require 'gaku/core/testing_support/factories'
   require 'gaku/core/testing_support/controller_requests'
