@@ -18,13 +18,13 @@ module Gaku
         def tab_link
           "##{@@resource_plural}-tab-link"
         end
-        
+
         def form
-          "#new-#{@@resource}" 
+          "#new-#{@@resource}"
         end
 
         def new_link
-          "#new-#{@@resource}-link" 
+          "#new-#{@@resource}-link"
         end
 
         def submit
@@ -51,26 +51,26 @@ module Gaku
           "##{@@resource_plural}-index tr"
         end
 
-        def edit_link 
+        def edit_link
           '.edit-link'
         end
 
-        def show_link 
+        def show_link
           '.show-link'
         end
 
-        def delete_link 
+        def delete_link
           '.delete-link'
         end
 
         def accept_alert
-          page.driver.browser.switch_to.alert.accept
+          page.driver.browser.switch_to.alert.accept if ENV['SELENIUM']
         end
 
         def size_of(selector)
           page.all(selector).size
         end
-      
+
         def wait_until_visible(selector)
           wait_until { find(selector).visible? }
           wait_for_ajax
@@ -85,7 +85,7 @@ module Gaku
           find(selector).visible?
         end
 
-        def invisible?(selector) 
+        def invisible?(selector)
           !page.find(selector).visible?
         end
 
@@ -96,9 +96,9 @@ module Gaku
         def ensure_delete_is_working
           tr_count = size_of table_rows
           within(table) { click delete_link }
-          
+
           accept_alert
-            
+
           wait_until { size_of(table_rows) == tr_count - 1 }
         end
 
