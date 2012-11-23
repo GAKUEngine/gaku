@@ -1,10 +1,10 @@
 row-fluid
   .span12
     #course-group-delete
-      =link_to 'Delete', "#", :id => 'delete-course-group-link', :class => 'pull-right'
+      = ajax_link_to_delete "#", :id => 'delete-course-group-link', :class => 'pull-right'
   .delete-modal
     =render 'gaku/shared/delete_modal', :target => [:soft_delete, @course_group]
-    
+
 coffee:
   $('#delete-course-group-link').on 'click', (e)->
     e.preventDefault()

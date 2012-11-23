@@ -2,12 +2,12 @@ module Gaku
 	module StudentsHelper
 		def gender(student)
 			if student.gender.nil?
-				t("genders.unknown")
+				t("gender.unknown")
 			else
 				if student.gender? 
-					t("genders.male")
+					t("gender.male")
 				else
-					t("genders.female")
+					t("gender.female")
 				end
 			end
 		end

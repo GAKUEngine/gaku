@@ -6,15 +6,18 @@ module Gaku
 
     respond_to :js, :html
 
-  	before_filter :load_guardian
-    before_filter :load_student
+  	before_filter :guardian
+    before_filter :student
+    before_filter :contact, :only => :make_primary 
+    before_filter :contact_types, :only => [:new, :edit]
+    before_filter :count, :only => [:create, :destroy]
 
     def create
       @contact = @guardian.contacts.build(params[:contact])
       if @contact.save
         @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
         respond_to do |format|
-          flash.now[:notice] = t('contacts.contact_created')
+          flash.now[:notice] = t('notice.created', :resource => resource_name)
           format.js { render 'create' }
         end
       end
@@ -25,7 +28,7 @@ module Gaku
       if @contact.save
         @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
         respond_to do |format|
-          flash.now[:notice] = t('contacts.contact_created')
+          flash.now[:notice] = t('notice.created', :resource => resource_name)
           format.js { render 'create_modal' }
         end
       end
@@ -49,7 +52,6 @@ module Gaku
     end 
 
   	def make_primary
-      @contact = Contact.find(params[:id])
       @contact.make_primary_guardian
       respond_with(@contact) do |format|
         format.js { render 'make_primary' }
@@ -58,12 +60,28 @@ module Gaku
 
     private
 
-      def load_guardian
-    	  @guardian = Guardian.find(params[:guardian_id])
-      end
+    def guardian
+  	  @guardian = Guardian.find(params[:guardian_id])
+    end
 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+    def student
+      @student = Student.find(params[:student_id])
+    end
+
+    def contact
+      @contact = Contact.find(params[:id])
+    end
+
+    def contact_types
+      @contact_types = ContactType.all
+    end
+
+    def resource_name
+      t('contact.singular')
+    end
+
+    def count 
+      @count = @guardian.contacts.count
+    end
   end
 end

@@ -1,8 +1,13 @@
+require "gaku/core/app_responder"
+
 module Gaku
   class GakuController < ActionController::Base
     protect_from_forgery
     before_filter :set_locale
     layout :resolve_layout
+
+    self.responder = Core::AppResponder
+    respond_to :html
 
     private
 

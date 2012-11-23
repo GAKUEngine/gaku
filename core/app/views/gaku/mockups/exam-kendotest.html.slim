@@ -18,9 +18,9 @@ table
       td= exam.max_score
       td= exam.weight
       td= exam.data
-      td= link_to 'Show', exam
-      td= link_to 'Edit', edit_exam_path(exam)
-      td= link_to 'Destroy', exam, confirm: 'Are you sure?', method: :delete
+      td= link_to_show  exam
+      td= link_to_edit [:edit, exam]
+      td= ajax_link_to_delete exam
 br/
 = link_to 'New Exam', new_exam_path
 hr/

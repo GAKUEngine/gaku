@@ -6,7 +6,8 @@ module Gaku
 
     respond_to :js, :html
 
-    before_filter :load_student
+    before_filter :student
+    before_filter :courses, :only => [:new, :edit]
 
     def create
       super do |format|
@@ -20,8 +21,13 @@ module Gaku
     end
 
     private 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+
+    def student
+      @student = Student.find(params[:student_id])
+    end
+
+    def courses
+      @courses = Course.all
+    end
   end
 end

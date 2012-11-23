@@ -11,29 +11,29 @@ br/
           li= msg
   .row-fluid
     .row-fluid
-      h4 = t('exams.edit_exam')
+      h4 = t('exam.edit')
     .row-fluid
       hr
     .row-fluid
       .span12.well
         .row-fluid
           .span9
-            = f.label :name, t("exams.name")
+            = f.label :name, t('exam.name')
             = f.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
           .span3
-            = f.label :weight, t("exams.weight")
+            = f.label :weight, t('exam.weight')
             = f.number_field :weight, :class => "validate[required,custom[number],min[0]] span12", "data-prompt-position" => "bottomRight:5"
         .row-fluid
           .span6
-            = f.label :description, t("exams.description")
+            = f.label :description, t('exam.description')
             = f.text_area :description, :class => "span12", :size => "0x2"
           .span6
-            = f.label :adjustments, t("exams.adjustments")
+            = f.label :adjustments, t('exam.adjustments')
             = f.text_area :adjustments, :class => "span12", :size => "0x2"
         .row-fluid
           .span12.form-inline
             = f.check_box :use_weighting
-            = f.label :use_weighting, t("exam_portions.use_weighting"), :class => "help-inline"
+            = f.label :use_weighting, t('exam_portion.use_weighting'), :class => "help-inline"
   .row-fluid
     .span12.well
       = f.submit nil, :id => 'submit-exam-button', :class => "span12 btn btn-primary"

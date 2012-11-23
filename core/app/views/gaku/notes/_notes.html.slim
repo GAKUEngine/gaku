@@ -1,9 +1,9 @@
 .row-fluid
     .pull-left
       h4.mt-xs.mb-0 *{:class => @notable_resource + '-notes-count'}
-        = print_count(@notable.notes.count, t('notes.list'))
+        = print_count(@notable.notes.count, t('note.list'))
     .pull-right
-        = ajax_link_to_new t("notes.add"), [:new, @notable, :note], :id => 'new-' + @notable_resource + '-note-link'
+        = ajax_link_to_new t('note.add'), [:new, @notable, :note], :id => 'new-' + @notable_resource + '-note-link'
 .row-fluid
   hr
 .row-fluid
@@ -14,8 +14,8 @@
       thead
         tr
           th
-          th =t("notes.title")
-          th =t("notes.content")
-          th.btn-info style="width:100px" =t 'manage'
+          th = t('note.title')
+          th = t('note.content')
+          th.btn-info style="width:100px" = t('manage')
       tbody
         =render :partial => 'gaku/notes/note', :collection => @notable.notes, :as => :note

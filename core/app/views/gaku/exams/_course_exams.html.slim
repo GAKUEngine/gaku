@@ -1,11 +1,11 @@
 table
   tr
-    th Name
-    th Course
-    th Problem count
-    th Max score
-    th Weight
-    th Data
+    th = t('exam.name')
+    th = t('exam.course')
+    th = t('exam.problem_count')
+    th = t('exam.max_score')
+    th = t('exam.weight')
+    th = t('exam.data')
     th
     th
     th
@@ -17,8 +17,8 @@ table
       td= exam.max_score
       td= exam.weight
       td= exam.data
-      td= link_to 'Show', exam
-      td= link_to 'Edit', edit_exam_path(exam)
-      td= link_to 'Destroy', exam, confirm: 'Are you sure?', method: :delete
+      td= link_to_show exam
+      td= link_to_edit [:edit, exam]
+      td= ajax_link_to_delete exam
 br/
-= link_to 'New Exam', new_exam_path
+= link_to t('exam.new'), new_exam_path

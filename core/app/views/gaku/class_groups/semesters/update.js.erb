@@ -7,6 +7,6 @@ showNotice("<%= render_flash %>");
   $('#semester-modal').remove();
   var currentSemesterPeriod = $("#semester-<%= @semester.id %>  .period");
   currentSemesterPeriod.html("<%= @semester.starting.strftime("%m/%d/%Y") + " - " + @semester.ending.strftime("%m/%d/%Y") %>")
-  $('#class-group-semesters-tab-link').html('<%= print_count(@class_group.semesters.count, t("semesters.semesters")) %>');
-  $('.class-group-semesters-count').html('<%= print_count(@class_group.semesters.count, t("semesters.list")) %>');
+  $('#class-group-semesters-tab-link').html("<%= print_count(@class_group.semesters.count, t('semester.plural')) %>");
+  $('.class-group-semesters-count').html("<%= print_count(@class_group.semesters.count, t('semester.list')) %>");
 <% end %>
