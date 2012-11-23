@@ -118,7 +118,7 @@ module Gaku
     end
     
     def primary_address
-      self.student_addresses.where(:is_primary => true).first.address
+      self.student_addresses.where(:is_primary => true).first.try(:address)
     end
 
 
