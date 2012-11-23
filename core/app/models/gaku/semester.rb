@@ -15,7 +15,7 @@ module Gaku
 
     attr_accessible :starting, :ending, :class_group_id
 
-    validates :class_gorup_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semester.uniqueness')}
+    validates :class_group_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semester.uniqueness')}
     validate :ending_after_starting
 
     private

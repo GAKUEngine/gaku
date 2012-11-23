@@ -12,7 +12,7 @@ module Gaku
     before_filter :student,           :only => [:edit, :update, :destroy]
     before_filter :count,             :only => [:create, :destroy]
     before_filter :selected_students, :only => [:create,:index]
-    
+
     def index
       @search = Student.search(params[:q])
       @students = @search.result(:distinct => true)#.includes([:addresses, :class_groups, :class_group_enrollments]).all
@@ -21,7 +21,7 @@ module Gaku
         return
       end
       @enrolled_students = params[:enrolled_students]
-  
+
       respond_to do |format|
         format.js
         format.html
@@ -44,7 +44,7 @@ module Gaku
             if !params[:student][:addresses_attributes].nil?
               format.js { render 'students/addresses/create' }
             elsif !params[:student][:notes_attributes].nil?
-              format.js { render 'students/notes/create' }             
+              format.js { render 'students/notes/create' }
             else
               if !params[:student][:picture].blank?
                 format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
@@ -53,18 +53,18 @@ module Gaku
               end
             end
           end
-          format.html { redirect_to @student } 
+          format.html { redirect_to @student }
         end
-        
+
       else
         render :edit
       end
     end
-    
+
     def destroy
       if @student.destroy #&& !request.xhr?
-        #flash[:notice] = t('notice.removed', :resource => resource_name)  
-        respond_with(@student) do 
+        #flash[:notice] = t('notice.removed', :resource => resource_name)
+        respond_with(@student) do |format|
           format.html { redirect_to students_path }
         end
       end
@@ -97,7 +97,7 @@ module Gaku
         end
         send_data content, :filename => filename
       end
-      
+
       def class_name
         params[:class_name].capitalize.constantize
       end
@@ -141,7 +141,7 @@ module Gaku
         %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
       end
 
-      def resource_name 
+      def resource_name
         t('student.singular')
       end
 
