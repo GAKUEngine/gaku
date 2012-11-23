@@ -26,9 +26,10 @@
                 = ep_form.label t('exam_portion.adjustments')
                 = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
           .row-fluid
-            = ep_form.submit nil, :class => "span6 btn btn-primary", :id => 'submit-exam-exam-portion-button'
-            = link_to_cancel :id => "cancel-exam-exam-portion-link"
-
+            .span12
+              .span6
+                = submit_button t('exam_portions.save'), :id => 'submit-exam-exam-portion-button'
+              = link_to_cancel :id => 'cancel-exam-exam-portion-link'
 
 coffee:
   $('.edit_exam').validationEngine();
