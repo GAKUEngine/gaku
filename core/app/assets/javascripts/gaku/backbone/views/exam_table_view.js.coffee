@@ -41,7 +41,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       $this = $(event.target) 
 
       portion = $this.parent().attr('class')
-      nextDiv = $this.closest('tr').next().find('.'+portion);
+      nextDiv = $this.closest('tr').next().find('.'+portion)
       input = nextDiv.find('.score-cell')
 
       if input[0] != undefined
@@ -64,11 +64,10 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .focus()
       return false
 
-  
-
   setPortionAttendance: (event)->
     currentTarget = $(event.currentTarget)
-    alert "attendance modal here"
+    inputElement = $('#' + currentTarget.attr("targetinputelement"))
+    inputElement.hide()
 
   validatePortion: (event)->
     currentTarget = $(event.currentTarget)

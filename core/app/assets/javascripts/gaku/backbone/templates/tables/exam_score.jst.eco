@@ -23,10 +23,10 @@
                 <td class='score-column' id='exam-portion-score-<%= score.id %>' align="left">
                   <form class='portion_score_update pull-left' style="float: left; margin-right: 50px" name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
                     <div class='exam-portion-<%= portion.id %>'>
-                      <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'/>
+                      <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>'/>
                     </div>
                   </form>
-                  <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>">
+                  <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>">
                     <i class="icon-ok"></i>
                   </div>
                 </td>
