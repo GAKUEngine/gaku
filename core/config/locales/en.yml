@@ -325,6 +325,8 @@ en:
 
   config:
     close: Close
+    label: "Label"
+    save: "Save"
     help:
       language: "Choose your Language"
 
