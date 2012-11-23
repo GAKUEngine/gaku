@@ -12,7 +12,7 @@
         <td class="vm-tc"><%= "class"%></td>
         <td class="vm-tc"><%= "seat_number" %></td>
         <td class="vm"><%= student.surname + " " + student.name %></td>
-      <tr/>
+      </tr>
     <% end %>
   </tbody>
 </table>
