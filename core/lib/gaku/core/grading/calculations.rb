@@ -118,7 +118,7 @@ module Gaku
               @standard_deviation += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
             end
 
-            def add_to_standard_deviation
+            def add_to_standard_deviation(exam, student)
               @standard_deviation += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
             end
 
