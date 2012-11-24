@@ -3,10 +3,10 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   template: JST['gaku/backbone/templates/tables/exam_table']
 
   events:
-    'blur .portion_score_update': 'validatePortion'
-    'click .portion_score_update input': 'removeBorder'
-    'click .portion_set_attendance' : 'setPortionAttendance'
-    'keypress .portion_score_update' : 'nextOnEnter'
+    'blur       .portion_score_update':         'validatePortion'
+    'keypress   .portion_score_update' :        'onEnterActions'
+    'click      .portion_set_attendance' :      'setPortionAttendance'
+    'click      .portion_score_update input':   'removeBorder'
 
 
   render: ->
@@ -33,10 +33,50 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       $('#exam-grading-calculations').html calculationsView.render().el
     @
 
+  
+
+  onEnterActions: (event)->
+    if !event.shiftKey && event.keyCode == 13 
+      @nextOnEnter(event)
+    else if event.shiftKey && event.keyCode == 13
+      @prevOnShiftEnter(event)
+
+
+  prevOnShiftEnter: (event)->
+    event.preventDefault()  
+    $this = $(event.target)
+
+    portion = $this.parent().attr('class')
+    prevDiv = $this.closest('tr').prev().find('.'+portion)
+    input = prevDiv.find('.score-cell')
+
+    if input[0]?
+      input.focus()
+    else
+      prevPortionTD = $this.closest('td').prev()
+      if prevPortionTD.attr('class') == 'score-column'
+        prevPortionClass = $(prevPortionTD).find('div:nth-child(1)').attr('class')
+        $this.closest('tbody')
+              .find('tr')
+              .eq('-2')
+              .find('div.'+prevPortionClass)
+              .find('input.score-cell')
+              .focus()
+
+      else
+        $this.closest('tbody')
+                .find('tr')
+                .eq('-2')
+                .find('input.score-cell')
+                .last()
+                .focus()
+        
+
+
+
+    return false;
 
   nextOnEnter: (event)->
-    if event.keyCode == 13
-
       event.preventDefault()
       $this = $(event.target) 
 
@@ -44,7 +84,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       nextDiv = $this.closest('tr').next().find('.'+portion)
       input = nextDiv.find('.score-cell')
 
-      if input[0] != undefined
+      if input[0]?
         input.focus()
       else
         nextPortionTD = $this.closest('td').next()
@@ -87,6 +127,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       urlLink: urlLink
       score: score
       baseURI: baseURI
+    console.log 'update me'
 
   removeBorder:(event)->
     $(event.currentTarget).removeClass('score-error')

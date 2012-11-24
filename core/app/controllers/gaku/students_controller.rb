@@ -1,20 +1,18 @@
 module Gaku
   class StudentsController < GakuController
     include SheetHelper
-
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    actions :show, :new, :destroy
-
     respond_to :js, :html
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show,  :only => :show
     before_filter :class_groups,      :only => [:new, :edit]
     before_filter :student,           :only => [:edit, :update, :destroy]
-    before_filter :students_count,    :only => [:create, :destroy]
-    
+    before_filter :count,             :only => [:create, :destroy]
+    before_filter :selected_students, :only => [:create,:index]
+
     def index
       @search = Student.search(params[:q])
       @students = @search.result(:distinct => true)#.includes([:addresses, :class_groups, :class_group_enrollments]).all
@@ -22,12 +20,7 @@ module Gaku
         get_csv_template
         return
       end
-
-      @class_groups = ClassGroup.all
-      @courses = Course.all
       @enrolled_students = params[:enrolled_students]
-
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
       respond_to do |format|
         format.js
@@ -36,55 +29,38 @@ module Gaku
       end
     end
 
-    def export_csv_index(students, field_order = ["surname", "name"])
-      filename = "Students.csv"
-      content = CSV.generate do |csv|
-        csv << translate_fields(field_order)
-        students.each do |student|
-          csv << student.attributes.values_at(*field_order)
-        end
-      end
-      send_data content, :filename => filename
-    end
-    private :export_csv_index
-
-    def create
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-      super do |format|
-        format.js { render }
-      end
-    end
-
     def update
       if @student.update_attributes(params[:student])
-        flash.now[:notice] = t('students.updated')
-        respond_to do |format|
+        #flash.now[:notice] = t('notice.updated', :resource => resource_name)
+        respond_with(student) do |format|
           unless params[:student].nil?
             if !params[:student][:addresses_attributes].nil?
               format.js { render 'students/addresses/create' }
             elsif !params[:student][:notes_attributes].nil?
-              format.js { render 'students/notes/create' }             
+              format.js { render 'students/notes/create' }
             else
               if !params[:student][:picture].blank?
-                format.html { redirect_to @student, :notice => t('notice.picture_uploaded')}
+                format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
               else
-                format.js { render}
+                format.js { render }
               end
             end
           end
-          format.html { redirect_to @student } 
+          format.html { redirect_to @student }
         end
-        
+
       else
         render :edit
       end
     end
-    
+
     def destroy
-      if @student.destroy && !request.xhr?
-        flash[:notice] = "Student was successfully destroyed."  
+      if @student.destroy #&& !request.xhr?
+        #flash[:notice] = t('notice.removed', :resource => resource_name)
+        respond_with(@student) do |format|
+          format.html { redirect_to students_path }
+        end
       end
-      redirect_to students_path
     end
 
     def autocomplete_search
@@ -93,20 +69,41 @@ module Gaku
       # work only on sqlite3 and postgresql
       term = Student.encrypt_name(params[:term])
       @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(encrypted_surname || " " || encrypted_name LIKE ?) OR (encrypted_name || " " || encrypted_surname LIKE ?) OR (encrypted_name LIKE ?) OR (encrypted_surname LIKE ?)', "%#{term}%", "%#{term}%", "%#{term}%",  "%#{term}%")
-
       @students_json = decrypt_students_fields(@students)
-
       render json: @students_json.as_json
     end
 
     def load_autocomplete_data
-      @result = params[:class_name].capitalize.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+      object = "Gaku::" + params[:class_name].capitalize
+      @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
     private
+
+      def export_csv_index(students, field_order = ["surname", "name"])
+        filename = "Students.csv"
+        content = CSV.generate do |csv|
+          csv << translate_fields(field_order)
+          students.each do |student|
+            csv << student.attributes.values_at(*field_order)
+          end
+        end
+        send_data content, :filename => filename
+      end
+
+      def class_name
+        params[:class_name].capitalize.constantize
+      end
+
+      def selected_students
+        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+      end
+
       def load_before_index
         @student = Student.new
+        @class_groups = ClassGroup.all
+        @courses = Course.all
       end
 
       def load_before_show
@@ -126,8 +123,8 @@ module Gaku
         @student = Student.find(params[:id])
       end
 
-      def students_count
-        @students_count = Student.count
+      def count
+        @count = Student.count
       end
 
       def sort_column
@@ -138,36 +135,9 @@ module Gaku
         %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
       end
 
-=begin
-      def decrypt_students_fields(students)
-        students_json = students.as_json(:methods => [:address_widget, :class_group_widget,:seat_number_widget])
-        i = 0
-        students_json.each {|student|
-          student[:name] = @students[i].name
-          student[:surname] = @students[i].surname
-          student[:phone] = @students[i].phone
-          student[:student] = @students[i]
-          i += 1
-        }
-        return students_json
+      def resource_name
+        t('student.singular')
       end
-
-      def decrypt_student_fields(student)
-        student[:name] = @student.name
-        student[:surname] = @student.surname
-        student[:phone] = @student.phone
-        student[:student] = @student
-        return student
-      end
-
-      def sort_students(students_json)
-        students_json.sort_by! { |hsh| hsh[sort_column.to_sym] }
-        if sort_direction == "desc"
-          students_json.reverse!
-        end
-        return students_json
-      end
-=end
 
   end
 end

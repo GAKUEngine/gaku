@@ -32,7 +32,7 @@ Gaku::Core::Engine.routes.draw do
 
   resources :courses do
     resources :notes
-    resources :enrollments, :controller => 'gaku/courses/enrollments' do
+    resources :enrollments, :controller => 'courses/enrollments' do
       post :enroll_class_group, :on => :member
       post :enroll_student, :on => :collection
     end

@@ -2,5 +2,5 @@ $('table#syllabuses-index tbody').append('<%= render_js_partial("syllabus", {:sy
 $('#new-syllabus form')[0].reset();
 $('#new-syllabus').slideToggle();
 $('#new-syllabus-link').show();
-$('.syllabuses-count').html('<%= print_count(@syllabuses_count + 1, t("syllabuses.list")) %>');
+$('.syllabuses-count').html('<%= print_count(@count+1, t_syllabus_list) %>');
 showNotice("<%= render_flash %>");

@@ -2,11 +2,11 @@
   .span1
   .span10
     .row-fluid
-      .pull-left 
-          h4.mt-xs.mb-0.syllabuses-count 
-            = print_count(@syllabuses.count, t("syllabuses.list"))
+      .pull-left
+          h4.mt-xs.mb-0.syllabuses-count
+            = print_count(@count, t_syllabus_list)
       .pull-right
-        = link_to_new t("syllabuses.new"), '', :id => "new-syllabus-link"
+        = link_to_new t('syllabus.new'), '', :id => "new-syllabus-link"
     .row-fluid
       .span12
         hr/
@@ -15,4 +15,4 @@
     .row-fluid
       .span12.well
         =render 'gaku/syllabuses/syllabuses'
-        
+

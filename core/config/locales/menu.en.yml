@@ -1,0 +1,12 @@
+en:
+  menu:
+    students: "Students"
+    exams: "Exam Management"
+    admin:
+      disposals:
+        exam: "Exam Disposals"
+        attachment: "Attachment Disposals"
+        course_group: "Course Group Disposals"
+      system:
+        system_tools: "System Tools"
+        backup: "Backup"

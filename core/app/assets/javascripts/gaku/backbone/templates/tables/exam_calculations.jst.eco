@@ -4,12 +4,12 @@
       <th id='total_points_title' class='btn-inverse' style="width:65px">
         Total_Points
       </th>
-      <% for exam in @exams: %>
-        <%= console.log exam.use_weighting %>
-        <% if exam.use_weighting == 'true' : %>
-          <td id='weighting_total_title' class='btn-inverse' style="width:65px">
-            Weighting Total
-          </td>
+      	<% for exam in @exams: %>
+          <% if exam.use_weighting == 'true' : %>
+            <td id='weighting_total_title' class='btn-inverse' style="width:65px">
+            	Weighting Total
+            </td>
+          <% end %>
         <% end %>
       <% end %>
       <th class='btn-inverse'>Deviation</th>

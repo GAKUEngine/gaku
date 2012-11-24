@@ -3,5 +3,5 @@ $('#admin-commute-method-types table tbody').append('<%= render_js_partial("comm
 $('#new-admin-commute-method-type').slideToggle()
 $('#new-admin-commute-method-type-link').show();
 
-$('.admin-commute-method-types-count').html('<%= print_count(@commute_method_types_count + 1, t("commute_method_types.list")) %>');
+$('.admin-commute-method-types-count').html('<%= print_count(@count+1, t_commute_method_type_list) %>');
 showNotice("<%= render_flash %>");

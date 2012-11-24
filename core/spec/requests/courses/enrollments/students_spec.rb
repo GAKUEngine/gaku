@@ -8,7 +8,7 @@ describe "CourseEnrollment"  do
   let(:student) { create(:student, :name => "John", :surname => "Doe") }
 
   before :all do
-    set_resource "course-student" 
+    set_resource "course-student"
   end
 
   context 'student', :js => true do
@@ -17,14 +17,14 @@ describe "CourseEnrollment"  do
       student
       visit gaku.course_path(course)
     end
-     
+
     it "enrolls and shows" do
-      click new_link 
+      click new_link
       wait_until_visible cancel_link
       expect do
         find(:css, "input#student-#{student.id}").set(true)
         wait_until { find('#students-checked-div').visible? }
-        within('#students-checked-div') do 
+        within('#students-checked-div') do
           page.should have_content('Chosen students(1)')
           click_link('Show')
           wait_until { find('#chosen-table').visible? }
@@ -33,16 +33,16 @@ describe "CourseEnrollment"  do
         end
         wait_until_invisible modal
       end.to change(Gaku::CourseEnrollment, :count).by 1
-      
+
       within(table){
         page.should have_content("Doe John")
         page.should have_content("View Assignments")
-        page.should have_content("View Exams")  
+        page.should have_content("View Exams")
       }
-      
-      size_of(table_rows).should == 2 #one for head 
+
+      size_of(table_rows).should == 2 #one for head
       within(count_div) { page.should have_content('Students list(1)') }
-      within('#new-course-enrollment-tab-link') { page.should have_content('Enrollments(1)') }
+      within('#new-course-enrollment-tab-link') { page.should have_content('Students(1)') }
       page.should have_content('Successfully enrolled');
     end
 
@@ -53,7 +53,7 @@ describe "CourseEnrollment"  do
       page.should have_content("#{student.name}")
       course.students.size.should eq 1
 
-      click new_link  
+      click new_link
       wait_until_visible cancel_link
       within('tr#student-' + student.id.to_s) do
         page.should have_selector("img.enrolled")

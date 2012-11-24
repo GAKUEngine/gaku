@@ -4,7 +4,7 @@ module Gaku
     belongs_to :admission_phase
     belongs_to :admission_phase_state
     has_many :exam_scores
-    has_many :notes
+    has_many :notes, as: :notable
 
     attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
   end

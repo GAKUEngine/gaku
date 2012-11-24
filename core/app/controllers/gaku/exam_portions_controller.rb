@@ -1,13 +1,13 @@
 module Gaku
   class ExamPortionsController < GakuController
-  	
+
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
 
     respond_to :js, :html
 
     before_filter :exam, :only => [:show, :edit, :update, :destroy ]
-
+    before_filter :portions_count, :only => :destroy
     def new
       super do |format|
         format.js { render 'gaku/exams/exam_portions/new' }
@@ -23,14 +23,14 @@ module Gaku
 
     def edit
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/edit' }  
-      end  
+        format.js { render 'gaku/exams/exam_portions/edit' }
+      end
     end
 
     def update
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/update' }  
-      end 
+        format.js { render 'gaku/exams/exam_portions/update' }
+      end
     end
 
     def destroy
@@ -43,7 +43,7 @@ module Gaku
       end
     end
 
-    private 
+    private
       def exam
         @exam = Exam.find(params[:exam_id])
       end
@@ -54,6 +54,11 @@ module Gaku
           total+=portion.weight
         end
         total
+      end
+
+      def portions_count
+        exam
+        @portions_count = @exam.exam_portions.count
       end
   end
 end

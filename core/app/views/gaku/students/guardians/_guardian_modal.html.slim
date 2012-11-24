@@ -6,7 +6,7 @@
     .modal-header
       button.close type="button" data-dismiss="modal"
         'x
-      h3=t 'Edit guardian'
+      h3 = t('guardian.edit')
     .modal-body
       .validation-error
       .form-inputs
@@ -17,5 +17,5 @@
 
         .row-fluid style="margin-top:10px"
           .span8
-            = guardian_form.submit t('guardians.save'), :class => "span12 btn btn-primary", :id => 'submit-student-guardian-button', :style => "min-height:0px; float: left;"
+            = guardian_form.submit t('guardian.save'), :class => "span12 btn btn-primary", :id => 'submit-student-guardian-button', :style => "min-height:0px; float: left;"
             = link_to_cancel  :id => 'cancel-student-guardian-link'

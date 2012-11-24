@@ -1,36 +1,38 @@
 .row-fluid.cnntrol-group
   .span12
-    = address_form.label :title, t("addresses.title")
+    = address_form.label :title, t('address.title')
     = address_form.text_field :title, :class => "span12"
+    
 .row-fluid.control-group
   .span6
-    = address_form.label :country, t("addresses.country"), :class => "control-label"
-    = address_form.select :country_id, Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('addresses.choose_country'), :selected => Gaku::Preset.get('address_country') }, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
+    = address_form.label :country, t('address.country'), :class => "control-label"
+    = address_form.select :country_id, Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('address.choose_country'), :selected => Gaku::Preset.get('address_country') }, :class => "validate[required] span12", :id => "country_dropdown", "data-prompt-position" => "bottomRight:5"
   .span6
-    = address_form.label :zipcode, t("addresses.zipcode"), :class => "control-label"
+    = address_form.label :zipcode, t('address.zipcode'), :class => "control-label"
     .row-fluid
       .span6
         = address_form.text_field :zipcode, :class => "span12"
       .span6
-        button.span12.btn.btn-primary= t "addresses.search_address"
+        button.span12.btn.btn-primary= t('address.search')
+
 .row-fluid
   .span3
-    / class state_label for handling changing state input with state dropdown/
-    = address_form.label :state_name, t("addresses.state"), :class => "control-label state_label"
+    /class state_label for handling changing state input with state dropdown/
+    = address_form.label :state_name, t('address.state'), :class => "control-label state_label"
     = address_form.text_field :state_name, :class => "span12", :id => "state_dropdown", :value => Gaku::Preset.get('address_state')
   .span3
-    = address_form.label :city, t("addresses.city"), :class => "control-label"
+    = address_form.label :city, t('address.city'), :class => "control-label"
     = address_form.text_field :city, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => Gaku::Preset.get('address_city')
   .span3
-    = address_form.label :address1, t("addresses.address1"), :class => "control-label"
+    = address_form.label :address1, t('address.address1'), :class => "control-label"
     = address_form.text_field :address1, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
   .span3
-    = address_form.label :address2, t("addresses.address2"), :class => "control-label"
+    = address_form.label :address2, t('address.address2'), :class => "control-label"
     = address_form.text_field :address2, :class => "span12"
   -if params[:action] == 'edit'
     .row-fluid
       .span12
-        =address_form.label :past, t('addresses.past')
+        =address_form.label :past, t('address.past')
         =address_form.check_box :past
 
 javascript:

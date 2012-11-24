@@ -71,6 +71,7 @@ module Gaku
       end
       if params[:source] == "class_groups"
         @class_group = ClassGroup.find(params[:class_group_id])
+        @count = @class_group.class_group_enrollments.count
         render 'gaku/class_groups/students/enroll_students'
       else
         flash.now[:notice] = notice.html_safe

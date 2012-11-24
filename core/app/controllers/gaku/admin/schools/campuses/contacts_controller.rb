@@ -7,8 +7,9 @@ module Gaku
 
       respond_to :js, :html
 
-      before_filter :load_campus, :only => [ :new, :create, :edit, :update, :destroy ]
-
+      before_filter :campus, :only => [ :new, :create, :edit, :update, :destroy ]
+      before_filter :contact_types, :only => [:new,:edit]
+      before_filter :count, :only => [:create, :destroy]
       def create
         super do |format|
           if @contact.save && @campus.contacts << @contact
@@ -22,8 +23,8 @@ module Gaku
         super do |format|
           @contacts = Contact.where(:campus_id => params[:campus_id])
           @contact.make_primary_campus if params[:contact][:is_primary] == "1"
-          format.js { render 'update' }  
-        end  
+          format.js { render 'update' }
+        end
       end
 
       def destroy
@@ -36,7 +37,7 @@ module Gaku
           end
 
         end
-      end 
+      end
 
       def make_primary
         @contact = Contact.find(params[:id])
@@ -47,9 +48,18 @@ module Gaku
         end
       end
 
-      private 
-        def load_campus
+      private
+        def campus
           @campus = Campus.find(params[:campus_id])
+        end
+
+        def contact_types
+          @contact_types = ContactType.all
+        end
+
+        def count
+          campus
+          @count = @campus.contacts.count
         end
     end
   end

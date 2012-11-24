@@ -1,6 +1,6 @@
 = form_for [@student, @guardian], :remote => true do |guardian_form|
     - if guardian_form.object.new_record?
-      b= t('guardians.new')
+      b= t('guardian.new')
       .row-fluid.mt-l
         .span12.well
           = render 'gaku/shared/form_fields/guardian_form_fields', :guardian_form => guardian_form
@@ -8,7 +8,7 @@
           .row-fluid
             .span12
               .span6
-                = submit_button t("guardians.save"), :id => 'submit-student-guardian-button'
+                = submit_button t('guardian.save'), :id => 'submit-student-guardian-button'
               =link_to_cancel :id => "cancel-student-guardian-link"
 
 = javascript_include_tag 'gaku/students/guardians'

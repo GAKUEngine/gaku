@@ -1,24 +1,17 @@
 module Gaku
   class ClassGroups::SemestersController < GakuController
-
     inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
-
     respond_to :js, :html
+    belongs_to :class_group, :parent_class => Gaku::ClassGroup
 
-    before_filter :load_class_group, :only => [:new, :create, :edit, :update, :destroy]
-    
-    def create
-      super do |format|
-        @class_group.semesters << @semester
-        format.js { render 'create' }  
-      end 
+    before_filter :count, :only => [:create, :destroy]
+
+    private
+
+    def count
+      class_group = ClassGroup.find(params[:class_group_id])
+      @count = class_group.semesters.count
     end
-    
-    private 
-      def load_class_group
-        @class_group = ClassGroup.find(params[:class_group_id])
-      end
 
   end
 end

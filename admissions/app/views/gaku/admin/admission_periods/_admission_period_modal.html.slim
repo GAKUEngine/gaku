@@ -2,7 +2,7 @@
 - model_class = model.class
 #edit-admission-period-modal.modal.hide wmode="opaque"
 
-  = form_for [:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |admission_period_form| 
+  = nested_form_for [:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |admission_period_form| 
 
       .modal-header
         button type="button" class="close" data-dismiss="modal" ×
@@ -19,6 +19,15 @@
           = admission_period_form.number_field :seat_limit
           = admission_period_form.label :admitted_on, t("admission_periods.admitted_on")
           = admission_period_form.date_select :admitted_on, :class => "span3"
+        br/
+        .h3=  t('admission_methods.list')
+        .row-fluid
+          = admission_period_form.fields_for :period_method_associations do |method_form|
+            = method_form.label :name, t("admission_methods.name")
+            = method_form.collection_select(:admission_method_id, Gaku::AdmissionMethod.all(:order => 'name'), :id, :name, { :prompt => 'Select Admission Method' })
+            = method_form.link_to_remove t('admission_methods.remove')
+          br/
+          p= admission_period_form.link_to_add t('admission_methods.add'), :period_method_associations
         .row-fluid
           .span9
             =submit_button t('admission_periods.save'), :id => 'submit-admin-admission-period-button'

@@ -1,2 +1,7 @@
-tr id="admission-method-admission-phase-state-#{state.id}"
+tr id="admission-method-admission-phase-state-#{state.id}" class="admission-phase-state"
+  td class="primary-button" width="28px"
+    -if state.is_default
+      = link_to "<i class='icon-white icon-ok'></i>".html_safe, make_default_admin_admission_method_admission_phase_admission_phase_state_path(state.admission_phase.admission_method, state.admission_phase, state), :class => 'btn btn-mini btn-primary make-primary', :remote => true
+    -else
+      = link_to "<i class='icon-white icon-ok'></i>".html_safe, make_default_admin_admission_method_admission_phase_admission_phase_state_path(state.admission_phase.admission_method, state.admission_phase, state), :id => 'set-primary-link', :class => 'btn btn-mini', :remote => true
   = render 'gaku/admin/admission_methods/admission_phases/admission_phase_states/admission_phase_state_fields', :state => state
