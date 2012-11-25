@@ -3,7 +3,7 @@ module Gaku
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show,  :only => [:show, :destroy]
-    before_filter :syllabuses_count, :only => [:create, :destroy]
+    before_filter :count, :only => [:create, :destroy, :index]
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -22,7 +22,7 @@ module Gaku
         @syllabus = Syllabus.new
       end
 
-      def syllabus 
+      def syllabus
       	@syllabus = Syllabus.find(params[:id])
       end
 
@@ -32,7 +32,7 @@ module Gaku
 
       def load_before_show
         syllabus
-        
+
         @exam = Exam.new
         @exam_syllabus = ExamSyllabus.new
         @exam.exam_portions.build
@@ -42,8 +42,8 @@ module Gaku
         grading_methods
       end
 
-      def syllabuses_count
-        @syllabuses_count = Syllabus.count
+      def count
+        @count = Syllabus.count
       end
 
   end

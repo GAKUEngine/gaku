@@ -3,9 +3,10 @@ module Gaku
 
     include LinkToHelper
     include SortHelper
+    include TranslationsHelper
 
     def required_field
-      ('<span class= "label label-important pull-right">' + t('required') + '</span>').html_safe 
+      ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe 
     end
 
     def print_count(count, text)

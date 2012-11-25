@@ -28,16 +28,18 @@ group :test do
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
+  gem 'capybara', '= 1.1.3'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
-  
+
+  gem 'poltergeist'
+
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
-  
+
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency

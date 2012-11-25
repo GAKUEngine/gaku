@@ -11,9 +11,9 @@ describe 'Courses' do
   before :all do
     set_resource "course"
   end
-  
-  context '#new', :js => true do 
-    before do 
+
+  context '#new', :js => true do
+    before do
       syllabus
       visit gaku.courses_path
       click new_link
@@ -21,8 +21,7 @@ describe 'Courses' do
     end
 
     it "creates new course" do
-      
-      expect do      
+      expect do
         fill_in 'course_code', :with => 'SUMMER2012'
         select "#{syllabus.name}", :from => 'course_syllabus_id'
         click submit
@@ -31,7 +30,7 @@ describe 'Courses' do
       end.to change(Gaku::Course, :count).by 1
 
       within(count_div) { page.should have_content('Courses list(1)') }
-      wait_until_invisible '#new-course'     
+      wait_until_invisible '#new-course'
       flash_created?
     end
 
@@ -41,7 +40,7 @@ describe 'Courses' do
     end
 
     it 'cancels creating' do
-      ensure_cancel_creating_is_working 
+      ensure_cancel_creating_is_working
     end
   end
 
@@ -58,7 +57,7 @@ describe 'Courses' do
         page.should have_content("biology")
         click show_link
       end
-      
+
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
@@ -66,7 +65,7 @@ describe 'Courses' do
     it 'shows validation messages upon edit', :js => true do
       within(table) { click edit_link }
 
-      page.should have_content("Edit Course") 
+      page.should have_content("Edit Course")
       fill_in 'course_code', :with => ''
       click submit
       page.should have_content('is required')
@@ -75,7 +74,7 @@ describe 'Courses' do
     it "edits a course", :js => true  do
       within(table) { click edit_link }
 
-      page.should have_content("Edit Course") 
+      page.should have_content("Edit Course")
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
       click submit
@@ -88,18 +87,18 @@ describe 'Courses' do
     it "edits a course from show", :js => true do
       within(table) { click show_link }
       page.should have_content("Show")
-      
+
       click edit_link
       wait_until_visible(modal)
-      
-      page.should have_content("Edit Course") 
+
+      page.should have_content("Edit Course")
       fill_in 'course_code', :with => 'biology2013'
       page.select "biology2013Syllabus", :from => 'course_syllabus_id'
       click submit
 
       page.should have_content "biology2013Syllabus"
       page.should have_content "biology2013"
-      
+
       flash_updated?
     end
 
@@ -108,10 +107,10 @@ describe 'Courses' do
       within(count_div) { page.should have_content('Courses list(1)') }
       within(table) { page.should have_content(course.code) }
 
-      expect do     
+      expect do
         ensure_delete_is_working
       end.to change(Gaku::Course, :count).by -1
-      
+
       within(count_div) { page.should_not have_content('Courses list(1)') }
       within(table) { page.should_not have_content(course.code) }
       flash_destroyed?

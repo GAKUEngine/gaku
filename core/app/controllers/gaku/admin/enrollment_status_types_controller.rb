@@ -1,17 +1,16 @@
 module Gaku
   module Admin
     class EnrollmentStatusTypesController < Admin::BaseController
-     	
+
       inherit_resources
       actions :index, :show, :new, :create, :update, :edit, :destroy
-
       respond_to :js, :html
 
-      before_filter :enrollment_status_types_count, :only => [:create, :destroy]
+      before_filter :count, :only => [:create, :destroy, :index]
 
       private
-        def enrollment_status_types_count
-          @enrollment_status_types_count = EnrollmentStatusType.count
+        def count
+          @count = EnrollmentStatusType.count
         end
     end
   end

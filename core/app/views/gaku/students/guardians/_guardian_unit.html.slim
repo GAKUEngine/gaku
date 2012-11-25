@@ -8,7 +8,7 @@
             = render 'gaku/shared/fields/guardian_fields', :guardian => guardian
 
       .row-fluid.mt-m
-        = ajax_link_to_new t('students.add_contact'), new_contact_student_guardian_path(@student, guardian), :id => 'new-student-guardian-contact-link'
+        = ajax_link_to_new t('contact.add'), new_contact_student_guardian_path(@student, guardian), :id => 'new-student-guardian-contact-link'
 
         = link_to_show [@student, guardian]
         = ajax_link_to_edit [:edit, @student, guardian]

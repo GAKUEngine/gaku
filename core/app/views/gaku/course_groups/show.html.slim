@@ -3,7 +3,7 @@
   .span10
     .row-fluid
       .span12
-        h3= t('course_groups.show')
+        h3= t('course_group.show')
     .row-fluid
       .span12
         hr/
@@ -11,12 +11,12 @@
       table.table.table-condensed.table-striped.table-bordered
         thead
           tr
-            th =t("course_groups.name")
+            th = t('course_group.name')
         tbody
           tr class="course-group-#{@course_group.id}"
             td.name = @course_group.name
     .row-fluid.mt-l
-      .span12.well       
+      .span12.well
             #courses
               .row-fluid
                 .span12
@@ -26,9 +26,9 @@
               .row-fluid
                 #course-group-enrollments-index
                   =render 'gaku/course_groups/course_group_enrollments/courses', :course_group => @course_group
-      
+
     .row-fluid
       .span12.well
-        = link_to t("Edit"), [:edit, @course_group], :class => "span6 btn edit-link", :remote => true
+        = link_to_edit_with_text [:edit, @course_group], :class => "edit-link span6 btn", :remote => true
         = link_to_back course_groups_path, :class => "span6 btn"
       =render 'delete_confirm'

@@ -3,12 +3,12 @@
     table#exam-exam-portions-index.index.table.table-striped.table-bordered.table-condensed
       thead
         tr
-          th.btn-inverse =t 'exam_portions.name'
-          th.btn-inverse =t 'exam_portions.max_score'
+          th.btn-inverse = t('exam_portion.name')
+          th.btn-inverse = t('exam_portion.max_score')
           - if @exam.use_weighting
-            th.btn-inverse =t 'exam_portions.weight'
-          th.btn-inverse =t 'exam_portions.problem_count'
-          th.btn-inverse =t('exam_portions.attached_file_count')
-          th.btn-info width="94px" =t 'manage'
+            th.btn-inverse = t('exam_portion.weight')
+          th.btn-inverse = t('exam_portion.problem_count')
+          th.btn-inverse = t('exam_portion.attached_file_count')
+          th.btn-info width="94px" = t('manage')
       tbody
         = render :partial => 'gaku/exams/exam_portions/show', :collection => @exam.exam_portions, :as => :exam_portion

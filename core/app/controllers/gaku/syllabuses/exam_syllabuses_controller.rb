@@ -1,27 +1,22 @@
 module Gaku
 	class Syllabuses::ExamSyllabusesController < GakuController
 
-		def destroy
-			@syllabus = Syllabus.find(params[:syllabus_id])
-			exam_syllabus = ExamSyllabus.find(params[:id])
-			exam_syllabus.destroy
-		
+		inherit_resources
+    actions :create, :destroy
+    belongs_to :syllabus, :parent_class => Gaku::Syllabus
+    respond_to :js, :html
 
-			flash.now[:notice] = 'Exam was successfully destroyed.'
-			respond_to do |format|
-				format.js { render 'destroy' }
-			end
-		end
+    before_filter :count, :only => [:create,:destroy]
 
-		def create
-			@syllabus = Syllabus.find(params[:syllabus_id])
-			@exams = Exam.all
-			@exam_syllabus = @syllabus.exam_syllabuses.build(params[:exam_syllabus])
-			@exam_syllabus.save
-			respond_to do |format|
-				flash.now[:notice] = 'Exam added to Syllabus'
-				format.js { render 'create' }
-			end
+    def create
+    	create!(:notice => t('notice.added', :resource => t('exam.singular')))
+    end
+
+		private
+
+		def count
+		  @syllabus = Syllabus.find(params[:syllabus_id])
+			@count = @syllabus.exams.count
 		end
 
 	end

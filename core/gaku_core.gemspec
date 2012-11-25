@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface', '>= 0.9.0'
   s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'inherited_resources'
+  s.add_dependency 'responders'
 
   s.add_dependency 'jquery-rails', '~> 2.0'
   s.add_dependency 'jquery-ui-rails'

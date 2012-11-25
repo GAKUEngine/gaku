@@ -4,7 +4,7 @@
       .modal-header
         button.close type="button" data-dismiss="modal"
           'x
-        h3 =t("addresses.edit")
+        h3 = t('address.edit')
       .modal-body
         .row-fluid
           .validation-error
@@ -14,5 +14,5 @@
         = render 'gaku/shared/form_fields/address_form_fields', :address_form => address_form
         .row-fluid
           .span9
-            = submit_button t('addresses.save'), :id => 'submit-student-guardian-address-button', :class => 'btn btn-primary button span12'
+            = submit_button t('address.save'), :id => 'submit-student-guardian-address-button', :class => 'btn btn-primary button span12'
             = link_to_cancel :id => 'cancel-student-guardian-address-link', :class => 'span3 btn btn-danger'

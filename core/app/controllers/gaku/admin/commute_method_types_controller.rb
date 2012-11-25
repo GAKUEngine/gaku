@@ -7,14 +7,14 @@ module Gaku
 
     	respond_to :js, :html
 
-    	before_filter :commute_method_types_count, :only => [:create,:destroy]
+    	before_filter :count, :only => [:create,:destroy, :index]
 
     	private
-    	  def commute_method_types_count
-    	  	@commute_method_types_count = CommuteMethodType.count
+    	  def count
+    	  	@count = CommuteMethodType.count
     	  end
-      
+
     end
   end
 end
-     	
+

@@ -2,11 +2,11 @@
   .row-fluid
     .span12.well
       = fields_for 'presets' do |grading_method|
-        = grading_method.label :grading_method, t('admin.presets.grading.grading_method')
+        = grading_method.label :grading_method, t('admin.preset.grading.grading_method')
         = grading_method.text_field :grading_method, :value => @preset_hash[:grading_method]
       = fields_for 'presets' do |grading_scheme|
-        = grading_scheme.label :grading_scheme, t('admin.presets.grading.grading_scheme')
+        = grading_scheme.label :grading_scheme, t('admin.preset.grading.grading_scheme')
         = grading_scheme.text_field :grading_scheme, :value => @preset_hash[:grading_scheme]
   .row-fluid
-    .span12.well          
-      =submit_tag t('admin.presets.save'), :class => 'btn btn-primary'
+    .span12.well
+      =submit_tag t('admin.preset.save'), :class => 'btn btn-primary'

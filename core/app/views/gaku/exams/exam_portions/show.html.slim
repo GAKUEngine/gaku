@@ -1,55 +1,55 @@
-=t 'exam_portions.show'
+= t('exam_portion.show')
 .row-fluid
   .span12
     table.table.table-striped.table-bordered.table-condensed
       thead
         tr
-          th.btn-inverse =t 'exam_portions.name'
-          th.btn-inverse =t 'exam_portions.max_score'
-          th.btn-inverse =t 'exam_portions.weight'
-          th.btn-inverse =t 'exam_portions.problem_count'
-          th.btn-inverse =t 'exam_portions.is_master'
-          th.btn-info width="94px" =t 'manage'
+          th.btn-inverse = t('exam_portion.name')
+          th.btn-inverse = t('exam_portion.max_score')
+          th.btn-inverse = t('exam_portion.weight')
+          th.btn-inverse = t('exam_portion.problem_count')
+          th.btn-inverse = t('exam_portion.is_master')
+          th.btn-info width="94px" = t('manage')
       tbody
         tr
-          td =@exam_portion.name
-          td =@exam_portion.max_score
-          td =@exam_portion.weight
-          td =@exam_portion.problem_count
-          td =@exam_portion.is_master
+          td = @exam_portion.name
+          td = @exam_portion.max_score
+          td = @exam_portion.weight
+          td = @exam_portion.problem_count
+          td = @exam_portion.is_master
           td
-            = link_to ("<i class='icon-white icon-eye-open'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-success", :style => "margin-right:5px"
-            = link_to ("<i class='icon-white icon-pencil'></i>").html_safe, edit_exam_exam_portion_path(@exam, @exam_portion), :class => "btn btn-mini btn-warning", :style => "margin-right:5px", :remote => true
-            = link_to ("<i class='icon-white icon-remove'></i>").html_safe, exam_exam_portion_path(@exam, @exam_portion), :data => { :confirm => 'Are you sure?' }, :remote => true, :method => :delete, :class => "delete_exam_portion_link btn btn-mini btn-danger"
+            = link_to_show [@exam, @exam_portion]
+            = ajax_link_to_edit [:edit, @exam, @exam_portion]
+            = ajax_link_to_delete [@exam, @exam_portion]
 .row-fluid
   .span12
     h4 Attachment index
     #new-exam-portion-attachment-link
-      =link_to ("<i class='icon-plus icon-white'></i> " + t('attachments.new_attachment')).html_safe, "#", :class => 'btn btn-primary pull-right'
+      =link_to ("<i class='icon-plus icon-white'></i> " + t('attachment.new')).html_safe, "#", :class => 'btn btn-primary pull-right'
 br/
 .row-fluid
   #new-exam-portion-attachment-form.hide
     .span12.well
       =form_for [@exam, @exam_portion, @attachment], :remote => true do |f|
-          =f.label :name, t('name')
+          =f.label :name, t('attachment.name')
           =f.text_field :name
-          =f.label :description, t('description')
+          =f.label :description, t('attachment.description')
           =f.text_area :description, :rows => 8
-          =f.label :asset, t('attachments.asset')
+          =f.label :asset, t('attachment.assets')
           =f.file_field :asset
           br
-          =f.submit t('attachments.create_attachment'), :class => 'btn btn-primary'
+          =f.submit t('attachment.create'), :class => 'btn btn-primary'
 .row-fluid
   .span12.well
     table.exam-portion-attachment-index.table.table-striped.table-bordered.table-condensed
       thead
         tr
-          th.btn-inverse =t('name')
-          th.btn-inverse =t('description')
-          th.btn-inverse =t('attachments.file_name')
-          th.btn-inverse =t('attachments.file_type')
-          th.btn-inverse =t('attachments.file_size')
-          th.btn-info width="70px" =t 'manage'
+          th.btn-inverse = t('attachment.name')
+          th.btn-inverse = t('attachment.description')
+          th.btn-inverse = t('attachment.file_name')
+          th.btn-inverse = t('attachment.file_type')
+          th.btn-inverse = t('attachment.file_size')
+          th.btn-info width="70px" = t('manage')
       tbody
         =render :partial => 'gaku/shared/fields/attachment_fields', :collection => @exam_portion.attachments, :as => :attachment
-          
+

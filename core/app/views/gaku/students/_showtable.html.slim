@@ -5,7 +5,7 @@
 
     .span3.well
       .row-fluid.pagination-centered
-        h4 =t("students.picture")
+        h4 =t(:picture)
       .row-fluid.mt-s
         .span12.pagination-centered
           = image_tag @student.picture.url(:thumb), :id => "student-picture"
@@ -33,6 +33,6 @@
 row-fluid
   .span12
     #delete-student
-      =link_to 'Delete', "#", :id => 'delete-student-link', :class => 'btn btn-danger pull-right'
+      =link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
   .delete_modal
     =render 'gaku/shared/delete_modal', :target => @student

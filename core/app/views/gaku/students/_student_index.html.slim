@@ -1,7 +1,7 @@
 table#student-index.table.table-bordered.table-striped
   tbody
     tr
-      th.btn-c1 width="20%" =t("class")
+      th.btn-c1 width="20%" =t(:class)
       td#student-class-group-enrollment
         - if student.class_groups.last
           - if student.class_groups.last.grade
@@ -16,27 +16,27 @@ table#student-index.table.table-bordered.table-striped
           = t("none")
     - if student.name_reading != ""
       tr
-        th.btn-c2 =t("phonetic_reading")
+        th.btn-c2 =t(:phonetic_reading)
         td.vm
           = student.surname_reading + " " + student.name_reading
     tr
-      th.btn-c2 =t("name")
+      th.btn-c2 =t(:name)
       td.vm style="font-size:16pt"
         = student.surname + " " + student.name
     tr
-      th.btn-c2 =t("gender")
+      th.btn-c2 =t('gender.label')
       td = gender(student)
     tr
-      th.btn-c2 =t("students.birth")
+      th.btn-c2 =t(:birth_date)
       td =student.birth_date
     tr
-      th.btn-c1 =t("students.phone")
+      th.btn-c1 =t(:phone)
       td =student.phone
     tr
-      th.btn-c1 =t("students.email")
+      th.btn-c1 =t(:email)
       td =student.email
     tr
-      th.btn-c2 =t("students.admitted")
+      th.btn-c2 =t(:admitted)
       td =student.admitted
     tr
       th.btn-c2 Enrollment Status
@@ -44,14 +44,14 @@ table#student-index.table.table-bordered.table-striped
         #student-enrollment-status 
           =render 'gaku/students/enrollment_statuses/enrollment_status', :student => student if student.enrollment_status
     tr
-      th.btn-c2 =t("students.scholarship_status")
+      th.btn-c2 =t(:scholarship_status)
       td =student.scholarship
     tr
-      th.btn-c2 =t('students.commute_method')
+      th.btn-c2 =t(:commute_method)
       td
         #student-commute-method
           #student-commute-method-form
           -if student.commute_method
             =render 'gaku/students/commute_methods/commute_method', :student => student
           -else
-            =link_to t("add"), new_student_commute_method_path(student, @new_commute_method), :remote => true,:id => 'new-student-commute-method-link'
+            =link_to t(:add), new_student_commute_method_path(student, @new_commute_method), :remote => true, :id => 'new-student-commute-method-link'
