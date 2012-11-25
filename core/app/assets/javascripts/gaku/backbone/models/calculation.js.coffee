@@ -4,8 +4,6 @@ class GAKUEngine.Models.Calculation extends Backbone.Model
     @on 'change', @reRenderCalculationsView, @
 
   reRenderCalculationsView: ->
-    tableView = new GAKUEngine.Views.ExamTableView
-      
     calculationsView = new GAKUEngine.Views.ExamCalculationsView
                               course: @get('course')
                               exams: @get('exams')

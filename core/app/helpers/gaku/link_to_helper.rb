@@ -63,6 +63,14 @@ module Gaku
       link_to name, resource, attributes
     end
 
+    def link_to_modal_delete(resource, options = {})
+      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      attributes = {
+        :class => 'btn btn-mini btn-danger modal-delete-link'
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
     def ajax_link_to_make_primary(resource, options = {})
       name = ("<i class='icon-white icon-ok'></i>").html_safe
       attributes = {
