@@ -23,9 +23,10 @@
         .h3=  t('admission_methods.list')
         .row-fluid
           = admission_period_form.fields_for :period_method_associations do |method_form|
-            = method_form.label :name, t("admission_methods.name")
-            = method_form.collection_select(:admission_method_id, Gaku::AdmissionMethod.all(:order => 'name'), :id, :name, { :prompt => 'Select Admission Method' })
-            = method_form.link_to_remove t('admission_methods.remove')
+            .method_form
+              = method_form.label :name, t("admission_methods.name")
+              = method_form.collection_select(:admission_method_id, Gaku::AdmissionMethod.all(:order => 'name'), :id, :name, { :prompt => 'Select Admission Method' })
+              = method_form.link_to_remove t('admission_methods.remove')
           br/
           p= admission_period_form.link_to_add t('admission_methods.add'), :period_method_associations
         .row-fluid
