@@ -48,9 +48,16 @@ module Gaku
 
         def gaku_xhr_get(action, parameters = nil, session = nil, flash = nil)
           parameters ||= {}
-          parameters.reverse_merge!(:format => :json)
+          parameters.reverse_merge!(:format => :js)
           parameters.merge!(:use_route => :gaku)
           xml_http_request(:get, action, parameters, session, flash)
+        end
+
+        def gaku_xhr_post(action, parameters = nil, session = nil, flash = nil)
+          parameters ||= {}
+          parameters.reverse_merge!(:format => :js)
+          parameters.merge!(:use_route => :gaku)
+          xml_http_request(:post, action, parameters, session, flash)
         end
 
         private
