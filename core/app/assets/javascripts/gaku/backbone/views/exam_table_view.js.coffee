@@ -70,9 +70,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .find('input.score-cell')
                 .last()
                 .focus()
-        
-
-
 
     return false
 
@@ -107,7 +104,8 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   setPortionAttendance: (event)->
     currentTarget = $(event.currentTarget)
     inputElement = $('#' + currentTarget.attr("targetinputelement"))
-    inputElement.hide()
+    #inputElement.hide()
+    attendance = new GAKUEngine.Models.ExamAttendance(currentTarget)
 
   validatePortion: (event)->
     currentTarget = $(event.currentTarget)
@@ -120,9 +118,9 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
     else if currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
-      @updataPortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
+      @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
 
-  updataPortion:(urlLink, score, baseURI) ->
+  updatePortion:(urlLink, score, baseURI) ->
     @exam_score = new GAKUEngine.Models.ExamPortionScore
       urlLink: urlLink
       score: score
