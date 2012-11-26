@@ -11,13 +11,13 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
   render: ->
     optionsObjects =  {
-                        course: @options.course, 
-                        exams: @options.exams, 
-                        student_total_scores: @options.student_total_scores, 
-                        exam_averages: @options.exam_averages, 
-                        deviation: @options.deviation, 
-                        students: @options.students, 
-                        grades: @options.grades, 
+                        course: @options.course,
+                        exams: @options.exams,
+                        student_total_scores: @options.student_total_scores,
+                        exam_averages: @options.exam_averages,
+                        deviation: @options.deviation,
+                        students: @options.students,
+                        grades: @options.grades,
                         ranks: @options.ranks
                       }
     
@@ -36,14 +36,14 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   
 
   onEnterActions: (event)->
-    if !event.shiftKey && event.keyCode == 13 
+    if !event.shiftKey && event.keyCode == 13
       @nextOnEnter(event)
     else if event.shiftKey && event.keyCode == 13
       @prevOnShiftEnter(event)
 
 
   prevOnShiftEnter: (event)->
-    event.preventDefault()  
+    event.preventDefault()
     $this = $(event.target)
 
     portion = $this.parent().attr('class')
@@ -74,11 +74,11 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
 
 
-    return false;
+    return false
 
   nextOnEnter: (event)->
       event.preventDefault()
-      $this = $(event.target) 
+      $this = $(event.target)
 
       portion = $this.parent().attr('class')
       nextDiv = $this.closest('tr').next().find('.'+portion)
