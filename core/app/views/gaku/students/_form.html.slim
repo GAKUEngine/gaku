@@ -1,0 +1,18 @@
+-model = @student || student
+= form_for model, :remote => true do |form|
+  - if @student.errors.any?
+    .alert.alert-error
+      strong
+        = pluralize(@student.errors.count, "error")
+        | prohibited this student from being saved:
+      ul
+        - @student.errors.full_messages.each do |msg|
+          li= msg
+  .row-fluid.mt-l
+    .span12.well
+      =render :partial => 'student_form_fields', :locals => { :form => form }
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t('student.create'), :id => 'submit-student-button'
+          = link_to_cancel :id => 'cancel-student-link'

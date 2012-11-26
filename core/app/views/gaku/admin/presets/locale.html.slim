@@ -1,0 +1,10 @@
+=form_tag update_presets_admin_presets_path, :method => :put do
+	.row-fluid
+  	.span12.well
+    	=fields_for 'presets' do |language|
+    		=language.label :language, t('language')
+    		=language.select :language,options_for_select(I18n.available_locales, :selected => @preset_hash[:language])
+	.row-fluid
+		.span12.well
+			=submit_tag t('admin.preset.save'), :class => 'btn btn-primary'
+

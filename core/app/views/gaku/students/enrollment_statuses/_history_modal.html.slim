@@ -1,0 +1,21 @@
+#history-enrollment-status-modal.modal.hide
+	.modal-header
+	  button type="button" class="close" data-dismiss="modal" ×
+	  h4 Enrollment Status History
+	.modal-body
+		.row-fluid
+			.span12
+				table.table.table-striped.table-bordered.table-condensed
+					thead
+						tr
+							th Status
+							th From
+							th To
+							th Notes
+					tbody
+						-@enrollment_status_history.each do |index,audit|
+							tr
+								td =audit[:type_name]
+								td =audit[:created_at]
+								td =audit[:ended_at]
+								td =audit[:notes].count

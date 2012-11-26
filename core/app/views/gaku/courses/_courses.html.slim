@@ -1,0 +1,10 @@
+table#courses-index.index.table.table-striped.table-bordered.table-condensed
+  thead
+    tr
+      th*{"class" => "btn-inverse", "data-field" => "#{t('syllabus.code')}-#{t('syllabus.singular')}-#{t('course.code')}-[#{t('syllabus.code')}]: #{t('syllabus')}-#{t('course.code')}"} = t('syllabus.code')
+      th*{"class" => "btn-inverse", "data-field" => t('schedule')} = t('schedule')
+      th*{"class" => "btn-inverse", "data-field" => t('teacher')} = t('teacher')
+      th*{"class" => "btn-inverse", "data-field" => t('num_enrolled')} = t('num_enrolled')
+      th.btn-info style="width:94px" = t('manage')
+  tbody
+    =render :partial => 'course', :collection => @courses, :as => 'course'

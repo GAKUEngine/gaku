@@ -1,0 +1,13 @@
+-@target = [@student, contact]
+
+tr id="contact-#{contact.id}" class="student-contact"
+  td class="primary-button" width="28px"
+    -if @target.last.is_primary?
+      = ajax_link_to_make_primary [:make_primary] + @target, :class => 'btn btn-mini btn-primary make-primary'
+    -else
+      = ajax_link_to_make_primary [:make_primary] + @target, :id => 'set-primary-link', :class => 'btn btn-mini'
+
+  = render 'gaku/shared/fields/contact_fields', :target => @target
+  td 
+    = ajax_link_to_edit [:edit] + @target
+    = ajax_link_to_delete @target

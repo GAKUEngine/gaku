@@ -1,0 +1,22 @@
+table#students-index-table.index.table.table-striped.table-bordered.table-condensed.tablesorter
+  thead
+    tr
+      th.btn-inverse style="width:24px;"
+        i.icon-check.icon-white
+      th.btn-inverse = sort_link @search, "surname", t('surname')
+      th.btn-inverse = sort_link @search, "name", t('name')
+      th.btn-inverse = student_sortable "birth_date", t('birth_date')
+      th.btn-inverse = student_sortable "gender", t('gender.label')
+      th.btn-inverse = student_sortable "class_name", t('class_group.name')
+      th.btn-inverse = student_sortable "seat_number", t('class_group_enrollment.seat_number')
+      th.btn-inverse = student_sortable "admitted", t('admitted')
+      th.btn-inverse = student_sortable "primary_address", t('address.primary')
+
+      - if params[:controller] == "gaku/students" or params[:controller] == "gaku/admissions"
+        th.btn-info style="width:62px" = t('manage')
+
+  tbody
+    =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
+
+= javascript_include_tag 'gaku/students/selected_students'
+= javascript_include_tag 'gaku/students/datatable'

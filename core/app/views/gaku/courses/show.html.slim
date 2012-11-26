@@ -1,0 +1,59 @@
+- content_for :title, t('course.show')
+
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .pull-left
+        h4.mb-0 = t('course.show')
+    .row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+        .row-fluid
+            table.table.table-striped.table-bordered.table-condensed.course-table
+              thead
+                tr
+                  th.btn-inverse = t('course.code')
+                  - if @course.syllabus
+                    th.btn-inverse = t('course.combined_code')
+                    th.btn-inverse = t('syllabus.singular')
+              tbody
+                tr
+                  td = @course.code
+                  - if @course.syllabus
+                    td = @course.syllabus.code
+                    td = @course.syllabus.name
+        .row-fluid
+          .span12
+            hr/
+        .row-fluid
+          .span12.well
+            .tabbable.tabs-right
+              ul.nav.nav-tabs
+                li.active
+                  a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments"
+                    = print_count(@course.students.count, t('student.plural'))
+                li
+                  a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments" = t('assignment.plural')
+                li
+                  a#new-course-exam-link data-toggle="tab" href="#course-exams"
+                    = !@course.syllabus.nil? ? print_count(@course.syllabus.exams.count, t('exam.plural')) : t('exam.plural')
+              .tab-content
+                #course-enrollments.tab-pane.active
+                  = render :partial => "gaku/courses/enrollments/enrollments"
+                #course-assignments.tab-pane
+                  = render :partial => "gaku/courses/assignments/assignments"
+                #course-exams.tab-pane
+                  = render :partial => "gaku/courses/exams/exams"
+
+    .row-fluid
+      .span12.well
+        #course-notes
+          = render :partial => 'gaku/notes/notes'
+
+    .row-fluid
+      .span12.well
+        = link_to_edit_with_text [:edit, @course], :class => "span9 btn btn-warning edit-link", :remote => true
+        = link_to_back courses_path, :class => "span3 btn btn-danger"

@@ -1,0 +1,7 @@
+$('#admin-admission-methods-index tbody').append('<%= render_js_partial("admission_method", {:admission_method => @admission_method}) %>');
+
+$('#new-admin-admission-method').slideToggle();
+$('#new-admin-admission-method-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-admission-methods-count').html('<%= print_count(@admission_methods_count + 1, t("admission_methods.list")) %>');

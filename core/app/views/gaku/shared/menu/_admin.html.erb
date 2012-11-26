@@ -1,0 +1,54 @@
+<li class="dropdown" data-hook="admin_menu">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <%= t('menu.admin.admin') %>
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li data-hook="school_details"><%= link_to t('menu.admin.school_details'), admin_school_details_path %></li>
+    <li data-hook="schools"><%= link_to t('menu.admin.schools'), admin_schools_path %></li>
+
+    <li class="dropdown-submenu" data-hook="types_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.types.types') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="contact_types"><%= link_to t('menu.admin.types.contact'), admin_contact_types_path %></li>
+        <li data-hook="enrollment_status_types">
+          <%= link_to t('menu.admin.types.enrollment_status'), admin_enrollment_status_types_path %>
+        </li>
+        <li data-hook="commute_method_types">
+          <%= link_to t('menu.admin.types.commute_methods'), admin_commute_method_types_path %>
+        </li>
+      </ul>
+    </li>
+
+    <li class="dropdown-submenu" data-hook="presets_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.preset.plural') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="student_presets"><%= link_to t('menu.admin.preset.items.student'), students_admin_presets_path %></li>
+        <li data-hook="grading_presets"><%= link_to t('menu.admin.preset.items.grading'), grading_admin_presets_path %></li>
+        <li data-hook="locale_presets"><%= link_to t('menu.admin.preset.items.locale'), locale_admin_presets_path %></li>
+      </ul>
+    </li>
+
+    <li class="dropdown-submenu" data-hook="disposals_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.disposals.disposals') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="exam_disposals"><%= link_to t('menu.admin.disposals.exam'), exams_admin_disposals_path %></li>
+        <li data-hook="attachment_disposals">
+          <%= link_to t('menu.admin.disposals.attachment'), attachments_admin_disposals_path %>
+        </li>
+        <li data-hook="course_group_disposals">
+          <%= link_to t('menu.admin.disposals.course_group'), course_groups_admin_disposals_path %>
+        </li>
+      </ul>
+    </li>
+
+    <li class="dropdown-submenu" data-hook="system_tools_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.system.system_tools') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="student_presets"><%= link_to t('menu.admin.system.backup'), admin_system_tools_path %></li>
+      </ul>
+    </li>
+
+
+  </ul>
+</li>

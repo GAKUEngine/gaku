@@ -1,0 +1,24 @@
+table
+  tr
+    th = t('exam.name')
+    th = t('exam.course')
+    th = t('exam.problem_count')
+    th = t('exam.max_score')
+    th = t('exam.weight')
+    th = t('exam.data')
+    th
+    th
+    th
+  - @exams.each do |exam|
+    tr
+      td= exam.name
+      td= exam.course
+      td= exam.problem_count
+      td= exam.max_score
+      td= exam.weight
+      td= exam.data
+      td= link_to_show exam
+      td= link_to_edit [:edit, exam]
+      td= ajax_link_to_delete exam
+br/
+= link_to t('exam.new'), new_exam_path

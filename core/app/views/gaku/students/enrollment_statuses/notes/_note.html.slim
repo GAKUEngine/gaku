@@ -1,0 +1,5 @@
+-unless note.nil? or note.new_record? or !note
+	tr id="note-#{note.id}"
+    td =link_to note.title, [@student, @enrollment_status, note], :remote => true  
+    td
+			=ajax_link_to_delete [@student, @enrollment_status, note]

@@ -1,0 +1,4 @@
+/ Using: render 'shared/manage_buttons', :target => obj or [obj, obj], :id => 'exam_link' #edit- and delete- prefix will be added
+= link_to_show target, :id => "show-#{id}"
+= link_to_edit [:edit] + [target].flatten, :id => "edit-#{id}"
+= ajax_link_to_delete [target].flatten, :id => "delete-#{id}"

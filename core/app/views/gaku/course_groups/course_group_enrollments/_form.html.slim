@@ -1,0 +1,12 @@
+= form_for [@course_group, @course_group_enrollment], { :remote => true } do |f|
+  .row-fluid.mt-l
+    .span12.well
+
+      = f.label :course_code, t('course.code'), :class => "control-label"
+      = f.select :course_id, @courses.collect { |c| ["#{c.code}", c.id] }, {:prompt => t('course.choose')}, :class => "span12 validate[required]"
+      = f.hidden_field :course_group_id, :value => @course_group.id
+      .row-fluid
+        .span12
+          .span6
+            = submit_button t('course.save'), :id => 'submit-course-group-enrollment-button'
+          = link_to_cancel :id => "cancel-course-group-enrollment-link"

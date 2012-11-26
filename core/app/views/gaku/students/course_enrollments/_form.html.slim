@@ -1,0 +1,15 @@
+=form_for [@student, @course_enrollment], :remote => true do |course_enrollment_form|
+  b= t('course.new')
+  .row-fluid.mt-l
+    .span12.well
+      = render 'gaku/shared/form_fields/course_enrollment_form_fields', :course_enrollment_form => course_enrollment_form
+
+      = course_enrollment_form.hidden_field :student_id, :value => @student.id
+
+      .row-fluid style="margin-top:10px"
+        .span12
+          .span6
+            = submit_button t('course_enrollment.create'), :id => 'submit-student-course-enrollment-button'
+          = link_to_cancel :id => "cancel-student-course-enrollment-link"
+
+= javascript_include_tag 'gaku/students/course_enrollments'

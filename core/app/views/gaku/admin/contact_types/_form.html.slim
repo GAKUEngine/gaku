@@ -1,0 +1,12 @@
+= form_for [:admin, @contact_type], :remote => true do |contact_type_form|
+  - if contact_type_form.object.new_record?
+    b= t('contact_type.new')
+    .row-fluid.mt-l
+      .span12.well
+          = contact_type_form.label :name, t('contact_type.name')
+          = contact_type_form.text_field :name, :class => "span12"
+          .row-fluid
+            .span12
+              .span6
+                =submit_button t('contact_type.save'), :id => 'submit-admin-contact-type-button'
+              = link_to_cancel :id => 'cancel-admin-contact-type-link'

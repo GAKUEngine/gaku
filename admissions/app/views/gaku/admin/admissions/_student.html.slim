@@ -1,0 +1,8 @@
+tr id="student-#{student.id}"
+  = render 'gaku/admin/admissions/student_fields', :student => student
+  td
+    = form_tag change_student_state_admin_admissions_path, :remote => true, :id => "change-student-state-form" do
+      = select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states, :id, :name, state.id), :style=> "width:140px;"
+      = hidden_field_tag :student_id, student.id
+      = submit_tag "Save"
+    //= state.admission_phase.admission_phase_states.count

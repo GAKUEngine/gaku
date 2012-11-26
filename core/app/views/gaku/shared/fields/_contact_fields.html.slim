@@ -1,0 +1,5 @@
+td=target.last.contact_type.name if target.last.contact_type
+td=target.last.data
+td=target.last.details
+td
+  =t(:emergency) if target.last.is_emergency?

@@ -1,0 +1,10 @@
+$('#new-syllabus-exam').slideToggle();
+$('#new-syllabus-exam-link').show()
+$('#new-syllabus-exam form').each (function(){
+  this.reset();
+});
+
+$('#syllabus-exams-index tbody').append('<%= render_js_partial("gaku/syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
+$('.exams-count').html('<%= print_count(@count, t_exam_list) %>');
+$('.no-exam-msg').remove();
+showNotice("<%= render_flash %>");

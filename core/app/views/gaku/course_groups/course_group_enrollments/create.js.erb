@@ -1,0 +1,7 @@
+$("#new-course-group-enrollment-link").show();
+$("#new-course-group-enrollment").slideToggle();
+$('#course-group-enrollment-form-errors').html('');
+$('#course-group-enrollments-index tbody').append('<%= render_js_partial("course", {:enrollment => @course_group_enrollment}) %>');
+$('.course-group-enrollments-count').html('<%= print_count(@count+1, t_course_list) %>');
+
+showNotice("<%= render_flash %>");

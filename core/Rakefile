@@ -1,0 +1,30 @@
+require 'rubygems'
+require 'bundler'
+require 'rake'
+require 'rake/testtask'
+require 'rake/packagetask'
+require 'rubygems/package_task'
+require 'rspec/core/rake_task'
+require 'gaku/core/testing_support/common_rake'
+
+Bundler::GemHelper.install_tasks
+RSpec::Core::RakeTask.new
+
+spec = eval(File.read('gaku_core.gemspec'))
+Gem::PackageTask.new(spec) do |p|
+  p.gem_spec = spec
+end
+
+desc "Release to gemcutter"
+task :release do
+  version = File.read(File.expand_path("../../GAKU_ENGINE_VERSION", __FILE__)).strip
+  cmd = "cd pkg && gem push gaku_core-#{version}.gem"; puts cmd; system cmd
+end
+
+task :default => :spec
+
+desc "Generates a dummy app for testing"
+task :test_app do
+  ENV['LIB_NAME'] = 'gaku/core'
+  Rake::Task['common:test_app'].invoke
+end

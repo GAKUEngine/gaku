@@ -1,0 +1,18 @@
+=form_tag update_presets_admin_presets_path, :method => :put do
+  .row-fluid
+    .span12.well
+      = fields_for 'presets' do |students_gender|
+        = students_gender.label :students_gender, t('admin.preset.student.gender')
+        = students_gender.select :students_gender,  options_for_select([[t('gender.male'), true], [t('gender.female'),false]], :selected => @preset_hash[:students_gender]), :prompt => t('gender.choose')
+      = fields_for 'presets' do |address_country|
+        = address_country.label :address_country, t('admin.preset.student.country')
+        = address_country.select :address_country, options_for_select(Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]},:selected => @preset_hash[:address_country]), {:prompt => t('address.choose_country')}
+      = fields_for 'presets' do |address_state|
+        = address_state.label :address_state, t('admin.preset.student.state')
+        = address_state.text_field :address_state, :value => @preset_hash[:address_state]
+      = fields_for 'presets' do |address_city|
+        = address_city.label :address_city, t('admin.preset.student.city')
+        = address_city.text_field :address_city, :value => @preset_hash[:address_city]
+  .row-fluid
+    .span12.well
+      =submit_tag t('admin.preset.save'), :class => 'btn btn-primary'

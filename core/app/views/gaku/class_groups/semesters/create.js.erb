@@ -1,0 +1,11 @@
+showNotice("<%= render_flash %>");
+<%- if @semester.errors.any? %>
+	$('#new-class-group-semester-form-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>');
+<%- else %>
+  $('#class-group-semesters-index tbody').append('<%= render_js_partial("semester", {:semester => @semester}) %>');
+	$('#new-class-group-semester').slideToggle();
+	$('#new-class-group-semester-form-errors').html('');
+  $('#new-class-group-semester-link').show();
+  $('#class-group-semesters-tab-link').html("<%= print_count(@count+1, t_semester_plural) %>");
+  $('.class-group-semesters-count').html("<%= print_count(@count+1, t_semester_list) %>");
+<% end %>

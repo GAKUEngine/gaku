@@ -1,0 +1,18 @@
+= form_for [@notable, @note], :remote => true do |note_form|
+  - if note_form.object.new_record?
+    b= t('note.new')
+    .row-fluid.mt-l
+      .span12.well style="margin-bottom:20px"
+        = render 'gaku/shared/form_fields/note_form_fields', :note_form => note_form
+
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('note.save'), :id => "submit-" + @notable_resource + "-note-button"
+            .span6
+              = link_to_cancel :id => "cancel-" + @notable_resource + "-note-link"
+
+javascript:
+  window.notable_resource = '#{@notable_resource}';
+            
+= javascript_include_tag 'gaku/notes'

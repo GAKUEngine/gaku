@@ -1,0 +1,11 @@
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      .span12
+        h3= t('exam.show')
+    .row-fluid
+      .span12
+        hr/
+    #exam-show
+      =render 'gaku/exams/exam_show', :exam => @exam

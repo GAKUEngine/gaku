@@ -1,0 +1,25 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *
+
+ *= require_self
+ *= require gaku/scaffolds.css.scss
+ * require gaku/themes/gakuengine/gakuengine.css.scss
+ *= require gaku/themes/gakuengine/jquery-ui-1.8.18.custom.css
+ * require gaku/kendo/kendo.common.min
+ *= require gaku/kendo2012/kendo.common.min
+ *= require gaku/kendo2012/kendo.silver.min
+ * require gaku/kendo.gakuengine
+ *= require gaku/buhin.css.scss
+ *= require gaku/bootstrap
+ *= require gaku/bootstrap-responsive
+ *= require gaku/gakuengine.css.scss
+ *= require gaku/tbs_datepicker/css/datepicker
+ *= require gaku/jquery_validation_engine/validationEngine.jquery.css
+ * require chosen
+ *= require gaku/jquery.dataTables.css
+ *= require gaku/devise/sessions.css
+
+*/

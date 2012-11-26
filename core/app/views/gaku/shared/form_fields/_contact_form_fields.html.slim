@@ -1,0 +1,15 @@
+.row-fluid
+	=contact_form.label :is_primary, t('contact.primary')
+	=contact_form.check_box :is_primary
+.row-fluid
+	=contact_form.label :contact_type
+	=contact_form.select :contact_type_id, @contact_types.collect {|ct| [ct.name, ct.id]}, {:prompt => t('contact_type.choose')}, {:class => "validate[required]", "data-prompt-position" => "bottomRight:5"}
+.row-fluid
+	=contact_form.label :data
+	=contact_form.text_field :data, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
+.row-fluid
+	=contact_form.label :details
+	=contact_form.text_field :details
+.row-fluid
+	=contact_form.label :is_emergency, t('contact.emergency')
+	=contact_form.check_box :is_emergency

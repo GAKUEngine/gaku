@@ -1,0 +1,24 @@
+$('#new-exam-exam-portion').slideToggle();
+$('#new-exam-exam-portion form').each (function(){
+  this.reset();
+});
+showNotice("<%= render_flash %>");
+
+$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/show", {:exam_portion => @exam.exam_portions.last}) %>');
+
+$('.exam-exam-portions-count').html("<%= print_count(@portions_count+1, t_exam_portion_list) %>");
+
+<% if @exam.use_weighting? %>
+
+  //if no portion added yet
+  if($('.exam-portions-weight thead tr').length==0){
+    $('.exam-portions-weight thead').append('<tr></tr>');
+    $('.exam-portions-weight tbody').append('<tr></tr>');
+  }
+
+  $('.exam-portions-weight thead tr').append('<th class="btn-warning" data-id=<%= @exam.exam_portions.last.id%>> <%= @exam.exam_portions.last.name+ " " + t("exams.weight") %> </th>')
+  $('.exam-portions-weight tbody tr').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_weight_td", {:portion => @exam.exam_portions.last}) %>')
+  var total = $('#weight-total').text();
+  var totalFl = parseFloat(total)+ <%= @exam.exam_portions.last.weight.to_f %>;
+  $("#weight-total").html(totalFl);
+<% end %>

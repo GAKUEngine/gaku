@@ -1,0 +1,18 @@
+.row-fluid
+  .span1
+  .span10
+    .row-fluid
+      #new-course.hide
+        = render 'form'
+    .row-fluid
+      .pull-left
+        h4.h4-vm.courses-count
+          = print_count(@count, t('course.list'))
+      .pull-right
+        = ajax_link_to_new t('course.new'), new_course_path, :id => "new-course-link"
+    row-fluid
+      .span12
+        hr/
+    .row-fluid
+      .span12.well
+          =render 'gaku/courses/courses'

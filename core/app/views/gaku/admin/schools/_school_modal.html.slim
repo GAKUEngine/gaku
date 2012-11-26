@@ -1,0 +1,19 @@
+- model = @school || School.new
+- model_class = model.class
+#edit-school-modal.modal.hide wmode="opaque"
+  .modal-header
+    button.close type="button" data-dismiss="modal"
+      'x
+  .modal-body
+  = form_for([:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |school_form|
+
+      .modal-header
+        h3 = t('school.edit')
+      .modal-body
+        .row-fluid
+          #validation-errors
+        = render 'school_form_fields', :school_form => school_form
+        .row-fluid
+          .span9
+            =submit_button t('school.save'), :id => 'submit-admin-school-button', :class => 'btn btn-primary button span12'
+          = link_to_cancel :id => 'cancel-admin-school-link'

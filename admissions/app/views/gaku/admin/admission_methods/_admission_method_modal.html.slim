@@ -1,0 +1,19 @@
+- model = @admission_method || AdmissionMethod.new
+- model_class = model.class
+#edit-admission-method-modal.modal.hide wmode="opaque"
+
+  = form_for [:admin, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal'} do |admission_method_form| 
+
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" ×
+        h3 =t("admission_methods.edit")
+      .modal-body
+        .row-fluid
+          #validation-errors
+        .row-fluid
+          = admission_method_form.label :name, t("admission_methods.name")
+          = admission_method_form.text_field :name, :class => "span12"    
+        .row-fluid
+          .span9
+            =submit_button t('admission_methods.save'), :id => 'submit-admin-admission-method-button'
+          = link_to_cancel :id => 'cancel-admin-admission-method-link'

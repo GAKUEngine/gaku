@@ -1,0 +1,16 @@
+.row-fluid
+  table#syllabus-exams-index.index.table.table-condensed.table-striped.table-bordered
+    thead
+      tr
+        th.btn-inverse = t('exam.name')
+        th.btn-inverse = t('exam.description')
+        th.btn-inverse = t('exam.adjustments')
+        th.btn-inverse = t('exam.weight')
+        th.btn-inverse = t('exam.use_weighting')
+        th.btn-info style="width:94px" = t('manage')
+    tbody
+      - if @syllabus.exam_syllabuses.any?
+        = render :partial => 'gaku/syllabuses/exams/exam', :collection => @syllabus.exam_syllabuses, :as => :exam_syllabus
+      - else
+        .alert.alert-danger.no-exam-msg
+          = t('notice.no_resource_assign_first', :resource => t('exam.plural'))

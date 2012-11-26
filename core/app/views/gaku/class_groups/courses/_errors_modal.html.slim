@@ -1,0 +1,11 @@
+.modal.hide#errors-modal wmode="opaque"
+  - if errors.any?
+    .alert.alert-error
+      strong
+        = pluralize(errors.count, "error")
+        | prohibited this enrollment from being saved:
+      ul
+        - errors.full_messages.each do |msg|
+          li= msg
+
+    = link_to_cancel

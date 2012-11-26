@@ -1,0 +1,19 @@
+- if @syllabus.assignments.any?
+  #syllabus-assignments
+    b= t('assignment.count')
+    |:
+    #syllabus-assignments-count
+      = @syllabus.assignments.count
+    p
+      b= t('assignment.list')
+
+    table#syllabus-assignments-index
+      tbody
+        tr
+          th= t('assignment.name')
+          th= t'(assignment.description')
+          th= t('assignment.max_score')
+        = render :partial => 'syllabuses/assignments/assignment', :collection => @syllabus.assignments, :as => :assignment
+
+- else
+  p= t('notice.no_resource_assign_first', :resource => t('assignment.plural'))

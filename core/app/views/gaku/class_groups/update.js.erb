@@ -1,0 +1,14 @@
+$('#class-group-modal').modal('hide');
+$('#class-group-modal').remove();
+showNotice("<%= render_flash %>");
+
+
+
+var currentClassGroupGrade = $(".class-group-<%= @class_group.id %> .grade");
+currentClassGroupGrade.html("<%= @class_group.grade %>");
+
+var currentClassGroupName = $(".class-group-<%= @class_group.id %> .name");
+currentClassGroupName.html("<%= @class_group.name %>");
+
+var currentClassGroupHomeRoom = $(".class-group-<%= @class_group.id %> .homeroom");
+currentClassGroupHomeRoom.html("<%= @class_group.homeroom %>");

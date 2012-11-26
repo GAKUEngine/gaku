@@ -1,0 +1,22 @@
+#student-course-enrollments
+  .row-fluid
+    #new-student-course-enrollment.hide
+    .pull-left
+      h4.mt-xs.mb-0.student-course-enrollments-count
+        = print_count(@student.courses.count, t('course.list'))
+    .pull-right
+      = ajax_link_to_new t('course_enrollment.add'), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link"
+
+  .row-fluid
+    hr
+  .row-fluid
+    .span12
+      table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th
+            th = t('course.code')
+            th = t('course.options')
+        tbody
+          = render :partial => 'gaku/students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
+#new-student-course-enrollment-form

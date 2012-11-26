@@ -1,0 +1,6 @@
+.alert.alert-error
+	-if target.errors.any?
+		button class='close' data-dismiss='alert' ×
+		ul
+			-target.errors.full_messages.each do |message|
+				li =message

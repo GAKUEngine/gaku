@@ -1,0 +1,9 @@
+- unless assignment.nil? || assignment.new_record? || !assignment
+  tr
+    td= assignment.name
+    td= assignment.description
+    td= assignment.max_score
+    
+    td= link_to_show, [@syllabus, assignment]
+    td= link_to_edit [:edit, @syllabus, assignment]
+    td= ajax_link_to_delete [@syllabus, assignment]

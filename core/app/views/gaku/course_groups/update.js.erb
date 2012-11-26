@@ -1,0 +1,7 @@
+$('#course-group-<%= @course_group.id %>').html('<%= render_js_partial("gaku/course_groups/course_group", {:course_group => @course_group}) %>');
+$('#edit-course-group-modal').modal('hide');
+showNotice("<%= render_flash %>");
+
+
+var currentCourseGroupName = $(".course-group-<%= @course_group.id %> .name");
+currentCourseGroupName.html("<%= @course_group.name %>");

@@ -1,0 +1,22 @@
+// Place all the styles related to the students controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hide{
+  display: none;
+}
+
+th .current{
+	background-repeat:no-repeat;
+	background-position: right center;
+	padding-right:12px;
+}
+
+th .current.asc {
+	background-image: url('/assets/up_arrow.gif')
+
+}
+
+th .current.desc {
+	background-image: url('/assets/down_arrow.gif')
+}

@@ -1,0 +1,12 @@
+$('#student-addresses-index tbody').append('<%= render_js_partial("address", {:address => @student.addresses.last}) %>');
+
+<%- if @student.addresses.count == 1 %>
+	$('#student-addresses-index tbody tr td.primary_address a').first().addClass('btn-primary');
+<% end %>
+
+$('#new-student-address').slideToggle();
+$('#new-student-address-link').show();
+
+$('#student-addresses-tab-link').html('<%= print_count(@count+1, t_address_plural) %>');
+$('.student-addresses-count').html('<%= print_count(@count+1, t_address_list) %>');
+showNotice("<%= render_flash %>");
