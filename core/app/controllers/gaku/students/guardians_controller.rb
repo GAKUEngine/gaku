@@ -14,9 +14,9 @@ module Gaku
     def create
       super do |format|
         if @student.guardians << @guardian
-          format.js { render 'create' }  
+          format.js { render 'create' }
         end
-      end  
+      end
     end
 
     def new_contact
@@ -50,7 +50,7 @@ module Gaku
       @contact_types = ContactType.all
     end
 
-    def count 
+    def count
       @count = @student.guardians.count
     end
 

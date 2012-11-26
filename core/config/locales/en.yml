@@ -32,37 +32,6 @@ en:
     already_added: "%{resource} are already added!"
     not_selected: "No %{resource} selected!"
 
-  admin:
-    admin: "Admin"
-    administration: "Administration"
-    administrator: "Administrator"
-    school_details: 'School Details'
-    schools: "Schools"
-    disposals: 'Disposals'
-    types:
-      types: 'Types & Methods'
-      contact: "Contact Types"
-      enrollment_status: "Enrollment Status Types"
-      commute_methods: "Commute Methods"
-    admission_methods: "Admission Methods"
-    admission_periods: "Admission Periods"
-    preset:
-      items:
-        student: "Student Preset"
-        locale: "Locale Preset"
-        grading: "Grading Preset"
-      plural: "Presets"
-      singular: "Preset"
-      save: 'Save'
-      grading:
-        grading_method: 'Grading Method'
-        grading_scheme: 'Grading Scheme'
-      student:
-        gender: 'Gender'
-        country: 'Country'
-        state: 'State'
-        city: 'City'
-
   hello: "Hello world"
   comname: "GAKU-Engine"
   show: "Show"
@@ -142,7 +111,6 @@ en:
   teacher: "Instructor"
   are_you_sure: "Are you sure?"
 
-
   student:
     singular: "Student"
     plural: "Students"
@@ -165,11 +133,9 @@ en:
       csv: "Registration CSV"
       sheet: "Registration Sheet"
 
-
   enroll_to_class: "Enroll to class"
   schedule: "Schedule"
   num_enrolled: "Number Enrolled"
-
 
   syllabus:
     singular: "Syllabus"
@@ -213,9 +179,6 @@ en:
     list: 'Course Groups List'
     show: 'Course Group'
     course_group_recover: 'Course Group Recovered'
-
-  num_courses: "Number of courses"
-  add_course: "Add course"
 
   course_enrollment:
     singular: "Course Enrollment"
@@ -460,9 +423,11 @@ en:
 
   select: "Select"
   period: "Period"
+
   pictures:
     change: "Change picture"
     upload: "Upload"
+
   exam_portion:
     list: "Exam portions list"
     count: "Exam portions count"
@@ -498,3 +463,59 @@ en:
       gender: "gender"
       phone: "phone"
       email: "email"
+
+  menu:
+    student:
+      plural: "Students"
+    class_group:
+      management: "Class Management"
+      plural: "Class Groups"
+    course_group:
+      plural: "Course Groups"
+    course:
+      management: "Course Management"
+      plural: "Courses"
+    syllabus:
+      plural: "Syllabuses"
+    exam:
+      management: "Exam Management"
+      plural: "Exams"
+
+    admin:
+      disposals:
+        disposals: "Disposals"
+        exam: "Exam Disposals"
+        attachment: "Attachment Disposals"
+        course_group: "Course Group Disposals"
+      system:
+        system_tools: "System Tools"
+        backup: "Backup"
+
+      admin: "Admin"
+      administration: "Administration"
+      administrator: "Administrator"
+      school_details: 'School Details'
+      schools: "Schools"
+      types:
+        types: 'Types & Methods'
+        contact: "Contact Types"
+        enrollment_status: "Enrollment Status Types"
+        commute_methods: "Commute Methods"
+
+      preset:
+        items:
+          student: "Student Preset"
+          locale: "Locale Preset"
+          grading: "Grading Preset"
+        plural: "Presets"
+        singular: "Preset"
+        save: 'Save'
+        grading:
+          grading_method: 'Grading Method'
+          grading_scheme: 'Grading Scheme'
+        student:
+          gender: 'Gender'
+          country: 'Country'
+          state: 'State'
+          city: 'City'
+
