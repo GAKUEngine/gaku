@@ -8,12 +8,14 @@ module Gaku
       helper_method :sort_column, :sort_direction
 
       before_filter :load_before_index, :only => [:index, :change_admission_period, :change_admission_method]
-      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method]
+      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method, :create]
       before_filter :load_search_object
+      before_filter :select_vars, :only => [:new]
 
       def change_admission_period
         @admission_period = AdmissionPeriod.find(params[:admission_period])
         @admission_methods = @admission_period.admission_methods
+        @admission_method = @admission_period.admission_methods.first
       end
 
       def change_admission_method
@@ -33,9 +35,33 @@ module Gaku
       end
 
       def index
-        
+
         #raise @students.find_all { |h| h[:state_id] == 1 }.map { |i| i[:student] }.inspect
         #raise @students.inspect
+      end
+
+      def new
+        @admission = Admission.new
+        @student = @admission.build_student
+      end
+
+      def create
+        @admission = Admission.new(params[:admission])
+        #raise @admission.inspect
+        if @admission.save
+          @admission_method = @admission.admission_method
+          # TODO change the selected phase
+          admission_phase = @admission_method.admission_phases.first
+          # TODO change the selected phase state
+          admission_phase_state = admission_phase.admission_phase_states.first
+          @admission_phase_record = AdmissionPhaseRecord.create(
+                                                :admission_phase_id => admission_phase.id, 
+                                                :admission_phase_state_id => admission_phase_state.id,
+                                                :admission_id => @admission.id)
+          
+          render 'create'
+        
+        end
       end
 
       private
@@ -64,6 +90,21 @@ module Gaku
             }
           }
         end
+
+        def select_vars
+          @class_groups = get_class_groups
+          @class_group_id ||= params[:class_group_id]
+          @scholarship_statuses = get_scholarship_statuses
+        end
+
+        def get_class_groups
+          ClassGroup.all
+        end
+
+        def get_scholarship_statuses
+          ScholarshipStatus.all
+        end
+
 
         def sort_column
           Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"

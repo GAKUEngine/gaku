@@ -7,6 +7,9 @@ en:
   admissions:
     please_select_period: "Please Select Admission Period"
     please_select_method: "Please Select Admission Method"
+    candidates:
+      new: "New Applicant"
+      exciting: "Exciting Applicant"
 
   admission_methods:
     singular: "Admission Method"
