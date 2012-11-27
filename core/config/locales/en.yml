@@ -33,7 +33,7 @@ en:
     not_selected: "No %{resource} selected!"
 
   hello: "Hello world"
-  comname: "GAKU-Engine"
+  comname: "GAKU Engine"
   show: "Show"
   edit: "Edit"
   destroy: "Destroy"
@@ -194,6 +194,15 @@ en:
   assignment:
     singular: "Assignment"
     plural: "Assignments"
+    new: "New Assignment"
+    add: "Add Assignment"
+    list: "Assignments"
+    results: "Assignment Results"
+    view: "View Assignments"
+    count: "Assignments Count"
+    name: "Assignment name"
+    description: "Description"
+    max_score: "Maximum score"
 
   class_group_management: "Class Management"
 
@@ -242,23 +251,11 @@ en:
     max_points: "Maximum Score"
     max: "Max"
     points: "Points"
-    how_grade: "How to grade"
+    how_grade: "Grading Method"
     deviation: "Deviation"
     percent: "Percent"
     rank: "Rank/Grade"
     total: "Total"
-
-  assignment:
-    plural: "Assignments"
-    new: "New Assignment"
-    add: "Add Assignment"
-    list: "Assignments"
-    results: "Assignment Results"
-    view: "View Assignments"
-    count: "Assignments Count"
-    name: "Assignment name"
-    description: "Description"
-    max_score: "Maximum score"
 
   exam:
     plural: "Exams"
@@ -322,7 +319,6 @@ en:
     save: "Save Guardian"
     edit: "Edit guardian"
     name: "Name"
-    relationship: "Relationship"
 
   contact_type:
     singular: "Contact Type"
@@ -445,6 +441,7 @@ en:
     edit: "Edit Exam Portion"
     show: "Show Exam Portion"
     attached_file_count: 'Attached file count'
+
   options: "Options"
 
   import_format: "Import Format"

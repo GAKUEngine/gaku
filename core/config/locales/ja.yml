@@ -1,0 +1,518 @@
+ja:
+  language: 言語
+  languages:
+    en: English[英語]
+    ja: 日本語
+
+  #inherited_resources
+  #https://github.com/plataformatec/responders/blob/master/lib/responders/flash_responder.rb
+  flash:
+    actions:
+      create:
+        notice: ! '%{resource_name}は正常に作成されました'
+      destroy:
+        alert: ! '%{resource_name}は消去出来ませんでした'
+        notice: ! '%{resource_name}は正常に消去されました'
+      update:
+        notice: ! '%{resource_name}は正常に更新されました'
+
+  notice:
+    added: ! '%{resource}は正常に追加されました'
+    created: ! '%{resource}は正常に作成されました'
+    destroyed: ! '%{resource}は正常に消去されました'
+    enrolled: ! '%{resource}は%{to}に正常に追加されました'
+    no_resource_assign_first: ! '%{resource}はありません、一つ登録してください'
+    recovered: ! '%{resource}は正常に復元されました'
+    removed: ! '%{resource}は正常に削除されました'
+    updated: ! '%{resource}は正常に更新されました'
+    uploaded: ! '%{resource}は正常にアップロードされました'
+
+  alert:
+    already_added: ! '%{resource}が既に登録されています!'
+    empty: ! '%{resource}が空です!'
+    not_selected: ! '%{resource}が未選択です!'
+
+  hello: ハローワールド
+  comname: 学園陣
+  show: 照会
+  edit: 編集
+  destroy: 消去
+  delete: 削除
+  back: 戻る
+  cancel: キャンセル
+  add: 追加
+  default: デフェルト
+  birth_date: 生年月日
+  title: タイトル
+  required: 必須
+  manage: 管理する
+  confirm_delete: 本当に削除しますか?
+  panel: パネル
+  name: 名前
+  surname: 姓
+  given_name: 名
+  phonetic_reading: ﾌﾘｶﾞﾅ
+  surname_reading: フリガナ（姓）
+  name_reading: フリガナ（名）
+  none: 未登録
+  date_placeholder: YYYY-MM-DD
+  search: 検索
+  hide: 非表示
+  description: 説明
+  confirm: これで宜しいですか？
+  history: 履歴
+  revert: 元に戻す
+
+  attachment:
+    asset_type: アセットの種類
+    assets: アセット
+    create: アセットを登録
+    description: アセット詳細
+    file_name: ファイル名
+    file_size: ファイルサイズ
+    file_type: ファイル種類
+    name: 名称
+    new: アセットの登録
+
+  address:
+    add: 住所の追加
+    address1: 住所
+    address2: 住所(ビル・マンション・部屋など)
+    choose_country: 国を選択して下さい
+    city: 市
+    count: 登録されている住所の数
+    country: 国
+    edit: 住所を編集
+    list: 住所一覧
+    new: 住所を登録する
+    past: 過去の住所として登録しますか?
+    plural: 住所
+    prefecture: 県・州・地方
+    primary: 主たる住所
+    save: 住所を保存
+    search: 住所検索
+    singular: 住所
+    state: 県・州・地方
+    title: 住所のタイトル
+    zipcode: 郵便番号
+
+  phone: 電話番号
+  email: メールアドレス
+  admitted: 入学日
+  graduated: 卒業日
+  scholarship_status: 諸学金状況 
+  birth_between: の間に生まれた
+  birth_and: と
+
+  commute_method: 通学手段
+  picture: 画像
+  birth: 生年月日
+  teacher: 教師
+  are_you_sure: 本当に実効しますか?
+
+  student:
+    add: 生徒を追加
+    birth_and: と
+    birth_between: から
+    chosen_students: 生徒を選択
+    class_group_enrollment: クラスに生徒を追加
+    commute_method: 通勤手段
+    create: 生徒を作成
+    edit: 編集
+    enroll: 生徒を追加
+    export: 生徒を書き出し
+    import: 生徒を読み込み
+    list: 生徒一覧
+    name: 生徒名
+    new: 生徒を登録
+    plural: 生徒
+    registration:
+      csv: CSVで生徒を登録
+      sheet: 出席番号を登録
+    show: 生徒照会
+    singular: 生徒
+
+  enroll_to_class: クラスに登録
+  schedule: 定刻
+  num_enrolled: 在籍人数
+
+  syllabus:
+    code: 科目コード
+    credits: 単位
+    description: 授業の説明
+    edit: 科目を編集
+    list: 科目一覧
+    name: 授業名
+    name_sample: 【例：数学A】
+    new: 科目を登録
+    plural: 科目
+    save: 科目を保存
+    show: 科目照会
+    singular: 科目
+
+  course:
+    add: 授業を追加
+    choose: 授業選択
+    code: 授業コード
+    code_sample: 【例：国語2020】
+    combined_code: コードを結合
+    count: 授業数
+    edit: 授業を編集
+    list: 授業一覧
+    management: 授業管理
+    name: 授業名
+    new: 授業を登録
+    options: 授業オプション
+    plural: 授業
+    save: 授業を保存
+    show: 授業照会
+    singular: 授業
+
+  course_group:
+    course_group_recover: 授業グループを復元
+    edit: 授業グループを編集
+    list: コース一覧
+    name: グループ名
+    new: 新しい授業グループ
+    plural: 授業グループ
+    save: 授業グループを保存
+    show: 授業グループ照会
+    singular: 授業グループ
+
+  course_enrollment:
+    add: 授業に生徒を追加
+    create: 生徒を追加
+    list: 在籍者一覧
+    plural: 授業在籍
+    singular: 授業在籍
+
+  enrollment:
+    plural: 在籍
+    singular: 在籍
+
+  assignment:
+    add: 課題を追加
+    count: 課題総数
+    description: 課題の説明
+    list: 課題一覧
+    max_score: 最大点数
+    name: 課題名称
+    new: 課題の登録
+    singular: 課題
+    plural: 課題
+    results: 課題結果
+    view: 課題詳細を参照
+
+  class_group_management: クラス管理
+
+  class_group:
+    add: クラスを追加
+    choose: クラス選択
+    edit: クラスを編集
+    enroll: クラスに入籍
+    grade: 学年
+    homeroom: ホームルーム
+    list: クラス一覧
+    name: クラス名
+    new: クラスを登録
+    none: 無し
+    plural: クラス
+    save: クラスを保存
+    show: クラス照会
+    singular: クラス
+
+  class_group_enrollment:
+    count: 在籍数
+    create: 在籍クラスを作成
+    current: 現在の在籍
+    list: クラス名簿
+    new: 新しいクラス在籍
+    seat_number: 出席番号
+
+  commute_method_type:
+    add: 通学手段を追加
+    edit: 通学手段を編集
+    list: 通学手段一覧
+    name: 名称
+    new: 通学手段を登録
+    plural: 通学手段種別
+    save: 通学手段種別を保存
+    singular: 通学手段種別
+
+  grade:
+    all_exams: 全試験
+    average_points: 平均点
+    average_score: 平均点
+    deviation: 偏差値
+    grading: 採点
+    how_grade: 採点方法
+    max: 最高点数
+    max_points: 最高点数
+    percent: ％
+    points: 点
+    rank: １０段階評価 / ５段階評価
+    total: 合計
+    total_points: 合計点数
+    weighting: 加重率
+    weighting_portion: 試験要素加重率
+
+  exam:
+    add: 試験を追加
+    add_existing: 既存の試験を追加
+    add_portion: 試験要素を追加
+    adjustments: 調整
+    choose: 試験を選択
+    choose_schedule: 日程を選択
+    count: 試験数
+    description: 試験の説明
+    edit: 試験を編集
+    grading_method: 採点方法
+    list: 試験一覧
+    name: 試験名
+    new: 試験を登録
+    new_exam: 試験コンテンツを登録
+    options: 試験オプション
+    plural: 試験
+    save: 試験を保存
+    select: 試験を選択
+    show: 試験照会
+    singular: 試験
+    total_weight: 合計加重率
+    use_weighting: 加重率を使用
+    view: 試験を照会
+    weight: 加重率
+
+  config:
+    close: 閉じる
+    help:
+      language: 使用する言語を選択してください。
+    label: 設定
+    save: 変更を保存
+
+  and: と
+  submit: 登録する
+
+  user:
+    info: ユーザー情報
+
+  gender:
+    choose: 性別を選択
+    female: 女性
+    label: 性別
+    male: 男性
+    unknown: 未登録
+
+  profile: プロフィール
+  profiles:
+    new: 新規プロフィール登録
+    save: プロフィールを保存
+
+  guardian:
+    singular: 保護者
+    plural: 保護者
+    new: 保護者を登録
+    guardians: 保護者
+    list: 保護者一覧
+    relationship: 続柄
+    add: 保護者を追加
+    save: 保護者を保存
+    edit: 保護者を編集
+    name: 保護者氏名
+
+  contact_type:
+    add: 連絡先種別を追加
+    choose: 連絡先種別を選択して下さい
+    edit: 連絡手段を編集
+    list: 連絡先種別一覧
+    name: 連絡先名
+    new: 連絡先種別を登録
+    plural: 連絡先種別
+    save: 連絡先種別を保存
+    singular: 連絡先種別
+
+  contact:
+    add: 連絡先を追加
+    contact_type: 連絡先種別
+    create: 連絡先を作成
+    data: 連絡先情報
+    details: 連絡先詳細
+    edit: 連絡先を編集
+    emergency: 緊急連絡先
+    list: 連絡先一覧
+    new: 連絡先を登録
+    plural: 連絡先
+    primary: 主要連絡先
+    save: 連絡先を保存
+    singular: 連絡先
+
+  school:
+    add: 学校を追加
+    campuses: キャンパス
+    code: 学校コード
+    description: 学校の説明
+    edit: 学校を編集
+    edit_master: 主要学校を編集
+    founded: 設立日
+    grades: 学年設定
+    list: 学校一覧
+    master: 主要学校
+    name: 学校名
+    new: 学校を登録
+    plural: 学校
+    primary: 主要学校
+    principal: 学長
+    save: 学校を保存
+    singular: 学校
+    slogan: 校訓
+    vice_principal: 教頭
+
+  campus:
+    add: キャンパスの追加
+    address: キャンパスの住所
+    contacs: キャンパスの連絡先
+    edit: キャンパス情報の編集
+    list: キャンパス一覧
+    name: キャンパス名
+    new: キャンパスを登録
+    plural: キャンパス
+    primary: メイン・キャンパス
+    save: キャンパス情報を保存する
+    singular: キャンパス
+
+  enrollment_status_type:
+    active: 在籍中
+    add: 在籍状態を追加
+    edit: 在籍状態を編集
+    list: 在籍状態一覧
+    name: 状態名
+    new: 在籍状態を登録
+    plural: 在籍状態
+    save: 在籍状態を保存
+    singular: 在籍状態
+
+  note:
+    add: 備考を追加
+    content: 本文
+    delete: 備考を削除
+    edit: 備考を編集
+    list: 備考一覧
+    new: 備考を登録
+    plural: 備考
+    save: 備考を保存
+    singular: 備考
+    title: 備考タイトル
+
+  class: クラス
+
+  semester:
+    add: 学期を追加
+    edit: 学期を編集
+    ending: 学期終了日
+    ending_after_starting: 開始後に終了して下さい
+    list: 学期一覧
+    number: 学期番号
+    plural: 学期
+    save: 学期を保存
+    starting: 開始
+    uniqueness: 既に追加された学期です
+
+  select: 選択
+  period: 期間
+
+  pictures:
+    change: 写真を変更
+    upload: 写真をアップロード
+
+  exam_portion:
+    adjustments: 調整
+    attached_file_count: 添付ファイル数
+    count: 試験要素数
+    description: 説明
+    edit: 試験要素を編集
+    execution_date: 実施日
+    is_master: マスター
+    list: 試験要素一覧
+    master: 試験要素マスター
+    max_score: 最高点数
+    name: 試験要素名
+    problem_count: 問題数
+    save: 試験要素を保存
+    show: 試験要素照会
+    use_weighting: 加重率を使用
+    weight: 加重率
+
+  options: オプション
+
+  import_format: インポート形式
+  helpers:
+    links:
+      cancel: キャンセル
+
+  csv:
+    export: CSVで書き出し
+    fields:
+      email: Eメール
+      gender: 性別
+      name: 名
+      name_reading: フリガナ（名）
+      phone: 電話
+      surname: 姓
+      surname_reading: フリガナ（姓）
+    import: CSVを読み込む
+
+  menu:
+    admin:
+      admin: 管理者
+      administration: 管理
+      administrator: 管理者
+      disposals:
+        attachment: 添付ファイルを処分
+        course_group: 授業グループを処分
+        disposals: 処分
+        exam: 試験を処分する
+      preset:
+        grading:
+          grading_method: 採点方法
+          grading_scheme: 採点方式
+        items:
+          grading: 採点プリセット
+          locale: 言語プリセット
+          student: 生徒プリセット
+        plural: プリセット
+        save: プリセットを保存
+        singular: プリセット
+        student:
+          city: 市区
+          country: 国
+          gender: 性別
+          state: 都道府県
+      school_details: 学校詳細
+      schools: 学校
+      system:
+        backup: バックアップ
+        system_tools: システムツール
+      types:
+        commute_methods: 通学手段
+        contact: 連絡先種別
+        enrollment_status: 在籍状態
+        types: 種別と方法
+    class_group:
+      management: クラス管理
+      plural: クラス
+    course:
+      management: 授業管理
+      plural: 授業
+    course_group:
+      plural: 授業グループ
+    exam:
+      management: 試験管理
+      plural: 試験
+    student:
+      plural: 生徒
+    syllabus:
+      plural: 科目
+
+  assignments:
+    description: 課題の説明
+  scholarship_status: 奨学生
+
