@@ -27,7 +27,7 @@
                     </div>
                   </form>
                   <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>">
-                    <i class="icon-ok"></i>
+                    <i class="icon-chair"></i>
                   </div>
                 </td>
               <% end %>
