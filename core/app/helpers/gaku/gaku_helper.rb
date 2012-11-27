@@ -5,8 +5,17 @@ module Gaku
     include SortHelper
     include TranslationsHelper
 
+    def present(object, klass = nil)
+      klass ||= "#{object.class}Presenter".constantize
+      puts klass
+      presenter = klass.new(object, self)
+      yield presenter if block_given?
+      presenter
+    end
+
+
     def required_field
-      ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe 
+      ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe
     end
 
     def print_count(count, text)
@@ -15,9 +24,9 @@ module Gaku
 
     def render_js_partial(partial, locals = {})
       unless locals == {}
-        escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim], :locals => locals) 
+        escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim], :locals => locals)
       else
-        escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim]) 
+        escape_javascript(render :partial => partial, :formats => [:html], :handlers => [:erb, :slim])
       end
     end
 
@@ -38,8 +47,8 @@ module Gaku
         when :notice then "alert alert-info"
         when :success then "alert alert-success"
         when :error then "alert alert-error"
-        when :alert then "alert alert-error" 
-      end 
+        when :alert then "alert alert-error"
+      end
     end
 
     def render_flash
@@ -47,7 +56,7 @@ module Gaku
     end
 
     def title(text)
-      content_for(:title) do 
+      content_for(:title) do
         text
       end
     end
