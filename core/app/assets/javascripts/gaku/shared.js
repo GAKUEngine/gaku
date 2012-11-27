@@ -12,3 +12,4 @@
 //= require jquery_validation_engine/jquery.validationEngine
 //= require jquery_validation_engine/languages/jquery.validationEngine-en
 //= require jquery.dataTables
+
