@@ -60,6 +60,13 @@ module Gaku
           xml_http_request(:post, action, parameters, session, flash)
         end
 
+        def gaku_xhr_put(action, parameters = nil, session = nil, flash = nil)
+          parameters ||= {}
+          parameters.reverse_merge!(:format => :js)
+          parameters.merge!(:use_route => :gaku)
+          xml_http_request(:put, action, parameters, session, flash)
+        end
+        
         private
 
           def process_gaku_action(action, parameters = nil, session = nil, flash = nil, method = "GET")
