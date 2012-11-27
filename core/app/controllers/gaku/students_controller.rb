@@ -6,20 +6,23 @@ module Gaku
     inherit_resources
     respond_to :js, :html
 
-    before_filter :load_before_index, :only => :index
-    before_filter :load_before_show,  :only => :show
-    before_filter :class_groups,      :only => [:new, :edit]
-    before_filter :student,           :only => [:edit, :update, :destroy]
-    before_filter :count,             :only => [:create, :destroy]
+    before_filter :select_vars, :only => [:index,:new, :edit]
+    before_filter :before_show,  :only => :show
+    #before_filter :class_groups,      :only => [:new, :edit]
+    #before_filter :student,           :only => [:edit, :update, :destroy]
+    before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
 
     def index
       @search = Student.search(params[:q])
-      @students = @search.result(:distinct => true)#.includes([:addresses, :class_groups, :class_group_enrollments]).all
+      @students = @search.result(:distinct => true)#.includes(:class_group_enrollments).all
       if params[:action] == "get_csv_template"
         get_csv_template
         return
       end
+
+      @student = Student.new
+      @courses = get_courses
       @enrolled_students = params[:enrolled_students]
 
       respond_to do |format|
@@ -30,9 +33,10 @@ module Gaku
     end
 
     def update
+      @student = get_student
       if @student.update_attributes(params[:student])
         #flash.now[:notice] = t('notice.updated', :resource => resource_name)
-        respond_with(student) do |format|
+        respond_with(@student) do |format|
           unless params[:student].nil?
             if !params[:student][:addresses_attributes].nil?
               format.js { render 'students/addresses/create' }
@@ -55,12 +59,12 @@ module Gaku
     end
 
     def destroy
-      if @student.destroy #&& !request.xhr?
-        #flash[:notice] = t('notice.removed', :resource => resource_name)
-        respond_with(@student) do |format|
-          format.html { redirect_to students_path }
-        end
-      end
+      destroy! { students_path }
+      #if @student.destroy
+      #  respond_with(@student) do |format|
+      #    format.html { redirect_to students_path }
+      #  end
+      #end
     end
 
     def autocomplete_search
@@ -81,6 +85,12 @@ module Gaku
 
     private
 
+      def select_vars
+        @class_groups = get_class_groups
+        @class_group_id ||= params[:class_group_id]
+        @scholarship_statuses = get_scholarship_statuses
+      end
+
       def export_csv_index(students, field_order = ["surname", "name"])
         filename = "Students.csv"
         content = CSV.generate do |csv|
@@ -100,31 +110,39 @@ module Gaku
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
       end
 
-      def load_before_index
-        @student = Student.new
-        @class_groups = ClassGroup.all
-        @courses = Course.all
-      end
-
-      def load_before_show
-        @new_commute_method = CommuteMethod.new
-        @new_contact = Contact.new
+      def before_show
+        #@new_commute_method = CommuteMethod.new
+        #@new_contact = Contact.new
         @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
         @notable = Student.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+
+        Student.includes([{:contacts => :contact_type}]).find(params[:id])
       end
 
-      def class_groups
-        @class_groups = ClassGroup.all
-        @class_group_id ||= params[:class_group_id]
-      end
+      #def class_groups
+      #  @class_groups = ClassGroup.all
+      #  @class_group_id ||= params[:class_group_id]
+      #end
 
-      def student
-        @student = Student.find(params[:id])
+      def get_student
+        Student.find(params[:id])
       end
 
       def count
         @count = Student.count
+      end
+
+      def get_class_groups
+        ClassGroup.all
+      end
+
+      def get_courses
+        Course.all
+      end
+
+      def get_scholarship_statuses
+        ScholarshipStatus.all
       end
 
       def sort_column

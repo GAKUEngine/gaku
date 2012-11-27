@@ -1,37 +1,37 @@
 <ul class="nav" id="menu">
-  <li><%= link_to t("menu.students"), students_path %></li>
+  <li><%= link_to t('menu.student.plural'), students_path %></li>
 
   <li class="dropdown" data-hook="class_groups_menu">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t("class_group_management") %>
+      <%= t('menu.class_group.management') %>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-      <li data-hook="class_groups"><%= link_to t("class_group.list"), class_groups_path %></li>
+      <li data-hook="class_groups"><%= link_to t('menu.class_group.plural'), class_groups_path %></li>
     </ul>
   </li>
 
 
   <li class="dropdown" data-hook="courses_menu">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t("course.management") %>
+      <%= t('menu.course.management') %>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-      <li data-hook="syllabuses"><%= link_to t("syllabus.plural"), syllabuses_path %></li>
-      <li data-hook="courses"><%= link_to t("course.plural"), courses_path %></li>
-      <li data-hook="course_groups"><%= link_to t('course_group.plural'), course_groups_path %></li>
+      <li data-hook="syllabuses"><%= link_to t('menu.syllabus.plural'), syllabuses_path %></li>
+      <li data-hook="courses"><%= link_to t('menu.course.plural'), courses_path %></li>
+      <li data-hook="course_groups"><%= link_to t('menu.course_group.plural'), course_groups_path %></li>
     </ul>
   </li>
 
 
   <li class="dropdown" data-hook="exams_menu">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t("menu.exams") %>
+      <%= t('menu.exam.management') %>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-      <li data-hook="exams"><%= link_to t('exam.plural'), exams_path %></li>
+      <li data-hook="exams"><%= link_to t('menu.exam.plural'), exams_path %></li>
     </ul>
   </li>
 

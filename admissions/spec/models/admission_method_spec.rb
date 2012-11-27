@@ -8,6 +8,6 @@ describe Gaku::AdmissionMethod do
     end
   	it { should have_many :admission_phases }
   	it { should have_many :admissions }
-    it { should belong_to :admission_period }
+    it { should have_many :admission_periods }
   end
 end

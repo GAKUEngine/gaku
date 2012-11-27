@@ -103,11 +103,20 @@ describe 'Admin Admission Method Phases' do
           end
           click '#submit-admin-admission-method-admission-phase-button'
           wait_until_invisible modal
+          admission_phase_state.reload
+          admission_phase_state.name.should eq 'Rejected'
+          admission_phase_state.can_progress.should eq false
+          admission_phase_state.can_admit.should eq false 
+          admission_phase_state.auto_progress.should eq false
+          
+          flash_updated?
 
-          #check edited values
-          subject { admission_phase_state }
-          its(:name) { should eq 'Rejected' }
-          its(:can_progress) { should eq false }
+          click_on 'Admission Phase States list'
+          wait_for_ajax
+          within (table) do 
+            page.should have_content 'Rejected'
+            page.should_not have_content 'Accepted'
+          end
         end 
       end
       context '#add', :js => true do
@@ -148,15 +157,17 @@ describe 'Admin Admission Method Phases' do
 
       it 'edits' do
         fill_in 'admission_phase_name', :with => 'Interview'
+        fill_in 'admission_phase_order', :with => 2
+        fill_in 'admission_phase_phase_handler', :with => 3
         click submit
-        #TODO check  
-        #name
-        #order
-        #handler
-      
         wait_until_invisible modal
-        page.should have_content 'Interview'
-        page.should_not have_content 'Exam'
+
+        within("#admission-method-admission-phase-#{admission_phase.id}") do
+          page.should have_content 'Interview'
+          page.should_not have_content 'Exam'
+          page.should have_content 2
+          page.should have_content 3
+        end
         flash_updated?
       end
 

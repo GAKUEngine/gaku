@@ -1,34 +1,44 @@
 module Gaku
   class Students::AddressesController < GakuController
     inherit_resources
-    actions :index, :show, :new, :update, :edit
+    belongs_to :student, :parent_class => Gaku::Student
+
+    #actions :index, :show, :new, :update, :edit
     respond_to :js, :html
-    
-    before_filter :student
+
+    before_filter :student, :only => [:destroy, :make_primary]
     before_filter :address, :only => [:destroy, :make_primary]
     before_filter :count, :only => [:create, :destroy]
 
     def create
-      super do |format|
-        if @address.save
-          if @student.addresses << @address
-            format.js { render 'create' }  
-          end
-        else
-          format.js  { render 'validation_errors' }
-        end
-      end  
+      create! do |success, failure|
+        failure.js { render 'validation_errors' }
+      end
     end
-    
+      #super do |format|
+      #  if @address.save
+      #    if @student.addresses << @address
+      #      format.js { render 'create' }
+      #    end
+      #  else
+      #    format.js  { render 'validation_errors' }
+      #  end
+      #end
+    #end
+
     def update
-      super do |format|
-        @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
-        if @address.save
-          format.js { render 'update' }
-        else
-          format.js { render 'validation_errors' }
-        end  
-      end  
+      @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
+      update! do |success, failure|
+        failure.js { render 'validation_errors' }
+      end
+      #super do |format|
+      #  @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
+      #  if @address.save
+      #    format.js { render 'update' }
+      #  else
+      #    format.js { render 'validation_errors' }
+      #  end
+      #end
     end
 
     def destroy
@@ -53,7 +63,7 @@ module Gaku
     end
 
     private
-    
+
     def address
       @address = Address.find(params[:id])
     end
