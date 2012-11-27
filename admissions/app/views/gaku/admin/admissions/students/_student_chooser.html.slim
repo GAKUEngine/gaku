@@ -1,0 +1,33 @@
+=render 'gaku/students/search/form'
+
+.row-fluid.hide#students-checked-div
+  .span6.well
+    h4.pull-left = t("student.chosen_students")
+    h4.chosen-count.pull-left
+    .table-action.show-chosen-table.pull-right = link_to t(:show),nil
+    .table-action.hide-chosen-table.pull-right.hide = link_to t(:hide),nil
+    table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
+      thead
+        tr
+          th.btn-inverse = t("surname")
+          th.btn-inverse = t("name")
+      tbody#students-checked
+    #chosen-actions.hide
+      -if !@admission.nil?
+        = form_tag( create_multiple_admin_admissions_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+          = hidden_field_tag :admission_period_id, params[:admission_period_id]
+          = hidden_field_tag :admission_method_id, params[:admission_method_id]
+          h4 = t("admissions.create_multiple")
+          = submit_tag t('admissions.create'), :class => 'btn btn-primary'
+
+        
+.row-fluid
+  .span12.well
+    #students-index-div
+      =render 'gaku/students/students'
+= javascript_include_tag "gaku/student_chooser"
+
+
+javascript:
+  $(".class_group-select").combobox();
+
