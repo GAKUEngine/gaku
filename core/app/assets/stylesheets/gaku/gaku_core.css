@@ -15,7 +15,7 @@
  *= require gaku/buhin.css.scss
  *= require gaku/bootstrap
  *= require gaku/bootstrap-responsive
- *= require gaku/gakuengine.css.scss
+ *= require gaku/shared.css.scss
  *= require gaku/tbs_datepicker/css/datepicker
  *= require gaku/jquery_validation_engine/validationEngine.jquery.css
  * require chosen
