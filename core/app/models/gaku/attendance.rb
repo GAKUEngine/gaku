@@ -17,5 +17,6 @@ module Gaku
 
 		belongs_to :attendancable, :polymorphic => true
 		belongs_to :student
+		belongs_to :attendance_type
 	end
 end
