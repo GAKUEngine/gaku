@@ -1,2 +1,5 @@
-= form_tag change_admission_method_admin_admissions_path, :remote => true, :id => "change-admission-method-form" do
-  = select_tag :admission_method, options_from_collection_for_select(admission_methods, 'id', 'name', admission_methods.first.try(:id)), :onchange => "$('#change-admission-method-form').submit()", :class => "span12"
+- if admission_methods.any?
+  = form_tag change_admission_method_admin_admissions_path, :remote => true, :id => "change-admission-method-form" do
+    = select_tag :admission_method, options_from_collection_for_select(admission_methods, 'id', 'name', admission_methods.first.try(:id)), :onchange => "$('#change-admission-method-form').submit()", :class => "span12"
+- else
+  No methods available for this period.
