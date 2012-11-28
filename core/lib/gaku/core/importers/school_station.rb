@@ -22,18 +22,32 @@ module Gaku
             
               idx = self.class.get_default_zaikou_index()
 
+              #定数
+              @japanID = Country.where(:numcode => 392).first.id
+              @phoneContactType = Gaku::ContactType.where(:name => "Phone").first
+              
+
               sheet.each do |row|
                 unless book.worksheet('CAMPUS_ZAIKOTBL').first == row
                   if row[idx[:name]].nil?
                     next
                   end
 
+                  student_foreign_id_number = nil
+                  if !row[idx[:foreignIdNumber]].nil?
+                    student_foreign_id_number = row[idx[:foreignIdNumber]].to_i.to_s
+                  end
+
+                  if Gaku::Student.exists?(:student_foreign_id_number => student_foreign_id_number)
+                    next
+                  end
+
                   @record_count += 1
 
-                  nameParts = row[idx[:name]].to_s().split("　")
+                  nameParts = row[idx[:name]].to_s().sub("　", " ").split(" ")
                   surname = nameParts.first
                   name = nameParts.last
-                  nameReadingParts = row[idx[:nameReading]].to_s().split(" ")
+                  nameReadingParts = row[idx[:nameReading]].to_s().sub("　", " ").split(" ")
                   surname_reading = nameReadingParts.first
                   name_reading = nameReadingParts.last
                   birth_date = nil
@@ -56,11 +70,6 @@ module Gaku
                   phone = nil
                   if !row[idx[:phone]].nil?
                     phone = row[idx[:phone]]
-                  end
-
-                  student_foreign_id_number = nil
-                  if !row[idx[:foreignIdNumber]].nil?
-                    student_foreign_id_number = row[idx[:foreignIdNumber]]
                   end
 
                   # check for existing
@@ -102,8 +111,29 @@ module Gaku
                   end
 
                   if !city.nil? && !address1.nil?
+                  zipcode = nil
+                  if !row[idx[:zipcode]].nil?
+                    zipcode = row[idx[:zipcode]]
+                  end
+                  state = nil
+                  if !row[idx[:state]].nil?
+                    state = State.where(:country_numcode => 392, :code => row[idx[:state]].to_i).first
+                  end
+                  city = nil
+                  if !row[idx[:city]].nil?
+                    city = row[idx[:city]]
+                  end
+                  address1 = nil
+                  if !row[idx[:address1]].nil?
+                    address1 = row[idx[:address1]]
+                  end
+                  address2 = nil
+
+                  if !row[idx[:address2]].nil?
+                    address2 = row[idx[:address2]]
+                  end
                     student.addresses.create!(:zipcode => zipcode,
-                                              :country_id => Country.where(:numcode => 392).first.id,
+                                              :country_id => @japanID,
                                               :state => state,
                                               :state_id => state.id,
                                               :state_name => state.name,
@@ -130,6 +160,39 @@ module Gaku
                                                         :name => guardianName,
                                                         :surname_reading => guardianSurname_reading,
                                                         :name_reading => guardianName_reading)
+
+                    if !row[idx[:guardianZipCode]].nil? && !row[idx[:guardianState]].nil? && !row[idx[:guardianCity]].nil? && !row[idx[:guardianAddress1]].nil?
+                      zipcode = row[idx[:guardianZipCode]]
+                      state = State.where(:country_numcode => 392, :code => row[idx[:guardianState]].to_i).first
+                      city = row[idx[:guardianCity]]
+                      address1 = row[idx[:guardianAddress1]]
+
+                      address2 = nil
+                      if !row[idx[:guardianAddress2]].nil?
+                        address2 = row[idx[:guardianAddress2]]
+                      end
+
+                      guardian.addresses.create!(:zipcode => zipcode,
+                                              :country_id => @japanID,
+                                              :state => state,
+                                              :state_id => state.id,
+                                              :state_name => state.name,
+                                              :city => city,
+                                              :address1 => address1,
+                                              :address2 => address2)
+
+                    end
+
+                    if !row[idx[:guardianPhone]].nil?
+                        contact = Gaku::Contact.new()
+                        contact.contact_type = @phoneContactType
+                        contact.is_primary = true
+                        contact.is_emergency = true
+                        contact.data = row[idx[:guardianPhone]]
+                        contact.save
+
+                        guardian.contacts << contact
+                    end
                   end
 
                 else #1st row, try parsing index
