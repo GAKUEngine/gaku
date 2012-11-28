@@ -2,7 +2,7 @@
 module Gaku
   class Students::ImporterController < GakuController
     include SheetHelper
-    #require 'importers/school_station'
+    require 'gaku/core/importers/school_station'
     require 'spreadsheet'
     require 'roo'
 

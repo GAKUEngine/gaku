@@ -11,9 +11,6 @@ module Importers
       if importer.save
         book = Spreadsheet.open(importer.data_file.path)
         
-        #read from not saved file. just read file
-        # book = Spreadsheet.open(file_data.path)
-        
         sheet = book.worksheet(0)
 
         ActiveRecord::Base.transaction do

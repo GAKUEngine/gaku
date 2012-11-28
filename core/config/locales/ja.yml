@@ -54,8 +54,8 @@ ja:
     new: アセットの登録
   back: 戻る
   birth: 生年月日
-  birth_and: と
-  birth_between: の間に生まれた
+  birth_and: 以下の生年月日まで
+  birth_between: 生年月日〜
   birth_date: 生年月日
   campus:
     add: キャンパスの追加
@@ -497,22 +497,22 @@ ja:
   student:
     add: 生徒を追加
     birth_and: と
-    birth_between: から
+    birth_between: 生年月日〜
     chosen_students: 生徒を選択
     class_group_enrollment: クラスに生徒を追加
     commute_method: 通勤手段
     create: 生徒を作成
     edit: 編集
     enroll: 生徒を追加
-    export: 生徒を書き出し
-    import: 生徒を読み込み
+    export: 生徒情報をCSVで書き出し
+    import: 生徒情報をCSVで登録
     list: 生徒一覧
     name: 生徒名
     new: 生徒を登録
     plural: 生徒
     registration:
       csv: CSVで生徒を登録
-      sheet: 出席番号を登録
+      sheet: 登録用のCSVをダウンロード
     show: 生徒照会
     singular: 生徒
   submit: 登録する
