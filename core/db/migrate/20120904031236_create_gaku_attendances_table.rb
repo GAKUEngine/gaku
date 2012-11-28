@@ -6,7 +6,8 @@ class CreateGakuAttendancesTable < ActiveRecord::Migration
       
   		t.references :attendancable, :polymorphic => true
       t.references :student
-  		
+  		t.references :attendance_type
+      
   		t.timestamps
   	end
   end
