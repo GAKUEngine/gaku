@@ -73,10 +73,12 @@ module Gaku
       
         def wait_until_visible(selector)
           wait_until { find(selector).visible? }
+          wait_for_ajax
         end
 
         def wait_until_invisible(selector)
           wait_until { !page.find(selector).visible? }
+          wait_for_ajax
         end
 
         def visible?(selector)
@@ -93,8 +95,8 @@ module Gaku
 
         def ensure_delete_is_working
           tr_count = size_of table_rows
-
-          click delete_link 
+          within(table) { click delete_link }
+          
           accept_alert
             
           wait_until { size_of(table_rows) == tr_count - 1 }
@@ -103,10 +105,13 @@ module Gaku
         def ensure_cancel_creating_is_working
           click cancel_link
 
-          wait_until_invisible form
+          wait_for_ajax
+
+          invisible? form
           click new_link
 
-          wait_until_visible submit
+          wait_for_ajax
+          visible? submit
           invisible? new_link
         end
 

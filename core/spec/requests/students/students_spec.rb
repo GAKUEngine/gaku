@@ -4,37 +4,42 @@ describe 'Students' do
 
   stub_authorization!
 
+  let(:student) { create(:student, :name => 'John', :surname => 'Doe') }
+  let(:student2) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
+  let(:student3) { create(:student, :name => 'Johny', :surname => 'Bravo') }
+  let(:class_group) { create(:class_group, :name => 'Biology') }
+
   before :all do
     set_resource "student"
   end
 
   context "existing" do
     before do 
-      @student  = create(:student, :name => 'John', :surname => 'Doe')
-      @student2 = create(:student, :name => 'Susumu', :surname => 'Yokota')
-      @student3 = create(:student, :name => 'Johny', :surname => 'Bravo')
+      student
+      student2
+      student3
       visit gaku.students_path
     end
 
     it "lists" do
       size_of(table_rows).should eq 4
-      page.should have_content "#{@student.name}"
-      page.should have_content "#{@student.surname}"
-      page.should have_content "#{@student2.name}"
-      page.should have_content "#{@student2.surname}" 
-      page.should have_content "#{@student3.name}" 
-      page.should have_content "#{@student3.surname}"
+      page.should have_content "#{student.name}"
+      page.should have_content "#{student.surname}"
+      page.should have_content "#{student2.name}"
+      page.should have_content "#{student2.surname}" 
+      page.should have_content "#{student3.name}" 
+      page.should have_content "#{student3.surname}"
     end
 
     it 'chooses students', :js => true do 
-      find(:css, "input#student-#{@student.id}").set(true)
+      find(:css, "input#student-#{student.id}").set(true)
       wait_until_visible '#students-checked-div'
 
       within('#students-checked-div') do 
         page.should have_content 'Chosen students(1)'
         click_link 'Show'
         wait_until_visible '#chosen-table'
-        page.should have_content "#{@student.name}"
+        page.should have_content "#{student.name}"
         page.should have_button 'Enroll to class'
         page.should have_button 'Enroll to course'
         click_link 'Hide'
@@ -66,7 +71,7 @@ describe 'Students' do
 
     context '#edit from show view', :js => true do 
       before do
-        visit gaku.student_path(@student)        
+        visit gaku.student_path(student)        
         click edit_link
         wait_until_visible modal 
       end
@@ -79,9 +84,9 @@ describe 'Students' do
 
         page.should have_content "Kostova"
         page.should have_content "Marta"
-        @student.reload
-        @student.name.should eq "Marta" 
-        @student.surname.should eq "Kostova"
+        student.reload
+        student.name.should eq "Marta" 
+        student.surname.should eq "Kostova"
         flash_updated? 
       end
 
@@ -106,9 +111,9 @@ describe 'Students' do
 
         page.should have_content "Kostova"
         page.should have_content "Marta"
-        @student.reload
-        @student.name.should eq "Marta" 
-        @student.surname.should eq "Kostova"
+        student.reload
+        student.name.should eq "Marta" 
+        student.surname.should eq "Kostova"
         flash_updated? 
       end
 
@@ -118,9 +123,9 @@ describe 'Students' do
     end
     
     it 'deletes', :js => true do
-      visit gaku.student_path(@student2)
+      visit gaku.student_path(student2)
       student_count = Gaku::Student.count
-      page.should have_content "#{@student2.name}"
+      page.should have_content "#{student2.name}"
       
       expect do 
         click '#delete-student-link'     
@@ -129,14 +134,14 @@ describe 'Students' do
         wait_until { flash_destroyed? }
       end.to change(Gaku::Student, :count).by -1
 
-      page.should_not have_content "#{@student2.name}"
+      page.should_not have_content "#{student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
       current_path.should eq gaku.students_path
     end
 
     it 'enrolls to class', :js => true do 
-      create(:class_group, :name => 'Biology')
-      visit gaku.student_path(@student)
+      class_group
+      visit gaku.student_path(student)
       
       expect do 
         click_on 'enroll-student-link'
@@ -150,12 +155,13 @@ describe 'Students' do
       end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 
       click_on 'enroll-student-link'
+      wait_until_visible '#new-class-group-enrollment-modal'
       within('#new-class-group-enrollment-modal') do
         page.should have_content 'Biology'
         page.should have_content '77'
       end
 
-      visit gaku.student_path(@student)
+      visit gaku.student_path(student)
       within('td#student-class-group-enrollment') do 
         page.should have_content 'Biology'
         page.should have_content '77'

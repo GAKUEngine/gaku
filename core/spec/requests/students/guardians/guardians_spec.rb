@@ -4,17 +4,16 @@ describe 'Student Guardians' do
 
   stub_authorization!
   
+  let(:student) { create(:student) }
+  let(:guardian) { create(:guardian) }
+
   before :all do
     set_resource "student-guardian"
   end
 
-  before do
-    @student = create(:student)
-    visit gaku.student_path(@student)
-  end
-
   context 'new', :js => true do 
-    before do 
+    before do
+      visit gaku.student_path(student)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -32,7 +31,7 @@ describe 'Student Guardians' do
 
         click submit
         wait_until_invisible form
-      end.to change(@student.guardians, :count).by 1
+      end.to change(student.guardians, :count).by 1
 
       #required
       page.should have_content "Doe"
@@ -53,11 +52,9 @@ describe 'Student Guardians' do
 
   context "existing" do 
     before(:each) do 
-      @guardian = create(:guardian)
-      @student.guardians << @guardian
-      @student.reload
+      student.guardians << guardian
 
-      visit gaku.student_path(@student) 
+      visit gaku.student_path(student) 
       click tab_link
       wait_until { page.has_content? 'Guardians list' } 
     end
@@ -85,19 +82,19 @@ describe 'Student Guardians' do
     end
 
     it "deletes", :js => true do
-      page.should have_content @guardian.name
+      page.should have_content guardian.name
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }
 
       expect do 
         click '.delete-student-guardian-link' 
         accept_alert
-        within("#student-guardians") { page.should_not have_content @guardian.name }
-      end.to change(@student.guardians, :count).by -1
+        within("#student-guardians") { page.should_not have_content guardian.name }
+      end.to change(student.guardians, :count).by -1
 
       within(count_div) { page.should_not have_content 'Guardians list(1)' }
       within(tab_link)  { page.should_not have_content 'Guardians(1)' }
-      page.should_not have_content @guardian.name
+      page.should_not have_content guardian.name
       flash_destroyed?
     end
   end

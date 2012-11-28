@@ -31,7 +31,9 @@ module Gaku
 
   	def destroy
   		super do |format|
-  			format.js {render :nothing => true}
+  			load_notes
+        @note = Note.new
+        format.js {render 'destroy'}
   		end
   	end
 

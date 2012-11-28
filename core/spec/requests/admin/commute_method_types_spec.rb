@@ -4,6 +4,8 @@ describe 'Admin CommuteMethodTypes' do
 
   stub_authorization!
 
+  let(:commute_method_type) { create(:commute_method_type, :name => 'metro') }
+
   before :all do 
     set_resource "admin-commute-method-type"
   end
@@ -33,12 +35,13 @@ describe 'Admin CommuteMethodTypes' do
   end
 
   context 'existing' do 
+
     before do
-      @commute_method_type = create(:commute_method_type, :name => 'metro') 
+      commute_method_type
       visit gaku.admin_commute_method_types_path
     end
 
-    context 'edit', :js => true do 
+    context '#edit ', :js => true do 
       before do 
         within(table) { click edit_link }
         wait_until_visible modal 
@@ -58,9 +61,8 @@ describe 'Admin CommuteMethodTypes' do
         ensure_cancel_modal_is_working
       end
     end
-
-  	it 'deletes', :js => true do
-      page.should have_content @commute_method_type.name
+    it 'deletes', :js => true do
+      page.should have_content commute_method_type.name
       within(count_div) { page.should have_content 'Commute Method Types list(1)' }
 
       expect do
@@ -68,9 +70,10 @@ describe 'Admin CommuteMethodTypes' do
       end.to change(Gaku::CommuteMethodType, :count).by -1
         
       within(count_div) { page.should_not have_content 'Commute Method Types list(1)' }
-      page.should_not have_content @commute_method_type.name
+      page.should_not have_content commute_method_type.name
       flash_destroyed?
     end
+
   end
 
 end
