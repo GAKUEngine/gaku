@@ -20,6 +20,8 @@ module Gaku
         get_csv_template
         return
       end
+      
+      @students = @students.page(params[:page]).per(10)
 
       @student = Student.new
       @courses = get_courses
