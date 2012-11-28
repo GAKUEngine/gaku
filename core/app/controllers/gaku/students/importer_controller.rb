@@ -102,7 +102,7 @@ module Gaku
     #import XLS list exported from SchoolStation
     #在校生リストを先にインポートする必要がある
     def import_school_station_student_list
-      importer = Importers::SchoolStationImporter.new()
+      importer = Gaku::Core::Importers::SchoolStation.new()
       @results = importer.import_zaikousei(params[:importer])
       render :school_station_preview
     end
