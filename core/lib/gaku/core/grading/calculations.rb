@@ -32,10 +32,16 @@ module Gaku
           end
           
           def calculate_exam_averages
-            @students.each do |student|
-              @exams.each do |exam|
-                add_to_exam_averages(exam, student, @students)
-                add_to_weight_averages(exam, student) if exam.use_weighting
+            @exams.each do |exam|
+              @students.each do |student|
+                @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
+                if exam.use_weighting
+                  @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
+                end
+              end
+              @exam_averages[exam.id] = fix_digit(@exam_averages[exam.id] / @students.length, 4)
+              if exam.use_weighting
+                @exam_weight_averages[exam.id] = fix_digit(@exam_weight_averages[exam.id] / @students.length, 4)
               end
             end
           end
@@ -43,7 +49,7 @@ module Gaku
           def calculate_deviation
             @deviation = Hash.new { |hash,key| hash[key] = {} }
             @standard_deviation = 0.0
-            @deviation_member = 0.0
+            @deviation_memo = 0.0
             @exams.each do |exam|
               @students.each do |student|
                 if exam.use_weighting
@@ -56,7 +62,7 @@ module Gaku
              
               @students.each do |student|
                 @deviation[student.id][exam.id] = 0.0
-                add_to_deviation_member(exam, student)
+                add_to_deviation_memo(exam, student)
                 add_to_deviation(exam, student)
               end
             end
@@ -106,14 +112,6 @@ module Gaku
               @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
             end
 
-            def add_to_exam_averages(exam, student, students)
-              @exam_averages[exam.id] += fix_digit(@student_total_scores[student.id][exam.id] / students.length,4)
-            end
-
-            def add_to_weight_averages(exam, student)
-              @exam_weight_averages[exam.id] += fix_digit(@student_total_weights[student.id][exam.id],4)
-            end
-
             def add_to_weighted_standard_deviation(exam, student)
               @standard_deviation += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
             end
@@ -126,16 +124,16 @@ module Gaku
               @standard_deviation = Math.sqrt standard_deviation / @students.length
             end
 
-            def add_to_deviation_member(exam, student)
+            def add_to_deviation_memo(exam, student)
               if exam.use_weighting
-                @deviation_member = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / @standard_deviation
+                @deviation_memo = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / @standard_deviation
               else
-                @deviation_member = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / @standard_deviation
+                @deviation_memo = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / @standard_deviation
               end
             end
 
             def add_to_deviation(exam, student)
-              @deviation[student.id][exam.id] = @deviation_member.nan? ? 50 : fix_digit(@deviation_member * 10 + 50, 4)
+              @deviation[student.id][exam.id] = @deviation_memo.nan? ? 50 : fix_digit(@deviation_memo * 10 + 50, 4)
             end
 
             def populate_student_scores
