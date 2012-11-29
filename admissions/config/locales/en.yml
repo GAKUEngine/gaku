@@ -10,6 +10,8 @@ en:
     candidates:
       new: "New Applicant"
       exciting: "Exciting Applicant"
+    create_multiple: "Create student entries and their admissions"
+    create: "Create"
 
   admission_methods:
     singular: "Admission Method"
