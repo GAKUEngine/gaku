@@ -4,11 +4,11 @@
   .row-fluid.mt-l
     .span12.well
       = render 'gaku/shared/form_fields/contact_form_fields',  :contact_form => contact_form
-      
+
       .row-fluid
         .span12
           .span6
             = submit_button t('contact.save'), :id => 'submit-student-contact-button'
           = link_to_cancel :id => 'cancel-student-contact-link'
 
-= javascript_include_tag 'gaku/students/contacts'
+/= javascript_include_tag 'gaku/students/contacts'

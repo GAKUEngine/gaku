@@ -12,7 +12,7 @@ module Gaku
 
     def button(text, resource, options = {})
       attributes = {
-        :class => "btn btn-primary"
+        :class => "btn btn-primary mr-s"
       }.merge(options)
       link_to text, resource, attributes
     end
@@ -30,7 +30,7 @@ module Gaku
       name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
       attributes = {
         :remote => true,
-        :class => "btn btn-primary"
+        :class => "btn btn-primary mr-s"
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -89,7 +89,7 @@ module Gaku
       }.merge(options)
       link_to name, resource, attributes
     end
-    
+
 
     # Edit button with only pencil image - without text
     def link_to_edit(resource, options = {})
@@ -98,7 +98,7 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-warning edit-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     # Edit button with text "Edit" and pencil image
     def link_to_edit_with_text(resource, options = {})
@@ -107,7 +107,7 @@ module Gaku
         :class => "edit-link"
       }.merge(options)
       link_to name, resource, attributes
-    end  
+    end
 
  def ajax_link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
@@ -116,7 +116,7 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-success show-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     def link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
@@ -124,7 +124,7 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-success show-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     def link_to_cancel(options = {})
       name = t('cancel')
@@ -133,8 +133,8 @@ module Gaku
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
-    end 
-    
+    end
+
     def ajax_link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
@@ -143,12 +143,12 @@ module Gaku
       }.merge(options)
 
       link_to name, resource, attributes
-    end 
+    end
 
     def link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       link_to name, resource, options
-    end   
+    end
 
     def submit_button(text, options={})
       attributes = {
