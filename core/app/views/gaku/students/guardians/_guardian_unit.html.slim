@@ -4,7 +4,7 @@
       .row-fluid
         table.table.table-bordered.table-striped
           tbody
-            
+
             = render 'gaku/shared/fields/guardian_fields', :guardian => guardian
 
       .row-fluid.mt-m
@@ -12,7 +12,7 @@
 
         = link_to_show [@student, guardian]
         = ajax_link_to_edit [:edit, @student, guardian]
-        
+
         = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
-        
-= javascript_include_tag 'gaku/students/guardians'
+
+/= javascript_include_tag 'gaku/students/guardians'

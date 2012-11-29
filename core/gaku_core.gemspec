@@ -43,4 +43,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancan'
 
   s.add_dependency 'nested_form'
+  s.add_dependency 'kaminari'
 end
