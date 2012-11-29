@@ -1,13 +1,13 @@
-- content_for :title, t("student.list")
+- content_for :title, t('student.list')
 
 .row-fluid
   .pull-left
-    h4.mt-xs.mb-0.students-count 
-      = print_count(@students.count, t("student.list"))
+    h4.mt-xs.mb-0.students-count
+      = print_count(@students.count, t('student.list'))
   .pull-right
-    = ajax_link_to_new t("student.new"), new_student_path, :id => "new-student-link", :class => 'mr-s btn btn-primary'
-    = button t("student.import"), "students/importer", :id => "import-students-link", :class => 'mr-s btn btn-primary'
-    = button t("student.export"), "students.csv", :id => 'export-students-link', :class => 'btn'
+    = ajax_link_to_new t('student.new'), new_student_path, :id => "new-student-link"
+    = button t('student.import'), "students/importer", :id => "import-students-link"
+    = button t('student.export'), "students/csv", :id => 'export-students-link'
 #new-student.hide
   = render 'gaku/students/form'
 .row-fluid

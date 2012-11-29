@@ -3,10 +3,10 @@ html
   head
     title
       = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
-    = stylesheet_link_tag "gaku/shared"
-    = stylesheet_link_tag    params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.css")
-    = javascript_include_tag "gaku/shared" 
-    = javascript_include_tag params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.js")
+    = stylesheet_link_tag "gaku/all"
+    /= stylesheet_link_tag    params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.css")
+    = javascript_include_tag "gaku/all"
+    /= javascript_include_tag params[:controller] if Rails.application.assets.find_asset("#{params[:controller]}.js")
     = csrf_meta_tags
   body
     = render :partial => 'gaku/shared/modal_config'
@@ -19,4 +19,4 @@ html
       #modal-dialogs
       = yield
 
-      
+
