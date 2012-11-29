@@ -9,23 +9,25 @@
           li= msg
   - if class_group_form.object.new_record?
     b= t('class_group.new')
-  .row-fluid.mt-l
-    .span12.well
-      .row-fluid
-        .span4
-          = class_group_form.label :grade, t('class_group.grade'), :class => "control-label pull-left"
-          = class_group_form.number_field :grade, :class => "span12"
-        .span4
-          = class_group_form.label :name, t('class_group.name'), :class => "control-label pull-left"
-          = required_field
-          = class_group_form.text_field :name, :class => "span12 validate[required]"
-        .span4
-          = class_group_form.label :homeroom, t('class_group.homeroom'), :class => "control-label pull-left"
-          = class_group_form.text_field :homeroom, :class => "span12"
-      .row-fluid
-        .span12
-          .span6
-            = submit_button t('class_group.save'), :id => 'submit-class-group-button'
-          = link_to_cancel :id => "cancel-class-group-link"
+  .control-group
+    .row-fluid.mt-l
+      .span12.well
+        .row-fluid
+          .span4
+            = class_group_form.label :grade, t('class_group.grade'), :class => "control-label pull-left"
+            = class_group_form.number_field :grade, :class => "span12"
+
+          .span4.control-group
+            = class_group_form.label :name, t('class_group.name'), :class => "control-label pull-left"
+            /= required_field
+            = class_group_form.text_field :name, :class => "span12 validate[required]"
+          .span4
+            = class_group_form.label :homeroom, t('class_group.homeroom'), :class => "control-label pull-left"
+            = class_group_form.text_field :homeroom, :class => "span12"
+        .row-fluid
+          .span12
+            .span6
+              = submit_button t('class_group.save'), :id => 'submit-class-group-button'
+            = link_to_cancel :id => "cancel-class-group-link"
 
 /= javascript_include_tag 'gaku/class_groups'
