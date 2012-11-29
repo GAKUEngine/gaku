@@ -129,7 +129,7 @@ module Gaku
     def link_to_cancel(options = {})
       name = t('cancel')
       attributes = {
-        :class => "span3 btn btn-danger",
+        :class => "span3 btn btn-danger cancel-link",
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
