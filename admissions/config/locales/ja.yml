@@ -46,6 +46,11 @@ ja:
     save: 入学フェーズを保存
     singular: 入学フェーズ
   admissions:
+    candidates:
+      exciting: 
+      new: 新規入学生を登録
+    create: 入学生を登録
+    create_multiple: 複数の入学生を登録
     please_select_method: 入学形態を選択して下さい
     please_select_period: 入学時期を選択して下さい
   menu:
