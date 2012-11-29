@@ -5,6 +5,8 @@ class CreateGakuAttendanceTypesTable < ActiveRecord::Migration
   		t.string :color_code
   		t.boolean :counted_absent
   		t.boolean :disable_credit
+      t.float :credit_rate
+      t.boolean :auto_credit
 
       t.timestamps
   	end

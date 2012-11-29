@@ -60,3 +60,5 @@ elasticsearch*
 Gemfile.lock
 */Gemfile.lock
 */core/Gemfile.lock
+
+.localeapp
