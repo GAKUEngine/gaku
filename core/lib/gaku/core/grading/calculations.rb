@@ -69,23 +69,12 @@ module Gaku
           end
 
           def calculate_rank_and_grade
-            @grades = Hash.new { |hash,key| hash[key] = {} }
             @scores = Array.new
-
             populate_student_scores
 
-
-            # WIP Grade Calculation -----↓
-
-            # @grading_method = GradingMethod.find(exam.grading_method_id)
-            # puts "@grading_method-------------"
-            # puts @grading_method.name
-            # eval @grading_method.method
+            @grades = Hash.new { |hash,key| hash[key] = {} }
             grading_method = 1
-
             grade_calculate(grading_method)
-
-            # Rank Calculation -----↓
             rank_calculate
           end
 
@@ -148,24 +137,27 @@ module Gaku
                   end
                 end
               @scores.sort!().reverse!()
+              puts "SORTED SCORES--------------------------"
+              puts @scores
             end
 
             def grade_calculate(grading_method)
               @gradePoint = 10
-              @grade_levels_deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
-              @grade_levels_percent = [5, 5, 10, 10, 30, 10, 100]
+              @grade_levels_deviation = [10000000000, 66, 62, 58, 55, 50, 45, 37, 0]
+              @grade_levels_percent = [5, 5, 10, 10, 30, 30, 10, 100]
 
               @exams.each do |exam|
                 case grading_method
                 when 1
-                  grading_method_one(exam)
+                  grading_method_deviation(exam)
                 when 2
-                  grading_method_two(exam)
+                  grading_method_percent(exam)
                 end
+                process_low_deviations(exam)
               end
             end
 
-            def grading_method_one(exam)
+            def grading_method_deviation(exam)
               @grade_levels_deviation.each_with_index do |glevel, i|
                 @students.each do |student|
                   if @grade_levels_deviation[i] > @deviation[student.id][exam.id] && @grade_levels_deviation[i+1] <= @deviation[student.id][exam.id]
@@ -176,19 +168,40 @@ module Gaku
               end
             end
   
-            def grading_method_two(exam)
-              scoresMem = @scores.clone
+            def grading_method_percent(exam)
+              scores_memo = @scores.clone
               gradeNums = []
               @grade_levels_percent.each do |glevel|
                 gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
               end
               gradeNums.each do |gnum|
                 i = 0
-                while i < gnum && scoresMem.length != 0
-                  @grades[exam.id][scoresMem.shift[1]] = gradePoint
+                while i < gnum && scores_memo.length != 0
+                  @grades[exam.id][scores_memo.shift[1]] = @gradePoint
                   i += 1
                 end
                 @gradePoint -= 1
+              end
+            end
+            
+            def process_low_deviations(exam)
+              scores_memo = @scores.clone
+              @students.each do |student|
+                if exam.use_weighting
+                  if @student_total_weights[student.id][exam.id] < @exam_weight_averages[exam.id] / 2 && @student_total_weights[student.id][exam.id] < 30
+                    @grades[exam.id][student.id] = 2
+                    if @student_total_weights[student.id][exam.id] < @exam_weight_averages[exam.id] / 4
+                      @grades[exam.id][student.id] = 1
+                    end
+                  end
+                else
+                  if @student_total_scores[exam.id][student.id] < @exam_averages[exam.id] / 2 && 30
+                    @grades[exam.id][student.id] = 2
+                    if @student_total_scores[student.id][exam.id] < @exam_averages[exam.id] / 4
+                      @grades[exam.id][student.id] = 1
+                    end
+                  end
+                end
               end
             end
 
@@ -214,13 +227,13 @@ module Gaku
                 @students.each {|student| @ranks[exam.id][student.id] = 3 }
             end
 
-            def rank_score(exam,rank_nums)
+            def rank_score(exam, rank_nums)
               rank_nums.each do |rnum|
                 i = 0
                 while i < rnum && @scores.length != 0
-                  scoreMem = @scores.shift()
-                  @ranks[exam.id][scoreMem[1]] = @rank_point
-                  rnum += 1 if @scores.length != 0 and scoreMem[0] == @scores[0][0]
+                  score_memo = @scores.shift()
+                  @ranks[exam.id][score_memo[1]] = @rank_point
+                  rnum += 1 if @scores.length != 0 and score_memo[0] == @scores[0][0]
                   i += 1
                 end
                @rank_point -= 1
