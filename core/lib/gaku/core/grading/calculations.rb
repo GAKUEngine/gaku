@@ -137,8 +137,6 @@ module Gaku
                   end
                 end
               @scores.sort!().reverse!()
-              puts "SORTED SCORES--------------------------"
-              puts @scores
             end
 
             def grade_calculate(grading_method)
