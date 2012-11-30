@@ -9,6 +9,7 @@ module Gaku
     before_filter :student, :only => [:destroy, :make_primary]
     before_filter :address, :only => [:destroy, :make_primary]
     before_filter :count, :only => [:create, :destroy]
+    before_filter :countries, :only => [:new, :edit]
 
     def create
       create! do |success, failure|
@@ -63,6 +64,10 @@ module Gaku
     end
 
     private
+
+    def countries
+      @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
+    end
 
     def address
       @address = Address.find(params[:id])

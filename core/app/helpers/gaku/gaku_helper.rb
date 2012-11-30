@@ -4,6 +4,7 @@ module Gaku
     include LinkToHelper
     include SortHelper
     include TranslationsHelper
+    include PresetsHelper
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
