@@ -5,6 +5,7 @@
 //= require chosen-jquery
 //= require underscore
 //= require backbone
+//= require rails.validations
 //= require gaku/gaku_engine
 //= require tablefix
 //= require combobox
@@ -18,3 +19,4 @@
 //= require gaku/students/selected_students
 
 // require_tree ./
+

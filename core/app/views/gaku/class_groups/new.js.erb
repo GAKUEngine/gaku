@@ -1,2 +1,3 @@
-$('#new-class-group').slideDown();
+$('#new-class-group').html('<%= render_js_partial("form") %>').slideDown();
 $('#new-class-group-link').hide();
+$('.remote-form').enableValidations();
