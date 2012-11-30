@@ -23,13 +23,17 @@
                 <td class='score-column' id='exam-portion-score-<%= score.id %>' align="left">
                   <form class='portion_score_update span12' style="float: left; padding-right: 50px" name="input" action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
                     <div class='exam-portion-<%= portion.id %>'>
-                      <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>'/>
+                      <% if @attendances[student.id][score.id] : %>
+                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' disabled />
+                      <% else : %>
+                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>'/>
+                      <% end %>
                     </div>
                   </form>
-                  <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>">
+                    
+                  <div class="portion_set_attendance pull-right btn" style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="/courses/<%= @course.id %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" data-attendance="<%= @attendances[student.id][score.id] %>" >
                     <i class="icon-chair"></i>
                   </div>
-                </td>
               <% end %>
             <% end %>
           <% end %>    
