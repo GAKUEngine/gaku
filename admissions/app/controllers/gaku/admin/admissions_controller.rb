@@ -8,7 +8,7 @@ module Gaku
       helper_method :sort_column, :sort_direction
 
       before_filter :load_before_index, :only => [:index, :change_admission_period, :change_admission_method]
-      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method, :create, :create_multiple]
+      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
 
@@ -26,13 +26,24 @@ module Gaku
         @state = AdmissionPhaseState.find(params[:state_id])
         @student = Student.find(params[:student_id])
         @admission_record = @student.admission.admission_phase_records.first
+        @old_state_id = @admission_record.admission_phase_state_id
         if !(@state.id == @admission_record.admission_phase_state_id)
-          @old_state_id = @admission_record.admission_phase_state_id
-          @admission_record.admission_phase_state_id = @state.id
+          # TODO decide how next phase should be chosen and decide for default phase states
+          if @state.auto_progress == true
+            phase = @state.admission_phase
+            @next_phase = AdmissionPhase.find_by_admission_method_id_and_order(phase.admission_method_id ,phase.order+1)
+            @state = @next_phase.admission_phase_states.first
+            @admission_record.admission_phase_state = @state
+            @admission_method = phase.admission_method
+            @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+          else
+            @admission_record.admission_phase_state_id = @state.id
+          end
           @admission_record.save
           render 'change_student_state'
         end
       end
+
 
       def index
 
@@ -50,6 +61,7 @@ module Gaku
         #raise @admission.inspect
         if @admission.save
           @admission_method = @admission.admission_method
+          @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
           # TODO change the selected phase
           admission_phase = @admission_method.admission_phases.first
           # TODO change the selected phase state
