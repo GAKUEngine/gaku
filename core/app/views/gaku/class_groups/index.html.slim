@@ -3,6 +3,7 @@
   .span10
     .row-fluid
       #new-class-group.hide
+        =render 'form'
       .pull-left 
         h4.mt-xs.mb-0.class-groups-count 
           = print_count(@count, t_class_group_list)

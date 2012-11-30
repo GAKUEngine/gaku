@@ -25,20 +25,10 @@ jQuery ->
 
   $('#new-syllabus form').validationEngine()
 
-  #$('#new-syllabus-link').click (e)->
-  #  e.preventDefault()
-  #  $(@).hide()
-  #  $('#new-syllabus').slideToggle()
-
   $('#cancel-syllabus-link').on 'click', (e) ->
     $('#new-syllabus').slideToggle()
     $('#new-syllabus-link').show()
 
-
-  #$('#cancel-syllabus-link').on 'click', (event)->
-  #  event.preventDefault()
-  #  $('#new-syllabus').slideToggle()
-  #  $('#new-syllabus-link').show()
 
   $('#cancel-existing-exam-link').on 'click', (event)->
     event.preventDefault()

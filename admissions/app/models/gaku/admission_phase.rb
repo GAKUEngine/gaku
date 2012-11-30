@@ -8,5 +8,7 @@ module Gaku
     accepts_nested_attributes_for :admission_phase_states, :allow_destroy => true
 
     attr_accessible :name, :order, :phase_handler, :admission_method_id, :admission_phase_states_attributes
+
+    validates :name, :presence => true
   end
 end

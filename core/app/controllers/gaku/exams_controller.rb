@@ -85,6 +85,7 @@ module Gaku
         @exams = Course.find(params[:course_id]).syllabus.exams
       else
         @exams = Exam.all
+        @exam = Exam.new
       end
 
       respond_to do |format|

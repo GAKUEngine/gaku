@@ -17,4 +17,4 @@
 // require_tree ./class_groups
 //= require gaku/students/selected_students
 
-//= require_tree ./
+// require_tree ./
