@@ -38,7 +38,10 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :exams do
-      resources :exam_portion_scores
+      resources :exam_portion_scores do 
+        resources :attendances
+      end
+
       collection do
         get :grading
         get :export_xls
@@ -158,6 +161,7 @@ Gaku::Core::Engine.routes.draw do
     resources :commute_method_types
     resources :contact_types
     resources :enrollment_status_types
+    resources :attendance_types
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
         resources :contacts, :controller => 'schools/campuses/contacts' do
