@@ -1,18 +1,12 @@
-.modal.hide#edit-address-modal wmode="opaque"
-  = form_for [@student, @address], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |address_form| 
+= modal_for 'edit-address-modal'  do
+  = modal_header t('address.edit')
+  = modal_form_for [@student, @address] do |f|
+    .modal-body
+      .row-fluid
+        = hidden_field_tag :student_id, @student.id
+        = render 'gaku/shared/form_fields/address_form_fields', :f => f
 
-      .modal-header
-        button.close type="button" data-dismiss="modal"
-          'x
-        h3 = t('address.edit')
-      .modal-body
-        .row-fluid
-          #validation-errors
-        .row-fluid
-          = hidden_field_tag :student_id, @student.id
-          
-        = render 'gaku/shared/form_fields/address_form_fields', :address_form => address_form
-        .row-fluid
-          .span9
-            = submit_button t('address.save'), :id => 'submit-student-address-button', :class => 'btn btn-primary button span12'
-            = link_to_cancel :id => 'cancel-student-address-link', :class => 'span3 btn btn-danger'
+      .row-fluid
+        .span9
+          = submit_button t('address.save'), :id => 'submit-student-address-button'
+        = link_to_cancel :id => 'cancel-student-address-link'

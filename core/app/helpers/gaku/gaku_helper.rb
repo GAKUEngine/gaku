@@ -5,6 +5,8 @@ module Gaku
     include SortHelper
     include TranslationsHelper
     include PresetsHelper
+    include FormHelper
+    include ModalHelper
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
@@ -13,15 +15,6 @@ module Gaku
       yield presenter if block_given?
       presenter
     end
-
-    def remote_form_for(object, options = {}, &block)
-      options[:validate] = true
-      options[:builder] = ValidateFormBuilder
-      options[:html] = {:class => 'remote-form'}
-      options[:remote] = true
-      form_for(object, options, &block)
-    end
-
 
     def required_field
       ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe

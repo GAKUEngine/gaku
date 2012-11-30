@@ -30,9 +30,14 @@ class ValidateFormBuilder < ActionView::Helpers::FormBuilder
       end
     end
 
-    def actions(&block)
-      content_tag :div, class: "form-actions" do
-        block.call
+    def check_box(name, *args)
+      options = args.extract_options!.symbolize_keys!
+      content_tag :div, class: "control-group#{(' error' if object.errors[name].any?)}"  do
+        content_tag(:div, class: 'controls') do
+          args << options.except(:label, :help)
+          html = super(name, *args) + ' ' + options[:label]
+          label(name, html, class: 'checkbox')
+        end
       end
     end
 
