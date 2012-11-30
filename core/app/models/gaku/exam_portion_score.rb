@@ -14,6 +14,8 @@ module Gaku
 	  belongs_to :student
 	  belongs_to :exam_portion
 	  
+	  has_many :attendances, :as => :attendancable
+
 	  attr_accessible :score, :exam_portion_id, :student_id
 	end
 end
