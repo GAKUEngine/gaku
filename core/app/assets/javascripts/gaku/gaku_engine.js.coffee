@@ -9,7 +9,6 @@ window.GAKUEngine =
 $.fn.enableValidations = ->
   $(this).enableClientSideValidations()
 
-
 $ ->
 
   $('.delete-link').live 'ajax:success', (evt, data, status, xhr) ->
@@ -25,6 +24,8 @@ $ ->
     if element.data("valid") isnt false
       element.parent().parent().addClass "error"
       element.parent().find(".message").addClass "error help-inline"
+
+
 
   $(".cancel-link").live "click", (e) ->
     event.preventDefault()
