@@ -127,7 +127,8 @@ module Gaku
           :deviation => @deviation.as_json(:root => false),
           :students => @students.to_json(:root => false),
           :grades => @grades.as_json(:root => false),
-          :ranks => @ranks.as_json(:root => false)
+          :ranks => @ranks.as_json(:root => false),
+          :attendances => @student_portion_attendance.as_json(:root => true)
         }}
         format.html { render "gaku/exams/grading" }
       end
