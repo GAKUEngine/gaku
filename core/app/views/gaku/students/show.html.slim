@@ -1,14 +1,15 @@
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .span12
-        h4.mt-xs.mb-0 = t('student.show')
-    .row-fluid
-      .span12
-        hr/
-    .row-fluid
-      .span12
-        = render 'gaku/students/showtable'
+- present @student do |student_presenter|
+  .row-fluid
+    .span1
+    .span10
+      .row-fluid
+        .span12
+          h4.mt-xs.mb-0 = t('student.show')
+      .row-fluid
+        .span12
+          hr/
+      .row-fluid
+        .span12
+          = render 'gaku/students/showtable'
 
-= javascript_include_tag "gaku/students/show"
+  /= javascript_include_tag "gaku/students/show"

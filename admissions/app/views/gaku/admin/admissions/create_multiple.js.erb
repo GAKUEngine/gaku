@@ -1,0 +1,9 @@
+$('#student-modal').modal('hide');
+$('#student-modal').remove();
+showNotice("<%= render_flash %>");
+
+<% if !@admission_records.empty? %>
+  <%  @admission_records.each {|record| %>
+    $('#state<%= record.admission_phase_state.id.to_s %> #students-index tbody').append('<%= render_js_partial("gaku/admin/admissions/student", :student => record.admission.student, :state => record.admission_phase_state) %>');
+  <% } %>
+<% end %>

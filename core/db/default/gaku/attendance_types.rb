@@ -53,7 +53,7 @@ Gaku::AttendanceType.create({
 })
 
 Gaku::AttendanceType.create({
-  :name => "Abscent",
+  :name => "absent",
   :color_code => "#000000",
   :counted_absent => true,
   :disable_credit => true,
