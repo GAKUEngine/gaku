@@ -413,6 +413,7 @@ en:
         backup: Backup
         system_tools: System Tools
       types:
+        attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Status Types
