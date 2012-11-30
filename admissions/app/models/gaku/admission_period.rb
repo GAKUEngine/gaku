@@ -8,5 +8,6 @@ module Gaku
 
     attr_accessible :name, :rolling, :seat_limit, :admitted_on, :period_method_associations_attributes
 
+    validates  :name, presence: true
   end
 end

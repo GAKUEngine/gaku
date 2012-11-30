@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Gaku::Admin::AdmissionPeriodsController do
 
   let(:admission_period) { create(:admission_period) }
+  let(:admission_method) { create(:admission_method) }
 
   describe "GET #index" do
     it "is successful" do
@@ -21,17 +22,24 @@ describe Gaku::Admin::AdmissionPeriodsController do
     end
   end
 
-    describe 'GET #show' do
-    it "assigns the requested admission_period to @admission_period" do
-      gaku_xhr_get :show, id: admission_period
-      assigns(:admission_period).should eq admission_period
+  context "GET #show" do
+    before do
+      admission_period.admission_methods<<admission_method
+      admission_period.reload
+    end
+    it 'should be success' do
+      gaku_xhr_get :show_methods, id:admission_period
+      response.should be_success
     end
 
-    it "renders the :show template" do
-      pending "need to resolve why is not rendering :show or remove test" do
-        gaku_xhr_get :show, id: admission_period
-        response.should render_template :show
-      end
+    it 'populates an array of admission methods' do
+      gaku_xhr_get :show_methods, id:admission_period
+      assigns(:admission_methods).should eq admission_period.admission_methods
+    end
+
+    it 'renders the :show_methods template' do
+      gaku_xhr_get :show_methods, id:admission_period
+      response.should render_template :show_methods
     end
   end
 
@@ -42,10 +50,8 @@ describe Gaku::Admin::AdmissionPeriodsController do
     end
 
     it "renders the :new template" do
-      pending "need to resolve why is not rendering :new or remove test" do
-        gaku_xhr_get :new
-        response.should render_template :new
-      end
+      gaku_xhr_get :new
+      response.should render_template :new
     end
   end
 
@@ -61,11 +67,9 @@ describe Gaku::Admin::AdmissionPeriodsController do
     end
     context "with invalid attributes" do
       it "does not save the new admission period in the db" do
-        pending "need to make validations in model" do
-          expect{
-            gaku_post :create, admission_period: {name: ''}  
-          }.to_not change(Gaku::AdmissionPeriod, :count)
-        end
+        expect{
+          gaku_xhr_post :create, admission_period: {name: ''}  
+        }.to_not change(Gaku::AdmissionPeriod, :count)
       end
     end
   end
@@ -78,13 +82,24 @@ describe Gaku::Admin::AdmissionPeriodsController do
     end
 
     context "valid attributes" do
-      it "changes admission metod's attributes" do
-        gaku_put :update, id: admission_period,admission_period: attributes_for(:admission_period, name: "AZ")
+      it "changes admission method's attributes" do
+        gaku_put :update, id: admission_period,admission_period: attributes_for(:admission_period, name: "Regular Admission")
         admission_period.reload
-        admission_period.name.should eq("AZ")
+        admission_period.name.should eq("Regular Admission")
 
         controller.should set_the_flash
       end
+    end
+
+    context "invalid attributes" do
+      it "changes admission method's attributes" do
+        gaku_xhr_put :update, id: admission_period,admission_period: attributes_for(:admission_period, name: "")
+        admission_period.reload
+        admission_period.name.should_not eq("")
+      end
+    end
+
+    context "methods" do
     end
   end
 
