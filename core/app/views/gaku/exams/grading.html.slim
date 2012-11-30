@@ -9,7 +9,8 @@ javascript:
   var students = '#{@students.to_json(:root => false).to_s.html_safe}'
   var grades = '#{@grades.to_json(:root => false).to_s.html_safe}'
   var ranks = '#{@ranks.to_json(:root => false).to_s.html_safe}'
-
+  var attendances = '#{@student_portion_attendance.to_json(:root => false).to_s.html_safe}'
+  
 coffee:
   $(document).ready ->
     router = new GAKUEngine.Routers.ExamsRouter
@@ -21,6 +22,7 @@ coffee:
       students: $.parseJSON(students)
       grades: $.parseJSON(grades)
       ranks: $.parseJSON(ranks)
+      attendances: $.parseJSON(attendances)
     Backbone.history.start()
     
     console.log("grading.html.slim dayo-")
