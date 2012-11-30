@@ -1,12 +1,5 @@
-= form_for @class_group, :remote => true, :validate => true do |class_group_form|
-  - if @class_group.errors.any?
-    .alert.alert-error
-      strong
-        = pluralize(@class_group.errors.count, "error")
-        | prohibited this class_group from being saved:
-      ul
-        - @class_group.errors.full_messages.each do |msg|
-          li= msg
+= form_for @class_group, :html => {:class => 'form'}, :remote => true, :validate => true do |class_group_form|
+
   - if class_group_form.object.new_record?
     b= t('class_group.new')
   .control-group
@@ -19,8 +12,7 @@
 
           .span4.control-group
             = class_group_form.label :name, t('class_group.name'), :class => "control-label pull-left"
-            /= required_field
-            = class_group_form.text_field :name, :class => "span12 validate[required]"
+            = class_group_form.text_field :name, :class => "span12"
           .span4
             = class_group_form.label :homeroom, t('class_group.homeroom'), :class => "control-label pull-left"
             = class_group_form.text_field :homeroom, :class => "span12"

@@ -5,7 +5,13 @@ window.GAKUEngine =
   Routers: {}
   init: ->
 
+
+$.fn.enableValidations = ->
+  $(this).enableClientSideValidations()
+
+
 $ ->
+
   $('.delete-link').live 'ajax:success', (evt, data, status, xhr) ->
     $(this).closest('tr').remove()
 
