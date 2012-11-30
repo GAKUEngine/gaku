@@ -1,0 +1,22 @@
+#admin-attendance-types
+  #new-admin-attendance-type.hide
+  .row-fluid
+    .pull-left
+      h4.h4-vm.admin-attendance-types-count
+        = print_count(@count, t_attendance_type_list)
+    .pull-right
+      =ajax_link_to_new t('attendance_type.add'), new_admin_attendance_type_path, :id => 'new-admin-attendance-type-link'
+  .row-fluid
+    table#admin-attendance-types-index.index.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-inverse = t('attendance_type.singular')
+          th.btn-inverse style='width:100px' = t('attendance_type.color_code')
+          th.btn-inverse = t('attendance_type.credit_rate')
+          th.btn-inverse = t('attendance_type.counted_absent')
+          th.btn-inverse = t('attendance_type.disable_credit')
+          th.btn-inverse = t('attendance_type.auto_credit')
+          th.btn-info style="width:61px" = t('manage')
+      tbody
+        =render :partial => 'gaku/admin/attendance_types/attendance_type', :collection => @attendance_types, :as => :attendance_type
+    br/

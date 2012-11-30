@@ -1,0 +1,7 @@
+$('#admin-attendance-types-index tbody').append('<%= render_js_partial("attendance_type", {:attendance_type => @attendance_type}) %>');
+
+$('#new-admin-attendance-type').slideToggle();
+$('#new-admin-attendance-type-link').show();
+
+$('.admin-attendance-types-count').html('<%= print_count(@count+1, t_attendance_type_list) %>');
+showNotice("<%= render_flash %>");
