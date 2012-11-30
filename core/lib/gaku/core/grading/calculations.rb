@@ -14,12 +14,14 @@ module Gaku
             @exam_averages = Hash.new {0.0}
             @exam_weight_averages = Hash.new {0.0}
             @weighting_score = true
+            @student_portion_attendance = Hash.new { |hash,key| hash[key] = {} }
 
             @students.each do |student|
               @exams.each do |exam|
                 @student_total_scores[student.id][exam.id] = 0.0
                 @student_total_weights[student.id][exam.id] = 0.0
                 exam.exam_portions.each do |portion|
+                  add_to_portion_attendance(student, exam, portion)
                   if have_portion_score?(student, portion)
                     create_new_portion_score(student,portion)
                   else
@@ -29,6 +31,11 @@ module Gaku
                 end
               end
             end
+          end
+
+          def add_to_portion_attendance(student, exam, portion)
+            score = portion.student_score(student)
+            @student_portion_attendance[student.id][score.id] = score.attendances.first.try(:id)
           end
           
           def calculate_exam_averages
