@@ -13,6 +13,7 @@
 //= require jquery_validation_engine/jquery.validationEngine
 //= require jquery_validation_engine/languages/jquery.validationEngine-en
 //= require jquery.dataTables
+//= require jquery.miniColors.min
 
 // require gaku/class_groups
 // require_tree ./class_groups
