@@ -33,4 +33,4 @@ $ ->
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id
     $(resource_new_link).show()
-    $(resource_form).slideToggle()
+    $(resource_form).slideUp()
