@@ -11,6 +11,8 @@ describe Gaku::AttendanceType do
   	it { should allow_mass_assignment_of :color_code }
   	it { should allow_mass_assignment_of :counted_absent }
   	it { should allow_mass_assignment_of :disable_credit }
+  	it { should allow_mass_assignment_of :credit_rate }
+  	it { should allow_mass_assignment_of :auto_credit}
 
   end
 end

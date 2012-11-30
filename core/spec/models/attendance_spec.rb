@@ -9,7 +9,6 @@ describe Gaku::Attendance do
   	it { should belong_to(:attendancable) }
 
   	it { should allow_mass_assignment_of :reason }
-  	it { should allow_mass_assignment_of :description }
 
   end
 end
