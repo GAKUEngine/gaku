@@ -13,6 +13,13 @@ module Gaku
       presenter
     end
 
+    def remote_form_for(object, options = {}, &block)
+      options[:validate] = true
+      options[:html] = {:class => 'remote-form'}
+      options[:remote] = true
+      form_for(object, options, &block)
+    end
+
 
     def required_field
       ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe
