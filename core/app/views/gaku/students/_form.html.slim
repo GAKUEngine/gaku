@@ -1,16 +1,8 @@
 -model = @student || student
-= form_for model, :remote => true do |form|
-  - if @student.errors.any?
-    .alert.alert-error
-      strong
-        = pluralize(@student.errors.count, "error")
-        | prohibited this student from being saved:
-      ul
-        - @student.errors.full_messages.each do |msg|
-          li= msg
+= remote_form_for model do |f|
   .row-fluid.mt-l
     .span12.well
-      =render :partial => 'student_form_fields', :locals => { :form => form }
+      =render :partial => 'student_form_fields', :locals => { :f => f }
       .row-fluid
         .span12
           .span6

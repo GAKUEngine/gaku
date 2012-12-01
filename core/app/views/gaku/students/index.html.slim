@@ -3,7 +3,7 @@
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0.students-count
-      = print_count(@students.count, t('student.list'))
+      = print_count(@count, t('student.list'))
   .pull-right
     = ajax_link_to_new t('student.new'), new_student_path, :id => "new-student-link"
     = button t('student.import'), "students/importer", :id => "import-students-link"
