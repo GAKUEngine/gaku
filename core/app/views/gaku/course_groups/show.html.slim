@@ -31,4 +31,5 @@
       .span12.well
         = link_to_edit_with_text [:edit, @course_group], :class => "edit-link span6 btn", :remote => true
         = link_to_back course_groups_path, :class => "span6 btn"
-      =render 'delete_confirm'
+      .span12
+        =render 'delete_confirm'
