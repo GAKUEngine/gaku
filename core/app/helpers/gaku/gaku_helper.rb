@@ -7,6 +7,14 @@ module Gaku
     include PresetsHelper
     include FormHelper
     include ModalHelper
+    include HtmlHelper
+
+    def count_div(html_class, &block)
+      content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
+        block.call
+      end
+    end
+
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
