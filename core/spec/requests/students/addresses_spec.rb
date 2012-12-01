@@ -63,7 +63,7 @@ describe 'Address' do
       end
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -106,7 +106,7 @@ describe 'Address' do
         page.should have_content 'City can\'t be blank'
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end

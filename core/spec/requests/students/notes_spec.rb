@@ -40,7 +40,7 @@ describe 'Student Notes' do
       end
     end
 
-    it 'cancels creating', :js => true do
+    it 'cancels creating', :js => true, :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -68,7 +68,7 @@ describe 'Student Notes' do
         flash_updated?
       end
 
-      it 'cancels editting'  do
+      it 'cancels editting', :cancel => true  do
         ensure_cancel_modal_is_working
       end
     end

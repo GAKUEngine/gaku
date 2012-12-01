@@ -90,7 +90,7 @@ describe 'Students' do
         flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
 
@@ -117,7 +117,7 @@ describe 'Students' do
         flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
@@ -197,7 +197,7 @@ describe 'Students' do
       end
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
