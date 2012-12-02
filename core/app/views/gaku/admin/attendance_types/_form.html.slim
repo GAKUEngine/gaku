@@ -1,27 +1,9 @@
-= form_for [:admin, @attendance_type], :remote => true do |attendance_type_form|
-  - if attendance_type_form.object.new_record?
-    b= t('attendance_type.new')
-    .row-fluid.mt-l
-      .span12.well
-          = attendance_type_form.label :name, t('attendance_type.name')
-          = attendance_type_form.text_field :name, :class => "span12"
-
-          = attendance_type_form.label :color_code
-          = attendance_type_form.text_field :color_code, :class => 'span 12'
-
-          = attendance_type_form.label :credit_rate
-          = attendance_type_form.text_field :credit_rate, :class => 'span 12'
-
-          = attendance_type_form.label :counted_absent
-          = attendance_type_form.check_box :counted_absent
-
-          = attendance_type_form.label :disable_credit
-          = attendance_type_form.check_box :disable_credit
-
-          = attendance_type_form.label :auto_credit
-          = attendance_type_form.check_box :auto_credit
-          .row-fluid
-            .span12
-              .span6
-                =submit_button t('attendance_type.save'), :id => 'submit-admin-attendance-type-button'
-              = link_to_cancel :id => 'cancel-admin-attendance-type-link'
+= remote_form_for [:admin, @attendance_type] do |f|
+  .row-fluid.mt-l
+    .span12.well
+      = render 'form_fields', :f => f
+  .row-fluid
+    .span12
+      .span6
+        = submit_button t(:'attendance_type.save'), :id => 'submit-admin-attendance-type-button'
+      = link_to_cancel :id => 'cancel-admin-attendance-type-link'
