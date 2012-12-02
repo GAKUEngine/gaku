@@ -1,6 +1,6 @@
 .row-fluid
   .span12.well
-    table.table.table-bordered.table-striped
+    = table_for '' do
       tbody
         = render 'gaku/shared/fields/guardian_fields', :guardian => @guardian
 
@@ -10,4 +10,4 @@ br/
 
 .row-fluid
   .span12
-    =link_to_back @student, :class => 'btn'
+    = link_to_back @student, :class => 'btn'

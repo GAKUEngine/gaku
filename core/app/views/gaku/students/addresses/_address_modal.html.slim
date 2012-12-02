@@ -1,5 +1,5 @@
 = modal_for 'edit-address-modal'  do
-  = modal_header t('address.edit')
+  = modal_header t(:'address.edit')
   = modal_form_for [@student, @address] do |f|
     .modal-body
       .row-fluid
@@ -8,5 +8,5 @@
 
       .row-fluid
         .span9
-          = submit_button t('address.save'), :id => 'submit-student-address-button'
+          = submit_button t(:'address.save'), :id => 'submit-student-address-button'
         = link_to_cancel :id => 'cancel-student-address-link'

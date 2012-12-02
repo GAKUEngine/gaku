@@ -4,10 +4,9 @@ module Gaku
     belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
-    before_filter :student, :only => [:destroy, :make_primary]
-    before_filter :address, :only => [:destroy, :make_primary]
-    before_filter :count, :only => [:create, :destroy]
-    before_filter :countries, :only => [:new, :edit]
+    before_filter :student,   :only => [:destroy, :make_primary]
+    before_filter :address,   :only => [:destroy, :make_primary]
+    before_filter :count,     :only => [:create, :destroy]
 
     def update
       @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
@@ -24,7 +23,7 @@ module Gaku
             format.js { render }
           end
         else
-          render 'destroy'
+          render :destroy
         end
       end
     end
@@ -36,10 +35,6 @@ module Gaku
     end
 
     private
-
-    def countries
-      @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
-    end
 
     def address
       @address = Address.find(params[:id])

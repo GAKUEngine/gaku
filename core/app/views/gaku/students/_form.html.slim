@@ -1,10 +1,9 @@
--model = @student || student
-= remote_form_for model do |f|
+= remote_form_for @student do |f|
   .row-fluid.mt-l
     .span12.well
       =render :partial => 'student_form_fields', :locals => { :f => f }
       .row-fluid
         .span12
           .span6
-            = submit_button t('student.create'), :id => 'submit-student-button'
+            = submit_button t(:'student.create'), :id => 'submit-student-button'
           = link_to_cancel :id => 'cancel-student-link'

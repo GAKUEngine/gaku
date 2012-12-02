@@ -72,13 +72,13 @@ module Gaku
         end
 
         def wait_until_visible(selector)
-          wait_until { find(selector).visible? }
           wait_for_ajax
+          wait_until { find(selector).visible? }
         end
 
         def wait_until_invisible(selector)
-          wait_until { !page.find(selector).visible? }
           wait_for_ajax
+          wait_until { !page.find(selector).visible? }
         end
 
         def visible?(selector)

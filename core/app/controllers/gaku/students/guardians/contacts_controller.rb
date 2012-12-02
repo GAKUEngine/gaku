@@ -1,6 +1,6 @@
 module Gaku
   class Students::Guardians::ContactsController < GakuController
-  	
+
   	inherit_resources
     actions :new, :update, :edit, :destroy
 
@@ -8,8 +8,7 @@ module Gaku
 
   	before_filter :guardian
     before_filter :student
-    before_filter :contact, :only => :make_primary 
-    before_filter :contact_types, :only => [:new, :edit]
+    before_filter :contact, :only => :make_primary
     before_filter :count, :only => [:create, :destroy]
 
     def create
@@ -39,7 +38,7 @@ module Gaku
         @contacts = Contact.where(:guardian_id => params[:guardian_id])
         @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
         format.js { render 'update' }
-      end  
+      end
     end
 
      def destroy
@@ -49,7 +48,7 @@ module Gaku
         end
           format.js { render 'destroy' }
       end
-    end 
+    end
 
   	def make_primary
       @contact.make_primary_guardian
@@ -72,15 +71,11 @@ module Gaku
       @contact = Contact.find(params[:id])
     end
 
-    def contact_types
-      @contact_types = ContactType.all
-    end
-
     def resource_name
       t('contact.singular')
     end
 
-    def count 
+    def count
       @count = @guardian.contacts.count
     end
   end

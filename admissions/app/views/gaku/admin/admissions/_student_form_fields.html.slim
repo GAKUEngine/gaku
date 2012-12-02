@@ -5,19 +5,19 @@
 
 .row-fluid
   .span6
-    = form.label :surname_reading, surname_reading_title, :class => "control-label pull-left"
+    = form.label :surname_reading, surname_reading_label, :class => "control-label pull-left"
     = form.text_field :surname_reading, :class => "span12"
   .span6
-    = form.label :name_reading, name_reading_title, :class => "control-label pull-left"
+    = form.label :name_reading, name_reading_label, :class => "control-label pull-left"
     = form.text_field :name_reading, :class => "span12"
 
 .row-fluid
   .span6
-    = form.label :surname, surname_reading_title, :class => "control-label pull-left"
+    = form.label :surname, surname_reading_label, :class => "control-label pull-left"
     = required_field
     = form.text_field :surname, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
   .span6
-    = form.label :name, name_title, :class => "control-label pull-left"
+    = form.label :name, name_label, :class => "control-label pull-left"
     = required_field
     = form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
 

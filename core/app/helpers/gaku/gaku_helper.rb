@@ -15,10 +15,24 @@ module Gaku
       end
     end
 
+    def countries
+      Gaku::Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
+    end
+
+    def scholarship_statuses
+      Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+    end
+
+    def contact_types
+      Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}
+    end
+
+    def genders
+      { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
-      puts klass
       presenter = klass.new(object, self)
       yield presenter if block_given?
       presenter

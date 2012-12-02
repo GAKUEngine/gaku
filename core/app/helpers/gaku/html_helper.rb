@@ -23,6 +23,13 @@ module Gaku
       end
     end
 
+    def th_icon(icon)
+      content_tag :th, class: "btn-inverse", style: "width:24px;" do
+        #content_tag(:i, class: "icon-#{icon} icon-white")
+        '<i class="icon-' + icon + ' icon-white"></i>'.html_safe
+      end
+    end
+
     def th_home_icon
       content_tag :th, class: "btn-inverse", style: "width:28px;" do
         content_tag :i, class: "icon-home icon-white"

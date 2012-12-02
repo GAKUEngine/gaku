@@ -13,5 +13,9 @@ module Gaku
       Gaku::Preset.get('address_country')
     end
 
+    def gender_preset
+      Gaku::Preset.get('students_gender')
+    end
+
   end
 end
