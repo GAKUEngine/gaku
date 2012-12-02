@@ -30,7 +30,7 @@ describe 'Syllabus' do
       size_of(table_rows).should eq tr_count+1
     end
 
-    it "errors without required fields" do
+    pending "errors without required fields" do
       click submit
       page.should have_content "This field is required"
       page.should_not have_content "was successfully created"
