@@ -85,6 +85,18 @@ module Gaku
       end
     end
 
+    def boolean_image(field)
+      if field
+        image_tag('tick.png')
+      else
+        image_tag('cross.png')
+      end
+    end
+
+    def color_code(color)
+      "<div style='width:100px;height:20px;background-color:#{color};border:1px solid whitesmoke'></div> ".html_safe
+    end
+
   end
 end
 

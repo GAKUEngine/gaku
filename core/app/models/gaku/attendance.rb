@@ -13,10 +13,12 @@
 #
 module Gaku
 	class Attendance < ActiveRecord::Base
-		attr_accessible :reason, :description
 
 		belongs_to :attendancable, :polymorphic => true
 		belongs_to :student
 		belongs_to :attendance_type
+
+		attr_accessible :reason, :student_id, :attendance_type_id
+
 	end
 end

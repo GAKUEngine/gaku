@@ -1,5 +1,4 @@
 jQuery ->
-
   $('#new-class-group form').validationEngine()
 
   $("#cancel-class-group-link").on 'click', (event)->

@@ -1,3 +1,10 @@
-<div>
-attendance chooser here
-</div>
+<form action='<%= @attendanceUrl %>' id='grading-attendance-type-select'>
+	<select>
+			<option> Choose Attendance Type </option>
+		<% for type in @attendanceTypes : %>
+			<option value='<%= type.id %>'><%= type.name %></option>	
+		<% end %>
+	</select>
+	<input />
+	<button>Submit</button>
+</form>

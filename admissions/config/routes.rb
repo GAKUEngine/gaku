@@ -6,8 +6,9 @@ Gaku::Core::Engine.routes.prepend do
         post :change_admission_method
         post :change_student_state
         get :student_chooser
+        post :create_multiple
       end
-      post :create_multiple
+      
       get :new_applicant
     end
     resources :admission_methods do

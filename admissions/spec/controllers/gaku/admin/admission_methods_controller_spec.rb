@@ -40,10 +40,8 @@ describe Gaku::Admin::AdmissionMethodsController do
     end
 
     it "renders the :new template" do
-      pending "need to resolve why is not rendering :new or remove test" do
-        gaku_xhr_get :new
-        response.should render_template :new
-      end
+      gaku_xhr_get :new
+      response.should render_template :new
     end
   end
 
@@ -51,19 +49,15 @@ describe Gaku::Admin::AdmissionMethodsController do
     context "with valid attributes" do
       it "saves the new admission method in the db" do
         expect{
-          gaku_post :create, admission_method: attributes_for(:admission_method)  
+          gaku_xhr_post :create, admission_method: attributes_for(:admission_method)  
         }.to change(Gaku::AdmissionMethod, :count).by 1
-        
-        controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new admission method in the db" do
-        pending "need to make validations in model" do
-          expect{
-            gaku_post :create, admission_method: {name: ''}  
-          }.to_not change(Gaku::AdmissionMethod, :count)
-        end
+        expect{
+          gaku_xhr_post :create, admission_method: {name: ''}  
+        }.to_not change(Gaku::AdmissionMethod, :count)
       end
     end
   end
@@ -77,20 +71,29 @@ describe Gaku::Admin::AdmissionMethodsController do
 
     context "valid attributes" do
       it "changes admission metod's attributes" do
-        gaku_put :update, id: admission_method,admission_method: attributes_for(:admission_method, name: "AZ")
+        gaku_put :update, id: admission_method, admission_method: attributes_for(:admission_method, name: "Regular Admissions")
         admission_method.reload
-        admission_method.name.should eq("AZ")
+        admission_method.name.should eq("Regular Admissions")
 
         controller.should set_the_flash
       end
     end
+
+    context "invalid attributes" do
+      it "does not change admission_method's attributes" do
+        gaku_xhr_put :update, id: admission_method, admission_method: attributes_for(:admission_method, name: "")
+        admission_method.reload
+        admission_method.name.should_not eq("")
+      end
+    end
   end
+
 
   describe "DELETE #destroy" do
     it "deletes the admission method" do
-      @admission_method = create(:admission_method)
+      admission_method
       expect{
-        gaku_delete :destroy, id: @admission_method
+        gaku_delete :destroy, id: admission_method
       }.to change(Gaku::AdmissionMethod, :count).by -1
 
       controller.should set_the_flash

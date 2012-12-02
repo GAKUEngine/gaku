@@ -52,6 +52,20 @@ en:
     file_type: File type
     name: Name
     new: New Attachment
+  attendance_type:
+    add: Add Attendance Type
+    edit: Edin Attendance Type
+    list: Attendance Types list
+    name: Name
+    new: New Attendance Type
+    plural: Attendance Types
+    save: Save Attendance Type
+    singular: Attendance Type
+    color_code: Color Code
+    credit_rate: Credit Rate
+    counted_absent: Counted Absent
+    disable_credit: Disable Credit
+    auto_credit: Auto Credit
   back: Back
   birth: Birth Date
   birth_and: and
@@ -399,6 +413,7 @@ en:
         backup: Backup
         system_tools: System Tools
       types:
+        attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Status Types
