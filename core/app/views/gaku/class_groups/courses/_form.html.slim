@@ -1,13 +1,13 @@
-= form_for [@class_group, @class_group_course_enrollment], { :remote => true } do |f|
-  .row-fluid.mt-l
+= remote_form_for [@class_group, @class_group_course_enrollment] do |f|
+  .row-fluid
     .span12.well
-      .row-fluid
-        = f.label :course_code, t('course.code'), :class => "control-label"
-        = f.select :course_id, @courses.collect { |c| ["#{c.code}", c.id] }, {:prompt => t('course.choose')}, :class => "span12 validate[required]"
-        = f.hidden_field :class_group_id, :value => @class_group.id
+      = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :class => "span12", :label => t(:'course.code')
+      = f.hidden_field :class_group_id, :value => @class_group.id
 
-      .row-fluid.mt-s
-        = submit_button t('course.save'), :id => 'submit-class-group-course-button', :class => "span6 btn btn-primary"
-        = link_to_cancel :id => "cancel-class-group-course-link"
+  .row-fluid
+    .span12
+      .span9
+        = submit_button t(:'course.save'), :id => 'submit-class-group-course-button'
+      = link_to_cancel :id => "cancel-class-group-course-link"
 
 /= javascript_include_tag 'gaku/class_groups/courses'

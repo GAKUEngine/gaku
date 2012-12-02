@@ -19,6 +19,10 @@ module Gaku
       Gaku::Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
     end
 
+    def courses
+      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+    end
+
     def scholarship_statuses
       Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
     end

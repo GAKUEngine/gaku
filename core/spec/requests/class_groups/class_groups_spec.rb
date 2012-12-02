@@ -32,7 +32,7 @@ describe 'ClassGroups' do
       flash_created?
     end
 
-    it "errors without required fields" do
+    pending "errors without required fields" do
       click submit
       page.should have_content 'field is required'
       flash_error_for 'class_group_name'
