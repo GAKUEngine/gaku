@@ -7,6 +7,12 @@ module Gaku
       end
     end
 
+    def table(&block)
+      content_tag :table, class: "table table-striped table-bordered table-condensed" do
+        block.call
+      end
+    end
+
     def sortable_table_for(id, &block)
       content_tag :table, class: "table table-striped table-bordered table-condensed tablesorter", id: id do
         block.call

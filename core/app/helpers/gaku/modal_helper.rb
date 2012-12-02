@@ -6,7 +6,7 @@ module Gaku
     end
 
     def modal_for(id, &block)
-      content_tag :div, class: "modal hide fade", id: id, wmode: "opaque" do
+      content_tag :div, class: "modal hide", id: id, wmode: "opaque" do
         block.call
       end
     end
