@@ -7,18 +7,18 @@ describe 'Admin ContactTypes' do
   let(:contact_type) { create(:contact_type, :name => 'mobile') }
 
   before :all do
-    set_resource "admin-contact-type" 
+    set_resource "admin-contact-type"
   end
 
   context 'new', :js => true do
-    before do 
+    before do
       visit gaku.admin_contact_types_path
       click new_link
       wait_until_visible submit
     end
 
     it 'creates and shows' do
-      expect do 
+      expect do
         fill_in 'contact_type_name', :with => 'home phone'
         click submit
         wait_until_invisible form
@@ -27,28 +27,28 @@ describe 'Admin ContactTypes' do
       page.should have_content 'home phone'
       within(count_div) { page.should have_content 'Contact Types list(1)' }
       flash_created?
-    end 
+    end
 
-    it 'cancels creating' do 
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context 'existing' do 
+  context 'existing' do
     before do
       contact_type
       visit gaku.admin_contact_types_path
     end
 
-    context 'edit', :js => true do 
-      before do 
+    context 'edit', :js => true do
+      before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits' do
         fill_in 'contact_type_name', :with => 'email'
-        click submit 
+        click submit
 
         wait_until_invisible modal
         page.should have_content 'email'
@@ -56,7 +56,7 @@ describe 'Admin ContactTypes' do
         flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
@@ -65,7 +65,7 @@ describe 'Admin ContactTypes' do
       page.should have_content contact_type.name
       within(count_div) { page.should have_content 'Contact Types list(1)' }
 
-      expect do 
+      expect do
         ensure_delete_is_working
       end.to change(Gaku::ContactType, :count).by -1
 

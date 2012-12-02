@@ -5,18 +5,18 @@ describe 'Syllabus' do
   stub_authorization!
 
   let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
-  
+
   before do
-    set_resource "syllabus" 
+    set_resource "syllabus"
   end
 
-  context '#new ', :js => true do 
+  context '#new ', :js => true do
     before do
       visit gaku.syllabuses_path
       click new_link
       wait_until_visible submit
     end
-    it "creates" do 
+    it "creates" do
       tr_count = size_of(table_rows)
       expect do
         fill_in "syllabus_name", :with => "Syllabus1"
@@ -25,17 +25,17 @@ describe 'Syllabus' do
         click submit
         wait_until_invisible submit
       end.to change(Gaku::Syllabus, :count).by 1
-      
+
       page.find(new_link).visible?
       size_of(table_rows).should eq tr_count+1
     end
 
-    it "errors without required fields" do 
+    it "errors without required fields" do
       click submit
       page.should have_content "This field is required"
       page.should_not have_content "was successfully created"
     end
-    it "cancels adding" do
+    it "cancels adding", :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -49,9 +49,9 @@ describe 'Syllabus' do
       it "lists existing syllabuses" do
         page.should have_content("List Syllabuses")
 
-        within(table) { 
+        within(table) {
           page.should have_content("Biology")
-          page.should have_content("bio") 
+          page.should have_content("bio")
         }
         size_of(table_rows).should eq 2
       end
@@ -68,7 +68,7 @@ describe 'Syllabus' do
         wait_until_visible modal
       end
 
-      it 'edits' do 
+      it 'edits' do
         fill_in "syllabus_name", :with => "Maths"
         fill_in "syllabus_code", :with => "math"
         fill_in "syllabus_description", :with => "Maths Description"
@@ -88,14 +88,14 @@ describe 'Syllabus' do
         flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
 
-      it 'edits from show view' do 
+      it 'edits from show view' do
         visit gaku.syllabus_path(syllabus)
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
 
         fill_in "syllabus_name", :with => "Maths"
         fill_in "syllabus_code", :with => "math"
@@ -126,5 +126,5 @@ describe 'Syllabus' do
     end
 
   end
-  
+
 end

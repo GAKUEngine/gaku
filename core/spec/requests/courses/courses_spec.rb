@@ -39,7 +39,7 @@ describe 'Courses' do
       page.should have_content('is required')
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
