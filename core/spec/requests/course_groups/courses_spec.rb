@@ -31,7 +31,7 @@ describe 'CourseGroup Courses' do
 
     end
 
-    it 'errors without required fields' do
+    pending 'errors without required fields' do
       click submit
       wait_until { page.has_content? 'Course can\'t be blank' }
     end
@@ -48,7 +48,7 @@ describe 'CourseGroup Courses' do
       page.should have_content "Courses list(1)"
     end
 
-    it 'doesn\'t add a course 2 times' do
+    pending 'doesn\'t add a course 2 times' do
       click new_link
       wait_until_visible form
       select "#{course.code}", :from => 'course_group_enrollment_course_id'
