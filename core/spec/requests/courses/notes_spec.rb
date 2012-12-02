@@ -32,7 +32,7 @@ describe 'Course Notes' do
       flash_created?
     end
 
-    it "errors without required fields"  do
+    pending "errors without required fields"  do
       click submit
       wait_until do
          flash_error_for 'note_title'

@@ -7,7 +7,5 @@ $("#course-students-index tbody").html('');
 $('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t_student_plural) %>');
 $('.course-students-count').html('<%= print_count(@course.students.count, t_student_list) %>');
 
-
 $('#student-modal').modal('hide');
 showNotice("<%= render_flash %>");
-

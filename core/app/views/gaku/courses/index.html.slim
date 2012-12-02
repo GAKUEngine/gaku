@@ -6,13 +6,13 @@
         = render 'form'
     .row-fluid
       .pull-left
-        h4.h4-vm.courses-count
-          = print_count(@count, t('course.list'))
+        = count_div 'courses-count' do
+          = print_count @count, t_course_list
       .pull-right
-        = ajax_link_to_new t('course.new'), new_course_path, :id => "new-course-link"
+        = ajax_link_to_new t(:'course.new'), [:new, :course], :id => "new-course-link"
     row-fluid
       .span12
         hr/
     .row-fluid
       .span12.well
-          =render 'gaku/courses/courses'
+          = render 'gaku/courses/courses'

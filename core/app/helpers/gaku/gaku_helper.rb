@@ -15,6 +15,10 @@ module Gaku
       end
     end
 
+    def syllabuses
+      Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
+    end
+
     def countries
       Gaku::Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
     end
