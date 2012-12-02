@@ -9,6 +9,7 @@ require 'cancan'
 require 'audited-activerecord'
 require 'inherited_resources'
 require 'slim-rails'
+require 'kaminari'
 
 module Gaku
 

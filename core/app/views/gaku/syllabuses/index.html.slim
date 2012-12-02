@@ -6,7 +6,7 @@
           h4.mt-xs.mb-0.syllabuses-count
             = print_count(@count, t_syllabus_list)
       .pull-right
-        = link_to_new t('syllabus.new'), '', :id => "new-syllabus-link"
+        = ajax_link_to_new t('syllabus.new'), new_syllabus_path, :id => "new-syllabus-link"
     .row-fluid
       .span12
         hr/

@@ -18,24 +18,24 @@ describe Gaku::SyllabusesController do
 
   describe 'GET #show' do
     it "assigns the requested syllabus to @syllabus" do
-      gaku_get :show, id: syllabus
+      gaku_xhr_get :show, id: syllabus
       assigns(:syllabus).should eq syllabus
     end
 
     it "renders the :show template" do
-      gaku_get :show, id: syllabus
+      gaku_xhr_get :show, id: syllabus
       response.should render_template :show
     end
   end
 
   describe 'GET #new' do
     it "assigns a new syllabus to @syllabus" do
-      gaku_get :new
+      gaku_xhr_get :new
       assigns(:syllabus).should be_a_new(Gaku::Syllabus)
     end
 
     it "renders the :new template" do
-      gaku_get :new
+      gaku_xhr_get :new
       response.should render_template :new
     end
   end
@@ -44,16 +44,15 @@ describe Gaku::SyllabusesController do
     context "with valid attributes" do
       it "saves the new syllabus in the db" do
         expect{
-          gaku_post :create, syllabus: attributes_for(:syllabus)  
+          gaku_xhr_post :create, syllabus: attributes_for(:syllabus)  
         }.to change(Gaku::Syllabus, :count).by 1
         
-        controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new syllabus in the db" do
         expect{
-          gaku_post :create, syllabus: {name: ''}  
+          gaku_xhr_post :create, syllabus: {name: ''}  
         }.to_not change(Gaku::Syllabus, :count)
       end
     end

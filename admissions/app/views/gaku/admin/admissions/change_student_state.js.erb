@@ -1,4 +1,9 @@
 $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').fadeOut(function(){
   $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').remove();
+
   $('<%= render_js_partial("student", {:student => @student, :state => @state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
 });
+
+<%- if @next_phase %>
+  $('a[href$="#phase_<%= @next_phase.id%>"]').trigger('click');
+<% end %>

@@ -20,10 +20,11 @@
           .pull-left
             h4.mt-xs.mb-0.students-count
               /= print_count(@students.count, "合計志願者数：")
-          .pull-right
-            = ajax_link_to_new t("admissions.candidates.new"), new_student_path, :id => "new-student-link", :class => 'mr-s btn btn-primary'
 
-            = button t("admissions.candidates.export"), "students.csv", :id => 'export-students-link', :class => 'btn'
+          .pull-right
+            #new-admin-admission-link
+              = render 'gaku/admin/admissions/links', :admission_method => @admission_method
+        #new-admin-admission.hide
         hr
         #admission-phases
-          = render 'gaku/admin/admissions/phases', :admission_method => @admission_periods.last.admission_methods.first
+          = render 'gaku/admin/admissions/phases', :admission_method => @admission_method

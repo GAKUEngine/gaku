@@ -1,23 +1,13 @@
-#edit-student-modal.modal.hide
-  .modal-header
-    button type="button" class="close" data-dismiss="modal" ×
-    h1 Edit Student
+= modal_for 'edit-student-modal' do
+  = modal_header t(:'student.edit')
   .modal-body
-    = form_for student, :remote => true do |form|
-		  - if student.errors.any?
-		    .alert.alert-error
-		      strong
-		        = pluralize(student.errors.count, "error")
-		        | prohibited this student from being saved:
-		      ul
-		        - student.errors.full_messages.each do |msg|
-		          li= msg
+    = modal_form_for student do |f|
 		  .row-fluid
 		    .span12.well
-		      =render :partial => 'gaku/students/student_form_fields', :locals => { :form => form }
+		      = render 'gaku/students/student_form_fields', :f => f
 
 		  .row-fluid
 		    .span12.well
 		      .span9
-		        = form.submit nil, :id => 'submit-student-button', :class => "span12 btn btn-primary update_student"
-		      = link_to_cancel :id => 'cancel-student-link', :class => "span3 btn"
+		        = submit_button t(:'student.save'), :id => 'submit-student-button'
+		      = link_to_cancel :id => 'cancel-student-link'

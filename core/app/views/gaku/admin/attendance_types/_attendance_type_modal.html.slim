@@ -1,0 +1,10 @@
+= modal_for 'edit-attendance-type-modal' do
+  = modal_header t(:'attendance_type.edit')
+  = modal_form_for [:admin, @attendance_type] do |f|
+    .modal-body
+      .row-fluid
+        = render 'form_fields', :f => f
+      .row-fluid
+        .span9
+          = submit_button t(:'attendance_type.save'), :id => 'submit-admin-attendance-type-button'
+        = link_to_cancel :id => 'cancel-admin-attendance-type-link'

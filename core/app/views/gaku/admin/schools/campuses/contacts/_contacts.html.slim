@@ -2,23 +2,20 @@
   .row-fluid
     #new-admin-school-campus-contact.hide
     .pull-left
-      h4.h4-vm.admin-school-campus-contacts-count
-        = print_count(@campus.contacts.count, t('contact.list'))
+      = count_div 'admin-school-campus-contacts-count' do
+        = print_count @campus.contacts.count, t_contact_list
     .pull-right
-        = ajax_link_to_new t('contact.add'), new_admin_school_campus_contact_path(@campus.school, @campus), :id => 'new-admin-school-campus-contact-link'
+        = ajax_link_to_new t(:'contact.add'), [:new, :admin, @campus.school, @campus, :contact], :id => 'new-admin-school-campus-contact-link'
 
   .row-fluid
-    table#admin-school-campus-contacts-index.index.table.table-striped.table-bordered.table-condensed
+    = table_for 'admin-school-campus-contacts-index' do
       thead
         tr
-          th.btn-inverse style="width:28px; height:28px"
-              i.icon-white.icon-home
-          th.btn-inverse = t('contact_type.singular')
-          th.btn-inverse = t('contact.data')
-          th.btn-inverse = t('contact.details')
-          th.btn-inverse = t('contact.emergency')
-          th.btn-info style='width:61px' = t('manage')
+          = th_icon 'home'
+          = th t(:'contact_type.singular')
+          = th t(:'contact.data')
+          = th t(:'contact.details')
+          = th t(:'contact.emergency')
+          = th_actions 2
       tbody
-        =render :partial => 'gaku/admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'
-    br/
-    #new-admin-school-campus-contact-form-errors
+        = render :partial => 'gaku/admin/schools/campuses/contacts/contact', :collection => @campus.contacts, :as => 'contact'

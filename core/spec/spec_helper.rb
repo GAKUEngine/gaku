@@ -66,6 +66,7 @@ Spork.each_run do
     config.include Gaku::Core::TestingSupport::FlashHelpers, :type => :request
     config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, :type => :controller
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, :type => :request
+    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
   end
 
   RSpec::Matchers.define :have_valid_factory do |factory_name|

@@ -1,19 +1,18 @@
 #admin-commute-method-types
 	#new-admin-commute-method-type.hide
+		= render('form')
 	.row-fluid
 		.pull-left
-			h4.h4-vm.admin-commute-method-types-count
-				= print_count(@count, t_commute_method_type_list)
+			= count_div 'admin-commute-method-types-count' do
+				= print_count @count, t_commute_method_type_list
 		.pull-right
-			=ajax_link_to_new t('commute_method_type.new'), new_admin_commute_method_type_path, :id => 'new-admin-commute-method-type-link'
-	.row-fluid
-		span12
+			= ajax_link_to_new t(:'commute_method_type.new'), [:new, :admin, :commute_method_type], :id => 'new-admin-commute-method-type-link'
 	.row-fluid
 		.span12
-			table#admin-commute-method-types-index.index.table.table-striped.table-bordered.table-condensed
+			= table_for 'admin-commute-method-types-index' do
 			  thead
 			    tr
-			      th.btn-inverse = t('commute_method_type.plural')
-			      th.btn-inverse style="width:61px" = t('manage')
+			      = th t(:'commute_method_type.plural')
+			      = th_actions 2
 			    tbody
-			    	=render :partial => 'commute_method_type', :collection => @commute_method_types, :as => :commute_method_type
+			    	= render :partial => 'commute_method_type', :collection => @commute_method_types, :as => :commute_method_type

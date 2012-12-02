@@ -1,8 +1,6 @@
 .row-fluid.control-group
   .span12
-    = note_form.label :title, t('note.title'), :class => "control-label"
-    = note_form.text_field :title, :class => "span12 edit_note validate[required]"
+    = f.text_field :title, :class => "span12 edit_note", :label => t(:'note.title')
 .row-fluid.control-group
   .span12
-    = note_form.label :content, t('note.content'), :class => "control-label"
-    = note_form.text_area :content, :class => "span12 edit_note validate[required]", :size => "0x10"
+    = f.text_area :content, :class => "span12 edit_note", :size => "0x7", :label => t(:'note.content')

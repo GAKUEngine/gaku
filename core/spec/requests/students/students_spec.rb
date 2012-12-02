@@ -14,7 +14,7 @@ describe 'Students' do
   end
 
   context "existing" do
-    before do 
+    before do
       student
       student2
       student3
@@ -26,16 +26,16 @@ describe 'Students' do
       page.should have_content "#{student.name}"
       page.should have_content "#{student.surname}"
       page.should have_content "#{student2.name}"
-      page.should have_content "#{student2.surname}" 
-      page.should have_content "#{student3.name}" 
+      page.should have_content "#{student2.surname}"
+      page.should have_content "#{student3.name}"
       page.should have_content "#{student3.surname}"
     end
 
-    it 'chooses students', :js => true do 
+    it 'chooses students', :js => true do
       find(:css, "input#student-#{student.id}").set(true)
       wait_until_visible '#students-checked-div'
 
-      within('#students-checked-div') do 
+      within('#students-checked-div') do
         page.should have_content 'Chosen students(1)'
         click_link 'Show'
         wait_until_visible '#chosen-table'
@@ -52,28 +52,28 @@ describe 'Students' do
 
       fill_in 'q_name_cont', :with => "J"
       wait_for_ajax
-      
+
       size_of(table_rows).should eq 3
       within(table) do
-        page.should have_content "John" 
+        page.should have_content "John"
         page.should have_content "Johny"
       end
-      
+
       fill_in 'q_surname_cont', :with => "B"
       wait_for_ajax
-      
+
       size_of(table_rows).should eq 2
       within(table) do
         page.should have_content "Johny"
         page.should have_content "Bravo"
-      end 
+      end
     end
 
-    context '#edit from show view', :js => true do 
+    context '#edit from show view', :js => true do
       before do
-        visit gaku.student_path(student)        
+        visit gaku.student_path(student)
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it "edits " do
@@ -85,22 +85,22 @@ describe 'Students' do
         page.should have_content "Kostova"
         page.should have_content "Marta"
         student.reload
-        student.name.should eq "Marta" 
+        student.name.should eq "Marta"
         student.surname.should eq "Kostova"
-        flash_updated? 
+        flash_updated?
       end
 
-      it 'cancels editting' do
-        ensure_cancel_modal_is_working 
+      it 'cancels editting', :cancel => true do
+        ensure_cancel_modal_is_working
       end
 
     end
 
     context '#edit from index view', :js => true do
       before do
-        visit gaku.students_path        
+        visit gaku.students_path
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it "edits" do
@@ -112,23 +112,23 @@ describe 'Students' do
         page.should have_content "Kostova"
         page.should have_content "Marta"
         student.reload
-        student.name.should eq "Marta" 
+        student.name.should eq "Marta"
         student.surname.should eq "Kostova"
-        flash_updated? 
+        flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
-    
+
     it 'deletes', :js => true do
       visit gaku.student_path(student2)
       student_count = Gaku::Student.count
       page.should have_content "#{student2.name}"
-      
-      expect do 
-        click '#delete-student-link'     
+
+      expect do
+        click '#delete-student-link'
         within(modal) { click_on "Delete" }
         accept_alert
         wait_until { flash_destroyed? }
@@ -139,11 +139,11 @@ describe 'Students' do
       current_path.should eq gaku.students_path
     end
 
-    it 'enrolls to class', :js => true do 
+    it 'enrolls to class', :js => true do
       class_group
       visit gaku.student_path(student)
-      
-      expect do 
+
+      expect do
         click_on 'enroll-student-link'
         wait_until_visible modal
 
@@ -162,7 +162,7 @@ describe 'Students' do
       end
 
       visit gaku.student_path(student)
-      within('td#student-class-group-enrollment') do 
+      within('td#student-class-group-enrollment') do
         page.should have_content 'Biology'
         page.should have_content '77'
       end
@@ -170,15 +170,15 @@ describe 'Students' do
 
   end
 
-  context "new", :js => true do 
-    before do 
+  context "new", :js => true do
+    before do
       visit gaku.students_path
       click new_link
       wait_until_visible submit
     end
 
-    it "creates and shows" do 
-      expect do 
+    it "creates and shows" do
+      expect do
         fill_in "student_name", :with => "John"
         fill_in "student_surname", :with => "Doe"
         click_button "submit-student-button"
@@ -189,16 +189,15 @@ describe 'Students' do
       within(count_div) { page.should have_content 'Students list(1)' }
       flash_created?
     end
-        
-    it 'errors without required fields' do 
+
+    pending 'errors without required fields' do
       click submit
       wait_until do
-        page.should have_selector 'div.student_surnameformError'
-        page.should have_selector 'div.student_nameformError'
+        page.should have_content "can't be blank"
       end
     end
 
-    it 'cancels creating' do 
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end

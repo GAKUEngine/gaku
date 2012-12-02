@@ -89,5 +89,13 @@ module Gaku
       t('exam_portion.list')
     end
 
+    def t_attendance_type_list
+      t('attendance_type.list')
+    end
+
+    def t_note_list
+      t(:'note.list')
+    end
+
   end
 end

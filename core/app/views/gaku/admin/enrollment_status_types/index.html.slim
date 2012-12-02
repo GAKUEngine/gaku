@@ -2,17 +2,17 @@
   #new-admin-enrollment-status-type.hide
   .row-fluid
     .pull-left
-      h4.h4-vm.admin-enrollment-status-types-count
-        = print_count(@count, t_enrollment_status_type_list)
+      = count_div 'admin-enrollment-status-types-count' do
+        = print_count @count, t_enrollment_status_type_list
     .pull-right
-      =ajax_link_to_new t('enrollment_status_type.add'), new_admin_enrollment_status_type_path, :id => 'new-admin-enrollment-status-type-link'
+      = ajax_link_to_new t(:'enrollment_status_type.add'), [:new, :admin, :enrollment_status_type], :id => 'new-admin-enrollment-status-type-link'
   .row-fluid
-    table#admin-enrollment-status-types-index.index.table.table-striped.table-bordered.table-condensed
+    = table_for 'admin-enrollment-status-types-index' do
       thead
         tr
-          th.btn-inverse = t('enrollment_status_type.singular')
-          th.btn-inverse = t('enrollment_status_type.active')
-          th.btn-info style="width:61px" = t('manage')
+          = th t(:'enrollment_status_type.singular')
+          = th t(:'enrollment_status_type.active')
+          = th_actions 2
       tbody
-        =render :partial => 'gaku/admin/enrollment_status_types/enrollment_status_type', :collection => @enrollment_status_types, :as => 'enrollment_status_type'
+        = render :partial => 'gaku/admin/enrollment_status_types/enrollment_status_type', :collection => @enrollment_status_types, :as => 'enrollment_status_type'
     br/

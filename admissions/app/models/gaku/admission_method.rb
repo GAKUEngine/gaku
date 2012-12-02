@@ -6,5 +6,7 @@ module Gaku
     has_many :period_method_associations
 
     attr_accessible :name, :admission_id, :admission_period_id
+
+    validates :name, :presence => true
   end
 end

@@ -2,7 +2,7 @@
 
 .row-fluid.hide#students-checked-div
   .span6.well
-    h4.pull-left = t("student.chosen_students")
+    h4.pull-left= t(:'student.chosen_students')
     h4.chosen-count.pull-left
     .table-action.show-chosen-table.pull-right = link_to t(:show),nil
     .table-action.hide-chosen-table.pull-right.hide = link_to t(:hide),nil
@@ -25,6 +25,12 @@
           = hidden_field_tag "source", "courses"
           h4 = "Adding students to " + @course.code
           = submit_tag t('course_enrollment.add'), :class => 'btn btn-primary'
+      -elsif !@admission.nil?
+        = form_tag( admissions_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+          = form.hidden_field :admission_period_id, :value => params[:admission_period_id]
+          = form.hidden_field :admission_method_id, :value => params[:admission_method_id]
+          h4 = "Adding students to admission"
+          = submit_tag t('admissions.add'), :class => 'btn btn-primary'
       - else
         .span12 style="margin-top:10px;"
           = form_tag( enroll_students_class_group_enrollments_path, :method => "post", :id => "enroll-to-class-form", :remote => true) do
@@ -40,9 +46,9 @@
           = submit_tag t('course_enrollment.add'), :class => 'btn btn-primary'
 .row-fluid
   .span12.well
-    #students-index
+    #students-index-div
       =render 'gaku/students/students'
-= javascript_include_tag "gaku/student_chooser"
+/= javascript_include_tag "gaku/student_chooser"
 
 
 javascript:

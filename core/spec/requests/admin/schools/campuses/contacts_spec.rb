@@ -8,21 +8,21 @@ describe 'Admin School Campus Contact' do
   let(:contact_type) { create(:contact_type, :name => 'email') }
   let(:contact) { create(:contact, :contact_type => contact_type) }
   let(:contact2) { create(:contact, :data => 'gaku2@example.com', :contact_type => contact_type) }
-  before :all do 
+  before :all do
     set_resource "admin-school-campus-contact"
   end
-  
 
-  context 'new', :js => true do 
+
+  context 'new', :js => true do
     before do
       contact_type
-      visit gaku.admin_school_campus_path(school, school.campuses.first) 
+      visit gaku.admin_school_campus_path(school, school.campuses.first)
       click new_link
       wait_until_visible submit
     end
 
     it "creates and shows" do
-      expect do 
+      expect do
         select 'email', :from => 'contact_contact_type_id'
         fill_in "contact_data", :with => "The contact data"
         fill_in "contact_details", :with => "The contact details"
@@ -36,42 +36,42 @@ describe 'Admin School Campus Contact' do
       flash_created?
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context "existing", :js => true do 
-    before do 
-      school.campuses.first.contacts << contact 
+  context "existing", :js => true do
+    before do
+      school.campuses.first.contacts << contact
     end
 
-    context 'edit' do 
-      before do 
+    context 'edit' do
+      before do
         contact_type
         visit gaku.admin_school_campus_path(school, school.campuses.first)
         click edit_link
         wait_until_visible modal
       end
 
-      it "edits" do 
+      it "edits" do
         fill_in 'contact_data', :with => 'example@genshin.org'
         click submit
 
         wait_until_invisible modal
-        page.should have_content 'example@genshin.org' 
+        page.should have_content 'example@genshin.org'
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
 
-    it "sets as primary" do 
-      
+    it "sets as primary" do
+
       school.campuses.first.contacts << contact2
-      
+
       visit gaku.admin_school_campus_path(school, school.campuses.first)
 
       school.campuses.first.contacts.first.is_primary? == true
@@ -89,8 +89,8 @@ describe 'Admin School Campus Contact' do
 
       within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content(contact.data)
-      
-      expect do 
+
+      expect do
         ensure_delete_is_working
       end.to change(school.campuses.first.contacts, :count).by -1
 

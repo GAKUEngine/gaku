@@ -11,14 +11,15 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
   render: ->
     optionsObjects =  {
-                        course: @options.course, 
-                        exams: @options.exams, 
-                        student_total_scores: @options.student_total_scores, 
-                        exam_averages: @options.exam_averages, 
-                        deviation: @options.deviation, 
-                        students: @options.students, 
-                        grades: @options.grades, 
+                        course: @options.course,
+                        exams: @options.exams,
+                        student_total_scores: @options.student_total_scores,
+                        exam_averages: @options.exam_averages,
+                        deviation: @options.deviation,
+                        students: @options.students,
+                        grades: @options.grades,
                         ranks: @options.ranks
+                        attendances: @options.attendances
                       }
     
     $(this.el).html @template(optionsObjects)
@@ -33,17 +34,16 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       $('#exam-grading-calculations').html calculationsView.render().el
     @
 
-  
 
   onEnterActions: (event)->
-    if !event.shiftKey && event.keyCode == 13 
+    if !event.shiftKey && event.keyCode == 13
       @nextOnEnter(event)
     else if event.shiftKey && event.keyCode == 13
       @prevOnShiftEnter(event)
 
 
   prevOnShiftEnter: (event)->
-    event.preventDefault()  
+    event.preventDefault()
     $this = $(event.target)
 
     portion = $this.parent().attr('class')
@@ -70,18 +70,16 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .find('input.score-cell')
                 .last()
                 .focus()
-        
 
+    return false
 
-
-    return false;
 
   nextOnEnter: (event)->
       event.preventDefault()
-      $this = $(event.target) 
+      $this = $(event.target)
 
       portion = $this.parent().attr('class')
-      nextDiv = $this.closest('tr').next().find('.'+portion);
+      nextDiv = $this.closest('tr').next().find('.'+portion)
       input = nextDiv.find('.score-cell')
 
       if input[0]?
@@ -104,11 +102,42 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .focus()
       return false
 
-  
 
   setPortionAttendance: (event)->
+
     currentTarget = $(event.currentTarget)
-    alert "attendance modal here"
+    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'    
+    attendanceId = $(currentTarget).attr('data-attendance')
+
+    if attendanceId
+      attendance = new GAKUEngine.Models.Attendance()
+      attendance.url = "#{attendanceUrl}/#{attendanceId}"
+      attendance.fetch
+        success: ->
+          console.log attendance
+          attendanceShow = new GAKUEngine.Views.ExamAttendanceShow({model: attendance, currentTarget: currentTarget })
+          currentTarget.popover
+            html : true
+            content: ->
+              attendanceShow.render().el
+    else
+      attendance_types = new GAKUEngine.Collections.AttendanceTypes()
+      attendance_types.bind 'reset', ->
+
+        attendanceView = new GAKUEngine.Views.ExamAttendance(
+                                  attendance_types : attendance_types,
+                                  attendanceUrl : attendanceUrl,
+                                  currentTarget : currentTarget)
+        currentTarget.popover
+          html : true
+          content: ->
+            attendanceView.render().el
+
+      attendance_types.fetch()
+
+  renderAttendance: ->
+    @attendance_types
+
 
   validatePortion: (event)->
     currentTarget = $(event.currentTarget)
@@ -121,14 +150,18 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
     else if currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
-      @updataPortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
+      @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
 
-  updataPortion:(urlLink, score, baseURI) ->
+
+
+  updatePortion:(urlLink, score, baseURI) ->
     @exam_score = new GAKUEngine.Models.ExamPortionScore
       urlLink: urlLink
       score: score
       baseURI: baseURI
     console.log 'update me'
+
+
 
   removeBorder:(event)->
     $(event.currentTarget).removeClass('score-error')

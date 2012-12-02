@@ -1,6 +1,6 @@
 <div class='row-fluid'>
   <div class='span12 well pull-left'>
-    <table class='exam_grid table table-striped table-bordered table-condensed'>
+    <table class='exam-frame-table exam_grid table table-striped table-bordered table-condensed'>
       <thead>
         <tr>
           <th class='btn-primary'>Student </th>
@@ -20,3 +20,4 @@
     <table>
   </div>
 </div>
+<div class='stupid'></div>

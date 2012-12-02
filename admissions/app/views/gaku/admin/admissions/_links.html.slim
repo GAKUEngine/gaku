@@ -1,0 +1,5 @@
+- if !admission_method.nil?
+  = ajax_link_to_new t("admissions.candidates.new"), new_admin_admission_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => "new-admission-link", :class => 'mr-s btn btn-primary'
+  = ajax_link_to_new t("admissions.candidates.exciting"), student_chooser_admin_admissions_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => 'new-create-multiple-admissions-student-link', :class => 'mr-s btn btn-primary'
+
+  = button t("admissions.candidates.export"), "students.csv", :id => 'export-students-link', :class => 'btn'

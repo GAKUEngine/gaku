@@ -34,12 +34,12 @@ describe 'Courses' do
       flash_created?
     end
 
-    it 'doesn\'t create without required fields' do
+    pending 'doesn\'t create without required fields' do
       click submit
       page.should have_content('is required')
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -62,7 +62,7 @@ describe 'Courses' do
       page.should have_content('biology')
     end
 
-    it 'shows validation messages upon edit', :js => true do
+    pending 'shows validation messages upon edit', :js => true do
       within(table) { click edit_link }
 
       page.should have_content("Edit Course")

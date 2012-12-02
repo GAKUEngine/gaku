@@ -21,6 +21,8 @@ module Gaku
         return
       end
 
+      @students = @students.page(params[:page]).per(10)
+
       @student = Student.new
       @courses = get_courses
       @enrolled_students = params[:enrolled_students]

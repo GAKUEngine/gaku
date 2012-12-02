@@ -1,0 +1,9 @@
+= remote_form_for [:admin, @attendance_type] do |f|
+  .row-fluid.mt-l
+    .span12.well
+      = render 'form_fields', :f => f
+  .row-fluid
+    .span12
+      .span6
+        = submit_button t(:'attendance_type.save'), :id => 'submit-admin-attendance-type-button'
+      = link_to_cancel :id => 'cancel-admin-attendance-type-link'

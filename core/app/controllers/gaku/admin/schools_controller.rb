@@ -7,7 +7,7 @@ module Gaku
 
       respond_to :js, :html
 
-      before_filter :count, :only => [:create, :destroy]
+      before_filter :count, :only => [:create, :destroy, :index]
       before_filter :master_school, :only => [:index, :school_details, :edit_master]
 
       def school_details

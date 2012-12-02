@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe 'ClassGroup Students' do
-  
+
   stub_authorization!
 
   let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
   let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
 
   before :all do
-    set_resource "class-group-student" 
+    set_resource "class-group-student"
   end
 
   before do
@@ -30,7 +30,7 @@ describe 'ClassGroup Students' do
       expect do
         find(:css, "input#student-#{student1.id}").set(true)
         wait_until_visible('#students-checked-div')
-        within('#students-checked-div') do 
+        within('#students-checked-div') do
           page.should have_content('Chosen students(1)')
           click_link('Show')
           wait_until_visible('#chosen-table')
@@ -41,7 +41,7 @@ describe 'ClassGroup Students' do
 
         within(table){ page.should have_content("#{student1.name}") }
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
-      
+
       within('.class-group-enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
     end
@@ -50,7 +50,7 @@ describe 'ClassGroup Students' do
       expect do
         find(:css, "input#student-#{student1.id}").set(true)
         wait_until_visible('#students-checked-div')
-        within('#students-checked-div') do 
+        within('#students-checked-div') do
           page.should have_content('Chosen students(1)')
           click_link('Show')
           wait_until { find('#chosen-table').visible? }
@@ -59,7 +59,7 @@ describe 'ClassGroup Students' do
         click cancel_link
         wait_until_invisible('#student-modal')
       end.to change(Gaku::ClassGroupEnrollment, :count).by 0
-      
+
       within(table) { page.should_not have_content("#{student1.name}") }
       within('.class-group-enrollments-count') { page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
@@ -78,9 +78,9 @@ describe 'ClassGroup Students' do
       click new_link
       wait_until_visible('#student-modal')
       fill_in 'q[name_cont]', :with => 'Sus'
-     
+
       wait_until { size_of(table_rows) == 1 }
-      
+
     end
   end
 
@@ -103,9 +103,9 @@ describe 'ClassGroup Students' do
 
     it 'deletes', :js => true do
       click_link 'class-group-enrollments-tab-link'
-      
+
       ensure_delete_is_working
-      
+
       within('.class-group-enrollments-count') { page.should_not have_content("1") }
       within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
     end

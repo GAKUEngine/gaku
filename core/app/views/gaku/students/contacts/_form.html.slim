@@ -1,14 +1,11 @@
-- model = @contact || Contact.new
-= form_for [@student, model], :remote => true do |contact_form|
-  b= t('contact.new')
+= remote_form_for [@student, @contact] do |f|
   .row-fluid.mt-l
     .span12.well
-      = render 'gaku/shared/form_fields/contact_form_fields',  :contact_form => contact_form
-      
+      = render 'gaku/shared/form_fields/contact_form_fields',  :f => f
       .row-fluid
         .span12
           .span6
-            = submit_button t('contact.save'), :id => 'submit-student-contact-button'
+            = submit_button t(:'contact.save'), :id => 'submit-student-contact-button'
           = link_to_cancel :id => 'cancel-student-contact-link'
 
-= javascript_include_tag 'gaku/students/contacts'
+/= javascript_include_tag 'gaku/students/contacts'

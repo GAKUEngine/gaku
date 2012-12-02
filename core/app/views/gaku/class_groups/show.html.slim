@@ -3,17 +3,17 @@
   .span10
     .row-fluid
       .span12
-        h3= t('class_group.show')
+        h3 = t(:'class_group.show')
     .row-fluid
       .span12
         hr/
     .row-fluid
-      table.table.table-condensed.table-striped.table-bordered
+      = table do
         thead
           tr
-            th = t('class_group.grade')
-            th = t('class_group.name')
-            th = t('class_group.homeroom')
+            th = t(:'class_group.grade')
+            th = t(:'class_group.name')
+            th = t(:'class_group.homeroom')
         tbody
           tr class="class-group-#{@class_group.id}"
             = render 'gaku/shared/fields/class_group_fields', :class_group => @class_group
@@ -43,18 +43,18 @@
                 = render 'gaku/class_groups/semesters/semesters'
               .row-fluid
                 div id="semester_form" style="display:none"
-                  
+
             #courses.tab-pane
               .row-fluid
                 = render 'gaku/class_groups/courses/courses'
               .row-fluid
                 div id="course_form" style="display:none"
-    
+
     .row-fluid
       .span12.well
         #class-group-notes
           = render :partial => 'gaku/notes/notes'
-          
+
     .row-fluid
       .span12.well
         = link_to_edit_with_text [:edit, @class_group], :class => "span6 btn edit-link", :remote => true

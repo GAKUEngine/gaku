@@ -1,0 +1,5 @@
+$('#new-admin-admission').slideToggle();
+$('#new-admin-admission-link').show();
+
+showNotice("<%= render_flash %>");
+$('#state<%= @admission_phase_record.admission_phase_state.id.to_s %> #students-index tbody').append('<%= render_js_partial("gaku/admin/admissions/student", :student => @admission.student, :state => @admission_phase_record.admission_phase_state) %>');
