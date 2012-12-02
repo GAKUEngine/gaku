@@ -1,17 +1,13 @@
-= form_for [:admin, @enrollment_status_type], :remote => true do |enrollment_status_type_form|
-  - if enrollment_status_type_form.object.new_record?
-    b= t('enrollment_status_type.new')
-    .row-fluid.mt-l
-      .span12.well
-          = enrollment_status_type_form.label :name, t('enrollment_status_type.name')
-          = enrollment_status_type_form.text_field :name, :class => "span12"
+= remote_form_for [:admin, @enrollment_status_type] do |f|
+  .row-fluid.mt-l
+    .span12.well
+      = f.text_field :name, :class => "span12", :label => t(:'enrollment_status_type.name')
+      = f.check_box :is_active, :label => t(:'enrollment_status_type.active')
 
-          = enrollment_status_type_form.label :is_active, t('enrollment_status_type.active')
-          = enrollment_status_type_form.check_box :is_active
-          .row-fluid
-            .span12
-              .span6
-                =submit_button t('enrollment_status_type.save'), :id => 'submit-admin-enrollment-status-type-button'
-              = link_to_cancel :id => 'cancel-admin-enrollment-status-type-link'
+  .row-fluid
+    .span12
+      .span9
+        = submit_button t(:'enrollment_status_type.save'), :id => 'submit-admin-enrollment-status-type-button'
+      = link_to_cancel :id => 'cancel-admin-enrollment-status-type-link'
 
 /= javascript_include_tag 'gaku/admin/enrollment_status_types'
