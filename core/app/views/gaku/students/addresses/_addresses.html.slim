@@ -2,27 +2,26 @@
   .row-fluid
     #new-student-address.hide
     .pull-left
-      h4.mt-xs.mb-0.student-addresses-count
-        = print_count(@student.addresses.count, t('address.list'))
+      = count_div 'student-addresses-count' do
+        = print_count @student.addresses.count, t(:'address.list')
     .pull-right
-      = ajax_link_to_new t('address.add'), new_student_address_path(@student), :id => 'new-student-address-link'
+      = ajax_link_to_new t('address.add'), [:new, @student, :address], :id => 'new-student-address-link'
   .row-fluid
     .span12
       hr
   .row-fluid
     .span12
-      table#student-addresses-index.index.table.table-striped.table-bordered.table-condensed
+      = table_for 'student-addresses-index' do
         thead
           tr
-            th.btn-inverse style="width:28px"
-              i.icon-white.icon-home
-            th.btn-inverse = t('address.title')
-            th.btn-inverse = t('address.country')
-            th.btn-inverse = t('address.zipcode')
-            th.btn-inverse = t('address.state')
-            th.btn-inverse = t('address.city')
-            th.btn-inverse = t('address.address1')
-            th.btn-inverse = t('address.address2')
-            th.btn-info style="width:61px" = t('manage')
+            = th_icon 'home'
+            = th t(:'address.title')
+            = th t(:'address.country')
+            = th t(:'address.zipcode')
+            = th t(:'address.state')
+            = th t(:'address.city')
+            = th t(:'address.address1')
+            = th t(:'address.address2')
+            = th_actions 2
         tbody
-          =render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'
+          = render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'

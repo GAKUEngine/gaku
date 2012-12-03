@@ -19,22 +19,22 @@ describe 'Student Guardian Contacts' do
   before(:each) do
     contact_type
     student.guardians << guardian
-    visit gaku.student_path(student) 
-    
+    visit gaku.student_path(student)
+
     click tab_link
-    wait_until { page.has_content? 'Guardians list' } 
+    wait_until { page.has_content? 'Guardians list' }
   end
 
-  context 'new', :js => true  do 
+  context 'new', :js => true  do
 
-    context 'thru modal' do 
-      before do 
+    context 'thru modal' do
+      before do
         click new_link
         wait_until_visible modal
       end
 
-      it "creates and shows" do 
-        expect do 
+      it "creates and shows" do
+        expect do
           select 'mobile',           :from => 'contact_contact_type_id'
           fill_in 'contact_data',    :with => '777'
 
@@ -48,20 +48,20 @@ describe 'Student Guardian Contacts' do
         within(count_div) { page.should have_content 'Contacts list(1)' }
       end
 
-      it 'cancels creating' do 
+      it 'cancels creating', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
-    
-    context 'thru slide form' do 
-      before do 
+
+    context 'thru slide form' do
+      before do
         click show_link
         click new_link
         wait_until_visible submit
       end
 
-      it "creates and shows" do 
-        expect do 
+      it "creates and shows" do
+        expect do
           select 'mobile', :from => 'contact_contact_type_id'
           fill_in 'contact_data',    :with => '777'
 
@@ -75,27 +75,27 @@ describe 'Student Guardian Contacts' do
         flash_created?
       end
 
-      it 'cancels creating' do 
+      it 'cancels creating', :cancel => true do
         ensure_cancel_creating_is_working
       end
     end
   end
 
-  context 'existing' do 
-    before do 
+  context 'existing' do
+    before do
       student.guardians.first.contacts << mobile1
       student.reload
     end
-    
-    context 'edit', :js => true do 
-      before do 
+
+    context 'edit', :js => true do
+      before do
         click show_link
         page.should have_content '123'
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
-      it 'edits' do 
+      it 'edits' do
         fill_in 'contact_data', :with => '777'
         click submit
 
@@ -105,7 +105,7 @@ describe 'Student Guardian Contacts' do
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
@@ -116,7 +116,7 @@ describe 'Student Guardian Contacts' do
       within(count_div) { page.should have_content 'Contacts list(1)' }
 
       expect do
-        ensure_delete_is_working 
+        ensure_delete_is_working
       end.to change(student.guardians.first.contacts, :count).by -1
 
       within(count_div) { page.should_not have_content 'Contacts list(1)' }
@@ -145,7 +145,7 @@ describe 'Student Guardian Contacts' do
       student.guardians.first.contacts.first.is_primary? == true
     end
 
-    it 'sets primary', :js => true do 
+    it 'sets primary', :js => true do
 
       student.guardians.first.contacts << mobile2
       click show_link
@@ -154,8 +154,8 @@ describe 'Student Guardian Contacts' do
       student.guardians.first.contacts.second.is_primary? == false
 
       within("#{table} tr#contact-#{student.guardians.first.contacts.second.id}") do
-        click_link 'set-primary-link' 
-      end 
+        click_link 'set-primary-link'
+      end
       accept_alert
 
       student.guardians.first.contacts.first.is_primary? == false

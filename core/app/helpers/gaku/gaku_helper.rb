@@ -4,23 +4,47 @@ module Gaku
     include LinkToHelper
     include SortHelper
     include TranslationsHelper
+    include PresetsHelper
+    include FormHelper
+    include ModalHelper
+    include HtmlHelper
+
+    def count_div(html_class, &block)
+      content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
+        block.call
+      end
+    end
+
+    def syllabuses
+      Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
+    end
+
+    def countries
+      Gaku::Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
+    end
+
+    def courses
+      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+    end
+
+    def scholarship_statuses
+      Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+    end
+
+    def contact_types
+      Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}
+    end
+
+    def genders
+      { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
-      puts klass
       presenter = klass.new(object, self)
       yield presenter if block_given?
       presenter
     end
-
-    def remote_form_for(object, options = {}, &block)
-      options[:validate] = true
-      #options[:builder] = ValidateFormBuilder
-      options[:html] = {:class => 'remote-form'}
-      options[:remote] = true
-      form_for(object, options, &block)
-    end
-
 
     def required_field
       ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe

@@ -3,13 +3,19 @@ module Gaku
     class Schools::Campuses::ContactsController < GakuController
 
       inherit_resources
-      actions :index, :show, :create, :update, :edit, :destroy
+      #actions :index, :show, :create, :update, :edit, :destroy
 
       respond_to :js, :html
 
       before_filter :campus, :only => [ :new, :create, :edit, :update, :destroy ]
       before_filter :contact_types, :only => [:new,:edit]
       before_filter :count, :only => [:create, :destroy]
+
+      def new
+        @contact = Contact.new
+        new!
+      end
+
       def create
         super do |format|
           if @contact.save && @campus.contacts << @contact

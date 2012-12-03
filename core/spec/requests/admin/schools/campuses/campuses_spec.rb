@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Admin School Campuses' do
-  
+
   stub_authorization!
 
   let(:school) { create(:school, :name => 'Nagoya University') }
@@ -10,20 +10,20 @@ describe 'Admin School Campuses' do
     set_resource "admin-school-campus"
   end
 
-  before do 
+  before do
     visit gaku.admin_school_path(school)
   end
 
   context 'new', :js => true do
-    before do 
+    before do
       click new_link
       wait_until_visible submit
     end
 
-    it 'creates and shows' do 
+    it 'creates and shows' do
       within(count_div) { page.should have_content 'Campuses list(1)' }
 
-      expect do 
+      expect do
         fill_in 'campus_name', :with => 'Nagoya Campus'
         click submit
         wait_until_invisible form
@@ -32,34 +32,34 @@ describe 'Admin School Campuses' do
       page.should have_content 'Nagoya Campus'
       within(count_div) { page.should have_content 'Campuses list(2)' }
       flash_created?
-    end 
+    end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context 'existing', :js => true do 
-    
-    context 'edit' do 
-      before do 
+  context 'existing', :js => true do
+
+    context 'edit' do
+      before do
         within(table) { click edit_link }
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it 'edits' do
         fill_in 'campus_name', :with => 'Nagoya Campus'
-        click submit 
+        click submit
 
         wait_until_invisible modal
-        within(table) do 
+        within(table) do
           page.should have_content 'Nagoya Campus'
-          page.should_not have_content 'Nagoya University' 
+          page.should_not have_content 'Nagoya University'
         end
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
@@ -68,7 +68,7 @@ describe 'Admin School Campuses' do
       within(table) { page.should have_content "Nagoya University" }
       within(count_div) { page.should have_content 'Campuses list(1)' }
 
-      expect do 
+      expect do
         ensure_delete_is_working
       end.to change(school.campuses, :count).by -1
 

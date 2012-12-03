@@ -60,7 +60,7 @@ describe "CourseEnrollment"  do
       end
     end
 
-    it 'cancels enrolling' do
+    it 'cancels enrolling', :cancel => true do
       click new_link
       wait_until_visible cancel_link
 

@@ -52,6 +52,7 @@ en:
     file_type: File type
     name: Name
     new: New Attachment
+
   attendance_type:
     add: Add Attendance Type
     edit: Edin Attendance Type
@@ -229,7 +230,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token: 
+      no_token:
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -243,10 +244,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
+      signed_up_but_inactive:
+      signed_up_but_locked:
+      signed_up_but_unconfirmed:
+      update_needs_confirmation:
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -309,6 +310,8 @@ en:
     view: View Exams
     weight: Weight
   exam_portion:
+    plural: Exam Portions
+    singular: Exam Portion
     adjustments: Adjustments
     attached_file_count: Attached file count
     count: Exam portions count

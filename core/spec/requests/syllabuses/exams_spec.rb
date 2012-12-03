@@ -42,7 +42,7 @@ describe 'Syllabus Exams' do
       wait_until_invisible existing_exam_form
     end
 
-    it "cancels adding existing exam", :js => true do
+    it "cancels adding existing exam", :cancel => true, :js => true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -90,7 +90,7 @@ describe 'Syllabus Exams' do
         syllabus.exams.count.should eq 0
       end
 
-      it "cancels creating", :js => true do
+      it "cancels creating", :cancel => true, :js => true do
         ensure_cancel_creating_is_working
       end
     end

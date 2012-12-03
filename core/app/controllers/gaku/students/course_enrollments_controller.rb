@@ -3,12 +3,11 @@ module Gaku
 
     inherit_resources
     belongs_to :student, :parent_class => Gaku::Student
-    #actions :new, :create, :update, :edit, :destroy
-
     respond_to :js, :html
 
     #before_filter :student
     before_filter :courses, :only => [:new, :edit]
+    before_filter :count, :only => [:create, :destroy]
 
     def create
       create! do |success, failure|
@@ -31,7 +30,12 @@ module Gaku
     end
 
     def courses
-      @courses = Course.all
+      @courses = Course.all.collect { |s| ["#{s.code}", s.id] }
+    end
+
+    def count
+      student
+      @count = @student.courses.count
     end
   end
 end

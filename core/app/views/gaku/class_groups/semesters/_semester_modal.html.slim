@@ -1,8 +1,5 @@
-
-#semester-modal.modal.hide
-  .modal-header
-    button type="button" class="close" data-dismiss="modal" ×
-    h1 = t('semester.edit')
-    #class-group-semester-form-errors
+= modal_for 'semester-modal' do
+  = modal_header t(:'semester.edit')
+  #class-group-semester-form-errors
   .modal-body
-    =render 'form'
+    = render 'form'

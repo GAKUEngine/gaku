@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Student Guardians' do
 
   stub_authorization!
-  
+
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }
 
@@ -11,7 +11,7 @@ describe 'Student Guardians' do
     set_resource "student-guardian"
   end
 
-  context 'new', :js => true do 
+  context 'new', :js => true do
     before do
       visit gaku.student_path(student)
       click tab_link
@@ -20,8 +20,8 @@ describe 'Student Guardians' do
     end
 
     it "creates and shows" do
-      expect do 
-        #required 
+      expect do
+        #required
         fill_in "guardian_surname",         :with => "Doe"
         fill_in "guardian_name",            :with => "John"
 
@@ -45,27 +45,27 @@ describe 'Student Guardians' do
       flash_created?
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context "existing" do 
-    before(:each) do 
+  context "existing" do
+    before(:each) do
       student.guardians << guardian
 
-      visit gaku.student_path(student) 
+      visit gaku.student_path(student)
       click tab_link
-      wait_until { page.has_content? 'Guardians list' } 
+      wait_until { page.has_content? 'Guardians list' }
     end
 
-    context 'edit', :js => true do 
-      before do 
+    context 'edit', :js => true do
+      before do
         click edit_link
         wait_until_visible modal
       end
 
-      it "edits" do 
+      it "edits" do
         fill_in 'guardian_name',    :with => 'Edited guardian name'
         fill_in 'guardian_surname', :with => 'Edited guardian surname'
         click submit
@@ -76,7 +76,7 @@ describe 'Student Guardians' do
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
@@ -86,8 +86,8 @@ describe 'Student Guardians' do
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }
 
-      expect do 
-        click '.delete-student-guardian-link' 
+      expect do
+        click '.delete-student-guardian-link'
         accept_alert
         within("#student-guardians") { page.should_not have_content guardian.name }
       end.to change(student.guardians, :count).by -1
@@ -98,5 +98,5 @@ describe 'Student Guardians' do
       flash_destroyed?
     end
   end
-  
+
 end

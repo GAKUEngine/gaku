@@ -39,7 +39,7 @@ describe 'Exam portions' do
         #TODO flash_created?
       end
 
-      it 'cancels adding' do
+      it 'cancels adding', :cancel => true do
         ensure_cancel_creating_is_working
       end
     end

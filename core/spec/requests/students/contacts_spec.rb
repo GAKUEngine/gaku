@@ -9,52 +9,52 @@ describe 'Student Contacts' do
   let(:contact) { create(:contact, :contact_type => contact_type) }
   let(:contact2) { create(:contact, :data => 'gaku2@example.com', :contact_type => contact_type) }
 
-  before :all do 
+  before :all do
     set_resource "student-contact"
   end
 
-  context 'new', :js => true do 
-    before do 
+  context 'new', :js => true do
+    before do
       contact_type
-      visit gaku.student_path(student) 
+      visit gaku.student_path(student)
       click new_link
       wait_until_visible submit
     end
 
     it "adds and shows" do
-      expect do 
+      expect do
         select 'email',            :from => 'contact_contact_type_id'
         fill_in "contact_data",    :with => "The contact data"
         fill_in "contact_details", :with => "The contact details"
         click submit
         wait_until_invisible form
-      end.to change(student.contacts, :count).by 1 
-      
+      end.to change(student.contacts, :count).by 1
+
       page.should have_content "The contact data"
       page.should have_content "The contact details"
       within(count_div) { page.should have_content 'Contacts list(1)' }
       flash_created?
     end
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
 
 
-  context "existing" do 
-    before(:each) do 
-      student.contacts << contact 
+  context "existing" do
+    before(:each) do
+      student.contacts << contact
     end
 
-    context 'edit', :js => true do 
-      before do 
+    context 'edit', :js => true do
+      before do
         visit gaku.student_path(student)
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
-      it "edits" do 
+      it "edits" do
         fill_in 'contact_data', :with => 'example@genshin.org'
         click submit
 
@@ -63,16 +63,16 @@ describe 'Student Contacts' do
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
     end
 
 
-    it "sets primary", :js => true do     
-      student.contacts << contact2      
-      visit gaku.student_path(student) 
-     
+    it "sets primary", :js => true do
+      student.contacts << contact2
+      visit gaku.student_path(student)
+
       student.contacts.first.is_primary? == true
       student.contacts.second.is_primary? == false
 
@@ -88,7 +88,7 @@ describe 'Student Contacts' do
 
       contact1_tr = "#contact-#{contact.id}"
       contact2_tr = "#contact-#{contact2.id}"
-      
+
       visit gaku.student_path(student)
 
       click "#{contact2_tr} td.primary-button a"
@@ -97,9 +97,9 @@ describe 'Student Contacts' do
 
       click "#{contact2_tr} .delete-link"
       accept_alert
-      
+
       page.find("#{contact1_tr} .primary-button a.btn-primary")
-      student.contacts.first.is_primary? == true 
+      student.contacts.first.is_primary? == true
     end
 
     it "deletes", :js => true do
@@ -107,11 +107,11 @@ describe 'Student Contacts' do
 
       within(count_div) { page.should have_content 'Contacts list(1)' }
       page.should have_content contact.data
-       
-      expect do 
+
+      expect do
         ensure_delete_is_working
       end.to change(student.contacts, :count).by -1
-      
+
       within(count_div) { page.should_not have_content 'Contacts list(1)' }
       page.should_not have_content contact.data
       flash_destroyed?

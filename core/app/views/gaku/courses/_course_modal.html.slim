@@ -1,6 +1,14 @@
-#course-modal.modal.hide
-  .modal-header
-    button type="button" class="close" data-dismiss="modal" ×
-    h1 = t('course.edit')
-  .modal-body
-    =render 'form'
+= modal_for 'course-modal' do
+  = modal_header t(:'course.edit')
+  = modal_form_for @course do |f|
+    .modal-body
+      .row-fluid.mt-l
+        .span12.well
+          = render 'form_fields', :f => f
+
+      .row-fluid
+        .span12
+          .span9
+            = submit_button t(:'course.save'), :id => 'submit-course-button'
+          = link_to_cancel :id => "cancel-course-link"
+

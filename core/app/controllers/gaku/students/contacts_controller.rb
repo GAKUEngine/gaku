@@ -8,9 +8,8 @@ module Gaku
 
     before_filter :student, :only => [:new, :create, :edit, :update, :destroy]
     before_filter :contact, :only => :make_primary
-    before_filter :contact_types, :only => [:new, :edit]
     before_filter :count, :only => [:create,:destroy]
-    
+
     def create
       super do |format|
         if @contact.save && @student.contacts << @contact
@@ -24,8 +23,8 @@ module Gaku
       super do |format|
         @contacts = Contact.where(:student_id => params[:student_id])
         @contact.make_primary_student if params[:contact][:is_primary] == "1"
-        format.js { render 'update' }  
-      end  
+        format.js { render 'update' }
+      end
     end
 
     def destroy
@@ -37,7 +36,7 @@ module Gaku
           format.js { render 'destroy' }
         end
       end
-    end 
+    end
 
     def make_primary
       @contact.make_primary_student
@@ -54,10 +53,6 @@ module Gaku
 
     def contact
       @contact = Contact.find(params[:id])
-    end
-
-    def contact_types
-      @contact_types = Gaku::ContactType.all
     end
 
     def count

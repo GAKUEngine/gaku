@@ -1,26 +1,26 @@
 #admin-schools
-  =render 'master_school', :master_school => @master_school if @master_school
+  = render 'master_school', :master_school => @master_school if @master_school
   .row-fluid
     #new-admin-school.hide
     .pull-left
-      h4.h4-vm.admin-schools-count
-        = print_count(@schools.count, t('school.list'))
+      = count_div 'admin-schools-count' do
+        = print_count @count, t_school_list
     .pull-right
-      = ajax_link_to_new t('school.add'), new_admin_school_path(@school), :id => 'new-admin-school-link'
+      = ajax_link_to_new t(:'school.add'), [:new, :admin, :school], :id => 'new-admin-school-link'
   .row-fluid
-    table#admin-schools-index.index.table.table-striped.table-bordered.table-condensed
+    = table_for 'admin-schools-index' do
       thead
         tr
-          th.btn-inverse Code
-          th.btn-inverse = t('school.name')
-          th.btn-inverse = t('school.campuses')
-          th.btn-inverse = t('school.slogan')
-          th.btn-inverse = t('school.description')
-          th.btn-inverse = t('school.founded')
-          th.btn-inverse = t('school.principal')
-          th.btn-inverse = t('school.vice_principal')
-          th.btn-inverse = t('school.grades')
-          th.btn-inverse = t('contact.plural')
+          = th t(:'school.code')
+          = th t(:'school.name')
+          = th t(:'school.campuses')
+          = th t(:'school.slogan')
+          = th t(:'school.description')
+          = th t(:'school.founded')
+          = th t(:'school.principal')
+          = th t(:'school.vice_principal')
+          = th t(:'school.grades')
+          = th t(:'contact.plural')
       tbody
-        =render :partial => 'gaku/admin/schools/school', :collection => @schools, :as => 'school'
+        = render :partial => 'gaku/admin/schools/school', :collection => @schools, :as => 'school'
     br/

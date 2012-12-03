@@ -1,7 +1,15 @@
-#class-group-modal.modal.hide
-  .modal-header
-    button.close type="button" data-dismiss="modal"
-      'x
-    h1 = t('class_group.edit')
-  .modal-body
-    =render 'form'
+= modal_for 'class-group-modal' do
+  = modal_header t(:'class_group.edit')
+
+  = modal_form_for @class_group do |f|
+    .modal-body
+      .row-fluid
+        .span12.well
+          = render 'form_fields', :f => f
+
+      .row-fluid
+        .span12
+          .span9
+            = submit_button t('class_group.save'), :id => 'submit-class-group-button'
+          = link_to_cancel :id => "cancel-class-group-link"
+
