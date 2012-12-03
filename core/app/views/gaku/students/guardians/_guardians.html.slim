@@ -3,10 +3,10 @@
   #new-student-guardian.hide
   .row-fluid
     .pull-left
-      h4.mt-xs.mb-0.student-guardians-count
-        = print_count(@student.guardians.count, t_guardian_list)
+      = count_div 'student-guardians-count' do
+        = print_count @student.guardians.count, t_guardian_list
     .pull-right
-      = ajax_link_to_new t('guardian.add'), new_student_guardian_path(@student), :id => "new-student-guardian-link"
+      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], :id => "new-student-guardian-link"
   .row-fluid
     .span12
       hr
@@ -14,7 +14,7 @@
     .span12
       .row-fluid
         .span12.well.guardians_list
-          =render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
+          = render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => 'guardian'
 
       / table.table.table-striped.table-bordered.table-condensed
       /   thead

@@ -1,18 +1,13 @@
-#edit-commute-method-type-modal.modal.hide wmode="opaque"
+= modal_for 'edit-commute-method-type-modal' do
+  = modal_header t(:'commute_method_type.edit')
+  = modal_form_for [:admin, @commute_method_type] do |f|
+    .modal-body
+      .row-fluid
+        .span12
+          = f.text_field :name, :class => "span12", :label => t(:'commute_method_type.name')
 
-  = form_for([:admin, @commute_method_type], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' }) do |commute_method_type_form|
-
-      .modal-header
-        button type="button" class="close" data-dismiss="modal" ×
-        h3 = t('commute_method_type.edit')
-      .modal-body
-        .row-fluid
-          #validation-errors
-        .row-fluid
-          = commute_method_type_form.label :name, t('commute_method_type.name')
-          = commute_method_type_form.text_field :name, :class => "span12"
-        br/
-        .row-fluid
+      .row-fluid
+        .span12
           .span9
-            = submit_button t('commute_method_type.save'), :id => 'submit-admin-commute-method-type-button'
+            = submit_button t(:'commute_method_type.save'), :id => 'submit-admin-commute-method-type-button'
           = link_to_cancel :id => 'cancel-admin-commute-method-type-link'

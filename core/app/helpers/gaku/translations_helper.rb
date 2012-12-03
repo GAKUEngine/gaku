@@ -93,5 +93,9 @@ module Gaku
       t('attendance_type.list')
     end
 
+    def t_note_list
+      t(:'note.list')
+    end
+
   end
 end

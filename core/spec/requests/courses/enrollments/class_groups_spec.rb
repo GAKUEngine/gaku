@@ -25,7 +25,7 @@ describe "CourseEnrollment"  do
       page.should have_content 'No Class Group selected'
     end
 
-    it 'cancels enrolling' do
+    it 'cancels enrolling', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end

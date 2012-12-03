@@ -1,3 +1,4 @@
 $('#new-student-contact').html('<%= render_js_partial("form", { :student => @student}) %>');
 $('#new-student-contact').slideToggle()
 $('#new-student-contact-link').hide();
+$('.remote-form').enableValidations();

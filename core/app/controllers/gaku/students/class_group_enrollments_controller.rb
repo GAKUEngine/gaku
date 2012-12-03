@@ -36,7 +36,7 @@ module Gaku
     end
 
     def class_groups
-      @class_groups = ClassGroup.all
+      @class_groups = ClassGroup.all.collect { |s| ["#{s.name} ", s.id] }
     end
   end
 end

@@ -2,7 +2,7 @@
   =render 'master_school', :master_school => @school if @school.is_primary?
   .row-fluid
     .span12.well
-      table.table.table-bordered.table-striped
+      = table do
         tbody
           tr
             = render 'school_fields', :school => @school
@@ -13,7 +13,7 @@
     .span12.well
       -if params[:action] == 'school_details'
         span4
-          =link_to t('school.edit_master'), admin_school_details_edit_path, :class => 'btn btn-danger span4', :confirm => t('confirm')
+          = link_to t(:'school.edit_master'), admin_school_details_edit_path, :class => 'btn btn-danger span4', :confirm => t('confirm')
       -else
         -unless @school.is_primary
           .span4

@@ -12,19 +12,19 @@ module Gaku
 			end
 		end
 
-    def surname_reading_title
+    def surname_reading_label
     	t(:phonetic_reading) + " ("+t(:surname)+")"
     end
 
-    def name_reading_title
+    def name_reading_label
       t(:phonetic_reading) + " ("+t(:given_name)+")"
     end
 
-    def surname_title
+    def surname_label
     	t(:name)+" ("+t(:surname)+")"
     end
 
-    def name_title
+    def name_label
     	t(:name)+" ("+t(:given_name)+")"
     end
 	end

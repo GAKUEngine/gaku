@@ -1,3 +1,4 @@
 $('#modal-dialogs').html('<%= render_js_partial("attendance_type_modal", {:attendance_type => @attendance_type}) %>');
 $('#edit-attendance-type-modal #attendance_type_color_code').miniColors()
 $('#edit-attendance-type-modal').modal('show');
+$('.remote-form').enableValidations();

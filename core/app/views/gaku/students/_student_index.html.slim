@@ -1,5 +1,5 @@
 - present student do |student_presenter|
-  table#student-index.table.table-bordered.table-striped
+  = table_for 'student-index' do
     tbody
       tr
         th.btn-c1 width="20%" = t('class')
@@ -11,7 +11,7 @@
           td.vm
             = student_presenter.phonetic_reading
       tr
-        th.btn-c2 =t ('name')
+        th.btn-c2 = t('name')
         td.vm style="font-size:16pt"
           = student_presenter
       tr
