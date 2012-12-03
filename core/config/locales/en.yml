@@ -310,6 +310,8 @@ en:
     view: View Exams
     weight: Weight
   exam_portion:
+    plural: Exam Portions
+    singular: Exam Portion
     adjustments: Adjustments
     attached_file_count: Attached file count
     count: Exam portions count
