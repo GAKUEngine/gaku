@@ -44,7 +44,7 @@ $ ->
 
 
   $(document).on "click",".cancel-link", (e) ->
-    event.preventDefault()
+    e.preventDefault()
     resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id
