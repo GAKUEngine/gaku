@@ -9,7 +9,7 @@ module Gaku
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show, :only => :show
-    before_filter :class_group,  :only => [:destroy, :show]
+    before_filter :class_group,  :only => [:destroy, :show, :student_chooser]
     before_filter :count, :only => [:create, :destroy, :index]
 
     def index
@@ -17,7 +17,6 @@ module Gaku
     end
 
     def student_chooser
-      @class_group = ClassGroup.find(params[:class_group_id])
       @search = Student.search(params[:q])
       @students = @search.result
 
