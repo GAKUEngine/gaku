@@ -87,7 +87,9 @@ module Gaku
         @exams = Exam.all
         @exam = Exam.new
       end
-
+      
+      @exam.exam_portions.build
+      
       respond_to do |format|
         format.html
         format.json { render :json => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
@@ -97,7 +99,7 @@ module Gaku
     def create_exam_portion
       if @exam.update_attributes(params[:exam])
         respond_to do |format|
-          flash.now[:notice] = t('notice.created', :resource => t('exam_portion.singular'))
+          flash.now[:notice] = t('notice.created', :resource => t('Exam.singular'))
           format.js {render 'gaku/exams/exam_portions/create_exam_portion'}
         end
       end
