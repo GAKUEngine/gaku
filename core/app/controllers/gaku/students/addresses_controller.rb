@@ -4,9 +4,16 @@ module Gaku
     belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
-    before_filter :student,   :only => [:destroy, :make_primary]
+    before_filter :student,   :only => [:index,:destroy, :make_primary]
     before_filter :address,   :only => [:destroy, :make_primary]
     before_filter :count,     :only => [:create, :destroy]
+
+    
+    def create
+      @address = @student.addresses.create(params[:address])
+      flash[:notice] = t('notice.created', :resource => t('address.singular')) 
+    end
+
 
     def update
       @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
