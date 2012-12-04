@@ -1,9 +1,2 @@
-= remote_form_for @course_group do |f|
-  .row-fluid.mt-l
-    .span12.well
-      = render 'form_fields', :f => f
-      .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'course_group.save'), :id => 'submit-course-group-button'
-          = link_to_cancel :id => 'cancel-course-group-link'
+= test_form_for @course_group do |f|
+  = render 'form_fields', :f => f
