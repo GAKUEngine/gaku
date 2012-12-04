@@ -5,9 +5,16 @@ module Gaku
     belongs_to :syllabus, :parent_class => Gaku::Syllabus
     respond_to :js, :html
 
+    before_filter :syllabus, :only => [:create]
     before_filter :grading_methods, :only => [:edit]
     before_filter :exam_syllabus, :only => [:update]
     before_filter :count, :only => [:create, :destroy]
+
+    def create
+      @exam = @syllabus.exams.create(params[:exam])
+      flash.now[:notice] = t('notice.created', :resource => t('exam.singular') ) 
+    end
+
 
     private
 
