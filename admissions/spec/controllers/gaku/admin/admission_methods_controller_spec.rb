@@ -21,7 +21,7 @@ describe Gaku::Admin::AdmissionMethodsController do
     end
   end
 
-    describe 'GET #show' do
+  describe 'GET #show' do
     it "assigns the requested admission_method to @admission_method" do
       gaku_get :show, id: admission_method
       assigns(:admission_method).should eq admission_method

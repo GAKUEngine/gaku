@@ -27,7 +27,7 @@ $.fn.enableValidations = ->
 
 $ ->
 
-  $('.delete-link').live 'ajax:success', (evt, data, status, xhr) ->
+  $(document).on 'ajax:success','.delete-link', (evt, data, status, xhr) ->
     $(this).closest('tr').remove()
 
   # small plugin for fadeOut notices after 2sec when notice is showed
@@ -43,8 +43,8 @@ $ ->
 
 
 
-  $(".cancel-link").live "click", (e) ->
-    event.preventDefault()
+  $(document).on "click",".cancel-link", (e) ->
+    e.preventDefault()
     resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id

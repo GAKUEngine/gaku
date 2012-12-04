@@ -3,6 +3,13 @@ module Gaku
 
     respond_to :js
 
+    def new
+      @course = Course.find(params[:course_id])  
+      respond_to do |format|
+        format.js { render 'gaku/courses/enrollments/class_groups/new' }
+      end
+    end
+
     def enroll_student
       @course_enrollment = CourseEnrollment.new(params[:course_enrollment])
       @course = Course.find(params[:course_enrollment][:course_id])

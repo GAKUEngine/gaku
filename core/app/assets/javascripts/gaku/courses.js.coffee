@@ -27,18 +27,7 @@ $ ->
     $('#new-course').slideToggle()
     $('#new-course-link').show()
 
-  $('#new-course-class-group-link').on 'click', (event)->
-    event.preventDefault()
-    $('#new-course-student-form').hide()
-    $('#new-course-student-link').show()
-    $('#new-course-class-group-link').hide()
-    $('#new-course-class-group').slideToggle()
-
-  $("#cancel-course-student-link").click ->
-    $("#new-course-student-link").show()
-    $("#new-course-student-form").html("")
-
-  $("#cancel-course-class-group-link").on 'click', (event)->
+  $('#new-course-class-group').on "click","#cancel-course-class-group-link", (event)->
     event.preventDefault()
     $("#new-course-class-group-link").show()
     $("#new-course-class-group").slideToggle()

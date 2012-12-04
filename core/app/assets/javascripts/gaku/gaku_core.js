@@ -18,6 +18,7 @@
 // require gaku/class_groups
 // require_tree ./class_groups
 //= require gaku/students/selected_students
+//= require gaku/syllabuses.js.coffee
 
 // require_tree ./
 

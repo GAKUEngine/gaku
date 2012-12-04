@@ -99,8 +99,6 @@ describe Gaku::Admin::AdmissionPeriodsController do
       end
     end
 
-    context "methods" do
-    end
   end
 
   describe "DELETE #destroy" do
