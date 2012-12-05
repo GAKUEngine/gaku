@@ -28,6 +28,8 @@ describe 'Admin Admissions' do
         @active_tab = page.find('.nav-tabs .active')
         @nav_tabs = page.find('.nav-tabs')
         @active_tab_content = page.find('.tab-content .active')
+        @first_method = admission_period.admission_methods.first
+        @last_method = admission_period.admission_methods.last
       end
 
       context 'default' do
@@ -36,24 +38,24 @@ describe 'Admin Admissions' do
         end
 
         it 'selects the first method' do
-          within ('#admission-method-selection') { page.should have_content "#{admission_period.admission_methods.first.name}" }
+          within ('#admission-method-selection') { page.should have_content "#{@first_method.name}" }
         end
 
         it 'shows first method\'s phases' do
           within (@nav_tabs) do
-            page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}"
-            page.should have_content "#{admission_period.admission_methods.first.admission_phases.last.name}" 
+            page.should have_content "#{@first_method.admission_phases.first.name}"
+            page.should have_content "#{@first_method.admission_phases.last.name}" 
           end
         end
 
         it 'open first phase\'s tab' do
-          within(@active_tab) { page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}" }
+          within(@active_tab) { page.should have_content "#{@first_method.admission_phases.first.name}" }
         end
 
         it 'shows first phase states' do
           within(@active_tab_content) do
-            page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.admission_phase_states.first.name}"
-            page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.admission_phase_states.last.name}"
+            page.should have_content "#{@first_method.admission_phases.first.admission_phase_states.first.name}"
+            page.should have_content "#{@first_method.admission_phases.first.admission_phase_states.last.name}"
           end
         end
 
@@ -62,34 +64,33 @@ describe 'Admin Admissions' do
       context 'when change method' do
         before do
           select "#{admission_period.name}", from: 'admission_period'
-          within('#admission-method-selection') { select "#{admission_period.admission_methods.last.name}", from: 'admission_method' }
+          within('#admission-method-selection') { select "#{@last_method.name}", from: 'admission_method' }
         end
 
         it 'shows selected method\'s phases' do
           within (@nav_tabs)  do
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.first.name}"
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.last.name}" 
+            page.should have_content "#{@last_method.admission_phases.first.name}"
+            page.should have_content "#{@last_method.admission_phases.last.name}" 
           end
         end
 
         it 'open first phase\'s tab' do
-          within (@active_tab) { page.should have_content "#{admission_period.admission_methods.last.admission_phases.first.name}" }
+          within (@active_tab) { page.should have_content "#{@last_method.admission_phases.first.name}" }
         end
 
         it 'shows first phase states' do
           within (@active_tab_content) do
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.first.admission_phase_states.first.name}"
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.first.admission_phase_states.last.name}"
+            page.should have_content "#{@last_method.admission_phases.first.admission_phase_states.first.name}"
+            page.should have_content "#{@last_method.admission_phases.first.admission_phase_states.last.name}"
           end
         end
 
         it 'navigate thru phases' do
-          within (@nav_tabs) { click_on "#{admission_period.admission_methods.last.admission_phases.last.name}" }
+          within (@nav_tabs) { click_on "#{@last_method.admission_phases.last.name}" }
           wait_for_ajax
-          #@active_tab_content = page.find('.tab-content .active')
-          within (page.find('.tab-content .active')) do
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.last.admission_phase_states.first.name}"
-            page.should have_content "#{admission_period.admission_methods.last.admission_phases.last.admission_phase_states.last.name}"
+          within (@active_tab_content) do
+            page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.first.name}"
+            page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
           end
         end
 
