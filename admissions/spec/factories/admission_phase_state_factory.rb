@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :admission_phase_state, :class => Gaku::AdmissionPhaseState do
+    name 'State 1'
+  end
   factory :admission_phase_state_pre_exam, :class => Gaku::AdmissionPhaseState do
     name 'Pre-Exam'
     can_progress  true

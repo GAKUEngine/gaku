@@ -1,4 +1,8 @@
 FactoryGirl.define do
+
+  factory :admission_method, :class => Gaku::AdmissionMethod do
+    name 'Summer Program Admissions'
+  end
   factory :admission_method_regular, :class => Gaku::AdmissionMethod do
     name 'Regular Admissions'
     after_build do |method|
