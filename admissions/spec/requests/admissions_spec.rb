@@ -6,6 +6,7 @@ describe 'Admin Admissions' do
 
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
+  let(:student) { create(:student) }
   
   describe 'when select admission period', js: true do
     context 'when period has no methods' do
@@ -21,7 +22,6 @@ describe 'Admin Admissions' do
 
     context 'when period has methods' do
       before do
-
         admission_period
         visit gaku.admin_admissions_path
 
@@ -93,11 +93,82 @@ describe 'Admin Admissions' do
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
           end
         end
+      end
+      context 'applicants' do
+        context 'new students' do
+          before do
+            click_on 'New Applicant'
+            wait_for_ajax
+          end
+          it 'adds new' do
+            expect do
+              fill_in 'admission_student_attributes_name', with: 'Marta'
+              fill_in 'admission_student_attributes_surname', with: 'Kostova'
+              click_on 'Create Student'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-admin-admission-link')
+            end.to change(Gaku::Admission, :count).by 1
+
+            within ('#state1' ) do
+              within('#students-index') { page.should have_content ('Marta') }
+            end
+          end
+          it 'cancels adding' do
+            expect do
+              click_on 'Cancel'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-admin-admission-link')
+            end.to change(Gaku::Admission, :count).by 0
+          end
+        end
+
+        context 'existing students' do
+          before do
+            student
+            admission_period
+            visit gaku.admin_admissions_path
+            click_on 'new-create-multiple-admissions-student-link'
+            wait_for_ajax          
+          end
+
+          it 'adds existing' do
+            expect do
+              find(:css, "input#student-#{student.id}").set(true)
+              wait_until_visible '#students-checked-div'
+
+              within('#students-checked-div') do
+                page.should have_content 'Chosen students(1)'
+                click_link 'Show'
+                wait_until_visible '#chosen-table'
+                page.should have_content "#{student.name}"
+                click_on 'Create'
+                wait_for_ajax
+              end
+            end.to change(Gaku::Admission, :count).by 1
+
+            within ('#state1' ) do
+              within('#students-index') { page.should have_content ("#{student.name}") }
+            end
+          end
+          it 'cancels adding' do
+            expect do
+              click_on 'Cancel'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-class-group-student-link')
+            end.to change(Gaku::Admission, :count).by 0
+          end
+        end
+
+        context 'existing applicants' do
+          pending 'changes state' do
+          end
+          pending 'exports as CSV' do
+          end
+        end
 
       end
-    end
 
-    
+    end
 
   end
 end
