@@ -41,6 +41,10 @@ describe 'Admin Admissions' do
         admission_phase_exam.admission_phase_states<<admission_phase_state_passed
         admission_phase_exam.admission_phase_states<<admission_phase_state_abscent
 
+        admission_phase_lang_exam.admission_phase_states<<admission_phase_state_pre_exam
+        admission_phase_lang_exam.admission_phase_states<<admission_phase_state_passed
+        admission_phase_lang_exam.admission_phase_states<<admission_phase_state_abscent
+
         admission_method_international.admission_phases<<admission_phase_lang_exam
         admission_method_international.admission_phases<<admission_phase_exam
         admission_method_international.admission_phases<<admission_phase_interview
@@ -51,7 +55,11 @@ describe 'Admin Admissions' do
         admission_period.admission_methods<<admission_method_standart
         admission_period.admission_methods<<admission_method_international
  
-        visit gaku.admin_admissions_path 
+        visit gaku.admin_admissions_path
+
+        @active_tab = page.find('.nav-tabs .active')
+        @nav_tabs = page.find('.nav-tabs')
+        @active_tab_content = page.find('.tab-content .active')
       end
 
       context 'default' do
@@ -64,23 +72,23 @@ describe 'Admin Admissions' do
         end
 
         it 'shows first method\'s phases' do
-          within ('#admission-phases') do
-            page.should have_content "#{admission_phase_exam.name}"
-            page.should have_content "#{admission_phase_interview.name}" 
+          within (@nav_tabs) do
+            page.should have_content "#{admission_method_standart.admission_phases.first.name}"
+            page.should have_content "#{admission_method_standart.admission_phases.last.name}" 
           end
         end
-        
+
         it 'open first phase\'s tab' do
-          within(".active") { page.should have_content "#{admission_phase_exam.name}" }
+          within(@active_tab) { page.should have_content "#{admission_method_standart.admission_phases.first.name}" }
         end
 
         it 'shows first phase states' do
-          within(".tab-content") do
-            page.should have_content "#{admission_phase_state_pre_exam.name}"
-            page.should have_content "#{admission_phase_state_passed.name}"
-            page.should have_content "#{admission_phase_state_abscent.name}"
+          within(@active_tab_content) do
+            page.should have_content "#{admission_method_standart.admission_phases.first.admission_phase_states.first.name}"
+            page.should have_content "#{admission_method_standart.admission_phases.first.admission_phase_states.last.name}"
           end
         end
+
       end
 
       context 'when change method' do
@@ -90,11 +98,23 @@ describe 'Admin Admissions' do
         end
 
         it 'shows selected method\'s phases' do
-          within ('#admission-phases') do
-            page.should have_content "#{admission_phase_exam.name}"
-            page.should have_content "#{admission_phase_interview.name}" 
+          within @nav_tabs  do
+            page.should have_content "#{admission_method_international.admission_phases.first.name}"
+            page.should have_content "#{admission_method_international.admission_phases.last.name}" 
           end
         end
+
+        it 'open first phase\'s tab' do
+          within(@active_tab) { page.should have_content "#{admission_method_international.admission_phases.first.name}" }
+        end
+
+        it 'shows first phase states' do
+          within(@active_tab_content) do
+            page.should have_content "#{admission_phase_lang_exam.admission_phase_states.first.name}"
+            page.should have_content "#{admission_phase_lang_exam.admission_phase_states.last.name}"
+          end
+        end
+
       end
     end
 
