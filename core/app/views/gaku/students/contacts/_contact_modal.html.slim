@@ -6,9 +6,7 @@
         .span12.well
           = hidden_field_tag :student_id, @student.id
           = render 'gaku/shared/form_fields/contact_form_fields', :f => f
-
-      .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'contact.save'), :id => 'submit-student-contact-button'
-          = link_to_cancel :id => 'cancel-student-contact-link'
+          .row-fluid
+            .span12
+              = submit_button t(:'contact.save'), :id => 'submit-student-contact-button'
+              = link_to_cancel :id => 'cancel-student-contact-link'

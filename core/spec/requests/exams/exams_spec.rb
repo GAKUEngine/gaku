@@ -10,13 +10,12 @@ describe 'Exams' do
   end
 
   context '#new', :js => true do
-
     before do
       visit gaku.exams_path
       click new_link
       wait_until_visible submit
     end
-
+    
     it 'creates new exam' do  #TODO Add execution_date and data
       tr_count = size_of(table_rows)
 
