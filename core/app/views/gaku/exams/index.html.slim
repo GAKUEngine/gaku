@@ -8,13 +8,13 @@
     =ajax_link_to_new t('exam.add'), new_exam_path, :id => 'new-exam-link'
 .row-fluid
   .span12.well
-    table#exams-index.index.table.table-striped.table-bordered.table-condensed
+  	=table_for 'exams-index' do
 	    thead
 		    tr
-		    	th class='btn-inverse' = t('exam.name')
-		    	th class='btn-inverse' = t('exam.adjustments')
-		    	th class='btn-inverse' = t('exam.weight')
-		    	th class='btn-inverse' = t('exam.use_weighting')
-		    	th class='btn-info' = t('exam.options')
+		    	=th t('exam.name')
+		    	=th t('exam.adjustments')
+		    	=th t('exam.weight')
+		    	=th t('exam.use_weighting')
+		    	=th_actions 3
 			tbody
 				=render :partial => 'gaku/exams/exam',  :as => :exam, :collection => @exams
