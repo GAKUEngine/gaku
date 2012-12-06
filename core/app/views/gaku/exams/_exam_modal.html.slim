@@ -1,6 +1,12 @@
-#edit-exam-modal.modal.hide
-  .modal-header
-    button type="button" class="close" data-dismiss="modal" ×
-    h3 = t('exam.edit')
-  .modal-body
-  	=render 'exam_form', :exam => @exam
+= modal_for 'edit-exam-modal' do
+  = modal_header t(:'exam.edit')
+  = modal_form_for @exam do |f|
+		.modal-body
+			.row-fluid.mt-l
+				.span12.well
+					= render 'form_exam_fields', :f => f
+			.row-fluid
+			  .span12
+			    .span9
+			      = submit_button t(:'course_group.save'), :id => 'submit-exam-button'
+			    = link_to_cancel :id => 'cancel-exam-link'

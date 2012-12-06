@@ -1,0 +1,13 @@
+.row-fluid
+  .span9
+    = f.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :label => t('exam.name')
+  .span3
+    = f.number_field :weight, :class => "span12", "data-prompt-position" => "bottomRight:5", :label => t('exam.weight')
+.row-fluid
+  .span6
+    = f.text_area :description, :class => "span12", :size => "0x2", :label => t('exam.description')
+  .span6
+    = f.text_area :adjustments, :class => "span12", :size => "0x2", :label => t('exam.adjustments')
+.row-fluid
+  .span12.form-inline
+    = f.check_box :use_weighting, :label => t('exam_portion.use_weighting'), :class => "help-inline"

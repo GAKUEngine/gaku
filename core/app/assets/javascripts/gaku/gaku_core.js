@@ -18,7 +18,10 @@
 // require gaku/class_groups
 // require_tree ./class_groups
 //= require gaku/students/selected_students
-//= require gaku/syllabuses.js.coffee
+//= require gaku/student_chooser
+//= require gaku/syllabuses
+//= require gaku/students
+//= require gaku/students/addresses/form
 
 // require_tree ./
 

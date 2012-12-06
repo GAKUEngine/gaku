@@ -1,14 +1,8 @@
 = modal_for 'edit-contact-modal' do
   = modal_form_for [@student, @contact] do |f|
     = modal_header t(:'contact.edit')
-    .modal-body
-      .row-fluid
-        .span12.well
-          = hidden_field_tag :student_id, @student.id
-          = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+    = modal_body do
+      = hidden_field_tag :student_id, @student.id
+      = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+      = buttons_for @contact, :nested_id => 'student-contact'
 
-      .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'contact.save'), :id => 'submit-student-contact-button'
-          = link_to_cancel :id => 'cancel-student-contact-link'

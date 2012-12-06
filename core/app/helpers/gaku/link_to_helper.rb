@@ -137,7 +137,7 @@ module Gaku
     def link_to_cancel(options = {})
       name = t('cancel')
       attributes = {
-        :class => "span3 btn btn-danger cancel-link",
+        :class => "span6 btn btn-danger cancel-link",
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
@@ -161,7 +161,7 @@ module Gaku
     def submit_button(text, options={})
       attributes = {
         :type => 'submit',
-        :class => 'span12 btn btn-primary button'
+        :class => 'span6 btn btn-primary button'
       }.merge(options)
       button_tag(content_tag('span', text), attributes)
     end

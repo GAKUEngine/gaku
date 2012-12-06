@@ -164,7 +164,7 @@ describe 'Students' do
       visit gaku.student_path(student)
       within('td#student-class-group-enrollment') do
         page.should have_content 'Biology'
-        page.should have_content '77'
+        page.should have_content student.class_groups.last.grade.try(:to_s)
       end
     end
 
