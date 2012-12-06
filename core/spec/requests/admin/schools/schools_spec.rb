@@ -61,6 +61,32 @@ describe 'Admin Schools' do
         ensure_cancel_modal_is_working
       end
     end
+    it 'shows' do
+      within(table) { click show_link }
+      current_path.should eq "/admin/schools/#{school.id}"
+    end
+
+    context '#edit from show' do
+      before do
+        visit gaku.admin_school_path(school)
+        click_on "Edit"
+        wait_until_visible modal
+      end
+      it 'edits'  do
+        fill_in 'school_name', :with => 'Sofia Technical University'
+        click submit
+
+        wait_until_invisible modal
+        page.should have_content 'Sofia Technical University'
+        page.should_not have_content 'Varna Technical University'
+        flash_updated?
+      end
+
+      it 'cancels editting', :cancel => true do
+        ensure_cancel_modal_is_working
+      end
+    end
+
 
     it 'deletes' do
       within(count_div) { page.should have_content 'Schools list(1)' }
