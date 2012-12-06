@@ -23,6 +23,7 @@ class ValidateFormBuilder < ActionView::Helpers::FormBuilder
           content_tag(:div, class: 'controls') do
             help = object.errors[name].any? ? object.errors[name].join(', ') : options[:help]
             help = content_tag(@help_tag, class: @help_css) { help } if help
+            options[:class] = "span12"
             args << options.except(:label, :help)
             super(name, *args) + help
           end

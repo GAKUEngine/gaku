@@ -4,21 +4,10 @@ describe 'Admin Admissions' do
 
   stub_authorization!
 
-  let(:admission_period_no_methods) { create(:admission_period) }
+  let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
-  let(:admission_method_international) { create(:admission_method, name: 'International Division Admissions') }
-  let(:admission_method_standart) { create(:admission_method, name: 'Regular Admissions') }
-  let(:admission_phase_exam) { create(:admission_phase, name: 'Exam') }
-  let(:admission_phase_interview) { create(:admission_phase, name: 'Interview') }
-  let(:admission_phase_lang_exam) { create(:admission_phase, name: 'Foreign Language Exam') }
-  let(:admission_phase_state_pre_exam) { create(:admission_phase_state, name: 'Pre-Exam') }
-  let(:admission_phase_state_passed) { create(:admission_phase_state, name: 'Passed') }
-  let(:admission_phase_state_abscent) { create(:admission_phase_state, name: 'Abscent') }
-  let(:admission_phase_state_accepted) { create(:admission_phase_state, name: 'Accepted') }
-  let(:admission_phase_state_waiting) { create(:admission_phase_state, name: 'Waiting for interview') }
-  let(:admission_phase_state_rejected) { create(:admission_phase_state, name: 'Rejected') }
-
-
+  let(:student) { create(:student) }
+  
   describe 'when select admission period', js: true do
     context 'when period has no methods' do
       before do
@@ -33,25 +22,14 @@ describe 'Admin Admissions' do
 
     context 'when period has methods' do
       before do
-        admission_phase_interview.admission_phase_states<<admission_phase_state_waiting
-        admission_phase_interview.admission_phase_states<<admission_phase_state_accepted
-        admission_phase_interview.admission_phase_states<<admission_phase_state_rejected
+        admission_period
+        visit gaku.admin_admissions_path
 
-        admission_phase_exam.admission_phase_states<<admission_phase_state_pre_exam
-        admission_phase_exam.admission_phase_states<<admission_phase_state_passed
-        admission_phase_exam.admission_phase_states<<admission_phase_state_abscent
-
-        admission_method_international.admission_phases<<admission_phase_lang_exam
-        admission_method_international.admission_phases<<admission_phase_exam
-        admission_method_international.admission_phases<<admission_phase_interview
-
-        admission_method_standart.admission_phases<<admission_phase_exam
-        admission_method_standart.admission_phases<<admission_phase_interview
-
-        admission_period.admission_methods<<admission_method_standart
-        admission_period.admission_methods<<admission_method_international
- 
-        visit gaku.admin_admissions_path 
+        @active_tab = page.find('.nav-tabs .active')
+        @nav_tabs = page.find('.nav-tabs')
+        @active_tab_content = page.find('.tab-content .active')
+        @first_method = admission_period.admission_methods.first
+        @last_method = admission_period.admission_methods.last
       end
 
       context 'default' do
@@ -60,45 +38,137 @@ describe 'Admin Admissions' do
         end
 
         it 'selects the first method' do
-          within ('#admission-method-selection') { page.should have_content "#{admission_method_standart.name}" }
+          within ('#admission-method-selection') { page.should have_content "#{@first_method.name}" }
         end
 
         it 'shows first method\'s phases' do
-          within ('#admission-phases') do
-            page.should have_content "#{admission_phase_exam.name}"
-            page.should have_content "#{admission_phase_interview.name}" 
+          within (@nav_tabs) do
+            page.should have_content "#{@first_method.admission_phases.first.name}"
+            page.should have_content "#{@first_method.admission_phases.last.name}" 
           end
         end
-        
+
         it 'open first phase\'s tab' do
-          within(".active") { page.should have_content "#{admission_phase_exam.name}" }
+          within(@active_tab) { page.should have_content "#{@first_method.admission_phases.first.name}" }
         end
 
         it 'shows first phase states' do
-          within(".tab-content") do
-            page.should have_content "#{admission_phase_state_pre_exam.name}"
-            page.should have_content "#{admission_phase_state_passed.name}"
-            page.should have_content "#{admission_phase_state_abscent.name}"
+          within(@active_tab_content) do
+            page.should have_content "#{@first_method.admission_phases.first.admission_phase_states.first.name}"
+            page.should have_content "#{@first_method.admission_phases.first.admission_phase_states.last.name}"
           end
         end
+
       end
 
       context 'when change method' do
         before do
           select "#{admission_period.name}", from: 'admission_period'
-          within('#admission-method-selection') { select "#{admission_method_international.name}", from: 'admission_method' }
+          within('#admission-method-selection') { select "#{@last_method.name}", from: 'admission_method' }
         end
 
         it 'shows selected method\'s phases' do
-          within ('#admission-phases') do
-            page.should have_content "#{admission_phase_exam.name}"
-            page.should have_content "#{admission_phase_interview.name}" 
+          within (@nav_tabs)  do
+            page.should have_content "#{@last_method.admission_phases.first.name}"
+            page.should have_content "#{@last_method.admission_phases.last.name}" 
+          end
+        end
+
+        it 'open first phase\'s tab' do
+          within (@active_tab) { page.should have_content "#{@last_method.admission_phases.first.name}" }
+        end
+
+        it 'shows first phase states' do
+          within (@active_tab_content) do
+            page.should have_content "#{@last_method.admission_phases.first.admission_phase_states.first.name}"
+            page.should have_content "#{@last_method.admission_phases.first.admission_phase_states.last.name}"
+          end
+        end
+
+        it 'navigate thru phases' do
+          within (@nav_tabs) { click_on "#{@last_method.admission_phases.last.name}" }
+          wait_for_ajax
+          within (@active_tab_content) do
+            page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.first.name}"
+            page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
           end
         end
       end
-    end
+      context 'applicants' do
+        context 'new students' do
+          before do
+            click_on 'New Applicant'
+            wait_for_ajax
+          end
+          it 'adds new' do
+            expect do
+              fill_in 'admission_student_attributes_name', with: 'Marta'
+              fill_in 'admission_student_attributes_surname', with: 'Kostova'
+              click_on 'Create Student'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-admin-admission-link')
+            end.to change(Gaku::Admission, :count).by 1
 
-    
+            within ('#state1' ) do
+              within('#students-index') { page.should have_content ('Marta') }
+            end
+          end
+          it 'cancels adding' do
+            expect do
+              click_on 'Cancel'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-admin-admission-link')
+            end.to change(Gaku::Admission, :count).by 0
+          end
+        end
+
+        context 'existing students' do
+          before do
+            student
+            admission_period
+            visit gaku.admin_admissions_path
+            click_on 'new-create-multiple-admissions-student-link'
+            wait_for_ajax          
+          end
+
+          it 'adds existing' do
+            expect do
+              find(:css, "input#student-#{student.id}").set(true)
+              wait_until_visible '#students-checked-div'
+
+              within('#students-checked-div') do
+                page.should have_content 'Chosen students(1)'
+                click_link 'Show'
+                wait_until_visible '#chosen-table'
+                page.should have_content "#{student.name}"
+                click_on 'Create'
+                wait_for_ajax
+              end
+            end.to change(Gaku::Admission, :count).by 1
+
+            within ('#state1' ) do
+              within('#students-index') { page.should have_content ("#{student.name}") }
+            end
+          end
+          it 'cancels adding' do
+            expect do
+              click_on 'Cancel'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-class-group-student-link')
+            end.to change(Gaku::Admission, :count).by 0
+          end
+        end
+
+        context 'existing applicants' do
+          pending 'changes state' do
+          end
+          pending 'exports as CSV' do
+          end
+        end
+
+      end
+
+    end
 
   end
 end
