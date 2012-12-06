@@ -102,7 +102,7 @@ module Gaku
     end
 
     def color_code(color)
-      "<div style='width:100px;height:20px;background-color:#{color};border:1px solid whitesmoke'></div> ".html_safe
+      content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
     end
 
   end

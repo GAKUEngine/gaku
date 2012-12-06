@@ -21,9 +21,9 @@ module Gaku
                 @student_total_scores[student.id][exam.id] = 0.0
                 @student_total_weights[student.id][exam.id] = 0.0
                 exam.exam_portions.each do |portion|
-                  add_to_portion_attendance(student, exam, portion)
                   if have_portion_score?(student, portion)
                     create_new_portion_score(student,portion)
+                    add_to_portion_attendance(student, exam, portion)
                   else
                     add_to_student_total_score(student, exam, portion)
                     add_to_student_total_weight(student,exam, portion) if exam.use_weighting
