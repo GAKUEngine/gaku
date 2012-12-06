@@ -36,3 +36,9 @@ row-fluid
       = link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
   .delete_modal
     =render 'gaku/shared/delete_modal', :target => @student
+
+coffee:
+  $('#delete-student-link').on 'click', (event) ->
+    event.preventDefault()
+    $('#delete-modal').modal('show')
+

@@ -71,6 +71,14 @@ module Gaku
       link_to name, resource, attributes
     end
 
+    def ajax_soft_delete(options = {})
+      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      attributes = {
+        :class => 'btn btn-mini btn-danger delete-link'
+      }.merge(options)
+      link_to name, '#', attributes
+    end
+
     def ajax_link_to_make_primary(resource, options = {})
       name = ("<i class='icon-white icon-ok'></i>").html_safe
       attributes = {
