@@ -1,5 +1,5 @@
 $ ->
-  $('#modal-dialogs').on "change", "input.student-check", (e) ->
+  $('body').on 'change', 'input.student-check', ->
     thisCheck = $(this)
     thisId = $(this).closest('tr').attr('id')
 
@@ -21,14 +21,14 @@ $ ->
         chosen_trs = $('#chosen-table').find('tbody tr')
         $('.chosen-count').html('(' + chosen_trs.length + ')')
 
-  $('#modal-dialogs').on "click", '.show-chosen-table', (event) ->
+  $('body').on 'click', '.show-chosen-table', (event) ->
     event.preventDefault()
     $('.show-chosen-table').hide()
     $('.hide-chosen-table').show()
     $('#chosen-table').show()
     $('#chosen-actions').show()
 
-  $('#modal-dialogs').on "click", '.hide-chosen-table', (event) ->
+  $('body').on 'click', '.hide-chosen-table', (event) ->
     event.preventDefault()
     $('.hide-chosen-table').hide()
     $('.show-chosen-table').show()

@@ -1,7 +1,7 @@
 # Dynamic change states based on country
 $ ->
 	stateDropdown = $('#state_dropdown')
-	$('#country_dropdown').on 'change', (e) ->
+	$('body').on 'change','#country_dropdown', (e) ->
 		countryCode = $("#country_dropdown option:selected").val()
 		$.ajax
 			type: 'get'
@@ -26,4 +26,4 @@ $ ->
 					$('.state_select').remove()
 					stateLabel.after stateSelect
 					$.each data, (i, data) ->
-						stateSelect.append('<option value="' + data.name + '">' + data.name + '</option>')
+						stateSelect.append('<option value="' + data.state.name + '">' + data.state.name + '</option>')
