@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Admin EnrollmentStatusTypes' do
+describe 'Admin Enrollment Status Types' do
 
   stub_authorization!
 

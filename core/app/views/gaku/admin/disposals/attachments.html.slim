@@ -1,6 +1,6 @@
 .row-fluid
   .span12.well
-    table.disposals-attachment-index.table.table-striped.table-bordered.table-condensed
+    table#disposal-attachments-index.table.table-striped.table-bordered.table-condensed
       thead
         tr
           th.btn-inverse = t('attachment.name')
@@ -21,6 +21,6 @@
             td =number_to_human_size attachment.asset_file_size
             td
               = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, attachment], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true, :style => 'margin-left:5px'
-              = ajax_link_to_delete attachment , :id => 'delete-disposal-attachments-link'
+              = ajax_link_to_delete attachment , :id => 'delete-disposal-attachment-link'
 
 
