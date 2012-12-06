@@ -13,6 +13,18 @@ module Gaku
       end
     end
 
+    def modal_body(&block)
+      content_tag :div, class: "modal-body" do
+        content_tag :div, class: "row-fluid" do
+          content_tag :div, class: "span12 well" do
+            block.call
+          end
+        end
+      end
+    end
+
+
+
     def modal_header(text)
       content_tag :div, class: "modal-header" do
         concat close_button

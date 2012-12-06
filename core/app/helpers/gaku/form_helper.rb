@@ -6,7 +6,11 @@ module Gaku
       options[:builder] = ValidateFormBuilder
       options[:html] = {:class => 'remote-form'}
       options[:remote] = true
-      form_for(object, options, &block)
+      content_tag :div, class: "row-fluid" do
+        content_tag :div, class: "span12 well" do
+          form_for(object, options, &block)
+        end
+      end
       #EASY USING
       #build_proc = build_form(object, &form_block)
       #form_for(object, options, &build_proc)
@@ -66,12 +70,12 @@ module Gaku
       locale_name =  object_name.underscore
       object_class = options[:nested_id] ||  object_name
 
-      content_tag :div, :class => 'span12' do
-        submit = content_tag :div, :class => 'span6' do
-          submit_button t(:"#{locale_name}.save"), :id => "submit-#{object_class}-button"
+      content_tag :div, :class => 'row-fluid' do
+        content_tag :div, :class => 'span12' do
+          submit = submit_button(t(:"#{locale_name}.save"), :id => "submit-#{object_class}-button")
+          cancel_link = link_to_cancel( :id => "cancel-#{object_class}-link")
+          submit + cancel_link
         end
-        cancel_link = link_to_cancel( :id => "cancel-#{object_class}-link")
-        submit + cancel_link
       end
     end
 
@@ -80,6 +84,6 @@ module Gaku
     def get_class(object)
       object.class.to_s.underscore.dasherize.split('/').last
     end
-    
+
   end
 end
