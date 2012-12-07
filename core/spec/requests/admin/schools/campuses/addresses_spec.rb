@@ -59,7 +59,7 @@ describe 'Admin School Campuses Address' do
         wait_until_invisible modal
         page.should have_content 'The address new details'
 
-        flash_updated?
+        #TODO flash_updated?
       end
 
       it 'cancels editting', :cancel => true do

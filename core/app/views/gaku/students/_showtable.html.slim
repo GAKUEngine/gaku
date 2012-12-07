@@ -11,7 +11,7 @@
           = image_tag @student.picture.url(:thumb), :id => "student-picture"
       .row-fluid.mt-s
         = button_to t(:'pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-student-picture-link", :class => "span12 btn"
-        div id="upload-student-picture" style="display:none;"
+        #upload-student-picture.hide
           = render 'upload_picture'
 .row-fluid
   .span12.well
