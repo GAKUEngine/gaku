@@ -1,3 +1,4 @@
+//edit from index
 $('tr#address-<%= @address.id %>').html('<%= render_js_partial("gaku/admin/schools/campuses/addresses/address_row_fields", {:address => @address, :target => [@student, @guardian, @address]}) %>');
 $("#edit-address-modal").modal("hide");
 showNotice("<%= render_flash %>");

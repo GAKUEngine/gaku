@@ -7,9 +7,11 @@ module Gaku
 
       respond_to :js, :html
 
+
       before_filter :address, :only => [:destroy, :make_primary]
-    	before_filter :school, :only => [:new, :create, :edit, :update]
+    	before_filter :school
     	before_filter :campus
+      before_filter :before_index, :only => [:index]
 
     	def create
         @address = Address.create(params[:address])
@@ -31,6 +33,9 @@ module Gaku
       end
 
       private
+        def before_index
+          @address = @campus.address
+        end
 
         def address
           @address = Address.find(params[:id])

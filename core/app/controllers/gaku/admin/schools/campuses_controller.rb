@@ -8,8 +8,10 @@ module Gaku
 
       respond_to :js, :html
 
-      #before_filter :load_school
+      before_filter :school
       before_filter :count, :only => [:create,:destroy]
+      before_filter :before_show, :only => [:show]
+
 
       #def create
       #  super do |format|
@@ -20,6 +22,10 @@ module Gaku
       #end
 
       private
+        def before_show
+          @address = Address.new
+        end
+
         def school
           @school = School.find(params[:school_id])
         end

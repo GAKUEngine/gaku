@@ -78,7 +78,7 @@ describe 'Admin Schools' do
 
         wait_until_invisible modal
         page.should have_content 'Sofia Technical University'
-        page.should_not have_content 'Varna Technical University'
+        
         flash_updated?
       end
 

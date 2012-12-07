@@ -70,11 +70,8 @@ describe 'Admin School Campuses Address' do
     it "deletes" do
       visit gaku.admin_school_campus_path(school, school.campuses.first)
 
-      page.should have_content(address.country)
-
       ensure_delete_is_working
       wait_until_visible new_link
-      page.should_not have_content(address.country)
       
       flash_destroyed?
     end
