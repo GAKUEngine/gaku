@@ -5,7 +5,7 @@ describe Gaku::Campus do
 		it { should have_valid_factory(:campus) }
 		it { should belong_to(:school) }
 		it { should have_many(:contacts) }
-		it { should belong_to(:address) }
+		it { should have_one(:address) }
 
 		it { should allow_mass_assignment_of :name }
 		it { should allow_mass_assignment_of :school_id }

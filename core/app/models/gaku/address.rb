@@ -21,12 +21,13 @@ module Gaku
   class Address < ActiveRecord::Base 
     belongs_to :country
     belongs_to :state
-   
+    belongs_to :campus
+
     has_many :student_addresses, :dependent => :destroy
     has_many :students, :through => :student_addresses, :dependent => :destroy
     has_many :guardian_addresses, :dependent => :destroy
     has_many :guardians, :through => :guardian_addresses
-    has_one :campus
+    
 
     validates :address1, :city, :country, :presence => true
 

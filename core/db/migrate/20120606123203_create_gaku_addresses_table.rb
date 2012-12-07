@@ -11,6 +11,7 @@ class CreateGakuAddressesTable < ActiveRecord::Migration
       t.references :country
       t.references :state
       t.references :faculty
+      t.references :campus
 
       t.timestamps
     end
