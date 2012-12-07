@@ -36,19 +36,19 @@
               .row-fluid#class_group_enrollments_list
                 =render 'gaku/class_groups/students/students'
               .row-fluid
-                div id='enrollment_form' style='display:none'
+                #enrollment_form.hide
 
             #semesters.tab-pane
               .row-fluid
                 = render 'gaku/class_groups/semesters/semesters'
               .row-fluid
-                div id="semester_form" style="display:none"
+                #semester_form.hide
 
             #courses.tab-pane
               .row-fluid
                 = render 'gaku/class_groups/courses/courses'
               .row-fluid
-                div id="course_form" style="display:none"
+                #course_form.hide
 
     .row-fluid
       .span12.well
