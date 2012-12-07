@@ -5,9 +5,5 @@
 		  .row-fluid
 		    .span12.well
 		      = render 'gaku/students/student_form_fields', :f => f
-
 		  .row-fluid
-		    .span12.well
-		      .span9
-		        = submit_button t(:'student.save'), :id => 'submit-student-button'
-		      = link_to_cancel :id => 'cancel-student-link'
+		    =buttons_for @student

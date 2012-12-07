@@ -24,7 +24,4 @@
         = syllabus_form.label t('syllabus.description')
         = syllabus_form.text_area :description, :class => "span12", :size => "0x5"
       .row-fluid
-        .span12
-          .span6
-            = submit_button t('syllabus.save'), :id => 'submit-syllabus-button'
-          = link_to_cancel :id => "cancel-syllabus-link"
+        = buttons_for @syllabus

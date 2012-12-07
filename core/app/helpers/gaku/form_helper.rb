@@ -24,12 +24,14 @@ module Gaku
 
     def buttons_for(object, options = {})
       object_name = get_class(object)
-      locale_name =  object_name.underscore
       object_class = options[:nested_id] ||  object_name
-
+      
+      locale_name =  object_name.underscore
+      locale = options[:label] || t("#{locale_name}.save")
+      
       content_tag :div, :class => 'row-fluid' do
         content_tag :div, :class => 'span12' do
-          concat submit_button(t(:"#{locale_name}.save"), :id => "submit-#{object_class}-button")
+          concat submit_button( locale , :id => "submit-#{object_class}-button")
           concat link_to_cancel( :id => "cancel-#{object_class}-link")
         end
       end

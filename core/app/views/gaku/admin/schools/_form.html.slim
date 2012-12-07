@@ -4,9 +4,4 @@
       .span12.well
         = render 'school_form_fields', :f => f
         .row-fluid
-          .span12
-            .span9
-              = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
-            = link_to_cancel :id => 'cancel-admin-school-link'
-
-/= javascript_include_tag 'gaku/admin/schools'
+          = buttons_for @school, :nested_id => 'admin-school'

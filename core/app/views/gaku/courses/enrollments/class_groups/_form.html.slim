@@ -7,7 +7,4 @@
       = f.label :class_group_id
       = f.select :class_group_id, @class_groups.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('class_group.choose')}, {:class => 'chzn-select'}
   .row-fluid
-    .span12
-      .span6
-        = submit_button t('class_group.enroll'), :id => 'submit-course-class-group-button'
-      = link_to_cancel :id => "cancel-course-class-group-link"
+    = buttons_for @course, :nested_id => 'course-class-group', :label => t('class_group.enroll')

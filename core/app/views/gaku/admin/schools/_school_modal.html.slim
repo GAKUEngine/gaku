@@ -5,6 +5,4 @@
       .row-fluid
         = render 'school_form_fields', :f => f
       .row-fluid
-        .span9
-          = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
-        = link_to_cancel :id => 'cancel-admin-school-link'
+          = buttons_for @school, :nested_id => 'admin-school'

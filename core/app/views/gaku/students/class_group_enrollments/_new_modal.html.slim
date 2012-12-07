@@ -23,8 +23,5 @@
             = f.text_field :seat_number, :label => t(:'class_group_enrollment.seat_number')
 
       .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'class_group_enrollment.create'), :id => 'submit-course-button'
-          = link_to_cancel :id => "cancel-enroll-student-link"
+        = buttons_for @class_group_enrollment, :id => 'class-group-enrollment', :label => t(:'class_group_enrollment.create')
 
