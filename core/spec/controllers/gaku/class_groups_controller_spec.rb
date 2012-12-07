@@ -6,41 +6,41 @@ describe Gaku::ClassGroupsController do
 
   describe "GET #index" do
     it "is successful" do
-      gaku_xhr_get :index
+      gaku_js_get :index
       response.should be_success
     end
 
     it "populates an array of class_groups" do
-      gaku_xhr_get :index
+      gaku_js_get :index
       assigns(:class_groups).should eq [class_group]
     end
 
     it "renders the :index view" do
-      gaku_xhr_get :index
+      gaku_js_get :index
       response.should render_template :index
     end
   end 
 
   describe 'GET #show' do
     it "assigns the requested class_group to @class_group" do
-      gaku_xhr_get :show, id: class_group
+      gaku_js_get :show, id: class_group
       assigns(:class_group).should eq class_group
     end
 
     it "renders the :show template" do
-      gaku_xhr_get :show, id: class_group
+      gaku_js_get :show, id: class_group
       response.should render_template :show
     end
   end
 
   describe 'GET #new' do
     it "assigns a new class_group to @class_group" do
-      gaku_xhr_get :new
+      gaku_js_get :new
       assigns(:class_group).should be_a_new(Gaku::ClassGroup)
     end
 
     it "renders the :new template" do
-      gaku_xhr_get :new
+      gaku_js_get :new
       response.should render_template :new
     end
   end
@@ -49,7 +49,7 @@ describe Gaku::ClassGroupsController do
     context "with valid attributes" do
       it "saves the new class group in the db" do
         expect{
-          gaku_xhr_post :create, class_group: attributes_for(:class_group)  
+          gaku_js_post :create, class_group: attributes_for(:class_group)  
         }.to change(Gaku::ClassGroup, :count).by 1
         
       end
@@ -57,7 +57,7 @@ describe Gaku::ClassGroupsController do
     context "with invalid attributes" do
       it "does not save the new class group in the db" do
         expect{
-          gaku_xhr_post :create, class_group: {name: ''}  
+          gaku_js_post :create, class_group: {name: ''}  
         }.to_not change(Gaku::ClassGroup, :count)
       end
     end
