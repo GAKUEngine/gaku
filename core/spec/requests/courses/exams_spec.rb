@@ -23,7 +23,7 @@ describe "CourseExams"  do
     current_path.should eq "/courses/#{course.id}/exams/#{exam.id}/grading"
   end
 
-  pending "shows all grading link" do
+  it "shows all grading link" do
     click_link 'All Exams'
     #TODO check redirection
   end

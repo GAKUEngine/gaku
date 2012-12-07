@@ -30,7 +30,7 @@ describe 'Exams' do
         fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
 
         click submit
-        wait_until_invisible form
+        wait_until_invisible '#new_exam'
       end.to change(Gaku::Exam, :count).by 1
 
       size_of(table_rows).should == tr_count + 1

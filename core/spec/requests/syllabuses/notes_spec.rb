@@ -23,7 +23,7 @@ describe 'Syllabus Notes' do
         fill_in "note_title",   :with => "The note title"
         fill_in "note_content", :with => "The note content"
         click submit
-        wait_until_invisible form
+        wait_until_invisible '.form'
       end.to change(syllabus.notes, :count).by 1
 
       page.should have_content "The note title"
