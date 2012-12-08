@@ -1,7 +1,7 @@
 module Gaku
   class ClassGroupsController < GakuController
     helper_method :sort_column, :sort_direction
-    
+
     inherit_resources
     actions :show, :new, :create, :edit, :update, :destroy
 
@@ -30,7 +30,7 @@ module Gaku
         format.js
       end
     end
-    
+
     private
 
       def class_group
@@ -57,7 +57,7 @@ module Gaku
       def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
       end
-      
+
       def count
         @count = ClassGroup.count
       end
