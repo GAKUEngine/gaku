@@ -4,7 +4,6 @@ module Gaku
 
     inherit_resources
     actions :show, :new, :create, :edit, :update, :destroy
-
     respond_to :js, :html
 
     before_filter :load_before_index, :only => :index

@@ -15,6 +15,28 @@ module Gaku
       end
     end
 
+    def hr
+      content_tag :div, class: "row-fluid" do
+        content_tag :div, class: "span12" do
+          content_tag :hr
+        end
+      end
+    end
+
+    def index_body(&block)
+      content_tag :div, class: "row-fluid" do
+        content_tag :div, class: "span12" do
+          block.call
+        end
+      end
+    end
+
+    def index_head(&block)
+      content_tag :div, class: "row-fluid" do
+        block.call
+      end
+    end
+
     def sortable_table_for(id, &block)
       content_tag :table, class: "table table-striped table-bordered table-condensed tablesorter", id: id do
         block.call

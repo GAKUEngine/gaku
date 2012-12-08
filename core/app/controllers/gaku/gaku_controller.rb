@@ -15,6 +15,8 @@ module Gaku
         case action_name
         when "index"
           "gaku/layouts/index"
+        when "show"
+          "gaku/layouts/show"
         else
           "gaku/layouts/gaku"
         end
