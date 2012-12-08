@@ -22,7 +22,7 @@ describe 'CourseGroup Courses' do
       expect do
         select "#{course.code}", :from => 'course_group_enrollment_course_id'
         click submit
-        wait_until_invisible form
+        wait_until_invisible '.form'
       end.to change(Gaku::CourseGroupEnrollment, :count).by 1
 
       within(table) { page.should have_content "#{course.code}" }

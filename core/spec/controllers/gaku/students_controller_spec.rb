@@ -23,7 +23,7 @@ describe Gaku::StudentsController do
   end
 
   describe 'GET #new' do
-    before { gaku_xhr_get :new }
+    before { gaku_js_get :new }
 
     it { should respond_with(:success) }
     it('renders') { should render_template :new }
@@ -33,20 +33,20 @@ describe Gaku::StudentsController do
   describe "POST #create" do
 
     context "with valid attributes" do
-      let(:xhr_post!) { gaku_xhr_post :create, student: valid_attributes }
+      let(:js_post!) { gaku_js_post :create, student: valid_attributes }
 
       it "saves" do
-        expect { xhr_post! }.to change(Gaku::Student, :count).by 1
+        expect { js_post! }.to change(Gaku::Student, :count).by 1
         response.should be_success
         response.should render_template :create
       end
     end
 
     context "with invalid attributes" do
-      let(:xhr_post!) { gaku_xhr_post :create, student: invalid_attributes }
+      let(:js_post!) { gaku_js_post :create, student: invalid_attributes }
 
       it "does not save" do
-        expect{ xhr_post!}.to_not change(Gaku::Student, :count)
+        expect{ js_post!}.to_not change(Gaku::Student, :count)
         response.should be_success
       end
     end

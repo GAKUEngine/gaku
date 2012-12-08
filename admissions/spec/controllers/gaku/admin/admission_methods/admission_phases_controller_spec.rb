@@ -7,12 +7,12 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
   describe 'GET #new' do
     it "assigns a new admission_phase to @admission_phase" do
-      gaku_xhr_get :new, admission_method_id: admission_method.id
+      gaku_js_get :new, admission_method_id: admission_method.id
       assigns(:admission_phase).should be_a_new(Gaku::AdmissionPhase)
     end
 
     it "renders the :new template" do
-        gaku_xhr_get :new, admission_method_id: admission_method.id
+        gaku_js_get :new, admission_method_id: admission_method.id
         response.should render_template :new
     end
   end
@@ -30,7 +30,7 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
     context "with invalid attributes" do
       it "does not save the new admission method phase in the db" do
           expect{
-            gaku_xhr_post :create, admission_method_id: admission_method.id, admission_phase: {name: ''}  
+            gaku_js_post :create, admission_method_id: admission_method.id, admission_phase: {name: ''}  
           }.to_not change(Gaku::AdmissionPhase, :count)
       end
     end
@@ -38,12 +38,12 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
   describe 'GET #edit' do
     it "locates the requested admission_phase" do
-      gaku_xhr_get :edit, id: admission_phase, admission_method_id: admission_method.id
+      gaku_js_get :edit, id: admission_phase, admission_method_id: admission_method.id
       assigns(:admission_phase).should eq(admission_phase)
     end
 
     it "renders the :edit template" do
-        gaku_xhr_get :edit, id: admission_phase, admission_method_id: admission_method.id
+        gaku_js_get :edit, id: admission_phase, admission_method_id: admission_method.id
         response.should render_template :edit
     end
   end
@@ -70,7 +70,7 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
     context "invalid attributes" do
       it "does not change admission phase's attributes" do
-        gaku_xhr_put :update, id: admission_phase, 
+        gaku_js_put :update, id: admission_phase, 
                               admission_phase: attributes_for(:admission_phase, name: ""),
                               admission_method_id: admission_method.id
         admission_method.reload
@@ -81,12 +81,12 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
   describe 'GET #show states' do
     it "locates the requested admission_phase's states" do
-      gaku_xhr_get :show_phase_states, id: admission_phase, admission_method_id: admission_method.id
+      gaku_js_get :show_phase_states, id: admission_phase, admission_method_id: admission_method.id
       assigns(:admission_phase).should eq(admission_phase)
     end
 
     it "renders the :admission_phase_states_modal template" do
-      gaku_xhr_get :show_phase_states, id: admission_phase, admission_method_id: admission_method.id
+      gaku_js_get :show_phase_states, id: admission_phase, admission_method_id: admission_method.id
       response.should render_template :show_phase_states
     end
   end

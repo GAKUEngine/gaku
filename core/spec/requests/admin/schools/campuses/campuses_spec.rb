@@ -4,7 +4,8 @@ describe 'Admin School Campuses' do
 
   stub_authorization!
 
-  let(:school) { create(:school, :name => 'Nagoya University') }
+  let(:school) { create(:school, name:'Nagoya University') }
+  let(:campus) { create(:campus ) }
 
   before :all do
     set_resource "admin-school-campus"
@@ -40,7 +41,10 @@ describe 'Admin School Campuses' do
   end
 
   context 'existing', :js => true do
-
+    before do
+      campus
+      visit gaku.admin_school_path(school)
+    end
     context 'edit' do
       before do
         within(table) { click edit_link }
@@ -62,6 +66,11 @@ describe 'Admin School Campuses' do
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
+    end
+
+    it 'shows' do
+      within(table) { click show_link }
+      page.should have_content "Contacts list"
     end
 
     it 'deletes' do

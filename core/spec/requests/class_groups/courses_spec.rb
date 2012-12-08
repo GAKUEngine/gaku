@@ -38,7 +38,7 @@ describe 'ClassGroup Courses' do
       wait_until { page.has_content? 'Course can\'t be blank' }
     end
 
-    pending 'cancels creating', :cancel => true do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end

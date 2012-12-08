@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Admin CommuteMethodTypes' do
+describe 'Admin Commute Method Types' do
 
   stub_authorization!
 
