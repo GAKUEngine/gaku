@@ -78,7 +78,7 @@ describe 'Syllabus Exams' do
         flash_created?
       end
 
-      it 'errors without the required fields', :js => true do
+      pending 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
         click submit
 
