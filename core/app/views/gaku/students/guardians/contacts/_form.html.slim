@@ -1,7 +1,4 @@
 = remote_form_for [@student, @guardian, @contact] do |f|
-  .row-fluid.mt-l
-    .span12.well
-      = render 'gaku/shared/form_fields/contact_form_fields', :f => f
-      .row-fluid
-				= buttons_for @contact, :nested_id => 'student-guardian-contact'
+  = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+  = buttons_for @contact, :nested_id => 'student-guardian-contact'
 

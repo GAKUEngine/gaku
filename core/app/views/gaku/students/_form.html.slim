@@ -1,6 +1,3 @@
 = remote_form_for @student do |f|
-  .row-fluid.mt-l
-    .span12.well
-      =render :partial => 'student_form_fields', :locals => { :f => f }
-      .row-fluid
-        =buttons_for @student
+  = render :partial => 'form_fields', :locals => { :f => f }
+  = buttons_for @student

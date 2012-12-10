@@ -1,5 +1,5 @@
 tr
-  th width="20%" = t('guardian.name')
+  th = t(:'guardian.name')
   td.vm style="font-size:16pt"
     div
       ruby style="margin-right:5px"
@@ -12,13 +12,14 @@ tr
           = guardian.name
         rt
           = guardian.name_reading
-  th = t('guardian.relationship')
+tr
+  th = t(:'guardian.relationship')
   td.vm-tc style="font-size:12pt" = guardian.relationship
 tr
-  th = t('address.singular')
-  td#primary-address colspan="3" 
-    ="#{guardian.primary_address.address1}, #{guardian.primary_address.address2}, #{guardian.primary_address.city}, #{guardian.primary_address.zipcode}, #{guardian.primary_address.state_name}, #{guardian.primary_address.country.name}" unless guardian.primary_address.blank? 
+  th = t(:'address.singular')
+  td#primary-address colspan="3"
+    ="#{guardian.primary_address.address1}, #{guardian.primary_address.address2}, #{guardian.primary_address.city}, #{guardian.primary_address.zipcode}, #{guardian.primary_address.state_name}, #{guardian.primary_address.country.name}" unless guardian.primary_address.blank?
 tr
-  th = t('contact.singular')
-  td#primary-contact colspan="3" 
+  th = t(:'contact.singular')
+  td#primary-contact colspan="3"
     = "#{guardian.primary_contact.contact_type.name}: #{guardian.primary_contact.data} (#{guardian.primary_contact.details}) " unless guardian.primary_contact.blank?
