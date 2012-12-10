@@ -17,8 +17,5 @@
           .span12.well
             =render 'form_portion_fields', :ep_form => ep_form
   .row-fluid.well
-    .span12
-      .span6
-        = submit_button t('exam.save'), :id => 'submit-exam-button'
-      = link_to_cancel :id => "cancel-exam-link"
+    =buttons_for @exam
 

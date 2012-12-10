@@ -4,7 +4,4 @@
       = render 'gaku/shared/form_fields/address_form_fields', :f => f
 
       .row-fluid
-        .span12
-          .span9
-            = submit_button t('address.save'), :id => 'submit-admin-school-campus-address-button'
-          = link_to_cancel :id => 'cancel-admin-school-campus-address-link'
+        = buttons_for @address, :nested_id => 'admin-school-campus-address'

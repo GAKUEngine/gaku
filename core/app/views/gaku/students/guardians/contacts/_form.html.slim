@@ -3,9 +3,5 @@
     .span12.well
       = render 'gaku/shared/form_fields/contact_form_fields', :f => f
       .row-fluid
-        .span12
-          .span6
-            = submit_button t(:'contact.save'), :id => 'submit-student-guardian-contact-button'
-          = link_to_cancel  :id => 'cancel-student-guardian-contact-link'
+				= buttons_for @contact, :nested_id => 'student-guardian-contact'
 
-/= javascript_include_tag 'gaku/students/guardians/contacts'

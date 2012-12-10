@@ -5,7 +5,4 @@
          = render 'form_fields', :f => f
 
       .row-fluid
-        .span12
-          .span9
-            = submit_button t('class_group.save'), :id => 'submit-class-group-button'
-          = link_to_cancel :id => "cancel-class-group-link"
+        =buttons_for @class_group
