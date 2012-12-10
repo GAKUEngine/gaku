@@ -1,7 +1,4 @@
 = remote_form_for [@course_group, @course_group_enrollment] do |f|
-  .row-fluid.mt-l
-    .span12.well
-      = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :class => "span12", :label => t(:'course.code')
-      = f.hidden_field :course_group_id, :value => @course_group.id
-      .row-fluid
-        = buttons_for @course_group_enrollment, :id => 'course-group-enrollments'
+  = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :class => "span12", :label => t(:'course.code')
+  = f.hidden_field :course_group_id, :value => @course_group.id
+  = buttons_for @course_group_enrollment, :id => 'course-group-enrollments'
