@@ -1,11 +1,12 @@
 -unless @school.blank?
   =render 'master_school', :master_school => @school if @school.is_primary?
-  .row-fluid
-    .span12.well
-      = table do
-        tbody
-          tr
-            = render 'school_fields', :school => @school
+  #admin-school-information
+    .row-fluid
+      .span12.well
+        = table do
+          tbody
+            tr
+              = render 'school_fields', :school => @school
   br/
   = render 'gaku/admin/schools/campuses/campuses'
   br/
