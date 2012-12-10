@@ -6,8 +6,10 @@ module Gaku
 
     respond_to :js, :html
 
+    before_filter :exam_portion, :only => :show
     before_filter :exam, :only => [:show, :edit, :update, :destroy ]
     before_filter :portions_count, :only => :destroy
+    before_filter :attachments_count, :only => :show
     def new
       super do |format|
         format.js { render 'gaku/exams/exam_portions/new' }
@@ -59,6 +61,14 @@ module Gaku
       def portions_count
         exam
         @portions_count = @exam.exam_portions.count
+      end
+
+      def exam_portion
+        @exam_portion = ExamPortion.find(params[:id])
+      end
+
+      def attachments_count
+        @attachments_count = @exam_portion.attachments.count
       end
   end
 end

@@ -8,12 +8,16 @@ module Gaku
 			@attachable = find_attachable 
 			@attachment = @attachable.attachments.build(params[:attachment])
 			respond_to do |format|
-				if @attachment.save
+			if @attachment.save
 					format.html { redirect_to :back, :notice => 'Asset upload was successful!' }
 				else
-					format.html { redirect_to :back, :error => 'Error when upload asset' }
+					format.html { redirect_to :back, :flash => {:success => 'Error when upload asset'} }
 				end
 			end
+		end
+			
+		def new
+			@note = @attachable.attachment.new
 		end
 
 		def destroy 
@@ -45,8 +49,14 @@ module Gaku
 		private
 
 		  def find_attachable
-			  klass = [ExamPortion].detect {|c| params["#{c.name.underscore}_id"]}
-			  @commentable = klass.find(params["#{klass.name.underscore}_id"])
+	      unnamespaced_klass = ''
+	      klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c| 
+	        unnamespaced_klass = c.to_s.split("::")
+	        params["#{unnamespaced_klass[1].underscore}_id"]
+	      end
+
+	      @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
+	      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 		  end
 
 	end

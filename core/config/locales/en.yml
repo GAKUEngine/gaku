@@ -52,7 +52,7 @@ en:
     file_type: File type
     name: Name
     new: New Attachment
-
+    list: Attachment list
   attendance_type:
     add: Add Attendance Type
     edit: Edin Attendance Type

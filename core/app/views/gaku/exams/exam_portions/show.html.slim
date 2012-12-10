@@ -22,34 +22,26 @@
             = ajax_link_to_edit [:edit, @exam, @exam_portion]
             = ajax_link_to_delete [@exam, @exam_portion]
 .row-fluid
-  .span12
-    h4 Attachment index
-    #new-exam-portion-attachment-link
-      =link_to ("<i class='icon-plus icon-white'></i> " + t('attachment.new')).html_safe, "#", :class => 'btn btn-primary pull-right'
+.row-fluid
+    .pull-left
+      = count_div 'exam-exam-portion-attachment-count' do
+        = print_count @attachments_count, t(:'attachment.list')
+    .pull-right
+        =ajax_link_to_new t(:'attachment.new'), [:new, @exam, @exam_portion, :attachment], :id => "new-exam-exam-portion-attachment-link"
 br/
 .row-fluid
-  #new-exam-portion-attachment-form.hide
-    .span12.well
-      =form_for [@exam, @exam_portion, @attachment], :remote => true do |f|
-          =f.label :name, t('attachment.name')
-          =f.text_field :name
-          =f.label :description, t('attachment.description')
-          =f.text_area :description, :rows => 8
-          =f.label :asset, t('attachment.assets')
-          =f.file_field :asset
-          br
-          =f.submit t('attachment.create'), :class => 'btn btn-primary'
+  #new-exam-exam-portion-attachment.hide
 .row-fluid
   .span12.well
-    table.exam-portion-attachment-index.table.table-striped.table-bordered.table-condensed
+    =table_for 'exam-exam-portion-attachment-index' do
       thead
         tr
-          th.btn-inverse = t('attachment.name')
-          th.btn-inverse = t('attachment.description')
-          th.btn-inverse = t('attachment.file_name')
-          th.btn-inverse = t('attachment.file_type')
-          th.btn-inverse = t('attachment.file_size')
-          th.btn-info width="70px" = t('manage')
+          =th t('attachment.name')
+          =th t('attachment.description')
+          =th t('attachment.file_name')
+          =th t('attachment.file_type')
+          =th t('attachment.file_size')
+          =th_actions t('manage')
       tbody
         =render :partial => 'gaku/shared/fields/attachment_fields', :collection => @exam_portion.attachments, :as => :attachment
 
