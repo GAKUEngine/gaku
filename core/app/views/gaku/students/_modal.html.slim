@@ -1,0 +1,6 @@
+= modal_for 'edit-student-modal' do
+  = modal_header t(:'student.edit')
+  = modal_form_for @student do |f|
+    = modal_body do
+	    = render 'form_fields', :f => f
+	    = buttons_for @student

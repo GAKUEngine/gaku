@@ -15,6 +15,18 @@ module Gaku
       end
     end
 
+    def enrollment_status_types
+      Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def class_groups
+      Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types
+      Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
     def syllabuses
       Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
     end

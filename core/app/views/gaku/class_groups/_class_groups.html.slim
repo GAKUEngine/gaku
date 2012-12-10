@@ -6,5 +6,5 @@
 	    = th(sortable 'homeroom', t(:'class_group.homeroom'))
 	    = th_actions 3
 	tbody
-	  =render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
+	  = render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
 

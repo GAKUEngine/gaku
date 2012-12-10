@@ -1,6 +1,6 @@
-- content_for :title, t(:'student.list')
+= content_for :title, t(:'student.list')
 
-.row-fluid
+= content_for :index_header do
   .pull-left
     = count_div 'students-count' do
       = print_count @count, t(:'student.list')
@@ -8,11 +8,15 @@
     = ajax_link_to_new t(:'student.new'), new_student_path, :id => "new-student-link"
     = button t(:'student.import'), "students/importer", :id => "import-students-link"
     = button t(:'student.export'), "students.csv", :id => 'export-students-link'
-#new-student.hide
-  = render 'gaku/students/form'
-.row-fluid
-  .span12
-    hr/
-  =render 'gaku/students/student_chooser'
-.row-fluid
-  = paginate @students
+
+= content_for :new_form do
+  #new-student.hide
+
+= render 'student_chooser'
+
+= hr
+
+#students-index-div
+  = render 'students'
+
+= paginate @students
