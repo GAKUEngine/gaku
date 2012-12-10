@@ -8,10 +8,10 @@ module Gaku
     before_filter :address,   :only => [:destroy, :make_primary]
     before_filter :count,     :only => [:create, :destroy]
 
-    
+
     def create
       @address = @student.addresses.create(params[:address])
-      flash[:notice] = t('notice.created', :resource => t('address.singular')) 
+      flash[:notice] = t('notice.created', :resource => t(:'address.singular'))
     end
 
 

@@ -6,10 +6,8 @@ module Gaku
     inherit_resources
     respond_to :js, :html
 
-    before_filter :select_vars, :only => [:index,:new, :edit]
-    before_filter :before_show,  :only => :show
-    #before_filter :class_groups,      :only => [:new, :edit]
-    #before_filter :student,           :only => [:edit, :update, :destroy]
+    before_filter :select_vars,       :only => [:index,:new, :edit]
+    before_filter :before_show,       :only => :show
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
 
@@ -24,7 +22,6 @@ module Gaku
       @students = @students.page(params[:page]).per(10)
 
       @student = Student.new
-      @courses = get_courses
       @enrolled_students = params[:enrolled_students]
 
       respond_to do |format|
@@ -37,7 +34,6 @@ module Gaku
     def update
       @student = get_student
       if @student.update_attributes(params[:student])
-        #flash.now[:notice] = t('notice.updated', :resource => resource_name)
         respond_with(@student) do |format|
           unless params[:student].nil?
             if !params[:student][:addresses_attributes].nil?
@@ -62,11 +58,6 @@ module Gaku
 
     def destroy
       destroy! { students_path }
-      #if @student.destroy
-      #  respond_with(@student) do |format|
-      #    format.html { redirect_to students_path }
-      #  end
-      #end
     end
 
     def autocomplete_search
@@ -88,9 +79,7 @@ module Gaku
     private
 
       def select_vars
-        @class_groups = get_class_groups
         @class_group_id ||= params[:class_group_id]
-        @scholarship_statuses = get_scholarship_statuses
       end
 
       def export_csv_index(students, field_order = ["surname", "name"])
@@ -113,38 +102,19 @@ module Gaku
       end
 
       def before_show
-        #@new_commute_method = CommuteMethod.new
-        #@new_contact = Contact.new
         @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
         @notable = Student.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
         Student.includes([{:contacts => :contact_type}]).find(params[:id])
       end
-
-      #def class_groups
-      #  @class_groups = ClassGroup.all
-      #  @class_group_id ||= params[:class_group_id]
-      #end
-
+      
       def get_student
         Student.find(params[:id])
       end
 
       def count
         @count = Student.count
-      end
-
-      def get_class_groups
-        ClassGroup.all
-      end
-
-      def get_courses
-        Course.all
-      end
-
-      def get_scholarship_statuses
-        ScholarshipStatus.all
       end
 
       def sort_column
@@ -154,10 +124,5 @@ module Gaku
       def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
       end
-
-      def resource_name
-        t('student.singular')
-      end
-
   end
 end

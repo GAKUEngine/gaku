@@ -6,7 +6,6 @@ module Gaku
     respond_to :js, :html
 
     before_filter :student, :only => [:new, :create]
-    before_filter :class_groups, :only => :new
 
     def create
       @class_group_enrollment = ClassGroupEnrollment.new(params[:class_group_enrollment])
@@ -14,7 +13,7 @@ module Gaku
         if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
           @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
         end
-        flash.now[:notice] = t('notice.enrolled', :resource => t('student.singular'), :to => resource_name)
+        flash.now[:notice] = t('notice.enrolled', :resource => t('student.singular'), :to => t(:'class_group.singular'))
         format.js { render 'create' }
       end
     end
@@ -31,12 +30,5 @@ module Gaku
       @student = Student.find(params[:student_id])
     end
 
-    def resource_name
-      t('class_group.singular')
-    end
-
-    def class_groups
-      @class_groups = ClassGroup.all.collect { |s| ["#{s.name} ", s.id] }
-    end
   end
 end
