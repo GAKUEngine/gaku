@@ -1,25 +1,26 @@
 #student-addresses
-  = form_div 'new-student-address'
-
-  .pull-left
-    = count_div 'student-addresses-count' do
-      = print_count @student.addresses.count, t(:'address.list')
-  .pull-right
-    = ajax_link_to_new t('address.add'), [:new, @student, :address], :id => 'new-student-address-link'
+  = index_header do
+    #new-student-address.hide
+    .pull-left
+      = count_div 'student-addresses-count' do
+        = print_count @student.addresses.count, t(:'address.list')
+    .pull-right
+      = ajax_link_to_new t(:'address.add'), [:new, @student, :address], :id => 'new-student-address-link'
 
   = hr
 
-  = table_for 'student-addresses-index' do
-    thead
-      tr
-        = th_icon 'home'
-        = th t(:'address.title')
-        = th t(:'address.country')
-        = th t(:'address.zipcode')
-        = th t(:'address.state')
-        = th t(:'address.city')
-        = th t(:'address.address1')
-        = th t(:'address.address2')
-        = th_actions 2
-    tbody
-      = render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'
+  = index_body do
+    = table_for 'student-addresses-index' do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'address.title')
+          = th t(:'address.country')
+          = th t(:'address.zipcode')
+          = th t(:'address.state')
+          = th t(:'address.city')
+          = th t(:'address.address1')
+          = th t(:'address.address2')
+          = th_actions 2
+      tbody
+        = render :partial => 'gaku/students/addresses/address', :collection => @student.addresses, :as => 'address'

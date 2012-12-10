@@ -23,6 +23,14 @@ module Gaku
       end
     end
 
+    def well_div(&block)
+      content_tag :div, class: "row-fluid" do
+        content_tag :div, class: "span12 well" do
+          block.call
+        end
+      end
+    end
+
     def index_body(&block)
       content_tag :div, class: "row-fluid" do
         content_tag :div, class: "span12" do
@@ -31,7 +39,7 @@ module Gaku
       end
     end
 
-    def index_head(&block)
+    def index_header(&block)
       content_tag :div, class: "row-fluid" do
         block.call
       end
