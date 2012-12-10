@@ -1,10 +1,7 @@
 = remote_form_for [@student, @address] do |f|
-  .row-fluid
-    .span12.well
-      = render 'gaku/shared/form_fields/address_form_fields',  :f => f
+  = render 'gaku/shared/form_fields/address_form_fields',  :f => f
+  = buttons_for @address, :nested_id => 'student-address'
 
-      .row-fluid
-        = buttons_for @address, :nested_id => 'student-address'
 
 /= javascript_include_tag 'gaku/students/addresses'
 /= javascript_include_tag 'gaku/shared/address'

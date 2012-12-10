@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::Attachment do
 
   context "validations" do 
-  	pending { should have_valid_factory(:attachment) }
+  	it { should have_valid_factory(:attachment) }
 
   	it { should belong_to(:attachable) }
 

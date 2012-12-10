@@ -4,7 +4,7 @@ module Gaku
     def remote_form_for(object, options = {}, &block)
       options[:validate] = true
       options[:builder] = ValidateFormBuilder
-      options[:html] = {:class => 'remote-form'}
+      options[:html] = {:class => 'remote-form form'}
       options[:remote] = true
       content_tag :div, class: "row-fluid" do
         content_tag :div, class: "span12 well" do

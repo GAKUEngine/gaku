@@ -8,5 +8,5 @@ table#course-groups-index.index.table.table-striped.table-bordered.table-condens
     	tr class="course-group-#{course_group.id}"
 			  td.name = course_group.name
 			  td
-				  = ajax_link_to_delete course_group , :id => 'show-course-group-link'
+				  = ajax_link_to_delete course_group , :id => 'delete-course-group-link'
 				  = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, course_group], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true

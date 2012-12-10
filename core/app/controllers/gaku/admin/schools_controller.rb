@@ -20,7 +20,7 @@ module Gaku
 
       def update
         super do |format|
-          format.html { redirect_to admin_school_details_path, :notice => 'blq' }
+          format.js { render 'update' }
         end
       end
 

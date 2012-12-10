@@ -31,7 +31,7 @@ describe 'Admin Admission Periods' do
       flash_created?
     end 
 
-    pending 'cancels creating' do 
+    it 'cancels creating' do 
       ensure_cancel_creating_is_working
     end
 

@@ -1,11 +1,5 @@
 = remote_form_for [@student, @course_enrollment] do |f|
-  .row-fluid.mt-l
-    .span12.well
-      .row-fluid
-        .span12
-          = f.select :course_id, @courses, { :prompt => t(:'course.choose')}, :label => t(:'course.plural')
-      = f.hidden_field :student_id, :value => @student.id
-
-      .row-fluid style="margin-top:10px"
-        = buttons_for @course_enrollment, :label => t(:'course_enrollment.create'), :nested_id => 'student-course-enrollment'
+  = f.select :course_id, @courses, { :prompt => t(:'course.choose')}, :label => t(:'course.plural')
+  = f.hidden_field :student_id, :value => @student.id
+  = buttons_for @course_enrollment, :label => t(:'course_enrollment.create'), :nested_id => 'student-course-enrollment'
 

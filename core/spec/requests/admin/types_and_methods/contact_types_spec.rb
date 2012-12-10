@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Admin ContactTypes' do
+describe 'Admin Contact Types' do
 
   stub_authorization!
 

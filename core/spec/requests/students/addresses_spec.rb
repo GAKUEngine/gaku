@@ -37,7 +37,7 @@ describe 'Address' do
         fill_in "address_address2", :with => "Toyota str."
 
         click submit
-        wait_until_invisible form
+        wait_until_invisible submit
       end.to change(student.addresses, :count).by 1
 
       #required
@@ -88,7 +88,7 @@ describe 'Address' do
         fill_in 'address_title',     :with => 'Edited address'
 
         click submit
-        wait_until_invisible modal
+        wait_until_invisible submit
 
         page.should have_content 'Edited street address'
         page.should have_content 'Tokyo'

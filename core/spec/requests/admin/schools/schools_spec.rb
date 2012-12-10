@@ -80,6 +80,7 @@ describe 'Admin Schools' do
         click submit
 
         wait_until_invisible modal
+
         find(school_info).should have_content 'Sofia Technical University'
         find(school_info).should_not have_content 'Varna Technical University'
         flash_updated?

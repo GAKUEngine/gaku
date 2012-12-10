@@ -1,10 +1,7 @@
 = modal_for 'edit-address-modal' do
   = modal_header t(:'address.edit')
   = modal_form_for [@student, @guardian, @address] do |f|
-    .modal-body
-      .row-fluid
-        = hidden_field_tag :student_id, @student.id
-
+    = modal_body do
+      = hidden_field_tag :student_id, @student.id
       = render 'gaku/shared/form_fields/address_form_fields', :f => f
-      .row-fluid
-        = buttons_for @address, :nested_id => 'student-guardian-address'
+      = buttons_for @address, :nested_id => 'student-guardian-address'

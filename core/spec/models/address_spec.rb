@@ -14,11 +14,12 @@ describe Gaku::Address do
     it { should have_valid_factory(:address) }
     it { should belong_to(:country) }
     it { should belong_to(:state) }
+    it { should belong_to(:campus) }
     it { should have_many(:student_addresses) } 
     it { should have_many(:students) } 
     it { should have_many(:guardian_addresses) } 
     it { should have_many(:guardians) }
-    it { should have_one(:campus) } 
+     
  
 
     it { should validate_presence_of(:address1) }

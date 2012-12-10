@@ -7,9 +7,11 @@ describe "CourseExams"  do
   let(:course) { create(:course) }
   let(:student) { create(:student) }
   let(:exam) { create(:exam, :name => 'Math') }
+  let(:exam2) { create(:exam) }
 
   before do   
     syllabus.exams << exam
+    syllabus.exams << exam2
     course.students << student
     syllabus.courses << course
 
@@ -23,8 +25,9 @@ describe "CourseExams"  do
     current_path.should eq "/courses/#{course.id}/exams/#{exam.id}/grading"
   end
 
-  pending "shows all grading link" do
+  it "shows all grading link" do
+    page.should have_content 'All Exams'
     click_link 'All Exams'
-    #TODO check redirection
+    current_path.should eq "/courses/#{course.id}/exams/grading"
   end
 end
