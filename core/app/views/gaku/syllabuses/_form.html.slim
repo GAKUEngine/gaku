@@ -1,27 +1,3 @@
-= form_for @syllabus, :remote => true do |syllabus_form|
-  - if @syllabus.errors.any?
-    .alert.alert-error
-      strong
-        = pluralize(@syllabus.errors.count, "error")
-        | prohibited this syllabus from being saved:
-      ul
-        - @syllabus.errors.full_messages.each do |msg|
-          li= msg
-
-  .row-fluid
-    .span12.well
-      .row-fluid
-        .span4
-          = syllabus_form.label t('syllabus.name')
-          = syllabus_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
-        .span4
-          = syllabus_form.label t('syllabus.code')
-          = syllabus_form.text_field :code, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
-        .span4
-          = syllabus_form.label t('syllabus.credits')
-          = syllabus_form.number_field :credits, :class => "validate[custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
-      .row-fluid
-        = syllabus_form.label t('syllabus.description')
-        = syllabus_form.text_area :description, :class => "span12", :size => "0x5"
-      .row-fluid
-        = buttons_for @syllabus
+= remote_form_for @syllabus do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @syllabus

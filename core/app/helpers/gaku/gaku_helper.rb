@@ -15,6 +15,10 @@ module Gaku
       end
     end
 
+    def grading_methods
+      Gaku::GradingMethod.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
     def enrollment_status_types
       Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
     end

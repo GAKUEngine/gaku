@@ -23,7 +23,7 @@ describe 'Syllabus Exams' do
       syllabus
       visit gaku.syllabuses_path
 
-      within('table.index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
       page.should have_content "No Exams"
     end
 
@@ -58,7 +58,7 @@ describe 'Syllabus Exams' do
       before do
         syllabus
         visit gaku.syllabuses_path
-        within('table.index tbody tr:nth-child(1)') { click show_link }
+        within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
         page.should have_content "No Exams"
         click new_link
         wait_until_visible submit
@@ -138,7 +138,7 @@ describe 'Syllabus Exams' do
     before do
       syllabus
       visit gaku.syllabuses_path
-      within('table.index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
     end
 
     it "clicking on new-existing-exam-link hides new-exam form", :js => true do
