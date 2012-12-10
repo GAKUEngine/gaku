@@ -7,7 +7,4 @@
           = f.text_field :name, :class => "span12", :label => t(:'commute_method_type.name')
 
       .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'commute_method_type.save'), :id => 'submit-admin-commute-method-type-button'
-          = link_to_cancel :id => 'cancel-admin-commute-method-type-link'
+        = buttons_for @commute_method_type, :nested_id => 'admin-commute-method-type'

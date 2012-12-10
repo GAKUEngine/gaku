@@ -4,7 +4,4 @@
       = render 'form_fields', :f => f
 
   .row-fluid
-    .span12
-      .span9
-        = submit_button t(:'course.save'), :id => 'submit-course-button'
-      = link_to_cancel :id => "cancel-course-link"
+    = buttons_for @course, :nested_id => 'course'

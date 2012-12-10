@@ -6,7 +6,4 @@
 				.span12.well
 					= render 'form_exam_fields', :f => f
 			.row-fluid
-			  .span12
-			    .span9
-			      = submit_button t(:'course_group.save'), :id => 'submit-exam-button'
-			    = link_to_cancel :id => 'cancel-exam-link'
+			  = buttons_for @exam

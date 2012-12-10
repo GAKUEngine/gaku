@@ -98,7 +98,7 @@ en:
     new: New Class Group
     none: None
     plural: Class Groups
-    save: Save Class
+    save: Save Class Group
     show: Show
     singular: Class Group
   class_group_enrollment:
@@ -108,6 +108,8 @@ en:
     list: Class Roster
     new: New class enrollment
     seat_number: Seat number
+  class_group_course_enrollment:
+    save: Save Course to Class Group
   class_group_management: Class Management
   commute_method: Commute Method
   commute_method_type:
@@ -169,11 +171,13 @@ en:
     save: Save Course
     show: Show Course
     singular: Course
+  course_group_enrollment:
+    save: Save to Course Group
   course_enrollment:
     add: Enroll to course
     create: Create enrollment
     list: Enrollments
-    plural: Course Enrollments
+    plural: Course Enrollment
     singular: Course Enrollment
   course_group:
     course_group_recover: Course Group Recovered
@@ -520,6 +524,7 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
+    save: Save Student
     edit: Edit
     enroll: Enroll Student
     export: Export Students

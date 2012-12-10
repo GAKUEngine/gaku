@@ -1,2 +1,5 @@
-= test_form_for @course_group do |f|
+= remote_form_for @course_group do |f|
   = render 'form_fields', :f => f
+  .row-fliud
+  	.span12
+			= buttons_for @course_group

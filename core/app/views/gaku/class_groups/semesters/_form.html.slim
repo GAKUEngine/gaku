@@ -8,9 +8,5 @@
           = f.date_select :ending, :class => "span12", :order => [:year,:month,:day], :label => t(:'semester.ending')
         = f.hidden_field :class_group_id, :value => @class_group.id
       .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'semester.save'), :id => 'submit-class-group-semester-button'
-          = link_to_cancel  :id => "cancel-class-group-semester-link",:style => "min-height:0px"
+        = buttons_for @semester, :nested_id => 'class-group-semester'
 
-/= javascript_include_tag 'gaku/class_groups/semesters'

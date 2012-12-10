@@ -7,9 +7,5 @@
       = f.hidden_field :student_id, :value => @student.id
 
       .row-fluid style="margin-top:10px"
-        .span12
-          .span9
-            = submit_button t(:'course_enrollment.create'), :id => 'submit-student-course-enrollment-button'
-          = link_to_cancel :id => "cancel-student-course-enrollment-link"
+        = buttons_for @course_enrollment, :label => t(:'course_enrollment.create'), :nested_id => 'student-course-enrollment'
 
-/= javascript_include_tag 'gaku/students/course_enrollments'

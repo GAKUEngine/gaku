@@ -5,9 +5,4 @@
       = f.hidden_field :class_group_id, :value => @class_group.id
 
   .row-fluid
-    .span12
-      .span9
-        = submit_button t(:'course.save'), :id => 'submit-class-group-course-button'
-      = link_to_cancel :id => "cancel-class-group-course-link"
-
-/= javascript_include_tag 'gaku/class_groups/courses'
+  	= buttons_for @class_group_course_enrollment, :nested_id => 'class-group-course'

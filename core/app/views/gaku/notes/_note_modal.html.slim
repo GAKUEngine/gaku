@@ -10,7 +10,5 @@
           = render 'gaku/shared/form_fields/note_form_fields', :f => f
 
       .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'note.save'), :id => 'submit-' + @notable_resource + '-note-button'
-          = link_to_cancel :id => 'cancel-' + @notable_resource + '-note-link'
+        = buttons_for @note, :nested_id => "#{@notable_resource}-note"
+

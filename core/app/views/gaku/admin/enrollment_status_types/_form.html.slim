@@ -5,9 +5,4 @@
       = f.check_box :is_active, :label => t(:'enrollment_status_type.active')
 
   .row-fluid
-    .span12
-      .span9
-        = submit_button t(:'enrollment_status_type.save'), :id => 'submit-admin-enrollment-status-type-button'
-      = link_to_cancel :id => 'cancel-admin-enrollment-status-type-link'
-
-/= javascript_include_tag 'gaku/admin/enrollment_status_types'
+    = buttons_for @enrollment_status_type, :nested_id => 'admin-enrollment-status-type'

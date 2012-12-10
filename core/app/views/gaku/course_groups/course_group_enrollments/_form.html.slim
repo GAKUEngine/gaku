@@ -4,7 +4,4 @@
       = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :class => "span12", :label => t(:'course.code')
       = f.hidden_field :course_group_id, :value => @course_group.id
       .row-fluid
-        .span12
-          .span9
-            = submit_button t(:'course.save'), :id => 'submit-course-group-enrollment-button'
-          = link_to_cancel :id => "cancel-course-group-enrollment-link"
+        = buttons_for @course_group_enrollment, :id => 'course-group-enrollments'
