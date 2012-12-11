@@ -36,6 +36,7 @@ module Gaku
             @next_phase = AdmissionPhase.find_by_admission_method_id_and_order(phase.admission_method_id ,phase.order+1)
             @state = @next_phase.admission_phase_states.first
             @admission_record.admission_phase_state = @state
+            @admission_record.admission_phase = @next_phase
           else
             @admission_record.admission_phase_state_id = @state.id
           end

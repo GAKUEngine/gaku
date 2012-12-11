@@ -7,3 +7,7 @@ $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').fadeOut(f
 <%- if @next_phase %>
   $('a[href$="#phase_<%= @next_phase.id%>"]').trigger('click');
 <% end %>
+
+<%- @admission_method.admission_phases.each {|phase| %>
+  $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+<% } %>
