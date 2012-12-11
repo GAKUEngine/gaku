@@ -1,2 +1,3 @@
-$('#modal-dialogs').html('<%== render_js_partial("gaku/syllabuses/exams/exam_modal", {:exam => @exam}) %>');
+$('#modal-dialogs').html('<%= render_js_partial("modal", {:exam => @exam}) %>');
 $('#edit-syllabus-exam-modal').modal('show');
+$('.remote-form').enableValidations();

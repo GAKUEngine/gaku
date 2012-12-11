@@ -1,6 +1,6 @@
 module Gaku
   class Students::Guardians::AddressesController < GakuController
-    
+
     inherit_resources
     actions :new, :create, :edit, :update
 
@@ -15,16 +15,14 @@ module Gaku
     def create
       super do |format|
         if @guardian.addresses << @address
-          primary_address        
-          format.js { render 'create' }  
+          primary_address
+          format.js { render 'create' }
         end
-      end  
+      end
     end
 
-    def destroy 
+    def destroy
       if @address.destroy
-
-        #flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
         if @address.id == @primary_address_id
           @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
           respond_to do |format|
@@ -43,7 +41,7 @@ module Gaku
       @guardian_address.make_primary
       render :nothing => true
     end
-    
+
     private
 
       def address
@@ -60,10 +58,6 @@ module Gaku
 
       def primary_address
         @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
-      end
-
-      def resource_name
-        t('address.singular')
       end
 
       def count

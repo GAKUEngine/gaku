@@ -1,0 +1,6 @@
+.row-fluid
+  .span6
+    = f.date_select :starting, :order => [:year,:month,:day], :label => t(:'semester.starting')
+  .span6
+    = f.date_select :ending, :order => [:year,:month,:day], :label => t(:'semester.ending')
+  = f.hidden_field :class_group_id, :value => @class_group.id

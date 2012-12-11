@@ -1,2 +1,3 @@
-$('#new-syllabus').slideDown();
-$('#new-syllabus-link').hide()
+$('#new-syllabus').html('<%= render_js_partial("form") %>').slideToggle();
+$('#new-syllabus-link').hide();
+$('.remote-form').enableValidations();

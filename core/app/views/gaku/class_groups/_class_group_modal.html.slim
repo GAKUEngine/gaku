@@ -1,12 +1,7 @@
 = modal_for 'class-group-modal' do
   = modal_header t(:'class_group.edit')
-
   = modal_form_for @class_group do |f|
-    .modal-body
-      .row-fluid
-        .span12.well
-          = render 'form_fields', :f => f
-
-      .row-fluid
-        = buttons_for @class_group
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @class_group
 

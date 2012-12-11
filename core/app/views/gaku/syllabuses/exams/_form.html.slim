@@ -1,53 +1,15 @@
-= form_for [@syllabus, @exam], :remote => true do |exam_form|
-  - if exam_form.object.new_record?
-    .row-fluid
-      .span12.well
-        .row-fluid
-          .row-fluid
-            h4 = t('exam.new')
-          .row-fluid
-            hr
-          .row-fluid
-            .span12.well
-              .row-fluid
-                .span9
-                  = exam_form.label :name, t('exam.name')
-                  = exam_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
-                .span3
-                  = exam_form.label :grading_method, t('exam.grading_method')
-                  = exam_form.collection_select :grading_method_id, @grading_methods, :id, :name
-              .row-fluid
-                .span6
-                  = exam_form.label :description, t('exam.description')
-                  = exam_form.text_area :description, :class => "span12", :size => "0x2"
-                .span6
-                  = exam_form.label :adjustments, t('exam.adjustments')
-                  = exam_form.text_area :adjustments, :class => "span12", :size => "0x2"
-          .row-fluid
-            h4 = t('exam_portion.master')
-          .row-fluid
-            hr
-          .row-fluid
-            = exam_form.fields_for :exam_portions do |ep_form|
-              - if ep_form.object.new_record?
-                .span12.well
-                  .row-fluid
-                    .span9
-                      = ep_form.label :name, t('exam_portion.name')
-                      = ep_form.text_field :name, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5", :value => t('exam.singular')
-                  .row-fluid
-                    .span6
-                      = ep_form.label :problem_count, t('exam_portion.problem_count')
-                      = ep_form.number_field :problem_count, :class => "validate[custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5"
-                    .span6
-                      = ep_form.label :max_score, t('exam_portion.max_score')
-                      = ep_form.number_field :max_score, :class => "validate[required,custom[integer],min[0]] span12", "data-prompt-position" => "bottomRight:5", :value => 100
-                  .row-fluid
-                    .span6
-                      = ep_form.label :description, t('exam_portion.description')
-                      = ep_form.text_area :description, :class => "span12", :size => "0x2"
-                    .span6
-                      = ep_form.label :adjustments, t('exam_portion.adjustments')
-                      = ep_form.text_area :adjustments, :class => "span12", :size => "0x2"
-          .row-fluid
-            = buttons_for @exam, :nested_id => 'syllabus-exam'
+= remote_form_for [@syllabus, @exam] do |f|
+  .row-fluid
+    h4 = t(:'exam.new')
+  = hr
+  = well_div do
+    = render 'gaku/syllabuses/exams/form_fields', :f => f
+
+  .row-fluid
+    h4 = t(:'exam_portion.master')
+  = hr
+  = well_div do
+    = f.fields_for :exam_portions do |ep_form|
+      = render 'gaku/syllabuses/exams/exam_portions_form_fields', :ep_form => ep_form
+
+  = buttons_for @exam, :nested_id => 'syllabus-exam'
