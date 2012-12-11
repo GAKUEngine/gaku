@@ -49,14 +49,14 @@ module Gaku
 		private
 
 		  def find_attachable
-	      unnamespaced_klass = ''
-	      klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c| 
-	        unnamespaced_klass = c.to_s.split("::")
-	        params["#{unnamespaced_klass[1].underscore}_id"]
-	      end
+	      # unnamespaced_klass = ''
+	      # klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c| 
+	      #   unnamespaced_klass = c.to_s.split("::")
+	      #   params["#{unnamespaced_klass[1].underscore}_id"]
+	      # end
 
-	      @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
-	      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+	      # @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
+	      # @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 		  end
 
 	end
