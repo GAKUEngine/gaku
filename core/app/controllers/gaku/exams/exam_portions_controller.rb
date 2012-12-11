@@ -1,5 +1,5 @@
 module Gaku
-  class ExamPortionsController < GakuController
+  class Exams::ExamPortionsController < GakuController
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -12,26 +12,26 @@ module Gaku
     before_filter :attachments_count, :only => :show
     def new
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/new' }
+        format.js { render 'new' }
       end
     end
 
     def show
       @attachment = Attachment.new
       super do |format|
-        format.html { render 'gaku/exams/exam_portions/show' }
+        format.html { render 'show' }
       end
     end
 
     def edit
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/edit' }
+        format.js { render 'edit' }
       end
     end
 
     def update
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/update' }
+        format.js { render 'update' }
       end
     end
 
@@ -41,7 +41,7 @@ module Gaku
       @exam_portion.destroy
       @total_weight = get_total_weight(@exam.exam_portions)
       super do |format|
-        format.js { render 'gaku/exams/exam_portions/destroy' }
+        format.js { render 'destroy' }
       end
     end
 

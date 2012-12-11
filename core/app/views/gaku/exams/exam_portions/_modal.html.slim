@@ -7,6 +7,6 @@
         .row-fluid
           .span12.well
             .span12
-              =render 'gaku/exams/form_portion_fields', :ep_form => ep_form
+              =render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
         .row-fluid
           = buttons_for @exam_portion, :nested_id => 'exam-exam-portion'
