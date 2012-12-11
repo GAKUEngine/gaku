@@ -86,7 +86,6 @@ describe Gaku::Admin::ContactTypesController do
       it "does not change contact type's attributes" do
         gaku_js_put :update, id: contact_type, 
                               contact_type: attributes_for(:contact_type, name: "")
-
         contact_type.reload
         contact_type.name.should_not eq("")
       end
