@@ -1,2 +1,3 @@
-$('#modal-dialogs').html('<%= render_js_partial("syllabus_modal", {:syllabus => @syllabus}) %>');
+$('#modal-dialogs').html('<%= render_js_partial("modal", {:syllabus => @syllabus}) %>');
 $('#syllabus-modal').modal('show');
+$('.remote-form').enableValidations();

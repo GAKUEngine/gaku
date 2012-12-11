@@ -21,9 +21,9 @@ $ ->
     $('#new-syllabus-assignment-form').slideToggle()
 
 
-  $('#new-syllabus-exam form').validationEngine()
+  #$('#new-syllabus-exam form').validationEngine()
 
-  $('#new-syllabus form').validationEngine()
+  #$('#new-syllabus form').validationEngine()
 
   $('#cancel-syllabus-link').on 'click', (e) ->
     $('#new-syllabus').slideToggle()
