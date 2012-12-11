@@ -1,0 +1,23 @@
+#exam-exam-portion-attachments
+	=index_header do 
+		#new-exam-exam-portion-attachment.hide
+    .pull-left
+	    = count_div 'exam-exam-portion-attachment-count' do
+	      = print_count @attachments_count, t(:'attachment.list')
+    .pull-right
+	    =ajax_link_to_new t(:'attachment.new'), [:new, @exam, @exam_portion, :attachment], :id => "new-exam-exam-portion-attachment-link"
+    
+	=hr
+
+	=index_body do
+		= table_for 'exam-portion-attachment-index' do
+		  thead
+		    tr
+		      = th t(:'attachment.name')
+		      = th t(:'attachment.description')
+		      = th t(:'attachment.file_name')
+		      = th t(:'attachment.file_type')
+		      = th t(:'attachment.file_size')
+		      = th_actions 2
+		  tbody
+		    = render :partial => 'gaku/shared/fields/attachment_fields', :collection => @exam_portion.attachments, :as => :attachment

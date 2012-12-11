@@ -1,0 +1,5 @@
+=render 'gaku/shared/fields/exam_portion_fields', :exam_portion => exam_portion
+td
+  = link_to_show [@exam, exam_portion], :id => "show-exam-exam-portion-link"
+  = link_to_edit [:edit, @exam, exam_portion], :id => "edit-exam-exam-portion-link", :remote => true
+  = ajax_link_to_delete [@exam, exam_portion], :id => "delete-exam-exam-portion-link"

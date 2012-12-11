@@ -1,0 +1,10 @@
+= table do
+    thead
+      tr
+        = th t(:'exam_portion.name')
+        = th t(:'exam_portion.max_score')
+        = th t(:'exam_portion.weight')
+        = th t(:'exam_portion.problem_count')
+        = th_actions 3
+    tbody
+      = render 'gaku/exams/exam_portions/exam_portion', :exam_portion => @exam_portion
