@@ -4,6 +4,23 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
   let(:commute_method_type) { create(:commute_method_type) }
 
+  describe "GET #index" do
+    it "is successful" do
+      gaku_js_get :index
+      response.should be_success
+    end
+
+    it "populates an array of commute method type" do
+      gaku_js_get :index
+      assigns(:commute_method_types).should eq [commute_method_type]
+    end
+
+    it "renders the :index view" do
+      gaku_js_get :index
+      response.should render_template :index
+    end
+  end 
+
   describe 'GET #new' do
     it "assigns a new commute_method_type to @commute_method_type" do
       gaku_js_get :new, commute_method_type_id: commute_method_type.id

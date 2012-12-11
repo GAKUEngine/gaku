@@ -4,6 +4,23 @@ describe Gaku::Admin::ContactTypesController do
 
   let(:contact_type) { create(:contact_type) }
 
+  describe "GET #index" do
+    it "is successful" do
+      gaku_js_get :index
+      response.should be_success
+    end
+
+    it "populates an array of contact types" do
+      gaku_js_get :index
+      assigns(:contact_types).should eq [contact_type]
+    end
+
+    it "renders the :index view" do
+      gaku_js_get :index
+      response.should render_template :index
+    end
+  end 
+
   describe 'GET #new' do
     it "assigns a new contact_type to @contact_type" do
       gaku_js_get :new, contact_type_id: contact_type.id
