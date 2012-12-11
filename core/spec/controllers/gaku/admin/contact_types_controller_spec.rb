@@ -18,7 +18,7 @@ describe Gaku::Admin::ContactTypesController do
 
   describe "POST #create" do
     context "with valid attributes" do
-      it "saves the new commute method type in the db" do
+      it "saves the new contact type in the db" do
         expect{
           gaku_post :create, contact_type: attributes_for(:contact_type)  
         }.to change(Gaku::ContactType, :count).by 1
@@ -27,7 +27,7 @@ describe Gaku::Admin::ContactTypesController do
       end
     end
     context "with invalid attributes" do
-      it "does not save the new commute method type in the db" do
+      it "does not save the new contact type in the db" do
           expect{
             gaku_js_post :create, contact_type: {name: ''}  
           }.to_not change(Gaku::ContactType, :count)
@@ -57,9 +57,9 @@ describe Gaku::Admin::ContactTypesController do
     context "valid attributes" do
       it "changes contact type's attributes" do
         gaku_put :update, id: contact_type,
-                          contact_type: attributes_for(:contact_type, name: "Train")
+                          contact_type: attributes_for(:contact_type, name: "Phone")
         contact_type.reload
-        contact_type.name.should eq("Train")
+        contact_type.name.should eq("Phone")
 
         controller.should set_the_flash
       end
@@ -77,7 +77,7 @@ describe Gaku::Admin::ContactTypesController do
   end
 
   describe "DELETE #destroy" do
-    it "deletes the admission method_phase" do
+    it "deletes the contact type" do
       contact_type
       expect{
         gaku_delete :destroy, id: contact_type

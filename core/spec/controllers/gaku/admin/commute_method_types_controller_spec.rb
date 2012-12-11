@@ -55,7 +55,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
     end
 
     context "valid attributes" do
-      it "changes admission phase's attributes" do
+      it "changes commute method type's attributes" do
         gaku_put :update, id: commute_method_type,
                           commute_method_type: attributes_for(:commute_method_type, name: "Train")
         commute_method_type.reload
@@ -66,7 +66,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
     end
 
     context "invalid attributes" do
-      it "does not change admission phase's attributes" do
+      it "does not change commute method type's attributes" do
         gaku_js_put :update, id: commute_method_type, 
                               commute_method_type: attributes_for(:commute_method_type, name: "")
 
@@ -77,7 +77,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
   end
 
   describe "DELETE #destroy" do
-    it "deletes the admission method_phase" do
+    it "deletes the commute method type" do
       commute_method_type
       expect{
         gaku_delete :destroy, id: commute_method_type
