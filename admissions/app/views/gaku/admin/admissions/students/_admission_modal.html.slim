@@ -1,9 +1,0 @@
-- model = @admission || Gaku::Admission.new
-- model_class = model.class
-#admission-modal.modal.hide wmode="opaque" style="padding: 41px;position: absolute;left: 500px;top: 300px;width:auto;height:auto;text-align:center;"
-  .modal-header
-    button.close type="button" data-dismiss="modal"
-      'x
-  .modal-body
-    = render 'gaku/admin/admissions/students/student_chooser'
-    = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-admission-modal-link'
