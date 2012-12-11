@@ -1,0 +1,13 @@
+.row-fluid
+  .span9
+    = f.text_field :name, :label => t(:'exam.name')
+  .span3
+    = f.number_field :weight, :label => t(:'exam.weight')
+.row-fluid
+  .span6
+    = f.text_area :description, :size => "0x2", :label => t(:'exam.description')
+  .span6
+    = f.text_area :adjustments, :size => "0x2", :label => t(:'exam.adjustments')
+.row-fluid
+  .span12
+    = f.check_box :use_weighting, :label => t(:'exam_portion.use_weighting')

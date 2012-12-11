@@ -1,9 +1,0 @@
-= modal_for 'edit-exam-modal' do
-  = modal_header t(:'exam.edit')
-  = modal_form_for @exam do |f|
-		.modal-body
-			.row-fluid.mt-l
-				.span12.well
-					= render 'form_exam_fields', :f => f
-			.row-fluid
-			  = buttons_for @exam

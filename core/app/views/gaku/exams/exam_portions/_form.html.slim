@@ -1,0 +1,5 @@
+= remote_form_for @exam, :url => create_exam_portion_exam_path(:id => @exam) do |f|
+  = f.fields_for :exam_portions do |ep_form|
+    - if ep_form.object.new_record?
+      = render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
+      = buttons_for ep_form.object, :nested_id => 'exam-exam-portion'

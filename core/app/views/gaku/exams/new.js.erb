@@ -1,2 +1,3 @@
-$('#new-exam').slideDown();
-$('#new-exam-link').hide()
+$('#new-exam').html('<%= render_js_partial("form") %>').slideToggle();
+$('#new-exam-link').hide();
+$('.remote-form').enableValidations();
