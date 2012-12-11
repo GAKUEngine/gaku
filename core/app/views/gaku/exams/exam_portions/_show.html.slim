@@ -1,11 +1,11 @@
 - unless exam_portion.nil? || exam_portion.new_record? || !exam_portion
   tr id="exam_portion_#{exam_portion.id}"
-    td= exam_portion.name
-    td= exam_portion.max_score
+    td = exam_portion.name
+    td = exam_portion.max_score
     - if @exam.use_weighting
-      td= exam_portion.weight
-    td= exam_portion.problem_count
-    td= exam_portion.attachments.count
+      td = exam_portion.weight
+    td = exam_portion.problem_count
+    td = exam_portion.attachments.count
 
     td
       = link_to_show [@exam, exam_portion], :id => "show-exam-exam-portion-link"
