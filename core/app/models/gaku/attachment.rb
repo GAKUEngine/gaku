@@ -15,7 +15,7 @@
 #
 module Gaku
 	class Attachment < ActiveRecord::Base
-		
+
 		attr_accessible :name, :description, :asset
 
 		belongs_to :attachable, :polymorphic => true

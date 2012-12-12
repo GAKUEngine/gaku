@@ -6,34 +6,16 @@ module Gaku
 
     respond_to :js, :html
 
-    before_filter :exam_portion, :only => :show
-    before_filter :exam, :only => [:show, :edit, :update, :destroy ]
-    before_filter :portions_count, :only => :destroy
-    before_filter :attachments_count, :only => :show
-    def new
-      super do |format|
-        format.js { render 'new' }
+    before_filter :exam
+    before_filter :count, :only => [:create, :destroy]
+
+    def create
+      @exam_portion = @exam.exam_portions.build(params[:exam_portion])
+      if @exam_portion.save
+        respond_with @exam_portion
       end
     end
 
-    def show
-      @attachment = Attachment.new
-      super do |format|
-        format.html { render 'show' }
-      end
-    end
-
-    def edit
-      super do |format|
-        format.js { render 'edit' }
-      end
-    end
-
-    def update
-      super do |format|
-        format.js { render 'update' }
-      end
-    end
 
     def destroy
       @exam_portion = ExamPortion.find(params[:id])
@@ -46,29 +28,17 @@ module Gaku
     end
 
     private
+
       def exam
         @exam = Exam.find(params[:exam_id])
       end
 
       def get_total_weight(portions)
-        total = 0
-        portions.each do |portion|
-          total+=portion.weight
-        end
-        total
+        portions.inject(0) {|sum, p| sum + p.weight }
       end
 
-      def portions_count
-        exam
-        @portions_count = @exam.exam_portions.count
-      end
-
-      def exam_portion
-        @exam_portion = ExamPortion.find(params[:id])
-      end
-
-      def attachments_count
-        @attachments_count = @exam_portion.attachments.count
+      def count
+        @count = @exam.exam_portions.count
       end
   end
 end

@@ -7,11 +7,11 @@
     table.table.table-striped.table-bordered.table-condensed.exam-portions-weight
       thead
         - exam.exam_portions.each_with_index do |portion, i|
-          - if i < exam.exam_portions.size - 1
+          - if i < exam.exam_portions.size
             th.btn-warning*{'data-id' =>portion.id} = portion.name+ " " + t('exam.weight')
       tbody
         - exam.exam_portions.each_with_index do |portion, i|
-          - if i < exam.exam_portions.size - 1
+          - if i < exam.exam_portions.size
             - total += portion.weight
             =render 'gaku/exams/exam_portions/exam_portion_weight_td', :portion =>portion
 
