@@ -46,7 +46,7 @@ regular_method = create_sample_admission_method(
   { :name => "Regular Admissions" },
   [
     {
-      :args => { :name => "Written Application" },
+      :args => { :name => "Written Application", :order => 1 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -54,14 +54,14 @@ regular_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report" },
+      :args => { :name => "Written Report", :order => 2 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Exam" },
+      :args => { :name => "Exam", :order => 3 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed", :can_admit => true, :can_progress => true, :auto_progress => true },
@@ -69,7 +69,7 @@ regular_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview" },
+      :args => { :name => "Interview", :order => 4 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
@@ -83,7 +83,7 @@ international_division_method = create_sample_admission_method(
   { :name => "International Division Admissions" },
   [
     {
-      :args => { :name => "Written Application" },
+      :args => { :name => "Written Application", :order => 1 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -91,14 +91,14 @@ international_division_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview" },
+      :args => { :name => "Interview", :order => 2 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
         { :name => "Rejected", :can_admit => false }
       ]
     },{
-      :args => { :name => "Exam" },
+      :args => { :name => "Exam", :order => 3 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed", :can_admit => true, :can_progress => true, :auto_progress => true },
@@ -106,7 +106,7 @@ international_division_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Foreign Langauge Exam" },
+      :args => { :name => "Foreign Langauge Exam", :order => 4 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed with Fluent Score", :can_admit => true, :can_progress => true, :auto_progress => true, :auto_admit => true },
@@ -115,7 +115,7 @@ international_division_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report" },
+      :args => { :name => "Written Report", :order => 5 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
@@ -129,7 +129,7 @@ summer_method = create_sample_admission_method(
   { :name => "Summer Program Admissions"},
   [
     {
-      :args => { :name => "Written Application" },
+      :args => { :name => "Written Application", :order => 1 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -137,14 +137,14 @@ summer_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report" },
+      :args => { :name => "Written Report", :order => 2 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview" },
+      :args => { :name => "Interview", :order => 3 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },

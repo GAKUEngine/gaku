@@ -3,8 +3,8 @@
     ul.nav.nav-tabs
       - admission_method.admission_phases.each_with_index do |phase, index|
         li *{:class => ("active" if index == 0)}
-          a href="#phase_#{phase.id.to_s}" data-toggle="tab"
-            = phase.name
+          a href="#phase_#{phase.id.to_s}" data-toggle="tab" id="phase_#{phase.id.to_s}_tab"
+            = phase.name + '(' + phase.admission_phase_records.count.to_s + ')'
         - if index < admission_method.admission_phases.count-1
           li style="margin:8px 15px 0px 15px"
             i.icon-arrow-right style="background-image:url('/assets/bootstrap/glyphicons-halflings.png')"
