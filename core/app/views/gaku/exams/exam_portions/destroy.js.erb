@@ -1,7 +1,4 @@
-$(".delete-exam-portion-link").live('ajax:success', function(evt, data, status, xhr){
-      $(this).closest('tr').fadeOut();
-});
 $('.exam-exam-portions-count').html("<%= print_count(@count-1, t_exam_portion_list) %>");
-$('[data-id=<%= @portion_id %>]').remove();
+$('[data-id=<%= @exam_portion.id %>]').remove();
 $('#weight-total').text('<%= @total_weight %>')
 showNotice("<%= render_flash %>");
