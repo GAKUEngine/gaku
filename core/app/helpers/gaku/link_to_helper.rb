@@ -112,7 +112,7 @@ module Gaku
     def link_to_edit_with_text(resource, options = {})
       name = ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe
       attributes = {
-        :class => "edit-link"
+        :class => "span9 btn btn-warning edit-link"
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -155,7 +155,10 @@ module Gaku
 
     def link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
-      link_to name, resource, options
+      attributes = {
+        :class => 'span3 btn btn-danger'
+      }.merge(options)
+      link_to name, resource, attributes
     end
 
     def submit_button(text, options={})

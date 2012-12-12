@@ -44,10 +44,7 @@
               = select_tag "course_id", options_from_collection_for_select(@courses, "id", "code"), {:class => "class_group-select"}
 
           = submit_tag t('course_enrollment.add'), :class => 'btn btn-primary'
-.row-fluid
-  .span12.well
-    #students-index-div
-      =render 'gaku/students/students'
+
 /= javascript_include_tag "gaku/student_chooser"
 
 
