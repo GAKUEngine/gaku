@@ -8,28 +8,6 @@ $ ->
       $(@).removeClass('btn-primary')
     $(@).addClass('btn-primary')
 
-  $('#student-commute-method').on 'click','#cancel-commute-method-link', (e)->
-    e.preventDefault()
-    if $(@).parent('form').attr('class') == 'new_commute_method'
-      $('#student-commute-method-form').html('')
-      $('#new-student-commute-method-link').show()
-    else
-      $('span#commute-method').show()
-      $('#edit-student-commute-method-link').show()
-      $('#student-commute-method-form').html('')
-
-  $('#student-enrollment-status').on 'click', '#cancel-enrollment-status-link', (event) ->
-    event.preventDefault()
-    $('#enrolled-status').show()
-    $('#edit-student-enrollment-status-link').show()
-    $('#student-enrollment-status-form').html('')
-
-  #student
-
-  $('#cancel-student-link').on 'click', (e) ->
-    $('#new-student').slideToggle()
-    $('#new-student-link').show()
-
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()
     $('#delete-modal').modal('show')
