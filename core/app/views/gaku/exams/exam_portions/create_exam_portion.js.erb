@@ -4,14 +4,14 @@ $('#new-exam-exam-portion form').each (function(){
 });
 showNotice("<%= render_flash %>");
 
-$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/show", {:exam_portion => @exam.exam_portions.last}) %>');
+$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion", {:exam_portion => @exam.exam_portions.last}) %>');
 
 $('.exam-exam-portions-count').html("<%= print_count(@portions_count+1, t_exam_portion_list) %>");
 
 <% if @exam.use_weighting? %>
 
   //if no portion added yet
-  if($('.exam-portions-weight thead tr').length==0){
+  if($('.exam-portions-weight thead tr').length == 0){
     $('.exam-portions-weight thead').append('<tr></tr>');
     $('.exam-portions-weight tbody').append('<tr></tr>');
   }

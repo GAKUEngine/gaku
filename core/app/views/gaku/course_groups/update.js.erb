@@ -1,4 +1,4 @@
-$('#course-group-<%= @course_group.id %>').html('<%= render_js_partial("gaku/course_groups/course_group", {:course_group => @course_group}) %>');
+$('#course-group-<%= @course_group.id %>').html('<%= render_js_partial("course_group", {:course_group => @course_group}) %>');
 $('#edit-course-group-modal').modal('hide');
 showNotice("<%= render_flash %>");
 

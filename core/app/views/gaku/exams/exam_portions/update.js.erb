@@ -1,4 +1,4 @@
-$('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("gaku/exams/exam_portions/exam_portion", {:exam_portion => @exam_portion}) %>');
+$('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_unit", {:exam_portion => @exam_portion}) %>');
 $("#edit-exam-exam-portion-modal").modal('hide');
 $('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
 showNotice("<%= render_flash %>");

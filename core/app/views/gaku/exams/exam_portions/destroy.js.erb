@@ -1,5 +1,5 @@
 $(".delete-exam-portion-link").live('ajax:success', function(evt, data, status, xhr){
-      $(this).closest('tr').fadeOut();
+  $(this).closest('tr').fadeOut();
 });
 $('.exam-exam-portions-count').html("<%= print_count(@portions_count-1, t_exam_portion_list) %>");
 $('[data-id=<%= @portion_id %>]').remove();

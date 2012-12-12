@@ -1,6 +1,3 @@
 = remote_form_for [:admin, @contact_type] do |f|
-  .row-fluid.mt-l
-    .span12.well
-      = f.text_field :name, :class => "span12", :label => t(:'contact_type.name')
-    .row-fluid
-      =buttons_for @contact_type, :nested_id => 'admin-contact-type'
+  = f.text_field :name, :label => t(:'contact_type.name')
+  = buttons_for @contact_type, :nested_id => 'admin-contact-type'

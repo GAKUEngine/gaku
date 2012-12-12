@@ -1,0 +1,6 @@
+= modal_for 'edit-note-modal' do
+  = modal_header t(:'note.edit')
+  = modal_form_for [@notable, @note] do |f|
+    = modal_body do
+      = render 'gaku/shared/form_fields/note_form_fields', :f => f
+      = buttons_for @note, :nested_id => "#{@notable_resource}-note"

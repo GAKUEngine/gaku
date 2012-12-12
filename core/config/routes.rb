@@ -138,8 +138,8 @@ Gaku::Core::Engine.routes.draw do
 
     resources :notes
     resources :exam_scores
-    resources :exam_portions do
-      resources :attachments, :only => [:create]
+    resources :exam_portions, :controller => 'exams/exam_portions' do
+      resources :attachments, :controller => 'exams/exam_portions/attachments'
     end
   end
 

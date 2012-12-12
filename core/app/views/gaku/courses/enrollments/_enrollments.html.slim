@@ -1,4 +1,4 @@
-= show_header do
+= index_header do
   #new-course-class-group-form-errors
   #new-course-class-group.hide
     = render :partial => 'gaku/courses/enrollments/class_groups/form', course: @course, new_course_enrollment: @new_course_enrollment
@@ -13,7 +13,7 @@
 
 = hr
 
-= show_body do
+= index_body do
   = table_for 'course-students-index' do
     thead
       tr

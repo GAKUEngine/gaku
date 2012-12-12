@@ -24,6 +24,8 @@ module Gaku
 
 		validates :name, :presence => true
 
+		validates_attachment :asset, :presence => true
+
 		default_scope :conditions => { :is_deleted => false }
 
 	end

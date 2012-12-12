@@ -4,9 +4,7 @@ module Gaku
     inherit_resources
     belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
-
-    #before_filter :student
-    before_filter :courses, :only => [:new, :edit]
+    
     before_filter :count, :only => [:create, :destroy]
 
     def create
@@ -27,10 +25,6 @@ module Gaku
 
     def student
       @student = Student.find(params[:student_id])
-    end
-
-    def courses
-      @courses = Course.all.collect { |s| ["#{s.code}", s.id] }
     end
 
     def count

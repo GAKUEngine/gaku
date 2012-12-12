@@ -18,7 +18,7 @@
       .row-fluid
         .span12.well
           .span6
-            = f.select :class_group_id, @class_groups, {:prompt => t(:'class_group.choose')}, :label => t(:'class_group.plural')
+            = f.select :class_group_id, class_groups, {:prompt => t(:'class_group.choose')}, :label => t(:'class_group.plural')
           .span6
             = f.text_field :seat_number, :label => t(:'class_group_enrollment.seat_number')
 

@@ -3,8 +3,6 @@ module Gaku
     class SchoolsController < Admin::BaseController
 
       inherit_resources
-      actions :index, :show, :new, :create, :update, :edit, :destroy
-
       respond_to :js, :html
 
       before_filter :count, :only => [:create, :destroy, :index]
@@ -12,16 +10,10 @@ module Gaku
 
       def school_details
         @school = @master_school
-        render 'show'
+        render :show
       end
 
       def edit_master
-      end
-
-      def update
-        super do |format|
-          format.js { render 'update' }
-        end
       end
 
       private

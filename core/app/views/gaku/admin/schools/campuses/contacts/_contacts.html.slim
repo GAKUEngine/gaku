@@ -1,13 +1,14 @@
 #admin-school-campus-contacts
-  .row-fluid
+  = index_header do
     #new-admin-school-campus-contact.hide
     .pull-left
       = count_div 'admin-school-campus-contacts-count' do
         = print_count @campus.contacts.count, t_contact_list
     .pull-right
         = ajax_link_to_new t(:'contact.add'), [:new, :admin, @campus.school, @campus, :contact], :id => 'new-admin-school-campus-contact-link'
-
-  .row-fluid
+  = hr
+  
+  = index_body do
     = table_for 'admin-school-campus-contacts-index' do
       thead
         tr

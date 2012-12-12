@@ -14,12 +14,10 @@
 
 = render 'tabs'
 
-.row-fluid
-  .span12.well
-    #class-group-notes
-      = render 'gaku/notes/notes'
+= well_div do
+  #class-group-notes
+    = render 'gaku/notes/notes'
 
-.row-fluid
-  .span12.well
-    = link_to_edit_with_text [:edit, @class_group], :class => "span6 btn edit-link", :remote => true
-    = link_to_back class_groups_path, :class => "span6 btn", :id => 'back-class-group-link'
+= well_div do
+  = link_to_edit_with_text [:edit, @class_group], :remote => true
+  = link_to_back class_groups_path, :id => 'back-class-group-link'

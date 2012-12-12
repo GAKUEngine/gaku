@@ -1,8 +1,8 @@
-table#course-groups-index.index.table.table-striped.table-bordered.table-condensed
+= table_for 'course-groups-index' do
 	thead
 	  tr
-	    th.btn-inverse = sortable 'name',  t('course_group.name')
-	    th.btn-info style="width:94px" = t('manage')
+	    = th(sortable 'name',  t(:'course_group.name'))
+	    = th_actions 3
 	tbody
 	  - @course_groups.each do |course_group|
     	tr class="course-group-#{course_group.id}"

@@ -1,8 +1,0 @@
-= modal_for 'edit-campus-modal' do
-  = modal_header t(:'campus.edit')
-  = modal_form_for [:admin, @school, @campus] do |f|
-    .modal-body
-      .row-fluid
-        = f.text_field :name, :class => "span12", :label => t(:'campus.name')
-      .row-fluid
-         = buttons_for @campus, :nested_id => 'admin-school-campus'

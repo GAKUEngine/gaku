@@ -1,0 +1,6 @@
+.row-fluid
+	.span12.well
+		= form_for [@exam, @exam_portion, @attachment], :builder => ValidateFormBuilder, :validate => true do |f|
+			= render 'form_fields', :f => f
+			br
+			= buttons_for @attachment, :nested_id => 'exam-exam-portion-attachment'
