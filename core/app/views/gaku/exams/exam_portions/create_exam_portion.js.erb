@@ -11,7 +11,7 @@ $('.exam-exam-portions-count').html("<%= print_count(@portions_count+1, t_exam_p
 <% if @exam.use_weighting? %>
 
   //if no portion added yet
-  if($('.exam-portions-weight thead tr').length==0){
+  if($('.exam-portions-weight thead tr').length == 0){
     $('.exam-portions-weight thead').append('<tr></tr>');
     $('.exam-portions-weight tbody').append('<tr></tr>');
   }
