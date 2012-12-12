@@ -43,6 +43,8 @@ en:
   assignments:
     description: Assignment Description
   attachment:
+    singular: Attachment
+    plural: Attachments
     asset_type: Asset type
     assets: Assets
     create: Create Attachment
@@ -53,6 +55,8 @@ en:
     name: Name
     new: New Attachment
     list: Attachment list
+    asset_upload: Asset was uploaded successfully!
+    asset_error: Error when upload asset
   attendance_type:
     add: Add Attendance Type
     edit: Edin Attendance Type
@@ -280,6 +284,8 @@ en:
     save: Save Enrollment Status Type
     singular: Enrollment Status Type
   errors:
+    not_uploaded: ! 'Error when upload %{resource}!'
+
     messages:
       already_confirmed: was already confirmed, please try signing in
       expired: has expired, please request a new one
