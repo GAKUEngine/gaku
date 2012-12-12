@@ -93,12 +93,6 @@ module Gaku
       end
     end
 
-    # def show
-    #   super do |format|
-    #     format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
-    #   end
-    # end
-
     def grading
       @course = Course.find(params[:course_id])
       @students = @course.students #.select("id, surname, name")
