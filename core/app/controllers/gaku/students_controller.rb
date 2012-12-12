@@ -5,6 +5,7 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
+    respond_to :csv, :only => :index
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
     before_filter :before_show,       :only => :show
@@ -13,22 +14,13 @@ module Gaku
 
     def index
       @search = Student.search(params[:q])
-      @students = @search.result(:distinct => true)#.includes(:class_group_enrollments).all
-      if params[:action] == "get_csv_template"
-        get_csv_template
-        return
-      end
-
-      @students = @students.page(params[:page]).per(10)
+      @students = @search.result(:distinct => true).page(params[:page]).per(10)
+      #@students = @students.page(params[:page]).per(10)
 
       @student = Student.new
       @enrolled_students = params[:enrolled_students]
 
-      respond_to do |format|
-        format.js
-        format.html
-        format.csv  { export_csv_index(@students) }
-      end
+      respond_with(@students)
     end
 
     def update
@@ -82,17 +74,6 @@ module Gaku
         @class_group_id ||= params[:class_group_id]
       end
 
-      def export_csv_index(students, field_order = ["surname", "name"])
-        filename = "Students.csv"
-        content = CSV.generate do |csv|
-          csv << translate_fields(field_order)
-          students.each do |student|
-            csv << student.attributes.values_at(*field_order)
-          end
-        end
-        send_data content, :filename => filename
-      end
-
       def class_name
         params[:class_name].capitalize.constantize
       end
@@ -108,7 +89,7 @@ module Gaku
 
         Student.includes([{:contacts => :contact_type}]).find(params[:id])
       end
-      
+
       def get_student
         Student.find(params[:id])
       end
