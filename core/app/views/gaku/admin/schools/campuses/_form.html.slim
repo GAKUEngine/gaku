@@ -1,9 +1,3 @@
 = remote_form_for [:admin, @school, @campus] do |f|
-  b= t(:'campus.new')
-  .row-fluid.mt-l
-    .span12.well
-      .span12.well
-        = f.text_field :name, :class => "span12", :label => t(:'campus.name')
-        .row-fluid
-          = buttons_for @school, :nested_id => 'admin-school-campus'
-
+  = f.text_field :name, :label => t(:'campus.name')
+  = buttons_for @school, :nested_id => 'admin-school-campus'

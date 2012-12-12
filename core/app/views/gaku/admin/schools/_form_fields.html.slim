@@ -1,0 +1,25 @@
+.row-fluid
+  .span6
+    = f.text_field :name, :label => t(:'school.name')
+  .span6
+    = f.text_field :code, :label => t(:'school.code')
+
+.row-fluid
+  .span6
+    = f.text_field :founded, :label => t(:'school.founded')
+  .span6
+    = f.text_field :grades, :label => t(:'school.grades')
+
+.row-fluid
+  .span6
+    = f.text_field :principal, :label => t(:'school.principal')
+  .span6
+    = f.text_field :vice_principal, :label => t(:'school.vice_principal')
+
+.row-fluid
+  .span12
+    = f.text_field :slogan, :label => t(:'school.slogan')
+
+.row-fluid
+  .span12
+    = f.text_area :description, :size => "2x3", :label => t(:'school.description')
