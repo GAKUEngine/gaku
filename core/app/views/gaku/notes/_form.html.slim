@@ -1,10 +1,6 @@
 = remote_form_for [@notable, @note] do |f|
-  .row-fluid.mt-l
-    .span12.well style="margin-bottom:20px"
-      = render 'gaku/shared/form_fields/note_form_fields', :f => f
-
-  .row-fluid
-    = buttons_for @note, :nested_id=> "#{@notable_resource}-note"
+  = render 'gaku/shared/form_fields/note_form_fields', :f => f
+  = buttons_for @note, :nested_id=> "#{@notable_resource}-note"
 
 javascript:
   window.notable_resource = '#{@notable_resource}';
