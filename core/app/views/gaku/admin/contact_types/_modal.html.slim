@@ -1,0 +1,6 @@
+= modal_for 'edit-contact-type-modal' do
+  = modal_header t(:'contact_type.edit')
+  = modal_form_for [:admin, @contact_type] do |f|
+    = modal_body do
+      = f.text_field :name, :label => t(:'contact_type.name')
+      = buttons_for @contact_type, :nested_id => 'admin-contact-type'
