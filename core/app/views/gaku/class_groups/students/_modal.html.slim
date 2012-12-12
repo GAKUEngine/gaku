@@ -6,4 +6,7 @@
       'x
   .modal-body
     = render 'gaku/students/student_chooser'
+    .row-fluid
+    	#student-index-div
+		    = render 'gaku/students/students'
     = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-class-group-student-link'

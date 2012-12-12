@@ -67,18 +67,22 @@ describe 'Admin Schools' do
     end
 
     context '#edit from show' do
+      school_info  = '#admin-school-information'
+
       before do
         visit gaku.admin_school_path(school)
         click_on "Edit"
         wait_until_visible modal
       end
-      it 'edits'  do
+      
+      it 'edits', :js => true do
         fill_in 'school_name', :with => 'Sofia Technical University'
         click submit
 
         wait_until_invisible modal
-        page.should have_content 'Sofia Technical University'
-        
+
+        find(school_info).should have_content 'Sofia Technical University'
+        find(school_info).should_not have_content 'Varna Technical University'
         flash_updated?
       end
 

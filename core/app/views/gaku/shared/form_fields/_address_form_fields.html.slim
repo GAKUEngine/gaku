@@ -4,7 +4,7 @@
 
 .row-fluid
   .span3
-    = f.select :country_id, countries , { :selected => country_preset }, :id => "country_dropdown", :label => t(:'address.country')
+    = f.select :country_id, countries , { :selected => f.object.country_id || country_preset }, :id => "country_dropdown", :label => t(:'address.country')
   .span3
     = f.text_field :zipcode, :label => t(:'address.zipcode')
   .span3
@@ -12,12 +12,9 @@
 
 .row-fluid
   .span3
-    /FIXME : Fix the label class
-    /class state_label for handling changing state input with state dropdown/
-    /= f.label :state_name, t('address.state'), :class => "control-label state_label"
-    = f.text_field :state_name, :id => "state_dropdown", :value => state_preset, :label => t(:'address.state')
+      = f.text_field :state_name, :id => "state_dropdown", :value => f.object.state_name || state_preset, :label => t(:'address.state')
   .span3
-    = f.text_field :city, :value => city_preset, :label => t(:'address.city')
+    = f.text_field :city, :value =>f.object.city ||  city_preset, :label => t(:'address.city')
   .span3
     = f.text_field :address1, :label => t(:'address.address1')
   .span3

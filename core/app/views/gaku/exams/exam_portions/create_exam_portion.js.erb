@@ -4,7 +4,7 @@ $('#new-exam-exam-portion form').each (function(){
 });
 showNotice("<%= render_flash %>");
 
-$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/show", {:exam_portion => @exam.exam_portions.last}) %>');
+$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion", {:exam_portion => @exam.exam_portions.last}) %>');
 
 $('.exam-exam-portions-count').html("<%= print_count(@portions_count+1, t_exam_portion_list) %>");
 

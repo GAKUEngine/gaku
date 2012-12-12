@@ -3,3 +3,5 @@ $("#edit-school-modal").modal("hide");
 //edit from show
 $(".school_info").html('<%= render_js_partial("fields", {:school => @school}) %>');
 showNotice("<%= render_flash %>");
+
+$('#admin-school-information table tbody tr').html('<%= render_js_partial("school_fields", {:school => @school}) %>')
