@@ -10,6 +10,6 @@
   = hr
   = well_div do
     = f.fields_for :exam_portions do |ep_form|
-      = render 'gaku/syllabuses/exams/exam_portions_form_fields', :ep_form => ep_form
-
+      = render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
+      
   = buttons_for @exam, :nested_id => 'syllabus-exam'

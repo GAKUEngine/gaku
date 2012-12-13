@@ -7,7 +7,7 @@ module Gaku
 
   	before_filter :guardian
     before_filter :student
-    before_filter :contact, :except => [:new, :create]
+    before_filter :contact, :except => [:new, :create, :create_modal]
     before_filter :count, :only => [:create, :destroy]
 
     def create
@@ -63,6 +63,6 @@ module Gaku
     def count
       @count = @guardian.contacts.count
     end
-    
+
   end
 end
