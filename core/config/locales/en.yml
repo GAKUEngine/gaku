@@ -483,6 +483,18 @@ en:
   pictures:
     change: Change picture
     upload: Upload
+  preset:
+    singular: Preset
+    plural: Presets
+    save: Save Presets
+    student:
+      gender: Gender
+      country: Country
+      state: State
+      city: City
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
   profile: Profile
   profiles:
     new: New Profile

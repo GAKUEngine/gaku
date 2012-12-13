@@ -3,16 +3,16 @@
     .row-fluid
       .span3
         = fields_for :presets do |students_gender|
-          = students_gender.select :students_gender, genders, {:selected => @preset_hash[:students_gender], :prompt => t(:'gender.choose')}, :label => t(:'admin.preset.student.gender')
+          = students_gender.select :students_gender, genders, {:selected => @preset_hash[:students_gender], :prompt => t(:'gender.choose')}, :label => t(:'preset.student.gender')
       .span3
         = fields_for :presets do |address_country|
-          = address_country.select :address_country, countries, {:selected => @preset_hash[:address_country], :prompt => t(:'address.choose_country')}, :label => t(:'admin.preset.student.country')
+          = address_country.select :address_country, countries, {:selected => @preset_hash[:address_country], :prompt => t(:'address.choose_country')}, :label => t(:'preset.student.country')
       .span3
         = fields_for :presets do |address_state|
-          = address_state.text_field :address_state, :value => @preset_hash[:address_state], :label => t(:'admin.preset.student.state')
+          = address_state.text_field :address_state, :value => @preset_hash[:address_state], :label => t(:'preset.student.state')
       .span3
         = fields_for :presets do |address_city|
-          = address_city.text_field :address_city, :value => @preset_hash[:address_city], :label => t(:'admin.preset.student.city')
+          = address_city.text_field :address_city, :value => @preset_hash[:address_city], :label => t(:'preset.student.city')
 
   = well_div do
-    = submit_button t(:'admin.preset.save')
+    = submit_button t(:'preset.save')
