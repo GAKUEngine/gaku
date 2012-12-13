@@ -2,9 +2,16 @@ require 'spec_helper'
 
 describe Gaku::AssignmentScore do
 
-  context "validations" do 
-  	it { should have_valid_factory(:assignment_score) }
-  	it { should belong_to(:student) } 
+  context "validations" do
+    it { should belong_to(:student) } 
+    
+    it { should have_valid_factory(:assignment_score) }
+
+    it "is invalid without a score" do 
+      build(:assignment_score, score: nil).should_not be_valid
+    end
+
+    
   end
   
 end

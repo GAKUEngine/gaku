@@ -29,7 +29,8 @@ module Gaku
     has_many :guardians, :through => :guardian_addresses
     
 
-    validates :address1, :city, :country, :presence => true
+    validates_presence_of :address1, :city, :country
+    validates_associated :country, :state, :campus
 
     accepts_nested_attributes_for :country
     attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country, :state_id, :student_id
