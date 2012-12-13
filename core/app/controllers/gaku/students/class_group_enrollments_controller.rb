@@ -2,7 +2,7 @@ module Gaku
   class Students::ClassGroupEnrollmentsController < GakuController
 
     inherit_resources
-    actions :new, :destroy
+    actions :new, :create, :destroy
     respond_to :js, :html
 
     before_filter :student, :only => [:new, :create]

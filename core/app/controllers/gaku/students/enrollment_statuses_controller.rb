@@ -9,18 +9,12 @@ module Gaku
 
   	def history
       @enrollment_status_history = @enrollment_status.history
-
-      respond_with(@enrollment_status_history) do |format|
-  			format.js { render 'history' }
-  		end
+      respond_with(@enrollment_status_history)
   	end
 
     def revert
       @enrollment_status.revert unless @enrollment_status.audits.count.equal?(1)
-
-      respond_with(@enrollment_status) do |format|
-        format.js { render 'revert' }
-      end
+      respond_with(@enrollment_status)
     end
 
     private
