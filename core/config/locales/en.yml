@@ -115,7 +115,10 @@ en:
   class_group_course_enrollment:
     save: Save Course to Class Group
   class_group_management: Class Management
-  commute_method: Commute Method
+  commute_method:
+    save: Save Commute Method
+    singular: Commute Method
+    plural: Commute Methods
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
