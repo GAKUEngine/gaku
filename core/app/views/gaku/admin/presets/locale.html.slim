@@ -6,4 +6,4 @@
           = language.select :language, options_for_select(I18n.available_locales, :selected => @preset_hash[:language]), :label => t(:'language')
       .row-fluid
         .span3
-          = submit_button t(:'admin.preset.save')
+          = submit_button t(:'preset.save')
