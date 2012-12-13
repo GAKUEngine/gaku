@@ -67,7 +67,7 @@ describe 'Admin Schools' do
     end
 
     context '#edit from show' do
-      school_info  = '#admin-school-information'
+      school_info  = '.school_info'
 
       before do
         visit gaku.admin_school_path(school)
