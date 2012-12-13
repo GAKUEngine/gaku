@@ -5,7 +5,6 @@ describe Gaku::Guardian do
   context "validations" do 
   	let(:guardian) { stub_model(Gaku::Guardian) }
 
-  	it { should have_valid_factory(:guardian) }
     it { should belong_to(:user) }
     it { should have_many(:guardian_addresses) } 
     it { should have_many(:addresses) } 

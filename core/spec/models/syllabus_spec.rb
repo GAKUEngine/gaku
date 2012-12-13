@@ -3,8 +3,6 @@ require 'spec_helper'
 describe Gaku::Syllabus do
 
   context "validations" do 
-  	it { should have_valid_factory(:syllabus) }
-
     it { should have_many(:courses) }
     it { should have_many(:assignments) }
     it { should have_many(:exam_syllabuses) } 

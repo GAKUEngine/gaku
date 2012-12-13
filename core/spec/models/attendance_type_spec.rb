@@ -3,8 +3,6 @@ require 'spec_helper'
 describe Gaku::AttendanceType do
 
   context "validations" do 
-  	it { should have_valid_factory(:attendance_type) }
-
   	it { should have_many(:attendances)}
   	
   	it { should allow_mass_assignment_of :name }

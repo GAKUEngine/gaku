@@ -69,12 +69,6 @@ Spork.each_run do
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
   end
 
-  RSpec::Matchers.define :have_valid_factory do |factory_name|
-    match do |model|
-      create(factory_name).new_record?.should be_false
-    end
-  end
-
   RSpec::Matchers.define :validate do |expected|
     match do |actual|
       have_content "can't be blank"
