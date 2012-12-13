@@ -3,7 +3,8 @@
     = fields_for 'presets' do |language|
       .row-fluid
         .span6
-          = language.select :language, options_for_select(I18n.available_locales, :selected => @preset_hash[:language]), :label => t(:'language')
+          = language.label t(:'language')
+          = language.select :language, options_for_select(I18n.available_locales, :selected => @preset_hash[:language])
       .row-fluid
         .span3
           = submit_button t(:'preset.save')
