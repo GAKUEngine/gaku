@@ -43,12 +43,7 @@ module Gaku
 
 
     def max_score
-      maxScore = 0.0
-      self.exam_portions.each do |portion|
-        maxScore += portion.max_score
-      end
-
-      return maxScore
+      exam_portions.inject(0) {|sum, p| sum + p.max_score }
     end
 
     private
