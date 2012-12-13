@@ -24,8 +24,8 @@ describe 'Exam portions' do
       end
       it 'adds a portion' do
         expect do
-          fill_in "exam_exam_portions_attributes_1_name", :with => 'Ubuntu'
-          fill_in 'exam_exam_portions_attributes_1_weight', :with => 100.6
+          fill_in "exam_portion_name", :with => 'Ubuntu'
+          fill_in 'exam_portion_weight', :with => 100.6
           click submit
           wait_until_invisible form
         end.to change(exam.exam_portions,:count).by 1

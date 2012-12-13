@@ -13,7 +13,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
-module Gaku 
+module Gaku
   class Exam < ActiveRecord::Base
 
     has_many :exam_scores
@@ -22,7 +22,7 @@ module Gaku
     has_many :exam_syllabuses
     has_many :syllabuses, :through => :exam_syllabuses
     belongs_to :grading_method
-    has_many :notes, as: :notable 
+    has_many :notes, as: :notable
 
     has_many :attendances, :as => :attendancable
 
@@ -36,6 +36,10 @@ module Gaku
     after_create :build_default_exam_portion
 
     scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+
+    def total_weight
+      exam_portions.inject(0) {|sum, p| sum + p.weight }
+    end
 
 
     def max_score

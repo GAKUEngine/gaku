@@ -6,12 +6,9 @@ module Gaku
 
     include Gaku::Core::Grading::Calculations
 
-    before_filter :exam, :only => [:show, :create_exam_portion]
     before_filter :before_show, :only => :show
     before_filter :before_new, :only => :new
-    before_filter :before_update, :only => :update
     before_filter :count, :only => [:create, :destroy, :index]
-    before_filter :portions_count, :only => :create_exam_portion
 
 
     def export_xls
@@ -87,27 +84,12 @@ module Gaku
         @exams = Exam.all
         @exam = Exam.new
       end
-      
+
       @exam.exam_portions.build
-      
+
       respond_to do |format|
         format.html
         format.json { render :json => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
-      end
-    end
-
-    def create_exam_portion
-      if @exam.update_attributes(params[:exam])
-        respond_to do |format|
-          flash.now[:notice] = t('notice.created', :resource => t('Exam.singular'))
-          format.js {render 'gaku/exams/exam_portions/create_exam_portion'}
-        end
-      end
-    end
-
-    def show
-      super do |format|
-        format.json { render :json => @exam.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
       end
     end
 
@@ -150,40 +132,26 @@ module Gaku
       @master_portion = @exam.exam_portions.new
     end
 
-    def before_update
-      @exams = Exam.all
-      @notable = exam
-      @notable_resource = @notable.class.to_s.underscore.gsub("_","-")
+    def exam
+      @exam = Exam.find(params[:id])
     end
 
+    def before_show
+      exam
+      @notable = @exam
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+    end
 
-    private
-      def exam
-        @exam = Exam.find(params[:id])
+    def count
+      @count = Exam.count
+    end
+
+    def find_exams
+      if params[:id] != nil
+        @exams = Exam.find_all_by_id(params[:id])
+      else
+        @exams = @course.syllabus.exams.all
       end
-
-      def before_show
-        @exam.exam_portions.build
-        @notable = @exam
-        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
-      end
-
-      def count
-        @count = Exam.count
-      end
-
-      def portions_count
-        @portions_count = @exam.exam_portions.count
-     end
-
-      def find_exams
-        if params[:id] != nil
-          @exams = Exam.find_all_by_id(params[:id])
-        else
-          @exams = @course.syllabus.exams.all
-          # TODO calculate all grades and put them in here
-          # @grades = 1
-        end
-      end
+    end
   end
 end
