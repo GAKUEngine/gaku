@@ -50,3 +50,9 @@ $ ->
     resource_form = "#new-" + resource_id
     $(resource_new_link).show()
     $(resource_form).slideUp()
+
+  $(document).on 'click', '#cancel-student-commute-method-link', (e) ->
+    e.preventDefault()
+    $('#student-commute-method-form').slideUp ->
+      $('#commute-method').show()
+      $('#edit-student-commute-method-link').show()

@@ -83,7 +83,7 @@ describe 'Students' do
         end
         it ' adds' do
           select "#{commute_method_type.name}", from: 'commute_method_commute_method_type_id'
-          click_on 'Create Commute method'
+          click_on 'submit-student-commute-method-button'
           page.should have_content "#{commute_method_type.name}"
           #wait_until_visible '#new-student-commute-method-link'
         end
@@ -102,7 +102,7 @@ describe 'Students' do
         end
         it ' edits' do
           select 'Train', from: 'commute_method_commute_method_type_id'
-          click_on 'Update Commute method'
+          click_on 'submit-student-commute-method-button'
           wait_until_visible '#edit-student-commute-method-link'
           page.should have_content "Train"
         end
@@ -113,7 +113,7 @@ describe 'Students' do
         end
 
       end
-      
+
     end
 
     context '#edit from show view', js: true do
