@@ -22,6 +22,6 @@
 //= require gaku/syllabuses
 //= require gaku/students
 //= require gaku/students/addresses/form
-
+//= require_tree ./backbone/
 // require_tree ./
 
