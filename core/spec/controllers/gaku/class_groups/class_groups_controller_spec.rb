@@ -22,6 +22,12 @@ describe Gaku::ClassGroupsController do
   end 
 
   describe 'GET #show' do
+    
+    it "is successful" do
+      gaku_js_get :show, id: class_group
+      response.should be_success
+    end
+
     it "assigns the requested class_group to @class_group" do
       gaku_js_get :show, id: class_group
       assigns(:class_group).should eq class_group
@@ -63,20 +69,37 @@ describe Gaku::ClassGroupsController do
     end
   end
 
-  describe "PUT #update" do
+  describe 'GET #edit' do
+    it "locates the requested class_group" do
+      gaku_js_get :edit, id: class_group
+      assigns(:class_group).should eq(class_group)
+    end
 
+    it "renders the :edit template" do
+        gaku_js_get :edit, id: class_group
+        response.should render_template :edit
+    end
+  end
+
+  describe "PUT #update" do
     it "locates the requested @class_group" do
-      gaku_put :update, id: class_group, class_group: attributes_for(:class_group) 
+      gaku_js_put :update, id: class_group, class_group: attributes_for(:class_group) 
       assigns(:class_group).should eq(class_group)
     end
 
     context "valid attributes" do
       it "changes class group's attributes" do
-        gaku_put :update, id: class_group,class_group: attributes_for(:class_group, name: "AZ")
+        gaku_js_put :update, id: class_group,class_group: attributes_for(:class_group, name: "AZ")
         class_group.reload
         class_group.name.should eq("AZ")
-
-        controller.should set_the_flash
+      end
+    end
+    context "invalid attributes" do
+      it "does not change class group's attributes" do
+        gaku_js_put :update, id: class_group, 
+                              class_group: attributes_for(:class_group, name: "")
+        class_group.reload
+        class_group.name.should_not eq("")
       end
     end
   end

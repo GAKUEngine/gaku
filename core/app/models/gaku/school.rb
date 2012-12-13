@@ -24,9 +24,9 @@ module Gaku
   	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code
 
     validates_presence_of :name
-    
-    after_create :build_default_campus
 
+    after_create :build_default_campus 
+  
   	private
       def build_default_campus
         if self.campuses.any?
