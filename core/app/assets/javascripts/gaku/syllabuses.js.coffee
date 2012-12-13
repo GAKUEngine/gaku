@@ -4,9 +4,9 @@
 $ ->
   $('#syllabus-exams').on "click", '#new-syllabus-exam-link', (event) ->
     event.preventDefault()
-    $(@).hide()
+    #$(@).hide()
     $('#new-existing-exam').slideUp ->
-      $('#new-syllabus-exam').slideToggle()
+      #$('#new-syllabus-exam').slideToggle()
       $('#new-existing-exam-link').show()
 
   $('#syllabus-exams').on "click", '#new-existing-exam-link', (event) ->
