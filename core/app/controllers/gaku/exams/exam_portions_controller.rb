@@ -2,9 +2,7 @@ module Gaku
   class Exams::ExamPortionsController < GakuController
 
     inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
     belongs_to :exam
-
     respond_to :js, :html
 
     before_filter :exam

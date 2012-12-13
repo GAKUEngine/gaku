@@ -1,6 +1,3 @@
 = remote_form_for [:admin, @attendance_type] do |f|
-  .row-fluid.mt-l
-    .span12
-      = render 'form_fields', :f => f
-  	.row-fluid
-    	= buttons_for @attendance_type, :nested_id => 'admin-attendance-type'
+  = render 'form_fields', :f => f
+  = buttons_for @attendance_type, :nested_id => 'admin-attendance-type'

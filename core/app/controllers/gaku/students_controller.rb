@@ -5,6 +5,7 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
+    respond_to :csv, :only => :index
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
     before_filter :before_show,       :only => :show
@@ -12,23 +13,8 @@ module Gaku
     before_filter :selected_students, :only => [:create,:index]
 
     def index
-      @search = Student.search(params[:q])
-      @students = @search.result(:distinct => true)#.includes(:class_group_enrollments).all
-      if params[:action] == "get_csv_template"
-        get_csv_template
-        return
-      end
-
-      @students = @students.page(params[:page]).per(10)
-
-      @student = Student.new
       @enrolled_students = params[:enrolled_students]
-
-      respond_to do |format|
-        format.js
-        format.html
-        format.csv  { export_csv_index(@students) }
-      end
+      index!
     end
 
     def update
@@ -76,53 +62,49 @@ module Gaku
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
+    protected
+
+    def collection
+      @search = Student.search(params[:q])
+      @students = @search.result(:distinct => true).page(params[:page]).per(10)
+    end
+
     private
 
-      def select_vars
-        @class_group_id ||= params[:class_group_id]
-      end
+    def select_vars
+      @class_group_id ||= params[:class_group_id]
+    end
 
-      def export_csv_index(students, field_order = ["surname", "name"])
-        filename = "Students.csv"
-        content = CSV.generate do |csv|
-          csv << translate_fields(field_order)
-          students.each do |student|
-            csv << student.attributes.values_at(*field_order)
-          end
-        end
-        send_data content, :filename => filename
-      end
+    def class_name
+      params[:class_name].capitalize.constantize
+    end
 
-      def class_name
-        params[:class_name].capitalize.constantize
-      end
+    def selected_students
+      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+    end
 
-      def selected_students
-        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-      end
+    def before_show
+      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      @notable = Student.find(params[:id])
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-      def before_show
-        @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
-        @notable = Student.find(params[:id])
-        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+      Student.includes([{:contacts => :contact_type}]).find(params[:id])
+    end
 
-        Student.includes([{:contacts => :contact_type}]).find(params[:id])
-      end
-      
-      def get_student
-        Student.find(params[:id])
-      end
+    def get_student
+      Student.find(params[:id])
+    end
 
-      def count
-        @count = Student.count
-      end
+    def count
+      @count = Student.count
+    end
 
-      def sort_column
-        Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
-      end
+    def sort_column
+      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+    end
 
-      def sort_direction
-        %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-      end
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
   end
 end

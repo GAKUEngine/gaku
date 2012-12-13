@@ -1,19 +1,20 @@
 #admin-school-campuses
-  .row-fluid
+  = index_header do
     #new-admin-school-campus.hide
+
     .pull-left
       = count_div 'admin-school-campuses-count' do
         = print_count @school.campuses.count, t_campus_list
     .pull-right
       = ajax_link_to_new t(:'campus.add'), [:new, :admin, @school, :campus], :id => 'new-admin-school-campus-link'
+  = hr
 
-  .row-fluid
-    .span12
-      = table_for 'admin-school-campuses-index' do
-          thead
-            tr
-              = th_icon 'home'
-              = th t(:'campus.name')
-              = th_actions 3
-          tbody
-            = render :partial => 'gaku/admin/schools/campuses/campus', :collection => @school.campuses, :as => 'campus'
+  = index_body do
+    = table_for 'admin-school-campuses-index' do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'campus.name')
+          = th_actions 3
+      tbody
+        = render :partial => 'gaku/admin/schools/campuses/campus', :collection => @school.campuses, :as => 'campus'

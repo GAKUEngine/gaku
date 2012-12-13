@@ -19,23 +19,3 @@ $ ->
   $('#new-syllabus-assignment').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slideToggle()
-
-
-  #$('#new-syllabus-exam form').validationEngine()
-
-  #$('#new-syllabus form').validationEngine()
-
-  $('#cancel-syllabus-link').on 'click', (e) ->
-    $('#new-syllabus').slideToggle()
-    $('#new-syllabus-link').show()
-
-
-  $('#syllabus-exams').on "click", '#cancel-existing-exam-link', (event)->
-    event.preventDefault()
-    $('#new-existing-exam').slideToggle()
-    $('#new-existing-exam-link').show()
-
-  $('#syllabus-exams').on "click",'#cancel-syllabus-exam-link', (event) ->
-    event.preventDefault()
-    $('#new-syllabus-exam').slideToggle()
-    $('#new-syllabus-exam-link').show()

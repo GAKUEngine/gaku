@@ -5,5 +5,7 @@ module Gaku
 
 		attr_accessible :name, :color_code, :counted_absent, :disable_credit, :credit_rate, :auto_credit
 
+    validates :name, presence:true
+
 	end
 end

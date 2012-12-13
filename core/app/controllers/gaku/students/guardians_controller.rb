@@ -2,8 +2,7 @@ module Gaku
   class Students::GuardiansController < GakuController
 
     inherit_resources
-    actions :new, :edit, :update, :destroy, :index, :show
-
+    #belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
     before_filter :student
@@ -13,7 +12,7 @@ module Gaku
     def create
       super do |format|
         if @student.guardians << @guardian
-          format.js { render 'create' }
+          format.js { render }
         end
       end
     end
@@ -21,9 +20,7 @@ module Gaku
     def new_contact
       guardian
     	@contact = Contact.new
-    	respond_to do |format|
-    		format.js { render 'new_contact' }
-    	end
+    	respond_with(@contact)
     end
 
     private

@@ -4,7 +4,7 @@ describe 'Admin Disposals Attachments' do
 
   stub_authorization!
 
-  let(:attachment) { create(:attachment, is_deleted:true) }
+  let(:attachment) { create(:attachment, :is_deleted => 1) }
 
   before do
     set_resource('disposal-attachment')
@@ -14,7 +14,7 @@ describe 'Admin Disposals Attachments' do
 
   context 'no deleted attachment' do
     before do
-      
+
     end
     it 'shows empty table' do
       within(table) do

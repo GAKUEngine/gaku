@@ -1,3 +1,3 @@
-- unless exam_portion.nil? || exam_portion.new_record? || !exam_portion
+- unless exam_portion.nil? or exam_portion.new_record? or !exam_portion
   tr id="exam_portion_#{exam_portion.id}"
-    =render 'gaku/exams/exam_portions/exam_portion_unit', :exam_portion => exam_portion
+    = render 'gaku/exams/exam_portions/exam_portion_unit', :exam_portion => exam_portion
