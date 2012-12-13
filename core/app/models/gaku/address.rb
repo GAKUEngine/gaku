@@ -31,7 +31,8 @@ module Gaku
 
     validates :address1, :city, :country, :presence => true
 
-    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
+    accepts_nested_attributes_for :country
+    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country, :state_id, :student_id
 
   #  attr_encrypted :title,      :key => 'vegb9er7gr5grg7r4r4gr3f'
   #  attr_encrypted :address1,   :key => 'vegb9er7gr5grg7r4r4gr3f'

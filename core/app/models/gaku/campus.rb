@@ -20,6 +20,7 @@ module Gaku
 		attr_accessible :name, :school_id, :address_id, :is_master
 
 		scope :master, lambda { where(:is_master => true) }
+    validates :name, presence: true
 
 	end
 end
