@@ -64,9 +64,9 @@ describe 'Courses' do
         page.should have_content("Edit Course")
       end
 
-      it 'has validations' do
+      it 'has validations', :js => true do
         fill_in 'course_code', :with => ''
-        has_validations? 
+        has_validations?
       end
 
       it "edits a course", :js => true  do

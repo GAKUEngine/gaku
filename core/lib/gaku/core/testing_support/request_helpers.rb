@@ -128,7 +128,7 @@ module Gaku
 
         def has_validations?
           click submit
-          wait_until { page.should validate "can't be blank" }
+          wait_until { page.should have_content "can't be blank" }
         end
 
         private
