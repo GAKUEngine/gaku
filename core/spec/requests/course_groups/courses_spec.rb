@@ -31,10 +31,7 @@ describe 'CourseGroup Courses' do
 
     end
 
-    pending 'errors without required fields' do
-      click submit
-      wait_until { page.has_content? 'Course can\'t be blank' }
-    end
+    it {has_validations?}
 
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working

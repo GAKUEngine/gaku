@@ -30,11 +30,8 @@ describe 'Syllabus' do
       size_of(table_rows).should eq tr_count+1
     end
 
-    pending "errors without required fields" do
-      click submit
-      page.should have_content "This field is required"
-      page.should_not have_content "was successfully created"
-    end
+    it {has_validations?}
+    
     it "cancels adding", :cancel => true do
       ensure_cancel_creating_is_working
     end
