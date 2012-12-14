@@ -5,8 +5,6 @@ describe Gaku::Student do
   context "validations" do 
     let(:student) { stub_model(Gaku::Student) }
 
-  	it { should have_valid_factory(:student) }
-
     it { should have_many(:enrollment_statuses) }
     it { should have_many(:course_enrollments) }
     it { should have_many(:courses) }

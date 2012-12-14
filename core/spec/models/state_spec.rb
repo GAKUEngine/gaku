@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Gaku::State do
 
   context "validations" do 
-    it { should have_valid_factory(:state) }
     it { should belong_to(:country) }
 
     it { should validate_presence_of(:name) }

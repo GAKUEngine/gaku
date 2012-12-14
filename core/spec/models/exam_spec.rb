@@ -5,7 +5,6 @@ describe Gaku::Exam do
   context "validations" do 
   	let(:exam) { create(:exam) }
 
-    it { should have_valid_factory(:exam) }
     it { should have_many(:exam_scores) }
     it { should have_many(:exam_portions) }
     it { should have_many(:exam_portion_scores) }

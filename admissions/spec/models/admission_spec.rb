@@ -3,10 +3,6 @@ require 'spec_helper'
 describe Gaku::Admission do
 
   context "validations" do
-    it "has a valid factory" do
-      should have_valid_factory(:admission) 
-    end
-
     it { should belong_to :student } 
     it { should belong_to :scholarship_status }
     it { should belong_to :admission_method }
@@ -19,6 +15,5 @@ describe Gaku::Admission do
     it { should have_many :notes }
 
     #it { should have_one :school_history }
-
   end
 end

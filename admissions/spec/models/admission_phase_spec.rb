@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe Gaku::AdmissionPhase do
 
-  context "validations" do 
-
-    it "has a valid factory" do
-      should have_valid_factory(:admission_phase) 
-    end
+  context "validations" do
 
     it { should belong_to :admission_method }
 
