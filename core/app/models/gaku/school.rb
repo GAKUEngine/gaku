@@ -22,11 +22,15 @@ module Gaku
     has_many :achievements
 
   	attr_accessible :name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code
-
     validates_presence_of :name
 
-    after_create :build_default_campus 
-  
+    has_one :master_campus,
+      :class_name => 'Gaku::Campus',
+      :conditions => { :is_master => true },
+      :dependent => :destroy
+
+    after_create :build_default_campus
+
   	private
       def build_default_campus
         if self.campuses.any?
