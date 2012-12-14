@@ -32,11 +32,7 @@ describe 'ClassGroups' do
       flash_created?
     end
 
-    pending "errors without required fields" do
-      click submit
-      page.should have_content 'field is required'
-      flash_error_for 'class_group_name'
-    end
+    it {has_validations?}
 
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working

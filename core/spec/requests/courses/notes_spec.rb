@@ -32,13 +32,7 @@ describe 'Course Notes' do
       flash_created?
     end
 
-    pending "errors without required fields"  do
-      click submit
-      wait_until do
-         flash_error_for 'note_title'
-         flash_error_for 'note_content'
-      end
-    end
+    it {has_validations?}
 
     it 'cancels creating', :cancel => true, :js => true do
       ensure_cancel_creating_is_working

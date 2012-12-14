@@ -78,15 +78,10 @@ describe 'Syllabus Exams' do
         flash_created?
       end
 
-      pending 'errors without the required fields', :js => true do
+      it 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
-        click submit
-
-        wait_until do
-          flash_error_for 'exam_name'
-          flash_error_for 'exam_exam_portions_attributes_0_name'
-        end
-
+        has_validations?
+        
         syllabus.exams.count.should eq 0
       end
 
