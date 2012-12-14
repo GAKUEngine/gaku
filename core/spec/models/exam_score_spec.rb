@@ -5,7 +5,6 @@ describe Gaku::ExamScore do
   context "validations" do 
   	let(:exam_score) { create(:exam_score) }
 
-  	it { should have_valid_factory(:exam_score) }
     it { should belong_to(:exam) }
 
     it { should validate_presence_of(:score) }
