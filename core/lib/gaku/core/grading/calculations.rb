@@ -37,7 +37,7 @@ module Gaku
             score = portion.student_score(student)
             @student_portion_attendance[student.id][score.id] = score.attendances.first.try(:id)
           end
-          
+
           def calculate_exam_averages
             @students.each do |student|
               @exams.each do |exam|
@@ -60,7 +60,7 @@ module Gaku
                 end
               end
               standard_deviation(@standard_deviation)
-             
+
               @students.each do |student|
                 @deviation[student.id][exam.id] = 0.0
                 add_to_deviation_member(exam, student)
@@ -184,7 +184,7 @@ module Gaku
                 @gradePoint -= 1
               end
             end
-  
+
             def grading_method_two(exam)
               scoresMem = @scores.clone
               gradeNums = []
@@ -205,7 +205,7 @@ module Gaku
               @rank_point = 5
               @ranks = Hash.new { |hash,key| hash[key] = {} }
               rank_levels = [15, 20]
-              @exams.each do |exams|
+              @exams.each do |exam|
                 initial_student_rank(exam)
                 rank_nums = rank_nums(rank_levels)
                 rank_score(exam,rank_nums)
