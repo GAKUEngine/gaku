@@ -8,6 +8,14 @@ module Gaku
     	before_filter :load_vars
       before_filter :before_index, :only => :index
 
+      def create
+        @address = Address.create(params[:address])
+        @campus.address = @address
+        if @campus.save
+          respond_with @campus
+        end
+      end
+
       def destroy
         @address = Address.find(params[:id])
         @campus.address.destroy
