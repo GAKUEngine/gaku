@@ -237,12 +237,7 @@ describe 'Students' do
       flash_created?
     end
 
-    pending 'errors without required fields' do
-      click submit
-      wait_until do
-        page.should have_content "can't be blank"
-      end
-    end
+    it {has_validations?}
 
     it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working

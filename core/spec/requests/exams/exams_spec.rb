@@ -42,24 +42,22 @@ describe 'Exams' do
       ensure_cancel_creating_is_working
     end
 
-    pending 'errors without required exam fields' do
+    it 'errors without required exam fields' do
       # input only exam_portion fields to check validation on exam
       fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
       fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1
       fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
 
-      click submit
-      page.should have_content('This field is required')
+      has_validations?
     end
 
-    pending 'errors without required exam portion fields' do
+    it 'errors without required exam portion fields' do
       # input only exam fields to check validation on exam
       fill_in 'exam_name', :with => 'Biology Exam'
       fill_in 'exam_weight', :with => 1
       fill_in 'exam_description', :with => "Good work"
 
-      click submit
-      page.should have_content('This field is required')
+      has_validations?
     end
   end
 
@@ -83,10 +81,9 @@ describe 'Exams' do
         flash_updated?
       end
 
-      pending 'errors without required fields on index/edit' do
+      it 'errors without required fields on index/edit' do
         fill_in 'exam_name', :with => ''
-        click submit
-        page.should have_content 'This field is required'
+        has_validations?
       end
 
       it 'hides weighting widget' do
