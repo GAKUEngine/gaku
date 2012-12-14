@@ -1,4 +1,5 @@
 en:
+  id: "Id"
   add: Add
   address:
     add: Add Address
@@ -206,6 +207,8 @@ en:
       phone: phone
       surname: surname
       surname_reading: surname_reading
+      birth_date: birth_date
+      admitted: admitted
     import: CSV Import
   date_placeholder: YYYY-MM-DD
   default: Default
