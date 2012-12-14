@@ -69,18 +69,4 @@ Spork.each_run do
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
   end
 
-  RSpec::Matchers.define :validate do |expected|
-    match do |actual|
-      have_content "can't be blank"
-    end
-
-    failure_message_for_should do |actual|
-      "missing validations"
-    end
-
-    description do
-      "have validations"
-    end
-  end
-
 end
