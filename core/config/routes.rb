@@ -38,13 +38,13 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :exams do
-      resources :exam_portion_scores do 
+      resources :exam_portion_scores do
         resources :attendances
       end
 
       collection do
         get :grading
-        get :export_xls
+        get :export
       end
 
       member do
@@ -52,7 +52,7 @@ Gaku::Core::Engine.routes.draw do
         put :update_score
         get :calculations
       end
-      
+
     end
     member do
       get :student_chooser
@@ -86,7 +86,7 @@ Gaku::Core::Engine.routes.draw do
   resources :students do
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
-      member do 
+      member do
         get :history
         get :revert
       end
@@ -173,7 +173,7 @@ Gaku::Core::Engine.routes.draw do
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
-      get :grading, :on => :collection      
+      get :grading, :on => :collection
       put :update_presets, :on => :collection
     end
 
@@ -184,7 +184,7 @@ Gaku::Core::Engine.routes.draw do
         get :attachments
       end
     end
-  
+
     match 'school_details' => 'schools#school_details', :via => :get
     match 'school_details/edit' => 'schools#edit_master', :via => :get
 

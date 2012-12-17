@@ -29,8 +29,7 @@
 #
 module Gaku
   class Student < ActiveRecord::Base
-    require 'csv'
-
+    
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
 
@@ -66,7 +65,7 @@ module Gaku
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
-                    :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
+                    :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes,
                     :picture, :student_id_number, :student_foreign_id_number, :scholarship_status_id
 
   #  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
@@ -89,11 +88,11 @@ module Gaku
     audited
 
     def enrollment_status
-      self.enrollment_statuses.first 
+      self.enrollment_statuses.first
     end
 
     # methods for json student chooser returning
-    
+
     def full_name
       "#{self.surname} #{self.name}"
     end
@@ -115,9 +114,9 @@ module Gaku
     # need modify when primary columns is added
     def address_widget
       pa = self.addresses.first
-      pa.blank? ? nil : pa.city 
+      pa.blank? ? nil : pa.city
     end
-    
+
     def primary_address
       self.student_addresses.where(:is_primary => true).first.try(:address)
     end
@@ -133,7 +132,7 @@ module Gaku
           student[:phone]   = students[i].phone
           i += 1
         end
-        
+
         return students_json.to_json
     end
 
