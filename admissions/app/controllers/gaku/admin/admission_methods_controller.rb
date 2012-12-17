@@ -2,16 +2,14 @@ module Gaku
   module Admin
     class AdmissionMethodsController < GakuController
 
-      inherit_resources 
-      actions :index, :show, :new, :create, :update, :edit, :destroy
-      
+      inherit_resources
       respond_to :js, :html
 
-      before_filter :admission_methods_count, :only => [:create, :destroy]
+      before_filter :count, :only => [:create, :destroy, :index]
 
       private
-        def admission_methods_count 
-          @admission_methods_count = AdmissionMethod.count
+        def count
+          @count = AdmissionMethod.count
         end
     end
   end
