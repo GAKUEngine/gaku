@@ -11,7 +11,7 @@
 #
 module Gaku
   class GuardianAddress < ActiveRecord::Base
-  	belongs_to :guardian
+    belongs_to :guardian
     belongs_to :address
 
     attr_accessible :guardian_id, :address_id, :is_primary
@@ -27,9 +27,9 @@ module Gaku
     private
 
     def ensure_primary_first
-    	if self.guardian.addresses.blank?
-    		self.is_primary = true
-    	end
+      if self.guardian.addresses.blank?
+        self.is_primary = true
+      end
     end
   end
 end
