@@ -1,12 +1,12 @@
-table#students-index.index.table.table-striped.table-bordered.table-condensed
+= table_for 'students-index' do
   thead
     tr
-      th.btn-inverse =   t("surname")
-      th.btn-inverse =   t("name")
-      th.btn-inverse =   t('birth')
-      th.btn-inverse =   t('gender.label')
-      th.btn-inverse =   t('class_groups.name')
-      th.btn-inverse =   t('class_group_enrollments.seat_number')
-      th.btn-info style="width:140px" = t("state")
+      = th t(:'surname')
+      = th t(:'name')
+      = th t(:'birth')
+      = th t(:'gender.label')
+      = th t(:'class_groups.name')
+      = th t(:'class_group_enrollments.seat_number')
+      = th_actions 140
   tbody
-    =render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state}
+    = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state}
