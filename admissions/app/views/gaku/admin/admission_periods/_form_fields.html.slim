@@ -1,0 +1,22 @@
+.row-fluid
+  .span12
+    .span6
+      = f.text_field :name, :label => t(:'admission_periods.name')
+    .span3
+      = f.number_field :seat_limit, :label => t(:'admission_periods.seat_limit')
+.row-fluid
+  .span12
+    = f.date_select :admitted_on, :label => t(:'admission_periods.admitted_on')
+.row-fluid
+  .span12
+    = f.check_box :rolling, :label => t(:'admission_periods.rolling')
+br/
+
+.row-fluid
+  = f.fields_for :period_method_associations do |method_form|
+    .method_form
+      = method_form.label :name, t("admission_methods.name")
+      = method_form.select :admission_method_id, @admission_methods, { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name')
+      = method_form.link_to_remove t(:'admission_methods.remove'), :class => 'btn btn-danger'
+  br/
+  p= f.link_to_add t('admission_methods.add'), :period_method_associations, :class => 'btn'
