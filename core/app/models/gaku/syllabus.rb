@@ -24,7 +24,7 @@ module Gaku
 
 	  accepts_nested_attributes_for :exams, :assignments
 
-	  validates :name, :code, :presence => true  
+	  validates_presence_of :name, :code  
 	end
 end
 

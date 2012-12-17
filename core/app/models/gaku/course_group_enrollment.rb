@@ -13,7 +13,7 @@ module Gaku
 
 	  attr_accessible :course_id, :course_group_id 
 
-	  validates :course_group_id, :presence => true
+	  validates_presence_of :course_group_id
 	  validates :course_id, :uniqueness => {:scope => :course_group_id, :message => "already enrolled to this course group!"}, :presence => true
 
 	end

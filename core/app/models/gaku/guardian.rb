@@ -21,7 +21,7 @@ module Gaku
     has_many :contacts
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship, :contacts, :contacts_attributes
-    validates :name, :surname, :presence => true
+    validates_presence_of :name, :surname
 
   #  attr_encrypted :name,             :key => 'fd8eg8gre67gre87g7rer4erg43e'
   #  attr_encrypted :surname,          :key => 'fd8eg8gre67gre87g7rer4erg43e'

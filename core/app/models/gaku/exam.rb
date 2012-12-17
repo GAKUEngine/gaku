@@ -30,7 +30,7 @@ module Gaku
 
     accepts_nested_attributes_for :exam_portions
 
-    validates :name, :presence => true
+    validates_presence_of :name
     validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
 
     after_create :build_default_exam_portion
