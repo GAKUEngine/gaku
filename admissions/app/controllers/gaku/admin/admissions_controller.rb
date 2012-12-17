@@ -25,18 +25,26 @@ module Gaku
       def change_student_state
         @state = AdmissionPhaseState.find(params[:state_id])
         @student = Student.find(params[:student_id])
-        @admission_record = @student.admission.admission_phase_records.first
-        @old_state_id = @admission_record.admission_phase_state_id
         phase = @state.admission_phase
+        @admission_record = @student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+        @old_state_id = @admission_record.admission_phase_state_id
+    
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
         @admission_method = phase.admission_method
+        
         if !(@state.id == @admission_record.admission_phase_state_id)
           # TODO decide how next phase should be chosen and decide for default phase states
           if @state.auto_progress == true
             @next_phase = AdmissionPhase.find_by_admission_method_id_and_order(phase.admission_method_id ,phase.order+1)
-            @state = @next_phase.admission_phase_states.first
-            @admission_record.admission_phase_state = @state
-            @admission_record.admission_phase = @next_phase
+            @new_state = @next_phase.admission_phase_states.first
+            #@admission_record.admission_phase_state = @state
+            #@admission_record.admission_phase = @next_phase
+            @new_admission_record = AdmissionPhaseRecord.new
+            @new_admission_record.admission = @student.admission
+            @new_admission_record.admission_phase = @next_phase
+            @new_admission_record.admission_phase_state = @new_state
+            @new_admission_record.save
+            @admission_record.admission_phase_state_id = @state.id
           else
             @admission_record.admission_phase_state_id = @state.id
           end
