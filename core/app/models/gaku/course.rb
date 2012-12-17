@@ -23,6 +23,7 @@ module Gaku
     
     has_many :notes, as: :notable 
     has_many :exam_schedules
+    
     belongs_to :syllabus
     belongs_to :class_group
 
