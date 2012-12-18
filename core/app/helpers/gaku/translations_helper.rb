@@ -5,6 +5,10 @@ module Gaku
       t('class_group.list')
     end
 
+    def t_class_group_enrollment_list
+      t('class_group_enrollment.list')
+    end
+
     def t_course_plural
       t('course.plural')
     end

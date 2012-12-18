@@ -12,10 +12,6 @@ Spork.prefork do
   require 'active_record/fixtures'
   require 'factory_girl_rails'
 
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist unless ENV['SELENIUM']
-  Capybara.default_wait_time = 5
-  
   require 'gaku/core/testing_support/factories'
   require 'gaku/core/testing_support/controller_requests'
   require 'gaku/core/testing_support/request_helpers'
@@ -23,7 +19,7 @@ Spork.prefork do
   require 'gaku/core/testing_support/auth_helpers'
 
   require 'gaku/core/url_helpers'
-  require 'factories' 
+  require 'factories'
 
 end
 
