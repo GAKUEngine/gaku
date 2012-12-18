@@ -5,10 +5,17 @@ Gaku::Core::Engine.routes.prepend do
         post :change_admission_period
         post :change_admission_method
         post :change_student_state
+        get :student_chooser
+        post :create_multiple
       end
+      
+      get :new_applicant
     end
     resources :admission_methods do
       resources :admission_phases, :controller => 'admission_methods/admission_phases' do
+        resources :admission_phase_states, :controller => 'admission_methods/admission_phases/admission_phase_states' do
+          post :make_default, :on => :member
+        end
         member do
           get :show_phase_states
         end

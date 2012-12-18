@@ -1,4 +1,3 @@
-=form_for [@student, @enrollment_status], :remote => true do |f|
-	=f.select :enrollment_status_type_id, Gaku::EnrollmentStatusType.all.collect{|s| [s.name.capitalize, s.id]}, :prompt => t('default')
-	=f.submit nil, :class => 'btn btn-primary'
-	=link_to t('cancel'), "",:id => 'cancel-enrollment-status-link', :class => 'btn'
+= remote_form_for [@student, @enrollment_status] do |f|
+	= f.select :enrollment_status_type_id, enrollment_status_types, :prompt => t(:'default')
+	= buttons_for @enrollment_status, :nested_id => 'student-enrollment-status'

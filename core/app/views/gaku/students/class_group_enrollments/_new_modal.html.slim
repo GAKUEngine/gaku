@@ -1,40 +1,27 @@
-- model = @class_group_enrollment || Gaku::ClassGroupEnrollment.new
-- model_class = model.class
-.modal.hide#new-class-group-enrollment-modal wmode="opaque"
-  
-  = form_for [@student, model], :remote => true, :html => {:'data-type' => 'script', :class => 'form-horizontal' } do |f|
-    .modal-header
-      button.close type="button" data-dismiss="modal"
-        'x
-      h3=t 'class_group_enrollments.new'
+= modal_for 'new-class-group-enrollment-modal' do
+  = modal_header t(:'class_group_enrollment.new')
+  = modal_form_for [@student, @class_group_enrollment] do |f|
     .modal-body
-      
-      b= t('class_group_enrollments.current_enrollment')
+      b= t(:'class_group_enrollment.current')
       |:
       .row-fluid
-        .span6.well 
+        .span12.well
           table.table.table-bordered
             tbody
               tr
-                th = t("class_groups.name")
+                th = t(:'class_group.name')
                 td#class-enrollment-name = @student.class_group_enrollments.last.class_group.name if @student.class_groups.any?
               tr
-                th = t("class_group_enrollments.seat_number")
+                th = t(:'class_group_enrollment.seat_number')
                 td#class-enrollment-seat-number = @student.class_group_enrollments.last.seat_number if @student.class_groups.any?
       .validation-error
-      .form-inputs
-        .field
-          = f.label t('class_group_enrollments.class_groups')
-          = f.select :class_group_id, Gaku::ClassGroup.all.collect { |s| ["#{s.name} ", s.id] }, {:prompt => t('students.choose_class group')}
-        br/
-        .field
-          = f.label t('class_group_enrollments.seat_number')
-          = f.text_field :seat_number
-        br/
-        .actions
-        .row-fluid
-          .span12
-            .span6
-              = submit_button t('class_groups.create_class_group_enrollment'), :id => 'submit-course-button'
-            = link_to_cancel :id => "cancel-enroll-student-link"
+      .row-fluid
+        .span12.well
+          .span6
+            = f.select :class_group_id, class_groups, {:prompt => t(:'class_group.choose')}, :label => t(:'class_group.plural')
+          .span6
+            = f.text_field :seat_number, :label => t(:'class_group_enrollment.seat_number')
+
+      .row-fluid
+        = buttons_for @class_group_enrollment, :id => 'class-group-enrollment', :label => t(:'class_group_enrollment.create')
 

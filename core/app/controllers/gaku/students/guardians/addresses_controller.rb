@@ -1,37 +1,31 @@
 module Gaku
   class Students::Guardians::AddressesController < GakuController
-    
+
     inherit_resources
     actions :new, :create, :edit, :update
-
     respond_to :js, :html
 
-    before_filter :load_address, :only => [:destroy, :make_primary]
-    before_filter :load_student, :only => [:new, :create, :edit, :update]
-    before_filter :load_guardian
-    before_filter :load_primary_address, :only => [:update, :destroy]
+    before_filter :address, :only => [:destroy, :make_primary]
+    before_filter :student, :only => [:new, :create, :edit, :update]
+    before_filter :guardian
+    before_filter :primary_address, :only => [:update, :destroy]
+    before_filter :count, :only => [:create,:destroy]
 
     def create
       super do |format|
         if @guardian.addresses << @address
-          load_primary_address        
-          format.js { render 'create' }  
+          primary_address
+          format.js { render }
         end
-      end  
+      end
     end
 
-    def destroy 
+    def destroy
       if @address.destroy
-
-        flash.now[:notice] = t('addresses.destroyed')
         if @address.id == @primary_address_id
           @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
-          respond_to do |format|
-            format.js { render }
-          end
-        else
-          render 'destroy'
         end
+        respond_with(@address)
       end
     end
 
@@ -40,24 +34,28 @@ module Gaku
       @guardian_address.make_primary
       render :nothing => true
     end
-    
+
     private
 
-      def load_address
-        @address = Address.find(params[:id])
-      end
+    def address
+      @address = Address.find(params[:id])
+    end
 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+    def student
+      @student = Student.find(params[:student_id])
+    end
 
-      def load_guardian
-        @guardian = Guardian.find(params[:guardian_id])
-      end
+    def guardian
+      @guardian = Guardian.find(params[:guardian_id])
+    end
 
-      def load_primary_address
-        @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
-      end
+    def primary_address
+      @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
+    end
+
+    def count
+      @count = @guardian.addresses.count
+    end
 
   end
 end

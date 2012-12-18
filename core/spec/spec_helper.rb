@@ -18,7 +18,7 @@ Spork.prefork do
   require 'gaku/core/testing_support/request_helpers'
   require 'gaku/core/testing_support/flash_helpers'
   require 'gaku/core/testing_support/auth_helpers'
-
+  
   require 'gaku/core/url_helpers'
 end
 
@@ -63,12 +63,7 @@ Spork.each_run do
     config.include Gaku::Core::TestingSupport::FlashHelpers, :type => :request
     config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, :type => :controller
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, :type => :request
-  end
-
-  RSpec::Matchers.define :have_valid_factory do |factory_name|
-    match do |model|
-      create(factory_name).new_record?.should be_false
-    end
+    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
   end
 
 end

@@ -2,37 +2,37 @@ module Gaku
   class Syllabuses::ExamsController < GakuController
 
     inherit_resources
-    actions :index, :show, :new, :update, :edit, :destroy
-
-    before_filter :load_syllabus, :only => [:create, :edit]
-    before_filter :grading_methods, :only => [:edit]
-    before_filter :load_exam_syllabus, :only => [:update]
-
-
+    belongs_to :syllabus, :parent_class => Gaku::Syllabus
     respond_to :js, :html
 
+    before_filter :syllabus,      :only => [:create, :new]
+    before_filter :exam_syllabus, :only => :update
+    before_filter :count,         :only => [:create, :destroy]
+
     def create
-   	  exam = Exam.create(params[:exam])
-   	  flash.now[:notice] = t('exams.exam_created')
-  	  respond_to do |format|
-        if @syllabus.exams << exam
-          format.js { render 'create' }  
-        end
-      end  
+      @exam = @syllabus.exams.create(params[:exam])
+      create!
     end
 
+    def new
+      @exam = @syllabus.exams.new
+      @exam.exam_portions.build
+      new!
+    end
+    
     private
 
-    def load_syllabus
+    def syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])
     end
 
-    def grading_methods
-        @grading_methods = GradingMethod.all
+    def exam_syllabus
+      @exam_syllabus = ExamSyllabus.find_by_exam_id_and_syllabus_id(params[:id], params[:syllabus_id])
     end
 
-    def load_exam_syllabus
-      @exam_syllabus = ExamSyllabus.where(:exam_id => params[:id], :syllabus_id => params[:syllabus_id]).first
+    def count
+      @syllabus = Syllabus.find(params[:syllabus_id])
+      @count = @syllabus.exams.count
     end
 
   end

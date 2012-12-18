@@ -1,68 +1,54 @@
 module Gaku
   class Students::AddressesController < GakuController
-
     inherit_resources
-    actions :index, :show, :new, :update, :edit
-
+    belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
-    before_filter :load_address, :only => :destroy
-    before_filter :load_student, :only => [:new, :create, :edit, :update, :destroy]
+    before_filter :student,   :only => [:index, :destroy, :make_primary]
+    before_filter :address,   :only => [:destroy, :make_primary]
+    before_filter :count,     :only => [:create, :destroy]
 
     def create
-      super do |format|
-        if @address.save
-          if @student.addresses << @address
-            format.js { render 'create' }  
-          end
-        else
-          format.js  { render 'validation_errors' }
-        end
-      end  
+      @address = @student.addresses.create(params[:address])
+      create!
     end
-    
+
     def update
-      super do |format|
-        @primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
-        if @address.save
-          format.js { render 'update' }
-        else
-          format.js { render 'validation_errors' }
-        end  
-      end  
+      #@primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
+      @primary_address = StudentAddress.find_by_student_id_and_is_primary(params[:student_id], true)
+      update!
     end
 
     def destroy
       @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
       if @address.destroy
-        flash.now[:notice] = t('addresses.destroyed')
         if @address.id == @primary_address_id
           @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
-          respond_to do |format|
-            format.js { render }
-          end
-        else
-          render 'destroy'
         end
+        respond_with(@address)
       end
     end
 
     def make_primary
-      @student = Student.find(params[:student_id])
-      @address = Address.find(params[:id])
-      @student_address = StudentAddress.find_by_student_id_and_address_id(@student.id,@address.id)
-      @student_address.make_primary
+      student_address = StudentAddress.find_by_student_id_and_address_id(@student.id, @address.id)
+      student_address.make_primary
       render :nothing => true
     end
 
     private
-      def load_address
-        @address = Address.find(params[:id])
-      end
 
-      def load_student
-        @student = Student.find(params[:student_id])
-      end
+    def address
+      @address = Address.find(params[:id])
+    end
+
+    def student
+      @student = Student.find(params[:student_id])
+    end
+
+    def count
+      student
+      @count = @student.addresses.count
+    end
 
   end
 end

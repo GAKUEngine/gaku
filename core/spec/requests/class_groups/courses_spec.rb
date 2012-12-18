@@ -8,11 +8,11 @@ describe 'ClassGroup Courses' do
   let(:course) { create(:course, :code => 'Math2012') }
 
   before :all do
-    set_resource "class-group-course" 
+    set_resource "class-group-course"
   end
-   
-  context 'new', :js => true do 
-    before do 
+
+  context 'new', :js => true do
+    before do
       course
       visit gaku.class_group_path(class_group)
       click tab_link
@@ -26,19 +26,16 @@ describe 'ClassGroup Courses' do
         click submit
         wait_until_invisible form
       end.to change(Gaku::ClassGroupCourseEnrollment, :count).by 1
-    
+
       within(table) { page.should have_content "#{course.code}" }
       within(count_div) { page.should have_content "Courses list(1)" }
       within(tab_link) { page.should have_content "Courses(1)" }
       flash_created?
     end
 
-    it "errors without required fields" do
-      click submit
-      wait_until { page.has_content? 'Course can\'t be blank' }
-    end
+    it { has_validations? }
 
-    pending 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -53,15 +50,15 @@ describe 'ClassGroup Courses' do
       within(tab_link) { page.should have_content "1" }
     end
 
-    it "doesn't add a course 2 times" do  
+    it "doesn't add a course 2 times" do
       click new_link
       wait_until_visible form
       select "#{course.code}", :from => 'class_group_course_enrollment_course_id'
       click submit
-      wait_until { page.should have_content "Course Already enrolled to the class group!" }   
+      wait_until { page.should have_content "Already enrolled to the class group!" }
     end
 
-    it 'deletes' do 
+    it 'deletes' do
       within(table) { page.should have_content "#{course.code}" }
       within(count_div) { page.should have_content "Courses list(1)" }
       within(tab_link) { page.should have_content "Courses(1)" }
@@ -69,7 +66,7 @@ describe 'ClassGroup Courses' do
       expect do
         ensure_delete_is_working
       end.to change(Gaku::ClassGroupCourseEnrollment, :count).by -1
-  
+
       within(table) { page.should_not have_content "#{course.code}" }
       within(count_div) { page.should_not have_content "Courses list(1)" }
       within(tab_link) { page.should_not have_content "Courses(1)" }

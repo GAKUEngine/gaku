@@ -1,3 +1,4 @@
+$ ->
   $('.js-autocomplete').each (i, element) ->
     element_id = '#' + $(element).attr('id')
     $(element_id).autocomplete

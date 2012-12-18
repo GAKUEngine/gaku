@@ -1,2 +1,3 @@
-$('#modal-dialogs').html('<%= render_js_partial("admission_phase_modal", {:admission_phase => @admission_phase}) %>');
+$('#modal-dialogs').html('<%= render_js_partial("modal", {:admission_phase => @admission_phase}) %>');
 $('#edit-admission-method-admission-phase-modal').modal('show');
+$('.remote-form').enableValidations();

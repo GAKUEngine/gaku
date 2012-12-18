@@ -1,422 +1,584 @@
 en:
-  languages:
-    en: "English"
-    ja: "日本語[Japanese]"
-  admin:
-    admin: "Admin"
-    administration: "Administration"
-    administrator: "Administrator"
-    school_details: 'School Details'
-    schools: "Schools"
-    disposals: 'Disposals'
-    types:
-      types: 'Types & Methods'
-      contact: "Contact Types"
-      enrollment_status: "Enrollment Status Types"
-      commute_methods: "Commute Methods"
-    admission_methods: "Admission Methods"
-    admission_periods: "Admission Periods"
-    presets:
-      presets: "Presets"
-      student: "Student Preset"
-      locale: "Locale Preset"
-      save: 'Save'
-      updated: 'Presets Updated'
-      grading:
-        grading: 'Grading Preset'
-        grading_method: 'Grading Method'
-        grading_scheme: 'Grading Scheme'
-      students:
-        gender: 'Gender'
-        country: 'Country'
-        state: 'State'
-        city: 'City'
-  fields:
-    name: "name"
-    surname: "surname"
-    name_reading: "name_reading"
-    surname_reading: "surname_reading"
-    gender: "gender"
-    phone: "phone"
-    email: "email"
-    birth_date: "birth_date"
-    admitted: "admitted"
-  class_groups:
-    list: "Class Listing"
-  hello: "Hello world"
-  comname: "GAKU-Engine"
-  Show: "Show"
-  Edit: "Edit"
-  Destroy: "Destroy"
-  Delete: "Delete"
-  Back: "Back"
-  cancel: "Cancel"
-  add: 'Add'
-  default: 'Default'
-  required:
-  manage: "Manage"
-  confirm_delete: "Really Delete this record?"
-  panel: "Panel"
-  name: "Name"
-  surname: "Surname"
-  given_name: "Given Name"
-  phonetic_reading: "Phonetic Reading"
-  address: "Address"
-  none: "None"
-  date_placeholder: "YYYY-MM-DD"
-  search: "Search"
-  hide: "Hide"
-  description: 'Description'
-  confirm: 'Are you sure?'
-  history: 'History'
-  revert: 'Revert'
-  attachments:
-    assets: 'Assets'
-    file_name: 'File name'
-    file_type: 'File type'
-    file_size: 'File size'
-    new_attachment: "New Attachment"
-    create_attachment: 'Create Attachment'
-    attachment_recovered: 'Attachment recovered'
-    asset_type: 'Asset type'
-  addresses:
-    created: 'Address was successfully created.'
-    destroyed: 'Address was successfully destroyed.'
-    plural: "Addresses"
-    singular: "Address"
-    new: "New Address"
-    add: "Add Address"
-    zipcode: "ZIP Code"
-    search_address:
-    country: "Country"
-    prefecture: "State/Province/Prefecture"
-    city: "City"
-    address1: "Address 1"
-    address2: "Address 2"
-    primary: "Primary address"
-    state: "State"
-    past: "Make past?"
-    count: "Addresses count"
-    list: "Addresses list"
-    choose_country: "Choose Country"
-    edit: "Edit address"
-    save: "Save address"
-  phone: "Phone Number"
-  email: "Mail Address"
-  admitted: "Enrollment Date"
-  graduated: "Graduation Date"
-  birth: "Birth Date"
-  teacher: "Instructor"
-  student: "Student"
-  students:
-    show: "Show Students"
-    new: "Register New Student"
-    edit: "Edit"
-    list: "Students list"
-    surname: "Surname"
-    name: "Name"
-    address: "Address"
-    phone: "Phone #"
-    email: "E-Mail"
-    birth: "Birth Date"
-    birth_between: "Birth date between"
-    birth_and: "and"
-    admitted: "Admitted"
-    graduated: "Graduated"
-    add_address: "Add Address"
-    picture: "Picture"
-    choose_gender: 'Choose Gender'
-    class_group_enrollment: "Class enrollment"
-    add_contact: "Add Contact"
-    create_contact: "Create Contact"
-    contact_type: 'Contact Type'
-    birth_between: "Birth date between"
-    birth_and: "and"
-    chosen_students: "Chosen students"
-    commute_method: 'Commute Method'
-    updated: 'Student was successfully updated.'
-  add_student: "Add Student"
-  enroll_to_class: "Enroll to class"
-  schedule: "Schedule"
-  num_enrolled: "Number Enrolled"
-  combined_code: "Combined Code"
-  syllabus: "Syllabus"
-  syllabuses:
-    plural: "Syllabuses"
-    show: "Syllabus"
-    new: "New Syllabus"
-    edit: "Edit Syllabus"
-    list: "List Syllabuses"
-    code: "Syllabus Code"
-    name: "Course Name"
-    name_sample: "[EX: Science A]"
-    description: "Course Description"
-    credits: "Credits"
-    choose_exam: 'Choose Exam'
-    add_exam: 'Add Exam'
-    add_existing_exam: 'Add Existing Exam'
-    save: 'Save Syllabus'
-  course_management: 'Course Management'
-  course: "Course"
-  courses:
-    plural: "Courses"
-    new: "New Course"
-    edit: "Edit Course"
-    list: "Courses list"
-    code: "Course Code"
-    code_sample: "[EX: FALL2020]"
-    save: "Save course"
-    add: "Add course"
-    choose_course: "Choose course"
-    enroll_student: "Enroll Student"
-    count: "Courses count"
-    enroll_class_group: 'Enroll Class Group'
-    add_class_group: 'Add Class Group'
-    choose_class_group: 'Choose Class Group'
-    course_created: 'Course was successfully created'
-    course_destroyed: 'Course was successfully destroyed.'
-  course_groups:
-    course_groups: 'Course Groups'
-    edit_course_group: 'Edit Course Group'
-    new: 'New Course Group'
-    add_course: 'Add Course'
-    course_group_created: 'Course Group Created'
-    course_added: 'Course added to course group'
-    list: 'Course Groups List'
-    show: 'Course Group'
-    course_group_recover: 'Course Group Recovered'
-    course_group_delete: 'Course group was successfully destroyed.'
-  num_courses: "Number of courses"
-  add_course: "Add course"
-  course_enrollments:
-    list: "Enrollments"
-    add: "Enroll to course"
-    create: "Create enrollment"
-    enrollment: "Enrollment"
-    assignment: "Assignment"
-  class_group_management: "Class Management"
-  class_groups:
-    plural: "Class Groups"
-    list: "Class Groups list"
-    new: "New Class"
-    name: "Class Name"
-    grade: "Grade"
-    homeroom: "Home Room"
-    choose_student: 'Choose Student'
-    create_class_group_enrollment: 'Create Class Enrollment'
-    none: "None"
-    save: "Save Class"
-  class_group_enrollments:
-    list: "Class Roster"
-    new: "New class enrollment"
-    seat_number: "Seat number"
-    class_groups: "Class groups"
-    current_enrollment: "Current enrollment"
-    enrollments_count: "Enrollments count"
-    student_enrolled: "Student enrolled to class group"
-  commute_methods:
-    created: 'Commute method was successfully created'
-    updated: 'Commute method was updated'
-  commute_method_types:
-    plural: "Commute Method Types"
-    singular: "Commute Method Type"
-    save: 'Save Commute Method Type'
-    new: 'New Commute Method Type'
-    edit: 'Edit Commute Method Type'
-    list: 'Commute Method Types list'
-    add: 'Add Commute Method Type'
-  grades:
-    grading: "Grading"
-    weighting: "Weight"
-    weighting_portion: "Weighting"
-    average_points: "Average Points"
-    average_score: "Average Score"
-    total_points: "Total Score"
-    max_points: "Maximum Score"
-    max: "Max"
-    points: "Points"
-    how_grade: "How to grade"
-    deviation: "Deviation"
-    percent: "Percent"
-    rank: "Rank/Grade"
-    total: "Total"
+  id: "Id"
+  add: Add
+  address:
+    add: Add Address
+    address1: Address 1
+    address2: Address 2
+    choose_country: Choose Country
+    city: City
+    count: Addresses count
+    country: Country
+    edit: Edit address
+    list: Addresses list
+    new: New Address
+    past: Make past?
+    plural: Addresses
+    prefecture: State/Province/Prefecture
+    primary: Primary Address
+    save: Save address
+    search: Search Address
+    singular: Address
+    state: State
+    title: Title
+    zipcode: ZIP Code
+  admitted: Admitted On
+  alert:
+    already_added: ! '%{resource} are already added!'
+    empty: ! '%{resource} is empty!'
+    not_selected: No %{resource} selected!
+  and: ! ' and '
+  are_you_sure: Are you sure?
+  assignment:
+    add: Add Assignment
+    count: Assignments Count
+    description: Description
+    list: Assignments
+    max_score: Maximum score
+    name: Assignment name
+    new: New Assignment
+    plural: Assignments
+    results: Assignment Results
+    singular: Assignment
+    view: View Assignments
   assignments:
-    plural: "Assignments"
-    new: "New Assignment"
-    add: "Add Assignment"
-    list: "Assignments"
-    results: "Assignment Results"
-    view: "View Assignments"
-    count: "Assignments Count"
-    name: "Assignment name"
-    description: "Description"
-    max_score: "Maximum score"
-  exams:
-    exam: 'Exam'
-    plural: "Exams"
-    new: "New Exam"
-    new_exam: "New Exam Contents"
-    add: "Add Exam"
-    list: "Exams List"
-    view: "View Exams"
-    select: "Select Exam"
-    choose_schedule: "Choose Schedule"
-    add_portion: 'Add Portion'
-    count: "Exams Count"
-    name: "Exam name"
-    description: "Description"
-    adjustments: "Adjustments"
-    weight: "Weight"
-    use_weighting: "Use Weighting"
-    show: "Show Exam"
-    edit: "Edit Exam"
-    exam_created: 'Exam was successfully created'
-    destroyed: 'Exam was successfully destroyed.'
-    save: 'Save Exam'
-  config:
-    label: "Config"
-    close: "Close"
-    save: "Save changes"
-    help:
-      language: "Choose your Language"
-  language: "Language"
-  and: " and "
-  submit: "Submit"
-  gender: "Sex"
-  genders:
-    male: "Male"
-    female: "Female"
-    unknown: "Unknown"
-  profile: "Profile"
-  profiles:
-    new: "New Profile"
-    save: "Save profile"
-  guardian: "Guardian"
-  guardians:
-    new: "New Guardian"
-    guardians: "Guardians"
-    list: "Guardians list"
-    relationship: "Relationship"
-    add: "Add Guardian"
-    save: "Save Guardian"
-    edit: "Edit guardian"
-
-  contact_types:
-    singular: "Contact Type"
-    plural: "Contact Types"
-    new: "New Contact Type"
-    add: "Add Contact Type"
-    save: "Save Contact Type"
-    list: "Contact Types list"
-
-  contacts:
-    new: "New Contact"
-    save: "Save Contact"
-    data: "Data"
-    details: "Details"
-    primary: "Primary"
-    emergency: "Emergency"
-    actions: 'Actions'
-    list: "Contacts list"
-    contacts: "Contacts"
-    contact_created: 'Contact successfully created.'
-  schools:
-    singular: "School"
-    plural: "Schools"
-    add: "Add School"
-    edit: "Edit School"
-    list: "Schools list"
-    new: "New School"
-    save: "Save School"
-    name: "Name"
-    slogan: "Slogan"
-    description: "Description"
-    founded: "Founded"
-    principal: "Principal"
-    vice_principal: "Vice Principal"
-    grades: "Grades"
-    primary: "Primary"
-    campuses: "Campuses"
-    code: 'Code'
-    edit_master: 'Edit Master School'
-    master_school: 'Master School'
-
-  campuses:
-    singular: "Campus"
-    plural: "Campuses"
-    add: "Add Campus"
-    edit: "Edit Campus"
-    list: "Campuses list"
-    new: "New Campus"
-    save: "Save Campus"
-    name: "Name"
-    address: "Campus Address"
-    contacs: "Campus Contacts"
-    primary: "Primary"
-
-  enrollment_status_types:
-    singular: "Enrollment Status Type"
-    plural: "Enrollment Status Types"
-    new: "New Enrollment Status Type"
-    add: "Add Enrollment Status Type"
-    save: "Save Enrollment Status Type"
-    list: "Enrollment Status Types list"
-    active: "Active"
-
-  note: "Notes"
-  notes:
-    notes: "Notes"
-    list: "Notes list"
-    title: "Note Title"
-    content: "Content"
-    new: "New Note"
-    add: "Add Note"
-    delete: "Delete Note"
-    save: "Save note"
-    edit: "Edit note"
-    created: 'Note was successfully created.'
-    destroyed: 'Note was successfully destroyed.'
+    description: Assignment Description
+  attachment:
+    singular: Attachment
+    plural: Attachments
+    asset_type: Asset type
+    assets: Assets
+    create: Create Attachment
+    description: Description
+    file_name: File name
+    file_size: File size
+    file_type: File type
+    name: Name
+    new: New Attachment
+    list: Attachment list
+    asset_upload: Asset was uploaded successfully!
+    asset_error: Error when upload asset
+  attendance_type:
+    add: Add Attendance Type
+    edit: Edin Attendance Type
+    list: Attendance Types list
+    name: Name
+    new: New Attendance Type
+    plural: Attendance Types
+    save: Save Attendance Type
+    singular: Attendance Type
+    color_code: Color Code
+    credit_rate: Credit Rate
+    counted_absent: Counted Absent
+    disable_credit: Disable Credit
+    auto_credit: Auto Credit
+  back: Back
+  birth: Birth Date
+  birth_and: and
+  birth_between: Birth date between
+  birth_date: Birth Date
+  campus:
+    add: Add Campus
+    address: Campus Address
+    contacs: Campus Contacts
+    edit: Edit Campus
+    list: Campuses list
+    name: Name
+    new: New Campus
+    plural: Campuses
+    primary: Primary
+    save: Save Campus
+    singular: Campus
+  cancel: Cancel
   class: Class
-  semesters:
-    plural: "Semesters"
-    list: "Semesters list"
-    starting: "Starting"
-    ending:   "Ending"
-    save: "Save semester"
-    ending_after_starting: 'should be after Starting'
-    uniqueness: "have this semester added"
-  num_semesters: "Number of semesters"
-  add_semester: "Add a semester"
-  notice:
-    no_assignments: "No assignments, assign one first"
-    no_exams: "No exams, assign one first"
-  select: "Select"
-  pictures:
-    change: "Change picture"
-    upload: "Upload"
-  exam_portions:
-    list: "Exam portions list"
-    count: "Exam portions count"
-    name: "Portion name"
-    max_score: "Maximum score"
-    weight: "Weight"
-    problem_count: "Problem count"
-    description: "Description"
-    adjustments: "Adjustments"
-    execution_date: "Execution date"
-    is_master: "Master"
-    master: "Master exam portion"
-    save: "Save exam portion"
-    show: "Show Exam Portion"
-    attached_file_count: 'Attached file count'
-  options: "Options"
-  notice:
-    picture_uploaded: "Picture was successfully uploaded"
-  import_format: "Import Format"
+  class_group:
+    add: Add Class Group
+    choose: Choose Class Group
+    edit: Edit Class Group
+    enroll: Enroll Class Group
+    grade: Grade
+    homeroom: Home Room
+    list: Class Groups list
+    name: Class Name
+    new: New Class Group
+    none: None
+    plural: Class Groups
+    save: Save Class Group
+    show: Show
+    singular: Class Group
+  class_group_enrollment:
+    count: Enrollments count
+    create: Create Class Enrollment
+    current: Current enrollment
+    list: Class Roster
+    new: New class enrollment
+    seat_number: Seat number
+  class_group_course_enrollment:
+    save: Save Course to Class Group
+  class_group_management: Class Management
+  commute_method:
+    save: Save Commute Method
+    singular: Commute Method
+    plural: Commute Methods
+  commute_method_type:
+    add: Add Commute Method Type
+    edit: Edit Commute Method Type
+    list: Commute Method Types list
+    name: Name
+    new: New Commute Method Type
+    plural: Commute Method Types
+    save: Save Commute Method Type
+    singular: Commute Method Type
+  comname: GAKU Engine
+  config:
+    close: Close
+    help:
+      language: Choose your Language
+    label: Label
+    save: Save
+  confirm: Are you sure?
+  confirm_delete: Really Delete this record?
+  contact:
+    add: Add Contact
+    contact_type: Contact Type
+    create: Create Contact
+    data: Data
+    details: Details
+    edit: Edit Contact
+    emergency: Emergency
+    list: Contacts list
+    new: New Contact
+    plural: Contacts
+    primary: Primary
+    save: Save Contact
+    singular: Contact
+  contact_type:
+    add: Add Contact Type
+    choose: Choose Contact Type
+    edit: Edit Contact Type
+    list: Contact Types list
+    name: Name
+    new: New Contact Type
+    plural: Contact Types
+    save: Save Contact Type
+    singular: Contact Type
+  course:
+    add: Add Course
+    choose: Choose Course
+    code: Course Code
+    code_sample: ! '[EX: FALL2020]'
+    combined_code: Combined Code
+    count: Courses count
+    edit: Edit Course
+    list: Courses list
+    management: Course Management
+    name: Course Name
+    new: New Course
+    options: Options
+    plural: Courses
+    save: Save Course
+    show: Show Course
+    singular: Course
+  course_group_enrollment:
+    save: Save to Course Group
+  course_enrollment:
+    add: Enroll to course
+    create: Create enrollment
+    list: Enrollments
+    plural: Course Enrollment
+    singular: Course Enrollment
+  course_group:
+    course_group_recover: Course Group Recovered
+    edit: Edit Course Group
+    list: Course Groups List
+    name: Name
+    new: New Course Group
+    plural: Course Groups
+    save: Save Course Group
+    show: Course Group
+    singular: Course Group
+  csv:
+    export: CSV Export
+    fields:
+      email: email
+      gender: gender
+      name: name
+      name_reading: name_reading
+      phone: phone
+      surname: surname
+      surname_reading: surname_reading
+      birth_date: birth_date
+      admitted: admitted
+    import: CSV Import
+  date_placeholder: YYYY-MM-DD
+  default: Default
+  delete: Delete
+  description: Description
+  destroy: Destroy
+  devise:
+    confirmations:
+      confirmed: Your account was successfully confirmed. You are now signed in.
+      send_instructions: You will receive an email with instructions about how to confirm your account in a few minutes.
+      send_paranoid_instructions: If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.
+    email: Email
+    failure:
+      already_authenticated: You are already signed in.
+      inactive: Your account was not activated yet.
+      invalid: Invalid email or password.
+      invalid_token: Invalid authentication token.
+      locked: Your account is locked.
+      timeout: Your session expired, please sign in again to continue.
+      unauthenticated: You need to sign in or sign up before continuing.
+      unconfirmed: You have to confirm your account before continuing.
+    mailer:
+      confirmation_instructions:
+        subject: Confirmation instructions
+      reset_password_instructions:
+        subject: Reset password instructions
+      unlock_instructions:
+        subject: Unlock Instructions
+    omniauth_callbacks:
+      failure: Could not authorize you from %{kind} because "%{reason}".
+      success: Successfully authorized from %{kind} account.
+    password: Password
+    password_confirmation: Password Confirmation
+    passwords:
+      forgot: Forgot your password?
+      no_token:
+      send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
+      send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
+      updated: Your password was changed successfully. You are now signed in.
+      updated_not_active: Your password was changed successfully.
+    registrations:
+      destroyed: Bye! Your account was successfully cancelled. We hope to see you again soon.
+      inactive_signed_up: You have signed up successfully. However, we could not sign you in because your account is %{reason}.
+      reasons:
+        inactive: inactive
+        locked: locked
+        unconfirmed: unconfirmed
+      sign_up: Sign Up
+      signed_up: Welcome! You have signed up successfully.
+      signed_up_but_inactive:
+      signed_up_but_locked:
+      signed_up_but_unconfirmed:
+      update_needs_confirmation:
+      updated: You updated your account successfully.
+    sessions:
+      remember_me: Remember me
+      sign_in: Sign in
+      sign_out: Sign Out
+      signed_in: Signed in successfully.
+      signed_out: Signed out successfully.
+    unlocks:
+      send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
+      send_paranoid_instructions: If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.
+      unlocked: Your account was successfully unlocked. You are now signed in.
+  edit: Edit
+  email: Mail Address
+  enroll_to_class: Enroll to class
+  enrollment:
+    plural: Enrollments
+    singular: Enrollment
+  enrollment_status_type:
+    active: Active
+    add: Add Enrollment Status Type
+    edit: Edin Enrollment Status Type
+    list: Enrollment Status Types list
+    name: Name
+    new: New Enrollment Status Type
+    plural: Enrollment Status Types
+    save: Save Enrollment Status Type
+    singular: Enrollment Status Type
+  errors:
+    not_uploaded: ! 'Error when upload %{resource}!'
+
+    messages:
+      already_confirmed: was already confirmed, please try signing in
+      expired: has expired, please request a new one
+      not_found: not found
+      not_locked: was not locked
+      not_saved:
+        one: ! '1 error prohibited this %{resource} from being saved:'
+        other: ! '%{count} errors prohibited this %{resource} from being saved:'
+  exam:
+    add: Add Exam
+    add_existing: Add Existing Exam
+    add_portion: Add Portion
+    adjustments: Adjustments
+    choose: Choose Exam
+    choose_schedule: Choose Schedule
+    count: Exams Count
+    description: Description
+    edit: Edit Exam
+    grading_method: Grading Method
+    list: Exams List
+    name: Exam name
+    new: New Exam
+    new_exam: New Exam Contents
+    options: Options
+    plural: Exams
+    save: Save Exam
+    select: Select Exam
+    show: Show Exam
+    singular: Exam
+    total_weight: Total Weight
+    use_weighting: Use Weighting
+    view: View Exams
+    weight: Weight
+  exam_portion:
+    plural: Exam Portions
+    singular: Exam Portion
+    adjustments: Adjustments
+    attached_file_count: Attached file count
+    count: Exam portions count
+    description: Description
+    edit: Edit Exam Portion
+    execution_date: Execution date
+    is_master: Master
+    list: Exam portions list
+    master: Master exam portion
+    max_score: Maximum score
+    name: Portion name
+    problem_count: Problem count
+    save: Save exam portion
+    show: Show Exam Portion
+    use_weighting: Use Weighting
+    weight: Weight
+  flash:
+    actions:
+      create:
+        notice: ! '%{resource_name} was successfully created!'
+      destroy:
+        alert: ! '%{resource_name} could not be destroyed!'
+        notice: ! '%{resource_name} was successfully destroyed!'
+      update:
+        notice: ! '%{resource_name} was successfully updated!'
+  gender:
+    choose: Choose Gender
+    female: Female
+    label: Sex
+    male: Male
+    unknown: Unknown
+  given_name: Given Name
+  grade:
+    all_exams: All Exams
+    average_points: Average Points
+    average_score: Average Score
+    deviation: Deviation
+    grading: Grading
+    how_grade: Grading Method
+    max: Max
+    max_points: Maximum Score
+    percent: Percent
+    points: Points
+    rank: Rank/Grade
+    total: Total
+    total_points: Total Score
+    weighting: Weight
+    weighting_portion: Weighting
+  graduated: Graduated On
+  guardian:
+    add: Add Guardian
+    edit: Edit guardian
+    guardians: Guardians
+    list: Guardians list
+    name: Name
+    new: New Guardian
+    plural: Guardians
+    relationship: Relationship
+    save: Save Guardian
+    singular: Guardian
+  hello: Hello world
   helpers:
     links:
-      cancel: "Cancel"
-
-  csv:
-    import: "CSV Import"
-    export: "CSV Export"
+      cancel: Cancel
+  hide: Hide
+  history: History
+  import_format: Import Format
+  language: Language
+  languages:
+    en: English
+    ja: 日本語[Japanese]
+  manage: Manage
+  menu:
+    admin:
+      admin: Admin
+      administration: Administration
+      administrator: Administrator
+      disposals:
+        attachment: Attachment Disposals
+        course_group: Course Group Disposals
+        disposals: Disposals
+        exam: Exam Disposals
+      preset:
+        grading:
+          grading_method: Grading Method
+          grading_scheme: Grading Scheme
+        items:
+          grading: Grading Preset
+          locale: Locale Preset
+          student: Student Preset
+        plural: Presets
+        save: Save
+        singular: Preset
+        student:
+          city: City
+          country: Country
+          gender: Gender
+          state: State
+      school_details: School Details
+      schools: Schools
+      system:
+        backup: Backup
+        system_tools: System Tools
+      types:
+        attendance_types: Attendance Types
+        commute_methods: Commute Methods
+        contact: Contact Types
+        enrollment_status: Enrollment Status Types
+        types: Types & Methods
+    class_group:
+      management: Class Management
+      plural: Class Groups
+    course:
+      management: Course Management
+      plural: Courses
+    course_group:
+      plural: Course Groups
+    exam:
+      management: Exam Management
+      plural: Exams
+    student:
+      plural: Students
+    syllabus:
+      plural: Syllabuses
+  name: Name
+  name_reading: Name Reading
+  none: None
+  note:
+    add: Add Note
+    content: Content
+    delete: Delete Note
+    edit: Edit note
+    list: Notes list
+    new: New Note
+    plural: Notes
+    save: Save note
+    singular: Note
+    title: Note Title
+  notice:
+    added: ! '%{resource} has been successfully added!'
+    created: ! '%{resource} has been successfully created!'
+    destroyed: ! '%{resource} has been successfully destroyed!'
+    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
+    no_resource_assign_first: No %{resource}, assign one first
+    recovered: ! '%{resource} has been successfully recovered'
+    removed: ! '%{resource} has been successfully removed!'
+    updated: ! '%{resource} has been successfully updated!'
+    uploaded: ! '%{resource} has been successfully uploaded!'
+  num_enrolled: Number Enrolled
+  options: Options
+  panel: Panel
+  period: Period
+  phone: Phone Number
+  phonetic_reading: Phonetic Reading
+  picture: Picture
+  pictures:
+    change: Change picture
+    upload: Upload
+  preset:
+    singular: Preset
+    plural: Presets
+    save: Save Presets
+    student:
+      gender: Gender
+      country: Country
+      state: State
+      city: City
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
+  profile: Profile
+  profiles:
+    new: New Profile
+    save: Save profile
+  required: required
+  revert: Revert
+  schedule: Schedule
+  scholarship_status: Scholarship Status
+  school:
+    add: Add School
+    campuses: Campuses
+    code: Code
+    description: Description
+    edit: Edit School
+    edit_master: Edit Master School
+    founded: Founded
+    grades: Grades
+    list: Schools list
+    master: Master School
+    name: Name
+    new: New School
+    plural: Schools
+    primary: Primary
+    principal: Principal
+    save: Save School
+    singular: School
+    slogan: Slogan
+    vice_principal: Vice Principal
+  search: Search
+  select: Select
+  semester:
+    add: Add Semester
+    edit: Edit Semester
+    ending: Ending
+    ending_after_starting: should be after Starting
+    list: Semesters list
+    number: Number of Semesters
+    plural: Semesters
+    save: Save semester
+    starting: Starting
+    uniqueness: have this semester added
+  show: Show
+  student:
+    add: Add Student
+    birth_and: and
+    birth_between: Birth date between
+    chosen_students: Chosen students
+    class_group_enrollment: Class enrollment
+    commute_method: Commute Method
+    create: Create Student
+    save: Save Student
+    edit: Edit
+    enroll: Enroll Student
+    export: Export Students
+    import: Import Students
+    list: Students list
+    name: Name
+    new: Register New Student
+    plural: Students
+    registration:
+      csv: Registration CSV
+      sheet: Registration Sheet
+    show: Show Students
+    singular: Student
+  submit: Submit
+  surname: Surname
+  surname_reading: Surname Reading
+  syllabus:
+    code: Syllabus Code
+    credits: Credits
+    description: Course Description
+    edit: Edit Syllabus
+    list: List Syllabuses
+    name: Course Name
+    name_sample: ! '[EX: Science A]'
+    new: New Syllabus
+    plural: Syllabuses
+    save: Save Syllabus
+    show: Show Syllabus
+    singular: Syllabus
+  teacher: Instructor
+  title: Title
+  user:
+    info: User info

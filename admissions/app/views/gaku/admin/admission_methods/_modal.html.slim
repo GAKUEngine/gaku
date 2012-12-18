@@ -1,0 +1,6 @@
+= modal_for 'edit-admission-method-modal' do
+  = modal_header t(:'admission_methods.edit')
+  = modal_form_for [:admin, @admission_method] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @admission_method, :nested_id => 'admin-admission-method',  :label => t(:'admission_methods.save')

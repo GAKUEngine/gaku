@@ -1,6 +1,11 @@
 # encoding: utf-8
 
-names = [ "Biology Exam", "Math Exam", "Literature Exam"]
+names = [
+  "Summer Program Entry",
+  "Regular Program Entry",
+  "International Program Exams",
+  "National Information Engineer Certification"
+]
 
 names.each do |name|
   Gaku::Exam.create(:name => name)

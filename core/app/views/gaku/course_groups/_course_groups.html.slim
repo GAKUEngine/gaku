@@ -1,8 +1,7 @@
-/ user for index ajax sorting
-table#course-groups-index.index.table.table-striped.table-bordered.table-condensed
+= table_for 'course-groups-index' do
 	thead
 	  tr
-	    th.btn-inverse = sortable 'name',  t('name')
-	    th.btn-info style="width:94px" = t('manage')
+	    = th(sortable 'name',  t(:'course_group.name'))
+	    = th_actions 3
 	tbody
-	  =render :partial => 'course_group', :collection => @course_groups, :as => :course_group
+	  = render :partial => 'course_group', :collection => @course_groups, :as => :course_group

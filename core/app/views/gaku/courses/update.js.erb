@@ -6,5 +6,5 @@ showNotice("<%= render_flash %>");
   //update from index page
   $(".course-<%= @course.id %> .syllabus").html( "[<%= @course.syllabus.code + "]:" +  @course.syllabus.name + "-" + @course.code %>");
   //update from show page
-  $(".course-table tbody tr").html('<%= render_js_partial("gaku/shared/fields/course_show_fields", {:course => @course}) %>');
+  $("#course-table tbody tr").html('<%= render_js_partial("gaku/shared/fields/course_show_fields", {:course => @course}) %>');
 <% end %>

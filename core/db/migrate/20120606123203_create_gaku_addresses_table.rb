@@ -7,10 +7,11 @@ class CreateGakuAddressesTable < ActiveRecord::Migration
 #      t.string   :encrypted_zipcode, :encrypted_state_name, :encrypted_title
       t.string   :state
       t.boolean :past, :default => false
-      
+
       t.references :country
       t.references :state
       t.references :faculty
+      t.references :campus
 
       t.timestamps
     end

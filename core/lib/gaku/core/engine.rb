@@ -5,7 +5,7 @@ module Gaku
       engine_name 'gaku'
 
       config.autoload_paths += %W(#{config.root}/lib)
-      
+
       config.to_prepare do
         GakuController.helper(GakuHelper)
       end
@@ -33,6 +33,13 @@ module Gaku
       #  app.config.gaku = Gaku::Core::Environment.new
       #  Gaku::Config = app.config.gaku.preferences #legacy access
       #end
+
+      # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
+      initializer "gaku.assets.precompile", :group => :all do |app|
+        app.config.assets.precompile += %w[
+          gaku/all.*
+        ]
+      end
 
       # filter sensitive information during logging
       initializer "gaku.params.filter" do |app|

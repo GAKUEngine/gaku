@@ -3,6 +3,13 @@ module Gaku
 
     respond_to :js
 
+    def new
+      @course = Course.find(params[:course_id])  
+      respond_to do |format|
+        format.js { render 'gaku/courses/enrollments/class_groups/new' }
+      end
+    end
+
     def enroll_student
       @course_enrollment = CourseEnrollment.new(params[:course_enrollment])
       @course = Course.find(params[:course_enrollment][:course_id])
@@ -25,11 +32,11 @@ module Gaku
       if !params[:course][:class_group_id].blank?
         @class_group = ClassGroup.find(params[:course][:class_group_id])
         if @class_group.students.empty?
-          show_flash_error_for_enroll(@course, 'Selected Class Group is empty') and return
+          flash_error(@course, t('alert.empty', :resource => t('class_group.singular'))) and return
         else
           @not_added_students = @class_group.students - @course.students
-          if @not_added_students.empty? 
-            show_flash_error_for_enroll(@course, 'All students are already added to the course') and return 
+          if @not_added_students.empty?
+            flash_error(@course, t('alert.already_added', :resource => t('student.plural'))) and return
           end
         end
         @course.enroll_class_group(@class_group)
@@ -37,14 +44,15 @@ module Gaku
           format.js { render 'gaku/courses/enrollments/class_groups/enroll' }
         end
       else
-        show_flash_error_for_enroll(@course,'No Class Group selected')
+        flash_error(@course,t('alert.not_selected', :resource => t('class_group.singular')))
       end
     end
 
+    private
 
-    def show_flash_error_for_enroll(respond_with_var,message)
+    def flash_error(respond_with_var,message)
       respond_with(respond_with_var) do |format|
-        @course.errors[:base]<< message
+        @course.errors[:base] << message
         format.html { render :nothing => true }
         format.js { render 'gaku/courses/enrollments/class_groups/enroll'}
       end

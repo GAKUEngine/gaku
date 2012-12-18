@@ -1,3 +1,4 @@
-$('#student-guardians-tab-link').html('<%= print_count(@student.guardians.count, t("guardians.guardians")) %>');
-$('.student-guardians-count').html('<%= print_count(@student.guardians.count, t("guardians.list")) %>');
+$('#student-guardians-tab-link').html("<%= print_count(@count-1, t_guardian_plural) %>");
+$('.student-guardians-count').html("<%= print_count(@count-1, t_guardian_list) %>");
+$('#guardian-<%= @guardian.id %>').remove()
 showNotice("<%= render_flash %>");

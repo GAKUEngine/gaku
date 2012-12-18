@@ -1,11 +1,11 @@
-= form_for [:admin, @master_school] do |school_form|
-  b= t('schools.edit_master')
+= form_for [:admin, @master_school] do |f|
+  b= t(:'school.edit_master')
   .row-fluid.mt-l
     .span12.well
       .span12.well
-        = render 'school_form_fields', :school_form => school_form
+        = render 'school_form_fields', :f => f
         .row-fluid
           .span12
-            .span6 
-              = submit_button t('schools.save'), :id => 'submit-admin-school-button'
-            = link_to t('Back'), admin_school_details_path , :id => 'back-admin-school-link', :class => 'btn span3'
+            .span6
+              = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
+            = link_to_back admin_school_details_path , :id => 'back-admin-school-link', :class => 'btn span3'

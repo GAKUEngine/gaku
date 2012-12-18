@@ -18,19 +18,22 @@
 #  updated_at :datetime         not null
 #
 module Gaku
-  class Address < ActiveRecord::Base 
+  class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-   
+    belongs_to :campus
+
     has_many :student_addresses, :dependent => :destroy
     has_many :students, :through => :student_addresses, :dependent => :destroy
     has_many :guardian_addresses, :dependent => :destroy
     has_many :guardians, :through => :guardian_addresses
-    has_one :campus
 
-    validates :address1, :city, :country, :presence => true
 
-    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country_id, :state_id, :student_id
+    validates_presence_of :address1, :city, :country
+    #validates_associated :country, :state, :campus
+
+    accepts_nested_attributes_for :country
+    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country, :country_id, :state_id, :student_id
 
   #  attr_encrypted :title,      :key => 'vegb9er7gr5grg7r4r4gr3f'
   #  attr_encrypted :address1,   :key => 'vegb9er7gr5grg7r4r4gr3f'
@@ -71,6 +74,6 @@ module Gaku
     def empty?
       attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
     end
-    
+
   end
 end

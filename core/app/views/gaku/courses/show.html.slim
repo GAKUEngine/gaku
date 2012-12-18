@@ -1,59 +1,30 @@
-- content_for :title, t("courses.show")
+= content_for :title do
+  = t(:'course.show')
 
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .pull-left
-        h4.mb-0 = t("courses.show")
-    .row-fluid
-      .span12
-        hr/
-    .row-fluid
-      .span12.well
-        .row-fluid
-            table.table.table-striped.table-bordered.table-condensed.course-table
-              thead
-                tr
-                  th.btn-inverse =t('courses.code')
-                  - if @course.syllabus
-                    th.btn-inverse =t('combined_code')
-                    th.btn-inverse =t("syllabus")
-              tbody
-                tr
-                  td =@course.code
-                  - if @course.syllabus
-                    td =@course.syllabus.code
-                    td =@course.syllabus.name
-        .row-fluid
-          .span12
-            hr/
-        .row-fluid
-          .span12.well
-            .tabbable.tabs-right
-              ul.nav.nav-tabs
-                li.active
-                  a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments" 
-                    = print_count(@course.students.count, t("course_enrollments.enrollments"))
-                li
-                  a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments" =t("course_enrollments.assignments")
-                li
-                  a#new-course-exam-link data-toggle="tab" href="#course-exams" 
-                    = !@course.syllabus.nil? ? print_count(@course.syllabus.exams.count, t("exams.plural")) : t("exams.plural")
-              .tab-content
-                #course-enrollments.tab-pane.active
-                  = render :partial => "gaku/courses/enrollments/enrollments"
-                #course-assignments.tab-pane
-                  = render :partial => "gaku/courses/assignments/assignments"
-                #course-exams.tab-pane
-                  = render :partial => "gaku/courses/exams/exams"
+= content_for :show_header do
+  = t(:'course.show')
 
-    .row-fluid
-      .span12.well
-        #course-notes
-          = render :partial => 'gaku/notes/notes'
+= well_div do
+  = table_for('course-table') do
+    thead
+      tr
+        = th t(:'course.code')
+        - if @course.syllabus
+          = th t(:'course.combined_code')
+          = th t(:'syllabus.singular')
+    tbody
+      tr
+        td = @course.code
+        - if @course.syllabus
+          td = @course.syllabus.code
+          td = @course.syllabus.name
 
-    .row-fluid
-      .span12.well
-        = link_to_edit_with_text [:edit, @course], :class => "span9 btn btn-warning edit-link", :remote => true
-        = link_to_back courses_path, :class => "span3 btn btn-danger"
+= render 'tabs'
+
+= well_div do
+  #course-notes
+    = render :partial => 'gaku/notes/notes'
+
+= well_div do
+  = link_to_edit_with_text [:edit, @course], :remote => true
+  = link_to_back courses_path

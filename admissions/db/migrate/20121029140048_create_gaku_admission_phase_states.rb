@@ -4,7 +4,9 @@ class CreateGakuAdmissionPhaseStates < ActiveRecord::Migration
       t.string      :name
       t.boolean     :can_progress
       t.boolean     :can_admit
+      t.boolean     :auto_progress
       t.boolean     :auto_admit
+      t.boolean     :is_default
       t.references  :admission_phase
 
       t.timestamps

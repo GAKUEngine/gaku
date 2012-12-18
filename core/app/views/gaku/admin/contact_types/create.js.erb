@@ -4,4 +4,4 @@ $('#new-admin-contact-type').slideToggle();
 $('#new-admin-contact-type-link').show();
 
 showNotice("<%= render_flash %>");
-$('.admin-contact-types-count').html('<%= print_count(@contact_types_count + 1, t("contact_types.list")) %>');
+$('.admin-contact-types-count').html('<%= print_count(@count+1, t_contact_type_list) %>');

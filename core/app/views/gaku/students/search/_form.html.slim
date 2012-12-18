@@ -1,27 +1,26 @@
 = search_form_for @search, :html => {:id => 'search-students'} do |f|
   .row-fluid
     .span12.well
-      h4.mt-0.mb-s = t('search')
+      h4.mt-0.mb-s = t(:'search')
       .tabbable.tabs-right
         ul.nav.nav-tabs
           li.active
             a#student-search-tab data-toggle="tab" href="#student"
-              -if params[:controller] == "gaku/students"
-                = t('student')
-              -elsif params[:controller] == "gaku/admissions"
-                = t('admissions.candidates.candidate')
-              -else
-                = t('student') 
+              - if params[:controller] == "gaku/students"
+                = t(:'student.singular')
+              - elsif params[:controller] == "gaku/admissions"
+                = t(:'admissions.candidates.candidate')
+              - else
+                = t(:'student.singular')
           li
             a#student-address-search-tab data-toggle="tab" href="#address"
-              = t('address')
+              = t(:'address.singular')
         .tab-content
           #student.tab-pane.active
             = render :partial => 'gaku/students/search/student', :locals => {:f => f}
           #address.tab-pane
             = render :partial => 'gaku/students/search/address', :locals => {:f => f}
   = hidden_field_tag "autocomplete_field"
-  = hidden_field_tag "enrolled_students", @enrolled_students 
+
+  = hidden_field_tag "enrolled_students", @enrolled_students
   #selected-students.hide
-
-

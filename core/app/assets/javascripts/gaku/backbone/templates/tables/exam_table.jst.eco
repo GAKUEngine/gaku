@@ -1,0 +1,23 @@
+<div class='row-fluid'>
+  <div class='span12 well pull-left'>
+    <table class='exam-frame-table exam_grid table table-striped table-bordered table-condensed'>
+      <thead>
+        <tr>
+          <th class='btn-primary'>Student </th>
+          <th class='btn-success' colspan='3'>   
+            <% for exam in @exams: %>
+              <%= exam.name %></th>
+            <% end %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id='exam-grading-user'>1</td>
+          <td id='exam-grading-score'>2</td>
+          <td id='exam-grading-calculations'>3</td>
+        </tr>
+    <table>
+  </div>
+</div>
+<div class='stupid'></div>

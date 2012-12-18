@@ -3,5 +3,5 @@ $('#new-syllabus-assignment-form form').each (function(){
   this.reset();
 });
 $('#syllabus-assignments-index tbody').append('<%= render_js_partial("syllabuses/assignments/assignment", {:assignment => @syllabus.assignments.last}) %>');
-$('#syllabus-assignments-count').html('<%= @syllabus.assignments.count %>');
+$('#syllabus-assignments-count').html('<%= @count %>');
 showNotice("<%= render_flash %>");

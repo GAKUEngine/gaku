@@ -5,10 +5,13 @@ describe Gaku::ExamScore do
   context "validations" do 
   	let(:exam_score) { create(:exam_score) }
 
-  	it { should have_valid_factory(:exam_score) }
     it { should belong_to(:exam) }
 
     it { should validate_presence_of(:score) }
+    it { should validate_numericality_of(:score) }
+
+    it { should allow_mass_assignment_of :score }
+    it { should allow_mass_assignment_of :comment }
 
     it "errors when score is nil" do
       exam_score.score = nil

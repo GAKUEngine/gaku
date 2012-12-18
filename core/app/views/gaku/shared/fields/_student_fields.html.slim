@@ -7,7 +7,7 @@
 td.surname = student.surname
 td.name = student.name
 td.birth = student.birth_date
-td.gender = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
+td.gender = student.gender.nil? ? '' : (student.gender ? t('gender.male') : t('gender.female'))
 td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
 td.admitted = student.admitted

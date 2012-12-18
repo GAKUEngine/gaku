@@ -1,0 +1,4 @@
+$('tr#attendance-type-<%= @attendance_type.id %>').html('<%= render_js_partial("fields", {:attendance_type => @attendance_type}) %>');
+$("#edit-attendance-type-modal").modal("hide");
+showNotice("<%= render_flash %>");
+

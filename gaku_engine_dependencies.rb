@@ -6,7 +6,7 @@ gem 'pg'
 gem 'sqlite3'
 
 gem 'execjs'
-gem 'therubyracer'
+gem 'therubyracer', '0.10.2'
 
 gem 'rails-i18n'
 
@@ -32,12 +32,14 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
-  
+
+  gem 'poltergeist'
+
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
-  
+
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency

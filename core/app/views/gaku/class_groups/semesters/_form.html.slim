@@ -1,17 +1,4 @@
-= form_for [@class_group, @semester], { :remote => true } do |f|
-  .row-fluid.mt-l
-    .span12.well 
-      .row-fluid
-        /後でカレンダーにする
-        .span6
-          = f.label :starting, t("semesters.starting"), :class => "control-label"
-          = f.date_select :starting, :class => "span12"
-        .span6
-          = f.label :ending, t("semesters.ending"), :class => "control-label"
-          = f.date_select :ending, :class => "span12"
-        = f.hidden_field :class_group_id, :value => @class_group.id
-      .row-fluid.mt-s
-        = submit_button t("semesters.save"), :id => 'submit-class-group-semester-button', :class => "span6 btn btn-primary"
-        = link_to_cancel  :id => "cancel-class-group-semester-link",:style => "min-height:0px"
+= remote_form_for [@class_group, @semester] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @semester, :nested_id => 'class-group-semester'
 
-= javascript_include_tag 'gaku/class_groups/semesters'

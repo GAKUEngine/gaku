@@ -3,18 +3,17 @@ module Gaku
     class CommuteMethodTypesController < Admin::BaseController
 
     	inherit_resources
-    	actions :index, :show, :new, :create, :update, :edit, :destroy
-
     	respond_to :js, :html
 
-    	before_filter :commute_method_types_count, :only => [:create,:destroy]
+    	before_filter :count, :only => [:create, :destroy, :index]
 
     	private
-    	  def commute_method_types_count
-    	  	@commute_method_types_count = CommuteMethodType.count
-    	  end
-      
+
+  	  def count
+  	  	@count = CommuteMethodType.count
+  	  end
+
     end
   end
 end
-     	
+

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Syllabus Exams' do
- 
+
   stub_authorization!
 
   let(:exam) { create(:exam) }
@@ -23,30 +23,30 @@ describe 'Syllabus Exams' do
       syllabus
       visit gaku.syllabuses_path
 
-      within('table.index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
       page.should have_content "No Exams"
     end
 
     it "adds existing exam", :js => true do
-      click new_existing_exam_link 
+      click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
-      
+
       select exam.name, :from => 'exam_syllabus_exam_id'
-      click submit_existing_exam_button      
-      
+      click submit_existing_exam_button
+
       #ensure_create_is_working table_rows
 
       page.should have_content exam.name
-      flash? "Exam added to Syllabus"     
+      flash? "successfully added"
 
       wait_until_invisible existing_exam_form
-    end 
+    end
 
-    it "cancels adding existing exam", :js => true do
-      click new_existing_exam_link 
+    it "cancels adding existing exam", :cancel => true, :js => true do
+      click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
-      
+
       click cancel_existing_exam_link
       wait_until_invisible existing_exam_form
       visible? new_existing_exam_link
@@ -54,23 +54,23 @@ describe 'Syllabus Exams' do
   end
 
   context "new exam" do
-    context 'new' do 
+    context 'new' do
       before do
         syllabus
-        visit gaku.syllabuses_path 
-        within('table.index tbody tr:nth-child(1)') { click show_link }
+        visit gaku.syllabuses_path
+        within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
         page.should have_content "No Exams"
         click new_link
         wait_until_visible submit
       end
 
-      it "creates and shows", :js => true  do    
-        expect do  
+      it "creates and shows", :js => true  do
+        expect do
           #required
           fill_in 'exam_name', :with => 'Biology Exam'
           fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
           click submit
-          wait_until_invisible form
+          wait_until_invisible submit
         end.to change(syllabus.exams, :count).by 1
 
         page.should have_content "Biology Exam"
@@ -78,32 +78,27 @@ describe 'Syllabus Exams' do
         flash_created?
       end
 
-      it 'errors without the required fields', :js => true do 
+      it 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
-        click submit
-
-        wait_until do 
-          flash_error_for 'exam_name' 
-          flash_error_for 'exam_exam_portions_attributes_0_name' 
-        end
-
+        has_validations?
+        
         syllabus.exams.count.should eq 0
       end
 
-      it "cancels creating", :js => true do
+      it "cancels creating", :cancel => true, :js => true do
         ensure_cancel_creating_is_working
       end
     end
 
-    context 'created exam' do 
-      before do 
+    context 'created exam' do
+      before do
         syllabus.exams << exam
         visit gaku.syllabus_path(syllabus)
       end
 
-      it 'edits', :js => true do 
+      it 'edits', :js => true do
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
 
         fill_in 'exam_name', :with => 'Ruby Exam'
         click submit
@@ -113,7 +108,7 @@ describe 'Syllabus Exams' do
         flash_updated?
       end
 
-      it 'shows'  do 
+      it 'shows'  do
         click show_link
         page.should have_content 'Show Exam'
         page.should have_content 'Exam portions list'
@@ -123,32 +118,32 @@ describe 'Syllabus Exams' do
 
       it 'deletes', :js => true do
         page.should have_content exam.name
-         
-        expect do 
+
+        expect do
           ensure_delete_is_working
         end.to change(syllabus.exams, :count).by -1
-     
+
         within(table){ page.should_not have_content exam.name }
-        flash_destroyed? 
+        flash_destroyed?
       end
     end
   end
 
   context 'links hiding' do
-    before do 
+    before do
       syllabus
       visit gaku.syllabuses_path
-      within('table.index tbody tr:nth-child(1)') { click show_link }
-    end 
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
+    end
 
     it "clicking on new-existing-exam-link hides new-exam form", :js => true do
       click new_link
       wait_until_visible form
-      
-      click new_existing_exam_link 
+
+      click new_existing_exam_link
       wait_until_visible existing_exam_form
       invisible? new_existing_exam_link
-      
+
       wait_until_invisible form
       visible? new_link
     end

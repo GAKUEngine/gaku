@@ -1,0 +1,15 @@
+#exam-show
+  = table do
+    tbody
+      tr
+        = th t(:'exam.name')
+        td = @exam.name
+      tr
+        = th t(:'exam.weight')
+        td = @exam.weight
+      tr
+        = th t(:'exam.description')
+        td colspan="3" = @exam.description
+      tr
+        = th t(:'exam.adjustments')
+        td colspan="3" = @exam.adjustments

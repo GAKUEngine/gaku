@@ -1,0 +1,4 @@
+.span6
+  = f.select :syllabus_id, syllabuses, {}, :class => "span12", :label => t(:'syllabus.singular')
+.span6
+  = f.text_field :code, :placeholder => t(:'course.code_sample'), :class => "span12", :label => t(:'course.code')

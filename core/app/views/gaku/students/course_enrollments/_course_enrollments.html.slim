@@ -2,21 +2,20 @@
   .row-fluid
     #new-student-course-enrollment.hide
     .pull-left
-      h4.mt-xs.mb-0.student-course-enrollments-count
-        = print_count(@student.courses.count, t('courses.list'))
+      =count_div 'student-course-enrollments-count' do
+        = print_count @student.courses.count, t(:'course.list')
     .pull-right
-      = ajax_link_to_new t("course_enrollments.add"), new_student_course_enrollment_path(:student_id => @student.id), :id => "new-student-course-enrollment-link"
-
+      = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], :id => "new-student-course-enrollment-link"
   .row-fluid
     hr
   .row-fluid
     .span12
-      table#student-course-enrollments-index.index.table.table-striped.table-bordered.table-condensed
+      = table_for 'student-course-enrollments-index' do
         thead
           tr
-            th
-            th =t("courses.code")
-            th =t("options")
+            = th t(:id)
+            = th t(:'course.code')
+            = th t(:'course.options')
         tbody
           = render :partial => 'gaku/students/course_enrollments/course_enrollment', :collection => @student.courses, :as => 'course'
-#new-student-course-enrollment-form
+/#new-student-course-enrollment-form

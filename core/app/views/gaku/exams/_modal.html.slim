@@ -1,0 +1,6 @@
+= modal_for 'edit-exam-modal' do
+  = modal_header t(:'exam.edit')
+  = modal_form_for @exam do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @exam

@@ -1,16 +1,16 @@
-.row-fluid
-  table#syllabus-exams-index.index.table.table-condensed.table-striped.table-bordered
+= well_div do
+  = table_for 'exams-index' do
     thead
       tr
-        th.btn-inverse =t 'exams.name'
-        th.btn-inverse =t 'exams.description'
-        th.btn-inverse =t 'exams.adjustments'
-        th.btn-inverse =t 'exams.weight'
-        th.btn-inverse =t 'exams.use_weighting'
-        th.btn-info style="width:94px" =t 'manage'
+        = th t(:'exam.name')
+        = th t(:'exam.description')
+        = th t(:'exam.adjustments')
+        = th t(:'exam.weight')
+        = th t(:'exam.use_weighting')
+        = th_actions 3
     tbody
       - if @exams.any?
         = render :partial => 'gaku/admin/disposals/exam', :collection => @exams, :as => :exam
       - else
         .alert.alert-danger.no-exam-msg
-          = t('notice.no_exams')
+          = t(:'notice.no_resource_assign_first', :resource => t(:'exam.singular'))

@@ -1,17 +1,19 @@
-#admin-admission-methods
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-admission-methods-count' do
+      = print_count @count, t(:'admission_methods.list')
+  .pull-right
+    = ajax_link_to_new t(:'admission_methods.add'), [:new, :admin, :admission_method], :id => 'new-admin-admission-method-link'
+
+= content_for :new_form do
   #new-admin-admission-method.hide
+
+#admin-admission-methods
   .row-fluid
-    .pull-left
-      h4.h4-vm.admin-admission-methods-count
-        = print_count(@admission_methods.count, t('admission_methods.list'))
-    .pull-right
-      =ajax_link_to_new t('admission_methods.add'), new_admin_admission_method_path, :id => 'new-admin-admission-method-link'
-  .row-fluid
-    table#admin-admission-methods-index.index.table.table-striped.table-bordered.table-condensed
+    = table_for 'admin-admission-methods-index' do
       thead
         tr
-          th.btn-inverse =t('admission_methods.singular')
-          th.btn-info style="width:100px" =t('manage')
+          = th t(:'admission_methods.singular')
+          = th_actions 3
       tbody
-        =render :partial => 'admission_method', :collection => @admission_methods, :as => 'admission_method'
-    br/
+        = render :partial => 'admission_method', :collection => @admission_methods, :as => 'admission_method'

@@ -1,15 +1,25 @@
+require "gaku/core/app_responder"
+
 module Gaku
   class GakuController < ActionController::Base
     protect_from_forgery
     before_filter :set_locale
     layout :resolve_layout
 
+    self.responder = Core::AppResponder
+    respond_to :html
+
     private
 
       def resolve_layout
-        # some logic depending on current request
-        path_to_layout =  "gaku/layouts/gaku"
-        return path_to_layout
+        case action_name
+        when "index"
+          "gaku/layouts/index"
+        when "show"
+          "gaku/layouts/show"
+        else
+          "gaku/layouts/gaku"
+        end
       end
 
       def set_locale
@@ -17,7 +27,7 @@ module Gaku
           I18n.locale = params[:locale]
           current_user.settings[:locale] = params[:locale]
           flash[:notice] = "Language is set to #{t('languages.' + current_user.locale)}" if current_user.save
-        elsif current_user 
+        elsif current_user
           I18n.locale = current_user.settings[:locale] #|| Gaku::Preset.get('language')
         else
           if request.env['HTTP_ACCEPT_LANGUAGE']

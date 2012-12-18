@@ -1,0 +1,6 @@
+= modal_for 'edit-attendance-type-modal' do
+  = modal_header t(:'attendance_type.edit')
+  = modal_form_for [:admin, @attendance_type] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @attendance_type, :nested_id => 'admin-attendance-type'

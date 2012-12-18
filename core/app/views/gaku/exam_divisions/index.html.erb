@@ -15,9 +15,9 @@
     <td><%= exam_division.name %></td>
     <td><%= exam_division.portion %></td>
     <td><%= exam_division.maxscore %></td>
-    <td><%= link_to 'Show', exam_division %></td>
-    <td><%= link_to 'Edit', edit_exam_division_path(exam_division) %></td>
-    <td><%= link_to 'Destroy', exam_division, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:show), exam_division %></td>
+    <td><%= link_to t(:edit), edit_exam_division_path(exam_division) %></td>
+    <td><%= ajax_link_to_delete exam_division %></td>
   </tr>
 <% end %>
 </table>

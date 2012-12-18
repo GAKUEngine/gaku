@@ -7,12 +7,12 @@ module Gaku
       fields = f.fields_for(association, new_object, child_index: id) do |builder|
         render(association.to_s.singularize + "_fields", f: builder)
       end
-      link_to(("<i class='icon-plus icon-white'></i> "+name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+      link_to(("<i class='icon-plus icon-white'></i> " + name).html_safe, '#', :class => "btn btn-primary add_fields", data: {id: id, fields: fields.gsub("\n", "")})
     end
 
     def button(text, resource, options = {})
       attributes = {
-        :class => "btn btn-primary"
+        :class => "btn btn-primary mr-s"
       }.merge(options)
       link_to text, resource, attributes
     end
@@ -30,7 +30,7 @@ module Gaku
       name = ("<i class='icon-white icon-plus'></i> " + text).html_safe
       attributes = {
         :remote => true,
-        :class => "btn btn-primary"
+        :class => "btn btn-primary mr-s"
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -57,10 +57,26 @@ module Gaku
       attributes = {
         :remote => true,
         :method => :delete,
-        :data => { :confirm => 'Are you sure?' },
+        :data => { :confirm => t(:are_you_sure) },
         :class => 'btn btn-mini btn-danger delete-link'
       }.merge(options)
       link_to name, resource, attributes
+    end
+
+    def link_to_modal_delete(resource, options = {})
+      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      attributes = {
+        :class => 'btn btn-mini btn-danger modal-delete-link'
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def ajax_soft_delete(options = {})
+      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      attributes = {
+        :class => 'btn btn-mini btn-danger delete-link'
+      }.merge(options)
+      link_to name, '#', attributes
     end
 
     def ajax_link_to_make_primary(resource, options = {})
@@ -68,7 +84,7 @@ module Gaku
       attributes = {
         :remote => true,
         :method => :post,
-        :data => { :confirm => 'Are you sure?' },
+        :data => { :confirm => t(:are_you_sure) },
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -81,7 +97,7 @@ module Gaku
       }.merge(options)
       link_to name, resource, attributes
     end
-    
+
 
     # Edit button with only pencil image - without text
     def link_to_edit(resource, options = {})
@@ -90,16 +106,16 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-warning edit-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     # Edit button with text "Edit" and pencil image
     def link_to_edit_with_text(resource, options = {})
-      name = ('<i class="icon-white icon-pencil"></i> '+t(:Edit)).html_safe
+      name = ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe
       attributes = {
-        :class => "edit-link"
+        :class => "span9 btn btn-warning edit-link"
       }.merge(options)
       link_to name, resource, attributes
-    end  
+    end
 
  def ajax_link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
@@ -108,7 +124,7 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-success show-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     def link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
@@ -116,36 +132,39 @@ module Gaku
         :class => "mr-xs btn btn-mini btn-success show-link"
       }.merge(options)
       link_to name, resource, attributes
-    end   
+    end
 
     def link_to_cancel(options = {})
-      name = t('.cancel', :default => t("helpers.links.cancel"))
+      name = t('cancel')
       attributes = {
-        :class => "span3 btn btn-danger",
+        :class => "span6 btn btn-danger cancel-link",
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
-    end 
-    
+    end
+
     def ajax_link_to_back(resource, options = {})
-      name = ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe
+      name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
         :class => "btn",
         :remote => true
       }.merge(options)
 
       link_to name, resource, attributes
-    end 
+    end
 
     def link_to_back(resource, options = {})
-      name = ('<i class="icon-white icon-share-alt"></i> '+t(:Back)).html_safe
-      link_to name, resource, options
-    end   
+      name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
+      attributes = {
+        :class => 'span3 btn btn-danger'
+      }.merge(options)
+      link_to name, resource, attributes
+    end
 
     def submit_button(text, options={})
       attributes = {
         :type => 'submit',
-        :class => 'span12 btn btn-primary button'
+        :class => 'span6 btn btn-primary button'
       }.merge(options)
       button_tag(content_tag('span', text), attributes)
     end

@@ -1,23 +1,23 @@
 #student-guardian-contacts
-  #new-student-guardian-contact.hide 
-  .row-fluid
+  = index_header do
+    #new-student-guardian-contact.hide
     .pull-left
-      h4.h4-vm.student-guardian-contacts-count
-        =print_count(@guardian.contacts.count, t('contacts.list'))
+      = count_div 'student-guardian-contacts-count' do
+        = print_count @guardian.contacts.count, t_contact_list
     .pull-right
-      =ajax_link_to_new t('students.add_contact'), new_student_guardian_contact_path(@student, @guardian), :id => 'new-student-guardian-contact-link'
+      = ajax_link_to_new t(:'contact.add'), [:new, @student, @guardian, :contact], :id => 'new-student-guardian-contact-link'
+      
+  = hr
 
-  .row-fluid
-    .span12    
-      table#student-guardian-contacts-index.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th.btn-inverse style="width:28px"
-              i.icon-white.icon-home
-            th.btn-inverse =t('contact_type')
-            th.btn-inverse =t('contacts.data')
-            th.btn-inverse =t('contacts.details')
-            th.btn-inverse =t('contacts.emergency')
-            th.btn-info style="width:71px" =t 'manage'
-        tbody
-          =render :partial => 'gaku/students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'
+  = index_body do
+    = table_for 'student-guardian-contacts-index' do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'contact.contact_type')
+          = th t(:'contact.data')
+          = th t(:'contact.details')
+          = th t(:'contact.emergency')
+          = th_actions 2
+      tbody
+        = render :partial => 'gaku/students/guardians/contacts/contact', :collection => @guardian.contacts, :as => 'contact'

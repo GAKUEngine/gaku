@@ -14,17 +14,19 @@
 #  asset_updated_at   :datetime
 #
 module Gaku
-	class Attachment < ActiveRecord::Base
-		
-		attr_accessible :name, :description, :asset
+  class Attachment < ActiveRecord::Base
 
-		belongs_to :attachable, :polymorphic => true
+    attr_accessible :name, :description, :asset
 
-		has_attached_file :asset
+    belongs_to :attachable, :polymorphic => true
 
-		validates :name, :presence => true
+    has_attached_file :asset
 
-		default_scope :conditions => { :is_deleted => false }
+    validates_presence_of :name
+    validates_associated :attachable
+    validates_attachment :asset, presence: true
 
-	end
+    default_scope conditions: { is_deleted: false }
+
+  end
 end

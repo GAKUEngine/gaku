@@ -1,36 +1,33 @@
-#new-course-class-group-form-errors
-#new-course-class-group style='display:none' 
-  =render :partial => 'gaku/courses/enrollments/class_groups/form', :course => @course, :new_course_enrollment => @new_course_enrollment
-.row-fluid
+= index_header do
+  #new-course-class-group-form-errors
+  #new-course-class-group.hide
+    = render :partial => 'gaku/courses/enrollments/class_groups/form', course: @course, new_course_enrollment: @new_course_enrollment
   .pull-left
-    h4.h4-vm.course-students-count 
-      = print_count(@course.students.count, t("students.list"))
+    = count_div 'course-students-count' do
+      = print_count(@course.students.count, t('student.list'))
   .pull-right
     #new-course-student-div.pull-right
-      = ajax_link_to_new t('add_student'), student_chooser_course_path(:course_id => @course.id), :id => 'new-course-student-link'
+      = ajax_link_to_new t(:'student.add'), student_chooser_course_path(course_id: @course.id), id: 'new-course-student-link'
     #new-course-class-group-div.pull-right.mr-s
-      = ajax_link_to_new t('courses.add_class_group'), "", :id => 'new-course-class-group-link'
+      = ajax_link_to_new t(:'class_group.add'), new_course_enrollment_path(course_id: @course.id), id: 'new-course-class-group-link'
 
-.row-fluid
-  .span12
-    hr
-.row-fluid
-  .span12
-    table#course-students-index.table.table-condensed.table-striped.table-bordered
-      thead
-        tr
-          th.btn-inverse*{"data-field" => t("students.name")}
-            = t("students.name")
-          th.btn-inverse*{"data-field" => t("assignments.plural") + t("and") + t("exams.plural")}
-            = t("assignments.plural") + t("and") + t("exams.plural")
-          th.btn-inverse*{"data-field" => t("grades.total_points")}
-            = t("grades.total_points")
-          th.btn-inverse*{"data-field" => t("grades.rank")}
-            = t("grades.rank")
-      tbody
-        =render :partial => 'gaku/courses/enrollments/enrolled', :collection => @course.students, :as => :enrollment
-.row-fluid
-  /Modalでもいいかも。
+= hr
+
+= index_body do
+  = table_for 'course-students-index' do
+    thead
+      tr
+        th.btn-inverse*{"data-field" => t('student.name')}
+          = t('student.name')
+        th.btn-inverse*{"data-field" => t('assignment.plural') + t('and') + t('exam.plural')}
+          = t('assignment.plural') + t('and') + t('exam.plural')
+        th.btn-inverse*{"data-field" => t('grade.total_points')}
+          = t('grade.total_points')
+        th.btn-inverse*{"data-field" => t('grade.rank')}
+          = t('grade.rank')
+    tbody
+      = render partial: 'gaku/courses/enrollments/enrolled', collection: @course.students, as: :enrollment
+
 
 coffee:
-  $('#new-course-student-form form').validationEngine()
+  #$('#new-course-student-form form').validationEngine()

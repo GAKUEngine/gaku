@@ -1,15 +1,15 @@
 .row-fluid
-	=contact_form.label :is_primary, t('contacts.primary')
-	=contact_form.check_box :is_primary
+  .span6
+	  = f.select :contact_type_id, contact_types, {:prompt => t(:'contact_type.choose')}, :label => t(:'contact_type.plural')
+  .span6
+	  = f.text_field :data, :label => t(:'contact.data')
+
 .row-fluid
-	=contact_form.label :contact_type
-	=contact_form.select :contact_type_id, Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}, {:prompt => "Choose Contact Type"}, {:class => "validate[required]", "data-prompt-position" => "bottomRight:5"}
+  .span12
+	  = f.text_field :details, :label => t(:'contact.details')
+    
 .row-fluid
-	=contact_form.label :data
-	=contact_form.text_field :data, :class => "validate[required] span12", "data-prompt-position" => "bottomRight:5"
-.row-fluid
-	=contact_form.label :details
-	=contact_form.text_field :details
-.row-fluid
-	=contact_form.label :is_emergency, t('contacts.emergency')
-	=contact_form.check_box :is_emergency
+  .span6
+	  = f.check_box :is_primary, :label => t(:'contact.primary')
+  .span6
+	  = f.check_box :is_emergency, :label => t(:'contact.emergency')

@@ -1,0 +1,40 @@
+.row-fluid
+  .span12
+    .span6
+      = f.text_field :name, :label => t(:'admission_phases.name')
+    .span3
+      = f.number_field :order, :label => t(:'admission_phases.order')
+    .span3
+      = f.number_field :phase_handler, :label => t(:'admission_phases.phase_handler')
+.span12.well[style="margin-left: 0px; margin-top: 20px;"]
+  .row-fluid
+    = f.fields_for :admission_phase_states do |state_form|
+      .well.state
+        = state_form.text_field :name, :label => t(:'admission_phase_states.name')
+        = state_form.check_box :can_progress, :label => t(:'admission_phase_states.can_progress')
+        = state_form.check_box :can_admit, :label => t(:'admission_phase_states.can_admit')
+        = state_form.check_box :auto_progress, :label => t(:'admission_phase_states.auto_progress')
+        = state_form.check_box :auto_admit, :label => t(:'admission_phase_states.auto_admit')
+        = state_form.link_to_remove t(:'admission_phase_states.remove'), :class => 'btn btn-danger'
+      = hr
+  p= f.link_to_add t(:'admission_phase_states.add'), :admission_phase_states, :class => 'btn'
+.span12.well[style="margin-left: 0px; margin-top: 20px;"]
+  .row-fluid
+    = submit_button t(:'admission_phases.save'), :id => 'submit-admin-admission-method-admission-phase-button'
+    = link_to_cancel :id => 'cancel-admin-admission-method-admission-phase-link'
+
+css:
+
+  .checkbox label {
+    display:inline;
+  }
+
+  .checkbox input {
+    float:none;
+  }
+  .fields label {
+    margin-right:10px;
+  }
+  .fields input {
+    margin-right:30px;
+  }

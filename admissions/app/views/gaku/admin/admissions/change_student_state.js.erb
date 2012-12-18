@@ -1,4 +1,17 @@
 $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').fadeOut(function(){
   $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').remove();
+
   $('<%= render_js_partial("student", {:student => @student, :state => @state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
 });
+
+<%- if @state.auto_progress == true %>
+  $('div#state<%= @new_admission_record.admission_phase_state_id %> table tbody').append('<%= render_js_partial("student", {:student => @student, :state => @new_state}) %>')
+<% end %>
+
+<%- if @next_phase %>
+  //$('a[href$="#phase_<%= @next_phase.id%>"]').trigger('click');
+<% end %>
+
+<%- @admission_method.admission_phases.each {|phase| %>
+  $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+<% } %>

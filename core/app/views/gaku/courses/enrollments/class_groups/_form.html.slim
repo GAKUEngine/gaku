@@ -1,13 +1,3 @@
-=form_for @course, :url => enroll_class_group_course_enrollment_path(@course), :remote => true, :method => 'post' do |f|
-
-  b Choose Class Group
-  .row-fluid.mt-l
-    .span12.well
-    
-      = f.label :class_group_id
-      = f.select :class_group_id, @class_groups.collect{ |cg| ["#{cg.name}", cg.id]},{:prompt => t('courses.choose_class_group')}, {:class => 'chzn-select'}
-  .row-fluid
-    .span12
-      .span6
-        = submit_button t('courses.enroll_class_group'), :id => 'submit-course-class-group-button'
-      = link_to_cancel :id => "cancel-course-class-group-link"
+= remote_form_for @course, :url => enroll_class_group_course_enrollment_path(@course), :method => 'post' do |f|
+  = f.select :class_group_id, class_groups, {:prompt => t('class_group.choose')}, {:class => 'chzn-select'}
+  = buttons_for @course, :nested_id => 'course-class-group', :label => t('class_group.enroll')

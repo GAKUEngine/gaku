@@ -1,13 +1,13 @@
-.row-fluid
-  .span12.well
-    table.table.table-bordered.table-striped
-      tbody
-        = render 'gaku/shared/fields/guardian_fields', :guardian => @guardian
+= well_div do
+  = table do
+    tbody
+      = render 'fields', :guardian => @guardian
 
-= render 'gaku/students/guardians/contacts/contacts'
-br/
-= render 'gaku/students/guardians/addresses/addresses'
+= well_div do
+  = render 'gaku/students/guardians/contacts/contacts'
 
-.row-fluid
-  .span12
-    =link_to_back @student, :class => 'btn'
+= well_div do
+  = render 'gaku/students/guardians/addresses/addresses'
+
+= well_div do
+  = link_to_back @student

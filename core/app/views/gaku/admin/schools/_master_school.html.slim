@@ -1,31 +1,31 @@
 #admin-master-school
 .row-fluid
   .span6
-    table.index.table.table-striped.table-bordered.table-condensed
+    = table do
       tr
-        th.btn-c1  width="25%" =t('schools.master_school')
-        td =master_school.name if master_school
+        th.btn-c1  width="25%" = t(:'school.master_school')
+        td = master_school.name
       tr
-        th.btn-c2 =t('schools.code')
-        td =master_school.grades if master_school
+        th.btn-c2 = t(:'school.code')
+        td = master_school.grades
       tr
-        th.btn-c2 =t('schools.campuses')
-        td =master_school.campuses.count if master_school
+        th.btn-c2 = t(:'school.campuses')
+        td = master_school.campuses.count
       tr
-        th.btn-c2 =t("schools.slogan")
-        td =master_school.slogan if master_school
+        th.btn-c2 = t(:'school.slogan')
+        td = master_school.slogan
       tr
-        th.btn-c2 =t("schools.founded")
-        td =master_school.founded if master_school
+        th.btn-c2 = t(:'school.founded')
+        td = master_school.founded
       tr
-        th.btn-c2 =t("schools.description")
-        td =master_school.description if master_school
+        th.btn-c2 = t(:'school.description')
+        td = master_school.description
       tr
-        th.btn-c2 =t("schools.principal")
-        td =master_school.principal if master_school
+        th.btn-c2 = t(:'school.principal')
+        td = master_school.principal
       tr
-        th.btn-c2 =t("schools.vice_principal")
-        td =master_school.vice_principal if master_school
+        th.btn-c2 = t(:'school.vice_principal')
+        td = master_school.vice_principal
       tr
-        th.btn-c2 =t("schools.grades")
-        td =master_school.grades if master_school
+        th.btn-c2 = t(:'school.grades')
+        td = master_school.grades

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 syllabuses = [
-	             { :name => "Introduction to Biology", :code => "B01", :hours => 50,
+	             { :name => "Introduction to Biology", :code => "B01",
                 :description => "A general introduction to the world of organisms and how they function", :credits => 5 }, 
 	             { :name => "Trigonometry", :code => "M401", 
                 :description => "TRIANGLES!", :credits => 3 },

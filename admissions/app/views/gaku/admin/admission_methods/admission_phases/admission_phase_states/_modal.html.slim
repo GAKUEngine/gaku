@@ -1,0 +1,15 @@
+= modal_for 'show-admission-method-admission-phase-states-modal' do
+  = modal_header t(:'admission_phase_states.list')
+  = modal_body do
+    = table_for 'admin-admission-method-admission-phase-states-index' do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'admission_phase_states.singular')
+          = th t(:'admission_phase_states.can_progress')
+          = th t(:'admission_phase_states.can_admit')
+          = th t(:'admission_phase_states.auto_progress')
+          = th t(:'admission_phase_states.auto_admit')
+        tbody
+          = render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase_states/admission_phase_state', :collection => admission_phase.admission_phase_states, :as => 'state'
+

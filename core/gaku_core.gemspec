@@ -17,13 +17,14 @@ Gem::Specification.new do |s|
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
-  
+
   s.add_dependency 'rails', '~> 3.2.8'
   s.add_dependency 'rails-i18n'
   s.add_dependency 'slim-rails'
   s.add_dependency 'deface', '>= 0.9.0'
   s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'inherited_resources'
+  s.add_dependency 'responders'
 
   s.add_dependency 'jquery-rails', '~> 2.0'
   s.add_dependency 'jquery-ui-rails'
@@ -41,5 +42,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan'
 
+  s.add_dependency 'client_side_validations'
   s.add_dependency 'nested_form'
+  s.add_dependency 'kaminari'
 end

@@ -1,0 +1,6 @@
+= remote_form_for [:admin, @admission] do |form|
+  = form.hidden_field :admission_period_id, :value => params[:admission_period_id]
+  = form.hidden_field :admission_method_id, :value => params[:admission_method_id]
+  = form.fields_for :student, @student do |student_form|
+    = render :partial => 'student_form_fields', :locals => { :f => student_form }
+  = buttons_for @admission, :nested_id => 'admin-admission', :label => t(:'student.create')

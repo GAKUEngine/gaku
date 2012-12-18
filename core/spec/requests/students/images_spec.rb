@@ -16,7 +16,7 @@ describe "Student Images" do
       absolute_path = Rails.root + "../support/120x120.jpg"
       attach_file 'student_picture', absolute_path
       click_button "Upload"
-      flash? "Picture was successfully uploaded"
+      flash? "successfully uploaded"
     end
   end
   

@@ -4,17 +4,20 @@ describe 'Students' do
 
   stub_authorization!
 
-  let(:student) { create(:student, :name => 'John', :surname => 'Doe') }
-  let(:student2) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
-  let(:student3) { create(:student, :name => 'Johny', :surname => 'Bravo') }
-  let(:class_group) { create(:class_group, :name => 'Biology') }
+  let(:student) { create(:student, name: 'John', surname: 'Doe') }
+  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota') }
+  let(:student3) { create(:student, name: 'Johny', surname: 'Bravo') }
+  let(:class_group) { create(:class_group, name:'Biology') }
+  let(:commute_method_type) { create(:commute_method_type) }
+  let(:commute_method_type_train) { create(:commute_method_type, name: 'Train') }
+  let(:commute_method) { create(:commute_method, student: student) }
 
   before :all do
     set_resource "student"
   end
 
   context "existing" do
-    before do 
+    before do
       student
       student2
       student3
@@ -26,16 +29,16 @@ describe 'Students' do
       page.should have_content "#{student.name}"
       page.should have_content "#{student.surname}"
       page.should have_content "#{student2.name}"
-      page.should have_content "#{student2.surname}" 
-      page.should have_content "#{student3.name}" 
+      page.should have_content "#{student2.surname}"
+      page.should have_content "#{student3.name}"
       page.should have_content "#{student3.surname}"
     end
 
-    it 'chooses students', :js => true do 
+    it 'chooses students', js: true do
       find(:css, "input#student-#{student.id}").set(true)
       wait_until_visible '#students-checked-div'
 
-      within('#students-checked-div') do 
+      within('#students-checked-div') do
         page.should have_content 'Chosen students(1)'
         click_link 'Show'
         wait_until_visible '#chosen-table'
@@ -47,88 +50,132 @@ describe 'Students' do
       end
     end
 
-    it "has autocomplete while searching", :js => true do
+    it "has autocomplete while searching", js: true do
       size_of(table_rows).should eq 4
 
-      fill_in 'q_name_cont', :with => "J"
+      fill_in 'q_name_cont', with: "J"
       wait_for_ajax
-      
+
       size_of(table_rows).should eq 3
       within(table) do
-        page.should have_content "John" 
+        page.should have_content "John"
         page.should have_content "Johny"
       end
-      
-      fill_in 'q_surname_cont', :with => "B"
+
+      fill_in 'q_surname_cont', with: "B"
       wait_for_ajax
-      
+
       size_of(table_rows).should eq 2
       within(table) do
         page.should have_content "Johny"
         page.should have_content "Bravo"
-      end 
+      end
     end
 
-    context '#edit from show view', :js => true do 
+    context "commute method", js: true do
+      context " #add" do
+        before do
+          commute_method_type
+          visit gaku.student_path(student)
+          click '#new-student-commute-method-link'
+          wait_until_invisible '#new-student-commute-method-link'
+          wait_until_visible 'form#new_commute_method'
+        end
+        it ' adds' do
+          select "#{commute_method_type.name}", from: 'commute_method_commute_method_type_id'
+          click_on 'submit-student-commute-method-button'
+          page.should have_content "#{commute_method_type.name}"
+          #wait_until_visible '#new-student-commute-method-link'
+        end
+        it 'cancels adding' do
+          click_on 'Cancel'
+          wait_until_visible '#new-student-commute-method-link'
+        end
+      end
+      context ' #edit' do
+        before do
+          commute_method_type.commute_methods<<commute_method
+          commute_method_type_train
+          visit gaku.student_path(student)
+          page.should have_content "#{student.commute_method.commute_method_type.name}"
+          click '#edit-student-commute-method-link'
+        end
+        it ' edits' do
+          select 'Train', from: 'commute_method_commute_method_type_id'
+          click_on 'submit-student-commute-method-button'
+          wait_until_visible '#edit-student-commute-method-link'
+          page.should have_content "Train"
+        end
+        it 'cancels editing' do
+          click_on 'Cancel'
+          wait_until_visible '#edit-student-commute-method-link'
+          page.should have_content "#{commute_method_type.name}"
+        end
+
+      end
+
+    end
+
+    context '#edit from show view', js: true do
       before do
-        visit gaku.student_path(student)        
+        visit gaku.student_path(student)
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it "edits " do
-        fill_in "student_surname", :with => "Kostova"
-        fill_in "student_name",    :with => "Marta"
+        fill_in "student_surname", with: "Kostova"
+        fill_in "student_name",    with: "Marta"
         click submit
         wait_until_invisible modal
 
         page.should have_content "Kostova"
         page.should have_content "Marta"
         student.reload
-        student.name.should eq "Marta" 
+        student.name.should eq "Marta"
         student.surname.should eq "Kostova"
-        flash_updated? 
+        flash_updated?
       end
 
-      it 'cancels editting' do
-        ensure_cancel_modal_is_working 
+      it 'cancels editting', cancel: true do
+        ensure_cancel_modal_is_working
       end
 
     end
 
-    context '#edit from index view', :js => true do
+    context '#edit from index view', js: true do
       before do
-        visit gaku.students_path        
+        visit gaku.students_path
         click edit_link
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it "edits" do
-        fill_in "student_surname", :with => "Kostova"
-        fill_in "student_name",    :with => "Marta"
+        fill_in "student_surname", with: "Kostova"
+        fill_in "student_name",    with: "Marta"
         click submit
         wait_until_invisible modal
 
         page.should have_content "Kostova"
         page.should have_content "Marta"
         student.reload
-        student.name.should eq "Marta" 
+        student.name.should eq "Marta"
         student.surname.should eq "Kostova"
-        flash_updated? 
+        flash_updated?
       end
 
-      it 'cancels editting' do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end
-    
-    it 'deletes', :js => true do
+
+    it 'deletes', js: true do
       visit gaku.student_path(student2)
       student_count = Gaku::Student.count
       page.should have_content "#{student2.name}"
-      
-      expect do 
-        click '#delete-student-link'     
+
+      expect do
+        click '#delete-student-link'
         within(modal) { click_on "Delete" }
         accept_alert
         wait_until { flash_destroyed? }
@@ -139,16 +186,16 @@ describe 'Students' do
       current_path.should eq gaku.students_path
     end
 
-    it 'enrolls to class', :js => true do 
+    it 'enrolls to class', js: true do
       class_group
       visit gaku.student_path(student)
-      
-      expect do 
+
+      expect do
         click_on 'enroll-student-link'
         wait_until_visible modal
 
-        select 'Biology', :from => 'class_group_enrollment_class_group_id'
-        fill_in 'class_group_enrollment_seat_number', :with => '77'
+        select 'Biology', from: 'class_group_enrollment_class_group_id'
+        fill_in 'class_group_enrollment_seat_number', with: '77'
         click_on "Create Class Enrollment"
         click_on 'Cancel'
         wait_until_invisible modal
@@ -162,25 +209,25 @@ describe 'Students' do
       end
 
       visit gaku.student_path(student)
-      within('td#student-class-group-enrollment') do 
+      within('td#student-class-group-enrollment') do
         page.should have_content 'Biology'
-        page.should have_content '77'
+        page.should have_content student.class_groups.last.grade.try(:to_s)
       end
     end
 
   end
 
-  context "new", :js => true do 
-    before do 
+  context "new", js: true do
+    before do
       visit gaku.students_path
       click new_link
       wait_until_visible submit
     end
 
-    it "creates and shows" do 
-      expect do 
-        fill_in "student_name", :with => "John"
-        fill_in "student_surname", :with => "Doe"
+    it "creates and shows" do
+      expect do
+        fill_in "student_name", with: "John"
+        fill_in "student_surname", with: "Doe"
         click_button "submit-student-button"
         wait_until_invisible form
       end.to change(Gaku::Student, :count).by 1
@@ -189,16 +236,10 @@ describe 'Students' do
       within(count_div) { page.should have_content 'Students list(1)' }
       flash_created?
     end
-        
-    it 'errors without required fields' do 
-      click submit
-      wait_until do
-        page.should have_selector 'div.student_surnameformError'
-        page.should have_selector 'div.student_nameformError'
-      end
-    end
 
-    it 'cancels creating' do 
+    it {has_validations?}
+
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end

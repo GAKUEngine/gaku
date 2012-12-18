@@ -1,23 +1,21 @@
-<%- if @contact.errors.any? %>
-	$('#new-student-contact-form-errors').html('<%= render_js_partial("shared/errors", {:target => @contact}) %>');
-<%- else %>
-  $('.student-contacts-count').html('<%= print_count(@student.contacts.count, t("contacts.list")) %>');
-  $('#student-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
-	$("#new-student-contact-link").show();
-	$('#new-student-contact').slideToggle();
-	$("#new-student-contact form")[0].reset();
-	$('#new-student-contact-form-errors').slideToggle();
-	showNotice("<%= render_flash %>");
+$('.student-contacts-count').html("<%= print_count(@count+1, t_contact_list) %>");
+$('#student-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
+
+$("#new-student-contact-link").show();
+$('#new-student-contact').slideToggle();
+$("#new-student-contact form")[0].reset();
+$('#new-student-contact-form-errors').slideToggle();
+showNotice("<%= render_flash %>");
 
 
-	<%- if @contact.is_primary? %>
-		$('.student-contact').each(function() {
-			$(this).children('td.primary-contact').html('');
-			$(this).find('.primary-button a').removeClass('btn-primary');
-		});
+<%- if @contact.is_primary? %>
+	$('.student-contact').each(function() {
+		$(this).children('td.primary-contact').html('');
+		$(this).find('.primary-button a').removeClass('btn-primary');
+	});
 
-		var currentContact = $("#contact-<%= @contact.id %>");
-		currentContact.children('td.primary-contact').html('Primary');
-		currentContact.find('.primary-button a').addClass('btn-primary');
-	<% end %>
+	var currentContact = $("#contact-<%= @contact.id %>");
+	currentContact.children('td.primary-contact').html('Primary');
+	currentContact.find('.primary-button a').addClass('btn-primary');
 <% end %>
+
