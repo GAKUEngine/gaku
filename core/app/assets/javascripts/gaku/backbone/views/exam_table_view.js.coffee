@@ -21,12 +21,12 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         ranks: @options.ranks
                         attendances: @options.attendances
                       }
-    
+
     $(this.el).html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
       $('#exam-grading-user').html userView.render().el
-      
+
       scoreView = new GAKUEngine.Views.ExamScoreView(optionsObjects)
       $('#exam-grading-score').html scoreView.render().el
 
@@ -93,7 +93,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .find('div.' + nextPortionClass)
                 .find('input.score-cell')
                 .focus()
-          
+
         else
           $this.closest('tbody')
                 .find('tr:first-child')
@@ -106,33 +106,40 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   setPortionAttendance: (event)->
 
     currentTarget = $(event.currentTarget)
-    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'    
-    attendanceId = $(currentTarget).attr('data-attendance')
+    attendanceId  = $(currentTarget).attr('data-attendance')
+    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'
+    examPortionScore = $(currentTarget).closest('td').attr('id')
+
 
     if attendanceId
       attendance = new GAKUEngine.Models.Attendance()
       attendance.url = "#{attendanceUrl}/#{attendanceId}"
       attendance.fetch
         success: ->
-          console.log attendance
           attendanceShow = new GAKUEngine.Views.ExamAttendanceShow({model: attendance, currentTarget: currentTarget })
           currentTarget.popover
+            trigger: 'manual'
             html : true
             content: ->
               attendanceShow.render().el
+          currentTarget.popover 'toggle'
+
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
       attendance_types.bind 'reset', ->
-
+        console.log 'times'
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,
-                                  currentTarget : currentTarget)
+                                  currentTarget : currentTarget,
+                                  examPortionScore: examPortionScore)
         currentTarget.popover
+
+          trigger: 'toggle'
           html : true
           content: ->
             attendanceView.render().el
-
+        currentTarget.popover 'toggle'
       attendance_types.fetch()
 
   renderAttendance: ->
