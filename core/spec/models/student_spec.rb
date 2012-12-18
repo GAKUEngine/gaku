@@ -5,31 +5,33 @@ describe Gaku::Student do
   context "validations" do 
     let(:student) { stub_model(Gaku::Student) }
 
-    it { should have_many :enrollment_statuses }
+    
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
     it { should have_many :class_group_enrollments }
     it { should have_many(:class_groups).through(:class_group_enrollments) } 
+    it { should have_many :student_specialties }
+    it { should have_many(:specialities).through(:student_specialties) }
+    it { should have_many :exam_portion_scores }
+    it { should have_many :assignment_scores }
     it { should have_many :student_addresses } 
     it { should have_many(:addresses).through(:student_addresses) } 
     it { should have_many :contacts }
     it { should have_many :notes }
-    it { should have_many :assignment_scores }
-    it { should have_many :exam_portion_scores }
-    it { should have_many :student_specialties }
-    it { should have_many(:specialities).through(:student_specialties) }
-    it { should have_many :simple_grades }
+    it { should have_many :attendances }
+    it { should have_many :enrollment_statuses }
     it { should have_many :achievements }
     it { should have_many :school_histories }
+    it { should have_many :simple_grades }
+    
     xit { should have_one :admission }
-
-    it { should belong_to :scholarship_status }
-
-    it { should have_and_belong_to_many(:guardians) }
 
     it { should belong_to(:commute_method)}
     it { should belong_to(:user) }
+    it { should belong_to :scholarship_status }
 
+    it { should have_and_belong_to_many(:guardians) }
+    
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:surname) }
 
@@ -73,6 +75,17 @@ describe Gaku::Student do
       student.surname = nil
       student.should_not be_valid
     end
+  end
+
+  context 'methods' do
+    xit 'enrollment_status'
+    xit 'full_name'
+    xit 'scholarship'
+    xit 'class_group_widget'
+    xit 'seat_number_widget'
+    xit 'address_widget'
+    xit 'primary_address'
+    xit 'decrypt_student_fields'
   end
   
 end
