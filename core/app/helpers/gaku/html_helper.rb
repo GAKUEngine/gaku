@@ -66,6 +66,8 @@ module Gaku
         size = 62
       elsif num == 3
         size = 90
+      else
+        size = num
       end
       content_tag :th, class:"btn-info", style:"width:#{size}px" do
         t('manage')

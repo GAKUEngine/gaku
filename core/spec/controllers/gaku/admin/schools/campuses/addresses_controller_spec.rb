@@ -23,6 +23,7 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
 
   describe "POST #create" do
     context "with valid attributes" do
+
       it "saves the new address in the db" do
         expect do
           gaku_js_post :create, address: valid_attributes, school_id: school.id, campus_id: campus.id
@@ -31,8 +32,9 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
         #controller.should set_the_flash
       end
     end
+
     context "with invalid attributes" do
-      it "does not save the new addresses in the db" do
+      xit "does not save the new addresses in the db" do
         expect do
           gaku_js_post :create, address: invalid_attributes, school_id: school.id, campus_id: campus.id
         end.to_not change(Gaku::Address, :count)

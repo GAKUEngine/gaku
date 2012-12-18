@@ -6,7 +6,7 @@ window.GAKUEngine =
   init: ->
 
 
-window.ClientSideValidations.formBuilders["ValidateFormBuilder"] =
+formBuilder =
   add: (element, settings, message) ->
     if element.data("valid") isnt false
       element.data "valid", false
@@ -20,6 +20,11 @@ window.ClientSideValidations.formBuilders["ValidateFormBuilder"] =
     element.parent().find('span.help-inline').remove()
     element.data "valid", true
 
+
+
+window.ClientSideValidations.formBuilders["ValidateFormBuilder"] = formBuilder
+
+window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBuilder
 
 
 $.fn.enableValidations = ->

@@ -1,0 +1,12 @@
+= modal_for 'show-admission-period-admission-methods-modal' do
+  = modal_header t(:'admission_methods.list')
+  = modal_body do
+    .row-fluid
+      = table_for 'admin-admission-period-admission-methods-index' do
+        thead
+          tr
+            = th t(:'admission_methods.singular')
+          tbody
+            tbody
+              = render :partial => 'gaku/admin/admission_periods/admission_methods/admission_method', :collection => @admission_methods, :as => 'admission_method'
+
