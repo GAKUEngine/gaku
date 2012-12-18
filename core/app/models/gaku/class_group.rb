@@ -23,6 +23,6 @@ module Gaku
 	  
 	  attr_accessible :name, :grade, :homeroom
 
-	  validates :name, :presence => true
+	  validates_presence_of :name
 	end
 end

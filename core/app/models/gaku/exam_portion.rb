@@ -25,10 +25,9 @@ module Gaku
 	  has_many :attachments, :as => :attachable
 	  has_many :attendances, :as => :attendancable
 
-
 	  attr_accessible :name, :description, :max_score, :problem_count, :weight, :execution_date, :adjustments
 
-	  validates :name, :presence => true
+	  #validates :name, :presence => true
 
 	  validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
 	  validates :max_score, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }

@@ -4,13 +4,24 @@ describe Gaku::Course do
 
   context "validations" do 
     it { should have_many(:course_enrollments) }
-    it { should have_many(:students) }
+    it { should have_many(:students).through(:course_enrollments) }
     it { should have_many(:course_group_enrollments) }
-    it { should have_many(:course_groups) }
+    it { should have_many(:course_groups).through(:course_group_enrollments) }
     it { should have_many(:exam_schedules) }
-    it { should belong_to(:syllabus) }
-    it { should have_many(:class_groups) }
+    it { should have_many(:notes) }
     it { should have_many(:class_group_course_enrollments) }
+    it { should have_many(:class_groups).through(:class_group_course_enrollments) }
+
+    it { should belong_to(:syllabus) }
+    it { should belong_to(:class_group) }
+
+    it { should accept_nested_attributes_for(:course_enrollments) }
+
+    it { should validate_presence_of :code }
+
+    it { should allow_mass_assignment_of :code }
+    it { should allow_mass_assignment_of :class_group_id }
+    it { should allow_mass_assignment_of :syllabus_id }
   end
   
   context "enroll_class_group" do

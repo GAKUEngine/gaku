@@ -77,7 +77,7 @@ module Gaku
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
-    validates :name, :surname, :presence => true
+    validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :notes, :allow_destroy => true

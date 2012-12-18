@@ -10,8 +10,9 @@ describe Gaku::Contact do
     it { should belong_to(:guardian) }
     it { should belong_to(:campus) }
 
+    it { should validate_presence_of(:data) }
+    it { should validate_presence_of(:contact_type_id) }
   end
-  
 
   context 'make first student contact primary on create' do
   	it "should first student address be primary" do

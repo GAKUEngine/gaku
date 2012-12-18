@@ -11,6 +11,6 @@ module Gaku
 
 		attr_accessible :name
 
-    validates :name, :presence => :true
+    validates_presence_of :name
 	end
 end

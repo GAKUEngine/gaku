@@ -23,6 +23,7 @@ module Gaku
     
     has_many :notes, as: :notable 
     has_many :exam_schedules
+    
     belongs_to :syllabus
     belongs_to :class_group
 
@@ -30,7 +31,7 @@ module Gaku
 
     attr_accessible :code, :class_group_id, :syllabus_id 
 
-    validates :code, :presence => true
+    validates_presence_of :code
 
     def enroll_class_group(class_group)
     	unless class_group.blank?
