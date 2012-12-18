@@ -17,7 +17,7 @@
         = state_form.check_box :auto_admit, :label => t(:'admission_phase_states.auto_admit')
         = state_form.link_to_remove t(:'admission_phase_states.remove'), :class => 'btn btn-danger'
       = hr
-  p= f.link_to_add t(:'admission_phase_states.add'), :admission_phase_states, :class => 'btn btn-primary'
+  p= f.link_to_add t(:'admission_phase_states.add'), :admission_phase_states, :class => 'btn'
 .span12.well[style="margin-left: 0px; margin-top: 20px;"]
   .row-fluid
     = submit_button t(:'admission_phases.save'), :id => 'submit-admin-admission-method-admission-phase-button'
@@ -28,7 +28,7 @@ css:
   .checkbox label {
     display:inline;
   }
-  
+
   .checkbox input {
     float:none;
   }

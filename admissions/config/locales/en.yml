@@ -1,5 +1,5 @@
 en:
-  menu: 
+  menu:
     admissions: "Admissions"
     admission_methods: "Admission Methods"
     admission_periods: "Admission Periods"
@@ -9,7 +9,9 @@ en:
     please_select_method: "Please Select Admission Method"
     candidates:
       new: "New Applicant"
-      exciting: "Exciting Applicant"
+      existing: "Existing Applicant"
+      list: "Admission Candidates List"
+      export: "Export"
     create_multiple: "Create student entries and their admissions"
     create: "Create"
     admitted_on: "Admitted on"
@@ -23,6 +25,7 @@ en:
     list: "Admission Methods list"
     edit: "Edit Admission Method"
     name: "Method name"
+    remove: "Remove"
 
   admission_phases:
     singular: "Admission Phase"
@@ -48,6 +51,7 @@ en:
     name: "State name"
     can_progress: "Can progress"
     can_admit: "Can admit"
+    auto_progress: "Auto progress"
     auto_admit: "Auto admit"
     remove: "Remove state"
 
