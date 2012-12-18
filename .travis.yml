@@ -7,8 +7,8 @@ env:
 script:
   - "export DISPLAY=:99.0"
   - "alias set_gemfile='export BUNDLE_GEMFILE=\"`pwd`/Gemfile\"'"
-  - "cd core; set_gemfile; bundle install --quiet; bundle exec rspec spec"
-  - "cd ../admissions; set_gemfile; bundle install --quiet; bundle exec rspec spec"
+  - "cd core; set_gemfile; bundle install --quiet; SELENIUM=1 I18N=1 bundle exec rspec spec"
+  - "cd ../admissions; set_gemfile; bundle install --quiet; SELENIUM=1 I18N=1 bundle exec rspec spec"
 
 notifications:
   email:
