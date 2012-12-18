@@ -61,6 +61,15 @@ module Gaku
         end
       end
 
+      def admit_student
+        @student = Student.find(params[:student_id])
+        admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
+        admission = @student.admission
+        admission.admitted = true
+        admission.save
+        @student.admitted = admission_date
+        @student.save
+      end
 
       def index
 
