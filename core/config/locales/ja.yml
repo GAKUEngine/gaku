@@ -294,6 +294,7 @@ ja:
       not_saved:
         one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
         other: ! '%{count} つのエラーにより %{resource} は保存されませんでした:'
+    not_uploaded: 
   exam:
     add: 試験を追加
     add_existing: 既存の試験を追加
@@ -331,9 +332,11 @@ ja:
     master: 試験要素マスター
     max_score: 最高点数
     name: 試験要素名
+    plural: 
     problem_count: 問題数
     save: 試験要素を保存
     show: 試験要素照会
+    singular: 
     use_weighting: 加重率を使用
     weight: 加重率
   flash:
@@ -425,6 +428,7 @@ ja:
         backup: バックアップ
         system_tools: システムツール
       types:
+        attendance_types: 
         commute_methods: 通学手段
         contact: 連絡先種別
         enrollment_status: 在籍状態
@@ -478,6 +482,18 @@ ja:
   pictures:
     change: 写真を変更
     upload: 写真をアップロード
+  preset:
+    grading:
+      grading_method: 
+      grading_scheme: 
+    plural: 
+    save: 
+    singular: 
+    student:
+      city: 
+      country: 
+      gender: 
+      state: 
   profile: プロフィール
   profiles:
     new: 新規プロフィール登録
@@ -539,6 +555,7 @@ ja:
     registration:
       csv: CSVで生徒を登録
       sheet: 登録用のCSVをダウンロード
+    save: 
     show: 生徒照会
     singular: 生徒
   submit: 登録する

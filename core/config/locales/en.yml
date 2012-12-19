@@ -294,6 +294,7 @@ en:
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
         other: ! '%{count} errors prohibited this %{resource} from being saved:'
+    not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
     add_existing: Add Existing Exam
@@ -331,9 +332,11 @@ en:
     master: Master exam portion
     max_score: Maximum score
     name: Portion name
+    plural: Exam Portions
     problem_count: Problem count
     save: Save exam portion
     show: Show Exam Portion
+    singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
   flash:
@@ -425,6 +428,7 @@ en:
         backup: Backup
         system_tools: System Tools
       types:
+        attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Status Types
@@ -478,6 +482,18 @@ en:
   pictures:
     change: Change picture
     upload: Upload
+  preset:
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
+    plural: Presets
+    save: Save Presets
+    singular: Preset
+    student:
+      city: City
+      country: Country
+      gender: Gender
+      state: State
   profile: Profile
   profiles:
     new: New Profile
@@ -539,6 +555,7 @@ en:
     registration:
       csv: Registration CSV
       sheet: Registration Sheet
+    save: Save Student
     show: Show Students
     singular: Student
   submit: Submit
