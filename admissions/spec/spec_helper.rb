@@ -23,7 +23,7 @@ Spork.prefork do
   require 'gaku/core/testing_support/auth_helpers'
 
   require 'gaku/core/url_helpers'
-  require 'factories' 
+  require 'factories'
 
 end
 

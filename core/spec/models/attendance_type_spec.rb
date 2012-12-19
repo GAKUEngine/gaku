@@ -4,6 +4,8 @@ describe Gaku::AttendanceType do
 
   context "validations" do 
   	it { should have_many(:attendances)}
+
+    it { should validate_presence_of(:name) }
   	
   	it { should allow_mass_assignment_of :name }
   	it { should allow_mass_assignment_of :color_code }
