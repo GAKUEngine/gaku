@@ -49,7 +49,6 @@ en:
     singular: Admission Phase
   admissions:
     candidates:
-      exciting: Exciting Applicant
       existing: Existing Applicant
       export: Export
       list: Admission Candidates List
