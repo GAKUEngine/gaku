@@ -39,7 +39,7 @@ module Gaku
       options[:builder] = ValidateNestedFormBuilder
       options[:html] = {:'data-type' => 'script', :class => 'remote-form'}
       options[:remote] = true
-      form_for(object, options, &block)
+      nested_form_for(object, options, &block)
     end
 
 
