@@ -166,16 +166,14 @@ module Gaku
 
       private
         def load_before_index
-        	@search = Student.search(params[:q])
+          @search = Student.search(params[:q])
           @students = @search.result
           @class_groups = ClassGroup.all
           @courses = Course.all
           @admission_periods = Gaku::AdmissionPeriod.all
-          unless @admission_periods.any?
-            @admission_period = @admission_periods.last
-            @admission_methods = @admission_periods.last.try(:admission_methods)
-            @admission_method = @admission_period.admission_methods.first if @admission_methods
-          end
+          @admission_period = @admission_periods.last
+          @admission_methods = @admission_periods.last.admission_methods
+          @admission_method = @admission_period.admission_methods.first
         end
 
         def load_search_object
