@@ -6,7 +6,7 @@ ja:
     name: 形態名
     new: 新しい入学形態
     plural: 入学形態
-    remove: 
+    remove: 削除
     save: 入学形態を保存
     singular: 入学形態
   admission_periods:
@@ -24,7 +24,7 @@ ja:
   admission_phase_states:
     add: 入学フェーズの状態
     auto_admit: 自動入学
-    auto_progress: 
+    auto_progress: 自動進行
     can_admit: 入学可能
     can_progress: 進学可能
     edit: 入学フェーズの状態を編集
@@ -49,10 +49,9 @@ ja:
     singular: 入学フェーズ
   admissions:
     candidates:
-      exciting: 
-      existing: 
-      export: 
-      list: 
+      existing: 既登録入学希望者の追加
+      export: 出力
+      list: 入学希望者一覧
       new: 新規入学生を登録
     create: 入学生を登録
     create_multiple: 複数の入学生を登録
