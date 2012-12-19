@@ -2,7 +2,7 @@
 module Gaku
   class Students::ImporterController < GakuController
     include SheetHelper
-    #require 'importers/school_station'
+    require 'gaku/core/importers/school_station'
     require 'spreadsheet'
     require 'roo'
 
@@ -101,7 +101,7 @@ module Gaku
     #import XLS list exported from SchoolStation
     #在校生リストを先にインポートする必要がある
     def import_school_station_student_list
-      importer = Importers::SchoolStationImporter.new()
+      importer = Gaku::Core::Importers::SchoolStation.new()
       @results = importer.import_zaikousei(params[:importer])
       render :school_station_preview
     end
