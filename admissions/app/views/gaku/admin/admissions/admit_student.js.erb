@@ -1,0 +1,1 @@
+$('tr#student-<%= @student.id %> td.manage').html('<%= t("admissions.admitted_on") + " " + @student.admitted.strftime("%d-%b-%Y") %>')
