@@ -1,5 +1,4 @@
 en:
-  id: "Id"
   add: Add
   address:
     add: Add Address
@@ -44,22 +43,27 @@ en:
   assignments:
     description: Assignment Description
   attachment:
-    singular: Attachment
-    plural: Attachments
+    asset_error: Error when upload asset
     asset_type: Asset type
+    asset_upload: Asset was uploaded successfully!
     assets: Assets
     create: Create Attachment
     description: Description
     file_name: File name
     file_size: File size
     file_type: File type
+    list: Attachment list
     name: Name
     new: New Attachment
-    list: Attachment list
-    asset_upload: Asset was uploaded successfully!
-    asset_error: Error when upload asset
+    plural: Attachments
+    singular: Attachment
   attendance_type:
     add: Add Attendance Type
+    auto_credit: Auto Credit
+    color_code: Color Code
+    counted_absent: Counted Absent
+    credit_rate: Credit Rate
+    disable_credit: Disable Credit
     edit: Edin Attendance Type
     list: Attendance Types list
     name: Name
@@ -67,11 +71,6 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
-    color_code: Color Code
-    credit_rate: Credit Rate
-    counted_absent: Counted Absent
-    disable_credit: Disable Credit
-    auto_credit: Auto Credit
   back: Back
   birth: Birth Date
   birth_and: and
@@ -106,6 +105,8 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
+  class_group_course_enrollment:
+    save: Save Course to Class Group
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
@@ -113,13 +114,8 @@ en:
     list: Class Roster
     new: New class enrollment
     seat_number: Seat number
-  class_group_course_enrollment:
-    save: Save Course to Class Group
   class_group_management: Class Management
-  commute_method:
-    save: Save Commute Method
-    singular: Commute Method
-    plural: Commute Methods
+  commute_method: Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
@@ -179,8 +175,6 @@ en:
     save: Save Course
     show: Show Course
     singular: Course
-  course_group_enrollment:
-    save: Save to Course Group
   course_enrollment:
     add: Enroll to course
     create: Create enrollment
@@ -197,9 +191,13 @@ en:
     save: Save Course Group
     show: Course Group
     singular: Course Group
+  course_group_enrollment:
+    save: Save to Course Group
   csv:
     export: CSV Export
     fields:
+      admitted: admitted
+      birth_date: birth_date
       email: email
       gender: gender
       name: name
@@ -207,8 +205,6 @@ en:
       phone: phone
       surname: surname
       surname_reading: surname_reading
-      birth_date: birth_date
-      admitted: admitted
     import: CSV Import
   date_placeholder: YYYY-MM-DD
   default: Default
@@ -244,7 +240,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token:
+      no_token: 
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -258,10 +254,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive:
-      signed_up_but_locked:
-      signed_up_but_unconfirmed:
-      update_needs_confirmation:
+      signed_up_but_inactive: 
+      signed_up_but_locked: 
+      signed_up_but_unconfirmed: 
+      update_needs_confirmation: 
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -290,8 +286,6 @@ en:
     save: Save Enrollment Status Type
     singular: Enrollment Status Type
   errors:
-    not_uploaded: ! 'Error when upload %{resource}!'
-
     messages:
       already_confirmed: was already confirmed, please try signing in
       expired: has expired, please request a new one
@@ -300,6 +294,7 @@ en:
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
         other: ! '%{count} errors prohibited this %{resource} from being saved:'
+    not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
     add_existing: Add Existing Exam
@@ -326,8 +321,6 @@ en:
     view: View Exams
     weight: Weight
   exam_portion:
-    plural: Exam Portions
-    singular: Exam Portion
     adjustments: Adjustments
     attached_file_count: Attached file count
     count: Exam portions count
@@ -339,9 +332,11 @@ en:
     master: Master exam portion
     max_score: Maximum score
     name: Portion name
+    plural: Exam Portions
     problem_count: Problem count
     save: Save exam portion
     show: Show Exam Portion
+    singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
   flash:
@@ -394,6 +389,7 @@ en:
       cancel: Cancel
   hide: Hide
   history: History
+  id: Id
   import_format: Import Format
   language: Language
   languages:
@@ -487,17 +483,17 @@ en:
     change: Change picture
     upload: Upload
   preset:
-    singular: Preset
-    plural: Presets
-    save: Save Presets
-    student:
-      gender: Gender
-      country: Country
-      state: State
-      city: City
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
+    plural: Presets
+    save: Save Presets
+    singular: Preset
+    student:
+      city: City
+      country: Country
+      gender: Gender
+      state: State
   profile: Profile
   profiles:
     new: New Profile
@@ -548,7 +544,6 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
-    save: Save Student
     edit: Edit
     enroll: Enroll Student
     export: Export Students
@@ -560,6 +555,7 @@ en:
     registration:
       csv: Registration CSV
       sheet: Registration Sheet
+    save: Save Student
     show: Show Students
     singular: Student
   submit: Submit
