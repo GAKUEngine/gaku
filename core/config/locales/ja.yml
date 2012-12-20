@@ -86,6 +86,7 @@ ja:
     save: クラスを保存
     show: クラス照会
     singular: クラス
+    none_assigned: None Assigned
   class_group_enrollment:
     count: 在籍数
     create: 在籍クラスを作成

@@ -106,6 +106,7 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
+    none_assigned: None Assigned
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
