@@ -12,6 +12,7 @@ en:
         other: "%{count} errors prohibited this %{resource} from being saved:"
 
   devise:
+    login: 'Username or Email'
     email: "Email"
     password: "Password"
     password_confirmation: "Password Confirmation"
@@ -50,7 +51,7 @@ en:
         unconfirmed: 'unconfirmed'
         locked: 'locked'
       sign_up: 'Sign Up'
-      
+
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'

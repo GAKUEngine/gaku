@@ -11,8 +11,8 @@ div style="width:320px;margin:0 auto;"
         .row-fluid
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
             .row-fluid
-              = f.label :email, t("devise.email")
-              = f.email_field :email, :class => 'span12'
+              = f.label :login, t("devise.login")
+              = f.text_field :login, :class => 'span12'
             .row-fluid
               = f.label :password, t("devise.password")
               = f.password_field :password, :class => 'span12'
