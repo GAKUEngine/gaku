@@ -21,11 +21,12 @@ class DeviseCreateGakuUsers < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Database authenticatable
+      t.string   :username
       t.string   :email
       t.string   :encrypted_password
-      
+
       t.timestamps
-      
+
     end
 
     add_index :gaku_users, :email,                :unique => true
