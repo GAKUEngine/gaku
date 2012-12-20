@@ -22,20 +22,21 @@ module Gaku
                 @student_total_weights[student.id][exam.id] = 0.0
                 exam.exam_portions.each do |portion|
                   if have_portion_score?(student, portion)
-                    create_new_portion_score(student,portion)
-                    add_to_portion_attendance(student, exam, portion)
-                  else
                     add_to_student_total_score(student, exam, portion)
                     add_to_student_total_weight(student,exam, portion) if exam.use_weighting
+                    add_to_portion_attendance(student, exam, portion)
+                  else
+                    score = create_new_portion_score(student,portion)
+                    add_to_portion_attendance(student, exam, portion, score)
                   end
                 end
               end
             end
           end
 
-          def add_to_portion_attendance(student, exam, portion)
-            score = portion.student_score(student)
-            @student_portion_attendance[student.id][score.id] = score.attendances.first.try(:id)
+          def add_to_portion_attendance(student, exam, portion, score = nil)
+            score ||= portion.student_score(student)
+            @student_portion_attendance[student.id][score.id] = score.attendances.last.try(:id)
           end
 
           def calculate_exam_averages
@@ -106,7 +107,7 @@ module Gaku
             end
 
             def have_portion_score?(student, portion)
-              student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
+              student.exam_portion_scores.where(:exam_portion_id => portion.id).first.present?
             end
 
             def add_to_student_total_weight(student,exam, portion)

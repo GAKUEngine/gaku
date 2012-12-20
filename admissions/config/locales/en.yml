@@ -1,69 +1,63 @@
 en:
-  menu:
-    admissions: "Admissions"
-    admission_methods: "Admission Methods"
-    admission_periods: "Admission Periods"
-
-  admissions:
-    please_select_period: "Please Select Admission Period"
-    please_select_method: "Please Select Admission Method"
-    candidates:
-      new: "New Applicant"
-      existing: "Existing Applicant"
-      list: "Admission Candidates List"
-      export: "Export"
-    create_multiple: "Create student entries and their admissions"
-    create: "Create"
-    admitted_on: "Admitted on"
-
   admission_methods:
-    singular: "Admission Method"
-    plural: "Admission Methods"
-    new: "New Admission Method"
-    add: "Add Admission Method"
-    save: "Save Admission Method"
-    list: "Admission Methods list"
-    edit: "Edit Admission Method"
-    name: "Method name"
-    remove: "Remove"
-
-  admission_phases:
-    singular: "Admission Phase"
-    plural: "Admission Phases"
-    new: "New Admission Phase"
-    add: "Add Admission Phase"
-    save: "Save Admission Phase"
-    list: "Admission Phases list"
-    edit: "Edit Admission Phase"
-    order: "Order"
-    phase_handler: "Phase handler"
-    name: "Phase name"
-
-  admission_phase_states:
-    singular: "Admission Phase State"
-    plural: "Admission Phase States"
-    new: "New Admission Phase State"
-    add: "Add Admission Phase State"
-    save: "Save Admission Phase State"
-    list: "Admission Phase States list"
-    edit: "Edit Admission Phase State"
-    order: "Order"
-    name: "State name"
-    can_progress: "Can progress"
-    can_admit: "Can admit"
-    auto_progress: "Auto progress"
-    auto_admit: "Auto admit"
-    remove: "Remove state"
-
+    add: Add Admission Method
+    edit: Edit Admission Method
+    list: Admission Methods list
+    name: Method name
+    new: New Admission Method
+    plural: Admission Methods
+    remove: Remove
+    save: Save Admission Method
+    singular: Admission Method
   admission_periods:
-    singular: "Admission Period"
-    plural: "Admission Periods"
-    new: "New Admission PPeriod"
-    add: "Add Admission Period"
-    save: "Save Admission Period"
-    list: "Admission Periods list"
-    edit: "Edit Admission Period"
-    name: "Period name"
-    rolling: "Rolling"
-    seat_limit: "Seat Limit"
-    admitted_on: "Admitted On"
+    add: Add Admission Period
+    admitted_on: Admitted On
+    edit: Edit Admission Period
+    list: Admission Periods list
+    name: Period name
+    new: New Admission PPeriod
+    plural: Admission Periods
+    rolling: Rolling
+    save: Save Admission Period
+    seat_limit: Seat Limit
+    singular: Admission Period
+  admission_phase_states:
+    add: Add Admission Phase State
+    auto_admit: Auto admit
+    auto_progress: Auto progress
+    can_admit: Can admit
+    can_progress: Can progress
+    edit: Edit Admission Phase State
+    list: Admission Phase States list
+    name: State name
+    new: New Admission Phase State
+    order: Order
+    plural: Admission Phase States
+    remove: Remove state
+    save: Save Admission Phase State
+    singular: Admission Phase State
+  admission_phases:
+    add: Add Admission Phase
+    edit: Edit Admission Phase
+    list: Admission Phases list
+    name: Phase name
+    new: New Admission Phase
+    order: Order
+    phase_handler: Phase handler
+    plural: Admission Phases
+    save: Save Admission Phase
+    singular: Admission Phase
+  admissions:
+    candidates:
+      existing: Existing Applicant
+      export: Export
+      list: Admission Candidates List
+      new: New Applicant
+    create: Create
+    create_multiple: Create student entries and their admissions
+    please_select_method: Please Select Admission Method
+    please_select_period: Please Select Admission Period
+  menu:
+    admission_methods: Admission Methods
+    admission_periods: Admission Periods
+    admissions: Admissions

@@ -1,8 +1,9 @@
-<form action='<%= @attendanceUrl %>' id='grading-attendance-type-select'>
+<%= console.log @examPortionScore %>
+<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
 	<select>
 			<option> Choose Attendance Type </option>
 		<% for type in @attendanceTypes : %>
-			<option value='<%= type.id %>'><%= type.name %></option>	
+			<option value='<%= type.id %>'><%= type.name %></option>
 		<% end %>
 	</select>
 	<input />
