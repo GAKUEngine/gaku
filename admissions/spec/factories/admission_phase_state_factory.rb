@@ -11,6 +11,7 @@ FactoryGirl.define do
   factory :admission_phase_state_passed, :class => Gaku::AdmissionPhaseState do
     name 'Passed'
     can_progress  true
+    auto_progress true
     can_admit     false
     auto_admit    false
   end

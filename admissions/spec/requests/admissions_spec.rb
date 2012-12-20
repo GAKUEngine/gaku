@@ -7,9 +7,9 @@ describe 'Admin Admissions' do
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
   let(:student) { create(:student) }
-  
+
   describe 'when select admission period', js: true do
-    context 'when period has no methods' do
+    context 'without methods' do
       before do
         admission_period_no_methods
         visit gaku.admin_admissions_path
@@ -20,7 +20,7 @@ describe 'Admin Admissions' do
       end
     end
 
-    context 'when period has methods' do
+    context 'with methods' do
       before do
         admission_period
         visit gaku.admin_admissions_path
@@ -113,6 +113,9 @@ describe 'Admin Admissions' do
               within('#students-index') { page.should have_content ('Marta') }
             end
           end
+
+          xit 'has validations'
+
           it 'cancels adding' do
             expect do
               click_on 'Cancel'
@@ -159,8 +162,70 @@ describe 'Admin Admissions' do
           end
         end
 
-        context 'existing applicants' do
-          pending 'changes state' do
+        context 'Jorney - add new student and' do
+          before do
+            click_on 'New Applicant'
+            wait_for_ajax
+            #add new student
+            expect do
+              fill_in 'admission_student_attributes_name', with: 'Marta'
+              fill_in 'admission_student_attributes_surname', with: 'Kostova'
+              click_on 'Create Student'
+              wait_until_visible('#new-admission-link')
+              wait_until_invisible('#cancel-admin-admission-link')
+            end.to change(Gaku::Admission, :count).by 1
+            page.should have_content("Exam(1)")
+            within ('#state1' ) do
+              within('#students-index') { page.should have_content ('Marta') }
+            end
+
+          end
+          it 'change state' do
+            #Exam | Pre Exam
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") {
+              select "Abscent", from: 'state_id'
+              click_on 'Save'
+              wait_for_ajax
+              sleep 1
+              wait_until { size_of("#students-index tbody tr").should eq 0 }
+              page.should_not have_content 'Admitted on'
+            }
+            page.should have_content("Interview(0)")
+            #Exam | Abscent
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.last.id}") {
+              size_of("#students-index tbody tr").should eq 1
+              select "Passed", from: 'state_id'
+              click_on 'Save'
+              sleep 1
+              wait_until { size_of("#students-index tbody tr").should eq 0 }
+            }
+            #Exam | Passed
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") {
+              size_of("#students-index tbody tr").should eq 1
+              page.should_not have_content 'Admitted on'
+              click_on 'Save'
+              sleep 1
+            }
+            page.should have_content "Interview(1)"
+            click_on ("Interview(1)")
+            page.should have_content 'Marta'
+            #Interview | Waiting for Interview
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") {
+              size_of("#students-index tbody tr").should eq 1
+              page.should_not have_content 'Admitted on'
+              select "Accepted", from: 'state_id'
+              click_on 'Save'
+              sleep 1
+            }
+            #Interview | Accepted
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.second.id}") {
+              size_of("#students-index tbody tr").should eq 1
+              page.should have_content 'Admitted On'
+            }
+            #TODO revert admitted if admittedd by mistake
+            visit gaku.students_path
+            page.should have_content 'Marta'
+            page.should have_content 'Admitted On'
           end
           pending 'exports as CSV' do
           end
