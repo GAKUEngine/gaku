@@ -17,7 +17,7 @@ module Gaku
   class Exam < ActiveRecord::Base
 
     has_many :exam_scores
-    has_many :exam_portions
+    has_many :exam_portions, :order => :position
     has_many :exam_portion_scores, :through => :exam_portions
     has_many :exam_syllabuses
     has_many :syllabuses, :through => :exam_syllabuses
@@ -28,7 +28,7 @@ module Gaku
 
     validates_presence_of :name
     validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
-    
+
     attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes, :grading_method_id
 
     accepts_nested_attributes_for :exam_portions
