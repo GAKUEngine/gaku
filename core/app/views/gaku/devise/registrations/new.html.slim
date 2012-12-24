@@ -13,7 +13,7 @@ div style="width:320px;margin:0 auto;"
             = devise_error_messages!
             .row-fluid
               = f.label :username, t(:"devise.username")
-              = f.email_field :username, :class => 'span12'
+              = f.text_field :username, :class => 'span12'
             .row-fluid
               = f.label :email, t(:"devise.email")
               = f.email_field :email, :class => 'span12'
