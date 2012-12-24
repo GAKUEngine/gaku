@@ -22,7 +22,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         attendances: @options.attendances
                       }
 
-    $(this.el).html @template(optionsObjects)
+    @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
       $('#exam-grading-user').html userView.render().el
@@ -147,18 +147,15 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
 
   validatePortion: (event)->
-    currentTarget = $(event.currentTarget)
+    currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
-    maxScore = $(event.currentTarget).data('max-score')
+    maxScore           = currentTarget.closest('form').data('max-score')
 
-    if currentTargetValue > maxScore
-      currentTargetInput.addClass('score-error')
-    else if currentTargetValue < 0
+    if currentTargetValue > maxScore or currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
       @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
-
 
 
   updatePortion:(urlLink, score, baseURI) ->
@@ -166,7 +163,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       urlLink: urlLink
       score: score
       baseURI: baseURI
-    console.log 'update me'
 
 
 
