@@ -14,6 +14,7 @@ module Gaku
             @exam_averages = Hash.new {0.0}
             @exam_weight_averages = Hash.new {0.0}
             @weighting_score = true
+            @student_portion_attendance = Hash.new { |hash,key| hash[key] = {} }
 
             @students.each do |student|
               @exams.each do |exam|
@@ -21,27 +22,28 @@ module Gaku
                 @student_total_weights[student.id][exam.id] = 0.0
                 exam.exam_portions.each do |portion|
                   if have_portion_score?(student, portion)
-                    create_new_portion_score(student,portion)
-                  else
                     add_to_student_total_score(student, exam, portion)
                     add_to_student_total_weight(student,exam, portion) if exam.use_weighting
+                    add_to_portion_attendance(student, exam, portion)
+                  else
+                    score = create_new_portion_score(student,portion)
+                    add_to_portion_attendance(student, exam, portion, score)
                   end
                 end
               end
             end
           end
-          
+
+          def add_to_portion_attendance(student, exam, portion, score = nil)
+            score ||= portion.student_score(student)
+            @student_portion_attendance[student.id][score.id] = score.attendances.last.try(:id)
+          end
+
           def calculate_exam_averages
-            @exams.each do |exam|
-              @students.each do |student|
-                @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
-                if exam.use_weighting
-                  @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
-                end
-              end
-              @exam_averages[exam.id] = fix_digit(@exam_averages[exam.id] / @students.length, 4)
-              if exam.use_weighting
-                @exam_weight_averages[exam.id] = fix_digit(@exam_weight_averages[exam.id] / @students.length, 4)
+            @students.each do |student|
+              @exams.each do |exam|
+                add_to_exam_averages(exam, student, @students)
+                add_to_weight_averages(exam, student) if exam.use_weighting
               end
             end
           end
@@ -49,7 +51,7 @@ module Gaku
           def calculate_deviation
             @deviation = Hash.new { |hash,key| hash[key] = {} }
             @standard_deviation = 0.0
-            @deviation_memo = 0.0
+            @deviation_member = 0.0
             @exams.each do |exam|
               @students.each do |student|
                 if exam.use_weighting
@@ -59,22 +61,33 @@ module Gaku
                 end
               end
               standard_deviation(@standard_deviation)
-             
+
               @students.each do |student|
                 @deviation[student.id][exam.id] = 0.0
-                add_to_deviation_memo(exam, student)
+                add_to_deviation_member(exam, student)
                 add_to_deviation(exam, student)
               end
             end
           end
 
           def calculate_rank_and_grade
+            @grades = Hash.new { |hash,key| hash[key] = {} }
             @scores = Array.new
+
             populate_student_scores
 
-            @grades = Hash.new { |hash,key| hash[key] = {} }
+
+            # WIP Grade Calculation -----↓
+
+            # @grading_method = GradingMethod.find(exam.grading_method_id)
+            # puts "@grading_method-------------"
+            # puts @grading_method.name
+            # eval @grading_method.method
             grading_method = 1
+
             grade_calculate(grading_method)
+
+            # Rank Calculation -----↓
             rank_calculate
           end
 
@@ -94,11 +107,19 @@ module Gaku
             end
 
             def have_portion_score?(student, portion)
-              student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
+              student.exam_portion_scores.where(:exam_portion_id => portion.id).first.present?
             end
 
             def add_to_student_total_weight(student,exam, portion)
               @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+            end
+
+            def add_to_exam_averages(exam, student, students)
+              @exam_averages[exam.id] += fix_digit(@student_total_scores[student.id][exam.id] / students.length,4)
+            end
+
+            def add_to_weight_averages(exam, student)
+              @exam_weight_averages[exam.id] += fix_digit(@student_total_weights[student.id][exam.id],4)
             end
 
             def add_to_weighted_standard_deviation(exam, student)
@@ -113,16 +134,16 @@ module Gaku
               @standard_deviation = Math.sqrt standard_deviation / @students.length
             end
 
-            def add_to_deviation_memo(exam, student)
+            def add_to_deviation_member(exam, student)
               if exam.use_weighting
-                @deviation_memo = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / @standard_deviation
+                @deviation_member = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / @standard_deviation
               else
-                @deviation_memo = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / @standard_deviation
+                @deviation_member = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / @standard_deviation
               end
             end
 
             def add_to_deviation(exam, student)
-              @deviation[student.id][exam.id] = @deviation_memo.nan? ? 50 : fix_digit(@deviation_memo * 10 + 50, 4)
+              @deviation[student.id][exam.id] = @deviation_member.nan? ? 50 : fix_digit(@deviation_member * 10 + 50, 4)
             end
 
             def populate_student_scores
@@ -141,21 +162,20 @@ module Gaku
 
             def grade_calculate(grading_method)
               @gradePoint = 10
-              @grade_levels_deviation = [10000000000, 66, 62, 58, 55, 50, 45, 37, 0]
-              @grade_levels_percent = [5, 5, 10, 10, 30, 30, 10, 100]
+              @grade_levels_deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
+              @grade_levels_percent = [5, 5, 10, 10, 30, 10, 100]
 
               @exams.each do |exam|
                 case grading_method
                 when 1
-                  grading_method_deviation(exam)
+                  grading_method_one(exam)
                 when 2
-                  grading_method_percent(exam)
+                  grading_method_two(exam)
                 end
-                process_low_deviations(exam)
               end
             end
 
-            def grading_method_deviation(exam)
+            def grading_method_one(exam)
               @grade_levels_deviation.each_with_index do |glevel, i|
                 @students.each do |student|
                   if @grade_levels_deviation[i] > @deviation[student.id][exam.id] && @grade_levels_deviation[i+1] <= @deviation[student.id][exam.id]
@@ -165,41 +185,20 @@ module Gaku
                 @gradePoint -= 1
               end
             end
-  
-            def grading_method_percent(exam)
-              scores_memo = @scores.clone
+
+            def grading_method_two(exam)
+              scoresMem = @scores.clone
               gradeNums = []
               @grade_levels_percent.each do |glevel|
                 gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
               end
               gradeNums.each do |gnum|
                 i = 0
-                while i < gnum && scores_memo.length != 0
-                  @grades[exam.id][scores_memo.shift[1]] = @gradePoint
+                while i < gnum && scoresMem.length != 0
+                  @grades[exam.id][scoresMem.shift[1]] = gradePoint
                   i += 1
                 end
                 @gradePoint -= 1
-              end
-            end
-            
-            def process_low_deviations(exam)
-              scores_memo = @scores.clone
-              @students.each do |student|
-                if exam.use_weighting
-                  if @student_total_weights[student.id][exam.id] < @exam_weight_averages[exam.id] / 2 && @student_total_weights[student.id][exam.id] < 30
-                    @grades[exam.id][student.id] = 2
-                    if @student_total_weights[student.id][exam.id] < @exam_weight_averages[exam.id] / 4
-                      @grades[exam.id][student.id] = 1
-                    end
-                  end
-                else
-                  if @student_total_scores[exam.id][student.id] < @exam_averages[exam.id] / 2 && 30
-                    @grades[exam.id][student.id] = 2
-                    if @student_total_scores[student.id][exam.id] < @exam_averages[exam.id] / 4
-                      @grades[exam.id][student.id] = 1
-                    end
-                  end
-                end
               end
             end
 
@@ -207,7 +206,7 @@ module Gaku
               @rank_point = 5
               @ranks = Hash.new { |hash,key| hash[key] = {} }
               rank_levels = [15, 20]
-              @exams.each do |exams|
+              @exams.each do |exam|
                 initial_student_rank(exam)
                 rank_nums = rank_nums(rank_levels)
                 rank_score(exam,rank_nums)
@@ -225,13 +224,13 @@ module Gaku
                 @students.each {|student| @ranks[exam.id][student.id] = 3 }
             end
 
-            def rank_score(exam, rank_nums)
+            def rank_score(exam,rank_nums)
               rank_nums.each do |rnum|
                 i = 0
                 while i < rnum && @scores.length != 0
-                  score_memo = @scores.shift()
-                  @ranks[exam.id][score_memo[1]] = @rank_point
-                  rnum += 1 if @scores.length != 0 and score_memo[0] == @scores[0][0]
+                  scoreMem = @scores.shift()
+                  @ranks[exam.id][scoreMem[1]] = @rank_point
+                  rnum += 1 if @scores.length != 0 and scoreMem[0] == @scores[0][0]
                   i += 1
                 end
                @rank_point -= 1

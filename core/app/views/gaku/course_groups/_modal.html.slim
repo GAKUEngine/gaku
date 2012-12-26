@@ -1,0 +1,6 @@
+= modal_for 'edit-course-group-modal' do
+  = modal_header t(:'course_group.edit')
+  = modal_form_for @course_group do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @course_group, :nested_id => 'course-group'

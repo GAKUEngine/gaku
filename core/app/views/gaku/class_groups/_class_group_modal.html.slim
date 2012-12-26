@@ -1,7 +1,7 @@
-#class-group-modal.modal.hide
-  .modal-header
-    button.close type="button" data-dismiss="modal"
-      'x
-    h1 = t('class_group.edit')
-  .modal-body
-    =render 'form'
+= modal_for 'class-group-modal' do
+  = modal_header t(:'class_group.edit')
+  = modal_form_for @class_group do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @class_group
+

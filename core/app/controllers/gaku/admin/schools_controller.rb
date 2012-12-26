@@ -3,25 +3,17 @@ module Gaku
     class SchoolsController < Admin::BaseController
 
       inherit_resources
-      actions :index, :show, :new, :create, :update, :edit, :destroy
-
       respond_to :js, :html
 
-      before_filter :count, :only => [:create, :destroy]
+      before_filter :count, :only => [:create, :destroy, :index]
       before_filter :master_school, :only => [:index, :school_details, :edit_master]
 
       def school_details
         @school = @master_school
-        render 'show'
+        render :show
       end
 
       def edit_master
-      end
-
-      def update
-        super do |format|
-          format.html { redirect_to admin_school_details_path, :notice => 'blq' }
-        end
       end
 
       private

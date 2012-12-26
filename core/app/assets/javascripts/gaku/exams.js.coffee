@@ -12,15 +12,4 @@ $(document).ready ->
       $('#exam_weight').attr 'class','span12'
       $('.exam_weightformError').remove()
 
-  $('#cancel-exam-exam-portion-link').on 'click', (event) ->
-    event.preventDefault()
-    $('#new-exam-exam-portion').slideToggle()
-
-
-  # cancel new exam form
-  $('#new-exam').on 'click','#cancel-exam-link', (event)->
-    event.preventDefault()
-    $('#new-exam').slideToggle()
-    $('#new-exam-link').show()
-
 

@@ -1,18 +1,14 @@
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      #new-class-group.hide
-      .pull-left 
-        h4.mt-xs.mb-0.class-groups-count 
-          = print_count(@count, t_class_group_list)
-      .pull-right
-        = ajax_link_to_new t('class_group.new'), new_class_group_path,:id => "new-class-group-link"
-    .row-fluid
-      .span12
-        hr/
-    .row-fluid
-      .span12.well
-        #class-groups-index
-          =render 'class_groups'
-    .row-fluid
+= content_for :title do
+  = t(:'class_group.plural')
+
+= content_for :new_form do
+  #new-class-group.hide
+
+= content_for :index_header do
+  .pull-left
+    = count_div('class-groups-count') { print_count @count, t_class_group_list }
+  .pull-right
+    = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], :id => "new-class-group-link"
+
+#class-groups-index
+  = render 'class_groups'

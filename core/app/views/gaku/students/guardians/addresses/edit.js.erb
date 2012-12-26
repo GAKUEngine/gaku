@@ -1,2 +1,3 @@
-$('#modal-dialogs').html('<%= render_js_partial("address_modal", {:address => @address}) %>');
+$('#modal-dialogs').html('<%= render_js_partial("modal", {:address => @address}) %>');
 $('#edit-address-modal').modal('show');
+$('.remote-form').enableValidations();

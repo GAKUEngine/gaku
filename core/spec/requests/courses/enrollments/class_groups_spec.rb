@@ -25,7 +25,7 @@ describe "CourseEnrollment"  do
       page.should have_content 'No Class Group selected'
     end
 
-    it 'cancels enrolling' do
+    it 'cancels enrolling', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -60,7 +60,7 @@ describe "CourseEnrollment"  do
       expect do
         select 'Math', :from => 'course_class_group_id'
         click submit
-        wait_until_invisible(form)
+        wait_until_invisible submit
       end.to change(course.students, :count).by 2
 
       page.should have_content "Johniew"

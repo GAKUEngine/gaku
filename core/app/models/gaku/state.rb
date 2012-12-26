@@ -11,9 +11,9 @@
 #
 module Gaku
   class State < ActiveRecord::Base
-    belongs_to :country, :foreign_key => 'country_numcode'
+    belongs_to :country, :foreign_key => 'country_numcode', :primary_key => 'numcode'
 
-    validates :country, :name, :presence => true
+    validates_presence_of :country, :name
 
     attr_accessible :name, :name_ascii, :abbr, :code
 

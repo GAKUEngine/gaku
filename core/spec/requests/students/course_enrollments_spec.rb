@@ -10,8 +10,8 @@ describe 'Student CourseEnrollments' do
     set_resource "student-course-enrollment"
   end
 
-  context 'new', :js => true do 
-    before do 
+  context 'new', :js => true do
+    before do
       course
       visit gaku.student_path(student)
 
@@ -21,7 +21,7 @@ describe 'Student CourseEnrollments' do
     end
 
     it "creates and shows" do
-      expect do 
+      expect do
         select "fall2050", :from => 'course_enrollment_course_id'
         click submit
         wait_until_invisible form
@@ -33,14 +33,14 @@ describe 'Student CourseEnrollments' do
       flash_created?
     end
 
-    it 'cancels creating' do
-      ensure_cancel_creating_is_working 
+    it 'cancels creating', :cancel => true do
+      ensure_cancel_creating_is_working
     end
   end
 
   it "deletes", :js => true do
     student.courses << course
-    visit gaku.student_path(student) 
+    visit gaku.student_path(student)
 
     click tab_link
 
@@ -48,7 +48,7 @@ describe 'Student CourseEnrollments' do
     within(tab_link)  { page.should have_content 'Courses(1)' }
     page.should have_content course.code
 
-    expect do 
+    expect do
       ensure_delete_is_working
     end.to change(student.courses, :count).by -1
 
@@ -57,5 +57,5 @@ describe 'Student CourseEnrollments' do
     page.should_not have_content course.code
     flash_destroyed?
   end
-  
+
 end

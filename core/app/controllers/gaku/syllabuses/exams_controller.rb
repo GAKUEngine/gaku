@@ -5,22 +5,29 @@ module Gaku
     belongs_to :syllabus, :parent_class => Gaku::Syllabus
     respond_to :js, :html
 
-    before_filter :grading_methods, :only => [:edit]
-    before_filter :exam_syllabus, :only => [:update]
-    before_filter :count, :only => [:create, :destroy]
+    before_filter :syllabus,      :only => [:create, :new]
+    before_filter :exam_syllabus, :only => :update
+    before_filter :count,         :only => [:create, :destroy]
 
+    def create
+      @exam = @syllabus.exams.create(params[:exam])
+      create!
+    end
+
+    def new
+      @exam = @syllabus.exams.new
+      @exam.exam_portions.build
+      new!
+    end
+    
     private
 
     def syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])
     end
 
-    def grading_methods
-      @grading_methods = GradingMethod.all
-    end
-
     def exam_syllabus
-      @exam_syllabus = ExamSyllabus.where(:exam_id => params[:id], :syllabus_id => params[:syllabus_id]).first
+      @exam_syllabus = ExamSyllabus.find_by_exam_id_and_syllabus_id(params[:id], params[:syllabus_id])
     end
 
     def count

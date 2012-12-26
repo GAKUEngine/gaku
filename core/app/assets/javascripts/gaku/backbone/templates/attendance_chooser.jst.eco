@@ -1,3 +1,11 @@
-<div>
-attendance chooser here
-</div>
+<%= console.log @examPortionScore %>
+<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
+	<select>
+			<option> Choose Attendance Type </option>
+		<% for type in @attendanceTypes : %>
+			<option value='<%= type.id %>'><%= type.name %></option>
+		<% end %>
+	</select>
+	<input />
+	<button>Submit</button>
+</form>

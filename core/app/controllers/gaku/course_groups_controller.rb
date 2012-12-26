@@ -8,7 +8,7 @@ module Gaku
     respond_to :js, :html
 
     before_filter :before_show,  :only => [:show]
-    before_filter :count, :only => [:create, :destroy]
+    before_filter :count, :only => [:create, :destroy, :index]
     before_filter :unscoped_course_group, :only => :destroy
 
     def index

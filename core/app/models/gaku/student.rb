@@ -29,44 +29,37 @@
 #
 module Gaku
   class Student < ActiveRecord::Base
-    require 'csv'
-
+    
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
-
     has_many :class_group_enrollments
     has_many :class_groups, :through => :class_group_enrollments
-
     has_many :student_specialties
     has_many :specialities, :through => :student_specialties
-
     has_many :exam_portion_scores
     has_many :assignment_scores
-
-    belongs_to :user
-    belongs_to :commute_method
-
     has_many :student_addresses
     has_many :addresses, :through => :student_addresses
-
-    has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
     has_many :contacts
     has_many :notes, as: :notable
-
     has_many :attendances
     has_many :enrollment_statuses
 
-    belongs_to :scholarship_status
-    has_many :simple_grades
     has_many :achievements
     has_many :school_histories
+    has_many :simple_grades
 
     has_one :admission
+    
+    belongs_to :user
+    belongs_to :commute_method
+    belongs_to :scholarship_status
 
+    has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
-                    :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes, 
+                    :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes,
                     :picture, :student_id_number, :student_foreign_id_number, :scholarship_status_id
 
   #  attr_encrypted :name,             :key => 'f98gd9regre9gr9gre9gerh'
@@ -78,7 +71,7 @@ module Gaku
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
-    validates :name, :surname, :presence => true
+    validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :notes, :allow_destroy => true
@@ -89,11 +82,11 @@ module Gaku
     audited
 
     def enrollment_status
-      self.enrollment_statuses.first 
+      self.enrollment_statuses.first
     end
 
     # methods for json student chooser returning
-    
+
     def full_name
       "#{self.surname} #{self.name}"
     end
@@ -115,9 +108,9 @@ module Gaku
     # need modify when primary columns is added
     def address_widget
       pa = self.addresses.first
-      pa.blank? ? nil : pa.city 
+      pa.blank? ? nil : pa.city
     end
-    
+
     def primary_address
       self.student_addresses.where(:is_primary => true).first.try(:address)
     end
@@ -133,7 +126,7 @@ module Gaku
           student[:phone]   = students[i].phone
           i += 1
         end
-        
+
         return students_json.to_json
     end
 

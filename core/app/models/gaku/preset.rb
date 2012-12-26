@@ -26,8 +26,6 @@ module Gaku
       end
     end
 
-
-
 	  def self.method_missing(method, *args, &block)
 			return self.send method, *args, &block if self.respond_to? method  
 			

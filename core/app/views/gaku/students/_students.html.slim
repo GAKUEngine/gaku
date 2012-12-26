@@ -1,22 +1,21 @@
-table#students-index.index.table.table-striped.table-bordered.table-condensed.tablesorter
+= sortable_table_for 'students-index' do
   thead
     tr
-      th.btn-inverse style="width:24px;"
-        i.icon-check.icon-white
-      th.btn-inverse =  t('surname')
-      th.btn-inverse =  t('name')
-      th.btn-inverse =  t('birth_date')
-      th.btn-inverse =  t('gender.label')
-      th.btn-inverse =  t('class_group.name')
-      th.btn-inverse =  t('class_group_enrollment.seat_number')
-      th.btn-inverse =  t('admitted')
-      th.btn-inverse =  t('address.primary')
+      = th_icon 'check'
+      = th t(:'surname')
+      = th t(:'name')
+      = th t(:'birth_date')
+      = th t(:'gender.label')
+      = th t(:'class_group.name')
+      = th t(:'class_group_enrollment.seat_number')
+      = th t(:'admitted')
+      = th t(:'address.primary')
 
-      - if params[:controller] == "gaku/students" or params[:controller] == "gaku/admissions"
-        th.btn-info style="width:62px" = t('manage')
+      - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
+        = th_actions 2
 
   tbody
-    =render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
+    = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
 /= javascript_include_tag 'gaku/students/selected_students'
 /= javascript_include_tag 'gaku/students/datatable'

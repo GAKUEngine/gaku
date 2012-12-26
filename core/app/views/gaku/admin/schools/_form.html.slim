@@ -1,15 +1,3 @@
-- @school ||= school
-= form_for [:admin, @school], :remote => true do |school_form|
-  - if school_form.object.new_record?
-    b= t('school.new')
-    .row-fluid.mt-l
-      .span12.well
-        .span12.well
-          = render 'school_form_fields', :school_form => school_form
-          .row-fluid
-            .span12
-              .span6
-                = submit_button t('school.save'), :id => 'submit-admin-school-button'
-              = link_to_cancel :id => 'cancel-admin-school-link'
-
-/= javascript_include_tag 'gaku/admin/schools'
+= remote_form_for [:admin, @school] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @school, :nested_id => 'admin-school'

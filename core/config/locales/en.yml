@@ -43,15 +43,34 @@ en:
   assignments:
     description: Assignment Description
   attachment:
+    asset_error: Error when upload asset
     asset_type: Asset type
+    asset_upload: Asset was uploaded successfully!
     assets: Assets
     create: Create Attachment
     description: Description
     file_name: File name
     file_size: File size
     file_type: File type
+    list: Attachment list
     name: Name
     new: New Attachment
+    plural: Attachments
+    singular: Attachment
+  attendance_type:
+    add: Add Attendance Type
+    auto_credit: Auto Credit
+    color_code: Color Code
+    counted_absent: Counted Absent
+    credit_rate: Credit Rate
+    disable_credit: Disable Credit
+    edit: Edin Attendance Type
+    list: Attendance Types list
+    name: Name
+    new: New Attendance Type
+    plural: Attendance Types
+    save: Save Attendance Type
+    singular: Attendance Type
   back: Back
   birth: Birth Date
   birth_and: and
@@ -83,9 +102,11 @@ en:
     new: New Class Group
     none: None
     plural: Class Groups
-    save: Save Class
+    save: Save Class Group
     show: Show
     singular: Class Group
+  class_group_course_enrollment:
+    save: Save Course to Class Group
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
@@ -158,7 +179,7 @@ en:
     add: Enroll to course
     create: Create enrollment
     list: Enrollments
-    plural: Course Enrollments
+    plural: Course Enrollment
     singular: Course Enrollment
   course_group:
     course_group_recover: Course Group Recovered
@@ -170,9 +191,13 @@ en:
     save: Save Course Group
     show: Course Group
     singular: Course Group
+  course_group_enrollment:
+    save: Save to Course Group
   csv:
     export: CSV Export
     fields:
+      admitted: admitted
+      birth_date: birth_date
       email: email
       gender: gender
       name: name
@@ -269,6 +294,7 @@ en:
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
         other: ! '%{count} errors prohibited this %{resource} from being saved:'
+    not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
     add_existing: Add Existing Exam
@@ -306,9 +332,11 @@ en:
     master: Master exam portion
     max_score: Maximum score
     name: Portion name
+    plural: Exam Portions
     problem_count: Problem count
     save: Save exam portion
     show: Show Exam Portion
+    singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
   flash:
@@ -361,6 +389,7 @@ en:
       cancel: Cancel
   hide: Hide
   history: History
+  id: Id
   import_format: Import Format
   language: Language
   languages:
@@ -399,6 +428,7 @@ en:
         backup: Backup
         system_tools: System Tools
       types:
+        attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Status Types
@@ -452,6 +482,18 @@ en:
   pictures:
     change: Change picture
     upload: Upload
+  preset:
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
+    plural: Presets
+    save: Save Presets
+    singular: Preset
+    student:
+      city: City
+      country: Country
+      gender: Gender
+      state: State
   profile: Profile
   profiles:
     new: New Profile
@@ -513,6 +555,7 @@ en:
     registration:
       csv: Registration CSV
       sheet: Registration Sheet
+    save: Save Student
     show: Show Students
     singular: Student
   submit: Submit

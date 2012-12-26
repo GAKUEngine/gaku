@@ -15,7 +15,7 @@ module Gaku
 	  has_many :course_group_enrollments
 	  has_many :courses, :through => :course_group_enrollments
 
-	  validates :name, :presence => true
+	  validates_presence_of :name
 
 	  default_scope :conditions => { :is_deleted => false }
 	end

@@ -6,7 +6,7 @@ gem 'pg'
 gem 'sqlite3'
 
 gem 'execjs'
-gem 'therubyracer'
+gem 'therubyracer', '0.10.2'
 
 gem 'rails-i18n'
 

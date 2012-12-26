@@ -34,12 +34,9 @@ describe 'Courses' do
       flash_created?
     end
 
-    it 'doesn\'t create without required fields' do
-      click submit
-      page.should have_content('is required')
-    end
+    it {has_validations?}
 
-    it 'cancels creating' do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -61,27 +58,26 @@ describe 'Courses' do
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
+    context ' #edit ' do
+      before do
+        within(table) { click edit_link }
+        page.should have_content("Edit Course")
+      end
 
-    it 'shows validation messages upon edit', :js => true do
-      within(table) { click edit_link }
+      it 'has validations', :js => true do
+        fill_in 'course_code', :with => ''
+        has_validations?
+      end
 
-      page.should have_content("Edit Course")
-      fill_in 'course_code', :with => ''
-      click submit
-      page.should have_content('is required')
-    end
+      it "edits a course", :js => true  do
+        fill_in 'course_code', :with => 'biology2013'
+        page.select "biology2013Syllabus", :from => 'course_syllabus_id'
+        click submit
 
-    it "edits a course", :js => true  do
-      within(table) { click edit_link }
-
-      page.should have_content("Edit Course")
-      fill_in 'course_code', :with => 'biology2013'
-      page.select "biology2013Syllabus", :from => 'course_syllabus_id'
-      click submit
-
-      page.should have_content "biology2013Syllabus"
-      page.should have_content "biology2013"
-      flash_updated?
+        page.should have_content "biology2013Syllabus"
+        page.should have_content "biology2013"
+        flash_updated?
+      end
     end
 
     it "edits a course from show", :js => true do

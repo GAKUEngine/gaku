@@ -1,10 +1,10 @@
-table#class-groups-index.index.table.table-striped.table-bordered.table-condensed
+= table_for 'class-groups-index' do
 	thead
 	  tr
-	    th.btn-inverse = sortable 'grade', t('class_group.grade')
-	    th.btn-inverse = sortable 'name',  t('class_group.name')
-	    th.btn-inverse = sortable 'homeroom', t('class_group.homeroom')
-	    th.btn-info style="width:94px" = t('manage')
+	    = th(sortable 'grade', t(:'class_group.grade'))
+	    = th(sortable 'name',  t(:'class_group.name'))
+	    = th(sortable 'homeroom', t(:'class_group.homeroom'))
+	    = th_actions 3
 	tbody
-	  =render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
-            
+	  = render :partial => 'class_group', :collection => @class_groups, :as => 'class_group'
+

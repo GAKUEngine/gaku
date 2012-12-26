@@ -6,6 +6,7 @@ en:
     name: Method name
     new: New Admission Method
     plural: Admission Methods
+    remove: Remove
     save: Save Admission Method
     singular: Admission Method
   admission_periods:
@@ -14,7 +15,7 @@ en:
     edit: Edit Admission Period
     list: Admission Periods list
     name: Period name
-    new: New Admission Period
+    new: New Admission PPeriod
     plural: Admission Periods
     rolling: Rolling
     save: Save Admission Period
@@ -23,6 +24,7 @@ en:
   admission_phase_states:
     add: Add Admission Phase State
     auto_admit: Auto admit
+    auto_progress: Auto progress
     can_admit: Can admit
     can_progress: Can progress
     edit: Edit Admission Phase State
@@ -47,10 +49,12 @@ en:
     singular: Admission Phase
   admissions:
     candidates:
-      exciting: Exciting Applicant
+      existing: Existing Applicant
+      export: Export
+      list: Admission Candidates List
       new: New Applicant
-    create: Create New Admission Record
-    create_multiple: Create multiple student entries and their admissions
+    create: Create
+    create_multiple: Create student entries and their admissions
     please_select_method: Please Select Admission Method
     please_select_period: Please Select Admission Period
   menu:

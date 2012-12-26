@@ -19,13 +19,14 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         students: @options.students,
                         grades: @options.grades,
                         ranks: @options.ranks
+                        attendances: @options.attendances
                       }
-    
-    $(this.el).html @template(optionsObjects)
+
+    @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
       $('#exam-grading-user').html userView.render().el
-      
+
       scoreView = new GAKUEngine.Views.ExamScoreView(optionsObjects)
       $('#exam-grading-score').html scoreView.render().el
 
@@ -33,7 +34,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       $('#exam-grading-calculations').html calculationsView.render().el
     @
 
-  
 
   onEnterActions: (event)->
     if !event.shiftKey && event.keyCode == 13
@@ -73,6 +73,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
     return false
 
+
   nextOnEnter: (event)->
       event.preventDefault()
       $this = $(event.target)
@@ -92,7 +93,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .find('div.' + nextPortionClass)
                 .find('input.score-cell')
                 .focus()
-          
+
         else
           $this.closest('tbody')
                 .find('tr:first-child')
@@ -101,31 +102,69 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .focus()
       return false
 
+
   setPortionAttendance: (event)->
+
     currentTarget = $(event.currentTarget)
-    inputElement = $('#' + currentTarget.attr("targetinputelement"))
-    #inputElement.hide()
-    attendance = new GAKUEngine.Models.ExamAttendance(currentTarget)
+    attendanceId  = $(currentTarget).attr('data-attendance')
+    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'
+    examPortionScore = $(currentTarget).closest('td').attr('id')
+
+
+    if attendanceId
+      attendance = new GAKUEngine.Models.Attendance()
+      attendance.url = "#{attendanceUrl}/#{attendanceId}"
+      attendance.fetch
+        success: ->
+          attendanceShow = new GAKUEngine.Views.ExamAttendanceShow({model: attendance, currentTarget: currentTarget })
+          currentTarget.popover
+            trigger: 'manual'
+            html : true
+            content: ->
+              attendanceShow.render().el
+          currentTarget.popover 'toggle'
+
+    else
+      attendance_types = new GAKUEngine.Collections.AttendanceTypes()
+      attendance_types.bind 'reset', ->
+        console.log 'times'
+        attendanceView = new GAKUEngine.Views.ExamAttendance(
+                                  attendance_types : attendance_types,
+                                  attendanceUrl : attendanceUrl,
+                                  currentTarget : currentTarget,
+                                  examPortionScore: examPortionScore)
+        currentTarget.popover
+
+          trigger: 'toggle'
+          html : true
+          content: ->
+            attendanceView.render().el
+        currentTarget.popover 'toggle'
+      attendance_types.fetch()
+
+  renderAttendance: ->
+    @attendance_types
+
 
   validatePortion: (event)->
-    currentTarget = $(event.currentTarget)
+    currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
-    maxScore = $(event.currentTarget).data('max-score')
+    maxScore           = currentTarget.closest('form').data('max-score')
 
-    if currentTargetValue > maxScore
-      currentTargetInput.addClass('score-error')
-    else if currentTargetValue < 0
+    if currentTargetValue > maxScore or currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
       @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
+
 
   updatePortion:(urlLink, score, baseURI) ->
     @exam_score = new GAKUEngine.Models.ExamPortionScore
       urlLink: urlLink
       score: score
       baseURI: baseURI
-    console.log 'update me'
+
+
 
   removeBorder:(event)->
     $(event.currentTarget).removeClass('score-error')

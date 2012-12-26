@@ -23,7 +23,7 @@ describe 'Syllabus Exams' do
       syllabus
       visit gaku.syllabuses_path
 
-      within('table.index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
       page.should have_content "No Exams"
     end
 
@@ -42,7 +42,7 @@ describe 'Syllabus Exams' do
       wait_until_invisible existing_exam_form
     end
 
-    it "cancels adding existing exam", :js => true do
+    it "cancels adding existing exam", :cancel => true, :js => true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -58,7 +58,7 @@ describe 'Syllabus Exams' do
       before do
         syllabus
         visit gaku.syllabuses_path
-        within('table.index tbody tr:nth-child(1)') { click show_link }
+        within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
         page.should have_content "No Exams"
         click new_link
         wait_until_visible submit
@@ -70,7 +70,7 @@ describe 'Syllabus Exams' do
           fill_in 'exam_name', :with => 'Biology Exam'
           fill_in 'exam_exam_portions_attributes_0_name' , :with => 'Biology Exam Portion'
           click submit
-          wait_until_invisible form
+          wait_until_invisible submit
         end.to change(syllabus.exams, :count).by 1
 
         page.should have_content "Biology Exam"
@@ -80,17 +80,12 @@ describe 'Syllabus Exams' do
 
       it 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
-        click submit
-
-        wait_until do
-          flash_error_for 'exam_name'
-          flash_error_for 'exam_exam_portions_attributes_0_name'
-        end
-
+        has_validations?
+        
         syllabus.exams.count.should eq 0
       end
 
-      it "cancels creating", :js => true do
+      it "cancels creating", :cancel => true, :js => true do
         ensure_cancel_creating_is_working
       end
     end
@@ -138,7 +133,7 @@ describe 'Syllabus Exams' do
     before do
       syllabus
       visit gaku.syllabuses_path
-      within('table.index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
     end
 
     it "clicking on new-existing-exam-link hides new-exam form", :js => true do

@@ -1,11 +1,31 @@
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .span12
-        h3= t('exam.show')
-    .row-fluid
-      .span12
-        hr/
-    #exam-show
-      =render 'gaku/exams/exam_show', :exam => @exam
+= content_for :show_header do
+  h3 = t(:'exam.show')
+
+= well_div do
+  = render 'show_table', :exam => @exam
+
+= well_div do
+  #new-exam-exam-portion.hide style='margin-bottom:20px'
+
+  .pull-left
+    = count_div 'exam-exam-portions-count' do
+      = print_count(@exam.exam_portions.count, t_exam_portion_list)
+  .pull-right
+    = ajax_link_to_new t(:'exam.add_portion'), [:new, @exam, :exam_portion], :id => 'new-exam-exam-portion-link'
+
+  = hr
+
+  #exam-exam-portions
+    = render 'gaku/exams/exam_portions/exam_portions'
+
+  - if @exam.use_weighting
+    .weight-check-widget
+      = render 'weight_check_widget', :exam => @exam
+
+= well_div do
+  #exam-notes
+    = render :partial => 'gaku/notes/notes'
+
+= well_div do
+  = link_to_edit_with_text [:edit,@exam], :remote => true
+  = link_to_back exams_path

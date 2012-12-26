@@ -14,18 +14,18 @@
       tbody#students-checked
     #chosen-actions.hide
       -if !@admission.nil?
-        = form_tag( create_multiple_admin_admissions_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+        = form_tag create_multiple_admin_admissions_path,  :id => "enroll-to-course-form", :remote => true do
           = hidden_field_tag :admission_period_id, params[:admission_period_id]
           = hidden_field_tag :admission_method_id, params[:admission_method_id]
           h4 = t("admissions.create_multiple")
           = submit_tag t('admissions.create'), :class => 'btn btn-primary'
 
-        
+
 .row-fluid
   .span12.well
     #students-index-div
       =render 'gaku/students/students'
-= javascript_include_tag "gaku/student_chooser"
+/= javascript_include_tag "gaku/student_chooser"
 
 
 javascript:

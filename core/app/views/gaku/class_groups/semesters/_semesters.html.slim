@@ -1,21 +1,20 @@
-.row-fluid
-  br/
+= index_header do
   #new-class-group-semester-form-errors
   #new-class-group-semester.hide
-    = render 'gaku/class_groups/semesters/form'
+    /= render 'gaku/class_groups/semesters/form'
   .pull-left
-    h4.h4-vm.class-group-semesters-count 
-      =print_count(@class_group.semesters.count, t_semester_list)
+    = count_div 'class-group-semesters-count' do
+      = print_count @class_group.semesters.count, t_semester_list
   .pull-right
-    = ajax_link_to_new t('semester.add'), new_class_group_semester_path(:class_group_id => @class_group.id), :id => 'new-class-group-semester-link'
-.row-fluid
-hr
-.row-fluid
-    .span12
-      table#class-group-semesters-index.index.table.table-striped.table-bordered.table-condensed
-        thead
-          tr
-            th = t('period')
-            th = t('options')
-        tbody
-          =render :partial => 'gaku/class_groups/semesters/semester', :collection => @class_group.semesters, :as => :semester 
+    = ajax_link_to_new t(:'semester.add'), new_class_group_semester_path(:class_group_id => @class_group.id), :id => 'new-class-group-semester-link'
+
+= hr
+
+= index_body do
+  = table_for 'class-group-semesters-index' do
+    thead
+      tr
+      = th t(:'period')
+      = th_actions 2
+    tbody
+      =render :partial => 'gaku/class_groups/semesters/semester', :collection => @class_group.semesters, :as => :semester

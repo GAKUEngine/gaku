@@ -1,7 +1,7 @@
 row-fluid
   .span12
     #course-group-delete
-      = ajax_link_to_delete "#", :id => 'delete-course-group-link', :class => 'pull-right'
+      = ajax_soft_delete :id => 'delete-course-group-link'
   .delete-modal
     =render 'gaku/shared/delete_modal', :target => [:soft_delete, @course_group]
 

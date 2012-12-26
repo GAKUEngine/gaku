@@ -1,4 +1,0 @@
-.row-fluid
-  .span3
-    = course_enrollment_form.label :course
-    = course_enrollment_form.select :course_id, @courses.collect { |s| ["#{s.code}", s.id] }, { :prompt => t('course.choose') }, :class => "validate[required]", "data-prompt-position" => "bottomRight:5"

@@ -4,7 +4,7 @@ describe 'Admin Admission Periods' do
 
   stub_authorization!
 
-  let(:admission_period) { create(:admission_period) }
+  let(:admission_period) { create(:admission_period_no_methods) }
   let(:admission_method) { create(:admission_method, :name => 'International Division Admissions') }
   let(:admission_method2) { create(:admission_method, :name => 'Regular Admissions') }
 
@@ -31,7 +31,7 @@ describe 'Admin Admission Periods' do
       flash_created?
     end 
 
-    pending 'cancels creating' do 
+    it 'cancels creating' do 
       ensure_cancel_creating_is_working
     end
 

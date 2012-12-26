@@ -18,7 +18,7 @@ module Gaku
 
     	def update_presets
         Preset.save_presets(params[:presets])
-    		redirect_to :back, :notice => t('notice.updated', :resource => t('admin.preset.singular'))
+    		redirect_to :back, :notice => t(:'notice.updated', :resource => t(:'preset.plural'))
   		end
 
   	end

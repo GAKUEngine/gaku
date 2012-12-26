@@ -16,21 +16,21 @@ describe 'Student Guardian Addresses' do
   before :all do
     set_resource "student-guardian-address"
   end
-  
-  context 'new', :js => true do 
+
+  context 'new', :js => true do
     before do
       country
       student.guardians << guardian
-      visit gaku.student_path(student) 
+      visit gaku.student_path(student)
       click tab_link
-      wait_until { page.has_content? 'Guardians list' } 
+      wait_until { page.has_content? 'Guardians list' }
       click show_link
       click new_link
       wait_until_visible submit
     end
 
-    it "creates and shows" do 
-      expect do 
+    it "creates and shows" do
+      expect do
         #required
         select 'Japan',              :from => 'country_dropdown'
         fill_in 'address_address1',  :with => 'Subaru str.'
@@ -47,12 +47,12 @@ describe 'Student Guardian Addresses' do
       flash_created?
     end
 
-    it 'cancels creating' do 
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
-    end 
+    end
   end
 
-  context 'existing' do 
+  context 'existing' do
     before do
       bulgaria
       student.guardians << guardian
@@ -60,13 +60,13 @@ describe 'Student Guardian Addresses' do
       visit gaku.student_guardian_path(student, student.guardians.first)
     end
 
-    context 'edit', :js => true do 
-      before do 
+    context 'edit', :js => true do
+      before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
-      it 'edits' do 
+      it 'edits' do
         select 'Bulgaria',          :from => 'country_dropdown'
         fill_in 'address_address1', :with => 'Maria Luiza bul.'
         fill_in 'address_city',     :with => 'Varna'
@@ -78,12 +78,12 @@ describe 'Student Guardian Addresses' do
         flash_updated?
       end
 
-      it 'cancels edit' do 
+      it 'cancels edit', :cancel => true do
         ensure_cancel_modal_is_working
       end
   end
 
-    it 'deletes', :js => true do 
+    it 'deletes', :js => true do
       page.should have_content 'Japan'
       within(count_div) { page.should have_content 'Addresses list(1)' }
       expect do
@@ -99,7 +99,7 @@ describe 'Student Guardian Addresses' do
       address1_tr = "#address-#{address1.id}"
       address2_tr = "#address-#{address2.id}"
       visit gaku.student_guardian_path(student, student.guardians.first)
-      
+
       click "#{address2_tr} a"
       accept_alert
 
@@ -113,7 +113,7 @@ describe 'Student Guardian Addresses' do
       student.guardians.first.guardian_addresses.first.is_primary? == true
     end
 
-    it 'sets primary', :js => true do 
+    it 'sets primary', :js => true do
       student.guardians.first.addresses <<  address2
 
       visit gaku.student_guardian_path(student, student.guardians.first)
@@ -123,10 +123,10 @@ describe 'Student Guardian Addresses' do
 
       within('table#student-guardian-addresses-index tr#address-2') { click_link 'set_primary_link' }
       accept_alert
-      
+
       student.guardians.first.guardian_addresses.first.is_primary? == false
       student.guardians.first.guardian_addresses.second.is_primary? == true
     end
   end
-  
+
 end

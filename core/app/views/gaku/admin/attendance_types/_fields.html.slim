@@ -1,0 +1,9 @@
+td = attendance_type.name
+td = color_code attendance_type.color_code
+td = attendance_type.credit_rate
+td = boolean_image attendance_type.counted_absent
+td = boolean_image attendance_type.disable_credit
+td = boolean_image attendance_type.auto_credit
+td
+  = ajax_link_to_edit [:edit, :admin, attendance_type]
+  = ajax_link_to_delete [:admin, attendance_type]

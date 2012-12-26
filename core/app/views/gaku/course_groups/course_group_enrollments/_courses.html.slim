@@ -1,18 +1,23 @@
-#new-course-group-enrollment
-.pull-left
-  h4.h4-vm.course-group-enrollments-count
-   = print_count(@course_group.course_group_enrollments.count, t_course_list)
-.pull-right
-  = ajax_link_to_new t('course.add'), new_course_group_course_group_enrollment_path(@course_group), :id =>'new-course-group-enrollment-link'
-table#course-group-enrollments-index.index.table.table-striped.table-bordered.table-condensed
-	thead
-		tr
-			th = t('course.name')
-			th = t('syllabus.singular')
-			th = t('manage')
-	tbody
-		- course_group.course_group_enrollments.each do |course_group_enrollment|
-			tr
-				td =course_group_enrollment.course.code
-				td =course_group_enrollment.course.syllabus.name if course_group_enrollment.course.syllabus
-				td =ajax_link_to_delete [@course_group, course_group_enrollment]
+= index_header do
+  #new-course-group-enrollment.hide
+  .pull-left
+    = count_div 'course-group-enrollments-count' do
+     = print_count @course_group.course_group_enrollments.count, t_course_list
+  .pull-right
+    = ajax_link_to_new t(:'course.add'), [:new, @course_group, :course_group_enrollment], :id =>'new-course-group-enrollment-link'
+
+= hr
+
+= index_body do
+  = table_for 'course-group-enrollments-index' do
+  	thead
+  		tr
+  			= th t(:'course.name')
+  			= th t(:'syllabus.singular')
+  			= th_actions 2
+  	tbody
+  		- course_group.course_group_enrollments.each do |course_group_enrollment|
+  			tr
+  				td = course_group_enrollment.course.code
+  				td = course_group_enrollment.course.syllabus.name if course_group_enrollment.course.syllabus
+  				td = ajax_link_to_delete [@course_group, course_group_enrollment]

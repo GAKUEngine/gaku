@@ -1,63 +1,56 @@
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .span12
-        h3= t('syllabus.show')
-    .row-fluid
-      .span12
-        hr/
-    .row-fluid
-      .span12.well
-        table.table.table-condensed.table-striped.table-bordered
-          thead
-            tr
-              th = t('syllabus.code')
-              th = t('syllabus.name')
-              th = t('syllabus.credits')
-              th = t('syllabus.description')
-          tbody
-            tr class="syllabus-#{@syllabus.id}"
-              = render 'gaku/shared/fields/syllabus_fields', :syllabus => @syllabus
-    .row-fluid
-      .span12.well
-        .row-fluid
-          #syllabus-exams
-            .row-fluid
-              .pull-left
-                h4.mt-xs.mb-0.exams-count
-                  = print_count(@syllabus.exams.count, t_exam_list)
-              .pull-right
-                = ajax_link_to_new t('exam.new'), '', :id => 'new-syllabus-exam-link'
-                = ajax_link_to_new t('exam.add_existing'), '', :id => 'new-existing-exam-link'
-            .row-fluid
-              .span12
-                #new-existing-exam-errors
-                #new-existing-exam style='display:none;padding-top:10px'
-                  = render 'gaku/syllabuses/exams/select_form'
-                #new-syllabus-exam style='display:none;padding-top:10px'
-                  = render 'gaku/syllabuses/exams/form'
-            .row-fluid
-              .span12
-                hr
-            = render 'gaku/syllabuses/exams/exams'
-        .row-fluid
-          br/
-        /.row-fluid
-          #syllabus-assigmnents
-            = render 'gaku/syllabuses/assignments/assignments'
-          #new-syllabus-assignment
-            = link_to t('assignment.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
-          #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
-            =render 'gaku/syllabuses/assignments/form'
-    .row-fluid
-      .span12.well
-        #syllabus-notes
-          = render :partial => 'gaku/notes/notes'
-    .row-fluid
-      .span12.well
-        = link_to_edit_with_text [:edit, @syllabus], :class => "span9 btn btn-warning edit-link", :style => "min-height:0px", :remote => true
-        = link_to_back syllabuses_path, :class => "span3 btn btn-danger", :style => "min-height:0px"
-        .row-fluid
+= content_for :show_header do
+  = count_div '' do
+    = t(:'syllabus.show')
 
-= javascript_include_tag 'gaku/syllabuses'
+= well_div do
+  = table do
+    thead
+      tr
+        = th t(:'syllabus.code')
+        = th t(:'syllabus.name')
+        = th t(:'syllabus.credits')
+        = th t(:'syllabus.description')
+    tbody
+      tr class="syllabus-#{@syllabus.id}"
+        = render 'gaku/shared/fields/syllabus_fields', :syllabus => @syllabus
+
+= well_div do
+  .row-fluid
+    #syllabus-exams
+      .row-fluid
+        .pull-left
+          = count_div 'exams-count' do
+            = print_count @syllabus.exams.count, t_exam_list
+        .pull-right
+          = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], :id => 'new-syllabus-exam-link'
+          = ajax_link_to_new t(:'exam.add_existing'), '', :id => 'new-existing-exam-link'
+
+      .row-fluid
+        .span12
+          #new-existing-exam-errors
+          #new-existing-exam.hide style='padding-top:10px'
+            = render 'gaku/syllabuses/exams/select_form'
+
+          #new-syllabus-exam.hide style='padding-top:10px'
+            /= render 'gaku/syllabuses/exams/form'
+      .row-fluid
+        .span12
+          hr
+      = render 'gaku/syllabuses/exams/exams'
+  .row-fluid
+    br/
+  /.row-fluid
+    #syllabus-assigmnents
+      = render 'gaku/syllabuses/assignments/assignments'
+    #new-syllabus-assignment
+      = link_to t(:'assignment.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
+    #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
+      = render 'gaku/syllabuses/assignments/form'
+
+= well_div do
+  #syllabus-notes
+    = render 'gaku/notes/notes'
+
+= well_div do
+  = link_to_edit_with_text [:edit, @syllabus], :remote => true
+  = link_to_back syllabuses_path

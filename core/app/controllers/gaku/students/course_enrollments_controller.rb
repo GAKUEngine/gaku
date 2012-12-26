@@ -3,25 +3,14 @@ module Gaku
 
     inherit_resources
     belongs_to :student, :parent_class => Gaku::Student
-    #actions :new, :create, :update, :edit, :destroy
-
     respond_to :js, :html
 
-    #before_filter :student
-    before_filter :courses, :only => [:new, :edit]
+    before_filter :count, :only => [:create, :destroy]
 
     def create
       create! do |success, failure|
-        failure.js { render 'error' }
+        failure.js { render :error }
       end
-      #super do |format|
-      #  if @student.course_enrollments << @course_enrollment
-      #    format.js { render 'create' }
-      #  else
-      #    @errors = @course_enrollment.errors
-      #    format.js { render 'error' }
-      #  end
-      #end
     end
 
     private
@@ -30,8 +19,9 @@ module Gaku
       @student = Student.find(params[:student_id])
     end
 
-    def courses
-      @courses = Course.all
+    def count
+      student
+      @count = @student.courses.count
     end
   end
 end

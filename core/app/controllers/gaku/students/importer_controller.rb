@@ -13,7 +13,6 @@ module Gaku
 
     def get_csv_template
       filename = "StudentRegistration.csv"
-      registration_fields = ["surname", "name", "surname_reading", "name_reading", "gender", "phone", "email", "birth_date", "admitted"]
       content = CSV.generate do |csv|
         csv << registration_fields
         csv << translate_fields(registration_fields)
@@ -29,7 +28,7 @@ module Gaku
       # import_sheet_student_list
 
       if params[:importer][:data_file].nil?
-        redirect_to importer_index_path, :alert => 'no file or bad file' 
+        redirect_to importer_index_path, :alert => 'no file or bad file'
       else
         if params[:importer][:data_file].content_type == 'application/vnd.ms-excel'
           case params[:importer][:importer_type]
@@ -54,7 +53,7 @@ module Gaku
         case @rowcount
           when 0
             #TODO get mapping of field index
-          else 
+          else
             unless row.empty?
               Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
               @created_students += 1
@@ -68,26 +67,26 @@ module Gaku
     def import_sheet_student_list
 
       file_data = params[:importer][:data_file]
-      
+
       #read from saved file
       importer = ImportFile.new(params[:importer])
       importer.context = 'students'
       if importer.save
         book = Spreadsheet.open(importer.data_file.path)
-        
+
         #read from not saved file. just read file
         # book = Spreadsheet.open(file_data.path)
-        
+
         sheet = book.worksheet(0)
 
         ActiveRecord::Base.transaction do
         #Giorgio:put in transaction for fast importing
           sheet.each do |row|
-            unless book.worksheet('Sheet1').first == row 
+            unless book.worksheet('Sheet1').first == row
               # check for existing
-              student = Student.create!(:surname => row[0], 
-                              :name => row[1], 
-                              :surname_reading => row[2], 
+              student = Student.create!(:surname => row[0],
+                              :name => row[1],
+                              :surname_reading => row[2],
                               :name_reading => row[3])
             end
           end

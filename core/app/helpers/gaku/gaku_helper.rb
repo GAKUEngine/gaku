@@ -4,15 +4,63 @@ module Gaku
     include LinkToHelper
     include SortHelper
     include TranslationsHelper
+    include PresetsHelper
+    include FormHelper
+    include ModalHelper
+    include HtmlHelper
+
+    def count_div(html_class, &block)
+      content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
+        block.call
+      end
+    end
+
+    def grading_methods
+      Gaku::GradingMethod.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def enrollment_status_types
+      Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def class_groups
+      Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types
+      Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def syllabuses
+      Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
+    end
+
+    def countries
+      Gaku::Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
+    end
+
+    def courses
+      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+    end
+
+    def scholarship_statuses
+      Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+    end
+
+    def contact_types
+      Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}
+    end
+
+    def genders
+      { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
-      puts klass
       presenter = klass.new(object, self)
       yield presenter if block_given?
       presenter
     end
-
 
     def required_field
       ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe
@@ -59,6 +107,18 @@ module Gaku
       content_for(:title) do
         text
       end
+    end
+
+    def boolean_image(field)
+      if field
+        image_tag('tick.png')
+      else
+        image_tag('cross.png')
+      end
+    end
+
+    def color_code(color)
+      content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
     end
 
   end

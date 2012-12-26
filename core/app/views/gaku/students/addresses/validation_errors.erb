@@ -1,5 +1,0 @@
-<%- if params[:action] == 'create' %>
-  $('#validation-errors').html("<%= render_js_partial('gaku/shared/errors', {:target => @address}) %>");
-<%- elsif params[:action] == 'update' %>
-  $('#validation-errors').html("<%= render_js_partial('gaku/shared/errors', {:target => @address}) %>");
-<% end %>

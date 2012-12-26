@@ -1,14 +1,6 @@
-.modal.hide#new-contact-modal wmode="opaque"
-  .modal-header
-    button.close type="button" data-dismiss="modal"
-      'x
-    h3 = t('contact.new')
-  .modal-body
-    = form_for [@student, @guardian, @contact], :url => create_modal_student_guardian_contacts_path(@student, @guardian, @contact), :remote => true do |contact_form|
-
-      = render 'gaku/shared/form_fields/contact_form_fields', :contact_form => contact_form
-
-      .actions
-        .span8
-          = submit_button t('contact.create'), :id => 'submit-student-guardian-contact-button'
-        = link_to_cancel :id => 'cancel-student-guardian-contact-link'
+= modal_for 'new-contact-modal' do
+  = modal_header t(:'contact.new')
+  = modal_form_for [@student, @guardian, @contact], :url => [:create_modal, @student, @guardian, @contact] do |f|
+    = modal_body do
+      = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+      = buttons_for @contact, :nested_id => 'student-guardian-contact'

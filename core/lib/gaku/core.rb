@@ -10,7 +10,10 @@ require 'audited-activerecord'
 require 'inherited_resources'
 require 'slim-rails'
 require 'kaminari'
-
+require 'client_side_validations'
+require 'spreadsheet'
+require 'csv'
+  
 module Gaku
 
   module Core

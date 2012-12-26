@@ -5,14 +5,14 @@ describe Gaku::Contact do
 	let(:student) { create(:student) }
 
   context "validations" do 
-  	it { should have_valid_factory(:contact) }
     it { should belong_to(:contact_type) }
     it { should belong_to(:student) }
     it { should belong_to(:guardian) }
     it { should belong_to(:campus) }
 
+    it { should validate_presence_of(:data) }
+    it { should validate_presence_of(:contact_type_id) }
   end
-  
 
   context 'make first student contact primary on create' do
   	it "should first student address be primary" do

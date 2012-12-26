@@ -72,13 +72,13 @@ module Gaku
         end
 
         def wait_until_visible(selector)
-          wait_until { find(selector).visible? }
           wait_for_ajax
+          wait_until { find(selector).visible? }
         end
 
         def wait_until_invisible(selector)
-          wait_until { !page.find(selector).visible? }
           wait_for_ajax
+          wait_until { !page.find(selector).visible? }
         end
 
         def visible?(selector)
@@ -124,6 +124,11 @@ module Gaku
           page.wait_until(timeout) do
             page.evaluate_script 'jQuery.active == 0'
           end
+        end
+
+        def has_validations?
+          click submit
+          wait_until { page.should have_content "can't be blank" }
         end
 
         private
