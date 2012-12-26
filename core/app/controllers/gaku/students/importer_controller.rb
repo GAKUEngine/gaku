@@ -105,8 +105,8 @@ module Gaku
       #@results = importer.import_zaikousei(params[:importer])
       #render :school_station_preview
 
-      Gaku::Core::Importers::SchoolStationImporter.perform_async("zaikousei", params[:importer])
-      render :school_station_preview
+      #Gaku::Core::Importers::SchoolStationImporter.perform_async("zaikousei", params[:importer])
+      #render :school_station_preview
     end
 
   end
