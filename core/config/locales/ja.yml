@@ -43,31 +43,31 @@ ja:
   assignments:
     description: 課題の説明
   attachment:
-    asset_error: 
+    asset_error: アセットのアップロード中にエラーが発生しました
     asset_type: アセットの種類
-    asset_upload: 
+    asset_upload: アセットのアップロードに成功しました!
     assets: アセット
     create: アセットを登録
     description: アセット詳細
     file_name: ファイル名
     file_size: ファイルサイズ
     file_type: ファイル種類
-    list: 
+    list: 添付ファイル一覧
     name: 名称
     new: アセットの登録
-    plural: 
-    singular: 
+    plural: 添付ファイル
+    singular: 添付ファイル
   attendance_type:
-    add: 
+    add: 出席類を追加
     auto_credit: 
-    color_code: 
-    counted_absent: 
+    color_code: 色コード
+    counted_absent: 「欠席」として反映する
     credit_rate: 
     disable_credit: 
-    edit: 
-    list: 
-    name: 
-    new: 
+    edit: 出席類の編集
+    list: 出席類一覧
+    name: 出席類名称
+    new: 新規出席類の登録
     plural: 
     save: 
     singular: 

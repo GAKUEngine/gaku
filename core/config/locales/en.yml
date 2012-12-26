@@ -43,7 +43,7 @@ en:
   assignments:
     description: Assignment Description
   attachment:
-    asset_error: Error when upload asset
+    asset_error: Error during asset upload
     asset_type: Asset type
     asset_upload: Asset was uploaded successfully!
     assets: Assets
