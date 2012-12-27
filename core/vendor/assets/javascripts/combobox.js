@@ -113,7 +113,7 @@
 
 })(jQuery);
 	
-// // new code
-// $(function() {
-	// $(".combobox").combobox();
-// });
+// new code
+$(function() {
+	$(".combobox").combobox();
+});
