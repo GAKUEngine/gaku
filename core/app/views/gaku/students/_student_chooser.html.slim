@@ -53,5 +53,14 @@
 
 javascript:
   $(document).ready(function(){
-    $(".class_group-select").combobox();
+    addOptions($(".class_group-select"));
   });
+  function addOptions(select){
+    for(var i=0; i < select.length; i++){
+      var options = eval(select[i].textContent);
+      for(var j=0; j < options.length; j++){
+        $(select[i]).append($('<option>').html(options[j][0]).val(options[j][1]));
+      }
+    }
+  }
+  //$(".class_group-select").combobox();
