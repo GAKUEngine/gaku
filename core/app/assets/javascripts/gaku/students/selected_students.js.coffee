@@ -6,7 +6,7 @@ $ ->
     if thisCheck.is (':checked')
       surname = $(this).closest('tr').find('td.surname').text()
       name = $(this).closest('tr').find('td.name').text()
-      $('#students-checked').append("<tr class=" + thisId + "><td>" + name + "</td><td>" + surname + "</td></tr>")
+      $('#students-checked').append("<tr class=" + thisId + "><td>" + surname + "</td><td>" + name + "</td></tr>")
       $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
       $('#students-checked-div').slideDown()
       chosen_trs = $('#chosen-table').find('tbody tr')
