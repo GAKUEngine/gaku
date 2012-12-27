@@ -32,8 +32,17 @@ module Gaku
 	  validates :weight, :numericality => { :greater_than_or_equal_to => 0 }
 	  validates :max_score, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
+	  before_create :proper_position
+
+
 	  def student_score(student)
 	  	self.exam_portion_scores.where(:student_id => student.id).first
+	  end
+
+	  private
+
+	  def proper_position
+	 		self.position = self.exam.exam_portions.count
 	  end
 
 	end
