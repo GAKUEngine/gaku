@@ -6,7 +6,6 @@ class CreateGakuExamPortionsTable < ActiveRecord::Migration
       t.float    :weight, :default => 100
   	  t.integer  :problem_count
       t.text     :description, :adjustments
-      t.boolean  :is_master,  :default => false
       t.integer  :position
 
       t.references :exam

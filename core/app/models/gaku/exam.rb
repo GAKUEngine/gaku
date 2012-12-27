@@ -32,7 +32,7 @@ module Gaku
     attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes, :grading_method_id
 
     accepts_nested_attributes_for :exam_portions
-    after_create :build_default_exam_portion
+    # after_create :build_default_exam_portion
 
     scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
 
@@ -44,22 +44,6 @@ module Gaku
     def max_score
       exam_portions.inject(0) {|sum, p| sum + p.max_score }
     end
-
-    private
-      def build_default_exam_portion
-        if self.exam_portions.any?
-          exam_portion = self.exam_portions.first
-        else
-          exam_portion = self.exam_portions.create(:name => self.name)
-        end
-
-        exam_portion.is_master = true
-        if self.name == ""
-          exam_portion.name = self.name
-        end
-        exam_portion.save
-      end
-
   end
 end
 
