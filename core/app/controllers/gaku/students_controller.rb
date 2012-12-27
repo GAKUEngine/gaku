@@ -66,7 +66,7 @@ module Gaku
 
     def collection
       @search = Student.search(params[:q])
-      @students = @search.result(:distinct => true).page(params[:page]).per(2)
+      @students = @search.result(:distinct => true).page(params[:page]).per(10)
     end
 
     private
