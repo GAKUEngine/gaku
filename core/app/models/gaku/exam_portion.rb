@@ -43,8 +43,6 @@ module Gaku
 
 	  def proper_position
 	 		self.position = self.exam.exam_portions.count
-
-	  	# raise exam_exam_portions.inspect
 	  end
 
 	end
