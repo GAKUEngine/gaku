@@ -17,6 +17,11 @@ Gaku::Core::Engine.routes.prepend do
         resources :admission_phase_states, :controller => 'admission_methods/admission_phases/admission_phase_states' do
           post :make_default, :on => :member
         end
+        resources :exams, :controller => 'admission_methods/admission_phases/exams' do
+          get :exciting, :on => :member
+          post :assign_exciting, :on => :collection
+          delete :destroy_connection, :on => :member
+        end
         member do
           get :show_phase_states
         end

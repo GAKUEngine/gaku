@@ -1,0 +1,10 @@
+.row-fluid
+  .span6
+    = f.text_field :name, :label => t(:'exam.name')
+  .span6
+    = f.select :grading_method_id, grading_methods, :label => t(:'exam.grading_method')
+.row-fluid
+  .span6
+    = f.text_area :description, :size => "0x2", :label => t(:'exam.description')
+  .span6
+    = f.text_area :adjustments, :size => "0x2", :label => t(:'exam.adjustments')

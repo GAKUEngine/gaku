@@ -47,6 +47,7 @@ en:
     plural: Admission Phases
     save: Save Admission Phase
     singular: Admission Phase
+    exam: Exam
   admissions:
     candidates:
       existing: Existing Applicant

@@ -1,0 +1,7 @@
+= modal_for 'exciting-admission-method-admission-phase-exam-modal' do
+  = modal_header t(:'exam.add_existing')
+  = form_tag assign_exciting_admin_admission_method_admission_phase_exams_path(@admission_method, @admission_phase), :remote => true do |f|
+
+    = select_tag :exam_id, options_from_collection_for_select(@exams, 'id', 'name', @exams.first.try(:id)), {:class => 'chzn-select'}
+
+    = buttons_for @admission_phase, :nested_id => 'existing-exam', :label => t('exam.add')
