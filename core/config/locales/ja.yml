@@ -113,6 +113,7 @@ ja:
     save: クラスを保存
     show: クラス照会
     singular: クラス
+    none_assigned: None Assigned
   class_group_course_enrollment:
     save: 
   class_group_enrollment:
