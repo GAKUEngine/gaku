@@ -1,4 +1,6 @@
 Gaku::Core::Engine.routes.draw do
+  
+  mount Sidekiq::Web => '/sidekiq'
 
   #devise_for :installs
   devise_for :users, {
