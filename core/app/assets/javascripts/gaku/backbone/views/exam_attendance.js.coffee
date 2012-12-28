@@ -8,6 +8,9 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 		console.log 'renderMe'
 		@submitId = "#" + @options.examPortionScore + "-submit"
 		$(@el).html @template({ attendanceTypes: @options.attendance_types.toJSON(), attendanceUrl : @options.attendanceUrl,examPortionScore: @options.examPortionScore})
+
+		$('body').undelegate @submitId, 'submit'
+
 		$('body').delegate @submitId, 'submit', (event)=>
 			event.preventDefault()
 			@createAttendance(event)

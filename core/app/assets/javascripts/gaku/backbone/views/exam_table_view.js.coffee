@@ -126,8 +126,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-      attendance_types.bind 'reset', ->
-        console.log 'times'
+      attendance_types.on 'reset', ->
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,
