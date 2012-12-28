@@ -115,7 +115,9 @@ en:
     new: New class enrollment
     seat_number: Seat number
   class_group_management: Class Management
-  commute_method: Commute Method
+  commute_method:
+    singular: Commute Method
+    add: Add Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
@@ -240,7 +242,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token: 
+      no_token:
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -254,10 +256,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
+      signed_up_but_inactive:
+      signed_up_but_locked:
+      signed_up_but_unconfirmed:
+      update_needs_confirmation:
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -562,6 +564,7 @@ en:
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
+    import: Import Syllabuses
     code: Syllabus Code
     credits: Credits
     description: Course Description
