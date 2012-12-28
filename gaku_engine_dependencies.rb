@@ -8,6 +8,9 @@ gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer', '0.10.2'
 
+gem 'sidekiq'
+gem 'sinatra', require: false
+
 gem 'rails-i18n'
 
 group :assets do

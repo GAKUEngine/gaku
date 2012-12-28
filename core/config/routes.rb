@@ -203,5 +203,4 @@ Gaku::Core::Engine.routes.draw do
     get 'index'
   end
 
-
 end
