@@ -28,10 +28,10 @@ module Gaku
         phase = @state.admission_phase
         @admission_record = @student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
         @old_state_id = @admission_record.admission_phase_state_id
-    
+
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
         @admission_method = phase.admission_method
-        
+
         if !(@state.id == @admission_record.admission_phase_state_id)
           # TODO decide how next phase should be chosen and decide for default phase states
           if @state.auto_progress == true
@@ -45,6 +45,14 @@ module Gaku
             @new_admission_record.admission_phase_state = @new_state
             @new_admission_record.save
             @admission_record.admission_phase_state_id = @state.id
+          elsif @state.auto_admit == true
+            admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
+            admission = @student.admission
+            admission.admitted = true
+            admission.save
+            @student.admitted = admission_date
+            @student.save
+            @admission_record.admission_phase_state_id = @state.id
           else
             @admission_record.admission_phase_state_id = @state.id
           end
@@ -53,6 +61,15 @@ module Gaku
         end
       end
 
+      def admit_student
+        @student = Student.find(params[:student_id])
+        admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
+        admission = @student.admission
+        admission.admitted = true
+        admission.save
+        @student.admitted = admission_date
+        @student.save
+      end
 
       def index
 
@@ -76,12 +93,12 @@ module Gaku
           # TODO change the selected phase state
           admission_phase_state = admission_phase.admission_phase_states.first
           @admission_phase_record = AdmissionPhaseRecord.create(
-                                                :admission_phase_id => admission_phase.id, 
+                                                :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
-          
+
           render 'create'
-        
+
         end
       end
 
@@ -110,9 +127,9 @@ module Gaku
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
         params[:selected_students].each {|student|
           student_id = student.split("-")[1].to_i
-          admission = Admission.new( :admission_period_id => params[:admission_period_id], 
+          admission = Admission.new( :admission_period_id => params[:admission_period_id],
                                                   :admission_method_id => params[:admission_method_id],
-                                                  :student_id => student_id)   
+                                                  :student_id => student_id)
           if  admission.save
             @enrollments << admission
             @admission_method = admission.admission_method
@@ -120,7 +137,7 @@ module Gaku
             admission_phase = @admission_method.admission_phases.first
             # TODO change the selected phase state
             admission_phase_state = admission_phase.admission_phase_states.first
-            @admission_records << AdmissionPhaseRecord.create(:admission_phase_id => admission_phase.id, 
+            @admission_records << AdmissionPhaseRecord.create(:admission_phase_id => admission_phase.id,
                                         :admission_phase_state_id => admission_phase_state.id,
                                         :admission_id => admission.id)
           else
@@ -129,7 +146,7 @@ module Gaku
         }
         notice = ""
         if !@enrollments.empty?
-          
+
           @enrollments.each {|enrollment|
             student = Student.find(enrollment.student_id)
             notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
@@ -137,7 +154,7 @@ module Gaku
           flash.now[:success] = notice.html_safe
         end
         if !@err_enrollments.empty?
-          
+
           @err_enrollments.each {|enrollment|
             student = Student.find(enrollment.student_id)
             notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
@@ -149,7 +166,7 @@ module Gaku
 
       private
         def load_before_index
-        	@search = Student.search(params[:q])
+          @search = Student.search(params[:q])
           @students = @search.result
           @class_groups = ClassGroup.all
           @courses = Course.all

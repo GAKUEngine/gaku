@@ -1,0 +1,63 @@
+ja:
+  admission_methods:
+    add: 入学形態を追加
+    edit: 入学形態を編集
+    list: 入学形態一覧
+    name: 形態名
+    new: 新しい入学形態
+    plural: 入学形態
+    remove: 削除
+    save: 入学形態を保存
+    singular: 入学形態
+  admission_periods:
+    add: 入学時期を追加
+    admitted_on: 入学日
+    edit: 入学時期を編集
+    list: 入学時期一覧
+    name: 入学時期名
+    new: 入学時期を追加
+    plural: 入学時期
+    rolling: 編入・転入・ローリング
+    save: 入学時期を保存
+    seat_limit: 席数制限(最大席数)
+    singular: 入学時期
+  admission_phase_states:
+    add: 入学フェーズの状態
+    auto_admit: 自動入学
+    auto_progress: 自動進行
+    can_admit: 入学可能
+    can_progress: 進学可能
+    edit: 入学フェーズの状態を編集
+    list: 入学フェーズの状態一覧
+    name: 状態名
+    new: 新しい入学フェーズ状態を登録
+    order: 優先順位
+    plural: 入学フェーズの状態
+    remove: 状態を削除
+    save: 入学フェーズの状態を保存
+    singular: 入学フェーズ状態
+  admission_phases:
+    add: 入学フェーズを追加
+    edit: 入学フェーズを編集
+    list: 入学フェーズ一覧
+    name: 入学フェーズ名
+    new: 入学フェースを追加
+    order: 入学フェーズの順位
+    phase_handler: 入学フェーズハンドラー
+    plural: 入学フェーズ
+    save: 入学フェーズを保存
+    singular: 入学フェーズ
+  admissions:
+    candidates:
+      existing: 既登録入学希望者の追加
+      export: 出力
+      list: 入学希望者一覧
+      new: 新規入学生を登録
+    create: 入学生を登録
+    create_multiple: 複数の入学生を登録
+    please_select_method: 入学形態を選択して下さい
+    please_select_period: 入学時期を選択して下さい
+  menu:
+    admission_methods: 入学形態
+    admission_periods: 入学時期
+    admissions: 入学処理

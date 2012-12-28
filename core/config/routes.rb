@@ -139,6 +139,7 @@ Gaku::Core::Engine.routes.draw do
     resources :notes
     resources :exam_scores
     resources :exam_portions, :controller => 'exams/exam_portions' do
+      post :sort, :on => :collection
       resources :attachments, :controller => 'exams/exam_portions/attachments'
     end
   end
@@ -201,6 +202,5 @@ Gaku::Core::Engine.routes.draw do
   resource :grading_methods do
     get 'index'
   end
-
 
 end
