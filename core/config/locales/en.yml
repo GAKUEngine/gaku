@@ -476,6 +476,7 @@ en:
     uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
+  order: Order
   panel: Panel
   period: Period
   phone: Phone Number
