@@ -8,9 +8,9 @@ module Gaku
           def import(data)
             importer = ImportFile.new(data)
 
-            #importer.context = 'students'
+            importer.context = 'syllabuses'
             if importer.save
-              book = Spreadsheet.open(importer.data_file.path)
+              book = Spreadsheet.open(data.path)
               sheet = book.worksheet(@sheet_name)
 
               ActiveRecord::Base.transaction do
