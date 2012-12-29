@@ -5,7 +5,10 @@ module Gaku
       module SchoolStation
         class Zaikousei
           
+          @record_count
+
           def get_default_index
+            @record_count = 0
             idx = Hash.new
 
             #initial default values (from inital raw output)
@@ -103,6 +106,14 @@ module Gaku
 
             results = Hash.new
             results[:status] = "OK"
+           # results[:record_count] = @record_count
+
+           # logger.info "--------------------------------------------------"
+           # logger.info "Created #{importer.record_count} student records in the db"
+           # logger.info "Students in the db: #{Student.count}"
+           # logger.info "Contacts in the db: #{Contact.count}"
+           # logger.info "Addresses in the db: #{Address.count}"
+           # logger.info "Guardians in the db: #{Guardian.count}"
 
             return results
           end
@@ -114,6 +125,9 @@ module Gaku
             #sheet is shifted so the top line is taken
             #idx = check_index(sheet.first, idx)
             
+            #sheet.each 1 do |row|
+            #  Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(row, idx)
+            #end
             Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(sheet, idx)
           end
         end
