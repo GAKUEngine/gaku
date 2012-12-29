@@ -20,9 +20,9 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         grades: @options.grades,
                         ranks: @options.ranks
                         attendances: @options.attendances
+                        path_to_exam: @options.path_to_exam
                       }
-
-    $(this.el).html @template(optionsObjects)
+    @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
       $('#exam-grading-user').html userView.render().el
@@ -126,8 +126,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-      attendance_types.bind 'reset', ->
-        console.log 'times'
+      attendance_types.on 'reset', ->
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,
@@ -147,18 +146,15 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
 
   validatePortion: (event)->
-    currentTarget = $(event.currentTarget)
+    currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
-    maxScore = $(event.currentTarget).data('max-score')
+    maxScore           = currentTarget.closest('form').data('max-score')
 
-    if currentTargetValue > maxScore
-      currentTargetInput.addClass('score-error')
-    else if currentTargetValue < 0
+    if currentTargetValue > maxScore or currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
       @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
-
 
 
   updatePortion:(urlLink, score, baseURI) ->
@@ -166,7 +162,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       urlLink: urlLink
       score: score
       baseURI: baseURI
-    console.log 'update me'
 
 
 

@@ -74,5 +74,35 @@ module Gaku
       end
     end
 
+    def manage_buttons_for(resource, options = {})
+      id = extract_id(resource)
+      concat link_to_show(resource, :id => "show-#{id}-link") unless except?(:show, options)
+      concat link_to_edit [:edit] + [resource].flatten, :id => "edit-#{id}-link", :remote => true unless except?(:edit, options)
+      ajax_link_to_delete resource, :id => "delete-#{id}-link" unless except?(:delete, options)
+    end
+
+    private
+
+    def except?(button_symbol, options)
+      [options[:except]].flatten.include?(button_symbol)
+    end
+
+    def extract_id(resource)
+      if resource.kind_of?(Array)
+        resource_id = String.new
+        resource.each_with_index do |r, index|
+          resource_id << '-' unless index == 0
+          resource_id << proper_id(r)
+        end
+        resource_id
+      else
+        proper_id(resource)
+      end
+    end
+
+    def proper_id(resource)
+      resource.class.to_s.underscore.split('/')[1].dasherize
+    end
+
   end
 end

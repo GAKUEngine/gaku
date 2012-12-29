@@ -42,6 +42,8 @@ module Gaku
       calculate_deviation
       calculate_rank_and_grade
 
+      @path_to_exam = course_path(:id => params[:course_id])
+
       respond_to do |format|
         format.json { render :json => {
           :student_total_scores => @student_total_scores.as_json(),
@@ -52,7 +54,8 @@ module Gaku
           :students => @students.to_json(:root => false),
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
-          :attendances => @student_portion_attendance.as_json(:root => true)
+          :attendances => @student_portion_attendance.as_json(:root => true),
+          :path_to_exam => @path_to_exam.to_json
         }}
         format.html { render "gaku/exams/grading" }
       end
