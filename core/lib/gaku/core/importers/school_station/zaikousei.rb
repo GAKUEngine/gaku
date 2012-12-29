@@ -4,6 +4,7 @@ module Gaku
     module Importers
       module SchoolStation
         class Zaikousei
+<<<<<<< HEAD
           
           @record_count
 
