@@ -1,5 +1,5 @@
 - if !phase.exam.nil?
   - if phase.admission_phase_records.count > 0
-    = link_to 'Grade', grading_admin_admission_phase_exam_path(phase, phase.exam)
+    = button t('exams.grade'), grading_admin_admission_phase_exam_path(phase, phase.exam)
   - else
     = t('admission_phases.no_students')

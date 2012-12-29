@@ -63,3 +63,5 @@ en:
     admission_methods: Admission Methods
     admission_periods: Admission Periods
     admissions: Admissions
+  exams:
+    grade: Grade Exam
