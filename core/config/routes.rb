@@ -83,6 +83,7 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
     resources :notes
+    resources :importer, :controller => 'syllabuses/importer'
   end
 
   resources :students do
