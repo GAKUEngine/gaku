@@ -48,6 +48,7 @@ en:
     save: Save Admission Phase
     singular: Admission Phase
     exam: Exam
+    no_students: "This phase have exam assigned, but there are no students to grade"
   admissions:
     candidates:
       existing: Existing Applicant
