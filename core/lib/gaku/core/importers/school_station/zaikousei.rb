@@ -2,14 +2,10 @@
 module Gaku
   module Core
     module Importers
-      class SchoolStation
+      module SchoolStation
         class Zaikousei
           # default filename CAMPUS_ZAIKOTBL
           def import(id)
-            #import ZAIKOU list from SchoolStation
-            #file_data = data[:data_file]
-
-            #read from saved file
 
             importer = ImportFile.find(id)
 
@@ -19,7 +15,6 @@ module Gaku
               sheet = book.worksheet(0)
 
               ActiveRecord::Base.transaction do
-                #Giorgio:put in transaction for fast importing
                 @record_count = 0
 
                 idx = self.class.get_default_index()
@@ -134,6 +129,7 @@ module Gaku
                     if !row[idx[:address2]].nil?
                       address2 = row[idx[:address2]]
                     end
+                    
                       student.addresses.create!(:zipcode => zipcode,
                                                 :country_id => @japanID,
                                                 :state => state,
