@@ -64,3 +64,5 @@ ja:
     admissions: 入学処理
   exams:
     grade:
+    exam_score:
+    not_graded: 
