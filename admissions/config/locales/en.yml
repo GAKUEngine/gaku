@@ -63,3 +63,7 @@ en:
     admission_methods: Admission Methods
     admission_periods: Admission Periods
     admissions: Admissions
+  exams:
+    grade: Grade Exam
+    exam_score: Exam Score
+    not_graded: Not Graded

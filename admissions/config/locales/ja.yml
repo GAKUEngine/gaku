@@ -62,3 +62,5 @@ ja:
     admission_methods: 入学形態
     admission_periods: 入学時期
     admissions: 入学処理
+  exams:
+    grade:
