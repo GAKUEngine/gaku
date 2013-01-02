@@ -7,6 +7,8 @@
       = th t(:'gender.label')
       = th t(:'class_group.name')
       = th t(:'class_group_enrollment.seat_number')
+      - if !state.admission_phase.exam.nil?
+        = th t(:'exam.exam_score')
       = th_actions 140
   tbody
-    = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state}
+    = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }

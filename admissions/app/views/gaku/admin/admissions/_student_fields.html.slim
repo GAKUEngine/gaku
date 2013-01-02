@@ -4,3 +4,13 @@ td.birth = student.birth_date
 td.gender = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
 td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
+// TODO: move this to helper
+- if !phase.exam.nil?
+  td.exam-score
+    - score = 0
+    - phase.exam.exam_portions.each do |exam_portion|
+      score += Gaku::ExamPortionScore.where(:exam_portion_id => exam_portion.id, :student_id => student.id).score
+    - if score == 0
+      = t(:'exams.not_graded')
+    - else
+      = score
