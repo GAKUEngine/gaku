@@ -24,7 +24,9 @@ module Gaku
       calculate_deviation
       calculate_rank_and_grade
 
-      @path_to_exam = admin_admission_phase_exam_path(:id => params[:admission_phase_id])
+      @path_to_exam = admin_admission_phase_path(:id => params[:admission_phase_id])
+
+      # raise @path_to_exam.inspect
 
       respond_to do |format|
         format.json { render :json => {
