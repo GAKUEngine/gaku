@@ -6,15 +6,4 @@ td.class-name = student.class_group_enrollments.empty? ? '' : student.class_grou
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
 // TODO: move this to helper
 - if !phase.exam.nil?
-  td.exam-score
-    - total_score = 0
-    - student_graded = false
-    - phase.exam.exam_portions.each do |exam_portion|
-      - portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  student.id)
-      - if !portion_score.nil?
-        - student_graded = true
-        - total_score += portion_score.score.to_i
-    - if !student_graded
-      = t(:'exams.not_graded')
-    - else
-      = total_score
+  td.exam-score = @students.select{|f| f[:student_id] == student.id}[0][:exam_score]
