@@ -9,7 +9,7 @@ td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_gro
   td.exam-score
     - score = 0
     - phase.exam.exam_portions.each do |exam_portion|
-      score += Gaku::ExamPortionScore.where(:exam_portion_id => exam_portion.id, :student_id => student.id).score
+      - score += Gaku::ExamPortionScore.where(:exam_portion_id => exam_portion.id, :student_id => student.id).score
     - if score == 0
       = t(:'exams.not_graded')
     - else
