@@ -1,4 +1,12 @@
 en:
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."
+
   add: Add
   address:
     add: Add Address
@@ -477,6 +485,7 @@ en:
     uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
+  order: Order
   panel: Panel
   period: Period
   phone: Phone Number

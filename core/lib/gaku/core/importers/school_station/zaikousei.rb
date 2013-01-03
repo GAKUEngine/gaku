@@ -2,31 +2,27 @@
 module Gaku
   module Core
     module Importers
-      class SchoolStation
+      module SchoolStation
         class Zaikousei
           # default filename CAMPUS_ZAIKOTBL
-          def import(data)
-            #import ZAIKOU list from SchoolStation
-            #file_data = data[:data_file]
-            
-            #read from saved file
-            importer = ImportFile.new(data)
-            importer.context = 'students'
-            if importer.save
+          def import(id)
+
+            importer = ImportFile.find(id)
+
+            if importer
               book = Spreadsheet.open(importer.data_file.path)
-              
+
               sheet = book.worksheet(0)
 
               ActiveRecord::Base.transaction do
-                #Giorgio:put in transaction for fast importing
                 @record_count = 0
-              
+
                 idx = self.class.get_default_index()
 
                 #定数
                 @japanID = Country.where(:numcode => 392).first.id
                 @phoneContactType = Gaku::ContactType.where(:name => "Phone").first
-                
+
 
                 sheet.each do |row|
                   unless book.worksheet('CAMPUS_ZAIKOTBL').first == row
@@ -58,7 +54,7 @@ module Gaku
                         birth_date = Date.strptime(row[idx[:birthDate]].to_s, "%Y/%m/%d")
                       end
                     end
-                    
+
                     gender = nil
                     if !row[idx[:gender]].nil?
                       if row[idx[:gender]].to_i == 2
@@ -67,16 +63,16 @@ module Gaku
                         gender = 1
                       end
                     end
-                    
+
                     phone = nil
                     if !row[idx[:phone]].nil?
                       phone = row[idx[:phone]]
                     end
 
                     # check for existing
-                    student = Student.create!(:surname => surname, 
+                    student = Student.create!(:surname => surname,
                                     :name => name,
-                                    :surname_reading => surname_reading, 
+                                    :surname_reading => surname_reading,
                                     :name_reading => name_reading,
                                     :student_foreign_id_number => student_foreign_id_number,
                                     :birth_date => birth_date,
@@ -133,6 +129,7 @@ module Gaku
                     if !row[idx[:address2]].nil?
                       address2 = row[idx[:address2]]
                     end
+                    
                       student.addresses.create!(:zipcode => zipcode,
                                                 :country_id => @japanID,
                                                 :state => state,

@@ -1,4 +1,6 @@
 Gaku::Core::Engine.routes.draw do
+  
+  mount Sidekiq::Web => '/sidekiq'
 
   #devise_for :installs
   devise_for :users, {
@@ -81,6 +83,7 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
     resources :notes
+    resources :importer, :controller => 'syllabuses/importer'
   end
 
   resources :students do

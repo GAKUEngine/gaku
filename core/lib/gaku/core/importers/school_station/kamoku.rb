@@ -2,20 +2,20 @@
 module Gaku
   module Core
     module Importers
-      class SchoolStation
+      module SchoolStation
         class Kamoku
           @sheet_name = "CAMPUS_KAMOKTBL"
           def import(data)
             importer = ImportFile.new(data)
 
-            #importer.context = 'students'
+            importer.context = 'syllabuses'
             if importer.save
-              book = Spreadsheet.open(importer.data_file.path)
+              book = Spreadsheet.open(data.path)
               sheet = book.worksheet(@sheet_name)
 
               ActiveRecord::Base.transaction do
                 @record_count = 0
-              
+
                 idx = self.class.get_default_index()
 
                 sheet.each do |row|

@@ -45,4 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'client_side_validations'
   s.add_dependency 'nested_form'
   s.add_dependency 'kaminari'
+
+  s.add_dependency 'sidekiq'
+  s.add_dependency 'sinatra'
 end
