@@ -20,8 +20,8 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         grades: @options.grades,
                         ranks: @options.ranks
                         attendances: @options.attendances
+                        path_to_exam: @options.path_to_exam
                       }
-
     @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)

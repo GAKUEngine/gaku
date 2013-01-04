@@ -17,4 +17,5 @@ class GAKUEngine.Routers.ExamsRouter extends Backbone.Router
       grades: @options.grades
       ranks: @options.ranks
       attendances: @options.attendances
+      path_to_exam: @options.path_to_exam
     $('.grading-container').html @tableView.render().el

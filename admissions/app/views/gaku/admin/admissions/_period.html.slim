@@ -1,2 +1,5 @@
-= form_tag change_admission_period_admin_admissions_path, :remote => true, :id => "change-admission-period-form" do
-  = select_tag :admission_period, options_from_collection_for_select(@admission_periods, 'id', 'name', admission_period.id), :onchange => "$('#change-admission-period-form').submit()", :class => "span12"
+- if !admission_period.nil?
+  = form_tag change_admission_period_admin_admissions_path, :remote => true, :id => "change-admission-period-form" do
+    = select_tag :admission_period, options_from_collection_for_select(@admission_periods, 'id', 'name', admission_period.id), :onchange => "$('#change-admission-period-form').submit()", :class => "span12"
+- else
+  'No period available.'

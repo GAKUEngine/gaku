@@ -184,9 +184,28 @@ module Gaku
           @students = []
           @state_records = AdmissionPhaseRecord.all
           @state_records.each {|record|
+            total_score = 0
+            student_graded = false
+            phase = record.admission_phase
+            if !phase.exam.nil?
+              phase.exam.exam_portions.each do |exam_portion|
+                portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
+                if !portion_score.nil?
+                  student_graded = true
+                  total_score += portion_score.score.to_i
+                end
+              end
+            end
+            if student_graded
+              exam_score = total_score
+            else
+              exam_score = t('exams.not_graded')
+            end
             @students << {
               :state_id => record.admission_phase_state_id,
-              :student => record.admission.student
+              :student => record.admission.student,
+              :student_id => record.admission.student.id,
+              :exam_score => exam_score
             }
           }
         end
