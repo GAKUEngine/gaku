@@ -204,7 +204,6 @@ module Gaku
             @students << {
               :state_id => record.admission_phase_state_id,
               :student => record.admission.student,
-              :student_id => record.admission.student.id,
               :exam_score => exam_score
             }
           }
