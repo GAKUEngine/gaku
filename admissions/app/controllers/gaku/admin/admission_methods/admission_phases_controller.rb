@@ -11,18 +11,21 @@ module Gaku
 
       before_filter :load_admission_method
       before_filter :admission_phases_count, :only => [:create, :destroy]
-      
+
       def create
-        super do |format|
-          if @admission_phase.save  && @admission_method.admission_phases << @admission_phase 
+        @admission_phase = @admission_method.admission_phases.build(params[:admission_phase])
+          # @admission_phase.save  && @admission_method.admission_phases << @admission_phase
+
+          if @admission_phase.save
             if !@admission_phase.admission_phase_states.any?
               admission_phase_state = AdmissionPhaseState.create(:name => "Default state",:admission_phase_id => @admission_phase.id, :is_default => true)
             else
               @admission_phase.admission_phase_states.first.update_attributes(:is_default => true)
             end
-            format.js { render 'create' }
+            respond_to do |format|
+              format.js { render 'create' }
+            end
           end
-        end
       end
 
       def show_phase_states
@@ -33,12 +36,19 @@ module Gaku
 
       end
 
+      def sort
+        params[:'admission-method-admission-phase'].each_with_index do |id, index|
+          @admission_method.admission_phases.update_all( {:position => index}, {:id => id} )
+        end
+        render :nothing => true
+      end
+
       private
         def load_admission_method
           @admission_method = AdmissionMethod.find(params[:admission_method_id])
         end
 
-        def admission_phases_count 
+        def admission_phases_count
           @admission_phases_count = @admission_method.admission_phases.count
         end
     end

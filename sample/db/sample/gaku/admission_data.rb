@@ -46,7 +46,7 @@ regular_method = create_sample_admission_method(
   { :name => "Regular Admissions" },
   [
     {
-      :args => { :name => "Written Application", :order => 1 },
+      :args => { :name => "Written Application", :position => 0 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -54,14 +54,14 @@ regular_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report", :order => 2 },
+      :args => { :name => "Written Report", :position => 1 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Exam", :order => 3 },
+      :args => { :name => "Exam", :position => 2 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed", :can_admit => true, :can_progress => true, :auto_progress => true },
@@ -69,7 +69,7 @@ regular_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview", :order => 4 },
+      :args => { :name => "Interview", :position => 3 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
@@ -83,7 +83,7 @@ international_division_method = create_sample_admission_method(
   { :name => "International Division Admissions" },
   [
     {
-      :args => { :name => "Written Application", :order => 1 },
+      :args => { :name => "Written Application", :position => 0 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -91,14 +91,14 @@ international_division_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview", :order => 2 },
+      :args => { :name => "Interview", :position => 1 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
         { :name => "Rejected", :can_admit => false }
       ]
     },{
-      :args => { :name => "Exam", :order => 3 },
+      :args => { :name => "Exam", :position => 2 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed", :can_admit => true, :can_progress => true, :auto_progress => true },
@@ -106,7 +106,7 @@ international_division_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Foreign Langauge Exam", :order => 4 },
+      :args => { :name => "Foreign Langauge Exam", :position => 3 },
       :states => [
         { :name => "Pre-Exam" },
         { :name => "Passed with Fluent Score", :can_admit => true, :can_progress => true, :auto_progress => true, :auto_admit => true },
@@ -115,7 +115,7 @@ international_division_method = create_sample_admission_method(
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report", :order => 5 },
+      :args => { :name => "Written Report", :position => 4 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
@@ -129,7 +129,7 @@ summer_method = create_sample_admission_method(
   { :name => "Summer Program Admissions"},
   [
     {
-      :args => { :name => "Written Application", :order => 1 },
+      :args => { :name => "Written Application", :position => 0 },
       :states => [
         { :name => "Received" },
         { :name => "In Review" },
@@ -137,14 +137,14 @@ summer_method = create_sample_admission_method(
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Written Report", :order => 2 },
+      :args => { :name => "Written Report", :position => 1 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
         { :name => "Rejected", :can_progress => false }
       ]
     },{
-      :args => { :name => "Interview", :order => 3 },
+      :args => { :name => "Interview", :position => 2 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
@@ -170,36 +170,36 @@ period = Gaku::AdmissionPeriod.create({ :name => "2013年秋推薦" })
 
 period = Gaku::AdmissionPeriod.create({ :name => "2013年秋" })
 
-#{}"admission_method_id", "admitted", "created_at", 
+#{}"admission_method_id", "admitted", "created_at",
 #{}"scholarship_status_id", "student_id", "updated_at"
 #      t.references :admission
 #      t.references :admission_phase
 #      t.references :admission_phase_state
 
-#admission = Gaku::Admission.create( 
-#            :student_id => 1, 
+#admission = Gaku::Admission.create(
+#            :student_id => 1,
 #            :admission_method_id => Gaku::AdmissionMethod.first.id)
 #admission_record = Gaku::AdmissionPhaseRecord.create(
 #            :admission_id => admission.id,
 #            :admission_phase_id => Gaku::AdmissionPhase.first.id,
 #            :admission_phase_state_id => Gaku::AdmissionPhase.first.admission_phase_states.first.id)
-#admission2 = Gaku::Admission.create( 
-#            :student_id => 2, 
+#admission2 = Gaku::Admission.create(
+#            :student_id => 2,
 #            :admission_method_id => Gaku::AdmissionMethod.first.id)
 #admission_record2 = Gaku::AdmissionPhaseRecord.create(
 #            :admission_id => admission2.id,
 #            :admission_phase_id => Gaku::AdmissionPhase.first.id,
 #            :admission_phase_state_id => Gaku::AdmissionPhase.first.admission_phase_states.first.id)
 #
-#admission3 = Gaku::Admission.create( 
-#            :student_id => 3, 
+#admission3 = Gaku::Admission.create(
+#            :student_id => 3,
 #            :admission_method_id => Gaku::AdmissionPhase.first.id)
 #admission_record3 = Gaku::AdmissionPhaseRecord.create(
 #            :admission_id => admission3.id,
 #            :admission_phase_id => Gaku::AdmissionPhase.first.id,
 #            :admission_phase_state_id => 2)
-#admission4 = Gaku::Admission.create( 
-#            :student_id => 4, 
+#admission4 = Gaku::Admission.create(
+#            :student_id => 4,
 #            :admission_method_id => Gaku::AdmissionMethod.first.id)
 #admission_record4 = Gaku::AdmissionPhaseRecord.create(
 #            :admission_id => admission4.id,
