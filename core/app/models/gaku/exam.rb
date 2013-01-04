@@ -25,6 +25,7 @@ module Gaku
     has_many :attendances, :as => :attendancable
 
     belongs_to :grading_method
+    belongs_to :admission_phase
 
     validates_presence_of :name
     validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }

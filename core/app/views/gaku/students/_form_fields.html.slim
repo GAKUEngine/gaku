@@ -1,6 +1,6 @@
 .row-fluid
   .span6
-    = f.select :class_group_ids, class_groups, :label => t(:'class')
+    = f.select :class_group_ids, class_groups,{:prompt => t(:'class_groups.none_assigned')}, :label => t(:'class')
 .row-fluid
   .span6
     = f.text_field :surname_reading, :label => surname_reading_label

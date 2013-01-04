@@ -10,7 +10,13 @@ module Gaku
       def grading
 
       # @course = Course.find(params[:course_id])
-      @students = Student.first(3) #students ....
+      phase = AdmissionPhase.find(params[:admission_phase_id])
+      records = phase.admission_phase_records
+      @students = []
+      records.each {|record|
+        @students << record.admission.student
+      }
+      #@students = Student.first(3) #students ....
       @exams = Exam.where(:id => params[:id]) #don`t use find .. because need relation
 
       calculate_totals
@@ -18,7 +24,9 @@ module Gaku
       calculate_deviation
       calculate_rank_and_grade
 
-      @path_to_exam = admin_admission_path(:id => params[:admission_id])
+      @path_to_exam = admin_admission_phase_path(:id => params[:admission_phase_id])
+
+      # raise @path_to_exam.inspect
 
       respond_to do |format|
         format.json { render :json => {

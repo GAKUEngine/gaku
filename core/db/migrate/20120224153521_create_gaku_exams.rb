@@ -8,7 +8,6 @@ class CreateGakuExams < ActiveRecord::Migration
       t.boolean  :is_standalone, :default => false 
 
       t.references :grading_method
-      t.references :admission_phase
 
       t.timestamps
     end

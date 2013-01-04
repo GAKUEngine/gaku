@@ -1,10 +1,6 @@
 Gaku::Core::Engine.routes.prepend do
 	namespace :admin do
 		resources :admissions do
-      resources :exams do
-        get :grading, :on => :member
-        resources :exam_portion_scores
-      end
       collection do
         post :change_admission_period
         post :change_admission_method
@@ -16,10 +12,23 @@ Gaku::Core::Engine.routes.prepend do
 
       get :new_applicant
     end
+
+    resources :admission_phases do 
+      resources :exams do
+        get :grading, :on => :member
+        resources :exam_portion_scores
+      end
+    end
+
     resources :admission_methods do
       resources :admission_phases, :controller => 'admission_methods/admission_phases' do
         resources :admission_phase_states, :controller => 'admission_methods/admission_phases/admission_phase_states' do
           post :make_default, :on => :member
+        end
+        resources :exams, :controller => 'admission_methods/admission_phases/exams' do
+          get :exciting, :on => :member
+          post :assign_exciting, :on => :collection
+          delete :destroy_connection, :on => :member
         end
         member do
           get :show_phase_states

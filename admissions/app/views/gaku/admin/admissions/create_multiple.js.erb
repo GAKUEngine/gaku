@@ -10,4 +10,5 @@ showNotice("<%= render_flash %>");
 
 <%- @admission_method.admission_phases.each {|phase| %>
   $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+  $('#phase_<%= phase.id %>-grade-button').html('<%= render_js_partial("grade_button", :phase => phase) %>');
 <% } %>
