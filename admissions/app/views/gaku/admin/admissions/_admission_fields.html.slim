@@ -1,0 +1,6 @@
+td.status = admission.admitted ? admission.student.admitted : t(:'admissions.not_admitted')
+td.name = admission.student.name
+td.birth = admission.student.birth_date
+td.registration-date = admission.admission_phase_records.first.created_at.strftime("%Y.%m.%d")
+td.admission-phase = admission.admission_phase_records.last.admission_phase.name
+td.manage

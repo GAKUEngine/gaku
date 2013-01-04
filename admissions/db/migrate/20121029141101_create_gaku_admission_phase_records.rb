@@ -4,6 +4,8 @@ class CreateGakuAdmissionPhaseRecords < ActiveRecord::Migration
   		t.references :admission
   		t.references :admission_phase
       t.references :admission_phase_state
+
+      t.timestamps
   	end
   end
 end

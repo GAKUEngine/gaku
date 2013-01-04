@@ -16,6 +16,6 @@ module Gaku
     accepts_nested_attributes_for :admission_phase_records, :allow_destroy => true
     accepts_nested_attributes_for :student
 
-    attr_accessible :student_id, :scholarship_status_id , :admission_method_id, :admission_period_id, :student_attributes
+    attr_accessible :student_id, :scholarship_status_id , :admission_method_id, :admission_period_id, :student_attributes, :admitted
   end
 end
