@@ -2,7 +2,7 @@
 module Gaku
   module Core
     module Importers
-      class SchoolStation
+      module SchoolStation
         class Kamoku
           @sheet_name = "CAMPUS_KAMOKTBL"
           def import(data)
@@ -15,7 +15,7 @@ module Gaku
 
               ActiveRecord::Base.transaction do
                 @record_count = 0
-              
+
                 idx = self.class.get_default_index()
 
                 sheet.each do |row|

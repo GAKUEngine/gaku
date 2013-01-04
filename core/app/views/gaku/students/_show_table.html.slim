@@ -41,8 +41,7 @@
         th.btn-c2 = t('commute_method.singular')
         td
           #student-commute-method
-            #student-commute-method-form
-            -if student.commute_method
-              =render 'gaku/students/commute_methods/commute_method', :student => student
-            -else
-              =ajax_link_to_new t(:add), [:new, student, :commute_method], :id => 'new-student-commute-method-link'
+            - if student.commute_method
+              = render 'gaku/students/commute_methods/commute_method', :student => student
+            - else
+              = ajax_link_to_new t(:add), [:new, student, :commute_method], :id => 'new-student-commute-method-link'

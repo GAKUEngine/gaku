@@ -20,8 +20,8 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         grades: @options.grades,
                         ranks: @options.ranks
                         attendances: @options.attendances
+                        path_to_exam: @options.path_to_exam
                       }
-
     @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
@@ -116,18 +116,26 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       attendance.url = "#{attendanceUrl}/#{attendanceId}"
       attendance.fetch
         success: ->
-          attendanceShow = new GAKUEngine.Views.ExamAttendanceShow({model: attendance, currentTarget: currentTarget })
-          currentTarget.popover
-            trigger: 'manual'
-            html : true
-            content: ->
-              attendanceShow.render().el
-          currentTarget.popover 'toggle'
+          attendance_types = new GAKUEngine.Collections.AttendanceTypes()
+          attendance_types.on 'reset', ->
+            attendanceView = new GAKUEngine.Views.ExamAttendance(
+                                      attendance_types : attendance_types,
+                                      attendanceUrl : attendanceUrl,
+                                      currentTarget : currentTarget,
+                                      examPortionScore: examPortionScore,
+                                      attendance: attendance)
+            currentTarget.popover
+
+              trigger: 'toggle'
+              html : true
+              content: ->
+                attendanceView.render().el
+            currentTarget.popover 'toggle'
+          attendance_types.fetch()
 
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-      attendance_types.bind 'reset', ->
-        console.log 'times'
+      attendance_types.on 'reset', ->
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,

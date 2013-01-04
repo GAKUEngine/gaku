@@ -47,6 +47,7 @@ ja:
     plural: 入学フェーズ
     save: 入学フェーズを保存
     singular: 入学フェーズ
+    no_students:
   admissions:
     candidates:
       existing: 既登録入学希望者の追加
@@ -61,3 +62,7 @@ ja:
     admission_methods: 入学形態
     admission_periods: 入学時期
     admissions: 入学処理
+  exams:
+    grade:
+    exam_score:
+    not_graded: 

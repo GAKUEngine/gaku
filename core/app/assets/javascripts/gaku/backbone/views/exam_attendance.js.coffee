@@ -5,17 +5,28 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 	# 	'submit #grading-attendance-type-select' : 'alertMe'
 
 	render: ->
-		console.log 'renderMe'
+		that = @
 		@submitId = "#" + @options.examPortionScore + "-submit"
-		$(@el).html @template({ attendanceTypes: @options.attendance_types.toJSON(), attendanceUrl : @options.attendanceUrl,examPortionScore: @options.examPortionScore})
+		$(@el).empty().html @template({ attendanceTypes: @options.attendance_types.toJSON(), attendanceUrl : @options.attendanceUrl,examPortionScore: @options.examPortionScore, attendance: @options.attendance.toJSON() if @options.attendance })
+
+		$('body').undelegate @submitId, 'submit'
+
 		$('body').delegate @submitId, 'submit', (event)=>
 			event.preventDefault()
 			@createAttendance(event)
-		@
 
-	alertMe: (event) ->
-		eve
-		alert 'hello'
+		$('body').undelegate '.delete-attendance', 'click'
+
+		$('body').delegate '.delete-attendance', 'click', (event) ->
+			event.preventDefault()
+
+			attendanceInpit =  $('#score-' + that.options.attendance.get('attendancable_id'))
+			attendanceInpit.removeAttr("disabled")
+			attendanceInpit.closest('td').children('.portion_set_attendance').removeAttr('data-attendance')
+
+			that.options.attendance.destroy()
+			that.options.currentTarget.popover('destroy')
+		@
 
 	createAttendance: (event)->
 		event.preventDefault()
@@ -30,7 +41,6 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 		attendance.set('attendance': {'reason': attendanceReason ,'attendance_type_id': attendanceTypeId})
 
 		attendance.save {}, success: (response)=>
-			console.log response.id
 			@options.currentTarget.attr('data-attendance', response.id)
 			@options.currentTarget.closest('.score-column')
 												 .find('input').attr('disabled', '')

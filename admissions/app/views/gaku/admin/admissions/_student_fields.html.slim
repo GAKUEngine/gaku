@@ -4,3 +4,6 @@ td.birth = student.birth_date
 td.gender = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
 td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
+// TODO: move this to helper
+- if !phase.exam.nil?
+  td.exam-score = @students.select{|f| f[:student_id] == student.id}[0][:exam_score]

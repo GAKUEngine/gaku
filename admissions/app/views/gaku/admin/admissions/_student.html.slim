@@ -1,5 +1,5 @@
 tr id="student-#{student.id}"
-  = render 'gaku/admin/admissions/student_fields', :student => student
+  = render 'gaku/admin/admissions/student_fields', :student => student, :phase => state.admission_phase
   td.manage
     - if student.admission.admitted == true
       = t("admissions.admitted_on") + " " + student.admitted.strftime("%d-%b-%Y")
