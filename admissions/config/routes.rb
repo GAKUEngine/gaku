@@ -13,10 +13,12 @@ Gaku::Core::Engine.routes.prepend do
       get :new_applicant
     end
 
-    resources :admission_phases do 
+    resources :admission_phases do
       resources :exams do
         get :grading, :on => :member
-        resources :exam_portion_scores
+        resources :exam_portion_scores do
+          resources :attendances
+        end
       end
     end
 
