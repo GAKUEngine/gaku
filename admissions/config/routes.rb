@@ -8,8 +8,9 @@ Gaku::Core::Engine.routes.prepend do
         get :student_chooser
         post :create_multiple
         post :admit_student
+        get :listing_admissions
       end
-
+      
       get :new_applicant
     end
 
