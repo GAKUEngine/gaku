@@ -7,8 +7,8 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_before_index, :only => [:index, :change_admission_period, :change_admission_method]
-      before_filter :load_state_records, :only => [:index, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
+      before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
+      before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
 
@@ -75,6 +75,10 @@ module Gaku
 
         #raise @students.find_all { |h| h[:state_id] == 1 }.map { |i| i[:student] }.inspect
         #raise @students.inspect
+      end
+
+      def listing_admissions
+
       end
 
       def new

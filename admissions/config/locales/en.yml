@@ -58,6 +58,7 @@ en:
       export: Export
       list: Admission Candidates List
       new: New Applicant
+      not_admitted: Not admitted
     create: Create
     create_multiple: Create student entries and their admissions
     please_select_method: Please Select Admission Method
