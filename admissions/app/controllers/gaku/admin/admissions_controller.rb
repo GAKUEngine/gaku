@@ -172,8 +172,10 @@ module Gaku
           @courses = Course.all
           @admission_periods = Gaku::AdmissionPeriod.all
           @admission_period = @admission_periods.last
-          @admission_methods = @admission_periods.last.admission_methods
-          @admission_method = @admission_period.admission_methods.first
+          if !@admission_period.nil?
+            @admission_methods = @admission_periods.last.admission_methods
+            @admission_method = @admission_period.admission_methods.first
+          end
         end
 
         def load_search_object
