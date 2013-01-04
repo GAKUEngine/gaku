@@ -9,6 +9,8 @@ ja:
     remove: 削除
     save: 入学形態を保存
     singular: 入学形態
+    no_method: 
+    no_period: 
   admission_periods:
     add: 入学時期を追加
     admitted_on: 入学日
@@ -21,6 +23,7 @@ ja:
     save: 入学時期を保存
     seat_limit: 席数制限(最大席数)
     singular: 入学時期
+    no_period: 
   admission_phase_states:
     add: 入学フェーズの状態
     auto_admit: 自動入学
@@ -47,12 +50,14 @@ ja:
     plural: 入学フェーズ
     save: 入学フェーズを保存
     singular: 入学フェーズ
+    no_students:
   admissions:
     candidates:
       existing: 既登録入学希望者の追加
       export: 出力
       list: 入学希望者一覧
       new: 新規入学生を登録
+      not_admitted: 
     create: 入学生を登録
     create_multiple: 複数の入学生を登録
     please_select_method: 入学形態を選択して下さい
@@ -61,3 +66,7 @@ ja:
     admission_methods: 入学形態
     admission_periods: 入学時期
     admissions: 入学処理
+  exams:
+    grade:
+    exam_score:
+    not_graded: 

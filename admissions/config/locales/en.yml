@@ -9,6 +9,8 @@ en:
     remove: Remove
     save: Save Admission Method
     singular: Admission Method
+    no_method: No methods available for this period.
+    no_period: Admission periods needed to view admission methods.
   admission_periods:
     add: Add Admission Period
     admitted_on: Admitted On
@@ -21,6 +23,7 @@ en:
     save: Save Admission Period
     seat_limit: Seat Limit
     singular: Admission Period
+    no_period: No period available.
   admission_phase_states:
     add: Add Admission Phase State
     auto_admit: Auto admit
@@ -47,12 +50,15 @@ en:
     plural: Admission Phases
     save: Save Admission Phase
     singular: Admission Phase
+    exam: Exam
+    no_students: "This phase have exam assigned, but there are no students to grade"
   admissions:
     candidates:
       existing: Existing Applicant
       export: Export
       list: Admission Candidates List
       new: New Applicant
+      not_admitted: Not admitted
     create: Create
     create_multiple: Create student entries and their admissions
     please_select_method: Please Select Admission Method
@@ -61,3 +67,7 @@ en:
     admission_methods: Admission Methods
     admission_periods: Admission Periods
     admissions: Admissions
+  exams:
+    grade: Grade Exam
+    exam_score: Exam Score
+    not_graded: Not Graded

@@ -17,7 +17,7 @@ describe Gaku::Admission do
     it { should have_one :school_history }
 
     it { should accept_nested_attributes_for :student }
-    it { should accept_nested_attributes_for(:admission_phase_record).allow_destroy(true) }
+    it { should accept_nested_attributes_for(:admission_phase_records).allow_destroy(true) }
 
     it { should allow_mass_assignment_of :student_id }
     it { should allow_mass_assignment_of :scholarship_status_id }

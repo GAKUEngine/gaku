@@ -15,3 +15,5 @@
             #new-student.hide
               /= render 'form'
             =render 'phase', :admission_phase_states => phase.admission_phase_states
+            div *{:id => "phase_#{phase.id.to_s}-grade-button"}
+              = render 'grade_button', :phase => phase

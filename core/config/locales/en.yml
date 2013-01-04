@@ -105,6 +105,7 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
+    none_assigned: None Assigned
   class_group_course_enrollment:
     save: Save Course to Class Group
   class_group_enrollment:
