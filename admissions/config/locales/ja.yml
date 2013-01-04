@@ -57,6 +57,7 @@ ja:
       export: 出力
       list: 入学希望者一覧
       new: 新規入学生を登録
+      not_admitted: 
     create: 入学生を登録
     create_multiple: 複数の入学生を登録
     please_select_method: 入学形態を選択して下さい
