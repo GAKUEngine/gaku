@@ -31,9 +31,10 @@ end
 def create_sample_admission_method(method_args, phase_array)
   method = Gaku::AdmissionMethod.create(method_args)
   phase_array.each do |phase_info|
-    phase = Gaku::AdmissionPhase.create(phase_info[:args])
+    phase = method.admission_phases.build(phase_info[:args])
     add_states_to_phase(phase_info[:states], phase)
-    method.admission_phases << phase
+    # method.admission_phases << phase
+    phase.save
   end
 
   # Save the method
