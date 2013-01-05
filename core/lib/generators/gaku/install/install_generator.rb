@@ -33,6 +33,11 @@ module Gaku
       end
     end
 
+    def add_files
+      template 'config/sidekiq.yml', 'config/sidekiq.yml'
+      template 'log/sidekiq.log', 'log/sidekiq.log'
+    end
+
     def remove_unneeded_files
       remove_file "public/index.html"
     end
