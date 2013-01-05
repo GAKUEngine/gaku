@@ -1,12 +1,4 @@
 ja:
-  views:
-    pagination:
-      first: "&laquo; 最初"
-      last: "最後 &raquo;"
-      previous: "&lsaquo; 前"
-      next: "次 &rsaquo;"
-      truncate: "..."
-
   add: 追加
   address:
     add: 住所の追加
@@ -109,11 +101,11 @@ ja:
     name: クラス名
     new: クラスを登録
     none: 無し
+    none_assigned: None Assigned
     plural: クラス
     save: クラスを保存
     show: クラス照会
     singular: クラス
-    none_assigned: None Assigned
   class_group_course_enrollment:
     save: 
   class_group_enrollment:
@@ -235,6 +227,7 @@ ja:
       timeout: セッションがタイムアウトしました。もう一度ログインしてください。
       unauthenticated: ログインしてください。
       unconfirmed: 本登録を行ってください。
+    login: 
     mailer:
       confirmation_instructions:
         subject: アカウントの登録方法
@@ -278,6 +271,7 @@ ja:
       send_instructions: アカウントの凍結解除方法を数分以内にメールでご連絡します。
       send_paranoid_instructions: アカウントが見つかった場合、アカウントの凍結解除方法を数分以内にメールでご連絡します。
       unlocked: アカウントを凍結解除しました。ログインしています。
+    username: 
   edit: 編集
   email: メールアドレス
   enroll_to_class: クラスに登録
@@ -483,6 +477,7 @@ ja:
     uploaded: ! '%{resource}は正常にアップロードされました'
   num_enrolled: 在籍人数
   options: オプション
+  order: 
   panel: パネル
   period: 期間
   phone: 電話番号
@@ -575,6 +570,7 @@ ja:
     credits: 単位
     description: 授業の説明
     edit: 科目を編集
+    import: 
     list: 科目一覧
     name: 授業名
     name_sample: 【例：数学A】
@@ -587,3 +583,10 @@ ja:
   title: タイトル
   user:
     info: ユーザー情報
+  views:
+    pagination:
+      first: ! '&laquo; 最初'
+      last: 最後 &raquo;
+      next: 次 &rsaquo;
+      previous: ! '&lsaquo; 前'
+      truncate: ! '...'
