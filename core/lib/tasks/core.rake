@@ -1,17 +1,16 @@
-require 'active_record'
-require 'gaku/core/custom_fixtures'
+require 'active_record/fixtures'
 
 namespace :db do
   desc %q{Loads a specified fixture file:
-For .yml/.csv use rake db:load_file[gaku/filename.yml,/absolute/path/to/parent/]
+For .yml      use rake db:load_file[gaku/filename.yml,/absolute/path/to/parent/]
 For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
 
   task :load_file , [:file, :dir] => :environment do |t, args|
     file = Pathname.new(args.file)
 
-    if %w{.csv .yml}.include? file.extname
+    if %w{.yml}.include? file.extname
       puts "loading fixture #{Pathname.new(args.dir).join(file)}"
-      Core::Fixtures.create_fixtures(args.dir, file.to_s.sub(file.extname, ""))
+      ActiveRecord::Fixtures.create_fixtures(args.dir, file.to_s.sub(file.extname, ""))
     elsif file.exist?
       puts "loading ruby #{file}"
       require file
@@ -94,7 +93,7 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
       Rake::Task["db:seed"].invoke
     end
 
-    if Rails.env.production? 
+    if Rails.env.production?
       load_sample = agree("WARNING: In Production and products exist in database, load sample data anyways? [y/n]:" )
     else
       load_sample = true if ENV['AUTO_ACCEPT']
