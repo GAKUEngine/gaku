@@ -8,8 +8,9 @@ Gaku::Core::Engine.routes.prepend do
         get :student_chooser
         post :create_multiple
         post :admit_student
+        get :listing_admissions
       end
-
+      
       get :new_applicant
     end
 
@@ -24,6 +25,7 @@ Gaku::Core::Engine.routes.prepend do
 
     resources :admission_methods do
       resources :admission_phases, :controller => 'admission_methods/admission_phases' do
+        post :sort, :on => :collection
         resources :admission_phase_states, :controller => 'admission_methods/admission_phases/admission_phase_states' do
           post :make_default, :on => :member
         end
