@@ -36,6 +36,7 @@ module Gaku
     def add_files
       template 'config/sidekiq.yml', 'config/sidekiq.yml'
       template 'log/sidekiq.log', 'log/sidekiq.log'
+      template 'Procfile', 'Procfile'
     end
 
     def remove_unneeded_files

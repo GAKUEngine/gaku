@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'nested_form'
   s.add_dependency 'kaminari'
 
+  s.add_dependency 'foreman'
   s.add_dependency 'sidekiq'
   s.add_dependency 'sinatra'
 end
