@@ -5,7 +5,7 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
-    respond_to :csv, :only => :index
+    respond_to :csv, :only => :csv
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
     before_filter :before_show,       :only => :show
@@ -15,6 +15,22 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       index!
+    end
+
+    def csv
+      @students = Student.all
+      field_order = ["surname", "name"]
+
+      content = CSV.generate do |csv|
+        csv << translate_fields(field_order)
+        @students.each do |student|
+          csv << student.attributes.values_at(*field_order)
+        end
+      end
+
+      send_data content,
+          :type => 'text/csv; charset=utf-8; header=present',
+          :disposition => "attachment; filename=students.csv"
     end
 
     def update

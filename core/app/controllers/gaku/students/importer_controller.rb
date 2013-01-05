@@ -100,8 +100,8 @@ module Gaku
 
 
     def import_school_station_students_xls
-      importer = ImportFile.create(params[:importer].merge(:context => 'students'))
-      Gaku::ImporterWorker.perform_async(importer.id)
+      file = ImportFile.create(params[:importer].merge(:context => 'students'))
+      Gaku::StudentWorker.perform_async(file.id)
       render :school_station_preview
     end
 
