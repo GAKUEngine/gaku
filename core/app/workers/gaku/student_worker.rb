@@ -5,7 +5,7 @@ module Gaku
     include Sidekiq::Worker
 
     def perform(id)
-      puts "Started StudentWorker"
+      logger.info "Started StudentWorker"
 
       importer = Gaku::Core::Importers::SchoolStation::Zaikousei.new()
       file = ImportFile.find(id)
@@ -18,7 +18,7 @@ module Gaku
           @record_count = 0
 
           idx = importer.get_default_index
-
+          
           country = Country.find_by_numcode(392)
           contact_type = ContactType.find_by_name("Phone")
 
@@ -31,7 +31,7 @@ module Gaku
               end
 
               if Gaku::Student.exists?(:student_foreign_id_number => row[idx[:foreign_id_number]])
-                puts "Student with foreign_id: #{row[idx[:foreign_id_number]]} already exists"
+                logger.info "Student with foreign_id: #{row[idx[:foreign_id_number]]} already exists"
                 next
               end
 
@@ -70,8 +70,8 @@ module Gaku
                               :gender => gender)
 
               if student
-                puts "--------------------------------------------------"
-                puts "Created student: #{student.id}, name: #{student.name}"
+                logger.info "--------------------------------------------------"
+                logger.info "Created student: #{student.id}, name: #{student.name}"
               else
                 next
               end
@@ -92,7 +92,7 @@ module Gaku
                                           :address1 => row[idx[:address1]],
                                           :address2 => row[idx[:address2]])
                 if student_address
-                  puts "Created address: #{student_address.id} for student: #{student.id}"
+                  logger.info "Created address: #{student_address.id} for student: #{student.id}"
                 end
               end
 
@@ -102,7 +102,7 @@ module Gaku
                                                            :is_emergency => true,
                                                            :data => row[idx[:phone]])
                 if student_contact
-                  puts "Created contact: #{student_contact.id} for student: #{student.id}"
+                  logger.info "Created contact: #{student_contact.id} for student: #{student.id}"
                 end
 
               end
@@ -126,7 +126,7 @@ module Gaku
                                                     :name_reading => guardian_name_reading)
 
                 if guardian
-                  puts "Created guardian: #{guardian.id} for student: #{student.id}"
+                  logger.info "Created guardian: #{guardian.id} for student: #{student.id}"
                 end
 
                 if row[idx[:guardian][:city]] and row[idx[:guardian][:address1]]
@@ -144,7 +144,7 @@ module Gaku
                                           :address1 => row[idx[:guardian][:address1]],
                                           :address2 => row[idx[:guardian][:address2]])
                   if guardian_address
-                    puts "Created address: #{guardian_address.id} for guardian: #{guardian.id}"
+                    logger.info "Created address: #{guardian_address.id} for guardian: #{guardian.id}"
                   end
 
                 end
@@ -172,12 +172,12 @@ module Gaku
       results[:status] = "OK"
       results[:record_count] = @record_count
 
-      puts "--------------------------------------------------"
-      puts "Created #{@record_count} student records in the db"
-      puts "Students in the db: #{Student.count}"
-      puts "Contacts in the db: #{Contact.count}"
-      puts "Addresses in the db: #{Address.count}"
-      puts "Guardians in the db: #{Guardian.count}"
+      logger.info "--------------------------------------------------"
+      logger.info "Created #{@record_count} student records in the db"
+      logger.info "Students in the db: #{Student.count}"
+      logger.info "Contacts in the db: #{Contact.count}"
+      logger.info "Addresses in the db: #{Address.count}"
+      logger.info "Guardians in the db: #{Guardian.count}"
 
       return results
     end
