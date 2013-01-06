@@ -1,21 +1,23 @@
 - unless @school.blank?
-  = render 'master_school', :master_school => @school if @school.is_primary?
-  = well_div do
-    = table do
-      tbody
-        tr.school_info
-          = render 'fields', :school => @school
+  - if @school.is_primary?
+    = render 'master_school', :master_school => @school
+  - else
+    = well_div do
+      = table do
+        tbody
+          tr.school_info
+            = render 'fields', :school => @school
 
   br/
   = render 'gaku/admin/schools/campuses/campuses'
   br/
 
   = well_div do
-    -if params[:action] == 'school_details'
+    - if params[:action] == 'school_details'
       span4
         = link_to t(:'school.edit_master'), admin_school_details_edit_path, :class => 'btn btn-danger span4', :confirm => t('confirm')
-    -else
-      -unless @school.is_primary
+    - else
+      - unless @school.is_primary
         = link_to_edit_with_text [:edit, :admin, @school], :remote => true
 
     = link_to_back admin_schools_path

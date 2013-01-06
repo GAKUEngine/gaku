@@ -1,11 +1,5 @@
 en:
-
-  activerecord:
-    models:
-      gaku/student:
-        one: Student
-        other: Students
-
+  
   helpers:
     page_entries_info:
       one_page:
