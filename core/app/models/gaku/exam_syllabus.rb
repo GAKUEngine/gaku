@@ -1,16 +1,6 @@
-# == Schema Information
-#
-# Table name: exam_syllabuses
-#
-#  id          :integer          not null, primary key
-#  exam_id     :integer
-#  syllabus_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
 module Gaku
 	class ExamSyllabus < ActiveRecord::Base
-		
+
 		attr_accessible :exam_id
 
 		belongs_to :syllabus

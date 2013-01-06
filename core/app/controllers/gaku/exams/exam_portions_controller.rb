@@ -11,7 +11,11 @@ module Gaku
 
     def destroy
       super do |format|
-        @exam.destroy if @exam.exam_portions.empty?
+        if @exam.exam_portions.empty?
+          if @exam.destroy
+            flash[:notice] = t(:'notice.destroyed', :resource => t(:'exam.singular'))
+          end
+        end
         format.js { render }
       end
     end

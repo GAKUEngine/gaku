@@ -4,6 +4,8 @@ class CreateGakuSpecialtiesTable < ActiveRecord::Migration
     	t.string   :name
     	t.text     :description
     	t.boolean  :mayor_only, :default => false
-    end 
+
+      t.timestamps
+    end
   end
 end

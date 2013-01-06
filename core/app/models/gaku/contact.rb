@@ -1,20 +1,3 @@
-# == Schema Information
-#
-# Table name: contacts
-#
-#  id              :integer          not null, primary key
-#  data            :string(255)
-#  details         :text
-#  is_primary      :boolean          default(FALSE)
-#  is_emergency    :boolean          default(FALSE)
-#  contact_type_id :integer
-#  student_id      :integer
-#  guardian_id     :integer
-#  faculty_id      :integer
-#  campus_id       :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
 module Gaku
   class Contact < ActiveRecord::Base
     belongs_to :contact_type
@@ -26,7 +9,7 @@ module Gaku
 
     validates_presence_of :data,:contact_type_id
 
-    before_save :ensure_first_primary, :on => :create
+    before_save :ensure_primary, :on => :create
 
     private
 
@@ -42,7 +25,7 @@ module Gaku
       end
     end
 
-    def ensure_first_primary
+    def ensure_primary
     	if self.student_id
     		user_contacts = Contact.where(:student_id => self.student_id)
   			user_contacts.blank? && (self.is_primary == false) ? self.is_primary=true : nil
@@ -51,6 +34,7 @@ module Gaku
         user_contacts.blank? && (self.is_primary == false) ? self.is_primary=true : nil
       end
     end
+
   end
 end
 

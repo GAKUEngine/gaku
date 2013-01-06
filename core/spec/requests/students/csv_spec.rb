@@ -12,7 +12,7 @@ describe 'Student CSV' do
       visit gaku.students_path
 
       click_link 'export-students-link'
-      page.response_headers['Content-Type'].should eq "text/csv; charset=utf-8"
+      page.response_headers['Content-Type'].should match(/csv; charset=utf-8/)
       page.should have_content 'surname,name'
       page.should have_content 'Doe,John'
       page.should have_content 'Yokota,Susumu'

@@ -30,6 +30,7 @@ class DeviseCreateGakuUsers < ActiveRecord::Migration
     end
 
     add_index :gaku_users, :email,                :unique => true
+    add_index :gaku_users, :username,                :unique => true
     add_index :gaku_users, :reset_password_token, :unique => true
   end
 end
