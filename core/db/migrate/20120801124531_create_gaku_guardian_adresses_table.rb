@@ -3,6 +3,7 @@ class CreateGakuGuardianAdressesTable < ActiveRecord::Migration
   	create_table :gaku_guardian_addresses do |t|
       t.references :guardian
       t.references :address
+      
       t.boolean    :is_primary, :default => false
 
       t.timestamps

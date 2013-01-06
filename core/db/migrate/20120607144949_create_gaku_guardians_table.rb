@@ -6,15 +6,10 @@ class CreateGakuGuardiansTable < ActiveRecord::Migration
       t.string   :name_reading
       t.string   :surname_reading
       t.string   :relationship
-#      t.string   :encrypted_name
-#      t.string   :encrypted_surname
-#      t.string   :encrypted_name_reading
-#      t.string   :encrypted_surname_reading
-#      t.string   :encrypted_relationship
-
+      
       t.references :user
 
       t.timestamps
-    end 
+    end
   end
 end
