@@ -4,6 +4,7 @@ class CreateGakuSchedules < ActiveRecord::Migration
       t.datetime :starting
       t.datetime :ending
       t.string   :repeat
+      
       t.references :admission_period
 
       t.timestamps
