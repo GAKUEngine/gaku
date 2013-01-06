@@ -8,6 +8,7 @@ class CreateGakuAdmissionsTable < ActiveRecord::Migration
       t.references  :scholarship_status
       t.references  :school_history
       t.references  :admission_phase_record
+      t.integer     :deleted, :default => 0
       
       t.timestamps
     end

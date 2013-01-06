@@ -17,5 +17,10 @@ module Gaku
     accepts_nested_attributes_for :student
 
     attr_accessible :student_id, :scholarship_status_id , :admission_method_id, :admission_period_id, :student_attributes, :admitted
+
+
+    default_scope where("deleted = ?", 0)
+    scope :deleted, where("deleted = ?", 1)
+    
   end
 end

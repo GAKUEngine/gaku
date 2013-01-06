@@ -35,7 +35,7 @@ module Gaku
         if !(@state.id == @admission_record.admission_phase_state_id)
           # TODO decide how next phase should be chosen and decide for default phase states
           if @state.auto_progress == true
-            @next_phase = AdmissionPhase.find_by_admission_method_id_and_order(phase.admission_method_id ,phase.order+1)
+            @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
             @new_state = @next_phase.admission_phase_states.first
             #@admission_record.admission_phase_state = @state
             #@admission_record.admission_phase = @next_phase
@@ -168,6 +168,11 @@ module Gaku
 
       end
 
+      def soft_delete
+        @admission = Admission.find(params[:id])
+        @admission.update_attribute('deleted', 1)
+      end
+
       private
         def load_before_index
           @search = Student.search(params[:q])
@@ -190,28 +195,30 @@ module Gaku
           @students = []
           @state_records = AdmissionPhaseRecord.all
           @state_records.each {|record|
-            total_score = 0
-            student_graded = false
-            phase = record.admission_phase
-            if !phase.exam.nil?
-              phase.exam.exam_portions.each do |exam_portion|
-                portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
-                if !portion_score.nil?
-                  student_graded = true
-                  total_score += portion_score.score.to_i
+            if record.admission
+              total_score = 0
+              student_graded = false
+              phase = record.admission_phase
+              if !phase.exam.nil?
+                phase.exam.exam_portions.each do |exam_portion|
+                  portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
+                  if !portion_score.nil?
+                    student_graded = true
+                    total_score += portion_score.score.to_i
+                  end
                 end
               end
+              if student_graded
+                exam_score = total_score
+              else
+                exam_score = t('exams.not_graded')
+              end
+              @students << {
+                :state_id => record.admission_phase_state_id,
+                :student => record.admission.student,
+                :exam_score => exam_score
+              }
             end
-            if student_graded
-              exam_score = total_score
-            else
-              exam_score = t('exams.not_graded')
-            end
-            @students << {
-              :state_id => record.admission_phase_state_id,
-              :student => record.admission.student,
-              :exam_score => exam_score
-            }
           }
         end
 
