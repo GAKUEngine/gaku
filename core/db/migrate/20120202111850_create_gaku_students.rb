@@ -8,11 +8,6 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :surname_reading, :default =>  ""
       t.boolean  :gender
       t.string   :phone
-#      t.string   :encrypted_name
-#      t.string   :encrypted_surname
-#      t.string   :encrypted_name_reading, :default => ""
-#      t.string   :encrypted_surname_reading, :default =>  ""
-#      t.string   :encrypted_phone
       t.string   :email
       t.date     :birth_date
       t.date     :admitted
@@ -25,7 +20,7 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.references :faculty
       t.references :commute_method
       t.references :scholarship_status
-      
+
       t.timestamps
     end
   end
