@@ -16,18 +16,19 @@ module Gaku
 
     attr_accessible :student_id, :address_id, :is_primary
 
-    before_save :ensure_primary_first, :on => :create
+    before_save :ensure_primary, :on => :create
 
-    def ensure_primary_first
-    	if self.student.addresses.blank?
-    		self.is_primary = true
-    	end
+    def ensure_primary
+      if self.student.addresses.blank?
+        self.is_primary = true
+      end
     end
 
-    def make_primary  	
-    	self.student.student_addresses.update_all('is_primary = "false"', "id <> #{self.id}")
+    def make_primary
+    	self.student.student_addresses.update_all('is_primary = false', "id <> #{self.id}")
     	self.is_primary = true
     	self.save
     end
+    
   end
 end

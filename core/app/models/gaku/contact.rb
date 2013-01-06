@@ -26,7 +26,7 @@ module Gaku
 
     validates_presence_of :data,:contact_type_id
 
-    before_save :ensure_first_primary, :on => :create
+    before_save :ensure_primary, :on => :create
 
     private
 
@@ -42,7 +42,7 @@ module Gaku
       end
     end
 
-    def ensure_first_primary
+    def ensure_primary
     	if self.student_id
     		user_contacts = Contact.where(:student_id => self.student_id)
   			user_contacts.blank? && (self.is_primary == false) ? self.is_primary=true : nil
