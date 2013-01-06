@@ -157,7 +157,7 @@ describe 'Admin Admission Method Phases' do
 
       it 'edits' do
         fill_in 'admission_phase_name', :with => 'Interview'
-        fill_in 'admission_phase_order', :with => 2
+        #fill_in 'admission_phase_order', :with => 2
         fill_in 'admission_phase_phase_handler', :with => 3
         click submit
         wait_until_invisible modal
@@ -165,7 +165,7 @@ describe 'Admin Admission Method Phases' do
         within("#admission-method-admission-phase-#{admission_phase.id}") do
           page.should have_content 'Interview'
           page.should_not have_content 'Written application'
-          page.should have_content 2
+          #page.should have_content 2
           page.should have_content 3
         end
         flash_updated?
