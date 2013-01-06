@@ -25,9 +25,9 @@
                     <div class='exam-portion-<%= portion.id %>'>
 
                       <% if @attendances[student.id][score.id] : %>
-                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' disabled />
+                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= score.id %>' disabled />
                       <% else : %>
-                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>'/>
+                        <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>' id='score-<%= score.id %>' />
                       <% end %>
                     </div>
                   </form>

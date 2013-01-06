@@ -10,5 +10,8 @@ describe Gaku::AdmissionPhase do
     it { should have_one :exam }
   	it { should have_many :admission_phase_states }
 
+    it { should validate_presence_of :admission_method }
+    it { should validate_presence_of :name }
+
   end
 end

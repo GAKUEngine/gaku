@@ -6,7 +6,7 @@
       = print_count @count, t_syllabus_list
   .pull-right
     = ajax_link_to_new t(:'syllabus.new'), [:new, :syllabus], :id => "new-syllabus-link"
-    = button t(:'syllabus.import'), "syallabuses/importer", :id => "import-syllabuses-link"
+    = button t(:'syllabus.import'), "syllabuses/importer", :id => "import-syllabuses-link"
 
 = content_for :new_form do
   #new-syllabus.hide

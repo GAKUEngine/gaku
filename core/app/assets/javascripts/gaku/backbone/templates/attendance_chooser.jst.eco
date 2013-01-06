@@ -1,11 +1,19 @@
-<%= console.log @examPortionScore %>
 <form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
 	<select>
 			<option> Choose Attendance Type </option>
 		<% for type in @attendanceTypes : %>
-			<option value='<%= type.id %>'><%= type.name %></option>
-		<% end %>
+			<% if @attendance && @attendance.attendance_type_id == type.id : %>
+        <option value='<%= type.id %>' selected='selected' ><%= type.name %></option>
+      <% else : %>
+        <option value='<%= type.id %>'><%= type.name %></option>
+		  <% end %>
+    <% end %>
 	</select>
-	<input />
-	<button>Submit</button>
+
+	<input value="<%= @attendance.reason if @attendance %>" />
+	<button class='btn btn-primary'>Submit</button>
+  <% if @attendance : %>
+    <a class='delete-attendance'> Delete </a>
+  <% end %>
+
 </form>

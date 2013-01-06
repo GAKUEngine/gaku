@@ -1,5 +1,7 @@
 Gaku::Core::Engine.routes.draw do
 
+  mount Sidekiq::Web => '/sidekiq'
+
   #devise_for :installs
   devise_for :users, {
     class_name: 'Gaku::User',
@@ -81,6 +83,7 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
     resources :notes
+    resources :importer, :controller => 'syllabuses/importer'
   end
 
   resources :students do
@@ -120,6 +123,8 @@ Gaku::Core::Engine.routes.draw do
 
 
     collection do
+      get :csv
+      
       resources :importer, :controller => "students/importer" do
         collection do
           get :get_csv_template
@@ -127,6 +132,7 @@ Gaku::Core::Engine.routes.draw do
           post :import_student_list
         end
       end
+
       get :autocomplete_search
       get :load_autocomplete_data
     end
