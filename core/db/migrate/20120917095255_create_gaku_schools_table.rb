@@ -1,5 +1,4 @@
 class CreateGakuSchoolsTable < ActiveRecord::Migration
-  
   def change
 		create_table :gaku_schools do |t|
   		t.string      :name
@@ -11,8 +10,8 @@ class CreateGakuSchoolsTable < ActiveRecord::Migration
   		t.string			:vice_principal
   		t.text				:grades
       t.string      :code
-      
+
   		t.timestamps
-  	end  	
+  	end
   end
 end

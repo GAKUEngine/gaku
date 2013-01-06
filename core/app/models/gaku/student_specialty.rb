@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: student_specialties
-#
-#  id           :integer          not null, primary key
-#  student_id   :integer
-#  specialty_id :integer
-#  is_mayor     :boolean          default(TRUE)
-#
 module Gaku
 	class StudentSpecialty < ActiveRecord::Base
 		belongs_to :specialty

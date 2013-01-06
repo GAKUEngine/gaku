@@ -65,5 +65,5 @@ types = [
 ]
 
 types.each do |type|
-  Gaku::AttendanceType.where(type).first_or_create
+  Gaku::AttendanceType.where(type).first_or_create!
 end

@@ -1,20 +1,25 @@
 # encoding: utf-8
 
-syllabus = Gaku::Syllabus.create(:name => "Ruby", :code => "rb")
-course = Gaku::Course.create(:code => "Fall 2011")
+syllabus = Gaku::Syllabus.where(:name => "Ruby", :code => "rb").first_or_create!
+course = Gaku::Course.where(:code => "Fall 2011").first_or_create!
+student = Gaku::Student.where(:name => 'Susumu', :surname => 'Yokota').first_or_create!
 
-student = Gaku::Student.create(:name => 'Susumu', :surname => 'Yokota')
+exam1 = Gaku::Exam.where(:name => "Midterm", :use_weighting => true, :weight => 4).first_or_create!
+exam1_portion1 = exam1.exam_portions.where(:name => 'Multiple Choice', :max_score => 100).first_or_create!
+exam1_portion2 = exam1.exam_portions.where(:name => 'Practical', :max_score => 200).first_or_create!
 
-exam = Gaku::Exam.create(:name => "Midterm", :use_weighting => true, :weight => 4)
-exam_portion_1 = exam.exam_portions.create(:name => 'Multiple Choice', :max_score => 100)
-exam_portion_2 = exam.exam_portions.create(:name => 'Practical', :max_score => 200)
-syllabus.exams << exam
+exam2 = Gaku::Exam.where(:name => "Final", :use_weighting => true, :weight => 6).first_or_create!
+exam2_portion1 = exam2.exam_portions.where(:name => 'Question and Answer', :max_score => 200).first_or_create!
+exam2_portion2 = exam2.exam_portions.where(:name => 'Practical', :max_score => 300).first_or_create!
 
-exam = Gaku::Exam.create(:name => "Final", :use_weighting => true, :weight => 6)
-exam_portion_1 = exam.exam_portions.create(:name => 'Question and Answer', :max_score => 200)
-exam_portion_2 = exam.exam_portions.create(:name => 'Practical', :max_score => 300)
-syllabus.exams << exam
+exams = [exam1, exam2]
 
-course.students << student
+unless syllabus.exams.count > 0
+  syllabus.exams << exams
+end
+
+unless course.students.count > 0
+  course.students << student
+end
 
 syllabus.courses << course

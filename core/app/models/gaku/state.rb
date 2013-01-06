@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: states
-#
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  abbr            :string(255)
-#  name_ascii      :string(255)
-#  code            :integer
-#  country_numcode :integer
-#
 module Gaku
   class State < ActiveRecord::Base
     belongs_to :country, :foreign_key => 'country_numcode', :primary_key => 'numcode'
@@ -36,7 +25,7 @@ module Gaku
     def to_s
       name
     end
-    
+
   end
 end
 

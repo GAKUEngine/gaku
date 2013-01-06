@@ -1,15 +1,5 @@
-# == Schema Information
-#
-# Table name: enrollment_status_types
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  is_active  :boolean
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 module Gaku
-	class EnrollmentStatusType < ActiveRecord::Base 
+	class EnrollmentStatusType < ActiveRecord::Base
 		attr_accessible :name, :is_active
 
     validates_presence_of :name

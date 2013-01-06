@@ -22,23 +22,23 @@
 
 def add_states_to_phase(phase_states, phase)
 phase_states.each do |state_data|
-  phase_state = Gaku::AdmissionPhaseState.create(state_data)
+  phase_state = Gaku::AdmissionPhaseState.where(state_data).first_or_create!
   phase.admission_phase_states << phase_state
 end
 phase.save
 end
 
 def create_sample_admission_method(method_args, phase_array)
-  method = Gaku::AdmissionMethod.create(method_args)
+  method = Gaku::AdmissionMethod.where(method_args).first_or_create!
   phase_array.each do |phase_info|
     phase = method.admission_phases.build(phase_info[:args])
     add_states_to_phase(phase_info[:states], phase)
     # method.admission_phases << phase
-    phase.save
+    phase.save!
   end
 
   # Save the method
-  method.save
+  method.save!
 
   return method
 end
@@ -91,14 +91,18 @@ international_division_method = create_sample_admission_method(
         { :name => "Accepted", :auto_progress => true, :can_progress => true },
         { :name => "Rejected", :can_progress => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Interview", :position => 1 },
       :states => [
         { :name => "Waiting for Interview" },
         { :name => "Accepted", :can_admit => true, :auto_admit => true },
         { :name => "Rejected", :can_admit => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Exam", :position => 2 },
       :states => [
         { :name => "Pre-Exam" },
@@ -106,7 +110,9 @@ international_division_method = create_sample_admission_method(
         { :name => "Rejected", :can_admit => false, :can_progress => false },
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Foreign Langauge Exam", :position => 3 },
       :states => [
         { :name => "Pre-Exam" },
@@ -115,7 +121,9 @@ international_division_method = create_sample_admission_method(
         { :name => "Rejected", :can_admit => false, :can_progress => false },
         { :name => "Abscent", :can_admit => false, :can_progress => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Written Report", :position => 4 },
       :states => [
         { :name => "In Review" },
@@ -137,14 +145,18 @@ summer_method = create_sample_admission_method(
         { :name => "Accepted", :auto_progress => true, :can_progress => true },
         { :name => "Rejected", :can_progress => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Written Report", :position => 1 },
       :states => [
         { :name => "In Review" },
         { :name => "Accepted", :auto_progress => true, :can_progress => true, :can_admit => true },
         { :name => "Rejected", :can_progress => false }
       ]
-    },{
+    },
+
+    {
       :args => { :name => "Interview", :position => 2 },
       :states => [
         { :name => "Waiting for Interview" },
@@ -156,20 +168,18 @@ summer_method = create_sample_admission_method(
 )
 
 # Periods
-period = Gaku::AdmissionPeriod.create({ :name => "Summer 2013" })
-period.admission_methods << summer_method
+period1 = Gaku::AdmissionPeriod.where(:name => "Summer 2013").first_or_create!
+period1.admission_methods << summer_method
 
-period = Gaku::AdmissionPeriod.create({ :name => "Fall 2013 Early Admissions" })
+Gaku::AdmissionPeriod.where(:name => "Fall 2013 Early Admissions").first_or_create!
 
-period = Gaku::AdmissionPeriod.create({ :name => "Fall 2013" })
-period.admission_methods << regular_method
-period.admission_methods << international_division_method
+period2 = Gaku::AdmissionPeriod.where(:name => "Fall 2013").first_or_create!
+period2.admission_methods << regular_method
+period2.admission_methods << international_division_method
 
-period = Gaku::AdmissionPeriod.create({ :name => "2013年夏短期プログラム" })
-
-period = Gaku::AdmissionPeriod.create({ :name => "2013年秋推薦" })
-
-period = Gaku::AdmissionPeriod.create({ :name => "2013年秋" })
+Gaku::AdmissionPeriod.where(:name => "2013年夏短期プログラム").first_or_create!
+Gaku::AdmissionPeriod.where(:name => "2013年秋推薦").first_or_create!
+Gaku::AdmissionPeriod.where(:name => "2013年秋").first_or_create!
 
 #{}"admission_method_id", "admitted", "created_at",
 #{}"scholarship_status_id", "student_id", "updated_at"
