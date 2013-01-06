@@ -145,10 +145,9 @@ describe 'Admin Admissions' do
                 wait_until_visible '#chosen-table'
                 page.should have_content "#{student.name}"
                 click_on 'Create'
-                wait_for_ajax
+                wait_until_invisible '#chosen-table'
               end
             end.to change(Gaku::Admission, :count).by 1
-
             within ('#state1' ) do
               within('#students-index') { page.should have_content ("#{student.name}") }
             end
