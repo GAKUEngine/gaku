@@ -18,7 +18,7 @@ module Gaku
           @record_count = 0
 
           idx = importer.get_default_index
-          
+
           country = Country.find_by_numcode(392)
           contact_type = ContactType.find_by_name("Phone")
 
@@ -30,7 +30,7 @@ module Gaku
                 next
               end
 
-              if Gaku::Student.exists?(:student_foreign_id_number => row[idx[:foreign_id_number]])
+              if Gaku::Student.exists?(:student_foreign_id_number => row[idx[:foreign_id_number]].to_i)
                 logger.info "Student with foreign_id: #{row[idx[:foreign_id_number]]} already exists"
                 next
               end
