@@ -2,6 +2,7 @@ class GAKUEngine.Models.ExamPortionScore extends Backbone.Model
   idAttribute: "score"
 
   initialize:(options)->
+    @options = options
     @on 'change', @fetchCalculations, @
 
     @url = options.urlLink
@@ -13,5 +14,5 @@ class GAKUEngine.Models.ExamPortionScore extends Backbone.Model
 
   fetchCalculations: ->
     calculations = new GAKUEngine.Models.Calculation()
-    calculations.url = options.baseURI
+    calculations.url = @options.baseURI
     calculations.fetch()

@@ -104,57 +104,64 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
 
   setPortionAttendance: (event)->
-
     currentTarget = $(event.currentTarget)
     attendanceId  = $(currentTarget).attr('data-attendance')
     attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'
     examPortionScore = $(currentTarget).closest('td').attr('id')
 
-
     if attendanceId
       attendance = new GAKUEngine.Models.Attendance()
       attendance.url = "#{attendanceUrl}/#{attendanceId}"
       attendance.fetch
-        success: ->
+        success: =>
           attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-          attendance_types.on 'reset', ->
+          attendance_types.on 'reset', =>
             attendanceView = new GAKUEngine.Views.ExamAttendance(
                                       attendance_types : attendance_types,
                                       attendanceUrl : attendanceUrl,
                                       currentTarget : currentTarget,
                                       examPortionScore: examPortionScore,
                                       attendance: attendance)
-            currentTarget.popover
 
-              trigger: 'toggle'
-              html : true
-              content: ->
-                attendanceView.render().el
-            currentTarget.popover 'toggle'
+            @renderAttendancePopover(currentTarget, attendanceView)
+          # currentTarget.popover
+          #   trigger: 'manual'
+          #   html : true
+          #   content: ->
+          #     attendanceView.render().el
+          # currentTarget.popover 'toggle'
+
           attendance_types.fetch()
 
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-      attendance_types.on 'reset', ->
+      attendance_types.on 'reset', =>
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,
                                   currentTarget : currentTarget,
                                   examPortionScore: examPortionScore)
-        currentTarget.popover
 
-          trigger: 'toggle'
-          html : true
-          content: ->
-            attendanceView.render().el
-        currentTarget.popover 'toggle'
+        @renderAttendancePopover(currentTarget, attendanceView)
+
       attendance_types.fetch()
 
-  renderAttendance: ->
-    @attendance_types
-
+  renderAttendancePopover: (target, view)->
+    target.popover
+      trigger: 'toggle'
+      html : true
+      content: ->
+        view.render().el
+    if target.data('popover').$tip
+      if target.data('popover').$tip.is(':visible')
+        target.popover 'hide'
+      else
+        target.popover 'show'
+    else
+      target.popover 'show'
 
   validatePortion: (event)->
+    console.log event.currentTarget
     currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
