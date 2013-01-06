@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: student_addresses
-#
-#  id         :integer          not null, primary key
-#  student_id :integer
-#  address_id :integer
-#  is_primary :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 module Gaku
   class StudentAddress < ActiveRecord::Base
   	belongs_to :student
@@ -29,6 +18,6 @@ module Gaku
     	self.is_primary = true
     	self.save
     end
-    
+
   end
 end

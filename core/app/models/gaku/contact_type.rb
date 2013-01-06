@@ -1,10 +1,3 @@
-# == Schema Information
-#
-# Table name: contact_types
-#
-#  id   :integer          not null, primary key
-#  name :string(255)
-#
 module Gaku
 	class ContactType < ActiveRecord::Base
 	  has_many :contacts
