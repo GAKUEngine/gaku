@@ -162,7 +162,7 @@ describe 'Admin Admissions' do
           end
         end
 
-        context 'Jorney - add new student and' do
+        context 'Journey - add new student and' do
           before do
             click_on 'New Applicant'
             wait_for_ajax
@@ -222,7 +222,7 @@ describe 'Admin Admissions' do
               size_of("#students-index tbody tr").should eq 1
               page.should have_content 'Admitted On'
             }
-            #TODO revert admitted if admittedd by mistake
+            #TODO revert admitted if admitted by mistake
             visit gaku.students_path
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
