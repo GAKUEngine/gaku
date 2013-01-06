@@ -30,7 +30,7 @@ module Gaku
                 next
               end
 
-              if Gaku::Student.exists?(:student_foreign_id_number => row[idx[:foreign_id_number]].to_i)
+              if Gaku::Student.exists?(:student_foreign_id_number => row[idx[:foreign_id_number]].to_i.to_s)
                 logger.info "Student with foreign_id: #{row[idx[:foreign_id_number]]} already exists"
                 next
               end
