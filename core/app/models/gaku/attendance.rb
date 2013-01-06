@@ -7,7 +7,6 @@ module Gaku
 
     attr_accessible :reason, :student_id, :attendance_type_id
 
-    validates_presence_of :reason
     validates_associated :attendancable, :student, :attendance_type
 
   end
