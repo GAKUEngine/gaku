@@ -9,7 +9,7 @@ module Gaku
 
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
-      before_filter :load_search_object
+      #before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
 
       def change_admission_period
@@ -24,7 +24,7 @@ module Gaku
 
       def change_student_state
         @state = AdmissionPhaseState.find(params[:state_id])
-        @student = Student.find(params[:student_id])
+        @student = Student.unscoped.find(params[:student_id])
         phase = @state.admission_phase
         @admission_record = @student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
         @old_state_id = @admission_record.admission_phase_state_id
@@ -62,7 +62,7 @@ module Gaku
       end
 
       def admit_student
-        @student = Student.find(params[:student_id])
+        @student = Student.unscoped.find(params[:student_id])
         admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
         admission = @student.admission
         admission.admitted = true
@@ -72,13 +72,14 @@ module Gaku
       end
 
       def index
-
-        #raise @students.find_all { |h| h[:state_id] == 1 }.map { |i| i[:student] }.inspect
-        #raise @students.inspect
       end
 
       def listing_admissions
+      end
 
+      def listing_applicants
+        @search = Student.unscoped.search(params[:q])
+        @students = @search.result
       end
 
       def new
@@ -108,7 +109,7 @@ module Gaku
 
       def student_chooser
         @admission = Admission.new
-        @search = Student.search(params[:q])
+        @search = Student.unscoped.search(params[:q])
         @students = @search.result
 
         @admissions = Admission.all
@@ -152,7 +153,7 @@ module Gaku
         if !@enrollments.empty?
 
           @enrollments.each {|enrollment|
-            student = Student.find(enrollment.student_id)
+            student = Student.unscoped.find(enrollment.student_id)
             notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
           }
           flash.now[:success] = notice.html_safe
@@ -160,7 +161,7 @@ module Gaku
         if !@err_enrollments.empty?
 
           @err_enrollments.each {|enrollment|
-            student = Student.find(enrollment.student_id)
+            student = Student.unscoped.find(enrollment.student_id)
             notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
           }
           flash.now[:error] = notice.html_safe
@@ -171,11 +172,14 @@ module Gaku
       def soft_delete
         @admission = Admission.find(params[:id])
         @admission.update_attribute('deleted', 1)
+        @admission.admission_phase_records.each {|rec|
+          rec.update_attribute('deleted', 1)
+        }
       end
 
       private
         def load_before_index
-          @search = Student.search(params[:q])
+          @search = Student.unscoped.search(params[:q])
           @students = @search.result
           @class_groups = ClassGroup.all
           @courses = Course.all
@@ -195,30 +199,28 @@ module Gaku
           @students = []
           @state_records = AdmissionPhaseRecord.all
           @state_records.each {|record|
-            if record.admission
-              total_score = 0
-              student_graded = false
-              phase = record.admission_phase
-              if !phase.exam.nil?
-                phase.exam.exam_portions.each do |exam_portion|
-                  portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
-                  if !portion_score.nil?
-                    student_graded = true
-                    total_score += portion_score.score.to_i
-                  end
+            total_score = 0
+            student_graded = false
+            phase = record.admission_phase
+            if !phase.exam.nil?
+              phase.exam.exam_portions.each do |exam_portion|
+                portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
+                if !portion_score.nil?
+                  student_graded = true
+                  total_score += portion_score.score.to_i
                 end
               end
-              if student_graded
-                exam_score = total_score
-              else
-                exam_score = t('exams.not_graded')
-              end
-              @students << {
-                :state_id => record.admission_phase_state_id,
-                :student => record.admission.student,
-                :exam_score => exam_score
-              }
             end
+            if student_graded
+              exam_score = total_score
+            else
+              exam_score = t('exams.not_graded')
+            end
+            @students << {
+              :state_id => record.admission_phase_state_id,
+              :student => record.admission.student,
+              :exam_score => exam_score
+            }
           }
         end
 
