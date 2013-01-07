@@ -22,7 +22,7 @@
 
 def add_states_to_phase(phase_states, phase)
 phase_states.each do |state_data|
-  phase_state = Gaku::AdmissionPhaseState.where(state_data).first_or_create!
+  phase_state = Gaku::AdmissionPhaseState.create(state_data)
   phase.admission_phase_states << phase_state
 end
 phase.save
