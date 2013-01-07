@@ -8,6 +8,7 @@
       = ajax_link_to_new t(:'admission_phases.add'), [:new, :admin, @admission_method, :admission_phase], :id => 'new-admin-admission-method-admission-phase-link'
   = hr
 
+=well_div do
   = index_body do
     = table_for 'admin-admission-method-admission-phases-index' do
       thead
@@ -21,3 +22,6 @@
       tbody class='sortable' data-sort-url="#{sort_admin_admission_method_admission_phases_path(@admission_method)}"
         = render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase', :collection => @admission_method.admission_phases, :as => 'admission_phase'
     br/
+
+
+
