@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 3.2.8'
   s.add_dependency 'slim-rails'
   s.add_dependency 'deface', '>= 0.9.0'
-  s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
+  s.add_dependency 'paper_trail', '~> 2'
 
   s.add_dependency 'rails-i18n'
   s.add_dependency 'localeapp'
