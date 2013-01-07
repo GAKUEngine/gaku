@@ -1,6 +1,10 @@
 - content_for :title, t(:'admissions.candidates.list')
 .row-fluid
-  h4.mt-xs.mb-0 = t(:'admissions.candidates.list')
+  .pull-left
+    h4.mt-xs.mb-0 =t(:'admissions.candidates.list')
+  .pull-right
+    #new-admin-admission-link
+      = render 'gaku/admin/admissions/links', :admission_method => @admission_method
 .row-fluid
   hr
 .row-fluid
@@ -13,18 +17,13 @@
         #admission-method-selection
           = render 'gaku/admin/admissions/method', :admission_methods => @admission_methods
     .row-fluid.mt-s
-      .span12.well
-        .row-fluid
+      .span12.well style="margin-bottom:0px"
+        /.row-fluid
           .pull-left
             h4.mt-xs.mb-0 2012年【春期：一般】
           .pull-left
             h4.mt-xs.mb-0.students-count
               /= print_count(@students.count, "合計志願者数：")
-
-          .pull-right
-            #new-admin-admission-link
-              = render 'gaku/admin/admissions/links', :admission_method => @admission_method
         #new-admin-admission.hide
-        hr
         #admission-phases
           = render 'gaku/admin/admissions/phases', :admission_method => @admission_method

@@ -1,5 +1,5 @@
 - if !admission_method.nil?
-  .tabbable.mt-s
+  .tabbable
     ul.nav.nav-tabs
       - admission_method.admission_phases.each_with_index do |phase, index|
         li *{:class => ("active" if index == 0)}
@@ -11,9 +11,8 @@
     .tab-content
       - admission_method.admission_phases.each_with_index do |phase, index|
         div.tab-pane *{:id => "phase_#{phase.id.to_s}", :class => ("active" if index == 0)}
-          .row-fluid.mt-l
+          .row-fluid style="background-color:white"
             #new-student.hide
-              /= render 'form'
             =render 'phase', :admission_phase_states => phase.admission_phase_states
             div *{:id => "phase_#{phase.id.to_s}-grade-button"}
               = render 'grade_button', :phase => phase
