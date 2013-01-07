@@ -10,7 +10,8 @@ module Gaku
 
     attr_accessible :name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes
 
-    validates :name, :presence => true
+    validates :name, presence: true
+    validates :admission_method, presence: true
 
     before_create :proper_position
     after_destroy :refresh_positions

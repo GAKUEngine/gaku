@@ -1,0 +1,11 @@
+row-fluid
+  .span12
+    #admission-delete
+      = ajax_soft_delete :id => 'delete-admission-link'
+  .delete-modal
+    =render 'gaku/shared/delete_modal_remote', :target => [:soft_delete, :admin, admission]
+
+coffee:
+  $('#delete-admission-link').on 'click', (e)->
+    e.preventDefault()
+    $('#delete-modal').modal('show')
