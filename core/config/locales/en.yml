@@ -119,11 +119,11 @@ en:
     name: Class Name
     new: New Class Group
     none: None
+    none_assigned: None Assigned
     plural: Class Groups
     save: Save Class Group
     show: Show
     singular: Class Group
-    none_assigned: None Assigned
   class_group_course_enrollment:
     save: Save Course to Class Group
   class_group_enrollment:
@@ -151,7 +151,7 @@ en:
     close: Close
     help:
       language: Choose your Language
-    label: Label
+    label: Language
     save: Save
   confirm: Are you sure?
   confirm_delete: Really Delete this record?
@@ -247,6 +247,7 @@ en:
       timeout: Your session expired, please sign in again to continue.
       unauthenticated: You need to sign in or sign up before continuing.
       unconfirmed: You have to confirm your account before continuing.
+    login: Username or Email
     mailer:
       confirmation_instructions:
         subject: Confirmation instructions
@@ -261,7 +262,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token:
+      no_token: No Token
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -275,10 +276,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive:
-      signed_up_but_locked:
-      signed_up_but_unconfirmed:
-      update_needs_confirmation:
+      signed_up_but_inactive: This account is inactive
+      signed_up_but_locked: This account has been locked
+      signed_up_but_unconfirmed: This account has not been confirmed
+      update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -290,6 +291,7 @@ en:
       send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.
       unlocked: Your account was successfully unlocked. You are now signed in.
+    username: Username
   edit: Edit
   email: Mail Address
   enroll_to_class: Enroll to class
@@ -584,11 +586,11 @@ en:
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
-    import: Import Syllabuses
     code: Syllabus Code
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
+    import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
     name_sample: ! '[EX: Science A]'
@@ -601,3 +603,10 @@ en:
   title: Title
   user:
     info: User info
+  views:
+    pagination:
+      first: ! '&laquo; First'
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: ! '&lsaquo; Prev'
+      truncate: ! '...'
