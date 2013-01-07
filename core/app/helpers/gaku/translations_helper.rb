@@ -97,6 +97,10 @@ module Gaku
       t('attendance_type.list')
     end
 
+    def t_student_list
+      t(:'student.list')
+    end
+
     def t_note_list
       t(:'note.list')
     end

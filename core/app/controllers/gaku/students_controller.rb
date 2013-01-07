@@ -82,7 +82,10 @@ module Gaku
 
     def collection
       @search = Student.search(params[:q])
-      @students = @search.result(:distinct => true).page(params[:page]).per(10)
+      results = @search.result(:distinct => true)
+
+      @students_count = results.count
+      @students = results.page(params[:page]).per(10)
     end
 
     private
