@@ -18,6 +18,6 @@
           = th t(:'admission_phases.exam')
           = th t(:'admission_phase_states.plural')
           = th_actions 2
-      tbody id='admission-phase-portion-sorting' data-sort-url="#{sort_admin_admission_method_admission_phases_path(@admission_method)}"
+      tbody class='sortable' data-sort-url="#{sort_admin_admission_method_admission_phases_path(@admission_method)}"
         = render :partial => 'gaku/admin/admission_methods/admission_phases/admission_phase', :collection => @admission_method.admission_phases, :as => 'admission_phase'
     br/
