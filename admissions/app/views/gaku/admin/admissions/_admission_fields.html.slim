@@ -4,3 +4,6 @@ td.birth = admission.student.birth_date
 td.registration-date = admission.admission_phase_records.first.created_at.strftime("%Y.%m.%d")
 td.admission-phase = admission.admission_phase_records.last.admission_phase.name
 td.manage
+  = link_to_show admission.student
+  = ajax_link_to_edit [:edit, admission.student], :style => "margin:0px"
+  = render 'delete_confirm', :admission => admission

@@ -20,7 +20,7 @@ describe 'Admin Admission Method Phases' do
     
   end
 
-  context 'new', js: true do
+  context 'new', :js => true do
     before do
       visit gaku.admin_admission_method_path(admission_method)
       click new_link
@@ -53,7 +53,7 @@ describe 'Admin Admission Method Phases' do
     end
 
     context 'phases states ' do
-      context 'existing ', js: true do
+      context 'existing ', :js => true do
         before do
           set_resource 'admin-admission-method-admission-phase-states'
           admission_method.admission_phases.first.admission_phase_states<<admission_phase_state
@@ -119,7 +119,7 @@ describe 'Admin Admission Method Phases' do
           end
         end 
       end
-      context '#add', js: true do
+      context '#add', :js => true do
         it 'adds' do
           click edit_link
           wait_until_visible modal
@@ -149,7 +149,7 @@ describe 'Admin Admission Method Phases' do
 
     end
 
-    context '#edit ', js: true do 
+    context '#edit ', :js => true do 
       before do 
         within(table) { click edit_link }
         wait_until_visible modal 
@@ -157,6 +157,7 @@ describe 'Admin Admission Method Phases' do
 
       it 'edits' do
         fill_in 'admission_phase_name', :with => 'Interview'
+        #fill_in 'admission_phase_order', :with => 2
         fill_in 'admission_phase_phase_handler', :with => 3
         click submit
         wait_until_invisible modal
@@ -164,6 +165,7 @@ describe 'Admin Admission Method Phases' do
         within("#admission-method-admission-phase-#{admission_phase.id}") do
           page.should have_content 'Interview'
           page.should_not have_content 'Written application'
+          #page.should have_content 2
           page.should have_content 3
         end
         flash_updated?
@@ -176,8 +178,7 @@ describe 'Admin Admission Method Phases' do
       it 'adds exams'
       it 'remove exams'
     end
-
-    it 'deletes', js: true do
+    it 'deletes', :js => true do
       page.should have_content admission_phase.name
       within(count_div) { page.should have_content 'Admission Phases list(1)' }
 

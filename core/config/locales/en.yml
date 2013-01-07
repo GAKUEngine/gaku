@@ -1,22 +1,4 @@
 en:
-  
-  helpers:
-    page_entries_info:
-      one_page:
-        display_entries:
-          zero: "No %{entry_name} found"
-          one: "Displaying <b>1</b> %{entry_name}"
-          other: "Displaying <b>all %{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
-  views:
-    pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Prev"
-      next: "Next &rsaquo;"
-      truncate: "..."
-
   add: Add
   address:
     add: Add Address
@@ -134,9 +116,7 @@ en:
     new: New class enrollment
     seat_number: Seat number
   class_group_management: Class Management
-  commute_method:
-    singular: Commute Method
-    add: Add Commute Method
+  commute_method: Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
