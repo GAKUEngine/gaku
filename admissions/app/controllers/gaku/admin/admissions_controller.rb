@@ -35,7 +35,7 @@ module Gaku
         if !(@state.id == @admission_record.admission_phase_state_id)
           # TODO decide how next phase should be chosen and decide for default phase states
           if @state.auto_progress == true
-            @next_phase = AdmissionPhase.find_by_admission_method_id_and_order(phase.admission_method_id ,phase.order+1)
+            @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
             @new_state = @next_phase.admission_phase_states.first
             #@admission_record.admission_phase_state = @state
             #@admission_record.admission_phase = @next_phase
