@@ -1,5 +1,5 @@
 en:
-  
+
   helpers:
     page_entries_info:
       one_page:
@@ -586,7 +586,7 @@ en:
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
-    code: Syllabus Code
+    code: Code
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
