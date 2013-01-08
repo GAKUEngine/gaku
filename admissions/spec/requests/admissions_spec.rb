@@ -227,7 +227,7 @@ describe 'Admin Admissions' do
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end
-          context 'grade' do
+          context 'grading' do
             before do
               admission_period
               @exam_phase = admission_period.admission_methods.first.admission_phases.first
@@ -235,7 +235,7 @@ describe 'Admin Admissions' do
               admission_period.reload
               visit gaku.admin_admissions_path
             end
-            xit 'grade' do
+            xit 'grades' do
               page.should have_content 'Grade Exam'
               click_on 'Grade Exam'
               page.should have_content "#{exam.name}"
@@ -243,9 +243,45 @@ describe 'Admin Admissions' do
               visit gaku.admin_admissions_path
               page.should have_content 2.78
             end
+            xit 'adds attendance method' do
+            end
           end
-          xit 'add attendance method' do
+
+          context 'listing' do
+            xit 'lists admissions' do
+              page.should have_content 'Listing Admissions'
+              click_on 'Listing Admissions'
+              current_path.should == "/admissions/listing_admissions"
+              page.should have_content 'Admission Candidates List'
+              page.should have_content "#{admission_period.admission_methods.first.name}"
+              page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}"
+            end
+            context 'lists applicants and' do
+              before do
+                page.should have_content 'Applicants List'
+                click_on 'Applicants List'
+                current_path.should == "/admissions/listing_applicants"
+              end
+              xit 'edits applicants' do
+                click '.edit-link'
+                wait_until_visible modal
+                #TODO edit the applicant
+                click_on 'Submit'
+                wait_until_invisible modal
+              end
+              xit 'shows applicants' do
+                click '.show-link'
+                current_path.should eq "/students/params[:id]"
+              end
+              xit 'returns to admissions' do
+                page.should have_content 'Admissions'
+                click_on 'Admissions'
+                current_path.should eq "/admissions"
+              end
+            end
+
           end
+          
           pending 'exports as CSV' do
           end
         end
