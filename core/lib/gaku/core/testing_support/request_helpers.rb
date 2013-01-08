@@ -126,6 +126,11 @@ module Gaku
           end
         end
 
+        def has_validations?
+          click submit
+          wait_until { page.should have_content "can't be blank" }
+        end
+
         private
           def plural(text)
             a = []

@@ -11,9 +11,7 @@ Spork.prefork do
   require 'database_cleaner'
   require 'active_record/fixtures'
   require 'factory_girl_rails'
-
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist unless ENV['SELENIUM']
+  require 'sidekiq/testing'
 
   require 'gaku/core/testing_support/env'
   require 'gaku/core/testing_support/factories'
@@ -67,12 +65,6 @@ Spork.each_run do
     config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, :type => :controller
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, :type => :request
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
-  end
-
-  RSpec::Matchers.define :have_valid_factory do |factory_name|
-    match do |model|
-      create(factory_name).new_record?.should be_false
-    end
   end
 
 end

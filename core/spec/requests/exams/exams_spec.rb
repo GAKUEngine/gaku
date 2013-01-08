@@ -6,11 +6,10 @@ describe 'Exams' do
   let(:exam) { create(:exam, :name => "Linux") }
 
   before :all do
-    set_resource("exam")
+    set_resource "exam"
   end
 
   context '#new', :js => true do
-
     before do
       visit gaku.exams_path
       click new_link
@@ -31,11 +30,11 @@ describe 'Exams' do
         fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
 
         click submit
-        wait_until_invisible form
+        wait_until_invisible submit
       end.to change(Gaku::Exam, :count).by 1
 
-      size_of(table_rows).should == tr_count + 1
-      within(count_div) { page.should have_content('Exams List(1)') }
+      size_of(table_rows).should eq (tr_count + 1)
+      within(count_div) { page.should have_content 'Exams List(1)' }
       flash_created?
     end
 
@@ -43,24 +42,14 @@ describe 'Exams' do
       ensure_cancel_creating_is_working
     end
 
-    pending 'errors without required exam fields' do
-      # input only exam_portion fields to check validation on exam
-      fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-      fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1
-      fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
-
-      click submit
-      page.should have_content('This field is required')
+    it 'errors without required exam fields' do
+      has_validations?
     end
 
-    pending 'errors without required exam portion fields' do
-      # input only exam fields to check validation on exam
-      fill_in 'exam_name', :with => 'Biology Exam'
-      fill_in 'exam_weight', :with => 1
-      fill_in 'exam_description', :with => "Good work"
-
-      click submit
-      page.should have_content('This field is required')
+    it 'errors without required exam portion fields' do
+      fill_in 'exam_name', :with => 'Exam 1'
+      fill_in 'exam_exam_portions_attributes_0_name', :with => ''
+      has_validations?
     end
   end
 
@@ -75,19 +64,19 @@ describe 'Exams' do
         within(table) { click edit_link }
         wait_until_visible modal
       end
+
       it 'edits from index' do
         fill_in 'exam_name', :with => 'Biology 2012'
         click submit
         wait_until_invisible modal
 
-        within(table) { page.should have_content('Biology 2012') }
+        within(table) { page.should have_content 'Biology 2012' }
         flash_updated?
       end
 
-      pending 'errors without required fields on index/edit' do
+      it 'errors without required fields on index/edit' do
         fill_in 'exam_name', :with => ''
-        click submit
-        page.should have_content 'This field is required'
+        has_validations?
       end
 
       it 'hides weighting widget' do
@@ -95,7 +84,7 @@ describe 'Exams' do
         click submit
         wait_until_invisible modal
 
-        page.should_not have_content('Total Weight')
+        page.should_not have_content 'Total Weight'
         page.should have_no_selector(:content,'.weight-check-widget')
       end
     end
@@ -103,41 +92,41 @@ describe 'Exams' do
     context '#show ' do
       before do
         within(table) { click show_link }
-        page.should have_content('Show Exam')
+        page.should have_content 'Show Exam'
       end
 
       it 'shows weighting widget' do
-        page.should have_content('Weight')
-        page.should have_content('Total Weight')
+        page.should have_content 'Weight'
+        page.should have_content 'Total Weight'
       end
 
       context '#edit', :js => true do
         before do
           click_on "Edit"
-          page.should have_content('Edit Exam')
+          page.should have_content 'Edit Exam'
         end
+
         it 'edits from show view' do
           fill_in 'exam_name', :with => 'Biology 2012'
           click submit
-          page.should have_content('Biology 2012')
+          page.should have_content 'Biology 2012'
           flash_updated?
         end
 
-        pending 'errors without required fields on view/edit' do
+        it 'errors without required fields on view/edit' do
           fill_in 'exam_name', :with => ''
-          click submit
-          wait_until { page.should have_content('This field is required') }
+          has_validations?
         end
       end
     end
     it 'deletes', :js => true do
-      within(count_div) { page.should have_content('Exams List(1)') }
+      within(count_div) { page.should have_content 'Exams List(1)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::Exam, :count).by -1
 
-      within(count_div) { page.should_not have_content('Exams List(1)') }
+      within(count_div) { page.should_not have_content 'Exams List(1)' }
       page.should_not have_content exam.name
       flash_destroyed?
     end
@@ -145,7 +134,7 @@ describe 'Exams' do
     it 'returns to index when back is selected' do
       visit gaku.exam_path(exam)
       click_on 'Back'
-      page.should have_content('Exams List')
+      page.should have_content 'Exams List'
     end
   end
 end

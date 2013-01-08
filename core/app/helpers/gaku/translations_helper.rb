@@ -5,6 +5,10 @@ module Gaku
       t('class_group.list')
     end
 
+    def t_class_group_enrollment_list
+      t('class_group_enrollment.list')
+    end
+
     def t_course_plural
       t('course.plural')
     end
@@ -91,6 +95,14 @@ module Gaku
 
     def t_attendance_type_list
       t('attendance_type.list')
+    end
+
+    def t_student_list
+      t(:'student.list')
+    end
+
+    def t_specialty_list
+      t(:'specialty.list')
     end
 
     def t_note_list

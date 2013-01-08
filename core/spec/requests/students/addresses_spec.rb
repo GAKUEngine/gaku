@@ -37,7 +37,7 @@ describe 'Address' do
         fill_in "address_address2", :with => "Toyota str."
 
         click submit
-        wait_until_invisible form
+        wait_until_invisible submit
       end.to change(student.addresses, :count).by 1
 
       #required
@@ -54,14 +54,7 @@ describe 'Address' do
       flash_created?
     end
 
-    pending 'errors without required fields' do
-      click submit
-      wait_until do
-        flash_error_for 'address_address1'
-        flash_error_for 'country_dropdown'
-        flash_error_for 'address_city'
-      end
-    end
+    it {has_validations?}
 
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
@@ -88,7 +81,7 @@ describe 'Address' do
         fill_in 'address_title',     :with => 'Edited address'
 
         click submit
-        wait_until_invisible modal
+        wait_until_invisible submit
 
         page.should have_content 'Edited street address'
         page.should have_content 'Tokyo'
@@ -96,14 +89,11 @@ describe 'Address' do
         flash_updated?
       end
 
-      pending 'errors without required fields' do
+      it 'errors without required fields' do
         fill_in 'address_address1',  :with => ''
         fill_in 'address_city',      :with => ''
 
-        click submit
-
-        page.should have_content 'Address1 can\'t be blank'
-        page.should have_content 'City can\'t be blank'
+        has_validations?
       end
 
       it 'cancels editting', :cancel => true do

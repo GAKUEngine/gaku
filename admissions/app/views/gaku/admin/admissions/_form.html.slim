@@ -1,28 +1,6 @@
-= form_for [:admin, @admission], :remote => true do |form|
-  - if @admission.errors.any?
-    .alert.alert-error
-      strong
-        = pluralize(@admission.errors.count, "error")
-        | prohibited this student from being saved:
-      ul
-        - @admission.errors.full_messages.each do |msg|
-          li= msg
-  .row-fluid.mt-l
-    .span12.well
-      = form.hidden_field :admission_period_id, :value => params[:admission_period_id]
-      = form.hidden_field :admission_method_id, :value => params[:admission_method_id] 
-      = form.fields_for :student, @student do |student_form|
-        - if @student.errors.any?
-          .alert.alert-error
-            strong
-              = pluralize(@student.errors.count, "error")
-              | prohibited this student from being saved:
-            ul
-              - @student.errors.full_messages.each do |msg|
-                li= msg
-        =render :partial => 'student_form_fields', :locals => { :form => student_form }
-      .row-fluid
-        .span12
-          .span6
-            = submit_button t('student.create'), :id => 'submit-admin-admission-button'
-          = link_to_cancel :id => 'cancel-admin-admission-link'
+= remote_form_for [:admin, @admission] do |form|
+  = form.hidden_field :admission_period_id, :value => params[:admission_period_id]
+  = form.hidden_field :admission_method_id, :value => params[:admission_method_id]
+  = form.fields_for :student, @student do |student_form|
+    = render :partial => 'student_form_fields', :locals => { :f => student_form }
+  = buttons_for @admission, :nested_id => 'admin-admission', :label => t(:'student.create')

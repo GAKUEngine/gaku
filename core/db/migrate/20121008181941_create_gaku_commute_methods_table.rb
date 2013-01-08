@@ -4,6 +4,8 @@ class CreateGakuCommuteMethodsTable < ActiveRecord::Migration
   		t.text :details
 
   		t.references :commute_method_type
+
+      t.timestamps
   	end
   end
 end

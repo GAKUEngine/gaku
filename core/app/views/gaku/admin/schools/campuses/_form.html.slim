@@ -1,13 +1,3 @@
 = remote_form_for [:admin, @school, @campus] do |f|
-  b= t(:'campus.new')
-  .row-fluid.mt-l
-    .span12.well
-      .span12.well
-        = f.text_field :name, :class => "span12", :label => t(:'campus.name')
-        .row-fluid
-          .span12
-            .span9
-              = submit_button t(:'campus.save'), :id => 'submit-admin-school-campus-button'
-            = link_to_cancel :id => 'cancel-admin-school-campus-link'
-
-/= javascript_include_tag 'gaku/admin/schools/campuses'
+  = f.text_field :name, :label => t(:'campus.name')
+  = buttons_for @school, :nested_id => 'admin-school-campus'

@@ -71,6 +71,14 @@ module Gaku
       link_to name, resource, attributes
     end
 
+    def ajax_soft_delete(options = {})
+      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      attributes = {
+        :class => 'btn btn-mini btn-danger delete-link'
+      }.merge(options)
+      link_to name, '#', attributes
+    end
+
     def ajax_link_to_make_primary(resource, options = {})
       name = ("<i class='icon-white icon-ok'></i>").html_safe
       attributes = {
@@ -104,7 +112,7 @@ module Gaku
     def link_to_edit_with_text(resource, options = {})
       name = ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe
       attributes = {
-        :class => "edit-link"
+        :class => "span9 btn btn-warning edit-link"
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -129,7 +137,7 @@ module Gaku
     def link_to_cancel(options = {})
       name = t('cancel')
       attributes = {
-        :class => "span3 btn btn-danger cancel-link",
+        :class => "span6 btn btn-danger cancel-link",
         :'data-dismiss' => "modal"
       }.merge(options)
       link_to name, '#', attributes
@@ -147,13 +155,16 @@ module Gaku
 
     def link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
-      link_to name, resource, options
+      attributes = {
+        :class => 'span3 btn btn-danger'
+      }.merge(options)
+      link_to name, resource, attributes
     end
 
     def submit_button(text, options={})
       attributes = {
         :type => 'submit',
-        :class => 'span12 btn btn-primary button'
+        :class => 'span6 btn btn-primary button'
       }.merge(options)
       button_tag(content_tag('span', text), attributes)
     end

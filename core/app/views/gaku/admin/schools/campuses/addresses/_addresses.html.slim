@@ -1,25 +1,24 @@
 #admin-school-campus-addresses
-  #new-admin-school-campus-address.hide
-  .row-fluid
+  = index_header do
+    #new-admin-school-campus-address.hide
     .pull-left
-      h4.h4-vm
+      = count_div '' do
         = t(:'address.singular')
     .pull-right
       = ajax_link_to_new t(:'address.add'), [:new, :admin, @school, @campus, :address], :id => 'new-admin-school-campus-address-link', :class => @campus.address.nil? ? "btn btn-primary" : 'btn btn-primary hide'
+  = hr
 
-  .row-fluid
-    .span12
-      = table_for 'admin-school-campus-addresses-index' do
-          thead
-            tr
-              = th t(:'address.title')
-              = th t(:'address.country')
-              = th t(:'address.zipcode')
-              = th t(:'address.state')
-              = th t(:'address.city')
-              = th t(:'address.address1')
-              = th t(:'address.address2')
-              = th_actions 2
-          tbody
-            = render :partial => 'gaku/admin/schools/campuses/addresses/address', :locals => {:address => @campus.address}
-br/
+  = index_body do
+    = table_for 'admin-school-campus-addresses-index' do
+        thead
+          tr
+            = th t(:'address.title')
+            = th t(:'address.country')
+            = th t(:'address.zipcode')
+            = th t(:'address.state')
+            = th t(:'address.city')
+            = th t(:'address.address1')
+            = th t(:'address.address2')
+            = th_actions 2
+        tbody
+          = render :partial => 'gaku/admin/schools/campuses/addresses/address', :locals => {:address => @campus.address}

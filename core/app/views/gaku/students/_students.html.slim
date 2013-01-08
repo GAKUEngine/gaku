@@ -10,6 +10,7 @@
       = th t(:'class_group_enrollment.seat_number')
       = th t(:'admitted')
       = th t(:'address.primary')
+      = th t(:'assignment.plural')
 
       - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
         = th_actions 2
@@ -17,5 +18,5 @@
   tbody
     = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
-/= javascript_include_tag 'gaku/students/selected_students'
-/= javascript_include_tag 'gaku/students/datatable'
+
+/=paginate @students

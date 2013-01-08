@@ -33,12 +33,9 @@ describe 'ClassGroup Courses' do
       flash_created?
     end
 
-    it "errors without required fields" do
-      click submit
-      wait_until { page.has_content? 'Course can\'t be blank' }
-    end
+    it { has_validations? }
 
-    pending 'cancels creating', :cancel => true do
+    it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end
@@ -58,7 +55,7 @@ describe 'ClassGroup Courses' do
       wait_until_visible form
       select "#{course.code}", :from => 'class_group_course_enrollment_course_id'
       click submit
-      wait_until { page.should have_content "Course Already enrolled to the class group!" }
+      wait_until { page.should have_content "Already enrolled to the class group!" }
     end
 
     it 'deletes' do

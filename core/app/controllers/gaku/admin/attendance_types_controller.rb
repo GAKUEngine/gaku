@@ -6,10 +6,9 @@ module Gaku
       respond_to :js, :html, :json
       before_filter :count, :only => [:create, :destroy, :index]
 
-
       def index
         super do |format|
-          format.json { render :json => @attendance_types.to_json(:root => false)}  
+          format.json { render :json => @attendance_types.to_json(:root => false) }
         end
       end
 

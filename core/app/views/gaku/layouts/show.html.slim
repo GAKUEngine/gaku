@@ -1,0 +1,15 @@
+= content_for :content do
+  .row-fluid
+    .span1
+    .span10
+      .row-fluid
+        .span12
+          h3
+            = yield :show_header
+
+      .row-fluid
+        .span12
+          hr/
+      = yield
+
+= render :file => 'gaku/layouts/gaku'

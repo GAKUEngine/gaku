@@ -2,5 +2,6 @@ td.surname = student.surname
 td.name = student.name
 td.birth = student.birth_date
 td.gender = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
-td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
-td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
+// TODO: move this to helper
+- if !phase.exam.nil?
+  td.exam-score = !@students.select{|f| f[:student] == student}[0].nil? ? @students.select{|f| f[:student] == student}[0][:exam_score] : t(:'exams.not_graded')

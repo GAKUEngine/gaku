@@ -1,13 +1,4 @@
 = remote_form_for [:admin, school, campus, @contact] do |f|
-  .row-fluid.mt-l
-    .span12.well
-      .span12.well
-        = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+  = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+  = buttons_for @contact, :nested_id => 'admin-school-campus-contact'
 
-        .row-fluid
-          .span12
-            .span9
-              = submit_button t(:'contact.save'), :id => 'submit-admin-school-campus-contact-button'
-            = link_to_cancel :id => 'cancel-admin-school-campus-contact-link'
-
-/= javascript_include_tag 'gaku/admin/schools/campuses/contacts'

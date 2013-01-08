@@ -1,7 +1,6 @@
 # Dynamic change states based on country
 $ ->
-	stateDropdown = $('#state_dropdown')
-	$('#country_dropdown').on 'change', (e) ->
+	$('body').on 'change','#country_dropdown', (e) ->
 		countryCode = $("#country_dropdown option:selected").val()
 		$.ajax
 			type: 'get'
@@ -10,20 +9,21 @@ $ ->
 				country_id: countryCode
 			dataType: 'json'
 			success: (data)->
-				stateLabel = $('.state_label')
-
+				stateDropdown = $('#state_dropdown')
+				stateLabel = $("label[for='address_state_name']")
 				stateDropdownName = stateDropdown.attr('name')
 				stateSelect = $('<select class="span12 state_select" name="' + stateDropdownName + '"> ')
-				
-				console.log(data)
-				console.log($.isEmptyObject(data))
+
 
 				if $.isEmptyObject(data) 
 					$('.state_select').remove()
-					stateLabel.after stateDropdown
+					# stateLabel.after stateDropdown
+					stateDropdown.show()
+					stateDropdown.prop('disabled', false)
 				else
-					stateDropdown.remove()
+					stateDropdown.hide()
+					stateDropdown.prop('disabled', true)
 					$('.state_select').remove()
 					stateLabel.after stateSelect
 					$.each data, (i, data) ->
-						stateSelect.append('<option value="' + data.name + '">' + data.name + '</option>')
+						stateSelect.append('<option value="' + data.state.name + '">' + data.state.name + '</option>')

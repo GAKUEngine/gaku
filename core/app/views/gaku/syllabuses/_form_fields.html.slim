@@ -1,0 +1,10 @@
+.row-fluid
+  .span4
+    = f.text_field :name, :label => t(:'syllabus.name')
+  .span4
+    = f.text_field :code, :label => t(:'syllabus.code')
+  .span4
+    = f.number_field :credits, :label => t(:'syllabus.credits')
+.row-fluid
+  .span12
+    = f.text_area :description, :size => "0x5", :label =>  t(:'syllabus.description')

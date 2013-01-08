@@ -1,0 +1,11 @@
+= content_for :title, t(:'changes.student_contact.list')
+
+= content_for :index_header do
+  .pull-left
+    = count_div 'changes-count' do
+      = print_count @count, t(:'changes.student_contact.list')
+
+= hr
+
+#changes-index
+  = render 'changes'

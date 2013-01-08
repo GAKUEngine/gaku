@@ -3,46 +3,35 @@ module Gaku
     class Schools::Campuses::AddressesController < GakuController
 
     	inherit_resources
-      actions :new, :edit, :update, :destoy
-
       respond_to :js, :html
 
-      before_filter :address, :only => [:destroy, :make_primary]
-    	before_filter :school, :only => [:new, :create, :edit, :update]
-    	before_filter :campus
+    	before_filter :load_vars
+      before_filter :before_index, :only => :index
 
-    	def create
+      def create
         @address = Address.create(params[:address])
         @campus.address = @address
-        respond_to do |format|
-          if @campus.save
-            flash.now[:notice] = t('notice.created', :resource => t('address.singular'))
-            format.js { render 'create' }
-          end
+        if @campus.save
+          respond_with @campus
         end
       end
 
       def destroy
+        @address = Address.find(params[:id])
         @campus.address.destroy
-        respond_to do |format|
-          flash.now[:notice] = t('notice.destroyed', :resource => t('address.singular') )
-          format.js { render 'destroy' }
-        end
+        respond_with(@campus.address)
       end
 
       private
 
-        def address
-          @address = Address.find(params[:id])
-        end
+      def before_index
+        @address = @campus.address
+      end
 
-        def school
-          @school = School.find(params[:school_id])
-        end
-
-        def campus
-          @campus = Campus.find(params[:campus_id])
-        end
+      def load_vars
+        @school = School.find(params[:school_id])
+        @campus = Campus.find(params[:campus_id])
+      end
 
     end
   end

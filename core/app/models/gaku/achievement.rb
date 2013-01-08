@@ -4,5 +4,8 @@ module Gaku
   	belongs_to :school
 
     attr_accessible :name, :description, :student_id, :school_id
+
+    validates_presence_of :name
+    validates_associated :student, :school
   end
 end

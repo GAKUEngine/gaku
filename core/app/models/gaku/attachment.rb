@@ -1,30 +1,17 @@
-# == Schema Information
-#
-# Table name: attachments
-#
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  description        :text
-#  is_deleted         :boolean          default(FALSE)
-#  attachable_id      :integer
-#  attachable_type    :string(255)
-#  asset_file_name    :string(255)
-#  asset_content_type :string(255)
-#  asset_file_size    :integer
-#  asset_updated_at   :datetime
-#
 module Gaku
-	class Attachment < ActiveRecord::Base
-		
-		attr_accessible :name, :description, :asset
+  class Attachment < ActiveRecord::Base
 
-		belongs_to :attachable, :polymorphic => true
+    attr_accessible :name, :description, :asset
 
-		has_attached_file :asset
+    belongs_to :attachable, :polymorphic => true
 
-		validates :name, :presence => true
+    has_attached_file :asset
 
-		default_scope :conditions => { :is_deleted => false }
+    validates_presence_of :name
+    validates_associated :attachable
+    validates_attachment :asset, presence: true
 
-	end
+    default_scope conditions: { is_deleted: false }
+
+  end
 end

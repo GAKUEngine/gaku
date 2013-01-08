@@ -6,7 +6,7 @@ gem 'pg'
 gem 'sqlite3'
 
 gem 'execjs'
-gem 'therubyracer'
+gem 'therubyracer', '0.10.2'
 
 gem 'rails-i18n'
 
@@ -15,11 +15,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
   gem 'uglifier', '>= 1.0.3'
-end
-
-group :development do
-  gem 'annotate'
-  gem "rails-erd"
 end
 
 group :test do
@@ -45,16 +40,5 @@ group :test do
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency
   end
 end
-
-unless ENV["CI"]
-  platform :ruby_18 do
-    gem 'rcov'
-    gem 'ruby-debug'
-  end
-  platform :ruby_19 do
-    gem 'simplecov'
-    gem 'ruby-debug19'
-  end
-end
-
+  
 gemspec

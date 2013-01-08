@@ -1,0 +1,7 @@
+= modal_for 'syllabus-modal' do
+  = modal_header t(:'syllabus.edit')
+  = modal_form_for @syllabus do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @syllabus
+

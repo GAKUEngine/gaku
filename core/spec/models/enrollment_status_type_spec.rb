@@ -3,7 +3,11 @@ require 'spec_helper'
 describe Gaku::EnrollmentStatusType do
 	
 	context 'validations' do
-	  it { should have_valid_factory(:enrollment_status_type) }
+
+    it { should validate_presence_of :name }
+
+    it { should allow_mass_assignment_of :name }
+    it { should allow_mass_assignment_of :is_active }
 	end
 
 end

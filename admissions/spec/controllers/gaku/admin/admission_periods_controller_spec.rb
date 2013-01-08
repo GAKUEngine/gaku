@@ -28,29 +28,29 @@ describe Gaku::Admin::AdmissionPeriodsController do
       admission_period.reload
     end
     it 'should be success' do
-      gaku_xhr_get :show_methods, id:admission_period
+      gaku_js_get :show_methods, id:admission_period
       response.should be_success
     end
 
     it 'populates an array of admission methods' do
-      gaku_xhr_get :show_methods, id:admission_period
+      gaku_js_get :show_methods, id:admission_period
       assigns(:admission_methods).should eq admission_period.admission_methods
     end
 
     it 'renders the :show_methods template' do
-      gaku_xhr_get :show_methods, id:admission_period
+      gaku_js_get :show_methods, id:admission_period
       response.should render_template :show_methods
     end
   end
 
   describe 'GET #new' do
     it "assigns a new admission_period to @admission_period" do
-      gaku_xhr_get :new
+      gaku_js_get :new
       assigns(:admission_period).should be_a_new(Gaku::AdmissionPeriod)
     end
 
     it "renders the :new template" do
-      gaku_xhr_get :new
+      gaku_js_get :new
       response.should render_template :new
     end
   end
@@ -68,7 +68,7 @@ describe Gaku::Admin::AdmissionPeriodsController do
     context "with invalid attributes" do
       it "does not save the new admission period in the db" do
         expect{
-          gaku_xhr_post :create, admission_period: {name: ''}  
+          gaku_js_post :create, admission_period: {name: ''}  
         }.to_not change(Gaku::AdmissionPeriod, :count)
       end
     end
@@ -93,14 +93,12 @@ describe Gaku::Admin::AdmissionPeriodsController do
 
     context "invalid attributes" do
       it "changes admission method's attributes" do
-        gaku_xhr_put :update, id: admission_period,admission_period: attributes_for(:admission_period, name: "")
+        gaku_js_put :update, id: admission_period,admission_period: attributes_for(:admission_period, name: "")
         admission_period.reload
         admission_period.name.should_not eq("")
       end
     end
 
-    context "methods" do
-    end
   end
 
   describe "DELETE #destroy" do

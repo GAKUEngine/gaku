@@ -1,1 +1,13 @@
-$("#students-index-div").html("<%= escape_javascript(render('gaku/students/students')) %>");
+$("#students-index-div").html("<%= escape_javascript(render('students')) %>");
+$('.students-count').html('<%= print_count(@students_count, t_student_list) %>');
+
+
+
+var students_per_page = 10;
+var pagination = $('.pagination');
+
+if('<%= @students.count %>' < students_per_page) {
+  pagination.hide();
+} else {
+  pagination.show();
+}

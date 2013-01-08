@@ -1,20 +1,21 @@
-#new-exam.hide
-  =render 'form'
-.row-fluid
+= content_for :index_header do
   .pull-left
-    h4.h4-vm.exams-count
-      = print_count(@count, t_exam_list)
+    = count_div 'exams-count' do
+      = print_count @count, t_exam_list
   .pull-right
-    =ajax_link_to_new t('exam.add'), new_exam_path, :id => 'new-exam-link'
-.row-fluid
-  .span12.well
-    table#exams-index.index.table.table-striped.table-bordered.table-condensed
-	    thead
-		    tr
-		    	th class='btn-inverse' = t('exam.name')
-		    	th class='btn-inverse' = t('exam.adjustments')
-		    	th class='btn-inverse' = t('exam.weight')
-		    	th class='btn-inverse' = t('exam.use_weighting')
-		    	th class='btn-info' = t('exam.options')
-			tbody
-				=render :partial => 'gaku/exams/exam',  :as => :exam, :collection => @exams
+    = ajax_link_to_new t(:'exam.add'), [:new, :exam], :id => 'new-exam-link'
+
+= content_for :new_form do
+  #new-exam.hide
+    /= render 'form'
+
+= table_for 'exams-index' do
+  thead
+    tr
+    	= th t(:'exam.name')
+    	= th t(:'exam.adjustments')
+    	= th t(:'exam.weight')
+    	= th t(:'exam.use_weighting')
+    	= th_actions 3
+	tbody
+		= render :partial => 'exam',  :as => :exam, :collection => @exams

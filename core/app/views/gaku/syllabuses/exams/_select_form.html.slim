@@ -1,11 +1,5 @@
-= form_for [@syllabus, Gaku::ExamSyllabus.new], :url => syllabus_exam_syllabuses_path(@syllabus), :remote => true, :method => 'post' do |f|
-  .fields
-    b = t('exam.choose')
-    =f.label :exam_id
-    =f.select :exam_id, Gaku::Exam.all.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]},{:prompt => t('exam.choose')}, {:class => 'chzn-select'}
-  .actions
-		.row-fluid
-			.span12
-				.span6
-					= submit_button t('exam.add'), :id => 'submit-existing-exam-button'
-				= link_to_cancel :id => 'cancel-existing-exam-link'
+= remote_form_for [@syllabus, Gaku::ExamSyllabus.new], :url => syllabus_exam_syllabuses_path(@syllabus), :method => 'post' do |f|
+
+  = f.select :exam_id, Gaku::Exam.all.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]}, {:prompt => t('exam.choose')}, {:class => 'chzn-select'}
+
+  = buttons_for @syllabus, :nested_id => 'existing-exam', :label => t('exam.add')

@@ -27,7 +27,7 @@ describe 'ClassGroup Notes' do
         fill_in "note_title",   :with => "The note title"
         fill_in "note_content", :with => "The note content"
         click submit
-        wait_until_invisible form
+        wait_until_invisible submit
       end.to change(class_group.notes, :count).by 1
 
       page.should have_content "The note title"
@@ -35,14 +35,8 @@ describe 'ClassGroup Notes' do
       within(count_div) { page.should have_content 'Notes list(1)' }
       flash_created?
     end
-
-    pending "errors without required fields"  do
-      click submit
-      wait_until do
-         flash_error_for 'note_title'
-         flash_error_for 'note_content'
-      end
-    end
+    
+    it { has_validations? }
 
     it 'cancels creating', :cancel => true, :js => true do
       ensure_cancel_creating_is_working

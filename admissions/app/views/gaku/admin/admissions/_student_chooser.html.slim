@@ -1,4 +1,4 @@
-=render 'gaku/students/search/form'
+= render 'gaku/students/search/form'
 
 .row-fluid.hide#students-checked-div
   .span6.well
@@ -12,17 +12,16 @@
           th.btn-inverse = sort_link @search, "surname", t("surname")
           th.btn-inverse = sort_link @search, "name", t("name")
       tbody#students-checked
-    
+
 .row-fluid
   .span12.well style="margin-bottom:0px"
     #students-index-div
       =render 'gaku/students/students'
     - admission_phase_states.each_with_index do |state, index|
       .span6 *{:id => "state" + state.id.to_s, :style => ("margin-left:0;" if index%2 == 0)}
-        h4 
+        h4
           = state.name
         =render 'gaku/students/students'
-= javascript_include_tag "student_chooser"
 
 
 javascript:

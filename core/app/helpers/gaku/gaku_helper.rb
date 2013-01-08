@@ -15,6 +15,22 @@ module Gaku
       end
     end
 
+    def grading_methods
+      Gaku::GradingMethod.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def enrollment_status_types
+      Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def class_groups
+      Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types
+      Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
     def syllabuses
       Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
     end
@@ -102,7 +118,7 @@ module Gaku
     end
 
     def color_code(color)
-      "<div style='width:100px;height:20px;background-color:#{color};border:1px solid whitesmoke'></div> ".html_safe
+      content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
     end
 
   end

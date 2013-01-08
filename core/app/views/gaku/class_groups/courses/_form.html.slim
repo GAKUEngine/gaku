@@ -1,13 +1,5 @@
 = remote_form_for [@class_group, @class_group_course_enrollment] do |f|
-  .row-fluid
-    .span12.well
-      = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :class => "span12", :label => t(:'course.code')
-      = f.hidden_field :class_group_id, :value => @class_group.id
+  = f.select :course_id, courses, {:prompt => t(:'course.choose')}, :label => t(:'course.code')
+  = f.hidden_field :class_group_id, :value => @class_group.id
 
-  .row-fluid
-    .span12
-      .span9
-        = submit_button t(:'course.save'), :id => 'submit-class-group-course-button'
-      = link_to_cancel :id => "cancel-class-group-course-link"
-
-/= javascript_include_tag 'gaku/class_groups/courses'
+  = buttons_for @class_group_course_enrollment, :nested_id => 'class-group-course'

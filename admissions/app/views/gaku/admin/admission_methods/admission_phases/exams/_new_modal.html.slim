@@ -1,0 +1,18 @@
+= modal_for 'new-admission-method-admission-phase-exam-modal' do
+  = modal_header t(:'exam.add')
+  = modal_body do
+    = modal_form_for [:admin, @admission_method, @admission_phase, @exam] do |f|
+      .row-fluid
+        h4 = t(:'exam.new')
+      = hr
+      = well_div do
+        = render 'gaku/admin/admission_methods/admission_phases/exams/form_fields', :f => f
+
+      .row-fluid
+        h4 = t(:'exam_portion.master')
+      = hr
+      = well_div do
+        = f.fields_for :exam_portions do |ep_form|
+          = render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
+          
+      = buttons_for @exam, :nested_id => 'admission_phase-exam'

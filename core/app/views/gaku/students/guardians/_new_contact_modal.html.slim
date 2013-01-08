@@ -1,9 +1,6 @@
 = modal_for 'new-contact-modal' do
   = modal_header t(:'contact.new')
-  .modal-body
-    = form_for [@student, @guardian, @contact], :url => [:create_modal, @student, @guardian, @contact], :remote => true do |f|
+  = modal_form_for [@student, @guardian, @contact], :url => [:create_modal, @student, @guardian, @contact] do |f|
+    = modal_body do
       = render 'gaku/shared/form_fields/contact_form_fields', :f => f
-      .actions
-        .span8
-          = submit_button t(:'contact.create'), :id => 'submit-student-guardian-contact-button'
-        = link_to_cancel :id => 'cancel-student-guardian-contact-link'
+      = buttons_for @contact, :nested_id => 'student-guardian-contact'

@@ -1,4 +1,36 @@
 en:
+
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."
+
+  changes:
+    student:
+      list: "Student Changes list"
+    student_address:
+      list: "Student Address Changes list"
+    student_contact:
+      list: "Student Contact Changes list"
+    from: "From"
+    to: "To"
+    changed_at: "Changed At"
+    event: "Event"
+    change: "Change"
+
+
   add: Add
   address:
     add: Add Address
@@ -43,18 +75,27 @@ en:
   assignments:
     description: Assignment Description
   attachment:
+    asset_error: Error during asset upload
     asset_type: Asset type
+    asset_upload: Asset was uploaded successfully!
     assets: Assets
     create: Create Attachment
     description: Description
     file_name: File name
     file_size: File size
     file_type: File type
+    list: Attachment list
     name: Name
     new: New Attachment
-
+    plural: Attachments
+    singular: Attachment
   attendance_type:
     add: Add Attendance Type
+    auto_credit: Auto Credit
+    color_code: Color Code
+    counted_absent: Counted Absent
+    credit_rate: Credit Rate
+    disable_credit: Disable Credit
     edit: Edin Attendance Type
     list: Attendance Types list
     name: Name
@@ -62,11 +103,6 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
-    color_code: Color Code
-    credit_rate: Credit Rate
-    counted_absent: Counted Absent
-    disable_credit: Disable Credit
-    auto_credit: Auto Credit
   back: Back
   birth: Birth Date
   birth_and: and
@@ -97,10 +133,13 @@ en:
     name: Class Name
     new: New Class Group
     none: None
+    none_assigned: None Assigned
     plural: Class Groups
-    save: Save Class
+    save: Save Class Group
     show: Show
     singular: Class Group
+  class_group_course_enrollment:
+    save: Save Course to Class Group
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
@@ -109,7 +148,9 @@ en:
     new: New class enrollment
     seat_number: Seat number
   class_group_management: Class Management
-  commute_method: Commute Method
+  commute_method:
+    singular: Commute Method
+    add: Add Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
@@ -124,7 +165,7 @@ en:
     close: Close
     help:
       language: Choose your Language
-    label: Label
+    label: Language
     save: Save
   confirm: Are you sure?
   confirm_delete: Really Delete this record?
@@ -173,7 +214,7 @@ en:
     add: Enroll to course
     create: Create enrollment
     list: Enrollments
-    plural: Course Enrollments
+    plural: Course Enrollment
     singular: Course Enrollment
   course_group:
     course_group_recover: Course Group Recovered
@@ -185,9 +226,13 @@ en:
     save: Save Course Group
     show: Course Group
     singular: Course Group
+  course_group_enrollment:
+    save: Save to Course Group
   csv:
     export: CSV Export
     fields:
+      admitted: admitted
+      birth_date: birth_date
       email: email
       gender: gender
       name: name
@@ -216,6 +261,7 @@ en:
       timeout: Your session expired, please sign in again to continue.
       unauthenticated: You need to sign in or sign up before continuing.
       unconfirmed: You have to confirm your account before continuing.
+    login: Username or Email
     mailer:
       confirmation_instructions:
         subject: Confirmation instructions
@@ -230,7 +276,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token:
+      no_token: No Token
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -244,10 +290,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive:
-      signed_up_but_locked:
-      signed_up_but_unconfirmed:
-      update_needs_confirmation:
+      signed_up_but_inactive: This account is inactive
+      signed_up_but_locked: This account has been locked
+      signed_up_but_unconfirmed: This account has not been confirmed
+      update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -259,6 +305,7 @@ en:
       send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.
       unlocked: Your account was successfully unlocked. You are now signed in.
+    username: Username
   edit: Edit
   email: Mail Address
   enroll_to_class: Enroll to class
@@ -284,6 +331,7 @@ en:
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
         other: ! '%{count} errors prohibited this %{resource} from being saved:'
+    not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
     add_existing: Add Existing Exam
@@ -321,9 +369,11 @@ en:
     master: Master exam portion
     max_score: Maximum score
     name: Portion name
+    plural: Exam Portions
     problem_count: Problem count
     save: Save exam portion
     show: Show Exam Portion
+    singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
   flash:
@@ -376,6 +426,7 @@ en:
       cancel: Cancel
   hide: Hide
   history: History
+  id: Id
   import_format: Import Format
   language: Language
   languages:
@@ -384,6 +435,11 @@ en:
   manage: Manage
   menu:
     admin:
+      changes:
+        changes: "Changes and Deletions"
+        students: "Students"
+        student_addresses: "Student Addresses"
+        student_contacts: "Student Contacts"
       admin: Admin
       administration: Administration
       administrator: Administrator
@@ -410,6 +466,7 @@ en:
           state: State
       school_details: School Details
       schools: Schools
+      specialties: Specialties
       system:
         backup: Backup
         system_tools: System Tools
@@ -460,6 +517,7 @@ en:
     uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
+  order: Order
   panel: Panel
   period: Period
   phone: Phone Number
@@ -468,6 +526,18 @@ en:
   pictures:
     change: Change picture
     upload: Upload
+  preset:
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
+    plural: Presets
+    save: Save Presets
+    singular: Preset
+    student:
+      city: City
+      country: Country
+      gender: Gender
+      state: State
   profile: Profile
   profiles:
     new: New Profile
@@ -529,16 +599,18 @@ en:
     registration:
       csv: Registration CSV
       sheet: Registration Sheet
+    save: Save Student
     show: Show Students
     singular: Student
   submit: Submit
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
-    code: Syllabus Code
+    code: Code
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
+    import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
     name_sample: ! '[EX: Science A]'
@@ -547,7 +619,22 @@ en:
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
+  specialty:
+    edit: Edit Specialty
+    list: Specialties list
+    add: Add Specialty
+    singular: Specialty
+    description: Description
+    major_only: Major Only
+    name: Name
   teacher: Instructor
   title: Title
   user:
     info: User info
+  views:
+    pagination:
+      first: ! '&laquo; First'
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: ! '&lsaquo; Prev'
+      truncate: ! '...'

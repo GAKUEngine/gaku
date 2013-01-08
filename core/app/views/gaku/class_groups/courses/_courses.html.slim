@@ -1,4 +1,4 @@
-.row-fluid
+= index_header do
   #new-class-group-course.hide
     = render 'gaku/class_groups/courses/form'
   .pull-left
@@ -7,15 +7,13 @@
   .pull-right
     = ajax_link_to_new t(:'course.add'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
 
-.row-fluid
-  .span12
-    hr
-.row-fluid
-  .span12
-    = table_for 'class-group-courses-index' do
-      thead
-        tr
-          = th t(:'course.code')
-          = th_actions 2
-      tbody
-        = render :partial => 'gaku/class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
+= hr
+
+= index_body do
+  = table_for 'class-group-courses-index' do
+    thead
+      tr
+        = th t(:'course.code')
+        = th_actions 2
+    tbody
+      = render :partial => 'gaku/class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'

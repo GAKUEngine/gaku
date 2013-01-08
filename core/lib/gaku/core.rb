@@ -6,10 +6,14 @@ require 'ransack'
 require 'jquery-rails'
 require 'devise'
 require 'cancan'
-require 'audited-activerecord'
 require 'inherited_resources'
 require 'slim-rails'
 require 'kaminari'
+require 'client_side_validations'
+require 'spreadsheet'
+require 'csv'
+require 'sidekiq/web'
+require 'paper_trail'
 
 module Gaku
 

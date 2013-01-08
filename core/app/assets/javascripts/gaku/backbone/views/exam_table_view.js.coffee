@@ -20,13 +20,13 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         grades: @options.grades,
                         ranks: @options.ranks
                         attendances: @options.attendances
+                        path_to_exam: @options.path_to_exam
                       }
-    
-    $(this.el).html @template(optionsObjects)
+    @$el.html @template(optionsObjects)
     _.defer ->
       userView = new GAKUEngine.Views.ExamUserView(optionsObjects)
       $('#exam-grading-user').html userView.render().el
-      
+
       scoreView = new GAKUEngine.Views.ExamScoreView(optionsObjects)
       $('#exam-grading-score').html scoreView.render().el
 
@@ -93,7 +93,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                 .find('div.' + nextPortionClass)
                 .find('input.score-cell')
                 .focus()
-          
+
         else
           $this.closest('tbody')
                 .find('tr:first-child')
@@ -104,54 +104,73 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
 
   setPortionAttendance: (event)->
-
     currentTarget = $(event.currentTarget)
-    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'    
-    attendanceId = $(currentTarget).attr('data-attendance')
+    attendanceId  = $(currentTarget).attr('data-attendance')
+    attendanceUrl = $(currentTarget[0]).attr('action') + '/attendances'
+    examPortionScore = $(currentTarget).closest('td').attr('id')
 
     if attendanceId
       attendance = new GAKUEngine.Models.Attendance()
       attendance.url = "#{attendanceUrl}/#{attendanceId}"
       attendance.fetch
-        success: ->
-          console.log attendance
-          attendanceShow = new GAKUEngine.Views.ExamAttendanceShow({model: attendance, currentTarget: currentTarget })
-          currentTarget.popover
-            html : true
-            content: ->
-              attendanceShow.render().el
+        success: =>
+          attendance_types = new GAKUEngine.Collections.AttendanceTypes()
+          attendance_types.on 'reset', =>
+            attendanceView = new GAKUEngine.Views.ExamAttendance(
+                                      attendance_types : attendance_types,
+                                      attendanceUrl : attendanceUrl,
+                                      currentTarget : currentTarget,
+                                      examPortionScore: examPortionScore,
+                                      attendance: attendance)
+
+            @renderAttendancePopover(currentTarget, attendanceView)
+          # currentTarget.popover
+          #   trigger: 'manual'
+          #   html : true
+          #   content: ->
+          #     attendanceView.render().el
+          # currentTarget.popover 'toggle'
+
+          attendance_types.fetch()
+
     else
       attendance_types = new GAKUEngine.Collections.AttendanceTypes()
-      attendance_types.bind 'reset', ->
-
+      attendance_types.on 'reset', =>
         attendanceView = new GAKUEngine.Views.ExamAttendance(
                                   attendance_types : attendance_types,
                                   attendanceUrl : attendanceUrl,
-                                  currentTarget : currentTarget)
-        currentTarget.popover
-          html : true
-          content: ->
-            attendanceView.render().el
+                                  currentTarget : currentTarget,
+                                  examPortionScore: examPortionScore)
+
+        @renderAttendancePopover(currentTarget, attendanceView)
 
       attendance_types.fetch()
 
-  renderAttendance: ->
-    @attendance_types
-
+  renderAttendancePopover: (target, view)->
+    target.popover
+      trigger: 'toggle'
+      html : true
+      content: ->
+        view.render().el
+    if target.data('popover').$tip
+      if target.data('popover').$tip.is(':visible')
+        target.popover 'hide'
+      else
+        target.popover 'show'
+    else
+      target.popover 'show'
 
   validatePortion: (event)->
-    currentTarget = $(event.currentTarget)
+    console.log event.currentTarget
+    currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
-    maxScore = $(event.currentTarget).data('max-score')
+    maxScore           = currentTarget.closest('form').data('max-score')
 
-    if currentTargetValue > maxScore
-      currentTargetInput.addClass('score-error')
-    else if currentTargetValue < 0
+    if currentTargetValue > maxScore or currentTargetValue < 0
       currentTargetInput.addClass('score-error')
     else
       @updatePortion(currentTarget.attr('action'), event.target.value, event.target.baseURI )
-
 
 
   updatePortion:(urlLink, score, baseURI) ->
@@ -159,7 +178,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       urlLink: urlLink
       score: score
       baseURI: baseURI
-    console.log 'update me'
 
 
 

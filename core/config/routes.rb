@@ -1,5 +1,7 @@
 Gaku::Core::Engine.routes.draw do
 
+  mount Sidekiq::Web => '/sidekiq'
+
   #devise_for :installs
   devise_for :users, {
     class_name: 'Gaku::User',
@@ -10,10 +12,7 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
-
-
-  #resources :admissions
-
+  
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
@@ -38,13 +37,13 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :exams do
-      resources :exam_portion_scores do 
+      resources :exam_portion_scores do
         resources :attendances
       end
 
       collection do
         get :grading
-        get :export_xls
+        get :export
       end
 
       member do
@@ -52,7 +51,7 @@ Gaku::Core::Engine.routes.draw do
         put :update_score
         get :calculations
       end
-      
+
     end
     member do
       get :student_chooser
@@ -81,12 +80,13 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, :controller => 'syllabuses/exams'
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
     resources :notes
+    resources :importer, :controller => 'syllabuses/importer'
   end
 
   resources :students do
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
-      member do 
+      member do
         get :history
         get :revert
       end
@@ -120,6 +120,8 @@ Gaku::Core::Engine.routes.draw do
 
 
     collection do
+      get :csv
+
       resources :importer, :controller => "students/importer" do
         collection do
           get :get_csv_template
@@ -127,6 +129,7 @@ Gaku::Core::Engine.routes.draw do
           post :import_student_list
         end
       end
+
       get :autocomplete_search
       get :load_autocomplete_data
     end
@@ -138,8 +141,9 @@ Gaku::Core::Engine.routes.draw do
 
     resources :notes
     resources :exam_scores
-    resources :exam_portions do
-      resources :attachments, :only => [:create]
+    resources :exam_portions, :controller => 'exams/exam_portions' do
+      post :sort, :on => :collection
+      resources :attachments, :controller => 'exams/exam_portions/attachments'
     end
   end
 
@@ -157,11 +161,19 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :specialties
     resources :system_tools
     resources :commute_method_types
     resources :contact_types
     resources :enrollment_status_types
     resources :attendance_types
+
+    namespace :changes do
+      resources :students, :controller => 'student_changes'
+      resources :student_contacts, :controller => 'student_contact_changes'
+      resources :student_addresses, :controller => 'student_address_changes'
+    end
+
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
         resources :contacts, :controller => 'schools/campuses/contacts' do
@@ -170,10 +182,11 @@ Gaku::Core::Engine.routes.draw do
         resources :addresses, :controller => 'schools/campuses/addresses'
       end
     end
+
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
-      get :grading, :on => :collection      
+      get :grading, :on => :collection
       put :update_presets, :on => :collection
     end
 
@@ -184,7 +197,7 @@ Gaku::Core::Engine.routes.draw do
         get :attachments
       end
     end
-  
+
     match 'school_details' => 'schools#school_details', :via => :get
     match 'school_details/edit' => 'schools#edit_master', :via => :get
 
@@ -201,6 +214,5 @@ Gaku::Core::Engine.routes.draw do
   resource :grading_methods do
     get 'index'
   end
-
 
 end

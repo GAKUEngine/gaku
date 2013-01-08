@@ -1,22 +1,20 @@
-.row-fluid
-  .row-fluid
-    .hide *{:id => 'new-' + @notable_resource + '-note'}
+= index_header do
+  .hide *{:id => 'new-' + @notable_resource + '-note'}
   .pull-left
     = count_div "#{@notable_resource}-notes-count" do
       = print_count @notable.notes.count, t_note_list
   .pull-right
-      = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], :id => 'new-' + @notable_resource + '-note-link'
-.row-fluid
-  hr
+    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], :id => 'new-' + @notable_resource + '-note-link'
 
-.row-fluid
-  .span12
-    = table_for "#{@notable_resource}-notes-index" do
-      thead
-        tr
-          = th ''
-          = th t(:'note.title')
-          = th t(:'note.content')
-          = th_actions 3
-      tbody
-        = render :partial => 'gaku/notes/note', :collection => @notable.notes, :as => :note
+= hr
+
+= index_body do
+  = table_for "#{@notable_resource}-notes-index" do
+    thead
+      tr
+        = th ''
+        = th t(:'note.title')
+        = th t(:'note.content')
+        = th_actions 3
+    tbody
+      = render :partial => 'gaku/notes/note', :collection => @notable.notes, :as => :note

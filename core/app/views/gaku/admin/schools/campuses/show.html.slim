@@ -1,10 +1,9 @@
-.row-fluid
-  .span12.well
-    = table do
-      tbody
-        tr
-          td = @campus.name
+= well_div do
+  = table do
+    tbody
+      tr
+        td = @campus.name
 
 = render 'gaku/admin/schools/campuses/contacts/contacts'
-hr
+= hr
 = render 'gaku/admin/schools/campuses/addresses/addresses'

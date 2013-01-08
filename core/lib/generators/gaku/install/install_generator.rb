@@ -33,12 +33,19 @@ module Gaku
       end
     end
 
-    #def add_files
-    #  template 'config/initializers/gaku.rb', 'config/initializers/gaku.rb'
-    #end
-
     def remove_unneeded_files
       remove_file "public/index.html"
+    end
+
+    def clear_logs
+      remove_file 'log/sidekiq.log'
+      add_file 'log/sidekiq.log'
+    end
+
+    def add_files
+      template 'config/sidekiq.yml', 'config/sidekiq.yml'
+      #template 'log/sidekiq.log', 'log/sidekiq.log'
+      template 'Procfile', 'Procfile'
     end
 
     def setup_assets
@@ -100,7 +107,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def run_migrations
       if @run_migrations
         say_status :running, "migrations"
-        rake 'db:migrate' 
+        rake 'db:migrate'
       else
         say_status :skipping, "migrations (don't forget to run rake db:migrate)"
       end
@@ -128,7 +135,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def load_sample_data
       if @load_sample_data
         say_status :loading, "sample data"
-        rake 'gaku_sample:load' 
+        rake 'gaku_sample:load'
       else
         say_status :skipping, "sample data (you can always run rake gaku_sample:load)"
       end

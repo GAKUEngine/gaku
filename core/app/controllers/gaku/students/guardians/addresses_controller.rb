@@ -1,9 +1,8 @@
 module Gaku
   class Students::Guardians::AddressesController < GakuController
-    
+
     inherit_resources
     actions :new, :create, :edit, :update
-
     respond_to :js, :html
 
     before_filter :address, :only => [:destroy, :make_primary]
@@ -15,26 +14,18 @@ module Gaku
     def create
       super do |format|
         if @guardian.addresses << @address
-          primary_address        
-          format.js { render 'create' }  
+          primary_address
+          format.js { render }
         end
-      end  
+      end
     end
 
-    def destroy 
+    def destroy
       if @address.destroy
-
-        #flash.now[:notice] = t('notice.destroyed', :resource => resource_name)
         if @address.id == @primary_address_id
           @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
-          respond_to do |format|
-            format.js { render }
-          end
-        else
-          respond_with(@address) do |format|
-            format.js { render 'destroy'}
-          end
         end
+        respond_with(@address)
       end
     end
 
@@ -43,32 +34,28 @@ module Gaku
       @guardian_address.make_primary
       render :nothing => true
     end
-    
+
     private
 
-      def address
-        @address = Address.find(params[:id])
-      end
+    def address
+      @address = Address.find(params[:id])
+    end
 
-      def student
-        @student = Student.find(params[:student_id])
-      end
+    def student
+      @student = Student.find(params[:student_id])
+    end
 
-      def guardian
-        @guardian = Guardian.find(params[:guardian_id])
-      end
+    def guardian
+      @guardian = Guardian.find(params[:guardian_id])
+    end
 
-      def primary_address
-        @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
-      end
+    def primary_address
+      @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
+    end
 
-      def resource_name
-        t('address.singular')
-      end
-
-      def count
-        @count = @guardian.addresses.count
-      end
+    def count
+      @count = @guardian.addresses.count
+    end
 
   end
 end

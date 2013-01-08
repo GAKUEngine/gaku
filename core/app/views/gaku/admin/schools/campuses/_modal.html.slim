@@ -1,0 +1,6 @@
+= modal_for 'edit-campus-modal' do
+  = modal_header t(:'campus.edit')
+  = modal_form_for [:admin, @school, @campus] do |f|
+    = modal_body do
+      = f.text_field :name, :label => t(:'campus.name')
+      = buttons_for @campus, :nested_id => 'admin-school-campus'

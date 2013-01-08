@@ -29,10 +29,7 @@ describe 'CourseGroups' do
       flash_created?
     end
 
-    pending 'errors without required fields'do
-      click submit
-      page.should have_content('can\'t be blank')
-    end
+    it {has_validations?}
 
     it 'cancels adding', :cancel => true do
       ensure_cancel_creating_is_working

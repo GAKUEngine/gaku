@@ -1,18 +1,14 @@
-.row-fluid
-  .span1
-  .span10
-    .row-fluid
-      .pull-left
-          h4.mt-xs.mb-0.syllabuses-count
-            = print_count(@count, t_syllabus_list)
-      .pull-right
-        = ajax_link_to_new t('syllabus.new'), new_syllabus_path, :id => "new-syllabus-link"
-    .row-fluid
-      .span12
-        hr/
-      #new-syllabus.hide
-        =render 'form'
-    .row-fluid
-      .span12.well
-        =render 'gaku/syllabuses/syllabuses'
+= content_for :title, t(:'syllabus.plural')
 
+= content_for :index_header do
+  .pull-left
+    = count_div 'syllabuses-count' do
+      = print_count @count, t_syllabus_list
+  .pull-right
+    = ajax_link_to_new t(:'syllabus.new'), [:new, :syllabus], :id => "new-syllabus-link"
+    = button t(:'syllabus.import'), "syllabuses/importer", :id => "import-syllabuses-link"
+
+= content_for :new_form do
+  #new-syllabus.hide
+
+= render 'syllabuses'

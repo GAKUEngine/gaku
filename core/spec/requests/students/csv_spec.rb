@@ -7,18 +7,18 @@ describe 'Student CSV' do
   let!(:student) { create(:student, :name => 'John', :surname => 'Doe') }
   let!(:student2) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
 
-  context 'download' do 
+  context 'download' do
     it 'exports as CSV' do
       visit gaku.students_path
 
       click_link 'export-students-link'
-      page.response_headers['Content-Type'].should eq "text/csv"
+      page.response_headers['Content-Type'].should match(/csv; charset=utf-8/)
       page.should have_content 'surname,name'
       page.should have_content 'Doe,John'
       page.should have_content 'Yokota,Susumu'
     end
 
-    it 'downloads registration CSV' do 
+    it 'downloads registration CSV' do
       visit gaku.students_path
       click_link 'import-students-link'
       click_link 'get_registration_csv'
@@ -28,11 +28,11 @@ describe 'Student CSV' do
     end
   end
 
-  context 'upload' do 
+  context 'upload' do
     it 'imports from CSV' do
       visit gaku.students_path
 
-      expect do 
+      expect do
         click_link 'import-students-link'
         select "GAKU Engine", :from => 'importer_importer_type'
         absolute_path = Rails.root + "../support/students.csv"
@@ -43,5 +43,5 @@ describe 'Student CSV' do
       page.should have_content 'created students:2'
     end
   end
-  
+
 end

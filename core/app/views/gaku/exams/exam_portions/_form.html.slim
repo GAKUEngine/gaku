@@ -1,0 +1,3 @@
+= remote_form_for [@exam, @exam_portion] do |ep_form|
+  = render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
+  = buttons_for ep_form.object, :nested_id => 'exam-exam-portion'
