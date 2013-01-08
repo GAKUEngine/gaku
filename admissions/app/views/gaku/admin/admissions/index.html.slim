@@ -1,4 +1,7 @@
 - content_for :title, t(:'admissions.candidates.list')
+.pull-right
+  = button t(:'admissions.go_to_listing'), [:listing_admissions, :admin, :admissions], :id => 'listing_dmissions-admin-admissions-link'
+  = button t(:'admissions.go_to_applicants'), [:listing_applicants, :admin, :admissions], :id => 'listing_applicants-admin-admissions-link'
 .row-fluid
   h4.mt-xs.mb-0 = t(:'admissions.candidates.list')
 .row-fluid

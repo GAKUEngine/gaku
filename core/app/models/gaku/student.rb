@@ -58,6 +58,8 @@ module Gaku
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
 
+    default_scope where("admitted != ?", "")
+
     def enrollment_status
       self.enrollment_statuses.first
     end

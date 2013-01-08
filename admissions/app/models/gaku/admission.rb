@@ -21,6 +21,10 @@ module Gaku
 
     default_scope where("deleted = ?", 0)
     scope :deleted, where("deleted = ?", 1)
+
+    def student
+      Student.unscoped{ super }
+    end
     
   end
 end
