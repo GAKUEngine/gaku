@@ -10,6 +10,7 @@
         = th t(:'syllabus.name')
         = th t(:'syllabus.credits')
         = th t(:'syllabus.description')
+        = th t(:'exam.plural')
     tbody
       tr class="syllabus-#{@syllabus.id}"
         = render 'gaku/shared/fields/syllabus_fields', :syllabus => @syllabus

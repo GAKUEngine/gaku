@@ -1,10 +1,11 @@
 = table_for 'syllabuses-index' do
   thead
     tr
-      th.btn-inverse data-field=t(:'syllabus.code') = t(:'syllabus.code')
-      th.btn-inverse data-field=t(:'syllabus.name') = t(:'syllabus.name')
-      th.btn-inverse data-field=t(:'syllabus.description') = t(:'syllabus.description')
-      th.btn-inverse data-field=t(:'syllabus.credits') = t(:'syllabus.credits')
-      th.btn-info data-field=t('manage') style="width:94px" = t('manage')
+      = th t(:'syllabus.code')
+      = th t(:'syllabus.name')
+      = th t(:'syllabus.description')
+      = th t(:'syllabus.credits')
+      = th t(:'exam.plural')
+      = th_actions 3
   tbody
     = render :partial => 'syllabus', :collection => @syllabuses, :as => 'syllabus'

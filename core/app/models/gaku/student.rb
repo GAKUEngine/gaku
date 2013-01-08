@@ -28,6 +28,13 @@ module Gaku
 
     has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
+    has_paper_trail :on => [:update, :destroy],
+                    :only => [
+                               :name, :surname,
+                               :student_id_number, :student_foreign_id_number, :scholarship_status_id,
+                               :commute_method_id
+                             ]
+
     attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes,
@@ -42,8 +49,6 @@ module Gaku
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts, :allow_destroy => true
 
-    has_associated_audits
-    audited
 
     def enrollment_status
       self.enrollment_statuses.first
