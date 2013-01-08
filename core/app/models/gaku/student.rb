@@ -3,14 +3,19 @@ module Gaku
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
+
     has_many :class_group_enrollments
     has_many :class_groups, :through => :class_group_enrollments
+
     has_many :student_specialties
     has_many :specialities, :through => :student_specialties
-    has_many :exam_portion_scores
-    has_many :assignment_scores
+
     has_many :student_addresses
     has_many :addresses, :through => :student_addresses
+
+    has_many :exam_portion_scores
+    has_many :assignment_scores
+
     has_many :contacts
     has_many :notes, as: :notable
     has_many :attendances
@@ -20,30 +25,38 @@ module Gaku
     has_many :school_histories
     has_many :simple_grades
 
-    has_one :admission
-
     belongs_to :user
     belongs_to :commute_method
     belongs_to :scholarship_status
 
     has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
-    attr_accessible :name, :surname, :name_reading, :surname_reading, :phone, :email, :birth_date, :gender, :admitted, :graduated,
+    has_paper_trail :on => [:update, :destroy],
+                    :only => [
+                               :name, :surname, :middle_name,
+                               :student_id_number, :student_foreign_id_number, :scholarship_status_id,
+                               :commute_method_id
+                             ]
+
+    attr_accessible :name, :surname, :middle_name, :name_reading, :surname_reading,
+                    :birth_date, :gender,
+                    :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
-                    :guardians, :guardians_attributes, :notes, :notes_attributes, :addresses, :addresses_attributes,
-                    :picture, :student_id_number, :student_foreign_id_number, :scholarship_status_id
+                    :guardians, :guardians_attributes,
+                    :notes, :notes_attributes,
+                    :addresses, :addresses_attributes,
+                    :picture,
+                    :student_id_number, :student_foreign_id_number, :scholarship_status_id
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
     validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
-    accepts_nested_attributes_for :notes, :allow_destroy => true
+    accepts_nested_attributes_for :notes,     :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
-    accepts_nested_attributes_for :contacts, :allow_destroy => true
+    accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    has_associated_audits
-    audited
 
     default_scope where("admitted != ?", "")
 
@@ -79,21 +92,6 @@ module Gaku
 
     def primary_address
       self.student_addresses.where(:is_primary => true).first.try(:address)
-    end
-
-
-    def self.decrypt_student_fields(students)
-        students_json = students.as_json(:except => [:encrypted_name, :encrypted_surname, :encrypted_name_reading, :encrypted_surname_reading, :encrypted_phone])
-
-        i = 0
-        students_json.each do |student|
-          student[:name]    = students[i].name
-          student[:surname] = students[i].surname
-          student[:phone]   = students[i].phone
-          i += 1
-        end
-
-        return students_json.to_json
     end
 
   end

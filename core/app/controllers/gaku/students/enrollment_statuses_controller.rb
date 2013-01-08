@@ -12,10 +12,10 @@ module Gaku
       respond_with(@enrollment_status_history)
   	end
 
-    def revert
-      @enrollment_status.revert unless @enrollment_status.audits.count.equal?(1)
-      respond_with(@enrollment_status)
-    end
+    #def revert
+    #  @enrollment_status.revert unless @enrollment_status.audits.count.equal?(1)
+    #  respond_with(@enrollment_status)
+    #end
 
     private
 
