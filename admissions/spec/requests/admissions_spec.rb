@@ -7,6 +7,7 @@ describe 'Admin Admissions' do
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
   let(:student) { create(:student) }
+  let(:exam) { create(:exam) }
 
   describe 'when select admission period', js: true do
     context 'without methods' do
@@ -225,6 +226,25 @@ describe 'Admin Admissions' do
             visit gaku.students_path
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
+          end
+          context 'grade' do
+            before do
+              admission_period
+              @exam_phase = admission_period.admission_methods.first.admission_phases.first
+              @exam_phase.exam = exam
+              admission_period.reload
+              visit gaku.admin_admissions_path
+            end
+            xit 'grade' do
+              page.should have_content 'Grade Exam'
+              click_on 'Grade Exam'
+              page.should have_content "#{exam.name}"
+              fill_in 'portion_score', with: 2.78
+              visit gaku.admin_admissions_path
+              page.should have_content 2.78
+            end
+          end
+          xit 'add attendance method' do
           end
           pending 'exports as CSV' do
           end
