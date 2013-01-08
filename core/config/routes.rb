@@ -12,10 +12,7 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
-
-
-  #resources :admissions
-
+  
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'

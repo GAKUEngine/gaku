@@ -10,16 +10,18 @@ module Gaku
     has_many :attendances, :as => :attendancable
 
     belongs_to :grading_method
-    belongs_to :admission_phase
+
 
     validates_presence_of :name
     validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
 
-    attr_accessible :name, :description, :weight, :use_weighting, :is_standalone, :adjustments, :exam_portions_attributes, :grading_method_id
+    attr_accessible :name, :description, :weight,
+                    :use_weighting, :is_standalone, :adjustments,
+                    :exam_portions_attributes, :grading_method_id
 
     accepts_nested_attributes_for :exam_portions
 
-    scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+    #scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
 
     def total_weight
       exam_portions.inject(0) {|sum, p| sum + p.weight }
