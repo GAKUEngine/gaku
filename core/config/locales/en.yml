@@ -1,5 +1,5 @@
 en:
-  
+
   helpers:
     page_entries_info:
       one_page:
@@ -16,6 +16,20 @@ en:
       previous: "&lsaquo; Prev"
       next: "Next &rsaquo;"
       truncate: "..."
+
+  changes:
+    student:
+      list: "Student Changes list"
+    student_address:
+      list: "Student Address Changes list"
+    student_contact:
+      list: "Student Contact Changes list"
+    from: "From"
+    to: "To"
+    changed_at: "Changed At"
+    event: "Event"
+    change: "Change"
+
 
   add: Add
   address:
@@ -421,6 +435,11 @@ en:
   manage: Manage
   menu:
     admin:
+      changes:
+        changes: "Changes and Deletions"
+        students: "Students"
+        student_addresses: "Student Addresses"
+        student_contacts: "Student Contacts"
       admin: Admin
       administration: Administration
       administrator: Administrator
@@ -586,7 +605,7 @@ en:
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
-    code: Syllabus Code
+    code: Code
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
