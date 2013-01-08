@@ -5,8 +5,7 @@ class CreateGakuExamScores < ActiveRecord::Migration
       t.text     :comment
 
       t.references :exam
-      t.references :admission_phase_record
-
+      
       t.timestamps
     end
   end
