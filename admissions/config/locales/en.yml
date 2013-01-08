@@ -11,6 +11,7 @@ en:
     singular: Admission Method
     no_method: No methods available for this period.
     no_period: Admission periods needed to view admission methods.
+    show: 'Show Admission Method'
   admission_periods:
     add: Add Admission Period
     admitted_on: Admitted On

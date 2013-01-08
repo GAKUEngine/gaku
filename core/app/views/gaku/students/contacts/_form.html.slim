@@ -1,5 +1,3 @@
 = remote_form_for [@student, @contact] do |f|
   = render 'gaku/shared/form_fields/contact_form_fields',  :f => f
   = buttons_for @contact, :nested_id => 'student-contact'
-
-/= javascript_include_tag 'gaku/students/contacts'
