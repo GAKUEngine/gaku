@@ -8,12 +8,27 @@ module Gaku
     has_many :students, :through => :student_addresses, :dependent => :destroy
     has_many :guardian_addresses, :dependent => :destroy
     has_many :guardians, :through => :guardian_addresses
-    
+
+    has_paper_trail :on => [:update, :destroy],
+                    :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+
     validates_presence_of :address1, :city, :country
     #validates_associated :country, :state, :campus
 
     accepts_nested_attributes_for :country
-    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name, :past, :country, :country_id, :state_id, :student_id
+
+    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name,
+                    :past, :country, :country_id, :state_id, :student_id
+
+    def join_model_name
+      'Gaku::StudentAddress' if StudentAddress.exists?(:address_id => self.id)
+    end
+
+    def joined_resource_id
+      if StudentAddress.exists?(:address_id => self.id)
+        StudentAddress.find_by_address_id(self.id).student_id
+      end
+    end
 
     def self.default
       country = Country.find(Config[:default_country_numcode]) rescue Country.first

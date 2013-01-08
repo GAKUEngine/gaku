@@ -5,11 +5,22 @@ module Gaku
     belongs_to :guardian
     belongs_to :campus
 
+    has_paper_trail :on => [:update, :destroy],
+                    :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+
     attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
 
     validates_presence_of :data,:contact_type_id
 
     before_save :ensure_primary, :on => :create
+
+    def join_model_name
+      'Gaku::Student' if self.student_id
+    end
+
+    def joined_resource_id
+      self.student_id if self.student_id
+    end
 
     private
 
@@ -19,7 +30,7 @@ module Gaku
 
         self.update_attributes(:is_primary => true)
         user_contacts = Contact.where(foreign_key_sym => self.send(foreign_key_sym))
-        user_contacts.update_all('is_primary = false', "id <> #{self.id}")
+        user_contacts.update_all('is_primary = 0', "id <> #{self.id}")
       else
         super
       end

@@ -6,6 +6,9 @@ class CreateVersions < ActiveRecord::Migration
       t.string   :event,     :null => false
       t.string   :whodunnit
       t.text     :object
+      t.text     :object_changes
+      t.string   :join_model
+      t.integer  :joined_resource_id
       t.datetime :created_at
     end
     add_index :versions, [:item_type, :item_id]
