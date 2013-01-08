@@ -1,0 +1,6 @@
+td = specialty.name
+td = specialty.description
+td = boolean_image(specialty.major_only)
+td
+  = ajax_link_to_edit [:edit, :admin, specialty]
+  = ajax_link_to_delete [:admin, specialty]
