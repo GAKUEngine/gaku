@@ -11,7 +11,7 @@ module Gaku
       respond_to :js, :html
 
       def new
-        @exam = @admission_phase.exams.new
+        @exam = @admission_phase.build_exam
         @exam.exam_portions.build
         new!
       end
@@ -26,7 +26,7 @@ module Gaku
       end
 
       def create
-        @exam =  @admission_phase.exams.create(params[:exam])
+        @exam =  @admission_phase.create_exam(params[:exam])
         create!
       end
 
