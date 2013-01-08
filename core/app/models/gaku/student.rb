@@ -45,6 +45,8 @@ module Gaku
     has_associated_audits
     audited
 
+    default_scope where("admitted != ?", "")
+
     def enrollment_status
       self.enrollment_statuses.first
     end
