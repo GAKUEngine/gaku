@@ -7,5 +7,9 @@ module Gaku
     has_many :notes, as: :notable
 
     attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
+  
+    default_scope where("deleted = ?", 0)
+    scope :deleted, where("deleted = ?", 1)
+    
   end
 end

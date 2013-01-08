@@ -9,6 +9,7 @@ Gaku::Core::Engine.routes.prepend do
         post :create_multiple
         post :admit_student
         get :listing_admissions
+        get :listing_applicants
       end
       member do
         delete :soft_delete
