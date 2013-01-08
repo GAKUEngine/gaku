@@ -21,7 +21,7 @@ module Gaku
 
     accepts_nested_attributes_for :exam_portions
 
-    #scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+    scope :without_syllabuses, includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
 
     def total_weight
       exam_portions.inject(0) {|sum, p| sum + p.weight }
