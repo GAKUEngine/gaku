@@ -14,6 +14,7 @@ describe 'Admin Admission Method Phases' do
                                         :is_default => false,
                                         :name => 'Accepted') }
   let(:admission_phase_state2) { create(:admission_phase_state, :name => 'In Review') }
+  let(:exam) { create(:exam) }
 
   before do
     set_resource "admin-admission-method-admission-phase"
@@ -177,11 +178,69 @@ describe 'Admin Admission Method Phases' do
       it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
-
-      it 'adds exams'
-      it 'removes exams'
     end
 
+    context 'add exam', js:true do
+      context ' #new ' do
+        before do
+          click_on 'New Exam'
+          wait_until_visible modal
+        end
+        it 'adds exams' do
+          fill_in 'exam_name', with: 'Essay'
+          click_on 'Save Exam'
+          wait_until_invisible modal
+          page.should have_content 'Essay'
+        end
+        it 'has_validations' do
+          click_on 'Save Exam'
+          wait_until { page.should have_content "can't be blank" }
+        end
+        it 'cancel adding' do
+          click_on 'Cancel'
+          wait_until_invisible modal
+          page.should have_content "New Exam"
+          page.should have_content "Add Existing Exam"
+        end
+      end
+      context 'add existing exam' do
+        before do
+          exam
+          visit gaku.admin_admission_method_path(admission_method)
+          click_on 'Add Existing Exam'
+          wait_until_visible modal
+        end
+        it 'adds existing exam' do
+          select "#{exam.name}", from: 'exam_id'
+          click_on 'Add Exam'
+          wait_until_invisible modal
+          page.should have_content "#{exam.name}"
+        end
+        it 'cancels adding' do
+          click_on 'Cancel'
+          wait_until_invisible modal
+          page.should have_content "New Exam"
+          page.should have_content "Add Existing Exam"
+        end
+      end
+
+      context 'existing exam' do
+        before do
+          admission_phase.exam=exam
+          visit gaku.admin_admission_method_path(admission_method)
+        end
+        it 'removes exams' do
+          page.should have_content "#{exam.name}"
+          click '.delete-link'
+          accept_alert
+          page.should_not have_content "#{exam.name}"
+          page.should have_content "New Exam"
+          page.should have_content "Add Existing Exam"  
+        end
+      end
+
+    end
+      
     it 'deletes', js: true do
       page.should have_content admission_phase.name
       within(count_div) { page.should have_content 'Admission Phases list(1)' }
