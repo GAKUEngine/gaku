@@ -1,0 +1,7 @@
+$('#admin-specialties-index tbody').append('<%= render_js_partial("specialty", {:specialty => @specialty}) %>');
+
+$('#new-admin-specialty').slideToggle();
+$('#new-admin-specialty-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-specialties-count').html('<%= print_count(@count+1, t_specialty_list) %>');

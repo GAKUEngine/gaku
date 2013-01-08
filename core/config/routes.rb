@@ -124,7 +124,7 @@ Gaku::Core::Engine.routes.draw do
 
     collection do
       get :csv
-      
+
       resources :importer, :controller => "students/importer" do
         collection do
           get :get_csv_template
@@ -164,6 +164,7 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :specialties
     resources :system_tools
     resources :commute_method_types
     resources :contact_types

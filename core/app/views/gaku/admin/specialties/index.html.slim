@@ -1,0 +1,20 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-specialties-count' do
+      = print_count @count, t_specialty_list
+  .pull-right
+    = ajax_link_to_new t(:'specialty.add'), [:new, :admin, :specialty], :id => 'new-admin-specialty-link'
+
+= content_for :new_form do
+  #new-admin-specialty.hide
+
+#admin-specialties
+  = table_for 'admin-specialties-index' do
+    thead
+      tr
+        = th t(:'specialty.singular')
+        = th t(:'specialty.description')
+        = th t(:'specialty.major_only')
+        = th_actions 3
+    tbody
+      = render :partial => 'specialty', :collection => @specialties, :as => 'specialty'
