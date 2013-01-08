@@ -466,6 +466,7 @@ en:
           state: State
       school_details: School Details
       schools: Schools
+      specialties: Specialties
       system:
         backup: Backup
         system_tools: System Tools
@@ -618,6 +619,14 @@ en:
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
+  specialty:
+    edit: Edit Specialty
+    list: Specialties list
+    add: Add Specialty
+    singular: Specialty
+    description: Description
+    major_only: Major Only
+    name: Name
   teacher: Instructor
   title: Title
   user:

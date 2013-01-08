@@ -1,0 +1,8 @@
+= modal_for 'edit-specialty-modal' do
+  = modal_header t(:'specialty.edit')
+  = modal_form_for [:admin, @specialty] do |f|
+    = modal_body do
+      = f.text_field :name, :label => t(:'specialty.name')
+      = f.text_field :description, :label => t(:'specialty.description')
+      = f.check_box :major_only, :label => t(:'specialty.major_only')
+      = buttons_for @specialty, :nested_id => 'admin-specialty'
