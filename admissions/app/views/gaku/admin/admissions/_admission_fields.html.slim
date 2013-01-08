@@ -1,4 +1,4 @@
-td.status = admission.admitted ? admission.student.admitted : t(:'admissions.not_admitted')
+td.status = admission.admitted ? t(:'admissions.admitted_on') + ' : ' + admission.student.admitted.to_s : t(:'admissions.not_admitted')
 td.name = admission.student.name
 td.birth = admission.student.birth_date
 td.registration-date = admission.admission_phase_records.first.created_at.strftime("%Y.%m.%d")

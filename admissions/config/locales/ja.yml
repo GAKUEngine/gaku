@@ -62,6 +62,10 @@ ja:
     create_multiple: 複数の入学生を登録
     please_select_method: 入学形態を選択して下さい
     please_select_period: 入学時期を選択して下さい
+    go_to_admissions:
+    go_to_listing:
+    go_to_applicants: 
+    admitted_on:
   menu:
     admission_methods: 入学形態
     admission_periods: 入学時期
