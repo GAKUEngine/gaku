@@ -33,8 +33,8 @@ Gaku::Core::Engine.routes.prepend do
           post :make_default, :on => :member
         end
         resources :exams, :controller => 'admission_methods/admission_phases/exams' do
-          get :exciting
-          post :assign_exciting, :on => :collection
+          get :existing, :on => :collection
+          post :assign_existing, :on => :collection
           delete :destroy_connection, :on => :member
         end
         member do

@@ -16,11 +16,11 @@ module Gaku
         new!
       end
 
-      def exciting
+      def existing
         @exams = Exam.all
       end
 
-      def assign_exciting
+      def assign_existing
         @exam = Exam.find(params[:exam_id])
         @admission_phase.exam = @exam
       end
