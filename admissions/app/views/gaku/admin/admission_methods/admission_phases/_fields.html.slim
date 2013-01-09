@@ -8,7 +8,7 @@ td
     = ajax_link_to_delete [:admin, @admission_method, admission_phase, admission_phase.exam]
   - else
     = ajax_link_to_new t(:'exam.new'), [:new, :admin, @admission_method, admission_phase, :exam], :id => 'new-syllabus-exam-link'
-    = ajax_link_to_new t(:'exam.add_existing'), [:exciting, :admin, @admission_method, admission_phase, :exam], :id => 'new-existing-exam-link'
+    = ajax_link_to_new t(:'exam.add_existing'), [:exciting, :admin, @admission_method, admission_phase, :exams], :id => 'new-existing-exam-link'
 
 
 td = link_to t(:'admission_phase_states.list'), show_phase_states_admin_admission_method_admission_phase_path(@admission_method, admission_phase), :remote => true
