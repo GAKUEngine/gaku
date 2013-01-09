@@ -70,6 +70,8 @@ en:
     go_to_listing: Listing Admissions
     go_to_applicants: Applicants List
     admitted_on: Admitted On
+    status: Admission Status
+    reg_date: Application Registration Date
   menu:
     admission_methods: Admission Methods
     admission_periods: Admission Periods
