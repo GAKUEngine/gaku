@@ -76,3 +76,7 @@ ja:
     grade:
     exam_score:
     not_graded: 
+  students:
+    status:
+    active:
+    deleted: 

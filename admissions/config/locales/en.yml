@@ -80,3 +80,7 @@ en:
     grade: Grade Exam
     exam_score: Exam Score
     not_graded: Not Graded
+  students:
+    status: Student status
+    active: Active
+    deleted: Deleted
