@@ -186,6 +186,7 @@ module Gaku
 
       private
         def load_period_method
+          @admission_periods = Gaku::AdmissionPeriod.all
           if session[:admission_period_id]
             @admission_period = AdmissionPeriod.find(session[:admission_period_id])
           else
@@ -207,7 +208,6 @@ module Gaku
           @students = @search.result
           @class_groups = ClassGroup.all
           @courses = Course.all
-          @admission_periods = Gaku::AdmissionPeriod.all
         end
 
         def load_search_object
