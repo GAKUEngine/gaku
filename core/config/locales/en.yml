@@ -627,6 +627,7 @@ en:
     description: Description
     major_only: Major Only
     name: Name
+    save: "Save Specialty"
   teacher: Instructor
   title: Title
   user:

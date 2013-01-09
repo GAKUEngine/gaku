@@ -1,6 +1,3 @@
 = remote_form_for [:admin, @specialty] do |f|
-  = f.text_field :name, :label => t(:'specialty.name')
-  = f.text_field :description, :label => t(:'specialty.description')
-  = f.check_box :major_only, :label => t(:'specialty.major_only')
-
-  = buttons_for @specialty, :nested_id => 'admin-specialty'
+  = render 'form_fields', :f => f
+  = buttons_for @specialty, :nested_id => 'admin-specialty', :label => t(:'specialty.save')
