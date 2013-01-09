@@ -15,9 +15,9 @@
   = f.fields_for :period_method_associations do |method_form|
     .method_form
       .row-fluid
-        .span3
+        .span6
           = method_form.select :admission_method_id, options_from_collection_for_select(@admission_methods, :id, 'name'), { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name')
-        .span3[style="margin-top: 25px;"]
+        .span6[style="margin-top: 25px;"]
           = method_form.link_to_remove t(:'admission_methods.remove'), :class => 'btn btn-danger'
     = hr
   br/
