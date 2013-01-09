@@ -43,6 +43,8 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of(:surname_reading) }
     it { should allow_mass_assignment_of(:birth_date) }
     it { should allow_mass_assignment_of(:gender) }
+    it { should allow_mass_assignment_of(:phone) }
+    it { should allow_mass_assignment_of(:email) }
     it { should allow_mass_assignment_of(:admitted) }
     it { should allow_mass_assignment_of(:graduated) }
     it { should allow_mass_assignment_of(:class_groups) }
