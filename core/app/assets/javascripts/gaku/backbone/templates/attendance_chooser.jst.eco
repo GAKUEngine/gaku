@@ -1,5 +1,5 @@
-<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
-	<select>
+<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit' class='mt-xs'>
+	<select class="span12">
 		<% for type in @attendanceTypes : %>
 			<% if @attendance && @attendance.attendance_type_id == type.id : %>
         <option value='<%= type.id %>' selected='selected' ><%= type.name %></option>
@@ -9,8 +9,8 @@
     <% end %>
 	</select>
 
-	<input value="<%= @attendance.reason if @attendance %>" />
-	<button class='btn btn-primary'>Submit</button>
+	<input class="span12" value="<%= @attendance.reason if @attendance %>" />
+	<button class='btn btn-primary mt-s'>Submit</button>
   <% if @attendance : %>
     <a class='delete-attendance'> Delete </a>
   <% end %>
