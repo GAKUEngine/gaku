@@ -5,8 +5,6 @@
       = th t(:'name')
       = th t(:'birth')
       = th t(:'gender.label')
-      = th t(:'class_group.name')
-      = th t(:'class_group_enrollment.seat_number')
       - if !state.admission_phase.exam.nil?
         = th t(:'exam.exam_score')
       = th_actions 140
