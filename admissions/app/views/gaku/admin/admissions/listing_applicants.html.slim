@@ -1,4 +1,4 @@
-- content_for :title, t(:'admissions.applicants.list')
+= content_for :title, t(:'admissions.applicants.list')
 .pull-right
   = button t(:'admissions.go_to_admissions'), [:admin, :admissions], :id => 'dmin-admissions-link'
   = button t(:'admissions.go_to_listing'), [:listing_admissions, :admin, :admissions], :id => 'listing_admissions-admin-admissions-link'
@@ -10,7 +10,6 @@
 .row-fluid
   .span12.well
     .row-fluid
-      .span6
         #admission-applicants-listing
 
           = sortable_table_for 'students-index' do
@@ -30,5 +29,5 @@
             tbody
               = render :partial => 'applicant', :collection => @students, :as => 'student'
 
-          javascript:
-            $(".class_group-select").combobox();
+javascript:
+  $(".class_group-select").combobox();

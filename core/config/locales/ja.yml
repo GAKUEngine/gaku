@@ -59,16 +59,16 @@ ja:
     singular: 添付ファイル
   attendance_type:
     add: 出席類を追加
-    auto_credit: 
+    auto_credit: 点数の自動計算
     color_code: 色コード
     counted_absent: 「欠席」として反映する
-    credit_rate: 
-    disable_credit: 
+    credit_rate: 点数の計算率
+    disable_credit: 得点無効
     edit: 出席類の編集
     list: 出席類一覧
     name: 出席類名称
     new: 新規出席類の登録
-    plural: 
+    plural: 出席種類
     save: 
     singular: 
   back: 戻る
@@ -551,7 +551,7 @@ ja:
     edit: 編集
     enroll: 生徒を追加
     export: 生徒情報をCSVで書き出し
-    import: 生徒情報をCSVで登録
+    import: 生徒情報のインポート
     list: 生徒一覧
     name: 生徒名
     new: 生徒を登録
@@ -570,7 +570,7 @@ ja:
     credits: 単位
     description: 授業の説明
     edit: 科目を編集
-    import: 
+    import: 科目情報のインポート
     list: 科目一覧
     name: 授業名
     name_sample: 【例：数学A】

@@ -27,5 +27,18 @@ module Gaku
     def name_label
     	t(:name)+" ("+t(:given_name)+")"
     end
+
+    def address_icon
+      content_tag :i, nil, class: "icon-globe"
+    end
+
+    def contact_icon
+      content_tag :i, nil, class: "icon-envelope"
+    end
+
+    def guardian_icon
+      content_tag :i, nil, class: "icon-user"
+    end
+    
 	end
 end

@@ -12,10 +12,7 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
-
-
-  #resources :admissions
-
+  
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
@@ -124,7 +121,7 @@ Gaku::Core::Engine.routes.draw do
 
     collection do
       get :csv
-      
+
       resources :importer, :controller => "students/importer" do
         collection do
           get :get_csv_template
@@ -164,11 +161,19 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :specialties
     resources :system_tools
     resources :commute_method_types
     resources :contact_types
     resources :enrollment_status_types
     resources :attendance_types
+
+    namespace :changes do
+      resources :students, :controller => 'student_changes'
+      resources :student_contacts, :controller => 'student_contact_changes'
+      resources :student_addresses, :controller => 'student_address_changes'
+    end
+
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
         resources :contacts, :controller => 'schools/campuses/contacts' do
@@ -177,6 +182,7 @@ Gaku::Core::Engine.routes.draw do
         resources :addresses, :controller => 'schools/campuses/addresses'
       end
     end
+
     resources :presets do
       get :students, :on => :collection
       get :locale, :on => :collection
