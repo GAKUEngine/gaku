@@ -40,7 +40,6 @@ module Gaku
 
     attr_accessible :name, :surname, :middle_name, :name_reading, :surname_reading,
                     :birth_date, :gender,
-                    :phone, :email,
                     :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
@@ -58,7 +57,7 @@ module Gaku
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    
+
 
     def enrollment_status
       self.enrollment_statuses.first
