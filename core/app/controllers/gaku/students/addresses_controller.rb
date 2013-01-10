@@ -30,6 +30,7 @@ module Gaku
     def recovery
       @student_address = StudentAddress.unscoped.find_by_student_id_and_address_id(@student.id, @address.id)
       @student_address.update_attribute(:is_deleted, false)
+      @address.update_attribute(:is_deleted, false)
       render :nothing => true
     end
 
@@ -37,10 +38,13 @@ module Gaku
       @primary_address_id = @student.student_addresses.find_by_is_primary(true).try(:id)
       student_address = StudentAddress.find_by_student_id_and_address_id(@student.id, @address.id)
       student_address.update_attributes(:is_deleted => true, :is_primary => false)
+      @address.update_attribute(:is_deleted, true)
+
       if student_address.id == @primary_address_id
         # change to where.not(:id => student_address.id) when Rails 4 are released!
         @student.student_addresses.where("id != #{student_address.id}").first.make_primary unless @student.student_addresses.blank?
       end
+
       flash.now[:notice] = t(:'notice.destroyed', :resource => @address)
       respond_to do |format|
         format.js { render }

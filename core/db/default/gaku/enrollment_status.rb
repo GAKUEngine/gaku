@@ -19,5 +19,5 @@ states = {
 }
 
 states.each do |name, state|
-	Gaku::EnrollmentStatusType.where(:name => name, :is_active => state).first_or_create!
+	Gaku::EnrollmentStatus.where(:name => name, :is_active => state, :immutable => true).first_or_create!
 end

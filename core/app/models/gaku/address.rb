@@ -18,15 +18,16 @@ module Gaku
     accepts_nested_attributes_for :country
 
     attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name,
-                    :past, :country, :country_id, :state_id, :student_id
+                    :is_deleted, :past, :country,
+                    :country_id, :state_id, :student_id
 
     def join_model_name
-      'Gaku::StudentAddress' if StudentAddress.exists?(:address_id => self.id)
+      'Gaku::StudentAddress' if StudentAddress.unscoped.exists?(:address_id => self.id)
     end
 
     def joined_resource_id
-      if StudentAddress.exists?(:address_id => self.id)
-        StudentAddress.find_by_address_id(self.id).student_id
+      if StudentAddress.unscoped.exists?(:address_id => self.id)
+        StudentAddress.unscoped.find_by_address_id(self.id).student_id
       end
     end
 

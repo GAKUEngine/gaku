@@ -18,7 +18,6 @@ describe Gaku::Student do
     it { should have_many :contacts }
     it { should have_many :notes }
     it { should have_many :attendances }
-    it { should have_many :enrollment_statuses }
     it { should have_many :achievements }
     it { should have_many :school_histories }
     it { should have_many :simple_grades }
@@ -26,6 +25,7 @@ describe Gaku::Student do
     it { should belong_to(:commute_method)}
     it { should belong_to(:user) }
     it { should belong_to :scholarship_status }
+    it { should belong_to :enrollment_status }
 
     it { should have_and_belong_to_many(:guardians) }
 
@@ -58,6 +58,7 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of(:student_id_number) }
     it { should allow_mass_assignment_of(:student_foreign_id_number) }
     it { should allow_mass_assignment_of(:scholarship_status_id) }
+    it { should allow_mass_assignment_of(:enrollment_status_id) }
     it { should_not allow_mass_assignment_of(:user) }
     it { should_not allow_mass_assignment_of(:user_attributes) }
 
@@ -74,7 +75,7 @@ describe Gaku::Student do
 
   context 'methods' do
     xit 'enrollment_status'
-    xit 'full_name'
+    xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
     xit 'seat_number_widget'
