@@ -19,6 +19,7 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.references :faculty
       t.references :commute_method
       t.references :scholarship_status
+      t.references :enrollment_status
 
       t.timestamps
     end
