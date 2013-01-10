@@ -7,7 +7,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
+      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_method]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
@@ -16,10 +16,16 @@ module Gaku
 
       def change_admission_period
         @admission_period = AdmissionPeriod.find(params[:admission_period])
-        @admission_methods = @admission_period.admission_methods
-        @admission_method = @admission_period.admission_methods.first
         session[:admission_period_id] = @admission_period.id
-        session[:admission_method_id] = @admission_methods.first.id
+        @admission_methods = @admission_period.admission_methods
+
+        if !@admission_methods.empty?
+          @admission_method = @admission_methods.first
+          session[:admission_method_id] = @admission_methods.first.id
+        else
+          @admission_method = nil
+          session[:admission_method_id] = nil
+        end
       end
 
       def change_admission_method
@@ -195,8 +201,7 @@ module Gaku
           if session[:admission_method_id]
             @admission_method = AdmissionMethod.find(session[:admission_method_id])
           else
-            if !@admission_period.nil?
-              
+            if !@admission_period.nil? && !@admission_period.admission_methods.nil?
               @admission_method = @admission_period.admission_methods.first
             end
           end  
