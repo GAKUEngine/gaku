@@ -237,19 +237,38 @@ describe 'Admin Admissions' do
               admission_period.reload
               visit gaku.admin_admissions_path
             end
-            it 'grades' do
-              page.should have_content 'Grade Exam'
-              click_on 'Grade Exam'
-              page.should have_content "#{exam.name}"
-              fill_in 'portion_score', with: 89
-              click '.exam-parts' #TODO fix this
-              wait_for_ajax
-              within('.exam-parts') { page.should have_content 89 }
-              visit gaku.admin_admissions_path
-              select 'Passed', from: 'state_id'
-              click_on 'Save'
-              page.should have_content 89
+            context 'grades' do
+              before do
+                page.should have_content 'Grade Exam'
+                click_on 'Grade Exam'
+                page.should have_content "#{exam.name}"
+              end
+              it 'grades' do
+                fill_in 'portion_score', with: 89
+                sleep 1 #this is needed because sometimes test fails
+                click '.exam-parts' #TODO fix this
+                wait_for_ajax
+                visit gaku.admin_admissions_path
+                select 'Passed', from: 'state_id'
+                click_on 'Save'
+                page.should have_content 89
+              end
+              it 'errors with invalid points' do
+                fill_in 'portion_score', with: -120 #Max score is 100
+                click '.exam-parts' #TODO fix this
+                wait_for_ajax
+                page.has_css?('.score-error')
+                fill_in 'portion_score', with: 120
+                click '.exam-parts' #TODO fix this
+                wait_for_ajax
+                page.has_css?('.score-error')
+                visit gaku.admin_admissions_path
+                select 'Passed', from: 'state_id'
+                click_on 'Save'
+                page.should_not have_content 120
+              end
             end
+            
             context 'attendance' do
               before do
                 page.has_content?('Grade Exam') 
