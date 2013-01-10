@@ -7,7 +7,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions]
+      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
