@@ -606,7 +606,7 @@ en:
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
-    code: Code
+    code: Syllabus Code
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
@@ -627,6 +627,7 @@ en:
     description: Description
     major_only: Major Only
     name: Name
+    save: "Save Specialty"
   teacher: Instructor
   title: Title
   user:

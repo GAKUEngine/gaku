@@ -2,10 +2,13 @@ module Gaku
   class StudentAddress < ActiveRecord::Base
   	belongs_to :student
     belongs_to :address
-    
-    attr_accessible :student_id, :address_id, :is_primary
+
+    attr_accessible :student_id, :address_id, :is_primary, :is_deleted
 
     before_save :ensure_primary, :on => :create
+
+    default_scope :conditions => { :is_deleted => false }
+
 
     def ensure_primary
       if self.student.addresses.blank?
@@ -14,7 +17,8 @@ module Gaku
     end
 
     def make_primary
-    	self.student.student_addresses.update_all('is_primary = false', "id <> #{self.id}")
+      # raise self.student.student_addresses.inspect
+    	self.student.student_addresses.update_all("is_primary = 'f'", "id <> #{self.id}")
     	self.is_primary = true
     	self.save
     end
