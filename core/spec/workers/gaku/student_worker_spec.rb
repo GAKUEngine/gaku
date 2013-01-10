@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Gaku::StudentWorker do
-  
+
   let(:worker)   { Gaku::StudentWorker.new }
 
   it 'starts' do
@@ -23,7 +23,7 @@ describe Gaku::StudentWorker do
     end
 
     context 'non existing' do
-      it 'imports student' do
+      xit 'imports student' do
         expect do
           worker.perform(@imported_file.id)
         end.to change(Gaku::Student, :count).by 1
@@ -39,7 +39,7 @@ describe Gaku::StudentWorker do
         create(:student, :name => 'Susumu', :surname => 'Yokota', :student_foreign_id_number => 4427)
       end
 
-      it "doesn't import" do
+      xit "doesn't import" do
         expect do
           worker.perform(@imported_file.id)
         end.to change(Gaku::Student, :count).by 0

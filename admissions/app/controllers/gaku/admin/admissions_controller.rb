@@ -7,19 +7,32 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
+      before_filter :load_period_method, :only => [:index, :listing_admissions]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
+      
 
       def change_admission_period
         @admission_period = AdmissionPeriod.find(params[:admission_period])
         @admission_methods = @admission_period.admission_methods
         @admission_method = @admission_period.admission_methods.first
+        session[:admission_period_id] = @admission_period.id
+        session[:admission_method_id] = @admission_methods.first.id
       end
 
       def change_admission_method
         @admission_method = AdmissionMethod.find(params[:admission_method])
+        session[:admission_method_id] = @admission_method.id
+      end
+
+      def index
+
+
+      end
+
+      def listing_admissions
       end
 
       def change_student_state
@@ -69,12 +82,6 @@ module Gaku
         admission.save
         @student.admitted = admission_date
         @student.save
-      end
-
-      def index
-      end
-
-      def listing_admissions
       end
 
       def listing_applicants
@@ -178,17 +185,29 @@ module Gaku
       end
 
       private
+        def load_period_method
+          @admission_periods = Gaku::AdmissionPeriod.all
+          if session[:admission_period_id]
+            @admission_period = AdmissionPeriod.find(session[:admission_period_id])
+          else
+            @admission_period = @admission_periods.last
+          end
+          if session[:admission_method_id]
+            @admission_method = AdmissionMethod.find(session[:admission_method_id])
+          else
+            if !@admission_period.nil?
+              
+              @admission_method = @admission_period.admission_methods.first
+            end
+          end  
+          @admission_methods = @admission_period.admission_methods
+        end
+
         def load_before_index
           @search = Student.unscoped.search(params[:q])
           @students = @search.result
           @class_groups = ClassGroup.all
           @courses = Course.all
-          @admission_periods = Gaku::AdmissionPeriod.all
-          @admission_period = @admission_periods.last
-          if !@admission_period.nil?
-            @admission_methods = @admission_periods.last.admission_methods
-            @admission_method = @admission_period.admission_methods.first
-          end
         end
 
         def load_search_object

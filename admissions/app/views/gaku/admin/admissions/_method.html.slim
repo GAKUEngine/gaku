@@ -1,7 +1,7 @@
 - if !@admission_period.nil? 
-  -if admission_methods.any?
+  -if !@admission_method.nil?
     = form_tag change_admission_method_admin_admissions_path, :remote => true, :id => "change-admission-method-form" do
-      = select_tag :admission_method, options_from_collection_for_select(admission_methods, 'id', 'name', admission_methods.first.try(:id)), :onchange => "$('#change-admission-method-form').submit()", :class => "span12"
+      = select_tag :admission_method, options_from_collection_for_select(admission_methods, 'id', 'name', @admission_method.id), :onchange => "$('#change-admission-method-form').submit()", :class => "span12"
   - else
     = t(:'admission_methods.no_method')
 - else
