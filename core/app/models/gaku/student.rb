@@ -69,6 +69,10 @@ module Gaku
       "#{self.surname} #{self.name}"
     end
 
+    def to_s
+      "#{self.surname} #{self.name}"
+    end
+
     def scholarship
       scholarship_status.nil? ? "" : scholarship_status.name
     end
