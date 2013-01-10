@@ -25,6 +25,7 @@ describe Gaku::Student do
     it { should belong_to(:commute_method)}
     it { should belong_to(:user) }
     it { should belong_to :scholarship_status }
+    it { should belong_to :enrollment_status }
 
     it { should have_and_belong_to_many(:guardians) }
 
@@ -57,6 +58,7 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of(:student_id_number) }
     it { should allow_mass_assignment_of(:student_foreign_id_number) }
     it { should allow_mass_assignment_of(:scholarship_status_id) }
+    it { should allow_mass_assignment_of(:enrollment_status_id) }
     it { should_not allow_mass_assignment_of(:user) }
     it { should_not allow_mass_assignment_of(:user_attributes) }
 

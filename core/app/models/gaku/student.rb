@@ -28,6 +28,7 @@ module Gaku
     belongs_to :user
     belongs_to :commute_method
     belongs_to :scholarship_status
+    belongs_to :enrollment_status
 
     has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
@@ -46,7 +47,7 @@ module Gaku
                     :notes, :notes_attributes,
                     :addresses, :addresses_attributes,
                     :picture,
-                    :student_id_number, :student_foreign_id_number, :scholarship_status_id
+                    :student_id_number, :student_foreign_id_number, :scholarship_status_id, :enrollment_status_id
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
@@ -64,7 +65,7 @@ module Gaku
     end
 
     # methods for json student chooser returning
-    
+
     def to_s
       "#{self.surname} #{self.name}"
     end
