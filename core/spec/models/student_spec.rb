@@ -74,7 +74,7 @@ describe Gaku::Student do
 
   context 'methods' do
     xit 'enrollment_status'
-    xit 'full_name'
+    xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
     xit 'seat_number_widget'

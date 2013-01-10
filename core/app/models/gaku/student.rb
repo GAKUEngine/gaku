@@ -64,11 +64,7 @@ module Gaku
     end
 
     # methods for json student chooser returning
-
-    def full_name
-      "#{self.surname} #{self.name}"
-    end
-
+    
     def to_s
       "#{self.surname} #{self.name}"
     end
