@@ -1,7 +1,0 @@
-= modal_for 'edit-enrollment-status-type-modal' do
-  = modal_header t(:'enrollment_status_type.edit')
-  = modal_form_for [:admin, @enrollment_status_type] do |f|
-    = modal_body do
-      = f.text_field :name, :label => t(:'enrollment_status_type.name')
-      = f.check_box :is_active, :label => t(:'enrollment_status_type.active')
-      = buttons_for @enrollment_status_type, :nested_id => 'admin-enrollment-status-type'

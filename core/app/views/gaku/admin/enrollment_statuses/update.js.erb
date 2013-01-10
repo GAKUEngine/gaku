@@ -1,0 +1,4 @@
+$('tr#enrollment-status-<%= @enrollment_status.id %>').html('<%= render_js_partial("fields", {:enrollment_status => @enrollment_status}) %>');
+$("#edit-enrollment-status-modal").modal("hide");
+showNotice("<%= render_flash %>");
+

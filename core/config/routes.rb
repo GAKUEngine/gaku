@@ -168,7 +168,7 @@ Gaku::Core::Engine.routes.draw do
     resources :system_tools
     resources :commute_method_types
     resources :contact_types
-    resources :enrollment_status_types
+    resources :enrollment_statuses
     resources :attendance_types
 
     namespace :changes do

@@ -1,0 +1,5 @@
+td = enrollment_status
+td = boolean_image(enrollment_status.is_active)
+td
+  = ajax_link_to_edit [:edit, :admin, enrollment_status]
+  = ajax_link_to_delete [:admin, enrollment_status]
