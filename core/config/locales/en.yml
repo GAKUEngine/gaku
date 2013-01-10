@@ -357,6 +357,7 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    exam_score: Exam Score
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count

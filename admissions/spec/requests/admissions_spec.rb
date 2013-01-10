@@ -8,6 +8,7 @@ describe 'Admin Admissions' do
   let(:admission_period) { create(:admission_period) }
   let(:student) { create(:student) }
   let(:exam) { create(:exam) }
+  let(:attendance) { create(:attendance) }
 
   describe 'when select admission period', js: true do
     context 'without methods' do
@@ -230,28 +231,65 @@ describe 'Admin Admissions' do
           context 'grading' do
             before do
               admission_period
+              attendance
               @exam_phase = admission_period.admission_methods.first.admission_phases.first
               @exam_phase.exam = exam
               admission_period.reload
               visit gaku.admin_admissions_path
             end
-            xit 'grades' do
+            it 'grades' do
               page.should have_content 'Grade Exam'
               click_on 'Grade Exam'
               page.should have_content "#{exam.name}"
-              fill_in 'portion_score', with: 2.78
+              fill_in 'portion_score', with: 89
+              click '.exam-parts' #TODO fix this
+              wait_for_ajax
+              within('.exam-parts') { page.should have_content 89 }
               visit gaku.admin_admissions_path
-              page.should have_content 2.78
+              select 'Passed', from: 'state_id'
+              click_on 'Save'
+              page.should have_content 89
             end
-            xit 'adds attendance method' do
+            context 'attendance' do
+              before do
+                page.has_content?('Grade Exam') 
+                click_on 'Grade Exam'
+                page.should have_content "#{exam.name}"
+                click '.btn'
+                wait_until_visible '.popover-content'
+                #TODO add some predefined reasons
+              end
+              it 'selects attendance reason' do
+                select 'Illness', from: 'preset-reasons'
+                click_on 'Submit'
+                page.should_not have_css '.popover-content'
+                find('.score-cell')['disabled'].should == "true"
+              end
+              it 'adds attendance custom reason' do
+                fill_in 'custom-reason', with: 'Illness' 
+                click_on 'Submit'
+                page.should_not have_css '.popover-content'
+                find('.score-cell')['disabled'].should == "true"
+              end
+              it 'removes attendance reason' do
+                fill_in 'custom-reason', with: 'Illness' 
+                click_on 'Submit'
+                page.should_not have_css '.popover-content'
+                find('.score-cell')['disabled'].should == "true"
+                #TODO remove duplication
+                click '.btn'
+                page.find('.delete-attendance').click
+                wait_for_ajax
+                find('.score-cell')['disabled'].should == nil
+              end
             end
           end
 
           context 'listing' do
-            xit 'lists admissions' do
+            it 'lists admissions' do
               page.should have_content 'Listing Admissions'
               click_on 'Listing Admissions'
-              current_path.should == "/admissions/listing_admissions"
+              current_path.should == "/admin/admissions/listing_admissions"
               page.should have_content 'Admission Candidates List'
               page.should have_content "#{admission_period.admission_methods.first.name}"
               page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}"
@@ -260,23 +298,23 @@ describe 'Admin Admissions' do
               before do
                 page.should have_content 'Applicants List'
                 click_on 'Applicants List'
-                current_path.should == "/admissions/listing_applicants"
+                current_path.should == "/admin/admissions/listing_applicants"
               end
-              xit 'edits applicants' do
+              it 'edits applicants' do
                 click '.edit-link'
                 wait_until_visible modal
                 #TODO edit the applicant
                 click_on 'Submit'
                 wait_until_invisible modal
               end
-              xit 'shows applicants' do
+              it 'shows applicants' do
                 click '.show-link'
-                current_path.should eq "/students/params[:id]"
+                current_path.should eq "/students/1"
               end
-              xit 'returns to admissions' do
+              it 'returns to admissions' do
                 page.should have_content 'Admissions'
                 click_on 'Admissions'
-                current_path.should eq "/admissions"
+                current_path.should eq "/admin/admissions"
               end
             end
 
