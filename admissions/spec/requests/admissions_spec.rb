@@ -303,9 +303,12 @@ describe 'Admin Admissions' do
               it 'edits applicants' do
                 click '.edit-link'
                 wait_until_visible modal
-                #TODO edit the applicant
-                click_on 'Submit'
+                fill_in 'student_name', with: 'Martina'
+                click_on 'Save Student'
                 wait_until_invisible modal
+                page.has_content?('Martina')
+                visit gaku.listing_applicants_admin_admissions_path
+                page.has_content?('Martina')
               end
               it 'shows applicants' do
                 click '.show-link'
