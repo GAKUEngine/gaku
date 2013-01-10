@@ -18,7 +18,6 @@ describe Gaku::Student do
     it { should have_many :contacts }
     it { should have_many :notes }
     it { should have_many :attendances }
-    it { should have_many :enrollment_statuses }
     it { should have_many :achievements }
     it { should have_many :school_histories }
     it { should have_many :simple_grades }
