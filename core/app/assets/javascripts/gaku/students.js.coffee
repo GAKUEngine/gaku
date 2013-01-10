@@ -3,10 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
   #student show
-  $('.make-primary-address').on 'ajax:success', ->
-    $('.make-primary-address').each ->
-      $(@).removeClass('btn-primary')
-    $(@).addClass('btn-primary')
 
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()
@@ -14,6 +10,6 @@ $ ->
 
   $("#upload-student-picture-link").click ->
     $("#upload-student-picture").toggle()
-    
+
   $('.datepicker').datepicker(format:'yyyy/mm/dd')
   $(".class-group-select").combobox()
