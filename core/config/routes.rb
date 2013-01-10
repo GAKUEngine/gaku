@@ -12,7 +12,7 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
-  
+
   resources :class_groups do
     resources :semesters, :controller => 'class_groups/semesters'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
@@ -107,6 +107,9 @@ Gaku::Core::Engine.routes.draw do
 
     resources :addresses, :controller => 'students/addresses' do
       post :make_primary, :on => :member
+      get :soft_delete, :on => :member
+      get :recovery, :on => :member
+
     end
     resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member
@@ -195,6 +198,7 @@ Gaku::Core::Engine.routes.draw do
         get :exams
         get :course_groups
         get :attachments
+        get :student_addresses
       end
     end
 
