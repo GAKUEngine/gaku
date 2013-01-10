@@ -66,6 +66,8 @@ ja:
     go_to_listing:
     go_to_applicants: 
     admitted_on:
+    status:
+    reg_date:
   menu:
     admission_methods: 入学形態
     admission_periods: 入学時期
@@ -74,3 +76,7 @@ ja:
     grade:
     exam_score:
     not_graded: 
+  students:
+    status:
+    active:
+    deleted: 

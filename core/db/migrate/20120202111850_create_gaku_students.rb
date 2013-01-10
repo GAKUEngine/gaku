@@ -7,14 +7,13 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :name_reading, :default => ""
       t.string   :surname_reading, :default =>  ""
       t.boolean  :gender
-      t.string   :phone
-      t.string   :email
       t.date     :birth_date
       t.date     :admitted
       t.date     :graduated
       t.string   :student_id_number
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
+      t.integer  :deleted, :default => 0
 
       t.references :user
       t.references :faculty
