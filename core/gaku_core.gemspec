@@ -51,4 +51,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'foreman'
   s.add_dependency 'sidekiq'
   s.add_dependency 'sinatra'
+
+  s.add_dependency 'globalize3', '~> 0.3.0'
+
 end

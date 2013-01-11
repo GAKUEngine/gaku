@@ -1,0 +1,4 @@
+= remote_form_for [:admin, @enrollment_status] do |f|
+  = f.text_field :name, :label => t(:'enrollment_status.name')
+  = f.check_box :is_active, :label => t(:'enrollment_status.active')
+  = buttons_for @enrollment_status, :nested_id => 'admin-enrollment-status'

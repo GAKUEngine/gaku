@@ -1,6 +1,6 @@
 module Gaku
   module Admin
-    class EnrollmentStatusTypesController < Admin::BaseController
+    class EnrollmentStatusesController < Admin::BaseController
 
       inherit_resources
       respond_to :js, :html
@@ -10,9 +10,9 @@ module Gaku
       private
 
       def count
-        @count = EnrollmentStatusType.count
+        @count = EnrollmentStatus.count
       end
-      
+
     end
   end
 end

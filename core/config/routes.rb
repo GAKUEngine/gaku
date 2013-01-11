@@ -84,6 +84,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+    put :enrollment_status, :on => :member
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
       member do
@@ -168,7 +169,7 @@ Gaku::Core::Engine.routes.draw do
     resources :system_tools
     resources :commute_method_types
     resources :contact_types
-    resources :enrollment_status_types
+    resources :enrollment_statuses
     resources :attendance_types
 
     namespace :changes do
