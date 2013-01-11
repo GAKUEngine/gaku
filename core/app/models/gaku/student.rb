@@ -28,6 +28,7 @@ module Gaku
     belongs_to :user
     belongs_to :commute_method
     belongs_to :scholarship_status
+    belongs_to :enrollment_status
 
     has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
@@ -35,7 +36,8 @@ module Gaku
                     :only => [
                                :name, :surname, :middle_name,
                                :student_id_number, :student_foreign_id_number, :scholarship_status_id,
-                               :commute_method_id
+                               :commute_method_id,
+                               :is_deleted
                              ]
 
     attr_accessible :name, :surname, :middle_name, :name_reading, :surname_reading,
@@ -46,7 +48,9 @@ module Gaku
                     :notes, :notes_attributes,
                     :addresses, :addresses_attributes,
                     :picture,
-                    :student_id_number, :student_foreign_id_number, :scholarship_status_id
+                    :is_deleted,
+                    :student_id_number, :student_foreign_id_number,
+                    :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
@@ -57,7 +61,7 @@ module Gaku
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    default_scope where("deleted = ?", 0)
+    default_scope where(:is_deleted => 0)
 
     def enrollment_status
       self.enrollment_statuses.first
@@ -65,7 +69,7 @@ module Gaku
 
     # methods for json student chooser returning
 
-    def full_name
+    def to_s
       "#{self.surname} #{self.name}"
     end
 

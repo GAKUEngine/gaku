@@ -1,5 +1,5 @@
 <form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
-	<select>
+	<select name='preset-reasons'>
 		<% for type in @attendanceTypes : %>
 			<% if @attendance && @attendance.attendance_type_id == type.id : %>
         <option value='<%= type.id %>' selected='selected' ><%= type.name %></option>
@@ -9,7 +9,7 @@
     <% end %>
 	</select>
 
-	<input value="<%= @attendance.reason if @attendance %>" />
+	<input name='custom-reason' value="<%= @attendance.reason if @attendance %>" />
 	<button class='btn btn-primary'>Submit</button>
   <% if @attendance : %>
     <a class='delete-attendance'> Delete </a>

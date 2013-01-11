@@ -59,7 +59,6 @@ en:
       export: Export
       list: Admission Candidates List
       new: New Applicant
-      not_admitted: Not admitted
     applicants: 
       list: Admission Applicants List
     create: Create
@@ -70,6 +69,7 @@ en:
     go_to_listing: Listing Admissions
     go_to_applicants: Applicants List
     admitted_on: Admitted On
+    not_admitted: Not admitted
     status: Admission Status
     reg_date: Application Registration Date
   menu:

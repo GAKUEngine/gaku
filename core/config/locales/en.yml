@@ -357,6 +357,7 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    exam_score: Exam Score
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -448,6 +449,7 @@ en:
         course_group: Course Group Disposals
         disposals: Disposals
         exam: Exam Disposals
+        student_address: Student Addresses Disposals
       preset:
         grading:
           grading_method: Grading Method

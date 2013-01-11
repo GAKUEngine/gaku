@@ -13,12 +13,13 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :student_id_number
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
-      t.integer  :deleted, :default => 0
+      t.boolean  :is_deleted, :default => false
 
       t.references :user
       t.references :faculty
       t.references :commute_method
       t.references :scholarship_status
+      t.references :enrollment_status
 
       t.timestamps
     end
