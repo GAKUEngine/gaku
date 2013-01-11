@@ -1,31 +1,31 @@
 require 'spec_helper'
 
-describe 'Admin Enrollment Status Types' do
+describe 'Admin Enrollment Statuses' do
 
   stub_authorization!
 
-  let(:enrollment_status_type) { create(:enrollment_status_type, :name => 'Admitted') }
+  let(:enrollment_status) { create(:enrollment_status, :name => 'Admitted') }
 
   before :all do
-    set_resource "admin-enrollment-status-type"
+    set_resource "admin-enrollment-status"
   end
 
   context 'new', :js => true do
   	before do
-  	  visit gaku.admin_enrollment_status_types_path
+  	  visit gaku.admin_enrollment_statuses_path
       click new_link
       wait_until_visible submit
     end
 
     it 'creates and shows' do
       expect do
-        fill_in 'enrollment_status_type_name', :with => 'Enrolled'
+        fill_in 'enrollment_status_name', :with => 'Enrolled'
         click submit
         wait_until_invisible form
-      end.to change(Gaku::EnrollmentStatusType, :count).by 1
+      end.to change(Gaku::EnrollmentStatus, :count).by 1
 
       within(table) { page.should have_content 'Enrolled' }
-      within(count_div) { page.should have_content 'Enrollment Status Types list(1)' }
+      within(count_div) { page.should have_content 'Enrollment Statuses list(1)' }
       flash_created?
     end
 
@@ -36,8 +36,8 @@ describe 'Admin Enrollment Status Types' do
 
   context 'existing' do
     before do
-      enrollment_status_type
-      visit gaku.admin_enrollment_status_types_path
+      enrollment_status
+      visit gaku.admin_enrollment_statuses_path
     end
 
     context 'edit', :js => true do
@@ -47,7 +47,7 @@ describe 'Admin Enrollment Status Types' do
       end
 
     	it 'edits' do
-    	  fill_in 'enrollment_status_type_name', :with => 'Expelled'
+    	  fill_in 'enrollment_status_name', :with => 'Expelled'
     	  click submit
 
     	  wait_until_invisible modal
@@ -63,15 +63,15 @@ describe 'Admin Enrollment Status Types' do
 
 
   	it 'deletes', :js => true do
-      page.should have_content enrollment_status_type.name
-      within(count_div) { page.should have_content 'Enrollment Status Types list(1)' }
+      page.should have_content enrollment_status.name
+      within(count_div) { page.should have_content 'Enrollment Statuses list(1)' }
 
       expect do
         ensure_delete_is_working
-      end.to change(Gaku::EnrollmentStatusType, :count).by -1
+      end.to change(Gaku::EnrollmentStatus, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Enrollment Status Types list(1)' }
-      page.should_not have_content enrollment_status_type.name
+      within(count_div) { page.should_not have_content 'Enrollment Statuses list(1)' }
+      page.should_not have_content enrollment_status.name
       flash_destroyed?
     end
   end
