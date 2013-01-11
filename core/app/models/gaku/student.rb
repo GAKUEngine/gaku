@@ -47,7 +47,8 @@ module Gaku
                     :notes, :notes_attributes,
                     :addresses, :addresses_attributes,
                     :picture,
-                    :student_id_number, :student_foreign_id_number, :scholarship_status_id, :enrollment_status_id
+                    :student_id_number, :student_foreign_id_number,
+                    :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
