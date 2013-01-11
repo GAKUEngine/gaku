@@ -71,6 +71,73 @@ module Gaku
           end
         end
 
+        def add_phone_to_student(row, idx, student)
+          if row[idx["phone"]]
+            student_contact = student.contacts.create!(:contact_type_id => idx["contact_type"]["contact_type"]["id"],
+                                                       :is_primary => true,
+                                                       :is_emergency => true,
+                                                       :data => row[idx["phone"]])
+            if student_contact
+              logger.info "Created contact: #{student_contact.id} for student: #{student.id}"
+            end
+          end
+        end
+
+        def add_guardian_to_student(row, idx, student)
+          # add primary guardian
+          if row[idx["guardian"]["name"]]
+            guardian_name_parts = row[idx["guardian"]["name"]].to_s().split("　")
+            guardian_surname = guardian_name_parts.first
+            guardian_name = guardian_name_parts.last
+
+            if row[idx["guardian"]["name_reading"]]
+              guardian_name_reading_parts = row[idx["guardian"]["name_reading"]].to_s().split(" ")
+              guardian_surname_reading = guardian_name_reading_parts.first
+              guardian_name_reading = guardian_name_reading_parts.last
+            end
+
+            guardian = student.guardians.create!(:surname => guardian_surname,
+                                                :name => guardian_name,
+                                                :surname_reading => guardian_surname_reading,
+                                                :name_reading => guardian_name_reading)
+
+            if guardian
+              logger.info "Created guardian: #{guardian.id} for student: #{student.id}"
+            end
+
+            if row[idx["guardian"]["city"]] and row[idx["guardian"]["address1"]]
+
+              state = State.where(:country_numcode => 392, :code => row[idx["guardian"]["state"]].to_i).first
+
+
+
+              guardian_address = guardian.addresses.create!(:zipcode => row[idx["guardian"]["zipcode"]],
+                                      :country_id => idx["country"]["country"]["id"],
+                                      :state => state,
+                                      :state_id => state.id,
+                                      :state_name => state.name,
+                                      :city => row[idx["guardian"]["city"]],
+                                      :address1 => row[idx["guardian"]["address1"]],
+                                      :address2 => row[idx["guardian"]["address2"]])
+              if guardian_address
+                logger.info "Created address: #{guardian_address.id} for guardian: #{guardian.id}"
+              end
+
+            end
+
+            if row[idx["guardian"]["phone"]]
+                contact = Gaku::Contact.new()
+                contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
+                contact.is_primary = true
+                contact.is_emergency = true
+                contact.data = row[idx["guardian"]["phone"]]
+                contact.save
+
+                guardian.contacts << contact
+            end
+          end
+        end
+
         def perform(row, idx)
           ActiveRecord::Base.transaction do
             logger.info "《〓 Started ZaikouWorker 〓》"
@@ -87,72 +154,8 @@ module Gaku
             end
 
             add_address_to_student(row, idx, student)
-
-
-  #          if row[idx[:phone]]
-  #            student_contact = student.contacts.create!(:contact_type_id => contact_type.id,
-  #                                                       :is_primary => true,
-  #                                                       :is_emergency => true,
-  #                                                       :data => row[idx[:phone]])
-  #            if student_contact
-  #              logger.info "Created contact: #{student_contact.id} for student: #{student.id}"
-  #            end
-
-  #          end
-
-  #          # add primary guardian
-  #          if row[idx[:guardian][:name]]
-  #            guardian_name_parts = row[idx[:guardian][:name]].to_s().split("　")
-  #            guardian_surname = guardian_name_parts.first
-  #            guardian_name = guardian_name_parts.last
-
-
-  #            if row[idx[:guardian][:name_reading]]
-  #              guardian_name_reading_parts = row[idx[:guardian][:name_reading]].to_s().split(" ")
-  #              guardian_surname_reading = guardian_name_reading_parts.first
-  #              guardian_name_reading = guardian_name_reading_parts.last
-  #            end
-
-  #            guardian = student.guardians.create!(:surname => guardian_surname,
-  #                                                :name => guardian_name,
-  #                                                :surname_reading => guardian_surname_reading,
-  #                                                :name_reading => guardian_name_reading)
-
-  #            if guardian
-  #              logger.info "Created guardian: #{guardian.id} for student: #{student.id}"
-  #            end
-
-  #            if row[idx[:guardian][:city]] and row[idx[:guardian][:address1]]
-
-  #              state = State.where(:country_numcode => 392, :code => row[idx[:guardian][:state]].to_i).first
-
-
-
-  #              guardian_address = guardian.addresses.create!(:zipcode => row[idx[:guardian][:zipcode]],
-  #                                      :country_id => country.id,
-  #                                      :state => state,
-  #                                      :state_id => state.id,
-  #                                      :state_name => state.name,
-  #                                      :city => row[idx[:guardian][:city]],
-  #                                      :address1 => row[idx[:guardian][:address1]],
-  #                                      :address2 => row[idx[:guardian][:address2]])
-  #              if guardian_address
-  #                logger.info "Created address: #{guardian_address.id} for guardian: #{guardian.id}"
-  #              end
-
-  #            end
-
-  #            if row[idx[:guardian][:phone]]
-  #                contact = Gaku::Contact.new()
-  #                contact.contact_type = contact_type
-  #                contact.is_primary = true
-  #                contact.is_emergency = true
-  #                contact.data = row[idx[:guardian][:phone]]
-  #                contact.save
-
-  #                guardian.contacts << contact
-  #            end
-  #          end
+            add_phone_to_student(row, idx, student)
+            add_guardian_to_student(row, idx, student)
           end
         end
       end
