@@ -19,8 +19,8 @@ module Gaku
     attr_accessible :student_id, :scholarship_status_id , :admission_method_id, :admission_period_id, :student_attributes, :admitted
 
 
-    default_scope where("is_deleted = ?", 0)
-    scope :deleted, where("is_deleted = ?", 1)
+    default_scope where("is_deleted = ?", false)
+    scope :deleted, where("is_deleted = ?", true)
 
     def student
       Student.unscoped{ super }
