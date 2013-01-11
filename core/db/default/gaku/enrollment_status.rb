@@ -1,19 +1,23 @@
 states = {
+	:'Pre-Admission' 								=> false,
 	:'Admitted' 										=> true,
 	:'Enrolled' 										=> true,
+	:'Transfered In' 					      => true,
+	:'Transfered Out' 					    => false,
 	:'Visiting' 										=> true,
 	:'Re-Admitted' 									=> true,
 	:'On Exchange' 									=> true,
   :'Inactive' 										=> false,
-	:'Pre-Admission' 								=> false,
 	:'Graduated' 										=> false,
 	:'Re-Enrolled'									=> false,
 	:'Suspended' 										=> false,
 	:'Expelled' 										=> false,
-	:'Drop Out' 										=> false,
-	:'On Leave/Temporary Absence'   => false
+	:'Dropped Out' 									=> false,
+	:'On Leave'                     => false,
+	:'Extended Absence'             => false,
+	:'Deleted' 										  => false
 }
 
 states.each do |name, state|
-	Gaku::EnrollmentStatusType.where(:name => name, :is_active => state).first_or_create!
+	Gaku::EnrollmentStatus.where(:name => name, :is_active => state, :immutable => true).first_or_create!
 end

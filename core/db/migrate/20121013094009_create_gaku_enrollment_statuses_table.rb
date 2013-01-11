@@ -1,10 +1,11 @@
 class CreateGakuEnrollmentStatusesTable < ActiveRecord::Migration
   def change
   	create_table :gaku_enrollment_statuses do |t|
-  		t.references :enrollment_status_type
-  		t.references :student
+      t.string  :name
+      t.boolean :is_active
+      t.boolean :immutable
 
-  		t.timestamps
+      t.timestamps
   	end
   end
 end

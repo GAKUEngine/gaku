@@ -4,7 +4,8 @@ class CreateGakuAddressesTable < ActiveRecord::Migration
       t.string   :address1, :address2, :city
       t.string   :zipcode, :state_name, :title
       t.string   :state
-      t.boolean :past, :default => false
+      t.boolean  :past, :default => false
+      t.boolean  :is_deleted, :default => false
 
       t.references :country
       t.references :state
