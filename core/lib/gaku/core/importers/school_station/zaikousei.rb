@@ -39,12 +39,18 @@ module Gaku
 
             idx[:updated] = 2
 
+            #add static fields
+            #SchoolStationで大半の住所が日本にある
+            idx[:country] = Country.find_by_numcode(392)
+            idx[:contact_type] = ContactType.find_by_name("Phone")
+
             return idx
           end
 
           #在校テーブルのフィルド順を確認し、表陣と違った場合インデックスを変更し返す
           def check_index(row, idx)
             row.each_with_index do |cell, i|
+              i = i.to_i
               case cell
               when "ZAINAM_C" #生徒名の漢字
                 idx[:name] = i
@@ -87,11 +93,6 @@ module Gaku
               end
             end
 
-            #add static fields
-            #SchoolStationで大半の住所が日本にある
-            idx[:country] = Country.find_by_numcode(392)
-            idx[:contact_type] = ContactType.find_by_name("Phone")
-
             return idx
           end
 
@@ -122,7 +123,7 @@ module Gaku
             idx = get_default_index
 
             #sheet is shifted so the top line is taken
-            idx = check_index(sheet.first, idx)
+            #idx = check_index(sheet.first, idx)
             sheet.each 1 do |row|
               Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(row, idx)
             end
