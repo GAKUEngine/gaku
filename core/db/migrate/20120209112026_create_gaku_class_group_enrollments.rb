@@ -8,7 +8,5 @@ class CreateGakuClassGroupEnrollments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :gaku_class_group_enrollments, :class_group_id
-    add_index :gaku_class_group_enrollments, :student_id
   end
 end

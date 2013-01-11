@@ -323,6 +323,8 @@ ja:
     use_weighting: 加重率を使用
     view: 試験を照会
     weight: 加重率
+    exam_score: Exam Score
+
   exam_portion:
     adjustments: 調整
     attached_file_count: 添付ファイル数
