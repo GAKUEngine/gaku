@@ -282,19 +282,19 @@ describe 'Admin Admissions' do
                 select 'Illness', from: 'preset-reasons'
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
               end
               it 'adds attendance custom reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
               end
               it 'removes attendance reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
                 #TODO remove duplication
                 click '.btn'
                 page.find('.delete-attendance').click
