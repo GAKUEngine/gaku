@@ -60,10 +60,6 @@ module Gaku
 
     default_scope where("deleted = ?", 0)
 
-    def enrollment_status
-      self.enrollment_statuses.first
-    end
-
     # methods for json student chooser returning
 
     def to_s

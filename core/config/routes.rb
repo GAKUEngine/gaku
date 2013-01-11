@@ -84,6 +84,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+    put :enrollment_status, :on => :member
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
       member do
