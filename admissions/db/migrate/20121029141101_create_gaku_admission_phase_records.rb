@@ -4,7 +4,7 @@ class CreateGakuAdmissionPhaseRecords < ActiveRecord::Migration
   		t.references :admission
   		t.references :admission_phase
       t.references :admission_phase_state
-      t.integer    :deleted, :default => 0
+      t.integer    :is_deleted, :default => 0
 
       t.timestamps
   	end
