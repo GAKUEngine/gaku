@@ -184,9 +184,9 @@ module Gaku
 
       def soft_delete
         @admission = Admission.find(params[:id])
-        @admission.update_attribute('deleted', 1)
+        @admission.update_attribute('is_deleted', true)
         @admission.admission_phase_records.each {|rec|
-          rec.update_attribute('deleted', 1)
+          rec.update_attribute('is_deleted', true)
         }
       end
 

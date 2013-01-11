@@ -59,10 +59,9 @@ module Gaku
     end
 
     def destroy
-      #destroy! { students_path }
-      @student = Student.find(params[:id])
-      @student.update_attribute('deleted', 1)
-      redirect_to students_path, :notice => t('notice.destroyed', :resource => t('student.singular'))
+      @student = get_student
+      @student.update_attribute(:is_deleted, true)
+      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
     def autocomplete_search
