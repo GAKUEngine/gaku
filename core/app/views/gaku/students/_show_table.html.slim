@@ -28,7 +28,7 @@
         th.btn-c2 Enrollment Status
         td.vm
           #student-enrollment-status
-            /= render 'gaku/students/enrollment_statuses/enrollment_status', :student => student if student.enrollment_status
+            =render 'gaku/students/enrollment_statuses/enrollment_status'
       tr
         th.btn-c2 = t('scholarship_status')
         td =student.scholarship

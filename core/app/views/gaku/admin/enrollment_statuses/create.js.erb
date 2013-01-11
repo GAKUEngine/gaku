@@ -1,0 +1,7 @@
+$('#admin-enrollment-statuses-index tbody').append('<%= render_js_partial("enrollment_status", {:enrollment_status => @enrollment_status}) %>');
+
+$('#new-admin-enrollment-status').slideToggle();
+$('#new-admin-enrollment-status-link').show();
+
+$('.admin-enrollment-statuses-count').html('<%= print_count(@count+1, t_enrollment_status_list) %>');
+showNotice("<%= render_flash %>");

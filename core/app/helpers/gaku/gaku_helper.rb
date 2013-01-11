@@ -51,6 +51,10 @@ module Gaku
       Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}
     end
 
+    def enrollment_statuses
+      Gaku::EnrollmentStatus.all.collect {|es| [es.name, es.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end

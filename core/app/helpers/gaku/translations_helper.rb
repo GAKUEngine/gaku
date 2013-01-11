@@ -81,8 +81,8 @@ module Gaku
       t('contact_type.list')
     end
 
-    def t_enrollment_status_type_list
-      t('enrollment_status_type.list')
+    def t_enrollment_status_list
+      t('enrollment_status.list')
     end
 
     def t_commute_method_type_list
