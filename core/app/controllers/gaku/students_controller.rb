@@ -60,7 +60,7 @@ module Gaku
 
     def destroy
       @student = get_student
-      @student.update_attribute(:is_deleted, 1)
+      @student.update_attribute(:is_deleted, true)
       redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
