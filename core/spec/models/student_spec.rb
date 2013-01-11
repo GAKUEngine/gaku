@@ -59,6 +59,7 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of(:student_foreign_id_number) }
     it { should allow_mass_assignment_of(:scholarship_status_id) }
     it { should allow_mass_assignment_of(:enrollment_status_id) }
+    it { should allow_mass_assignment_of(:is_deleted) }
     it { should_not allow_mass_assignment_of(:user) }
     it { should_not allow_mass_assignment_of(:user_attributes) }
 
