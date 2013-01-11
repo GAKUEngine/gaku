@@ -116,7 +116,10 @@ describe 'Admin Admissions' do
             end
           end
 
-          xit 'has validations'
+          it 'has validations' do
+            click_on 'Create Student'
+            page.should have_content "can't be blank" 
+          end
 
           it 'cancels adding' do
             expect do
@@ -332,11 +335,13 @@ describe 'Admin Admissions' do
               it 'shows applicants' do
                 click '.show-link'
                 current_path.should eq "/students/1"
+                page.has_content? 'Martina'
               end
               it 'returns to admissions' do
                 page.should have_content 'Admissions'
                 click_on 'Admissions'
                 current_path.should eq "/admin/admissions"
+                page.has_content? 'Admission Candidates List'
               end
             end
 
