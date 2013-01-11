@@ -36,7 +36,7 @@ module Gaku
                     :only => [
                                :name, :surname, :middle_name,
                                :student_id_number, :student_foreign_id_number, :scholarship_status_id,
-                               :commute_method_id,
+                               :commute_method_id, :enrollment_status_id,
                                :is_deleted
                              ]
 
