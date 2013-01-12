@@ -116,7 +116,10 @@ describe 'Admin Admissions' do
             end
           end
 
-          xit 'has validations'
+          it 'has validations' do
+            click_on 'Create Student'
+            page.should have_content "can't be blank" 
+          end
 
           it 'cancels adding' do
             expect do
@@ -282,19 +285,19 @@ describe 'Admin Admissions' do
                 select 'Illness', from: 'preset-reasons'
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
               end
               it 'adds attendance custom reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
               end
               it 'removes attendance reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
+                find('.score-cell')['disabled'].should == "disabled"
                 #TODO remove duplication
                 click '.btn'
                 page.find('.delete-attendance').click
@@ -332,11 +335,13 @@ describe 'Admin Admissions' do
               it 'shows applicants' do
                 click '.show-link'
                 current_path.should eq "/students/1"
+                page.has_content? 'Martina'
               end
               it 'returns to admissions' do
                 page.should have_content 'Admissions'
                 click_on 'Admissions'
                 current_path.should eq "/admin/admissions"
+                page.has_content? 'Admission Candidates List'
               end
             end
 
