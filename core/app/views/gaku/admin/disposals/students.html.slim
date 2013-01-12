@@ -1,0 +1,13 @@
+= well_div do
+  = table_for 'disposal-student-index' do
+    thead
+      tr
+        = th t(:'surname')
+        = th t(:'name')
+        = th t(:'surname_reading')
+        = th t(:'name_reading')
+        = th t(:'birth_date')
+        = th t(:'address.primary')
+        = th_actions 3
+    tbody
+      =render :partial => 'student', :collection => @students, :as => :student

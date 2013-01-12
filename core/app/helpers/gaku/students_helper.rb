@@ -39,6 +39,10 @@ module Gaku
     def guardian_icon
       content_tag :i, nil, class: "icon-user"
     end
-    
+
+    def edit_button
+      content_tag :i, nil, :class => 'icon-white icon-pencil'
+    end
+
 	end
 end
