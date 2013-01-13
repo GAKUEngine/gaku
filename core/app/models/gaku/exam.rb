@@ -1,12 +1,13 @@
 module Gaku
   class Exam < ActiveRecord::Base
 
+    include Notable
+
     has_many :exam_scores
     has_many :exam_portions, :order => :position
     has_many :exam_portion_scores, :through => :exam_portions
     has_many :exam_syllabuses
     has_many :syllabuses, :through => :exam_syllabuses
-    has_many :notes, as: :notable
     has_many :attendances, :as => :attendancable
 
     belongs_to :grading_method
