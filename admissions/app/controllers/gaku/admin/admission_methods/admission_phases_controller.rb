@@ -23,6 +23,7 @@ module Gaku
               @admission_phase.admission_phase_states.first.update_attributes(:is_default => true)
             end
             respond_to do |format|
+              flash.now[:notice] = t('notice.created', :resource => t('admission_phases.singular'))
               format.js { render 'create' }
             end
           end
