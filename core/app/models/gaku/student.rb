@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Notable
+    include Notable, Trashable
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
@@ -48,7 +48,6 @@ module Gaku
                     :guardians, :guardians_attributes,
                     :addresses, :addresses_attributes,
                     :picture,
-                    :is_deleted,
                     :student_id_number, :student_foreign_id_number,
                     :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
@@ -59,8 +58,6 @@ module Gaku
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
-
-    default_scope where(:is_deleted => false)
 
     # methods for json student chooser returning
 
