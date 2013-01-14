@@ -46,6 +46,8 @@ module Gaku
                           :gender => gender,
                           :admitted => 1)
 
+          student.update_attribute(:enrollment_status_id, 2)
+
           return student
         end
 
