@@ -59,8 +59,8 @@ module Gaku
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    # methods for json student chooser returning
-
+    default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
+    
     def to_s
       "#{self.surname} #{self.name}"
     end
