@@ -70,6 +70,8 @@ module Gaku
             admission.admitted = true
             admission.save
             @student.admitted = admission_date
+            # change student enrollment status
+            @student.enrollment_status_id = 2
             @student.save
             @admission_record.admission_phase_state_id = @state.id
           else
@@ -87,6 +89,7 @@ module Gaku
         admission.admitted = true
         admission.save
         @student.admitted = admission_date
+        @student.enrollment_status_id = 2
         @student.save
       end
 
@@ -114,6 +117,7 @@ module Gaku
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
+          @admission.student.update_attribute(:enrollment_status_id, 1)
 
           render 'create'
 
@@ -167,6 +171,8 @@ module Gaku
 
           @enrollments.each {|enrollment|
             student = Student.unscoped.find(enrollment.student_id)
+            # change student status
+            student.update_attribute(:enrollment_status_id, 1)
             notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
           }
           flash.now[:success] = notice.html_safe
