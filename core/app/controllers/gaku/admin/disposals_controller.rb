@@ -21,7 +21,7 @@ module Gaku
 			end
 
 			def student_addresses
-				@student_addresses = StudentAddress.where(:is_deleted => true)
+				@addresses = Address.where(:is_deleted => true, :addressable_type => Gaku::Student)
 			end
 
 			private

@@ -139,7 +139,7 @@ module Gaku
     end
 
     def before_show
-      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
       @notable = Student.unscoped.find(params[:id])
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 

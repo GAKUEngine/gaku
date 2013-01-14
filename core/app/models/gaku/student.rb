@@ -18,6 +18,8 @@ module Gaku
 
     has_many :contacts
     has_many :notes, as: :notable
+    has_many :addresses, as: :addressable
+
     has_many :attendances
     has_many :enrollment_statuses
 

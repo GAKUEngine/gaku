@@ -4,13 +4,15 @@ module Gaku
     belongs_to :state
     belongs_to :campus
 
-    has_many :student_addresses, :dependent => :destroy
-    has_many :students, :through => :student_addresses, :dependent => :destroy
-    has_many :guardian_addresses, :dependent => :destroy
-    has_many :guardians, :through => :guardian_addresses
 
-    has_paper_trail :on => [:update, :destroy],
-                    :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+
+    belongs_to :addressable, polymorphic: true
+
+    # has_paper_trail :on => [:update, :destroy],
+                    # :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+
+    default_scope :conditions => { :is_deleted => false }
+
 
     validates_presence_of :address1, :city, :country
     #validates_associated :country, :state, :campus
@@ -21,15 +23,25 @@ module Gaku
                     :is_deleted, :past, :country,
                     :country_id, :state_id, :student_id
 
-    def join_model_name
-      'Gaku::StudentAddress' if StudentAddress.unscoped.exists?(:address_id => self.id)
+    before_save :ensure_first_primary, :on => :create
+
+
+    def make_primary
+      self.addressable.addresses.update_all(:is_primary => false)
+      self.is_primary = true
+      self.save
     end
 
-    def joined_resource_id
-      if StudentAddress.unscoped.exists?(:address_id => self.id)
-        StudentAddress.unscoped.find_by_address_id(self.id).student_id
-      end
-    end
+
+    # def join_model_name
+    #   'Gaku::StudentAddress' if StudentAddress.unscoped.exists?(:address_id => self.id)
+    # end
+
+    # def joined_resource_id
+    #   if StudentAddress.unscoped.exists?(:address_id => self.id)
+    #     StudentAddress.unscoped.find_by_address_id(self.id).student_id
+    #   end
+    # end
 
     def self.default
       country = Country.find(Config[:default_country_numcode]) rescue Country.first
@@ -62,6 +74,12 @@ module Gaku
 
     def empty?
       attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
+    end
+
+    private
+
+    def ensure_first_primary
+      self.is_primary = true if self.addressable.addresses.blank?
     end
 
   end

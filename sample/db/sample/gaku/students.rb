@@ -5,8 +5,8 @@ require 'ffaker'
 student = Gaku::Student.where(:name => 'John', :surname => 'Doe').first_or_create!
 
 country = Gaku::Country.find_by_name('日本')
-address = Gaku::Address.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
-Gaku::StudentAddress.where(:student_id => student.id, :address_id => address.id).first_or_create!
+# address = Gaku::Address.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
+# Gaku::StudentAddress.where(:student_id => student.id, :address_id => address.id).first_or_create!
 
 email = Gaku::ContactType.find_by_name('Email')
 home_phone = Gaku::ContactType.find_by_name('Home Phone')
@@ -30,8 +30,8 @@ guardian_mobile_phone = Gaku::Contact.create!(:data => Faker::PhoneNumber.phone_
 
 guardian.contacts << [guardian_email, guardian_home_phone, guardian_mobile_phone]
 
-guardian_address = Gaku::Address.create!(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id)
-Gaku::GuardianAddress.where(:guardian_id => guardian.id, :address_id => guardian_address.id).first_or_create!
+# guardian_address = Gaku::Address.create!(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id)
+# Gaku::GuardianAddress.where(:guardian_id => guardian.id, :address_id => guardian_address.id).first_or_create!
 
 student.guardians << guardian
 
