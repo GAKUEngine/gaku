@@ -13,8 +13,7 @@ describe Gaku::Student do
     it { should have_many(:specialities).through(:student_specialties) }
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
-    it { should have_many :student_addresses }
-    it { should have_many(:addresses).through(:student_addresses) }
+    it { should have_many :addresses }
     it { should have_many :contacts }
     it { should have_many :notes }
     it { should have_many :attendances }
