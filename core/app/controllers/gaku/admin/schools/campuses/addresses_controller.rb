@@ -9,10 +9,9 @@ module Gaku
       before_filter :before_index, :only => :index
 
       def create
-        @address = Address.create(params[:address])
-        @campus.address = @address
-        if @campus.save
-          respond_with @campus
+        @address = @campus.build_address(params[:address])
+        if @address.save
+          respond_with @address
         end
       end
 
