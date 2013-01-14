@@ -46,7 +46,7 @@ exams.each do |exam|
     exam_sheet.row(3 + index)[0] = student.id
     # exam_sheet.row(2 + index)[0] = ?  - class
     # exam_sheet.row(2 + index)[1] = ?  - seat number
-    exam_sheet.row(3 + index)[3] = student.full_name
+    exam_sheet.row(3 + index)[3] = student
 
     # studens/exam_portion score matrix
     exam.exam_portions.each_with_index do |portion, portion_index|

@@ -13,7 +13,7 @@
       <ul class="dropdown-menu">
         <li data-hook="contact_types"><%= link_to t('menu.admin.types.contact'), admin_contact_types_path %></li>
         <li data-hook="enrollment_status_types">
-          <%= link_to t('menu.admin.types.enrollment_status'), admin_enrollment_status_types_path %>
+          <%= link_to t('menu.admin.types.enrollment_status'), admin_enrollment_statuses_path %>
         </li>
         <li data-hook="commute_method_types">
           <%= link_to t('menu.admin.types.commute_methods'), admin_commute_method_types_path %>
@@ -55,6 +55,9 @@
         </li>
         <li data-hook="course_group_disposals">
           <%= link_to t('menu.admin.disposals.course_group'), course_groups_admin_disposals_path %>
+        </li>
+        <li data-hook="student_addresses_disposals">
+          <%= link_to t('menu.admin.disposals.student_address'), student_addresses_admin_disposals_path %>
         </li>
       </ul>
     </li>

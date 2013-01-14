@@ -14,6 +14,8 @@ require 'spreadsheet'
 require 'csv'
 require 'sidekiq/web'
 require 'paper_trail'
+require 'globalize3'
+
 
 module Gaku
 

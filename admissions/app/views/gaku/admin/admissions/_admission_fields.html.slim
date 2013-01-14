@@ -3,7 +3,7 @@ td.name = admission.student.name
 td.birth = admission.student.birth_date
 td.registration-date = admission.admission_phase_records.first.created_at.strftime("%Y.%m.%d")
 td.admission-phase = admission.admission_phase_records.last.admission_phase.name
-td.student-status = (admission.student.deleted == 0) ? t(:'students.active') : t(:'students.deleted')
+td.student-status = admission.student.enrollment_status.name
 td.manage
   = link_to_show admission.student
   = ajax_link_to_edit [:edit, admission.student], :style => "margin:0px"

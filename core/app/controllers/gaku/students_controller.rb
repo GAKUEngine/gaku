@@ -59,10 +59,9 @@ module Gaku
     end
 
     def destroy
-      #destroy! { students_path }
-      @student = Student.find(params[:id])
-      @student.update_attribute('deleted', 1)
-      redirect_to students_path, :notice => t('notice.destroyed', :resource => t('student.singular'))
+      @student = get_student
+      @student.update_attribute(:is_deleted, true)
+      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
     def autocomplete_search
@@ -79,6 +78,14 @@ module Gaku
       object = "Gaku::" + params[:class_name].capitalize
       @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
+    end
+
+    def enrollment_status
+      @student = Student.find(params[:id])
+      @student.update_attributes(params[:student])
+      if @student.save
+        respond_with @student
+      end
     end
 
     protected

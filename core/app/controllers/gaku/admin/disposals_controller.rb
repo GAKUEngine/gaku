@@ -15,8 +15,12 @@ module Gaku
 				@attachments = Attachment.where(:is_deleted => true).order(sort_column + " " + sort_direction)
 			end
 
+			def student_addresses
+				@student_addresses = StudentAddress.where(:is_deleted => true)
+			end
+
 			private
-			
+
 		  def sort_column
 	      Student.column_names.include?(params[:sort]) ? params[:sort] : "name"
 	    end

@@ -312,16 +312,16 @@ en:
   enrollment:
     plural: Enrollments
     singular: Enrollment
-  enrollment_status_type:
+  enrollment_status:
     active: Active
-    add: Add Enrollment Status Type
-    edit: Edin Enrollment Status Type
-    list: Enrollment Status Types list
+    add: Add Enrollment Status
+    edit: Edin Enrollment Status
+    list: Enrollment Statuses list
     name: Name
-    new: New Enrollment Status Type
-    plural: Enrollment Status Types
-    save: Save Enrollment Status Type
-    singular: Enrollment Status Type
+    new: New Enrollment Status
+    singular: Enrollment Status
+    plural: Enrollment Statuses
+    save: Save Enrollment Status
   errors:
     messages:
       already_confirmed: was already confirmed, please try signing in
@@ -357,6 +357,7 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    exam_score: Exam Score
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -448,6 +449,7 @@ en:
         course_group: Course Group Disposals
         disposals: Disposals
         exam: Exam Disposals
+        student_address: Student Addresses Disposals
       preset:
         grading:
           grading_method: Grading Method
@@ -474,7 +476,7 @@ en:
         attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
-        enrollment_status: Enrollment Status Types
+        enrollment_status: Enrollment Statuses
         types: Types & Methods
     class_group:
       management: Class Management
