@@ -84,6 +84,22 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+
+    member do
+      get :edit_enrollment_status
+      put :enrollment_status
+      get :recovery
+      get :soft_delete
+    end
+
+    resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
+      resources :notes, :controller => 'students/enrollment_statuses/notes'
+      member do
+        get :history
+        get :revert
+      end
+    end
+    
     resources :commute_methods, :controller => 'students/commute_methods'
 
     resources :guardians, :controller => 'students/guardians' do
@@ -194,6 +210,7 @@ Gaku::Core::Engine.routes.draw do
 
     resources :disposals do
       collection do
+        get :students
         get :exams
         get :course_groups
         get :attachments

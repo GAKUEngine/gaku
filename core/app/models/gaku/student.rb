@@ -19,6 +19,9 @@ module Gaku
     has_many :assignment_scores
 
     has_many :contacts
+
+    has_many :addresses, as: :addressable
+    
     has_many :attendances
     has_many :enrollment_statuses
 
@@ -60,7 +63,7 @@ module Gaku
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
     default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
-    
+
     def to_s
       "#{self.surname} #{self.name}"
     end
