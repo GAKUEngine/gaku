@@ -1,15 +1,15 @@
 module Gaku
   class StudentAddress < ActiveRecord::Base
+
+    include Trashable
+
   	belongs_to :student
     belongs_to :address
 
     attr_accessible :student_id, :address_id, :is_primary, :is_deleted
 
     before_save :ensure_primary, :on => :create
-
-    default_scope :conditions => { :is_deleted => false }
-
-
+    
     def ensure_primary
       if self.student.addresses.blank?
         self.is_primary = true

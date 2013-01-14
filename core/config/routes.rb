@@ -84,15 +84,8 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
-    put :enrollment_status, :on => :member
-    resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
-      resources :notes, :controller => 'students/enrollment_statuses/notes'
-      member do
-        get :history
-        get :revert
-      end
-    end
     resources :commute_methods, :controller => 'students/commute_methods'
+
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do
         post :create_modal, :on => :collection
@@ -112,15 +105,20 @@ Gaku::Core::Engine.routes.draw do
       get :recovery, :on => :member
 
     end
+
     resources :contacts, :controller => 'students/contacts' do
       post :make_primary, :on => :member
     end
 
-    resources :notes#, :controller => 'students/notes'
+    resources :notes
     resources :course_enrollments, :controller => 'students/course_enrollments'
     resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
     resources :exams
     resources :courses
+
+    member do
+      put :enrollment_status
+    end
 
 
     collection do

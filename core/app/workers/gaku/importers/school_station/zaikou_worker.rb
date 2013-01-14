@@ -45,6 +45,8 @@ module Gaku
                           :birth_date => birth_date,
                           :gender => gender)
 
+          student.update_attribute(:enrollment_status_id, 2)
+
           return student
         end
 
