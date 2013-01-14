@@ -23,35 +23,15 @@ describe Gaku::Admin::AdmissionsController do
       response.should render_template :index
     end
 
-    it "loads @admission_periods" do
+    it "assigns variables" do
       assigns(:admission_periods).should_not be_nil
-    end
-    it "loads @admission_period" do
       assigns(:admission_period).should_not be_nil
-    end
-
-    it "loads @admission_methods" do
       assigns(:admission_methods).should_not be_nil
-    end
-
-    it "loads @admission_method" do
       assigns(:admission_method).should_not be_nil
-    end
-
-    it "loads @search" do
       assigns(:search).should_not be_nil
-    end
-    it "loads @students" do
       assigns(:students).should_not be_nil
-    end
-    it "loads @class_groups" do
       assigns(:class_groups).should_not be_nil
-    end
-    it "loads @courses" do
       assigns(:courses).should_not be_nil
-    end
-
-    it "loads @state_records" do
       assigns(:state_records).should_not be_nil
     end
 
@@ -64,26 +44,17 @@ describe Gaku::Admin::AdmissionsController do
     it "renders the :new template" do
       response.should render_template :new
     end
-
-    it "loads @class_groups" do
+    it "assigns variables" do
       assigns(:class_groups).should_not be_nil
+      assigns(:scholarship_statuses).should_not be_nil
+      assigns(:admission).should be_a_new Gaku::Admission
+      assigns(:student).should be_a_new Gaku::Student
     end
 
     xit "loads @class_group_id" do
       assigns(:class_group_id).should_not be_nil
     end
 
-    it "loads @scholarship_statuses" do
-      assigns(:scholarship_statuses).should_not be_nil
-    end
-
-    it "assigns a new admission" do
-      assigns(:admission).should be_a_new Gaku::Admission
-    end
-
-    it "assigns a new student" do
-      assigns(:student).should be_a_new Gaku::Student
-    end
   end
 
   describe "POST #create" do
@@ -139,6 +110,30 @@ describe Gaku::Admin::AdmissionsController do
     session[:admission_method_id].should eq admission_period.admission_methods.first.id
   end
 
+  context 'lists admissions' do
+    before do
+      gaku_js_get :listing_admissions
+    end
+    it 'is successful' do
+      response.should be_success
+    end
+    it "renders the :listing_admissions view" do
+      response.should render_template :listing_admissions
+    end
+
+    it "assigns variables" do
+      assigns(:admission_periods).should_not be_nil
+      assigns(:admission_period).should_not be_nil
+      assigns(:admission_methods).should_not be_nil
+      assigns(:admission_method).should_not be_nil
+      assigns(:search).should_not be_nil
+      assigns(:students).should_not be_nil
+      assigns(:class_groups).should_not be_nil
+      assigns(:courses).should_not be_nil
+      assigns(:state_records).should_not be_nil
+    end
+    
+  end
   xit 'changes student state'
 
   xit 'admits student'
