@@ -8,7 +8,7 @@ module Gaku
 
         def get_student(row, idx)
           if Gaku::Student.exists?(:student_foreign_id_number => row[idx["foreign_id_number"]].to_i.to_s)
-            logger.info "Student with foreign_id: #{row[idx["foreign_id_number"]].to_i.to_s} already exists"
+            logger.info "SchoolStationのID番号「#{row[idx["foreign_id_number"]].to_i.to_s}」の生徒が既に登録されている為新規登録及び更新が行われません。"
             return nil
           end
 
@@ -66,7 +66,7 @@ module Gaku
                                       :address1 => row[idx["address1"]],
                                       :address2 => row[idx["address2"]])
             if student_address
-              logger.info "Created address: #{student_address.id} for student: #{student.id}"
+              logger.info "生徒「#{student.surname} #{student.name}」に住所を登録しました。"
             end
           end
         end
@@ -78,7 +78,7 @@ module Gaku
                                                        :is_emergency => true,
                                                        :data => row[idx["phone"]])
             if student_contact
-              logger.info "Created contact: #{student_contact.id} for student: #{student.id}"
+              logger.info "生徒「#{student.surname} #{student.name}」に電話番号を登録しました。"
             end
           end
         end
@@ -102,7 +102,7 @@ module Gaku
                                                 :name_reading => guardian_name_reading)
 
             if guardian
-              logger.info "Created guardian: #{guardian.id} for student: #{student.id}"
+              logger.info "生徒「#{student.surname} #{student.name}」に保護者「#{guardian.surname} #{guardian.name}」を登録しました。"
             end
 
             if row[idx["guardian"]["city"]] and row[idx["guardian"]["address1"]]
@@ -120,7 +120,7 @@ module Gaku
                                       :address1 => row[idx["guardian"]["address1"]],
                                       :address2 => row[idx["guardian"]["address2"]])
               if guardian_address
-                logger.info "Created address: #{guardian_address.id} for guardian: #{guardian.id}"
+                logger.info "生徒「#{student.surname} #{student.name}」の保護者「#{guardian.surname} #{guardian.name}」に住所を登録しました。"
               end
 
             end
@@ -140,15 +140,14 @@ module Gaku
 
         def perform(row, idx)
           ActiveRecord::Base.transaction do
-            logger.info "《〓 Started ZaikouWorker 〓》"
             if row[idx["name"]].nil?
-              logger.info "No name in row, skipping"
+              logger.info "SchoolStation在校生インポータ: 名前が入力されていない行がありました。この行は無視します。\n#{row}"
               return
             end
             
             student = get_student(row, idx)
             if student
-              logger.info "Created student: #{student.id}, name: #{student.name}\n"
+              logger.info "SchoolStationインポータにより生徒#{student.surname} #{student.name}が登録されました。\n"
             else
               return
             end
