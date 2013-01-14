@@ -22,9 +22,9 @@ module Gaku
 
           if row[idx["birth_date"]]
             begin
-              birth_date = Date.civil(1899, 12, 31) + row[idx["birth_date"]].to_i.days - 1.day
-            rescue
               birth_date = Date.strptime(row[idx["birth_date"]].to_s, "%Y/%m/%d")
+            rescue
+              birth_date = Date.civil(1899, 12, 31) + row[idx["birth_date"]].to_i.days - 1.day
             end
           end
 
@@ -43,8 +43,7 @@ module Gaku
                           :name_reading => name_reading,
                           :student_foreign_id_number => row[idx[:foreign_id_number].to_i],
                           :birth_date => birth_date,
-                          :gender => gender,
-                          :admitted => 1)
+                          :gender => gender)
 
           return student
         end
