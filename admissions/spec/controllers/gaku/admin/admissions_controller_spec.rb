@@ -133,7 +133,11 @@ describe Gaku::Admin::AdmissionsController do
     end
     xit 'without periods'
   end
-  xit 'changes admission method'
+  it 'changes admission method' do
+    gaku_js_post :change_admission_method, admission_method: admission_period.admission_methods.first
+    assigns(:admission_method).should eq admission_period.admission_methods.first
+    session[:admission_method_id].should eq admission_period.admission_methods.first.id
+  end
 
   xit 'changes student state'
 
