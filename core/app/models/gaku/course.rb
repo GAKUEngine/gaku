@@ -1,5 +1,8 @@
 module Gaku
   class Course < ActiveRecord::Base
+
+    include Notable
+    
     has_many :course_enrollments
     has_many :students, :through => :course_enrollments
 
@@ -9,7 +12,6 @@ module Gaku
     has_many :class_group_course_enrollments, :dependent => :destroy
     has_many :class_groups, :through => :class_group_course_enrollments
 
-    has_many :notes, as: :notable
     has_many :exam_schedules
 
     belongs_to :syllabus

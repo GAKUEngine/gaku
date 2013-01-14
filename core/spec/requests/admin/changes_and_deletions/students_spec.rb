@@ -10,7 +10,8 @@ describe 'Student Changes' do
                               :student_id_number => "Changed student_id_number",
                               :student_foreign_id_number => "Changed student_foreign_id_number",
                               :scholarship_status_id => 777,
-                              :commute_method_id => 888)
+                              :commute_method_id => 888,
+                              :enrollment_status_id => 999)
 
     visit gaku.admin_changes_students_path
     page.should have_content "Changed name"
@@ -20,6 +21,7 @@ describe 'Student Changes' do
     page.should have_content "Changed student_foreign_id_number"
     page.should have_content "777"
     page.should have_content "888"
+    page.should have_content "999"
   end
 
   it 'saves soft deletes' do
