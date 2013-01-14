@@ -61,7 +61,8 @@ module Gaku
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    default_scope where(:is_deleted => false)
+    #default_scope where(:is_deleted => false)
+    default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
     # methods for json student chooser returning
 
