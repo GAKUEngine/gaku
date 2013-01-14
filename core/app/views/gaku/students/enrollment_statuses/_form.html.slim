@@ -1,3 +1,0 @@
-= remote_form_for [@student, @enrollment_status] do |f|
-	= f.select :enrollment_status_type_id, enrollment_status_types, :prompt => t(:'default')
-	= buttons_for @enrollment_status, :nested_id => 'student-enrollment-status'
