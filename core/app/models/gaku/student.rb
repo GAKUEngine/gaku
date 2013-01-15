@@ -17,8 +17,8 @@ module Gaku
 
     has_many :exam_portion_scores
     has_many :assignment_scores
-
-    has_many :contacts
+    
+    has_many :contacts, as: :contactable
 
     has_many :addresses, as: :addressable
 

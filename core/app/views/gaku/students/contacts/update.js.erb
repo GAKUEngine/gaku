@@ -1,12 +1,3 @@
-$('#student-contacts-index tbody').html('<%= escape_javascript(render :partial => "contact", :formats => [:html], :handlers => [:erb, :slim], :collection => @contacts, :as => :contact) %>');
+$('#contact-<%= @contact.id %>').html('<%= render_js_partial("fields", {:contact => @contact}) %>');
 $(".modal#edit-contact-modal").modal("hide");
 showNotice("<%= render_flash %>");
-
-$('.student-contact').each(function() {
-	$(this).children('td.primary-contact').html('');
-	$(this).find('.primary-button a').removeClass('btn-primary');
-});
-
-var currentContact = $("#contact-<%= @contact.id %>");
-currentContact.children('td.primary-contact').html('Primary');
-currentContact.find('.primary-button a').addClass('btn-primary');

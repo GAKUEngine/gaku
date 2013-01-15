@@ -8,11 +8,6 @@ module Gaku
     before_filter :address,   :only => [:destroy, :make_primary, :soft_delete, :recovery]
     before_filter :count,     :only => [:create, :destroy, :soft_delete, :recovery]
 
-    def create
-      @address = @student.addresses.create(params[:address])
-      create!
-    end
-
     def destroy
       super do |format|
         format.js { render :nothing => true }

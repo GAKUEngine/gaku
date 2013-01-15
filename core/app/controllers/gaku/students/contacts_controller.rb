@@ -9,30 +9,18 @@ module Gaku
     before_filter :contact, :except => [:new, :create]
     before_filter :count,   :only => [:create, :destroy]
 
-    def create
-      super do |format|
-        if @contact.save && @student.contacts << @contact
-          @contact.make_primary_student if params[:contact][:is_primary] == "1"
-        end
-        format.js { render }
-      end
-    end
-
-    def update
-      @contacts = Contact.where(:student_id => params[:student_id])
-      @contact.make_primary_student if params[:contact][:is_primary] == "1"
-      update!
-    end
-
     def destroy
-      if @contact.is_primary?
-        @student.contacts.first.make_primary_student if @student.contacts.any?
+      if @contact.destroy
+        if @contact.is_primary?
+          @student.contacts.first.try(:make_primary)
+        end
       end
+      flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'contact.singular'))
       destroy!
     end
 
     def make_primary
-      @contact.make_primary_student
+      @contact.make_primary
       respond_with(@contact)
     end
 
