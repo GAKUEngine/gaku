@@ -126,16 +126,16 @@ module Gaku
 
             end
 
-            if row[idx["guardian"]["phone"]]
-                contact = Gaku::Contact.new()
-                contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
-                contact.is_primary = true
-                contact.is_emergency = true
-                contact.data = row[idx["guardian"]["phone"]]
-                contact.save
+           # if row[idx["guardian"]["phone"]]
+           #     contact = Gaku::Contact.new()
+           #     contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
+           #     contact.is_primary = true
+           #     contact.is_emergency = true
+           #     contact.data = row[idx["guardian"]["phone"]]
+           #     contact.save
 
-                guardian.contacts << contact
-            end
+           #     guardian.contacts << contact
+           # end
           end
         end
 
@@ -163,9 +163,9 @@ module Gaku
               return
             end
 
-            #add_address_to_student(row, idx, student)
+            add_address_to_student(row, idx, student)
             #add_phone_to_student(row, idx, student)
-            #add_guardian_to_student(row, idx, student)
+            add_guardian_to_student(row, idx, student)
           end
         end
       end
