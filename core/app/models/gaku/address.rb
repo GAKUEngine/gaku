@@ -32,6 +32,14 @@ module Gaku
       self.save
     end
 
+    def primary?
+      if self.is_primary == true
+        true
+      else
+        false
+      end
+    end
+
 
     # def join_model_name
     #   'Gaku::StudentAddress' if StudentAddress.unscoped.exists?(:address_id => self.id)

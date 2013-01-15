@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :address, class: Gaku::Address do
-    address1 '10 Lovely Street'
-    address2 'Northwest'
-    city   'Herndon'
-    zipcode '20170'
+    address1 { Faker::Address.street_address }
+    address2 { Faker::Address.street_address }
+    city     { Faker::Address.city }
 
     association(:state)
     association(:campus)
