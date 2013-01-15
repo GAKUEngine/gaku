@@ -22,4 +22,4 @@
             = th t(:'address.address2')
             = th_actions 2
         tbody
-          = render :partial => 'gaku/students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address', :locals => {:primary_address => @primary_address}
+          = render :partial => 'gaku/students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'
