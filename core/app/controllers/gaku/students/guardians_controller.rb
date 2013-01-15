@@ -6,7 +6,6 @@ module Gaku
     respond_to :js, :html
 
     before_filter :student
-    before_filter :primary_address, :only => :show
     before_filter :count, :only => [:create,:destroy]
 
     def create
@@ -31,11 +30,6 @@ module Gaku
 
     def guardian
       @guardian = Guardian.find(params[:id])
-    end
-
-    def primary_address
-      guardian
-      @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
     end
 
     def count

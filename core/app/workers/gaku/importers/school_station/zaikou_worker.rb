@@ -4,7 +4,6 @@ module Gaku
     module SchoolStation
       class ZaikouWorker
         include Sidekiq::Worker
-        require "gaku/core/importers/school_station/zaikousei.rb"
 
         def get_student(row, idx)
           if Gaku::Student.exists?(:student_foreign_id_number => row[idx["foreign_id_number"]].to_i.to_s)
@@ -139,7 +138,17 @@ module Gaku
           end
         end
 
-        def perform(row, idx)
+        REDIS_POOL = ConnectionPool.new(:size => 10, :timeout => 3) { Redis.new }
+        def perform(sheet, idx)
+          sheet.each do |row|
+            REDIS_POOL.with_connection do |redis|
+              redis.lsize(:zaiou)
+              process_row(row, idx)
+            end
+          end
+        end
+
+        def process_row(row, idx)
           ActiveRecord::Base.transaction do
             if row[idx["name"]].nil?
               logger.info "SchoolStation在校生インポータ: 名前が入力されていない行がありました。この行は無視します。\n#{row}"

@@ -1,12 +1,12 @@
 tr
-  td = student_address.student
-  td = student_address.address.title
-  td = student_address.address.country
-  td = student_address.address.zipcode
-  td = student_address.address.state
-  td = student_address.address.city
-  td = student_address.address.address1
-  td = student_address.address.address2
+  td = address.addressable
+  td = address.title
+  td = address.country
+  td = address.zipcode
+  td = address.state
+  td = address.city
+  td = address.address1
+  td = address.address2
   td
-    = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, student_address.student, student_address.address], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true, :style => 'margin-left:5px'
-    = ajax_link_to_delete [student_address.student, student_address.address] , :id => 'delete-disposal-student-address-link'
+    = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, address.addressable, address], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true, :style => 'margin-left:5px'
+    = ajax_link_to_delete [address.addressable, address] , :id => 'delete-disposal-student-address-link'
