@@ -2,7 +2,7 @@
 require 'ffaker'
 
 #student
-student = Gaku::Student.where(:name => 'John', :surname => 'Doe').first_or_create!
+student = Gaku::Student.where(:name => 'John', :surname => 'Doe', :enrollment_status_id => 2).first_or_create!
 
 country = Gaku::Country.find_by_name('日本')
 # address = Gaku::Address.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
@@ -36,10 +36,10 @@ guardian = Gaku::Guardian.create!(:name => Faker::Name.first_name, :surname => F
 student.guardians << guardian
 
 students = [
-  { :name => 'Anonime', :surname => 'Anonimized' },
-  { :name => 'Amon', :surname => 'Tobin' },
-  { :name => '零', :surname => '影月' },
-  { :name => 'サニー', :surname => 'スノー'}
+  { :name => 'Anonime', :surname => 'Anonimized', :enrollment_status_id => 2 },
+  { :name => 'Amon', :surname => 'Tobin', :enrollment_status_id => 2 },
+  { :name => '零', :surname => '影月', :enrollment_status_id => 2 },
+  { :name => 'サニー', :surname => 'スノー', :enrollment_status_id => 2 }
 ]
 
 students.each do |student|
@@ -48,6 +48,6 @@ end
 
 unless Gaku::Student.count > 50
   50.times do
-    Gaku::Student.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name)
+    Gaku::Student.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name, :enrollment_status_id => 2)
   end
 end
