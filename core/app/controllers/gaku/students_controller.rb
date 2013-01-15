@@ -11,10 +11,32 @@ module Gaku
     before_filter :before_show,       :only => :show
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
+    before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
 
     def index
       @enrolled_students = params[:enrolled_students]
       index!
+    end
+
+    def show
+      respond_with @student
+    end
+
+    def destroy
+      if @student.destroy
+        respond_with @student
+      end
+    end
+
+    def recovery
+      @student.update_attribute(:is_deleted, false)
+      respond_with @student
+    end
+
+    def soft_delete
+      @student = Student.find(params[:id])
+      @student.update_attribute(:is_deleted, true)
+      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
     def csv
@@ -58,11 +80,7 @@ module Gaku
       end
     end
 
-    def destroy
-      @student = get_student
-      @student.update_attribute(:is_deleted, true)
-      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
-    end
+
 
     def autocomplete_search
       # search only name or surname separate
@@ -78,6 +96,10 @@ module Gaku
       object = "Gaku::" + params[:class_name].capitalize
       @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
+    end
+
+    def edit_enrollment_status
+      @student = Student.find(params[:id])
     end
 
     def enrollment_status
@@ -100,6 +122,10 @@ module Gaku
 
     private
 
+    def unscoped_student
+      @student = Student.unscoped.find(params[:id])
+    end
+
     def select_vars
       @class_group_id ||= params[:class_group_id]
     end
@@ -113,11 +139,11 @@ module Gaku
     end
 
     def before_show
-      @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
-      @notable = Student.find(params[:id])
+      # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      @notable = Student.unscoped.find(params[:id])
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-      Student.includes([{:contacts => :contact_type}]).find(params[:id])
+      Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
     end
 
     def get_student

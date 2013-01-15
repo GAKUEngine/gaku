@@ -3,7 +3,8 @@ module Gaku
 
 		has_many :contacts
 		belongs_to :school
-		has_one :address
+
+    has_one :address, as: :addressable
 
 		attr_accessible :name, :school_id, :address_id, :is_master
 
