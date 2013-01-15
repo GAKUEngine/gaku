@@ -5,6 +5,6 @@ module Gaku
 	  has_many :class_groups
 	  has_many :courses
 	  has_many :addresses
-	  has_many :contacts
+	  has_many :contacts, as: :contactable
 	end
 end

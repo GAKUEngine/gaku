@@ -6,11 +6,11 @@ module Gaku
     has_many :addresses, as: :addressable
 
     has_and_belongs_to_many :students, :join_table => :gaku_guardians_students
-    has_many :contacts
+    #has_many :contacts
 
     validates_presence_of :name, :surname
 
-    attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship, :contacts, :contacts_attributes
+    attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship
     accepts_nested_attributes_for :contacts, :allow_destroy => true
 
     def primary_contact

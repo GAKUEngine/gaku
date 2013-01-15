@@ -44,27 +44,7 @@ describe Gaku::Address do
     end
   end
 
-  context ".default" do
-    before do
-      @default_country_id = AppConfig[:default_country_id]
-      new_country = create(:country)
-      AppConfig[:default_country_id] = new_country.id
-    end
-
-    after do
-      AppConfig[:default_country_id] = @default_country_id
-    end
-    it "sets up a new record with Gaku::Config[:default_country_id]" do
-      Gaku::Address.default.country.should == Gaku::Country.find(AppConfig[:default_country_id])
-    end
-
-    # Regression test for #1142
-    it "uses the first available country if :default_country_id is set to an invalid value" do
-      AppConfig[:default_country_id] = "0"
-      Gaku::Address.default.country.should == Gaku::Country.first
-    end
-  end
-
+  
   context '#state_text' do
     context 'state is blank' do
       let(:address) { build(:address, state: nil, state_name: 'virginia') }

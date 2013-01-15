@@ -3,9 +3,7 @@ module Gaku
     belongs_to :country
     belongs_to :state
     belongs_to :campus
-
-
-
+    
     belongs_to :addressable, polymorphic: true
 
     # has_paper_trail :on => [:update, :destroy],
@@ -50,34 +48,11 @@ module Gaku
     #   end
     # end
 
-    def self.default
-      country = Country.find(Config[:default_country_numcode]) rescue Country.first
-      new({:country => country}, :without_protection => true)
-    end
 
     def state_text
       state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
     end
 
-    def same_as?(other)
-      return false if other.nil?
-      attributes.except('id', 'updated_at', 'created_at') == other.attributes.except('id', 'updated_at', 'created_at')
-    end
-
-    alias same_as same_as?
-
-    def clone
-      self.class.new(self.attributes.except('id', 'updated_at', 'created_at'))
-    end
-
-    def ==(other_address)
-      self_attrs = self.attributes
-      other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
-
-      [self_attrs, other_attrs].each { |attrs| attrs.except!('id', 'created_at', 'updated_at') }
-
-      self_attrs == other_attrs
-    end
 
     def empty?
       attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
