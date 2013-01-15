@@ -7,13 +7,11 @@ module Gaku
 
     attr_accessible :name, :is_active, :immutable
 
-    validates_presence_of :name
-
+    validates :name, presence: true
 
     def to_s
-      "#{name}"
+      name
     end
-
 
   end
 end
