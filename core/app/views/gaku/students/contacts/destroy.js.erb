@@ -1,8 +1,6 @@
-showNotice("<%= render_flash %>");
-$('.student-contacts-count').html("<%= print_count(@count-1, t_contact_list) %>");
-
-<%- unless @student.contacts.blank? %>
-	$('#student-contacts-index').find('#contact-<%= @student.contacts.first.id %> td.primary-button a').addClass('btn-primary');
-	console.log($('#contact-<%= @student.contacts.first.id %> td.primary-button a'));
+<%- if @student.contacts.any? & @contact.is_primary? %>
+  $('#contact-<%= @student.contacts.first.id %> td.primary-contact a').addClass('btn-primary');
 <% end %>
 
+$('.student-contacts-count').html("<%= print_count(@count-1, t_contact_list) %>");
+showNotice("<%= render_flash %>");
