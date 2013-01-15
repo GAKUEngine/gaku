@@ -134,7 +134,36 @@ describe Gaku::Admin::AdmissionsController do
     end
     
   end
-  xit 'changes student state'
+  context 'changes student state' do
+    before do
+      gaku_js_post :change_student_state, state_id: 1
+    end
+    context 'when new state is auto progressable' do
+      it 'creates new admission record' do
+      end
+    end
+    context 'when new state is auto admittable' do
+      it 'admits the student' do
+      end
+    end
+    it "assigns variables" do
+      assigns(:state_id).should_not be_nil
+      assigns(:student).should_not be_nil
+      assigns(:admission_record).should_not be_nil
+    end
+    it 'changes admission record' do
+      expect do
+      end.to change(:admission_record.admission_phase_state_id)
+    end
+    it 'is successful' do
+      response.should be_success
+    end
+
+    it "renders the :change_student_state view" do
+      response.should render_template :change_student_state
+    end
+      
+  end
 
   xit 'admits student'
 
