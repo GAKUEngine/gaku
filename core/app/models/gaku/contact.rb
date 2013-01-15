@@ -13,6 +13,7 @@ module Gaku
     validates_presence_of :data,:contact_type_id
 
     before_save :ensure_first_primary, :on => :create
+    before_save :remove_other_primary
 
     def join_model_name
       'Gaku::Student' if self.student_id
@@ -28,6 +29,10 @@ module Gaku
     end
 
     private
+
+    def remove_other_primary
+      self.contactable.contacts.update_all(:is_primary => false) if self.is_primary?
+    end
 
     def ensure_first_primary
       self.is_primary = true if self.contactable.contacts.blank?
