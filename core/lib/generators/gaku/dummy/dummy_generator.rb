@@ -23,7 +23,7 @@ module Gaku
 
     def generate_test_dummy
       opts = (options || {}).slice(*PASSTHROUGH_OPTIONS)
-      opts[:database] = 'sqlite3' if opts[:database].blank?
+      opts[:database] = 'mysql' if opts[:database].blank?
       opts[:force] = true
       opts[:skip_bundle] = true
       opts[:old_style_hash] = true

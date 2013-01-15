@@ -16,7 +16,7 @@ end
 
 desc "Generates a dummy app for testing for every GAKU engine"
 task :test_app do
-  %w(core).each do |engine|
+  %w(core admissions).each do |engine|
     ENV['LIB_NAME'] = File.join('gaku', engine)
     ENV['DUMMY_PATH'] = File.expand_path("../#{engine}/spec/dummy", __FILE__)
     Rake::Task['common:test_app'].execute

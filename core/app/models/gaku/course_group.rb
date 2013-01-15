@@ -1,12 +1,14 @@
 module Gaku
 	class CourseGroup < ActiveRecord::Base
-	  attr_accessible :name
+
+    include Trashable
 
 	  has_many :course_group_enrollments
 	  has_many :courses, :through => :course_group_enrollments
 
+    attr_accessible :name
+
 	  validates_presence_of :name
 
-	  default_scope :conditions => { :is_deleted => false }
 	end
 end
