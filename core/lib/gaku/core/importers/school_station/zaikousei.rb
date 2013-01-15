@@ -124,9 +124,11 @@ module Gaku
 
             #sheet is shifted so the top line is taken
             #idx = check_index(sheet.first, idx)
-            sheet.each 1 do |row|
-              Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(row, idx)
-            end
+            
+            #sheet.each 1 do |row|
+            #  Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(row, idx)
+            #end
+            Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(sheet, idx)
           end
         end
       end
