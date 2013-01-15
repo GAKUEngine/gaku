@@ -11,6 +11,8 @@ module Gaku
             return nil
           end
 
+          foreign_id_number = row[idx["foreign_id_number"]].to_i.to_s
+
           name_parts = row[idx["name"]].to_s().sub("　", " ").split(" ")
           surname = name_parts.first
           name = name_parts.last
@@ -40,11 +42,10 @@ module Gaku
                           :name => name,
                           :surname_reading => surname_reading,
                           :name_reading => name_reading,
-                          :student_foreign_id_number => row[idx[:foreign_id_number].to_i],
+                          :student_foreign_id_number => foreign_id_number,
                           :birth_date => birth_date,
-                          :gender => gender)
-
-          student.update_attribute(:enrollment_status_id, 2)
+                          :gender => gender,
+                          :enrollment_status_id => 2)
 
           return student
         end
@@ -138,13 +139,13 @@ module Gaku
           end
         end
 
-        REDIS_POOL = ConnectionPool.new(:size => 10, :timeout => 3) { Redis.new }
         def perform(sheet, idx)
-          sheet.each do |row|
-            REDIS_POOL.with_connection do |redis|
-              redis.lsize(:zaiou)
-              process_row(row, idx)
-            end
+          #pool = ConnectionPool.new(:size => 10, :timeout => 3) { Redis.new }
+          sheet.drop(1).each do |row|
+            #pool.with_connection do |redis|
+              #redis.lsize(:zaiou)
+            process_row(row, idx)
+            #end
           end
         end
 
@@ -162,9 +163,9 @@ module Gaku
               return
             end
 
-            add_address_to_student(row, idx, student)
-            add_phone_to_student(row, idx, student)
-            add_guardian_to_student(row, idx, student)
+            #add_address_to_student(row, idx, student)
+            #add_phone_to_student(row, idx, student)
+            #add_guardian_to_student(row, idx, student)
           end
         end
       end
