@@ -2,7 +2,6 @@ module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-    belongs_to :campus
     
     belongs_to :addressable, polymorphic: true
 

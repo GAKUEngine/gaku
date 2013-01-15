@@ -17,7 +17,6 @@ describe Gaku::Address do
 
     it { should belong_to(:country) }
     it { should belong_to(:state) }
-    it { should belong_to(:campus) }
 
     it { should belong_to(:addressable) }
 
@@ -44,7 +43,7 @@ describe Gaku::Address do
     end
   end
 
-  
+
   context '#state_text' do
     context 'state is blank' do
       let(:address) { build(:address, state: nil, state_name: 'virginia') }
