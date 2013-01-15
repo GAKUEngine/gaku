@@ -28,7 +28,7 @@ module Gaku
 
     def make_primary
       self.addressable.addresses.update_all(:is_primary => false)
-      self.update_attribute(:is_primary => true)
+      self.update_attribute(:is_primary, true)
     end
 
 
