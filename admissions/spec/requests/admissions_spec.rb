@@ -109,7 +109,7 @@ describe 'Admin Admissions' do
               fill_in 'admission_student_attributes_name', with: 'Marta'
               fill_in 'admission_student_attributes_surname', with: 'Kostova'
               click_on 'Create Student'
-              wait_until_visible('#new-admission-link') #first time throws error
+              wait_until_visible('#new-admin-admission-link')
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 1
 
@@ -126,7 +126,7 @@ describe 'Admin Admissions' do
           it 'cancels adding' do
             expect do
               click_on 'Cancel'
-              wait_until_visible('#new-admission-link')
+              wait_until_visible('#new-admin-admission-link')
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 0
           end
@@ -165,7 +165,7 @@ describe 'Admin Admissions' do
           it 'cancels adding' do
             expect do
               click_on 'Cancel'
-              wait_until_visible('#new-admission-link')
+              wait_until_visible('#new-admin-admission-link')
               wait_until_invisible('#cancel-class-group-student-link')
             end.to change(Gaku::Admission, :count).by 0
           end
@@ -180,7 +180,7 @@ describe 'Admin Admissions' do
               fill_in 'admission_student_attributes_name', with: 'Marta'
               fill_in 'admission_student_attributes_surname', with: 'Kostova'
               click_on 'Create Student'
-              wait_until_visible('#new-admission-link') #first time throws error
+              wait_until_visible('#new-admin-admission-link') #first time throws error
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 1
             page.should have_content("Exam(1)")
