@@ -19,10 +19,6 @@
     = f.text_field :address1, :label => t(:'address.address1')
   .span3
     = f.text_field :address2, :label => t(:'address.address2')
-  - if params[:action] == 'edit'
-    .row-fluid
-      .span12
-        = f.check_box :past, :label => t(:'address.past')
 
 javascript:
   var state_preset = '#{state_preset}'

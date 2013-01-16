@@ -4,13 +4,18 @@ $('#new-student-guardian-contact').slideToggle();
 $('#new-student-guardian-contact form')[0].reset();
 showNotice("<%= render_flash %>");
 
-<% if @contact.is_primary? %>
-	$('.guardian-contact').each(function() {
-		$(this).find('.make-primary').removeClass('btn-primary');
-	});
-	var currentContact = $("#contact-<%= @contact.id %>");
-	currentContact.find('.make-primary').addClass('btn-primary');
-	$('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
-<% end %>	
-
 $('.student-guardian-contacts-count').html("<%= print_count(@count+1, t_contact_list) %>");
+
+
+<% if @contact.is_primary? %>
+  $('#student-guardian-contacts-index tbody tr').each(function(){
+    $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
+  });
+  $("#contact-<%= @contact.id %>").children('td.primary-contact')
+                                                .find('a')
+                                                .addClass('btn-primary')
+
+
+  $('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
+<% end %>
+

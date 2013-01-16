@@ -1,9 +1,10 @@
 module Gaku
 	class Campus < ActiveRecord::Base
 
-		has_many :contacts
+    has_many :contacts, as: :contactable
 		belongs_to :school
-		has_one :address
+
+    has_one :address, as: :addressable
 
 		attr_accessible :name, :school_id, :address_id, :is_master
 

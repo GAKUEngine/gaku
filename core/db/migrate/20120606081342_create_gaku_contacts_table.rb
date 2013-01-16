@@ -6,12 +6,10 @@ class CreateGakuContactsTable < ActiveRecord::Migration
       t.boolean  :is_primary,   :default => false
       t.boolean  :is_emergency, :default => false
 
+      t.belongs_to :contactable, polymorphic: true
       t.references :contact_type
-      t.references :student
-      t.references :guardian
-      t.references :faculty
-      t.references :campus
-      
+
+
       t.timestamps
     end
   end

@@ -8,31 +8,26 @@ module Gaku
     before_filter :address, :only => [:destroy, :make_primary]
     before_filter :student, :only => [:new, :create, :edit, :update]
     before_filter :guardian
-    before_filter :primary_address, :only => [:update, :destroy]
     before_filter :count, :only => [:create,:destroy]
 
     def create
-      super do |format|
-        if @guardian.addresses << @address
-          primary_address
-          format.js { render }
-        end
-      end
+      @address = @guardian.addresses.create(params[:address])
+      create!
     end
 
     def destroy
       if @address.destroy
-        if @address.id == @primary_address_id
-          @guardian.guardian_addresses.first.make_primary unless @guardian.guardian_addresses.blank?
+        if @address.is_primary?
+          @guardian.addresses.first.try(:make_primary)
         end
+        flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
         respond_with(@address)
       end
     end
 
     def make_primary
-      @guardian_address = GuardianAddress.find_by_guardian_id_and_address_id(@guardian.id,@address.id)
-      @guardian_address.make_primary
-      render :nothing => true
+      @address.make_primary
+      respond_with @address
     end
 
     private
@@ -47,10 +42,6 @@ module Gaku
 
     def guardian
       @guardian = Guardian.find(params[:guardian_id])
-    end
-
-    def primary_address
-      @primary_address = @guardian.guardian_addresses.find_by_is_primary(true)
     end
 
     def count
