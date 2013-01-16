@@ -1,12 +1,10 @@
 module Gaku
   class Contact < ActiveRecord::Base
     belongs_to :contact_type
-
     belongs_to :contactable, polymorphic: true
 
-
-    # has_paper_trail :on => [:update, :destroy],
-                    # :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+    has_paper_trail :on => [:update, :destroy],
+                    :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
 
     attr_accessible :data, :details, :contact_type_id, :is_primary, :is_emergency
 
@@ -16,11 +14,11 @@ module Gaku
     before_save :remove_other_primary
 
     def join_model_name
-      'Gaku::Student' if self.student_id
+      self.contactable_type
     end
 
     def joined_resource_id
-      self.student_id if self.student_id
+      self.contactable_id
     end
 
     def make_primary

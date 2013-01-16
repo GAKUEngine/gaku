@@ -3,9 +3,9 @@ require 'spec_helper'
 describe 'Student Address Versioning' do
 
   before do
-    @student = create(:student)
-    @address = create(:address)
-    @student_address = create(:student_address, :student => @student, :address => @address)
+    @student = create(:student_with_one_address)
+    @student.reload
+    @address = @student.addresses.first
   end
 
   it 'saves update history' do
@@ -16,7 +16,7 @@ describe 'Student Address Versioning' do
 
     version = Version.last
 
-    version.join_model.should eq "Gaku::StudentAddress"
+    version.join_model.should eq "Gaku::Student"
     version.joined_resource_id.should eq @student.id
   end
 
