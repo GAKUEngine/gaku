@@ -1,23 +1,29 @@
+# -*- encoding: utf-8 -*-
 # Array format ['en status', 'ja status', 'is_active?']
 statuses = [
-
-	['Pre-Admission', 		'Japanese Pre-Admission ', 			false ],
-	['Admitted', 					'Japanese Admitted',    				true	],
-	['Enrolled',					'Japanese Enrolled',						true	],
-	['Transfered In',			'Japanese Transfered In',				true	],
-	['Transfered Out',		'Japanese Transfered Out',			false	],
-	['Visiting',					'Japanese Visiting',						true	],
-	['Re-Admitted',				'Japanese Re-Admitted',					true	],
-	['On Exchange',				'Japanese On Exchange',					true	],
-  ['Inactive',					'Japanese Inactive',						false	],
-	['Graduated',					'Japanese Graduated',						false	],
-	['Re-Enrolled', 			'Japanese Re-Enrolled', 				false	],
-	['Suspended', 				'Japanese Suspended', 					false	],
-	['Expelled',					'Japanese Expelled', 						false	],
-	['Dropped Out',				'Japanese Dropped Out', 				false	],
-	['On Leave', 					'Japanese On Leave', 						false	],
-	['Extended Absence', 	'Japanese Extended Absence', 		false	],
-	['Deleted', 					'Japanese Deleted' , 						false	]
+	['Applicant', 		          '志願', 			  false ], #DO NOT CHANGE ORDER
+	['Admitted', 					      '入学',    			true	], #DO NOT CHANGE ORDER
+	['Enrolled',					      '在学',				  true	], #DO NOT CHANGE ORDER
+	['Transfered In',			      '転入',			  	true	],
+	['Transfered Out',		      '転出',			    false	],
+	['Course Transfer In',			'編入',				  true	],
+	['Course Transfer Out',		  '編出',			    false	],
+	['Visiting',					      '留学',				  true	],
+	['Re-Admitted',				      '再入学',				true	],
+	['On For-Credit Exchange',	'単位認定留学',	true	],
+	['On Non-Credit Exchange',	'休学留学',			true	],
+	['Repeat',                	'留年',			    true	],
+	['Heald Back',	            '原級留置',			true	],
+  ['Inactive',					      '休学',					false	],
+	['Graduated',					      '卒業',					false	],
+	['Re-Enrolled', 			      '復学', 				false	],
+	['Suspended', 				      '退学', 				false	],
+	['Expelled',					      '停学', 				false	],
+	['Dropped Out',				      '自主退学', 		false	],
+	['Terminal Leave',		      '除籍', 				false	],
+	['On Leave', 					      '一時自主退学', false	],
+	['Extended Absence', 	      '長期自主退学', false	],
+	['Deleted', 					      '削除' , 				false	]
 ]
 
 statuses.each do |status|
