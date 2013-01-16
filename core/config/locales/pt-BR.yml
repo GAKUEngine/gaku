@@ -290,6 +290,16 @@ pt-BR:
   enrollment:
     plural: 
     singular: 
+  enrollment_status:
+    active: 
+    add: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
   enrollment_status_type:
     active: 
     add: 
@@ -318,6 +328,7 @@ pt-BR:
     count: 
     description: 
     edit: 
+    exam_score: 
     grading_method: 
     list: 
     name: 
@@ -414,11 +425,17 @@ pt-BR:
       admin: 
       administration: 
       administrator: 
+      changes:
+        changes: 
+        student_addresses: 
+        student_contacts: 
+        students: 
       disposals:
         attachment: 
         course_group: 
         disposals: 
         exam: 
+        student_address: 
       preset:
         grading:
           grading_method: 
@@ -437,6 +454,7 @@ pt-BR:
           state: 
       school_details: 
       schools: 
+      specialties: 
       system:
         backup: 
         system_tools: 
@@ -550,6 +568,15 @@ pt-BR:
     starting: 
     uniqueness: 
   show: 
+  specialty:
+    add: 
+    description: 
+    edit: 
+    list: 
+    major_only: 
+    name: 
+    save: 
+    singular: 
   student:
     add: 
     birth_and: 

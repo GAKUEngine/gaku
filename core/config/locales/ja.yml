@@ -14,7 +14,7 @@ ja:
     past: "過去の住所として登録しますか?"
     plural: "住所"
     prefecture: "県・州・地方"
-    primary: "主たる住所"
+    primary: "主要住所"
     save: "住所を保存"
     search: "住所検索"
     singular: "住所"
@@ -90,17 +90,17 @@ ja:
     singular: "キャンパス"
   cancel: "キャンセル"
   changes:
-    change: 
-    changed_at: 
-    event: 
-    from: 
+    change: "変更履歴"
+    changed_at: "変更時刻"
+    event: "イベント"
+    from: "フォーム"
     student:
-      list: 
+      list: "生徒情報変更履歴"
     student_address:
-      list: 
+      list: "生徒住所変更履歴"
     student_contact:
-      list: 
-    to: 
+      list: "生徒連絡先変更履歴"
+    to: "変更後"
   class: "クラス"
   class_group:
     add: "クラスを追加"
@@ -119,7 +119,7 @@ ja:
     show: "クラス照会"
     singular: "クラス"
   class_group_course_enrollment:
-    save: 
+    save: "クラスに授業を登録"
   class_group_enrollment:
     count: "在籍数"
     create: "在籍クラスを作成"
@@ -261,7 +261,7 @@ ja:
       updated_not_active: "パスワードが正しく変更されました。"
     registrations:
       destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
-      inactive_signed_up: 
+      inactive_signed_up: "サインアップに成功しましたが、%{reason}の為にサインイン出来ません。"
       reasons:
         inactive: "非アクティブ"
         locked: "ロック"
@@ -283,13 +283,23 @@ ja:
       send_instructions: "アカウントの凍結解除方法を数分以内にメールでご連絡します。"
       send_paranoid_instructions: "アカウントが見つかった場合、アカウントの凍結解除方法を数分以内にメールでご連絡します。"
       unlocked: "アカウントを凍結解除しました。ログインしています。"
-    username: 
+    username: "ユーザー名"
   edit: "編集"
   email: "メールアドレス"
   enroll_to_class: "クラスに登録"
   enrollment:
     plural: "在籍"
     singular: "在籍"
+  enrollment_status:
+    active: "アクティブ"
+    add: "在学状況を追加"
+    edit: "在学状況を編集"
+    list: "在学状況一覧"
+    name: "名前"
+    new: "新規在学状況"
+    plural: "在学状況"
+    save: "在学状況を保存"
+    singular: "在学状況"
   enrollment_status_type:
     active: "在籍中"
     add: "在籍状態を追加"
@@ -309,7 +319,7 @@ ja:
       not_saved:
         one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
         other: "%{count} つのエラーにより %{resource} は保存されませんでした:"
-    not_uploaded: 
+    not_uploaded: "アップロード中にエラーが発生しました。%{resource}"
   exam:
     add: "試験を追加"
     add_existing: "既存の試験を追加"
@@ -320,6 +330,7 @@ ja:
     count: "試験数"
     description: "試験の説明"
     edit: "試験を編集"
+    exam_score: "試験点数"
     grading_method: "採点方法"
     list: "試験一覧"
     name: "試験名"
@@ -347,11 +358,11 @@ ja:
     master: "試験要素マスター"
     max_score: "最高点数"
     name: "試験要素名"
-    plural: 
+    plural: "試験要素"
     problem_count: "問題数"
     save: "試験要素を保存"
     show: "試験要素照会"
-    singular: 
+    singular: "試験要素"
     use_weighting: "加重率を使用"
     weight: "加重率"
   flash:
@@ -404,7 +415,7 @@ ja:
       cancel: "キャンセル"
   hide: "非表示"
   history: "履歴"
-  id: 
+  id: ID
   import_format: "インポート形式"
   language: "言語"
   languages:
@@ -416,11 +427,17 @@ ja:
       admin: "管理者"
       administration: "管理"
       administrator: "管理者"
+      changes:
+        changes: "変更・削除履歴"
+        student_addresses: "生徒住所"
+        student_contacts: "生徒連絡先"
+        students: "生徒"
       disposals:
         attachment: "添付ファイルを処分"
         course_group: "授業グループを処分"
         disposals: "処分"
         exam: "試験を処分する"
+        student_address: "生徒住所削除一覧"
       preset:
         grading:
           grading_method: "採点方法"
@@ -439,11 +456,12 @@ ja:
           state: "都道府県"
       school_details: "学校詳細"
       schools: "学校"
+      specialties: "専攻"
       system:
         backup: "バックアップ"
         system_tools: "システムツール"
       types:
-        attendance_types: 
+        attendance_types: "欠席種別"
         commute_methods: "通学手段"
         contact: "連絡先種別"
         enrollment_status: "在籍状態"
@@ -489,7 +507,7 @@ ja:
     uploaded: "%{resource}は正常にアップロードされました"
   num_enrolled: "在籍人数"
   options: "オプション"
-  order: 
+  order: "順序"
   panel: "パネル"
   period: "期間"
   phone: "電話番号"
@@ -500,16 +518,16 @@ ja:
     upload: "写真をアップロード"
   preset:
     grading:
-      grading_method: 
-      grading_scheme: 
-    plural: 
-    save: 
-    singular: 
+      grading_method: "採点処理方式"
+      grading_scheme: "評価基準"
+    plural: "プリセット"
+    save: "プリセットを保存"
+    singular: "プリセット"
     student:
-      city: 
-      country: 
-      gender: 
-      state: 
+      city: "市区町村"
+      country: "国"
+      gender: "性別"
+      state: "都道府県"
   profile: "プロフィール"
   profiles:
     new: "新規プロフィール登録"
@@ -552,6 +570,15 @@ ja:
     starting: "開始"
     uniqueness: "既に追加された学期です"
   show: "照会"
+  specialty:
+    add: "専攻を追加"
+    description: "説明文"
+    edit: "専攻を編集"
+    list: "専攻一覧"
+    major_only: "主専攻に限定"
+    name: "専攻名"
+    save: "専攻を保存"
+    singular: "専攻"
   student:
     add: "生徒を追加"
     birth_and: "と"
@@ -571,7 +598,7 @@ ja:
     registration:
       csv: CSVで生徒を登録
       sheet: "登録用のCSVをダウンロード"
-    save: 
+    save: "生徒を保存"
     show: "生徒照会"
     singular: "生徒"
   submit: "登録する"
