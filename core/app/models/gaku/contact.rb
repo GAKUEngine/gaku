@@ -29,11 +29,7 @@ module Gaku
     end
 
     def primary?
-      if self.is_primary == true
-        true
-      else
-        false
-      end
+      self.is_primary
     end
 
     private

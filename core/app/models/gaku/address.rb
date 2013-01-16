@@ -2,17 +2,16 @@ module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-    
+
     belongs_to :addressable, polymorphic: true
 
     # has_paper_trail :on => [:update, :destroy],
                     # :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
 
     default_scope :conditions => { :is_deleted => false }
-
-
+    
     validates_presence_of :address1, :city, :country
-    #validates_associated :country, :state, :campus
+
 
     accepts_nested_attributes_for :country
 
@@ -29,11 +28,7 @@ module Gaku
     end
 
     def primary?
-      if self.is_primary == true
-        true
-      else
-        false
-      end
+      self.is_primary
     end
 
 
