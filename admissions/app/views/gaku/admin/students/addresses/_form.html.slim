@@ -1,0 +1,3 @@
+= remote_form_for [@student, @address] do |f|
+  = render 'gaku/shared/form_fields/address_form_fields',  :f => f
+  = buttons_for @address, :nested_id => 'student-address'

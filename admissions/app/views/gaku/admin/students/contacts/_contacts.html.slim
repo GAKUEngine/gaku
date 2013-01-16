@@ -1,0 +1,23 @@
+#student-contacts
+  = index_header do
+    #new-student-contact.hide
+    .pull-left
+      = count_div 'student-contacts-count' do
+        = print_count @student.contacts.count, t_contact_list
+    .pull-right
+      = ajax_link_to_new t(:'contact.add'), [:new, @student, :contact], :id => 'new-student-contact-link'
+
+  = hr
+
+  = index_body do
+    = table_for 'student-contacts-index' do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'contact_type.singular')
+          = th t(:'contact.data')
+          = th t(:'contact.details')
+          = th t(:'contact.emergency')
+          = th_actions 2
+      tbody
+        = render :partial => 'gaku/students/contacts/contact', :collection => @student.contacts, :as => 'contact'

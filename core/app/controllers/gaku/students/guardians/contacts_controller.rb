@@ -2,7 +2,8 @@ module Gaku
   class Students::Guardians::ContactsController < GakuController
 
   	inherit_resources
-    actions :new, :update, :edit, :destroy
+    belongs_to :guardian, :parent_class => Gaku::Guardian
+
     respond_to :js, :html
 
   	before_filter :guardian
@@ -10,39 +11,26 @@ module Gaku
     before_filter :contact, :except => [:new, :create, :create_modal]
     before_filter :count, :only => [:create, :destroy]
 
-    def create
-      @contact = @guardian.contacts.build(params[:contact])
-      if @contact.save
-        @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
-      end
-      respond_with(@contact)
-    end
-
     def create_modal
       @contact = @guardian.contacts.build(params[:contact])
       if @contact.save
-        @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
+        flash.now[:notice] = t(:'notice.created', :resource => t(:'contact.singular'))
         respond_with(@contact)
       end
     end
 
-    def update
-      @contacts = Contact.where(:guardian_id => params[:guardian_id])
-      @contact.make_primary_guardian if params[:contact][:is_primary] == "1"
-      update!
-    end
-
-     def destroy
-      super do |format|
+    def destroy
+      if @contact.destroy
         if @contact.is_primary?
-          @guardian.contacts.first.make_primary_guardian if @guardian.contacts.any?
+          @guardian.contacts.first.try(:make_primary)
         end
-        format.js { render }
       end
+      flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'contact.singular'))
+      destroy!
     end
 
   	def make_primary
-      @contact.make_primary_guardian
+      @contact.make_primary
       respond_with(@contact)
     end
 

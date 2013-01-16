@@ -1,0 +1,6 @@
+<%-if  @guardian.contacts.any? %>
+	$('#student-guardian-contacts-index').find('#contact-<%= @guardian.contacts.first.id %> .make-primary').addClass('btn-primary');
+<% end %>
+
+showNotice("<%= render_flash %>");
+$('.student-guardian-contacts-count').html("<%= print_count(@count-1, t_contact_list) %>");

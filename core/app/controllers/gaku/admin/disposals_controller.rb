@@ -3,6 +3,11 @@ module Gaku
 		class DisposalsController < Admin::BaseController
 			helper_method :sort_column, :sort_direction
 
+			def students
+				@students = Student.where(:is_deleted => true)
+			end
+
+
 			def exams
 				@exams = Exam.without_syllabuses
 			end
@@ -16,7 +21,7 @@ module Gaku
 			end
 
 			def student_addresses
-				@student_addresses = StudentAddress.where(:is_deleted => true)
+				@addresses = Address.where(:is_deleted => true, :addressable_type => Gaku::Student)
 			end
 
 			private

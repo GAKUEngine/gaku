@@ -1,8 +1,6 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Notable, Trashable
-
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
 
@@ -18,7 +16,10 @@ module Gaku
     has_many :exam_portion_scores
     has_many :assignment_scores
 
-    has_many :contacts
+    has_many :contacts, as: :contactable
+    has_many :notes, as: :notable
+    has_many :addresses, as: :addressable
+
     has_many :attendances
     has_many :enrollment_statuses
 
@@ -46,8 +47,10 @@ module Gaku
                     :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
+                    :notes, :notes_attributes,
                     :addresses, :addresses_attributes,
                     :picture,
+                    :is_deleted,
                     :student_id_number, :student_foreign_id_number,
                     :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
@@ -56,11 +59,14 @@ module Gaku
     validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
+    accepts_nested_attributes_for :notes,     :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
     accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
-    
+    default_scope where(:is_deleted => false)
+
+    # methods for json student chooser returning
+
     def to_s
       "#{self.surname} #{self.name}"
     end

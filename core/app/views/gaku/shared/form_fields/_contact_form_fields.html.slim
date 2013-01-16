@@ -7,9 +7,8 @@
 .row-fluid
   .span12
 	  = f.text_field :details, :label => t(:'contact.details')
-    
 .row-fluid
   .span6
-	  = f.check_box :is_primary, :label => t(:'contact.primary')
+    = f.check_box :is_primary, :label => t(:'contact.primary')
   .span6
-	  = f.check_box :is_emergency, :label => t(:'contact.emergency')
+    = f.check_box :is_emergency, :label => t(:'contact.emergency')

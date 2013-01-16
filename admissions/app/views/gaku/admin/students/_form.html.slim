@@ -1,0 +1,3 @@
+= remote_form_for [:admin, @student] do |f|
+  = render :partial => 'form_fields', :locals => { :f => f }
+  = buttons_for @student
