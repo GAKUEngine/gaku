@@ -5,7 +5,7 @@ module Gaku
 
 		translates :name
 
-    attr_accessible :name, :is_active, :immutable
+    attr_accessible :code, :name, :is_active, :immutable
 
     validates :name, presence: true
 
