@@ -2,3 +2,5 @@ span#student-enrollment-status style='margin-right:3px'
   = @student.enrollment_status
 = link_to edit_button, [:edit_enrollment_status, @student], :class=> 'mr-xs btn btn-mini btn-warning' ,:id => 'edit-student-enrollment-status-link', :remote => true
 
+= render 'gaku/students/enrollment_statuses/modal'
+

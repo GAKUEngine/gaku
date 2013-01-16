@@ -10,6 +10,5 @@ describe Gaku::Campus do
 
 		it { should allow_mass_assignment_of :name }
 		it { should allow_mass_assignment_of :school_id }
-		it { should allow_mass_assignment_of :address_id }
 	end
 end

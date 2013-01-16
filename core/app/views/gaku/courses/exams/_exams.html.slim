@@ -11,7 +11,7 @@
 			    	tr
 			    		td = exam.name
 			    		td
-			      		= link_to ('<i class="icon-white icon-pencil"></i> ' + t('grade.grading')).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span3 btn btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
+			      		= link_to ('<i class="icon-white icon-pencil"></i> ' + t('grade.grading')).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span12 btn btn-mini btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
 .row-fluid
   .span12
     hr

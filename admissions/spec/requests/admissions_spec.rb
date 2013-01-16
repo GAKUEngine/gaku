@@ -27,7 +27,7 @@ describe 'Admin Admissions' do
         admission_period
         visit gaku.admin_admissions_path
 
-        @active_tab = page.find('.nav-tabs .active')
+        @active_tab = page.find('.nav-tabs .active') #first time throws error
         @nav_tabs = page.find('.nav-tabs')
         @active_tab_content = page.find('.tab-content .active')
         @first_method = admission_period.admission_methods.first
@@ -66,7 +66,9 @@ describe 'Admin Admissions' do
       context 'when change method' do
         before do
           select "#{admission_period.name}", from: 'admission_period'
+          wait_for_ajax
           within('#admission-method-selection') { select "#{@last_method.name}", from: 'admission_method' }
+          wait_for_ajax
         end
 
         it 'shows selected method\'s phases' do
@@ -107,7 +109,7 @@ describe 'Admin Admissions' do
               fill_in 'admission_student_attributes_name', with: 'Marta'
               fill_in 'admission_student_attributes_surname', with: 'Kostova'
               click_on 'Create Student'
-              wait_until_visible('#new-admission-link')
+              wait_until_visible('#new-admission-link') #first time throws error
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 1
 
@@ -142,15 +144,18 @@ describe 'Admin Admissions' do
           it 'adds existing' do
             expect do
               find(:css, "input#student-#{student.id}").set(true)
+              wait_for_ajax
               wait_until_visible '#students-checked-div'
 
               within('#students-checked-div') do
                 page.should have_content 'Chosen students(1)'
                 click_link 'Show'
+                wait_for_ajax
                 wait_until_visible '#chosen-table'
                 page.should have_content "#{student.name}"
                 click_on 'Create'
-                wait_until_invisible '#chosen-table'
+                wait_for_ajax
+                wait_until { page.should_not have_css('#student-modal') }
               end
             end.to change(Gaku::Admission, :count).by 1
             within ('#state1' ) do
@@ -175,7 +180,7 @@ describe 'Admin Admissions' do
               fill_in 'admission_student_attributes_name', with: 'Marta'
               fill_in 'admission_student_attributes_surname', with: 'Kostova'
               click_on 'Create Student'
-              wait_until_visible('#new-admission-link')
+              wait_until_visible('#new-admission-link') #first time throws error
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 1
             page.should have_content("Exam(1)")
@@ -214,7 +219,7 @@ describe 'Admin Admissions' do
             click_on ("Interview(1)")
             page.should have_content 'Marta'
             #Interview | Waiting for Interview
-            within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") {
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") { #first time throws error
               size_of("#students-index tbody tr").should eq 1
               page.should_not have_content 'Admitted on'
               select "Accepted", from: 'state_id'
@@ -285,19 +290,19 @@ describe 'Admin Admissions' do
                 select 'Illness', from: 'preset-reasons'
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "disabled"
+                find('.score-cell')['disabled'].should == "true" #for phantom it should == "disabled"
               end
               it 'adds attendance custom reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "disabled"
+                find('.score-cell')['disabled'].should == "true"
               end
               it 'removes attendance reason' do
                 fill_in 'custom-reason', with: 'Illness' 
                 click_on 'Submit'
                 page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "disabled"
+                find('.score-cell')['disabled'].should == "true"
                 #TODO remove duplication
                 click '.btn'
                 page.find('.delete-attendance').click

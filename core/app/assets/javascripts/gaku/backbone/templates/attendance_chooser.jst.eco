@@ -1,16 +1,17 @@
-<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit'>
-	<select name='preset-reasons'>
-		<% for type in @attendanceTypes : %>
-			<% if @attendance && @attendance.attendance_type_id == type.id : %>
+<form action='<%= @attendanceUrl %>' id='<%= @examPortionScore %>-submit' class='mt-xs'>
+
+  <select name='preset-reasons' class="span12">
+    <% for type in @attendanceTypes : %>
+      <% if @attendance && @attendance.attendance_type_id == type.id : %>
         <option value='<%= type.id %>' selected='selected' ><%= type.name %></option>
       <% else : %>
         <option value='<%= type.id %>'><%= type.name %></option>
-		  <% end %>
+      <% end %>
     <% end %>
-	</select>
+  </select>
 
-	<input name='custom-reason' value="<%= @attendance.reason if @attendance %>" />
-	<button class='btn btn-primary'>Submit</button>
+  <input name='custom-reason' class="span12" value="<%= @attendance.reason if @attendance %>" />
+  <button class='btn btn-primary mt-s'>Submit</button>
   <% if @attendance : %>
     <a class='delete-attendance'> Delete </a>
   <% end %>

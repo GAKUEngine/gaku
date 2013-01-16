@@ -4,12 +4,10 @@ describe 'Student Guardian Addresses' do
 
   stub_authorization!
 
-  let(:student) { create(:student) }
+  let(:student)  { create(:student) }
   let(:guardian) { create(:guardian) }
-  let(:country) { create(:country, :name => "Japan") }
+  let(:country)  { create(:country, :name => "Japan") }
   let(:bulgaria) { create(:country, :name => "Bulgaria") }
-  let(:address1) { create(:address, :address1 => 'Toyota str.', :country => country, :city => 'Nagoya') }
-  let(:address2) { create(:address, :address1 => 'Maria Luiza bul.', :country => bulgaria, :city => 'Varna') }
 
   tab_link = "#student-guardians-tab-link"
 
@@ -37,7 +35,7 @@ describe 'Student Guardian Addresses' do
         fill_in 'address_city',      :with => 'Nagoya'
         click submit
         wait_until_invisible form
-      end.to change(student.guardians.first.addresses, :count).by 1
+      end.to change(guardian.addresses, :count).by 1
 
       page.should have_content 'Japan'
       page.should have_content 'Nagoya'
@@ -53,79 +51,94 @@ describe 'Student Guardian Addresses' do
   end
 
   context 'existing' do
-    before do
-      bulgaria
-      student.guardians << guardian
-      student.guardians.first.addresses <<  address1
-      visit gaku.student_guardian_path(student, student.guardians.first)
-    end
 
-    context 'edit', :js => true do
+    context 'one address' do
       before do
-        within(table) { click edit_link }
-        wait_until_visible modal
+        bulgaria
+        @guardian = create(:guardian_with_one_address)
+        @guardian.reload
+        student.guardians << @guardian
+        visit gaku.student_guardian_path(student, @guardian)
       end
 
-      it 'edits' do
-        select 'Bulgaria',          :from => 'country_dropdown'
-        fill_in 'address_address1', :with => 'Maria Luiza bul.'
-        fill_in 'address_city',     :with => 'Varna'
+      context 'edit', :js => true do
+        before do
+          within(table) { click edit_link }
+          wait_until_visible modal
+        end
 
-        click submit
-        wait_until_invisible modal
-        wait_until { page.should have_content 'Bulgaria' }
-        within(table) { page.should_not have_content 'Japan' }
-        flash_updated?
+        it 'edits' do
+          select 'Bulgaria',          :from => 'country_dropdown'
+          fill_in 'address_address1', :with => 'Maria Luiza bul.'
+          fill_in 'address_city',     :with => 'Varna'
+
+          click submit
+          wait_until_invisible modal
+          wait_until { page.should have_content 'Bulgaria' }
+          within(table) { page.should_not have_content 'Japan' }
+          flash_updated?
+        end
+
+        it 'cancels edit', :cancel => true do
+          ensure_cancel_modal_is_working
+        end
       end
 
-      it 'cancels edit', :cancel => true do
-        ensure_cancel_modal_is_working
-      end
-  end
+      it 'deletes', :js => true do
+        address_field = @guardian.addresses.first.address1
 
-    it 'deletes', :js => true do
-      page.should have_content 'Japan'
-      within(count_div) { page.should have_content 'Addresses list(1)' }
-      expect do
-        ensure_delete_is_working
-      end.to change(student.guardians.first.addresses, :count).by -1
-      within(count_div) { page.should_not have_content 'Addresses list(1)' }
-      page.find(table).should_not have_content 'Japan'
-      flash_destroyed?
+        page.should have_content address_field
+        within(count_div) { page.should have_content 'Addresses list(1)' }
+
+        expect do
+          ensure_delete_is_working
+        end.to change(@guardian.addresses, :count).by -1
+
+        within(count_div) { page.should_not have_content 'Addresses list(1)' }
+        page.find(table).should_not have_content address_field
+        flash_destroyed?
+      end
     end
 
-    it "delete primary", :js => true do
-      student.guardians.first.addresses <<  address2
-      address1_tr = "#address-#{address1.id}"
-      address2_tr = "#address-#{address2.id}"
-      visit gaku.student_guardian_path(student, student.guardians.first)
+    context 'two addresses' do
+      before do
+        bulgaria
+        @guardian = create(:guardian_with_two_addresses)
+        @guardian.reload
+        student.guardians << @guardian
+        visit gaku.student_guardian_path(student, @guardian)
+      end
 
-      click "#{address2_tr} a"
-      accept_alert
+      it "delete primary", :js => true do
+        address1_tr = "#address-#{@guardian.addresses.first.id}"
+        address2_tr = "#address-#{@guardian.addresses.first.id}"
+        visit gaku.student_guardian_path(student, @guardian)
 
-      page.find("#{address2_tr} .primary_address a.btn-primary")
+        click "#{address2_tr} a"
+        accept_alert
 
-      click "#{address2_tr} .delete-link"
-      accept_alert
+        page.find("#{address2_tr} .primary_address a.btn-primary")
 
-      page.find("#{address1_tr} .primary_address a.btn-primary")
+        click "#{address2_tr} .delete-link"
+        accept_alert
 
-      student.guardians.first.guardian_addresses.first.is_primary? == true
-    end
+        page.find("#{address1_tr} .primary_address a.btn-primary")
 
-    it 'sets primary', :js => true do
-      student.guardians.first.addresses <<  address2
+        @guardian.addresses.first.primary? == true
+      end
 
-      visit gaku.student_guardian_path(student, student.guardians.first)
+      it 'sets primary', :js => true do
+        visit gaku.student_guardian_path(student, @guardian)
 
-      student.guardians.first.guardian_addresses.first.is_primary? == true
-      student.guardians.first.guardian_addresses.second.is_primary? == false
+        @guardian.addresses.first.primary? == true
+        @guardian.addresses.second.primary? == false
 
-      within('table#student-guardian-addresses-index tr#address-2') { click_link 'set_primary_link' }
-      accept_alert
+        within('table#student-guardian-addresses-index tr#address-2') { click_link 'set_primary_link' }
+        accept_alert
 
-      student.guardians.first.guardian_addresses.first.is_primary? == false
-      student.guardians.first.guardian_addresses.second.is_primary? == true
+        @guardian.addresses.first.primary? == false
+        @guardian.addresses.second.primary? == true
+      end
     end
   end
 
