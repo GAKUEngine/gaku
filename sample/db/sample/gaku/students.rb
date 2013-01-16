@@ -5,27 +5,27 @@ require 'ffaker'
 student = Gaku::Student.where(:name => 'John', :surname => 'Doe').first_or_create!
 
 country = Gaku::Country.find_by_name('日本')
-address = student.addresses.create(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id)
+address = student.addresses.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
 
 email = Gaku::ContactType.find_by_name('Email')
 home_phone = Gaku::ContactType.find_by_name('Home Phone')
 mobile_phone = Gaku::ContactType.find_by_name('Mobile Phone')
 
-student_email = student.contacts.create!(:data => 'john@example.com', :contact_type_id => email.id)
-student_home_phone = student.contacts.create!(:data => Faker::PhoneNumber.phone_number, :contact_type_id => home_phone.id)
-student_mobile_phone = student.contacts.create!(:data => Faker::PhoneNumber.phone_number, :contact_type_id => mobile_phone.id, :is_primary => true)
+student_email = student.contacts.where(:data => 'john@example.com', :contact_type_id => email.id).first_or_create!
+student_home_phone = student.contacts.where(:data => Faker::PhoneNumber.phone_number, :contact_type_id => home_phone.id).first_or_create!
+student_mobile_phone = student.contacts.where(:data => Faker::PhoneNumber.phone_number, :contact_type_id => mobile_phone.id, :is_primary => true).first_or_create!
 
 note = Gaku::Note.where(:title => 'Excellent', :content => 'Excellent student').first_or_create!
 student.notes << note
 
 #guardian
-guardian = Gaku::Guardian.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name)
+guardian = Gaku::Guardian.where(:name => Faker::Name.first_name, :surname => Faker::Name.last_name).first_or_create!
 
-guardian_email = guardian.contacts.create!(:data => "#{guardian.name}@example.com", :contact_type_id => email.id)
-guardian_home_phone =  guardian.contacts.create!(:data => Faker::PhoneNumber.phone_number, :contact_type_id => home_phone.id)
-guardian_mobile_phone =  guardian.contacts.create!(:data => Faker::PhoneNumber.phone_number, :contact_type_id => mobile_phone.id, :is_primary => true)
+guardian_email = guardian.contacts.where(:data => "#{guardian.name}@example.com", :contact_type_id => email.id).first_or_create!
+guardian_home_phone =  guardian.contacts.where(:data => Faker::PhoneNumber.phone_number, :contact_type_id => home_phone.id).first_or_create!
+guardian_mobile_phone =  guardian.contacts.where(:data => Faker::PhoneNumber.phone_number, :contact_type_id => mobile_phone.id, :is_primary => true).first_or_create!
 
-guardian_address = guardian.addresses.create!(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id)
+guardian_address = guardian.addresses.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
 
 student.guardians << guardian
 
