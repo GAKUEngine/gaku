@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Notable, Trashable
+    include Contactable, Notable, Trashable
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
@@ -17,8 +17,7 @@ module Gaku
 
     has_many :exam_portion_scores
     has_many :assignment_scores
-    
-    has_many :contacts, as: :contactable
+
 
     has_many :addresses, as: :addressable
 
@@ -60,8 +59,7 @@ module Gaku
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
     accepts_nested_attributes_for :addresses, :allow_destroy => true
-    accepts_nested_attributes_for :contacts,  :allow_destroy => true
-
+    
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
     def to_s
@@ -89,7 +87,7 @@ module Gaku
     end
 
     def primary_address
-      self.student_addresses.where(:is_primary => true).first.try(:address)
+      self.addresses.where(:is_primary => true).first.try(:address)
     end
 
   end

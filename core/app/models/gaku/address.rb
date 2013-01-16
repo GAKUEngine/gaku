@@ -9,7 +9,7 @@ module Gaku
                     # :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
 
     default_scope :conditions => { :is_deleted => false }
-    
+
     validates_presence_of :address1, :city, :country
 
 
@@ -19,7 +19,7 @@ module Gaku
                     :is_deleted, :past, :country,
                     :country_id, :state_id, :student_id
 
-    before_save :ensure_first_primary, :on => :create
+    before_save :ensure_first_is_primary, :on => :create
 
 
     def make_primary
@@ -54,7 +54,7 @@ module Gaku
 
     private
 
-    def ensure_first_primary
+    def ensure_first_is_primary
       if self.addressable.respond_to?(:addresses)
         self.is_primary = true if self.addressable.addresses.blank?
       end

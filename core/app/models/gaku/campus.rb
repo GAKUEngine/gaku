@@ -1,8 +1,9 @@
 module Gaku
 	class Campus < ActiveRecord::Base
 
+    include Contactable
+
     has_one :address, as: :addressable
-    has_many :contacts, as: :contactable
 
     belongs_to :school
 

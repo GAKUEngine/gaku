@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Address' do
+describe 'Student Address' do
   stub_authorization!
 
   let(:student) { create(:student) }

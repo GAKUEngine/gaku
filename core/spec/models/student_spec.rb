@@ -33,7 +33,6 @@ describe Gaku::Student do
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
     it { should accept_nested_attributes_for(:addresses).allow_destroy(true) }
-    it { should accept_nested_attributes_for(:contacts).allow_destroy(true) }
 
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:surname) }
