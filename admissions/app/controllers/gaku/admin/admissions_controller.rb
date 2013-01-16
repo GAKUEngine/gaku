@@ -129,6 +129,7 @@ module Gaku
         @admissions = Admission.all
 
         @enrolled_students = Admission.where(:admission_period_id => params[:admission_period_id], :admission_method_id => params[:admission_method_id]).map {|i| i.student_id.to_s }
+        @enrolled_students += Student.where("enrollment_status_id != ?", 1).map {|i| i.id.to_s }
 
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

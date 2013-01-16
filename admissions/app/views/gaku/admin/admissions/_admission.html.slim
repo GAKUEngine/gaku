@@ -1,4 +1,4 @@
-tr id="admission-#{admission.id}"
+tr id="admission-#{admission.id}" style="#{ (admission.student.enrollment_status_id == 17) ? "color: grey;" : "" }"
   = render 'gaku/admin/admissions/admission_fields', :admission => admission
   td.manage
   
