@@ -1,15 +1,11 @@
 .row-fluid
   .span12 style="margin-bottom:0px; padding:15px"
-    <div class="row-fluid">
-      - admission_phase_states.each_with_index do |state, index|
-        - if index%2 == 0 and index != 0
-          </div>
-          <div class="row-fluid">
-        .span6 *{:id => "state" + state.id.to_s}
+    - admission_phase_states.each_with_index do |state, index|
+      .row-fluid
+        .span12 *{:id => "state" + state.id.to_s}
           h4
             = state.name
           =render 'students_list', :state => state
-    </div>
 /= javascript_include_tag "student_chooser"
 
 
