@@ -1,0 +1,6 @@
+tr id="student-#{student.id}"
+  = render 'gaku/shared/fields/student_fields', :student => student
+  - if ["gaku/students", "gaku/admissions"].include? params[:controller]
+    td
+      = link_to_show student
+      = ajax_link_to_edit [:edit, student], :style => "margin:0px"

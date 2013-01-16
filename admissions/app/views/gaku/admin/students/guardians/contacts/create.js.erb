@@ -1,0 +1,21 @@
+$('#student-guardian-contacts-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
+$("#new-student-guardian-contact-link").show();
+$('#new-student-guardian-contact').slideToggle();
+$('#new-student-guardian-contact form')[0].reset();
+showNotice("<%= render_flash %>");
+
+$('.student-guardian-contacts-count').html("<%= print_count(@count+1, t_contact_list) %>");
+
+
+<% if @contact.is_primary? %>
+  $('#student-guardian-contacts-index tbody tr').each(function(){
+    $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
+  });
+  $("#contact-<%= @contact.id %>").children('td.primary-contact')
+                                                .find('a')
+                                                .addClass('btn-primary')
+
+
+  $('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
+<% end %>
+

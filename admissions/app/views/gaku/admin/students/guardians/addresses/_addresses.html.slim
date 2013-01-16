@@ -1,0 +1,25 @@
+#student-guardian-addresses
+  = index_header do
+    #new-student-guardian-address.hide
+    .pull-left
+      = count_div 'student-guardian-addresses-count' do
+        = print_count @guardian.addresses.count, t_address_list
+    .pull-right
+      = ajax_link_to_new t(:'address.add'), [:new, @student, @guardian, :address], :id => 'new-student-guardian-address-link'
+  = hr
+
+  = index_body do
+    = table_for 'student-guardian-addresses-index' do
+        thead
+          tr
+            = th_icon 'home'
+            = th t(:'address.title')
+            = th t(:'address.country')
+            = th t(:'address.zipcode')
+            = th t(:'address.state')
+            = th t(:'address.city')
+            = th t(:'address.address1')
+            = th t(:'address.address2')
+            = th_actions 2
+        tbody
+          = render :partial => 'gaku/students/guardians/addresses/address', :collection => @guardian.addresses, :as => 'address'

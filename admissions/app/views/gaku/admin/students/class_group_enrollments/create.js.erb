@@ -1,0 +1,10 @@
+<%- if @class_group_enrollment.errors.any? %>
+	$('.validation-error').html("<%= render_js_partial('/gaku/shared/errors', :target => @class_group_enrollment) %>")
+<% else %>
+	showNotice("<%= render_flash %>");
+	$('td#class-enrollment-name').html('<%= @class_group.name %>');
+	$('td#class-enrollment-seat-number').html('<%= @class_group_enrollment.seat_number %>');
+	$('.validation-error').html('');
+
+	$('#student-class-group-enrollment').html('<%= "#{@student.class_groups.last.grade.try(:to_s)} - #{@class_group.name}" %>')
+<% end %>
