@@ -128,7 +128,9 @@ ja:
     new: "新しいクラス在籍"
     seat_number: "出席番号"
   class_group_management: "クラス管理"
-  commute_method: "通学手段"
+  commute_method:
+    plural: "通学方法"
+    singular: "通学方法"
   commute_method_type:
     add: "通学手段を追加"
     edit: "通学手段を編集"

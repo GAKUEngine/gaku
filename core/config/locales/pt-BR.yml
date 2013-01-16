@@ -128,7 +128,9 @@ pt-BR:
     new: 
     seat_number: 
   class_group_management: 
-  commute_method: 
+  commute_method:
+    plural: 
+    singular: 
   commute_method_type:
     add: 
     edit: 
