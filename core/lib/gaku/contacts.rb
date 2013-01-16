@@ -1,5 +1,5 @@
 module Gaku
-  module Contactable
+  module Contacts
     extend ActiveSupport::Concern
 
     included do
@@ -8,7 +8,7 @@ module Gaku
       def primary_contact
         self.contacts.where(:is_primary => true).first
       end
-      
+
     end
 
   end

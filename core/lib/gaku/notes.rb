@@ -1,5 +1,5 @@
 module Gaku
-  module Notable
+  module Notes
     extend ActiveSupport::Concern
 
     included do

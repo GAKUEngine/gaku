@@ -1,7 +1,7 @@
 module Gaku
   class Exam < ActiveRecord::Base
 
-    include Notable
+    include Notes
 
     has_many :exam_scores
     has_many :exam_portions, :order => :position

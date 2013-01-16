@@ -1,7 +1,7 @@
 module Gaku
 	class ClassGroup < ActiveRecord::Base
 
-		include Notable
+		include Notes
 
 	  has_many :class_group_enrollments
 	  has_many :students, :through => :class_group_enrollments
@@ -14,6 +14,6 @@ module Gaku
 	  attr_accessible :name, :grade, :homeroom
 
 	  validates_presence_of :name
-	  
+
 	end
 end

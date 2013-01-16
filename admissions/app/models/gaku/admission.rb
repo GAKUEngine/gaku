@@ -1,7 +1,7 @@
 module Gaku
   class Admission < ActiveRecord::Base
 
-    include Notable, Trashable
+    include Notes, Trashable
 
     belongs_to :student
     belongs_to :scholarship_status
