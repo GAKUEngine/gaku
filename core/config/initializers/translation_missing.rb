@@ -1,7 +1,7 @@
 unless ENV['I18N'] == 0
 	module I18n
 	  def self.just_raise_that_exception(exception, key, locale, options)
-	    raise exception, key
+	    raise [exception, key].inspect
 	  end
 	end
 
