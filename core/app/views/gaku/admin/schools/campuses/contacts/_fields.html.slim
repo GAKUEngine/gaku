@@ -1,0 +1,5 @@
+= render 'gaku/shared/fields/contact_primary_field', :target => [:admin, school, campus, contact]
+= render 'gaku/shared/fields/contact_fields', :target => [:admin, school, campus, contact]
+td
+  = ajax_link_to_edit [:edit,:admin, school, campus, contact]
+  = ajax_link_to_delete [:admin, school, campus, contact]

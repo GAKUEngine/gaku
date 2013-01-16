@@ -60,7 +60,9 @@ module Gaku
     private
 
     def ensure_first_primary
-      self.is_primary = true if self.addressable.try(:addresses).try(:'blank?')
+      if self.addressable.respond_to?(:addresses)
+        self.is_primary = true if self.addressable.addresses.blank?
+      end
     end
 
   end
