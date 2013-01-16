@@ -164,7 +164,7 @@ module Gaku
             end
 
             add_address_to_student(row, idx, student)
-            #add_phone_to_student(row, idx, student)
+            add_phone_to_student(row, idx, student)
             add_guardian_to_student(row, idx, student)
           end
         end
