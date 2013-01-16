@@ -27,6 +27,14 @@ module Gaku
       self.update_attribute(:is_primary, true)
     end
 
+    def primary?
+      if self.is_primary == true
+        true
+      else
+        false
+      end
+    end
+
     private
 
     def ensure_first_primary

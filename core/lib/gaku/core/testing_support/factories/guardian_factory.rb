@@ -18,4 +18,17 @@ FactoryGirl.define do
     end
   end
 
+  factory :guardian_with_one_contact, :parent => :guardian do
+    after_create do |guardian|
+      FactoryGirl.create(:contact, :contactable => guardian)
+    end
+  end
+
+  factory :guardian_with_two_contacts, :parent => :guardian do
+    after_create do |guardian|
+      FactoryGirl.create(:contact, :contactable => guardian)
+      FactoryGirl.create(:contact, :contactable => guardian)
+    end
+  end
+
 end
