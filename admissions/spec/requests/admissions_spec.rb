@@ -241,7 +241,7 @@ describe 'Admin Admissions' do
               admission_period
               attendance
               @exam_phase = admission_period.admission_methods.first.admission_phases.first
-              @exam_phase.exam = exam
+              #@exam_phase.exam = exam
               admission_period.reload
               visit gaku.admin_admissions_path
             end

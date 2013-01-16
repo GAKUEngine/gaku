@@ -8,7 +8,7 @@ describe Gaku::Admin::AdmissionsController do
   let!(:exam) { create(:exam) }
   let!(:attendance) { create(:attendance) }
   let(:admission_method_regular) { create(:admission_method_regular) }
-  
+  #let(:admission) { create(:admission) }
   
   describe "GET #index" do
     before do
@@ -60,11 +60,10 @@ describe Gaku::Admin::AdmissionsController do
   describe "POST #create" do
     context 'with valid attributes' do
 
-      xit 'saves the new admission in the db' do
+      it 'saves the new admission in the db' do
         expect do
-          gaku_post :create, admission: attributes_for(:admission, 
-                                                        admission_period_id:admission_period, 
-                                                        admission_method_id:admission_method_regular)
+          gaku_post :create, admission: build(:admission, 
+                                          admission_period_id: admission_period)
         end.to change(Gaku::Admission, :count).by 1
       end
     end
@@ -136,7 +135,13 @@ describe Gaku::Admin::AdmissionsController do
   end
   context 'changes student state' do
     before do
-      gaku_js_post :change_student_state, state_id: 1
+      @student = student
+      @admission = create(:admission, student:@student)
+      @student.admission = @admission
+      #raise @student.admission.admission_phase_records.inspect
+      @first_state = admission_period.admission_methods.first.admission_phases.first.admission_phase_states.first
+      @second_state = admission_period.admission_methods.first.admission_phases.first.admission_phase_states.second
+      gaku_js_post :change_student_state, state_id: @second_state, student_id: @student.id, admission_period_id: admission_period.id
     end
     context 'when new state is auto progressable' do
       it 'creates new admission record' do
