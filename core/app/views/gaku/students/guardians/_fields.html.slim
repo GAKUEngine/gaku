@@ -18,8 +18,8 @@ tr
 tr
   th = t(:'address.singular')
   td#primary-address colspan="3"
-    ="#{guardian.primary_address.address1}, #{guardian.primary_address.address2}, #{guardian.primary_address.city}, #{guardian.primary_address.zipcode}, #{guardian.primary_address.state_name}, #{guardian.primary_address.country.name}" unless guardian.primary_address.blank?
+    / ="#{guardian.primary_address.address1}, #{guardian.primary_address.address2}, #{guardian.primary_address.city}, #{guardian.primary_address.zipcode}, #{guardian.primary_address.state_name}, #{guardian.primary_address.country.name}" unless guardian.primary_address.blank?
 tr
   th = t(:'contact.singular')
   td#primary-contact colspan="3"
-    = "#{guardian.primary_contact.contact_type.name}: #{guardian.primary_contact.data} (#{guardian.primary_contact.details}) " unless guardian.primary_contact.blank?
+    / = "#{guardian.primary_contact.contact_type.name}: #{guardian.primary_contact.data} (#{guardian.primary_contact.details}) " unless guardian.primary_contact.blank?
