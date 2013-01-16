@@ -1,6 +1,8 @@
 module Gaku
   class Student < ActiveRecord::Base
 
+    before_save :default_values
+
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
 
@@ -95,5 +97,8 @@ module Gaku
       self.student_addresses.where(:is_primary => true).first.try(:address)
     end
 
+     def default_values
+      self.enrollment_status_id ||= 1
+    end
   end
 end
