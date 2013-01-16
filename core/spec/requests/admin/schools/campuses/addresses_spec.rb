@@ -11,7 +11,6 @@ describe 'Admin School Campuses Address' do
     set_resource "admin-school-campus-address"
   end
 
-
   context 'new', :js => true do
     before do
       address
@@ -41,8 +40,8 @@ describe 'Admin School Campuses Address' do
   end
 
   context "existing", :js => true do
+
     before do
-      address.campus = school.master_campus
       school.master_campus.address = address
     end
 
