@@ -135,14 +135,16 @@ describe 'Student Address' do
 
         visit gaku.student_path(@student)
 
-        click "#{address2_tr} a"
-        accept_alert
-        page.find("#{address2_tr} .primary_address a.btn-primary")
-
-        click "#{address2_tr} .delete-link"
+        # click "#{address2_tr} a"
+        within("#{table} tr#address-#{@student.addresses.second.id}") { click_link 'set_primary_link' }
         accept_alert
 
-        page.find("#{address1_tr} .primary_address a.btn-primary")
+        # page.find("#{address2_tr} .primary_address a.btn-primary")
+
+        within("#{table} tr#address-#{@student.addresses.second.id}") { click ".delete-link" }
+        accept_alert
+
+        wait_until { page.find("#{address1_tr} .primary_address a.btn-primary") }
 
         @student.addresses.first.primary? == true
       end
@@ -155,8 +157,7 @@ describe 'Student Address' do
         click tab_link
 
         #sleep 10
-
-        within("#{table} tr#address-2") { click_link 'set_primary_link' }
+        within("#{table} tr#address-#{@student.addresses.second.id}") { click_link 'set_primary_link' }
         accept_alert
 
         @student.addresses.first.primary? == false
