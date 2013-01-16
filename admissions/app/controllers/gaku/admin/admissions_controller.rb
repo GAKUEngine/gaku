@@ -113,9 +113,9 @@ module Gaku
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
-                                                :admission_id => @admission.id,
-                                                :enrollment_status => Gaku::EnrollmentStatus.where(:code => "applicant"))
-          #@admission.student.update_attribute(:enrollment_status_id, 1)
+                                                :admission_id => @admission.id)
+          
+          #@admission.student.update_attribute(:enrollment_status, Gaku::EnrollmentStatus.where(:code => "applicant"))
 
           render 'create'
 
