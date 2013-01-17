@@ -1,7 +1,0 @@
-= modal_for 'edit-guardian-modal' do
-  = modal_header t(:'guardian.edit')
-  = modal_form_for [@student, @guardian] do |f|
-    = modal_body do
-      = hidden_field_tag :student_id, @student.id
-      = render 'form_fields', :f => f
-      = buttons_for @guardian, :nested_id => 'student-guardian'
