@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <th class='btn-primary'>Student </th>
-          <th class='btn-success' colspan='3'>   
-            <% for exam in @exams: %>
-              <%= exam.name %></th>
-            <% end %>
-          </th>
+          <% for exam in @exams: %>
+            <th class='btn-success' colspan='3'>   
+                <%= exam.name %></th>
+            </th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
