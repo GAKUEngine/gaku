@@ -117,7 +117,9 @@ describe 'Student Guardian Addresses' do
         click "#{address2_tr} a"
         accept_alert
 
+
         page.find("#{address2_tr} .primary_address a.btn-primary")
+        !page.find("#{address1_tr} .primary_address a.btn-primary")
 
         click "#{address2_tr} .delete-link"
         accept_alert

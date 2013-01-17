@@ -129,22 +129,24 @@ describe 'Student Address' do
       end
 
       it "delete primary", :js => true do
-
         address1_tr = "#address-#{@student.addresses.first.id}"
         address2_tr = "#address-#{@student.addresses.second.id}"
 
         visit gaku.student_path(@student)
 
-        # click "#{address2_tr} a"
-        within("#{table} tr#address-#{@student.addresses.second.id}") { click_link 'set_primary_link' }
+        click tab_link
+
+        within("#{table} #{address2_tr}") { click_link 'set_primary_link' }
         accept_alert
 
-        # page.find("#{address2_tr} .primary_address a.btn-primary")
+        page.find("#{address2_tr} .primary_address a.btn-primary")
+        !page.find("#{address1_tr} .primary_address a.btn-primary")
 
-        within("#{table} tr#address-#{@student.addresses.second.id}") { click ".delete-link" }
+
+        within("#{table} #{address2_tr}") { click '.delete-link'}
         accept_alert
 
-        wait_until { page.find("#{address1_tr} .primary_address a.btn-primary") }
+        page.find("#{address1_tr} .primary_address a.btn-primary")
 
         @student.addresses.first.primary? == true
       end

@@ -23,7 +23,7 @@ module Gaku
 
 
     def make_primary
-      self.addressable.addresses.update_all(:is_primary => false)
+      self.addressable.addresses.update_all({:is_primary => false}, ['id != ?', id] )
       self.update_attribute(:is_primary, true)
     end
 
