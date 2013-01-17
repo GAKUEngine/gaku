@@ -45,7 +45,7 @@ module Gaku
                           :student_foreign_id_number => foreign_id_number,
                           :birth_date => birth_date,
                           :gender => gender,
-                          :enrollment_status_id => 2)
+                          :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("admitted").id)
 
           return student
         end

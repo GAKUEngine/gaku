@@ -31,6 +31,7 @@ group :test do
   gem 'poltergeist'
 
   gem 'guard'
+  gem 'rb-inotify', '~> 0.8.8'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'

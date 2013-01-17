@@ -1,0 +1,14 @@
+.row-fluid
+  .span12.well
+    .row-fluid
+      .span12
+        /= link_to_file t(:'student.registration.sheet'), :action => :get_sheet_template
+        hr /
+        = form_for :importer, :url => {:controller => Gaku::Admin::ApplicantImporterController, :action => "import_applicant_list" }, :html => { :multipart => true } do |f|
+          label for="importer"
+          = f.file_field :data_file
+          br /
+          = t(:'import_format')
+          /= select("importer", "importer_type", @importer_types, {:include_blank => false})
+          br /
+          = submit_tag 'Submit'

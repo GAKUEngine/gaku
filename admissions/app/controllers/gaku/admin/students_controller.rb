@@ -4,7 +4,6 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
-      respond_to :csv, :only => :csv
 
       before_filter :select_vars,       :only => [:index,:new, :edit]
       before_filter :before_show,       :only => :show
