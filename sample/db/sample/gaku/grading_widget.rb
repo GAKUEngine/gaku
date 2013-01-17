@@ -2,6 +2,7 @@
 
 syllabus = Gaku::Syllabus.where(:name => "Ruby", :code => "rb").first_or_create!
 course = Gaku::Course.where(:code => "Fall 2011").first_or_create!
+enrollment_status = Gaku::EnrollmentStatus.find_by_code("admitted");
 student = Gaku::Student.where(:name => 'Susumu', :surname => 'Yokota').first_or_create!
 
 exam1 = Gaku::Exam.where(:name => "Midterm", :use_weighting => true, :weight => 4).first_or_create!
