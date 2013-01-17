@@ -1,6 +1,6 @@
 module Gaku
   class Student < ActiveRecord::Base
-    
+
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
 
@@ -89,6 +89,10 @@ module Gaku
     def address_widget
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
+    end
+
+    def primary_address
+      self.student_addresses.where(:is_primary => true).first.try(:address)
     end
 
   end
