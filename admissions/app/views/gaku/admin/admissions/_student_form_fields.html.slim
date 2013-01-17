@@ -15,14 +15,6 @@
   .span6
     = f.select :gender, genders, {:prompt => t(:'gender.choose'), :selected => gender_preset}, :label => t(:gender)
 
-/.row-fluid
-  .span4
-    = f.text_field :admitted, :class => "datepicker", :label => t(:admitted)
-  .span4
-    = f.text_field :graduated, :class => "datepicker", :label => t(:graduated)
-  .span4
-    = f.select :scholarship_status_id, scholarship_statuses, {:include_blank => true}, :label => t(:scholarship_status)
-
 coffee:
   $(document).ready ->
     $('.datepicker').datepicker()
