@@ -82,7 +82,7 @@ module Gaku
     end
 
     def default_values
-      self.enrollment_status_id ||= 1
+      self.enrollment_status_id ||= Gaku::EnrollmentStatus.find_by_code("applicant").id
     end
 
   end
