@@ -36,7 +36,7 @@ module Gaku
       end
 
       def index
-
+        
 
       end
 
