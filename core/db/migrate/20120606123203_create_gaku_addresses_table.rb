@@ -8,11 +8,9 @@ class CreateGakuAddressesTable < ActiveRecord::Migration
       t.boolean  :is_primary, :default => false
 
 
-      t.belongs_to :addressable, polymorphic: true
+      t.references :addressable, polymorphic: true
       t.references :country
       t.references :state
-      t.references :faculty
-      t.references :campus
 
       t.timestamps
     end

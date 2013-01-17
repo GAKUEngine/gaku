@@ -63,7 +63,6 @@ module Gaku
             @new_admission_record.admission_phase = @next_phase
             @new_admission_record.admission_phase_state = @new_state
             @new_admission_record.save
-            @admission_record.admission_phase_state_id = @state.id
           elsif @state.auto_admit == true
             admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
             admission = @student.admission
@@ -73,10 +72,8 @@ module Gaku
             # change student enrollment status
             @student.enrollment_status_id = 2
             @student.save
-            @admission_record.admission_phase_state_id = @state.id
-          else
-            @admission_record.admission_phase_state_id = @state.id
           end
+          @admission_record.admission_phase_state_id = @state.id
           @admission_record.save
           render 'change_student_state'
         end
@@ -118,7 +115,7 @@ module Gaku
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
           
-          #@admission.student.update_attribute(:enrollment_status, Gaku::EnrollmentStatus.where(:code => "applicant"))
+          @admission.student.update_attribute(:enrollment_status_id, Gaku::EnrollmentStatus.find_by_code("applicant").id)
 
           render 'create'
 

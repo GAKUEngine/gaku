@@ -84,6 +84,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :students do
+
     member do
       get :edit_enrollment_status
       put :enrollment_status
@@ -98,6 +99,7 @@ Gaku::Core::Engine.routes.draw do
         get :revert
       end
     end
+    
     resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do

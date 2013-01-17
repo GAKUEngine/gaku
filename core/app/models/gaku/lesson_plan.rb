@@ -1,13 +1,13 @@
 module Gaku
 	class LessonPlan < ActiveRecord::Base
 
-    include Notable
-
+    include Notes
+    
 		has_many :lessons
 	  has_many :attachments, :as => :attachable
 		belongs_to :syllabus
 
 		attr_accessible :title, :description
-    
+
 	end
 end

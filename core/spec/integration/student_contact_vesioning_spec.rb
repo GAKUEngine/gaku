@@ -3,10 +3,9 @@ require 'spec_helper'
 describe 'Student Contact Versioning' do
 
   before do
-    @student = create(:student)
-    contact_type = create(:contact_type, :name => 'email')
-    @contact =  create(:contact, :contact_type => contact_type)
-    @student.contacts << @contact
+    @student = create(:student_with_one_contact)
+    @student.reload
+    @contact = @student.contacts.first
   end
 
   it 'saves update history' do
