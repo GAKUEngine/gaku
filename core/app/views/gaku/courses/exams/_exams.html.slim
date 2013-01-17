@@ -1,20 +1,17 @@
 .row-fluid
   - if @course.syllabus and @course.syllabus.exams.any?
-  		table#course-exams-index.index.table.table-striped.table-bordered.table-condensed
-			  thead
-			    tr
-			      th*{"class" => "btn-inverse"}
-			      	= t('exam.name')
-			      th.btn-info style="width:200px" = t(:manage)
-			  tbody
-			    - @course.syllabus.exams.each do |exam|
-			    	tr
-			    		td = exam.name
-			    		td
-			      		= link_to ('<i class="icon-white icon-pencil"></i> ' + t('grade.grading')).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span12 btn btn-mini btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
-.row-fluid
-  .span12
-    hr
-.row-fluid
+      table#course-exams-index.index.table.table-striped.table-bordered.table-condensed
+        thead
+          tr
+            th*{"class" => "btn-inverse"}
+              = t('exam.name')
+            th.btn-info style="width:200px" = t(:manage)
+        tbody
+          - @course.syllabus.exams.each do |exam|
+            tr
+              td = exam.name
+              td
+                = link_to ('<i class="icon-white icon-pencil"></i> ' + t('grade.grading')).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span12 btn btn-mini btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
+.row-fluid.mt-m
   - if @course.syllabus and @course.syllabus.exams.any?
     = link_to ('<i class="icon-white icon-list"></i> ' + t("grade.all_exams")).html_safe, "#{request.fullpath}/exams/grading", :class => "span12 btn btn-success"
