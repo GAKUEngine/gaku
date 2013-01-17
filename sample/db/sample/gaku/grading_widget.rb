@@ -23,3 +23,4 @@ unless course.students.count > 0
 end
 
 syllabus.courses << course
+
