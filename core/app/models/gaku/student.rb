@@ -92,11 +92,7 @@ module Gaku
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
     end
-
-    def primary_address
-      self.student_addresses.where(:is_primary => true).first.try(:address)
-    end
-
+    
     def default_values
       self.enrollment_status_id ||= Gaku::EnrollmentStatus.find_by_code("applicant").id
     end
