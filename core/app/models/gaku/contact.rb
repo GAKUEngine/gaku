@@ -22,7 +22,7 @@ module Gaku
     end
 
     def make_primary
-      self.contactable.contacts.update_all(:is_primary => false)
+      self.contactable.contacts.update_all({:is_primary => false}, ['id != ?', id] )
       self.update_attribute(:is_primary, true)
     end
 
@@ -33,7 +33,7 @@ module Gaku
     private
 
     def remove_other_primary
-      self.contactable.contacts.update_all(:is_primary => false) if self.is_primary?
+      self.contactable.contacts.update_all({:is_primary => false}, ['id != ?', id]) if self.is_primary?
     end
 
     def ensure_first_is_primary
