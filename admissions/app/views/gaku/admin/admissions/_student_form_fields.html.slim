@@ -15,7 +15,7 @@
   .span6
     = f.select :gender, genders, {:prompt => t(:'gender.choose'), :selected => gender_preset}, :label => t(:gender)
 
-.row-fluid
+/.row-fluid
   .span4
     = f.text_field :admitted, :class => "datepicker", :label => t(:admitted)
   .span4
