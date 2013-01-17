@@ -4,13 +4,14 @@ module Gaku
     module SchoolStation
       class ZaikouWorker
         include Sidekiq::Worker
-        require "gaku/core/importers/school_station/zaikousei.rb"
 
         def get_student(row, idx)
           if Gaku::Student.exists?(:student_foreign_id_number => row[idx["foreign_id_number"]].to_i.to_s)
             logger.info "SchoolStationのID番号「#{row[idx["foreign_id_number"]].to_i.to_s}」の生徒が既に登録されている為新規登録及び更新が行われません。"
             return nil
           end
+
+          foreign_id_number = row[idx["foreign_id_number"]].to_i.to_s
 
           name_parts = row[idx["name"]].to_s().sub("　", " ").split(" ")
           surname = name_parts.first
@@ -22,9 +23,9 @@ module Gaku
 
           if row[idx["birth_date"]]
             begin
-              birth_date = Date.civil(1899, 12, 31) + row[idx["birth_date"]].to_i.days - 1.day
-            rescue
               birth_date = Date.strptime(row[idx["birth_date"]].to_s, "%Y/%m/%d")
+            rescue
+              birth_date = Date.civil(1899, 12, 31) + row[idx["birth_date"]].to_i.days - 1.day
             end
           end
 
@@ -41,12 +42,10 @@ module Gaku
                           :name => name,
                           :surname_reading => surname_reading,
                           :name_reading => name_reading,
-                          :student_foreign_id_number => row[idx[:foreign_id_number].to_i],
+                          :student_foreign_id_number => foreign_id_number,
                           :birth_date => birth_date,
                           :gender => gender,
-                          :admitted => 1)
-
-          student.update_attribute(:enrollment_status_id, 2)
+                          :enrollment_status_id => 2)
 
           return student
         end
@@ -127,20 +126,30 @@ module Gaku
 
             end
 
-            if row[idx["guardian"]["phone"]]
-                contact = Gaku::Contact.new()
-                contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
-                contact.is_primary = true
-                contact.is_emergency = true
-                contact.data = row[idx["guardian"]["phone"]]
-                contact.save
+           # if row[idx["guardian"]["phone"]]
+           #     contact = Gaku::Contact.new()
+           #     contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
+           #     contact.is_primary = true
+           #     contact.is_emergency = true
+           #     contact.data = row[idx["guardian"]["phone"]]
+           #     contact.save
 
-                guardian.contacts << contact
-            end
+           #     guardian.contacts << contact
+           # end
           end
         end
 
-        def perform(row, idx)
+        def perform(sheet, idx)
+          #pool = ConnectionPool.new(:size => 10, :timeout => 3) { Redis.new }
+          sheet.drop(1).each do |row|
+            #pool.with_connection do |redis|
+              #redis.lsize(:zaiou)
+            process_row(row, idx)
+            #end
+          end
+        end
+
+        def process_row(row, idx)
           ActiveRecord::Base.transaction do
             if row[idx["name"]].nil?
               logger.info "SchoolStation在校生インポータ: 名前が入力されていない行がありました。この行は無視します。\n#{row}"

@@ -1,0 +1,16 @@
+#guardians-modal
+#student-guardians
+  = index_header do
+    #new-student-guardian.hide
+    .pull-left
+      = count_div 'student-guardians-count' do
+        = print_count @student.guardians.count, t_guardian_list
+    .pull-right
+      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], :id => "new-student-guardian-link"
+
+  = hr
+
+  = index_body do
+    .row-fluid
+      .span12.well.guardians_list
+        = render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => :guardian

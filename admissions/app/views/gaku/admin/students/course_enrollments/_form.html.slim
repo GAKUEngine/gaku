@@ -1,0 +1,5 @@
+= remote_form_for [@student, @course_enrollment] do |f|
+  = f.select :course_id, courses, { :prompt => t(:'course.choose')}, :label => t(:'course.plural')
+  = f.hidden_field :student_id, :value => @student.id
+  = buttons_for @course_enrollment, :label => t(:'course_enrollment.create'), :nested_id => 'student-course-enrollment'
+

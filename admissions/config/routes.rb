@@ -47,6 +47,8 @@ Gaku::Core::Engine.routes.prepend do
         get :show_methods
       end
     end
-	end
 
+    resources :students
+
+	end
 end

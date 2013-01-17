@@ -1,36 +1,4 @@
 en:
-
-  helpers:
-    page_entries_info:
-      one_page:
-        display_entries:
-          zero: "No %{entry_name} found"
-          one: "Displaying <b>1</b> %{entry_name}"
-          other: "Displaying <b>all %{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
-  views:
-    pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Prev"
-      next: "Next &rsaquo;"
-      truncate: "..."
-
-  changes:
-    student:
-      list: "Student Changes list"
-    student_address:
-      list: "Student Address Changes list"
-    student_contact:
-      list: "Student Contact Changes list"
-    from: "From"
-    to: "To"
-    changed_at: "Changed At"
-    event: "Event"
-    change: "Change"
-
-
   add: Add
   address:
     add: Add Address
@@ -55,10 +23,10 @@ en:
     zipcode: ZIP Code
   admitted: Admitted On
   alert:
-    already_added: ! '%{resource} are already added!'
-    empty: ! '%{resource} is empty!'
+    already_added: "%{resource} are already added!"
+    empty: "%{resource} is empty!"
     not_selected: No %{resource} selected!
-  and: ! ' and '
+  and: " and "
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -96,7 +64,7 @@ en:
     counted_absent: Counted Absent
     credit_rate: Credit Rate
     disable_credit: Disable Credit
-    edit: Edin Attendance Type
+    edit: Edit Attendance Type
     list: Attendance Types list
     name: Name
     new: New Attendance Type
@@ -121,6 +89,18 @@ en:
     save: Save Campus
     singular: Campus
   cancel: Cancel
+  changes:
+    change: Change
+    changed_at: Changed At
+    event: Event
+    from: From
+    student:
+      list: Student Changes list
+    student_address:
+      list: Student Address Changes list
+    student_contact:
+      list: Student Contact Changes list
+    to: To
   class: Class
   class_group:
     add: Add Class Group
@@ -149,8 +129,8 @@ en:
     seat_number: Seat number
   class_group_management: Class Management
   commute_method:
+    plural: Commute Methods
     singular: Commute Method
-    add: Add Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
@@ -197,7 +177,7 @@ en:
     add: Add Course
     choose: Choose Course
     code: Course Code
-    code_sample: ! '[EX: FALL2020]'
+    code_sample: "[EX: FALL2020]"
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -315,13 +295,23 @@ en:
   enrollment_status:
     active: Active
     add: Add Enrollment Status
-    edit: Edin Enrollment Status
+    edit: Edit Enrollment Status
     list: Enrollment Statuses list
     name: Name
     new: New Enrollment Status
-    singular: Enrollment Status
     plural: Enrollment Statuses
     save: Save Enrollment Status
+    singular: Enrollment Status
+  enrollment_status_type:
+    active: Active
+    add: Add Enrollment Status Type
+    edit: Edit Enrollment Status Type
+    list: Enrollment Status Types list
+    name: Name
+    new: New Enrollment Status Type
+    plural: Enrollment Status Types
+    save: Save Enrollment Status Type
+    singular: Enrollment Status Type
   errors:
     messages:
       already_confirmed: was already confirmed, please try signing in
@@ -330,7 +320,7 @@ en:
       not_locked: was not locked
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
-        other: ! '%{count} errors prohibited this %{resource} from being saved:'
+        other: "%{count} errors prohibited this %{resource} from being saved:"
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -342,6 +332,7 @@ en:
     count: Exams Count
     description: Description
     edit: Edit Exam
+    exam_score: Exam Score
     grading_method: Grading Method
     list: Exams List
     name: Exam name
@@ -357,7 +348,6 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
-    exam_score: Exam Score
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -380,12 +370,12 @@ en:
   flash:
     actions:
       create:
-        notice: ! '%{resource_name} was successfully created!'
+        notice: "%{resource_name} was successfully created!"
       destroy:
-        alert: ! '%{resource_name} could not be destroyed!'
-        notice: ! '%{resource_name} was successfully destroyed!'
+        alert: "%{resource_name} could not be destroyed!"
+        notice: "%{resource_name} was successfully destroyed!"
       update:
-        notice: ! '%{resource_name} was successfully updated!'
+        notice: "%{resource_name} was successfully updated!"
   gender:
     choose: Choose Gender
     female: Female
@@ -432,18 +422,18 @@ en:
   language: Language
   languages:
     en: English
-    ja: 日本語[Japanese]
+    ja: "日本語[Japanese]"
   manage: Manage
   menu:
     admin:
-      changes:
-        changes: "Changes and Deletions"
-        students: "Students"
-        student_addresses: "Student Addresses"
-        student_contacts: "Student Contacts"
       admin: Admin
       administration: Administration
       administrator: Administrator
+      changes:
+        changes: Changes and Deletions
+        student_addresses: Student Addresses
+        student_contacts: Student Contacts
+        students: Students
       disposals:
         attachment: Attachment Disposals
         course_group: Course Group Disposals
@@ -508,15 +498,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: ! '%{resource} has been successfully added!'
-    created: ! '%{resource} has been successfully created!'
-    destroyed: ! '%{resource} has been successfully destroyed!'
-    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
+    added: "%{resource} has been successfully added!"
+    created: "%{resource} has been successfully created!"
+    destroyed: "%{resource} has been successfully destroyed!"
+    enrolled: "%{resource} has been successfully enrolled to %{to}!"
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: ! '%{resource} has been successfully recovered'
-    removed: ! '%{resource} has been successfully removed!'
-    updated: ! '%{resource} has been successfully updated!'
-    uploaded: ! '%{resource} has been successfully uploaded!'
+    recovered: "%{resource} has been successfully recovered"
+    removed: "%{resource} has been successfully removed!"
+    updated: "%{resource} has been successfully updated!"
+    uploaded: "%{resource} has been successfully uploaded!"
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -582,6 +572,15 @@ en:
     starting: Starting
     uniqueness: have this semester added
   show: Show
+  specialty:
+    add: Add Specialty
+    description: Description
+    edit: Edit Specialty
+    list: Specialties list
+    major_only: Major Only
+    name: Name
+    save: Save Specialty
+    singular: Specialty
   student:
     add: Add Student
     birth_and: and
@@ -615,29 +614,20 @@ en:
     import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: ! '[EX: Science A]'
+    name_sample: "[EX: Science A]"
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
-  specialty:
-    edit: Edit Specialty
-    list: Specialties list
-    add: Add Specialty
-    singular: Specialty
-    description: Description
-    major_only: Major Only
-    name: Name
-    save: "Save Specialty"
   teacher: Instructor
   title: Title
   user:
     info: User info
   views:
     pagination:
-      first: ! '&laquo; First'
+      first: "&laquo; First"
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: ! '&lsaquo; Prev'
-      truncate: ! '...'
+      previous: "&lsaquo; Prev"
+      truncate: "..."

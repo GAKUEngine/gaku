@@ -1,0 +1,5 @@
+= render 'gaku/shared/fields/address_primary_field', :address => address, :target => [@student, address]
+= render 'gaku/shared/fields/address_fields', :address => address, :target => [@student, address]
+td
+  = ajax_link_to_edit [:edit, @student, address]
+  = ajax_soft_delete [:soft_delete, @student, address]

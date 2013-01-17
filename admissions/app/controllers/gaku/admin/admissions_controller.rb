@@ -63,7 +63,6 @@ module Gaku
             @new_admission_record.admission_phase = @next_phase
             @new_admission_record.admission_phase_state = @new_state
             @new_admission_record.save
-            @admission_record.admission_phase_state_id = @state.id
           elsif @state.auto_admit == true
             admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
             admission = @student.admission
@@ -73,10 +72,8 @@ module Gaku
             # change student enrollment status
             @student.enrollment_status_id = 2
             @student.save
-            @admission_record.admission_phase_state_id = @state.id
-          else
-            @admission_record.admission_phase_state_id = @state.id
           end
+          @admission_record.admission_phase_state_id = @state.id
           @admission_record.save
           render 'change_student_state'
         end
@@ -117,7 +114,8 @@ module Gaku
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
-          @admission.student.update_attribute(:enrollment_status_id, 1)
+          
+          #@admission.student.update_attribute(:enrollment_status, Gaku::EnrollmentStatus.where(:code => "applicant"))
 
           render 'create'
 
@@ -126,12 +124,13 @@ module Gaku
 
       def student_chooser
         @admission = Admission.new
-        @search = Student.unscoped.search(params[:q])
+        @search = Student.unscoped.where(:enrollment_status_id => 1).search(params[:q])
         @students = @search.result
 
         @admissions = Admission.all
 
         @enrolled_students = Admission.where(:admission_period_id => params[:admission_period_id], :admission_method_id => params[:admission_method_id]).map {|i| i.student_id.to_s }
+        #@enrolled_students += Student.where("enrollment_status_id != ?", 1).map {|i| i.id.to_s }
 
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

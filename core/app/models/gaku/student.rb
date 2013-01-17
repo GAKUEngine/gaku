@@ -43,6 +43,7 @@ module Gaku
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
                     :picture,
+                    :is_deleted,
                     :student_id_number, :student_foreign_id_number,
                     :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
@@ -52,8 +53,9 @@ module Gaku
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
 
-
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
+
+    before_save :default_values
 
     def to_s
       "#{self.surname} #{self.name}"
@@ -77,6 +79,10 @@ module Gaku
     def address_widget
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
+    end
+
+    def default_values
+      self.enrollment_status_id ||= 1
     end
 
   end

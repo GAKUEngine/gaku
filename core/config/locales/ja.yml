@@ -1,594 +1,633 @@
 ja:
-  add: 追加
+  add: "追加"
   address:
-    add: 住所の追加
-    address1: 住所
-    address2: 住所(ビル・マンション・部屋など)
-    choose_country: 国を選択して下さい
-    city: 市
-    count: 登録されている住所の数
-    country: 国
-    edit: 住所を編集
-    list: 住所一覧
-    new: 住所を登録する
-    past: 過去の住所として登録しますか?
-    plural: 住所
-    prefecture: 県・州・地方
-    primary: 主たる住所
-    save: 住所を保存
-    search: 住所検索
-    singular: 住所
-    state: 県・州・地方
-    title: 住所のタイトル
-    zipcode: 郵便番号
-  admitted: 入学日
+    add: "住所の追加"
+    address1: "住所"
+    address2: "住所(ビル・マンション・部屋など)"
+    choose_country: "国を選択して下さい"
+    city: "市"
+    count: "登録されている住所の数"
+    country: "国"
+    edit: "住所を編集"
+    list: "住所一覧"
+    new: "住所を登録する"
+    past: "過去の住所として登録しますか?"
+    plural: "住所"
+    prefecture: "県・州・地方"
+    primary: "主要住所"
+    save: "住所を保存"
+    search: "住所検索"
+    singular: "住所"
+    state: "県・州・地方"
+    title: "住所のタイトル"
+    zipcode: "郵便番号"
+  admitted: "入学日"
   alert:
-    already_added: ! '%{resource}が既に登録されています!'
-    empty: ! '%{resource}が空です!'
-    not_selected: ! '%{resource}が未選択です!'
-  and: と
-  are_you_sure: 本当に実効しますか?
+    already_added: "%{resource}が既に登録されています!"
+    empty: "%{resource}が空です!"
+    not_selected: "%{resource}が未選択です!"
+  and: "と"
+  are_you_sure: "本当に実効しますか?"
   assignment:
-    add: 課題を追加
-    count: 課題総数
-    description: 課題の説明
-    list: 課題一覧
-    max_score: 最大点数
-    name: 課題名称
-    new: 課題の登録
-    plural: 課題
-    results: 課題結果
-    singular: 課題
-    view: 課題詳細を参照
+    add: "課題を追加"
+    count: "課題総数"
+    description: "課題の説明"
+    list: "課題一覧"
+    max_score: "最大点数"
+    name: "課題名称"
+    new: "課題の登録"
+    plural: "課題"
+    results: "課題結果"
+    singular: "課題"
+    view: "課題詳細を参照"
   assignments:
-    description: 課題の説明
+    description: "課題の説明"
   attachment:
-    asset_error: アセットのアップロード中にエラーが発生しました
-    asset_type: アセットの種類
-    asset_upload: アセットのアップロードに成功しました!
-    assets: アセット
-    create: アセットを登録
-    description: アセット詳細
-    file_name: ファイル名
-    file_size: ファイルサイズ
-    file_type: ファイル種類
-    list: 添付ファイル一覧
-    name: 名称
-    new: アセットの登録
-    plural: 添付ファイル
-    singular: 添付ファイル
+    asset_error: "アセットのアップロード中にエラーが発生しました"
+    asset_type: "アセットの種類"
+    asset_upload: "アセットのアップロードに成功しました!"
+    assets: "アセット"
+    create: "アセットを登録"
+    description: "アセット詳細"
+    file_name: "ファイル名"
+    file_size: "ファイルサイズ"
+    file_type: "ファイル種類"
+    list: "添付ファイル一覧"
+    name: "名称"
+    new: "アセットの登録"
+    plural: "添付ファイル"
+    singular: "添付ファイル"
   attendance_type:
-    add: 出席類を追加
-    auto_credit: 点数の自動計算
-    color_code: 色コード
-    counted_absent: 「欠席」として反映する
-    credit_rate: 点数の計算率
-    disable_credit: 得点無効
-    edit: 出席類の編集
-    list: 出席類一覧
-    name: 出席類名称
-    new: 新規出席類の登録
-    plural: 出席種類
-    save: 
-    singular: 
-  back: 戻る
-  birth: 生年月日
-  birth_and: 以下の生年月日まで
-  birth_between: 生年月日〜
-  birth_date: 生年月日
+    add: "出席類を追加"
+    auto_credit: "点数の自動計算"
+    color_code: "色コード"
+    counted_absent: "「欠席」として反映する"
+    credit_rate: "点数の計算率"
+    disable_credit: "得点無効"
+    edit: "出席類の編集"
+    list: "出席類一覧"
+    name: "出席類名称"
+    new: "新規出席類の登録"
+    plural: "出席種類"
+    save: "欠席種別を保存"
+    singular: "欠席種別"
+  back: "戻る"
+  birth: "生年月日"
+  birth_and: "以下の生年月日まで"
+  birth_between: "生年月日〜"
+  birth_date: "生年月日"
   campus:
-    add: キャンパスの追加
-    address: キャンパスの住所
-    contacs: キャンパスの連絡先
-    edit: キャンパス情報の編集
-    list: キャンパス一覧
-    name: キャンパス名
-    new: キャンパスを登録
-    plural: キャンパス
-    primary: メイン・キャンパス
-    save: キャンパス情報を保存する
-    singular: キャンパス
-  cancel: キャンセル
-  class: クラス
+    add: "キャンパスの追加"
+    address: "キャンパスの住所"
+    contacs: "キャンパスの連絡先"
+    edit: "キャンパス情報の編集"
+    list: "キャンパス一覧"
+    name: "キャンパス名"
+    new: "キャンパスを登録"
+    plural: "キャンパス"
+    primary: "メイン・キャンパス"
+    save: "キャンパス情報を保存する"
+    singular: "キャンパス"
+  cancel: "キャンセル"
+  changes:
+    change: "変更履歴"
+    changed_at: "変更時刻"
+    event: "イベント"
+    from: "フォーム"
+    student:
+      list: "生徒情報変更履歴"
+    student_address:
+      list: "生徒住所変更履歴"
+    student_contact:
+      list: "生徒連絡先変更履歴"
+    to: "変更後"
+  class: "クラス"
   class_group:
-    add: クラスを追加
-    choose: クラス選択
-    edit: クラスを編集
-    enroll: クラスに入籍
-    grade: 学年
-    homeroom: ホームルーム
-    list: クラス一覧
-    name: クラス名
-    new: クラスを登録
-    none: 無し
+    add: "クラスを追加"
+    choose: "クラス選択"
+    edit: "クラスを編集"
+    enroll: "クラスに入籍"
+    grade: "学年"
+    homeroom: "ホームルーム"
+    list: "クラス一覧"
+    name: "クラス名"
+    new: "クラスを登録"
+    none: "無し"
     none_assigned: None Assigned
-    plural: クラス
-    save: クラスを保存
-    show: クラス照会
-    singular: クラス
+    plural: "クラス"
+    save: "クラスを保存"
+    show: "クラス照会"
+    singular: "クラス"
   class_group_course_enrollment:
-    save: 
+    save: "クラスに授業を登録"
   class_group_enrollment:
-    count: 在籍数
-    create: 在籍クラスを作成
-    current: 現在の在籍
-    list: クラス名簿
-    new: 新しいクラス在籍
-    seat_number: 出席番号
-  class_group_management: クラス管理
-  commute_method: 通学手段
+    count: "在籍数"
+    create: "在籍クラスを作成"
+    current: "現在の在籍"
+    list: "クラス名簿"
+    new: "新しいクラス在籍"
+    seat_number: "出席番号"
+  class_group_management: "クラス管理"
+  commute_method:
+    plural: "通学方法"
+    singular: "通学方法"
   commute_method_type:
-    add: 通学手段を追加
-    edit: 通学手段を編集
-    list: 通学手段一覧
-    name: 名称
-    new: 通学手段を登録
-    plural: 通学手段種別
-    save: 通学手段種別を保存
-    singular: 通学手段種別
-  comname: 学園陣
+    add: "通学手段を追加"
+    edit: "通学手段を編集"
+    list: "通学手段一覧"
+    name: "名称"
+    new: "通学手段を登録"
+    plural: "通学手段種別"
+    save: "通学手段種別を保存"
+    singular: "通学手段種別"
+  comname: "学園陣"
   config:
-    close: 閉じる
+    close: "閉じる"
     help:
-      language: 使用する言語を選択してください。
-    label: 設定
-    save: 変更を保存
-  confirm: これで宜しいですか？
-  confirm_delete: 本当に削除しますか?
+      language: "使用する言語を選択してください。"
+    label: "設定"
+    save: "変更を保存"
+  confirm: "これで宜しいですか？"
+  confirm_delete: "本当に削除しますか?"
   contact:
-    add: 連絡先を追加
-    contact_type: 連絡先種別
-    create: 連絡先を作成
-    data: 連絡先情報
-    details: 連絡先詳細
-    edit: 連絡先を編集
-    emergency: 緊急連絡先
-    list: 連絡先一覧
-    new: 連絡先を登録
-    plural: 連絡先
-    primary: 主要連絡先
-    save: 連絡先を保存
-    singular: 連絡先
+    add: "連絡先を追加"
+    contact_type: "連絡先種別"
+    create: "連絡先を作成"
+    data: "連絡先情報"
+    details: "連絡先詳細"
+    edit: "連絡先を編集"
+    emergency: "緊急連絡先"
+    list: "連絡先一覧"
+    new: "連絡先を登録"
+    plural: "連絡先"
+    primary: "主要連絡先"
+    save: "連絡先を保存"
+    singular: "連絡先"
   contact_type:
-    add: 連絡先種別を追加
-    choose: 連絡先種別を選択して下さい
-    edit: 連絡手段を編集
-    list: 連絡先種別一覧
-    name: 連絡先名
-    new: 連絡先種別を登録
-    plural: 連絡先種別
-    save: 連絡先種別を保存
-    singular: 連絡先種別
+    add: "連絡先種別を追加"
+    choose: "連絡先種別を選択して下さい"
+    edit: "連絡手段を編集"
+    list: "連絡先種別一覧"
+    name: "連絡先名"
+    new: "連絡先種別を登録"
+    plural: "連絡先種別"
+    save: "連絡先種別を保存"
+    singular: "連絡先種別"
   course:
-    add: 授業を追加
-    choose: 授業選択
-    code: 授業コード
-    code_sample: 【例：国語2020】
-    combined_code: コードを結合
-    count: 授業数
-    edit: 授業を編集
-    list: 授業一覧
-    management: 授業管理
-    name: 授業名
-    new: 授業を登録
-    options: 授業オプション
-    plural: 授業
-    save: 授業を保存
-    show: 授業照会
-    singular: 授業
+    add: "授業を追加"
+    choose: "授業選択"
+    code: "授業コード"
+    code_sample: "【例：国語2020】"
+    combined_code: "コードを結合"
+    count: "授業数"
+    edit: "授業を編集"
+    list: "授業一覧"
+    management: "授業管理"
+    name: "授業名"
+    new: "授業を登録"
+    options: "授業オプション"
+    plural: "授業"
+    save: "授業を保存"
+    show: "授業照会"
+    singular: "授業"
   course_enrollment:
-    add: 授業に生徒を追加
-    create: 生徒を追加
-    list: 在籍者一覧
-    plural: 授業在籍
-    singular: 授業在籍
+    add: "授業に生徒を追加"
+    create: "生徒を追加"
+    list: "在籍者一覧"
+    plural: "授業在籍"
+    singular: "授業在籍"
   course_group:
-    course_group_recover: 授業グループを復元
-    edit: 授業グループを編集
-    list: コース一覧
-    name: グループ名
-    new: 新しい授業グループ
-    plural: 授業グループ
-    save: 授業グループを保存
-    show: 授業グループ照会
-    singular: 授業グループ
+    course_group_recover: "授業グループを復元"
+    edit: "授業グループを編集"
+    list: "コース一覧"
+    name: "グループ名"
+    new: "新しい授業グループ"
+    plural: "授業グループ"
+    save: "授業グループを保存"
+    show: "授業グループ照会"
+    singular: "授業グループ"
   course_group_enrollment:
-    save: 
+    save: "授業グループを保存"
   csv:
     export: CSVで書き出し
     fields:
-      admitted: 
-      birth_date: 
+      admitted: "認証済み"
+      birth_date: "誕生日"
       email: Eメール
-      gender: 性別
-      name: 名
-      name_reading: フリガナ（名）
-      phone: 電話
-      surname: 姓
-      surname_reading: フリガナ（姓）
+      gender: "性別"
+      name: "名"
+      name_reading: "フリガナ（名）"
+      phone: "電話"
+      surname: "姓"
+      surname_reading: "フリガナ（姓）"
     import: CSVを読み込む
   date_placeholder: YYYY-MM-DD
-  default: デフェルト
-  delete: 削除
-  description: 説明
-  destroy: 消去
+  default: "デフェルト"
+  delete: "削除"
+  description: "説明"
+  destroy: "消去"
   devise:
     confirmations:
-      confirmed: アカウントを登録しました。
-      send_instructions: 登録方法を数分以内にメールでご連絡します。
-      send_paranoid_instructions: もしあなたのEメールアドレスが見つかった場合、本人確認についてのメールが数分以内に送られます。
+      confirmed: "アカウントを登録しました。"
+      send_instructions: "登録方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "もしあなたのEメールアドレスが見つかった場合、本人確認についてのメールが数分以内に送られます。"
     email: Eメール
     failure:
-      already_authenticated: 既にログインしています。
-      inactive: アカウントがアクティベートされていません。
-      invalid: メールアドレスかパスワードが違います。
-      invalid_token: 認証キーが不正です。
-      locked: あなたのアカウントは凍結されています。
-      timeout: セッションがタイムアウトしました。もう一度ログインしてください。
-      unauthenticated: ログインしてください。
-      unconfirmed: 本登録を行ってください。
-    login: 
+      already_authenticated: "既にログインしています。"
+      inactive: "アカウントがアクティベートされていません。"
+      invalid: "メールアドレスかパスワードが違います。"
+      invalid_token: "認証キーが不正です。"
+      locked: "あなたのアカウントは凍結されています。"
+      timeout: "セッションがタイムアウトしました。もう一度ログインしてください。"
+      unauthenticated: "ログインしてください。"
+      unconfirmed: "本登録を行ってください。"
+    login: "ユーザー名かEメール"
     mailer:
       confirmation_instructions:
-        subject: アカウントの登録方法
+        subject: "アカウントの登録方法"
       reset_password_instructions:
-        subject: パスワードの再設定
+        subject: "パスワードの再設定"
       unlock_instructions:
-        subject: アカウントの凍結解除
+        subject: "アカウントの凍結解除"
     omniauth_callbacks:
-      failure: ! '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
-      success: ! '%{kind} アカウントによる個人認証に成功しました。'
-    password: パスワード
-    password_confirmation: パスワード（確認用）
+      failure: "%{kind} アカウントによる個人認証に失敗しました（%{reason}）。"
+      success: "%{kind} アカウントによる個人認証に成功しました。"
+    password: "パスワード"
+    password_confirmation: "パスワード（確認用）"
     passwords:
-      forgot: パスワードをお忘れの場合
-      no_token: このページにはアクセスできません。パスワード復元メールのリンクをコピーした場合には、正しい URL かどうかをお確かめください。
-      send_instructions: パスワードのリセット方法を数分以内にメールでご連絡します。
-      send_paranoid_instructions: もしあなたのEメールアドレスが見つかった場合、パスワード復元用のメールが数分以内に送られます。
-      updated: パスワードを変更しました。
-      updated_not_active: パスワードが正しく変更されました。
+      forgot: "パスワードをお忘れの場合"
+      no_token: "このページにはアクセスできません。パスワード復元メールのリンクをコピーした場合には、正しい URL かどうかをお確かめください。"
+      send_instructions: "パスワードのリセット方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "もしあなたのEメールアドレスが見つかった場合、パスワード復元用のメールが数分以内に送られます。"
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードが正しく変更されました。"
     registrations:
-      destroyed: アカウントを削除しました。またのご利用をお待ちしております。
-      inactive_signed_up: 
+      destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
+      inactive_signed_up: "サインアップに成功しましたが、%{reason}の為にサインイン出来ません。"
       reasons:
-        inactive: 非アクティブ
-        locked: ロック
-        unconfirmed: 未確認
-      sign_up: サインアップ
-      signed_up: ようこそ！ アカウント登録を受け付けました。
-      signed_up_but_inactive: アカウント登録を受け付けました。しかしまだ有効化されておらず、ログインできません。
-      signed_up_but_locked: アカウント登録を受け付けました。しかし、アカウントが凍結されているためログインできません。
-      signed_up_but_unconfirmed: 本人確認用のメールがあなたのEメールアドレスに送られました。メール内のリンクからアカウントを有効化さ>せてください。
-      update_needs_confirmation: アカウント情報を変更しましたが、Eメールアドレスの本人確認用Eメールをお送りしましたので、中のリンクをクリックして証明してください。
-      updated: アカウント情報を変更しました。
+        inactive: "非アクティブ"
+        locked: "ロック"
+        unconfirmed: "未確認"
+      sign_up: "サインアップ"
+      signed_up: "ようこそ！ アカウント登録を受け付けました。"
+      signed_up_but_inactive: "アカウント登録を受け付けました。しかしまだ有効化されておらず、ログインできません。"
+      signed_up_but_locked: "アカウント登録を受け付けました。しかし、アカウントが凍結されているためログインできません。"
+      signed_up_but_unconfirmed: "本人確認用のメールがあなたのEメールアドレスに送られました。メール内のリンクからアカウントを有効化さ>せてください。"
+      update_needs_confirmation: "アカウント情報を変更しましたが、Eメールアドレスの本人確認用Eメールをお送りしましたので、中のリンクをクリックして証明してください。"
+      updated: "アカウント情報を変更しました。"
     sessions:
-      remember_me: ログイン情報を記録する
-      sign_in: サインイン
-      sign_out: サインアウト
-      signed_in: ログインしました。
-      signed_out: ログアウトしました。
+      remember_me: "ログイン情報を記録する"
+      sign_in: "サインイン"
+      sign_out: "サインアウト"
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
     unlocks:
-      send_instructions: アカウントの凍結解除方法を数分以内にメールでご連絡します。
-      send_paranoid_instructions: アカウントが見つかった場合、アカウントの凍結解除方法を数分以内にメールでご連絡します。
-      unlocked: アカウントを凍結解除しました。ログインしています。
-    username: 
-  edit: 編集
-  email: メールアドレス
-  enroll_to_class: クラスに登録
+      send_instructions: "アカウントの凍結解除方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "アカウントが見つかった場合、アカウントの凍結解除方法を数分以内にメールでご連絡します。"
+      unlocked: "アカウントを凍結解除しました。ログインしています。"
+    username: "ユーザー名"
+  edit: "編集"
+  email: "メールアドレス"
+  enroll_to_class: "クラスに登録"
   enrollment:
-    plural: 在籍
-    singular: 在籍
+    plural: "在籍"
+    singular: "在籍"
+  enrollment_status:
+    active: "アクティブ"
+    add: "在学状況を追加"
+    edit: "在学状況を編集"
+    list: "在学状況一覧"
+    name: "名前"
+    new: "新規在学状況"
+    plural: "在学状況"
+    save: "在学状況を保存"
+    singular: "在学状況"
   enrollment_status_type:
-    active: 在籍中
-    add: 在籍状態を追加
-    edit: 在籍状態を編集
-    list: 在籍状態一覧
-    name: 状態名
-    new: 在籍状態を登録
-    plural: 在籍状態
-    save: 在籍状態を保存
-    singular: 在籍状態
+    active: "在籍中"
+    add: "在籍状態を追加"
+    edit: "在籍状態を編集"
+    list: "在籍状態一覧"
+    name: "状態名"
+    new: "在籍状態を登録"
+    plural: "在籍状態"
+    save: "在籍状態を保存"
+    singular: "在籍状態"
   errors:
     messages:
-      already_confirmed: は既に登録済みですのでログインしてください
-      expired: の期限が切れましたので、新しくリクエストしてください
-      not_found: は見つかりませんでした
-      not_locked: は凍結されていません
+      already_confirmed: "は既に登録済みですのでログインしてください"
+      expired: "の期限が切れましたので、新しくリクエストしてください"
+      not_found: "は見つかりませんでした"
+      not_locked: "は凍結されていません"
       not_saved:
         one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
-        other: ! '%{count} つのエラーにより %{resource} は保存されませんでした:'
-    not_uploaded: 
+        other: "%{count} つのエラーにより %{resource} は保存されませんでした:"
+    not_uploaded: "アップロード中にエラーが発生しました。%{resource}"
   exam:
-    add: 試験を追加
-    add_existing: 既存の試験を追加
-    add_portion: 試験要素を追加
-    adjustments: 調整
-    choose: 試験を選択
-    choose_schedule: 日程を選択
-    count: 試験数
-    description: 試験の説明
-    edit: 試験を編集
-    grading_method: 採点方法
-    list: 試験一覧
-    name: 試験名
-    new: 試験を登録
-    new_exam: 試験コンテンツを登録
-    options: 試験オプション
-    plural: 試験
-    save: 試験を保存
-    select: 試験を選択
-    show: 試験照会
-    singular: 試験
-    total_weight: 合計加重率
-    use_weighting: 加重率を使用
-    view: 試験を照会
-    weight: 加重率
-    exam_score: Exam Score
-
+    add: "試験を追加"
+    add_existing: "既存の試験を追加"
+    add_portion: "試験要素を追加"
+    adjustments: "調整"
+    choose: "試験を選択"
+    choose_schedule: "日程を選択"
+    count: "試験数"
+    description: "試験の説明"
+    edit: "試験を編集"
+    exam_score: "試験点数"
+    grading_method: "採点方法"
+    list: "試験一覧"
+    name: "試験名"
+    new: "試験を登録"
+    new_exam: "試験コンテンツを登録"
+    options: "試験オプション"
+    plural: "試験"
+    save: "試験を保存"
+    select: "試験を選択"
+    show: "試験照会"
+    singular: "試験"
+    total_weight: "合計加重率"
+    use_weighting: "加重率を使用"
+    view: "試験を照会"
+    weight: "加重率"
   exam_portion:
-    adjustments: 調整
-    attached_file_count: 添付ファイル数
-    count: 試験要素数
-    description: 説明
-    edit: 試験要素を編集
-    execution_date: 実施日
-    is_master: マスター
-    list: 試験要素一覧
-    master: 試験要素マスター
-    max_score: 最高点数
-    name: 試験要素名
-    plural: 
-    problem_count: 問題数
-    save: 試験要素を保存
-    show: 試験要素照会
-    singular: 
-    use_weighting: 加重率を使用
-    weight: 加重率
+    adjustments: "調整"
+    attached_file_count: "添付ファイル数"
+    count: "試験要素数"
+    description: "説明"
+    edit: "試験要素を編集"
+    execution_date: "実施日"
+    is_master: "マスター"
+    list: "試験要素一覧"
+    master: "試験要素マスター"
+    max_score: "最高点数"
+    name: "試験要素名"
+    plural: "試験要素"
+    problem_count: "問題数"
+    save: "試験要素を保存"
+    show: "試験要素照会"
+    singular: "試験要素"
+    use_weighting: "加重率を使用"
+    weight: "加重率"
   flash:
     actions:
       create:
-        notice: ! '%{resource_name}は正常に作成されました'
+        notice: "%{resource_name}は正常に作成されました"
       destroy:
-        alert: ! '%{resource_name}は消去出来ませんでした'
-        notice: ! '%{resource_name}は正常に消去されました'
+        alert: "%{resource_name}は消去出来ませんでした"
+        notice: "%{resource_name}は正常に消去されました"
       update:
-        notice: ! '%{resource_name}は正常に更新されました'
+        notice: "%{resource_name}は正常に更新されました"
   gender:
-    choose: 性別を選択
-    female: 女性
-    label: 性別
-    male: 男性
-    unknown: 未登録
-  given_name: 名
+    choose: "性別を選択"
+    female: "女性"
+    label: "性別"
+    male: "男性"
+    unknown: "未登録"
+  given_name: "名"
   grade:
-    all_exams: 全試験
-    average_points: 平均点
-    average_score: 平均点
-    deviation: 偏差値
-    grading: 採点
-    how_grade: 採点方法
-    max: 最高点数
-    max_points: 最高点数
-    percent: ％
-    points: 点
-    rank: １０段階評価 / ５段階評価
-    total: 合計
-    total_points: 合計点数
-    weighting: 加重率
-    weighting_portion: 試験要素加重率
-  graduated: 卒業日
+    all_exams: "全試験"
+    average_points: "平均点"
+    average_score: "平均点"
+    deviation: "偏差値"
+    grading: "採点"
+    how_grade: "採点方法"
+    max: "最高点数"
+    max_points: "最高点数"
+    percent: "％"
+    points: "点"
+    rank: "１０段階評価 / ５段階評価"
+    total: "合計"
+    total_points: "合計点数"
+    weighting: "加重率"
+    weighting_portion: "試験要素加重率"
+  graduated: "卒業日"
   guardian:
-    add: 保護者を追加
-    edit: 保護者を編集
-    guardians: 保護者
-    list: 保護者一覧
-    name: 保護者氏名
-    new: 保護者を登録
-    plural: 保護者
-    relationship: 続柄
-    save: 保護者を保存
-    singular: 保護者
-  hello: ハローワールド
+    add: "保護者を追加"
+    edit: "保護者を編集"
+    guardians: "保護者"
+    list: "保護者一覧"
+    name: "保護者氏名"
+    new: "保護者を登録"
+    plural: "保護者"
+    relationship: "続柄"
+    save: "保護者を保存"
+    singular: "保護者"
+  hello: "ハローワールド"
   helpers:
     links:
-      cancel: キャンセル
-  hide: 非表示
-  history: 履歴
-  id: 
-  import_format: インポート形式
-  language: 言語
+      cancel: "キャンセル"
+  hide: "非表示"
+  history: "履歴"
+  id: ID
+  import_format: "インポート形式"
+  language: "言語"
   languages:
     en: English[英語]
-    ja: 日本語
-  manage: 管理
+    ja: "日本語"
+  manage: "管理"
   menu:
     admin:
-      admin: 管理者
-      administration: 管理
-      administrator: 管理者
+      admin: "管理者"
+      administration: "管理"
+      administrator: "管理者"
+      changes:
+        changes: "変更・削除履歴"
+        student_addresses: "生徒住所"
+        student_contacts: "生徒連絡先"
+        students: "生徒"
       disposals:
-        attachment: 添付ファイルを処分
-        course_group: 授業グループを処分
-        disposals: 処分
-        exam: 試験を処分する
+        attachment: "添付ファイルを処分"
+        course_group: "授業グループを処分"
+        disposals: "処分"
+        exam: "試験を処分する"
+        student_address: "生徒住所削除一覧"
       preset:
         grading:
-          grading_method: 採点方法
-          grading_scheme: 採点方式
+          grading_method: "採点方法"
+          grading_scheme: "採点方式"
         items:
-          grading: 採点プリセット
-          locale: 言語プリセット
-          student: 生徒プリセット
-        plural: プリセット
-        save: プリセットを保存
-        singular: プリセット
+          grading: "採点プリセット"
+          locale: "言語プリセット"
+          student: "生徒プリセット"
+        plural: "プリセット"
+        save: "プリセットを保存"
+        singular: "プリセット"
         student:
-          city: 市区
-          country: 国
-          gender: 性別
-          state: 都道府県
-      school_details: 学校詳細
-      schools: 学校
+          city: "市区"
+          country: "国"
+          gender: "性別"
+          state: "都道府県"
+      school_details: "学校詳細"
+      schools: "学校"
+      specialties: "専攻"
       system:
-        backup: バックアップ
-        system_tools: システムツール
+        backup: "バックアップ"
+        system_tools: "システムツール"
       types:
-        attendance_types: 
-        commute_methods: 通学手段
-        contact: 連絡先種別
-        enrollment_status: 在籍状態
-        types: 種別と方法
+        attendance_types: "欠席種別"
+        commute_methods: "通学手段"
+        contact: "連絡先種別"
+        enrollment_status: "在籍状態"
+        types: "種別と方法"
     class_group:
-      management: クラス管理
-      plural: クラス
+      management: "クラス管理"
+      plural: "クラス"
     course:
-      management: 授業管理
-      plural: 授業
+      management: "授業管理"
+      plural: "授業"
     course_group:
-      plural: 授業グループ
+      plural: "授業グループ"
     exam:
-      management: 試験管理
-      plural: 試験
+      management: "試験管理"
+      plural: "試験"
     student:
-      plural: 生徒
+      plural: "生徒"
     syllabus:
-      plural: 科目
-  name: 名前
-  name_reading: フリガナ（名）
-  none: 未登録
+      plural: "科目"
+  name: "名前"
+  name_reading: "フリガナ（名）"
+  none: "未登録"
   note:
-    add: 備考を追加
-    content: 本文
-    delete: 備考を削除
-    edit: 備考を編集
-    list: 備考一覧
-    new: 備考を登録
-    plural: 備考
-    save: 備考を保存
-    singular: 備考
-    title: 備考タイトル
+    add: "備考を追加"
+    content: "本文"
+    delete: "備考を削除"
+    edit: "備考を編集"
+    list: "備考一覧"
+    new: "備考を登録"
+    plural: "備考"
+    save: "備考を保存"
+    singular: "備考"
+    title: "備考タイトル"
   notice:
-    added: ! '%{resource}は正常に追加されました'
-    created: ! '%{resource}は正常に作成されました'
-    destroyed: ! '%{resource}は正常に消去されました'
-    enrolled: ! '%{resource}は%{to}に正常に追加されました'
-    no_resource_assign_first: ! '%{resource}はありません、一つ登録してください'
-    recovered: ! '%{resource}は正常に復元されました'
-    removed: ! '%{resource}は正常に削除されました'
-    updated: ! '%{resource}は正常に更新されました'
-    uploaded: ! '%{resource}は正常にアップロードされました'
-  num_enrolled: 在籍人数
-  options: オプション
-  order: 
-  panel: パネル
-  period: 期間
-  phone: 電話番号
-  phonetic_reading: ﾌﾘｶﾞﾅ
-  picture: 画像
+    added: "%{resource}は正常に追加されました"
+    created: "%{resource}は正常に作成されました"
+    destroyed: "%{resource}は正常に消去されました"
+    enrolled: "%{resource}は%{to}に正常に追加されました"
+    no_resource_assign_first: "%{resource}はありません、一つ登録してください"
+    recovered: "%{resource}は正常に復元されました"
+    removed: "%{resource}は正常に削除されました"
+    updated: "%{resource}は正常に更新されました"
+    uploaded: "%{resource}は正常にアップロードされました"
+  num_enrolled: "在籍人数"
+  options: "オプション"
+  order: "順序"
+  panel: "パネル"
+  period: "期間"
+  phone: "電話番号"
+  phonetic_reading: "ﾌﾘｶﾞﾅ"
+  picture: "画像"
   pictures:
-    change: 写真を変更
-    upload: 写真をアップロード
+    change: "写真を変更"
+    upload: "写真をアップロード"
   preset:
     grading:
-      grading_method: 
-      grading_scheme: 
-    plural: 
-    save: 
-    singular: 
+      grading_method: "採点処理方式"
+      grading_scheme: "評価基準"
+    plural: "プリセット"
+    save: "プリセットを保存"
+    singular: "プリセット"
     student:
-      city: 
-      country: 
-      gender: 
-      state: 
-  profile: プロフィール
+      city: "市区町村"
+      country: "国"
+      gender: "性別"
+      state: "都道府県"
+  profile: "プロフィール"
   profiles:
-    new: 新規プロフィール登録
-    save: プロフィールを保存
-  required: 必須
-  revert: 元に戻す
-  schedule: 定刻
-  scholarship_status: 奨学生
+    new: "新規プロフィール登録"
+    save: "プロフィールを保存"
+  required: "必須"
+  revert: "元に戻す"
+  schedule: "定刻"
+  scholarship_status: "奨学生"
   school:
-    add: 学校を追加
-    campuses: キャンパス
-    code: 学校コード
-    description: 学校の説明
-    edit: 学校を編集
-    edit_master: 主要学校を編集
-    founded: 設立日
-    grades: 学年設定
-    list: 学校一覧
-    master: 主要学校
-    name: 学校名
-    new: 学校を登録
-    plural: 学校
-    primary: 主要学校
-    principal: 学長
-    save: 学校を保存
-    singular: 学校
-    slogan: 校訓
-    vice_principal: 教頭
-  search: 検索
-  select: 選択
+    add: "学校を追加"
+    campuses: "キャンパス"
+    code: "学校コード"
+    description: "学校の説明"
+    edit: "学校を編集"
+    edit_master: "主要学校を編集"
+    founded: "設立日"
+    grades: "学年設定"
+    list: "学校一覧"
+    master: "主要学校"
+    name: "学校名"
+    new: "学校を登録"
+    plural: "学校"
+    primary: "主要学校"
+    principal: "学長"
+    save: "学校を保存"
+    singular: "学校"
+    slogan: "校訓"
+    vice_principal: "教頭"
+  search: "検索"
+  select: "選択"
   semester:
-    add: 学期を追加
-    edit: 学期を編集
-    ending: 学期終了日
-    ending_after_starting: 開始後に終了して下さい
-    list: 学期一覧
-    number: 学期番号
-    plural: 学期
-    save: 学期を保存
-    starting: 開始
-    uniqueness: 既に追加された学期です
-  show: 照会
+    add: "学期を追加"
+    edit: "学期を編集"
+    ending: "学期終了日"
+    ending_after_starting: "開始後に終了して下さい"
+    list: "学期一覧"
+    number: "学期番号"
+    plural: "学期"
+    save: "学期を保存"
+    starting: "開始"
+    uniqueness: "既に追加された学期です"
+  show: "照会"
+  specialty:
+    add: "専攻を追加"
+    description: "説明文"
+    edit: "専攻を編集"
+    list: "専攻一覧"
+    major_only: "主専攻に限定"
+    name: "専攻名"
+    save: "専攻を保存"
+    singular: "専攻"
   student:
-    add: 生徒を追加
-    birth_and: と
-    birth_between: 生年月日〜
-    chosen_students: 生徒を選択
-    class_group_enrollment: クラスに生徒を追加
-    commute_method: 通勤手段
-    create: 生徒を作成
-    edit: 編集
-    enroll: 生徒を追加
-    export: 生徒情報をCSVで書き出し
-    import: 生徒情報のインポート
-    list: 生徒一覧
-    name: 生徒名
-    new: 生徒を登録
-    plural: 生徒
+    add: "生徒を追加"
+    birth_and: "と"
+    birth_between: "生年月日〜"
+    chosen_students: "生徒を選択"
+    class_group_enrollment: "クラスに生徒を追加"
+    commute_method: "通勤手段"
+    create: "生徒を作成"
+    edit: "編集"
+    enroll: "生徒を追加"
+    export: "生徒情報をCSVで書き出し"
+    import: "生徒情報のインポート"
+    list: "生徒一覧"
+    name: "生徒名"
+    new: "生徒を登録"
+    plural: "生徒"
     registration:
       csv: CSVで生徒を登録
-      sheet: 登録用のCSVをダウンロード
-    save: 
-    show: 生徒照会
-    singular: 生徒
-  submit: 登録する
-  surname: 姓
-  surname_reading: フリガナ（姓）
+      sheet: "登録用のCSVをダウンロード"
+    save: "生徒を保存"
+    show: "生徒照会"
+    singular: "生徒"
+  submit: "登録する"
+  surname: "姓"
+  surname_reading: "フリガナ（姓）"
   syllabus:
-    code: 科目コード
-    credits: 単位
-    description: 授業の説明
-    edit: 科目を編集
-    import: 科目情報のインポート
-    list: 科目一覧
-    name: 授業名
-    name_sample: 【例：数学A】
-    new: 科目を登録
-    plural: 科目
-    save: 科目を保存
-    show: 科目照会
-    singular: 科目
-  teacher: 教師
-  title: タイトル
+    code: "科目コード"
+    credits: "単位"
+    description: "授業の説明"
+    edit: "科目を編集"
+    import: "科目情報のインポート"
+    list: "科目一覧"
+    name: "授業名"
+    name_sample: "【例：数学A】"
+    new: "科目を登録"
+    plural: "科目"
+    save: "科目を保存"
+    show: "科目照会"
+    singular: "科目"
+  teacher: "教師"
+  title: "タイトル"
   user:
-    info: ユーザー情報
+    info: "ユーザー情報"
   views:
     pagination:
-      first: ! '&laquo; 最初'
-      last: 最後 &raquo;
-      next: 次 &rsaquo;
-      previous: ! '&lsaquo; 前'
-      truncate: ! '...'
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      next: "次 &rsaquo;"
+      previous: "&lsaquo; 前"
+      truncate: "..."
