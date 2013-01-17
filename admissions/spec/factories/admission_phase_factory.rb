@@ -8,11 +8,11 @@ FactoryGirl.define do
     name 'Exam'
     position 1
     after_build do |phase_exam|
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_pre_exam, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_passed, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_rejected, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_abscent, :admission_phase => phase_exam)
-      #phase_exam.exam = FactoryGirl.build(:exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_pre_exam, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_passed, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_rejected, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_abscent, :admission_phase => phase_exam)
+      phase_exam.exam = FactoryGirl.build(:exam)
     end
   end
   factory :admission_phase_interview, :class => Gaku::AdmissionPhase do

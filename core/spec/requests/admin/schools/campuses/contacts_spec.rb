@@ -6,13 +6,11 @@ describe 'Admin School Campus Contact' do
 
   let(:school) { create(:school) }
   let(:contact_type) { create(:contact_type, :name => 'email') }
-  let(:contact) { create(:contact, :contact_type => contact_type) }
-  let(:contact2) { create(:contact, :data => 'gaku2@example.com', :contact_type => contact_type) }
+
   before :all do
     set_resource "admin-school-campus-contact"
   end
-
-
+  
   context 'new', :js => true do
     before do
       contact_type
@@ -42,61 +40,73 @@ describe 'Admin School Campus Contact' do
   end
 
   context "existing", :js => true do
-    before do
-      school.campuses.first.contacts << contact
-    end
+    context 'one contact' do
 
-    context 'edit' do
       before do
-        contact_type
-        visit gaku.admin_school_campus_path(school, school.campuses.first)
-        click edit_link
-        wait_until_visible modal
+        @school = create(:school_with_one_contact)
+        @school.reload
       end
 
-      it "edits" do
-        fill_in 'contact_data', :with => 'example@genshin.org'
-        click submit
+      context 'edit' do
+        before do
+          contact_type
+          visit gaku.admin_school_campus_path(@school, @school.campuses.first)
+          click edit_link
+          wait_until_visible modal
+        end
 
-        wait_until_invisible modal
-        page.should have_content 'example@genshin.org'
-        flash_updated?
-      end
+        it "edits" do
+          fill_in 'contact_data', :with => 'example@genshin.org'
+          click submit
 
-      it 'cancels editting', :cancel => true do
-        ensure_cancel_modal_is_working
+          wait_until_invisible modal
+          page.should have_content 'example@genshin.org'
+          flash_updated?
+        end
+
+        it 'cancels editting', :cancel => true do
+          ensure_cancel_modal_is_working
+        end
+
+        it "deletes" do
+          contact_field = @school.campuses.first.contacts.first.data
+          visit gaku.admin_school_campus_path(@school, @school.campuses.first)
+
+          within(count_div) { page.should have_content 'Contacts list(1)' }
+          page.should have_content contact_field
+
+          expect do
+            ensure_delete_is_working
+          end.to change(@school.campuses.first.contacts, :count).by -1
+
+          page.should_not have_content contact_field
+          within(count_div) { page.should_not have_content 'Contacts list(1)' }
+          flash_destroyed?
+        end
       end
     end
 
-    it "sets as primary" do
+    context 'two contacts' do
 
-      school.campuses.first.contacts << contact2
+      before do
+        @school = create(:school_with_two_contacts)
+        @school.reload
+      end
 
-      visit gaku.admin_school_campus_path(school, school.campuses.first)
+      it "sets as primary" do
+        visit gaku.admin_school_campus_path(@school, @school.campuses.first)
 
-      school.campuses.first.contacts.first.is_primary? == true
-      school.campuses.first.contacts.second.is_primary? == false
+        @school.campuses.first.contacts.first.primary? == true
+        @school.campuses.first.contacts.second.primary? == false
 
-      within('table#admin-school-campus-contacts-index tr#contact-2') { click_link 'set-primary-link' }
-      accept_alert
+        within('table#admin-school-campus-contacts-index tr#contact-2') { click_link 'set-primary-link' }
+        accept_alert
 
-      school.campuses.first.contacts.first.is_primary? == false
-      school.campuses.first.contacts.second.is_primary? == true
+        @school.campuses.first.contacts.first.primary? == false
+        @school.campuses.first.contacts.second.primary? == true
+      end
     end
 
-    it "deletes" do
-      visit gaku.admin_school_campus_path(school, school.campuses.first)
 
-      within(count_div) { page.should have_content 'Contacts list(1)' }
-      page.should have_content(contact.data)
-
-      expect do
-        ensure_delete_is_working
-      end.to change(school.campuses.first.contacts, :count).by -1
-
-      page.should_not have_content(contact.data)
-      within(count_div) { page.should_not have_content 'Contacts list(1)' }
-      flash_destroyed?
-    end
   end
 end

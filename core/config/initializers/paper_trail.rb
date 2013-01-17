@@ -3,5 +3,5 @@ class Version < ActiveRecord::Base
 
   scope :students, lambda { where(:item_type => 'Gaku::Student') }
   scope :student_contacts, lambda { where(:item_type => 'Gaku::Contact', :join_model => 'Gaku::Student') }
-  scope :student_addresses, lambda { where(:item_type => 'Gaku::Address', :join_model => 'Gaku::StudentAddress') }
+  scope :student_addresses, lambda { where(:item_type => 'Gaku::Address', :join_model => 'Gaku::Student') }
 end

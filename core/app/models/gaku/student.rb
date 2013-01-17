@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    before_save :default_values
+    include Addresses, Contacts, Notes, Trashable
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
@@ -12,15 +12,8 @@ module Gaku
     has_many :student_specialties
     has_many :specialities, :through => :student_specialties
 
-    has_many :student_addresses
-    has_many :addresses, :through => :student_addresses
-
     has_many :exam_portion_scores
     has_many :assignment_scores
-
-    has_many :contacts, as: :contactable
-    has_many :notes, as: :notable
-    has_many :addresses, as: :addressable
 
     has_many :attendances
     has_many :enrollment_statuses
@@ -49,8 +42,6 @@ module Gaku
                     :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
-                    :notes, :notes_attributes,
-                    :addresses, :addresses_attributes,
                     :picture,
                     :is_deleted,
                     :student_id_number, :student_foreign_id_number,
@@ -61,13 +52,10 @@ module Gaku
     validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
-    accepts_nested_attributes_for :notes,     :allow_destroy => true
-    accepts_nested_attributes_for :addresses, :allow_destroy => true
-    accepts_nested_attributes_for :contacts,  :allow_destroy => true
 
-    default_scope where(:is_deleted => false)
+    #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
-    # methods for json student chooser returning
+    before_save :default_values
 
     def to_s
       "#{self.surname} #{self.name}"
@@ -93,12 +81,9 @@ module Gaku
       pa.blank? ? nil : pa.city
     end
 
-    def primary_address
-      self.student_addresses.where(:is_primary => true).first.try(:address)
-    end
-
-     def default_values
+    def default_values
       self.enrollment_status_id ||= 1
     end
+
   end
 end
