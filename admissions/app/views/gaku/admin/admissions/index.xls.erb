@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <% @admission_method = Gaku::AdmissionMethod.find(params[:admission_method]) %>
+  <% @admission_method.phases.each_with_index do |phase, index| %>
+    <Worksheet ss:Name="<%= phase %>">
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">ID</Data></Cell>
+          <Cell><Data ss:Type="String">Name</Data></Cell>
+          <Cell><Data ss:Type="String">Release Date</Data></Cell>
+          <Cell><Data ss:Type="String">Price</Data></Cell>
+        </Row>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>
+
+
