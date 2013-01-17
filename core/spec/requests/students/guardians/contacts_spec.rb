@@ -106,7 +106,7 @@ describe 'Student Guardian Contacts' do
 
           wait_until_invisible modal
           page.should have_content '777'
-          page.find(table).should_not contact_field
+          page.find(table).should_not have_content(contact_field)
           flash_updated?
         end
 
@@ -143,15 +143,15 @@ describe 'Student Guardian Contacts' do
         contact1_tr = "#contact-#{@guardian.contacts.first.id}"
         contact2_tr = "#contact-#{@guardian.contacts.second.id}"
 
-        click "#{contact2_tr} td.primary-button a"
+        within("#{table} #{contact2_tr}") { click_link 'set-primary-link' }
         accept_alert
 
-        page.find("#{contact2_tr} td.primary-button a.btn-primary")
+        !page.find("#{contact2_tr} td.primary-contact a.btn-primary")
 
         click "#{contact2_tr} .delete-link"
         accept_alert
 
-        page.find("#{contact1_tr} td.primary-button a.btn-primary")
+        page.find("#{contact1_tr} td.primary-contact a.btn-primary")
 
         @guardian.contacts.first.primary? == true
       end

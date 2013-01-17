@@ -92,10 +92,10 @@ describe 'Student Contacts' do
       before do
         @student = create(:student_with_two_contacts)
         @student.reload
+        visit gaku.student_path(@student)
       end
 
       it "sets primary", :js => true do
-        visit gaku.student_path(@student)
 
         @student.contacts.first.primary? == true
         @student.contacts.second.primary? == false
@@ -111,16 +111,15 @@ describe 'Student Contacts' do
         contact1_tr = "#contact-#{@student.contacts.first.id}"
         contact2_tr = "#contact-#{@student.contacts.second.id}"
 
-        visit gaku.student_path(@student)
-
-        click "#{contact2_tr} td.primary-button a"
+        within("#{table} #{contact2_tr}") { click_link 'set-primary-link' }
         accept_alert
-        page.find("#{contact2_tr} td.primary-button a.btn-primary")
+
+        !page.find("#{contact2_tr} td.primary-contact a.btn-primary")
 
         click "#{contact2_tr} .delete-link"
         accept_alert
 
-        page.find("#{contact1_tr} .primary-button a.btn-primary")
+        page.find("#{contact1_tr} .primary-contact a.btn-primary")
         @student.contacts.first.primary? == true
       end
 
