@@ -3,10 +3,10 @@
     <table class='exam-frame-table exam_grid table table-striped table-bordered table-condensed'>
       <thead>
         <tr>
-          <th class='btn-primary'>Student </th>
+          <th class='btn-primary'>Student</th>
           <% for exam in @exams: %>
-            <th class='btn-success' colspan='3'>   
-                <%= exam.name %></th>
+            <th class='btn-success' colspan='3'>
+              <%= exam.name %></th>
             </th>
           <% end %>
         </tr>
@@ -14,8 +14,12 @@
       <tbody>
         <tr>
           <td id='exam-grading-user'>1</td>
-          <td id='exam-grading-score'>2</td>
-          <td id='exam-grading-calculations'>3</td>
+          <td>
+            <% for exam in @exams: %>
+              <td id='exam-grading-score'>2</td>
+              <td id='exam-grading-calculations'>3</td>
+            <% end %>
+          </td>
         </tr>
     <table>
   </div>
