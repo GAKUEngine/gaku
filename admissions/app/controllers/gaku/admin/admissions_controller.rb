@@ -4,6 +4,7 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
+      respond_to :xls, :only => :xls
 
       helper_method :sort_column, :sort_direction
 
