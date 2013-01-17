@@ -1,8 +1,6 @@
 module Gaku
   class Student < ActiveRecord::Base
-
-    before_save :default_values
-
+    
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
 
@@ -92,9 +90,6 @@ module Gaku
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
     end
-    
-    def default_values
-      self.enrollment_status_id ||= Gaku::EnrollmentStatus.find_by_code("applicant").id
-    end
+
   end
 end
