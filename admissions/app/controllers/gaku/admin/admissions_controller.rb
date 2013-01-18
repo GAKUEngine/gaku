@@ -117,10 +117,8 @@ module Gaku
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
           
-          @admission.student.update_attribute(:enrollment_status_id, Gaku::EnrollmentStatus.find_by_code("applicant").id)
-
+          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
           render 'create'
-
         end
       end
 
