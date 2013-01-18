@@ -1,6 +1,8 @@
 ja:
   admission_methods:
     add: "入学形態を追加"
+    attributes:
+      name: "名前"
     edit: "入学形態を編集"
     list: "入学形態一覧"
     name: "形態名"
