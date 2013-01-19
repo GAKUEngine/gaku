@@ -104,7 +104,6 @@ module Gaku
 
       def create
         @admission = Admission.new(params[:admission])
-        #raise @admission.inspect
         if @admission.save
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
@@ -146,45 +145,30 @@ module Gaku
         @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-        params[:selected_students].each {|student|
+        params[:selected_students].each { |student|
           student_id = student.split("-")[1].to_i
-          admission = Admission.new( :admission_period_id => params[:admission_period_id],
-                                                  :admission_method_id => params[:admission_method_id],
-                                                  :student_id => student_id)
+          admission = Admission.new( admission_period_id: @admission_period.id,
+                                      admission_method_id: @admission_method.id,
+                                      student_id: student_id )
           if  admission.save
             @enrollments << admission
-            @admission_method = admission.admission_method
             # TODO change the selected phase
-            admission_phase = @admission_method.admission_phases.first
+            admission_phase = admission.admission_method.admission_phases.first
             # TODO change the selected phase state
             admission_phase_state = admission_phase.admission_phase_states.first
-            @admission_records << AdmissionPhaseRecord.create(:admission_phase_id => admission_phase.id,
+            @admission_records << AdmissionPhaseRecord.create(
+                                        :admission_phase_id => admission_phase.id,
                                         :admission_phase_state_id => admission_phase_state.id,
                                         :admission_id => admission.id)
+            admission.update_column(:admission_phase_record_id, @admission_records.last.id)
+            # change student status
+            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
+            
           else
             @err_enrollments << admission
           end
         }
-        notice = ""
-        if !@enrollments.empty?
-
-          @enrollments.each {|enrollment|
-            student = Student.unscoped.find(enrollment.student_id)
-            # change student status
-            student.update_attribute(:enrollment_status_id, 1)
-            notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
-          }
-          flash.now[:success] = notice.html_safe
-        end
-        if !@err_enrollments.empty?
-
-          @err_enrollments.each {|enrollment|
-            student = Student.unscoped.find(enrollment.student_id)
-            notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + enrollment.errors.full_messages.join(", ") + "</span></p>"
-          }
-          flash.now[:error] = notice.html_safe
-        end
-
+        show_flashes(@enrollments,@err_enrollments)
       end
 
       def soft_delete
@@ -275,6 +259,24 @@ module Gaku
         def sort_direction
           %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
         end
+
+        def show_flashes(admissions, err_admissions)
+          notice = ""
+          unless admissions.empty?
+            admissions.each {|admission|
+              student = Student.unscoped.find(admission.student_id)
+              notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
+            }
+            flash.now[:success] = notice.html_safe
+          end
+          unless err_admissions.empty?
+            err_admissions.each {|admission|
+              student = Student.unscoped.find(admission.student_id)
+              notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(", ") + "</span></p>"
+            }
+            flash.now[:error] = notice.html_safe
+          end
+      end
     end
   end
 end
