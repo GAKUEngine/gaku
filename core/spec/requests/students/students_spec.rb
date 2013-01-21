@@ -78,7 +78,7 @@ describe 'Students' do
           commute_method_type
           visit gaku.student_path(student)
           click '#new-student-commute-method-link'
-          wait_until_invisible '#new-student-commute-method-link'
+          wait_until_invisible '#edit-student-commute-method-link'
           wait_until_visible 'form#new_commute_method'
         end
         it ' adds' do
