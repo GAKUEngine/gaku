@@ -43,7 +43,6 @@
       tr
         th.btn-c2 = t('specialty.singular')
         td
-          - if !student.specialties
-            = render 'gaku/students/student_specialties/student_specialty', :student => student
-          -else
-            = link_to t(:manage), [student, :student_specialties], :remote => true, :id => 'new-student-commute-method-link', :class => 'btn btn-primary mr-s btn-mini'
+          #student-enrollment-status
+            = render 'gaku/students/student_specialties/student_specialties', :student => student
+
