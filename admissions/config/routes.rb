@@ -10,6 +10,11 @@ Gaku::Core::Engine.routes.prepend do
         post :admit_student
         get :listing_admissions
         get :listing_applicants
+        resources :importer, :controller => "admissions/importer" do
+          collection do
+            post :import_sheet
+          end
+        end
       end
       member do
         delete :soft_delete
@@ -49,6 +54,5 @@ Gaku::Core::Engine.routes.prepend do
     end
 
     resources :students
-
 	end
 end
