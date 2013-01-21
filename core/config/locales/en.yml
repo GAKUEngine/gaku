@@ -584,6 +584,7 @@ en:
     singular: Specialty
     plural: Specialties
     major: Major
+    minor: Minor
     choose: Choose Specialty
   student_specialty:
     index: Student Specialty Index

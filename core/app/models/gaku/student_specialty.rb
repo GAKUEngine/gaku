@@ -9,5 +9,8 @@ module Gaku
 
     validates_presence_of :specialty_id
 
+    scope :ordered, order('is_major desc')
+
+
   end
 end
