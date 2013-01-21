@@ -92,6 +92,8 @@ Gaku::Core::Engine.routes.draw do
       get :soft_delete
     end
 
+    resources :student_specialties, :controller => 'students/student_specialties'
+
     resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
       resources :notes, :controller => 'students/enrollment_statuses/notes'
       member do
@@ -99,7 +101,7 @@ Gaku::Core::Engine.routes.draw do
         get :revert
       end
     end
-    
+
     resources :commute_methods, :controller => 'students/commute_methods'
     resources :guardians, :controller => 'students/guardians' do
       resources :contacts, :controller => 'students/guardians/contacts' do

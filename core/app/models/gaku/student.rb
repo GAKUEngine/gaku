@@ -8,7 +8,7 @@ module Gaku
     has_many :class_groups, :through => :class_group_enrollments
 
     has_many :student_specialties
-    has_many :specialities, :through => :student_specialties
+    has_many :specialties, :through => :student_specialties
 
     has_many :student_addresses
     has_many :addresses, :through => :student_addresses
