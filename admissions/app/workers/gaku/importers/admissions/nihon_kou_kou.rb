@@ -9,7 +9,7 @@ module Gaku
         require 'roo'
 
         def perform(book)
-          sheet = book.worksheet('入力推普')
+          #sheet = book.worksheet('入力推普')
           logger.info("opened")
         end
 

@@ -33,7 +33,7 @@ module Gaku
           #
           if file
             book = Spreadsheet.open(file.data_file.path)
-            Gaku::Importers::Admissions::NihonKouKou.perform_async(book)
+            Gaku::Importers::Admissions::NihonKouKou.perform_async("ppp")
           end
         end
         
