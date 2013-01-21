@@ -2,9 +2,9 @@
     #new-student-specialty.hide
     .pull-left
       = count_div 'student-specialty-count' do
-        = print_count @student_specialties.count, t(:'address.list')
+        = print_count @count, t_specialty_list
     .pull-right
-      = ajax_link_to_new 'Add Student Specialty', nil, :id => 'new-student-specialty-link'
+      = ajax_link_to_new 'Add Student Specialty', [:new, @student, :student_specialty], :id => 'new-student-specialty-link'
 
 =hr
 
