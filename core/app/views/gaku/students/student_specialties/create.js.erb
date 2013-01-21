@@ -1,0 +1,9 @@
+$('#index-student-specialties tbody').append('<%= render_js_partial("student_specialty", {:student_specialty => @student_specialty}) %>');
+$('.student-specialty-count').html('<%= print_count(@count+1, t_specialty_list) %>');
+
+showNotice("<%= render_flash %>");
+
+$('#new-student-specialty').slideToggle()
+$('#new-student-specialty-link').show();
+
+$('.remote-form').enableValidations();

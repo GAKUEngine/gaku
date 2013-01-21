@@ -55,6 +55,10 @@ module Gaku
       Gaku::EnrollmentStatus.all.collect {|es| [es.name, es.id]}
     end
 
+    def specialties
+      Gaku::Specialty.all.collect {|s| [s.name, s.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
