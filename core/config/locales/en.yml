@@ -599,7 +599,7 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
-    edit: Edit
+    edit: Edit Student
     enroll: Enroll Student
     export: Export Students
     import: Import Students

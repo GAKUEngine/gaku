@@ -1,3 +1,3 @@
 span#student-specialty-list
   = student_specialties_list(@student.student_specialties)
-= ajax_link_to_edit [student, :student_specialties], :id => 'new-student-specialty-link'
+= link_to edit_button, [student, :student_specialties], :class=> 'mr-xs btn btn-mini btn-warning' , :id => 'new-student-specialty-link', :remote => true
