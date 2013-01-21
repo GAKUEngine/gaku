@@ -8,9 +8,8 @@ module Gaku
         require 'spreadsheet'
         require 'roo'
 
-        def perform(book)
-          #sheet = book.worksheet('入力推普')
-          logger.info("opened")
+        def perform(sheet)
+          logger.info("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVopened")
         end
 
       end

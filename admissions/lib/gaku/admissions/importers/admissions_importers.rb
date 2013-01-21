@@ -9,7 +9,7 @@ module Gaku
 
         def admission_importer_types
           [
-            {:name => "高校志願者シート", :importer_function => 高校志願者シート }
+            {:name => "高校志願者シート", :importer_function => :高校志願者シート }
           ]
         end
 
@@ -23,22 +23,19 @@ module Gaku
         end
 
         def run_importer(importer_name, file, file_type)
-          #if file_type == 'application/vnd.ms-excel'
-          #admission_importer_types.each do |importer|
-          #  if importer["name"] == importer_name
-          #    importer.import_function
-          #    return
-          #  end
-          #end
-          #
-          if file
-            book = Spreadsheet.open(file.data_file.path)
-            Gaku::Importers::Admissions::NihonKouKou.perform_async("ppp")
+          admission_importer_types.each do |importer|
+            if importer[:name] == importer_name
+              book = Spreadsheet.open(file.data_file.path)
+              send(importer[:importer_function], book)
+              return
+            end
           end
         end
         
-        def 高校志願者シート
+        def 高校志願者シート(book)
           #Gaku::Importers::Admissions::NihonKouKou.perform_async(book)
+          sheet = book.worksheet('入力推普')
+          Gaku::Importers::Admissions::NihonKouKou.perform_async(sheet)
         end
       end
     end
