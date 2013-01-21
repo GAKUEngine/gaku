@@ -129,6 +129,7 @@ en:
     seat_number: Seat number
   class_group_management: Class Management
   commute_method:
+    edit: Edit Commute Method
     add: Add Commute Method
     plural: Commute Methods
     singular: Commute Method

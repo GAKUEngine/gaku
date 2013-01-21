@@ -6,7 +6,7 @@ module Gaku
 		attr_accessible :commute_method_type_id
 
     def to_s
-      self.commute_method_type
+      self.commute_method_type.name
     end
 
 	end
