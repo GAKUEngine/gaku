@@ -1,3 +1,6 @@
 span#commute-method style='margin-right:3px'
   = student.commute_method
-= link_to edit_button, [:edit, student, student.commute_method], :class=> 'mr-xs btn btn-mini btn-warning', :remote => true, :id => 'edit-student-commute-method-link'
+-if student.commute_method
+  = link_to edit_button, [:edit, student, student.commute_method], :class=> 'mr-xs btn btn-mini btn-warning', :remote => true, :id => 'edit-student-commute-method-link'
+-else
+  = link_to edit_button, [:new, student, :commute_method], :class=> 'mr-xs btn btn-mini btn-warning', :remote => true, :id => 'edit-student-commute-method-link'
