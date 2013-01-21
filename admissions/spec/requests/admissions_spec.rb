@@ -6,9 +6,10 @@ describe 'Admin Admissions' do
 
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
-  let(:student) { create(:student) }
   let(:exam) { create(:exam) }
   let(:attendance) { create(:attendance) }
+  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
+  let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
 
   describe 'when select admission period', js: true do
     context 'without methods' do
