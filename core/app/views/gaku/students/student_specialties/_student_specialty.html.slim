@@ -1,0 +1,3 @@
+- unless student_specialty.nil? or student_specialty.new_record? or !student_specialty
+  tr id="student-specialty-#{student_specialty.id}"
+    = render :partial =>'fields', :locals => {:student_specialty => student_specialty}

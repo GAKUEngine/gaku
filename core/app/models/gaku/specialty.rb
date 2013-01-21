@@ -5,5 +5,10 @@ module Gaku
 
     validates :name, :presence => true
 	  attr_accessible :name, :description, :major_only
-	end
+
+
+    def to_s
+      name
+    end
+  end
 end

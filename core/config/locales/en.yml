@@ -582,6 +582,9 @@ en:
     name: Name
     save: Save Specialty
     singular: Specialty
+    major: Major
+  student_specialty:
+    index: Student Specialty Index
   student:
     add: Add Student
     birth_and: and
