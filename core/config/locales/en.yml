@@ -129,6 +129,7 @@ en:
     seat_number: Seat number
   class_group_management: Class Management
   commute_method:
+    edit: Edit Commute Method
     add: Add Commute Method
     plural: Commute Methods
     singular: Commute Method
@@ -582,9 +583,14 @@ en:
     name: Name
     save: Save Specialty
     singular: Specialty
+    plural: Specialties
     major: Major
+    minor: Minor
+    choose: Choose Specialty
   student_specialty:
     index: Student Specialty Index
+    save: Save Student Specialty
+    edit: Student Specialty Edit
   student:
     add: Add Student
     birth_and: and
@@ -593,7 +599,7 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
-    edit: Edit
+    edit: Edit Student
     enroll: Enroll Student
     export: Export Students
     import: Import Students

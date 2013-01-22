@@ -5,5 +5,10 @@ module Gaku
     validates :name, :presence => true, :uniqueness => true
 
 		attr_accessible :name
+
+    def self.type
+      name
+    end
+
 	end
 end

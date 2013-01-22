@@ -55,6 +55,10 @@ module Gaku
       Gaku::EnrollmentStatus.all.collect {|es| [es.name, es.id]}
     end
 
+    def specialties
+      Gaku::Specialty.all.collect {|s| [s.name, s.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
@@ -123,6 +127,19 @@ module Gaku
 
     def color_code(color)
       content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
+    end
+
+    def student_specialties_list(student_specialties)
+      string = String.new
+      student_specialties.ordered.each_with_index do |student_specialty, i|
+        string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
+        string.concat ", " unless i == student_specialties.count - 1
+      end
+      string.html_safe
+    end
+
+    def major_check(student_specialty)
+      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
     end
 
   end
