@@ -34,8 +34,8 @@ module Gaku
         
         def 高校志願者シート(book)
           #Gaku::Importers::Admissions::NihonKouKou.perform_async(book)
-          sheet = book.worksheet('入力推普')
-          Gaku::Importers::Admissions::NihonKouKou.perform_async(sheet)
+          entry_sheet = book.worksheet('入力推普')
+          Gaku::Importers::Admissions::NihonKouKou.perform_async(entry_sheet)
         end
       end
     end
