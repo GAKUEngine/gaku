@@ -31,7 +31,6 @@ group :test do
   gem 'poltergeist'
 
   gem 'guard'
-  gem 'rb-inotify', '~> 0.8.8'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
@@ -39,7 +38,10 @@ group :test do
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency
+  else
+    gem 'rb-inotify', '~> 0.8.8' #this is not available for MacOS
   end
+
 end
   
 gemspec

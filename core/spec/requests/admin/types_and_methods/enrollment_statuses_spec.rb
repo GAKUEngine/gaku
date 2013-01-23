@@ -4,7 +4,7 @@ describe 'Admin Enrollment Statuses' do
 
   stub_authorization!
 
-  let(:enrollment_status) { create(:enrollment_status, :name => 'Admitted') }
+  let(:enrollment_status) { create(:enrollment_status_admitted) }
 
   before :all do
     set_resource "admin-enrollment-status"

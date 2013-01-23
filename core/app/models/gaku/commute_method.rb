@@ -4,5 +4,10 @@ module Gaku
 		belongs_to :commute_method_type
 
 		attr_accessible :commute_method_type_id
+
+    def to_s
+      self.commute_method_type.name
+    end
+
 	end
 end

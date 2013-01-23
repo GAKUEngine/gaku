@@ -1,0 +1,5 @@
+td = student_specialty.specialty
+td = boolean_image(student_specialty.is_major)
+td
+  = link_to_edit [:edit, student_specialty.student, student_specialty], :id => "edit-student-specialty-link", :remote => true
+  = ajax_link_to_delete [student_specialty.student, student_specialty], :id => "delete-student-specialty-link"

@@ -146,10 +146,18 @@ module Gaku
       link_to name, '#', attributes
     end
 
+    def link_to_modal_cancel(options = {})
+      name = t('cancel')
+      attributes = {
+        :class => "span6 btn btn-danger cancel-link",
+      }.merge(options)
+      link_to name, '#', attributes
+    end
+
     def ajax_link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
-        :class => "btn",
+        :class => "span6 btn btn-danger back-link",
         :remote => true
       }.merge(options)
 

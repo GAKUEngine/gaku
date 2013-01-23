@@ -10,7 +10,7 @@ describe Gaku::Student do
     it { should have_many :class_group_enrollments }
     it { should have_many(:class_groups).through(:class_group_enrollments) }
     it { should have_many :student_specialties }
-    it { should have_many(:specialities).through(:student_specialties) }
+    it { should have_many(:specialties).through(:student_specialties) }
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :addresses }

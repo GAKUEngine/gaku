@@ -19,25 +19,30 @@
         td = gender(student)
       tr
         th.btn-c2 = t('birth_date')
-        td =student.birth_date
+        td = student.birth_date
 
       tr
-        th.btn-c2 = t('admitted')
-        td =student.admitted
+        th.btn-c2 = t(:'admitted')
+        td = student.admitted
+
       tr
-        th.btn-c2 Enrollment Status
+        th.btn-c2 = t(:'enrollment_status.singular')
         td.vm
           #student-enrollment-status
-           / = render 'gaku/students/enrollment_statuses/enrollment_status'
+            = render 'gaku/students/enrollment_statuses/enrollment_status', :student => student
 
       tr
         th.btn-c2 = t('scholarship_status')
-        td =student.scholarship
+        td = student.scholarship
       tr
         th.btn-c2 = t('commute_method.singular')
         td
           #student-commute-method
-            - if student.commute_method
-              = render 'gaku/students/commute_methods/commute_method', :student => student
-            - else
-              = ajax_link_to_new t(:add), [:new, student, :commute_method], :id => 'new-student-commute-method-link'
+            = render 'gaku/students/commute_methods/commute_method', :student => student
+
+      tr
+        th.btn-c2 = t('specialty.singular')
+        td
+          #student-enrollment-status
+            = render 'gaku/students/student_specialties/student_specialties', :student => student
+
