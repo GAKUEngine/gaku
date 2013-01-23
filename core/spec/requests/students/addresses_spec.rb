@@ -140,8 +140,6 @@ describe 'Student Address' do
         accept_alert
 
         page.find("#{address2_tr} .primary_address a.btn-primary")
-        !page.find("#{address1_tr} .primary_address a.btn-primary")
-
 
         within("#{table} #{address2_tr}") { click '.delete-link'}
         accept_alert
