@@ -18,7 +18,7 @@
             
             div style="display:none"
               div id="current_lang"
-                = I18n.locale            
+                = I18n.locale
               div id="link_langs"
                 = link_to "ja", :locale => "ja"
                 = link_to "en", :locale => "en"
@@ -30,8 +30,8 @@ coffee:
   $("#select_lang").val($("#current_lang").text())
   $("#btn_config_save").click (e) ->
     links = $("#link_langs").children()
-    switch $("#select_lang").attr("value")
+    switch $("#select_lang")[0].value
       when "ja"
-        location.href = $(links[0]).attr("href")
+        location.href = links[0].href
       when "en"
-        location.href = $(links[1]).attr("href")
+        location.href = links[1].href
