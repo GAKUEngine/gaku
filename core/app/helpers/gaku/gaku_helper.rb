@@ -142,11 +142,11 @@ module Gaku
       student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
     end
 
-    def resize_image(image, options = {})
+    def resize_image(image_url, options = {})
       raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
       height = options[:height] || options[:size]
-      width  = options[:width] || options[:size]
-      image_tag(image, :style => "height:#{height}px;width:#{width}px") unless image.blank?
+      width  = options[:width]  || options[:size]
+      image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
     end
 
   end
