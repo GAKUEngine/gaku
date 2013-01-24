@@ -471,6 +471,7 @@ en:
       school_details: School Details
       schools: Schools
       specialties: Specialties
+      achievements: Achievements
       system:
         backup: Backup
         system_tools: System Tools
