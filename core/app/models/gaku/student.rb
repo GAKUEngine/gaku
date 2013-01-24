@@ -18,7 +18,9 @@ module Gaku
     has_many :attendances
     has_many :enrollment_statuses
 
-    has_many :achievements
+    has_many :student_achievements
+    has_many :achievements, :through => :student_achievements
+
     has_many :school_histories
     has_many :simple_grades
 
