@@ -5,9 +5,11 @@ module Gaku
 
   	belongs_to :school
 
-    attr_accessible :name, :description, :student_id, :school_id
+    has_attached_file :badge
+
+    attr_accessible :name, :description, :student_id, :school_id, :authority, :badge
 
     validates_presence_of :name
-    validates_associated :student, :school
+    # validates_associated :student, :school
   end
 end
