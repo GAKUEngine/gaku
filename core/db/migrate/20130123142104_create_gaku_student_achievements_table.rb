@@ -4,6 +4,8 @@ class CreateGakuStudentAchievementsTable < ActiveRecord::Migration
       t.references :student
       t.references :achievement
 
+      t.string     :assertion
+
       t.timestamps
     end
   end
