@@ -112,6 +112,7 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
+    resources :simple_grades, :controller => 'students/simple_grades'
 
     resources :student_specialties, :controller => 'students/student_specialties'
 

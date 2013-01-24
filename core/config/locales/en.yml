@@ -613,6 +613,15 @@ en:
     save: Save Student
     show: Show Students
     singular: Student
+  simple_grade:
+    add: Add Simple Grade
+    singular: Simple Grade
+    plural: Simple Grades
+    list: Simple Grades list
+    grade: Grade
+    index: Simple Grade Index
+    save: Save Simple Grade
+    edit: Edit Simple Grade
   submit: Submit
   surname: Surname
   surname_reading: Surname Reading

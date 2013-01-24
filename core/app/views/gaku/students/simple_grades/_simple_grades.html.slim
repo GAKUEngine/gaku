@@ -1,0 +1,3 @@
+span#student-simple-grades-list style='margin-right:3px'
+  = student.simple_grades.pluck(:name).join(', ')
+= link_to edit_button, [student, :simple_grades], :class=> 'mr-xs btn btn-mini btn-warning' , :id => 'edit-student-simple-grades-link', :remote => true
