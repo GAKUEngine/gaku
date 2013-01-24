@@ -184,6 +184,7 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :achievements
     resources :specialties
     resources :system_tools
     resources :commute_method_types
