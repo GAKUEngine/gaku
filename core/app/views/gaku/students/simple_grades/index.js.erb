@@ -1,0 +1,5 @@
+$('#modal-dialogs').html("<%= render_js_partial('gaku/students/simple_grades/index_modal', {:simple_grades => @simple_grades}) %>");
+$('.modal-backdrop').remove()
+$('#index-student-simple-grades-modal').modal('show');
+
+

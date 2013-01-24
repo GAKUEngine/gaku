@@ -45,4 +45,9 @@
         td
           #student-enrollment-status
             = render 'gaku/students/student_specialties/student_specialties', :student => student
+      tr
+        th.btn-c2 = t('simple_grade.singular')
+        td
+          #student-simple-grade
+            = render 'gaku/students/simple_grades/simple_grades', :student => student
 

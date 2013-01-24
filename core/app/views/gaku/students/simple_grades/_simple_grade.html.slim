@@ -1,0 +1,3 @@
+- unless simple_grade.nil? or simple_grade.new_record? or !simple_grade
+  tr id="student-simple-grade-#{simple_grade.id}"
+    = render :partial =>'fields', :locals => {:simple_grade => simple_grade}

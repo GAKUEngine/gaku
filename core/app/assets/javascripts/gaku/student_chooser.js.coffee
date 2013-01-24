@@ -11,7 +11,7 @@ $ ->
         $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
 
 
-  $("#students-index th a").live 'click', (event) ->
+  $("#students-index th a").on 'click', (event) ->
     $.getScript(this.href)
     return false
 
