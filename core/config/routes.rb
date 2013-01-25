@@ -112,6 +112,7 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
+    resources :simple_grades, :controller => 'students/simple_grades'
 
     resources :student_specialties, :controller => 'students/student_specialties'
 
@@ -183,6 +184,7 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :achievements
     resources :specialties
     resources :system_tools
     resources :commute_method_types
