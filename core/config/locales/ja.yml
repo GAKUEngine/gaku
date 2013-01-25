@@ -596,15 +596,15 @@ ja:
     singular: "単体評価"
   specialty:
     add: "専攻を追加"
-    choose: 
+    choose: "専科を選択"
     description: "説明文"
     edit: "専攻を編集"
     list: "専攻一覧"
-    major: 
+    major: "主専科"
     major_only: "主専攻に限定"
-    minor: 
+    minor: "副専科"
     name: "専攻名"
-    plural: 
+    plural: "専科"
     save: "専攻を保存"
     singular: "専攻"
   student:
@@ -630,9 +630,9 @@ ja:
     show: "生徒照会"
     singular: "生徒"
   student_specialty:
-    edit: 
-    index: 
-    save: 
+    edit: "専科を編集"
+    index: "専科一覧"
+    save: "専科を保存"
   submit: "登録する"
   surname: "姓"
   surname_reading: "フリガナ（姓）"
