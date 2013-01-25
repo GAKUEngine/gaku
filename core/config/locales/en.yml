@@ -42,6 +42,16 @@ en:
     view: View Assignments
   assignments:
     description: Assignment Description
+  achievement:
+    edit: Edit Achievement
+    save: Save Achievement
+    name: Name
+    list: Achievement List
+    add: Add Achievement
+    singular: Achievement
+    description: Description
+    authority: Authority
+    badge: Badge
   attachment:
     asset_error: Error during asset upload
     asset_type: Asset type
@@ -461,6 +471,7 @@ en:
       school_details: School Details
       schools: Schools
       specialties: Specialties
+      achievements: Achievements
       system:
         backup: Backup
         system_tools: System Tools

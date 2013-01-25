@@ -13,6 +13,17 @@ module Gaku
       end
     end
 
+    def normal_form_for(object, options = {}, &block)
+      options[:validate] = true
+      options[:builder] = ValidateFormBuilder
+      options[:html] = {:class => 'normal-form form'}
+      content_tag :div, class: "row-fluid" do
+        content_tag :div, class: "span12 well" do
+          form_for(object, options, &block)
+        end
+      end
+    end
+
     def remote_nested_form_for(object, options = {}, &block)
       options[:validate] = true
       options[:builder] = ValidateNestedFormBuilder
@@ -32,6 +43,15 @@ module Gaku
       options[:remote] = true
       form_for(object, options, &block)
     end
+
+
+    def normal_modal_form_for(object, options = {}, &block)
+      options[:validate] = true
+      options[:builder] = ValidateFormBuilder
+      options[:html] = {:'data-type' => 'script', :class => 'remote-form'}
+      form_for(object, options, &block)
+    end
+
 
 
     def modal_nested_form_for(object, options = {}, &block)

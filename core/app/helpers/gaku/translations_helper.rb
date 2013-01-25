@@ -113,5 +113,9 @@ module Gaku
       t(:'note.list')
     end
 
+    def t_achievement_list
+      t(:'achievement.list')
+    end
+
   end
 end
