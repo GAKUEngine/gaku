@@ -1,4 +1,14 @@
 en:
+  achievement:
+    add: Add Achievement
+    authority: Authority
+    badge: Badge
+    description: Description
+    edit: Edit Achievement
+    list: Achievement List
+    name: Name
+    save: Save Achievement
+    singular: Achievement
   add: Add
   address:
     add: Add Address
@@ -42,16 +52,6 @@ en:
     view: View Assignments
   assignments:
     description: Assignment Description
-  achievement:
-    edit: Edit Achievement
-    save: Save Achievement
-    name: Name
-    list: Achievement List
-    add: Add Achievement
-    singular: Achievement
-    description: Description
-    authority: Authority
-    badge: Badge
   attachment:
     asset_error: Error during asset upload
     asset_type: Asset type
@@ -139,8 +139,8 @@ en:
     seat_number: Seat number
   class_group_management: Class Management
   commute_method:
-    edit: Edit Commute Method
     add: Add Commute Method
+    edit: Edit Commute Method
     plural: Commute Methods
     singular: Commute Method
   commute_method_type:
@@ -438,6 +438,7 @@ en:
   manage: Manage
   menu:
     admin:
+      achievements: Achievements
       admin: Admin
       administration: Administration
       administrator: Administrator
@@ -471,7 +472,6 @@ en:
       school_details: School Details
       schools: Schools
       specialties: Specialties
-      achievements: Achievements
       system:
         backup: Backup
         system_tools: System Tools
@@ -585,23 +585,28 @@ en:
     starting: Starting
     uniqueness: have this semester added
   show: Show
+  simple_grade:
+    add: Add Simple Grade
+    edit: Edit Simple Grade
+    grade: Grade
+    index: Simple Grade Index
+    list: Simple Grades list
+    plural: Simple Grades
+    save: Save Simple Grade
+    singular: Simple Grade
   specialty:
     add: Add Specialty
+    choose: Choose Specialty
     description: Description
     edit: Edit Specialty
     list: Specialties list
+    major: Major
     major_only: Major Only
+    minor: Minor
     name: Name
+    plural: Specialties
     save: Save Specialty
     singular: Specialty
-    plural: Specialties
-    major: Major
-    minor: Minor
-    choose: Choose Specialty
-  student_specialty:
-    index: Student Specialty Index
-    save: Save Student Specialty
-    edit: Student Specialty Edit
   student:
     add: Add Student
     birth_and: and
@@ -624,15 +629,10 @@ en:
     save: Save Student
     show: Show Students
     singular: Student
-  simple_grade:
-    add: Add Simple Grade
-    singular: Simple Grade
-    plural: Simple Grades
-    list: Simple Grades list
-    grade: Grade
-    index: Simple Grade Index
-    save: Save Simple Grade
-    edit: Edit Simple Grade
+  student_specialty:
+    edit: Student Specialty Edit
+    index: Student Specialty Index
+    save: Save Student Specialty
   submit: Submit
   surname: Surname
   surname_reading: Surname Reading

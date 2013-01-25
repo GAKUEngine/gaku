@@ -1,4 +1,14 @@
 pt-BR:
+  achievement:
+    add: 
+    authority: 
+    badge: 
+    description: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   add: Adicionar
   address:
     add: Adicionar Endereço
@@ -84,23 +94,23 @@ pt-BR:
     list: Lista de Campus
     name: Nome
     new: Novo Campus
-    plural: 
+    plural: Campus
     primary: Primário
     save: Salvar Campus
     singular: Campus
   cancel: Cancelar
   changes:
     change: 
-    changed_at: 
-    event: 
-    from: 
+    changed_at: Alterado Em
+    event: Evento
+    from: De
     student:
-      list: 
+      list: Lista de Mudanças de Alunos
     student_address:
-      list: 
+      list: Lista de Mudanças de Endereços de Alunos
     student_contact:
-      list: 
-    to: 
+      list: Lista de Mudanças de Contato de Alunos
+    to: Para
   class: Classe
   class_group:
     add: Adicionar Grupo de Classe
@@ -121,14 +131,16 @@ pt-BR:
   class_group_course_enrollment:
     save: 
   class_group_enrollment:
-    count: 
-    create: 
-    current: 
+    count: Contagem de matrículas
+    create: Criar Matrícula de Classe
+    current: Matrícula Atual
     list: 
-    new: 
-    seat_number: 
-  class_group_management: 
+    new: Nova matrícula de classe
+    seat_number: Número do assento
+  class_group_management: Gestão da Classe
   commute_method:
+    add: 
+    edit: 
     plural: 
     singular: 
   commute_method_type:
@@ -179,10 +191,10 @@ pt-BR:
     code: 
     code_sample: 
     combined_code: 
-    count: 
-    edit: 
-    list: 
-    management: 
+    count: Contagem de cursos
+    edit: Editar Curso
+    list: Lista de Cursos
+    management: Gestão de Cursos
     name: Nome do Curso
     new: Novo Curso
     options: Opções
@@ -205,25 +217,25 @@ pt-BR:
     plural: Grupos de Curso
     save: Salvar Grupo de Curso
     show: Grupo de Curso
-    singular: 
+    singular: Grupo de Cursos
   course_group_enrollment:
-    save: 
+    save: Salvar em Grupo de Cursos
   csv:
-    export: 
+    export: Exportação CSV
     fields:
-      admitted: 
-      birth_date: 
-      email: 
-      gender: 
-      name: 
+      admitted: admitido
+      birth_date: nascimento
+      email: email
+      gender: sexo
+      name: nome
       name_reading: 
-      phone: 
-      surname: 
+      phone: telefone
+      surname: "último nome"
       surname_reading: 
-    import: 
-  date_placeholder: 
-  default: 
-  delete: 
+    import: Importação CSV
+  date_placeholder: DD-MM-YYYY
+  default: Padrão
+  delete: Excluir
   description: 
   destroy: 
   devise:
@@ -252,10 +264,10 @@ pt-BR:
     omniauth_callbacks:
       failure: 
       success: 
-    password: 
-    password_confirmation: 
+    password: Senha
+    password_confirmation: Confirmação de Senha
     passwords:
-      forgot: 
+      forgot: Esqueceu sua senha?
       no_token: 
       send_instructions: 
       send_paranoid_instructions: 
@@ -265,14 +277,14 @@ pt-BR:
       destroyed: 
       inactive_signed_up: 
       reasons:
-        inactive: 
-        locked: 
-        unconfirmed: 
-      sign_up: 
-      signed_up: 
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
+        inactive: inativo
+        locked: trancado
+        unconfirmed: não confirmado
+      sign_up: Registrar
+      signed_up: Bem vindo! Você acessou com sucesso.
+      signed_up_but_inactive: Esta conta está inativa
+      signed_up_but_locked: Esta conta foi trancada
+      signed_up_but_unconfirmed: Esta conta não foi confirmada
       update_needs_confirmation: 
       updated: 
     sessions:
@@ -424,6 +436,7 @@ pt-BR:
   manage: 
   menu:
     admin:
+      achievements: 
       admin: 
       administration: 
       administrator: 
@@ -570,13 +583,26 @@ pt-BR:
     starting: 
     uniqueness: 
   show: 
+  simple_grade:
+    add: 
+    edit: 
+    grade: 
+    index: 
+    list: 
+    plural: 
+    save: 
+    singular: 
   specialty:
     add: 
+    choose: 
     description: 
     edit: 
     list: 
+    major: 
     major_only: 
+    minor: 
     name: 
+    plural: 
     save: 
     singular: 
   student:
@@ -601,6 +627,10 @@ pt-BR:
     save: 
     show: 
     singular: 
+  student_specialty:
+    edit: 
+    index: 
+    save: 
   submit: 
   surname: 
   surname_reading: 
