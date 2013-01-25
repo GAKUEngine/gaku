@@ -1,0 +1,7 @@
+td = achievement.name
+td = achievement.description
+td = achievement.authority
+td = resize_image(achievement.badge, :size => 48)
+td
+  = ajax_link_to_edit [:edit, :admin, achievement]
+  = ajax_link_to_delete [:admin, achievement]

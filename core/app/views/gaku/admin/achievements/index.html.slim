@@ -1,0 +1,22 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-achievement-count' do
+      = print_count @count, t_achievement_list
+  .pull-right
+    = ajax_link_to_new t(:'achievement.add'), [:new, :admin, :achievement], :id => 'new-admin-achievement-link'
+
+= content_for :new_form do
+  #new-admin-achievement.hide
+
+#admin-achievements
+  = table_for 'admin-achievements-index' do
+    thead
+      tr
+        = th t(:'achievement.singular')
+        = th t(:'achievement.description')
+        = th t(:'achievement.authority')
+        = th t(:'achievement.badge')
+        = th_actions 2
+    tbody
+      = render :partial => 'gaku/admin/achievements/achievement', :collection => @achievements, :as => :achievement
+

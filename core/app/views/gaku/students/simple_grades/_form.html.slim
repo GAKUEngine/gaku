@@ -1,0 +1,6 @@
+= remote_form_for [@student, @simple_grade] do |f|
+  =render 'form_fields', :f => f
+  .row-fluid
+    .span12
+      =submit_button t(:'simple_grade.save') , :id => "submit-student-simple-grade-button"
+      =link_to_modal_cancel :id => "cancel-student-simple-grade-link"
