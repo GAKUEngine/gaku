@@ -4,7 +4,6 @@ module Gaku
     module Importers
       class AdmissionsImporters
         include SheetHelper
-        require 'spreadsheet'
         require 'roo'
 
         def admission_importer_types
@@ -22,20 +21,17 @@ module Gaku
           return types
         end
 
-        def run_importer(importer_name, file, file_type)
+        def run_importer(importer_name, file, content_type, period_id, method_id)
           admission_importer_types.each do |importer|
             if importer[:name] == importer_name
-              book = Spreadsheet.open(file.data_file.path)
-              send(importer[:importer_function], book)
+              send(importer[:importer_function], file, period_id, method_id)
               return
             end
           end
         end
         
-        def 高校志願者シート(book)
-          #Gaku::Importers::Admissions::NihonKouKou.perform_async(book)
-          entry_sheet = book.worksheet('入力推普')
-          Gaku::Importers::Admissions::NihonKouKou.perform_async(entry_sheet)
+        def 高校志願者シート(file, period_id, method_id)
+          Gaku::Importers::Admissions::NihonKouKou.perform_async(file.data_file.path, period_id, method_id)
         end
       end
     end
