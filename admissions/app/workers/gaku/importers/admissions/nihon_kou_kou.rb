@@ -69,7 +69,7 @@ module Gaku
                             :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
 
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.new(:student_id => student.id,:admission_period_id => period_id, :admission_method_id => method_id)
+              admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
 
               if admission.save
                 admission_method = admission.admission_method
