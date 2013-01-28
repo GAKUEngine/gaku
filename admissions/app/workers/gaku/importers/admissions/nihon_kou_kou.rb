@@ -70,7 +70,7 @@ module Gaku
 
             if !period_id.nil? && !method_id.nil?
               admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
-
+              logger.info
               if admission.save
                 admission_method = admission.admission_method
                 admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
@@ -83,10 +83,12 @@ module Gaku
                 
                 admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
               end
+              logger.info "志願者「" + surname + "　" + name + 
+                "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
+            else
+              logger.info "入学時期及び入学形態が設定されていなかった為志願者" + "「" + surname + "　" + name +
+                "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
-
-            logger.info "志願者「" + surname + "　" + name + 
-              "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
           end
         end
 
