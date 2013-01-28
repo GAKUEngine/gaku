@@ -3,12 +3,15 @@ $ ->
     element_id = '#' + $(element).attr('id')
     $(element_id).autocomplete
       source: $(element_id).data('autocomplete-source')
+      messages:
+        noResults: ->
+        results: ->
       select: (event, ui) ->
         $(this).val(ui.item.value);
         $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
-      
-      
-  $("#students-index th a").live 'click', (event) ->
+
+
+  $("#students-index th a").on 'click', (event) ->
     $.getScript(this.href)
     return false
 

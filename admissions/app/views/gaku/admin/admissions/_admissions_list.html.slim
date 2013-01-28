@@ -1,0 +1,15 @@
+- if admission_method
+  = table_for 'admissions-index' do
+    thead
+      tr
+        = th t(:'admissions.status')
+        = th t(:'name')
+        = th t(:'birth')
+        = th t(:'admissions.reg_date')
+        = th t(:'admission_phases.singular')
+        = th t(:'students.status')
+        = th_actions 140
+    tbody
+      = render :partial => 'gaku/admin/admissions/admission', :collection => admission_method.admissions, :as => 'admission', :locals => {:admission_method => admission_method}
+- else
+  = t(:'admission_methods.no_method')

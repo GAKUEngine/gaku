@@ -33,12 +33,18 @@ module Gaku
       end
     end
 
-    def add_files
-      template 'config/initializers/client_side_validations.rb', 'config/initializers/client_side_validations.rb'
-    end
-
     def remove_unneeded_files
       remove_file "public/index.html"
+    end
+
+    def clear_logs
+      remove_file 'log/sidekiq.log'
+      add_file 'log/sidekiq.log'
+    end
+
+    def add_files
+      template 'config/sidekiq.yml', 'config/sidekiq.yml'
+      template 'Procfile', 'Procfile'
     end
 
     def setup_assets

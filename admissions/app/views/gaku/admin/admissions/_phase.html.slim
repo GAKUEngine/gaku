@@ -1,12 +1,12 @@
 .row-fluid
-  .span12.well style="margin-bottom:0px"
+  .span12 style="margin-bottom:0px; padding:15px"
     - admission_phase_states.each_with_index do |state, index|
-      .span6 *{:id => "state" + state.id.to_s, :style => ("margin-left:0;" if index%2 == 0)}
-        h4
-          = state.name
-        =render 'students_list', :state => state
+      .row-fluid
+        .span12 *{:id => "state" + state.id.to_s}
+          h4
+            = state.name
+          =render 'students_list', :state => state
 /= javascript_include_tag "student_chooser"
-
 
 javascript:
   $(".class_group-select").combobox();

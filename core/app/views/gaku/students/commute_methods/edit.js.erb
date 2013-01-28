@@ -1,3 +1,5 @@
-$('#student-commute-method-form').html('<%= render_js_partial("gaku/students/commute_methods/form") %>').slideDown();
-$('#edit-student-commute-method-link').hide()
-$('span#commute-method').hide()
+$('#modal-dialogs').html('<%= render_js_partial("gaku/students/commute_methods/modal", :student => @student) %>');
+$('#student-commute-method-modal').modal('show');
+$('#new-student-commute-method-link').hide();
+$('.remote-form').enableValidations();
+

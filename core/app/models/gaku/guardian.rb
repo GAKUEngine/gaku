@@ -1,42 +1,14 @@
-# == Schema Information
-#
-# Table name: guardians
-#
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  surname         :string(255)
-#  name_reading    :string(255)
-#  surname_reading :string(255)
-#  relationship    :string(255)
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
 module Gaku
   class Guardian < ActiveRecord::Base
+
+    include Addresses, Contacts
+
     belongs_to :user
-    has_many :guardian_addresses
-    has_many :addresses, :through => :guardian_addresses
     has_and_belongs_to_many :students, :join_table => :gaku_guardians_students
-    has_many :contacts
 
     validates_presence_of :name, :surname
 
-    attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship, :contacts, :contacts_attributes
-    accepts_nested_attributes_for :contacts, :allow_destroy => true
-    
-  #  attr_encrypted :name,             :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  #  attr_encrypted :surname,          :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  #  attr_encrypted :name_reading,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  #  attr_encrypted :surname_reading,   :key => 'fd8eg8gre67gre87g7rer4erg43e'
-  #  attr_encrypted :relationship,      :key => 'fd8eg8gre67gre87g7rer4erg43e'
+    attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship
 
-    def primary_contact
-    	contacts.where(:is_primary => true).first
-    end
-
-    def primary_address
-    	guardian_addresses.where(:is_primary => true).first.address rescue nil
-    end
   end
 end

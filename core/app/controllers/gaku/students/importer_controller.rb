@@ -2,8 +2,7 @@
 module Gaku
   class Students::ImporterController < GakuController
     include SheetHelper
-    #require 'importers/school_station'
-    require 'spreadsheet'
+    #require 'spreadsheet'
     require 'roo'
 
     def index
@@ -35,7 +34,7 @@ module Gaku
           when "GAKU Engine"
             import_sheet_student_list
           when "SchoolStation"
-            import_school_station_student_list
+            import_school_station_students_xls
           end
 
         elsif params[:importer][:data_file].content_type == "text/csv"
@@ -98,11 +97,11 @@ module Gaku
 
     end
 
-    #import XLS list exported from SchoolStation
-    #在校生リストを先にインポートする必要がある
-    def import_school_station_student_list
-      importer = Importers::SchoolStationImporter.new()
-      @results = importer.import_zaikousei(params[:importer])
+
+    def import_school_station_students_xls
+      file = ImportFile.create(params[:importer].merge(:context => 'students'))
+      importer = Gaku::Core::Importers::SchoolStation::Zaikousei.new()
+      importer.process_file(file)
       render :school_station_preview
     end
 

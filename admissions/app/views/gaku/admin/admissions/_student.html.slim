@@ -1,19 +1,20 @@
-tr id="student-#{student.id}"
-  = render 'gaku/admin/admissions/student_fields', :student => student
+tr id="student-#{student.id}" style="#{ (student.enrollment_status.code == "deleted") ? "color: grey;" : "" }"
+  = render 'gaku/admin/admissions/student_fields', :student => student, :phase => state.admission_phase
   td.manage
-    - if student.admission.admitted == true
-      = t("admissions.admitted_on") + " " + student.admitted.strftime("%d-%b-%Y")
-    -else
-      = form_tag change_student_state_admin_admissions_path, :remote => true, :id => "change-student-state-form" do
-        = select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states, :id, :name, state.id), :style=> "width:140px;"
-        = hidden_field_tag :student_id, student.id
-        = hidden_field_tag :admission_period_id, @admission_period.id
-        = hidden_field_tag :admission_method_id, @admission_method.id
-        = submit_tag "Save"
-      //= state.admission_phase.admission_phase_states.count
-      - if state.can_admit
-        = form_tag admit_student_admin_admissions_path, :remote => true, :id => "admit-student-form" do
+    - if !(student.enrollment_status.code == "deleted")
+      - if student.admission.admitted == true
+        = t("admissions.admitted_on") + " " + student.admitted.strftime("%d-%b-%Y")
+      -else
+        = form_tag change_student_state_admin_admissions_path, :remote => true, :id => "change-student-state-form" do
+          = select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states, :id, :name, state.id), :style=> "width:140px;"
           = hidden_field_tag :student_id, student.id
           = hidden_field_tag :admission_period_id, @admission_period.id
           = hidden_field_tag :admission_method_id, @admission_method.id
-          = submit_tag "Admit"
+          = submit_tag "Save"
+        //= state.admission_phase.admission_phase_states.count
+        - if state.can_admit
+          = form_tag admit_student_admin_admissions_path, :remote => true, :id => "admit-student-form" do
+            = hidden_field_tag :student_id, student.id
+            = hidden_field_tag :admission_period_id, @admission_period.id
+            = hidden_field_tag :admission_method_id, @admission_method.id
+            = submit_tag "Admit"

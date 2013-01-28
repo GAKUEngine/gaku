@@ -61,3 +61,17 @@ $ ->
     $('#student-commute-method-form').slideUp ->
       $('#commute-method').show()
       $('#edit-student-commute-method-link').show()
+
+  # sorting
+  fixHelper = (e, ui) ->
+    ui.children().each ->
+      $(@).width $(@).width()
+    ui
+
+
+  $('.sortable').sortable
+    handle: '.sort-handler'
+    helper: fixHelper
+    axis: 'y'
+    update: ->
+      $.post $(@).data('sort-url'), $(@).sortable('serialize')

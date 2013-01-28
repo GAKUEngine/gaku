@@ -1,0 +1,15 @@
+= well_div do
+  = table_for 'disposal-attachments-index' do
+    thead
+      tr
+        = th 'Student'
+        = th t(:'address.title')
+        = th t(:'address.country')
+        = th t(:'address.zipcode')
+        = th t(:'address.state')
+        = th t(:'address.city')
+        = th t(:'address.address1')
+        = th t(:'address.address2')
+        = th_actions 3
+    tbody
+      =render :partial => 'address', :collection => @addresses, :as => :address

@@ -1,17 +1,8 @@
-# == Schema Information
-#
-# Table name: courses
-#
-#  id             :integer          not null, primary key
-#  code           :string(255)
-#  faculty_id     :integer
-#  syllabus_id    :integer
-#  class_group_id :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#
-module Gaku 
+module Gaku
   class Course < ActiveRecord::Base
+
+    include Notes
+
     has_many :course_enrollments
     has_many :students, :through => :course_enrollments
 
@@ -20,16 +11,15 @@ module Gaku
 
     has_many :class_group_course_enrollments, :dependent => :destroy
     has_many :class_groups, :through => :class_group_course_enrollments
-    
-    has_many :notes, as: :notable 
+
     has_many :exam_schedules
-    
+
     belongs_to :syllabus
     belongs_to :class_group
 
     accepts_nested_attributes_for :course_enrollments
 
-    attr_accessible :code, :class_group_id, :syllabus_id 
+    attr_accessible :code, :class_group_id, :syllabus_id
 
     validates_presence_of :code
 

@@ -6,8 +6,6 @@ describe 'Student Contacts' do
 
   let(:student) { create(:student) }
   let(:contact_type) { create(:contact_type, :name => 'email') }
-  let(:contact) { create(:contact, :contact_type => contact_type) }
-  let(:contact2) { create(:contact, :data => 'gaku2@example.com', :contact_type => contact_type) }
 
   before :all do
     set_resource "student-contact"
@@ -43,78 +41,88 @@ describe 'Student Contacts' do
 
 
   context "existing" do
-    before(:each) do
-      student.contacts << contact
+
+    context 'one contact' do
+      before(:each) do
+        @student = create(:student_with_one_contact)
+        @student.reload
+      end
+
+      context 'edit', :js => true do
+        before do
+          visit gaku.student_path(@student)
+          within(table) { click edit_link }
+          wait_until_visible modal
+        end
+
+        it "edits" do
+          fill_in 'contact_data', :with => 'example@genshin.org'
+          click submit
+
+          wait_until_invisible modal
+          page.should have_content 'example@genshin.org'
+          flash_updated?
+        end
+
+        it 'cancels editting', :cancel => true do
+          ensure_cancel_modal_is_working
+        end
+
+        it "deletes", :js => true do
+          contact_field = @student.contacts.first.data
+          visit gaku.student_path(@student)
+
+          within(count_div) { page.should have_content 'Contacts list(1)' }
+          page.should have_content contact_field
+
+          expect do
+            ensure_delete_is_working
+          end.to change(@student.contacts, :count).by -1
+
+          within(count_div) { page.should_not have_content 'Contacts list(1)' }
+          page.should_not have_content contact_field
+          flash_destroyed?
+        end
+      end
+
     end
 
-    context 'edit', :js => true do
+    context 'two contacts' do
+
       before do
-        visit gaku.student_path(student)
-        within(table) { click edit_link }
-        wait_until_visible modal
+        @student = create(:student_with_two_contacts)
+        @student.reload
+        visit gaku.student_path(@student)
       end
 
-      it "edits" do
-        fill_in 'contact_data', :with => 'example@genshin.org'
-        click submit
+      it "sets primary", :js => true do
 
-        wait_until_invisible modal
-        page.should have_content 'example@genshin.org'
-        flash_updated?
+        @student.contacts.first.primary? == true
+        @student.contacts.second.primary? == false
+
+        within("#{table} tr#contact-2") { click_link 'set-primary-link' }
+        accept_alert
+
+        @student.contacts.first.primary? == false
+        @student.contacts.second.primary? == true
       end
 
-      it 'cancels editting', :cancel => true do
-        ensure_cancel_modal_is_working
+      it "delete primary", :js => true do
+        contact1_tr = "#contact-#{@student.contacts.first.id}"
+        contact2_tr = "#contact-#{@student.contacts.second.id}"
+
+        within("#{table} #{contact2_tr}") { click_link 'set-primary-link' }
+        accept_alert
+
+        !page.find("#{contact2_tr} td.primary-contact a.btn-primary")
+
+        click "#{contact2_tr} .delete-link"
+        accept_alert
+
+        page.find("#{contact1_tr} .primary-contact a.btn-primary")
+        @student.contacts.first.primary? == true
       end
-    end
 
-
-    it "sets primary", :js => true do
-      student.contacts << contact2
-      visit gaku.student_path(student)
-
-      student.contacts.first.is_primary? == true
-      student.contacts.second.is_primary? == false
-
-      within("#{table} tr#contact-2") { click_link 'set-primary-link' }
-      accept_alert
-
-      student.contacts.first.is_primary? == false
-      student.contacts.second.is_primary? == true
-    end
-
-    it "delete primary", :js => true do
-      student.contacts << contact2
-
-      contact1_tr = "#contact-#{contact.id}"
-      contact2_tr = "#contact-#{contact2.id}"
-
-      visit gaku.student_path(student)
-
-      click "#{contact2_tr} td.primary-button a"
-      accept_alert
-      page.find("#{contact2_tr} td.primary-button a.btn-primary")
-
-      click "#{contact2_tr} .delete-link"
-      accept_alert
-
-      page.find("#{contact1_tr} .primary-button a.btn-primary")
-      student.contacts.first.is_primary? == true
-    end
-
-    it "deletes", :js => true do
-      visit gaku.student_path(student)
-
-      within(count_div) { page.should have_content 'Contacts list(1)' }
-      page.should have_content contact.data
-
-      expect do
-        ensure_delete_is_working
-      end.to change(student.contacts, :count).by -1
-
-      within(count_div) { page.should_not have_content 'Contacts list(1)' }
-      page.should_not have_content contact.data
-      flash_destroyed?
     end
   end
 end

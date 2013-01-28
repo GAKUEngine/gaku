@@ -1,4 +1,4 @@
-<%- unless @guardian.addresses.blank? %>
+<%- if @guardian.addresses.any? & @address.is_primary? %>
 	$('#address-<%= @guardian.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 

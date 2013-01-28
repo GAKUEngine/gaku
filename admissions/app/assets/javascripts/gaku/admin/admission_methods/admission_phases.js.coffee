@@ -1,6 +1,15 @@
 $ ->
-  
-  $('#new-admin-admission-methodadmission-phase').on 'click','#cancel-admin-admission-method-admission-phase-link', (event) ->
-    event.preventDefault()
-    $('#new-admin-admission-method-admission-phase-link').show()
-    $("#new-admin-admission-method-admission-phase").slideToggle()
+  fixHelper = (e, ui) ->
+    ui.children().each ->
+      console.log @
+      $(@).width($(@).width())
+    ui
+
+  $('#admission-phase-portion-sorting').sortable
+    handle: '.sort-handler'
+    helper: fixHelper
+    axis: 'y'
+    update: ->
+      $.post $(@).data('sort-url'), $(@).sortable('serialize')
+
+  $('#admission-phase-portion-sorting').disableSelection()

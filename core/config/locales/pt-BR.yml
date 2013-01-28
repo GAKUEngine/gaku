@@ -1,0 +1,661 @@
+pt-BR:
+  achievement:
+    add: 
+    authority: 
+    badge: 
+    description: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
+  add: Adicionar
+  address:
+    add: Adicionar Endereço
+    address1: Endereço 1
+    address2: Endereço 2
+    choose_country: Selecione País
+    city: Cidade
+    count: Contagem de endereços
+    country: País
+    edit: Editar endereço
+    list: Listagem de endereços
+    new: Novo Endereço
+    past: 
+    plural: Endereços
+    prefecture: Estado/Província/Prefeitura
+    primary: Endereço Primário
+    save: Salvar endereço
+    search: Buscar Endereço
+    singular: Endereço
+    state: Estado
+    title: Título
+    zipcode: CEP
+  admitted: Admitido Em
+  alert:
+    already_added: "%{resource} já foram adicionados!"
+    empty: "%{resource} está vazio!"
+    not_selected: Nenhum %{resource} selecionado!
+  and: e
+  are_you_sure: Você tem certeza?
+  assignment:
+    add: Adicionar Atribuição
+    count: Contagem de atribuições
+    description: Descrição
+    list: Atribuições
+    max_score: Pontuação máxima
+    name: Nome da atribuição
+    new: Nova Atribuição
+    plural: Atribuições
+    results: Resultados da Atribuição
+    singular: Atribuição
+    view: Exibir Atribuições
+  assignments:
+    description: Descrição da Atribuição
+  attachment:
+    asset_error: Erro ao fazer upload
+    asset_type: 
+    asset_upload: 
+    assets: 
+    create: 
+    description: Descrição
+    file_name: Nome do arquivo
+    file_size: Tamanho do arquivo
+    file_type: Tipo do arquivo
+    list: 
+    name: Nome
+    new: 
+    plural: 
+    singular: 
+  attendance_type:
+    add: 
+    auto_credit: 
+    color_code: Código da Cor
+    counted_absent: 
+    credit_rate: 
+    disable_credit: Desabilitar Crédito
+    edit: 
+    list: 
+    name: Nome
+    new: 
+    plural: 
+    save: 
+    singular: 
+  back: Voltar
+  birth: Data de Nascimento
+  birth_and: e
+  birth_between: Data de Nascimento entre
+  birth_date: Data de Nascimento
+  campus:
+    add: Adicionar Campus
+    address: Endereço do Campus
+    contacs: Contatos do Campus
+    edit: Editar Campus
+    list: Lista de Campus
+    name: Nome
+    new: Novo Campus
+    plural: Campus
+    primary: Primário
+    save: Salvar Campus
+    singular: Campus
+  cancel: Cancelar
+  changes:
+    change: 
+    changed_at: Alterado Em
+    event: Evento
+    from: De
+    student:
+      list: Lista de Mudanças de Alunos
+    student_address:
+      list: Lista de Mudanças de Endereços de Alunos
+    student_contact:
+      list: Lista de Mudanças de Contato de Alunos
+    to: Para
+  class: Classe
+  class_group:
+    add: Adicionar Grupo de Classe
+    choose: Selecionar Grupo de Classe
+    edit: Editar Grupo de Classe
+    enroll: 
+    grade: 
+    homeroom: 
+    list: 
+    name: Nome da Classe
+    new: Novo Grupo de Classe
+    none: Nenhum
+    none_assigned: Nenhum Atribuído
+    plural: Grupos de Classe
+    save: Salvar Grupo de Classe
+    show: Exibir
+    singular: Grupo de Classe
+  class_group_course_enrollment:
+    save: 
+  class_group_enrollment:
+    count: Contagem de matrículas
+    create: Criar Matrícula de Classe
+    current: Matrícula Atual
+    list: 
+    new: Nova matrícula de classe
+    seat_number: Número do assento
+  class_group_management: Gestão da Classe
+  commute_method:
+    add: 
+    edit: 
+    plural: 
+    singular: 
+  commute_method_type:
+    add: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+  comname: GAKU Engine
+  config:
+    close: Fechar
+    help:
+      language: Selecione seu Idioma
+    label: Idioma
+    save: Salvar
+  confirm: Você tem certeza?
+  confirm_delete: Realmente excluir este registro?
+  contact:
+    add: Adicionar Contato
+    contact_type: Tipo de Contato
+    create: Criar Contato
+    data: Dados
+    details: Detalhes
+    edit: Editar Contato
+    emergency: Emergência
+    list: Lista de Contatos
+    new: Novo Contato
+    plural: Contatos
+    primary: Primário
+    save: Salvar Contato
+    singular: Contato
+  contact_type:
+    add: Adicionar Tipo de Contato
+    choose: Selecionar Tipo de Contato
+    edit: Editar Tipo de Contato
+    list: Listagem de Tipos de Contato
+    name: Nome
+    new: Novo Tipo de Contato
+    plural: Tipos de Contato
+    save: Salvar Tipo de Contato
+    singular: Tipo de Contato
+  course:
+    add: Adicionar Curso
+    choose: 
+    code: 
+    code_sample: 
+    combined_code: 
+    count: Contagem de cursos
+    edit: Editar Curso
+    list: Lista de Cursos
+    management: Gestão de Cursos
+    name: Nome do Curso
+    new: Novo Curso
+    options: Opções
+    plural: Cursos
+    save: Salvar Curso
+    show: Exibir Curso
+    singular: Curso
+  course_enrollment:
+    add: Matricular em curso
+    create: Criar matrícula
+    list: Matrículas
+    plural: Matrícula de Curso
+    singular: Matrícula de Curso
+  course_group:
+    course_group_recover: Grupo de Curso Recuperado
+    edit: Editar Grupo de Curso
+    list: Lista de Grupos de Curso
+    name: Nome
+    new: Novo Grupo de Curso
+    plural: Grupos de Curso
+    save: Salvar Grupo de Curso
+    show: Grupo de Curso
+    singular: Grupo de Cursos
+  course_group_enrollment:
+    save: Salvar em Grupo de Cursos
+  csv:
+    export: Exportação CSV
+    fields:
+      admitted: admitido
+      birth_date: nascimento
+      email: email
+      gender: sexo
+      name: nome
+      name_reading: 
+      phone: telefone
+      surname: "último nome"
+      surname_reading: 
+    import: Importação CSV
+  date_placeholder: DD-MM-YYYY
+  default: Padrão
+  delete: Excluir
+  description: 
+  destroy: 
+  devise:
+    confirmations:
+      confirmed: 
+      send_instructions: 
+      send_paranoid_instructions: 
+    email: 
+    failure:
+      already_authenticated: 
+      inactive: 
+      invalid: 
+      invalid_token: 
+      locked: 
+      timeout: 
+      unauthenticated: 
+      unconfirmed: 
+    login: 
+    mailer:
+      confirmation_instructions:
+        subject: 
+      reset_password_instructions:
+        subject: 
+      unlock_instructions:
+        subject: 
+    omniauth_callbacks:
+      failure: 
+      success: 
+    password: Senha
+    password_confirmation: Confirmação de Senha
+    passwords:
+      forgot: Esqueceu sua senha?
+      no_token: 
+      send_instructions: 
+      send_paranoid_instructions: 
+      updated: 
+      updated_not_active: 
+    registrations:
+      destroyed: 
+      inactive_signed_up: 
+      reasons:
+        inactive: inativo
+        locked: trancado
+        unconfirmed: não confirmado
+      sign_up: Registrar
+      signed_up: Bem vindo! Você acessou com sucesso.
+      signed_up_but_inactive: Esta conta está inativa
+      signed_up_but_locked: Esta conta foi trancada
+      signed_up_but_unconfirmed: Esta conta não foi confirmada
+      update_needs_confirmation: 
+      updated: 
+    sessions:
+      remember_me: 
+      sign_in: 
+      sign_out: 
+      signed_in: 
+      signed_out: 
+    unlocks:
+      send_instructions: 
+      send_paranoid_instructions: 
+      unlocked: 
+    username: 
+  edit: 
+  email: 
+  enroll_to_class: 
+  enrollment:
+    plural: 
+    singular: 
+  enrollment_status:
+    active: 
+    add: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+  enrollment_status_type:
+    active: 
+    add: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+  errors:
+    messages:
+      already_confirmed: 
+      expired: 
+      not_found: 
+      not_locked: 
+      not_saved: 
+    not_uploaded: 
+  exam:
+    add: 
+    add_existing: 
+    add_portion: 
+    adjustments: 
+    choose: 
+    choose_schedule: 
+    count: 
+    description: 
+    edit: 
+    exam_score: 
+    grading_method: 
+    list: 
+    name: 
+    new: 
+    new_exam: 
+    options: 
+    plural: 
+    save: 
+    select: 
+    show: 
+    singular: 
+    total_weight: 
+    use_weighting: 
+    view: 
+    weight: 
+  exam_portion:
+    adjustments: 
+    attached_file_count: 
+    count: 
+    description: 
+    edit: 
+    execution_date: 
+    is_master: 
+    list: 
+    master: 
+    max_score: 
+    name: 
+    plural: 
+    problem_count: 
+    save: 
+    show: 
+    singular: 
+    use_weighting: 
+    weight: 
+  flash:
+    actions:
+      create:
+        notice: 
+      destroy:
+        alert: 
+        notice: 
+      update:
+        notice: 
+  gender:
+    choose: 
+    female: 
+    label: 
+    male: 
+    unknown: 
+  given_name: 
+  grade:
+    all_exams: 
+    average_points: 
+    average_score: 
+    deviation: 
+    grading: 
+    how_grade: 
+    max: 
+    max_points: 
+    percent: 
+    points: 
+    rank: 
+    total: 
+    total_points: 
+    weighting: 
+    weighting_portion: 
+  graduated: 
+  guardian:
+    add: 
+    edit: 
+    guardians: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    relationship: 
+    save: 
+    singular: 
+  hello: 
+  helpers:
+    links:
+      cancel: 
+  hide: 
+  history: 
+  id: 
+  import_format: 
+  language: 
+  languages:
+    en: 
+    ja: 
+  manage: 
+  menu:
+    admin:
+      achievements: 
+      admin: 
+      administration: 
+      administrator: 
+      changes:
+        changes: 
+        student_addresses: 
+        student_contacts: 
+        students: 
+      disposals:
+        attachment: 
+        course_group: 
+        disposals: 
+        exam: 
+        student_address: 
+      preset:
+        grading:
+          grading_method: 
+          grading_scheme: 
+        items:
+          grading: 
+          locale: 
+          student: 
+        plural: 
+        save: 
+        singular: 
+        student:
+          city: 
+          country: 
+          gender: 
+          state: 
+      school_details: 
+      schools: 
+      specialties: 
+      system:
+        backup: 
+        system_tools: 
+      types:
+        attendance_types: 
+        commute_methods: 
+        contact: 
+        enrollment_status: 
+        types: 
+    class_group:
+      management: 
+      plural: 
+    course:
+      management: 
+      plural: 
+    course_group:
+      plural: 
+    exam:
+      management: 
+      plural: 
+    student:
+      plural: 
+    syllabus:
+      plural: 
+  name: 
+  name_reading: 
+  none: 
+  note:
+    add: 
+    content: 
+    delete: 
+    edit: 
+    list: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+    title: 
+  notice:
+    added: 
+    created: 
+    destroyed: 
+    enrolled: 
+    no_resource_assign_first: 
+    recovered: 
+    removed: 
+    updated: 
+    uploaded: 
+  num_enrolled: 
+  options: 
+  order: 
+  panel: 
+  period: 
+  phone: 
+  phonetic_reading: 
+  picture: 
+  pictures:
+    change: 
+    upload: 
+  preset:
+    grading:
+      grading_method: 
+      grading_scheme: 
+    plural: 
+    save: 
+    singular: 
+    student:
+      city: 
+      country: 
+      gender: 
+      state: 
+  profile: 
+  profiles:
+    new: 
+    save: 
+  required: 
+  revert: 
+  schedule: 
+  scholarship_status: 
+  school:
+    add: 
+    campuses: 
+    code: 
+    description: 
+    edit: 
+    edit_master: 
+    founded: 
+    grades: 
+    list: 
+    master: 
+    name: 
+    new: 
+    plural: 
+    primary: 
+    principal: 
+    save: 
+    singular: 
+    slogan: 
+    vice_principal: 
+  search: 
+  select: 
+  semester:
+    add: 
+    edit: 
+    ending: 
+    ending_after_starting: 
+    list: 
+    number: 
+    plural: 
+    save: 
+    starting: 
+    uniqueness: 
+  show: 
+  simple_grade:
+    add: 
+    edit: 
+    grade: 
+    index: 
+    list: 
+    plural: 
+    save: 
+    singular: 
+  specialty:
+    add: 
+    choose: 
+    description: 
+    edit: 
+    list: 
+    major: 
+    major_only: 
+    minor: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  student:
+    add: 
+    birth_and: 
+    birth_between: 
+    chosen_students: 
+    class_group_enrollment: 
+    commute_method: 
+    create: 
+    edit: 
+    enroll: 
+    export: 
+    import: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    registration:
+      csv: 
+      sheet: 
+    save: 
+    show: 
+    singular: 
+  student_specialty:
+    edit: 
+    index: 
+    save: 
+  submit: 
+  surname: 
+  surname_reading: 
+  syllabus:
+    code: 
+    credits: 
+    description: 
+    edit: 
+    import: 
+    list: 
+    name: 
+    name_sample: 
+    new: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+  teacher: 
+  title: 
+  user:
+    info: 
+  views:
+    pagination:
+      first: 
+      last: 
+      next: 
+      previous: 
+      truncate: 

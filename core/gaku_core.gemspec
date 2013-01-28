@@ -19,16 +19,18 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'rails', '~> 3.2.8'
-  s.add_dependency 'rails-i18n'
   s.add_dependency 'slim-rails'
   s.add_dependency 'deface', '>= 0.9.0'
-  s.add_dependency 'audited-activerecord', '~> 3.0'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
+  s.add_dependency 'paper_trail', '~> 2'
+
+  s.add_dependency 'rails-i18n'
+  s.add_dependency 'localeapp'
+  s.add_dependency 'i18n-js'
 
   s.add_dependency 'jquery-rails', '~> 2.0'
   s.add_dependency 'jquery-ui-rails'
-  s.add_dependency 'i18n-js'
   s.add_dependency 'eco'
 
   s.add_dependency 'highline', '= 1.6.11'
@@ -45,4 +47,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'client_side_validations'
   s.add_dependency 'nested_form'
   s.add_dependency 'kaminari'
+
+  s.add_dependency 'foreman'
+  s.add_dependency 'sidekiq'
+  s.add_dependency 'sinatra'
+
+  s.add_dependency 'globalize3', '~> 0.3.0'
+
 end

@@ -1,0 +1,33 @@
+= content_for :title, t(:'admissions.applicants.list')
+.pull-right
+  = button t(:'admissions.go_to_admissions'), [:admin, :admissions], :id => 'admin-admissions-link'
+  = button t(:'admissions.go_to_listing'), [:listing_admissions, :admin, :admissions], :id => 'listing_admissions-admin-admissions-link'
+
+.row-fluid
+  h4.mt-xs.mb-0 = t(:'admissions.candidates.list')
+.row-fluid
+  hr
+.row-fluid
+  .span12.well
+    .row-fluid
+        #admission-applicants-listing
+
+          = sortable_table_for 'students-index' do
+            thead
+              tr
+                /= th_icon 'check'
+                = th t(:'surname')
+                = th t(:'name')
+                = th t(:'birth_date')
+                = th t(:'gender.label')
+                = th t(:'admission_periods.singular')
+                = th t(:'admission_methods.singular')
+                = th t(:'admission_phases.singular')
+                = th t(:'address.primary')
+                = th_actions 2
+
+            tbody
+              = render :partial => 'applicant', :collection => @students, :as => 'student'
+
+javascript:
+  $(".class_group-select").combobox();

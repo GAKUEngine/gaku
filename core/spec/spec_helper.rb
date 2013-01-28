@@ -11,6 +11,7 @@ Spork.prefork do
   require 'database_cleaner'
   require 'active_record/fixtures'
   require 'factory_girl_rails'
+  require 'sidekiq/testing'
 
   require 'gaku/core/testing_support/env'
   require 'gaku/core/testing_support/factories'
@@ -18,7 +19,7 @@ Spork.prefork do
   require 'gaku/core/testing_support/request_helpers'
   require 'gaku/core/testing_support/flash_helpers'
   require 'gaku/core/testing_support/auth_helpers'
-  
+
   require 'gaku/core/url_helpers'
 end
 

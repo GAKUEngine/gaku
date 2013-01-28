@@ -1,0 +1,8 @@
+= modal_header t(:'simple_grade.edit')
+= modal_body do
+  = remote_form_for [@student, @simple_grade] do |f|
+    =render 'form_fields', :f => f
+    .row-fluid
+      .span12
+        =submit_button t(:'simple_grade.save') , :id => "submit-student-simple-grade-button"
+        =ajax_link_to_back [@student, :simple_grades]

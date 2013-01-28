@@ -17,11 +17,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
-  gem 'annotate'
-  gem "rails-erd"
-end
-
 group :test do
   gem 'spork', '~> 1.0rc'
   gem 'rspec-rails'
@@ -43,18 +38,10 @@ group :test do
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency
+  else
+    gem 'rb-inotify', '~> 0.8.8' #this is not available for MacOS
   end
-end
 
-unless ENV["CI"]
-  platform :ruby_18 do
-    gem 'rcov'
-    gem 'ruby-debug'
-  end
-  platform :ruby_19 do
-    gem 'simplecov'
-    gem 'ruby-debug19'
-  end
 end
 
 gemspec

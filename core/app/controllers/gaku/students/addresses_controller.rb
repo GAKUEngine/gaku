@@ -4,41 +4,43 @@ module Gaku
     belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
-    before_filter :student,   :only => [:index, :destroy, :make_primary]
-    before_filter :address,   :only => [:destroy, :make_primary]
-    before_filter :count,     :only => [:create, :destroy]
-
-    def create
-      @address = @student.addresses.create(params[:address])
-      create!
-    end
-
-    def update
-      #@primary_address = StudentAddress.where(:student_id => params[:student_id], :is_primary => true).first
-      @primary_address = StudentAddress.find_by_student_id_and_is_primary(params[:student_id], true)
-      update!
-    end
+    before_filter :student,   :only => [:index, :destroy, :make_primary, :soft_delete]
+    before_filter :address,   :only => [:destroy, :make_primary, :soft_delete, :recovery]
+    before_filter :count,     :only => [:create, :destroy, :soft_delete, :recovery]
 
     def destroy
-      @primary_address_id = @student.student_addresses.find_by_is_primary(true).id rescue nil
-      if @address.destroy
-        if @address.id == @primary_address_id
-          @student.student_addresses.first.make_primary unless @student.student_addresses.blank?
-        end
-        respond_with(@address)
+      super do |format|
+        format.js { render :nothing => true }
+      end
+    end
+
+    def recovery
+      @address.update_attribute(:is_deleted, false)
+      flash.now[:notice] = t(:'notice.recovered', :resource => t(:'address.singular'))
+      respond_with @address
+    end
+
+    def soft_delete
+      @address.update_attribute(:is_deleted, true)
+      if @address.is_primary?
+        @student.addresses.first.try(:make_primary)
+      end
+
+      flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
+      respond_to do |format|
+        format.js { render }
       end
     end
 
     def make_primary
-      student_address = StudentAddress.find_by_student_id_and_address_id(@student.id, @address.id)
-      student_address.make_primary
-      render :nothing => true
+      @address.make_primary
+      respond_with(@address)
     end
 
     private
 
     def address
-      @address = Address.find(params[:id])
+      @address = Address.unscoped.find(params[:id])
     end
 
     def student

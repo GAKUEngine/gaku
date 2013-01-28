@@ -1,14 +1,14 @@
-- if @exam.exam_portions.any?
-  .row-fluid
-   = table_for 'exam-exam-portions-index' do
-      thead
-        tr
-          = th t(:'exam_portion.name')
-          = th t(:'exam_portion.max_score')
-          - if @exam.use_weighting
-            = th t(:'exam_portion.weight')
-          = th t(:'exam_portion.problem_count')
-          = th t(:'exam_portion.attached_file_count')
-          = th_actions 3
-      tbody
-        = render :partial => 'gaku/exams/exam_portions/exam_portion', :collection => @exam.exam_portions, :as => :exam_portion
+.row-fluid
+ = table_for 'exam-exam-portions-index' do
+    thead
+      tr
+        = th t(:'order')
+        = th t(:'exam_portion.name')
+        = th t(:'exam_portion.max_score')
+        - if @exam.use_weighting
+          = th t(:'exam_portion.weight')
+        = th t(:'exam_portion.problem_count')
+        = th t(:'exam_portion.attached_file_count')
+        = th_actions 3
+    tbody class='sortable' data-sort-url="#{sort_exam_exam_portions_path(@exam)}"
+      = render :partial => 'gaku/exams/exam_portions/exam_portion', :collection => @exam.exam_portions, :as => :exam_portion

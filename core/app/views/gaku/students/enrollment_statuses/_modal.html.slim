@@ -1,0 +1,6 @@
+= modal_for 'edit-student-enrollment-status-modal' do
+  = modal_header t(:'enrollment_status.edit')
+  = modal_form_for [:enrollment_status, student] do |f|
+    = modal_body do
+      = f.select :enrollment_status_id, enrollment_statuses, :prompt => t('default')
+      = buttons_for student, :nested_id => 'student-enrollment-status', :label => t(:'enrollment_status.save')

@@ -21,3 +21,4 @@
 //= require gaku/students/addresses/form
 //= require gaku/shared/address
 //= require_tree ./backbone/
+//= require ./admin/disposals

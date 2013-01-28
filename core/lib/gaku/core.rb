@@ -1,19 +1,23 @@
 require 'rails/all'
 require 'rails/generators'
+require 'rails-i18n'
 require 'deface'
 require 'paperclip'
 require 'ransack'
 require 'jquery-rails'
 require 'devise'
 require 'cancan'
-require 'audited-activerecord'
 require 'inherited_resources'
 require 'slim-rails'
 require 'kaminari'
 require 'client_side_validations'
 require 'spreadsheet'
 require 'csv'
-  
+require 'sidekiq/web'
+require 'paper_trail'
+require 'globalize3'
+
+
 module Gaku
 
   module Core

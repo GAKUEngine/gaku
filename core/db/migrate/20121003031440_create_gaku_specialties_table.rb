@@ -3,7 +3,9 @@ class CreateGakuSpecialtiesTable < ActiveRecord::Migration
     create_table :gaku_specialties do |t|
     	t.string   :name
     	t.text     :description
-    	t.boolean  :mayor_only, :default => false
-    end 
+    	t.boolean  :major_only, :default => false
+
+      t.timestamps
+    end
   end
 end

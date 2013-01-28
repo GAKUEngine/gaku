@@ -8,6 +8,25 @@ module Gaku
     before_filter :exam
     before_filter :count, :only => [:create, :destroy]
 
+
+    def destroy
+      super do |format|
+        if @exam.exam_portions.empty?
+          if @exam.destroy
+            flash[:notice] = t(:'notice.destroyed', :resource => t(:'exam.singular'))
+          end
+        end
+        format.js { render }
+      end
+    end
+
+    def sort
+      params[:exam_portion].each_with_index do |id, index|
+        @exam.exam_portions.update_all( {:position => index}, {:id => id} )
+      end
+      render :nothing => true
+    end
+
     private
 
     def exam

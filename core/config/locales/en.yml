@@ -23,10 +23,10 @@ en:
     zipcode: ZIP Code
   admitted: Admitted On
   alert:
-    already_added: ! '%{resource} are already added!'
-    empty: ! '%{resource} is empty!'
+    already_added: "%{resource} are already added!"
+    empty: "%{resource} is empty!"
     not_selected: No %{resource} selected!
-  and: ! ' and '
+  and: " and "
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -42,8 +42,20 @@ en:
     view: View Assignments
   assignments:
     description: Assignment Description
+  achievement:
+    edit: Edit Achievement
+    save: Save Achievement
+    name: Name
+    list: Achievements list
+    add: Add Achievement
+    singular: Achievement
+    plural: Achievements
+    description: Description
+    authority: Authority
+    badge: Badge
+    choose: Choose Achievement
   attachment:
-    asset_error: Error when upload asset
+    asset_error: Error during asset upload
     asset_type: Asset type
     asset_upload: Asset was uploaded successfully!
     assets: Assets
@@ -64,7 +76,7 @@ en:
     counted_absent: Counted Absent
     credit_rate: Credit Rate
     disable_credit: Disable Credit
-    edit: Edin Attendance Type
+    edit: Edit Attendance Type
     list: Attendance Types list
     name: Name
     new: New Attendance Type
@@ -89,6 +101,18 @@ en:
     save: Save Campus
     singular: Campus
   cancel: Cancel
+  changes:
+    change: Change
+    changed_at: Changed At
+    event: Event
+    from: From
+    student:
+      list: Student Changes list
+    student_address:
+      list: Student Address Changes list
+    student_contact:
+      list: Student Contact Changes list
+    to: To
   class: Class
   class_group:
     add: Add Class Group
@@ -101,6 +125,7 @@ en:
     name: Class Name
     new: New Class Group
     none: None
+    none_assigned: None Assigned
     plural: Class Groups
     save: Save Class Group
     show: Show
@@ -115,7 +140,11 @@ en:
     new: New class enrollment
     seat_number: Seat number
   class_group_management: Class Management
-  commute_method: Commute Method
+  commute_method:
+    add: Add Commute Method
+    edit: Edit Commute Method
+    plural: Commute Methods
+    singular: Commute Method
   commute_method_type:
     add: Add Commute Method Type
     edit: Edit Commute Method Type
@@ -130,7 +159,7 @@ en:
     close: Close
     help:
       language: Choose your Language
-    label: Label
+    label: Language
     save: Save
   confirm: Are you sure?
   confirm_delete: Really Delete this record?
@@ -162,7 +191,7 @@ en:
     add: Add Course
     choose: Choose Course
     code: Course Code
-    code_sample: ! '[EX: FALL2020]'
+    code_sample: "[EX: FALL2020]"
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -226,6 +255,7 @@ en:
       timeout: Your session expired, please sign in again to continue.
       unauthenticated: You need to sign in or sign up before continuing.
       unconfirmed: You have to confirm your account before continuing.
+    login: Username or Email
     mailer:
       confirmation_instructions:
         subject: Confirmation instructions
@@ -240,7 +270,7 @@ en:
     password_confirmation: Password Confirmation
     passwords:
       forgot: Forgot your password?
-      no_token: 
+      no_token: No Token
       send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
       send_paranoid_instructions: If your e-mail exists on our database, you will receive a password recovery link on your e-mail
       updated: Your password was changed successfully. You are now signed in.
@@ -254,10 +284,10 @@ en:
         unconfirmed: unconfirmed
       sign_up: Sign Up
       signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
+      signed_up_but_inactive: This account is inactive
+      signed_up_but_locked: This account has been locked
+      signed_up_but_unconfirmed: This account has not been confirmed
+      update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
     sessions:
       remember_me: Remember me
@@ -269,16 +299,27 @@ en:
       send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.
       unlocked: Your account was successfully unlocked. You are now signed in.
+    username: Username
   edit: Edit
   email: Mail Address
   enroll_to_class: Enroll to class
   enrollment:
     plural: Enrollments
     singular: Enrollment
+  enrollment_status:
+    active: Active
+    add: Add Enrollment Status
+    edit: Edit Enrollment Status
+    list: Enrollment Statuses list
+    name: Name
+    new: New Enrollment Status
+    plural: Enrollment Statuses
+    save: Save Enrollment Status
+    singular: Enrollment Status
   enrollment_status_type:
     active: Active
     add: Add Enrollment Status Type
-    edit: Edin Enrollment Status Type
+    edit: Edit Enrollment Status Type
     list: Enrollment Status Types list
     name: Name
     new: New Enrollment Status Type
@@ -293,7 +334,7 @@ en:
       not_locked: was not locked
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
-        other: ! '%{count} errors prohibited this %{resource} from being saved:'
+        other: "%{count} errors prohibited this %{resource} from being saved:"
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -305,6 +346,7 @@ en:
     count: Exams Count
     description: Description
     edit: Edit Exam
+    exam_score: Exam Score
     grading_method: Grading Method
     list: Exams List
     name: Exam name
@@ -342,12 +384,12 @@ en:
   flash:
     actions:
       create:
-        notice: ! '%{resource_name} was successfully created!'
+        notice: "%{resource_name} was successfully created!"
       destroy:
-        alert: ! '%{resource_name} could not be destroyed!'
-        notice: ! '%{resource_name} was successfully destroyed!'
+        alert: "%{resource_name} could not be destroyed!"
+        notice: "%{resource_name} was successfully destroyed!"
       update:
-        notice: ! '%{resource_name} was successfully updated!'
+        notice: "%{resource_name} was successfully updated!"
   gender:
     choose: Choose Gender
     female: Female
@@ -394,18 +436,25 @@ en:
   language: Language
   languages:
     en: English
-    ja: 日本語[Japanese]
+    ja: "日本語[Japanese]"
   manage: Manage
   menu:
     admin:
+      achievements: Achievements
       admin: Admin
       administration: Administration
       administrator: Administrator
+      changes:
+        changes: Changes and Deletions
+        student_addresses: Student Addresses
+        student_contacts: Student Contacts
+        students: Students
       disposals:
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals
         exam: Exam Disposals
+        student_address: Student Addresses Disposals
       preset:
         grading:
           grading_method: Grading Method
@@ -424,6 +473,7 @@ en:
           state: State
       school_details: School Details
       schools: Schools
+      specialties: Specialties
       system:
         backup: Backup
         system_tools: System Tools
@@ -431,7 +481,7 @@ en:
         attendance_types: Attendance Types
         commute_methods: Commute Methods
         contact: Contact Types
-        enrollment_status: Enrollment Status Types
+        enrollment_status: Enrollment Statuses
         types: Types & Methods
     class_group:
       management: Class Management
@@ -463,17 +513,18 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: ! '%{resource} has been successfully added!'
-    created: ! '%{resource} has been successfully created!'
-    destroyed: ! '%{resource} has been successfully destroyed!'
-    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
+    added: "%{resource} has been successfully added!"
+    created: "%{resource} has been successfully created!"
+    destroyed: "%{resource} has been successfully destroyed!"
+    enrolled: "%{resource} has been successfully enrolled to %{to}!"
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: ! '%{resource} has been successfully recovered'
-    removed: ! '%{resource} has been successfully removed!'
-    updated: ! '%{resource} has been successfully updated!'
-    uploaded: ! '%{resource} has been successfully uploaded!'
+    recovered: "%{resource} has been successfully recovered"
+    removed: "%{resource} has been successfully removed!"
+    updated: "%{resource} has been successfully updated!"
+    uploaded: "%{resource} has been successfully uploaded!"
   num_enrolled: Number Enrolled
   options: Options
+  order: Order
   panel: Panel
   period: Period
   phone: Phone Number
@@ -536,6 +587,40 @@ en:
     starting: Starting
     uniqueness: have this semester added
   show: Show
+  simple_grade:
+    add: Add Simple Grade
+    edit: Edit Simple Grade
+    grade: Grade
+    index: Simple Grade Index
+    list: Simple Grades list
+    plural: Simple Grades
+    save: Save Simple Grade
+    singular: Simple Grade
+  specialty:
+    add: Add Specialty
+    choose: Choose Specialty
+    description: Description
+    edit: Edit Specialty
+    list: Specialties list
+    major: Major
+    major_only: Major Only
+    minor: Minor
+    name: Name
+    plural: Specialties
+    save: Save Specialty
+    singular: Specialty
+    plural: Specialties
+    major: Major
+    minor: Minor
+    choose: Choose Specialty
+  student_specialty:
+    index: Student Specialty Index
+    save: Save Student Specialty
+    edit: Student Specialty Edit
+  student_achievement:
+    index: Student Achievement Index
+    save: Save Student Achievement
+    edit: Edit Student Achievement
   student:
     add: Add Student
     birth_and: and
@@ -544,7 +629,7 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
-    edit: Edit
+    edit: Edit Student
     enroll: Enroll Student
     export: Export Students
     import: Import Students
@@ -558,6 +643,10 @@ en:
     save: Save Student
     show: Show Students
     singular: Student
+  student_specialty:
+    edit: Student Specialty Edit
+    index: Student Specialty Index
+    save: Save Student Specialty
   submit: Submit
   surname: Surname
   surname_reading: Surname Reading
@@ -566,9 +655,10 @@ en:
     credits: Credits
     description: Course Description
     edit: Edit Syllabus
+    import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: ! '[EX: Science A]'
+    name_sample: "[EX: Science A]"
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
@@ -578,3 +668,10 @@ en:
   title: Title
   user:
     info: User info
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: "&lsaquo; Prev"
+      truncate: "..."

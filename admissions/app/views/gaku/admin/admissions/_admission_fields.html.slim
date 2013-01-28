@@ -1,0 +1,10 @@
+td.status = admission.admitted ? t(:'admissions.admitted_on') + ' : ' + admission.student.admitted.to_s : t(:'admissions.not_admitted')
+td.name = admission.student.name
+td.birth = admission.student.birth_date
+td.registration-date = admission.admission_phase_records.first.created_at.strftime("%Y.%m.%d")
+td.admission-phase = admission.admission_phase_records.last.admission_phase.name
+td.student-status = admission.student.enrollment_status
+td.manage
+  = link_to_show admin_student_path(admission.student)
+  = ajax_link_to_edit [:edit, :admin, admission.student], :style => "margin:0px"
+  = render 'gaku/admin/admissions/delete_confirm', :admission => admission

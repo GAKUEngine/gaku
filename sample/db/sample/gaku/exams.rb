@@ -8,5 +8,5 @@ names = [
 ]
 
 names.each do |name|
-  Gaku::Exam.create(:name => name)
+  Gaku::Exam.where(:name => name).first_or_create!
 end

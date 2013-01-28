@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
   let(:admission_method) { create(:admission_method) }
-  let(:admission_phase) { create(:admission_phase) }
+  let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
 
   describe 'GET #new' do
     it "assigns a new admission_phase to @admission_phase" do
@@ -24,7 +24,6 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
           gaku_post :create, admission_method_id: admission_method.id, admission_phase: attributes_for(:admission_phase)  
         }.to change(Gaku::AdmissionPhase, :count).by 1
         
-        controller.should set_the_flash
       end
     end
     context "with invalid attributes" do

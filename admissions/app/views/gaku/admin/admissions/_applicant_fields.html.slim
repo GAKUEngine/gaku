@@ -1,0 +1,8 @@
+td.surname = student.surname
+td.name = student.name
+td.birth = student.birth_date
+td.gender = student.gender.nil? ? '' : (student.gender ? t('gender.male') : t('gender.female'))
+td.admission-period = !student.admission.nil? ? student.admission.admission_period.name : ''
+td.admission-method = !student.admission.nil? ? student.admission.admission_method.name : ''
+td.admission-phase = !student.admission.nil? ? student.admission.admission_phase_records.last.admission_phase.name : ''
+td.address = student.address_widget

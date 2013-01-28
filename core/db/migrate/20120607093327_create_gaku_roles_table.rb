@@ -5,7 +5,8 @@ class CreateGakuRolesTable < ActiveRecord::Migration
 
       t.references :class_group_enrollment
       t.references :faculty
-      
+
+      t.timestamps
 	  end
   end
 end

@@ -1,0 +1,12 @@
+tr
+  td = address.addressable
+  td = address.title
+  td = address.country
+  td = address.zipcode
+  td = address.state
+  td = address.city
+  td = address.address1
+  td = address.address2
+  td
+    = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, address.addressable, address], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true, :style => 'margin-left:5px'
+    = ajax_link_to_delete [address.addressable, address] , :id => 'delete-disposal-student-address-link'

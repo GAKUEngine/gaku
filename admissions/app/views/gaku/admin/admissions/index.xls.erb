@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <% @admission_method.admission_phases.each_with_index do |phase, index| %>
+  <Worksheet ss:Name="<%= phase.name.to_s %>">
+    <Table>
+    <% phase.admission_phase_states.each do |state| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= state.name.to_s %></Data></Cell>
+      </Row>
+      <% @state_records.each do |record| %>
+        <% if record.admission_phase == phase && record.admission_phase_state == state %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.admission.student.name %></Data></Cell>
+      </Row>
+        <% end %>
+      <% end %>
+      <Row></Row>
+      <Row></Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <% end %>
+</Workbook>

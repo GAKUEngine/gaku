@@ -2,50 +2,43 @@ require 'spec_helper'
 
 describe Gaku::Student do
 
-  context "validations" do 
+  context "validations" do
     let(:student) { stub_model(Gaku::Student) }
 
-    
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
     it { should have_many :class_group_enrollments }
-    it { should have_many(:class_groups).through(:class_group_enrollments) } 
+    it { should have_many(:class_groups).through(:class_group_enrollments) }
     it { should have_many :student_specialties }
-    it { should have_many(:specialities).through(:student_specialties) }
+    it { should have_many(:specialties).through(:student_specialties) }
+    it { should have_many(:achievements) }
+    it { should have_many(:achievements).through(:student_achievements) }
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
-    it { should have_many :student_addresses } 
-    it { should have_many(:addresses).through(:student_addresses) } 
+    it { should have_many :addresses }
     it { should have_many :contacts }
     it { should have_many :notes }
     it { should have_many :attendances }
-    it { should have_many :enrollment_statuses }
     it { should have_many :achievements }
     it { should have_many :school_histories }
     it { should have_many :simple_grades }
-    
-    xit { should have_one :admission }
 
     it { should belong_to(:commute_method)}
     it { should belong_to(:user) }
     it { should belong_to :scholarship_status }
+    it { should belong_to :enrollment_status }
 
     it { should have_and_belong_to_many(:guardians) }
-    
+
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:surname) }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
-    it { should accept_nested_attributes_for(:notes).allow_destroy(true) }
-    it { should accept_nested_attributes_for(:addresses).allow_destroy(true) }
-    it { should accept_nested_attributes_for(:contacts).allow_destroy(true) }
 
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:surname) }
     it { should allow_mass_assignment_of(:name_reading) }
     it { should allow_mass_assignment_of(:surname_reading) }
-    it { should allow_mass_assignment_of(:phone) }
-    it { should allow_mass_assignment_of(:email) }
     it { should allow_mass_assignment_of(:birth_date) }
     it { should allow_mass_assignment_of(:gender) }
     it { should allow_mass_assignment_of(:admitted) }
@@ -55,14 +48,12 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of(:class_groups_attributes) }
     it { should allow_mass_assignment_of(:guardians) }
     it { should allow_mass_assignment_of(:guardians_attributes) }
-    it { should allow_mass_assignment_of(:notes) }
-    it { should allow_mass_assignment_of(:notes_attributes) }
-    it { should allow_mass_assignment_of(:addresses) }
-    it { should allow_mass_assignment_of(:addresses_attributes) }
     it { should allow_mass_assignment_of(:picture) }
     it { should allow_mass_assignment_of(:student_id_number) }
     it { should allow_mass_assignment_of(:student_foreign_id_number) }
     it { should allow_mass_assignment_of(:scholarship_status_id) }
+    it { should allow_mass_assignment_of(:enrollment_status_id) }
+    it { should allow_mass_assignment_of(:is_deleted) }
     it { should_not allow_mass_assignment_of(:user) }
     it { should_not allow_mass_assignment_of(:user_attributes) }
 
@@ -79,13 +70,12 @@ describe Gaku::Student do
 
   context 'methods' do
     xit 'enrollment_status'
-    xit 'full_name'
+    xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
     xit 'seat_number_widget'
     xit 'address_widget'
     xit 'primary_address'
-    xit 'decrypt_student_fields'
   end
-  
+
 end

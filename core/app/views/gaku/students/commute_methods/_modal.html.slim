@@ -1,0 +1,6 @@
+= modal_for 'student-commute-method-modal' do
+  = modal_header t(:'commute_method.edit')
+  = modal_form_for [student, @commute_method] do |f|
+    = modal_body do
+      = f.select :commute_method_type_id, commute_method_types, :prompt => t('default')
+      = buttons_for @commute_method, :nested_id => 'student-commute-method', :label => t(:'commute_method.add')
