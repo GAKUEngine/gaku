@@ -1,6 +1,6 @@
 = content_for :index_header do
   .pull-left
-    = count_div 'admin-achievement-count' do
+    = count_div 'admin-achievements-count' do
       = print_count @count, t_achievement_list
   .pull-right
     = ajax_link_to_new t(:'achievement.add'), [:new, :admin, :achievement], :id => 'new-admin-achievement-link'

@@ -48,7 +48,7 @@ module Gaku
     def normal_modal_form_for(object, options = {}, &block)
       options[:validate] = true
       options[:builder] = ValidateFormBuilder
-      options[:html] = {:'data-type' => 'script', :class => 'remote-form'}
+      options[:html] = {:'data-type' => 'script', :class => 'normal-form'}
       form_for(object, options, &block)
     end
 

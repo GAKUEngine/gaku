@@ -1,0 +1,3 @@
+- unless student_achievement.nil? or student_achievement.new_record? or !student_achievement
+  tr id="student-achievement-#{student_achievement.id}"
+    = render :partial =>'fields', :locals => {:student_achievement => student_achievement}
