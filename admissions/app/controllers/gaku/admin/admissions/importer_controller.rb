@@ -8,7 +8,11 @@ module Gaku
           importers = Gaku::Admissions::Importers::AdmissionsImporters.new()
 
           @importer_types = importers.get_types
-          render "gaku/admin/admissions/importer/index"
+
+          respond_to do |format|
+            format.js
+          end
+          #render "gaku/admin/admissions/importer/index"
         end
 
         def get_template
