@@ -49,9 +49,11 @@ en:
     list: Achievement List
     add: Add Achievement
     singular: Achievement
+    plural: Achievements
     description: Description
     authority: Authority
     badge: Badge
+    choose: Choose Achievement
   attachment:
     asset_error: Error during asset upload
     asset_type: Asset type
@@ -602,6 +604,10 @@ en:
     index: Student Specialty Index
     save: Save Student Specialty
     edit: Student Specialty Edit
+  student_achievement:
+    index: Student Achievement Index
+    save: Save Student Achievement
+    edit: Edit Student Achievement
   student:
     add: Add Student
     birth_and: and

@@ -11,5 +11,10 @@ module Gaku
 
     validates_presence_of :name
     # validates_associated :student, :school
+
+    def to_s
+      name
+    end
+
   end
 end

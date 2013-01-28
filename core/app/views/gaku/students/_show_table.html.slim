@@ -50,4 +50,9 @@
         td
           #student-simple-grade
             = render 'gaku/students/simple_grades/simple_grades', :student => student
+      tr
+        th.btn-c2 = t('achievement.singular')
+        td
+          #student-achievement
+            = render 'gaku/students/student_achievements/student_achievements', :student => student
 

@@ -113,7 +113,8 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :simple_grades, :controller => 'students/simple_grades'
-
+    resources :commute_methods, :controller => 'students/commute_methods'
+    resources :student_achievements, :controller => 'students/student_achievements'
     resources :student_specialties, :controller => 'students/student_specialties'
 
     #resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
@@ -124,7 +125,6 @@ Gaku::Core::Engine.routes.draw do
     #  end
     #end
 
-    resources :commute_methods, :controller => 'students/commute_methods'
 
     resources :guardians, :controller => 'students/guardians' do
       get :new_contact, :on => :member
