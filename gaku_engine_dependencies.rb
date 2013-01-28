@@ -10,8 +10,6 @@ gem 'therubyracer', '0.10.2'
 
 gem 'rails-i18n'
 
-gem 'roo', :git => 'git://github.com/Empact/roo.git'
-
 group :assets do
   gem 'less'
   gem 'sass-rails',   '~> 3.2'
@@ -45,5 +43,5 @@ group :test do
   end
 
 end
-  
+
 gemspec
