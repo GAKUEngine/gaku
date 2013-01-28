@@ -5,6 +5,6 @@ module Gaku
 
     attr_accessible :achievement_id
 
-    validate_presence_of :achievement_id
+    validates_presence_of :achievement_id
   end
 end
