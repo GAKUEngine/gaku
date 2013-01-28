@@ -14,6 +14,7 @@ ja:
     save: "入学形態を保存"
     show: "入学方式を表示"
     singular: "入学形態"
+    starting_applicant_number:
   admission_periods:
     add: "入学時期を追加"
     admitted_on: "入学日"
