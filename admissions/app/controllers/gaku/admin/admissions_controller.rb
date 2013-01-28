@@ -116,7 +116,7 @@ module Gaku
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
           
-          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
+          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:true, immutable:true).first_or_create!.id)
           render 'create'
         end
       end
@@ -162,7 +162,7 @@ module Gaku
                                         :admission_id => admission.id)
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
             # change student status
-            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
+            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:true, immutable:true).first_or_create!.id)
             
           else
             @err_enrollments << admission
@@ -182,7 +182,7 @@ module Gaku
       private
         def load_period_method
           @admission_periods = Gaku::AdmissionPeriod.all
-          
+
           if session[:admission_period_id]
             @admission_period = AdmissionPeriod.find(session[:admission_period_id])
           else
