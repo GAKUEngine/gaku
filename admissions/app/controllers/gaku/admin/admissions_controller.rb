@@ -9,7 +9,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new]
+      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
@@ -25,7 +25,6 @@ module Gaku
       end
 
       def index
-        
 
       end
 
@@ -107,7 +106,7 @@ module Gaku
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
           
-          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:true, immutable:true).first_or_create!.id)
+          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
           render 'create'
         end
       end
@@ -124,12 +123,16 @@ module Gaku
 
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
+        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+
         respond_to do |format|
           format.js
         end
       end
 
       def create_multiple
+        raise params.inspect
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
         @err_enrollments = []
         @enrollments = []
@@ -153,7 +156,7 @@ module Gaku
                                         :admission_id => admission.id)
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
             # change student status
-            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:true, immutable:true).first_or_create!.id)
+            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
             
           else
             @err_enrollments << admission
