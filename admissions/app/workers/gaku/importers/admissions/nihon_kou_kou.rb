@@ -24,11 +24,11 @@ module Gaku
 
         def 基本入力処理(book, period_id, method_id)
           puts "基本入力処理------------------------------"
-          sheet = book.sheet('基本入力')
+          sheet = book.sheet('入力')
 
-          idx = get_index_from_row(sheet.row(6))
+          idx = get_index_from_row(sheet.row(7))
 
-          sheet.drop(6).each do |row|
+          sheet.drop(7).each do |row|
             基本入力一行分(row, idx, period_id, method_id)
           end
         end
@@ -48,7 +48,7 @@ module Gaku
             surname = name_parts.first
             name = name_parts.last
 
-            name_reading_raw = row[idx["志願者カナ氏名"]]
+            name_reading_raw = row[idx["フリガナ"]]
 
             surname_reading = ""
             name_reading = ""
@@ -77,7 +77,7 @@ module Gaku
 
             if !period_id.nil? && !method_id.nil?
               admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
-
+              logger.info
               if admission.save
                 admission_method = admission.admission_method
                 admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
@@ -90,10 +90,12 @@ module Gaku
                 
                 admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
               end
+              logger.info "志願者「" + surname + "　" + name + 
+                "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
+            else
+              logger.info "入学時期及び入学形態が設定されていなかった為志願者" + "「" + surname + "　" + name +
+                "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
-
-            logger.info "志願者「" + surname + "　" + name + 
-              "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
           end
         end
 
