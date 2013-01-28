@@ -20,11 +20,11 @@ module Gaku
         end
 
         def 基本入力処理(book, period_id, method_id)
-          sheet = book.sheet('基本入力')
+          sheet = book.sheet('入力')
 
-          idx = get_index_from_row(sheet.row(6))
+          idx = get_index_from_row(sheet.row(7))
 
-          sheet.drop(6).each do |row|
+          sheet.drop(7).each do |row|
             基本入力一行分(row, idx, period_id, method_id)
           end
         end
@@ -41,7 +41,7 @@ module Gaku
             surname = name_parts.first
             name = name_parts.last
 
-            name_reading_raw = row[idx["志願者カナ氏名"]]
+            name_reading_raw = row[idx["フリガナ"]]
 
             surname_reading = ""
             name_reading = ""
