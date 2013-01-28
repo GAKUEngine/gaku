@@ -1,14 +1,4 @@
 en:
-  achievement:
-    add: Add Achievement
-    authority: Authority
-    badge: Badge
-    description: Description
-    edit: Edit Achievement
-    list: Achievement List
-    name: Name
-    save: Save Achievement
-    singular: Achievement
   add: Add
   address:
     add: Add Address
@@ -56,7 +46,7 @@ en:
     edit: Edit Achievement
     save: Save Achievement
     name: Name
-    list: Achievement List
+    list: Achievements list
     add: Add Achievement
     singular: Achievement
     plural: Achievements
