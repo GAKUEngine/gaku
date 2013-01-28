@@ -52,6 +52,18 @@ en:
     view: View Assignments
   assignments:
     description: Assignment Description
+  achievement:
+    edit: Edit Achievement
+    save: Save Achievement
+    name: Name
+    list: Achievement List
+    add: Add Achievement
+    singular: Achievement
+    plural: Achievements
+    description: Description
+    authority: Authority
+    badge: Badge
+    choose: Choose Achievement
   attachment:
     asset_error: Error during asset upload
     asset_type: Asset type
@@ -607,6 +619,18 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
+    plural: Specialties
+    major: Major
+    minor: Minor
+    choose: Choose Specialty
+  student_specialty:
+    index: Student Specialty Index
+    save: Save Student Specialty
+    edit: Student Specialty Edit
+  student_achievement:
+    index: Student Achievement Index
+    save: Save Student Achievement
+    edit: Edit Student Achievement
   student:
     add: Add Student
     birth_and: and

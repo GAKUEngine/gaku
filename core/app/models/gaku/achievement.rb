@@ -8,5 +8,10 @@ module Gaku
     attr_accessible :name, :description, :authority, :badge
 
     validates_presence_of :name
+
+    def to_s
+      name
+    end
+
   end
 end
