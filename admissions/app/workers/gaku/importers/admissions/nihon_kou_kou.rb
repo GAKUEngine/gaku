@@ -80,7 +80,7 @@ module Gaku
               logger.info
               if admission.save
                 admission_method = admission.admission_method
-                admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
+                admission_period = AdmissionPeriod.find(period_id)
                 admission_phase = admission_method.admission_phases.first
                 admission_phase_state = admission_phase.admission_phase_states.first
                 admission_phase_record = AdmissionPhaseRecord.create(

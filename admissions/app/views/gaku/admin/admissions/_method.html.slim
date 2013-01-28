@@ -6,3 +6,10 @@
     = t(:'admission_methods.no_method')
 - else
   = t(:'admission_methods.no_period')
+
+
+javascript:
+
+  $('#admission_method').on('change', function(){
+    history.pushState(null, document.title, '?admission_period='+$('#admission_period').val()+'&admission_method='+$(this).val());
+  });

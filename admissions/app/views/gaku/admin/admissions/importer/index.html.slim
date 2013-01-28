@@ -2,7 +2,7 @@
   .span12.well
     .row-fluid
       .span12
-        = form_for :importer, :url => { :action => "import_sheet" }, :html => { :multipart => true } do |f|
+        = form_for :importer, :url => { :action => "import_sheet", :admission_period_id => 1, :admission_method_id => 1 }, :html => { :multipart => true } do |f|
           label for="importer"
           = t(:'import_format')
           = select("importer", "importer_type", @importer_types, {:include_blank => false})
