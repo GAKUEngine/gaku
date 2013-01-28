@@ -1,4 +1,14 @@
 ja:
+  achievement:
+    add: "実績を追加"
+    authority: "提供者"
+    badge: "バッジ"
+    description: "説明"
+    edit: "実績内容を編集"
+    list: "実績類一覧"
+    name: "実績の名称"
+    save: "実績類を保存"
+    singular: "実績"
   add: "追加"
   address:
     add: "住所の追加"
@@ -129,6 +139,8 @@ ja:
     seat_number: "出席番号"
   class_group_management: "クラス管理"
   commute_method:
+    add: "通学方法を追加"
+    edit: "通学方法を編集"
     plural: "通学方法"
     singular: "通学方法"
   commute_method_type:
@@ -426,6 +438,7 @@ ja:
   manage: "管理"
   menu:
     admin:
+      achievements: "実績"
       admin: "管理者"
       administration: "管理"
       administrator: "管理者"
@@ -572,13 +585,26 @@ ja:
     starting: "開始"
     uniqueness: "既に追加された学期です"
   show: "照会"
+  simple_grade:
+    add: "単体評価を追加"
+    edit: "単体評価を編集"
+    grade: "単体評価"
+    index: "単体評価一覧"
+    list: "単体評価覧"
+    plural: "単体評価"
+    save: "単体評価を保存"
+    singular: "単体評価"
   specialty:
     add: "専攻を追加"
+    choose: "専科を選択"
     description: "説明文"
     edit: "専攻を編集"
     list: "専攻一覧"
+    major: "主専科"
     major_only: "主専攻に限定"
+    minor: "副専科"
     name: "専攻名"
+    plural: "専科"
     save: "専攻を保存"
     singular: "専攻"
   student:
@@ -603,6 +629,10 @@ ja:
     save: "生徒を保存"
     show: "生徒照会"
     singular: "生徒"
+  student_specialty:
+    edit: "専科を編集"
+    index: "専科一覧"
+    save: "専科を保存"
   submit: "登録する"
   surname: "姓"
   surname_reading: "フリガナ（姓）"
