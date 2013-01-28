@@ -1,15 +1,12 @@
 module Gaku
   class Achievement < ActiveRecord::Base
-  	has_many :student_achievement
-    has_many :student, :through => :student_achievement
-
-  	belongs_to :school
+  	has_many :student_achievements
+    has_many :students, :through => :student_achievements
 
     has_attached_file :badge
 
-    attr_accessible :name, :description, :student_id, :school_id, :authority, :badge
+    attr_accessible :name, :description, :authority, :badge
 
     validates_presence_of :name
-    # validates_associated :student, :school
   end
 end

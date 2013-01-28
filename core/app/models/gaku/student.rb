@@ -12,15 +12,12 @@ module Gaku
     has_many :student_specialties
     has_many :specialties, :through => :student_specialties
 
-    has_many :exam_portion_scores
-    has_many :assignment_scores
-
-    has_many :attendances
-    has_many :enrollment_statuses
-
     has_many :student_achievements
     has_many :achievements, :through => :student_achievements
 
+    has_many :exam_portion_scores
+    has_many :assignment_scores
+    has_many :attendances
     has_many :school_histories
     has_many :simple_grades
 
