@@ -16,7 +16,7 @@ describe 'Admin Admissions' do
       before do
         admission_period_no_methods
         visit gaku.admin_admissions_path
-        select "#{admission_period_no_methods.name}", from: 'admission_period'
+        select "#{admission_period_no_methods.name}", from: 'admission_period_id'
       end
       it 'shows no methods info' do
         within ('#admission-method-selection') { page.should have_content 'No methods available for this period.' }
@@ -66,9 +66,9 @@ describe 'Admin Admissions' do
 
       context 'when change method' do
         before do
-          select "#{admission_period.name}", from: 'admission_period'
+          select "#{admission_period.name}", from: 'admission_period_id'
           wait_for_ajax
-          within('#admission-method-selection') { select "#{@last_method.name}", from: 'admission_method' }
+          within('#admission-method-selection') { select "#{@last_method.name}", from: 'admission_method_id' }
           wait_for_ajax
         end
 

@@ -22,7 +22,7 @@ module Gaku
                     :admission_method_id, :admission_period_id,
                     :student_attributes, :admitted
 
-    validates :applicant_number, :presence => true, :uniqueness => {:scope => :admission_method_id}
+    #validates :applicant_number, :presence => true, :uniqueness => {:scope => :admission_method_id}
 
     def student
       Student.unscoped{ super }

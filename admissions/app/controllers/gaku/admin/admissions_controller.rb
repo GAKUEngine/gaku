@@ -132,7 +132,6 @@ module Gaku
       end
 
       def create_multiple
-        raise params.inspect
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
         @err_enrollments = []
         @enrollments = []
