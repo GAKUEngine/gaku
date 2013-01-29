@@ -18,7 +18,7 @@ module Gaku
     has_many :exam_portion_scores
     has_many :assignment_scores
     has_many :attendances
-    has_many :school_histories
+    has_many :external_school_records
     has_many :simple_grades
 
     belongs_to :user
