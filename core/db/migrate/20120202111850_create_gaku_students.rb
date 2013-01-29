@@ -15,6 +15,8 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :national_registration_number
       t.boolean  :is_deleted, :default => false
 
+      t.attachment :picture
+
       t.references :user
       t.references :faculty
       t.references :commute_method
