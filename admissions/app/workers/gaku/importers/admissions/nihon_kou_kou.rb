@@ -7,19 +7,22 @@ module Gaku
         include SheetHelper
         require 'roo'
 
+
         def perform(file_path, period_id, method_id)
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
 
           if book.nil?
+            logger.info "インポートファイルをシートとして開けませんでした。"
             return
           end
 
           基本入力処理(book, period_id, method_id)
-
         end
 
+
         def 基本入力処理(book, period_id, method_id)
+          logger.info "--日本高校シートの基本入力シート処理開始--"
           sheet = book.sheet('入力')
 
           idx = get_index_from_row(sheet.row(7))
@@ -28,6 +31,7 @@ module Gaku
             基本入力一行分(row, idx, period_id, method_id)
           end
         end
+
 
         def 基本入力一行分(row, idx, period_id, method_id)
           ActiveRecord::Base.transaction do
@@ -73,7 +77,7 @@ module Gaku
               logger.info
               if admission.save
                 admission_method = admission.admission_method
-                admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
+                admission_period = AdmissionPeriod.find(period_id)
                 admission_phase = admission_method.admission_phases.first
                 admission_phase_state = admission_phase.admission_phase_states.first
                 admission_phase_record = AdmissionPhaseRecord.create(
@@ -91,6 +95,7 @@ module Gaku
             end
           end
         end
+
 
       end
     end

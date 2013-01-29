@@ -8,7 +8,18 @@ module Gaku
           importers = Gaku::Admissions::Importers::AdmissionsImporters.new()
 
           @importer_types = importers.get_types
-          render "gaku/admin/admissions/importer/index"
+
+          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+          if params[:admission_method_id]
+            @admission_method = AdmissionMethod.find(params[:admission_method_id])
+          else
+            @admission_method = @admission_period.admission_methods.first
+          end
+
+          respond_to do |format|
+            format.js
+          end
+          #render "gaku/admin/admissions/importer/index"
         end
 
         def get_template
@@ -25,7 +36,7 @@ module Gaku
           importers.run_importer(params[:importer][:importer_type], file, 
                                  params[:importer][:data_file].content_type, params[:admission_period_id], params[:admission_method_id])
 
-          render :text => "working"
+          render :text => "working dayo-"
         end
       end
     end

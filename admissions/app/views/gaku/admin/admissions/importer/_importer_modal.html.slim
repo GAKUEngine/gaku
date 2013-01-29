@@ -1,0 +1,21 @@
+.modal.hide#importer-modal wmode="opaque" style="padding: 41px;position: absolute;left: 500px;top: 300px;width:auto;height:auto;text-align:center;"
+  .modal-header
+    button.close type="button" data-dismiss="modal"
+      'x
+  .modal-body
+    .row-fluid
+      .span12.well
+        .row-fluid
+          .span12
+            = form_for :importer, :url => { :action => "import_sheet" }, :html => { :multipart => true } do |f|
+              = hidden_field_tag "admission_period_id", params[:admission_period_id]
+              = hidden_field_tag "admission_method_id", params[:admission_method_id]
+
+              label for="importer"
+              = t(:'import_format')
+              = select("importer", "importer_type", @importer_types, {:include_blank => false})
+              br /
+              = f.file_field :data_file
+              br /
+              = submit_tag 'Submit'
+    = link_to_cancel :class => 'span3 btn btn-danger', :id => 'cancel-class-group-student-link'
