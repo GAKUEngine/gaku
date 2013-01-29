@@ -7,6 +7,8 @@ class CreateGakuAchievements < ActiveRecord::Migration
 
       t.attachment  :badge
 
+      t.references :external_school_record
+
       t.timestamps
   	end
   end
