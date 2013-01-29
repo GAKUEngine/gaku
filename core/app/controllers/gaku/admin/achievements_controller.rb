@@ -2,30 +2,22 @@ module Gaku
   module Admin
     class AchievementsController < Admin::BaseController
       inherit_resources
-      respond_to :js, :html, :json
+      respond_to :js, :html
 
       before_filter :count, :only => [:index, :create, :destroy]
 
       def create
-        super do |format|
-          format.html { redirect_to_index }
-        end
+        create! { [:admin, :achievements ] }
       end
 
        def update
-        super do |format|
-          format.html { redirect_to_index }
-        end
+        update! { [:admin, :achievements ] }
       end
 
       private
 
       def count
         @count = Achievement.count
-      end
-
-      def redirect_to_index
-        redirect_to [:admin, :achievements ]
       end
 
     end

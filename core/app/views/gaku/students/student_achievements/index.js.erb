@@ -1,0 +1,3 @@
+$('#modal-dialogs').html("<%= render_js_partial('gaku/students/student_achievements/index_modal', {:student_achievements => @student_achievements}) %>");
+$('.modal-backdrop').remove()
+$('#index-student-achievements-modal').modal('show');

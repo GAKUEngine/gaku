@@ -9,6 +9,13 @@ module Gaku
 
           @importer_types = importers.get_types
 
+          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+          if params[:admission_method_id]
+            @admission_method = AdmissionMethod.find(params[:admission_method_id])
+          else
+            @admission_method = @admission_period.admission_methods.first
+          end
+
           respond_to do |format|
             format.js
           end

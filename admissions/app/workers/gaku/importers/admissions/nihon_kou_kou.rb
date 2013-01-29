@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+                                                                               # -*- encoding: utf-8 -*-
 module Gaku
   module Importers
     module Admissions
@@ -7,19 +7,22 @@ module Gaku
         include SheetHelper
         require 'roo'
 
+
         def perform(file_path, period_id, method_id)
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
 
           if book.nil?
+            logger.info "インポートファイルをシートして開けませんでした。"
             return
           end
 
           基本入力処理(book, period_id, method_id)
-
         end
 
+
         def 基本入力処理(book, period_id, method_id)
+          logger.info "--日本高校シートの基本入力シート処理開始--"
           sheet = book.sheet('入力')
 
           idx = get_index_from_row(sheet.row(7))
@@ -29,8 +32,20 @@ module Gaku
           end
         end
 
+
         def 基本入力一行分(row, idx, period_id, method_id)
+          kyoka9 = ["国","社","数","理","音","美","体","技","英"]
+          kyoka5 = ["国","社","数","理","英"]
+          kyoka3 = ["国","数","英"]
           ActiveRecord::Base.transaction do
+            
+            
+            naishin = []
+            kyoka9.each_with_index do |kyoka, i|
+              naishin.push row[idx[kyoka]]
+            end
+            
+            
             name_raw = row[idx["氏名"]]
             if name_raw.nil?
               #名前が無い行の情報を無視
@@ -56,7 +71,7 @@ module Gaku
             if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
               duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
               if duplicates.length > 0
-                logger.info "志願者#" + applicant_number + "「" + surname + "　" + name + "」が既に" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name
+                logger.info "志願者#" + applicant_number.to_s + "「" + surname + "　" + name + "」が既に" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name
                 return
               end
             end
@@ -73,7 +88,7 @@ module Gaku
               logger.info
               if admission.save
                 admission_method = admission.admission_method
-                admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
+                admission_period = AdmissionPeriod.find(period_id)
                 admission_phase = admission_method.admission_phases.first
                 admission_phase_state = admission_phase.admission_phase_states.first
                 admission_phase_record = AdmissionPhaseRecord.create(
@@ -89,8 +104,11 @@ module Gaku
               logger.info "入学時期及び入学形態が設定されていなかった為志願者" + "「" + surname + "　" + name +
                 "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
+            
+            
           end
         end
+
 
       end
     end
