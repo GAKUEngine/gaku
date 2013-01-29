@@ -13,7 +13,7 @@ module Gaku
           book = Roo::Spreadsheet.open(file_path)
 
           if book.nil?
-            logger.info "インポートファイルをシートして開けませんでした。"
+            logger.info "インポートファイルをシートとして開けませんでした。"
             return
           end
 
@@ -28,7 +28,7 @@ module Gaku
           idx = get_index_from_row(sheet.row(7))
 
           sheet.drop(7).each do |row|
-            基本入力一行分(rxow, idx, period_id, method_id)
+            基本入力一行分(row, idx, period_id, method_id)
           end
         end
 
