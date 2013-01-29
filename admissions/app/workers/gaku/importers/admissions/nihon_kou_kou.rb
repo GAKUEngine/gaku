@@ -34,16 +34,35 @@ module Gaku
 
 
         def 基本入力一行分(row, idx, period_id, method_id)
+          
           kyoka9 = ["国","社","数","理","音","美","体","技","英"]
           kyoka5 = ["国","社","数","理","英"]
           kyoka3 = ["国","数","英"]
+          
           ActiveRecord::Base.transaction do
             
             
-            naishin = []
-            kyoka9.each_with_index do |kyoka, i|
-              naishin.push row[idx[kyoka]]
+            
+            def calculation_total_and_save(kyoka_list, name)
+              total = 0
+              
+              kyoka_list.each do |grade|
+                total += row[idx[kyoka]]
+              end
+              
+              naishin = SimpleGrade.new(:name => name, :grade => total)
+              naishin.save
             end
+            
+            kyoka9.each_with_index do |kyoka, i|
+              naishin = SimpleGrade.new(:name => kyoka, :grade => row[idx[kyoka]])
+              naishin.save
+            end
+            
+            calculation_total_and_save(kyoka9, "９科目")
+            calculation_total_and_save(kyoka5, "５科目")
+            calculation_total_and_save(kyoka3, "３科目")
+            
             
             
             name_raw = row[idx["氏名"]]
