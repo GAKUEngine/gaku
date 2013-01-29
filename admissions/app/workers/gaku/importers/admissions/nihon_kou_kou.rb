@@ -33,16 +33,14 @@ module Gaku
         end
 
 
+        kyoka9 = ["国","社","数","理","音","美","体","技","英"]
+        kyoka5 = ["国","社","数","理","英"]
+        kyoka3 = ["国","数","英"]
         def 基本入力一行分(row, idx, period_id, method_id)
-          
-          kyoka9 = ["国","社","数","理","音","美","体","技","英"]
-          kyoka5 = ["国","社","数","理","英"]
-          kyoka3 = ["国","数","英"]
-          
           ActiveRecord::Base.transaction do
             
-            
-            
+
+
             def calculation_total_and_save(kyoka_list, name)
               total = 0
               
@@ -54,16 +52,24 @@ module Gaku
               naishin.save
             end
             
+            minyu = 0
             kyoka9.each_with_index do |kyoka, i|
-              naishin = SimpleGrade.new(:name => kyoka, :grade => row[idx[kyoka]])
-              naishin.save
+              if !row[idx[kyoka]].nil?
+                naishin = SimpleGrade.new(:name => kyoka, :grade => row[idx[kyoka]])
+                naishin.save
+              else
+                minyu = 1
+                logger.info "【"+kyoka+"】" + "の内申点が未入力です。"
+              end
             end
             
-            calculation_total_and_save(kyoka9, "９科目")
-            calculation_total_and_save(kyoka5, "５科目")
-            calculation_total_and_save(kyoka3, "３科目")
+            if !minyu
+              calculation_total_and_save(kyoka9, "９科目")
+              calculation_total_and_save(kyoka5, "５科目")
+              calculation_total_and_save(kyoka3, "３科目")
+            end
             
-            
+
             
             name_raw = row[idx["氏名"]]
             if name_raw.nil?
