@@ -36,7 +36,7 @@ module Gaku
           importers.run_importer(params[:importer][:importer_type], file, 
                                  params[:importer][:data_file].content_type, params[:admission_period_id], params[:admission_method_id])
 
-          render :text => "working"
+          render :text => "working dayo-"
         end
       end
     end

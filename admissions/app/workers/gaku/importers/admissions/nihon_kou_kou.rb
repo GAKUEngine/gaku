@@ -3,35 +3,43 @@ module Gaku
   module Importers
     module Admissions
       class NihonKouKou
+        puts "NihonKouKou------------------------------"
         include Sidekiq::Worker
         include SheetHelper
         require 'roo'
 
+
         def perform(file_path, period_id, method_id)
+          puts "perform------------------------------"
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
 
           if book.nil?
+            puts "ERORR dayo----------------------"
             return
           end
 
           基本入力処理(book, period_id, method_id)
-
         end
 
+
         def 基本入力処理(book, period_id, method_id)
+          puts "基本入力処理------------------------------"
           sheet = book.sheet('入力')
 
           idx = get_index_from_row(sheet.row(7))
 
           sheet.drop(7).each do |row|
-            基本入力一行分(row, idx, period_id, method_id)
+            基本入力一行分(rxow, idx, period_id, method_id)
           end
         end
+
 
         def 基本入力一行分(row, idx, period_id, method_id)
           ActiveRecord::Base.transaction do
             name_raw = row[idx["氏名"]]
+            puts "name_raw---------------------------------------------"
+            puts name_raw
             if name_raw.nil?
               #名前が無い行の情報を無視
               return
@@ -91,6 +99,7 @@ module Gaku
             end
           end
         end
+
 
       end
     end
