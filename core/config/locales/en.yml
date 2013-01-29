@@ -381,6 +381,13 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
+  external_school_record:
+    student_id_number: Student ID number
+    beginning: Beginning
+    ending: Ending
+    absences: Absences
+    attendance_rate: Attendance Rate
+    data: Data
   flash:
     actions:
       create:
