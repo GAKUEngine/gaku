@@ -49,13 +49,10 @@ module Gaku
             naishin.save
           end
           
-          kyoka9.each_with_index do |kyoka, i|
-            if !row[idx[kyoka]].nil?
-              naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
-              naishin.save
-            end
+          kyoka9.each do |kyoka|
+            naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
+            naishin.save
           end
-          
           内申点合計計算(kyoka9, "９教科", student, row, idx)
           内申点合計計算(kyoka5, "５教科", student, row, idx)
           内申点合計計算(kyoka3, "３教科", student, row, idx)
