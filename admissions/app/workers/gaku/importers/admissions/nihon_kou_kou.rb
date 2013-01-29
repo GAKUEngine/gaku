@@ -33,43 +33,37 @@ module Gaku
         end
 
 
-        kyoka9 = ["国","社","数","理","音","美","体","技","英"]
-        kyoka5 = ["国","社","数","理","英"]
-        kyoka3 = ["国","数","英"]
-        def 基本入力一行分(row, idx, period_id, method_id)
-          ActiveRecord::Base.transaction do
+        def 内申点登録(student, row, idx)
+          kyoka9 = ["国","社","数","理","音","美","体","技","英"]
+          kyoka5 = ["国","社","数","理","英"]
+          kyoka3 = ["国","数","英"]
+
+          def 内申点合計計算(kyoka_list, name, student, row, idx)
+            total = 0
             
+            kyoka_list.each do |kyoka|
+              total += row[idx[kyoka]]
+            end
 
-
-            def calculation_total_and_save(kyoka_list, name)
-              total = 0
-              
-              kyoka_list.each do |grade|
-                total += row[idx[kyoka]]
-              end
-              
-              naishin = SimpleGrade.new(:name => name, :grade => total)
+            naishin = SimpleGrade.new(:student_id  => student.id, :name => name, :grade => total)
+            naishin.save
+          end
+          
+          kyoka9.each_with_index do |kyoka, i|
+            if !row[idx[kyoka]].nil?
+              naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
               naishin.save
             end
-            
-            minyu = 0
-            kyoka9.each_with_index do |kyoka, i|
-              if !row[idx[kyoka]].nil?
-                naishin = SimpleGrade.new(:name => kyoka, :grade => row[idx[kyoka]])
-                naishin.save
-              else
-                minyu = 1
-                logger.info "【"+kyoka+"】" + "の内申点が未入力です。"
-              end
-            end
-            
-            if !minyu
-              calculation_total_and_save(kyoka9, "９科目")
-              calculation_total_and_save(kyoka5, "５科目")
-              calculation_total_and_save(kyoka3, "３科目")
-            end
-            
+          end
+          
+          内申点合計計算(kyoka9, "９教科", student, row, idx)
+          内申点合計計算(kyoka5, "５教科", student, row, idx)
+          内申点合計計算(kyoka3, "３教科", student, row, idx)
+        end
 
+
+        def 基本入力一行分(row, idx, period_id, method_id)
+          ActiveRecord::Base.transaction do
             
             name_raw = row[idx["氏名"]]
             if name_raw.nil?
@@ -130,6 +124,7 @@ module Gaku
                 "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
             
+            内申点登録(student, row, idx)
             
           end
         end
