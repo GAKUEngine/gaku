@@ -64,6 +64,7 @@ en:
       list: Admission Candidates List
       new: New Applicant
     create: Create
+    admit: Admit
     create_multiple: Create student entries and their admissions
     go_to_admissions: Admissions
     go_to_applicants: Applicants List
