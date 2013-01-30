@@ -229,6 +229,20 @@ module Gaku
             else
               exam_score = t('exams.not_graded')
             end
+            
+            
+            # 中学校名抽出処理
+            
+            puts "record.admission.student dayo-"
+            puts record.admission.student.external_school_records
+            
+            # if record.admission.student.external_school_record.school_id.nil?
+              # school_name = "中学校が登録されていません"
+            # else
+              # school_name = SchollHistory.find_by_id(record.admission.student.external_school_record.school_id)
+            # end
+            
+            
             @students << {
               :state_id => record.admission_phase_state_id,
               :student => record.admission.student,
