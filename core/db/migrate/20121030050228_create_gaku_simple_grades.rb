@@ -3,9 +3,10 @@ class CreateGakuSimpleGrades < ActiveRecord::Migration
   	create_table :gaku_simple_grades do |t|
       t.string      :name
       t.string      :grade
-      
+
       t.references  :school
       t.references  :student
+      t.references  :external_school_record
 
       t.timestamps
   	end
