@@ -13,7 +13,7 @@ module Gaku
           book = Roo::Spreadsheet.open(file_path)
 
           if book.nil?
-            logger.info "インポートファイルをシートして開けませんでした。"
+            logger.info "インポートファイルをシートとして開けませんでした。"
             return
           end
 
