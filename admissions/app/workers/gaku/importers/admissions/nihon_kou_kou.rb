@@ -55,6 +55,7 @@ module Gaku
             naishin.save
             record.simple_grades << naishin
           end
+
           内申点合計計算(kyoka9, "９教科", student, record, row, idx)
           内申点合計計算(kyoka5, "５教科", student, record, row, idx)
           内申点合計計算(kyoka3, "３教科", student, record, row, idx)
@@ -73,6 +74,20 @@ module Gaku
             end
         end
 
+        def 志望学科登録(admission, row, idx)
+          if !row[idx["１志望"]].nil? && row[idx["１志望"]] != ""
+            primary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 1, :specialty_id => Specialty.where(:name => row[idx["１志望"]]).first)
+            if primary.specialty_id != nil
+              primary.save
+              admission.specialty_applications << primary
+            end
+          end
+
+          if !row[idx["２志望"]].nil? && row[idx["２志望"]] != ""
+            secondary = [row[idx["２志望"]]
+          end
+          
+        end
 
         def 基本入力一行分(row, idx, period_id, method_id)
           ActiveRecord::Base.transaction do
@@ -115,8 +130,11 @@ module Gaku
                             :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
 
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
-              logger.info
+              admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number,
+                                        :admission_period_id => period_id, :admission_method_id => method_id)
+
+              志望学科登録(admission, row, idx)
+
               if admission.save
                 admission_method = admission.admission_method
                 admission_period = AdmissionPeriod.find(period_id)
