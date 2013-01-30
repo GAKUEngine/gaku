@@ -1,4 +1,16 @@
 en:
+  achievement:
+    add: Add Achievement
+    authority: Authority
+    badge: Badge
+    choose: Choose Achievement
+    description: Description
+    edit: Edit Achievement
+    list: Achievements list
+    name: Name
+    plural: Achievements
+    save: Save Achievement
+    singular: Achievement
   add: Add
   address:
     add: Add Address
@@ -23,10 +35,10 @@ en:
     zipcode: ZIP Code
   admitted: Admitted On
   alert:
-    already_added: "%{resource} are already added!"
-    empty: "%{resource} is empty!"
+    already_added: ! '%{resource} are already added!'
+    empty: ! '%{resource} is empty!'
     not_selected: No %{resource} selected!
-  and: " and "
+  and: ! ' and '
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -42,18 +54,6 @@ en:
     view: View Assignments
   assignments:
     description: Assignment Description
-  achievement:
-    edit: Edit Achievement
-    save: Save Achievement
-    name: Name
-    list: Achievements list
-    add: Add Achievement
-    singular: Achievement
-    plural: Achievements
-    description: Description
-    authority: Authority
-    badge: Badge
-    choose: Choose Achievement
   attachment:
     asset_error: Error during asset upload
     asset_type: Asset type
@@ -191,7 +191,7 @@ en:
     add: Add Course
     choose: Choose Course
     code: Course Code
-    code_sample: "[EX: FALL2020]"
+    code_sample: ! '[EX: FALL2020]'
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -334,7 +334,7 @@ en:
       not_locked: was not locked
       not_saved:
         one: ! '1 error prohibited this %{resource} from being saved:'
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        other: ! '%{count} errors prohibited this %{resource} from being saved:'
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -391,12 +391,12 @@ en:
   flash:
     actions:
       create:
-        notice: "%{resource_name} was successfully created!"
+        notice: ! '%{resource_name} was successfully created!'
       destroy:
-        alert: "%{resource_name} could not be destroyed!"
-        notice: "%{resource_name} was successfully destroyed!"
+        alert: ! '%{resource_name} could not be destroyed!'
+        notice: ! '%{resource_name} was successfully destroyed!'
       update:
-        notice: "%{resource_name} was successfully updated!"
+        notice: ! '%{resource_name} was successfully updated!'
   gender:
     choose: Choose Gender
     female: Female
@@ -443,7 +443,7 @@ en:
   language: Language
   languages:
     en: English
-    ja: "日本語[Japanese]"
+    ja: 日本語[Japanese]
   manage: Manage
   menu:
     admin:
@@ -520,15 +520,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: "%{resource} has been successfully added!"
-    created: "%{resource} has been successfully created!"
-    destroyed: "%{resource} has been successfully destroyed!"
-    enrolled: "%{resource} has been successfully enrolled to %{to}!"
+    added: ! '%{resource} has been successfully added!'
+    created: ! '%{resource} has been successfully created!'
+    destroyed: ! '%{resource} has been successfully destroyed!'
+    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: "%{resource} has been successfully recovered"
-    removed: "%{resource} has been successfully removed!"
-    updated: "%{resource} has been successfully updated!"
-    uploaded: "%{resource} has been successfully uploaded!"
+    recovered: ! '%{resource} has been successfully recovered'
+    removed: ! '%{resource} has been successfully removed!'
+    updated: ! '%{resource} has been successfully updated!'
+    uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -558,6 +558,7 @@ en:
     save: Save profile
   required: required
   revert: Revert
+  save: Save
   schedule: Schedule
   scholarship_status: Scholarship Status
   school:
@@ -616,18 +617,6 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
-    plural: Specialties
-    major: Major
-    minor: Minor
-    choose: Choose Specialty
-  student_specialty:
-    index: Student Specialty Index
-    save: Save Student Specialty
-    edit: Student Specialty Edit
-  student_achievement:
-    index: Student Achievement Index
-    save: Save Student Achievement
-    edit: Edit Student Achievement
   student:
     add: Add Student
     birth_and: and
@@ -650,6 +639,10 @@ en:
     save: Save Student
     show: Show Students
     singular: Student
+  student_achievement:
+    edit: Edit Student Achievement
+    index: Student Achievement Index
+    save: Save Student Achievement
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index
@@ -665,7 +658,7 @@ en:
     import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: "[EX: Science A]"
+    name_sample: ! '[EX: Science A]'
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
@@ -677,8 +670,8 @@ en:
     info: User info
   views:
     pagination:
-      first: "&laquo; First"
+      first: ! '&laquo; First'
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: "&lsaquo; Prev"
-      truncate: "..."
+      previous: ! '&lsaquo; Prev'
+      truncate: ! '...'

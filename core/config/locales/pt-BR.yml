@@ -3,10 +3,12 @@ pt-BR:
     add: 
     authority: 
     badge: 
+    choose: 
     description: 
     edit: 
     list: 
     name: 
+    plural: 
     save: 
     singular: 
   add: Adicionar
@@ -33,8 +35,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: "%{resource} já foram adicionados!"
-    empty: "%{resource} está vazio!"
+    already_added: ! '%{resource} já foram adicionados!'
+    empty: ! '%{resource} está vazio!'
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -230,7 +232,7 @@ pt-BR:
       name: nome
       name_reading: 
       phone: telefone
-      surname: "último nome"
+      surname: último nome
       surname_reading: 
     import: Importação CSV
   date_placeholder: DD-MM-YYYY
@@ -547,6 +549,7 @@ pt-BR:
     save: 
   required: 
   revert: 
+  save: 
   schedule: 
   scholarship_status: 
   school:
@@ -627,6 +630,10 @@ pt-BR:
     save: 
     show: 
     singular: 
+  student_achievement:
+    edit: 
+    index: 
+    save: 
   student_specialty:
     edit: 
     index: 
