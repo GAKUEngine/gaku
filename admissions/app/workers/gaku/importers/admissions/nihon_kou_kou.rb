@@ -1,4 +1,4 @@
-                                                                               # -*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 module Gaku
   module Importers
     module Admissions
@@ -33,12 +33,12 @@ module Gaku
         end
 
 
-        def 内申点登録(student, row, idx)
+        def 内申点登録(student, record, row, idx)
           kyoka9 = ["国","社","数","理","音","美","体","技","英"]
           kyoka5 = ["国","社","数","理","英"]
           kyoka3 = ["国","数","英"]
 
-          def 内申点合計計算(kyoka_list, name, student, row, idx)
+          def 内申点合計計算(kyoka_list, name, student, record, row, idx)
             total = 0
             
             kyoka_list.each do |kyoka|
@@ -47,15 +47,30 @@ module Gaku
 
             naishin = SimpleGrade.new(:student_id  => student.id, :name => name, :grade => total)
             naishin.save
+            record.simple_grades << naishin
           end
           
           kyoka9.each do |kyoka|
             naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
             naishin.save
+            record.simple_grades << naishin
           end
-          内申点合計計算(kyoka9, "９教科", student, row, idx)
-          内申点合計計算(kyoka5, "５教科", student, row, idx)
-          内申点合計計算(kyoka3, "３教科", student, row, idx)
+          内申点合計計算(kyoka9, "９教科", student, record, row, idx)
+          内申点合計計算(kyoka5, "５教科", student, record, row, idx)
+          内申点合計計算(kyoka3, "３教科", student, record, row, idx)
+        end
+
+        def 中学校度の内容登録(student, row, idx)
+            record = SchoolRecord.new
+            record.data = ""
+            record.student_id = student.id
+            year_2_absences = row[idx["２年欠席"]].to_i
+            year_3_absences = row[idx["３年欠席"]].to_i
+            record.absences = year_2_absences + year_3_absences
+            record.data << {:year_2_absences => year_2_absences, :year_3_absences => year_3_absences}.to_json
+            if record.save
+              内申点登録(student, record, row, idx)
+            end
         end
 
 
@@ -121,7 +136,7 @@ module Gaku
                 "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
             
-            内申点登録(student, row, idx)
+            中学校度の内容登録(student, row, idx)
             
           end
         end
