@@ -62,7 +62,7 @@ module Gaku
         end
 
         def 中学校度の内容登録(student, row, idx)
-            record = SchoolRecord.new
+            record = ExternalSchoolRecord.new
             record.data = ""
             record.student_id = student.id
             year_2_absences = row[idx["２年欠席"]].to_i
@@ -76,7 +76,8 @@ module Gaku
 
         def 志望学科登録(admission, row, idx)
           if !row[idx["１志望"]].nil? && row[idx["１志望"]] != ""
-            primary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 1, :specialty_id => Specialty.where(:name => row[idx["１志望"]]).first)
+            primary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 1,
+                                               :specialty_id => Specialty.where(:name => row[idx["１志望"]]).first)
             if primary.specialty_id != nil
               primary.save
               admission.specialty_applications << primary
@@ -84,7 +85,8 @@ module Gaku
           end
 
           if !row[idx["２志望"]].nil? && row[idx["２志望"]] != ""
-            secondary = [row[idx["２志望"]]
+            secondary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 2,
+                                                 :specialty_id => Specialty.where(:name => row[idx["２志望"]]).first)
           end
           
         end
