@@ -3,8 +3,8 @@ module Gaku
     belongs_to :student
     belongs_to :achievement
 
-    attr_accessible :achievement_id
+    attr_accessible :achievement_id, :student_id
 
-    validates_presence_of :achievement_id
+    validates_presence_of :achievement_id, :student_id
   end
 end
