@@ -153,6 +153,22 @@ module Gaku
       image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
     end
 
+    def achievements_show(achievements)
+      content_tag_for :span, achievements do |achievement|
+        concat achievement.to_s
+        concat String.new ' '
+        concat resize_image(achievement.badge, :size => 22)
+        concat ', ' unless achievement.equal? achievements.last
+      end
+    end
+
+    def simple_grades_show(simple_grades)
+      content_tag_for :span, simple_grades do |simple_grade|
+        concat "#{simple_grade} (#{simple_grade.grade})"
+        concat ', ' unless simple_grade.equal? simple_grades.last
+      end
+    end
+
   end
 end
 
