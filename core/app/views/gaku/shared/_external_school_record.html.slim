@@ -25,10 +25,10 @@
     tr
       =th t(:'simple_grade.plural')
       td
-        / =external_school_record.simple_grades.inspect
+        =simple_grades_show(external_school_record.simple_grades)
     tr
       =th t(:'achievement.plural')
-      td =external_school_record.achievements.inspect
+      td =achievements_show(external_school_record.achievements)
 
 
 
