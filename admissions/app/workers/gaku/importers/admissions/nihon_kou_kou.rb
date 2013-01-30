@@ -87,8 +87,13 @@ module Gaku
           if !row[idx["２志望"]].nil? && row[idx["２志望"]] != ""
             secondary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 2,
                                                  :specialty_id => Specialty.where(:name => row[idx["２志望"]]).first)
+            if secondary.specialty_id != nil
+              secondary.save
+              admission.specialty_applications << secondary
+            end
           end
-          
+
+          admission.save          
         end
 
         def 基本入力一行分(row, idx, period_id, method_id)
@@ -124,9 +129,11 @@ module Gaku
            #   end
            # end
 
-            # if there is a period and method then an admission will be created or updated
+            #入学時期及び入学形態が引数に含まれてればadmissionレコードを作成
             if !period_id.nil? && !method_id.nil?
               admission = Admission.find_or_create_by_applicant_number(applicant_number)
+
+              #ここに生徒が登録されてなければ登録し、既に登録されていれば更新を行う
               if admission.student_id.nil?
                 student = Student.create!(:surname => surname,
                                 :name => name,
@@ -138,9 +145,9 @@ module Gaku
               end
 
 
-              admission.update(:student_id => student.id, :admission_period_id => period_id, :admission_method_id => method_id)
-
-              志望学科登録(admission, row, idx)
+              admission.student_id = student.id
+              admission.admission_period_id = period_id
+              admission.admission_method_id = method_id
 
               if admission.save
                 admission_method = admission.admission_method
@@ -153,11 +160,14 @@ module Gaku
                                                       :admission_id => admission.id)
                 
                 admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
+                
+                志望学科登録(admission, row, idx)
               end
               logger.info "志願者「" + surname + "　" + name + 
                 "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
             else
               #既に存在しているかどうかの判断は簡単に出来ない為そのまま登録してしまう
+              #TODO どうにか確認し重複しない様にする
               student = Student.create!(:surname => surname,
                               :name => name,
                               :surname_reading => surname_reading,
