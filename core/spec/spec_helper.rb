@@ -11,6 +11,7 @@ Spork.prefork do
   require 'database_cleaner'
   require 'active_record/fixtures'
   require 'factory_girl_rails'
+  require "paperclip/matchers"
   require 'sidekiq/testing'
 
   require 'gaku/core/testing_support/env'
@@ -57,6 +58,7 @@ Spork.each_run do
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.include FactoryGirl::Syntax::Methods
+    config.include Paperclip::Shoulda::Matchers
     config.include Devise::TestHelpers, :type => :controller
     config.include Gaku::Core::UrlHelpers
     config.include Gaku::Core::TestingSupport::ControllerRequests, :type => :controller
