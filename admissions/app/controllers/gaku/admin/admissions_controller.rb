@@ -41,7 +41,7 @@ module Gaku
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
         @admission_method = phase.admission_method
 
-        if !(@state.id == @admission_record.admission_phase_state_id)
+        unless @state.id == @admission_record.admission_phase_state_id
           # TODO decide how next phase should be chosen and decide for default phase states
           if @state.auto_progress == true
             @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
