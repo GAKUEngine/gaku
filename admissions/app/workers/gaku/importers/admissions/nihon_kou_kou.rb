@@ -116,24 +116,29 @@ module Gaku
 
             applicant_number = row[idx["受験番号"]]
 
-            if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
-              duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
-              if duplicates.length > 0
-                logger.info "志願者#" + applicant_number.to_s + "「" + surname + "　" + name + "」が既に" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name
-                return
-              end
-            end
+           # if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
+           #   duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
+           #   if duplicates.length > 0
+           #     logger.info "志願者#" + applicant_number.to_s + "「" + surname + "　" + name + "」が既に" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name
+           #     return
+           #   end
+           # end
 
-            #TODO check for existing
-            student = Student.create!(:surname => surname,
-                            :name => name,
-                            :surname_reading => surname_reading,
-                            :name_reading => name_reading,
-                            :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
-
+            # if there is a period and method then an admission will be created or updated
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.new(:student_id => student.id, :applicant_number => applicant_number,
-                                        :admission_period_id => period_id, :admission_method_id => method_id)
+              admission = Admission.find_or_create_by_applicant_number(applicant_number)
+              if admission.student_id.nil?
+                student = Student.create!(:surname => surname,
+                                :name => name,
+                                :surname_reading => surname_reading,
+                                :name_reading => name_reading,
+                                :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
+              else
+                student = Student.find(admission.student_id)
+              end
+
+
+              admission.update(:student_id => student.id, :admission_period_id => period_id, :admission_method_id => method_id)
 
               志望学科登録(admission, row, idx)
 
@@ -152,6 +157,13 @@ module Gaku
               logger.info "志願者「" + surname + "　" + name + 
                 "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
             else
+              #既に存在しているかどうかの判断は簡単に出来ない為そのまま登録してしまう
+              student = Student.create!(:surname => surname,
+                              :name => name,
+                              :surname_reading => surname_reading,
+                              :name_reading => name_reading,
+                              :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
+
               logger.info "入学時期及び入学形態が設定されていなかった為志願者" + "「" + surname + "　" + name +
                 "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
