@@ -9,7 +9,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser]
+      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser, :listing_applicants]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
@@ -194,6 +194,9 @@ module Gaku
           if @admission_period
             @admission_methods = @admission_period.admission_methods
           end
+          @admission_params = {}
+          @admission_params[:admission_period_id] = @admission_period.id
+          @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
 
         end
 
