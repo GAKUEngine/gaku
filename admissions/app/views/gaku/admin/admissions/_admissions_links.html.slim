@@ -1,0 +1,6 @@
+- if ((request.fullpath.include? "listing_admissions") || (request.fullpath.include? "listing_applicants"))
+  = button t(:'admissions.go_to_admissions'), admin_admissions_path(admission_params), :id => 'admin-admissions-link'
+- if !(request.fullpath.include? "listing_admissions")
+  = button t(:'admissions.go_to_listing'), listing_admissions_admin_admissions_path(admission_params), :id => 'listing_admissions-admin-admissions-link'
+- if !(request.fullpath.include? "listing_applicants")
+  = button t(:'admissions.go_to_applicants'), listing_applicants_admin_admissions_path(admission_params), :id => 'listing_applicants-admin-admissions-link'
