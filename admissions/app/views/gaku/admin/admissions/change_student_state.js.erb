@@ -1,17 +1,29 @@
-$('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').fadeOut(function(){
-  $('div#state<%= @old_state_id %> table tr#student-<%= @student.id %>').remove();
+$('.change-state-form').fadeOut();
+<% @state_students.each do |student| %>
+  $('div#state<%= @old_state_id %> table tr#student-<%= student.id %>').fadeOut(function(){
+    $('div#state<%= @old_state_id %> table tr#student-<%= student.id %>').remove();
 
-  $('<%= render_js_partial("student", {:student => @student, :state => @state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
-});
+    $('<%= render_js_partial("student", {:student => student, :state => @state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
+  });
 
-<%- if @state.auto_progress %>
-  $('div#state<%= @new_admission_record.admission_phase_state_id %> table tbody').append('<%= render_js_partial("student", {:student => @student, :state => @new_state}) %>');
+  <%- if @state.auto_progress %>
+    $('div#state<%= @new_admission_record.admission_phase_state_id %> table tbody').append('<%= render_js_partial("student", {:student => student, :state => @new_state}) %>');
+  <% end %>
+
+  <%- if @next_phase %>
+    //$('a[href$="#phase_<%= @next_phase.id%>"]').trigger('click');
+  <% end %>
+
+  <%- @admission_method.admission_phases.each {|phase| %>
+    $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+  <% } %>
 <% end %>
 
-<%- if @next_phase %>
-  //$('a[href$="#phase_<%= @next_phase.id%>"]').trigger('click');
+<% @state.admission_phase.admission_phase_states.each do |state| %>
+  <% if state.admission_phase_records.count > 0 %>
+    $('.change-state_<%= state.id %>-form').html('<%= render_js_partial("state_change_form", :state => state) %>')
+  <% else %>
+    $('.change-state_<%= state.id %>-form').html('');
+  <% end %>
 <% end %>
-
-<%- @admission_method.admission_phases.each {|phase| %>
-  $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
-<% } %>
+$('.change-state-form').fadeIn();

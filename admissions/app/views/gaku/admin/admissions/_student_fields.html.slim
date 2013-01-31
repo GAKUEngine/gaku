@@ -1,6 +1,7 @@
-td.applicant_number = student.admission.applicant_number
-td.school_name = "中学校名"
-td.specialty_applications = student.admission.specialty_applications
+- if !(student.enrollment_status.code == "deleted") || (student.admission.admitted == true)
+  td.vm-tc = check_box_tag "student_ids[]", student.id, false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
+- else
+  td
 td.surname = student.surname
 td.name = student.name
 td.birth = student.birth_date

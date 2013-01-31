@@ -9,12 +9,12 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser]
+      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser, :listing_applicants]
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
-      
+
 
       def change_admission_period
 
@@ -32,41 +32,48 @@ module Gaku
       end
 
       def change_student_state
-        @state = AdmissionPhaseState.find(params[:state_id])
-        @student = Student.unscoped.find(params[:student_id])
-        phase = @state.admission_phase
-        @admission_record = @student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
-        @old_state_id = @admission_record.admission_phase_state_id
-
-        @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-        @admission_method = phase.admission_method
-
-        unless @state.id == @admission_record.admission_phase_state_id
-          # TODO decide how next phase should be chosen and decide for default phase states
-          if @state.auto_progress == true
-            @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
-            @new_state = @next_phase.admission_phase_states.first
-            #@admission_record.admission_phase_state = @state
-            #@admission_record.admission_phase = @next_phase
-            @new_admission_record = AdmissionPhaseRecord.new
-            @new_admission_record.admission = @student.admission
-            @new_admission_record.admission_phase = @next_phase
-            @new_admission_record.admission_phase_state = @new_state
-            @new_admission_record.save
-          elsif @state.auto_admit == true
-            admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
-            admission = @student.admission
-            admission.admitted = true
-            admission.save
-            @student.admitted = admission_date
-            # change student enrollment status
-            @student.enrollment_status_id = 2
-            @student.save
-          end
-          @admission_record.admission_phase_state_id = @state.id
-          @admission_record.save
-          render 'change_student_state'
+        @state_students = []
+        params[:student_ids].each do |id|
+          @state_students << Student.unscoped.find(id)
         end
+        @state = AdmissionPhaseState.find(params[:state_id])
+
+        #@student = Student.unscoped.find(params[:student_id])
+        @state_students.each  do |student|
+          phase = @state.admission_phase
+          @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+          @old_state_id = @admission_record.admission_phase_state_id
+
+          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+          @admission_method = phase.admission_method
+
+          if !(@state.id == @admission_record.admission_phase_state_id)
+            # TODO decide how next phase should be chosen and decide for default phase states
+            if @state.auto_progress == true
+              @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+              @new_state = @next_phase.admission_phase_states.first
+              #@admission_record.admission_phase_state = @state
+              #@admission_record.admission_phase = @next_phase
+              @new_admission_record = AdmissionPhaseRecord.new
+              @new_admission_record.admission = student.admission
+              @new_admission_record.admission_phase = @next_phase
+              @new_admission_record.admission_phase_state = @new_state
+              @new_admission_record.save
+            elsif @state.auto_admit == true
+              admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+              admission = student.admission
+              admission.admitted = true
+              admission.save
+              student.admitted = admission_date
+              # change student enrollment status
+              student.enrollment_status_id = 2
+              student.save
+            end
+            @admission_record.admission_phase_state_id = @state.id
+            @admission_record.save
+          end
+        end
+        render 'change_student_state'
       end
 
       def admit_student
@@ -105,7 +112,7 @@ module Gaku
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
-          
+
           @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
           render 'create'
         end
@@ -156,7 +163,7 @@ module Gaku
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
             # change student status
             admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
-            
+
           else
             @err_enrollments << admission
           end
@@ -189,11 +196,14 @@ module Gaku
             if !@admission_period.nil? && !@admission_period.admission_methods.nil?
               @admission_method = @admission_period.admission_methods.first
             end
-          end  
+          end
 
           if @admission_period
             @admission_methods = @admission_period.admission_methods
           end
+          @admission_params = {}
+          @admission_params[:admission_period_id] = @admission_period.id
+          @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
 
         end
 
@@ -231,20 +241,20 @@ module Gaku
             else
               exam_score = t('exams.not_graded')
             end
-            
-            
+
+
             # 中学校名抽出処理
-            
+
             puts "record.admission.student dayo-"
             puts record.admission.student.simple_grades
-            
+
             # if record.admission.student.external_school_record.school_id.nil?
               # school_name = "中学校が登録されていません"
             # else
               # school_name = SchollHistory.find_by_id(record.admission.student.external_school_record.school_id)
             # end
-            
-            
+
+
             @students << {
               :state_id => record.admission_phase_state_id,
               :student => record.admission.student,
