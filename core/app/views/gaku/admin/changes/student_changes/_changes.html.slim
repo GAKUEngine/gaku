@@ -11,13 +11,13 @@
 
   tbody
     - @changes.each do |change|
-      - change.changeset.keys.each do |key|
+      - change.human_changes.keys.each do |key|
         tr
           td = change.id
           td = link_to "#{t(:'student.singular')} #{change.item_id}", student_path(change.item_id)
           td = change.event
           td = key
-          td = change.changeset[key][0]
-          td = change.changeset[key][1]
+          td = change.human_changes[key][0]
+          td = change.human_changes[key][1]
           td = change.created_at
 

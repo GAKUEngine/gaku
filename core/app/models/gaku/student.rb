@@ -28,10 +28,12 @@ module Gaku
 
     has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
-    has_paper_trail :on => [:update, :destroy],
+    has_paper_trail :class_name => 'Gaku::StudentVersion',
+                    :on => [:update, :destroy],
                     :only => [
                                :name, :surname, :middle_name,
-                               :student_id_number, :student_foreign_id_number, :scholarship_status_id,
+                               :student_id_number, :student_foreign_id_number,
+                               :scholarship_status_id,
                                :commute_method_id, :enrollment_status_id,
                                :is_deleted
                              ]
