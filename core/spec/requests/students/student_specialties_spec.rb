@@ -31,6 +31,7 @@ describe 'Student Specialties' do
 
       page.should have_content(specialty.name)
       within(count_div) { page.should have_content "Specialties list(1)"}
+      flash_created?
     end
 
     it 'cancel creating', :cancel => true do
@@ -63,7 +64,7 @@ describe 'Student Specialties' do
 
       it 'cancels editting' do
         click '.back-link'
-        page.should have_content(specialty.name)
+        within(table) { page.should have_content(specialty.name) }
       end
     end
 
@@ -76,6 +77,8 @@ describe 'Student Specialties' do
 
       within(count_div) { page.should have_content 'Specialties list' }
       page.should_not have_content(specialty.name)
+      flash_destroyed?
+
     end
   end
 end
