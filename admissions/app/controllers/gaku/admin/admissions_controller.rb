@@ -219,7 +219,7 @@ module Gaku
         end
 
         def load_state_records
-          puts "load_state_records kaishi-"
+          #puts "load_state_records kaishi-"
 
           @students = []
           @state_records = AdmissionPhaseRecord.all
@@ -245,8 +245,8 @@ module Gaku
 
             # 中学校名抽出処理
 
-            puts "record.admission.student dayo-"
-            puts record.admission.student.simple_grades
+            #puts "record.admission.student dayo-"
+            #puts record.admission.student.simple_grades
 
             # if record.admission.student.external_school_record.school_id.nil?
               # school_name = "中学校が登録されていません"
