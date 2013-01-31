@@ -14,7 +14,7 @@ module Gaku
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
-      
+
 
       def change_admission_period
 
@@ -33,12 +33,13 @@ module Gaku
 
       def change_student_state
         @state_students = []
-        params[:student_ids].each {|id|
+        params[:student_ids].each do |id|
           @state_students << Student.unscoped.find(id)
-        }
+        end
         @state = AdmissionPhaseState.find(params[:state_id])
+
         #@student = Student.unscoped.find(params[:student_id])
-        @state_students.each {|student|
+        @state_students.each  do |student|
           phase = @state.admission_phase
           @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
           @old_state_id = @admission_record.admission_phase_state_id
@@ -70,9 +71,8 @@ module Gaku
             end
             @admission_record.admission_phase_state_id = @state.id
             @admission_record.save
-            
           end
-        }
+        end
         render 'change_student_state'
       end
 
@@ -112,7 +112,7 @@ module Gaku
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => admission_phase_state.id,
                                                 :admission_id => @admission.id)
-          
+
           @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
           render 'create'
         end
@@ -163,7 +163,7 @@ module Gaku
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
             # change student status
             admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
-            
+
           else
             @err_enrollments << admission
           end
@@ -196,7 +196,7 @@ module Gaku
             if !@admission_period.nil? && !@admission_period.admission_methods.nil?
               @admission_method = @admission_period.admission_methods.first
             end
-          end  
+          end
 
           if @admission_period
             @admission_methods = @admission_period.admission_methods
@@ -219,6 +219,8 @@ module Gaku
         end
 
         def load_state_records
+          #puts "load_state_records kaishi-"
+
           @students = []
           @state_records = AdmissionPhaseRecord.all
           @state_records.each {|record|
@@ -239,6 +241,20 @@ module Gaku
             else
               exam_score = t('exams.not_graded')
             end
+
+
+            # 中学校名抽出処理
+
+            #puts "record.admission.student dayo-"
+            #puts record.admission.student.simple_grades
+
+            # if record.admission.student.external_school_record.school_id.nil?
+              # school_name = "中学校が登録されていません"
+            # else
+              # school_name = SchollHistory.find_by_id(record.admission.student.external_school_record.school_id)
+            # end
+
+
             @students << {
               :state_id => record.admission_phase_state_id,
               :student => record.admission.student,

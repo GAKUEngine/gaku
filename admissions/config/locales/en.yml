@@ -55,6 +55,7 @@ en:
     save: Save Admission Phase
     singular: Admission Phase
   admissions:
+    admit: Admit
     admitted_on: Admitted On
     applicants:
       list: Admission Applicants List
@@ -83,6 +84,6 @@ en:
     admissions: Admissions
   students:
     active: Active
+    choose_students: Choose Students
     deleted: Deleted
     status: Student status
-    choose_students: Choose Students

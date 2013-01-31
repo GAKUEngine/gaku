@@ -192,46 +192,46 @@ describe 'Admin Admissions' do
           end
           it 'change state' do
             #Exam | Pre Exam
-            within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") {
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") do
               select "Abscent", from: 'state_id'
               click_on 'Save'
               wait_for_ajax
               sleep 1
               wait_until { size_of("#students-index tbody tr").should eq 0 }
               page.should_not have_content 'Admitted on'
-            }
-            page.should have_content("Interview(0)")
+            end
+            page.should have_content "Interview(0)"
             #Exam | Abscent
-            within("#state#{@first_method.admission_phases.first.admission_phase_states.last.id}") {
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.last.id}") do
               size_of("#students-index tbody tr").should eq 1
               select "Passed", from: 'state_id'
               click_on 'Save'
               sleep 1
               wait_until { size_of("#students-index tbody tr").should eq 0 }
-            }
+            end
             #Exam | Passed
-            within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") {
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should_not have_content 'Admitted on'
               click_on 'Save'
               sleep 1
-            }
+            end
             page.should have_content "Interview(1)"
-            click_on ("Interview(1)")
+            click_on "Interview(1)"
             page.should have_content 'Marta'
             #Interview | Waiting for Interview
-            within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") { #first time throws error
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should_not have_content 'Admitted on'
               select "Accepted", from: 'state_id'
               click_on 'Save'
               sleep 1
-            }
+            end
             #Interview | Accepted
-            within("#state#{@first_method.admission_phases.last.admission_phase_states.second.id}") {
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.second.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should have_content 'Admitted On'
-            }
+            end
             #TODO revert admitted if admitted by mistake
             visit gaku.students_path
             page.should have_content 'Marta'

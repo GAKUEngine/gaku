@@ -15,6 +15,7 @@ FactoryGirl.define do
       phase_exam.exam = FactoryGirl.build(:exam)
     end
   end
+
   factory :admission_phase_interview, :class => Gaku::AdmissionPhase do
     name 'Interview'
     position 2
@@ -24,6 +25,7 @@ FactoryGirl.define do
       phase_interview.admission_phase_states << FactoryGirl.build(:admission_phase_state_rejected, :admission_phase => phase_interview)
     end
   end
+  
   factory :admission_phase_lang_exam, :class => Gaku::AdmissionPhase do
     name 'Foreign Language Exam'
     position 3

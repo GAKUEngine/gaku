@@ -1,0 +1,36 @@
+=hr
+=table_for '#external-school-record' do
+    tr
+      =th t(:'student.singular')
+      td =external_school_record.student.to_s
+    tr
+      =th t(:'external_school_record.student_id_number')
+      td =external_school_record.student_id_number
+    tr
+      =th t(:'external_school_record.beginning')
+      td =external_school_record.beginning
+    tr
+      =th t(:'external_school_record.ending')
+      td =external_school_record.ending
+
+    tr
+      =th t(:'external_school_record.absences')
+      td =external_school_record.absences
+    tr
+      =th t(:'external_school_record.attendance_rate')
+      td =external_school_record.attendance_rate
+    tr
+      =th t(:'external_school_record.data')
+      td =external_school_record.data
+    tr
+      =th t(:'simple_grade.plural')
+      td
+        =simple_grades_show(external_school_record.simple_grades)
+    tr
+      =th t(:'achievement.plural')
+      td =achievements_show(external_school_record.achievements)
+
+
+
+
+

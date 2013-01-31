@@ -6,5 +6,10 @@ module Gaku
     attr_accessible :name, :grade, :school_id, :student_id
 
     validates_presence_of :school_id, :student_id
+
+    def to_s
+      name
+    end
+
   end
 end

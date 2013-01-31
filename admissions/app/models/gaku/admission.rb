@@ -13,7 +13,7 @@ module Gaku
     has_many :exam_scores, :through => :admission_phase_records
     has_many :attachments, as: :attachable
 
-    has_one :school_history
+    has_one :external_school_record
 
     accepts_nested_attributes_for :admission_phase_records, :allow_destroy => true
     accepts_nested_attributes_for :student
