@@ -41,6 +41,8 @@ module Gaku
         #@student = Student.unscoped.find(params[:student_id])
         @state_students.each  do |student|
           phase = @state.admission_phase
+          logger.debug "#{@state.inspect}"
+          logger.debug "#{phase.inspect}"
           @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
           @old_state_id = @admission_record.admission_phase_state_id
 
@@ -49,7 +51,17 @@ module Gaku
 
           if !(@state.id == @admission_record.admission_phase_state_id)
             # TODO decide how next phase should be chosen and decide for default phase states
-            if @state.auto_progress == true
+            if @state.auto_admit == true
+              admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+              admission = student.admission
+              admission.admitted = true
+              admission.save
+              student.admitted = admission_date
+              # change student enrollment status
+              student.enrollment_status_id = 2
+              student.save
+
+            elsif @state.auto_progress == true
               @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
               @new_state = @next_phase.admission_phase_states.first
               #@admission_record.admission_phase_state = @state
@@ -59,15 +71,6 @@ module Gaku
               @new_admission_record.admission_phase = @next_phase
               @new_admission_record.admission_phase_state = @new_state
               @new_admission_record.save
-            elsif @state.auto_admit == true
-              admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
-              admission = student.admission
-              admission.admitted = true
-              admission.save
-              student.admitted = admission_date
-              # change student enrollment status
-              student.enrollment_status_id = 2
-              student.save
             end
             @admission_record.admission_phase_state_id = @state.id
             @admission_record.save
@@ -107,10 +110,10 @@ module Gaku
           # TODO change the selected phase
           admission_phase = @admission_method.admission_phases.first
           # TODO change the selected phase state
-          admission_phase_state = admission_phase.admission_phase_states.first
+          @admission_phase_state = admission_phase.admission_phase_states.first
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
-                                                :admission_phase_state_id => admission_phase_state.id,
+                                                :admission_phase_state_id => @admission_phase_state.id,
                                                 :admission_id => @admission.id)
 
           @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
@@ -155,10 +158,10 @@ module Gaku
             # TODO change the selected phase
             admission_phase = admission.admission_method.admission_phases.first
             # TODO change the selected phase state
-            admission_phase_state = admission_phase.admission_phase_states.first
+            @admission_phase_state = admission_phase.admission_phase_states.first
             @admission_records << AdmissionPhaseRecord.create(
                                         :admission_phase_id => admission_phase.id,
-                                        :admission_phase_state_id => admission_phase_state.id,
+                                        :admission_phase_state_id => @admission_phase_state.id,
                                         :admission_id => admission.id)
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
             # change student status

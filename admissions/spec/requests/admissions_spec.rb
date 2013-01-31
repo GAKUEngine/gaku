@@ -193,6 +193,7 @@ describe 'Admin Admissions' do
           it 'change state' do
             #Exam | Pre Exam
             within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") do
+              find(:css, "#student-1-check").set(true)
               select "Abscent", from: 'state_id'
               click_on 'Save'
               wait_for_ajax
@@ -204,6 +205,7 @@ describe 'Admin Admissions' do
             #Exam | Abscent
             within("#state#{@first_method.admission_phases.first.admission_phase_states.last.id}") do
               size_of("#students-index tbody tr").should eq 1
+              find(:css, "#student-1-check").set(true)
               select "Passed", from: 'state_id'
               click_on 'Save'
               sleep 1
@@ -223,6 +225,7 @@ describe 'Admin Admissions' do
             within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should_not have_content 'Admitted on'
+              find(:css, "#student-1-check").set(true)
               select "Accepted", from: 'state_id'
               click_on 'Save'
               sleep 1

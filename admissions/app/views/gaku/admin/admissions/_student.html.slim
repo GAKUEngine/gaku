@@ -1,5 +1,11 @@
 tr id="student-#{student.id}" style="#{ (student.enrollment_status.code == "deleted") ? "color: grey;" : "" }"
   = render 'gaku/admin/admissions/student_fields', :student => student, :phase => state.admission_phase
+  td
+    - if !(student.enrollment_status.code == "deleted")
+      - if student.admission.admitted == true
+        = t("admissions.admitted_on") + " " + student.admitted.strftime("%d-%b-%Y")
+      -else
+        = student.enrollment_status.name
   /td.manage
     - if !(student.enrollment_status.code == "deleted")
       - if student.admission.admitted == true
