@@ -106,6 +106,7 @@ en:
     changed_at: Changed At
     event: Event
     from: From
+    user: Changed by
     student:
       list: Student Changes list
     student_address:

@@ -37,5 +37,11 @@ describe 'Student Changes' do
     page.should have_content "update"
   end
 
+  it 'saves destroy' do
+    student.destroy
+    visit gaku.admin_changes_students_path
+    page.should have_content 'destroy'
+  end
+
 
 end

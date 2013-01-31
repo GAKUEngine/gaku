@@ -29,4 +29,10 @@ describe 'Student Addresses Changes' do
     page.should have_content "update"
   end
 
+  it 'saves destroy' do
+    @address.destroy
+    visit gaku.admin_changes_student_addresses_path
+    page.should have_content 'destroy'
+  end
+
 end
