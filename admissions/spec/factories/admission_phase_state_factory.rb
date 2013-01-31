@@ -30,10 +30,10 @@ FactoryGirl.define do
 
   factory :admission_phase_state_accepted, :class => Gaku::AdmissionPhaseState do
     name 'Accepted'
-    can_progress  false
+    can_progress  true
     can_admit     true
     auto_admit    true
-    auto_progress false
+    auto_progress true
   end
 
   factory :admission_phase_state_waiting, :class => Gaku::AdmissionPhaseState do

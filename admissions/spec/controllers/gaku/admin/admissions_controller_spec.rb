@@ -187,11 +187,12 @@ describe Gaku::Admin::AdmissionsController do
                       admission_period_id: admission_period.id,
                       admission_method_id: admission_period.admission_methods.second.id
 
-      assigns(:state_id).should_not be_nil
-      assigns(:students_ids).should_not be_nil
+      assigns(:state_students).should_not be_nil
+      assigns(:state).should_not be_nil
       assigns(:admission_record).should_not be_nil
-      assigns(:admission_period_id).should_not be_nil
-      assigns(:admission_method_id).should_not be_nil
+      assigns(:next_phase).should_not be_nil
+      assigns(:new_state).should_not be_nil
+      assigns(:new_admission_record).should_not be_nil
     end
 
     it 'changes admission record' do

@@ -41,8 +41,6 @@ module Gaku
         #@student = Student.unscoped.find(params[:student_id])
         @state_students.each  do |student|
           phase = @state.admission_phase
-          logger.debug "#{@state.inspect}"
-          logger.debug "#{phase.inspect}"
           @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
           @old_state_id = @admission_record.admission_phase_state_id
 
@@ -60,8 +58,9 @@ module Gaku
               # change student enrollment status
               student.enrollment_status_id = 2
               student.save
+            end
 
-            elsif @state.auto_progress == true
+            if @state.auto_progress == true
               @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
               @new_state = @next_phase.admission_phase_states.first
               #@admission_record.admission_phase_state = @state
