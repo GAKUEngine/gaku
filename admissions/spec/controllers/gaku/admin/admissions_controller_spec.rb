@@ -195,16 +195,6 @@ describe Gaku::Admin::AdmissionsController do
       assigns(:new_admission_record).should_not be_nil
     end
 
-    it 'changes admission record' do
-      expect do
-        gaku_js_post :change_student_state, 
-                      state_id: @new_state.id, 
-                      student_ids: [@admission.student_id], 
-                      admission_period_id: admission_period.id,
-                      admission_method_id: admission_period.admission_methods.second.id
-      end.to change(:admission_record.admission_phase_state_id)
-    end
-
     it 'is successful' do
       gaku_js_post :change_student_state, 
                       state_id: @new_state.id, 
