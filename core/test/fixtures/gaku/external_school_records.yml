@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  belongs_to: 
+  belongs_to: 
+  beginning: 2013-01-29
+  ending: 2013-01-29
+  student_id_number: MyString
+  absences: 1
+  attendance_rate: 1.5
+  graduated: 
+  has_many: 
+  has_many: 
+
+two:
+  belongs_to: 
+  belongs_to: 
+  beginning: 2013-01-29
+  ending: 2013-01-29
+  student_id_number: MyString
+  absences: 1
+  attendance_rate: 1.5
+  graduated: 
+  has_many: 
+  has_many: 
