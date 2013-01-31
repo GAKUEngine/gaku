@@ -12,6 +12,5 @@ module Gaku
     validates_presence_of :name
     validates_associated :attachable
     validates_attachment :asset, presence: true
-    
   end
 end

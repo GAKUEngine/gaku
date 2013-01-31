@@ -1,7 +1,11 @@
 module Gaku
   class ScholarshipStatus < ActiveRecord::Base
+
     has_many :students
+
     attr_accessible :name
+
+    validates :name, presence: true
 
     def to_s
       name

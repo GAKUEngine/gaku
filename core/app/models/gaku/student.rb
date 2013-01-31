@@ -60,10 +60,6 @@ module Gaku
       "#{self.surname} #{self.name}"
     end
 
-    def scholarship
-      scholarship_status.nil? ? "" : scholarship_status.name
-    end
-
     def class_group_widget
       cg = self.class_groups.last
       cg.blank? ? nil : cg
