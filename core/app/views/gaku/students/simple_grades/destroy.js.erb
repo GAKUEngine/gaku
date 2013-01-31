@@ -1,4 +1,4 @@
-$('.student-simple-grade-count').html('<%= print_count(@count-1, t_simple_grade_list) %>');
+$('.student-simple-grades-count').html('<%= print_count(@count-1, t_simple_grade_list) %>');
 showNotice("<%= render_flash %>");
 $('#student-simple-grades-list').html('<%= @student.simple_grades.pluck(:name).join(", ") %>')
 

@@ -1,5 +1,6 @@
 td = simple_grade.name
 td = simple_grade.grade
+td = simple_grade.school
 td
-  = link_to_edit [:edit, @student, simple_grade], :id => "edit-student-simple-grade-link", :remote => true
+  = ajax_link_to_edit [:edit, @student, simple_grade], :id => "edit-student-simple-grade-link"
   = ajax_link_to_delete [@student, simple_grade], :id => "delete-student-simple-grade-link"

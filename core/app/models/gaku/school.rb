@@ -16,7 +16,12 @@ module Gaku
 
     after_create :build_default_campus
 
-  	private
+  	def to_s
+      name
+    end
+
+
+    private
 
     def build_default_campus
       if self.campuses.any?
