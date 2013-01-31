@@ -1,5 +1,4 @@
 $('#index-student-specialties-modal .modal-body .row-fluid .span12.well').html("<%= render_js_partial('index', {:student_specialties => @student_specialties}) %>");
-$('.student-specialty-count').html('<%= print_count(@count, t_specialty_list) %>');
 $('#student-specialty-list').html('<%= student_specialties_list(@student.student_specialties) %>')
 
 showNotice("<%= render_flash %>");
