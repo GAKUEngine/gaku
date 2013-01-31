@@ -457,6 +457,7 @@ en:
         student_contacts: Student Contacts
         students: Students
       disposals:
+        student: Student Disposals
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals

@@ -49,7 +49,12 @@
     <li class="dropdown-submenu" data-hook="disposals_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.disposals.disposals') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="exam_disposals"><%= link_to t('menu.admin.disposals.exam'), exams_admin_disposals_path %></li>
+        <li data-hook="student_disposals">
+          <%= link_to t('menu.admin.disposals.student'), students_admin_disposals_path %>
+        </li>
+        <li data-hook="exam_disposals">
+          <%= link_to t('menu.admin.disposals.exam'), exams_admin_disposals_path %>
+        </li>
         <li data-hook="attachment_disposals">
           <%= link_to t('menu.admin.disposals.attachment'), attachments_admin_disposals_path %>
         </li>
