@@ -63,6 +63,10 @@ module Gaku
       Gaku::Achievement.all.collect {|a| [a.name, a.id]}
     end
 
+    def schools
+      Gaku::School.all.collect { |s| [s.name, s.id] }
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
