@@ -4,8 +4,8 @@ module Gaku
       class StudentChangesController < Admin::BaseController
 
         def index
-          @changes = Version.students
-          @count = Version.students.count
+          @changes = StudentVersion.all
+          @count = StudentVersion.count
         end
 
       end

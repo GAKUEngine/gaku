@@ -106,6 +106,7 @@ en:
     changed_at: Changed At
     event: Event
     from: From
+    user: Changed by
     student:
       list: Student Changes list
     student_address:
@@ -457,6 +458,7 @@ en:
         student_contacts: Student Contacts
         students: Students
       disposals:
+        student: Student Disposals
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals
@@ -581,6 +583,7 @@ en:
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
+    choose: Choose School
   search: Search
   select: Select
   semester:

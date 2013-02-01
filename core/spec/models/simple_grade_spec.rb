@@ -13,6 +13,7 @@ describe Gaku::SimpleGrade do
 
     it { should validate_presence_of :school_id }
     it { should validate_presence_of :student_id }
-
+    it { should validate_presence_of :name }
+    it { should validate_presence_of :grade }
   end
 end

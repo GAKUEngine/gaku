@@ -37,11 +37,9 @@ module Gaku
       self.addressable_id
     end
 
-
     def state_text
       state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
     end
-
 
     def empty?
       attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
