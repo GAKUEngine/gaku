@@ -1,3 +1,4 @@
 $('.student-achievements-count').html('<%= print_count(@count-1, t_achievement_list) %>');
+$('#student-achievements-list').html('<%= escape_javascript(achievements_show(@student.achievements)) %>')
 showNotice("<%= render_flash %>");
 
