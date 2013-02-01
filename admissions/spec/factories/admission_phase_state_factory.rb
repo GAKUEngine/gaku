@@ -33,7 +33,7 @@ FactoryGirl.define do
     can_progress  true
     can_admit     true
     auto_admit    true
-    auto_progress true
+    auto_progress false
   end
 
   factory :admission_phase_state_waiting, :class => Gaku::AdmissionPhaseState do
@@ -56,7 +56,7 @@ FactoryGirl.define do
     name 'Passed with Fluent Score'
     can_progress  true
     can_admit     true
-    auto_progress true
+    auto_progress false
     auto_admit    true
   end
   
