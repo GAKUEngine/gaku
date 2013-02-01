@@ -4,6 +4,8 @@ describe Gaku::Admin::AdmissionsController do
 
   let!(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let!(:admission_period) { create(:admission_period) }
+  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
+  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let!(:student) { create(:student, enrollment_status_id: 1) }
   let!(:exam) { create(:exam) }
   let!(:attendance) { create(:attendance) }
@@ -42,6 +44,10 @@ describe Gaku::Admin::AdmissionsController do
       gaku_js_get :new
     end
 
+    it "is successful" do
+      response.should be_success
+    end
+
     it "renders the :new template" do
       response.should render_template :new
     end
@@ -53,32 +59,65 @@ describe Gaku::Admin::AdmissionsController do
       assigns(:student).should be_a_new Gaku::Student
     end
 
-    xit "loads @class_group_id" do
-      assigns(:class_group_id).should_not be_nil
-    end
-
   end
 
   describe "POST #create" do
     context 'with valid attributes' do
 
-      xit 'saves the new admission in the db' do
+      before do
+        @admission = attributes_for(:admission, 
+                                          admission_period_id: admission_period.id,
+                                          admission_method_id: admission_method_regular.id,
+                                          student_id: student.id)
+      end
+      it 'saves the new admission in the db' do
         expect do
-          gaku_post :create, admission: build(:admission, 
-                                          admission_period_id: admission_period_id)
+          gaku_js_post :create, admission: @admission
         end.to change(Gaku::Admission, :count).by 1
+      end
+      it 'creates and saves new admission record in the db' do
+        expect do
+          gaku_js_post :create, admission: @admission
+        end.to change(Gaku::AdmissionPhaseRecord, :count).by 1
+      end
+
+      xit 'changes student\'s enrollment status' do
+        expect do
+          gaku_js_post :create, admission: @admission
+          student.reload
+        end.to change(student,:enrollment_status_id)
       end
     end
 
     context 'with invalid attributes' do
-      xit 'does not save the new admission in the db' do
+      it 'raises error without student' do
         expect do
           gaku_post :create, admission: attributes_for(:admission, 
-                                                        admission_period_id:admission_period.id, 
-                                                        admission_method_id:admission_method_regular.id, 
-                                                        student_id: nil )
-        end.to_not change(Gaku::Admission, :count)
+                                          admission_period_id: admission_period.id,
+                                          admission_method_id: admission_method_regular.id,
+                                          student_id: nil) 
+        end.to raise_error
       end
+
+      it 'raises error without method' do
+        expect do
+          gaku_post :create, admission: attributes_for(:admission, 
+                                          admission_period_id: admission_period.id,
+                                          admission_method_id: nil,
+                                          student_id: student.id) 
+        end.to raise_error
+      end
+
+      it 'raises error without period' do
+        expect do
+          gaku_post :create, admission: attributes_for(:admission, 
+                                          admission_period_id: nil,
+                                          admission_method_id: admission_method_regular.id,
+                                          student_id: student.id) 
+        end.to raise_error
+      end
+
+
     end
     
   end
@@ -95,7 +134,6 @@ describe Gaku::Admin::AdmissionsController do
     end
 
     it 'uses period without methods' do
-      admission_period_no_methods
       gaku_js_post :change_admission_period, admission_period: admission_period_no_methods
       assigns(:admission_period).should eq admission_period_no_methods
       assigns(:admission_methods).should eq admission_period_no_methods.admission_methods
@@ -104,7 +142,6 @@ describe Gaku::Admin::AdmissionsController do
       response.should be_success
     end
 
-    xit 'without periods'
   end
 
   it 'changes admission method' do
