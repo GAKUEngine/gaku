@@ -33,60 +33,66 @@ module Gaku
 
       def change_student_state
         @state_students = []
+
         params[:student_ids].each do |id|
           @state_students << Student.unscoped.find(id)
         end
-        @state = AdmissionPhaseState.find(params[:state_id])
 
-        #@student = Student.unscoped.find(params[:student_id])
-        @state_students.each  do |student|
-          phase = @state.admission_phase
-          @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
-          @old_state_id = @admission_record.admission_phase_state_id
+        if params[:admit_students]
+          # admit students
 
-          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-          @admission_method = phase.admission_method
-
-          if !(@state.id == @admission_record.admission_phase_state_id)
-            # TODO decide how next phase should be chosen and decide for default phase states
-            if @state.auto_admit == true
-              admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
-              admission = student.admission
-              admission.admitted = true
-              admission.save
-              student.admitted = admission_date
-              # change student enrollment status
-              student.enrollment_status_id = 2
-              student.save
-            end
-
-            if @state.auto_progress == true
-              @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
-              @new_state = @next_phase.admission_phase_states.first
-              #@admission_record.admission_phase_state = @state
-              #@admission_record.admission_phase = @next_phase
-              @new_admission_record = AdmissionPhaseRecord.new
-              @new_admission_record.admission = student.admission
-              @new_admission_record.admission_phase = @next_phase
-              @new_admission_record.admission_phase_state = @new_state
-              @new_admission_record.save
-            end
-            @admission_record.admission_phase_state_id = @state.id
-            @admission_record.save
+          @state_students.each  do |student|
+            admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+            admission = student.admission
+            admission.admitted = true
+            admission.save
+            student.admitted = admission_date
+            student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
+            student.save
           end
-        end
-        render 'change_student_state'
-      end
+          render 'admit_student'
+        else
+          @state = AdmissionPhaseState.find(params[:state_id])
 
-      def admit_student
-        @student = Student.unscoped.find(params[:student_id])
-        admission_date = !@student.admission.admission_period.admitted_on.nil? ? @student.admission.admission_period.admitted_on : Date.today
-        admission = @student.admission
-        admission.admitted = true
-        admission.save
-        @student.admitted = admission_date
-        @student.enrollment_status_id = 2
-        @student.save
+          #@student = Student.unscoped.find(params[:student_id])
+          @state_students.each  do |student|
+            phase = @state.admission_phase
+            @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+            @old_state_id = @admission_record.admission_phase_state_id
+
+            @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+            @admission_method = phase.admission_method
+
+            if !(@state.id == @admission_record.admission_phase_state_id)
+              # TODO decide how next phase should be chosen and decide for default phase states
+              if @state.auto_admit == true
+                admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+                admission = student.admission
+                admission.admitted = true
+                admission.save
+                student.admitted = admission_date
+                # change student enrollment status
+                student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
+                student.save
+
+              elsif @state.auto_progress == true
+                @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+                @new_state = @next_phase.admission_phase_states.first
+                #@admission_record.admission_phase_state = @state
+                #@admission_record.admission_phase = @next_phase
+                @new_admission_record = AdmissionPhaseRecord.new
+                @new_admission_record.admission = student.admission
+                @new_admission_record.admission_phase = @next_phase
+                @new_admission_record.admission_phase_state = @new_state
+                @new_admission_record.save
+              end
+              @admission_record.admission_phase_state_id = @state.id
+              @admission_record.save
+            end
+          end
+          logger.debug "STUDENT !!! #{EnrollmentStatus.all.inspect}"
+          render 'change_student_state'
+        end
       end
 
       def listing_applicants
