@@ -1,5 +1,8 @@
 module Gaku
   class ClassGroupsController < GakuController
+
+    include StudentChooserController
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
@@ -8,27 +11,13 @@ module Gaku
 
     before_filter :load_before_index, :only => :index
     before_filter :load_before_show, :only => :show
-    before_filter :class_group,  :only => [:destroy, :show, :student_chooser]
+    before_filter :class_group,  :only => [:destroy, :show]
     before_filter :count, :only => [:create, :destroy, :index]
 
     def index
       @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
     end
 
-    def student_chooser
-      @search = Student.search(params[:q])
-      @students = @search.result
-
-      @class_groups = ClassGroup.all
-
-      @enrolled_students = @class_group.students.map {|i| i.id.to_s }
-
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
-      respond_to do |format|
-        format.js
-      end
-    end
 
     private
 
