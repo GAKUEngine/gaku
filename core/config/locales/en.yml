@@ -638,6 +638,7 @@ en:
     save: Save Specialty
     singular: Specialty
   student:
+    choose: Choose students
     add: Add Student
     birth_and: and
     birth_between: Birth date between
