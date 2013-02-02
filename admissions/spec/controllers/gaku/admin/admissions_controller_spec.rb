@@ -140,11 +140,12 @@ describe Gaku::Admin::AdmissionsController do
 
   context 'changes student state' do
     before do
+      admission_period
       @current_state = admission_period.admission_methods.second.admission_phases.second.admission_phase_states.first #waiting for interview
       @new_state = admission_period.admission_methods.second.admission_phases.second.admission_phase_states.second #Accepted
       
       @admission_phase_record = create(:admission_phase_record, 
-                                                    admission_phase_id: admission_period.admission_methods.first.admission_phases.first.id,
+                                                    admission_phase_id: admission_period.admission_methods.second.admission_phases.second.id,
                                                     admission_phase_state_id: @current_state.id)
 
       @admission = create(:admission, 

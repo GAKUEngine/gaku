@@ -113,6 +113,7 @@ pt-BR:
     student_contact:
       list: Lista de Mudanças de Contato de Alunos
     to: Para
+    user: 
   class: Classe
   class_group:
     add: Adicionar Grupo de Classe
@@ -379,6 +380,13 @@ pt-BR:
     singular: 
     use_weighting: 
     weight: 
+  external_school_record:
+    absences: 
+    attendance_rate: 
+    beginning: 
+    data: 
+    ending: 
+    student_id_number: 
   flash:
     actions:
       create:
@@ -452,6 +460,7 @@ pt-BR:
         course_group: 
         disposals: 
         exam: 
+        student: 
         student_address: 
       preset:
         grading:
@@ -555,6 +564,7 @@ pt-BR:
   school:
     add: 
     campuses: 
+    choose: 
     code: 
     description: 
     edit: 

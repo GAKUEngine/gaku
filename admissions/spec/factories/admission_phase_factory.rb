@@ -20,9 +20,9 @@ FactoryGirl.define do
     name 'Interview'
     position 2
     after_build do |phase_interview|
-      phase_interview.admission_phase_states << FactoryGirl.build(:admission_phase_state_waiting, :admission_phase => phase_interview)
-      phase_interview.admission_phase_states << FactoryGirl.build(:admission_phase_state_accepted, :admission_phase => phase_interview)
-      phase_interview.admission_phase_states << FactoryGirl.build(:admission_phase_state_rejected, :admission_phase => phase_interview)
+      phase_interview.admission_phase_states << FactoryGirl.create(:admission_phase_state_waiting, :admission_phase => phase_interview)
+      phase_interview.admission_phase_states << FactoryGirl.create(:admission_phase_state_accepted, :admission_phase => phase_interview)
+      phase_interview.admission_phase_states << FactoryGirl.create(:admission_phase_state_rejected, :admission_phase => phase_interview)
     end
   end
   
@@ -30,11 +30,11 @@ FactoryGirl.define do
     name 'Foreign Language Exam'
     position 3
     after_build do |phase_exam|
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_pre_exam, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_passed, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_passed_fluent, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_rejected, :admission_phase => phase_exam)
-      phase_exam.admission_phase_states << FactoryGirl.build(:admission_phase_state_abscent, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_pre_exam, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_passed, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_passed_fluent, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_rejected, :admission_phase => phase_exam)
+      phase_exam.admission_phase_states << FactoryGirl.create(:admission_phase_state_abscent, :admission_phase => phase_exam)
     end
   end
   

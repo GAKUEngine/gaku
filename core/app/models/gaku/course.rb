@@ -9,8 +9,8 @@ module Gaku
     has_many :course_group_enrollments
     has_many :course_groups, :through => :course_group_enrollments
 
-    has_many :class_group_course_enrollments, :dependent => :destroy
     has_many :class_groups, :through => :class_group_course_enrollments
+    has_many :class_group_course_enrollments, :dependent => :destroy
 
     has_many :exam_schedules
 

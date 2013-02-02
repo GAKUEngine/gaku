@@ -1,5 +1,6 @@
 module Gaku
   class PeriodMethodAssociation < ActiveRecord::Base
+
     belongs_to :admission_period
     belongs_to :admission_method
 
