@@ -1,0 +1,8 @@
+= table_for 'extracurricular-activity-index' do
+  thead
+    tr
+      = th t(:'extracurricular_activity.name')
+      = th_actions 3
+  tbody
+    = render :partial => 'extracurricular_activity', :collection => @extracurricular_activities, :as => 'extracurricular_activity'
+

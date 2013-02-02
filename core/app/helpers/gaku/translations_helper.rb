@@ -117,5 +117,13 @@ module Gaku
       t(:'achievement.list')
     end
 
+    def t_extracurricular_activity_list
+      t(:'extracurricular_activity.list')
+    end
+
+    def t_extracurricular_activity_plural
+      t(:'extracurricular_activity.plural')
+    end
+
   end
 end

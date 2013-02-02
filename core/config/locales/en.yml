@@ -1,4 +1,18 @@
 en:
+  success:
+    enrolled: "Successfully enrolled!"
+  failure:
+    enrolled: "Failed to enroll!"
+  extracurricular_activity:
+    add: Add Extracurricular Activity
+    singular: Extracurricular Activity
+    plural: Extracurricular Activities
+    list: Extracurricular Activities list
+    new: New Extracurricular Activity
+    name: Name
+    save: Save
+    show: Show Extracurricular Activity
+    edit: Edit Extracurricular Activity
   achievement:
     add: Add Achievement
     authority: Authority
