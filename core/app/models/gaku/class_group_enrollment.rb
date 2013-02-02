@@ -6,7 +6,8 @@ module Gaku
 
 	  attr_accessible :seat_number, :roles, :class_group_id, :student_id
 
-	  validates :student_id, :uniqueness => {:scope => :class_group_id, :message => "Already enrolled to the class group!"}
+	  validates :student_id,
+              uniqueness: { scope: :class_group_id, message: "Already enrolled to the class group!" }
 		validates_presence_of :class_group_id
 	end
 end

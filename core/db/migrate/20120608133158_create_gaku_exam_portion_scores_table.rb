@@ -1,11 +1,12 @@
 class CreateGakuExamPortionScoresTable < ActiveRecord::Migration
-  def change 
+  def change
   	create_table :gaku_exam_portion_scores do |t|
   	  t.float    :score
+      t.string   :entry_number
 
   	  t.references :exam_portion
   	  t.references :student
-  	  
+
   	  t.timestamps
    	end
   end

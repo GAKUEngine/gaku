@@ -10,7 +10,7 @@ describe 'Students' do
   let(:class_group) { create(:class_group, name:'Biology') }
   let(:commute_method_type) { create(:commute_method_type) }
   let(:commute_method_type_train) { create(:commute_method_type, name: 'Train') }
-  let(:commute_method) { create(:commute_method, student: student) }
+  let(:commute_method) { create(:commute_method, commute_method_type: commute_method_type_train, student: student) }
 
   before :all do
     set_resource "student"
