@@ -3,8 +3,8 @@ module Gaku
 
     include Notes
 
-    has_many :course_enrollments
-    has_many :students, :through => :course_enrollments
+    has_many :enrollments, class_name: "Gaku::CourseEnrollment"
+    has_many :students, :through => :enrollments
 
     has_many :course_group_enrollments
     has_many :course_groups, :through => :course_group_enrollments
@@ -17,7 +17,7 @@ module Gaku
     belongs_to :syllabus
     belongs_to :class_group
 
-    accepts_nested_attributes_for :course_enrollments
+    accepts_nested_attributes_for :enrollments
 
     attr_accessible :code, :class_group_id, :syllabus_id
 

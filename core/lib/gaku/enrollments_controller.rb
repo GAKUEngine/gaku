@@ -26,7 +26,11 @@ module Gaku
       if params[:source] == class_name_underscored_plural
         @resource = class_name.constantize.find(params[enrollment_param])
         @count = @resource.enrollments.count
-        render "gaku/#{class_name_underscored_plural}/students/enroll_students"
+        if class_name_underscored_plural == 'courses'
+          render "gaku/#{class_name_underscored_plural}/enrollments/students/enroll_students"
+        else
+          render "gaku/#{class_name_underscored_plural}/students/enroll_students"
+        end
       #else
       #  flash.now[:notice] = notice.html_safe
       #  render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
