@@ -32,7 +32,7 @@
           = hidden_field_tag "extracurricular_activity_id", @extracurricular_activity.id
           = hidden_field_tag "source", "extracurricular_activities"
           h4 = "Adding students to " + @extracurricular_activity.name
-          = submit_tag t('extracurricular_activity.add'), :class => 'btn btn-primary'
+          = submit_tag t('extracurricular_activity.enroll'), :class => 'btn btn-primary'
 
       - elsif !@admission.nil?
         = form_tag( admissions_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do

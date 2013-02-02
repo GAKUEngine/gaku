@@ -3,7 +3,7 @@
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li#extracurricular-activity-students-tab.active
-          a#class-group-enrollments-tab-link data-toggle="tab" href="#extracurricular_activity_enrollments"
+          a#extracurricular-activity-enrollments-tab-link data-toggle="tab" href="#extracurricular_activity_enrollments"
             = print_count @extracurricular_activity.extracurricular_activity_enrollments.count, t(:'student.plural')
       .tab-content
 

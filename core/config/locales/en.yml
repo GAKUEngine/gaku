@@ -13,6 +13,9 @@ en:
     save: Save
     show: Show Extracurricular Activity
     edit: Edit Extracurricular Activity
+    enroll: Enroll to Extracurricular Activity
+  extracurricular_activity_enrollment:
+    list: Student list
   achievement:
     add: Add Achievement
     authority: Authority

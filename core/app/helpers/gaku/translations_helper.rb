@@ -125,5 +125,9 @@ module Gaku
       t(:'extracurricular_activity.plural')
     end
 
+    def t_extracurricular_activity_enrollment_list
+      t(:'extracurricular_activity_enrollment.list')
+    end
+
   end
 end
