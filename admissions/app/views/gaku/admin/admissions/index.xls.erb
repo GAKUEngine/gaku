@@ -29,11 +29,15 @@
         <Cell><Data ss:Type="String">志願者番号</Data></Cell>
         <Cell><Data ss:Type="String"><%= t("surname") %></Data></Cell>
         <Cell><Data ss:Type="String"><%= t("given_name") %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("surname_reading") %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("name_reading") %></Data></Cell>
       </Row>
       <Row>
         <Cell><Data ss:Type="String"><%= record.admission.applicant_number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.admission.student.surname_reading %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.admission.student.name_reading %></Data></Cell>
       </Row>
         <% end %>
       <% end %>
