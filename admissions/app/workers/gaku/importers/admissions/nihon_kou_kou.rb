@@ -46,13 +46,15 @@ module Gaku
               total += row[idx[kyoka]]
             end
 
-            naishin = SimpleGrade.create!(:student_id  => student.id, :name => name, :grade => total)
+            naishin = SimpleGrade.first_or_create(:student_id  => student.id, :name => name)
+            naishin.grade = total
             naishin.save
             record.simple_grades << naishin
           end
           
           kyoka9.each do |kyoka|
-            naishin = SimpleGrade.create!(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
+            naishin = SimpleGrade.first_or_create(:student_id  => student.id, :name => kyoka)
+            naishin.grade = row[idx[kyoka]]
             naishin.save
             logger.info "志願者「" + student.surname + "　" + student.name + "」に" + kyoka + "の点数" + naishin.grade.to_s + "を登録しました。"
             record.simple_grades << naishin
@@ -166,7 +168,7 @@ module Gaku
 
             #入学時期及び入学形態が引数に含まれてればadmissionレコードを作成
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.find_or_create_by_applicant_number(applicant_number)
+              admission = Admission.first_or_create(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
 
               #ここに生徒が登録されてなければ登録し、既に登録されていれば更新を行う
               if admission.student_id.nil?
@@ -175,17 +177,14 @@ module Gaku
                                 :surname_reading => surname_reading,
                                 :name_reading => name_reading,
                                 :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
+                
+                admission.student_id = student.id
 
                 logger.info "志願者「" + surname + "　" + name + "」が未登録でした。"
               else
                 student = Student.find(admission.student_id)
                 logger.info "志願者「" + surname + "　" + name + "」が既に登録されている為情報を更新対象とします。"
               end
-
-
-              admission.student_id = student.id
-              admission.admission_period_id = period_id
-              admission.admission_method_id = method_id
 
               if admission.save
                 admission_method = admission.admission_method
