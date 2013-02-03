@@ -21,10 +21,8 @@
       <Row></Row>
       <% phase.admission_phase_states.each do |state| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= state.name.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("admission_phase_states.singular") + " : " + state.name.to_s %></Data></Cell>
       </Row>
-      <% @state_records.each do |record| %>
-        <% if record.admission_phase == phase && record.admission_phase_state == state %>
       <Row>
         <Cell><Data ss:Type="String">志願者番号</Data></Cell>
         <Cell><Data ss:Type="String"><%= t("surname") %></Data></Cell>
@@ -32,6 +30,8 @@
         <Cell><Data ss:Type="String"><%= t("surname_reading") %></Data></Cell>
         <Cell><Data ss:Type="String"><%= t("name_reading") %></Data></Cell>
       </Row>
+      <% @state_records.each do |record| %>
+        <% if record.admission_phase == phase && record.admission_phase_state == state %>
       <Row>
         <Cell><Data ss:Type="String"><%= record.admission.applicant_number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
