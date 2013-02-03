@@ -6,8 +6,9 @@ $('.change-state-form').fadeOut();
     $('<%= render_js_partial("student", {:student => student, :state => @state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
   });
 
-  <%- if @state.auto_progress %>
+  <%- if @state.auto_progress == true %>
     $('div#state<%= @new_admission_record.admission_phase_state_id %> table tbody').append('<%= render_js_partial("student", {:student => student, :state => @new_state}) %>');
+    $('.change-state_<%= @new_state.id %>-form').html('<%= render_js_partial("state_change_form", :state => @new_state) %>')
   <% end %>
 
   <%- if @next_phase %>
@@ -19,11 +20,11 @@ $('.change-state-form').fadeOut();
   <% } %>
 <% end %>
 
-<% @state.admission_phase.admission_phase_states.each do |state| %>
-  <% if state.admission_phase_records.count > 0 %>
-    $('.change-state_<%= state.id %>-form').html('<%= render_js_partial("state_change_form", :state => state) %>')
-  <% else %>
-    $('.change-state_<%= state.id %>-form').html('');
+  <% @state.admission_phase.admission_phase_states.each do |state| %>
+    <% if state.admission_phase_records.count > 0 %>
+      $('.change-state_<%= state.id %>-form').html('<%= render_js_partial("state_change_form", :state => state) %>')
+    <% else %>
+      $('.change-state_<%= state.id %>-form').html('');
+    <% end %>
   <% end %>
-<% end %>
 $('.change-state-form').fadeIn();

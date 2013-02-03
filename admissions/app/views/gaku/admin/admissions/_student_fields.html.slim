@@ -1,5 +1,5 @@
 - if !(student.enrollment_status.code == "deleted") || (student.admission.admitted == true)
-  td.vm-tc = check_box_tag "student_ids[]", student.id, false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
+  td.vm-tc = check_box_tag "student_ids[]", student.id, false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}-check"
 - else
   td
 td.surname = student.surname
