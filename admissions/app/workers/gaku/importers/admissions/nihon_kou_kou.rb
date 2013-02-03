@@ -7,7 +7,6 @@ module Gaku
         include SheetHelper
         require 'roo'
 
-
         def perform(file_path, period_id, method_id)
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
