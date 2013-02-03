@@ -113,6 +113,7 @@ ja:
     student_contact:
       list: 生徒連絡先変更履歴
     to: 変更後
+    user: 変更を摘要したユーザ
   class: クラス
   class_group:
     add: クラスを追加
@@ -381,6 +382,13 @@ ja:
     singular: 試験要素
     use_weighting: 加重率を使用
     weight: 加重率
+  external_school_record:
+    absences: 欠席数
+    attendance_rate: 出席率
+    beginning: 開始日
+    data: データ
+    ending: 終了日
+    student_id_number: 生徒番号
   flash:
     actions:
       create:
@@ -454,6 +462,7 @@ ja:
         course_group: 授業グループを処分
         disposals: 処分
         exam: 試験を処分する
+        student: 生徒情報処分
         student_address: 生徒住所削除一覧
       preset:
         grading:
@@ -557,6 +566,7 @@ ja:
   school:
     add: 学校を追加
     campuses: キャンパス
+    choose: 学校選択
     code: 学校コード
     description: 学校の説明
     edit: 学校を編集

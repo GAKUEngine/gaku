@@ -106,7 +106,6 @@ en:
     changed_at: Changed At
     event: Event
     from: From
-    user: Changed by
     student:
       list: Student Changes list
     student_address:
@@ -114,6 +113,7 @@ en:
     student_contact:
       list: Student Contact Changes list
     to: To
+    user: Changed by
   class: Class
   class_group:
     add: Add Class Group
@@ -383,12 +383,12 @@ en:
     use_weighting: Use Weighting
     weight: Weight
   external_school_record:
-    student_id_number: Student ID number
-    beginning: Beginning
-    ending: Ending
     absences: Absences
     attendance_rate: Attendance Rate
+    beginning: Beginning
     data: Data
+    ending: Ending
+    student_id_number: Student ID number
   flash:
     actions:
       create:
@@ -458,11 +458,11 @@ en:
         student_contacts: Student Contacts
         students: Students
       disposals:
-        student: Student Disposals
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals
         exam: Exam Disposals
+        student: Student Disposals
         student_address: Student Addresses Disposals
       preset:
         grading:
@@ -566,6 +566,7 @@ en:
   school:
     add: Add School
     campuses: Campuses
+    choose: Choose School
     code: Code
     description: Description
     edit: Edit School
@@ -583,7 +584,6 @@ en:
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
-    choose: Choose School
   search: Search
   select: Select
   semester:
