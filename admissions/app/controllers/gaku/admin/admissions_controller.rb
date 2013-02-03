@@ -25,16 +25,6 @@ module Gaku
       end
 
       def index
-        puts ":admission_period_id dayo-----------------"
-        admission_period_id = params[:admission_period_id]
-        puts admission_period_id
-        puts @admission_period.id
-        puts "@admission_method dayo-----------------"
-        admission_method_id = params[:admission_method_id]
-        puts @admission_method.id
-        puts @admission_method.name
-        puts @admission_method.admission_phases
-        
         respond_to do |format|
           format.html
           format.xls
