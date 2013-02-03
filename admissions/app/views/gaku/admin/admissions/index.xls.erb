@@ -7,13 +7,31 @@
   <% @admission_method.admission_phases.each_with_index do |phase, index| %>
   <Worksheet ss:Name="<%= phase.name.to_s %>">
     <Table>
-    <% phase.admission_phase_states.each do |state| %>
+      
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_periods.name") + " : " + @admission_period.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_methods.singular") + " : " + @admission_method.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_phases.singular") + " : " + phase.name.to_s %></Data></Cell>
+      </Row>
+      <Row></Row>
+      <Row></Row>
+      <% phase.admission_phase_states.each do |state| %>
       <Row>
         <Cell><Data ss:Type="String"><%= state.name.to_s %></Data></Cell>
       </Row>
       <% @state_records.each do |record| %>
         <% if record.admission_phase == phase && record.admission_phase_state == state %>
       <Row>
+        <Cell><Data ss:Type="String">志願者番号</Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("surname") %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("given_name") %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= record.admission.applicant_number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.name %></Data></Cell>
       </Row>
@@ -21,7 +39,7 @@
       <% end %>
       <Row></Row>
       <Row></Row>
-    <% end %>
+      <% end %>
     </Table>
   </Worksheet>
   <% end %>
