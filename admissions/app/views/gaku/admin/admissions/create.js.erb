@@ -3,7 +3,7 @@ $('#new-admin-admission-link').show();
 
 showNotice("<%= render_flash %>");
 $('#state<%= @admission_phase_record.admission_phase_state.id.to_s %> #students-index tbody').append('<%= render_js_partial("gaku/admin/admissions/student", :student => @admission.student, :state => @admission_phase_record.admission_phase_state) %>');
-
+$('.change-state_<%= @admission_phase_state.id %>-form').html('<%= render_js_partial("state_change_form", :state => @admission_phase_state) %>');
 <%- @admission_method.admission_phases.each {|phase| %>
   $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
   $('#phase_<%= phase.id %>-grade-button').html('<%= render_js_partial("grade_button", :phase => phase) %>');

@@ -5,4 +5,4 @@
 = hidden_field_tag :admission_method_id, @admission_method.id
 = submit_tag "Save"
 - if state.can_admit
-  = submit_tag "Admit"
+  = submit_tag "Admit", :name => 'admit_students'
