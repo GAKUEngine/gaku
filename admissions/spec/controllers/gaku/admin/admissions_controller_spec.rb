@@ -179,12 +179,11 @@ describe Gaku::Admin::AdmissionsController do
      
     context 'when new state is auto progressable but not auto admittable' do
       before do
-        admission_period
         @current_state = admission_period.admission_methods.second.admission_phases.first.admission_phase_states.first #pre exam
         @new_state = admission_period.admission_methods.second.admission_phases.first.admission_phase_states.second #passed
         
         @admission_phase_record = create(:admission_phase_record, 
-                                                      admission_phase_id: admission_period.admission_methods.second.admission_phases.second.id,
+                                                      admission_phase_id: admission_period.admission_methods.second.admission_phases.first.id,
                                                       admission_phase_state_id: @current_state.id)
 
         @admission = create(:admission, 
@@ -195,43 +194,47 @@ describe Gaku::Admin::AdmissionsController do
         @admission_phase_record.admission = @admission
         @admission_phase_record.save!
 
-        gaku_js_post :change_student_state, 
+      end
+
+      it 'creates new admission phase record' do
+        expect do
+          gaku_js_post :change_student_state, 
                         state_id: @new_state.id, 
                         student_ids: [@admission.student_id], 
                         admission_period_id: admission_period.id,
                         admission_method_id: admission_period.admission_methods.second.id
-      end
-
-      it 'creates new admission record' do
-        expect do
-          gaku_js_post :change_student_state, 
-                          state_id: @new_state.id, 
-                          student_ids: [@admission.student_id], 
-                          admission_period_id: admission_period.id,
-                          admission_method_id: admission_period.admission_methods.second.id
         end.to change(Gaku::AdmissionPhaseRecord, :count).by 1
       end
 
-      it "assigns variables" do
-        assigns(:state_students).should_not be_nil
-        assigns(:state).should_not be_nil
-        assigns(:admission_record).should_not be_nil
-        assigns(:next_phase).should_not be_nil
-        assigns(:new_state).should_not be_nil
-        assigns(:new_admission_record).should_not be_nil
-      end
-      it 'is successful' do
-        response.should be_success
-      end
+      context 'when make post request, it' do
+        before do
+          gaku_js_post :change_student_state, 
+                        state_id: @new_state.id, 
+                        student_ids: [@admission.student_id], 
+                        admission_period_id: admission_period.id,
+                        admission_method_id: admission_period.admission_methods.second.id
+        end
+        it "assigns variables" do
+          assigns(:state_students).should_not be_nil
+          assigns(:state).should_not be_nil
+          assigns(:admission_record).should_not be_nil
+          assigns(:next_phase).should_not be_nil
+          assigns(:new_state).should_not be_nil
+          assigns(:new_admission_record).should_not be_nil
+        end
+        it 'is successful' do
+          response.should be_success
+        end
 
-      it "renders the :change_student_state view" do
-        response.should render_template :change_student_state
+        it "renders the :change_student_state view" do
+          response.should render_template :change_student_state
+        end
       end
+      
     
     end
     context 'when new state is auto admittable but not auto pregressable' do
       before do
-        admission_period
         @current_state = admission_period.admission_methods.second.admission_phases.second.admission_phase_states.first #waiting for interview
         @new_state = admission_period.admission_methods.second.admission_phases.second.admission_phase_states.second #Accepted
         
