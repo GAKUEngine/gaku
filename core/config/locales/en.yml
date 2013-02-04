@@ -1,4 +1,21 @@
 en:
+  success:
+    enrolled: "Successfully enrolled!"
+  failure:
+    enrolled: "Failed to enroll!"
+  extracurricular_activity:
+    add: Add Extracurricular Activity
+    singular: Extracurricular Activity
+    plural: Extracurricular Activities
+    list: Extracurricular Activities list
+    new: New Extracurricular Activity
+    name: Name
+    save: Save
+    show: Show Extracurricular Activity
+    edit: Edit Extracurricular Activity
+    enroll: Enroll to Extracurricular Activity
+  extracurricular_activity_enrollment:
+    list: Student list
   achievement:
     add: Add Achievement
     authority: Authority
@@ -106,6 +123,7 @@ en:
     changed_at: Changed At
     event: Event
     from: From
+    user: Changed by
     student:
       list: Student Changes list
     student_address:
@@ -457,6 +475,7 @@ en:
         student_contacts: Student Contacts
         students: Students
       disposals:
+        student: Student Disposals
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals
@@ -581,6 +600,7 @@ en:
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
+    choose: Choose School
   search: Search
   select: Select
   semester:
@@ -618,6 +638,7 @@ en:
     save: Save Specialty
     singular: Specialty
   student:
+    choose: Choose students
     add: Add Student
     birth_and: and
     birth_between: Birth date between

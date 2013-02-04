@@ -9,6 +9,10 @@ module Gaku
     self.responder = Core::AppResponder
     respond_to :html
 
+    def user_for_paper_trail
+      user_signed_in? ? current_user : 'Public user'  # or whatever
+    end
+
     private
 
       def resolve_layout

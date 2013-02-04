@@ -8,9 +8,9 @@ module Gaku
 
 		attr_accessible :name, :school_id, :is_master
 
-		scope :master, lambda { where(:is_master => true) }
-
     validates_presence_of :name
+
+    scope :master, lambda { where(:is_master => true) }
 
 	end
 end
