@@ -79,16 +79,20 @@ module Gaku
 
         def 中学校度の内容登録(student, row, idx)
           school = 中学校検索(row[idx["中学校コード"]], row[idx["中学校名"]])
-          record = ExternalSchoolRecord.new
-          record.school = school
-          record.data = ""
-          record.student_id = student.id
-          year_2_absences = row[idx["２年欠席"]].to_i
-          year_3_absences = row[idx["３年欠席"]].to_i
-          record.absences = year_2_absences + year_3_absences
-          record.data << {:year_2_absences => year_2_absences, :year_3_absences => year_3_absences}.to_json
-          record.save
-          logger.info "志願者「" + student.surname + "　" + student.name + "」の中学情報を登録しました。"
+          record = ExternalSchoolRecord.where(:student_id => student.id, :school_id => school.id).first
+          if record.nil?
+            logger.info "志願者「" + student.surname + "　" + student.name + "」の中学校情報「" + school.name + "[" + school.code + "]」を登録します。"
+            record = ExternalSchoolRecord.new
+            record.school = school
+            record.data = ""
+            record.student_id = student.id
+            year_2_absences = row[idx["２年欠席"]].to_i
+            year_3_absences = row[idx["３年欠席"]].to_i
+            record.absences = year_2_absences + year_3_absences
+            record.data << {:year_2_absences => year_2_absences, :year_3_absences => year_3_absences}.to_json
+            record.save
+            logger.info "志願者「" + student.surname + "　" + student.name + "」の中学情報を登録しました。"
+          end
 
           内申点登録(student, record, row, idx)
         end
