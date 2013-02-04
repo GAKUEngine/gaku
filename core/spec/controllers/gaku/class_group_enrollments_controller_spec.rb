@@ -9,7 +9,7 @@ describe Gaku::ClassGroupEnrollmentsController do
   describe "POST #enroll_students" do
     context 'one student' do
 
-      let(:attributes) { { class_group_id: class_group.id, selected_students: ["student-#{student1.id}"] } }
+      let(:attributes) { { class_group_id: class_group.id, selected_students: ["student-#{student1.id}"], source: "class_groups" } }
 
       it 'saves to db' do
         expect do

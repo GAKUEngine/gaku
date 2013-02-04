@@ -5,6 +5,8 @@ module Gaku
 
 		attr_accessible :commute_method_type_id
 
+    validates :commute_method_type_id, presence: true
+
     def to_s
       self.commute_method_type.name
     end
