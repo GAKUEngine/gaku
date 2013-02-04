@@ -21,8 +21,6 @@ Gaku::Core::Engine.routes.draw do
     resources :students, :controller => 'extracurricular_activities/students' do
       collection do
         post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
       end
     end
   end
@@ -38,8 +36,6 @@ Gaku::Core::Engine.routes.draw do
     resources :students, :controller => 'class_groups/students' do
       collection do
         post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
       end
     end
   end
@@ -77,8 +73,6 @@ Gaku::Core::Engine.routes.draw do
 
   resources :class_group_enrollments do
     collection do
-      get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
   end
@@ -93,8 +87,6 @@ Gaku::Core::Engine.routes.draw do
 
   resources :extracurricular_activity_enrollments do
     collection do
-      #get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
   end
