@@ -6,12 +6,12 @@ module Gaku
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    actions :show, :new, :create, :edit, :update, :destroy
     respond_to :js, :html
 
-    before_filter :load_before_index, :only => :index
+    expose :class_group
+
+
     before_filter :load_before_show, :only => :show
-    before_filter :class_group,  :only => [:destroy, :show]
     before_filter :count, :only => [:create, :destroy, :index]
 
     def index
@@ -21,13 +21,6 @@ module Gaku
 
     private
 
-      def class_group
-        @class_group = ClassGroup.find(params[:id])
-      end
-
-      def load_before_index
-        @class_group = ClassGroup.new
-      end
 
       def load_before_show
         @notable = ClassGroup.find(params[:id])
