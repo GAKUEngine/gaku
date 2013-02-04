@@ -47,13 +47,13 @@ module Gaku
               total += row[idx[kyoka]]
             end
 
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => name, :grade => total)
+            naishin = SimpleGrade.create!(:student_id  => student.id, :name => name, :grade => total)
             naishin.save
             record.simple_grades << naishin
           end
           
           kyoka9.each do |kyoka|
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
+            naishin = SimpleGrade.create!(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
             naishin.save
             logger.info "志願者「" + student.surname + "　" + student.name + "」に" + kyoka + "の点数" + naishin.grade.to_s + "を登録しました。"
             record.simple_grades << naishin
