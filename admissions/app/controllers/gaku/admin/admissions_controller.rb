@@ -42,18 +42,7 @@ module Gaku
         end
 
         if params[:admit_students]
-          # admit students
-
-          @state_students.each  do |student|
-            admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
-            admission = student.admission
-            admission.admitted = true
-            admission.save
-            student.admitted = admission_date
-            student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
-            student.save
-          end
-          render 'admit_student'
+          admit_students(@state_students)
         else
           @state = AdmissionPhaseState.find(params[:state_id])
 
@@ -67,14 +56,12 @@ module Gaku
             @admission_method = phase.admission_method
 
             if !(@state.id == @admission_record.admission_phase_state_id)
-              # TODO decide how next phase should be chosen and decide for default phase states
               if @state.auto_admit == true
                 admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
                 admission = student.admission
                 admission.admitted = true
                 admission.save
                 student.admitted = admission_date
-                # change student enrollment status
                 student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
                 student.save
 
@@ -93,7 +80,6 @@ module Gaku
               @admission_record.save
             end
           end
-          logger.debug "STUDENT !!! #{EnrollmentStatus.all.inspect}"
           render 'change_student_state'
         end
       end
@@ -313,7 +299,20 @@ module Gaku
             }
             flash.now[:error] = notice.html_safe
           end
-      end
+        end
+        
+        def admit_students(students)
+          students.each  do |student|
+            admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+            admission = student.admission
+            admission.admitted = true
+            admission.save
+            student.admitted = admission_date
+            student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
+            student.save
+          end
+          render 'admit_student'
+        end
     end
   end
 end

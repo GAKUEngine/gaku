@@ -9,6 +9,7 @@ describe 'Admin Admissions' do
   let(:exam) { create(:exam) }
   let(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
+  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
 
   describe 'when select admission period', js: true do
