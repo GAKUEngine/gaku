@@ -24,7 +24,7 @@ module Gaku
 
     #validates :applicant_number, :presence => true, :uniqueness => {:scope => :admission_method_id}
 
-    validates: :applicant_number, :uniqueness => {:scope => [:admission_period_id, :admission_method_id]}
+    validates :applicant_number, :uniqueness => {:scope => [:admission_period_id, :admission_method_id]}
 
 
     def student
