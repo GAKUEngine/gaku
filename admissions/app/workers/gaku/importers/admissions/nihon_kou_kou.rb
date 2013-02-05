@@ -133,6 +133,14 @@ module Gaku
           admission.save          
         end
 
+        def create_applicant(surname, name, surname_reading, name_reading)
+          return Student.create!(:surname => surname,
+                          :name => name,
+                          :surname_reading => surname_reading,
+                          :name_reading => name_reading,
+                          :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
+        end
+
         def 基本入力一行分(row, idx, period_id, method_id)
           ActiveRecord::Base.transaction do
             
@@ -158,6 +166,8 @@ module Gaku
 
             applicant_number = row[idx["受験番号"]]
 
+            logger.info "志願者「" + name_raw + "」[" + applicant_number.to_i.to_s + "]が見つかりました。" 
+
            # if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
            #   duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
            #   if duplicates.length > 0
@@ -168,22 +178,24 @@ module Gaku
 
             #入学時期及び入学形態が引数に含まれてればadmissionレコードを作成
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.first_or_create(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
+              admission = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id).first
+              if !admission.nil?
+                logger.info "[" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "]に入学レコード[" + applicant_number.to_i.to_s + "]が既に登録している為更新対象とします。"
+                student = Student.find(admission.student_id)
+                if student.name != name || student.surname != student.surname
+                  student = create_applicant(surname, name, surname_reading, name_reading)
+                  admission.student_id = student.id
+                  admission.save
+                end
 
-              #ここに生徒が登録されてなければ登録し、既に登録されていれば更新を行う
-              if admission.student_id.nil?
-                student = Student.create!(:surname => surname,
-                                :name => name,
-                                :surname_reading => surname_reading,
-                                :name_reading => name_reading,
-                                :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
-                
-                admission.student_id = student.id
+                logger.info "志願者「" + surname + "　" + name + "」が既に登録されている為情報を更新対象とします。"
+              else
+                student = create_applicant(surname, name, surname_reading, name_reading)
+
+                admission = Admission.create!(:applicant_number => applicant_number, :student_id => student.id,
+                                              :admission_period_id => period_id, :admission_method_id => method_id)
 
                 logger.info "志願者「" + surname + "　" + name + "」が未登録でした。"
-              else
-                student = Student.find(admission.student_id)
-                logger.info "志願者「" + surname + "　" + name + "」が既に登録されている為情報を更新対象とします。"
               end
 
               if admission.save
