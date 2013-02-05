@@ -7,15 +7,48 @@
   <% @admission_method.admission_phases.each_with_index do |phase, index| %>
   <Worksheet ss:Name="<%= phase.name.to_s %>">
     <Table>
+      
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_periods.name") + " : " + @admission_period.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_methods.singular") + " : " + @admission_method.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_phases.singular") + " : " + phase.name.to_s %></Data></Cell>
+      </Row>
+      <Row></Row>
+      <Row></Row>
     <% phase.admission_phase_states.each do |state| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= state.name.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("admission_phase_states.singular") + " : " + state.name.to_s %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">志願者番号</Data></Cell>
+        <Cell><Data ss:Type="String">志願者氏名（カナ氏名）</Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
+      <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
+        <Cell><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+      <% end %>
+        <Cell><Data ss:Type="String">欠席数（２年）</Data></Cell>
+        <Cell><Data ss:Type="String">欠席数（３年）</Data></Cell>
       </Row>
       <% @state_records.each do |record| %>
         <% if record.admission_phase == phase && record.admission_phase_state == state %>
       <Row>
-        <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= record.admission.student.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= record.admission.applicant_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Gaku::School.find_by_id(record.admission.student.external_school_records[0].school_id).name %></Data></Cell>
+          <% record.admission.specialty_applications.each do |specialty_application|  %>
+        <Cell><Data ss:Type="String"><%= specialty_application.name %></Data></Cell>
+          <% end %>
+          <% record.admission.student.simple_grades.each do |simple_grade| %>
+        <Cell><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
+          <% end %>
+          <% absences = JSON.parse(record.admission.student.external_school_records[0].data) %>
+          <% absences.each do |absence, val| %>
+        <Cell><Data ss:Type="Number"><%= val %></Data></Cell>
+          <% end %>
       </Row>
         <% end %>
       <% end %>

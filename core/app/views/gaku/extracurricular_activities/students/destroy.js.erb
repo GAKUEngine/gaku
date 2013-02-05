@@ -1,0 +1,3 @@
+showNotice("<%= render_flash %>");
+$('#extracurricular-activity-enrollments-tab-link').html('<%= print_count(@extracurricular_activity.extracurricular_activity_enrollments.count, t_extracurricular_activity_enrollment_list) %>');
+$('.extracurricular-activity-enrollments-count').html('<%= print_count(@extracurricular_activity.extracurricular_activity_enrollments.count, t_extracurricular_activity_enrollment_list) %>');

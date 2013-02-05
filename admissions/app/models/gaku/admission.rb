@@ -27,6 +27,6 @@ module Gaku
     def student
       Student.unscoped{ super }
     end
-
+    
   end
 end

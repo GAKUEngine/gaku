@@ -9,6 +9,9 @@ module Gaku
     has_many :class_group_enrollments
     has_many :class_groups, :through => :class_group_enrollments
 
+    has_many :extracurricular_activity_enrollments
+    has_many :extracurricular_activities, :through => :extracurricular_activity_enrollments
+
     has_many :student_specialties
     has_many :specialties, :through => :student_specialties
 

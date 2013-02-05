@@ -7,7 +7,6 @@ module Gaku
         include SheetHelper
         require 'roo'
 
-
         def perform(file_path, period_id, method_id)
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
@@ -47,13 +46,15 @@ module Gaku
               total += row[idx[kyoka]]
             end
 
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => name, :grade => total)
+            naishin = SimpleGrade.first_or_create(:student_id  => student.id, :name => name)
+            naishin.grade = total
             naishin.save
             record.simple_grades << naishin
           end
           
           kyoka9.each do |kyoka|
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
+            naishin = SimpleGrade.first_or_create(:student_id  => student.id, :name => kyoka)
+            naishin.grade = row[idx[kyoka]]
             naishin.save
             logger.info "志願者「" + student.surname + "　" + student.name + "」に" + kyoka + "の点数" + naishin.grade.to_s + "を登録しました。"
             record.simple_grades << naishin
@@ -64,8 +65,26 @@ module Gaku
           内申点合計計算(kyoka3, "３教科", student, record, row, idx)
         end
 
+        def 中学校検索(code, name)
+          school = School.where(:code => code).first
+          if school.nil?
+            school = School.where(:name => name).first
+            if school.nil?
+              logger.info "学校「" + name + "」[" + code + "]の登録が無かった為仮に作成しました。"
+              school = School.create!(:code => code, :name => name)
+            end
+          end
+
+          return school
+        end
+
         def 中学校度の内容登録(student, row, idx)
+          school = 中学校検索(row[idx["中学校コード"]], row[idx["中学校名"]])
+          record = ExternalSchoolRecord.where(:student_id => student.id, :school_id => school.id).first
+          if record.nil?
+            logger.info "志願者「" + student.surname + "　" + student.name + "」の中学校情報「" + school.name + "[" + school.code + "]」を登録します。"
             record = ExternalSchoolRecord.new
+            record.school = school
             record.data = ""
             record.student_id = student.id
             year_2_absences = row[idx["２年欠席"]].to_i
@@ -74,8 +93,9 @@ module Gaku
             record.data << {:year_2_absences => year_2_absences, :year_3_absences => year_3_absences}.to_json
             record.save
             logger.info "志願者「" + student.surname + "　" + student.name + "」の中学情報を登録しました。"
+          end
 
-            内申点登録(student, record, row, idx)
+          内申点登録(student, record, row, idx)
         end
 
         def 志望学科登録(admission, row, idx)
@@ -148,7 +168,7 @@ module Gaku
 
             #入学時期及び入学形態が引数に含まれてればadmissionレコードを作成
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.find_or_create_by_applicant_number(applicant_number)
+              admission = Admission.first_or_create(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
 
               #ここに生徒が登録されてなければ登録し、既に登録されていれば更新を行う
               if admission.student_id.nil?
@@ -157,17 +177,14 @@ module Gaku
                                 :surname_reading => surname_reading,
                                 :name_reading => name_reading,
                                 :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
+                
+                admission.student_id = student.id
 
                 logger.info "志願者「" + surname + "　" + name + "」が未登録でした。"
               else
                 student = Student.find(admission.student_id)
                 logger.info "志願者「" + surname + "　" + name + "」が既に登録されている為情報を更新対象とします。"
               end
-
-
-              admission.student_id = student.id
-              admission.admission_period_id = period_id
-              admission.admission_method_id = method_id
 
               if admission.save
                 admission_method = admission.admission_method

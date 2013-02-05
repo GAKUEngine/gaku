@@ -25,7 +25,10 @@ module Gaku
       end
 
       def index
-
+        respond_to do |format|
+          format.html
+          format.xls
+        end
       end
 
       def listing_admissions
