@@ -1,5 +1,7 @@
 module Gaku
-  module Enrollments
+  module EnrollmentsController
+
+    include Core::ClassNameDetector
 
     def enroll_students
       params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
@@ -8,7 +10,7 @@ module Gaku
 
       params[:selected_students].each do |student|
         student_id = student.split("-")[1].to_i
-        enrollment = enrollment_class_name.constantize.new(enrollment_param => params[enrollment_param], :student_id => student_id)
+        enrollment = class_name.constantize.new(enrollment_param => params[enrollment_param], :student_id => student_id)
         if  enrollment.save
           @enrollments << enrollment
         else
@@ -23,35 +25,34 @@ module Gaku
         flash_success @enrollments
       end
 
-      if params[:source] == class_name_underscored.pluralize
-        @extracurricular_activity = class_name.constantize.find(params[enrollment_param])
-        @count = @extracurricular_activity.extracurricular_activity_enrollments.count
-        render 'gaku/extracurricular_activities/students/enroll_students'
-      else
-        flash.now[:notice] = notice.html_safe
-        render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
+      if params[:source] == class_name_underscored_plural
+        @resource = class_name_minus_enrollment.constantize.find(params[enrollment_param])
+        @count = @resource.enrollments.count
+        if class_name_underscored_plural == 'courses'
+          render "gaku/#{class_name_underscored_plural}/enrollments/students/enroll_students"
+        else
+          render "gaku/#{class_name_underscored_plural}/students/enroll_students"
+        end
+      #else
+      #  flash.now[:notice] = notice.html_safe
+      #  render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
       end
     end
 
+
+    def autocomplete_filtered_students
+      @enrolled_students = class_name.constantize.where(enrollment_param => params[enrollment_param]).pluck(:student_id)
+
+      if @enrolled_students.blank?
+        @students = Student.where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%")
+      else
+        @students = Student.where('id not in (?)) and ((surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?)', @enrolled_students ,"%#{params[:term]}%", "%#{params[:term]}%" )
+      end
+
+      render json: @students.as_json
+    end
+
     private
-
-    def enrollment_class_name
-      "Gaku::#{controller_name.classify}"
-    end
-
-    def class_name
-      "Gaku::#{controller_name.classify.split('Enrollment').first}"
-    end
-
-    def class_name_underscored
-      controller_name.classify.split('Enrollment').first.underscore
-    end
-
-    def enrollment_param
-      "#{controller_name.classify.split('Enrollment').first.underscore}_id"
-    end
-
-
 
     def flash_failure(enrollments)
       msg = ""

@@ -1,7 +1,7 @@
 module Gaku
   class ExtracurricularActivity < ActiveRecord::Base
-    has_many :extracurricular_activity_enrollments
-    has_many :students, :through => :extracurricular_activity_enrollments
+    has_many :enrollments, class_name: "Gaku::ExtracurricularActivityEnrollment"
+    has_many :students, :through => :enrollments
 
     attr_accessible :name
 
