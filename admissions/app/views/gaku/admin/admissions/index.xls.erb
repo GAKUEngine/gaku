@@ -26,6 +26,8 @@
       <Row>
         <Cell><Data ss:Type="String">志願者番号</Data></Cell>
         <Cell><Data ss:Type="String">志願者氏名（カナ氏名）</Data></Cell>
+        <Cell><Data ss:Type="String">志望学科１</Data></Cell>
+        <Cell><Data ss:Type="String">志望学科２</Data></Cell>
         <Cell><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
       <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
         <Cell><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
@@ -40,7 +42,7 @@
         <Cell><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
         <Cell><Data ss:Type="String"><%= Gaku::School.find_by_id(record.admission.student.external_school_records[0].school_id).name %></Data></Cell>
           <% record.admission.specialty_applications.each do |specialty_application|  %>
-        <Cell><Data ss:Type="String"><%= specialty_application.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Gaku::Specialty.find(specialty_application.specialty_id) %></Data></Cell>
           <% end %>
           <% record.admission.student.simple_grades.each do |simple_grade| %>
         <Cell><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
