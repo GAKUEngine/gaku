@@ -40,10 +40,10 @@
       <Row>
         <Cell><Data ss:Type="Number"><%= record.admission.applicant_number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
+          <% i = 0; while i < 2 %>
+        <Cell><Data ss:Type="String"><%= Gaku::Specialty.find(record.admission.specialty_applications[i].specialty_id) %></Data></Cell>
+          <% i += 1; end %>
         <Cell><Data ss:Type="String"><%= Gaku::School.find_by_id(record.admission.student.external_school_records[0].school_id).name %></Data></Cell>
-          <% record.admission.specialty_applications.each do |specialty_application|  %>
-        <Cell><Data ss:Type="String"><%= Gaku::Specialty.find(specialty_application.specialty_id) %></Data></Cell>
-          <% end %>
           <% record.admission.student.simple_grades.each do |simple_grade| %>
         <Cell><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
           <% end %>
