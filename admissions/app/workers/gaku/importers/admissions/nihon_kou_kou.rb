@@ -190,7 +190,9 @@ module Gaku
               if !admission.nil?
                 logger.info "[" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "]に入学レコード[" + applicant_number.to_i.to_s + "]が既に登録している為更新対象とします。"
                 student = Student.find(admission.student_id)
-                if student.name != name || student.surname != student.surname
+                if !student.nil? && student.name != name || student.surname != student.surname
+                  logger.info "!*!*![" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "の" + applicant_number.to_i.to_s + "に「" 
+                    + student.surname + "　" + student.name + "」が登録されているがシートデータに「" + surname + "　" + name + "」が登録されてます。上書きします。"
                   student = create_applicant(surname, name, surname_reading, name_reading)
                   admission.student_id = student.id
                   admission.save
@@ -203,10 +205,6 @@ module Gaku
                 admission = Admission.create!(:applicant_number => applicant_number, :student_id => student.id,
                                               :admission_period_id => period_id, :admission_method_id => method_id)
 
-                logger.info "志願者「" + surname + "　" + name + "」が未登録でした。"
-              end
-
-              if admission.save
                 admission_method = admission.admission_method
                 admission_period = AdmissionPeriod.find(period_id)
                 admission_phase = admission_method.admission_phases.first
@@ -215,13 +213,12 @@ module Gaku
                                                       :admission_phase_id => admission_phase.id,
                                                       :admission_phase_state_id => admission_phase_state.id,
                                                       :admission_id => admission.id)
-                
-                admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.find_by_code("applicant").id)
-                
+
                 logger.info "志願者「" + surname + "　" + name + 
                   "[" + surname_reading + "　" + name_reading + "]」を" + admission_period.name + "の" + admission_method.name + "に登録しました。"
-                志望学科登録(admission, row, idx)
               end
+
+              志望学科登録(admission, row, idx)
             else
               #既に存在しているかどうかの判断は名前しかない
               # TODO スコープ内名前重複チェック
