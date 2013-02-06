@@ -63,7 +63,7 @@
   
   <% sheets = ["志願者番号順", "順位順", "志望コース順", "志望別（国際教養科）", "志望別（普通科）"] %>
   <% sheets.each do |sheet| %>
-  <Worksheet>
+  <Worksheet ss:Name="受験結果：<%= sheet %>">
     <Table>
       <Row>
         <Cell><Data ss:Type="String">受験結果：<%= sheet %></Data></Cell>
