@@ -47,7 +47,7 @@
           <% record.admission.student.simple_grades.each do |simple_grade| %>
         <Cell><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
           <% end %>
-          <% absences = JSON.parse(record.admission.student.external_school_records[0].data) %>
+          <% absences = JSON.parse(record.admission.student.external_school_records.last.data) %>
           <% absences.each do |absence, val| %>
         <Cell><Data ss:Type="Number"><%= val %></Data></Cell>
           <% end %>
@@ -60,4 +60,16 @@
     </Table>
   </Worksheet>
   <% end %>
+  
+  <% sheets = ["志願者番号順", "順位順", "志望コース順", "志望別（国際教養科）", "志望別（普通科）"] %>
+  <% sheets.each do |sheet| %>
+  <Worksheet>
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">受験結果：<%= sheet %></Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <% end %>
+  
 </Workbook>
