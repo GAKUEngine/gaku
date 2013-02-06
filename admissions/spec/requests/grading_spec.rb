@@ -4,31 +4,30 @@ describe 'Admin Admissions Grading' do
 
   stub_authorization!
 
-  let(:admission_period_no_methods) { create(:admission_period_no_methods) }
-  let(:admission_period) { create(:admission_period) }
-  let(:exam) { create(:exam) }
-  let(:attendance) { create(:attendance) }
+  let!(:admission_period) { create(:admission_period) }
+  let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
-  let(:admission) { create(:admission) }
+  let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id, is_deleted:false, admitted:false) }
   
 
   before do
-    admission
-    admission_period
-    attendance
-    @exam_phase = admission_period.admission_methods.first.admission_phases.first
-    admission_period.reload
+    @admission = create(:admission, 
+                          admission_period_id: admission_period.id,
+                          student_id: student.id)
+    student.admission = @admission
+    student.save!
     visit gaku.admin_admissions_path
   end
 
   context 'grades', js:true do
 
     before do
+      page.should have_content "#{admission_period.name}"
+      page.should have_content "#{admission_period.admission_methods.first.name}"
+      page.should have_content "#{student.name}"
       page.should have_content 'Grade Exam'
       click_on 'Grade Exam'
-      page.should have_content "#{exam.name}"
     end
 
     it 'grades' do
@@ -59,14 +58,13 @@ describe 'Admin Admissions Grading' do
 
   end
   
-  context 'attendance' do
+  context 'attendance', js:true do
 
     before do
       page.has_content?('Grade Exam') 
       click_on 'Grade Exam'
-      page.should have_content "#{exam.name}"
       click '.btn'
-      wait_until_visible '.popover-content'
+      page.should have_css '.popover-content'
       #TODO add some predefined reasons
     end
 

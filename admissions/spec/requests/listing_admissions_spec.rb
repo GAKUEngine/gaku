@@ -4,25 +4,30 @@ describe 'Admin Listing Admissions' do
 
   stub_authorization!
 
-  let(:admission_period_no_methods) { create(:admission_period_no_methods) }
-  let(:admission_period) { create(:admission_period) }
-  let(:exam) { create(:exam) }
-  let(:attendance) { create(:attendance) }
+  let!(:admission_period) { create(:admission_period) }
+  let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
-  let(:admission) { create(:admission) }
+  let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id) }
 
-  context 'list admissions and', js:true do
+  context 'lists admissions and', js:true do
 
     before do
-      student
+      @admission = create(:admission, 
+                          admission_period_id: admission_period.id,
+                          student_id: student.id)
+      student.admission = @admission
+      student.save!
+
+      visit gaku.admin_admissions_path
+
       page.should have_content 'Listing Admissions'
       click_on 'Listing Admissions'
       current_path.should == "/admin/admissions/listing_admissions"
-      page.should have_content 'Admission Candidates List'
-      page.should have_content "#{admission_period.admission_methods.first.name}"
-      page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}"
+      page.has_content? 'Admission Candidates List'
+      page.has_content? "#{admission_period.admission_methods.first.name}"
+      page.has_content? "#{admission_period.admission_methods.first.admission_phases.first.name}"
+      page.should have_content "#{student.name}"
     end
 
     it 'edits admissions' do
