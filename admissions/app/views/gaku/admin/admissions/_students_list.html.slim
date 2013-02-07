@@ -10,6 +10,7 @@
         - if !state.admission_phase.exam.nil?
           = th t(:'exam.exam_score')
         /= th_actions 140
+        = th t(:'students.status')
     tbody
       = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
 

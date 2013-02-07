@@ -39,19 +39,6 @@ module Gaku
       end
     end
 
-
-    def autocomplete_filtered_students
-      @enrolled_students = class_name.constantize.where(enrollment_param => params[enrollment_param]).pluck(:student_id)
-
-      if @enrolled_students.blank?
-        @students = Student.where('(surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?)', "%#{params[:term]}%", "%#{params[:term]}%")
-      else
-        @students = Student.where('id not in (?)) and ((surname || " " || name LIKE ?) OR (name || " " || surname LIKE ?)', @enrolled_students ,"%#{params[:term]}%", "%#{params[:term]}%" )
-      end
-
-      render json: @students.as_json
-    end
-
     private
 
     def flash_failure(enrollments)

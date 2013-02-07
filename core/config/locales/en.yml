@@ -690,6 +690,14 @@ en:
   title: Title
   user:
     info: User info
+    username: Username
+    email: Email
+    password: Password
+    password_confirmation: Confirm Password
+    list: Users list
+    add: Add User
+    edit: Edit User
+    save: Save User
   views:
     pagination:
       first: ! '&laquo; First'
