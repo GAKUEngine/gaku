@@ -50,6 +50,12 @@ module Gaku
         end
       end
 
+      def soft_delete
+        @student = Student.find(params[:id])
+        @student.update_attribute(:is_deleted, true)
+        redirect_to listing_applicants_admin_admissions_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
+      end
+
       protected
 
       def collection

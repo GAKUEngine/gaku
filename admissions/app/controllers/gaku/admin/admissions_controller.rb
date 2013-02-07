@@ -85,7 +85,7 @@ module Gaku
       end
 
       def listing_applicants
-        @search = Student.unscoped.search(params[:q])
+        @search = Student.non_deleted.search(params[:q])
         @students = @search.result
       end
 
