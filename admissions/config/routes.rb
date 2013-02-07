@@ -2,8 +2,9 @@ Gaku::Core::Engine.routes.prepend do
 	namespace :admin do
 		resources :admissions do
       collection do
-        post :change_admission_period
-        post :change_admission_method
+        get :change_admission_period
+        get :change_admission_method
+        get  :change_period_method
         post :change_student_state
         get :student_chooser
         post :create_multiple

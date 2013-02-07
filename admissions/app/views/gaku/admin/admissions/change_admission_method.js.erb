@@ -1,3 +1,5 @@
 $('#admission-phases').html('<%= render_js_partial("phases", {:admission_method => @admission_method}) %>');
 $('#new-admin-admission-link').html('<%= render_js_partial("links", {:admission_method => @admission_method}) %>');
-$('#admissions_links').html('<%= render_js_partial("admissions_links", {:admission_params => @admission_params}) %>')
+$('#admissions_links').html('<%= render_js_partial("admissions_links", {:admission_params => @admission_params}) %>');
+
+history.pushState({ backTag: true }, document.title, '?' + '<%= @admission_method.nil? ? "" : "admission_method_id=" + @admission_method.id.to_s + "&"%>' + 'admission_period_id=<%= @admission_period.id.to_s %>');
