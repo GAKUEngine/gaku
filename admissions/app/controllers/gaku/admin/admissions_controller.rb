@@ -25,6 +25,9 @@ module Gaku
       end
 
       def index
+        puts "@admission_method dayo---"
+        puts @admission_method
+        
         respond_to do |format|
           format.html
           format.xls
