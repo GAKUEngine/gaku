@@ -5,13 +5,14 @@ FactoryGirl.define do
 
   factory :admission_period, :class => Gaku::AdmissionPeriod do
     name 'Regular Admission 2013'
-    after_build do |period|
-      period.period_method_associations << FactoryGirl.build(:period_method_association, 
-                                                            admission_period: period,
-                                                            admission_method: FactoryGirl.build(:admission_method_regular))
-      period.period_method_associations << FactoryGirl.build(:period_method_association,
-                                                            admission_period: period,
-                                                            admission_method: FactoryGirl.build(:admission_method_international))
+    after_create do |period|
+      period.period_method_associations << FactoryGirl.create(:period_method_association, 
+                                                            admission_period_id: period.id,
+                                                            admission_method_id: FactoryGirl.create(:admission_method_regular).id)
+      period.period_method_associations << FactoryGirl.create(:period_method_association,
+                                                            admission_period_id: period.id,
+                                                            admission_method_id: FactoryGirl.create(:admission_method_international).id)
+      period.save!
     end
   end
 

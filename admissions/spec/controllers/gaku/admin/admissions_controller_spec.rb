@@ -175,6 +175,30 @@ describe Gaku::Admin::AdmissionsController do
     end  
   end
 
+  context 'lists applicants' do
+    before do
+      gaku_js_get :listing_applicants
+    end
+
+    it 'is successful' do
+      response.should be_success
+    end
+
+    it "renders the :listing_applicants view" do
+      response.should render_template :listing_applicants
+    end
+
+    it "assigns variables" do
+      assigns(:admission_periods).should_not be_nil
+      assigns(:admission_period).should_not be_nil
+      assigns(:admission_methods).should_not be_nil
+      assigns(:admission_method).should_not be_nil
+      assigns(:search).should_not be_nil
+      assigns(:students).should_not be_nil
+      assigns(:admission_params).should_not be_nil
+    end  
+  end
+
   context 'changes student state' do
      
     context 'when new state is auto progressable but not auto admittable' do
