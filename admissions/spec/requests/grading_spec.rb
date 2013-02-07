@@ -4,7 +4,6 @@ describe 'Admin Admissions Grading' do
 
   stub_authorization!
 
-  let!(:admission_period) { create(:admission_period) }
   let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
@@ -13,7 +12,6 @@ describe 'Admin Admissions Grading' do
 
   before do
     @admission = create(:admission, 
-                          admission_period_id: admission_period.id,
                           student_id: student.id)
     student.admission = @admission
     student.save!
@@ -23,8 +21,8 @@ describe 'Admin Admissions Grading' do
   context 'grades', js:true do
 
     before do
-      page.should have_content "#{admission_period.name}"
-      page.should have_content "#{admission_period.admission_methods.first.name}"
+      page.should have_content "#{@admission.admission_period.name}"
+      page.should have_content "#{@admission.admission_period.admission_methods.first.name}"
       page.should have_content "#{student.name}"
       page.should have_content 'Grade Exam'
       click_on 'Grade Exam'
