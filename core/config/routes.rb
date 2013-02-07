@@ -206,6 +206,7 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :users
 
     namespace :changes do
       resources :students, :controller => 'student_changes'
