@@ -133,5 +133,9 @@ module Gaku
       t(:'user.list')
     end
 
+    def t_role_list
+      t(:'role.list')
+    end
+
   end
 end

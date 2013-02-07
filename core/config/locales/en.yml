@@ -1,4 +1,10 @@
 en:
+  role:
+    list: Roles list
+    add: Add Role
+    name: Name
+    save: Save Role
+    edit: Edit Role
   success:
     enrolled: "Successfully enrolled!"
   failure:
