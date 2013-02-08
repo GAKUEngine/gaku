@@ -4,7 +4,7 @@
 = f.password_field :password_confirmation, :label => t(:'user.password_confirmation')
 
 .roles
+  = hidden_field_tag "user[role_ids][]", nil
   - roles.each do |role|
-    = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+    = check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)
     = role.name
-    = hidden_field_tag "user[role_ids][]", ""
