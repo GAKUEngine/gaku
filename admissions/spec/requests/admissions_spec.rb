@@ -69,6 +69,23 @@ describe 'Admin Admissions' do
           end
         end
 
+        xit 'sets parameters in the url' do
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          current_path.should == "/admin/admissions/admission_period_id=#{admission_period.id}&admission_method_id=#{admission_period.admission_methods.first.id}"
+          page.evaluate_script('window.history.back()')
+          current_path.should == "/admin/admissions"
+        end
+
+        it 'doesn\'t renames listing buttons on changing period' do # this was issue
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
+          end
+        end
+
       end
 
       context 'when change method' do
@@ -104,6 +121,15 @@ describe 'Admin Admissions' do
           within (@active_tab_content) do
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.first.name}"
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
+          end
+        end
+
+        it 'doesn\'t renames listing buttons on changing method', js:true do # this was issue
+          select "#{admission_period.admission_methods.last.name}", from: 'admission_method_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
           end
         end
 
@@ -270,17 +296,7 @@ describe 'Admin Admissions' do
           xit 'exports as CSV' do
           end
         end
-
-        xit 'sets parameters in the url', js:true do
-          current_path.should == "/admin/admissions"
-          expect do
-            select "#{admission_period.name}", from: 'admission_period_id'
-            wait_for_ajax
-          end.to change { current_path }.from("/admin/admissions").to eq("/admin/admissions/admission_period_id=#{admission_period.id}&admission_method_id=#{admission_period.admission_methods.first.id}")
-          page.evaluate_script('window.history.back()')
-          current_path.should == "/admin/admissions"
-        end
-
+        
       end
 
     end
