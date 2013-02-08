@@ -293,7 +293,7 @@ describe 'Admin Admissions' do
             page.should have_content 'Admitted On'
           end
           
-          xit 'exports as CSV' do
+          context 'exports' do
           end
         end
         
