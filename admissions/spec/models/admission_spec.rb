@@ -14,7 +14,7 @@ describe Gaku::Admission do
     it { should have_many :attachments }
     it { should have_many :notes }
 
-    it { should have_one :school_history }
+    it { should have_one :external_school_record }
 
     it { should accept_nested_attributes_for :student }
     it { should accept_nested_attributes_for(:admission_phase_records).allow_destroy(true) }
