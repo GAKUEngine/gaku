@@ -34,11 +34,12 @@
   </Styles>
   
   <% phase = @admission_method.admission_phases.first %>
-  <% sheets = ["志願者番号順", "順位順", "志望コース順", "志望別（国際教養科）", "志望別（普通科）"] %>
+  <%# sheets = ["志願者番号順", "順位順", "志望コース順", "志望別（国際教養科）", "志望別（普通科）"] %>
+  <% sheets = ["志願者番号順"] %>
   <% sheets.each do |sheet| %>
   <Worksheet ss:Name="受験結果：<%= sheet %>">
     <Table>
-      <Column ss:Width="65"/><Column ss:Width="135"/><Column ss:Span="21" ss:Width="70"/>
+      <Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="130"/>
       <Row ss:Height="25">
         <Cell ss:StyleID="h1" ss:MergeAcross="2"><Data ss:Type="String">受験結果：<%= sheet %></Data></Cell>
       </Row>
@@ -46,7 +47,7 @@
       <Row></Row>
     
       <Row ss:Height="25">
-        <Cell ss:Index="4" ss:MergeAcross="2" ss:StyleID="s1"><Data ss:Type="String">試験</Data></Cell>
+        <Cell ss:Index="4" ss:MergeAcross="3" ss:StyleID="s1"><Data ss:Type="String">試験</Data></Cell>
         <Cell ss:MergeAcross="11" ss:StyleID="s1"><Data ss:Type="String">内申点</Data></Cell>
       </Row>
       
@@ -54,11 +55,13 @@
       <Row ss:Height="25">
         <Cell ss:StyleID="s1"><Data ss:Type="String">志願者番号</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">志願者氏名（カナ氏名）</Data></Cell>
+        
         <Cell ss:StyleID="s1"><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
         
+        <Cell ss:StyleID="s1"><Data ss:Type="String">素点合計</Data></Cell>
     <% eps = phase.exam.exam_portions %>
     <% eps.each do |ep| %>
-      <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
     <% end %>
         
     <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
@@ -83,6 +86,12 @@
         <Cell ss:StyleID="s2"><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
 
         <Cell ss:StyleID="s2"><Data ss:Type="String"><%= record.admission.student.external_school_records.last.school.name %></Data></Cell>
+        
+        <% total_score = 0 %>
+        <% eps.each do |ep| %>
+          <% total_score += ep.exam_portion_scores[index].score %>
+        <% end %>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= total_score %></Data></Cell>
         
         <% eps.each do |ep| %>
         <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= ep.exam_portion_scores[index].score %></Data></Cell>
@@ -109,7 +118,6 @@
     </Table>
   </Worksheet>
   <% end %>
-  
   
   
   <% @admission_method.admission_phases.each_with_index do |phase, index| %>

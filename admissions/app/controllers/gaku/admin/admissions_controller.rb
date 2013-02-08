@@ -27,7 +27,7 @@ module Gaku
       def index
         puts "@admission_method dayo---"
         puts @admission_method
-        
+        puts @student_total_scores
         respond_to do |format|
           format.html
           format.xls
