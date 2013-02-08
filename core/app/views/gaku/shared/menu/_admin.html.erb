@@ -37,6 +37,16 @@
       </ul>
     </li>
 
+    <li class="dropdown-submenu" data-hook="users_and_roles_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.users.users_and_roles') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="users"><%= link_to t('menu.admin.users.users'), admin_users_path %></li>
+        <li data-hook="roles">
+          <%= link_to t('menu.admin.users.roles'), admin_roles_path %>
+        </li>
+      </ul>
+    </li>
+
     <li class="dropdown-submenu" data-hook="presets_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.preset.plural') %></a>
       <ul class="dropdown-menu">

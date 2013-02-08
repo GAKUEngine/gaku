@@ -480,6 +480,10 @@ en:
         student_addresses: Student Addresses
         student_contacts: Student Contacts
         students: Students
+      users:
+        users_and_roles: Users & Roles
+        users: Users
+        roles: Roles
       disposals:
         student: Student Disposals
         attachment: Attachment Disposals
