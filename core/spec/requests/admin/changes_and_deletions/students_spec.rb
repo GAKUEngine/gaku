@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'Student Changes' do
 
+  as_admin
+
   let!(:student) { create(:student) }
   let(:scholarship_status) { create(:scholarship_status) }
   let(:enrollment_status) { create(:enrollment_status_admitted) }

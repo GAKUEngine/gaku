@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Attendance Types' do
 
-  stub_authorization!
+  as_admin
 
   let(:attendance_type) { create(:attendance_type, :name => 'metro') }
 

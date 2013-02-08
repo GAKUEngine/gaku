@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe 'Admin Roles' do
 
-  stub_authorization!
+  as_admin
 
   let(:user) { create(:user) }
-  let(:admin_role) { create(:role, :name => 'admin') }
+  let(:principal_role) { create(:role, :name => 'principal') }
   let(:teacher_role) { create(:role, :name => 'teacher') }
 
   before :all do
@@ -14,7 +14,7 @@ describe 'Admin Roles' do
 
   context 'new', :js => true do
     before do
-      admin_role
+      principal_role
       teacher_role
       visit gaku.admin_users_path
       click new_link
@@ -34,7 +34,7 @@ describe 'Admin Roles' do
 
       page.should have_content 'Susumu Yokota'
       page.should have_content 'susumu@example.com'
-      within(count_div) { page.should have_content 'Users list(1)' }
+      within(count_div) { page.should have_content 'Users list(2)' }
       flash_created?
     end
 
@@ -88,13 +88,13 @@ describe 'Admin Roles' do
 
     it 'deletes', :js => true do
       page.should have_content user.username
-      within(count_div) { page.should have_content 'Users list(1)' }
+      within(count_div) { page.should have_content 'Users list(2)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::User, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Users list(1)' }
+      within(count_div) { page.should_not have_content 'Users list(2)' }
       page.should_not have_content user.username
       flash_destroyed?
     end

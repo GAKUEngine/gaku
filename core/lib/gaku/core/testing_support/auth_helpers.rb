@@ -1,3 +1,6 @@
+require 'spec_helper'
+include Warden::Test::Helpers
+
 module Gaku
   module Core
     module TestingSupport
@@ -26,6 +29,14 @@ module Gaku
             end
           end
 
+          def as_admin
+            before(:each) do
+              user = FactoryGirl.create(:admin)
+              login_as user, scope: :user
+            end
+          end
+
+
           def stub_authorization!
             before(:all) { Ability.register_ability(AuthHelpers::Request::SuperAbility) }
             after(:all) { Ability.remove_ability(AuthHelpers::Request::SuperAbility) }
@@ -37,7 +48,7 @@ module Gaku
             fill_in "user_password", :with => 'secret'
             click_button "sign_in"
           end
-          
+
         end
       end
     end

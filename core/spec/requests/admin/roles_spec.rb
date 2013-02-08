@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Roles' do
 
-  stub_authorization!
+  as_admin
 
   let(:role) { create(:role, :name => 'teacher') }
 
@@ -12,6 +12,7 @@ describe 'Admin Roles' do
 
   context 'new', :js => true do
     before do
+      #admin
       visit gaku.admin_roles_path
       click new_link
       wait_until_visible submit
@@ -25,7 +26,7 @@ describe 'Admin Roles' do
       end.to change(Gaku::Role, :count).by 1
 
       page.should have_content 'master admin'
-      within(count_div) { page.should have_content 'Roles list(1)' }
+      within(count_div) { page.should have_content 'Roles list(2)' }
       flash_created?
     end
 
@@ -77,13 +78,13 @@ describe 'Admin Roles' do
 
     it 'deletes', :js => true do
       page.should have_content role.name
-      within(count_div) { page.should have_content 'Roles list(1)' }
+      within(count_div) { page.should have_content 'Roles list(2)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::Role, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Roles list(1)' }
+      within(count_div) { page.should_not have_content 'Roles list(2)' }
       page.should_not have_content role.name
       flash_destroyed?
     end

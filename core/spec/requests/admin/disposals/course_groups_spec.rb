@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Course Groups' do
 
-  stub_authorization!
+  as_admin
 
   let(:course_group) { create(:course_group, is_deleted:true) }
 
@@ -13,7 +13,7 @@ describe 'Admin Disposals Course Groups' do
 
   context 'no deleted course groups' do
     before do
-      
+
     end
     it 'shows empty table' do
       within(table) do

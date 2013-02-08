@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Attachments' do
 
-  stub_authorization!
+  as_admin
 
   let(:attachment) { create(:attachment, :is_deleted => 1) }
 
