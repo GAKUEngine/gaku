@@ -32,6 +32,14 @@ module Gaku
       end
     end
 
+    def has_role?(role_sym)
+      roles.any? { |r| r.name.underscore.to_sym == role_sym }
+    end
+
+    def role?(role)
+      return !!self.roles.find_by_name(role.to_s.camelize)
+    end
+
     private
 
     def default_language

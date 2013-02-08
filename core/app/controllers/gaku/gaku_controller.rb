@@ -13,6 +13,10 @@ module Gaku
       user_signed_in? ? current_user : 'Public user'  # or whatever
     end
 
+    def current_ability
+      @current_ability ||= Ability.new(current_user)
+    end
+
     private
 
       def resolve_layout

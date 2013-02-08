@@ -33,12 +33,28 @@ class Ability
 
     user ||= User.new
 
-    can :manage, :all
-    
-    #include any abilities registered by extensions, etc.
-    Ability.abilities.each do |clazz|
-      ability = clazz.send(:new, user)
-      @rules = rules + ability.send(:rules)
+    if user.role? :admin
+      can :manage, :all
+    else
+      #can :read, :all
+      #can :create, Comment
+      #can :update, Comment do |comment|
+      #  comment.try(:user) == user || user.role?(:moderator)
+      #end
+      #if user.role?(:author)
+      #  can :create, Article
+      #  can :update, Article do |article|
+      #    article.try(:user) == user
+      #  end
+      #end
     end
+
+    #can :manage, :all
+
+    #include any abilities registered by extensions, etc.
+    #Ability.abilities.each do |clazz|
+    #  ability = clazz.send(:new, user)
+    #  @rules = rules + ability.send(:rules)
+    #end
   end
 end
