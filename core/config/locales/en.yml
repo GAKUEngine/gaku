@@ -489,6 +489,7 @@ en:
           grading: Grading Preset
           locale: Locale Preset
           student: Student Preset
+          defaults: Defaults Preset
         plural: Presets
         save: Save
         singular: Preset
