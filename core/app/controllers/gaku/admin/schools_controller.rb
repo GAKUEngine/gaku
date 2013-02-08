@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class SchoolsController < Admin::BaseController
 
+      load_and_authorize_resource :class =>  Gaku::School
+
       inherit_resources
       respond_to :js, :html
 
