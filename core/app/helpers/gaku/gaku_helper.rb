@@ -67,6 +67,10 @@ module Gaku
       Gaku::School.all.collect { |s| [s.name, s.id] }
     end
 
+    def roles
+      Gaku::Role.all
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end

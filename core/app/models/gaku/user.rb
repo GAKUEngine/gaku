@@ -16,7 +16,8 @@ module Gaku
     #ActiveRecord::Store accessors can be validated as other model attributes
     # validates :language, :numericality => true
 
-    attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :locale
+    attr_accessible :login, :username, :email, :password, :password_confirmation,
+                    :remember_me, :locale, :role_ids
 
     before_create :default_language
 

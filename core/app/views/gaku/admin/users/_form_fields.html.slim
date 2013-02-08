@@ -2,3 +2,9 @@
 = f.text_field :email, :label => t(:'user.email')
 = f.password_field :password, :label => t(:'user.password')
 = f.password_field :password_confirmation, :label => t(:'user.password_confirmation')
+
+.roles
+  - roles.each do |role|
+    = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+    = role.name
+    = hidden_field_tag "user[role_ids][]", ""
