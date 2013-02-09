@@ -1,5 +1,8 @@
 module Gaku
   class ExtracurricularActivities::StudentsController < GakuController
+
+    authorize_resource :class => false
+
     inherit_resources
     actions :index, :show, :create, :update, :edit, :delete
 
