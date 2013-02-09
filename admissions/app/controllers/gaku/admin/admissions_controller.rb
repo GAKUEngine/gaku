@@ -57,8 +57,8 @@ module Gaku
               if @next_state.auto_admit == true
                 student.admission.admit(student)
               elsif @next_state.auto_progress == true
-                @next_phase = AdmissionPhase.find_next_phase(phase)
-                @new_state = @next_phase.admission_phase_states.first
+                next_phase = AdmissionPhase.find_next_phase(phase)
+                @new_state = next_phase.admission_phase_states.first
                 student.admission.progress_to_next_phase(phase)
               end
               @admission_record.admission_phase_state_id = @next_state.id
