@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Notes' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student) }
   let(:note) { create(:note, :notable => student) }

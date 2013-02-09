@@ -1,6 +1,10 @@
 module Gaku
   class Students::Guardians::ContactsController < GakuController
 
+    load_and_authorize_resource :student, :class => Gaku::Student
+    load_and_authorize_resource :guardian, :through => :student, :class => Gaku::Guardian
+    load_and_authorize_resource :contact, :through => :guardian, :class => Gaku::Contact
+
   	inherit_resources
     belongs_to :guardian, :parent_class => Gaku::Guardian
 

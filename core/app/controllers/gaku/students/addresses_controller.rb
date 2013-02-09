@@ -1,5 +1,9 @@
 module Gaku
   class Students::AddressesController < GakuController
+
+    load_and_authorize_resource :student
+    load_and_authorize_resource :address, :through => :student, :class => Gaku::Address
+
     inherit_resources
     belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html

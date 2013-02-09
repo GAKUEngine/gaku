@@ -1,6 +1,10 @@
 module Gaku
   class Students::StudentSpecialtiesController < GakuController
 
+    #load_and_authorize_resource :student, :class => Gaku::Student
+    #load_and_authorize_resource :specialty, :through => :student, :class => Gaku::Specialty
+    skip_authorization_check
+
     inherit_resources
     belongs_to :student
     respond_to :js, :html

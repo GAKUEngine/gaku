@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Simple Grade' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }

@@ -1,6 +1,9 @@
 module Gaku
   class Students::GuardiansController < GakuController
 
+    load_and_authorize_resource :student, :class => Gaku::Student
+    load_and_authorize_resource :guardian, :through => :student, :class => Gaku::Guardian
+
     inherit_resources
     #belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html

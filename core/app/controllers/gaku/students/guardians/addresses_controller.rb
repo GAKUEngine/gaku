@@ -1,6 +1,10 @@
 module Gaku
   class Students::Guardians::AddressesController < GakuController
 
+    load_and_authorize_resource :student, :class => Gaku::Student
+    load_and_authorize_resource :guardian, :through => :student, :class => Gaku::Guardian
+    load_and_authorize_resource :address, :through => :guardian, :class => Gaku::Address
+
     inherit_resources
     actions :new, :create, :edit, :update
     respond_to :js, :html

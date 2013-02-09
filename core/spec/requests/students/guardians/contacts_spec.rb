@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Guardian Contacts' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }

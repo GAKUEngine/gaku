@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "Student Images" do
 
-  stub_authorization!
-  
+  as_admin
+
   let(:student) { create(:student) }
-  
-  before do 
+
+  before do
     visit gaku.student_path(student)
   end
 
@@ -19,5 +19,5 @@ describe "Student Images" do
       flash? "successfully uploaded"
     end
   end
-  
+
 end

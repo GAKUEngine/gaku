@@ -37,7 +37,14 @@ module Gaku
       if user.role? :admin
         can :manage, :all
       else
-        can :manage, Gaku::Student
+        if user.role? :student
+          can :index, Gaku::Student
+        else
+          can :manage, Gaku::Student
+          can :manage, Gaku::Address
+          can :manage, Gaku::Contact
+          can :manage, Gaku::Note
+        end
         #can :read, :all
         #can :create, Comment
         #can :update, Comment do |comment|
