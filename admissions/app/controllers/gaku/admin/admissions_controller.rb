@@ -10,22 +10,21 @@ module Gaku
       helper_method :sort_column, :sort_direction
 
       before_filter :load_period_method
-      before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :change_period_method]
-      before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :change_period_method, :create, :create_multiple, :change_student_state]
-      #before_filter :load_search_object
-      before_filter :select_vars, :only => [:new]
-      before_filter :load_state_students, only: :change_student_state
+      before_filter :load_before_index, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method, 
+                                                  :change_period_method]
+      before_filter :load_state_records, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method, 
+                                                  :change_period_method, :create, :create_multiple, :change_student_state]
+      before_filter :select_vars, only: [:new]
+      before_filter :load_state_students, only: [:change_student_state]
+      before_filter :load_selected_students, only: [:student_chooser, :create_multiple]
 
       def change_admission_period
-        #raise request.query_parameters.inspect
       end
 
       def change_admission_method
-        #raise request.query_parameters.inspect
       end
 
       def change_period_method
-
       end
 
       def index
@@ -81,9 +80,7 @@ module Gaku
         if @admission.save
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
-          # TODO change the selected phase
           admission_phase = @admission_method.admission_phases.first
-          # TODO change the selected phase state
           @admission_phase_state = admission_phase.admission_phase_states.first
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
@@ -103,11 +100,8 @@ module Gaku
         @admissions = Admission.all
 
         @enrolled_students = Admission.where(:admission_period_id => params[:admission_period_id], :admission_method_id => params[:admission_method_id]).map {|i| i.student_id.to_s }
-        #@enrolled_students += Student.where("enrollment_status_id != ?", 1).map {|i| i.id.to_s }
 
-        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
-        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        @method_admissions = Admission.where(admission_method_id: @admission_method.id)
         @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
 
         respond_to do |format|
@@ -116,13 +110,12 @@ module Gaku
       end
 
       def create_multiple
-        params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
         @err_enrollments = []
         @enrollments = []
         @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
         @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-        params[:selected_students].each { |student|
+        @selected_students.each { |student|
           student_id = student.split("-")[1].to_i
           admission = Admission.new( admission_period_id: @admission_period.id,
                                       admission_method_id: @admission_method.id,
@@ -190,15 +183,19 @@ module Gaku
           @courses = Course.all
         end
 
-        def load_search_object
-          @search = Student.search(params[:q])
-        end
-
         def load_state_students
           @state_students = []
 
           params[:student_ids].each do |id|
             @state_students << Student.unscoped.find(id)
+          end
+        end
+
+        def load_selected_students
+          if params[:selected_students].nil? 
+            @selected_students = [] 
+          else
+            @selected_students = params[:selected_students]
           end
         end
 
@@ -273,11 +270,11 @@ module Gaku
         def show_flashes(admissions, err_admissions)
           notice = ""
           unless admissions.empty?
-            admissions.each {|admission|
+            admissions.each do |admission|
               student = Student.unscoped.find(admission.student_id)
               #TODO localize the text
               notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
-            }
+            end
             flash.now[:success] = notice.html_safe
           end
           unless err_admissions.empty?
