@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe Gaku::Student do
 
+  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
+  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
+  let!(:student) { create(:student, enrollment_status_id:2) }
+  
   context "validations" do
-    let(:student) { stub_model(Gaku::Student) }
-
+    
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
 
@@ -64,7 +67,20 @@ describe Gaku::Student do
   end
 
   context 'methods' do
-    xit 'enrollment_status'
+
+    context 'enrollment_status' do
+
+      before do
+        @student = student
+      end
+
+      it 'makes the student applicant' do
+        @student.make_applicant
+        #@student.save
+        expect(@student.enrollment_status.code).to eq 'applicant'
+      end
+
+    end
     xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'

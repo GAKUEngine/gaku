@@ -76,5 +76,14 @@ module Gaku
       pa.blank? ? nil : pa.city
     end
 
+    def make_applicant
+      update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
+                                                                    code:"applicant", 
+                                                                    name:"Applicant", 
+                                                                    is_active:false, 
+                                                                    immutable:true).first_or_create!.id)
+      save
+    end
+
   end
 end

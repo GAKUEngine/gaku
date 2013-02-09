@@ -110,7 +110,7 @@ module Gaku
                                                 :admission_phase_state_id => @admission_phase_state.id,
                                                 :admission_id => @admission.id)
 
-          @admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
+          @admission.change_student_to_applicant
           render 'create'
         end
       end
@@ -158,9 +158,8 @@ module Gaku
                                         :admission_phase_state_id => @admission_phase_state.id,
                                         :admission_id => admission.id)
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
-            # change student status
-            admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant", name:"Applicant", is_active:false, immutable:true).first_or_create!.id)
-
+            
+            admission.change_student_to_applicant
           else
             @err_enrollments << admission
           end

@@ -28,5 +28,9 @@ module Gaku
       Student.unscoped{ super }
     end
 
+    def change_student_to_applicant
+        student.make_applicant
+    end
+
   end
 end
