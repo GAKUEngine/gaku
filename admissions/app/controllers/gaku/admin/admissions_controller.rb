@@ -14,7 +14,7 @@ module Gaku
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :change_period_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
       before_filter :select_vars, :only => [:new]
-
+      before_filter :load_state_students, only: :change_student_state
 
       def change_admission_period
         #raise request.query_parameters.inspect
@@ -35,12 +35,7 @@ module Gaku
       end
 
       def change_student_state
-        @state_students = []
-
-        params[:student_ids].each do |id|
-          @state_students << Student.unscoped.find(id)
-        end
-
+        
         if params[:admit_students]
           admit_students(@state_students)
         else
@@ -48,7 +43,7 @@ module Gaku
 
           @state_students.each  do |student|
             phase = @next_state.admission_phase
-            @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+            @admission_record = student.admission.find_record_by_phase(phase.id)
             @old_state_id = @admission_record.admission_phase_state_id
 
             @admission_method = phase.admission_method
@@ -197,6 +192,14 @@ module Gaku
 
         def load_search_object
           @search = Student.search(params[:q])
+        end
+
+        def load_state_students
+          @state_students = []
+
+          params[:student_ids].each do |id|
+            @state_students << Student.unscoped.find(id)
+          end
         end
 
         def load_state_records

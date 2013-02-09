@@ -10,7 +10,6 @@ describe Gaku::Admin::AdmissionsController do
   let!(:exam) { create(:exam) }
   let!(:attendance) { create(:attendance) }
   let(:admission_method_regular) { create(:admission_method_regular) }
-  #let(:admission) { create(:admission) }
   
   describe "GET #index" do
     before do
@@ -242,7 +241,6 @@ describe Gaku::Admin::AdmissionsController do
           assigns(:state_students).should_not be_nil
           assigns(:next_state).should_not be_nil
           assigns(:admission_record).should_not be_nil
-          assigns(:next_phase).should_not be_nil
           assigns(:new_state).should_not be_nil
         end
         it 'is successful' do

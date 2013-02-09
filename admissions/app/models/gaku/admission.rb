@@ -55,5 +55,9 @@ module Gaku
       new_admission_record.save
     end
 
+    def find_record_by_phase(phase_id)
+      admission_phase_records.find_by_admission_phase_id(phase_id) 
+    end
+
   end
 end
