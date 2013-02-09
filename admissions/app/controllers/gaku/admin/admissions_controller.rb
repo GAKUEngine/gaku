@@ -47,7 +47,7 @@ module Gaku
 
             @admission_method = phase.admission_method
 
-            unless (@next_state.id == @admission_record.admission_phase_state_id)
+            unless (@next_state.id == @old_state_id)
               if @next_state.auto_admit == true
                 student.admission.admit(student)
               elsif @next_state.auto_progress == true
@@ -200,48 +200,21 @@ module Gaku
         end
 
         def load_state_records
-          #puts "load_state_records kaishi-"
-
           @students = []
           @state_records = AdmissionPhaseRecord.all
-          @state_records.each {|record|
-            total_score = 0
-            student_graded = false
-            phase = record.admission_phase
-            if !phase.exam.nil?
-              phase.exam.exam_portions.each do |exam_portion|
-                portion_score = Gaku::ExamPortionScore.find_by_exam_portion_id_and_student_id(exam_portion.id,  record.admission.student.id)
-                if !portion_score.nil?
-                  student_graded = true
-                  total_score += portion_score.score.to_i
-                end
-              end
-            end
-            if student_graded
-              exam_score = total_score
+          
+          @state_records.each do |record|
+            if record.exam_score != nil
+              exam_score = record.exam_score
             else
               exam_score = t('exams.not_graded')
             end
-
-
-            # 中学校名抽出処理
-
-            #puts "record.admission.student dayo-"
-            #puts record.admission.student.simple_grades
-
-            # if record.admission.student.external_school_record.school_id.nil?
-              # school_name = "中学校が登録されていません"
-            # else
-              # school_name = SchollHistory.find_by_id(record.admission.student.external_school_record.school_id)
-            # end
-
-
             @students << {
               :state_id => record.admission_phase_state_id,
               :student => record.admission.student,
               :exam_score => exam_score
             }
-          }
+          end
         end
 
         def select_vars
@@ -278,11 +251,11 @@ module Gaku
             flash.now[:success] = notice.html_safe
           end
           unless err_admissions.empty?
-            err_admissions.each {|admission|
+            err_admissions.each do |admission|
               student = Student.unscoped.find(admission.student_id)
               #TODO localize the text
               notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(", ") + "</span></p>"
-            }
+            end
             flash.now[:error] = notice.html_safe
           end
         end
@@ -292,8 +265,6 @@ module Gaku
             admission = student.admission
             admission.admit(student)
           end
-          #@state_students = students
-          #render 'admit_students'
         end
     end
   end
