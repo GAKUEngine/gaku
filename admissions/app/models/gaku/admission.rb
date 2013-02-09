@@ -29,7 +29,11 @@ module Gaku
     end
 
     def change_student_to_applicant
-        student.make_applicant
+      student.make_applicant
+    end
+
+    def change_applicant_to_student(admission_date)
+      student.make_admitted(admission_date)
     end
 
   end

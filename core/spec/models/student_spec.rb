@@ -76,8 +76,13 @@ describe Gaku::Student do
 
       it 'makes the student applicant' do
         @student.make_applicant
-        #@student.save
         expect(@student.enrollment_status.code).to eq 'applicant'
+      end
+
+      it 'makes the applicant student' do
+        @student.make_admitted(Time.now)
+        expect(@student.enrollment_status.code).to eq 'admitted'
+        expect(@student.admitted).not_to be_nil
       end
 
     end

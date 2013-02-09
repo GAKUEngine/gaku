@@ -61,10 +61,8 @@ module Gaku
                 admission = student.admission
                 admission.admitted = true
                 admission.save
-                student.admitted = admission_date
-                student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
+                student.make_admitted(admission_date)
                 student.save
-
               elsif @state.auto_progress == true
                 @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
                 @new_state = @next_phase.admission_phase_states.first
@@ -158,7 +156,7 @@ module Gaku
                                         :admission_phase_state_id => @admission_phase_state.id,
                                         :admission_id => admission.id)
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
-            
+
             admission.change_student_to_applicant
           else
             @err_enrollments << admission
@@ -306,8 +304,7 @@ module Gaku
             admission = student.admission
             admission.admitted = true
             admission.save
-            student.admitted = admission_date
-            student.enrollment_status_id = Gaku::EnrollmentStatus.where(code:"admitted", name:"Admitted", is_active:true, immutable:true).first_or_create!.id
+            student.make_admitted(admission_date)
             student.save
           end
           render 'admit_student'
