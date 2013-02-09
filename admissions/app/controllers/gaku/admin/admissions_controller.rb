@@ -115,7 +115,7 @@ module Gaku
 
       def student_chooser
         @admission = Admission.new
-        @search = Student.unscoped.where(:enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id).search(params[:q])
+        @search = Student.only_applicants.search(params[:q])
         @students = @search.result
 
         @admissions = Admission.all

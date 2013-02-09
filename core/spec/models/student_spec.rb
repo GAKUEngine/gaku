@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Gaku::Student do
-
-  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
-  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_id:2) }
   
   context "validations" do
     
@@ -69,21 +65,6 @@ describe Gaku::Student do
   context 'methods' do
 
     context 'enrollment_status' do
-
-      before do
-        @student = student
-      end
-
-      it 'makes the student applicant' do
-        @student.make_applicant
-        expect(@student.enrollment_status.code).to eq 'applicant'
-      end
-
-      it 'makes the applicant student' do
-        @student.make_admitted(Time.now)
-        expect(@student.enrollment_status.code).to eq 'admitted'
-        expect(@student.admitted).not_to be_nil
-      end
 
     end
     xit 'to_s'

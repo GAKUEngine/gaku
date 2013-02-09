@@ -53,7 +53,7 @@ describe Gaku::Admission do
       end
 
       it 'changes applicant to student' do
-          @admission.change_applicant_to_student(Time.now)
+          @admission.change_applicant_to_student(Date.today)
           expect(@admission.student.enrollment_status_id).to eq(2)
           expect(@admission.student.admitted).not_to be_nil
       end
