@@ -44,29 +44,24 @@ module Gaku
         if params[:admit_students]
           admit_students(@state_students)
         else
-          @state = AdmissionPhaseState.find(params[:state_id])
+          @next_state = AdmissionPhaseState.find(params[:state_id])
 
           #@student = Student.unscoped.find(params[:student_id])
           @state_students.each  do |student|
-            phase = @state.admission_phase
+            phase = @next_state.admission_phase
             @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
             @old_state_id = @admission_record.admission_phase_state_id
 
             @admission_period = AdmissionPeriod.find(params[:admission_period_id])
             @admission_method = phase.admission_method
 
-            if !(@state.id == @admission_record.admission_phase_state_id)
-              if @state.auto_admit == true
-                admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
-                admission = student.admission
-                admission.admitted = true
-                admission.save
-                student.make_admitted(admission_date)
-                student.save
-              elsif @state.auto_progress == true
+            if !(@next_state.id == @admission_record.admission_phase_state_id)
+              if @next_state.auto_admit == true
+                student.admission.admit(student)
+              elsif @next_state.auto_progress == true
                 @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
                 @new_state = @next_phase.admission_phase_states.first
-                #@admission_record.admission_phase_state = @state
+                #@admission_record.admission_phase_state = @next_state
                 #@admission_record.admission_phase = @next_phase
                 @new_admission_record = AdmissionPhaseRecord.new
                 @new_admission_record.admission = student.admission
@@ -74,7 +69,7 @@ module Gaku
                 @new_admission_record.admission_phase_state = @new_state
                 @new_admission_record.save
               end
-              @admission_record.admission_phase_state_id = @state.id
+              @admission_record.admission_phase_state_id = @next_state.id
               @admission_record.save
             end
           end
@@ -302,14 +297,11 @@ module Gaku
         
         def admit_students(students)
           students.each  do |student|
-            admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
             admission = student.admission
-            admission.admitted = true
-            admission.save
-            student.make_admitted(admission_date)
-            student.save
+            admission.admit(student)
           end
-          render 'admit_student'
+          #@state_students = students
+          #render 'admit_students'
         end
     end
   end

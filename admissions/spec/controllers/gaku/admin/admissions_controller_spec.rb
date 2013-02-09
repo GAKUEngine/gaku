@@ -240,7 +240,7 @@ describe Gaku::Admin::AdmissionsController do
         end
         it "assigns variables" do
           assigns(:state_students).should_not be_nil
-          assigns(:state).should_not be_nil
+          assigns(:next_state).should_not be_nil
           assigns(:admission_record).should_not be_nil
           assigns(:next_phase).should_not be_nil
           assigns(:new_state).should_not be_nil
@@ -294,7 +294,7 @@ describe Gaku::Admin::AdmissionsController do
     
       it "assigns variables" do
         assigns(:state_students).should_not be_nil
-        assigns(:state).should_not be_nil
+        assigns(:next_state).should_not be_nil
         assigns(:admission_record).should_not be_nil
         assigns(:next_phase).should be_nil
         assigns(:new_state).should be_nil

@@ -36,5 +36,13 @@ module Gaku
       student.make_admitted(admission_date)
     end
 
+    def admit(student)
+      admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
+      admission = student.admission
+      admission.admitted = true
+      admission.save
+      student.make_admitted(admission_date)
+    end
+
   end
 end

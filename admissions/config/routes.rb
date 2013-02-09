@@ -8,7 +8,7 @@ Gaku::Core::Engine.routes.prepend do
         post :change_student_state
         get :student_chooser
         post :create_multiple
-        post :admit_student
+        post :admit_students
         get :listing_admissions
         get :listing_applicants
         resources :importer, :controller => "admissions/importer" do
