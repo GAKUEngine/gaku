@@ -7,39 +7,23 @@ module Gaku
       module AuthHelpers
 
         module Controller
-          def stub_authorization!
-            before do
-              controller.should_receive(:authorize!).twice.and_return(true)
+
+          def as_admin
+            before(:each) do
+              @request.env["devise.mapping"] = ::Devise.mappings[:admin]
+              sign_in FactoryGirl.create(:admin) # Using factory girl as an example
             end
           end
 
-          def login_admin
-            @request.env["devise.mapping"] = Devise.mappings[:admin]
-            sign_in create(:admin) # Using factory girl as an example
-          end
         end
 
         module Request
-          class SuperAbility
-            include CanCan::Ability
-
-            def initialize(user)
-              # allow anyone to perform index on Order
-              can :manage, :all
-            end
-          end
 
           def as_admin
             before(:each) do
               user = FactoryGirl.create(:admin)
               login_as user, scope: :user
             end
-          end
-
-
-          def stub_authorization!
-            before(:all) { Ability.register_ability(AuthHelpers::Request::SuperAbility) }
-            after(:all) { Ability.remove_ability(AuthHelpers::Request::SuperAbility) }
           end
 
           def sign_in_as!(user)

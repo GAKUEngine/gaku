@@ -1,6 +1,8 @@
 module Gaku
   class NotesController < GakuController
 
+    load_and_authorize_resource :note, :class => Gaku::Note
+
   	before_filter :notable
     inherit_resources
     respond_to :js, :html

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Students' do
 
-  stub_authorization!
+  as_admin
 
   let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
   let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }

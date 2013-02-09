@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::ClassGroupsController do
 
+  as_admin
+
   let(:class_group) { create(:class_group) }
 
   describe "GET #index" do
@@ -19,10 +21,10 @@ describe Gaku::ClassGroupsController do
       gaku_js_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #show' do
-    
+
     it "is successful" do
       gaku_js_get :show, id: class_group
       response.should be_success
@@ -55,15 +57,15 @@ describe Gaku::ClassGroupsController do
     context "with valid attributes" do
       it "saves the new class group in the db" do
         expect{
-          gaku_js_post :create, class_group: attributes_for(:class_group)  
+          gaku_js_post :create, class_group: attributes_for(:class_group)
         }.to change(Gaku::ClassGroup, :count).by 1
-        
+
       end
     end
     context "with invalid attributes" do
       it "does not save the new class group in the db" do
         expect{
-          gaku_js_post :create, class_group: {name: ''}  
+          gaku_js_post :create, class_group: {name: ''}
         }.to_not change(Gaku::ClassGroup, :count)
       end
     end
@@ -83,7 +85,7 @@ describe Gaku::ClassGroupsController do
 
   describe "PUT #update" do
     it "locates the requested @class_group" do
-      gaku_js_put :update, id: class_group, class_group: attributes_for(:class_group) 
+      gaku_js_put :update, id: class_group, class_group: attributes_for(:class_group)
       assigns(:class_group).should eq(class_group)
     end
 
@@ -96,7 +98,7 @@ describe Gaku::ClassGroupsController do
     end
     context "invalid attributes" do
       it "does not change class group's attributes" do
-        gaku_js_put :update, id: class_group, 
+        gaku_js_put :update, id: class_group,
                               class_group: attributes_for(:class_group, name: "")
         class_group.reload
         class_group.name.should_not eq("")

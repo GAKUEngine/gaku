@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'ClassGroups' do
 
-  stub_authorization!
+  as_admin
+
   let(:class_group){ create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
 
   before :all do
