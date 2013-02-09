@@ -285,6 +285,7 @@ module Gaku
           unless admissions.empty?
             admissions.each {|admission|
               student = Student.unscoped.find(admission.student_id)
+              #TODO localize the text
               notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
             }
             flash.now[:success] = notice.html_safe
@@ -292,6 +293,7 @@ module Gaku
           unless err_admissions.empty?
             err_admissions.each {|admission|
               student = Student.unscoped.find(admission.student_id)
+              #TODO localize the text
               notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(", ") + "</span></p>"
             }
             flash.now[:error] = notice.html_safe
