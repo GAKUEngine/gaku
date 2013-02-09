@@ -9,7 +9,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :new, :student_chooser, :listing_applicants, :change_period_method]
+      before_filter :load_period_method
       before_filter :load_before_index, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :change_period_method]
       before_filter :load_state_records, :only => [:index, :listing_admissions, :change_admission_period, :change_admission_method, :change_period_method, :create, :create_multiple, :change_student_state]
       #before_filter :load_search_object
@@ -46,28 +46,20 @@ module Gaku
         else
           @next_state = AdmissionPhaseState.find(params[:state_id])
 
-          #@student = Student.unscoped.find(params[:student_id])
           @state_students.each  do |student|
             phase = @next_state.admission_phase
             @admission_record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
             @old_state_id = @admission_record.admission_phase_state_id
 
-            @admission_period = AdmissionPeriod.find(params[:admission_period_id])
             @admission_method = phase.admission_method
 
-            if !(@next_state.id == @admission_record.admission_phase_state_id)
+            unless (@next_state.id == @admission_record.admission_phase_state_id)
               if @next_state.auto_admit == true
                 student.admission.admit(student)
               elsif @next_state.auto_progress == true
-                @next_phase = AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+                @next_phase = AdmissionPhase.find_next_phase(phase)
                 @new_state = @next_phase.admission_phase_states.first
-                #@admission_record.admission_phase_state = @next_state
-                #@admission_record.admission_phase = @next_phase
-                @new_admission_record = AdmissionPhaseRecord.new
-                @new_admission_record.admission = student.admission
-                @new_admission_record.admission_phase = @next_phase
-                @new_admission_record.admission_phase_state = @new_state
-                @new_admission_record.save
+                student.admission.progress_to_next_phase(phase)
               end
               @admission_record.admission_phase_state_id = @next_state.id
               @admission_record.save

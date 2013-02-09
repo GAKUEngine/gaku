@@ -244,7 +244,6 @@ describe Gaku::Admin::AdmissionsController do
           assigns(:admission_record).should_not be_nil
           assigns(:next_phase).should_not be_nil
           assigns(:new_state).should_not be_nil
-          assigns(:new_admission_record).should_not be_nil
         end
         it 'is successful' do
           response.should be_success
