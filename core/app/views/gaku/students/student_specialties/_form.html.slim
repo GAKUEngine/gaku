@@ -1,6 +1,5 @@
 = remote_form_for [@student, @student_specialty] do |f|
-  = f.select :specialty_id, specialties, { :prompt => t(:'specialty.choose')}, :label => t(:'specialty.plural')
-  = f.check_box :is_major, :label => t(:'specialty.major')
+  =render 'form_fields', :f => f
   .row-fluid
     .span12
       =submit_button t(:'student_specialty.save') , :id => "submit-student-specialty-button"

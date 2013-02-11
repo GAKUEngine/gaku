@@ -19,7 +19,7 @@ tr id="student-#{student.id}" style="#{ (student.enrollment_status.code == "dele
           = submit_tag t("save")
         //= state.admission_phase.admission_phase_states.count
         - if state.can_admit
-          = form_tag admit_student_admin_admissions_path, :remote => true, :id => "admit-student-form" do
+          = form_tag admit_students_admin_admissions_path, :remote => true, :id => "admit-student-form" do
             = hidden_field_tag :student_id, student.id
             = hidden_field_tag :admission_period_id, @admission_period.id
             = hidden_field_tag :admission_method_id, @admission_method.id
