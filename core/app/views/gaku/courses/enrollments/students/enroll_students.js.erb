@@ -1,11 +1,11 @@
 $("#course-students-index tbody").html('');
 
-<% @course.course_enrollments.each {|enrollment| %>
+<% @resource.enrollments.each do |enrollment| %>
   $('#course-students-index tbody').append('<%= render_js_partial("gaku/courses/enrollments/enrolled", {:enrollment => enrollment.student}) %>');
-<% } %>
+<% end %>
 
-$('#new-course-enrollment-tab-link').html('<%= print_count(@course.students.count, t_student_plural) %>');
-$('.course-students-count').html('<%= print_count(@course.students.count, t_student_list) %>');
+$('#new-course-enrollment-tab-link').html('<%= print_count(@resource.students.count, t_student_plural) %>');
+$('.course-students-count').html('<%= print_count(@resource.students.count, t_student_list) %>');
 
 $('#student-modal').modal('hide');
 showNotice("<%= render_flash %>");

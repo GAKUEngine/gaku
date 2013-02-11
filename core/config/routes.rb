@@ -13,6 +13,18 @@ Gaku::Core::Engine.routes.draw do
     }
   }
 
+  resources :extracurricular_activities do
+    member do
+      get :student_chooser
+    end
+
+    resources :students, :controller => 'extracurricular_activities/students' do
+      collection do
+        post :enroll_student
+      end
+    end
+  end
+
   resources :class_groups do
     member do
       get :student_chooser
@@ -24,8 +36,6 @@ Gaku::Core::Engine.routes.draw do
     resources :students, :controller => 'class_groups/students' do
       collection do
         post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
       end
     end
   end
@@ -63,14 +73,19 @@ Gaku::Core::Engine.routes.draw do
 
   resources :class_group_enrollments do
     collection do
-      get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
   end
 
 
   resources :course_enrollments do
+    collection do
+      post :enroll_students
+    end
+  end
+
+
+  resources :extracurricular_activity_enrollments do
     collection do
       post :enroll_students
     end
