@@ -1,0 +1,14 @@
+.row-fluid.mt-l
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li#extracurricular-activity-students-tab.active
+          a#extracurricular-activity-enrollments-tab-link data-toggle="tab" href="#extracurricular_activity_enrollments"
+            = print_count @extracurricular_activity.enrollments.count, t(:'student.plural')
+      .tab-content
+
+        #exracurricular-activity-enrollments.tab-pane.active
+          .row-fluid#xracurricular-activity-enrollments-list
+            =render 'gaku/extracurricular_activities/students/students'
+          .row-fluid
+            #enrollment-form.hide

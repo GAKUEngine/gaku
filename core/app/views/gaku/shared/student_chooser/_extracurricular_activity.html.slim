@@ -1,0 +1,5 @@
+= form_tag( enroll_students_extracurricular_activity_enrollments_path, :method => "post", :id => "enroll-to-extracurricular-activity-form", :remote => true) do
+  = hidden_field_tag "extracurricular_activity_id", @extracurricular_activity.id
+  = hidden_field_tag "source", "extracurricular_activities"
+  h4 = "Adding students to " + @extracurricular_activity.name
+  = submit_tag t('extracurricular_activity.enroll'), :class => 'btn btn-primary'

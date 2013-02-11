@@ -8,7 +8,7 @@ describe 'Admin Listing Admissions' do
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id) }
-
+  let(:admission_period) { create(:admission_period) }
   context 'lists admissions and', js:true do
 
     before do
@@ -45,6 +45,35 @@ describe 'Admin Listing Admissions' do
       page.should have_content "#{student.name}"
     end
 
+    context 'deletes admission' do
+
+      it 'deletes from index table' do
+        click delete_link
+        accept_alert
+        page.should_not have_content "#{student.name}"
+        visit gaku.listing_admissions_admin_admissions_path
+        page.should_not have_content "#{student.name}"
+        visit gaku.students_admin_disposals_path
+        page.should_not have_content "#{student.name}"
+      end
+
+      it 'deletes from show view' do
+        click '.show-link'
+        current_path.should eq "/admin/students/1"
+        page.should have_content "#{student.name}"
+        click '#delete-student-link'
+        accept_alert
+        page.should have_content "successfully"
+        current_path.should == "/admin/admissions/listing_admissions"
+        page.should_not have_content "#{student.name}"
+        visit gaku.listing_admissions_admin_admissions_path
+        page.should_not have_content "#{student.name}"
+        visit gaku.students_admin_disposals_path
+        page.should_not have_content "#{student.name}"
+      end
+
+    end
+    
     it 'goes to admissions' do
       page.should have_content 'Admissions'
       click_on 'Admissions'
@@ -61,7 +90,39 @@ describe 'Admin Listing Admissions' do
       page.should have_content "#{student.name}"
     end
 
-    xit 'deletes admission' do
+    context 'when make ajax requests' do
+      before do
+        admission_period
+        visit gaku.listing_admissions_admin_admissions_path
+        current_path.should == "/admin/admissions/listing_admissions"
+        within('#admissions_links') do
+          page.should have_content 'Applicants List'
+          page.should_not have_content 'Listing Admissions'
+          page.should have_content 'Admissions'
+        end
+      end
+
+      it 'doesn\'t renames listing buttons on changing period', js:true do # this was issue
+        select "#{admission_period.name}", from: 'admission_period_id'
+        wait_for_ajax
+        within('#admissions_links') do
+          page.should have_content 'Applicants List'
+          page.should_not have_content 'Listing Admissions'
+          page.should have_content 'Admissions'
+        end
+      end
+
+      it 'doesn\'t renames listing buttons on changing method', js:true do # this was issue
+        select "#{admission_period.admission_methods.last.name}", from: 'admission_method_id'
+        wait_for_ajax
+        within('#admissions_links') do
+          page.should have_content 'Applicants List'
+          page.should_not have_content 'Listing Admissions'
+          page.should have_content 'Admissions'
+
+        end
+      end
+
     end
 
   end

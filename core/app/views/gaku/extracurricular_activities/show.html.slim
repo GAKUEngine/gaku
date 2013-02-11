@@ -1,0 +1,18 @@
+= content_for :show_header do
+  = t(:'extracurricular_activity.show')
+
+= well_div do
+  = table do
+    thead
+      tr
+        th = t(:'extracurricular_activity.name')
+
+    tbody
+      tr class="extracurricular-activity-#{@extracurricular_activity.id}"
+        = render 'fields', :extracurricular_activity => @extracurricular_activity
+
+= render 'tabs'
+
+= well_div do
+  = link_to_edit_with_text [:edit, @extracurricular_activity], :remote => true
+  = link_to_back extracurricular_activities_path, :id => 'back-extracurricular-activity-link'

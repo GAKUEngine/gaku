@@ -69,6 +69,23 @@ describe 'Admin Admissions' do
           end
         end
 
+        xit 'sets parameters in the url' do
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          current_path.should == "/admin/admissions/admission_period_id=#{admission_period.id}&admission_method_id=#{admission_period.admission_methods.first.id}"
+          page.evaluate_script('window.history.back()')
+          current_path.should == "/admin/admissions"
+        end
+
+        it 'doesn\'t renames listing buttons on changing period' do # this was issue
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
+          end
+        end
+
       end
 
       context 'when change method' do
@@ -104,6 +121,15 @@ describe 'Admin Admissions' do
           within (@active_tab_content) do
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.first.name}"
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
+          end
+        end
+
+        it 'doesn\'t renames listing buttons on changing method', js:true do # this was issue
+          select "#{admission_period.admission_methods.last.name}", from: 'admission_method_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
           end
         end
 
@@ -208,7 +234,7 @@ describe 'Admin Admissions' do
             end
           end
 
-          it 'change state' do
+          it 'change state and grade exam' do
             #Exam | Pre Exam
             within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") do
               find(:css, "#student-1-check").set(true)
@@ -229,6 +255,14 @@ describe 'Admin Admissions' do
               sleep 1
               wait_until { size_of("#students-index tbody tr").should eq 0 }
             end
+            #grade exam
+            page.should have_content 'Grade Exam' 
+            click_on 'Grade Exam'
+            fill_in 'portion_score', with: 89
+            sleep 1 #this is needed because sometimes test fails
+            click '.exam-parts' #TODO fix this
+            wait_for_ajax
+            visit gaku.admin_admissions_path
             #Exam | Passed
             within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") do
               size_of("#students-index tbody tr").should eq 1
@@ -258,17 +292,11 @@ describe 'Admin Admissions' do
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end
-
-          #grade
-
-          context 'listing' do
-
-          end
           
-          xit 'exports as CSV' do
+          context 'exports' do
           end
         end
-
+        
       end
 
     end
