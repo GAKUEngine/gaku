@@ -50,7 +50,7 @@ describe 'Admin Roles' do
 
     context 'edit', :js => true do
       before do
-        within(table) { click edit_link }
+        within('#admin-roles-index tbody tr:nth-child(2)') { click edit_link }
         wait_until_visible modal
       end
 
@@ -80,8 +80,12 @@ describe 'Admin Roles' do
       page.should have_content role.name
       within(count_div) { page.should have_content 'Roles list(2)' }
 
+      tr_count = size_of table_rows
+
       expect do
-        ensure_delete_is_working
+        within('#admin-roles-index tbody tr:nth-child(2)') { click delete_link }
+        accept_alert
+        wait_until { size_of(table_rows) == tr_count - 1 }
       end.to change(Gaku::Role, :count).by -1
 
       within(count_div) { page.should_not have_content 'Roles list(2)' }

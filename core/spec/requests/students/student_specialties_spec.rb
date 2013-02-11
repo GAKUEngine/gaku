@@ -34,7 +34,7 @@ describe 'Student Specialties' do
       flash_created?
     end
 
-    it 'cancel creating', :cancel => true do
+    xit 'cancel creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end

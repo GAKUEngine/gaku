@@ -12,9 +12,9 @@ describe 'Admin Presets Students' do
     address
     visit gaku.students_admin_presets_path
   end
+
   context '#default', js:true do
     it 'saves' do
-
       select 'Female', from:'presets_students_gender'
       select "#{address.country}", from:'presets_address_country'
       fill_in 'presets_address_state', with: "#{address.state.name}"

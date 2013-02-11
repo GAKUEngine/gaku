@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Admin Roles' do
+describe 'Admin Users' do
 
   as_admin
 
@@ -59,7 +59,7 @@ describe 'Admin Roles' do
 
     context 'edit', :js => true do
       before do
-        within(table) { click edit_link }
+        within('#admin-users-index tbody tr:nth-child(2)') { click edit_link }
         wait_until_visible modal
       end
 
@@ -90,8 +90,12 @@ describe 'Admin Roles' do
       page.should have_content user.username
       within(count_div) { page.should have_content 'Users list(2)' }
 
+      tr_count = size_of table_rows
+
       expect do
-        ensure_delete_is_working
+        within('#admin-users-index tbody tr:nth-child(2)') { click delete_link }
+        accept_alert
+        wait_until { size_of(table_rows) == tr_count - 1 }
       end.to change(Gaku::User, :count).by -1
 
       within(count_div) { page.should_not have_content 'Users list(2)' }

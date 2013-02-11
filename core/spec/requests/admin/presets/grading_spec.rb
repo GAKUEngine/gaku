@@ -7,6 +7,7 @@ describe 'Admin Presets Grading' do
   before do
     visit gaku.grading_admin_presets_path
   end
+
   context '#default', js:true do
     it 'saves' do
 

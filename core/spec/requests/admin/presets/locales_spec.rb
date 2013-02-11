@@ -7,9 +7,9 @@ describe 'Admin Presets Locales' do
   before do
     visit gaku.locale_admin_presets_path
   end
+
   context '#default', js:true do
     it 'saves' do
-
       select 'en', from:'presets_language'
       click '.btn'
 
