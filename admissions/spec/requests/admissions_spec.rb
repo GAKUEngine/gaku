@@ -9,21 +9,26 @@ describe 'Admin Admissions' do
   let(:exam) { create(:exam) }
   let(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
+  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
 
   describe 'when select admission period', js: true do
     context 'without methods' do
+
       before do
         admission_period_no_methods
         visit gaku.admin_admissions_path
         select "#{admission_period_no_methods.name}", from: 'admission_period_id'
       end
+
       it 'shows no methods info' do
         within ('#admission-method-selection') { page.should have_content 'No methods available for this period.' }
       end
+
     end
 
     context 'with methods' do
+
       before do
         admission_period
         visit gaku.admin_admissions_path
@@ -36,6 +41,7 @@ describe 'Admin Admissions' do
       end
 
       context 'default' do
+
         it 'selects the first period' do
           within ('#admission-period-selection') { page.should have_content "#{admission_period.name}" }
         end
@@ -49,6 +55,7 @@ describe 'Admin Admissions' do
             page.should have_content "#{@first_method.admission_phases.first.name}"
             page.should have_content "#{@first_method.admission_phases.last.name}" 
           end
+
         end
 
         it 'open first phase\'s tab' do
@@ -62,9 +69,27 @@ describe 'Admin Admissions' do
           end
         end
 
+        xit 'sets parameters in the url' do
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          current_path.should == "/admin/admissions/admission_period_id=#{admission_period.id}&admission_method_id=#{admission_period.admission_methods.first.id}"
+          page.evaluate_script('window.history.back()')
+          current_path.should == "/admin/admissions"
+        end
+
+        it 'doesn\'t renames listing buttons on changing period' do # this was issue
+          select "#{admission_period.name}", from: 'admission_period_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
+          end
+        end
+
       end
 
       context 'when change method' do
+
         before do
           select "#{admission_period.name}", from: 'admission_period_id'
           wait_for_ajax
@@ -98,13 +123,26 @@ describe 'Admin Admissions' do
             page.should have_content "#{@last_method.admission_phases.last.admission_phase_states.last.name}"
           end
         end
+
+        it 'doesn\'t renames listing buttons on changing method', js:true do # this was issue
+          select "#{admission_period.admission_methods.last.name}", from: 'admission_method_id'
+          wait_for_ajax
+          within('#admissions_links') do
+            page.should have_content 'Applicants List'
+            page.should have_content 'Listing Admissions'
+          end
+        end
+
       end
       context 'applicants' do
+
         context 'new students' do
+
           before do
             click_on 'New Applicant'
             wait_for_ajax
           end
+
           it 'adds new' do
             expect do
               fill_in 'admission_student_attributes_name', with: 'Marta'
@@ -134,6 +172,7 @@ describe 'Admin Admissions' do
         end
 
         context 'existing students' do
+
           before do
             student
             admission_period
@@ -143,6 +182,7 @@ describe 'Admin Admissions' do
           end
 
           it 'adds existing' do
+
             expect do
               find(:css, "input#student-#{student.id}").set(true)
               wait_for_ajax
@@ -159,10 +199,12 @@ describe 'Admin Admissions' do
                 #wait_until { page.should_not have_css('#student-modal') }
               end
             end.to change(Gaku::Admission, :count).by 1
+
             within ('#state1' ) do
               within('#students-index') { page.should have_content ("#{student.name}") }
             end
           end
+
           it 'cancels adding' do
             expect do
               click_on 'Cancel'
@@ -170,9 +212,11 @@ describe 'Admin Admissions' do
               wait_until_invisible('#cancel-class-group-student-link')
             end.to change(Gaku::Admission, :count).by 0
           end
+
         end
 
         context 'Journey - add new student and' do
+
           before do
             click_on 'New Applicant'
             wait_for_ajax
@@ -188,9 +232,9 @@ describe 'Admin Admissions' do
             within ('#state1' ) do
               within('#students-index') { page.should have_content ('Marta') }
             end
-
           end
-          it 'change state' do
+
+          it 'change state and grade exam' do
             #Exam | Pre Exam
             within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") do
               find(:css, "#student-1-check").set(true)
@@ -211,6 +255,14 @@ describe 'Admin Admissions' do
               sleep 1
               wait_until { size_of("#students-index tbody tr").should eq 0 }
             end
+            #grade exam
+            page.should have_content 'Grade Exam' 
+            click_on 'Grade Exam'
+            fill_in 'portion_score', with: 89
+            sleep 1 #this is needed because sometimes test fails
+            click '.exam-parts' #TODO fix this
+            wait_for_ajax
+            visit gaku.admin_admissions_path
             #Exam | Passed
             within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") do
               size_of("#students-index tbody tr").should eq 1
@@ -240,126 +292,11 @@ describe 'Admin Admissions' do
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end
-          context 'grading' do
-            before do
-              admission_period
-              attendance
-              @exam_phase = admission_period.admission_methods.first.admission_phases.first
-              #@exam_phase.exam = exam
-              admission_period.reload
-              visit gaku.admin_admissions_path
-            end
-            context 'grades' do
-              before do
-                page.should have_content 'Grade Exam'
-                click_on 'Grade Exam'
-                page.should have_content "#{exam.name}"
-              end
-              it 'grades' do
-                fill_in 'portion_score', with: 89
-                sleep 3 #this is needed because sometimes test fails
-                click '.exam-parts' #TODO fix this
-                wait_for_ajax
-                visit gaku.admin_admissions_path
-                select 'Passed', from: 'state_id'
-                click_on 'Save'
-                page.should have_content 89
-              end
-              it 'errors with invalid points' do
-                fill_in 'portion_score', with: -120 #Max score is 100
-                click '.exam-parts' #TODO fix this
-                wait_for_ajax
-                page.has_css?('.score-error')
-                fill_in 'portion_score', with: 120
-                click '.exam-parts' #TODO fix this
-                wait_for_ajax
-                page.has_css?('.score-error')
-                visit gaku.admin_admissions_path
-                select 'Passed', from: 'state_id'
-                click_on 'Save'
-                page.should_not have_content 120
-              end
-            end
-            
-            context 'attendance' do
-              before do
-                page.has_content?('Grade Exam') 
-                click_on 'Grade Exam'
-                page.should have_content "#{exam.name}"
-                click '.btn'
-                wait_until_visible '.popover-content'
-                #TODO add some predefined reasons
-              end
-              it 'selects attendance reason' do
-                select 'Illness', from: 'preset-reasons'
-                click_on 'Submit'
-                page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true" #for phantom it should == "disabled"
-              end
-              it 'adds attendance custom reason' do
-                fill_in 'custom-reason', with: 'Illness' 
-                click_on 'Submit'
-                page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
-              end
-              it 'removes attendance reason' do
-                fill_in 'custom-reason', with: 'Illness' 
-                click_on 'Submit'
-                page.should_not have_css '.popover-content'
-                find('.score-cell')['disabled'].should == "true"
-                #TODO remove duplication
-                click '.btn'
-                page.find('.delete-attendance').click
-                wait_for_ajax
-                find('.score-cell')['disabled'].should == nil
-              end
-            end
-          end
-
-          context 'listing' do
-            it 'lists admissions' do
-              page.should have_content 'Listing Admissions'
-              click_on 'Listing Admissions'
-              current_path.should == "/admin/admissions/listing_admissions"
-              page.should have_content 'Admission Candidates List'
-              page.should have_content "#{admission_period.admission_methods.first.name}"
-              page.should have_content "#{admission_period.admission_methods.first.admission_phases.first.name}"
-            end
-            context 'lists applicants and' do
-              before do
-                page.should have_content 'Applicants List'
-                click_on 'Applicants List'
-                current_path.should == "/admin/admissions/listing_applicants"
-              end
-              it 'edits applicants' do
-                click '.edit-link'
-                wait_until_visible modal
-                fill_in 'student_name', with: 'Martina'
-                click_on 'Save Student'
-                wait_until_invisible modal
-                page.has_content?('Martina')
-                visit gaku.listing_applicants_admin_admissions_path
-                page.has_content?('Martina')
-              end
-              it 'shows applicants' do
-                click '.show-link'
-                current_path.should eq "/students/1"
-                page.has_content? 'Martina'
-              end
-              it 'returns to admissions' do
-                page.should have_content 'Admissions'
-                click_on 'Admissions'
-                current_path.should eq "/admin/admissions"
-                page.has_content? 'Admission Candidates List'
-              end
-            end
-
-          end
           
-          pending 'exports as CSV' do
+          context 'exports' do
           end
         end
-
+        
       end
 
     end

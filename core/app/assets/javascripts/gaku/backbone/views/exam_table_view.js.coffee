@@ -161,7 +161,6 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
       target.popover 'show'
 
   validatePortion: (event)->
-    console.log event.currentTarget
     currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
     currentTargetValue = currentTargetInput.attr('value')
