@@ -8,9 +8,6 @@ describe Gaku::UserRole do
 
     it { should allow_mass_assignment_of :user_id }
     it { should allow_mass_assignment_of :role_id }
-
-    it { should validate_presence_of :user_id }
-    it { should validate_presence_of :role_id }
   end
 
 end
