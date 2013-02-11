@@ -36,7 +36,7 @@ describe 'Admin Listing Applicants' do
 
     it 'shows applicants' do
       click '.show-link'
-      current_path.should eq "admin/students/1"
+      current_path.should eq "/admin/students/1"
       page.should have_content "#{student.name}"
     end
 
