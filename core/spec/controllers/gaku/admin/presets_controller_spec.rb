@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::PresetsController do
 
+  as_admin
+
   describe "GET #students" do
     it "is successful" do
       gaku_get :students
@@ -12,10 +14,10 @@ describe Gaku::Admin::PresetsController do
       gaku_get :students
       response.should render_template :students
     end
-  end 
+  end
 
   describe "GET #locale" do
-    
+
     it "is successful" do
     gaku_get :locale
     response.should be_success

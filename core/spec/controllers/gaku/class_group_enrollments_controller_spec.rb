@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::ClassGroupEnrollmentsController do
 
+  as_admin
+
   let(:student1) { create(:student) }
   let(:student2) { create(:student) }
   let(:class_group) { create(:class_group) }

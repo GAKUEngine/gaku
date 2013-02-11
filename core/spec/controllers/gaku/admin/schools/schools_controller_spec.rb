@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::SchoolsController do
 
+  as_admin
+
   let(:school) { create(:school, :is_primary => true) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::Admin::SchoolsController do
       gaku_js_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe "GET #school_details" do
     it "is successful" do
@@ -54,16 +56,16 @@ describe Gaku::Admin::SchoolsController do
     context "with valid attributes" do
       it "saves the new school in the db" do
         expect{
-          gaku_post :create, school: attributes_for(:school)  
+          gaku_post :create, school: attributes_for(:school)
         }.to change(Gaku::School, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new school in the db" do
         expect{
-          gaku_js_post :create, school: {name: ''}  
+          gaku_js_post :create, school: {name: ''}
         }.to_not change(Gaku::School, :count)
       end
     end
@@ -83,7 +85,7 @@ describe Gaku::Admin::SchoolsController do
 
   describe "PUT #update" do
     it "locates the requested @school" do
-      gaku_put :update, id: school, school: attributes_for(:school) 
+      gaku_put :update, id: school, school: attributes_for(:school)
       assigns(:school).should eq(school)
     end
 
@@ -98,7 +100,7 @@ describe Gaku::Admin::SchoolsController do
     end
     context "invalid attributes" do
       it "does not change school's attributes" do
-        gaku_js_put :update, id: school, 
+        gaku_js_put :update, id: school,
                               school: attributes_for(:school, name: "")
         school.reload
         school.name.should_not eq("")
