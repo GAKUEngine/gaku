@@ -1,6 +1,9 @@
 # -*- encoding: utf-8 -*-
 module Gaku
   class Syllabuses::ImporterController < GakuController
+
+    skip_authorization_check
+
     include SheetHelper
     require 'gaku/core/importers/school_station/kamoku.rb'
     require 'spreadsheet'

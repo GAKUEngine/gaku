@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Syllabus' do
 
-  stub_authorization!
+  as_admin
 
   let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
 
@@ -31,7 +31,7 @@ describe 'Syllabus' do
     end
 
     it {has_validations?}
-    
+
     it "cancels adding", :cancel => true do
       ensure_cancel_creating_is_working
     end
