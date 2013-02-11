@@ -229,6 +229,7 @@ Gaku::Core::Engine.routes.draw do
         get :students
         get :locale
         get :grading
+        get :defaults
         put :update_presets
       end
     end

@@ -177,6 +177,15 @@ module Gaku
       end
     end
 
+
+    def chooser_preset
+      @chooser_preset ||= Gaku::Preset.chooser_table_fields
+    end
+
+    def enabled_field?(field)
+      chooser_preset[field].to_i == 1 rescue true
+    end
+
   end
 end
 

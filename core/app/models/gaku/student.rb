@@ -63,6 +63,19 @@ module Gaku
       "#{self.surname} #{self.name}"
     end
 
+    def identification_number
+      "%surname-%name-%id".gsub(/%(\w+)/) do |s|
+        case s
+        when "%name"
+          name.downcase
+        when "%surname"
+          surname.downcase
+        when "%id"
+          id
+        end
+      end
+    end
+
     def class_group_widget
       cg = self.class_groups.last
       cg.blank? ? nil : cg
