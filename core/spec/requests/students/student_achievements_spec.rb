@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Achievements' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:achievement) { create(:achievement) }

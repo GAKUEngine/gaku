@@ -444,6 +444,16 @@ en:
     total_points: Total Score
     weighting: Weight
     weighting_portion: Weighting
+  grading_method:
+    singular: Grading Method
+    plural: Grading Methods
+    list: Grading Methods list
+    add: Add Grading Method
+    description: Description
+    name: Name
+    method: Methods
+    save: Save Grading Method
+    edit: Edit Grading Method
   graduated: Graduated On
   guardian:
     add: Add Guardian
@@ -511,6 +521,7 @@ en:
       school_details: School Details
       schools: Schools
       specialties: Specialties
+      grading_methods: Grading Methods
       system:
         backup: Backup
         system_tools: System Tools
