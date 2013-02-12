@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Grading Methods' do
 
-  stub_authorization!
+  as_admin
 
   let(:grading_method) { create(:grading_method, :name => 'Bulgarian') }
 
