@@ -124,7 +124,7 @@ describe Gaku::Admin::AdmissionsController do
   context 'changes admission period' do
 
     it 'uses period with methods' do
-      gaku_js_post :change_admission_period, admission_period: admission_period
+      gaku_js_get :change_admission_period, admission_period: admission_period
       assigns(:admission_period).should eq admission_period
       assigns(:admission_methods).should eq admission_period.admission_methods
       assigns(:admission_method).should eq admission_period.admission_methods.first
@@ -133,7 +133,7 @@ describe Gaku::Admin::AdmissionsController do
     end
 
     it 'uses period without methods' do
-      gaku_js_post :change_admission_period, admission_period: admission_period_no_methods
+      gaku_js_get :change_admission_period, admission_period: admission_period_no_methods
       assigns(:admission_period).should eq admission_period_no_methods
       assigns(:admission_methods).should eq admission_period_no_methods.admission_methods
       assigns(:admission_method).should eq nil
@@ -144,8 +144,20 @@ describe Gaku::Admin::AdmissionsController do
   end
 
   it 'changes admission method' do
-    gaku_js_post :change_admission_method, admission_method: admission_period.admission_methods.first
+    gaku_js_get :change_admission_method, admission_method: admission_period.admission_methods.first
     assigns(:admission_method).should eq admission_period.admission_methods.first
+  end
+
+  it 'changes period method' do
+    gaku_js_get :change_period_method, admission_method: admission_period.admission_methods.first
+    
+    assigns(:admission_periods).should eq [admission_period_no_methods, admission_period]
+    assigns(:admission_period).should eq admission_period
+    assigns(:admission_method).should eq admission_period.admission_methods.first
+    assigns(:admission_methods).should eq admission_period.admission_methods
+
+    response.should be_success
+
   end
 
   context 'lists admissions' do
@@ -309,8 +321,66 @@ describe Gaku::Admin::AdmissionsController do
       
   end
 
-  xit 'uses student chooser'
+  it 'uses student chooser' do
+    gaku_js_get :student_chooser
 
-  xit 'create_multiple'
+    assigns(:admission_periods).should_not be_nil
+    assigns(:admission_period).should_not be_nil
+    assigns(:admission_methods).should_not be_nil
+    assigns(:admission_method).should_not be_nil
+    assigns(:search).should_not be_nil
+    assigns(:selected_students).should_not be_nil
+    assigns(:admissions).should_not be_nil
+    assigns(:admission).should_not be_nil
+    assigns(:enrolled_students).should eq []
+    assigns(:method_admissions).should_not be_nil
+    assigns(:applicant_max_number).should_not be_nil
+
+    response.should be_success
+  end
+
+  context 'create multiple' do
+    it 'assigns variables' do
+      
+      gaku_js_post :create_multiple, admission_period_id: admission_period.id,
+                                     admission_method_id: admission_period.admission_methods.first.id,
+                                     selected_students: ["student-#{student.id}"]
+
+      assigns(:admission_periods).should_not be_nil
+      assigns(:admission_period).should_not be_nil
+      assigns(:admission_methods).should_not be_nil
+      assigns(:admission_method).should_not be_nil
+      assigns(:selected_students).should eq ["student-#{student.id}"]
+      assigns(:admission_records).should_not be_nil
+
+      response.should be_success
+    end
+
+    it 'creates an admission' do
+      expect do
+        gaku_js_post :create_multiple, admission_period_id: admission_period.id,
+                                     admission_method_id: admission_period.admission_methods.first.id,
+                                     selected_students: ["student-#{student.id}"]
+      end.to change(Gaku::Admission, :count).by 1
+    end
+
+    it 'creates an admission record' do
+      expect do
+        gaku_js_post :create_multiple, admission_period_id: admission_period.id,
+                                     admission_method_id: admission_period.admission_methods.first.id,
+                                     selected_students: ["student-#{student.id}"]
+      end.to change(Gaku::AdmissionPhaseRecord, :count).by 1
+    end
+
+    it 'admits the student' do
+      @student = create(:student, enrollment_status_id: nil)
+      expect do
+        gaku_js_post :create_multiple, admission_period_id: admission_period.id,
+                                     admission_method_id: admission_period.admission_methods.first.id,
+                                     selected_students: ["student-#{@student.id}"]
+        @student.reload
+      end.to change(@student,:enrollment_status_id)
+    end
+  end
 
 end
