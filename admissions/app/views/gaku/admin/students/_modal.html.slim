@@ -2,5 +2,5 @@
   = modal_header t(:'student.edit')
   = modal_form_for [:admin, @student] do |f|
     = modal_body do
-	    = render 'gaku/students/form_fields', :f => f
-	    = buttons_for [:admin, @student]
+      = render 'gaku/students/form_fields', :f => f
+      = buttons_for @student

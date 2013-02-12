@@ -28,9 +28,11 @@ module Gaku
       end
 
       def index
+        session[:current_page] = 'admissions'
       end
 
       def listing_admissions
+        session[:current_page] = 'listing'
       end
 
       def change_student_state
@@ -64,8 +66,9 @@ module Gaku
       end
 
       def listing_applicants
-        @search = Student.unscoped.search(params[:q])
+        @search = Student.non_deleted.search(params[:q])
         @students = @search.result
+        session[:current_page] = 'applicants'
       end
 
       def new

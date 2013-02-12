@@ -32,13 +32,17 @@
     /.span4
       = link_to t(:'enroll_to_class'), [:new, @student, :class_group_enrollment], { :id => 'enroll-student-link', :class => "span12 btn btn-primary", :remote => true }
     .span4
-      = link_to_edit_with_text [:edit, :admin, admission.student], :class => "span12 btn btn-warning edit-link", :remote => true
+      = link_to_edit_with_text [:edit, :admin, @student], :class => "span12 btn btn-warning edit-link", :remote => true
     .span4
       = link_to_back [:listing_admissions, :admin, :admissions], :class => "span12 btn"
 
   row-fluid
     .span12
       #delete-student
+        = link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
+    .delete_modal
+      =render 'delete_modal', :student => @student
+        
         
 
 coffee:

@@ -62,6 +62,7 @@ describe 'Admin Listing Admissions' do
         current_path.should eq "/admin/students/1"
         page.should have_content "#{student.name}"
         click '#delete-student-link'
+        within(modal) { click_on "Delete" }
         accept_alert
         page.should have_content "successfully"
         current_path.should == "/admin/admissions/listing_admissions"
