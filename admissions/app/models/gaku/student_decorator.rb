@@ -16,8 +16,7 @@ module Gaku
 
     def make_applicant
       update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
-                                                                    code:"applicant", 
-                                                                    name:"Applicant", 
+                                                                    code:"applicant",
                                                                     is_active:false, 
                                                                     immutable:true).first_or_create!.id)
       save
@@ -25,8 +24,7 @@ module Gaku
 
     def make_admitted(admission_date)
       update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
-                                                                    code:"admitted", 
-                                                                    name:"Admitted", 
+                                                                    code:"admitted",
                                                                     is_active:true, 
                                                                     immutable:true).first_or_create!.id)
       update_column(:admitted, admission_date)
