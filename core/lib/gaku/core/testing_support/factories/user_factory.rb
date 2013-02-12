@@ -7,10 +7,17 @@ FactoryGirl.define do
   end
 
   factory :admin, :parent => :user do
-    #admin true
     after_create do |user|
       role = FactoryGirl.create(:admin_role)
       FactoryGirl.create(:user_role, :role => role, :user => user)
     end
   end
+
+  factory :student_user, :parent => :user do
+    after_create do |user|
+      role = FactoryGirl.create(:student_role)
+      FactoryGirl.create(:user_role, :role => role, :user => user)
+    end
+  end
+
 end

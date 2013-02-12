@@ -67,6 +67,8 @@ Spork.each_run do
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Controller, :type => :controller
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, :type => :request
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
+
+    config.alias_it_should_behave_like_to :ensures, "ensures"
   end
 
 end
