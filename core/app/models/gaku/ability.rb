@@ -58,13 +58,13 @@ module Gaku
         #end
       end
 
-      #can :manage, :all
 
       #include any abilities registered by extensions, etc.
-      #Ability.abilities.each do |clazz|
-      #  ability = clazz.send(:new, user)
-      #  @rules = rules + ability.send(:rules)
-      #end
+      Ability.abilities.each do |clazz|
+        ability = clazz.send(:new, user)
+        @rules = rules + ability.send(:rules)
+      end
+
     end
   end
 end
