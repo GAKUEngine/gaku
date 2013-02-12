@@ -499,6 +499,7 @@ en:
           grading: Grading Preset
           locale: Locale Preset
           student: Student Preset
+          defaults: Defaults Preset
         plural: Presets
         save: Save
         singular: Preset
@@ -611,6 +612,7 @@ en:
     slogan: Slogan
     vice_principal: Vice Principal
     choose: Choose School
+    show: School Show
   search: Search
   select: Select
   semester:

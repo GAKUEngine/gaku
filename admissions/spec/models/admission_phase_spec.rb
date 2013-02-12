@@ -14,4 +14,10 @@ describe Gaku::AdmissionPhase do
     it { should validate_presence_of :name }
 
   end
+
+  context 'methods' do
+    xit 'proper_position'
+    xit 'refresh_positions'
+    xit 'find next phase'
+  end
 end

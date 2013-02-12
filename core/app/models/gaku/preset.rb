@@ -5,7 +5,8 @@ module Gaku
 	  PRESETS = {
 	  	:student => ['students_gender', 'address_country', 'address_state', 'address_city'],
 	  	:locale  => ['language'],
-	  	:grading => ['grading_method', 'grading_scheme']
+	  	:grading => ['grading_method', 'grading_scheme'],
+	  	:default => ['chooser_table_columns']
 	  }
 
 	  def self.save_presets(params)
@@ -26,7 +27,6 @@ module Gaku
 				return self.get method_name
 			end
 		end
-
 
 		private
 

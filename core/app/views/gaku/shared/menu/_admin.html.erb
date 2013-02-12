@@ -50,9 +50,16 @@
     <li class="dropdown-submenu" data-hook="presets_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.preset.plural') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="student_presets"><%= link_to t('menu.admin.preset.items.student'), students_admin_presets_path %></li>
-        <li data-hook="grading_presets"><%= link_to t('menu.admin.preset.items.grading'), grading_admin_presets_path %></li>
-        <li data-hook="locale_presets"><%= link_to t('menu.admin.preset.items.locale'), locale_admin_presets_path %></li>
+        <li data-hook="student_presets">
+          <%= link_to t('menu.admin.preset.items.student'), students_admin_presets_path %>
+        </li>
+        <li data-hook="grading_presets">
+          <%= link_to t('menu.admin.preset.items.grading'), grading_admin_presets_path %>
+        </li>
+        <li data-hook="locale_presets"><%= link_to t('menu.admin.preset.items.locale'), locale_admin_presets_path %>
+        </li>
+        <li data-hook="defaults_presets"><%= link_to t('menu.admin.preset.items.defaults'), defaults_admin_presets_path %>
+        </li>
       </ul>
     </li>
 

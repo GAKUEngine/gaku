@@ -21,7 +21,9 @@ module Gaku
 
     before_create :default_language
 
-    validates_presence_of :username
+    validates_presence_of :username, :email
+    validates_uniqueness_of :username, :email
+    validates_presence_of :password, :password_confirmation, :on => :create
 
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup

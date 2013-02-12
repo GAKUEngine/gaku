@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe Gaku::Student do
-
+  
   context "validations" do
-    let(:student) { stub_model(Gaku::Student) }
-
+    
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
 
@@ -64,7 +63,10 @@ describe Gaku::Student do
   end
 
   context 'methods' do
-    xit 'enrollment_status'
+
+    context 'enrollment_status' do
+
+    end
     xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
