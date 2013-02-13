@@ -2,19 +2,20 @@ require 'spec_helper'
 
 describe Gaku::Exam do
 
-  context "validations" do 
+  context "validations" do
   	let(:exam) { create(:exam) }
+
+    it_behaves_like 'notable'
 
     it { should have_many :exam_scores }
     it { should have_many :exam_portions }
     it { should have_many(:exam_portion_scores).through(:exam_portions) }
-    it { should have_many :exam_syllabuses } 
-    it { should have_many(:syllabuses).through(:exam_syllabuses) } 
-    it { should have_many :notes }
-    it { should have_many :attendances } 
+    it { should have_many :exam_syllabuses }
+    it { should have_many(:syllabuses).through(:exam_syllabuses) }
+    it { should have_many :attendances }
 
     it { should belong_to :grading_method }
-    
+
     it { should validate_presence_of(:name) }
 
     it { should validate_numericality_of(:weight) }
@@ -51,5 +52,5 @@ describe Gaku::Exam do
     xit 'total_weight'
     xit 'max_score'
   end
-  
+
 end

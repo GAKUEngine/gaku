@@ -6,10 +6,10 @@ describe Gaku::Guardian do
   	let(:guardian) { stub_model(Gaku::Guardian) }
 
     it_behaves_like 'person'
+    it_behaves_like 'addressable'
+    it_behaves_like 'contactable'
 
     it { should belong_to :user }
-    it { should have_many :addresses }
-    it { should have_many :contacts }
     it { should have_and_belong_to_many :students }
 
     it { should allow_mass_assignment_of :relationship }

@@ -5,6 +5,10 @@ describe Gaku::Student do
   context "validations" do
 
     it_behaves_like 'person'
+    it_behaves_like 'addressable'
+    it_behaves_like 'notable'
+    it_behaves_like 'contactable'
+    it_behaves_like 'thrashable'
 
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
@@ -20,9 +24,6 @@ describe Gaku::Student do
 
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
-    it { should have_many :addresses }
-    it { should have_many :contacts }
-    it { should have_many :notes }
     it { should have_many :attendances }
     it { should have_many :achievements }
     it { should have_many :external_school_records }
@@ -51,7 +52,6 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of :student_foreign_id_number }
     it { should allow_mass_assignment_of :scholarship_status_id }
     it { should allow_mass_assignment_of :enrollment_status_id }
-    it { should allow_mass_assignment_of :is_deleted }
   end
 
   context 'methods' do

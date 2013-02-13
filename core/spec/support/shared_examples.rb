@@ -38,7 +38,7 @@ shared_examples_for "deny except" do |except_role|
 end
 
 
-shared_examples_for "person" do
+shared_examples_for 'person' do
   it { should validate_presence_of :name }
   it { should validate_presence_of :surname }
 
@@ -50,3 +50,18 @@ shared_examples_for "person" do
   it { should allow_mass_assignment_of :gender }
 end
 
+shared_examples_for 'addressable' do
+  it { should have_many :addresses }
+end
+
+shared_examples_for 'notable' do
+  it { should have_many :notes }
+end
+
+shared_examples_for 'contactable' do
+  it { should have_many :contacts }
+end
+
+shared_examples_for 'thrashable' do
+  it { should allow_mass_assignment_of :is_deleted }
+end
