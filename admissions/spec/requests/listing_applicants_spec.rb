@@ -57,6 +57,23 @@ describe 'Admin Listing Applicants' do
     end
 
     it 'deletes applicant' do
+      click '.show-link'
+      current_path.should eq "/admin/students/1"
+      page.should have_content "#{student.name}"
+      click '#delete-student-link'
+      within(modal) { click_on "Delete" }
+      accept_alert
+      wait_for_ajax
+      student.reload
+      page.should have_content "successfully"
+      current_path.should == "/admin/admissions/listing_applicants"
+      page.should_not have_content "#{student.name}"
+      visit gaku.listing_applicants_admin_admissions_path
+      page.should_not have_content "#{student.name}"
+      visit gaku.students_path
+      page.should_not have_content "#{student.name}"
+      visit gaku.students_admin_disposals_path
+      page.should have_content "#{student.name}"
     end
   end
 end
