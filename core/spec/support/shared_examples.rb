@@ -37,3 +37,16 @@ shared_examples_for "deny except" do |except_role|
   end
 end
 
+
+shared_examples_for "person" do
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :surname }
+
+  it { should allow_mass_assignment_of :name }
+  it { should allow_mass_assignment_of :surname }
+  it { should allow_mass_assignment_of :name_reading }
+  it { should allow_mass_assignment_of :surname_reading }
+  it { should allow_mass_assignment_of :birth_date }
+  it { should allow_mass_assignment_of :gender }
+end
+

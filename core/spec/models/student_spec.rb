@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Gaku::Student do
-  
+
   context "validations" do
-    
+
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
 
@@ -33,18 +33,10 @@ describe Gaku::Student do
 
     it { should have_and_belong_to_many :guardians }
 
-    it { should validate_presence_of :name }
-    it { should validate_presence_of :surname }
     it { should have_attached_file :picture }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
 
-    it { should allow_mass_assignment_of :name }
-    it { should allow_mass_assignment_of :surname }
-    it { should allow_mass_assignment_of :name_reading }
-    it { should allow_mass_assignment_of :surname_reading }
-    it { should allow_mass_assignment_of :birth_date }
-    it { should allow_mass_assignment_of :gender }
     it { should allow_mass_assignment_of :admitted }
     it { should allow_mass_assignment_of :graduated }
     it { should allow_mass_assignment_of :class_groups }
@@ -58,8 +50,6 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of :scholarship_status_id }
     it { should allow_mass_assignment_of :enrollment_status_id }
     it { should allow_mass_assignment_of :is_deleted }
-    it { should_not allow_mass_assignment_of :user }
-    it { should_not allow_mass_assignment_of :user_attributes }
   end
 
   context 'methods' do
