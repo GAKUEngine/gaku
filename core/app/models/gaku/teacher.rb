@@ -5,7 +5,7 @@ module Gaku
 
     belongs_to :user
 
-    attr_accessible :user_id
+    attr_accessible :user_id, :picture
 
     has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 

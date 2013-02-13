@@ -1,4 +1,13 @@
 en:
+  teacher:
+    list: Teachers list
+    new: New Teacher
+    name: Name
+    save: Save Teacher
+    edit: Edit Teacher
+    show: Show Teacher
+    singular: Teacher
+    plural: Teachers
   role:
     list: Roles list
     add: Add Role
@@ -708,7 +717,6 @@ en:
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
-  teacher: Instructor
   title: Title
   user:
     info: User info

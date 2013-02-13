@@ -1,0 +1,5 @@
+tr id="teacher-#{teacher.id}"
+  = render 'fields', :teacher => teacher
+  td
+    = link_to_show teacher
+    = ajax_link_to_edit [:edit, teacher], :style => "margin:0px"

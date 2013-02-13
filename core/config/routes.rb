@@ -102,6 +102,11 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, :controller => 'syllabuses/importer'
   end
 
+  resources :teachers do
+    get :soft_delete, :on => :member
+
+    resources :notes
+  end
 
   resources :students do
 
