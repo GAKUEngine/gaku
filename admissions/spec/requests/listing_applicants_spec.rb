@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Listing Applicants' do
 
-  stub_authorization!
+  as_admin
 
   let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }

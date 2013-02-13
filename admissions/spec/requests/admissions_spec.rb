@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Admissions' do
 
-  stub_authorization!
+  as_admin
 
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
