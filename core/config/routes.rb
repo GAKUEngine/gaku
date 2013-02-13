@@ -206,6 +206,10 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :users
+    resources :roles
+    resources :grading_methods
+
 
     namespace :changes do
       resources :students, :controller => 'student_changes'
@@ -227,6 +231,7 @@ Gaku::Core::Engine.routes.draw do
         get :students
         get :locale
         get :grading
+        get :defaults
         put :update_presets
       end
     end
@@ -252,10 +257,6 @@ Gaku::Core::Engine.routes.draw do
       delete :soft_delete
       get :recovery
     end
-  end
-
-  resource :grading_methods do
-    get :index
   end
 
 end

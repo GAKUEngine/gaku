@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'Student Contact Changes' do
 
+  as_admin
+
   before do
     @student = create(:student_with_one_contact)
     @student.reload

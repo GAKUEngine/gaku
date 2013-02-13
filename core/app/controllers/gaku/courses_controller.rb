@@ -1,6 +1,8 @@
 module Gaku
   class CoursesController < GakuController
 
+    load_and_authorize_resource :class =>  Gaku::Course
+
     include StudentChooserController
 
     helper_method :sort_column, :sort_direction

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::EnrollmentStatusesController do
 
+  as_admin
+
   let(:enrollment_status) { create(:enrollment_status) }
 
   describe "GET #index" do

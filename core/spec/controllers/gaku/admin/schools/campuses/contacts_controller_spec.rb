@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Gaku::Admin::Schools::Campuses::ContactsController  do
-  
+
+  as_admin
+
   let(:contact) { create(:contact) }
   let(:school) { create(:school) }
   let(:campus) { create(:campus, school_id:school.id) }
@@ -22,9 +24,9 @@ describe Gaku::Admin::Schools::Campuses::ContactsController  do
     context "with valid attributes" do
       it "saves the new contact in the db" do
         expect{
-          gaku_post :create, contact: attributes_for(:contact, contact_type_id:2), school_id: school.id, campus_id: campus.id 
+          gaku_post :create, contact: attributes_for(:contact, contact_type_id:2), school_id: school.id, campus_id: campus.id
         }.to change(Gaku::Contact, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
@@ -66,7 +68,7 @@ describe Gaku::Admin::Schools::Campuses::ContactsController  do
     end
     context "invalid attributes" do
       it "does not change contact's attributes" do
-        gaku_js_put :update, id: contact, 
+        gaku_js_put :update, id: contact,
                               contact: attributes_for(:contact, data: ""), school_id: school.id, campus_id: campus.id
         contact.reload
         contact.data.should_not eq("")
@@ -74,7 +76,7 @@ describe Gaku::Admin::Schools::Campuses::ContactsController  do
     end
   end
 
-  
+
   describe "DELETE #destroy" do
     xit "deletes the contact" do
       contact

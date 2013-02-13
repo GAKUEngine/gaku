@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Exam portions' do
 
-  stub_authorization!
+  as_admin
 
   let(:exam) { create(:exam, :name => "Unix") }
 

@@ -1,5 +1,8 @@
 module Gaku
   class ExamsController < GakuController
+
+    load_and_authorize_resource :class =>  Gaku::Exam
+
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
     respond_to :html, :js

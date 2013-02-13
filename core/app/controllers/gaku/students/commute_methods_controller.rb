@@ -1,6 +1,9 @@
 module Gaku
 	class Students::CommuteMethodsController < GakuController
 
+		load_and_authorize_resource :student, :class => Gaku::Student
+    load_and_authorize_resource :commute_method, :through => :student, :class => Gaku::CommuteMethod
+
 		inherit_resources
 		respond_to :html, :js
 

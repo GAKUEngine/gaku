@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class Schools::Campuses::ContactsController < GakuController
 
+      authorize_resource :class => false
+
       inherit_resources
       belongs_to :campus, :parent_class => Gaku::Campus
 

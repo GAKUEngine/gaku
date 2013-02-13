@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'Student CourseEnrollments' do
-  stub_authorization!
+
+  as_admin
 
   let(:student) { create(:student) }
   let(:course) { create(:course, :code => 'fall2050') }

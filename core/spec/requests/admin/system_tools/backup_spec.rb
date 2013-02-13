@@ -2,6 +2,6 @@ require 'spec_helper'
 
 describe 'Admin System Tools Backup' do
 
-  stub_authorization!
+  as_admin
 
 end

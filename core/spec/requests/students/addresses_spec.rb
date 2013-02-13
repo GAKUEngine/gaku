@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'Student Address' do
-  stub_authorization!
+
+  as_admin
 
   let(:student) { create(:student) }
   let(:country) { create(:country, :name => "Japan") }

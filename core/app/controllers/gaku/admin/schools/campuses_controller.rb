@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class Schools::CampusesController < Admin::BaseController
 
+      authorize_resource :class => false
+
       inherit_resources
       belongs_to :school, :parent_class => Gaku::School
       respond_to :js, :html

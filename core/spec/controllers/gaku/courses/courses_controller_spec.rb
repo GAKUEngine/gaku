@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::CoursesController do
 
+  as_admin
+
   let(:course) { create(:course) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::CoursesController do
       gaku_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #show' do
     it "assigns the requested course to @course" do
@@ -37,9 +39,9 @@ describe Gaku::CoursesController do
     context "with valid attributes" do
       it "saves the new course in the db" do
         expect{
-          gaku_post :create, course: attributes_for(:course)  
+          gaku_post :create, course: attributes_for(:course)
         }.to change(Gaku::Course, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
@@ -48,7 +50,7 @@ describe Gaku::CoursesController do
   describe "PUT #update" do
 
     it "locates the requested @course" do
-      gaku_put :update, id: course, course: attributes_for(:course) 
+      gaku_put :update, id: course, course: attributes_for(:course)
       assigns(:course).should eq(course)
     end
 

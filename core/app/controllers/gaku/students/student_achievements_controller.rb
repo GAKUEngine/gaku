@@ -1,6 +1,10 @@
 module Gaku
   class Students::StudentAchievementsController < GakuController
 
+    #load_and_authorize_resource :student, :class => Gaku::Student
+    #load_and_authorize_resource :achievement, :through => :student, :class => Gaku::Achievement
+    skip_authorization_check
+
     inherit_resources
     belongs_to :student
     respond_to :js, :html, :json

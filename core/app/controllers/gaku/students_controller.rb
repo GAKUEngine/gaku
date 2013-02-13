@@ -1,6 +1,9 @@
 module Gaku
   class StudentsController < GakuController
     include SheetHelper
+
+    load_and_authorize_resource :class =>  Gaku::Student
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
