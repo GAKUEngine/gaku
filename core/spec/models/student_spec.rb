@@ -4,6 +4,8 @@ describe Gaku::Student do
 
   context "validations" do
 
+    it_behaves_like 'person'
+
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
 
@@ -57,7 +59,6 @@ describe Gaku::Student do
     context 'enrollment_status' do
 
     end
-    xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
     xit 'seat_number_widget'

@@ -1,22 +1,8 @@
 .row-fluid
   .span12
     = f.select :class_group_ids, class_groups,{:prompt => t(:'class_group.none_assigned')}, :label => t(:'class')
-.row-fluid
-  .span6
-    = f.text_field :surname_reading, :label => surname_reading_label
-  .span6
-    = f.text_field :name_reading, :label => name_reading_label
-.row-fluid
-  .span6
-    = f.text_field :surname, :label => surname_label
-  .span6
-    = f.text_field :name, :label => name_label
 
-.row-fluid
-  .span6
-    = f.text_field :birth_date, :class => "datepicker", :label => t(:birth_date)
-  .span6
-    = f.select :gender, genders, {:prompt => t(:'gender.choose'), :selected => gender_preset}, :label => t(:gender)
+= render 'gaku/shared/form_fields/person_form_fields', :f => f
 
 .row-fluid
   .span6
@@ -29,7 +15,3 @@
     = f.select :scholarship_status_id, scholarship_statuses, {:include_blank => true}, :label => t(:scholarship_status)
   .span6
     = f.select :enrollment_status_id, enrollment_statuses,  {:include_blank => true}, :label => t(:enrollment_status)
-
-coffee:
-  $(document).ready ->
-    $('.datepicker').datepicker()
