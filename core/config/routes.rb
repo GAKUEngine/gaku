@@ -106,6 +106,14 @@ Gaku::Core::Engine.routes.draw do
     get :soft_delete, :on => :member
 
     resources :notes
+
+    resources :addresses do
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
+    end
   end
 
   resources :students do
