@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Teacher Images" do
+describe "Teacher Picture" do
 
   as_admin
 
