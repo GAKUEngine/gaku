@@ -149,12 +149,16 @@ Gaku::Core::Engine.routes.draw do
         post :make_primary, :on => :member
       end
 
-      resources :addresses, :controller => 'students/guardians/addresses' do
-        post :make_primary, :on => :member
+      resources :addresses do
+        member do
+          post :make_primary
+          get :soft_delete
+          get :recovery
+        end
       end
     end
 
-    resources :addresses, :controller => 'students/addresses' do
+    resources :addresses do
       member do
         post :make_primary
         get :soft_delete
