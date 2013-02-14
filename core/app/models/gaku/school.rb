@@ -1,6 +1,8 @@
 module Gaku
   class School < ActiveRecord::Base
 
+    include Picture
+
   	has_many :campuses
     has_many :simple_grades
 

@@ -4,6 +4,7 @@ describe Gaku::Campus do
 	context "validations" do
 
     it_behaves_like 'contactable'
+    it_behaves_like 'avatarable'
 
 		it { should belong_to(:school) }
 		it { should have_one(:address) }

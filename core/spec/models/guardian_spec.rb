@@ -8,6 +8,7 @@ describe Gaku::Guardian do
     it_behaves_like 'person'
     it_behaves_like 'addressable'
     it_behaves_like 'contactable'
+    it_behaves_like 'avatarable'
 
     it { should belong_to :user }
     it { should have_and_belong_to_many :students }
