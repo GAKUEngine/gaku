@@ -8,8 +8,4 @@ $ ->
     e.preventDefault()
     $('#delete-modal').modal('show')
 
-  $("#upload-student-picture-link").click ->
-    $("#upload-student-picture").toggle()
-
-  $('.datepicker').datepicker(format:'yyyy/mm/dd')
   $(".class-group-select").combobox()
