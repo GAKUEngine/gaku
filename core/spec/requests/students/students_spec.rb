@@ -72,54 +72,7 @@ describe 'Students' do
       end
     end
 
-    context "commute method", js: true do
-      context " #add" do
-        before do
-          commute_method_type
-          visit gaku.student_path(student)
-          click '#edit-student-commute-method-link'
-          #wait_until_invisible '#edit-student-commute-method-link'
-          wait_until_visible 'form#new_commute_method'
-        end
 
-        it ' adds' do
-          select "#{commute_method_type.name}", from: 'commute_method_commute_method_type_id'
-          click_on 'submit-student-commute-method-button'
-          page.should have_content "#{commute_method_type.name}"
-          #wait_until_visible '#new-student-commute-method-link'
-        end
-
-        it 'cancels adding' do
-          click_on 'Cancel'
-          wait_until_invisible modal
-        end
-      end
-
-      context ' #edit' do
-        before do
-          commute_method_type.commute_methods<<commute_method
-          commute_method_type_train
-          visit gaku.student_path(student)
-          page.should have_content "#{student.commute_method.commute_method_type.name}"
-          click '#edit-student-commute-method-link'
-        end
-
-        it ' edits' do
-          select 'Train', from: 'commute_method_commute_method_type_id'
-          click_on 'submit-student-commute-method-button'
-          wait_until_visible '#edit-student-commute-method-link'
-          page.should have_content "Train"
-        end
-
-        it 'cancels editing' do
-          click_on 'Cancel'
-          wait_until_invisible modal
-          page.should have_content "#{commute_method_type.name}"
-        end
-
-      end
-
-    end
 
     context '#edit from show view', js: true do
       before do
