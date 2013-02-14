@@ -6,4 +6,17 @@ FactoryGirl.define  do
     surname_reading { Faker::Name.last_name }
     gender "male"
   end
+
+  factory :teacher_with_one_address, :parent => :teacher do
+    after_create do |teacher|
+      FactoryGirl.create(:address, :addressable => teacher)
+    end
+  end
+
+  factory :teacher_with_two_addresses, :parent => :teacher do
+    after_create do |teacher|
+      FactoryGirl.create(:address, :addressable => teacher)
+      FactoryGirl.create(:address, :addressable => teacher)
+    end
+  end
 end
