@@ -555,6 +555,8 @@ en:
       plural: Students
     teacher:
       plural: Teachers
+    extracurricular_activity:
+      plural: Extracurriculars
     syllabus:
       plural: Syllabuses
   name: Name

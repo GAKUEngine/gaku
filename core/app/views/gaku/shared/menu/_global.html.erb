@@ -3,20 +3,11 @@
 
   <li><%= link_to t(:'menu.teacher.plural'), teachers_path %></li>
 
-  <li class="dropdown" data-hook="class_groups_menu">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t(:'menu.class_group.management') %>
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-      <li data-hook="class_groups"><%= link_to t(:'menu.class_group.plural'), class_groups_path %></li>
-    </ul>
-  </li>
-
+  <li><%= link_to t(:'menu.class_group.plural'), class_groups_path %></li>
 
   <li class="dropdown" data-hook="courses_menu">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t(:'menu.course.management') %>
+      <%= t(:'menu.course.plural') %>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
@@ -26,16 +17,9 @@
     </ul>
   </li>
 
+  <li><%= link_to t(:'menu.exam.plural'), exams_path %></li>
+  <li><%= link_to t(:'menu.extracurricular_activity.plural'), extracurricular_activities_path %></li>
 
-  <li class="dropdown" data-hook="exams_menu">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= t(:'menu.exam.management') %>
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-      <li data-hook="exams"><%= link_to t(:'menu.exam.plural'), exams_path %></li>
-    </ul>
-  </li>
 
   <%= render :partial => 'gaku/shared/menu/admin' %>
 
