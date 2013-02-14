@@ -383,4 +383,29 @@ describe Gaku::Admin::AdmissionsController do
     end
   end
 
+  context 'soft_delete' do
+    
+    before do
+      @admission = attributes_for(:admission, 
+                                          admission_period_id: admission_period.id,
+                                          admission_method_id: admission_method_regular.id,
+                                          student_id: student.id)
+      gaku_js_post :create, admission: @admission
+      expect(response).to be_success
+      @admission = Gaku::Admission.all.first
+      gaku_js_post :soft_delete, id:@admission.id
+      @admission.reload
+    end
+
+    it 'changes is deleted attribute' do
+      expect(@admission.is_deleted).to eq true
+    end
+
+    it 'changes is deleted attribute for all admission\'s phase records' do
+      @admission.admission_phase_records.each do |rec|
+          expect(rec.is_deleted).to eq true
+      end
+    end
+  end
+
 end
