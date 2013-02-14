@@ -8,6 +8,7 @@ describe Gaku::Student do
     it_behaves_like 'addressable'
     it_behaves_like 'notable'
     it_behaves_like 'contactable'
+    it_behaves_like 'avatarable'
     it_behaves_like 'thrashable'
 
     it { should have_many :course_enrollments }
@@ -36,8 +37,6 @@ describe Gaku::Student do
 
     it { should have_and_belong_to_many :guardians }
 
-    it { should have_attached_file :picture }
-
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
 
     it { should allow_mass_assignment_of :admitted }
@@ -47,7 +46,6 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of :class_groups_attributes }
     it { should allow_mass_assignment_of :guardians }
     it { should allow_mass_assignment_of :guardians_attributes }
-    it { should allow_mass_assignment_of :picture }
     it { should allow_mass_assignment_of :student_id_number }
     it { should allow_mass_assignment_of :student_foreign_id_number }
     it { should allow_mass_assignment_of :scholarship_status_id }

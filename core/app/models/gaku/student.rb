@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Person, Addresses, Contacts, Notes, Trashable
+    include Person, Addresses, Contacts, Notes, Picture, Trashable
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
@@ -44,11 +44,8 @@ module Gaku
     attr_accessible :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
-                    :picture,
                     :student_id_number, :student_foreign_id_number,
                     :scholarship_status_id, :enrollment_status_id, :commute_method_id
-
-    has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
 
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true

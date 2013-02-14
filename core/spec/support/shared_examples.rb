@@ -65,3 +65,8 @@ end
 shared_examples_for 'thrashable' do
   it { should allow_mass_assignment_of :is_deleted }
 end
+
+shared_examples_for 'avatarable' do
+  it { should have_attached_file :picture }
+  it { should allow_mass_assignment_of :picture }
+end
