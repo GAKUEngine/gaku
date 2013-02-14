@@ -8,16 +8,7 @@
     = render 'show_table', :teacher => @teacher
 
   .span3.well
-    .row-fluid.pagination-centered
-      h4= t(:'picture')
-
-    .row-fluid.mt-s
-      .span12.pagination-centered
-        = image_tag @teacher.picture.url(:thumb), :id => "teacher-picture"
-    .row-fluid.mt-s
-      = button_to t(:'pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-picture-link", :class => "span12 btn"
-      #upload-picture.hide
-        = render 'upload_picture'
+    = render 'gaku/shared/picture', :resource => @teacher
 
 
 = well_div do
