@@ -18,6 +18,17 @@ module Gaku
       def edit_master
       end
 
+      def update
+        @school = School.find(params[:id])
+        super do |format|
+          if params[:school][:picture]
+            format.html { redirect_to [:admin, @school], :notice => t('notice.uploaded', :resource => t('picture')) }
+          else
+            format.js { render }
+           end
+        end
+      end
+
       private
 
       def master_school

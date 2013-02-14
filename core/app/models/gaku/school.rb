@@ -22,6 +22,10 @@ module Gaku
       name
     end
 
+    def primary?
+      self.is_primary
+    end
+
 
     private
 

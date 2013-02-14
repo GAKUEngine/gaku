@@ -8,8 +8,7 @@
 = content_for :new_form do
   #new-admin-school.hide
 
-
-= render 'master_school', :master_school => @master_school if @master_school
+= render 'show_table', :school => @master_school if @master_school
 
 =hr
 

@@ -10,6 +10,17 @@ module Gaku
 
       before_filter :count, :only => [:create, :destroy]
 
+      def update
+        @campus = Campus.find(params[:id])
+        super do |format|
+          if params[:campus][:picture]
+            format.html { redirect_to [:admin, @campus.school, @campus], :notice => t('notice.uploaded', :resource => t('picture')) }
+          else
+            format.js { render }
+           end
+        end
+      end
+
       private
 
       def count

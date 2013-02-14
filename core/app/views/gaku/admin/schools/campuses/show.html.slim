@@ -1,8 +1,14 @@
-= well_div do
-  = table do
-    tbody
-      tr
-        td = @campus.name
+.row-fluid
+  .span9
+    = table_for 'campus-index' do
+      tbody
+        tr
+          th.btn-c1 = t(:'campus.name')
+          td.vm
+            = @campus.name
+
+  .span3.well
+    = render 'picture', :campus => @campus
 
 = render 'gaku/admin/schools/campuses/contacts/contacts'
 = hr
