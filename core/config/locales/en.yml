@@ -553,6 +553,8 @@ en:
       plural: Exams
     student:
       plural: Students
+    teacher:
+      plural: Teachers
     syllabus:
       plural: Syllabuses
   name: Name
