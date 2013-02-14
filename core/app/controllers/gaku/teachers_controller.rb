@@ -8,6 +8,7 @@ module Gaku
 
     before_filter :count, :only => [:index, :create,:destroy]
     before_filter :notable, :only => :show
+    before_filter :teacher, :only => [:soft_delete, :update]
 
     def soft_delete
       @teacher = Teacher.find(params[:id])
@@ -15,11 +16,24 @@ module Gaku
       redirect_to teachers_path, :notice => t(:'notice.destroyed', :resource => t(:'teacher.singular'))
     end
 
+    def update
+      super do |format|
+        if params[:teacher][:picture]
+          format.html { redirect_to @teacher, :notice => t('notice.uploaded', :resource => t('picture')) }
+        else
+          format.js { render }
+         end
+      end
+    end
 
     private
 
     def count
       @count = Teacher.count
+    end
+
+    def teacher
+      @teacher = Teacher.find(params[:id])
     end
 
     def notable
