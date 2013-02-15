@@ -12,6 +12,9 @@
 
 
 = well_div do
+  = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@teacher]}
+
+= well_div do
   #teacher-notes
     = render :partial => 'gaku/notes/notes'
 

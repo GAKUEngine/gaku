@@ -44,7 +44,7 @@ module Gaku
     end
 
     def addressable
-      klasses = [Gaku::Student, Gaku::Campus, Gaku::Guardian].select do |c|
+      klasses = [Gaku::Student, Gaku::Campus, Gaku::Guardian, Gaku::Teacher].select do |c|
         params[c.to_s.foreign_key]
       end
 
