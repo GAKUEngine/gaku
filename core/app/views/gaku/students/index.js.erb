@@ -3,11 +3,14 @@ $('.students-count').html('<%= print_count(@students_count, t_student_list) %>')
 
 
 
+
 var students_per_page = 10;
 var pagination = $('.pagination');
 
-if('<%= @students.count %>' < students_per_page) {
-  pagination.hide();
-} else {
-  pagination.show();
-}
+<% if !params[:page].present? %>
+  if('<%= @students.count %>' < students_per_page) {
+    pagination.hide();
+  } else {
+    pagination.show();
+  }
+<% end %>
