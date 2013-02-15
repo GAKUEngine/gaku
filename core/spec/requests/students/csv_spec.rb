@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student CSV' do
 
-  stub_authorization!
+  as_admin
 
   let!(:student) { create(:student, :name => 'John', :surname => 'Doe') }
   let!(:student2) { create(:student, :name => 'Susumu', :surname => 'Yokota') }

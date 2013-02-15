@@ -2,14 +2,16 @@ module Gaku
   module Admin
   	class PresetsController < Admin::BaseController
 
+      authorize_resource :class => false
+
     	inherit_resources
 
     	def students
-      	@preset_hash =  Preset.load_presets_hash(Preset::PRESETS[:student])
+      	@preset_hash = Preset.load_presets_hash(Preset::PRESETS[:student])
       end
 
     	def locale
-        @preset_hash =  Preset.load_presets_hash(Preset::PRESETS[:locale])
+        @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:locale])
     	end
 
       def grading

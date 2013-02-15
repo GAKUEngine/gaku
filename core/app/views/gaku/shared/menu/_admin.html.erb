@@ -6,6 +6,7 @@
   <ul class="dropdown-menu">
     <li data-hook="school_details"><%= link_to t('menu.admin.school_details'), admin_school_details_path %></li>
     <li data-hook="schools"><%= link_to t('menu.admin.schools'), admin_schools_path %></li>
+    <li data-hook="grading_methods"><%= link_to t('menu.admin.grading_methods'), admin_grading_methods_path %></li>
     <li data-hook="specialties"><%= link_to t('menu.admin.specialties'), admin_specialties_path %></li>
     <li data-hook="achievement"><%= link_to t('menu.admin.achievements'), admin_achievements_path %></li>
     <li class="dropdown-submenu" data-hook="types_sub_menu">
@@ -37,12 +38,29 @@
       </ul>
     </li>
 
+    <li class="dropdown-submenu" data-hook="users_and_roles_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.users.users_and_roles') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="users"><%= link_to t('menu.admin.users.users'), admin_users_path %></li>
+        <li data-hook="roles">
+          <%= link_to t('menu.admin.users.roles'), admin_roles_path %>
+        </li>
+      </ul>
+    </li>
+
     <li class="dropdown-submenu" data-hook="presets_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.preset.plural') %></a>
       <ul class="dropdown-menu">
-        <li data-hook="student_presets"><%= link_to t('menu.admin.preset.items.student'), students_admin_presets_path %></li>
-        <li data-hook="grading_presets"><%= link_to t('menu.admin.preset.items.grading'), grading_admin_presets_path %></li>
-        <li data-hook="locale_presets"><%= link_to t('menu.admin.preset.items.locale'), locale_admin_presets_path %></li>
+        <li data-hook="student_presets">
+          <%= link_to t('menu.admin.preset.items.student'), students_admin_presets_path %>
+        </li>
+        <li data-hook="grading_presets">
+          <%= link_to t('menu.admin.preset.items.grading'), grading_admin_presets_path %>
+        </li>
+        <li data-hook="locale_presets"><%= link_to t('menu.admin.preset.items.locale'), locale_admin_presets_path %>
+        </li>
+        <li data-hook="defaults_presets"><%= link_to t('menu.admin.preset.items.defaults'), defaults_admin_presets_path %>
+        </li>
       </ul>
     </li>
 

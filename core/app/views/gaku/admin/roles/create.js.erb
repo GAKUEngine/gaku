@@ -1,0 +1,7 @@
+$('#admin-roles-index tbody').append('<%= render_js_partial("role", {:role => @role}) %>');
+
+$('#new-admin-role').slideToggle();
+$('#new-admin-role-link').show();
+
+$('.admin-roles-count').html('<%= print_count(@count+1, t_role_list) %>');
+showNotice("<%= render_flash %>");

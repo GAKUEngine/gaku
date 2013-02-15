@@ -102,6 +102,19 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, :controller => 'syllabuses/importer'
   end
 
+  resources :teachers do
+    get :soft_delete, :on => :member
+
+    resources :notes
+
+    resources :addresses do
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
+    end
+  end
 
   resources :students do
 
@@ -149,12 +162,16 @@ Gaku::Core::Engine.routes.draw do
         post :make_primary, :on => :member
       end
 
-      resources :addresses, :controller => 'students/guardians/addresses' do
-        post :make_primary, :on => :member
+      resources :addresses do
+        member do
+          post :make_primary
+          get :soft_delete
+          get :recovery
+        end
       end
     end
 
-    resources :addresses, :controller => 'students/addresses' do
+    resources :addresses do
       member do
         post :make_primary
         get :soft_delete
@@ -206,6 +223,10 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :users
+    resources :roles
+    resources :grading_methods
+
 
     namespace :changes do
       resources :students, :controller => 'student_changes'
@@ -227,6 +248,7 @@ Gaku::Core::Engine.routes.draw do
         get :students
         get :locale
         get :grading
+        get :defaults
         put :update_presets
       end
     end
@@ -252,10 +274,6 @@ Gaku::Core::Engine.routes.draw do
       delete :soft_delete
       get :recovery
     end
-  end
-
-  resource :grading_methods do
-    get :index
   end
 
 end

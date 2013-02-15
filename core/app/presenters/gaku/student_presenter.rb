@@ -2,14 +2,6 @@ module Gaku
   class StudentPresenter < BasePresenter
     presents :student
 
-    def phonetic_reading
-      student.surname_reading + " " + student.name_reading
-    end
-
-    def to_s
-      student.surname + " " + student.name
-    end
-
     def class_group
       str = ''
       if student.class_group_enrollments.last

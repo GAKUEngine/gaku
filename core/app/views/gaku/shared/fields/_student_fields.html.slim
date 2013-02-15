@@ -4,10 +4,9 @@
   td.vm-tc = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
 - else
   td.vm-tc = check_box_tag "","", false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
-td.surname = student.surname
-td.name = student.name
-td.birth = student.birth_date
-td.gender = student.gender.nil? ? '' : (student.gender ? t('gender.male') : t('gender.female'))
+
+= render 'gaku/shared/fields/person_fields', :person => student
+
 td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
 td.admitted = student.admitted

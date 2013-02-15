@@ -1,0 +1,4 @@
+- target ||= prepare_target(nested_resources, address) if defined?(nested_resources)
+-unless address.nil? or address.new_record? or !address
+  tr id="address-#{address.id}"
+    = render :partial => 'gaku/addresses/fields', :locals => {:address => address, :target => target  }

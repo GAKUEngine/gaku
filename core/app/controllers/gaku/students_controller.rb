@@ -1,6 +1,9 @@
 module Gaku
   class StudentsController < GakuController
     include SheetHelper
+
+    load_and_authorize_resource :class =>  Gaku::Student
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
@@ -55,32 +58,17 @@ module Gaku
           :disposition => "attachment; filename=students.csv"
     end
 
+
     def update
       @student = get_student
-      if @student.update_attributes(params[:student])
-        respond_with(@student) do |format|
-          unless params[:student].nil?
-            if !params[:student][:addresses_attributes].nil?
-              format.js { render 'students/addresses/create' }
-            elsif !params[:student][:notes_attributes].nil?
-              format.js { render 'students/notes/create' }
-            else
-              if !params[:student][:picture].blank?
-                format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
-              else
-                format.js { render }
-              end
-            end
-          end
-          format.html { redirect_to @student }
-        end
-
-      else
-        render :edit
+      super do |format|
+        if params[:student][:picture]
+          format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
+        else
+          format.js { render }
+         end
       end
     end
-
-
 
     def autocomplete_search
       # search only name or surname separate

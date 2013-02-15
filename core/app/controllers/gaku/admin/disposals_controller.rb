@@ -3,6 +3,9 @@ module Gaku
 		class DisposalsController < Admin::BaseController
 			helper_method :sort_column, :sort_direction
 
+			#load_and_authorize_resource :class =>  Version
+			authorize_resource :class => false
+
 			def students
 				@students = Student.where(:is_deleted => true)
 			end

@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "CourseExams"  do
-  stub_authorization!
+
+  as_admin
 
   let(:syllabus) { create(:syllabus) }
   let(:course) { create(:course) }
@@ -9,7 +10,7 @@ describe "CourseExams"  do
   let(:exam) { create(:exam, :name => 'Math') }
   let(:exam2) { create(:exam) }
 
-  before do   
+  before do
     syllabus.exams << exam
     syllabus.exams << exam2
     course.students << student
@@ -19,7 +20,7 @@ describe "CourseExams"  do
 
     click_link 'Exams'
   end
-  
+
   it "shows grading link" do
     click_link 'Grading'
     current_path.should eq "/courses/#{course.id}/exams/#{exam.id}/grading"

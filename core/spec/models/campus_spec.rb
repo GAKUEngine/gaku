@@ -2,8 +2,11 @@ require 'spec_helper'
 
 describe Gaku::Campus do
 	context "validations" do
+
+    it_behaves_like 'contactable'
+    it_behaves_like 'avatarable'
+
 		it { should belong_to(:school) }
-		it { should have_many(:contacts) }
 		it { should have_one(:address) }
 
     it { should validate_presence_of(:name) }

@@ -67,6 +67,10 @@ module Gaku
       Gaku::School.all.collect { |s| [s.name, s.id] }
     end
 
+    def roles
+      Gaku::Role.all
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
@@ -171,6 +175,24 @@ module Gaku
         concat "#{simple_grade} (#{simple_grade.grade})"
         concat ', ' unless simple_grade.equal? simple_grades.last
       end
+    end
+
+
+    def chooser_preset
+      @chooser_preset ||= Gaku::Preset.chooser_table_fields
+    end
+
+    def enabled_field?(field)
+      chooser_preset[field].to_i == 1 rescue true
+    end
+
+    def prepare_target(nested_resource, address)
+      return nil if nested_resource.blank?
+      [nested_resource, address].flatten
+    end
+
+    def prepare_resource_name(nested_resources, resource)
+      @resource_name = [nested_resources.map {|r| get_class(r) }, resource.to_s].flatten.join '-'
     end
 
   end

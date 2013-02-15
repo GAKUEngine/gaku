@@ -1,6 +1,8 @@
 module Gaku
   class SyllabusesController < GakuController
 
+    load_and_authorize_resource :class =>  Gaku::Syllabus
+
     #before_filter :load_before_index, :only => :index
     #before_filter :load_before_show,  :only => [:show, :destroy]
     before_filter :load_before_show,  :only => :show

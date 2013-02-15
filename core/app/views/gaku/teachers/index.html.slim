@@ -1,0 +1,16 @@
+= content_for :title, t(:'teacher.list')
+
+= content_for :index_header do
+  .pull-left
+    = count_div 'teachers-count' do
+      = print_count @count, t(:'teacher.list')
+  .pull-right
+    = ajax_link_to_new t(:'teacher.new'), new_teacher_path, :id => "new-teacher-link"
+
+= content_for :new_form do
+  #new-teacher.hide
+
+= hr
+
+#teachers-index-div
+  = render 'teachers'

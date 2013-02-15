@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::SyllabusesController do
 
+  as_admin
+
   let(:syllabus) { create(:syllabus) }
 
   describe "GET #index" do
@@ -14,7 +16,7 @@ describe Gaku::SyllabusesController do
       gaku_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #show' do
     it "assigns the requested syllabus to @syllabus" do
@@ -44,15 +46,15 @@ describe Gaku::SyllabusesController do
     context "with valid attributes" do
       it "saves the new syllabus in the db" do
         expect{
-          gaku_js_post :create, syllabus: attributes_for(:syllabus)  
+          gaku_js_post :create, syllabus: attributes_for(:syllabus)
         }.to change(Gaku::Syllabus, :count).by 1
-        
+
       end
     end
     context "with invalid attributes" do
       it "does not save the new syllabus in the db" do
         expect{
-          gaku_js_post :create, syllabus: {name: ''}  
+          gaku_js_post :create, syllabus: {name: ''}
         }.to_not change(Gaku::Syllabus, :count)
       end
     end
@@ -61,7 +63,7 @@ describe Gaku::SyllabusesController do
   describe "PUT #update" do
 
     it "locates the requested @syllabus" do
-      gaku_put :update, id: syllabus, syllabus: attributes_for(:syllabus) 
+      gaku_put :update, id: syllabus, syllabus: attributes_for(:syllabus)
       assigns(:syllabus).should eq(syllabus)
     end
 

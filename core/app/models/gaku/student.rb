@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Addresses, Contacts, Notes, Trashable
+    include Person, Addresses, Contacts, Notes, Picture, Trashable
 
     has_many :course_enrollments
     has_many :courses, :through => :course_enrollments
@@ -41,26 +41,29 @@ module Gaku
                                :is_deleted
                              ]
 
-    attr_accessible :name, :surname, :middle_name, :name_reading, :surname_reading,
-                    :birth_date, :gender,
-                    :admitted, :graduated,
+    attr_accessible :admitted, :graduated,
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
-                    :picture,
                     :student_id_number, :student_foreign_id_number,
                     :scholarship_status_id, :enrollment_status_id, :commute_method_id
 
-    has_attached_file :picture, :styles => {:thumb => "256x256>"}, :default_url => "/assets/pictures/thumb/missing.png"
-
-    validates_presence_of :name, :surname
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
 
 
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
-    def to_s
-      "#{self.surname} #{self.name}"
+    def identification_number
+      "%surname-%name-%id".gsub(/%(\w+)/) do |s|
+        case s
+        when "%name"
+          name.downcase
+        when "%surname"
+          surname.downcase
+        when "%id"
+          id
+        end
+      end
     end
 
     def class_group_widget

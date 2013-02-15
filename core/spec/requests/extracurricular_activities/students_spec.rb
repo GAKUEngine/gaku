@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ExtracurricularActivity Students' do
 
-  stub_authorization!
+  as_admin
 
   let(:extracurricular_activity) { create(:extracurricular_activity) }
   let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }

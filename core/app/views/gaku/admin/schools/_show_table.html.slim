@@ -1,0 +1,31 @@
+#school-index
+.row-fluid
+  .span9
+    = table do
+      tr
+        th.btn-c1  width="25%" = t(:'school.name')
+        td = school.name
+      tr
+        th.btn-c2 = t(:'school.code')
+        td = school.grades
+      tr
+        th.btn-c2 = t(:'school.campuses')
+        td = school.campuses.count
+      tr
+        th.btn-c2 = t(:'school.slogan')
+        td = school.slogan
+      tr
+        th.btn-c2 = t(:'school.founded')
+        td = school.founded
+      tr
+        th.btn-c2 = t(:'school.principal')
+        td = school.principal
+      tr
+        th.btn-c2 = t(:'school.vice_principal')
+        td = school.vice_principal
+      tr
+        th.btn-c2 = t(:'school.grades')
+        td = school.grades
+
+  .span3.well
+    = render 'gaku/admin/shared/picture', :resource => school

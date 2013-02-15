@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Syllabus Notes' do
 
-  stub_authorization!
+  as_admin
 
   let(:syllabus) { create(:syllabus) }
   let(:note) { create(:note, :notable => syllabus) }

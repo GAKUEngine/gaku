@@ -1,5 +1,9 @@
 module Gaku
   class ClassGroups::StudentsController < GakuController
+
+    load_and_authorize_resource :class_group, :class => Gaku::ClassGroup
+    load_and_authorize_resource :student, :through => :class_group, :class => Gaku::Student
+
     inherit_resources
     actions :index, :show, :create, :update, :edit, :delete
 
@@ -11,7 +15,7 @@ module Gaku
       enrolled_students_ids = ClassGroupEnrollment.where(:class_group_id => @class_group.id).map {|x| x.student_id}
       @class_group_enrollment = ClassGroupEnrollment.new
       @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).all
-      render 'new'  
+      render 'new'
     end
 
     def enroll_student
@@ -43,7 +47,7 @@ module Gaku
       end
     end
 
-    private 
+    private
 
     def class_group
       @class_group =  ClassGroup.find(params[:class_group_id])
