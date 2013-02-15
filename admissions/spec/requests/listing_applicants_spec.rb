@@ -56,24 +56,66 @@ describe 'Admin Listing Applicants' do
       page.should have_content "#{student.name}"
     end
 
-    it 'deletes applicant' do
-      click '.show-link'
-      current_path.should eq "/admin/students/1"
-      page.should have_content "#{student.name}"
-      click '#delete-student-link'
-      within(modal) { click_on "Delete" }
-      accept_alert
-      wait_for_ajax
-      student.reload
-      page.should have_content "successfully"
-      current_path.should == "/admin/admissions/listing_applicants"
-      page.should_not have_content "#{student.name}"
-      visit gaku.listing_applicants_admin_admissions_path
-      page.should_not have_content "#{student.name}"
-      visit gaku.students_path
-      page.should_not have_content "#{student.name}"
-      visit gaku.students_admin_disposals_path
-      page.should have_content "#{student.name}"
+    context 'deleting applicant' do
+      
+      before do
+        click '.show-link'
+        current_path.should eq "/admin/students/1"
+        page.should have_content "#{student.name}"
+        click '#delete-student-link'
+        within(modal) { click_on "Delete" }
+        accept_alert
+        wait_for_ajax
+        student.reload
+      end
+
+      it 'soft deletes the applicant' do
+        page.should have_content "successfully"
+        current_path.should == "/admin/admissions/listing_applicants"
+        page.should_not have_content "#{student.name}"
+        visit gaku.listing_applicants_admin_admissions_path
+        page.should_not have_content "#{student.name}"
+      end
+
+      it 'shows the student in student disposals' do
+        visit gaku.students_admin_disposals_path
+        page.should have_content "#{student.name}"
+      end
+
+      it 'deletes student from students index' do
+        visit gaku.students_path
+        page.should_not have_content "#{student.name}"
+      end
+
+      xit 'shows the deleted applicant' do
+        visit gaku.students_admin_disposals_path
+        page.should have_content "#{student.name}"
+        click '.show-link'
+        current_path.should == ""
+      end
+
+      xit 'revert deleting' do
+        visit gaku.students_admin_disposals_path
+        page.should have_content "#{student.name}"
+        click '.recovery-link'
+        visit gaku.listing_applicants_admin_admissions_path
+        page.should have_content "#{student.name}"
+      end
+
+      it 'deletes forever' do
+        visit gaku.students_admin_disposals_path
+        page.should have_content "#{student.name}"
+        click delete_link
+        accept_alert
+        page.should_not have_content "#{student.name}"
+        student.reload
+        visit gaku.students_admin_disposals_path
+        page.should_not have_content "#{student.name}"
+        visit gaku.listing_applicants_admin_admissions_path
+        page.should_not have_content "#{student.name}"
+        visit gaku.students_path
+        page.should_not have_content "#{student.name}"
+      end
     end
   end
 end
