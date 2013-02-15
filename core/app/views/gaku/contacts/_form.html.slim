@@ -1,0 +1,4 @@
+= remote_form_for [@nested_resources, @contactable, @contact].flatten do |f|
+  = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+  = buttons_for @contact, :nested_id => @resource_name
+

@@ -12,7 +12,7 @@
       = render 'gaku/shared/picture', :resource => @student
 
   = well_div do
-    = render :partial => 'gaku/students/contacts/contacts'
+    = render 'gaku/contacts/contacts', :nested_resources => [@student]
 
   = well_div do
     #student-notes

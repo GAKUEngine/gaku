@@ -1,0 +1,20 @@
+$('#<%= @resource_name.pluralize %>-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
+$("#new-<%= @resource_name %>-link").show();
+$('#new-<%= @resource_name %>').slideToggle();
+showNotice("<%= render_flash %>");
+
+$('.<%= @resource_name.pluralize %>-count').html("<%= print_count(@count+1, t_contact_list) %>");
+
+
+<% if @contact.is_primary? %>
+  $('#<%= @resource_name.pluralize %>-index tbody tr').each(function(){
+    $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
+  });
+  $("#contact-<%= @contact.id %>").children('td.primary-contact')
+                                                .find('a')
+                                                .addClass('btn-primary')
+
+
+  $('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
+<% end %>
+

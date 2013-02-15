@@ -149,7 +149,7 @@ Gaku::Core::Engine.routes.draw do
     resources :guardians, :controller => 'students/guardians' do
       get :new_contact, :on => :member
 
-      resources :contacts, :controller => 'students/guardians/contacts' do
+      resources :contacts do
         post :create_modal, :on => :collection
         post :make_primary, :on => :member
       end
@@ -171,7 +171,7 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
-    resources :contacts, :controller => 'students/contacts' do
+    resources :contacts do
       post :make_primary, :on => :member
     end
 
@@ -228,7 +228,7 @@ Gaku::Core::Engine.routes.draw do
 
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'schools/campuses/contacts' do
+        resources :contacts, :controller => 'contacts' do
           post :make_primary, :on => :member
         end
         resources :addresses, :controller => 'schools/campuses/addresses'

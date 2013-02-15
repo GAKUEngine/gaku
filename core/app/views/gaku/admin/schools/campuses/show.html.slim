@@ -10,6 +10,6 @@
   .span3.well
     = render 'picture', :campus => @campus
 
-= render 'gaku/admin/schools/campuses/contacts/contacts'
+= render 'gaku/contacts/contacts', :nested_resources => [:admin, @school, @campus]
 = hr
 = render 'gaku/admin/schools/campuses/addresses/addresses'

@@ -1,0 +1,24 @@
+- prepare_resource_name(nested_resources, :contact)
+div class="#{@resource_name.pluralize}"
+  = index_header do
+    div id="new-#{@resource_name}" class='hide'
+    .pull-left
+      = count_div "#{@resource_name.pluralize}-count" do
+        = print_count nested_resources.last.contacts.count, t_contact_list
+    .pull-right
+      = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, :id => "new-#{@resource_name}-link"
+
+  = hr
+
+  = index_body do
+    = table_for "#{@resource_name.pluralize}-index" do
+      thead
+        tr
+          = th_icon 'home'
+          = th t(:'contact.contact_type')
+          = th t(:'contact.data')
+          = th t(:'contact.details')
+          = th t(:'contact.emergency')
+          = th_actions 2
+      tbody
+        = render :partial => 'gaku/contacts/contact', :collection => nested_resources.last.contacts, :as => :contact, :locals => {:nested_resources => nested_resources}
