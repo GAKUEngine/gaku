@@ -30,7 +30,18 @@ window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBui
 $.fn.enableValidations = ->
   $(this).enableClientSideValidations()
 
+
 $ ->
+
+  $('#sof-delete-link').on 'click', (e)->
+    e.preventDefault()
+    $('#delete-modal').modal('show')
+
+  $("#upload-picture-link").click ->
+    $("#upload-picture").toggle()
+
+  $('.datepicker').datepicker(format:'yyyy/mm/dd')
+
 
   $(document).on 'ajax:success','.delete-link', (evt, data, status, xhr) ->
     $(this).closest('tr').remove()

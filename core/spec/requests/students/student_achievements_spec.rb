@@ -20,6 +20,7 @@ describe 'Student Achievements' do
       visit gaku.student_path(student)
       click '#index-student-achievements-link'
       click new_link
+      wait_until_visible '#cancel-student-achievement-link'
     end
 
     it 'create and show' do

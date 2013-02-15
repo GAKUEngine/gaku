@@ -27,7 +27,7 @@ module Gaku
 
   	def notable
       unnamespaced_klass = ''
-      klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
+      klass = [Gaku::Student, Gaku::Teacher, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
         unnamespaced_klass = c.to_s.split("::")
         params["#{unnamespaced_klass[1].underscore}_id"]
       end

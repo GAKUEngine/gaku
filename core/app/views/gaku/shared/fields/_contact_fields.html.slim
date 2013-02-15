@@ -1,5 +1,5 @@
-td=target.last.contact_type.name if target.last.contact_type
-td=target.last.data
-td=target.last.details
+td=contact.name
+td=contact.data
+td=contact.details
 td
-  =t(:'contact.emergency') if target.last.is_emergency?
+  =t(:'contact.emergency') if contact.is_emergency?

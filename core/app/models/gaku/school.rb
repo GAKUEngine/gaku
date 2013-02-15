@@ -1,6 +1,8 @@
 module Gaku
   class School < ActiveRecord::Base
 
+    include Picture
+
   	has_many :campuses
     has_many :simple_grades
 
@@ -18,6 +20,10 @@ module Gaku
 
   	def to_s
       name
+    end
+
+    def primary?
+      self.is_primary
     end
 
 
