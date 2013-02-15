@@ -1,4 +1,4 @@
-<%- if @addressable.addresses.any? & @address.is_primary? %>
+<%- if @addressable.addresses.any? && @address.is_primary? %>
 	$('#address-<%= @addressable.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 
