@@ -9,18 +9,10 @@
       = render 'show_table', :student => @student
 
     .span3.well
-      .row-fluid.pagination-centered
-        h4= t(:'picture')
-      .row-fluid.mt-s
-        .span12.pagination-centered
-          = image_tag @student.picture.url(:thumb), :id => "student-picture"
-      .row-fluid.mt-s
-        = button_to t(:'pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-student-picture-link", :class => "span12 btn"
-        #upload-student-picture.hide
-          = render 'gaku/students/upload_picture'
+      = render 'gaku/shared/picture', :resource => @student
 
   = well_div do
-    = render :partial => 'gaku/students/contacts/contacts'
+    = render 'gaku/contacts/contacts', :nested_resources => [@student]
 
   = well_div do
     #student-notes

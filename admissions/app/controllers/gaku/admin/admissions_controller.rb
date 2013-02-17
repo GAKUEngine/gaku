@@ -113,18 +113,17 @@ module Gaku
       end
 
       def create_multiple
-        @err_enrollments = []
-        @enrollments = []
+        err_admissions = []
+        admissions = []
         @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
-        @admission_period = AdmissionPeriod.find(params[:admission_period_id])
         @selected_students.each { |student|
           student_id = student.split("-")[1].to_i
           admission = Admission.new( admission_period_id: @admission_period.id,
                                       admission_method_id: @admission_method.id,
                                       student_id: student_id )
           if  admission.save
-            @enrollments << admission
+            admissions << admission
             # TODO change the selected phase
             admission_phase = admission.admission_method.admission_phases.first
             # TODO change the selected phase state
@@ -137,10 +136,10 @@ module Gaku
 
             admission.change_student_to_applicant
           else
-            @err_enrollments << admission
+            err_admissions << admission
           end
         }
-        show_flashes(@enrollments,@err_enrollments)
+        show_flashes(admissions,err_admissions)
       end
 
       def soft_delete

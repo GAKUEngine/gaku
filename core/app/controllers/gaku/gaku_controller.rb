@@ -3,7 +3,7 @@ require "gaku/core/app_responder"
 module Gaku
   class GakuController < ActionController::Base
     protect_from_forgery
-    check_authorization
+    #check_authorization
 
     rescue_from CanCan::AccessDenied do |exception|
       redirect_to root_url, :alert => exception.message

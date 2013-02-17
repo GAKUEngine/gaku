@@ -192,7 +192,7 @@ module Gaku
     end
 
     def prepare_resource_name(nested_resources, resource)
-      @resource_name = [nested_resources.map {|r| get_class(r) }, resource.to_s].flatten.join '-'
+      @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
     end
 
   end
