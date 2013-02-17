@@ -1,0 +1,4 @@
+= render 'gaku/admin/admissions/applicant_fields', :student => student
+td
+  = link_to_show [:admin, student]
+  = ajax_link_to_edit [:edit, :admin, student], :style => "margin:0px"

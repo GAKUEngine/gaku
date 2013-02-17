@@ -1,7 +1,7 @@
 <% if !@student.admission.nil? %>
   $('tr#admission-<%= @student.admission.id %>').html('<%= render_js_partial("gaku/admin/admissions/admission_fields", {:admission => @student.admission}) %>'); // update from index
 <% else %>
-  $('tr#student-<%= @student.id %>').html('<%= render_js_partial("gaku/admin/admissions/applicant_fields", {:student => @student}) %>')
+  $('tr#student-<%= @student.id %>').html('<%= render_js_partial("gaku/admin/admissions/applicant_unit", {:student => @student}) %>')
 <% end %>
 $('.student-index').html('<%= render_js_partial("show_table", {:student => @student}) %>'); //update from show
 $('#edit-student-modal').modal('hide');
