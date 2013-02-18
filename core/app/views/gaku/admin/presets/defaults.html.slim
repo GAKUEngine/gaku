@@ -1,0 +1,50 @@
+= form_tag update_presets_admin_presets_path, :method => :put do
+  = well_div do
+    = fields_for 'presets' do |chooser_table_fields|
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'surname')
+          / t(:'chooser_table_fields')
+          / =hidden_field_tag 'presets[chooser_table_fields[surname]]', false
+          = chooser_table_fields.check_box 'chooser_table_fields[surname]', {:checked => (true if enabled_field?(:surname))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'name')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[name]', {:checked => (true if enabled_field?(:name))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label (:'birth_date')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[birth_date]', {:checked => (true if enabled_field?(:birth_date))}
+        .span6
+      .row-fluid
+          = chooser_table_fields.label t(:'gender.label')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[sex]', {:checked => (true if enabled_field?(:sex))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'class_group.name')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[class_name]', {:checked => (true if enabled_field?(:class_name))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'class_group_enrollment.seat_number')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[seat_number]', {:checked => (true if enabled_field?(:seat_number))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'admitted')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[admitted_on]', {:checked => (true if enabled_field?(:admitted_on))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'address.primary')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[primary_address]', {:checked => (true if enabled_field?(:primary_address))}
+      .row-fluid
+        .span6
+          = chooser_table_fields.label t(:'assignment.plural')
+          / t(:'chooser_table_fields')
+          = chooser_table_fields.check_box 'chooser_table_fields[assignments]', {:checked => (true if enabled_field?(:assignments))}
+    = submit_button t(:'preset.save')

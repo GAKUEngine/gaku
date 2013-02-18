@@ -1,0 +1,10 @@
+// needed for student tab counter
+$("#student-addresses-tab-link").html("<%= print_count(@count+1, t_address_plural) %>");
+
+$('#<%= @resource_name.pluralize %>-index tbody').append('<%= render_js_partial("address", {:address => @address}) %>');
+$('#new-<%= @resource_name %>').slideToggle();
+$('#new-<%= @resource_name %> form')[0].reset();
+$('#new-<%= @resource_name %>-link').show();
+
+showNotice("<%= render_flash %>");
+$('.<%= @resource_name.pluralize %>-count').html('<%= print_count(@count+1, t_address_list) %>');

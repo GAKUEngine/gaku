@@ -1,0 +1,6 @@
+- if session[:current_page] != 'admissions'
+  = button t(:'admissions.go_to_admissions'), admin_admissions_path(admission_params), :id => 'admin-admissions-link'
+- if session[:current_page] != 'listing'
+  = button t(:'admissions.go_to_listing'), listing_admissions_admin_admissions_path(admission_params), :id => 'listing_admissions-admin-admissions-link'
+- if session[:current_page] != 'applicants'
+  = button t(:'admissions.go_to_applicants'), listing_applicants_admin_admissions_path(admission_params), :id => 'listing_applicants-admin-admissions-link'

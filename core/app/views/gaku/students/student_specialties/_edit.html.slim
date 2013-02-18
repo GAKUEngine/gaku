@@ -1,0 +1,8 @@
+= modal_header t(:'student_specialty.edit')
+= modal_body do
+  = remote_form_for [@student, @student_specialty] do |f|
+    =render 'form_fields', :f => f
+    .row-fluid
+      .span12
+        =submit_button t(:'student_specialty.save') , :id => "submit-student-specialty-button"
+        =ajax_link_to_back [@student, :student_specialties]

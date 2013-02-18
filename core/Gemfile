@@ -1,3 +1,5 @@
 eval(File.read(File.dirname(__FILE__) + '/../gaku_engine_dependencies.rb'))
 
+gem 'roo',  :git => 'git://github.com/Empact/roo.git'
+
 gemspec

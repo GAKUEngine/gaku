@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Notes' do
 
-  stub_authorization!
+  as_admin
 
   let(:class_group) { create(:class_group) }
   let(:note) { create(:note, :notable => class_group) }
@@ -35,7 +35,7 @@ describe 'ClassGroup Notes' do
       within(count_div) { page.should have_content 'Notes list(1)' }
       flash_created?
     end
-    
+
     it { has_validations? }
 
     it 'cancels creating', :cancel => true, :js => true do

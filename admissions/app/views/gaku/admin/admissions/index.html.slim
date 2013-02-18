@@ -1,7 +1,7 @@
 - content_for :title, t(:'admissions.candidates.list')
 .pull-right
-  = button t(:'admissions.go_to_listing'), [:listing_admissions, :admin, :admissions], :id => 'listing_admissions-admin-admissions-link'
-  = button t(:'admissions.go_to_applicants'), [:listing_applicants, :admin, :admissions], :id => 'listing_applicants-admin-admissions-link'
+  #admissions_links
+    = render 'gaku/admin/admissions/admissions_links', :admission_params => @admission_params
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0 =t(:'admissions.candidates.list')
@@ -30,3 +30,12 @@
         #new-admin-admission.hide
         #admission-phases
           = render 'gaku/admin/admissions/phases', :admission_method => @admission_method
+
+javascript:
+  $(window).bind("popstate", function(e){
+    if (!e.originalEvent.state.backTag) return;
+    var new_location = location.href;
+    var new_location_edited = new_location.replace('/admissions','/admissions/change_period_method');
+    $.get(new_location_edited);
+  });
+  history.pushState({ backTag: true }, document.title, '')

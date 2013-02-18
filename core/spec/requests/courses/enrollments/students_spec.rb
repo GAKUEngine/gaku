@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "CourseEnrollment"  do
 
-  stub_authorization!
+  as_admin
 
   let(:course) { create(:course) }
   let(:student) { create(:student, :name => "John", :surname => "Doe") }
@@ -20,7 +20,7 @@ describe "CourseEnrollment"  do
 
     it "enrolls and shows" do
       click new_link
-      wait_until_visible cancel_link
+      wait_until_visible modal
       expect do
         find(:css, "input#student-#{student.id}").set(true)
         wait_until { find('#students-checked-div').visible? }
@@ -54,7 +54,7 @@ describe "CourseEnrollment"  do
       course.students.size.should eq 1
 
       click new_link
-      wait_until_visible cancel_link
+      wait_until_visible modal
       within('tr#student-' + student.id.to_s) do
         page.should have_selector("img.enrolled")
       end
@@ -62,15 +62,10 @@ describe "CourseEnrollment"  do
 
     it 'cancels enrolling', :cancel => true do
       click new_link
-      wait_until_visible cancel_link
+      wait_until_visible modal
 
-      click cancel_link
+      click '.cancel-link'
       wait_until_invisible modal
-
-      click new_link
-
-      wait_until_visible cancel_link
-      invisible? new_link
     end
   end
 

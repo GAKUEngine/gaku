@@ -3,4 +3,5 @@
   = form.hidden_field :admission_method_id, :value => params[:admission_method_id]
   = form.fields_for :student, @student do |student_form|
     = render :partial => 'student_form_fields', :locals => { :f => student_form }
+  = form.number_field :applicant_number, :value => @applicant_max_number
   = buttons_for @admission, :nested_id => 'admin-admission', :label => t(:'student.create')

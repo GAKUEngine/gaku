@@ -1,12 +1,30 @@
-= table_for 'students-index' do
-  thead
-    tr
-      = th t(:'surname')
-      = th t(:'name')
-      = th t(:'birth')
-      = th t(:'gender.label')
-      - if !state.admission_phase.exam.nil?
-        = th t(:'exam.exam_score')
-      = th_actions 140
-  tbody
-    = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |h| h[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
+= form_tag change_student_state_admin_admissions_path, :remote => true, :id => "change-student-state-form" do
+  = table_for 'students-index' do
+    thead
+      tr
+        = th_icon 'check'
+        = th t(:'surname')
+        = th t(:'name')
+        = th t(:'birth')
+        = th t(:'gender.label')
+        - if !state.admission_phase.exam.nil?
+          = th t(:'exam.exam_score')
+        /= th_actions 140
+        = th t(:'students.status')
+    tbody
+      = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |s| s[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
+
+  br
+  div class="change-state_#{state.id}-form change-state-form"
+    - if @students.find_all { |s| s[:state_id] == state.id }.map { |i| i[:student] }.any?
+      = render :partial => 'gaku/admin/admissions/state_change_form', :locals => {:state => state}
+
+
+javascript:
+  $('#all_students_check').change(function(){
+    if (this.checked) {
+      $('.student-check').prop('checked', true);
+    }else{
+      $('.student-check').prop('checked', false);
+    }
+  });

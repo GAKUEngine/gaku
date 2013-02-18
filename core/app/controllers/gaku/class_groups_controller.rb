@@ -1,44 +1,27 @@
 module Gaku
   class ClassGroupsController < GakuController
+
+    include StudentChooserController
+
+    load_and_authorize_resource :class =>  Gaku::ClassGroup
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    actions :show, :new, :create, :edit, :update, :destroy
     respond_to :js, :html
 
-    before_filter :load_before_index, :only => :index
+    expose :class_group
+
+
     before_filter :load_before_show, :only => :show
-    before_filter :class_group,  :only => [:destroy, :show, :student_chooser]
     before_filter :count, :only => [:create, :destroy, :index]
 
     def index
       @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
     end
 
-    def student_chooser
-      @search = Student.search(params[:q])
-      @students = @search.result
-
-      @class_groups = ClassGroup.all
-
-      @enrolled_students = @class_group.students.map {|i| i.id.to_s }
-
-      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
-      respond_to do |format|
-        format.js
-      end
-    end
 
     private
-
-      def class_group
-        @class_group = ClassGroup.find(params[:id])
-      end
-
-      def load_before_index
-        @class_group = ClassGroup.new
-      end
 
       def load_before_show
         @notable = ClassGroup.find(params[:id])

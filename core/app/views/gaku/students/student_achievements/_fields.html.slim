@@ -1,0 +1,8 @@
+td = student_achievement.achievement
+
+td = student_achievement.achievement.description
+td = student_achievement.achievement.authority
+td = resize_image student_achievement.achievement.badge, :size => 22
+td
+  = ajax_link_to_edit [:edit, @student, student_achievement], :id => "edit-student-achievement-link"
+  = ajax_link_to_delete [@student, student_achievement], :id => "delete-student-achievement-link"

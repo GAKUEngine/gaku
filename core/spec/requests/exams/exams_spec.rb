@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'Exams' do
-  stub_authorization!
+
+  as_admin
 
   let(:exam) { create(:exam, :name => "Linux") }
 

@@ -43,5 +43,5 @@ group :test do
   end
 
 end
-  
+
 gemspec

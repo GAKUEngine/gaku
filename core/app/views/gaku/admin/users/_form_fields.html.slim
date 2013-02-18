@@ -1,0 +1,10 @@
+= f.text_field :username, :label => t(:'user.username')
+= f.text_field :email, :label => t(:'user.email')
+= f.password_field :password, :label => t(:'user.password')
+= f.password_field :password_confirmation, :label => t(:'user.password_confirmation')
+
+.roles
+  = hidden_field_tag "user[role_ids][]", nil
+  - roles.each do |role|
+    = check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)
+    = role.name

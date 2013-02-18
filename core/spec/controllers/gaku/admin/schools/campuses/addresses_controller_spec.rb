@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::Schools::Campuses::AddressesController do
 
+  as_admin
+
   let(:address) { create(:address) }
   let(:school) { create(:school) }
   let(:country) { create(:country) }

@@ -1,10 +1,12 @@
 module Gaku
   class Courses::EnrollmentsController < GakuController
 
+    authorize_resource :class => false
+
     respond_to :js
 
     def new
-      @course = Course.find(params[:course_id])  
+      @course = Course.find(params[:course_id])
       respond_to do |format|
         format.js { render 'gaku/courses/enrollments/class_groups/new' }
       end

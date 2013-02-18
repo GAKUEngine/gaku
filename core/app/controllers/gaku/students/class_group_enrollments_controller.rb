@@ -1,6 +1,9 @@
 module Gaku
   class Students::ClassGroupEnrollmentsController < GakuController
 
+    load_and_authorize_resource :student, :class => Gaku::Student
+    load_and_authorize_resource :class_group_enrollment, :through => :student, :class => Gaku::ClassGroupEnrollment
+
     inherit_resources
     actions :new, :create, :destroy
     respond_to :js, :html

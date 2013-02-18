@@ -1,0 +1,7 @@
+= form_for resource, :html => { :multipart => true } do |form|
+  .row-fluid.mt-m
+    = form.file_field :picture, :class => "form-file"
+  .row-fluid.mt-xs
+    = form.submit t('pictures.upload'), :class => "span12 btn btn-primary"
+coffee:
+  $(".form-file").attr('size', 9)

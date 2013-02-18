@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'slim-rails'
   s.add_dependency 'deface', '>= 0.9.0'
   s.add_dependency 'inherited_resources'
+  s.add_dependency 'decent_exposure'
   s.add_dependency 'responders'
   s.add_dependency 'paper_trail', '~> 2'
 

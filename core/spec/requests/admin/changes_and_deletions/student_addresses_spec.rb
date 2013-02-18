@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'Student Addresses Changes' do
 
+  as_admin
+
   before do
     @student = create(:student_with_one_address)
     @student.reload
@@ -27,6 +29,12 @@ describe 'Student Addresses Changes' do
     page.should have_content "false"
     page.should have_content "is_deleted"
     page.should have_content "update"
+  end
+
+  it 'saves destroy' do
+    @address.destroy
+    visit gaku.admin_changes_student_addresses_path
+    page.should have_content 'destroy'
   end
 
 end

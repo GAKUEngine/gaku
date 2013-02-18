@@ -1,0 +1,44 @@
+= render 'gaku/students/search/form'
+
+.row-fluid.hide#students-checked-div
+  .span12.well.mt-m
+    h4.pull-left= t(:'student.chosen_students')
+    h4.chosen-count.pull-left
+    .table-action.show-chosen-table.pull-right = link_to t(:show),nil
+    .table-action.hide-chosen-table.pull-right.hide = link_to t(:hide),nil
+    table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
+      thead
+        tr
+          th.btn-inverse = sort_link @search, "surname", t("surname")
+          th.btn-inverse = sort_link @search, "name", t("name")
+      tbody#students-checked
+    #chosen-actions.hide
+      - if @class_group
+        = render 'gaku/shared/student_chooser/class_group'
+
+      - elsif @course
+        = render 'gaku/shared/student_chooser/course'
+
+      - elsif @extracurricular_activity
+        = render 'gaku/shared/student_chooser/extracurricular_activity'
+
+      - elsif @admission
+        = render 'gaku/shared/student_chooser/admission'
+
+#students-index-div
+  = render 'gaku/students/students'
+= javascript_include_tag "gaku/student_chooser"
+
+javascript:
+  $(document).ready(function(){
+    addOptions($(".class_group-select"));
+  });
+  function addOptions(select){
+    for(var i=0; i < select.length; i++){
+      var options = eval(select[i].textContent);
+      for(var j=0; j < options.length; j++){
+        $(select[i]).append($('<option>').html(options[j][0]).val(options[j][1]));
+      }
+    }
+  }
+  //$(".class_group-select").combobox();

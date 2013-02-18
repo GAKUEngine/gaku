@@ -2,15 +2,11 @@ require 'spec_helper'
 
 describe 'Students' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota') }
   let(:student3) { create(:student, name: 'Johny', surname: 'Bravo') }
-  let(:class_group) { create(:class_group, name:'Biology') }
-  let(:commute_method_type) { create(:commute_method_type) }
-  let(:commute_method_type_train) { create(:commute_method_type, name: 'Train') }
-  let(:commute_method) { create(:commute_method, student: student) }
 
   before :all do
     set_resource "student"
@@ -72,49 +68,7 @@ describe 'Students' do
       end
     end
 
-    context "commute method", js: true do
-      context " #add" do
-        before do
-          commute_method_type
-          visit gaku.student_path(student)
-          click '#new-student-commute-method-link'
-          wait_until_invisible '#new-student-commute-method-link'
-          wait_until_visible 'form#new_commute_method'
-        end
-        it ' adds' do
-          select "#{commute_method_type.name}", from: 'commute_method_commute_method_type_id'
-          click_on 'submit-student-commute-method-button'
-          page.should have_content "#{commute_method_type.name}"
-          #wait_until_visible '#new-student-commute-method-link'
-        end
-        it 'cancels adding' do
-          click_on 'Cancel'
-          wait_until_visible '#new-student-commute-method-link'
-        end
-      end
-      context ' #edit' do
-        before do
-          commute_method_type.commute_methods<<commute_method
-          commute_method_type_train
-          visit gaku.student_path(student)
-          page.should have_content "#{student.commute_method.commute_method_type.name}"
-          click '#edit-student-commute-method-link'
-        end
-        it ' edits' do
-          select 'Train', from: 'commute_method_commute_method_type_id'
-          click_on 'submit-student-commute-method-button'
-          wait_until_visible '#edit-student-commute-method-link'
-          page.should have_content "Train"
-        end
-        it 'cancels editing' do
-          click_on 'Cancel'
-          wait_until_visible '#edit-student-commute-method-link'
-          page.should have_content "#{commute_method_type.name}"
-        end
 
-      end
-
-    end
 
     context '#edit from show view', js: true do
       before do
@@ -184,35 +138,6 @@ describe 'Students' do
       page.should_not have_content "#{student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
       current_path.should eq gaku.students_path
-    end
-
-    it 'enrolls to class', js: true do
-      class_group
-      visit gaku.student_path(student)
-
-      expect do
-        click_on 'enroll-student-link'
-        wait_until_visible modal
-
-        select 'Biology', from: 'class_group_enrollment_class_group_id'
-        fill_in 'class_group_enrollment_seat_number', with: '77'
-        click_on "Create Class Enrollment"
-        click_on 'Cancel'
-        wait_until_invisible modal
-      end.to change(Gaku::ClassGroupEnrollment, :count).by 1
-
-      click_on 'enroll-student-link'
-      wait_until_visible '#new-class-group-enrollment-modal'
-      within('#new-class-group-enrollment-modal') do
-        page.should have_content 'Biology'
-        page.should have_content '77'
-      end
-
-      visit gaku.student_path(student)
-      within('td#student-class-group-enrollment') do
-        page.should have_content 'Biology'
-        page.should have_content student.class_groups.last.grade.try(:to_s)
-      end
     end
 
   end

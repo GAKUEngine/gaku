@@ -1,0 +1,5 @@
+$('#index-student-simple-grades-modal .modal-body .row-fluid .span12.well').html("<%= render_js_partial('index', :locals => {:simple_grades => @simple_grades}) %>");
+$('.student-simple-grades-count').html('<%= print_count(@count, t_simple_grade_list) %>');
+$('#student-simple-grades-list').html('<%= escape_javascript(simple_grades_show(@student.simple_grades)) %>')
+
+showNotice("<%= render_flash %>");

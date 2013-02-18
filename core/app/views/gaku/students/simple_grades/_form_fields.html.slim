@@ -1,0 +1,3 @@
+= f.text_field :name, :label => t(:'simple_grade.plural')
+= f.text_field :grade, :label => t(:'simple_grade.grade')
+= f.select :school_id, schools, { :prompt => t(:'school.choose')}, :label => t(:'school.plural')

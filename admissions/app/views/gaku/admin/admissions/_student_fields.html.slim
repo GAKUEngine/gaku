@@ -1,7 +1,11 @@
+- if !(student.enrollment_status.code == "deleted") || (student.admission.admitted == true)
+  td.vm-tc = check_box_tag "student_ids[]", student.id, false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}-check"
+- else
+  td
 td.surname = student.surname
 td.name = student.name
 td.birth = student.birth_date
-td.gender = student.gender.nil? ? '' : (student.gender ? t('male') : t('female'))
+td.gender = student.gender.nil? ? '' : (student.gender ? t(:'gender.male') : t(:'gender.female'))
 // TODO: move this to helper
 - if !phase.exam.nil?
   td.exam-score = !@students.select{|f| f[:student] == student}[0].nil? ? @students.select{|f| f[:student] == student}[0][:exam_score] : t(:'exams.not_graded')

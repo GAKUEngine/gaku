@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin School Campus Contact' do
 
-  stub_authorization!
+  as_admin
 
   let(:school) { create(:school) }
   let(:contact_type) { create(:contact_type, :name => 'email') }
@@ -10,7 +10,7 @@ describe 'Admin School Campus Contact' do
   before :all do
     set_resource "admin-school-campus-contact"
   end
-  
+
   context 'new', :js => true do
     before do
       contact_type

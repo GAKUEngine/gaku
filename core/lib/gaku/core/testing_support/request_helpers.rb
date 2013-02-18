@@ -131,6 +131,51 @@ module Gaku
           wait_until { page.should have_content "can't be blank" }
         end
 
+        def enroll_one_student_via_button(caption)
+          find(:css, "input#student-#{student1.id}").set(true)
+          wait_until_visible '#students-checked-div'
+          within('#students-checked-div') do
+            page.should have_content 'Chosen students(1)'
+            click_link 'Show'
+            wait_until_visible '#chosen-table'
+            page.should have_content "#{student1.name}"
+            click_button caption
+          end
+          wait_until_invisible '#student-modal'
+
+          within(table){ page.should have_content "#{student1.name}" }
+        end
+
+        def enroll_three_students_via_button(caption)
+          find(:css, "input#student-#{student1.id}").set(true)
+          find(:css, "input#student-#{student2.id}").set(true)
+          find(:css, "input#student-#{student3.id}").set(true)
+
+          wait_until_visible '#students-checked-div'
+          within('#students-checked-div') do
+            page.should have_content 'Chosen students(3)'
+            click_link 'Show'
+            wait_until_visible '#chosen-table'
+            page.should have_content "#{student1.name}"
+            page.should have_content "#{student2.name}"
+            page.should have_content "#{student3.name}"
+            click_button caption
+          end
+          wait_until_invisible '#student-modal'
+
+          within(table) do
+            page.should have_content "#{student1.name}"
+            page.should have_content "#{student2.name}"
+            page.should have_content "#{student3.name}"
+          end
+        end
+
+        def check_path(current_url,expected_path)
+          uri = URI.parse(current_url)
+          "#{uri.path}?#{uri.query}".should == expected_path
+        end
+
+
         private
           def plural(text)
             a = []

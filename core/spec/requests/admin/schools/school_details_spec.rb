@@ -2,6 +2,6 @@ require 'spec_helper'
 
 describe 'Admin School Details' do
 
-  stub_authorization!
+  as_admin
 
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Semesters' do
 
-  stub_authorization!
+  as_admin
 
   let(:class_group) { create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
   let(:semester) { create(:semester, :starting => "2012-10-21", :ending => "2012-11-21") }

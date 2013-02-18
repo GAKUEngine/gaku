@@ -1,0 +1,19 @@
+= index_header do
+    #new-student-simple-grade.hide
+    .pull-left
+      = count_div 'student-simple-grades-count' do
+        = print_count @count, t_simple_grade_list
+    .pull-right
+      = ajax_link_to_new t(:'simple_grade.add'), [:new, @student, :simple_grade], :id => 'new-student-simple-grade-link'
+
+=hr
+
+= table_for 'student-simple-grades-index' do
+  thead
+    tr
+      =th t(:'simple_grade.singular')
+      =th t(:'simple_grade.grade')
+      =th t(:'school.singular')
+      =th_actions 2
+  tbody
+    =render :partial =>'simple_grade', :collection => @simple_grades, :as => :simple_grade

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Specialties' do
 
-  stub_authorization!
+  as_admin
 
   let(:specialty) { create(:specialty, :name => 'mobile') }
 

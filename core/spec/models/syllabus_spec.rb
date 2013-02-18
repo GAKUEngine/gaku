@@ -2,11 +2,14 @@ require 'spec_helper'
 
 describe Gaku::Syllabus do
 
-  context "validations" do 
+  context "validations" do
+
+    it_behaves_like 'notable'
+
     it { should have_many :courses }
     it { should have_many :assignments }
-    it { should have_many :lesson_plans } 
-    it { should have_many :exam_syllabuses } 
+    it { should have_many :lesson_plans }
+    it { should have_many :exam_syllabuses }
     it { should have_many(:exams).through(:exam_syllabuses) }
     it { should have_many :notes }
 

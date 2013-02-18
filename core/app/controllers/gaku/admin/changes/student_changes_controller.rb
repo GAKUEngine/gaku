@@ -3,9 +3,11 @@ module Gaku
      module Changes
       class StudentChangesController < Admin::BaseController
 
+        load_and_authorize_resource :class =>  StudentVersion
+
         def index
-          @changes = Version.students
-          @count = Version.students.count
+          @changes = StudentVersion.all
+          @count = StudentVersion.count
         end
 
       end

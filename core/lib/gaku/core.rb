@@ -1,5 +1,6 @@
 require 'rails/all'
 require 'rails/generators'
+require 'rails-i18n'
 require 'deface'
 require 'paperclip'
 require 'ransack'
@@ -15,6 +16,7 @@ require 'csv'
 require 'sidekiq/web'
 require 'paper_trail'
 require 'globalize3'
+require 'decent_exposure'
 
 
 module Gaku

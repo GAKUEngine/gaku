@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'Admin Enrollment Statuses' do
 
-  stub_authorization!
+  as_admin
 
-  let(:enrollment_status) { create(:enrollment_status, :name => 'Admitted') }
+  let(:enrollment_status) { create(:enrollment_status_admitted) }
 
   before :all do
     set_resource "admin-enrollment-status"

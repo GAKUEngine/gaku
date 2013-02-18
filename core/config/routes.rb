@@ -13,21 +13,33 @@ Gaku::Core::Engine.routes.draw do
     }
   }
 
-  resources :class_groups do
-    resources :semesters, :controller => 'class_groups/semesters'
-    resources :class_group_course_enrollments, :controller => 'class_groups/courses'
-    resources :notes
-    resources :students, :controller => 'class_groups/students' do
-      collection do
-        post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
-      end
-    end
+  resources :extracurricular_activities do
     member do
       get :student_chooser
     end
+
+    resources :students, :controller => 'extracurricular_activities/students' do
+      collection do
+        post :enroll_student
+      end
+    end
   end
+
+  resources :class_groups do
+    member do
+      get :student_chooser
+    end
+    resources :semesters, :controller => 'class_groups/semesters'
+    resources :class_group_course_enrollments, :controller => 'class_groups/courses'
+    resources :notes
+
+    resources :students, :controller => 'class_groups/students' do
+      collection do
+        post :enroll_student
+      end
+    end
+  end
+
 
   resources :courses do
     resources :notes
@@ -58,14 +70,13 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
+
   resources :class_group_enrollments do
     collection do
-      get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
-
   end
+
 
   resources :course_enrollments do
     collection do
@@ -73,7 +84,15 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
-  resources :exam_portion_scores
+
+  resources :extracurricular_activity_enrollments do
+    collection do
+      post :enroll_students
+    end
+  end
+
+
+  #resources :exam_portion_scores
 
   resources :syllabuses do
     resources :assignments, :controller => 'syllabuses/assignments'
@@ -81,6 +100,20 @@ Gaku::Core::Engine.routes.draw do
     resources :exam_syllabuses, :controller => 'syllabuses/exam_syllabuses'
     resources :notes
     resources :importer, :controller => 'syllabuses/importer'
+  end
+
+  resources :teachers do
+    get :soft_delete, :on => :member
+
+    resources :notes
+
+    resources :addresses do
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
+    end
   end
 
   resources :students do
@@ -92,49 +125,11 @@ Gaku::Core::Engine.routes.draw do
       get :soft_delete
     end
 
-    resources :student_specialties, :controller => 'students/student_specialties'
-
-    resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
-      resources :notes, :controller => 'students/enrollment_statuses/notes'
-      member do
-        get :history
-        get :revert
-      end
-    end
-
-    resources :commute_methods, :controller => 'students/commute_methods'
-    resources :guardians, :controller => 'students/guardians' do
-      resources :contacts, :controller => 'students/guardians/contacts' do
-        post :create_modal, :on => :collection
-        post :make_primary, :on => :member
-      end
-
-      resources :addresses, :controller => 'students/guardians/addresses' do
-        post :make_primary, :on => :member
-      end
-
-      get :new_contact, :on => :member
-    end
-
-    resources :addresses, :controller => 'students/addresses' do
-      post :make_primary, :on => :member
-      get :soft_delete, :on => :member
-      get :recovery, :on => :member
-
-    end
-    resources :contacts, :controller => 'students/contacts' do
-      post :make_primary, :on => :member
-    end
-
-    resources :notes#, :controller => 'students/notes'
-    resources :course_enrollments, :controller => 'students/course_enrollments'
-    resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
-    resources :exams
-    resources :courses
-
-
     collection do
+      get 'page/:page', :action => :index
       get :csv
+      get :autocomplete_search
+      get :load_autocomplete_data
 
       resources :importer, :controller => "students/importer" do
         collection do
@@ -143,10 +138,56 @@ Gaku::Core::Engine.routes.draw do
           post :import_student_list
         end
       end
-
-      get :autocomplete_search
-      get :load_autocomplete_data
     end
+
+    resources :simple_grades, :controller => 'students/simple_grades'
+    resources :commute_methods, :controller => 'students/commute_methods'
+    resources :student_achievements, :controller => 'students/student_achievements'
+    resources :student_specialties, :controller => 'students/student_specialties'
+
+    #resources :enrollment_statuses, :controller => 'students/enrollment_statuses' do
+      #resources :notes, :controller => 'students/enrollment_statuses/notes'
+    #  member do
+    #    get :history
+    #    get :revert
+    #  end
+    #end
+
+
+    resources :guardians, :controller => 'students/guardians' do
+      get :new_contact, :on => :member
+
+      resources :contacts do
+        post :create_modal, :on => :collection
+        post :make_primary, :on => :member
+      end
+
+      resources :addresses do
+        member do
+          post :make_primary
+          get :soft_delete
+          get :recovery
+        end
+      end
+    end
+
+    resources :addresses do
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
+    end
+
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
+
+    resources :notes
+    resources :course_enrollments, :controller => 'students/course_enrollments'
+    resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
+    #resources :exams
+    #resources :courses
 
   end
 
@@ -166,8 +207,8 @@ Gaku::Core::Engine.routes.draw do
   resources :course_groups do
     resources :course_group_enrollments, :controller => 'course_groups/course_group_enrollments'
     member do
-      delete 'soft_delete'
-      get 'recovery'
+      delete :soft_delete
+      get :recovery
     end
   end
 
@@ -175,12 +216,17 @@ Gaku::Core::Engine.routes.draw do
 
 
   namespace :admin do
+    resources :achievements
     resources :specialties
     resources :system_tools
     resources :commute_method_types
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :users
+    resources :roles
+    resources :grading_methods
+
 
     namespace :changes do
       resources :students, :controller => 'student_changes'
@@ -190,7 +236,7 @@ Gaku::Core::Engine.routes.draw do
 
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'schools/campuses/contacts' do
+        resources :contacts, :controller => 'contacts' do
           post :make_primary, :on => :member
         end
         resources :addresses, :controller => 'schools/campuses/addresses'
@@ -198,10 +244,13 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :presets do
-      get :students, :on => :collection
-      get :locale, :on => :collection
-      get :grading, :on => :collection
-      put :update_presets, :on => :collection
+      collection do
+        get :students
+        get :locale
+        get :grading
+        get :defaults
+        put :update_presets
+      end
     end
 
     resources :disposals do
@@ -221,14 +270,10 @@ Gaku::Core::Engine.routes.draw do
 
   resources :attachments do
     member do
-      get 'download'
-      delete 'soft_delete'
-      get 'recovery'
+      get :download
+      delete :soft_delete
+      get :recovery
     end
-  end
-
-  resource :grading_methods do
-    get 'index'
   end
 
 end

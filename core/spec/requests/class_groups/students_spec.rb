@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Students' do
 
-  stub_authorization!
+  as_admin
 
   let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
   let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
@@ -47,22 +47,8 @@ describe 'ClassGroup Students' do
     end
 
     it 'cancels adding', :js => true do
-      expect do
-        find(:css, "input#student-#{student1.id}").set(true)
-        wait_until_visible('#students-checked-div')
-        within('#students-checked-div') do
-          page.should have_content('Chosen students(1)')
-          click_link('Show')
-          wait_until { find('#chosen-table').visible? }
-          page.should have_content("#{student1.name}")
-        end
-        click cancel_link
-        wait_until_invisible('#student-modal')
-      end.to change(Gaku::ClassGroupEnrollment, :count).by 0
-
-      within(table) { page.should_not have_content("#{student1.name}") }
-      within('.class-group-enrollments-count') { page.should_not have_content("1") }
-      within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
+      click '.cancel-link'
+      wait_until_invisible('#student-modal')
     end
   end
 

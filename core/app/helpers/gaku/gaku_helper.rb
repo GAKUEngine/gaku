@@ -55,6 +55,22 @@ module Gaku
       Gaku::EnrollmentStatus.all.collect {|es| [es.name, es.id]}
     end
 
+    def specialties
+      Gaku::Specialty.all.collect {|s| [s.name, s.id]}
+    end
+
+    def achievements
+      Gaku::Achievement.all.collect {|a| [a.name, a.id]}
+    end
+
+    def schools
+      Gaku::School.all.collect { |s| [s.name, s.id] }
+    end
+
+    def roles
+      Gaku::Role.all
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
@@ -123,6 +139,60 @@ module Gaku
 
     def color_code(color)
       content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
+    end
+
+    def student_specialties_list(student_specialties)
+      string = String.new
+      student_specialties.ordered.each_with_index do |student_specialty, i|
+        string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
+        string.concat ", " unless i == student_specialties.count - 1
+      end
+      string.html_safe
+    end
+
+    def major_check(student_specialty)
+      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
+    end
+
+    def resize_image(image_url, options = {})
+      raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
+      height = options[:height] || options[:size]
+      width  = options[:width]  || options[:size]
+      image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
+    end
+
+    def achievements_show(achievements)
+      content_tag_for :span, achievements do |achievement|
+        concat achievement.to_s
+        concat String.new ' '
+        concat resize_image(achievement.badge, :size => 22)
+        concat ', ' unless achievement.equal? achievements.last
+      end
+    end
+
+    def simple_grades_show(simple_grades)
+      content_tag_for :span, simple_grades do |simple_grade|
+        concat "#{simple_grade} (#{simple_grade.grade})"
+        concat ', ' unless simple_grade.equal? simple_grades.last
+      end
+    end
+
+
+    def chooser_preset
+      @chooser_preset ||= Gaku::Preset.chooser_table_fields
+    end
+
+    def enabled_field?(field)
+      chooser_preset[field].to_i == 1 rescue true
+    end
+
+    def prepare_target(nested_resource, address)
+      return nil if nested_resource.blank?
+      [nested_resource, address].flatten
+    end
+
+    def prepare_resource_name(nested_resources, resource)
+      @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
     end
 
   end

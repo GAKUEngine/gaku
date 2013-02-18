@@ -1,0 +1,8 @@
+= check_box_tag "all_students_check"
+= "Check all"
+= select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states.where('id != ?', state.id), :id, :name, state.id), :style=> "width:140px;"
+= hidden_field_tag :admission_period_id, @admission_period.id
+= hidden_field_tag :admission_method_id, @admission_method.id
+= submit_tag "Save"
+- if state.can_admit
+  = submit_tag "Admit", :name => 'admit_students'

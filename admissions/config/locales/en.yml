@@ -12,6 +12,7 @@ en:
     save: Save Admission Method
     show: Show Admission Method
     singular: Admission Method
+    starting_applicant_number: Starting Applicant Number
   admission_periods:
     add: Add Admission Period
     admitted_on: Admitted On
@@ -54,6 +55,7 @@ en:
     save: Save Admission Phase
     singular: Admission Phase
   admissions:
+    admit: Admit
     admitted_on: Admitted On
     applicants:
       list: Admission Applicants List
@@ -82,5 +84,6 @@ en:
     admissions: Admissions
   students:
     active: Active
+    choose_students: Choose Students
     deleted: Deleted
     status: Student status

@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'Student Address' do
-  stub_authorization!
+
+  as_admin
 
   let(:student) { create(:student) }
   let(:country) { create(:country, :name => "Japan") }
@@ -140,8 +141,6 @@ describe 'Student Address' do
         accept_alert
 
         page.find("#{address2_tr} .primary_address a.btn-primary")
-        !page.find("#{address1_tr} .primary_address a.btn-primary")
-
 
         within("#{table} #{address2_tr}") { click '.delete-link'}
         accept_alert

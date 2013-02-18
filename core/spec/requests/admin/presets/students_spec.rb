@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Presets Students' do
 
-  stub_authorization!
+  as_admin
 
   let(:country) { create(:country) }
   let(:state) { create(:state, country:country) }
@@ -12,13 +12,13 @@ describe 'Admin Presets Students' do
     address
     visit gaku.students_admin_presets_path
   end
+
   context '#default', js:true do
     it 'saves' do
-
       select 'Female', from:'presets_students_gender'
       select "#{address.country}", from:'presets_address_country'
       fill_in 'presets_address_state', with: "#{address.state.name}"
-      click '.btn' 
+      click '.btn'
 
       flash_updated?
     end

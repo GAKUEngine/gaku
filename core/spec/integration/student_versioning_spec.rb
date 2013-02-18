@@ -10,7 +10,7 @@ describe 'Student Versioning' do
     expect do
       @student.name = "Changed Name"
       @student.save
-    end.to change(Version, :count).by 1
+    end.to change(Gaku::StudentVersion, :count).by 1
   end
 
 end

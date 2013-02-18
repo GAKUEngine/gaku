@@ -1,0 +1,6 @@
+= modal_for 'edit-contact-modal' do
+  = modal_header t(:'contact.edit')
+  = modal_form_for [@nested_resources, @contactable, @contact].flatten do |f|
+    = modal_body do
+      = render 'gaku/shared/form_fields/contact_form_fields', :f => f
+      = buttons_for @contact, :nested_id => @resource_name

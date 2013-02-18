@@ -1,0 +1,4 @@
+$('.student-simple-grades-count').html('<%= print_count(@count-1, t_simple_grade_list) %>');
+showNotice("<%= render_flash %>");
+$('#student-simple-grades-list').html('<%= escape_javascript(simple_grades_show(@student.simple_grades)) %>')
+
