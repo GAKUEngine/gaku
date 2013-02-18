@@ -4,7 +4,7 @@
       = render 'fields', :guardian => @guardian
 
 = well_div do
-  = render 'gaku/students/guardians/contacts/contacts'
+  = render 'gaku/contacts/contacts', :nested_resources => [@student, @guardian]
 
 = well_div do
   = render 'gaku/addresses/addresses', :nested_resources => [@student, @guardian]

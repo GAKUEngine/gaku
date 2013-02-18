@@ -1,0 +1,6 @@
+- target ||= [@nested_resources, @contactable, contact].flatten
+= render :partial => 'gaku/shared/fields/contact_primary_field', :locals => {:contact => contact, :target => target}
+= render :partial => 'gaku/shared/fields/contact_fields', :locals => {:contact => contact }
+td
+  = ajax_link_to_edit [:edit, target].flatten
+  = ajax_link_to_delete target
