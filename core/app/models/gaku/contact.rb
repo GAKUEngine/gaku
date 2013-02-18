@@ -14,6 +14,8 @@ module Gaku
     before_save :ensure_first_is_primary, :on => :create
     before_save :remove_other_primary
 
+    delegate :name, :to => :contact_type, :allow_nil => true
+
     def join_model_name
       self.contactable_type
     end

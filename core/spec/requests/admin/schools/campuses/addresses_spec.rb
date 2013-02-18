@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin School Campuses Address' do
 
-  stub_authorization!
+  as_admin
 
   let(:address) { create(:address) }
   let(:school) { create(:school)}

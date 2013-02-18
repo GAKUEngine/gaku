@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Achievements' do
 
-  stub_authorization!
+  as_admin
 
   let(:achievement) { create(:achievement, :name => 'gold') }
 

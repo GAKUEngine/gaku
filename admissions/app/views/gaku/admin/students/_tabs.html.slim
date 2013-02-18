@@ -13,7 +13,7 @@
             = print_count @student.courses.count, t('course.plural')
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'gaku/students/addresses/addresses'
+          = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@student]}
         #guardians.tab-pane
           = render :partial => 'gaku/students/guardians/guardians'
         /#courses.tab-pane

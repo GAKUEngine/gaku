@@ -1,0 +1,8 @@
+$('#new-teacher').slideToggle();
+$('#new-teacher form')[0].reset();
+$('#new-teacher-link').show();
+
+$('#teachers-index tbody').append('<%= render_js_partial("teacher", {:teacher => @teacher}) %>');
+$('.teachers-count').html("<%= print_count(@count+1, t_teachers_list) %>");
+
+showNotice("<%= render_flash %>");

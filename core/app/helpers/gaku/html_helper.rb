@@ -65,7 +65,7 @@ module Gaku
       if num == 2
         size = 62
       elsif num == 3
-        size = 90
+        size = 95
       else
         size = num
       end

@@ -1,5 +1,5 @@
 tr id="student-#{student.id}"
   = render 'applicant_fields', :student => student
   td
-    = link_to_show student
-    = ajax_link_to_edit [:edit, student], :style => "margin:0px"
+    = link_to_show [:admin, student]
+    = ajax_link_to_edit [:edit, :admin, student], :style => "margin:0px"

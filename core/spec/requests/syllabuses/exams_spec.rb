@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Syllabus Exams' do
 
-  stub_authorization!
+  as_admin
 
   let(:exam) { create(:exam) }
   let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
@@ -81,7 +81,7 @@ describe 'Syllabus Exams' do
       it 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
         has_validations?
-        
+
         syllabus.exams.count.should eq 0
       end
 

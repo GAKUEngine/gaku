@@ -21,8 +21,6 @@ Gaku::Core::Engine.routes.draw do
     resources :students, :controller => 'extracurricular_activities/students' do
       collection do
         post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
       end
     end
   end
@@ -38,8 +36,6 @@ Gaku::Core::Engine.routes.draw do
     resources :students, :controller => 'class_groups/students' do
       collection do
         post :enroll_student
-        get :filtered_students
-        get :autocomplete_filtered_students
       end
     end
   end
@@ -77,8 +73,6 @@ Gaku::Core::Engine.routes.draw do
 
   resources :class_group_enrollments do
     collection do
-      get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
   end
@@ -93,8 +87,6 @@ Gaku::Core::Engine.routes.draw do
 
   resources :extracurricular_activity_enrollments do
     collection do
-      #get :filtered_students
-      get :autocomplete_filtered_students
       post :enroll_students
     end
   end
@@ -110,6 +102,19 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, :controller => 'syllabuses/importer'
   end
 
+  resources :teachers do
+    get :soft_delete, :on => :member
+
+    resources :notes
+
+    resources :addresses do
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
+    end
+  end
 
   resources :students do
 
@@ -152,17 +157,21 @@ Gaku::Core::Engine.routes.draw do
     resources :guardians, :controller => 'students/guardians' do
       get :new_contact, :on => :member
 
-      resources :contacts, :controller => 'students/guardians/contacts' do
+      resources :contacts do
         post :create_modal, :on => :collection
         post :make_primary, :on => :member
       end
 
-      resources :addresses, :controller => 'students/guardians/addresses' do
-        post :make_primary, :on => :member
+      resources :addresses do
+        member do
+          post :make_primary
+          get :soft_delete
+          get :recovery
+        end
       end
     end
 
-    resources :addresses, :controller => 'students/addresses' do
+    resources :addresses do
       member do
         post :make_primary
         get :soft_delete
@@ -170,7 +179,7 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
-    resources :contacts, :controller => 'students/contacts' do
+    resources :contacts do
       post :make_primary, :on => :member
     end
 
@@ -214,6 +223,10 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :users
+    resources :roles
+    resources :grading_methods
+
 
     namespace :changes do
       resources :students, :controller => 'student_changes'
@@ -223,7 +236,7 @@ Gaku::Core::Engine.routes.draw do
 
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'schools/campuses/contacts' do
+        resources :contacts, :controller => 'contacts' do
           post :make_primary, :on => :member
         end
         resources :addresses, :controller => 'schools/campuses/addresses'
@@ -261,10 +274,6 @@ Gaku::Core::Engine.routes.draw do
       delete :soft_delete
       get :recovery
     end
-  end
-
-  resource :grading_methods do
-    get :index
   end
 
 end

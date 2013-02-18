@@ -5,21 +5,8 @@
         th.btn-c1 width="20%" = t('class')
         td#student-class-group-enrollment
           = student_presenter.class_group
-      - if student.name_reading?
-        tr
-          th.btn-c2 = t('phonetic_reading')
-          td.vm
-            = student_presenter.phonetic_reading
-      tr
-        th.btn-c2 = t('name')
-        td.vm style="font-size:16pt"
-          = student_presenter
-      tr
-        th.btn-c2 = t('gender.label')
-        td = gender(student)
-      tr
-        th.btn-c2 = t('birth_date')
-        td =student.birth_date
+      
+      = render 'gaku/shared/fields/person_show_table', :person => student
 
       tr
         th.btn-c2 = t('admitted')

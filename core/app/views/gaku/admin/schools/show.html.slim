@@ -1,17 +1,13 @@
 = content_for :show_header do
   = t(:'school.show')
 
-=well_div do
-  - unless @school.blank?
-    - if @school.is_primary?
-      = render 'master_school', :master_school => @school
-    - else
-      = well_div do
-        = table do
-          tbody
-            tr.school_info
-              = render 'fields', :school => @school
 
+= well_div do
+  - unless @school.blank?
+    = render 'show_table', :school => @school
+
+
+    = hr
     br/
     = render 'gaku/admin/schools/campuses/campuses'
     br/

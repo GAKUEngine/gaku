@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'Student Addresses Changes' do
 
+  as_admin
+
   before do
     @student = create(:student_with_one_address)
     @student.reload

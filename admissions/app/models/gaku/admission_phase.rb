@@ -16,6 +16,10 @@ module Gaku
     before_create :proper_position
     after_destroy :refresh_positions
 
+    def self.find_next_phase(phase)
+      AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+    end
+
     private
 
     def proper_position

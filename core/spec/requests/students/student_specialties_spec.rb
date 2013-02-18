@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Specialties' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:specialty) {create(:specialty) }
@@ -34,7 +34,7 @@ describe 'Student Specialties' do
       flash_created?
     end
 
-    it 'cancel creating', :cancel => true do
+    xit 'cancel creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Course Notes' do
 
-  stub_authorization!
+  as_admin
 
   let(:course) { create(:course) }
   let(:note) { create(:note, :notable => course) }

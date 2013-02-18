@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'CourseGroup Courses' do
-  stub_authorization!
+
+  as_admin
 
   let(:course_group) { create(:course_group, :name => "math 2012 courses") }
   let(:course) { create(:course, :code => 'Math2012') }

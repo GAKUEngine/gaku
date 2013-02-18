@@ -1,0 +1,6 @@
+<%-if  @contactable.contacts.any? && @contact.is_primary? %>
+  $('#<%= @resource_name.pluralize %>-index').find('#contact-<%= @contactable.contacts.first.id %> #set-primary-link').addClass('btn-primary');
+<% end %>
+
+showNotice("<%= render_flash %>");
+$('.<%= @resource_name.pluralize %>-count').html("<%= print_count(@count-1, t_contact_list) %>");

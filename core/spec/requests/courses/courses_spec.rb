@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Courses' do
 
-  stub_authorization!
+  as_admin
 
   let(:syllabus) { create(:syllabus, :name => 'biology2012', :code => 'bio') }
   let(:syllabus2) { create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology') }

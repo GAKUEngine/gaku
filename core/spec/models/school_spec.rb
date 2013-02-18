@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::School do
 	context "validations" do
+		it_behaves_like 'avatarable'
+
 		it { should have_many :campuses }
 		it { should have_many :simple_grades }
 

@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class SchoolsController < Admin::BaseController
 
+      load_and_authorize_resource :class => Gaku::School
+
       inherit_resources
       respond_to :js, :html
 
@@ -14,6 +16,17 @@ module Gaku
       end
 
       def edit_master
+      end
+
+      def update
+        @school = School.find(params[:id])
+        super do |format|
+          if params[:school][:picture]
+            format.html { redirect_to [:admin, @school], :notice => t('notice.uploaded', :resource => t('picture')) }
+          else
+            format.js { render }
+           end
+        end
       end
 
       private

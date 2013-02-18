@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Contacts' do
 
-  stub_authorization!
+  as_admin
 
   let(:student) { create(:student) }
   let(:contact_type) { create(:contact_type, :name => 'email') }

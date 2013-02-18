@@ -1,6 +1,8 @@
 module Gaku
   class ExtracurricularActivitiesController < GakuController
 
+    load_and_authorize_resource :class =>  Gaku::ExtracurricularActivity
+
     include StudentChooserController
 
     inherit_resources

@@ -38,6 +38,11 @@ module Gaku
         end
       end
 
+      def show
+        session[:return_to] = request.referer
+        show!
+      end
+
       def edit_enrollment_status
         @student = Student.find(params[:id])
       end
@@ -48,6 +53,13 @@ module Gaku
         if @student.save
           respond_with @student
         end
+      end
+
+      def soft_delete
+        @student = Student.find(params[:id])
+        @student.update_attribute(:is_deleted, true)
+
+        redirect_to session[:return_to], :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
       end
 
       protected

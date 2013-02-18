@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Schools' do
 
-  stub_authorization!
+  as_admin
 
   let(:school) { create(:school, :name => 'Varna Technical University') }
 
@@ -74,7 +74,7 @@ describe 'Admin Schools' do
         click_on "Edit"
         wait_until_visible modal
       end
-      
+
       it 'edits', :js => true do
         fill_in 'school_name', :with => 'Sofia Technical University'
         click submit

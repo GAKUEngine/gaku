@@ -3,6 +3,8 @@ module Gaku
 
     include StudentChooserController
 
+    load_and_authorize_resource :class =>  Gaku::ClassGroup
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources
@@ -20,7 +22,6 @@ module Gaku
 
 
     private
-
 
       def load_before_show
         @notable = ClassGroup.find(params[:id])

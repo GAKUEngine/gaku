@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::ContactTypesController do
 
+  as_admin
+
   let(:contact_type) { create(:contact_type) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::Admin::ContactTypesController do
       gaku_js_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #new' do
     it "assigns a new contact_type to @contact_type" do
@@ -37,16 +39,16 @@ describe Gaku::Admin::ContactTypesController do
     context "with valid attributes" do
       it "saves the new contact type in the db" do
         expect{
-          gaku_post :create, contact_type: attributes_for(:contact_type)  
+          gaku_post :create, contact_type: attributes_for(:contact_type)
         }.to change(Gaku::ContactType, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new contact type in the db" do
           expect{
-            gaku_js_post :create, contact_type: {name: ''}  
+            gaku_js_post :create, contact_type: {name: ''}
           }.to_not change(Gaku::ContactType, :count)
       end
     end
@@ -66,7 +68,7 @@ describe Gaku::Admin::ContactTypesController do
 
   describe "PUT #update" do
     it "locates the requested @contact_type" do
-      gaku_put :update, id: contact_type, 
+      gaku_put :update, id: contact_type,
                         contact_type: attributes_for(:contact_type)
       assigns(:contact_type).should eq(contact_type)
     end
@@ -84,7 +86,7 @@ describe Gaku::Admin::ContactTypesController do
 
     context "invalid attributes" do
       it "does not change contact type's attributes" do
-        gaku_js_put :update, id: contact_type, 
+        gaku_js_put :update, id: contact_type,
                               contact_type: attributes_for(:contact_type, name: "")
         contact_type.reload
         contact_type.name.should_not eq("")

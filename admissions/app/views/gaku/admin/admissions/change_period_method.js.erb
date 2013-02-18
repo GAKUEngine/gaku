@@ -6,3 +6,4 @@ $('#admission-method-selection').html('<%= render_js_partial("method", {:admissi
   $('#admission-phases').html('<%= render_js_partial("phases", {:admission_method => @admission_methods.first}) %>');
   $('#new-admin-admission-link').html('<%= render_js_partial("links", {:admission_method => @admission_method}) %>');
 <% end %>  
+$('#admissions_links').html('<%= render_js_partial("admissions_links", {:admission_params => @admission_params}) %>');

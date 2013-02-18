@@ -1,6 +1,9 @@
 module Gaku
   class Syllabuses::ExamsController < GakuController
 
+    load_and_authorize_resource :syllabus, :class => Gaku::Syllabus
+    load_and_authorize_resource :exam, :through => :syllabus, :class => Gaku::Exam
+
     inherit_resources
     belongs_to :syllabus, :parent_class => Gaku::Syllabus
     respond_to :js, :html
@@ -19,7 +22,7 @@ module Gaku
       @exam.exam_portions.build
       new!
     end
-    
+
     private
 
     def syllabus

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::ExamsController do
 
+  as_admin
+
   let(:exam) { create(:exam) }
 
   describe "GET #index" do
@@ -20,7 +22,7 @@ describe Gaku::ExamsController do
       gaku_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #show' do
     it "assigns the requested exam to @exam" do
@@ -50,16 +52,16 @@ describe Gaku::ExamsController do
     context "with valid attributes" do
       it "saves the new exam in the db" do
         expect{
-          gaku_js_post :create, exam: attributes_for(:exam)  
+          gaku_js_post :create, exam: attributes_for(:exam)
         }.to change(Gaku::Exam, :count).by 1
-        
+
         #controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new exam in the db" do
         expect{
-          gaku_js_post :create, exam: {name: ''}  
+          gaku_js_post :create, exam: {name: ''}
         }.to_not change(Gaku::Exam, :count)
       end
     end
@@ -68,7 +70,7 @@ describe Gaku::ExamsController do
   describe "PUT #update" do
 
     it "locates the requested @exam" do
-      gaku_js_put :update, id: exam, exam: attributes_for(:exam) 
+      gaku_js_put :update, id: exam, exam: attributes_for(:exam)
       assigns(:exam).should eq(exam)
     end
 

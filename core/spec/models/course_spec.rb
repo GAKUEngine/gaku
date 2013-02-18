@@ -3,12 +3,14 @@ require 'spec_helper'
 describe Gaku::Course do
 
   context "validations" do
+
+    it_behaves_like 'notable'
+
     it { should have_many(:enrollments) }
     it { should have_many(:students).through(:enrollments) }
     it { should have_many(:course_group_enrollments) }
     it { should have_many(:course_groups).through(:course_group_enrollments) }
     it { should have_many(:exam_schedules) }
-    it { should have_many(:notes) }
     it { should have_many(:class_group_course_enrollments) }
     it { should have_many(:class_groups).through(:class_group_course_enrollments) }
 
