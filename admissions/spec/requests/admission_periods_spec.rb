@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'Admin Admission Periods' do
 
-  stub_authorization!
-
+  as_admin 
+  
   let(:admission_period) { create(:admission_period_no_methods) }
   let(:admission_method) { create(:admission_method, :name => 'International Division Admissions') }
   let(:admission_method2) { create(:admission_method, :name => 'Regular Admissions') }

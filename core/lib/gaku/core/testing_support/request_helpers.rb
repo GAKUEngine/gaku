@@ -170,6 +170,11 @@ module Gaku
           end
         end
 
+        def check_path(current_url,expected_path)
+          uri = URI.parse(current_url)
+          "#{uri.path}?#{uri.query}".should == expected_path
+        end
+
 
         private
           def plural(text)
