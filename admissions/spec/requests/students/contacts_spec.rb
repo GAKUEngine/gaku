@@ -6,7 +6,7 @@ describe 'Admin Student Contacts' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:contact_type) { create(:contact_type, :name => 'email') }
+  let(:contact_type) { create(:contact_type, :name => 'Email') }
 
   before :all do
     set_resource "student-contact"
@@ -16,10 +16,11 @@ describe 'Admin Student Contacts' do
     
     before do
       contact_type
+      @data = student
       visit gaku.admin_student_path(id:student.id)
     end
 
-    it_should_behave_like 'new contact'
+    it_behaves_like 'new contact'
     
   end
 
@@ -31,6 +32,7 @@ describe 'Admin Student Contacts' do
       before(:each) do
         @student = create(:student_with_one_contact)
         @student.reload
+        @data = @student
       end
 
       context 'edit', :js => true do
@@ -39,9 +41,9 @@ describe 'Admin Student Contacts' do
           visit gaku.admin_student_path(@student)
         end
 
-        it_should_behave_like 'edit contact'
+        it_behaves_like 'edit contact'
 
-        it_should_behave_like 'delete contact', @student #the test uses @student
+        it_behaves_like 'delete contact', @data #the test uses @student
         
       end
 
@@ -52,10 +54,11 @@ describe 'Admin Student Contacts' do
       before do
         @student = create(:student_with_two_contacts)
         @student.reload
+        @data = @student
         visit gaku.admin_student_path(@student)
       end
 
-      it_should_behave_like 'primary contacts'
+      it_behaves_like 'primary contacts'
 
     end
   end
