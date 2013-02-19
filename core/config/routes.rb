@@ -179,10 +179,6 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
-    resources :contacts do
-      post :make_primary, :on => :member
-    end
-
     resources :notes
     resources :course_enrollments, :controller => 'students/course_enrollments'
     resources :class_group_enrollments, :controller => 'students/class_group_enrollments'
@@ -237,6 +233,7 @@ Gaku::Core::Engine.routes.draw do
     resources :schools do
       resources :campuses, :controller => 'schools/campuses' do
         resources :contacts, :controller => 'contacts' do
+          post :create_modal, :on => :collection
           post :make_primary, :on => :member
         end
         resources :addresses, :controller => 'schools/campuses/addresses'
