@@ -1,4 +1,4 @@
-require 'spec_helper'
+  require 'spec_helper'
 
 describe 'Admin Presets Locales' do
 
@@ -11,7 +11,7 @@ describe 'Admin Presets Locales' do
   context '#default', js:true do
     it 'saves' do
       select 'en', from:'presets_language'
-      click '.btn'
+      click '#submit-preset'
 
       flash_updated?
     end
