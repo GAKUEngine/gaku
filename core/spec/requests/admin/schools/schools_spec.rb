@@ -67,7 +67,7 @@ describe 'Admin Schools' do
     end
 
     context '#edit from show' do
-      school_info  = '.school_info'
+      show_table  = '#school-show-table'
 
       before do
         visit gaku.admin_school_path(school)
@@ -81,8 +81,8 @@ describe 'Admin Schools' do
 
         wait_until_invisible modal
 
-        find(school_info).should have_content 'Sofia Technical University'
-        find(school_info).should_not have_content 'Varna Technical University'
+        find(show_table).should have_content 'Sofia Technical University'
+        find(show_table).should_not have_content 'Varna Technical University'
         flash_updated?
       end
 
