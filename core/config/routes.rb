@@ -215,6 +215,17 @@ Gaku::Core::Engine.routes.draw do
   root :to => 'home#index'
 
 
+  scope :path => :admin, :as => :admin do
+    resources :schools, :controller => 'admin/schools' do
+      resources :campuses, :controller => 'admin/schools/campuses' do
+        resources :contacts do
+          post :make_primary, :on => :member
+        end
+        resources :addresses, :controller => 'admin/schools/campuses/addresses'
+      end
+    end
+  end
+
   namespace :admin do
     resources :achievements
     resources :specialties
@@ -232,15 +243,6 @@ Gaku::Core::Engine.routes.draw do
       resources :students, :controller => 'student_changes'
       resources :student_contacts, :controller => 'student_contact_changes'
       resources :student_addresses, :controller => 'student_address_changes'
-    end
-
-    resources :schools do
-      resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'contacts' do
-          post :make_primary, :on => :member
-        end
-        resources :addresses, :controller => 'schools/campuses/addresses'
-      end
     end
 
     resources :presets do
