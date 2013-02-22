@@ -1,10 +1,10 @@
 = table_for 'courses-index' do
   thead
     tr
-      th*{"class" => "btn-inverse", "data-field" => "#{t('syllabus.code')}-#{t('syllabus.singular')}-#{t('course.code')}-[#{t('syllabus.code')}]: #{t('syllabus')}-#{t('course.code')}"} = t('syllabus.code')
-      th*{"class" => "btn-inverse", "data-field" => t('schedule')} = t('schedule')
-      th*{"class" => "btn-inverse", "data-field" => t('teacher')} = t('teacher')
-      th*{"class" => "btn-inverse", "data-field" => t('num_enrolled')} = t('num_enrolled')
-      th.btn-info style="width:94px" = t('manage')
+      =th t(:'syllabus.code')
+      =th t(:'schedule')
+      =th t(:'teacher.singular')
+      =th t(:'num_enrolled')
+      =th_actions 3
   tbody
     = render :partial => 'course', :collection => @courses, :as => 'course'

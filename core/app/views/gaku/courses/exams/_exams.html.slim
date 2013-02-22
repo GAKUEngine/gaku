@@ -1,17 +1,13 @@
 .row-fluid
   - if @course.syllabus and @course.syllabus.exams.any?
-      table#course-exams-index.index.table.table-striped.table-bordered.table-condensed
+      = table_for 'course-exams-index' do
         thead
           tr
-            th*{"class" => "btn-inverse"}
-              = t('exam.name')
-            th.btn-info style="width:200px" = t(:manage)
+            =th t('exam.name')
+            =th_actions 3
         tbody
-          - @course.syllabus.exams.each do |exam|
-            tr
-              td = exam.name
-              td
-                = link_to ('<i class="icon-white icon-pencil"></i> ' + t('grade.grading')).html_safe, "#{request.fullpath}/exams/#{exam.id}/grading", :class => "span12 btn btn-mini btn-primary grading_link", :params => { :course_id => @course.id, :exam_id => exam.id }
+          = render :partial => 'gaku/courses/exams/exam', :collection => @course.syllabus.exams, :as => :exam
+
 .row-fluid.mt-m
   - if @course.syllabus and @course.syllabus.exams.any?
-    = link_to ('<i class="icon-white icon-list"></i> ' + t("grade.all_exams")).html_safe, "#{request.fullpath}/exams/grading", :class => "span12 btn btn-success"
+    =link_to content_tag(:i, '', :class => 'icon-white icon-list') + ' ' +t("grade.all_exams"), grading_course_exams_path(@course), :class => "span12 btn btn-success", :id => 'all-course-exams-grade'

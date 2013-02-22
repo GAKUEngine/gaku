@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'support/requests/contactable_spec'
 
-describe 'Student Contacts' do
+describe 'Admin Student Contacts' do
 
   as_admin
 
@@ -16,7 +16,7 @@ describe 'Student Contacts' do
     
     before do
       contact_type
-      visit gaku.student_path(student)
+      visit gaku.admin_student_path(id:student.id)
     end
 
     it_should_behave_like 'new contact'
@@ -36,7 +36,7 @@ describe 'Student Contacts' do
       context 'edit', :js => true do
         
         before do
-          visit gaku.student_path(@student)
+          visit gaku.admin_student_path(@student)
         end
 
         it_should_behave_like 'edit contact'
@@ -52,7 +52,7 @@ describe 'Student Contacts' do
       before do
         @student = create(:student_with_two_contacts)
         @student.reload
-        visit gaku.student_path(@student)
+        visit gaku.admin_student_path(@student)
       end
 
       it_should_behave_like 'primary contacts'
