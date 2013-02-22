@@ -107,6 +107,10 @@ Gaku::Core::Engine.routes.draw do
 
     resources :notes
 
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
+
     resources :addresses do
       member do
         post :make_primary
