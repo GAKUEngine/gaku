@@ -20,6 +20,7 @@ describe 'Students in admissions' do
       student2
       student3
       visit gaku.admin_student_path(id:student.id)
+
     end
 
     context 'when select edit btn' do
@@ -56,7 +57,13 @@ describe 'Students in admissions' do
 
     end
 
-    it_behaves_like 'avatarable'
+    context 'avatarable' do
+
+      before { @file_name = 'student_picture' }
+      it_behaves_like 'avatarable'  
+      
+    end
+    
 
     context 'shows notes' do
       
