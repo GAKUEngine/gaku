@@ -241,16 +241,6 @@ Gaku::Core::Engine.routes.draw do
       resources :student_addresses, :controller => 'student_address_changes'
     end
 
-    resources :schools do
-      resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'contacts' do
-          post :create_modal, :on => :collection
-          post :make_primary, :on => :member
-        end
-        resources :addresses, :controller => 'schools/campuses/addresses'
-      end
-    end
-
     resources :presets do
       collection do
         get :students
