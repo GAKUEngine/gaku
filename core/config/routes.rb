@@ -175,6 +175,10 @@ Gaku::Core::Engine.routes.draw do
       end
     end
 
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
+
     resources :addresses do
       member do
         post :make_primary
