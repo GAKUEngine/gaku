@@ -5,6 +5,7 @@ require 'bundler/cli'
 
 module Gaku
   class InstallGenerator < Rails::Generators::Base
+
     class_option :migrate, :type => :boolean, :default => true, :banner => 'Run Gaku migrations'
     class_option :seed, :type => :boolean, :default => true, :banner => 'load seed data (migrations must be run)'
     class_option :sample, :type => :boolean, :default => true, :banner => 'load sample data (migrations must be run)'
@@ -13,6 +14,7 @@ module Gaku
     #class_option :admin_email, :type => :string
     #class_option :admin_password, :type => :string
     class_option :lib_name, :type => :string, :default => 'gaku'
+    class_option :env, :type => :string, :default => 'development'
 
     def self.source_paths
       paths = self.superclass.source_paths
@@ -23,6 +25,8 @@ module Gaku
     end
 
     def prepare_options
+      @env = options[:env]
+      puts "ENV : #{@env}"
       @run_migrations = options[:migrate]
       @load_seed_data = options[:seed]
       @load_sample_data = options[:sample]
@@ -98,7 +102,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       say_status :creating, "database"
       silence_stream(STDOUT) do
         silence_stream(STDERR) do
-          silence_warnings { rake 'db:create' }
+          silence_warnings { rake 'db:create', :env =>  @env }
         end
       end
     end
@@ -106,7 +110,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def run_migrations
       if @run_migrations
         say_status :running, "migrations"
-        rake 'db:migrate'
+        rake 'db:migrate', :env => @env
       else
         say_status :skipping, "migrations (don't forget to run rake db:migrate)"
       end
@@ -116,6 +120,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       if @load_seed_data
         say_status :loading,  "seed data"
         rake_options=[]
+        rake_options << "RAILS_ENV=#{@env}"
         rake_options << "AUTO_ACCEPT=1" if options[:auto_accept]
         rake_options << "ADMIN_EMAIL=#{options[:admin_email]}" if options[:admin_email]
         rake_options << "ADMIN_PASSWORD=#{options[:admin_password]}" if options[:admin_password]
@@ -134,7 +139,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def load_sample_data
       if @load_sample_data
         say_status :loading, "sample data"
-        rake 'gaku_sample:load'
+        rake "gaku_sample:load", :env =>  @env
       else
         say_status :skipping, "sample data (you can always run rake gaku_sample:load)"
       end
