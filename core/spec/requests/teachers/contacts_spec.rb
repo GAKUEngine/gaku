@@ -42,7 +42,7 @@ describe 'Teacher Contacts' do
 
         it_behaves_like 'edit contact'
 
-        it_behaves_like 'delete contact', @data #the test uses @student
+        it_behaves_like 'delete contact', @data
 
       end
 
