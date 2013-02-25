@@ -9,6 +9,8 @@ module Gaku
     inherit_resources
     respond_to :js, :html
     respond_to :csv, :only => :csv
+    respond_to :pdf, :only => :show
+
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
     before_filter :before_show,       :only => :show
@@ -22,7 +24,11 @@ module Gaku
     end
 
     def show
-      respond_with @student
+      super do |format|
+        format.pdf { send_data render_to_string, :filename => "student-#{@student.id}.pdf",
+                                                 :type => 'application/pdf',
+                                                 :disposition => 'inline'}
+      end
     end
 
     def destroy

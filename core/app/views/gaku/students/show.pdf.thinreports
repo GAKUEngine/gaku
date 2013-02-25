@@ -1,0 +1,9 @@
+report.start_new_page do |page|
+  page.values :id => @student.id,
+              :surname => @student.surname,
+              :middle_name => @student.middle_name,
+              :name => @student.name,
+              :surname_reading => @student.surname_reading,
+              :name_reading => @student.name_reading
+  page.item(:photo).src(@student.picture.path(:thumb))
+end
