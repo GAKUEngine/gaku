@@ -5,5 +5,4 @@ report.start_new_page do |page|
               :name => @student.name,
               :surname_reading => @student.surname_reading,
               :name_reading => @student.name_reading
-  page.item(:photo).src(@student.picture.path(:thumb))
 end
