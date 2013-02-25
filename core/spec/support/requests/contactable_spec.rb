@@ -1,4 +1,6 @@
 shared_examples_for 'new contact' do
+
+  it { has_validations? }
   
   context 'new' do
     

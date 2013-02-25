@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/requests/avatarable_spec'
 
 describe 'Admin Schools' do
 
@@ -35,7 +36,19 @@ describe 'Admin Schools' do
     end
   end
 
+  context 'shows primary school avatar' do
+
+    before do
+      primary_school = create(:school, is_primary:true)
+      visit gaku.admin_schools_path
+      @file_name = 'school_picture' 
+    end
+    
+    it_behaves_like 'avatarable'  
+    
+  end
   context 'existing', :js => true do
+    
     before do
       school
       visit gaku.admin_schools_path
@@ -67,7 +80,7 @@ describe 'Admin Schools' do
     end
 
     context '#edit from show' do
-      school_info  = '.school_info'
+      show_table  = '#school-show-table'
 
       before do
         visit gaku.admin_school_path(school)
@@ -81,8 +94,8 @@ describe 'Admin Schools' do
 
         wait_until_invisible modal
 
-        find(school_info).should have_content 'Sofia Technical University'
-        find(school_info).should_not have_content 'Varna Technical University'
+        find(show_table).should have_content 'Sofia Technical University'
+        find(show_table).should_not have_content 'Varna Technical University'
         flash_updated?
       end
 

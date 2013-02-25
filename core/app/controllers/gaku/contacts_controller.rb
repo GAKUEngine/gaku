@@ -47,7 +47,7 @@ module Gaku
     end
 
     def contactable
-      klasses = [Gaku::School, Gaku::Student, Gaku::Campus, Gaku::Guardian].select do |c|
+      klasses = [Gaku::School, Gaku::Campus, Gaku::Student, Gaku::Guardian, Gaku::Teacher].select do |c|
         params[c.to_s.foreign_key]
       end
 
