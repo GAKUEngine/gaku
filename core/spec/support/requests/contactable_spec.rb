@@ -1,6 +1,4 @@
 shared_examples_for 'new contact' do
-
-  it { has_validations? }
   
   context 'new' do
     
@@ -28,6 +26,11 @@ shared_examples_for 'new contact' do
       ensure_cancel_creating_is_working
     end
 
+    it 'has validations', js:true do
+      click submit
+      has_validations?
+    end
+
   end
   
 end
@@ -50,6 +53,11 @@ shared_examples_for 'edit contact' do
 
   it 'cancels editting', :cancel => true do
     ensure_cancel_modal_is_working
+  end
+
+  it 'errors without required fields', js:true do
+    fill_in 'contact_data', :with => ''
+    has_validations?
   end
 
 end
