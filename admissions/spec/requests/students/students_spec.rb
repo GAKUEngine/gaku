@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/requests/avatarable_spec'
 
 describe 'Students in admissions' do
 
@@ -19,6 +20,7 @@ describe 'Students in admissions' do
       student2
       student3
       visit gaku.admin_student_path(id:student.id)
+
     end
 
     context 'when select edit btn' do
@@ -55,26 +57,14 @@ describe 'Students in admissions' do
 
     end
 
-    context 'shows picture' do
+    context 'avatarable' do
 
-      it 'shows picture' do
-        page.should have_css '#avatar-picture'
-      end
-
-      it "uploads" do
-        click_button "Change picture"
-        absolute_path = Rails.root + "../support/120x120.jpg"
-        attach_file 'student_picture', absolute_path
-        click_button "Upload"
-        flash? "successfully uploaded"
-      end
+      before { @file_name = 'student_picture' }
+      it_behaves_like 'avatarable'  
       
     end
+    
 
-
-    context 'shows contacts' do
-      
-    end
     context 'shows notes' do
       
     end

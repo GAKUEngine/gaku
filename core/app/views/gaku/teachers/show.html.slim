@@ -10,6 +10,8 @@
   .span3.well
     = render 'gaku/shared/picture', :resource => @teacher
 
+= well_div do
+  = render :partial => 'gaku/contacts/contacts', :locals => {:nested_resources => [@teacher]}
 
 = well_div do
   = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@teacher]}
