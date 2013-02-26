@@ -68,8 +68,6 @@ describe 'Students' do
       end
     end
 
-
-
     context '#edit from show view', js: true do
       before do
         visit gaku.student_path(student)
