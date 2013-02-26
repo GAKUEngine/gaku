@@ -53,10 +53,6 @@ describe 'ExtracurricularActivity Students' do
 
     end
 
-    it 'cancels adding' do
-      click '.cancel-link'
-      wait_until_invisible('#student-modal')
-    end
   end
 
   context "#search " do
