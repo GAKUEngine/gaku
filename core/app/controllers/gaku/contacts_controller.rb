@@ -29,6 +29,17 @@ module Gaku
       respond_with @contact
     end
 
+    def create_modal
+      #extra action because of modal guardian contact creating form student#show
+      if @contactable.class == Gaku::Guardian
+        @contact = @contactable.contacts.build(params[:contact])
+        if @contact.save
+          flash.now[:notice] = t(:'notice.created', :resource => t(:'contact.singular'))
+          respond_with(@contact)
+        end
+      end
+    end
+
     private
 
     def count
@@ -36,7 +47,7 @@ module Gaku
     end
 
     def contactable
-      klasses = [Gaku::School, Gaku::Student, Gaku::Campus, Gaku::Guardian].select do |c|
+      klasses = [Gaku::School, Gaku::Campus, Gaku::Student, Gaku::Guardian, Gaku::Teacher].select do |c|
         params[c.to_s.foreign_key]
       end
 

@@ -19,4 +19,18 @@ FactoryGirl.define  do
       FactoryGirl.create(:address, :addressable => teacher)
     end
   end
+
+  factory :teacher_with_one_contact, :parent => :teacher do
+    after_create do |teacher|
+      FactoryGirl.create(:contact, :contactable => teacher)
+    end
+  end
+
+  factory :teacher_with_two_contacts, :parent => :teacher do
+    after_create do |teacher|
+      FactoryGirl.create(:contact, :contactable => teacher)
+      FactoryGirl.create(:contact, :contactable => teacher)
+    end
+  end
+
 end

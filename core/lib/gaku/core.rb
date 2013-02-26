@@ -17,6 +17,7 @@ require 'sidekiq/web'
 require 'paper_trail'
 require 'globalize3'
 require 'decent_exposure'
+require 'thinreports-rails'
 
 
 module Gaku
