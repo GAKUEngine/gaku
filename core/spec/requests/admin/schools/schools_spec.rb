@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/requests/avatarable_spec'
 
 describe 'Admin Schools' do
 
@@ -35,7 +36,19 @@ describe 'Admin Schools' do
     end
   end
 
+  context 'shows primary school avatar' do
+
+    before do
+      primary_school = create(:school, is_primary:true)
+      visit gaku.admin_schools_path
+      @file_name = 'school_picture' 
+    end
+    
+    it_behaves_like 'avatarable'  
+    
+  end
   context 'existing', :js => true do
+    
     before do
       school
       visit gaku.admin_schools_path

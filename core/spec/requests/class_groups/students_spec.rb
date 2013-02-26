@@ -45,11 +45,6 @@ describe 'ClassGroup Students' do
       within('.class-group-enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
     end
-
-    it 'cancels adding', :js => true do
-      click '.cancel-link'
-      wait_until_invisible('#student-modal')
-    end
   end
 
   context "#search " do

@@ -101,6 +101,7 @@ en:
     new: New Attachment
     plural: Attachments
     singular: Attachment
+    save: Save Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -117,8 +118,8 @@ en:
     singular: Attendance Type
   back: Back
   birth: Birth Date
-  birth_and: and
-  birth_between: Birth date between
+  birth_date_from: Birth date(from)
+  birth_date_to: Birth date(to)
   birth_date: Birth Date
   campus:
     add: Add Campus
