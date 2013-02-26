@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spreadsheet'
   s.add_dependency 'roo'
   s.add_dependency 'app_config'
+  s.add_dependency 'thinreports-rails'
 
   s.add_dependency 'devise'
   s.add_dependency 'devise-i18n'

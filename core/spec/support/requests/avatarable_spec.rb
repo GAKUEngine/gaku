@@ -4,10 +4,10 @@ shared_examples 'avatarable' do
     page.should have_css '#avatar-picture'
   end
 
-  it "uploads" do
+  it "uploads", js:true do
     click_button "Change picture"
     absolute_path = Rails.root + "../support/120x120.jpg"
-    attach_file 'student_picture', absolute_path
+    attach_file @file_name, absolute_path
     click_button "Upload"
     flash? "successfully uploaded"
   end

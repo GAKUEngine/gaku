@@ -107,6 +107,10 @@ Gaku::Core::Engine.routes.draw do
 
     resources :notes
 
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
+
     resources :addresses do
       member do
         post :make_primary
@@ -169,6 +173,10 @@ Gaku::Core::Engine.routes.draw do
           get :recovery
         end
       end
+    end
+
+    resources :contacts do
+      post :make_primary, :on => :member
     end
 
     resources :addresses do

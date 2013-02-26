@@ -1,50 +1,49 @@
 require 'spec_helper'
 require 'support/requests/contactable_spec'
 
-describe 'Admin Student Contacts' do
+describe 'Teacher Contacts' do
 
   as_admin
 
-  let(:student) { create(:student) }
+  let(:teacher) { create(:teacher) }
   let(:contact_type) { create(:contact_type, :name => 'Email') }
 
   before :all do
-    set_resource "student-contact"
+    set_resource "teacher-contact"
   end
 
   context 'new', :js => true do
-    
+
     before do
       contact_type
-      @data = student
-      visit gaku.admin_student_path(id:student.id)
+      visit gaku.teacher_path(teacher)
+      @data = teacher
     end
 
     it_behaves_like 'new contact'
-    
-  end
 
+  end
 
   context "existing" do
 
     context 'one contact' do
 
       before(:each) do
-        @student = create(:student_with_one_contact)
-        @student.reload
-        @data = @student
+        @teacher = create(:teacher_with_one_contact)
+        @teacher.reload
+        @data = @teacher
       end
 
       context 'edit', :js => true do
-        
+
         before do
-          visit gaku.admin_student_path(@student)
+          visit gaku.teacher_path(@teacher)
         end
 
         it_behaves_like 'edit contact'
 
-        it_behaves_like 'delete contact', @data #the test uses @student
-        
+        it_behaves_like 'delete contact', @data
+
       end
 
     end
@@ -52,10 +51,10 @@ describe 'Admin Student Contacts' do
     context 'two contacts' do
 
       before do
-        @student = create(:student_with_two_contacts)
-        @student.reload
-        @data = @student
-        visit gaku.admin_student_path(@student)
+        @teacher = create(:teacher_with_two_contacts)
+        @teacher.reload
+        @data = @teacher
+        visit gaku.teacher_path(@teacher)
       end
 
       it_behaves_like 'primary contacts'

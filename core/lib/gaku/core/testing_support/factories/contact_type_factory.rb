@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :contact_type, :class => Gaku::ContactType do
-    name "email"
+    name "Email"
   end
 end
