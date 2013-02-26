@@ -35,8 +35,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: ! '%{resource} já foram adicionados!'
-    empty: ! '%{resource} está vazio!'
+    already_added: '%{resource} já foram adicionados!'
+    empty: '%{resource} está vazio!'
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -88,6 +88,8 @@ pt-BR:
   birth_and: e
   birth_between: Data de Nascimento entre
   birth_date: Data de Nascimento
+  birth_date_from: 
+  birth_date_to: 
   campus:
     add: Adicionar Campus
     address: Endereço do Campus
@@ -387,6 +389,21 @@ pt-BR:
     data: 
     ending: 
     student_id_number: 
+  extracurricular_activity:
+    add: 
+    edit: 
+    enroll: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+  extracurricular_activity_enrollment:
+    list: 
+  failure:
+    enrolled: 
   flash:
     actions:
       create:
@@ -419,6 +436,16 @@ pt-BR:
     total_points: 
     weighting: 
     weighting_portion: 
+  grading_method:
+    add: 
+    description: 
+    edit: 
+    list: 
+    method: 
+    name: 
+    plural: 
+    save: 
+    singular: 
   graduated: 
   guardian:
     add: 
@@ -462,11 +489,13 @@ pt-BR:
         exam: 
         student: 
         student_address: 
+      grading_methods: 
       preset:
         grading:
           grading_method: 
           grading_scheme: 
         items:
+          defaults: 
           grading: 
           locale: 
           student: 
@@ -490,6 +519,10 @@ pt-BR:
         contact: 
         enrollment_status: 
         types: 
+      users:
+        roles: 
+        users: 
+        users_and_roles: 
     class_group:
       management: 
       plural: 
@@ -501,9 +534,13 @@ pt-BR:
     exam:
       management: 
       plural: 
+    extracurricular_activity:
+      plural: 
     student:
       plural: 
     syllabus:
+      plural: 
+    teacher:
       plural: 
   name: 
   name_reading: 
@@ -558,6 +595,12 @@ pt-BR:
     save: 
   required: 
   revert: 
+  role:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
   save: 
   schedule: 
   scholarship_status: 
@@ -579,6 +622,7 @@ pt-BR:
     primary: 
     principal: 
     save: 
+    show: 
     singular: 
     slogan: 
     vice_principal: 
@@ -622,6 +666,7 @@ pt-BR:
     add: 
     birth_and: 
     birth_between: 
+    choose: 
     chosen_students: 
     class_group_enrollment: 
     commute_method: 
@@ -649,6 +694,8 @@ pt-BR:
     index: 
     save: 
   submit: 
+  success:
+    enrolled: 
   surname: 
   surname_reading: 
   syllabus:
@@ -668,7 +715,15 @@ pt-BR:
   teacher: 
   title: 
   user:
+    add: 
+    edit: 
+    email: 
     info: 
+    list: 
+    password: 
+    password_confirmation: 
+    save: 
+    username: 
   views:
     pagination:
       first: 
