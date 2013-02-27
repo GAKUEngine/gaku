@@ -11,6 +11,7 @@ module Gaku
           def calculate_totals
             @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
             @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
+            @completion = Hash.new { |hash,key| hash[key] = {} }
             @exam_averages = Hash.new {0.0}
             @exam_weight_averages = Hash.new {0.0}
             @weighting_score = true
@@ -18,6 +19,7 @@ module Gaku
 
             @students.each do |student|
               @exams.each do |exam|
+                caluculate_completion(exam)
                 @student_total_scores[student.id][exam.id] = 0.0
                 @student_total_weights[student.id][exam.id] = 0.0
                 exam.exam_portions.each do |portion|
@@ -92,6 +94,18 @@ module Gaku
           end
 
           private
+
+            def caluculate_completion(exam)
+              total ||= exam.total_records(@students)
+              ungraded ||= exam.ungraded
+
+              @completion[exam.id][:completion_percentage] = exam.completion(@students)
+              @completion[exam.id][:total] = total
+              @completion[exam.id][:graded] = total - ungraded
+              @completion[exam.id][:ungraded] = ungraded
+            end
+
+
             def fix_digit(num, digit_num)
               fix_num = 10 ** digit_num
               fixed_num = num * fix_num

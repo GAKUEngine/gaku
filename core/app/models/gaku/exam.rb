@@ -37,6 +37,31 @@ module Gaku
       exam_portions.inject(0) {|sum, p| sum + p.max_score }
     end
 
+    def completion(students)
+      total_records = total_records(students)
+      completion_ratio = 1 - (ungraded  / total_records.to_f)
+
+      return (completion_ratio * 100).round(2)
+    end
+
+    def ungraded
+      ungraded = 0
+      self.exam_portions.each do |ep|
+        ep.exam_portion_scores.each do |eps|
+          if eps.score.nil?
+            ungraded += 1 unless eps.attendances.last.try(:attendance_type).try(:auto_credit)
+          end
+        end
+      end
+
+      return ungraded
+    end
+
+
+    def total_records(students)
+       self.exam_portions.count * students.count
+    end
+
   end
 end
 
