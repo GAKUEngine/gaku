@@ -69,7 +69,6 @@ en:
     new: New Attachment
     plural: Attachments
     singular: Attachment
-    save: Save Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
