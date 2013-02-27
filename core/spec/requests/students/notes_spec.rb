@@ -14,6 +14,7 @@ describe 'Student Notes' do
   context 'new', :js => true do
     before do
       visit gaku.student_path(student)
+      click tab_link
       click new_link
       wait_until_visible submit
     end
@@ -29,6 +30,7 @@ describe 'Student Notes' do
       page.should have_content "The note title"
       page.should have_content "The note content"
       within(count_div) { page.should have_content 'Notes list(1)' }
+      within(tab_link) { page.should have_content 'Notes(1)' }
       flash_created?
     end
 
@@ -43,6 +45,8 @@ describe 'Student Notes' do
     before do
       note
       visit gaku.student_path(student)
+      click tab_link
+      wait_until { page.has_content? 'Notes list' }
     end
 
     context 'edit' do
@@ -76,6 +80,7 @@ describe 'Student Notes' do
       end.to change(student.notes, :count).by -1
 
       within(count_div) { page.should_not have_content 'Notes list(1)' }
+      within(tab_link) { page.should_not have_content 'Notes(1)' }
       page.should_not have_content note.title
       flash_destroyed?
     end

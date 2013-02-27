@@ -11,13 +11,6 @@
     .span3.well
       = render 'gaku/shared/picture', :resource => @student
 
-  = well_div do
-    = render 'gaku/contacts/contacts', :nested_resources => [@student]
-
-  = well_div do
-    #student-notes
-      = render :partial => 'gaku/notes/notes'
-
   = render :partial => 'tabs'
 
   = well_div do
