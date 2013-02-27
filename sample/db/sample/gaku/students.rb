@@ -4,12 +4,12 @@ require 'ffaker'
 #student
 student = Gaku::Student.where(:name => 'John', :surname => 'Doe', :enrollment_status_id => 2).first_or_create!
 
-country = Gaku::Country.find_by_name('日本')
+country = Gaku::Country.where(:name => '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: "392").first_or_create!
 address = student.addresses.where(:address1 => Faker::Address.street_address, :city => 'Nagoya', :country_id => country.id).first_or_create!
 
-email = Gaku::ContactType.find_by_name('Email')
-home_phone = Gaku::ContactType.find_by_name('Home Phone')
-mobile_phone = Gaku::ContactType.find_by_name('Mobile Phone')
+email = Gaku::ContactType.where(:name => 'Email').first_or_create!
+home_phone = Gaku::ContactType.where(:name => 'Home Phone').first_or_create!
+mobile_phone = Gaku::ContactType.where(:name => 'Mobile Phone').first_or_create!
 
 student_email = student.contacts.where(:data => 'john@example.com', :contact_type_id => email.id).first_or_create!
 student_home_phone = student.contacts.where(:data => Faker::PhoneNumber.phone_number, :contact_type_id => home_phone.id).first_or_create!
