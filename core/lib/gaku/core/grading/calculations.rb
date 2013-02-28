@@ -97,7 +97,7 @@ module Gaku
 
             def caluculate_completion(exam)
               total ||= exam.total_records(@students)
-              ungraded ||= exam.ungraded
+              ungraded ||= exam.ungraded(@students)
 
               @completion[exam.id][:completion_percentage] = exam.completion(@students)
               @completion[exam.id][:total] = total

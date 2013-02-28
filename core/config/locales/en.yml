@@ -396,6 +396,11 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    ungraded: Ungraded
+    graded: Graded
+    total: Total
+    completion: Completion
+    grading_completion: Grading Completion
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count

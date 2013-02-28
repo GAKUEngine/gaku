@@ -39,14 +39,18 @@ module Gaku
 
     def completion(students)
       total_records = total_records(students)
-      completion_ratio = 1 - (ungraded  / total_records.to_f)
+      completion_ratio = 1 - (ungraded(students)  / total_records.to_f)
 
       return (completion_ratio * 100).round(2)
     end
 
-    def ungraded
+    def ungraded(students)
       ungraded = 0
       self.exam_portions.each do |ep|
+        if ep.exam_portion_scores.nil?
+          ungraded += students.count
+          next
+        end
         ep.exam_portion_scores.each do |eps|
           if eps.score.nil?
             ungraded += 1 unless eps.attendances.last.try(:attendance_type).try(:auto_credit)

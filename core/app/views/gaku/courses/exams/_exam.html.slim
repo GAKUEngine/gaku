@@ -1,4 +1,5 @@
 tr
   td = exam.name
+  td = exam_completion_info(exam)
   td
     = link_to content_tag(:i, '', :class => 'icon-white icon-pencil') + t('grade.grading'), grading_course_exam_path(@course, exam), :class => "span12 btn btn-mini btn-primary grading_link"
