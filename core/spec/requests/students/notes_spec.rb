@@ -6,7 +6,7 @@ describe 'Student Notes' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:note) { create(:note, :notable => student) }
+  let(:note) { create(:note, notable: student) }
 
   before :all do
     set_resource "student-note"

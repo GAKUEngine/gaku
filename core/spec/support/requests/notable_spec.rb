@@ -56,7 +56,7 @@ shared_examples_for 'edit note' do
   end
 
   it 'errors without required fields', js:true do
-    fill_in 'note_title', :with => ''
+    fill_in 'note_title', with: ''
     has_validations?
   end
 
@@ -64,7 +64,7 @@ end
 
 shared_examples_for 'delete note' do
 
-  it "deletes", :js => true do
+  it "deletes", js: true do
     note_field = @data.notes.first.title
 
     within(count_div) { page.should have_content 'Notes list(1)' }
