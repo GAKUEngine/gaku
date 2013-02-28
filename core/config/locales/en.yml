@@ -35,10 +35,10 @@ en:
     zipcode: ZIP Code
   admitted: Admitted On
   alert:
-    already_added: '%{resource} are already added!'
-    empty: '%{resource} is empty!'
+    already_added: ! '%{resource} are already added!'
+    empty: ! '%{resource} is empty!'
     not_selected: No %{resource} selected!
-  and: ' and '
+  and: ! ' and '
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -69,7 +69,6 @@ en:
     new: New Attachment
     plural: Attachments
     singular: Attachment
-    save: Save Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -195,7 +194,7 @@ en:
     add: Add Course
     choose: Choose Course
     code: Course Code
-    code_sample: '[EX: FALL2020]'
+    code_sample: ! '[EX: FALL2020]'
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -293,7 +292,6 @@ en:
       signed_up_but_unconfirmed: This account has not been confirmed
       update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
-      admin_set_up: This is the first time you are running this application. Please set up admin user.
     sessions:
       remember_me: Remember me
       sign_in: Sign in
@@ -338,8 +336,8 @@ en:
       not_found: not found
       not_locked: was not locked
       not_saved:
-        one: '1 error prohibited this %{resource} from being saved:'
-        other: '%{count} errors prohibited this %{resource} from being saved:'
+        one: ! '1 error prohibited this %{resource} from being saved:'
+        other: ! '%{count} errors prohibited this %{resource} from being saved:'
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -411,12 +409,12 @@ en:
   flash:
     actions:
       create:
-        notice: '%{resource_name} was successfully created!'
+        notice: ! '%{resource_name} was successfully created!'
       destroy:
-        alert: '%{resource_name} could not be destroyed!'
-        notice: '%{resource_name} was successfully destroyed!'
+        alert: ! '%{resource_name} could not be destroyed!'
+        notice: ! '%{resource_name} was successfully destroyed!'
       update:
-        notice: '%{resource_name} was successfully updated!'
+        notice: ! '%{resource_name} was successfully updated!'
   gender:
     choose: Choose Gender
     female: Female
@@ -561,15 +559,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: '%{resource} has been successfully added!'
-    created: '%{resource} has been successfully created!'
-    destroyed: '%{resource} has been successfully destroyed!'
-    enrolled: '%{resource} has been successfully enrolled to %{to}!'
+    added: ! '%{resource} has been successfully added!'
+    created: ! '%{resource} has been successfully created!'
+    destroyed: ! '%{resource} has been successfully destroyed!'
+    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: '%{resource} has been successfully recovered'
-    removed: '%{resource} has been successfully removed!'
-    updated: '%{resource} has been successfully updated!'
-    uploaded: '%{resource} has been successfully uploaded!'
+    recovered: ! '%{resource} has been successfully recovered'
+    removed: ! '%{resource} has been successfully removed!'
+    updated: ! '%{resource} has been successfully updated!'
+    uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -710,7 +708,7 @@ en:
     import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: '[EX: Science A]'
+    name_sample: ! '[EX: Science A]'
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
@@ -730,8 +728,8 @@ en:
     username: Username
   views:
     pagination:
-      first: '&laquo; First'
+      first: ! '&laquo; First'
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '...'
+      previous: ! '&lsaquo; Prev'
+      truncate: ! '...'
