@@ -57,6 +57,13 @@ module Gaku
 
       def soft_delete
         @student = Student.find(params[:id])
+        if !@student.admission.nil?
+          @student.admission.admission_phase_records.each {|record|
+            record.update_attribute(:is_deleted, true)
+          }
+          @student.admission.update_attribute(:is_deleted, true)
+        end
+        
         @student.update_attribute(:is_deleted, true)
 
         redirect_to session[:return_to], :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
