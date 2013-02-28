@@ -68,6 +68,7 @@ en:
     name: Name
     new: New Attachment
     plural: Attachments
+    save: Save Attachment
     singular: Attachment
   attendance_type:
     add: Add Attendance Type
@@ -279,6 +280,7 @@ en:
       updated: Your password was changed successfully. You are now signed in.
       updated_not_active: Your password was changed successfully.
     registrations:
+      admin_set_up: This is the first time you are running this application. Please set up admin user.
       destroyed: Bye! Your account was successfully cancelled. We hope to see you again soon.
       inactive_signed_up: You have signed up successfully. However, we could not sign you in because your account is %{reason}.
       reasons:

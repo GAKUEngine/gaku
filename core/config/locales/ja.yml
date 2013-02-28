@@ -68,6 +68,7 @@ ja:
     name: 名称
     new: アセットの登録
     plural: 添付ファイル
+    save: 
     singular: 添付ファイル
   attendance_type:
     add: 出席類を追加
@@ -279,6 +280,7 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
+      admin_set_up: 
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       inactive_signed_up: サインアップに成功しましたが、%{reason}の為にサインイン出来ません。
       reasons:

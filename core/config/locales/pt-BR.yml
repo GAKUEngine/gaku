@@ -68,6 +68,7 @@ pt-BR:
     name: Nome
     new: 
     plural: 
+    save: 
     singular: 
   attendance_type:
     add: 
@@ -279,6 +280,7 @@ pt-BR:
       updated: 
       updated_not_active: 
     registrations:
+      admin_set_up: 
       destroyed: 
       inactive_signed_up: 
       reasons:

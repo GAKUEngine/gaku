@@ -68,6 +68,7 @@ bg:
     name: Име
     new: Ново прикачване на файл
     plural: Прикачени файлове
+    save: 
     singular: Прикачен файл
   attendance_type:
     add: Добави нов вид посещаемост
@@ -279,6 +280,7 @@ bg:
       updated: 
       updated_not_active: 
     registrations:
+      admin_set_up: 
       destroyed: 
       inactive_signed_up: 
       reasons:
