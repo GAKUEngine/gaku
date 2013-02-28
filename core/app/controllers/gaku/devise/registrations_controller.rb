@@ -9,7 +9,8 @@ class Gaku::Devise::RegistrationsController < Devise::RegistrationsController
 
   def create_admin
     build_resource
-    resource.admin = true
+    admin_role = Gaku::Role.find_by_name('Admin')
+    resource.roles << admin_role
 
     if resource.save
       if resource.active_for_authentication?
