@@ -13,7 +13,7 @@ describe 'Student Notes' do
 
   context 'new', :js => true do
     before do
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -44,7 +44,7 @@ describe 'Student Notes' do
   context "existing", :js => true do
     before do
       note
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click tab_link
       wait_until { page.has_content? 'Notes list' }
     end

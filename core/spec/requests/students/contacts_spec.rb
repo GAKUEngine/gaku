@@ -16,7 +16,7 @@ describe 'Student Contacts' do
 
     before do
       contact_type
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click tab_link
       wait_until { page.has_content? 'Contacts list' }
       @data = student
@@ -40,7 +40,7 @@ describe 'Student Contacts' do
       context 'edit', :js => true do
 
         before do
-          visit gaku.student_path(@student)
+          visit gaku.edit_student_path(@student)
           click tab_link
           wait_until { page.has_content? 'Contacts list' }
         end
@@ -59,7 +59,7 @@ describe 'Student Contacts' do
         @student = create(:student_with_two_contacts)
         @student.reload
         @data = @student
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Contacts list' }
       end

@@ -1,4 +1,5 @@
-td
-	= link_to_show [@notable, note]
-	= ajax_link_to_edit [:edit, @notable, note]
-	= ajax_link_to_delete [@notable, note]
+- if can_edit?
+  td
+  	= link_to_show [@notable, note]
+  	= ajax_link_to_edit [:edit, @notable, note]
+  	= ajax_link_to_delete [@notable, note]

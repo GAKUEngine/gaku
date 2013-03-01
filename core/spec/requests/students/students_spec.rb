@@ -122,7 +122,7 @@ describe 'Students' do
     end
 
     it 'deletes', js: true do
-      visit gaku.student_path(student2)
+      visit gaku.edit_student_path(student2)
       student_count = Gaku::Student.count
       page.should have_content "#{student2.name}"
 

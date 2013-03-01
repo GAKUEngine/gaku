@@ -5,8 +5,12 @@
         tbody
           = render 'gaku/students/guardians/fields', :guardian => guardian
 
-    .row-fluid.mt-m
-      = ajax_link_to_new t(:'contact.add'), [:new, :contact, @student, guardian], :id => 'new-student-guardian-contact-link'
+    - if can_edit?
+      .row-fluid.mt-m
+        = ajax_link_to_new t(:'contact.add'), [:new, :contact, @student, guardian], :id => 'new-student-guardian-contact-link'
+        = link_to_show [@student, guardian]
+        = ajax_link_to_edit [:edit, @student, guardian]
+        = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
+    - else
       = link_to_show [@student, guardian]
-      = ajax_link_to_edit [:edit, @student, guardian]
-      = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
+
