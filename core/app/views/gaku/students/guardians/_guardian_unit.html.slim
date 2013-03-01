@@ -1,16 +1,13 @@
-- unless guardian.nil? or guardian.new_record? or !guardian
-  = well_div do
-    .row-fluid
-      = table do
-        tbody
-          = render 'gaku/students/guardians/fields', :guardian => guardian
+td
+td = guardian.surname
+td = guardian.name
+td = guardian.birth_date
+td = guardian.relationship
 
-    - if can_edit?
-      .row-fluid.mt-m
-        = ajax_link_to_new t(:'contact.add'), [:new, :contact, @student, guardian], :id => 'new-student-guardian-contact-link'
-        = link_to_show [@student, guardian]
-        = ajax_link_to_edit [:edit, @student, guardian]
-        = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
-    - else
-      = link_to_show [@student, guardian]
-
+- if can_edit?
+  td
+    = link_to_show [@student, guardian]
+    = ajax_link_to_edit [:edit, @student, guardian]
+    = ajax_link_to_delete [@student, guardian], :class => 'btn btn-mini btn-danger delete-student-guardian-link'
+- else
+  td = link_to_show [@student, guardian]
