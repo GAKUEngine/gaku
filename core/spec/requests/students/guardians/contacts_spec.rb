@@ -20,7 +20,7 @@ describe 'Student Guardian Contacts' do
     before(:each) do
       contact_type
       student.guardians << guardian
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       @data = guardian
       click tab_link
       wait_until { page.has_content? 'Guardians list' }
@@ -73,7 +73,7 @@ describe 'Student Guardian Contacts' do
         visit gaku.student_guardian_path(student, @guardian)
       end
 
-      
+
       it_behaves_like 'edit contact'
 
       it_behaves_like 'delete contact', @data

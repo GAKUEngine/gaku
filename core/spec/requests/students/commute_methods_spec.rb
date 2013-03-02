@@ -25,7 +25,7 @@ describe 'Student Commute Methods' do
       context " #add" do
         before do
           commute_method_type
-          visit gaku.student_path(student)
+          visit gaku.edit_student_path(student)
           click '#edit-student-commute-method-link'
           wait_until_visible modal
         end
@@ -46,7 +46,7 @@ describe 'Student Commute Methods' do
         before do
           commute_method_type.commute_methods<<commute_method
           commute_method_type_train
-          visit gaku.student_path(student)
+          visit gaku.edit_student_path(student)
           page.should have_content "#{student.commute_method.commute_method_type}"
           click '#edit-student-commute-method-link'
         end

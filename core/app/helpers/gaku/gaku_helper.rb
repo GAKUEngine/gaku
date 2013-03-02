@@ -15,6 +15,14 @@ module Gaku
       end
     end
 
+    def can_edit?
+      if controller.action_name == "show" and controller.controller_name == "students"
+        false
+      else
+        true
+      end
+    end
+
     def grading_methods
       Gaku::GradingMethod.all.collect {|s| [s.name.capitalize, s.id] }
     end

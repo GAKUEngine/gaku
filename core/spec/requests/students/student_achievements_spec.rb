@@ -17,7 +17,7 @@ describe 'Student Achievements' do
 
     before do
       achievement
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-achievements-link'
       click new_link
       wait_until_visible '#cancel-student-achievement-link'
@@ -45,7 +45,7 @@ describe 'Student Achievements' do
     before do
       achievement2
       student_achievement
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-achievements-link'
     end
 

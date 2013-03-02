@@ -13,7 +13,7 @@ describe 'Student Guardians' do
 
   context 'new', :js => true do
     before do
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -54,7 +54,7 @@ describe 'Student Guardians' do
     before(:each) do
       student.guardians << guardian
 
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click tab_link
       wait_until { page.has_content? 'Guardians list' }
     end
