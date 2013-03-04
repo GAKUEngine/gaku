@@ -117,7 +117,7 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
-  birth: Birth Date
+  sex_and_birth: Sex/Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
   birth_date: Birth Date

@@ -1,47 +1,50 @@
 - present student do |student_presenter|
-  = table_for 'student-index' do
+  = show_table_for 'student-index' do
+    caption
+     h2 = student
     tbody
-      tr
-        th.btn-c1 width="20%" = t('class')
-        td#student-class-group-enrollment
-          = student_presenter.class_group
 
       = render 'gaku/shared/fields/person_show_table', :person => student
 
       tr
-        th.btn-c2 = t(:'contact.primary')
+        th width="20%" = t('class')
+        td#student-class-group-enrollment
+          = student_presenter.class_group
+
+      tr
+        th = t(:'contact.primary')
         td = student_presenter.primary_contact
 
       tr
-        th.btn-c2 = t(:'address.primary')
+        th = t(:'address.primary')
         td = student_presenter.primary_address
 
       tr
-        th.btn-c2 = t(:'admitted')
+        th = t(:'admitted')
         td = student.admitted
 
       tr
-        th.btn-c2 = t(:'enrollment_status.singular')
+        th = t(:'enrollment_status.singular')
         td = student.enrollment_status
 
       tr
-        th.btn-c2 = t(:'scholarship_status')
+        th = t(:'scholarship_status')
         td = student.scholarship_status
 
       tr
-        th.btn-c2 = t(:'commute_method.singular')
+        th = t(:'commute_method.singular')
         td = student.commute_method
 
       tr
-        th.btn-c2 = t(:'specialty.plural')
+        th = t(:'specialty.plural')
         td = student_presenter.specialties
 
       tr
-        th.btn-c2 = t(:'simple_grade.plural')
+        th = t(:'simple_grade.plural')
         td = student_presenter.simple_grades
 
       tr
-        th.btn-c2 = t(:'achievement.plural')
+        th = t(:'achievement.plural')
         td = student_presenter.achievements
 
 

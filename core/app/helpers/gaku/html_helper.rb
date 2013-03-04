@@ -15,6 +15,15 @@ module Gaku
       end
     end
 
+
+    def show_table_for(id, &block)
+      content_tag :div, class: "row-fluid" do
+        content_tag :table, class: "table table-hover table-condensed", id: id do
+          block.call
+        end
+      end
+    end
+
     def hr
       content_tag :div, class: "row-fluid" do
         content_tag :div, class: "span12" do
