@@ -9,6 +9,14 @@
       = render 'gaku/shared/fields/person_show_table', :person => student
 
       tr
+        th.btn-c2 = t(:'contact.primary')
+        td = student_presenter.primary_contact
+
+      tr
+        th.btn-c2 = t(:'address.primary')
+        td = student_presenter.primary_address
+
+      tr
         th.btn-c2 = t(:'admitted')
         td = student.admitted
 
@@ -25,6 +33,15 @@
         td = student.commute_method
 
       tr
-        th.btn-c2 = t(:'specialty.singular')
-        td = student.student_specialties
+        th.btn-c2 = t(:'specialty.plural')
+        td = student_presenter.specialties
+
+      tr
+        th.btn-c2 = t(:'simple_grade.plural')
+        td = student_presenter.simple_grades
+
+      tr
+        th.btn-c2 = t(:'achievement.plural')
+        td = student_presenter.achievements
+
 
