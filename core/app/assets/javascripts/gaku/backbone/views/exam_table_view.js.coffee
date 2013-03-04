@@ -21,6 +21,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
                         ranks: @options.ranks
                         attendances: @options.attendances
                         path_to_exam: @options.path_to_exam
+                        completion: @options.completion
                       }
     @$el.html @template(optionsObjects)
     _.defer ->

@@ -4,6 +4,7 @@
         thead
           tr
             =th t('exam.name')
+            =th t('exam.grading_completion')
             =th_actions 3
         tbody
           = render :partial => 'gaku/courses/exams/exam', :collection => @course.syllabus.exams, :as => :exam
