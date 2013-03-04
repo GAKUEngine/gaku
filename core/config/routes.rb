@@ -11,7 +11,10 @@ Gaku::Core::Engine.routes.draw do
       registrations: "gaku/devise/registrations",
       passwords: "gaku/devise/passwords"
     }
-  }
+  } do
+    get :set_up_admin_account, :to => "devise/registrations#set_up_admin_account"
+    post :create_admin, :to => "devise/registrations#create_admin"
+  end
 
   resources :extracurricular_activities do
     member do

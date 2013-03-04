@@ -11,6 +11,8 @@ module Gaku
 
     before_filter :set_locale
 
+    before_filter :users_check
+
     layout :resolve_layout
 
     self.responder = Core::AppResponder
@@ -47,6 +49,13 @@ module Gaku
         I18n.locale = current_user.settings[:locale] #|| Gaku::Preset.get('language')
       else
         I18n.default_locale
+      end
+    end
+
+    def users_check
+      count = User.count
+      if count == 0
+        redirect_to set_up_admin_account_path
       end
     end
 

@@ -323,6 +323,7 @@ en:
       signed_up_but_unconfirmed: This account has not been confirmed
       update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
+      admin_set_up: This is the first time you are running this application. Please set up admin user.
     sessions:
       remember_me: Remember me
       sign_in: Sign in
