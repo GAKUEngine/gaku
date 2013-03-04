@@ -11,6 +11,7 @@ javascript:
   var ranks = '#{@ranks.to_json(:root => false).to_s.html_safe}'
   var attendances = '#{@student_portion_attendance.to_json(:root => false).to_s.html_safe}'
   var path_to_exam = '#{@path_to_exam.to_json.to_s.html_safe}'
+  var completion = '#{@completion.to_json.to_s.html_safe}'
 coffee:
   $(document).ready ->
     router = new GAKUEngine.Routers.ExamsRouter
@@ -24,6 +25,8 @@ coffee:
       ranks: $.parseJSON(ranks)
       attendances: $.parseJSON(attendances)
       path_to_exam: $.parseJSON(path_to_exam)
+      completion: $.parseJSON(completion)
+
     Backbone.history.start()
 
     tableSizeFix = ->
