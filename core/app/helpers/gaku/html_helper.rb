@@ -3,7 +3,7 @@ module Gaku
 
     def table_for(id, &block)
       content_tag :div, class: "row-fluid" do
-        content_tag :table, class: "table table-striped table-bordered table-condensed", id: id do
+        content_tag :table, class: "table table-striped table-condensed", id: id do
           block.call
         end
       end
