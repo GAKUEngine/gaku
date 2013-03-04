@@ -1,149 +1,149 @@
-pt-BR:
+bg:
   achievement:
-    add: 
-    authority: 
-    badge: 
-    choose: 
-    description: 
-    edit: 
-    list: 
-    name: 
-    plural: 
-    save: 
-    singular: 
-  add: Adicionar
+    add: Добави Постижение
+    authority: Пълномощие
+    badge: Значка
+    choose: Избери Постижение
+    description: Описание
+    edit: Редактирай Постижение
+    list: Списък Постижения
+    name: Име
+    plural: Постижения
+    save: Запази Постижение
+    singular: Постижение
+  add: Добави
   address:
-    add: Adicionar Endereço
-    address1: Endereço 1
-    address2: Endereço 2
-    choose_country: Selecione País
-    city: Cidade
-    count: Contagem de endereços
-    country: País
-    edit: Editar endereço
-    list: Listagem de endereços
-    new: Novo Endereço
-    past: 
-    plural: Endereços
-    prefecture: Estado/Província/Prefeitura
-    primary: Endereço Primário
-    save: Salvar endereço
-    search: Buscar Endereço
-    singular: Endereço
-    state: Estado
-    title: Título
-    zipcode: CEP
-  admitted: Admitido Em
+    add: Добави Адрес
+    address1: Адрес 1
+    address2: Адрес 2
+    choose_country: Избери Държава
+    city: Град
+    count: Брой адреси
+    country: Държава
+    edit: Редактирай адрес
+    list: Списък Адреси
+    new: Добави Адрес
+    past: Маркирай като стар?
+    plural: Адреси
+    prefecture: Щат/Провинция/Префектура
+    primary: Основен Адрес
+    save: Запази Адрес
+    search: Търси Адрес
+    singular: Адрес
+    state: Щат
+    title: Заглавие
+    zipcode: Пощенски код
+  admitted: Приет на
   alert:
-    already_added: ! '%{resource} já foram adicionados!'
-    empty: ! '%{resource} está vazio!'
-    not_selected: Nenhum %{resource} selecionado!
-  and: e
-  are_you_sure: Você tem certeza?
+    already_added: ! '%{resource} са вече добавени!'
+    empty: ! '%{resource} е празен!'
+    not_selected: Няма избран %{resource}!
+  and: и
+  are_you_sure: Сигурен ли сте?
   assignment:
-    add: Adicionar Atribuição
-    count: Contagem de atribuições
-    description: Descrição
-    list: Atribuições
-    max_score: Pontuação máxima
-    name: Nome da atribuição
-    new: Nova Atribuição
-    plural: Atribuições
-    results: Resultados da Atribuição
-    singular: Atribuição
-    view: Exibir Atribuições
+    add: Добави Зaдание
+    count: Брой на заданията
+    description: Описание
+    list: Задания
+    max_score: Максимален резултат
+    name: Име на заданието
+    new: Създай Задание
+    plural: Задания
+    results: Резултати от заданието
+    singular: Задание
+    view: Покажи Заданията
   assignments:
-    description: Descrição da Atribuição
+    description: Описание на заданието
   attachment:
-    asset_error: Erro ao fazer upload
-    asset_type: 
-    asset_upload: 
-    assets: 
-    create: 
-    description: Descrição
-    file_name: Nome do arquivo
-    file_size: Tamanho do arquivo
-    file_type: Tipo do arquivo
-    list: 
-    name: Nome
-    new: 
-    plural: 
+    asset_error: Грешка при качването на файла
+    asset_type: Тип на файла.
+    asset_upload: Файлът беше качен успешно!
+    assets: Файлове
+    create: Качи Файл
+    description: Описание
+    file_name: Име на файла
+    file_size: Големина на файла
+    file_type: Тип на файла
+    list: Списък на файловете
+    name: Име
+    new: Ново прикачване на файл
+    plural: Прикачени файлове
     save: 
-    singular: 
+    singular: Прикачен файл
   attendance_type:
-    add: 
-    auto_credit: 
-    color_code: Código da Cor
-    counted_absent: 
+    add: Добави нов вид посещаемост
+    auto_credit: Авто Кредит
+    color_code: Код за цвят
+    counted_absent: Брой отсъстващи
     credit_rate: 
-    disable_credit: Desabilitar Crédito
-    edit: 
-    list: 
-    name: Nome
-    new: 
-    plural: 
-    save: 
-    singular: 
-  back: Voltar
-  birth: Data de Nascimento
-  birth_and: e
-  birth_between: Data de Nascimento entre
-  birth_date: Data de Nascimento
+    disable_credit: 
+    edit: Редактирай типове на посещаемост
+    list: Списък с типове на посещаемост
+    name: Име
+    new: Добави тип на посещаемост
+    plural: Типове на посещаемост
+    save: Запази тип на посещаемост
+    singular: Тим на посещаемост
+  back: 
+  birth: 
+  birth_and: 
+  birth_between: 
+  birth_date: 
   birth_date_from: 
   birth_date_to: 
   campus:
-    add: Adicionar Campus
-    address: Endereço do Campus
-    contacs: Contatos do Campus
-    edit: Editar Campus
-    list: Lista de Campus
-    name: Nome
-    new: Novo Campus
-    plural: Campus
-    primary: Primário
-    save: Salvar Campus
-    singular: Campus
-  cancel: Cancelar
+    add: 
+    address: 
+    contacs: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    primary: 
+    save: 
+    singular: 
+  cancel: 
   changes:
     change: 
-    changed_at: Alterado Em
-    event: Evento
-    from: De
+    changed_at: 
+    event: 
+    from: 
     student:
-      list: Lista de Mudanças de Alunos
+      list: 
     student_address:
-      list: Lista de Mudanças de Endereços de Alunos
+      list: 
     student_contact:
-      list: Lista de Mudanças de Contato de Alunos
-    to: Para
+      list: 
+    to: 
     user: 
-  class: Classe
+  class: 
   class_group:
-    add: Adicionar Grupo de Classe
-    choose: Selecionar Grupo de Classe
-    edit: Editar Grupo de Classe
+    add: 
+    choose: 
+    edit: 
     enroll: 
     grade: 
     homeroom: 
     list: 
-    name: Nome da Classe
-    new: Novo Grupo de Classe
-    none: Nenhum
-    none_assigned: Nenhum Atribuído
-    plural: Grupos de Classe
-    save: Salvar Grupo de Classe
-    show: Exibir
-    singular: Grupo de Classe
+    name: 
+    new: 
+    none: 
+    none_assigned: 
+    plural: 
+    save: 
+    show: 
+    singular: 
   class_group_course_enrollment:
     save: 
   class_group_enrollment:
-    count: Contagem de matrículas
-    create: Criar Matrícula de Classe
-    current: Matrícula Atual
+    count: 
+    create: 
+    current: 
     list: 
-    new: Nova matrícula de classe
-    seat_number: Número do assento
-  class_group_management: Gestão da Classe
+    new: 
+    seat_number: 
+  class_group_management: 
   commute_method:
     add: 
     edit: 
@@ -158,90 +158,90 @@ pt-BR:
     plural: 
     save: 
     singular: 
-  comname: GAKU Engine
+  comname: 
   config:
-    close: Fechar
+    close: 
     help:
-      language: Selecione seu Idioma
-    label: Idioma
-    save: Salvar
-  confirm: Você tem certeza?
-  confirm_delete: Realmente excluir este registro?
+      language: 
+    label: 
+    save: 
+  confirm: 
+  confirm_delete: 
   contact:
-    add: Adicionar Contato
-    contact_type: Tipo de Contato
-    create: Criar Contato
-    data: Dados
-    details: Detalhes
-    edit: Editar Contato
-    emergency: Emergência
-    list: Lista de Contatos
-    new: Novo Contato
-    plural: Contatos
-    primary: Primário
-    save: Salvar Contato
-    singular: Contato
+    add: 
+    contact_type: 
+    create: 
+    data: 
+    details: 
+    edit: 
+    emergency: 
+    list: 
+    new: 
+    plural: 
+    primary: 
+    save: 
+    singular: 
   contact_type:
-    add: Adicionar Tipo de Contato
-    choose: Selecionar Tipo de Contato
-    edit: Editar Tipo de Contato
-    list: Listagem de Tipos de Contato
-    name: Nome
-    new: Novo Tipo de Contato
-    plural: Tipos de Contato
-    save: Salvar Tipo de Contato
-    singular: Tipo de Contato
+    add: 
+    choose: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
   course:
-    add: Adicionar Curso
+    add: 
     choose: 
     code: 
     code_sample: 
     combined_code: 
-    count: Contagem de cursos
-    edit: Editar Curso
-    list: Lista de Cursos
-    management: Gestão de Cursos
-    name: Nome do Curso
-    new: Novo Curso
-    options: Opções
-    plural: Cursos
-    save: Salvar Curso
-    show: Exibir Curso
-    singular: Curso
+    count: 
+    edit: 
+    list: 
+    management: 
+    name: 
+    new: 
+    options: 
+    plural: 
+    save: 
+    show: 
+    singular: 
   course_enrollment:
-    add: Matricular em curso
-    create: Criar matrícula
-    list: Matrículas
-    plural: Matrícula de Curso
-    singular: Matrícula de Curso
+    add: 
+    create: 
+    list: 
+    plural: 
+    singular: 
   course_group:
-    course_group_recover: Grupo de Curso Recuperado
-    edit: Editar Grupo de Curso
-    list: Lista de Grupos de Curso
-    name: Nome
-    new: Novo Grupo de Curso
-    plural: Grupos de Curso
-    save: Salvar Grupo de Curso
-    show: Grupo de Curso
-    singular: Grupo de Cursos
+    course_group_recover: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    show: 
+    singular: 
   course_group_enrollment:
-    save: Salvar em Grupo de Cursos
+    save: 
   csv:
-    export: Exportação CSV
+    export: 
     fields:
-      admitted: admitido
-      birth_date: nascimento
-      email: email
-      gender: sexo
-      name: nome
+      admitted: 
+      birth_date: 
+      email: 
+      gender: 
+      name: 
       name_reading: 
-      phone: telefone
-      surname: último nome
+      phone: 
+      surname: 
       surname_reading: 
-    import: Importação CSV
-  date_placeholder: DD-MM-YYYY
-  default: Padrão
-  delete: Excluir
+    import: 
+  date_placeholder: 
+  default: 
+  delete: 
   description: 
   destroy: 
   devise:
@@ -270,10 +270,10 @@ pt-BR:
     omniauth_callbacks:
       failure: 
       success: 
-    password: Senha
-    password_confirmation: Confirmação de Senha
+    password: 
+    password_confirmation: 
     passwords:
-      forgot: Esqueceu sua senha?
+      forgot: 
       no_token: 
       send_instructions: 
       send_paranoid_instructions: 
@@ -284,14 +284,14 @@ pt-BR:
       destroyed: 
       inactive_signed_up: 
       reasons:
-        inactive: inativo
-        locked: trancado
-        unconfirmed: não confirmado
-      sign_up: Registrar
-      signed_up: Bem vindo! Você acessou com sucesso.
-      signed_up_but_inactive: Esta conta está inativa
-      signed_up_but_locked: Esta conta foi trancada
-      signed_up_but_unconfirmed: Esta conta não foi confirmada
+        inactive: 
+        locked: 
+        unconfirmed: 
+      sign_up: 
+      signed_up: 
+      signed_up_but_inactive: 
+      signed_up_but_locked: 
+      signed_up_but_unconfirmed: 
       update_needs_confirmation: 
       updated: 
     sessions:

@@ -1,36 +1,4 @@
 en:
-  teacher:
-    list: Teachers list
-    new: New Teacher
-    name: Name
-    save: Save Teacher
-    edit: Edit Teacher
-    show: Show Teacher
-    singular: Teacher
-    plural: Teachers
-  role:
-    list: Roles list
-    add: Add Role
-    name: Name
-    save: Save Role
-    edit: Edit Role
-  success:
-    enrolled: "Successfully enrolled!"
-  failure:
-    enrolled: "Failed to enroll!"
-  extracurricular_activity:
-    add: Add Extracurricular Activity
-    singular: Extracurricular Activity
-    plural: Extracurricular Activities
-    list: Extracurricular Activities list
-    new: New Extracurricular Activity
-    name: Name
-    save: Save
-    show: Show Extracurricular Activity
-    edit: Edit Extracurricular Activity
-    enroll: Enroll to Extracurricular Activity
-  extracurricular_activity_enrollment:
-    list: Student list
   achievement:
     add: Add Achievement
     authority: Authority
@@ -100,6 +68,7 @@ en:
     name: Name
     new: New Attachment
     plural: Attachments
+    save: Save Attachment
     singular: Attachment
   attendance_type:
     add: Add Attendance Type
@@ -117,9 +86,11 @@ en:
     singular: Attendance Type
   back: Back
   birth: Birth Date
-  birth_date_from: Birth date(from)
-  birth_date_to: Birth date(to)
+  birth_and: and
+  birth_between: Birth date between
   birth_date: Birth Date
+  birth_date_from: Birth Date [Starting]
+  birth_date_to: Birth Date [Ending]
   campus:
     add: Add Campus
     address: Campus Address
@@ -309,6 +280,7 @@ en:
       updated: Your password was changed successfully. You are now signed in.
       updated_not_active: Your password was changed successfully.
     registrations:
+      admin_set_up: This is the first time you are running this application. Please set up admin user.
       destroyed: Bye! Your account was successfully cancelled. We hope to see you again soon.
       inactive_signed_up: You have signed up successfully. However, we could not sign you in because your account is %{reason}.
       reasons:
@@ -421,6 +393,21 @@ en:
     data: Data
     ending: Ending
     student_id_number: Student ID number
+  extracurricular_activity:
+    add: Add Extracurricular Activity
+    edit: Edit Extracurricular Activity
+    enroll: Enroll to Extracurricular Activity
+    list: Extracurricular Activities list
+    name: Name
+    new: New Extracurricular Activity
+    plural: Extracurricular Activities
+    save: Save
+    show: Show Extracurricular Activity
+    singular: Extracurricular Activity
+  extracurricular_activity_enrollment:
+    list: Student list
+  failure:
+    enrolled: Failed to enroll!
   flash:
     actions:
       create:
@@ -454,15 +441,15 @@ en:
     weighting: Weight
     weighting_portion: Weighting
   grading_method:
-    singular: Grading Method
-    plural: Grading Methods
-    list: Grading Methods list
     add: Add Grading Method
     description: Description
-    name: Name
-    method: Methods
-    save: Save Grading Method
     edit: Edit Grading Method
+    list: Grading Methods list
+    method: Methods
+    name: Name
+    plural: Grading Methods
+    save: Save Grading Method
+    singular: Grading Method
   graduated: Graduated On
   guardian:
     add: Add Guardian
@@ -499,10 +486,6 @@ en:
         student_addresses: Student Addresses
         student_contacts: Student Contacts
         students: Students
-      users:
-        users_and_roles: Users & Roles
-        users: Users
-        roles: Roles
       disposals:
         attachment: Attachment Disposals
         course_group: Course Group Disposals
@@ -510,15 +493,16 @@ en:
         exam: Exam Disposals
         student: Student Disposals
         student_address: Student Addresses Disposals
+      grading_methods: Grading Methods
       preset:
         grading:
           grading_method: Grading Method
           grading_scheme: Grading Scheme
         items:
+          defaults: Defaults Preset
           grading: Grading Preset
           locale: Locale Preset
           student: Student Preset
-          defaults: Defaults Preset
         plural: Presets
         save: Save
         singular: Preset
@@ -530,7 +514,6 @@ en:
       school_details: School Details
       schools: Schools
       specialties: Specialties
-      grading_methods: Grading Methods
       system:
         backup: Backup
         system_tools: System Tools
@@ -540,6 +523,10 @@ en:
         contact: Contact Types
         enrollment_status: Enrollment Statuses
         types: Types & Methods
+      users:
+        roles: Roles
+        users: Users
+        users_and_roles: Users & Roles
     class_group:
       management: Class Management
       plural: Class Groups
@@ -551,14 +538,14 @@ en:
     exam:
       management: Exam Management
       plural: Exams
-    student:
-      plural: Students
-    teacher:
-      plural: Teachers
     extracurricular_activity:
       plural: Extracurriculars
+    student:
+      plural: Students
     syllabus:
       plural: Syllabuses
+    teacher:
+      plural: Teachers
   name: Name
   name_reading: Name Reading
   none: None
@@ -612,6 +599,12 @@ en:
     save: Save profile
   required: required
   revert: Revert
+  role:
+    add: Add Role
+    edit: Edit Role
+    list: Roles List
+    name: Name
+    save: Save Role
   save: Save
   schedule: Schedule
   scholarship_status: Scholarship Status
@@ -633,11 +626,10 @@ en:
     primary: Primary
     principal: Principal
     save: Save School
+    show: School Show
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
-    choose: Choose School
-    show: School Show
   search: Search
   select: Select
   semester:
@@ -675,10 +667,10 @@ en:
     save: Save Specialty
     singular: Specialty
   student:
-    choose: Choose students
     add: Add Student
     birth_and: and
     birth_between: Birth date between
+    choose: Choose students
     chosen_students: Chosen students
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
@@ -706,6 +698,8 @@ en:
     index: Student Specialty Index
     save: Save Student Specialty
   submit: Submit
+  success:
+    enrolled: Successfully enrolled!
   surname: Surname
   surname_reading: Surname Reading
   syllabus:
@@ -722,17 +716,18 @@ en:
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
+  teacher: Instructor
   title: Title
   user:
-    info: User info
-    username: Username
-    email: Email
-    password: Password
-    password_confirmation: Confirm Password
-    list: Users list
     add: Add User
     edit: Edit User
+    email: Email
+    info: User info
+    list: Users list
+    password: Password
+    password_confirmation: Confirm Password
     save: Save User
+    username: Username
   views:
     pagination:
       first: ! '&laquo; First'
