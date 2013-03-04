@@ -52,20 +52,32 @@ module Gaku
           next
         end
         ep.exam_portion_scores.each do |eps|
-          if eps.score.nil?
-            ungraded += 1 unless eps.attendances.last.try(:attendance_type).try(:auto_credit)
-          end
+            ungraded += 1 if check_record_completion?(eps)
         end
       end
 
       return ungraded
     end
 
-
     def total_records(students)
        self.exam_portions.count * students.count
     end
 
+    def completed_by_student?(student)
+      state = true
+      self.exam_portions.each do |ep|
+        student_eps = ep.exam_portion_scores.detect {|eps| eps.student_id == student.id}
+        state = false if check_record_completion?(student_eps)
+      end
+
+      return state
+    end
+
+    private
+
+    def check_record_completion?(student_eps)
+      student_eps.score.nil? && !student_eps.attendances.last.try(:attendance_type).try(:auto_credit)
+    end
   end
 end
 
