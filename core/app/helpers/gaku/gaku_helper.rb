@@ -8,6 +8,7 @@ module Gaku
     include FormHelper
     include ModalHelper
     include HtmlHelper
+    include PersonHelper
 
     def count_div(html_class, &block)
       content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
@@ -91,6 +92,7 @@ module Gaku
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
+      puts "KLaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas : #{klass}"
       presenter = klass.new(object, self)
       yield presenter if block_given?
       presenter

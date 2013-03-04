@@ -30,11 +30,11 @@ module Gaku
     end
 
     def primary_address
-      "#{student.primary_address.city}, #{student.primary_address.address1}"
+      "#{student.primary_address.city}, #{student.primary_address.address1}" if student.primary_address
     end
 
     def primary_contact
-      "#{student.primary_contact.contact_type}: #{student.primary_contact.data}"
+      "#{student.primary_contact.contact_type}: #{student.primary_contact.data}" if student.primary_contact
     end
 
     private

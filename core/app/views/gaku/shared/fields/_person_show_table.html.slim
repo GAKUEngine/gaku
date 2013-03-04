@@ -1,3 +1,4 @@
-tr
-  th = t(:'sex_and_birth')
-  td = gender(person)
+- present person, "Gaku::PersonPresenter".constantize do |presenter|
+  tr
+    th = t(:'sex_and_birth')
+    td = presenter.sex_and_birth
