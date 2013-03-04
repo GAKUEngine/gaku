@@ -13,5 +13,18 @@ module Gaku
       end
     end
 
+
+    def person_caption(person)
+      content_tag :caption do
+        content_tag :h2 do
+
+          content_tag :ruby do
+            concat person
+            concat content_tag(:rt) { person.phonetic_reading }
+          end
+        end
+      end
+    end
+
   end
 end

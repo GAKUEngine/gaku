@@ -1,12 +1,8 @@
 - present student do |student_presenter|
   = show_table_for 'student-index' do
 
-    caption
-      h2
-        ruby
-          = student
-          rt
-            = student.phonetic_reading
+    = person_caption student
+
     tbody
 
       = render 'gaku/shared/fields/person_show_table', :person => student

@@ -1,5 +1,8 @@
 - present student do |student_presenter|
-  = table_for 'student-index' do
+  = show_table_for 'student-index' do
+
+    = person_caption student
+
     tbody
       tr
         th.btn-c1 width="20%" = t('class')
