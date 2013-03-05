@@ -61,7 +61,7 @@ Gaku::Core::Engine.routes.draw do
       member do
         get :grading
         put :update_score
-        get :calculations
+        get :completed
       end
 
     end
