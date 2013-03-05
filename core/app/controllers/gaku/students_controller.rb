@@ -43,7 +43,6 @@ module Gaku
     end
 
     def soft_delete
-      @student = Student.find(params[:id])
       @student.soft_delete
       redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
@@ -115,7 +114,8 @@ module Gaku
     end
 
     def resource
-      @student = Student.includes(:contacts => :contact_type).find(params[:id])
+      #@student = Student.includes(:contacts => :contact_type).find(params[:id])
+      @student = Student.find(params[:id])
     end
 
     private

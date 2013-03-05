@@ -118,6 +118,7 @@ en:
     singular: Attendance Type
   back: Back
   sex_and_birth: Sex/Birth Date
+  birth: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
   birth_date: Birth Date

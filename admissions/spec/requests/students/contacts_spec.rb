@@ -13,15 +13,16 @@ describe 'Admin Student Contacts' do
   end
 
   context 'new', :js => true do
-    
+
     before do
       contact_type
       @data = student
-      visit gaku.admin_student_path(id:student.id)
+      visit gaku.edit_admin_student_path(id:student.id)
+      click tab_link
     end
 
     it_behaves_like 'new contact'
-    
+
   end
 
 
@@ -36,15 +37,16 @@ describe 'Admin Student Contacts' do
       end
 
       context 'edit', :js => true do
-        
+
         before do
-          visit gaku.admin_student_path(@student)
+          visit gaku.edit_admin_student_path(@student)
+          click tab_link
         end
 
         it_behaves_like 'edit contact'
 
         it_behaves_like 'delete contact', @data #the test uses @student
-        
+
       end
 
     end
@@ -55,7 +57,8 @@ describe 'Admin Student Contacts' do
         @student = create(:student_with_two_contacts)
         @student.reload
         @data = @student
-        visit gaku.admin_student_path(@student)
+        visit gaku.edit_admin_student_path(@student)
+        click tab_link
       end
 
       it_behaves_like 'primary contacts'
