@@ -5,6 +5,7 @@ describe 'Admin School Campuses Address' do
 
   as_admin
 
+  let(:country) { create(:country, :name => "Japan") }
   let(:address) { create(:address) }
   let(:school) { create(:school)}
 
@@ -14,6 +15,7 @@ describe 'Admin School Campuses Address' do
 
   context 'new' do
     before do
+      country
       address
       visit gaku.admin_school_campus_path(school, school.master_campus)
     end

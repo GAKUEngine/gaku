@@ -11,7 +11,7 @@ shared_examples 'new address' do
     it "creates and shows", js:true do
 
       fill_in "address_title", with: 'Primary address'
-      select "#{address.country.name}", from: 'country_dropdown'
+      select "#{country}", from: 'country_dropdown'
       fill_in "address_zipcode", with:'123'
       fill_in "address_city", with:'Nagoya'
       fill_in "address_address1", with:'The address details'
