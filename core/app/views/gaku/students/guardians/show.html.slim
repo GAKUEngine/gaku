@@ -1,5 +1,6 @@
 = well_div do
-  = table do
+  = show_table do
+    = person_caption @guardian
     tbody
       = render 'fields', :guardian => @guardian
 

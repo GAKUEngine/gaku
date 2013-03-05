@@ -53,14 +53,6 @@ module Gaku
 
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
-    def self.primary_address
-      self.addresses.where(:primary => true)
-    end
-
-    def self.primary_contact
-      self.contacts.where(:primary => true)
-    end
-
     def identification_number
       "%surname-%name-%id".gsub(/%(\w+)/) do |s|
         case s

@@ -53,8 +53,7 @@ module Gaku
     end
 
     def users_check
-      count = User.count
-      if count == 0
+      if User.count == 0 and Rails.env != 'test'
         redirect_to set_up_admin_account_path
       end
     end

@@ -1,14 +1,14 @@
 shared_examples 'new address' do
-  
-  context 'new' do
-    
+
+  context 'new', js:true do
+
     before do
       click new_link
       wait_until_invisible new_link
-      wait_until_visible submit  
+      wait_until_visible submit
     end
 
-    it "creates and shows", js:true do
+    it "creates and shows" do
 
       fill_in "address_title", with: 'Primary address'
       select "#{address.country.name}", from: 'country_dropdown'
@@ -22,35 +22,40 @@ shared_examples 'new address' do
       flash_created?
     end
 
-    it 'cancels creating', js:true do
+    it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it { has_validations? }
 
   end
 
 end
 
 shared_examples_for 'edit address' do
-  
-  before do
-    click edit_link
-    wait_until_visible modal
+
+  context 'edit', js: true do
+    before do
+      click edit_link
+      wait_until_visible modal
+    end
+
+    it "edits" do
+      fill_in "address_address1", with:'The address new details'
+      click submit
+
+      wait_until_invisible modal
+      page.should have_content 'The address new details'
+
+      flash_updated?
+    end
+
+    it 'cancels editting' do
+      ensure_cancel_modal_is_working
+    end
+
+    it { has_validations? }
   end
-
-  it "edits", js:true do
-    fill_in "address_address1", with:'The address new details'
-    click submit
-
-    wait_until_invisible modal
-    page.should have_content 'The address new details'
-
-    flash_updated?
-  end
-
-  it 'cancels editting', js:true do
-    ensure_cancel_modal_is_working
-  end
-
 end
 
 shared_examples_for 'delete address' do

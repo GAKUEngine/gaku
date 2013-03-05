@@ -92,7 +92,6 @@ module Gaku
 
     def present(object, klass = nil)
       klass ||= "#{object.class}Presenter".constantize
-      puts "KLaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas : #{klass}"
       presenter = klass.new(object, self)
       yield presenter if block_given?
       presenter
