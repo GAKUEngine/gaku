@@ -8,10 +8,19 @@ module Gaku
     include FormHelper
     include ModalHelper
     include HtmlHelper
+    include PersonHelper
 
     def count_div(html_class, &block)
       content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
         block.call
+      end
+    end
+
+    def can_edit?
+      if controller.action_name == "show" and controller.controller_name == "students"
+        false
+      else
+        true
       end
     end
 

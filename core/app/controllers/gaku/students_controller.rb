@@ -13,7 +13,7 @@ module Gaku
 
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
-    before_filter :before_show,       :only => :show
+    before_filter :notable,           :only => [:show, :edit]
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
     before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
@@ -44,13 +44,7 @@ module Gaku
 
     def soft_delete
       @student = Student.find(params[:id])
-      if !@student.admission.nil?
-        @student.admission.admission_phase_records.each {|record|
-          record.update_attribute(:is_deleted, true)
-        }
-        @student.admission.update_attribute(:is_deleted, true)
-      end
-      @student.update_attribute(:is_deleted, true)
+      @student.soft_delete
       redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
@@ -120,6 +114,10 @@ module Gaku
       @students = results.page(params[:page]).per(10)
     end
 
+    def resource
+      @student = Student.includes(:contacts => :contact_type).find(params[:id])
+    end
+
     private
 
     def unscoped_student
@@ -138,12 +136,12 @@ module Gaku
       params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
     end
 
-    def before_show
+    def notable
       # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
       @notable = Student.unscoped.find(params[:id])
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-      Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
+      #Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
     end
 
     def get_student

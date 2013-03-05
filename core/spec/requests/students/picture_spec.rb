@@ -8,14 +8,14 @@ describe "Student Picture" do
   let(:student) { create(:student) }
 
   before do
-    visit gaku.student_path(student)
+    visit gaku.edit_student_path(student)
   end
 
   context 'avatarable' do
 
     before { @file_name = 'student_picture' }
-    it_behaves_like 'avatarable'  
-    
+    it_behaves_like 'avatarable'
+
   end
 
 end

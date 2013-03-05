@@ -20,45 +20,15 @@ describe 'Student Guardian Contacts' do
     before(:each) do
       contact_type
       student.guardians << guardian
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       @data = guardian
       click tab_link
       wait_until { page.has_content? 'Guardians list' }
+      click show_link
     end
 
-    context 'thru modal' do
-      before do
-        click new_link
-        wait_until_visible modal
-      end
+    it_behaves_like 'new contact'
 
-      it "creates and shows" do
-        expect do
-          select 'Email',           :from => 'contact_contact_type_id'
-          fill_in 'contact_data',    :with => '777'
-
-          click submit
-          wait_until_invisible modal
-        end.to change(guardian.contacts, :count).by 1
-
-        click show_link
-        page.should have_content 'Email'
-        page.should have_content '777'
-        within(count_div) { page.should have_content 'Contacts list(1)' }
-      end
-
-      it 'cancels creating', :cancel => true do
-        ensure_cancel_modal_is_working
-      end
-    end
-
-    context 'thru slide form' do
-      before do
-        click show_link
-      end
-
-      it_behaves_like 'new contact'
-    end
   end
 
   context 'existing', js:true do
@@ -73,7 +43,7 @@ describe 'Student Guardian Contacts' do
         visit gaku.student_guardian_path(student, @guardian)
       end
 
-      
+
       it_behaves_like 'edit contact'
 
       it_behaves_like 'delete contact', @data

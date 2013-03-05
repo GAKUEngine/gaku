@@ -1,11 +1,11 @@
 shared_examples 'new address' do
-  
+
   context 'new' do
-    
+
     before do
       click new_link
       wait_until_invisible new_link
-      wait_until_visible submit  
+      wait_until_visible submit
     end
 
     it "creates and shows", js:true do
@@ -36,7 +36,7 @@ shared_examples 'new address' do
 end
 
 shared_examples_for 'edit address' do
-  
+
   before do
     click edit_link
     wait_until_visible modal

@@ -13,15 +13,17 @@ describe 'Student Contacts' do
   end
 
   context 'new', :js => true do
-    
+
     before do
       contact_type
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
+      click tab_link
+      wait_until { page.has_content? 'Contacts list' }
       @data = student
     end
 
     it_behaves_like 'new contact'
-    
+
   end
 
 
@@ -36,15 +38,17 @@ describe 'Student Contacts' do
       end
 
       context 'edit', :js => true do
-        
+
         before do
-          visit gaku.student_path(@student)
+          visit gaku.edit_student_path(@student)
+          click tab_link
+          wait_until { page.has_content? 'Contacts list' }
         end
 
         it_behaves_like 'edit contact'
 
         it_behaves_like 'delete contact', @data #the test uses @student
-        
+
       end
 
     end
@@ -55,7 +59,9 @@ describe 'Student Contacts' do
         @student = create(:student_with_two_contacts)
         @student.reload
         @data = @student
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
+        click tab_link
+        wait_until { page.has_content? 'Contacts list' }
       end
 
       it_behaves_like 'primary contacts'

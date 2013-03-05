@@ -19,7 +19,6 @@ describe 'Admin School Campuses Address' do
     end
 
     it_behaves_like 'new address'
-    
   end
 
   context "existing" do
