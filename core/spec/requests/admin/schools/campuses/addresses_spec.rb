@@ -20,7 +20,6 @@ describe 'Admin School Campuses Address' do
 
     it_behaves_like 'new address'
     
-    it { has_validations? }
   end
 
   context "existing" do
@@ -32,7 +31,12 @@ describe 'Admin School Campuses Address' do
 
     it_behaves_like 'edit address'
 
-    it_behaves_like 'delete address'
+    it "deletes single address", js:true do
+      ensure_delete_is_working
+      wait_until_visible new_link
+
+      flash_destroyed?
+    end
 
   end
 end

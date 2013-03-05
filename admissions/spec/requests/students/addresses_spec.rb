@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'support/requests/addressable_spec'
 
-describe 'Student Address' do
+describe 'Admin Student Address' do
 
   as_admin
 
@@ -16,7 +16,7 @@ describe 'Student Address' do
     
     before do
       country
-      visit gaku.student_path(student)
+      visit gaku.admin_student_path(student)
     end
 
     it_behaves_like 'new address'
@@ -29,7 +29,7 @@ describe 'Student Address' do
       before(:each) do
         @student =  create(:student_with_one_address)
         @student.reload
-        visit gaku.student_path(@student)
+        visit gaku.admin_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end
@@ -58,7 +58,7 @@ describe 'Student Address' do
         @student = create(:student_with_two_addresses)
         @student.reload
         @data = @student
-        visit gaku.student_path(@student)
+        visit gaku.admin_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end

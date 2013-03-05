@@ -69,10 +69,6 @@ describe 'Students in admissions' do
       
     end
 
-    context 'shows addresses' do
-      
-    end
-
     context 'shows guardians' do
       
     end
