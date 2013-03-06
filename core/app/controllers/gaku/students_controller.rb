@@ -71,6 +71,7 @@ module Gaku
           format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
         else
           format.js { render }
+          format.json { head :no_content }
          end
       end
     end
