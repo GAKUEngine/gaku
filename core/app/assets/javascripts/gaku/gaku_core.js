@@ -1,7 +1,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+
 //= require bootstrap.min
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
+
 //= require chosen-jquery
 //= require underscore
 //= require backbone

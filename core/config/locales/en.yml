@@ -86,6 +86,7 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
+  sex_and_birth: Sex/Birth Date
   birth: Birth Date
   birth_and: and
   birth_between: Birth date between
@@ -179,7 +180,7 @@ en:
     list: Contacts list
     new: New Contact
     plural: Contacts
-    primary: Primary
+    primary: Primary Contact
     save: Save Contact
     singular: Contact
   contact_type:

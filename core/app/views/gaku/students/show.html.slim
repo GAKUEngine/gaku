@@ -1,9 +1,4 @@
 - present @student do |student_presenter|
-  = content_for :show_header do
-    = count_div '' do
-      = t(:'student.show')
-
-
   = well_div do
     .span9.student-index
       = render 'show_table', :student => @student

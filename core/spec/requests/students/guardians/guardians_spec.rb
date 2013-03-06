@@ -37,8 +37,6 @@ describe 'Student Guardians' do
       page.should have_content "Doe"
       page.should have_content "John"
 
-      page.should have_content "Phonetic Doe"
-      page.should have_content "Phonetic John"
       page.should have_content "Father"
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }

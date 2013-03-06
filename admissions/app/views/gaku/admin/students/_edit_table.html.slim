@@ -13,9 +13,7 @@
 
       tr
         th.btn-c2 = t(:'admitted')
-        td#admitted
-          a#edit-admitted href="#" data-resource="student" data-name="admitted" data-type="text" data-url="#{student_path(student.id)}" data-original-title="Enter username"
-            = student.admitted
+        td = student.admitted
 
       tr
         th.btn-c2 = t(:'enrollment_status.singular')
@@ -48,6 +46,3 @@
           #student-achievement
             = render 'gaku/students/student_achievements/student_achievements', :student => student
 
-
-coffee:
-  $('#edit-admitted').editable()
