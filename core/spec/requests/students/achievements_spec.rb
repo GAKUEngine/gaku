@@ -40,6 +40,7 @@ describe 'Student Achievements' do
     end
 
     it {has_validations?}
+    
 
   end
 
