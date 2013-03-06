@@ -17,6 +17,8 @@ module Gaku
     belongs_to :syllabus
     belongs_to :class_group
 
+    delegate :name, :code, :to => :syllabus, :prefix => true, :allow_nil => true
+
     accepts_nested_attributes_for :enrollments
 
     attr_accessible :code, :class_group_id, :syllabus_id

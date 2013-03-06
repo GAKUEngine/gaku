@@ -28,12 +28,15 @@
     .span4
       = link_to_back students_path, :class => "span12 btn"
 
-  row-fluid
+  .row-fluid
     .span12
       #delete-student
         = link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
     .delete_modal
       =render 'delete_modal', :student => @student
+  .row-fluid
+    .span
+      =link_to 'Generate Report', student_path(@student, :format => :pdf), :class => 'btn-primary btn'
 
 coffee:
   $('#delete-student-link').on 'click', (event) ->

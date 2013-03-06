@@ -101,6 +101,7 @@ en:
     new: New Attachment
     plural: Attachments
     singular: Attachment
+    save: Save Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -117,8 +118,8 @@ en:
     singular: Attendance Type
   back: Back
   birth: Birth Date
-  birth_and: and
-  birth_between: Birth date between
+  birth_date_from: Birth date(from)
+  birth_date_to: Birth date(to)
   birth_date: Birth Date
   campus:
     add: Add Campus
@@ -322,6 +323,7 @@ en:
       signed_up_but_unconfirmed: This account has not been confirmed
       update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
+      admin_set_up: This is the first time you are running this application. Please set up admin user.
     sessions:
       remember_me: Remember me
       sign_in: Sign in

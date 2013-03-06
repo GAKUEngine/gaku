@@ -1,11 +1,13 @@
 shared_examples_for 'new contact' do
-  
+
   context 'new' do
-    
+
     before do
       click new_link
-      wait_until_visible submit  
+      wait_until_visible submit
     end
+
+    it { has_validations? }
 
     it "adds and shows" do
       expect do
@@ -32,15 +34,17 @@ shared_examples_for 'new contact' do
     end
 
   end
-  
+
 end
 
 shared_examples_for 'edit contact' do
-  
+
   before do
     within(table) { click edit_link }
     wait_until_visible modal
   end
+
+  it { has_validations? }
 
   it "edits" do
     fill_in 'contact_data', :with => 'example@genshin.org'

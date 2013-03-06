@@ -40,7 +40,13 @@ module Gaku
     end
 
     def courses
-      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+      Gaku::Course.all.collect do |c|
+        if c.syllabus_name
+          ["#{c.syllabus_name}-#{c.code}", c.id]
+        else
+          ["#{c.code}", c.id]
+        end
+      end
     end
 
     def scholarship_statuses

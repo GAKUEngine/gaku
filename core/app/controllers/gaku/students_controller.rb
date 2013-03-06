@@ -9,6 +9,8 @@ module Gaku
     inherit_resources
     respond_to :js, :html
     respond_to :csv, :only => :csv
+    respond_to :pdf, :only => :show
+
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
     before_filter :before_show,       :only => :show
@@ -22,7 +24,11 @@ module Gaku
     end
 
     def show
-      respond_with @student
+      super do |format|
+        format.pdf { send_data render_to_string, :filename => "student-#{@student.id}.pdf",
+                                                 :type => 'application/pdf',
+                                                 :disposition => 'inline'}
+      end
     end
 
     def destroy
@@ -38,6 +44,12 @@ module Gaku
 
     def soft_delete
       @student = Student.find(params[:id])
+      if !@student.admission.nil?
+        @student.admission.admission_phase_records.each {|record|
+          record.update_attribute(:is_deleted, true)
+        }
+        @student.admission.update_attribute(:is_deleted, true)
+      end
       @student.update_attribute(:is_deleted, true)
       redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
