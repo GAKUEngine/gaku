@@ -13,10 +13,10 @@ describe 'Student Address' do
   end
 
   context 'new', :js => true do
-    
+
     before do
       country
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
 
       it_behaves_like 'new address'
 
@@ -31,7 +31,7 @@ describe 'Student Address' do
       before(:each) do
         @student =  create(:student_with_one_address)
         @student.reload
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end
@@ -42,7 +42,7 @@ describe 'Student Address' do
           wait_until_visible modal
         end
 
-        
+
 
         it 'errors without required fields' do
           fill_in 'address_address1',  :with => ''
@@ -78,7 +78,7 @@ describe 'Student Address' do
       before(:each) do
         @student =  create(:student_with_two_addresses)
         @student.reload
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
 
@@ -88,7 +88,7 @@ describe 'Student Address' do
         address1_tr = "#address-#{@student.addresses.first.id}"
         address2_tr = "#address-#{@student.addresses.second.id}"
 
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
 
         click tab_link
 
@@ -109,7 +109,7 @@ describe 'Student Address' do
         @student.addresses.first.primary? == true
         @student.addresses.second.primary? == false
 
-        visit gaku.student_path(@student)
+        visit gaku.edit_student_path(@student)
         click tab_link
 
         #sleep 10

@@ -15,7 +15,7 @@ describe 'Student Class Group Enrollments' do
   it 'enrolls to class', js: true do
     student
     class_group
-    visit gaku.student_path(student)
+    visit gaku.edit_student_path(student)
 
     expect do
       click_on 'enroll-student-link'
@@ -35,7 +35,7 @@ describe 'Student Class Group Enrollments' do
       page.should have_content '77'
     end
 
-    visit gaku.student_path(student)
+    visit gaku.edit_student_path(student)
     within('td#student-class-group-enrollment') do
       page.should have_content 'Biology'
       page.should have_content student.class_groups.last.grade.try(:to_s)

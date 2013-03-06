@@ -19,8 +19,12 @@ shared_examples_for 'new contact' do
 
       page.should have_content "The contact data"
       page.should have_content "The contact details"
-      within(count_div) { page.should have_content 'Contacts list(1)' }
       flash_created?
+      within(count_div) { page.should have_content 'Contacts list(1)' }
+      if page.has_css?(tab_link)
+        within(tab_link)  { page.should have_content 'Contacts(1)' }
+      end
+
     end
 
     it 'cancels creating', :cancel => true do
@@ -67,9 +71,12 @@ shared_examples_for 'delete contact' do
       ensure_delete_is_working
     end.to change(@data.contacts, :count).by -1
 
-    within(count_div) { page.should_not have_content 'Contacts list(1)' }
-    page.should_not have_content contact_field
     flash_destroyed?
+    within(count_div) { page.should_not have_content 'Contacts list(1)' }
+    if page.has_css?(tab_link)
+      within(tab_link)  { page.should_not have_content 'Contacts(1)' }
+    end
+    page.should_not have_content contact_field
   end
 
 end

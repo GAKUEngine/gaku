@@ -6,11 +6,22 @@
       = count_div 'student-guardians-count' do
         = print_count @student.guardians.count, t_guardian_list
     .pull-right
-      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], :id => "new-student-guardian-link"
+      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], :id => "new-student-guardian-link" if can_edit?
 
   = hr
 
   = index_body do
-    .row-fluid
-      .span12.well.guardians_list
-        = render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => :guardian
+    = table_for "student-guardians-index" do
+        thead
+          tr
+            = th_icon 'home'
+            = th t(:'surname')
+            = th t(:'name')
+            = th t(:'birth_date')
+            = th t(:'guardian.relationship')
+            - if can_edit?
+              = th_actions 3
+            - else
+              = th_actions 1
+        tbody
+          = render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => :guardian
