@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Student Achievements' do
+describe 'Admin Student Achievements' do
 
   as_admin
 
@@ -17,7 +17,7 @@ describe 'Student Achievements' do
 
     before do
       achievement
-      visit gaku.edit_student_path(student)
+      visit gaku.edit_admin_student_path(student)
       click '#index-student-achievements-link'
       click new_link
       wait_until_visible '#cancel-student-achievement-link'
@@ -47,7 +47,7 @@ describe 'Student Achievements' do
     before do
       achievement2
       student_achievement
-      visit gaku.edit_student_path(student)
+      visit gaku.edit_admin_student_path(student)
       click '#index-student-achievements-link'
     end
 
@@ -69,6 +69,7 @@ describe 'Student Achievements' do
         click '.back-link'
         within(table) { page.should have_content(achievement) }
       end
+
     end
 
     it 'delete' do
