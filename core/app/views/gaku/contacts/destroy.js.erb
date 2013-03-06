@@ -4,3 +4,4 @@
 
 showNotice("<%= render_flash %>");
 $('.<%= @resource_name.pluralize %>-count').html("<%= print_count(@count-1, t_contact_list) %>");
+$('#<%= @resource_name.pluralize %>-tab-link').html("<%= print_count(@count-1, t_contact_plural) %>");

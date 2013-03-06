@@ -1,17 +1,17 @@
 shared_examples 'new address' do
-  
+
   context 'new' do
-    
+
     before do
       click new_link
       wait_until_invisible new_link
-      wait_until_visible submit  
+      wait_until_visible submit
     end
 
     it "creates and shows", js:true do
 
       fill_in "address_title", with: 'Primary address'
-      select "#{address.country.name}", from: 'country_dropdown'
+      select "#{country}", from: 'country_dropdown'
       fill_in "address_zipcode", with:'123'
       fill_in "address_city", with:'Nagoya'
       fill_in "address_address1", with:'The address details'
@@ -36,7 +36,7 @@ shared_examples 'new address' do
 end
 
 shared_examples_for 'edit address' do
-  
+
   before do
     click edit_link
     wait_until_visible modal

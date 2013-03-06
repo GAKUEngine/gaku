@@ -5,8 +5,8 @@
         <tr>
           <th class='btn-primary'>Student</th>
           <% for exam in @exams: %>
-            <th class='btn-success' colspan='3'>
-              <%= exam.name %></th>
+            <th class='btn-success exam-name-info' colspan='3'>
+              <%= exam.name %> 【Completed:<%= @completion[exam.id]['completion_percentage']%>% Ungraded:<%= @completion[exam.id]['ungraded'] %> Graded:<%= @completion[exam.id]['graded'] %> Total:<%= @completion[exam.id]['total'] %>】</th>
             </th>
           <% end %>
         </tr>

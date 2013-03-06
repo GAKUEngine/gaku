@@ -1,0 +1,53 @@
+- present student do |student_presenter|
+  = show_table_for 'student-index' do
+
+    = person_caption student
+
+    tbody
+      tr
+        th.btn-c1 width="20%" = t('class')
+        td#student-class-group-enrollment
+          = student_presenter.class_group
+
+      = render 'gaku/shared/fields/person_show_table', :person => student
+
+      tr
+        th.btn-c2 = t(:'admitted')
+        td#admitted
+          a#edit-admitted href="#" data-resource="student" data-name="admitted" data-type="text" data-url="#{student_path(student.id)}" data-original-title="Enter username"
+            = student.admitted
+
+      tr
+        th.btn-c2 = t(:'enrollment_status.singular')
+        td.vm
+          #student-enrollment-status
+            = render 'gaku/students/enrollment_statuses/enrollment_status', :student => student
+
+      tr
+        th.btn-c2 = t('scholarship_status')
+        td = student.scholarship_status
+      tr
+        th.btn-c2 = t('commute_method.singular')
+        td
+          #student-commute-method
+            = render 'gaku/students/commute_methods/commute_method', :student => student
+
+      tr
+        th.btn-c2 = t('specialty.singular')
+        td
+          #student-enrollment-status
+            = render 'gaku/students/student_specialties/student_specialties', :student => student
+      tr
+        th.btn-c2 = t('simple_grade.singular')
+        td
+          #student-simple-grade
+            = render 'gaku/students/simple_grades/simple_grades', :student => student
+      tr
+        th.btn-c2 = t('achievement.singular')
+        td
+          #student-achievement
+            = render 'gaku/students/student_achievements/student_achievements', :student => student
+
+
+coffee:
+  $('#edit-admitted').editable()

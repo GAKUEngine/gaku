@@ -9,7 +9,7 @@ class Gaku::Devise::RegistrationsController < Devise::RegistrationsController
 
   def create_admin
     build_resource
-    admin_role = Gaku::Role.find_by_name('Admin')
+    admin_role = Gaku::Role.where(:name => 'Admin').first_or_create!
     resource.roles << admin_role
 
     if resource.save

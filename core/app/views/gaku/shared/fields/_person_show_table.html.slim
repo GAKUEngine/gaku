@@ -1,14 +1,4 @@
-tr
-  th.btn-c2 = t(:'phonetic_reading')
-  td.vm
-    = person.phonetic_reading
-tr
-  th.btn-c2 = t(:'name')
-  td.vm style="font-size:16pt"
-    = person
-tr
-  th.btn-c2 = t(:'gender.label')
-  td = gender(person)
-tr
-  th.btn-c2 = t(:'birth_date')
-  td = person.birth_date
+- present person, "Gaku::PersonPresenter".constantize do |presenter|
+  tr
+    th = t(:'sex_and_birth')
+    td = presenter.sex_and_birth

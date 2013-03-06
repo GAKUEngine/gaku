@@ -162,8 +162,6 @@ Gaku::Core::Engine.routes.draw do
 
 
     resources :guardians, :controller => 'students/guardians' do
-      get :new_contact, :on => :member
-
       resources :contacts do
         post :create_modal, :on => :collection
         post :make_primary, :on => :member

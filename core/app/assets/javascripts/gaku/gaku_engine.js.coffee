@@ -5,7 +5,6 @@ window.GAKUEngine =
   Routers: {}
   init: ->
 
-
 formBuilder =
   add: (element, settings, message) ->
     if element.data("valid") isnt false
@@ -30,6 +29,8 @@ window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBui
 $.fn.enableValidations = ->
   $(this).enableClientSideValidations()
 
+
+$.fn.editable.defaults.mode = 'inline'
 
 $ ->
 

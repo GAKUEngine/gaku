@@ -13,10 +13,10 @@ describe 'Admin Student Address' do
   end
 
   context 'new', :js => true do
-    
+
     before do
       country
-      visit gaku.admin_student_path(student)
+      visit gaku.edit_admin_student_path(student)
     end
 
     it_behaves_like 'new address'
@@ -29,7 +29,7 @@ describe 'Admin Student Address' do
       before(:each) do
         @student =  create(:student_with_one_address)
         @student.reload
-        visit gaku.admin_student_path(@student)
+        visit gaku.edit_admin_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end
@@ -37,7 +37,7 @@ describe 'Admin Student Address' do
       it_behaves_like 'edit address'
 
       context 'delete' do
-        
+
         before do
           @data = @student
           within(tab_link)  { page.should have_content 'Addresses(1)' }
@@ -58,7 +58,7 @@ describe 'Admin Student Address' do
         @student = create(:student_with_two_addresses)
         @student.reload
         @data = @student
-        visit gaku.admin_student_path(@student)
+        visit gaku.edit_admin_student_path(@student)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end

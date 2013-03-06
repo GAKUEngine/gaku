@@ -117,6 +117,7 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
+  sex_and_birth: Sex/Birth Date
   birth: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
@@ -208,7 +209,7 @@ en:
     list: Contacts list
     new: New Contact
     plural: Contacts
-    primary: Primary
+    primary: Primary Contact
     save: Save Contact
     singular: Contact
   contact_type:
@@ -397,6 +398,11 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    ungraded: Ungraded
+    graded: Graded
+    total: Total
+    completion: Completion
+    grading_completion: Grading Completion
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count

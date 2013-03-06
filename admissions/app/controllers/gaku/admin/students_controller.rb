@@ -6,7 +6,7 @@ module Gaku
       respond_to :js, :html
 
       before_filter :select_vars,       :only => [:index,:new, :edit]
-      before_filter :before_show,       :only => :show
+      before_filter :notable,           :only => [:show, :edit]
       before_filter :count,             :only => [:create, :destroy, :index]
       before_filter :selected_students, :only => [:create,:index]
       before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
@@ -43,6 +43,11 @@ module Gaku
         show!
       end
 
+      def edit
+        session[:return_to] = request.referer
+        edit!
+      end
+
       def edit_enrollment_status
         @student = Student.find(params[:id])
       end
@@ -63,7 +68,7 @@ module Gaku
           }
           @student.admission.update_attribute(:is_deleted, true)
         end
-        
+
         @student.update_attribute(:is_deleted, true)
 
         redirect_to session[:return_to], :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
@@ -97,12 +102,12 @@ module Gaku
         params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
       end
 
-      def before_show
+      def notable
         # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
         @notable = Student.unscoped.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-        Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
+        #Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
       end
 
       def get_student

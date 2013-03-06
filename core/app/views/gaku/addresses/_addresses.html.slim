@@ -6,7 +6,8 @@ div id="#{@resource_name.pluralize}"
       = count_div "#{@resource_name.pluralize}-count" do
         = print_count nested_resources.last.addresses.count, t_address_list
     .pull-right
-      = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, :id => "new-#{@resource_name}-link"
+      = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, :id => "new-#{@resource_name}-link" if can_edit?
+
   = hr
 
   = index_body do
@@ -21,6 +22,6 @@ div id="#{@resource_name.pluralize}"
             = th t(:'address.city')
             = th t(:'address.address1')
             = th t(:'address.address2')
-            = th_actions 2
+            = th_actions 2 if can_edit?
         tbody
          = render :partial => 'gaku/addresses/address', :collection => nested_resources.last.addresses, :as => :address, :locals => {:nested_resources => nested_resources}

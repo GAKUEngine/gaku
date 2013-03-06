@@ -19,12 +19,6 @@ module Gaku
       end
     end
 
-    def new_contact
-      guardian
-    	@contact = Contact.new
-    	respond_with(@contact)
-    end
-
     private
 
     def student

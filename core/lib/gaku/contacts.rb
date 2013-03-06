@@ -8,7 +8,6 @@ module Gaku
       def primary_contact
         self.contacts.where(:is_primary => true).first
       end
-
     end
 
   end

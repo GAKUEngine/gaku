@@ -14,7 +14,7 @@ describe 'Student CourseEnrollments' do
   context 'new', :js => true do
     before do
       course
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
 
       click tab_link
       click new_link
@@ -41,7 +41,7 @@ describe 'Student CourseEnrollments' do
 
   it "deletes", :js => true do
     student.courses << course
-    visit gaku.student_path(student)
+    visit gaku.edit_student_path(student)
 
     click tab_link
 

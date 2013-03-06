@@ -15,7 +15,7 @@ describe 'Simple Grade' do
   context '#new', :js => true do
     before do
       school
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-simple-grades-link'
       click new_link
     end
@@ -43,7 +43,7 @@ describe 'Simple Grade' do
   context 'existing', :js => true do
     before do
       simple_grade
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-simple-grades-link'
     end
 

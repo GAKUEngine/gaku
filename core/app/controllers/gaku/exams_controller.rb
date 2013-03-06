@@ -47,6 +47,8 @@ module Gaku
 
       @path_to_exam = course_path(:id => params[:course_id])
 
+      # raise @completion.inspect
+
       respond_to do |format|
         format.json { render :json => {
           :student_total_scores => @student_total_scores.as_json(),
@@ -58,7 +60,8 @@ module Gaku
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
           :attendances => @student_portion_attendance.as_json(:root => true),
-          :path_to_exam => @path_to_exam.to_json
+          :path_to_exam => @path_to_exam.to_json,
+          :completion => @completion
         }}
         format.html { render "gaku/exams/grading" }
       end
