@@ -30,9 +30,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'localeapp'
   s.add_dependency 'i18n-js'
 
-  s.add_dependency 'jquery-rails', '~> 2.0'
+  s.add_dependency 'jquery-rails', '2.1.4'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'eco'
+  s.add_dependency 'bootstrap-sass'
   s.add_dependency 'bootstrap-editable-rails'
 
   s.add_dependency 'highline', '= 1.6.11'
