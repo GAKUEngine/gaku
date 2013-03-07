@@ -1,16 +1,16 @@
 pt-BR:
   achievement:
-    add: 
-    authority: 
-    badge: 
-    choose: 
-    description: 
-    edit: 
-    list: 
-    name: 
-    plural: 
-    save: 
-    singular: 
+    add: Adicionar Conquista
+    authority: Autoridade
+    badge: Distintivo
+    choose: Escolher Conquista
+    description: Descrição
+    edit: Editar Conquista
+    list: Lista de Conquistas
+    name: Nome
+    plural: Conquistas
+    save: Salvar Conquista
+    singular: Conquista
   add: Adicionar
   address:
     add: Adicionar Endereço
@@ -35,8 +35,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: ! '%{resource} já foram adicionados!'
-    empty: ! '%{resource} está vazio!'
+    already_added: '%{resource} já foram adicionados!'
+    empty: '%{resource} está vazio!'
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -59,17 +59,17 @@ pt-BR:
     asset_type: 
     asset_upload: 
     assets: 
-    create: 
+    create: Criar Anexo
     description: Descrição
     file_name: Nome do arquivo
     file_size: Tamanho do arquivo
     file_type: Tipo do arquivo
-    list: 
+    list: Lista de Anexos
     name: Nome
-    new: 
-    plural: 
-    save: 
-    singular: 
+    new: Novo Anexo
+    plural: Anexos
+    save: Salvar Anexo
+    singular: Anexo
   attendance_type:
     add: 
     auto_credit: 
@@ -125,7 +125,7 @@ pt-BR:
     enroll: 
     grade: 
     homeroom: 
-    list: 
+    list: Lista de Grupos de Classes
     name: Nome da Classe
     new: Novo Grupo de Classe
     none: Nenhum
@@ -135,12 +135,12 @@ pt-BR:
     show: Exibir
     singular: Grupo de Classe
   class_group_course_enrollment:
-    save: 
+    save: Salvar Curso para Grupo de Classes
   class_group_enrollment:
     count: Contagem de matrículas
     create: Criar Matrícula de Classe
     current: Matrícula Atual
-    list: 
+    list: Lista de Classe
     new: Nova matrícula de classe
     seat_number: Número do assento
   class_group_management: Gestão da Classe
@@ -153,7 +153,7 @@ pt-BR:
     add: 
     edit: 
     list: 
-    name: 
+    name: Nome
     new: 
     plural: 
     save: 
@@ -193,10 +193,10 @@ pt-BR:
     singular: Tipo de Contato
   course:
     add: Adicionar Curso
-    choose: 
-    code: 
-    code_sample: 
-    combined_code: 
+    choose: Escolha Curso
+    code: Código de Curso
+    code_sample: '[EX: FALL2020]'
+    combined_code: Código Combinado
     count: Contagem de cursos
     edit: Editar Curso
     list: Lista de Cursos
@@ -251,36 +251,36 @@ pt-BR:
       send_paranoid_instructions: 
     email: 
     failure:
-      already_authenticated: 
-      inactive: 
-      invalid: 
-      invalid_token: 
-      locked: 
-      timeout: 
-      unauthenticated: 
-      unconfirmed: 
-    login: 
+      already_authenticated: Você já está logado.
+      inactive: Sua conta não foi ativada ainda.
+      invalid: Email ou senha inválidos.
+      invalid_token: Chave de autenticação inválida.
+      locked: Sua conta está bloqueada.
+      timeout: Sua sessão expirou, por favor logue novamente para continuar.
+      unauthenticated: Você precisa logar ou registrar-se antes de continuar.
+      unconfirmed: Você deve confirmar sua conta antes de continuar.
+    login: Nome de usuário ou Email
     mailer:
       confirmation_instructions:
-        subject: 
+        subject: Instruções de confirmação
       reset_password_instructions:
-        subject: 
+        subject: Instruções para resetar a senha
       unlock_instructions:
-        subject: 
+        subject: Destravar Instruções
     omniauth_callbacks:
-      failure: 
-      success: 
+      failure: Não foi possível autorizá-lo(a) a %{kind} porque "%{reason}".
+      success: Conta autorizada com sucesso para %{kind}.
     password: Senha
     password_confirmation: Confirmação de Senha
     passwords:
       forgot: Esqueceu sua senha?
-      no_token: 
-      send_instructions: 
-      send_paranoid_instructions: 
-      updated: 
-      updated_not_active: 
+      no_token: Sem Chave
+      send_instructions: Em alguns minutos você receberá um email com instruções sobre como resetar sua senha.
+      send_paranoid_instructions: Se seu email existe na nossa base de dados, você receberá em seu email um link para recuperação de senha.
+      updated: Sua senha foi alterada com sucesso. Agora você está logado(a).
+      updated_not_active: Sua senha foi alterada com sucesso.
     registrations:
-      admin_set_up: 
+      admin_set_up: Esta é a primeira vez que você está executando esta aplicação. Por favor defina o usuário administrador.
       destroyed: 
       inactive_signed_up: 
       reasons:
@@ -346,10 +346,13 @@ pt-BR:
     adjustments: 
     choose: 
     choose_schedule: 
+    completion: 
     count: 
     description: 
     edit: 
     exam_score: 
+    graded: 
+    grading_completion: 
     grading_method: 
     list: 
     name: 
@@ -361,7 +364,9 @@ pt-BR:
     select: 
     show: 
     singular: 
+    total: 
     total_weight: 
+    ungraded: 
     use_weighting: 
     view: 
     weight: 
@@ -641,6 +646,8 @@ pt-BR:
     save: 
     starting: 
     uniqueness: 
+  sex: 
+  sex_and_birth: 
   show: 
   simple_grade:
     add: 

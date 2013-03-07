@@ -17,7 +17,7 @@ describe 'Student Specialties' do
 
     before do
       specialty
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-specialties-link'
       click new_link
     end
@@ -44,7 +44,7 @@ describe 'Student Specialties' do
       specialty
       specialty2
       student_specialty
-      visit gaku.student_path(student)
+      visit gaku.edit_student_path(student)
       click '#index-student-specialties-link'
     end
 

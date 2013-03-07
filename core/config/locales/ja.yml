@@ -35,9 +35,9 @@ ja:
     zipcode: 郵便番号
   admitted: 入学日
   alert:
-    already_added: ! '%{resource}が既に登録されています!'
-    empty: ! '%{resource}が空です!'
-    not_selected: ! '%{resource}が未選択です!'
+    already_added: '%{resource}が既に登録されています!'
+    empty: '%{resource}が空です!'
+    not_selected: '%{resource}が未選択です!'
   and: と
   are_you_sure: 本当に実効しますか?
   assignment:
@@ -68,7 +68,7 @@ ja:
     name: 名称
     new: アセットの登録
     plural: 添付ファイル
-    save: 
+    save: 添付ファイルを保存
     singular: 添付ファイル
   attendance_type:
     add: 出席類を追加
@@ -268,8 +268,8 @@ ja:
       unlock_instructions:
         subject: アカウントの凍結解除
     omniauth_callbacks:
-      failure: ! '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
-      success: ! '%{kind} アカウントによる個人認証に成功しました。'
+      failure: '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
+      success: '%{kind} アカウントによる個人認証に成功しました。'
     password: パスワード
     password_confirmation: パスワード（確認用）
     passwords:
@@ -280,7 +280,9 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
-      admin_set_up: 
+      admin_set_up: |-
+        学園陣が初期状態です。
+        管理者ユーザを登録して下さい。
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       inactive_signed_up: サインアップに成功しましたが、%{reason}の為にサインイン出来ません。
       reasons:
@@ -338,8 +340,8 @@ ja:
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
       not_saved:
-        one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
-        other: ! '%{count} つのエラーにより %{resource} は保存されませんでした:'
+        one: '1 つのエラーにより %{resource} は保存されませんでした:'
+        other: '%{count} つのエラーにより %{resource} は保存されませんでした:'
     not_uploaded: アップロード中にエラーが発生しました。%{resource}
   exam:
     add: 試験を追加
@@ -348,10 +350,13 @@ ja:
     adjustments: 調整
     choose: 試験を選択
     choose_schedule: 日程を選択
+    completion: 採点率
     count: 試験数
     description: 試験の説明
     edit: 試験を編集
     exam_score: 試験点数
+    graded: 採点済み
+    grading_completion: 採点済みの割合
     grading_method: 採点方法
     list: 試験一覧
     name: 試験名
@@ -363,7 +368,9 @@ ja:
     select: 試験を選択
     show: 試験照会
     singular: 試験
+    total: 合計
     total_weight: 合計加重率
+    ungraded: 未採点
     use_weighting: 加重率を使用
     view: 試験を照会
     weight: 加重率
@@ -411,12 +418,12 @@ ja:
   flash:
     actions:
       create:
-        notice: ! '%{resource_name}は正常に作成されました'
+        notice: '%{resource_name}は正常に作成されました'
       destroy:
-        alert: ! '%{resource_name}は消去出来ませんでした'
-        notice: ! '%{resource_name}は正常に消去されました'
+        alert: '%{resource_name}は消去出来ませんでした'
+        notice: '%{resource_name}は正常に消去されました'
       update:
-        notice: ! '%{resource_name}は正常に更新されました'
+        notice: '%{resource_name}は正常に更新されました'
   gender:
     choose: 性別を選択
     female: 女性
@@ -561,15 +568,15 @@ ja:
     singular: 備考
     title: 備考タイトル
   notice:
-    added: ! '%{resource}は正常に追加されました'
-    created: ! '%{resource}は正常に作成されました'
-    destroyed: ! '%{resource}は正常に消去されました'
-    enrolled: ! '%{resource}は%{to}に正常に追加されました'
-    no_resource_assign_first: ! '%{resource}はありません、一つ登録してください'
-    recovered: ! '%{resource}は正常に復元されました'
-    removed: ! '%{resource}は正常に削除されました'
-    updated: ! '%{resource}は正常に更新されました'
-    uploaded: ! '%{resource}は正常にアップロードされました'
+    added: '%{resource}は正常に追加されました'
+    created: '%{resource}は正常に作成されました'
+    destroyed: '%{resource}は正常に消去されました'
+    enrolled: '%{resource}は%{to}に正常に追加されました'
+    no_resource_assign_first: '%{resource}はありません、一つ登録してください'
+    recovered: '%{resource}は正常に復元されました'
+    removed: '%{resource}は正常に削除されました'
+    updated: '%{resource}は正常に更新されました'
+    uploaded: '%{resource}は正常にアップロードされました'
   num_enrolled: 在籍人数
   options: オプション
   order: 順序
@@ -643,6 +650,8 @@ ja:
     save: 学期を保存
     starting: 開始
     uniqueness: 既に追加された学期です
+  sex: 性別
+  sex_and_birth: 性別・生年月日
   show: 照会
   simple_grade:
     add: 単体評価を追加
@@ -730,8 +739,8 @@ ja:
     username: ユーザ名
   views:
     pagination:
-      first: ! '&laquo; 最初'
+      first: '&laquo; 最初'
       last: 最後 &raquo;
       next: 次 &rsaquo;
-      previous: ! '&lsaquo; 前'
-      truncate: ! '...'
+      previous: '&lsaquo; 前'
+      truncate: '...'

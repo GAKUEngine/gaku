@@ -5,6 +5,7 @@ describe 'Admin School Campuses Address' do
 
   as_admin
 
+  let(:country) { create(:country, :name => "Japan") }
   let(:address) { create(:address) }
   let(:school) { create(:school)}
 
@@ -14,13 +15,12 @@ describe 'Admin School Campuses Address' do
 
   context 'new' do
     before do
+      country
       address
       visit gaku.admin_school_campus_path(school, school.master_campus)
     end
 
     it_behaves_like 'new address'
-    
-    it { has_validations? }
   end
 
   context "existing" do
@@ -32,7 +32,12 @@ describe 'Admin School Campuses Address' do
 
     it_behaves_like 'edit address'
 
-    it_behaves_like 'delete address'
+    it "deletes single address", js:true do
+      ensure_delete_is_working
+      wait_until_visible new_link
+
+      flash_destroyed?
+    end
 
   end
 end

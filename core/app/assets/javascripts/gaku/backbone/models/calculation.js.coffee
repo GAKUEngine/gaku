@@ -16,7 +16,10 @@ class GAKUEngine.Models.Calculation extends Backbone.Model
 
     $('#exam-grading-calculations').html calculationsView.render().el
 
-    
+    completionView = new GAKUEngine.Views.ExamCompletion(exam: @get('exams')[0], completion: @get('completion')  )
+    $('.exam-name-info').html completionView.render().el
+
+
     # console.log("calcualation.js dayo-")
     # tableSizeFix = ->
     #   $("html").css "overflow-x", "hidden"
