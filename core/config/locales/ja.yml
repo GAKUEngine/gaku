@@ -725,7 +725,9 @@ ja:
     save: 科目を保存
     show: 科目照会
     singular: 科目
-  teacher: 教師
+  teacher:
+    plural: 先生
+    singular: 教師
   title: タイトル
   user:
     add: ユーザーを追加

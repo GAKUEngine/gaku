@@ -552,7 +552,7 @@ en:
     syllabus:
       plural: Syllabuses
     teacher:
-      plural: Teachers
+      plural: Instructors
   name: Name
   name_reading: Name Reading
   none: None
@@ -725,7 +725,9 @@ en:
     save: Save Syllabus
     show: Show Syllabus
     singular: Syllabus
-  teacher: Instructor
+  teacher:
+    plural: Instructors
+    singular: Instructor
   title: Title
   user:
     add: Add User

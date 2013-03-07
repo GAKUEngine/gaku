@@ -721,7 +721,9 @@ pt-BR:
     save: 
     show: 
     singular: 
-  teacher: 
+  teacher:
+    plural: 
+    singular: 
   title: 
   user:
     add: 
