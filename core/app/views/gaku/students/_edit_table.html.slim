@@ -14,8 +14,8 @@
       tr
         th.btn-c2 = t(:'admitted')
         td#admitted
-          a#edit-admitted href="#" data-resource="student" data-name="admitted" data-type="text" data-url="#{student_path(student.id)}" data-original-title="Enter username"
-            = student.admitted
+          a#edit-admitted href="#" data-resource="student" data-name="enrollment_status_id" data-type="select" data-url="#{student_path(student.id)}" data-original-title="Enter username"
+            = student.enrollment_status
 
       tr
         th.btn-c2 = t(:'enrollment_status.singular')
@@ -48,6 +48,19 @@
           #student-achievement
             = render 'gaku/students/student_achievements/student_achievements', :student => student
 
+javascript:
+  $('#edit-admitted').editable({
+      source: #{ @enrollments.to_json.html_safe },
+      display: function(value, sourceData) {
+       var html = [],
+        checked = $.fn.editableutils.itemsByValue(value, sourceData);
+          if(checked.length) {
+               $.each(checked, function(i, v) { html.push($.fn.editableutils.escape(v.text)); });
+               $(this).html(html.join(', '));
+           } else {
+               $(this).empty();
+           }
+        $(this).show();
+      }
+  });
 
-coffee:
-  $('#edit-admitted').editable()

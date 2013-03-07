@@ -18,6 +18,7 @@ require 'paper_trail'
 require 'globalize3'
 require 'decent_exposure'
 require 'thinreports-rails'
+require 'bootstrap-sass'
 require 'bootstrap-editable-rails'
 
 
