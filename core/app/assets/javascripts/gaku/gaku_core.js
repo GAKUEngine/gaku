@@ -2,6 +2,8 @@
 // require jquery_ujs
 //= require jquery-ui
 
+//= require moment.min
+
 //= require bootstrap
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
