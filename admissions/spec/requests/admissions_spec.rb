@@ -238,7 +238,7 @@ describe 'Admin Admissions' do
 
         end
 
-        context 'Journey - add new student and' do
+        context 'Journey - add new student and', js:true do
 
           before do
             click_on 'New Applicant'

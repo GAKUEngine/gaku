@@ -80,6 +80,7 @@ describe 'Admin Listing Admissions' do
           page.should have_content "#{student.name}"
           click delete_link
           accept_alert
+          sleep 1
           page.should_not have_content "#{student.name}"
           #student.reload
           visit gaku.students_admin_disposals_path
