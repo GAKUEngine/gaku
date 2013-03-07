@@ -158,9 +158,13 @@ module Gaku
 
     def student_specialties_list(student_specialties)
       string = String.new
-      student_specialties.ordered.each_with_index do |student_specialty, i|
-        string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
-        string.concat ", " unless i == student_specialties.count - 1
+      if student_specialties.any?
+        student_specialties.each_with_index do |student_specialty, i|
+          string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
+          string.concat ", " unless i == student_specialties.count - 1
+        end
+      else
+        string.concat "Empty"
       end
       string.html_safe
     end
@@ -177,19 +181,31 @@ module Gaku
     end
 
     def achievements_show(achievements)
-      content_tag_for :span, achievements do |achievement|
-        concat achievement.to_s
-        concat String.new ' '
-        concat resize_image(achievement.badge, :size => 22)
-        concat ', ' unless achievement.equal? achievements.last
+      string = String.new
+      if achievements.any?
+        achievements.each do |achievement|
+          string.concat achievement.to_s
+          string.concat String.new ' '
+          #string.concat resize_image(achievement.badge, :size => 22)
+          string.concat ', ' unless achievement.equal? achievements.last
+        end
+      else
+        string.concat 'Empty'
       end
+      string.html_safe
     end
 
     def simple_grades_show(simple_grades)
-      content_tag_for :span, simple_grades do |simple_grade|
-        concat "#{simple_grade} (#{simple_grade.grade})"
-        concat ', ' unless simple_grade.equal? simple_grades.last
+      string = String.new
+      if simple_grades.any?
+        simple_grades.each do |simple_grade|
+          string.concat "#{simple_grade.name} (#{simple_grade.grade})"
+          string.concat ', ' unless simple_grade.equal? simple_grades.last
+        end
+      else
+        string.concat "Empty"
       end
+      string.html_safe
     end
 
 

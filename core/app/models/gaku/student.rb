@@ -66,6 +66,10 @@ module Gaku
       end
     end
 
+    def self.specialties
+      self.student_specialties.map &:name
+    end
+
     def class_group_widget
       cg = self.class_groups.last
       cg.blank? ? nil : cg
