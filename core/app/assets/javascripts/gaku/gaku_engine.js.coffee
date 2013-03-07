@@ -25,6 +25,29 @@ window.ClientSideValidations.formBuilders["ValidateFormBuilder"] = formBuilder
 
 window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBuilder
 
+$.fn.inline_select = (resource) ->
+  console.log resource
+  $(this).editable
+    source: resource
+    showbuttons: false
+    display: (value, sourceData) ->
+      html = []
+      checked = $.fn.editableutils.itemsByValue(value, sourceData)
+      if checked.length
+        $.each checked, (i, v) ->
+          html.push $.fn.editableutils.escape(v.text)
+
+        $(this).html html.join(", ")
+      else
+        $(this).empty()
+      $(this).show()
+
+$.fn.inline_date = () ->
+  $(this).editable
+    display: (value) ->
+      $(this).show()
+      console.log moment(value)
+
 
 $.fn.enableValidations = ->
   $(this).enableClientSideValidations()

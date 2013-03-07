@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'paperclip'
   s.add_dependency 'ransack'
-  s.add_dependency 'spreadsheet'
   s.add_dependency 'roo'
   s.add_dependency 'app_config'
   s.add_dependency 'thinreports-rails'

@@ -124,12 +124,22 @@ module Gaku
 
     def enrollment_statuses
       #@enrollment_statuses = EnrollmentStatus.all.to_json(:value => :id, :text => :name)
-      @enrollment_statuses = EnrollmentStatus.all
       @enrollments = []
-      @enrollment_statuses.each do |e|
+      EnrollmentStatus.all.each do |e|
         @enrollments << {value: e.id, text: e.name}
       end
-      @enrollments
+
+      @commutes = []
+      CommuteMethodType.all.each do |e|
+        @commutes << {value: e.id, text: e.name}
+      end
+
+      @sch = []
+      ScholarshipStatus.all.each do |e|
+        @sch << {value: e.id, text: e.name}
+      end
+
+
     end
 
     def unscoped_student
