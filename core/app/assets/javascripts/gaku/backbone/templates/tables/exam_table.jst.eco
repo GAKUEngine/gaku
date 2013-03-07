@@ -1,4 +1,11 @@
 <div class='row-fluid'>
+  <div class='span12'>
+    <div class='pull-right'>
+      <a class='btn btn-primary hide-completed'>Hide Completed</a>
+    </div>
+  </div>
+</div>
+<div class='row-fluid'>
   <div class='span12 well pull-left'>
     <table class='exam-frame-table exam_grid table table-striped table-bordered table-condensed'>
       <thead>
