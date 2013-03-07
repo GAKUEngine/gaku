@@ -35,8 +35,8 @@ bg:
     zipcode: Пощенски код
   admitted: Приет на
   alert:
-    already_added: ! '%{resource} са вече добавени!'
-    empty: ! '%{resource} е празен!'
+    already_added: '%{resource} са вече добавени!'
+    empty: '%{resource} е празен!'
     not_selected: Няма избран %{resource}!
   and: и
   are_you_sure: Сигурен ли сте?
@@ -68,7 +68,7 @@ bg:
     name: Име
     new: Ново прикачване на файл
     plural: Прикачени файлове
-    save: 
+    save: Запази прикачения файл
     singular: Прикачен файл
   attendance_type:
     add: Добави нов вид посещаемост
@@ -84,13 +84,13 @@ bg:
     plural: Типове на посещаемост
     save: Запази тип на посещаемост
     singular: Тим на посещаемост
-  back: 
-  birth: 
-  birth_and: 
-  birth_between: 
-  birth_date: 
-  birth_date_from: 
-  birth_date_to: 
+  back: Назад
+  birth: Рождена дата
+  birth_and: и
+  birth_between: Рождена дата между
+  birth_date: Рождена дата
+  birth_date_from: Рождена дата(от)
+  birth_date_to: Рождена дата(до)
   campus:
     add: 
     address: 
@@ -346,10 +346,13 @@ bg:
     adjustments: 
     choose: 
     choose_schedule: 
+    completion: 
     count: 
     description: 
     edit: 
     exam_score: 
+    graded: 
+    grading_completion: 
     grading_method: 
     list: 
     name: 
@@ -361,7 +364,9 @@ bg:
     select: 
     show: 
     singular: 
+    total: 
     total_weight: 
+    ungraded: 
     use_weighting: 
     view: 
     weight: 
@@ -641,6 +646,8 @@ bg:
     save: 
     starting: 
     uniqueness: 
+  sex: 
+  sex_and_birth: 
   show: 
   simple_grade:
     add: 
