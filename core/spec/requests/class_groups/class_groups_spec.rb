@@ -102,6 +102,11 @@ describe 'ClassGroups' do
         edited_class_group.homeroom.should eq 'B2'
         flash_updated?
       end
+
+      it 'has validations' do
+        fill_in 'class_group_name', with: ''
+        has_validations?
+      end
     end
 
     it 'deletes', :js => true do
