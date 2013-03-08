@@ -17,6 +17,7 @@ module Gaku
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
     before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
+    before_filter :enrollment_statuses, :only => :edit
 
     def index
       @enrolled_students = params[:enrolled_students]
@@ -120,6 +121,26 @@ module Gaku
     end
 
     private
+
+    def enrollment_statuses
+      #@enrollment_statuses = EnrollmentStatus.all.to_json(:value => :id, :text => :name)
+      @enrollments = []
+      EnrollmentStatus.all.each do |e|
+        @enrollments << {value: e.id, text: e.name}
+      end
+
+      @commutes = []
+      CommuteMethodType.all.each do |e|
+        @commutes << {value: e.id, text: e.name}
+      end
+
+      @sch = []
+      ScholarshipStatus.all.each do |e|
+        @sch << {value: e.id, text: e.name}
+      end
+
+
+    end
 
     def unscoped_student
       @student = Student.unscoped.find(params[:id])

@@ -1,3 +1,2 @@
 span#student-specialty-list
-  = student_specialties_list(@student.student_specialties)
-= link_to edit_button, [student, :student_specialties], :class=> 'mr-xs btn btn-mini btn-warning' , :id => 'index-student-specialties-link', :remote => true
+  = link_to student_specialties_list(@student.student_specialties), [student, :student_specialties],:id => 'index-student-specialties-link', :remote => true

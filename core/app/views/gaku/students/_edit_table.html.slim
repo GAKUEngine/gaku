@@ -9,28 +9,31 @@
         td#student-class-group-enrollment
           = student_presenter.class_group
 
-      = render 'gaku/shared/fields/person_show_table', :person => student
+      = render 'gaku/shared/fields/person_edit_table', :person => student
 
       tr
         th.btn-c2 = t(:'admitted')
         td#admitted
-          a#edit-admitted href="#" data-resource="student" data-name="admitted" data-type="text" data-url="#{student_path(student.id)}" data-original-title="Enter username"
-            = student.admitted
+
 
       tr
         th.btn-c2 = t(:'enrollment_status.singular')
         td.vm
-          #student-enrollment-status
-            = render 'gaku/students/enrollment_statuses/enrollment_status', :student => student
+          a#enrollment.editable href="#" data-resource="student" data-name="enrollment_status_id" data-type="select" data-url="#{student_path(student.id)}"
+            = student.enrollment_status
 
       tr
         th.btn-c2 = t('scholarship_status')
-        td = student.scholarship_status
+        td
+          a#scholarship.editable href="#" data-resource="student" data-name="scholarship_status_id" data-type="select" data-url="#{student_path(student.id)}"
+            = student.scholarship_status
       tr
         th.btn-c2 = t('commute_method.singular')
         td
+          a#commute_method.editable href="#" data-resource="student" data-name="commute_method_type_id" data-type="select" data-url="#{student_path(student.id)}"
+            = student.commute_method
           #student-commute-method
-            = render 'gaku/students/commute_methods/commute_method', :student => student
+            /= render 'gaku/students/commute_methods/commute_method', :student => student
 
       tr
         th.btn-c2 = t('specialty.singular')
@@ -48,6 +51,12 @@
           #student-achievement
             = render 'gaku/students/student_achievements/student_achievements', :student => student
 
+javascript:
+  var commutes= #{ @commutes.to_json.html_safe }
+  var enrollment_types = #{ @enrollments.to_json.html_safe }
+  var scholarship_statuses = #{ @sch.to_json.html_safe }
+  $('#commute_method').inline_select(commutes);
+  $('#enrollment').inline_select(enrollment_types);
+  $('#scholarship').inline_select(scholarship_statuses);
+  $('#birth_date').inline_date();
 
-coffee:
-  $('#edit-admitted').editable()
