@@ -92,158 +92,158 @@ bg:
   birth_date_from: Рождена дата(от)
   birth_date_to: Рождена дата(до)
   campus:
-    add: 
-    address: 
-    contacs: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
+    add: Добави Факултет
+    address: Адрес на факултета
+    contacs: Контакти на факултета
+    edit: Редактирай Факултет
+    list: Списък Факултети
+    name: Име
+    new: Нов Факултет
+    plural: Факултети
     primary: 
-    save: 
-    singular: 
-  cancel: 
+    save: Запази Факултет
+    singular: Факултет
+  cancel: Отмени
   changes:
-    change: 
-    changed_at: 
-    event: 
-    from: 
+    change: Промени
+    changed_at: Променено На
+    event: Събитие
+    from: От
     student:
-      list: 
+      list: Списък с промени по ученическите данни
     student_address:
-      list: 
+      list: Списък с промени по ученическите адреси
     student_contact:
-      list: 
-    to: 
-    user: 
-  class: 
+      list: Списък с промени по ученическите контакти
+    to: До
+    user: Променено от
+  class: Клас
   class_group:
-    add: 
-    choose: 
-    edit: 
-    enroll: 
-    grade: 
-    homeroom: 
-    list: 
-    name: 
-    new: 
-    none: 
-    none_assigned: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    add: Добави Клас
+    choose: Избери Клас
+    edit: Редактирай Клас
+    enroll: Запиши Клас
+    grade: Оценка
+    homeroom: Класна Стая
+    list: Списък Класове
+    name: Име на класа
+    new: Нов Клас
+    none: Няма
+    none_assigned: Няма Назначен
+    plural: Класове
+    save: Запази Клас
+    show: Покажи
+    singular: Клас
   class_group_course_enrollment:
-    save: 
+    save: Запази Курс към Клас
   class_group_enrollment:
-    count: 
-    create: 
-    current: 
-    list: 
-    new: 
-    seat_number: 
-  class_group_management: 
+    count: Брой на записаните студенти
+    create: Създай добавяне към Класа
+    current: Текущо записване
+    list: Списък на Класа
+    new: Ново добавяне в Класа
+    seat_number: Номер на място
+  class_group_management: Ръководство на Класа
   commute_method:
-    add: 
-    edit: 
-    plural: 
-    singular: 
+    add: Добави Вид Транспорт
+    edit: Редактирай Вид Транспорт
+    plural: Видове Транспорт
+    singular: Вид Транспорт
   commute_method_type:
-    add: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    singular: 
-  comname: 
+    add: Добави Тип Транспорт
+    edit: Редактирай Тип Транспорт
+    list: Списък с Типове Транспорт
+    name: Име
+    new: Нов Тип Транспорт
+    plural: Типове Транспорт
+    save: Запази Тип Транспорт
+    singular: Тип Транспорт
+  comname: GAKU Сисетма
   config:
-    close: 
+    close: Затвори
     help:
-      language: 
-    label: 
-    save: 
-  confirm: 
-  confirm_delete: 
+      language: Избери Език
+    label: Език
+    save: Запази
+  confirm: Сигурен ли сте?
+  confirm_delete: Изтриване на този запис?
   contact:
-    add: 
-    contact_type: 
-    create: 
-    data: 
-    details: 
-    edit: 
-    emergency: 
-    list: 
-    new: 
-    plural: 
-    primary: 
-    save: 
-    singular: 
+    add: Добави Контакт
+    contact_type: Тип Контакт
+    create: Създай Контакт
+    data: Данни
+    details: Детайли
+    edit: Редактирай Контакт
+    emergency: Спешни случаи
+    list: Списък Контакти
+    new: Нов Контакт
+    plural: Контакти
+    primary: Основен Контакт
+    save: Запази Контакт
+    singular: Контакт
   contact_type:
-    add: 
-    choose: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    singular: 
+    add: Добави Вид Контакт
+    choose: Избери Вид Контакт
+    edit: Редактирай Вид Контакт
+    list: Списък Видове Контакти
+    name: Име
+    new: Нов Вид Контакт
+    plural: Видове Контакти
+    save: Запази Вид Контакт
+    singular: Вид Контакт
   course:
-    add: 
-    choose: 
-    code: 
-    code_sample: 
-    combined_code: 
-    count: 
-    edit: 
-    list: 
-    management: 
-    name: 
-    new: 
-    options: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    add: Добави Курс
+    choose: Избери Курс
+    code: Код на Курса
+    code_sample: '[ПР: ЕСЕН2020]'
+    combined_code: Комбиниран Код
+    count: Брой Курсове
+    edit: Редактирай Курс
+    list: Списък Курсове
+    management: Ръководство на Курса
+    name: Име на Курса
+    new: Нов Курс
+    options: Опции
+    plural: Курсове
+    save: Запази Курс
+    show: Покажи Курс
+    singular: Курс
   course_enrollment:
-    add: 
-    create: 
-    list: 
-    plural: 
-    singular: 
+    add: Запиши в Курс
+    create: Добави в Курс
+    list: Записи в Курса
+    plural: Записи в Курса
+    singular: Запис в Курса
   course_group:
-    course_group_recover: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    course_group_recover: Курс Група Възстановена
+    edit: Редактирай Курс Група
+    list: Списък Курс Групи
+    name: Име
+    new: Нова Курс Група
+    plural: Курс Групи
+    save: Запази Курс Група
+    show: Курс Група
+    singular: Курс Група
   course_group_enrollment:
-    save: 
+    save: Запази Курс Група
   csv:
-    export: 
+    export: CSV Експорт
     fields:
-      admitted: 
-      birth_date: 
-      email: 
-      gender: 
-      name: 
-      name_reading: 
-      phone: 
-      surname: 
-      surname_reading: 
-    import: 
-  date_placeholder: 
+      admitted: Приет
+      birth_date: Рождена Дата
+      email: Имейл
+      gender: Пол
+      name: Име
+      name_reading: Име (чете се)
+      phone: Телефон
+      surname: Фамилно Име
+      surname_reading: Фамилно име (чете се)
+    import: CSV Импорт
+  date_placeholder: ГГГГ-ММ-ДД
   default: 
-  delete: 
-  description: 
-  destroy: 
+  delete: Изтрий
+  description: Описание
+  destroy: Изтрий
   devise:
     confirmations:
       confirmed: 
@@ -721,7 +721,9 @@ bg:
     save: 
     show: 
     singular: 
-  teacher: 
+  teacher:
+    plural: 
+    singular: 
   title: 
   user:
     add: 
