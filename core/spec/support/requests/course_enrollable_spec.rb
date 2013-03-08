@@ -2,8 +2,7 @@ shared_examples_for 'enroll to course' do
 
   context 'add', js: true do
 
-    before do
-      click tab_link
+    before do 
       click new_link
       wait_until_visible submit
     end
@@ -15,12 +14,14 @@ shared_examples_for 'enroll to course' do
         select "#{@course.code}", from: @select
         click submit
         wait_until_invisible form
+        flash? 'successfully'
       end.to change(@data.courses, :count).by 1
-
       page.should have_content "#{@course.code}"
       within(count_div) { page.should have_content 'Courses list(1)' }
-      within(tab_link)  { page.should have_content 'Courses(1)' }
-      flash_created?
+      if page.has_css?(tab_link)
+        within(tab_link)  { page.should have_content 'Courses(1)' }
+      end
+      
     end
 
     it 'cancels creating' do

@@ -18,6 +18,7 @@ describe 'ClassGroup Courses' do
       visit gaku.class_group_path(class_group)
       @data = class_group
       @select = 'class_group_course_enrollment_course_id'
+      click tab_link
     end
 
     it_behaves_like 'enroll to course'

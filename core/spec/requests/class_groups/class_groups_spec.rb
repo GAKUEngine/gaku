@@ -13,6 +13,7 @@ describe 'ClassGroups' do
   context 'new', :js => true do
     before do
       visit gaku.class_groups_path
+      
       click new_link
       wait_until_visible submit
     end
