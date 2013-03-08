@@ -39,7 +39,7 @@
   <% sheets.each do |sheet| %>
   <Worksheet ss:Name="受験結果：<%= sheet %>">
     <Table>
-      <Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="130"/>
+      <Column ss:Width="65"/><Column ss:Width="150"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/>
       <Row ss:Height="25">
         <Cell ss:StyleID="h1" ss:MergeAcross="2"><Data ss:Type="String">受験結果：<%= sheet %></Data></Cell>
       </Row>
