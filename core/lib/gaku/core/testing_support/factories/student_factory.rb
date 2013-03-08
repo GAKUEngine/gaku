@@ -39,4 +39,13 @@ FactoryGirl.define  do
     end
   end
 
+
+  trait :with_enrollment_status do
+    association :enrollment_status, factory: :enrollment_status
+  end
+
+  trait :with_scholarship_status do
+    association :scholarship_status, factory: :scholarship_status
+  end
+
 end

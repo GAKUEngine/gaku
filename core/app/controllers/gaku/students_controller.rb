@@ -93,18 +93,6 @@ module Gaku
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
-    def edit_enrollment_status
-      @student = Student.find(params[:id])
-    end
-
-    def enrollment_status
-      @student = Student.find(params[:id])
-      @student.update_attributes(params[:student])
-      if @student.save
-        respond_with @student
-      end
-    end
-
     protected
 
     def collection

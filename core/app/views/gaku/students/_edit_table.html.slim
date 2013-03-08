@@ -19,13 +19,13 @@
       tr
         th.btn-c2 = t(:'enrollment_status.singular')
         td.vm
-          a#enrollment.editable href="#" data-resource="student" data-name="enrollment_status_id" data-type="select" data-url="#{student_path(student.id)}"
+          a#edit-enrollment-status.editable href="#" data-resource="student" data-name="enrollment_status_id" data-type="select" data-url="#{student_path(student.id)}"
             = student.enrollment_status
 
       tr
         th.btn-c2 = t('scholarship_status')
         td
-          a#scholarship.editable href="#" data-resource="student" data-name="scholarship_status_id" data-type="select" data-url="#{student_path(student.id)}"
+          a#edit-scholarship-status.editable href="#" data-resource="student" data-name="scholarship_status_id" data-type="select" data-url="#{student_path(student.id)}"
             = student.scholarship_status
       tr
         th.btn-c2 = t('commute_method.singular')
@@ -56,7 +56,7 @@ javascript:
   var enrollment_types = #{ @enrollments.to_json.html_safe }
   var scholarship_statuses = #{ @sch.to_json.html_safe }
   $('#commute_method').inline_select(commutes);
-  $('#enrollment').inline_select(enrollment_types);
-  $('#scholarship').inline_select(scholarship_statuses);
+  $('#edit-enrollment-status').inline_select(enrollment_types);
+  $('#edit-scholarship-status').inline_select(scholarship_statuses);
   $('#birth_date').inline_date();
 
