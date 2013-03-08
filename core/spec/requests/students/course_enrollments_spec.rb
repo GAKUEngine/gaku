@@ -15,9 +15,10 @@ describe 'Student CourseEnrollments' do
   context 'new' do
     
     before do
-      course
+      @course = course
       visit gaku.edit_student_path(student)
       @data = student
+      @select = 'course_enrollment_course_id'
     end
 
     it_behaves_like 'enroll to course'

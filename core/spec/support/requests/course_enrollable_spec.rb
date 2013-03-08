@@ -12,12 +12,12 @@ shared_examples_for 'enroll to course' do
 
     it "creates and shows" do
       expect do
-        select "fall2050", from: 'course_enrollment_course_id'
+        select "#{@course.code}", from: @select
         click submit
         wait_until_invisible form
       end.to change(@data.courses, :count).by 1
 
-      page.should have_content "fall2050"
+      page.should have_content "#{@course.code}"
       within(count_div) { page.should have_content 'Courses list(1)' }
       within(tab_link)  { page.should have_content 'Courses(1)' }
       flash_created?
@@ -25,6 +25,23 @@ shared_examples_for 'enroll to course' do
 
     it 'cancels creating' do
       ensure_cancel_creating_is_working
+    end
+
+    context 'validations' do
+      
+      before do
+        @data.courses << @course
+        @data.reload
+      end
+
+      it { has_validations? }
+
+      it "doesn't add a course 2 times" do
+        select "#{@course.code}", :from => @select
+        click submit
+        wait_until { page.should have_content "Already enrolled" }
+      
+      end
     end
 
   end
@@ -48,7 +65,7 @@ shared_examples_for 'remove enrollment' do
     if page.has_css?(tab_link)
       within(tab_link)  { page.should_not have_content 'Courses(1)' }
     end
-    page.should_not have_content course_field
+    within(table) { page.should_not have_content course_field }
   end
 
 end
