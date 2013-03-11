@@ -3,4 +3,4 @@ tr id="student-#{student.id}"
   - if ["gaku/students", "gaku/admissions"].include? params[:controller]
     td
       = link_to_show student
-      = ajax_link_to_edit [:edit, student], :style => "margin:0px"
+      = link_to_edit [:edit, student], :style => "margin:0px"
