@@ -5,7 +5,7 @@ module Gaku
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
-    respond_to :html, :js
+    respond_to :html, :js, :json
     respond_to :xls, :only => :export
 
     include Gaku::Core::Grading::Calculations
@@ -67,10 +67,13 @@ module Gaku
       end
     end
 
-    def calculations
-      respond_to do |format|
-        format.json {render :json => {:hello => :world}}
-      end
+    def completed
+      @exam = Exam.find(params[:id])
+      @course = Course.find(params[:course_id])
+      @students = @course.students
+
+
+      respond_with @exam.completed_by_students(@students)
     end
 
     private
