@@ -16,6 +16,8 @@ module Gaku
       end
     end
 
+
+
     def can_edit?
       if controller.action_name == "show" and controller.controller_name == "students"
         false

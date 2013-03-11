@@ -249,7 +249,9 @@ Gaku::Core::Engine.routes.draw do
 
 
     namespace :changes do
-      resources :students, :controller => 'student_changes'
+      resources :students, :controller => 'student_changes' do
+        get 'page/:page', :action => :index, :on => :collection
+      end
       resources :student_contacts, :controller => 'student_contact_changes'
       resources :student_addresses, :controller => 'student_address_changes'
     end
@@ -259,6 +261,7 @@ Gaku::Core::Engine.routes.draw do
         get :students
         get :locale
         get :grading
+        get :pagination
         get :defaults
         put :update_presets
       end
