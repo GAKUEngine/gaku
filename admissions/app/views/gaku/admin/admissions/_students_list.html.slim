@@ -21,7 +21,7 @@
 
 
 javascript:
-  $('#all_students_check').change(function(){
+  $('.change-state-form').on('change', '#all_students_check', function(){
     if (this.checked) {
       $('.student-check').prop('checked', true);
     }else{
