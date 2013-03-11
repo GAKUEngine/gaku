@@ -40,6 +40,9 @@ describe 'Student Achievements' do
       ensure_cancel_creating_is_working
     end
 
+    it {has_validations?}
+    
+
   end
 
   context 'existing',  :js => true do

@@ -32,11 +32,6 @@ shared_examples_for 'new contact' do
       ensure_cancel_creating_is_working
     end
 
-    it 'has validations', js:true do
-      click submit
-      has_validations?
-    end
-
   end
 
 end

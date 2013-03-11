@@ -25,6 +25,7 @@ describe 'Admin Admission Method Phases' do
       visit gaku.admin_admission_method_path(admission_method)
       click new_link
       wait_until_visible submit
+      wait_for_ajax
     end
 
     it 'creates and shows' do
@@ -42,6 +43,8 @@ describe 'Admin Admission Method Phases' do
     it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it {has_validations?}
 
   end
 

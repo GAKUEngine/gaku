@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Student Specialties' do
+describe 'Admin Student Specialties' do
 
   as_admin
 
@@ -8,7 +8,6 @@ describe 'Student Specialties' do
   let(:specialty) {create(:specialty) }
   let(:student_specialty) {create(:student_specialty, :student => student, :specialty => specialty )}
   let(:specialty2) { create(:specialty, :name => 'Math Specialty') }
-  let!(:el) { '#index-student-specialties-link' }
 
   before :all do
     set_resource 'student-specialty'
@@ -18,10 +17,10 @@ describe 'Student Specialties' do
 
     before do
       specialty
-      visit gaku.edit_student_path(student)
-      within(el) { page.should have_content("Empty") }
-      click el
+      visit gaku.edit_admin_student_path(student)
+      click '#index-student-specialties-link'
       click new_link
+      sleep 1 # because it is failing some times
     end
 
     it 'create and show' do
@@ -31,10 +30,16 @@ describe 'Student Specialties' do
         wait_until_invisible form
       end.to change(Gaku::StudentSpecialty, :count).by(1)
 
-      within(el) { page.should have_content(specialty.name) }
+      page.should have_content(specialty.name)
       within(count_div) { page.should have_content "Specialties list(1)"}
       flash_created?
     end
+
+    it 'cancel creating', :cancel => true do
+      ensure_cancel_creating_is_working
+    end
+
+    it {has_validations?}
   end
 
   context 'existing', :js => true do
@@ -42,8 +47,8 @@ describe 'Student Specialties' do
       specialty
       specialty2
       student_specialty
-      visit gaku.edit_student_path(student)
-      click el
+      visit gaku.edit_admin_student_path(student)
+      click '#index-student-specialties-link'
     end
 
     context '#edit' do
@@ -55,10 +60,8 @@ describe 'Student Specialties' do
         select specialty2.name , :from => 'student_specialty_specialty_id'
         click submit
 
-        within(el) do
-          page.should have_content(specialty2.name)
-          page.should_not have_content(specialty.name)
-        end
+        page.should have_content(specialty2.name)
+        page.should_not have_content(specialty.name)
         flash_updated?
       end
 
@@ -76,10 +79,9 @@ describe 'Student Specialties' do
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
       within(count_div) { page.should have_content 'Specialties list' }
-      within(el) { page.should_not have_content(specialty.name) }
-
+      page.should_not have_content(specialty.name)
       flash_destroyed?
-    end
 
+    end
   end
 end
