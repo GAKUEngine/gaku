@@ -20,5 +20,6 @@
 //= require gaku/students
 //= require gaku/students/addresses/form
 //= require gaku/shared/address
+//= require gaku/exams
 //= require_tree ./backbone/
 //= require ./admin/disposals
