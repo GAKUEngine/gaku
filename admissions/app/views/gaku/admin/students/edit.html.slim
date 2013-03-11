@@ -19,7 +19,7 @@
     .span4
       = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link", :remote => true
     .span4
-      = link_to_back students_path, :class => "span12 btn"
+      = link_to_back session[:return_to], :class => "span12 btn"
 
   .row-fluid
     .span12
