@@ -8,7 +8,7 @@ describe 'Student Achievements' do
   let(:achievement) { create(:achievement) }
   let(:achievement2) { create(:achievement, :name => 'Another achievement') }
   let(:student_achievement) { create(:student_achievement, :student => student, :achievement => achievement) }
-  let!(:el) { '#index-student-achievements-link' }
+  let!(:el) { '#achievements' }
 
   before :all do
     set_resource 'student-achievement'
@@ -41,7 +41,7 @@ describe 'Student Achievements' do
     end
 
     it {has_validations?}
-    
+
 
   end
 

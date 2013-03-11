@@ -26,7 +26,6 @@ window.ClientSideValidations.formBuilders["ValidateFormBuilder"] = formBuilder
 window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBuilder
 
 $.fn.inline_select = (resource) ->
-  console.log resource
   $(this).editable
     source: resource
     showbuttons: false
@@ -46,7 +45,6 @@ $.fn.inline_date = () ->
   $(this).editable
     display: (value) ->
       $(this).show()
-      console.log moment(value)
 
 
 $.fn.enableValidations = ->

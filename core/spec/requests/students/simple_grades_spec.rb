@@ -7,7 +7,7 @@ describe 'Simple Grade' do
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }
   let(:simple_grade) { create(:simple_grade, :school => school, :student => student) }
-  let!(:el) { '#index-student-simple-grades-link' }
+  let!(:el) { '#simple-grades' }
 
   before :all do
     set_resource 'student-simple-grade'

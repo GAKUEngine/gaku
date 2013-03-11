@@ -8,7 +8,7 @@ describe 'Student Scholarship Status' do
   let(:student2) { create(:student, :with_scholarship_status) }
   let!(:scholarship_status) { create(:scholarship_status) }
   let!(:scholarship_status2) { create(:scholarship_status, :name => "New Scholarship Status") }
-  let!(:el) { '#edit-scholarship-status' }
+  let!(:el) { '#scholarship-status' }
   let!(:select_box) { 'select.input-medium' }
 
   context '#new', :js => true do

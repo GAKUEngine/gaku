@@ -8,7 +8,7 @@ describe 'Student Enrollment Status' do
   let(:student2) { create(:student, :with_enrollment_status) }
   let!(:enrollment_status) { create(:enrollment_status) }
   let!(:enrollment_status2) { create(:enrollment_status, :name => "New Enrollment") }
-  let!(:el) { '#edit-enrollment-status' }
+  let!(:el) { '#enrollment-status' }
   let!(:select_box) { 'select.input-medium' }
 
   context '#new', :js => true do

@@ -8,7 +8,7 @@ describe 'Student Specialties' do
   let(:specialty) {create(:specialty) }
   let(:student_specialty) {create(:student_specialty, :student => student, :specialty => specialty )}
   let(:specialty2) { create(:specialty, :name => 'Math Specialty') }
-  let!(:el) { '#index-student-specialties-link' }
+  let!(:el) { '#specialties' }
 
   before :all do
     set_resource 'student-specialty'
