@@ -42,6 +42,14 @@ module Gaku
       Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
     end
 
+    def commute_method_types_inline
+      commute_method_types = []
+      CommuteMethodType.all.each do |e|
+        commute_method_types << {value: e.id, text: e.name}
+      end
+      commute_method_types.to_json.html_safe
+    end
+
     def syllabuses
       Gaku::Syllabus.all.collect { |s| [s.name, s.id] }
     end

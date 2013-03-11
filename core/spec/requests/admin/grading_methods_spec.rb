@@ -10,7 +10,7 @@ describe 'Admin Grading Methods' do
     set_resource "admin-grading-method"
   end
 
-  on:  'new', js: true do
+  context 'new', js: true do
     before do
       visit gaku.admin_grading_methods_path
       click new_link
@@ -42,7 +42,7 @@ describe 'Admin Grading Methods' do
       visit gaku.admin_grading_methods_path
     end
 
-    on:  'edit', js: true do
+    context 'edit', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
@@ -66,7 +66,7 @@ describe 'Admin Grading Methods' do
         fill_in 'grading_method_name', with: ''
         has_validations?
       end
-      
+
     end
 
     it 'deletes', js: true do

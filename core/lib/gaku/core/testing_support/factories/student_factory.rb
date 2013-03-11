@@ -48,4 +48,8 @@ FactoryGirl.define  do
     association :scholarship_status, factory: :scholarship_status
   end
 
+  trait :with_commute_method_type do
+    association :commute_method_type, factory: :commute_method_type
+  end
+
 end
