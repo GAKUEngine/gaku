@@ -4,6 +4,7 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
+      #respond_to :xls, :only => :index
 
       before_filter :select_vars,       :only => [:index,:new, :edit]
       before_filter :notable,           :only => [:show, :edit]

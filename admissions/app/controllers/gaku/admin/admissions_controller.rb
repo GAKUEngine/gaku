@@ -4,7 +4,8 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
-      respond_to :xls
+      respond_to :xls, :only => :index
+      respond_to :ods, :only => :index
       respond_to :csv, :only => :csv
 
       helper_method :sort_column, :sort_direction
@@ -29,6 +30,10 @@ module Gaku
 
       def index
         session[:current_page] = 'admissions'
+        respond_to do |format|
+          format.html
+          format.xls  { #TODO render xls }
+        end
       end
 
       def listing_admissions
