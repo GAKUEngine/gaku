@@ -8,6 +8,7 @@ describe 'Student Specialties' do
   let(:specialty) {create(:specialty) }
   let(:student_specialty) {create(:student_specialty, :student => student, :specialty => specialty )}
   let(:specialty2) { create(:specialty, :name => 'Math Specialty') }
+  let!(:el) { '#specialties' }
 
   before :all do
     set_resource 'student-specialty'
@@ -18,7 +19,8 @@ describe 'Student Specialties' do
     before do
       specialty
       visit gaku.edit_student_path(student)
-      click '#index-student-specialties-link'
+      within(el) { page.should have_content("Empty") }
+      click el
       click new_link
       sleep 1
     end
@@ -30,7 +32,7 @@ describe 'Student Specialties' do
         wait_until_invisible form
       end.to change(Gaku::StudentSpecialty, :count).by(1)
 
-      page.should have_content(specialty.name)
+      within(el) { page.should have_content(specialty.name) }
       within(count_div) { page.should have_content "Specialties list(1)"}
       flash_created?
     end
@@ -40,7 +42,7 @@ describe 'Student Specialties' do
     end
 
     it {has_validations?}
-    
+
   end
 
   context 'existing', :js => true do
@@ -49,7 +51,7 @@ describe 'Student Specialties' do
       specialty2
       student_specialty
       visit gaku.edit_student_path(student)
-      click '#index-student-specialties-link'
+      click el
     end
 
     context '#edit' do
@@ -61,8 +63,10 @@ describe 'Student Specialties' do
         select specialty2.name , :from => 'student_specialty_specialty_id'
         click submit
 
-        page.should have_content(specialty2.name)
-        page.should_not have_content(specialty.name)
+        within(el) do
+          page.should have_content(specialty2.name)
+          page.should_not have_content(specialty.name)
+        end
         flash_updated?
       end
 
@@ -80,9 +84,10 @@ describe 'Student Specialties' do
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
       within(count_div) { page.should have_content 'Specialties list' }
-      page.should_not have_content(specialty.name)
-      flash_destroyed?
+      within(el) { page.should_not have_content(specialty.name) }
 
+      flash_destroyed?
     end
+
   end
 end

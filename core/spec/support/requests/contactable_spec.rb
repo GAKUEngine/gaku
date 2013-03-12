@@ -43,8 +43,6 @@ shared_examples_for 'edit contact' do
     wait_until_visible modal
   end
 
-  it { has_validations? }
-
   it "edits" do
     fill_in 'contact_data', :with => 'example@genshin.org'
     click submit
@@ -52,6 +50,12 @@ shared_examples_for 'edit contact' do
     wait_until_invisible modal
     page.should have_content 'example@genshin.org'
     flash_updated?
+  end
+
+  it 'errors without required fields', js:true do
+    fill_in 'contact_data',  :with => ''
+
+    has_validations?
   end
 
   it 'cancels editting', :cancel => true do
