@@ -28,20 +28,10 @@ describe 'ClassGroup Students' do
 
     it 'adds and shows a student', :js => true do
       expect do
-        find(:css, "input#student-#{student1.id}").set(true)
-        wait_until_visible('#students-checked-div')
-        within('#students-checked-div') do
-          page.should have_content('Chosen students(1)')
-          click_link('Show')
-          wait_until_visible('#chosen-table')
-          page.should have_content("#{student1.name}")
-          click_button 'Enroll to class'
-        end
-        wait_until_invisible('#student-modal')
-
-        within(table){ page.should have_content("#{student1.name}") }
+        enroll_one_student_via_button('Enroll to class')
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
-
+      
+      page.should have_content "#{student1} : Successfully enrolled!"
       within('.class-group-enrollments-count'){ page.should have_content("1") }
       within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
     end

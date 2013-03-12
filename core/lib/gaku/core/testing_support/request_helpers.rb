@@ -93,6 +93,10 @@ module Gaku
           find(selector).click
         end
 
+        def click_option(resource)
+          find("option[value='#{resource.id}']").click
+        end
+
         def ensure_delete_is_working
           tr_count = size_of table_rows
           within(table) { click delete_link }

@@ -42,14 +42,14 @@ describe 'CourseGroups' do
       visit gaku.course_groups_path
     end
 
-    context '#edit', :js => true do
+    context '#edit', js: true do
       before do
         click edit_link
         wait_until_visible submit
       end
 
       it 'edits from index' do
-        fill_in 'course_group_name', :with => '2012 Courses'
+        fill_in 'course_group_name', with: '2012 Courses'
         click submit
 
         within (table) do
@@ -61,7 +61,7 @@ describe 'CourseGroups' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
 
@@ -70,7 +70,7 @@ describe 'CourseGroups' do
         click edit_link
         wait_until_visible submit
 
-        fill_in 'course_group_name', :with => '2012 Courses'
+        fill_in 'course_group_name', with: '2012 Courses'
         click submit
 
         within ('.table') do
@@ -79,6 +79,11 @@ describe 'CourseGroups' do
         end
         Gaku::CourseGroup.last.name.should eq '2012 Courses'
         flash_updated?
+      end
+
+      it 'has validations' do
+        fill_in 'course_group_name', with: ''
+        has_validations?
       end
     end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Student Specialties' do
+describe 'Admin Student Specialties' do
 
   as_admin
 
@@ -17,9 +17,10 @@ describe 'Student Specialties' do
 
     before do
       specialty
-      visit gaku.edit_student_path(student)
+      visit gaku.edit_admin_student_path(student)
       click '#index-student-specialties-link'
       click new_link
+      sleep 1 # because it is failing some times
     end
 
     it 'create and show' do
@@ -34,9 +35,11 @@ describe 'Student Specialties' do
       flash_created?
     end
 
-    xit 'cancel creating', :cancel => true do
+    it 'cancel creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
+
+    it {has_validations?}
   end
 
   context 'existing', :js => true do
@@ -44,7 +47,7 @@ describe 'Student Specialties' do
       specialty
       specialty2
       student_specialty
-      visit gaku.edit_student_path(student)
+      visit gaku.edit_admin_student_path(student)
       click '#index-student-specialties-link'
     end
 

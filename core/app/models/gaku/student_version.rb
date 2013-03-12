@@ -19,7 +19,7 @@ module Gaku
           to = EnrollmentStatus.find(self.changeset[key][1]).to_s if self.changeset[key][1]
           human_changes[:enrollment_status] = [from, to]
 
-        when 'commute_method_id'
+        when 'commute_method_type_id'
           from = CommuteMethodType.find(self.changeset[key][0]).to_s if self.changeset[key][0]
           to = CommuteMethodType.find(self.changeset[key][1]).to_s if self.changeset[key][1]
           human_changes[:commute_method] = [from, to]
