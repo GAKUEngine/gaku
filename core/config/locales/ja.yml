@@ -461,6 +461,7 @@ ja:
         exam: 試験を処分する
         student_address: 生徒住所削除一覧
       preset:
+        pagination: Pagination Preset
         grading:
           grading_method: 採点方法
           grading_scheme: 採点方式
