@@ -9,7 +9,7 @@ module Gaku
 
     attr_accessible :name, :admission_id, :admission_period_id, :starting_applicant_number
 
-    validates :name, :presence => true
+    validates :name, :presence => true, :uniqueness => true
 
   end
 end
