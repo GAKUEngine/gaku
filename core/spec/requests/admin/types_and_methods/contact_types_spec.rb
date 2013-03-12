@@ -29,6 +29,8 @@ describe 'Admin Contact Types' do
       flash_created?
     end
 
+    it { has_validations? }
+
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
@@ -54,6 +56,11 @@ describe 'Admin Contact Types' do
         page.should have_content 'email'
         page.should_not have_content 'mobile'
         flash_updated?
+      end
+
+      it 'has validations' do
+        fill_in 'contact_type_name', :with => ''
+        has_validations?
       end
 
       it 'cancels editting', :cancel => true do

@@ -20,6 +20,7 @@ describe 'Student Specialties' do
       visit gaku.edit_student_path(student)
       click '#index-student-specialties-link'
       click new_link
+      sleep 1
     end
 
     it 'create and show' do
@@ -34,9 +35,12 @@ describe 'Student Specialties' do
       flash_created?
     end
 
-    xit 'cancel creating', :cancel => true do
+    it 'cancel creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
+
+    it {has_validations?}
+    
   end
 
   context 'existing', :js => true do
