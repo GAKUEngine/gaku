@@ -26,7 +26,7 @@
       #delete-student
         = link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
     .delete_modal
-      =render 'gaku/shared/student/delete_modal', :student => @student
+      =render 'delete_modal', :student => @student
   .row-fluid
     .span
       =link_to 'Generate Report', student_path(@student, :format => :pdf), :class => 'btn-primary btn'
