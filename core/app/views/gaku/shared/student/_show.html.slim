@@ -1,0 +1,13 @@
+- present @student do |student_presenter|
+  = well_div do
+    .span9.student-index
+      = render 'gaku/shared/student/show_table', :student => @student
+
+    .span3.well
+      = render 'gaku/shared/picture', :resource => @student
+
+  = render :partial => 'gaku/shared/student/tabs'
+
+  = well_div do
+    .span4
+      = link_to_back students_path, :class => "span12 btn"

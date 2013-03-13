@@ -16,6 +16,8 @@ module Gaku
       end
     end
 
+
+
     def can_edit?
       if controller.action_name == "show" and controller.controller_name == "students"
         false
@@ -32,12 +34,28 @@ module Gaku
       Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
     end
 
+    def enrollment_statuses_inline
+      enrollment_status_types = []
+      EnrollmentStatus.all.each do |e|
+        enrollment_status_types << {value: e.id, text: e.name}
+      end
+      enrollment_status_types.to_json.html_safe
+    end
+
     def class_groups
       Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
     end
 
     def commute_method_types
       Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types_inline
+      commute_method_types = []
+      CommuteMethodType.all.each do |e|
+        commute_method_types << {value: e.id, text: e.name}
+      end
+      commute_method_types.to_json.html_safe
     end
 
     def syllabuses
@@ -60,6 +78,14 @@ module Gaku
 
     def scholarship_statuses
       Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+    end
+
+    def scholarship_statuses_inline
+      scholarship_statuses = []
+      ScholarshipStatus.all.each do |e|
+        scholarship_statuses << {value: e.id, text: e.name}
+      end
+      scholarship_statuses.to_json.html_safe
     end
 
     def contact_types

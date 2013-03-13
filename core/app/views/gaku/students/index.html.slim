@@ -19,8 +19,4 @@
 #students-index-div
   = render 'students'
 
-/= paginate @students
-/= page_entries_info @students
-
-= Gaku::ExternalSchoolRecord.all.inspect
 = render :partial => 'gaku/shared/external_school_record', :collection => Gaku::ExternalSchoolRecord.all, :as => :external_school_record

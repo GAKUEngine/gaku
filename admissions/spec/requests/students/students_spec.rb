@@ -27,11 +27,26 @@ describe 'Students in admissions' do
 
       before do
         click edit_link
+        wait_until_visible modal
       end
 
-      xit "edits " do
+      it "edits " do
+        fill_in "student_surname", with: "Kostova"
+        fill_in "student_name",    with: "Marta"
+        click submit
+        wait_until_invisible modal
+
+        page.should have_content "Kostova"
+        page.should have_content "Marta"
+        student.reload
+        student.name.should eq "Marta"
+        student.surname.should eq "Kostova"
+        flash_updated?
       end
 
+      it 'cancels editting', cancel: true do
+        ensure_cancel_modal_is_working
+      end
 
     end
 
@@ -50,10 +65,6 @@ describe 'Students in admissions' do
 
     end
 
-
-    context 'shows notes' do
-
-    end
 
     context 'shows guardians' do
 

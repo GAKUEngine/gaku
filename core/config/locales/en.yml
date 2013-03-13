@@ -502,6 +502,7 @@ en:
         student_address: Student Addresses Disposals
       grading_methods: Grading Methods
       preset:
+        pagination: Pagination Preset
         grading:
           grading_method: Grading Method
           grading_scheme: Grading Scheme
@@ -589,6 +590,10 @@ en:
     change: Change picture
     upload: Upload
   preset:
+    pagination: Pagination
+    per_page:
+      default: Default Per Page
+      changes: Changes Per Page
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme

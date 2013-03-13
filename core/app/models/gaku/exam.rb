@@ -51,9 +51,7 @@ module Gaku
           ungraded += students.count
           next
         end
-        ep.exam_portion_scores.each do |eps|
-            ungraded += 1 if check_record_completion?(eps)
-        end
+        ep.exam_portion_scores.each {|eps| ungraded += 1 if check_record_completion?(eps) }
       end
 
       return ungraded
@@ -62,6 +60,15 @@ module Gaku
     def total_records(students)
        self.exam_portions.count * students.count
     end
+
+    def completed_by_students(students)
+      completed = Array.new
+      students.each do |student|
+        completed.append(student.id) if self.completed_by_student?(student)
+      end
+      return completed
+    end
+
 
     def completed_by_student?(student)
       state = true

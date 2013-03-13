@@ -68,58 +68,6 @@ describe 'Students' do
       end
     end
 
-    context '#edit from show view', js: true do
-      before do
-        visit gaku.student_path(student)
-        click edit_link
-        wait_until_visible modal
-      end
-
-      it "edits " do
-        fill_in "student_surname", with: "Kostova"
-        fill_in "student_name",    with: "Marta"
-        click submit
-        wait_until_invisible modal
-
-        page.should have_content "Kostova"
-        page.should have_content "Marta"
-        student.reload
-        student.name.should eq "Marta"
-        student.surname.should eq "Kostova"
-        flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
-
-    end
-
-    context '#edit from index view', js: true do
-      before do
-        visit gaku.students_path
-        click edit_link
-        wait_until_visible modal
-      end
-
-      it "edits" do
-        fill_in "student_surname", with: "Kostova"
-        fill_in "student_name",    with: "Marta"
-        click submit
-        wait_until_invisible modal
-
-        page.should have_content "Kostova"
-        page.should have_content "Marta"
-        student.reload
-        student.name.should eq "Marta"
-        student.surname.should eq "Kostova"
-        flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
-    end
 
     it 'deletes', js: true do
       visit gaku.edit_student_path(student2)

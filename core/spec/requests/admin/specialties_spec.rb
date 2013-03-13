@@ -29,6 +29,8 @@ describe 'Admin Specialties' do
       flash_created?
     end
 
+    it { has_validations? }
+
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
@@ -58,6 +60,11 @@ describe 'Admin Specialties' do
 
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
+      end
+
+      it 'has validations' do
+        fill_in 'specialty_name', with: ''
+        has_validations?
       end
     end
 

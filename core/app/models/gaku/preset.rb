@@ -6,8 +6,17 @@ module Gaku
 	  	:student => ['students_gender', 'address_country', 'address_state', 'address_city'],
 	  	:locale  => ['language'],
 	  	:grading => ['grading_method', 'grading_scheme'],
-	  	:default => ['chooser_table_columns']
+	  	:default => ['chooser_table_columns'],
+	  	:pagination => ['default_per_page', 'changes_per_page']
 	  }
+
+	  def changes_per_page
+	  	if self.get('changes_per_page').empty?
+	  		self.get('default')
+	  	else
+	  		self.get('changes_per_page')
+	  	end
+	  end
 
 	  def self.save_presets(params)
 	  	ActiveRecord::Base.transaction do

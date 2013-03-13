@@ -48,18 +48,6 @@ module Gaku
         edit!
       end
 
-      def edit_enrollment_status
-        @student = Student.find(params[:id])
-      end
-
-      def enrollment_status
-        @student = Student.find(params[:id])
-        @student.update_attributes(params[:student])
-        if @student.save
-          respond_with @student
-        end
-      end
-
       def soft_delete
         @student = Student.find(params[:id])
         if !@student.admission.nil?
