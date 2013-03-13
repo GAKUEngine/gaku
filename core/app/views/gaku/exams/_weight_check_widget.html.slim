@@ -3,20 +3,15 @@
     .alert.alert-warning
       = t('exam.weight')
   .row-fluid
-    - total = 0
     table.table.table-striped.table-bordered.table-condensed.exam-portions-weight
       thead
         - exam.exam_portions.each_with_index do |portion, i|
-          - if i < exam.exam_portions.size
-            th.btn-warning*{'data-id' =>portion.id} = portion.name+ " " + t('exam.weight')
+          th.btn-warning = "#{portion.name} #{t('exam.weight')}"
       tbody
-        - exam.exam_portions.each_with_index do |portion, i|
-          - if i < exam.exam_portions.size
-            - total += portion.weight
-            =render 'gaku/exams/exam_portions/exam_portion_weight_td', :portion =>portion
+        =render :partial => 'gaku/exams/exam_portions/exam_portion_weight_td', :collection => exam.exam_portions, :as => :portion
 
     table.table.table-striped.table-bordered.table-condensed.exam-portions-total-weight
       thead
         th.btn-inverse = t('exam.total_weight')
       tbody
-      td#weight-total.vm = total
+      td#weight-total.vm = exam.total_weight
