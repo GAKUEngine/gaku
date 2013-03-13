@@ -393,6 +393,7 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
+    error: Please correct exam portions weights. Total are over 100.
   external_school_record:
     absences: Absences
     attendance_rate: Attendance Rate
