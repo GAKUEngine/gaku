@@ -31,7 +31,7 @@ module Gaku
 
     def correct_weight_with_error
       self.weight = weight_was
-      self.custom_errors =  'please correct portions weights'
+      self.custom_errors =  I18n.t(:'exam_portion.error')
     end
 
     def weight_calculate
