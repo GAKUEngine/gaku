@@ -380,6 +380,7 @@ ja:
     count: 試験要素数
     description: 説明
     edit: 試験要素を編集
+    error: 試験の部分の合計が100%を越えてて自動修正が出来ませんでした。正しい数字を入力しなおして下さい。
     execution_date: 実施日
     is_master: マスター
     list: 試験要素一覧

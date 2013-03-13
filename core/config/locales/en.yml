@@ -380,6 +380,7 @@ en:
     count: Exam portions count
     description: Description
     edit: Edit Exam Portion
+    error: Please correct exam portions weights. The total exceeds 100%.
     execution_date: Execution date
     is_master: Master
     list: Exam portions list
@@ -393,7 +394,6 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
-    error: Please correct exam portions weights. Total are over 100.
   external_school_record:
     absences: Absences
     attendance_rate: Attendance Rate
