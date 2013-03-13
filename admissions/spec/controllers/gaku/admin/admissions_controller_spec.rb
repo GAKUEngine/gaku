@@ -215,13 +215,19 @@ describe Gaku::Admin::AdmissionsController do
     context 'when new state is auto progressable but not auto admittable' do
       before do
         @current_state = admission_period.admission_methods.second.admission_phases.first.admission_phase_states.first #pre exam
+        @admission_phase_record = create(:admission_phase_record, 
+                                                      admission_phase_id: admission_period.admission_methods.second.admission_phases.first.id,
+                                                      admission_phase_state_id: @current_state.id)
         @new_state = admission_period.admission_methods.second.admission_phases.first.admission_phase_states.second #passed
 
         @admission = create(:admission, 
                               student_id: student.id)
+
         student.admission = @admission
         student.save!
 
+        @admission_phase_record.admission = @admission
+        @admission_phase_record.save!
       end
 
       it 'creates new admission phase record' do

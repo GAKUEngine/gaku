@@ -13,6 +13,10 @@ FactoryGirl.define do
       admission.admission_phase_records = [@admission_phase_record]
       admission.admission_phase_record_id = @admission_phase_record.id
       admission.save!
+
+      @admission_phase_record.admission = admission
+      @admission_phase_record.save!
+
     end
     
   end
