@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :admission, :class => Gaku::Admission do
     
     after_create do |admission|
-      admission.admission_period_id = FactoryGirl.create(:admission_period).id
+      admission.admission_period_id = FactoryGirl.create(:admission_period_with_methods).id
       @admission_phase_record = FactoryGirl.create(:admission_phase_record, 
                                                     admission_id: admission.id, 
                                                     admission_phase_id: admission.admission_period.admission_methods.first.admission_phases.first.id,
