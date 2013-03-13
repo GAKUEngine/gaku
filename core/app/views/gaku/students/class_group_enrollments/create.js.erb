@@ -6,5 +6,5 @@
 	$('td#class-enrollment-seat-number').html('<%= @class_group_enrollment.seat_number %>');
 	$('.validation-error').html('');
 
-	$('#student-class-group-enrollment').html('<%= "#{@student.class_groups.last.grade.try(:to_s)} - #{@class_group.name}" %>')
+	$('#class-group').text('<%= "#{@student.class_groups.last.grade.try(:to_s)} - #{@class_group.name}" %>');
 <% end %>
