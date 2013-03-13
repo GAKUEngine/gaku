@@ -16,7 +16,7 @@
     .method_form
       .row-fluid
         .span6
-          = method_form.select :admission_method_id, options_from_collection_for_select(@admission_methods, :id, 'name'), { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name')
+          = method_form.select :admission_method_id, options_from_collection_for_select(@admission_methods, :id, 'name', method_form.object.admission_method_id), { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name')
         .span6[style="margin-top: 25px;"]
           = method_form.link_to_remove t(:'admission_methods.remove'), :class => 'btn btn-danger'
     = hr
