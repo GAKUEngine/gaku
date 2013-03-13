@@ -1,7 +1,10 @@
 .span12.well
   .row-fluid
-    .alert.alert-warning
-      = t('exam.weight')
+    h3  = t('exam.weight')
+  .row-fluid
+    .exam-portion-error
+      / .alert.alert-error
+      /   = t('exam.weight')
   .row-fluid
     table.table.table-striped.table-bordered.table-condensed.exam-portions-weight
       thead

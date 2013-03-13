@@ -2,9 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$(document).ready ->
-  $('.edit_exam_portion').on 'change', ->
-    $(@).submit()
+# $(document).ready ->
+#   $('.edit_exam_portion').on 'change', ->
+#     $(@).submit()
 
 # $(document).ready ->
 #   $(document).on 'click','#exam_use_weighting', ->
