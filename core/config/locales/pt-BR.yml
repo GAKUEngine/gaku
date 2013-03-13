@@ -35,8 +35,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: '%{resource} já foram adicionados!'
-    empty: '%{resource} está vazio!'
+    already_added: ! '%{resource} já foram adicionados!'
+    empty: ! '%{resource} está vazio!'
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -195,7 +195,7 @@ pt-BR:
     add: Adicionar Curso
     choose: Escolha Curso
     code: Código de Curso
-    code_sample: '[EX: FALL2020]'
+    code_sample: ! '[EX: FALL2020]'
     combined_code: Código Combinado
     count: Contagem de cursos
     edit: Editar Curso
@@ -506,6 +506,7 @@ pt-BR:
           grading: 
           locale: 
           student: 
+        pagination: 
         plural: 
         save: 
         singular: 
@@ -588,6 +589,10 @@ pt-BR:
     grading:
       grading_method: 
       grading_scheme: 
+    pagination: 
+    per_page:
+      changes: 
+      default: 
     plural: 
     save: 
     singular: 

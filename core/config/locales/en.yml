@@ -35,10 +35,10 @@ en:
     zipcode: ZIP Code
   admitted: Admitted On
   alert:
-    already_added: '%{resource} are already added!'
-    empty: '%{resource} is empty!'
+    already_added: ! '%{resource} are already added!'
+    empty: ! '%{resource} is empty!'
     not_selected: No %{resource} selected!
-  and: ' and '
+  and: ! ' and '
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -195,7 +195,7 @@ en:
     add: Add Course
     choose: Choose Course
     code: Course Code
-    code_sample: '[EX: FALL2020]'
+    code_sample: ! '[EX: FALL2020]'
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -280,9 +280,9 @@ en:
       updated: Your password was changed successfully. You are now signed in.
       updated_not_active: Your password was changed successfully.
     registrations:
-      admin_set_up: |-
-        This is your first time running GAKU Engine.
-        Please set up the Admin user.
+      admin_set_up: ! 'This is your first time running GAKU Engine.
+
+        Please set up the Admin user.'
       destroyed: Bye! Your account was successfully cancelled. We hope to see you again soon.
       inactive_signed_up: You have signed up successfully. However, we could not sign you in because your account is %{reason}.
       reasons:
@@ -340,8 +340,8 @@ en:
       not_found: not found
       not_locked: was not locked
       not_saved:
-        one: '1 error prohibited this %{resource} from being saved:'
-        other: '%{count} errors prohibited this %{resource} from being saved:'
+        one: ! '1 error prohibited this %{resource} from being saved:'
+        other: ! '%{count} errors prohibited this %{resource} from being saved:'
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -419,12 +419,12 @@ en:
   flash:
     actions:
       create:
-        notice: '%{resource_name} was successfully created!'
+        notice: ! '%{resource_name} was successfully created!'
       destroy:
-        alert: '%{resource_name} could not be destroyed!'
-        notice: '%{resource_name} was successfully destroyed!'
+        alert: ! '%{resource_name} could not be destroyed!'
+        notice: ! '%{resource_name} was successfully destroyed!'
       update:
-        notice: '%{resource_name} was successfully updated!'
+        notice: ! '%{resource_name} was successfully updated!'
   gender:
     choose: Choose Gender
     female: Female
@@ -503,7 +503,6 @@ en:
         student_address: Student Addresses Disposals
       grading_methods: Grading Methods
       preset:
-        pagination: Pagination Preset
         grading:
           grading_method: Grading Method
           grading_scheme: Grading Scheme
@@ -512,6 +511,7 @@ en:
           grading: Grading Preset
           locale: Locale Preset
           student: Student Preset
+        pagination: Pagination Preset
         plural: Presets
         save: Save
         singular: Preset
@@ -570,15 +570,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: '%{resource} has been successfully added!'
-    created: '%{resource} has been successfully created!'
-    destroyed: '%{resource} has been successfully destroyed!'
-    enrolled: '%{resource} has been successfully enrolled to %{to}!'
+    added: ! '%{resource} has been successfully added!'
+    created: ! '%{resource} has been successfully created!'
+    destroyed: ! '%{resource} has been successfully destroyed!'
+    enrolled: ! '%{resource} has been successfully enrolled to %{to}!'
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: '%{resource} has been successfully recovered'
-    removed: '%{resource} has been successfully removed!'
-    updated: '%{resource} has been successfully updated!'
-    uploaded: '%{resource} has been successfully uploaded!'
+    recovered: ! '%{resource} has been successfully recovered'
+    removed: ! '%{resource} has been successfully removed!'
+    updated: ! '%{resource} has been successfully updated!'
+    uploaded: ! '%{resource} has been successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -591,13 +591,13 @@ en:
     change: Change picture
     upload: Upload
   preset:
-    pagination: Pagination
-    per_page:
-      default: Default Per Page
-      changes: Changes Per Page
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
+    pagination: Pagination
+    per_page:
+      changes: Changes Per Page
+      default: Default Items Per Page
     plural: Presets
     save: Save Presets
     singular: Preset
@@ -725,7 +725,7 @@ en:
     import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: '[EX: Science A]'
+    name_sample: ! '[EX: Science A]'
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
@@ -747,8 +747,8 @@ en:
     username: Username
   views:
     pagination:
-      first: '&laquo; First'
+      first: ! '&laquo; First'
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '...'
+      previous: ! '&lsaquo; Prev'
+      truncate: ! '...'
