@@ -50,6 +50,8 @@ module Gaku
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
 
+    before_create :set_scholarship_status
+
 
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
@@ -84,6 +86,10 @@ module Gaku
     def address_widget
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
+    end
+
+    def set_scholarship_status
+      self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end
 
   end

@@ -5,6 +5,8 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
+    translates :name
+
 		attr_accessible :name
 
     def to_s
