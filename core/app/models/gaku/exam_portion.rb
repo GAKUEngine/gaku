@@ -53,7 +53,7 @@ module Gaku
     end
 
     def init_weight
-      if self.weight.nil? && self.weight.zero?
+      if self.weight.nil? && self.weight.try(:zero?)
         other_ep = exam.exam_portions
         percentage = 100 / (other_ep.count + 1)
         self.weight = percentage
