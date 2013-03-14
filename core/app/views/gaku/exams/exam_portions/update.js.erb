@@ -1,6 +1,27 @@
 $('tr#exam_portion_<%= @exam_portion.id %>').html('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_unit", {:exam_portion => @exam_portion}) %>');
 $("#edit-exam-exam-portion-modal").modal('hide');
-$('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
-//showNotice("<%= render_flash %>");
+// $('input#<%= @exam_portion.id %>.exam-portion-weight').val('<%= @exam_portion.weight %>')
+// showNotice("<%= render_flash %>");
 
 $('#weight-total').text(<%= @exam.total_weight %>);
+
+
+weights = ('<%= @exam.exam_portions.pluck(:weight) %>')
+weights = weights.slice(1, -1).split(',')
+
+$('.exam-portions-weight tbody form').each(function(i, form){
+  $(form).find('input.exam-portion-weight').val(parseFloat(weights[i]))
+})
+
+$('#exam-exam-portions-index tbody tr').each(function(i, tr){
+  tdWeight = $(tr).find('td')[3]
+  $(tdWeight).text(weights[i])
+})
+
+error = '<%= @exam_portion.custom_errors %>'
+
+if(error){
+  $('.exam-portion-error').html('<%= render_js_partial("gaku/exams/exam_portions/custom_exam_portion_error", {:error => @exam_portion.custom_errors}) %>')
+}else{
+  $('.exam-portion-error').html('');
+}

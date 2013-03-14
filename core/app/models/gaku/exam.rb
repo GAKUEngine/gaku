@@ -29,7 +29,17 @@ module Gaku
     end
 
     def total_weight
-      exam_portions.inject(0) {|sum, p| sum + p.weight }
+      exam_portions.inject(0) { |sum, p| p.weight ? sum + p.weight : sum }
+    end
+
+    def total_weight_except(portion)
+      exam_portions.inject(0) do |sum, p|
+        if portion == p
+          sum
+        else
+          p.weight ? sum + p.weight : sum
+        end
+      end
     end
 
 

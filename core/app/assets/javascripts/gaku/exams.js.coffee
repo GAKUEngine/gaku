@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $('.edit_exam_portion').on 'change', ->
-    $(@).submit()
+  $('.exam-portion-weight').on 'blur', ->
+    $(@).parent('form').submit()
 
 # $(document).ready ->
 #   $(document).on 'click','#exam_use_weighting', ->
