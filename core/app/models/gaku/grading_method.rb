@@ -5,5 +5,6 @@ module Gaku
 	  has_one :assignment
 
 	  attr_accessible :description, :method, :name
+    validates :name, :presence => true
 	end
 end

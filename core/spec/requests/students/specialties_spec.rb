@@ -22,7 +22,7 @@ describe 'Student Specialties' do
       within(el) { page.should have_content("Empty") }
       click el
       click new_link
-      sleep 1
+      wait_until_visible cancel_link
     end
 
     it 'create and show' do
