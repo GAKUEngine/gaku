@@ -1,13 +1,10 @@
-= well_div do
-  = show_table do
-    = person_caption @guardian
-    tbody
-      = render 'fields', :guardian => @guardian
+#guardian-table
+  = render 'edit_table', :guardian => @guardian
 
 = render 'tabs', :guardian => @guardian
 
 = well_div do
   = link_to_back @student
-  = link_to_edit_with_text [:edit, @student, @guardian], :remote => true
+  = link_to_edit_with_text [:edit, @student, @guardian], { :id => 'edit-modal', :remote => true }
 
 #guardians-modal

@@ -3,11 +3,7 @@
 
     caption
       h2
-        a#name.editable href="#" data-resource="student"  data-name="name" data-type="text" data-url="#{student_path(student.id)}"
-          ruby
-            = student
-            rt
-              = student.phonetic_reading
+        = link_to edit_person_caption(student), [:edit, @student], :remote => true, :class => 'edit-link'
 
     tbody
       tr
