@@ -2,7 +2,6 @@ Gaku::Core::Engine.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  #devise_for :installs
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
@@ -11,7 +10,9 @@ Gaku::Core::Engine.routes.draw do
       registrations: "gaku/devise/registrations",
       passwords: "gaku/devise/passwords"
     }
-  } do
+  }
+
+  devise_scope :users do
     get :set_up_admin_account, :to => "devise/registrations#set_up_admin_account"
     post :create_admin, :to => "devise/registrations#create_admin"
   end
