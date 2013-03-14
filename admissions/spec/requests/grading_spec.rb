@@ -30,9 +30,8 @@ describe 'Admin Admissions Grading' do
 
     it 'grades' do
       fill_in 'portion_score', with: 89
-      sleep 3 #this is needed because sometimes test fails
       click '.exam-parts' #TODO fix this
-      wait_for_ajax
+      sleep 1
       visit gaku.admin_admissions_path
       select 'Passed', from: 'state_id'
       click_on 'Save'
