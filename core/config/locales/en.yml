@@ -423,6 +423,7 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
+    error: Please correct exam portions weights. Total are over 100.
   external_school_record:
     student_id_number: Student ID number
     beginning: Beginning
