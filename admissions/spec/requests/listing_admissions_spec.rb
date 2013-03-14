@@ -12,7 +12,7 @@ describe 'Admin Listing Admissions' do
   context 'lists admissions and', js:true do
 
     before do
-      @admission = create(:admission, 
+      @admission = create(:admission,
                           student_id: student.id)
       student.admission = @admission
       student.save!
@@ -28,30 +28,13 @@ describe 'Admin Listing Admissions' do
       page.should have_content "#{student.name}"
     end
 
-    it 'edits admissions' do
-      click '.edit-link'
-      wait_until_visible modal
-      fill_in 'student_name', with: 'Martina'
-      click_on 'Save Student'
-      wait_until_invisible modal
-      page.should have_content 'Martina'
-      visit gaku.listing_admissions_admin_admissions_path
-      page.should have_content 'Martina' 
-    end
-
-    it 'shows admissions' do
-      click '.show-link'
-      current_path.should eq "/admin/students/1"
-      page.should have_content "#{student.name}"
-    end
-
     describe 'deleting admission' do
 
-      context 'soft deleting from show' do
-      
+      context 'soft deleting from edit' do
+
         before do
-          click '.show-link'
-          current_path.should eq "/admin/students/1"
+          click '.edit-link'
+          current_path.should eq "/admin/students/1/edit"
           page.should have_content "#{student.name}"
           click '#delete-student-link'
           within(modal) { click_on "Delete" }
@@ -59,7 +42,7 @@ describe 'Admin Listing Admissions' do
           student.reload
         end
 
-        it 'deletes student from show view' do
+        it 'deletes student from edit view' do
           page.should have_content "successfully"
           current_path.should == "/admin/admissions/listing_admissions"
           page.should_not have_content "#{student.name}"
@@ -97,8 +80,9 @@ describe 'Admin Listing Admissions' do
           page.should have_content "#{student.name}"
           click delete_link
           accept_alert
+          sleep 1
           page.should_not have_content "#{student.name}"
-          student.reload
+          #student.reload
           visit gaku.students_admin_disposals_path
           page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path
@@ -110,7 +94,7 @@ describe 'Admin Listing Admissions' do
       end
 
       context 'soft deleting from index' do
-        
+
         before do
           click delete_link
           accept_alert
@@ -141,7 +125,7 @@ describe 'Admin Listing Admissions' do
 
       end
     end
-    
+
     it 'goes to admissions' do
       page.should have_content 'Admissions'
       click_on 'Admissions'

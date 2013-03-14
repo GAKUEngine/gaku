@@ -10,7 +10,5 @@ module Gaku
       end
     end
 
-
-
   end
 end

@@ -1,0 +1,51 @@
+- present student do |student_presenter|
+  = show_table_for 'student-index' do
+
+    = person_caption student
+
+    tbody
+
+      = render 'gaku/shared/fields/person_show_table', :person => student
+
+      tr
+        th width="20%" = t('class')
+        td#student-class-group-enrollment
+          = student_presenter.class_group
+
+      tr
+        th = t(:'contact.primary')
+        td = student_presenter.primary_contact
+
+      tr
+        th = t(:'address.primary')
+        td = student_presenter.primary_address
+
+      tr
+        th = t(:'admitted')
+        td = student.admitted
+
+      tr
+        th = t(:'enrollment_status.singular')
+        td = student.enrollment_status
+
+      tr
+        th = t(:'scholarship_status')
+        td = student.scholarship_status
+
+      tr
+        th = t(:'commute_method.singular')
+        td = student.commute_method_type
+
+      tr
+        th = t(:'specialty.plural')
+        td = student_presenter.specialties
+
+      tr
+        th = t(:'simple_grade.plural')
+        td = student_presenter.simple_grades
+
+      tr
+        th = t(:'achievement.plural')
+        td = student_presenter.achievements
+
+

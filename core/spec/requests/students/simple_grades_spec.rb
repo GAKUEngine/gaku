@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-describe 'Simple Grade' do
+describe 'Student Simple Grades' do
 
   as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }
   let(:simple_grade) { create(:simple_grade, :school => school, :student => student) }
+  let!(:el) { '#simple-grades' }
 
   before :all do
     set_resource 'student-simple-grade'
@@ -15,9 +16,10 @@ describe 'Simple Grade' do
   context '#new', :js => true do
     before do
       school
-      visit gaku.student_path(student)
-      click '#index-student-simple-grades-link'
+      visit gaku.edit_student_path(student)
+      click el
       click new_link
+      wait_until_visible modal
     end
 
     it 'create and show' do
@@ -30,21 +32,18 @@ describe 'Simple Grade' do
         wait_until_invisible form
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
-      page.should have_content('Ruby Science')
+      within(el) { page.should have_content('Ruby Science') }
       within(count_div) { page.should have_content 'Simple Grades list(1)'}
       flash_created?
     end
 
-    xit 'cancel creating', :cancel => true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing', :js => true do
     before do
       simple_grade
-      visit gaku.student_path(student)
-      click '#index-student-simple-grades-link'
+      visit gaku.edit_student_path(student)
+      click el
     end
 
     context '#edit' do
@@ -56,13 +55,14 @@ describe 'Simple Grade' do
         fill_in 'simple_grade_name', :with => 'Rails Science'
         click submit
 
+        wait_until_invisible form
         page.should have_content('Rails Science')
         flash_updated?
       end
 
       it 'cancels editting' do
         click '.back-link'
-        within(table) { page.should have_content(simple_grade.name) }
+        within(el) { page.should have_content(simple_grade.name) }
       end
 
     end
@@ -75,7 +75,7 @@ describe 'Simple Grade' do
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
       within(count_div) { page.should have_content 'Simple Grades list' }
-      page.should_not have_content(simple_grade.name)
+      within(el) { page.should_not have_content(simple_grade.name) }
       flash_destroyed?
     end
   end

@@ -1,71 +1,58 @@
 require 'spec_helper'
 
-describe 'Student Commute Methods' do
+describe 'Student Commute Method Type' do
 
   as_admin
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:commute_method_type) { create(:commute_method_type) }
-  let(:commute_method_type_train) { create(:commute_method_type, name: 'Train') }
-  let(:commute_method) { create(:commute_method, commute_method_type: commute_method_type_train, student: student) }
+  let(:student2) { create(:student, :with_commute_method_type) }
+  let!(:commute_method_type) { create(:commute_method_type, :name => "Bus") }
+  let!(:commute_method_type2) { create(:commute_method_type, :name => "Train") }
+  let!(:el) { '#commute-method-type' }
+  let!(:select_box) { 'select.input-medium' }
 
-  before :all do
-    set_resource "student-commute-method"
-    submit = 'submit-student-commute-method-button'
-    edit_link = '#edit-student-commute-method-link'
+  context '#new', :js => true do
+
+    before do
+      visit gaku.edit_student_path(student)
+      within(el) { page.should have_content "Empty"}
+      click el
+      wait_until_visible select_box
+    end
+
+    it 'create and show' do
+      within(select_box) {  click_option commute_method_type2 }
+
+      wait_until_invisible select_box
+      within(el) { page.should have_content(commute_method_type2.name) }
+      student.reload
+      student.commute_method_type.should eq commute_method_type2
+    end
+
+
   end
 
-  context "existing" do
+  context 'existing',  :js => true do
     before do
-      student
-      visit gaku.students_path
+      student2
+      visit gaku.edit_student_path(student2)
+      within(el) { page.should have_content("Car")}
+      click el
+      wait_until_visible select_box
     end
 
-    context "commute method", js: true do
-      context " #add" do
-        before do
-          commute_method_type
-          visit gaku.student_path(student)
-          click '#edit-student-commute-method-link'
-          wait_until_visible modal
-        end
+    context '#edit' do
 
-        it ' adds' do
-          select "#{commute_method_type.name}", from: 'commute_method_commute_method_type_id'
-          click '#submit-student-commute-method-button'
-          page.should have_content "#{commute_method_type}"
-        end
+      it 'edits' do
+        within(select_box) { click_option commute_method_type2 }
 
-        it 'cancels adding' do
-          click '#cancel-student-commute-method-link'
-          wait_until_invisible modal
-        end
-      end
-
-      context ' #edit' do
-        before do
-          commute_method_type.commute_methods<<commute_method
-          commute_method_type_train
-          visit gaku.student_path(student)
-          page.should have_content "#{student.commute_method.commute_method_type}"
-          click '#edit-student-commute-method-link'
-        end
-
-        it ' edits' do
-          select 'Train', from: 'commute_method_commute_method_type_id'
-          click '#submit-student-commute-method-button'
-          wait_until_visible '#edit-student-commute-method-link'
-          page.should have_content "Train"
-        end
-
-        it 'cancels editing' do
-          click '#cancel-student-commute-method-link'
-          wait_until_invisible modal
-          page.should have_content "#{commute_method_type}"
-        end
-
+        wait_until_invisible select_box
+        within(el) { page.should have_content(commute_method_type2.name) }
+        student2.reload
+        student2.commute_method_type.should eq commute_method_type2
       end
 
     end
+
   end
 end

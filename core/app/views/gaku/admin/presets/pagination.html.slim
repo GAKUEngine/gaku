@@ -1,0 +1,13 @@
+= form_tag update_presets_admin_presets_path, :method => :put do
+  = well_div do
+    .row-fluid
+      .span3
+        = fields_for :presets do |default|
+          = default.label t(:'preset.per_page.default')
+          = default.select :default_per_page, per_page_values, {:selected => @preset_hash[:default_per_page]}
+      .span3
+        = fields_for :presets do |changes|
+          = changes.label t(:'preset.per_page.changes')
+          = changes.select :changes_per_page, per_page_values, {:selected => @preset_hash[:changes_per_page]}
+  = well_div do
+    = submit_button t(:'preset.save'), :id => 'submit-preset'

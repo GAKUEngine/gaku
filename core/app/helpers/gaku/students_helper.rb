@@ -1,16 +1,6 @@
 module Gaku
 	module StudentsHelper
-		def gender(student)
-			if student.gender.nil?
-				t("gender.unknown")
-			else
-				if student.gender?
-					t("gender.male")
-				else
-					t("gender.female")
-				end
-			end
-		end
+
 
     def surname_reading_label
     	t(:phonetic_reading) + " ("+t(:surname)+")"

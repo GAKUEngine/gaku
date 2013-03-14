@@ -1,3 +1,2 @@
-- unless guardian.nil? or guardian.new_record? or !guardian
-  div id="guardian-#{guardian.id}" class="guardian-cell"
-    = render 'gaku/students/guardians/guardian_unit', :guardian => guardian
+tr id="guardian-#{guardian.id}"
+  = render 'gaku/students/guardians/guardian_unit', :guardian => guardian

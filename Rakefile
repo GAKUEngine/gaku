@@ -9,9 +9,20 @@ rescue LoadError
   exit
 end
 
+task :default => :all_specs
+
 spec = eval(File.read('gaku_engine.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
+end
+
+desc "Run specs for all engines"
+task :all_specs do
+  %w(core admissions).each do |engine|
+    ENV['LIB_NAME'] = File.join('gaku', engine)
+    ENV['SELENIUM'] = '1'
+    cmd = "cd #{engine} && bundle exec rspec"; puts cmd; system cmd
+  end
 end
 
 desc "Generates a dummy app for testing for every GAKU engine"

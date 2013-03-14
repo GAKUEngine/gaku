@@ -3,6 +3,8 @@ module Gaku
 
     has_many :students
 
+    translates :name
+
     attr_accessible :name
 
     validates :name, presence: true

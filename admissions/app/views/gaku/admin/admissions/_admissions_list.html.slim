@@ -8,7 +8,7 @@
         = th t(:'admissions.reg_date')
         = th t(:'admission_phases.singular')
         = th t(:'students.status')
-        = th_actions 140
+        = th_actions 2
     tbody
       = render :partial => 'gaku/admin/admissions/admission', :collection => admission_method.admissions, :as => 'admission', :locals => {:admission_method => admission_method}
 - else

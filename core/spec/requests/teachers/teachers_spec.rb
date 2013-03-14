@@ -68,6 +68,11 @@ describe 'Teachers' do
         flash_updated?
       end
 
+      it 'has validations' do
+        fill_in 'teacher_surname', with: ''
+        has_validations?
+      end
+
       it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
@@ -98,6 +103,11 @@ describe 'Teachers' do
         flash_updated?
       end
 
+      it 'has validations' do
+        fill_in 'teacher_surname', with: ''
+        has_validations?
+      end
+
       it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
@@ -118,6 +128,14 @@ describe 'Teachers' do
       page.should_not have_content "#{teacher2.name}"
       within(count_div) { page.should_not have_content 'Teachers list(#{teacher_count - 1})' }
       current_path.should eq gaku.teachers_path
+    end
+
+    context "when select back btn" do
+      it 'returns to index view' do
+        visit gaku.teacher_path(teacher2)
+        click_on('Back')
+        page.current_path.should eq gaku.teachers_path
+      end
     end
 
   end

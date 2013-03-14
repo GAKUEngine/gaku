@@ -8,10 +8,21 @@ module Gaku
     include FormHelper
     include ModalHelper
     include HtmlHelper
+    include PersonHelper
 
     def count_div(html_class, &block)
       content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
         block.call
+      end
+    end
+
+
+
+    def can_edit?
+      if controller.action_name == "show" and controller.controller_name == "students"
+        false
+      else
+        true
       end
     end
 
@@ -23,12 +34,28 @@ module Gaku
       Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
     end
 
+    def enrollment_statuses_inline
+      enrollment_status_types = []
+      EnrollmentStatus.all.each do |e|
+        enrollment_status_types << {value: e.id, text: e.name}
+      end
+      enrollment_status_types.to_json.html_safe
+    end
+
     def class_groups
       Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
     end
 
     def commute_method_types
       Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types_inline
+      commute_method_types = []
+      CommuteMethodType.all.each do |e|
+        commute_method_types << {value: e.id, text: e.name}
+      end
+      commute_method_types.to_json.html_safe
     end
 
     def syllabuses
@@ -40,11 +67,25 @@ module Gaku
     end
 
     def courses
-      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+      Gaku::Course.all.collect do |c|
+        if c.syllabus_name
+          ["#{c.syllabus_name}-#{c.code}", c.id]
+        else
+          ["#{c.code}", c.id]
+        end
+      end
     end
 
     def scholarship_statuses
       Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+    end
+
+    def scholarship_statuses_inline
+      scholarship_statuses = []
+      ScholarshipStatus.all.each do |e|
+        scholarship_statuses << {value: e.id, text: e.name}
+      end
+      scholarship_statuses.to_json.html_safe
     end
 
     def contact_types
@@ -143,9 +184,13 @@ module Gaku
 
     def student_specialties_list(student_specialties)
       string = String.new
-      student_specialties.ordered.each_with_index do |student_specialty, i|
-        string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
-        string.concat ", " unless i == student_specialties.count - 1
+      if student_specialties.any?
+        student_specialties.each_with_index do |student_specialty, i|
+          string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
+          string.concat ", " unless i == student_specialties.count - 1
+        end
+      else
+        string.concat "Empty"
       end
       string.html_safe
     end
@@ -162,19 +207,31 @@ module Gaku
     end
 
     def achievements_show(achievements)
-      content_tag_for :span, achievements do |achievement|
-        concat achievement.to_s
-        concat String.new ' '
-        concat resize_image(achievement.badge, :size => 22)
-        concat ', ' unless achievement.equal? achievements.last
+      string = String.new
+      if achievements.any?
+        achievements.each do |achievement|
+          string.concat achievement.to_s
+          string.concat String.new ' '
+          #string.concat resize_image(achievement.badge, :size => 22)
+          string.concat ', ' unless achievement.equal? achievements.last
+        end
+      else
+        string.concat 'Empty'
       end
+      string.html_safe
     end
 
     def simple_grades_show(simple_grades)
-      content_tag_for :span, simple_grades do |simple_grade|
-        concat "#{simple_grade} (#{simple_grade.grade})"
-        concat ', ' unless simple_grade.equal? simple_grades.last
+      string = String.new
+      if simple_grades.any?
+        simple_grades.each do |simple_grade|
+          string.concat "#{simple_grade.name} (#{simple_grade.grade})"
+          string.concat ', ' unless simple_grade.equal? simple_grades.last
+        end
+      else
+        string.concat "Empty"
       end
+      string.html_safe
     end
 
 

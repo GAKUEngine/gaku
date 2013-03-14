@@ -6,7 +6,7 @@ div class="#{@resource_name.pluralize}"
       = count_div "#{@resource_name.pluralize}-count" do
         = print_count nested_resources.last.contacts.count, t_contact_list
     .pull-right
-      = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, :id => "new-#{@resource_name}-link"
+      = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, :id => "new-#{@resource_name}-link" if can_edit?
 
   = hr
 
@@ -19,6 +19,6 @@ div class="#{@resource_name.pluralize}"
           = th t(:'contact.data')
           = th t(:'contact.details')
           = th t(:'contact.emergency')
-          = th_actions 2
+          = th_actions 2 if can_edit?
       tbody
         = render :partial => 'gaku/contacts/contact', :collection => nested_resources.last.contacts, :as => :contact, :locals => {:nested_resources => nested_resources}

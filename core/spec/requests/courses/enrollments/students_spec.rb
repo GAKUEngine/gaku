@@ -5,7 +5,7 @@ describe "CourseEnrollment"  do
   as_admin
 
   let(:course) { create(:course) }
-  let(:student) { create(:student, :name => "John", :surname => "Doe") }
+  let(:student1) { create(:student, :name => "John", :surname => "Doe") }
 
   before :all do
     set_resource "course-student"
@@ -14,7 +14,7 @@ describe "CourseEnrollment"  do
   context 'student', :js => true do
 
     before do
-      student
+      student1
       visit gaku.course_path(course)
     end
 
@@ -22,16 +22,7 @@ describe "CourseEnrollment"  do
       click new_link
       wait_until_visible modal
       expect do
-        find(:css, "input#student-#{student.id}").set(true)
-        wait_until { find('#students-checked-div').visible? }
-        within('#students-checked-div') do
-          page.should have_content('Chosen students(1)')
-          click_link('Show')
-          wait_until { find('#chosen-table').visible? }
-          page.should have_content("#{student.name}")
-          click_button 'Enroll to course'
-        end
-        wait_until_invisible modal
+        enroll_one_student_via_button('Enroll to course')
       end.to change(Gaku::CourseEnrollment, :count).by 1
 
       within(table){
@@ -47,26 +38,19 @@ describe "CourseEnrollment"  do
     end
 
     it "enrolls student only once"  do
-      course.students << student
+      course.students << student1
       visit gaku.course_path(course)
 
-      page.should have_content("#{student.name}")
+      page.should have_content("#{student1.name}")
       course.students.size.should eq 1
 
       click new_link
       wait_until_visible modal
-      within('tr#student-' + student.id.to_s) do
+      within('tr#student-' + student1.id.to_s) do
         page.should have_selector("img.enrolled")
       end
     end
 
-    it 'cancels enrolling', :cancel => true do
-      click new_link
-      wait_until_visible modal
-
-      click '.cancel-link'
-      wait_until_invisible modal
-    end
   end
 
 end

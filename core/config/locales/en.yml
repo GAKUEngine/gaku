@@ -1,4 +1,5 @@
 en:
+  sex: Sex
   teacher:
     list: Teachers list
     new: New Teacher
@@ -117,9 +118,10 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
+  sex_and_birth: Sex/Birth Date
   birth: Birth Date
-  birth_and: and
-  birth_between: Birth date between
+  birth_date_from: Birth date(from)
+  birth_date_to: Birth date(to)
   birth_date: Birth Date
   campus:
     add: Add Campus
@@ -208,7 +210,7 @@ en:
     list: Contacts list
     new: New Contact
     plural: Contacts
-    primary: Primary
+    primary: Primary Contact
     save: Save Contact
     singular: Contact
   contact_type:
@@ -323,6 +325,7 @@ en:
       signed_up_but_unconfirmed: This account has not been confirmed
       update_needs_confirmation: Registration update needs confirmation
       updated: You updated your account successfully.
+      admin_set_up: This is the first time you are running this application. Please set up admin user.
     sessions:
       remember_me: Remember me
       sign_in: Sign in
@@ -518,6 +521,7 @@ en:
         exam: Exam Disposals
         student_address: Student Addresses Disposals
       preset:
+        pagination: Pagination Preset
         grading:
           grading_method: Grading Method
           grading_scheme: Grading Scheme
@@ -602,6 +606,10 @@ en:
     change: Change picture
     upload: Upload
   preset:
+    pagination: Pagination
+    per_page:
+      default: Default Per Page
+      changes: Changes Per Page
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme

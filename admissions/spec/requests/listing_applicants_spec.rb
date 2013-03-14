@@ -12,7 +12,7 @@ describe 'Admin Listing Applicants' do
   context 'lists applicants and', js:true do
 
     before do
-      @admission = create(:admission, 
+      @admission = create(:admission,
                           student_id: student.id)
       student.admission = @admission
       student.save!
@@ -25,18 +25,7 @@ describe 'Admin Listing Applicants' do
 
     it 'edits applicants' do
       click '.edit-link'
-      wait_until_visible modal
-      fill_in 'student_name', with: 'Martina'
-      click_on 'Save Student'
-      wait_until_invisible modal
-      page.should have_content 'Martina'
-      visit gaku.listing_applicants_admin_admissions_path
-      page.should have_content 'Martina'
-    end
-
-    it 'shows applicants' do
-      click '.show-link'
-      current_path.should eq "/admin/students/1"
+      current_path.should eq "/admin/students/1/edit"
       page.should have_content "#{student.name}"
     end
 
@@ -57,15 +46,13 @@ describe 'Admin Listing Applicants' do
     end
 
     context 'deleting applicant' do
-      
+
       before do
-        click '.show-link'
-        current_path.should eq "/admin/students/1"
-        page.should have_content "#{student.name}"
+        click '.edit-link'
         click '#delete-student-link'
         within(modal) { click_on "Delete" }
         accept_alert
-        wait_for_ajax
+        #wait_for_ajax
         student.reload
       end
 
@@ -108,7 +95,7 @@ describe 'Admin Listing Applicants' do
         click delete_link
         accept_alert
         page.should_not have_content "#{student.name}"
-        student.reload
+        #student.reload
         visit gaku.students_admin_disposals_path
         page.should_not have_content "#{student.name}"
         visit gaku.listing_applicants_admin_admissions_path

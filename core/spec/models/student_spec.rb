@@ -30,7 +30,7 @@ describe Gaku::Student do
     it { should have_many :external_school_records }
     it { should have_many :simple_grades }
 
-    it { should belong_to :commute_method }
+    it { should belong_to :commute_method_type }
     it { should belong_to :user }
     it { should belong_to :scholarship_status }
     it { should belong_to :enrollment_status }

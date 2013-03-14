@@ -1,0 +1,30 @@
+.row-fluid
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a#student-addresses-tab-link data-toggle="tab" href="#addresses"
+            = print_count @student.addresses.count, t(:'address.plural')
+        li
+          a#student-contacts-tab-link data-toggle="tab" href="#contacts"
+            = print_count @student.contacts.count, t(:'contact.plural')
+        li
+          a#student-notes-tab-link data-toggle="tab" href="#notes"
+            = print_count @student.notes.count, t(:'note.plural')
+        li
+          a#student-guardians-tab-link data-toggle="tab" href="#guardians"
+            = print_count @student.guardians.count, t(:'guardian.plural')
+        li
+          a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
+            = print_count @student.courses.count, t('course.plural')
+      .tab-content
+        #addresses.tab-pane.active
+          = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@student]}
+        #contacts.tab-pane
+          = render 'gaku/contacts/contacts', :nested_resources => [@student]
+        #notes.tab-pane
+          = render :partial => 'gaku/notes/notes'
+        #guardians.tab-pane
+          = render :partial => 'gaku/students/guardians/guardians'
+        #courses.tab-pane
+          = render :partial => 'gaku/students/course_enrollments/course_enrollments'

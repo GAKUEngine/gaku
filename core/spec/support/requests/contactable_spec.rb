@@ -1,13 +1,13 @@
 shared_examples_for 'new contact' do
 
-  it { has_validations? }
-  
   context 'new' do
-    
+
     before do
       click new_link
-      wait_until_visible submit  
+      wait_until_visible submit
     end
+
+    it { has_validations? }
 
     it "adds and shows" do
       expect do
@@ -20,8 +20,12 @@ shared_examples_for 'new contact' do
 
       page.should have_content "The contact data"
       page.should have_content "The contact details"
-      within(count_div) { page.should have_content 'Contacts list(1)' }
       flash_created?
+      within(count_div) { page.should have_content 'Contacts list(1)' }
+      if page.has_css?(tab_link)
+        within(tab_link)  { page.should have_content 'Contacts(1)' }
+      end
+
     end
 
     it 'cancels creating', :cancel => true do
@@ -29,11 +33,11 @@ shared_examples_for 'new contact' do
     end
 
   end
-  
+
 end
 
 shared_examples_for 'edit contact' do
-  
+
   before do
     within(table) { click edit_link }
     wait_until_visible modal
@@ -48,8 +52,19 @@ shared_examples_for 'edit contact' do
     flash_updated?
   end
 
+  it 'errors without required fields', js:true do
+    fill_in 'contact_data',  :with => ''
+
+    has_validations?
+  end
+
   it 'cancels editting', :cancel => true do
     ensure_cancel_modal_is_working
+  end
+
+  it 'errors without required fields', js:true do
+    fill_in 'contact_data', :with => ''
+    has_validations?
   end
 
 end
@@ -66,9 +81,12 @@ shared_examples_for 'delete contact' do
       ensure_delete_is_working
     end.to change(@data.contacts, :count).by -1
 
-    within(count_div) { page.should_not have_content 'Contacts list(1)' }
-    page.should_not have_content contact_field
     flash_destroyed?
+    within(count_div) { page.should_not have_content 'Contacts list(1)' }
+    if page.has_css?(tab_link)
+      within(tab_link)  { page.should_not have_content 'Contacts(1)' }
+    end
+    page.should_not have_content contact_field
   end
 
 end

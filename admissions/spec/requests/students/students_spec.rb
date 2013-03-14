@@ -14,17 +14,17 @@ describe 'Students in admissions' do
   end
 
   context "existing", js:true do
-    
+
     before do
       student
       student2
       student3
-      visit gaku.admin_student_path(id:student.id)
+      visit gaku.edit_admin_student_path(student)
 
     end
 
     context 'when select edit btn' do
-      
+
       before do
         click edit_link
         wait_until_visible modal
@@ -35,6 +35,7 @@ describe 'Students in admissions' do
         fill_in "student_name",    with: "Marta"
         click submit
         wait_until_invisible modal
+
         page.should have_content "Kostova"
         page.should have_content "Marta"
         student.reload
@@ -60,21 +61,13 @@ describe 'Students in admissions' do
     context 'avatarable' do
 
       before { @file_name = 'student_picture' }
-      it_behaves_like 'avatarable'  
-      
-    end
-    
+      it_behaves_like 'avatarable'
 
-    context 'shows notes' do
-      
     end
 
-    context 'shows addresses' do
-      
-    end
 
     context 'shows guardians' do
-      
+
     end
   end
 end
