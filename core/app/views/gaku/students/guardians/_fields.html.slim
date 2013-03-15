@@ -1,5 +1,15 @@
-= render 'gaku/shared/fields/person_show_table', :person => guardian
+- present guardian do |guardian_presenter|
+  = render 'gaku/shared/fields/person_show_table', :person => guardian
 
-tr
-  th = t(:'guardian.relationship')
-  td.vm-tc style="font-size:12pt" = guardian.relationship
+  tr
+    th = t(:'contact.primary')
+    td = guardian_presenter.primary_contact
+
+  tr
+    th = t(:'address.primary')
+    td = guardian_presenter.primary_address
+
+
+  tr
+    th = t(:'guardian.relationship')
+    td.vm-tc style="font-size:12pt" = guardian.relationship

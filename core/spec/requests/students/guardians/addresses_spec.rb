@@ -21,10 +21,7 @@ describe 'Student Guardian Addresses' do
     before do
       country
       student.guardians << guardian
-      visit gaku.edit_student_path(student)
-      click "#student-guardians-tab-link"
-      wait_until { page.has_content? 'Guardians list' }
-      click edit_link
+      visit gaku.edit_student_guardian_path(student, guardian)
     end
 
     it_behaves_like 'new address'

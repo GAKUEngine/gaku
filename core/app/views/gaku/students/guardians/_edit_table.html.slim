@@ -2,6 +2,6 @@
   = show_table do
     caption
       h2
-        = link_to edit_person_caption(@guardian), [:edit, @student, @guardian], :remote => true, :class => 'edit-link'
+        = link_to edit_person_caption(@guardian), [:edit, @student, @guardian], :remote => true
     tbody
       = render 'fields', :guardian => @guardian

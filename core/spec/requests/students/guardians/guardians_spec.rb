@@ -59,7 +59,7 @@ describe 'Student Guardians' do
     context 'edit', :js => true do
       before do
         visit gaku.edit_student_guardian_path(student, guardian)
-        click edit_link
+        click '#edit-modal'
         wait_until_visible modal
       end
 

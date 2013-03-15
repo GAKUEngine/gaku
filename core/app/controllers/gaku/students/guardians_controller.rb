@@ -9,6 +9,7 @@ module Gaku
     respond_to :js, :html
 
     before_filter :student
+    before_filter :guardian, :only => :update
     before_filter :count, :only => [:create,:destroy]
 
     def create
@@ -16,6 +17,17 @@ module Gaku
         if @student.guardians << @guardian
           format.js { render }
         end
+      end
+    end
+
+    def update
+      super do |format|
+        if params[:guardian][:picture]
+          format.html { redirect_to [:edit, student, guardian], :notice => t('notice.uploaded', :resource => t('picture')) }
+        else
+          format.js { render }
+          format.json { head :no_content }
+         end
       end
     end
 

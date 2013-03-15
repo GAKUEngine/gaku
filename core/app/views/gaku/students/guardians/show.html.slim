@@ -1,8 +1,12 @@
 = well_div do
-  = show_table do
-    = person_caption @guardian
-    tbody
-      = render 'fields', :guardian => @guardian
+  .span9#guardian-table
+    = show_table do
+      = person_caption @guardian
+      tbody
+        = render 'fields', :guardian => @guardian
+  .span3.well
+    = render :partial => 'picture', :locals => { :guardian => @guardian, :student => @student }
+
 
 = render 'tabs', :guardian => @guardian
 
