@@ -20,10 +20,10 @@ commute_method_types = [
 
 commute_method_types.each do |type|
   I18n.locale = :en
-  commute_method_type = Gaku::CommuteMethodType.where(:name => type[0]).first_or_create!
+  commute_method_type = Gaku::CommuteMethodType.find_or_create_by_name(type[0])
 
   I18n.locale = :ja
-  commute_method_type.update_attribute(:name,  type[1])
+  commute_method_type.update_attributes(:name => type[1])
 end
 
 I18n.locale = nil

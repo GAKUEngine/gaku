@@ -21,11 +21,11 @@
 #end
 
 def add_states_to_phase(phase_states, phase)
-phase_states.each do |state_data|
-  phase_state = Gaku::AdmissionPhaseState.create(state_data) 
-  phase.admission_phase_states << phase_state
-end
-phase.save
+  phase_states.each do |state_data|
+    phase_state = Gaku::AdmissionPhaseState.create(state_data) 
+    phase.admission_phase_states << phase_state
+  end
+  phase.save
 end
 
 def create_sample_admission_method(method_args, phase_array)
@@ -43,13 +43,11 @@ def create_sample_admission_method(method_args, phase_array)
         phase.exam.exam_portions << exam_portion
       end
     end
-    add_states_to_phase(phase_info[:states], phase)
-    phase.save!
+    if phase.save
+      add_states_to_phase(phase_info[:states], phase)
+    end
   end
-
-  # Save the method
-  method.save!
-
+  method.save
   return method
 end
 
