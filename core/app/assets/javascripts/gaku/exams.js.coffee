@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $('.exam-portion-weight').on 'blur', ->
+  $('.exam-portion-weight').on 'change', ->
     $(@).parent('form').submit()
 
 # $(document).ready ->

@@ -53,13 +53,12 @@ module Gaku
     end
 
     def init_weight
-      if self.weight.nil? && self.weight.try(:zero?)
+      if self.weight.nil?
         other_ep = exam.exam_portions
         percentage = 100 / (other_ep.count + 1)
         self.weight = percentage
         other_ep.update_all :weight => percentage
       end
-
     end
 
     def student_score(student)
