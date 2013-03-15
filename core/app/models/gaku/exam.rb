@@ -88,7 +88,6 @@ module Gaku
     private
 
     def check_record_completion?(student_eps)
-      logger.debug "SCORE IS #{student_eps.score.nil? && !student_eps.attendances.last.try(:attendance_type).try(:auto_credit)}"
       student_eps.score.nil? && !student_eps.attendances.last.try(:attendance_type).try(:auto_credit)
     end
   end
