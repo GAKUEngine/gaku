@@ -40,7 +40,8 @@ module Gaku
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
           :attendances => @student_portion_attendance.as_json(:root => true),
-          :path_to_exam => @path_to_exam.to_json
+          :path_to_exam => @path_to_exam.to_json,
+          :completion => @completion
         }}
         format.html { render "gaku/exams/grading" }
       end
