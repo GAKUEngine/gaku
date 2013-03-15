@@ -52,6 +52,15 @@ module Gaku
       button_tag(content_tag('span', text), attributes)
     end
 
+    def ajax_link_to_recovery(resource, options = {})
+      name = content_tag(:i, nil, :class => 'icon-white icon-repeat')
+      attributes = {
+        :remote => true,
+        :class => "mr-xs btn btn-mini btn-warning recovery-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
     def ajax_link_to_delete(resource, options = {})
       name = ("<i class='icon-white icon-remove'></i>").html_safe
       attributes = {
