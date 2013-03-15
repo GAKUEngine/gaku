@@ -32,9 +32,18 @@ def create_sample_admission_method(method_args, phase_array)
   method = Gaku::AdmissionMethod.where(method_args).first_or_create!
   phase_array.each do |phase_info|
     phase = method.admission_phases.build(phase_info[:args])
-    phase.exam = Gaku::Exam.where(phase_info[:exam]).first_or_create! if phase_info[:exam]
+    if phase_info[:exam]
+      exam = Gaku::Exam.where(phase_info[:exam]).first_or_create!
+      phase.exam = exam
+      phase.save!
+      phase_info[:exam_portions].each do |portion|
+        exam_portion = Gaku::ExamPortion.where(portion).build
+        exam_portion.exam_id = phase.exam.id
+        exam_portion.save!
+        phase.exam.exam_portions << exam_portion
+      end
+    end
     add_states_to_phase(phase_info[:states], phase)
-    method.admission_phases << phase
     phase.save!
   end
 
@@ -64,7 +73,8 @@ regular_method = create_sample_admission_method(
       ]
     },{
       args: { name: "Exam", position: 2 },
-      exam: { name: "Summer Program Entry", use_weighting: false },
+      exam: { name: "Summer Program Entry", use_weighting: true, weight: 100},
+      exam_portions: [{name: "exam", max_score: 100, weight: 100, problem_count: 1}],
       states: [
         { name: "Pre-Exam" },
         { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
