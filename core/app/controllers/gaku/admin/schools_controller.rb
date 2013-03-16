@@ -12,10 +12,11 @@ module Gaku
 
       def school_details
         @school = @master_school
-        render :show
+        render 'show', :layout => 'gaku/layouts/show'
       end
 
       def edit_master
+        render 'edit_master', :layout => 'gaku/layouts/show'
       end
 
       def update
