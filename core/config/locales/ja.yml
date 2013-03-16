@@ -69,6 +69,7 @@ ja:
     new: アセットの登録
     plural: 添付ファイル
     singular: 添付ファイル
+    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: 出席類を追加
     auto_credit: 点数の自動計算

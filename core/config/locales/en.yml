@@ -103,6 +103,7 @@ en:
     plural: Attachments
     singular: Attachment
     save: Save Attachment
+    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
