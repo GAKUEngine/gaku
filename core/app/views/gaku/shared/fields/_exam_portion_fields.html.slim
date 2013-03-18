@@ -2,7 +2,7 @@ td class='sort-handler'
   i class='icon-move'
 td = exam_portion.name
 td = exam_portion.max_score
-  - if @exam.use_weighting
-td = exam_portion.weight
+- if @exam.use_weighting
+  td = exam_portion.weight
 td = exam_portion.problem_count
 td = exam_portion.attachments.count

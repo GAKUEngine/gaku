@@ -25,12 +25,12 @@ $ ->
     event.preventDefault()
     $('.show-chosen-table').hide()
     $('.hide-chosen-table').show()
-    $('#chosen-table').show()
-    $('#chosen-actions').show()
+    $('#chosen-table').slideToggle()
+    $('#chosen-actions').slideToggle()
 
   $('body').on 'click', '.hide-chosen-table', (event) ->
     event.preventDefault()
     $('.hide-chosen-table').hide()
     $('.show-chosen-table').show()
-    $('#chosen-table').hide()
-    $('#chosen-actions').hide()
+    $('#chosen-table').slideToggle()
+    $('#chosen-actions').slideToggle()

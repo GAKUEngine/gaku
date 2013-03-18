@@ -406,6 +406,7 @@ en:
     completion: Completion
     grading_completion: Grading Completion
   exam_portion:
+    attached_file_count: Attachments
     adjustments: Adjustments
     attached_file_count: Attached file count
     count: Exam portions count
