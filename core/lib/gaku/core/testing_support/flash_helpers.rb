@@ -23,6 +23,10 @@ module Gaku
           flash? 'successfully recovered'
         end
 
+        def flash_uploaded?
+          flash? 'successfully uploaded'
+        end
+
         def flash_error_for(field)
           page.should have_selector("div.#{field}formError")
         end
