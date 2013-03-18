@@ -10,7 +10,7 @@ module Gaku
 
     accepts_nested_attributes_for :admission_phase_states, :allow_destroy => true
 
-    validates :name, presence: true
+    validates :name, presence: true, :uniqueness => {:scope => :admission_method_id}
     validates :admission_method, presence: true
 
     before_create :proper_position

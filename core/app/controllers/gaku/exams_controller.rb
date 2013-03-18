@@ -47,7 +47,8 @@ module Gaku
 
       @path_to_exam = course_path(:id => params[:course_id])
 
-      # raise @completion.inspect
+      #exam_portions need reload to properly include exam_portion_score in as_json
+      @exams.each { |exam| exam.exam_portions.reload }
 
       respond_to do |format|
         format.json { render :json => {

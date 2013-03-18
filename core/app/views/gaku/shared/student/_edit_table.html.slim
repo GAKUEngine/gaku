@@ -1,13 +1,20 @@
 - present student do |student_presenter|
   = show_table_for 'student-index' do
 
-    = person_caption student
+    caption
+      h2
+        a#name.editable href="#" data-resource="student"  data-name="name" data-type="text" data-url="#{student_path(student.id)}"
+          ruby
+            = student
+            rt
+              = student.phonetic_reading
 
     tbody
       tr
         th.btn-c1 width="20%" = t('class')
-        td#student-class-group-enrollment
-          = student_presenter.class_group
+        td
+          = link_to student_presenter.class_group, [:new, @student, :class_group_enrollment], { :id => 'class-group', :remote => true }
+
 
       = render 'gaku/shared/fields/person_edit_table', :person => student
 
@@ -54,4 +61,4 @@ javascript:
   $('#enrollment-status').inline_select(#{ enrollment_statuses_inline });
   $('#scholarship-status').inline_select(#{ scholarship_statuses_inline });
   $('#birth_date').inline_date();
-
+  $('#name').editable();
