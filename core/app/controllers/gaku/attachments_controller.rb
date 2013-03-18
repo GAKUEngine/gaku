@@ -5,6 +5,7 @@ module Gaku
 		actions :index, :show, :new, :create, :update, :edit, :destroy
 		before_filter :unscoped_attachment, :only => [:recovery, :destroy]
 
+		 # TODO: merge and refactor two controllers
 		def create
 			@attachable = find_attachable
 			@attachment = @attachable.attachments.build(params[:attachment])
@@ -30,7 +31,10 @@ module Gaku
 		def soft_delete
 			@attachment = Attachment.find(params[:id])
 			@attachment.update_attribute(:is_deleted, true)
-			render :nothing => true
+			flash.now[:notice] = t('notice.destroyed', :resource => t('attachment.singular'))
+			respond_to do |format|
+				format.js { render 'soft_delete' }
+			end
 		end
 
 		def download

@@ -3,7 +3,7 @@
 		#new-exam-exam-portion-attachment.hide
     .pull-left
 	    = count_div 'exam-exam-portion-attachment-count' do
-	      = print_count @attachments_count, t(:'attachment.list')
+	      = print_count @exam_portion.attachments.count, t(:'attachment.list')
     .pull-right
 	    = ajax_link_to_new t(:'attachment.new'), [:new, @exam, @exam_portion, :attachment], :id => "new-exam-exam-portion-attachment-link"
 
