@@ -8,7 +8,7 @@ $ ->
       name = $(this).closest('tr').find('td.name').text()
       $('#students-checked').append("<tr class=" + thisId + "><td>" + surname + "</td><td>" + name + "</td></tr>")
       $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
-      $('#students-checked-div').slideDown()
+      $('#students-checked-div').slide()
       chosen_trs = $('#chosen-table').find('tbody tr')
       $('.chosen-count').html('(' + chosen_trs.length + ')')
     else
@@ -16,7 +16,7 @@ $ ->
       $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find('input.' + thisId).remove()
 
       if $('#students-checked tr').length == 0
-        $('#students-checked-div').slideUp()
+        $('#students-checked-div').slide()
       else
         chosen_trs = $('#chosen-table').find('tbody tr')
         $('.chosen-count').html('(' + chosen_trs.length + ')')
@@ -25,12 +25,12 @@ $ ->
     event.preventDefault()
     $('.show-chosen-table').hide()
     $('.hide-chosen-table').show()
-    $('#chosen-table').slideToggle()
-    $('#chosen-actions').slideToggle()
+    $('#chosen-table').slide()
+    $('#chosen-actions').slide()
 
   $('body').on 'click', '.hide-chosen-table', (event) ->
     event.preventDefault()
     $('.hide-chosen-table').hide()
     $('.show-chosen-table').show()
-    $('#chosen-table').slideToggle()
-    $('#chosen-actions').slideToggle()
+    $('#chosen-table').slide()
+    $('#chosen-actions').slide()
