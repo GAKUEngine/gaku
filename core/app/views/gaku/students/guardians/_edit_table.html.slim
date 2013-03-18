@@ -1,7 +1,14 @@
-= well_div do
-  = show_table do
-    caption
-      h2
-        = link_to edit_person_caption(@guardian), [:edit, @student, @guardian], :remote => true
-    tbody
-      = render 'fields', :guardian => @guardian
+
+= show_table_for 'guardian-index' do
+  caption
+    h2
+      = link_to edit_person_caption(@guardian), [:edit, @student, @guardian], :remote => true
+  tbody
+    = render 'gaku/shared/fields/person_edit_table', :person => guardian
+
+    tr
+      th width="20%" = t(:'guardian.relationship')
+      td.vm-tc style="font-size:12pt" = guardian.relationship
+
+javascript:
+  $('#birth_date').inline_date();

@@ -3,7 +3,7 @@
     = show_table do
       = person_caption @guardian
       tbody
-        = render 'fields', :guardian => @guardian
+        = render 'show_table', :guardian => @guardian
   .span3.well
     = render :partial => 'picture', :locals => { :guardian => @guardian, :student => @student }
 

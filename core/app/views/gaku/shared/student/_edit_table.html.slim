@@ -7,7 +7,7 @@
 
     tbody
       tr
-        th.btn-c1 width="20%" = t('class')
+        th width="20%" = t(:'class')
         td
           = link_to student_presenter.class_group, [:new, @student, :class_group_enrollment], { :id => 'class-group', :remote => true }
 
@@ -15,7 +15,7 @@
       = render 'gaku/shared/fields/person_edit_table', :person => student
 
       tr
-        th.btn-c2 = t(:'admitted')
+        th = t(:'admitted')
         td#admitted
           = student.admitted
 
