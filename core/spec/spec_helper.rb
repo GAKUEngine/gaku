@@ -33,24 +33,27 @@ Spork.each_run do
   RSpec.configure do |config|
     config.mock_with :rspec
 
+    config.before(:all) do
+      DeferredGarbageCollection.start
+    end
+
     config.before(:each) do
       if example.metadata[:js]
         DatabaseCleaner.strategy = :truncation
       else
         DatabaseCleaner.strategy = :transaction
       end
-    end
 
-    config.before(:each) do
       DatabaseCleaner.start
+      @routes = Gaku::Core::Engine.routes
     end
 
     config.after(:each) do
       DatabaseCleaner.clean
     end
 
-    config.before(:each) do
-      @routes = Gaku::Core::Engine.routes
+    config.after(:all) do
+      DeferredGarbageCollection.reconsider
     end
 
     config.use_transactional_fixtures = false
