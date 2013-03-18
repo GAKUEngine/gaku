@@ -68,9 +68,8 @@ en:
     name: Name
     new: New Attachment
     plural: Attachments
-    singular: Attachment
     save: Save Attachment
-    attachment_recovered: Asset was successfully recovered!
+    singular: Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
