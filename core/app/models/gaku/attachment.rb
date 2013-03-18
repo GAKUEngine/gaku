@@ -9,8 +9,8 @@ module Gaku
 
     has_attached_file :asset
 
+    validates_associated :attachable, :message => I18n.t(:'attachment.associated')
     validates_presence_of :name
-    validates_presence_of :attachable
     validates_attachment :asset, presence: true
   end
 end

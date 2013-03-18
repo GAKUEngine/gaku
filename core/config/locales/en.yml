@@ -103,6 +103,7 @@ en:
     plural: Attachments
     singular: Attachment
     save: Save Attachment
+    associated: Attachable are not present
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
