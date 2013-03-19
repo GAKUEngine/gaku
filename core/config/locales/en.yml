@@ -100,6 +100,7 @@ en:
     list: Attachments list
     name: Name
     new: New Attachment
+    edit: Edit Attachment
     plural: Attachments
     singular: Attachment
     save: Save Attachment
