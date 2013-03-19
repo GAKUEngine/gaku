@@ -59,6 +59,7 @@ pt-BR:
     asset_type: 
     asset_upload: 
     assets: 
+    associated: 
     create: Criar Anexo
     description: Descrição
     file_name: Nome do arquivo

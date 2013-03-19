@@ -59,6 +59,7 @@ bg:
     asset_type: Тип на файла.
     asset_upload: Файлът беше качен успешно!
     assets: Файлове
+    associated: 
     create: Качи Файл
     description: Описание
     file_name: Име на файла

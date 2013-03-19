@@ -59,6 +59,7 @@ en:
     asset_type: Asset type
     asset_upload: Asset was uploaded successfully!
     assets: Assets
+    associated: No attachable files are present.
     create: Create Attachment
     description: Description
     file_name: File name

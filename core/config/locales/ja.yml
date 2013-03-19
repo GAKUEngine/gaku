@@ -59,6 +59,7 @@ ja:
     asset_type: アセットの種類
     asset_upload: アセットのアップロードに成功しました!
     assets: アセット
+    associated: 添付出来るファイルがありません。
     create: アセットを登録
     description: アセット詳細
     file_name: ファイル名
