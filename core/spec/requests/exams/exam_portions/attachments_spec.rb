@@ -54,13 +54,13 @@ describe 'Exam Portion Attachments' do
     end
 
     it 'deletes from index table' do
-      within(count_div) { page.should have_content 'Attachments list(1)' }
+      within(count_div) { page.should have_content 'Attachment list(1)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::Attachment, :count).by -1
 
-      within(count_div) { page.should have_content 'Attachments list' }
+      within(count_div) { page.should have_content 'Attachment list' }
       page.should_not have_content("#{attachment.name}")
       flash_destroyed?
     end
