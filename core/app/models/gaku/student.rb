@@ -92,5 +92,14 @@ module Gaku
       self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end
 
+    def is_active
+      enrollment_status = EnrollmentStatus.find_by_id(self.enrollment_status_id)
+      if enrollment_status
+        enrollment_status.is_active
+      else
+        false
+      end
+    end
+
   end
 end
