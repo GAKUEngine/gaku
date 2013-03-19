@@ -77,12 +77,11 @@ module Gaku
     end
 
     def th_actions(num)
-      if num == 2
-        size = 62
-      elsif num == 3
-        size = 95
-      else
-        size = num
+      size = case num
+      when 1 then 40
+      when 2 then 62
+      when 3 then 95
+      else num
       end
       content_tag :th, class:"btn-info", style:"width:#{size}px" do
         t('manage')

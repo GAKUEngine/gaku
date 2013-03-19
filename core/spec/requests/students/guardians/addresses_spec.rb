@@ -11,7 +11,7 @@ describe 'Student Guardian Addresses' do
   let(:country)  { create(:country, :name => "Japan") }
   let(:bulgaria) { create(:country, :name => "Bulgaria") }
 
-  tab_link = "#student-guardians-tab-link"
+
 
   before :all do
     set_resource "student-guardian-address"
@@ -21,10 +21,7 @@ describe 'Student Guardian Addresses' do
     before do
       country
       student.guardians << guardian
-      visit gaku.edit_student_path(student)
-      click tab_link
-      wait_until { page.has_content? 'Guardians list' }
-      click show_link
+      visit gaku.edit_student_guardian_path(student, guardian)
     end
 
     it_behaves_like 'new address'
@@ -38,13 +35,13 @@ describe 'Student Guardian Addresses' do
         @guardian = create(:guardian_with_one_address)
         @guardian.reload
         student.guardians << @guardian
-        visit gaku.student_guardian_path(student, @guardian)
+        visit gaku.edit_student_guardian_path(student, @guardian)
       end
 
       it_behaves_like 'edit address'
 
       context 'delete' do
-        
+
         before do
           @data = @guardian
         end
@@ -60,7 +57,7 @@ describe 'Student Guardian Addresses' do
         @guardian = create(:guardian_with_two_addresses)
         @guardian.reload
         student.guardians << @guardian
-        visit gaku.student_guardian_path(student, @guardian)
+        visit gaku.edit_student_guardian_path(student, @guardian)
         @data = @guardian
       end
 

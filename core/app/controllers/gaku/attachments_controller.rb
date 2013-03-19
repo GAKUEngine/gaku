@@ -51,7 +51,8 @@ module Gaku
 
 		def recovery
 			@attachment.update_attribute(:is_deleted, false)
-			flash.now[:notice] = t('notice.recovered', :resource => t('attachment.singular'))
+			flash.now[:notice] = t('attachment.attachment_recovered')
+
 			respond_to do |format|
 				format.js { render 'recover_attachment'}
 			end

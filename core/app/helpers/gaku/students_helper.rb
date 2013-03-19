@@ -3,7 +3,7 @@ module Gaku
 
 
     def surname_reading_label
-    	t(:phonetic_reading) + " ("+t(:surname)+")"
+      t(:phonetic_reading) + " ("+t(:surname)+")"
     end
 
     def name_reading_label
@@ -11,11 +11,11 @@ module Gaku
     end
 
     def surname_label
-    	t(:name)+" ("+t(:surname)+")"
+      t(:name)+" ("+t(:surname)+")"
     end
 
     def name_label
-    	t(:name)+" ("+t(:given_name)+")"
+      t(:name)+" ("+t(:given_name)+")"
     end
 
     def address_icon
@@ -38,5 +38,5 @@ module Gaku
       content_tag :i, nil, :class => 'icon-white icon-ok'
     end
 
-	end
+  end
 end

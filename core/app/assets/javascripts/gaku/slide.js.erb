@@ -1,0 +1,14 @@
+
+$.fn.slide = function() {
+  var duration;
+
+  <% if Rails.env.test? %>
+    duration = 5;
+  <% else %>
+    duration = 200;
+  <% end %>
+
+  return $(this).slideToggle({
+    duration: duration
+  });
+};

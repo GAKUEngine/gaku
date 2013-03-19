@@ -29,14 +29,6 @@ module Gaku
       student.simple_grades.map { |s| s.name }.join(', ')
     end
 
-    def primary_address
-      "#{student.primary_address.city}, #{student.primary_address.address1}" if student.primary_address
-    end
-
-    def primary_contact
-      "#{student.primary_contact.contact_type}: #{student.primary_contact.data}" if student.primary_contact
-    end
-
     private
 
     def handle_none(value)

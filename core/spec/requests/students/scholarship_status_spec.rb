@@ -15,7 +15,7 @@ describe 'Student Scholarship Status' do
 
     before do
       visit gaku.edit_student_path(student)
-      within(el) { page.should have_content "Empty"}
+      within(el) { page.should have_content "#{scholarship_status.name}"}
       click el
       wait_until_visible select_box
     end
@@ -23,7 +23,6 @@ describe 'Student Scholarship Status' do
     it 'create and show' do
       within(select_box) {  click_option scholarship_status2 }
 
-      wait_until_invisible select_box
       within(el) { page.should have_content(scholarship_status2.name) }
       student.reload
       student.scholarship_status.should eq scholarship_status2
@@ -46,7 +45,6 @@ describe 'Student Scholarship Status' do
       it 'edits' do
         within(select_box) { click_option scholarship_status2 }
 
-        wait_until_invisible select_box
         within(el) { page.should have_content(scholarship_status2.name) }
         student2.reload
         student2.scholarship_status.should eq scholarship_status2

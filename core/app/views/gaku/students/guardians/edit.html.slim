@@ -1,0 +1,15 @@
+= well_div do
+  .span9#guardian-table
+    = render 'edit_table', :guardian => @guardian
+  .span3.well
+    = render :partial => 'picture', :locals => { :guardian => @guardian, :student => @student }
+
+= render 'tabs', :guardian => @guardian
+
+= well_div do
+  .span5
+    = link_to_edit_with_text [:edit, @student, @guardian], { :class => "span12 btn btn-warning", :id => 'edit-modal', :remote => true }
+  .span5
+    = link_to_back @student, :class => "span12 btn"
+
+#guardians-modal

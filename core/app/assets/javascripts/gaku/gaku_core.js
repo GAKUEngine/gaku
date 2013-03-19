@@ -20,6 +20,8 @@
 //= require jquery.miniColors.min
 //= require jquery_nested_form
 
+//= require gaku/slide.js.erb
+
 //= require gaku/students/selected_students
 //= require gaku/student_chooser
 //= require gaku/syllabuses

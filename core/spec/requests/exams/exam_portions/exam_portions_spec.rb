@@ -23,7 +23,7 @@ describe 'Exam portions' do
         wait_until_visible submit
       end
 
-      pending 'adds a portion' do
+      it 'adds a portion' do
         #exam portions weight total cant be over 100
         expect do
           fill_in "exam_portion_name", :with => 'Ubuntu'
@@ -31,14 +31,13 @@ describe 'Exam portions' do
           click submit
           wait_until_invisible form
         end.to change(exam.exam_portions,:count).by 1
-
+        flash_created?
         within(count_div) { page.should have_content 'Exam portions list(2)' }
         size_of(table_rows).should == 3
         within (table) { page.should have_content "Ubuntu" }
         page.should have_content 'Ubuntu Weight'
         page.should have_content 'Total Weight'
         within('#weight-total') { page.should have_content "200.6" }
-        #TODO flash_created?
       end
 
       it 'cancels adding', :cancel => true do

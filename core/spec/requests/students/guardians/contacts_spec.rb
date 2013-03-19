@@ -9,7 +9,7 @@ describe 'Student Guardian Contacts' do
   let(:guardian) { create(:guardian) }
   let(:contact_type) { create(:contact_type, :name => 'Email') }
 
-  tab_link = "#student-guardians-tab-link"
+  tab_link = "#student-guardian-contacts-tab-link"
 
   before :all do
     set_resource "student-guardian-contact"
@@ -22,9 +22,10 @@ describe 'Student Guardian Contacts' do
       student.guardians << guardian
       visit gaku.edit_student_path(student)
       @data = guardian
-      click tab_link
+      click "#student-guardians-tab-link"
       wait_until { page.has_content? 'Guardians list' }
-      click show_link
+      click edit_link
+      click tab_link
     end
 
     it_behaves_like 'new contact'
@@ -40,7 +41,8 @@ describe 'Student Guardian Contacts' do
         @guardian.reload
         student.guardians << @guardian
         @data = @guardian
-        visit gaku.student_guardian_path(student, @guardian)
+        visit gaku.edit_student_guardian_path(student, @guardian)
+        click tab_link
       end
 
 
@@ -57,7 +59,8 @@ describe 'Student Guardian Contacts' do
         @guardian.reload
         student.guardians << @guardian
         @data = @guardian
-        visit gaku.student_guardian_path(student, @guardian)
+        visit gaku.edit_student_guardian_path(student, @guardian)
+        click tab_link
       end
 
       it_behaves_like 'primary contacts'

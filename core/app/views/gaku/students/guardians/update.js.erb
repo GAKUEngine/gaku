@@ -1,3 +1,4 @@
-$('#guardian-<%= @guardian.id %>').html('<%= render_js_partial("guardian_unit", {:guardian => @guardian}) %>');
-$('#edit-guardian-modal').modal('hide');
+$('#guardian-<%= @guardian.id %>').html('<%= render_js_partial("guardian_unit", {:guardian => @guardian}) %>'); // update from index
+$('#guardian-table').html('<%= render_js_partial("edit_table", {:guardian => @guardian}) %>'); //update from show
+$('.modal').modal('hide');
 showNotice("<%= render_flash %>");

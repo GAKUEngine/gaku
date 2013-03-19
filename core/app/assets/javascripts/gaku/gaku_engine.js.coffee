@@ -87,7 +87,7 @@ $ ->
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id
     $(resource_new_link).show()
-    $(resource_form).slideUp()
+    $(resource_form).slide()
 
   $(document).on 'click', '#cancel-student-commute-method-link', (e) ->
     e.preventDefault()
