@@ -12,10 +12,10 @@
 = table_for 'exams-index' do
   thead
     tr
-    	= th t(:'exam.name')
-    	= th t(:'exam.adjustments')
-    	= th t(:'exam.weight')
-    	= th t(:'exam.use_weighting')
-    	= th_actions 3
-	tbody
-		= render :partial => 'exam',  :as => :exam, :collection => @exams
+      = th t(:'exam.name')
+      = th t(:'exam.adjustments')
+      = th t(:'exam.weight')
+      = th t(:'exam.use_weighting')
+      = th_actions 3
+  tbody
+    = render :partial => 'exam', :as => :exam, :collection => @exams

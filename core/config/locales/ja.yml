@@ -68,8 +68,8 @@ ja:
     name: 名称
     new: アセットの登録
     plural: 添付ファイル
+    save: 添付ファイルを保存
     singular: 添付ファイル
-    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: 出席類を追加
     auto_credit: 点数の自動計算
@@ -89,6 +89,8 @@ ja:
   birth_and: 以下の生年月日まで
   birth_between: 生年月日〜
   birth_date: 生年月日
+  birth_date_from: 生年月日[開始日]
+  birth_date_to: 生年月日[終了日]
   campus:
     add: キャンパスの追加
     address: キャンパスの住所
@@ -114,6 +116,7 @@ ja:
     student_contact:
       list: 生徒連絡先変更履歴
     to: 変更後
+    user: 変更を摘要したユーザ
   class: クラス
   class_group:
     add: クラスを追加
@@ -277,6 +280,9 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
+      admin_set_up: ! '学園陣が初期状態です。
+
+        管理者ユーザを登録して下さい。'
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       inactive_signed_up: サインアップに成功しましたが、%{reason}の為にサインイン出来ません。
       reasons:
@@ -344,10 +350,13 @@ ja:
     adjustments: 調整
     choose: 試験を選択
     choose_schedule: 日程を選択
+    completion: 採点率
     count: 試験数
     description: 試験の説明
     edit: 試験を編集
     exam_score: 試験点数
+    graded: 採点済み
+    grading_completion: 採点済みの割合
     grading_method: 採点方法
     list: 試験一覧
     name: 試験名
@@ -359,7 +368,9 @@ ja:
     select: 試験を選択
     show: 試験照会
     singular: 試験
+    total: 合計
     total_weight: 合計加重率
+    ungraded: 未採点
     use_weighting: 加重率を使用
     view: 試験を照会
     weight: 加重率
@@ -369,6 +380,7 @@ ja:
     count: 試験要素数
     description: 説明
     edit: 試験要素を編集
+    error: 試験の部分の合計が100%を越えてて自動修正が出来ませんでした。正しい数字を入力しなおして下さい。
     execution_date: 実施日
     is_master: マスター
     list: 試験要素一覧
@@ -382,6 +394,28 @@ ja:
     singular: 試験要素
     use_weighting: 加重率を使用
     weight: 加重率
+  external_school_record:
+    absences: 欠席数
+    attendance_rate: 出席率
+    beginning: 開始日
+    data: データ
+    ending: 終了日
+    student_id_number: 生徒番号
+  extracurricular_activity:
+    add: 部活を追加
+    edit: 部活を編集
+    enroll: 部活生を追加
+    list: 部活一覧
+    name: 部活名称
+    new: 新しい部活
+    plural: 部活
+    save: 部活を保存
+    show: 部活の表示
+    singular: 部活
+  extracurricular_activity_enrollment:
+    list: 部活生一覧
+  failure:
+    enrolled: 登録に失敗しました。
   flash:
     actions:
       create:
@@ -414,6 +448,16 @@ ja:
     total_points: 合計点数
     weighting: 加重率
     weighting_portion: 試験要素加重率
+  grading_method:
+    add: 評価法を追加
+    description: 評価法の詳細
+    edit: 評価法を編集
+    list: 評価法一覧
+    method: 評価法
+    name: 評価法名称
+    plural: 評価法
+    save: 評価法の保存
+    singular: 評価法
   graduated: 卒業日
   guardian:
     add: 保護者を追加
@@ -450,27 +494,24 @@ ja:
         student_addresses: 生徒住所
         student_contacts: 生徒連絡先
         students: 生徒
-      users:
-        users_and_roles: Users & Roles
-        users: Users
-        roles: Roles
       disposals:
-        student: Student Disposals
         attachment: 添付ファイルを処分
         course_group: 授業グループを処分
         disposals: 処分
         exam: 試験を処分する
+        student: 生徒情報処分
         student_address: 生徒住所削除一覧
+      grading_methods: 評価法
       preset:
-        pagination: Pagination Preset
         grading:
           grading_method: 採点方法
           grading_scheme: 採点方式
         items:
+          defaults: 初期プリセット
           grading: 採点プリセット
           locale: 言語プリセット
           student: 生徒プリセット
-          defaults: Defaults Preset
+        pagination: ページ分けの設定
         plural: プリセット
         save: プリセットを保存
         singular: プリセット
@@ -482,7 +523,6 @@ ja:
       school_details: 学校詳細
       schools: 学校
       specialties: 専攻
-      grading_methods: Grading Methods
       system:
         backup: バックアップ
         system_tools: システムツール
@@ -492,6 +532,10 @@ ja:
         contact: 連絡先種別
         enrollment_status: 在籍状態
         types: 種別と方法
+      users:
+        roles: 役割
+        users: ユーザ
+        users_and_roles: ユーザと役割
     class_group:
       management: クラス管理
       plural: クラス
@@ -503,14 +547,14 @@ ja:
     exam:
       management: 試験管理
       plural: 試験
+    extracurricular_activity:
+      plural: 部活動
     student:
       plural: 生徒
-    teacher:
-      plural: 教師
-    extracurricular_activity:
-      plural: Extracurriculars
     syllabus:
       plural: 科目
+    teacher:
+      plural: 先生
   name: 名前
   name_reading: フリガナ（名）
   none: 未登録
@@ -550,6 +594,10 @@ ja:
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
+    pagination: ページ分け
+    per_page:
+      changes: ページ当たりの差分
+      default: ページ当たりの件数
     plural: プリセット
     save: プリセットを保存
     singular: プリセット
@@ -564,12 +612,19 @@ ja:
     save: プロフィールを保存
   required: 必須
   revert: 元に戻す
+  role:
+    add: 役割を追加
+    edit: 役割を編集
+    list: 役割一覧
+    name: 役割名
+    save: 役割を保存
   save: 保存
   schedule: 定刻
   scholarship_status: 奨学生
   school:
     add: 学校を追加
     campuses: キャンパス
+    choose: 学校選択
     code: 学校コード
     description: 学校の説明
     edit: 学校を編集
@@ -584,6 +639,7 @@ ja:
     primary: 主要学校
     principal: 学長
     save: 学校を保存
+    show: 学校情報の表示
     singular: 学校
     slogan: 校訓
     vice_principal: 教頭
@@ -600,6 +656,8 @@ ja:
     save: 学期を保存
     starting: 開始
     uniqueness: 既に追加された学期です
+  sex: 性別
+  sex_and_birth: 性別・生年月日
   show: 照会
   simple_grade:
     add: 単体評価を追加
@@ -627,6 +685,7 @@ ja:
     add: 生徒を追加
     birth_and: と
     birth_between: 生年月日〜
+    choose: 生徒を選択して下さい
     chosen_students: 生徒を選択
     class_group_enrollment: クラスに生徒を追加
     commute_method: 通勤手段
@@ -654,6 +713,8 @@ ja:
     index: 専科一覧
     save: 専科を保存
   submit: 登録する
+  success:
+    enrolled: 在籍処理が成功しました。
   surname: 姓
   surname_reading: フリガナ（姓）
   syllabus:
@@ -670,10 +731,20 @@ ja:
     save: 科目を保存
     show: 科目照会
     singular: 科目
-  teacher: 教師
+  teacher:
+    plural: 先生
+    singular: 教師
   title: タイトル
   user:
+    add: ユーザーを追加
+    edit: ユーザーを編集
+    email: Eメール
     info: ユーザー情報
+    list: ユーザ一覧
+    password: パスワード
+    password_confirmation: パスワードの確認
+    save: ユーザを保存
+    username: ユーザ名
   views:
     pagination:
       first: ! '&laquo; 最初'
