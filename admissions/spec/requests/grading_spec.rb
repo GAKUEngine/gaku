@@ -41,12 +41,10 @@ describe 'Admin Admissions Grading' do
     it 'errors with invalid points' do
       fill_in 'portion_score', with: -120 #Max score is 100
       click '.exam-parts' #TODO fix this
-      wait_for_ajax
-      page.has_css? '.score-error'
+      page.should have_css '.score-error'
       fill_in 'portion_score', with: 120
       click '.exam-parts' #TODO fix this
-      wait_for_ajax
-      page.has_css? '.score-error'
+      page.should have_css '.score-error'
       visit gaku.admin_admissions_path
       select 'Passed', from: 'state_id'
       click_on 'Save'
@@ -58,7 +56,7 @@ describe 'Admin Admissions Grading' do
   context 'attendance', js:true do
 
     before do
-      page.has_content?('Grade Exam')
+      page.should have_content 'Grade Exam'
       click_on 'Grade Exam'
       click '.portion_set_attendance'
       page.should have_css '.popover-content'
