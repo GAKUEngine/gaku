@@ -22,18 +22,18 @@
 def add_exam_to_phase(phase_info, phase)
   exam = Gaku::Exam.where(phase_info[:exam]).first_or_create!
     phase.exam = exam
-    phase.save!
+    phase.save
     phase_info[:exam_portions].each do |portion|
       exam_portion = Gaku::ExamPortion.where(portion).build
       exam_portion.exam_id = phase.exam.id
-      exam_portion.save!
+      exam_portion.save
       phase.exam.exam_portions << exam_portion
     end
 end
 
 def add_states_to_phase(phase_states, phase)
   phase_states.each do |state_data|
-    phase_state = Gaku::AdmissionPhaseState.create(state_data) 
+    phase_state = Gaku::AdmissionPhaseState.create(state_data)
     phase.admission_phase_states << phase_state
   end
   phase.save
@@ -43,7 +43,7 @@ def create_sample_admission_method(method_args, phase_array)
   method = Gaku::AdmissionMethod.where(method_args).first_or_create!
   phase_array.each do |phase_info|
     phase = method.admission_phases.build(phase_info[:args])
-    add_exam_to_phase(phase_info, phase) if phase_info[:exam] 
+    add_exam_to_phase(phase_info, phase) if phase_info[:exam]
     add_states_to_phase(phase_info[:states], phase) if phase.save
   end
   method.save
