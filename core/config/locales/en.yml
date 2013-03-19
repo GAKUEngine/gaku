@@ -70,7 +70,8 @@ en:
     plural: Attachments
     save: Save Attachment
     singular: Attachment
-    associated: Attachable are not present
+    associated: Attachable is not present
+    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
