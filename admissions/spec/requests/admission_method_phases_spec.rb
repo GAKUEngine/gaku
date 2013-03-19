@@ -85,7 +85,7 @@ describe 'Admin Admission Method Phases' do
           end
         end
 
-        it '#deletes' do
+        pending '#deletes' do
           click edit_link
           wait_until_visible modal
           expect do
@@ -102,10 +102,12 @@ describe 'Admin Admission Method Phases' do
           click edit_link
           wait_until_visible modal
           within('.state') do
-            fill_in 'admission_phase_admission_phase_states_attributes_0_name', with: 'Rejected'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_can_progress'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_can_admit'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_auto_progress'
+            click edit_link
+            fill_in 'admission_phase_state_name', with: 'Rejected'
+            uncheck 'admission_phase_state_can_progress'
+            uncheck 'admission_phase_state_can_admit'
+            uncheck 'admission_phase_state_auto_progress'
+            click '#submit-admin-admission-method-admission-phase-admission-phase-state-button'
           end
 
           click '#submit-admin-admission-method-admission-phase-button'
