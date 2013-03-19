@@ -67,6 +67,7 @@ en:
     list: Attachments list
     name: Name
     new: New Attachment
+    edit: Edit Attachment
     plural: Attachments
     save: Save Attachment
     singular: Attachment
