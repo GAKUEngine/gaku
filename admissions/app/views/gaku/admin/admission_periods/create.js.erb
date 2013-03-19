@@ -1,6 +1,6 @@
 $('#admin-admission-periods-index tbody').append('<%= render_js_partial("admission_period", {:admission_period => @admission_period}) %>');
 
-$('#new-admin-admission-period').slideToggle();
+$('#new-admin-admission-period').slide();
 $('#new-admin-admission-period-link').show();
 
 showNotice("<%= render_flash %>");

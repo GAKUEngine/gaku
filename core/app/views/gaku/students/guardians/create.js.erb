@@ -1,5 +1,5 @@
 $('#student-guardians-index').append('<%= render_js_partial("guardian", {:guardian => @guardian}) %>');
-$('#new-student-guardian').slideToggle();
+$('#new-student-guardian').slide();
 $('#new-student-guardian-link').show();
 
 $('#student-guardians-tab-link').html("<%= print_count(@count+1, t_guardian_plural) %>");

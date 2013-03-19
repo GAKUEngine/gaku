@@ -4,7 +4,7 @@ describe 'Admin Disposals Attachments' do
 
   as_admin
 
-  let(:attachment) { create(:attachment, :is_deleted => 1) }
+  let(:attachment) { create(:attachment, :for_exam_portion, :is_deleted => 1) }
 
   before do
     set_resource('disposal-attachment')
@@ -35,18 +35,22 @@ describe 'Admin Disposals Attachments' do
       end
     end
 
-    pending 'deteles' do
+    it 'deteles' do
       expect do
         ensure_delete_is_working
-        page.should_not have_content attachment.name
-        flash_destroyed?
-      end.to change(Gaku::Attachment,:count).by -1
+      end.to change(Gaku::Attachment.unscoped,:count).by -1
+
+      page.should_not have_content attachment.name
+      flash_destroyed?
     end
 
-    it 'reverts' do
+    it 'recovery' do
       expect do
         within(table) { click '.recovery-link' }
       end.to change(Gaku::Attachment,:count).by 0
+
+      page.should_not have_content attachment.name
+      flash_recovered?
     end
 
   end

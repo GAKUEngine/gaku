@@ -68,7 +68,7 @@ module Gaku
       @student = get_student
       super do |format|
         if params[:student][:picture]
-          format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
+          format.html { redirect_to [:edit, @student], :notice => t('notice.uploaded', :resource => t('picture')) }
         else
           format.js { render }
           format.json { head :no_content }

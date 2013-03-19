@@ -9,7 +9,7 @@ shared_examples 'avatarable' do
     absolute_path = Rails.root + "../support/120x120.jpg"
     attach_file @file_name, absolute_path
     click_button "Upload"
-    flash? "successfully uploaded"
+    flash_uploaded?
   end
-  
+
 end

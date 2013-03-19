@@ -3,7 +3,7 @@ $('#new-<%= @notable_resource %>-note form').each(function() {
 	this.reset();
 });
 
-$('#new-<%= @notable_resource %>-note').slideToggle();
+$('#new-<%= @notable_resource %>-note').slide();
 $('#new-<%= @notable_resource %>-note-link').show();
 
 $('#<%= @notable_resource %>-notes-tab-link').html("<%= print_count(@notable.notes.count, t('note.plural')) %>");

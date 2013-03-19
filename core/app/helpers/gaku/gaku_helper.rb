@@ -17,10 +17,13 @@ module Gaku
     end
 
 
-
     def can_edit?
-      if controller.action_name == "show" and controller.controller_name == "students"
-        false
+      if controller.action_name == "show"
+        if controller.controller_name == "students" or controller.controller_name == "guardians"
+          false
+        else
+          true
+        end
       else
         true
       end
