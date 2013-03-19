@@ -16,6 +16,7 @@ html
           = render "gaku/shared/flash", :flash => flash
       #errors
       #modal-dialogs
-      = content_for?(:content) ? yield(:content) : yield
 
-
+      .row-fluid
+        .span12
+          = content_for?(:content) ? yield(:content) : yield
