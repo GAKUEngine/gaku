@@ -1,0 +1,752 @@
+bg:
+  achievement:
+    add: Добави Постижение
+    authority: Пълномощие
+    badge: Значка
+    choose: Избери Постижение
+    description: Описание
+    edit: Редактирай Постижение
+    list: Списък Постижения
+    name: Име
+    plural: Постижения
+    save: Запази Постижение
+    singular: Постижение
+  add: Добави
+  address:
+    add: Добави Адрес
+    address1: Адрес 1
+    address2: Адрес 2
+    choose_country: Избери Държава
+    city: Град
+    count: Брой адреси
+    country: Държава
+    edit: Редактирай адрес
+    list: Списък Адреси
+    new: Добави Адрес
+    past: Маркирай като стар?
+    plural: Адреси
+    prefecture: Щат/Провинция/Префектура
+    primary: Основен Адрес
+    save: Запази Адрес
+    search: Търси Адрес
+    singular: Адрес
+    state: Щат
+    title: Заглавие
+    zipcode: Пощенски код
+  admitted: Приет на
+  alert:
+    already_added: ! '%{resource} са вече добавени!'
+    empty: ! '%{resource} е празен!'
+    not_selected: Няма избран %{resource}!
+  and: и
+  are_you_sure: Сигурен ли сте?
+  assignment:
+    add: Добави Зaдание
+    count: Брой на заданията
+    description: Описание
+    list: Задания
+    max_score: Максимален резултат
+    name: Име на заданието
+    new: Създай Задание
+    plural: Задания
+    results: Резултати от заданието
+    singular: Задание
+    view: Покажи Заданията
+  assignments:
+    description: Описание на заданието
+  attachment:
+    asset_error: Грешка при качването на файла
+    asset_type: Тип на файла.
+    asset_upload: Файлът беше качен успешно!
+    assets: Файлове
+    create: Качи Файл
+    description: Описание
+    file_name: Име на файла
+    file_size: Големина на файла
+    file_type: Тип на файла
+    list: Списък на файловете
+    name: Име
+    new: Ново прикачване на файл
+    plural: Прикачени файлове
+    save: Запази прикачения файл
+    singular: Прикачен файл
+  attendance_type:
+    add: Добави нов вид посещаемост
+    auto_credit: Авто Кредит
+    color_code: Код за цвят
+    counted_absent: Брой отсъстващи
+    credit_rate: Кредитен Курс
+    disable_credit: Премахни Кредит
+    edit: Редактирай типове на посещаемост
+    list: Списък с типове на посещаемост
+    name: Име
+    new: Добави тип на посещаемост
+    plural: Типове на посещаемост
+    save: Запази тип на посещаемост
+    singular: Тим на посещаемост
+  back: Назад
+  birth: Рождена дата
+  birth_and: и
+  birth_between: Рождена дата между
+  birth_date: Рождена дата
+  birth_date_from: Рождена дата(от)
+  birth_date_to: Рождена дата(до)
+  campus:
+    add: Добави Факултет
+    address: Адрес на факултета
+    contacs: Контакти на факултета
+    edit: Редактирай Факултет
+    list: Списък Факултети
+    name: Име
+    new: Нов Факултет
+    plural: Факултети
+    primary: Основен
+    save: Запази Факултет
+    singular: Факултет
+  cancel: Отмени
+  changes:
+    change: Промени
+    changed_at: Променено На
+    event: Събитие
+    from: От
+    student:
+      list: Списък с промени по ученическите данни
+    student_address:
+      list: Списък с промени по ученическите адреси
+    student_contact:
+      list: Списък с промени по ученическите контакти
+    to: До
+    user: Променено от
+  class: Клас
+  class_group:
+    add: Добави Клас
+    choose: Избери Клас
+    edit: Редактирай Клас
+    enroll: Запиши Клас
+    grade: Оценка
+    homeroom: Класна Стая
+    list: Списък Класове
+    name: Име на класа
+    new: Нов Клас
+    none: Няма
+    none_assigned: Няма Назначен
+    plural: Класове
+    save: Запази Клас
+    show: Покажи
+    singular: Клас
+  class_group_course_enrollment:
+    save: Запази Курс към Клас
+  class_group_enrollment:
+    count: Брой на записаните студенти
+    create: Създай добавяне към Класа
+    current: Текущо записване
+    list: Списък на Класа
+    new: Ново добавяне в Класа
+    seat_number: Номер на място
+  class_group_management: Ръководство на Класа
+  commute_method:
+    add: Добави Вид Транспорт
+    edit: Редактирай Вид Транспорт
+    plural: Видове Транспорт
+    singular: Вид Транспорт
+  commute_method_type:
+    add: Добави Тип Транспорт
+    edit: Редактирай Тип Транспорт
+    list: Списък с Типове Транспорт
+    name: Име
+    new: Нов Тип Транспорт
+    plural: Типове Транспорт
+    save: Запази Тип Транспорт
+    singular: Тип Транспорт
+  comname: GAKU Сисетма
+  config:
+    close: Затвори
+    help:
+      language: Избери Език
+    label: Език
+    save: Запази
+  confirm: Сигурен ли сте?
+  confirm_delete: Изтриване на този запис?
+  contact:
+    add: Добави Контакт
+    contact_type: Тип Контакт
+    create: Създай Контакт
+    data: Данни
+    details: Детайли
+    edit: Редактирай Контакт
+    emergency: Спешни случаи
+    list: Списък Контакти
+    new: Нов Контакт
+    plural: Контакти
+    primary: Основен Контакт
+    save: Запази Контакт
+    singular: Контакт
+  contact_type:
+    add: Добави Вид Контакт
+    choose: Избери Вид Контакт
+    edit: Редактирай Вид Контакт
+    list: Списък Видове Контакти
+    name: Име
+    new: Нов Вид Контакт
+    plural: Видове Контакти
+    save: Запази Вид Контакт
+    singular: Вид Контакт
+  course:
+    add: Добави Курс
+    choose: Избери Курс
+    code: Код на Курса
+    code_sample: ! '[ПР: ЕСЕН2020]'
+    combined_code: Комбиниран Код
+    count: Брой Курсове
+    edit: Редактирай Курс
+    list: Списък Курсове
+    management: Ръководство на Курса
+    name: Име на Курса
+    new: Нов Курс
+    options: Опции
+    plural: Курсове
+    save: Запази Курс
+    show: Покажи Курс
+    singular: Курс
+  course_enrollment:
+    add: Запиши в Курс
+    create: Добави в Курс
+    list: Записи в Курса
+    plural: Записи в Курса
+    singular: Запис в Курса
+  course_group:
+    course_group_recover: Курс Група Възстановена
+    edit: Редактирай Курс Група
+    list: Списък Курс Групи
+    name: Име
+    new: Нова Курс Група
+    plural: Курс Групи
+    save: Запази Курс Група
+    show: Курс Група
+    singular: Курс Група
+  course_group_enrollment:
+    save: Запази Курс Група
+  csv:
+    export: CSV Експорт
+    fields:
+      admitted: Приет
+      birth_date: Рождена Дата
+      email: Имейл
+      gender: Пол
+      name: Име
+      name_reading: Име (чете се)
+      phone: Телефон
+      surname: Фамилно Име
+      surname_reading: Фамилно име (чете се)
+    import: CSV Импорт
+  date_placeholder: ГГГГ-ММ-ДД
+  default: По подразбиране
+  delete: Изтрий
+  description: Описание
+  destroy: Изтрий
+  devise:
+    confirmations:
+      confirmed: Вашият акаунт беше създаден успешно. В момента сте в системата.
+      send_instructions: Ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
+      send_paranoid_instructions: Ако вашият имейл адрес е в нашата база данни, ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
+    email: Имейл
+    failure:
+      already_authenticated: Влезли сте в системата.
+      inactive: Вашият акаунт не е активиран все още.
+      invalid: Невалиден имейл или парола.
+      invalid_token: Невалиден аутентикиращ токен.
+      locked: Вашият акаунт е заключен.
+      timeout: Вашата сесия е изтекла, моля влезте в системата за да продължите.
+      unauthenticated: Нужно е да влезете в системата преди да продължите.
+      unconfirmed: Нужно е да потвърдите вашия акаунт преди да продължите.
+    login: Потребителско име или Имейл
+    mailer:
+      confirmation_instructions:
+        subject: Инструкции за потвърждаване
+      reset_password_instructions:
+        subject: Инструкции за ресет на парола
+      unlock_instructions:
+        subject: Отключи Инструкции
+    omniauth_callbacks:
+      failure: Системата не можа да ви оторизира от %{kind} защото "%{reason}".
+      success: Успешно оторизиран от %{kind} акаунт.
+    password: Парола
+    password_confirmation: Потвърждаване на парола
+    passwords:
+      forgot: Забравена парола?
+      no_token: Няма Токен.
+      send_instructions: Ще получите имейл с инстукции как да нулирате вашата парола.
+      send_paranoid_instructions: Ако вашият имейл е вече в нашата база данни, ще получите линк за възстановяване на вашата парола на вашия имейл
+      updated: Вашата парола беше променена успешно. В момента сте в системата.
+      updated_not_active: Вашата парола беше променена успешно.
+    registrations:
+      admin_set_up: ! 'Това е първият път в който ползвате GAKU Engine.
+
+        Моля виведете данни за потребител Администратор.'
+      destroyed: Довиждане! Вашият акаунт беше успешно затворен. Надяваме се да ви видим отново.
+      inactive_signed_up: Вие се регистрирахте успешно в системата. Въпреки това, не можете да влезете в системата, защото вашият акаунт е  %{reason}.
+      reasons:
+        inactive: неактивен
+        locked: заключен
+        unconfirmed: непотвърден
+      sign_up: Регистрирайте се
+      signed_up: Добре дошли! Вие се регистрирахте успешно.
+      signed_up_but_inactive: Този акаунт е неактивен
+      signed_up_but_locked: Този акаунт е заключен
+      signed_up_but_unconfirmed: Този акаунт все още не е потвърден
+      update_needs_confirmation: Обновяването на регистрацията има нужда от потвърждаване
+      updated: Вие обновихте вашият акаунт успешно.
+    sessions:
+      remember_me: Запомни ме
+      sign_in: Влизане в системата
+      sign_out: Излизане от системата
+      signed_in: Влязохте в системата успешно.
+      signed_out: Излязохте от системата успешно.
+    unlocks:
+      send_instructions: Ще получите имейл с инструкции как да отключите вашия акаунт до няколко минути.
+      send_paranoid_instructions: Ако вашият акаунт вече съществува, ще получите имейл с инструкции как да го отключите до няколко минути.
+      unlocked: Вашият акаунт е отключен успешно. В момента сте в системата.
+    username: Потребителско Име
+  edit: Редактиране
+  email: Поща
+  enroll_to_class: Записване в клас
+  enrollment:
+    plural: Записи
+    singular: Запис
+  enrollment_status:
+    active: Активен
+    add: Добави Статус на Записване
+    edit: Редактирай Статус на Записване
+    list: Списък Статуси на Записване
+    name: Име
+    new: Нов Статус на Записване
+    plural: Статуси на Записване
+    save: Запази Статус на Записване
+    singular: Статус на Записване
+  enrollment_status_type:
+    active: Активен
+    add: 
+    edit: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+  errors:
+    messages:
+      already_confirmed: 
+      expired: 
+      not_found: 
+      not_locked: 
+      not_saved: 
+    not_uploaded: 
+  exam:
+    add: 
+    add_existing: 
+    add_portion: 
+    adjustments: 
+    choose: 
+    choose_schedule: 
+    completion: 
+    count: 
+    description: 
+    edit: 
+    exam_score: 
+    graded: 
+    grading_completion: 
+    grading_method: 
+    list: 
+    name: 
+    new: 
+    new_exam: 
+    options: 
+    plural: 
+    save: 
+    select: 
+    show: 
+    singular: 
+    total: 
+    total_weight: 
+    ungraded: 
+    use_weighting: 
+    view: 
+    weight: 
+  exam_portion:
+    adjustments: 
+    attached_file_count: 
+    count: 
+    description: 
+    edit: 
+    error: 
+    execution_date: 
+    is_master: 
+    list: 
+    master: 
+    max_score: 
+    name: 
+    plural: 
+    problem_count: 
+    save: 
+    show: 
+    singular: 
+    use_weighting: 
+    weight: 
+  external_school_record:
+    absences: 
+    attendance_rate: 
+    beginning: 
+    data: 
+    ending: 
+    student_id_number: 
+  extracurricular_activity:
+    add: 
+    edit: 
+    enroll: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+  extracurricular_activity_enrollment:
+    list: 
+  failure:
+    enrolled: 
+  flash:
+    actions:
+      create:
+        notice: 
+      destroy:
+        alert: 
+        notice: 
+      update:
+        notice: 
+  gender:
+    choose: 
+    female: 
+    label: 
+    male: 
+    unknown: 
+  given_name: 
+  grade:
+    all_exams: 
+    average_points: 
+    average_score: 
+    deviation: 
+    grading: 
+    how_grade: 
+    max: 
+    max_points: 
+    percent: 
+    points: 
+    rank: 
+    total: 
+    total_points: 
+    weighting: 
+    weighting_portion: 
+  grading_method:
+    add: 
+    description: 
+    edit: 
+    list: 
+    method: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  graduated: 
+  guardian:
+    add: 
+    edit: 
+    guardians: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    relationship: 
+    save: 
+    singular: 
+  hello: 
+  helpers:
+    links:
+      cancel: 
+  hide: 
+  history: 
+  id: 
+  import_format: 
+  language: 
+  languages:
+    en: 
+    ja: 
+  manage: 
+  menu:
+    admin:
+      achievements: 
+      admin: 
+      administration: 
+      administrator: 
+      changes:
+        changes: 
+        student_addresses: 
+        student_contacts: 
+        students: 
+      disposals:
+        attachment: 
+        course_group: 
+        disposals: 
+        exam: 
+        student: 
+        student_address: 
+      grading_methods: 
+      preset:
+        grading:
+          grading_method: 
+          grading_scheme: 
+        items:
+          defaults: 
+          grading: 
+          locale: 
+          student: 
+        pagination: 
+        plural: 
+        save: 
+        singular: 
+        student:
+          city: 
+          country: 
+          gender: 
+          state: 
+      school_details: 
+      schools: 
+      specialties: 
+      system:
+        backup: 
+        system_tools: 
+      types:
+        attendance_types: 
+        commute_methods: 
+        contact: 
+        enrollment_status: 
+        types: 
+      users:
+        roles: 
+        users: 
+        users_and_roles: 
+    class_group:
+      management: 
+      plural: 
+    course:
+      management: 
+      plural: 
+    course_group:
+      plural: 
+    exam:
+      management: 
+      plural: 
+    extracurricular_activity:
+      plural: 
+    student:
+      plural: 
+    syllabus:
+      plural: 
+    teacher:
+      plural: 
+  name: 
+  name_reading: 
+  none: 
+  note:
+    add: 
+    content: 
+    delete: 
+    edit: 
+    list: 
+    new: 
+    plural: 
+    save: 
+    singular: 
+    title: 
+  notice:
+    added: 
+    created: 
+    destroyed: 
+    enrolled: 
+    no_resource_assign_first: 
+    recovered: 
+    removed: 
+    updated: 
+    uploaded: 
+  num_enrolled: 
+  options: 
+  order: 
+  panel: 
+  period: 
+  phone: 
+  phonetic_reading: 
+  picture: 
+  pictures:
+    change: 
+    upload: 
+  preset:
+    grading:
+      grading_method: 
+      grading_scheme: 
+    pagination: 
+    per_page:
+      changes: 
+      default: 
+    plural: 
+    save: 
+    singular: 
+    student:
+      city: 
+      country: 
+      gender: 
+      state: 
+  profile: 
+  profiles:
+    new: 
+    save: 
+  required: 
+  revert: 
+  role:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
+  save: 
+  schedule: 
+  scholarship_status: 
+  school:
+    add: 
+    campuses: 
+    choose: 
+    code: 
+    description: 
+    edit: 
+    edit_master: 
+    founded: 
+    grades: 
+    list: 
+    master: 
+    name: 
+    new: 
+    plural: 
+    primary: 
+    principal: 
+    save: 
+    show: 
+    singular: 
+    slogan: 
+    vice_principal: 
+  search: 
+  select: 
+  semester:
+    add: 
+    edit: 
+    ending: 
+    ending_after_starting: 
+    list: 
+    number: 
+    plural: 
+    save: 
+    starting: 
+    uniqueness: 
+  sex: 
+  sex_and_birth: 
+  show: 
+  simple_grade:
+    add: 
+    edit: 
+    grade: 
+    index: 
+    list: 
+    plural: 
+    save: 
+    singular: 
+  specialty:
+    add: 
+    choose: 
+    description: 
+    edit: 
+    list: 
+    major: 
+    major_only: 
+    minor: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  student:
+    add: 
+    birth_and: 
+    birth_between: 
+    choose: 
+    chosen_students: 
+    class_group_enrollment: 
+    commute_method: 
+    create: 
+    edit: 
+    enroll: 
+    export: 
+    import: 
+    list: 
+    name: 
+    new: 
+    plural: 
+    registration:
+      csv: 
+      sheet: 
+    save: 
+    show: 
+    singular: 
+  student_achievement:
+    edit: 
+    index: 
+    save: 
+  student_specialty:
+    edit: 
+    index: 
+    save: 
+  submit: 
+  success:
+    enrolled: 
+  surname: 
+  surname_reading: 
+  syllabus:
+    code: 
+    credits: 
+    description: 
+    edit: 
+    import: 
+    list: 
+    name: 
+    name_sample: 
+    new: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+  teacher:
+    plural: 
+    singular: 
+  title: 
+  user:
+    add: 
+    edit: 
+    email: 
+    info: 
+    list: 
+    password: 
+    password_confirmation: 
+    save: 
+    username: 
+  views:
+    pagination:
+      first: 
+      last: 
+      next: 
+      previous: 
+      truncate: 

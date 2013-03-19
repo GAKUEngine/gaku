@@ -4,18 +4,168 @@
   xmlns:x="urn:schemas-microsoft-com:office:excel"
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
+
+  <Styles>
+    <Style ss:ID="h1">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <Font ss:Bold="1"/>
+    </Style>
+
+    <Style ss:ID="s1">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+      </Borders>
+      <Font ss:Bold="1"/>
+    </Style>
+    
+    <Style ss:ID="s2">
+      <Alignment ss:Vertical="Center"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+      </Borders>
+    </Style>
+  </Styles>
+  
+  <% phase = @admission_method.admission_phases.first %>
+  <%# sheets = ["志願者番号順", "順位順", "志望コース順", "志望別（国際教養科）", "志望別（普通科）"] %>
+  <% sheets = ["志願者番号順"] %>
+  <% sheets.each do |sheet| %>
+  <Worksheet ss:Name="受験結果：<%= sheet %>">
+    <Table>
+      <Column ss:Width="65"/><Column ss:Width="150"/><Column ss:Width="65"/><Column ss:Width="65"/><Column ss:Width="65"/>
+      <Row ss:Height="25">
+        <Cell ss:StyleID="h1" ss:MergeAcross="2"><Data ss:Type="String">受験結果：<%= sheet %></Data></Cell>
+      </Row>
+      <Row></Row>
+      <Row></Row>
+    
+      <Row ss:Height="25">
+        <Cell ss:Index="4" ss:MergeAcross="3" ss:StyleID="s1"><Data ss:Type="String">試験</Data></Cell>
+        <Cell ss:MergeAcross="11" ss:StyleID="s1"><Data ss:Type="String">内申点</Data></Cell>
+      </Row>
+      
+    <% state = phase.admission_phase_states.first %>
+      <Row ss:Height="25">
+        <Cell ss:StyleID="s1"><Data ss:Type="String">志願者番号</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">志願者氏名（カナ氏名）</Data></Cell>
+        
+        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
+        
+        <Cell ss:StyleID="s1"><Data ss:Type="String">素点合計</Data></Cell>
+    <% eps = phase.exam.exam_portions %>
+    <% eps.each do |ep| %>
+        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
+    <% end %>
+        
+    <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
+        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+    <% end %>
+      
+        <Cell ss:StyleID="s1"><Data ss:Type="String">欠席数（２年）</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">欠席数（３年）</Data></Cell>
+        
+        <Cell ss:StyleID="s1"><Data ss:Type="String">志望学科１</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">合否</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">志望学科２</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">合否</Data></Cell>
+      </Row>
+      
+    <% @state_records.each_with_index do |record, index| %>
+      <% if record.admission_phase == phase && record.admission_phase_state == state %>
+      <Row ss:Height="25">
+
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= record.admission.applicant_number %></Data></Cell>
+
+        <Cell ss:StyleID="s2"><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
+
+        <Cell ss:StyleID="s2"><Data ss:Type="String"><%= record.admission.student.external_school_records.last.school.name %></Data></Cell>
+        
+        <% total_score = 0 %>
+        <% eps.each do |ep| %>
+          <% total_score += ep.exam_portion_scores[index].score %>
+        <% end %>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= total_score %></Data></Cell>
+        
+        <% eps.each do |ep| %>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= ep.exam_portion_scores[index].score %></Data></Cell>
+        <% end %>
+        
+        <% record.admission.student.simple_grades.each do |simple_grade| %>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
+        <% end %>
+
+        <% absences = JSON.parse(record.admission.student.external_school_records.last.data) %>
+        <% absences.each do |absence, val| %>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= val %></Data></Cell>
+        <% end %>
+
+        <% i = 0; while i < 2 %>
+        <Cell ss:StyleID="s2"><Data ss:Type="String"><%= record.admission.specialty_applications[i].specialty.name %></Data></Cell>
+        <Cell ss:StyleID="s2"><Data ss:Type="String"></Data></Cell>
+        <% i += 1; end %>
+
+      </Row>
+      <% end %>
+    <% end %>
+
+    </Table>
+  </Worksheet>
+  <% end %>
+  
+  
   <% @admission_method.admission_phases.each_with_index do |phase, index| %>
   <Worksheet ss:Name="<%= phase.name.to_s %>">
     <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_periods.name") + " : " + @admission_period.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_methods.singular") + " : " + @admission_method.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t("admission_phases.singular") + " : " + phase.name.to_s %></Data></Cell>
+      </Row>
+      <Row></Row>
+      <Row></Row>
     <% phase.admission_phase_states.each do |state| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= state.name.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("admission_phase_states.singular") + " : " + state.name.to_s %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">志願者番号</Data></Cell>
+        <Cell><Data ss:Type="String">志願者氏名（カナ氏名）</Data></Cell>
+        <Cell><Data ss:Type="String">志望学科１</Data></Cell>
+        <Cell><Data ss:Type="String">志望学科２</Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
+      <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
+        <Cell><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+      <% end %>
+        <Cell><Data ss:Type="String">欠席数（２年）</Data></Cell>
+        <Cell><Data ss:Type="String">欠席数（３年）</Data></Cell>
       </Row>
       <% @state_records.each do |record| %>
         <% if record.admission_phase == phase && record.admission_phase_state == state %>
       <Row>
-        <Cell><Data ss:Type="String"><%= record.admission.student.surname %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= record.admission.student.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= record.admission.applicant_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.admission.student.surname + " " + record.admission.student.name + "（" + record.admission.student.surname_reading + " " + record.admission.student.name_reading + "）" %></Data></Cell>
+          <% i = 0; while i < 2 %>
+        <Cell><Data ss:Type="String"><%= record.admission.specialty_applications[i].specialty.name %></Data></Cell>
+          <% i += 1; end %>
+        <Cell><Data ss:Type="String"><%= record.admission.student.external_school_records.last.school.name %></Data></Cell>
+          <% record.admission.student.simple_grades.each do |simple_grade| %>
+        <Cell><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
+          <% end %>
+          <% absences = JSON.parse(record.admission.student.external_school_records.last.data) %>
+          <% absences.each do |absence, val| %>
+        <Cell><Data ss:Type="Number"><%= val %></Data></Cell>
+          <% end %>
       </Row>
         <% end %>
       <% end %>
@@ -25,4 +175,5 @@
     </Table>
   </Worksheet>
   <% end %>
+  
 </Workbook>

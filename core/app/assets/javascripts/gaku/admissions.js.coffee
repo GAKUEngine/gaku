@@ -6,7 +6,7 @@ $ ->
   $('#new-student-link').on 'click', (e) ->
     e.preventDefault()
     $(this).hide()
-    $('#new-student').slideToggle()
+    $('#new-student').slide()
 
   $('#delete-student-link').on 'click', (e)->
     e.preventDefault()

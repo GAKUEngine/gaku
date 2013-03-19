@@ -1,0 +1,12 @@
+.row-fluid.pagination-centered
+  h4= t(:'picture')
+
+.row-fluid.mt-s
+  .span12.pagination-centered
+    = image_tag guardian.picture.url(:thumb), :id => "avatar-picture"
+
+- if can_edit?
+  .row-fluid.mt-s
+    = button_to t(:'pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-picture-link", :class => "span12 btn"
+    #upload-picture.hide
+      = render :partial => 'upload_picture', :locals => { :student => student, :guardian => guardian }

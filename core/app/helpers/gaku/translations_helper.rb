@@ -149,5 +149,9 @@ module Gaku
       t(:'teacher.list')
     end
 
+    def t_attachment_list
+      t(:'attachment.list')
+    end
+
   end
 end

@@ -3,6 +3,7 @@ html
   head
     title
       = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
+    = javascript_tag '$.fx.off = true;' if Rails.env.test?
     = stylesheet_link_tag "gaku/all"
     = javascript_include_tag "gaku/all"
     = csrf_meta_tags

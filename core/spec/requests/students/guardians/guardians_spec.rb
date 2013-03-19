@@ -54,12 +54,12 @@ describe 'Student Guardians' do
 
       visit gaku.edit_student_path(student)
       click tab_link
-      wait_until { page.has_content? 'Guardians list' }
     end
 
     context 'edit', :js => true do
       before do
-        click edit_link
+        visit gaku.edit_student_guardian_path(student, guardian)
+        click '#edit-modal'
         wait_until_visible modal
       end
 

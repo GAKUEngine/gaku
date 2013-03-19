@@ -1,6 +1,6 @@
 $('#admin-users-index tbody').append('<%= render_js_partial("user", {:user => @user}) %>');
 
-$('#new-admin-user').slideToggle();
+$('#new-admin-user').slide();
 $('#new-admin-user-link').show();
 
 $('.admin-users-count').html('<%= print_count(@count+1, t_user_list) %>');

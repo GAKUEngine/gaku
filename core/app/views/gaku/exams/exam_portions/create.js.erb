@@ -1,4 +1,4 @@
-$('#new-exam-exam-portion').slideToggle();
+$('#new-exam-exam-portion').slide();
 $('#new-exam-exam-portion-link').show();
 showNotice("<%= render_flash %>");
 
@@ -14,9 +14,35 @@ $('.exam-exam-portions-count').html("<%= print_count(@count+1, t_exam_portion_li
     $('.exam-portions-weight tbody').append('<tr></tr>');
   }
 
-  $('.exam-portions-weight thead tr').append('<th class="btn-warning" data-id=<%= @exam.exam_portions.last.id%>> <%= @exam.exam_portions.last.name+ " " + t("exam.weight") %> </th>')
-  $('.exam-portions-weight tbody tr').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_weight_td", {:portion => @exam.exam_portions.last}) %>')
-  var total = $('#weight-total').text();
-  var totalFl = parseFloat(total)+ <%= @exam.exam_portions.last.weight.to_f %>;
-  $("#weight-total").html(totalFl);
+  $('.exam-portions-weight thead tr').append('<th class="btn-warning" data-id=<%= @exam.exam_portions.last.id%>> <%= @exam.exam_portions.last.name+ " " + t("exam.weight") %> </th>');
+  $('.exam-portions-weight tbody tr').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_weight_td", {:portion => @exam.exam_portions.last}) %>');
+
+  weights = ('<%= @exam.exam_portions.pluck(:weight) %>');
+  weights = weights.slice(1, -1).split(',');
+
+  total   = 0;
+  for (var i = 0; i < weights.length; i++) {
+    total += parseFloat(weights[i]);
+  }
+  
+  $('.exam-portions-weight tbody form').each(function(i, form){
+    $(form).find('input.exam-portion-weight').val(parseFloat(weights[i]))
+  })
+
+  $('#exam-exam-portions-index tbody tr').each(function(i, tr){
+    tdWeight = $(tr).find('td')[3]
+    $(tdWeight).text(weights[i])
+  })
+  
+  $('#weight-total').text(total);
 <% end %>
+
+
+
+error = '<%= @exam_portion.custom_errors %>'
+
+if(error){
+  $('.exam-portion-error').html('<%= render_js_partial("gaku/exams/exam_portions/custom_exam_portion_error", {:error => @exam_portion.custom_errors}) %>')
+}else{
+  $('.exam-portion-error').html('');
+}

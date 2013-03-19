@@ -1,0 +1,30 @@
+- present @student do |student_presenter|
+  = content_for :show_header do
+    = count_div '' do
+      = t(:'student.edit')
+
+
+  = well_div do
+    .span9.student-index
+      = render 'gaku/shared/student/edit_table', :student => @student
+
+    .span3.well
+      = render 'gaku/shared/picture', :resource => @student
+
+  = render :partial => 'gaku/shared/student/tabs'
+
+  = well_div do
+    .span5
+      = link_to_edit_with_text [:edit, @student], :class => "span12 btn btn-warning edit-link", :remote => true
+    .span5
+      = link_to_back students_path, :class => "span12 btn"
+    .span2#delete-student
+      = link_to_modal_delete nil, :id => 'delete-student-link', :class => 'btn btn-danger pull-right', :data => {:confirm => nil}
+    .delete_modal
+      = render 'delete_modal', :student => @student
+
+
+coffee:
+  $('#delete-student-link').on 'click', (event) ->
+    event.preventDefault()
+    $('#delete-modal').modal('show')

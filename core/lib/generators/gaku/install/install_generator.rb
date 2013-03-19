@@ -8,11 +8,7 @@ module Gaku
 
     class_option :migrate, :type => :boolean, :default => true, :banner => 'Run Gaku migrations'
     class_option :seed, :type => :boolean, :default => true, :banner => 'load seed data (migrations must be run)'
-    class_option :sample, :type => :boolean, :default => true, :banner => 'load sample data (migrations must be run)'
     class_option :auto_accept, :type => :boolean
-    #class_option :user_class, :type => :string
-    #class_option :admin_email, :type => :string
-    #class_option :admin_password, :type => :string
     class_option :lib_name, :type => :string, :default => 'gaku'
     class_option :env, :type => :string, :default => 'development'
 
@@ -29,11 +25,9 @@ module Gaku
       puts "ENV : #{@env}"
       @run_migrations = options[:migrate]
       @load_seed_data = options[:seed]
-      @load_sample_data = options[:sample]
 
       unless @run_migrations
          @load_seed_data = false
-         @load_sample_data = false
       end
     end
 
@@ -122,8 +116,6 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
         rake_options=[]
         rake_options << "RAILS_ENV=#{@env}"
         rake_options << "AUTO_ACCEPT=1" if options[:auto_accept]
-        rake_options << "ADMIN_EMAIL=#{options[:admin_email]}" if options[:admin_email]
-        rake_options << "ADMIN_PASSWORD=#{options[:admin_password]}" if options[:admin_password]
 
         cmd = lambda { rake("db:seed #{rake_options.join(' ')}") }
         if options[:auto_accept] || (options[:admin_email] && options[:admin_password])
@@ -133,15 +125,6 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
         end
       else
         say_status :skipping, "seed data (you can always run rake db:seed)"
-      end
-    end
-
-    def load_sample_data
-      if @load_sample_data
-        say_status :loading, "sample data"
-        rake "gaku_sample:load", :env =>  @env
-      else
-        say_status :skipping, "sample data (you can always run rake gaku_sample:load)"
       end
     end
 

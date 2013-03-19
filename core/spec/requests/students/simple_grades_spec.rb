@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Simple Grade' do
+describe 'Student Simple Grades' do
 
   as_admin
 
@@ -19,6 +19,7 @@ describe 'Simple Grade' do
       visit gaku.edit_student_path(student)
       click el
       click new_link
+      wait_until_visible modal
     end
 
     it 'create and show' do

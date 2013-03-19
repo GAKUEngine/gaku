@@ -29,7 +29,17 @@ module Gaku
     end
 
     def total_weight
-      exam_portions.inject(0) {|sum, p| sum + p.weight }
+      exam_portions.inject(0) { |sum, p| p.weight ? sum + p.weight : sum }
+    end
+
+    def total_weight_except(portion)
+      exam_portions.inject(0) do |sum, p|
+        if portion == p
+          sum
+        else
+          p.weight ? sum + p.weight : sum
+        end
+      end
     end
 
 
@@ -40,20 +50,15 @@ module Gaku
     def completion(students)
       total_records = total_records(students)
       completion_ratio = 1 - (ungraded(students)  / total_records.to_f)
-
       return (completion_ratio * 100).round(2)
     end
 
     def ungraded(students)
-      ungraded = 0
-      self.exam_portions.each do |ep|
-        if ep.exam_portion_scores.nil?
-          ungraded += students.count
-          next
+       ungraded = 0
+        students.each do |student|
+          student_exam_eps = self.exam_portion_scores.select { |eps| eps.student_id == student.id }
+          student_exam_eps.each {|eps| ungraded += 1 if check_record_completion?(eps)}
         end
-        ep.exam_portion_scores.each {|eps| ungraded += 1 if check_record_completion?(eps) }
-      end
-
       return ungraded
     end
 

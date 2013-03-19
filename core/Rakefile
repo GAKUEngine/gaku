@@ -5,6 +5,7 @@ require 'rake/testtask'
 require 'rake/packagetask'
 require 'rubygems/package_task'
 require 'rspec/core/rake_task'
+require 'rspec/core/runner'
 require 'gaku/core/testing_support/common_rake'
 
 Bundler::GemHelper.install_tasks
@@ -35,3 +36,18 @@ RSpec::Core::RakeTask.new(:factory_specs) do |t|
 end
 
 task spec: :factory_specs
+
+
+desc "Fork spec"
+task :fork_spec do
+  fork do
+    RSpec::Core::Runner.disable_autorun!
+    RSpec::Core::Runner.run(['spec'], $stderr, $stdout) ? exit(0) : exit(1)
+  end
+  Process.wait
+  raise 'rspec failed' unless $?.exitstatus == 0
+  # exiting the fork can cause MySql to drop the connection
+  # but AR doesn't notice. This mitigates.
+  ActiveRecord::Base.connection.reconnect! if ActiveRecord::Base.connected?
+end
+
