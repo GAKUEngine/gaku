@@ -70,6 +70,7 @@ en:
     plural: Attachments
     save: Save Attachment
     singular: Attachment
+    associated: Attachable are not present
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -734,6 +735,11 @@ en:
   teacher:
     plural: Instructors
     singular: Instructor
+    show: Show Teacher
+    list: Teachers list
+    new: New Teacher
+    save: Save Teacher
+    edit: Edit Teacher
   title: Title
   user:
     add: Add User
