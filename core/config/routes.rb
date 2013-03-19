@@ -12,7 +12,7 @@ Gaku::Core::Engine.routes.draw do
     }
   }
 
-  devise_scope :users do
+  devise_scope :user do
     get :set_up_admin_account, :to => "devise/registrations#set_up_admin_account"
     post :create_admin, :to => "devise/registrations#create_admin"
   end
