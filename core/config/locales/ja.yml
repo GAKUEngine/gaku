@@ -35,9 +35,9 @@ ja:
     zipcode: 郵便番号
   admitted: 入学日
   alert:
-    already_added: '%{resource}が既に登録されています!'
-    empty: '%{resource}が空です!'
-    not_selected: '%{resource}が未選択です!'
+    already_added: ! '%{resource}が既に登録されています!'
+    empty: ! '%{resource}が空です!'
+    not_selected: ! '%{resource}が未選択です!'
   and: と
   are_you_sure: 本当に実効しますか?
   assignment:
@@ -70,6 +70,7 @@ ja:
     plural: 添付ファイル
     save: 添付ファイルを保存
     singular: 添付ファイル
+    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: 出席類を追加
     auto_credit: 点数の自動計算
@@ -268,8 +269,8 @@ ja:
       unlock_instructions:
         subject: アカウントの凍結解除
     omniauth_callbacks:
-      failure: '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
-      success: '%{kind} アカウントによる個人認証に成功しました。'
+      failure: ! '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
+      success: ! '%{kind} アカウントによる個人認証に成功しました。'
     password: パスワード
     password_confirmation: パスワード（確認用）
     passwords:
@@ -280,9 +281,9 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
-      admin_set_up: |-
-        学園陣が初期状態です。
-        管理者ユーザを登録して下さい。
+      admin_set_up: ! '学園陣が初期状態です。
+
+        管理者ユーザを登録して下さい。'
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       inactive_signed_up: サインアップに成功しましたが、%{reason}の為にサインイン出来ません。
       reasons:
@@ -340,8 +341,8 @@ ja:
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
       not_saved:
-        one: '1 つのエラーにより %{resource} は保存されませんでした:'
-        other: '%{count} つのエラーにより %{resource} は保存されませんでした:'
+        one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
+        other: ! '%{count} つのエラーにより %{resource} は保存されませんでした:'
     not_uploaded: アップロード中にエラーが発生しました。%{resource}
   exam:
     add: 試験を追加
@@ -380,6 +381,7 @@ ja:
     count: 試験要素数
     description: 説明
     edit: 試験要素を編集
+    error: 試験の部分の合計が100%を越えてて自動修正が出来ませんでした。正しい数字を入力しなおして下さい。
     execution_date: 実施日
     is_master: マスター
     list: 試験要素一覧
@@ -418,12 +420,12 @@ ja:
   flash:
     actions:
       create:
-        notice: '%{resource_name}は正常に作成されました'
+        notice: ! '%{resource_name}は正常に作成されました'
       destroy:
-        alert: '%{resource_name}は消去出来ませんでした'
-        notice: '%{resource_name}は正常に消去されました'
+        alert: ! '%{resource_name}は消去出来ませんでした'
+        notice: ! '%{resource_name}は正常に消去されました'
       update:
-        notice: '%{resource_name}は正常に更新されました'
+        notice: ! '%{resource_name}は正常に更新されました'
   gender:
     choose: 性別を選択
     female: 女性
@@ -493,7 +495,12 @@ ja:
         student_addresses: 生徒住所
         student_contacts: 生徒連絡先
         students: 生徒
+      users:
+        users_and_roles: Users & Roles
+        users: Users
+        roles: Roles
       disposals:
+        student: Student Disposals
         attachment: 添付ファイルを処分
         course_group: 授業グループを処分
         disposals: 処分
@@ -502,6 +509,7 @@ ja:
         student_address: 生徒住所削除一覧
       grading_methods: 評価法
       preset:
+        pagination: Pagination Preset
         grading:
           grading_method: 採点方法
           grading_scheme: 採点方式
@@ -510,6 +518,11 @@ ja:
           grading: 採点プリセット
           locale: 言語プリセット
           student: 生徒プリセット
+<<<<<<< HEAD
+        pagination: ページ分けの設定
+=======
+          defaults: Defaults Preset
+>>>>>>> tapalilov/develop
         plural: プリセット
         save: プリセットを保存
         singular: プリセット
@@ -521,6 +534,7 @@ ja:
       school_details: 学校詳細
       schools: 学校
       specialties: 専攻
+      grading_methods: Grading Methods
       system:
         backup: バックアップ
         system_tools: システムツール
@@ -549,6 +563,10 @@ ja:
       plural: 部活動
     student:
       plural: 生徒
+    teacher:
+      plural: 教師
+    extracurricular_activity:
+      plural: Extracurriculars
     syllabus:
       plural: 科目
     teacher:
@@ -568,15 +586,15 @@ ja:
     singular: 備考
     title: 備考タイトル
   notice:
-    added: '%{resource}は正常に追加されました'
-    created: '%{resource}は正常に作成されました'
-    destroyed: '%{resource}は正常に消去されました'
-    enrolled: '%{resource}は%{to}に正常に追加されました'
-    no_resource_assign_first: '%{resource}はありません、一つ登録してください'
-    recovered: '%{resource}は正常に復元されました'
-    removed: '%{resource}は正常に削除されました'
-    updated: '%{resource}は正常に更新されました'
-    uploaded: '%{resource}は正常にアップロードされました'
+    added: ! '%{resource}は正常に追加されました'
+    created: ! '%{resource}は正常に作成されました'
+    destroyed: ! '%{resource}は正常に消去されました'
+    enrolled: ! '%{resource}は%{to}に正常に追加されました'
+    no_resource_assign_first: ! '%{resource}はありません、一つ登録してください'
+    recovered: ! '%{resource}は正常に復元されました'
+    removed: ! '%{resource}は正常に削除されました'
+    updated: ! '%{resource}は正常に更新されました'
+    uploaded: ! '%{resource}は正常にアップロードされました'
   num_enrolled: 在籍人数
   options: オプション
   order: 順序
@@ -592,6 +610,10 @@ ja:
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
+    pagination: ページ分け
+    per_page:
+      changes: ページ当たりの差分
+      default: ページ当たりの件数
     plural: プリセット
     save: プリセットを保存
     singular: プリセット
@@ -741,8 +763,8 @@ ja:
     username: ユーザ名
   views:
     pagination:
-      first: '&laquo; 最初'
+      first: ! '&laquo; 最初'
       last: 最後 &raquo;
       next: 次 &rsaquo;
-      previous: '&lsaquo; 前'
-      truncate: '...'
+      previous: ! '&lsaquo; 前'
+      truncate: ! '...'

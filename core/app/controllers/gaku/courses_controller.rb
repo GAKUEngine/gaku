@@ -22,7 +22,7 @@ module Gaku
     protected
 
     def collection
-      @courses = Course.includes(:syllabus).all
+      #@courses = Course.includes(:syllabus).all
     end
 
 

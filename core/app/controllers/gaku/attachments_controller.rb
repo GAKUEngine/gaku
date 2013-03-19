@@ -40,7 +40,7 @@ module Gaku
 		def recovery
 			@attachment = Attachment.unscoped.find(params[:id])
 			@attachment.update_attribute(:is_deleted, false)
-			flash.now[:notice] = t('attachments.attachment_recovered')
+			flash.now[:notice] = t('attachment.attachment_recovered')
 			respond_to do |format|
 				format.js { render 'admin/disposals/recover_attachment'}
 			end

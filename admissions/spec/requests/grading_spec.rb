@@ -8,10 +8,10 @@ describe 'Admin Admissions Grading' do
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id, is_deleted:false, admitted:false) }
-  
+
 
   before do
-    @admission = create(:admission, 
+    @admission = create(:admission,
                           student_id: student.id)
     student.admission = @admission
     student.save!
@@ -30,9 +30,8 @@ describe 'Admin Admissions Grading' do
 
     it 'grades' do
       fill_in 'portion_score', with: 89
-      sleep 3 #this is needed because sometimes test fails
       click '.exam-parts' #TODO fix this
-      wait_for_ajax
+      sleep 1
       visit gaku.admin_admissions_path
       select 'Passed', from: 'state_id'
       click_on 'Save'
@@ -55,13 +54,13 @@ describe 'Admin Admissions Grading' do
     end
 
   end
-  
+
   context 'attendance', js:true do
 
     before do
-      page.has_content?('Grade Exam') 
+      page.has_content?('Grade Exam')
       click_on 'Grade Exam'
-      click '.btn'
+      click '.portion_set_attendance'
       page.should have_css '.popover-content'
       #TODO add some predefined reasons
     end
@@ -74,18 +73,18 @@ describe 'Admin Admissions Grading' do
     end
 
     it 'adds attendance custom reason' do
-      fill_in 'custom-reason', with: 'Illness' 
+      fill_in 'custom-reason', with: 'Illness'
       click_on 'Submit'
       page.should_not have_css '.popover-content'
       find('.score-cell')['disabled'].should == "true"
     end
 
     it 'removes attendance reason' do
-      fill_in 'custom-reason', with: 'Illness' 
+      fill_in 'custom-reason', with: 'Illness'
       click_on 'Submit'
       page.should_not have_css '.popover-content'
       find('.score-cell')['disabled'].should == "true"
-      click '.btn'
+      click '.portion_set_attendance'
       page.find('.delete-attendance').click
       wait_for_ajax
       find('.score-cell')['disabled'].should == nil

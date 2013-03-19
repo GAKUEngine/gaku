@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::AdmissionMethodsController do
 
-  let(:admission_method) { create(:admission_method) }
+  let(:admission_method) { create(:admission_method_without_phases) }
 
   describe "GET #index" do
     it "is successful" do
@@ -49,7 +49,7 @@ describe Gaku::Admin::AdmissionMethodsController do
     context "with valid attributes" do
       it "saves the new admission method in the db" do
         expect{
-          gaku_js_post :create, admission_method: attributes_for(:admission_method)  
+          gaku_js_post :create, admission_method: attributes_for(:admission_method_without_phases)  
         }.to change(Gaku::AdmissionMethod, :count).by 1
       end
     end
@@ -65,13 +65,13 @@ describe Gaku::Admin::AdmissionMethodsController do
   describe "PUT #update" do
 
     it "locates the requested @admission_method" do
-      gaku_put :update, id: admission_method, admission_method: attributes_for(:admission_method) 
+      gaku_put :update, id: admission_method, admission_method: attributes_for(:admission_method_without_phases) 
       assigns(:admission_method).should eq(admission_method)
     end
 
     context "valid attributes" do
       it "changes admission metod's attributes" do
-        gaku_put :update, id: admission_method, admission_method: attributes_for(:admission_method, name: "Regular Admissions")
+        gaku_put :update, id: admission_method, admission_method: attributes_for(:admission_method_without_phases, name: "Regular Admissions")
         admission_method.reload
         admission_method.name.should eq("Regular Admissions")
 
@@ -81,7 +81,7 @@ describe Gaku::Admin::AdmissionMethodsController do
 
     context "invalid attributes" do
       it "does not change admission_method's attributes" do
-        gaku_js_put :update, id: admission_method, admission_method: attributes_for(:admission_method, name: "")
+        gaku_js_put :update, id: admission_method, admission_method: attributes_for(:admission_method_without_phases, name: "")
         admission_method.reload
         admission_method.name.should_not eq("")
       end

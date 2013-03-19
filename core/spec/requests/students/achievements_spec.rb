@@ -8,6 +8,7 @@ describe 'Student Achievements' do
   let(:achievement) { create(:achievement) }
   let(:achievement2) { create(:achievement, :name => 'Another achievement') }
   let(:student_achievement) { create(:student_achievement, :student => student, :achievement => achievement) }
+  let!(:el) { '#achievements' }
 
   before :all do
     set_resource 'student-achievement'
@@ -18,7 +19,7 @@ describe 'Student Achievements' do
     before do
       achievement
       visit gaku.edit_student_path(student)
-      click '#index-student-achievements-link'
+      click el
       click new_link
       wait_until_visible '#cancel-student-achievement-link'
     end
@@ -30,7 +31,7 @@ describe 'Student Achievements' do
         wait_until_invisible form
       end.to change(Gaku::StudentAchievement, :count).by(1)
 
-      page.should have_content(achievement.name)
+      within(el) { page.should have_content(achievement.name) }
       within(count_div) { page.should have_content('Achievements list(1)')}
       flash_created?
     end
@@ -39,6 +40,9 @@ describe 'Student Achievements' do
       ensure_cancel_creating_is_working
     end
 
+    it {has_validations?}
+
+
   end
 
   context 'existing',  :js => true do
@@ -46,7 +50,7 @@ describe 'Student Achievements' do
       achievement2
       student_achievement
       visit gaku.edit_student_path(student)
-      click '#index-student-achievements-link'
+      click el
     end
 
     context '#edit' do
@@ -58,8 +62,11 @@ describe 'Student Achievements' do
         select achievement2.name, :from => 'student_achievement_achievement_id'
         click submit
 
-        page.should have_content(achievement2)
-        page.should_not have_content(achievement)
+        within(el) do
+          page.should have_content(achievement2)
+          page.should_not have_content(achievement)
+        end
+
         flash_updated?
       end
 
@@ -76,7 +83,7 @@ describe 'Student Achievements' do
         ensure_delete_is_working
       end.to change(Gaku::StudentAchievement, :count).by(-1)
 
-      page.should_not have_content(achievement)
+      within(el) { page.should_not have_content(achievement) }
       within(count_div) { page.should have_content('Achievements list') }
       flash_destroyed?
     end

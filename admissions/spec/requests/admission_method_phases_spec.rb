@@ -4,7 +4,7 @@ describe 'Admin Admission Method Phases' do
 
   as_admin
 
-  let!(:admission_method) { create(:admission_method) }
+  let!(:admission_method) { create(:admission_method_without_phases) }
   let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
   let(:admission_phase_state) { create( :admission_phase_state,
                                         :can_progress => true,
@@ -25,6 +25,7 @@ describe 'Admin Admission Method Phases' do
       visit gaku.admin_admission_method_path(admission_method)
       click new_link
       wait_until_visible submit
+      wait_for_ajax
     end
 
     it 'creates and shows' do
@@ -42,6 +43,8 @@ describe 'Admin Admission Method Phases' do
     it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it {has_validations?}
 
   end
 
@@ -252,13 +255,6 @@ describe 'Admin Admission Method Phases' do
       within(count_div) { page.should_not have_content 'Admission Phases list(1)' }
       page.should_not have_content admission_phase.name
       flash_destroyed?
-    end
-  end
-
-  context 'when select back' do
-    pending 'returns to admission_methods/index page' do
-      click_on 'Back'
-      current_path.should == "/admission_methods"
     end
   end
 

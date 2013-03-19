@@ -238,7 +238,7 @@ describe 'Admin Admissions' do
 
         end
 
-        context 'Journey - add new student and' do
+        context 'Journey - add new student and', js:true do
 
           before do
             click_on 'New Applicant'
@@ -282,9 +282,8 @@ describe 'Admin Admissions' do
             page.should have_content 'Grade Exam' 
             click_on 'Grade Exam'
             fill_in 'portion_score', with: 89
-            sleep 1 #this is needed because sometimes test fails
             click '.exam-parts' #TODO fix this
-            wait_for_ajax
+            sleep 1
             visit gaku.admin_admissions_path
             #Exam | Passed
             within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") do

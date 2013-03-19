@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
-  let(:admission_method) { create(:admission_method) }
+  let(:admission_method) { create(:admission_method_without_phases) }
   let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
 
   describe 'GET #new' do

@@ -7,6 +7,47 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
     'keypress   .portion_score_update' :        'onEnterActions'
     'click      .portion_set_attendance' :      'setPortionAttendance'
     'click      .portion_score_update input':   'removeBorder'
+    'click      .hide-completed' :              'fetchCompleted'
+    'click      .show-completed' :              'showCompleted'
+
+
+  showCompleted: (event)->
+    completed = $('.show-completed').attr('data-completed').split(',')
+    for v in completed
+      $("tr.student_#{v}").each ->
+        $(@).fadeIn()
+
+    $(event.currentTarget).removeClass('show-completed')
+                          .addClass('hide-completed')
+                          .text('Hide Completed')
+                          .removeAttr('data-completed')
+
+
+  fetchCompleted: (event)->
+    event.preventDefault()
+    completed =  new GAKUEngine.Models.Completed
+    completed.url = 'completed'
+
+    completed.fetch
+      success: =>
+        @hideCompleted(completed)
+        @changeButtonState(event, completed)
+
+  changeButtonState: (event, completed)->
+    completedArray = []
+    _.each completed.attributes, (v, k)->
+      completedArray.push v
+
+    $(event.currentTarget).removeClass('hide-completed')
+                          .addClass('show-completed')
+                          .text('Show Completed')
+                          .attr('data-completed', completedArray)
+
+
+  hideCompleted: (completed)->
+    _.each completed.attributes, (v, k)->
+      $("tr.student_#{v}").each ->
+        $(@).fadeOut()
 
 
   render: ->

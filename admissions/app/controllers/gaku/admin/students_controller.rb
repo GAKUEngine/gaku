@@ -4,6 +4,7 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
+      #respond_to :xls, :only => :index
 
       before_filter :select_vars,       :only => [:index,:new, :edit]
       before_filter :notable,           :only => [:show, :edit]
@@ -46,18 +47,6 @@ module Gaku
       def edit
         session[:return_to] = request.referer
         edit!
-      end
-
-      def edit_enrollment_status
-        @student = Student.find(params[:id])
-      end
-
-      def enrollment_status
-        @student = Student.find(params[:id])
-        @student.update_attributes(params[:student])
-        if @student.save
-          respond_with @student
-        end
       end
 
       def soft_delete

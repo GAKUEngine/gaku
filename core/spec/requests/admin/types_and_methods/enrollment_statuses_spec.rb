@@ -29,6 +29,8 @@ describe 'Admin Enrollment Statuses' do
       flash_created?
     end
 
+    it { has_validations? }
+
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
@@ -59,6 +61,12 @@ describe 'Admin Enrollment Statuses' do
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
+
+      it 'has validations' do
+        fill_in 'enrollment_status_name', :with => ''
+        has_validations?
+      end
+
     end
 
 

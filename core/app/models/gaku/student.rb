@@ -25,7 +25,7 @@ module Gaku
     has_many :simple_grades
 
     belongs_to :user
-    belongs_to :commute_method
+    belongs_to :commute_method_type
     belongs_to :scholarship_status
     belongs_to :enrollment_status
 
@@ -37,7 +37,7 @@ module Gaku
                                :name, :surname, :middle_name,
                                :student_id_number, :student_foreign_id_number,
                                :scholarship_status_id,
-                               :commute_method_id, :enrollment_status_id,
+                               :commute_method_type_id, :enrollment_status_id,
                                :is_deleted
                              ]
 
@@ -45,10 +45,12 @@ module Gaku
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
                     :student_id_number, :student_foreign_id_number,
-                    :scholarship_status_id, :enrollment_status_id, :commute_method_id
+                    :scholarship_status_id, :enrollment_status_id, :commute_method_type_id
 
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
+
+    before_create :set_scholarship_status
 
 
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
@@ -84,6 +86,10 @@ module Gaku
     def address_widget
       pa = self.addresses.first
       pa.blank? ? nil : pa.city
+    end
+
+    def set_scholarship_status
+      self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end
 
   end

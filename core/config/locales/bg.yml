@@ -35,8 +35,8 @@ bg:
     zipcode: Пощенски код
   admitted: Приет на
   alert:
-    already_added: '%{resource} са вече добавени!'
-    empty: '%{resource} е празен!'
+    already_added: ! '%{resource} са вече добавени!'
+    empty: ! '%{resource} е празен!'
     not_selected: Няма избран %{resource}!
   and: и
   are_you_sure: Сигурен ли сте?
@@ -75,8 +75,8 @@ bg:
     auto_credit: Авто Кредит
     color_code: Код за цвят
     counted_absent: Брой отсъстващи
-    credit_rate: 
-    disable_credit: 
+    credit_rate: Кредитен Курс
+    disable_credit: Премахни Кредит
     edit: Редактирай типове на посещаемост
     list: Списък с типове на посещаемост
     name: Име
@@ -100,7 +100,7 @@ bg:
     name: Име
     new: Нов Факултет
     plural: Факултети
-    primary: 
+    primary: Основен
     save: Запази Факултет
     singular: Факултет
   cancel: Отмени
@@ -195,7 +195,7 @@ bg:
     add: Добави Курс
     choose: Избери Курс
     code: Код на Курса
-    code_sample: '[ПР: ЕСЕН2020]'
+    code_sample: ! '[ПР: ЕСЕН2020]'
     combined_code: Комбиниран Код
     count: Брой Курсове
     edit: Редактирай Курс
@@ -240,89 +240,91 @@ bg:
       surname_reading: Фамилно име (чете се)
     import: CSV Импорт
   date_placeholder: ГГГГ-ММ-ДД
-  default: 
+  default: По подразбиране
   delete: Изтрий
   description: Описание
   destroy: Изтрий
   devise:
     confirmations:
-      confirmed: 
-      send_instructions: 
-      send_paranoid_instructions: 
-    email: 
+      confirmed: Вашият акаунт беше създаден успешно. В момента сте в системата.
+      send_instructions: Ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
+      send_paranoid_instructions: Ако вашият имейл адрес е в нашата база данни, ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
+    email: Имейл
     failure:
-      already_authenticated: 
-      inactive: 
-      invalid: 
-      invalid_token: 
-      locked: 
-      timeout: 
-      unauthenticated: 
-      unconfirmed: 
-    login: 
+      already_authenticated: Влезли сте в системата.
+      inactive: Вашият акаунт не е активиран все още.
+      invalid: Невалиден имейл или парола.
+      invalid_token: Невалиден аутентикиращ токен.
+      locked: Вашият акаунт е заключен.
+      timeout: Вашата сесия е изтекла, моля влезте в системата за да продължите.
+      unauthenticated: Нужно е да влезете в системата преди да продължите.
+      unconfirmed: Нужно е да потвърдите вашия акаунт преди да продължите.
+    login: Потребителско име или Имейл
     mailer:
       confirmation_instructions:
-        subject: 
+        subject: Инструкции за потвърждаване
       reset_password_instructions:
-        subject: 
+        subject: Инструкции за ресет на парола
       unlock_instructions:
-        subject: 
+        subject: Отключи Инструкции
     omniauth_callbacks:
-      failure: 
-      success: 
-    password: 
-    password_confirmation: 
+      failure: Системата не можа да ви оторизира от %{kind} защото "%{reason}".
+      success: Успешно оторизиран от %{kind} акаунт.
+    password: Парола
+    password_confirmation: Потвърждаване на парола
     passwords:
-      forgot: 
-      no_token: 
-      send_instructions: 
-      send_paranoid_instructions: 
-      updated: 
-      updated_not_active: 
+      forgot: Забравена парола?
+      no_token: Няма Токен.
+      send_instructions: Ще получите имейл с инстукции как да нулирате вашата парола.
+      send_paranoid_instructions: Ако вашият имейл е вече в нашата база данни, ще получите линк за възстановяване на вашата парола на вашия имейл
+      updated: Вашата парола беше променена успешно. В момента сте в системата.
+      updated_not_active: Вашата парола беше променена успешно.
     registrations:
-      admin_set_up: 
-      destroyed: 
-      inactive_signed_up: 
+      admin_set_up: ! 'Това е първият път в който ползвате GAKU Engine.
+
+        Моля виведете данни за потребител Администратор.'
+      destroyed: Довиждане! Вашият акаунт беше успешно затворен. Надяваме се да ви видим отново.
+      inactive_signed_up: Вие се регистрирахте успешно в системата. Въпреки това, не можете да влезете в системата, защото вашият акаунт е  %{reason}.
       reasons:
-        inactive: 
-        locked: 
-        unconfirmed: 
-      sign_up: 
-      signed_up: 
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
-      updated: 
+        inactive: неактивен
+        locked: заключен
+        unconfirmed: непотвърден
+      sign_up: Регистрирайте се
+      signed_up: Добре дошли! Вие се регистрирахте успешно.
+      signed_up_but_inactive: Този акаунт е неактивен
+      signed_up_but_locked: Този акаунт е заключен
+      signed_up_but_unconfirmed: Този акаунт все още не е потвърден
+      update_needs_confirmation: Обновяването на регистрацията има нужда от потвърждаване
+      updated: Вие обновихте вашият акаунт успешно.
     sessions:
-      remember_me: 
-      sign_in: 
-      sign_out: 
-      signed_in: 
-      signed_out: 
+      remember_me: Запомни ме
+      sign_in: Влизане в системата
+      sign_out: Излизане от системата
+      signed_in: Влязохте в системата успешно.
+      signed_out: Излязохте от системата успешно.
     unlocks:
-      send_instructions: 
-      send_paranoid_instructions: 
-      unlocked: 
-    username: 
-  edit: 
-  email: 
-  enroll_to_class: 
+      send_instructions: Ще получите имейл с инструкции как да отключите вашия акаунт до няколко минути.
+      send_paranoid_instructions: Ако вашият акаунт вече съществува, ще получите имейл с инструкции как да го отключите до няколко минути.
+      unlocked: Вашият акаунт е отключен успешно. В момента сте в системата.
+    username: Потребителско Име
+  edit: Редактиране
+  email: Поща
+  enroll_to_class: Записване в клас
   enrollment:
-    plural: 
-    singular: 
+    plural: Записи
+    singular: Запис
   enrollment_status:
-    active: 
-    add: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    singular: 
+    active: Активен
+    add: Добави Статус на Записване
+    edit: Редактирай Статус на Записване
+    list: Списък Статуси на Записване
+    name: Име
+    new: Нов Статус на Записване
+    plural: Статуси на Записване
+    save: Запази Статус на Записване
+    singular: Статус на Записване
   enrollment_status_type:
-    active: 
+    active: Активен
     add: 
     edit: 
     list: 
@@ -376,6 +378,7 @@ bg:
     count: 
     description: 
     edit: 
+    error: 
     execution_date: 
     is_master: 
     list: 
@@ -506,6 +509,7 @@ bg:
           grading: 
           locale: 
           student: 
+        pagination: 
         plural: 
         save: 
         singular: 
@@ -588,6 +592,10 @@ bg:
     grading:
       grading_method: 
       grading_scheme: 
+    pagination: 
+    per_page:
+      changes: 
+      default: 
     plural: 
     save: 
     singular: 
