@@ -52,6 +52,37 @@ describe 'Exam Portion Attachments' do
       visit gaku.exam_exam_portion_path(exam, exam_portion)
     end
 
+    context '#edit' do
+      before do
+        within(table) { click edit_link }
+      end
+
+      it 'edits' do
+        page.should have_content attachment.name
+
+        fill_in 'attachment_name', :with => 'Different name'
+        fill_in 'attachment_description', :with => 'Different description'
+
+        click submit
+
+        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
+
+        flash_updated?
+        page.should have_content 'Different name'
+        page.should_not have_content attachment.name
+
+      end
+
+      it "cancels editing" do
+        ensure_cancel_modal_is_working
+      end
+
+      it 'has validations' do
+        fill_in 'attachment_name', :with => ''
+        has_validations?
+      end
+    end
+
     it 'deletes' do
       within(count_div) { page.should have_content 'Attachments list(1)' }
 
