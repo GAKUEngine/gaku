@@ -1,4 +1,6 @@
 en:
+  import: Import
+  export: Export
   achievement:
     add: Add Achievement
     authority: Authority

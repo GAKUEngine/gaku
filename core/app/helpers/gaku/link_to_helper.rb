@@ -12,6 +12,13 @@ module Gaku
 
     def button(text, resource, options = {})
       attributes = {
+        :class => "btn mr-s"
+      }.merge(options)
+      link_to text, resource, attributes
+    end
+
+    def primary_button(text, resource, options = {})
+      attributes = {
         :class => "btn btn-primary mr-s"
       }.merge(options)
       link_to text, resource, attributes
@@ -21,6 +28,22 @@ module Gaku
       name = ("<i class='icon-white icon-file'></i>" + text).html_safe
       attributes = {
         :class => "btn btn-primary"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def link_to_import(text, resource, options = {})
+      name = ('<i class="icon-upload"></i> '+ text).html_safe
+      attributes = {
+        :class => 'mr-s btn'
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def link_to_export(text, resource, options = {})
+      name = ('<i class="icon-download"></i> '+ text).html_safe
+      attributes = {
+        :class => 'mr-s btn'
       }.merge(options)
       link_to name, resource, attributes
     end

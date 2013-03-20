@@ -1,13 +1,14 @@
 - content_for :title, t(:'admissions.candidates.list')
 .pull-right
   #admissions_links
-    = render 'gaku/admin/admissions/admissions_links', :admission_params => @admission_params
+
 .row-fluid
   .pull-left
     h4.mt-xs.mb-0 =t(:'admissions.candidates.list')
   .pull-right
     #new-admin-admission-link
       = render 'gaku/admin/admissions/links', :admission_method => @admission_method
+      = render 'gaku/admin/admissions/admissions_links', :admission_params => @admission_params
 .row-fluid
   hr
 .row-fluid
