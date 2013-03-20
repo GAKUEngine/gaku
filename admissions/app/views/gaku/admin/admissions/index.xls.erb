@@ -60,7 +60,7 @@
         
         <Cell ss:StyleID="s1"><Data ss:Type="String">素点合計</Data></Cell>
     <% unless phase.exam.exam_portions.blank? %>
-      <% eps = phase.exam.exam_portions %>
+      <% eps = @admission_method.admission_phases[1].exam.exam_portions %>
       <% eps.each do |ep| %>
           <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
       <% end %>
