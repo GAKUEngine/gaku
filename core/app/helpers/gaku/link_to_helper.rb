@@ -25,7 +25,7 @@ module Gaku
     end
 
     def link_to_file(text, resource, options = {})
-      name = ("<i class='icon-white icon-file'></i>" + text).html_safe
+      name = ("<i class='icon-white icon-file'></i> " + text).html_safe
       attributes = {
         :class => "btn btn-primary"
       }.merge(options)
@@ -33,7 +33,7 @@ module Gaku
     end
 
     def link_to_upload_image(resource, options = {})
-      name = ("<i class='icon-camera'></i>" + t(:'pictures.change')).html_safe
+      name = ("<i class='icon-camera'></i> " + t(:'pictures.change')).html_safe
       attributes = {
         :class => "btn span12 mr-s"
       }.merge(options)
@@ -41,7 +41,7 @@ module Gaku
     end
 
     def link_to_upload(options = {})
-      text = ("<i class='icon-upload'></i>" + t(:'pictures.upload')).html_safe
+      text = ("<i class='icon-upload'></i> " + t(:'pictures.upload')).html_safe
       attributes = {
         :class => "btn span12 mr-s"
       }.merge(options)
