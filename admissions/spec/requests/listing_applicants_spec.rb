@@ -52,12 +52,10 @@ describe 'Admin Listing Applicants' do
         click '#delete-student-link'
         within(modal) { click_on "Delete" }
         accept_alert
-        #wait_for_ajax
-        student.reload
+        flash_destroyed?
       end
 
       it 'soft deletes the applicant' do
-        page.should have_content "successfully"
         current_path.should == "/admin/admissions/listing_applicants"
         page.should_not have_content "#{student.name}"
         visit gaku.listing_applicants_admin_admissions_path
@@ -74,17 +72,18 @@ describe 'Admin Listing Applicants' do
         page.should_not have_content "#{student.name}"
       end
 
-      xit 'shows the deleted applicant' do
+      it 'shows the deleted applicant' do
         visit gaku.students_admin_disposals_path
         page.should have_content "#{student.name}"
         click '.show-link'
-        current_path.should == ""
+        current_path.should == "/admin/students/#{student.id}"
       end
 
-      xit 'revert deleting' do
+      it 'revert deleting' do
         visit gaku.students_admin_disposals_path
         page.should have_content "#{student.name}"
         click '.recovery-link'
+        flash_recovered?
         visit gaku.listing_applicants_admin_admissions_path
         page.should have_content "#{student.name}"
       end
@@ -94,8 +93,8 @@ describe 'Admin Listing Applicants' do
         page.should have_content "#{student.name}"
         click delete_link
         accept_alert
+        flash_destroyed?
         page.should_not have_content "#{student.name}"
-        #student.reload
         visit gaku.students_admin_disposals_path
         page.should_not have_content "#{student.name}"
         visit gaku.listing_applicants_admin_admissions_path
