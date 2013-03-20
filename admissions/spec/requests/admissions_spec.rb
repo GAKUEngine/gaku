@@ -53,7 +53,7 @@ describe 'Admin Admissions' do
         it 'shows first method\'s phases' do
           within (@nav_tabs) do
             page.should have_content "#{@first_method.admission_phases.first.name}"
-            page.should have_content "#{@first_method.admission_phases.last.name}" 
+            page.should have_content "#{@first_method.admission_phases.last.name}"
           end
         end
 
@@ -105,8 +105,8 @@ describe 'Admin Admissions' do
           page.evaluate_script('window.history.back()')
           check_path(current_url,"/admin/admissions?admission_period_id=#{admission_period_no_methods.id}")
           wait_for_ajax
-          click_on 'Listing Admissions' 
-          check_path(current_url,"/admin/admissions/listing_admissions?admission_period_id=#{admission_period_no_methods.id}")          
+          click_on 'Listing Admissions'
+          check_path(current_url,"/admin/admissions/listing_admissions?admission_period_id=#{admission_period_no_methods.id}")
         end
 
       end
@@ -123,7 +123,7 @@ describe 'Admin Admissions' do
         it 'shows selected method\'s phases' do
           within (@nav_tabs)  do
             page.should have_content "#{@last_method.admission_phases.first.name}"
-            page.should have_content "#{@last_method.admission_phases.last.name}" 
+            page.should have_content "#{@last_method.admission_phases.last.name}"
           end
         end
 
@@ -182,7 +182,7 @@ describe 'Admin Admissions' do
 
           it 'has validations' do
             click_on 'Create Student'
-            page.should have_content "can't be blank" 
+            page.should have_content "can't be blank"
           end
 
           it 'cancels adding' do
@@ -201,7 +201,7 @@ describe 'Admin Admissions' do
             admission_period
             visit gaku.admin_admissions_path
             click_on 'new-create-multiple-admissions-student-link'
-            wait_for_ajax          
+            wait_for_ajax
           end
 
           it 'adds existing' do
@@ -226,14 +226,6 @@ describe 'Admin Admissions' do
             within ('#state1' ) do
               within('#students-index') { page.should have_content ("#{student.name}") }
             end
-          end
-
-          it 'cancels adding' do
-            expect do
-              click_on 'Cancel'
-              wait_until_visible('#new-admin-admission-link')
-              wait_until_invisible('#cancel-class-group-student-link')
-            end.to change(Gaku::Admission, :count).by 0
           end
 
         end
@@ -279,7 +271,7 @@ describe 'Admin Admissions' do
               wait_until { size_of("#students-index tbody tr").should eq 0 }
             end
             #grade exam
-            page.should have_content 'Grade Exam' 
+            page.should have_content 'Grade Exam'
             click_on 'Grade Exam'
             fill_in 'portion_score', with: 89
             click '.exam-parts' #TODO fix this
@@ -314,11 +306,11 @@ describe 'Admin Admissions' do
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end
-          
+
           context 'exports' do
           end
         end
-        
+
       end
 
     end

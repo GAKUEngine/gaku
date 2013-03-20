@@ -1,0 +1,15 @@
+.row-fluid
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a#student-guardian-addresses-tab-link data-toggle="tab" href="#addresses"
+            = print_count @guardian.addresses.count, t(:'address.plural')
+        li
+          a#student-guardian-contacts-tab-link data-toggle="tab" href="#contacts"
+            = print_count @guardian.contacts.count, t(:'contact.plural')
+      .tab-content
+        #addresses.tab-pane.active
+          = render 'gaku/addresses/addresses', :nested_resources => [@student, @guardian]
+        #contacts.tab-pane
+          = render 'gaku/contacts/contacts', :nested_resources => [@student, @guardian]

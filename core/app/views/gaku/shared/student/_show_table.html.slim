@@ -5,20 +5,20 @@
 
     tbody
 
+    tr
+      th width="20%" = t('class')
+      td#student-class-group-enrollment
+        = student_presenter.class_group
+
       = render 'gaku/shared/fields/person_show_table', :person => student
 
       tr
-        th width="20%" = t('class')
-        td#student-class-group-enrollment
-          = student_presenter.class_group
-
-      tr
         th = t(:'contact.primary')
-        td = student_presenter.primary_contact
+        td#contact_widget = student.contact_widget
 
       tr
         th = t(:'address.primary')
-        td = student_presenter.primary_address
+        td#address_widget = student.address_widget
 
       tr
         th = t(:'admitted')

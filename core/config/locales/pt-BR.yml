@@ -59,8 +59,11 @@ pt-BR:
     asset_type: 
     asset_upload: 
     assets: 
+    associated: 
+    attachment_recovered: 
     create: Criar Anexo
     description: Descrição
+    edit: 
     file_name: Nome do arquivo
     file_size: Tamanho do arquivo
     file_type: Tipo do arquivo
@@ -390,6 +393,7 @@ pt-BR:
     singular: 
     use_weighting: 
     weight: 
+  export: 
   external_school_record:
     absences: 
     attendance_rate: 
@@ -473,6 +477,7 @@ pt-BR:
   hide: 
   history: 
   id: 
+  import: 
   import_format: 
   language: 
   languages:
@@ -639,6 +644,11 @@ pt-BR:
     singular: 
     slogan: 
     vice_principal: 
+  school_level:
+    add_school_level: 
+    plural: 
+    remove_school_level: 
+    singular: 
   search: 
   select: 
   semester:
@@ -728,7 +738,12 @@ pt-BR:
     show: 
     singular: 
   teacher:
+    edit: 
+    list: 
+    new: 
     plural: 
+    save: 
+    show: 
     singular: 
   title: 
   user:

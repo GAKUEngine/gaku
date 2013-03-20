@@ -1,14 +1,14 @@
 = well_div do
-  = show_table do
-    = person_caption @guardian
-    tbody
-      = render 'fields', :guardian => @guardian
+  .span9#guardian-table
+    = show_table do
+      = person_caption @guardian
+      tbody
+        = render 'show_table', :guardian => @guardian
+  .span3.well
+    = render :partial => 'picture', :locals => { :guardian => @guardian, :student => @student }
 
-= well_div do
-  = render 'gaku/contacts/contacts', :nested_resources => [@student, @guardian]
 
-= well_div do
-  = render 'gaku/addresses/addresses', :nested_resources => [@student, @guardian]
+= render 'tabs', :guardian => @guardian
 
 = well_div do
   = link_to_back @student

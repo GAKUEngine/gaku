@@ -1,5 +1,13 @@
 = render 'gaku/shared/fields/person_show_table', :person => guardian
 
 tr
+  th = t(:'contact.primary')
+  td#contact_widget = guardian.contact_widget
+
+tr
+  th = t(:'address.primary')
+  td#address_widget = guardian.address_widget
+
+tr
   th = t(:'guardian.relationship')
   td.vm-tc style="font-size:12pt" = guardian.relationship

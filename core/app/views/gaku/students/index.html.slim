@@ -6,8 +6,8 @@
       = print_count @count, t(:'student.list')
   .pull-right
     = ajax_link_to_new t(:'student.new'), new_student_path, :id => "new-student-link"
-    = button t(:'student.import'), importer_index_path, :id => "import-students-link"
-    = button t(:'student.export'), {:action => :csv, :format => :csv}, :id => 'export-students-link'
+    = link_to_import t(:'import'), importer_index_path, :id => "import-students-link"
+    = link_to_export t(:'export'), {:action => :csv, :format => :csv}, :id => 'export-students-link'
 
 = content_for :new_form do
   #new-student.hide

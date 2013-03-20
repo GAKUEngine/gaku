@@ -5,9 +5,10 @@ module Gaku
 
   	has_many :campuses
     has_many :simple_grades
+    has_many :school_levels
 
   	attr_accessible :name, :is_primary, :slogan, :description, :founded,
-                    :principal, :vice_principal, :grades, :code
+                    :principal, :vice_principal, :grades, :code, :school_levels_attributes
 
     validates_presence_of :name
 
@@ -15,6 +16,8 @@ module Gaku
       :class_name => 'Gaku::Campus',
       :conditions => { :is_master => true },
       :dependent => :destroy
+
+    accepts_nested_attributes_for :school_levels
 
     after_create :build_default_campus
 
@@ -26,6 +29,9 @@ module Gaku
       self.is_primary
     end
 
+    def self.primary
+      where(:is_primary => true).first
+    end
 
     private
 

@@ -59,8 +59,11 @@ ja:
     asset_type: アセットの種類
     asset_upload: アセットのアップロードに成功しました!
     assets: アセット
+    associated: 添付出来るファイルがありません。
+    attachment_recovered: データの復元が成功しました。
     create: アセットを登録
     description: アセット詳細
+    edit: 添付ファイルを編集する
     file_name: ファイル名
     file_size: ファイルサイズ
     file_type: ファイル種類
@@ -70,7 +73,6 @@ ja:
     plural: 添付ファイル
     save: 添付ファイルを保存
     singular: 添付ファイル
-    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: 出席類を追加
     auto_credit: 点数の自動計算
@@ -395,6 +397,7 @@ ja:
     singular: 試験要素
     use_weighting: 加重率を使用
     weight: 加重率
+  export: エクスポート
   external_school_record:
     absences: 欠席数
     attendance_rate: 出席率
@@ -478,6 +481,7 @@ ja:
   hide: 非表示
   history: 履歴
   id: ID
+  import: インポート
   import_format: インポート形式
   language: 言語
   languages:
@@ -495,12 +499,7 @@ ja:
         student_addresses: 生徒住所
         student_contacts: 生徒連絡先
         students: 生徒
-      users:
-        users_and_roles: Users & Roles
-        users: Users
-        roles: Roles
       disposals:
-        student: Student Disposals
         attachment: 添付ファイルを処分
         course_group: 授業グループを処分
         disposals: 処分
@@ -509,7 +508,10 @@ ja:
         student_address: 生徒住所削除一覧
       grading_methods: 評価法
       preset:
+<<<<<<< HEAD
         pagination: ページ分けの設定
+=======
+>>>>>>> kagetsuki/develop
         grading:
           grading_method: 採点方法
           grading_scheme: 採点方式
@@ -518,6 +520,10 @@ ja:
           grading: 採点プリセット
           locale: 言語プリセット
           student: 生徒プリセット
+<<<<<<< HEAD
+=======
+        pagination: ページ分けの設定
+>>>>>>> kagetsuki/develop
         plural: プリセット
         save: プリセットを保存
         singular: プリセット
@@ -529,7 +535,6 @@ ja:
       school_details: 学校詳細
       schools: 学校
       specialties: 専攻
-      grading_methods: Grading Methods
       system:
         backup: バックアップ
         system_tools: システムツール
@@ -558,10 +563,6 @@ ja:
       plural: 部活動
     student:
       plural: 生徒
-    teacher:
-      plural: 教師
-    extracurricular_activity:
-      plural: Extracurriculars
     syllabus:
       plural: 科目
     teacher:
@@ -654,6 +655,11 @@ ja:
     singular: 学校
     slogan: 校訓
     vice_principal: 教頭
+  school_level:
+    add_school_level: 学級を追加する
+    plural: 学級
+    remove_school_level: この学級を削除する
+    singular: 学級
   search: 検索
   select: 選択
   semester:
@@ -743,7 +749,12 @@ ja:
     show: 科目照会
     singular: 科目
   teacher:
+    edit: 教師情報の編集
+    list: 教師一覧
+    new: 教師の新規登録
     plural: 先生
+    save: 教師情報を保存
+    show: 教師情報を表示
     singular: 教師
   title: タイトル
   user:

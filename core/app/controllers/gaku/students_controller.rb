@@ -2,7 +2,7 @@ module Gaku
   class StudentsController < GakuController
     include SheetHelper
 
-    load_and_authorize_resource :class =>  Gaku::Student
+    load_and_authorize_resource :class =>  Gaku::Student, :except => [:recovery, :destroy]
 
     helper_method :sort_column, :sort_direction
 
@@ -45,6 +45,7 @@ module Gaku
 
     def recovery
       @student.update_attribute(:is_deleted, false)
+      flash.now[:notice] = t(:'notice.recovered', :resource => t(:'student.singular'))
       respond_with @student
     end
 
@@ -74,7 +75,7 @@ module Gaku
       @student = get_student
       super do |format|
         if params[:student][:picture]
-          format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
+          format.html { redirect_to [:edit, @student], :notice => t('notice.uploaded', :resource => t('picture')) }
         else
           format.js { render }
           format.json { head :no_content }

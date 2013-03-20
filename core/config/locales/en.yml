@@ -59,18 +59,20 @@ en:
     asset_type: Asset type
     asset_upload: Asset was uploaded successfully!
     assets: Assets
+    associated: Attachable is not present
+    attachment_recovered: Asset was successfully recovered!
     create: Create Attachment
     description: Description
+    edit: Edit Attachment
     file_name: File name
     file_size: File size
     file_type: File type
-    list: Attachment list
+    list: Attachments list
     name: Name
     new: New Attachment
     plural: Attachments
-    singular: Attachment
     save: Save Attachment
-    attachment_recovered: Asset was successfully recovered!
+    singular: Attachment
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -395,6 +397,7 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
+  export: Export
   external_school_record:
     absences: Absences
     attendance_rate: Attendance Rate
@@ -478,6 +481,7 @@ en:
   hide: Hide
   history: History
   id: Id
+  import: Import
   import_format: Import Format
   language: Language
   languages:
@@ -644,6 +648,11 @@ en:
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
+  school_level:
+    add_school_level: Add School Level
+    plural: School Levels
+    remove_school_level: Remove this school level
+    singular: School Level
   search: Search
   select: Select
   semester:
@@ -733,7 +742,12 @@ en:
     show: Show Syllabus
     singular: Syllabus
   teacher:
+    edit: Edit Teacher
+    list: Teachers list
+    new: New Teacher
     plural: Instructors
+    save: Save Teacher
+    show: Show Teacher
     singular: Instructor
   title: Title
   user:

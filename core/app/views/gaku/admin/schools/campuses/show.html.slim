@@ -1,4 +1,4 @@
-.row-fluid
+= well_div do
   .span9
     = table_for 'campus-index' do
       tbody
@@ -10,6 +10,12 @@
   .span3.well
     = render 'picture', :campus => @campus
 
-= render 'gaku/contacts/contacts', :nested_resources => [:admin, @school, @campus]
-= hr
-= render 'gaku/admin/schools/campuses/addresses/addresses'
+= well_div do
+  = render 'gaku/contacts/contacts', :nested_resources => [:admin, @school, @campus]
+  = hr
+  = render 'gaku/admin/schools/campuses/addresses/addresses'
+
+= well_div do
+  .span12
+    = link_to_back admin_school_path(@school)
+

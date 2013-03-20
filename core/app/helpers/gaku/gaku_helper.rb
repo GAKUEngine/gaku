@@ -17,10 +17,13 @@ module Gaku
     end
 
 
-
     def can_edit?
-      if controller.action_name == "show" and controller.controller_name == "students"
-        false
+      if controller.action_name == "show"
+        if controller.controller_name == "students" or controller.controller_name == "guardians"
+          false
+        else
+          true
+        end
       else
         true
       end
@@ -106,6 +109,10 @@ module Gaku
 
     def schools
       Gaku::School.all.collect { |s| [s.name, s.id] }
+    end
+
+    def school_levels
+      Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id]}
     end
 
     def roles
@@ -227,6 +234,19 @@ module Gaku
         simple_grades.each do |simple_grade|
           string.concat "#{simple_grade.name} (#{simple_grade.grade})"
           string.concat ', ' unless simple_grade.equal? simple_grades.last
+        end
+      else
+        string.concat "Empty"
+      end
+      string.html_safe
+    end
+
+    def comma_separete_list(objects)
+      string = String.new
+      if objects.any?
+        objects.each do |object|
+          string.concat object.to_s
+          string.concat ', ' unless object.equal? objects.last
         end
       else
         string.concat "Empty"

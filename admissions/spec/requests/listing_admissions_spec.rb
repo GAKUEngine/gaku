@@ -60,18 +60,20 @@ describe 'Admin Listing Admissions' do
           page.should_not have_content "#{student.name}"
         end
 
-        xit 'shows the deleted admission' do
+        it 'shows the deleted admission' do
           visit gaku.students_admin_disposals_path
           page.should have_content "#{student.name}"
           click '.show-link'
-          current_path.should == ""
+          current_path.should == "/admin/students/#{student.id}"
         end
 
-        xit 'revert deleting' do
+        it 'revert deleting' do
           visit gaku.students_admin_disposals_path
           page.should have_content "#{student.name}"
           click '.recovery-link'
-          visit gaku.listing_admissions_admin_admissions_path
+          flash_recovered?
+          #reverts the student, but not the admission
+          visit gaku.listing_applicants_admin_admissions_path
           page.should have_content "#{student.name}"
         end
 
@@ -80,9 +82,9 @@ describe 'Admin Listing Admissions' do
           page.should have_content "#{student.name}"
           click delete_link
           accept_alert
-          sleep 1
+          flash_destroyed?
           page.should_not have_content "#{student.name}"
-          #student.reload
+          
           visit gaku.students_admin_disposals_path
           page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path

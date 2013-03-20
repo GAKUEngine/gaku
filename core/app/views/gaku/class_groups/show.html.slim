@@ -19,5 +19,7 @@
     = render 'gaku/notes/notes'
 
 = well_div do
-  = link_to_edit_with_text [:edit, @class_group], :remote => true
-  = link_to_back class_groups_path, :id => 'back-class-group-link'
+  .span6
+    = link_to_edit_with_text [:edit, @class_group], :remote => true
+  .span6
+    = link_to_back class_groups_path, :id => 'back-class-group-link'

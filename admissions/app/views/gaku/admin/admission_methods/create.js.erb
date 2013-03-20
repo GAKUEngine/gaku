@@ -1,6 +1,6 @@
 $('#admin-admission-methods-index tbody').append('<%= render_js_partial("admission_method", {:admission_method => @admission_method}) %>');
 
-$('#new-admin-admission-method').slideToggle();
+$('#new-admin-admission-method').slide();
 $('#new-admin-admission-method-link').show();
 
 showNotice("<%= render_flash %>");
