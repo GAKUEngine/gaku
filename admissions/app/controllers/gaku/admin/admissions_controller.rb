@@ -32,7 +32,7 @@ module Gaku
         session[:current_page] = 'admissions'
         respond_to do |format|
           format.html
-          format.xls  { #TODO render xls }
+          format.xls
         end
       end
 

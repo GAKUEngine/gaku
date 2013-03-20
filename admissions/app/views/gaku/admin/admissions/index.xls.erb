@@ -63,11 +63,18 @@
     <% eps.each do |ep| %>
         <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
     <% end %>
-        
-    <% @state_records[0].admission.student.simple_grades.each do |simple_grade| %>
-        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+       
+       
+       
+    <% @state_records.each_with_index do |record, index| %>
+      <% if record.admission_phase == phase && record.admission_phase_state == state %>
+        <% record.admission.student.simple_grades.each do |simple_grade| %>
+          <Cell ss:StyleID="s1"><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+        <% end %>
+      <% end %>
     <% end %>
-      
+    
+    
         <Cell ss:StyleID="s1"><Data ss:Type="String">欠席数（２年）</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">欠席数（３年）</Data></Cell>
         
