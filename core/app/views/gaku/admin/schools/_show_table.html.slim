@@ -26,6 +26,10 @@
       tr
         th.btn-c2 = t(:'school.grades')
         td = school.grades
+      -if school.primary?
+        tr
+          th.btn-c2 = t(:'school_level.plural')
+          td = comma_separete_list(school.school_levels)
 
   .span3.well
     = render 'gaku/admin/shared/picture', :resource => school

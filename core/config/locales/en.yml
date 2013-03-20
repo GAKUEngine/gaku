@@ -639,6 +639,11 @@ en:
     singular: School
     slogan: Slogan
     vice_principal: Vice Principal
+  school_level:
+    singular: School Level
+    plural: School Levels
+    add_school_level: Add School Level
+    remove_school_level: Remove this school level
   search: Search
   select: Select
   semester:

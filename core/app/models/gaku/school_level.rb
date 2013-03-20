@@ -4,5 +4,10 @@ module Gaku
     belongs_to :school
 
     validates :title, :presence => true
+
+    def to_s
+      title
+    end
+
   end
 end
