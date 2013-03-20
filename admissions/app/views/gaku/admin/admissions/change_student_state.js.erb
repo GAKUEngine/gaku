@@ -9,6 +9,7 @@ $('.change-state-form').fadeOut();
   <%- if @next_state.auto_progress == true && @progress_success %>
     $('div#state<%= @new_state.id %> table tbody').append('<%= render_js_partial("student", {:student => student, :state => @new_state}) %>');
     $('.change-state_<%= @new_state.id %>-form').html('<%= render_js_partial("state_change_form", :state => @new_state) %>')
+    $('#phase_<%= @new_state.admission_phase.id.to_s %>-grade-button').html('<%= render_js_partial("grade_button", :phase => @new_state.admission_phase) %>');
   <% end %>
 
   <%- @admission_method.admission_phases.each {|phase| %>
