@@ -7,6 +7,6 @@
 
 - if can_edit?
   .row-fluid.mt-s
-    = button_to t(:'pictures.change'), 'JavaScript:void(0);', :method => :get, :id => "upload-picture-link", :class => "span12 btn"
+    = link_to_upload_image 'JavaScript:void(0);', :method => :get, :id => "upload-picture-link"
     #upload-picture.hide
       = render 'gaku/shared/upload_picture', :resource => resource

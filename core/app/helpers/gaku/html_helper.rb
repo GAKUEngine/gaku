@@ -83,8 +83,8 @@ module Gaku
       when 3 then 95
       else num
       end
-      content_tag :th, class:"btn-info", style:"width:#{size}px" do
-        t('manage')
+      content_tag :th, class: "btn-inverse", style:"width:#{size}px" do
+        content_tag :i, nil,  class: "icon-edit icon-white"
       end
     end
 

@@ -32,6 +32,22 @@ module Gaku
       link_to name, resource, attributes
     end
 
+    def link_to_upload_image(resource, options = {})
+      name = ("<i class='icon-camera'></i>" + t(:'pictures.change')).html_safe
+      attributes = {
+        :class => "btn span12 mr-s"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def link_to_upload(options = {})
+      text = ("<i class='icon-upload'></i>" + t(:'pictures.upload')).html_safe
+      attributes = {
+        :class => "btn span12 mr-s"
+      }.merge(options)
+      button_tag(content_tag('span', text), attributes)
+    end
+
     def link_to_import(text, resource, options = {})
       name = ('<i class="icon-upload"></i> '+ text).html_safe
       attributes = {
@@ -96,9 +112,9 @@ module Gaku
     end
 
     def link_to_modal_delete(resource, options = {})
-      name = ("<i class='icon-white icon-remove'></i>").html_safe
+      name = ("<i class='icon-white icon-trash'></i>").html_safe
       attributes = {
-        :class => 'btn btn-mini btn-danger modal-delete-link'
+        :class => 'btn btn-danger modal-delete-link span12'
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -149,18 +165,26 @@ module Gaku
 
     # Edit button with text "Edit" and pencil image
     def link_to_edit_with_text(resource, options = {})
-      name = ('<i class="icon-white icon-pencil"></i> '+t(:edit)).html_safe
+      name = ('<i class="icon-pencil"></i> '+t(:edit)).html_safe
       attributes = {
-        :class => "span9 btn btn-warning edit-link"
+        :class => "span12 btn edit-link"
       }.merge(options)
       link_to name, resource, attributes
     end
 
- def ajax_link_to_show(resource, options = {})
+    def link_to_edit_with_custom_text(text, resource, options = {})
+      name = ('<i class="icon-pencil"></i> '+ text).html_safe
+      attributes = {
+        :class => "span12 btn edit-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def ajax_link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
       attributes = {
         :remote => true,
-        :class => "mr-xs btn btn-mini btn-success show-link"
+        :class => "mr-xs btn btn-mini btn-info show-link"
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -168,24 +192,24 @@ module Gaku
     def link_to_show(resource, options = {})
       name = ("<i class='icon-white icon-eye-open'></i>").html_safe
       attributes = {
-        :class => "mr-xs btn btn-mini btn-success show-link"
+        :class => "mr-xs btn btn-mini btn-info show-link"
       }.merge(options)
       link_to name, resource, attributes
     end
 
     def link_to_cancel(options = {})
-      name = t('cancel')
+      text = ('<i class="icon-white icon-ban-circle"></i> '+ t(:'cancel')).html_safe
       attributes = {
-        :class => "span6 btn btn-danger cancel-link",
+        :class => "span6 btn btn-warning cancel-link",
         :'data-dismiss' => "modal"
       }.merge(options)
-      link_to name, '#', attributes
+      link_to text, '#', attributes
     end
 
     def link_to_modal_cancel(options = {})
       name = t('cancel')
       attributes = {
-        :class => "span6 btn btn-danger cancel-link",
+        :class => "span6 btn btn-warning cancel-link",
       }.merge(options)
       link_to name, '#', attributes
     end
@@ -193,7 +217,7 @@ module Gaku
     def ajax_link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
-        :class => "span6 btn btn-danger back-link",
+        :class => "span6 btn btn-warning back-link",
         :remote => true
       }.merge(options)
 
@@ -201,14 +225,15 @@ module Gaku
     end
 
     def link_to_back(resource, options = {})
-      name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
+      name = ('<i class="icon-share-alt"></i> '+ t(:back)).html_safe
       attributes = {
-        :class => 'span3 btn btn-danger'
+        :class => 'span12 btn'
       }.merge(options)
       link_to name, resource, attributes
     end
 
     def submit_button(text, options={})
+      text = ('<i class="icon-white icon-ok-circle"></i> '+ text).html_safe
       attributes = {
         :type => 'submit',
         :class => 'span6 btn btn-primary button'

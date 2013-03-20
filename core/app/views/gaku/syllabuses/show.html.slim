@@ -53,5 +53,7 @@
     = render 'gaku/notes/notes'
 
 = well_div do
-  = link_to_edit_with_text [:edit, @syllabus], :remote => true
-  = link_to_back syllabuses_path
+  .span6
+    = link_to_edit_with_text [:edit, @syllabus], :remote => true
+  .span6
+    = link_to_back syllabuses_path

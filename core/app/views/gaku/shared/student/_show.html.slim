@@ -9,7 +9,7 @@
   = render :partial => 'gaku/shared/student/tabs'
 
   = well_div do
-    .span4
+    .span6
       = link_to_back students_path, :class => "span12 btn"
-    .span4
+    .span6
       = link_to 'Generate Report', student_path(@student, :format => :pdf), :class => 'span12 btn'
