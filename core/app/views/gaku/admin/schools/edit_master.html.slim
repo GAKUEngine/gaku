@@ -1,8 +1,13 @@
 = content_for :show_header do
   = t(:'school.edit_master')
 
-= normal_form_for [:admin, @master_school] do |f|
+= remote_nested_form_for [:admin, @master_school] do |f|
   = render 'form_fields', :f => f
+  =f.fields_for :school_levels do |school_level|
+    =school_level.text_field :title, :label => t(:'school_level.singular')
+    =school_level.link_to_remove t(:'school_level.remove_school_level')
+  =f.link_to_add t(:'school_level.add_school_level'), :school_levels
+
   .row-fluid
     .span12
       = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
