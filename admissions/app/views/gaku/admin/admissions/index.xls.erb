@@ -59,17 +59,17 @@
         <Cell ss:StyleID="s1"><Data ss:Type="String"><%= t("school.name") %></Data></Cell>
         
         <Cell ss:StyleID="s1"><Data ss:Type="String">素点合計</Data></Cell>
-    <% eps = phase.exam.exam_portions %>
-    <% eps.each do |ep| %>
-        <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
+    <% unless phase.exam.exam_portions.blank? %>
+      <% eps = phase.exam.exam_portions %>
+      <% eps.each do |ep| %>
+          <Cell ss:StyleID="s1"><Data ss:Type="String"><%= ep.name %></Data></Cell>
+      <% end %>
     <% end %>
-       
-       
-       
+     
     <% @state_records.each_with_index do |record, index| %>
-      <% if record.admission_phase == phase && record.admission_phase_state == state %>
+      <% if index == 1 %>
         <% record.admission.student.simple_grades.each do |simple_grade| %>
-          <Cell ss:StyleID="s1"><Data ss:Type="String"><%= simple_grade.name %></Data></Cell>
+          <Cell ss:StyleID="s1"><Data ss:Type="String"><%= simple_grade.name.blank? ? "" : simple_grade.name %></Data></Cell>
         <% end %>
       <% end %>
     <% end %>
@@ -96,16 +96,16 @@
         
         <% total_score = 0 %>
         <% eps.each do |ep| %>
-          <% total_score += ep.exam_portion_scores[index].score %>
+          <% ep.exam_portion_scores[index].score.blank? ? total_score += 0 : total_score += ep.exam_portion_scores[index].score %>
         <% end %>
         <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= total_score %></Data></Cell>
         
         <% eps.each do |ep| %>
-        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= ep.exam_portion_scores[index].score %></Data></Cell>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= ep.exam_portion_scores[index].score.blank? ? "" : ep.exam_portion_scores[index].score %></Data></Cell>
         <% end %>
         
         <% record.admission.student.simple_grades.each do |simple_grade| %>
-        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= simple_grade.grade %></Data></Cell>
+        <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= simple_grade.grade.blank? ? "" : simple_grade.grade %></Data></Cell>
         <% end %>
 
         <% absences = JSON.parse(record.admission.student.external_school_records.last.data) %>
@@ -127,7 +127,7 @@
   <% end %>
   
   
-  <% @admission_method.admission_phases.each_with_index do |phase, index| %>
+<!--   <% @admission_method.admission_phases.each_with_index do |phase, index| %>
   <Worksheet ss:Name="<%= phase.name.to_s %>">
     <Table>
       <Row>
@@ -181,6 +181,6 @@
     <% end %>
     </Table>
   </Worksheet>
-  <% end %>
+  <% end %> -->
   
 </Workbook>
