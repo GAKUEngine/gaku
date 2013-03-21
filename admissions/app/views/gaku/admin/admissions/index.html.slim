@@ -33,7 +33,7 @@
 
 javascript:
   $(window).bind("popstate", function(e){
-    if (!e.originalEvent.state.backTag) return;
+    if (e.originalEvent.state && !e.originalEvent.state.backTag) return;
     var new_location = location.href;
     var new_location_edited = new_location.replace('/admissions','/admissions/change_period_method');
     $.get(new_location_edited);
