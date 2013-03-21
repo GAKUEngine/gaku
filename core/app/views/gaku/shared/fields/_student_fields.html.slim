@@ -15,9 +15,9 @@ td.contact = student.contact_widget
 
 - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
   td.assignments
-    - student.addresses.count.times do
+    - student.addresses_count.times do
       = address_icon
-    - student.contacts.count.times do
+    - student.contacts_count.times do
       = contact_icon
     - student.guardians.count.times do
       = guardian_icon

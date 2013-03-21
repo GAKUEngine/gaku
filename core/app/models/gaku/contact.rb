@@ -2,7 +2,7 @@ module Gaku
   class Contact < ActiveRecord::Base
 
     belongs_to :contact_type
-    belongs_to :contactable, polymorphic: true
+    belongs_to :contactable, polymorphic: true, :counter_cache => true
 
     has_paper_trail :on => [:update, :destroy],
                     :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }

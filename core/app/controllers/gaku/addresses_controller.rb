@@ -21,12 +21,15 @@ module Gaku
 
     def recovery
       @address.update_attribute(:is_deleted, false)
+      @addresable.update_attribute(:addresses_count, @addresable.addresses.count)
       flash.now[:notice] = t(:'notice.recovered', :resource => t(:'address.singular'))
       respond_with @address
     end
 
     def soft_delete
       @address.update_attribute(:is_deleted, true)
+      @addresable.update_attribute(:addresses_count, @addresable.addresses.count)
+
       if @address.is_primary?
         @addressable.addresses.first.try(:make_primary)
       end
@@ -40,7 +43,7 @@ module Gaku
     private
 
     def count
-      @count = @addressable.addresses.count
+      @count = @addressable.addresses_count
     end
 
     def addressable

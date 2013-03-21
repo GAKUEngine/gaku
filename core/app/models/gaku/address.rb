@@ -2,7 +2,7 @@ module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-    belongs_to :addressable, polymorphic: true
+    belongs_to :addressable, polymorphic: true, :counter_cache => true
 
     has_paper_trail :on => [:update, :destroy],
                     :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
