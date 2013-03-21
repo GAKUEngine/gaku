@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'ffaker'
+require 'rake-progressbar'
 
 #student
 student = Gaku::Student.where(:name => 'John', :surname => 'Doe', :enrollment_status_id => 2).first_or_create!
@@ -46,8 +47,14 @@ students.each do |student|
   Gaku::Student.where(student).first_or_create!
 end
 
-unless Gaku::Student.count > 500
-  500.times do
+
+students_count = 1000
+
+unless Gaku::Student.count > students_count
+  bar = RakeProgressbar.new(students_count)
+  students_count.times do
     Gaku::Student.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name, :enrollment_status_id => 2)
+    bar.inc
   end
+  bar.finished
 end

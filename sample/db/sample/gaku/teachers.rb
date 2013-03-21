@@ -1,3 +1,5 @@
+require 'rake-progressbar'
+
 teachers = [
   { :name => 'Vassil', :surname => 'Kalkov' },
   { :name => 'Marta', :surname => 'Kostova' },
@@ -10,8 +12,13 @@ teachers.each do |teacher|
   Gaku::Teacher.where(teacher).first_or_create!
 end
 
-unless Gaku::Teacher.count > 50
-  50.times do
+teachers_count = 50
+
+unless Gaku::Teacher.count > teachers_count
+  bar = RakeProgressbar.new(teachers_count)
+  teachers_count.times do
     Gaku::Teacher.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name)
+    bar.inc
   end
+  bar.finished
 end
