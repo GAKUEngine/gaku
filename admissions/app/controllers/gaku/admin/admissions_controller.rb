@@ -11,9 +11,9 @@ module Gaku
       helper_method :sort_column, :sort_direction
 
       before_filter :load_period_method
-      before_filter :load_before_index, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method, 
+      before_filter :load_before_index, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method,
                                                   :change_period_method]
-      before_filter :load_state_records, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method, 
+      before_filter :load_state_records, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method,
                                                   :change_period_method, :create, :create_multiple, :change_student_state]
       before_filter :select_vars, only: [:new]
       before_filter :load_state_students, only: [:change_student_state]
@@ -30,10 +30,10 @@ module Gaku
 
       def index
         session[:current_page] = 'admissions'
-        #respond_to do |format|
-        #  format.html
-        #  format.xls  { #TODO render xls }
-        #end
+        respond_to do |format|
+          format.html
+          format.xls  #{ TODO render xls }
+        end
       end
 
       def listing_admissions
@@ -41,7 +41,7 @@ module Gaku
       end
 
       def change_student_state
-        
+
         if params[:admit_students]
           admit_students(@state_students)
         else
@@ -60,7 +60,7 @@ module Gaku
               elsif @next_state.auto_progress == true
                 next_phase = AdmissionPhase.find_next_phase(phase)
                 @new_state = next_phase.admission_phase_states.first
-                student.admission.progress_to_next_phase(phase)
+                @progress_success = student.admission.progress_to_next_phase(phase)
               end
               @admission_record.admission_phase_state_id = @next_state.id
               @admission_record.save
@@ -72,7 +72,7 @@ module Gaku
 
       def listing_applicants
         @search = Student.non_deleted.search(params[:q])
-        @students = @search.result
+        @students = @search.result.page(params[:page]).per(Preset.students_per_page)
         session[:current_page] = 'applicants'
       end
 
@@ -178,7 +178,7 @@ module Gaku
             @admission_methods = @admission_period.admission_methods
           end
           @admission_params = {}
-          @admission_params[:admission_period_id] = @admission_period.id
+          @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
           @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
 
         end
@@ -199,8 +199,8 @@ module Gaku
         end
 
         def load_selected_students
-          if params[:selected_students].nil? 
-            @selected_students = [] 
+          if params[:selected_students].nil?
+            @selected_students = []
           else
             @selected_students = params[:selected_students]
           end
@@ -209,7 +209,7 @@ module Gaku
         def load_state_records
           @students = []
           @state_records = AdmissionPhaseRecord.all
-          
+
           @state_records.each do |record|
             if record.exam_score != nil
               exam_score = record.exam_score
@@ -266,7 +266,7 @@ module Gaku
             flash.now[:error] = notice.html_safe
           end
         end
-        
+
         def admit_students(students)
           students.each  do |student|
             admission = student.admission

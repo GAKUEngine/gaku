@@ -50,11 +50,11 @@ module Gaku
       next_phase = AdmissionPhase.find_next_phase(phase)
       new_state = next_phase.admission_phase_states.first
 
-      AdmissionPhaseRecord.new.tap do |record|
-        record.admission = student.admission
-        record.admission_phase = next_phase
-        record.admission_phase_state = new_state
-      end.save
+      record = AdmissionPhaseRecord.new
+      record.admission = student.admission
+      record.admission_phase = next_phase
+      record.admission_phase_state = new_state
+      return record.save
     end
 
     def find_record_by_phase(phase_id)

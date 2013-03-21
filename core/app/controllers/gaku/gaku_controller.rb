@@ -35,6 +35,8 @@ module Gaku
         "gaku/layouts/index"
       when "show"
         "gaku/layouts/show"
+      when "edit"
+        "gaku/layouts/edit"
       else
         "gaku/layouts/gaku"
       end

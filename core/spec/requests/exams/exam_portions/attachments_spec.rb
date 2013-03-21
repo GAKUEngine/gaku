@@ -47,10 +47,41 @@ describe 'Exam Portion Attachments' do
   end
 
   context 'when exists', js: true do
-    
+
     before do
       exam; exam_portion; attachment
       visit gaku.exam_exam_portion_path(exam, exam_portion)
+    end
+
+    context '#edit' do
+      before do
+        within(table) { click edit_link }
+      end
+
+      it 'edits' do
+        page.should have_content attachment.name
+
+        fill_in 'attachment_name', :with => 'Different name'
+        fill_in 'attachment_description', :with => 'Different description'
+
+        click submit
+
+        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
+
+        flash_updated?
+        page.should have_content 'Different name'
+        page.should_not have_content attachment.name
+
+      end
+
+      it "cancels editing" do
+        ensure_cancel_modal_is_working
+      end
+
+      it 'has validations' do
+        fill_in 'attachment_name', :with => ''
+        has_validations?
+      end
     end
 
     it 'deletes from index table' do
@@ -101,7 +132,7 @@ describe 'Exam Portion Attachments' do
         accept_alert
         flash_destroyed?
         page.should_not have_content "#{attachment.name}"
-        
+
         visit gaku.attachments_admin_disposals_path
         page.should_not have_content "#{attachment.name}"
         visit gaku.exam_exam_portion_path(exam, exam_portion)

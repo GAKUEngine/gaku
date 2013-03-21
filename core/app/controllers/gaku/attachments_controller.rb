@@ -4,8 +4,9 @@ module Gaku
 		inherit_resources
 		actions :index, :show, :new, :create, :update, :edit, :destroy
 		before_filter :unscoped_attachment, :only => [:recovery, :destroy]
+		respond_to :js, :html
 
-		 # TODO: merge and refactor two controllers
+		# TODO: merge and refactor two controllers
 		def create
 			@attachable = find_attachable
 			@attachment = @attachable.attachments.build(params[:attachment])
@@ -15,6 +16,12 @@ module Gaku
 				else
 					format.html { redirect_to :back, :flash => {:success => 'Error when upload asset'} }
 				end
+			end
+		end
+
+		def update
+			super do |format|
+				format.html { redirect_to :back }
 			end
 		end
 

@@ -3,7 +3,7 @@ module Gaku
 
     def table_for(id, &block)
       content_tag :div, class: "row-fluid" do
-        content_tag :table, class: "table table-striped table-condensed", id: id do
+        content_tag :table, class: "table table-striped table-bordered table-condensed", id: id do
           block.call
         end
       end
@@ -18,7 +18,7 @@ module Gaku
 
     def show_table_for(id, &block)
       content_tag :div, class: "row-fluid" do
-        content_tag :table, class: "table table-hover table-condensed", id: id do
+        content_tag :table, class: "table table-hover  table-condensed", id: id do
           block.call
         end
       end
@@ -83,8 +83,8 @@ module Gaku
       when 3 then 95
       else num
       end
-      content_tag :th, class:"btn-info", style:"width:#{size}px" do
-        t('manage')
+      content_tag :th, class: "btn-inverse", style:"width:#{size}px" do
+        content_tag :i, nil,  class: "icon-edit icon-white"
       end
     end
 
