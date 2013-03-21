@@ -41,6 +41,7 @@ ja:
     remove: 状態を削除
     save: 入学フェーズの状態を保存
     singular: 入学フェーズ状態
+    no_states: "There are no states"
   admission_phases:
     add: 入学フェーズを追加
     edit: 入学フェーズを編集
@@ -54,6 +55,7 @@ ja:
     plural: 入学フェーズ
     save: 入学フェーズを保存
     singular: 入学フェーズ
+    no_phases: "There are no phases"
   admissions:
     admit: 入学内定
     admitted_on: 入学日
