@@ -5,7 +5,7 @@ module Gaku
 
     def student_chooser
       @search = Student.search(params[:q])
-      @students = @search.result
+      @students = @search.result.page(params[:page]).per(Preset.students_per_page)
 
 
       instance_variable_set("@#{class_name_underscored_plural}", class_name.constantize.all)

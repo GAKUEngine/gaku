@@ -18,5 +18,4 @@
   tbody
     = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
-- if params[:controller] == "gaku/students"
-  = paginate @students, :remote => true
+= paginate @students, :remote => true

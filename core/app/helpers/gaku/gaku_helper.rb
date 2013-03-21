@@ -70,7 +70,7 @@ module Gaku
     end
 
     def courses
-      Gaku::Course.all.collect do |c|
+      Gaku::Course.includes(:syllabus).collect do |c|
         if c.syllabus_name
           ["#{c.syllabus_name}-#{c.code}", c.id]
         else
