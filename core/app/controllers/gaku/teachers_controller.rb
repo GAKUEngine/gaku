@@ -11,7 +11,6 @@ module Gaku
     before_filter :teacher, :only => [:soft_delete, :update]
 
     def soft_delete
-      @teacher = Teacher.find(params[:id])
       @teacher.update_attribute(:is_deleted, true)
       redirect_to teachers_path, :notice => t(:'notice.destroyed', :resource => t(:'teacher.singular'))
     end
@@ -24,6 +23,16 @@ module Gaku
           format.js { render }
          end
       end
+    end
+
+
+    protected
+
+    def collection
+      @search = Teacher.search(params[:q])
+      results = @search.result(:distinct => true)
+
+      @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
     end
 
     private
