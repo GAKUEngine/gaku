@@ -178,7 +178,7 @@ module Gaku
             @admission_methods = @admission_period.admission_methods
           end
           @admission_params = {}
-          @admission_params[:admission_period_id] = @admission_period.id
+          @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
           @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
 
         end
