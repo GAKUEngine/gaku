@@ -10,6 +10,8 @@ module Gaku
 
     attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
 
+    validates :admission_phase_state_id, :uniqueness => {:scope => :admission_id}
+
     def exam_score
 
       total_score = 0

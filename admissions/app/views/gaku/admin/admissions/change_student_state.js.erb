@@ -3,12 +3,13 @@ $('.change-state-form').fadeOut();
   $('div#state<%= @old_state_id %> table tr#student-<%= student.id %>').fadeOut(function(){
     $('div#state<%= @old_state_id %> table tr#student-<%= student.id %>').remove();
 
-    $('<%= render_js_partial("student", {:student => student, :state => @next_state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table tbody').fadeIn();
+    $('<%= render_js_partial("student", {:student => student, :state => @next_state}) %>').hide().appendTo('div#state<%= @admission_record.admission_phase_state_id %> table#students-index tbody').fadeIn();
   });
 
-  <%- if @next_state.auto_progress == true %>
+  <%- if @next_state.auto_progress == true && @progress_success %>
     $('div#state<%= @new_state.id %> table tbody').append('<%= render_js_partial("student", {:student => student, :state => @new_state}) %>');
     $('.change-state_<%= @new_state.id %>-form').html('<%= render_js_partial("state_change_form", :state => @new_state) %>')
+    $('#phase_<%= @new_state.admission_phase.id.to_s %>-grade-button').html('<%= render_js_partial("grade_button", :phase => @new_state.admission_phase) %>');
   <% end %>
 
   <%- @admission_method.admission_phases.each {|phase| %>
