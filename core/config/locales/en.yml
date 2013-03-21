@@ -1,4 +1,6 @@
 en:
+  import: Import
+  export: Export
   achievement:
     add: Add Achievement
     authority: Authority
@@ -419,15 +421,6 @@ en:
     list: Student list
   failure:
     enrolled: Failed to enroll!
-  flash:
-    actions:
-      create:
-        notice: ! '%{resource_name} was successfully created!'
-      destroy:
-        alert: ! '%{resource_name} could not be destroyed!'
-        notice: ! '%{resource_name} was successfully destroyed!'
-      update:
-        notice: ! '%{resource_name} was successfully updated!'
   gender:
     choose: Choose Gender
     female: Female

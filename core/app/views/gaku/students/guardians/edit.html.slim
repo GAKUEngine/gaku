@@ -7,9 +7,9 @@
 = render 'tabs', :guardian => @guardian
 
 = well_div do
-  .span5
-    = link_to_edit_with_text [:edit, @student, @guardian], { :class => "span12 btn btn-warning", :id => 'edit-modal', :remote => true }
-  .span5
+  .span6
+    = link_to_edit_with_text [:edit, @student, @guardian], { :id => 'edit-modal', :remote => true }
+  .span6
     = link_to_back @student, :class => "span12 btn"
 
 #guardians-modal

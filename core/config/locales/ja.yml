@@ -418,15 +418,6 @@ ja:
     list: 部活生一覧
   failure:
     enrolled: 登録に失敗しました。
-  flash:
-    actions:
-      create:
-        notice: ! '%{resource_name}は正常に作成されました'
-      destroy:
-        alert: ! '%{resource_name}は消去出来ませんでした'
-        notice: ! '%{resource_name}は正常に消去されました'
-      update:
-        notice: ! '%{resource_name}は正常に更新されました'
   gender:
     choose: 性別を選択
     female: 女性

@@ -10,9 +10,9 @@
       = th t(:'class_group_enrollment.seat_number')
       = th t(:'admitted')
       = th t(:'address.primary')
-      = th t(:'assignment.plural')
-
+      = th t(:'contact.primary')
       - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
+        = th t(:'assignment.plural')
         = th_actions 2
 
   tbody

@@ -2,8 +2,8 @@ module Gaku
   class AdmissionPhase < ActiveRecord::Base
 
     belongs_to :admission_method
-  	has_many :admission_phase_records
-  	has_many :admission_phase_states
+  	has_many :admission_phase_records, :dependent => :destroy
+  	has_many :admission_phase_states, :dependent => :destroy
     has_one  :exam
 
     attr_accessible :name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes
