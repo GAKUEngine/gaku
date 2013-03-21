@@ -11,10 +11,13 @@ td.class-name = student.class_group_enrollments.empty? ? '' : student.class_grou
 td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
 td.admitted = student.admitted
 td.address = student.address_widget
-td.assignments
-  - student.addresses.count.times do
-    = address_icon
-  - student.contacts.count.times do
-    = contact_icon
-  - student.guardians.count.times do
-    = guardian_icon
+td.contact = student.contact_widget
+
+- if ['gaku/students', 'gaku/admissions'].include? params[:controller]
+  td.assignments
+    - student.addresses.count.times do
+      = address_icon
+    - student.contacts.count.times do
+      = contact_icon
+    - student.guardians.count.times do
+      = guardian_icon

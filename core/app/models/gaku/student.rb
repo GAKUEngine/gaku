@@ -82,12 +82,6 @@ module Gaku
       sn.blank? ? nil : sn.seat_number
     end
 
-    # need modify when primary columns is added
-    def address_widget
-      pa = self.addresses.first
-      pa.blank? ? nil : pa.city
-    end
-
     def set_scholarship_status
       self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end
