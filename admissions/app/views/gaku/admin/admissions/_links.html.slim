@@ -1,8 +1,15 @@
-- if !admission_method.nil?
-  = ajax_link_to_new t(:'admissions.candidates.new'), new_admin_admission_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => "new-admission-link", :class => 'mr-s btn btn-primary'
+- if !admission_method.nil? 
+  -if admission_method.admission_phases.any? 
+    - if admission_method.admission_phases.first.admission_phase_states.any?
+      = ajax_link_to_new t(:'admissions.candidates.new'), new_admin_admission_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => "new-admission-link", :class => 'mr-s btn btn-primary'
 
-  = ajax_link_to_new t(:'admissions.candidates.existing'), student_chooser_admin_admissions_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => 'new-create-multiple-admissions-student-link', :class => 'mr-s btn btn-primary'
+      = ajax_link_to_new t(:'admissions.candidates.existing'), student_chooser_admin_admissions_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id), :id => 'new-create-multiple-admissions-student-link', :class => 'mr-s btn btn-primary'
 
-  = link_to_export t(:'export'), "admissions.xls?admission_period_id="+@admission_period.id.to_s+"&admission_method_id="+@admission_method.id.to_s, :id => 'export-xls-link'
+      = link_to_export t(:'export'), "admissions.xls?admission_period_id="+@admission_period.id.to_s+"&admission_method_id="+@admission_method.id.to_s, :id => 'export-xls-link'
 
-  = link_to_import t(:'import'), admin_importer_index_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id)
+      = link_to_import t(:'import'), admin_importer_index_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id)
+    - else
+      = t(:'admission_phase_states.no_states')
+  - else
+    = t(:'admission_phases.no_phases')
+

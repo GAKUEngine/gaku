@@ -41,6 +41,7 @@ en:
     remove: Remove state
     save: Save Admission Phase State
     singular: Admission Phase State
+    no_states: "There are no states"
   admission_phases:
     add: Add Admission Phase
     edit: Edit Admission Phase
@@ -54,6 +55,7 @@ en:
     plural: Admission Phases
     save: Save Admission Phase
     singular: Admission Phase
+    no_phases: "There are no phases"
   admissions:
     admit: Admit
     admitted_on: Admitted On

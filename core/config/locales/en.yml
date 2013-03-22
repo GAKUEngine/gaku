@@ -1,6 +1,4 @@
 en:
-  import: Import
-  export: Export
   achievement:
     add: Add Achievement
     authority: Authority
@@ -61,20 +59,20 @@ en:
     asset_type: Asset type
     asset_upload: Asset was uploaded successfully!
     assets: Assets
+    associated: Attachable is not present
+    attachment_recovered: Asset was successfully recovered!
     create: Create Attachment
     description: Description
+    edit: Edit Attachment
     file_name: File name
     file_size: File size
     file_type: File type
     list: Attachments list
     name: Name
     new: New Attachment
-    edit: Edit Attachment
     plural: Attachments
     save: Save Attachment
     singular: Attachment
-    associated: Attachable is not present
-    attachment_recovered: Asset was successfully recovered!
   attendance_type:
     add: Add Attendance Type
     auto_credit: Auto Credit
@@ -400,6 +398,7 @@ en:
     singular: Exam Portion
     use_weighting: Use Weighting
     weight: Weight
+  export: Export
   external_school_record:
     absences: Absences
     attendance_rate: Attendance Rate
@@ -422,6 +421,15 @@ en:
     list: Student list
   failure:
     enrolled: Failed to enroll!
+  flash:
+    actions:
+      create:
+        notice: ! '%{resource_name} was successfully created!'
+      destroy:
+        alert: ! '%{resource_name} could not be destroyed!'
+        notice: ! '%{resource_name} was successfully destroyed!'
+      update:
+        notice: ! '%{resource_name} was successfully updated!'
   gender:
     choose: Choose Gender
     female: Female
@@ -474,6 +482,7 @@ en:
   hide: Hide
   history: History
   id: Id
+  import: Import
   import_format: Import Format
   language: Language
   languages:
@@ -641,10 +650,10 @@ en:
     slogan: Slogan
     vice_principal: Vice Principal
   school_level:
-    singular: School Level
-    plural: School Levels
     add_school_level: Add School Level
+    plural: School Levels
     remove_school_level: Remove this school level
+    singular: School Level
   search: Search
   select: Select
   semester:
@@ -734,13 +743,13 @@ en:
     show: Show Syllabus
     singular: Syllabus
   teacher:
-    plural: Instructors
-    singular: Instructor
-    show: Show Teacher
+    edit: Edit Teacher
     list: Teachers list
     new: New Teacher
+    plural: Instructors
     save: Save Teacher
-    edit: Edit Teacher
+    show: Show Teacher
+    singular: Instructor
   title: Title
   user:
     add: Add User
