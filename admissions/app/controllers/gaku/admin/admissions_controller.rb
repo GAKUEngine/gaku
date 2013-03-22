@@ -30,10 +30,10 @@ module Gaku
 
       def index
         session[:current_page] = 'admissions'
-        #respond_to do |format|
-        #  format.html
-        #  format.xls  { #TODO render xls }
-        #end
+        respond_to do |format|
+          format.html
+          format.xls  #{ TODO render xls }
+        end
       end
 
       def listing_admissions

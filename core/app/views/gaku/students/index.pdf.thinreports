@@ -1,0 +1,17 @@
+puts 'students dayo---'
+puts @students
+
+report.start_new_page do
+  values(
+    :bikou1 => 'ThinReports',
+    
+    # :student_name_reading => @enrolled_students[0].surname_reading + @enrolled_students[0].name_reading,
+    # :student_name => @enrolled_students[0].surname + @enrolled_students[0].name,
+
+    :guardian_name_reading => 'やまだ　たろう',
+    :guardian_name => '山田　太郎',
+    :guardian_address => 'ああああああああああああああああ',
+
+    :student_history => 'test',
+  )
+end

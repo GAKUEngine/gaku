@@ -20,7 +20,13 @@ module Gaku
 
     def index
       @enrolled_students = params[:enrolled_students]
-      index!
+      #index!
+      
+      super do |format|
+        format.pdf { 
+          send_data render_to_string, filename: 'sido_yoroku.pdf', type: 'application/pdf', disposition: 'attachment'
+        }
+      end
     end
 
     def show
