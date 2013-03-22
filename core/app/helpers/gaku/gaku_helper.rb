@@ -111,6 +111,10 @@ module Gaku
       Gaku::School.all.collect { |s| [s.name, s.id] }
     end
 
+    def school_levels
+      Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id]}
+    end
+
     def roles
       Gaku::Role.all
     end
@@ -209,34 +213,15 @@ module Gaku
       image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
     end
 
-    def achievements_show(achievements)
-      string = String.new
-      if achievements.any?
-        achievements.each do |achievement|
-          string.concat achievement.to_s
-          string.concat String.new ' '
-          #string.concat resize_image(achievement.badge, :size => 22)
-          string.concat ', ' unless achievement.equal? achievements.last
-        end
+    def comma_separete_list(objects, options = {}, &block)
+      if objects.any?
+        objects.map do |object|
+          block_given? ? block.call(object) : object
+        end.join(', ')
       else
-        string.concat 'Empty'
+        options[:empty]
       end
-      string.html_safe
     end
-
-    def simple_grades_show(simple_grades)
-      string = String.new
-      if simple_grades.any?
-        simple_grades.each do |simple_grade|
-          string.concat "#{simple_grade.name} (#{simple_grade.grade})"
-          string.concat ', ' unless simple_grade.equal? simple_grades.last
-        end
-      else
-        string.concat "Empty"
-      end
-      string.html_safe
-    end
-
 
     def chooser_preset
       @chooser_preset ||= Gaku::Preset.chooser_table_fields

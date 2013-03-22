@@ -10,24 +10,8 @@
 .row-fluid
   .span12.well
     .row-fluid
-        #admission-applicants-listing
-
-          = sortable_table_for 'students-index' do
-            thead
-              tr
-                /= th_icon 'check'
-                = th t(:'surname')
-                = th t(:'name')
-                = th t(:'birth_date')
-                = th t(:'gender.label')
-                = th t(:'admission_periods.singular')
-                = th t(:'admission_methods.singular')
-                = th t(:'admission_phases.singular')
-                = th t(:'address.primary')
-                = th_actions 1
-
-            tbody
-              = render :partial => 'applicant', :collection => @students, :as => 'student'
+      #admission-applicants-listing
+        = render 'applicants', :students => @students
 
 javascript:
   $(".class_group-select").combobox();

@@ -85,7 +85,7 @@ describe 'Admin Admission Method Phases' do
           end
         end
 
-        pending '#deletes' do
+        it '#deletes' do
           click edit_link
           wait_until_visible modal
           expect do
@@ -95,7 +95,9 @@ describe 'Admin Admission Method Phases' do
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
           end.to change(Gaku::AdmissionPhaseState, :count).by -1
-          page.should_not have_content("#{admission_phase_state.name}")
+          click_on 'Admission Phase States list'
+          wait_until_visible '#show-admission-method-admission-phase-states-modal'
+          page.should_not have_content(admission_phase_state.name)
         end
 
         it 'edits ' do
