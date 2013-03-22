@@ -5,6 +5,7 @@
         = th_icon 'check'
         = th t(:'surname')
         = th t(:'name')
+        = th t(:'admissions.applicant_number')
         = th t(:'birth')
         = th t(:'gender.label')
         - if !state.admission_phase.exam.nil?
