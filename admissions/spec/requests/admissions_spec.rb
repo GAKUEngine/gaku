@@ -286,7 +286,7 @@ describe 'Admin Admissions' do
             sleep 1
             visit gaku.admin_admissions_path
             #Exam | Passed
-            within("#state#{@first_method.admission_phases.first.admission_phase_states.second.id}") do
+            within("#state#{@first_method.admission_phases.first.admission_phase_states.third.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should_not have_content 'Admitted on'
               click_on 'Save'
@@ -305,7 +305,7 @@ describe 'Admin Admissions' do
               sleep 1
             end
             #Interview | Accepted
-            within("#state#{@first_method.admission_phases.last.admission_phase_states.second.id}") do
+            within("#state#{@first_method.admission_phases.last.admission_phase_states.third.id}") do
               size_of("#students-index tbody tr").should eq 1
               page.should have_content 'Admitted On'
             end

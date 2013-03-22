@@ -12,7 +12,7 @@
         /= th_actions 140
         = th t(:'students.status')
     tbody
-      = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |s| s[:state_id] == state.id }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
+      = render :partial => 'gaku/admin/admissions/student', :collection => @students.find_all { |s| (s[:state_id] == state.id && s[:student].admission.admission_period_id == @admission_period.id) }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
 
   br
   div class="change-state_#{state.id}-form change-state-form"

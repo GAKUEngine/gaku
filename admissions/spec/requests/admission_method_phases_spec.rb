@@ -101,7 +101,7 @@ describe 'Admin Admission Method Phases' do
         it 'edits ' do
           click edit_link
           wait_until_visible modal
-          within('.state') do
+          within('#admission-phase-state-'+admission_phase_state.id.to_s) do
             click edit_link
             fill_in 'admission_phase_state_name', with: 'Rejected'
             uncheck 'admission_phase_state_can_progress'
@@ -133,7 +133,7 @@ describe 'Admin Admission Method Phases' do
         it 'adds' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
@@ -147,7 +147,7 @@ describe 'Admin Admission Method Phases' do
         it 'cancels adding' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax

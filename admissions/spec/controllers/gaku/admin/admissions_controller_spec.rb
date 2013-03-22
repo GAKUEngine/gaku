@@ -232,6 +232,7 @@ describe Gaku::Admin::AdmissionsController do
 
       it 'creates new admission phase record' do
         expect do
+          #raise @admission.admission_phase_records.first.admission_phase_state.inspect + " " + 
           gaku_js_post :change_student_state, 
                         state_id: @new_state.id, 
                         student_ids: [@admission.student_id], 

@@ -17,11 +17,6 @@ module Gaku
           # @admission_phase.save  && @admission_method.admission_phases << @admission_phase
 
           if @admission_phase.save
-            if !@admission_phase.admission_phase_states.any?
-              admission_phase_state = AdmissionPhaseState.create(:name => "Default state",:admission_phase_id => @admission_phase.id, :is_default => true)
-            else
-              @admission_phase.admission_phase_states.first.update_attributes(:is_default => true)
-            end
             respond_to do |format|
               flash.now[:notice] = t('notice.created', :resource => t('admission_phases.singular'))
               format.js { render 'create' }
