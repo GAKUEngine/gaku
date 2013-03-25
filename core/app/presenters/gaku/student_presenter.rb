@@ -4,7 +4,7 @@ module Gaku
 
     def class_group
       cg = student.class_groups.last
-      cg.blank? ? "" : cg
+      cg.blank? ? "Empty" : cg
     end
 
     def seat_number

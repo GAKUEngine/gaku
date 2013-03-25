@@ -28,8 +28,8 @@ module Gaku
     end
 
     def soft_delete
-      @address.soft_delete
       @addressable.addresses.first.try(:make_primary) if @address.primary?
+      @address.soft_delete
       flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
       respond_with @address
     end

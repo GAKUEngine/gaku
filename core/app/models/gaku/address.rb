@@ -33,7 +33,6 @@
     def soft_delete
       self.update_attributes(:is_deleted => true, :is_primary => false)
       addressable.class.decrement_counter(:addresses_count, addressable.id)
-
     end
 
     def recover
