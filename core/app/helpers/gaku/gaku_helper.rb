@@ -34,12 +34,12 @@ module Gaku
     end
 
     def enrollment_status_types
-      Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
+      EnrollmentStatusType.includes(:translations).collect {|s| [s.name.capitalize, s.id] }
     end
 
     def enrollment_statuses_inline
       enrollment_status_types = []
-      EnrollmentStatus.all.each do |e|
+      EnrollmentStatus.includes(:translations).each do |e|
         enrollment_status_types << {value: e.id, text: e.name}
       end
       enrollment_status_types.to_json.html_safe
@@ -50,12 +50,12 @@ module Gaku
     end
 
     def commute_method_types
-      Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+      CommuteMethodType.includes(:translations).collect {|s| [s.name.capitalize, s.id] }
     end
 
     def commute_method_types_inline
       commute_method_types = []
-      CommuteMethodType.all.each do |e|
+      CommuteMethodType.includes(:translations).each do |e|
         commute_method_types << {value: e.id, text: e.name}
       end
       commute_method_types.to_json.html_safe
@@ -80,12 +80,12 @@ module Gaku
     end
 
     def scholarship_statuses
-      Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+      ScholarshipStatus.includes(:translations).collect {|p| [ p.name, p.id ] }
     end
 
     def scholarship_statuses_inline
       scholarship_statuses = []
-      ScholarshipStatus.all.each do |e|
+      ScholarshipStatus.includes(:translations).each do |e|
         scholarship_statuses << {value: e.id, text: e.name}
       end
       scholarship_statuses.to_json.html_safe

@@ -23,6 +23,19 @@ module Gaku
     def make_primary
       self.addressable.addresses.update_all({:is_primary => false}, ['id != ?', id] )
       self.update_attribute(:is_primary, true)
+      if self.addressable.has_attribute?(:primary_address)
+        self.addressable.update_attribute(:primary_address, self.addressable.address_widget)
+      end
+    end
+
+    def soft_delete
+      self.update_attribute(:is_deleted, true)
+      self.addressable.update_attribute(:addresses_count, self.addressable.addresses_count-1  )
+    end
+
+    def recover
+      self.update_attribute(:is_deleted, false)
+      self.addresable.update_attribute(:addresses_count, self.addresable.addresses_count+1)
     end
 
     def primary?

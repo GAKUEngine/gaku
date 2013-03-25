@@ -104,7 +104,7 @@ module Gaku
     end
 
     def resource
-      @student = Student.includes(:contacts => :contact_type).find(params[:id])
+      @student = Student.includes([:contacts => :contact_type, :addresses => :country]).find(params[:id])
     end
 
     private

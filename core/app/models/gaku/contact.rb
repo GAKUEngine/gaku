@@ -27,6 +27,10 @@ module Gaku
     def make_primary
       self.contactable.contacts.update_all({:is_primary => false}, ['id != ?', id])
       self.update_attribute(:is_primary, true)
+
+      if self.contactable.has_attribute?(:primary_contact)
+        self.contactable.update_attribute(:primary_contact, self.contactable.contact_widget)
+      end
     end
 
     def primary?
