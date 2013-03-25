@@ -5,6 +5,6 @@ $(".<%= @resource_name.pluralize %>-count").html("<%= print_count(@count-1, t_ad
 
 showNotice("<%= render_flash %>");
 
-<%- if @addressable.addresses.any? & @address.is_primary? %>
+<%- if @addressable.addresses.reload.any? & @address.is_primary? %>
 	$('#address-<%= @addressable.addresses.first.id %> td a').addClass('btn-primary');
 <% end %>

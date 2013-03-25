@@ -1,11 +1,13 @@
 module Gaku
   class AddressesController < GakuController
 
-    load_and_authorize_resource :address, :class => Gaku::Address
+    load_and_authorize_resource :address, :class => Gaku::Address, :except => [:recovery, :destroy]
 
     inherit_resources
+
     respond_to :js, :html
 
+    before_filter :unscoped_address, :only => [:destroy, :recovery]
     before_filter :addressable
     before_filter :count
 
@@ -33,6 +35,10 @@ module Gaku
     end
 
     private
+
+    def unscoped_address
+      @address = Gaku::Address.unscoped.find(params[:id])
+    end
 
     def count
       @count = @addressable.addresses_count
