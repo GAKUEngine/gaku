@@ -1,0 +1,2 @@
+$("#teachers-index-div").html("<%= escape_javascript(render('teachers')) %>");
+$('.teachers-count').html('<%= print_count(@count, t_teachers_list) %>');

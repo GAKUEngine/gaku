@@ -72,16 +72,6 @@ module Gaku
       self.student_specialties.map &:name
     end
 
-    def class_group_widget
-      cg = self.class_groups.last
-      cg.blank? ? nil : cg
-    end
-
-    def seat_number_widget
-      sn = self.class_group_enrollments.last
-      sn.blank? ? nil : sn.seat_number
-    end
-
     def set_scholarship_status
       self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end

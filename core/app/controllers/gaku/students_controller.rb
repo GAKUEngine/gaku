@@ -106,12 +106,11 @@ module Gaku
       results = @search.result(:distinct => true)
 
       @students_count = results.count
-      @students = results.page(params[:page]).per(10)
+      @students = results.page(params[:page]).per(Preset.students_per_page)
     end
 
     def resource
-      #@student = Student.includes(:contacts => :contact_type).find(params[:id])
-      @student = Student.find(params[:id])
+      @student = Student.includes([:contacts => :contact_type, :addresses => :country]).find(params[:id])
     end
 
     private

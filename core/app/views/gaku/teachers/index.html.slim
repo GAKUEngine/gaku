@@ -3,7 +3,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'teachers-count' do
-      = print_count @count, t(:'teacher.list')
+      = print_count @count, t_teachers_list
   .pull-right
     = ajax_link_to_new t(:'teacher.new'), new_teacher_path, :id => "new-teacher-link"
 
@@ -14,3 +14,5 @@
 
 #teachers-index-div
   = render 'teachers'
+
+= paginate @teachers, :remote => true

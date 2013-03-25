@@ -1,23 +1,25 @@
-- if @enrolled_students && @enrolled_students.include?(student.id.to_s)
-	td.vm-tc = image_tag 'check.png', :class => 'enrolled'
-- elsif @selected_students
-  td.vm-tc = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
-- else
-  td.vm-tc = check_box_tag "","", false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
+- present student do |student_presenter|
 
-= render 'gaku/shared/fields/person_fields', :person => student
+  - if @enrolled_students && @enrolled_students.include?(student.id.to_s)
+  	td.vm-tc = image_tag 'check.png', :class => 'enrolled'
+  - elsif @selected_students
+    td.vm-tc = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
+  - else
+    td.vm-tc = check_box_tag "","", false, :class => "student-check student-#{student.id}", :id => "student-#{student.id}"
 
-td.class-name = student.class_group_enrollments.empty? ? '' : student.class_groups.last.name
-td.seat-number = student.class_group_enrollments.empty? ? '' : student.class_group_enrollments.last.seat_number
-td.admitted = student.admitted
-td.address = student.address_widget
-td.contact = student.contact_widget
+  = render 'gaku/shared/fields/person_fields', :person => student
 
-- if ['gaku/students', 'gaku/admissions'].include? params[:controller]
+  td.class-name = student_presenter.class_group
+  td.seat-number = student_presenter.seat_number
+  td.admitted = student.admitted
+  td.address = student.primary_address
+  td.contact = student.primary_contact
+
+
   td.assignments
-    - student.addresses.count.times do
+    - student.addresses_count.times do
       = address_icon
-    - student.contacts.count.times do
+    - student.contacts_count.times do
       = contact_icon
     - student.guardians.count.times do
       = guardian_icon

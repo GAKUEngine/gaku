@@ -37,13 +37,14 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-editable-rails'
 
   s.add_dependency 'highline', '= 1.6.11'
+  s.add_dependency 'rake-progressbar'
   s.add_dependency 'paperclip'
   s.add_dependency 'ransack'
 
   #spreadsheet handling
   s.add_dependency 'roo'
   s.add_dependency 'writeexcel'
- 
+
   s.add_dependency 'app_config'
   s.add_dependency 'thinreports-rails'
 
