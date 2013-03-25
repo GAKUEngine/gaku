@@ -30,10 +30,10 @@ module Gaku
 
       def index
         session[:current_page] = 'admissions'
-        #respond_to do |format|
-        #  format.html
-        #  format.xls  { #TODO render xls }
-        #end
+        respond_to do |format|
+          format.html
+          format.xls  #{ TODO render xls }
+        end
       end
 
       def listing_admissions
@@ -89,7 +89,7 @@ module Gaku
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
           admission_phase = @admission_method.admission_phases.first
-          @admission_phase_state = admission_phase.admission_phase_states.first
+          @admission_phase_state = admission_phase.admission_phase_states.find_by_is_default(true)
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => @admission_phase_state.id,

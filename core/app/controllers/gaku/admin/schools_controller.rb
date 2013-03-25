@@ -33,7 +33,7 @@ module Gaku
       private
 
       def master_school
-        @master_school = School.where(:is_primary => true).first
+        @master_school = School.primary
       end
 
       def count

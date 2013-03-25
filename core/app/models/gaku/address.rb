@@ -1,4 +1,4 @@
-module Gaku
+  module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
@@ -15,9 +15,11 @@ module Gaku
 
     attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name,
                     :is_deleted, :past, :country,
-                    :country_id, :state_id
+                    :country_id, :state_id, :is_primary
 
     before_save :ensure_first_is_primary, :on => :create
+
+    after_destroy :reset_counter_cache
 
 
     def make_primary
@@ -29,13 +31,15 @@ module Gaku
     end
 
     def soft_delete
-      self.update_attribute(:is_deleted, true)
-      self.addressable.update_attribute(:addresses_count, self.addressable.addresses_count-1  )
+      self.update_attributes(:is_deleted => true, :is_primary => false)
+      addressable.class.decrement_counter(:addresses_count, addressable.id)
+
     end
 
     def recover
       self.update_attribute(:is_deleted, false)
-      self.addresable.update_attribute(:addresses_count, self.addresable.addresses_count+1)
+      addressable.class.increment_counter(:addresses_count, addressable.id)
+
     end
 
     def primary?
@@ -59,6 +63,10 @@ module Gaku
     end
 
     private
+
+    def reset_counter_cache
+      addressable.class.reset_counters(addressable.id, :addresses)
+    end
 
     def ensure_first_is_primary
       if self.addressable.respond_to?(:addresses)
