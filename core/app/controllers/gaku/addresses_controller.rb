@@ -1,89 +1,158 @@
 module Gaku
-  class AddressesController < GakuController
+  class StudentsController < GakuController
+    include SheetHelper
 
-    load_and_authorize_resource :address, :class => Gaku::Address, :except => [:recovery, :destroy]
+    load_and_authorize_resource :class =>  Gaku::Student, :except => [:recovery, :destroy]
+
+    helper_method :sort_column, :sort_direction
 
     inherit_resources
-
     respond_to :js, :html
+    respond_to :csv, :only => :csv
+    respond_to :pdf, :only => :show
 
-    before_filter :unscoped_address, :only => [:destroy, :recovery]
-    before_filter :addressable
-    before_filter :count
 
-    def create
-      @address = @addressable.addresses.new(params[:address])
-      create!
+    before_filter :select_vars,       :only => [:index,:new, :edit]
+    before_filter :notable,           :only => [:show, :edit]
+    before_filter :count,             :only => [:create, :destroy, :index]
+    before_filter :selected_students, :only => [:create,:index]
+    before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
+
+    def index
+      @enrolled_students = params[:enrolled_students]
+      #index!
+
+      super do |format|
+        format.pdf {
+          send_data render_to_string, filename: 'sido_yoroku.pdf', type: 'application/pdf', disposition: 'attachment'
+        }
+      end
     end
 
-    def make_primary
-      @address.make_primary
-      respond_with @address
+    def show
+      super do |format|
+        format.pdf { send_data render_to_string, :filename => "student-#{@student.id}.pdf",
+                                                 :type => 'application/pdf',
+                                                 :disposition => 'inline'}
+      end
+    end
+
+    def destroy
+      if @student.destroy
+        respond_with @student
+      end
     end
 
     def recovery
-      @address.recover
-      flash.now[:notice] = t(:'notice.recovered', :resource => t(:'address.singular'))
-      respond_with @address
+      @student.update_attribute(:is_deleted, false)
+      flash.now[:notice] = t(:'notice.recovered', :resource => t(:'student.singular'))
+      respond_with @student
     end
 
     def soft_delete
-      @addressable.addresses.first.try(:make_primary) if @address.primary?
-      @address.soft_delete
-      flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
-      respond_with @address
+      @student.soft_delete
+      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
+    end
+
+    def csv
+      @students = Student.all
+      field_order = ["surname", "name"]
+
+      content = CSV.generate do |csv|
+        csv << translate_fields(field_order)
+        @students.each do |student|
+          csv << student.attributes.values_at(*field_order)
+        end
+      end
+
+      send_data content,
+          :type => 'text/csv; charset=utf-8; header=present',
+          :disposition => "attachment; filename=students.csv"
+    end
+
+
+    def update
+      @student = get_student
+      super do |format|
+        if params[:student][:picture]
+          format.html { redirect_to [:edit, @student], :notice => t('notice.uploaded', :resource => t('picture')) }
+        else
+          format.js { render }
+          format.json { head :no_content }
+         end
+      end
+    end
+
+    def autocomplete_search
+      # search only name or surname separate
+      # @students = Student.where("name like ? OR surname like ?", "%#{params[:term]}%", "%#{params[:term]}%")
+      # work only on sqlite3 and postgresql
+      term = Student.encrypt_name(params[:term])
+      @students = Student.includes([:addresses, :class_groups, :class_group_enrollments]).where('(encrypted_surname || " " || encrypted_name LIKE ?) OR (encrypted_name || " " || encrypted_surname LIKE ?) OR (encrypted_name LIKE ?) OR (encrypted_surname LIKE ?)', "%#{term}%", "%#{term}%", "%#{term}%",  "%#{term}%")
+      @students_json = decrypt_students_fields(@students)
+      render json: @students_json.as_json
+    end
+
+    def load_autocomplete_data
+      object = "Gaku::" + params[:class_name].capitalize
+      @result = object.constantize.order(params[:column].to_sym).where(params[:column] + " like ?", "%#{params[:term]}%")
+      render json: @result.map(&params[:column].to_sym).uniq
+    end
+
+    protected
+
+    def collection
+      @search = Student.search(params[:q])
+      results = @search.result(:distinct => true)
+
+      @students_count = results.count
+      @students = results.page(params[:page]).per(Preset.students_per_page)
+    end
+
+    def resource
+      @student = Student.includes([:contacts => :contact_type, :addresses => :country]).find(params[:id])
     end
 
     private
 
-    def unscoped_address
-      @address = Gaku::Address.unscoped.find(params[:id])
+    def unscoped_student
+      @student = Student.unscoped.find(params[:id])
+    end
+
+    def select_vars
+      @class_group_id ||= params[:class_group_id]
+    end
+
+    def class_name
+      params[:class_name].capitalize.constantize
+    end
+
+    def selected_students
+      params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
+    end
+
+    def notable
+      # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+      @notable = Student.unscoped.find(params[:id])
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+
+      #Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
+    end
+
+    def get_student
+      Student.find(params[:id])
     end
 
     def count
-      @count = @addressable.addresses_count
+      @count = Student.count
     end
 
-    def addressable
-      klasses = [Gaku::Student, Gaku::Campus, Gaku::Guardian, Gaku::Teacher].select do |c|
-        params[c.to_s.foreign_key]
-      end
-
-      @nested_resources = nested_resources(klasses)
-      @resource_name = resource_name
+    def sort_column
+      Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
     end
 
-    def nested_resources(klasses)
-      nested_resources = Array.new
-      if klasses.is_a? Array
-        @addressable = klasses.last.find(params[klasses.last.to_s.foreign_key])
-
-        klasses.pop #remove @addressable resource
-        klasses.each do |klass|
-          nested_resources.append klass.find(params[klasses.last.to_s.foreign_key])
-        end
-      else
-        @addressable = klasses.find(params[klasses.to_s.foreign_key])
-      end
-
-      #prepend :admin for admin/namespacing
-      nested_resources.prepend(:admin) if @addressable.class == Gaku::Campus
-      return nested_resources
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
-
-    def resource_name
-      resource_name = Array.new
-      @nested_resources.each do |resource|
-        resource.is_a?(Symbol) ? resource_name.append(resource.to_s) : resource_name.append(get_class(resource))
-      end
-      resource_name.append get_class(@addressable)
-      resource_name.append get_class(@address)
-      resource_name.join '-'
-    end
-
-    def get_class(object)
-      object.class.to_s.underscore.dasherize.split('/').last
-    end
-
   end
 end

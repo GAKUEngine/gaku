@@ -4,7 +4,7 @@ $("#student-addresses-tab-link").html("<%= print_count(@count-1, t_address_plura
 $(".<%= @resource_name.pluralize %>-count").html("<%= print_count(@count-1, t_address_list) %>");
 
 showNotice("<%= render_flash %>");
-
-<%- if @addressable.addresses.reload.any? & @address.is_primary? %>
+console.log('<%=  @address.is_primary? %>')
+<%- if @addressable.addresses.reload.any? & @primary_address %>
 	$('#address-<%= @addressable.addresses.first.id %> td a').addClass('btn-primary');
 <% end %>
