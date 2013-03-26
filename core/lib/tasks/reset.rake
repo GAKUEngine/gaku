@@ -16,4 +16,19 @@ namespace :gaku do
     end
 
   end
+
+
+  desc "Reset db + delete migrations and run generator + load sample data"
+  task :reset_app => :environment do
+    unless Rails.env.production?
+      say "rake gaku:db:reset"
+      Rake::Task["gaku:db:reset"].invoke
+
+      say "rails g gaku:install"
+      %x{rails g gaku:install}
+
+      say "rake gaku:sample:load"
+      Rake::Task["gaku:sample:load"].invoke
+    end
+  end
 end
