@@ -28,6 +28,7 @@ module Gaku
     end
 
     def soft_delete
+      @primary_address = true if @address.is_primary?
       @address.soft_delete
       @addressable.addresses.first.try(:make_primary) if @address.primary?
       flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
