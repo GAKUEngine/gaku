@@ -26,8 +26,11 @@ class AddCounterCache < ActiveRecord::Migration
     end
 
     add_column :gaku_campuses, :contacts_count, :integer, :default => 0
+    add_column :gaku_campuses, :addresses_count, :integer, :default => 0
     Gaku::Campus.find_each do |e|
       e.update_attribute(:contacts_count, e.contacts.length)
+      addreses_count = e.address ? 1 : 0
+      e.update_attribute(:addresses_count, addresses_count)
       e.save
     end
 
@@ -44,5 +47,6 @@ class AddCounterCache < ActiveRecord::Migration
     remove_column :gaku_teachers, :contacts_count
 
     remove_column :gaku_campuses, :contacts_count
+    remove_column :gaku_campuses, :addresses_count
   end
 end
