@@ -4,7 +4,7 @@ FactoryGirl.define do
     association(:school)
   end
 
-  trait :with_address do
+  trait :with_one_address do
     after_create do |campus|
       campus.address = FactoryGirl.create(:address, :addressable => campus)
       campus.save

@@ -46,7 +46,7 @@ describe Gaku::Course do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:course_with_note) { create(:course, :with_one_note) }
+      let(:course_with_note) { create(:course, :with_note) }
 
       it "increments notes_count" do
         expect do

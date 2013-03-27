@@ -25,7 +25,7 @@ describe Gaku::Guardian do
     context 'addresses_count' do
 
       let(:address) { build(:address) }
-      let(:guardian_with_address) { create(:guardian, :with_one_address) }
+      let(:guardian_with_address) { create(:guardian, :with_address) }
 
       it "increments addresses_count" do
         expect do
@@ -43,7 +43,7 @@ describe Gaku::Guardian do
     context 'contacts_count' do
 
       let(:contact) { build(:contact) }
-      let(:guardian_with_contact) { create(:guardian, :with_one_contact) }
+      let(:guardian_with_contact) { create(:guardian, :with_contact) }
 
       it "increments contacts_count" do
         expect do

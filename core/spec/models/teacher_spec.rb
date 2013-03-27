@@ -22,7 +22,7 @@ describe Gaku::Teacher do
     context 'addresses_count' do
 
       let(:address) { build(:address) }
-      let(:teacher_with_address) { create(:teacher_with_one_address) }
+      let(:teacher_with_address) { create(:teacher, :with_address) }
 
       it "increments addresses_count" do
         expect do
@@ -40,7 +40,7 @@ describe Gaku::Teacher do
     context 'contacts_count' do
 
       let(:contact) { build(:contact) }
-      let(:teacher_with_contact) { create(:teacher_with_one_contact) }
+      let(:teacher_with_contact) { create(:teacher, :with_contact) }
 
       it "increments contacts_count" do
         expect do
@@ -59,7 +59,7 @@ describe Gaku::Teacher do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:teacher_with_note) { create(:teacher, :with_one_note) }
+      let(:teacher_with_note) { create(:teacher, :with_note) }
 
       it "increments notes_count" do
         expect do

@@ -21,7 +21,7 @@ describe Gaku::LessonPlan do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:lesson_plan_with_note) { create(:lesson_plan, :with_one_note) }
+      let(:lesson_plan_with_note) { create(:lesson_plan, :with_note) }
 
       it "increments notes_count" do
         expect do

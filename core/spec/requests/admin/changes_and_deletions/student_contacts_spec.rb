@@ -5,7 +5,7 @@ describe 'Student Contact Changes' do
   as_admin
 
   before do
-    @student = create(:student_with_one_contact)
+    @student = create(:student, :with_contact)
     @student.reload
     @contact = @student.contacts.first
   end

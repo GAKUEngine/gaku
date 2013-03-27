@@ -38,7 +38,7 @@ describe Gaku::Syllabus do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:syllabus_with_note) { create(:syllabus, :with_one_note) }
+      let(:syllabus_with_note) { create(:syllabus, :with_note) }
 
       it "increments notes_count" do
         expect do

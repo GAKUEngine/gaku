@@ -5,7 +5,7 @@ describe 'Student Addresses Changes' do
   as_admin
 
   before do
-    @student = create(:student_with_one_address)
+    @student = create(:student, :with_address)
     @student.reload
     @address = @student.addresses.first
   end
@@ -23,7 +23,7 @@ describe 'Student Addresses Changes' do
   end
 
   it 'saves soft deletes' do
-    @address.update_attribute(:is_deleted, true)
+    @address.soft_delete
     visit gaku.admin_changes_student_addresses_path
     page.should have_content "true"
     page.should have_content "false"

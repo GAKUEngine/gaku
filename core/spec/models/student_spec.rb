@@ -79,7 +79,7 @@ describe Gaku::Student do
     context 'addresses_count' do
 
       let(:address) { build(:address) }
-      let(:student_with_one_address) { create(:student_with_one_address) }
+      let(:student_with_address) { create(:student, :with_address) }
 
       it "increments addresses_count" do
         expect do
@@ -89,15 +89,15 @@ describe Gaku::Student do
 
       it "decrements addresses_count" do
         expect do
-          student_with_one_address.addresses.last.destroy
-        end.to change { student_with_one_address.reload.addresses_count }.by -1
+          student_with_address.addresses.last.destroy
+        end.to change { student_with_address.reload.addresses_count }.by -1
       end
     end
 
     context 'contacts_count' do
 
       let(:contact) { build(:contact) }
-      let(:student_with_one_contact) { create(:student_with_one_contact) }
+      let(:student_with_contact) { create(:student, :with_contact) }
 
       it "increments contacts_count" do
         expect do
@@ -107,8 +107,8 @@ describe Gaku::Student do
 
       it "decrements contacts_count" do
         expect do
-          student_with_one_contact.contacts.last.destroy
-        end.to change { student_with_one_contact.reload.contacts_count }.by -1
+          student_with_contact.contacts.last.destroy
+        end.to change { student_with_contact.reload.contacts_count }.by -1
       end
     end
 
@@ -116,7 +116,7 @@ describe Gaku::Student do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:student_with_one_note) { create(:student_with_one_note) }
+      let(:student_with_note) { create(:student, :with_note) }
 
       it "increments notes_count" do
         expect do
@@ -126,8 +126,8 @@ describe Gaku::Student do
 
       it "decrements notes_count" do
         expect do
-          student_with_one_note.notes.last.destroy
-        end.to change { student_with_one_note.reload.notes_count }.by -1
+          student_with_note.notes.last.destroy
+        end.to change { student_with_note.reload.notes_count }.by -1
       end
     end
 

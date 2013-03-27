@@ -28,7 +28,7 @@ describe Gaku::ClassGroup do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:class_group_with_note) { create(:class_group, :with_one_note) }
+      let(:class_group_with_note) { create(:class_group, :with_note) }
 
       it "increments notes_count" do
         expect do

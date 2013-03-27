@@ -56,7 +56,7 @@ describe Gaku::Exam do
     context 'notes_count' do
 
       let(:note) { build(:note) }
-      let(:exam_with_note) { create(:exam, :with_one_note) }
+      let(:exam_with_note) { create(:exam, :with_note) }
 
       it "increments notes_count" do
         expect do
