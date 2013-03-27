@@ -4,9 +4,9 @@ module Gaku
     include Person, Addresses, Contacts, Picture
 
     belongs_to :user
-    has_and_belongs_to_many :students, :join_table => :gaku_guardians_students
+    has_many :student_guardians, :dependent => :destroy
+    has_many :students, :through => :student_guardians
 
     attr_accessible :relationship
-
   end
 end

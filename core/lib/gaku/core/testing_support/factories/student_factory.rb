@@ -39,6 +39,21 @@ FactoryGirl.define  do
     end
   end
 
+  factory :student_with_one_guardian, :parent => :student do
+    after_create do |student|
+      student.guardians << FactoryGirl.create(:guardian)
+      student.save
+    end
+  end
+
+
+  factory :student_with_one_note, :parent => :student do
+    after_create do |student|
+      student.notes << FactoryGirl.create(:note, :notable => student)
+      student.save
+    end
+  end
+
 
   trait :with_enrollment_status do
     association :enrollment_status, factory: :enrollment_status

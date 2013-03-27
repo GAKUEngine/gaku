@@ -48,6 +48,30 @@ describe Gaku::Exam do
     end
   end
 
+
+  context 'counter_cache' do
+
+    let!(:exam) { FactoryGirl.create(:exam) }
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:exam_with_note) { create(:exam, :with_one_note) }
+
+      it "increments notes_count" do
+        expect do
+          exam.notes << note
+        end.to change { exam.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          exam_with_note.notes.last.destroy
+        end.to change { exam_with_note.reload.notes_count }.by -1
+      end
+    end
+  end
+
   context 'methods' do
     xit 'total_weight'
     xit 'max_score'

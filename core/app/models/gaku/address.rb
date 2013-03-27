@@ -38,7 +38,6 @@
     def recover
       self.update_attribute(:is_deleted, false)
       addressable.class.increment_counter(:addresses_count, addressable.id)
-
     end
 
     def primary?

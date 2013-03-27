@@ -5,5 +5,6 @@ module Gaku
 	  attr_accessible :title, :content
 
     validates_presence_of :title, :content
+
 	end
 end

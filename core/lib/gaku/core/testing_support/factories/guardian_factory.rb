@@ -31,4 +31,19 @@ FactoryGirl.define do
     end
   end
 
+
+  trait :with_one_address do
+    after_create do |guardian|
+      guardian.addresses << FactoryGirl.create(:address, :addressable => guardian)
+      guardian.save
+    end
+  end
+
+  trait :with_one_contact do
+    after_create do |resource|
+      resource.contacts << FactoryGirl.create(:contact, :contactable => resource)
+      resource.save
+    end
+  end
+
 end

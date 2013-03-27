@@ -20,4 +20,28 @@ describe Gaku::ClassGroup do
     end
   end
 
+
+  context 'counter_cache' do
+
+    let!(:class_group) { FactoryGirl.create(:class_group) }
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:class_group_with_note) { create(:class_group, :with_one_note) }
+
+      it "increments notes_count" do
+        expect do
+          class_group.notes << note
+        end.to change { class_group.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          class_group_with_note.notes.last.destroy
+        end.to change { class_group_with_note.reload.notes_count }.by -1
+      end
+    end
+  end
+
 end

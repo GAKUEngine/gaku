@@ -33,4 +33,10 @@ FactoryGirl.define  do
     end
   end
 
+  trait :with_one_note do
+    after_create do |teacher|
+      FactoryGirl.create(:note, :notable => teacher)
+    end
+  end
+
 end

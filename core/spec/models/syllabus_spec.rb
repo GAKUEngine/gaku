@@ -29,4 +29,29 @@ describe Gaku::Syllabus do
     it { should allow_mass_assignment_of :assignments_attributes }
 
   end
+
+
+  context 'counter_cache' do
+
+    let!(:syllabus) { FactoryGirl.create(:syllabus) }
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:syllabus_with_note) { create(:syllabus, :with_one_note) }
+
+      it "increments notes_count" do
+        expect do
+          syllabus.notes << note
+        end.to change { syllabus.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          syllabus_with_note.notes.last.destroy
+        end.to change { syllabus_with_note.reload.notes_count }.by -1
+      end
+    end
+  end
+
 end
