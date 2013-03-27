@@ -15,6 +15,12 @@ FactoryGirl.define  do
     end
   end
 
+  trait :with_course do
+    after_create do |student|
+      student.courses << FactoryGirl.create(:course)
+      student.save
+    end
+  end
 
   trait :with_enrollment_status do
     association :enrollment_status, factory: :enrollment_status
