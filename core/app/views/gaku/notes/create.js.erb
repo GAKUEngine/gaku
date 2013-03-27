@@ -6,6 +6,6 @@ $('#new-<%= @notable_resource %>-note form').each(function() {
 $('#new-<%= @notable_resource %>-note').slide();
 $('#new-<%= @notable_resource %>-note-link').show();
 
-$('#<%= @notable_resource %>-notes-tab-link').html("<%= print_count(@notable.notes.count, t('note.plural')) %>");
-$('.<%= @notable_resource %>-notes-count').html("<%= print_count(@notable.notes.count, t('note.list')) %>");
+$('#<%= @notable_resource %>-notes-tab-link').html("<%= print_count(@notable.notes_count + 1, t('note.plural')) %>");
+$('.<%= @notable_resource %>-notes-count').html("<%= print_count(@notable.notes_count + 1, t('note.list')) %>");
 showNotice("<%= render_flash %>");

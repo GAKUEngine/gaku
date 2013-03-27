@@ -6,6 +6,7 @@ describe 'Student Notes' do
   as_admin
 
   let(:student) { create(:student) }
+  let(:student_with_note) { create(:student, :with_note) }
   let(:note) { create(:note, notable: student) }
 
   before :all do
@@ -14,9 +15,9 @@ describe 'Student Notes' do
 
   context 'new' do
     before do
-      visit gaku.edit_student_path(student)
-      click tab_link
       @data = student
+      visit gaku.edit_student_path(@data)
+      click tab_link
     end
 
     it_behaves_like 'new note'
@@ -24,10 +25,9 @@ describe 'Student Notes' do
 
   context "existing", :js => true do
     before do
-      note
-      visit gaku.edit_student_path(student)
+      @data = student_with_note
+      visit gaku.edit_student_path(@data)
       click tab_link
-      @data = student
     end
 
     it_behaves_like 'edit note'

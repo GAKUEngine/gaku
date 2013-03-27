@@ -37,7 +37,29 @@ describe Gaku::Course do
   		course.student_ids.include?(student1.id)
   		course.student_ids.include?(student2.id)
   	end
+  end
 
+  context 'counter_cache' do
+
+    let!(:course) { FactoryGirl.create(:course) }
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:course_with_note) { create(:course, :with_note) }
+
+      it "increments notes_count" do
+        expect do
+          course.notes << note
+        end.to change { course.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          course_with_note.notes.last.destroy
+        end.to change { course_with_note.reload.notes_count }.by -1
+      end
+    end
   end
 
 end

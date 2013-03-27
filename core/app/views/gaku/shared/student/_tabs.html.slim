@@ -10,10 +10,10 @@
             = print_count @student.contacts_count, t(:'contact.plural')
         li
           a#student-notes-tab-link data-toggle="tab" href="#notes"
-            = print_count @student.notes.count, t(:'note.plural')
+            = print_count @student.notes_count, t(:'note.plural')
         li
           a#student-guardians-tab-link data-toggle="tab" href="#guardians"
-            = print_count @student.guardians.count, t(:'guardian.plural')
+            = print_count @student.guardians_count, t(:'guardian.plural')
         li
           a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
             = print_count @student.courses.count, t('course.plural')

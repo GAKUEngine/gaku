@@ -6,6 +6,8 @@ describe 'Student Address' do
   as_admin
 
   let(:student) { create(:student) }
+  let(:student_with_address) { create(:student, :with_address) }
+  let(:student_with_addresses) { create(:student, :with_addresses) }
   let(:country) { create(:country, :name => "Japan") }
 
   before :all do
@@ -27,9 +29,8 @@ describe 'Student Address' do
 
     context 'one address' do
       before(:each) do
-        @student =  create(:student_with_one_address)
-        @student.reload
-        visit gaku.edit_student_path(@student)
+        @data = student_with_address
+        visit gaku.edit_student_path(@data)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end
@@ -39,7 +40,6 @@ describe 'Student Address' do
       context 'delete' do
 
         before do
-          @data = @student
           within(tab_link)  { page.should have_content 'Addresses(1)' }
         end
 
@@ -55,10 +55,8 @@ describe 'Student Address' do
     context 'two addresses' do
 
       before(:each) do
-        @student = create(:student_with_two_addresses)
-        @student.reload
-        @data = @student
-        visit gaku.edit_student_path(@student)
+        @data = student_with_addresses
+        visit gaku.edit_student_path(@data)
         click tab_link
         wait_until { page.has_content? 'Addresses list' }
       end

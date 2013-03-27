@@ -6,7 +6,9 @@ describe 'Student Contacts' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:contact_type) { create(:contact_type, :name => 'Email') }
+  let(:student_with_contact) { create(:student, :with_contact) }
+  let(:student_with_contacts) { create(:student, :with_contacts) }
+  let!(:contact_type) { create(:contact_type, :name => 'Email') }
 
   before :all do
     set_resource "student-contact"
@@ -15,11 +17,10 @@ describe 'Student Contacts' do
   context 'new', :js => true do
 
     before do
-      contact_type
-      visit gaku.edit_student_path(student)
+      @data = student
+      visit gaku.edit_student_path(@data)
       click tab_link
       wait_until { page.has_content? 'Contacts list' }
-      @data = student
     end
 
     it_behaves_like 'new contact'
@@ -32,22 +33,20 @@ describe 'Student Contacts' do
     context 'one contact' do
 
       before(:each) do
-        @student = create(:student_with_one_contact)
-        @student.reload
-        @data = @student
+        @data = student_with_contact
       end
 
       context 'edit', :js => true do
 
         before do
-          visit gaku.edit_student_path(@student)
+          visit gaku.edit_student_path(@data)
           click tab_link
           wait_until { page.has_content? 'Contacts list' }
         end
 
         it_behaves_like 'edit contact'
 
-        it_behaves_like 'delete contact', @data #the test uses @student
+        it_behaves_like 'delete contact', @data
 
       end
 
@@ -56,10 +55,8 @@ describe 'Student Contacts' do
     context 'two contacts' do
 
       before do
-        @student = create(:student_with_two_contacts)
-        @student.reload
-        @data = @student
-        visit gaku.edit_student_path(@student)
+        @data = student_with_contacts
+        visit gaku.edit_student_path(@data)
         click tab_link
         wait_until { page.has_content? 'Contacts list' }
       end
