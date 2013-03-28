@@ -13,8 +13,6 @@ FactoryGirl.define do
       student2 = FactoryGirl.create(:student)
       FactoryGirl.create(:class_group_enrollment, :student => student1, :class_group => resource)
       FactoryGirl.create(:class_group_enrollment, :student => student2, :class_group => resource)
-      #resource.addresses << FactoryGirl.create(:address, :addressable => resource)
-      #resource.save
     end
   end
 

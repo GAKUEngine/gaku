@@ -15,7 +15,7 @@ module Gaku
     private
 
     def save_student_class_and_number
-      student.class_and_number = "#{class_group} - #{seat_number}"
+      student.class_and_number = "#{class_group} - ##{seat_number}"
       student.save
     end
 

@@ -20,7 +20,7 @@ describe Gaku::ClassGroupEnrollment do
 
     it 'saves after creation' do
       enrollment
-      enrollment.student.class_and_number.should eq "#{enrollment.class_group} - #{enrollment.seat_number}"
+      enrollment.student.class_and_number.should eq "#{enrollment.class_group} - ##{enrollment.seat_number}"
     end
   end
 
