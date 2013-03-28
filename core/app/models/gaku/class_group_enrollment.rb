@@ -8,6 +8,16 @@ module Gaku
 
 	  validates :student_id,
               uniqueness: { scope: :class_group_id, message: "Already enrolled to the class group!" }
-		validates_presence_of :class_group_id
+		validates_presence_of :class_group_id, :student_id
+
+    after_save :save_student_class_and_number
+
+    private
+
+    def save_student_class_and_number
+      student.class_and_number = "#{class_group} - #{seat_number}"
+      student.save
+    end
+
 	end
 end

@@ -9,8 +9,7 @@
 
   = render 'gaku/shared/fields/person_fields', :person => student
 
-  td.class-name = student_presenter.class_group
-  td.seat-number = student_presenter.seat_number
+  td.class-name = student.class_and_number
   td.admitted = student.admitted
   td.address = student.primary_address
   td.contact = student.primary_contact

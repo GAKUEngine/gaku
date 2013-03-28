@@ -4,7 +4,7 @@ describe 'Admin Disposals Student Addresses' do
 
   as_admin
 
-  let(:student) { create(:student_with_one_address) }
+  let(:student) { create(:student, :with_address) }
 
   before do
     student

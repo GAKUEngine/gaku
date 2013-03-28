@@ -6,8 +6,7 @@ describe "CourseEnrollment"  do
 
   let(:course) { create(:course) }
   let(:class_group) { create(:class_group, :name => "Math") }
-  let(:student1) { create(:student, :name => "Johniew", :surname => "Doe", :class_group_ids => [class_group.id]) }
-  let(:student2) { create(:student, :name => "Amon", :surname => "Tobin", :class_group_ids => [class_group.id]) }
+  let(:class_group_with_students) { create(:class_group, :with_students, :name => "Math") }
 
   before :all do
     set_resource "course-class-group"
@@ -47,9 +46,7 @@ describe "CourseEnrollment"  do
 
   context 'class group with 2 students', :js => true do
     before do
-      class_group
-      student1
-      student2
+      class_group_with_students
       visit gaku.course_path(course)
     end
 
@@ -63,16 +60,16 @@ describe "CourseEnrollment"  do
         wait_until_invisible submit
       end.to change(course.students, :count).by 2
 
-      page.should have_content "Johniew"
-      page.should have_content "Amon"
+      page.should have_content class_group_with_students.students.first
+      page.should have_content class_group_with_students.students.second
       page.should have_content "View Assignments"
       page.should have_content "View Exams"
       # TODO show flash msgs for successfuly added students
     end
 
     it 'errors if all students are already added' do
-      course.students << student1
-      course.students << student2
+      course.students << class_group_with_students.students.first
+      course.students << class_group_with_students.students.second
       visit gaku.course_path(course)
 
       click new_link

@@ -7,4 +7,5 @@
 	$('.validation-error').html('');
 
 	$('#class-group').text('<%= "#{@student.class_groups.last.grade.try(:to_s)} - #{@class_group.name}" %>');
+  $('#new-class-group-enrollment-modal').modal('hide');
 <% end %>

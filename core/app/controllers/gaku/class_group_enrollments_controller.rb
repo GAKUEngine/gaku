@@ -5,5 +5,10 @@ module Gaku
 
   include EnrollmentsController
 
+
+  def create
+    @enrollment = ClassGroupEnrollment.create(params[:class_group_enrollment])
+  end
+
   end
 end
