@@ -63,7 +63,7 @@
     private
 
     def reset_counter_cache
-      addressable.class.reset_counters(addressable.id, :addresses)
+      addressable.class.reset_counters(addressable.id, :addresses) unless addressable.instance_of? Gaku::Campus
     end
 
     def ensure_first_is_primary
