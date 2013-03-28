@@ -230,9 +230,8 @@ describe Gaku::Admin::AdmissionsController do
         @admission_phase_record.save!
       end
 
-      it 'creates new admission phase record' do
+      it 'creates new admission phase record'  do
         expect do
-          #raise @admission.admission_phase_records.first.admission_phase_state.inspect + " " + 
           gaku_js_post :change_student_state, 
                         state_id: @new_state.id, 
                         student_ids: [@admission.student_id], 
@@ -373,7 +372,7 @@ describe Gaku::Admin::AdmissionsController do
     end
 
     it 'admits the student' do
-      @student = create(:student, enrollment_status_id: nil)
+      @student = create(:student, enrollment_status_id: 1)
       expect do
         gaku_js_post :create_multiple, admission_period_id: admission_period.id,
                                      admission_method_id: admission_period.admission_methods.first.id,
