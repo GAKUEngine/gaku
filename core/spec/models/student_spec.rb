@@ -57,7 +57,6 @@ describe Gaku::Student do
 
     let!(:student) { FactoryGirl.create(:student) }
 
-
     context 'guardians_count' do
 
       let(:guardian) { create(:guardian) }
@@ -73,6 +72,24 @@ describe Gaku::Student do
         expect do
           student_with_one_guardian.guardians.last.destroy
         end.to change { student_with_one_guardian.reload.guardians_count }.by -1
+      end
+    end
+
+    context 'courses_count' do
+
+      let(:course) { create(:course) }
+      let(:student_with_course) { create(:student, :with_course) }
+
+      it "increments courses_count" do
+        expect do
+          student.courses << course
+        end.to change { student.courses_count }.by 1
+      end
+
+      it "decrements guardians_count" do
+        expect do
+          student_with_course.courses.last.destroy
+        end.to change { student_with_course.reload.courses_count }.by -1
       end
     end
 
