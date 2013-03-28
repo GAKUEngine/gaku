@@ -4,23 +4,19 @@ describe 'Admin Disposals Student Addresses' do
 
   as_admin
 
-  let(:student) { create(:student_with_one_address) }
-
-  before do
-    student
-    student.addresses.reload
-  end
+  let(:student) { create(:student, :with_address) }
 
   it "no soft deleted student addresses", :js => true do
     visit gaku.student_addresses_admin_disposals_path
     within('#admin-student-addresses-disposals-index') do
       page.all('tbody tr').size.should eq 0
-      page.should_not have_content(student.addresses.first.address1)
     end
   end
 
   context 'recover and destroy student address disposals', :js => true do
     before do
+      student.addresses.reload
+
       visit gaku.edit_student_path(student)
       click '.delete-link'
       accept_alert
