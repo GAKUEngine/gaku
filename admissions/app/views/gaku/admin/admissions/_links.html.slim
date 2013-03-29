@@ -7,6 +7,7 @@
 
       = link_to_export t(:'export'), "admissions.xls?admission_period_id="+@admission_period.id.to_s+"&admission_method_id="+@admission_method.id.to_s, :id => 'export-xls-link'
       = link_to_import t(:'import'), admin_importer_index_path(:admission_period_id => @admission_period.id, :admission_method_id => @admission_method.id)
+
     - else
       = t(:'admission_phase_states.no_states')
   - else

@@ -18,7 +18,7 @@ h4
       .row-fluid
         .span6
           - if method_form.object.new_record?
-            = method_form.select :admission_method_id, options_from_collection_for_select(@admission_methods, :id, 'name', method_form.object.admission_method_id), { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name')
+            = method_form.select :admission_method_id, options_from_collection_for_select(@admission_methods, :id, 'name', method_form.object.admission_method_id), { :prompt => 'Select Admission Method' }, :label => t(:'admission_methods.name'), :id => 'admission-method-select'
           - else
             = method_form.object.admission_method.name
         .span6[style="margin-top: 25px;"]

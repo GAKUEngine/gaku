@@ -89,12 +89,15 @@ describe 'Admin Admission Method Phases' do
           click edit_link
           wait_until_visible modal
           expect do
-            click_on 'Remove state'
+            within('#admission-phase-state-'+admission_phase_state.id.to_s) do
+              click_on 'Remove state'
+            end
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
+            page.all('.state', :visible => true).count.should == 2
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
           end.to change(Gaku::AdmissionPhaseState, :count).by -1
+         
           click_on 'Admission Phase States list'
           wait_until_visible '#show-admission-method-admission-phase-states-modal'
           page.should_not have_content(admission_phase_state.name)
@@ -103,7 +106,7 @@ describe 'Admin Admission Method Phases' do
         it 'edits ' do
           click edit_link
           wait_until_visible modal
-          within('.state') do
+          within('#admission-phase-state-'+admission_phase_state.id.to_s) do
             click edit_link
             fill_in 'admission_phase_state_name', with: 'Rejected'
             uncheck 'admission_phase_state_can_progress'
@@ -135,26 +138,27 @@ describe 'Admin Admission Method Phases' do
         it 'adds' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1 #default state
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
-            within('.state') { find(:css, "input").set('Written Report') }
+            page.all('.state', :visible => true).count.should == 2
+            fill_in 'State name', with: 'Written Report'
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
+            flash_updated?
           end.to change(Gaku::AdmissionPhaseState, :count).by 1
         end
 
         it 'cancels adding' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
-            within('.state') { find(:css, "input").set('Written Report') }
+            page.all('.state', :visible => true).count.should == 2
+            fill_in 'State name', with: 'Written Report'
             click cancel_link
           end.to change(Gaku::AdmissionPhaseState, :count).by 0
         end

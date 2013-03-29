@@ -14,10 +14,21 @@ module Gaku
     validates :admission_method, presence: true
 
     before_create :proper_position
+    after_create  :add_default_state
     after_destroy :refresh_positions
+
+    #validates :admission_phase_states, presence: true
 
     def self.find_next_phase(phase)
       AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+    end
+
+    def get_default_state
+      self.admission_phase_states.each do |state| 
+        if state.is_default = true
+          return state
+        end
+      end
     end
 
     private
@@ -31,6 +42,10 @@ module Gaku
       admission_phases.pluck(:id).each_with_index do |id, index|
         admission_phases.update_all( {:position => index}, {:id => id} )
       end
+    end
+
+    def add_default_state
+      AdmissionPhaseState.where(name: "Default state", admission_phase_id: self.id, is_default: true, can_progress: true, can_admit: false, auto_admit: false).first_or_create
     end
 
   end

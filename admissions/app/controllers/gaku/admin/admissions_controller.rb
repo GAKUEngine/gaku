@@ -80,22 +80,24 @@ module Gaku
         @admission = Admission.new
         @student = @admission.build_student
         @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
-        @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+        #@applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
       end
 
       def create
+
         @admission = Admission.new(params[:admission])
         if @admission.save
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
           admission_phase = @admission_method.admission_phases.first
-          @admission_phase_state = admission_phase.admission_phase_states.find_by_is_default(true)
+          @admission_phase_state = admission_phase.get_default_state
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => @admission_phase_state.id,
                                                 :admission_id => @admission.id)
-
+          @admission.update_column(:admission_phase_record_id, @admission_phase_record.id)
           @admission.change_student_to_applicant
+          @admission.save
           render 'create'
         end
       end

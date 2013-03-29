@@ -75,7 +75,7 @@ describe 'Admin Admission Periods' do
           
           flash_updated?
         end
-
+=begin
         it 'edits ' do
           click edit_link
           wait_until_visible modal
@@ -96,6 +96,7 @@ describe 'Admin Admission Periods' do
             page.should_not have_content admission_method.name
           end
         end
+=end
         it 'adds ' do
           click edit_link
           wait_until_visible modal
@@ -103,7 +104,7 @@ describe 'Admin Admission Periods' do
             click_on 'Add Admission Method'
             wait_for_ajax
             page.all('.method_form', :visible => true).count.should == 2
-            select "#{admission_method2.name}", :from => 'admission_period[period_method_associations_attributes][0][admission_method_id]'
+            select "#{admission_method2.name}", :from => 'admission-method-select'
             click '#submit-admin-admission-period-button'
             wait_until_invisible modal
           end.to change(Gaku::PeriodMethodAssociation, :count).by 1
