@@ -40,7 +40,7 @@ describe 'Admin Admissions Grading' do
 
     it 'errors with invalid points' do
       fill_in 'portion_score', with: -120 #Max score is 100
-      click '.exam-parts' #TODO fix this
+      click '.total_row' #TODO fix this
       page.should have_css '.score-error'
       fill_in 'portion_score', with: 120
       click '.exam-parts' #TODO fix this

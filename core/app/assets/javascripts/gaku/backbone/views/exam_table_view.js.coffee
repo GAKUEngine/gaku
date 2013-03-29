@@ -4,6 +4,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
   events:
     'blur       .portion_score_update':         'validatePortion'
+
     'keypress   .portion_score_update' :        'onEnterActions'
     'click      .portion_set_attendance' :      'setPortionAttendance'
     'click      .portion_score_update input':   'removeBorder'
@@ -205,7 +206,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   validatePortion: (event)->
     currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
-    currentTargetValue = currentTargetInput.attr('value')
+    currentTargetValue = parseInt currentTargetInput.val()
     maxScore           = currentTarget.closest('form').data('max-score')
 
     if currentTargetValue > maxScore or currentTargetValue < 0
