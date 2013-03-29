@@ -7,7 +7,7 @@ describe Gaku::Student do
 
   context "validations" do
     it { should have_one(:admission) }
-    it { should validate_presence_of(:enrollment_status_id) }
+    #it { should validate_presence_of(:enrollment_status_id) }
   end
 
   context 'when student is applicant' do
