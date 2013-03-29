@@ -88,6 +88,7 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
+  empty: Empty
   birth: Birth Date
   birth_and: and
   birth_between: Birth date between

@@ -76,6 +76,7 @@ en:
     please_select_period: Please Select Admission Period
     reg_date: Application Registration Date
     status: Admission Status
+    applicant_number: Applicant Number
   exams:
     exam_score: Exam Score
     grade: Grade Exam
