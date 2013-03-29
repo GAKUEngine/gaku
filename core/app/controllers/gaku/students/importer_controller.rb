@@ -5,7 +5,6 @@ module Gaku
     skip_authorization_check
 
     include SheetHelper
-    #require 'spreadsheet'
     require 'roo'
 
     def index

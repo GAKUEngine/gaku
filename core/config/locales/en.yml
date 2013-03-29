@@ -88,7 +88,6 @@ en:
     save: Save Attendance Type
     singular: Attendance Type
   back: Back
-  empty: Empty
   birth: Birth Date
   birth_and: and
   birth_between: Birth date between
@@ -313,6 +312,7 @@ en:
     username: Username
   edit: Edit
   email: Mail Address
+  empty: Empty
   enroll_to_class: Enroll to class
   enrollment:
     plural: Enrollments

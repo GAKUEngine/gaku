@@ -312,6 +312,7 @@ ja:
     username: ユーザー名
   edit: 編集
   email: メールアドレス
+  empty: 空です
   enroll_to_class: クラスに登録
   enrollment:
     plural: 在籍

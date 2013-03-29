@@ -312,6 +312,7 @@ bg:
     username: Потребителско Име
   edit: Редактиране
   email: Поща
+  empty: 
   enroll_to_class: Записване в клас
   enrollment:
     plural: Записи
