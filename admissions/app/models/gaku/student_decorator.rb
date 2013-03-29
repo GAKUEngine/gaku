@@ -6,6 +6,8 @@ module Gaku
 
     scope :non_deleted, includes(:enrollment_status).where('gaku_enrollment_statuses.code != ?', "deleted")
 
+    #validates :enrollment_status_id, presence: true
+
     def student
       Student.unscoped{ super }
     end

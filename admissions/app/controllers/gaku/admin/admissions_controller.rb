@@ -91,14 +91,17 @@ module Gaku
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
           admission_phase = @admission_method.admission_phases.first
           @admission_phase_state = admission_phase.get_default_state
+          
           @admission_phase_record = AdmissionPhaseRecord.create(
                                                 :admission_phase_id => admission_phase.id,
                                                 :admission_phase_state_id => @admission_phase_state.id,
                                                 :admission_id => @admission.id)
+
           @admission.update_column(:admission_phase_record_id, @admission_phase_record.id)
           @admission.change_student_to_applicant
           @admission.save
-          render 'create'
+          
+          render 'create', :admission_phase_record => @admission_phase_record
         end
       end
 
