@@ -1,0 +1,12 @@
+.row-fluid
+    ul.thumbnails
+      - @student.achievements.each_slice(6) do |achievements|
+        .row-fluid
+          .achievements-group
+            - achievements.each do |achievement|
+              li.span2
+                .thumbnail.well
+                  =image_tag(achievement.badge)
+                  h4 =achievement.name
+                  p.muted =achievement.authority
+        =hr
