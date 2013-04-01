@@ -189,23 +189,6 @@ module Gaku
       content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
     end
 
-    def student_specialties_list(student_specialties)
-      string = String.new
-      if student_specialties.any?
-        student_specialties.each_with_index do |student_specialty, i|
-          string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
-          string.concat ", " unless i == student_specialties.count - 1
-        end
-      else
-        string.concat "Empty"
-      end
-      string.html_safe
-    end
-
-    def major_check(student_specialty)
-      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
-    end
-
     def resize_image(image_url, options = {})
       raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
       height = options[:height] || options[:size]
@@ -213,47 +196,39 @@ module Gaku
       image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
     end
 
-    def achievements_show(achievements)
-      string = String.new
-      if achievements.any?
-        achievements.each do |achievement|
-          string.concat achievement.to_s
-          string.concat String.new ' '
-          #string.concat resize_image(achievement.badge, :size => 22)
-          string.concat ', ' unless achievement.equal? achievements.last
-        end
-      else
-        string.concat 'Empty'
+
+    def student_specialties_list(specialties)
+      comma_separated_list specialties, :empty => t(:'empty') do |specialty|
+        "#{specialty.specialty} (#{major_check(specialty)})"
       end
-      string.html_safe
     end
+
+    def achievements_show(achievements)
+      comma_separated_list achievements, :empty => t(:'empty') do |achievement|
+        "#{achievement.name} (#{resize_image(achievement.badge, :size => 22)})"
+      end
+    end
+
 
     def simple_grades_show(simple_grades)
-      string = String.new
-      if simple_grades.any?
-        simple_grades.each do |simple_grade|
-          string.concat "#{simple_grade.name} (#{simple_grade.grade})"
-          string.concat ', ' unless simple_grade.equal? simple_grades.last
-        end
-      else
-        string.concat "Empty"
+      comma_separated_list simple_grades, :empty => t(:'empty') do |simple_grade|
+        "#{simple_grade.name} (#{simple_grade.grade})"
       end
-      string.html_safe
     end
 
-    def comma_separete_list(objects)
-      string = String.new
+    def major_check(student_specialty)
+      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
+    end
+
+    def comma_separated_list(objects, options = {}, &block)
       if objects.any?
-        objects.each do |object|
-          string.concat object.to_s
-          string.concat ', ' unless object.equal? objects.last
-        end
+        objects.map do |object|
+          block_given? ? block.call(object) : object
+        end.join(', ')
       else
-        string.concat "Empty"
+        options[:empty]
       end
-      string.html_safe
     end
-
 
     def chooser_preset
       @chooser_preset ||= Gaku::Preset.chooser_table_fields
