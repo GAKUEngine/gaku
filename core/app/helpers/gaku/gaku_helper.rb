@@ -224,7 +224,7 @@ module Gaku
       if objects.any?
         objects.map do |object|
           block_given? ? block.call(object) : object
-        end.join(', ')
+        end.join(', ').html_safe
       else
         options[:empty]
       end

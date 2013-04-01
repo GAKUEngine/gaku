@@ -4,6 +4,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
 
   events:
     'blur       .portion_score_update':         'validatePortion'
+
     'keypress   .portion_score_update' :        'onEnterActions'
     'click      .portion_set_attendance' :      'setPortionAttendance'
     'click      .portion_score_update input':   'removeBorder'
