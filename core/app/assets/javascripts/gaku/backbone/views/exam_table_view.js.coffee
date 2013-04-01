@@ -206,7 +206,7 @@ class GAKUEngine.Views.ExamTableView extends Backbone.View
   validatePortion: (event)->
     currentTarget      = $(event.currentTarget)
     currentTargetInput = currentTarget.find('input')
-    currentTargetValue = parseInt currentTargetInput.val()
+    currentTargetValue = currentTargetInput.val()
     maxScore           = currentTarget.closest('form').data('max-score')
 
     if currentTargetValue > maxScore or currentTargetValue < 0
