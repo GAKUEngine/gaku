@@ -9,16 +9,22 @@ describe 'Admin Presets Output Formats' do
   end
 
   context '#default', js:true do
-    it 'saves' do
-      select 'xls', from:'presets_spreadsheets'
-      select 'PDF', from:'presets_printables'
-      click '#submit-preset'
-
+    it 'save spreadsheets' do
+      expect do
+        select 'xls', from:'presets_spreadsheets'
+        click '#submit-preset'
+      end.to change { Gaku::Preset.get('spreadsheets') }.to('xls')
+      find_field('presets_spreadsheets').find('option[selected]').text.should eq('xls')
       flash_updated?
-      Gaku::Preset.get('spreadsheets').should eq('xls')
-      Gaku::Preset.get('printables').should eq('PDF')
+    end
 
+    it 'save printables' do
+      expect do
+        select 'PDF', from:'presets_printables'
+        click '#submit-preset'
+      end.to change { Gaku::Preset.get('printables') }.to('PDF')
+      find_field('presets_printables').find('option[selected]').text.should eq('PDF')
+      flash_updated?
     end
   end
-
 end
