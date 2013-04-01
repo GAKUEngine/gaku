@@ -42,8 +42,17 @@ module Gaku
 
       def change_student_state
 
-        if params[:admit_students]
+        if params[:admit_students].present?
           admit_students(@state_students)
+
+        elsif params[:progress_students].present?
+          state = AdmissionPhaseState.find(params[:state_id])
+          phase = state.admission_phase
+          next_phase = AdmissionPhase.find_next_phase(phase)
+          @new_state = next_phase.admission_phase_states.first
+          @state_students.each  do |student|
+            @progress_success = student.admission.progress_to_next_phase(phase)
+          end
         else
           @next_state = AdmissionPhaseState.find(params[:state_id])
 

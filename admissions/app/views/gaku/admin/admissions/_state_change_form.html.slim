@@ -6,9 +6,11 @@
         = "All"
       th
         = select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states.where('id != ?', state.id), :id, :name, state.id)
-
-      th
         = submit_tag "Save"
+      th
+        - if state.can_progress
+          = submit_tag "Progress", :name => 'progress_students'
+      th
         - if state.can_admit
           = submit_tag "Admit", :name => 'admit_students'
 
