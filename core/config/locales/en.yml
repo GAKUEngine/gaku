@@ -612,6 +612,11 @@ en:
       country: Country
       gender: Gender
       state: State
+    output_formats:
+      choose: Choose Format
+      printables: Printable
+      documents: Documents
+      spreadsheets: Spreadsheets
   profile: Profile
   profiles:
     new: New Profile

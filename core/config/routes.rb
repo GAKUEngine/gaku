@@ -264,6 +264,7 @@ Gaku::Core::Engine.routes.draw do
         get :grading
         get :pagination
         get :defaults
+        get :output_formats
         put :update_presets
       end
     end
