@@ -158,16 +158,10 @@ module Gaku
 
             def add_to_standard_deviation(exam, student)
               @standard_deviation += fix_digit((@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2, 2)
-              puts "@standard_deviation daaa"
-              puts @standard_deviation
             end
 
             def standard_deviation(standard_deviation)
-              puts "raw standard dev"
-              puts standard_deviation
               @standard_deviation = fix_digit(Math.sqrt(standard_deviation / @students.length), 4)
-              puts "@standard_deviation dayo--"
-              puts @standard_deviation
             end
 
             def add_to_deviation_member(exam, student)
