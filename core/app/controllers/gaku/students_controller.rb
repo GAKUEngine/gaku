@@ -21,9 +21,9 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       #index!
-      
+
       super do |format|
-        format.pdf { 
+        format.pdf {
           send_data render_to_string, filename: 'sido_yoroku.pdf', type: 'application/pdf', disposition: 'attachment'
         }
       end
@@ -105,7 +105,6 @@ module Gaku
       @search = Student.search(params[:q])
       results = @search.result(:distinct => true)
 
-      @students_count = results.count
       @students = results.page(params[:page]).per(Preset.students_per_page)
     end
 

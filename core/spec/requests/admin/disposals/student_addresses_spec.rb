@@ -5,6 +5,10 @@ describe 'Admin Disposals Student Addresses' do
   as_admin
 
   let(:student) { create(:student, :with_address) }
+  before do
+    student
+    student.addresses.reload
+  end
 
   it "no soft deleted student addresses", :js => true do
     visit gaku.student_addresses_admin_disposals_path

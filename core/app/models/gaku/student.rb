@@ -3,7 +3,7 @@ module Gaku
 
     include Person, Addresses, Contacts, Notes, Picture, Trashable
 
-    has_many :course_enrollments
+    has_many :course_enrollments, :dependent => :destroy
     has_many :courses, :through => :course_enrollments
 
     has_many :class_group_enrollments
