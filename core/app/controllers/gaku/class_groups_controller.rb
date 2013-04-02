@@ -27,7 +27,7 @@ module Gaku
         @notable = ClassGroup.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
         # @course = Course.new
-        @courses = Course.all
+        #@courses = Course.all
         @class_group_course_enrollment = ClassGroupCourseEnrollment.new
       end
 

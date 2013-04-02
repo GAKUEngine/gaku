@@ -86,7 +86,7 @@ describe Gaku::Student do
         end.to change { student.courses_count }.by 1
       end
 
-      it "decrements guardians_count" do
+      it "decrements courses_count" do
         expect do
           student_with_course.courses.last.destroy
         end.to change { student_with_course.reload.courses_count }.by -1

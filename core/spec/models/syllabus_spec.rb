@@ -52,6 +52,25 @@ describe Gaku::Syllabus do
         end.to change { syllabus_with_note.reload.notes_count }.by -1
       end
     end
+
+    context 'exams_count' do
+
+      let(:exam) { build(:exam) }
+      let(:syllabus_with_exam) { create(:syllabus, :with_exam) }
+
+      it "increments exams_count" do
+        expect do
+          syllabus.exams << exam
+        end.to change { syllabus.reload.exams_count }.by 1
+      end
+
+      it "decrements exams_count" do
+        expect do
+          syllabus_with_exam.exams.last.destroy
+        end.to change { syllabus_with_exam.reload.exams_count }.by -1
+      end
+    end
+
   end
 
 end
