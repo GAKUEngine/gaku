@@ -13,7 +13,7 @@ module Gaku
             @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
             @completion = Hash.new { |hash,key| hash[key] = {} }
             @exam_averages = Hash.new []
-            @exam_weight_averages = Hash.new {0.0}
+            @exam_weight_averages = Hash.new []
             @weighting_score = true
             @student_portion_attendance = Hash.new { |hash,key| hash[key] = {} }
 
@@ -44,7 +44,7 @@ module Gaku
           def calculate_exam_averages
             @students.each do |student|
               @exams.each do |exam|
-                add_to_exam_averages(exam, student, @students)
+                add_to_exam_averages(exam, student)
                 add_to_weight_averages(exam, student) if exam.use_weighting
               end
             end
@@ -128,16 +128,6 @@ module Gaku
               @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
             end
 
-            def add_to_exam_averages(exam, student, students)
-              @exam_averages[exam.id].push @student_total_scores[student.id][exam.id]
-              if @exam_averages[exam.id].length == students.length
-                total = calculate_array_total @exam_averages[exam.id]
-                @exam_averages[exam.id] = fix_digit(total / students.length, 1)
-                puts "@exam_averages[exam.id] dayoo"
-                puts @exam_averages[exam.id]
-              end
-            end
-            
             def calculate_array_total(array_data)
               total = 0
               array_data.each do |num|
@@ -146,8 +136,20 @@ module Gaku
               return total
             end
 
+            def add_to_exam_averages(exam, student)
+              @exam_averages[exam.id].push @student_total_scores[student.id][exam.id]
+              if @exam_averages[exam.id].length == @students.length
+                total = calculate_array_total @exam_averages[exam.id]
+                @exam_averages[exam.id] = fix_digit(total / @students.length, 1)
+              end
+            end
+
             def add_to_weight_averages(exam, student)
-              @exam_weight_averages[exam.id] += fix_digit(@student_total_weights[student.id][exam.id],4)
+              @exam_weight_averages[exam.id].push @student_total_weights[student.id][exam.id]
+              if @exam_weight_averages[exam.id].length == @students.length
+                total = calculate_array_total @exam_weight_averages[exam.id]
+                @exam_weight_averages[exam.id] = fix_digit(total / @students.lenght, 1)
+              end
             end
 
             def add_to_weighted_standard_deviation(exam, student)
