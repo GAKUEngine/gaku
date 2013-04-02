@@ -12,7 +12,7 @@ module Gaku
             @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
             @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
             @completion = Hash.new { |hash,key| hash[key] = {} }
-            @exam_averages = Hash.new {0.0}
+            @exam_averages = Hash.new []
             @exam_weight_averages = Hash.new {0.0}
             @weighting_score = true
             @student_portion_attendance = Hash.new { |hash,key| hash[key] = {} }
@@ -129,7 +129,21 @@ module Gaku
             end
 
             def add_to_exam_averages(exam, student, students)
-              @exam_averages[exam.id] += fix_digit(@student_total_scores[student.id][exam.id] / students.length,4)
+              @exam_averages[exam.id].push @student_total_scores[student.id][exam.id]
+              if @exam_averages[exam.id].length == students.length
+                total = calculate_array_total @exam_averages[exam.id]
+                @exam_averages[exam.id] = fix_digit(total / students.length, 1)
+                puts "@exam_averages[exam.id] dayoo"
+                puts @exam_averages[exam.id]
+              end
+            end
+            
+            def calculate_array_total(array_data)
+              total = 0
+              array_data.each do |num|
+                total += num
+              end
+              return total
             end
 
             def add_to_weight_averages(exam, student)
@@ -141,11 +155,17 @@ module Gaku
             end
 
             def add_to_standard_deviation(exam, student)
-              @standard_deviation += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
+              @standard_deviation += fix_digit((@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2, 2)
+              puts "@standard_deviation daaa"
+              puts @standard_deviation
             end
 
             def standard_deviation(standard_deviation)
-              @standard_deviation = Math.sqrt standard_deviation / @students.length
+              puts "raw standard dev"
+              puts standard_deviation
+              @standard_deviation = fix_digit(Math.sqrt(standard_deviation / @students.length), 4)
+              puts "@standard_deviation dayo--"
+              puts @standard_deviation
             end
 
             def add_to_deviation_member(exam, student)
