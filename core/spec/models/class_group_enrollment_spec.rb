@@ -10,8 +10,7 @@ describe Gaku::ClassGroupEnrollment do
     it { should validate_presence_of :class_group_id }
     it { should validate_presence_of :student_id }
 
-    it { should validate_uniqueness_of(:student_id).scoped_to(:class_group_id).with_message(/Already enrolled to the class group!/) }
-
+    it { should validate_uniqueness_of(:student_id).scoped_to(:class_group_id).with_message("Already enrolled to the class group!") }
   end
 
 

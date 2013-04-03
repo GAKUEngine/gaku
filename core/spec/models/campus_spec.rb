@@ -33,7 +33,7 @@ describe Gaku::Campus do
 
       it "decrements addresses_count" do
         expect do
-          campus_with_address.address = nil
+          campus_with_address.address.destroy
         end.to change { campus_with_address.reload.addresses_count }.by -1
       end
     end

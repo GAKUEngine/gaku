@@ -25,6 +25,9 @@ module Gaku
 
     validates_presence_of :code
 
+    after_save :refresh_course_counter
+
+
     def enroll_class_group(class_group)
     	unless class_group.blank?
         ActiveRecord::Base.transaction do
@@ -32,6 +35,14 @@ module Gaku
       	 	  CourseEnrollment.find_or_create_by_student_id_and_course_id(student_id, self.id)
       	 end
         end
+      end
+    end
+
+    private
+
+    def refresh_course_counter
+      students.each do |s|
+        Student.reset_counters(s.id ,:courses)
       end
     end
 

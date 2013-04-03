@@ -65,6 +65,7 @@ describe Gaku::Student do
       it "increments guardians_count" do
         expect do
           student.guardians << guardian
+          student.reload
         end.to change { student.guardians_count }.by 1
       end
 
@@ -83,6 +84,7 @@ describe Gaku::Student do
       it "increments courses_count" do
         expect do
           student.courses << course
+          student.reload
         end.to change { student.courses_count }.by 1
       end
 
