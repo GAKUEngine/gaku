@@ -45,6 +45,7 @@ en:
     save: "Save"
     progress: "Progress"
     admit: "Admit"
+    remove_student: "Return from Phase"
   admission_phases:
     add: Add Admission Phase
     edit: Edit Admission Phase

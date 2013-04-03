@@ -45,6 +45,7 @@ ja:
     save: "Save"
     progress: "Progress"
     admit: "Admit"
+    remove_student: "Return from Phase"
   admission_phases:
     add: 入学フェーズを追加
     edit: 入学フェーズを編集

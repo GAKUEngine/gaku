@@ -13,6 +13,10 @@
       th
         - if state.can_admit
           = submit_tag t(:'admission_phase_states.admit'), :name => 'admit_students'
+      th
+        - if state.admission_phase.position != 0
+          = submit_tag t(:'admission_phase_states.remove_student'), :name => 'remove_students'
 
     = hidden_field_tag :admission_period_id, @admission_period.id
     = hidden_field_tag :admission_method_id, @admission_method.id
+    = hidden_field_tag :current_state, state.id

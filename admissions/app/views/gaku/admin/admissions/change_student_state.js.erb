@@ -1,14 +1,25 @@
 <% if params[:progress_students].present? %>
-  <% if @progress_success %>
-    <% @state_students.each do |student| %>
+  <% @state_students.each do |student| %>
+    <% if @progress_success.include? student.id %>
       $('div#state<%= @new_state.id %> table tbody').append('<%= render_js_partial("student", {:student => student, :state => @new_state}) %>');
       $('.change-state_<%= @new_state.id %>-form').html('<%= render_js_partial("state_change_form", :state => @new_state) %>')
       $('#phase_<%= @new_state.admission_phase.id.to_s %>-grade-button').html('<%= render_js_partial("grade_button", :phase => @new_state.admission_phase) %>');
     <% end %>
-    <%- @admission_method.admission_phases.each {|phase| %>
-      $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
-    <% } %>
   <% end %>
+  <%- @admission_method.admission_phases.each {|phase| %>
+    $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+  <% } %>
+<% elsif params[:remove_students].present? %>
+  <% @state_students.each do |student| %>
+    <% if @remove_success.include? student.id %>
+      $('div#state<%= @current_state_id %> table tr#student-<%= student.id %>').fadeOut(function(){
+        $('div#state<%= @current_state_id %> table tr#student-<%= student.id %>').remove();
+      });
+    <% end %>
+  <% end %>
+  <%- @admission_method.admission_phases.each {|phase| %>
+    $('#phase_<%= phase.id %>_tab').text('<%= phase.name + '(' + phase.admission_phase_records.count.to_s + ')'%>');
+  <% } %>
 <% else %>
   $('.change-state-form').fadeOut();
   <% @state_students.each do |student| %>
