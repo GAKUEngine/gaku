@@ -673,7 +673,7 @@ ja:
   simple_grade:
     add: 単体評価を追加
     edit: 単体評価を編集
-    grade: 単体評価
+    grade: 単体評価点数
     index: 単体評価一覧
     list: 単体評価覧
     plural: 単体評価
