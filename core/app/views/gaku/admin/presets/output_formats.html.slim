@@ -1,0 +1,19 @@
+= form_tag update_presets_admin_presets_path, :method => :put do
+  = well_div do
+    .row-fluid
+      .span3
+        = fields_for :presets do |spreadsheets|
+          = spreadsheets.label t(:'preset.output_formats.spreadsheets')
+          = spreadsheets.select :spreadsheets, ['xls','xml','ods','fods', 'xlsx'], {:selected => @preset_hash[:spreadsheets], :prompt => t(:'preset.output_formats.choose')}
+    .row-fluid
+      .span3
+        = fields_for :presets do |printables|
+          = printables.label t(:'preset.output_formats.printables')
+          = printables.select :printables, ['PDF', 'PS'], {:selected => @preset_hash[:printables], :prompt => t(:'preset.output_formats.choose')}
+    .row-fluid
+      .span3
+        = fields_for :presets do |documents|
+          = documents.label t(:'preset.output_formats.documents')
+          = documents.select :documents, ['wip will be added'], {:selected => @preset_hash[:documents], :prompt => t(:'preset.output_formats.choose')}
+  = well_div do
+    = submit_button t(:'preset.save'), :id => 'submit-preset'

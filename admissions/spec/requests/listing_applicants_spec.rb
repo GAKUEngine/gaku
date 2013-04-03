@@ -25,7 +25,7 @@ describe 'Admin Listing Applicants' do
 
     it 'edits applicants' do
       click '.edit-link'
-      current_path.should eq "/admin/students/1/edit"
+      current_path.should eq "/admin/students/#{student.id}/edit"
       page.should have_content "#{student.name}"
     end
 

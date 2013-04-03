@@ -4,6 +4,7 @@
   td
 td.surname = student.surname
 td.name = student.name
+td.applicant_number = student.admission.applicant_number
 td.birth = student.birth_date
 td.gender = student.gender.nil? ? '' : (student.gender ? t(:'gender.male') : t(:'gender.female'))
 // TODO: move this to helper

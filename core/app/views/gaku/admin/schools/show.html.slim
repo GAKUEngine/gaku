@@ -15,8 +15,8 @@
 
     = well_div do
       - if params[:action] == 'school_details'
-        .span6
-          = link_to_edit_with_custom_text t(:'school.edit_master'), admin_school_details_edit_path, {:confirm => t(:'confirm')}
+        span4
+          = link_to t(:'school.edit_master'), admin_school_details_edit_path, :class => 'btn btn-danger span4', :confirm => t('confirm'), :id => 'edit-admin-primary-school'
       - else
         - unless @school.is_primary
           .span6

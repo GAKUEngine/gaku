@@ -17,7 +17,7 @@ module Gaku
       :conditions => { :is_master => true },
       :dependent => :destroy
 
-    accepts_nested_attributes_for :school_levels
+    accepts_nested_attributes_for :school_levels, :allow_destroy => true
 
     after_create :build_default_campus
 
