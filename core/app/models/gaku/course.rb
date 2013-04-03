@@ -12,6 +12,9 @@ module Gaku
     has_many :class_groups, :through => :class_group_course_enrollments
     has_many :class_group_course_enrollments, :dependent => :destroy
 
+    has_many :semester_courses
+    has_many :semesters, :through => :semester_courses
+
     has_many :exam_schedules
 
     belongs_to :syllabus
