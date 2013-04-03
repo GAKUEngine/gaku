@@ -42,6 +42,9 @@ ja:
     save: 入学フェーズの状態を保存
     singular: 入学フェーズ状態
     no_states: "There are no states"
+    save: "Save"
+    progress: "Progress"
+    admit: "Admit"
   admission_phases:
     add: 入学フェーズを追加
     edit: 入学フェーズを編集
