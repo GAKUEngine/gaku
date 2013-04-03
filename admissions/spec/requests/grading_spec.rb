@@ -31,7 +31,7 @@ describe 'Admin Admissions Grading' do
     it 'grades' do
       fill_in 'portion_score', with: 89
       click '.exam-parts' #TODO fix this
-      sleep 1
+      sleep 2
       visit gaku.admin_admissions_path
       select 'Passed', from: 'state_id'
       click_on 'Save'
@@ -40,7 +40,7 @@ describe 'Admin Admissions Grading' do
 
     it 'errors with invalid points' do
       fill_in 'portion_score', with: -120 #Max score is 100
-      click '.exam-parts' #TODO fix this
+      click '.total_row' #TODO fix this
       page.should have_css '.score-error'
       fill_in 'portion_score', with: 120
       click '.exam-parts' #TODO fix this

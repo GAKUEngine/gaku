@@ -17,6 +17,9 @@
         li
           a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
             = print_count @student.courses.count, t('course.plural')
+        li
+          a#student-achievements-tab-link data-toggle="tab" href="#achievements"
+            = print_count @student.achievements.count, t('achievement.plural')
       .tab-content
         #addresses.tab-pane.active
           = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@student]}
@@ -28,3 +31,6 @@
           = render :partial => 'gaku/students/guardians/guardians'
         #courses.tab-pane
           = render :partial => 'gaku/students/course_enrollments/course_enrollments'
+        #achievements.tab-pane
+          = render :partial => 'gaku/students/student_achievements/achievements_tab'
+

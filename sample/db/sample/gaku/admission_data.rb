@@ -33,8 +33,14 @@ end
 
 def add_states_to_phase(phase_states, phase)
   phase_states.each do |state_data|
-    phase_state = Gaku::AdmissionPhaseState.create(state_data)
-    phase.admission_phase_states << phase_state
+    phase_state = Gaku::AdmissionPhaseState.new(state_data)
+    if phase_state.is_default == true
+      default_state = phase.admission_phase_states.find_by_is_default(true)
+      default_state.update_attributes(state_data)
+    else
+      phase_state.save
+      phase.admission_phase_states << phase_state
+    end
   end
   phase.save
 end
@@ -56,7 +62,7 @@ regular_method = create_sample_admission_method(
     {
       args: { name: "Written Application", position: 0 },
       states: [
-        { name: "Received", :is_default => true },
+        { name: "Received", :can_progress => true, :is_default => true },
         { name: "In Review" },
         { name: "Accepted", auto_progress: true, can_progress: true },
         { name: "Rejected", can_progress: false }
@@ -64,7 +70,7 @@ regular_method = create_sample_admission_method(
     },{
       args: { name: "Written Report", position: 1 },
       states: [
-        { name: "In Review", :is_default => true },
+        { name: "In Review", :can_progress => true, :is_default => true },
         { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
         { name: "Rejected", can_progress: false }
       ]
@@ -73,7 +79,7 @@ regular_method = create_sample_admission_method(
       exam: { name: "Summer Program Entry", use_weighting: true, weight: 100},
       exam_portions: [{name: "exam", max_score: 100, weight: 100, problem_count: 1}],
       states: [
-        { name: "Pre-Exam", :is_default => true },
+        { name: "Pre-Exam", :can_progress => true, :is_default => true  },
         { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
         { name: "Rejected", can_admit: false, can_progress: false },
         { name: "Abscent", can_admit: false, can_progress: false }
@@ -81,7 +87,7 @@ regular_method = create_sample_admission_method(
     },{
       args: { name: "Interview", position: 3 },
       states: [
-        { name: "Waiting for Interview", :is_default => true },
+        { name: "Waiting for Interview", :can_progress => true, :is_default => true },
         { name: "Accepted", can_admit: true, :auto_admit => true },
         { name: "Rejected", can_admit: false }
       ]
@@ -95,7 +101,7 @@ international_division_method = create_sample_admission_method(
     {
       args: { name: "Written Application", position: 0 },
       states: [
-        { name: "Received", :is_default => true },
+        { name: "Received", :can_progress => true, :is_default => true },
         { name: "In Review" },
         { name: "Accepted", auto_progress: true, can_progress: true },
         { name: "Rejected", can_progress: false }
@@ -105,7 +111,7 @@ international_division_method = create_sample_admission_method(
     {
       args: { name: "Interview", position: 1 },
       states: [
-        { name: "Waiting for Interview", :is_default => true },
+        { name: "Waiting for Interview", :can_progress => true, :is_default => true },
         { name: "Accepted", can_admit: true, :auto_admit => true },
         { name: "Rejected", can_admit: false }
       ]
@@ -114,7 +120,7 @@ international_division_method = create_sample_admission_method(
     {
       args: { name: "Exam", position: 2 },
       states: [
-        { name: "Pre-Exam", :is_default => true },
+        { name: "Pre-Exam", :can_progress => true, :is_default => true },
         { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
         { name: "Rejected", can_admit: false, can_progress: false },
         { name: "Abscent", can_admit: false, can_progress: false }
@@ -124,7 +130,7 @@ international_division_method = create_sample_admission_method(
     {
       args: { name: "Foreign Langauge Exam", position: 3 },
       states: [
-        { name: "Pre-Exam", :is_default => true },
+        { name: "Pre-Exam", :can_progress => true, :is_default => true },
         { name: "Passed with Fluent Score", can_admit: true, can_progress: true, auto_progress: true, :auto_admit => true },
         { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
         { name: "Rejected", can_admit: false, can_progress: false },
@@ -135,7 +141,7 @@ international_division_method = create_sample_admission_method(
     {
       args: { name: "Written Report", position: 4 },
       states: [
-        { name: "In Review", :is_default => true },
+        { name: "In Review", :can_progress => true, :is_default => true },
         { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
         { name: "Rejected", can_progress: false }
       ]
@@ -149,7 +155,7 @@ summer_method = create_sample_admission_method(
     {
       args: { name: "Written Application", position: 0 },
       states: [
-        { name: "Received", :is_default => true },
+        { name: "Received", :can_progress => true, :is_default => true },
         { name: "In Review" },
         { name: "Accepted", auto_progress: true, can_progress: true },
         { name: "Rejected", can_progress: false }
@@ -159,7 +165,7 @@ summer_method = create_sample_admission_method(
     {
       args: { name: "Written Report", position: 1 },
       states: [
-        { name: "In Review", :is_default => true },
+        { name: "In Review", :can_progress => true, :is_default => true },
         { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
         { name: "Rejected", can_progress: false }
       ]
@@ -168,7 +174,7 @@ summer_method = create_sample_admission_method(
     {
       args: { name: "Interview", position: 2 },
       states: [
-        { name: "Waiting for Interview", :is_default => true },
+        { name: "Waiting for Interview", :can_progress => true, :is_default => true },
         { name: "Accepted", can_admit: true, :auto_admit => true },
         { name: "Rejected", can_admit: false }
       ]

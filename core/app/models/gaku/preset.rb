@@ -7,7 +7,9 @@ module Gaku
 	  	:locale  => ['language'],
 	  	:grading => ['grading_method', 'grading_scheme'],
 	  	:default => ['chooser_table_columns'],
-	  	:pagination => ['default_per_page', 'changes_per_page']
+	  	:pagination => ['default_per_page', 'changes_per_page'],
+	  	:output_formats => ['spreadsheets', 'printables', 'documents' ]
+
 	  }
 
 	  def changes_per_page
