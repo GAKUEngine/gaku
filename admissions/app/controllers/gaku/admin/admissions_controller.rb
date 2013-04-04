@@ -132,8 +132,11 @@ module Gaku
 
       def student_chooser
         @admission = Admission.new
-        @search = Student.only_applicants.search(params[:q])
+        #TODO make only_applicants to work with applicant students
+        #@search = Student.only_applicants.search(params[:q])
+        @search = Student.search(params[:q])
         @students = @search.result
+        @students = @search.result.page(params[:page]).per(Preset.students_per_page)
 
         @admissions = Admission.all
 
