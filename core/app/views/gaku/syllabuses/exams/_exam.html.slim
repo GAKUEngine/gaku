@@ -1,4 +1,4 @@
-- unless !exam_syllabus.exam or exam_syllabus.exam.nil? or exam_syllabus.exam.new_record?
-  tr id="exam-#{exam_syllabus.exam.id}"
-    = render 'gaku/syllabuses/exams/fields', :exam_syllabus => exam_syllabus
+- unless exam.new_record?
+  tr id="exam-#{exam.id}"
+    = render 'gaku/syllabuses/exams/fields', :exam => exam
 

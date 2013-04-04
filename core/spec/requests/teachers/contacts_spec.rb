@@ -6,6 +6,8 @@ describe 'Teacher Contacts' do
   as_admin
 
   let(:teacher) { create(:teacher) }
+  let(:teacher_with_contact) { create(:teacher, :with_contact) }
+  let(:teacher_with_contacts) { create(:teacher, :with_contacts) }
   let(:contact_type) { create(:contact_type, :name => 'Email') }
 
   before :all do
@@ -29,15 +31,13 @@ describe 'Teacher Contacts' do
     context 'one contact' do
 
       before(:each) do
-        @teacher = create(:teacher_with_one_contact)
-        @teacher.reload
-        @data = @teacher
+        @data = teacher_with_contact
       end
 
       context 'edit', :js => true do
 
         before do
-          visit gaku.teacher_path(@teacher)
+          visit gaku.teacher_path(@data)
         end
 
         it_behaves_like 'edit contact'
@@ -51,10 +51,8 @@ describe 'Teacher Contacts' do
     context 'two contacts' do
 
       before do
-        @teacher = create(:teacher_with_two_contacts)
-        @teacher.reload
-        @data = @teacher
-        visit gaku.teacher_path(@teacher)
+        @data = teacher_with_contacts
+        visit gaku.teacher_path(@data)
       end
 
       it_behaves_like 'primary contacts'

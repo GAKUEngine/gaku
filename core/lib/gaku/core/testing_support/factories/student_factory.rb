@@ -1,4 +1,5 @@
 FactoryGirl.define  do
+
   factory :student, :class => Gaku::Student do
     name { Faker::Name.first_name }
     surname { Faker::Name.last_name }
@@ -7,38 +8,19 @@ FactoryGirl.define  do
     gender "male"
   end
 
-  factory :student_with_one_address, :parent => :student do
+  factory :student_with_one_guardian, :parent => :student do
     after_create do |student|
-      FactoryGirl.create(:address, :addressable => student)
+      student.guardians << FactoryGirl.create(:guardian)
       student.save
     end
   end
 
-  factory :student_with_two_addresses, :parent => :student do
+  trait :with_course do
     after_create do |student|
-      FactoryGirl.create(:address, :addressable => student)
-      FactoryGirl.create(:address, :addressable => student)
+      student.courses << FactoryGirl.create(:course)
       student.save
     end
   end
-
-  factory :student_with_one_contact, :parent => :student do
-    after_create do |student|
-      contact = FactoryGirl.create(:contact, :contactable => student)
-      student.contacts << contact
-      student.save
-    end
-
-  end
-
-  factory :student_with_two_contacts, :parent => :student do
-    after_create do |student|
-      student.contacts << FactoryGirl.create(:contact, :contactable => student)
-      student.contacts << FactoryGirl.create(:contact, :contactable => student)
-      student.save
-    end
-  end
-
 
   trait :with_enrollment_status do
     association :enrollment_status, factory: :enrollment_status

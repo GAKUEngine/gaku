@@ -8,10 +8,10 @@ describe 'Student Guardian Addresses' do
 
   let(:student)  { create(:student) }
   let(:guardian) { create(:guardian) }
+  let(:guardian_with_address) { create(:guardian, :with_address) }
+  let(:guardian_with_addresses) { create(:guardian, :with_addresses) }
   let(:country)  { create(:country, :name => "Japan") }
   let(:bulgaria) { create(:country, :name => "Bulgaria") }
-
-
 
   before :all do
     set_resource "student-guardian-address"
@@ -32,19 +32,14 @@ describe 'Student Guardian Addresses' do
     context 'one address' do
       before do
         bulgaria
-        @guardian = create(:guardian_with_one_address)
-        @guardian.reload
-        student.guardians << @guardian
-        visit gaku.edit_student_guardian_path(student, @guardian)
+        @data = guardian_with_address
+        student.guardians << @data
+        visit gaku.edit_student_guardian_path(student, @data)
       end
 
       it_behaves_like 'edit address'
 
       context 'delete' do
-
-        before do
-          @data = @guardian
-        end
 
         it_behaves_like 'delete address'
 
@@ -54,11 +49,9 @@ describe 'Student Guardian Addresses' do
     context 'two addresses' do
       before do
         bulgaria
-        @guardian = create(:guardian_with_two_addresses)
-        @guardian.reload
-        student.guardians << @guardian
-        visit gaku.edit_student_guardian_path(student, @guardian)
-        @data = @guardian
+        @data = guardian_with_addresses
+        student.guardians << @data
+        visit gaku.edit_student_guardian_path(student, @data)
       end
 
       it_behaves_like 'primary addresses'

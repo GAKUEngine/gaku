@@ -6,8 +6,10 @@ module Gaku
     has_many :exam_scores
     has_many :exam_portions, :order => :position
     has_many :exam_portion_scores, :through => :exam_portions
-    has_many :exam_syllabuses
+
+    has_many :exam_syllabuses, :dependent => :destroy
     has_many :syllabuses, :through => :exam_syllabuses
+
     has_many :attendances, :as => :attendancable
 
     belongs_to :grading_method

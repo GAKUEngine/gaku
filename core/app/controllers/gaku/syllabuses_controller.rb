@@ -12,11 +12,7 @@ module Gaku
     private
 
     def syllabus
-    	@syllabus = Syllabus.includes(includes).find(params[:id])
-    end
-
-    def includes
-      [{:exam_syllabuses => [:exam, :syllabus]}]
+    	@syllabus = Syllabus.find(params[:id])
     end
 
     def grading_methods

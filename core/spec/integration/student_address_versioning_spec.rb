@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Student Address Versioning' do
 
   before do
-    @student = create(:student_with_one_address)
+    @student = create(:student, :with_address)
     @student.reload
     @address = @student.addresses.first
   end

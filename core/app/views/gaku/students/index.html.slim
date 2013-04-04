@@ -12,11 +12,8 @@
 = content_for :new_form do
   #new-student.hide
 
-= render 'student_chooser'
+= render 'gaku/shared/student_chooser/chooser'
 
 = hr
 
-#students-index-div
-  = render 'students'
-
-= render :partial => 'gaku/shared/external_school_record', :collection => Gaku::ExternalSchoolRecord.all, :as => :external_school_record
+/= render :partial => 'gaku/shared/external_school_record', :collection => Gaku::ExternalSchoolRecord.all, :as => :external_school_record
