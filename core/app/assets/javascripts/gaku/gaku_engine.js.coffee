@@ -55,7 +55,7 @@ $.fn.editable.defaults.mode = 'inline'
 
 $ ->
 
-  $('#sof-delete-link').on 'click', (e)->
+  $('#soft-delete-link').on 'click', (e)->
     e.preventDefault()
     $('#delete-modal').modal('show')
 

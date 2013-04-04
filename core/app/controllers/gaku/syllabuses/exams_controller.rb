@@ -8,9 +8,8 @@ module Gaku
     belongs_to :syllabus, :parent_class => Gaku::Syllabus
     respond_to :js, :html
 
-    before_filter :syllabus,      :only => [:create, :new]
+    before_filter :syllabus
     before_filter :exam_syllabus, :only => :update
-    before_filter :count,         :only => [:create, :destroy]
 
     def create
       @exam = @syllabus.exams.create(params[:exam])
@@ -33,10 +32,6 @@ module Gaku
       @exam_syllabus = ExamSyllabus.find_by_exam_id_and_syllabus_id(params[:id], params[:syllabus_id])
     end
 
-    def count
-      @syllabus = Syllabus.find(params[:syllabus_id])
-      @count = @syllabus.exams.count
-    end
 
   end
 end

@@ -1,11 +1,13 @@
 module Gaku
   class AddressesController < GakuController
 
-    load_and_authorize_resource :address, :class => Gaku::Address
+    load_and_authorize_resource :address, :class => Gaku::Address, :except => [:recovery, :destroy]
 
     inherit_resources
+
     respond_to :js, :html
 
+    before_filter :unscoped_address, :only => [:destroy, :recovery]
     before_filter :addressable
     before_filter :count
 
@@ -20,27 +22,27 @@ module Gaku
     end
 
     def recovery
-      @address.update_attribute(:is_deleted, false)
+      @address.recover
       flash.now[:notice] = t(:'notice.recovered', :resource => t(:'address.singular'))
       respond_with @address
     end
 
     def soft_delete
-      @address.update_attribute(:is_deleted, true)
-      if @address.is_primary?
-        @addressable.addresses.first.try(:make_primary)
-      end
-
+      @primary_address = true if @address.is_primary?
+      @address.soft_delete
+      @addressable.addresses.first.try(:make_primary) if @address.primary?
       flash.now[:notice] = t(:'notice.destroyed', :resource => t(:'address.singular'))
-      respond_to do |format|
-        format.js { render }
-      end
+      respond_with @address
     end
 
     private
 
+    def unscoped_address
+      @address = Gaku::Address.unscoped.find(params[:id])
+    end
+
     def count
-      @count = @addressable.addresses.count
+      @count = @addressable.addresses_count
     end
 
     def addressable

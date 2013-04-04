@@ -25,10 +25,12 @@
 
       - elsif @admission
         = render 'gaku/shared/student_chooser/admission'
+= hr
 
 #students-index-div
   = render 'gaku/students/students'
-= javascript_include_tag "gaku/student_chooser"
+
+/= javascript_include_tag "gaku/student_chooser"
 
 javascript:
   $(document).ready(function(){
