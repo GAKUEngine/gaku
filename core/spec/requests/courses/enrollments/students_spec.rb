@@ -25,11 +25,11 @@ describe "CourseEnrollment"  do
         enroll_one_student_via_button('Enroll to course')
       end.to change(Gaku::CourseEnrollment, :count).by 1
 
-      within(table){
+      within(table) do
         page.should have_content("Doe John")
         page.should have_content("View Assignments")
         page.should have_content("View Exams")
-      }
+      end
 
       size_of(table_rows).should == 2 #one for head
       within(count_div) { page.should have_content('Students list(1)') }
@@ -39,10 +39,11 @@ describe "CourseEnrollment"  do
 
     it "enrolls student only once"  do
       course.students << student1
+      course.reload
       visit gaku.course_path(course)
 
       page.should have_content("#{student1.name}")
-      course.students.size.should eq 1
+      course.students_count.should eq 1
 
       click new_link
       wait_until_visible modal

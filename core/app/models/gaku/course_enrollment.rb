@@ -1,7 +1,7 @@
 module Gaku
   class CourseEnrollment < ActiveRecord::Base
     belongs_to :student, :counter_cache => :courses_count
-    belongs_to :course
+    belongs_to :course, :counter_cache => :students_count
 
     validates :student_id, :uniqueness => {:scope => :course_id, :message => "Already enrolled to course!"}
     validates_presence_of :course_id

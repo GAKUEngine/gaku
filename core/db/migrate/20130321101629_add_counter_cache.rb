@@ -59,6 +59,7 @@ class AddCounterCache < ActiveRecord::Migration
 
     Gaku::Syllabus.find_each do |e|
       e.update_attribute(:exams_count, e.exams.length)
+      e.update_attribute(:notes_count, e.notes.length)
       e.save
     end
 
@@ -71,9 +72,11 @@ class AddCounterCache < ActiveRecord::Migration
     end
 
     add_column :gaku_courses, :notes_count, :integer, :default => 0
+    add_column :gaku_courses, :students_count, :integer, :default => 0
 
     Gaku::Course.find_each do |e|
       e.update_attribute(:notes_count, e.notes.length)
+      e.update_attribute(:students_count, e.students.length)
       e.save
     end
 
@@ -111,6 +114,7 @@ class AddCounterCache < ActiveRecord::Migration
     remove_column :gaku_syllabuses, :exams_count
 
     remove_column :gaku_courses, :notes_count
+    remove_column :gaku_courses, :students_count
 
     remove_column :gaku_exams, :notes_count
   end

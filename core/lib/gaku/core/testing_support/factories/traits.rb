@@ -43,4 +43,11 @@ FactoryGirl.define do
     end
   end
 
+  trait :with_student do
+    after_create do |resource|
+      resource.students << FactoryGirl.create(:student)
+      #resource.notes.reload
+    end
+  end
+
 end
