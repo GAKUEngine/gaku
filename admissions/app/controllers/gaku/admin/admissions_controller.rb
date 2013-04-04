@@ -42,8 +42,33 @@ module Gaku
 
       def change_student_state
 
-        if params[:admit_students]
+        if params[:admit_students].present?
           admit_students(@state_students)
+
+        elsif params[:progress_students].present?
+          state = AdmissionPhaseState.find(params[:state_id])
+          phase = state.admission_phase
+          next_phase = AdmissionPhase.find_next_phase(phase)
+          @new_state = next_phase.admission_phase_states.first
+          @progress_success = []
+          @state_students.each  do |student|
+            success = student.admission.progress_to_next_phase(phase)
+            if success
+              @progress_success << student.id
+            end
+          end
+        elsif params[:remove_students].present?
+          state = AdmissionPhaseState.find(params[:current_state])
+          @current_state_id = state.id
+          phase = state.admission_phase
+          @remove_success = []
+          @state_students.each  do |student|
+            record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+            success = record.update_attributes(:is_deleted => true)
+            if success
+              @remove_success << student.id
+            end
+          end
         else
           @next_state = AdmissionPhaseState.find(params[:state_id])
 
@@ -214,7 +239,6 @@ module Gaku
         def load_state_records
           @students = []
           @state_records = AdmissionPhaseRecord.all
-
           @state_records.each do |record|
             if record.exam_score != nil
               exam_score = record.exam_score
