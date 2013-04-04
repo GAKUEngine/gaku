@@ -12,14 +12,5 @@ module Gaku
 
     scope :master, lambda { where(:is_master => true) }
 
-
-   after_destroy :refresh_address_count
-
-   private
-
-   def refresh_address_count
-     Campus.reset_counters(self.id, :addresses)
-   end
-
   end
 end

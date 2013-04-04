@@ -1,3 +1,4 @@
+
 class ActiveRecord::Associations::HasManyThroughAssociation
   def insert_record(record, validate = true, raise = false)
     ensure_not_nested
