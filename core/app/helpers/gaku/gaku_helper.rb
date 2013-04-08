@@ -257,6 +257,14 @@ module Gaku
       "#{t(:'exam.completion')}:#{percentage} #{t(:'exam.graded')}:#{total - ungraded} #{t(:'exam.ungraded')}:#{ungraded} #{t(:'exam.total')}:#{total}"
     end
 
+    def datepicker_date_format(date)
+      date ?  date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
+    end
+
+    def calendar_icon
+      content_tag(:i, nil, :class => ' icon-calendar')
+    end
+
   end
 end
 

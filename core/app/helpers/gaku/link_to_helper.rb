@@ -227,7 +227,7 @@ module Gaku
     def link_to_back(resource, options = {})
       name = ('<i class="icon-share-alt"></i> '+ t(:back)).html_safe
       attributes = {
-        :class => 'span12 btn'
+        :class => 'span6 btn back-link'
       }.merge(options)
       link_to name, resource, attributes
     end
