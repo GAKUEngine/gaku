@@ -8,8 +8,10 @@ module Gaku
     has_many :semester_class_groups
     has_many :class_groups, :through => :semester_class_groups
 
-    # validates :class_group_id, :uniqueness => {:scope => [:starting, :ending], :message =>  I18n.t('semester.uniqueness')}
+    belongs_to :school_year
+
     validates_presence_of :starting, :ending
+
     validate :ending_after_starting
 
     private
