@@ -7,6 +7,9 @@ module Gaku
       it { should validate_presence_of :ending }
       it { should allow_mass_assignment_of :starting }
       it { should allow_mass_assignment_of :ending }
+
+      it { should have_many :semesters}
+
     end
 
   end
