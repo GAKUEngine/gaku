@@ -247,6 +247,9 @@ Gaku::Core::Engine.routes.draw do
     resources :users
     resources :roles
     resources :grading_methods
+    resources :school_years do
+      resources :semesters, :controller => 'school_years/semesters'
+    end
 
 
     namespace :changes do
