@@ -49,12 +49,19 @@ module Gaku
     def progress_to_next_phase(phase)
       next_phase = AdmissionPhase.find_next_phase(phase)
       new_state = next_phase.admission_phase_states.first
+      success = false
 
-      record = AdmissionPhaseRecord.new
-      record.admission = student.admission
-      record.admission_phase = next_phase
-      record.admission_phase_state = new_state
-      return record.save
+      record = AdmissionPhaseRecord.deleted.find_by_admission_id_and_admission_phase_id_and_admission_phase_state_id(student.admission.id, next_phase.id, new_state.id)
+      if !record.nil?
+        success = record.update_attributes(:is_deleted => false)
+      else
+        record = AdmissionPhaseRecord.new
+        record.admission = student.admission
+        record.admission_phase = next_phase
+        record.admission_phase_state = new_state
+        success = record.save
+      end
+      return success
     end
 
     def find_record_by_phase(phase_id)

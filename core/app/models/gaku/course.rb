@@ -3,7 +3,7 @@ module Gaku
 
     include Notes
 
-    has_many :enrollments, class_name: "Gaku::CourseEnrollment"
+    has_many :enrollments, class_name: "Gaku::CourseEnrollment", :dependent => :destroy
     has_many :students, :through => :enrollments
 
     has_many :course_group_enrollments

@@ -4,7 +4,7 @@ div class="#{@resource_name.pluralize}"
     div id="new-#{@resource_name}" class='hide'
     .pull-left
       = count_div "#{@resource_name.pluralize}-count" do
-        = print_count nested_resources.last.contacts.count, t_contact_list
+        = print_count nested_resources.last.contacts_count, t_contact_list
     .pull-right
       = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, :id => "new-#{@resource_name}-link" if can_edit?
 

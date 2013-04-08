@@ -8,7 +8,7 @@ namespace :common do
 
     require "#{ENV['LIB_NAME']}"
 
-    ENV['DB_NAME'] = "mysql"
+    ENV['DB_NAME'] = "postgresql"
 
     puts "LIB_NAME : #{ENV['LIB_NAME']}"
     puts "DB_NAME : #{ENV['DB_NAME']}"

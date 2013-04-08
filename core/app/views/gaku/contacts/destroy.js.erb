@@ -1,4 +1,4 @@
-<%-if  @contactable.contacts.any? && @contact.is_primary? %>
+<%-if  @contactable.contacts.reload.any? && @contact.is_primary? %>
   $('#<%= @resource_name.pluralize %>-index').find('#contact-<%= @contactable.contacts.first.id %> #set-primary-link').addClass('btn-primary');
 <% end %>
 

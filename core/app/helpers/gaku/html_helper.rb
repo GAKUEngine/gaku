@@ -80,7 +80,7 @@ module Gaku
       size = case num
       when 1 then 40
       when 2 then 62
-      when 3 then 95
+      when 3 then 99
       else num
       end
       content_tag :th, class: "btn-inverse", style:"width:#{size}px" do

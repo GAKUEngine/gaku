@@ -4,6 +4,7 @@ $('#new-student-course-enrollment form select').val('');
 $('#new-student-course-enrollment').slide();
 $('#new-student-course-enrollment-link').show();
 
+
 showNotice("<%= render_flash %>");
-$('#student-course-enrollments-tab-link').html("<%= print_count(@count+1, t_course_plural) %>");
-$('.student-course-enrollments-count').html("<%= print_count(@count+1, t_course_list) %>");
+$('#student-course-enrollments-tab-link').html("<%= print_count(@student.reload.courses_count, t_course_plural) %>");
+$('.student-course-enrollments-count').html("<%= print_count(@student.courses_count, t_course_list) %>");

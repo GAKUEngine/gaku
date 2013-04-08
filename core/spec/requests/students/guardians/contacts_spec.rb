@@ -7,6 +7,8 @@ describe 'Student Guardian Contacts' do
 
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }
+  let(:guardian_with_contact) { create(:guardian, :with_contact) }
+  let(:guardian_with_contacts) { create(:guardian, :with_contacts) }
   let(:contact_type) { create(:contact_type, :name => 'Email') }
 
   tab_link = "#student-guardian-contacts-tab-link"
@@ -37,11 +39,9 @@ describe 'Student Guardian Contacts' do
     context 'one contact' do
 
       before do
-        @guardian = create(:guardian_with_one_contact)
-        @guardian.reload
-        student.guardians << @guardian
-        @data = @guardian
-        visit gaku.edit_student_guardian_path(student, @guardian)
+        @data = guardian_with_contact
+        student.guardians << @data
+        visit gaku.edit_student_guardian_path(student, @data)
         click tab_link
       end
 
@@ -55,11 +55,9 @@ describe 'Student Guardian Contacts' do
     context 'two contacts' do
 
       before do
-        @guardian = create(:guardian_with_two_contacts)
-        @guardian.reload
-        student.guardians << @guardian
-        @data = @guardian
-        visit gaku.edit_student_guardian_path(student, @guardian)
+        @data = guardian_with_contacts
+        student.guardians << @data
+        visit gaku.edit_student_guardian_path(student, @data)
         click tab_link
       end
 

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Student Contact Versioning' do
 
   before do
-    @student = create(:student_with_one_contact)
+    @student = create(:student, :with_contact)
     @student.reload
     @contact = @student.contacts.first
   end

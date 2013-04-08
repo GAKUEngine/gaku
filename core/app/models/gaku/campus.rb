@@ -12,5 +12,5 @@ module Gaku
 
     scope :master, lambda { where(:is_master => true) }
 
-	end
+  end
 end
