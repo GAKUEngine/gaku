@@ -13,7 +13,7 @@
       = th t(:'assignment.plural')
       - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
 
-        = th_actions 2
+        = th_actions 3
 
   tbody
     = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
