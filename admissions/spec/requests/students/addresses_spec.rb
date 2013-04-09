@@ -27,7 +27,7 @@ describe 'Admin Student Address' do
 
     context 'one address' do
       before(:each) do
-        @student =  create(:student_with_one_address)
+        @student =  create(:student, :with_address)
         @student.reload
         visit gaku.edit_admin_student_path(@student)
         click tab_link
@@ -55,7 +55,7 @@ describe 'Admin Student Address' do
     context 'two addresses' do
 
       before(:each) do
-        @student = create(:student_with_two_addresses)
+        @student = create(:student, :with_addresses)
         @student.reload
         @data = @student
         visit gaku.edit_admin_student_path(@student)

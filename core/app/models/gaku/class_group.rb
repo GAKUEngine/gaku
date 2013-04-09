@@ -15,5 +15,10 @@ module Gaku
 
 	  validates_presence_of :name
 
+
+	  def to_s
+	  	"#{grade} - #{name}"
+	  end
+
 	end
 end

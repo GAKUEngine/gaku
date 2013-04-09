@@ -5,12 +5,12 @@ module Gaku
     included do
       has_many :addresses, as: :addressable
 
-      def primary_address
+      def get_primary_address
         self.addresses.where(:is_primary => true).first
       end
 
       def address_widget
-        "#{self.primary_address.city}, #{self.primary_address.address1}" if self.primary_address
+        "#{self.get_primary_address.city}, #{self.get_primary_address.address1}" if self.get_primary_address
       end
     end
 

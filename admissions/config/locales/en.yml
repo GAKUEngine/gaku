@@ -42,6 +42,10 @@ en:
     save: Save Admission Phase State
     singular: Admission Phase State
     no_states: "There are no states"
+    save: "Save"
+    progress: "Progress"
+    admit: "Admit"
+    remove_student: "Return from Phase"
   admission_phases:
     add: Add Admission Phase
     edit: Edit Admission Phase

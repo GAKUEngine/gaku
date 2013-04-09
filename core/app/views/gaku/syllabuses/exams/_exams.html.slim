@@ -9,8 +9,8 @@
         = th t(:'exam.use_weighting')
         = th_actions 3
     tbody
-      - if @syllabus.exam_syllabuses.any?
-        = render :partial => 'gaku/syllabuses/exams/exam', :collection => @syllabus.exam_syllabuses, :as => :exam_syllabus
+      - if @syllabus.exams.any?
+        = render :partial => 'gaku/syllabuses/exams/exam', :collection => @syllabus.exams, :as => :exam
       - else
         .alert.alert-danger.no-exam-msg
           = t(:'notice.no_resource_assign_first', :resource => t(:'exam.plural'))
