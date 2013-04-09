@@ -105,7 +105,7 @@ module Gaku
         @admission = Admission.new
         @student = @admission.build_student
         @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
-        #@applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+        @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
       end
 
       def create
@@ -144,7 +144,7 @@ module Gaku
 
         @method_admissions = Admission.where(admission_method_id: @admission_method.id)
         @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
-
+        
         respond_to do |format|
           format.js
         end
@@ -155,11 +155,14 @@ module Gaku
         admissions = []
         @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
+        applicant_number = params[:applicant_max_number].to_i
+   
         @selected_students.each { |student|
           student_id = student.split("-")[1].to_i
           admission = Admission.new( admission_period_id: @admission_period.id,
                                       admission_method_id: @admission_method.id,
-                                      student_id: student_id )
+                                      student_id: student_id,
+                                      applicant_number: applicant_number )
           if  admission.save
             admissions << admission
             # TODO change the selected phase
@@ -173,6 +176,7 @@ module Gaku
             admission.update_column(:admission_phase_record_id, @admission_records.last.id)
 
             admission.change_student_to_applicant
+            applicant_number += 1
           else
             err_admissions << admission
           end

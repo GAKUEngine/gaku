@@ -17,6 +17,7 @@
         = form_tag create_multiple_admin_admissions_path,  :id => "enroll-to-course-form", :remote => true do
           = hidden_field_tag :admission_period_id, params[:admission_period_id]
           = hidden_field_tag :admission_method_id, params[:admission_method_id]
+          = hidden_field_tag :applicant_max_number, @applicant_max_number
           h4 = t("admissions.create_multiple")
           = submit_tag t('admissions.create'), :class => 'btn btn-primary'
 
