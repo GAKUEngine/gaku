@@ -5,6 +5,12 @@
         = fields_for :presets do |default|
           = default.label t(:'preset.per_page.default')
           = default.select :default_per_page, per_page_values, {:selected => @preset_hash[:default_per_page]}
+
+      .span3
+        = fields_for :presets do |default|
+          = default.label t(:'preset.per_page.students')
+          = default.select :students_per_page, per_page_values, {:selected => @preset_hash[:students_per_page]}
+
       .span3
         = fields_for :presets do |changes|
           = changes.label t(:'preset.per_page.changes')

@@ -2,8 +2,8 @@
 # Array format ['en status', 'ja status', 'is_active?']
 statuses = [
 	['applicant',           'Applicant', 		          '志願', 			  false ], #DO NOT CHANGE ORDER
-	['admitted',            'Admitted', 					    '入学',    			true	], #DO NOT CHANGE ORDER
-	['enrolled',            'Enrolled',					      '在学',				  true	], #DO NOT CHANGE ORDER
+	['admitted',            'Admitted', 					    '入学',    			true	],
+	['enrolled',            'Enrolled',					      '在学',				  true	],
 	['transferred_in',      'Transfered In',			    '転入',			  	true	],
 	['transferred_out',     'Transfered Out',		      '転出',			    false	],
 	['course_transfer_in',  'Course Transfer In',			'編入',				  true	],

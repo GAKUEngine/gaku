@@ -7,18 +7,9 @@ module Gaku
 	  	:locale  => ['language'],
 	  	:grading => ['grading_method', 'grading_scheme'],
 	  	:default => ['chooser_table_columns'],
-	  	:pagination => ['default_per_page', 'changes_per_page'],
+	  	:pagination => ['default_per_page', 'students_per_page', 'changes_per_page'],
 	  	:output_formats => ['spreadsheets', 'printables', 'documents' ]
-
 	  }
-
-	  def changes_per_page
-	  	if self.get('changes_per_page').empty?
-	  		self.get('default')
-	  	else
-	  		self.get('changes_per_page')
-	  	end
-	  end
 
 	  def self.save_presets(params)
 	  	ActiveRecord::Base.transaction do
@@ -34,6 +25,14 @@ module Gaku
 			method_name = method.to_s
 			if method_name =~ /=/
 				return self.set method_name.gsub('=', ''), args.first
+
+			elsif method_name =~ /^.*_per_page$/
+				if self.get(method_name)
+				  return self.get method_name
+				else
+					return self.get 'default_per_page' # default_per_page
+				end
+
 			else
 				return self.get method_name
 			end

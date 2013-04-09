@@ -58,6 +58,69 @@ syllabuses = [
     :credits => 3
   },
 
+  {
+    :name => "Introduction to Ruby",
+    :code => "RB1",
+    :description => "Learn the basics of Ruby programming.",
+    :credits => 3
+  },
+
+  {
+    :name => "Ruby Programming",
+    :code => "RB2",
+    :description => "Leverage your Ruby skills.",
+    :credits => 3
+  },
+
+  {
+    :name => "Ruby Guru",
+    :code => "RB3",
+    :description => "Became a ruby guru.",
+    :credits => 3
+  },
+
+  {
+    :name => "Introduction to node.js",
+    :code => "NJS1",
+    :description => "Learn the basics of node.js programming.",
+    :credits => 3
+  },
+
+  {
+    :name => "Node.js Programming",
+    :code => "NJS2",
+    :description => "Leverage your node.js skills.",
+    :credits => 3
+  },
+
+  {
+    :name => "Node.js Guru",
+    :code => "NJS3",
+    :description => "Became a node.js guru.",
+    :credits => 3
+  },
+
+  {
+    :name => "Introduction to clojure",
+    :code => "CL1",
+    :description => "Learn the basics of clojure programming.",
+    :credits => 3
+  },
+
+  {
+    :name => "Clojure Programming",
+    :code => "CL2",
+    :description => "Leverage your clojure skills.",
+    :credits => 3
+  },
+
+  {
+    :name => "Clojure Guru",
+    :code => "CL3",
+    :description => "Became a clojure guru.",
+    :credits => 3
+  }
+
 ]
 
 syllabuses.each do |syllabus|
