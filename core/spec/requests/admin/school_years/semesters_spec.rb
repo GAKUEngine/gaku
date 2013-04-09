@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'Admin School Years' do
+describe 'Admin School Years Semesters' do
 
-  let(:school_year) { create(:school_year)}
+  let(:school_year) { create(:school_year, :starting => Date.parse('2013-3-8'), :ending => Date.parse('2014-11-8')) }
   let(:semester) { create(:semester, :school_year => school_year)}
 
   as_admin
@@ -49,6 +49,7 @@ describe 'Admin School Years' do
       visit gaku.admin_school_year_path(school_year)
     end
 
+
     context 'edit', :js => true do
       before do
         within(table) { click edit_link }
@@ -91,6 +92,18 @@ describe 'Admin School Years' do
         current_path.should == gaku.admin_school_years_path
 
       end
+    end
+
+    it 'deletes', :js => true do
+      within(count_div) { page.should have_content 'Semesters list(1)' }
+
+      expect do
+        ensure_delete_is_working
+      end.to change(Gaku::Semester, :count).by -1
+
+      within(count_div) { page.should_not have_content 'Semesters list(1)' }
+      within(count_div) { page.should have_content 'Semesters list' }
+      flash_destroyed?
     end
   end
 

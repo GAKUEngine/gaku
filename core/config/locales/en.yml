@@ -690,6 +690,7 @@ en:
     save: Save semester
     uniqueness: have this semester added
     day: Days
+    between: Should be between School Year starting and ending
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show

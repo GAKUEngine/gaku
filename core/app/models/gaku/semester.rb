@@ -12,14 +12,23 @@ module Gaku
 
     validates_presence_of :starting, :ending
 
+    validate :between_school_year_dates
     validate :ending_after_starting
 
     private
+
 
     def ending_after_starting
       return if  starting.blank? && ending.blank?
       errors.add(:ending, I18n.t('semester.ending_after_starting')) if self.starting >= self.ending
     end
 
+    def between_school_year_dates
+      return if school_year.nil?
+      school_year_range = school_year.starting..school_year.ending
+      unless school_year_range.cover?(starting) && school_year_range.cover?(ending)
+        errors.add(:ending, I18n.t('semester.between'))
+      end
+    end
   end
 end

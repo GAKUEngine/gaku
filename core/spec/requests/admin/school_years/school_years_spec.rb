@@ -74,6 +74,19 @@ describe 'Admin School Years' do
         fill_in 'school_year_ending', :with => ''
         has_validations?
       end
+
+      it 'deletes', :js => true do
+        within(count_div) { page.should have_content 'School Years list(1)' }
+        expect do
+          ensure_delete_is_working
+        end.to change(Gaku::SchoolYear, :count).by -1
+
+        within(count_div) { page.should_not have_content 'School Years list(1)' }
+        within(count_div) { page.should have_content 'School Years list' }
+        flash_destroyed?
+    end
+
+
     end
   end
 
