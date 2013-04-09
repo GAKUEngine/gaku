@@ -43,7 +43,7 @@ module Gaku
     private
 
     def count
-      @count = @contactable.contacts.count
+      @count = @contactable.contacts_count
     end
 
     def contactable

@@ -4,7 +4,7 @@
     = render :partial => 'gaku/courses/enrollments/class_groups/form', course: @course, new_course_enrollment: @new_course_enrollment
   .pull-left
     = count_div 'course-students-count' do
-      = print_count(@course.students.count, t('student.list'))
+      = print_count(@course.students_count, t(:'student.list'))
   .pull-right
     #new-course-student-div.pull-right
       = ajax_link_to_new t(:'student.add'), student_chooser_course_path(course_id: @course.id), id: 'new-course-student-link'

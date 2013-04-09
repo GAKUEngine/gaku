@@ -22,8 +22,13 @@ module Gaku
     protected
 
     def collection
-      #@courses = Course.includes(:syllabus).all
+      @courses = Course.includes(:syllabus).all
     end
+
+    def resource
+      @course = Course.includes(:syllabus => {:exams => :exam_portion_scores}).find(params[:id])
+    end
+
 
 
     private

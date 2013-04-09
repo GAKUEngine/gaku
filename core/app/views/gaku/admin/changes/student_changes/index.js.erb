@@ -1,13 +1,2 @@
 $("#admin-student-changes-index").html("<%= escape_javascript(render('changes')) %>");
 $('.changes-count').html('<%= print_count(@changes.count, t_student_list) %>');
-
-var students_per_page = 10;
-var pagination = $('.pagination');
-
-<% if !params[:page].present? %>
-  if('<%= @changes.count %>' < students_per_page) {
-    pagination.hide();
-  } else {
-    pagination.show();
-  }
-<% end %>

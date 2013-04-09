@@ -3,7 +3,7 @@
     #new-student-course-enrollment.hide
     .pull-left
       =count_div 'student-course-enrollments-count' do
-        = print_count @student.courses.count, t(:'course.list')
+        = print_count @student.courses_count, t(:'course.list')
     .pull-right
       = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], :id => "new-student-course-enrollment-link" if can_edit?
   .row-fluid

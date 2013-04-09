@@ -31,7 +31,7 @@ describe 'Admin Student Contacts' do
     context 'one contact' do
 
       before(:each) do
-        @student = create(:student_with_one_contact)
+        @student = create(:student, :with_contact)
         @student.reload
         @data = @student
       end
@@ -54,7 +54,7 @@ describe 'Admin Student Contacts' do
     context 'two contacts' do
 
       before do
-        @student = create(:student_with_two_contacts)
+        @student = create(:student, :with_contacts)
         @student.reload
         @data = @student
         visit gaku.edit_admin_student_path(@student)
