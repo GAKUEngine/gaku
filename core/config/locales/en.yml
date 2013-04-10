@@ -604,6 +604,7 @@ en:
     per_page:
       changes: Changes Per Page
       default: Default Items Per Page
+      students: Students Per Page
     plural: Presets
     save: Save Presets
     singular: Preset

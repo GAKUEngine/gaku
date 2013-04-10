@@ -16,6 +16,13 @@ module Gaku
       @extracurricular_activity = ExtracurricularActivity.includes(includes).find(params[:id])
     end
 
+    def collection
+      @search = ExtracurricularActivity.search(params[:q])
+      results = @search.result(:distinct => true)
+
+      @extracurricular_activities = results.page(params[:page]).per(Preset.default_per_page)
+    end
+
     def includes
       #:student
     end
