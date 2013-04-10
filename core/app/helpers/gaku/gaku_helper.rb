@@ -119,8 +119,16 @@ module Gaku
       Gaku::Role.all
     end
 
+    def semesters
+      Gaku::Semester.all.collect { |s| ["#{s.starting} / #{s.ending}" ,s.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
+
+    def style_semester(date)
+      date.strftime('')
     end
 
     def present(object, klass = nil)

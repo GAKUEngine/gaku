@@ -1,8 +1,8 @@
 module Gaku
-  class ClassGroups::SemestersController < GakuController
+  class ClassGroups::SemesterClassGroupsController < GakuController
 
     load_and_authorize_resource :class_group, :class => Gaku::ClassGroup
-    load_and_authorize_resource :semester, :through => :class_group, :class => Gaku::Semester
+    # load_and_authorize_resource :semester, :through => :class_group, :class => Gaku::Semester
 
     inherit_resources
     respond_to :js, :html

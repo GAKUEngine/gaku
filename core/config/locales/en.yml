@@ -691,6 +691,9 @@ en:
     uniqueness: have this semester added
     day: Days
     between: Should be between School Year starting and ending
+  semester_class_group:
+    save: Save Semester
+    choose: Choose Semester
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show
