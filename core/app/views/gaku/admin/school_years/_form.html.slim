@@ -1,0 +1,3 @@
+= remote_form_for [:admin, @school_year] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @school_year, :nested_id => 'admin-school-year', :label => t(:'school_year.save')

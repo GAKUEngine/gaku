@@ -9,7 +9,8 @@ module Gaku
 	  has_many :class_group_course_enrollments, :dependent => :destroy
 	  has_many :courses, :through => :class_group_course_enrollments
 
-	  has_many :semesters
+	  has_many :semester_class_groups
+    has_many :semesters, :through => :semester_class_groups
 
 	  attr_accessible :name, :grade, :homeroom
 

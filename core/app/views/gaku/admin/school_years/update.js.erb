@@ -1,0 +1,4 @@
+$('tr#school-year-<%= @school_year.id %>').html('<%= render_js_partial("fields", {:school_year => @school_year}) %>');
+
+$("#edit-school-year-modal").modal("hide");
+showNotice("<%= render_flash %>");

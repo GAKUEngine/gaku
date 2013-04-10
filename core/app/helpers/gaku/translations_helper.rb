@@ -153,5 +153,13 @@ module Gaku
       t(:'attachment.list')
     end
 
+    def t_school_year_list
+      t(:'school_year.list')
+    end
+
+    def t_semester_list
+      t(:'semester.list')
+    end
+
   end
 end

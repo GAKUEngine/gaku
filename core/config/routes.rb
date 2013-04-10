@@ -33,7 +33,7 @@ Gaku::Core::Engine.routes.draw do
     member do
       get :student_chooser
     end
-    resources :semesters, :controller => 'class_groups/semesters'
+    resources :semester_class_groups, :controller => 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
     resources :notes
 
@@ -247,6 +247,9 @@ Gaku::Core::Engine.routes.draw do
     resources :users
     resources :roles
     resources :grading_methods
+    resources :school_years do
+      resources :semesters, :controller => 'school_years/semesters'
+    end
 
 
     namespace :changes do

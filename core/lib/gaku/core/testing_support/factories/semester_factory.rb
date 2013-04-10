@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :semester, :class => Gaku::Semester do
-    starting { Time.now }
-    ending { starting + 6.months }
+    starting { Date.parse('2013-04-08') }
+    ending { Date.parse('2014-04-08') }
   end
 end
