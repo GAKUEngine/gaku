@@ -37,5 +37,9 @@ module Gaku
       end
     end
 
+    def modal_form_error(id)
+      content_tag :div, nil, :id => id
+    end
+
   end
 end

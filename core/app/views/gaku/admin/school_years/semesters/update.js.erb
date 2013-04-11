@@ -1,5 +1,9 @@
-$('tr#semester-<%= @semester.id %>').html('<%= render_js_partial("fields", {:semester => @semester}) %>');
-$("#edit-school-year-semester-modal").modal("hide");
-
-showNotice("<%= render_flash %>");
-
+<%- if @semester.valid? %>
+  $('tr#semester-<%= @semester.id %>').html('<%= render_js_partial("fields", {:semester => @semester}) %>');
+  $("#edit-school-year-semester-modal").modal("hide");
+  showNotice("<%= render_flash %>");
+  $('#edit-school-year-semester-modal-error').html('')
+<%- else %>
+  console.log($('#edit-school-year-semester-modal-error'));
+  $('#edit-school-year-semester-modal-error').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>')
+<% end %>
