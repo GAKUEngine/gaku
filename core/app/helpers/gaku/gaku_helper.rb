@@ -119,8 +119,16 @@ module Gaku
       Gaku::Role.all
     end
 
+    def semesters
+      Gaku::Semester.all.collect { |s| ["#{s.starting} / #{s.ending}" ,s.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
+
+    def style_semester(date)
+      date.strftime('')
     end
 
     def present(object, klass = nil)
@@ -255,6 +263,14 @@ module Gaku
       percentage = number_to_percentage exam.completion(@course_students), :precision => 2
 
       "#{t(:'exam.completion')}:#{percentage} #{t(:'exam.graded')}:#{total - ungraded} #{t(:'exam.ungraded')}:#{ungraded} #{t(:'exam.total')}:#{total}"
+    end
+
+    def datepicker_date_format(date)
+      date ?  date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
+    end
+
+    def calendar_icon
+      content_tag(:i, nil, :class => ' icon-calendar')
     end
 
   end

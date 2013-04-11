@@ -1,0 +1,3 @@
+-unless semester_class_group.nil? or semester_class_group.new_record? or !semester_class_group
+	tr id="semester-class-group-#{semester_class_group.id}"
+	  =render 'gaku/class_groups/semester_class_groups/fields', :semester_class_group => semester_class_group

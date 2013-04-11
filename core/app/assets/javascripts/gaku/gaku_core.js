@@ -7,6 +7,7 @@
 //= require bootstrap
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
+//= require_tree ../../../../vendor/assets/javascripts/bootstrap-datepicker/
 
 //= require chosen-jquery
 //= require underscore
@@ -15,7 +16,6 @@
 //= require gaku/gaku_engine
 //= require tablefix
 //= require combobox
-//= require tbs_datepicker/js/bootstrap-datepicker
 //= require jquery.dataTables
 //= require jquery.miniColors.min
 //= require jquery_nested_form
@@ -31,3 +31,4 @@
 //= require gaku/exams
 //= require_tree ./backbone/
 //= require ./admin/disposals
+//= require gaku/admin

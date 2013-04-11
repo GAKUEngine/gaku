@@ -22,7 +22,6 @@ module Gaku
 
     def prepare_options
       @env = options[:env]
-      puts "ENV : #{@env}"
       @run_migrations = options[:migrate]
       @load_seed_data = options[:seed]
 

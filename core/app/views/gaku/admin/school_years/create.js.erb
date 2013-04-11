@@ -1,0 +1,7 @@
+$('#admin-school-years-index tbody').append('<%= render_js_partial("school_year", {:school_year => @school_year}) %>');
+
+$('#new-admin-school-year').slide();
+$('#new-admin-school-year-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-school-years-count').html('<%= print_count(@count+1, t_school_year_list) %>');

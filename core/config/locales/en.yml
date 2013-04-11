@@ -604,6 +604,7 @@ en:
     per_page:
       changes: Changes Per Page
       default: Default Items Per Page
+      students: Students Per Page
     plural: Presets
     save: Save Presets
     singular: Preset
@@ -659,19 +660,40 @@ en:
     plural: School Levels
     remove_school_level: Remove this school level
     singular: School Level
+  school_year:
+    edit: Edit School Year
+    save: Save School Year
+    list: School Years list
+    add: Add School Year
+    singular: School Year
+    plural: School Years
+    starting: School Year starting
+    ending: School Year ending
+    day: Day
+    duration: School Year duration
+    ending_after_starting: should be after Starting
+    show: Show School Year
   search: Search
   select: Select
   semester:
     add: Add Semester
+    remove: Remove Semester
+    starting: Semester starting
+    ending: Semester ending
     edit: Edit Semester
-    ending: Ending
     ending_after_starting: should be after Starting
     list: Semesters list
     number: Number of Semesters
     plural: Semesters
+    singular: Semester
+    duration: Semester duration
     save: Save semester
-    starting: Starting
     uniqueness: have this semester added
+    day: Days
+    between: Should be between School Year starting and ending
+  semester_class_group:
+    save: Save Semester
+    choose: Choose Semester
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show
@@ -766,6 +788,14 @@ en:
     password_confirmation: Confirm Password
     save: Save User
     username: Username
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%y-%m-%d"
+      long: "%Y %B %d"
+
+
+
   views:
     pagination:
       first: ! '&laquo; First'

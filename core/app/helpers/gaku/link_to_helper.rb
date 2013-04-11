@@ -156,9 +156,9 @@ module Gaku
 
     # Edit button with only pencil image - without text
     def link_to_edit(resource, options = {})
-      name = ("<i class='icon-white icon-pencil'></i>").html_safe
+      name = ("<i class='icon-white icon-edit'></i>").html_safe
       attributes = {
-        :class => "mr-xs btn btn-mini btn-warning edit-link"
+        :class => "mr-xs btn btn-mini btn-inverse edit-link",
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -227,7 +227,7 @@ module Gaku
     def link_to_back(resource, options = {})
       name = ('<i class="icon-share-alt"></i> '+ t(:back)).html_safe
       attributes = {
-        :class => 'span12 btn'
+        :class => 'span6 btn back-link'
       }.merge(options)
       link_to name, resource, attributes
     end
