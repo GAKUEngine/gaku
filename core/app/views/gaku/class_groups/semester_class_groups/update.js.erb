@@ -1,0 +1,4 @@
+showNotice("<%= render_flash %>");
+$('#semester-modal').modal('hide');
+console.log($('#semester-class-group-<%= @semester_class_group.id %>'))
+$('#semester-class-group-<%= @semester_class_group.id %>').html('<%= render_js_partial("fields", {:semester_class_group => @semester_class_group}) %>');

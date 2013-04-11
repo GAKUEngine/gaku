@@ -1,0 +1,4 @@
+= remote_form_for [@class_group, @semester_class_group] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @semester_class_group, :nested_id => 'class-group-semester-class-group'
+

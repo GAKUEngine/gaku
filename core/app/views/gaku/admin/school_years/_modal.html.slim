@@ -1,0 +1,6 @@
+= modal_for 'edit-school-year-modal' do
+  = modal_header t(:'school_year.edit')
+  = modal_form_for [:admin, @school_year] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @school_year, :nested_id => 'admin-school-year'

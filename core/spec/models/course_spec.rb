@@ -14,6 +14,10 @@ describe Gaku::Course do
     it { should have_many(:class_group_course_enrollments) }
     it { should have_many(:class_groups).through(:class_group_course_enrollments) }
 
+
+    it { should have_many :semester_courses }
+    it { should have_many(:semesters).through(:semester_courses) }
+
     it { should belong_to(:syllabus) }
     it { should belong_to(:class_group) }
 
