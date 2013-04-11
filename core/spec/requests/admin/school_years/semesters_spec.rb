@@ -30,11 +30,39 @@ describe 'Admin School Years Semesters' do
       within(count_div) { page.should have_content 'Semesters list(1)' }
       flash_created?
     end
+    context 'validations' do
+      it 'has ending after starting validation' do
+        fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+        fill_in 'semester_ending', :with => Date.parse('2013-3-8')
+        click submit
+        page.should have_content 'should be after Starting'
 
-    it 'has validations' do
-      fill_in 'semester_ending', :with => ''
-      fill_in 'semester_ending', :with => ''
-      has_validations?
+        fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+        fill_in 'semester_ending', :with => Date.parse('2013-3-9')
+        click submit
+        page.should_not have_content 'should be after Starting'
+        flash_created?
+      end
+
+      it "semester should be beetween school year starting and ending" do
+        fill_in 'semester_starting', :with => Date.parse('2013-3-7')
+        fill_in 'semester_ending', :with => Date.parse('2014-11-9')
+        click submit
+        page.should have_content 'Should be between School Year starting and ending'
+
+        fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+        fill_in 'semester_ending', :with => Date.parse('2013-3-9')
+        click submit
+        page.should_not have_content 'Should be between School Year starting and ending'
+        flash_created?
+      end
+
+      it 'presence validations'  do
+        fill_in 'semester_ending', :with => ''
+        fill_in 'semester_ending', :with => ''
+        has_validations?
+      end
+
     end
 
     it 'cancels creating', :cancel => true do
@@ -74,10 +102,39 @@ describe 'Admin School Years Semesters' do
         ensure_cancel_modal_is_working
       end
 
-      it 'has validations' do
-        fill_in 'semester_starting', :with => ''
-        fill_in 'semester_ending', :with => ''
-        has_validations?
+      context 'validations' do
+        it 'has ending after starting validation' do
+          fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+          fill_in 'semester_ending', :with => Date.parse('2013-3-8')
+          click submit
+          within(modal) {page.should have_content 'should be after Starting'}
+
+          fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+          fill_in 'semester_ending', :with => Date.parse('2013-3-9')
+          click submit
+          within(modal) {page.should_not have_content 'should be after Starting'}
+          flash_updated?
+        end
+
+        it "semester should be beetween school year starting and ending" do
+          fill_in 'semester_starting', :with => Date.parse('2013-3-7')
+          fill_in 'semester_ending', :with => Date.parse('2014-11-9')
+          click submit
+          within(modal) { page.should have_content 'Should be between School Year starting and ending' }
+
+          fill_in 'semester_starting', :with => Date.parse('2013-3-8')
+          fill_in 'semester_ending', :with => Date.parse('2013-3-9')
+          click submit
+          within(modal) {page.should_not have_content 'Should be between School Year starting and ending' }
+          flash_updated?
+        end
+
+        it 'presence validations'  do
+          fill_in 'semester_ending', :with => ''
+          fill_in 'semester_ending', :with => ''
+          has_validations?
+        end
+
       end
     end
 
