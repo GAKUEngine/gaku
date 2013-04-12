@@ -4,6 +4,5 @@
   showNotice("<%= render_flash %>");
   $('#edit-school-year-semester-modal-error').html('')
 <%- else %>
-  console.log($('#edit-school-year-semester-modal-error'));
   $('#edit-school-year-semester-modal-error').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>')
 <% end %>
