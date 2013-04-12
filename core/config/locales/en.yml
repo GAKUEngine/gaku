@@ -692,6 +692,7 @@ en:
     day: Days
     between: Should be between School Year starting and ending
   semester_class_group:
+    uniqueness: Semester already added to Class Group
     save: Save Semester
     choose: Choose Semester
   sex: Sex
