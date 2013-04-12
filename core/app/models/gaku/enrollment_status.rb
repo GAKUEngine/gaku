@@ -7,8 +7,6 @@ module Gaku
 
     attr_accessible :code, :name, :is_active, :immutable
 
-    validates :name, presence: true
-
     def to_s
       name
     end
