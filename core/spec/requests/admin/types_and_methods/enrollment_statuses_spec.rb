@@ -20,6 +20,7 @@ describe 'Admin Enrollment Statuses' do
     it 'creates and shows' do
       expect do
         fill_in 'enrollment_status_name', :with => 'Enrolled'
+        fill_in 'enrollment_status_code', :with => 'enrolled'
         click submit
         wait_until_invisible form
       end.to change(Gaku::EnrollmentStatus, :count).by 1
@@ -63,7 +64,7 @@ describe 'Admin Enrollment Statuses' do
       end
 
       it 'has validations' do
-        fill_in 'enrollment_status_name', :with => ''
+        fill_in 'enrollment_status_code', :with => ''
         has_validations?
       end
 
