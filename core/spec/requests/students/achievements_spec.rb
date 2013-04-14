@@ -71,7 +71,7 @@ describe 'Student Achievements' do
       end
 
       it 'cancel editing' do
-        click '.back-link'
+        click '.back-modal-link'
         within(table) { page.should have_content(achievement) }
       end
     end

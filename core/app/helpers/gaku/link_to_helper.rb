@@ -217,7 +217,7 @@ module Gaku
     def ajax_link_to_back(resource, options = {})
       name = ('<i class="icon-white icon-share-alt"></i> '+t(:back)).html_safe
       attributes = {
-        :class => "span6 btn btn-warning back-link",
+        :class => "span6 btn btn-warning back-link back-modal-link",
         :remote => true
       }.merge(options)
 
