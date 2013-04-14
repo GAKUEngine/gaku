@@ -9,9 +9,11 @@ describe Gaku::Syllabus do
     it { should have_many :courses }
     it { should have_many :assignments }
     it { should have_many :lesson_plans }
+    it { should have_many :notes }
+    it { should have_many :programs }
+
     it { should have_many :exam_syllabuses }
     it { should have_many(:exams).through(:exam_syllabuses) }
-    it { should have_many :notes }
 
     it { should validate_presence_of :name }
     it { should validate_presence_of :code }

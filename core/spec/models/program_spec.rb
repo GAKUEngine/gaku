@@ -9,6 +9,8 @@ require 'spec_helper'
     it { should have_many :program_specialties }
     it { should have_many(:specialties).through(:program_specialties) }
 
+    it { should have_many :syllabuses }
+
     it { should validate_presence_of :name }
 
     it { should allow_mass_assignment_of :name }

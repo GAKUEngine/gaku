@@ -7,6 +7,8 @@ module Gaku
     has_many :program_levels
     has_many :levels, :through => :program_levels
 
+    has_many :syllabuses, :class_name => "Gaku::ProgramSyllabus"
+
     attr_accessible :name, :description
 
     validates :name, :presence => true
