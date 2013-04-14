@@ -9,6 +9,12 @@ module Gaku
 
       before_filter :count, :only => [:create, :destroy, :index]
 
+      protected
+
+      def collection
+        @enrollment_statuses = EnrollmentStatus.includes(:translations)
+      end
+
       private
 
       def count
