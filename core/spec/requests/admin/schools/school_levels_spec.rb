@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'Admin School Levels' do
 
   let(:school) { create(:school) }
-  let(:master_school) { create(:school, :master, :name => 'Asenovgrad University')}
-  let(:school_level) { create(:school_level, :school => master_school)}
+  let(:master_school) { create(:school, :master, :name => 'Asenovgrad University') }
+  let(:level) { create(:level, :school => master_school) }
   as_admin
 
   before :all do
@@ -20,24 +20,24 @@ describe 'Admin School Levels' do
     it 'create and show' do
       click '#edit-admin-primary-school'
       accept_alert
-      current_path.should == gaku.admin_school_details_edit_path
+      current_path.should eq gaku.admin_school_details_edit_path
       click '.add-school-level'
       fill_in 'School Level', :with => '12 class'
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
-      page.should have_content('12 class')
+      page.should have_content '12 class'
     end
   end
 
   context 'deletes', :js => true do
     before do
-      school_level
+      level
       master_school
       visit gaku.admin_school_details_path
       click '#edit-admin-primary-school'
       accept_alert
-      current_path.should == gaku.admin_school_details_edit_path
+      current_path.should eq gaku.admin_school_details_edit_path
     end
 
     it "edit" do
@@ -45,7 +45,7 @@ describe 'Admin School Levels' do
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
-      page.should_not have_content(school_level.title)
+      page.should_not have_content level
     end
 
     it "delete" do
@@ -53,8 +53,8 @@ describe 'Admin School Levels' do
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
-      page.should_not have_content(school_level.title)
-      page.should have_content('5 class')
+      page.should_not have_content level
+      page.should have_content '5 class'
     end
   end
 
@@ -62,19 +62,19 @@ describe 'Admin School Levels' do
     before do
       school
       master_school
-      school_level
+      level
       visit gaku.admin_schools_path
     end
 
     it "have no edit for school levels" do
       within(table) { click edit_link }
-      page.should_not have_css('a.add-school-level')
+      page.should_not have_css 'a.add-school-level'
     end
 
     it "not show school levels on non primary school" do
       within(table) { click show_link }
-      page.should_not have_content('School Levels')
-      page.should_not have_content(school_level.title)
+      page.should_not have_content 'School Levels'
+      page.should_not have_content level
     end
   end
 
