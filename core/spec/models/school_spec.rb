@@ -6,6 +6,7 @@ describe Gaku::School do
 		it { should have_many :levels }
 		it { should have_many :campuses }
 		it { should have_many :simple_grades }
+		it { should have_many :programs }
 
 
 		it { should have_one(:master_campus) }

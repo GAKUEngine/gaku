@@ -11,6 +11,8 @@ require 'spec_helper'
 
     it { should have_many :syllabuses }
 
+    it { should belong_to :school }
+
     it { should validate_presence_of :name }
 
     it { should allow_mass_assignment_of :name }
