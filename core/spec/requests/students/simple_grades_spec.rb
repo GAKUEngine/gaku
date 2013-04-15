@@ -61,7 +61,7 @@ describe 'Student Simple Grades' do
       end
 
       it 'cancels editting' do
-        within('#index-student-simple-grades-modal') { click '.back-link' }
+        click '.back-modal-link'
         within(el) { page.should have_content(simple_grade.name) }
       end
 

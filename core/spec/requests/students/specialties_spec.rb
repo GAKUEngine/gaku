@@ -71,7 +71,7 @@ describe 'Student Specialties' do
       end
 
       it 'cancels editting' do
-        within('#index-student-specialties-modal') { click '.back-link' }
+        click '.back-modal-link'
         within(table) { page.should have_content(specialty.name) }
       end
     end

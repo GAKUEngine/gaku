@@ -323,6 +323,7 @@ en:
     edit: Edit Enrollment Status
     list: Enrollment Statuses list
     name: Name
+    code: Code
     new: New Enrollment Status
     plural: Enrollment Statuses
     save: Save Enrollment Status
