@@ -4,6 +4,7 @@ class CreateGakuProgramsTable < ActiveRecord::Migration
       t.string :name
       t.text   :description
 
+      t.references :school
       t.timestamps
     end
   end
