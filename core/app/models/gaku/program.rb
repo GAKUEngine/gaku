@@ -9,6 +9,8 @@ module Gaku
 
     has_many :syllabuses, :class_name => "Gaku::ProgramSyllabus"
 
+    belongs_to :school
+
     attr_accessible :name, :description
 
     validates :name, :presence => true
