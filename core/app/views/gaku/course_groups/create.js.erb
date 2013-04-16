@@ -4,7 +4,7 @@
 	$('#course-groups-index tbody').append('<%= render_js_partial("course_group", {:course_group => @course_group}) %>');
 	showNotice("<%= render_flash %>");
 	$('.course-groups-count').html('<%= print_count(@count+1, t_course_group_list) %>');
-	$('#new-course-group').slideToggle()
+	$('#new-course-group').slide()
 	$('#new-course-group-link').show()
 	$('#new-course-group form')[0].reset();
 <% end %>

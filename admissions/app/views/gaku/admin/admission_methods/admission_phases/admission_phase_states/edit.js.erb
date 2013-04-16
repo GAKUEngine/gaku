@@ -1,0 +1,3 @@
+$('#admission-phase-state-<%= @state.id %>-controls').hide();
+$('#admission-phase-state-<%= @state.id %>-name').hide();
+$('#admission-phase-state-<%= @state.id %>').append('<%= render_js_partial("form") %>');

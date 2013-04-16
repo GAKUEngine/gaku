@@ -15,6 +15,21 @@ module Gaku
       end
     end
 
+
+    def show_table_for(id, &block)
+      content_tag :div, class: "row-fluid" do
+        content_tag :table, class: "table table-hover  table-condensed", id: id do
+          block.call
+        end
+      end
+    end
+
+    def show_table(&block)
+      content_tag :table, class: "table table-hover table-condensed"  do
+        block.call
+      end
+    end
+
     def hr
       content_tag :div, class: "row-fluid" do
         content_tag :div, class: "span12" do
@@ -62,15 +77,14 @@ module Gaku
     end
 
     def th_actions(num)
-      if num == 2
-        size = 62
-      elsif num == 3
-        size = 95
-      else
-        size = num
+      size = case num
+      when 1 then 40
+      when 2 then 62
+      when 3 then 99
+      else num
       end
-      content_tag :th, class:"btn-info", style:"width:#{size}px" do
-        t('manage')
+      content_tag :th, class: "btn-inverse", style:"width:#{size}px" do
+        content_tag :i, nil,  class: "icon-edit icon-white"
       end
     end
 

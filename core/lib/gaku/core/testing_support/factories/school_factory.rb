@@ -20,4 +20,8 @@ FactoryGirl.define do
     end
   end
 
+  trait :master do
+    is_primary true
+  end
+
 end

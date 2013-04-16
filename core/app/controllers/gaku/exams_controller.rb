@@ -5,7 +5,7 @@ module Gaku
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
-    respond_to :html, :js
+    respond_to :html, :js, :json
     respond_to :xls, :only => :export
 
     include Gaku::Core::Grading::Calculations
@@ -47,6 +47,9 @@ module Gaku
 
       @path_to_exam = course_path(:id => params[:course_id])
 
+      #exam_portions need reload to properly include exam_portion_score in as_json
+      @exams.each { |exam| exam.exam_portions.reload }
+
       respond_to do |format|
         format.json { render :json => {
           :student_total_scores => @student_total_scores.as_json(),
@@ -58,16 +61,20 @@ module Gaku
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
           :attendances => @student_portion_attendance.as_json(:root => true),
-          :path_to_exam => @path_to_exam.to_json
+          :path_to_exam => @path_to_exam.to_json,
+          :completion => @completion
         }}
         format.html { render "gaku/exams/grading" }
       end
     end
 
-    def calculations
-      respond_to do |format|
-        format.json {render :json => {:hello => :world}}
-      end
+    def completed
+      @exam = Exam.find(params[:id])
+      @course = Course.find(params[:course_id])
+      @students = @course.students
+
+
+      respond_with @exam.completed_by_students(@students)
     end
 
     private

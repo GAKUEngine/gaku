@@ -17,6 +17,21 @@ module Gaku
         @state.save
       end
 
+      def edit
+        @state = AdmissionPhaseState.find(params[:id])
+        @admission_method = AdmissionMethod.find(params[:admission_method_id])
+        @admission_phase = AdmissionPhase.find(params[:admission_phase_id])
+      end
+
+      def update
+        @state = AdmissionPhaseState.find(params[:id])
+        if @state.update_attributes(params[:admission_phase_state])
+          respond_to do |format|
+            format.js { render 'update' }
+          end
+        end
+      end
+
     end
   end
 end

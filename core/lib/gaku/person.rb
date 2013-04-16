@@ -5,7 +5,7 @@ module Gaku
     included do
       validates_presence_of :name, :surname
 
-      attr_accessible :name, :surname, :name_reading, :surname_reading,
+      attr_accessible :name, :surname, :name_reading, :surname_reading, :middle_name,
                       :birth_date, :gender
 
 

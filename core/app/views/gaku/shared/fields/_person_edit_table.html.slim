@@ -1,0 +1,10 @@
+tr
+  th = t(:'sex')
+  td = person.gender
+
+tr
+  th = t(:'birth_date')
+  td
+    a href="#" data-url="#{student_path(person.id)}" id="birth_date" data-type="combodate" data-resource="student" data-value="#{person.birth_date}" data-format="YYYY-MM-DD" data-viewformat="YYYY-MM-DD" data-template="YYYY-MM-DD" data-pk="1" data-original-title="Select Date of birth" class="editable editable-click" style="display: inline;"
+      = person.birth_date
+

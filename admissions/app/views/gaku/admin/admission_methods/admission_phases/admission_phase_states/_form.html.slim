@@ -1,0 +1,27 @@
+= remote_nested_form_for [:admin, @admission_method, @admission_phase, @state] do |f|
+  = render 'form_fields', :f => f
+  = submit_button t(:'admission_phase_states.save'), :id => 'submit-admin-admission-method-admission-phase-admission-phase-state-button'
+  = link_to t(:cancel), '', :class => 'btn cancel-admission-phase-state-edit'
+
+javascript:
+  $('.admission-phase-state').on('click', 'button', function(e){
+    e.preventDefault();
+    object_html_id = $(this).closest('.admission-phase-state').attr('id').split('-');
+    object_id = object_html_id[object_html_id.length - 1];
+    $.ajax({
+       type: "PUT",
+       url: '/admin/admission_methods/3/admission_phases/10/admission_phase_states/'+object_id,
+       data: $($(this).closest('form')).serialize(), // serializes the form's elements.
+     });
+
+    return false; // avoid to execute the actual submit of the form.
+  });
+
+  $('.admission-phase-state').on('click', '.cancel-admission-phase-state-edit', function(e){
+    e.preventDefault();
+    object_html_id = $(this).closest('.admission-phase-state').attr('id').split('-');
+    object_id = object_html_id[object_html_id.length - 1];
+    $('#admission-phase-state-'+ object_id +' .row-fluid').remove();
+    $('#admission-phase-state-'+ object_id +'-controls').show();
+    $('#admission-phase-state-'+ object_id +'-name').show();
+  });

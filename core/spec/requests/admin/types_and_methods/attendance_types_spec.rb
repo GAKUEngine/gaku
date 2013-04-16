@@ -17,6 +17,8 @@ describe 'Admin Attendance Types' do
       wait_until_visible submit
     end
 
+    it { has_validations? }
+
     it 'creates and shows' do
       expect do
         fill_in 'attendance_type_name', :with => 'car'
@@ -45,6 +47,11 @@ describe 'Admin Attendance Types' do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
+      end
+
+      it 'has validations' do
+        fill_in 'attendance_type_name', :with => ''
+        has_validations?
       end
 
     	it 'edits' do

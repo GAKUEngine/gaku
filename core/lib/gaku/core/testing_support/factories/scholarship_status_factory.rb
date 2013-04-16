@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :scholarship_status, :class => Gaku::ScholarshipStatus do
-    name 'Scholar'
+    name 'Self Paid'
+    is_default true
   end
 end

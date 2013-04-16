@@ -6,6 +6,7 @@ describe 'Student Class Group Enrollments' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:class_group) { create(:class_group, name:'Biology') }
+  let!(:el) { '#class-group' }
 
   before :all do
     set_resource "student"
@@ -15,10 +16,10 @@ describe 'Student Class Group Enrollments' do
   it 'enrolls to class', js: true do
     student
     class_group
-    visit gaku.student_path(student)
+    visit gaku.edit_student_path(student)
 
     expect do
-      click_on 'enroll-student-link'
+      click el
       wait_until_visible modal
 
       select 'Biology', from: 'class_group_enrollment_class_group_id'
@@ -28,15 +29,15 @@ describe 'Student Class Group Enrollments' do
       wait_until_invisible modal
     end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 
-    click_on 'enroll-student-link'
+    click el
     wait_until_visible '#new-class-group-enrollment-modal'
     within('#new-class-group-enrollment-modal') do
       page.should have_content 'Biology'
       page.should have_content '77'
     end
 
-    visit gaku.student_path(student)
-    within('td#student-class-group-enrollment') do
+    visit gaku.edit_student_path(student)
+    within(el) do
       page.should have_content 'Biology'
       page.should have_content student.class_groups.last.grade.try(:to_s)
     end

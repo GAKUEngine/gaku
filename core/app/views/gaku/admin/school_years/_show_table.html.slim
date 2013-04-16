@@ -1,0 +1,10 @@
+= show_table  do
+  tbody
+    caption
+      b = t(:'school_year.singular')
+    tr
+      th = t(:'school_year.starting')
+      td = @school_year.starting
+    tr
+      th = t(:'school_year.ending')
+      td = @school_year.ending

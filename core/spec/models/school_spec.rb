@@ -3,9 +3,11 @@ require 'spec_helper'
 describe Gaku::School do
 	context "validations" do
 		it_behaves_like 'avatarable'
-
+		it { should have_many :levels }
 		it { should have_many :campuses }
 		it { should have_many :simple_grades }
+		it { should have_many :programs }
+
 
 		it { should have_one(:master_campus) }
 

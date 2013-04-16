@@ -2,6 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+$(document).ready ->
+  $('.exam-portion-weight').on 'change', ->
+    $(@).parent('form').submit()
+
 # $(document).ready ->
 #   $(document).on 'click','#exam_use_weighting', ->
 #     if $(@).is ':checked'

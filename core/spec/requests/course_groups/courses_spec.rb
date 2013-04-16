@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/requests/course_enrollable_spec'
 
 describe 'CourseGroup Courses' do
 
@@ -13,60 +14,25 @@ describe 'CourseGroup Courses' do
 
   context 'new', :js => true do
     before do
-      course
+      @course = course
       visit gaku.course_group_path(course_group)
-      click new_link
-      wait_until_visible submit
+      @data = course_group
+      @select = 'course_group_enrollment_course_id'
     end
 
-    it 'adds and shows' do
-      expect do
-        select "#{course.code}", :from => 'course_group_enrollment_course_id'
-        click submit
-        wait_until_invisible '.form'
-      end.to change(Gaku::CourseGroupEnrollment, :count).by 1
-
-      within(table) { page.should have_content "#{course.code}" }
-      page.should have_content "Courses list(1)"
-      page.has_content? 'Course added to course group'
-
-    end
-
-    it {has_validations?}
-
-    it 'cancels creating', :cancel => true do
-      ensure_cancel_creating_is_working
-    end
+    it_behaves_like 'enroll to course'
   end
 
-  context 'existing', :js => true do
+  context 'remove' do
+    
     before do
       course_group.courses << course
       visit gaku.course_group_path(course_group)
-      page.should have_content "Courses list(1)"
+      @data = course_group
+
     end
 
-    pending 'doesn\'t add a course 2 times' do
-      click new_link
-      wait_until_visible form
-      select "#{course.code}", :from => 'course_group_enrollment_course_id'
-      click submit
-      wait_until { page.should have_content "Course already enrolled to this course group!" }
-    end
-
-    it 'deletes' do
-
-      within(table) { page.should have_content "#{course.code}" }
-
-      expect do
-        ensure_delete_is_working
-      end.to change(Gaku::CourseGroupEnrollment, :count).by -1
-
-      within(table) { page.should_not have_content "#{course.code}" }
-      page.should_not have_content "Courses list(1)"
-
-      flash_destroyed?
-    end
+    it_behaves_like 'remove enrollment'
   end
 
 end

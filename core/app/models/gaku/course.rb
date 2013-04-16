@@ -3,7 +3,7 @@ module Gaku
 
     include Notes
 
-    has_many :enrollments, class_name: "Gaku::CourseEnrollment"
+    has_many :enrollments, class_name: "Gaku::CourseEnrollment", :dependent => :destroy
     has_many :students, :through => :enrollments
 
     has_many :course_group_enrollments
@@ -12,10 +12,15 @@ module Gaku
     has_many :class_groups, :through => :class_group_course_enrollments
     has_many :class_group_course_enrollments, :dependent => :destroy
 
+    has_many :semester_courses
+    has_many :semesters, :through => :semester_courses
+
     has_many :exam_schedules
 
     belongs_to :syllabus
     belongs_to :class_group
+
+    delegate :name, :code, :to => :syllabus, :prefix => true, :allow_nil => true
 
     accepts_nested_attributes_for :enrollments
 

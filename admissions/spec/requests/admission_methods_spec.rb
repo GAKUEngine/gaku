@@ -4,7 +4,7 @@ describe 'Admin Admission Methods' do
 
   as_admin
 
-  let(:admission_method) { create(:admission_method) }
+  let(:admission_method) { create(:admission_method_without_phases) }
 
   before do
     set_resource "admin-admission-method"

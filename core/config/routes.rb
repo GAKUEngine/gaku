@@ -2,7 +2,6 @@ Gaku::Core::Engine.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  #devise_for :installs
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
@@ -12,6 +11,11 @@ Gaku::Core::Engine.routes.draw do
       passwords: "gaku/devise/passwords"
     }
   }
+
+  devise_scope :user do
+    get :set_up_admin_account, :to => "devise/registrations#set_up_admin_account"
+    post :create_admin, :to => "devise/registrations#create_admin"
+  end
 
   resources :extracurricular_activities do
     member do
@@ -29,7 +33,7 @@ Gaku::Core::Engine.routes.draw do
     member do
       get :student_chooser
     end
-    resources :semesters, :controller => 'class_groups/semesters'
+    resources :semester_class_groups, :controller => 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, :controller => 'class_groups/courses'
     resources :notes
 
@@ -61,7 +65,7 @@ Gaku::Core::Engine.routes.draw do
       member do
         get :grading
         put :update_score
-        get :calculations
+        get :completed
       end
 
     end
@@ -106,6 +110,10 @@ Gaku::Core::Engine.routes.draw do
     get :soft_delete, :on => :member
 
     resources :notes
+
+    resources :contacts do
+      post :make_primary, :on => :member
+    end
 
     resources :addresses do
       member do
@@ -155,8 +163,6 @@ Gaku::Core::Engine.routes.draw do
 
 
     resources :guardians, :controller => 'students/guardians' do
-      get :new_contact, :on => :member
-
       resources :contacts do
         post :create_modal, :on => :collection
         post :make_primary, :on => :member
@@ -169,6 +175,10 @@ Gaku::Core::Engine.routes.draw do
           get :recovery
         end
       end
+    end
+
+    resources :contacts do
+      post :make_primary, :on => :member
     end
 
     resources :addresses do
@@ -215,6 +225,17 @@ Gaku::Core::Engine.routes.draw do
   root :to => 'home#index'
 
 
+  scope :path => :admin, :as => :admin do
+    resources :schools, :controller => 'admin/schools' do
+      resources :campuses, :controller => 'admin/schools/campuses' do
+        resources :contacts do
+          post :make_primary, :on => :member
+        end
+        resources :addresses, :controller => 'admin/schools/campuses/addresses'
+      end
+    end
+  end
+
   namespace :admin do
     resources :achievements
     resources :specialties
@@ -226,21 +247,17 @@ Gaku::Core::Engine.routes.draw do
     resources :users
     resources :roles
     resources :grading_methods
+    resources :school_years do
+      resources :semesters, :controller => 'school_years/semesters'
+    end
 
 
     namespace :changes do
-      resources :students, :controller => 'student_changes'
+      resources :students, :controller => 'student_changes' do
+        get 'page/:page', :action => :index, :on => :collection
+      end
       resources :student_contacts, :controller => 'student_contact_changes'
       resources :student_addresses, :controller => 'student_address_changes'
-    end
-
-    resources :schools do
-      resources :campuses, :controller => 'schools/campuses' do
-        resources :contacts, :controller => 'contacts' do
-          post :make_primary, :on => :member
-        end
-        resources :addresses, :controller => 'schools/campuses/addresses'
-      end
     end
 
     resources :presets do
@@ -248,7 +265,9 @@ Gaku::Core::Engine.routes.draw do
         get :students
         get :locale
         get :grading
+        get :pagination
         get :defaults
+        get :output_formats
         put :update_presets
       end
     end

@@ -1,0 +1,1 @@
+<%= @exam.name %> 【Completed:<%= @completion[@exam.id]['completion_percentage']%>% Ungraded:<%= @completion[@exam.id]['ungraded'] %> Graded:<%= @completion[@exam.id]['graded'] %> Total:<%= @completion[@exam.id]['total'] %>】

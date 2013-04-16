@@ -2,6 +2,6 @@
   .row-fluid.mt-m
     = form.file_field :picture, :class => "form-file"
   .row-fluid.mt-xs
-    = form.submit t('pictures.upload'), :class => "span12 btn btn-primary"
+    = link_to_upload
 coffee:
   $(".form-file").attr('size', 9)

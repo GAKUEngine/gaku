@@ -27,5 +27,7 @@
     = render :partial => 'gaku/notes/notes'
 
 = well_div do
-  = link_to_edit_with_text [:edit,@exam], :remote => true
-  = link_to_back exams_path
+  .span6
+    = link_to_edit_with_text [:edit,@exam], :remote => true
+  .span6
+    = link_to_back exams_path

@@ -10,6 +10,23 @@ module Gaku
 
     before_filter :count, :only => [:create, :destroy, :index]
 
+    protected
+
+    def resource
+      @extracurricular_activity = ExtracurricularActivity.includes(includes).find(params[:id])
+    end
+
+    def collection
+      @search = ExtracurricularActivity.search(params[:q])
+      results = @search.result(:distinct => true)
+
+      @extracurricular_activities = results.page(params[:page]).per(Preset.default_per_page)
+    end
+
+    def includes
+      #:student
+    end
+
     private
 
     def count

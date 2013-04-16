@@ -6,4 +6,5 @@
     td = exam.weight
     td = exam.use_weighting
     td
+      = ajax_link_to_recovery [:recovery, exam], :id => 'recovery-exam-link'
       = ajax_link_to_delete exam , :id => 'delete-syllabus-exam-link'

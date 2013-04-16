@@ -47,4 +47,4 @@
           = chooser_table_fields.label t(:'assignment.plural')
           / t(:'chooser_table_fields')
           = chooser_table_fields.check_box 'chooser_table_fields[assignments]', {:checked => (true if enabled_field?(:assignments))}
-    = submit_button t(:'preset.save')
+    = submit_button t(:'preset.save'), :id => 'submit-preset'

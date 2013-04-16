@@ -1,5 +1,5 @@
 $('#index-student-achievements-modal .modal-body .row-fluid .span12.well').html("<%= render_js_partial('index', {:student_achievements => @student_achievements}) %>");
 $('.student-achievements-count').html('<%= print_count(@count, t_achievement_list) %>');
-$('#student-achievements-list').html('<%= escape_javascript(achievements_show(@student.achievements)) %>')
+$('#student-achievements-list a').text('<%= escape_javascript(achievements_show(@student.achievements)) %>')
 
 showNotice("<%= render_flash %>");

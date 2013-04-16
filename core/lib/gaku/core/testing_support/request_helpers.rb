@@ -93,6 +93,10 @@ module Gaku
           find(selector).click
         end
 
+        def click_option(resource)
+          find("option[value='#{resource.id}']").click
+        end
+
         def ensure_delete_is_working
           tr_count = size_of table_rows
           within(table) { click delete_link }
@@ -136,6 +140,7 @@ module Gaku
           wait_until_visible '#students-checked-div'
           within('#students-checked-div') do
             page.should have_content 'Chosen students(1)'
+            wait_until { page.should have_content "Show"}
             click_link 'Show'
             wait_until_visible '#chosen-table'
             page.should have_content "#{student1.name}"

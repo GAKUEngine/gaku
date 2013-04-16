@@ -1,0 +1,7 @@
+- if semester.valid?
+  td = l semester.starting, :format => :long
+  td = l semester.ending, :format => :long
+  td = pluralize (semester.ending - semester.starting).to_i, t(:'semester.day')
+  td
+    = ajax_link_to_edit [:edit, :admin, @school_year, semester]
+    = ajax_link_to_delete [:admin, @school_year, semester]

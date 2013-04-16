@@ -45,6 +45,10 @@ module Gaku
       t(:'contact.list')
     end
 
+    def t_contact_plural
+      t(:'contact.plural')
+    end
+
     def t_guardian_plural
       t(:'guardian.plural')
     end
@@ -143,6 +147,18 @@ module Gaku
 
     def t_teachers_list
       t(:'teacher.list')
+    end
+
+    def t_attachment_list
+      t(:'attachment.list')
+    end
+
+    def t_school_year_list
+      t(:'school_year.list')
+    end
+
+    def t_semester_list
+      t(:'semester.list')
     end
 
   end

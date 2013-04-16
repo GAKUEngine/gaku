@@ -5,7 +5,6 @@ module Gaku
     load_and_authorize_resource :guardian, :through => :student, :class => Gaku::Guardian
 
     inherit_resources
-    #belongs_to :student, :parent_class => Gaku::Student
     respond_to :js, :html
 
     before_filter :student
@@ -19,20 +18,27 @@ module Gaku
       end
     end
 
-    def new_contact
-      guardian
-    	@contact = Contact.new
-    	respond_with(@contact)
+    def update
+      super do |format|
+        if params[:guardian][:picture]
+          format.html { redirect_to [:edit, student, guardian], :notice => t('notice.uploaded', :resource => t('picture')) }
+        else
+          format.js { render }
+          format.json { head :no_content }
+         end
+      end
+    end
+
+    protected
+
+    def resource
+      @guardian = Guardian.includes(:contacts => :contact_type).find(params[:id])
     end
 
     private
 
     def student
       @student = Student.find(params[:student_id])
-    end
-
-    def guardian
-      @guardian = Guardian.find(params[:id])
     end
 
     def count

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "CourseExams"  do
+describe "CourseExams", :js => true  do
 
   as_admin
 
@@ -18,17 +18,17 @@ describe "CourseExams"  do
 
     visit gaku.course_path(course)
 
-    click_link 'Exams'
+    click '#course-exam-link'
   end
 
   it "shows grading link" do
-    click_link 'Grading'
-    current_path.should eq "/courses/#{course.id}/exams/#{exam.id}/grading"
+    click '.grading_link'
+    current_path.should eq gaku.grading_course_exam_path(course, exam)
   end
 
   it "shows all grading link" do
     page.should have_content 'All Exams'
-    click_link 'All Exams'
-    current_path.should eq "/courses/#{course.id}/exams/grading"
+    click '#all-course-exams-grade'
+    current_path.should eq gaku.grading_course_exams_path(course)
   end
 end

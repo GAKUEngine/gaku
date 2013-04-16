@@ -4,7 +4,7 @@ describe 'Admin Admission Method Phases' do
 
   as_admin
 
-  let!(:admission_method) { create(:admission_method) }
+  let!(:admission_method) { create(:admission_method_without_phases) }
   let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
   let(:admission_phase_state) { create( :admission_phase_state,
                                         :can_progress => true,
@@ -25,6 +25,7 @@ describe 'Admin Admission Method Phases' do
       visit gaku.admin_admission_method_path(admission_method)
       click new_link
       wait_until_visible submit
+      wait_for_ajax
     end
 
     it 'creates and shows' do
@@ -42,6 +43,8 @@ describe 'Admin Admission Method Phases' do
     it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it {has_validations?}
 
   end
 
@@ -86,23 +89,30 @@ describe 'Admin Admission Method Phases' do
           click edit_link
           wait_until_visible modal
           expect do
-            click_on 'Remove state'
+            within('#admission-phase-state-'+admission_phase_state.id.to_s) do
+              click_on 'Remove state'
+            end
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
+            page.all('.state', :visible => true).count.should == 2
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
           end.to change(Gaku::AdmissionPhaseState, :count).by -1
-          page.should_not have_content("#{admission_phase_state.name}")
+         
+          click_on 'Admission Phase States list'
+          wait_until_visible '#show-admission-method-admission-phase-states-modal'
+          page.should_not have_content(admission_phase_state.name)
         end
 
         it 'edits ' do
           click edit_link
           wait_until_visible modal
-          within('.state') do
-            fill_in 'admission_phase_admission_phase_states_attributes_0_name', with: 'Rejected'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_can_progress'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_can_admit'
-            uncheck 'admission_phase_admission_phase_states_attributes_0_auto_progress'
+          within('#admission-phase-state-'+admission_phase_state.id.to_s) do
+            click edit_link
+            fill_in 'admission_phase_state_name', with: 'Rejected'
+            uncheck 'admission_phase_state_can_progress'
+            uncheck 'admission_phase_state_can_admit'
+            uncheck 'admission_phase_state_auto_progress'
+            click '#submit-admin-admission-method-admission-phase-admission-phase-state-button'
           end
 
           click '#submit-admin-admission-method-admission-phase-button'
@@ -128,26 +138,27 @@ describe 'Admin Admission Method Phases' do
         it 'adds' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1 #default state
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
-            within('.state') { find(:css, "input").set('Written Report') }
+            page.all('.state', :visible => true).count.should == 2
+            fill_in 'State name', with: 'Written Report'
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
+            flash_updated?
           end.to change(Gaku::AdmissionPhaseState, :count).by 1
         end
 
         it 'cancels adding' do
           click edit_link
           wait_until_visible modal
-          admission_method.admission_phases.first.admission_phase_states.count.should eq 0
+          admission_method.admission_phases.first.admission_phase_states.count.should eq 1
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 1
-            within('.state') { find(:css, "input").set('Written Report') }
+            page.all('.state', :visible => true).count.should == 2
+            fill_in 'State name', with: 'Written Report'
             click cancel_link
           end.to change(Gaku::AdmissionPhaseState, :count).by 0
         end
@@ -252,13 +263,6 @@ describe 'Admin Admission Method Phases' do
       within(count_div) { page.should_not have_content 'Admission Phases list(1)' }
       page.should_not have_content admission_phase.name
       flash_destroyed?
-    end
-  end
-
-  context 'when select back' do
-    pending 'returns to admission_methods/index page' do
-      click_on 'Back'
-      current_path.should == "/admission_methods"
     end
   end
 

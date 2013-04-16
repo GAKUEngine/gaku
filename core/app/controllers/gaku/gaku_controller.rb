@@ -11,15 +11,22 @@ module Gaku
 
     before_filter :set_locale
 
+    before_filter :users_check
+
     layout :resolve_layout
 
     self.responder = Core::AppResponder
     respond_to :html
 
+    helper_method :preset
+
     def user_for_paper_trail
       user_signed_in? ? current_user : 'Public user'  # or whatever
     end
 
+    def preset(name)
+      Gaku::Preset.get(name)
+    end
 
     private
 
@@ -33,6 +40,8 @@ module Gaku
         "gaku/layouts/index"
       when "show"
         "gaku/layouts/show"
+      when "edit"
+        "gaku/layouts/edit"
       else
         "gaku/layouts/gaku"
       end
@@ -47,6 +56,12 @@ module Gaku
         I18n.locale = current_user.settings[:locale] #|| Gaku::Preset.get('language')
       else
         I18n.default_locale
+      end
+    end
+
+    def users_check
+      if User.count == 0 and Rails.env != 'test'
+        redirect_to set_up_admin_account_path
       end
     end
 

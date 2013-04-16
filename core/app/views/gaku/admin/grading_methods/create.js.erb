@@ -1,6 +1,6 @@
 $('#admin-grading-methods-index tbody').append('<%= render_js_partial("grading_method", {:grading_method => @grading_method}) %>');
 
-$('#new-admin-grading-method').slideToggle();
+$('#new-admin-grading-method').slide();
 $('#new-admin-grading-method-link').show();
 
 showNotice("<%= render_flash %>");

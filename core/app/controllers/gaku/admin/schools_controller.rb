@@ -12,17 +12,18 @@ module Gaku
 
       def school_details
         @school = @master_school
-        render :show
+        render 'show', :layout => 'gaku/layouts/show'
       end
 
       def edit_master
+        render 'edit_master', :layout => 'gaku/layouts/show'
       end
 
       def update
         @school = School.find(params[:id])
         super do |format|
           if params[:school][:picture]
-            format.html { redirect_to [:admin, @school], :notice => t('notice.uploaded', :resource => t('picture')) }
+            format.html { redirect_to [:admin, @school], :notice => t(:'notice.uploaded', :resource => t(:'picture')) }
           else
             format.js { render }
            end
@@ -32,7 +33,7 @@ module Gaku
       private
 
       def master_school
-        @master_school = School.where(:is_primary => true).first
+        @master_school = School.primary
       end
 
       def count

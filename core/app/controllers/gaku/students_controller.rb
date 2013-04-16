@@ -2,27 +2,39 @@ module Gaku
   class StudentsController < GakuController
     include SheetHelper
 
-    load_and_authorize_resource :class =>  Gaku::Student
+    load_and_authorize_resource :class =>  Gaku::Student, :except => [:recovery, :destroy]
 
     helper_method :sort_column, :sort_direction
 
     inherit_resources
     respond_to :js, :html
     respond_to :csv, :only => :csv
+    respond_to :pdf, :only => :show
+
 
     before_filter :select_vars,       :only => [:index,:new, :edit]
-    before_filter :before_show,       :only => :show
+    before_filter :notable,           :only => [:show, :edit]
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
     before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
 
     def index
       @enrolled_students = params[:enrolled_students]
-      index!
+      #index!
+
+      super do |format|
+        format.pdf {
+          send_data render_to_string, filename: 'sido_yoroku.pdf', type: 'application/pdf', disposition: 'attachment'
+        }
+      end
     end
 
     def show
-      respond_with @student
+      super do |format|
+        format.pdf { send_data render_to_string, :filename => "student-#{@student.id}.pdf",
+                                                 :type => 'application/pdf',
+                                                 :disposition => 'inline'}
+      end
     end
 
     def destroy
@@ -33,12 +45,12 @@ module Gaku
 
     def recovery
       @student.update_attribute(:is_deleted, false)
+      flash.now[:notice] = t(:'notice.recovered', :resource => t(:'student.singular'))
       respond_with @student
     end
 
     def soft_delete
-      @student = Student.find(params[:id])
-      @student.update_attribute(:is_deleted, true)
+      @student.soft_delete
       redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
     end
 
@@ -63,9 +75,10 @@ module Gaku
       @student = get_student
       super do |format|
         if params[:student][:picture]
-          format.html { redirect_to @student, :notice => t('notice.uploaded', :resource => t('picture')) }
+          format.html { redirect_to [:edit, @student], :notice => t('notice.uploaded', :resource => t('picture')) }
         else
           format.js { render }
+          format.json { head :no_content }
          end
       end
     end
@@ -86,26 +99,17 @@ module Gaku
       render json: @result.map(&params[:column].to_sym).uniq
     end
 
-    def edit_enrollment_status
-      @student = Student.find(params[:id])
-    end
-
-    def enrollment_status
-      @student = Student.find(params[:id])
-      @student.update_attributes(params[:student])
-      if @student.save
-        respond_with @student
-      end
-    end
-
     protected
 
     def collection
       @search = Student.search(params[:q])
       results = @search.result(:distinct => true)
 
-      @students_count = results.count
-      @students = results.page(params[:page]).per(10)
+      @students = results.page(params[:page]).per(Preset.students_per_page)
+    end
+
+    def resource
+      @student = Student.includes([:contacts => :contact_type, :addresses => :country]).find(params[:id])
     end
 
     private
@@ -126,12 +130,12 @@ module Gaku
       params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
     end
 
-    def before_show
+    def notable
       # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
       @notable = Student.unscoped.find(params[:id])
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-      Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
+      #Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
     end
 
     def get_student

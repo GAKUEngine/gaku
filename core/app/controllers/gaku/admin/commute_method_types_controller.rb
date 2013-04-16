@@ -9,6 +9,13 @@ module Gaku
 
     	before_filter :count, :only => [:create, :destroy, :index]
 
+
+      protected
+
+      def collection
+        @commute_method_types = CommuteMethodType.includes(:translations)
+      end
+
     	private
 
   	  def count

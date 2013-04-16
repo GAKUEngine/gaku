@@ -13,6 +13,7 @@ describe Gaku::CoursesController do
     end
 
     it "populates an array of courses" do
+      course
       gaku_get :index
       assigns(:courses).should eq [course]
     end

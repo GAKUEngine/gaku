@@ -12,7 +12,8 @@
   = table_for 'admin-enrollment-statuses-index' do
     thead
       tr
-        = th t(:'enrollment_status.singular')
+        = th t(:'enrollment_status.name')
+        = th t(:'enrollment_status.code')
         = th t(:'enrollment_status.active')
         = th_actions 2
     tbody

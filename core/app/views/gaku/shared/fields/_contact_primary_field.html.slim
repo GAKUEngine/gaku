@@ -1,5 +1,13 @@
 td class="primary-contact" width="28px"
-  -if contact.is_primary?
-    = ajax_link_to_make_primary [:make_primary] + target,:id => 'set-primary-link', :class => 'btn btn-mini btn-primary make-primary'
-  -else
-    = ajax_link_to_make_primary [:make_primary] + target, :id => 'set-primary-link', :class => 'btn btn-mini'
+  - if can_edit?
+    - if contact.primary?
+      = ajax_link_to_make_primary [:make_primary] + target, :id => 'set-primary-link', :class => 'btn btn-mini btn-primary make-primary'
+    - else
+      = ajax_link_to_make_primary [:make_primary] + target, :id => 'set-primary-link', :class => 'btn btn-mini'
+
+  - else
+    - if contact.primary?
+      span.btn.btn-mini.btn-primary
+        = primary_checkbox
+
+

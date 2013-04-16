@@ -4,22 +4,24 @@ describe 'Admin Grading Methods' do
 
   as_admin
 
-  let(:grading_method) { create(:grading_method, :name => 'Bulgarian') }
+  let(:grading_method) { create(:grading_method, name: 'Bulgarian') }
 
   before :all do
     set_resource "admin-grading-method"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.admin_grading_methods_path
       click new_link
       wait_until_visible submit
     end
 
+    it { has_validations? }
+
     it 'creates and shows' do
       expect do
-        fill_in 'grading_method_name', :with => 'Bulgarian'
+        fill_in 'grading_method_name', with: 'Bulgarian'
         click submit
         wait_until_invisible form
       end.to change(Gaku::GradingMethod, :count).by 1
@@ -29,7 +31,7 @@ describe 'Admin Grading Methods' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -40,14 +42,14 @@ describe 'Admin Grading Methods' do
       visit gaku.admin_grading_methods_path
     end
 
-    context 'edit', :js => true do
+    context 'edit', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits' do
-        fill_in 'grading_method_name', :with => 'Japanese'
+        fill_in 'grading_method_name', with: 'Japanese'
         click submit
 
         wait_until_invisible modal
@@ -56,12 +58,18 @@ describe 'Admin Grading Methods' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
+
+      it 'has validations' do
+        fill_in 'grading_method_name', with: ''
+        has_validations?
+      end
+
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content grading_method.name
       within(count_div) { page.should have_content 'Grading Methods list(1)' }
 

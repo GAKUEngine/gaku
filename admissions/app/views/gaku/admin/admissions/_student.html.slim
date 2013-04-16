@@ -1,5 +1,5 @@
 tr id="student-#{student.id}" style="#{ (student.enrollment_status.code == "deleted") ? "color: grey;" : "" }"
-  = render 'gaku/admin/admissions/student_fields', :student => student, :phase => state.admission_phase
+  = render 'gaku/admin/admissions/student_fields', :student => student, :phase => state.admission_phase, :state => state
   td.status
     - if !(student.enrollment_status.code == "deleted")
       - if student.admission.admitted == true

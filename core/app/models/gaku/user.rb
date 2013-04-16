@@ -25,6 +25,10 @@ module Gaku
     validates_uniqueness_of :username, :email
     validates_presence_of :password, :password_confirmation, :on => :create
 
+    roles_table_name = Gaku::Role.table_name
+
+    scope :admin, lambda { includes(:roles).where("#{roles_table_name}.name" => "admin") }
+
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)

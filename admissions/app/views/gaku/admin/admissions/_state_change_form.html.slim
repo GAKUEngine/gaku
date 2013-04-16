@@ -1,8 +1,24 @@
-= check_box_tag "all_students_check"
-= "Check all"
-= select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states.where('id != ?', state.id), :id, :name, state.id), :style=> "width:140px;"
-= hidden_field_tag :admission_period_id, @admission_period.id
-= hidden_field_tag :admission_method_id, @admission_method.id
-= submit_tag "Save"
-- if state.can_admit
-  = submit_tag "Admit", :name => 'admit_students'
+- if state.admission_phase.admission_phase_states.count > 1 || (state.can_progress || state.can_admit || state.admission_phase.position != 0)
+  .span7
+    table
+      th
+        = check_box_tag "all_students_check"
+        = "All"
+      - if state.admission_phase.admission_phase_states.count > 1
+        th
+          = select_tag :state_id, options_from_collection_for_select(state.admission_phase.admission_phase_states.where('id != ?', state.id), :id, :name, state.id)
+          = submit_tag t(:'admission_phase_states.save')
+      
+      - if state.can_progress
+        th
+          = submit_tag t(:'admission_phase_states.progress'), :name => 'progress_students'
+      - if state.can_admit
+        th
+          = submit_tag t(:'admission_phase_states.admit'), :name => 'admit_students'
+      - if state.admission_phase.position != 0
+        th
+          = submit_tag t(:'admission_phase_states.remove_student'), :name => 'remove_students'
+
+    = hidden_field_tag :admission_period_id, @admission_period.id
+    = hidden_field_tag :admission_method_id, @admission_method.id
+    = hidden_field_tag :current_state, state.id

@@ -22,7 +22,9 @@
         = render 'gaku/course_groups/course_group_enrollments/courses', :course_group => @course_group
 
 = well_div do
-  = link_to_edit_with_text [:edit, @course_group], :remote => true
-  = link_to_back course_groups_path
-
-  = render 'delete_confirm'
+  .span5
+    = link_to_edit_with_text [:edit, @course_group], :remote => true
+  .span5
+    = link_to_back course_groups_path
+  .span2
+    = render 'delete_confirm'

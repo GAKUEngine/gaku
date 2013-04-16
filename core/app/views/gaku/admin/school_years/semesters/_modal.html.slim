@@ -1,0 +1,7 @@
+= modal_for 'edit-school-year-semester-modal' do
+  = modal_header t(:'semester.edit')
+  = modal_form_for [:admin, @school_year, semester] do |f|
+    = modal_body do
+      = modal_form_error 'edit-school-year-semester-modal-error'
+      = render 'form_fields', :f => f
+      = buttons_for semester, :nested_id => 'admin-school-year-semester'

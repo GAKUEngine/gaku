@@ -11,9 +11,7 @@ describe Gaku::SimpleGrade do
     it { should allow_mass_assignment_of :school_id }
     it { should allow_mass_assignment_of :student_id }
 
-    it { should validate_presence_of :school_id }
     it { should validate_presence_of :student_id }
     it { should validate_presence_of :name }
-    it { should validate_presence_of :grade }
   end
 end

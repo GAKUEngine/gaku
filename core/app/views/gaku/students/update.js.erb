@@ -1,4 +1,4 @@
 $('tr#student-<%= @student.id %>').html('<%= render_js_partial("student_unit", {:student => @student}) %>'); // update from index
-$('.student-index').html('<%= render_js_partial("show_table", {:student => @student}) %>'); //update from show
+$('.student-index').html('<%= render_js_partial("gaku/shared/student/edit_table", {:student => @student}) %>'); //update from show
 $('#edit-student-modal').modal('hide');
 showNotice("<%= render_flash %>");

@@ -41,21 +41,27 @@ module Gaku
 
     def admit(student)
       admission_date = !student.admission.admission_period.admitted_on.nil? ? student.admission.admission_period.admitted_on : Date.today
-      admission = student.admission
-      admission.admitted = true
-      admission.save
+
+      student.admission.update_attribute(:admitted, true)
       student.make_admitted(admission_date)
     end
 
     def progress_to_next_phase(phase)
       next_phase = AdmissionPhase.find_next_phase(phase)
       new_state = next_phase.admission_phase_states.first
+      success = false
 
-      new_admission_record = AdmissionPhaseRecord.new
-      new_admission_record.admission = student.admission
-      new_admission_record.admission_phase = next_phase
-      new_admission_record.admission_phase_state = new_state
-      new_admission_record.save
+      record = AdmissionPhaseRecord.deleted.find_by_admission_id_and_admission_phase_id_and_admission_phase_state_id(student.admission.id, next_phase.id, new_state.id)
+      if !record.nil?
+        success = record.update_attributes(:is_deleted => false)
+      else
+        record = AdmissionPhaseRecord.new
+        record.admission = student.admission
+        record.admission_phase = next_phase
+        record.admission_phase_state = new_state
+        success = record.save
+      end
+      return success
     end
 
     def find_record_by_phase(phase_id)

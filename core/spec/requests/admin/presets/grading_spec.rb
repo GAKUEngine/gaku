@@ -13,7 +13,7 @@ describe 'Admin Presets Grading' do
 
       fill_in 'presets_grading_method', with:'Exam'
       fill_in 'presets_grading_scheme', with:'A'
-      click '.btn'
+      click '#submit-preset'
 
       flash_updated?
     end

@@ -6,6 +6,9 @@ tr
   td = student.birth_date
   td = student.address_widget
   td
-    = link_to_show student
+    - if student.is_active
+      = link_to_show student
+    - else
+      = link_to_show [:admin, student]
     = link_to content_tag(:li, nil, :class => 'icon-white icon-repeat'), [:recovery, student], :class => 'mr-xs btn btn-mini btn-warning recovery-link', :remote => true
-    = ajax_link_to_delete student , :id => 'delete-disposal-student-address-link'
+    = ajax_link_to_delete student , :id => 'delete-disposal-student-link'

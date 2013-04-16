@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/requests/avatarable_spec'
 
 describe "Admin School Campus Picture" do
 
@@ -9,16 +10,10 @@ describe "Admin School Campus Picture" do
   before do
     visit gaku.admin_school_path(school)
     click show_link
+    @file_name = 'campus_picture'
   end
 
-  context "uploading", :js => true do
-    it "uploads" do
-      click_button "Change picture"
-      absolute_path = Rails.root + "../support/120x120.jpg"
-      attach_file 'campus_picture', absolute_path
-      click_button "Upload"
-      flash? "successfully uploaded"
-    end
-  end
+  it_behaves_like 'avatarable'
+
 
 end

@@ -4,7 +4,7 @@ $("#extracurricular-activity-students-index tbody").html('');
   $('#extracurricular-activity-students-index tbody').append('<%= render_js_partial("gaku/extracurricular_activities/students/student", {:enrollment => enrollment}) %>');
 <% end %>
 
-$('#extracurricular-activity-enrollments-tab-link').html('<%= print_count(@count, t_extracurricular_activity_plural) %>');
+$('#extracurricular-activity-enrollments-tab-link').html('<%= print_count(@count, t_student_plural) %>');
 $('.extracurricular-activity-enrollments-count').html('<%= print_count(@count, t_extracurricular_activity_list) %>');
 
 $('#student-modal').modal('hide');

@@ -3,7 +3,7 @@ module Gaku
 
     include Person, Addresses, Contacts, Notes, Picture, Trashable
 
-    has_many :course_enrollments
+    has_many :course_enrollments, :dependent => :destroy
     has_many :courses, :through => :course_enrollments
 
     has_many :class_group_enrollments
@@ -18,6 +18,9 @@ module Gaku
     has_many :student_achievements
     has_many :achievements, :through => :student_achievements
 
+    has_many :student_guardians, :dependent => :destroy
+    has_many :guardians, :through => :student_guardians
+
     has_many :exam_portion_scores
     has_many :assignment_scores
     has_many :attendances
@@ -25,11 +28,12 @@ module Gaku
     has_many :simple_grades
 
     belongs_to :user
-    belongs_to :commute_method
+    belongs_to :commute_method_type
     belongs_to :scholarship_status
     belongs_to :enrollment_status
 
-    has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
+
+    #has_and_belongs_to_many :guardians, :join_table => :gaku_guardians_students
 
     has_paper_trail :class_name => 'Gaku::StudentVersion',
                     :on => [:update, :destroy],
@@ -37,7 +41,7 @@ module Gaku
                                :name, :surname, :middle_name,
                                :student_id_number, :student_foreign_id_number,
                                :scholarship_status_id,
-                               :commute_method_id, :enrollment_status_id,
+                               :commute_method_type_id, :enrollment_status_id,
                                :is_deleted
                              ]
 
@@ -45,10 +49,12 @@ module Gaku
                     :class_groups, :class_group_ids, :class_groups_attributes,
                     :guardians, :guardians_attributes,
                     :student_id_number, :student_foreign_id_number,
-                    :scholarship_status_id, :enrollment_status_id, :commute_method_id
+                    :scholarship_status_id, :enrollment_status_id, :commute_method_type_id
 
 
     accepts_nested_attributes_for :guardians, :allow_destroy => true
+
+    before_create :set_scholarship_status
 
 
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
@@ -66,20 +72,21 @@ module Gaku
       end
     end
 
-    def class_group_widget
-      cg = self.class_groups.last
-      cg.blank? ? nil : cg
+    def self.specialties
+      self.student_specialties.map &:name
     end
 
-    def seat_number_widget
-      sn = self.class_group_enrollments.last
-      sn.blank? ? nil : sn.seat_number
+    def set_scholarship_status
+      self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end
 
-    # need modify when primary columns is added
-    def address_widget
-      pa = self.addresses.first
-      pa.blank? ? nil : pa.city
+    def is_active
+      enrollment_status = EnrollmentStatus.find_by_id(self.enrollment_status_id)
+      if enrollment_status
+        enrollment_status.is_active
+      else
+        false
+      end
     end
 
   end

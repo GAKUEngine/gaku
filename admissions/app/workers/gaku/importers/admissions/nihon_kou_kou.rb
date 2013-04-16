@@ -7,7 +7,6 @@ module Gaku
         include SheetHelper
         require 'roo'
 
-
         def perform(file_path, period_id, method_id)
           #one liner open, relying on Roo to figure it out
           book = Roo::Spreadsheet.open(file_path)
@@ -38,6 +37,8 @@ module Gaku
           kyoka5 = ["国","社","数","理","英"]
           kyoka3 = ["国","数","英"]
 
+          logger.info "志願者「" + student.surname + "　" + student.name + "」の内申点を登録します。"
+
           def 内申点合計計算(kyoka_list, name, student, record, row, idx)
             total = 0
             
@@ -45,14 +46,25 @@ module Gaku
               total += row[idx[kyoka]]
             end
 
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => name, :grade => total)
+            naishin = SimpleGrade.where(:student_id  => student.id, :name => name).first
+            if naishin.nil?
+              naishin = SimpleGrade.create!(:student_id  => student.id, :name => name)
+            end
+            naishin.grade = total
             naishin.save
             record.simple_grades << naishin
           end
           
           kyoka9.each do |kyoka|
-            naishin = SimpleGrade.new(:student_id  => student.id, :name => kyoka, :grade => row[idx[kyoka]])
+            naishin = SimpleGrade.where(:student_id  => student.id, :name => kyoka).first
+            if naishin.nil?
+              naishin = SimpleGrade.create!(:student_id  => student.id, :name => kyoka)
+            end
+
+            naishin.grade = row[idx[kyoka]]
             naishin.save
+
+            logger.info "志願者「" + student.surname + "　" + student.name + "」に" + kyoka + "の点数" + naishin.grade.to_s + "を登録しました。"
             record.simple_grades << naishin
           end
 
@@ -61,39 +73,80 @@ module Gaku
           内申点合計計算(kyoka3, "３教科", student, record, row, idx)
         end
 
+        def 中学校検索(code, name)
+          school = School.where(:code => code).first
+          if school.nil?
+            school = School.where(:name => name).first
+            if school.nil?
+              logger.info "学校「" + name + "」[" + code + "]の登録が無かった為仮に作成しました。"
+              school = School.create!(:code => code, :name => name)
+            end
+          end
+
+          return school
+        end
+
         def 中学校度の内容登録(student, row, idx)
+          school = 中学校検索(row[idx["中学校コード"]], row[idx["中学校名"]])
+          record = ExternalSchoolRecord.where(:student_id => student.id, :school_id => school.id).first
+          if record.nil?
+            logger.info "志願者「" + student.surname + "　" + student.name + "」の中学校情報「" + school.name + "[" + school.code + "]」を登録します。"
             record = ExternalSchoolRecord.new
+            record.school = school
             record.data = ""
             record.student_id = student.id
             year_2_absences = row[idx["２年欠席"]].to_i
             year_3_absences = row[idx["３年欠席"]].to_i
             record.absences = year_2_absences + year_3_absences
             record.data << {:year_2_absences => year_2_absences, :year_3_absences => year_3_absences}.to_json
-            if record.save
-              内申点登録(student, record, row, idx)
-            end
+            record.save
+            logger.info "志願者「" + student.surname + "　" + student.name + "」の中学情報を登録しました。"
+          end
+
+          内申点登録(student, record, row, idx)
         end
 
         def 志望学科登録(admission, row, idx)
           if !row[idx["１志望"]].nil? && row[idx["１志望"]] != ""
-            primary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 1,
-                                               :specialty_id => Specialty.where(:name => row[idx["１志望"]]).first)
-            if primary.specialty_id != nil
-              primary.save
-              admission.specialty_applications << primary
+            logger.info "志願学科「" + row[idx["１志望"]] + "」を探してます。"
+            specialty = Specialty.where(:name => row[idx["１志望"]]).first
+            if !specialty.nil?
+              application = SpecialtyApplication.create!(:admission_id => admission.id, :rank => 1,
+                                               :specialty_id => specialty.id)
+              if application.specialty_id != nil
+                application.save
+                admission.specialty_applications << application
+                logger.info "志願者" + admission.student.surname + "　" + admission.student.name + "の第一志願が「" + application.specialty.name + "」です。"
+              end
+            else
+              logger.info "学科/専攻「" + row[idx["１志望"]] + "」が見つかりませんでした。シートデータを直すか専攻を追加して"
             end
           end
 
           if !row[idx["２志望"]].nil? && row[idx["２志望"]] != ""
-            secondary = SpecialtyApplication.new(:admission_id => admission.id, :rank => 2,
-                                                 :specialty_id => Specialty.where(:name => row[idx["２志望"]]).first)
-            if secondary.specialty_id != nil
-              secondary.save
-              admission.specialty_applications << secondary
+            specialty = Specialty.where(:name => row[idx["２志望"]]).first
+            if !specialty.nil?
+              application = SpecialtyApplication.create!(:admission_id => admission.id, :rank => 1,
+                                               :specialty_id => specialty.id)
+              if application.specialty_id != nil
+                application.save
+                admission.specialty_applications << application
+                logger.info "志願者" + admission.student.surname + "　" + admission.student.name + "の第二志願が「" + application.specialty.name + "」です。"
+              end
+            else
+              logger.info "学科/専攻「" + row[idx["２志望"]] + "」が見つかりませんでした。シートデータを直すか専攻を追加して"
             end
           end
 
           admission.save          
+        end
+
+        def create_applicant(surname, name, surname_reading, name_reading)
+          return Student.create!(:surname => surname,
+                          :name => name,
+                          :surname_reading => surname_reading,
+                          :name_reading => name_reading,
+                          :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
         end
 
         def 基本入力一行分(row, idx, period_id, method_id)
@@ -121,6 +174,8 @@ module Gaku
 
             applicant_number = row[idx["受験番号"]]
 
+            logger.info "志願者「" + name_raw + "」[" + applicant_number.to_i.to_s + "]が見つかりました。" 
+
            # if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
            #   duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
            #   if duplicates.length > 0
@@ -131,25 +186,25 @@ module Gaku
 
             #入学時期及び入学形態が引数に含まれてればadmissionレコードを作成
             if !period_id.nil? && !method_id.nil?
-              admission = Admission.find_or_create_by_applicant_number(applicant_number)
-
-              #ここに生徒が登録されてなければ登録し、既に登録されていれば更新を行う
-              if admission.student_id.nil?
-                student = Student.create!(:surname => surname,
-                                :name => name,
-                                :surname_reading => surname_reading,
-                                :name_reading => name_reading,
-                                :enrollment_status_id => Gaku::EnrollmentStatus.find_by_code("applicant").id)
-              else
+              admission = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id).first
+              if !admission.nil?
+                logger.info "[" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "]に入学レコード[" + applicant_number.to_i.to_s + "]が既に登録している為更新対象とします。"
                 student = Student.find(admission.student_id)
-              end
+                if !student.nil? && student.name != name || student.surname != student.surname
+                  logger.info "!*!*![" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "の" + applicant_number.to_i.to_s + "に「" 
+                    + student.surname + "　" + student.name + "」が登録されているがシートデータに「" + surname + "　" + name + "」が登録されてます。上書きします。"
+                  student = create_applicant(surname, name, surname_reading, name_reading)
+                  admission.student_id = student.id
+                  admission.save
+                end
 
+                logger.info "志願者「" + surname + "　" + name + "」が既に登録されている為情報を更新対象とします。"
+              else
+                student = create_applicant(surname, name, surname_reading, name_reading)
 
-              admission.student_id = student.id
-              admission.admission_period_id = period_id
-              admission.admission_method_id = method_id
+                admission = Admission.create!(:applicant_number => applicant_number, :student_id => student.id,
+                                              :admission_period_id => period_id, :admission_method_id => method_id)
 
-              if admission.save
                 admission_method = admission.admission_method
                 admission_period = AdmissionPeriod.find(period_id)
                 admission_phase = admission_method.admission_phases.first
@@ -158,16 +213,15 @@ module Gaku
                                                       :admission_phase_id => admission_phase.id,
                                                       :admission_phase_state_id => admission_phase_state.id,
                                                       :admission_id => admission.id)
-                
-                admission.student.update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(code:"applicant").first.id)
-                
-                志望学科登録(admission, row, idx)
+
+                logger.info "志願者「" + surname + "　" + name + 
+                  "[" + surname_reading + "　" + name_reading + "]」を" + admission_period.name + "の" + admission_method.name + "に登録しました。"
               end
-              logger.info "志願者「" + surname + "　" + name + 
-                "[" + surname_reading + "　" + name_reading + "]」を登録しました。"
+
+              志望学科登録(admission, row, idx)
             else
-              #既に存在しているかどうかの判断は簡単に出来ない為そのまま登録してしまう
-              #TODO どうにか確認し重複しない様にする
+              #既に存在しているかどうかの判断は名前しかない
+              # TODO スコープ内名前重複チェック
               student = Student.create!(:surname => surname,
                               :name => name,
                               :surname_reading => surname_reading,
@@ -179,7 +233,6 @@ module Gaku
             end
             
             中学校度の内容登録(student, row, idx)
-            
           end
         end
 

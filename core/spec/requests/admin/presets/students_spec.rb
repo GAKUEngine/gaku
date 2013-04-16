@@ -18,7 +18,7 @@ describe 'Admin Presets Students' do
       select 'Female', from:'presets_students_gender'
       select "#{address.country}", from:'presets_address_country'
       fill_in 'presets_address_state', with: "#{address.state.name}"
-      click '.btn'
+      click '#submit-preset'
 
       flash_updated?
     end

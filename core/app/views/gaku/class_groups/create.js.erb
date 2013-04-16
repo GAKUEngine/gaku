@@ -1,6 +1,6 @@
 $('table#class-groups-index tbody').append('<%= render_js_partial("class_group", {:class_group => @class_group}) %>');
 $('#new-class-group form')[0].reset();
-$('#new-class-group').slideToggle();
+$('#new-class-group').slide();
 $('#new-class-group-link').show();
 $('.class-groups-count').html("<%= print_count(@count+1, t_class_group_list) %>");
 showNotice("<%= render_flash %>");

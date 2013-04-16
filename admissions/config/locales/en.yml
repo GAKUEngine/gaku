@@ -41,6 +41,11 @@ en:
     remove: Remove state
     save: Save Admission Phase State
     singular: Admission Phase State
+    no_states: "There are no states"
+    save: "Save"
+    progress: "Progress"
+    admit: "Admit"
+    remove_student: "Return from Phase"
   admission_phases:
     add: Add Admission Phase
     edit: Edit Admission Phase
@@ -54,6 +59,7 @@ en:
     plural: Admission Phases
     save: Save Admission Phase
     singular: Admission Phase
+    no_phases: "There are no phases"
   admissions:
     admit: Admit
     admitted_on: Admitted On
@@ -74,6 +80,7 @@ en:
     please_select_period: Please Select Admission Period
     reg_date: Application Registration Date
     status: Admission Status
+    applicant_number: Applicant Number
   exams:
     exam_score: Exam Score
     grade: Grade Exam

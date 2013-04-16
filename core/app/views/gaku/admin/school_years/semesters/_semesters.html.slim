@@ -1,0 +1,22 @@
+#admin-school-year-semesters
+  = index_header do
+    #new-admin-school-year-semester-errors
+    #new-admin-school-year-semester.hide
+
+    .pull-left
+      = count_div 'admin-school-year-semesters-count' do
+        = print_count @school_year.semesters.count, t_semester_list
+    .pull-right
+      = ajax_link_to_new t(:'semester.add'), [:new, :admin, @school_year, :semester], :id => 'new-admin-school-year-semester-link'
+  = hr
+
+  = index_body do
+    = table_for 'admin-school-year-semesters-index' do
+      thead
+        tr
+          = th t(:'semester.starting')
+          = th t(:'semester.ending')
+          = th t(:'semester.duration')
+          = th_actions 3
+      tbody
+        = render :partial => 'gaku/admin/school_years/semesters/semester', :collection => @school_year.semesters, :as => :semester
