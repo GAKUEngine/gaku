@@ -8,6 +8,10 @@ module Gaku
 
       private
 
+      def current_ability
+        @current_ability ||= Gaku::AdminAbility.new(current_user)
+      end
+
       def resolve_layout
         case action_name
         when "index"

@@ -1,0 +1,12 @@
+.row-fluid.pagination-centered
+  h4= t(:'picture')
+
+.row-fluid.mt-s
+  .span12.pagination-centered
+    = image_tag resource.picture.url(:thumb), :id => "avatar-picture"
+
+- if can_edit?
+  .row-fluid.mt-s
+    = link_to_upload_image 'JavaScript:void(0);', :method => :get, :id => "upload-picture-link"
+    #upload-picture.hide
+      = render 'gaku/shared/upload_picture', :resource => resource

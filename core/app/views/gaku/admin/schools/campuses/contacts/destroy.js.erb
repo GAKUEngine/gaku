@@ -1,6 +1,0 @@
-<%- if @campus.contacts.any? & @contact.is_primary? %>
-  $('#contact-<%= @campus.contacts.first.id %> td.primary-contact a').addClass('btn-primary');
-<% end %>
-
-$('.admin-school-campus-contacts-count').html('<%= print_count(@count-1, t_contact_list) %>');
-showNotice("<%= render_flash %>");

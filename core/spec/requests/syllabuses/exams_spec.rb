@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe 'Syllabus Exams' do
 
-  stub_authorization!
+  as_admin
 
   let(:exam) { create(:exam) }
   let(:syllabus) { create(:syllabus, :name => 'Biology', :code => 'bio') }
   let(:exam) { create(:exam, :name => 'Astronomy Exam') }
+  let!(:count_div) { ".exams-count" }
 
   existing_exam_form           = '#new-existing-exam'
   new_existing_exam_link       = '#new-existing-exam-link'
@@ -28,18 +29,17 @@ describe 'Syllabus Exams' do
     end
 
     it "adds existing exam", :js => true do
+      within(count_div) { page.should have_content 'Exams list' }
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
 
       select exam.name, :from => 'exam_syllabus_exam_id'
       click submit_existing_exam_button
 
-      #ensure_create_is_working table_rows
-
+      wait_until_invisible existing_exam_form
       page.should have_content exam.name
       flash? "successfully added"
-
-      wait_until_invisible existing_exam_form
+      within(count_div) { page.should have_content 'Exams list(1)' }
     end
 
     it "cancels adding existing exam", :cancel => true, :js => true do
@@ -65,6 +65,7 @@ describe 'Syllabus Exams' do
       end
 
       it "creates and shows", :js => true  do
+        within(count_div) { page.should have_content 'Exams list' }
         expect do
           #required
           fill_in 'exam_name', :with => 'Biology Exam'
@@ -75,13 +76,14 @@ describe 'Syllabus Exams' do
 
         page.should have_content "Biology Exam"
         page.should_not have_content "No Exams"
+        within(count_div) { page.should have_content 'Exams list(1)' }
         flash_created?
       end
 
       it 'errors without the required fields', :js => true do
         fill_in 'exam_exam_portions_attributes_0_name', :with => ''
         has_validations?
-        
+
         syllabus.exams.count.should eq 0
       end
 
@@ -118,12 +120,14 @@ describe 'Syllabus Exams' do
 
       it 'deletes', :js => true do
         page.should have_content exam.name
+        within(count_div) { page.should have_content 'Exams list(1)' }
 
         expect do
           ensure_delete_is_working
         end.to change(syllabus.exams, :count).by -1
 
         within(table){ page.should_not have_content exam.name }
+        within(count_div) { page.should_not have_content 'Exams list(1)' }
         flash_destroyed?
       end
     end

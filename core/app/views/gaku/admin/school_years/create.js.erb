@@ -1,0 +1,10 @@
+<%- if @school_year.valid? %>
+  $('#admin-school-years-index tbody').append('<%= render_js_partial("school_year", {:school_year => @school_year}) %>');
+  $('#new-admin-school-year').slide();
+  $('#new-admin-school-year-link').show();
+  showNotice("<%= render_flash %>");
+  $('.admin-school-years-count').html('<%= print_count(@count+1, t_school_year_list) %>');
+  $('#new-admin-school-year-errors').html('')
+<%- else %>
+   $('#new-admin-school-year-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @school_year}) %>')
+<% end %>

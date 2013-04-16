@@ -5,7 +5,6 @@ window.GAKUEngine =
   Routers: {}
   init: ->
 
-
 formBuilder =
   add: (element, settings, message) ->
     if element.data("valid") isnt false
@@ -26,11 +25,45 @@ window.ClientSideValidations.formBuilders["ValidateFormBuilder"] = formBuilder
 
 window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBuilder
 
+$.fn.inline_select = (resource) ->
+  $(this).editable
+    source: resource
+    showbuttons: false
+    display: (value, sourceData) ->
+      html = []
+      checked = $.fn.editableutils.itemsByValue(value, sourceData)
+      if checked.length
+        $.each checked, (i, v) ->
+          html.push $.fn.editableutils.escape(v.text)
+
+        $(this).html html.join(", ")
+      else
+        $(this).empty()
+      $(this).show()
+
+$.fn.inline_date = () ->
+  $(this).editable
+    display: (value) ->
+      $(this).show()
+
 
 $.fn.enableValidations = ->
   $(this).enableClientSideValidations()
 
+
+$.fn.editable.defaults.mode = 'inline'
+
 $ ->
+
+  $('#soft-delete-link').on 'click', (e)->
+    e.preventDefault()
+    $('#delete-modal').modal('show')
+
+  $("#upload-picture-link").click ->
+    $("#upload-picture").toggle()
+
+  $('.datepicker').datepicker(format:'yyyy/mm/dd')
+
 
   $(document).on 'ajax:success','.delete-link', (evt, data, status, xhr) ->
     $(this).closest('tr').remove()

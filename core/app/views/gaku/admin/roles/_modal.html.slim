@@ -1,0 +1,6 @@
+= modal_for 'edit-role-modal' do
+  = modal_header t(:'role.edit')
+  = modal_form_for [:admin, @role] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @role, :nested_id => 'admin-role'

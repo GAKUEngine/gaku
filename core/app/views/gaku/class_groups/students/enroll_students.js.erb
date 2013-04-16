@@ -1,8 +1,8 @@
 $("#class-group-students-index tbody").html('');
 
-<% @class_group.class_group_enrollments.each {|enrollment| %>
+<% @resource.enrollments.each do |enrollment| %>
   $('#class-group-students-index tbody').append('<%= render_js_partial("gaku/class_groups/students/student", {:enrollment => enrollment}) %>');
-<% } %>
+<% end %>
 
 $('#class-group-enrollments-tab-link').html('<%= print_count(@count, t_student_plural) %>');
 $('.class-group-enrollments-count').html('<%= print_count(@count, t_student_list) %>');

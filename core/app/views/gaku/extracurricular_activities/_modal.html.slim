@@ -1,0 +1,7 @@
+= modal_for 'extracurricular-activity-modal' do
+  = modal_header t(:'extracurricular_activity.edit')
+  = modal_form_for @extracurricular_activity do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @extracurricular_activity
+

@@ -1,7 +1,6 @@
 $ ->
   fixHelper = (e, ui) ->
     ui.children().each ->
-      console.log @
       $(@).width($(@).width())
     ui
 

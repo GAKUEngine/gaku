@@ -1,0 +1,3 @@
+= remote_form_for [:admin, @grading_method] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @grading_method, :nested_id => 'admin-grading-method'

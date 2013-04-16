@@ -32,9 +32,8 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 		event.preventDefault()
 		form = $(event.currentTarget)
 		attendanceUrl = form.attr('action')
-		attendanceTypeId = form.children('select').attr('value')
-		attendanceReason = form.children('input').attr('value')
-
+		attendanceTypeId = form.children('select').val()
+		attendanceReason = form.children('input').val()
 
 		attendance = new GAKUEngine.Models.Attendance()
 		attendance.url = attendanceUrl

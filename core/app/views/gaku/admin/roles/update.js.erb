@@ -1,0 +1,4 @@
+$('tr#role-<%= @role.id %>').html('<%= render_js_partial("fields", {:role => @role}) %>');
+$("#edit-role-modal").modal("hide");
+showNotice("<%= render_flash %>");
+

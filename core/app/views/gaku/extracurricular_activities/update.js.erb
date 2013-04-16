@@ -1,0 +1,6 @@
+$('#extracurricular-activity-modal').modal('hide');
+$('#extracurricular-activity-modal').remove();
+showNotice("<%= render_flash %>");
+
+var currentName = $(".extracurricular-activity-<%= @extracurricular_activity.id %> .name");
+currentName.html("<%= @extracurricular_activity.name %>");

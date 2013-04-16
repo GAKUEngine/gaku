@@ -1,14 +1,23 @@
 module Gaku
   class Guardian < ActiveRecord::Base
 
-    include Addresses, Contacts
+    include Person, Addresses, Contacts, Picture
 
     belongs_to :user
-    has_and_belongs_to_many :students, :join_table => :gaku_guardians_students
+    has_many :student_guardians, :dependent => :destroy
+    has_many :students, :through => :student_guardians
 
-    validates_presence_of :name, :surname
+    attr_accessible :relationship
 
-    attr_accessible :name, :surname, :name_reading, :surname_reading, :relationship
+    after_create :refresh_student_counts
+    after_destroy :refresh_student_counts
 
+    private
+
+      def refresh_student_counts
+        students.each do |s|
+          Student.reset_counters(s.id ,:guardians)
+        end
+      end
   end
 end

@@ -1,4 +1,1 @@
-row-fluid
-  .span12
-    #admission-delete
-      =link_to ("<i class='icon-white icon-remove'></i>").html_safe, [:soft_delete, :admin, admission], :method => :delete, :remote => true, :class => 'btn btn-mini btn-danger delete-link', :data => {:confirm => t('confirm_delete')}
+=link_to ("<i class='icon-white icon-remove'></i>").html_safe, [:soft_delete, :admin, admission], :method => :delete, :remote => true, :class => 'btn btn-mini btn-danger delete-link', :id => 'delete-student-link', :data => {:confirm => t('confirm_delete')}

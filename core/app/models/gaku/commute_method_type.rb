@@ -1,12 +1,15 @@
 module Gaku
 	class CommuteMethodType < ActiveRecord::Base
-		has_many :commute_methods
 
-    validates :name, :presence => true, :uniqueness => true
+		has_many :students
+
+    validates :name, presence: true, uniqueness: true
+
+    translates :name
 
 		attr_accessible :name
 
-    def self.type
+    def to_s
       name
     end
 

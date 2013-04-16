@@ -1,6 +1,8 @@
 module Gaku
 	class CourseGroups::CourseGroupEnrollmentsController < GakuController
 
+		load_and_authorize_resource :course_group_enrollment, :class => Gaku::CourseGroupEnrollment
+
 		inherit_resources
 		actions :index, :show, :new, :create, :update, :edit, :destroy
 		respond_to :js, :html

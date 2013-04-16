@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'Admin Admission Methods' do
 
-  stub_authorization!
+  as_admin
 
-  let(:admission_method) { create(:admission_method) }
+  let(:admission_method) { create(:admission_method_without_phases) }
 
   before do
     set_resource "admin-admission-method"

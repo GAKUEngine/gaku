@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::Admin::AdmissionPeriodsController do
 
   let(:admission_period) { create(:admission_period) }
-  let(:admission_method) { create(:admission_method) }
+  let(:admission_method) { create(:admission_method_without_phases) }
 
   describe "GET #index" do
     it "is successful" do

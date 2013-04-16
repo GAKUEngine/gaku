@@ -1,0 +1,5 @@
+= modal_for 'delete-modal' do
+  = modal_header t(:delete)
+  = modal_body do
+    .delete_button style='text-align:center'
+      =link_to t(:delete), [:soft_delete, @teacher], :class => 'btn btn-danger', :data => {:confirm => t('confirm_delete')}

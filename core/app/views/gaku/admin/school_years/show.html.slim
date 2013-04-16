@@ -1,0 +1,15 @@
+= content_for :show_header do
+  = t(:'school_year.show')
+=well_div do
+ =render 'show_table'
+
+=hr
+
+= well_div do
+  =render 'gaku/admin/school_years/semesters/semesters'
+
+  =hr
+  .row-fluid
+    .span12
+      = link_to_back admin_school_years_path
+

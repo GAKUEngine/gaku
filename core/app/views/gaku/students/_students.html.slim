@@ -7,16 +7,15 @@
       = th t(:'birth_date')
       = th t(:'gender.label')
       = th t(:'class_group.name')
-      = th t(:'class_group_enrollment.seat_number')
       = th t(:'admitted')
       = th t(:'address.primary')
+      = th t(:'contact.primary')
       = th t(:'assignment.plural')
-
       - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
-        = th_actions 2
+
+        = th_actions 3
 
   tbody
     = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
 
-
-/=paginate @students
+= paginate @students, :remote => true

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::CommuteMethodTypesController do
 
+  as_admin
+
   let(:commute_method_type) { create(:commute_method_type) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
       gaku_js_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #new' do
     it "assigns a new commute_method_type to @commute_method_type" do
@@ -37,16 +39,16 @@ describe Gaku::Admin::CommuteMethodTypesController do
     context "with valid attributes" do
       it "saves the new commute method type in the db" do
         expect{
-          gaku_post :create, commute_method_type: attributes_for(:commute_method_type)  
+          gaku_post :create, commute_method_type: attributes_for(:commute_method_type)
         }.to change(Gaku::CommuteMethodType, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new commute method type in the db" do
           expect{
-            gaku_js_post :create, commute_method_type: {name: ''}  
+            gaku_js_post :create, commute_method_type: {name: ''}
           }.to_not change(Gaku::CommuteMethodType, :count)
       end
     end
@@ -66,7 +68,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
   describe "PUT #update" do
     it "locates the requested @commute_method_type" do
-      gaku_put :update, id: commute_method_type, 
+      gaku_put :update, id: commute_method_type,
                         commute_method_type: attributes_for(:commute_method_type)
       assigns(:commute_method_type).should eq(commute_method_type)
     end
@@ -84,7 +86,7 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
     context "invalid attributes" do
       it "does not change commute method type's attributes" do
-        gaku_js_put :update, id: commute_method_type, 
+        gaku_js_put :update, id: commute_method_type,
                               commute_method_type: attributes_for(:commute_method_type, name: "")
 
         commute_method_type.reload

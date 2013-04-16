@@ -5,9 +5,10 @@
   = f.label :name_cont, t(:given_name)
   = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
 .span3
-  = f.label :birth_date_gteq, t(:birth_between)
+  = f.label :birth_date_gteq, t(:birth_date_from)
   = f.text_field :birth_date_gteq, :class => 'span12', :placeholder => t('date_placeholder')
-  = f.label :birth_date_lteq, t(:birth_and)
+.span3
+  = f.label :birth_date_lteq, t(:birth_date_to)
   = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t(:date_placeholder)
 - if params[:controller] == "admissions"
   .span3

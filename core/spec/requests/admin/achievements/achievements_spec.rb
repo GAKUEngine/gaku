@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Achievements' do
 
-  stub_authorization!
+  as_admin
 
   let(:achievement) { create(:achievement, :name => 'gold') }
 
@@ -32,6 +32,8 @@ describe 'Admin Achievements' do
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
+
+    it { has_validations? }
   end
 
   context 'existing' do
@@ -59,6 +61,11 @@ describe 'Admin Achievements' do
 
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
+      end
+
+      it 'has validations' do
+        fill_in 'achievement_name', :with => ''
+        has_validations?
       end
     end
 

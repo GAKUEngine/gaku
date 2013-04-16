@@ -7,7 +7,7 @@ class CreateGakuAdmissionsTable < ActiveRecord::Migration
       t.references  :admission_method
       t.references  :admission_period
       t.references  :scholarship_status
-      t.references  :school_history
+      t.references  :external_school_record
       t.references  :admission_phase_record
 
       t.boolean     :is_deleted, :default => false

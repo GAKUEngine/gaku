@@ -1,0 +1,9 @@
+$('#admission-period-selection').html('<%= render_js_partial("period", {:admission_period => @admission_period}) %>');
+$('#admission-method-selection').html('<%= render_js_partial("method", {:admission_methods => @admission_methods}) %>');
+<% if request.referer.include? 'listing_admissions' %>
+  $('#admissions-list').html('<%= render_js_partial("admissions_list", {:admission_method => @admission_methods.first}) %>');
+<% else %>
+  $('#admission-phases').html('<%= render_js_partial("phases", {:admission_method => @admission_methods.first}) %>');
+  $('#new-admin-admission-link').html('<%= render_js_partial("links", {:admission_method => @admission_method}) %>');
+<% end %>  
+$('#admissions_links').html('<%= render_js_partial("admissions_links", {:admission_params => @admission_params}) %>');

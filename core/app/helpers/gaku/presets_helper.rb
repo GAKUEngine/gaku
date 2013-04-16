@@ -17,5 +17,13 @@ module Gaku
       Gaku::Preset.get('students_gender')
     end
 
+    def per_page_preset
+      Preset.get('per_page')
+    end
+
+    def per_page_values
+      [10, 25, 50, 100]
+    end
+
   end
 end

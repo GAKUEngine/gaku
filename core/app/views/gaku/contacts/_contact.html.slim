@@ -1,0 +1,5 @@
+- target ||= prepare_target(nested_resources, contact) if defined?(nested_resources)
+- unless contact.nil? or contact.new_record? or !contact
+  tr id="contact-#{contact.id}"
+    = render 'gaku/contacts/fields', :contact => contact, :target => target
+

@@ -1,3 +1,0 @@
-$('tr#address-<%= @address.id %>').html('<%= render_js_partial("fields", {:address => @address, :target => [@student, @address]}) %>');
-$(".modal#edit-address-modal").modal("hide");
-showNotice("<%= render_flash %>");

@@ -1,0 +1,5 @@
+tr id="enrollment-#{enrollment.id}"
+  td = enrollment.student.surname
+  td = enrollment.student.name
+  td
+    = ajax_link_to_delete extracurricular_activity_student_path(:extracurricular_activity_id => enrollment.extracurricular_activity_id, :id => enrollment.student_id, :extracurricular_activity_enrollment => enrollment.id)

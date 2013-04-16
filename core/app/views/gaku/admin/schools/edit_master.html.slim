@@ -1,11 +1,17 @@
-= form_for [:admin, @master_school] do |f|
-  b= t(:'school.edit_master')
-  .row-fluid.mt-l
-    .span12.well
-      .span12.well
-        = render 'school_form_fields', :f => f
-        .row-fluid
-          .span12
-            .span6
-              = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
-            = link_to_back admin_school_details_path , :id => 'back-admin-school-link', :class => 'btn span3'
+= content_for :show_header do
+  = t(:'school.edit_master')
+
+= remote_nested_form_for [:admin, @master_school] do |f|
+  = render 'form_fields', :f => f
+  = f.fields_for :levels do |level|
+    .well
+      = level.text_field :name, :label => t(:'school_level.singular'), :class => 'school-level-name'
+      = level.link_to_remove t(:'school_level.remove_school_level'), :class => 'btn btn-danger remove-school-level'
+    hr
+  p = f.link_to_add t(:'school_level.add_school_level'), :levels, :class => 'btn btn-success add-school-level'
+
+  .row-fluid
+    .span12
+      = submit_button t(:'school.save'), :id => 'submit-admin-school-button'
+      .span6
+        = link_to_back admin_school_details_path , :id => 'back-admin-school-link', :class => 'btn span12'

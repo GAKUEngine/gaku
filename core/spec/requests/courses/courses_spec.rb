@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Courses' do
 
-  stub_authorization!
+  as_admin
 
   let(:syllabus) { create(:syllabus, :name => 'biology2012', :code => 'bio') }
   let(:syllabus2) { create(:syllabus, :name => 'biology2013Syllabus', :code => 'biology') }
@@ -58,6 +58,15 @@ describe 'Courses' do
       page.should have_content('Course Code')
       page.should have_content('biology')
     end
+
+    context "when select back btn" do
+      it 'returns to index view', js:true do
+        visit gaku.course_path(course)
+        click_on('Back')
+        page.current_path.should eq gaku.courses_path
+      end
+    end
+
     context ' #edit ' do
       before do
         within(table) { click edit_link }

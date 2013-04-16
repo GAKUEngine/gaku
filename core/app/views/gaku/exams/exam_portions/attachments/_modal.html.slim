@@ -1,0 +1,6 @@
+= modal_for 'edit-exam-exam-portion-attachment-modal' do
+  = modal_header t(:'attachment.edit')
+  = normal_modal_form_for [@exam,@exam_portion, @attachment] do |f|
+    = modal_body do
+      = render 'gaku/exams/exam_portions/attachments/form_fields', :f => f
+      = buttons_for @attachment, :nested_id => "exam-exam-portion-attachment"

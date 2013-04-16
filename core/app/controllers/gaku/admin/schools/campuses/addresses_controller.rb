@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class Schools::Campuses::AddressesController < GakuController
 
+      authorize_resource :class => false
+
     	inherit_resources
       respond_to :js, :html
 

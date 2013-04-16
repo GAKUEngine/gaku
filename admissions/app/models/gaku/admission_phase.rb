@@ -2,19 +2,34 @@ module Gaku
   class AdmissionPhase < ActiveRecord::Base
 
     belongs_to :admission_method
-  	has_many :admission_phase_records
-    #has_many :exams
-  	has_many :admission_phase_states
-    accepts_nested_attributes_for :admission_phase_states, :allow_destroy => true
+  	has_many :admission_phase_records, :dependent => :destroy
+  	has_many :admission_phase_states, :dependent => :destroy
     has_one  :exam
 
     attr_accessible :name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes
 
-    validates :name, presence: true
+    accepts_nested_attributes_for :admission_phase_states, :allow_destroy => true
+
+    validates :name, presence: true, :uniqueness => {:scope => :admission_method_id}
     validates :admission_method, presence: true
 
     before_create :proper_position
+    after_create  :add_default_state
     after_destroy :refresh_positions
+
+    #validates :admission_phase_states, presence: true
+
+    def self.find_next_phase(phase)
+      AdmissionPhase.find_by_admission_method_id_and_position(phase.admission_method_id ,phase.position+1)
+    end
+
+    def get_default_state
+      self.admission_phase_states.each do |state| 
+        if state.is_default = true
+          return state
+        end
+      end
+    end
 
     private
 
@@ -27,6 +42,10 @@ module Gaku
       admission_phases.pluck(:id).each_with_index do |id, index|
         admission_phases.update_all( {:position => index}, {:id => id} )
       end
+    end
+
+    def add_default_state
+      AdmissionPhaseState.where(name: "Default state", admission_phase_id: self.id, is_default: true, can_progress: true, can_admit: false, auto_admit: false).first_or_create
     end
 
   end

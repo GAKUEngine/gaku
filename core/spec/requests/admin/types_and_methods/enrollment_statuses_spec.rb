@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Enrollment Statuses' do
 
-  stub_authorization!
+  as_admin
 
   let(:enrollment_status) { create(:enrollment_status_admitted) }
 
@@ -20,6 +20,7 @@ describe 'Admin Enrollment Statuses' do
     it 'creates and shows' do
       expect do
         fill_in 'enrollment_status_name', :with => 'Enrolled'
+        fill_in 'enrollment_status_code', :with => 'enrolled'
         click submit
         wait_until_invisible form
       end.to change(Gaku::EnrollmentStatus, :count).by 1
@@ -28,6 +29,8 @@ describe 'Admin Enrollment Statuses' do
       within(count_div) { page.should have_content 'Enrollment Statuses list(1)' }
       flash_created?
     end
+
+    it { has_validations? }
 
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
@@ -59,6 +62,12 @@ describe 'Admin Enrollment Statuses' do
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
+
+      it 'has validations' do
+        fill_in 'enrollment_status_code', :with => ''
+        has_validations?
+      end
+
     end
 
 

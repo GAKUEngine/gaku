@@ -8,10 +8,24 @@ module Gaku
     include FormHelper
     include ModalHelper
     include HtmlHelper
+    include PersonHelper
 
     def count_div(html_class, &block)
       content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
         block.call
+      end
+    end
+
+
+    def can_edit?
+      if controller.action_name == "show"
+        if controller.controller_name == "students" or controller.controller_name == "guardians"
+          false
+        else
+          true
+        end
+      else
+        true
       end
     end
 
@@ -20,7 +34,15 @@ module Gaku
     end
 
     def enrollment_status_types
-      Gaku::EnrollmentStatusType.all.collect {|s| [s.name.capitalize, s.id] }
+      EnrollmentStatusType.includes(:translations).collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def enrollment_statuses_inline
+      enrollment_status_types = []
+      EnrollmentStatus.includes(:translations).each do |e|
+        enrollment_status_types << {value: e.id, text: e.name}
+      end
+      enrollment_status_types.to_json.html_safe
     end
 
     def class_groups
@@ -28,7 +50,15 @@ module Gaku
     end
 
     def commute_method_types
-      Gaku::CommuteMethodType.all.collect {|s| [s.name.capitalize, s.id] }
+      CommuteMethodType.includes(:translations).collect {|s| [s.name.capitalize, s.id] }
+    end
+
+    def commute_method_types_inline
+      commute_method_types = []
+      CommuteMethodType.includes(:translations).each do |e|
+        commute_method_types << {value: e.id, text: e.name}
+      end
+      commute_method_types.to_json.html_safe
     end
 
     def syllabuses
@@ -40,11 +70,25 @@ module Gaku
     end
 
     def courses
-      Gaku::Course.all.collect { |c| ["#{c.code}", c.id] }
+      Gaku::Course.includes(:syllabus).collect do |c|
+        if c.syllabus_name
+          ["#{c.syllabus_name}-#{c.code}", c.id]
+        else
+          ["#{c.code}", c.id]
+        end
+      end
     end
 
     def scholarship_statuses
-      Gaku::ScholarshipStatus.all.collect {|p| [ p.name, p.id ] }
+      ScholarshipStatus.includes(:translations).collect {|p| [ p.name, p.id ] }
+    end
+
+    def scholarship_statuses_inline
+      scholarship_statuses = []
+      ScholarshipStatus.includes(:translations).each do |e|
+        scholarship_statuses << {value: e.id, text: e.name}
+      end
+      scholarship_statuses.to_json.html_safe
     end
 
     def contact_types
@@ -63,8 +107,28 @@ module Gaku
       Gaku::Achievement.all.collect {|a| [a.name, a.id]}
     end
 
+    def schools
+      Gaku::School.all.collect { |s| [s.name, s.id] }
+    end
+
+    def school_levels
+      Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id]}
+    end
+
+    def roles
+      Gaku::Role.all
+    end
+
+    def semesters
+      Gaku::Semester.all.collect { |s| ["#{s.starting} / #{s.ending}" ,s.id]}
+    end
+
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
+    end
+
+    def style_semester(date)
+      date.strftime('')
     end
 
     def present(object, klass = nil)
@@ -133,24 +197,80 @@ module Gaku
       content_tag :div, nil, :style => "width:100px;height:20px;background-color:#{color}"
     end
 
-    def student_specialties_list(student_specialties)
-      string = String.new
-      student_specialties.ordered.each_with_index do |student_specialty, i|
-        string.concat "#{student_specialty.specialty} (#{major_check(student_specialty)})"
-        string.concat ", " unless i == student_specialties.count - 1
+    def resize_image(image_url, options = {})
+      raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
+      height = options[:height] || options[:size]
+      width  = options[:width]  || options[:size]
+      image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
+    end
+
+
+    def student_specialties_list(specialties)
+      comma_separated_list specialties, :empty => t(:'empty') do |specialty|
+        "#{specialty.specialty} (#{major_check(specialty)})"
       end
-      string.html_safe
+    end
+
+    def achievements_show(achievements)
+      comma_separated_list achievements, :empty => t(:'empty') do |achievement|
+        "#{achievement.name} (#{resize_image(achievement.badge, :size => 22)})"
+      end
+    end
+
+
+    def simple_grades_show(simple_grades)
+      comma_separated_list simple_grades, :empty => t(:'empty') do |simple_grade|
+        "#{simple_grade.name} (#{simple_grade.grade})"
+      end
     end
 
     def major_check(student_specialty)
       student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
     end
 
-    def resize_image(image_url, options = {})
-      raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
-      height = options[:height] || options[:size]
-      width  = options[:width]  || options[:size]
-      image_tag(image_url, :style => "height:#{height}px;width:#{width}px") unless image_url.blank?
+    def comma_separated_list(objects, options = {}, &block)
+      if objects.any?
+        objects.map do |object|
+          block_given? ? block.call(object) : object
+        end.join(', ').html_safe
+      else
+        options[:empty]
+      end
+    end
+
+    def chooser_preset
+      @chooser_preset ||= Gaku::Preset.chooser_table_fields
+    end
+
+    def enabled_field?(field)
+      chooser_preset[field].to_i == 1 rescue true
+    end
+
+    def prepare_target(nested_resource, address)
+      return nil if nested_resource.blank?
+      [nested_resource, address].flatten
+    end
+
+    def prepare_resource_name(nested_resources, resource)
+      @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
+    end
+
+    def exam_completion_info(exam)
+      @course_students ||= @course.students
+      ungraded = exam.ungraded(@course_students)
+      total = exam.total_records(@course_students)
+
+      percentage = number_to_percentage exam.completion(@course_students), :precision => 2
+
+      "#{t(:'exam.completion')}:#{percentage} #{t(:'exam.graded')}:#{total - ungraded} #{t(:'exam.ungraded')}:#{ungraded} #{t(:'exam.total')}:#{total}"
+    end
+
+    def datepicker_date_format(date)
+      date ?  date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
+    end
+
+    def calendar_icon
+      content_tag(:i, nil, :class => ' icon-calendar')
     end
 
   end

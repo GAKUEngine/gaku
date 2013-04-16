@@ -1,6 +1,10 @@
 module Gaku
   class Exams::ExamPortionsController < GakuController
 
+    #load_and_authorize_resource :exam, :class => Gaku::Exam
+    #load_and_authorize_resource :exam_portion, :through => :exam, :class => Gaku::ExamPortion
+    authorize_resource :class => false
+
     inherit_resources
     belongs_to :exam
     respond_to :js, :html

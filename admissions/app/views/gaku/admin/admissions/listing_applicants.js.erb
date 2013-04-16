@@ -1,0 +1,2 @@
+$("#admission-applicants-listing").html("<%= escape_javascript(render('applicants')) %>");
+$('.students-count').html('<%= print_count(@students_count, t_student_list) %>');

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Admin::AttendanceTypesController do
 
+  as_admin
+
   let(:attendance_type) { create(:attendance_type) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::Admin::AttendanceTypesController do
       gaku_js_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #new' do
     it "assigns a new attendance_type to @attendance_type" do
@@ -37,16 +39,16 @@ describe Gaku::Admin::AttendanceTypesController do
     context "with valid attributes" do
       it "saves the new attendance_type in the db" do
         expect{
-          gaku_post :create, attendance_type: attributes_for(:attendance_type)  
+          gaku_post :create, attendance_type: attributes_for(:attendance_type)
         }.to change(Gaku::AttendanceType, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
     context "with invalid attributes" do
       it "does not save the new attendance_type in the db" do
         expect{
-          gaku_js_post :create, attendance_type: {name: ''}  
+          gaku_js_post :create, attendance_type: {name: ''}
         }.to_not change(Gaku::AttendanceType, :count)
       end
     end
@@ -66,7 +68,7 @@ describe Gaku::Admin::AttendanceTypesController do
 
   describe "PUT #update" do
     it "locates the requested @attendance_type" do
-      gaku_put :update, id: attendance_type, attendance_type: attributes_for(:attendance_type) 
+      gaku_put :update, id: attendance_type, attendance_type: attributes_for(:attendance_type)
       assigns(:attendance_type).should eq(attendance_type)
     end
 
@@ -81,7 +83,7 @@ describe Gaku::Admin::AttendanceTypesController do
     end
     context "invalid attributes" do
       it "does not change attendance_type's attributes" do
-        gaku_js_put :update, id: attendance_type, 
+        gaku_js_put :update, id: attendance_type,
                               attendance_type: attributes_for(:attendance_type, name: "")
         attendance_type.reload
         attendance_type.name.should_not eq("")

@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'Exams' do
-  stub_authorization!
+
+  as_admin
 
   let(:exam) { create(:exam, :name => "Linux") }
 
@@ -34,7 +35,7 @@ describe 'Exams' do
       end.to change(Gaku::Exam, :count).by 1
 
       size_of(table_rows).should eq (tr_count + 1)
-      within(count_div) { page.should have_content 'Exams List(1)' }
+      within(count_div) { page.should have_content 'Exams list(1)' }
       flash_created?
     end
 
@@ -120,13 +121,13 @@ describe 'Exams' do
       end
     end
     it 'deletes', :js => true do
-      within(count_div) { page.should have_content 'Exams List(1)' }
+      within(count_div) { page.should have_content 'Exams list(1)' }
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::Exam, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Exams List(1)' }
+      within(count_div) { page.should_not have_content 'Exams list(1)' }
       page.should_not have_content exam.name
       flash_destroyed?
     end
@@ -134,7 +135,7 @@ describe 'Exams' do
     it 'returns to index when back is selected' do
       visit gaku.exam_path(exam)
       click_on 'Back'
-      page.should have_content 'Exams List'
+      page.should have_content 'Exams list'
     end
   end
 end

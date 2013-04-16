@@ -1,0 +1,4 @@
+$('tr#user-<%= @user.id %>').html('<%= render_js_partial("fields", {:user => @user}) %>');
+$("#edit-user-modal").modal("hide");
+showNotice("<%= render_flash %>");
+

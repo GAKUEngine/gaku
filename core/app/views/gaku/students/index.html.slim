@@ -6,18 +6,14 @@
       = print_count @count, t(:'student.list')
   .pull-right
     = ajax_link_to_new t(:'student.new'), new_student_path, :id => "new-student-link"
-    = button t(:'student.import'), importer_index_path, :id => "import-students-link"
-    = button t(:'student.export'), {:action => :csv, :format => :csv}, :id => 'export-students-link'
+    = link_to_import t(:'import'), importer_index_path, :id => "import-students-link"
+    = link_to_export t(:'export'), {:action => :csv, :format => :csv}, :id => 'export-students-link'
 
 = content_for :new_form do
   #new-student.hide
 
-= render 'student_chooser'
+= render 'gaku/shared/student_chooser/chooser'
 
 = hr
 
-#students-index-div
-  = render 'students'
-
-= paginate @students
-/= page_entries_info @students
+/= render :partial => 'gaku/shared/external_school_record', :collection => Gaku::ExternalSchoolRecord.all, :as => :external_school_record

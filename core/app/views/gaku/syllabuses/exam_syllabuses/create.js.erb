@@ -1,11 +1,11 @@
 <%- if @exam_syllabus.errors.any? %>
-	$('#new-existing-exam-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @exam_syllabus}) %>');
+	$('#new-existing-exam-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @exam_syllabus.exam}) %>');
 <%- else %>
 	$('#new-existing-exam').html('<%= render_js_partial("gaku/syllabuses/exams/select_form", {:syllabus => @syllabus}) %>');
-	$('#new-existing-exam').slideToggle();
+	$('#new-existing-exam').slide();
 	$('#new-existing-exam-link').show()
 
-	$('.exams-count').html('<%= print_count(@count, t_exam_list) %>');
-  $('#syllabus-exams-index tbody').append('<%= render_js_partial("gaku/syllabuses/exams/exam", {:exam_syllabus => @syllabus.exam_syllabuses.last}) %>');
+	$('.exams-count').html('<%= print_count(@syllabus.reload.exams_count, t_exam_list) %>');
+  $('#syllabus-exams-index tbody').append('<%= render_js_partial("gaku/syllabuses/exams/exam", {:exam => @exam_syllabus.exam}) %>');
 	showNotice("<%= render_flash %>");
 <% end %>

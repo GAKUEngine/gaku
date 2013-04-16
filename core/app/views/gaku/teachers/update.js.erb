@@ -1,0 +1,4 @@
+$('tr#teacher-<%= @teacher.id %>').html('<%= render_js_partial("teacher_unit", {:teacher => @teacher}) %>'); // update from index
+$('.teacher-index').html('<%= render_js_partial("show_table", {:teacher => @teacher}) %>'); //update from show
+$('#edit-teacher-modal').modal('hide');
+showNotice("<%= render_flash %>");

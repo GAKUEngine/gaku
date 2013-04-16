@@ -4,7 +4,7 @@ class CreateGakuSemestersTable < ActiveRecord::Migration
       t.date :starting
  	    t.date :ending
 
- 	    t.references :class_group
+      t.references :school_year
 
  	    t.timestamps
  	  end

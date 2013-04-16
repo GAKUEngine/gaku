@@ -26,7 +26,8 @@ module Gaku
 
       @path_to_exam = admin_admission_phase_path(:id => params[:admission_phase_id])
 
-      # raise @path_to_exam.inspect
+      #exam_portions need reload to properly include exam_portion_score in as_json
+      @exams.each { |exam| exam.exam_portions.reload }
 
       respond_to do |format|
         format.json { render :json => {
@@ -39,7 +40,8 @@ module Gaku
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
           :attendances => @student_portion_attendance.as_json(:root => true),
-          :path_to_exam => @path_to_exam.to_json
+          :path_to_exam => @path_to_exam.to_json,
+          :completion => @completion
         }}
         format.html { render "gaku/exams/grading" }
       end

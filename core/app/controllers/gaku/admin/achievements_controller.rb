@@ -1,6 +1,9 @@
 module Gaku
   module Admin
     class AchievementsController < Admin::BaseController
+
+      load_and_authorize_resource :class =>  Gaku::Achievement
+
       inherit_resources
       respond_to :js, :html
 

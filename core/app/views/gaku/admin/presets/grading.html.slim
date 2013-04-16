@@ -9,4 +9,4 @@
       = grading_scheme.label t(:'preset.grading.grading_scheme')
       = grading_scheme.text_field :grading_scheme, :value => @preset_hash[:grading_scheme]
   = well_div do
-    = submit_button t(:'preset.save')
+    = submit_button t(:'preset.save'), :id => 'submit-preset'

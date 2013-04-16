@@ -1,6 +1,8 @@
 module Gaku
   class CourseGroupsController < GakuController
 
+    load_and_authorize_resource :class =>  Gaku::CourseGroup
+
     helper_method :sort_column, :sort_direction
 
     inherit_resources

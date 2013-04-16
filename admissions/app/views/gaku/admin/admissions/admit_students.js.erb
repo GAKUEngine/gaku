@@ -1,0 +1,3 @@
+<% @state_students.each do |student| %>
+  $('tr#student-<%= student.id %> td.status').html('<%= t("admissions.admitted_on") + " " + student.admitted.strftime("%d-%b-%Y") %>');
+<% end %>

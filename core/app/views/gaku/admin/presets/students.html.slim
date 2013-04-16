@@ -18,4 +18,4 @@
           = address_city.label t(:'preset.student.city')
           = address_city.text_field :address_city, :value => @preset_hash[:address_city]
   = well_div do
-    = submit_button t(:'preset.save')
+    = submit_button t(:'preset.save'), :id => 'submit-preset'

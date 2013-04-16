@@ -1,9 +1,10 @@
-$('#index-student-achievements tbody').append('<%= render_js_partial("student_achievement", {:student_achievement => @student_achievement}) %>');
-$('.student-achievement-count').html('<%= print_count(@count+1, t_achievement_list) %>');
+$('#student-achievements-index tbody').append('<%= render_js_partial("student_achievement", {:student_achievement => @student_achievement}) %>');
+$('.student-achievements-count').html('<%= print_count(@count+1, t_achievement_list) %>');
+$('#student-achievements-list a').text('<%= escape_javascript(achievements_show(@student.achievements)) %>')
 
 showNotice("<%= render_flash %>");
 
-$('#new-student-achievement').slideToggle()
+$('#new-student-achievement').slide()
 $('#new-student-achievement-link').show();
 
 $('.remote-form').enableValidations();

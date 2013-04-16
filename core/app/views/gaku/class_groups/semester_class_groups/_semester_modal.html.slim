@@ -1,0 +1,6 @@
+= modal_for 'semester-modal' do
+  = modal_header t(:'semester.edit')
+  = modal_form_for [@class_group, @semester_class_group] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @semester_class_group, :nested_id => 'class-group-semester-class-group'

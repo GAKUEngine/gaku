@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Gaku::CourseGroupsController do
 
+  as_admin
+
   let(:course_group) { create(:course_group) }
 
   describe "GET #index" do
@@ -19,7 +21,7 @@ describe Gaku::CourseGroupsController do
       gaku_get :index
       response.should render_template :index
     end
-  end 
+  end
 
   describe 'GET #show' do
     it "assigns the requested course group to @course_group" do
@@ -37,9 +39,9 @@ describe Gaku::CourseGroupsController do
     context "with valid attributes" do
       it "saves the new course group in the db" do
         expect{
-          gaku_post :create, course_group: attributes_for(:course_group)  
+          gaku_post :create, course_group: attributes_for(:course_group)
         }.to change(Gaku::CourseGroup, :count).by 1
-        
+
         controller.should set_the_flash
       end
     end
@@ -48,7 +50,7 @@ describe Gaku::CourseGroupsController do
   describe "PUT #update" do
 
     it "locates the requested @course_group" do
-      gaku_put :update, id: course_group, course_group: attributes_for(:course_group) 
+      gaku_put :update, id: course_group, course_group: attributes_for(:course_group)
       assigns(:course_group).should eq(course_group)
     end
 
@@ -64,10 +66,10 @@ describe Gaku::CourseGroupsController do
   end
 
   describe "DELETE #destroy" do
-    pending "deletes the course group" do   
+    pending "deletes the course group" do
       gaku_delete :destroy, :id => course_group
       expect(course_group.is_deleted).to eq true
-      controller.should set_the_flash  
+      controller.should set_the_flash
     end
   end
 end

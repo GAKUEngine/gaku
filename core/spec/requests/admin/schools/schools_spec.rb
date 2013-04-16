@@ -1,16 +1,17 @@
 require 'spec_helper'
+require 'support/requests/avatarable_spec'
 
 describe 'Admin Schools' do
 
-  stub_authorization!
+  as_admin
 
-  let(:school) { create(:school, :name => 'Varna Technical University') }
+  let(:school) { create(:school, name: 'Varna Technical University') }
 
   before :all do
     set_resource "admin-school"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.admin_schools_path
       click new_link
@@ -19,7 +20,7 @@ describe 'Admin Schools' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'school_name', :with => 'Nagoya University'
+        fill_in 'school_name', with: 'Nagoya University'
         click submit
 
         wait_until_invisible form
@@ -30,25 +31,40 @@ describe 'Admin Schools' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
+
+    it { has_validations? }
   end
 
-  context 'existing', :js => true do
+  context 'shows primary school avatar' do
+
+    before do
+      primary_school = create(:school, is_primary:true)
+      visit gaku.admin_schools_path
+      @file_name = 'school_picture' 
+    end
+    
+    it_behaves_like 'avatarable'  
+    
+  end
+  context 'existing', js: true do
+    
     before do
       school
       visit gaku.admin_schools_path
     end
 
     context 'edit' do
+
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits'  do
-        fill_in 'school_name', :with => 'Sofia Technical University'
+        fill_in 'school_name', with: 'Sofia Technical University'
         click submit
 
         wait_until_invisible modal
@@ -57,17 +73,24 @@ describe 'Admin Schools' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
+
+      it 'has validations' do
+        fill_in 'school_name', with: ''
+        has_validations?
+      end
+
     end
+
     it 'shows' do
       within(table) { click show_link }
       current_path.should eq "/admin/schools/#{school.id}"
     end
 
     context '#edit from show' do
-      school_info  = '.school_info'
+      show_table  = '#school-show-table'
 
       before do
         visit gaku.admin_school_path(school)
@@ -75,18 +98,23 @@ describe 'Admin Schools' do
         wait_until_visible modal
       end
       
-      it 'edits', :js => true do
-        fill_in 'school_name', :with => 'Sofia Technical University'
+      it 'has validations' do
+        fill_in 'school_name', with: ''
+        has_validations?
+      end
+
+      it 'edits', js: true do
+        fill_in 'school_name', with: 'Sofia Technical University'
         click submit
 
         wait_until_invisible modal
 
-        find(school_info).should have_content 'Sofia Technical University'
-        find(school_info).should_not have_content 'Varna Technical University'
+        find(show_table).should have_content 'Sofia Technical University'
+        find(show_table).should_not have_content 'Varna Technical University'
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
     end

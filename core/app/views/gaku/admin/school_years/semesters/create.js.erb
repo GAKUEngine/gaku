@@ -1,0 +1,10 @@
+<%- if @semester.valid? %>
+  $('#admin-school-year-semesters-index tbody').append('<%= render_js_partial("semester", {:semester => @semester}) %>');
+  $('#new-admin-school-year-semester').slide();
+  $('#new-admin-school-year-semester-link').show();
+  showNotice("<%= render_flash %>");
+  $('.admin-school-year-semesters-count').html('<%= print_count(@count+1, t_semester_list) %>');
+  $('#new-admin-school-year-semester-errors').html(' ')
+<%- else %>
+  $('#new-admin-school-year-semester-errors').html('<%= render_js_partial("gaku/shared/errors", {:target => @semester}) %>')
+<% end %>

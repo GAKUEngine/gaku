@@ -1,6 +1,12 @@
 module Gaku
   class Students::SimpleGradesController < GakuController
 
+    #skip_load_and_authorize_resource :only => :index
+    skip_authorization_check
+
+    #load_and_authorize_resource :student, :class => Gaku::Student
+    #load_and_authorize_resource :simple_grade, :through => :student, :class => Gaku::SimpleGrade
+
     inherit_resources
     belongs_to :student
     respond_to :js, :html, :json
@@ -10,9 +16,14 @@ module Gaku
     before_filter :simple_grades, :only => :update
 
 
-     def index
-      @simple_grades = @student.simple_grades
-      respond_with @simple_grades
+    protected
+
+    def collection
+      @simple_grades ||= end_of_association_chain.accessible_by(current_ability)
+    end
+
+    def begin_of_association_chain
+      @student
     end
 
     private

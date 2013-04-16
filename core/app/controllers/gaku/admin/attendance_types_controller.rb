@@ -2,6 +2,8 @@ module Gaku
   module Admin
     class AttendanceTypesController < Admin::BaseController
 
+      load_and_authorize_resource :class =>  Gaku::AttendanceType
+
     	inherit_resources
       respond_to :js, :html, :json
       before_filter :count, :only => [:create, :destroy, :index]

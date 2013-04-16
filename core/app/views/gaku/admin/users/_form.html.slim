@@ -1,0 +1,3 @@
+= remote_form_for [:admin, @user] do |f|
+  = render 'form_fields', :f => f
+  = buttons_for @user, :nested_id => 'admin-user'

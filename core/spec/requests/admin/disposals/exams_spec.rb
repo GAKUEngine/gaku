@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Exams' do
 
-  stub_authorization!
+  as_admin
 
   let(:syllabus) { create(:syllabus) }
   let(:exam) { create(:exam, is_standalone: true ) }
@@ -14,7 +14,7 @@ describe 'Admin Disposals Exams' do
 
   context 'no deleted exams' do
     before do
-      
+
     end
     it 'shows empty table' do
       within(table) do

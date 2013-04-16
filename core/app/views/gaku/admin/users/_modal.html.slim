@@ -1,0 +1,6 @@
+= modal_for 'edit-user-modal' do
+  = modal_header t(:'user.edit')
+  = modal_form_for [:admin, @user] do |f|
+    = modal_body do
+      = render 'form_fields', :f => f
+      = buttons_for @user, :nested_id => 'admin-user'

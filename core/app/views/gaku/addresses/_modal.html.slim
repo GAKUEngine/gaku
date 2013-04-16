@@ -1,0 +1,6 @@
+= modal_for 'edit-address-modal' do
+  = modal_header t(:'address.edit')
+  = modal_form_for [@nested_resources, @addressable, @address].flatten do |f|
+    = modal_body do
+      = render 'gaku/shared/form_fields/address_form_fields', :f => f
+      = buttons_for @address, :nested_id => @resource_name

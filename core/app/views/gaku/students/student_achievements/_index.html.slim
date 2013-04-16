@@ -1,14 +1,14 @@
 = index_header do
     #new-student-achievement.hide
     .pull-left
-      = count_div 'student-achievement-count' do
+      = count_div 'student-achievements-count' do
         = print_count @count, t_achievement_list
     .pull-right
       = ajax_link_to_new 'Add Student Achievement', [:new, @student, :student_achievement], :id => 'new-student-achievement-link'
 
 =hr
 
-= table_for 'index-student-achievements' do
+= table_for 'student-achievements-index' do
   thead
     tr
       =th t(:'achievement.name')

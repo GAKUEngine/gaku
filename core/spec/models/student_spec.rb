@@ -3,74 +3,157 @@ require 'spec_helper'
 describe Gaku::Student do
 
   context "validations" do
-    let(:student) { stub_model(Gaku::Student) }
+
+    it_behaves_like 'person'
+    it_behaves_like 'addressable'
+    it_behaves_like 'notable'
+    it_behaves_like 'contactable'
+    it_behaves_like 'avatarable'
+    it_behaves_like 'thrashable'
 
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
+
     it { should have_many :class_group_enrollments }
     it { should have_many(:class_groups).through(:class_group_enrollments) }
+
     it { should have_many :student_specialties }
     it { should have_many(:specialties).through(:student_specialties) }
-    it { should have_many(:achievements) }
+
+    it { should have_many :achievements }
     it { should have_many(:achievements).through(:student_achievements) }
+
+    it { should have_many :student_guardians}
+    it { should have_many(:guardians).through(:student_guardians) }
+
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
-    it { should have_many :addresses }
-    it { should have_many :contacts }
-    it { should have_many :notes }
     it { should have_many :attendances }
     it { should have_many :achievements }
-    it { should have_many :school_histories }
+    it { should have_many :external_school_records }
     it { should have_many :simple_grades }
 
-    it { should belong_to(:commute_method)}
-    it { should belong_to(:user) }
+    it { should belong_to :commute_method_type }
+    it { should belong_to :user }
     it { should belong_to :scholarship_status }
     it { should belong_to :enrollment_status }
 
-    it { should have_and_belong_to_many(:guardians) }
-
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:surname) }
-
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
 
-    it { should allow_mass_assignment_of(:name) }
-    it { should allow_mass_assignment_of(:surname) }
-    it { should allow_mass_assignment_of(:name_reading) }
-    it { should allow_mass_assignment_of(:surname_reading) }
-    it { should allow_mass_assignment_of(:birth_date) }
-    it { should allow_mass_assignment_of(:gender) }
-    it { should allow_mass_assignment_of(:admitted) }
-    it { should allow_mass_assignment_of(:graduated) }
-    it { should allow_mass_assignment_of(:class_groups) }
-    it { should allow_mass_assignment_of(:class_group_ids) }
-    it { should allow_mass_assignment_of(:class_groups_attributes) }
-    it { should allow_mass_assignment_of(:guardians) }
-    it { should allow_mass_assignment_of(:guardians_attributes) }
-    it { should allow_mass_assignment_of(:picture) }
-    it { should allow_mass_assignment_of(:student_id_number) }
-    it { should allow_mass_assignment_of(:student_foreign_id_number) }
-    it { should allow_mass_assignment_of(:scholarship_status_id) }
-    it { should allow_mass_assignment_of(:enrollment_status_id) }
-    it { should allow_mass_assignment_of(:is_deleted) }
-    it { should_not allow_mass_assignment_of(:user) }
-    it { should_not allow_mass_assignment_of(:user_attributes) }
+    it { should allow_mass_assignment_of :admitted }
+    it { should allow_mass_assignment_of :graduated }
+    it { should allow_mass_assignment_of :class_groups }
+    it { should allow_mass_assignment_of :class_group_ids }
+    it { should allow_mass_assignment_of :class_groups_attributes }
+    it { should allow_mass_assignment_of :guardians }
+    it { should allow_mass_assignment_of :guardians_attributes }
+    it { should allow_mass_assignment_of :student_id_number }
+    it { should allow_mass_assignment_of :student_foreign_id_number }
+    it { should allow_mass_assignment_of :scholarship_status_id }
+    it { should allow_mass_assignment_of :enrollment_status_id }
+  end
 
-    it "errors when name is nil" do
-      student.name = nil
-      student.should_not be_valid
+  context 'counter_cache' do
+
+    let!(:student) { FactoryGirl.create(:student) }
+
+    context 'guardians_count' do
+
+      let(:guardian) { create(:guardian) }
+      let(:student_with_one_guardian) { create(:student_with_one_guardian) }
+
+      it "increments guardians_count" do
+        expect do
+          student.guardians << guardian
+          student.reload
+        end.to change { student.guardians_count }.by 1
+      end
+
+      it "decrements guardians_count" do
+        expect do
+          student_with_one_guardian.guardians.last.destroy
+        end.to change { student_with_one_guardian.reload.guardians_count }.by -1
+      end
     end
 
-    it "errors when surname is nil" do
-      student.surname = nil
-      student.should_not be_valid
+    context 'courses_count' do
+
+      let(:course) { create(:course) }
+      let(:student_with_course) { create(:student, :with_course) }
+
+      it "increments courses_count" do
+        expect do
+          student.courses << course
+          student.reload
+        end.to change { student.courses_count }.by 1
+      end
+
+      it "decrements courses_count" do
+        expect do
+          student_with_course.courses.last.destroy
+        end.to change { student_with_course.reload.courses_count }.by -1
+      end
     end
+
+    context 'addresses_count' do
+
+      let(:address) { build(:address) }
+      let(:student_with_address) { create(:student, :with_address) }
+
+      it "increments addresses_count" do
+        expect do
+          student.addresses << address
+        end.to change { student.reload.addresses_count }.by 1
+      end
+
+      it "decrements addresses_count" do
+        expect do
+          student_with_address.addresses.last.destroy
+        end.to change { student_with_address.reload.addresses_count }.by -1
+      end
+    end
+
+    context 'contacts_count' do
+
+      let(:contact) { build(:contact) }
+      let(:student_with_contact) { create(:student, :with_contact) }
+
+      it "increments contacts_count" do
+        expect do
+          student.contacts << contact
+        end.to change { student.reload.contacts_count }.by 1
+      end
+
+      it "decrements contacts_count" do
+        expect do
+          student_with_contact.contacts.last.destroy
+        end.to change { student_with_contact.reload.contacts_count }.by -1
+      end
+    end
+
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:student_with_note) { create(:student, :with_note) }
+
+      it "increments notes_count" do
+        expect do
+          student.notes << note
+        end.to change { student.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          student_with_note.notes.last.destroy
+        end.to change { student_with_note.reload.notes_count }.by -1
+      end
+    end
+
+
   end
 
   context 'methods' do
-    xit 'enrollment_status'
-    xit 'to_s'
     xit 'scholarship'
     xit 'class_group_widget'
     xit 'seat_number_widget'

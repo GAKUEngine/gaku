@@ -7,17 +7,13 @@
       = th t(:'changes.change')
       = th t(:'changes.from')
       = th t(:'changes.to')
+      = th t(:'changes.user')
       = th t(:'changes.changed_at')
 
   tbody
     - @changes.each do |change|
-      - change.changeset.keys.each do |key|
-        tr
-          td = change.id
-          td = link_to "#{t(:'student.singular')} #{change.joined_resource_id}", student_path(change.joined_resource_id)
-          td = change.event
-          td = key
-          td = change.changeset[key][0]
-          td = change.changeset[key][1]
-          td = change.created_at
+      - if change.event == 'destroy'
+        = render 'deletion', :change => change
+      - else
+        = render 'change', :change => change
 

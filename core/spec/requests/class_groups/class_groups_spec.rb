@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'ClassGroups' do
 
-  stub_authorization!
+  as_admin
+
   let(:class_group){ create(:class_group, :grade => '1', :name => "Not so awesome class group", :homeroom => 'A1') }
 
   before :all do
@@ -12,6 +13,7 @@ describe 'ClassGroups' do
   context 'new', :js => true do
     before do
       visit gaku.class_groups_path
+      
       click new_link
       wait_until_visible submit
     end
@@ -99,6 +101,11 @@ describe 'ClassGroups' do
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
         flash_updated?
+      end
+
+      it 'has validations' do
+        fill_in 'class_group_name', with: ''
+        has_validations?
       end
     end
 

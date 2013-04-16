@@ -1,0 +1,5 @@
+= form_tag( admissions_path, :method => "post", :id => "enroll-to-course-form", :remote => true) do
+  = form.hidden_field :admission_period_id, :value => params[:admission_period_id]
+  = form.hidden_field :admission_method_id, :value => params[:admission_method_id]
+  h4 = "Adding students to admission"
+  = submit_tag t('admissions.add'), :class => 'btn btn-primary'

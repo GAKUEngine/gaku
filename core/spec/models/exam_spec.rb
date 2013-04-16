@@ -2,19 +2,20 @@ require 'spec_helper'
 
 describe Gaku::Exam do
 
-  context "validations" do 
+  context "validations" do
   	let(:exam) { create(:exam) }
+
+    it_behaves_like 'notable'
 
     it { should have_many :exam_scores }
     it { should have_many :exam_portions }
     it { should have_many(:exam_portion_scores).through(:exam_portions) }
-    it { should have_many :exam_syllabuses } 
-    it { should have_many(:syllabuses).through(:exam_syllabuses) } 
-    it { should have_many :notes }
-    it { should have_many :attendances } 
+    it { should have_many :exam_syllabuses }
+    it { should have_many(:syllabuses).through(:exam_syllabuses) }
+    it { should have_many :attendances }
 
     it { should belong_to :grading_method }
-    
+
     it { should validate_presence_of(:name) }
 
     it { should validate_numericality_of(:weight) }
@@ -47,9 +48,33 @@ describe Gaku::Exam do
     end
   end
 
+
+  context 'counter_cache' do
+
+    let!(:exam) { FactoryGirl.create(:exam) }
+
+    context 'notes_count' do
+
+      let(:note) { build(:note) }
+      let(:exam_with_note) { create(:exam, :with_note) }
+
+      it "increments notes_count" do
+        expect do
+          exam.notes << note
+        end.to change { exam.reload.notes_count }.by 1
+      end
+
+      it "decrements notes_count" do
+        expect do
+          exam_with_note.notes.last.destroy
+        end.to change { exam_with_note.reload.notes_count }.by -1
+      end
+    end
+  end
+
   context 'methods' do
     xit 'total_weight'
     xit 'max_score'
   end
-  
+
 end

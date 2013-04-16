@@ -16,7 +16,11 @@ require 'csv'
 require 'sidekiq/web'
 require 'paper_trail'
 require 'globalize3'
-
+require 'decent_exposure'
+require 'thinreports-rails'
+require 'bootstrap-sass'
+require 'bootstrap-editable-rails'
+require 'nested_form'
 
 module Gaku
 

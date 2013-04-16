@@ -8,12 +8,20 @@
   .row-fluid
     = f.fields_for :admission_phase_states do |state_form|
       .well.state
-        = state_form.text_field :name, :label => t(:'admission_phase_states.name')
-        = state_form.check_box :can_progress, :label => t(:'admission_phase_states.can_progress')
-        = state_form.check_box :can_admit, :label => t(:'admission_phase_states.can_admit')
-        = state_form.check_box :auto_progress, :label => t(:'admission_phase_states.auto_progress')
-        = state_form.check_box :auto_admit, :label => t(:'admission_phase_states.auto_admit')
-        = state_form.link_to_remove t(:'admission_phase_states.remove'), :class => 'btn btn-danger'
+        - if state_form.object.new_record?
+          = state_form.text_field :name, :label => t(:'admission_phase_states.name')
+          = state_form.check_box :can_progress, :label => t(:'admission_phase_states.can_progress')
+          = state_form.check_box :can_admit, :label => t(:'admission_phase_states.can_admit')
+          = state_form.check_box :auto_progress, :label => t(:'admission_phase_states.auto_progress')
+          = state_form.check_box :auto_admit, :label => t(:'admission_phase_states.auto_admit')
+          = state_form.link_to_remove t(:'admission_phase_states.remove'), :class => 'btn btn-danger'
+        - else
+          .div[id="admission-phase-state-#{state_form.object.id.to_s}" class="admission-phase-state"]
+            .div[id="admission-phase-state-#{state_form.object.id.to_s}-name"]
+              = state_form.object.name
+            .div[id="admission-phase-state-#{state_form.object.id.to_s}-controls"]
+              = ajax_link_to_edit [:edit, :admin, @admission_method, @admission_phase, state_form.object]
+              = state_form.link_to_remove t(:'admission_phase_states.remove'), :class => 'btn btn-danger'
       = hr
   p= f.link_to_add t(:'admission_phase_states.add'), :admission_phase_states, :class => 'btn'
 .span12.well[style="margin-left: 0px; margin-top: 20px;"]

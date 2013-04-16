@@ -1,0 +1,7 @@
+$('#<%= @resource_name.pluralize %>-index tbody tr').each(function(){
+  $(this).children('td.primary_address').find('a').removeClass('btn-primary')
+});
+
+$("#address-<%= @address.id %>").children('td.primary_address')
+                                                .find('a')
+                                                .addClass('btn-primary')

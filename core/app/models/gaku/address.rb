@@ -1,8 +1,8 @@
-module Gaku
+  module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-    belongs_to :addressable, polymorphic: true
+    belongs_to :addressable, polymorphic: true, :counter_cache => true
 
     has_paper_trail :on => [:update, :destroy],
                     :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
@@ -15,14 +15,29 @@ module Gaku
 
     attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name,
                     :is_deleted, :past, :country,
-                    :country_id, :state_id
+                    :country_id, :state_id, :is_primary
 
     before_save :ensure_first_is_primary, :on => :create
+
+    after_destroy :reset_counter_cache
 
 
     def make_primary
       self.addressable.addresses.update_all({:is_primary => false}, ['id != ?', id] )
       self.update_attribute(:is_primary, true)
+      if self.addressable.has_attribute?(:primary_address)
+        self.addressable.update_attribute(:primary_address, self.addressable.address_widget)
+      end
+    end
+
+    def soft_delete
+      self.update_attributes(:is_deleted => true, :is_primary => false)
+      addressable.class.decrement_counter(:addresses_count, addressable.id)
+    end
+
+    def recover
+      self.update_attribute(:is_deleted, false)
+      addressable.class.increment_counter(:addresses_count, addressable.id)
     end
 
     def primary?
@@ -37,17 +52,19 @@ module Gaku
       self.addressable_id
     end
 
-
     def state_text
       state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
     end
-
 
     def empty?
       attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
     end
 
     private
+
+    def reset_counter_cache
+      addressable.class.reset_counters(addressable.id, :addresses) unless addressable.instance_of? Gaku::Campus
+    end
 
     def ensure_first_is_primary
       if self.addressable.respond_to?(:addresses)
