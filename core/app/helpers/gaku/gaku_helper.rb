@@ -139,7 +139,7 @@ module Gaku
     end
 
     def required_field
-      ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe
+      content_tag :span, t(:required), :class => 'label label-important pull-right'
     end
 
     def print_count(count, text)
@@ -271,6 +271,10 @@ module Gaku
 
     def calendar_icon
       content_tag(:i, nil, :class => ' icon-calendar')
+    end
+
+    def nested_header(text)
+      content_tag :h4, text
     end
 
   end
