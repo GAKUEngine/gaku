@@ -71,11 +71,7 @@ describe 'Student Achievements' do
       end
 
       it 'cancel editing' do
-<<<<<<< HEAD
-        within ('#index-student-achievements-modal') {click '.back-link' }
-=======
-        click '.back-modal-link'
->>>>>>> 86a374c37dd0a10e6c33b9f2c40359bbedb62000
+        within('#index-student-achievements-modal') {click '.back-modal-link' }
         within(table) { page.should have_content(achievement) }
       end
     end
