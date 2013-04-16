@@ -7,12 +7,15 @@ module Gaku
     has_many :program_levels
     has_many :levels, :through => :program_levels
 
-    has_many :syllabuses, :class_name => "Gaku::ProgramSyllabus"
+    has_many :program_syllabuses
+    has_many :syllabuses, :through => :program_syllabuses
 
     belongs_to :school
 
     attr_accessible :name, :description
 
     validates :name, :presence => true
+
+    accepts_nested_attributes_for :program_levels, :program_specialties, :program_syllabuses, :allow_destroy => true
   end
 end
