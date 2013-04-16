@@ -17,6 +17,7 @@ module Gaku
     before_filter :count,             :only => [:create, :destroy, :index]
     before_filter :selected_students, :only => [:create,:index]
     before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
+    after_filter  :make_enrolled,     :only => [:create]
 
     def index
       @enrolled_students = params[:enrolled_students]
@@ -152,6 +153,12 @@ module Gaku
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+
+    def make_enrolled
+      if @student.valid?
+        @student.make_enrolled
+      end
     end
   end
 end
