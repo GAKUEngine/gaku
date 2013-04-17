@@ -161,5 +161,9 @@ module Gaku
       t(:'semester.list')
     end
 
+    def t_program_list
+      t(:'program.list')
+    end
+
   end
 end

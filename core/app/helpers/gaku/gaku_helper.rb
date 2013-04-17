@@ -115,6 +115,12 @@ module Gaku
       Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id]}
     end
 
+    def levels
+      Gaku::Level.all.collect { |l| [l.name, l.id]}
+    end
+
+
+
     def roles
       Gaku::Role.all
     end
