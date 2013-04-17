@@ -7,11 +7,12 @@
     #school-show-table
       = render 'show_table', :school => @school
 
-
     = hr
-    br/
+
     = render 'gaku/admin/schools/campuses/campuses'
-    br/
+    br
+    = render 'gaku/admin/schools/programs/programs'
+    br
 
     = well_div do
       - if params[:action] == 'school_details'
