@@ -12,7 +12,7 @@ module Gaku
 
     belongs_to :school
 
-    attr_accessible :name, :description
+    attr_accessible :name, :description, :program_specialties_attributes, :program_levels_attributes, :program_syllabuses_attributes
 
     validates :name, :presence => true
 
