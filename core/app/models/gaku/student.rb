@@ -60,10 +60,10 @@ module Gaku
     #default_scope includes(:enrollment_status).where('gaku_enrollment_statuses.is_active = ?', true)
 
     def make_enrolled
-      update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
-                                                                    code:"enrolled",
-                                                                    is_active:true, 
-                                                                    immutable:true).first_or_create!.id)
+      enrollment_status = Gaku::EnrollmentStatus.where( code:"enrolled",
+                                                        is_active:true, 
+                                                        immutable:true).first_or_create!.id
+      update_column(:enrollment_status_id, enrollment_status)
       save
     end
 

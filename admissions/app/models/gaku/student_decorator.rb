@@ -9,7 +9,7 @@ module Gaku
     #validates :enrollment_status_id, presence: true
 
     def student
-      Student.unscoped{ super }
+      Student.unscoped { super }
     end
 
     def self.only_applicants

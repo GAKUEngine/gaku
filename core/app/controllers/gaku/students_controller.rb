@@ -152,13 +152,15 @@ module Gaku
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      if %w[asc desc].include?(params[:direction])
+        params[:direction] 
+      else
+        'asc'
+       end
     end
 
     def make_enrolled
-      if @student.valid?
-        @student.make_enrolled
-      end
+      @student.make_enrolled if @student.valid?
     end
   end
 end
