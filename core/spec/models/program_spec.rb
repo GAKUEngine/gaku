@@ -9,7 +9,7 @@ require 'spec_helper'
     it { should have_many :program_specialties }
     it { should have_many(:specialties).through(:program_specialties) }
 
-    it { should have_many(:program_syllabuses) }
+    it { should have_many :program_syllabuses }
     it { should have_many(:syllabuses).through(:program_syllabuses) }
 
     it { should belong_to :school }

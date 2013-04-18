@@ -229,9 +229,9 @@ Gaku::Core::Engine.routes.draw do
     resources :schools, :controller => 'admin/schools' do
       resources :programs, :controller => 'admin/schools/programs' do
         member do
-          get 'show_program_levels'
-          get 'show_program_syllabuses'
-          get 'show_program_specialties'
+          get :show_program_levels
+          get :show_program_syllabuses
+          get :show_program_specialties
         end
       end
       resources :campuses, :controller => 'admin/schools/campuses' do
