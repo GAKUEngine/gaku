@@ -68,6 +68,15 @@ module Gaku
       return progress_success
     end
 
+    def assign_admission_phase_record(admission_phase, admission_phase_state)
+      admission_phase_record = AdmissionPhaseRecord.create(
+                                                :admission_phase_id => admission_phase.id,
+                                                :admission_phase_state_id => admission_phase_state.id,
+                                                :admission_id => self.id)
+
+      update_column(:admission_phase_record_id, admission_phase_record.id)
+    end
+
     def student
       Student.unscoped{ super }
     end
