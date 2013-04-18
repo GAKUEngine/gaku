@@ -41,56 +41,25 @@ module Gaku
       end
 
       def change_student_state
-
         if params[:admit_students].present?
           admit_students(@state_students)
-
         elsif params[:progress_students].present?
           state = AdmissionPhaseState.find(params[:state_id])
           phase = state.admission_phase
           next_phase = AdmissionPhase.find_next_phase(phase)
           @new_state = next_phase.admission_phase_states.first
-          @progress_success = []
-          @state_students.each  do |student|
-            success = student.admission.progress_to_next_phase(phase)
-            if success
-              @progress_success << student.id
-            end
-          end
+          @progress_success = Admission.progress_students(@state_students, phase)
         elsif params[:remove_students].present?
-          state = AdmissionPhaseState.find(params[:current_state])
+          state = AdmissionPhaseState.find(params[:current_state_id])
           @current_state_id = state.id
           phase = state.admission_phase
-          @remove_success = []
-          @state_students.each  do |student|
-            record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
-            success = record.update_attributes(:is_deleted => true)
-            if success
-              @remove_success << student.id
-            end
-          end
+          @remove_success = Admission.remove_students(@state_students, phase)
         else
+          @old_state = AdmissionPhaseState.find(params[:current_state_id])
           @next_state = AdmissionPhaseState.find(params[:state_id])
-
-          @state_students.each  do |student|
-            phase = @next_state.admission_phase
-            @admission_record = student.admission.find_record_by_phase(phase.id)
-            @old_state_id = @admission_record.admission_phase_state_id
-
-            @admission_method = phase.admission_method
-
-            unless (@next_state.id == @old_state_id)
-              if @next_state.auto_admit == true
-                student.admission.admit(student)
-              elsif @next_state.auto_progress == true
-                next_phase = AdmissionPhase.find_next_phase(phase)
-                @new_state = next_phase.admission_phase_states.first
-                @progress_success = student.admission.progress_to_next_phase(phase)
-              end
-              @admission_record.admission_phase_state_id = @next_state.id
-              @admission_record.save
-            end
-          end
+          phase = @next_state.admission_phase
+          @admission_method = phase.admission_method
+          @progress_success = Admission.change_students_state(@state_students, phase, @old_state, @next_state)
           render 'change_student_state'
         end
       end
