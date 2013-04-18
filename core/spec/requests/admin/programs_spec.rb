@@ -4,20 +4,13 @@ describe 'Admin Program' do
 
   as_admin
 
-  let(:school) { create(:school)}
-  let(:program) { create(:program, :school => school) }
+  let!(:school) { create(:school) }
 
-  let(:level) { create(:level) }
-  let(:syllabus) { create(:syllabus) }
-  let(:specialty) { create(:specialty) }
+  let!(:level) { create(:level, :name => 'Ruby Ninja Level2') }
+  let!(:syllabus) { create(:syllabus, :name => 'Ruby Ninja Championship') }
+  let!(:specialty) { create(:specialty, :name => 'Ruby throw exception') }
 
-  let(:level2) { create(:level, :name => 'Ruby Ninja Level2') }
-  let(:syllabus2) { create(:syllabus, :name => 'Ruby Ninja Championship') }
-  let(:specialty2) { create(:specialty, :name => 'Ruby throw exception') }
-
-  let(:program_level) { create(:program_level, :level => level, :program => program) }
-  let(:program_syllabus) { create(:program_syllabus, :syllabus => syllabus, :program => program) }
-  let(:program_specialty) { create(:program_specialty, :specialty => specialty, :program => program) }
+  let(:program) { create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, :school => school) }
 
   before :all do
     set_resource "admin-school-program"
@@ -25,10 +18,6 @@ describe 'Admin Program' do
 
   context 'new', :js => true do
     before do
-      school
-      level
-      specialty
-      syllabus
       visit gaku.admin_school_path(school)
       click new_link
       wait_until_visible submit
@@ -52,15 +41,17 @@ describe 'Admin Program' do
         wait_until_invisible form
       end.to change(Gaku::Program, :count).by(1)
 
-      Gaku::ProgramLevel.count.should eq(1)
-      Gaku::ProgramSyllabus.count.should eq(1)
-      Gaku::ProgramSpecialty.count.should eq(1)
+      Gaku::Program.last.tap do |p|
+        p.syllabuses.count.should eq(1)
+        p.levels.count.should eq(1)
+        p.specialties.count.should eq(1)
+      end
 
       page.should have_content 'Rails Ninja'
       within(count_div) { page.should have_content 'Programs list(1)' }
       flash_created?
 
-      ['level', 'syllabus', 'specialty'].each do |resource|
+      %w(level syllabus specialty).each do |resource|
         click ".program-#{resource.pluralize}-list"
         within("#show-program-#{resource.pluralize}-modal") do
           page.should have_content(send(resource).name)
@@ -77,15 +68,12 @@ describe 'Admin Program' do
 
   context 'existing', :js => true do
     before do
-      school
       program
-      level;syllabus; specialty
-      level2; syllabus2; specialty2
-      program_level; program_syllabus; program_specialty
       visit gaku.admin_school_path(school)
     end
 
     context 'edit' do
+
       before do
         within(table) { click edit_link }
         wait_until_visible modal
@@ -96,22 +84,20 @@ describe 'Admin Program' do
         fill_in 'program_name', :with => 'Rails Samurai'
         fill_in 'program_description', :with => 'Rails Ninja Camp'
 
-        select  specialty2.name, :from => 'program-specialty-select'
-
-        select  level2.name, :from => 'program-level-select'
-
-        select  syllabus2.name, :from => 'program-syllabus-select'
+        select  specialty.name, :from => 'program-specialty-select'
+        select  level.name, :from => 'program-level-select'
+        select  syllabus.name, :from => 'program-syllabus-select'
 
         click submit
         wait_until_invisible form
 
-        within(table) {page.should have_content 'Rails Samurai' }
+        within(table) { page.should have_content 'Rails Samurai' }
         flash_updated?
 
-        ['level', 'syllabus', 'specialty'].each do |resource|
+        %w(level syllabus specialty).each do |resource|
           click ".program-#{resource.pluralize}-list"
           within("#show-program-#{resource.pluralize}-modal") do
-            page.should have_content(send(resource + 2.to_s).name)
+            page.should have_content(send(resource.to_s).name)
             click close
           end
         end
@@ -121,15 +107,6 @@ describe 'Admin Program' do
       it 'cancels editting', :cancel => true do
         ensure_cancel_modal_is_working
       end
-    end
-
-    context 'delete' do
-      before do
-        school
-        program
-        visit gaku.admin_school_path(school)
-      end
-
     end
 
     it 'deletes', :js => true do
