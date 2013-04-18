@@ -1,15 +1,15 @@
 = remote_nested_form_for [:admin, @school, @program] do |f|
   = render 'form_fields', :f => f
 
-  = render 'program_specialty_form_fields', :f => f
+  = render 'gaku/admin/schools/programs/program_levels/program_level_form_fields', :f => f
 
   = hr
 
-  = render 'program_level_form_fields', :f => f
+  = render 'gaku/admin/schools/programs/program_syllabuses/program_syllabus_form_fields', :f => f
 
   = hr
 
-  = render 'program_syllabus_form_fields', :f => f
+  = render 'gaku/admin/schools/programs/program_specialties/program_specialty_form_fields', :f => f
 
   br
 
