@@ -76,6 +76,36 @@ module Gaku
       return admission_phase_record
     end
 
+    def self.create_multiple_admissions(students, admission_period, admission_method, applicant_number)
+      err_admissions = []
+      admissions = []
+      admission_records = []
+      result = {}
+      students.each { |student|
+        student_id = student.split("-")[1].to_i
+        admission = Admission.new( admission_period_id: admission_period.id,
+                                    admission_method_id: admission_method.id,
+                                    student_id: student_id,
+                                    applicant_number: applicant_number )
+        if  admission.save
+          admissions << admission
+          # TODO change the selected phase
+          admission_phase = admission.admission_method.admission_phases.first
+          admission_phase_state = admission_phase.get_default_state
+          result[:admission_phase_state] = admission_phase_state
+          admission_records << admission.assign_admission_phase_record(admission_phase, admission_phase_state)
+          admission.change_student_to_applicant
+          applicant_number += 1
+        else
+          err_admissions << admission
+        end
+      }
+      result[:admissions] = admissions
+      result[:admission_records] =  admission_records
+      result[:err_admissions] = err_admissions 
+      return result
+    end
+
     def student
       Student.unscoped{ super }
     end

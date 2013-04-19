@@ -115,31 +115,14 @@ module Gaku
       end
 
       def create_multiple
-        err_admissions = []
-        admissions = []
-        @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
         @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
         applicant_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
-   
-        @selected_students.each { |student|
-          student_id = student.split("-")[1].to_i
-          admission = Admission.new( admission_period_id: @admission_period.id,
-                                      admission_method_id: @admission_method.id,
-                                      student_id: student_id,
-                                      applicant_number: applicant_number )
-          if  admission.save
-            admissions << admission
-            # TODO change the selected phase
-            admission_phase = admission.admission_method.admission_phases.first
-            @admission_phase_state = admission_phase.get_default_state
-            @admission_records << admission.assign_admission_phase_record(admission_phase, @admission_phase_state)
-            admission.change_student_to_applicant
-            applicant_number += 1
-          else
-            err_admissions << admission
-          end
-        }
+        result = Admission.create_multiple_admissions(@selected_students, @admission_period, @admission_method, applicant_number)
+        admissions = result[:admissions]
+        @admission_records = result[:admission_records]
+        @admission_phase_state = result[:admission_phase_state]
+        err_admissions = result[:err_admissions]
         show_flashes(admissions,err_admissions)
       end
 
