@@ -73,6 +73,7 @@ module Gaku
                                                 :admission_id => self.id)
 
       update_column(:admission_phase_record_id, admission_phase_record.id)
+      return admission_phase_record
     end
 
     def student
