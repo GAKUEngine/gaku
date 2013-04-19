@@ -27,7 +27,7 @@ module Gaku
       return if school_year.nil?
       school_year_range = school_year.starting..school_year.ending
       unless school_year_range.cover?(starting) && school_year_range.cover?(ending)
-        errors.add(:ending, I18n.t('semester.between'))
+        errors.add(:base, I18n.t('semester.between'))
       end
     end
   end

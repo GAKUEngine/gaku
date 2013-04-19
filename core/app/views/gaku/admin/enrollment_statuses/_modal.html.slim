@@ -3,5 +3,6 @@
   = modal_form_for [:admin, @enrollment_status] do |f|
     = modal_body do
       = f.text_field :name, :label => t(:'enrollment_status.name')
+      = f.text_field :code, :label => t(:'enrollment_status.code')
       = f.check_box :is_active, :label => t(:'enrollment_status.active')
       = buttons_for @enrollment_status, :nested_id => 'admin-enrollment-status'

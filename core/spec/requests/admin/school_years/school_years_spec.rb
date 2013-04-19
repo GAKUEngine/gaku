@@ -28,11 +28,27 @@ describe 'Admin School Years' do
       within(count_div) { page.should have_content 'School Years list(1)' }
       flash_created?
     end
+    context 'validations' do
 
-    it 'has validations' do
-      fill_in 'school_year_starting', :with => ''
-      fill_in 'school_year_ending', :with => ''
-      has_validations?
+      it 'has ending after starting validation' do
+        fill_in 'school_year_starting', :with => Date.parse('2013-3-8')
+        fill_in 'school_year_ending', :with => Date.parse('2013-3-8')
+        click submit
+        page.should have_content 'should be after Starting'
+
+        fill_in 'school_year_starting', :with => Date.parse('2013-3-8')
+        fill_in 'school_year_ending', :with => Date.parse('2013-3-9')
+        click submit
+        page.should_not have_content 'should be after Starting'
+        flash_created?
+      end
+
+
+      it 'has validations' do
+        fill_in 'school_year_starting', :with => ''
+        fill_in 'school_year_ending', :with => ''
+        has_validations?
+      end
     end
 
     it 'cancels creating', :cancel => true do
@@ -69,10 +85,26 @@ describe 'Admin School Years' do
         ensure_cancel_modal_is_working
       end
 
-      it 'has validations' do
-        fill_in 'school_year_starting', :with => ''
-        fill_in 'school_year_ending', :with => ''
-        has_validations?
+      context 'validations' do
+        it "validate ending before starting" do
+          fill_in 'school_year_starting', :with => Date.parse('2013-3-8')
+          fill_in 'school_year_ending', :with => Date.parse('2013-3-8')
+          click submit
+          page.should have_content 'should be after Starting'
+
+          fill_in 'school_year_starting', :with => Date.parse('2013-3-8')
+          fill_in 'school_year_ending', :with => Date.parse('2013-3-9')
+          click submit
+          page.should_not have_content 'should be after Starting'
+          flash_updated?
+        end
+
+        it 'has validations' do
+          fill_in 'school_year_starting', :with => ''
+          fill_in 'school_year_ending', :with => ''
+          has_validations?
+        end
+
       end
 
       it 'deletes', :js => true do

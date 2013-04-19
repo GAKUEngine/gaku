@@ -40,6 +40,20 @@ describe 'ClassGroup Semesters' do
       flash_created?
     end
 
+    it 'presence validations'  do
+      has_validations?
+    end
+
+    it 'uniqness scope validations'  do
+      semester_class_group
+      expect do
+        select "#{semester.starting} / #{semester.ending}", :from => 'semester_class_group_semester_id'
+        click submit
+      end.to change(Gaku::SemesterClassGroup, :count).by(0)
+      page.should have_content('Semester already added to Class Group')
+    end
+
+
     it 'cancels creating', :cancel => true do
       ensure_cancel_creating_is_working
     end
