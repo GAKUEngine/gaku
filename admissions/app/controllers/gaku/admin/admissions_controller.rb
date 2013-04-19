@@ -96,16 +96,17 @@ module Gaku
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
         @search = Student.search(params[:q])
-        @students = @search.result
         @students = @search.result.page(params[:page]).per(Preset.students_per_page)
-
         @admissions = Admission.all
-
-        @enrolled_students = Admission.where(:admission_period_id => params[:admission_period_id], :admission_method_id => params[:admission_method_id]).map {|i| i.student_id.to_s }
-
+        query_params = {  :admission_period_id => params[:admission_period_id], 
+                          :admission_method_id => params[:admission_method_id] }
+        @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }
         @method_admissions = Admission.where(admission_method_id: @admission_method.id)
-        @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
-        
+        if @applicant_max_number = !@method_admissions.empty?
+          (@method_admissions.map(&:applicant_number).max + 1)
+        else
+          @admission_method.starting_applicant_number
+        end
         respond_to do |format|
           format.js
         end
