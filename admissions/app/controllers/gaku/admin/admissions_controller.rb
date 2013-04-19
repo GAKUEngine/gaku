@@ -117,7 +117,8 @@ module Gaku
         admissions = []
         @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
-        applicant_number = params[:applicant_max_number].to_i
+        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        applicant_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
    
         @selected_students.each { |student|
           student_id = student.split("-")[1].to_i
@@ -129,14 +130,8 @@ module Gaku
             admissions << admission
             # TODO change the selected phase
             admission_phase = admission.admission_method.admission_phases.first
-            # TODO change the selected phase state
-            @admission_phase_state = admission_phase.admission_phase_states.first
-            @admission_records << AdmissionPhaseRecord.create(
-                                        :admission_phase_id => admission_phase.id,
-                                        :admission_phase_state_id => @admission_phase_state.id,
-                                        :admission_id => admission.id)
-            admission.update_column(:admission_phase_record_id, @admission_records.last.id)
-
+            @admission_phase_state = admission_phase.get_default_state
+            @admission_records << admission.assign_admission_phase_record(admission_phase, @admission_phase_state)
             admission.change_student_to_applicant
             applicant_number += 1
           else
