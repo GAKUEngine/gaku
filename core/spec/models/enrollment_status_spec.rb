@@ -9,6 +9,6 @@ describe Gaku::EnrollmentStatus do
     it { should allow_mass_assignment_of :is_active }
     it { should allow_mass_assignment_of :immutable }
 
-    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:code) }
   end
 end

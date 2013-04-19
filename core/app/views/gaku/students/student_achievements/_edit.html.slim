@@ -4,5 +4,5 @@
     =render 'form_fields', :f => f
     .row-fluid
       .span12
-        =submit_button t(:'student_achievement.save') , :id => "submit-student-achievement-button"
-        =ajax_link_to_back [@student, :student_achievements]
+        = submit_button t(:'student_achievement.save') , :id => "submit-student-achievement-button"
+        = ajax_link_to_back [@student, :student_achievements]

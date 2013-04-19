@@ -1,2 +1,3 @@
-tr id="semester-#{semester.id}"
-  = render 'gaku/admin/school_years/semesters/fields', :semester => semester
+-unless semester.new_record? && semester.nil? && !semester
+  tr id="semester-#{semester.id}"
+    = render 'gaku/admin/school_years/semesters/fields', :semester => semester

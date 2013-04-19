@@ -26,7 +26,7 @@ describe Gaku::Admin::EnrollmentStatusesController do
     context "with valid attributes" do
       it "saves the new enrollment status in the db" do
         expect do
-          gaku_post :create, enrollment_status: attributes_for(:enrollment_status, name: "Edited name")
+          gaku_post :create, enrollment_status: attributes_for(:enrollment_status, code: "abc")
         end.to change(Gaku::EnrollmentStatus, :count).by 1
 
         controller.should set_the_flash
@@ -35,7 +35,7 @@ describe Gaku::Admin::EnrollmentStatusesController do
     context "with invalid attributes" do
       it "does not save the new contact type in the db" do
         expect do
-          gaku_js_post :create, enrollment_status: attributes_for(:enrollment_status, name: "")
+          gaku_js_post :create, enrollment_status: attributes_for(:enrollment_status, code: "")
         end.to_not change(Gaku::EnrollmentStatus, :count)
       end
     end
@@ -58,18 +58,18 @@ describe Gaku::Admin::EnrollmentStatusesController do
     context "valid attributes" do
       it "changes enrollment status attributes" do
         gaku_js_put :update, id: enrollment_status,
-                             enrollment_status: attributes_for(:enrollment_status, name: "Edited name")
+                             enrollment_status: attributes_for(:enrollment_status, code: "Edited code")
         enrollment_status.reload
-        enrollment_status.name.should eq "Edited name"
+        enrollment_status.code.should eq "Edited code"
       end
     end
 
     context "invalid attributes" do
       it "does not change contact type's attributes" do
         gaku_js_put :update, id: enrollment_status,
-                    enrollment_status: attributes_for(:enrollment_status, name: "")
+                    enrollment_status: attributes_for(:enrollment_status, code: "")
         enrollment_status.reload
-        enrollment_status.name.should_not eq ""
+        enrollment_status.code.should_not eq ""
       end
     end
   end
