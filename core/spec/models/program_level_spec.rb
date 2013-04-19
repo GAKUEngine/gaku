@@ -8,6 +8,8 @@ require 'spec_helper'
 
     it { should allow_mass_assignment_of :program_id }
     it { should allow_mass_assignment_of :level_id }
+
+    it { should validate_presence_of :level_id }
   end
 
 end

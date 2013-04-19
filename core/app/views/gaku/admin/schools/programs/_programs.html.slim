@@ -1,0 +1,25 @@
+#admin-school-programs
+  = index_header do
+    #new-admin-school-program.hide
+
+    .pull-left
+      = count_div 'admin-school-programs-count' do
+        = print_count @school.programs.count, t_program_list
+    .pull-right
+      = ajax_link_to_new t(:'program.add'), [:new, :admin, @school, :program], :id => 'new-admin-school-program-link'
+  = hr
+
+  = index_body do
+    = table_for 'admin-school-programs-index' do
+      thead
+        tr
+          = th t(:'program.name')
+          = th t(:'program.description')
+          = th t(:'program.levels')
+          = th t(:'syllabus.plural')
+          = th t(:'specialty.plural')
+
+
+          = th_actions 3
+      tbody
+        = render :partial => 'gaku/admin/schools/programs/program', :collection => @school.programs, :as => :program
