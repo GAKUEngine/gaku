@@ -140,9 +140,12 @@ module Gaku
 
           if params[:admission_period_id]
             @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-          end
-          if @admission_period.nil? && !@admission_periods.nil?
+          elsif !@admission_periods.nil?
             @admission_period = @admission_periods.last
+          end
+
+          if @admission_period
+            @admission_methods = @admission_period.admission_methods
           end
 
           if params[:admission_method_id]
@@ -152,14 +155,10 @@ module Gaku
               @admission_method = @admission_period.admission_methods.first
             end
           end
-
-          if @admission_period
-            @admission_methods = @admission_period.admission_methods
-          end
+          
           @admission_params = {}
           @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
           @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
-
         end
 
         def load_before_index
