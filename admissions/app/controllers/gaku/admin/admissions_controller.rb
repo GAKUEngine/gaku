@@ -60,7 +60,7 @@ module Gaku
           phase = @next_state.admission_phase
           @admission_method = phase.admission_method
           next_phase = AdmissionPhase.find_next_phase(phase)
-          @new_state = next_phase.admission_phase_states.first
+          @new_state = next_phase.admission_phase_states.first if @next_state.auto_progress == true
           @progress_success = Admission.change_students_state(@state_students, phase, @old_state, @next_state)
           render 'change_student_state'
         end
