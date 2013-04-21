@@ -7,7 +7,7 @@ GAKU Engine is a student/assignment focused student and school management system
 
 What does the name mean?
 ------------------------
-The kanji for "learning" is 学[gaku]. So literally GAKU Engine alone means "Learning Engine". The full Japanese name further uses "ateji" to make the name into 学園陣, which is broken down into 学園[gakuen] "academic" and 陣[jin] "encampment/battle formation". Either way it's always read the same, so take your pick of the meaning: "Learning Engine" or "Academic Encampment".  
+The kanji for "learning" is 学[gaku]. So literally GAKU Engine alone means "Learning Engine". The full Japanese name further uses "ateji" to make the name into 学園陣, which is broken down into 学園[gakuen] "academic" and 陣[jin] "encampment/battle formation". Either way it's always read the same, so take your pick of the meaning: "Learning Engine" or "Academic Encampment".
 
 For the English we also chose to treat GAKU as an acronym, which can be seen above. You know, because confusing acronyms are radical to the max.
 
@@ -28,71 +28,80 @@ It allows for full student management, grading etc. It's bascally what all stude
 
 Installation
 ------------
-Create a new Rails application.
 
-    $ gem install rails -v 3.2.8
-    $ rails _3.2.8_ new my_school
+You have 2 choices:
 
-Or use existing one.
+### Simple
 
-Add Gaku Engine to your Gemfile.
+Get [gaku\_base\_app](http://github.com/kalkov/gaku_base_app) and follow the instructions.
+
+### Custom
+
+Create a new Rails application:
+
+    $ gem install rails -v 3.2.13
+    $ rails _3.2.13_ new my_app
+
+
+Then add GAKUEngine to your Gemfile.
 
 ```ruby
-gem 'gaku_engine', :git => 'git://github.com/Genshin/GAKUEngine.git'
+gem 'gaku_engine', github: 'Genshin/GAKUEngine'
 ```
 
-Update your bundle
+Install dependencies:
 
-    $ bundle install
+    $ bundle
 
-Use the install generator to copy migrations, initializers and generate
-sample data.
-	
-	```sh
-	$ rake db:create:all
-   	$ rails g gaku:install
-    ```
+Create the database:
 
-You can avoid running migrations or generating seed and sample data
+    $ rake db:create:all
 
-    $ rails g gaku:install --migrate=false --sample=false --seed=false
+Run the install generator to copy migrations, initializers, run seed data...
 
-You can always perform the steps later.
+    $ rails g gaku:install
 
-    $ bundle exec rake db:migrate
-    $ bundle exec rake db:seed
+Sample Data
+-----------
+If you want to populate sample data:
 
-Run Gaku Engine
----------------
-		
-    $ rails s 
+    $ rake gaku:sample:load
+
+Defaults:
+user: admin pass: 123456
 
 
-Visit http://localhost:3000
+Run
+---
+
+    $ rails s
+
+
+Check http://localhost:3000
 
 
 Notes
 -----
 1. Schools can use it for free - though ideally we want schools to hire developers on maintenance contracts so the software can be improved and schools don't need to worry about the system being poorly maintained by untrained internal staff.
 2. Part of the reason GAKU Engine was created was to eliminate dependence on commercial licenses from certain companies.
-	- These licenses are expensive, and many school management systems are built on and rely on them. 
+	- These licenses are expensive, and many school management systems are built on and rely on them.
 	- The problem is some companies have created organizations that actively go after schools for license infringement.
 	- Though unrelated to GAKU Engine core, we recommend switching to OSS software on school workstations as well, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc. This will reduce cost and eliminate the risk of having bad licenses.
 
 Development Status
 ------------------
-Development continuing is contigent upon receiving proper initial funding. Currently what you see here is a very rought demo which is being refined as time permits. Failure to acquire funds will not end the project but may inhibit its progress.  
+Development continuing is contigent upon receiving proper initial funding. Currently what you see here is a very rought demo which is being refined as time permits. Failure to acquire funds will not end the project but may inhibit its progress.
 If you would like to participate in development or if you are a school and would like to see GAKU Engine developed (we will offer services for free to everyone who funds development) plese contact Genshin Souzou K.K. at info@genshin.org
 
 Full Naming History
 -------------------
-GAKU Engine is primarily being developed by the Genshin Souzou organization in Japan. It is also being developed in Ruby/Rails, in which using Japanese names is a common practice. So we chose to use the character for "learning", which is 学 - read "gaku".  
-But "gaku" alone in Japanese isn't a very good name for a software project. So we added "Engine" because it's also a common Rails naming construct and because adding the word "Engine" to something makes it sound all powerful and cool.  
-So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).  
-To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.  
+GAKU Engine is primarily being developed by the Genshin Souzou organization in Japan. It is also being developed in Ruby/Rails, in which using Japanese names is a common practice. So we chose to use the character for "learning", which is 学 - read "gaku".
+But "gaku" alone in Japanese isn't a very good name for a software project. So we added "Engine" because it's also a common Rails naming construct and because adding the word "Engine" to something makes it sound all powerful and cool.
+So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).
+To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.
 
 Support
 =======
 
-    :irc => { :server => 'irc.freenode.org', :port => 6667, :channel => 'gaku' }
+    irc: { server: 'irc.freenode.org', port: 6667, channel: 'gaku' }
 
