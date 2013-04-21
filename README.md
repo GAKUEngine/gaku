@@ -38,7 +38,7 @@ Or use existing one.
 Add Gaku Engine to your Gemfile.
 
 ```ruby
-gem 'gaku', :git => 'git://github.com/Genshin/GAKUEngine.git'
+gem 'gaku_engine', :git => 'git://github.com/Genshin/GAKUEngine.git'
 ```
 
 Update your bundle
@@ -47,8 +47,11 @@ Update your bundle
 
 Use the install generator to copy migrations, initializers and generate
 sample data.
-
-    $ rails g gaku:install
+	
+	```sh
+	$ rake db:create:all
+   	$ rails g gaku:install
+    ```
 
 You can avoid running migrations or generating seed and sample data
 
