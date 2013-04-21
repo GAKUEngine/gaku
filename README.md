@@ -26,6 +26,14 @@ It allows for full student management, grading etc. It's bascally what all stude
 * It will feature a full set of "social" interfaces for students. Students will be able to check their grades, assignments, download notes and printouts, communicate with teachers and staff and share links and information. These features can be enabled or disabled and can be easily regulated by staff.
 * It is multi-locale. Generated reports and paperwork will be formatted appropriately for your schools country of operation (if paperwork for your contry is not available yet please file an issue and we will see about adding it).
 
+Requirements
+------------
+* ruby >= 1.9.3
+* sqlite3
+* mysql
+* postgresql
+
+
 Installation
 ------------
 
