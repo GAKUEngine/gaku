@@ -1,4 +1,9 @@
-GAKU Engine [学園陣][![Build Status](https://travis-ci.org/Genshin/GAKUEngine.png)](https://travis-ci.org/Genshin/GAKUEngine)[![Code Climate](https://codeclimate.com/github/Genshin/GAKUEngine.png)](https://codeclimate.com/github/Genshin/GAKUEngine)[![Dependency Status](https://gemnasium.com/Genshin/GAKUEngine.png)](https://gemnasium.com/Genshin/GAKUEngine)
+[![Build Status](https://travis-ci.org/Genshin/GAKUEngine.png)](https://travis-ci.org/Genshin/GAKUEngine)
+[![Dependency Status](https://gemnasium.com/Genshin/GAKUEngine.png)](https://gemnasium.com/Genshin/GAKUEngine)
+[![Code Climate](https://codeclimate.com/github/Genshin/GAKUEngine.png)](https://codeclimate.com/github/Genshin/GAKUEngine)
+
+
+GAKU Engine [学園陣]
 ====================
 Genshin Academic Karte Unification Engine
 =========================================
