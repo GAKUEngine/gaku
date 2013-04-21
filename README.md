@@ -104,6 +104,48 @@ Run specs using Selenium:
 
     $ SELENIUM=1 rspec
 
+
+Development
+-----------
+
+### Status
+
+Development continuing is contigent upon receiving proper initial funding. Currently what you see here is a very rought demo which is being refined as time permits. Failure to acquire funds will not end the project but may inhibit its progress.
+If you would like to participate in development or if you are a school and would like to see GAKU Engine developed (we will offer services for free to everyone who funds development) plese contact Genshin Souzou K.K. at info@genshin.org
+
+Pull requests are very welcome! Please try to follow these simple rules if applicable:
+
+Separate branch:
+
+* Please create a feature branch for every separate change you make.
+* Open a pull-request early for any new features to get feedback.
+* Make sure your patches are well tested. All specs must pass.
+* Follow Bozhidar Batsov's style guides: [ruby-style-guide](https://github.com/bbatsov/ruby-style-guide) and [rails-style-guide](https://github.com/bbatsov/rails-style-guide).
+* Run [rubocop](https://github.com/bbatsov/rubocop) to ensure no style guide issues.
+
+Master branch:
+
+* Commit directly onto the master branch only for typos, improvements to the readme and documentation.
+
+### Author
+
+[Rei Kagetsuki](https://github.com/Kagetsuki) ([@kagetsuki0](http://twitter.com/kagetsuki0))
+
+### Core Team
+
+* [Vassil Kalkov](https://github.com/kalkov) ([@versicolor](http://twitter.com/versicolor), [blog](http://kalkov.github.io))
+* [Georgi Tapalilov](https://github.com/tapalilov)
+* [Radoslav Georgiev](https://github.com/absolu7)
+
+### Contributors
+
+[https://github.com/Genshin/GAKUEngine/contributors](https://github.com/Genshin/GAKUEngine/contributors)
+
+Support
+=======
+
+    irc: { server: 'irc.freenode.org', port: 6667, channel: 'gaku' }
+
 Notes
 -----
 1. Schools can use it for free - though ideally we want schools to hire developers on maintenance contracts so the software can be improved and schools don't need to worry about the system being poorly maintained by untrained internal staff.
@@ -112,10 +154,6 @@ Notes
 	- The problem is some companies have created organizations that actively go after schools for license infringement.
 	- Though unrelated to GAKU Engine core, we recommend switching to OSS software on school workstations as well, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc. This will reduce cost and eliminate the risk of having bad licenses.
 
-Development Status
-------------------
-Development continuing is contigent upon receiving proper initial funding. Currently what you see here is a very rought demo which is being refined as time permits. Failure to acquire funds will not end the project but may inhibit its progress.
-If you would like to participate in development or if you are a school and would like to see GAKU Engine developed (we will offer services for free to everyone who funds development) plese contact Genshin Souzou K.K. at info@genshin.org
 
 Full Naming History
 -------------------
@@ -124,8 +162,5 @@ But "gaku" alone in Japanese isn't a very good name for a software project. So w
 So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).
 To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.
 
-Support
-=======
 
-    irc: { server: 'irc.freenode.org', port: 6667, channel: 'gaku' }
 
