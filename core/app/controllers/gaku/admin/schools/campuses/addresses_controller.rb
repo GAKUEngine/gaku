@@ -2,19 +2,17 @@ module Gaku
   module Admin
     class Schools::Campuses::AddressesController < GakuController
 
-      authorize_resource :class => false
+      authorize_resource class: false
 
-    	inherit_resources
+      inherit_resources
       respond_to :js, :html
 
-    	before_filter :load_vars
-      before_filter :before_index, :only => :index
+      before_filter :load_vars
+      before_filter :before_index, only: :index
 
       def create
         @address = @campus.build_address(params[:address])
-        if @address.save
-          respond_with @address
-        end
+        respond_with @address if @address.save
       end
 
       def destroy

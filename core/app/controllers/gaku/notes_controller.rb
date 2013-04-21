@@ -1,9 +1,9 @@
 module Gaku
   class NotesController < GakuController
 
-    load_and_authorize_resource :note, :class => Gaku::Note
+    load_and_authorize_resource :note, class: Gaku::Note
 
-  	before_filter :notable
+    before_filter :notable
     inherit_resources
     respond_to :js, :html
 
@@ -13,7 +13,7 @@ module Gaku
     end
 
     def create
-    	@note = @notable.notes.new(params[:note])
+      @note = @notable.notes.new(params[:note])
       create!
     end
 
@@ -25,15 +25,27 @@ module Gaku
 
     private
 
-  	def notable
+    def notable_klasses
+      [
+        Gaku::Student,
+        Gaku::Teacher,
+        Gaku::LessonPlan,
+        Gaku::Syllabus,
+        Gaku::ClassGroup,
+        Gaku::Course,
+        Gaku::Exam
+      ]
+    end
+
+    def notable
       unnamespaced_klass = ''
-      klass = [Gaku::Student, Gaku::Teacher, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
-        unnamespaced_klass = c.to_s.split("::")
+      klass = notable_klasses.detect do |c|
+        unnamespaced_klass = c.to_s.split('::')
         params["#{unnamespaced_klass[1].underscore}_id"]
       end
 
       @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+      @notable_resource = get_resource_name @notable
     end
 
   end

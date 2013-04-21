@@ -2,15 +2,15 @@ module Gaku
   module Admin
     class UsersController < Admin::BaseController
 
-      load_and_authorize_resource :class =>  Gaku::User
+      load_and_authorize_resource class: Gaku::User
 
       inherit_resources
       respond_to :js, :html
 
-      after_filter  :save_user_roles, :only => :create
-      before_filter :save_user_roles, :only => :update
-      before_filter :count, :only => [:create, :destroy, :index]
-      before_filter :clean_password, :only => :update
+      after_filter  :save_user_roles, only: :create
+      before_filter :save_user_roles, only: :update
+      before_filter :count,           only: [:create, :destroy, :index]
+      before_filter :clean_password,  only: :update
 
 
       private

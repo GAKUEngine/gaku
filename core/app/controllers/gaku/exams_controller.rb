@@ -1,18 +1,18 @@
 module Gaku
   class ExamsController < GakuController
 
-    load_and_authorize_resource :class =>  Gaku::Exam
+    load_and_authorize_resource class: Gaku::Exam
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
     respond_to :html, :js, :json
-    respond_to :xls, :only => :export
+    respond_to :xls, only: :export
 
     include Gaku::Core::Grading::Calculations
 
-    before_filter :before_show, :only => :show
-    before_filter :before_new, :only => :new
-    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :before_show, only: :show
+    before_filter :before_new,  only: :new
+    before_filter :count,       only: [:create, :destroy, :index]
 
 
     def export
@@ -31,7 +31,7 @@ module Gaku
 
       respond_to do |format|
         format.html
-        format.json { render :json => @exams.as_json(:include => {:exam_portions => {:include => :exam_portion_scores}})}
+        format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
       end
     end
 
@@ -45,7 +45,7 @@ module Gaku
       calculate_deviation
       calculate_rank_and_grade
 
-      @path_to_exam = course_path(:id => params[:course_id])
+      @path_to_exam = course_path(id: params[:course_id])
 
       #exam_portions need reload to properly include exam_portion_score in as_json
       @exams.each { |exam| exam.exam_portions.reload }

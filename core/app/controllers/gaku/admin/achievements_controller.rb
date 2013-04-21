@@ -2,12 +2,12 @@ module Gaku
   module Admin
     class AchievementsController < Admin::BaseController
 
-      load_and_authorize_resource :class =>  Gaku::Achievement
+      load_and_authorize_resource class: Gaku::Achievement
 
       inherit_resources
       respond_to :js, :html
 
-      before_filter :count, :only => [:index, :create, :destroy]
+      before_filter :count, only: [:index, :create, :destroy]
 
       def create
         create! { [:admin, :achievements ] }

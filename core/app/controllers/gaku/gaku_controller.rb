@@ -1,4 +1,4 @@
-require "gaku/core/app_responder"
+require 'gaku/core/app_responder'
 
 module Gaku
   class GakuController < ActionController::Base
@@ -6,7 +6,7 @@ module Gaku
     #check_authorization
 
     rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => exception.message
+      redirect_to root_url, alert: exception.message
     end
 
     before_filter :set_locale
@@ -28,6 +28,16 @@ module Gaku
       Gaku::Preset.get(name)
     end
 
+    protected
+
+    def get_resource_name(object)
+      object.class.to_s.underscore.split('/')[1].gsub('_', '-')
+    end
+
+    def get_class(object)
+      object.class.to_s.underscore.dasherize.split('/').last
+    end
+
     private
 
     def current_ability
@@ -36,14 +46,14 @@ module Gaku
 
     def resolve_layout
       case action_name
-      when "index"
-        "gaku/layouts/index"
-      when "show"
-        "gaku/layouts/show"
-      when "edit"
-        "gaku/layouts/edit"
+      when 'index'
+        'gaku/layouts/index'
+      when 'show'
+        'gaku/layouts/show'
+      when 'edit'
+        'gaku/layouts/edit'
       else
-        "gaku/layouts/gaku"
+        'gaku/layouts/gaku'
       end
     end
 
@@ -51,16 +61,17 @@ module Gaku
       if current_user && params[:locale]
         I18n.locale = params[:locale]
         current_user.settings[:locale] = params[:locale]
-        flash[:notice] = "Language is set to #{t('languages.' + current_user.locale)}" if current_user.save
+        notice = "Language is set to #{t('languages.' + current_user.locale)}"
+        flash[:notice] = notice if current_user.save
       elsif current_user
-        I18n.locale = current_user.settings[:locale] #|| Gaku::Preset.get('language')
+        I18n.locale = current_user.settings[:locale]
       else
         I18n.default_locale
       end
     end
 
     def users_check
-      if User.count == 0 and Rails.env != 'test'
+      if User.count == 0 && Rails.env != 'test'
         redirect_to set_up_admin_account_path
       end
     end
@@ -70,7 +81,9 @@ module Gaku
     end
 
     def after_sign_in_path_for(resource_or_scope)
-      I18n.locale = current_user.settings[:locale] unless current_user.settings[:locale].blank?
+      unless current_user.settings[:locale].blank?
+        I18n.locale = current_user.settings[:locale]
+      end
       super
     end
 

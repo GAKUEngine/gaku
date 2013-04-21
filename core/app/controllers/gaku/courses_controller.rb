@@ -1,7 +1,7 @@
 module Gaku
   class CoursesController < GakuController
 
-    load_and_authorize_resource :class =>  Gaku::Course
+    load_and_authorize_resource class: Gaku::Course
 
     include StudentChooserController
 
@@ -10,12 +10,12 @@ module Gaku
     inherit_resources
     respond_to :js, :html
 
-    before_filter :before_show,  :only => :show
-    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :before_show,  only: :show
+    before_filter :count,        only: [:create, :destroy, :index]
 
     def show
       super do |format|
-        format.json { render :json => @course.as_json(:include => 'students') }
+        format.json { render json: @course.as_json(include: :students) }
       end
     end
 
@@ -26,7 +26,8 @@ module Gaku
     end
 
     def resource
-      @course = Course.includes(:syllabus => {:exams => :exam_portion_scores}).find(params[:id])
+      @course = Course.includes(syllabus: {exams: :exam_portion_scores})
+                      .find(params[:id])
     end
 
 
@@ -37,10 +38,10 @@ module Gaku
       @count = Course.count
     end
 
-	  def before_show
+    def before_show
       @notable = Course.find(params[:id])
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
-	  end
+      @notable_resource = get_resource_name(@notable)
+    end
 
     def sort_column
       Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
