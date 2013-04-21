@@ -529,6 +529,7 @@ en:
           state: State
       school_details: School Details
       schools: Schools
+      school_years: School Years
       specialties: Specialties
       system:
         backup: Backup
