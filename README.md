@@ -88,6 +88,22 @@ Run
 Check http://localhost:3000
 
 
+
+Testing
+-------
+
+Change to core engine:
+
+    $ cd core
+
+Recreate test_app:
+
+    $ bundle exec rake test_app
+
+Run specs using Selenium:
+
+    $ SELENIUM=1 rspec
+
 Notes
 -----
 1. Schools can use it for free - though ideally we want schools to hire developers on maintenance contracts so the software can be improved and schools don't need to worry about the system being poorly maintained by untrained internal staff.
