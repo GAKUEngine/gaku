@@ -7,5 +7,7 @@ module Gaku
 
     attr_accessible :program_id, :syllabus_id, :level_id
 
+    validates_presence_of :syllabus_id
+
   end
 end
