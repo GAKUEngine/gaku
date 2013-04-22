@@ -1,7 +1,6 @@
 module Gaku
   module GakuHelper
 
-    include LinkToHelper
     include SortHelper
     include TranslationsHelper
     include PresetsHelper

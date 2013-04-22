@@ -21,6 +21,7 @@ require 'thinreports-rails'
 require 'bootstrap-sass'
 require 'bootstrap-editable-rails'
 require 'nested_form'
+require 'gaku_helpers'
 
 module Gaku
 
