@@ -1,6 +1,7 @@
 module Gaku
   module GakuHelper
 
+    include StudentChooserHelper
     include SortHelper
     include TranslationsHelper
     include PresetsHelper
