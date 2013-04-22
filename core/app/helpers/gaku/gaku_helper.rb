@@ -6,8 +6,6 @@ module Gaku
     include TranslationsHelper
     include PresetsHelper
     include FormHelper
-    include ModalHelper
-    include HtmlHelper
     include PersonHelper
 
     def count_div(html_class, &block)
