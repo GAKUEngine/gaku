@@ -14,7 +14,7 @@ describe Gaku::ClassGroup do
 
 
 
-    it { should have_many :semester_class_groups }
+    it { should have_many(:semester_class_groups).dependent(:destroy) }
     it { should have_many(:semesters).through(:semester_class_groups) }
 
     it { should validate_presence_of(:name) }
