@@ -5,26 +5,6 @@ window.GAKUEngine =
   Routers: {}
   init: ->
 
-formBuilder =
-  add: (element, settings, message) ->
-    if element.data("valid") isnt false
-      element.data "valid", false
-      element.parent().parent().addClass "error"
-      element.parent().find(".message").addClass "error help-inline"
-      $('<span/>').addClass('help-inline').text(message).appendTo(element.parent())
-
-  remove: (element, settings) ->
-    element.parent().parent().removeClass('error')
-    element.parent().find(".message").removeClass "error help-inline"
-    element.parent().find('span.help-inline').remove()
-    element.data "valid", true
-
-
-
-window.ClientSideValidations.formBuilders["ValidateFormBuilder"] = formBuilder
-
-window.ClientSideValidations.formBuilders["ValidateNestedFormBuilder"] = formBuilder
-
 $.fn.inline_select = (resource) ->
   $(this).editable
     source: resource
@@ -72,13 +52,6 @@ $ ->
   window.showNotice = (notice)->
     $('#notice').html(notice).delay(3000).fadeOut ->
       $(@).html('').show()
-
-  window.ClientSideValidations.callbacks.element.fail = (element, message, callback) ->
-    callback()
-    if element.data("valid") isnt false
-      element.parent().parent().addClass "error"
-      element.parent().find(".message").addClass "error help-inline"
-
 
 
   $(document).on "click",".cancel-link", (e) ->

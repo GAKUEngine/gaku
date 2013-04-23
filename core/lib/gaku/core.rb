@@ -22,6 +22,9 @@ require 'bootstrap-sass'
 require 'bootstrap-editable-rails'
 require 'nested_form'
 require 'gaku_helpers'
+require 'gaku_forms'
+require 'gaku_nested_forms'
+
 
 module Gaku
 

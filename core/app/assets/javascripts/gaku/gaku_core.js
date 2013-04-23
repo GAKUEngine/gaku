@@ -32,3 +32,6 @@
 //= require_tree ./backbone/
 //= require ./admin/disposals
 //= require gaku/admin
+
+//= require gaku_forms
+//= require gaku_nested_forms
