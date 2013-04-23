@@ -273,6 +273,10 @@ module Gaku
       content_tag(:i, nil, :class => ' icon-calendar')
     end
 
+    def extract_class_groups(semester_class_groups)
+      semester_class_groups.map(&:class_group)
+    end
+
   end
 end
 
