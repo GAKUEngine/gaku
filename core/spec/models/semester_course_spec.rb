@@ -13,6 +13,7 @@ module Gaku
       it { should allow_mass_assignment_of :semester_id }
       it { should allow_mass_assignment_of :course_id }
 
+      it { should validate_uniqueness_of(:semester_id).scoped_to(:course_id).with_message(/Semester already added to Course/) }
 
     end
   end
