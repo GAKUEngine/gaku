@@ -10,6 +10,10 @@ module Gaku
       it { should validate_presence_of :semester_id }
       it { should validate_presence_of :course_id }
 
+      it { should allow_mass_assignment_of :semester_id }
+      it { should allow_mass_assignment_of :course_id }
+
+
     end
   end
 end
