@@ -529,6 +529,7 @@ en:
           state: State
       school_details: School Details
       schools: Schools
+      school_years: School Years
       specialties: Specialties
       system:
         backup: Backup
@@ -623,6 +624,34 @@ en:
   profiles:
     new: New Profile
     save: Save profile
+  program:
+    edit: Edit Program
+    save: Save Program
+    name: Name
+    description: Description
+    levels: Levels
+    plural: Programs
+    singular: Program
+    add: Add Program
+    list: Programs list
+  program_level:
+    list: Program Levels list
+    choose: Choose Program Level
+    plural: Program Levels
+    add: Add Program Level
+    remove: Remove Program Level
+  program_specialty:
+    list: Program Specialties list
+    choose: Choose Program Specialty
+    add: Add Program Specialty
+    remove: Remove Program Specialty
+    plural: Program Specialties
+  program_syllabus:
+    list: Program Syllabuses list
+    choose: Choose Program Syllabus
+    plural: Program Specialties
+    add: Add Program Syllabus
+    remove: Remove Program Syllabus
   required: required
   revert: Revert
   role:

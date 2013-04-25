@@ -2,8 +2,6 @@ module Gaku
   module Admin
     class AdmissionMethods::AdmissionPhases::AdmissionPhaseStatesController < GakuController
 
-      include LinkToHelper
-
       respond_to :js, :html
 
       def make_default

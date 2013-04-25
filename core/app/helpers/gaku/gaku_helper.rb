@@ -1,13 +1,10 @@
 module Gaku
   module GakuHelper
 
-    include LinkToHelper
+    include StudentChooserHelper
     include SortHelper
     include TranslationsHelper
     include PresetsHelper
-    include FormHelper
-    include ModalHelper
-    include HtmlHelper
     include PersonHelper
 
     def count_div(html_class, &block)
@@ -30,11 +27,11 @@ module Gaku
     end
 
     def grading_methods
-      Gaku::GradingMethod.all.collect {|s| [s.name.capitalize, s.id] }
+      Gaku::GradingMethod.all.collect { |s| [s.name.capitalize, s.id] }
     end
 
     def enrollment_status_types
-      EnrollmentStatusType.includes(:translations).collect {|s| [s.name.capitalize, s.id] }
+      EnrollmentStatusType.includes(:translations).collect { |s| [s.name.capitalize, s.id] }
     end
 
     def enrollment_statuses_inline
@@ -46,7 +43,7 @@ module Gaku
     end
 
     def class_groups
-      Gaku::ClassGroup.all.collect {|s| [s.name.capitalize, s.id] }
+      Gaku::ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
     end
 
     def commute_method_types
@@ -80,7 +77,7 @@ module Gaku
     end
 
     def scholarship_statuses
-      ScholarshipStatus.includes(:translations).collect {|p| [ p.name, p.id ] }
+      ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
     end
 
     def scholarship_statuses_inline
@@ -92,19 +89,19 @@ module Gaku
     end
 
     def contact_types
-      Gaku::ContactType.all.collect {|ct| [ct.name, ct.id]}
+      Gaku::ContactType.all.collect { |ct| [ct.name, ct.id] }
     end
 
     def enrollment_statuses
-      Gaku::EnrollmentStatus.all.collect {|es| [es.name, es.id]}
+      Gaku::EnrollmentStatus.all.collect { |es| [es.name, es.id] }
     end
 
     def specialties
-      Gaku::Specialty.all.collect {|s| [s.name, s.id]}
+      Gaku::Specialty.all.collect { |s| [s.name, s.id] }
     end
 
     def achievements
-      Gaku::Achievement.all.collect {|a| [a.name, a.id]}
+      Gaku::Achievement.all.collect { |a| [a.name, a.id] }
     end
 
     def schools
@@ -112,15 +109,21 @@ module Gaku
     end
 
     def school_levels
-      Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id]}
+      Gaku::School.primary.school_levels.collect { |sl| [sl.title, sl.id] }
     end
+
+    def levels
+      Gaku::Level.all.collect { |l| [l.name, l.id] }
+    end
+
+
 
     def roles
       Gaku::Role.all
     end
 
     def semesters
-      Gaku::Semester.all.collect { |s| ["#{s.starting} / #{s.ending}" ,s.id]}
+      Gaku::Semester.all.collect { |s| ["#{s.starting} / #{s.ending}" ,s.id] }
     end
 
     def genders
@@ -139,7 +142,7 @@ module Gaku
     end
 
     def required_field
-      ('<span class= "label label-important pull-right">' + t(:required) + '</span>').html_safe
+      content_tag :span, t(:required), :class => 'label label-important pull-right'
     end
 
     def print_count(count, text)
@@ -273,8 +276,13 @@ module Gaku
       content_tag(:i, nil, :class => ' icon-calendar')
     end
 
+
     def extract_class_groups(semester_class_groups)
       semester_class_groups.map(&:class_group)
+    end
+
+    def nested_header(text)
+      content_tag :h4, text
     end
 
   end
