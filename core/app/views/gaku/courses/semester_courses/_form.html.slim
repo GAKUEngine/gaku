@@ -1,0 +1,4 @@
+= remote_form_for [@course, @semester_course] do |f|
+  = render 'form_fields', f: f
+  = buttons_for @semester_course, nested_id: 'course-semester-course', label: t(:'semester.save')
+

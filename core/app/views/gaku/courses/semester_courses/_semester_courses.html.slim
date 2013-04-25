@@ -1,0 +1,18 @@
+= index_header do
+  #new-course-semester-course.hide
+  .pull-left
+    = count_div 'course-semester-courses-count' do
+      = print_count @course.semesters.count, t_semester_list
+  .pull-right
+    = ajax_link_to_new t(:'semester.add'), [:new, @course, :semester_course], id: 'new-course-semester-course-link'
+
+= hr
+
+= index_body do
+  = table_for 'course-semester-courses-index' do
+    thead
+      tr
+      = th t(:'period')
+      = th_actions 2
+    tbody
+      =render partial: 'gaku/courses/semester_courses/semester_course', collection: @course.semester_courses, as: :semester_course

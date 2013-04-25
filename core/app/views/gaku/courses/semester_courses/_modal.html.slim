@@ -1,0 +1,6 @@
+= modal_for 'semester-modal' do
+  = modal_header t(:'semester.edit')
+  = modal_form_for [@course, @semester_course] do |f|
+    = modal_body do
+      = render 'form_fields', f: f
+      = buttons_for @semester_course, nested_id: 'course-semester-course', label: t(:'semester.save')

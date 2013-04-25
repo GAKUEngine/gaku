@@ -1,0 +1,3 @@
+-unless semester_course.nil? or semester_course.new_record? or !semester_course
+  tr id="semester-course-#{semester_course.id}"
+    =render 'gaku/courses/semester_courses/fields', semester_course: semester_course
