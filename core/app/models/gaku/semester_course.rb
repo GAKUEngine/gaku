@@ -3,6 +3,11 @@ module Gaku
     belongs_to :semester
     belongs_to :course
 
+    attr_accessible :semester_id, :course_id
+
     validates_presence_of :semester_id, :course_id
+
+    validates :semester_id, presence: true,
+        uniqueness: { scope: :course_id, message: I18n.t('semester_course.uniqueness')}
   end
 end
