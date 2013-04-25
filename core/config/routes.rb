@@ -46,6 +46,7 @@ Gaku::Core::Engine.routes.draw do
 
 
   resources :courses do
+    resources :semester_courses, :controller => 'courses/semester_courses'
     resources :notes
     resources :enrollments, :controller => 'courses/enrollments' do
       post :enroll_class_group, :on => :member
