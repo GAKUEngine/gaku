@@ -706,6 +706,7 @@ en:
   search: Search
   select: Select
   semester:
+    choose: Choose Semester
     add: Add Semester
     remove: Remove Semester
     starting: Semester starting
@@ -725,6 +726,8 @@ en:
     uniqueness: Semester already added to Class Group
     save: Save Semester
     choose: Choose Semester
+  semester_course:
+    uniqueness: Semester already added to Course
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show
