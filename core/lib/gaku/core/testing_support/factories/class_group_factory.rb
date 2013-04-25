@@ -16,13 +16,4 @@ FactoryGirl.define do
     end
   end
 
-  trait :with_semesters do
-    after_create do |resource|
-      2.times do
-        resource.semesters << FactoryGirl.create(:semester)
-      end
-    end
-  end
-
-
 end
