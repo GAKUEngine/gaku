@@ -27,3 +27,7 @@ guard 'bundler' do
   watch('Gemfile')
   watch(/^.+\.gemspec/)
 end
+
+guard 'cop' do
+  watch(%r{^(.*).rb})
+end
