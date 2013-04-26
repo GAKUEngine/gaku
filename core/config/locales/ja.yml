@@ -533,6 +533,7 @@ ja:
           gender: 性別
           state: 都道府県
       school_details: 学校詳細
+      school_years: 学年管理
       schools: 学校
       specialties: 専攻
       system:
@@ -628,6 +629,34 @@ ja:
   profiles:
     new: 新規プロフィール登録
     save: プロフィールを保存
+  program:
+    add: プログラムを追加
+    description: プログラム説明
+    edit: プログラムを編集
+    levels: レベル
+    list: プログラム一覧
+    name: プルグラム名
+    plural: プログラム
+    save: プログラム
+    singular: プログラム
+  program_level:
+    add: プルグラムレベルを追加
+    choose: プログラムレベルを選択
+    list: プログラムレベル一覧
+    plural: プログラムレベル
+    remove: プログラムレベルを削除
+  program_specialty:
+    add: プログラムに専攻追加
+    choose: プログラム専攻を選択
+    list: プログラム専攻一覧
+    plural: プログラム専攻
+    remove: プログラム専攻を削除
+  program_syllabus:
+    add: 選択授業を追加
+    choose: プログラム授業を選択
+    list: プログラム授業一覧
+    plural: プログラム専攻
+    remove: プログラム授業を削除
   required: 必須
   revert: 元に戻す
   role:

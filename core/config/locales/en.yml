@@ -533,8 +533,8 @@ en:
           gender: Gender
           state: State
       school_details: School Details
-      schools: Schools
       school_years: School Years
+      schools: Schools
       specialties: Specialties
       system:
         backup: Backup
@@ -630,32 +630,32 @@ en:
     new: New Profile
     save: Save profile
   program:
-    edit: Edit Program
-    save: Save Program
-    name: Name
-    description: Description
-    levels: Levels
-    plural: Programs
-    singular: Program
     add: Add Program
+    description: Description
+    edit: Edit Program
+    levels: Levels
     list: Programs list
+    name: Name
+    plural: Programs
+    save: Save Program
+    singular: Program
   program_level:
-    list: Program Levels list
-    choose: Choose Program Level
-    plural: Program Levels
     add: Add Program Level
+    choose: Choose Program Level
+    list: Program Levels list
+    plural: Program Levels
     remove: Remove Program Level
   program_specialty:
-    list: Program Specialties list
-    choose: Choose Program Specialty
     add: Add Program Specialty
+    choose: Choose Program Specialty
+    list: Program Specialties list
+    plural: Program Specialties
     remove: Remove Program Specialty
-    plural: Program Specialties
   program_syllabus:
-    list: Program Syllabuses list
-    choose: Choose Program Syllabus
-    plural: Program Specialties
     add: Add Program Syllabus
+    choose: Choose Program Syllabus
+    list: Program Syllabuses list
+    plural: Program Specialties
     remove: Remove Program Syllabus
   required: required
   revert: Revert

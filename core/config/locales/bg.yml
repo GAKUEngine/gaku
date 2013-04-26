@@ -531,6 +531,7 @@ bg:
           gender: 
           state: 
       school_details: 
+      school_years: 
       schools: 
       specialties: 
       system:
@@ -626,6 +627,34 @@ bg:
   profiles:
     new: 
     save: 
+  program:
+    add: 
+    description: 
+    edit: 
+    levels: 
+    list: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  program_level:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_specialty:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_syllabus:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
   required: 
   revert: 
   role:
