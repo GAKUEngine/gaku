@@ -10,5 +10,7 @@ describe Gaku::ProgramSyllabus do
     it { should allow_mass_assignment_of :program_id}
     it { should allow_mass_assignment_of :syllabus_id }
     it { should allow_mass_assignment_of :level_id }
+
+    it { should validate_presence_of :syllabus_id }
   end
 end
