@@ -13,6 +13,11 @@ module Gaku
     before_filter :before_show,  :only => :show
     before_filter :count, :only => [:create, :destroy, :index]
 
+    def index
+      @courses = SemesterCourse.group_by_semester
+      @courses_without_semester = Course.without_semester
+    end
+
     def show
       super do |format|
         format.json { render :json => @course.as_json(:include => 'students') }
