@@ -4,5 +4,11 @@ module Gaku
     belongs_to :level
 
     attr_accessible :program_id, :level_id
+
+    validates_presence_of :level_id
+
+    def to_s
+      name
+    end
   end
 end

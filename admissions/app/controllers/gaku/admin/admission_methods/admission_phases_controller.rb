@@ -2,8 +2,6 @@ module Gaku
   module Admin
     class AdmissionMethods::AdmissionPhasesController < GakuController
 
-      include LinkToHelper
-
       inherit_resources
       actions :index, :show, :new, :update, :edit, :destroy
 

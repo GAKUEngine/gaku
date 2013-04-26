@@ -9,5 +9,10 @@ module Gaku
 
     validates :semester_id, :presence => true,
         :uniqueness => {:scope => :class_group_id, :message => I18n.t('semester_class_group.uniqueness')}
+
+    def self.group_by_semester
+      all(:include => [:semester, :class_group]).group_by(&:semester_id)
+    end
+
   end
 end

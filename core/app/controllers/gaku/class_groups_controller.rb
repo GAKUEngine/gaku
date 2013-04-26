@@ -17,7 +17,8 @@ module Gaku
     before_filter :count, :only => [:create, :destroy, :index]
 
     def index
-      @class_groups = ClassGroup.order(sort_column + " " + sort_direction)
+      @class_groups = SemesterClassGroup.group_by_semester
+      @class_groups_without_semester = ClassGroup.without_semester
     end
 
 

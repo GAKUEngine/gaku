@@ -15,8 +15,11 @@ module Gaku
     validate :between_school_year_dates
     validate :ending_after_starting
 
-    private
+    def to_s
+      "#{starting} - #{ending}"
+    end
 
+    private
 
     def ending_after_starting
       return if  starting.blank? && ending.blank?

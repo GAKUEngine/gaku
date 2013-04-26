@@ -1,2 +1,6 @@
 $('.class-groups-count').html("<%= print_count(@count-1, t_class_group_list) %>");
 showNotice("<%= render_flash %>");
+
+$('.class-group-<%= @class_group.id %>').each(function(){
+  $(this).remove();
+});
