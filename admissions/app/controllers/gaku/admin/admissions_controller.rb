@@ -20,12 +20,15 @@ module Gaku
       before_filter :load_selected_students, only: [:student_chooser, :create_multiple]
 
       def change_admission_period
+        render 'gaku/admin/admissions/common/change_admission_period'
       end
 
       def change_admission_method
+        render 'gaku/admin/admissions/common/change_admission_method'
       end
 
       def change_period_method
+        render 'gaku/admin/admissions/common/change_period_method'
       end
 
       def index
@@ -62,8 +65,8 @@ module Gaku
           next_phase = AdmissionPhase.find_next_phase(phase)
           @new_state = next_phase.admission_phase_states.first if @next_state.auto_progress == true
           @progress_success = Admission.change_students_state(@state_students, phase, @old_state, @next_state)
-          render 'change_student_state'
         end
+        render 'gaku/admin/admissions/admissions/change_student_state'
       end
 
       def listing_applicants
@@ -77,6 +80,7 @@ module Gaku
         @student = @admission.build_student
         @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
         @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+        render 'gaku/admin/admissions/admissions/new'
       end
 
       def create
@@ -89,7 +93,7 @@ module Gaku
           @admission.assign_admission_phase_record(admission_phase, @admission_phase_state)
           @admission.change_student_to_applicant
           @admission.save
-          render 'create', :admission_phase_record => @admission_phase_record
+          render 'gaku/admin/admissions/admissions/create', :admission_phase_record => @admission_phase_record
         end
       end
 
@@ -110,7 +114,7 @@ module Gaku
           @admission_method.starting_applicant_number
         end
         respond_to do |format|
-          format.js
+          format.js { render 'gaku/admin/admissions/admissions/student_chooser' }
         end
       end
 
@@ -124,6 +128,7 @@ module Gaku
         @admission_phase_state = result[:admission_phase_state]
         err_admissions = result[:err_admissions]
         show_flashes(admissions,err_admissions)
+        render 'gaku/admin/admissions/admissions/create_multiple'
       end
 
       def soft_delete
@@ -132,6 +137,7 @@ module Gaku
         @admission.admission_phase_records.each {|rec|
           rec.update_attribute('is_deleted', true)
         }
+        render 'gaku/admin/admissions/listing_admissions/soft_delete'
       end
 
       private
