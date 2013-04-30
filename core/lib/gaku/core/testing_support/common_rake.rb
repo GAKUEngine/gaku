@@ -9,9 +9,7 @@ namespace :common do
     require "#{ENV['LIB_NAME']}"
 
     ENV['DB_NAME'] = "postgresql"
-
-    puts "LIB_NAME : #{ENV['LIB_NAME']}"
-    puts "DB_NAME : #{ENV['DB_NAME']}"
+    puts "#{ENV['LIB_NAME']} running on #{ENV['DB_NAME']}"
 
     Gaku::DummyGenerator.start ["--lib_name=#{ENV['LIB_NAME']}", "--database=#{ENV['DB_NAME']}", "--quiet"]
     Gaku::InstallGenerator.start ["--lib_name=#{ENV['LIB_NAME']}", "--auto-accept", "--migrate=false", "--seed=false", "--sample=false", "--quiet"]
