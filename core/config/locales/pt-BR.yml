@@ -35,8 +35,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: ! '%{resource} já foram adicionados!'
-    empty: ! '%{resource} está vazio!'
+    already_added: '%{resource} já foram adicionados!'
+    empty: '%{resource} está vazio!'
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -198,7 +198,7 @@ pt-BR:
     add: Adicionar Curso
     choose: Escolha Curso
     code: Código de Curso
-    code_sample: ! '[EX: FALL2020]'
+    code_sample: '[EX: FALL2020]'
     combined_code: Código Combinado
     count: Contagem de cursos
     edit: Editar Curso
@@ -242,6 +242,11 @@ pt-BR:
       surname: último nome
       surname_reading: 
     import: Importação CSV
+  date:
+    formats:
+      default: 
+      long: 
+      short: 
   date_placeholder: DD-MM-YYYY
   default: Padrão
   delete: Excluir
@@ -310,6 +315,7 @@ pt-BR:
     username: 
   edit: 
   email: 
+  empty: 
   enroll_to_class: 
   enrollment:
     plural: 
@@ -317,6 +323,7 @@ pt-BR:
   enrollment_status:
     active: 
     add: 
+    code: 
     edit: 
     list: 
     name: 
@@ -522,6 +529,7 @@ pt-BR:
           gender: 
           state: 
       school_details: 
+      school_years: 
       schools: 
       specialties: 
       system:
@@ -595,10 +603,16 @@ pt-BR:
     grading:
       grading_method: 
       grading_scheme: 
+    output_formats:
+      choose: 
+      documents: 
+      printables: 
+      spreadsheets: 
     pagination: 
     per_page:
       changes: 
       default: 
+      students: 
     plural: 
     save: 
     singular: 
@@ -611,6 +625,34 @@ pt-BR:
   profiles:
     new: 
     save: 
+  program:
+    add: 
+    description: 
+    edit: 
+    levels: 
+    list: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  program_level:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_specialty:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_syllabus:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
   required: 
   revert: 
   role:
@@ -649,18 +691,40 @@ pt-BR:
     plural: 
     remove_school_level: 
     singular: 
+  school_year:
+    add: 
+    day: 
+    duration: 
+    edit: 
+    ending: 
+    ending_after_starting: 
+    list: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+    starting: 
   search: 
   select: 
   semester:
     add: 
+    between: 
+    day: 
+    duration: 
     edit: 
     ending: 
     ending_after_starting: 
     list: 
     number: 
     plural: 
+    remove: 
     save: 
+    singular: 
     starting: 
+    uniqueness: 
+  semester_class_group:
+    choose: 
+    save: 
     uniqueness: 
   sex: 
   sex_and_birth: 

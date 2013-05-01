@@ -21,7 +21,7 @@ describe Gaku::ClassGroupsController do
 
       it "populates an array of class_groups" do
         gaku_js_get :index
-        assigns(:class_groups).should eq [class_group]
+        assigns(:class_groups_without_semester).should eq [class_group]
       end
 
       it "renders the :index view" do

@@ -35,8 +35,8 @@ bg:
     zipcode: Пощенски код
   admitted: Приет на
   alert:
-    already_added: ! '%{resource} са вече добавени!'
-    empty: ! '%{resource} е празен!'
+    already_added: '%{resource} са вече добавени!'
+    empty: '%{resource} е празен!'
     not_selected: Няма избран %{resource}!
   and: и
   are_you_sure: Сигурен ли сте?
@@ -198,7 +198,7 @@ bg:
     add: Добави Курс
     choose: Избери Курс
     code: Код на Курса
-    code_sample: ! '[ПР: ЕСЕН2020]'
+    code_sample: '[ПР: ЕСЕН2020]'
     combined_code: Комбиниран Код
     count: Брой Курсове
     edit: Редактирай Курс
@@ -242,6 +242,11 @@ bg:
       surname: Фамилно Име
       surname_reading: Фамилно име (чете се)
     import: CSV Импорт
+  date:
+    formats:
+      default: 
+      long: 
+      short: 
   date_placeholder: ГГГГ-ММ-ДД
   default: По подразбиране
   delete: Изтрий
@@ -283,9 +288,9 @@ bg:
       updated: Вашата парола беше променена успешно. В момента сте в системата.
       updated_not_active: Вашата парола беше променена успешно.
     registrations:
-      admin_set_up: ! 'Това е първият път в който ползвате GAKU Engine.
-
-        Моля виведете данни за потребител Администратор.'
+      admin_set_up: |-
+        Това е първият път в който ползвате GAKU Engine.
+        Моля виведете данни за потребител Администратор.
       destroyed: Довиждане! Вашият акаунт беше успешно затворен. Надяваме се да ви видим отново.
       inactive_signed_up: Вие се регистрирахте успешно в системата. Въпреки това, не можете да влезете в системата, защото вашият акаунт е  %{reason}.
       reasons:
@@ -312,6 +317,7 @@ bg:
     username: Потребителско Име
   edit: Редактиране
   email: Поща
+  empty: 
   enroll_to_class: Записване в клас
   enrollment:
     plural: Записи
@@ -319,6 +325,7 @@ bg:
   enrollment_status:
     active: Активен
     add: Добави Статус на Записване
+    code: 
     edit: Редактирай Статус на Записване
     list: Списък Статуси на Записване
     name: Име
@@ -524,6 +531,7 @@ bg:
           gender: 
           state: 
       school_details: 
+      school_years: 
       schools: 
       specialties: 
       system:
@@ -597,10 +605,16 @@ bg:
     grading:
       grading_method: 
       grading_scheme: 
+    output_formats:
+      choose: 
+      documents: 
+      printables: 
+      spreadsheets: 
     pagination: 
     per_page:
       changes: 
       default: 
+      students: 
     plural: 
     save: 
     singular: 
@@ -613,6 +627,34 @@ bg:
   profiles:
     new: 
     save: 
+  program:
+    add: 
+    description: 
+    edit: 
+    levels: 
+    list: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+  program_level:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_specialty:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
+  program_syllabus:
+    add: 
+    choose: 
+    list: 
+    plural: 
+    remove: 
   required: 
   revert: 
   role:
@@ -651,18 +693,40 @@ bg:
     plural: 
     remove_school_level: 
     singular: 
+  school_year:
+    add: 
+    day: 
+    duration: 
+    edit: 
+    ending: 
+    ending_after_starting: 
+    list: 
+    plural: 
+    save: 
+    show: 
+    singular: 
+    starting: 
   search: 
   select: 
   semester:
     add: 
+    between: 
+    day: 
+    duration: 
     edit: 
     ending: 
     ending_after_starting: 
     list: 
     number: 
     plural: 
+    remove: 
     save: 
+    singular: 
     starting: 
+    uniqueness: 
+  semester_class_group:
+    choose: 
+    save: 
     uniqueness: 
   sex: 
   sex_and_birth: 
