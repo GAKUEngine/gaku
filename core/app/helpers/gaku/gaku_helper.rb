@@ -276,9 +276,8 @@ module Gaku
       content_tag(:i, nil, :class => ' icon-calendar')
     end
 
-
-    def extract_class_groups(semester_class_groups)
-      semester_class_groups.map(&:class_group)
+    def extract_grouped(grouped, resource)
+      grouped.map(&resource.to_sym)
     end
 
     def nested_header(text)

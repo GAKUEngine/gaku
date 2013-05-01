@@ -1,4 +1,4 @@
-$('#courses-index tbody').append('<%= render_js_partial("course", {:course => @course}) %>');
+$('#courses-without-semester-index tbody').append('<%= render_js_partial("course", { course: @course }) %>');
 $('.courses-count').html('<%= print_count(@count+1, t_course_list) %>');
 
 $('#new-course').slide();
