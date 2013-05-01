@@ -15,7 +15,7 @@ describe Gaku::CoursesController do
     it "populates an array of courses" do
       course
       gaku_get :index
-      assigns(:courses).should eq [course]
+      assigns(:courses_without_semester).should eq [course]
     end
 
     it "renders the :index view" do
