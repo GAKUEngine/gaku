@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   factory :admin_role, :parent => :role do
-    name 'admin'
+    name 'Admin'
   end
 
   factory :principal_role, :parent => :role do
