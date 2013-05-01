@@ -6,29 +6,27 @@
   </div>
 </div>
 <div class='row-fluid'>
-  <div class='span12 well pull-left'>
-    <table class='exam-frame-table exam_grid table table-striped table-bordered table-condensed'>
-      <thead>
-        <tr>
-          <th class='btn-primary'>Student</th>
+  <table class='exam-frame-table exam_grid table table-bordered table-condensed'>
+    <thead>
+      <tr>
+        <th class='btn-primary'>Student</th>
+        <% for exam in @exams: %>
+          <th class='btn-success exam-name-info' colspan='3'>
+            <%= exam.name %> 【Completed:<%= @completion[exam.id]['completion_percentage']%>% Ungraded:<%= @completion[exam.id]['ungraded'] %> Graded:<%= @completion[exam.id]['graded'] %> Total:<%= @completion[exam.id]['total'] %>】</th>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id='exam-grading-user'>1</td>
+        <td>
           <% for exam in @exams: %>
-            <th class='btn-success exam-name-info' colspan='3'>
-              <%= exam.name %> 【Completed:<%= @completion[exam.id]['completion_percentage']%>% Ungraded:<%= @completion[exam.id]['ungraded'] %> Graded:<%= @completion[exam.id]['graded'] %> Total:<%= @completion[exam.id]['total'] %>】</th>
-            </th>
+            <td id='exam-grading-score'>2</td>
+            <td id='exam-grading-calculations'>3</td>
           <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id='exam-grading-user'>1</td>
-          <td>
-            <% for exam in @exams: %>
-              <td id='exam-grading-score'>2</td>
-              <td id='exam-grading-calculations'>3</td>
-            <% end %>
-          </td>
-        </tr>
-    <table>
-  </div>
+        </td>
+      </tr>
+  <table>
 </div>
 <div class='stupid'></div>

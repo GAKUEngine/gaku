@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # Array format ['en scholarship_status', 'ja scholarship_status', 'is_default']
 scholarship_statuses = [
-  ['Self Paid',                   '自己支払っ',       true ],
+  ['Self Paid',                   '自己支払い',       true ],
   ['Government Scholarship',      '政府奨学金',       false],
   ['School Scholarship',          '学校の奨学金',     false],
   ['Organizational Scholarship',  '組織の奨学金',     false],
