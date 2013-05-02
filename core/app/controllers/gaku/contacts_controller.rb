@@ -8,6 +8,7 @@ module Gaku
 
     before_filter :contactable
     before_filter :count
+    before_filter :load_data
 
     def create
       @contact = @contactable.contacts.new(params[:contact])
@@ -41,6 +42,10 @@ module Gaku
     end
 
     private
+
+    def load_data
+      @contact_types = ContactType.all.collect { |ct| [ct.name, ct.id] }
+    end
 
     def count
       @count = @contactable.contacts_count
