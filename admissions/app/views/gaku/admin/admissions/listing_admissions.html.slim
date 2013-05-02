@@ -1,7 +1,7 @@
 - content_for :title, t(:'admissions.candidates.list')
 .pull-right
   #admissions_links
-    = render 'gaku/admin/admissions/admissions_links', :admission_params => @admission_params
+    = render 'gaku/admin/admissions/links/admissions_links', :admission_params => @admission_params
 .row-fluid
   h4.mt-xs.mb-0 = t(:'admissions.candidates.list')
 .row-fluid
@@ -11,10 +11,10 @@
     .row-fluid
       .span6
         #admission-period-selection
-          = render 'gaku/admin/admissions/period', :admission_period => @admission_period
+          = render 'gaku/admin/admissions/common/period', :admission_period => @admission_period
       .span6
         #admission-method-selection
-          = render 'gaku/admin/admissions/method', :admission_methods => @admission_methods
+          = render 'gaku/admin/admissions/common/method', :admission_methods => @admission_methods
     .row-fluid.mt-s
       .span12.well
         .row-fluid
@@ -24,4 +24,13 @@
             h4.mt-xs.mb-0.students-count
               /= print_count(@students.count, "合計志願者数：")
           #admissions-list
-            = render 'gaku/admin/admissions/admissions_list', :admission_method => @admission_method
+            = render 'gaku/admin/admissions/listing_admissions/admissions_list', :admission_method => @admission_method
+
+javascript:
+  $(window).bind("popstate", function(e){
+    if (!e.originalEvent.state.backTag) return;
+    var new_location = location.href;
+    var new_location_edited = new_location.replace('/admissions/listing_admissions','/admissions/change_period_method');
+    $.get(new_location_edited);
+  });
+  history.pushState({ backTag: true }, document.title, '')

@@ -1,0 +1,4 @@
+tr id="student-#{student.id}"
+  = render 'gaku/admin/admissions/listing_applicants/applicant_fields', :student => student
+  td
+    = link_to_edit [:edit, :admin, student]
