@@ -35,12 +35,12 @@ describe 'Admin School Years Semesters' do
         fill_in 'semester_starting', :with => Date.parse('2013-3-8')
         fill_in 'semester_ending', :with => Date.parse('2013-3-8')
         click submit
-        page.should have_content 'should be after Starting'
+        page.should have_content 'The Ending Date must come after the Starting Date'
 
         fill_in 'semester_starting', :with => Date.parse('2013-3-8')
         fill_in 'semester_ending', :with => Date.parse('2013-3-9')
         click submit
-        page.should_not have_content 'should be after Starting'
+        page.should_not have_content 'The Ending Date must come after the Starting Date'
         flash_created?
       end
 
@@ -107,12 +107,12 @@ describe 'Admin School Years Semesters' do
           fill_in 'semester_starting', :with => Date.parse('2013-3-8')
           fill_in 'semester_ending', :with => Date.parse('2013-3-8')
           click submit
-          within(modal) {page.should have_content 'should be after Starting'}
+          within(modal) { page.should have_content 'The Ending Date must come after the Starting Date' }
 
           fill_in 'semester_starting', :with => Date.parse('2013-3-8')
           fill_in 'semester_ending', :with => Date.parse('2013-3-9')
           click submit
-          within(modal) {page.should_not have_content 'should be after Starting'}
+          within(modal) { page.should_not have_content 'The Ending Date must come after the Starting Date' }
           flash_updated?
         end
 
