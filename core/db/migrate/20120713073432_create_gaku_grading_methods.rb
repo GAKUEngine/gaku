@@ -1,9 +1,11 @@
 class CreateGakuGradingMethods < ActiveRecord::Migration
   def change
     create_table :gaku_grading_methods do |t|
-      t.string :name
-      t.text   :description
-      t.text   :method
+      t.string  :name
+      t.text    :description
+      t.text    :method
+      t.text    :arguments
+      t.boolean :curved, :default => true
 
       t.timestamps
     end
