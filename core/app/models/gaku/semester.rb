@@ -23,7 +23,7 @@ module Gaku
 
     def ending_after_starting
       return if  starting.blank? && ending.blank?
-      errors.add(:ending, I18n.t('semester.ending_after_starting')) if self.starting >= self.ending
+      errors.add(:base, I18n.t('semester.ending_after_starting')) if self.starting >= self.ending
     end
 
     def between_school_year_dates
