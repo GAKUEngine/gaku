@@ -9,5 +9,8 @@ describe Gaku::GradingMethodSet do
     it { should allow_mass_assignment_of :rank_order }
     it { should have_many(:grading_method_set_items) }
     it { should have_many(:grading_methods).through(:grading_method_set_items) }
+
+    it { should validate_presence_of :name }
+
   end
 end

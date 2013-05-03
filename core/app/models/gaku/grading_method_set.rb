@@ -4,5 +4,7 @@ module Gaku
 
     has_many :grading_method_set_items
     has_many :grading_methods, through: :grading_method_set_items
+
+    validates :name, presence:true
   end
 end
