@@ -10,8 +10,6 @@ module Gaku
     inherit_resources
     respond_to :js, :html
 
-    expose :class_group
-
     before_filter :load_data
     before_filter :load_before_show, :only => :show
     before_filter :count, :only => [:create, :destroy, :index]

@@ -1,10 +1,14 @@
 # -*- encoding: utf-8 -*-
+
+require 'spreadsheet'
+require 'csv'
+
 module Gaku
   module Core
     module Importers
       module SchoolStation
         class Zaikousei
-          
+
           def get_default_index
             idx = Hash.new
 
@@ -113,7 +117,7 @@ module Gaku
 
             #sheet is shifted so the top line is taken
             #idx = check_index(sheet.first, idx)
-            
+
             Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(sheet, idx)
           end
         end

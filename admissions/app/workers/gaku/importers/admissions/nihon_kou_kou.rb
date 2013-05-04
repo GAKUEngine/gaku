@@ -41,7 +41,7 @@ module Gaku
 
           def 内申点合計計算(kyoka_list, name, student, record, row, idx)
             total = 0
-            
+
             kyoka_list.each do |kyoka|
               total += row[idx[kyoka]]
             end
@@ -54,7 +54,7 @@ module Gaku
             naishin.save
             record.simple_grades << naishin
           end
-          
+
           kyoka9.each do |kyoka|
             naishin = SimpleGrade.where(:student_id  => student.id, :name => kyoka).first
             if naishin.nil?
@@ -138,7 +138,7 @@ module Gaku
             end
           end
 
-          admission.save          
+          admission.save
         end
 
         def create_applicant(surname, name, surname_reading, name_reading)
@@ -151,7 +151,7 @@ module Gaku
 
         def 基本入力一行分(row, idx, period_id, method_id)
           ActiveRecord::Base.transaction do
-            
+
             name_raw = row[idx["氏名"]]
             if name_raw.nil?
               #名前が無い行の情報を無視
@@ -174,7 +174,7 @@ module Gaku
 
             applicant_number = row[idx["受験番号"]]
 
-            logger.info "志願者「" + name_raw + "」[" + applicant_number.to_i.to_s + "]が見つかりました。" 
+            logger.info "志願者「" + name_raw + "」[" + applicant_number.to_i.to_s + "]が見つかりました。"
 
            # if !applicant_number.nil? && !period_id.nil? && !method_id.nil?
            #   duplicates = Admission.where(:applicant_number => applicant_number, :admission_period_id => period_id, :admission_method_id => method_id)
@@ -191,7 +191,7 @@ module Gaku
                 logger.info "[" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "]に入学レコード[" + applicant_number.to_i.to_s + "]が既に登録している為更新対象とします。"
                 student = Student.find(admission.student_id)
                 if !student.nil? && student.name != name || student.surname != student.surname
-                  logger.info "!*!*![" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "の" + applicant_number.to_i.to_s + "に「" 
+                  logger.info "!*!*![" + AdmissionPeriod.find(period_id).name + ":" + AdmissionMethod.find(method_id).name + "の" + applicant_number.to_i.to_s + "に「"
                     + student.surname + "　" + student.name + "」が登録されているがシートデータに「" + surname + "　" + name + "」が登録されてます。上書きします。"
                   student = create_applicant(surname, name, surname_reading, name_reading)
                   admission.student_id = student.id
@@ -214,7 +214,7 @@ module Gaku
                                                       :admission_phase_state_id => admission_phase_state.id,
                                                       :admission_id => admission.id)
 
-                logger.info "志願者「" + surname + "　" + name + 
+                logger.info "志願者「" + surname + "　" + name +
                   "[" + surname_reading + "　" + name_reading + "]」を" + admission_period.name + "の" + admission_method.name + "に登録しました。"
               end
 
@@ -231,7 +231,7 @@ module Gaku
               logger.info "入学時期及び入学形態が設定されていなかった為志願者" + "「" + surname + "　" + name +
                 "[" + surname_reading + "　" + name_reading + "]」を入学時期形態なしで志願者リストに登録しました。"
             end
-            
+
             中学校度の内容登録(student, row, idx)
           end
         end
