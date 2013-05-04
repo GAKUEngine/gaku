@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+#source 'http://production.s3.rubygems.org'
 
 #DB
 gem 'mysql2'
@@ -17,27 +18,12 @@ group :assets do
 end
 
 group :development do
-  gem 'rubocop'
-end
-
-group :test do
-  gem 'capybara', '= 1.1.3'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
-  gem 'spork', '~> 1.0rc'
-
-  gem 'rspec-rails'
-  gem 'factory_girl_rails', '~> 3.2.0'
-  gem 'ffaker'
-  gem 'shoulda-matchers'
-
-  gem 'database_cleaner'
-  gem 'launchy'
-
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
+  gem 'rubocop'
+  gem 'guard-cop'
 
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
@@ -45,7 +31,20 @@ group :test do
   else
     gem 'rb-inotify', '~> 0.8.8' #this is not available for MacOS
   end
+end
 
+group :test do
+  gem 'spork', '~> 1.0rc'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 3.2.0'
+  gem 'ffaker'
+  gem 'shoulda-matchers'
+  gem 'capybara', '= 1.1.3'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'launchy'
+
+  gem 'poltergeist'
 end
 
 gemspec

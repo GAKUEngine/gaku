@@ -25,6 +25,11 @@ module Gaku
       @class_group_course_enrollment = ClassGroupCourseEnrollment.new
     end
 
+    def index
+      @class_groups = SemesterClassGroup.group_by_semester
+      @class_groups_without_semester = ClassGroup.without_semester
+    end
+
     def sort_column
       ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
     end

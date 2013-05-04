@@ -63,6 +63,10 @@ module Gaku
           '.delete-link'
         end
 
+        def close
+          '.close'
+        end
+
         def accept_alert
           page.driver.browser.switch_to.alert.accept if ENV['SELENIUM']
         end

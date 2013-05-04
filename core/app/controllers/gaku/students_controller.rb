@@ -12,11 +12,13 @@ module Gaku
     respond_to :csv, only: :csv
     respond_to :pdf, only: :show
 
-    before_filter :select_vars,       only: [:index, :new, :edit]
+    before_filter :select_vars,       only: [:index,:new, :edit]
     before_filter :notable,           only: [:show, :edit]
     before_filter :count,             only: [:create, :destroy, :index]
-    before_filter :selected_students, only: [:create, :index]
+    before_filter :selected_students, only: [:create,:index]
     before_filter :unscoped_student,  only: [:show, :destroy, :recovery]
+    after_filter  :make_enrolled,     only: [:create]
+
 
     def index
       @enrolled_students = params[:enrolled_students]
@@ -166,7 +168,15 @@ module Gaku
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      if %w[asc desc].include?(params[:direction])
+        params[:direction]
+      else
+        'asc'
+       end
+    end
+
+    def make_enrolled
+      @student.make_enrolled if @student.valid?
     end
   end
 end

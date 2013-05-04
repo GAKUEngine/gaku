@@ -15,13 +15,15 @@ module Gaku
     validate :between_school_year_dates
     validate :ending_after_starting
 
+    def to_s
+      "#{starting} - #{ending}"
+    end
+
     private
 
     def ending_after_starting
       return if  starting.blank? && ending.blank?
-      if starting >= ending
-        errors.add(:ending, I18n.t(:'semester.ending_after_starting'))
-      end
+      errors.add(:base, I18n.t(:'semester.ending_after_starting')) if starting >= ending
     end
 
     def between_school_year_dates

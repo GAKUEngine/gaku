@@ -5,9 +5,6 @@ module Gaku
       inherit_resources
 
       before_filter :initialize_variables
-
-      include LinkToHelper
-
       respond_to :js, :html
 
       def new

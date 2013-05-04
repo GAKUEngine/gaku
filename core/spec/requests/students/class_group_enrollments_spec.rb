@@ -25,7 +25,7 @@ describe 'Student Class Group Enrollments' do
       select 'Biology', from: 'class_group_enrollment_class_group_id'
       fill_in 'class_group_enrollment_seat_number', with: '77'
       click_on "Create Class Enrollment"
-      click_on 'Cancel'
+      #click_on 'Cancel'
       wait_until_invisible modal
     end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 

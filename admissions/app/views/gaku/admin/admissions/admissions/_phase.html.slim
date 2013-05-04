@@ -1,0 +1,12 @@
+.row-fluid
+  .span12 style="margin-bottom:0px; padding:15px"
+    - admission_phase_states.each_with_index do |state, index|
+      .row-fluid
+        .span12 *{:id => "state" + state.id.to_s}
+          h4
+            = state.name
+          =render 'gaku/admin/admissions/admissions/students_list', :state => state
+/= javascript_include_tag "student_chooser"
+
+javascript:
+  $(".class_group-select").combobox();

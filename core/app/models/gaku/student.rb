@@ -55,6 +55,14 @@ module Gaku
 
     before_create :set_scholarship_status
 
+    def make_enrolled
+      enrollment_status = Gaku::EnrollmentStatus.where( code: "enrolled",
+                                                        is_active: true,
+                                                        immutable: true).first_or_create!.id
+      update_column(:enrollment_status_id, enrollment_status)
+      save
+    end
+
     def identification_number
       "%surname-%name-%id".gsub(/%(\w+)/) do |s|
         case s

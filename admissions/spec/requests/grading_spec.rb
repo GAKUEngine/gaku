@@ -5,9 +5,7 @@ describe 'Admin Admissions Grading' do
   as_admin
 
   let!(:attendance) { create(:attendance) }
-  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
-  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id, is_deleted:false, admitted:false) }
+  let!(:student) { create(:student, :applicant) }
 
 
   before do
@@ -31,7 +29,7 @@ describe 'Admin Admissions Grading' do
     it 'grades' do
       fill_in 'portion_score', with: 89
       click '.exam-parts' #TODO fix this
-      sleep 2
+      #sleep 2
       visit gaku.admin_admissions_path
       select 'Passed', from: 'state_id'
       click_on 'Save'

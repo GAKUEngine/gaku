@@ -35,9 +35,9 @@ ja:
     zipcode: 郵便番号
   admitted: 入学日
   alert:
-    already_added: ! '%{resource}が既に登録されています!'
-    empty: ! '%{resource}が空です!'
-    not_selected: ! '%{resource}が未選択です!'
+    already_added: '%{resource}が既に登録されています!'
+    empty: '%{resource}が空です!'
+    not_selected: '%{resource}が未選択です!'
   and: と
   are_you_sure: 本当に実効しますか?
   assignment:
@@ -242,6 +242,11 @@ ja:
       surname: 姓
       surname_reading: フリガナ（姓）
     import: CSVを読み込む
+  date:
+    formats:
+      default: '%Y-%m-%d'
+      long: '%Y-%m-%d'
+      short: '%Y-%m-%d'
   date_placeholder: YYYY-MM-DD
   default: デフェルト
   delete: 削除
@@ -271,8 +276,8 @@ ja:
       unlock_instructions:
         subject: アカウントの凍結解除
     omniauth_callbacks:
-      failure: ! '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
-      success: ! '%{kind} アカウントによる個人認証に成功しました。'
+      failure: '%{kind} アカウントによる個人認証に失敗しました（%{reason}）。'
+      success: '%{kind} アカウントによる個人認証に成功しました。'
     password: パスワード
     password_confirmation: パスワード（確認用）
     passwords:
@@ -283,9 +288,9 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
-      admin_set_up: ! '学園陣が初期状態です。
-
-        管理者ユーザを登録して下さい。'
+      admin_set_up: |-
+        学園陣が初期状態です。
+        管理者ユーザを登録して下さい。
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       inactive_signed_up: サインアップに成功しましたが、%{reason}の為にサインイン出来ません。
       reasons:
@@ -312,6 +317,7 @@ ja:
     username: ユーザー名
   edit: 編集
   email: メールアドレス
+  empty: 空です
   enroll_to_class: クラスに登録
   enrollment:
     plural: 在籍
@@ -319,6 +325,7 @@ ja:
   enrollment_status:
     active: アクティブ
     add: 在学状況を追加
+    code: コード
     edit: 在学状況を編集
     list: 在学状況一覧
     name: 名前
@@ -343,8 +350,8 @@ ja:
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
       not_saved:
-        one: ! '1 つのエラーにより %{resource} は保存されませんでした:'
-        other: ! '%{count} つのエラーにより %{resource} は保存されませんでした:'
+        one: '1 つのエラーにより %{resource} は保存されませんでした:'
+        other: '%{count} つのエラーにより %{resource} は保存されませんでした:'
     not_uploaded: アップロード中にエラーが発生しました。%{resource}
   exam:
     add: 試験を追加
@@ -423,12 +430,12 @@ ja:
   flash:
     actions:
       create:
-        notice: ! '%{resource_name}は正常に作成されました'
+        notice: '%{resource_name}は正常に作成されました'
       destroy:
-        alert: ! '%{resource_name}は消去出来ませんでした'
-        notice: ! '%{resource_name}は正常に消去されました'
+        alert: '%{resource_name}は消去出来ませんでした'
+        notice: '%{resource_name}は正常に消去されました'
       update:
-        notice: ! '%{resource_name}は正常に更新されました'
+        notice: '%{resource_name}は正常に更新されました'
   gender:
     choose: 性別を選択
     female: 女性
@@ -526,6 +533,7 @@ ja:
           gender: 性別
           state: 都道府県
       school_details: 学校詳細
+      school_years: 学年管理
       schools: 学校
       specialties: 専攻
       system:
@@ -575,15 +583,15 @@ ja:
     singular: 備考
     title: 備考タイトル
   notice:
-    added: ! '%{resource}は正常に追加されました'
-    created: ! '%{resource}は正常に作成されました'
-    destroyed: ! '%{resource}は正常に消去されました'
-    enrolled: ! '%{resource}は%{to}に正常に追加されました'
-    no_resource_assign_first: ! '%{resource}はありません、一つ登録してください'
-    recovered: ! '%{resource}は正常に復元されました'
-    removed: ! '%{resource}は正常に削除されました'
-    updated: ! '%{resource}は正常に更新されました'
-    uploaded: ! '%{resource}は正常にアップロードされました'
+    added: '%{resource}は正常に追加されました'
+    created: '%{resource}は正常に作成されました'
+    destroyed: '%{resource}は正常に消去されました'
+    enrolled: '%{resource}は%{to}に正常に追加されました'
+    no_resource_assign_first: '%{resource}はありません、一つ登録してください'
+    recovered: '%{resource}は正常に復元されました'
+    removed: '%{resource}は正常に削除されました'
+    updated: '%{resource}は正常に更新されました'
+    uploaded: '%{resource}は正常にアップロードされました'
   num_enrolled: 在籍人数
   options: オプション
   order: 順序
@@ -599,10 +607,16 @@ ja:
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
+    output_formats:
+      choose: フォーマット選択
+      documents: ドキュメント
+      printables: 印刷物
+      spreadsheets: 表計算
     pagination: ページ分け
     per_page:
       changes: ページ当たりの差分
       default: ページ当たりの件数
+      students: ページ毎の生徒数
     plural: プリセット
     save: プリセットを保存
     singular: プリセット
@@ -615,6 +629,34 @@ ja:
   profiles:
     new: 新規プロフィール登録
     save: プロフィールを保存
+  program:
+    add: プログラムを追加
+    description: プログラム説明
+    edit: プログラムを編集
+    levels: レベル
+    list: プログラム一覧
+    name: プルグラム名
+    plural: プログラム
+    save: プログラム
+    singular: プログラム
+  program_level:
+    add: プルグラムレベルを追加
+    choose: プログラムレベルを選択
+    list: プログラムレベル一覧
+    plural: プログラムレベル
+    remove: プログラムレベルを削除
+  program_specialty:
+    add: プログラムに専攻追加
+    choose: プログラム専攻を選択
+    list: プログラム専攻一覧
+    plural: プログラム専攻
+    remove: プログラム専攻を削除
+  program_syllabus:
+    add: 選択授業を追加
+    choose: プログラム授業を選択
+    list: プログラム授業一覧
+    plural: プログラム専攻
+    remove: プログラム授業を削除
   required: 必須
   revert: 元に戻す
   role:
@@ -653,26 +695,48 @@ ja:
     plural: 学級
     remove_school_level: この学級を削除する
     singular: 学級
+  school_year:
+    add: 学年を追加
+    day: 日
+    duration: 学年の期間
+    edit: 学年を編集
+    ending: 学年最終日
+    ending_after_starting: 学年最終日が学年開始日より前に設定されています。
+    list: 学年一覧
+    plural: 学年
+    save: 学年を保存
+    show: 学年照会
+    singular: 学年
+    starting: 学年開始日
   search: 検索
   select: 選択
   semester:
     add: 学期を追加
+    between: 学期の期間を学年開始日と学年最終日の間で設定してください。
+    day: 日
+    duration: 学期の期間
     edit: 学期を編集
     ending: 学期終了日
     ending_after_starting: 開始後に終了して下さい
     list: 学期一覧
     number: 学期番号
     plural: 学期
+    remove: 学期を削除
     save: 学期を保存
+    singular: 学期
     starting: 開始
     uniqueness: 既に追加された学期です
+  semester_class_group:
+    choose: 学期を選択
+    save: 学期を保存
+    uniqueness: このクラスに同じ学期が既に登録されています。
   sex: 性別
   sex_and_birth: 性別・生年月日
   show: 照会
   simple_grade:
     add: 単体評価を追加
     edit: 単体評価を編集
-    grade: 単体評価
+    grade: 単体評価[点数/スコア/結果]
     index: 単体評価一覧
     list: 単体評価覧
     plural: 単体評価
@@ -762,8 +826,8 @@ ja:
     username: ユーザ名
   views:
     pagination:
-      first: ! '&laquo; 最初'
+      first: '&laquo; 最初'
       last: 最後 &raquo;
       next: 次 &rsaquo;
-      previous: ! '&lsaquo; 前'
-      truncate: ! '...'
+      previous: '&lsaquo; 前'
+      truncate: '...'
