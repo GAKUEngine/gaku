@@ -1,7 +1,7 @@
 =nested_header t(:'program_syllabus.plural')
 = f.fields_for :program_syllabuses,  :validate => true   do |syllabus|
   .well
-    =syllabus.select :syllabus_id, syllabuses, {:prompt => t(:'program_syllabus.choose')}, {:id => 'program-syllabus-select'}
+    =syllabus.select :syllabus_id, @syllabuses, {:prompt => t(:'program_syllabus.choose')}, {:id => 'program-syllabus-select'}
     =syllabus.link_to_remove t(:'program_syllabus.remove'), :class => 'btn btn-danger remove-program-syllabus'
   = hr
 p = f.link_to_add t(:'program_syllabus.add'), :program_syllabuses, :class => 'btn btn-success add-program-syllabus'
