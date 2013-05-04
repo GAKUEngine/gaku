@@ -12,6 +12,7 @@ module Gaku
     before_filter :student
     before_filter :student_achievements, :only => [:update]
     before_filter :count, :only => [:index, :create, :destroy]
+    before_filter :load_data
 
     def index
       @student_achievements = @student.student_achievements
@@ -19,6 +20,10 @@ module Gaku
     end
 
     private
+
+    def load_data
+      @achievements = Achievement.all.collect { |s| [s.name, s.id] }
+    end
 
     def student
       @student = Student.find(params[:student_id])

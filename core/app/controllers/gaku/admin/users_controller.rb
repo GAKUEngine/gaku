@@ -11,9 +11,14 @@ module Gaku
       before_filter :save_user_roles, :only => :update
       before_filter :count, :only => [:create, :destroy, :index]
       before_filter :clean_password, :only => :update
+      before_filter :load_data
 
 
       private
+
+      def load_data
+        @roles = Role.all
+      end
 
       def save_user_roles
         @user = User.find(params[:id]) if params[:id]

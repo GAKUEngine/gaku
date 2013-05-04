@@ -1,6 +1,6 @@
 .row-fluid
   .span12
-    = f.select :class_group_ids, class_groups,{:prompt => t(:'class_group.none_assigned')}, :label => t(:'class')
+    = f.select :class_group_ids, @class_groups,{:prompt => t(:'class_group.none_assigned')}, :label => t(:'class')
 
 = render 'gaku/shared/form_fields/person_form_fields', :f => f
 
@@ -12,6 +12,6 @@
 
 .row-fluid
   .span6
-    = f.select :scholarship_status_id, scholarship_statuses, {:include_blank => true}, :label => t(:scholarship_status)
+    = f.select :scholarship_status_id, @scholarship_statuses, {:include_blank => true}, :label => t(:scholarship_status)
   .span6
-    = f.select :enrollment_status_id, enrollment_statuses,  {:include_blank => true}, :label => t(:enrollment_status)
+    = f.select :enrollment_status_id, @enrollment_statuses,  {:include_blank => true}, :label => t(:enrollment_status)

@@ -1,7 +1,7 @@
 =nested_header t(:'program_level.plural')
 = f.fields_for :program_levels, :validate => true do |level|
   .well
-    =level.select :level_id, levels , {:prompt => t(:'program_level.choose')}, {:id => 'program-level-select'}
+    =level.select :level_id, @levels , {:prompt => t(:'program_level.choose')}, {:id => 'program-level-select'}
     =level.link_to_remove t(:'program_level.remove'), :class => 'btn btn-danger remove-program-level'
   =hr
 p = f.link_to_add t(:'program_level.add'), :program_levels, :class => 'btn btn-success add-program-level'

@@ -12,6 +12,7 @@ module Gaku
     before_filter :before_show,  :only => [:show]
     before_filter :count, :only => [:create, :destroy, :index]
     before_filter :unscoped_course_group, :only => :destroy
+    before_filter :load_data
 
     def index
       @course_groups = CourseGroup.order( sort_column + " " + sort_direction)
@@ -35,13 +36,17 @@ module Gaku
 
   	private
 
+    def load_data
+      @courses = Course.includes(:syllabus).collect { |c| [c, c.id] }
+    end
+
       def unscoped_course_group
         @course_group = CourseGroup.unscoped.find(params[:id])
       end
 
       def before_show
         @course_group_enrollment = CourseGroupEnrollment.new
-        @courses = Course.all
+        #@courses = Course.all
       end
 
       def count

@@ -20,6 +20,7 @@ describe 'Admin School Levels' do
     it 'create and show' do
       click '#edit-admin-primary-school'
       accept_alert
+      wait_until { page.should have_content 'Edit Master School' }
       current_path.should eq gaku.admin_school_details_edit_path
       click '.add-school-level'
       fill_in 'School Level', :with => '12 class'

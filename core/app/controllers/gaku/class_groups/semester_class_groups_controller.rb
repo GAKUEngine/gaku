@@ -9,8 +9,13 @@ module Gaku
     belongs_to :class_group, :parent_class => Gaku::ClassGroup
 
     before_filter :count, :only => [:create, :destroy]
+    before_filter :load_data, only: [:new, :edit]
 
     private
+
+    def load_data
+      @semesters = Semester.all.collect { |s| [s.to_s, s.id] }
+    end
 
     def count
       class_group = ClassGroup.find(params[:class_group_id])

@@ -30,6 +30,17 @@ module Gaku
 
     scope :without_semester, -> { includes(:semester_courses).where(gaku_semester_courses: { course_id: nil }) }
 
+    def to_s
+      if syllabus_name
+        "#{syllabus_name}-#{code}"
+      else
+        code
+      end
+    end
+
+    def to_selectbox
+      [self.to_s, self.id]
+    end
 
     def enroll_class_group(class_group)
     	unless class_group.blank?
