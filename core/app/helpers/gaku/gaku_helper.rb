@@ -1,11 +1,8 @@
 module Gaku
   module GakuHelper
 
-    #include StudentChooserHelper
     include SortHelper
     include TranslationsHelper
-    #include PresetsHelper
-    #include PersonHelper
 
     def count_div(html_class, &block)
       content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
@@ -25,8 +22,6 @@ module Gaku
         true
       end
     end
-
-
 
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
