@@ -9,6 +9,7 @@ module Gaku
 
     respond_to :js, :html
 
+    before_filter :load_data
     before_filter :unscoped_address, only: [:destroy, :recovery]
     before_filter :addressable
     before_filter :count
@@ -45,6 +46,10 @@ module Gaku
 
     def addressable_klasses
       [Gaku::Student, Gaku::Campus, Gaku::Guardian, Gaku::Teacher]
+    end
+
+    def load_data
+      @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
     end
 
     def unscoped_address

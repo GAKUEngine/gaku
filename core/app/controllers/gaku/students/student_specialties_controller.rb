@@ -9,6 +9,7 @@ module Gaku
     belongs_to :student
     respond_to :js, :html
 
+    before_filter :load_data
     before_filter :student
     before_filter :student_specialties, :only => :update
     before_filter :count, :only => [:index, :create, :destroy, :update]
@@ -26,6 +27,10 @@ module Gaku
     end
 
     private
+
+    def load_data
+      @specialties = Gaku::Specialty.all.collect { |s| [s.name, s.id] }
+    end
 
     def student
       @student = Student.find(params[:student_id])

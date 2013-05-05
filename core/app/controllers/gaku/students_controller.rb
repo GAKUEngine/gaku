@@ -1,5 +1,8 @@
+require 'csv'
+
 module Gaku
   class StudentsController < GakuController
+
     include SheetHelper
 
     load_and_authorize_resource class: Gaku::Student,
@@ -12,6 +15,7 @@ module Gaku
     respond_to :csv, only: :csv
     respond_to :pdf, only: :show
 
+    before_filter :load_data
     before_filter :select_vars,       only: [:index,:new, :edit]
     before_filter :notable,           only: [:show, :edit]
     before_filter :count,             only: [:create, :destroy, :index]
@@ -136,6 +140,13 @@ module Gaku
 
     def select_vars
       @class_group_id ||= params[:class_group_id]
+    end
+
+    def load_data
+      @achievements = Achievement.all.collect { |a| [a.name, a.id] }
+      @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
+      @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+      @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
     end
 
     def class_name

@@ -11,6 +11,7 @@ module Gaku
     belongs_to :student
     respond_to :js, :html, :json
 
+    before_filter :load_data
     before_filter :student
     before_filter :count, :only => [:index, :create, :destroy, :update]
     before_filter :simple_grades, :only => :update
@@ -27,6 +28,10 @@ module Gaku
     end
 
     private
+
+    def load_data
+      @schools = Gaku::School.all.collect { |s| [s.name, s.id] }
+    end
 
     def student
       @student = Student.find(params[:student_id])

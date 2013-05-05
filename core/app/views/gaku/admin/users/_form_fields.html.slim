@@ -5,6 +5,6 @@
 
 .roles
   = hidden_field_tag "user[role_ids][]", nil
-  - roles.each do |role|
+  - @roles.each do |role|
     = check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)
     = role.name

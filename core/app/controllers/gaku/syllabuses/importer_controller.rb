@@ -1,4 +1,8 @@
 # -*- encoding: utf-8 -*-
+
+require 'spreadsheet'
+require 'csv'
+
 module Gaku
   class Syllabuses::ImporterController < GakuController
 

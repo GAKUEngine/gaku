@@ -16,7 +16,8 @@ module Gaku
     validate :ending_after_starting
 
     def to_s
-      "#{starting} - #{ending}"
+      #"#{starting} - #{ending}"
+      "#{starting} / #{ending}"
     end
 
     private

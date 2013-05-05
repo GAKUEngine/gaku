@@ -7,6 +7,7 @@ module Gaku
     	inherit_resources
 
     	def students
+        @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
       	@preset_hash = Preset.load_presets_hash(Preset::PRESETS[:student])
       end
 
