@@ -1,7 +1,7 @@
 = content_for :title, t(:'admissions.applicants.list')
 .pull-right
   #admissions_links
-    = render 'gaku/admin/admissions/admissions_links', :admission_params => @admission_params
+    = render 'gaku/admin/admissions/links/admissions_links', :admission_params => @admission_params
 
 .row-fluid
   h4.mt-xs.mb-0 = t(:'admissions.candidates.list')
@@ -11,7 +11,7 @@
   .span12.well
     .row-fluid
       #admission-applicants-listing
-        = render 'applicants', :students => @students
+        = render 'gaku/admin/admissions/listing_applicants/applicants', :students => @students
 
 javascript:
   $(".class_group-select").combobox();

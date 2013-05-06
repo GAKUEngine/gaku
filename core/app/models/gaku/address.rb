@@ -1,74 +1,91 @@
-  module Gaku
+module Gaku
   class Address < ActiveRecord::Base
     belongs_to :country
     belongs_to :state
-    belongs_to :addressable, polymorphic: true, :counter_cache => true
+    belongs_to :addressable, polymorphic: true, counter_cache: true
 
-    has_paper_trail :on => [:update, :destroy],
-                    :meta => { :join_model  => :join_model_name, :joined_resource_id => :joined_resource_id }
+    has_paper_trail on:   [:update, :destroy],
+                    meta: {
+                            join_model: :join_model_name,
+                            joined_resource_id: :joined_resource_id
+                          }
 
-    default_scope :conditions => { :is_deleted => false }
+    default_scope conditions:  { is_deleted: false }
 
     validates_presence_of :address1, :city, :country
 
     accepts_nested_attributes_for :country
 
-    attr_accessible :title, :address1, :address2, :city, :zipcode, :state , :state_name,
-                    :is_deleted, :past, :country,
-                    :country_id, :state_id, :is_primary
+    attr_accessible :title, :address1, :address2, :city, :zipcode,
+                    :state, :state_name, :state_id, :country, :country_id,
+                    :is_deleted, :is_primary, :past
 
-    before_save :ensure_first_is_primary, :on => :create
+    before_save :ensure_first_is_primary, on: :create
 
     after_destroy :reset_counter_cache
 
-
     def make_primary
-      self.addressable.addresses.update_all({:is_primary => false}, ['id != ?', id] )
-      self.update_attribute(:is_primary, true)
-      if self.addressable.has_attribute?(:primary_address)
-        self.addressable.update_attribute(:primary_address, self.addressable.address_widget)
-      end
+      addresses.update_all({is_primary: false}, ['id != ?', id])
+      update_attribute(:is_primary, true)
+      update_address_widget
     end
 
     def soft_delete
-      self.update_attributes(:is_deleted => true, :is_primary => false)
+      update_attributes(is_deleted: true, is_primary: false)
       addressable.class.decrement_counter(:addresses_count, addressable.id)
     end
 
     def recover
-      self.update_attribute(:is_deleted, false)
+      update_attribute(:is_deleted, false)
       addressable.class.increment_counter(:addresses_count, addressable.id)
     end
 
     def primary?
-      self.is_primary
+      is_primary
     end
 
     def join_model_name
-      self.addressable_type
+      addressable_type
     end
 
     def joined_resource_id
-      self.addressable_id
+      addressable_id
     end
 
     def state_text
-      state.nil? ? state_name : (state.abbr.blank? ? state.name : state.abbr)
+      if state
+        state.abbr.blank? ? state.name : state.abbr
+      else
+        state_name
+      end
     end
 
     def empty?
-      attributes.except('id', 'created_at', 'updated_at', 'country_numcode').all? { |_, v| v.nil? }
+      except_fields = %w(id created_at updated_at country_numcode)
+      attributes.except(except_fields).all? { |_, v| v.nil? }
     end
 
     private
 
+    def addresses
+      addressable.addresses
+    end
+
     def reset_counter_cache
-      addressable.class.reset_counters(addressable.id, :addresses) unless addressable.instance_of? Gaku::Campus
+      unless addressable.instance_of? Gaku::Campus
+        addressable.class.reset_counters(addressable.id, :addresses)
+      end
     end
 
     def ensure_first_is_primary
-      if self.addressable.respond_to?(:addresses)
-        self.is_primary = true if self.addressable.addresses.blank?
+      if addressable.respond_to?(:addresses)
+        self.is_primary = true if addresses.blank?
+      end
+    end
+
+    def update_address_widget
+      if addressable.has_attribute? :primary_address
+        addressable.update_attribute(:primary_address, addressable.address_widget)
       end
     end
 

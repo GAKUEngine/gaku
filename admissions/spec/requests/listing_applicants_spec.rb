@@ -4,10 +4,7 @@ describe 'Admin Listing Applicants' do
 
   as_admin
 
-  let!(:attendance) { create(:attendance) }
-  let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
-  let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id, is_deleted:false, admitted:false) }
+  let!(:student) { create(:student, :admitted) }
 
   context 'lists applicants and', js:true do
 

@@ -9,6 +9,7 @@ module Gaku
     respond_to :js, :html
 
     before_filter :student, :only => [:new, :create]
+    before_filter :load_data
 
     def create
       @class_group_enrollment = ClassGroupEnrollment.new(params[:class_group_enrollment])
@@ -31,6 +32,10 @@ module Gaku
 
     def student
       @student = Student.find(params[:student_id])
+    end
+
+    def load_data
+      @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
     end
 
   end

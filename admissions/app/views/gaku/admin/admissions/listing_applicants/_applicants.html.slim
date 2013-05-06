@@ -13,6 +13,6 @@
       = th_actions 1
 
   tbody
-    = render :partial => 'applicant', :collection => @students, :as => 'student'
+    = render :partial => 'gaku/admin/admissions/listing_applicants/applicant', :collection => @students, :as => 'student'
 
 = paginate @students, :remote => true

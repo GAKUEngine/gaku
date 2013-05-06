@@ -1,20 +1,18 @@
 module Gaku
-	class EnrollmentStatus < ActiveRecord::Base
+  class EnrollmentStatus < ActiveRecord::Base
 
     has_many :students
 
-		translates :name
+    translates :name
 
     attr_accessible :code, :name, :is_active, :immutable
 
     validates :code, presence: true
 
-    before_create :check_status_name
+    before_create :set_name
 
-    def check_status_name
-    	if self.name.nil?
-    		self.name = self.code
-    	end
+    def set_name
+      self.name = code if name.nil?
     end
 
     def to_s

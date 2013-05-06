@@ -4,19 +4,22 @@ module Gaku
     include Notes
 
     has_many :exam_scores
-    has_many :exam_portions, :order => :position
-    has_many :exam_portion_scores, :through => :exam_portions
+    has_many :exam_portions, order: :position
+    has_many :exam_portion_scores, through: :exam_portions
 
-    has_many :exam_syllabuses, :dependent => :destroy
-    has_many :syllabuses, :through => :exam_syllabuses
+    has_many :exam_syllabuses, dependent: :destroy
+    has_many :syllabuses, through: :exam_syllabuses
 
-    has_many :attendances, :as => :attendancable
+    has_many :attendances, as: :attendancable
 
     belongs_to :grading_method
 
-
     validates_presence_of :name
-    validates :weight, :numericality => {:allow_blank => true, :greater_than_or_equal_to => 0 }
+
+    validates :weight, numericality: {
+                                        allow_blank: true,
+                                        greater_than_or_equal_to: 0
+                                     }
 
     attr_accessible :name, :description, :weight,
                     :use_weighting, :is_standalone, :adjustments,
@@ -25,9 +28,9 @@ module Gaku
 
     accepts_nested_attributes_for :exam_portions
 
-
     def self.without_syllabuses
-      includes(:syllabuses).where(:is_standalone => false).select {|p| p.syllabuses.length == 0 }
+      includes(:syllabuses).where(is_standalone: false)
+                           .select { |p| p.syllabuses.length == 0 }
     end
 
     def total_weight
@@ -44,28 +47,34 @@ module Gaku
       end
     end
 
-
     def max_score
-      exam_portions.inject(0) {|sum, p| sum + p.max_score }
+      exam_portions.inject(0) { |sum, p| sum + p.max_score }
     end
 
     def completion(students)
       total_records = total_records(students)
-      completion_ratio = 1 - (ungraded(students)  / total_records.to_f)
+      completion_ratio = 1 - (ungraded(students) / total_records.to_f)
       return (completion_ratio * 100).round(2)
     end
 
     def ungraded(students)
        ungraded = 0
+
         students.each do |student|
-          student_exam_eps = self.exam_portion_scores.select { |eps| eps.student_id == student.id }
-          student_exam_eps.each {|eps| ungraded += 1 if check_record_completion?(eps)}
+          student_exam_eps = exam_portion_scores.select do |eps|
+            eps.student_id == student.id
+          end
+
+          student_exam_eps.each do |eps|
+            ungraded += 1 if check_record_completion?(eps)
+          end
         end
+
       return ungraded
     end
 
     def total_records(students)
-       self.exam_portions.count * students.count
+      exam_portions.count * students.count
     end
 
     def completed_by_students(students)
@@ -79,8 +88,11 @@ module Gaku
 
     def completed_by_student?(student)
       state = true
-      self.exam_portions.each do |ep|
-        student_eps = ep.exam_portion_scores.detect {|eps| eps.student_id == student.id}
+
+      exam_portions.each do |ep|
+        student_eps = ep.exam_portion_scores.detect do |eps|
+          eps.student_id == student.id
+        end
         state = false if check_record_completion?(student_eps)
       end
 
@@ -90,7 +102,10 @@ module Gaku
     private
 
     def check_record_completion?(student_eps)
-      student_eps.score.nil? && !student_eps.attendances.last.try(:attendance_type).try(:auto_credit)
+      student_eps.score.nil? && !student_eps.attendances
+                                            .last
+                                            .try(:attendance_type)
+                                            .try(:auto_credit)
     end
   end
 end

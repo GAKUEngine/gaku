@@ -1,16 +1,15 @@
 module Gaku
-	class AssignmentsController < GakuController
+  class AssignmentsController < GakuController
 
-	  inherit_resources
-	  actions :index, :show, :new, :create, :update, :edit, :destroy
+    inherit_resources
 
-	  def destroy
-	    @assignment = Assignment.find(params[:id])
-	    @assignment.destroy
-	    respond_to do |format|
-	      format.js { render :nothing => true }
-	    end
-	  end
-	  
-	end
+    def destroy
+      @assignment = Assignment.find(params[:id])
+      @assignment.destroy
+      respond_to do |format|
+        format.js { render nothing: true }
+      end
+    end
+
+  end
 end

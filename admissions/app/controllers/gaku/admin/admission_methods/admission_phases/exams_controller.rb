@@ -4,7 +4,7 @@ module Gaku
 
       inherit_resources
 
-      before_filter :initialize_variables
+      before_filter :load_data
       respond_to :js, :html
 
       def new
@@ -32,10 +32,12 @@ module Gaku
       end
 
       private
-        def initialize_variables
-          @admission_method = AdmissionMethod.find(params[:admission_method_id])
-          @admission_phase = AdmissionPhase.find(params[:admission_phase_id])
-        end
+
+      def load_data
+        @admission_method = AdmissionMethod.find(params[:admission_method_id])
+        @admission_phase = AdmissionPhase.find(params[:admission_phase_id])
+        @grading_methods = GradingMethod.all.collect { |s| [s, s.id] }
+      end
 
     end
   end

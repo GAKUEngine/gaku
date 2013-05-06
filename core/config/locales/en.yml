@@ -137,6 +137,7 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
+    already_enrolled : Already enrolled to the class group!
   class_group_course_enrollment:
     save: Save Course to Class Group
   class_group_enrollment:
@@ -211,6 +212,7 @@ en:
     save: Save Course
     show: Show Course
     singular: Course
+    already_enrolled: Already enrolled to course!
   course_enrollment:
     add: Enroll to course
     create: Create enrollment
@@ -227,6 +229,7 @@ en:
     save: Save Course Group
     show: Course Group
     singular: Course Group
+    already_enrolled: Already enrolled to this course group!
   course_group_enrollment:
     save: Save to Course Group
   csv:
@@ -384,6 +387,7 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+    already_added: Exam already added!
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -423,6 +427,7 @@ en:
     save: Save
     show: Show Extracurricular Activity
     singular: Extracurricular Activity
+    already_enrolled: "Already enrolled to the extracurricular activity!"
   extracurricular_activity_enrollment:
     list: Student list
   failure:
@@ -755,6 +760,7 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
+    already_added: Specialty already added!
   student:
     add: Add Student
     birth_and: and

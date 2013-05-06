@@ -13,6 +13,6 @@
         div.tab-pane *{:id => "phase_#{phase.id.to_s}", :class => ("active" if index == 0)}
           .row-fluid style="background-color:white"
             #new-student.hide
-            =render 'phase', :admission_phase_states => phase.admission_phase_states
+            =render 'gaku/admin/admissions/admissions/phase', :admission_phase_states => phase.admission_phase_states
             div *{:id => "phase_#{phase.id.to_s}-grade-button"}
-              = render 'grade_button', :phase => phase
+              = render 'gaku/admin/admissions/admissions/grade_button', :phase => phase

@@ -3,7 +3,10 @@ module Gaku
 
     include Notes
 
-    has_many :enrollments, class_name: "Gaku::CourseEnrollment", dependent: :destroy
+    has_many :enrollments,
+             class_name: Gaku::CourseEnrollment,
+             dependent: :destroy
+
     has_many :students, through: :enrollments
 
     has_many :course_group_enrollments
@@ -30,13 +33,24 @@ module Gaku
 
     scope :without_semester, -> { includes(:semester_courses).where(gaku_semester_courses: { course_id: nil }) }
 
+    def to_s
+      if syllabus_name
+        "#{syllabus_name}-#{code}"
+      else
+        code
+      end
+    end
+
+    def to_selectbox
+      [self.to_s, self.id]
+    end
 
     def enroll_class_group(class_group)
-    	unless class_group.blank?
+      unless class_group.blank?
         ActiveRecord::Base.transaction do
           class_group.student_ids.each do |student_id|
-      	 	  CourseEnrollment.find_or_create_by_student_id_and_course_id(student_id, self.id)
-      	 end
+            CourseEnrollment.find_or_create_by_student_id_and_course_id(student_id, id)
+         end
         end
       end
     end

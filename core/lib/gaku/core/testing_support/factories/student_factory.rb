@@ -26,6 +26,18 @@ FactoryGirl.define  do
     association :enrollment_status, factory: :enrollment_status
   end
 
+  trait :admitted do
+    is_deleted false
+    #admitted false
+    association :enrollment_status, factory: :enrollment_status_admitted
+  end
+
+  trait :applicant do
+    is_deleted false
+    #admitted false
+    association :enrollment_status, factory: :enrollment_status_applicant
+  end
+
   trait :with_scholarship_status do
     association :scholarship_status, factory: :scholarship_status
   end

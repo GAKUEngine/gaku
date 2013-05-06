@@ -68,7 +68,7 @@ module Gaku
         end
 
         def accept_alert
-          page.driver.browser.switch_to.alert.accept if ENV['SELENIUM']
+          page.driver.browser.switch_to.alert.accept
         end
 
         def size_of(selector)

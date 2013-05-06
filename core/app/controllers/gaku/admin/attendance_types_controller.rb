@@ -2,15 +2,15 @@ module Gaku
   module Admin
     class AttendanceTypesController < Admin::BaseController
 
-      load_and_authorize_resource :class =>  Gaku::AttendanceType
+      load_and_authorize_resource class: Gaku::AttendanceType
 
     	inherit_resources
       respond_to :js, :html, :json
-      before_filter :count, :only => [:create, :destroy, :index]
+      before_filter :count, only: [:create, :destroy, :index]
 
       def index
         super do |format|
-          format.json { render :json => @attendance_types.to_json(:root => false) }
+          format.json { render json: @attendance_types.to_json(root: false) }
         end
       end
 

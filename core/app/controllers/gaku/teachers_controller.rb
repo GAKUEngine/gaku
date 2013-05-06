@@ -1,27 +1,31 @@
 module Gaku
   class TeachersController < GakuController
 
-    load_and_authorize_resource :teacher, :class => Gaku::Teacher
+    load_and_authorize_resource :teacher, class: Gaku::Teacher
 
     inherit_resources
     respond_to :js, :html
 
-    before_filter :count, :only => [:index, :create,:destroy]
-    before_filter :notable, :only => :show
-    before_filter :teacher, :only => [:soft_delete, :update]
+    before_filter :count,   only: [:index, :create, :destroy]
+    before_filter :notable, only: :show
+    before_filter :teacher, only: [:soft_delete, :update]
 
     def soft_delete
       @teacher.update_attribute(:is_deleted, true)
-      redirect_to teachers_path, :notice => t(:'notice.destroyed', :resource => t(:'teacher.singular'))
+      redirect_to teachers_path,
+                  notice: t(:'notice.destroyed', resource: t(:'teacher.singular'))
     end
 
     def update
       super do |format|
         if params[:teacher][:picture]
-          format.html { redirect_to @teacher, :notice => t('notice.uploaded', :resource => t('picture')) }
+          format.html do
+            redirect_to @teacher,
+                        notice: t(:'notice.uploaded', resource: t(:'picture'))
+          end
         else
           format.js { render }
-         end
+        end
       end
     end
 
@@ -30,7 +34,7 @@ module Gaku
 
     def collection
       @search = Teacher.search(params[:q])
-      results = @search.result(:distinct => true)
+      results = @search.result(distinct: true)
 
       @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
     end
@@ -47,7 +51,7 @@ module Gaku
 
     def notable
       @notable = Teacher.unscoped.find(params[:id])
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+      @notable_resource = get_resource_name @notable
     end
 
   end

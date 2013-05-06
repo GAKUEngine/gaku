@@ -1,7 +1,7 @@
 =nested_header t(:'program_specialty.plural')
 = f.fields_for :program_specialties, :validate => true do |specialty|
   .well
-    =specialty.select :specialty_id, specialties,{ :prompt => t(:'program_specialty.choose')}, {:id => 'program-specialty-select'}
+    =specialty.select :specialty_id, @specialties,{ :prompt => t(:'program_specialty.choose')}, {:id => 'program-specialty-select'}
     =specialty.link_to_remove t(:'program_specialty.remove'), :class => 'btn btn-danger remove-program-specialty'
   =hr
 p = f.link_to_add t(:'program_specialty.add'), :program_specialties, :class => 'btn btn-success add-program-specialty'

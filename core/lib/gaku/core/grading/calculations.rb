@@ -148,7 +148,7 @@ module Gaku
               @exam_weight_averages[exam.id].push @student_total_weights[student.id][exam.id]
               if @exam_weight_averages[exam.id].length == @students.length
                 total = calculate_array_total @exam_weight_averages[exam.id]
-                @exam_weight_averages[exam.id] = fix_digit(total / @students.lenght, 1)
+                @exam_weight_averages[exam.id] = fix_digit(total / @students.length, 1)
               end
             end
 
