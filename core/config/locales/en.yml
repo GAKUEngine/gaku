@@ -735,6 +735,9 @@ en:
     choose: Choose Semester
     save: Save Semester
     uniqueness: Semester already added to Class Group
+  semester_course:
+    uniqueness: Semester already added to Course
+    save: Save Semester
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show

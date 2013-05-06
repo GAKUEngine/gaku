@@ -8,7 +8,7 @@ module Gaku
     has_many :grading_method_sets, through: :grading_method_set_items
 
 	  attr_accessible :description, :method, :name, :curved, :arguments
-    validates :name, presence: true
 
+    validates :name, presence: true
   end
 end
