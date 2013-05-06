@@ -21,5 +21,5 @@
         =th t(:'class_group.homeroom')
         =th_actions 3
     tbody
-      = render :partial => 'class_group', :collection => extract_class_groups(semester_class_groups), :as => :class_group
+      = render :partial => 'class_group', :collection => extract_grouped(semester_class_groups, :class_group), :as => :class_group
   =hr

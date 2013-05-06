@@ -59,7 +59,7 @@ describe 'Admin Users' do
 
     context 'edit', :js => true do
       before do
-        within('#admin-users-index tbody tr:nth-child(2)') { click edit_link }
+        within("#admin-users-index tbody tr#user-#{user.id}") { click edit_link }
         wait_until_visible modal
       end
 
@@ -93,7 +93,7 @@ describe 'Admin Users' do
       tr_count = size_of table_rows
 
       expect do
-        within('#admin-users-index tbody tr:nth-child(2)') { click delete_link }
+        within("#admin-users-index tbody tr#user-#{user.id}") { click delete_link }
         accept_alert
         wait_until { size_of(table_rows) == tr_count - 1 }
       end.to change(Gaku::User, :count).by -1

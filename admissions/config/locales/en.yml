@@ -28,6 +28,7 @@ en:
     singular: Admission Period
   admission_phase_states:
     add: Add Admission Phase State
+    admit: Admit
     auto_admit: Auto admit
     auto_progress: Auto progress
     can_admit: Can admit
@@ -36,16 +37,14 @@ en:
     list: Admission Phase States list
     name: State name
     new: New Admission Phase State
+    no_states: There are no states
     order: Order
     plural: Admission Phase States
+    progress: Progress
     remove: Remove state
-    save: Save Admission Phase State
+    remove_student: Return from Phase
+    save: Save
     singular: Admission Phase State
-    no_states: "There are no states"
-    save: "Save"
-    progress: "Progress"
-    admit: "Admit"
-    remove_student: "Return from Phase"
   admission_phases:
     add: Add Admission Phase
     edit: Edit Admission Phase
@@ -53,16 +52,17 @@ en:
     list: Admission Phases list
     name: Phase name
     new: New Admission Phase
+    no_phases: There are no phases
     no_students: This phase have exam assigned, but there are no students to grade
     order: Order
     phase_handler: Phase handler
     plural: Admission Phases
     save: Save Admission Phase
     singular: Admission Phase
-    no_phases: "There are no phases"
   admissions:
     admit: Admit
     admitted_on: Admitted On
+    applicant_number: Applicant Number
     applicants:
       list: Admission Applicants List
     candidates:
@@ -80,7 +80,6 @@ en:
     please_select_period: Please Select Admission Period
     reg_date: Application Registration Date
     status: Admission Status
-    applicant_number: Applicant Number
   exams:
     exam_score: Exam Score
     grade: Grade Exam

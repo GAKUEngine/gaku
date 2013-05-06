@@ -1,9 +1,9 @@
 module Gaku
   module Admin
-     module Changes
+    module Changes
       class StudentChangesController < Admin::BaseController
 
-        load_and_authorize_resource :class =>  StudentVersion
+        load_and_authorize_resource class: StudentVersion
         respond_to :html, :js
 
         inherit_resources
@@ -17,7 +17,8 @@ module Gaku
         protected
 
         def collection
-          @changes = StudentVersion.page(params[:page]).per(Preset.changes_per_page)
+          @changes = StudentVersion.page(params[:page])
+                                   .per(Preset.changes_per_page)
         end
 
       end

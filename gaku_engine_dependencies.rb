@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
+#source 'http://production.s3.rubygems.org'
 
 #DB
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
 
-gem 'execjs'
-gem 'therubyracer', '0.10.2'
+gem 'therubyracer', :require => 'v8'
 
 gem 'rails-i18n'
 

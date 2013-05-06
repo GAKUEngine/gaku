@@ -1,38 +1,34 @@
 module Gaku
   class User < ActiveRecord::Base
-    # Include default devise modules. Others available are:
-    # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 
     has_many :user_roles
-    has_many :roles, :through => :user_roles
+    has_many :roles, through: :user_roles
 
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
 
-  	#in :accessors should be added all settings that user can set and check againts Preset
-    store :settings, :accessors => [:locale]
+    store :settings, accessors: [:locale]
 
     attr_accessor :login
-    #ActiveRecord::Store accessors can be validated as other model attributes
-    # validates :language, :numericality => true
 
-    attr_accessible :login, :username, :email, :password, :password_confirmation,
+    attr_accessible :login, :username, :email,
+                    :password, :password_confirmation,
                     :remember_me, :locale, :role_ids
 
     before_create :default_language
 
     validates_presence_of :username, :email
     validates_uniqueness_of :username, :email
-    validates_presence_of :password, :password_confirmation, :on => :create
+    validates_presence_of :password, :password_confirmation, on: :create
 
     roles_table_name = Gaku::Role.table_name
 
-    scope :admin, lambda { includes(:roles).where("#{roles_table_name}.name" => "admin") }
+    scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => "admin") }
 
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)
-        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]).first
       else
         where(conditions).first
       end

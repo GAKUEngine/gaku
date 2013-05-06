@@ -14,12 +14,12 @@ module Gaku
 
       def resolve_layout
         case action_name
-        when "index"
-          "gaku/layouts/index"
-        when "show"
-          "gaku/layouts/show"
+        when 'index'
+          'gaku/layouts/index'
+        when 'show'
+          'gaku/layouts/show'
         else
-          "gaku/layouts/gaku"
+          'gaku/layouts/gaku'
         end
       end
 

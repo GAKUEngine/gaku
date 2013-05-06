@@ -13,7 +13,8 @@ Spork.prefork do
   require 'factory_girl_rails'
 
   require 'capybara/poltergeist'
-  
+
+  require 'gaku/core/testing_support/env'
   require 'gaku/core/testing_support/factories'
   require 'gaku/core/testing_support/controller_requests'
   require 'gaku/core/testing_support/request_helpers'

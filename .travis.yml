@@ -1,19 +1,16 @@
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
+  - psql -c 'create database gaku_test;' -U postgres
 bundler_args: --without development production --quiet
 env:
-  - GEM=admissions DB=mysql
   - GEM=admissions DB=postgres
-  - GEM=core DB=mysql
   - GEM=core DB=postgres
-
 before_install:
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
 script:
   - bundle exec rake test_app
-  - SELENIUM=1 I18N=1 bundle exec rspec spec
-
+  - SELENIUM=1 I18N=1 bundle exec rspec
 
 notifications:
   email:
@@ -24,5 +21,9 @@ notifications:
     channels:
       - "irc.freenode.org#gaku"
 rvm:
-  - 1.9.2
   - 1.9.3
+  - 2.0.0
+  - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head

@@ -24,8 +24,11 @@ namespace :gaku do
       say "rake gaku:db:reset"
       Rake::Task["gaku:db:reset"].invoke
 
+      say "Creating DB ..."
+      Rake::Task["db:create"].invoke
+
       say "rails g gaku:install"
-      %x{rails g gaku:install}
+      system('rails g gaku:install')
 
       say "rake gaku:sample:load"
       Rake::Task["gaku:sample:load"].invoke
