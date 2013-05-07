@@ -10,6 +10,7 @@ module Gaku
 
     before_filter :syllabus
     before_filter :exam_syllabus, :only => :update
+    before_filter :load_data
 
     def create
       @exam = @syllabus.exams.create(params[:exam])
@@ -23,6 +24,10 @@ module Gaku
     end
 
     private
+
+    def load_data
+      @grading_methods = GradingMethod.all.collect { |s| [s.name, s.id] }
+    end
 
     def syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])

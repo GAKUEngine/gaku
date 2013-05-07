@@ -3,7 +3,7 @@ module Gaku
     belongs_to :student
     attr_accessible :score, :student_id
 
-    validates_presence_of :score
+    validates :score, presence: true
     validates_associated :student
   end
 end

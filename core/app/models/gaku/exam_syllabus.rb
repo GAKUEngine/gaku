@@ -1,14 +1,18 @@
 module Gaku
-	class ExamSyllabus < ActiveRecord::Base
+  class ExamSyllabus < ActiveRecord::Base
 
-		attr_accessible :exam_id
+    attr_accessible :exam_id
 
-		belongs_to :syllabus, :counter_cache => :exams_count
-		belongs_to :exam
+    belongs_to :syllabus, counter_cache: :exams_count
+    belongs_to :exam
 
-		validates_presence_of [:exam_id, :syllabus_id]
+    validates_presence_of [:exam_id, :syllabus_id]
 
-		validates :syllabus_id, :uniqueness => {:scope => :exam_id, :message => "Already added exam to syllabus!"}
+    validates :syllabus_id,
+              uniqueness: {
+                            scope: :exam_id,
+                            message: I18n.t(:'exam.already_added')
+                          }
 
-	end
+  end
 end

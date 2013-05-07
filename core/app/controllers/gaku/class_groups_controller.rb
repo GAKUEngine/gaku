@@ -3,18 +3,16 @@ module Gaku
 
     include StudentChooserController
 
-    load_and_authorize_resource :class =>  Gaku::ClassGroup
+    load_and_authorize_resource class:  Gaku::ClassGroup
 
     helper_method :sort_column, :sort_direction
 
     inherit_resources
     respond_to :js, :html
 
-    expose :class_group
-
-
-    before_filter :load_before_show, :only => :show
-    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :load_data
+    before_filter :load_before_show, only: :show
+    before_filter :count, only: [:create, :destroy, :index]
 
     def index
       @class_groups = SemesterClassGroup.group_by_semester
@@ -24,11 +22,13 @@ module Gaku
 
     private
 
+      def load_data
+        @courses = Course.includes(:syllabus).collect { |c| [c, c.id] }
+      end
+
       def load_before_show
         @notable = ClassGroup.find(params[:id])
-        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
-        # @course = Course.new
-        #@courses = Course.all
+        @notable_resource = get_resource_name(@notable)
         @class_group_course_enrollment = ClassGroupCourseEnrollment.new
       end
 

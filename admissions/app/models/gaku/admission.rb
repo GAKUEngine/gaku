@@ -26,6 +26,85 @@ module Gaku
 
     #validates: :applicant_number, :uniqueness => {:scope => [:admission_period_id, :admission_method_id]}
 
+    def self.progress_students(students, phase)
+      progress_success = []
+      students.each  do |student|
+        success = student.admission.progress_to_next_phase(phase)
+        if success
+          progress_success << student.id
+        end
+      end
+      return progress_success
+    end
+
+    def self.remove_students(students, phase)
+      remove_success = []
+      students.each  do |student|
+        record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
+        success = record.update_attributes(:is_deleted => true)
+        if success
+          remove_success << student.id
+        end
+      end
+      return remove_success
+    end
+
+    def self.change_students_state(students, phase, old_state, next_state)
+      progress_success = false
+      students.each  do |student|
+        admission_record = student.admission.find_record_by_phase(phase.id)
+        unless (next_state.id == old_state.id)
+          if next_state.auto_admit == true
+            student.admission.admit(student)
+          elsif next_state.auto_progress == true
+            progress_success = student.admission.progress_to_next_phase(phase)
+          end
+          admission_record.admission_phase_state_id = next_state.id
+          admission_record.save
+        end
+      end
+      return progress_success
+    end
+
+    def assign_admission_phase_record(admission_phase, admission_phase_state)
+      admission_phase_record = AdmissionPhaseRecord.create(
+                                                :admission_phase_id => admission_phase.id,
+                                                :admission_phase_state_id => admission_phase_state.id,
+                                                :admission_id => self.id)
+
+      update_column(:admission_phase_record_id, admission_phase_record.id)
+      return admission_phase_record
+    end
+
+    def self.create_multiple_admissions(students, admission_period, admission_method, applicant_number)
+      err_admissions = []
+      admissions = []
+      admission_records = []
+      result = {}
+      students.each { |student|
+        student_id = student.split("-")[1].to_i
+        admission = Admission.new( admission_period_id: admission_period.id,
+                                    admission_method_id: admission_method.id,
+                                    student_id: student_id,
+                                    applicant_number: applicant_number )
+        if  admission.save
+          admissions << admission
+          # TODO change the selected phase
+          admission_phase = admission.admission_method.admission_phases.first
+          admission_phase_state = admission_phase.get_default_state
+          result[:admission_phase_state] = admission_phase_state
+          admission_records << admission.assign_admission_phase_record(admission_phase, admission_phase_state)
+          admission.change_student_to_applicant
+          applicant_number += 1
+        else
+          err_admissions << admission
+        end
+      }
+      result[:admissions] = admissions
+      result[:admission_records] =  admission_records
+      result[:err_admissions] = err_admissions 
+      return result
+    end
 
     def student
       Student.unscoped{ super }

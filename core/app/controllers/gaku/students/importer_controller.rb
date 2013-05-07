@@ -1,11 +1,14 @@
 # -*- encoding: utf-8 -*-
+
+require 'spreadsheet'
+require 'csv'
+
 module Gaku
   class Students::ImporterController < GakuController
 
     skip_authorization_check
 
     include SheetHelper
-    #require 'spreadsheet'
     require 'roo'
 
     def index

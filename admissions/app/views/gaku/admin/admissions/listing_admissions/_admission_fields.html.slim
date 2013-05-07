@@ -6,4 +6,4 @@ td.admission-phase = admission.admission_phase_records.last.admission_phase.name
 td.student-status = admission.student.enrollment_status
 td.manage
   = link_to_edit [:edit, :admin, admission.student]
-  = render 'gaku/admin/admissions/delete_confirm', :admission => admission
+  = render 'gaku/admin/admissions/listing_admissions/delete_confirm', :admission => admission

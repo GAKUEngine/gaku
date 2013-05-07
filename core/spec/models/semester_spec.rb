@@ -26,7 +26,7 @@ describe Gaku::Semester do
         school_year
         semester = school_year.semesters.create :starting => Date.parse('2013-4-8'), :ending => Date.parse('2013-4-7')
         semester.valid?.should be_false
-        semester.should have(1).error_on(:ending)
+        semester.should have(1).error_on(:base)
       end
 
       it "validation error on not between school year starting and ending" do

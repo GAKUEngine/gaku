@@ -1,10 +1,10 @@
 module Gaku
   class SyllabusesController < GakuController
 
-    load_and_authorize_resource :class =>  Gaku::Syllabus
+    load_and_authorize_resource class: Gaku::Syllabus
 
-    before_filter :before_show,  :only => :show
-    before_filter :count, :only => [:create, :destroy, :index]
+    before_filter :before_show,  only: :show
+    before_filter :count,        only: [:create, :destroy, :index]
 
     inherit_resources
     respond_to :js, :html
@@ -12,7 +12,7 @@ module Gaku
     private
 
     def syllabus
-    	@syllabus = Syllabus.find(params[:id])
+      @syllabus = Syllabus.find(params[:id])
     end
 
     def grading_methods
@@ -22,7 +22,7 @@ module Gaku
     def before_show
       syllabus
       @notable = @syllabus
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+      @notable_resource = get_resource_name @notable
       grading_methods
     end
 

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Gaku::Exam do
+  let!(:exam) { create(:exam) }
 
   context "validations" do
-  	let(:exam) { create(:exam) }
 
     it_behaves_like 'notable'
 
@@ -51,7 +51,7 @@ describe Gaku::Exam do
 
   context 'counter_cache' do
 
-    let!(:exam) { FactoryGirl.create(:exam) }
+
 
     context 'notes_count' do
 
@@ -69,6 +69,13 @@ describe Gaku::Exam do
           exam_with_note.notes.last.destroy
         end.to change { exam_with_note.reload.notes_count }.by -1
       end
+    end
+  end
+
+  context '#max_score' do
+    let(:exam_with_portions) { create(:exam, :with_portions) }
+    it 'sums' do
+      exam_with_portions.max_score.should eq 300
     end
   end
 

@@ -20,12 +20,15 @@ module Gaku
       before_filter :load_selected_students, only: [:student_chooser, :create_multiple]
 
       def change_admission_period
+        render 'gaku/admin/admissions/common/change_admission_period'
       end
 
       def change_admission_method
+        render 'gaku/admin/admissions/common/change_admission_method'
       end
 
       def change_period_method
+        render 'gaku/admin/admissions/common/change_period_method'
       end
 
       def index
@@ -41,58 +44,29 @@ module Gaku
       end
 
       def change_student_state
-
         if params[:admit_students].present?
           admit_students(@state_students)
-
         elsif params[:progress_students].present?
           state = AdmissionPhaseState.find(params[:state_id])
           phase = state.admission_phase
           next_phase = AdmissionPhase.find_next_phase(phase)
           @new_state = next_phase.admission_phase_states.first
-          @progress_success = []
-          @state_students.each  do |student|
-            success = student.admission.progress_to_next_phase(phase)
-            if success
-              @progress_success << student.id
-            end
-          end
+          @progress_success = Admission.progress_students(@state_students, phase)
         elsif params[:remove_students].present?
-          state = AdmissionPhaseState.find(params[:current_state])
+          state = AdmissionPhaseState.find(params[:current_state_id])
           @current_state_id = state.id
           phase = state.admission_phase
-          @remove_success = []
-          @state_students.each  do |student|
-            record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
-            success = record.update_attributes(:is_deleted => true)
-            if success
-              @remove_success << student.id
-            end
-          end
+          @remove_success = Admission.remove_students(@state_students, phase)
         else
+          @old_state = AdmissionPhaseState.find(params[:current_state_id])
           @next_state = AdmissionPhaseState.find(params[:state_id])
-
-          @state_students.each  do |student|
-            phase = @next_state.admission_phase
-            @admission_record = student.admission.find_record_by_phase(phase.id)
-            @old_state_id = @admission_record.admission_phase_state_id
-
-            @admission_method = phase.admission_method
-
-            unless (@next_state.id == @old_state_id)
-              if @next_state.auto_admit == true
-                student.admission.admit(student)
-              elsif @next_state.auto_progress == true
-                next_phase = AdmissionPhase.find_next_phase(phase)
-                @new_state = next_phase.admission_phase_states.first
-                @progress_success = student.admission.progress_to_next_phase(phase)
-              end
-              @admission_record.admission_phase_state_id = @next_state.id
-              @admission_record.save
-            end
-          end
-          render 'change_student_state'
+          phase = @next_state.admission_phase
+          @admission_method = phase.admission_method
+          next_phase = AdmissionPhase.find_next_phase(phase)
+          @new_state = next_phase.admission_phase_states.first if @next_state.auto_progress == true
+          @progress_success = Admission.change_students_state(@state_students, phase, @old_state, @next_state)
         end
+        render 'gaku/admin/admissions/admissions/change_student_state'
       end
 
       def listing_applicants
@@ -106,27 +80,20 @@ module Gaku
         @student = @admission.build_student
         @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
         @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+        render 'gaku/admin/admissions/admissions/new'
       end
 
       def create
-
         @admission = Admission.new(params[:admission])
         if @admission.save
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
           admission_phase = @admission_method.admission_phases.first
           @admission_phase_state = admission_phase.get_default_state
-          
-          @admission_phase_record = AdmissionPhaseRecord.create(
-                                                :admission_phase_id => admission_phase.id,
-                                                :admission_phase_state_id => @admission_phase_state.id,
-                                                :admission_id => @admission.id)
-
-          @admission.update_column(:admission_phase_record_id, @admission_phase_record.id)
+          @admission.assign_admission_phase_record(admission_phase, @admission_phase_state)
           @admission.change_student_to_applicant
           @admission.save
-          
-          render 'create', :admission_phase_record => @admission_phase_record
+          render 'gaku/admin/admissions/admissions/create', :admission_phase_record => @admission_phase_record
         end
       end
 
@@ -135,53 +102,33 @@ module Gaku
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
         @search = Student.search(params[:q])
-        @students = @search.result
         @students = @search.result.page(params[:page]).per(Preset.students_per_page)
-
         @admissions = Admission.all
-
-        @enrolled_students = Admission.where(:admission_period_id => params[:admission_period_id], :admission_method_id => params[:admission_method_id]).map {|i| i.student_id.to_s }
-
+        query_params = {  :admission_period_id => params[:admission_period_id], 
+                          :admission_method_id => params[:admission_method_id] }
+        @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }
         @method_admissions = Admission.where(admission_method_id: @admission_method.id)
-        @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
-        
+        if @applicant_max_number = !@method_admissions.empty?
+          (@method_admissions.map(&:applicant_number).max + 1)
+        else
+          @admission_method.starting_applicant_number
+        end
         respond_to do |format|
-          format.js
+          format.js { render 'gaku/admin/admissions/admissions/student_chooser' }
         end
       end
 
       def create_multiple
-        err_admissions = []
-        admissions = []
-        @admission_records = []
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
-        applicant_number = params[:applicant_max_number].to_i
-   
-        @selected_students.each { |student|
-          student_id = student.split("-")[1].to_i
-          admission = Admission.new( admission_period_id: @admission_period.id,
-                                      admission_method_id: @admission_method.id,
-                                      student_id: student_id,
-                                      applicant_number: applicant_number )
-          if  admission.save
-            admissions << admission
-            # TODO change the selected phase
-            admission_phase = admission.admission_method.admission_phases.first
-            # TODO change the selected phase state
-            @admission_phase_state = admission_phase.admission_phase_states.first
-            @admission_records << AdmissionPhaseRecord.create(
-                                        :admission_phase_id => admission_phase.id,
-                                        :admission_phase_state_id => @admission_phase_state.id,
-                                        :admission_id => admission.id)
-            admission.update_column(:admission_phase_record_id, @admission_records.last.id)
-
-            admission.change_student_to_applicant
-            applicant_number += 1
-          else
-            err_admissions << admission
-          end
-        }
+        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        applicant_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
+        result = Admission.create_multiple_admissions(@selected_students, @admission_period, @admission_method, applicant_number)
+        admissions = result[:admissions]
+        @admission_records = result[:admission_records]
+        @admission_phase_state = result[:admission_phase_state]
+        err_admissions = result[:err_admissions]
         show_flashes(admissions,err_admissions)
+        render 'gaku/admin/admissions/admissions/create_multiple'
       end
 
       def soft_delete
@@ -190,6 +137,7 @@ module Gaku
         @admission.admission_phase_records.each {|rec|
           rec.update_attribute('is_deleted', true)
         }
+        render 'gaku/admin/admissions/listing_admissions/soft_delete'
       end
 
       private
@@ -198,9 +146,12 @@ module Gaku
 
           if params[:admission_period_id]
             @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-          end
-          if @admission_period.nil? && !@admission_periods.nil?
+          elsif !@admission_periods.nil?
             @admission_period = @admission_periods.last
+          end
+
+          if @admission_period
+            @admission_methods = @admission_period.admission_methods
           end
 
           if params[:admission_method_id]
@@ -210,14 +161,10 @@ module Gaku
               @admission_method = @admission_period.admission_methods.first
             end
           end
-
-          if @admission_period
-            @admission_methods = @admission_period.admission_methods
-          end
+          
           @admission_params = {}
           @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
           @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
-
         end
 
         def load_before_index

@@ -8,7 +8,7 @@ if ENV['SELENIUM']
 elsif ENV['PHANTOMJS']
   Capybara.javascript_driver = :poltergeist
 else
-  Capybara.javascript_driver = :poltergeist
+  Capybara.javascript_driver = :selenium
 end
 
 #Capybara.register_driver :selenium_firefox do |app|

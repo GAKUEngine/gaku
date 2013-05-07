@@ -1,4 +1,4 @@
-= table_for 'courses-index' do
+= table_for 'courses-without-semester-index' do
   thead
     tr
       =th t(:'syllabus.code')
@@ -7,4 +7,21 @@
       =th t(:'num_enrolled')
       =th_actions 3
   tbody
-    = render :partial => 'course', :collection => @courses, :as => 'course'
+    = render partial: 'course', collection: @courses_without_semester, as: :course
+
+=hr
+
+- @courses.each do |semester, semester_courses|
+  =table_for "semester-#{semester}-courses-index" do
+    thead
+      tr
+        th.btn-inverse colspan='5' ="#{t(:'semester.singular')}: #{semester_courses.first.semester}"
+      tr
+        =th t(:'syllabus.code')
+        =th t(:'schedule')
+        =th t(:'teacher.singular')
+        =th t(:'num_enrolled')
+        =th_actions 3
+    tbody
+      = render partial: 'course', collection: extract_grouped(semester_courses, :course), as: :course
+  =hr

@@ -8,7 +8,7 @@
       .span3
         = fields_for :presets do |address_country|
           = address_country.label t(:'preset.student.country')
-          = address_country.select :address_country, countries, {:selected => @preset_hash[:address_country], :prompt => t(:'address.choose_country')}
+          = address_country.select :address_country, @countries, {:selected => @preset_hash[:address_country], :prompt => t(:'address.choose_country')}
       .span3
         = fields_for :presets do |address_state|
           = address_state.label t(:'preset.student.state')
