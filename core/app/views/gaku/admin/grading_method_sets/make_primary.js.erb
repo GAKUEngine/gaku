@@ -1,0 +1,6 @@
+$('#admin-grading-method-sets-index tbody tr').each(function(){
+  $(this).find('.make-primary-grading-method-set').removeClass('btn-primary')
+});
+
+$("#grading-method-set-<%= @grading_method_set.id %>").find('.make-primary-grading-method-set')
+                                                .addClass('btn-primary')

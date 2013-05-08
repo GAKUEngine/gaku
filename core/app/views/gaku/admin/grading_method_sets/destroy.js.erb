@@ -1,0 +1,7 @@
+$('.admin-grading-method-sets-count').html('<%= print_count(@count-1, t_grading_method_set_list) %>');
+
+<%- if Gaku::GradingMethodSet.all.any? && @grading_method_set.is_primary? %>
+  $('#grading-method-set-<%= Gaku::GradingMethodSet.first.try(:id) %> td a').addClass('btn-primary');
+<% end %>
+
+showNotice("<%= render_flash %>");

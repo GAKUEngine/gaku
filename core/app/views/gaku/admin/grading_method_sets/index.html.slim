@@ -1,0 +1,23 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-grading-method-sets-count' do
+      = print_count @count, t_grading_method_set_list
+  .pull-right
+    = ajax_link_to_new t(:'grading_method_set.add'), [:new, :admin, :grading_method_set], id: 'new-admin-grading-method-set-link'
+
+= content_for :new_form do
+  #new-admin-grading-method-set.hide
+
+#admin-grading-method-sets
+  = table_for 'admin-grading-method-sets-index' do
+    thead
+      tr
+        = th_icon 'home'
+        = th t(:'grading_method_set.singular')
+        = th t(:'grading_method_set.display_deviation')
+        = th t(:'grading_method_set.display_rank')
+        = th t(:'grading_method_set.rank_order')
+
+        = th_actions 3
+    tbody
+      = render partial: 'grading_method_set', collection: @grading_method_sets, as: :grading_method_set
