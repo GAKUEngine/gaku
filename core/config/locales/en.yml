@@ -474,6 +474,16 @@ en:
     plural: Grading Methods
     save: Save Grading Method
     singular: Grading Method
+  grading_method_set:
+    name: Name
+    display_deviation: Display Deviation
+    display_rank: Display Rank
+    rank_order: Rank Order
+    add: Add Grading Method Set
+    singular: Grading Method Set
+    list: Grading Method Sets list
+    save: Save Grading Method Set
+    edit: Edit Grading Method Set
   graduated: Graduated On
   guardian:
     add: Add Guardian
@@ -518,7 +528,10 @@ en:
         exam: Exam Disposals
         student: Student Disposals
         student_address: Student Addresses Disposals
-      grading_methods: Grading Methods
+      grading:
+        grading: Grading
+        grading_methods: Grading Methods
+        grading_sets: Grading Sets
       preset:
         grading:
           grading_method: Grading Method
