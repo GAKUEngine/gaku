@@ -257,6 +257,7 @@ Gaku::Core::Engine.routes.draw do
     resources :grading_methods
     resources :grading_method_sets do
       post :make_primary, :on => :member
+      resources :grading_method_set_items, :controller => 'grading_method_sets/grading_method_set_items'
     end
 
     resources :school_years do
