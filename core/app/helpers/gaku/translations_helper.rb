@@ -145,6 +145,10 @@ module Gaku
       t(:'grading_method.list')
     end
 
+    def t_grading_method_set_list
+      t(:'grading_method_set.list')
+    end
+
     def t_teachers_list
       t(:'teacher.list')
     end

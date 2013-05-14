@@ -1,0 +1,3 @@
+$('tr#grading-method-set-item-<%= @grading_method_set_item.id %>').html('<%= render_js_partial("fields", {grading_method_set_item: @grading_method_set_item}) %>');
+$("#edit-grading-method-set-grading-method-set-item-modal").modal("hide");
+showNotice("<%= render_flash %>");

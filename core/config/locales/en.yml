@@ -467,13 +467,31 @@ en:
   grading_method:
     add: Add Grading Method
     description: Description
+    curved: Curved
+    arguments: Arguments
     edit: Edit Grading Method
     list: Grading Methods list
-    method: Methods
+    method: Method
     name: Name
     plural: Grading Methods
     save: Save Grading Method
     singular: Grading Method
+    choose: Choose Grading Method
+  grading_method_set:
+    name: Name
+    display_deviation: Display Deviation
+    display_rank: Display Rank
+    rank_order: Rank Order
+    add: Add Grading Method Set
+    singular: Grading Method Set
+    list: Grading Method Sets list
+    save: Save Grading Method Set
+    edit: Edit Grading Method Set
+    show: Show Grading Method Set
+  grading_method_set_item:
+    already: Grading Method already added to Grading Method Set
+    edit: Edit Grading Method Set Item
+    save: Save Grading Method Set Item
   graduated: Graduated On
   guardian:
     add: Add Guardian
@@ -518,7 +536,10 @@ en:
         exam: Exam Disposals
         student: Student Disposals
         student_address: Student Addresses Disposals
-      grading_methods: Grading Methods
+      grading:
+        grading: Grading
+        grading_methods: Grading Methods
+        grading_sets: Grading Sets
       preset:
         grading:
           grading_method: Grading Method

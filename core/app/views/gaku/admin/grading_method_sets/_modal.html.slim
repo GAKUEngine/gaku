@@ -1,0 +1,6 @@
+= modal_for 'edit-grading-method-set-modal' do
+  = modal_header t(:'grading_method_set.edit')
+  = modal_form_for [:admin, @grading_method_set] do |f|
+    = modal_body do
+      = render 'form_fields', f: f
+      = buttons_for @grading_method_set, nested_id: 'admin-grading-method-set'

@@ -1,0 +1,7 @@
+$('#admin-grading-method-sets-index tbody').append('<%= render_js_partial("grading_method_set", {grading_method_set: @grading_method_set}) %>');
+
+$('#new-admin-grading-method-set').slide();
+$('#new-admin-grading-method-set-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-grading-method-sets-count').html('<%= print_count(@count+1, t_grading_method_set_list) %>');

@@ -1,0 +1,23 @@
+= index_header do
+  #new-admin-grading-method-set-grading-method-set-item.hide
+  .pull-left
+    = count_div 'admin-grading-method-set-grading-method-set-items-count' do
+      = print_count @grading_method_set.grading_method_set_items.count, t_grading_method_list
+  .pull-right
+    = ajax_link_to_new t(:'grading_method.add'), new_admin_grading_method_set_grading_method_set_item_path(@grading_method_set), :id => 'new-admin-grading-method-set-grading-method-set-item-link'
+
+= hr
+
+= index_body do
+  = table_for 'admin-grading-method-set-grading-method-set-items-index' do
+    thead
+      tr
+        = th t(:'order')
+        = th t(:'grading_method.name')
+        = th t(:'grading_method.description')
+        = th t(:'grading_method.method')
+        = th t(:'grading_method.arguments')
+        = th t(:'grading_method.curved')
+        = th_actions 2
+    tbody class='sortable' data-sort-url='#{sort_admin_grading_method_set_grading_method_set_items_path(@grading_method_set)}'
+      = render partial: 'gaku/admin/grading_method_sets/grading_method_set_items/grading_method_set_item', collection: @grading_method_set.grading_method_set_items.order(:position), as: :grading_method_set_item

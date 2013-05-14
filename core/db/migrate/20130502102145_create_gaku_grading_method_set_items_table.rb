@@ -3,7 +3,7 @@ class CreateGakuGradingMethodSetItemsTable < ActiveRecord::Migration
     create_table :gaku_grading_method_set_items do |t|
       t.references :grading_method
       t.references :grading_method_set
-      t.integer :order
+      t.integer :position
 
       t.timestamps
     end

@@ -1,0 +1,9 @@
+td= render 'make_primary_field', grading_method_set: grading_method_set
+td= grading_method_set.name
+td= boolean_image grading_method_set.display_deviation
+td= boolean_image grading_method_set.display_rank
+td= boolean_image grading_method_set.rank_order
+td
+  = link_to_show [:admin, grading_method_set]
+  = ajax_link_to_edit [:edit, :admin, grading_method_set]
+  = ajax_link_to_delete [:admin, grading_method_set]

@@ -1,0 +1,13 @@
+= content_for :show_header do
+  = t(:'grading_method_set.show')
+
+=hr
+
+= well_div do
+  =render 'gaku/admin/grading_method_sets/grading_method_set_items/grading_method_set_items'
+
+  =hr
+  .row-fluid
+    .span12
+      = link_to_back admin_grading_method_sets_path
+
