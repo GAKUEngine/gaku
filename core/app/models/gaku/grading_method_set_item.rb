@@ -12,6 +12,7 @@ module Gaku
     private
 
     def proper_position
+      return unless grading_method_set
       self.position = grading_method_set.grading_method_set_items.count
     end
 
