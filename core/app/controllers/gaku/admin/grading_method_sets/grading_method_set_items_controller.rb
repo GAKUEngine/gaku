@@ -13,6 +13,13 @@ module Gaku
         before_filter :count, :only => [:index, :create, :destroy]
         before_filter :load_data, :only => [:new, :edit]
 
+        def sort
+          params[:'grading-method-set-item'].each_with_index do |id, index|
+            @grading_method_set.update_items_positions(id, index)
+          end
+          render :nothing => true
+      end
+
         private
 
         def load_data
