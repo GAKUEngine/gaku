@@ -10,6 +10,12 @@ module Gaku
       end
     end
 
+    def drag_field
+      content_tag :td, class: 'sort-handler' do
+        content_tag :i, nil, class: 'icon-move'
+      end
+    end
+
 
     def can_edit?
       if controller.action_name == "show"
