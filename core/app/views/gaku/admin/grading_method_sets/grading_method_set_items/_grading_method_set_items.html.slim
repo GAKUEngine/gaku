@@ -12,11 +12,12 @@
   = table_for 'admin-grading-method-set-grading-method-set-items-index' do
     thead
       tr
+        = th t(:'order')
         = th t(:'grading_method.name')
         = th t(:'grading_method.description')
         = th t(:'grading_method.method')
         = th t(:'grading_method.arguments')
         = th t(:'grading_method.curved')
         = th_actions 2
-    tbody
-      = render partial: 'gaku/admin/grading_method_sets/grading_method_set_items/grading_method_set_item', collection: @grading_method_set.grading_method_set_items, as: :grading_method_set_item
+    tbody class='sortable' data-sort-url='#{sort_admin_grading_method_set_grading_method_set_items_path(@grading_method_set)}'
+      = render partial: 'gaku/admin/grading_method_sets/grading_method_set_items/grading_method_set_item', collection: @grading_method_set.grading_method_set_items.order(:position), as: :grading_method_set_item
