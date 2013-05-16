@@ -371,7 +371,7 @@ ja:
     exam_score: 試験点数
     graded: 採点済み
     grading_completion: 採点済みの割合
-    grading_method: 採点方法
+    grading_method: 評価方法
     list: 試験一覧
     name: 試験名
     new: 試験を登録
@@ -453,8 +453,8 @@ ja:
     average_points: 平均点
     average_score: 平均点
     deviation: 偏差値
-    grading: 採点
-    how_grade: 採点方法
+    grading: 評価
+    how_grade: 評価方法
     max: 最高点数
     max_points: 最高点数
     percent: ％
@@ -478,20 +478,20 @@ ja:
     save: 評価法の保存
     singular: 評価法
   grading_method_set:
-    add: 採点方法セットを追加
+    add: 評価方法セットを追加
     display_deviation: 偏差値を表示
     display_rank: ランクを表示
-    edit: 採点方法セットを編集
-    list: 採点方法セット一覧
-    name: 採点方法名
+    edit: 評価方法セットを編集
+    list: 評価方法セット一覧
+    name: 評価方法名
     rank_order: ランク順
-    save: 採点方法セットを保存
-    show: 採点方法セットを表示
-    singular: 採点方法セット
+    save: 評価方法セットを保存
+    show: 評価方法セットを表示
+    singular: 評価方法セット
   grading_method_set_item:
-    already: 採点方法は既にセットに追加されています。
-    edit: 採点方法セットアイテムを編集
-    save: 採点方法セットアイテムを保存
+    already: 評価方法は既にセットに追加されています。
+    edit: 評価方法セットアイテムを編集
+    save: 評価方法セットアイテムを保存
   graduated: 卒業日
   guardian:
     add: 保護者を追加
@@ -537,9 +537,9 @@ ja:
         student: 生徒情報処分
         student_address: 生徒住所削除一覧
       grading:
-        grading: 採点
-        grading_methods: 採点方法
-        grading_sets: 採点セット
+        grading: 評価
+        grading_methods: 評価方法
+        grading_sets: 評価セット
       grading_methods: 評価法
       preset:
         grading:
