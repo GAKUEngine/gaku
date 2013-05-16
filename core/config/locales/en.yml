@@ -123,6 +123,7 @@ en:
   class: Class
   class_group:
     add: Add Class Group
+    already_enrolled: Already enrolled to the class group!
     choose: Choose Class Group
     edit: Edit Class Group
     enroll: Enroll Class Group
@@ -137,7 +138,6 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
-    already_enrolled : Already enrolled to the class group!
   class_group_course_enrollment:
     save: Save Course to Class Group
   class_group_enrollment:
@@ -197,6 +197,7 @@ en:
     singular: Contact Type
   course:
     add: Add Course
+    already_enrolled: Already enrolled to course!
     choose: Choose Course
     code: Course Code
     code_sample: '[EX: FALL2020]'
@@ -212,7 +213,6 @@ en:
     save: Save Course
     show: Show Course
     singular: Course
-    already_enrolled: Already enrolled to course!
   course_enrollment:
     add: Enroll to course
     create: Create enrollment
@@ -220,6 +220,7 @@ en:
     plural: Course Enrollment
     singular: Course Enrollment
   course_group:
+    already_enrolled: Already enrolled to this course group!
     course_group_recover: Course Group Recovered
     edit: Edit Course Group
     list: Course Groups List
@@ -229,7 +230,6 @@ en:
     save: Save Course Group
     show: Course Group
     singular: Course Group
-    already_enrolled: Already enrolled to this course group!
   course_group_enrollment:
     save: Save to Course Group
   csv:
@@ -361,6 +361,7 @@ en:
     add_existing: Add Existing Exam
     add_portion: Add Portion
     adjustments: Adjustments
+    already_added: Exam already added!
     choose: Choose Exam
     choose_schedule: Choose Schedule
     completion: Completion
@@ -387,7 +388,6 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
-    already_added: Exam already added!
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -418,6 +418,7 @@ en:
     student_id_number: Student ID number
   extracurricular_activity:
     add: Add Extracurricular Activity
+    already_enrolled: Already enrolled to the extracurricular activity!
     edit: Edit Extracurricular Activity
     enroll: Enroll to Extracurricular Activity
     list: Extracurricular Activities list
@@ -427,7 +428,6 @@ en:
     save: Save
     show: Show Extracurricular Activity
     singular: Extracurricular Activity
-    already_enrolled: "Already enrolled to the extracurricular activity!"
   extracurricular_activity_enrollment:
     list: Student list
   failure:
@@ -466,9 +466,10 @@ en:
     weighting_portion: Weighting
   grading_method:
     add: Add Grading Method
-    description: Description
-    curved: Curved
     arguments: Arguments
+    choose: Choose Grading Method
+    curved: Curved
+    description: Description
     edit: Edit Grading Method
     list: Grading Methods list
     method: Method
@@ -476,18 +477,17 @@ en:
     plural: Grading Methods
     save: Save Grading Method
     singular: Grading Method
-    choose: Choose Grading Method
   grading_method_set:
-    name: Name
+    add: Add Grading Method Set
     display_deviation: Display Deviation
     display_rank: Display Rank
-    rank_order: Rank Order
-    add: Add Grading Method Set
-    singular: Grading Method Set
-    list: Grading Method Sets list
-    save: Save Grading Method Set
     edit: Edit Grading Method Set
+    list: Grading Method Sets list
+    name: Name
+    rank_order: Rank Order
+    save: Save Grading Method Set
     show: Show Grading Method Set
+    singular: Grading Method Set
   grading_method_set_item:
     already: Grading Method already added to Grading Method Set
     edit: Edit Grading Method Set Item
@@ -540,6 +540,7 @@ en:
         grading: Grading
         grading_methods: Grading Methods
         grading_sets: Grading Sets
+      grading_methods: Grading Methods
       preset:
         grading:
           grading_method: Grading Method
@@ -737,9 +738,9 @@ en:
   search: Search
   select: Select
   semester:
-    choose: Choose Semester
     add: Add Semester
     between: Should be between School Year starting and ending
+    choose: Choose Semester
     day: Days
     duration: Semester duration
     edit: Edit Semester
@@ -759,11 +760,6 @@ en:
     uniqueness: Semester already added to Class Group
   semester_course:
     uniqueness: Semester already added to Course
-    save: Save Semester
-    choose: Choose Semester
-  semester_course:
-    uniqueness: Semester already added to Course
-
   sex: Sex
   sex_and_birth: Sex/Birth Date
   show: Show
@@ -778,6 +774,7 @@ en:
     singular: Simple Grade
   specialty:
     add: Add Specialty
+    already_added: Specialty already added!
     choose: Choose Specialty
     description: Description
     edit: Edit Specialty
@@ -789,7 +786,6 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
-    already_added: Specialty already added!
   student:
     add: Add Student
     birth_and: and

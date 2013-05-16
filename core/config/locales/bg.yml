@@ -123,6 +123,7 @@ bg:
   class: Клас
   class_group:
     add: Добави Клас
+    already_enrolled: 
     choose: Избери Клас
     edit: Редактирай Клас
     enroll: Запиши Клас
@@ -196,6 +197,7 @@ bg:
     singular: Вид Контакт
   course:
     add: Добави Курс
+    already_enrolled: 
     choose: Избери Курс
     code: Код на Курса
     code_sample: '[ПР: ЕСЕН2020]'
@@ -218,6 +220,7 @@ bg:
     plural: Записи в Курса
     singular: Запис в Курса
   course_group:
+    already_enrolled: 
     course_group_recover: Курс Група Възстановена
     edit: Редактирай Курс Група
     list: Списък Курс Групи
@@ -356,6 +359,7 @@ bg:
     add_existing: 
     add_portion: 
     adjustments: 
+    already_added: 
     choose: 
     choose_schedule: 
     completion: 
@@ -412,6 +416,7 @@ bg:
     student_id_number: 
   extracurricular_activity:
     add: 
+    already_enrolled: 
     edit: 
     enroll: 
     list: 
@@ -459,6 +464,9 @@ bg:
     weighting_portion: 
   grading_method:
     add: 
+    arguments: 
+    choose: 
+    curved: 
     description: 
     edit: 
     list: 
@@ -467,6 +475,21 @@ bg:
     plural: 
     save: 
     singular: 
+  grading_method_set:
+    add: 
+    display_deviation: 
+    display_rank: 
+    edit: 
+    list: 
+    name: 
+    rank_order: 
+    save: 
+    show: 
+    singular: 
+  grading_method_set_item:
+    already: 
+    edit: 
+    save: 
   graduated: 
   guardian:
     add: 
@@ -511,6 +534,10 @@ bg:
         exam: 
         student: 
         student_address: 
+      grading:
+        grading: 
+        grading_methods: 
+        grading_sets: 
       grading_methods: 
       preset:
         grading:
@@ -711,6 +738,7 @@ bg:
   semester:
     add: 
     between: 
+    choose: 
     day: 
     duration: 
     edit: 
@@ -728,6 +756,8 @@ bg:
     choose: 
     save: 
     uniqueness: 
+  semester_course:
+    uniqueness: 
   sex: 
   sex_and_birth: 
   show: 
@@ -742,6 +772,7 @@ bg:
     singular: 
   specialty:
     add: 
+    already_added: 
     choose: 
     description: 
     edit: 

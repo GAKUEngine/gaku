@@ -123,6 +123,7 @@ pt-BR:
   class: Classe
   class_group:
     add: Adicionar Grupo de Classe
+    already_enrolled: 
     choose: Selecionar Grupo de Classe
     edit: Editar Grupo de Classe
     enroll: 
@@ -196,6 +197,7 @@ pt-BR:
     singular: Tipo de Contato
   course:
     add: Adicionar Curso
+    already_enrolled: 
     choose: Escolha Curso
     code: Código de Curso
     code_sample: '[EX: FALL2020]'
@@ -218,6 +220,7 @@ pt-BR:
     plural: Matrícula de Curso
     singular: Matrícula de Curso
   course_group:
+    already_enrolled: 
     course_group_recover: Grupo de Curso Recuperado
     edit: Editar Grupo de Curso
     list: Lista de Grupos de Curso
@@ -354,6 +357,7 @@ pt-BR:
     add_existing: 
     add_portion: 
     adjustments: 
+    already_added: 
     choose: 
     choose_schedule: 
     completion: 
@@ -410,6 +414,7 @@ pt-BR:
     student_id_number: 
   extracurricular_activity:
     add: 
+    already_enrolled: 
     edit: 
     enroll: 
     list: 
@@ -457,6 +462,9 @@ pt-BR:
     weighting_portion: 
   grading_method:
     add: 
+    arguments: 
+    choose: 
+    curved: 
     description: 
     edit: 
     list: 
@@ -465,6 +473,21 @@ pt-BR:
     plural: 
     save: 
     singular: 
+  grading_method_set:
+    add: 
+    display_deviation: 
+    display_rank: 
+    edit: 
+    list: 
+    name: 
+    rank_order: 
+    save: 
+    show: 
+    singular: 
+  grading_method_set_item:
+    already: 
+    edit: 
+    save: 
   graduated: 
   guardian:
     add: 
@@ -509,6 +532,10 @@ pt-BR:
         exam: 
         student: 
         student_address: 
+      grading:
+        grading: 
+        grading_methods: 
+        grading_sets: 
       grading_methods: 
       preset:
         grading:
@@ -709,6 +736,7 @@ pt-BR:
   semester:
     add: 
     between: 
+    choose: 
     day: 
     duration: 
     edit: 
@@ -726,6 +754,8 @@ pt-BR:
     choose: 
     save: 
     uniqueness: 
+  semester_course:
+    uniqueness: 
   sex: 
   sex_and_birth: 
   show: 
@@ -740,6 +770,7 @@ pt-BR:
     singular: 
   specialty:
     add: 
+    already_added: 
     choose: 
     description: 
     edit: 
