@@ -123,6 +123,7 @@ ja:
   class: クラス
   class_group:
     add: クラスを追加
+    already_enrolled: 既にクラスに在籍しています。
     choose: クラス選択
     edit: クラスを編集
     enroll: クラスに入籍
@@ -196,6 +197,7 @@ ja:
     singular: 連絡先種別
   course:
     add: 授業を追加
+    already_enrolled: 既に授業に在籍しています。
     choose: 授業選択
     code: 授業コード
     code_sample: 【例：国語2020】
@@ -218,6 +220,7 @@ ja:
     plural: 授業在籍
     singular: 授業在籍
   course_group:
+    already_enrolled: 既に授業グループに在籍しています。
     course_group_recover: 授業グループを復元
     edit: 授業グループを編集
     list: コース一覧
@@ -358,6 +361,7 @@ ja:
     add_existing: 既存の試験を追加
     add_portion: 試験要素を追加
     adjustments: 調整
+    already_added: 既に試験が追加されています。
     choose: 試験を選択
     choose_schedule: 日程を選択
     completion: 採点率
@@ -414,6 +418,7 @@ ja:
     student_id_number: 生徒番号
   extracurricular_activity:
     add: 部活を追加
+    already_enrolled: 既に課外活動に在籍しています。
     edit: 部活を編集
     enroll: 部活生を追加
     list: 部活一覧
@@ -461,6 +466,9 @@ ja:
     weighting_portion: 試験要素加重率
   grading_method:
     add: 評価法を追加
+    arguments: 引数
+    choose: 評価方法を選択してください。
+    curved: 相対評価
     description: 評価法の詳細
     edit: 評価法を編集
     list: 評価法一覧
@@ -469,6 +477,21 @@ ja:
     plural: 評価法
     save: 評価法の保存
     singular: 評価法
+  grading_method_set:
+    add: 採点方法セットを追加
+    display_deviation: 偏差値を表示
+    display_rank: ランクを表示
+    edit: 採点方法セットを編集
+    list: 採点方法セット一覧
+    name: 採点方法名
+    rank_order: ランク順
+    save: 採点方法セットを保存
+    show: 採点方法セットを表示
+    singular: 採点方法セット
+  grading_method_set_item:
+    already: 採点方法は既にセットに追加されています。
+    edit: 採点方法セットアイテムを編集
+    save: 採点方法セットアイテムを保存
   graduated: 卒業日
   guardian:
     add: 保護者を追加
@@ -513,6 +536,10 @@ ja:
         exam: 試験を処分する
         student: 生徒情報処分
         student_address: 生徒住所削除一覧
+      grading:
+        grading: 採点
+        grading_methods: 採点方法
+        grading_sets: 採点セット
       grading_methods: 評価法
       preset:
         grading:
@@ -713,6 +740,7 @@ ja:
   semester:
     add: 学期を追加
     between: 学期の期間を学年開始日と学年最終日の間で設定してください。
+    choose: 学期を選択してください
     day: 日
     duration: 学期の期間
     edit: 学期を編集
@@ -730,6 +758,8 @@ ja:
     choose: 学期を選択
     save: 学期を保存
     uniqueness: このクラスに同じ学期が既に登録されています。
+  semester_course:
+    uniqueness: 同じ学期が既に授業に追加されています。
   sex: 性別
   sex_and_birth: 性別・生年月日
   show: 照会
@@ -744,6 +774,7 @@ ja:
     singular: 単体評価
   specialty:
     add: 専攻を追加
+    already_added: 専攻は既に登録されています。
     choose: 専科を選択
     description: 説明文
     edit: 専攻を編集
