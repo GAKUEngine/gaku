@@ -22,10 +22,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '4.0.0.rc1'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 1.0.1'
+  s.add_dependency 'protected_attributes'
 
   s.add_dependency 'slim', '~> 1.3.8'
   #s.add_dependency 'deface', '>= 0.9.0'
-  #s.add_dependency 'inherited_resources'
+  s.add_dependency 'inherited_resources'
   #s.add_dependency 'responders'
   #s.add_dependency 'paper_trail', '~> 2'
 
@@ -55,7 +56,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'thinreports-rails'
 
-  #s.add_dependency 'devise'
+  s.add_dependency 'devise'
   #s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan'
 
@@ -65,6 +66,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'sidekiq'
   s.add_dependency 'sinatra'
 
-  #s.add_dependency 'globalize3', '~> 0.3.0'
+  s.add_dependency 'globalize3'
 
 end

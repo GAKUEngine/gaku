@@ -11,6 +11,10 @@ gem 'therubyracer', :require => 'v8'
 gem 'rails-i18n'
 
 gem 'rails4_upgrade'
+gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
+gem 'protected_attributes'
+gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 
 
 group :assets do
