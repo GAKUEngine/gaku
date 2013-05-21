@@ -793,6 +793,8 @@ bg:
     class_group_enrollment: 
     commute_method: 
     create: 
+    download_registration_roster: 
+    download_roster: 
     edit: 
     enroll: 
     export: 
@@ -801,9 +803,7 @@ bg:
     name: 
     new: 
     plural: 
-    registration:
-      csv: 
-      sheet: 
+    roster_sheet: 
     save: 
     show: 
     singular: 

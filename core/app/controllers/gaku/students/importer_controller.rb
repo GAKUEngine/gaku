@@ -7,14 +7,17 @@ module Gaku
     require 'roo'
 
     def index
-      @importer_types = ['students.import_roster']
+      @importer_types = [I18n.t('student.roster_sheet')]
       render 'gaku/students/importer/index'
     end
 
     def get_roster
     end
 
-    def import_student_roster
+    def get_registration_roster
+    end
+
+    def import_roster
       if params[:importer][:data_file].nil?
         redirect_to importer_index_path, alert: 'no file or bad file'
       else

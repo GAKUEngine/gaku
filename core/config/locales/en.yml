@@ -795,6 +795,8 @@ en:
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
     create: Create Student
+    download_registration_roster: Download Registration Roster Sheet
+    download_roster: Download Roster Sheet
     edit: Edit Student
     enroll: Enroll Student
     export: Export Students
@@ -803,9 +805,7 @@ en:
     name: Name
     new: Register New Student
     plural: Students
-    registration:
-      csv: Registration CSV
-      sheet: Registration Sheet
+    roster_sheet: Student Roster Sheet
     save: Save Student
     show: Show Students
     singular: Student

@@ -3,8 +3,6 @@ require 'csv'
 module Gaku
   class StudentsController < GakuController
 
-    include SheetHelper
-
     load_and_authorize_resource class: Gaku::Student,
                                 except: [:recovery, :destroy]
 
@@ -12,7 +10,6 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
-    respond_to :csv, only: :csv
     respond_to :pdf, only: :show
 
     before_filter :load_data

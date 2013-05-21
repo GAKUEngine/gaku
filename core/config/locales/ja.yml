@@ -795,6 +795,8 @@ ja:
     class_group_enrollment: クラスに生徒を追加
     commute_method: 通勤手段
     create: 生徒を作成
+    download_registration_roster: 在校生登録シートをダウンロード
+    download_roster: 在校生シートをダウンロード
     edit: 編集
     enroll: 生徒を追加
     export: 生徒情報をCSVで書き出し
@@ -803,9 +805,7 @@ ja:
     name: 生徒名
     new: 生徒を登録
     plural: 生徒
-    registration:
-      csv: CSVで生徒を登録
-      sheet: 登録用のCSVをダウンロード
+    roster_sheet: 在校生シート
     save: 生徒を保存
     show: 生徒照会
     singular: 生徒
