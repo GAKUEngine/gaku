@@ -10,10 +10,13 @@ gem 'therubyracer', :require => 'v8'
 
 gem 'rails-i18n'
 
+gem 'rails4_upgrade'
+
+
 group :assets do
   gem 'less'
-  gem 'sass-rails',   '~> 3.2'
-  gem 'coffee-rails', '~> 3.2'
+  gem 'sass-rails',   '~> 4.0.0.rc1'
+  gem 'coffee-rails', '~> 4.0.0'
   gem 'uglifier', '>= 1.0.3'
 end
 
