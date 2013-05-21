@@ -32,12 +32,12 @@ module Gaku
 
     def soft_delete
       update_attributes(is_deleted: true, is_primary: false)
-      addressable.class.decrement_counter(:addresses_count, addressable.id)
+      decrement_count
     end
 
     def recover
       update_attribute(:is_deleted, false)
-      addressable.class.increment_counter(:addresses_count, addressable.id)
+      increment_count
     end
 
     def primary?
@@ -75,6 +75,14 @@ module Gaku
       unless addressable.instance_of? Gaku::Campus
         addressable.class.reset_counters(addressable.id, :addresses)
       end
+    end
+
+    def increment_count
+      addressable.class.increment_counter(:addresses_count, addressable.id)
+    end
+
+    def decrement_count
+      addressable.class.decrement_counter(:addresses_count, addressable.id)
     end
 
     def ensure_first_is_primary

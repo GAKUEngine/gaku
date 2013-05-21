@@ -3,6 +3,25 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+if ENV["COVERAGE"]
+  # Run Coverage report
+  require 'simplecov'
+  puts "Starting SimpleCov"
+  SimpleCov.start do
+    add_filter "/support/"
+    add_filter "/support/requests/"
+    add_filter "/spec/requests/**"
+    add_filter "/config/**"
+    add_group 'Controllers', 'app/controllers'
+    add_group 'Helpers', 'app/helpers'
+    add_group 'Presenters', 'app/presenters'
+    add_group 'Workers', 'app/workers'
+    add_group 'Mailers', 'app/mailers'
+    add_group 'Models', 'app/models'
+    add_group 'Libraries', 'lib'
+  end
+end
+
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../dummy/config/environment", __FILE__)
@@ -23,6 +42,9 @@ Spork.prefork do
 
   require 'gaku/core/url_helpers'
   require 'factories'
+
+  require 'coveralls'
+  Coveralls.wear!
 
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 

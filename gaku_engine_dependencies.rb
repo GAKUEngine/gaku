@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-#source 'http://production.s3.rubygems.org'
+#source 'https://rubygems.org'
+source 'http://production.s3.rubygems.org'
 
 #DB
 gem 'mysql2'
@@ -43,6 +43,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'simplecov'
+  gem 'coveralls', require: false
 
   gem 'poltergeist'
 end
