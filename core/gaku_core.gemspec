@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
-  #s.add_dependency 'bootstrap-editable-rails'
+  s.add_dependency 'bootstrap-editable-rails'
 
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'rake-progressbar'

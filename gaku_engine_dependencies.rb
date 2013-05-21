@@ -15,6 +15,8 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'protected_attributes'
 gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
+gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
+gem 'bootstrap-editable-rails', github: 'kalkov/bootstrap-editable-rails'
 
 
 group :assets do
@@ -45,7 +47,8 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'ffaker'
-  gem 'shoulda-matchers'
+  #gem 'shoulda-matchers'
+  gem "shoulda-matchers", github: "thoughtbot/shoulda-matchers" , branch: 'dp-rails-four'
   gem 'capybara', '= 1.1.3'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
