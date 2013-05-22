@@ -1,16 +1,21 @@
-.span3
-  = f.label :surname_cont, t(:surname)
-  = f.text_field :surname_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "surname") }
-.span3
-  = f.label :name_cont, t(:given_name)
-  = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
-.span3
-  = f.label :birth_date_gteq, t(:birth_date_from)
-  = f.text_field :birth_date_gteq, :class => 'span12', :placeholder => t('date_placeholder')
-.span3
-  = f.label :birth_date_lteq, t(:birth_date_to)
-  = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t(:date_placeholder)
-- if params[:controller] == "admissions"
+.row-fluid
   .span3
-    = f.label :school_id, t("admissions.candidates.junior_high_school")
-    = select_tag :name, nil, :class => "span12"
+    = f.label :surname_cont, t(:surname)
+    = f.text_field :surname_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "surname") }
+  .span3
+    = f.label :name_cont, t(:given_name)
+    = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
+  .span3
+    = f.label :birth_date_gteq, t(:birth_date_from)
+    = f.text_field :birth_date_gteq, :class => 'span12', :placeholder => t('date_placeholder')
+  .span3
+    = f.label :birth_date_lteq, t(:birth_date_to)
+    = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t(:date_placeholder)
+  - if params[:controller] == "admissions"
+    .span3
+      = f.label :school_id, t("admissions.candidates.junior_high_school")
+      = select_tag :name, nil, :class => "span12"
+.row-fluid
+  .span3
+    = f.label :enrollment_status_id_eq, t('enrollment_status.singular')
+    = f.select :enrollment_status_id_eq, Gaku::EnrollmentStatus.all.sort_by(&:name).collect{|s| [s.name, s.id]}, {:prompt => t('enrollment_status.choose_enrollment_status')}, :class => "validate[required] span12", :id => "enrollment_status_dropdown"

@@ -326,6 +326,7 @@ ja:
   enrollment_status:
     active: アクティブ
     add: 在学状況を追加
+    choose_enrollment_status: Choose Enrollment Status
     code: コード
     edit: 在学状況を編集
     list: 在学状況一覧
