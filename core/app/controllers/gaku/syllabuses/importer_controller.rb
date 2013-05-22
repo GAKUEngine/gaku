@@ -1,20 +1,11 @@
 # -*- encoding: utf-8 -*-
-
-require 'spreadsheet'
-require 'csv'
-
 module Gaku
   class Syllabuses::ImporterController < GakuController
 
     skip_authorization_check
 
-    include SheetHelper
-    require 'gaku/core/importers/school_station/kamoku.rb'
-    require 'spreadsheet'
-    require 'roo'
-
     def index
-      @importer_types = ["GAKU Engine", "SchoolStation"]
+      #@importer_types = ["GAKU Engine"]
       render "gaku/syllabuses/importer/index"
     end
 
@@ -22,12 +13,6 @@ module Gaku
     end
 
     def import_from_template
-      case params[:importer][:data_type]
-      when "SchoolStation"
-        importer = Gaku::Core::Importers::SchoolStation::Kamoku.new()
-        @results = importer.import(params[:importer][:data_file])
-        render :text => "seems ok"
-      end
     end
 
   end

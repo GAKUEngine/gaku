@@ -143,7 +143,6 @@ Gaku::Core::Engine.routes.draw do
         collection do
           get :get_roster
           get :get_registration_roster
-          post :import_roster
         end
       end
     end

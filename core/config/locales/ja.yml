@@ -232,19 +232,6 @@ ja:
     singular: 授業グループ
   course_group_enrollment:
     save: 授業グループを保存
-  csv:
-    export: CSVで書き出し
-    fields:
-      admitted: 認証済み
-      birth_date: 誕生日
-      email: Eメール
-      gender: 性別
-      name: 名
-      name_reading: フリガナ（名）
-      phone: 電話
-      surname: 姓
-      surname_reading: フリガナ（姓）
-    import: CSVを読み込む
   date:
     formats:
       default: '%Y-%m-%d'
@@ -350,6 +337,8 @@ ja:
     messages:
       already_confirmed: は既に登録済みですのでログインしてください
       expired: の期限が切れましたので、新しくリクエストしてください
+      file_type_unsupported: ファイル形式に対応出来ません。
+      file_unreadable: ファイルを読み込むことが出来ませんでした。
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
       not_saved:
@@ -432,6 +421,7 @@ ja:
     list: 部活生一覧
   failure:
     enrolled: 登録に失敗しました。
+  file: ファイル
   flash:
     actions:
       create:

@@ -232,19 +232,6 @@ en:
     singular: Course Group
   course_group_enrollment:
     save: Save to Course Group
-  csv:
-    export: CSV Export
-    fields:
-      admitted: admitted
-      birth_date: birth_date
-      email: email
-      gender: gender
-      name: name
-      name_reading: name_reading
-      phone: phone
-      surname: surname
-      surname_reading: surname_reading
-    import: CSV Import
   date:
     formats:
       default: '%Y-%m-%d'
@@ -350,6 +337,8 @@ en:
     messages:
       already_confirmed: was already confirmed, please try signing in
       expired: has expired, please request a new one
+      file_type_unsupported: File Type Not Supported.
+      file_unreadable: File could not be read.
       not_found: not found
       not_locked: was not locked
       not_saved:
@@ -432,6 +421,7 @@ en:
     list: Student list
   failure:
     enrolled: Failed to enroll!
+  file: File
   flash:
     actions:
       create:

@@ -232,19 +232,6 @@ pt-BR:
     singular: Grupo de Cursos
   course_group_enrollment:
     save: Salvar em Grupo de Cursos
-  csv:
-    export: Exportação CSV
-    fields:
-      admitted: admitido
-      birth_date: nascimento
-      email: email
-      gender: sexo
-      name: nome
-      name_reading: 
-      phone: telefone
-      surname: último nome
-      surname_reading: 
-    import: Importação CSV
   date:
     formats:
       default: 
@@ -348,6 +335,8 @@ pt-BR:
     messages:
       already_confirmed: 
       expired: 
+      file_type_unsupported: 
+      file_unreadable: 
       not_found: 
       not_locked: 
       not_saved: 
@@ -428,6 +417,7 @@ pt-BR:
     list: 
   failure:
     enrolled: 
+  file: 
   flash:
     actions:
       create:

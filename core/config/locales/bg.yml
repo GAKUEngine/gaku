@@ -232,19 +232,6 @@ bg:
     singular: Курс Група
   course_group_enrollment:
     save: Запази Курс Група
-  csv:
-    export: CSV Експорт
-    fields:
-      admitted: Приет
-      birth_date: Рождена Дата
-      email: Имейл
-      gender: Пол
-      name: Име
-      name_reading: Име (чете се)
-      phone: Телефон
-      surname: Фамилно Име
-      surname_reading: Фамилно име (чете се)
-    import: CSV Импорт
   date:
     formats:
       default: 
@@ -350,6 +337,8 @@ bg:
     messages:
       already_confirmed: 
       expired: 
+      file_type_unsupported: 
+      file_unreadable: 
       not_found: 
       not_locked: 
       not_saved: 
@@ -430,6 +419,7 @@ bg:
     list: 
   failure:
     enrolled: 
+  file: 
   flash:
     actions:
       create:

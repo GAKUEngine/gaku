@@ -2,11 +2,12 @@
   .span12.well
     .row-fluid
       .span12
-        = link_to_file t(:'student.download_roster'), :action => :get_roster
-        = link_to_file t(:'student.download_registration_roster'), :action => :get_registration_roster
+        = link_to_file t(:'student.download_roster'), action: :get_roster
+        = link_to_file t(:'student.download_registration_roster'), action: :get_registration_roster
         hr /
-        = form_for :importer, :url => { :action => "import_roster" }, :html => { :multipart => true } do |f|
-          label for="importer"
+        = form_for :importer, :html => { :multipart => true } do |f|
+          h3 = t('student.import')
+          = t('file')
           = f.file_field :data_file
           br /
           = t(:'import_format')

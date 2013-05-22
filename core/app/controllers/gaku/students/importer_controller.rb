@@ -4,10 +4,8 @@ module Gaku
 
     skip_authorization_check
 
-    require 'roo'
-
     def index
-      @importer_types = [I18n.t('student.roster_sheet')]
+      @importer_types = {I18n.t('student.roster_sheet') => :import_roster}
       render 'gaku/students/importer/index'
     end
 
@@ -17,21 +15,20 @@ module Gaku
     def get_registration_roster
     end
 
-    def import_roster
+    def create
       if params[:importer][:data_file].nil?
-        redirect_to importer_index_path, alert: 'no file or bad file'
+        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable')
       else
-        if params[:importer][:data_file].content_type == 'application/vnd.ms-excel'
-          case params[:importer][:importer_type]
-          when "GAKU Engine"
-            import_sheet_student_list
-          when "SchoolStation"
-            import_school_station_students_xls
-          end
+        send(params[:importer][:importer_type], params[:importer][:data_file])
+      end
+    end
 
-        elsif params[:importer][:data_file].content_type == "text/csv"
-            import_csv_student_list
-        end
+    def import_roster(file)
+      if file.content_type == 'application/vnd.ms-excel' ||
+          file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
+        Gaku::Importers::Students::Roster.perform_async(file)
+      else
+        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
     end
   end
