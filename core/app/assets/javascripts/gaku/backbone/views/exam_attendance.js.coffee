@@ -21,6 +21,7 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 			event.preventDefault()
 
 			attendanceInpit =  $('#score-' + that.options.attendance.get('attendancable_id'))
+			attendanceInpit.css('background-color':'white')
 			attendanceInpit.removeAttr("disabled")
 			attendanceInpit.closest('td').children('.portion_set_attendance').removeAttr('data-attendance')
 
@@ -40,12 +41,15 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 		attendance.set('attendance': {'reason': attendanceReason ,'attendance_type_id': attendanceTypeId})
 
 		attendance.save {}, success: (response)=>
+			attendance_type_color = response.attributes.attendance_type.color_code
 			@options.currentTarget.attr('data-attendance', response.id)
 			@options.currentTarget.closest('.score-column')
 												 .find('input').attr('disabled', '')
+												 .css('background-color': attendance_type_color)
 
 			@options.currentTarget.popover('destroy')
 			$('body').undelegate @submitId, 'submit'
+
 
 
 
