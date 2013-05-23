@@ -147,6 +147,7 @@ module Gaku
       @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
       @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
       @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
+      @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
     end
 
     def class_name
