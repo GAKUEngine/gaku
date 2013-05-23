@@ -197,7 +197,3 @@ VariableInterpolation:
 # Don't use semicolons to terminate expressions.
 Semicolon:
   Enabled: true
-
-AllCops:
-  Excludes:
-    - *.rb.swp

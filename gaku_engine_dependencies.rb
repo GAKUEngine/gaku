@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'therubyracer', :require => 'v8'
 
 gem 'rails-i18n'
-gem 'gen_sheet'
+gem 'GenSheet'
 
 group :assets do
   gem 'less'

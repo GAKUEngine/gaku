@@ -13,6 +13,8 @@ module Gaku
     end
 
     def get_registration_roster
+      exporter = Gaku::Core::Exporters::RosterExporter.new
+      file = exporter.export({})
     end
 
     def create
