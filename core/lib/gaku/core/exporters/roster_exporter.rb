@@ -12,7 +12,8 @@ module Gaku
 
         def initialize(options = {})
           @format = options[:format] || '.xls'
-          @template = options[:template] || 'app/templates/core/roster'
+          #TODO WTF!?
+          @template = options[:template] | 'assets/templates/roster.xls'
           load_template(@template)
         end
 
