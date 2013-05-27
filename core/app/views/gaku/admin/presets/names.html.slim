@@ -1,7 +1,3 @@
-- Gaku::Student.first(10).each do |s|
-  br
-  = student_names s
-
 = form_tag update_presets_admin_presets_path, method: :put do
   = well_div do
     = fields_for 'presets' do |language|
