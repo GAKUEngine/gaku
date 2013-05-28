@@ -187,6 +187,18 @@ module Gaku
       content_tag :h4, text
     end
 
+    def student_names(student)
+      @names_preset ||= Gaku::Preset.get(:names)
+      result = @names_preset.gsub(/%(\w+)/) do |name|
+        case name
+        when '%first' then student.name
+        when '%middle' then student.middle_name
+        when '%last' then student.surname
+        end
+      end
+      result.gsub(/\s+/, " ").strip
+    end
+
   end
 end
 

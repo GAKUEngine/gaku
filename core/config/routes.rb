@@ -283,6 +283,8 @@ Gaku::Core::Engine.routes.draw do
         get :pagination
         get :defaults
         get :output_formats
+        get :names
+
         put :update_presets
       end
     end
