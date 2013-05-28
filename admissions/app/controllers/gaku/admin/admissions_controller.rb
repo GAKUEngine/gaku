@@ -104,6 +104,7 @@ module Gaku
         @search = Student.search(params[:q])
         @students = @search.result.page(params[:page]).per(Preset.students_per_page)
         @admissions = Admission.all
+        @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
         query_params = {  :admission_period_id => params[:admission_period_id], 
                           :admission_method_id => params[:admission_method_id] }
         @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }

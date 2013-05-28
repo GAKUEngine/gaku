@@ -1,15 +1,16 @@
-.span3
-  = f.label :surname_cont, t(:surname)
-  = f.text_field :surname_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "surname") }
-.span3
-  = f.label :name_cont, t(:given_name)
-  = f.text_field :name_cont, :class => 'js-autocomplete span12', data: { autocomplete_source: load_autocomplete_data_students_path(:class_name => "student", :column => "name") }
-.span3
-  = f.label :birth_date_gteq, t(:birth_date_from)
-  = f.text_field :birth_date_gteq, :class => 'span12', :placeholder => t('date_placeholder')
-.span3
-  = f.label :birth_date_lteq, t(:birth_date_to)
-  = f.text_field :birth_date_lteq, :style => "margin-bottom:0px", :class => 'span12', :placeholder => t(:date_placeholder)
+
+= autocomplete_text_field(f, options = {  object_name: 'surname_cont',
+                                          tag_name: t(:surname),
+                                          class_name: 'student',
+                                          column: 'surname'})
+= autocomplete_text_field(f, options = {  object_name: 'name_cont',
+                                          tag_name: t(:given_name),
+                                          class_name: 'student',
+                                          column: 'name'})
+= autocomplete_date_field(f, options = {  object_name: 'birth_date_gteq', 
+                                          tag_name: t(:birth_date_from)})
+= autocomplete_date_field(f, options = {  object_name: 'birth_date_lteq', 
+                                          tag_name: t(:birth_date_to)})
 - if params[:controller] == "admissions"
   .span3
     = f.label :school_id, t("admissions.candidates.junior_high_school")

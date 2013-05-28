@@ -7,6 +7,7 @@ module Gaku
       @search = Student.search(params[:q])
       @students = @search.result.page(params[:page]).per(Preset.students_per_page)
 
+      @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
 
       instance_variable_set("@#{class_name_underscored_plural}", class_name.constantize.all)
       #@class_groups = class_name.constantize.all

@@ -50,6 +50,7 @@ ja:
     new: 課題の登録
     plural: 課題
     results: 課題結果
+    score: Score
     singular: 課題
     view: 課題詳細を参照
   assignments:
@@ -409,12 +410,14 @@ ja:
     use_weighting: 加重率を使用
     weight: 加重率
   export: エクスポート
+  extended: Extended
   external_school_record:
     absences: 欠席数
     attendance_rate: 出席率
     beginning: 開始日
     data: データ
     ending: 終了日
+    singular: External School Record
     student_id_number: 生徒番号
   extracurricular_activity:
     add: 部活を追加
@@ -513,6 +516,7 @@ ja:
   id: ID
   import: インポート
   import_format: インポート形式
+  is_graduated: Is Graduated
   language: 言語
   languages:
     en: English[英語]

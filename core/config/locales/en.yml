@@ -50,6 +50,7 @@ en:
     new: New Assignment
     plural: Assignments
     results: Assignment Results
+    score: Score
     singular: Assignment
     view: View Assignments
   assignments:
@@ -409,12 +410,14 @@ en:
     use_weighting: Use Weighting
     weight: Weight
   export: Export
+  extended: Extended
   external_school_record:
     absences: Absences
     attendance_rate: Attendance Rate
     beginning: Beginning
     data: Data
     ending: Ending
+    singular: External School Record
     student_id_number: Student ID number
   extracurricular_activity:
     add: Add Extracurricular Activity
@@ -513,6 +516,7 @@ en:
   id: Id
   import: Import
   import_format: Import Format
+  is_graduated: Is Graduated
   language: Language
   languages:
     en: English
