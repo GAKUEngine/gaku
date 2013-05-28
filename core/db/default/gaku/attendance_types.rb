@@ -1,5 +1,4 @@
 types = [
-
   {
     :name => "Present",
     :color_code => "#006e54",
@@ -63,7 +62,16 @@ types = [
     :auto_credit => false
   }
 ]
+japanese_attendance_types = ['Japanese Present', 'Japanese Present for Credit',
+                             'Japanese Excused', 'JapaneseIllness',
+                             'Japanese Injury', 'Japanese Mourning',
+                             'Japanese Absent'
+                            ]
 
-types.each do |type|
-  Gaku::AttendanceType.where(type).first_or_create!
+types.each_with_index do |type, index|
+  I18n.locale = :en
+  attendance_type = Gaku::AttendanceType.where(type).first_or_create!
+
+  I18n.locale = :ja
+  attendance_type.update_attributes(:name => japanese_attendance_types[index])
 end
