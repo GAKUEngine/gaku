@@ -27,8 +27,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'nested_form'
   s.add_dependency 'gaku_helpers'
-  s.add_dependency 'gaku_forms'
-  s.add_dependency 'gaku_nested_forms'
+  s.add_dependency 'gaku_forms', '~> 0.0.8'
+  s.add_dependency 'gaku_nested_forms', '~> 0.0.2'
 
   s.add_dependency 'rails-i18n'
   s.add_dependency 'localeapp'
