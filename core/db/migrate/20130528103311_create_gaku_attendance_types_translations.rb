@@ -1,6 +1,6 @@
 class CreateGakuAttendanceTypesTranslations < ActiveRecord::Migration
   def up
-    Gaku::AttendanceType.create_translation_table! :name => :string
+    Gaku::AttendanceType.create_translation_table! name: :string
   end
 
   def down
