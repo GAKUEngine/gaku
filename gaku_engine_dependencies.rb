@@ -18,6 +18,7 @@ gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 gem 'bootstrap-editable-rails', github: 'tkawa/bootstrap-editable-rails'
 gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
+#gem 'deface', github: 'spree/deface', branch: 'rails4'
 
 group :assets do
   gem 'less'

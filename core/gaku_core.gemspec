@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'protected_attributes'
 
   s.add_dependency 'slim', '~> 1.3.8'
-  #s.add_dependency 'deface', '>= 0.9.0'
+  #s.add_dependency 'deface'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
   s.add_dependency 'paper_trail'
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'paperclip'
-  #s.add_dependency 'ransack'
+  s.add_dependency 'ransack'
 
   #spreadsheet handling
   s.add_dependency 'roo'
@@ -67,6 +67,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'sidekiq'
   s.add_dependency 'sinatra'
 
-  #s.add_dependency 'globalize3'
+  s.add_dependency 'globalize3'
 
 end
