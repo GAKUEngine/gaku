@@ -12,13 +12,9 @@ Gaku::Core::Engine.routes.draw do
      }
   }
 
-#devise_for :users, :path => "auth", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
-
-
   devise_scope :user do
     get :set_up_admin_account, :to => "devise/registrations#set_up_admin_account"
     post :create_admin, :to => "devise/registrations#create_admin"
-    get "sign_in", :to => "devise/sessions#new"
   end
 
   resources :extracurricular_activities do
