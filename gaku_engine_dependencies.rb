@@ -13,11 +13,11 @@ gem 'rails-i18n'
 gem 'rails4_upgrade'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'protected_attributes'
-gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
+
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
-gem 'bootstrap-editable-rails', github: 'kalkov/bootstrap-editable-rails'
-
+#gem 'bootstrap-editable-rails', github: 'tkawa/bootstrap-editable-rails'
+gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
 
 group :assets do
   gem 'less'
