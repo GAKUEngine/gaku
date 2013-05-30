@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  #s.add_dependency 'rails', '~> 3.2.8'
   s.add_dependency 'rails', '4.0.0.rc1'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 1.0.1'
@@ -45,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-turbolinks'
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
-  #s.add_dependency 'bootstrap-editable-rails'
+  s.add_dependency 'bootstrap-editable-rails'
 
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'rake-progressbar'

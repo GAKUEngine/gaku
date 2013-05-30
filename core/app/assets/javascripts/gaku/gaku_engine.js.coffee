@@ -33,7 +33,10 @@ $.fn.enableValidations = ->
 
 $.fn.editable.defaults.mode = 'inline'
 
-$ ->
+
+do_on_load = ->
+
+  console.log 'do_on_change loaded'
 
   $('#soft-delete-link').on 'click', (e)->
     e.preventDefault()
@@ -55,6 +58,7 @@ $ ->
 
 
   $(document).on "click",".cancel-link", (e) ->
+    console.log 'Cancel event'
     e.preventDefault()
     resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
     resource_new_link = "#new-" + resource_id + "-link"
@@ -81,3 +85,7 @@ $ ->
     axis: 'y'
     update: ->
       $.post $(@).data('sort-url'), $(@).sortable('serialize')
+
+
+$(document).ready(do_on_load)
+$(window).bind('page:change', do_on_load)
