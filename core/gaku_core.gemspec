@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'nested_form'
   s.add_dependency 'gaku_helpers'
+
   s.add_dependency 'rails4_client_side_validations', '0.0.3'
   s.add_dependency 'gaku_forms', '~> 0.1.0'
   s.add_dependency 'gaku_nested_forms', '~> 0.1.0'

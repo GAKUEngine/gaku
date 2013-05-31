@@ -15,8 +15,8 @@ module Gaku
     validates :name, presence: true
 
     has_one :master_campus,
+            -> { where is_master: true },
             class_name: Gaku::Campus,
-            conditions: { is_master: true },
             dependent: :destroy
 
     accepts_nested_attributes_for :levels, allow_destroy: true

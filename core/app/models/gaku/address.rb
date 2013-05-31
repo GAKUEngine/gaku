@@ -10,7 +10,7 @@ module Gaku
                             joined_resource_id: :joined_resource_id
                           }
 
-    default_scope conditions:  { is_deleted: false }
+    default_scope -> { where(is_deleted: false) }
 
     validates_presence_of :address1, :city, :country
 
@@ -25,7 +25,7 @@ module Gaku
     after_destroy :reset_counter_cache
 
     def make_primary
-      addresses.update_all({is_primary: false}, ['id != ?', id])
+      addresses.where('id != ?', id).update_all(is_primary: false)
       update_attribute(:is_primary, true)
       update_address_widget
     end
