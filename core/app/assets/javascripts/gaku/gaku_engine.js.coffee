@@ -28,7 +28,7 @@ $.fn.inline_date = () ->
 
 
 $.fn.enableValidations = ->
-  $(this).enableClientSideValidations()
+  $(this).enableRails4ClientSideValidations()
 
 
 $.fn.editable.defaults.mode = 'inline'

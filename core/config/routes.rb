@@ -5,11 +5,11 @@ Gaku::Core::Engine.routes.draw do
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
-    controllers: {
-      sessions: "gaku/devise/sessions",
-      registrations: "gaku/devise/registrations",
-      passwords: "gaku/devise/passwords"
-    }
+     controllers: {
+       sessions: "gaku/devise/sessions",
+       registrations: "gaku/devise/registrations",
+       passwords: "gaku/devise/passwords"
+     }
   }
 
   devise_scope :user do
