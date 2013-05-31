@@ -44,7 +44,7 @@ module Gaku
     private
 
     def remove_other_primary
-      contacts.update_all({is_primary: false}, ['id != ?', id]) if primary?
+      contacts.where('id != ?', id).update_all(is_primary: false) if primary?
     end
 
     def ensure_first_is_primary

@@ -4,7 +4,7 @@ module Gaku
     include Notes
 
     has_many :exam_scores
-    has_many :exam_portions, order: :position
+    has_many :exam_portions, -> { order :position }
     has_many :exam_portion_scores, through: :exam_portions
 
     has_many :exam_syllabuses, dependent: :destroy

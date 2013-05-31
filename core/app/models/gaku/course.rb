@@ -49,7 +49,7 @@ module Gaku
       unless class_group.blank?
         ActiveRecord::Base.transaction do
           class_group.student_ids.each do |student_id|
-            CourseEnrollment.find_or_create_by_student_id_and_course_id(student_id, id)
+            CourseEnrollment.find_or_create_by(student_id: student_id, course_id: id)
          end
         end
       end
