@@ -1,4 +1,5 @@
 //= require jquery
+//= require turbolinks
 //= require jquery.turbolinks
 // require jquery_ujs
 //= require jquery-ui
@@ -6,8 +7,8 @@
 //= require moment.min
 
 //= require bootstrap
-// require bootstrap-editable
-// require bootstrap-editable-rails
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require_tree ../../../../vendor/assets/javascripts/bootstrap-datepicker/
 
 //= require chosen-jquery
