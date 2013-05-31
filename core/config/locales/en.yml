@@ -833,6 +833,7 @@ en:
     show: Show Teacher
     singular: Instructor
   title: Title
+  undefined: Undefined
   user:
     add: Add User
     edit: Edit User

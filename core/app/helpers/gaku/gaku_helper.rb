@@ -29,7 +29,12 @@ module Gaku
     def autocomplete_select(form, options = {})
       content_tag :div, class: 'span3' do
         concat form.label options[:object_name], options[:tag_name]
-        concat form.select options[:object_name], options[:collection], {prompt: options[:prompt]}, options[:html_options]
+        concat form.select  options[:object_name], 
+                            options[:collection], 
+                            { prompt: options[:prompt], 
+                              selected: options[:selected] 
+                            }, 
+                            options[:html_options]
       end
     end
 

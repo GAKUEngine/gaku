@@ -19,5 +19,6 @@
   = autocomplete_select(f, options = {  object_name: 'enrollment_status_id_eq', 
                                         tag_name: t('enrollment_status.singular'), 
                                         collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'), 
+                                        selected: 3,
                                         prompt_position: "bottomRight:5", 
                                         html_options: {class: "validate[required] span12", id: "enrollment_status_dropdown"}})

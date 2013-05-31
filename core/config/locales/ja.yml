@@ -819,6 +819,7 @@ ja:
     show: 教師情報を表示
     singular: 教師
   title: タイトル
+  undefined: Undefined
   user:
     add: ユーザーを追加
     edit: ユーザーを編集

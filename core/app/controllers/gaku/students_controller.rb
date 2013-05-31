@@ -29,6 +29,11 @@ module Gaku
       #index!
 
       super do |format|
+
+        format.html do
+          @students = Student.where(enrollment_status_id: 3).page(params[:page]).per(Preset.students_per_page)
+        end
+
         format.pdf do
           send_data render_to_string, filename: 'sido_yoroku.pdf',
                                       type: 'application/pdf',
@@ -39,6 +44,7 @@ module Gaku
 
     def show
       super do |format|
+
         format.pdf do
           send_data render_to_string, filename: "student-#{@student.id}.pdf",
                                       type: 'application/pdf',
@@ -146,6 +152,7 @@ module Gaku
       @achievements = Achievement.all.collect { |a| [a.name, a.id] }
       @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
       @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+      @enrollment_statuses << [t('undefined'), nil]
       @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
       @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
     end

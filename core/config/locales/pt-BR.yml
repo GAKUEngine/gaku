@@ -810,6 +810,7 @@ pt-BR:
     show: 
     singular: 
   title: 
+  undefined: Undefined
   user:
     add: 
     edit: 

@@ -106,6 +106,7 @@ module Gaku
         @admissions = Admission.all
         @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
         @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+        @enrollment_statuses << [t('undefined'), nil]
         query_params = {  :admission_period_id => params[:admission_period_id], 
                           :admission_method_id => params[:admission_method_id] }
         @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }

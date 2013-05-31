@@ -813,6 +813,7 @@ bg:
     show: 
     singular: 
   title: 
+  undefined: Неопределен
   user:
     add: 
     edit: 
