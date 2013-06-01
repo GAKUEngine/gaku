@@ -38,7 +38,7 @@ module Gaku
 
           def add_to_portion_attendance(student, exam, portion, score = nil)
             score ||= portion.student_score(student)
-            @student_portion_attendance[student.id][score.id] = score.attendances.last.try(:id)
+            @student_portion_attendance[student.id][score.id] = [score.attendances.last.try(:id), score.attendances.last.try(:attendance_type).try(:color_code)]
           end
 
           def calculate_exam_averages

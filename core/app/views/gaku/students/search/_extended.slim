@@ -1,0 +1,134 @@
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'course.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'courses_code_cont', 
+                                            tag_name:     t(:'course.code'), 
+                                            class_name:   'course', 
+                                            column:       'code'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'class_group.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'class_groups_name_cont', 
+                                            tag_name:     t(:'class_group.name'), 
+                                            class_name:   'class_groups', 
+                                            column:       'name'})
+  = autocomplete_text_field(f, options = {  object_name:  'class_groups_grade_eq', 
+                                            tag_name:     t(:'class_group.grade'), 
+                                            class_name:   'class_groups', 
+                                            column:       'grade'})
+  = autocomplete_text_field(f, options = {  object_name:  'class_groups_homeroom_cont', 
+                                            tag_name:     t(:'class_group.homeroom'), 
+                                            class_name:   'class_groups', 
+                                            column:       'homeroom'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'extracurricular_activity.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'extracurricular_activities_name_cont', 
+                                            tag_name:     t(:'extracurricular_activity.name'), 
+                                            class_name:   'extracurricular_activities', 
+                                            column:       'name'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'specialty.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name: 'specialties_name_cont', 
+                                            tag_name:     t(:'specialty.name'), 
+                                            class_name:   'specialties', 
+                                            column:       'name'})
+  = autocomplete_text_field(f, options = {  object_name:  'specialties_description_cont', 
+                                            tag_name:     t(:'specialty.description'), 
+                                            class_name:   'specialties', 
+                                            column:       'description'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'achievement.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'achievements_name_cont', 
+                                            tag_name:     t(:'achievement.name'), 
+                                            class_name:   'achievements', 
+                                            column:       'name'})
+  = autocomplete_text_field(f, options = {  object_name:  'achievements_description_cont', 
+                                            tag_name:     t(:'achievement.description'), 
+                                            class_name:   'achievements', 
+                                            column:       'description'})
+  = autocomplete_text_field(f, options = {  object_name:  'achievements_authority_cont', 
+                                            tag_name:     t(:'achievement.authority'), 
+                                            class_name:   'achievements', 
+                                            column:       'authority'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'guardian.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'guardians_name_cont', 
+                                            tag_name:     t(:'name'), 
+                                            class_name:   'guardians', 
+                                            column:       'name'})
+  = autocomplete_text_field(f, options = {  object_name:  'guardians_surname_cont', 
+                                            tag_name:     t(:'surname'), 
+                                            class_name:   'guardians', 
+                                            column:       'surname'})
+  = autocomplete_text_field(f, options = {  object_name:  'guardians_name_reading_cont', 
+                                            tag_name:     t(:'name_reading'), 
+                                            class_name:   'guardians', 
+                                            column:       'name_reading'})
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'guardians_surname_reading_cont', 
+                                            tag_name:     t(:'surname_reading'), 
+                                            class_name:   'guardians', 
+                                            column:       'surname_reading'})
+  = autocomplete_text_field(f, options = {  object_name:  'guardians_relationship_cont', 
+                                            tag_name:     t(:'guardian.relationship'), 
+                                            class_name:   'guardians', 
+                                            column:       'relationship'})
+
+//= hr
+//.row-fluid
+  h4.mt-xs.mb-0 =t(:'exam_portion_score.singular')
+//.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'exam_portion_scores_score_cont', 
+                                            tag_name:     t(:'exam_portion_score.score'), 
+                                            class_name:   'exam_portion_scores', 
+                                            column:       'score'})
+  = autocomplete_text_field(f, options = {  object_name:  'exam_portion_scores_entry_number_cont', 
+                                            tag_name:     t(:'exam_portion_score.entry_number'), 
+                                            class_name:   'exam_portion_scores', 
+                                            column:       'entry_number'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'assignment.singular')
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'assignment_scores_score_eq', 
+                                            tag_name:     t(:'assignment.score'), 
+                                            class_name:   'assignment_scores', 
+                                            column:       'score'})
+= hr
+.row-fluid
+  h4.mt-xs.mb-0 =t(:'external_school_record.singular')
+.row-fluid
+  = autocomplete_date_field(f, options = {  object_name:  'external_school_records_beginning_gteq', 
+                                            tag_name:     t(:'external_school_record.beginning')})
+  = autocomplete_date_field(f, options = {  object_name:  'external_school_records_ending_lteq', 
+                                            tag_name:     t(:'external_school_record.ending')})
+  = autocomplete_text_field(f, options = {  object_name:  'external_school_records_student_id_number_cont', 
+                                            tag_name:     t(:'external_school_record.student_id_number'), 
+                                            class_name:   'external_school_records', 
+                                            column:       'student_id_number'})
+  = autocomplete_text_field(f, options = {  object_name:  'external_school_records_absences_lteq', 
+                                            tag_name:     t(:'external_school_record.absences'), 
+                                            class_name:   'external_school_records', 
+                                            column:       'absences'})
+.row-fluid
+  = autocomplete_text_field(f, options = {  object_name:  'external_school_records_attendance_rate_eq', 
+                                            tag_name:     t(:'external_school_record.attendance_rate'), 
+                                            class_name:   'external_school_records', 
+                                            column:       'attendance_rate'})
+  //= autocomplete_text_field(f, options = {  object_name:  'external_school_records_graduated_lteq', 
+                                              tag_name:     t(:'is_graduated'), 
+                                              class_name:   'external_school_records', 
+                                              column:       'graduated'})
+  = autocomplete_text_field(f, options = {  object_name:  'external_school_records_data_cont', 
+                                            tag_name:     t(:'external_school_record.data'), 
+                                            class_name:   'external_school_records', 
+                                            column:        'data'})

@@ -9,6 +9,29 @@ module Gaku
         block.call
       end
     end
+  
+    def autocomplete_text_field(form, options = {})
+      content_tag :div, class: 'span3' do
+        concat form.label options[:object_name], options[:tag_name]
+        concat form.text_field options[:object_name], 
+          class: 'js-autocomplete span12', 
+          data: { autocomplete_source: load_autocomplete_data_students_path(class_name: options[:class_name], column: options[:column]) }
+      end
+    end
+
+    def autocomplete_date_field(form, options = {})
+      content_tag :div, class: 'span3' do
+        concat form.label options[:object_name], options[:tag_name]
+        concat form.text_field options[:object_name], class: 'span12', placeholder: t(:'date_placeholder')
+      end
+    end
+
+    def autocomplete_select(form, options = {})
+      content_tag :div, class: 'span3' do
+        concat form.label options[:object_name], options[:tag_name]
+        concat form.select options[:object_name], options[:collection], {prompt: options[:prompt]}, options[:html_options]
+      end
+    end
 
     def drag_field
       content_tag :td, class: 'sort-handler' do
@@ -185,6 +208,18 @@ module Gaku
 
     def nested_header(text)
       content_tag :h4, text
+    end
+
+    def student_names(student)
+      @names_preset ||= Gaku::Preset.get(:names)
+      result = @names_preset.gsub(/%(\w+)/) do |name|
+        case name
+        when '%first' then student.name
+        when '%middle' then student.middle_name
+        when '%last' then student.surname
+        end
+      end
+      result.gsub(/\s+/, " ").strip
     end
 
   end

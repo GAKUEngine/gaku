@@ -1,17 +1,4 @@
 $('#syllabus-modal').modal('hide');
 $('#syllabus-modal').remove();
 showNotice("<%= render_flash %>");
-
-
-
-var currentSyllabusCode = $(".syllabus-<%= @syllabus.id %> .code");
-currentSyllabusCode.html("<%= @syllabus.code %>");
-
-var currentSyllabusName = $(".syllabus-<%= @syllabus.id %> .name");
-currentSyllabusName.html("<%= @syllabus.name %>");
-
-var currentSyllabusDescription = $(".syllabus-<%= @syllabus.id %> .description");
-currentSyllabusDescription.html("<%= @syllabus.description %>");
-
-var currentSyllabusCredits = $(".syllabus-<%= @syllabus.id %> .credits");
-currentSyllabusCredits.html("<%= @syllabus.credits %>");
+$('tr.syllabus-<%= @syllabus.id %>').html('<%= render_js_partial("gaku/shared/fields/syllabus_fields", {:syllabus => @syllabus}) %>');

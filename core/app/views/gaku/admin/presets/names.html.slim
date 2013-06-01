@@ -1,0 +1,20 @@
+= form_tag update_presets_admin_presets_path, method: :put do
+  = well_div do
+    = fields_for 'presets' do |language|
+      .row-fluid
+        .span6
+          = fields_for :presets do |names|
+            = names.label t(:'preset.names')
+            = names.text_field :names, value: @preset_hash[:names]
+        .span6
+          p
+            'Information:
+            br
+            '%first - Student first name
+            br
+            '%middle - Student middle name
+            br
+            '%last - Student last name
+      .row-fluid
+        .span3
+          = submit_button t(:'preset.save'), id: 'submit-preset'

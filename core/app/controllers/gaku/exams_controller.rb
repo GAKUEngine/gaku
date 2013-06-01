@@ -60,7 +60,7 @@ module Gaku
           :students => @students.to_json(:root => false),
           :grades => @grades.as_json(:root => false),
           :ranks => @ranks.as_json(:root => false),
-          :attendances => @student_portion_attendance.as_json(:root => true),
+          :attendances => @student_portion_attendance.as_json(:root => true, :include => :attendance_type),
           :path_to_exam => @path_to_exam.to_json,
           :completion => @completion
         }}

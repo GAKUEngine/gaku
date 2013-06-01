@@ -12,7 +12,7 @@ module Gaku
                       reason: params[:attendance][:reason])
       if @attendance.save
         respond_with(@attendance) do |format|
-          format.json { render json: @attendance.to_json(root: false) }
+          format.json { render json: @attendance.to_json(root: false, include: :attendance_type) }
         end
       end
     end
