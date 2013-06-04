@@ -1,7 +1,7 @@
 module Gaku
   class Country < ActiveRecord::Base
 
-    has_many :states, -> { order name: 'ASC' },
+    has_many :states, -> { order name: :asc },
                       foreign_key: 'country_numcode',
                       primary_key: 'numcode'
 
