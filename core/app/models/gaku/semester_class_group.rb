@@ -15,7 +15,7 @@ module Gaku
                           }
 
     def self.group_by_semester
-      all(include: [:semester, :class_group]).group_by(&:semester_id)
+      all.includes([:semester, :class_group]).group_by(&:semester_id)
     end
 
   end
