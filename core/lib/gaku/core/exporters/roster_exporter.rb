@@ -12,14 +12,17 @@ module Gaku
 
         def initialize(options = {})
           @format = options[:format] || '.xls'
-          #TODO WTF!?
-          @template = options[:template] | 'assets/templates/roster.xls'
+          #TODO fix with paperclip
+          @template = options[:template] || 'assets/templates/roster.xls'
           load_template(@template)
         end
 
         def load_template(template)
-          @workbook = Roo::Spreadsheet.open(@template)
-          puts 'template loaded'
+          begin
+            @workbook = Roo::Spreadsheet.open(@template)
+          rescue
+            @workbook = Roo::Spreadsheet.new()
+          end
         end
 
         def export_all()
