@@ -29,7 +29,7 @@ module Gaku
 
 
     def enroll_class_group
-      @course = Course.find(params[:id])
+      @course = Course.find(params[:course_id])
       @not_added_students = []
       if !params[:course][:class_group_id].blank?
         @class_group = ClassGroup.find(params[:course][:class_group_id])
