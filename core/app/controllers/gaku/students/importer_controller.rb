@@ -20,7 +20,7 @@ module Gaku
     def create
       redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') if params[:importer][:data_file].nil?
 
-      file = ImportFile.new(params[:importer][:data_file])
+      file = ImportFile.new(params[:importer])
       file.context = 'students'
       raise "COULD NOT SAVE FILE" unless file.save
 
@@ -34,6 +34,7 @@ module Gaku
       if file.data_file.content_type == 'application/vnd.ms-excel' ||
           file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
         Gaku::Core::Importers::Students::Roster.import(file)
+        render text: "Importing"
       else
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
