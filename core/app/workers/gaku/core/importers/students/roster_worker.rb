@@ -6,10 +6,11 @@ module Gaku
           include Sidekiq::Worker
 
           def perform(sheet)
-            sheet.each(id: 'ID') do |row|
-              puts row
-              #process_row(row)
-            end
+            sheet.reverse
+            # sheet.each(id: 'ID') do |row|
+            #   puts row
+            #   #process_row(row)
+            # end
           end
 
           def student_exists?(row)
