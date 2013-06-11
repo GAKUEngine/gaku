@@ -6,7 +6,7 @@ module Gaku
       validates_presence_of :name, :surname
 
       attr_accessible :name, :surname, :name_reading, :surname_reading, :middle_name,
-                      :birth_date, :gender
+                      :birth_date, :gender, :middle_name_reading
 
 
       def to_s
