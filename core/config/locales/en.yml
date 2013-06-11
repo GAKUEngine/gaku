@@ -555,6 +555,7 @@ en:
           grading: Grading Preset
           locale: Locale Preset
           student: Student Preset
+          names: Names
         pagination: Pagination Preset
         plural: Presets
         save: Save
