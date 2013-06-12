@@ -303,6 +303,7 @@ describe 'Admin Admissions' do
             end
             #TODO revert admitted if admitted by mistake
             visit gaku.students_path
+            select "Admitted", from: 'q[enrollment_status_id_eq]'
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end

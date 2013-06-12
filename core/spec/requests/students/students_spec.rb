@@ -4,9 +4,12 @@ describe 'Students' do
 
   as_admin
 
-  let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota') }
-  let(:student3) { create(:student, name: 'Johny', surname: 'Bravo') }
+  let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
+  let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
+  let(:enrollment_status) { create(:enrollment_status) }
+  let(:student) { create(:student, name: 'John', surname: 'Doe', :enrollment_status_id => enrollment_status.id) }
+  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', :enrollment_status_id => enrollment_status.id) }
+  let(:student3) { create(:student, name: 'Johny', surname: 'Bravo', :enrollment_status_id => enrollment_status.id) }
 
   before :all do
     set_resource "student"
@@ -14,6 +17,9 @@ describe 'Students' do
 
   context "existing" do
     before do
+      enrollment_status_applicant
+      enrollment_status_admitted
+      enrollment_status
       student
       student2
       student3

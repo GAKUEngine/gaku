@@ -4,8 +4,11 @@ describe 'ClassGroup Students' do
 
   as_admin
 
+  let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
+  let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
+  let(:enrollment_status) { create(:enrollment_status) }
   let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
-  let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota') }
+  let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota', :enrollment_status_id => enrollment_status.id) }
 
   before :all do
     set_resource "class-group-student"
@@ -13,11 +16,15 @@ describe 'ClassGroup Students' do
 
   before do
     class_group
+    enrollment_status_applicant
+    enrollment_status_admitted
+    enrollment_status
   end
 
   context "#new" do
     before do
       student1
+
       visit gaku.class_groups_path
       click show_link
       click_link 'class-group-enrollments-tab-link'
