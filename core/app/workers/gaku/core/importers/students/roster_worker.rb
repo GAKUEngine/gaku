@@ -1,40 +1,23 @@
+require 'roo'
+require 'GenSheet'
+
 module Gaku
   module Core
     module Importers
       module Students
         class RosterWorker
           include Sidekiq::Worker
+           sidekiq_options retry: true, queue: 'roster_worker'
 
-          def perform(sheet)
-            sheet.reverse
-            # sheet.each(id: 'ID') do |row|
-            #   puts row
-            #   #process_row(row)
-            # end
-          end
-
-          def student_exists?(row)
-            if Gaku::Student.exists?(:student_foreign_id_number => row[:idnum].to_i.to_s)
-              return true
-            end
-            false
-          end
-
-          def update_student(row)
-          end
-
-          def register_student(row)
-            ActiveRecord::Base.transaction do
-            end
-          end
-
-          def process_row(row)
-            if student_exists?(row)
-              update_student(row)
+          def perform(file_id)
+            file = Gaku::ImportFile.find file_id
+            if file
+              Gaku::Core::Importers::Students::Roster.new(file)
             else
-              register_student(row)
+              raise "NO FILE"
             end
           end
+
         end
       end
     end

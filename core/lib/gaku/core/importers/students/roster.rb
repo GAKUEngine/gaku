@@ -8,24 +8,44 @@ module Gaku
       module Students
         class Roster
 
-
-          # end
-          def self.import(file)
-            raise "NO FILE" if file.data_file.nil?
-            # @book = Roo::Spreadsheet.open(file.data_file.path)
-            # info = self.get_info(@book)
-            # raise info.inspect
-            # sheet = @book.sheet(info[:roster]) || @book.sheet.first || return
-
-            Gaku::Core::Importers::Students::RosterWorker.perform_async('opa')
+          def initialize(file)
+            open_file = File.open(file.data_file.path)
+            @book = Roo::Spreadsheet.open open_file
           end
-          #gets workbook info from 'info' sheet
-          def self.get_info(book)
-            # info_sheet = book.sheet('info')
-            # raise book.cell(1,1).inspect
-            # return nil if info_sheet.nil?
 
+          def start
+            @book.sheet.each(id: 'ID') do |row|
+              puts row
+              process_row(row)
+            end
           end
+
+          private
+
+          def get_info
+            @book.sheet('info')
+          end
+
+          def student_exists?(row)
+            Gaku::Student.exists?(student_foreign_id_number: row[:idnum].to_i.to_s)
+          end
+
+          def update_student(row)
+          end
+
+          def register_student(row)
+            ActiveRecord::Base.transaction do
+            end
+          end
+
+          def process_row(row)
+            if student_exists?(row)
+              update_student(row)
+            else
+              register_student(row)
+            end
+          end
+
         end
       end
     end
