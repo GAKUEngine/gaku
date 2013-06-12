@@ -27,11 +27,12 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       #index!
-
+      @enrollment_status_applicant_id = EnrollmentStatus.find_by_code("applicant").id
+      @enrollment_status_enrolled_id = EnrollmentStatus.find_by_code("enrolled").id
       super do |format|
 
         format.html do
-          @students = Student.where(enrollment_status_id: 3).page(params[:page]).per(Preset.students_per_page)
+          @students = Student.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
         end
 
         format.pdf do
