@@ -33,12 +33,13 @@ module Gaku
             key_syms.each do |key|
               keymap[key] = I18n.t(key)
             end
+            return keymap
           end
-
 
           def start(info, book)
             keymap = get_keymap
-            book.each(keymap) do |row|
+            log keymap
+            book.parse(keymap) do |row|
               process_row(row)
             end
           end
