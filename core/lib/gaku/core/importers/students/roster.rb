@@ -17,18 +17,18 @@ module Gaku
             file_handle = File.open file.data_file.path
             book = Roo::Spreadsheet.open file_handle
             info = get_info(book)
-            log info[:locale]
+            log info['locale']
             open_roster(info, book)
             start(info, book)
           end
 
           def open_roster(info, book)
-            I18n.locale = info[:locale].to_s || I18n.default_locale
+            I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
             book.sheet(I18n.t('student.roster'))
           end
 
           def start(info, book)
-            book[info[:index_row].to_i .. -1].each(id: I18n.t(:id),
+            book(info[:index_row].to_i .. -1).each(id: I18n.t(:id),
               name: I18n.t(:name), name_reading: I18n.t(:name_reading),
               middle_name: I18n.t(:middle_name),
               middle_name_reading: I18n.t(:middle_name_reading),
