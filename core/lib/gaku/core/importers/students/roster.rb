@@ -8,24 +8,26 @@ module Gaku
       module Students
         class Roster
           def initialize(file)
-            open_file = File.open file.data_file.path
-            @book = Roo::Spreadsheet.open open_file
-            get_info
-            open_roster
-            start
+            file_handle = File.open file.data_file.path
+            book = Roo::Spreadsheet.open file_handle
+            info = get_info(book)
+            open_roster(info, book)
+            start(info, book)
           end
 
-          def open_roster
-            I18n.locale = @info['lang'] || I18n.default_locale
-            @book.sheet(I18n.t('student.roster'))
+          def open_roster(info, book)
+            puts info
+            I18n.locale = info['locale'].to_s || I18n.default_locale
+            book.sheet(I18n.t('student.roster'))
           end
 
-          def start
-            @book.sheet.drop(@info['header_height'].to_i).each(id: t(:id),
-              name: t(:name), name_reading: t(:name_reading),
-              middle_name: t(:middle_name),
-              middle_name_reading: t(:middle_name_reading),
-              surname: t(:surname), surname_reading: t(:surname_reading)
+          def start(info, book)
+            book.drop(1)
+            book.each(id: I18n.t(:id),
+              name: I18n.t(:name), name_reading: I18n.t(:name_reading),
+              middle_name: I18n.t(:middle_name),
+              middle_name_reading: I18n.t(:middle_name_reading),
+              surname: I18n.t(:surname), surname_reading: I18n.t(:surname_reading)
                 ) do |row|
               puts row
               process_row(row)
@@ -34,9 +36,9 @@ module Gaku
 
           private
 
-          def get_info
-            @book.sheet('info')
-            @info = @book.parse(locale: 'locale', template_ver: 'template_ver',
+          def get_info(book)
+            book.sheet('info')
+            book.parse(locale: 'locale', template_ver: 'template_ver',
               export_date: 'export_date', header_height: 'header_height',
               index_row: 'index_row')
           end
