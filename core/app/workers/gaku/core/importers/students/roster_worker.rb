@@ -7,9 +7,11 @@ module Gaku
       module Students
         class RosterWorker
           include Sidekiq::Worker
+           sidekiq_options retry: true, queue: 'roster_worker'
 
-          def perform(file)
-            if file.data_file
+          def perform(file_id)
+            file = Gaku::ImportFile.find file_id
+            if file
               Gaku::Core::Importers::Students::Roster.new(file)
             else
               raise "NO FILE"

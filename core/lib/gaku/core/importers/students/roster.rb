@@ -9,7 +9,8 @@ module Gaku
         class Roster
 
           def initialize(file)
-            @book = Roo::Spreadsheet.open(file.data_file.path)
+            open_file = File.open(file.data_file.path)
+            @book = Roo::Spreadsheet.open open_file
           end
 
           def start
