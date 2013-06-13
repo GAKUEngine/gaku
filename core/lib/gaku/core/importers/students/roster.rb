@@ -17,7 +17,6 @@ module Gaku
             file_handle = File.open file.data_file.path
             book = Roo::Spreadsheet.open file_handle
             info = get_info(book)
-            log info[:locale]
             open_roster(info, book)
             start(info, book)
           end
@@ -28,6 +27,13 @@ module Gaku
           end
 
           def start(info, book)
+            header_keys = [:id, :name, :name_reading, :middle_name,
+              :middle_name_reading, :surname, :surname_reading]
+            header_map = header_keys.collect do |key|
+              key I18n.t(key)
+            end
+            log header_map
+
             book[info[:index_row].to_i .. -1].each(id: I18n.t(:id),
               name: I18n.t(:name), name_reading: I18n.t(:name_reading),
               middle_name: I18n.t(:middle_name),
