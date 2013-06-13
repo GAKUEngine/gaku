@@ -16,20 +16,18 @@ module Gaku
           end
 
           def open_roster(info, book)
-            puts info
-            I18n.locale = info['locale'].to_s || I18n.default_locale
+            I18n.locale = info[:locale].to_s || I18n.default_locale
             book.sheet(I18n.t('student.roster'))
           end
 
           def start(info, book)
-            book.drop(1)
+            book.drop(info[:header_height])
             book.each(id: I18n.t(:id),
               name: I18n.t(:name), name_reading: I18n.t(:name_reading),
               middle_name: I18n.t(:middle_name),
               middle_name_reading: I18n.t(:middle_name_reading),
               surname: I18n.t(:surname), surname_reading: I18n.t(:surname_reading)
                 ) do |row|
-              puts row
               process_row(row)
             end
           end
