@@ -7,10 +7,17 @@ module Gaku
     module Importers
       module Students
         class Roster
-          def initialize(file)
+          @logger
+          def log(msg)
+            @logger.info(msg) unless @logger.nil?
+          end
+
+          def initialize(file, logger)
+            @logger = logger
             file_handle = File.open file.data_file.path
             book = Roo::Spreadsheet.open file_handle
             info = get_info(book)
+            log info[:locale]
             open_roster(info, book)
             start(info, book)
           end
@@ -21,8 +28,7 @@ module Gaku
           end
 
           def start(info, book)
-            book.drop(info[:header_height])
-            book.each(id: I18n.t(:id),
+            book[info[:index_row].to_i .. -1].each(id: I18n.t(:id),
               name: I18n.t(:name), name_reading: I18n.t(:name_reading),
               middle_name: I18n.t(:middle_name),
               middle_name_reading: I18n.t(:middle_name_reading),
@@ -36,9 +42,7 @@ module Gaku
 
           def get_info(book)
             book.sheet('info')
-            book.parse(locale: 'locale', template_ver: 'template_ver',
-              export_date: 'export_date', header_height: 'header_height',
-              index_row: 'index_row')
+            book.parse(header_search: book.row(book.first_row)).last
           end
 
           def student_exists?(row)

@@ -12,7 +12,7 @@ module Gaku
           def perform(file_id)
             file = Gaku::ImportFile.find file_id
             if file
-              Gaku::Core::Importers::Students::Roster.new(file)
+              Gaku::Core::Importers::Students::Roster.new(file, logger)
             else
               raise 'NO FILE'
             end
