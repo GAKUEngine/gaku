@@ -22,24 +22,23 @@ module Gaku
           end
 
           def open_roster(info, book)
-            I18n.locale = info[:locale].to_s || I18n.default_locale
+            I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
             book.sheet(I18n.t('student.roster'))
           end
 
-          def start(info, book)
-            header_keys = [:id, :name, :name_reading, :middle_name,
+          def get_keymap()
+            key_syms = [:id, :name, :name_reading, :middle_name,
               :middle_name_reading, :surname, :surname_reading]
-            header_map = header_keys.collect do |key|
-              key I18n.t(key)
+            keymap = {}
+            key_syms.each do |key|
+              keymap[key] = I18n.t(key)
             end
-            log header_map
+          end
 
-            book[info[:index_row].to_i .. -1].each(id: I18n.t(:id),
-              name: I18n.t(:name), name_reading: I18n.t(:name_reading),
-              middle_name: I18n.t(:middle_name),
-              middle_name_reading: I18n.t(:middle_name_reading),
-              surname: I18n.t(:surname), surname_reading: I18n.t(:surname_reading)
-                ) do |row|
+
+          def start(info, book)
+            keymap = get_keymap
+            book.each(keymap) do |row|
               process_row(row)
             end
           end
