@@ -50,6 +50,7 @@ bg:
     new: Създай Задание
     plural: Задания
     results: Резултати от заданието
+    score: 
     singular: Задание
     view: Покажи Заданията
   assignments:
@@ -396,12 +397,14 @@ bg:
     use_weighting: 
     weight: 
   export: 
+  extended: 
   external_school_record:
     absences: 
     attendance_rate: 
     beginning: 
     data: 
     ending: 
+    singular: 
     student_id_number: 
   extracurricular_activity:
     add: 
@@ -501,6 +504,7 @@ bg:
   id: 
   import: 
   import_format: 
+  is_graduated: 
   language: 
   languages:
     en: 
@@ -537,7 +541,9 @@ bg:
           defaults: 
           grading: 
           locale: 
+          names: 
           student: 
+        names: 
         pagination: 
         plural: 
         save: 
@@ -583,6 +589,8 @@ bg:
       plural: 
     teacher:
       plural: 
+  middle_name: 
+  middle_name_reading: 
   name: 
   name_reading: 
   none: 
@@ -622,6 +630,7 @@ bg:
     grading:
       grading_method: 
       grading_scheme: 
+    names: 
     output_formats:
       choose: 
       documents: 
@@ -793,6 +802,7 @@ bg:
     name: 
     new: 
     plural: 
+    roster: 
     roster_sheet: 
     save: 
     show: 

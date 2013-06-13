@@ -2,6 +2,7 @@ eval(File.read(File.dirname(__FILE__) + '/../gaku_engine_dependencies.rb'))
 
 group :development, :test do
   gem 'rspec'
+  gem 'sidekiq'
   gem 'rspec-sidekiq'
 end
 
