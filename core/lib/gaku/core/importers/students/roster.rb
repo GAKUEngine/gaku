@@ -9,7 +9,11 @@ module Gaku
         class Roster
           @logger
           def log(msg)
-            @logger.info(msg) unless @logger.nil?
+            unless @logger.nil?
+              @logger.info(msg)
+            else
+              puts msg
+            end
           end
 
           def initialize(file, logger)
@@ -31,7 +35,7 @@ module Gaku
               :middle_name_reading, :surname, :surname_reading]
             keymap = {}
             key_syms.each do |key|
-              keymap[key] = I18n.t(key)
+              keymap[key] = I18n.t(key).gsub(' ', '*')
             end
             return keymap
           end
@@ -39,8 +43,9 @@ module Gaku
           def start(info, book)
             keymap = get_keymap
             log keymap
-            book.parse(keymap) do |row|
-              process_row(row)
+            book.each(:id => "ID", :name_reading => "Name*Reading") do |row|
+              puts row
+              #process_row(row)
             end
           end
 
