@@ -35,7 +35,7 @@ module Gaku
               :middle_name_reading, :surname, :surname_reading]
             keymap = {}
             key_syms.each do |key|
-              keymap[key] = I18n.t(key).gsub(' ', '*')
+              keymap[key.to_s] = I18n.t(key).gsub(' ', '*')
             end
             return keymap
           end
@@ -43,7 +43,7 @@ module Gaku
           def start(info, book)
             keymap = get_keymap
             log keymap
-            book.each(:id => "ID", :name_reading => "Name*Reading") do |row|
+            book.each(keymap) do |row|
               puts row
               #process_row(row)
             end
