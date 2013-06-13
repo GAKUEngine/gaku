@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
 
   #spreadsheet handling
   s.add_dependency 'roo'
-  s.add_dependency 'writeexcel'
+  s.add_dependency 'gen_sheet'
 
   s.add_dependency 'thinreports-rails'
 
