@@ -34,7 +34,7 @@ module Gaku::Core::Importers::Students
         :middle_name_reading, :surname, :surname_reading]
       keymap = {}
       key_syms.each do |key|
-        keymap[key.to_s] = I18n.t(key).gsub(' ', '*')
+        keymap[key.to_s] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
       end
       return keymap
     end

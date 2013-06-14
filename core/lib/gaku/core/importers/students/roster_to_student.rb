@@ -20,8 +20,12 @@ module Gaku::Core::Importers::Students
     end
 
     def reg_name(row, student)
-      student.name = row['name']
       student.surname = row['surname']
+      student.middle_name = row['middle_name']
+      student.name = row['name']
+      student.surname_reading = row['surname_reading']
+      #student.middle_name_reading = row['middle_name_reading']
+      student.name_reading = row['name_reading']
     end
 
 
