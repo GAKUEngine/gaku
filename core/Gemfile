@@ -4,6 +4,9 @@ group :development, :test do
   gem 'rspec'
   gem 'sidekiq'
   gem 'rspec-sidekiq'
+  gem 'guard'
+  gem 'rubocop'
+  gem 'guard-rubocop'
 end
 
 gemspec

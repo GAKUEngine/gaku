@@ -28,6 +28,7 @@ guard 'bundler' do
   watch(/^.+\.gemspec/)
 end
 
-guard 'cop' do
-  watch(%r{^(.*).rb})
+guard :rubocop do
+  watch(%r{.+\.rb$})
+  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
 end

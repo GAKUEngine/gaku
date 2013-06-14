@@ -30,7 +30,7 @@ group :development do
     gem 'growl'
     gem 'rb-fsevent', '~> 0.9.1' #guard dependency
   else
-    gem 'rb-inotify', '~> 0.8.8' #this is not available for MacOS
+    gem 'rb-inotify' #this is not available for MacOS
   end
 end
 

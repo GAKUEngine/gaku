@@ -45,8 +45,12 @@ module Gaku::Core::Importers::Students
     end
 
     def student_exists?(row)
-      Gaku::Student.exists?(
-        student_foreign_id_number: row[:idnum].to_i.to_s)
+      (
+        Gaku::Student.exists?(
+          student_foreign_id_number: row[:foreign_id].to_i.to_s) ||
+        Gaku::Student.exists?(
+          student_foreign_id_number: row[:id].to_i.to_s)
+      )
     end
 
     def update_student(row)

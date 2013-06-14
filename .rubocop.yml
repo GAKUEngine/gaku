@@ -1,4 +1,3 @@
 AllCops:
-    Includes:
     Excludes:
-        - '**/*.swp'
+        - '*.swp$'
