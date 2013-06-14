@@ -42,10 +42,8 @@ module Gaku
 
           def start(info, book)
             keymap = get_keymap
-            log keymap
             book.each(keymap) do |row|
-              puts row
-              #process_row(row)
+              process_row(row)
             end
           end
 
