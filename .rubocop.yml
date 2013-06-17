@@ -1,3 +1,0 @@
-AllCops:
-    Excludes:
-        - '*.swp$'
