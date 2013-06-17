@@ -1,0 +1,13 @@
+{
+    "type": "Feature",
+    "id": "幻信創造株式会社",
+    "properties": {},
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+			34.929087,
+			137.163727
+        ]
+    }
+}
+

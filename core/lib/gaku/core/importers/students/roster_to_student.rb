@@ -10,8 +10,8 @@ module Gaku::Core::Importers::Students
       student = Gaku::Student.new()
       reg_id(row, student)
       reg_name(row, student)
-      reg_birthdate(row, student)
       reg_gender(row, student)
+      reg_birthdate(row, student)
       student.save()
     end
 
@@ -30,11 +30,11 @@ module Gaku::Core::Importers::Students
       student.name_reading = row['name_reading']
     end
 
-    def reg_birthdate(row, student)
-      student.birth_date = row['birth_date']
+    def reg_gender(row, student)
     end
 
-    def reg_gender(row, student)
+    def reg_birthdate(row, student)
+      student.birth_date = row['birth_date']
     end
 
   end
