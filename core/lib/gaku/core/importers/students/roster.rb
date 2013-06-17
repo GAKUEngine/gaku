@@ -24,17 +24,19 @@ module Gaku::Core::Importers::Students
 
     def start(info, book)
       keymap = get_keymap
-      book.each(keymap) do |row|
-        process_row(row)
+      book.each_with_index(keymap) do |row, i|
+        process_row(row) unless i == 0
       end
     end
 
     def get_keymap()
       key_syms = [:student_id_number, :student_foreign_id_number, :name, :name_reading, :middle_name,
-        :middle_name_reading, :surname, :surname_reading, :sex, :birth, :admitted]
+        :middle_name_reading, :surname, :surname_reading, :sex, :birth_date, :admitted]
       keymap = {}
       key_syms.each do |key|
         keymap[key.to_s] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
+        #TODO check if keys exist in header. If they do not then remove them from hash.
+        log 'KEY[' + key.to_s + ']: ' + keymap[key.to_s]
       end
       return keymap
     end
