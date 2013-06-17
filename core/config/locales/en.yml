@@ -407,7 +407,7 @@ en:
     data: Data
     ending: Ending
     singular: External School Record
-    student_id_number: Student ID number
+    student_id_number: Student ID
   extracurricular_activity:
     add: Add Extracurricular Activity
     already_enrolled: Already enrolled to the extracurricular activity!
@@ -813,6 +813,8 @@ en:
     edit: Edit Student Achievement
     index: Student Achievement Index
     save: Save Student Achievement
+  student_foreign_id_number: Foreign ID
+  student_id_number: Student ID
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index

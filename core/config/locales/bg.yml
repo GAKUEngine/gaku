@@ -811,6 +811,8 @@ bg:
     edit: 
     index: 
     save: 
+  student_foreign_id_number: 
+  student_id_number: 
   student_specialty:
     edit: 
     index: 

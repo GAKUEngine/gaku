@@ -30,8 +30,8 @@ module Gaku::Core::Importers::Students
     end
 
     def get_keymap()
-      key_syms = [:id, :name, :name_reading, :middle_name,
-        :middle_name_reading, :surname, :surname_reading]
+      key_syms = [:student_id_number, :student_foreign_id_number, :name, :name_reading, :middle_name,
+        :middle_name_reading, :surname, :surname_reading, :sex, :birth, :admitted]
       keymap = {}
       key_syms.each do |key|
         keymap[key.to_s] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')

@@ -813,6 +813,8 @@ ja:
     edit: 生徒の実績を編集
     index: 生徒の実績一覧
     save: 生徒の実績を保存
+  student_foreign_id_number: 外部生徒番号
+  student_id_number: 生徒番号
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
