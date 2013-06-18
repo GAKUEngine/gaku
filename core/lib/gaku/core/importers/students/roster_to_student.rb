@@ -4,8 +4,9 @@ require 'GenSheet'
 module Gaku::Core::Importers::Students
   class RosterToStudent
     include Gaku::Core::Importers::Logger
-    def initialize(row, logger = nil)
+    def initialize(row, info, logger = nil)
       @logger = logger
+      I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
 
       student = Gaku::Student.new()
       reg_id(row, student)
@@ -36,9 +37,9 @@ module Gaku::Core::Importers::Students
 
     def reg_sex(row, student)
       gender = nil
-      if row['sex'] == I18n.t(:female)
+      if row['sex'] == I18n.t('gender.female')
         gender = 0
-      else if row['sex'] == I18n.t(:male)
+      elsif row['sex'] == I18n.t('gender.male')
         gender = 1
       end
       student.gender = gender
@@ -56,12 +57,12 @@ module Gaku::Core::Importers::Students
     
     def add_contact(row, student)
       phone = row['phone']
-      student.contacts.create!(contact_type_id: :phone, is_primary: true,
+      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
         is_emergency: true, data: phone) unless (phone.nil? || phone == '')
 
       email = row['email']
-      student.contacts.create!(contact_type_id: :email, is_primary: true,
-        is_emergency: true, data: email) unless (phone.nil? || phone == '')
+      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
+        is_emergency: true, data: email) unless (email.nil? || email == '')
     end
 
     def add_address(row, student)

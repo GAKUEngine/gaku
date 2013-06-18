@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'roo'
 require 'GenSheet'
 
@@ -25,7 +24,7 @@ module Gaku::Core::Importers::Students
     def start(info, book)
       keymap = get_keymap
       book.each_with_index(keymap) do |row, i|
-        process_row(row) unless i == 0
+        process_row(row, info) unless i == 0
       end
     end
 
@@ -58,17 +57,17 @@ module Gaku::Core::Importers::Students
     def update_student(row)
     end
 
-    def register_student(row)
+    def register_student(row, info)
       ActiveRecord::Base.transaction do
-        Gaku::Core::Importers::Students::RosterToStudent.new(row)
+        Gaku::Core::Importers::Students::RosterToStudent.new(row, info, @logger)
       end
     end
 
-    def process_row(row)
+    def process_row(row, info)
       if student_exists?(row)
         update_student(row)
       else
-        register_student(row)
+        register_student(row, info)
       end
     end
   end
