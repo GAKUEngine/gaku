@@ -10,12 +10,18 @@ module Gaku::Core::Importers::SchoolStation
       @logger = logger
       file_handle = File.open file.data_file.path
       book = Roo::Spreadsheet.open file_handle
-      info = get_info(book)
-      open_roster(info, book)
-      start(info, book)
+      book = fix_for_school_station(book)
+      # info = get_info(book)
+      # open_roster(info, book)
+      # start(info, book)
     end
 
     private
+
+    def fix_for_school_station(book)
+      p 'henkantyu- dayo-'
+    end
+
     def open_roster(info, book)
       I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
       book.sheet(I18n.t('student.roster'))
