@@ -39,5 +39,16 @@ module Gaku
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
     end
+
+    def import_school_station_zaikousei
+      if file.data_file.content_type == 'application/vnd.ms-excel' ||
+          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
+        Gaku::Core::Importers::SchoolStation::ZaikouseiWorker.perform_async(file.id)
+        render text: "Importing Zaikousei"
+      else
+        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
+      end
+    end
+
   end
 end

@@ -2,8 +2,8 @@
 require 'roo'
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
-  class Roster
+module Gaku::Core::Importers::SchoolStation
+  class Zaikousei
     include Gaku::Core::Importers::Logger
 
     def initialize(file, logger)
