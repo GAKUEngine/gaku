@@ -22,24 +22,24 @@ module Gaku::Core::Importers::Students
 
     private
     def reg_id(row, student)
-      student.student_id_number = row['student_id_number'].to_s
-      student.student_foreign_id_number = row['student_foreign_id_number'].to_s
+      student.student_id_number = row[:student_id_number].to_s
+      student.student_foreign_id_number = row[:student_foreign_id_number].to_s
     end
 
     def reg_name(row, student)
-      student.surname = row['surname']
-      student.middle_name = row['middle_name']
-      student.name = row['name']
-      student.surname_reading = row['surname_reading']
-      student.middle_name_reading = row['middle_name_reading']
-      student.name_reading = row['name_reading']
+      student.surname = row[:surname]
+      student.middle_name = row[:middle_name]
+      student.name = row[:name]
+      student.surname_reading = row[:surname_reading]
+      student.middle_name_reading = row[:middle_name_reading]
+      student.name_reading = row[:name_reading]
     end
 
     def reg_sex(row, student)
       gender = nil
-      if row['sex'] == I18n.t('gender.female')
+      if row[:sex] == I18n.t('gender.female')
         gender = 0
-      elsif row['sex'] == I18n.t('gender.male')
+      elsif row[:sex] == I18n.t('gender.male')
         gender = 1
       end
       student.gender = gender
@@ -52,38 +52,36 @@ module Gaku::Core::Importers::Students
       #rescue
       #  birth_date = Date.civil(1899, 12, 31) + row['birth_date'].to_i.days - 1.day
       #end
-      student.birth_date = row['birth_date']
+      student.birth_date = row[:birth_date]
     end
     
     def add_contact(row, student)
-      phone = row['phone']
+      phone = row[:phone]
       student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
         is_emergency: true, data: phone) unless (phone.nil? || phone == '')
 
-      email = row['email']
-      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
+      email = row[:email]
+      student.contacts.create!(contact_type_id: ContactType.where(name: 'Email').first.id, is_primary: true,
         is_emergency: true, data: email) unless (email.nil? || email == '')
     end
 
     def add_address(row, student)
-      #    if row[idx["city"]] and row[idx["address1"]]
+     # if row['address.city'] && row['address.address1']
+     #   unless (row['address.state'].nil? || row['address.state'] == '')
+     #     state = State.where(name: row['address.state']).first
+     #     if state == nil
+     #       log 'State: "' + row['address.state'] + '" not found. Please register and retry import.'
+     #       return
+     #     end
+     #   end
 
-      #      if row[idx["state"]]
-      #        state = State.where(:country_numcode => 392, :code => row[idx["state"]].to_i).first
-      #      end
-
-      #      student_address = student.addresses.create!(:zipcode => row[idx["zipcode"]],
-      #                                :country_id => idx["country"]["country"]["id"],
-      #                                :state => state,
-      #                                :state_id => state.id,
-      #                                :state_name => state.name,
-      #                                :city => row[idx["city"]],
-      #                                :address1 => row[idx["address1"]],
-      #                                :address2 => row[idx["address2"]])
-      #      if student_address
-      #        logger.info "生徒「#{student.surname} #{student.name}」に住所を登録しました。"
-      #      end
-      #    end
+     #   student_address = student.addresses.create!(zipcode: row['address.zipcode'],
+     #     country_id: Country.where(name: row['address.country']).first.id ||
+     #       Country.where(name: '日本').first.id,
+     #     state: state, state_id: state.id, state_name: state.name,
+     #     city: row['city'], :address1 => row['address.address1'],
+     #     address2: row['address.address2'])
+     # end
     end
 
     def add_guardian(row, student)
