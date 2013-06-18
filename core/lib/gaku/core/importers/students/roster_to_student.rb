@@ -38,7 +38,7 @@ module Gaku::Core::Importers::Students
       gender = nil
       if row['sex'] == I18n.t(:female)
         gender = 0
-      else if row['sex'] == I18n.t(:male)
+      elsif row['sex'] == I18n.t(:male)
         gender = 1
       end
       student.gender = gender
