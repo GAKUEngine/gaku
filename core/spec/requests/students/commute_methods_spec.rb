@@ -23,7 +23,9 @@ describe 'Student Commute Method Type' do
     it 'create and show' do
       within(select_box) {  click_option commute_method_type2 }
 
-      wait_until_invisible select_box
+
+      page.should_not have_selector(select_box)
+
       within(el) { page.should have_content(commute_method_type2.name) }
       student.reload
       student.commute_method_type.should eq commute_method_type2
@@ -36,7 +38,7 @@ describe 'Student Commute Method Type' do
     before do
       student2
       visit gaku.edit_student_path(student2)
-      within(el) { page.should have_content("Car")}
+      within(el) { page.should have_content('Car') }
       click el
       wait_until_visible select_box
     end
@@ -45,8 +47,9 @@ describe 'Student Commute Method Type' do
 
       it 'edits' do
         within(select_box) { click_option commute_method_type2 }
+        page.should_not have_selector(select_box)
+        # wait_until { !page.find(select_box) }
 
-        wait_until_invisible select_box
         within(el) { page.should have_content(commute_method_type2.name) }
         student2.reload
         student2.commute_method_type.should eq commute_method_type2
