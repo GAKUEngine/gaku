@@ -4,8 +4,9 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :name
       t.string   :middle_name
       t.string   :surname
-      t.string   :name_reading,    :default => ""
-      t.string   :surname_reading, :default =>  ""
+      t.string   :name_reading,        default: ''
+      t.string   :middle_name_reading, default: ''
+      t.string   :surname_reading,     default: ''
       t.boolean  :gender
       t.date     :birth_date
       t.date     :admitted
@@ -13,7 +14,7 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :student_id_number
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
-      t.boolean  :is_deleted, :default => false
+      t.boolean  :is_deleted, default: false
 
       t.attachment :picture
 

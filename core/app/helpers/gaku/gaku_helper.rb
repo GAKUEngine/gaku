@@ -9,12 +9,12 @@ module Gaku
         block.call
       end
     end
-  
+
     def autocomplete_text_field(form, options = {})
       content_tag :div, class: 'span3' do
         concat form.label options[:object_name], options[:tag_name]
-        concat form.text_field options[:object_name], 
-          class: 'js-autocomplete span12', 
+        concat form.text_field options[:object_name],
+          class: 'js-autocomplete span12',
           data: { autocomplete_source: load_autocomplete_data_students_path(class_name: options[:class_name], column: options[:column]) }
       end
     end
@@ -210,16 +210,25 @@ module Gaku
       content_tag :h4, text
     end
 
-    def student_names(student)
+    def student_names(student, options = {})
       @names_preset ||= Gaku::Preset.get(:names)
+      reading = options[:reading]
+      if @names_preset.blank?
+        return reading ? student.phonetic_reading : student
+      end
       result = @names_preset.gsub(/%(\w+)/) do |name|
         case name
-        when '%first' then student.name
-        when '%middle' then student.middle_name
-        when '%last' then student.surname
+        when '%first' then proper_name(student, :name, reading)
+        when '%middle' then proper_name(student, :middle_name, reading)
+        when '%last' then proper_name(student, :surname, reading)
         end
       end
       result.gsub(/\s+/, " ").strip
+    end
+
+  private
+    def proper_name(student, attribute, reading)
+      reading ? student.send(attribute.to_s + '_reading') : student.send(attribute)
     end
 
   end

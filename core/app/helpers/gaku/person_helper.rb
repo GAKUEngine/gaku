@@ -19,8 +19,8 @@ module Gaku
         content_tag :h2 do
 
           content_tag :ruby do
-            concat person
-            concat content_tag(:rt) { person.phonetic_reading }
+            concat student_names(person)
+            concat content_tag(:rt) { student_names person, reading: true }
           end
         end
       end
@@ -28,8 +28,8 @@ module Gaku
 
     def edit_person_caption(person)
       content_tag :ruby do
-        concat person
-        concat content_tag(:rt) { person.phonetic_reading }
+        concat student_names(person)
+        concat content_tag(:rt) { student_names person, reading: true }
       end
     end
 
