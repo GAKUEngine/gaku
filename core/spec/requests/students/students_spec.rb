@@ -11,15 +11,17 @@ describe 'Students' do
   let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', :enrollment_status_id => enrollment_status.id) }
   let(:student3) { create(:student, name: 'Johny', surname: 'Bravo', :enrollment_status_id => enrollment_status.id) }
 
+
+
   before :all do
     set_resource "student"
   end
 
   context "existing" do
     before do
+      enrollment_status
       enrollment_status_applicant
       enrollment_status_admitted
-      enrollment_status
       student
       student2
       student3
