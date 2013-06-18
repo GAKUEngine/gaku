@@ -1,6 +1,6 @@
 $ ->
-  $('.js-autocomplete').each (i, element) ->
-    element_id = '#' + $(element).attr('id')
+  $(document).on 'keydown', '.js-autocomplete', (event) ->
+    element_id = '#' + $(this).attr('id')
     $(element_id).autocomplete
       source: $(element_id).data('autocomplete-source')
       messages:
@@ -11,14 +11,14 @@ $ ->
         $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
 
 
-  $("#students-index th a").on 'click', (event) ->
+  $(document).on 'click', "#students-index th a", (event) ->
     $.getScript(this.href)
     return false
 
-  $("#search-students input").on 'keyup', (event) ->
+  $(document).on 'keyup', "#search-students input", (event) ->
     $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
     return false
 
-  $("#search-students select").on 'change', (event) ->
+  $(document).on 'change', "#search-students select", (event) ->
     $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
     return false
