@@ -1,20 +1,27 @@
+# -*- encoding: utf-8 -*-
 require 'roo'
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
-  class Roster
+module Gaku::Core::Importers::SchoolStation
+  class Zaikousei
     include Gaku::Core::Importers::Logger
 
     def initialize(file, logger)
       @logger = logger
       file_handle = File.open file.data_file.path
       book = Roo::Spreadsheet.open file_handle
-      info = get_info(book)
-      open_roster(info, book)
-      start(info, book)
+      book = fix_for_school_station(book)
+      # info = get_info(book)
+      # open_roster(info, book)
+      # start(info, book)
     end
 
     private
+
+    def fix_for_school_station(book)
+      p 'henkantyu- dayo-'
+    end
+
     def open_roster(info, book)
       I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
       book.sheet(I18n.t('student.roster'))
@@ -23,21 +30,18 @@ module Gaku::Core::Importers::Students
     def start(info, book)
       keymap = get_keymap
       book.each_with_index(keymap) do |row, i|
-        process_row(row, info) unless i == 0
+        process_row(row) unless i == 0
       end
     end
 
     def get_keymap()
-      key_syms = [:student_id_number, :student_foreign_id_number, :name,
-        :name_reading, :middle_name, :middle_name_reading, :surname,
-        :surname_reading, :sex, :birth_date, :admitted, :phone,
-        :'address.zipcode', :'address.country', :'address.state',
-        :'address.city', :'address.address2', :'address.address1']
+      key_syms = [:student_id_number, :student_foreign_id_number, :name, :name_reading, :middle_name,
+        :middle_name_reading, :surname, :surname_reading, :sex, :birth_date, :admitted, :phone]
       keymap = {}
       key_syms.each do |key|
-        keymap[key] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
+        keymap[key.to_s] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
         #TODO check if keys exist in header. If they do not then remove them from hash.
-        log 'KEY[' + key.to_s + ']: ' + keymap[key]
+        log 'KEY[' + key.to_s + ']: ' + keymap[key.to_s]
       end
       return keymap
     end
@@ -59,17 +63,17 @@ module Gaku::Core::Importers::Students
     def update_student(row)
     end
 
-    def register_student(row, info)
+    def register_student(row)
       ActiveRecord::Base.transaction do
-        Gaku::Core::Importers::Students::RosterToStudent.new(row, info, @logger)
+        Gaku::Core::Importers::Students::RosterToStudent.new(row)
       end
     end
 
-    def process_row(row, info)
+    def process_row(row)
       if student_exists?(row)
         update_student(row)
       else
-        register_student(row, info)
+        register_student(row)
       end
     end
   end
