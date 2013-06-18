@@ -12,6 +12,8 @@ describe Gaku::State do
     it { should allow_mass_assignment_of :name_ascii }
     it { should allow_mass_assignment_of :abbr }
     it { should allow_mass_assignment_of :code }
+    it { should allow_mass_assignment_of :country_iso }
+
   end
 
   before(:all) do
