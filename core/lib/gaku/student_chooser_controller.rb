@@ -4,8 +4,8 @@ module Gaku
     include Core::ClassNameDetector
 
     def student_chooser
-      @enrollment_status_applicant_id = EnrollmentStatus.find_by_code("applicant").id
-      @enrollment_status_enrolled_id = EnrollmentStatus.find_by_code("enrolled").id
+      @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
+      @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
       @search = Student.search(params[:q])
       @students = @search.result.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
 
