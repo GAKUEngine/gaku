@@ -407,7 +407,7 @@ en:
     data: Data
     ending: Ending
     singular: External School Record
-    student_id_number: Student ID number
+    student_id_number: Student ID
   extracurricular_activity:
     add: Add Extracurricular Activity
     already_enrolled: Already enrolled to the extracurricular activity!
@@ -503,10 +503,10 @@ en:
       cancel: Cancel
   hide: Hide
   history: History
-  id: Id
+  id: ID
   import: Import
   import_format: Import Format
-  is_graduated: Is Graduated
+  is_graduated: Has Graduated
   language: Language
   languages:
     en: English
@@ -536,7 +536,6 @@ en:
         grading_sets: Grading Sets
       grading_methods: Grading Methods
       preset:
-        names: Names
         grading:
           grading_method: Grading Method
           grading_scheme: Grading Scheme
@@ -544,8 +543,9 @@ en:
           defaults: Defaults Preset
           grading: Grading Preset
           locale: Locale Preset
-          student: Student Preset
           names: Names
+          student: Student Preset
+        names: Names
         pagination: Pagination Preset
         plural: Presets
         save: Save
@@ -591,6 +591,8 @@ en:
       plural: Syllabuses
     teacher:
       plural: Instructors
+  middle_name: Middle Name
+  middle_name_reading: Middle Name Reading
   name: Name
   name_reading: Name Reading
   none: None
@@ -630,13 +632,13 @@ en:
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
+    names: Names
     output_formats:
       choose: Choose Format
       documents: Documents
       printables: Printable
       spreadsheets: Spreadsheets
     pagination: Pagination
-    names: Names
     per_page:
       changes: Changes Per Page
       default: Default Items Per Page
@@ -802,6 +804,7 @@ en:
     name: Name
     new: Register New Student
     plural: Students
+    roster: Roster
     roster_sheet: Student Roster Sheet
     save: Save Student
     show: Show Students
@@ -810,6 +813,8 @@ en:
     edit: Edit Student Achievement
     index: Student Achievement Index
     save: Save Student Achievement
+  student_foreign_id_number: Foreign ID
+  student_id_number: Student ID
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index

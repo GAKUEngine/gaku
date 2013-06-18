@@ -4,7 +4,7 @@ module Gaku
       module FlashHelpers
 
         def flash?(text)
-          page.should have_selector("#notice", :text => text)
+          page.should have_selector('#notice', :text => text)
         end
 
         def flash_created?
