@@ -23,7 +23,7 @@ describe 'Student Enrollment Status' do
     it 'create and show' do
       within(select_box) {  click_option enrollment_status2 }
 
-      wait_until_invisible select_box
+      page.should_not have_selector(select_box)
       within(el) { page.should have_content(enrollment_status2.name) }
       student.reload
       student.enrollment_status.should eq enrollment_status2
@@ -46,7 +46,7 @@ describe 'Student Enrollment Status' do
       it 'edits' do
         within(select_box) { click_option enrollment_status2 }
 
-        wait_until_invisible select_box
+        page.should_not have_selector(select_box)
         within(el) { page.should have_content(enrollment_status2.name) }
         student2.reload
         student2.enrollment_status.should eq enrollment_status2
