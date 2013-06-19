@@ -2,10 +2,10 @@ module Gaku
   class Country < ActiveRecord::Base
 
     has_many :states, order: 'name ASC' ,
-                      foreign_key: 'country_numcode',
-                      primary_key: 'numcode'
+                      foreign_key: :country_iso,
+                      primary_key: :iso
 
-    validates_presence_of :name, :iso_name
+    validates_presence_of :name, :iso_name, :iso
 
     def <=>(other)
       name <=> other.name

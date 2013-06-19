@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::State do
 
-  context "validations" do 
+  context "validations" do
     it { should belong_to(:country) }
 
     it { should validate_presence_of(:name) }
@@ -12,6 +12,8 @@ describe Gaku::State do
     it { should allow_mass_assignment_of :name_ascii }
     it { should allow_mass_assignment_of :abbr }
     it { should allow_mass_assignment_of :code }
+    it { should allow_mass_assignment_of :country_iso }
+
   end
 
   before(:all) do
@@ -26,6 +28,6 @@ describe Gaku::State do
 
   it "can find all states group by country numcode" do
     state = create(:state)
-    Gaku::State.states_group_by_country_numcode.should == { state.country_numcode.to_s => [[state.id, state.name]] }
+    Gaku::State.states_group_by_country_iso.should == { state.country_iso => [[state.id, state.name]] }
   end
 end
