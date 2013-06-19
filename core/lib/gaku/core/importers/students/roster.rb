@@ -15,6 +15,7 @@ module Gaku::Core::Importers::Students
     end
 
     private
+
     def open_roster(info, book)
       I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
       book.sheet(I18n.t('student.roster'))
@@ -22,9 +23,21 @@ module Gaku::Core::Importers::Students
 
     def start(info, book)
       keymap = get_keymap
-      book.each_with_index(keymap) do |row, i|
+      filtered_keymap = filter_keymap(keymap, book)
+
+      book.each_with_index(filtered_keymap) do |row, i|
         process_row(row, info) unless i == 0
       end
+    end
+
+    def filter_keymap(keymap,book)
+      filtered_keymap = {}
+      keymap.each do |key, value|
+        book.each do |row|
+          filtered_keymap[key] = value if row.grep(/#{value}/i).any?
+        end
+      end
+      return filtered_keymap
     end
 
     def get_keymap()
