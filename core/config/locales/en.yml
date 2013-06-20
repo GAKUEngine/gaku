@@ -30,9 +30,9 @@ en:
     save: Save address
     search: Search Address
     singular: Address
-    state: State
+    state: State/Prefecture
     title: Title
-    zipcode: ZIP Code
+    zipcode: Postal Code
   admitted: Admitted On
   alert:
     already_added: '%{resource} are already added!'
@@ -307,7 +307,7 @@ en:
       unlocked: Your account was successfully unlocked. You are now signed in.
     username: Username
   edit: Edit
-  email: Mail Address
+  email: Email
   empty: Empty
   enroll_to_class: Enroll to class
   enrollment:
@@ -622,6 +622,7 @@ en:
   order: Order
   panel: Panel
   period: Period
+  personal_information: Personal Information
   phone: Phone Number
   phonetic_reading: Phonetic Reading
   picture: Picture

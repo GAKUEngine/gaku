@@ -307,7 +307,7 @@ ja:
       unlocked: アカウントを凍結解除しました。ログインしています。
     username: ユーザー名
   edit: 編集
-  email: メールアドレス
+  email: メール
   empty: 空です
   enroll_to_class: クラスに登録
   enrollment:
@@ -622,6 +622,7 @@ ja:
   order: 順序
   panel: パネル
   period: 期間
+  personal_information: 個人情報
   phone: 電話番号
   phonetic_reading: ﾌﾘｶﾞﾅ
   picture: 画像
@@ -850,7 +851,7 @@ ja:
   user:
     add: ユーザーを追加
     edit: ユーザーを編集
-    email: Eメール
+    email: メール
     info: ユーザー情報
     list: ユーザ一覧
     password: パスワード
