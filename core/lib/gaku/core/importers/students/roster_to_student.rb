@@ -61,27 +61,30 @@ module Gaku::Core::Importers::Students
         is_emergency: true, data: phone) unless (phone.nil? || phone == '')
 
       email = row[:email]
-      student.contacts.create!(contact_type_id: ContactType.where(name: 'Email').first.id, is_primary: true,
+      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
         is_emergency: true, data: email) unless (email.nil? || email == '')
     end
 
     def add_address(row, student)
-     # if row['address.city'] && row['address.address1']
-     #   unless (row['address.state'].nil? || row['address.state'] == '')
-     #     state = State.where(name: row['address.state']).first
-     #     if state == nil
-     #       log 'State: "' + row['address.state'] + '" not found. Please register and retry import.'
-     #       return
-     #     end
-     #   end
+      if row[:'address.address1']
+        state = nil
+        unless (row[:'address.state'].nil? || row[:'address.state'] == '')
+          state = Gaku::State.where(name: row[:'address.state']).first
+          if state == nil
+            log 'State: "' + row[:'address.state'] + '" not found. Please register and retry import.'
+            return
+          end
+        end
 
-     #   student_address = student.addresses.create!(zipcode: row['address.zipcode'],
-     #     country_id: Country.where(name: row['address.country']).first.id ||
-     #       Country.where(name: '日本').first.id,
-     #     state: state, state_id: state.id, state_name: state.name,
-     #     city: row['city'], :address1 => row['address.address1'],
-     #     address2: row['address.address2'])
-     # end
+        country = Gaku::Country.where(name: '日本').first
+        unless Gaku::Country.where(name: row[:'address.country']).first.nil?
+          country = Gaku::Country.where(name: row[:'address.country']).first
+        end
+
+        student_address = student.addresses.create!(zipcode: row[:'address.zipcode'],
+          country: country, state: state, city: row[:'city'],
+          :address1 => row[:'address.address1'], address2: row[:'address.address2'])
+      end
     end
 
     def add_guardian(row, student)

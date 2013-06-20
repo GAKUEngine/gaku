@@ -4,6 +4,7 @@ require 'GenSheet'
 module Gaku::Core::Importers::Students
   class Roster
     include Gaku::Core::Importers::Logger
+    include Gaku::Core::Importers::Students::RosterKeys
 
     def initialize(file, logger)
       @logger = logger
@@ -28,31 +29,6 @@ module Gaku::Core::Importers::Students
       book.each_with_index(filtered_keymap) do |row, i|
         process_row(row, info) unless i == 0
       end
-    end
-
-    def filter_keymap(keymap,book)
-      filtered_keymap = {}
-      keymap.each do |key, value|
-        book.each do |row|
-          filtered_keymap[key] = value if row.grep(/#{value}/i).any?
-        end
-      end
-      return filtered_keymap
-    end
-
-    def get_keymap()
-      key_syms = [:student_id_number, :student_foreign_id_number, :name,
-        :name_reading, :middle_name, :middle_name_reading, :surname,
-        :surname_reading, :sex, :birth_date, :admitted, :phone,
-        :'address.zipcode', :'address.country', :'address.state',
-        :'address.city', :'address.address2', :'address.address1']
-      keymap = {}
-      key_syms.each do |key|
-        keymap[key] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
-        #TODO check if keys exist in header. If they do not then remove them from hash.
-        log 'KEY[' + key.to_s + ']: ' + keymap[key]
-      end
-      return keymap
     end
 
     def get_info(book)
