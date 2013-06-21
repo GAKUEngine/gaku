@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'rails', '~> 3.2.8'
-  s.add_dependency 'slim', '~> 1.3.8'
+  s.add_dependency 'slim', '~> 2.0.0'
   s.add_dependency 'deface', '>= 0.9.0'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
