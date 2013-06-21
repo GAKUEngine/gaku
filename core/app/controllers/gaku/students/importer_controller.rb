@@ -36,17 +36,16 @@ module Gaku
       if file.data_file.content_type == 'application/vnd.ms-excel' ||
           file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
         Gaku::Core::Importers::Students::RosterWorker.perform_async(file.id)
-        render text: "Importing"
+        render text: "Importing Roster"
       else
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
     end
 
     def import_school_station_zaikousei(file)
-      if file.data_file.content_type == 'application/vnd.ms-excel' ||
-          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
-        Gaku::Core::Importers::SchoolStation::ZaikouseiWorker.perform_async(file.id)
-        render text: "Importing Zaikousei"
+      if file.data_file.content_type == 'application/vnd.ms-excel'
+        Gaku::Core::Importers::Students::SchoolStationZaikouseiWorker.perform_async(file.id)
+        render text: "在校生をSchoolStationからインポート中。"
       else
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end

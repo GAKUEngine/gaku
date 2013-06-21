@@ -9,7 +9,6 @@ module Gaku::Core::Importers::Students::RosterKeys
     keymap = {}
     key_syms.each do |key|
       keymap[key] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
-      log 'KEY[' + key.to_s + ']: ' + keymap[key]
     end
     return keymap
   end
