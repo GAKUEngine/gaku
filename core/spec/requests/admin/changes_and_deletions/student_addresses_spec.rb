@@ -10,7 +10,7 @@ describe 'Student Addresses Changes' do
     @address = @student.addresses.first
   end
 
-  it 'saves edits' do
+  it 'saves edits', type: 'address' do
     old_city = @address.city
     old_address1 = @address.address1
     @address.update_attributes(:city => "Changed city", :address1 => "Changed address1")
@@ -22,7 +22,7 @@ describe 'Student Addresses Changes' do
     page.should have_content "Changed address1"
   end
 
-  it 'saves soft deletes' do
+  it 'saves soft deletes', type: 'address' do
     @address.soft_delete
     visit gaku.admin_changes_student_addresses_path
     page.should have_content "true"
@@ -31,7 +31,7 @@ describe 'Student Addresses Changes' do
     page.should have_content "update"
   end
 
-  it 'saves destroy' do
+  it 'saves destroy', type: 'address' do
     @address.destroy
     visit gaku.admin_changes_student_addresses_path
     page.should have_content 'destroy'

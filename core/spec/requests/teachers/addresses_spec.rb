@@ -14,7 +14,7 @@ describe 'Teacher Address' do
     set_resource "teacher-address"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'address' do
 
     before do
       country
@@ -25,7 +25,7 @@ describe 'Teacher Address' do
 
   end
 
-  context 'existing' do
+  context 'existing', type: 'address' do
 
     context 'one address' do
 

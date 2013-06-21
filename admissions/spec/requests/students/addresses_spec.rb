@@ -12,7 +12,7 @@ describe 'Admin Student Address' do
     set_resource "student-address"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'address' do
 
     before do
       country
@@ -23,7 +23,7 @@ describe 'Admin Student Address' do
 
   end
 
-  context 'existing' do
+  context 'existing', type: 'address' do
 
     context 'one address' do
       before(:each) do
