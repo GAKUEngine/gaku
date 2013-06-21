@@ -13,33 +13,9 @@ describe Gaku::Address do
     it { should belong_to :addressable }
   end
 
-  describe "validations" do
-
-    before do
-      country.states.stub find_all_by_name_or_abbr: [state]
-    end
-
-    it { should validate_presence_of(:address1) }
-    it { should validate_presence_of(:city) }
-    it { should validate_presence_of(:country) }
-
-    it 'is invalid without address1' do
-      build(:address, address1:nil).should_not be_valid
-    end
-
-    it 'is invalid without city' do
-      build(:address, city:nil).should_not be_valid
-    end
-
-    it 'is invalid without country' do
-      build(:address, country:nil).should_not be_valid
-    end
-
-    it "state_name is not nil and country does not have any states" do
-      address.state = nil
-      address.state_name = 'alabama'
-      address.should be_valid
-    end
+  describe 'validations' do
+    it { should validate_presence_of :address1 }
+    it { should validate_presence_of :country }
   end
 
   describe "before_save" do
@@ -111,15 +87,7 @@ describe Gaku::Address do
 
   end
 
-
-
-
   describe '#state_text' do
-    context 'state is blank' do
-      let(:address) { build(:address, state: nil, state_name: 'virginia') }
-      specify { address.state_text.should == 'virginia' }
-    end
-
     context 'both name and abbr is present' do
       let(:state) { build(:state, name: 'virginia', abbr: 'va') }
       let(:address) { build(:address, state: state) }
