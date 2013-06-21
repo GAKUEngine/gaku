@@ -16,15 +16,18 @@ Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
 end
 
-desc "Release to gemcutter"
+desc 'Release to gemcutter'
 task :release do
-  version = File.read(File.expand_path("../../GAKU_ENGINE_VERSION", __FILE__)).strip
-  cmd = "cd pkg && gem push gaku_core-#{version}.gem"; puts cmd; system cmd
+  version = File.read(
+    File.expand_path('../../GAKU_ENGINE_VERSION', __FILE__)).strip
+  cmd = "cd pkg && gem push gaku_core-#{version}.gem"
+  puts cmd
+  system cmd
 end
 
-task :default => :spec
+task default: :spec
 
-desc "Generates a dummy app for testing"
+desc 'Generates a dummy app for testing'
 task :test_app do
   ENV['LIB_NAME'] = 'gaku/core'
   Rake::Task['common:test_app'].invoke
@@ -37,8 +40,7 @@ end
 
 task spec: :factory_specs
 
-
-desc "Fork spec"
+desc 'Fork spec'
 task :fork_spec do
   fork do
     RSpec::Core::Runner.disable_autorun!

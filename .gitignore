@@ -47,6 +47,7 @@ nbproject
 *.swp
 *.swo
 *.orig
+.~lock.*#
 .rvmrc
 .yardoc/**
 

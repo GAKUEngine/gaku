@@ -1,9 +1,5 @@
-require 'csv'
-
 module Gaku
   class StudentsController < GakuController
-
-    include SheetHelper
 
     load_and_authorize_resource class: Gaku::Student,
                                 except: [:recovery, :destroy]
@@ -12,7 +8,6 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
-    respond_to :csv, only: :csv
     respond_to :pdf, only: :show
 
     before_filter :load_data
@@ -62,23 +57,6 @@ module Gaku
       redirect_to students_path,
                   notice: t(:'notice.destroyed', resource: t_resource)
     end
-
-    def csv
-      @students = Student.all
-      field_order = %w(surname name)
-
-      content = CSV.generate do |csv|
-        csv << translate_fields(field_order)
-        @students.each do |student|
-          csv << student.attributes.values_at(*field_order)
-        end
-      end
-
-      send_data content,
-                type: 'text/csv; charset=utf-8; header=present',
-                disposition: 'attachment; filename=students.csv'
-    end
-
 
     def update
       @student = get_student

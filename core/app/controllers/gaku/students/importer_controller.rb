@@ -1,114 +1,55 @@
 # -*- encoding: utf-8 -*-
-
-require 'spreadsheet'
-require 'csv'
-
 module Gaku
   class Students::ImporterController < GakuController
 
     skip_authorization_check
 
-    include SheetHelper
-    require 'roo'
-
     def index
-      @importer_types = ["GAKU Engine", "SchoolStation"]
-      render "gaku/students/importer/index"
+      @importer_types = {I18n.t('student.roster_sheet') => :import_roster, 'School Station' => :import_school_station_zaikousei}
+      # render 'gaku/students/importer/index'
     end
 
-    def get_csv_template
-      filename = "StudentRegistration.csv"
-      content = CSV.generate do |csv|
-        csv << registration_fields
-        csv << translate_fields(registration_fields)
+    def get_roster
+    end
+
+    def get_registration_roster
+      exporter = Gaku::Core::Exporters::RosterExporter.new
+      file = exporter.export({})
+    end
+
+    def create
+      redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') and return if params[:importer][:data_file].nil?
+
+      file = ImportFile.new(params[:importer])
+      file.context = 'students'
+      raise "COULD NOT SAVE FILE" unless file.save
+
+      case params[:importer][:importer_type]
+      when "import_roster"
+        import_roster(file)
+      when "import_school_station_zaikousei"
+        import_school_station_zaikousei(file)
       end
-      send_data content, :filename => filename
     end
 
-    def get_sheet_template
-    end
-
-
-    def import_student_list
-      # import_sheet_student_list
-
-      if params[:importer][:data_file].nil?
-        redirect_to importer_index_path, :alert => 'no file or bad file'
+    def import_roster(file)
+      if file.data_file.content_type == 'application/vnd.ms-excel' ||
+          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
+        Gaku::Core::Importers::Students::RosterWorker.perform_async(file.id)
+        render text: "Importing"
       else
-        if params[:importer][:data_file].content_type == 'application/vnd.ms-excel'
-          case params[:importer][:importer_type]
-          when "GAKU Engine"
-            import_sheet_student_list
-          when "SchoolStation"
-            import_school_station_students_xls
-          end
-
-        elsif params[:importer][:data_file].content_type == "text/csv"
-            import_csv_student_list
-        end
+        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
     end
 
-    def import_csv_student_list
-      @rowcount = 0
-      @created_students = 0
-      @csv_data = params[:importer][:data_file].read.force_encoding("UTF-8")
-
-      CSV.parse(@csv_data) do |row|
-        case @rowcount
-          when 0
-            #TODO get mapping of field index
-          else
-            unless row.empty?
-              Student.create!(:surname => row[0], :name => row[1], :surname_reading => row[2], :name_reading => row[3])
-              @created_students += 1
-            end
-          end
-          @rowcount += 1
-        end
-      render :student_import_preview
-    end
-
-    def import_sheet_student_list
-
-      file_data = params[:importer][:data_file]
-
-      #read from saved file
-      importer = ImportFile.new(params[:importer])
-      importer.context = 'students'
-      if importer.save
-        book = Spreadsheet.open(importer.data_file.path)
-
-        #read from not saved file. just read file
-        # book = Spreadsheet.open(file_data.path)
-
-        sheet = book.worksheet(0)
-
-        ActiveRecord::Base.transaction do
-        #Giorgio:put in transaction for fast importing
-          sheet.each do |row|
-            unless book.worksheet('Sheet1').first == row
-              # check for existing
-              student = Student.create!(:surname => row[0],
-                              :name => row[1],
-                              :surname_reading => row[2],
-                              :name_reading => row[3])
-            end
-          end
-        end
-        redirect_to importer_index_path, :notice => 'Spreadsheet Successful Imported'
+    def import_school_station_zaikousei(file)
+      if file.data_file.content_type == 'application/vnd.ms-excel' ||
+          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
+        Gaku::Core::Importers::SchoolStation::ZaikouseiWorker.perform_async(file.id)
+        render text: "Importing Zaikousei"
       else
-          redirect_to :back
+        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end
-
-    end
-
-
-    def import_school_station_students_xls
-      file = ImportFile.create(params[:importer].merge(:context => 'students'))
-      importer = Gaku::Core::Importers::SchoolStation::Zaikousei.new()
-      importer.process_file(file)
-      render :school_station_preview
     end
 
   end

@@ -1,6 +1,7 @@
 doctype 5
 html
   head
+    = favicon_link_tag 'gakuengine20.png'
     title
       = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
     = javascript_tag '$.fx.off = true;' if Rails.env.test?

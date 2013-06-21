@@ -7,7 +7,6 @@
   .pull-right
     = ajax_link_to_new t(:'student.new'), new_student_path, :id => "new-student-link"
     = link_to_import t(:'import'), importer_index_path, :id => "import-students-link"
-    = link_to_export t(:'export'), {:action => :csv, :format => :csv}, :id => 'export-students-link'
 
 = content_for :new_form do
   #new-student.hide
@@ -15,5 +14,3 @@
 = render 'gaku/shared/student_chooser/chooser'
 
 = hr
-
-/= render :partial => 'gaku/shared/external_school_record', :collection => Gaku::ExternalSchoolRecord.all, :as => :external_school_record

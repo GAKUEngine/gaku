@@ -12,12 +12,12 @@ module Gaku
 
     default_scope conditions:  { is_deleted: false }
 
-    validates_presence_of :address1, :city, :country
+    validates_presence_of :address1, :country
 
     accepts_nested_attributes_for :country
 
     attr_accessible :title, :address1, :address2, :city, :zipcode,
-                    :state, :state_name, :state_id, :country, :country_id,
+                    :state, :country,
                     :is_deleted, :is_primary, :past
 
     before_save :ensure_first_is_primary, on: :create

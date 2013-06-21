@@ -1,126 +1,79 @@
 # -*- encoding: utf-8 -*-
+require 'roo'
+require 'GenSheet'
 
-require 'spreadsheet'
-require 'csv'
+module Gaku::Core::Importers::SchoolStation
+  class Zaikousei
+    include Gaku::Core::Importers::Logger
 
-module Gaku
-  module Core
-    module Importers
-      module SchoolStation
-        class Zaikousei
+    def initialize(file, logger)
+      @logger = logger
+      file_handle = File.open file.data_file.path
+      book = Roo::Spreadsheet.open file_handle
+      book = fix_for_school_station(book)
+      # info = get_info(book)
+      # open_roster(info, book)
+      # start(info, book)
+    end
 
-          def get_default_index
-            idx = Hash.new
+    private
 
-            #initial default values (from inital raw output)
-            idx[:name] = 7
-            idx[:name_reading] = 8
-            idx[:birth_date] = 10
-            idx[:gender] = 11
-            idx[:phone] = 19
-            idx[:foreign_id_number] = 4
+    def fix_for_school_station(book)
+      p 'henkantyu- dayo-'
+    end
 
-            #primary address
-            idx[:zipcode] = 14
-            idx[:state] = 15
-            idx[:city] = 16
-            idx[:address1] = 17
-            idx[:address2] = 18
+    def open_roster(info, book)
+      I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
+      book.sheet(I18n.t('student.roster'))
+    end
 
-            #primary guardian
-            idx[:guardian] = Hash.new
-            idx[:guardian][:name] = 34
-            idx[:guardian][:name_reading] = 35
-            idx[:guardian][:zipcode] = 37
-            idx[:guardian][:state] = 38
-            idx[:guardian][:city] = 39
-            idx[:guardian][:address1] = 40
-            idx[:guardian][:address2] = 41
-            idx[:guardian][:phone] = 42
+    def start(info, book)
+      keymap = get_keymap
+      book.each_with_index(keymap) do |row, i|
+        process_row(row) unless i == 0
+      end
+    end
 
-            idx[:updated] = 2
+    def get_keymap()
+      key_syms = [:student_id_number, :student_foreign_id_number, :name, :name_reading, :middle_name,
+        :middle_name_reading, :surname, :surname_reading, :sex, :birth_date, :admitted, :phone]
+      keymap = {}
+      key_syms.each do |key|
+        keymap[key.to_s] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
+        #TODO check if keys exist in header. If they do not then remove them from hash.
+        log 'KEY[' + key.to_s + ']: ' + keymap[key.to_s]
+      end
+      return keymap
+    end
 
-            #add static fields
-            #SchoolStationで大半の住所が日本にある
-            idx[:country] = Country.find_by_numcode(392)
-            idx[:contact_type] = ContactType.find_by_name("Phone")
+    def get_info(book)
+      book.sheet('info')
+      book.parse(header_search: book.row(book.first_row)).last
+    end
 
-            return idx
-          end
+    def student_exists?(row)
+      (
+        Gaku::Student.exists?(
+          student_foreign_id_number: row[:foreign_id].to_i.to_s) ||
+        Gaku::Student.exists?(
+          student_foreign_id_number: row[:id].to_i.to_s)
+      )
+    end
 
-          #在校テーブルのフィルド順を確認し、表陣と違った場合インデックスを変更し返す
-          def check_index(row, idx)
-            row.each_with_index do |cell, i|
-              i = i.to_i
-              case cell
-              when "ZAINAM_C" #生徒名の漢字
-                idx[:name] = i
-              when "ZAINAM_K"
-                idx[:name_reading] = i
-              when "ZAIBTHDY"
-                idx[:birth_date] = i
-              when "ZAISEXKN"
-                idx[:gender] = i
-              when "ZAIZIPCD"
-                idx[:zipcode] = i
-              when "ZAIADRCD"
-                idx[:state] = i
-              when "ZAIADR_1"
-                idx[:city] = i
-              when "ZAIADR_2"
-                idx[:address1] = i
-              when "ZAIADR_3"
-                idx[:address2] = i
-              when "ZAITELNO"
-                idx[:phone] = i
-              when "HOGNAM_C"
-                idx[:guardian][:name] = i
-              when "HOGNAM_K"
-                idx[:guardian][:name_reading] = i
-              when "HOGZIPCD"
-                idx[:guardian][:zipcode] = i
-              when "HOGADR_1"
-                idx[:guardian][:city] = i
-              when "HOGADR_2"
-                idx[:guardian][:address1] = i
-              when "HOGADR_3"
-                idx[:guardian][:address2] = i
-              when "HOGTELNO"
-                idx[:guardian][:phone] = i
-              when "SEITONUM"
-                idx[:foreign_id_number] = i
-              when "UPDATEDY"
-                idx[:updated] = i
-              end
-            end
+    def update_student(row)
+    end
 
-            return idx
-          end
+    def register_student(row)
+      ActiveRecord::Base.transaction do
+        Gaku::Core::Importers::Students::RosterToStudent.new(row)
+      end
+    end
 
-          def process_file(file)
-            if file
-              book = Spreadsheet.open(file.data_file.path)
-              sheet = book.worksheet('CAMPUS_ZAIKOTBL')
-
-              process_records(sheet)
-            end
-
-            results = Hash.new
-            results[:status] = "OK"
-
-            return results
-          end
-
-          def process_records(sheet)
-            #get default index, then check for index on first row
-            idx = get_default_index
-
-            #sheet is shifted so the top line is taken
-            #idx = check_index(sheet.first, idx)
-
-            Gaku::Importers::SchoolStation::ZaikouWorker.perform_async(sheet, idx)
-          end
-        end
+    def process_row(row)
+      if student_exists?(row)
+        update_student(row)
+      else
+        register_student(row)
       end
     end
   end

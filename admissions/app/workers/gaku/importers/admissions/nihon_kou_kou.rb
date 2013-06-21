@@ -4,7 +4,6 @@ module Gaku
     module Admissions
       class NihonKouKou
         include Sidekiq::Worker
-        include SheetHelper
         require 'roo'
 
         def perform(file_path, period_id, method_id)

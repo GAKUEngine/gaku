@@ -50,6 +50,7 @@ bg:
     new: Създай Задание
     plural: Задания
     results: Резултати от заданието
+    score: 
     singular: Задание
     view: Покажи Заданията
   assignments:
@@ -232,19 +233,6 @@ bg:
     singular: Курс Група
   course_group_enrollment:
     save: Запази Курс Група
-  csv:
-    export: CSV Експорт
-    fields:
-      admitted: Приет
-      birth_date: Рождена Дата
-      email: Имейл
-      gender: Пол
-      name: Име
-      name_reading: Име (чете се)
-      phone: Телефон
-      surname: Фамилно Име
-      surname_reading: Фамилно име (чете се)
-    import: CSV Импорт
   date:
     formats:
       default: 
@@ -350,6 +338,8 @@ bg:
     messages:
       already_confirmed: 
       expired: 
+      file_type_unsupported: 
+      file_unreadable: 
       not_found: 
       not_locked: 
       not_saved: 
@@ -407,12 +397,14 @@ bg:
     use_weighting: 
     weight: 
   export: 
+  extended: 
   external_school_record:
     absences: 
     attendance_rate: 
     beginning: 
     data: 
     ending: 
+    singular: 
     student_id_number: 
   extracurricular_activity:
     add: 
@@ -430,6 +422,7 @@ bg:
     list: 
   failure:
     enrolled: 
+  file: 
   flash:
     actions:
       create:
@@ -511,6 +504,7 @@ bg:
   id: 
   import: 
   import_format: 
+  is_graduated: 
   language: 
   languages:
     en: 
@@ -547,7 +541,9 @@ bg:
           defaults: 
           grading: 
           locale: 
+          names: 
           student: 
+        names: 
         pagination: 
         plural: 
         save: 
@@ -593,6 +589,8 @@ bg:
       plural: 
     teacher:
       plural: 
+  middle_name: 
+  middle_name_reading: 
   name: 
   name_reading: 
   none: 
@@ -622,6 +620,7 @@ bg:
   order: 
   panel: 
   period: 
+  personal_information: 
   phone: 
   phonetic_reading: 
   picture: 
@@ -632,6 +631,7 @@ bg:
     grading:
       grading_method: 
       grading_scheme: 
+    names: 
     output_formats:
       choose: 
       documents: 
@@ -793,6 +793,8 @@ bg:
     class_group_enrollment: 
     commute_method: 
     create: 
+    download_registration_roster: 
+    download_roster: 
     edit: 
     enroll: 
     export: 
@@ -801,9 +803,8 @@ bg:
     name: 
     new: 
     plural: 
-    registration:
-      csv: 
-      sheet: 
+    roster: 
+    roster_sheet: 
     save: 
     show: 
     singular: 
@@ -811,6 +812,8 @@ bg:
     edit: 
     index: 
     save: 
+  student_foreign_id_number: 
+  student_id_number: 
   student_specialty:
     edit: 
     index: 

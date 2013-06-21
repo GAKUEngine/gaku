@@ -50,7 +50,7 @@ ja:
     new: 課題の登録
     plural: 課題
     results: 課題結果
-    score: Score
+    score: 得点
     singular: 課題
     view: 課題詳細を参照
   assignments:
@@ -233,19 +233,6 @@ ja:
     singular: 授業グループ
   course_group_enrollment:
     save: 授業グループを保存
-  csv:
-    export: CSVで書き出し
-    fields:
-      admitted: 認証済み
-      birth_date: 誕生日
-      email: Eメール
-      gender: 性別
-      name: 名
-      name_reading: フリガナ（名）
-      phone: 電話
-      surname: 姓
-      surname_reading: フリガナ（姓）
-    import: CSVを読み込む
   date:
     formats:
       default: '%Y-%m-%d'
@@ -320,7 +307,7 @@ ja:
       unlocked: アカウントを凍結解除しました。ログインしています。
     username: ユーザー名
   edit: 編集
-  email: メールアドレス
+  email: メール
   empty: 空です
   enroll_to_class: クラスに登録
   enrollment:
@@ -351,6 +338,8 @@ ja:
     messages:
       already_confirmed: は既に登録済みですのでログインしてください
       expired: の期限が切れましたので、新しくリクエストしてください
+      file_type_unsupported: ファイル形式に対応出来ません。
+      file_unreadable: ファイルを読み込むことが出来ませんでした。
       not_found: は見つかりませんでした
       not_locked: は凍結されていません
       not_saved:
@@ -410,14 +399,14 @@ ja:
     use_weighting: 加重率を使用
     weight: 加重率
   export: エクスポート
-  extended: Extended
+  extended: 拡張
   external_school_record:
     absences: 欠席数
     attendance_rate: 出席率
     beginning: 開始日
     data: データ
     ending: 終了日
-    singular: External School Record
+    singular: 外部学校記録
     student_id_number: 生徒番号
   extracurricular_activity:
     add: 部活を追加
@@ -435,6 +424,7 @@ ja:
     list: 部活生一覧
   failure:
     enrolled: 登録に失敗しました。
+  file: ファイル
   flash:
     actions:
       create:
@@ -516,7 +506,7 @@ ja:
   id: ID
   import: インポート
   import_format: インポート形式
-  is_graduated: Is Graduated
+  is_graduated: 卒業した
   language: 言語
   languages:
     en: English[英語]
@@ -553,7 +543,9 @@ ja:
           defaults: 初期プリセット
           grading: 採点プリセット
           locale: 言語プリセット
+          names: 名前
           student: 生徒プリセット
+        names: 名前
         pagination: ページ分けの設定
         plural: プリセット
         save: プリセットを保存
@@ -599,6 +591,8 @@ ja:
       plural: 科目
     teacher:
       plural: 先生
+  middle_name: ミドルネーム
+  middle_name_reading: フリガナ(ミドル)
   name: 名前
   name_reading: フリガナ（名）
   none: 未登録
@@ -628,6 +622,7 @@ ja:
   order: 順序
   panel: パネル
   period: 期間
+  personal_information: 個人情報
   phone: 電話番号
   phonetic_reading: ﾌﾘｶﾞﾅ
   picture: 画像
@@ -638,6 +633,7 @@ ja:
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
+    names: 名前
     output_formats:
       choose: フォーマット選択
       documents: ドキュメント
@@ -799,6 +795,8 @@ ja:
     class_group_enrollment: クラスに生徒を追加
     commute_method: 通勤手段
     create: 生徒を作成
+    download_registration_roster: 在校生登録シートをダウンロード
+    download_roster: 在校生シートをダウンロード
     edit: 編集
     enroll: 生徒を追加
     export: 生徒情報をCSVで書き出し
@@ -807,9 +805,8 @@ ja:
     name: 生徒名
     new: 生徒を登録
     plural: 生徒
-    registration:
-      csv: CSVで生徒を登録
-      sheet: 登録用のCSVをダウンロード
+    roster: 生徒一覧
+    roster_sheet: 在校生シート
     save: 生徒を保存
     show: 生徒照会
     singular: 生徒
@@ -817,6 +814,8 @@ ja:
     edit: 生徒の実績を編集
     index: 生徒の実績一覧
     save: 生徒の実績を保存
+  student_foreign_id_number: 外部生徒番号
+  student_id_number: 生徒番号
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
@@ -852,7 +851,7 @@ ja:
   user:
     add: ユーザーを追加
     edit: ユーザーを編集
-    email: Eメール
+    email: メール
     info: ユーザー情報
     list: ユーザ一覧
     password: パスワード
