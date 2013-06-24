@@ -8,7 +8,7 @@ describe 'Student Address Versioning' do
     @address = @student.addresses.first
   end
 
-  it 'saves update history' do
+  it 'saves update history', type: 'address' do
     expect do
       @address.address1 = "Changed"
       @address.save

@@ -13,7 +13,7 @@ describe 'Student Notes' do
     set_resource "student-note"
   end
 
-  context 'new' do
+  context 'new', type: 'note'  do
     before do
       @data = student
       visit gaku.edit_student_path(@data)
@@ -23,7 +23,7 @@ describe 'Student Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", :js => true do
+  context "existing", js: true, type: 'note'  do
     before do
       @data = student_with_note
       visit gaku.edit_student_path(@data)

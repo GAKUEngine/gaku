@@ -13,7 +13,7 @@ describe 'Admin School Campuses Address' do
     set_resource "admin-school-campus-address"
   end
 
-  context 'new' do
+  context 'new', type: 'address' do
     before do
       country
       address
@@ -23,7 +23,7 @@ describe 'Admin School Campuses Address' do
     it_behaves_like 'new address'
   end
 
-  context "existing" do
+  context 'existing', type: 'address' do
 
     before do
       school.master_campus.address = address

@@ -1,6 +1,11 @@
 - target ||= [@nested_resources, @contactable, contact].flatten
-= render :partial => 'gaku/shared/fields/contact_primary_field', :locals => {:contact => contact, :target => target}
-= render :partial => 'gaku/shared/fields/contact_fields', :locals => {:contact => contact }
+= render :partial => 'gaku/contacts/primary_field', :locals => {:contact => contact, :target => target}
+
+td = contact.name
+td = contact.data
+td = contact.details
+td
+  =t(:'contact.emergency') if contact.is_emergency?
 
 - if can_edit?
   td

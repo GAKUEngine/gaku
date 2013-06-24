@@ -1,5 +1,5 @@
 = remote_form_for [@notable, @note] do |f|
-  = render 'gaku/shared/form_fields/note_form_fields', :f => f
+  = render 'form_fields', :f => f
   = buttons_for @note, :nested_id=> "#{@notable_resource}-note"
 
 javascript:
