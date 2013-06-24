@@ -12,7 +12,7 @@ describe 'Admin School Campus Contact' do
     set_resource "admin-school-campus-contact"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'contact' do
     before do
       contact_type
       @data = school.campuses.first
@@ -22,7 +22,7 @@ describe 'Admin School Campus Contact' do
     it_behaves_like 'new contact'
   end
 
-  context "existing", :js => true do
+  context "existing", js: true, type: 'contact' do
     context 'one contact' do
 
       before do
@@ -44,7 +44,7 @@ describe 'Admin School Campus Contact' do
       end
     end
 
-    context 'two contacts' do
+    context 'two contacts', type: 'contact' do
 
       before do
         @school = create(:school_with_two_contacts)
