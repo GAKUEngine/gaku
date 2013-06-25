@@ -169,5 +169,9 @@ module Gaku
       t(:'program.list')
     end
 
+    def t_state_list
+      t(:'state.list')
+    end
+
   end
 end
