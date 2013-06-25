@@ -6,7 +6,7 @@ describe Gaku::State do
     it { should belong_to(:country) }
 
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:country) }
+    it { should validate_presence_of(:country_iso) }
 
     it { should allow_mass_assignment_of :name }
     it { should allow_mass_assignment_of :name_ascii }
