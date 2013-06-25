@@ -1,0 +1,14 @@
+.row-fluid
+  .span6
+    = f.text_field :name, label: t(:'state.name')
+  .span6
+    = f.text_field :abbr, label: t(:'state.abbr')
+.row-fluid
+  .span6
+    = f.text_field :name_ascii, label: t(:'state.name_ascii')
+  .span6
+    = f.text_field :code, label: t(:'state.code')
+.row-fluid
+  .span6
+    = f.select :country_iso, @countries, { prompt: t(:'address.choose_country') }, label: t(:'address.country')
+
