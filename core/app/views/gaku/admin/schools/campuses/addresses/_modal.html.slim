@@ -3,5 +3,5 @@
   = modal_form_for [:admin, @school, @campus, @address] do |f|
     = modal_body do
       = hidden_field_tag :campus_id, @campus.id
-      = render 'gaku/shared/form_fields/address_form_fields', :f => f
+      = render 'gaku/addresses/form_fields', f: f
       = buttons_for @address, :nested_id => 'admin-school-campus-address'

@@ -14,7 +14,7 @@ describe 'Student Contacts' do
     set_resource "student-contact"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'contact' do
 
     before do
       @data = student
@@ -28,7 +28,7 @@ describe 'Student Contacts' do
   end
 
 
-  context "existing" do
+  context "existing", type: 'contact' do
 
     context 'one contact' do
 
@@ -52,7 +52,7 @@ describe 'Student Contacts' do
 
     end
 
-    context 'two contacts' do
+    context 'two contacts', type: 'contact' do
 
       before do
         @data = student_with_contacts

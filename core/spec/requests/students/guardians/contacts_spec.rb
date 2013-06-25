@@ -18,7 +18,7 @@ describe 'Student Guardian Contacts' do
   end
 
 
-  context 'new', :js => true  do
+  context 'new', js: true, type: 'contact'  do
     before(:each) do
       contact_type
       student.guardians << guardian
@@ -34,7 +34,7 @@ describe 'Student Guardian Contacts' do
 
   end
 
-  context 'existing', js:true do
+  context 'existing', js: true, type: 'contact' do
 
     context 'one contact' do
 
@@ -52,7 +52,7 @@ describe 'Student Guardian Contacts' do
 
     end
 
-    context 'two contacts' do
+    context 'two contacts', type: 'contact' do
 
       before do
         @data = guardian_with_contacts

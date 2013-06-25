@@ -17,7 +17,7 @@ describe 'Student Guardian Addresses' do
     set_resource "student-guardian-address"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'address' do
     before do
       country
       student.guardians << guardian
@@ -27,7 +27,7 @@ describe 'Student Guardian Addresses' do
     it_behaves_like 'new address'
   end
 
-  context 'existing' do
+  context 'existing', type: 'address' do
 
     context 'one address' do
       before do

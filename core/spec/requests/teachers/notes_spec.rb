@@ -13,7 +13,7 @@ describe 'Teacher Notes' do
     set_resource "teacher-note"
   end
 
-  context 'new' do
+  context 'new', type: 'note'  do
 
     before do
       @data = teacher
@@ -23,7 +23,7 @@ describe 'Teacher Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing" do
+  context "existing", type: 'note'  do
 
     before do
       @data = teacher_with_note

@@ -12,7 +12,7 @@ describe 'Course Notes' do
     set_resource "course-note"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'note'  do
     before do
       visit gaku.course_path(course)
       @data = course
@@ -21,7 +21,7 @@ describe 'Course Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", :js => true do
+  context "existing", js: true, type: 'note'  do
     before do
       note
       visit gaku.course_path(course)

@@ -10,7 +10,7 @@ describe 'Student Contact Changes' do
     @contact = @student.contacts.first
   end
 
-  it 'saves edits' do
+  it 'saves edits', type: 'contact' do
     old_data = @contact.data
     @contact.update_attributes(:data => "123456789")
     visit gaku.admin_changes_student_contacts_path
@@ -19,7 +19,7 @@ describe 'Student Contact Changes' do
     page.should have_content "123456789"
   end
 
-  it 'saves destroy' do
+  it 'saves destroy', type: 'contact' do
     @contact.destroy
     visit gaku.admin_changes_student_contacts_path
     page.should have_content "destroy"

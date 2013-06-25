@@ -1,8 +1,6 @@
-- target ||= [@nested_resources, @addressable, address].flatten
-= render 'gaku/shared/fields/address_primary_field', :address => address, :target => target
-= render 'gaku/shared/fields/address_fields', :address => address
-
-- if can_edit?
-  td
-    = ajax_link_to_edit [:edit, target].flatten
-    = ajax_soft_delete [:soft_delete, target].flatten
+td= address.title
+td= address.country
+td= address.zipcode
+td= address.city
+td= address.address1
+td= address.address2
