@@ -1,7 +1,8 @@
 module Gaku::Core::Importers::Students::RosterKeys
-  KEY_SYMS = [:student_id_number, :student_foreign_id_number, :name,
-    :name_reading, :middle_name, :middle_name_reading, :surname,
-    :surname_reading, :sex, :birth_date, :admitted, :phone, :email,
+  KEY_SYMS = [:student_id_number, :student_foreign_id_number,
+    :full_name, :full_name_reading, :name, :name_reading,
+    :middle_name, :middle_name_reading, :surname, :surname_reading,
+    :sex, :birth_date, :admitted, :phone, :email,
     :'address.zipcode', :'address.country', :'address.state',
     :'address.city', :'address.address2', :'address.address1']
     

@@ -432,6 +432,8 @@ bg:
         notice: 
       update:
         notice: 
+  full_name: 
+  full_name_reading: 
   gender:
     choose: 
     female: 
@@ -495,6 +497,7 @@ bg:
     relationship: 
     save: 
     singular: 
+    surname: 
   hello: 
   helpers:
     links:

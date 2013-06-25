@@ -27,12 +27,24 @@ module Gaku::Core::Importers::Students
     end
 
     def reg_name(row, student)
-      student.surname = row[:surname]
-      student.middle_name = row[:middle_name]
-      student.name = row[:name]
-      student.surname_reading = row[:surname_reading]
-      student.middle_name_reading = row[:middle_name_reading]
-      student.name_reading = row[:name_reading]
+      if (!row[:surname].nil? && row[:surname] != '')
+        student.surname = row[:surname]
+        student.middle_name = row[:middle_name]
+        student.name = row[:name]
+        student.surname_reading = row[:surname_reading]
+        student.middle_name_reading = row[:middle_name_reading]
+        student.name_reading = row[:name_reading]
+      elsif (!row[:full_name].nil? && row[:full_name] != '')
+        name_parts = row[:full_name].sub("　", " ").split(" ")
+        student.surname = name_parts.first
+        student.name = name_parts.last
+
+        name_reading_parts = row[:full_name_reading].sub("　", " ").split(" ")
+        student.surname_reading = name_reading_parts.first
+        student.name_reading = name_reading_parts.last
+      else
+        log "Could not read student name for: " + row
+      end  
     end
 
     def reg_sex(row, student)
@@ -82,7 +94,7 @@ module Gaku::Core::Importers::Students
         end
 
         student_address = student.addresses.create!(zipcode: row[:'address.zipcode'],
-          country: country, state: state, city: row[:'city'],
+          country_id: country.id, state: state, city: row[:'city'],
           :address1 => row[:'address.address1'], address2: row[:'address.address2'])
       end
     end

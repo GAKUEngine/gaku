@@ -430,6 +430,8 @@ pt-BR:
         notice: 
       update:
         notice: 
+  full_name: 
+  full_name_reading: 
   gender:
     choose: 
     female: 
@@ -493,6 +495,7 @@ pt-BR:
     relationship: 
     save: 
     singular: 
+    surname: 
   hello: 
   helpers:
     links:
