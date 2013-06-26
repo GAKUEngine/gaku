@@ -51,7 +51,7 @@ module Gaku::Core::Importers::Students
 
     def register_student(row)
       ActiveRecord::Base.transaction do
-        Gaku::Core::Importers::Students::RosterToStudent.new(row, @logger).start
+        Gaku::Core::Importers::Students::RosterToStudent.new(row, @info, @logger)
       end
     end
 

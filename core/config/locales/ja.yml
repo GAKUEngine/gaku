@@ -308,7 +308,7 @@ ja:
     username: ユーザー名
   edit: 編集
   email: メール
-  empty: 空です
+  empty: 空/未登録
   enroll_to_class: クラスに登録
   enrollment:
     plural: 在籍
@@ -434,6 +434,8 @@ ja:
         notice: '%{resource_name}は正常に消去されました'
       update:
         notice: '%{resource_name}は正常に更新されました'
+  full_name: 氏名
+  full_name_reading: 氏名のフリガナ
   gender:
     choose: 性別を選択
     female: 女性
@@ -497,6 +499,7 @@ ja:
     relationship: 続柄
     save: 保護者を保存
     singular: 保護者
+    surname: 保護者名字
   hello: ハローワールド
   helpers:
     links:

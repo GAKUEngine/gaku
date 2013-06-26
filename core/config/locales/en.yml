@@ -434,6 +434,8 @@ en:
         notice: '%{resource_name} was successfully destroyed!'
       update:
         notice: '%{resource_name} was successfully updated!'
+  full_name: Full Name
+  full_name_reading: Full Name Reading
   gender:
     choose: Choose Gender
     female: Female
@@ -491,12 +493,13 @@ en:
     edit: Edit guardian
     guardians: Guardians
     list: Guardians list
-    name: Name
+    name: Guardian Name
     new: New Guardian
     plural: Guardians
     relationship: Relationship
     save: Save Guardian
     singular: Guardian
+    surname: Guardian Surname
   hello: Hello world
   helpers:
     links:
