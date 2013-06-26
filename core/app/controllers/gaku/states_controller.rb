@@ -5,7 +5,7 @@ module Gaku
     def index
       if params[:country_id]
         @country = Country.find(params[:country_id])
-        @states = State.where(country_numcode: @country.numcode)
+        @states = State.where(country_iso: @country.iso)
                        .order('name asc')
       else
         @states = State.all
