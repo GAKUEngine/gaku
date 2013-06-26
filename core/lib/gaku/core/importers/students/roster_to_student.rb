@@ -1,93 +1,116 @@
+# encoding: UTF-8
+
 require 'roo'
 require 'GenSheet'
 
 module Gaku::Core::Importers::Students
   class RosterToStudent
     include Gaku::Core::Importers::Logger
-    def initialize(row, info, logger = nil)
+
+    def initialize(row, logger = nil)
       @logger = logger
-      I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
+      @row = row
+    end
 
-      student = Gaku::Student.new()
-      reg_id(row, student)
-      reg_name(row, student)
-      reg_sex(row, student)
-      reg_birthdate(row, student)
-      student.save()
+    def start
+      @student = Gaku::Student.create! student_id_number: student_id_number,
+                                 student_foreign_id_number: student_foreign_id_number,
+                                 name: name, middle_name: middle_name, surname: surname,
+                                 name_reading: name_reading,
+                                 surname_reading: surname_reading,
+                                 middle_name_reading: middle_name_reading,
+                                 gender: gender, birth_date: birth_date
 
-      add_contact(row, student)
-      add_address(row, student)
-      add_guardian(row, student)
+      add_contact
+      add_address
+      add_guardian
     end
 
     private
-    def reg_id(row, student)
-      student.student_id_number = row[:student_id_number].to_s
-      student.student_foreign_id_number = row[:student_foreign_id_number].to_s
+
+    def student_id_number
+      @row[:student_id_number].to_s
     end
 
-    def reg_name(row, student)
-      student.surname = row[:surname]
-      student.middle_name = row[:middle_name]
-      student.name = row[:name]
-      student.surname_reading = row[:surname_reading]
-      student.middle_name_reading = row[:middle_name_reading]
-      student.name_reading = row[:name_reading]
+    def student_foreign_id_number
+      @row[:student_foreign_id_number].to_s
     end
 
-    def reg_sex(row, student)
-      gender = nil
-      if row[:sex] == I18n.t('gender.female')
-        gender = 0
-      elsif row[:sex] == I18n.t('gender.male')
-        gender = 1
+    def surname
+      @row[:surname]
+    end
+
+    def middle_name
+      @row[:middle_name]
+    end
+
+    def name
+      @row[:name]
+    end
+
+    def surname_reading
+      @row[:surname_reading]
+    end
+
+    def middle_name_reading
+      @row[:middle_name_reading]
+    end
+
+    def name_reading
+      @row[:name_reading]
+    end
+
+    def gender
+      if @row[:sex] == I18n.t('gender.female')
+        0
+      elsif @row[:sex] == I18n.t('gender.male')
+        1
       end
-      student.gender = gender
     end
 
-    def reg_birthdate(row, student)
+    def birth_date
       #birth_date = Date.strptime(row['birth_date']).to_s
       #begin
       #  birth_date = Date.strptime(row['birth_date'].to_s, "%Y/%m/%d")
       #rescue
       #  birth_date = Date.civil(1899, 12, 31) + row['birth_date'].to_i.days - 1.day
       #end
-      student.birth_date = row[:birth_date]
+      @row[:birth_date]
     end
-    
-    def add_contact(row, student)
-      phone = row[:phone]
-      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
+
+    def add_contact
+      phone = @row[:phone]
+      @student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
         is_emergency: true, data: phone) unless (phone.nil? || phone == '')
 
-      email = row[:email]
-      student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
+      email = @row[:email]
+      @student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
         is_emergency: true, data: email) unless (email.nil? || email == '')
     end
 
-    def add_address(row, student)
-      if row[:'address.address1']
+    def add_address
+      if @row[:'address.address1']
         state = nil
-        unless (row[:'address.state'].nil? || row[:'address.state'] == '')
-          state = Gaku::State.where(name: row[:'address.state']).first
+        unless (@row[:'address.state'].nil? || @row[:'address.state'] == '')
+          state = Gaku::State.where(name: @row[:'address.state']).first
           if state == nil
-            log 'State: "' + row[:'address.state'] + '" not found. Please register and retry import.'
+            log 'State: "' + @row[:'address.state'] + '" not found. Please register and retry import.'
             return
           end
         end
 
         country = Gaku::Country.where(name: '日本').first
-        unless Gaku::Country.where(name: row[:'address.country']).first.nil?
-          country = Gaku::Country.where(name: row[:'address.country']).first
+        unless Gaku::Country.where(name: @row[:'address.country']).first.nil?
+          country = Gaku::Country.where(name: @row[:'address.country']).first
         end
 
-        student_address = student.addresses.create!(zipcode: row[:'address.zipcode'],
-          country: country, state: state, city: row[:'city'],
-          :address1 => row[:'address.address1'], address2: row[:'address.address2'])
+        @student.addresses.create!(zipcode: @row[:'address.zipcode'],
+          country: country, state: state, city: @row[:'city'],
+          :address1 => @row[:'address.address1'], address2: @row[:'address.address2'])
       end
     end
 
-    def add_guardian(row, student)
+    def add_guardian
         #  # add primary guardian
         #  if row[idx["guardian"]["name"]]
         #    guardian_name_parts = row[idx["guardian"]["name"]].to_s().split("　")

@@ -17,7 +17,7 @@ module Gaku
     accepts_nested_attributes_for :country
 
     attr_accessible :title, :address1, :address2, :city, :zipcode,
-                    :state, :country_id,
+                    :state, :country_id, :country,
                     :is_deleted, :is_primary, :past
 
     before_save :ensure_first_is_primary, on: :create
