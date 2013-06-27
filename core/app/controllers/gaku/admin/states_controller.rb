@@ -12,7 +12,7 @@ module Gaku
       before_filter :load_data
 
       def country_states
-        @country = Country.where(:iso => params[:state][:country_iso]).first
+        @country = Country.where(iso: params[:state][:country_iso]).first
         @states = @country.states
         respond_with @states
       end

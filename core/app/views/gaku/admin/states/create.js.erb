@@ -1,5 +1,4 @@
 $('#admin-<%= @state.country_iso.downcase %>-states-index tbody').append('<%= render_js_partial("state", {:state => @state}) %>');
-console.log('#admin-<%= @state.country_iso %>-states-index tbody');
 $('#new-admin-state').slide();
 $('#new-admin-state-link').show();
 

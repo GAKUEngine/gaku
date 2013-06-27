@@ -212,7 +212,6 @@ module Gaku
 
     def country_preset
       @country_preset ||= Gaku::Preset.get('country')
-
     end
 
     def student_names(student, options = {})

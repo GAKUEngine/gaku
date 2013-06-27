@@ -6,18 +6,10 @@ describe 'Admin States' do
 
   let!(:country) { create(:country, name: 'Japan', iso: 'JP')}
   let(:state) { create(:state, name: 'Tokyo ', country: country) }
-
   let(:country2) { create(:country, name: 'Bulgaria', iso: 'BG')}
-
   let!(:country_table) { "#admin-#{country.iso.downcase}-states-index" }
 
-
-
-
-  before :all do
-    set_resource 'admin-state'
-  end
-
+  before :all { set_resource 'admin-state' }
 
   context 'new', js:true do
     before do
