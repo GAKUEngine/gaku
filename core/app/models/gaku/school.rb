@@ -8,9 +8,9 @@ module Gaku
     has_many :levels
     has_many :programs
 
-    attr_accessible :name, :is_primary, :slogan, :description, :founded,
-                    :principal, :vice_principal, :grades, :code,
-                    :levels_attributes
+    # attr_accessible :name, :is_primary, :slogan, :description, :founded,
+    #                 :principal, :vice_principal, :grades, :code,
+    #                 :levels_attributes
 
     validates :name, presence: true
 

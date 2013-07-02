@@ -12,7 +12,18 @@ module Gaku
       before_filter :load_program, :only => [:show_program_levels, :show_program_specialties, :show_program_syllabuses]
       before_filter :load_data
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:program).permit!] #FIXME Remove permit!
+      end
+
       private
+
+      def program_attr
+        [:name, :description, { program_specialties_attributes: [] }, { program_levels_attributes: [] }, { program_syllabuses_attributes: [] }]
+      end
 
       def load_data
         @levels = Level.all.collect { |l| [l.name, l.id] }

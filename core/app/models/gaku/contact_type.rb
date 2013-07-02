@@ -3,8 +3,7 @@ module Gaku
 
     has_many :contacts
 
-    attr_accessible :name
-    validates_presence_of :name
+    validates :name, presence: true
 
     def to_s
       name

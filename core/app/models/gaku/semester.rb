@@ -1,6 +1,6 @@
 module Gaku
   class Semester < ActiveRecord::Base
-    attr_accessible :starting, :ending
+    # attr_accessible :starting, :ending
 
     has_many :semester_courses
     has_many :courses, through: :semester_courses

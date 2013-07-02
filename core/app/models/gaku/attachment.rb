@@ -3,7 +3,7 @@ module Gaku
 
     include Trashable
 
-    attr_accessible :name, :description, :asset
+    # attr_accessible :name, :description, :asset
 
     belongs_to :attachable, polymorphic: true
 

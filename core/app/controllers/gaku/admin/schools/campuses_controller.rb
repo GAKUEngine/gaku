@@ -24,11 +24,22 @@ module Gaku
         end
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:campus).permit(campus_attr)]
+      end
+
       private
 
       def count
         @school = School.find(params[:school_id])
         @count = @school.campuses.count
+      end
+
+      def campus_attr
+        %i(name school_id is_master)
       end
 
     end

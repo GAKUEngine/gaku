@@ -6,7 +6,7 @@ module Gaku
     has_many :course_group_enrollments
     has_many :courses, through: :course_group_enrollments
 
-    attr_accessible :name
+    # attr_accessible :name
 
     validates :name, presence: true
 

@@ -3,7 +3,7 @@ module Gaku
     has_many :enrollments, class_name: Gaku::ExtracurricularActivityEnrollment
     has_many :students, through: :enrollments
 
-    attr_accessible :name
+    # attr_accessible :name
 
     validates :name, presence: true
 

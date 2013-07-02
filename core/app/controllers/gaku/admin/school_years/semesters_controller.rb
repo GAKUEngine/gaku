@@ -11,10 +11,21 @@ module Gaku
       respond_to :js, :html
       before_filter :count, only: [:create, :destroy, :index]
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:semester).permit(semester_attr)]
+      end
+
       private
 
       def count
         @count = Semester.count
+      end
+
+      def semester_attr
+        %i(starting ending)
       end
 
     end

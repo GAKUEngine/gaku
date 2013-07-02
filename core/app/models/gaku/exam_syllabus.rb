@@ -1,7 +1,7 @@
 module Gaku
   class ExamSyllabus < ActiveRecord::Base
 
-    attr_accessible :exam_id
+    # attr_accessible :exam_id
 
     belongs_to :syllabus, counter_cache: :exams_count
     belongs_to :exam

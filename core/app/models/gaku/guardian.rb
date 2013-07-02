@@ -7,7 +7,7 @@ module Gaku
     has_many :student_guardians, dependent: :destroy
     has_many :students, through: :student_guardians
 
-    attr_accessible :relationship
+    # attr_accessible :relationship
 
     after_create  :reset_student_count
     after_destroy :reset_student_count

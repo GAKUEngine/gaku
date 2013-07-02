@@ -10,7 +10,5 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
-    attr_accessible :name, :class_group_enrollment_id,
-                    :extracurricular_activity_enrollment_id
   end
 end

@@ -18,12 +18,12 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'rails', '4.0.0.rc1'
+  s.add_dependency 'rails', '4.0.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 1.0.1'
-  s.add_dependency 'protected_attributes'
+  #s.add_dependency 'protected_attributes'
 
-  s.add_dependency 'slim', '~> 1.3.8'
+  s.add_dependency 'slim', '~> 2.0.0'
   #s.add_dependency 'deface'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'

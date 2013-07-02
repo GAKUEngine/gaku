@@ -18,9 +18,20 @@ module Gaku
             @grading_method_set.update_items_positions(id, index)
           end
           render :nothing => true
-      end
+        end
+
+        protected
+
+        def resource_params
+          return [] if request.get?
+          [params.require(:grading_method_set_item).permit(grading_method_set_item_attr)]
+        end
 
         private
+
+        def grading_method_set_item_attr
+          %i(position grading_method_id grading_method_set_id)
+        end
 
         def load_data
           @grading_methods = GradingMethod.all.collect { |s| [s.name, s.id] }

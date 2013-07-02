@@ -7,8 +7,6 @@ module Gaku
 
     translates :name
 
-    attr_accessible :name
-
     def to_s
       name
     end

@@ -9,12 +9,22 @@ module Gaku
 
       before_filter :count, only: [:create, :destroy, :index]
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:school_year).permit(school_year_attr)]
+      end
+
       private
 
       def count
         @count = SchoolYear.count
       end
 
+      def school_year_attr
+        %i(starting ending)
+      end
 
     end
   end

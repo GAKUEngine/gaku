@@ -2,7 +2,7 @@ module Gaku
   class StudentVersion < Version
     self.table_name = :gaku_student_versions
 
-    attr_accessible :human_changes
+    # attr_accessible :human_changes
     serialize :human_changes
 
     before_save :set_human_changes

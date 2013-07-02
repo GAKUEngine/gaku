@@ -3,7 +3,7 @@ module Gaku
     belongs_to :program
     belongs_to :level
 
-    attr_accessible :program_id, :level_id
+    # attr_accessible :program_id, :level_id
 
     validates_presence_of :level_id
 

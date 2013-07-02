@@ -8,7 +8,7 @@ module Gaku
     belongs_to :admission_phase_state
     has_many :exam_scores
 
-    attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
+    # attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
 
     default_scope where(:is_deleted => false)
     scope :deleted, where(:is_deleted => true)

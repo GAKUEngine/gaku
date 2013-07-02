@@ -27,7 +27,7 @@ module Gaku
 
     accepts_nested_attributes_for :enrollments
 
-    attr_accessible :code, :class_group_id, :syllabus_id
+    # attr_accessible :code, :class_group_id, :syllabus_id
 
     validates_presence_of :code
 

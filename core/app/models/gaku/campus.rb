@@ -6,7 +6,7 @@ module Gaku
     belongs_to :school
     has_one :address, as: :addressable
 
-    attr_accessible :name, :school_id, :is_master
+    # attr_accessible :name, :school_id, :is_master
 
     validates_presence_of :name
 

@@ -34,6 +34,13 @@ module Gaku
         end
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:school).permit(school_attr)]
+      end
+
       private
 
       def master_school
@@ -42,6 +49,10 @@ module Gaku
 
       def count
         @count = School.count
+      end
+
+      def school_attr
+        [:name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, { levels_attributes: [ :name, :'_destroy', :id ] } ]
       end
 
     end

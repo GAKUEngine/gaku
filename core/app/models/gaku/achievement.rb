@@ -7,9 +7,6 @@ module Gaku
 
     has_attached_file :badge
 
-    attr_accessible :name, :description, :authority, :badge,
-                    :external_school_record_id
-
     validates :name, presence: true
 
     def to_s

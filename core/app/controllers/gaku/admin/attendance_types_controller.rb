@@ -14,11 +14,23 @@ module Gaku
         end
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:attendance_type).permit(attendance_type_attr)]
+      end
+
       private
 
       def count
         @count = AttendanceType.count
       end
+
+      def attendance_type_attr
+        %i(name color_code counted_absent disable_credit credit_rate auto_credit)
+      end
+
     end
   end
 end

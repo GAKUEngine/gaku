@@ -11,9 +11,9 @@ module Gaku
 
     attr_accessor :login
 
-    attr_accessible :login, :username, :email,
-                    :password, :password_confirmation,
-                    :remember_me, :locale, :role_ids
+    # attr_accessible :login, :username, :email,
+    #                 :password, :password_confirmation,
+    #                 :remember_me, :locale, :role_ids
 
     before_create :default_language
 

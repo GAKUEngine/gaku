@@ -12,7 +12,7 @@ module Gaku
 
     validates_presence_of :course_id
 
-    attr_accessible :student_id, :course_id
+    # attr_accessible :student_id, :course_id
 
   end
 end

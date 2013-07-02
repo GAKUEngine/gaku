@@ -10,8 +10,8 @@ module Gaku
                             joined_resource_id: :joined_resource_id
                           }
 
-    attr_accessible :data, :details, :contact_type_id,
-                    :is_primary, :is_emergency
+    # attr_accessible :data, :details, :contact_type_id,
+    #                 :is_primary, :is_emergency
 
     validates_presence_of :data, :contact_type_id
 

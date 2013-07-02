@@ -21,7 +21,18 @@ module Gaku
         respond_with(@campus.address)
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:address).permit(address_attr)]
+      end
+
       private
+
+      def address_attr
+        %i(title address1 address2 city zipcode state state_id country country_id is_deleted is_primary past)
+      end
 
       def before_index
         @address = @campus.address

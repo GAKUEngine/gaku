@@ -12,7 +12,7 @@ gem 'rails-i18n'
 
 gem 'rails4_upgrade'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-gem 'protected_attributes'
+#gem 'protected_attributes'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'

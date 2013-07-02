@@ -13,7 +13,18 @@ module Gaku
       before_filter :clean_password,  only: :update
       before_filter :load_data
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:user).permit(user_attr)]
+      end
+
       private
+
+      def user_attr
+        [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] }]
+      end
 
       def load_data
         @roles = Role.all
@@ -21,7 +32,7 @@ module Gaku
 
       def save_user_roles
         @user = User.find(params[:id]) if params[:id]
-        @user.roles.delete_all
+        @user.roles.destroy_all
         params[:user][:role] ||= {}
         Role.all.each do |role|
           if params[:user][:role_ids].include?(role.id.to_s)

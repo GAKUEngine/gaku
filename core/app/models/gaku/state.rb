@@ -4,7 +4,7 @@ module Gaku
 
     validates_presence_of :country, :name
 
-    attr_accessible :name, :name_ascii, :abbr, :code
+    # attr_accessible :name, :name_ascii, :abbr, :code
 
     def self.find_all_by_name_or_abbr(name_or_abbr)
       where('name = ? OR abbr = ?', name_or_abbr, name_or_abbr)

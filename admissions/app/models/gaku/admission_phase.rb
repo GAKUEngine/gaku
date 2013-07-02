@@ -6,7 +6,7 @@ module Gaku
   	has_many :admission_phase_states, :dependent => :destroy
     has_one  :exam
 
-    attr_accessible :name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes
+    # attr_accessible :name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes
 
     accepts_nested_attributes_for :admission_phase_states, :allow_destroy => true
 
@@ -24,7 +24,7 @@ module Gaku
     end
 
     def get_default_state
-      self.admission_phase_states.each do |state| 
+      self.admission_phase_states.each do |state|
         if state.is_default = true
           return state
         end

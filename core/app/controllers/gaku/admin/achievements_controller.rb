@@ -17,10 +17,19 @@ module Gaku
         update! { [:admin, :achievements ] }
       end
 
+      def resource_params
+        return [] if request.get?
+        [params.require(:achievement).permit(achievement_attr)]
+      end
+
       private
 
       def count
         @count = Achievement.count
+      end
+
+      def achievement_attr
+        %i(name description authority badge external_school_record)
       end
 
     end

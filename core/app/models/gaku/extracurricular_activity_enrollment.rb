@@ -4,7 +4,7 @@ module Gaku
     belongs_to :student
     has_many :roles
 
-    attr_accessible :extracurricular_activity_id, :student_id
+    # attr_accessible :extracurricular_activity_id, :student_id
 
     validates :student_id,
               uniqueness: {

@@ -11,7 +11,7 @@ module Gaku
     before_filter :load_data
 
     def create
-      @contact = @contactable.contacts.new(params[:contact])
+      @contact = @contactable.contacts.new(contact_params)
       create!
     end
 
@@ -38,7 +38,22 @@ module Gaku
       end
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:contact).permit(contact_attr)]
+    end
+
     private
+
+    def contact_params
+      params.require(:contact).permit(contact_attr)
+    end
+
+    def contact_attr
+      %i(data details contact_type_id is_primary is_emergency)
+    end
 
     def t_resource
       t(:'contact.singular')

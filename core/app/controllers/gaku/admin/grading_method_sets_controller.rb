@@ -22,11 +22,23 @@ module Gaku
         respond_with @grading_method_set
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:grading_method_set).permit(grading_method_set_attr)]
+      end
+
       private
 
       def count
         @count = GradingMethodSet.count
       end
+
+      def grading_method_set_attr
+        %i(display_deviation display_rank name is_primary rank_order)
+      end
+
     end
   end
 end

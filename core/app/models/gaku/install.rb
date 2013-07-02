@@ -4,7 +4,7 @@ module Gaku
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
 
-    attr_accessible :email, :password, :password_confirmation, :remember_me
+    # attr_accessible :email, :password, :password_confirmation, :remember_me
 
   end
 end

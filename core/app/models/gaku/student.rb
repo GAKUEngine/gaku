@@ -43,12 +43,12 @@ module Gaku
                             :is_deleted
                           ]
 
-    attr_accessible :admitted, :graduated,
-                    :class_groups, :class_group_ids, :class_groups_attributes,
-                    :guardians, :guardians_attributes,
-                    :student_id_number, :student_foreign_id_number,
-                    :scholarship_status_id, :enrollment_status_id,
-                    :commute_method_type_id
+    # attr_accessible :admitted, :graduated,
+    #                 :class_groups, :class_group_ids, :class_groups_attributes,
+    #                 :guardians, :guardians_attributes,
+    #                 :student_id_number, :student_foreign_id_number,
+    #                 :scholarship_status_id, :enrollment_status_id,
+    #                 :commute_method_type_id
 
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
