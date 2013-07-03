@@ -34,11 +34,12 @@ module Gaku
 
     def import_roster(file)
       if file.data_file.content_type == 'application/vnd.ms-excel' ||
-          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet'
+          file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet' ||
+          file.data_file.content_type == 'application/xls'
         Gaku::Core::Importers::Students::RosterWorker.perform_async(file.id)
         render text: "Importing Roster"
       else
-        redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
+        redirect_to importer_index_path, alert: '[' + file.data_file.content_type + '] ' + I18n.t('errors.messages.file_type_unsupported')
       end
     end
 

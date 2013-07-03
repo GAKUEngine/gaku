@@ -10,8 +10,9 @@ module Gaku
 
           def as_admin
             before(:each) do
-              @request.env["devise.mapping"] = ::Devise.mappings[:admin]
-              sign_in FactoryGirl.create(:admin) # Using factory girl as an example
+              @request.env['devise.mapping'] = ::Devise.mappings[:admin]
+              # Using factory girl as an example
+              sign_in FactoryGirl.create(:admin)
             end
           end
 
@@ -35,9 +36,9 @@ module Gaku
 
           def sign_in_as!(user)
             visit '/users/sign_in'
-            fill_in "user_email", :with => user.email
-            fill_in "user_password", :with => 'secret'
-            click_button "sign_in"
+            fill_in 'user_email', :with => user.email
+            fill_in 'user_password', :with => 'secret'
+            click_button 'sign_in'
           end
 
         end
