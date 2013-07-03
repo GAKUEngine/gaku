@@ -19,7 +19,3 @@ $ ->
 
       $(element).find('li').children('.thumbnail').each (index, li)->
         $(@).height maxHeight
-
-
-
-

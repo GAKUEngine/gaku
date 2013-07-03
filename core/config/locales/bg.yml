@@ -316,6 +316,7 @@ bg:
   enrollment_status:
     active: Активен
     add: Добави Статус на Записване
+    choose_enrollment_status: Избери Статус на Записване
     code: 
     edit: Редактирай Статус на Записване
     list: Списък Статуси на Записване
@@ -849,6 +850,7 @@ bg:
     show: 
     singular: 
   title: 
+  undefined: Неопределен
   user:
     add: 
     edit: 

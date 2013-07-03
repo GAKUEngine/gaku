@@ -4,8 +4,11 @@ describe "CourseEnrollment"  do
 
   as_admin
 
+  let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
+  let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
+  let(:enrollment_status) { create(:enrollment_status) }
   let(:course) { create(:course) }
-  let(:student1) { create(:student, :name => "John", :surname => "Doe") }
+  let(:student1) { create(:student, :name => "John", :surname => "Doe", :enrollment_status_id => enrollment_status.id) }
 
   before :all do
     set_resource "course-student"
@@ -14,6 +17,9 @@ describe "CourseEnrollment"  do
   context 'student', :js => true do
 
     before do
+      enrollment_status_applicant
+      enrollment_status_admitted
+      enrollment_status
       student1
       visit gaku.course_path(course)
     end
