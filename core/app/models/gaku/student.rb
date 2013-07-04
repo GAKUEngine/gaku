@@ -57,8 +57,7 @@ module Gaku
 
     def make_enrolled
       enrollment_status = Gaku::EnrollmentStatus.where( code: "enrolled",
-                                                        is_active: true,
-                                                        immutable: true).first_or_create!.id
+                            is_active: true, immutable: true).first_or_create!.id
       update_column(:enrollment_status_id, enrollment_status)
       save
     end
@@ -93,5 +92,15 @@ module Gaku
       end
     end
 
+    #returns full name complete with formatting [if any]
+    def formatted_name
+      # TODO
+    end
+
+    # return full name without formatting but in order,
+    # with spaces between portions
+    def full_name
+      # TODO
+    end
   end
 end

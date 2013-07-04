@@ -5,7 +5,6 @@ module Gaku::Core::Importers::Students
     include Gaku::Core::Importers::Logger
     include Gaku::Core::Importers::Students::StudentIdentity
 
-    
     def initialize(row, info, logger = nil)
       @logger = logger
       I18n.locale = info['locale'].to_sym.presence || I18n.default_locale

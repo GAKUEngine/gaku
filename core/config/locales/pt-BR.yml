@@ -50,7 +50,7 @@ pt-BR:
     new: Nova Atribuição
     plural: Atribuições
     results: Resultados da Atribuição
-    score: 
+    score: Pontuação
     singular: Atribuição
     view: Exibir Atribuições
   assignments:
@@ -487,7 +487,6 @@ pt-BR:
   guardian:
     add: 
     edit: 
-    guardians: 
     list: 
     name: 
     new: 
@@ -815,6 +814,7 @@ pt-BR:
     save: 
   student_foreign_id_number: 
   student_id_number: 
+  student_name: 
   student_specialty:
     edit: 
     index: 
