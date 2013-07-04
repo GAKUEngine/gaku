@@ -63,54 +63,51 @@ module Gaku::Core::Importers::Students
       #TODO find existing guardian
       log "Registering new Guardian '#{guardian_surname} #{guardian_name}' " +
             "to Student [#{student.student_id_number}] #{student.formatted_name}."
-      guardian.new 
+      guardian = student.guardians.new #guardian.new
+      guardian.name = guardian_name
+      guardian.surname = guardian_surname
 
-       # if row[idx["guardian"]["name_reading"]]
-       #   guardian_name_reading_parts = row[idx["guardian"]["name_reading"]].to_s().split(" ")
-       #   guardian_surname_reading = guardian_name_reading_parts.first
-       #   guardian_name_reading = guardian_name_reading_parts.last
-       # end
+      guardian.save
 
-       # guardian = student.guardians.create!(:surname => guardian_surname,
-       #                                     :name => guardian_name,
-       #                                     :surname_reading => guardian_surname_reading,
-       #                                     :name_reading => guardian_name_reading)
+      guardian.name_reading = row[:name_reading]
+      guardian.surname_reading = row[:surname_reading]
 
-       # if guardian
-       #   logger.info "生徒「#{student.surname} #{student.name}」に保護者「#{guardian.surname} #{guardian.name}」を登録しました。"
-       # end
+      add_address(row, guardian)
+      add_contacts(row, guardian)
 
-       # if row[idx["guardian"]["city"]] and row[idx["guardian"]["address1"]]
+      guardian.save
+    end
 
-       #   state = State.where(:country_numcode => 392, :code => row[idx["guardian"]["state"]].to_i).first
-
-
-
-       #   guardian_address = guardian.addresses.create!(:zipcode => row[idx["guardian"]["zipcode"]],
-       #                           :country_id => idx["country"]["country"]["id"],
-       #                           :state => state,
-       #                           :state_id => state.id,
-       #                           :state_name => state.name,
-       #                           :city => row[idx["guardian"]["city"]],
-       #                           :address1 => row[idx["guardian"]["address1"]],
-       #                           :address2 => row[idx["guardian"]["address2"]])
-       #   if guardian_address
-       #     logger.info "生徒「#{student.surname} #{student.name}」の保護者「#{guardian.surname} #{guardian.name}」に住所を登録しました。"
-       #   end
-
+    def add_address(row, guardian)
+      if row[:'address.address1']
+        state = nil
+        unless (row[:'address.state'].nil? || row[:'address.state'] == '')
+          state = Gaku::State.where(name: row[:'address.state']).first
+          if state == nil
+            log 'State: "' + row[:'address.state'] + '" not found. Please register and retry import.'
+            return
+          end
         end
 
-       # if row[idx["guardian"]["phone"]]
-       # contact = Gaku::Contact.new()
-       # contact.contact_type_id = idx["contact_type"]["contact_type"]["id"]
-       # contact.is_primary = true
-       # contact.is_emergency = true
-       # contact.data = row[idx["guardian"]["phone"]]
-       # contact.save
+        country = Gaku::Country.where(name: '日本').first
+        unless Gaku::Country.where(name: row[:'address.country']).first.nil?
+          country = Gaku::Country.where(name: row[:'address.country']).first
+        end
 
-       # guardian.contacts << contact
-       # end
+        guardian.addresses.create!(zipcode: row[:'address.zipcode'],
+          country_id: country.id, state: state, city: row[:'city'],
+          :address1 => row[:'address.address1'], address2: row[:'address.address2'])
       end
+    end
+
+    def add_contacts(row, guardian)
+      phone = row[:phone]
+      guardian.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
+        is_emergency: true, data: phone) unless (phone.nil? || phone == '')
+
+      email = row[:email]
+      guardian.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
+        is_emergency: true, data: email) unless (email.nil? || email == '')
     end
   end
 end
