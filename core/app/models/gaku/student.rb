@@ -97,9 +97,17 @@ module Gaku
       # TODO
     end
 
+    def formatted_name_reading
+      # TODO
+    end
+
     # return full name without formatting but in order,
     # with spaces between portions
     def full_name
+      # TODO
+    end
+
+    def full_name_reading
       # TODO
     end
   end
