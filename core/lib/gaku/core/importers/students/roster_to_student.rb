@@ -3,12 +3,14 @@ require 'GenSheet'
 module Gaku::Core::Importers::Students
   class RosterToStudent
     include Gaku::Core::Importers::Logger
+    include Gaku::Core::Importers::Students::StudentIdentity
+
     
     def initialize(row, info, logger = nil)
       @logger = logger
       I18n.locale = info['locale'].to_sym.presence || I18n.default_locale
 
-      student = Gaku::Student.new()
+      student = find_or_create_student(row)
       reg_id(row, student)
       reg_name(row, student)
       reg_sex(row, student)
@@ -20,6 +22,19 @@ module Gaku::Core::Importers::Students
     end
 
     private
+
+    def find_or_create_student(row)
+      student = find_student_by_student_ids(row[:student_id_number], row[:student_foreign_id_number])
+
+      unless student.nil?
+        log "Updating student record with Student ID[#{
+          student.student_id_number}]."
+        return student
+      end
+
+      log "Registering new student from importer."
+      Gaku::Student.new
+    end
 
     def reg_id(row, student)
       student.student_id_number = row[:student_id_number].to_s
