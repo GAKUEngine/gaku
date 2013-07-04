@@ -1,6 +1,13 @@
+- unless address.campus_address?
+  = render partial: 'gaku/addresses/primary_field', locals: { address: address, target: target }
 td= address.title
 td= address.country
 td= address.zipcode
 td= address.city
 td= address.address1
 td= address.address2
+-unless address.campus_address?
+  - if can_edit?
+    td
+      = ajax_link_to_edit [:edit, target].flatten
+      = ajax_soft_delete [:soft_delete, target].flatten

@@ -316,6 +316,7 @@ en:
   enrollment_status:
     active: Active
     add: Add Enrollment Status
+    choose_enrollment_status: Choose Enrollment Status
     code: Code
     edit: Edit Enrollment Status
     list: Enrollment Statuses list
@@ -851,6 +852,7 @@ en:
     show: Show Teacher
     singular: Instructor
   title: Title
+  undefined: Undefined
   user:
     add: Add User
     edit: Edit User

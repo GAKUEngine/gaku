@@ -101,10 +101,14 @@ module Gaku
         @admission = Admission.new
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
+        @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
+        @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
         @search = Student.search(params[:q])
-        @students = @search.result.page(params[:page]).per(Preset.students_per_page)
+        @students = @search.result.where(enrollment_status_id: @enrollment_status_applicant_id).page(params[:page]).per(Preset.students_per_page)
         @admissions = Admission.all
         @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
+        @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+        @enrollment_statuses << [t('undefined'), nil]
         query_params = {  :admission_period_id => params[:admission_period_id], 
                           :admission_method_id => params[:admission_method_id] }
         @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }

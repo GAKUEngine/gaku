@@ -65,6 +65,10 @@ module Gaku
       attributes.except(except_fields).all? { |_, v| v.nil? }
     end
 
+    def campus_address?
+      addressable_type == 'Gaku::Campus'
+    end
+
     private
 
     def addresses
