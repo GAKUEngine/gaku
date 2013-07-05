@@ -23,7 +23,18 @@ module Gaku
       new!
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:exam).permit!]
+    end
+
     private
+
+    def exam_attr
+      [:name, :description, :adjustments, { exam_portions_attributes: [] }]
+    end
 
     def load_data
       @grading_methods = GradingMethod.all.collect { |s| [s.name, s.id] }

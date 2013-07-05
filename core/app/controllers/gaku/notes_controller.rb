@@ -13,11 +13,31 @@ module Gaku
     end
 
     def create
-      @note = @notable.notes.new(params[:note])
+      @note = @notable.notes.new(note_params)
       create!
     end
 
     protected
+
+    # def begin_of_association_chain
+    #   notable
+    #   @notable.notes
+    # end
+
+    def note_params
+      params.require(:note).permit(note_attr)
+    end
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:note).permit(note_attr)]
+    end
+
+    private
+
+    def note_attr
+      %i(title content)
+    end
 
     def collection
       @notes = @notable.notes

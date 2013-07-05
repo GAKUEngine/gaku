@@ -10,7 +10,18 @@ module Gaku
     before_filter :count, only: [:create, :destroy]
     before_filter :load_data, only: [:new, :edit]
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:semester_class_group).permit(semester_class_group_attr)]
+    end
+
     private
+
+    def semester_class_group_attr
+      %i(semester_id)
+    end
 
     def load_data
       @semesters = Semester.all.collect { |s| [s.to_s, s.id] }

@@ -39,7 +39,16 @@ module Gaku
       @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:teacher).permit(teacher_attr)]
+    end
+
     private
+
+    def teacher_attr
+      %i(name surname name_reading surname_reading birth_date gender)
+    end
 
     def count
       @count = Teacher.count

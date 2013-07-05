@@ -35,6 +35,17 @@ module Gaku
       end
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:course_group).permit(course_group_attr)]
+    end
+
+    private
+
+    def course_group_attr
+      %i(name code)
+    end
+
     private
 
     def t_resource

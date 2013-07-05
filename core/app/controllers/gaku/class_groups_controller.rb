@@ -19,29 +19,40 @@ module Gaku
       @class_groups_without_semester = ClassGroup.without_semester
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:class_group).permit(class_group_attr)]
+    end
 
     private
 
-      def load_data
-        @courses = Course.includes(:syllabus).collect { |c| [c, c.id] }
-      end
+    def class_group_attr
+      %i(name grade homeroom)
+    end
 
-      def load_before_show
-        @notable = ClassGroup.find(params[:id])
-        @notable_resource = get_resource_name(@notable)
-        @class_group_course_enrollment = ClassGroupCourseEnrollment.new
-      end
+    def load_data
+      @courses = Course.includes(:syllabus).collect { |c| [c, c.id] }
+    end
 
-      def sort_column
-        ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
-      end
+    def load_before_show
+      @notable = ClassGroup.find(params[:id])
+      @notable_resource = get_resource_name(@notable)
+      @class_group_course_enrollment = ClassGroupCourseEnrollment.new
+    end
 
-      def sort_direction
-        %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-      end
+    def sort_column
+      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
 
-      def count
-        @count = ClassGroup.count
-      end
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+
+    def count
+      @count = ClassGroup.count
+    end
+
   end
 end

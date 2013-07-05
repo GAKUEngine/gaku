@@ -9,7 +9,18 @@ module Gaku
     inherit_resources
     respond_to :js, :html
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:syllabus).permit(syllabus_attr)]
+    end
+
     private
+
+    def syllabus_attr
+      %i(name code credits description)
+    end
 
     def syllabus
       @syllabus = Syllabus.find(params[:id])

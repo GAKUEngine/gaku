@@ -2,3 +2,4 @@
 .row-fluid
   .span12
     = f.text_field :relationship, :label => t(:'guardian.relationship')
+    /= f.hidden_field :student_id, value: @student.id

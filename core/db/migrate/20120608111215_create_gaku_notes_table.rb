@@ -4,10 +4,10 @@ class CreateGakuNotesTable < ActiveRecord::Migration
       t.string   :title
       t.text     :content
 
-      t.belongs_to :notable, polymorphic: true
+      t.references :notable, polymorphic: true
 
       t.timestamps
-    end 
+    end
     add_index :gaku_notes, [:notable_id, :notable_type]
   end
 end

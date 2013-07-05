@@ -124,7 +124,16 @@ module Gaku
                         .find(params[:id])
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:student).permit(student_attr)]
+    end
+
     private
+
+    def student_attr
+      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_id admitted graduated)
+    end
 
     def includes
       [:addresses, :class_groups, :class_group_enrollments]
