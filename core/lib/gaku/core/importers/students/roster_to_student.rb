@@ -32,12 +32,14 @@ module Gaku::Core::Importers::Students
       end
 
       log "Registering new student from importer."
-      Gaku::Student.new
+      student = Gaku::Student.new
+      student.enrollment_status = Gaku::EnrollmentStatus.find_by_code('enrolled')
+      return student
     end
 
     def reg_id(row, student)
-      student.student_id_number = row[:student_id_number].to_s
-      student.student_foreign_id_number = row[:student_foreign_id_number].to_s
+      student.student_id_number = normalize_id_num(row[:student_id_number])
+      student.student_foreign_id_number = normalize_id_num(row[:student_foreign_id_number])
     end
 
     def reg_name(row, student)
