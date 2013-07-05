@@ -4,6 +4,7 @@ module Gaku::Core::Importers::Students
   class RosterToStudent
     include Gaku::Core::Importers::Logger
     include Gaku::Core::Importers::Students::StudentIdentity
+    include Gaku::Core::Importers::Students::PersonalInformation
 
     def initialize(row, info, logger = nil)
       @logger = logger
@@ -16,7 +17,7 @@ module Gaku::Core::Importers::Students
       reg_birthdate(row, student)
       student.save()
 
-      add_contact(row, student)
+      add_contacts(row, student)
       add_address(row, student)
     end
 
@@ -60,70 +61,6 @@ module Gaku::Core::Importers::Students
         student.name_reading = name_reading_parts.last
       else
         log "Could not read student name for: " + row
-      end
-    end
-
-    def reg_sex(row, student)
-      gender = nil
-      if row[:sex] == I18n.t('gender.female')
-        gender = 0
-      elsif row[:sex] == I18n.t('gender.male')
-        gender = 1
-      end
-      student.gender = gender
-    end
-
-    def reg_birthdate(row, student)
-      #birth_date = Date.strptime(row['birth_date']).to_s
-      #begin
-      #  birth_date = Date.strptime(row['birth_date'].to_s, "%Y/%m/%d")
-      #rescue
-      #  birth_date = Date.civil(1899, 12, 31) + row['birth_date'].to_i.days - 1.day
-      #end
-      student.birth_date = row[:birth_date]
-    end
-
-    def add_contact(row, student)
-      phone = row[:phone]
-      unless student.contacts.where(contact_type_id: Gaku::ContactType.where(
-        name: 'Phone').first.id, data: phone).exists?
-        student.contacts.create!(contact_type_id: 
-          Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
-          is_emergency: true, data: phone) unless (phone.nil? || phone == '')
-      end
-
-      email = row[:email]
-      unless student.contacts.where(contact_type_id: Gaku::ContactType.where(
-        name: 'Email').first.id, data: email).exists?
-        student.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
-          is_emergency: true, data: email) unless (email.nil? || email == '')
-      end
-    end
-
-    def add_address(row, student)
-      if row[:'address.address1']
-        state = nil
-        unless (row[:'address.state'].nil? || row[:'address.state'] == '')
-          state = Gaku::State.where(name: row[:'address.state']).first
-          if state == nil
-            log 'State: "' + row[:'address.state'] + '" not found. Please register and retry import.'
-            return
-          end
-        end
-
-        country = Gaku::Country.where(name: '日本').first
-        unless Gaku::Country.where(name: row[:'address.country']).first.nil?
-          country = Gaku::Country.where(name: row[:'address.country']).first
-        end
-
-        unless student.addresses.where(zipcode: row[:'address.zipcode'],
-          country_id: country.id, state_id: state.id, city: row[:'city'],
-          address1: row[:'address.address1'], address2: row[:'address.address2']).exists?
-
-          student_address = student.addresses.create!(zipcode: row[:'address.zipcode'],
-            country_id: country.id, state: state, city: row[:'city'],
-            address1: row[:'address.address1'], address2: row[:'address.address2'])
-        end
       end
     end
   end

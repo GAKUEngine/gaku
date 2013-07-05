@@ -5,6 +5,7 @@ module Gaku::Core::Importers::Students
     include Gaku::Core::Importers::Logger
     include Gaku::Core::Importers::KeyMapper
     include Gaku::Core::Importers::Students::StudentIdentity
+    include Gaku::Core::Importers::Students::PersonalInformation
 
     GUARDIAN_KEY_SYMS = [:student_id_number, :student_foreign_id_number,
       :student_name, :'guardian.relationship', :full_name, :'guardian.surname',
@@ -72,45 +73,16 @@ module Gaku::Core::Importers::Students
 
       guardian.name_reading = row[:name_reading]
       guardian.surname_reading = row[:surname_reading]
+      guardian.relationship = row[:'guardian.relationship']
 
       add_address(row, guardian)
       add_contacts(row, guardian)
+      reg_sex(row, guardian)
+      reg_birthdate(row, guardian)
 
       guardian.save
 
       student.guardians << guardian
-    end
-
-    def add_address(row, guardian)
-      if row[:'address.address1']
-        state = nil
-        unless (row[:'address.state'].nil? || row[:'address.state'] == '')
-          state = Gaku::State.where(name: row[:'address.state']).first
-          if state == nil
-            log 'State: "' + row[:'address.state'] + '" not found. Please register and retry import.'
-            return
-          end
-        end
-
-        country = Gaku::Country.where(name: '日本').first
-        unless Gaku::Country.where(name: row[:'address.country']).first.nil?
-          country = Gaku::Country.where(name: row[:'address.country']).first
-        end
-
-        guardian.addresses.create!(zipcode: row[:'address.zipcode'],
-          country_id: country.id, state: state, city: row[:'city'],
-          :address1 => row[:'address.address1'], address2: row[:'address.address2'])
-      end
-    end
-
-    def add_contacts(row, guardian)
-      phone = row[:phone]
-      guardian.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
-        is_emergency: true, data: phone) unless (phone.nil? || phone == '')
-
-      email = row[:email]
-      guardian.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
-        is_emergency: true, data: email) unless (email.nil? || email == '')
     end
   end
 end
