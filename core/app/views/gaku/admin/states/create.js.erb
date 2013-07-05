@@ -1,0 +1,7 @@
+$('#admin-<%= @state.country_iso.downcase %>-states-index tbody').append('<%= render_js_partial("state", {:state => @state}) %>');
+$('#new-admin-state').slide();
+$('#new-admin-state-link').show();
+
+$('.admin-states-count').html('<%= print_count(@count+1, t_state_list) %>');
+
+showNotice("<%= render_flash %>");

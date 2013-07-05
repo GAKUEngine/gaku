@@ -259,6 +259,9 @@ Gaku::Core::Engine.routes.draw do
         post :sort, :on => :collection
       end
     end
+    resources :states do
+      post :country_states, on: :collection
+    end
 
     resources :school_years do
       resources :semesters, :controller => 'school_years/semesters'

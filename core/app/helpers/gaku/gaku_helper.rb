@@ -215,6 +215,10 @@ module Gaku
       content_tag :h4, text
     end
 
+    def country_preset
+      @country_preset ||= Gaku::Preset.get('country')
+    end
+
     def student_names(student, options = {})
       @names_preset ||= Gaku::Preset.get(:names)
       reading = options[:reading]

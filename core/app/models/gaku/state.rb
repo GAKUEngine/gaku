@@ -1,9 +1,11 @@
 module Gaku
   class State < ActiveRecord::Base
 
+    has_many :addresses
+
     belongs_to :country, foreign_key: :country_iso, primary_key: :iso
 
-    validates_presence_of :name, :country
+    validates_presence_of :name, :country_iso
 
     attr_accessible :name, :name_ascii, :abbr, :code, :country_iso
 
