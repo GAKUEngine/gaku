@@ -45,7 +45,7 @@ module Gaku::Core::Importers::Students
     end
 
     def add_guardian(row, student)
-      if !row[:'guardian.name'] == nil && row[:'guardian.name'] != '' # name filled
+      if row[:'guardian.name'] != nil && row[:'guardian.name'] != '' # name filled
         guardian_name = row[:'guardian.name']
         log "Guardian with name: " + guardian_name 
         if row[:'guardian.surname'] == nil || row[:'guardian.suranme'] == ''
