@@ -492,7 +492,6 @@ en:
   guardian:
     add: Add Guardian
     edit: Edit guardian
-    guardians: Guardians
     list: Guardians list
     name: Guardian Name
     new: New Guardian
@@ -820,6 +819,7 @@ en:
     save: Save Student Achievement
   student_foreign_id_number: Foreign ID
   student_id_number: Student ID
+  student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index

@@ -57,8 +57,7 @@ module Gaku
 
     def make_enrolled
       enrollment_status = Gaku::EnrollmentStatus.where( code: "enrolled",
-                                                        is_active: true,
-                                                        immutable: true).first_or_create!.id
+                            is_active: true, immutable: true).first_or_create!.id
       update_column(:enrollment_status_id, enrollment_status)
       save
     end
@@ -92,6 +91,61 @@ module Gaku
         false
       end
     end
+
+    #returns full name complete with formatting [if any]
+    def formatted_name
+      student_names
+    end
+
+    def formatted_name_reading
+      student_names reading: true
+    end
+
+    # return full name without formatting but in order,
+    # with spaces between portions
+    def full_name
+      student_names without_formating: true
+    end
+
+    def full_name_reading
+      student_names without_formating: true, reading: true
+    end
+
+    def student_names(options = {})
+      @names_preset ||= Gaku::Preset.get(:names)
+      preset = @names_preset
+
+      if options[:without_formating]
+        preset_without_format = String.new
+        preset.gsub(/%(\w+)/) {|n|  preset_without_format << n + ' '}
+        preset = preset_without_format.strip
+      end
+
+      if options[:reading] && name_reading.blank? && surname_reading.blank? && middle_name_reading.blank?
+        return ''
+      end
+
+      reading = options[:reading]
+      if preset.blank?
+        return reading ? self.phonetic_reading : self.to_s
+      end
+      result = preset.gsub(/%(\w+)/) do |name|
+        case name
+        when '%first' then proper_name(:name, reading)
+        when '%middle' then proper_name(:middle_name, reading)
+        when '%last' then proper_name(:surname, reading)
+        end
+      end
+      return result.gsub(/[^[[:word:]]\s]/, '').gsub(/\s+/, " ").strip if middle_name.blank?
+      result.gsub(/\s+/, " ").strip
+    end
+
+  private
+
+    def proper_name(attribute, reading)
+      reading ? self.send(attribute.to_s + '_reading') : self.send(attribute)
+    end
+
 
   end
 end

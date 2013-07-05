@@ -490,7 +490,6 @@ bg:
   guardian:
     add: 
     edit: 
-    guardians: 
     list: 
     name: 
     new: 
@@ -818,6 +817,7 @@ bg:
     save: 
   student_foreign_id_number: 
   student_id_number: 
+  student_name: 
   student_specialty:
     edit: 
     index: 

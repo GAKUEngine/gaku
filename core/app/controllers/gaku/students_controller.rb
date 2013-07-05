@@ -27,7 +27,9 @@ module Gaku
       super do |format|
 
         format.html do
-          @students = Student.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
+          # TODO Fix the line below
+          #@students = Student.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
+          @students = Student.page(params[:page]).per(Preset.students_per_page)
         end
 
         format.pdf do

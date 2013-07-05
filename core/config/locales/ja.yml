@@ -492,7 +492,6 @@ ja:
   guardian:
     add: 保護者を追加
     edit: 保護者を編集
-    guardians: 保護者
     list: 保護者一覧
     name: 保護者氏名
     new: 保護者を登録
@@ -820,6 +819,7 @@ ja:
     save: 生徒の実績を保存
   student_foreign_id_number: 外部生徒番号
   student_id_number: 生徒番号
+  student_name: 生徒の名前
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
