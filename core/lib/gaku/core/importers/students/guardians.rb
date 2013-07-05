@@ -47,6 +47,7 @@ module Gaku::Core::Importers::Students
     def add_guardian(row, student)
       if !row[:'guardian.name'] == nil && row[:'guardian.name'] != '' # name filled
         guardian_name = row[:'guardian.name']
+        log "Guardian with name: " + guardian_name 
         if row[:'guardian.surname'] == nil || row[:'guardian.suranme'] == ''
           guardian_surname = student.surname
         else
@@ -76,6 +77,8 @@ module Gaku::Core::Importers::Students
       add_contacts(row, guardian)
 
       guardian.save
+
+      student.guardians << guardian
     end
 
     def add_address(row, guardian)
