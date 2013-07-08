@@ -16,7 +16,7 @@ statuses = [
 	['held_back',           'Held Back',	            '原級留置',			true	],
   ['inactive',            'Inactive',					      '休学',					false	],
 	['graduated',           'Graduated',					      '卒業',					false	],
-	['re_enrolled',         'Re-Enrolled', 			      '復学', 				false	],
+	['re_enrolled',         'Re-Enrolled', 			      '復学', 				true	],
 	['suspended',           'Suspended', 				      '退学', 				false	],
 	['expelled',            'Expelled',					      '停学', 				false	],
 	['dropped_out',         'Dropped Out',				      '自主退学', 		false	],
