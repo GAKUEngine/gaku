@@ -50,7 +50,7 @@ describe Gaku::Student do
     it { should allow_mass_assignment_of :student_id_number }
     it { should allow_mass_assignment_of :student_foreign_id_number }
     it { should allow_mass_assignment_of :scholarship_status_id }
-    it { should allow_mass_assignment_of :enrollment_status_id }
+    it { should allow_mass_assignment_of :enrollment_status_code }
   end
 
   context 'counter_cache' do
