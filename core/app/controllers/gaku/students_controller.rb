@@ -22,14 +22,14 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       #index!
-      @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
-      @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
+      # @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
+      # @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
+      active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.pluck(:code)
+
       super do |format|
 
         format.html do
-          # TODO Fix the line below
-          #@students = Student.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
-          @students = Student.page(params[:page]).per(Preset.students_per_page)
+          @students = Student.where(enrollment_status_code: active_enrollment_statuses_codes).page(params[:page]).per(Preset.students_per_page)
         end
 
         format.pdf do
@@ -132,7 +132,7 @@ module Gaku
     def load_data
       @achievements = Achievement.all.collect { |a| [a.name, a.id] }
       @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
-      @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+      @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.code] }
       @enrollment_statuses << [t('undefined'), nil]
       @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
       @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}

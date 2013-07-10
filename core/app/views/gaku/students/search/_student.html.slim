@@ -7,18 +7,18 @@
                                             tag_name: t(:given_name),
                                             class_name: 'student',
                                             column: 'name'})
-  = autocomplete_date_field(f, options = {  object_name: 'birth_date_gteq', 
+  = autocomplete_date_field(f, options = {  object_name: 'birth_date_gteq',
                                             tag_name: t(:birth_date_from)})
-  = autocomplete_date_field(f, options = {  object_name: 'birth_date_lteq', 
+  = autocomplete_date_field(f, options = {  object_name: 'birth_date_lteq',
                                           tag_name: t(:birth_date_to)})
 - if params[:controller] == "admissions"
   .span3
     = f.label :school_id, t("admissions.candidates.junior_high_school")
     = select_tag :name, nil, :class => "span12"
 .row-fluid
-  = autocomplete_select(f, options = {  object_name: 'enrollment_status_id_eq', 
-                                        tag_name: t('enrollment_status.singular'), 
-                                        collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'), 
+  = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
+                                        tag_name: t('enrollment_status.singular'),
+                                        collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
                                         selected: ((params[:controller] == 'gaku/admin/admissions') ? @enrollment_status_applicant_id : @enrollment_status_enrolled_id),
-                                        prompt_position: "bottomRight:5", 
+                                        prompt_position: "bottomRight:5",
                                         html_options: {class: "validate[required] span12", id: "enrollment_status_dropdown"}})
