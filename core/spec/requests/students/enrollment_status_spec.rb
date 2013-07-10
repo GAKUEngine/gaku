@@ -6,10 +6,12 @@ describe 'Student Enrollment Status' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_enrollment_status) }
-  let!(:enrollment_status) { create(:enrollment_status) }
-  let!(:enrollment_status2) { create(:enrollment_status, :name => "New Enrollment") }
+  let!(:enrollment_status) { create(:enrollment_status, :code => 'enrolled') }
+  let!(:enrollment_status2) { create(:enrollment_status, name: "New Enrollment", code: 'new_enrolled') }
   let!(:el) { '#enrollment-status' }
   let!(:select_box) { 'select.input-medium' }
+  let!(:select_enrollment_option) { "option[value='#{enrollment_status2.code}']" }
+
 
   context '#new', :js => true do
 
@@ -21,7 +23,7 @@ describe 'Student Enrollment Status' do
     end
 
     it 'create and show' do
-      within(select_box) {  click_option enrollment_status2 }
+      within(select_box) {  find(select_enrollment_option).click  }
 
       page.should_not have_selector(select_box)
       within(el) { page.should have_content(enrollment_status2.name) }
@@ -44,7 +46,7 @@ describe 'Student Enrollment Status' do
     context '#edit' do
 
       it 'edits' do
-        within(select_box) { click_option enrollment_status2 }
+        within(select_box) {  find(select_enrollment_option).click  }
 
         page.should_not have_selector(select_box)
         within(el) { page.should have_content(enrollment_status2.name) }
