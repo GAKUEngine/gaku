@@ -2,9 +2,9 @@
 
 syllabus = Gaku::Syllabus.where(:name => "Ruby", :code => "rb").first_or_create!
 course = Gaku::Course.where(:code => "Fall 2011").first_or_create!
-enrollment_status = Gaku::EnrollmentStatus.find_by_code("admitted")
+enrollment_status_code = Gaku::EnrollmentStatus.where(code: 'admitted').first.try(:code)
 
-student = Gaku::Student.where(:name => 'John', :surname => 'Doe', :enrollment_status_id => 2).first_or_create!
+student = Gaku::Student.where(:name => 'John', :surname => 'Doe').first_or_create!(:enrollment_status_code => enrollment_status_code)
 
 exam1 = Gaku::Exam.where(:name => "Midterm", :use_weighting => true, :weight => 4).first_or_create!
 exam1_portion1 = exam1.exam_portions.where(:name => 'Multiple Choice', :max_score => 100).first_or_create!
