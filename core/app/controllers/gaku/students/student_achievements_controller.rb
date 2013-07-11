@@ -1,4 +1,4 @@
-module Gaku
+[module Gaku
   class Students::StudentAchievementsController < GakuController
 
     #load_and_authorize_resource :student, :class => Gaku::Student
@@ -17,6 +17,13 @@ module Gaku
     def index
       @student_achievements = @student.student_achievements
       respond_with @student_achievements
+    end
+
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:student_achievement).permit(:achievement_id)]
     end
 
     private
@@ -39,3 +46,4 @@ module Gaku
 
   end
 end
+]

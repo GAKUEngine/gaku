@@ -12,7 +12,7 @@ module Gaku
     before_filter :load_data
 
     def create
-      @class_group_enrollment = ClassGroupEnrollment.new(params[:class_group_enrollment])
+      @class_group_enrollment = ClassGroupEnrollment.new(class_group_enrollment_params)
       respond_to do |format|
         if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
           @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
@@ -26,6 +26,23 @@ module Gaku
       super do |format|
         format.js { render :nothing => true }
       end
+    end
+
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:class_group_enrollment).permit(class_group_enrollment_attr)]
+    end
+
+    private
+
+    def class_group_enrollment_attr
+      %i(class_group_id seat_number student_id)
+    end
+
+    def class_group_enrollment_params
+      params.require(:class_group_enrollment).permit(class_group_enrollment_attr)
     end
 
     private

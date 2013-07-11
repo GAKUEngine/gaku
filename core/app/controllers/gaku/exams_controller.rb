@@ -77,7 +77,18 @@ module Gaku
       respond_with @exam.completed_by_students(@students)
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:exam).permit(exam_attr)]
+    end
+
     private
+
+    def exam_attr
+      [:name, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
+    end
 
     def before_new
       @exam = Exam.new

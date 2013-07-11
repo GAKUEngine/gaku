@@ -26,6 +26,17 @@ module Gaku
       end
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:student_specialty).permit(student_specialty_attr)]
+    end
+
+    private
+
+    def student_specialty_attr
+      %i(specialty_id is_major)
+    end
+
     private
 
     def load_data

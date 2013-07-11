@@ -36,7 +36,16 @@ module Gaku
                       .find(params[:id])
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:course).permit(course_attr)]
+    end
+
     private
+
+    def course_attr
+      %i(syllabus_id code)
+    end
 
     def load_data
       @syllabuses = Syllabus.all.collect { |s| [s.name, s.id] }

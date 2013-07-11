@@ -15,7 +15,7 @@ module Gaku
     before_filter :count
 
     def create
-      @address = @addressable.addresses.new(params[:address])
+      @address = @addressable.addresses.new(address_params)
       create!
     end
 
@@ -38,7 +38,23 @@ module Gaku
       respond_with @address
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:address).permit(address_attr)]
+    end
+
     private
+
+    def address_params
+      params.require(:address).permit(address_attr)
+    end
+
+    def address_attr
+      %i(title country_id zipcode state_name city address1 address2)
+    end
+
 
     def t_resource
       t(:'address.singular')

@@ -1,5 +1,6 @@
 module Gaku
 	class Exams::ExamPortions::AttachmentsController < GakuController
+
 		respond_to :js, :html
 		inherit_resources
 		actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -10,7 +11,7 @@ module Gaku
 
 
 		def create
-			@attachment = @exam_portion.attachments.build(params[:attachment])
+			@attachment = @exam_portion.attachments.build(attachment_params)
 			respond_to do |format|
 				if @attachment.save
 					format.html { redirect_to [@exam, @exam_portion], :notice => t(:'notice.uploaded', :resource => t(:'attachment.singular') ) }
@@ -20,7 +21,22 @@ module Gaku
 			end
 		end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:attachment).permit(attachment_attr)]
+    end
+
 		private
+
+		def attachment_attr
+			[:name, :description, :asset]
+		end
+
+		def attachment_params
+			params.require(:attachment).permit(attachment_attr)
+		end
 
 		def exam
 			@exam = Exam.find(params[:exam_id])

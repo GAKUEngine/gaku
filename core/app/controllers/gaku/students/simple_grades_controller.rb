@@ -27,7 +27,16 @@ module Gaku
       @student
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:simple_grade).permit(simple_grade_attr)]
+    end
+
     private
+
+    def simple_grade_attr
+      %i(name grade school_id)
+    end
 
     def load_data
       @schools = Gaku::School.all.collect { |s| [s.name, s.id] }

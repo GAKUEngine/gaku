@@ -8,7 +8,7 @@ FactoryGirl.define do
 
 
   trait :with_students do
-    after_create do |resource|
+    after(:create) do |resource|
       student1 = FactoryGirl.create(:student)
       student2 = FactoryGirl.create(:student)
       FactoryGirl.create(:class_group_enrollment, :student => student1, :class_group => resource)

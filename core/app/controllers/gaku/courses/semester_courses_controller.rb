@@ -11,7 +11,18 @@ module Gaku
     before_filter :count, only: [:create, :destroy]
     before_filter :load_data
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:semester_course).permit(semester_course_attr)]
+    end
+
     private
+
+    def semester_course_attr
+      %i(semester_id)
+    end
 
     def count
       course = Course.find(params[:course_id])

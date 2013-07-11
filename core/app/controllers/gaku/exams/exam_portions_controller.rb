@@ -31,7 +31,18 @@ module Gaku
       render :nothing => true
     end
 
+    protected
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:exam_portion).permit(exam_portion_attr)]
+    end
+
     private
+
+    def exam_portion_attr
+      %i(name weight problem_count max_score description adjustments)
+    end
 
     def exam
       @exam = Exam.find(params[:exam_id])

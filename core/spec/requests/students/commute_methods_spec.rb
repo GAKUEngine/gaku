@@ -23,7 +23,8 @@ describe 'Student Commute Method Type' do
     it 'create and show' do
       within(select_box) {  click_option commute_method_type2 }
 
-      wait_until_invisible select_box
+      #wait_until_invisible 'editable-open'
+      sleep 1
       within(el) { page.should have_content(commute_method_type2.name) }
       student.reload
       student.commute_method_type.should eq commute_method_type2
