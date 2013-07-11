@@ -9,14 +9,14 @@ FactoryGirl.define  do
   end
 
   factory :student_with_one_guardian, :parent => :student do
-    after_create do |student|
+    after(:create) do |student|
       student.guardians << FactoryGirl.create(:guardian)
       student.save
     end
   end
 
   trait :with_course do
-    after_create do |student|
+    after(:create) do |student|
       student.courses << FactoryGirl.create(:course)
       student.save
     end

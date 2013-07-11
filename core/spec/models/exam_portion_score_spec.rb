@@ -2,16 +2,10 @@ require 'spec_helper'
 
 describe Gaku::ExamPortionScore do
 
-  context "validations" do 
-  	let(:exam_portion_score) { create(:exam_portion_score) }
-
+  describe 'associations' do
     it { should belong_to :exam_portion }
-    it { should belong_to :student }  
-
+    it { should belong_to :student }
     it { should have_many :attendances }
+  end
 
-    it { should allow_mass_assignment_of :score }
-    it { should allow_mass_assignment_of :exam_portion_id }
-    it { should allow_mass_assignment_of :student_id }
-  end  
 end

@@ -4,13 +4,13 @@ FactoryGirl.define do
     name "Math exam"
     weight 4
     use_weighting true
-    after_build do |exam|
+    after(:build) do |exam|
       exam.exam_portions << FactoryGirl.build(:exam_portion, :exam => exam)
     end
   end
 
   trait :with_portions do
-    after_create do |exam|
+    after(:create) do |exam|
       exam.exam_portions << FactoryGirl.create(:exam_portion, exam: exam)
       exam.exam_portions << FactoryGirl.create(:exam_portion, exam: exam)
       exam.save

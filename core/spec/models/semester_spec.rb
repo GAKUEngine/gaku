@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::Semester do
   let(:school_year) {school_year =  create(:school_year, :starting => Date.parse('2013-3-8'), :ending => Date.parse('2014-11-8'))}
 
-  context "validations" do
+  describe 'associations' do
     it { should have_many :semester_courses }
     it { should have_many(:courses).through(:semester_courses) }
 
@@ -11,10 +11,9 @@ describe Gaku::Semester do
     it { should have_many(:class_groups).through(:semester_class_groups) }
 
     it { should belong_to :school_year}
+  end
 
-    it { should allow_mass_assignment_of :starting }
-    it { should allow_mass_assignment_of :ending }
-
+  describe 'validations' do
     it { should validate_presence_of :starting }
     it { should validate_presence_of :ending }
 

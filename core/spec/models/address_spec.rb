@@ -13,15 +13,15 @@ describe Gaku::Address do
     it { should belong_to :addressable }
   end
 
-  describe "validations" do
+  describe 'validations' do
 
     before do
       country.states.stub find_all_by_name_or_abbr: [state]
     end
 
-    it { should validate_presence_of(:address1) }
-    it { should validate_presence_of(:city) }
-    it { should validate_presence_of(:country) }
+    it { should validate_presence_of :address1 }
+    it { should validate_presence_of :city }
+    it { should validate_presence_of :country }
 
     it 'is invalid without address1' do
       build(:address, address1:nil).should_not be_valid

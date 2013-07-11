@@ -8,9 +8,8 @@ FactoryGirl.define do
   end
 
   trait :with_exam do
-    after_create do |syllabus|
+    after(:create) do |syllabus|
       syllabus.exams << FactoryGirl.create(:exam)
-      syllabus.save
     end
   end
 

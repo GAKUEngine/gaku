@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe Gaku::Student do
 
-  context "validations" do
-
+  describe 'concerns' do
     it_behaves_like 'person'
     it_behaves_like 'addressable'
     it_behaves_like 'notable'
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
-    it_behaves_like 'thrashable'
+  end
 
+  describe 'associations' do
     it { should have_many :course_enrollments }
     it { should have_many(:courses).through(:course_enrollments) }
 
@@ -39,37 +39,26 @@ describe Gaku::Student do
     it { should belong_to :enrollment_status }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
-
-    it { should allow_mass_assignment_of :admitted }
-    it { should allow_mass_assignment_of :graduated }
-    it { should allow_mass_assignment_of :class_groups }
-    it { should allow_mass_assignment_of :class_group_ids }
-    it { should allow_mass_assignment_of :class_groups_attributes }
-    it { should allow_mass_assignment_of :guardians }
-    it { should allow_mass_assignment_of :guardians_attributes }
-    it { should allow_mass_assignment_of :student_id_number }
-    it { should allow_mass_assignment_of :student_foreign_id_number }
-    it { should allow_mass_assignment_of :scholarship_status_id }
-    it { should allow_mass_assignment_of :enrollment_status_id }
   end
 
   context 'counter_cache' do
 
-    let!(:student) { FactoryGirl.create(:student) }
+    let!(:student) { create(:student) }
 
     context 'guardians_count' do
 
       let(:guardian) { create(:guardian) }
       let(:student_with_one_guardian) { create(:student_with_one_guardian) }
 
-      it "increments guardians_count" do
+      it 'increments guardians_count' do
+        guardian
         expect do
           student.guardians << guardian
           student.reload
         end.to change { student.guardians_count }.by 1
       end
 
-      it "decrements guardians_count" do
+      it 'decrements guardians_count' do
         expect do
           student_with_one_guardian.guardians.last.destroy
         end.to change { student_with_one_guardian.reload.guardians_count }.by -1
@@ -81,14 +70,14 @@ describe Gaku::Student do
       let(:course) { create(:course) }
       let(:student_with_course) { create(:student, :with_course) }
 
-      it "increments courses_count" do
+      it 'increments courses_count' do
         expect do
           student.courses << course
           student.reload
         end.to change { student.courses_count }.by 1
       end
 
-      it "decrements courses_count" do
+      it 'decrements courses_count' do
         expect do
           student_with_course.courses.last.destroy
         end.to change { student_with_course.reload.courses_count }.by -1
@@ -100,13 +89,13 @@ describe Gaku::Student do
       let(:address) { build(:address) }
       let(:student_with_address) { create(:student, :with_address) }
 
-      it "increments addresses_count" do
+      it 'increments addresses_count' do
         expect do
           student.addresses << address
         end.to change { student.reload.addresses_count }.by 1
       end
 
-      it "decrements addresses_count" do
+      it 'decrements addresses_count' do
         expect do
           student_with_address.addresses.last.destroy
         end.to change { student_with_address.reload.addresses_count }.by -1
@@ -118,38 +107,36 @@ describe Gaku::Student do
       let(:contact) { build(:contact) }
       let(:student_with_contact) { create(:student, :with_contact) }
 
-      it "increments contacts_count" do
+      it 'increments contacts_count' do
         expect do
           student.contacts << contact
         end.to change { student.reload.contacts_count }.by 1
       end
 
-      it "decrements contacts_count" do
+      it 'decrements contacts_count' do
         expect do
           student_with_contact.contacts.last.destroy
         end.to change { student_with_contact.reload.contacts_count }.by -1
       end
     end
 
-
     context 'notes_count' do
 
       let(:note) { build(:note) }
       let(:student_with_note) { create(:student, :with_note) }
 
-      it "increments notes_count" do
+      it 'increments notes_count' do
         expect do
           student.notes << note
         end.to change { student.reload.notes_count }.by 1
       end
 
-      it "decrements notes_count" do
+      it 'decrements notes_count' do
         expect do
           student_with_note.notes.last.destroy
         end.to change { student_with_note.reload.notes_count }.by -1
       end
     end
-
 
   end
 

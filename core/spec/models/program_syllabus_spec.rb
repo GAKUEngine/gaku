@@ -2,15 +2,14 @@ require 'spec_helper'
 
 describe Gaku::ProgramSyllabus do
 
-  context "validations" do
+  describe 'associations' do
     it { should belong_to :program }
     it { should belong_to :syllabus }
     it { should belong_to :level }
+  end
 
-    it { should allow_mass_assignment_of :program_id}
-    it { should allow_mass_assignment_of :syllabus_id }
-    it { should allow_mass_assignment_of :level_id }
-
+  describe 'validations' do
     it { should validate_presence_of :syllabus_id }
   end
+
 end

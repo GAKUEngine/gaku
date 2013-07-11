@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Gaku::AssignmentScore do
 
-  context "validations" do
-    it { should belong_to(:student) } 
+  describe 'associations' do
+    it { should belong_to :student }
+  end
 
-    it "is invalid without a score" do 
+  describe 'validations' do
+    it 'is invalid without a score' do
       build(:assignment_score, score: nil).should_not be_valid
     end
-
-    
   end
-  
+
 end

@@ -1,8 +1,8 @@
 require 'spec_helper'
-  describe Gaku::Program do
 
-  context "validation" do
+describe Gaku::Program do
 
+  describe 'associations' do
     it { should have_many :program_levels }
     it { should have_many(:levels).through(:program_levels) }
 
@@ -13,10 +13,10 @@ require 'spec_helper'
     it { should have_many(:syllabuses).through(:program_syllabuses) }
 
     it { should belong_to :school }
-
-    it { should validate_presence_of :name }
-
-    it { should allow_mass_assignment_of :name }
-    it { should allow_mass_assignment_of :description }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end
+
 end

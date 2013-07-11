@@ -2,15 +2,14 @@ require 'spec_helper'
 
 describe Gaku::StudentSpecialty do
 
-  context "validations" do
+  context 'associations' do
     it { should belong_to :specialty }
     it { should belong_to :student }
+  end
 
-    it { should allow_mass_assignment_of :student_id }
-    it { should allow_mass_assignment_of :specialty_id }
-    it { should allow_mass_assignment_of :is_major }
-
+  context 'validations' do
     it { should validate_presence_of :student_id }
     it { should validate_presence_of :specialty_id }
   end
+
 end

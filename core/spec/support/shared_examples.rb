@@ -41,13 +41,6 @@ end
 shared_examples_for 'person' do
   it { should validate_presence_of :name }
   it { should validate_presence_of :surname }
-
-  it { should allow_mass_assignment_of :name }
-  it { should allow_mass_assignment_of :surname }
-  it { should allow_mass_assignment_of :name_reading }
-  it { should allow_mass_assignment_of :surname_reading }
-  it { should allow_mass_assignment_of :birth_date }
-  it { should allow_mass_assignment_of :gender }
 end
 
 shared_examples_for 'addressable' do
@@ -62,11 +55,6 @@ shared_examples_for 'contactable' do
   it { should have_many :contacts }
 end
 
-shared_examples_for 'thrashable' do
-  it { should allow_mass_assignment_of :is_deleted }
-end
-
 shared_examples_for 'avatarable' do
   it { should have_attached_file :picture }
-  it { should allow_mass_assignment_of :picture }
 end

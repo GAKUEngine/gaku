@@ -46,7 +46,8 @@ end
 group :test do
   gem 'spork', '~> 1.0rc'
   gem 'rspec-rails'
-  gem 'factory_girl_rails', '~> 3.2.0'
+  #gem 'factory_girl_rails', '~> 3.2.0'
+  gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker'
   #gem 'shoulda-matchers'
   gem "shoulda-matchers", github: "thoughtbot/shoulda-matchers" , branch: 'dp-rails-four'

@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe Gaku::ImportFile do
 
-  context "validations" do
+  describe 'validations' do
     it { should have_attached_file :data_file }
-
-    it { should allow_mass_assignment_of :context }
-    it { should allow_mass_assignment_of :data_file }
-    it { should allow_mass_assignment_of :importer_type }
   end
 
 end

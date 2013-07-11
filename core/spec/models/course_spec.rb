@@ -2,36 +2,36 @@ require 'spec_helper'
 
 describe Gaku::Course do
 
-  context "validations" do
-
+  describe 'concerns' do
     it_behaves_like 'notable'
+  end
 
-    it { should have_many(:enrollments) }
+  describe 'associations' do
+    it { should have_many :enrollments }
     it { should have_many(:students).through(:enrollments) }
-    it { should have_many(:course_group_enrollments) }
-    it { should have_many(:course_groups).through(:course_group_enrollments) }
-    it { should have_many(:exam_schedules) }
-    it { should have_many(:class_group_course_enrollments) }
-    it { should have_many(:class_groups).through(:class_group_course_enrollments) }
 
+    it { should have_many :course_group_enrollments }
+    it { should have_many(:course_groups).through(:course_group_enrollments) }
+
+    it { should have_many :class_group_course_enrollments }
+    it { should have_many(:class_groups).through(:class_group_course_enrollments) }
 
     it { should have_many(:semester_courses).dependent(:destroy) }
     it { should have_many(:semesters).through(:semester_courses) }
 
-    it { should belong_to(:syllabus) }
-    it { should belong_to(:class_group) }
+    it { should belong_to :syllabus }
+    it { should belong_to :class_group }
+    it { should have_many :exam_schedules }
 
-    it { should accept_nested_attributes_for(:enrollments) }
-
-    it { should validate_presence_of :code }
-
-    it { should allow_mass_assignment_of :code }
-    it { should allow_mass_assignment_of :class_group_id }
-    it { should allow_mass_assignment_of :syllabus_id }
+    it { should accept_nested_attributes_for :enrollments }
   end
 
-  context "enroll_class_group" do
-  	it "should enroll class group to course" do
+  describe 'validations' do
+    it { should validate_presence_of :code }
+  end
+
+  context 'enroll_class_group' do
+  	it 'should enroll class group to course' do
 			course = create(:course)
 			student1, student2 = create(:student), create(:student, :name => 'gaku')
       class_group = create(:class_group)
@@ -45,7 +45,7 @@ describe Gaku::Course do
 
   context 'counter_cache' do
 
-    let!(:course) { FactoryGirl.create(:course) }
+    let!(:course) { create(:course) }
 
     context 'notes_count' do
 

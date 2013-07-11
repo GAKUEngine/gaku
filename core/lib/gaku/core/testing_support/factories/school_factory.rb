@@ -8,13 +8,13 @@ FactoryGirl.define do
   end
 
   factory :school_with_one_contact, :parent => :school do
-    after_create do |school|
+    after(:create) do |school|
       FactoryGirl.create(:contact, :contactable => school.campuses.first)
     end
   end
 
   factory :school_with_two_contacts, :parent => :school do
-    after_create do |school|
+    after(:create) do |school|
       FactoryGirl.create(:contact, :contactable => school.campuses.first)
       FactoryGirl.create(:contact, :contactable => school.campuses.first)
     end
