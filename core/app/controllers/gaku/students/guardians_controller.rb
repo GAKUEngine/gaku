@@ -22,24 +22,25 @@ module Gaku
     # end
 
     def create
-      #@guardian = Guardian.create(guardian_params)
-      @student.guardians.build(guardian_params)
-      if @student.save
-        respond_with @guardian
-        #format.js { render }
-      end
+      @guardian = @student.guardians.create(guardian_params)
+      respond_with(@guardian) if @guardian.persisted?
     end
 
     def update
-      super do |format|
-        if params[:guardian][:picture]
-          format.html { redirect_to [:edit, student, guardian], :notice => t('notice.uploaded', :resource => t('picture')) }
-        else
-          format.js { render }
-          format.json { head :no_content }
-         end
-      end
+      @guardian = Gaku::Guardian.find(params[:id])
+      respond_with(@guardian) if @guardian.update(guardian_params)
     end
+
+    # def update
+    #   super do |format|
+    #     if params[:guardian][:picture]
+    #       format.html { redirect_to [:edit, student, guardian], :notice => t('notice.uploaded', :resource => t('picture')) }
+    #     else
+    #       format.js { render }
+    #       format.json { head :no_content }
+    #      end
+    #   end
+    # end
 
     protected
 
