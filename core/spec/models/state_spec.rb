@@ -8,7 +8,7 @@ describe Gaku::State do
 
   describe 'validations' do
     it { should validate_presence_of :name }
-    it { should validate_presence_of :country }
+    it { should validate_presence_of :country_iso }
   end
 
   before(:all) { Gaku::State.destroy_all }
