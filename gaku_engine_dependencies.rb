@@ -8,7 +8,6 @@ gem 'sqlite3'
 gem 'therubyracer', require: 'v8'
 
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-gem 'devise',      github: 'plataformatec/devise', branch: 'rails4'
 gem 'ransack',     github: 'ernie/ransack',        branch: 'rails-4'
 gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
 gem 'deface',      github: 'spree/deface',         branch: 'master'
