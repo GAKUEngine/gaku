@@ -1,6 +1,6 @@
 h2
   | Edit #{resource_name.to_s.humanize}
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
    div
     = f.label :username, t(:'devise.username')
@@ -14,7 +14,7 @@ h2
     = f.label :password
     i (leave blank if you don't want to change it)
     br/
-    = f.password_field :password, :autocomplete => "off"
+    = f.password_field :password, autocomplete: "off"
   div
     = f.label :password_confirmation
     br/
@@ -27,5 +27,5 @@ h2
   div= f.submit "Update"
 h3 Cancel my account
 p
-  | Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
+  | Unhappy? #{link_to "Cancel my account", registration_path(resource_name), confirm: "Are you sure?", method: :delete}.
 = link_to_back

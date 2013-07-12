@@ -7,11 +7,11 @@ describe 'ClassGroup Students' do
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
-  let(:class_group) { create(:class_group, grade: '1', name: "Biology", homeroom: 'A1') }
+  let(:class_group) { create(:class_group, grade: '1', name: 'Biology', homeroom: 'A1') }
   let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_id: enrollment_status.id) }
 
   before :all do
-    set_resource "class-group-student"
+    set_resource 'class-group-student'
   end
 
   before do
@@ -21,7 +21,7 @@ describe 'ClassGroup Students' do
     enrollment_status
   end
 
-  context "#new" do
+  context '#new' do
     before do
       student1
 
@@ -39,12 +39,12 @@ describe 'ClassGroup Students' do
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
       
       page.should have_content "#{student1} : Successfully enrolled!"
-      within('.class-group-enrollments-count'){ page.should have_content("1") }
-      within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
+      within('.class-group-enrollments-count'){ page.should have_content('1') }
+      within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
     end
   end
 
-  context "#search " do
+  context '#search ' do
     it 'searches students', js: true do
       visit gaku.class_groups_path
       click show_link
@@ -62,12 +62,12 @@ describe 'ClassGroup Students' do
     end
   end
 
-  context "when student is added" do
+  context 'when student is added' do
     before do
       class_group.students << student1
       visit gaku.class_group_path(class_group)
-      within('.class-group-enrollments-count'){ page.should have_content("1") }
-      within('#class-group-enrollments-tab-link'){ page.should have_content("1") }
+      within('.class-group-enrollments-count'){ page.should have_content('1') }
+      within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
       Gaku::ClassGroupEnrollment.count.should eq 1
     end
 
@@ -75,7 +75,7 @@ describe 'ClassGroup Students' do
       click new_link
       wait_until { page.find('#student-modal').visible? }
       within('tr#student-' + student1.id.to_s) do
-        page.should have_selector("img.enrolled")
+        page.should have_selector('img.enrolled')
       end
     end
 
@@ -84,8 +84,8 @@ describe 'ClassGroup Students' do
 
       ensure_delete_is_working
 
-      within('.class-group-enrollments-count') { page.should_not have_content("1") }
-      within('#class-group-enrollments-tab-link') { page.should_not have_content("1") }
+      within('.class-group-enrollments-count') { page.should_not have_content('1') }
+      within('#class-group-enrollments-tab-link') { page.should_not have_content('1') }
     end
   end
 

@@ -2,13 +2,13 @@
   .span12.well
     .row-fluid
       .span12
-        = link_to_file t(:'syllabus.registration.csv'), :action => :get_template :id => "get_template"
+        = link_to_file t(:'syllabus.registration.csv'), action: :get_template id: "get_template"
         hr /
-        = form_for :importer, :url => { :action => "import_from_template" }, :html => { :multipart => true } do |f|
+        = form_for :importer, url: { action: "import_from_template" }, html: { multipart: true } do |f|
           label for="importer"
           = f.file_field :data_file
           br /
           = t(:'import_format')
-          = select("importer", "data_type", @importer_types, {:include_blank => false})
+          = select("importer", "data_type", @importer_types, {include_blank: false})
           br /
           = submit_tag 'Submit'

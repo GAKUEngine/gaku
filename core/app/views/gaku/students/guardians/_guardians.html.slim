@@ -6,7 +6,7 @@
       = count_div 'student-guardians-count' do
         = print_count @student.guardians_count, t_guardian_list
     .pull-right
-      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], :id => "new-student-guardian-link" if can_edit?
+      = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], id: "new-student-guardian-link" if can_edit?
 
   = hr
 
@@ -23,4 +23,4 @@
             - else
               = th_actions 1
         tbody
-          = render :partial => 'gaku/students/guardians/guardian', :collection => @student.guardians, :as => :guardian
+          = render partial: 'gaku/students/guardians/guardian', collection: @student.guardians, as: :guardian

@@ -1,19 +1,19 @@
 .row-fluid
   .span6
-    = f.text_field :surname_reading, :label => surname_reading_label
+    = f.text_field :surname_reading, label: surname_reading_label
   .span6
-    = f.text_field :name_reading, :label => name_reading_label
+    = f.text_field :name_reading, label: name_reading_label
 .row-fluid
   .span6
-    = f.text_field :surname, :label => surname_label
+    = f.text_field :surname, label: surname_label
   .span6
-    = f.text_field :name, :label => name_label
+    = f.text_field :name, label: name_label
 
 .row-fluid
   .span6
-    = f.text_field :birth_date, :class => "datepicker", :label => t(:birth_date)
+    = f.text_field :birth_date, class: "datepicker", label: t(:birth_date)
   .span6
-    = f.select :gender, genders, {:prompt => t(:'gender.choose'), :selected => gender_preset}, :label => t(:gender)
+    = f.select :gender, genders, {prompt: t(:'gender.choose'), selected: gender_preset}, label: t(:gender)
 
 coffee:
   $(document).ready ->

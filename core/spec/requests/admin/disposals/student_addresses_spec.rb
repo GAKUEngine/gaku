@@ -10,7 +10,7 @@ describe 'Admin Disposals Student Addresses' do
     student.addresses.reload
   end
 
-  it "no soft deleted student addresses", js: true do
+  it 'no soft deleted student addresses', js: true do
     visit gaku.student_addresses_admin_disposals_path
     within('#admin-student-addresses-disposals-index') do
       page.all('tbody tr').size.should eq 0
@@ -41,7 +41,7 @@ describe 'Admin Disposals Student Addresses' do
       page.should have_content(student.addresses.first.address1)
     end
 
-    it "delete" do
+    it 'delete' do
       click '.delete-link'
       accept_alert
       flash_destroyed?

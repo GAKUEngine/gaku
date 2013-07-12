@@ -10,7 +10,7 @@ describe 'Student Notes' do
   let(:note) { create(:note, notable: student) }
 
   before :all do
-    set_resource "student-note"
+    set_resource 'student-note'
   end
 
   context 'new', type: 'note'  do
@@ -23,7 +23,7 @@ describe 'Student Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", js: true, type: 'note'  do
+  context 'existing', js: true, type: 'note'  do
     before do
       @data = student_with_note
       visit gaku.edit_student_path(@data)

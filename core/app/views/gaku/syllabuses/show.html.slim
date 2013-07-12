@@ -13,7 +13,7 @@
         = th t(:'exam.plural')
     tbody
       tr class="syllabus-#{@syllabus.id}"
-        = render 'gaku/shared/fields/syllabus_fields', :syllabus => @syllabus
+        = render 'gaku/shared/fields/syllabus_fields', syllabus: @syllabus
 
 = well_div do
   .row-fluid
@@ -23,8 +23,8 @@
           = count_div 'exams-count' do
             = print_count @syllabus.exams_count, t_exam_list
         .pull-right
-          = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], :id => 'new-syllabus-exam-link'
-          = ajax_link_to_new t(:'exam.add_existing'), '', :id => 'new-existing-exam-link'
+          = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
+          = ajax_link_to_new t(:'exam.add_existing'), '', id: 'new-existing-exam-link'
 
       .row-fluid
         .span12
@@ -44,7 +44,7 @@
     #syllabus-assigmnents
       = render 'gaku/syllabuses/assignments/assignments'
     #new-syllabus-assignment
-      = link_to t(:'assignment.new'), create_syllabus_assignment_path(@syllabus), { :id => 'new-course-assignment-link', :class => 'btn'}
+      = link_to t(:'assignment.new'), create_syllabus_assignment_path(@syllabus), { id: 'new-course-assignment-link', class: 'btn'}
     #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
       = render 'gaku/syllabuses/assignments/form'
 
@@ -54,6 +54,6 @@
 
 = well_div do
   .span6
-    = link_to_edit_with_text [:edit, @syllabus], :remote => true
+    = link_to_edit_with_text [:edit, @syllabus], remote: true
   .span6
     = link_to_back syllabuses_path

@@ -45,7 +45,7 @@ module Gaku::Core::Importers::Students
       book.set 1, (last_column += 1), I18n.t(:surname_reading)
 
       book.row(1).each do |cell|
-        log "cell: " + cell.to_s
+        log 'cell: ' + cell.to_s
       end
       #book.row(1..book.last_row).each do |row|
       #  log row
@@ -53,13 +53,13 @@ module Gaku::Core::Importers::Students
     end
 
     def _fix_name(row)
-      name_parts = row[:name].sub("　", " ").split(" ")
+      name_parts = row[:name].sub('　', ' ').split(' ')
       surname = name_parts.first
       name = name_parts.last
       row[:surname] = surname
       row[:name] = name
 
-      name_reading_parts = row[:name_reading].sub("　", " ").split(" ")
+      name_reading_parts = row[:name_reading].sub('　', ' ').split(' ')
       surname_reading = name_reading_parts.first
       name_reading = name_reading_parts.last
       row[:surname_reading] = surname_reading

@@ -4,7 +4,7 @@
       = count_div 'student-specialties-count' do
         = print_count @count, t_specialty_list
     .pull-right
-      = ajax_link_to_new 'Add Student Specialty', [:new, @student, :student_specialty], :id => 'new-student-specialty-link'
+      = ajax_link_to_new 'Add Student Specialty', [:new, @student, :student_specialty], id: 'new-student-specialty-link'
 
 =hr
 
@@ -15,4 +15,4 @@
       =th t(:'specialty.major')
       =th_actions 2
   tbody
-    =render :partial =>'student_specialty', :collection => @student_specialties, :as => :student_specialty
+    =render partial: 'student_specialty', collection: @student_specialties, as: :student_specialty

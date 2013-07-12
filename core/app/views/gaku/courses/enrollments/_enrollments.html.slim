@@ -1,7 +1,7 @@
 = index_header do
   #new-course-class-group-form-errors
   #new-course-class-group.hide
-    = render :partial => 'gaku/courses/enrollments/class_groups/form', course: @course, new_course_enrollment: @new_course_enrollment
+    = render partial: 'gaku/courses/enrollments/class_groups/form', course: @course, new_course_enrollment: @new_course_enrollment
   .pull-left
     = count_div 'course-students-count' do
       = print_count(@course.students_count, t(:'student.list'))

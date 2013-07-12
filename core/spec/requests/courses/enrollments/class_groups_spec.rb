@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe "CourseEnrollment"  do
+describe 'CourseEnrollment'  do
 
   as_admin
 
   let(:course) { create(:course) }
-  let(:class_group) { create(:class_group, name: "Math") }
-  let(:class_group_with_students) { create(:class_group, :with_students, name: "Math") }
+  let(:class_group) { create(:class_group, name: 'Math') }
+  let(:class_group_with_students) { create(:class_group, :with_students, name: 'Math') }
 
   before :all do
-    set_resource "course-class-group"
+    set_resource 'course-class-group'
   end
 
   context 'no existing class group', js: true do
@@ -50,7 +50,7 @@ describe "CourseEnrollment"  do
       visit gaku.course_path(course)
     end
 
-    it "enrolls a class group" do
+    it 'enrolls a class group' do
         click new_link
         wait_until_visible(submit)
 
@@ -62,8 +62,8 @@ describe "CourseEnrollment"  do
 
       page.should have_content class_group_with_students.students.first
       page.should have_content class_group_with_students.students.second
-      page.should have_content "View Assignments"
-      page.should have_content "View Exams"
+      page.should have_content 'View Assignments'
+      page.should have_content 'View Exams'
       # TODO show flash msgs for successfuly added students
     end
 

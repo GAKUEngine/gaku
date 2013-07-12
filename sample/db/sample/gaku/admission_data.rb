@@ -57,144 +57,144 @@ def create_sample_admission_method(method_args, phase_array)
 end
 
 regular_method = create_sample_admission_method(
-  { name: "Regular Admissions" },
+  { name: 'Regular Admissions' },
   [
     {
-      args: { name: "Written Application", position: 0 },
+      args: { name: 'Written Application', position: 0 },
       states: [
-        { name: "Received", can_progress: true, is_default: true },
-        { name: "In Review" },
-        { name: "Accepted", auto_progress: true, can_progress: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'Received', can_progress: true, is_default: true },
+        { name: 'In Review' },
+        { name: 'Accepted', auto_progress: true, can_progress: true },
+        { name: 'Rejected', can_progress: false }
       ]
     },{
-      args: { name: "Written Report", position: 1 },
+      args: { name: 'Written Report', position: 1 },
       states: [
-        { name: "In Review", can_progress: true, is_default: true },
-        { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'In Review', can_progress: true, is_default: true },
+        { name: 'Accepted', auto_progress: true, can_progress: true, can_admit: true },
+        { name: 'Rejected', can_progress: false }
       ]
     },{
-      args: { name: "Exam", position: 2 },
-      exam: { name: "Summer Program Entry", use_weighting: true, weight: 100},
-      exam_portions: [{name: "exam", max_score: 100, weight: 100, problem_count: 1}],
+      args: { name: 'Exam', position: 2 },
+      exam: { name: 'Summer Program Entry', use_weighting: true, weight: 100},
+      exam_portions: [{name: 'exam', max_score: 100, weight: 100, problem_count: 1}],
       states: [
-        { name: "Pre-Exam", can_progress: true, is_default: true  },
-        { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
-        { name: "Rejected", can_admit: false, can_progress: false },
-        { name: "Abscent", can_admit: false, can_progress: false }
+        { name: 'Pre-Exam', can_progress: true, is_default: true  },
+        { name: 'Passed', can_admit: true, can_progress: true, auto_progress: true },
+        { name: 'Rejected', can_admit: false, can_progress: false },
+        { name: 'Abscent', can_admit: false, can_progress: false }
       ]
     },{
-      args: { name: "Interview", position: 3 },
+      args: { name: 'Interview', position: 3 },
       states: [
-        { name: "Waiting for Interview", can_progress: true, is_default: true },
-        { name: "Accepted", can_admit: true, auto_admit: true },
-        { name: "Rejected", can_admit: false }
+        { name: 'Waiting for Interview', can_progress: true, is_default: true },
+        { name: 'Accepted', can_admit: true, auto_admit: true },
+        { name: 'Rejected', can_admit: false }
       ]
     }
   ]
 )
 
 international_division_method = create_sample_admission_method(
-  { name: "International Division Admissions" },
+  { name: 'International Division Admissions' },
   [
     {
-      args: { name: "Written Application", position: 0 },
+      args: { name: 'Written Application', position: 0 },
       states: [
-        { name: "Received", can_progress: true, is_default: true },
-        { name: "In Review" },
-        { name: "Accepted", auto_progress: true, can_progress: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'Received', can_progress: true, is_default: true },
+        { name: 'In Review' },
+        { name: 'Accepted', auto_progress: true, can_progress: true },
+        { name: 'Rejected', can_progress: false }
       ]
     },
 
     {
-      args: { name: "Interview", position: 1 },
+      args: { name: 'Interview', position: 1 },
       states: [
-        { name: "Waiting for Interview", can_progress: true, is_default: true },
-        { name: "Accepted", can_admit: true, auto_admit: true },
-        { name: "Rejected", can_admit: false }
+        { name: 'Waiting for Interview', can_progress: true, is_default: true },
+        { name: 'Accepted', can_admit: true, auto_admit: true },
+        { name: 'Rejected', can_admit: false }
       ]
     },
 
     {
-      args: { name: "Exam", position: 2 },
+      args: { name: 'Exam', position: 2 },
       states: [
-        { name: "Pre-Exam", can_progress: true, is_default: true },
-        { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
-        { name: "Rejected", can_admit: false, can_progress: false },
-        { name: "Abscent", can_admit: false, can_progress: false }
+        { name: 'Pre-Exam', can_progress: true, is_default: true },
+        { name: 'Passed', can_admit: true, can_progress: true, auto_progress: true },
+        { name: 'Rejected', can_admit: false, can_progress: false },
+        { name: 'Abscent', can_admit: false, can_progress: false }
       ]
     },
 
     {
-      args: { name: "Foreign Langauge Exam", position: 3 },
+      args: { name: 'Foreign Langauge Exam', position: 3 },
       states: [
-        { name: "Pre-Exam", can_progress: true, is_default: true },
-        { name: "Passed with Fluent Score", can_admit: true, can_progress: true, auto_progress: true, auto_admit: true },
-        { name: "Passed", can_admit: true, can_progress: true, auto_progress: true },
-        { name: "Rejected", can_admit: false, can_progress: false },
-        { name: "Abscent", can_admit: false, can_progress: false }
+        { name: 'Pre-Exam', can_progress: true, is_default: true },
+        { name: 'Passed with Fluent Score', can_admit: true, can_progress: true, auto_progress: true, auto_admit: true },
+        { name: 'Passed', can_admit: true, can_progress: true, auto_progress: true },
+        { name: 'Rejected', can_admit: false, can_progress: false },
+        { name: 'Abscent', can_admit: false, can_progress: false }
       ]
     },
 
     {
-      args: { name: "Written Report", position: 4 },
+      args: { name: 'Written Report', position: 4 },
       states: [
-        { name: "In Review", can_progress: true, is_default: true },
-        { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'In Review', can_progress: true, is_default: true },
+        { name: 'Accepted', auto_progress: true, can_progress: true, can_admit: true },
+        { name: 'Rejected', can_progress: false }
       ]
     }
   ]
 )
 
 summer_method = create_sample_admission_method(
-  { name: "Summer Program Admissions"},
+  { name: 'Summer Program Admissions'},
   [
     {
-      args: { name: "Written Application", position: 0 },
+      args: { name: 'Written Application', position: 0 },
       states: [
-        { name: "Received", can_progress: true, is_default: true },
-        { name: "In Review" },
-        { name: "Accepted", auto_progress: true, can_progress: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'Received', can_progress: true, is_default: true },
+        { name: 'In Review' },
+        { name: 'Accepted', auto_progress: true, can_progress: true },
+        { name: 'Rejected', can_progress: false }
       ]
     },
 
     {
-      args: { name: "Written Report", position: 1 },
+      args: { name: 'Written Report', position: 1 },
       states: [
-        { name: "In Review", can_progress: true, is_default: true },
-        { name: "Accepted", auto_progress: true, can_progress: true, can_admit: true },
-        { name: "Rejected", can_progress: false }
+        { name: 'In Review', can_progress: true, is_default: true },
+        { name: 'Accepted', auto_progress: true, can_progress: true, can_admit: true },
+        { name: 'Rejected', can_progress: false }
       ]
     },
 
     {
-      args: { name: "Interview", position: 2 },
+      args: { name: 'Interview', position: 2 },
       states: [
-        { name: "Waiting for Interview", can_progress: true, is_default: true },
-        { name: "Accepted", can_admit: true, auto_admit: true },
-        { name: "Rejected", can_admit: false }
+        { name: 'Waiting for Interview', can_progress: true, is_default: true },
+        { name: 'Accepted', can_admit: true, auto_admit: true },
+        { name: 'Rejected', can_admit: false }
       ]
     }
   ]
 )
 
 # Periods
-period1 = Gaku::AdmissionPeriod.where(name: "Summer 2013").first_or_create!
+period1 = Gaku::AdmissionPeriod.where(name: 'Summer 2013').first_or_create!
 period1.admission_methods << summer_method
 
-Gaku::AdmissionPeriod.where(name: "Fall 2013 Early Admissions").first_or_create!
+Gaku::AdmissionPeriod.where(name: 'Fall 2013 Early Admissions').first_or_create!
 
-period2 = Gaku::AdmissionPeriod.where(name: "Fall 2013").first_or_create!
+period2 = Gaku::AdmissionPeriod.where(name: 'Fall 2013').first_or_create!
 period2.admission_methods << regular_method
 period2.admission_methods << international_division_method
 
-Gaku::AdmissionPeriod.where(name: "2013年夏短期プログラム").first_or_create!
-Gaku::AdmissionPeriod.where(name: "2013年秋推薦").first_or_create!
-Gaku::AdmissionPeriod.where(name: "2013年秋").first_or_create!
+Gaku::AdmissionPeriod.where(name: '2013年夏短期プログラム').first_or_create!
+Gaku::AdmissionPeriod.where(name: '2013年秋推薦').first_or_create!
+Gaku::AdmissionPeriod.where(name: '2013年秋').first_or_create!
 
 #{}"admission_method_id", "admitted", "created_at",
 #{}"scholarship_status_id", "student_id", "updated_at"

@@ -10,7 +10,7 @@
         th = t(:'class_group.homeroom')
     tbody
       tr class="class-group-#{@class_group.id}"
-        = render 'gaku/shared/fields/class_group_fields', :class_group => @class_group
+        = render 'gaku/shared/fields/class_group_fields', class_group: @class_group
 
 = render 'tabs'
 
@@ -20,6 +20,6 @@
 
 = well_div do
   .span6
-    = link_to_edit_with_text [:edit, @class_group], :remote => true
+    = link_to_edit_with_text [:edit, @class_group], remote: true
   .span6
-    = link_to_back class_groups_path, :id => 'back-class-group-link'
+    = link_to_back class_groups_path, id: 'back-class-group-link'

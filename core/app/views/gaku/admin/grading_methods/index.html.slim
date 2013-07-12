@@ -3,7 +3,7 @@
     = count_div 'admin-grading-methods-count' do
       = print_count @count, t_grading_method_list
   .pull-right
-    = ajax_link_to_new t(:'grading_method.add'), [:new, :admin, :grading_method], :id => 'new-admin-grading-method-link'
+    = ajax_link_to_new t(:'grading_method.add'), [:new, :admin, :grading_method], id: 'new-admin-grading-method-link'
 
 = content_for :new_form do
   #new-admin-grading-method.hide
@@ -17,4 +17,4 @@
         = th t(:'grading_method.method')
         = th_actions 2
     tbody
-      = render :partial => 'grading_method', :collection => @grading_methods, :as => :grading_method
+      = render partial: 'grading_method', collection: @grading_methods, as: :grading_method

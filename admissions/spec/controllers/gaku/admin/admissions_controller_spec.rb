@@ -11,20 +11,20 @@ describe Gaku::Admin::AdmissionsController do
   let!(:attendance) { create(:attendance) }
   let(:admission_method) { create(:admission_method_with_phases) }
   
-  describe "GET #index" do
+  describe 'GET #index' do
     before do
       gaku_get :index
     end
 
-    it "is successful" do
+    it 'is successful' do
       response.should be_success
     end
 
-    it "renders the :index view" do
+    it 'renders the :index view' do
       response.should render_template :index
     end
 
-    it "assigns variables" do
+    it 'assigns variables' do
       assigns(:admission_periods).should_not be_nil
       assigns(:admission_period).should_not be_nil
       assigns(:admission_methods).should_not be_nil
@@ -43,15 +43,15 @@ describe Gaku::Admin::AdmissionsController do
       gaku_js_get :new
     end
 
-    it "is successful" do
+    it 'is successful' do
       response.should be_success
     end
 
-    it "renders the :new template" do
+    it 'renders the :new template' do
       response.should render_template :new
     end
     
-    it "assigns variables" do
+    it 'assigns variables' do
       assigns(:class_groups).should_not be_nil
       assigns(:scholarship_statuses).should_not be_nil
       assigns(:admission).should be_a_new Gaku::Admission
@@ -60,7 +60,7 @@ describe Gaku::Admin::AdmissionsController do
 
   end
 
-  describe "POST #create" do
+  describe 'POST #create' do
     context 'with valid attributes' do
 
       before do
@@ -169,11 +169,11 @@ describe Gaku::Admin::AdmissionsController do
       response.should be_success
     end
 
-    it "renders the :listing_admissions view" do
+    it 'renders the :listing_admissions view' do
       response.should render_template :listing_admissions
     end
 
-    it "assigns variables" do
+    it 'assigns variables' do
       assigns(:admission_periods).should_not be_nil
       assigns(:admission_period).should_not be_nil
       assigns(:admission_methods).should_not be_nil
@@ -195,11 +195,11 @@ describe Gaku::Admin::AdmissionsController do
       response.should be_success
     end
 
-    it "renders the :listing_applicants view" do
+    it 'renders the :listing_applicants view' do
       response.should render_template :listing_applicants
     end
 
-    it "assigns variables" do
+    it 'assigns variables' do
       assigns(:admission_periods).should_not be_nil
       assigns(:admission_period).should_not be_nil
       assigns(:admission_methods).should_not be_nil
@@ -250,7 +250,7 @@ describe Gaku::Admin::AdmissionsController do
                         admission_period_id: admission_period.id,
                         admission_method_id: admission_period.admission_methods.second.id
         end
-        it "assigns variables" do
+        it 'assigns variables' do
           assigns(:state_students).should_not be_nil
           assigns(:next_state).should_not be_nil
           #assigns(:admission_record).should_not be_nil
@@ -260,7 +260,7 @@ describe Gaku::Admin::AdmissionsController do
           response.should be_success
         end
 
-        it "renders the :change_student_state view" do
+        it 'renders the :change_student_state view' do
           response.should render_template :change_student_state
         end
       end
@@ -304,7 +304,7 @@ describe Gaku::Admin::AdmissionsController do
         end.to change(@admission,:admitted).to true
       end
     
-      it "assigns variables" do
+      it 'assigns variables' do
         assigns(:state_students).should_not be_nil
         assigns(:next_state).should_not be_nil
         #assigns(:admission_record).should_not be_nil
@@ -317,7 +317,7 @@ describe Gaku::Admin::AdmissionsController do
         response.should be_success
       end
 
-      it "renders the :change_student_state view" do
+      it 'renders the :change_student_state view' do
         response.should render_template :change_student_state
       end
     end

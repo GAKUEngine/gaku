@@ -82,7 +82,7 @@ module Gaku
       admission_records = []
       result = {}
       students.each { |student|
-        student_id = student.split("-")[1].to_i
+        student_id = student.split('-')[1].to_i
         admission = Admission.new( admission_period_id: admission_period.id,
                                     admission_method_id: admission_method.id,
                                     student_id: student_id,

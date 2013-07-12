@@ -9,7 +9,7 @@
     = count_div 'course-groups-count' do
       = print_count @count, t(:'course_group.list')
   .pull-right
-    = ajax_link_to_new t(:'course_group.new'), [:new, :course_group], :id => "new-course-group-link"
+    = ajax_link_to_new t(:'course_group.new'), [:new, :course_group], id: "new-course-group-link"
 
 
 = render 'course_groups'

@@ -3,15 +3,15 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
-if ENV["COVERAGE"]
+if ENV['COVERAGE']
   # Run Coverage report
   require 'simplecov'
-  puts "Starting SimpleCov"
+  puts 'Starting SimpleCov'
   SimpleCov.start do
-    add_filter "/support/"
-    add_filter "/support/requests/"
-    add_filter "/spec/requests/**"
-    add_filter "/config/**"
+    add_filter '/support/'
+    add_filter '/support/requests/'
+    add_filter '/spec/requests/**'
+    add_filter '/config/**'
     add_group 'Controllers', 'app/controllers'
     add_group 'Helpers', 'app/helpers'
     add_group 'Presenters', 'app/presenters'
@@ -23,8 +23,8 @@ if ENV["COVERAGE"]
 end
 
 Spork.prefork do
-  ENV["RAILS_ENV"] ||= 'test'
-  require File.expand_path("../dummy/config/environment", __FILE__)
+  ENV['RAILS_ENV'] ||= 'test'
+  require File.expand_path('../dummy/config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'database_cleaner'

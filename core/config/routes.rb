@@ -6,15 +6,15 @@ Gaku::Core::Engine.routes.draw do
     class_name: 'Gaku::User',
     module: :devise,
      controllers: {
-       sessions: "gaku/devise/sessions",
-       registrations: "gaku/devise/registrations",
-       passwords: "gaku/devise/passwords"
+       sessions: 'gaku/devise/sessions',
+       registrations: 'gaku/devise/registrations',
+       passwords: 'gaku/devise/passwords'
      }
   }
 
   devise_scope :user do
-    get :set_up_admin_account, to: "devise/registrations#set_up_admin_account"
-    post :create_admin, to: "devise/registrations#create_admin"
+    get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
+    post :create_admin, to: 'devise/registrations#create_admin'
   end
 
   resources :extracurricular_activities do
@@ -139,7 +139,7 @@ Gaku::Core::Engine.routes.draw do
       get :autocomplete_search
       get :load_autocomplete_data
 
-      resources :importer, controller: "students/importer" do
+      resources :importer, controller: 'students/importer' do
         collection do
           get :get_roster
           get :get_registration_roster

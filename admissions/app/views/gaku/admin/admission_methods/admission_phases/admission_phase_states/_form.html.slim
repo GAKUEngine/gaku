@@ -1,7 +1,7 @@
 = remote_nested_form_for [:admin, @admission_method, @admission_phase, @state] do |f|
-  = render 'form_fields', :f => f
-  = submit_button t(:'admission_phase_states.save'), :id => 'submit-admin-admission-method-admission-phase-admission-phase-state-button'
-  = link_to t(:cancel), '', :class => 'btn cancel-admission-phase-state-edit'
+  = render 'form_fields', f: f
+  = submit_button t(:'admission_phase_states.save'), id: 'submit-admin-admission-method-admission-phase-admission-phase-state-button'
+  = link_to t(:cancel), '', class: 'btn cancel-admission-phase-state-edit'
 
 javascript:
   $('.admission-phase-state').on('click', 'button', function(e){

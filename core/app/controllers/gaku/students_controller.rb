@@ -22,8 +22,8 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       #index!
-      @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
-      @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
+      @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: 'applicant').id
+      @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: 'enrolled').id
       super do |format|
 
         format.html do
@@ -93,7 +93,7 @@ module Gaku
     def load_autocomplete_data
       object = 'Gaku::' + params[:class_name].capitalize
       @result = object.constantize.order(params[:column].to_sym)
-                                  .where(params[:column] + " like ?", "%#{params[:term]}%")
+                                  .where(params[:column] + ' like ?', "%#{params[:term]}%")
       render json: @result.map(&params[:column].to_sym).uniq
     end
 

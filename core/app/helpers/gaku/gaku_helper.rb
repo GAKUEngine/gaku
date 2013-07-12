@@ -46,8 +46,8 @@ module Gaku
 
 
     def can_edit?
-      if controller.action_name == "show"
-        if controller.controller_name == "students" or controller.controller_name == "guardians"
+      if controller.action_name == 'show'
+        if controller.controller_name == 'students' || controller.controller_name == 'guardians'
           false
         else
           true
@@ -77,7 +77,7 @@ module Gaku
     end
 
     def print_count(count, text)
-      count != 0 ? text + "(" + count.to_s + ")" : text
+      count != 0 ? text + '(' + count.to_s + ')' : text
     end
 
     def render_js_partial(partial, locals = {})
@@ -96,16 +96,16 @@ module Gaku
 
     def student_sortable(column, title = nil)
       css_class = column == sort_column ? "current #{sort_direction}" : nil
-      direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+      direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
       link_to title, params.merge(sort: column, direction: direction, page: nil), {class: css_class}
     end
 
     def flash_color(type)
       case type
-        when :notice then "alert alert-info"
-        when :success then "alert alert-success"
-        when :error then "alert alert-error"
-        when :alert then "alert alert-error"
+        when :notice then 'alert alert-info'
+        when :success then 'alert alert-success'
+        when :error then 'alert alert-error'
+        when :alert then 'alert alert-error'
       end
     end
 
@@ -132,7 +132,7 @@ module Gaku
     end
 
     def resize_image(image_url, options = {})
-      raise "No size given use :size or :width & :height" unless options[:size] or (options[:height] && options[:width])
+      raise 'No size given use :size or :width & :height' unless options[:size] || (options[:height] && options[:width])
       height = options[:height] || options[:size]
       width  = options[:width]  || options[:size]
       image_tag(image_url, style: "height:#{height}px;width:#{width}px") unless image_url.blank?
@@ -232,7 +232,7 @@ module Gaku
         when '%last' then proper_name(student, :surname, reading)
         end
       end
-      result.gsub(/\s+/, " ").strip
+      result.gsub(/\s+/, ' ').strip
     end
 
   private

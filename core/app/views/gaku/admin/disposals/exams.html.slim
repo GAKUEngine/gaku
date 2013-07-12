@@ -10,7 +10,7 @@
         = th_actions 3
     tbody
       - if @exams.any?
-        = render :partial => 'gaku/admin/disposals/exam', :collection => @exams, :as => :exam
+        = render partial: 'gaku/admin/disposals/exam', collection: @exams, as: :exam
       - else
         .alert.alert-danger.no-exam-msg
-          = t(:'notice.no_resource_assign_first', :resource => t(:'exam.singular'))
+          = t(:'notice.no_resource_assign_first', resource: t(:'exam.singular'))

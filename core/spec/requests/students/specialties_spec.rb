@@ -19,7 +19,7 @@ describe 'Student Specialties' do
     before do
       specialty
       visit gaku.edit_student_path(student)
-      within(el) { page.should have_content("Empty") }
+      within(el) { page.should have_content('Empty') }
       click el
       click new_link
       wait_until_visible cancel_link
@@ -33,7 +33,7 @@ describe 'Student Specialties' do
       end.to change(Gaku::StudentSpecialty, :count).by(1)
 
       within(el) { page.should have_content(specialty.name) }
-      within(count_div) { page.should have_content "Specialties list(1)"}
+      within(count_div) { page.should have_content 'Specialties list(1)'}
       flash_created?
     end
 

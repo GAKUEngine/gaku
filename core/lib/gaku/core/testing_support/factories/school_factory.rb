@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :school, class: Gaku::School do
-    name "Nagoya City University"
-    slogan "Draw the individual potencial"
-    description "Nagoya University description"
+    name 'Nagoya City University'
+    slogan 'Draw the individual potencial'
+    description 'Nagoya University description'
     founded Date.new(1950, 4, 1)
-    principal "Hajime Togari"
+    principal 'Hajime Togari'
   end
 
   factory :school_with_one_contact, parent: :school do

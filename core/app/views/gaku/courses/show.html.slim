@@ -23,10 +23,10 @@
 
 = well_div do
   #course-notes
-    = render :partial => 'gaku/notes/notes'
+    = render partial: 'gaku/notes/notes'
 
 = well_div do
   .span6
-    = link_to_edit_with_text [:edit, @course], :remote => true
+    = link_to_edit_with_text [:edit, @course], remote: true
   .span6
     = link_to_back courses_path

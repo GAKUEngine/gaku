@@ -3,7 +3,7 @@
     = count_div 'admin-admission-periods-count' do
       = print_count @admission_periods.count, t('admission_periods.list')
   .pull-right
-    = ajax_link_to_new t(:'admission_periods.add'), [:new, :admin, :admission_period], :id => 'new-admin-admission-period-link'
+    = ajax_link_to_new t(:'admission_periods.add'), [:new, :admin, :admission_period], id: 'new-admin-admission-period-link'
 
 = content_for :new_form do
   #new-admin-admission-period.hide
@@ -19,6 +19,6 @@
         = th t(:'admission_periods.admitted_on')
         = th_actions 2
     tbody
-      = render :partial => 'admission_period', :collection => @admission_periods, :as => 'admission_period'
+      = render partial: 'admission_period', collection: @admission_periods, as: 'admission_period'
   br/
   

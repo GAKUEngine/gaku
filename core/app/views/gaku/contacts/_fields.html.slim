@@ -1,5 +1,5 @@
 - target ||= [@nested_resources, @contactable, contact].flatten
-= render :partial => 'gaku/contacts/primary_field', :locals => {:contact => contact, :target => target}
+= render partial: 'gaku/contacts/primary_field', locals: {contact: contact, target: target}
 
 td = contact.name
 td = contact.data

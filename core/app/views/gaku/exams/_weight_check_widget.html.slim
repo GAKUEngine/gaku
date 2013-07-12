@@ -11,7 +11,7 @@
         - exam.exam_portions.each_with_index do |portion, i|
           th.btn-warning = "#{portion.name} #{t('exam.weight')}"
       tbody
-        =render :partial => 'gaku/exams/exam_portions/exam_portion_weight_td', :collection => exam.exam_portions, :as => :portion
+        =render partial: 'gaku/exams/exam_portions/exam_portion_weight_td', collection: exam.exam_portions, as: :portion
 
     table.table.table-striped.table-bordered.table-condensed.exam-portions-total-weight
       thead

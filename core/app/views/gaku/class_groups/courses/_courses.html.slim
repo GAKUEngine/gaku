@@ -5,7 +5,7 @@
     = count_div 'class-group-courses-count' do
       = print_count @class_group.class_group_course_enrollments.count, t_course_list
   .pull-right
-    = ajax_link_to_new t(:'course.add'), new_class_group_class_group_course_enrollment_path(:class_group_id => @class_group.id), :id => 'new-class-group-course-link'
+    = ajax_link_to_new t(:'course.add'), new_class_group_class_group_course_enrollment_path(class_group_id: @class_group.id), id: 'new-class-group-course-link'
 
 = hr
 
@@ -16,4 +16,4 @@
         = th t(:'course.code')
         = th_actions 2
     tbody
-      = render :partial => 'gaku/class_groups/courses/course', :collection => @class_group.class_group_course_enrollments, :as => 'enrollment'
+      = render partial: 'gaku/class_groups/courses/course', collection: @class_group.class_group_course_enrollments, as: 'enrollment'

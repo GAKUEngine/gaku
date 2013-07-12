@@ -1,5 +1,5 @@
 tr id="student-#{student.id}"
-  = render 'gaku/shared/fields/student_fields', :student => student
+  = render 'gaku/shared/fields/student_fields', student: student
   - if ["gaku/students", "gaku/admissions"].include? params[:controller]
     td
       = link_to_show student

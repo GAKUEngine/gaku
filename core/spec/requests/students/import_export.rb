@@ -24,8 +24,8 @@ describe 'Student Sheet' do
       visit gaku.students_path
       expect do
         click_link 'import-students-link'
-        select "Roster", from: 'importer_importer_type'
-        absolute_path = Rails.root + "../support/sample_roster.xls"
+        select 'Roster', from: 'importer_importer_type'
+        absolute_path = Rails.root + '../support/sample_roster.xls'
         attach_file 'importer_data_file', absolute_path
         click_button 'Submit'
       end.to change(Gaku::Student, :count).by 2

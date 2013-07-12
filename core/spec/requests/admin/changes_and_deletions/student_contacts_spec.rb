@@ -12,17 +12,17 @@ describe 'Student Contact Changes' do
 
   it 'saves edits', type: 'contact' do
     old_data = @contact.data
-    @contact.update_attributes(data: "123456789")
+    @contact.update_attributes(data: '123456789')
     visit gaku.admin_changes_student_contacts_path
     page.should have_content old_data
-    page.should have_content "update"
-    page.should have_content "123456789"
+    page.should have_content 'update'
+    page.should have_content '123456789'
   end
 
   it 'saves destroy', type: 'contact' do
     @contact.destroy
     visit gaku.admin_changes_student_contacts_path
-    page.should have_content "destroy"
+    page.should have_content 'destroy'
   end
 
 end

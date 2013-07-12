@@ -43,7 +43,7 @@ module Gaku
     end
 
     def sort_column
-      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
     end
 
     def sort_direction

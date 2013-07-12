@@ -10,11 +10,11 @@ describe 'Student Guardian Addresses' do
   let(:guardian) { create(:guardian) }
   let(:guardian_with_address) { create(:guardian, :with_address) }
   let(:guardian_with_addresses) { create(:guardian, :with_addresses) }
-  let(:country)  { create(:country, name: "Japan") }
-  let(:bulgaria) { create(:country, name: "Bulgaria") }
+  let(:country)  { create(:country, name: 'Japan') }
+  let(:bulgaria) { create(:country, name: 'Bulgaria') }
 
   before :all do
-    set_resource "student-guardian-address"
+    set_resource 'student-guardian-address'
   end
 
   context 'new', js: true, type: 'address' do

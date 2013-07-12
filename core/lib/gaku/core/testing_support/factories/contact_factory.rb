@@ -1,9 +1,9 @@
 FactoryGirl.define do
 
   factory :contact, class: Gaku::Contact do
-    data "gaku@example.com"
+    data 'gaku@example.com'
     association(:contact_type)
-    details "My email"
+    details 'My email'
   end
 
 end

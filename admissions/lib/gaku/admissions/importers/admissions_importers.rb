@@ -8,7 +8,7 @@ module Gaku
 
         def admission_importer_types
           [
-            {name: "高校志願者シート", importer_function: :高校志願者シート }
+            {name: '高校志願者シート', importer_function: :高校志願者シート }
           ]
         end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'support/requests/avatarable_spec'
 
-describe "Admin School Campus Picture" do
+describe 'Admin School Campus Picture' do
 
   as_admin
 

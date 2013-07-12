@@ -94,7 +94,7 @@ module Gaku
       def notable
         # @primary_address = StudentAddress.where(student_id: params[:id], is_primary: true).first
         @notable = Student.unscoped.find(params[:id])
-        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+        @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
 
         #Student.unscoped.includes([{contacts: :contact_type}]).find(params[:id])
       end
@@ -108,7 +108,7 @@ module Gaku
       end
 
       def sort_column
-        Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+        Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
       end
 
       def sort_direction

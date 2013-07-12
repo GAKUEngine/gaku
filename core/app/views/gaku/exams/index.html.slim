@@ -3,7 +3,7 @@
     = count_div 'exams-count' do
       = print_count @count, t_exam_list
   .pull-right
-    = ajax_link_to_new t(:'exam.add'), [:new, :exam], :id => 'new-exam-link'
+    = ajax_link_to_new t(:'exam.add'), [:new, :exam], id: 'new-exam-link'
 
 = content_for :new_form do
   #new-exam.hide
@@ -18,4 +18,4 @@
       = th t(:'exam.use_weighting')
       = th_actions 3
   tbody
-    = render :partial => 'exam', :as => :exam, :collection => @exams
+    = render partial: 'exam', as: :exam, collection: @exams

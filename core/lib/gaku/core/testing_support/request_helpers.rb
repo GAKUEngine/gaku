@@ -144,7 +144,7 @@ module Gaku
           wait_until_visible '#students-checked-div'
           within('#students-checked-div') do
             page.should have_content 'Chosen students(1)'
-            wait_until { page.should have_content "Show"}
+            wait_until { page.should have_content 'Show'}
             click_link 'Show'
             wait_until_visible '#chosen-table'
             page.should have_content "#{student1.name}"
@@ -191,7 +191,7 @@ module Gaku
             a = text.split('-')
             p = a.last.pluralize
             result = a[0..-2] << p
-            result * "-"
+            result * '-'
           end
 
       end

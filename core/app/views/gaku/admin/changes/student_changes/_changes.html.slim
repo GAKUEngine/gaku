@@ -13,8 +13,8 @@
   tbody
     - @changes.each do |change|
       - if change.event == 'destroy'
-        = render 'deletion', :change => change
+        = render 'deletion', change: change
       - else
-        = render 'change', :change => change
+        = render 'change', change: change
 
 

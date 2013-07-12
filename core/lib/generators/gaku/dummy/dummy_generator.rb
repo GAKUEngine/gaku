@@ -1,8 +1,8 @@
-require "rails/generators/rails/app/app_generator"
+require 'rails/generators/rails/app/app_generator'
 
 module Gaku
   class DummyGenerator < Rails::Generators::Base
-    desc "Creates blank Rails application, installs Gaku and all sample data"
+    desc 'Creates blank Rails application, installs Gaku and all sample data'
 
     class_option :lib_name, default: ''
     class_option :database, default: ''
@@ -28,7 +28,7 @@ module Gaku
       opts[:skip_bundle] = true
       opts[:old_style_hash] = true
 
-      puts "Generating dummy Rails application..."
+      puts 'Generating dummy Rails application...'
       invoke Rails::Generators::AppGenerator,
         [ File.expand_path(dummy_path, destination_root) ], opts
     end
@@ -37,27 +37,27 @@ module Gaku
       @lib_name = options[:lib_name]
       @database = options[:database]
 
-      template "rails/database.yml", "#{dummy_path}/config/database.yml", force: true
-      template "rails/boot.rb", "#{dummy_path}/config/boot.rb", force: true
-      template "rails/application.rb", "#{dummy_path}/config/application.rb", force: true
-      template "rails/routes.rb", "#{dummy_path}/config/routes.rb", force: true
-      template "rails/script/rails", "#{dummy_path}/spec/dummy/script/rails", force: true
+      template 'rails/database.yml', "#{dummy_path}/config/database.yml", force: true
+      template 'rails/boot.rb', "#{dummy_path}/config/boot.rb", force: true
+      template 'rails/application.rb', "#{dummy_path}/config/application.rb", force: true
+      template 'rails/routes.rb', "#{dummy_path}/config/routes.rb", force: true
+      template 'rails/script/rails', "#{dummy_path}/spec/dummy/script/rails", force: true
     end
 
     def test_dummy_clean
       inside dummy_path do
-        remove_file ".gitignore"
-        remove_file "doc"
-        remove_file "Gemfile"
-        remove_file "lib/tasks"
-        remove_file "app/assets/images/rails.png"
-        remove_file "app/assets/javascripts/application.js"
-        remove_file "public/index.html"
-        remove_file "public/robots.txt"
-        remove_file "README"
-        remove_file "test"
-        remove_file "vendor"
-        remove_file "spec"
+        remove_file '.gitignore'
+        remove_file 'doc'
+        remove_file 'Gemfile'
+        remove_file 'lib/tasks'
+        remove_file 'app/assets/images/rails.png'
+        remove_file 'app/assets/javascripts/application.js'
+        remove_file 'public/index.html'
+        remove_file 'public/robots.txt'
+        remove_file 'README'
+        remove_file 'test'
+        remove_file 'vendor'
+        remove_file 'spec'
       end
     end
 
@@ -94,7 +94,7 @@ module Gaku
     end
 
     def gemfile_path
-      version_file = File.expand_path("../../Versionfile", Dir.pwd)
+      version_file = File.expand_path('../../Versionfile', Dir.pwd)
       if File.exist?(version_file)
         '../../../../Gemfile'
       else

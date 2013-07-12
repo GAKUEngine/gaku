@@ -18,8 +18,8 @@ module Gaku
     end
 
     def enroll_student
-      if params[:student_ids] && params[:student_ids] != ""
-        student_ids = params[:student_ids].split(",")
+      if params[:student_ids] && params[:student_ids] != ''
+        student_ids = params[:student_ids].split(',')
         @extracurricular_activity = ExtracurricularActivity.find(params[:enrollment][:extracurricular_activity_id])
         @students = []
 

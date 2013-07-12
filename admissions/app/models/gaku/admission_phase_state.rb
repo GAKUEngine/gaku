@@ -16,10 +16,10 @@ module Gaku
         if states.any?
           default_state = admission_phase.admission_phase_states.where('id != ?', state.id).first
           default_state.is_default = true
-          default_state.name = default_state.name + "(Default state)"
+          default_state.name = default_state.name + '(Default state)'
           default_state.save
         else
-          default_state = AdmissionPhaseState.create(is_default: true, admission_phase_id: admission_phase.id, name: "Default state")
+          default_state = AdmissionPhaseState.create(is_default: true, admission_phase_id: admission_phase.id, name: 'Default state')
         end
       end
 

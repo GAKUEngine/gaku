@@ -11,7 +11,7 @@ describe 'Student Contacts' do
   let!(:contact_type) { create(:contact_type, name: 'Email') }
 
   before :all do
-    set_resource "student-contact"
+    set_resource 'student-contact'
   end
 
   context 'new', js: true, type: 'contact' do
@@ -28,7 +28,7 @@ describe 'Student Contacts' do
   end
 
 
-  context "existing", type: 'contact' do
+  context 'existing', type: 'contact' do
 
     context 'one contact' do
 

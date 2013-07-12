@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "CourseEnrollment"  do
+describe 'CourseEnrollment'  do
 
   as_admin
 
@@ -8,10 +8,10 @@ describe "CourseEnrollment"  do
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
   let(:course) { create(:course) }
-  let(:student1) { create(:student, name: "John", surname: "Doe", enrollment_status_id: enrollment_status.id) }
+  let(:student1) { create(:student, name: 'John', surname: 'Doe', enrollment_status_id: enrollment_status.id) }
 
   before :all do
-    set_resource "course-student"
+    set_resource 'course-student'
   end
 
   context 'student', js: true do
@@ -24,7 +24,7 @@ describe "CourseEnrollment"  do
       visit gaku.course_path(course)
     end
 
-    it "enrolls and shows" do
+    it 'enrolls and shows' do
       click new_link
       wait_until_visible modal
       expect do
@@ -32,9 +32,9 @@ describe "CourseEnrollment"  do
       end.to change(Gaku::CourseEnrollment, :count).by 1
 
       within(table) do
-        page.should have_content("Doe John")
-        page.should have_content("View Assignments")
-        page.should have_content("View Exams")
+        page.should have_content('Doe John')
+        page.should have_content('View Assignments')
+        page.should have_content('View Exams')
       end
 
       size_of(table_rows).should == 2 #one for head
@@ -43,7 +43,7 @@ describe "CourseEnrollment"  do
       page.should have_content('Successfully enrolled');
     end
 
-    it "enrolls student only once"  do
+    it 'enrolls student only once'  do
       course.students << student1
       course.reload
       visit gaku.course_path(course)
@@ -54,7 +54,7 @@ describe "CourseEnrollment"  do
       click new_link
       wait_until_visible modal
       within('tr#student-' + student1.id.to_s) do
-        page.should have_selector("img.enrolled")
+        page.should have_selector('img.enrolled')
       end
     end
 

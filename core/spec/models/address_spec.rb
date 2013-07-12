@@ -35,18 +35,12 @@ describe Gaku::Address do
       build(:address, country:nil).should_not be_valid
     end
 
-    xit "state_name is not nil and country does not have any states" do
-      address.state = nil
-      address.state_name = 'alabama'
-      address.should be_valid
-    end
-
     it { should validate_presence_of :address1 }
     it { should validate_presence_of :country }
 
   end
 
-  describe "before_save" do
+  describe 'before_save' do
     it 'calls :ensure_first_is_primary on create' do
       built_address = build(:address)
       built_address.should_receive(:ensure_first_is_primary)

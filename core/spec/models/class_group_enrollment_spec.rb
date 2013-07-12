@@ -11,10 +11,10 @@ describe Gaku::ClassGroupEnrollment do
   describe 'validations' do
     it { should validate_presence_of :class_group_id }
     it { should validate_presence_of :student_id }
-    it { should validate_uniqueness_of(:student_id).scoped_to(:class_group_id).with_message("Already enrolled to the class group!") }
+    it { should validate_uniqueness_of(:student_id).scoped_to(:class_group_id).with_message('Already enrolled to the class group!') }
   end
 
-  context "#save_student_class_and_number" do
+  context '#save_student_class_and_number' do
     let(:enrollment) { create(:class_group_enrollment) }
 
     it 'saves after creation' do

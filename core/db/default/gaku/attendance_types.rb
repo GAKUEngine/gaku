@@ -1,7 +1,7 @@
 types = [
   {
-    name: "Present",
-    color_code: "#006e54",
+    name: 'Present',
+    color_code: '#006e54',
     counted_absent: false,
     disable_credit: false,
     credit_rate: 1.00,
@@ -9,8 +9,8 @@ types = [
   },
 
   {
-    name: "Present for Credit",
-    color_code: "#00a497",
+    name: 'Present for Credit',
+    color_code: '#00a497',
     counted_absent: false,
     disable_credit: false,
     credit_rate: 1.00,
@@ -18,8 +18,8 @@ types = [
   },
 
   {
-    name: "Excused",
-    color_code: "#2c4f54",
+    name: 'Excused',
+    color_code: '#2c4f54',
     counted_absent: false,
     disable_credit: false,
     credit_rate: 1.00,
@@ -27,8 +27,8 @@ types = [
   },
 
   {
-    name: "Illness",
-    color_code: "#4d4398",
+    name: 'Illness',
+    color_code: '#4d4398',
     counted_absent: true,
     disable_credit: false,
     credit_rate: 0.80,
@@ -36,8 +36,8 @@ types = [
   },
 
   {
-    name: "Injury",
-    color_code: "#c85179",
+    name: 'Injury',
+    color_code: '#c85179',
     counted_absent: true,
     disable_credit: false,
     credit_rate: 0.80,
@@ -45,8 +45,8 @@ types = [
   },
 
   {
-    name: "Mourning",
-    color_code: "#7d7d7d",
+    name: 'Mourning',
+    color_code: '#7d7d7d',
     counted_absent: true,
     disable_credit: false,
     credit_rate: 1.00,
@@ -54,8 +54,8 @@ types = [
   },
 
   {
-    name: "Absent",
-    color_code: "#e60033",
+    name: 'Absent',
+    color_code: '#e60033',
     counted_absent: true,
     disable_credit: true,
     credit_rate: 1.00,

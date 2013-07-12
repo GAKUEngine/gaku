@@ -4,5 +4,5 @@
   = modal_header t(:'exam_portion.edit')
   = modal_form_for [@exam, model] do |ep_form|
     = modal_body do
-      = render 'gaku/shared/form_fields/exam_portion_form_fields', :ep_form => ep_form
-      = buttons_for @exam_portion, :nested_id => 'exam-exam-portion'
+      = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: ep_form
+      = buttons_for @exam_portion, nested_id: 'exam-exam-portion'

@@ -7,7 +7,7 @@ describe 'Student Enrollment Status' do
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_enrollment_status) }
   let!(:enrollment_status) { create(:enrollment_status) }
-  let!(:enrollment_status2) { create(:enrollment_status, name: "New Enrollment") }
+  let!(:enrollment_status2) { create(:enrollment_status, name: 'New Enrollment') }
   let!(:el) { '#enrollment-status' }
   let!(:select_box) { 'select.input-medium' }
 
@@ -15,7 +15,7 @@ describe 'Student Enrollment Status' do
 
     before do
       visit gaku.edit_student_path(student)
-      within(el) { page.should have_content "Empty"}
+      within(el) { page.should have_content 'Empty'}
       click el
       wait_until_visible select_box
     end

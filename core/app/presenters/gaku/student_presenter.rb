@@ -4,12 +4,12 @@ module Gaku
 
     def class_group
       cg = student.class_groups.last
-      cg.blank? ? "Empty" : cg
+      cg.blank? ? 'Empty' : cg
     end
 
     def seat_number
       sn = student.class_group_enrollments.last
-      sn.blank? ? "" : sn.seat_number
+      sn.blank? ? '' : sn.seat_number
     end
 
     def achievements
@@ -30,7 +30,7 @@ module Gaku
       if value.present?
         yield
       else
-        content_tag :span, "None given", class: "none"
+        content_tag :span, 'None given', class: 'none'
       end
     end
 

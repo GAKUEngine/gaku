@@ -260,7 +260,7 @@ module Gaku
                 while i < rnum && @scores.length != 0
                   scoreMem = @scores.shift()
                   @ranks[exam.id][scoreMem[1]] = @rank_point
-                  rnum += 1 if @scores.length != 0 and scoreMem[0] == @scores[0][0]
+                  rnum += 1 if @scores.length != 0 && scoreMem[0] == @scores[0][0]
                   i += 1
                 end
                @rank_point -= 1

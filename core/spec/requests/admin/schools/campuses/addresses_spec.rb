@@ -5,12 +5,12 @@ describe 'Admin School Campuses Address' do
 
   as_admin
 
-  let(:country) { create(:country, name: "Japan") }
+  let(:country) { create(:country, name: 'Japan') }
   let(:address) { create(:address) }
   let(:school) { create(:school)}
 
   before :all do
-    set_resource "admin-school-campus-address"
+    set_resource 'admin-school-campus-address'
   end
 
   context 'new', type: 'address' do
@@ -32,7 +32,7 @@ describe 'Admin School Campuses Address' do
 
     it_behaves_like 'edit address'
 
-    it "deletes single address", js:true do
+    it 'deletes single address', js:true do
       ensure_delete_is_working
       wait_until_visible new_link
 

@@ -5,7 +5,7 @@ require 'rake-progressbar'
 #student
 student = Gaku::Student.where(name: 'John', surname: 'Doe', enrollment_status_id: 2).first_or_create!
 
-country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: "392").first_or_create!
+country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: '392').first_or_create!
 address = student.addresses.where(address1: Faker::Address.street_address, city: 'Nagoya', country_id: country.id).first_or_create!
 
 email = Gaku::ContactType.where(name: 'Email').first_or_create!

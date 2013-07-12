@@ -9,7 +9,7 @@ describe 'Student CourseEnrollments' do
   let(:course) { create(:course, code: 'fall2050') }
 
   before :all do
-    set_resource "student-course-enrollment"
+    set_resource 'student-course-enrollment'
   end
 
   context 'new' do

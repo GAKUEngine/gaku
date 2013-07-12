@@ -91,7 +91,7 @@ describe 'Admin Admissions' do
           wait_for_ajax
           check_path(current_url,"/admin/admissions?admission_method_id=1&amp;admission_period_id=#{admission_period.id}")
           page.evaluate_script('window.history.back()')
-          check_path(current_url,"/admin/admissions?")
+          check_path(current_url,'/admin/admissions?')
         end
 
         it 'remembers the url even if back btn is selected' do # this was an issue
@@ -243,7 +243,7 @@ describe 'Admin Admissions' do
               wait_until_visible('#new-admin-admission-link') #first time throws error
               wait_until_invisible('#cancel-admin-admission-link')
             end.to change(Gaku::Admission, :count).by 1
-            page.should have_content("Exam(1)")
+            page.should have_content('Exam(1)')
             within ('#state1' ) do
               within('#students-index') { page.should have_content ('Marta') }
             end
@@ -252,23 +252,23 @@ describe 'Admin Admissions' do
           it 'change state and grade exam' do
             #Exam | Pre Exam
             within("#state#{@first_method.admission_phases.first.admission_phase_states.first.id}") do
-              find(:css, "#student-1-check").set(true)
-              select "Abscent", from: 'state_id'
+              find(:css, '#student-1-check').set(true)
+              select 'Abscent', from: 'state_id'
               click_on 'Save'
               wait_for_ajax
               sleep 1
-              wait_until { size_of("#students-index tbody tr").should eq 0 }
+              wait_until { size_of('#students-index tbody tr').should eq 0 }
               page.should_not have_content 'Admitted on'
             end
-            page.should have_content "Interview(0)"
+            page.should have_content 'Interview(0)'
             #Exam | Abscent
             within("#state#{@first_method.admission_phases.first.admission_phase_states.last.id}") do
-              size_of("#students-index tbody tr").should eq 1
-              find(:css, "#student-1-check").set(true)
-              select "Passed", from: 'state_id'
+              size_of('#students-index tbody tr').should eq 1
+              find(:css, '#student-1-check').set(true)
+              select 'Passed', from: 'state_id'
               click_on 'Save'
               sleep 1
-              wait_until { size_of("#students-index tbody tr").should eq 0 }
+              wait_until { size_of('#students-index tbody tr').should eq 0 }
             end
             #grade exam
             page.should have_content 'Grade Exam'
@@ -279,31 +279,31 @@ describe 'Admin Admissions' do
             visit gaku.admin_admissions_path
             #Exam | Passed
             within("#state#{@first_method.admission_phases.first.admission_phase_states.third.id}") do
-              size_of("#students-index tbody tr").should eq 1
+              size_of('#students-index tbody tr').should eq 1
               page.should_not have_content 'Admitted on'
               click_on 'Save'
               sleep 1
             end
-            page.should have_content "Interview(1)"
-            click_on "Interview(1)"
+            page.should have_content 'Interview(1)'
+            click_on 'Interview(1)'
             page.should have_content 'Marta'
             #Interview | Waiting for Interview
             within("#state#{@first_method.admission_phases.last.admission_phase_states.first.id}") do
-              size_of("#students-index tbody tr").should eq 1
+              size_of('#students-index tbody tr').should eq 1
               page.should_not have_content 'Admitted on'
-              find(:css, "#student-1-check").set(true)
-              select "Accepted", from: 'state_id'
+              find(:css, '#student-1-check').set(true)
+              select 'Accepted', from: 'state_id'
               click_on 'Save'
               sleep 1
             end
             #Interview | Accepted
             within("#state#{@first_method.admission_phases.last.admission_phase_states.third.id}") do
-              size_of("#students-index tbody tr").should eq 1
+              size_of('#students-index tbody tr').should eq 1
               page.should have_content 'Admitted On'
             end
             #TODO revert admitted if admitted by mistake
             visit gaku.students_path
-            select "Admitted", from: 'q[enrollment_status_id_eq]'
+            select 'Admitted', from: 'q[enrollment_status_id_eq]'
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end

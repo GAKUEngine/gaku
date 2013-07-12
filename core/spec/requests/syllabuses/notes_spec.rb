@@ -10,7 +10,7 @@ describe 'Syllabus Notes' do
   let(:note) { create(:note) }
 
   before :all do
-    set_resource "syllabus-note"
+    set_resource 'syllabus-note'
   end
 
   context 'new', js: true do
@@ -22,7 +22,7 @@ describe 'Syllabus Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", js: true do
+  context 'existing', js: true do
     before do
       @data = syllabus_with_note
       visit gaku.syllabus_path(@data)

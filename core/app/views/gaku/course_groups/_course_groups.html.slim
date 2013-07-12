@@ -4,4 +4,4 @@
 	    = th(sortable 'name',  t(:'course_group.name'))
 	    = th_actions 3
 	tbody
-	  = render :partial => 'course_group', :collection => @course_groups, :as => :course_group
+	  = render partial: 'course_group', collection: @course_groups, as: :course_group

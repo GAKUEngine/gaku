@@ -41,7 +41,7 @@ describe 'Admin School Levels' do
       current_path.should eq gaku.admin_school_details_edit_path
     end
 
-    it "edit" do
+    it 'edit' do
       click '.remove-school-level'
       click submit
       flash_updated?
@@ -49,7 +49,7 @@ describe 'Admin School Levels' do
       page.should_not have_content level
     end
 
-    it "delete" do
+    it 'delete' do
       fill_in 'School Level', with: '5 class'
       click submit
       flash_updated?
@@ -67,12 +67,12 @@ describe 'Admin School Levels' do
       visit gaku.admin_schools_path
     end
 
-    it "have no edit for school levels" do
+    it 'have no edit for school levels' do
       within(table) { click edit_link }
       page.should_not have_css 'a.add-school-level'
     end
 
-    it "not show school levels on non primary school" do
+    it 'not show school levels on non primary school' do
       within(table) { click show_link }
       page.should_not have_content 'School Levels'
       page.should_not have_content level

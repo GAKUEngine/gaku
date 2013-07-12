@@ -5,11 +5,11 @@ describe 'CourseGroup Courses' do
 
   as_admin
 
-  let(:course_group) { create(:course_group, name: "math 2012 courses") }
+  let(:course_group) { create(:course_group, name: 'math 2012 courses') }
   let(:course) { create(:course, code: 'Math2012') }
 
   before :all do
-    set_resource "course-group-enrollment"
+    set_resource 'course-group-enrollment'
   end
 
   context 'new', js: true do

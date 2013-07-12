@@ -5,12 +5,12 @@
         = link_to_file t(:'student.download_roster'), action: :get_roster
         = link_to_file t(:'student.download_registration_roster'), action: :get_registration_roster
         hr /
-        = form_for :importer, :html => { :multipart => true } do |f|
+        = form_for :importer, html: { multipart: true } do |f|
           h3 = t('student.import')
           = t('file')
           = f.file_field :data_file
           br /
           = t(:'import_format')
-          = select("importer", "importer_type", @importer_types, {:include_blank => false})
+          = select("importer", "importer_type", @importer_types, {include_blank: false})
           br /
           = submit_tag t'import'

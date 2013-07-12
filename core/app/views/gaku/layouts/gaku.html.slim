@@ -9,12 +9,12 @@ html
     = javascript_include_tag "gaku/all"
     = csrf_meta_tags
   body
-    = render :partial => 'gaku/shared/modal_config'
-    = render :partial => "gaku/shared/menubar"
+    = render partial: 'gaku/shared/modal_config'
+    = render partial: "gaku/shared/menubar"
     .container-fluid
       #notice
         - unless flash.empty?
-          = render "gaku/shared/flash", :flash => flash
+          = render "gaku/shared/flash", flash: flash
       #errors
       #modal-dialogs
 

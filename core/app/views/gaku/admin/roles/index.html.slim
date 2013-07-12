@@ -3,7 +3,7 @@
     = count_div 'admin-roles-count' do
       = print_count @count, t_role_list
   .pull-right
-    = ajax_link_to_new t(:'role.add'), [:new, :admin, :role], :id => 'new-admin-role-link'
+    = ajax_link_to_new t(:'role.add'), [:new, :admin, :role], id: 'new-admin-role-link'
 
 = content_for :new_form do
   #new-admin-role.hide
@@ -15,5 +15,5 @@
         = th t(:'role.name')
         = th_actions 2
     tbody
-      = render :partial => 'gaku/admin/roles/role', :collection => @roles, :as => :role
+      = render partial: 'gaku/admin/roles/role', collection: @roles, as: :role
 

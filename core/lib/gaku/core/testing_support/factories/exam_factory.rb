@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
 	factory :exam, class: Gaku::Exam do
-    name "Math exam"
+    name 'Math exam'
     weight 4
     use_weighting true
     after(:build) do |exam|
