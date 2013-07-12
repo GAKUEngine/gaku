@@ -10,6 +10,6 @@
             = print_count @guardian.contacts.count, t(:'contact.plural')
       .tab-content
         #addresses.tab-pane.active
-          = render 'gaku/addresses/addresses', :nested_resources => [@student, @guardian]
+          = render 'gaku/addresses/addresses', nested_resources: [@student, @guardian]
         #contacts.tab-pane
-          = render 'gaku/contacts/contacts', :nested_resources => [@student, @guardian]
+          = render 'gaku/contacts/contacts', nested_resources: [@student, @guardian]

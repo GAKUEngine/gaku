@@ -20,8 +20,8 @@
               div id="current_lang"
                 = I18n.locale
               div id="link_langs"
-                = link_to "ja", :locale => "ja"
-                = link_to "en", :locale => "en"
+                = link_to "ja", locale: "ja"
+                = link_to "en", locale: "en"
   .modal-footer
     a.btn data-dismiss="modal" href="#" =t("config.close")
     a.btn.btn-primary id="btn_config_save" href="#" =t("config.save")

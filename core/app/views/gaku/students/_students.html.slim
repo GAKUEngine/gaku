@@ -16,6 +16,6 @@
         = th_actions 3
 
   tbody
-    = render :partial => 'gaku/students/student', :collection => @students, :as => 'student'
+    = render partial: 'gaku/students/student', collection: @students, as: 'student'
 
-= paginate @students, :remote => true
+= paginate @students, remote: true

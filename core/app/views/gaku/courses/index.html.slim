@@ -9,6 +9,6 @@
     = count_div 'courses-count' do
       = print_count @count, t_course_list
   .pull-right
-    = ajax_link_to_new t(:'course.new'), [:new, :course], :id => "new-course-link"
+    = ajax_link_to_new t(:'course.new'), [:new, :course], id: "new-course-link"
 
 = render 'courses'

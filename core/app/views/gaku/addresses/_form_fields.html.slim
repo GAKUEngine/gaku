@@ -1,24 +1,24 @@
 .row-fluid
   .span12
-    = f.text_field :title, :label => t(:'address.title')
+    = f.text_field :title, label: t(:'address.title')
 
 .row-fluid
   .span3
-    = f.select :country_id, @countries , { :selected => f.object.country_id || country_preset }, :id => "country_dropdown", :label => t(:'address.country')
+    = f.select :country_id, @countries , { selected: f.object.country_id || country_preset }, id: "country_dropdown", label: t(:'address.country')
   .span3
-    = f.text_field :zipcode, :label => t(:'address.zipcode')
+    = f.text_field :zipcode, label: t(:'address.zipcode')
   .span3
     button.span12.btn.btn-primary = t(:'address.search')
 
 .row-fluid
   /.span3
-      /= f.text_field :state_name, :id => "state_dropdown", :value => f.object.state_name || state_preset, :label => t(:'address.state')
+      /= f.text_field :state_name, id: "state_dropdown", value: f.object.state_name || state_preset, label: t(:'address.state')
   .span3
-    = f.text_field :city, :value => f.object.city ||  city_preset, :label => t(:'address.city')
+    = f.text_field :city, value: f.object.city ||  city_preset, label: t(:'address.city')
   .span3
-    = f.text_field :address1, :label => t(:'address.address1')
+    = f.text_field :address1, label: t(:'address.address1')
   .span3
-    = f.text_field :address2, :label => t(:'address.address2')
+    = f.text_field :address2, label: t(:'address.address2')
 
 javascript:
   var state_preset = '#{state_preset}'

@@ -1,5 +1,5 @@
 - if !admission_period.nil?
-  = select_tag :admission_period_id, options_from_collection_for_select(@admission_periods, 'id', 'name', admission_period.id), :class => "span12"
+  = select_tag :admission_period_id, options_from_collection_for_select(@admission_periods, 'id', 'name', admission_period.id), class: "span12"
 - else
   = t(:'admission_periods.no_period')
 

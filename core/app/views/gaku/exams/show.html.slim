@@ -2,7 +2,7 @@
   h3 = t(:'exam.show')
 
 = well_div do
-  = render 'show_table', :exam => @exam
+  = render 'show_table', exam: @exam
 
 = well_div do
   #new-exam-exam-portion.hide style='margin-bottom:20px'
@@ -11,7 +11,7 @@
     = count_div 'exam-exam-portions-count' do
       = print_count(@exam.exam_portions.count, t_exam_portion_list)
   .pull-right
-    = ajax_link_to_new t(:'exam.add_portion'), [:new, @exam, :exam_portion], :id => 'new-exam-exam-portion-link'
+    = ajax_link_to_new t(:'exam.add_portion'), [:new, @exam, :exam_portion], id: 'new-exam-exam-portion-link'
 
   = hr
 
@@ -20,14 +20,14 @@
 
   - if @exam.use_weighting
     .weight-check-widget
-      = render 'weight_check_widget', :exam => @exam
+      = render 'weight_check_widget', exam: @exam
 
 = well_div do
   #exam-notes
-    = render :partial => 'gaku/notes/notes'
+    = render partial: 'gaku/notes/notes'
 
 = well_div do
   .span6
-    = link_to_edit_with_text [:edit,@exam], :remote => true
+    = link_to_edit_with_text [:edit,@exam], remote: true
   .span6
     = link_to_back exams_path

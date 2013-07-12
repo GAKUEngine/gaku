@@ -1,4 +1,4 @@
-= form_tag change_student_state_admin_admissions_path, :remote => true, :id => "change-student-state-form" do
+= form_tag change_student_state_admin_admissions_path, remote: true, id: "change-student-state-form" do
   = table_for 'students-index' do
     thead
       tr
@@ -13,12 +13,12 @@
         /= th_actions 140
         = th t(:'students.status')
     tbody
-      = render :partial => 'gaku/admin/admissions/admissions/student', :collection => @students.find_all { |s| (s[:state_id] == state.id && s[:student].admission.admission_period_id == @admission_period.id) }.map { |i| i[:student] }, :as => 'student', :locals => { :state => state }
+      = render partial: 'gaku/admin/admissions/admissions/student', collection: @students.find_all { |s| (s[:state_id] == state.id && s[:student].admission.admission_period_id == @admission_period.id) }.map { |i| i[:student] }, as: 'student', locals: { state: state }
 
   br
   div class="change-state_#{state.id}-form change-state-form"
     - if @students.find_all { |s| s[:state_id] == state.id }.map { |i| i[:student] }.any?
-      = render :partial => 'gaku/admin/admissions/admissions/state_change_form', :locals => {:state => state}
+      = render partial: 'gaku/admin/admissions/admissions/state_change_form', locals: {state: state}
 
 
 javascript:

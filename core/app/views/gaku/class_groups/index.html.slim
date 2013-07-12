@@ -8,7 +8,7 @@
   .pull-left
     = count_div('class-groups-count') { print_count @count, t_class_group_list }
   .pull-right
-    = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], :id => "new-class-group-link"
+    = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], id: "new-class-group-link"
 
 #class-groups-index
   = render 'class_groups'

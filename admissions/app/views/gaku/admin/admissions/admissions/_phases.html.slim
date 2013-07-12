@@ -2,7 +2,7 @@
   .tabbable
     ul.nav.nav-tabs
       - admission_method.admission_phases.each_with_index do |phase, index|
-        li *{:class => ("active" if index == 0)}
+        li *{class: ("active" if index == 0)}
           a href="#phase_#{phase.id.to_s}" data-toggle="tab" id="phase_#{phase.id.to_s}_tab"
             = phase.name + '(' + phase.admission_phase_records.count.to_s + ')'
         - if index < admission_method.admission_phases.count-1
@@ -10,9 +10,9 @@
             i.icon-arrow-right style="background-image:url('/assets/bootstrap/glyphicons-halflings.png')"
     .tab-content
       - admission_method.admission_phases.each_with_index do |phase, index|
-        div.tab-pane *{:id => "phase_#{phase.id.to_s}", :class => ("active" if index == 0)}
+        div.tab-pane *{id: "phase_#{phase.id.to_s}", class: ("active" if index == 0)}
           .row-fluid style="background-color:white"
             #new-student.hide
-            =render 'gaku/admin/admissions/admissions/phase', :admission_phase_states => phase.admission_phase_states
-            div *{:id => "phase_#{phase.id.to_s}-grade-button"}
-              = render 'gaku/admin/admissions/admissions/grade_button', :phase => phase
+            =render 'gaku/admin/admissions/admissions/phase', admission_phase_states: phase.admission_phase_states
+            div *{id: "phase_#{phase.id.to_s}-grade-button"}
+              = render 'gaku/admin/admissions/admissions/grade_button', phase: phase

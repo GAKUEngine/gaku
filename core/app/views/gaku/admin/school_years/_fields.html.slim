@@ -1,5 +1,5 @@
-td = l school_year.starting, :format => :long
-td = l school_year.ending, :format => :long
+td = l school_year.starting, format: :long
+td = l school_year.ending, format: :long
 td = pluralize (school_year.ending - school_year.starting).to_i, t(:'school_year.day')
 td
   = link_to_show [:admin, school_year]

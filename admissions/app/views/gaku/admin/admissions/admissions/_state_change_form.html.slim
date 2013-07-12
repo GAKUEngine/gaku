@@ -11,13 +11,13 @@
       
       - if state.can_progress
         th
-          = submit_tag t(:'admission_phase_states.progress'), :name => 'progress_students'
+          = submit_tag t(:'admission_phase_states.progress'), name: 'progress_students'
       - if state.can_admit
         th
-          = submit_tag t(:'admission_phase_states.admit'), :name => 'admit_students'
+          = submit_tag t(:'admission_phase_states.admit'), name: 'admit_students'
       - if state.admission_phase.position != 0
         th
-          = submit_tag t(:'admission_phase_states.remove_student'), :name => 'remove_students'
+          = submit_tag t(:'admission_phase_states.remove_student'), name: 'remove_students'
 
     = hidden_field_tag :admission_period_id, @admission_period.id
     = hidden_field_tag :admission_method_id, @admission_method.id

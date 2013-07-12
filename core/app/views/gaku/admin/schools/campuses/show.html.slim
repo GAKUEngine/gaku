@@ -8,10 +8,10 @@
             = @campus.name
 
   .span3.well
-    = render 'picture', :campus => @campus
+    = render 'picture', campus: @campus
 
 = well_div do
-  = render 'gaku/contacts/contacts', :nested_resources => [:admin, @school, @campus]
+  = render 'gaku/contacts/contacts', nested_resources: [:admin, @school, @campus]
   = hr
   = render 'gaku/admin/schools/campuses/addresses/addresses'
 

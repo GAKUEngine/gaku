@@ -22,15 +22,15 @@
             = print_count @student.achievements.count, t('achievement.plural')
       .tab-content
         #addresses.tab-pane.active
-          = render :partial => 'gaku/addresses/addresses', :locals => {:nested_resources => [@student]}
+          = render partial: 'gaku/addresses/addresses', locals: {nested_resources: [@student]}
         #contacts.tab-pane
-          = render 'gaku/contacts/contacts', :nested_resources => [@student]
+          = render 'gaku/contacts/contacts', nested_resources: [@student]
         #notes.tab-pane
-          = render :partial => 'gaku/notes/notes'
+          = render partial: 'gaku/notes/notes'
         #guardians.tab-pane
-          = render :partial => 'gaku/students/guardians/guardians'
+          = render partial: 'gaku/students/guardians/guardians'
         #courses.tab-pane
-          = render :partial => 'gaku/students/course_enrollments/course_enrollments'
+          = render partial: 'gaku/students/course_enrollments/course_enrollments'
         #achievements.tab-pane
-          = render :partial => 'gaku/students/student_achievements/achievements_tab'
+          = render partial: 'gaku/students/student_achievements/achievements_tab'
 

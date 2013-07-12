@@ -3,7 +3,7 @@
     = count_div 'admin-attendance-types-count' do
       = print_count @count, t_attendance_type_list
   .pull-right
-    = ajax_link_to_new t(:'attendance_type.add'), [:new, :admin, :attendance_type], :id => 'new-admin-attendance-type-link'
+    = ajax_link_to_new t(:'attendance_type.add'), [:new, :admin, :attendance_type], id: 'new-admin-attendance-type-link'
 
 = content_for :new_form do
   #new-admin-attendance-type.hide
@@ -20,5 +20,5 @@
         = th t(:'attendance_type.auto_credit')
         = th_actions 2
     tbody
-      = render :partial => 'gaku/admin/attendance_types/attendance_type', :collection => @attendance_types, :as => :attendance_type
+      = render partial: 'gaku/admin/attendance_types/attendance_type', collection: @attendance_types, as: :attendance_type
 

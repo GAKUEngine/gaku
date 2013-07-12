@@ -3,16 +3,16 @@
 
     caption
       h2
-        = link_to edit_person_caption(student), [:edit, @student], :remote => true
+        = link_to edit_person_caption(student), [:edit, @student], remote: true
 
     tbody
       tr
         th width="20%" = t(:'class')
         td
-          = link_to student_presenter.class_group, [:new, @student, :class_group_enrollment], { :id => 'class-group', :remote => true }
+          = link_to student_presenter.class_group, [:new, @student, :class_group_enrollment], { id: 'class-group', remote: true }
 
 
-      = render 'gaku/shared/fields/person_edit_table', :person => student
+      = render 'gaku/shared/fields/person_edit_table', person: student
 
       tr
         th = t(:'admitted')
@@ -40,17 +40,17 @@
         th = t(:'specialty.singular')
         td
           #student-enrollment-status
-            = render 'gaku/students/student_specialties/student_specialties', :student => student
+            = render 'gaku/students/student_specialties/student_specialties', student: student
       tr
         th = t(:'simple_grade.singular')
         td
           #student-simple-grade
-            = render 'gaku/students/simple_grades/simple_grades', :student => student
+            = render 'gaku/students/simple_grades/simple_grades', student: student
       tr
         th = t(:'achievement.singular')
         td
           #student-achievement
-            = render 'gaku/students/student_achievements/student_achievements', :student => student
+            = render 'gaku/students/student_achievements/student_achievements', student: student
 
 javascript:
   $('#commute-method-type').inline_select(#{ commute_method_types_inline });

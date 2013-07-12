@@ -3,7 +3,7 @@
     = count_div 'admin-contact-types-count' do
       = print_count @count, t_contact_type_list
   .pull-right
-    = ajax_link_to_new t(:'contact_type.add'), [:new, :admin, :contact_type], :id => 'new-admin-contact-type-link'
+    = ajax_link_to_new t(:'contact_type.add'), [:new, :admin, :contact_type], id: 'new-admin-contact-type-link'
 
 = content_for :new_form do
   #new-admin-contact-type.hide
@@ -15,4 +15,4 @@
         = th t(:'contact_type.singular')
         = th_actions 2
     tbody
-      = render :partial => 'contact_type', :collection => @contact_types, :as => 'contact_type'
+      = render partial: 'contact_type', collection: @contact_types, as: 'contact_type'

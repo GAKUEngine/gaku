@@ -4,7 +4,7 @@
     = count_div 'admin-grading-method-set-grading-method-set-items-count' do
       = print_count @grading_method_set.grading_method_set_items.count, t_grading_method_list
   .pull-right
-    = ajax_link_to_new t(:'grading_method.add'), new_admin_grading_method_set_grading_method_set_item_path(@grading_method_set), :id => 'new-admin-grading-method-set-grading-method-set-item-link'
+    = ajax_link_to_new t(:'grading_method.add'), new_admin_grading_method_set_grading_method_set_item_path(@grading_method_set), id: 'new-admin-grading-method-set-grading-method-set-item-link'
 
 = hr
 

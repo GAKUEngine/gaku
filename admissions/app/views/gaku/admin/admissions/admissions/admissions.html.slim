@@ -4,9 +4,9 @@
     h4.mt-xs.mb-0 =t(:'admissions.candidates.list')
   .pull-right
     span#new-admin-admission-link
-      = render 'gaku/admin/admissions/links/links', :admission_method => @admission_method
+      = render 'gaku/admin/admissions/links/links', admission_method: @admission_method
     span#admissions_links
-      = render 'gaku/admin/admissions/links/admissions_links', :admission_params => @admission_params
+      = render 'gaku/admin/admissions/links/admissions_links', admission_params: @admission_params
 .row-fluid
   hr
 .row-fluid
@@ -14,10 +14,10 @@
     .row-fluid
       .span6
         #admission-period-selection
-          = render 'gaku/admin/admissions/common/period', :admission_period => @admission_period
+          = render 'gaku/admin/admissions/common/period', admission_period: @admission_period
       .span6
         #admission-method-selection
-          = render 'gaku/admin/admissions/common/method', :admission_methods => @admission_methods
+          = render 'gaku/admin/admissions/common/method', admission_methods: @admission_methods
     .row-fluid.mt-s
       .span12.well style="margin-bottom:0px"
         /.row-fluid
@@ -28,7 +28,7 @@
               /= print_count(@students.count, "合計志願者数：")
         #new-admin-admission.hide
         #admission-phases
-          = render 'gaku/admin/admissions/admissions/phases', :admission_method => @admission_method
+          = render 'gaku/admin/admissions/admissions/phases', admission_method: @admission_method
 
 javascript:
   $(window).bind("popstate", function(e){

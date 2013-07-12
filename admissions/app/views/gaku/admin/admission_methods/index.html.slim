@@ -3,7 +3,7 @@
     = count_div 'admin-admission-methods-count' do
       = print_count @count, t(:'admission_methods.list')
   .pull-right
-    = ajax_link_to_new t(:'admission_methods.add'), [:new, :admin, :admission_method], :id => 'new-admin-admission-method-link'
+    = ajax_link_to_new t(:'admission_methods.add'), [:new, :admin, :admission_method], id: 'new-admin-admission-method-link'
 
 = content_for :new_form do
   #new-admin-admission-method.hide
@@ -16,4 +16,4 @@
           = th t(:'admission_methods.singular')
           = th_actions 3
       tbody
-        = render :partial => 'admission_method', :collection => @admission_methods, :as => 'admission_method'
+        = render partial: 'admission_method', collection: @admission_methods, as: 'admission_method'

@@ -4,10 +4,10 @@
     - if user_signed_in?
       .row-fluid
         .span12
-          = render :partial => 'user_info'
+          = render partial: 'user_info'
       .row-fluid
         .span12
-          = render :partial => 'user_menu'
+          = render partial: 'user_menu'
     - else
       | 下記のリンクからログインを行ってください。
       #{link_to t("devise.sign_in"), new_user_session_path}

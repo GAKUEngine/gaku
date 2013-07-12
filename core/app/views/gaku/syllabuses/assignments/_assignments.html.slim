@@ -13,7 +13,7 @@
           th= t('assignment.name')
           th= t'(assignment.description')
           th= t('assignment.max_score')
-        = render :partial => 'syllabuses/assignments/assignment', :collection => @syllabus.assignments, :as => :assignment
+        = render partial: 'syllabuses/assignments/assignment', collection: @syllabus.assignments, as: :assignment
 
 - else
-  p= t('notice.no_resource_assign_first', :resource => t('assignment.plural'))
+  p= t('notice.no_resource_assign_first', resource: t('assignment.plural'))
