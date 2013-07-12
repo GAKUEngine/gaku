@@ -34,32 +34,18 @@ module Gaku
 
       user ||= User.new
 
-      # if user.role? :admin
+      if user.role? :admin
         can :manage, :all
-      # else
-      #   if user.role? :student
-      #     can :index, Gaku::Student
-      #   else
-      #     can :manage, Gaku::Student
-      #     can :manage, Gaku::Address
-      #     can :manage, Gaku::Contact
-      #     can :manage, Gaku::Note
-      #   end
-
-
-
-        #can :read, :all
-        #can :create, Comment
-        #can :update, Comment do |comment|
-        #  comment.try(:user) == user || user.role?(:moderator)
-        #end
-        #if user.role?(:author)
-        #  can :create, Article
-        #  can :update, Article do |article|
-        #    article.try(:user) == user
-        #  end
-        #end
-    #  end
+      else
+        if user.role? :student
+          can :index, Gaku::Student
+        else
+          can :manage, Gaku::Student
+          can :manage, Gaku::Address
+          can :manage, Gaku::Contact
+          can :manage, Gaku::Note
+        end
+      end
 
 
       #include any abilities registered by extensions, etc.
