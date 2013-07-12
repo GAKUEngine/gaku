@@ -1,0 +1,3 @@
+$('tr#state-<%= @state.id %>').html('<%= render_js_partial("fields", {state: @state}) %>');
+$("#edit-state-modal").modal("hide");
+showNotice("<%= render_flash %>");

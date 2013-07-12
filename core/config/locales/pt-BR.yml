@@ -50,6 +50,7 @@ pt-BR:
     new: Nova Atribuição
     plural: Atribuições
     results: Resultados da Atribuição
+    score: Pontuação
     singular: Atribuição
     view: Exibir Atribuições
   assignments:
@@ -232,19 +233,6 @@ pt-BR:
     singular: Grupo de Cursos
   course_group_enrollment:
     save: Salvar em Grupo de Cursos
-  csv:
-    export: Exportação CSV
-    fields:
-      admitted: admitido
-      birth_date: nascimento
-      email: email
-      gender: sexo
-      name: nome
-      name_reading: 
-      phone: telefone
-      surname: último nome
-      surname_reading: 
-    import: Importação CSV
   date:
     formats:
       default: 
@@ -348,6 +336,8 @@ pt-BR:
     messages:
       already_confirmed: 
       expired: 
+      file_type_unsupported: 
+      file_unreadable: 
       not_found: 
       not_locked: 
       not_saved: 
@@ -405,12 +395,14 @@ pt-BR:
     use_weighting: 
     weight: 
   export: 
+  extended: 
   external_school_record:
     absences: 
     attendance_rate: 
     beginning: 
     data: 
     ending: 
+    singular: 
     student_id_number: 
   extracurricular_activity:
     add: 
@@ -428,6 +420,7 @@ pt-BR:
     list: 
   failure:
     enrolled: 
+  file: 
   flash:
     actions:
       create:
@@ -437,6 +430,8 @@ pt-BR:
         notice: 
       update:
         notice: 
+  full_name: 
+  full_name_reading: 
   gender:
     choose: 
     female: 
@@ -492,7 +487,6 @@ pt-BR:
   guardian:
     add: 
     edit: 
-    guardians: 
     list: 
     name: 
     new: 
@@ -500,6 +494,7 @@ pt-BR:
     relationship: 
     save: 
     singular: 
+    surname: 
   hello: 
   helpers:
     links:
@@ -509,6 +504,7 @@ pt-BR:
   id: 
   import: 
   import_format: 
+  is_graduated: 
   language: 
   languages:
     en: 
@@ -545,7 +541,9 @@ pt-BR:
           defaults: 
           grading: 
           locale: 
+          names: 
           student: 
+        names: 
         pagination: 
         plural: 
         save: 
@@ -591,6 +589,8 @@ pt-BR:
       plural: 
     teacher:
       plural: 
+  middle_name: 
+  middle_name_reading: 
   name: 
   name_reading: 
   none: 
@@ -620,6 +620,7 @@ pt-BR:
   order: 
   panel: 
   period: 
+  personal_information: 
   phone: 
   phonetic_reading: 
   picture: 
@@ -630,6 +631,7 @@ pt-BR:
     grading:
       grading_method: 
       grading_scheme: 
+    names: 
     output_formats:
       choose: 
       documents: 
@@ -791,6 +793,8 @@ pt-BR:
     class_group_enrollment: 
     commute_method: 
     create: 
+    download_registration_roster: 
+    download_roster: 
     edit: 
     enroll: 
     export: 
@@ -799,9 +803,8 @@ pt-BR:
     name: 
     new: 
     plural: 
-    registration:
-      csv: 
-      sheet: 
+    roster: 
+    roster_sheet: 
     save: 
     show: 
     singular: 
@@ -809,6 +812,9 @@ pt-BR:
     edit: 
     index: 
     save: 
+  student_foreign_id_number: 
+  student_id_number: 
+  student_name: 
   student_specialty:
     edit: 
     index: 
@@ -841,6 +847,7 @@ pt-BR:
     show: 
     singular: 
   title: 
+  undefined: Undefined
   user:
     add: 
     edit: 

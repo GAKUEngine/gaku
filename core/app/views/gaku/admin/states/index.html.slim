@@ -1,0 +1,15 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-states-count' do
+      = print_count @count, t_state_list
+  .pull-right
+    = ajax_link_to_new t(:'state.add'), [:new, :admin, :state], id: 'new-admin-state-link'
+
+= content_for :new_form do
+  #new-admin-state.hide
+#show-admin-states-form
+  =render 'country_select_form'
+=hr
+#admin-country-states
+  = render 'country_table', states: @default_country.states, country: @default_country if @default_country
+

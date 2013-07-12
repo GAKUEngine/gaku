@@ -40,6 +40,10 @@ describe Gaku::Address do
       address.state_name = 'alabama'
       address.should be_valid
     end
+
+    it { should validate_presence_of :address1 }
+    it { should validate_presence_of :country }
+
   end
 
   describe "before_save" do
@@ -111,15 +115,7 @@ describe Gaku::Address do
 
   end
 
-
-
-
   describe '#state_text' do
-    context 'state is blank' do
-      let(:address) { build(:address, state: nil, state_name: 'virginia') }
-      specify { address.state_text.should == 'virginia' }
-    end
-
     context 'both name and abbr is present' do
       let(:state) { build(:state, name: 'virginia', abbr: 'va') }
       let(:address) { build(:address, state: state) }

@@ -2,15 +2,15 @@
   .span12.well
     .row-fluid
       .span12
-        = link_to_file t(:'student.registration.csv'), get_csv_template_importer_index_path, :id => "get_registration_csv"
-
-        = link_to_file t(:'student.registration.sheet'), :action => :get_sheet_template
+        = link_to_file t(:'student.download_roster'), action: :get_roster
+        = link_to_file t(:'student.download_registration_roster'), action: :get_registration_roster
         hr /
-        = form_for :importer, :url => { :action => "import_student_list" }, :html => { :multipart => true } do |f|
-          label for="importer"
+        = form_for :importer, :html => { :multipart => true } do |f|
+          h3 = t('student.import')
+          = t('file')
           = f.file_field :data_file
           br /
           = t(:'import_format')
           = select("importer", "importer_type", @importer_types, {:include_blank => false})
           br /
-          = submit_tag 'Submit'
+          = submit_tag t'import'

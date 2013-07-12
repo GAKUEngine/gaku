@@ -12,7 +12,7 @@ describe 'Exam Notes' do
     set_resource "exam-note"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true, type: 'note'  do
     before do
       visit gaku.exam_path(exam)
       @data = exam
@@ -21,7 +21,7 @@ describe 'Exam Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", :js => true do
+  context "existing", js: true, type: 'note'  do
     before do
       note
       visit gaku.exam_path(exam)

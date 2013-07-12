@@ -1,3 +1,4 @@
-$('tr#address-<%= @address.id %>').html('<%= render_js_partial("fields", {:address => @address}) %>');
+$('tr#address-<%= @address.id %>').html('<%= render_js_partial("fields", { address: @address, target: prepare_target([
+  @nested_resources, @addressable], @address) }) %>');
 $(".modal#edit-address-modal").modal("hide");
 showNotice("<%= render_flash %>");

@@ -136,15 +136,13 @@ Gaku::Core::Engine.routes.draw do
 
     collection do
       get 'page/:page', :action => :index
-      get :csv
       get :autocomplete_search
       get :load_autocomplete_data
 
       resources :importer, :controller => "students/importer" do
         collection do
-          get :get_csv_template
-          get :get_sheet_template
-          post :import_student_list
+          get :get_roster
+          get :get_registration_roster
         end
       end
     end
@@ -261,6 +259,9 @@ Gaku::Core::Engine.routes.draw do
         post :sort, :on => :collection
       end
     end
+    resources :states do
+      post :country_states, on: :collection
+    end
 
     resources :school_years do
       resources :semesters, :controller => 'school_years/semesters'
@@ -283,6 +284,8 @@ Gaku::Core::Engine.routes.draw do
         get :pagination
         get :defaults
         get :output_formats
+        get :names
+
         put :update_presets
       end
     end

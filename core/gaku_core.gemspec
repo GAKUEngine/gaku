@@ -21,10 +21,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '4.0.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 1.0.1'
-  #s.add_dependency 'protected_attributes'
 
   s.add_dependency 'slim', '~> 2.0.0'
   #s.add_dependency 'deface'
+
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
   s.add_dependency 'paper_trail'
@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
 
   #spreadsheet handling
   s.add_dependency 'roo'
-  s.add_dependency 'writeexcel'
+  s.add_dependency 'gen_sheet'
 
   s.add_dependency 'thinreports-rails'
 

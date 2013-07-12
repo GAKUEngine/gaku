@@ -1,9 +1,5 @@
-require 'csv'
-
 module Gaku
   class StudentsController < GakuController
-
-    include SheetHelper
 
     load_and_authorize_resource class: Gaku::Student,
                                 except: [:recovery, :destroy]
@@ -12,7 +8,6 @@ module Gaku
 
     inherit_resources
     respond_to :js, :html
-    respond_to :csv, only: :csv
     respond_to :pdf, only: :show
 
     before_filter :load_data
@@ -27,8 +22,16 @@ module Gaku
     def index
       @enrolled_students = params[:enrolled_students]
       #index!
-
+      @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
+      @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
       super do |format|
+
+        format.html do
+          # TODO Fix the line below
+          #@students = Student.where(enrollment_status_id: @enrollment_status_enrolled_id).page(params[:page]).per(Preset.students_per_page)
+          @students = Student.page(params[:page]).per(Preset.students_per_page)
+        end
+
         format.pdf do
           send_data render_to_string, filename: 'sido_yoroku.pdf',
                                       type: 'application/pdf',
@@ -39,6 +42,7 @@ module Gaku
 
     def show
       super do |format|
+
         format.pdf do
           send_data render_to_string, filename: "student-#{@student.id}.pdf",
                                       type: 'application/pdf',
@@ -62,23 +66,6 @@ module Gaku
       redirect_to students_path,
                   notice: t(:'notice.destroyed', resource: t_resource)
     end
-
-    def csv
-      @students = Student.all
-      field_order = %w(surname name)
-
-      content = CSV.generate do |csv|
-        csv << translate_fields(field_order)
-        @students.each do |student|
-          csv << student.attributes.values_at(*field_order)
-        end
-      end
-
-      send_data content,
-                type: 'text/csv; charset=utf-8; header=present',
-                disposition: 'attachment; filename=students.csv'
-    end
-
 
     def update
       @student = get_student
@@ -155,7 +142,9 @@ module Gaku
       @achievements = Achievement.all.collect { |a| [a.name, a.id] }
       @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
       @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+      @enrollment_statuses << [t('undefined'), nil]
       @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
+      @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
     end
 
     def class_name

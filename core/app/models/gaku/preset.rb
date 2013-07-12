@@ -8,7 +8,8 @@ module Gaku
       grading: %w(grading_method grading_scheme),
       default: %w(chooser_table_columns),
       pagination: %w(default_per_page students_per_page changes_per_page),
-      output_formats: %w(spreadsheets printables documents)
+      output_formats: %w(spreadsheets printables documents),
+      names: %w(names)
     }
 
     def self.save_presets(params)

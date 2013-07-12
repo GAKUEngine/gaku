@@ -12,13 +12,9 @@ module Gaku
 
     default_scope -> { where(is_deleted: false) }
 
-    validates_presence_of :address1, :city, :country
+    validates_presence_of :address1, :country
 
     accepts_nested_attributes_for :country
-
-    # attr_accessible :title, :address1, :address2, :city, :zipcode,
-    #                 :state, :state_name, :state_id, :country, :country_id,
-    #                 :is_deleted, :is_primary, :past
 
     before_save :ensure_first_is_primary, on: :create
 
@@ -63,6 +59,10 @@ module Gaku
     def empty?
       except_fields = %w(id created_at updated_at country_numcode)
       attributes.except(except_fields).all? { |_, v| v.nil? }
+    end
+
+    def campus_address?
+      addressable_type == 'Gaku::Campus'
     end
 
     private

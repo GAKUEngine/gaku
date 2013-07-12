@@ -5,7 +5,10 @@ module Gaku
                       foreign_key: 'country_numcode',
                       primary_key: 'numcode'
 
-    validates_presence_of :name, :iso_name
+
+    default_scope -> { order('name ASC') }
+
+    validates_presence_of :name, :iso_name, :iso
 
     def <=>(other)
       name <=> other.name
