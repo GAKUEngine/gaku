@@ -4,7 +4,7 @@ module Gaku
 
     #default_scope where("admitted != ?", "")
 
-    scope :non_deleted, includes(:enrollment_status).where('gaku_enrollment_statuses.code != ?', "deleted")
+    scope :non_deleted, includes(:enrollment_status).where('gaku_enrollment_statuses.code != ?', 'deleted')
 
     #validates :enrollment_status_id, presence: true
 
@@ -18,7 +18,7 @@ module Gaku
 
     def make_applicant
       update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
-                                                                    code:"applicant",
+                                                                    code:'applicant',
                                                                     is_active:false, 
                                                                     immutable:true).first_or_create!.id)
       save
@@ -26,7 +26,7 @@ module Gaku
 
     def make_admitted(admission_date)
       update_column(:enrollment_status_id, Gaku::EnrollmentStatus.where(
-                                                                    code:"admitted",
+                                                                    code:'admitted',
                                                                     is_active:true, 
                                                                     immutable:true).first_or_create!.id)
       update_column(:admitted, admission_date)

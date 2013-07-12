@@ -13,7 +13,7 @@ describe 'ExtracurricularActivity Students' do
   let(:student3) { create(:student, enrollment_status_id: enrollment_status.id) }
 
   before :all do
-    set_resource "extracurricular-activity-student"
+    set_resource 'extracurricular-activity-student'
   end
 
   before do
@@ -23,7 +23,7 @@ describe 'ExtracurricularActivity Students' do
     enrollment_status
   end
 
-  context "#new", js: true do
+  context '#new', js: true do
     before do
       student1
       student2
@@ -43,8 +43,8 @@ describe 'ExtracurricularActivity Students' do
       end.to change(Gaku::ExtracurricularActivityEnrollment,:count).by 1
 
       page.should have_content "#{student1} : Successfully enrolled!"
-      within('.extracurricular-activity-enrollments-count') { page.should have_content "1" }
-      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content "1" }
+      within('.extracurricular-activity-enrollments-count') { page.should have_content '1' }
+      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content '1' }
     end
 
     it 'adds more than one student' do
@@ -55,14 +55,14 @@ describe 'ExtracurricularActivity Students' do
       page.should have_content "#{student1} : Successfully enrolled!"
       page.should have_content "#{student2} : Successfully enrolled!"
       page.should have_content "#{student3} : Successfully enrolled!"
-      within('.extracurricular-activity-enrollments-count') { page.should have_content "3" }
-      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content "3" }
+      within('.extracurricular-activity-enrollments-count') { page.should have_content '3' }
+      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content '3' }
 
     end
 
   end
 
-  context "#search " do
+  context '#search ' do
     it 'searches students', js: true do
       visit gaku.extracurricular_activities_path
       click show_link
@@ -79,12 +79,12 @@ describe 'ExtracurricularActivity Students' do
     end
   end
 
-  context "when student is already added" do
+  context 'when student is already added' do
     before do
       extracurricular_activity.students << student1
       visit gaku.extracurricular_activity_path(extracurricular_activity)
-      within('.extracurricular-activity-enrollments-count') { page.should have_content "1" }
-      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content "1" }
+      within('.extracurricular-activity-enrollments-count') { page.should have_content '1' }
+      within('#extracurricular-activity-enrollments-tab-link') { page.should have_content '1' }
       Gaku::ExtracurricularActivityEnrollment.count.should eq 1
     end
 
@@ -92,7 +92,7 @@ describe 'ExtracurricularActivity Students' do
       click new_link
       wait_until { page.find('#student-modal').visible? }
       within('tr#student-' + student1.id.to_s) do
-        page.should have_selector("img.enrolled")
+        page.should have_selector('img.enrolled')
       end
     end
 
@@ -101,8 +101,8 @@ describe 'ExtracurricularActivity Students' do
 
       ensure_delete_is_working
 
-      within('.extracurricular-activity-enrollments-count') { page.should_not have_content("1") }
-      within('#extracurricular-activity-enrollments-tab-link') { page.should_not have_content("1") }
+      within('.extracurricular-activity-enrollments-count') { page.should_not have_content('1') }
+      within('#extracurricular-activity-enrollments-tab-link') { page.should_not have_content('1') }
     end
   end
 

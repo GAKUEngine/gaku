@@ -8,7 +8,7 @@ describe 'Student Versioning' do
 
   it 'saves update history' do
     expect do
-      @student.name = "Changed Name"
+      @student.name = 'Changed Name'
       @student.save
     end.to change(Gaku::StudentVersion, :count).by 1
   end

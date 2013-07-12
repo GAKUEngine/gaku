@@ -28,22 +28,22 @@ module Gaku
     module TestingSupport
       module ControllerRequests
         def gaku_get(action, parameters = nil, session = nil, flash = nil)
-          process_gaku_action(action, parameters, session, flash, "GET")
+          process_gaku_action(action, parameters, session, flash, 'GET')
         end
 
         # Executes a request simulating POST HTTP method and set/volley the response
         def gaku_post(action, parameters = nil, session = nil, flash = nil)
-          process_gaku_action(action, parameters, session, flash, "POST")
+          process_gaku_action(action, parameters, session, flash, 'POST')
         end
 
         # Executes a request simulating PUT HTTP method and set/volley the response
         def gaku_put(action, parameters = nil, session = nil, flash = nil)
-          process_gaku_action(action, parameters, session, flash, "PUT")
+          process_gaku_action(action, parameters, session, flash, 'PUT')
         end
 
         # Executes a request simulating DELETE HTTP method and set/volley the response
         def gaku_delete(action, parameters = nil, session = nil, flash = nil)
-          process_gaku_action(action, parameters, session, flash, "DELETE")
+          process_gaku_action(action, parameters, session, flash, 'DELETE')
         end
 
         def gaku_js_get(action, parameters = nil, session = nil, flash = nil)
@@ -69,7 +69,7 @@ module Gaku
         
         private
 
-          def process_gaku_action(action, parameters = nil, session = nil, flash = nil, method = "GET")
+          def process_gaku_action(action, parameters = nil, session = nil, flash = nil, method = 'GET')
             parameters ||= {}
             process(action, parameters.merge!(use_route: :gaku), session, flash, method)
           end

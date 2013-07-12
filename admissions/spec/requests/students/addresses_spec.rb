@@ -6,10 +6,10 @@ describe 'Admin Student Address' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:country) { create(:country, name: "Japan") }
+  let(:country) { create(:country, name: 'Japan') }
 
   before :all do
-    set_resource "student-address"
+    set_resource 'student-address'
   end
 
   context 'new', js: true, type: 'address' do

@@ -10,10 +10,10 @@ describe 'Students in admissions' do
   let(:student3) { create(:student, name: 'Johny', surname: 'Bravo') }
 
   before :all do
-    set_resource "student"
+    set_resource 'student'
   end
 
-  context "existing", js:true do
+  context 'existing', js:true do
 
     before do
       student
@@ -30,17 +30,17 @@ describe 'Students in admissions' do
         wait_until_visible modal
       end
 
-      it "edits " do
-        fill_in "student_surname", with: "Kostova"
-        fill_in "student_name",    with: "Marta"
+      it 'edits ' do
+        fill_in 'student_surname', with: 'Kostova'
+        fill_in 'student_name',    with: 'Marta'
         click submit
         wait_until_invisible modal
 
-        page.should have_content "Kostova"
-        page.should have_content "Marta"
+        page.should have_content 'Kostova'
+        page.should have_content 'Marta'
         student.reload
-        student.name.should eq "Marta"
-        student.surname.should eq "Kostova"
+        student.name.should eq 'Marta'
+        student.surname.should eq 'Kostova'
         flash_updated?
       end
 

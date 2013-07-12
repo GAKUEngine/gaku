@@ -65,21 +65,21 @@ describe 'Admin Admissions Grading' do
       select 'Illness', from: 'preset-reasons'
       click_on 'Submit'
       page.should_not have_css '.popover-content'
-      find('.score-cell')['disabled'].should == "true" #for phantom it should == "disabled"
+      find('.score-cell')['disabled'].should == 'true' #for phantom it should == "disabled"
     end
 
     it 'adds attendance custom reason' do
       fill_in 'custom-reason', with: 'Illness'
       click_on 'Submit'
       page.should_not have_css '.popover-content'
-      find('.score-cell')['disabled'].should == "true"
+      find('.score-cell')['disabled'].should == 'true'
     end
 
     it 'removes attendance reason' do
       fill_in 'custom-reason', with: 'Illness'
       click_on 'Submit'
       page.should_not have_css '.popover-content'
-      find('.score-cell')['disabled'].should == "true"
+      find('.score-cell')['disabled'].should == 'true'
       click '.portion_set_attendance'
       page.find('.delete-attendance').click
       wait_for_ajax

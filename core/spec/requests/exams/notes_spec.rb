@@ -9,7 +9,7 @@ describe 'Exam Notes' do
   let(:note) { create(:note, notable: exam) }
 
   before :all do
-    set_resource "exam-note"
+    set_resource 'exam-note'
   end
 
   context 'new', js: true, type: 'note'  do
@@ -21,7 +21,7 @@ describe 'Exam Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", js: true, type: 'note'  do
+  context 'existing', js: true, type: 'note'  do
     before do
       note
       visit gaku.exam_path(exam)

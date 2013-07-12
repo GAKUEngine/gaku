@@ -9,7 +9,7 @@ require 'sidekiq'
 # figure out where we are being loaded from
 if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
   begin
-    raise "foo"
+    raise 'foo'
   rescue => e
     puts <<-MSG
   ===================================================
@@ -29,15 +29,15 @@ if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
   end
 end
 
-if ENV["COVERAGE"]
+if ENV['COVERAGE']
   # Run Coverage report
   require 'simplecov'
-  puts "Starting SimpleCov"
+  puts 'Starting SimpleCov'
   SimpleCov.start do
-    add_filter "/support/"
-    add_filter "/support/requests/"
-    add_filter "/spec/requests/**"
-    add_filter "/config/**"
+    add_filter '/support/'
+    add_filter '/support/requests/'
+    add_filter '/spec/requests/**'
+    add_filter '/config/**'
     add_group 'Controllers', 'app/controllers'
     add_group 'Helpers', 'app/helpers'
     add_group 'Presenters', 'app/presenters'
@@ -49,14 +49,14 @@ if ENV["COVERAGE"]
 end
 
 Spork.prefork do
-  ENV["RAILS_ENV"] ||= 'test'
-  require File.expand_path("../dummy/config/environment", __FILE__)
+  ENV['RAILS_ENV'] ||= 'test'
+  require File.expand_path('../dummy/config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'database_cleaner'
   require 'active_record/fixtures'
   require 'factory_girl_rails'
-  require "paperclip/matchers"
+  require 'paperclip/matchers'
   require 'sidekiq/testing'
 
   require 'gaku/core/testing_support/env'
@@ -119,7 +119,7 @@ Spork.each_run do
     config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, type: :request
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
-    config.alias_it_should_behave_like_to :ensures, "ensures"
+    config.alias_it_should_behave_like_to :ensures, 'ensures'
   end
 
 end

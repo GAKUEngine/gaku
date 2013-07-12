@@ -7,7 +7,7 @@ describe 'CourseGroups' do
   let(:course_group) { create(:course_group, name: '2013Courses') }
 
   before :all do
-    set_resource("course-group")
+    set_resource('course-group')
   end
 
   context '#new', js: true do
@@ -93,7 +93,7 @@ describe 'CourseGroups' do
       page.should have_content course_group.name
 
       click '#delete-course-group-link'
-      within(".delete-modal") { click_on "Delete" }
+      within('.delete-modal') { click_on 'Delete' }
       accept_alert
 
       page.should_not have_content 'Course Groups List(1)'
@@ -101,7 +101,7 @@ describe 'CourseGroups' do
       flash_destroyed?
     end
 
-    context "when select back btn" do
+    context 'when select back btn' do
       it 'returns to index view' do
         visit gaku.course_group_path(course_group)
         click_on('Back')
@@ -109,7 +109,7 @@ describe 'CourseGroups' do
       end
     end
 
-    context "when select show btn" do
+    context 'when select show btn' do
       it 'redirects to show view' do
         within(table) { click show_link }
         page.should have_content ('Course Group')

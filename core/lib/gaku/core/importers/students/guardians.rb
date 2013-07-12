@@ -48,14 +48,14 @@ module Gaku::Core::Importers::Students
     def add_guardian(row, student)
       if row[:'guardian.name'] != nil && row[:'guardian.name'] != '' # name filled
         guardian_name = row[:'guardian.name']
-        log "Guardian with name: " + guardian_name 
+        log 'Guardian with name: ' + guardian_name 
         if row[:'guardian.surname'] == nil || row[:'guardian.suranme'] == ''
           guardian_surname = student.surname
         else
           guardian_surname = row[:'guardian.surname']
         end
       elsif !row[:full_name] == nil && row[:full_name] != '' # use full name
-        guardian_name_parts = row[:full_name].sub("　", " ").split(" ")
+        guardian_name_parts = row[:full_name].sub('　', ' ').split(' ')
         guardian_surname = guardian_name_parts.first
         guardian_name = guardian_name_parts.last
       else # no name, so can't register guardian

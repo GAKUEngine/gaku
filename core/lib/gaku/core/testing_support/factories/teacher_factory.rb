@@ -5,7 +5,7 @@ FactoryGirl.define  do
     surname { Faker::Name.last_name }
     name_reading { Faker::Name.first_name }
     surname_reading { Faker::Name.last_name }
-    gender "male"
+    gender 'male'
   end
 
 end

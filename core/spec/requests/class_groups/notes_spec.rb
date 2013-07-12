@@ -9,7 +9,7 @@ describe 'ClassGroup Notes' do
   let(:note) { create(:note, notable: class_group) }
 
   before :all do
-    set_resource "class-group-note"
+    set_resource 'class-group-note'
   end
 
   context 'new', type: 'note' do
@@ -22,7 +22,7 @@ describe 'ClassGroup Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", js: true, type: 'note'  do
+  context 'existing', js: true, type: 'note'  do
     before do
       note
       visit gaku.class_group_path(class_group)

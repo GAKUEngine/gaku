@@ -21,7 +21,7 @@ describe 'Admin Listing Admissions' do
 
       page.should have_content 'Listing Admissions'
       click_on 'Listing Admissions'
-      current_path.should == "/admin/admissions/listing_admissions"
+      current_path.should == '/admin/admissions/listing_admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{@admission.admission_period.admission_methods.first.name}"
       page.should have_content "#{@admission.admission_period.admission_methods.first.admission_phases.first.name}"
@@ -34,17 +34,17 @@ describe 'Admin Listing Admissions' do
 
         before do
           click '.edit-link'
-          current_path.should eq "/admin/students/1/edit"
+          current_path.should eq '/admin/students/1/edit'
           page.should have_content "#{student.name}"
           click '#delete-student-link'
-          within(modal) { click_on "Delete" }
+          within(modal) { click_on 'Delete' }
           accept_alert
           student.reload
         end
 
         it 'deletes student from edit view' do
-          page.should have_content "successfully"
-          current_path.should == "/admin/admissions/listing_admissions"
+          page.should have_content 'successfully'
+          current_path.should == '/admin/admissions/listing_admissions'
           page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path
           page.should_not have_content "#{student.name}"
@@ -131,7 +131,7 @@ describe 'Admin Listing Admissions' do
     it 'goes to admissions' do
       page.should have_content 'Admissions'
       click_on 'Admissions'
-      current_path.should eq "/admin/admissions"
+      current_path.should eq '/admin/admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"
     end
@@ -139,7 +139,7 @@ describe 'Admin Listing Admissions' do
     it 'goes to applicants list' do
       page.should have_content 'Applicants List'
       click_on 'Applicants List'
-      current_path.should eq "/admin/admissions/listing_applicants"
+      current_path.should eq '/admin/admissions/listing_applicants'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"
     end
@@ -148,7 +148,7 @@ describe 'Admin Listing Admissions' do
       before do
         admission_period
         visit gaku.listing_admissions_admin_admissions_path
-        current_path.should == "/admin/admissions/listing_admissions"
+        current_path.should == '/admin/admissions/listing_admissions'
         within('#admissions_links') do
           page.should have_content 'Applicants List'
           page.should_not have_content 'Listing Admissions'

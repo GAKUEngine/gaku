@@ -18,16 +18,16 @@ module Gaku
     end
 
     def create
-      redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') and return if params[:importer][:data_file].nil?
+      redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') && return if params[:importer][:data_file].nil?
 
       file = ImportFile.new(params[:importer])
       file.context = 'students'
-      raise "COULD NOT SAVE FILE" unless file.save
+      raise 'COULD NOT SAVE FILE' unless file.save
 
       case params[:importer][:importer_type]
-      when "import_roster"
+      when 'import_roster'
         import_roster(file)
-      when "import_school_station_zaikousei"
+      when 'import_school_station_zaikousei'
         import_school_station_zaikousei(file)
       end
     end
@@ -37,7 +37,7 @@ module Gaku
           file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet' ||
           file.data_file.content_type == 'application/xls'
         Gaku::Core::Importers::Students::RosterWorker.perform_async(file.id)
-        render text: "Importing Roster"
+        render text: 'Importing Roster'
       else
         redirect_to importer_index_path, alert: '[' + file.data_file.content_type + '] ' + I18n.t('errors.messages.file_type_unsupported')
       end
@@ -46,7 +46,7 @@ module Gaku
     def import_school_station_zaikousei(file)
       if file.data_file.content_type == 'application/vnd.ms-excel'
         Gaku::Core::Importers::Students::SchoolStationZaikouseiWorker.perform_async(file.id)
-        render text: "在校生をSchoolStationからインポート中。"
+        render text: '在校生をSchoolStationからインポート中。'
       else
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')
       end

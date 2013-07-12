@@ -6,7 +6,7 @@ module Gaku
 
     def index
       #@importer_types = ["GAKU Engine"]
-      render "gaku/syllabuses/importer/index"
+      render 'gaku/syllabuses/importer/index'
     end
 
     def get_template

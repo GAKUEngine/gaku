@@ -10,7 +10,7 @@ describe 'Teacher Notes' do
   let(:note) { create(:note) }
 
   before :all do
-    set_resource "teacher-note"
+    set_resource 'teacher-note'
   end
 
   context 'new', type: 'note'  do
@@ -23,7 +23,7 @@ describe 'Teacher Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", type: 'note'  do
+  context 'existing', type: 'note'  do
 
     before do
       @data = teacher_with_note

@@ -32,7 +32,7 @@ module Gaku::Core::Importers::Students
         return student
       end
 
-      log "Registering new student from importer."
+      log 'Registering new student from importer.'
       student = Gaku::Student.new
       student.enrollment_status = Gaku::EnrollmentStatus.find_by_code('enrolled')
       return student
@@ -52,15 +52,15 @@ module Gaku::Core::Importers::Students
         student.middle_name_reading = row[:middle_name_reading]
         student.name_reading = row[:name_reading]
       elsif (!row[:full_name].nil? && row[:full_name] != '')
-        name_parts = row[:full_name].sub("　", " ").split(" ")
+        name_parts = row[:full_name].sub('　', ' ').split(' ')
         student.surname = name_parts.first
         student.name = name_parts.last
 
-        name_reading_parts = row[:full_name_reading].sub("　", " ").split(" ")
+        name_reading_parts = row[:full_name_reading].sub('　', ' ').split(' ')
         student.surname_reading = name_reading_parts.first
         student.name_reading = name_reading_parts.last
       else
-        log "Could not read student name for: " + row
+        log 'Could not read student name for: ' + row
       end
     end
   end

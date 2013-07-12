@@ -64,7 +64,7 @@ module Gaku
           path_to_exam: @path_to_exam.to_json,
           completion: @completion
         }}
-        format.html { render "gaku/exams/grading" }
+        format.html { render 'gaku/exams/grading' }
       end
     end
 
@@ -102,7 +102,7 @@ module Gaku
     def before_show
       exam
       @notable = @exam
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
     end
 
     def count

@@ -8,10 +8,10 @@ describe 'Teacher Address' do
   let(:teacher) { create(:teacher) }
   let(:teacher_with_address) { create(:teacher, :with_address) }
   let(:teacher_with_addresses) { create(:teacher, :with_addresses) }
-  let(:country) { create(:country, name: "Japan") }
+  let(:country) { create(:country, name: 'Japan') }
 
   before :all do
-    set_resource "teacher-address"
+    set_resource 'teacher-address'
   end
 
   context 'new', js: true, type: 'address' do

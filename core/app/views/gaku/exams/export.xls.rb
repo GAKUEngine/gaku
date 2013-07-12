@@ -1,7 +1,7 @@
 require 'spreadsheet'
 require 'csv'
 
-response.headers["Content-Disposition"] = "attachment; filename='#{@course.code}.xls'"
+response.headers['Content-Disposition'] = "attachment; filename='#{@course.code}.xls'"
 
 students = @course.students
 

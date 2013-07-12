@@ -45,7 +45,7 @@ module Gaku
     end
 
     def add_default_state
-      AdmissionPhaseState.where(name: "Default state", admission_phase_id: self.id, is_default: true, can_progress: true, can_admit: false, auto_admit: false).first_or_create
+      AdmissionPhaseState.where(name: 'Default state', admission_phase_id: self.id, is_default: true, can_progress: true, can_admit: false, auto_admit: false).first_or_create
     end
 
   end

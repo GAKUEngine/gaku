@@ -11,10 +11,10 @@ describe 'Student Guardian Contacts' do
   let(:guardian_with_contacts) { create(:guardian, :with_contacts) }
   let(:contact_type) { create(:contact_type, name: 'Email') }
 
-  tab_link = "#student-guardian-contacts-tab-link"
+  tab_link = '#student-guardian-contacts-tab-link'
 
   before :all do
-    set_resource "student-guardian-contact"
+    set_resource 'student-guardian-contact'
   end
 
 
@@ -24,7 +24,7 @@ describe 'Student Guardian Contacts' do
       student.guardians << guardian
       visit gaku.edit_student_path(student)
       @data = guardian
-      click "#student-guardians-tab-link"
+      click '#student-guardians-tab-link'
       wait_until { page.has_content? 'Guardians list' }
       click edit_link
       click tab_link

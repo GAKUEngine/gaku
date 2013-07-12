@@ -43,7 +43,7 @@ module Gaku
           path_to_exam: @path_to_exam.to_json,
           completion: @completion
         }}
-        format.html { render "gaku/exams/grading" }
+        format.html { render 'gaku/exams/grading' }
       end
       end
 

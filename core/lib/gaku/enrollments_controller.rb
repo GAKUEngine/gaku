@@ -9,7 +9,7 @@ module Gaku
       @enrollments = []
 
       params[:selected_students].each do |student|
-        student_id = student.split("-")[1].to_i
+        student_id = student.split('-')[1].to_i
         enrollment = class_name.constantize.new(enrollment_param => params[enrollment_param], student_id: student_id)
         if  enrollment.save
           @enrollments << enrollment
@@ -42,17 +42,17 @@ module Gaku
     private
 
     def flash_failure(enrollments)
-      msg = ""
+      msg = ''
       enrollments.each do |enrollment|
         student = Student.find(enrollment.student_id)
-        msg += msg_for_failed_enrollment(student, enrollment.errors.full_messages.join(", "))
+        msg += msg_for_failed_enrollment(student, enrollment.errors.full_messages.join(', '))
       end
       flash.now[:error] = msg.html_safe
     end
 
 
     def flash_success(enrollments)
-      msg = ""
+      msg = ''
       enrollments.each do |enrollment|
         student = Student.find(enrollment.student_id)
         msg += msg_for_enrollment(student)

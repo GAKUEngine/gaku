@@ -101,8 +101,8 @@ module Gaku
         @admission = Admission.new
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
-        @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
-        @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
+        @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: 'applicant').id
+        @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: 'enrolled').id
         @search = Student.search(params[:q])
         @students = @search.result.where(enrollment_status_id: @enrollment_status_applicant_id).page(params[:page]).per(Preset.students_per_page)
         @admissions = Admission.all
@@ -228,7 +228,7 @@ module Gaku
 
 
         def sort_column
-          Student.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+          Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
         end
 
         def sort_direction
@@ -236,12 +236,12 @@ module Gaku
         end
 
         def show_flashes(admissions, err_admissions)
-          notice = ""
+          notice = ''
           unless admissions.empty?
             admissions.each do |admission|
               student = Student.unscoped.find(admission.student_id)
               #TODO localize the text
-              notice+= "<p>" + student.name + " " + student.surname + ": " + "<span style='color:green;'> Admission successfully  created.</span>" + "</p>"
+              notice+= '<p>' + student.name + ' ' + student.surname + ': ' + "<span style='color:green;'> Admission successfully  created.</span>" + '</p>'
             end
             flash.now[:success] = notice.html_safe
           end
@@ -249,7 +249,7 @@ module Gaku
             err_admissions.each do |admission|
               student = Student.unscoped.find(admission.student_id)
               #TODO localize the text
-              notice+= "<p>" + student.name + " " + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(", ") + "</span></p>"
+              notice+= '<p>' + student.name + ' ' + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(', ') + '</span></p>'
             end
             flash.now[:error] = notice.html_safe
           end

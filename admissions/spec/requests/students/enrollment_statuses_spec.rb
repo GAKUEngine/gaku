@@ -10,19 +10,19 @@ describe 'Admin Student Enrollment Status' do
   
 
   before :all do
-    set_resource "student-enrollment-status"
+    set_resource 'student-enrollment-status'
     @submit_btn = '#submit-student-button'
     @cancel_btn = '#cancel-student-link'
   end
 
-  context "existing" do
+  context 'existing' do
     before do
       student
       visit gaku.edit_admin_student_path(student)
     end
 
-    context "enrollment status", js: true do
-      context " #add" do
+    context 'enrollment status', js: true do
+      context ' #add' do
         before do
           click edit_link
           wait_until_visible modal

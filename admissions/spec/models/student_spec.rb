@@ -5,7 +5,7 @@ describe Gaku::Student do
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
 
-  context "validations" do
+  context 'validations' do
     it { should have_one(:admission) }
     #it { should validate_presence_of(:enrollment_status_id) }
   end
@@ -34,7 +34,7 @@ describe Gaku::Student do
       @student = create(:student, enrollment_status_id:2)
     end
 
-    xit "has named scope :only_applicants" do
+    xit 'has named scope :only_applicants' do
       #assert Gaku::Student.respond_to?(:only_applicants)
       expect(Gaku::Student.only_applicants).to eq []
     end 

@@ -10,13 +10,13 @@ describe 'Student Address Versioning' do
 
   it 'saves update history', type: 'address' do
     expect do
-      @address.address1 = "Changed"
+      @address.address1 = 'Changed'
       @address.save
     end.to change(Version, :count).by 1
 
     version = Version.last
 
-    version.join_model.should eq "Gaku::Student"
+    version.join_model.should eq 'Gaku::Student'
     version.joined_resource_id.should eq @student.id
   end
 

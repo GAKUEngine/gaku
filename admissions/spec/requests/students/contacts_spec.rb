@@ -9,7 +9,7 @@ describe 'Admin Student Contacts' do
   let(:contact_type) { create(:contact_type, name: 'Email') }
 
   before :all do
-    set_resource "student-contact"
+    set_resource 'student-contact'
   end
 
   context 'new', js: true do
@@ -26,7 +26,7 @@ describe 'Admin Student Contacts' do
   end
 
 
-  context "existing" do
+  context 'existing' do
 
     context 'one contact' do
 

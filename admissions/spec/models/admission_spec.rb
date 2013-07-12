@@ -5,7 +5,7 @@ describe Gaku::Admission do
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
 
-  context "validations" do
+  context 'validations' do
     it { should belong_to :student }
     it { should belong_to :scholarship_status }
     it { should belong_to :admission_method }
