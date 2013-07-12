@@ -10,20 +10,18 @@ gem 'therubyracer', require: 'v8'
 gem 'rails-i18n'
 gem 'gen_sheet'
 
-gem 'rails4_upgrade'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
-gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
+gem 'devise',      github: 'plataformatec/devise', branch: 'rails4'
+gem 'ransack',     github: 'ernie/ransack',        branch: 'rails-4'
+gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'deface',      github: 'spree/deface',         branch: 'master'
 gem 'bootstrap-editable-rails', github: 'tkawa/bootstrap-editable-rails'
-gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
-gem 'deface', github: 'spree/deface', branch: 'master'
 
 group :assets do
   gem 'less'
   gem 'sass-rails',   '~> 4.0.0.rc1'
   gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier',     '>= 1.0.3'
 end
 
 group :development do
