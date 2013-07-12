@@ -2,8 +2,11 @@
 require 'ffaker'
 require 'rake-progressbar'
 
+enrollment_status = Gaku::EnrollmentStatus.where(:code => 'admitted').first.try(:code)
+
 #student
-student = Gaku::Student.where(name: 'John', surname: 'Doe', enrollment_status_id: 2).first_or_create!
+
+student = Gaku::Student.where(name: 'John', surname: 'Doe').first_or_create!(enrollment_status_code: enrollment_status)
 
 country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: '392').first_or_create!
 address = student.addresses.where(address1: Faker::Address.street_address, city: 'Nagoya', country_id: country.id).first_or_create!
@@ -37,10 +40,17 @@ unless student.guardians.count > 1
 end
 
 students = [
+<<<<<<< HEAD
   { name: 'Anonime', surname: 'Anonimized', enrollment_status_id: 2 },
   { name: 'Amon', surname: 'Tobin', enrollment_status_id: 2 },
   { name: '零', surname: '影月', enrollment_status_id: 2 },
   { name: 'サニー', surname: 'スノー', enrollment_status_id: 2 }
+=======
+  { :name => 'Anonime', :surname => 'Anonimized', :enrollment_status_code => enrollment_status },
+  { :name => 'Amon', :surname => 'Tobin', :enrollment_status_code => enrollment_status },
+  { :name => '零', :surname => '影月', :enrollment_status_code => enrollment_status },
+  { :name => 'サニー', :surname => 'スノー', :enrollment_status_code => enrollment_status }
+>>>>>>> f4fe5e55a8d13639b2e6ca27e15089cbc22c2060
 ]
 
 students.each do |student|
@@ -50,11 +60,22 @@ end
 
 students_count = 1000
 
+
+
 unless Gaku::Student.count > students_count
   bar = RakeProgressbar.new(students_count)
+<<<<<<< HEAD
   students_count.times do
     Gaku::Student.create!(name: Faker::Name.first_name, surname: Faker::Name.last_name, enrollment_status_id: 2)
     bar.inc
+=======
+  ActiveRecord::Base.transaction do
+    students_count.times do
+      Gaku::Student.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name, :enrollment_status_code => enrollment_status)
+      bar.inc
+    end
+>>>>>>> f4fe5e55a8d13639b2e6ca27e15089cbc22c2060
   end
+
   bar.finished
 end

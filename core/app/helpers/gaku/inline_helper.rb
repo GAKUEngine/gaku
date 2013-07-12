@@ -12,7 +12,7 @@ module Gaku
     def enrollment_statuses_inline
       enrollment_status_types = []
       EnrollmentStatus.includes(:translations).each do |e|
-        enrollment_status_types << {value: e.id, text: e.name}
+        enrollment_status_types << {value: e.code, text: e.name}
       end
       enrollment_status_types.to_json.html_safe
     end

@@ -15,6 +15,7 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.string   :student_foreign_id_number
       t.string   :national_registration_number
       t.boolean  :is_deleted, default: false
+      t.string   :enrollment_status_code
 
       t.attachment :picture
 
@@ -22,7 +23,6 @@ class CreateGakuStudents < ActiveRecord::Migration
       t.references :faculty
       t.references :commute_method
       t.references :scholarship_status
-      t.references :enrollment_status
 
       t.timestamps
     end

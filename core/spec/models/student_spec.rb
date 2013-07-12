@@ -39,6 +39,7 @@ describe Gaku::Student do
     it { should belong_to :enrollment_status }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
+
   end
 
   context 'counter_cache' do
