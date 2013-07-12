@@ -51,7 +51,8 @@ describe Gaku::Admin::EnrollmentStatusesController do
   describe "PUT #update" do
     it "locates the requested @enrollment_status" do
       gaku_put :update, id: enrollment_status,
-                        name: "Test"
+                        enrollment_status: attributes_for(:enrollment_status)
+
       assigns(:enrollment_status).should eq(enrollment_status)
     end
 
