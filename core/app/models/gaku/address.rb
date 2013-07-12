@@ -12,7 +12,7 @@ module Gaku
 
     default_scope -> { where(is_deleted: false) }
 
-    validates_presence_of :address1, :country
+    validates_presence_of :address1, :country, :city
 
     accepts_nested_attributes_for :country
 
