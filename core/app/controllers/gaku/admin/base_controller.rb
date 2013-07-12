@@ -4,7 +4,7 @@ module Gaku
 
       layout :resolve_layout
 
-      # before_filter :authorize_admin
+      before_filter :authorize_admin
 
       private
 
