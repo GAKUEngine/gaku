@@ -11,7 +11,7 @@ module Gaku
       before_filter :before_index, only: :index
 
       def create
-        @address = @campus.build_address(params[:address])
+        @address = @campus.build_address(address_params)
         respond_with @address if @address.save
       end
 
@@ -32,6 +32,10 @@ module Gaku
 
       def address_attr
         %i(title address1 address2 city zipcode state state_id country country_id is_deleted is_primary past)
+      end
+
+      def address_params
+        params.require(:address).permit(address_attr)
       end
 
       def before_index
