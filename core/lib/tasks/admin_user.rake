@@ -69,8 +69,8 @@ end
 
 def create_admin_user
   if ENV['AUTO_ACCEPT']
-    password = 'spree123'
-    email = 'spree@example.com'
+    password = '123456'
+    email = 'admin@gaku-engine.com'
   else
     puts 'Create the admin user (press enter for defaults).'
     username = prompt_for_admin_username
