@@ -31,6 +31,7 @@ module Gaku
     def enroll_class_group
       @course = Course.find(params[:course_id])
       @not_added_students = []
+
       if !params[:course][:class_group_id].blank?
         @class_group = ClassGroup.find(params[:course][:class_group_id])
         if @class_group.students.empty?
@@ -53,7 +54,7 @@ module Gaku
     private
 
     def flash_error(respond_with_var,message)
-      respond_with(respond_with_var) do |format|
+      respond_to do |format|
         @course.errors[:base] << message
         format.html { render nothing: true }
         format.js { render :'gaku/courses/enrollments/class_groups/enroll'}
