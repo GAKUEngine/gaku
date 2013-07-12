@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'rails', '4.0.0'
+  s.add_dependency 'rails', '~> 4.0.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 1.0.1'
 
@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'thinreports-rails'
 
   s.add_dependency 'devise'
-  #s.add_dependency 'devise-i18n'
+  s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan'
 
   s.add_dependency 'kaminari'

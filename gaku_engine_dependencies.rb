@@ -7,9 +7,6 @@ gem 'sqlite3'
 
 gem 'therubyracer', require: 'v8'
 
-gem 'rails-i18n'
-gem 'gen_sheet'
-
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'devise',      github: 'plataformatec/devise', branch: 'rails4'
 gem 'ransack',     github: 'ernie/ransack',        branch: 'rails-4'
@@ -29,8 +26,8 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
-  gem 'rubocop'
   gem 'guard-cop'
+  gem 'rubocop'
 
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
