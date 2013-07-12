@@ -40,10 +40,9 @@ Gaku::Core::Engine.routes.prepend do
         end
 
         resources :exams, controller: 'admission_methods/admission_phases/exams' do
-          collection do
-            get :existing, on: :collection
-            post :assign_existing, on: :collection
-          end
+          get :existing, on: :collection
+          post :assign_existing, on: :collection
+
           delete :destroy_connection, on: :member
         end
 
