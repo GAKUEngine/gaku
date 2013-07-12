@@ -3,8 +3,8 @@ class CreateGakuAddressesTable < ActiveRecord::Migration
   	create_table :gaku_addresses do |t|
       t.string   :address1, :address2, :city
       t.string   :zipcode, :title
-      t.boolean  :is_deleted, :default => false
-      t.boolean  :is_primary, :default => false
+      t.boolean  :is_deleted, default: false
+      t.boolean  :is_primary, default: false
 
 
       t.references :addressable, polymorphic: true

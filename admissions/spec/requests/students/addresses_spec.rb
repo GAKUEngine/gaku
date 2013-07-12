@@ -6,7 +6,7 @@ describe 'Admin Student Address' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:country) { create(:country, :name => "Japan") }
+  let(:country) { create(:country, name: "Japan") }
 
   before :all do
     set_resource "student-address"

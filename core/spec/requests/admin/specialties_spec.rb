@@ -4,13 +4,13 @@ describe 'Admin Specialties' do
 
   as_admin
 
-  let(:specialty) { create(:specialty, :name => 'mobile') }
+  let(:specialty) { create(:specialty, name: 'mobile') }
 
   before :all do
     set_resource "admin-specialty"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.admin_specialties_path
       click new_link
@@ -19,7 +19,7 @@ describe 'Admin Specialties' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'specialty_name', :with => 'home phone'
+        fill_in 'specialty_name', with: 'home phone'
         click submit
         wait_until_invisible form
       end.to change(Gaku::Specialty, :count).by 1
@@ -31,7 +31,7 @@ describe 'Admin Specialties' do
 
     it { has_validations? }
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -42,14 +42,14 @@ describe 'Admin Specialties' do
       visit gaku.admin_specialties_path
     end
 
-    context 'edit', :js => true do
+    context 'edit', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits' do
-        fill_in 'specialty_name', :with => 'email'
+        fill_in 'specialty_name', with: 'email'
         click submit
 
         wait_until_invisible modal
@@ -58,7 +58,7 @@ describe 'Admin Specialties' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
 
@@ -68,7 +68,7 @@ describe 'Admin Specialties' do
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content specialty.name
       within(count_div) { page.should have_content 'Specialties list(1)' }
 

@@ -33,7 +33,7 @@ module Gaku
       end
 
       def admission_methods
-        @admission_methods = AdmissionMethod.all(:order => 'name') { |s| [s.name, s.id] }
+        @admission_methods = AdmissionMethod.all(order: 'name') { |s| [s.name, s.id] }
       end
 
     end

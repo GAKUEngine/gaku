@@ -5,7 +5,7 @@ gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
 
-gem 'therubyracer', :require => 'v8'
+gem 'therubyracer', require: 'v8'
 
 gem 'rails-i18n'
 gem 'gen_sheet'

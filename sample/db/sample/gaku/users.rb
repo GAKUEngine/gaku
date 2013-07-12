@@ -3,39 +3,39 @@
 users = [
 
   {
-    :email => 'example@example.com',
-    :username => 'example',
-    :password => '123456',
-    :password_confirmation => '123456'
+    email: 'example@example.com',
+    username: 'example',
+    password: '123456',
+    password_confirmation: '123456'
   },
 
   {
-    :email => 'admin@example.com',
-    :username => 'admin',
-    :password => '123456',
-    :password_confirmation => '123456'
+    email: 'admin@example.com',
+    username: 'admin',
+    password: '123456',
+    password_confirmation: '123456'
   },
 
   {
-    :email => 'student@example.com',
-    :username => 'student',
-    :password => '123456',
-    :password_confirmation => '123456'
+    email: 'student@example.com',
+    username: 'student',
+    password: '123456',
+    password_confirmation: '123456'
   },
 
   {
-    :email => 'guardian@example.com',
-    :username => 'guardian',
-    :password => '123456',
-    :password_confirmation => '123456'
+    email: 'guardian@example.com',
+    username: 'guardian',
+    password: '123456',
+    password_confirmation: '123456'
   }
 
 ]
 
 users.each do |user|
-  Gaku::User.where(:username => user[:username]).first_or_create!(:email => user[:email],
-                                                            :password => user[:password],
-                                                            :password_confirmation => user[:password_confirmation]
+  Gaku::User.where(username: user[:username]).first_or_create!(email: user[:email],
+                                                            password: user[:password],
+                                                            password_confirmation: user[:password_confirmation]
                                                            )
 end
 

@@ -9,7 +9,7 @@ describe 'Student Guardian Contacts' do
   let(:guardian) { create(:guardian) }
   let(:guardian_with_contact) { create(:guardian, :with_contact) }
   let(:guardian_with_contacts) { create(:guardian, :with_contacts) }
-  let(:contact_type) { create(:contact_type, :name => 'Email') }
+  let(:contact_type) { create(:contact_type, name: 'Email') }
 
   tab_link = "#student-guardian-contacts-tab-link"
 

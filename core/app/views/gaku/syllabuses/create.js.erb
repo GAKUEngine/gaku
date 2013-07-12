@@ -1,4 +1,4 @@
-$('table#syllabuses-index tbody').append('<%= render_js_partial("syllabus", {:syllabus => @syllabus}) %>');
+$('table#syllabuses-index tbody').append('<%= render_js_partial("syllabus", {syllabus: @syllabus}) %>');
 $('#new-syllabus form')[0].reset();
 $('#new-syllabus').slide();
 $('#new-syllabus-link').show();

@@ -1,9 +1,9 @@
 module Gaku
   class Syllabuses::ExamSyllabusesController < GakuController
 
-    #authorize_resource :class => false
-    #load_and_authorize_resource :syllabus, :class => Gaku::Syllabus
-    #load_and_authorize_resource :exam_syllabus, :through => :syllabus, :class => Gaku::ExamSyllabus
+    #authorize_resource class: false
+    #load_and_authorize_resource :syllabus, class: Gaku::Syllabus
+    #load_and_authorize_resource :exam_syllabus, through: :syllabus, class: Gaku::ExamSyllabus
 
     inherit_resources
 
@@ -11,14 +11,14 @@ module Gaku
              instance_name: 'exam_syllabus'
 
     actions :new, :create, :destroy
-    belongs_to :syllabus, :parent_class => Gaku::Syllabus
+    belongs_to :syllabus, parent_class: Gaku::Syllabus
     respond_to :js, :html
 
     before_filter :syllabus
 
     def create
       #@exam_syllabus = @syllabus.exams.create(params[:exam_syllabus])
-      create!(:notice => t(:'notice.added', :resource => t(:'exam.singular')))
+      create!(notice: t(:'notice.added', resource: t(:'exam.singular')))
     end
 
     protected

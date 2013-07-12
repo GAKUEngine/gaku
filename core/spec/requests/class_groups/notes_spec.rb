@@ -6,7 +6,7 @@ describe 'ClassGroup Notes' do
   as_admin
 
   let(:class_group) { create(:class_group) }
-  let(:note) { create(:note, :notable => class_group) }
+  let(:note) { create(:note, notable: class_group) }
 
   before :all do
     set_resource "class-group-note"

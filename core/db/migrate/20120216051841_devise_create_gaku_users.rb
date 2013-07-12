@@ -2,12 +2,12 @@ class DeviseCreateGakuUsers < ActiveRecord::Migration
   def change
     create_table :gaku_users  do |t|
 
-      t.boolean :admin, :default => false
+      t.boolean :admin, default: false
       t.text    :settings
       t.string  :locale
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0
+      t.integer  :sign_in_count, default: 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -29,8 +29,8 @@ class DeviseCreateGakuUsers < ActiveRecord::Migration
 
     end
 
-    add_index :gaku_users, :email,                :unique => true
-    add_index :gaku_users, :username,                :unique => true
-    add_index :gaku_users, :reset_password_token, :unique => true
+    add_index :gaku_users, :email,                unique: true
+    add_index :gaku_users, :username,                unique: true
+    add_index :gaku_users, :reset_password_token, unique: true
   end
 end

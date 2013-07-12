@@ -1,14 +1,14 @@
 module Gaku
   class Students::ClassGroupEnrollmentsController < GakuController
 
-    load_and_authorize_resource :student, :class => Gaku::Student
-    load_and_authorize_resource :class_group_enrollment, :through => :student, :class => Gaku::ClassGroupEnrollment
+    load_and_authorize_resource :student, class: Gaku::Student
+    load_and_authorize_resource :class_group_enrollment, through: :student, class: Gaku::ClassGroupEnrollment
 
     inherit_resources
     actions :new, :create, :destroy
     respond_to :js, :html
 
-    before_filter :student, :only => [:new, :create]
+    before_filter :student, only: [:new, :create]
     before_filter :load_data
 
     def create
@@ -17,14 +17,14 @@ module Gaku
         if @class_group_enrollment.save && @student.class_group_enrollments << @class_group_enrollment
           @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
         end
-        flash.now[:notice] = t('notice.enrolled', :resource => t('student.singular'), :to => t(:'class_group.singular'))
+        flash.now[:notice] = t('notice.enrolled', resource: t('student.singular'), to: t(:'class_group.singular'))
         format.js { render 'create' }
       end
     end
 
     def destroy
       super do |format|
-        format.js { render :nothing => true }
+        format.js { render nothing: true }
       end
     end
 

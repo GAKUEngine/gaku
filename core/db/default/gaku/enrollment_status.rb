@@ -28,7 +28,7 @@ statuses = [
 
 statuses.each do |status|
 	I18n.locale = :en
-	es = Gaku::EnrollmentStatus.where(:code => status[0], :name => status[1], :is_active => status[3], :immutable => true).first_or_create!
+	es = Gaku::EnrollmentStatus.where(code: status[0], name: status[1], is_active: status[3], immutable: true).first_or_create!
 
 	I18n.locale = :ja
 	es.update_attribute(:name,  status[2])

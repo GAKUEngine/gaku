@@ -29,7 +29,7 @@ module Gaku
 
         student_ids.each  do |student_id|
           student = Student.find(student_id)
-          enrollment = ClassGroupEnrollment.new(:class_group_id => params[:class_group_enrollment][:class_group_id], :student_id => student.id)
+          enrollment = ClassGroupEnrollment.new(class_group_id: params[:class_group_enrollment][:class_group_id], student_id: student.id)
           # handle not saving course enrollment
           enrollment.save!
           @students << enrollment.student

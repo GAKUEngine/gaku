@@ -1,9 +1,9 @@
 FactoryGirl.define do
-  factory :admission_period_no_methods, :class => Gaku::AdmissionPeriod do
+  factory :admission_period_no_methods, class: Gaku::AdmissionPeriod do
     name 'Admission Period 1'
   end
 
-  factory :admission_period, :class => Gaku::AdmissionPeriod do
+  factory :admission_period, class: Gaku::AdmissionPeriod do
     name { Faker::Name.name }
     after(:create) do |period|
       period.period_method_associations << FactoryGirl.create(:period_method_association,
@@ -16,7 +16,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :admission_period_with_methods, :class => Gaku::AdmissionPeriod do
+  factory :admission_period_with_methods, class: Gaku::AdmissionPeriod do
     name { Faker::Name.name }
     after(:create) do |period|
       period.period_method_associations << FactoryGirl.create(:period_method_association,

@@ -1,8 +1,8 @@
 module Gaku
   class Students::StudentSpecialtiesController < GakuController
 
-    #load_and_authorize_resource :student, :class => Gaku::Student
-    #load_and_authorize_resource :specialty, :through => :student, :class => Gaku::Specialty
+    #load_and_authorize_resource :student, class: Gaku::Student
+    #load_and_authorize_resource :specialty, through: :student, class: Gaku::Specialty
     skip_authorization_check
 
     inherit_resources
@@ -11,8 +11,8 @@ module Gaku
 
     before_filter :load_data
     before_filter :student
-    before_filter :student_specialties, :only => :update
-    before_filter :count, :only => [:index, :create, :destroy, :update]
+    before_filter :student_specialties, only: :update
+    before_filter :count, only: [:index, :create, :destroy, :update]
 
 
     def index

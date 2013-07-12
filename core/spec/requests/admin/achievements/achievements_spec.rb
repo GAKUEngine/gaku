@@ -4,13 +4,13 @@ describe 'Admin Achievements' do
 
   as_admin
 
-  let(:achievement) { create(:achievement, :name => 'gold') }
+  let(:achievement) { create(:achievement, name: 'gold') }
 
   before :all do
     set_resource "admin-achievement"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.admin_achievements_path
       click new_link
@@ -19,7 +19,7 @@ describe 'Admin Achievements' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'achievement_name', :with => 'medal'
+        fill_in 'achievement_name', with: 'medal'
         click submit
         wait_until_invisible form
       end.to change(Gaku::Achievement, :count).by 1
@@ -29,7 +29,7 @@ describe 'Admin Achievements' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
 
@@ -43,14 +43,14 @@ describe 'Admin Achievements' do
       visit gaku.admin_achievements_path
     end
 
-    context '#edit ', :js => true do
+    context '#edit ', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits' do
-        fill_in 'achievement_name', :with => 'bronze'
+        fill_in 'achievement_name', with: 'bronze'
         click submit
 
         wait_until_invisible modal
@@ -59,17 +59,17 @@ describe 'Admin Achievements' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
 
       it 'has validations' do
-        fill_in 'achievement_name', :with => ''
+        fill_in 'achievement_name', with: ''
         has_validations?
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content achievement.name
       within(count_div) { page.should have_content 'Achievements list(1)' }
 

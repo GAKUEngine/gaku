@@ -2,10 +2,10 @@ module Gaku
   class Students::CourseEnrollmentsController < GakuController
 
     load_and_authorize_resource :student
-    load_and_authorize_resource :course_enrollment, :through => :student, :class => Gaku::CourseEnrollment
+    load_and_authorize_resource :course_enrollment, through: :student, class: Gaku::CourseEnrollment
 
     inherit_resources
-    belongs_to :student, :parent_class => Gaku::Student
+    belongs_to :student, parent_class: Gaku::Student
 
     defaults resource_class: CourseEnrollment,
              instance_name: 'course_enrollment'

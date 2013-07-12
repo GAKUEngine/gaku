@@ -4,13 +4,13 @@ describe 'Exams' do
 
   as_admin
 
-  let(:exam) { create(:exam, :name => "Linux") }
+  let(:exam) { create(:exam, name: "Linux") }
 
   before :all do
     set_resource "exam"
   end
 
-  context '#new', :js => true do
+  context '#new', js: true do
     before do
       visit gaku.exams_path
       click new_link
@@ -21,14 +21,14 @@ describe 'Exams' do
       tr_count = size_of(table_rows)
 
       expect do
-        fill_in 'exam_name', :with => 'Biology Exam'
-        fill_in 'exam_weight', :with => 1
-        fill_in 'exam_description', :with => "Good work"
+        fill_in 'exam_name', with: 'Biology Exam'
+        fill_in 'exam_weight', with: 1
+        fill_in 'exam_description', with: "Good work"
 
-        fill_in 'exam_exam_portions_attributes_0_name', :with => 'Exam Portion 1'
-        fill_in 'exam_exam_portions_attributes_0_weight', :with => 1
-        fill_in 'exam_exam_portions_attributes_0_problem_count', :with => 1
-        fill_in 'exam_exam_portions_attributes_0_max_score', :with => 1
+        fill_in 'exam_exam_portions_attributes_0_name', with: 'Exam Portion 1'
+        fill_in 'exam_exam_portions_attributes_0_weight', with: 1
+        fill_in 'exam_exam_portions_attributes_0_problem_count', with: 1
+        fill_in 'exam_exam_portions_attributes_0_max_score', with: 1
 
         click submit
         wait_until_invisible submit
@@ -39,7 +39,7 @@ describe 'Exams' do
       flash_created?
     end
 
-    it "cancels creating", :cancel => true do
+    it "cancels creating", cancel: true do
       ensure_cancel_creating_is_working
     end
 
@@ -48,8 +48,8 @@ describe 'Exams' do
     end
 
     it 'errors without required exam portion fields' do
-      fill_in 'exam_name', :with => 'Exam 1'
-      fill_in 'exam_exam_portions_attributes_0_name', :with => ''
+      fill_in 'exam_name', with: 'Exam 1'
+      fill_in 'exam_exam_portions_attributes_0_name', with: ''
       has_validations?
     end
   end
@@ -60,14 +60,14 @@ describe 'Exams' do
       visit gaku.exams_path
     end
 
-    context '#edit ', :js => true do
+    context '#edit ', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits from index' do
-        fill_in 'exam_name', :with => 'Biology 2012'
+        fill_in 'exam_name', with: 'Biology 2012'
         click submit
         wait_until_invisible modal
 
@@ -76,7 +76,7 @@ describe 'Exams' do
       end
 
       it 'errors without required fields on index/edit' do
-        fill_in 'exam_name', :with => ''
+        fill_in 'exam_name', with: ''
         has_validations?
       end
 
@@ -101,26 +101,26 @@ describe 'Exams' do
         page.should have_content 'Total Weight'
       end
 
-      context '#edit', :js => true do
+      context '#edit', js: true do
         before do
           click_on "Edit"
           page.should have_content 'Edit Exam'
         end
 
         it 'edits from show view' do
-          fill_in 'exam_name', :with => 'Biology 2012'
+          fill_in 'exam_name', with: 'Biology 2012'
           click submit
           page.should have_content 'Biology 2012'
           flash_updated?
         end
 
         it 'errors without required fields on view/edit' do
-          fill_in 'exam_name', :with => ''
+          fill_in 'exam_name', with: ''
           has_validations?
         end
       end
     end
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       within(count_div) { page.should have_content 'Exams list(1)' }
 
       expect do

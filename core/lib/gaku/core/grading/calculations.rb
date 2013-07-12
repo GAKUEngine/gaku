@@ -113,19 +113,19 @@ module Gaku
             end
 
             def create_new_portion_score(student, portion)
-              ExamPortionScore.create(:student_id => student.id, :exam_portion_id => portion.id)
+              ExamPortionScore.create(student_id: student.id, exam_portion_id: portion.id)
             end
 
             def add_to_student_total_score(student,exam, portion)
-              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
             end
 
             def have_portion_score?(student, portion)
-              student.exam_portion_scores.where(:exam_portion_id => portion.id).first.present?
+              student.exam_portion_scores.where(exam_portion_id: portion.id).first.present?
             end
 
             def add_to_student_total_weight(student,exam, portion)
-              @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+              @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
             end
 
             def calculate_array_total(array_data)

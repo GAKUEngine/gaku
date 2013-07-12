@@ -4,7 +4,7 @@ namespace :gaku do
   namespace :db do
 
     desc "!!! Reset DB and delete migrations !!!"
-    task :reset => :environment do
+    task reset: :environment do
       say "!!! Reset DB and delete migrations !!!"
 
       dir = "#{Rails.root}/db/migrate"
@@ -19,7 +19,7 @@ namespace :gaku do
 
 
   desc "Reset db + delete migrations and run generator + load sample data"
-  task :reset_app => :environment do
+  task reset_app: :environment do
     unless Rails.env.production?
       say "rake db:drop"
       Rake::Task["db:drop"].invoke

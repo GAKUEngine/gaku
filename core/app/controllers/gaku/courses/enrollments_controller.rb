@@ -35,11 +35,11 @@ module Gaku
       if !params[:course][:class_group_id].blank?
         @class_group = ClassGroup.find(params[:course][:class_group_id])
         if @class_group.students.empty?
-          flash_error(@course, t(:'alert.empty', :resource => t(:'class_group.singular'))) and return
+          flash_error(@course, t(:'alert.empty', resource: t(:'class_group.singular'))) and return
         else
           @not_added_students = @class_group.students - @course.students
           if @not_added_students.empty?
-            flash_error(@course, t(:'alert.already_added', :resource => t(:'student.plural'))) and return
+            flash_error(@course, t(:'alert.already_added', resource: t(:'student.plural'))) and return
           end
         end
         @course.enroll_class_group(@class_group)

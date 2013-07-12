@@ -6,15 +6,15 @@ describe 'Student Specialties' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:specialty) {create(:specialty) }
-  let(:student_specialty) {create(:student_specialty, :student => student, :specialty => specialty )}
-  let(:specialty2) { create(:specialty, :name => 'Math Specialty') }
+  let(:student_specialty) {create(:student_specialty, student: student, specialty: specialty )}
+  let(:specialty2) { create(:specialty, name: 'Math Specialty') }
   let!(:el) { '#specialties' }
 
   before :all do
     set_resource 'student-specialty'
   end
 
-  context '#new', :js => true do
+  context '#new', js: true do
 
     before do
       specialty
@@ -27,7 +27,7 @@ describe 'Student Specialties' do
 
     it 'create and show' do
       expect do
-        select specialty.name , :from => 'student_specialty_specialty_id'
+        select specialty.name , from: 'student_specialty_specialty_id'
         click submit
         wait_until_invisible form
       end.to change(Gaku::StudentSpecialty, :count).by(1)
@@ -37,7 +37,7 @@ describe 'Student Specialties' do
       flash_created?
     end
 
-    it 'cancel creating', :cancel => true do
+    it 'cancel creating', cancel: true do
       ensure_cancel_creating_is_working
     end
 
@@ -45,7 +45,7 @@ describe 'Student Specialties' do
 
   end
 
-  context 'existing', :js => true do
+  context 'existing', js: true do
     before do
       specialty
       specialty2
@@ -60,7 +60,7 @@ describe 'Student Specialties' do
       end
 
       it 'edits' do
-        select specialty2.name , :from => 'student_specialty_specialty_id'
+        select specialty2.name , from: 'student_specialty_specialty_id'
         click submit
 
         within(el) do

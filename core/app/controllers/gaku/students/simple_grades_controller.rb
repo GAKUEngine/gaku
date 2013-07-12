@@ -1,11 +1,11 @@
 module Gaku
   class Students::SimpleGradesController < GakuController
 
-    #skip_load_and_authorize_resource :only => :index
+    #skip_load_and_authorize_resource only: :index
     skip_authorization_check
 
-    #load_and_authorize_resource :student, :class => Gaku::Student
-    #load_and_authorize_resource :simple_grade, :through => :student, :class => Gaku::SimpleGrade
+    #load_and_authorize_resource :student, class: Gaku::Student
+    #load_and_authorize_resource :simple_grade, through: :student, class: Gaku::SimpleGrade
 
     inherit_resources
     belongs_to :student
@@ -13,8 +13,8 @@ module Gaku
 
     before_filter :load_data
     before_filter :student
-    before_filter :count, :only => [:index, :create, :destroy, :update]
-    before_filter :simple_grades, :only => :update
+    before_filter :count, only: [:index, :create, :destroy, :update]
+    before_filter :simple_grades, only: :update
 
 
     protected

@@ -9,9 +9,9 @@ shared_examples_for 'new contact' do
 
     it "adds and shows" do
       expect do
-        select 'Email',            :from => 'contact_contact_type_id'
-        fill_in "contact_data",    :with => "The contact data"
-        fill_in "contact_details", :with => "The contact details"
+        select 'Email',            from: 'contact_contact_type_id'
+        fill_in "contact_data",    with: "The contact data"
+        fill_in "contact_details", with: "The contact details"
         click submit
         wait_until_invisible form
       end.to change(@data.contacts, :count).by 1
@@ -22,7 +22,7 @@ shared_examples_for 'new contact' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
 
@@ -43,7 +43,7 @@ shared_examples_for 'edit contact' do
   end
 
   it "edits" do
-    fill_in 'contact_data', :with => 'example@genshin.org'
+    fill_in 'contact_data', with: 'example@genshin.org'
     click submit
 
     wait_until_invisible modal
@@ -51,12 +51,12 @@ shared_examples_for 'edit contact' do
     flash_updated?
   end
 
-  it 'cancels editting', :cancel => true do
+  it 'cancels editting', cancel: true do
     ensure_cancel_modal_is_working
   end
 
   it 'errors without required fields', js:true do
-    fill_in 'contact_data', :with => ''
+    fill_in 'contact_data', with: ''
     has_validations?
   end
 
@@ -64,7 +64,7 @@ end
 
 shared_examples_for 'delete contact' do
 
-  it "deletes", :js => true do
+  it "deletes", js: true do
     contact_field = @data.contacts.first.data
 
     within(count_div) { page.should have_content 'Contacts list(1)' }
@@ -83,7 +83,7 @@ end
 
 shared_examples_for 'primary contacts' do
 
-  it "sets primary", :js => true do
+  it "sets primary", js: true do
     @data.contacts.first.primary? == true
     @data.contacts.second.primary? == false
 
@@ -94,7 +94,7 @@ shared_examples_for 'primary contacts' do
     @data.contacts.second.primary? == true
   end
 
-  it "delete primary", :js => true do
+  it "delete primary", js: true do
     contact1_tr = "#contact-#{@data.contacts.first.id}"
     contact2_tr = "#contact-#{@data.contacts.second.id}"
 

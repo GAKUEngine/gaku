@@ -6,12 +6,12 @@ describe 'Student Commute Method Type' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_commute_method_type) }
-  let!(:commute_method_type) { create(:commute_method_type, :name => "Bus") }
-  let!(:commute_method_type2) { create(:commute_method_type, :name => "Train") }
+  let!(:commute_method_type) { create(:commute_method_type, name: "Bus") }
+  let!(:commute_method_type2) { create(:commute_method_type, name: "Train") }
   let!(:el) { '#commute-method-type' }
   let!(:select_box) { 'select.input-medium' }
 
-  context '#new', :js => true do
+  context '#new', js: true do
 
     before do
       visit gaku.edit_student_path(student)
@@ -34,7 +34,7 @@ describe 'Student Commute Method Type' do
 
   end
 
-  context 'existing',  :js => true do
+  context 'existing',  js: true do
     before do
       student2
       visit gaku.edit_student_path(student2)

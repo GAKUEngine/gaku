@@ -4,13 +4,13 @@ describe 'CourseGroups' do
 
   as_admin
 
-  let(:course_group) { create(:course_group, :name => '2013Courses') }
+  let(:course_group) { create(:course_group, name: '2013Courses') }
 
   before :all do
     set_resource("course-group")
   end
 
-  context '#new', :js => true do
+  context '#new', js: true do
     before do
       visit gaku.course_groups_path
       click new_link
@@ -19,7 +19,7 @@ describe 'CourseGroups' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'course_group_name', :with => 'MathCourses2012'
+        fill_in 'course_group_name', with: 'MathCourses2012'
         click submit
         wait_until_invisible form
       end.to change(Gaku::CourseGroup, :count).by 1
@@ -31,7 +31,7 @@ describe 'CourseGroups' do
 
     it {has_validations?}
 
-    it 'cancels adding', :cancel => true do
+    it 'cancels adding', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -87,7 +87,7 @@ describe 'CourseGroups' do
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       visit gaku.course_group_path(course_group)
 
       page.should have_content course_group.name

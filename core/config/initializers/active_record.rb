@@ -5,9 +5,9 @@ class ActiveRecord::Associations::HasManyThroughAssociation
 
     if record.new_record?
       if raise
-        record.save!(:validate => validate)
+        record.save!(validate: validate)
       else
-        return unless record.save(:validate => validate)
+        return unless record.save(validate: validate)
       end
     end
 

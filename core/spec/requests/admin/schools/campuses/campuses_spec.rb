@@ -15,7 +15,7 @@ describe 'Admin School Campuses' do
     visit gaku.admin_school_path(school)
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       click new_link
       wait_until_visible submit
@@ -25,7 +25,7 @@ describe 'Admin School Campuses' do
       within(count_div) { page.should have_content 'Campuses list(1)' }
 
       expect do
-        fill_in 'campus_name', :with => 'Nagoya Campus'
+        fill_in 'campus_name', with: 'Nagoya Campus'
         click submit
         wait_until_invisible form
       end.to change(school.campuses, :count).by 1
@@ -35,12 +35,12 @@ describe 'Admin School Campuses' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context 'existing', :js => true do
+  context 'existing', js: true do
     before do
       campus
       visit gaku.admin_school_path(school)
@@ -52,7 +52,7 @@ describe 'Admin School Campuses' do
       end
 
       it 'edits' do
-        fill_in 'campus_name', :with => 'Nagoya Campus'
+        fill_in 'campus_name', with: 'Nagoya Campus'
         click submit
 
         wait_until_invisible modal
@@ -63,7 +63,7 @@ describe 'Admin School Campuses' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end

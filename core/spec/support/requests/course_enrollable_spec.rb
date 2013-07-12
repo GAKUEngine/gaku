@@ -38,7 +38,7 @@ shared_examples_for 'enroll to course' do
       it { has_validations? }
 
       it "doesn't add a course 2 times" do
-        select "#{@course.code}", :from => @select
+        select "#{@course.code}", from: @select
         click submit
         wait_until { page.should have_content "Already enrolled" }
       

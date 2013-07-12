@@ -43,7 +43,7 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
   end
 
   desc "Migrate schema to version 0 and back up again. WARNING: Destroys all data in tables!!"
-  task :remigrate => :environment do
+  task remigrate: :environment do
     require 'highline/import'
 
     if ENV['SKIP_NAG'] or ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [y/n] ")

@@ -33,10 +33,10 @@ describe Gaku::Course do
   context 'enroll_class_group' do
   	it 'should enroll class group to course' do
 			course = create(:course)
-			student1, student2 = create(:student), create(:student, :name => 'gaku')
+			student1, student2 = create(:student), create(:student, name: 'gaku')
       class_group = create(:class_group)
-      create(:class_group_enrollment, :student_id => student1.id, :class_group_id => class_group.id)
-      create(:class_group_enrollment, :student_id => student2.id, :class_group_id => class_group.id)
+      create(:class_group_enrollment, student_id: student1.id, class_group_id: class_group.id)
+      create(:class_group_enrollment, student_id: student2.id, class_group_id: class_group.id)
   		course.enroll_class_group(class_group)
   		course.student_ids.include?(student1.id)
   		course.student_ids.include?(student2.id)

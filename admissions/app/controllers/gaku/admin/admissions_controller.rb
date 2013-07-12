@@ -4,9 +4,9 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
-      respond_to :xls, :only => :index
-      respond_to :ods, :only => :index
-      respond_to :csv, :only => :csv
+      respond_to :xls, only: :index
+      respond_to :ods, only: :index
+      respond_to :csv, only: :csv
 
       helper_method :sort_column, :sort_direction
 
@@ -78,7 +78,7 @@ module Gaku
       def new
         @admission = Admission.new
         @student = @admission.build_student
-        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        @method_admissions = Admission.where(admission_method_id: @admission_method.id)
         @applicant_max_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
         render 'gaku/admin/admissions/admissions/new'
       end
@@ -93,7 +93,7 @@ module Gaku
           @admission.assign_admission_phase_record(admission_phase, @admission_phase_state)
           @admission.change_student_to_applicant
           @admission.save
-          render 'gaku/admin/admissions/admissions/create', :admission_phase_record => @admission_phase_record
+          render 'gaku/admin/admissions/admissions/create', admission_phase_record: @admission_phase_record
         end
       end
 
@@ -109,8 +109,8 @@ module Gaku
         @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
         @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
         @enrollment_statuses << [t('undefined'), nil]
-        query_params = {  :admission_period_id => params[:admission_period_id], 
-                          :admission_method_id => params[:admission_method_id] }
+        query_params = {  admission_period_id: params[:admission_period_id], 
+                          admission_method_id: params[:admission_method_id] }
         @enrolled_students = Admission.where(query_params).map {|i| i.student_id.to_s }
         @method_admissions = Admission.where(admission_method_id: @admission_method.id)
         if @applicant_max_number = !@method_admissions.empty?
@@ -125,7 +125,7 @@ module Gaku
 
       def create_multiple
         @admission_method = AdmissionMethod.find(params[:admission_method_id])
-        @method_admissions = Admission.where(:admission_method_id => @admission_method.id)
+        @method_admissions = Admission.where(admission_method_id: @admission_method.id)
         applicant_number = !@method_admissions.empty? ? (@method_admissions.map(&:applicant_number).max + 1) : @admission_method.starting_applicant_number
         result = Admission.create_multiple_admissions(@selected_students, @admission_period, @admission_method, applicant_number)
         admissions = result[:admissions]
@@ -205,9 +205,9 @@ module Gaku
               exam_score = t('exams.not_graded')
             end
             @students << {
-              :state_id => record.admission_phase_state_id,
-              :student => record.admission.student,
-              :exam_score => exam_score
+              state_id: record.admission_phase_state_id,
+              student: record.admission.student,
+              exam_score: exam_score
             }
           end
         end

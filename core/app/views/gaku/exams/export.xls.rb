@@ -15,10 +15,10 @@ exams.each do |exam|
   exam_portion_count = exam.exam_portions.count
 
   #create worksheet for current exam
-  exam_sheet = book.create_worksheet :name => exam.name
+  exam_sheet = book.create_worksheet name: exam.name
 
   # formating and merging cells
-  format = Spreadsheet::Format.new :weight => :bold, :align => :center
+  format = Spreadsheet::Format.new weight: :bold, align: :center
   exam_sheet.row(0).default_format = format
   exam_sheet.row(1).default_format = format
   exam_sheet.row(2).default_format = format
@@ -55,7 +55,7 @@ exams.each do |exam|
     exam.exam_portions.each_with_index do |portion, portion_index|
 
       #this method should be improved. many queries to db
-      portion_score = student.exam_portion_scores.where(:exam_portion_id => portion.id).first
+      portion_score = student.exam_portion_scores.where(exam_portion_id: portion.id).first
 
       exam_sheet.row(3 + index)[(4 + portion_index.to_i)] = portion_score.score rescue ''
     end

@@ -1,37 +1,37 @@
 FactoryGirl.define do
-  factory :role, :class => Gaku::Role do
+  factory :role, class: Gaku::Role do
     name "Role #1"
   end
 
-  factory :admin_role, :parent => :role do
+  factory :admin_role, parent: :role do
     name 'Admin'
   end
 
-  factory :principal_role, :parent => :role do
+  factory :principal_role, parent: :role do
     name 'principal'
   end
 
-  factory :vice_principal_role, :parent => :role do
+  factory :vice_principal_role, parent: :role do
     name 'vice_principal'
   end
 
-  factory :student_role, :parent => :role do
+  factory :student_role, parent: :role do
     name 'student'
   end
 
-  factory :guardian_role, :parent => :role do
+  factory :guardian_role, parent: :role do
     name 'guardian'
   end
 
-  factory :staff_role, :parent => :role do
+  factory :staff_role, parent: :role do
     name 'staff'
   end
 
-  factory :instructor_role, :parent => :role do
+  factory :instructor_role, parent: :role do
     name 'instructor'
   end
 
-  factory :counselor_role, :parent => :role do
+  factory :counselor_role, parent: :role do
     name 'counselor'
   end
 

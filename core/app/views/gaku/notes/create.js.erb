@@ -1,4 +1,4 @@
-$('#<%= @notable_resource %>-notes-index tbody').append('<%= render_js_partial("note", {:note => @notable.notes.last}) %>');
+$('#<%= @notable_resource %>-notes-index tbody').append('<%= render_js_partial("note", {note: @notable.notes.last}) %>');
 $('#new-<%= @notable_resource %>-note form').each(function() {
 	this.reset();
 });

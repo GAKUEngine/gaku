@@ -6,7 +6,7 @@ describe 'Admin School Campus Contact' do
   as_admin
 
   let(:school) { create(:school) }
-  let(:contact_type) { create(:contact_type, :name => 'Email') }
+  let(:contact_type) { create(:contact_type, name: 'Email') }
 
   before :all do
     set_resource "admin-school-campus-contact"

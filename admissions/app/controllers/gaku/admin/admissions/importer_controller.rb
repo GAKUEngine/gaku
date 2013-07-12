@@ -27,11 +27,11 @@ module Gaku
 
         def import_sheet
           if params[:importer][:data_file].nil?
-            redirect_to importer_index_path, :alert => 'no file or bad file'
+            redirect_to importer_index_path, alert: 'no file or bad file'
             return
           end
 
-          file = ImportFile.create(params[:importer].merge(:context => 'admissions'))
+          file = ImportFile.create(params[:importer].merge(context: 'admissions'))
           importers = Gaku::Admissions::Importers::AdmissionsImporters.new()
           importers.run_importer(params[:importer][:importer_type], file, 
                                  params[:importer][:data_file].content_type, params[:admission_period_id], params[:admission_method_id])

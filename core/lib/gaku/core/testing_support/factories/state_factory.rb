@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :state, :class => Gaku::State do
+  factory :state, class: Gaku::State do
     name 'Alabama'
     abbr 'AL'
     country do |country|

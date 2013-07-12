@@ -1,4 +1,4 @@
-$('#<%= @resource_name.pluralize %>-index tbody').append('<%= render_js_partial("contact", {:contact => @contact}) %>');
+$('#<%= @resource_name.pluralize %>-index tbody').append('<%= render_js_partial("contact", {contact: @contact}) %>');
 $("#new-<%= @resource_name %>-link").show();
 $('#new-<%= @resource_name %>').slide();
 showNotice("<%= render_flash %>");

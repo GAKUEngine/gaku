@@ -4,9 +4,9 @@ describe 'Exam Portion Attachments' do
 
   as_admin
 
-  let(:exam) { create(:exam, :name => "Unix") }
-  let(:exam_portion) { create(:exam_portion, :exam => exam) }
-  let(:attachment) { create(:attachment, :attachable => exam_portion) }
+  let(:exam) { create(:exam, name: "Unix") }
+  let(:exam_portion) { create(:exam_portion, exam: exam) }
+  let(:attachment) { create(:attachment, attachable: exam_portion) }
 
   before :all do
     set_resource 'exam-exam-portion-attachment'
@@ -61,8 +61,8 @@ describe 'Exam Portion Attachments' do
       it 'edits' do
         page.should have_content attachment.name
 
-        fill_in 'attachment_name', :with => 'Different name'
-        fill_in 'attachment_description', :with => 'Different description'
+        fill_in 'attachment_name', with: 'Different name'
+        fill_in 'attachment_description', with: 'Different description'
 
         click submit
 
@@ -79,7 +79,7 @@ describe 'Exam Portion Attachments' do
       end
 
       it 'has validations' do
-        fill_in 'attachment_name', :with => ''
+        fill_in 'attachment_name', with: ''
         has_validations?
       end
     end

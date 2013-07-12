@@ -4,7 +4,7 @@ class CreateGakuStudentSpecialtiesTable < ActiveRecord::Migration
   		t.references :student
   		t.references :specialty
 
-  		t.boolean    :is_major, :default => true
+  		t.boolean    :is_major, default: true
 
       t.timestamps
   	end

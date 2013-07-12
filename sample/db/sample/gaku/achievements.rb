@@ -6,5 +6,5 @@ els = %w(
         )
 
 els.each do |el|
-  Gaku::Achievement.where(:name => el).first_or_create!
+  Gaku::Achievement.where(name: el).first_or_create!
 end

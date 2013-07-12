@@ -6,7 +6,7 @@ describe 'Exam Notes' do
   as_admin
 
   let(:exam) { create(:exam) }
-  let(:note) { create(:note, :notable => exam) }
+  let(:note) { create(:note, notable: exam) }
 
   before :all do
     set_resource "exam-note"

@@ -13,7 +13,7 @@ describe 'Student Addresses Changes' do
   it 'saves edits', type: 'address' do
     old_city = @address.city
     old_address1 = @address.address1
-    @address.update_attributes(:city => "Changed city", :address1 => "Changed address1")
+    @address.update_attributes(city: "Changed city", address1: "Changed address1")
     visit gaku.admin_changes_student_addresses_path
     page.should have_content old_city
     page.should have_content old_address1

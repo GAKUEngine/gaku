@@ -3,15 +3,15 @@ require 'spec_helper'
 describe 'Admin School Levels' do
 
   let(:school) { create(:school) }
-  let(:master_school) { create(:school, :master, :name => 'Asenovgrad University') }
-  let(:level) { create(:level, :school => master_school) }
+  let(:master_school) { create(:school, :master, name: 'Asenovgrad University') }
+  let(:level) { create(:level, school: master_school) }
   as_admin
 
   before :all do
     set_resource 'admin-school'
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       master_school
       visit gaku.admin_school_details_path
@@ -23,7 +23,7 @@ describe 'Admin School Levels' do
       wait_until { page.should have_content 'Edit Master School' }
       current_path.should eq gaku.admin_school_details_edit_path
       click '.add-school-level'
-      fill_in 'School Level', :with => '12 class'
+      fill_in 'School Level', with: '12 class'
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
@@ -31,7 +31,7 @@ describe 'Admin School Levels' do
     end
   end
 
-  context 'deletes', :js => true do
+  context 'deletes', js: true do
     before do
       level
       master_school
@@ -50,7 +50,7 @@ describe 'Admin School Levels' do
     end
 
     it "delete" do
-      fill_in 'School Level', :with => '5 class'
+      fill_in 'School Level', with: '5 class'
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
@@ -59,7 +59,7 @@ describe 'Admin School Levels' do
     end
   end
 
-  context 'non master schools should not edit and show school levels', :js => true do
+  context 'non master schools should not edit and show school levels', js: true do
     before do
       school
       master_school

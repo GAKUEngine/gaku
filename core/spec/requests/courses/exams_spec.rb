@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe "CourseExams", :js => true  do
+describe "CourseExams", js: true  do
 
   as_admin
 
   let(:syllabus) { create(:syllabus) }
   let(:course) { create(:course) }
   let(:student) { create(:student) }
-  let(:exam) { create(:exam, :name => 'Math') }
+  let(:exam) { create(:exam, name: 'Math') }
   let(:exam2) { create(:exam) }
 
   before do

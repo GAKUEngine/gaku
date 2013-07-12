@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :admission, :class => Gaku::Admission do
+  factory :admission, class: Gaku::Admission do
 
     after(:create) do |admission|
       admission.admission_period_id = FactoryGirl.create(:admission_period_with_methods).id

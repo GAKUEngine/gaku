@@ -10,10 +10,10 @@ module Gaku
 
     # attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
 
-    default_scope where(:is_deleted => false)
-    scope :deleted, where(:is_deleted => true)
+    default_scope where(is_deleted: false)
+    scope :deleted, where(is_deleted: true)
 
-    validates :admission_phase_state_id, :uniqueness => {:scope => :admission_id}
+    validates :admission_phase_state_id, uniqueness: {scope: :admission_id}
 
 
 

@@ -7,11 +7,11 @@ describe 'Student Enrollment Status' do
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_enrollment_status) }
   let!(:enrollment_status) { create(:enrollment_status) }
-  let!(:enrollment_status2) { create(:enrollment_status, :name => "New Enrollment") }
+  let!(:enrollment_status2) { create(:enrollment_status, name: "New Enrollment") }
   let!(:el) { '#enrollment-status' }
   let!(:select_box) { 'select.input-medium' }
 
-  context '#new', :js => true do
+  context '#new', js: true do
 
     before do
       visit gaku.edit_student_path(student)
@@ -32,7 +32,7 @@ describe 'Student Enrollment Status' do
 
   end
 
-  context 'existing',  :js => true do
+  context 'existing',  js: true do
     before do
       student2
       visit gaku.edit_student_path(student2)

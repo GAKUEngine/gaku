@@ -8,7 +8,7 @@ describe 'Student Address' do
   let(:student) { create(:student) }
   let(:student_with_address) { create(:student, :with_address) }
   let(:student_with_addresses) { create(:student, :with_addresses) }
-  let(:country) { create(:country, :name => "Japan") }
+  let(:country) { create(:country, name: "Japan") }
 
   before :all do
     set_resource "student-address"

@@ -1,15 +1,15 @@
 module Gaku
   class Syllabuses::ExamsController < GakuController
 
-    load_and_authorize_resource :syllabus, :class => Gaku::Syllabus
-    load_and_authorize_resource :exam, :through => :syllabus, :class => Gaku::Exam
+    load_and_authorize_resource :syllabus, class: Gaku::Syllabus
+    load_and_authorize_resource :exam, through: :syllabus, class: Gaku::Exam
 
     inherit_resources
-    belongs_to :syllabus, :parent_class => Gaku::Syllabus
+    belongs_to :syllabus, parent_class: Gaku::Syllabus
     respond_to :js, :html
 
     before_filter :syllabus
-    before_filter :exam_syllabus, :only => :update
+    before_filter :exam_syllabus, only: :update
     before_filter :load_data
 
     def create

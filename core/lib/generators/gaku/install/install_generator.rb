@@ -6,11 +6,11 @@ require 'bundler/cli'
 module Gaku
   class InstallGenerator < Rails::Generators::Base
 
-    class_option :migrate, :type => :boolean, :default => true, :banner => 'Run Gaku migrations'
-    class_option :seed, :type => :boolean, :default => true, :banner => 'load seed data (migrations must be run)'
-    class_option :auto_accept, :type => :boolean
-    class_option :lib_name, :type => :string, :default => 'gaku'
-    class_option :env, :type => :string, :default => 'development'
+    class_option :migrate, type: :boolean, default: true, banner: 'Run Gaku migrations'
+    class_option :seed, type: :boolean, default: true, banner: 'load seed data (migrations must be run)'
+    class_option :auto_accept, type: :boolean
+    class_option :lib_name, type: :string, default: 'gaku'
+    class_option :env, type: :string, default: 'development'
 
     def self.source_paths
       paths = self.superclass.source_paths
@@ -95,7 +95,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       say_status :creating, "database"
       silence_stream(STDOUT) do
         silence_stream(STDERR) do
-          silence_warnings { rake 'db:create', :env =>  @env }
+          silence_warnings { rake 'db:create', env: @env }
         end
       end
     end
@@ -103,7 +103,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def run_migrations
       if @run_migrations
         say_status :running, "migrations"
-        rake 'db:migrate', :env => @env
+        rake 'db:migrate', env: @env
       else
         say_status :skipping, "migrations (don't forget to run rake db:migrate)"
       end
@@ -128,14 +128,14 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     end
 
     def notify_about_routes
-      insert_into_file File.join('config', 'routes.rb'), :after => "Application.routes.draw do\n" do
+      insert_into_file File.join('config', 'routes.rb'), after: "Application.routes.draw do\n" do
         %Q{
   # This line mounts Gaku's routes at the root of your application.
   # This means, any requests to URLs such as /students, will go to Gaku::StudentsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
   #
   # We ask that you don't use the :as option here, as Gaku relies on it being the default of "gaku"
-  mount Gaku::Core::Engine, :at => '/'
+  mount Gaku::Core::Engine, at: '/'
         }
       end
 
@@ -143,7 +143,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
         puts "*" * 50
         puts "We added the following line to your application's config/routes.rb file:"
         puts " "
-        puts "    mount Gaku::Core::Engine, :at => '/'"
+        puts "    mount Gaku::Core::Engine, at: '/'"
       end
     end
 

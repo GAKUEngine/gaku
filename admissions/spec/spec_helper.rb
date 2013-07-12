@@ -71,18 +71,18 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.treat_symbols_as_metadata_keys_with_true_values = true
-    config.filter_run :focus => true
+    config.filter_run focus: true
     config.run_all_when_everything_filtered = true
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.include FactoryGirl::Syntax::Methods
-    config.include Devise::TestHelpers, :type => :controller
+    config.include Devise::TestHelpers, type: :controller
     config.include Gaku::Core::UrlHelpers
-    config.include Gaku::Core::TestingSupport::ControllerRequests, :type => :controller
-    config.include Gaku::Core::TestingSupport::RequestHelpers, :type => :request
-    config.include Gaku::Core::TestingSupport::FlashHelpers, :type => :request
-    config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, :type => :controller
-    config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, :type => :request
+    config.include Gaku::Core::TestingSupport::ControllerRequests, type: :controller
+    config.include Gaku::Core::TestingSupport::RequestHelpers, type: :request
+    config.include Gaku::Core::TestingSupport::FlashHelpers, type: :request
+    config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, type: :controller
+    config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, type: :request
   end
 
   RSpec::Matchers.define :have_valid_factory do |factory_name|

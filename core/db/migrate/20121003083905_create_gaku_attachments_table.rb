@@ -3,9 +3,9 @@ class CreateGakuAttachmentsTable < ActiveRecord::Migration
     create_table :gaku_attachments do |t|
     	t.string 		 :name
   		t.text 	 		 :description
-			t.boolean		 :is_deleted, :default => false
+			t.boolean		 :is_deleted, default: false
       
-    	t.references :attachable, :polymorphic => true
+    	t.references :attachable, polymorphic: true
     end
 
     add_attachment :gaku_attachments, :asset

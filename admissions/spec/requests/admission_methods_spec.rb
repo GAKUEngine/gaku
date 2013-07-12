@@ -11,7 +11,7 @@ describe 'Admin Admission Methods' do
     visit gaku.admin_admission_methods_path
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       click new_link
       wait_until_visible submit
@@ -19,7 +19,7 @@ describe 'Admin Admission Methods' do
 
     it 'creates and shows' do 
       expect do
-        fill_in 'admission_method_name', :with => 'Standart'
+        fill_in 'admission_method_name', with: 'Standart'
         click submit
         wait_until_invisible form
       end.to change(Gaku::AdmissionMethod, :count).by 1
@@ -42,14 +42,14 @@ describe 'Admin Admission Methods' do
       visit gaku.admin_admission_methods_path
     end
 
-    context '#edit ', :js => true do 
+    context '#edit ', js: true do 
       before do 
         within(table) { click edit_link }
         wait_until_visible modal 
       end
 
       it 'edits' do
-        fill_in 'admission_method_name', :with => 'Early'
+        fill_in 'admission_method_name', with: 'Early'
         click submit
 
         wait_until_invisible modal
@@ -62,7 +62,7 @@ describe 'Admin Admission Methods' do
         ensure_cancel_modal_is_working
       end
     end
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content admission_method.name
       within(count_div) { page.should have_content 'Admission Methods list(1)' }
 

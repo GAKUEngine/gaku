@@ -8,13 +8,13 @@ describe "CourseEnrollment"  do
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
   let(:course) { create(:course) }
-  let(:student1) { create(:student, :name => "John", :surname => "Doe", :enrollment_status_id => enrollment_status.id) }
+  let(:student1) { create(:student, name: "John", surname: "Doe", enrollment_status_id: enrollment_status.id) }
 
   before :all do
     set_resource "course-student"
   end
 
-  context 'student', :js => true do
+  context 'student', js: true do
 
     before do
       enrollment_status_applicant

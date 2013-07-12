@@ -3,7 +3,7 @@
 #names = %w(Unknown Walking Bicycle Train Bus Car Metro)
 
 #names.each do |name|
-#	Gaku::CommuteMethodType.where(:name => name).first_or_create!
+#	Gaku::CommuteMethodType.where(name: name).first_or_create!
 #end
 
 # -*- encoding: utf-8 -*-
@@ -23,7 +23,7 @@ commute_method_types.each do |type|
   commute_method_type = Gaku::CommuteMethodType.find_or_create_by_name(type[0])
 
   I18n.locale = :ja
-  commute_method_type.update_attributes(:name => type[1])
+  commute_method_type.update_attributes(name: type[1])
 end
 
 I18n.locale = nil

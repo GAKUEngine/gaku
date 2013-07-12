@@ -4,13 +4,13 @@ module Gaku
 
       inherit_resources
       respond_to :js, :html
-      #respond_to :xls, :only => :index
+      #respond_to :xls, only: :index
 
-      before_filter :select_vars,       :only => [:index,:new, :edit]
-      before_filter :notable,           :only => [:show, :edit]
-      before_filter :count,             :only => [:create, :destroy, :index]
-      before_filter :selected_students, :only => [:create,:index]
-      before_filter :unscoped_student,  :only => [:show, :destroy, :recovery]
+      before_filter :select_vars,       only: [:index,:new, :edit]
+      before_filter :notable,           only: [:show, :edit]
+      before_filter :count,             only: [:create, :destroy, :index]
+      before_filter :selected_students, only: [:create,:index]
+      before_filter :unscoped_student,  only: [:show, :destroy, :recovery]
 
 
 
@@ -25,7 +25,7 @@ module Gaku
                 format.js { render 'students/notes/create' }
               else
                 if !params[:student][:picture].blank?
-                  format.html { redirect_to [:admin, @student], :notice => t('notice.uploaded', :resource => t('picture')) }
+                  format.html { redirect_to [:admin, @student], notice: t('notice.uploaded', resource: t('picture')) }
                 else
                   format.js { render }
                 end
@@ -60,14 +60,14 @@ module Gaku
 
         @student.update_attribute(:is_deleted, true)
 
-        redirect_to session[:return_to], :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
+        redirect_to session[:return_to], notice: t(:'notice.destroyed', resource: t(:'student.singular'))
       end
 
       protected
 
       def collection
         @search = Student.search(params[:q])
-        results = @search.result(:distinct => true)
+        results = @search.result(distinct: true)
 
         @students_count = results.count
         @students = results.page(params[:page]).per(10)
@@ -92,11 +92,11 @@ module Gaku
       end
 
       def notable
-        # @primary_address = StudentAddress.where(:student_id => params[:id], :is_primary => true).first
+        # @primary_address = StudentAddress.where(student_id: params[:id], is_primary: true).first
         @notable = Student.unscoped.find(params[:id])
         @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
 
-        #Student.unscoped.includes([{:contacts => :contact_type}]).find(params[:id])
+        #Student.unscoped.includes([{contacts: :contact_type}]).find(params[:id])
       end
 
       def get_student

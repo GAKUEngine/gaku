@@ -6,14 +6,14 @@ describe 'Student Simple Grades' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }
-  let(:simple_grade) { create(:simple_grade, :school => school, :student => student) }
+  let(:simple_grade) { create(:simple_grade, school: school, student: student) }
   let!(:el) { '#simple-grades' }
 
   before :all do
     set_resource 'student-simple-grade'
   end
 
-  context '#new', :js => true do
+  context '#new', js: true do
     before do
       school
       visit gaku.edit_student_path(student)
@@ -24,9 +24,9 @@ describe 'Student Simple Grades' do
 
     it 'create and show' do
       expect do
-        fill_in 'simple_grade_name', :with => 'Ruby Science'
-        fill_in 'simple_grade_grade', :with => 'A+'
-        select school.name, :from => 'simple_grade_school_id'
+        fill_in 'simple_grade_name', with: 'Ruby Science'
+        fill_in 'simple_grade_grade', with: 'A+'
+        select school.name, from: 'simple_grade_school_id'
 
         click submit
         wait_until_invisible form
@@ -39,7 +39,7 @@ describe 'Student Simple Grades' do
 
   end
 
-  context 'existing', :js => true do
+  context 'existing', js: true do
     before do
       simple_grade
       visit gaku.edit_student_path(student)
@@ -52,7 +52,7 @@ describe 'Student Simple Grades' do
       end
 
       it 'edits' do
-        fill_in 'simple_grade_name', :with => 'Rails Science'
+        fill_in 'simple_grade_name', with: 'Rails Science'
         click submit
 
         wait_until_invisible form

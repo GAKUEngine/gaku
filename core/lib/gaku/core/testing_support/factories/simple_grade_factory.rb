@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :simple_grade, :class => Gaku::SimpleGrade do
+  factory :simple_grade, class: Gaku::SimpleGrade do
     name 'Math'
     grade 'A+'
     association(:school)

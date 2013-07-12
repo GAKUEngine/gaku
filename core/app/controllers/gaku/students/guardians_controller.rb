@@ -1,14 +1,14 @@
 module Gaku
   class Students::GuardiansController < GakuController
 
-    load_and_authorize_resource :student, :class => Gaku::Student
-    load_and_authorize_resource :guardian, :through => :student, :class => Gaku::Guardian
+    load_and_authorize_resource :student, class: Gaku::Student
+    load_and_authorize_resource :guardian, through: :student, class: Gaku::Guardian
 
     inherit_resources
     respond_to :js, :html
 
     before_filter :student
-    before_filter :count, :only => [:create,:destroy]
+    before_filter :count, only: [:create,:destroy]
 
     def create
       super do |format|
@@ -21,7 +21,7 @@ module Gaku
     def update
       super do |format|
         if params[:guardian][:picture]
-          format.html { redirect_to [:edit, student, guardian], :notice => t('notice.uploaded', :resource => t('picture')) }
+          format.html { redirect_to [:edit, student, guardian], notice: t('notice.uploaded', resource: t('picture')) }
         else
           format.js { render }
           format.json { head :no_content }
@@ -32,7 +32,7 @@ module Gaku
     protected
 
     def resource
-      @guardian = Guardian.includes(:contacts => :contact_type).find(params[:id])
+      @guardian = Guardian.includes(contacts: :contact_type).find(params[:id])
     end
 
     def resource_params

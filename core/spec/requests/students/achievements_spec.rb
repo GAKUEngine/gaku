@@ -6,15 +6,15 @@ describe 'Student Achievements' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:achievement) { create(:achievement) }
-  let(:achievement2) { create(:achievement, :name => 'Another achievement') }
-  let(:student_achievement) { create(:student_achievement, :student => student, :achievement => achievement) }
+  let(:achievement2) { create(:achievement, name: 'Another achievement') }
+  let(:student_achievement) { create(:student_achievement, student: student, achievement: achievement) }
   let!(:el) { '#achievements' }
 
   before :all do
     set_resource 'student-achievement'
   end
 
-  context '#new', :js => true do
+  context '#new', js: true do
 
     before do
       achievement
@@ -26,7 +26,7 @@ describe 'Student Achievements' do
 
     it 'create and show' do
       expect do
-        select achievement.name, :from => 'student_achievement_achievement_id'
+        select achievement.name, from: 'student_achievement_achievement_id'
         click submit
         wait_until_invisible form
       end.to change(Gaku::StudentAchievement, :count).by(1)
@@ -45,7 +45,7 @@ describe 'Student Achievements' do
 
   end
 
-  context 'existing',  :js => true do
+  context 'existing',  js: true do
     before do
       achievement2
       student_achievement
@@ -59,7 +59,7 @@ describe 'Student Achievements' do
       end
 
       it 'edits' do
-        select achievement2.name, :from => 'student_achievement_achievement_id'
+        select achievement2.name, from: 'student_achievement_achievement_id'
         click submit
 
         within(el) do

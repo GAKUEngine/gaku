@@ -6,7 +6,7 @@
 #
 #   require 'gaku/core/testing_support/controller_requests'
 #   RSpec.configure do |c|
-#     c.include Gaku::Core::TestingSupport::ControllerRequests, :type => :controller
+#     c.include Gaku::Core::TestingSupport::ControllerRequests, type: :controller
 #   end
 #
 # Then, in your controller tests, you can access gaku routes like this:
@@ -48,22 +48,22 @@ module Gaku
 
         def gaku_js_get(action, parameters = nil, session = nil, flash = nil)
           parameters ||= {}
-          parameters.reverse_merge!(:format => :js)
-          parameters.merge!(:use_route => :gaku)
+          parameters.reverse_merge!(format: :js)
+          parameters.merge!(use_route: :gaku)
           xml_http_request(:get, action, parameters, session, flash)
         end
 
         def gaku_js_post(action, parameters = nil, session = nil, flash = nil)
           parameters ||= {}
-          parameters.reverse_merge!(:format => :js)
-          parameters.merge!(:use_route => :gaku)
+          parameters.reverse_merge!(format: :js)
+          parameters.merge!(use_route: :gaku)
           xml_http_request(:post, action, parameters, session, flash)
         end
 
         def gaku_js_put(action, parameters = nil, session = nil, flash = nil)
           parameters ||= {}
-          parameters.reverse_merge!(:format => :js)
-          parameters.merge!(:use_route => :gaku)
+          parameters.reverse_merge!(format: :js)
+          parameters.merge!(use_route: :gaku)
           xml_http_request(:put, action, parameters, session, flash)
         end
         
@@ -71,7 +71,7 @@ module Gaku
 
           def process_gaku_action(action, parameters = nil, session = nil, flash = nil, method = "GET")
             parameters ||= {}
-            process(action, parameters.merge!(:use_route => :gaku), session, flash, method)
+            process(action, parameters.merge!(use_route: :gaku), session, flash, method)
           end
 
       end

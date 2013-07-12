@@ -4,5 +4,5 @@ els = %w(
         )
 
 els.each do |el|
-  Gaku::Specialty.where(:name => el).first_or_create!
+  Gaku::Specialty.where(name: el).first_or_create!
 end

@@ -4,13 +4,13 @@ describe 'Admin Roles' do
 
   as_admin
 
-  let(:role) { create(:role, :name => 'teacher') }
+  let(:role) { create(:role, name: 'teacher') }
 
   before :all do
     set_resource "admin-role"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       #admin
       visit gaku.admin_roles_path
@@ -20,7 +20,7 @@ describe 'Admin Roles' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'role_name', :with => 'master admin'
+        fill_in 'role_name', with: 'master admin'
         click submit
         wait_until_invisible form
       end.to change(Gaku::Role, :count).by 1
@@ -31,13 +31,13 @@ describe 'Admin Roles' do
     end
 
     it 'validates' do
-      fill_in 'role_name', :with => ''
+      fill_in 'role_name', with: ''
       click submit
 
       page.should have_content "can't be blank"
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -48,14 +48,14 @@ describe 'Admin Roles' do
       visit gaku.admin_roles_path
     end
 
-    context 'edit', :js => true do
+    context 'edit', js: true do
       before do
         within('#admin-roles-index tbody tr:nth-child(2)') { click edit_link }
         wait_until_visible modal
       end
 
       it 'edits' do
-        fill_in 'role_name', :with => 'ninja'
+        fill_in 'role_name', with: 'ninja'
         click submit
 
         wait_until_invisible modal
@@ -65,18 +65,18 @@ describe 'Admin Roles' do
       end
 
       it 'validates' do
-        fill_in 'role_name', :with => ''
+        fill_in 'role_name', with: ''
         click submit
 
         page.should have_content "can't be blank"
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content role.name
       within(count_div) { page.should have_content 'Roles list(2)' }
 

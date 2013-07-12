@@ -87,7 +87,7 @@ describe 'Admin States' do
       end
 
       it 'edits' do
-        fill_in 'state_name', :with => 'Nagano'
+        fill_in 'state_name', with: 'Nagano'
         click submit
 
         wait_until_invisible modal
@@ -99,7 +99,7 @@ describe 'Admin States' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end

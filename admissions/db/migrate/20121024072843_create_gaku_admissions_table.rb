@@ -10,7 +10,7 @@ class CreateGakuAdmissionsTable < ActiveRecord::Migration
       t.references  :external_school_record
       t.references  :admission_phase_record
 
-      t.boolean     :is_deleted, :default => false
+      t.boolean     :is_deleted, default: false
 
       t.timestamps
     end

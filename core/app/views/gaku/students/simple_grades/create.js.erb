@@ -1,4 +1,4 @@
-$('#student-simple-grades-index tbody').append('<%= render_js_partial("simple_grade", {:simple_grade => @simple_grade}) %>');
+$('#student-simple-grades-index tbody').append('<%= render_js_partial("simple_grade", {simple_grade: @simple_grade}) %>');
 $('.student-simple-grades-count').html('<%= print_count(@count+1, t_simple_grade_list) %>');
 $('#student-simple-grades-list a').text('<%= escape_javascript(simple_grades_show(@student.simple_grades)) %>');
 

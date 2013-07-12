@@ -10,7 +10,7 @@ module Gaku
 
       params[:selected_students].each do |student|
         student_id = student.split("-")[1].to_i
-        enrollment = class_name.constantize.new(enrollment_param => params[enrollment_param], :student_id => student_id)
+        enrollment = class_name.constantize.new(enrollment_param => params[enrollment_param], student_id: student_id)
         if  enrollment.save
           @enrollments << enrollment
         else
@@ -35,7 +35,7 @@ module Gaku
         end
       #else
       #  flash.now[:notice] = notice.html_safe
-      #  render :partial => 'gaku/shared/flash', :locals => {:flash => flash}
+      #  render partial: 'gaku/shared/flash', locals: {flash: flash}
       end
     end
 

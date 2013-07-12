@@ -5,15 +5,15 @@ describe 'Admin Admission Periods' do
   as_admin 
   
   let(:admission_period) { create(:admission_period_no_methods) }
-  let(:admission_method) { create(:admission_method_without_phases, :name => 'International Division Admissions') }
-  let(:admission_method2) { create(:admission_method_without_phases, :name => 'Regular Admissions') }
+  let(:admission_method) { create(:admission_method_without_phases, name: 'International Division Admissions') }
+  let(:admission_method2) { create(:admission_method_without_phases, name: 'Regular Admissions') }
 
   before do
     set_resource "admin-admission-period"
     visit gaku.admin_admission_periods_path
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       click new_link
       wait_until_visible submit
@@ -21,7 +21,7 @@ describe 'Admin Admission Periods' do
 
     it 'creates and shows' do 
       expect do
-        fill_in 'admission_period_name', :with => 'Fall 2013'
+        fill_in 'admission_period_name', with: 'Fall 2013'
         click submit
         wait_until_invisible form
       end.to change(Gaku::AdmissionPeriod, :count).by 1
@@ -44,7 +44,7 @@ describe 'Admin Admission Periods' do
       visit gaku.admin_admission_periods_path
     end
     context 'methods ' do
-      context 'existing ', :js => true do
+      context 'existing ', js: true do
         before do
           admission_method2
           set_resource 'admin-admission-period-admission-methods'
@@ -68,7 +68,7 @@ describe 'Admin Admission Periods' do
           expect do
             click_on 'Remove'
             wait_for_ajax
-            page.all('.method_form', :visible => true).count.should == 0
+            page.all('.method_form', visible: true).count.should == 0
             click '#submit-admin-admission-period-button'
             wait_until_invisible modal
           end.to change(Gaku::PeriodMethodAssociation, :count).by -1
@@ -103,8 +103,8 @@ describe 'Admin Admission Periods' do
           expect do
             click_on 'Add Admission Method'
             wait_for_ajax
-            page.all('.method_form', :visible => true).count.should == 2
-            select "#{admission_method2.name}", :from => 'admission-method-select'
+            page.all('.method_form', visible: true).count.should == 2
+            select "#{admission_method2.name}", from: 'admission-method-select'
             click '#submit-admin-admission-period-button'
             wait_until_invisible modal
           end.to change(Gaku::PeriodMethodAssociation, :count).by 1
@@ -112,14 +112,14 @@ describe 'Admin Admission Periods' do
 
       end
     end
-    context '#edit ', :js => true do 
+    context '#edit ', js: true do 
       before do 
         within(table) { click edit_link }
         wait_until_visible modal 
       end
 
       it 'edits' do
-        fill_in 'admission_period_name', :with => 'Summer 2013'
+        fill_in 'admission_period_name', with: 'Summer 2013'
         select '2013', from: 'admission_period_admitted_on_1i'
         select 'May', from: 'admission_period_admitted_on_2i'
         select '30', from: 'admission_period_admitted_on_3i'
@@ -139,7 +139,7 @@ describe 'Admin Admission Periods' do
         ensure_cancel_modal_is_working
       end
     end
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content admission_period.name
       within(count_div) { page.should have_content 'Admission Periods list(1)' }
 

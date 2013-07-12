@@ -6,7 +6,7 @@ describe 'Student CourseEnrollments' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:course) { create(:course, :code => 'fall2050') }
+  let(:course) { create(:course, code: 'fall2050') }
 
   before :all do
     set_resource "student-course-enrollment"

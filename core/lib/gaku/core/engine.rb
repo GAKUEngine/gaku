@@ -29,13 +29,13 @@ module Gaku
       end
 
 
-      #initializer "gaku.environment", :before => :load_config_initializers do |app|
+      #initializer "gaku.environment", before: :load_config_initializers do |app|
       #  app.config.gaku = Gaku::Core::Environment.new
       #  Gaku::Config = app.config.gaku.preferences #legacy access
       #end
 
       # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
-      initializer "gaku.assets.precompile", :group => :all do |app|
+      initializer "gaku.assets.precompile", group: :all do |app|
         app.config.assets.precompile += %w[
           gaku/all.*
         ]

@@ -6,17 +6,17 @@ describe 'Admin Program' do
 
   let!(:school) { create(:school) }
 
-  let!(:level) { create(:level, :name => 'Ruby Ninja Level2') }
-  let!(:syllabus) { create(:syllabus, :name => 'Ruby Ninja Championship') }
-  let!(:specialty) { create(:specialty, :name => 'Ruby throw exception') }
+  let!(:level) { create(:level, name: 'Ruby Ninja Level2') }
+  let!(:syllabus) { create(:syllabus, name: 'Ruby Ninja Championship') }
+  let!(:specialty) { create(:specialty, name: 'Ruby throw exception') }
 
-  let(:program) { create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, :school => school) }
+  let(:program) { create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, school: school) }
 
   before :all do
     set_resource "admin-school-program"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.admin_school_path(school)
       click new_link
@@ -25,17 +25,17 @@ describe 'Admin Program' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'program_name', :with => 'Rails Ninja'
-        fill_in 'program_description', :with => 'Rails Ninja Camp'
+        fill_in 'program_name', with: 'Rails Ninja'
+        fill_in 'program_description', with: 'Rails Ninja Camp'
 
         click '.add-program-specialty'
-        select  specialty.name, :from => 'program-specialty-select'
+        select  specialty.name, from: 'program-specialty-select'
 
         click '.add-program-level'
-        select  level.name, :from => 'program-level-select'
+        select  level.name, from: 'program-level-select'
 
         click '.add-program-syllabus'
-        select  syllabus.name, :from => 'program-syllabus-select'
+        select  syllabus.name, from: 'program-syllabus-select'
 
         click submit
         wait_until_invisible form
@@ -61,12 +61,12 @@ describe 'Admin Program' do
 
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
 
-  context 'existing', :js => true do
+  context 'existing', js: true do
     before do
       program
       visit gaku.admin_school_path(school)
@@ -81,12 +81,12 @@ describe 'Admin Program' do
 
       it 'edits' do
 
-        fill_in 'program_name', :with => 'Rails Samurai'
-        fill_in 'program_description', :with => 'Rails Ninja Camp'
+        fill_in 'program_name', with: 'Rails Samurai'
+        fill_in 'program_description', with: 'Rails Ninja Camp'
 
-        select  specialty.name, :from => 'program-specialty-select'
-        select  level.name, :from => 'program-level-select'
-        select  syllabus.name, :from => 'program-syllabus-select'
+        select  specialty.name, from: 'program-specialty-select'
+        select  level.name, from: 'program-level-select'
+        select  syllabus.name, from: 'program-syllabus-select'
 
         click submit
         wait_until_invisible form
@@ -104,12 +104,12 @@ describe 'Admin Program' do
 
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       page.should have_content program.name
       within(count_div) { page.should have_content 'Programs list(1)' }
 

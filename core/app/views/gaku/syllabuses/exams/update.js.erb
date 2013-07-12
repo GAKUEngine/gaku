@@ -1,4 +1,4 @@
 showNotice("<%= render_flash %>")
 $('#edit-syllabus-exam-modal').modal('hide')
-$('tr#exam-<%= @exam.id %>').html('<%= render_js_partial("fields", {:exam => @exam}) %>');
+$('tr#exam-<%= @exam.id %>').html('<%= render_js_partial("fields", {exam: @exam}) %>');
 

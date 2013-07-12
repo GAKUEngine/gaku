@@ -10,7 +10,7 @@ describe 'Admin Enrollment Statuses' do
     set_resource "admin-enrollment-status"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
   	before do
   	  visit gaku.admin_enrollment_statuses_path
       click new_link
@@ -19,8 +19,8 @@ describe 'Admin Enrollment Statuses' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'enrollment_status_name', :with => 'Enrolled'
-        fill_in 'enrollment_status_code', :with => 'enrolled'
+        fill_in 'enrollment_status_name', with: 'Enrolled'
+        fill_in 'enrollment_status_code', with: 'enrolled'
         click submit
         wait_until_invisible form
       end.to change(Gaku::EnrollmentStatus, :count).by 1
@@ -32,7 +32,7 @@ describe 'Admin Enrollment Statuses' do
 
     it { has_validations? }
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -43,14 +43,14 @@ describe 'Admin Enrollment Statuses' do
       visit gaku.admin_enrollment_statuses_path
     end
 
-    context 'edit', :js => true do
+    context 'edit', js: true do
       before do
         within(table) { click edit_link }
         wait_until_visible modal
       end
 
     	it 'edits' do
-    	  fill_in 'enrollment_status_name', :with => 'Expelled'
+    	  fill_in 'enrollment_status_name', with: 'Expelled'
     	  click submit
 
     	  wait_until_invisible modal
@@ -59,19 +59,19 @@ describe 'Admin Enrollment Statuses' do
         flash_updated?
     	end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
 
       it 'has validations' do
-        fill_in 'enrollment_status_code', :with => ''
+        fill_in 'enrollment_status_code', with: ''
         has_validations?
       end
 
     end
 
 
-  	it 'deletes', :js => true do
+  	it 'deletes', js: true do
       page.should have_content enrollment_status.name
       within(count_div) { page.should have_content 'Enrollment Statuses list(1)' }
 

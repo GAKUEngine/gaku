@@ -8,9 +8,9 @@ describe 'ExtracurricularActivity Students' do
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
   let(:extracurricular_activity) { create(:extracurricular_activity) }
-  let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota', :enrollment_status_id => enrollment_status.id) }
-  let(:student2) { create(:student, :enrollment_status_id => enrollment_status.id) }
-  let(:student3) { create(:student, :enrollment_status_id => enrollment_status.id) }
+  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_id: enrollment_status.id) }
+  let(:student2) { create(:student, enrollment_status_id: enrollment_status.id) }
+  let(:student3) { create(:student, enrollment_status_id: enrollment_status.id) }
 
   before :all do
     set_resource "extracurricular-activity-student"
@@ -63,18 +63,18 @@ describe 'ExtracurricularActivity Students' do
   end
 
   context "#search " do
-    it 'searches students', :js => true do
+    it 'searches students', js: true do
       visit gaku.extracurricular_activities_path
       click show_link
       click_link 'extracurricular-activity-enrollments-tab-link'
 
-      create(:student, :name => 'Kenji', :surname => 'Kita')
-      create(:student, :name => 'Chikuhei', :surname => 'Nakajima')
+      create(:student, name: 'Kenji', surname: 'Kita')
+      create(:student, name: 'Chikuhei', surname: 'Nakajima')
 
       click new_link
       wait_until_visible('#student-modal')
       size_of(table_rows) == 3
-      fill_in 'q[name_cont]', :with => 'Sus'
+      fill_in 'q[name_cont]', with: 'Sus'
       wait_until { size_of(table_rows) == 1 }
     end
   end
@@ -88,7 +88,7 @@ describe 'ExtracurricularActivity Students' do
       Gaku::ExtracurricularActivityEnrollment.count.should eq 1
     end
 
-    it 'enrolls student only once', :js => true do
+    it 'enrolls student only once', js: true do
       click new_link
       wait_until { page.find('#student-modal').visible? }
       within('tr#student-' + student1.id.to_s) do
@@ -96,7 +96,7 @@ describe 'ExtracurricularActivity Students' do
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       click_link 'extracurricular-activity-enrollments-tab-link'
 
       ensure_delete_is_working
@@ -106,7 +106,7 @@ describe 'ExtracurricularActivity Students' do
     end
   end
 
-  it 'errors is student is enrolled meanwhile', :js => true do
+  it 'errors is student is enrolled meanwhile', js: true do
     student1
 
     visit gaku.extracurricular_activity_path(extracurricular_activity)

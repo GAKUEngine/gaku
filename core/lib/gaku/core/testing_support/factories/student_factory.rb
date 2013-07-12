@@ -1,6 +1,6 @@
 FactoryGirl.define  do
 
-  factory :student, :class => Gaku::Student do
+  factory :student, class: Gaku::Student do
     name { Faker::Name.first_name }
     surname { Faker::Name.last_name }
     name_reading { Faker::Name.first_name }
@@ -8,7 +8,7 @@ FactoryGirl.define  do
     gender "male"
   end
 
-  factory :student_with_one_guardian, :parent => :student do
+  factory :student_with_one_guardian, parent: :student do
     after(:create) do |student|
       student.guardians << FactoryGirl.create(:guardian)
       student.save

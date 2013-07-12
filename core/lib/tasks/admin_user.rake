@@ -2,7 +2,7 @@ require 'highline/import'
 
 namespace :gaku do
   desc "Create admin username and password"
-  task :generate_admin => :environment do
+  task generate_admin: :environment do
 
   if Gaku::User.admin.empty?
     create_admin_user
@@ -78,10 +78,10 @@ def create_admin_user
     password = prompt_for_admin_password
   end
   attributes = {
-    :password => password,
-    :password_confirmation => password,
-    :email => email,
-    :username => username
+    password: password,
+    password_confirmation: password,
+    email: email,
+    username: username
   }
 
 

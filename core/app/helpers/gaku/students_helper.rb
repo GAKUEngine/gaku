@@ -31,11 +31,11 @@ module Gaku
     end
 
     def edit_button
-      content_tag :i, nil, :class => 'icon-white icon-pencil'
+      content_tag :i, nil, class: 'icon-white icon-pencil'
     end
 
     def ok_icon
-      content_tag :i, nil, :class => 'icon-white icon-ok'
+      content_tag :i, nil, class: 'icon-white icon-ok'
     end
 
   end

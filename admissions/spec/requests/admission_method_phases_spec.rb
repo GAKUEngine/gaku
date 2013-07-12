@@ -7,13 +7,13 @@ describe 'Admin Admission Method Phases' do
   let!(:admission_method) { create(:admission_method_without_phases) }
   let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
   let(:admission_phase_state) { create( :admission_phase_state,
-                                        :can_progress => true,
-                                        :can_admit => true,
-                                        :auto_progress => true,
-                                        :auto_admit => false,
-                                        :is_default => false,
-                                        :name => 'Accepted') }
-  let(:admission_phase_state2) { create(:admission_phase_state, :name => 'In Review') }
+                                        can_progress: true,
+                                        can_admit: true,
+                                        auto_progress: true,
+                                        auto_admit: false,
+                                        is_default: false,
+                                        name: 'Accepted') }
+  let(:admission_phase_state2) { create(:admission_phase_state, name: 'In Review') }
   let(:exam) { create(:exam) }
 
   before do
@@ -30,7 +30,7 @@ describe 'Admin Admission Method Phases' do
 
     it 'creates and shows' do
       expect do
-        fill_in 'admission_phase_name', :with => 'Written application'
+        fill_in 'admission_phase_name', with: 'Written application'
         click submit
         wait_until_invisible form
       end.to change(Gaku::AdmissionPhase, :count).by 1
@@ -93,7 +93,7 @@ describe 'Admin Admission Method Phases' do
               click_on 'Remove state'
             end
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 2
+            page.all('.state', visible: true).count.should == 2
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
           end.to change(Gaku::AdmissionPhaseState, :count).by -1
@@ -142,7 +142,7 @@ describe 'Admin Admission Method Phases' do
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 2
+            page.all('.state', visible: true).count.should == 2
             fill_in 'State name', with: 'Written Report'
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
@@ -157,7 +157,7 @@ describe 'Admin Admission Method Phases' do
           expect do
             click_on 'Add Admission Phase State'
             wait_for_ajax
-            page.all('.state', :visible => true).count.should == 2
+            page.all('.state', visible: true).count.should == 2
             fill_in 'State name', with: 'Written Report'
             click cancel_link
           end.to change(Gaku::AdmissionPhaseState, :count).by 0
@@ -173,8 +173,8 @@ describe 'Admin Admission Method Phases' do
       end
 
       it 'edits' do
-        fill_in 'admission_phase_name', :with => 'Interview'
-        fill_in 'admission_phase_phase_handler', :with => 3
+        fill_in 'admission_phase_name', with: 'Interview'
+        fill_in 'admission_phase_phase_handler', with: 3
         click submit
         wait_until_invisible modal
 

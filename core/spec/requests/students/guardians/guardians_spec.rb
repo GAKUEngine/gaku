@@ -11,7 +11,7 @@ describe 'Student Guardians' do
     set_resource "student-guardian"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
     before do
       visit gaku.edit_student_path(student)
       click tab_link
@@ -22,12 +22,12 @@ describe 'Student Guardians' do
     it "creates and shows" do
       expect do
         #required
-        fill_in "guardian_surname",         :with => "Doe"
-        fill_in "guardian_name",            :with => "John"
+        fill_in "guardian_surname",         with: "Doe"
+        fill_in "guardian_name",            with: "John"
 
-        fill_in "guardian_surname_reading", :with => "Phonetic Doe"
-        fill_in "guardian_name_reading",    :with => "Phonetic John"
-        fill_in "guardian_relationship",    :with => "Father"
+        fill_in "guardian_surname_reading", with: "Phonetic Doe"
+        fill_in "guardian_name_reading",    with: "Phonetic John"
+        fill_in "guardian_relationship",    with: "Father"
 
         click submit
         wait_until_invisible form
@@ -43,7 +43,7 @@ describe 'Student Guardians' do
       flash_created?
     end
 
-    it 'cancels creating', :cancel => true do
+    it 'cancels creating', cancel: true do
       ensure_cancel_creating_is_working
     end
   end
@@ -56,7 +56,7 @@ describe 'Student Guardians' do
       click tab_link
     end
 
-    context 'edit', :js => true do
+    context 'edit', js: true do
       before do
         visit gaku.edit_student_guardian_path(student, guardian)
         click '#edit-modal'
@@ -64,8 +64,8 @@ describe 'Student Guardians' do
       end
 
       it "edits" do
-        fill_in 'guardian_name',    :with => 'Edited guardian name'
-        fill_in 'guardian_surname', :with => 'Edited guardian surname'
+        fill_in 'guardian_name',    with: 'Edited guardian name'
+        fill_in 'guardian_surname', with: 'Edited guardian surname'
         click submit
 
         wait_until_invisible modal
@@ -74,12 +74,12 @@ describe 'Student Guardians' do
         flash_updated?
       end
 
-      it 'cancels editting', :cancel => true do
+      it 'cancels editting', cancel: true do
         ensure_cancel_modal_is_working
       end
     end
 
-    it "deletes", :js => true do
+    it "deletes", js: true do
       page.should have_content guardian.name
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }

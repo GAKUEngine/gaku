@@ -5,7 +5,7 @@ class CreateGakuGradingMethods < ActiveRecord::Migration
       t.text    :description
       t.text    :method
       t.text    :arguments
-      t.boolean :curved, :default => true
+      t.boolean :curved, default: true
 
       t.timestamps
     end

@@ -4,7 +4,7 @@ describe 'Admin Disposals Attachments' do
 
   as_admin
 
-  let(:attachment) { create(:attachment, :for_exam_portion, :is_deleted => 1) }
+  let(:attachment) { create(:attachment, :for_exam_portion, is_deleted: 1) }
 
   before do
     set_resource('disposal-attachment')

@@ -5,7 +5,7 @@ describe 'Admin School Campuses Address' do
 
   as_admin
 
-  let(:country) { create(:country, :name => "Japan") }
+  let(:country) { create(:country, name: "Japan") }
   let(:address) { create(:address) }
   let(:school) { create(:school)}
 

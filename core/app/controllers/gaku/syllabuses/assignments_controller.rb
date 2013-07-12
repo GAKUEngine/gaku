@@ -1,7 +1,7 @@
 module Gaku
 	class Syllabuses::AssignmentsController < GakuController
 
-    before_filter :count, :only => :create
+    before_filter :count, only: :create
 	  def create
 	    if @syllabus.update_attributes(params[:syllabus])
 	      respond_to do |format|

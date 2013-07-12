@@ -7,11 +7,11 @@ describe 'Student Scholarship Status' do
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_scholarship_status) }
   let!(:scholarship_status) { create(:scholarship_status) }
-  let!(:scholarship_status2) { create(:scholarship_status, :name => "New Scholarship Status") }
+  let!(:scholarship_status2) { create(:scholarship_status, name: "New Scholarship Status") }
   let!(:el) { '#scholarship-status' }
   let!(:select_box) { 'select.input-medium' }
 
-  context '#new', :js => true do
+  context '#new', js: true do
 
     before do
       visit gaku.edit_student_path(student)
@@ -31,7 +31,7 @@ describe 'Student Scholarship Status' do
 
   end
 
-  context 'existing',  :js => true do
+  context 'existing',  js: true do
     before do
       student2
       visit gaku.edit_student_path(student2)

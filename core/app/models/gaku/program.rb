@@ -22,7 +22,7 @@ module Gaku
     accepts_nested_attributes_for :program_levels,
                                   :program_specialties,
                                   :program_syllabuses,
-                                  :allow_destroy => true
+                                  allow_destroy: true
 
   end
 end

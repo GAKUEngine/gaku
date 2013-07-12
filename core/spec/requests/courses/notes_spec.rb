@@ -6,7 +6,7 @@ describe 'Course Notes' do
   as_admin
 
   let(:course) { create(:course) }
-  let(:note) { create(:note, :notable => course) }
+  let(:note) { create(:note, notable: course) }
 
   before :all do
     set_resource "course-note"

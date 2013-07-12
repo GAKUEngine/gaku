@@ -57,8 +57,8 @@ shared_examples_for 'edit address' do
   end
 
   it 'errors without required fields', js:true do
-    fill_in 'address_address1',  :with => ''
-    fill_in 'address_city',      :with => ''
+    fill_in 'address_address1',  with: ''
+    fill_in 'address_city',      with: ''
 
     has_validations?
   end
@@ -67,7 +67,7 @@ end
 
 shared_examples_for 'delete address' do
 
-  it "deletes", :js => true do
+  it "deletes", js: true do
     address_field = @data.addresses.first.address1
 
     within(count_div) { page.should have_content 'Addresses list(1)' }
@@ -86,7 +86,7 @@ end
 
 shared_examples_for 'primary addresses' do
 
-  it "sets primary", :js => true do
+  it "sets primary", js: true do
     @data.addresses.first.primary? == true
     @data.addresses.second.primary? == false
 
@@ -97,7 +97,7 @@ shared_examples_for 'primary addresses' do
     @data.addresses.second.primary? == true
   end
 
-  it "delete primary", :js => true do
+  it "delete primary", js: true do
     address1_tr = "#address-#{@data.addresses.first.id}"
     address2_tr = "#address-#{@data.addresses.second.id}"
 

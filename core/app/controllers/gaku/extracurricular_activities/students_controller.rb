@@ -1,17 +1,17 @@
 module Gaku
   class ExtracurricularActivities::StudentsController < GakuController
 
-    authorize_resource :class => false
+    authorize_resource class: false
 
     inherit_resources
     actions :index, :show, :create, :update, :edit, :delete
 
     respond_to :js, :html
 
-    before_filter :extracurricular_activity, :only => :new
+    before_filter :extracurricular_activity, only: :new
 
     def new
-      enrolled_students_ids = ExtracurricularActivityEnrollment.where(:extracurricular_activity_id => @extracurricular_activity.id).map {|x| x.student_id}
+      enrolled_students_ids = ExtracurricularActivityEnrollment.where(extracurricular_activity_id: @extracurricular_activity.id).map {|x| x.student_id}
       @extracurricular_activity_enrollment = ExtracurricularActivityEnrollment.new
       @students = Student.includes([:addresses, :extracurricular_activities, :enrollments]).all
       render 'new'
@@ -25,7 +25,7 @@ module Gaku
 
         student_ids.each do |student_id|
           student = Student.find(student_id)
-          enrollment = ExtracurricularActivityEnrollment.new(:extracurricular_activity_id => params[:enrollment][:extracurricular_activity_id], :student_id => student.id)
+          enrollment = ExtracurricularActivityEnrollment.new(extracurricular_activity_id: params[:enrollment][:extracurricular_activity_id], student_id: student.id)
           enrollment.save!
           @students << enrollment.student
         end

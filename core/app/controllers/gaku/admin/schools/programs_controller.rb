@@ -2,14 +2,14 @@ module Gaku
   module Admin
     class Schools::ProgramsController < Admin::BaseController
 
-      authorize_resource :class => false
+      authorize_resource class: false
 
       inherit_resources
-      belongs_to :school, :parent_class => Gaku::School
+      belongs_to :school, parent_class: Gaku::School
       respond_to :js, :html
 
-      before_filter :count, :only => [:create, :destroy]
-      before_filter :load_program, :only => [:show_program_levels, :show_program_specialties, :show_program_syllabuses]
+      before_filter :count, only: [:create, :destroy]
+      before_filter :load_program, only: [:show_program_levels, :show_program_specialties, :show_program_syllabuses]
       before_filter :load_data
 
       protected

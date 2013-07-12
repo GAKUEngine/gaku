@@ -1,8 +1,8 @@
 [module Gaku
   class Students::StudentAchievementsController < GakuController
 
-    #load_and_authorize_resource :student, :class => Gaku::Student
-    #load_and_authorize_resource :achievement, :through => :student, :class => Gaku::Achievement
+    #load_and_authorize_resource :student, class: Gaku::Student
+    #load_and_authorize_resource :achievement, through: :student, class: Gaku::Achievement
     skip_authorization_check
 
     inherit_resources
@@ -10,8 +10,8 @@
     respond_to :js, :html, :json
 
     before_filter :student
-    before_filter :student_achievements, :only => [:update]
-    before_filter :count, :only => [:index, :create, :destroy]
+    before_filter :student_achievements, only: [:update]
+    before_filter :count, only: [:index, :create, :destroy]
     before_filter :load_data
 
     def index

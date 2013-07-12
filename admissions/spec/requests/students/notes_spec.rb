@@ -22,7 +22,7 @@ describe 'Admin Student Notes' do
     it_behaves_like 'new note'
   end
 
-  context "existing", :js => true do
+  context "existing", js: true do
     before do
       note
       visit gaku.edit_admin_student_path(student)

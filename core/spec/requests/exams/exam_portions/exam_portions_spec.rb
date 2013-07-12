@@ -4,7 +4,7 @@ describe 'Exam portions' do
 
   as_admin
 
-  let(:exam) { create(:exam, :name => "Unix") }
+  let(:exam) { create(:exam, name: "Unix") }
 
   before :all do
     set_resource "exam-exam-portion"
@@ -17,7 +17,7 @@ describe 'Exam portions' do
       within (count_div) { page.should have_content 'Exam portions list(1)' }
     end
 
-    context '#add ', :js => true do
+    context '#add ', js: true do
       before do
         click new_link
         wait_until_visible submit
@@ -26,8 +26,8 @@ describe 'Exam portions' do
       it 'adds a portion' do
         #exam portions weight total cant be over 100
         expect do
-          fill_in "exam_portion_name", :with => 'Ubuntu'
-          fill_in 'exam_portion_weight', :with => 100.6
+          fill_in "exam_portion_name", with: 'Ubuntu'
+          fill_in 'exam_portion_weight', with: 100.6
           click submit
           wait_until_invisible form
         end.to change(exam.exam_portions,:count).by 1
@@ -40,17 +40,17 @@ describe 'Exam portions' do
         within('#weight-total') { page.should have_content "200.6" }
       end
 
-      it 'cancels adding', :cancel => true do
+      it 'cancels adding', cancel: true do
         ensure_cancel_creating_is_working
       end
     end
 
 
-    it 'edits a portion', :js => true do
+    it 'edits a portion', js: true do
       within(table){ click edit_link }
       wait_until_visible modal
-      fill_in 'exam_portion_name', :with => 'MacOS'
-      fill_in 'exam_portion_weight', :with => 50.6
+      fill_in 'exam_portion_name', with: 'MacOS'
+      fill_in 'exam_portion_weight', with: 50.6
       click submit
 
       wait_until_invisible modal
@@ -67,8 +67,8 @@ describe 'Exam portions' do
       page.should have_content 'Show Exam Portion'
     end
 
-    it 'deletes exam portion', :js => true do
-      create(:exam_portion, :exam => exam)
+    it 'deletes exam portion', js: true do
+      create(:exam_portion, exam: exam)
 
       weight_total = find('#weight-total').text
       exam_portion_name = exam.exam_portions.first.name
@@ -86,7 +86,7 @@ describe 'Exam portions' do
       flash_destroyed?
     end
 
-    it 'deletes the last portion', :js => true do
+    it 'deletes the last portion', js: true do
       exam_portion_name = exam.exam_portions.first.name
 
       expect do

@@ -8,7 +8,7 @@ module Gaku
       respond_to :js, :html
 
       before_filter :load_admission_method
-      before_filter :admission_phases_count, :only => [:create, :destroy]
+      before_filter :admission_phases_count, only: [:create, :destroy]
 
       def create
         @admission_phase = @admission_method.admission_phases.build(params[:admission_phase])
@@ -16,7 +16,7 @@ module Gaku
 
           if @admission_phase.save
             respond_to do |format|
-              flash.now[:notice] = t('notice.created', :resource => t('admission_phases.singular'))
+              flash.now[:notice] = t('notice.created', resource: t('admission_phases.singular'))
               format.js { render 'create' }
             end
           end
@@ -32,9 +32,9 @@ module Gaku
 
       def sort
         params[:'admission-method-admission-phase'].each_with_index do |id, index|
-          @admission_method.admission_phases.update_all( {:position => index}, {:id => id} )
+          @admission_method.admission_phases.update_all( {position: index}, {id: id} )
         end
-        render :nothing => true
+        render nothing: true
       end
 
       private

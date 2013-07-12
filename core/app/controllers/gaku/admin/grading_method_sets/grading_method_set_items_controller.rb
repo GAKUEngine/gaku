@@ -3,21 +3,21 @@ module Gaku
     module GradingMethodSets
       class GradingMethodSetItemsController < Admin::BaseController
 
-        load_and_authorize_resource :class =>  Gaku::GradingMethodSetItem
+        load_and_authorize_resource class: Gaku::GradingMethodSetItem
 
 
         inherit_resources
         respond_to :js, :html
         belongs_to :grading_method_set, parent_class: Gaku::GradingMethodSet
 
-        before_filter :count, :only => [:index, :create, :destroy]
-        before_filter :load_data, :only => [:new, :edit]
+        before_filter :count, only: [:index, :create, :destroy]
+        before_filter :load_data, only: [:new, :edit]
 
         def sort
           params[:'grading-method-set-item'].each_with_index do |id, index|
             @grading_method_set.update_items_positions(id, index)
           end
-          render :nothing => true
+          render nothing: true
         end
 
         protected

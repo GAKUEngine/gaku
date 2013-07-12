@@ -4,9 +4,9 @@ class CreateGakuExams < ActiveRecord::Migration
       t.string   :name
       t.text     :description, :adjustments
       t.float    :weight
-      t.boolean  :use_weighting, :default => false
-      t.boolean  :is_standalone, :default => false
-      t.boolean  :has_entry_numbers, :default => false
+      t.boolean  :use_weighting, default: false
+      t.boolean  :is_standalone, default: false
+      t.boolean  :has_entry_numbers, default: false
 
       t.references :grading_method
 

@@ -1,4 +1,4 @@
-$('#contact-<%= @contact.id %>').html('<%= render_js_partial("fields", {:contact => @contact}) %>');
+$('#contact-<%= @contact.id %>').html('<%= render_js_partial("fields", {contact: @contact}) %>');
 $(".modal#edit-contact-modal").modal("hide");
 showNotice("<%= render_flash %>");
 

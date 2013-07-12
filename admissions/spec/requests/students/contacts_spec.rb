@@ -6,13 +6,13 @@ describe 'Admin Student Contacts' do
   as_admin
 
   let(:student) { create(:student) }
-  let(:contact_type) { create(:contact_type, :name => 'Email') }
+  let(:contact_type) { create(:contact_type, name: 'Email') }
 
   before :all do
     set_resource "student-contact"
   end
 
-  context 'new', :js => true do
+  context 'new', js: true do
 
     before do
       contact_type
@@ -36,7 +36,7 @@ describe 'Admin Student Contacts' do
         @data = @student
       end
 
-      context 'edit', :js => true do
+      context 'edit', js: true do
 
         before do
           visit gaku.edit_admin_student_path(@student)

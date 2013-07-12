@@ -7,8 +7,8 @@ describe 'ClassGroup Students' do
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
-  let(:class_group) { create(:class_group, :grade => '1', :name => "Biology", :homeroom => 'A1') }
-  let(:student1) { create(:student, :name => 'Susumu', :surname => 'Yokota', :enrollment_status_id => enrollment_status.id) }
+  let(:class_group) { create(:class_group, grade: '1', name: "Biology", homeroom: 'A1') }
+  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_id: enrollment_status.id) }
 
   before :all do
     set_resource "class-group-student"
@@ -33,7 +33,7 @@ describe 'ClassGroup Students' do
       wait_until_visible('#student-modal')
     end
 
-    it 'adds and shows a student', :js => true do
+    it 'adds and shows a student', js: true do
       expect do
         enroll_one_student_via_button('Enroll to class')
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
@@ -45,17 +45,17 @@ describe 'ClassGroup Students' do
   end
 
   context "#search " do
-    it 'searches students', :js => true do
+    it 'searches students', js: true do
       visit gaku.class_groups_path
       click show_link
       click_link 'class-group-enrollments-tab-link'
 
-      student2 = create(:student, :name => 'Kenji', :surname => 'Kita')
-      student3 = create(:student, :name => 'Chikuhei', :surname => 'Nakajima')
+      student2 = create(:student, name: 'Kenji', surname: 'Kita')
+      student3 = create(:student, name: 'Chikuhei', surname: 'Nakajima')
 
       click new_link
       wait_until_visible('#student-modal')
-      fill_in 'q[name_cont]', :with => 'Sus'
+      fill_in 'q[name_cont]', with: 'Sus'
 
       wait_until { size_of(table_rows) == 1 }
 
@@ -71,7 +71,7 @@ describe 'ClassGroup Students' do
       Gaku::ClassGroupEnrollment.count.should eq 1
     end
 
-    it 'enrolls student only once', :js => true do
+    it 'enrolls student only once', js: true do
       click new_link
       wait_until { page.find('#student-modal').visible? }
       within('tr#student-' + student1.id.to_s) do
@@ -79,7 +79,7 @@ describe 'ClassGroup Students' do
       end
     end
 
-    it 'deletes', :js => true do
+    it 'deletes', js: true do
       click_link 'class-group-enrollments-tab-link'
 
       ensure_delete_is_working

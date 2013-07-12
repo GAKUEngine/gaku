@@ -8,7 +8,7 @@ describe 'Student Contacts' do
   let(:student) { create(:student) }
   let(:student_with_contact) { create(:student, :with_contact) }
   let(:student_with_contacts) { create(:student, :with_contacts) }
-  let!(:contact_type) { create(:contact_type, :name => 'Email') }
+  let!(:contact_type) { create(:contact_type, name: 'Email') }
 
   before :all do
     set_resource "student-contact"
@@ -36,7 +36,7 @@ describe 'Student Contacts' do
         @data = student_with_contact
       end
 
-      context 'edit', :js => true do
+      context 'edit', js: true do
 
         before do
           visit gaku.edit_student_path(@data)

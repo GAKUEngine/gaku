@@ -10,7 +10,7 @@ module Gaku
         @student.admission.update_attribute(:is_deleted, true)
       end
       @student.soft_delete
-      redirect_to students_path, :notice => t(:'notice.destroyed', :resource => t(:'student.singular'))
+      redirect_to students_path, notice: t(:'notice.destroyed', resource: t(:'student.singular'))
     end
 
   end

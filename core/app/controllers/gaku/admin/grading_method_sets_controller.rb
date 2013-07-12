@@ -2,11 +2,11 @@ module Gaku
   module Admin
     class GradingMethodSetsController < Admin::BaseController
 
-      load_and_authorize_resource :class =>  Gaku::GradingMethodSet
+      load_and_authorize_resource class: Gaku::GradingMethodSet
 
       inherit_resources
       respond_to :js, :html
-      before_filter :count, :only => [:index, :create, :destroy]
+      before_filter :count, only: [:index, :create, :destroy]
 
       def destroy
         super do |format|

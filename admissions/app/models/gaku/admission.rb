@@ -10,21 +10,21 @@ module Gaku
 
     has_many :specialty_applications
     has_many :admission_phase_records
-    has_many :exam_scores, :through => :admission_phase_records
+    has_many :exam_scores, through: :admission_phase_records
     has_many :attachments, as: :attachable
 
     has_one :external_school_record
 
-    accepts_nested_attributes_for :admission_phase_records, :allow_destroy => true
+    accepts_nested_attributes_for :admission_phase_records, allow_destroy: true
     accepts_nested_attributes_for :student
 
     # attr_accessible :student_id, :applicant_number, :scholarship_status_id,
     #                 :admission_method_id, :admission_period_id,
     #                 :student_attributes, :admitted
 
-    #validates :applicant_number, :presence => true, :uniqueness => {:scope => :admission_method_id}
+    #validates :applicant_number, presence: true, uniqueness: {scope: :admission_method_id}
 
-    #validates: :applicant_number, :uniqueness => {:scope => [:admission_period_id, :admission_method_id]}
+    #validates: :applicant_number, uniqueness: {scope: [:admission_period_id, :admission_method_id]}
 
     def self.progress_students(students, phase)
       progress_success = []
@@ -41,7 +41,7 @@ module Gaku
       remove_success = []
       students.each  do |student|
         record = student.admission.admission_phase_records.find_by_admission_phase_id(phase.id)
-        success = record.update_attributes(:is_deleted => true)
+        success = record.update_attributes(is_deleted: true)
         if success
           remove_success << student.id
         end
@@ -68,9 +68,9 @@ module Gaku
 
     def assign_admission_phase_record(admission_phase, admission_phase_state)
       admission_phase_record = AdmissionPhaseRecord.create(
-                                                :admission_phase_id => admission_phase.id,
-                                                :admission_phase_state_id => admission_phase_state.id,
-                                                :admission_id => self.id)
+                                                admission_phase_id: admission_phase.id,
+                                                admission_phase_state_id: admission_phase_state.id,
+                                                admission_id: self.id)
 
       update_column(:admission_phase_record_id, admission_phase_record.id)
       return admission_phase_record
@@ -132,7 +132,7 @@ module Gaku
 
       record = AdmissionPhaseRecord.deleted.find_by_admission_id_and_admission_phase_id_and_admission_phase_state_id(student.admission.id, next_phase.id, new_state.id)
       if !record.nil?
-        success = record.update_attributes(:is_deleted => false)
+        success = record.update_attributes(is_deleted: false)
       else
         record = AdmissionPhaseRecord.new
         record.admission = student.admission

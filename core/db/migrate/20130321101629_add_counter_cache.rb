@@ -1,11 +1,11 @@
 class AddCounterCache < ActiveRecord::Migration
   def up
 
-    add_column :gaku_students, :addresses_count, :integer, :default => 0
-    add_column :gaku_students, :contacts_count, :integer, :default => 0
-    add_column :gaku_students, :notes_count, :integer, :default => 0
-    add_column :gaku_students, :courses_count, :integer, :default => 0
-    add_column :gaku_students, :guardians_count, :integer, :default => 0
+    add_column :gaku_students, :addresses_count, :integer, default: 0
+    add_column :gaku_students, :contacts_count, :integer, default: 0
+    add_column :gaku_students, :notes_count, :integer, default: 0
+    add_column :gaku_students, :courses_count, :integer, default: 0
+    add_column :gaku_students, :guardians_count, :integer, default: 0
 
     Gaku::Student.find_each do |e|
       e.update_attribute(:addresses_count, e.addresses.length)
@@ -17,8 +17,8 @@ class AddCounterCache < ActiveRecord::Migration
     end
 
 
-    add_column :gaku_guardians, :addresses_count, :integer, :default => 0
-    add_column :gaku_guardians, :contacts_count, :integer, :default => 0
+    add_column :gaku_guardians, :addresses_count, :integer, default: 0
+    add_column :gaku_guardians, :contacts_count, :integer, default: 0
 
     Gaku::Guardian.find_each do |e|
       e.update_attribute(:addresses_count, e.addresses.length)
@@ -26,9 +26,9 @@ class AddCounterCache < ActiveRecord::Migration
       e.save
     end
 
-    add_column :gaku_teachers, :addresses_count, :integer, :default => 0
-    add_column :gaku_teachers, :contacts_count, :integer, :default => 0
-    add_column :gaku_teachers, :notes_count, :integer, :default => 0
+    add_column :gaku_teachers, :addresses_count, :integer, default: 0
+    add_column :gaku_teachers, :contacts_count, :integer, default: 0
+    add_column :gaku_teachers, :notes_count, :integer, default: 0
 
     Gaku::Teacher.find_each do |e|
       e.update_attribute(:addresses_count, e.addresses.length)
@@ -37,8 +37,8 @@ class AddCounterCache < ActiveRecord::Migration
       e.save
     end
 
-    add_column :gaku_campuses, :contacts_count, :integer, :default => 0
-    add_column :gaku_campuses, :addresses_count, :integer, :default => 0
+    add_column :gaku_campuses, :contacts_count, :integer, default: 0
+    add_column :gaku_campuses, :addresses_count, :integer, default: 0
 
     Gaku::Campus.find_each do |e|
       e.update_attribute(:contacts_count, e.contacts.length)
@@ -47,15 +47,15 @@ class AddCounterCache < ActiveRecord::Migration
       e.save
     end
 
-    add_column :gaku_lesson_plans, :notes_count, :integer, :default => 0
+    add_column :gaku_lesson_plans, :notes_count, :integer, default: 0
 
     Gaku::LessonPlan.find_each do |e|
       e.update_attribute(:notes_count, e.notes.length)
       e.save
     end
 
-    add_column :gaku_syllabuses, :notes_count, :integer, :default => 0
-    add_column :gaku_syllabuses, :exams_count, :integer, :default => 0
+    add_column :gaku_syllabuses, :notes_count, :integer, default: 0
+    add_column :gaku_syllabuses, :exams_count, :integer, default: 0
 
     Gaku::Syllabus.find_each do |e|
       e.update_attribute(:exams_count, e.exams.length)
@@ -64,15 +64,15 @@ class AddCounterCache < ActiveRecord::Migration
     end
 
 
-    add_column :gaku_class_groups, :notes_count, :integer, :default => 0
+    add_column :gaku_class_groups, :notes_count, :integer, default: 0
 
     Gaku::ClassGroup.find_each do |e|
       e.update_attribute(:notes_count, e.notes.length)
       e.save
     end
 
-    add_column :gaku_courses, :notes_count, :integer, :default => 0
-    add_column :gaku_courses, :students_count, :integer, :default => 0
+    add_column :gaku_courses, :notes_count, :integer, default: 0
+    add_column :gaku_courses, :students_count, :integer, default: 0
 
     Gaku::Course.find_each do |e|
       e.update_attribute(:notes_count, e.notes.length)
@@ -80,7 +80,7 @@ class AddCounterCache < ActiveRecord::Migration
       e.save
     end
 
-    add_column :gaku_exams, :notes_count, :integer, :default => 0
+    add_column :gaku_exams, :notes_count, :integer, default: 0
 
     Gaku::Exam.find_each do |e|
       e.update_attribute(:notes_count, e.notes.length)

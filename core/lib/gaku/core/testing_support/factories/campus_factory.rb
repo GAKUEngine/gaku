@@ -6,7 +6,7 @@ FactoryGirl.define do
 
   trait :with_one_address do
     after(:create) do |campus|
-      campus.address = create(:address, :addressable => campus)
+      campus.address = create(:address, addressable: campus)
       campus.save
     end
   end
