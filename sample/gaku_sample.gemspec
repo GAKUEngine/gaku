@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Sample data for use with GAKU Engine'
   s.description = 'Required dependency for GAKU Engine'
 
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 2.0.0'
   s.author      = 'Vassil Kalkov'
   s.email       = 'info@genshin.org'
   s.homepage    = 'http://github.com/Genshin/GAKUEngine'
