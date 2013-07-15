@@ -6,7 +6,7 @@ describe Gaku::Admin::AdmissionsController do
   let!(:admission_period) { create(:admission_period) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_id: 1) }
+  let!(:student) { create(:student, enrollment_status_code: 'applicant') }
   let!(:exam) { create(:exam) }
   let!(:attendance) { create(:attendance) }
   let(:admission_method) { create(:admission_method_with_phases) }
@@ -84,7 +84,7 @@ describe Gaku::Admin::AdmissionsController do
         expect do
           gaku_js_post :create, admission: @admission
           student.reload
-        end.to change(student,:enrollment_status_id)
+        end.to change(student,:enrollment_status_code)
       end
     end
 
@@ -383,7 +383,7 @@ describe Gaku::Admin::AdmissionsController do
                                      selected_students: ["student-#{@student.id}"]
         @student.reload
         raise @student.enrollment_status
-      end.to change(@student,:enrollment_status_id)
+      end.to change(@student,:enrollment_status_code)
     end
   end
 

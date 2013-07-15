@@ -84,7 +84,7 @@ module Gaku
       end
 
       def create
-        @admission = Admission.new(params[:admission])
+        @admission = Admission.new(admission_params)
         if @admission.save
           @admission_method = @admission.admission_method
           @admission_period = AdmissionPeriod.find(params[:admission][:admission_period_id])
@@ -101,10 +101,12 @@ module Gaku
         @admission = Admission.new
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
-        @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: 'applicant').id
+        @enrollment_status_applicant = EnrollmentStatus.first_or_create(code: 'applicant')
+        enrollment_status_applicant_id = @enrollment_status_applicant.id
+        enrollment_status_applicant_code = @enrollment_status_applicant.code
         @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: 'enrolled').id
         @search = Student.search(params[:q])
-        @students = @search.result.where(enrollment_status_id: @enrollment_status_applicant_id).page(params[:page]).per(Preset.students_per_page)
+        @students = @search.result.where(enrollment_status_code: @enrollment_status_applicant_code).page(params[:page]).per(Preset.students_per_page)
         @admissions = Admission.all
         @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
         @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
@@ -145,122 +147,140 @@ module Gaku
         render 'gaku/admin/admissions/listing_admissions/soft_delete'
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:admission).permit(admission_attr)]
+      end
+
       private
-        def load_period_method
-          @admission_periods = Gaku::AdmissionPeriod.all
 
-          if params[:admission_period_id]
-            @admission_period = AdmissionPeriod.find(params[:admission_period_id])
-          elsif !@admission_periods.nil?
-            @admission_period = @admission_periods.last
+      def admission_params
+        params.require(:admission).permit(admission_attr)
+      end
+
+      def admission_attr
+        [:student_id, :applicant_number, :scholarship_status_id,
+           :admission_method_id, :admission_period_id,
+           :student_attributes, :admitted]
+      end
+
+      def load_period_method
+        @admission_periods = Gaku::AdmissionPeriod.all
+
+        if params[:admission_period_id]
+          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+        elsif !@admission_periods.nil?
+          @admission_period = @admission_periods.last
+        end
+
+        if @admission_period
+          @admission_methods = @admission_period.admission_methods
+        end
+
+        if params[:admission_method_id]
+          @admission_method = AdmissionMethod.find(params[:admission_method_id])
+        else
+          if !@admission_period.nil? && !@admission_period.admission_methods.nil?
+            @admission_method = @admission_period.admission_methods.first
           end
+        end
+        
+        @admission_params = {}
+        @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
+        @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
+      end
 
-          if @admission_period
-            @admission_methods = @admission_period.admission_methods
-          end
+      def load_before_index
+        @search = Student.unscoped.search(params[:q])
+        @students = @search.result
+        @class_groups = ClassGroup.all
+        @courses = Course.all
+      end
 
-          if params[:admission_method_id]
-            @admission_method = AdmissionMethod.find(params[:admission_method_id])
+      def load_state_students
+        @state_students = []
+
+        params[:student_ids].each do |id|
+          @state_students << Student.unscoped.find(id)
+        end
+      end
+
+      def load_selected_students
+        if params[:selected_students].nil?
+          @selected_students = []
+        else
+          @selected_students = params[:selected_students]
+        end
+      end
+
+      def load_state_records
+        @students = []
+        @state_records = AdmissionPhaseRecord.all
+        @state_records.each do |record|
+          if record.exam_score != nil
+            exam_score = record.exam_score
           else
-            if !@admission_period.nil? && !@admission_period.admission_methods.nil?
-              @admission_method = @admission_period.admission_methods.first
-            end
+            exam_score = t('exams.not_graded')
           end
-          
-          @admission_params = {}
-          @admission_params[:admission_period_id] = @admission_period.id if !@admission_period.nil?
-          @admission_params[:admission_method_id] = @admission_method.id if !@admission_method.nil?
+          @students << {
+            state_id: record.admission_phase_state_id,
+            student: record.admission.student,
+            exam_score: exam_score
+          }
         end
+      end
 
-        def load_before_index
-          @search = Student.unscoped.search(params[:q])
-          @students = @search.result
-          @class_groups = ClassGroup.all
-          @courses = Course.all
-        end
+      def select_vars
+        @class_groups = get_class_groups
+        @class_group_id ||= params[:class_group_id]
+        @scholarship_statuses = get_scholarship_statuses
+      end
 
-        def load_state_students
-          @state_students = []
+      def get_class_groups
+        ClassGroup.all
+      end
 
-          params[:student_ids].each do |id|
-            @state_students << Student.unscoped.find(id)
+      def get_scholarship_statuses
+        ScholarshipStatus.all
+      end
+
+
+      def sort_column
+        Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
+      end
+
+      def sort_direction
+        %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      end
+
+      def show_flashes(admissions, err_admissions)
+        notice = ''
+        unless admissions.empty?
+          admissions.each do |admission|
+            student = Student.unscoped.find(admission.student_id)
+            #TODO localize the text
+            notice+= '<p>' + student.name + ' ' + student.surname + ': ' + "<span style='color:green;'> Admission successfully  created.</span>" + '</p>'
           end
+          flash.now[:success] = notice.html_safe
         end
-
-        def load_selected_students
-          if params[:selected_students].nil?
-            @selected_students = []
-          else
-            @selected_students = params[:selected_students]
+        unless err_admissions.empty?
+          err_admissions.each do |admission|
+            student = Student.unscoped.find(admission.student_id)
+            #TODO localize the text
+            notice+= '<p>' + student.name + ' ' + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(', ') + '</span></p>'
           end
+          flash.now[:error] = notice.html_safe
         end
+      end
 
-        def load_state_records
-          @students = []
-          @state_records = AdmissionPhaseRecord.all
-          @state_records.each do |record|
-            if record.exam_score != nil
-              exam_score = record.exam_score
-            else
-              exam_score = t('exams.not_graded')
-            end
-            @students << {
-              state_id: record.admission_phase_state_id,
-              student: record.admission.student,
-              exam_score: exam_score
-            }
-          end
+      def admit_students(students)
+        students.each  do |student|
+          admission = student.admission
+          admission.admit(student)
         end
-
-        def select_vars
-          @class_groups = get_class_groups
-          @class_group_id ||= params[:class_group_id]
-          @scholarship_statuses = get_scholarship_statuses
-        end
-
-        def get_class_groups
-          ClassGroup.all
-        end
-
-        def get_scholarship_statuses
-          ScholarshipStatus.all
-        end
-
-
-        def sort_column
-          Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
-        end
-
-        def sort_direction
-          %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-        end
-
-        def show_flashes(admissions, err_admissions)
-          notice = ''
-          unless admissions.empty?
-            admissions.each do |admission|
-              student = Student.unscoped.find(admission.student_id)
-              #TODO localize the text
-              notice+= '<p>' + student.name + ' ' + student.surname + ': ' + "<span style='color:green;'> Admission successfully  created.</span>" + '</p>'
-            end
-            flash.now[:success] = notice.html_safe
-          end
-          unless err_admissions.empty?
-            err_admissions.each do |admission|
-              student = Student.unscoped.find(admission.student_id)
-              #TODO localize the text
-              notice+= '<p>' + student.name + ' ' + student.surname + ": <span style='color:orange;'>" + admission.errors.full_messages.join(', ') + '</span></p>'
-            end
-            flash.now[:error] = notice.html_safe
-          end
-        end
-
-        def admit_students(students)
-          students.each  do |student|
-            admission = student.admission
-            admission.admit(student)
-          end
-        end
+      end
     end
   end
 end

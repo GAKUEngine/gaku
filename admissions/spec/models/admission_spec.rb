@@ -28,13 +28,13 @@ describe Gaku::Admission do
     context 'changes student' do
 
       before do
-        @student = create(:student, enrollment_status_id:2)
+        @student = create(:student, enrollment_status_code: 'admitted')
         @admission = create(:admission, student_id: @student.id)
       end
 
       it 'to applicant' do
         @admission.change_student_to_applicant
-        expect(@admission.student.enrollment_status_id).to eq(1)
+        expect(@admission.student.enrollment_status_code).to eq('applicant')
       end
 
     end
@@ -42,13 +42,13 @@ describe Gaku::Admission do
     context 'changes applicant' do
 
       before do
-        @student = create(:student, enrollment_status_id:1)
+        @student = create(:student, enrollment_status_code: 'applicant')
         @admission = create(:admission, student_id: @student.id)
       end
 
       it 'changes applicant to student' do
         @admission.change_applicant_to_student(Date.today)
-        expect(@admission.student.enrollment_status_id).to eq(2)
+        expect(@admission.student.enrollment_status_code).to eq('admitted')
         expect(@admission.student.admitted).not_to be_nil
       end
 

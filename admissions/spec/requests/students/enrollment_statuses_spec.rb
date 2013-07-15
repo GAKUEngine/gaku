@@ -44,7 +44,7 @@ describe 'Admin Student Enrollment Status' do
       context ' #edit', js: true do
 
         before do
-          student.enrollment_status_id = enrollment_status_applicant.id
+          student.enrollment_status_code = enrollment_status_applicant.code
           student.save
           visit gaku.edit_admin_student_path(student)
           page.should have_content "#{enrollment_status_applicant.name}"

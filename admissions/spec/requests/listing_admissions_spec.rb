@@ -7,7 +7,7 @@ describe 'Admin Listing Admissions' do
   let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_id:enrollment_status_applicant.id) }
+  let!(:student) { create(:student, enrollment_status_code:enrollment_status_applicant.code) }
   let(:admission_period) { create(:admission_period) }
   context 'lists admissions and', js:true do
 

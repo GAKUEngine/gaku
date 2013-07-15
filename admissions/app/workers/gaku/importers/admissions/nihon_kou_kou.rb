@@ -145,7 +145,7 @@ module Gaku
                           name: name,
                           surname_reading: surname_reading,
                           name_reading: name_reading,
-                          enrollment_status_id: Gaku::EnrollmentStatus.find_by_code('applicant').id)
+                          enrollment_status_code: Gaku::EnrollmentStatus.find_by_code('applicant').code)
         end
 
         def 基本入力一行分(row, idx, period_id, method_id)
@@ -225,7 +225,7 @@ module Gaku
                               name: name,
                               surname_reading: surname_reading,
                               name_reading: name_reading,
-                              enrollment_status_id: Gaku::EnrollmentStatus.find_by_code('applicant').id)
+                              enrollment_status_code: Gaku::EnrollmentStatus.find_by_code('applicant').code)
 
               logger.info '入学時期及び入学形態が設定されていなかった為志願者' + '「' + surname + '　' + name +
                 '[' + surname_reading + '　' + name_reading + ']」を入学時期形態なしで志願者リストに登録しました。'

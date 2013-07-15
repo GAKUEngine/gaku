@@ -21,7 +21,7 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
     context "with valid attributes" do
       it "saves the new admission method phase in the db" do
         expect{
-          gaku_post :create, admission_method_id: admission_method.id, admission_phase: attributes_for(:admission_phase)  
+          gaku_js_post :create, admission_method_id: admission_method.id, admission_phase: attributes_for(:admission_phase)
         }.to change(Gaku::AdmissionPhase, :count).by 1
         
       end
@@ -49,7 +49,7 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
   describe "PUT #update" do
     it "locates the requested @admission_phase" do
-      gaku_put :update, id: admission_phase, 
+      gaku_js_put :update, id: admission_phase, 
                         admission_phase: attributes_for(:admission_phase), 
                         admission_method_id: admission_method.id
       assigns(:admission_phase).should eq(admission_phase)
@@ -57,7 +57,7 @@ describe Gaku::Admin::AdmissionMethods::AdmissionPhasesController do
 
     context "valid attributes" do
       it "changes admission phase's attributes" do
-        gaku_put :update, id: admission_phase,
+        gaku_js_put :update, id: admission_phase,
                           admission_phase: attributes_for(:admission_phase, name: "Exam"), 
                           admission_method_id: admission_method.id
         admission_phase.reload

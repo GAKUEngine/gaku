@@ -13,7 +13,7 @@ describe Gaku::Student do
   context 'when student is applicant' do
         
     before do
-      @student = create(:student, enrollment_status_id:1)
+      @student = create(:student, enrollment_status_code: 'applicant')
     end
 
     xit 'shows only applicants' do
@@ -31,7 +31,7 @@ describe Gaku::Student do
   context 'when student is admitted' do
     
     before do
-      @student = create(:student, enrollment_status_id:2)
+      @student = create(:student, enrollment_status_code: 'admitted')
     end
 
     xit 'has named scope :only_applicants' do

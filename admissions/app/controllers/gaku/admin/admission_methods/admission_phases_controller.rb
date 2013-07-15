@@ -11,7 +11,7 @@ module Gaku
       before_filter :admission_phases_count, only: [:create, :destroy]
 
       def create
-        @admission_phase = @admission_method.admission_phases.build(params[:admission_phase])
+        @admission_phase = @admission_method.admission_phases.build(admission_phase_params)
           # @admission_phase.save  && @admission_method.admission_phases << @admission_phase
 
           if @admission_phase.save
@@ -20,6 +20,17 @@ module Gaku
               format.js { render 'create' }
             end
           end
+      end
+
+      def update
+        @admission_phase = @admission_method.admission_phases.find(params[:id])
+
+        if @admission_phase.update(admission_phase_params)
+          respond_to do |format|
+            flash.now[:notice] = t('notice.updated', resource: t('admission_phases.singular'))
+            format.js { render 'update' }
+          end
+        end
       end
 
       def show_phase_states
@@ -37,14 +48,31 @@ module Gaku
         render nothing: true
       end
 
-      private
-        def load_admission_method
-          @admission_method = AdmissionMethod.find(params[:admission_method_id])
-        end
+      protected
 
-        def admission_phases_count
-          @admission_phases_count = @admission_method.admission_phases.count
-        end
+      def resource_params
+        return [] if request.get?
+        [params.require(:admission_phase).permit(admission_phase_attr)]
+      end
+
+      private
+      
+      def admission_phase_params
+        params.require(:admission_phase).permit(admission_phase_attr)
+      end
+
+      def admission_phase_attr
+        [:name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes]
+      end
+
+      def load_admission_method
+        @admission_method = AdmissionMethod.find(params[:admission_method_id])
+      end
+
+      def admission_phases_count
+        @admission_phases_count = @admission_method.admission_phases.count
+      end
+
     end
   end
 end

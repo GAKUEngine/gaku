@@ -30,6 +30,25 @@ module Gaku
         end
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:admission_phase_state).permit(admission_phase_state_attr)]
+      end
+
+      private
+
+      def admission_method_params
+        params.require(:admission_phase_state).permit(admission_phase_state_attr)
+      end
+
+      def admission_phase_state_attr
+        [:name, :can_progress, :can_admit, 
+           :auto_progress, :auto_admit, 
+           :is_default, :admission_phase_id]
+      end
+        
     end
   end
 end
