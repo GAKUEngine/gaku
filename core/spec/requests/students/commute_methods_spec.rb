@@ -23,7 +23,7 @@ describe 'Student Commute Method Type' do
     it 'create and show' do
       within(select_box) {  click_option commute_method_type2 }
 
-      wait_until_invisible 'editable-open'
+      page.should_not have_selector('editable-open')
 
       page.should_not have_selector(select_box)
       within(el) { page.should have_content(commute_method_type2.name) }
