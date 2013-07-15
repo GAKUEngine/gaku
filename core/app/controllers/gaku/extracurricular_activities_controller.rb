@@ -25,11 +25,20 @@ module Gaku
                                            .per(Preset.default_per_page)
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:extracurricular_activity).permit(extracurricular_activity_attr)]
+    end
+
     def includes
       #:student
     end
 
     private
+
+    def extracurricular_activity_attr
+      %i(name)
+    end
 
     def count
       @count = ExtracurricularActivity.count
