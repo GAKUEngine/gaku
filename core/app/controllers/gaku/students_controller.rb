@@ -21,9 +21,6 @@ module Gaku
 
     def index
       @enrolled_students = params[:enrolled_students]
-      #index!
-      # @enrollment_status_applicant_id = EnrollmentStatus.first_or_create(code: "applicant").id
-      # @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: "enrolled").id
       active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.pluck(:code)
 
       super do |format|
@@ -119,7 +116,7 @@ module Gaku
     private
 
     def student_attr
-      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_id commute_method_type_id admitted graduated)
+      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated)
     end
 
     def includes
