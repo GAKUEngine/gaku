@@ -7,9 +7,10 @@ describe 'Students' do
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
-  let(:student) { create(:student, name: 'John', surname: 'Doe', enrollment_status_id: enrollment_status.id) }
-  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_id: enrollment_status.id) }
-  let(:student3) { create(:student, name: 'Johny', surname: 'Bravo', enrollment_status_id: enrollment_status.id) }
+  let(:student) { create(:student, name: 'John', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student3) { create(:student, name: 'Johny', surname: 'Bravo', enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student4) { create(:student, name: 'Felix', surname: 'Baumgartner', enrollment_status_code: enrollment_status_applicant.code) }
 
 
 
@@ -25,17 +26,17 @@ describe 'Students' do
       student
       student2
       student3
+      student4
       visit gaku.students_path
     end
 
     it "lists" do
+      #list show only students with active enrollment statuses
       size_of(table_rows).should eq 4
       page.should have_content "#{student.name}"
       page.should have_content "#{student.surname}"
-      page.should have_content "#{student2.name}"
-      page.should have_content "#{student2.surname}"
-      page.should have_content "#{student3.name}"
-      page.should have_content "#{student3.surname}"
+      page.should_not have_content "#{student4.name}"
+      page.should_not have_content "#{student4.surname}"
     end
 
     it 'chooses students', js: true do
