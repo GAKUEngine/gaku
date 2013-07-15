@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'thinreports-rails'
 
-  s.add_dependency 'devise', '3.0.0.rc'
+  s.add_dependency 'devise', '~> 3.0.0'
   s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan'
 
