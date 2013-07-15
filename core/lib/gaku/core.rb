@@ -1,6 +1,7 @@
 require 'rails/all'
 require 'rails/generators'
 require 'rails-i18n'
+require 'eco'
 #require 'deface'
 require 'paperclip'
 require 'ransack'
