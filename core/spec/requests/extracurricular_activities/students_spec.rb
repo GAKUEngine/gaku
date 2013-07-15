@@ -8,9 +8,9 @@ describe 'ExtracurricularActivity Students' do
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
   let(:extracurricular_activity) { create(:extracurricular_activity) }
-  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status.id) }
-  let(:student2) { create(:student, enrollment_status_code: enrollment_status.id) }
-  let(:student3) { create(:student, enrollment_status_code: enrollment_status.id) }
+  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student2) { create(:student, enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student3) { create(:student, enrollment_status_code: enrollment_status_admitted.code) }
 
   before :all do
     set_resource 'extracurricular-activity-student'
@@ -28,7 +28,6 @@ describe 'ExtracurricularActivity Students' do
       student1
       student2
       student3
-
       visit gaku.extracurricular_activities_path
       click show_link
       click_link 'extracurricular-activity-enrollments-tab-link'
