@@ -36,7 +36,7 @@ $.fn.editable.defaults.mode = 'inline'
 
 do_on_load = ->
 
-  console.log 'do_on_change loaded'
+  #console.log 'do_on_change loaded'
 
   $('#soft-delete-link').on 'click', (e)->
     e.preventDefault()

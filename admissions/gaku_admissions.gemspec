@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version      = version
   s.summary      = 'Admission management for GAKU Engine'
   s.description  = 'Required dependency for GAKU Engine'
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.authors      = ['Vassil Kalkov']
   s.email        = 'info@genshin.org'

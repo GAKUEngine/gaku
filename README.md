@@ -33,7 +33,7 @@ It allows for full student management, grading etc. It's bascally what all stude
 
 Requirements
 ------------
-* ruby >= 1.9.3
+* ruby >= 2.0.0
 * sqlite3
 * mysql
 * postgresql
@@ -52,8 +52,8 @@ Get [gaku\_base\_app](http://github.com/kalkov/gaku_base_app) and follow the ins
 
 Create a new Rails application:
 
-    $ gem install rails -v 3.2.13
-    $ rails _3.2.13_ new my_app
+    $ gem install rails -v 4.0.0
+    $ rails _4.0.0_ new my_app
 
 
 Then add GAKUEngine to your Gemfile.
@@ -107,7 +107,7 @@ Recreate test_app:
 
 Run specs using Selenium:
 
-    $ SELENIUM=1 rspec
+    $ rspec
 
 
 Development

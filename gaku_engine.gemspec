@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version      = version
   s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
   s.description  = "It allows for full student management, grading etc. It's bascally what all student grading tools are with some unique features"
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov', 'Radoslav Georgiev', 'Marta Kostova']
   s.email        = 'info@genshin.org'

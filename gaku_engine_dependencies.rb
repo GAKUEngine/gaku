@@ -15,7 +15,7 @@ gem 'bootstrap-editable-rails', github: 'tkawa/bootstrap-editable-rails'
 
 group :assets do
   gem 'less'
-  gem 'sass-rails',   '~> 4.0.0.rc1'
+  gem 'sass-rails',   '~> 4.0.0'
   gem 'coffee-rails', '~> 4.0.0'
   gem 'uglifier',     '>= 1.0.3'
 end
