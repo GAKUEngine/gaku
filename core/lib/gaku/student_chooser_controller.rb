@@ -7,8 +7,10 @@ module Gaku
       @enrollment_status_applicant_code = EnrollmentStatus.first_or_create(code: 'applicant').code
       @enrollment_status_enrolled_code = EnrollmentStatus.first_or_create(code: 'enrolled').code
       
+
+      active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.pluck(:code)
       @search = Student.search(params[:q])
-      @students = @search.result.where(enrollment_status_code: @enrollment_status_enrolled_code).page(params[:page]).per(Preset.students_per_page)
+      @students = @search.result.where(enrollment_status_code: active_enrollment_statuses_codes).page(params[:page]).per(Preset.students_per_page)
 
       @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
       @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
