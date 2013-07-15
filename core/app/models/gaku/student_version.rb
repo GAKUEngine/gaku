@@ -2,7 +2,6 @@ module Gaku
   class StudentVersion < Version
     self.table_name = :gaku_student_versions
 
-    # attr_accessible :human_changes
     serialize :human_changes
 
     before_save :set_human_changes
@@ -17,7 +16,7 @@ module Gaku
 
         case key
 
-        when 'enrollment_status_id'
+        when 'enrollment_status_code'
           from = EnrollmentStatus.find(key0).to_s if key0
           to = EnrollmentStatus.find(key1).to_s if key1
           human_changes[:enrollment_status] = [from, to]
