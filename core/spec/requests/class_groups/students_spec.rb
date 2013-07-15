@@ -8,7 +8,7 @@ describe 'ClassGroup Students' do
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
   let(:class_group) { create(:class_group, grade: '1', name: 'Biology', homeroom: 'A1') }
-  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_id: enrollment_status.id) }
+  let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
 
   before :all do
     set_resource 'class-group-student'
