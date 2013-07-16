@@ -1,7 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-$ ->
+ready = ->
+  
   $('#syllabus-exams').on "click", '#new-syllabus-exam-link', (event) ->
     event.preventDefault()
     #$(@).hide()
@@ -19,3 +17,6 @@ $ ->
   $('#new-syllabus-assignment').on 'click', (event) ->
     event.preventDefault()
     $('#new-syllabus-assignment-form').slide()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

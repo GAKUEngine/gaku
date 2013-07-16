@@ -1,4 +1,4 @@
-$ ->
+ready = ->
   $('body').on 'change', 'input.student-check', ->
     thisCheck = $(this)
     thisId = $(this).closest('tr').attr('id')
@@ -34,3 +34,6 @@ $ ->
     $('.show-chosen-table').show()
     $('#chosen-table').slide()
     $('#chosen-actions').slide()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

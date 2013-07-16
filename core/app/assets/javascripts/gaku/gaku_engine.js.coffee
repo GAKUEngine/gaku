@@ -34,7 +34,7 @@ $.fn.enableValidations = ->
 $.fn.editable.defaults.mode = 'inline'
 
 
-do_on_load = ->
+ready = ->
 
   #console.log 'do_on_change loaded'
 
@@ -46,6 +46,9 @@ do_on_load = ->
     $("#upload-picture").toggle()
 
   $('.datepicker').datepicker(format:'yyyy/mm/dd')
+
+  $(document).on 'ajax:success', '.recovery-link', ->
+    $(this).closest('tr').remove()
 
 
   $(document).on 'ajax:success','.delete-link', (evt, data, status, xhr) ->
@@ -87,5 +90,5 @@ do_on_load = ->
       $.post $(@).data('sort-url'), $(@).sortable('serialize')
 
 
-$(document).ready(do_on_load)
-$(window).bind('page:change', do_on_load)
+$(document).ready(ready)
+$(window).bind('page:change', ready)

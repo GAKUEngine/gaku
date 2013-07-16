@@ -41,7 +41,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'jquery-rails', '~> 2.3.0'
   s.add_dependency 'jquery-ui-rails'
-  s.add_dependency 'jquery-turbolinks'
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'bootstrap-editable-rails'
