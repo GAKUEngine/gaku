@@ -77,7 +77,7 @@ module Gaku
     end
 
     def is_active
-      enrollment_status = EnrollmentStatus.find_by_id(self.enrollment_status_id)
+      enrollment_status = EnrollmentStatus.find_by_code(self.enrollment_status_code)
       if enrollment_status
         enrollment_status.is_active
       else
