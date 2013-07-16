@@ -1,4 +1,5 @@
-$ ->
+ready = ->
+  
   $(document).on 'keydown', '.js-autocomplete', (event) ->
     element_id = '#' + $(this).attr('id')
     $(element_id).autocomplete
@@ -9,7 +10,6 @@ $ ->
       select: (event, ui) ->
         $(this).val(ui.item.value);
         $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
-
 
   $(document).on 'click', "#students-index th a", (event) ->
     $.getScript(this.href)
@@ -22,3 +22,6 @@ $ ->
   $(document).on 'change', "#search-students select", (event) ->
     $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
     return false
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

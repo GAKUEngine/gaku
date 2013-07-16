@@ -6,7 +6,7 @@ describe 'Student Changes' do
 
   let!(:student) { create(:student) }
   let(:scholarship_status) { create(:scholarship_status) }
-  let(:enrollment_status) { create(:enrollment_status_admitted) }
+  let(:enrollment_status) { create(:enrollment_status) }
   let(:commute_method_type) { create(:commute_method_type) }
 
   it 'saves edits' do
@@ -16,7 +16,7 @@ describe 'Student Changes' do
                               student_foreign_id_number: 'Changed student_foreign_id_number',
                               scholarship_status_id: scholarship_status.id,
                               commute_method_type_id: commute_method_type.id,
-                              enrollment_status_id: enrollment_status.id)
+                              enrollment_status_code: enrollment_status.code)
 
     visit gaku.admin_changes_students_path
     page.should have_content 'Changed name'

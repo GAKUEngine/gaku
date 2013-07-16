@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::StudentsController do
 
   let!(:enrollment_status) { create(:enrollment_status) }
-  let(:student) { create(:student, enrollment_status_id: enrollment_status.id) }
+  let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
   let(:valid_attributes) { {name: "Marta", surname: "Kostova"} }
   let(:invalid_attributes) { {name: ""} }
 

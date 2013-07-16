@@ -17,7 +17,18 @@ module Gaku
         respond_with @states
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:state).permit(state_attr)]
+      end
+
       private
+
+      def state_attr
+        %i(name abbr name_ascii code country_iso)
+      end
 
       def load_data
         @countries = Gaku::Country.all.collect { |c| [c, c.iso ]}

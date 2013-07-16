@@ -5,6 +5,7 @@ shared_examples 'avatarable' do
   end
 
   it 'uploads', js:true do
+    sleep 0.5
     click '#upload-picture-link'
     absolute_path = Rails.root + '../support/120x120.jpg'
     attach_file @file_name, absolute_path

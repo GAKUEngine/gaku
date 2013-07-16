@@ -86,6 +86,7 @@ describe 'Admin Schools' do
 
     it 'shows' do
       within(table) { click show_link }
+      page.should have_content 'School Show'
       current_path.should eq "/admin/schools/#{school.id}"
     end
 

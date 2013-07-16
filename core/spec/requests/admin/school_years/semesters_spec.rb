@@ -138,7 +138,7 @@ describe 'Admin School Years Semesters' do
       end
     end
 
-    context "#back", js: true do
+    context "#back" do
       before do
         school_year
         visit gaku.admin_school_year_path(school_year)
@@ -146,8 +146,8 @@ describe 'Admin School Years Semesters' do
 
       it "back to school year index" do
         click '.back-link'
+        page.should have_content 'School Years list'
         current_path.should == gaku.admin_school_years_path
-
       end
     end
 

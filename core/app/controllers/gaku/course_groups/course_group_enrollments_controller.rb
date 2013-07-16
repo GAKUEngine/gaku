@@ -1,11 +1,11 @@
 module Gaku
 	class CourseGroups::CourseGroupEnrollmentsController < GakuController
 
-		#load_and_authorize_resource :course_group_enrollment,
-		#                             class: Gaku::CourseGroupEnrollment
+		load_and_authorize_resource :course_group_enrollment,
+		                             class: Gaku::CourseGroupEnrollment
 
-		#inherit_resources
-		#actions :index, :show, :create, :new, :update, :edit, :destroy
+		inherit_resources
+		actions :destroy
 		respond_to :js, :html
 
 		before_filter :course_group, only: [:new, :create, :destroy]
@@ -25,14 +25,21 @@ module Gaku
 			end
 		end
 
+		protected
+
+	    def resource_params
+	      return [] if request.get?
+	      [params.require(:course_group_enrollment).permit(course_group_enrollment_attr)]
+	    end
+
 		private
 
-    def course_group_enrollment_attr
-      []
-    end
+	def course_group_enrollment_attr
+		%i(course_id course_group_id)
+	end
 
     def course_group_enrollment_params
-      params.require(:course_group_enrollment).permit(:course_id, :course_group_id)
+      params.require(:course_group_enrollment).permit(course_group_enrollment_attr)
     end
 
 		def course_group
