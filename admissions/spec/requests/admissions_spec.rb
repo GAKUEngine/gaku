@@ -107,6 +107,7 @@ describe 'Admin Admissions' do
           wait_for_ajax
           sleep(3)
           click_on 'Listing Admissions'
+          wait_until_visible('#admin-admissions-link')
           check_path(current_url,"/admin/admissions/listing_admissions?admission_period_id=#{admission_period_no_methods.id}")
         end
 
