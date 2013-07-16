@@ -29,7 +29,7 @@ describe 'Admin Student Enrollment Status' do
         end
 
         it ' adds' do
-          select "#{enrollment_status_applicant.name}", from: 'student_enrollment_status_id'
+          select "#{enrollment_status_applicant.name}", from: 'student_enrollment_status_code'
           click @submit_btn
           page.should have_content "#{enrollment_status_applicant.name}"
         end
@@ -53,7 +53,7 @@ describe 'Admin Student Enrollment Status' do
         end
 
         it ' edits' do
-          select "#{enrollment_status_admitted.name}", from: 'student_enrollment_status_id'
+          select "#{enrollment_status_admitted.name}", from: 'student_enrollment_status_code'
           click @submit_btn
           page.should have_content "#{enrollment_status_admitted.name}"
         end

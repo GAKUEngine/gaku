@@ -64,6 +64,7 @@ describe 'Admin Listing Admissions' do
           visit gaku.students_admin_disposals_path
           page.should have_content "#{student.name}"
           click '.show-link'
+          wait_until_visible('#student-index')
           current_path.should == "/admin/students/#{student.id}"
         end
 
