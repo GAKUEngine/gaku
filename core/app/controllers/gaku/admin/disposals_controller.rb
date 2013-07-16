@@ -10,7 +10,6 @@ module Gaku
 				@students = Student.where(is_deleted: true)
 			end
 
-
 			def exams
 				@exams = Exam.without_syllabuses
 			end
