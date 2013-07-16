@@ -24,7 +24,6 @@ module Gaku
 
       def update
         @admission_phase = @admission_method.admission_phases.find(params[:id])
-
         if @admission_phase.update(admission_phase_params)
           respond_to do |format|
             flash.now[:notice] = t('notice.updated', resource: t('admission_phases.singular'))
@@ -62,7 +61,12 @@ module Gaku
       end
 
       def admission_phase_attr
-        [:name, :position, :phase_handler, :admission_method_id, :admission_phase_states_attributes]
+        [:name, :position, :phase_handler, :admission_method_id, 
+          { admission_phase_states_attributes: [:name, :can_progress, 
+                                                :can_admit, :auto_progress,
+                                                :auto_admit, :is_default, 
+                                                :admission_phase_id, 
+                                                :id, :_destroy]} ]
       end
 
       def load_admission_method

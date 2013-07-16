@@ -17,11 +17,13 @@ describe 'Admin Listing Applicants' do
 
       page.should have_content 'Applicants List'
       click_on 'Applicants List'
+      wait_until_visible('#admin-admissions-link')
       current_path.should == '/admin/admissions/listing_applicants'
     end
 
     it 'edits applicants' do
       click '.edit-link'
+      wait_until_visible('#student-index')
       current_path.should eq "/admin/students/#{student.id}/edit"
       page.should have_content "#{student.name}"
     end
@@ -29,6 +31,7 @@ describe 'Admin Listing Applicants' do
     it 'returns to admissions' do
       page.should have_content 'Admissions'
       click_on 'Admissions'
+      wait_until_visible('#listing_applicants-admin-admissions-link')
       current_path.should eq '/admin/admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"
@@ -37,6 +40,7 @@ describe 'Admin Listing Applicants' do
     it 'goes to admissions list' do
       page.should have_content 'Listing Admissions'
       click_on 'Listing Admissions'
+      wait_until_visible('#listing_applicants-admin-admissions-link')
       current_path.should eq '/admin/admissions/listing_admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"
@@ -46,6 +50,7 @@ describe 'Admin Listing Applicants' do
 
       before do
         click '.edit-link'
+        wait_until_visible('#student-index')
         click '#delete-student-link'
         within(modal) { click_on 'Delete' }
         accept_alert

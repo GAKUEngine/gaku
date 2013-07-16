@@ -23,7 +23,7 @@ module Gaku
       end
 
       def create
-        @exam =  @admission_phase.create_exam(params[:exam])
+        @exam =  @admission_phase.create_exam(exam_params)
         create!
       end
 
@@ -31,7 +31,22 @@ module Gaku
         @admission_phase.exam = nil
       end
 
+      protected
+
+      def resource_params
+        return [] if request.get?
+        [params.require(:exam).permit(exam_attr)]
+      end
+
       private
+
+      def exam_params
+        params.require(:exam).permit(exam_attr)
+      end
+
+      def exam_attr
+        [:name, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
+      end
 
       def load_data
         @admission_method = AdmissionMethod.find(params[:admission_method_id])

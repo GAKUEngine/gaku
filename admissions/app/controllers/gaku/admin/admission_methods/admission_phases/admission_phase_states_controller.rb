@@ -23,7 +23,7 @@ module Gaku
 
       def update
         @state = AdmissionPhaseState.find(params[:id])
-        if @state.update_attributes(params[:admission_phase_state])
+        if @state.update(admission_method_params)
           respond_to do |format|
             format.js { render 'update' }
           end
@@ -44,7 +44,7 @@ module Gaku
       end
 
       def admission_phase_state_attr
-        [:name, :can_progress, :can_admit, 
+        [  :name, :can_progress, :can_admit, 
            :auto_progress, :auto_admit, 
            :is_default, :admission_phase_id]
       end

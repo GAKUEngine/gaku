@@ -10,7 +10,7 @@ describe 'Admin Admissions' do
   let(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let(:student) { create(:student, enrollment_status:enrollment_status_applicant) }
+  let(:student) { create(:student, enrollment_status_code: 'applicant') }
 
   describe 'when select admission period', js: true do
     context 'without methods' do
@@ -105,6 +105,7 @@ describe 'Admin Admissions' do
           page.evaluate_script('window.history.back()')
           check_path(current_url,"/admin/admissions?admission_period_id=#{admission_period_no_methods.id}")
           wait_for_ajax
+          sleep(3)
           click_on 'Listing Admissions'
           check_path(current_url,"/admin/admissions/listing_admissions?admission_period_id=#{admission_period_no_methods.id}")
         end
@@ -303,7 +304,7 @@ describe 'Admin Admissions' do
             end
             #TODO revert admitted if admitted by mistake
             visit gaku.students_path
-            select 'Admitted', from: 'q[enrollment_status_id_eq]'
+            select 'Admitted', from: 'q[enrollment_status_code_eq]'
             page.should have_content 'Marta'
             page.should have_content 'Admitted On'
           end

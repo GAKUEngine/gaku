@@ -25,7 +25,11 @@ module Gaku
       private
 
       def admission_period_attr
-        [:name, :seat_limit, :'admitted_on(1i)', :'admitted_on(2i)', :'admitted_on(3i)', :rolling, { period_method_associations_attributes: []} ]
+        [ :name, :seat_limit, :'admitted_on(1i)', 
+          :'admitted_on(2i)', :'admitted_on(3i)', :rolling, 
+          { period_method_associations_attributes: [:admission_period_id, 
+                                                    :admission_method_id, 
+                                                    :id, :_destroy]} ]
       end
 
       def count

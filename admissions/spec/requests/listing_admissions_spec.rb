@@ -7,7 +7,7 @@ describe 'Admin Listing Admissions' do
   let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
-  let!(:student) { create(:student, enrollment_status_code:enrollment_status_applicant.code) }
+  let!(:student) { create(:student, enrollment_status_code: "applicant") }
   let(:admission_period) { create(:admission_period) }
   context 'lists admissions and', js:true do
 
@@ -16,11 +16,10 @@ describe 'Admin Listing Admissions' do
                           student_id: student.id)
       student.admission = @admission
       student.save!
-
       visit gaku.admin_admissions_path
-
       page.should have_content 'Listing Admissions'
       click_on 'Listing Admissions'
+      wait_until_visible('#admin-admissions-link')
       current_path.should == '/admin/admissions/listing_admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{@admission.admission_period.admission_methods.first.name}"
@@ -34,17 +33,18 @@ describe 'Admin Listing Admissions' do
 
         before do
           click '.edit-link'
+          wait_until_visible('#student-index')
           current_path.should eq '/admin/students/1/edit'
           page.should have_content "#{student.name}"
           click '#delete-student-link'
           within(modal) { click_on 'Delete' }
           accept_alert
           student.reload
+          page.should have_content 'successfully'
+          current_path.should == '/admin/admissions/listing_admissions'
         end
 
         it 'deletes student from edit view' do
-          page.should have_content 'successfully'
-          current_path.should == '/admin/admissions/listing_admissions'
           page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path
           page.should_not have_content "#{student.name}"
@@ -100,10 +100,10 @@ describe 'Admin Listing Admissions' do
         before do
           click delete_link
           accept_alert
+          page.should_not have_content "#{student.name}"
         end
 
         it 'deletes admission from index table' do
-          page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path
           page.should_not have_content "#{student.name}"
         end
@@ -131,6 +131,7 @@ describe 'Admin Listing Admissions' do
     it 'goes to admissions' do
       page.should have_content 'Admissions'
       click_on 'Admissions'
+      wait_until_visible('#listing_admissions-admin-admissions-link')
       current_path.should eq '/admin/admissions'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"
@@ -139,6 +140,7 @@ describe 'Admin Listing Admissions' do
     it 'goes to applicants list' do
       page.should have_content 'Applicants List'
       click_on 'Applicants List'
+      wait_until_visible('#listing_admissions-admin-admissions-link')
       current_path.should eq '/admin/admissions/listing_applicants'
       page.should have_content 'Admission Candidates List'
       page.should have_content "#{student.name}"

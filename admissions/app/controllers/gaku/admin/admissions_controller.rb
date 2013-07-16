@@ -10,7 +10,7 @@ module Gaku
 
       helper_method :sort_column, :sort_direction
 
-      before_filter :load_period_method
+      before_action :load_period_method
       before_filter :load_before_index, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method,
                                                   :change_period_method]
       before_filter :load_state_records, only: [:index, :listing_admissions, :change_admission_period, :change_admission_method,
@@ -101,15 +101,18 @@ module Gaku
         @admission = Admission.new
         #TODO make only_applicants to work with applicant students
         #@search = Student.only_applicants.search(params[:q])
+
         @enrollment_status_applicant = EnrollmentStatus.first_or_create(code: 'applicant')
-        enrollment_status_applicant_id = @enrollment_status_applicant.id
-        enrollment_status_applicant_code = @enrollment_status_applicant.code
+        @enrollment_status_enrolled = EnrollmentStatus.first_or_create(code: 'enrolled')
+        @enrollment_status_applicant_code = @enrollment_status_applicant.code
+        @enrollment_status_enrolled_code = @enrollment_status_enrolled.code
+
         @enrollment_status_enrolled_id = EnrollmentStatus.first_or_create(code: 'enrolled').id
         @search = Student.search(params[:q])
         @students = @search.result.where(enrollment_status_code: @enrollment_status_applicant_code).page(params[:page]).per(Preset.students_per_page)
         @admissions = Admission.all
         @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
-        @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.id] }
+        @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.code] }
         @enrollment_statuses << [t('undefined'), nil]
         query_params = {  admission_period_id: params[:admission_period_id], 
                           admission_method_id: params[:admission_method_id] }
@@ -163,14 +166,16 @@ module Gaku
       def admission_attr
         [:student_id, :applicant_number, :scholarship_status_id,
            :admission_method_id, :admission_period_id,
-           :student_attributes, :admitted]
+           { student_attributes: [:surname_reading, :name_reading, :surname, :name, :birth_date, :gender ] }, :admitted]
       end
 
       def load_period_method
         @admission_periods = Gaku::AdmissionPeriod.all
 
         if params[:admission_period_id]
-          @admission_period = AdmissionPeriod.find(params[:admission_period_id])
+          logger.debug(Gaku::AdmissionPeriod.all.inspect)
+          logger.debug(Gaku::AdmissionMethod.all.inspect)
+          @admission_period = Gaku::AdmissionPeriod.find(params[:admission_period_id])
         elsif !@admission_periods.nil?
           @admission_period = @admission_periods.last
         end
@@ -180,7 +185,7 @@ module Gaku
         end
 
         if params[:admission_method_id]
-          @admission_method = AdmissionMethod.find(params[:admission_method_id])
+          @admission_method = Gaku::AdmissionMethod.find(params[:admission_method_id])
         else
           if !@admission_period.nil? && !@admission_period.admission_methods.nil?
             @admission_method = @admission_period.admission_methods.first
@@ -202,8 +207,10 @@ module Gaku
       def load_state_students
         @state_students = []
 
-        params[:student_ids].each do |id|
-          @state_students << Student.unscoped.find(id)
+        if !params[:student_ids].nil?
+          params[:student_ids].each do |id|
+            @state_students << Student.unscoped.find(id)
+          end
         end
       end
 
