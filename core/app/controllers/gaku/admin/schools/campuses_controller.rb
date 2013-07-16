@@ -39,7 +39,7 @@ module Gaku
       end
 
       def campus_attr
-        %i(name school_id is_master)
+        %i(name school_id is_master picture)
       end
 
     end

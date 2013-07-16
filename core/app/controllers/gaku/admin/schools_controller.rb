@@ -52,7 +52,7 @@ module Gaku
       end
 
       def school_attr
-        [:name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, { levels_attributes: [ :name, :'_destroy', :id ] } ]
+        [:name, :is_primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, { levels_attributes: [ :name, :'_destroy', :id ] }, :picture ]
       end
 
     end
