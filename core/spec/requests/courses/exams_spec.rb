@@ -23,6 +23,7 @@ describe 'CourseExams', js: true  do
 
   it 'shows grading link' do
     click '.grading_link'
+    page.should have_content 'Hide Completed'
     current_path.should eq gaku.grading_course_exam_path(course, exam)
   end
 

@@ -71,7 +71,8 @@ describe 'Courses' do
     context 'when select back btn' do
       it 'returns to index view', js: true do
         visit gaku.course_path(course)
-        click_on('Back')
+        click_on 'Back'
+        page.should have_content 'Courses list'
         page.current_path.should eq gaku.courses_path
       end
     end
