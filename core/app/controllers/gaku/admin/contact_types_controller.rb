@@ -18,7 +18,7 @@ module Gaku
       private
 
       def count
-      	@count = ContactType.count
+        @count = ContactType.count
       end
 
       def contact_type_attr

@@ -4,10 +4,10 @@ module Gaku
 
       load_and_authorize_resource class: Gaku::CommuteMethodType
 
-    	inherit_resources
-    	respond_to :js, :html
+      inherit_resources
+      respond_to :js, :html
 
-    	before_filter :count, only: [:create, :destroy, :index]
+      before_filter :count, only: [:create, :destroy, :index]
 
       protected
 
@@ -20,11 +20,11 @@ module Gaku
         [params.require(:commute_method_type).permit(commute_method_type_attr)]
       end
 
-    	private
+      private
 
-  	  def count
-  	  	@count = CommuteMethodType.count
-  	  end
+      def count
+        @count = CommuteMethodType.count
+      end
 
       def commute_method_type_attr
         %i(name)

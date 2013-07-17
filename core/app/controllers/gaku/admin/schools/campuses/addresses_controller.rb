@@ -7,7 +7,7 @@ module Gaku
       inherit_resources
       respond_to :js, :html
 
-    	before_filter :load_data
+      before_filter :load_data
       before_filter :before_index, only: :index
 
       def create

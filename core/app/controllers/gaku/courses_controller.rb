@@ -59,7 +59,7 @@ module Gaku
       @notable = Course.find(params[:id])
       @notable_resource = get_resource_name(@notable)
       @class_groups = ClassGroup.all.collect { |s| [s.name, s.id] }
-	  end
+    end
 
     def sort_column
       Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
