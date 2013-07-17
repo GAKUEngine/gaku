@@ -12,7 +12,7 @@ module Gaku
       @attachment = @attachable.attachments.build(params[:attachment])
       respond_to do |format|
         if @attachment.save
-          format.html { redirect_to :back, notice: 'Asset upload was successful!' }
+          format.html { redirect_to :back, flash: { notice: 'Asset upload was successful!' } }
         else
           format.html { redirect_to :back, flash: {success: 'Error when upload asset'} }
         end
@@ -58,22 +58,31 @@ module Gaku
       end
     end
 
+    def resource_params
+      return [] if request.get?
+      [params.require(:attachment).permit(attachment_attr)]
+    end
+
     private
 
-      def unscoped_attachment
-        @attachment = Attachment.unscoped.find(params[:id])
-      end
+    def attachment_attr
+      [:name, :description, :asset]
+    end
 
-      def find_attachable
-        # unnamespaced_klass = ''
-        # klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
-        #   unnamespaced_klass = c.to_s.split("::")
-        #   params["#{unnamespaced_klass[1].underscore}_id"]
-        # end
+    def unscoped_attachment
+      @attachment = Attachment.unscoped.find(params[:id])
+    end
 
-        # @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
-        # @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
-      end
+    def find_attachable
+      # unnamespaced_klass = ''
+      # klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
+      #   unnamespaced_klass = c.to_s.split("::")
+      #   params["#{unnamespaced_klass[1].underscore}_id"]
+      # end
+
+      # @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
+      # @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+    end
 
   end
 end
