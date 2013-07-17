@@ -66,12 +66,14 @@ describe 'Exam Portion Attachments' do
 
         click submit
 
-        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
 
         flash_updated?
-        page.should have_content 'Different name'
-        page.should_not have_content attachment.name
+        wait_until do
+          page.should have_content 'Different name'
+          page.should_not have_content attachment.name
+        end
 
+        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
       end
 
       it "cancels editing" do
