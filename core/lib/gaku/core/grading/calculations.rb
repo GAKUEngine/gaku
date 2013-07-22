@@ -165,7 +165,6 @@ module Gaku
 
             def add_to_deviation_member(exam, student)
               if exam.use_weighting
-                puts [@student_total_weights[student.id][exam.id], @exam_weight_averages[exam.id], @standard_deviation].inspect
                 @deviation_member = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / @standard_deviation
               else
                 @deviation_member = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / @standard_deviation
