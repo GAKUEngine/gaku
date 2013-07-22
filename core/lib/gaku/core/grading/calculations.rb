@@ -16,7 +16,6 @@ module Gaku
             @exam_weight_averages = Hash.new []
             @weighting_score = true
             @student_portion_attendance = Hash.new { |hash,key| hash[key] = {} }
-
             @students.each do |student|
               @exams.each do |exam|
                 caluculate_completion(exam)
@@ -145,7 +144,7 @@ module Gaku
             end
 
             def add_to_weight_averages(exam, student)
-              @exam_weight_averages[exam.id].push @student_total_weights[student.id][exam.id]
+              @exam_weight_averages[exam.id] += [@student_total_weights[student.id][exam.id]]
               if @exam_weight_averages[exam.id].length == @students.length
                 total = calculate_array_total @exam_weight_averages[exam.id]
                 @exam_weight_averages[exam.id] = fix_digit(total / @students.length, 1)

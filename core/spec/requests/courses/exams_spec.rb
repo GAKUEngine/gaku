@@ -30,6 +30,7 @@ describe 'CourseExams', js: true  do
   it 'shows all grading link' do
     page.should have_content 'All Exams'
     click '#all-course-exams-grade'
+    page.should have_content 'Hide Completed'
     current_path.should eq gaku.grading_course_exams_path(course)
   end
 end
