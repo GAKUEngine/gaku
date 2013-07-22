@@ -1,36 +1,34 @@
 module Gaku
-  module Admin
-    class CommuteMethodTypesController < Admin::BaseController
+  class Admin::CommuteMethodTypesController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::CommuteMethodType
+    load_and_authorize_resource class: CommuteMethodType
 
-      inherit_resources
-      respond_to :js, :html
+    respond_to :js, :html
 
-      before_filter :count, only: [:create, :destroy, :index]
+    inherit_resources
 
-      protected
+    before_filter :count, only: %i(create destroy index)
 
-      def collection
-        @commute_method_types = CommuteMethodType.includes(:translations)
-      end
+    protected
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:commute_method_type).permit(commute_method_type_attr)]
-      end
-
-      private
-
-      def count
-        @count = CommuteMethodType.count
-      end
-
-      def commute_method_type_attr
-        %i(name)
-      end
-
+    def collection
+      @commute_method_types = CommuteMethodType.includes(:translations)
     end
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:commute_method_type).permit(attributes)]
+    end
+
+    private
+
+    def count
+      @count = CommuteMethodType.count
+    end
+
+    def attributes
+      %i(name)
+    end
+
   end
 end
-

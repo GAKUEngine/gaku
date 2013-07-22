@@ -1,38 +1,36 @@
 module Gaku
-  module Admin
-    class AchievementsController < Admin::BaseController
+  class Admin::AchievementsController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::Achievement
+    load_and_authorize_resource class: Achievement
 
-      inherit_resources
-      respond_to :js, :html
+    respond_to :js, :html
 
-      before_filter :count, only: [:index, :create, :destroy]
+    inherit_resources
 
-      def create
-        create! { [:admin, :achievements ] }
-      end
+    before_filter :count, only: %i(index create destroy)
 
-       def update
-        update! { [:admin, :achievements ] }
-      end
-
-      def resource_params
-        return [] if request.get?
-        [params.require(:achievement).permit(achievement_attr)]
-      end
-
-      private
-
-      def count
-        @count = Achievement.count
-      end
-
-      def achievement_attr
-        %i(name description authority badge external_school_record)
-      end
-
+    def create
+      create! { [:admin, :achievements] }
     end
+
+     def update
+      update! { [:admin, :achievements] }
+    end
+
+    def resource_params
+      return [] if request.get?
+      [params.require(:achievement).permit(attributes)]
+    end
+
+    private
+
+    def count
+      @count = Achievement.count
+    end
+
+    def attributes
+      %i(name description authority badge external_school_record)
+    end
+
   end
 end
-

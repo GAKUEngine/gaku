@@ -1,33 +1,31 @@
 module Gaku
-  module Admin
-    class SchoolYears::SemestersController < Admin::BaseController
+  class Admin::SchoolYears::SemestersController < Admin::BaseController
 
-      authorize_resource class: false
+    authorize_resource class: false
 
-      inherit_resources
-      belongs_to :school_year, parent_class: Gaku::SchoolYear
+    respond_to :js, :html
 
+    inherit_resources
+    belongs_to :school_year, parent_class: SchoolYear
 
-      respond_to :js, :html
-      before_filter :count, only: [:create, :destroy, :index]
+    before_filter :count, only: %i(create destroy index)
 
-      protected
+    protected
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:semester).permit(semester_attr)]
-      end
-
-      private
-
-      def count
-        @count = Semester.count
-      end
-
-      def semester_attr
-        %i(starting ending)
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:semester).permit(attributes)]
     end
+
+    private
+
+    def count
+      @count = Semester.count
+    end
+
+    def attributes
+      %i(starting ending)
+    end
+
   end
 end

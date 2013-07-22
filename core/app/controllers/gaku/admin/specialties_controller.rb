@@ -1,31 +1,30 @@
 module Gaku
-  module Admin
-    class SpecialtiesController < Admin::BaseController
+  class Admin::SpecialtiesController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::Specialty
+    load_and_authorize_resource class: Specialty
 
-      inherit_resources
-      respond_to :js, :html
+    respond_to :js, :html
 
-      before_filter :count, only: [:create, :destroy, :index]
+    inherit_resources
 
-      protected
+    before_filter :count, only: %i(create destroy index)
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:specialty).permit(specialty_attr)]
-      end
+    protected
 
-      private
-
-      def count
-        @count = Specialty.count
-      end
-
-      def specialty_attr
-        %i(name description major_only)
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:specialty).permit(attributes)]
     end
+
+    private
+
+    def count
+      @count = Specialty.count
+    end
+
+    def attributes
+      %i(name description major_only)
+    end
+
   end
 end

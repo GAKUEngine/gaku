@@ -1,10 +1,8 @@
-module Gaku 
-  module Admin
-    class SystemToolsController < Admin::BaseController
+module Gaku
+  class Admin::SystemToolsController < Admin::BaseController
 
-      def index
-      end
-    
+    def index
     end
+
   end
 end

@@ -1,30 +1,30 @@
 module Gaku
-  module Admin
-    class GradingMethodsController < Admin::BaseController
+  class Admin::GradingMethodsController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::GradingMethod
+    load_and_authorize_resource class: GradingMethod
 
-      inherit_resources
-      respond_to :js, :html
-      before_filter :count, only: [:index, :create, :destroy]
+    respond_to :js, :html
 
-      protected
+    inherit_resources
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:grading_method).permit(grading_method_attr)]
-      end
+    before_filter :count, only: %i(index create destroy)
 
-      private
+    protected
 
-      def count
-        @count = GradingMethod.count
-      end
-
-      def grading_method_attr
-        %i(description method name curved arguments)
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:grading_method).permit(attributes)]
     end
+
+    private
+
+    def count
+      @count = GradingMethod.count
+    end
+
+    def attributes
+      %i(description method name curved arguments)
+    end
+
   end
 end

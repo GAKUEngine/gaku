@@ -1,57 +1,56 @@
 module Gaku
-  module Admin
-    class UsersController < Admin::BaseController
+  class Admin::UsersController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::User
+    load_and_authorize_resource class: User
 
-      inherit_resources
-      respond_to :js, :html
+    respond_to :js, :html
 
-      after_filter  :save_user_roles, only: :create
-      before_filter :save_user_roles, only: :update
-      before_filter :count,           only: [:create, :destroy, :index]
-      before_filter :clean_password,  only: :update
-      before_filter :load_data
+    inherit_resources
 
-      protected
+    after_filter  :save_user_roles, only: :create
+    before_filter :save_user_roles, only: :update
+    before_filter :count,           only: %i(create destroy index)
+    before_filter :clean_password,  only: :update
+    before_filter :load_data
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:user).permit(user_attr)]
-      end
+    protected
 
-      private
-
-      def user_attr
-        [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] }]
-      end
-
-      def load_data
-        @roles = Role.all
-      end
-
-      def save_user_roles
-        @user = User.find(params[:id]) if params[:id]
-        @user.roles.destroy_all
-        params[:user][:role] ||= {}
-        Role.all.each do |role|
-          if params[:user][:role_ids].include?(role.id.to_s)
-            @user.roles << role
-          end
-        end
-
-        params[:user].delete(:role)
-      end
-
-      def count
-        @count = User.count
-      end
-
-      def clean_password
-        params[:user].delete(:password) if params[:user][:password].blank?
-        params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:user).permit(attributes)]
     end
+
+    private
+
+    def attributes
+      [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] } ]
+    end
+
+    def load_data
+      @roles = Role.all
+    end
+
+    def save_user_roles
+      @user = User.find(params[:id]) if params[:id]
+      @user.roles.destroy_all
+      params[:user][:role] ||= {}
+      Role.all.each do |role|
+        if params[:user][:role_ids].include?(role.id.to_s)
+          @user.roles << role
+        end
+      end
+
+      params[:user].delete(:role)
+    end
+
+    def count
+      @count = User.count
+    end
+
+    def clean_password
+      params[:user].delete(:password) if params[:user][:password].blank?
+      params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
+    end
+
   end
 end

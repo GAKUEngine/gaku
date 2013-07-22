@@ -1,30 +1,30 @@
 module Gaku
-  module Admin
-    class ContactTypesController < Admin::BaseController
+  class Admin::ContactTypesController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::ContactType
+    load_and_authorize_resource class: ContactType
 
-      inherit_resources
-      respond_to :js, :html
-      before_filter :count, only: [:create, :destroy, :index]
+    respond_to :js, :html
 
-      protected
+    inherit_resources
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:contact_type).permit(contact_type_attr)]
-      end
+    before_filter :count, only: %i(create destroy index)
 
-      private
+    protected
 
-      def count
-        @count = ContactType.count
-      end
-
-      def contact_type_attr
-        %i(name)
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:contact_type).permit(attributes)]
     end
+
+    private
+
+    def count
+      @count = ContactType.count
+    end
+
+    def attributes
+      %i(name)
+    end
+
   end
 end

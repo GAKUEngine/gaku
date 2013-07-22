@@ -1,31 +1,30 @@
 module Gaku
-  module Admin
-    class RolesController < Admin::BaseController
+  class Admin::RolesController < Admin::BaseController
 
-      load_and_authorize_resource class: Gaku::Role
+    load_and_authorize_resource class: Role
 
-      inherit_resources
-      respond_to :js, :html
+    respond_to :js, :html
 
-      before_filter :count, only: [:create, :destroy, :index]
+    inherit_resources
 
-      protected
+    before_filter :count, only: %i(create destroy index)
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:role).permit(role_attr)]
-      end
+    protected
 
-      private
-
-      def count
-        @count = Role.count
-      end
-
-      def role_attr
-        %i(name class_group_enrollment extracurricular_activity_enrollment)
-      end
-
+    def resource_params
+      return [] if request.get?
+      [params.require(:role).permit(attributes)]
     end
+
+    private
+
+    def count
+      @count = Role.count
+    end
+
+    def attributes
+      %i(name class_group_enrollment extracurricular_activity_enrollment)
+    end
+
   end
 end
