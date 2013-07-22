@@ -1,15 +1,15 @@
 module Gaku
   class ClassGroups::StudentsController < GakuController
 
-    load_and_authorize_resource :class_group, class: Gaku::ClassGroup
+    load_and_authorize_resource :class_group, class: ClassGroup
     load_and_authorize_resource :student,
                                 through: :class_group,
-                                class: Gaku::Student
+                                class: Student
+
+    respond_to :js, :html
 
     inherit_resources
     actions :index, :show, :create, :update, :edit, :delete
-
-    respond_to :js, :html
 
     before_filter :class_group, only: :new
 
@@ -41,7 +41,7 @@ module Gaku
       end
     end
 
-     def destroy
+    def destroy
       @class_group_enrollment = ClassGroupEnrollment.find(params[:class_group_enrollment])
       @class_group = ClassGroup.find(@class_group_enrollment.class_group_id)
       @class_group_enrollment.destroy

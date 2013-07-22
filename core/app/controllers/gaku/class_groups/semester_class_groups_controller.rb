@@ -1,25 +1,27 @@
 module Gaku
   class ClassGroups::SemesterClassGroupsController < GakuController
 
-    load_and_authorize_resource :class_group, class: Gaku::ClassGroup
+    load_and_authorize_resource :class_group, class: ClassGroup
+
+    respond_to :js, :html
 
     inherit_resources
-    respond_to :js, :html
-    belongs_to :class_group, parent_class: Gaku::ClassGroup
 
-    before_filter :count, only: [:create, :destroy]
-    before_filter :load_data, only: [:new, :edit]
+    belongs_to :class_group, parent_class: ClassGroup
+
+    before_filter :count, only: %I(create destroy)
+    before_filter :load_data, only: %I(new edit)
 
     protected
 
     def resource_params
       return [] if request.get?
-      [params.require(:semester_class_group).permit(semester_class_group_attr)]
+      [params.require(:semester_class_group).permit(attributes)]
     end
 
     private
 
-    def semester_class_group_attr
+    def attributes
       %i(semester_id)
     end
 

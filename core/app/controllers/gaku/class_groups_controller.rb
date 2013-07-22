@@ -3,16 +3,17 @@ module Gaku
 
     include StudentChooserController
 
-    load_and_authorize_resource class:  Gaku::ClassGroup
+    load_and_authorize_resource class:  ClassGroup
+
+    respond_to :js, :html
 
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    respond_to :js, :html
 
     before_filter :load_data
     before_filter :load_before_show, only: :show
-    before_filter :count, only: [:create, :destroy, :index]
+    before_filter :count, only: %i(create destroy index)
 
     def index
       @class_groups = SemesterClassGroup.group_by_semester
@@ -23,12 +24,12 @@ module Gaku
 
     def resource_params
       return [] if request.get?
-      [params.require(:class_group).permit(class_group_attr)]
+      [params.require(:class_group).permit(attributes)]
     end
 
     private
 
-    def class_group_attr
+    def attributes
       %i(name grade homeroom)
     end
 
