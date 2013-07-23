@@ -3,7 +3,7 @@ module Gaku::Core::Importers::Students::PersonalInformation
     phone = row[:phone]
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(
       name: 'Phone').first.id, data: phone).exists?
-      person.contacts.create!(contact_type_id: 
+      person.contacts.create!(contact_type_id:
         Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
         is_emergency: true, data: phone) unless (phone.nil? || phone == '')
     end
@@ -32,7 +32,7 @@ module Gaku::Core::Importers::Students::PersonalInformation
         country = Gaku::Country.where(name: row[:'address.country']).first
       end
 
-      unless person.addresses.where(zipcode: row[:'address.zipcode'],
+      unless person.addresses.where(zipcode: row[:'address.zipcode'].to_s,
         country_id: country.id, state_id: state.id, city: row[:'city'],
         address1: row[:'address.address1'], address2: row[:'address.address2']).exists?
 
