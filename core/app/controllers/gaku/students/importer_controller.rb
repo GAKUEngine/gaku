@@ -20,7 +20,7 @@ module Gaku
     def create
       redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') && return if params[:importer][:data_file].nil?
 
-      file = ImportFile.new(params[:importer])
+      file = ImportFile.new(import_params)
       file.context = 'students'
       raise 'COULD NOT SAVE FILE' unless file.save
 
@@ -31,6 +31,13 @@ module Gaku
         import_school_station_zaikousei(file)
       end
     end
+
+    private
+
+    def import_params
+      params.require(:importer).permit!
+    end
+
 
     def import_roster(file)
       if file.data_file.content_type == 'application/vnd.ms-excel' ||
