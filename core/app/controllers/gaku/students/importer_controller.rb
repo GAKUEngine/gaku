@@ -19,7 +19,6 @@ module Gaku
 
     def create
       redirect_to importer_index_path, alert: I18n.t('errors.messages.file_unreadable') && return if params[:importer][:data_file].nil?
-
       file = ImportFile.new(import_params)
       file.context = 'students'
       raise 'COULD NOT SAVE FILE' unless file.save
@@ -35,7 +34,7 @@ module Gaku
     private
 
     def import_params
-      params.require(:importer).permit!
+      params.require(:importer).permit(:data_file, :importer_type)
     end
 
 
