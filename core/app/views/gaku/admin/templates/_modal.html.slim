@@ -1,0 +1,6 @@
+= modal_for 'edit-template-modal' do
+  = modal_header t(:'template.edit')
+  = normal_modal_form_for [:admin, @template] do |f|
+    = modal_body do
+      = render 'form_fields', f: f
+      = buttons_for @template, nested_id: 'admin-template'

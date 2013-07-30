@@ -1,0 +1,20 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-templates-count' do
+      = print_count @count, t_template_list
+  .pull-right
+    = ajax_link_to_new t(:'template.add'), [:new, :admin, :template], id: 'new-admin-template-link'
+
+= content_for :new_form do
+  #new-admin-template.hide
+
+#admin-templates
+  = table_for 'admin-templates-index' do
+    thead
+      tr
+        = th t(:'template.singular')
+        = th t(:'template.context')
+        = th t(:'template.lock')
+        = th_actions 3
+    tbody
+      = render partial: 'template', collection: @templates, as: :template
