@@ -1,0 +1,8 @@
+td = template.name
+td = template.context
+td = boolean_image template.is_locked?
+td
+  = link_to download_icon, [:download, :admin, template], class: 'btn btn-mini btn-success', style: 'margin-right:5px'
+  = ajax_link_to_edit [:edit, :admin, template]
+  = ajax_link_to_delete [:admin, template]
+

@@ -565,6 +565,7 @@ en:
       system:
         backup: Backup
         system_tools: System Tools
+      templates: Templates
       types:
         attendance_types: Attendance Types
         commute_methods: Commute Methods
@@ -864,6 +865,17 @@ en:
     save: Save Teacher
     show: Show Teacher
     singular: Instructor
+  template:
+    singular: Template
+    plural: Templates
+    add: Add Template
+    list: Templates list
+    context: Context
+    lock: Lock
+    file: File
+    save: Save Template
+    edit: Template
+    file_type_error: Not supported file type
   title: Title
   undefined: Undefined
   user:

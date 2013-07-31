@@ -252,6 +252,9 @@ Gaku::Core::Engine.routes.draw do
     resources :attendance_types
     resources :users
     resources :roles
+    resources :templates do
+      get :download, on: :member
+    end
     resources :grading_methods
     resources :grading_method_sets do
       post :make_primary, on: :member

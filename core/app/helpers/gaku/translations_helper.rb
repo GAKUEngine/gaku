@@ -173,5 +173,9 @@ module Gaku
       t(:'state.list')
     end
 
+    def t_template_list
+      t(:'template.list')
+    end
+
   end
 end
