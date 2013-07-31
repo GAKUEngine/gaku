@@ -876,6 +876,7 @@ en:
     save: Save Template
     edit: Template
     file_type_error: Not supported file type
+    choose: Choose template
   title: Title
   undefined: Undefined
   user:
