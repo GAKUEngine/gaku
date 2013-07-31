@@ -1,8 +1,10 @@
 # -*- encoding: utf-8 -*-
+require 'GenSheet'
 module Gaku
   class Students::ImporterController < GakuController
 
     skip_authorization_check
+    before_action :load_templates, only: :index
 
     def index
       @importer_types = {I18n.t('student.roster_sheet') => :import_roster, 'School Station' => :import_school_station_zaikousei}
@@ -10,6 +12,13 @@ module Gaku
     end
 
     def get_roster
+      template = Template.find(params[:template][:id])
+      #read file from paperclip obejct
+      source_file = File.new(template.file.path)
+      #process with GenSheet
+      sheet = GenSheet.new(source_file).to_xls
+
+      send_file sheet
     end
 
     def get_registration_roster
@@ -35,6 +44,10 @@ module Gaku
 
     def import_params
       params.require(:importer).permit(:data_file, :importer_type)
+    end
+
+    def load_templates
+      @templates ||= Template.all
     end
 
 
