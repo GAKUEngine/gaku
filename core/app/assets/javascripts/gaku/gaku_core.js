@@ -1,6 +1,6 @@
 //= require jquery
 //= require turbolinks
-//= require jquery-ui
+//= require jquery.ui.all
 
 //= require moment.min
 
