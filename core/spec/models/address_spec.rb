@@ -7,37 +7,16 @@ describe Gaku::Address do
   let(:student) { create(:student) }
   let!(:address) { create(:address, country: country, addressable: student) }
 
-  describe 'associations' do
+  describe 'relations' do
     it { should belong_to :country }
     it { should belong_to :state }
     it { should belong_to :addressable }
   end
 
   describe 'validations' do
-
-    before do
-      country.states.stub find_all_by_name_or_abbr: [state]
-    end
-
     it { should validate_presence_of :address1 }
     it { should validate_presence_of :city }
     it { should validate_presence_of :country }
-
-    it 'is invalid without address1' do
-      build(:address, address1:nil).should_not be_valid
-    end
-
-    it 'is invalid without city' do
-      build(:address, city:nil).should_not be_valid
-    end
-
-    it 'is invalid without country' do
-      build(:address, country:nil).should_not be_valid
-    end
-
-    it { should validate_presence_of :address1 }
-    it { should validate_presence_of :country }
-
   end
 
   describe 'before_save' do
