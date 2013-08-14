@@ -6,7 +6,7 @@ module Gaku
     belongs_to :school
     has_one :address, as: :addressable
 
-    validates :name, presence: true
+    validates :name, :school, presence: true
 
     scope :master, -> { where(is_master: true) }
 

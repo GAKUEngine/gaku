@@ -7,13 +7,14 @@ describe Gaku::Campus do
     it_behaves_like 'avatarable'
   end
 
-  describe 'associations' do
+  describe 'relations' do
     it { should belong_to :school }
     it { should have_one :address }
   end
 
 	describe 'validations' do
     it { should validate_presence_of :name }
+    it { should validate_presence_of :school }
 	end
 
   context 'counter_cache' do
