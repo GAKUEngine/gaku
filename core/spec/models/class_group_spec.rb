@@ -17,10 +17,11 @@ describe Gaku::ClassGroup do
 
   describe 'validations' do
     it { should validate_presence_of :name }
+  end
 
-    it 'is invalid without name' do
-      build(:class_group, name: nil).should_not be_valid
-    end
+  describe '#to_s' do
+    let(:class_group) { build(:class_group) }
+    specify { class_group.to_s.should eq "#{class_group.grade} - #{class_group.name}" }
   end
 
   context 'counter_cache' do
