@@ -13,7 +13,7 @@ describe 'Admin School Campus Picture' do
     @file_name = 'campus_picture'
   end
 
-  it_behaves_like 'avatarable'
+  it_behaves_like 'new avatar'
 
 
 end

@@ -14,8 +14,8 @@ describe 'Admin School Picture' do
   context 'avatarable' do
 
     before { @file_name = 'school_picture' }
-    it_behaves_like 'avatarable'  
-    
+    it_behaves_like 'new avatar'
+
   end
-  
+
 end

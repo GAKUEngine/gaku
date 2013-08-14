@@ -1,4 +1,4 @@
-shared_examples 'avatarable' do
+shared_examples 'new avatar' do
 
   it 'shows picture' do
     page.should have_css '#avatar-picture'

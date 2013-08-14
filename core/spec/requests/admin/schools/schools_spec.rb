@@ -43,14 +43,14 @@ describe 'Admin Schools' do
     before do
       primary_school = create(:school, is_primary:true)
       visit gaku.admin_schools_path
-      @file_name = 'school_picture' 
+      @file_name = 'school_picture'
     end
-    
-    it_behaves_like 'avatarable'  
-    
+
+    it_behaves_like 'new avatar'
+
   end
   context 'existing', js: true do
-    
+
     before do
       school
       visit gaku.admin_schools_path
@@ -98,7 +98,7 @@ describe 'Admin Schools' do
         click_on "Edit"
         wait_until_visible modal
       end
-      
+
       it 'has validations' do
         fill_in 'school_name', with: ''
         has_validations?
