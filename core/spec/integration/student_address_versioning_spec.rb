@@ -12,9 +12,9 @@ describe 'Student Address Versioning' do
     expect do
       @address.address1 = 'Changed'
       @address.save
-    end.to change(Version, :count).by 1
+    end.to change(PaperTrail::Version, :count).by 1
 
-    version = Version.last
+    version = PaperTrail::Version.last
 
     version.join_model.should eq 'Gaku::Student'
     version.joined_resource_id.should eq @student.id
