@@ -10,5 +10,9 @@ module Gaku
 
     scope :master, -> { where(is_master: true) }
 
+    def to_s
+      name
+    end
+
   end
 end

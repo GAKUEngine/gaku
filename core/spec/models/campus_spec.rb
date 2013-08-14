@@ -17,6 +17,11 @@ describe Gaku::Campus do
     it { should validate_presence_of :school }
 	end
 
+  describe '#to_s' do
+    let(:campus) { build(:campus) }
+    specify { campus.to_s.should eq campus.name }
+  end
+
   context 'counter_cache' do
 
     let!(:campus) { create(:campus) }
