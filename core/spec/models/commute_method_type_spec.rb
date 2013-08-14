@@ -11,4 +11,9 @@ describe Gaku::CommuteMethodType do
     it { should validate_uniqueness_of :name }
   end
 
+  describe '#to_s' do
+    let(:commute_method_type) { build(:commute_method_type) }
+    specify { commute_method_type.to_s.should eq commute_method_type.name }
+  end
+
 end

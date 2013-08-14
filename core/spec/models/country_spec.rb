@@ -12,4 +12,9 @@ describe Gaku::Country do
     it { should validate_presence_of :iso }
   end
 
+  describe '#to_s' do
+    let(:country) { build(:country) }
+    specify { country.to_s.should eq country.name }
+  end
+
 end

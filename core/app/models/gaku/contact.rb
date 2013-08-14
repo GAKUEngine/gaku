@@ -10,7 +10,7 @@ module Gaku
                             joined_resource_id: :joined_resource_id
                           }
 
-    validates_presence_of :data, :contact_type_id
+    validates :data, :contact_type, presence: true
 
     before_save :ensure_first_is_primary, on: :create
     before_save :remove_other_primary

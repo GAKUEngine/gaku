@@ -3,8 +3,10 @@ module Gaku
     belongs_to :course
     belongs_to :course_group
 
-    validates_presence_of :course_group_id, :course_id
+    validates :course_group_id, presence: true
+
     validates :course_id,
+              presence: true,
               uniqueness: {
                             scope: :course_group_id,
                             message: I18n.t(:'course_group.already_enrolled')

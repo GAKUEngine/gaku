@@ -9,7 +9,15 @@ describe Gaku::Contact do
 
   describe 'validations' do
     it { should validate_presence_of :data }
-    it { should validate_presence_of :contact_type_id }
+    it { should validate_presence_of :contact_type }
+  end
+
+  describe 'methods' do
+    it { should respond_to :name }
+    it { should respond_to :primary? }
+    it { should respond_to :make_primary }
+    xit 'ensure_first_is_primary'
+    xit 'remove_other_primary'
   end
 
 end

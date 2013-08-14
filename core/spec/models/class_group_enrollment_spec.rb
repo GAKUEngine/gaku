@@ -15,10 +15,8 @@ describe Gaku::ClassGroupEnrollment do
   end
 
   context '#save_student_class_and_number' do
-    let(:enrollment) { create(:class_group_enrollment) }
-
     it 'saves after creation' do
-      enrollment
+      enrollment = create(:class_group_enrollment)
       enrollment.student.class_and_number.should eq "#{enrollment.class_group} - ##{enrollment.seat_number}"
     end
   end

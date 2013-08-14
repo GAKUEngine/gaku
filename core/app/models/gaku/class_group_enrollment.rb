@@ -5,13 +5,14 @@ module Gaku
     belongs_to :student
     has_many :roles
 
+    validates :class_group_id, presence: true
+
     validates :student_id,
+              presence: true,
               uniqueness: {
                             scope: :class_group_id,
                             message: I18n.t(:'class_group.already_enrolled')
                           }
-
-    validates :class_group_id, :student_id, presence: true
 
     after_save :save_student_class_and_number
 
