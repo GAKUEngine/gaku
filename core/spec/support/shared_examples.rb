@@ -43,6 +43,12 @@ shared_examples_for 'person' do
   it { should validate_presence_of :surname }
 end
 
+shared_examples_for 'thrashable' do
+  describe 'methods' do
+    it { should respond_to :soft_delete }
+  end
+end
+
 shared_examples_for 'addressable' do
   it { should have_many :addresses }
 end
