@@ -1,6 +1,5 @@
 module Gaku
   class Preset < ActiveRecord::Base
-    # attr_accessible :content, :name
 
     PRESETS = {
       student: %w(students_gender address_country address_state address_city),
@@ -71,5 +70,6 @@ module Gaku
       end
       return presets_hash
     end
+
   end
 end

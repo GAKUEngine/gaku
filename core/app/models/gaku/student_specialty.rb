@@ -4,15 +4,14 @@ module Gaku
     belongs_to :specialty
     belongs_to :student
 
-    # attr_accessible :student_id, :specialty_id , :is_major
+    validates :specialty_id, presence: true
 
     validates :student_id,
+              presence: true,
               uniqueness: {
                             scope: :specialty_id,
                             message: I18n.t(:'specialty.already_added')
                           }
-
-    validates_presence_of :specialty_id, :student_id
 
     scope :ordered, -> { order('is_major desc') }
 

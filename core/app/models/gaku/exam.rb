@@ -14,17 +14,13 @@ module Gaku
 
     belongs_to :grading_method
 
-    validates_presence_of :name
+    validates :name, presence: true
 
     validates :weight, numericality: {
                                         allow_blank: true,
                                         greater_than_or_equal_to: 0
                                      }
 
-    # attr_accessible :name, :description, :weight,
-    #                 :use_weighting, :is_standalone, :adjustments,
-    #                 :exam_portions_attributes, :grading_method_id,
-    #                 :has_entry_numbers
 
     accepts_nested_attributes_for :exam_portions
 

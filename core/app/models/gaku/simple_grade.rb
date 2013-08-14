@@ -4,9 +4,7 @@ module Gaku
     belongs_to :student
     belongs_to :school
 
-    # attr_accessible :name, :grade, :school_id, :student_id
-
-    validates_presence_of :name, :student_id
+    validates :name, :student_id, presence: true
 
     def to_s
       name

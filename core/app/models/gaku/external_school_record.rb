@@ -10,10 +10,6 @@ module Gaku
 
     has_many :achievements
 
-    # attr_accessible :absences, :attendance_rate, :beginning, :ending,
-    #                 :graduated, :student_id_number, :data,
-    #                 :school_id, :student_id
-
-    validates_presence_of :school_id, :student_id
+    validates :school_id, :student_id, presence: true
   end
 end

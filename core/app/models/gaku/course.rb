@@ -4,7 +4,7 @@ module Gaku
     include Notes
 
     has_many :enrollments,
-             class_name: Gaku::CourseEnrollment,
+             class_name: 'Gaku::CourseEnrollment',
              dependent: :destroy
 
     has_many :students, through: :enrollments
@@ -27,9 +27,7 @@ module Gaku
 
     accepts_nested_attributes_for :enrollments
 
-    # attr_accessible :code, :class_group_id, :syllabus_id
-
-    validates_presence_of :code
+    validates :code, presence: true
 
     scope :without_semester, -> { includes(:semester_courses).where(gaku_semester_courses: { course_id: nil }) }
 

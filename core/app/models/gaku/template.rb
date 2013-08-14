@@ -4,7 +4,7 @@ module Gaku
     has_attached_file :file
 
     validates :name, :context, presence: true
-    validates_presence_of :file, on: :create
+    validates :file, presence: true, on: :create
 
     validates_attachment_content_type :file,
         message: I18n.t(:'template.file_type_error'),

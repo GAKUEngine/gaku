@@ -1,10 +1,9 @@
 module Gaku
   class SchoolYear < ActiveRecord::Base
 
-    # attr_accessible :starting, :ending
     has_many :semesters
 
-    validates_presence_of :starting, :ending
+    validates :starting, :ending, presence: true
 
     validate :ending_after_starting
 

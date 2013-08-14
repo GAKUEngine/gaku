@@ -7,7 +7,5 @@ module Gaku
     has_many :attachments, as: :attachable
     belongs_to :syllabus
 
-    # attr_accessible :title, :description
-
   end
 end

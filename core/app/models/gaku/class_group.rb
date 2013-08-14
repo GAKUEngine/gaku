@@ -12,9 +12,7 @@ module Gaku
     has_many :semester_class_groups, dependent: :destroy
     has_many :semesters, through: :semester_class_groups
 
-    # attr_accessible :name, :grade, :homeroom
-
-    validates_presence_of :name
+    validates :name, presence: true
 
     scope :without_semester, -> {
                                   includes(:semester_class_groups)

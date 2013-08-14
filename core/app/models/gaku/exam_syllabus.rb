@@ -1,12 +1,10 @@
 module Gaku
   class ExamSyllabus < ActiveRecord::Base
 
-    # attr_accessible :exam_id
-
     belongs_to :syllabus, counter_cache: :exams_count
     belongs_to :exam
 
-    validates_presence_of [:exam_id, :syllabus_id]
+    validates :exam_id, :syllabus_id, presence: true
 
     validates :syllabus_id,
               uniqueness: {

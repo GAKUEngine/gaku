@@ -3,8 +3,6 @@ module Gaku
 
     include Trashable
 
-    # attr_accessible :name, :description, :asset
-
     belongs_to :attachable, polymorphic: true
 
     has_attached_file :asset
@@ -12,8 +10,8 @@ module Gaku
     validates_associated  :attachable,
                           message: I18n.t(:'attachment.associated')
 
-    validates_presence_of :name
-    validates_presence_of :asset, on: :create
+    validates :name, presence: true
+    validates :asset, presence: true, on: :create
 
     def to_s
       name

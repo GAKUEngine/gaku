@@ -1,10 +1,10 @@
 module Gaku
   class StudentAchievement < ActiveRecord::Base
+
     belongs_to :student
     belongs_to :achievement
 
-    # attr_accessible :achievement_id, :student_id
+    validates :achievement_id, :student_id, presence: true
 
-    validates_presence_of :achievement_id, :student_id
   end
 end

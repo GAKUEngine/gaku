@@ -49,7 +49,7 @@ module Gaku
     before_create :set_scholarship_status
 
     def make_enrolled
-      enrollment_status = Gaku::EnrollmentStatus.where( code: 'enrolled',
+      enrollment_status = EnrollmentStatus.where( code: 'enrolled',
                             is_active: true, immutable: true).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save

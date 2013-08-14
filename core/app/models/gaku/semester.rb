@@ -1,6 +1,5 @@
 module Gaku
   class Semester < ActiveRecord::Base
-    # attr_accessible :starting, :ending
 
     has_many :semester_courses
     has_many :courses, through: :semester_courses
@@ -10,13 +9,12 @@ module Gaku
 
     belongs_to :school_year
 
-    validates_presence_of :starting, :ending
+    validates :starting, :ending, presence: true
 
     validate :between_school_year_dates
     validate :ending_after_starting
 
     def to_s
-      #"#{starting} - #{ending}"
       "#{starting} / #{ending}"
     end
 
@@ -34,5 +32,6 @@ module Gaku
         errors.add(:base, I18n.t(:'semester.between'))
       end
     end
+
   end
 end

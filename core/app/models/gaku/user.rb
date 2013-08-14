@@ -11,17 +11,12 @@ module Gaku
 
     attr_accessor :login
 
-    # attr_accessible :login, :username, :email,
-    #                 :password, :password_confirmation,
-    #                 :remember_me, :locale, :role_ids
-
     before_create :default_language
 
-    validates_presence_of :username, :email
-    validates_uniqueness_of :username, :email
-    validates_presence_of :password, :password_confirmation, on: :create
+    validates :username, :email, presence: true, uniqueness: true
+    validates :password, :password_confirmation, presence: true, on: :create
 
-    roles_table_name = Gaku::Role.table_name
+    roles_table_name = Role.table_name
 
     scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
 
@@ -45,7 +40,7 @@ module Gaku
     private
 
     def default_language
-      self.settings[:locale] = Gaku::Preset.get('language')
+      self.settings[:locale] = Preset.get('language')
     end
 
   end
