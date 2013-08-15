@@ -12,12 +12,16 @@ module Gaku
 
     belongs_to :school
 
-    validates :name, presence: true
+    validates :name, :school, presence: true
 
     accepts_nested_attributes_for :program_levels,
                                   :program_specialties,
                                   :program_syllabuses,
                                   allow_destroy: true
+
+    def to_s
+      name
+    end
 
   end
 end

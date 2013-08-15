@@ -16,4 +16,9 @@ describe Gaku::Role do
     it { should validate_uniqueness_of :name }
   end
 
+  describe '#to_s' do
+    let(:role) { build(:role) }
+    specify { role.to_s.should eq role.name }
+  end
+
 end

@@ -11,8 +11,8 @@ describe Gaku::ExternalSchoolRecord do
   end
 
   describe 'validations' do
-    it { should validate_presence_of :student_id }
-    it { should validate_presence_of :school_id }
+    it { should validate_presence_of :student }
+    it { should validate_presence_of :school }
   end
 
 end

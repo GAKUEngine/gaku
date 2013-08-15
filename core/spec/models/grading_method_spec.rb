@@ -11,4 +11,13 @@ describe Gaku::GradingMethod do
     it { should have_many(:grading_method_sets).through(:grading_method_set_items) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end
+
+  describe '#to_s' do
+    let(:grading_method) { build(:grading_method) }
+    specify { grading_method.to_s.should eq grading_method.name }
+  end
+
 end

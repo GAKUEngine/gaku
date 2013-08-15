@@ -5,10 +5,11 @@ module Gaku
     has_many :roles
 
     validates :student_id,
+              presence: true,
               uniqueness: {
                             scope: :extracurricular_activity_id,
                             message: I18n.t(:'extracurricular_activity.already_enrolled')
                           }
-    validates :extracurricular_activity_id, :student_id, presence: true
+    validates :extracurricular_activity_id, presence: true
   end
 end

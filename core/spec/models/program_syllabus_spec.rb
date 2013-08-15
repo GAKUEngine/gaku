@@ -9,7 +9,9 @@ describe Gaku::ProgramSyllabus do
   end
 
   describe 'validations' do
-    it { should validate_presence_of :syllabus_id }
+    it { should validate_presence_of :syllabus }
+    it { should validate_presence_of :program }
+    it { should validate_presence_of :level }
   end
 
 end

@@ -7,5 +7,7 @@ module Gaku
     has_many :attachments, as: :attachable
     belongs_to :syllabus
 
+    validates :syllabus, presence: true
+
   end
 end

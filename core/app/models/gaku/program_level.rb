@@ -4,11 +4,7 @@ module Gaku
     belongs_to :program
     belongs_to :level
 
-    validates :level_id, presence: true
-
-    def to_s
-      name
-    end
+    validates :level, :program, presence: true
 
   end
 end

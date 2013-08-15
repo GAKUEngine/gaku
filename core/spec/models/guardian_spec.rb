@@ -9,11 +9,14 @@ describe Gaku::Guardian do
     it_behaves_like 'avatarable'
   end
 
-  describe 'associations' do
+  describe 'relations' do
     it { should belong_to :user }
-
     it { should have_many :student_guardians }
     it { should have_many(:students).through(:student_guardians) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of :user }
   end
 
   context 'counter_cache' do

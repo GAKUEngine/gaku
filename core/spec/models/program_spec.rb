@@ -17,6 +17,18 @@ describe Gaku::Program do
 
   describe 'validations' do
     it { should validate_presence_of :name }
+    it { should validate_presence_of :school }
+  end
+
+  describe 'nested_attributes' do
+    it { should accept_nested_attributes_for :program_levels }
+    it { should accept_nested_attributes_for :program_specialties }
+    it { should accept_nested_attributes_for :program_syllabuses }
+  end
+
+  describe '#to_s' do
+    let(:program) { build(:program) }
+    specify { program.to_s.should eq program.name }
   end
 
 end

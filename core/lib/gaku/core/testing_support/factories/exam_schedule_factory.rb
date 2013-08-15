@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :exam_schedule, class: Gaku::ExamSchedule do
-    association(:exam_portion)
-    association(:schedule)
+    exam_portion
+    schedule
+    course
   end
 end

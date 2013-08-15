@@ -5,7 +5,7 @@ module Gaku
 
     translates :name
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 
     def to_s
       name

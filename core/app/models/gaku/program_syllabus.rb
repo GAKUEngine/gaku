@@ -5,7 +5,7 @@ module Gaku
     belongs_to :syllabus
     belongs_to :level
 
-    validates :syllabus_id, presence: true
+    validates :syllabus, :program, :level, presence: true
 
   end
 end

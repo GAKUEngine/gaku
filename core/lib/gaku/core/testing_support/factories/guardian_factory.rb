@@ -4,6 +4,7 @@ FactoryGirl.define do
   	name { Faker::Name.first_name }
     surname { Faker::Name.last_name }
     relationship 'Relationship'
+    user
   end
 
 end

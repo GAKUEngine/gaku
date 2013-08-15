@@ -6,10 +6,14 @@ describe Gaku::LessonPlan do
     it_behaves_like 'notable'
   end
 
-  describe 'associations' do
+  describe 'relations' do
   	it { should have_many :lessons }
   	it { should have_many :attachments }
   	it { should belong_to :syllabus }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of :syllabus }
   end
 
   context 'counter_cache' do

@@ -11,12 +11,14 @@ module Gaku
 
     scope :active,  -> { where(is_active: true) }
 
-    def set_name
-      self.name = code if name.nil?
-    end
-
     def to_s
       name
+    end
+
+    private
+
+    def set_name
+      self.name = code if name.nil?
     end
 
   end

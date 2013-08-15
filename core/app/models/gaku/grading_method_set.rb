@@ -13,7 +13,6 @@ module Gaku
       self.update_attribute :is_primary, true
     end
 
-
     def ensure_first_is_primary
       self.is_primary = true if Gaku::GradingMethodSet.all.empty?
     end

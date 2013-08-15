@@ -1,5 +1,6 @@
 module Gaku
   class GradingMethod < ActiveRecord::Base
+
     has_one :exam
     has_one :exam_portion
     has_one :assignment
@@ -8,5 +9,10 @@ module Gaku
     has_many :grading_method_sets, through: :grading_method_set_items
 
     validates :name, presence: true
+
+    def to_s
+      name
+    end
+
   end
 end

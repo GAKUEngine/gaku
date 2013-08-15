@@ -4,7 +4,7 @@ module Gaku
     belongs_to :program
     belongs_to :specialty
 
-    validates :specialty_id, presence: true
+    validates :specialty, :program, presence: true
 
   end
 end

@@ -4,6 +4,7 @@ describe Gaku::Faculty do
 
   describe 'concerns' do
     it_behaves_like 'contactable'
+    it_behaves_like 'addressable'
   end
 
   describe 'associations' do
@@ -11,7 +12,6 @@ describe Gaku::Faculty do
     it { should have_many :students }
     it { should have_many :class_groups }
     it { should have_many :courses }
-    it { should have_many :addresses }
   end
 
 end

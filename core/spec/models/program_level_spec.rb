@@ -8,7 +8,8 @@ describe Gaku::ProgramLevel do
   end
 
   describe 'validations' do
-    it { should validate_presence_of :level_id }
+    it { should validate_presence_of :level }
+    it { should validate_presence_of :program }
   end
 
 end
