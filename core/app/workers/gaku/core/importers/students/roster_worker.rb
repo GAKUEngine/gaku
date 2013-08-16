@@ -1,7 +1,7 @@
 require 'roo'
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
+module Gaku::Importers::Students
   class RosterWorker
     include Sidekiq::Worker
     sidekiq_options retry: false
@@ -9,7 +9,7 @@ module Gaku::Core::Importers::Students
     def perform(file_id)
       file = Gaku::ImportFile.find file_id
       if file
-        Gaku::Core::Importers::Students::Roster.new(file, logger)
+        Gaku::Importers::Students::Roster.new(file, logger)
       else
         raise 'NO FILE'
       end

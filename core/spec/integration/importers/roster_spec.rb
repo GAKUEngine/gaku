@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'roo'
 
-describe Gaku::Core::Importers::Students::RosterWorker do
+describe Gaku::Importers::Students::RosterWorker do
 
   let!(:file) { create :import_file }
-  let(:importer) { Gaku::Core::Importers::Students::Roster.new(file, nil) }
+  let(:importer) { Gaku::Importers::Students::Roster.new(file, nil) }
   let(:book) { Roo::Spreadsheet.open(File.open(file)) }
 
   let!(:email) { create(:contact_type, name: 'Email') }

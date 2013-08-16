@@ -1,11 +1,11 @@
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
+module Gaku::Importers::Students
   class Guardians
-    include Gaku::Core::Importers::Logger
-    include Gaku::Core::Importers::KeyMapper
-    include Gaku::Core::Importers::Students::StudentIdentity
-    include Gaku::Core::Importers::Students::PersonalInformation
+    include Gaku::Importers::Logger
+    include Gaku::Importers::KeyMapper
+    include Gaku::Importers::Students::StudentIdentity
+    include Gaku::Importers::Students::PersonalInformation
 
     GUARDIAN_KEY_SYMS = [:student_id_number, :student_foreign_id_number,
       :student_name, :'guardian.relationship', :full_name, :'guardian.surname',
@@ -48,7 +48,7 @@ module Gaku::Core::Importers::Students
     def add_guardian(row, student)
       if row[:'guardian.name'] != nil && row[:'guardian.name'] != '' # name filled
         guardian_name = row[:'guardian.name']
-        log 'Guardian with name: ' + guardian_name 
+        log 'Guardian with name: ' + guardian_name
         if row[:'guardian.surname'] == nil || row[:'guardian.suranme'] == ''
           guardian_surname = student.surname
         else

@@ -22,7 +22,7 @@ module Gaku
     end
 
     def get_registration_roster
-      exporter = Gaku::Core::Exporters::RosterExporter.new
+      exporter = Gaku::Exporters::RosterExporter.new
       file = exporter.export({})
     end
 
@@ -55,7 +55,7 @@ module Gaku
       if file.data_file.content_type == 'application/vnd.ms-excel' ||
           file.data_file.content_type == 'application/vnd.oasis.opendocument.spreadsheet' ||
           file.data_file.content_type == 'application/xls'
-        Gaku::Core::Importers::Students::RosterWorker.perform_async(file.id)
+        Gaku::Importers::Students::RosterWorker.perform_async(file.id)
         render text: 'Importing Roster'
       else
         redirect_to importer_index_path, alert: '[' + file.data_file.content_type + '] ' + I18n.t('errors.messages.file_type_unsupported')
@@ -64,7 +64,7 @@ module Gaku
 
     def import_school_station_zaikousei(file)
       if file.data_file.content_type == 'application/vnd.ms-excel'
-        Gaku::Core::Importers::Students::SchoolStationZaikouseiWorker.perform_async(file.id)
+        Gaku::Importers::Students::SchoolStationZaikouseiWorker.perform_async(file.id)
         render text: '在校生をSchoolStationからインポート中。'
       else
         redirect_to importer_index_path, alert: I18n.t('errors.messages.file_type_unsupported')

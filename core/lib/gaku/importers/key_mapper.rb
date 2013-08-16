@@ -1,4 +1,4 @@
-module Gaku::Core::Importers::KeyMapper
+module Gaku::Importers::KeyMapper
   def get_keymap(key_syms)
     keymap = {}
     key_syms.each do |key|

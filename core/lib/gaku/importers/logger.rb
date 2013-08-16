@@ -1,4 +1,4 @@
-module Gaku::Core::Importers::Logger
+module Gaku::Importers::Logger
   @logger
   def log(msg)
     if !@logger.nil?

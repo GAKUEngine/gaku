@@ -1,10 +1,10 @@
 require 'roo'
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
+module Gaku::Importers::Students
   class SchoolStationZaikousei
-    include Gaku::Core::Importers::Logger
-    include Gaku::Core::Importers::Students::RosterKeys
+    include Gaku::Importers::Logger
+    include Gaku::Importers::Students::RosterKeys
 
     def initialize(file, logger)
       @logger = logger
@@ -49,7 +49,7 @@ module Gaku::Core::Importers::Students
       end
       #book.row(1..book.last_row).each do |row|
       #  log row
-      #end   
+      #end
     end
 
     def _fix_name(row)
@@ -72,7 +72,7 @@ module Gaku::Core::Importers::Students
       end
       book.each(keymap) do |row|
         log '名前変換 姓[' + row[:surname] + ']　名[' + row[:name] + ']'
-      end   
+      end
     end
 
     def fix_genders(book, keymap)
@@ -94,7 +94,7 @@ module Gaku::Core::Importers::Students
 
     def register_student(row)
       ActiveRecord::Base.transaction do
-        Gaku::Core::Importers::Students::RosterToStudent.new(row)
+        Gaku::Importers::Students::RosterToStudent.new(row)
       end
     end
 

@@ -1,4 +1,4 @@
-module Gaku::Core::Importers::Students::PersonalInformation
+module Gaku::Importers::Students::PersonalInformation
   def add_contacts(row, person)
     phone = row[:phone]
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(

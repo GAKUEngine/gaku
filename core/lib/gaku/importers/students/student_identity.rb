@@ -1,4 +1,4 @@
-module Gaku::Core::Importers::Students::StudentIdentity
+module Gaku::Importers::Students::StudentIdentity
   def normalize_id_num(id_number)
     if id_number.to_i == 0 # ID is alphanumeric
       return id_number.to_s

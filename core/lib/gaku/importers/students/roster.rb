@@ -1,9 +1,9 @@
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
+module Gaku::Importers::Students
   class Roster
-    include Gaku::Core::Importers::Logger
-    include Gaku::Core::Importers::KeyMapper
+    include Gaku::Importers::Logger
+    include Gaku::Importers::KeyMapper
 
     ROSTER_KEY_SYMS = [:student_id_number, :student_foreign_id_number,
       :full_name, :full_name_reading, :name, :name_reading,
@@ -20,7 +20,7 @@ module Gaku::Core::Importers::Students
       set_locale
       process_roster
 
-      Gaku::Core::Importers::Students::Guardians.new(file, logger)
+      Gaku::Importers::Students::Guardians.new(file, logger)
     end
 
     private
@@ -42,7 +42,7 @@ module Gaku::Core::Importers::Students
 
     def process_row(row)
       ActiveRecord::Base.transaction do
-        Gaku::Core::Importers::Students::RosterToStudent.new(
+        Gaku::Importers::Students::RosterToStudent.new(
           row, @info, @logger)
       end
     end

@@ -1,10 +1,10 @@
 require 'GenSheet'
 
-module Gaku::Core::Importers::Students
+module Gaku::Importers::Students
   class RosterToStudent
-    include Gaku::Core::Importers::Logger
-    include Gaku::Core::Importers::Students::StudentIdentity
-    include Gaku::Core::Importers::Students::PersonalInformation
+    include Gaku::Importers::Logger
+    include Gaku::Importers::Students::StudentIdentity
+    include Gaku::Importers::Students::PersonalInformation
 
     def initialize(row, info, logger = nil)
       @logger = logger
