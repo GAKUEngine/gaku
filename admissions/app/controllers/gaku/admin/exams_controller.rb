@@ -1,7 +1,7 @@
 module Gaku
   module Admin
     class ExamsController < GakuController
-      include Gaku::Core::Grading::Calculations
+      include Gaku::Grading::Calculations
 
       inherit_resources
       respond_to :js, :html

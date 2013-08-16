@@ -8,7 +8,7 @@ module Gaku
     respond_to :html, :js, :json
     respond_to :xls, only: :export
 
-    include Gaku::Core::Grading::Calculations
+    include Gaku::Grading::Calculations
 
     before_filter :before_show, only: :show
     before_filter :before_new,  only: :new
