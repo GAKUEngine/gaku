@@ -1,6 +1,7 @@
 source 'http://production.s3.rubygems.org'
 
 gem 'pg'
+gem 'therubyracer', require: 'v8'
 
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'master'
 gem 'ransack',     github: 'ernie/ransack',        branch: 'rails-4'
