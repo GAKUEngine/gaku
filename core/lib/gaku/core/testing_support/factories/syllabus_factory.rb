@@ -9,7 +9,7 @@ FactoryGirl.define do
 
   trait :with_exam do
     after(:create) do |syllabus|
-      syllabus.exams << FactoryGirl.create(:exam)
+      syllabus.exams << create(:exam)
     end
   end
 

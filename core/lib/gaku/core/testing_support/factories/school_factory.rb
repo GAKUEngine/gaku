@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :school, class: Gaku::School do
     name 'Nagoya City University'
     slogan 'Draw the individual potencial'
@@ -9,14 +10,14 @@ FactoryGirl.define do
 
   factory :school_with_one_contact, parent: :school do
     after(:create) do |school|
-      FactoryGirl.create(:contact, contactable: school.campuses.first)
+      create(:contact, contactable: school.campuses.first)
     end
   end
 
   factory :school_with_two_contacts, parent: :school do
     after(:create) do |school|
-      FactoryGirl.create(:contact, contactable: school.campuses.first)
-      FactoryGirl.create(:contact, contactable: school.campuses.first)
+      create(:contact, contactable: school.campuses.first)
+      create(:contact, contactable: school.campuses.first)
     end
   end
 

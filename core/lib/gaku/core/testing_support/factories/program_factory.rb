@@ -1,26 +1,26 @@
 FactoryGirl.define do
+
   factory :program, class: Gaku::Program do
     name 'Advanced Ruby'
     description 'Superior Ruby Skills'
     school
   end
 
-
   trait :with_program_level do |resource|
     resource.after(:build) do |program|
-      program.levels << FactoryGirl.create(:level)
+      program.levels << create(:level)
     end
   end
 
   trait :with_program_syllabus do |resource|
     resource.after(:build) do |program|
-      program.syllabuses << FactoryGirl.create(:syllabus)
+      program.syllabuses << create(:syllabus)
     end
   end
 
   trait :with_program_specialty do |resource|
     resource.after(:build) do |program|
-      program.specialties << FactoryGirl.create(:specialty)
+      program.specialties << create(:specialty)
     end
   end
 

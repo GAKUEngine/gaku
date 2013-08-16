@@ -10,20 +10,20 @@ FactoryGirl.define  do
 
   factory :student_with_one_guardian, parent: :student do
     after(:create) do |student|
-      student.guardians << FactoryGirl.create(:guardian)
+      student.guardians << create(:guardian)
       student.save
     end
   end
 
   trait :with_course do
     after(:create) do |student|
-      student.courses << FactoryGirl.create(:course)
+      student.courses << create(:course)
       student.save
     end
   end
 
   trait :with_enrollment_status do
-    association :enrollment_status, factory: :enrollment_status
+    enrollment_status
   end
 
   trait :admitted do
@@ -39,11 +39,11 @@ FactoryGirl.define  do
   end
 
   trait :with_scholarship_status do
-    association :scholarship_status, factory: :scholarship_status
+    scholarship_status
   end
 
   trait :with_commute_method_type do
-    association :commute_method_type, factory: :commute_method_type
+    commute_method_type
   end
 
 end

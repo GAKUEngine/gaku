@@ -1,6 +1,7 @@
 include ActionDispatch::TestProcess
 
 FactoryGirl.define do
+
   factory :attachment, class: Gaku::Attachment do
     name 'pic1'
     asset { fixture_file_upload(Rails.root + '../support/120x120.jpg', 'image/jpg') }
@@ -10,4 +11,5 @@ FactoryGirl.define do
   trait :for_exam_portion do
     association :attachable, factory: :exam_portion
   end
+
 end

@@ -5,7 +5,7 @@ FactoryGirl.define do
     address2 { Faker::Address.street_address }
     city     { Faker::Address.city }
 
-    association(:state)
+    state
 
     country do |address|
       if address.state

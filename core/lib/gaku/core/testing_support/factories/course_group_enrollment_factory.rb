@@ -1,6 +1,8 @@
 FactoryGirl.define do
+
   factory :course_group_enrollment, class: Gaku::CourseGroupEnrollment do
-    association(:course_group)
-    association(:course)
+    course_group
+    course
   end
+
 end

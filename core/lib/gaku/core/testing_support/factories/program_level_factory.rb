@@ -1,6 +1,8 @@
 FactoryGirl.define do
+
   factory :program_level, class: Gaku::ProgramLevel do
-    association :program
-    association :level
+    program
+    level
   end
+
 end

@@ -1,6 +1,8 @@
 FactoryGirl.define do
+
   factory :level, class: Gaku::Level do
     name 'High 3'
-    association :school
+    school
   end
+
 end

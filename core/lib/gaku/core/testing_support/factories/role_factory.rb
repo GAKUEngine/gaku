@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :role, class: Gaku::Role do
     name 'Role #1'
   end
