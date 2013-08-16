@@ -1,4 +1,4 @@
-require 'gaku/core/app_responder'
+require 'gaku/app_responder'
 
 module Gaku
   class GakuController < ActionController::Base
@@ -15,7 +15,7 @@ module Gaku
 
     layout :resolve_layout
 
-    self.responder = Core::AppResponder
+    self.responder = AppResponder
     respond_to :html
 
     helper_method :preset
