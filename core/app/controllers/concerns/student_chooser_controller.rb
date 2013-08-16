@@ -1,6 +1,6 @@
 module StudentChooserController
 
-  include Gaku::Core::ClassNameDetector
+  include Gaku::ClassNameDetector
 
   def student_chooser
 

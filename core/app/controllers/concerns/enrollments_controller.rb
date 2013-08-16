@@ -1,6 +1,6 @@
 module EnrollmentsController
 
-  include Gaku::Core::ClassNameDetector
+  include Gaku::ClassNameDetector
 
   def enroll_students
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
