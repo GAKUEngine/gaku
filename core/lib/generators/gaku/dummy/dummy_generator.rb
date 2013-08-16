@@ -5,7 +5,6 @@ module Gaku
     desc 'Creates blank Rails application, installs Gaku and all sample data'
 
     class_option :lib_name, default: ''
-    class_option :database, default: ''
 
     def self.source_paths
       paths = self.superclass.source_paths
@@ -18,12 +17,11 @@ module Gaku
     end
 
     PASSTHROUGH_OPTIONS = [
-      :skip_active_record, :skip_javascript, :database, :javascript, :quiet, :pretend, :force, :skip
+      :skip_active_record, :skip_javascript, :javascript, :quiet, :pretend, :force, :skip
     ]
 
     def generate_test_dummy
       opts = (options || {}).slice(*PASSTHROUGH_OPTIONS)
-      opts[:database] = 'postgres' if opts[:database].blank?
       opts[:force] = true
       opts[:skip_bundle] = true
       opts[:old_style_hash] = true
@@ -35,7 +33,6 @@ module Gaku
 
     def test_dummy_config
       @lib_name = options[:lib_name]
-      @database = options[:database]
 
       template 'rails/database.yml', "#{dummy_path}/config/database.yml", force: true
       template 'rails/boot.rb', "#{dummy_path}/config/boot.rb", force: true
@@ -62,7 +59,6 @@ module Gaku
     end
 
     attr :lib_name
-    attr :database
 
     protected
     def dummy_path

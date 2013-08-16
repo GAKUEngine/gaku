@@ -1,9 +1,7 @@
 source 'http://production.s3.rubygems.org'
 
 #DB
-gem 'mysql2'
 gem 'pg'
-gem 'sqlite3'
 
 gem 'therubyracer', require: 'v8'
 
