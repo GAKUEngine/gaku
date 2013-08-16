@@ -33,12 +33,12 @@ Spork.prefork do
 
   require 'capybara/poltergeist'
 
-  require 'gaku/core/testing_support/env'
-  require 'gaku/core/testing_support/factories'
-  require 'gaku/core/testing_support/controller_requests'
-  require 'gaku/core/testing_support/request_helpers'
-  require 'gaku/core/testing_support/flash_helpers'
-  require 'gaku/core/testing_support/auth_helpers'
+  require 'gaku/testing/env'
+  require 'gaku/testing/factories'
+  require 'gaku/testing/controller_requests'
+  require 'gaku/testing/request_helpers'
+  require 'gaku/testing/flash_helpers'
+  require 'gaku/testing/auth_helpers'
 
   require 'gaku/core/url_helpers'
   require 'factories'

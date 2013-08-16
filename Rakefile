@@ -3,9 +3,9 @@ require 'rubygems/package_task'
 require 'thor/group'
 require File.expand_path('../core/lib/generators/gaku/install/install_generator', __FILE__)
 begin
-  require 'gaku/core/testing_support/common_rake'
+  require 'gaku/testing/common_rake'
 rescue LoadError
-  raise "Could not find gaku/core/testing_support/common_rake. You need to run this command using Bundler."
+  raise "Could not find gaku/testing/common_rake. You need to run this command using Bundler."
   exit
 end
 

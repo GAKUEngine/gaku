@@ -59,12 +59,12 @@ Spork.prefork do
   require 'paperclip/matchers'
   require 'sidekiq/testing'
 
-  require 'gaku/core/testing_support/env'
-  require 'gaku/core/testing_support/factories'
-  require 'gaku/core/testing_support/controller_requests'
-  require 'gaku/core/testing_support/request_helpers'
-  require 'gaku/core/testing_support/flash_helpers'
-  require 'gaku/core/testing_support/auth_helpers'
+  require 'gaku/testing/env'
+  require 'gaku/testing/factories'
+  require 'gaku/testing/controller_requests'
+  require 'gaku/testing/request_helpers'
+  require 'gaku/testing/flash_helpers'
+  require 'gaku/testing/auth_helpers'
 
   require 'gaku/core/url_helpers'
 
@@ -110,11 +110,11 @@ Spork.each_run do
     config.include Paperclip::Shoulda::Matchers
     config.include Devise::TestHelpers, type: :controller
     config.include Gaku::Core::UrlHelpers
-    config.include Gaku::Core::TestingSupport::ControllerRequests, type: :controller
-    config.include Gaku::Core::TestingSupport::RequestHelpers, type: :request
-    config.include Gaku::Core::TestingSupport::FlashHelpers, type: :request
-    config.extend  Gaku::Core::TestingSupport::AuthHelpers::Controller, type: :controller
-    config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, type: :request
+    config.include Gaku::Testing::ControllerRequests, type: :controller
+    config.include Gaku::Testing::RequestHelpers, type: :request
+    config.include Gaku::Testing::FlashHelpers, type: :request
+    config.extend  Gaku::Testing::AuthHelpers::Controller, type: :controller
+    config.extend  Gaku::Testing::AuthHelpers::Request, type: :request
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
     config.alias_it_should_behave_like_to :ensures, 'ensures'
