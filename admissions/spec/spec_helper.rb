@@ -78,11 +78,11 @@ Spork.prefork do
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, type: :controller
     config.include Gaku::Core::UrlHelpers
-    config.include Gaku::Core::TestingSupport::ControllerRequests, type: :controller
-    config.include Gaku::Core::TestingSupport::RequestHelpers, type: :request
-    config.include Gaku::Core::TestingSupport::FlashHelpers, type: :request
-    config.include Gaku::Core::TestingSupport::AuthHelpers::Controller, type: :controller
-    config.extend  Gaku::Core::TestingSupport::AuthHelpers::Request, type: :request
+    config.include Gaku::Testing::ControllerRequests, type: :controller
+    config.include Gaku::Testing::RequestHelpers, type: :request
+    config.include Gaku::Testing::FlashHelpers, type: :request
+    config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
+    config.extend  Gaku::Testing::AuthHelpers::Request, type: :request
   end
 
   RSpec::Matchers.define :have_valid_factory do |factory_name|
