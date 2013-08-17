@@ -7,8 +7,6 @@ module Gaku
     has_many :student_guardians, dependent: :destroy
     has_many :students, through: :student_guardians
 
-    validates :user, presence: true
-
     after_create  :reset_student_count
     after_destroy :reset_student_count
 

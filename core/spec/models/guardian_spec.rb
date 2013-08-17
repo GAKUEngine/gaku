@@ -15,10 +15,6 @@ describe Gaku::Guardian do
     it { should have_many(:students).through(:student_guardians) }
   end
 
-  describe 'validations' do
-    it { should validate_presence_of :user }
-  end
-
   context 'counter_cache' do
 
     let!(:guardian) { create(:guardian) }
