@@ -109,7 +109,7 @@ module Gaku::Grading::Calculations
       end
 
       def create_new_portion_score(student, portion)
-        ExamPortionScore.create(student_id: student.id, exam_portion_id: portion.id)
+        Gaku::ExamPortionScore.create(student: student, exam_portion: portion)
       end
 
       def add_to_student_total_score(student,exam, portion)
