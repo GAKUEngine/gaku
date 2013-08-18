@@ -34,7 +34,7 @@ describe 'Admin Listing Admissions' do
         before do
           click '.edit-link'
           wait_until_visible('#student-index')
-          current_path.should eq '/admin/students/1/edit'
+          current_path.should eq "/admin/students/#{student.id}/edit"
           page.should have_content "#{student.name}"
           click '#delete-student-link'
           within(modal) { click_on 'Delete' }
@@ -85,7 +85,7 @@ describe 'Admin Listing Admissions' do
           accept_alert
           flash_destroyed?
           page.should_not have_content "#{student.name}"
-          
+
           visit gaku.students_admin_disposals_path
           page.should_not have_content "#{student.name}"
           visit gaku.listing_admissions_admin_admissions_path
