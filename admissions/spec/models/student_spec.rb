@@ -11,13 +11,13 @@ describe Gaku::Student do
   end
 
   context 'when student is applicant' do
-        
+
     before do
       @student = create(:student, enrollment_status_code: 'applicant')
     end
 
     xit 'shows only applicants' do
-      expect(Gaku::Student.only_applicants).to eq [@student]  
+      expect(Gaku::Student.only_applicants).to eq [@student]
     end
 
     it 'makes the applicant student' do
@@ -29,15 +29,14 @@ describe Gaku::Student do
   end
 
   context 'when student is admitted' do
-    
+
     before do
       @student = create(:student, enrollment_status_code: 'admitted')
     end
 
     xit 'has named scope :only_applicants' do
-      #assert Gaku::Student.respond_to?(:only_applicants)
       expect(Gaku::Student.only_applicants).to eq []
-    end 
+    end
 
     it 'makes the student applicant' do
       @student.make_applicant

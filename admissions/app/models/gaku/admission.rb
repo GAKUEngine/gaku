@@ -18,10 +18,6 @@ module Gaku
     accepts_nested_attributes_for :admission_phase_records, allow_destroy: true
     accepts_nested_attributes_for :student
 
-    # attr_accessible :student_id, :applicant_number, :scholarship_status_id,
-    #                 :admission_method_id, :admission_period_id,
-    #                 :student_attributes, :admitted
-
     #validates :applicant_number, presence: true, uniqueness: {scope: :admission_method_id}
 
     #validates: :applicant_number, uniqueness: {scope: [:admission_period_id, :admission_method_id]}

@@ -8,17 +8,12 @@ module Gaku
     belongs_to :admission_phase_state
     has_many :exam_scores
 
-    # attr_accessible :admission_id, :admission_phase_id, :admission_phase_state_id
-
     default_scope where(is_deleted: false)
     scope :deleted, where(is_deleted: true)
 
     validates :admission_phase_state_id, uniqueness: {scope: :admission_id}
 
-
-
     def exam_score
-
       total_score = 0
       student_graded = false
       unless admission_phase.exam.nil?
@@ -35,7 +30,7 @@ module Gaku
       else
         nil
       end
-
     end
+
   end
 end

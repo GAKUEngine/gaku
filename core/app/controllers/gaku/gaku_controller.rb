@@ -1,5 +1,3 @@
-require 'gaku/app_responder'
-
 module Gaku
   class GakuController < ActionController::Base
     protect_from_forgery

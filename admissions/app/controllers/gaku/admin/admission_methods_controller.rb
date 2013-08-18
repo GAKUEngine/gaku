@@ -9,13 +9,10 @@ module Gaku
 
       def create
         @admission_method = AdmissionMethod.new(admission_method_params)
-
         if @admission_method.save
-
           unless @admission_method.admission_phases.any?
             admission_phase = AdmissionPhase.create(name: 'Default phase', admission_method_id: @admission_method.id, phase_handler: 1)
           end
-
           respond_with @admission_method
         end
       end
