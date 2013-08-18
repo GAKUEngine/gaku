@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'spork'
-#uncomment the following line to use spork with the debugger
-#require 'spork/ext/ruby-debug'
 
 if ENV['COVERAGE']
   # Run Coverage report
@@ -45,7 +43,9 @@ Spork.prefork do
 
   require 'coveralls'
   Coveralls.wear!
+end
 
+Spork.each_run do
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
   RSpec.configure do |config|
@@ -84,18 +84,4 @@ Spork.prefork do
     config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
     config.extend  Gaku::Testing::AuthHelpers::Request, type: :request
   end
-
-  RSpec::Matchers.define :have_valid_factory do |factory_name|
-    match do |model|
-      create(factory_name).new_record?.should be_false
-    end
-  end
-
-end
-
-
-
-Spork.each_run do
-  # This code will be run each time you run your specs.
-  #FactoryGirl.reload
 end

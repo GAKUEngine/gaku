@@ -10,12 +10,10 @@ module Gaku
     end
 
     before_filter :set_locale
-
     before_filter :users_check
 
     layout :resolve_layout
 
-    self.responder = AppResponder
     respond_to :html
 
     helper_method :preset

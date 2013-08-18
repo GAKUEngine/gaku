@@ -32,24 +32,3 @@ task :test_app do
   ENV['LIB_NAME'] = 'gaku/core'
   Rake::Task['common:test_app'].invoke
 end
-
-desc 'Run factory specs.'
-RSpec::Core::RakeTask.new(:factory_specs) do |t|
-  t.pattern = './spec/models/factories_spec.rb'
-end
-
-task spec: :factory_specs
-
-desc 'Fork spec'
-task :fork_spec do
-  fork do
-    RSpec::Core::Runner.disable_autorun!
-    RSpec::Core::Runner.run(['spec'], $stderr, $stdout) ? exit(0) : exit(1)
-  end
-  Process.wait
-  raise 'rspec failed' unless $?.exitstatus == 0
-  # exiting the fork can cause MySql to drop the connection
-  # but AR doesn't notice. This mitigates.
-  ActiveRecord::Base.connection.reconnect! if ActiveRecord::Base.connected?
-end
-
