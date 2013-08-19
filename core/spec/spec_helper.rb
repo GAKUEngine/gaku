@@ -87,7 +87,7 @@ Spork.each_run do
     config.include Gaku::Testing::RequestHelpers, type: :request
     config.include Gaku::Testing::FlashHelpers, type: :request
     config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
-    config.extend  Gaku::Testing::AuthHelpers::Request, type: :request
+    config.include Gaku::Testing::AuthHelpers::Request, type: :request
     config.include HandyControllerHelpers::AllHelpers, type: :controller
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
