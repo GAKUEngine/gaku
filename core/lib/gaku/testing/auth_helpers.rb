@@ -10,6 +10,11 @@ module Gaku::Testing::AuthHelpers
         sign_in create(:admin)
       end
     end
+
+    def as(user)
+      @request.env['devise.mapping'] = ::Devise.mappings[:admin] if user == 'admin'
+      sign_in create("#{user.to_sym}_user")
+    end
   end
 
   module Request
