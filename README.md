@@ -33,9 +33,8 @@ It allows for full student management, grading etc. It's bascally what all stude
 Requirements
 ------------
 * ruby >= 2.0.0
-* sqlite3
-* mysql
 * postgresql
+* redis
 
 
 Installation
