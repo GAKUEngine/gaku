@@ -14,6 +14,10 @@ module Gaku::Testing::ControllerRequests
     process_gaku_action(action, 'PUT', parameters, session, flash)
   end
 
+  def gaku_patch(action, parameters = nil, session = nil, flash = nil)
+    process_gaku_action(action, 'PATCH', parameters, session, flash)
+  end
+
   # Executes a request simulating DELETE HTTP method and set/volley the response
   def gaku_delete(action, parameters = nil, session = nil, flash = nil)
     process_gaku_action(action, 'DELETE', parameters, session, flash)
@@ -38,6 +42,20 @@ module Gaku::Testing::ControllerRequests
     parameters.reverse_merge!(format: :js)
     parameters.merge!(use_route: :gaku)
     xml_http_request(:put, action, parameters, session, flash)
+  end
+
+  def gaku_js_patch(action, parameters = nil, session = nil, flash = nil)
+    parameters ||= {}
+    parameters.reverse_merge!(format: :js)
+    parameters.merge!(use_route: :gaku)
+    xml_http_request(:patch, action, parameters, session, flash)
+  end
+
+  def gaku_js_delete(action, parameters = nil, session = nil, flash = nil)
+    parameters ||= {}
+    parameters.reverse_merge!(format: :js)
+    parameters.merge!(use_route: :gaku)
+    xml_http_request(:delete, action, parameters, session, flash)
   end
 
   private
