@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::DisposalsController do
 
-  as_admin
+  before { as :admin }
 
   describe 'GET #exams' do
     it 'is successful' do

@@ -3,7 +3,7 @@ require 'support/requests/notable_spec'
 
 describe 'Course Notes' do
 
-  as_admin
+  before { as :admin }
 
   let(:course) { create(:course) }
   let(:note) { create(:note, notable: course) }

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Commute Method Types' do
 
-  as_admin
+  before { as :admin }
 
   let(:commute_method_type) { create(:commute_method_type, name: 'metro') }
 

@@ -3,7 +3,7 @@ require 'support/requests/notable_spec'
 
 describe 'Syllabus Notes' do
 
-  as_admin
+  before { as :admin }
 
   let(:syllabus) { create(:syllabus) }
   let(:syllabus_with_note) { create(:syllabus, :with_note) }

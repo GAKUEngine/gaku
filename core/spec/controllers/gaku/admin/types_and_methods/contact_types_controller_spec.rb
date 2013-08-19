@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::ContactTypesController do
 
-  as_admin
+  before { as :admin }
 
   let(:contact_type) { create(:contact_type) }
 

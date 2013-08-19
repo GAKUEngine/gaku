@@ -3,7 +3,7 @@ require 'support/requests/contactable_spec'
 
 describe 'Teacher Contacts' do
 
-  as_admin
+  before { as :admin }
 
   let(:teacher) { create(:teacher) }
   let(:teacher_with_contact) { create(:teacher, :with_contact) }

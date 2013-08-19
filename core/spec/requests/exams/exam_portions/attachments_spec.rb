@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Exam Portion Attachments' do
 
-  as_admin
+  before { as :admin }
 
   let(:exam) { create(:exam, name: "Unix") }
   let(:exam_portion) { create(:exam_portion, exam: exam) }

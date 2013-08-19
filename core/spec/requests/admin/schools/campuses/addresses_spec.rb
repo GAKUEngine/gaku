@@ -3,7 +3,7 @@ require 'support/requests/addressable_spec'
 
 describe 'Admin School Campuses Address' do
 
-  as_admin
+  before { as :admin }
 
   let(:country) { create(:country, name: 'Japan') }
   let(:address) { create(:address) }

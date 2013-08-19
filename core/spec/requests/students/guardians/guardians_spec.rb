@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Guardians' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }

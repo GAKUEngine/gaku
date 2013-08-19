@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'CourseExams', js: true  do
 
-  as_admin
+  before { as :admin }
 
   let(:syllabus) { create(:syllabus) }
   let(:course) { create(:course) }

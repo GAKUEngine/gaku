@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Attachments' do
 
-  as_admin
+  before { as :admin }
 
   let(:attachment) { create(:attachment, :for_exam_portion, is_deleted: 1) }
 

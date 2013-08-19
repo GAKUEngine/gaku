@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Exams' do
 
-  as_admin
+  before { as :admin }
 
   let(:syllabus) { create(:syllabus) }
   let(:exam) { create(:exam, is_standalone: true ) }

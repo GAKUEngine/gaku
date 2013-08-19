@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::ExamsController do
 
-  as_admin
+  before { as :admin }
 
   let(:exam) { create(:exam) }
 

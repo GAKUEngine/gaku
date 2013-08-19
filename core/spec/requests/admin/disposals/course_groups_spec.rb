@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Course Groups' do
 
-  as_admin
+  before { as :admin }
 
   let(:course_group) { create(:course_group, is_deleted:true) }
 

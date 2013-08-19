@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Templates' do
 
-  as_admin
+  before { as :admin }
 
   let(:template) { create(:template) }
 

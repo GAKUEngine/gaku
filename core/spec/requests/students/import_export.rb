@@ -3,7 +3,7 @@ require 'sidekiq/testing'
 
 describe 'Student Sheet' do
 
-  as_admin
+  before { as :admin }
 
   let!(:student) { create(:student, name: 'John', surname: 'Doe') }
   let!(:student2) { create(:student, name: 'Susumu', surname: 'Yokota') }

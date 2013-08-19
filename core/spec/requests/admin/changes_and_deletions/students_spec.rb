@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Changes' do
 
-  as_admin
+  before { as :admin }
 
   let!(:student) { create(:student) }
   let(:scholarship_status) { create(:scholarship_status) }

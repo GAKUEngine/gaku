@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Course Semesters' do
 
-  as_admin
+  before { as :admin }
 
   let(:course) { create(:course) }
   let(:course_with_semester) { create(:course, :with_semester) }

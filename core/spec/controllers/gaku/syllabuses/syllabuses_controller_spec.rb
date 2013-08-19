@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::SyllabusesController do
 
-  as_admin
+  before { as :admin }
 
   let(:syllabus) { create(:syllabus) }
 

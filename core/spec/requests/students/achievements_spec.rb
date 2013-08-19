@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Achievements' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:achievement) { create(:achievement) }

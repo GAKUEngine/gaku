@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Courses' do
 
-  as_admin
+  before { as :admin }
 
   let(:syllabus) { create(:syllabus, name: 'biology2012', code: 'bio') }
   let(:syllabus2) do

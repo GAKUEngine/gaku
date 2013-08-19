@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Disposals Student Addresses' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, :with_address) }
   before do

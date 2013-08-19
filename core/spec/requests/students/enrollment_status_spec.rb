@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Enrollment Status' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_enrollment_status) }

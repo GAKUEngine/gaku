@@ -3,7 +3,7 @@ require 'support/requests/course_enrollable_spec'
 
 describe 'ClassGroup Courses' do
 
-  as_admin
+  before { as :admin }
 
   let(:class_group) { create(:class_group, grade: '1', name: 'Not so awesome class group', homeroom: 'A1') }
   let(:course) { create(:course, code: 'Math2012') }
@@ -25,7 +25,7 @@ describe 'ClassGroup Courses' do
   end
 
   context 'remove' do
-    
+
     before do
       class_group.courses << course
       visit gaku.class_group_path(class_group)
@@ -36,5 +36,5 @@ describe 'ClassGroup Courses' do
 
     it_behaves_like 'remove enrollment'
   end
-  
+
 end

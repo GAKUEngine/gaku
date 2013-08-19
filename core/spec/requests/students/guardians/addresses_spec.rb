@@ -4,7 +4,7 @@ require 'support/requests/addressable_spec'
 
 describe 'Student Guardian Addresses' do
 
-  as_admin
+  before { as :admin }
 
   let(:student)  { create(:student) }
   let(:guardian) { create(:guardian) }

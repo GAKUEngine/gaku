@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::PresetsController do
 
-  as_admin
+  before { as :admin }
 
   describe 'GET #students' do
     it 'is successful' do

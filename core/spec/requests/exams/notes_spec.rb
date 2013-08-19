@@ -3,7 +3,7 @@ require 'support/requests/notable_spec'
 
 describe 'Exam Notes' do
 
-  as_admin
+  before { as :admin }
 
   let(:exam) { create(:exam) }
   let(:note) { create(:note, notable: exam) }

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ExtracurricularActivity Students' do
 
-  as_admin
+  before { as :admin }
 
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }

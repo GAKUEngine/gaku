@@ -3,7 +3,7 @@ require 'support/requests/course_enrollable_spec'
 
 describe 'Student CourseEnrollments' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student) }
   let(:course) { create(:course, code: 'fall2050') }
@@ -13,7 +13,7 @@ describe 'Student CourseEnrollments' do
   end
 
   context 'new' do
-    
+
     before do
       @course = course
       visit gaku.edit_student_path(student)
@@ -27,7 +27,7 @@ describe 'Student CourseEnrollments' do
   end
 
   context 'remove' do
-    
+
     before do
       student.courses << course
       visit gaku.edit_student_path(student)

@@ -3,7 +3,7 @@ require 'support/requests/notable_spec'
 
 describe 'Teacher Notes' do
 
-  as_admin
+  before { as :admin }
 
   let(:teacher) { create(:teacher) }
   let(:teacher_with_note) { create(:teacher, :with_note) }

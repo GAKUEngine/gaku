@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Class Group Enrollments' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:class_group) { create(:class_group, name:'Biology') }

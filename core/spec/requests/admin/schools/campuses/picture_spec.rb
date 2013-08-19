@@ -3,7 +3,7 @@ require 'support/requests/avatarable_spec'
 
 describe 'Admin School Campus Picture' do
 
-  as_admin
+  before { as :admin }
 
   let(:school) { create(:school) }
 

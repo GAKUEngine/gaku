@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Exam portions' do
 
-  as_admin
+  before { as :admin }
 
   let(:exam) { create(:exam, name: "Unix") }
 

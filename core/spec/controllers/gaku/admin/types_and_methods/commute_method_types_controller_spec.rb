@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::CommuteMethodTypesController do
 
-  as_admin
+  before { as :admin }
 
   let(:commute_method_type) { create(:commute_method_type) }
 

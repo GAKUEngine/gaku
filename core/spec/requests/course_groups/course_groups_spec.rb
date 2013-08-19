@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'CourseGroups' do
 
-  as_admin
+  before { as :admin }
 
   let(:course_group) { create(:course_group, name: '2013Courses') }
 

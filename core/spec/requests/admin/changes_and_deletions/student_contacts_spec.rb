@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Contact Changes' do
 
-  as_admin
+  before { as :admin }
 
   before do
     @student = create(:student, :with_contact)

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Commute Method Type' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, :with_commute_method_type) }

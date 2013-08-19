@@ -2,7 +2,7 @@
 
 describe 'Admin Presets Output Formats' do
 
-  as_admin
+  before { as :admin }
 
   before do
     visit gaku.output_formats_admin_presets_path

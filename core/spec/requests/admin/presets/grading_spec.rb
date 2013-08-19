@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Presets Grading' do
 
-  as_admin
+  before { as :admin }
 
   before do
     visit gaku.grading_admin_presets_path

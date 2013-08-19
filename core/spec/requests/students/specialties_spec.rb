@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Specialties' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:specialty) {create(:specialty) }

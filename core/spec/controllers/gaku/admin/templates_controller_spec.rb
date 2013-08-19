@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::TemplatesController do
 
-  as_admin
+  before { as :admin }
 
   let(:template) { create(:template) }
 

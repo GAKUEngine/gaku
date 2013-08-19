@@ -3,7 +3,7 @@ require 'support/requests/notable_spec'
 
 describe 'ClassGroup Notes' do
 
-  as_admin
+  before { as :admin }
 
   let(:class_group) { create(:class_group) }
   let(:note) { create(:note, notable: class_group) }

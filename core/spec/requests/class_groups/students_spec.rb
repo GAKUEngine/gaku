@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Students' do
 
-  as_admin
+  before { as :admin }
 
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
@@ -37,7 +37,7 @@ describe 'ClassGroup Students' do
       expect do
         enroll_one_student_via_button('Enroll to class')
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
-      
+
       page.should have_content "#{student1} : Successfully enrolled!"
       within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }

@@ -4,7 +4,7 @@ describe 'Admin School Years' do
 
   let(:school_year) { create(:school_year)}
 
-  as_admin
+  before { as :admin }
 
   before :all do
     set_resource "admin-school-year"

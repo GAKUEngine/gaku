@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Simple Grades' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }

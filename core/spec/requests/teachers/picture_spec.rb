@@ -3,7 +3,7 @@ require 'support/requests/avatarable_spec'
 
 describe 'Teacher Picture' do
 
-  as_admin
+  before { as :admin }
 
   let(:teacher) { create(:teacher) }
 

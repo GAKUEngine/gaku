@@ -11,7 +11,7 @@ describe Gaku::ClassGroupsController do
 
   context 'as admin' do
 
-    as_admin
+    before { as :admin }
 
     describe "GET #index" do
       it "is successful" do

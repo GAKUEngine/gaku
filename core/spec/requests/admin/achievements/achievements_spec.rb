@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Achievements' do
 
-  as_admin
+  before { as :admin }
 
   let(:achievement) { create(:achievement, name: 'gold') }
 

@@ -3,7 +3,7 @@ require 'support/requests/addressable_spec'
 
 describe 'Teacher Address' do
 
-  as_admin
+  before { as :admin }
 
   let(:teacher) { create(:teacher) }
   let(:teacher_with_address) { create(:teacher, :with_address) }

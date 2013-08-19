@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin States' do
 
-  as_admin
+  before { as :admin }
 
   let!(:country) { create(:country, name: 'Japan', iso: 'JP')}
   let(:state) { create(:state, name: 'Tokyo ', country: country) }

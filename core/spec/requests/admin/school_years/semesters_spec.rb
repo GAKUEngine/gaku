@@ -5,7 +5,7 @@ describe 'Admin School Years Semesters' do
   let(:school_year) { create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8')) }
   let(:semester) { create(:semester, school_year: school_year)}
 
-  as_admin
+  before { as :admin }
 
   before :all do
     set_resource "admin-school-year-semester"

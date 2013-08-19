@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin School Campuses' do
 
-  as_admin
+  before { as :admin }
 
   let(:school) { create(:school, name:'Nagoya University') }
   let(:campus) { create(:campus ) }

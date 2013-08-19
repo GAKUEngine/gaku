@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::Schools::CampusesController do
 
-  as_admin
+  before { as :admin }
 
   let(:school) { create(:school) }
   let(:campus) { create(:campus, school_id: school.id) }

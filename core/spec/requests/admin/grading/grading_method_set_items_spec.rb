@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Grading Method Set Items' do
 
-  as_admin
+  before { as :admin }
 
   let(:grading_method_set) { create(:grading_method_set) }
   let!(:grading_method) { create(:grading_method, name: 'Bulgarian') }

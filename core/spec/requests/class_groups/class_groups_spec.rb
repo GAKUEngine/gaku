@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroups' do
 
-  as_admin
+  before { as :admin }
 
   let(:class_group) do
     create(:class_group, grade: '1',

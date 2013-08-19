@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Enrollment Statuses' do
 
-  as_admin
+  before { as :admin }
 
   let(:enrollment_status) { create(:enrollment_status_admitted) }
 

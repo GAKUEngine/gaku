@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Contact Types' do
 
-  as_admin
+  before { as :admin }
 
   let(:contact_type) { create(:contact_type, name: 'mobile') }
 

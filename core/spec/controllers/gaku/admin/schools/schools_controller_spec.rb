@@ -10,7 +10,7 @@ describe Gaku::Admin::SchoolsController do
 
   context 'as admin' do
 
-    as_admin
+    before { as :admin }
 
     describe "GET #index" do
       it "is successful" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::EnrollmentStatusesController do
 
-  as_admin
+  before { as :admin }
 
   let(:enrollment_status) { create(:enrollment_status) }
 

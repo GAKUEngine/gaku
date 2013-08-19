@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Extracurricular Activities' do
 
-  as_admin
+  before { as :admin }
 
   let(:extracurricular_activity) { create(:extracurricular_activity, name: 'Tennis') }
 

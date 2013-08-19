@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Specialties' do
 
-  as_admin
+  before { as :admin }
 
   let(:specialty) { create(:specialty, name: 'mobile') }
 

@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe 'Admin School Levels' do
 
+  before { as :admin }
+
   let(:school) { create(:school) }
   let(:master_school) { create(:school, :master, name: 'Asenovgrad University') }
   let(:level) { create(:level, school: master_school) }
-  as_admin
+
 
   before :all do
     set_resource 'admin-school'

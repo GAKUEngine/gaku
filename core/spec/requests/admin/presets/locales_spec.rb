@@ -2,7 +2,7 @@
 
 describe 'Admin Presets Locales' do
 
-  as_admin
+  before { as :admin }
 
   before do
     visit gaku.locale_admin_presets_path

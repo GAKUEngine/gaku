@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Program' do
 
-  as_admin
+  before { as :admin }
 
   let!(:school) { create(:school) }
 

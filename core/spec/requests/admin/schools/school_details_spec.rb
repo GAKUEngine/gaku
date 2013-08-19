@@ -3,7 +3,7 @@ require 'support/requests/avatarable_spec'
 
 describe 'Admin School Details' do
 
-  as_admin
+  before { as :admin }
 
   let(:school) { create(:school, is_primary: true) }
 

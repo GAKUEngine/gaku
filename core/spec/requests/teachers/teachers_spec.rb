@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Teachers' do
 
-  as_admin
+  before { as :admin }
 
   let(:teacher) { create(:teacher, name: 'John', surname: 'Doe') }
   let(:teacher2) { create(:teacher) }

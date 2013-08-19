@@ -3,7 +3,7 @@ require 'support/requests/contactable_spec'
 
 describe 'Student Guardian Contacts' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }

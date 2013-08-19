@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ClassGroup Semesters' do
 
-  as_admin
+  before { as :admin }
 
   let(:class_group) { create(:class_group) }
   let(:school_year) { create(:school_year, starting: Date.parse('2013-1-1'), ending: Date.parse('2013-12-30')) }

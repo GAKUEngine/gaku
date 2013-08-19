@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Presets Students' do
 
-  as_admin
+  before { as :admin }
 
   let(:country) { create(:country) }
   let(:state) { create(:state, country:country) }
