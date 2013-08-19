@@ -45,6 +45,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'coveralls', require: false
+  gem 'handy_controller_helpers'
 end
 
 gemspec
