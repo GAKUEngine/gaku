@@ -18,11 +18,8 @@ module Gaku::Testing::AuthHelpers
   end
 
   module Request
-    def as_admin
-      before(:each) do
-        user = create(:admin)
-        login_as user, scope: :user
-      end
+    def as(user)
+      login_as create("#{user.to_sym}_user"), scope: :user
     end
 
     def log_in_as_student
