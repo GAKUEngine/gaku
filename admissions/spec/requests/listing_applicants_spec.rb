@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Listing Applicants' do
 
-  as_admin
+  before { as :admin }
 
   let!(:student) { create(:student, :admitted) }
 

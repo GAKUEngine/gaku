@@ -2,17 +2,15 @@ require 'spec_helper'
 
 describe 'Admin Admissions Grading' do
 
-  as_admin
-
   let!(:attendance) { create(:attendance) }
   let!(:student) { create(:student, :applicant) }
-
 
   before do
     @admission = create(:admission,
                           student_id: student.id)
     student.admission = @admission
     student.save!
+    as :admin
     visit gaku.admin_admissions_path
   end
 

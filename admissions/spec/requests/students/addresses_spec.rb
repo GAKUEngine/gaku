@@ -3,13 +3,12 @@ require 'support/requests/addressable_spec'
 
 describe 'Admin Student Address' do
 
-  as_admin
-
   let(:student) { create(:student) }
   let(:country) { create(:country, name: 'Japan') }
 
   before :all do
     set_resource 'student-address'
+    as :admin
   end
 
   context 'new', js: true, type: 'address' do

@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe 'Admin Admission Methods' do
 
-  as_admin
-
   let(:admission_method) { create(:admission_method_without_phases) }
 
   before do
     set_resource "admin-admission-method"
+    as :admin
     visit gaku.admin_admission_methods_path
   end
 
@@ -17,7 +16,7 @@ describe 'Admin Admission Methods' do
       wait_until_visible submit
     end
 
-    it 'creates and shows' do 
+    it 'creates and shows' do
       expect do
         fill_in 'admission_method_name', with: 'Standart'
         click submit
@@ -27,25 +26,25 @@ describe 'Admin Admission Methods' do
       page.should have_content 'Standart'
       within(count_div) { page.should have_content 'Admission Methods list(1)' }
       flash_created?
-    end 
+    end
 
-    it 'cancels creating' do 
+    it 'cancels creating' do
       ensure_cancel_creating_is_working
     end
 
   end
 
-  context 'existing' do 
+  context 'existing' do
 
     before do
       admission_method
       visit gaku.admin_admission_methods_path
     end
 
-    context '#edit ', js: true do 
-      before do 
+    context '#edit ', js: true do
+      before do
         within(table) { click edit_link }
-        wait_until_visible modal 
+        wait_until_visible modal
       end
 
       it 'edits' do
@@ -58,7 +57,7 @@ describe 'Admin Admission Methods' do
         flash_updated?
       end
 
-      it 'cancels editting' do 
+      it 'cancels editting' do
         ensure_cancel_modal_is_working
       end
     end
@@ -67,9 +66,9 @@ describe 'Admin Admission Methods' do
       within(count_div) { page.should have_content 'Admission Methods list(1)' }
 
       expect do
-        ensure_delete_is_working 
+        ensure_delete_is_working
       end.to change(Gaku::AdmissionMethod, :count).by -1
-        
+
       within(count_div) { page.should_not have_content 'Admission Methods list(1)' }
       page.should_not have_content admission_method.name
       flash_destroyed?

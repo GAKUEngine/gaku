@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Admin Listing Admissions' do
 
-  as_admin
+  before { as :admin }
 
   let!(:attendance) { create(:attendance) }
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }

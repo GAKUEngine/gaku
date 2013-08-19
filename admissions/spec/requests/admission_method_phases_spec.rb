@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe 'Admin Admission Method Phases' do
 
-  as_admin
-
   let!(:admission_method) { create(:admission_method_without_phases) }
   let(:admission_phase) { create(:admission_phase, admission_method: admission_method) }
   let(:admission_phase_state) { create( :admission_phase_state,
@@ -17,6 +15,7 @@ describe 'Admin Admission Method Phases' do
   let(:exam) { create(:exam) }
 
   before do
+    as :admin
     set_resource "admin-admission-method-admission-phase"
   end
 
@@ -97,7 +96,7 @@ describe 'Admin Admission Method Phases' do
             click '#submit-admin-admission-method-admission-phase-button'
             wait_until_invisible modal
           end.to change(Gaku::AdmissionPhaseState, :count).by -1
-         
+
           click_on 'Admission Phase States list'
           wait_until_visible '#show-admission-method-admission-phase-states-modal'
           page.should_not have_content(admission_phase_state.name)
@@ -246,12 +245,12 @@ describe 'Admin Admission Method Phases' do
           accept_alert
           page.should_not have_content "#{exam.name}"
           page.should have_content "New Exam"
-          page.should have_content "Add Existing Exam"  
+          page.should have_content "Add Existing Exam"
         end
       end
 
     end
-      
+
     it 'deletes', js: true do
       page.should have_content admission_phase.name
       within(count_div) { page.should have_content 'Admission Phases list(1)' }

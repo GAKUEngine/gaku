@@ -3,7 +3,7 @@ require 'support/requests/avatarable_spec'
 
 describe 'Students in admissions' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota') }

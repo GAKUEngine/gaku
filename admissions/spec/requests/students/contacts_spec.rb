@@ -3,7 +3,7 @@ require 'support/requests/contactable_spec'
 
 describe 'Admin Student Contacts' do
 
-  as_admin
+  before { as :admin }
 
   let(:student) { create(:student) }
   let(:contact_type) { create(:contact_type, name: 'Email') }

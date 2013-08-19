@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe 'Admin Admissions' do
 
-  as_admin
-
   let(:admission_period_no_methods) { create(:admission_period_no_methods) }
   let(:admission_period) { create(:admission_period) }
   let(:exam) { create(:exam) }
@@ -11,6 +9,8 @@ describe 'Admin Admissions' do
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant, id:1) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted, id:2) }
   let(:student) { create(:student, enrollment_status_code: 'applicant') }
+
+  before { as :admin }
 
   describe 'when select admission period', js: true do
     context 'without methods' do

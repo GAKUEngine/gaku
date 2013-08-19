@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe 'Admin Student Enrollment Status' do
 
-  as_admin
+   before { as :admin }
 
   let!(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let!(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  
+
 
   before :all do
     set_resource 'student-enrollment-status'
