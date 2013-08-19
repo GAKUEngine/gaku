@@ -6,7 +6,7 @@ FactoryGirl.define do
     password_confirmation 'secret'
   end
 
-  factory :admin, parent: :user do
+  factory :admin_user, parent: :user do
     after(:create) do |user|
       role = create(:admin_role)
       create(:user_role, role: role, user: user)
