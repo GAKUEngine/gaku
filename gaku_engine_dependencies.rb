@@ -37,14 +37,14 @@ group :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker'
   gem 'shoulda-matchers'
+  gem 'handy_controller_helpers'
   gem 'capybara', '= 1.1.3'
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'database_cleaner'
-  gem 'launchy'
   gem 'simplecov'
   gem 'coveralls', require: false
-  gem 'handy_controller_helpers'
+
 end
 
 gemspec
