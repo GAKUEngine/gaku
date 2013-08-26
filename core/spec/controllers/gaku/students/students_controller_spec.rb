@@ -8,11 +8,15 @@ describe Gaku::StudentsController do
   let(:invalid_attributes) { {name: ""} }
 
   describe "GET #index" do
-    before { gaku_get :index }
+    before do
+      student
+      gaku_get :index
+    end
 
-    it { should respond_with(:success) }
+    it { should respond_with 200 }
     it('assigns @students') { assigns(:students).should eq [student] }
-    it('renders') { should render_template :index }
+    it('assigns @count') { assigns(:count).should eq 1 }
+    it('renders #index template') { should render_template :index }
   end
 
   describe 'GET #show' do

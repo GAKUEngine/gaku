@@ -699,7 +699,8 @@ en:
     save: Save Role
   save: Save
   schedule: Schedule
-  scholarship_status: Scholarship Status
+  scholarship_status:
+    singular: Scholarship Status
   school:
     add: Add School
     campuses: Campuses

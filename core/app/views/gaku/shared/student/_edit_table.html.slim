@@ -1,60 +1,25 @@
-- present student do |student_presenter|
-  = show_table_for 'student-index' do
+= normal_form_for @student do |f|
+  .row-fluid
+    .span12
+      = f.select :class_group_ids, @class_groups,{prompt: t(:'class_group.none_assigned')}, label: t(:'class')
 
-    caption
-      h2
-        = link_to edit_person_caption(student), [:edit, @student], remote: true
+  = render 'gaku/shared/form_fields/person_form_fields', f: f
 
-    tbody
-      tr
-        th width="20%" = t(:'class')
-        td
-          = link_to student_presenter.class_group, [:new, @student, :class_group_enrollment], { id: 'class-group', remote: true }
+  .row-fluid
+    .span6
+      = f.text_field :admitted, class: "datepicker", label: t(:admitted)
+    .span6
+      = f.text_field :graduated, class: "datepicker", label: t(:graduated)
 
+  .row-fluid
+    .span6
+      = f.select :scholarship_status_id, @scholarship_statuses, {include_blank: true}, label: t(:'scholarship_status.singular')
+    .span6
+      = f.select :enrollment_status_code, @enrollment_statuses,  {include_blank: true}, label: t(:'enrollment_status.singular')
 
-      = render 'gaku/shared/fields/person_edit_table', person: student
+  .row-fluid
+    .span6
+      = f.select :commute_method_type_id, @commute_method_types, {include_blank: true}, label: t(:'commute_method_type.singular')
 
-      tr
-        th = t(:'admitted')
-        td#admitted
-          = student.admitted
-
-      tr
-        th = t(:'enrollment_status.singular')
-        td
-          a#enrollment-status.editable href="#" data-resource="student" data-name="enrollment_status_code" data-type="select" data-url="#{student_path(student.id)}"
-            = student.enrollment_status
-
-      tr
-        th = t(:'scholarship_status')
-        td
-          a#scholarship-status.editable href="#" data-resource="student" data-name="scholarship_status_id" data-type="select" data-url="#{student_path(student.id)}"
-            = student.scholarship_status
-      tr
-        th = t(:'commute_method.singular')
-        td
-          a#commute-method-type.editable href="#" data-resource="student" data-name="commute_method_type_id" data-type="select" data-url="#{student_path(student.id)}"
-            = student.commute_method_type
-
-      tr
-        th = t(:'specialty.singular')
-        td
-          #student-enrollment-status
-            = render 'gaku/students/student_specialties/student_specialties', student: student
-      tr
-        th = t(:'simple_grade.singular')
-        td
-          #student-simple-grade
-            = render 'gaku/students/simple_grades/simple_grades', student: student
-      tr
-        th = t(:'achievement.singular')
-        td
-          #student-achievement
-            = render 'gaku/students/student_achievements/student_achievements', student: student
-
-javascript:
-  $('#commute-method-type').inline_select(#{ commute_method_types_inline });
-  $('#enrollment-status').inline_select(#{ enrollment_statuses_inline });
-  $('#scholarship-status').inline_select(#{ scholarship_statuses_inline });
-  $('#birth_date').inline_date();
-  $('#name').editable();
+  = hr
+  = submit_button 'Save Student'
