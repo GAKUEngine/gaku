@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'highline', '= 1.6.11'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'paperclip'
-  s.add_dependency 'ransack'
+  s.add_dependency 'ransack', '~> 1.0'
 
   #spreadsheet handling
   s.add_dependency 'roo'
