@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.0.0'
   s.add_dependency 'turbolinks'
 
-  s.add_dependency 'slim', '~> 2.0.0'
+  s.add_dependency 'slim', '~> 2.0.1'
 
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
