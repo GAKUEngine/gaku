@@ -3,9 +3,9 @@ source 'http://production.s3.rubygems.org'
 gem 'pg'
 gem 'therubyracer', require: 'v8'
 
-gem 'paper_trail', github: 'airblade/paper_trail', branch: 'master'
+gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'ransack',     github: 'ernie/ransack',        branch: 'rails-4'
-gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'master'
 gem 'deface',      github: 'spree/deface',         branch: 'master'
 gem 'bootstrap-editable-rails', github: 'tkawa/bootstrap-editable-rails'
 
