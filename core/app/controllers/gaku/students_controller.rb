@@ -6,6 +6,8 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
+    #decorates_assigned :student
+
     inherit_resources
     respond_to :js,   only: %i( new create edit update index destroy recovery )
     respond_to :html, only: %i( index edit show )
@@ -107,7 +109,7 @@ module Gaku
 
     def resource
       @student = Student.includes([contacts: :contact_type, addresses: :country])
-                        .find(params[:id])
+                        .find(params[:id]).decorate
     end
 
     def resource_params
