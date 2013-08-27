@@ -14,9 +14,12 @@ describe Gaku::StudentsController do
     end
 
     it { should respond_with 200 }
-    it('assigns @students') { assigns(:students).should eq [student] }
-    it('assigns @count') { assigns(:count).should eq 1 }
-    it('renders #index template') { should render_template :index }
+    it('assigns @students') { expect(assigns(:students)).to eq [student] }
+    it('assigns @count') { expect(assigns(:count)).to eq 1 }
+    it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
+    it('assigns @countries') { expect(assigns(:countries)).to_not be_nil }
+    it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
+    it('renders :index template') { template? :index }
   end
 
   describe 'GET #show' do
@@ -30,9 +33,25 @@ describe Gaku::StudentsController do
   describe 'GET #new' do
     before { gaku_js_get :new }
 
-    it { should respond_with(:success) }
-    it('renders') { should render_template :new }
-    it('assigns @student') { assigns(:student).should be_a_new(Gaku::Student) }
+    it { should respond_with 200 }
+    it('renders :new template') { template? :new }
+    it('assigns @student') { expect(assigns(:student)).to be_a_new(Gaku::Student) }
+    it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
+    it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
+    it('assigns @scholarship_statuses') { expect(assigns(:scholarship_statuses)).to_not be_nil }
+    it('assigns @commute_method_types') { expect(assigns(:commute_method_types)).to_not be_nil }
+  end
+
+  describe 'GET #edit' do
+    before { gaku_js_get :edit, id: student }
+
+    it { should respond_with 200 }
+    it('renders :new template') { template? :edit }
+    it('assigns @student') { expect(assigns(:student)).to eq student }
+    it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
+    it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
+    it('assigns @scholarship_statuses') { expect(assigns(:scholarship_statuses)).to_not be_nil }
+    it('assigns @commute_method_types') { expect(assigns(:commute_method_types)).to_not be_nil }
   end
 
   describe "POST #create" do
@@ -70,19 +89,19 @@ describe Gaku::StudentsController do
         student.reload
         student.name.should eq("Kostova Marta")
 
-        #TODO controller.should set_the_flash
+        controller.should set_the_flash
       end
     end
   end
 
   describe "DELETE #destroy" do
     it "deletes the student" do
-      @student = create(:student)
+      student
       expect{
-        gaku_delete :destroy, id: @student
+        gaku_js_delete :destroy, id: student
       }.to change(Gaku::Student, :count).by -1
 
-      controller.should set_the_flash
+      #controller.should set_the_flash
     end
   end
 

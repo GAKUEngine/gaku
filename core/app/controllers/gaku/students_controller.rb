@@ -7,10 +7,11 @@ module Gaku
     helper_method :sort_column, :sort_direction
 
     inherit_resources
-    respond_to :js, :html
-    respond_to :pdf, only: :show
+    respond_to :js,   only: %i( new create edit update index destroy recovery )
+    respond_to :html, only: %i( index edit show )
+    respond_to :pdf,  only: %i( index show )
 
-    before_filter :load_data
+    before_filter :load_data,         only: %i( new edit )
     before_filter :select_vars,       only: [:index,:new, :edit]
     before_filter :notable,           only: [:show, :edit]
     before_filter :count,             only: [:create, :destroy, :index]
@@ -20,11 +21,13 @@ module Gaku
 
 
     def index
+      @enrollment_statuses = EnrollmentStatus.all
+      @countries = Country.all
+      @class_groups = ClassGroup.all
       @enrolled_students = params[:enrolled_students]
-      active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.pluck(:code)
+      active_enrollment_statuses_codes = EnrollmentStatus.active.pluck(:code)
 
       super do |format|
-
         format.html do
           @students = Student.where(enrollment_status_code: active_enrollment_statuses_codes).page(params[:page]).per(Preset.students_per_page)
         end
@@ -39,7 +42,6 @@ module Gaku
 
     def show
       super do |format|
-
         format.pdf do
           send_data render_to_string, filename: "student-#{@student.id}.pdf",
                                       type: 'application/pdf',
@@ -100,7 +102,6 @@ module Gaku
     def collection
       @search = Student.search(params[:q])
       results = @search.result(distinct: true)
-
       @students = results.page(params[:page]).per(Preset.students_per_page)
     end
 
@@ -137,13 +138,10 @@ module Gaku
     end
 
     def load_data
-      @achievements = Achievement.all.collect { |a| [a.name, a.id] }
-      @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
-      @enrollment_statuses =  EnrollmentStatus.all.collect { |es| [es.name, es.code] }
-      @enrollment_statuses << [t('undefined'), nil]
-      @commute_method_types =  CommuteMethodType.all.collect { |cm| [cm.name, cm.id] }
-      @scholarship_statuses = ScholarshipStatus.includes(:translations).collect { |p| [ p.name, p.id ] }
-      @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
+      @class_groups = ClassGroup.all
+      @enrollment_statuses = EnrollmentStatus.all
+      @scholarship_statuses = ScholarshipStatus.includes(:translations)
+      @commute_method_types = CommuteMethodType.all
     end
 
     def class_name
