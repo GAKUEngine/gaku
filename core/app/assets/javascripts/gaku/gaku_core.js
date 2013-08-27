@@ -5,8 +5,6 @@
 //= require moment.min
 
 //= require bootstrap
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
 //= require_tree ../../../../vendor/assets/javascripts/bootstrap-datepicker/
 
 //= require chosen-jquery
