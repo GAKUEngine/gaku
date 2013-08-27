@@ -36,7 +36,7 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker'
-  gem 'shoulda-matchers'
+  gem "shoulda-matchers", github: "thoughtbot/shoulda-matchers" , branch: 'dp-rails-four'
   gem 'handy_controller_helpers'
   gem 'capybara', '= 1.1.3'
   gem 'selenium-webdriver'
