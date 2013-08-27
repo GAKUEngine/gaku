@@ -1,6 +1,18 @@
 = well_div do
-  .span9.student-index
-    = render 'gaku/shared/student/edit_table', student: @student
+  .span9.well
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#student-personal-tab-link data-toggle="tab" href="#personal"
+          = t(:'personal')
+      li
+        a#student-academic-tab-link data-toggle="tab" href="#academic"
+          = t(:'academic')
+      .tab-content
+        #personal.tab-pane.active
+          = render 'gaku/shared/student/edit_table', student: @student
+        #academic.tab-pane
+          = render 'gaku/contacts/contacts', nested_resources: [@student]
+
 
   .span3.well
     = render 'gaku/shared/picture', resource: @student
