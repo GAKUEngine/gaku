@@ -88,7 +88,6 @@ Spork.each_run do
     config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
     config.include Gaku::Testing::AuthHelpers::Request, type: :request
     config.include HandyControllerHelpers::AllHelpers, type: :controller
-    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
     config.alias_it_should_behave_like_to :ensures, 'ensures'
   end
