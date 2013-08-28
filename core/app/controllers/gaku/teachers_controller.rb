@@ -39,6 +39,10 @@ module Gaku
       @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
     end
 
+    def resource
+      @teacher = Teacher.find(params[:id]).decorate
+    end
+
     def resource_params
       return [] if request.get?
       [params.require(:teacher).permit(teacher_attr)]
