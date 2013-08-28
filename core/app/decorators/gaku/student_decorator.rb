@@ -1,5 +1,5 @@
 module Gaku
-  class StudentDecorator < Draper::Decorator
+  class StudentDecorator < PersonDecorator
     decorates 'Gaku::Student'
     delegate_all
 
