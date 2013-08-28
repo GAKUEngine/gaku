@@ -1,51 +1,51 @@
-- present student do |student_presenter|
-  = show_table_for 'student-index' do
 
-    = person_caption student
+= show_table_for 'student-index' do
 
-    tbody
+  = person_caption student
+
+  tbody
+
+  tr
+    th width="20%" = t('class')
+    td#student-class-group-enrollment
+      = student.class_group
+
+    = render 'gaku/shared/fields/person_show_table', person: student
 
     tr
-      th width="20%" = t('class')
-      td#student-class-group-enrollment
-        = student_presenter.class_group
+      th = t(:'contact.primary')
+      td#contact_widget = student.primary_contact
 
-      = render 'gaku/shared/fields/person_show_table', person: student
+    tr
+      th = t(:'address.primary')
+      td#address_widget = student.primary_address
 
-      tr
-        th = t(:'contact.primary')
-        td#contact_widget = student.primary_contact
+    tr
+      th = t(:'admitted')
+      td = student.admitted
 
-      tr
-        th = t(:'address.primary')
-        td#address_widget = student.primary_address
+    tr
+      th = t(:'enrollment_status.singular')
+      td = student.enrollment_status
 
-      tr
-        th = t(:'admitted')
-        td = student.admitted
+    tr
+      th = t(:'scholarship_status')
+      td = student.scholarship_status
 
-      tr
-        th = t(:'enrollment_status.singular')
-        td = student.enrollment_status
+    tr
+      th = t(:'commute_method.singular')
+      td = student.commute_method_type
 
-      tr
-        th = t(:'scholarship_status')
-        td = student.scholarship_status
+    tr
+      th = t(:'specialty.plural')
+      td = student.specialties_list
 
-      tr
-        th = t(:'commute_method.singular')
-        td = student.commute_method_type
+    tr
+      th = t(:'simple_grade.plural')
+      td = student.simple_grades_list
 
-      tr
-        th = t(:'specialty.plural')
-        td = student_presenter.specialties
-
-      tr
-        th = t(:'simple_grade.plural')
-        td = student_presenter.simple_grades
-
-      tr
-        th = t(:'achievement.plural')
-        td = student_presenter.achievements
+    tr
+      th = t(:'achievement.plural')
+      td = student.achievements_list
 
 

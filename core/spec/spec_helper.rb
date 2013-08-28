@@ -13,7 +13,6 @@ if ENV['COVERAGE']
     add_filter '/config/**'
     add_group 'Controllers', 'app/controllers'
     add_group 'Helpers', 'app/helpers'
-    add_group 'Presenters', 'app/presenters'
     add_group 'Workers', 'app/workers'
     add_group 'Mailers', 'app/mailers'
     add_group 'Models', 'app/models'
@@ -89,7 +88,6 @@ Spork.each_run do
     config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
     config.include Gaku::Testing::AuthHelpers::Request, type: :request
     config.include HandyControllerHelpers::AllHelpers, type: :controller
-    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
     config.alias_it_should_behave_like_to :ensures, 'ensures'
   end

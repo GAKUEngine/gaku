@@ -1,24 +1,22 @@
-- present student do |student_presenter|
+- if @enrolled_students && @enrolled_students.include?(student.id.to_s)
+	td.vm-tc = image_tag 'check.png', class: 'enrolled'
+- elsif @selected_students
+  td.vm-tc = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), class: "student-check student-#{student.id}", id: "student-#{student.id}"
+- else
+  td.vm-tc = check_box_tag "","", false, class: "student-check student-#{student.id}", id: "student-#{student.id}"
 
-  - if @enrolled_students && @enrolled_students.include?(student.id.to_s)
-  	td.vm-tc = image_tag 'check.png', class: 'enrolled'
-  - elsif @selected_students
-    td.vm-tc = check_box_tag "","", (@selected_students.include?('student-'+student.id.to_s) ? true : false), class: "student-check student-#{student.id}", id: "student-#{student.id}"
-  - else
-    td.vm-tc = check_box_tag "","", false, class: "student-check student-#{student.id}", id: "student-#{student.id}"
+= render 'gaku/shared/fields/person_fields', person: student
 
-  = render 'gaku/shared/fields/person_fields', person: student
-
-  td.class-name = student.class_and_number
-  td.admitted = student.admitted
-  td.address = student.primary_address
-  td.contact = student.primary_contact
+td.class-name = student.class_and_number
+td.admitted = student.admitted
+td.address = student.primary_address
+td.contact = student.primary_contact
 
 
-  td.assignments
-    - student.addresses_count.times do
-      = address_icon
-    - student.contacts_count.times do
-      = contact_icon
-    - student.guardians_count.times do
-      = guardian_icon
+td.assignments
+  - student.addresses_count.times do
+    = address_icon
+  - student.contacts_count.times do
+    = contact_icon
+  - student.guardians_count.times do
+    = guardian_icon

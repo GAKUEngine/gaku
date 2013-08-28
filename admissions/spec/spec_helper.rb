@@ -12,7 +12,6 @@ if ENV['COVERAGE']
     add_filter '/config/**'
     add_group 'Controllers', 'app/controllers'
     add_group 'Helpers', 'app/helpers'
-    add_group 'Presenters', 'app/presenters'
     add_group 'Workers', 'app/workers'
     add_group 'Mailers', 'app/mailers'
     add_group 'Models', 'app/models'
