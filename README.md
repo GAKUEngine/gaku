@@ -7,7 +7,8 @@ GAKU Engine [学園陣]
 Genshin Academic Karte Unification Engine
 =========================================
 
-GAKU Engine is a student/assignment focused student and school management system.
+GAKU Engine is a modular, extendable, Open Source school and student management system built on Rails.  
+=GAKU Engine is currently under heavy development and subject to radical changes. We do not currently recommend any use it in a production environment.=
 
 What does the name mean?
 ------------------------
