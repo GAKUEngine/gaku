@@ -12,6 +12,14 @@ describe 'Change Language' do
     select '日本語', from: 'select_lang'
     click '#btn_config_save'
     has_content? "Language is set to 日本語"
+
+    visit gaku.root_path
+    click '#user_menu_dropdown'
+    within('#user_menu') { click_link '設定' }
+    sleep 0.1
+    select 'English', from: 'select_lang'
+    click '#btn_config_save'
+    has_content? "Language is set to English"
   end
 
 end
