@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Gaku::StudentsController do
 
+  let!(:admin) { create(:admin_user) }
   let!(:enrollment_status) { create(:enrollment_status_admitted) }
   let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
   let(:valid_attributes) { {name: "Marta", surname: "Kostova"} }
