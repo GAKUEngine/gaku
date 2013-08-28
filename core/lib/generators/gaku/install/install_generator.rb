@@ -135,7 +135,9 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
   #
   # We ask that you don't use the :as option here, as Gaku relies on it being the default of "gaku"
-  # mount Gaku::Core::Engine, at: '/'
+
+  mount Gaku::Core::Engine, at: '/'
+
         }
       end
 
