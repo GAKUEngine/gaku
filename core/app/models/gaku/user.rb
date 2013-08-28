@@ -13,8 +13,7 @@ module Gaku
 
     before_create :default_language
 
-    validates :username, :email, presence: true, uniqueness: true
-    validates :password, :password_confirmation, presence: true, on: :create
+    validates :username, presence: true, uniqueness: true
 
     roles_table_name = Role.table_name
 

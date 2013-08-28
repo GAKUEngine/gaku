@@ -517,6 +517,7 @@ ja:
   manage: 管理
   menu:
     admin:
+      templates: Templates
       achievements: 実績
       admin: 管理者
       administration: 管理
@@ -566,6 +567,7 @@ ja:
         backup: バックアップ
         system_tools: システムツール
       types:
+        states: States
         attendance_types: 欠席種別
         commute_methods: 通学手段
         contact: 連絡先種別
