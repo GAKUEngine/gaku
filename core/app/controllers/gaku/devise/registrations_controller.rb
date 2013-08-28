@@ -8,7 +8,7 @@ class Gaku::Devise::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_admin
-    build_resource
+    build_resource(user_params)
     admin_role = Gaku::Role.where(name: 'Admin').first_or_create!
     resource.roles << admin_role
 
@@ -27,4 +27,15 @@ class Gaku::Devise::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
+  protected
+
+  def user_params
+    params.require(:user).permit(user_attr)
+  end
+
+  def user_attr
+    %i( username email password password_confirmation )
+  end
+
 end
