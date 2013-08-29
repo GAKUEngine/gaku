@@ -2,11 +2,9 @@ source 'http://production.s3.rubygems.org'
 
 gem 'pg'
 
-gem 'less'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier',     '>= 1.0.3'
-gem 'therubyracer', require: 'v8'
 
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'master'
 gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
