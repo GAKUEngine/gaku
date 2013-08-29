@@ -58,6 +58,24 @@ module Gaku::Testing::ControllerRequests
     xml_http_request(:delete, action, parameters, session, flash)
   end
 
+  def json_response
+    JSON.parse(response.body)
+  end
+
+  def ensure_ok
+    response.status.should == 200
+  end
+
+  def ensure_not_found
+    json_response.should == { "error" => "The resource you were looking for could not be found." }
+    response.status.should == 404
+  end
+
+  def ensure_unauthorized
+    json_response.should == { "error" => "You need to sign in or sign up before continuing." }
+    response.status.should == 401
+  end
+
   private
 
   def process_gaku_action(action, method = 'GET' ,parameters = nil, session = nil, flash = nil)
