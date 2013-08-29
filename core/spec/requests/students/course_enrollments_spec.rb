@@ -1,19 +1,16 @@
 require 'spec_helper'
 require 'support/requests/course_enrollable_spec'
 
-describe 'Student CourseEnrollments' do
+describe 'Student Course Enrollments' do
 
   before { as :admin }
 
   let(:student) { create(:student) }
   let(:course) { create(:course, code: 'fall2050') }
 
-  before :all do
-    set_resource 'student-course-enrollment'
-  end
+  before(:all) { set_resource 'student-course-enrollment' }
 
   context 'new' do
-
     before do
       @course = course
       visit gaku.edit_student_path(student)

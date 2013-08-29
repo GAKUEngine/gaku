@@ -2,55 +2,21 @@ require 'spec_helper'
 
 describe 'Student Scholarship Status' do
 
+  before(:all) { set_resource 'student' }
   before { as :admin }
 
-  let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:student2) { create(:student, :with_scholarship_status) }
-  let!(:scholarship_status) { create(:scholarship_status, name: 'Free') }
-  let!(:scholarship_status2) { create(:scholarship_status, name: 'New Scholarship Status') }
-  let!(:el) { '#scholarship-status' }
-  let!(:select_box) { 'select.input-medium' }
+  let(:student) { create(:student) }
+  let!(:scholarship_status) { create(:scholarship_status) }
 
-  context '#new', js: true do
+  it 'create and show', js: true do
+    visit gaku.edit_student_path(student)
+    select scholarship_status.name, from: 'student_scholarship_status_id'
+    click submit
 
-    before do
-      visit gaku.edit_student_path(student)
-      within(el) { page.should have_content "#{scholarship_status.name}"}
-      click el
-      wait_until_visible select_box
-    end
-
-    it 'create and show' do
-      within(select_box) {  click_option scholarship_status2 }
-
-      within(el) { page.should have_content(scholarship_status2.name) }
-      student.reload
-      student.scholarship_status.should eq scholarship_status2
-    end
-
-
+    flash_updated?
+    within('#student_scholarship_status_id') { has_content? scholarship_status.name }
+    student.reload
+    expect(student.scholarship_status.name).to eq scholarship_status.name
   end
 
-  context 'existing',  js: true do
-    before do
-      student2
-      visit gaku.edit_student_path(student2)
-      within(el) { page.should have_content(scholarship_status)}
-      click el
-      wait_until_visible select_box
-    end
-
-    context '#edit' do
-
-      it 'edits' do
-        within(select_box) { click_option scholarship_status2 }
-
-        within(el) { page.should have_content(scholarship_status2.name) }
-        student2.reload
-        student2.scholarship_status.should eq scholarship_status2
-      end
-
-    end
-
-  end
 end

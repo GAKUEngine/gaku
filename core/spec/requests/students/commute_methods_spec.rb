@@ -2,60 +2,21 @@ require 'spec_helper'
 
 describe 'Student Commute Method Type' do
 
+  before(:all) { set_resource 'student' }
   before { as :admin }
 
-  let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:student2) { create(:student, :with_commute_method_type) }
-  let!(:commute_method_type) { create(:commute_method_type, name: 'Bus') }
-  let!(:commute_method_type2) { create(:commute_method_type, name: 'Train') }
-  let!(:el) { '#commute-method-type' }
-  let!(:select_box) { 'select.input-medium' }
+  let(:student) { create(:student) }
+  let!(:commute_method_type) { create(:commute_method_type) }
 
-  context '#new', js: true do
+  it 'create and show', js: true do
+    visit gaku.edit_student_path(student)
+    select commute_method_type.name, from: 'student_commute_method_type_id'
+    click submit
 
-    before do
-      visit gaku.edit_student_path(student)
-      within(el) { page.should have_content 'Empty'}
-      click el
-      wait_until_visible select_box
-    end
-
-    it 'create and show' do
-      within(select_box) {  click_option commute_method_type2 }
-
-      page.should_not have_selector('editable-open')
-
-      page.should_not have_selector(select_box)
-      within(el) { page.should have_content(commute_method_type2.name) }
-      student.reload
-      student.commute_method_type.should eq commute_method_type2
-    end
-
-
+    flash_updated?
+    within('#student_commute_method_type_id') { has_content? commute_method_type.name }
+    student.reload
+    expect(student.commute_method_type.name).to eq commute_method_type.name
   end
 
-  context 'existing',  js: true do
-    before do
-      student2
-      visit gaku.edit_student_path(student2)
-      within(el) { page.should have_content('Car') }
-      click el
-      wait_until_visible select_box
-    end
-
-    context '#edit' do
-
-      it 'edits' do
-        within(select_box) { click_option commute_method_type2 }
-        page.should_not have_selector(select_box)
-        # wait_until { !page.find(select_box) }
-
-        within(el) { page.should have_content(commute_method_type2.name) }
-        student2.reload
-        student2.commute_method_type.should eq commute_method_type2
-      end
-
-    end
-
-  end
 end
