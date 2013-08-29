@@ -12,21 +12,16 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'master'
 gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
 gem 'deface',      github: 'spree/deface',         branch: 'master'
 
+group :development, :production do
+  gem 'rack-mini-profiler'
+end
+
 group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-cop'
-  gem 'rubocop'
-  gem 'rack-mini-profiler'
-
-  if RUBY_PLATFORM =~ /darwin/
-    gem 'growl'
-    gem 'rb-fsevent', '~> 0.9.1' #guard dependency
-  else
-    gem 'rb-inotify' #this is not available for MacOS
-  end
 end
 
 group :test do
@@ -42,7 +37,6 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'coveralls', require: false
-
 end
 
 gemspec
