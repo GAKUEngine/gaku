@@ -11,6 +11,7 @@
       = th t(:'address.primary')
       = th t(:'contact.primary')
       = th t(:'personal_information')
+      = th_actions 3
 
   tbody
     = render partial: 'gaku/students/student', collection: @students, as: 'student'
