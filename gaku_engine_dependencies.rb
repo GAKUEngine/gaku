@@ -19,6 +19,7 @@ group :development do
   gem 'guard-spork'
   gem 'guard-cop'
   gem 'rubocop'
+  gem 'rack-mini-profiler'
 
   if RUBY_PLATFORM =~ /darwin/
     gem 'growl'
