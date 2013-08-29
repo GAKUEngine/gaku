@@ -2,9 +2,8 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   - psql -c 'create database gaku_test;' -U postgres
-bundler_args: --without development production --quiet
+bundler_args: --without development production
 env:
-  - GEM=admissions DB=postgres
   - GEM=core DB=postgres
 before_install:
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"

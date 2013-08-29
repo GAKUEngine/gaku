@@ -18,7 +18,7 @@ end
 
 desc "Run specs for all engines"
 task :all_specs do
-  %w(core admissions).each do |engine|
+  %w(core).each do |engine|
     ENV['LIB_NAME'] = File.join('gaku', engine)
     ENV['SELENIUM'] = '1'
     cmd = "cd #{engine} && bundle exec rspec"; puts cmd; system cmd
@@ -27,7 +27,7 @@ end
 
 desc "Generates a dummy app for testing for every GAKU engine"
 task :test_app do
-  %w(core admissions).each do |engine|
+  %w(core).each do |engine|
     ENV['LIB_NAME'] = File.join('gaku', engine)
     ENV['DUMMY_PATH'] = File.expand_path("../#{engine}/spec/dummy", __FILE__)
     Rake::Task['common:test_app'].execute
