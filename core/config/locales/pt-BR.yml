@@ -314,6 +314,7 @@ pt-BR:
   enrollment_status:
     active: 
     add: 
+    choose_enrollment_status: 
     code: 
     edit: 
     list: 
@@ -560,11 +561,13 @@ pt-BR:
       system:
         backup: 
         system_tools: 
+      templates: 
       types:
         attendance_types: 
         commute_methods: 
         contact: 
         enrollment_status: 
+        states: 
         types: 
       users:
         roles: 
@@ -784,7 +787,20 @@ pt-BR:
     plural: 
     save: 
     singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
+    plural: 
+    save: 
+    singular: 
   student:
+    academic_information: 
     add: 
     birth_and: 
     birth_between: 
@@ -802,6 +818,7 @@ pt-BR:
     list: 
     name: 
     new: 
+    personal_information: 
     plural: 
     roster: 
     roster_sheet: 
@@ -846,8 +863,20 @@ pt-BR:
     save: 
     show: 
     singular: 
+  template:
+    add: 
+    choose: 
+    context: 
+    edit: 
+    file: 
+    file_type_error: 
+    list: 
+    lock: 
+    plural: 
+    save: 
+    singular: 
   title: 
-  undefined: Undefined
+  undefined: 
   user:
     add: 
     edit: 

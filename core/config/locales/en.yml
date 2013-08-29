@@ -1,6 +1,4 @@
 en:
-  personal: Personal
-  academic: Academic
   achievement:
     add: Add Achievement
     authority: Authority
@@ -573,8 +571,8 @@ en:
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Statuses
-        types: Types & Methods
         states: States
+        types: Types & Methods
       users:
         roles: Roles
         users: Users
@@ -701,8 +699,7 @@ en:
     save: Save Role
   save: Save
   schedule: Schedule
-  scholarship_status:
-    singular: Scholarship Status
+  scholarship_status: Scholarship Status
   school:
     add: Add School
     campuses: Campuses
@@ -794,7 +791,20 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
+  state:
+    abbr: Abbr
+    add: Add State
+    code: Code
+    country_iso: Country ISO
+    edit: Edit State
+    list: State List
+    name: State Name
+    name_ascii: Name Ascii
+    plural: States
+    save: Save State
+    singular: State
   student:
+    academic_information: Academic Information
     add: Add Student
     birth_and: and
     birth_between: Birth date between
@@ -812,6 +822,7 @@ en:
     list: Students list
     name: Name
     new: Register New Student
+    personal_information: Personal Information
     plural: Students
     roster: Roster
     roster_sheet: Student Roster Sheet
@@ -829,18 +840,6 @@ en:
     edit: Student Specialty Edit
     index: Student Specialty Index
     save: Save Student Specialty
-  state:
-    edit: Edit State
-    name: State Name
-    save: Save State
-    singular: State
-    plural: States
-    list: State List
-    add: Add State
-    abbr: Abbr
-    name_ascii: Name Ascii
-    code: Code
-    country_iso: Country ISO
   submit: Submit
   success:
     enrolled: Successfully enrolled!
@@ -869,17 +868,17 @@ en:
     show: Show Teacher
     singular: Instructor
   template:
-    singular: Template
-    plural: Templates
     add: Add Template
-    list: Templates list
-    context: Context
-    lock: Lock
-    file: File
-    save: Save Template
-    edit: Template
-    file_type_error: Not supported file type
     choose: Choose template
+    context: Context
+    edit: Template
+    file: File
+    file_type_error: Not supported file type
+    list: Templates list
+    lock: Lock
+    plural: Templates
+    save: Save Template
+    singular: Template
   title: Title
   undefined: Undefined
   user:

@@ -316,7 +316,7 @@ ja:
   enrollment_status:
     active: アクティブ
     add: 在学状況を追加
-    choose_enrollment_status: Choose Enrollment Status
+    choose_enrollment_status: 在学状況の選択
     code: コード
     edit: 在学状況を編集
     list: 在学状況一覧
@@ -517,7 +517,6 @@ ja:
   manage: 管理
   menu:
     admin:
-      templates: Templates
       achievements: 実績
       admin: 管理者
       administration: 管理
@@ -566,12 +565,13 @@ ja:
       system:
         backup: バックアップ
         system_tools: システムツール
+      templates: 
       types:
-        states: States
         attendance_types: 欠席種別
         commute_methods: 通学手段
         contact: 連絡先種別
         enrollment_status: 在籍状態
+        states: 県/州/省
         types: 種別と方法
       users:
         roles: 役割
@@ -791,7 +791,20 @@ ja:
     plural: 専科
     save: 専攻を保存
     singular: 専攻
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
+    plural: 
+    save: 
+    singular: 
   student:
+    academic_information: 学校関連情報
     add: 生徒を追加
     birth_and: と
     birth_between: 生年月日〜
@@ -809,6 +822,7 @@ ja:
     list: 生徒一覧
     name: 生徒名
     new: 生徒を登録
+    personal_information: 個人情報
     plural: 生徒
     roster: 生徒一覧
     roster_sheet: 在校生シート
@@ -853,8 +867,20 @@ ja:
     save: 教師情報を保存
     show: 教師情報を表示
     singular: 教師
+  template:
+    add: 
+    choose: 
+    context: 
+    edit: 
+    file: 
+    file_type_error: 
+    list: 
+    lock: 
+    plural: 
+    save: 
+    singular: 
   title: タイトル
-  undefined: Undefined
+  undefined: 未定義
   user:
     add: ユーザーを追加
     edit: ユーザーを編集

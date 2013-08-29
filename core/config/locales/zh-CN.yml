@@ -314,6 +314,7 @@ zh-CN:
   enrollment_status:
     active: 
     add: 
+    choose_enrollment_status: 
     code: 
     edit: 
     list: 
@@ -560,11 +561,13 @@ zh-CN:
       system:
         backup: 
         system_tools: 
+      templates: 
       types:
         attendance_types: 
         commute_methods: 
         contact: 
         enrollment_status: 
+        states: 
         types: 
       users:
         roles: 
@@ -784,7 +787,20 @@ zh-CN:
     plural: 
     save: 
     singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
+    plural: 
+    save: 
+    singular: 
   student:
+    academic_information: 
     add: 
     birth_and: 
     birth_between: 
@@ -802,6 +818,7 @@ zh-CN:
     list: 
     name: 
     new: 
+    personal_information: 
     plural: 
     roster: 
     roster_sheet: 
@@ -846,7 +863,20 @@ zh-CN:
     save: 
     show: 
     singular: 
+  template:
+    add: 
+    choose: 
+    context: 
+    edit: 
+    file: 
+    file_type_error: 
+    list: 
+    lock: 
+    plural: 
+    save: 
+    singular: 
   title: 
+  undefined: 
   user:
     add: 
     edit: 

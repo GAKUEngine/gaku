@@ -316,7 +316,7 @@ bg:
   enrollment_status:
     active: Активен
     add: Добави Статус на Записване
-    choose_enrollment_status: Избери Статус на Записване
+    choose_enrollment_status: 
     code: 
     edit: Редактирай Статус на Записване
     list: Списък Статуси на Записване
@@ -563,11 +563,13 @@ bg:
       system:
         backup: 
         system_tools: 
+      templates: 
       types:
         attendance_types: 
         commute_methods: 
         contact: 
         enrollment_status: 
+        states: 
         types: 
       users:
         roles: 
@@ -787,7 +789,20 @@ bg:
     plural: 
     save: 
     singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
+    plural: 
+    save: 
+    singular: 
   student:
+    academic_information: 
     add: 
     birth_and: 
     birth_between: 
@@ -805,6 +820,7 @@ bg:
     list: 
     name: 
     new: 
+    personal_information: 
     plural: 
     roster: 
     roster_sheet: 
@@ -849,8 +865,20 @@ bg:
     save: 
     show: 
     singular: 
+  template:
+    add: 
+    choose: 
+    context: 
+    edit: 
+    file: 
+    file_type_error: 
+    list: 
+    lock: 
+    plural: 
+    save: 
+    singular: 
   title: 
-  undefined: Неопределен
+  undefined: 
   user:
     add: 
     edit: 
