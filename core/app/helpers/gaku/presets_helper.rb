@@ -1,6 +1,14 @@
 module Gaku
   module PresetsHelper
 
+    def chooser_preset
+      @chooser_preset ||= Gaku::Preset.chooser_table_fields
+    end
+
+    def enabled_field?(field)
+      chooser_preset[field].to_i == 1 rescue true
+    end
+
     def state_preset
       Gaku::Preset.get('address_state')
     end
@@ -9,8 +17,12 @@ module Gaku
       Gaku::Preset.get('address_city')
     end
 
+    # def country_preset
+    #   Gaku::Preset.get('address_country')
+    # end
+
     def country_preset
-      Gaku::Preset.get('address_country')
+      @country_preset ||= Gaku::Preset.get('country')
     end
 
     def gender_preset

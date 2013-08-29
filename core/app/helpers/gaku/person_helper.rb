@@ -33,5 +33,27 @@ module Gaku
       end
     end
 
+    def student_names(student, options = {})
+      @names_preset ||= Gaku::Preset.get(:names)
+      reading = options[:reading]
+      if @names_preset.blank?
+        return reading ? student.phonetic_reading : student
+      end
+      result = @names_preset.gsub(/%(\w+)/) do |name|
+        case name
+        when '%first' then proper_name(student, :name, reading)
+        when '%middle' then proper_name(student, :middle_name, reading)
+        when '%last' then proper_name(student, :surname, reading)
+        end
+      end
+      result.gsub(/\s+/, ' ').strip
+    end
+
+    private
+
+    def proper_name(student, attribute, reading)
+      reading ? student.send(attribute.to_s + '_reading') : student.send(attribute)
+    end
+
   end
 end
