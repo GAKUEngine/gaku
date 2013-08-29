@@ -17,6 +17,7 @@ describe 'Student Simple Grades' do
     before do
       school
       visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
       click el
       click new_link
       wait_until_visible modal
@@ -43,6 +44,7 @@ describe 'Student Simple Grades' do
     before do
       simple_grade
       visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
       click el
     end
 

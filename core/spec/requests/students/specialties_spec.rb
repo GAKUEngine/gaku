@@ -20,6 +20,7 @@ describe 'Student Specialties' do
       specialty
       visit gaku.edit_student_path(student)
       within(el) { page.should have_content('Empty') }
+      click '#student-academic-tab-link'
       click el
       click new_link
       wait_until_visible cancel_link
@@ -51,6 +52,7 @@ describe 'Student Specialties' do
       specialty2
       student_specialty
       visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
       click el
     end
 
