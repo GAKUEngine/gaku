@@ -6,6 +6,7 @@ FactoryGirl.define  do
     name_reading { Faker::Name.first_name }
     surname_reading { Faker::Name.last_name }
     gender 'male'
+    birth_date Date.today
   end
 
   factory :student_with_one_guardian, parent: :student do

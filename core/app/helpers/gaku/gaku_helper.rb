@@ -3,6 +3,7 @@ module Gaku
 
     include SortHelper
     include TranslationsHelper
+    include FlashHelper
 
     def drag_field
       content_tag :td, class: 'sort-handler' do

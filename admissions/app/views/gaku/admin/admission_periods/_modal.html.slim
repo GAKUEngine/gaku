@@ -1,6 +1,0 @@
-= modal_for 'edit-admission-period-modal' do
-  = modal_header t(:'admission_periods.edit')
-  = modal_nested_form_for [:admin, @admission_period] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = buttons_for @admission_period, nested_id: 'admin-admission-period', label: t('admission_periods.save')

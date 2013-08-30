@@ -1,17 +1,16 @@
 source 'http://production.s3.rubygems.org'
 
 gem 'pg'
-gem 'therubyracer', require: 'v8'
+
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier',     '>= 1.0.3'
 
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'master'
 gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
-gem 'deface',      github: 'spree/deface',         branch: 'master'
 
-group :assets do
-  gem 'less'
-  gem 'sass-rails',   '~> 4.0.0'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier',     '>= 1.0.3'
+group :development, :production do
+  gem 'rack-mini-profiler'
 end
 
 group :development do
@@ -20,14 +19,6 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-cop'
-  gem 'rubocop'
-
-  if RUBY_PLATFORM =~ /darwin/
-    gem 'growl'
-    gem 'rb-fsevent', '~> 0.9.1' #guard dependency
-  else
-    gem 'rb-inotify' #this is not available for MacOS
-  end
 end
 
 group :test do
@@ -43,7 +34,6 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'coveralls', require: false
-
 end
 
 gemspec

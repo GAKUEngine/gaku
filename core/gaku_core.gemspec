@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name         = 'gaku_core'
   s.version      = version
   s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
-  s.description  = "It allows for full student management, grading etc. It's bascally what all student grading tools are with some unique features"
+  s.description  = "It allows for full student management, grading etc. It's basically what all student grading tools are with some unique features"
   s.required_ruby_version = '>= 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov', 'Radoslav Georgiev', 'Marta Kostova']
@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
 
   s.add_dependency 'slim', '~> 2.0.1'
-
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
   s.add_dependency 'paper_trail'
@@ -36,7 +35,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'gaku_helpers'
 
   s.add_dependency 'rails-i18n'
-  s.add_dependency 'localeapp'
   s.add_dependency 'i18n-js'
 
   s.add_dependency 'jquery-rails'
@@ -44,23 +42,24 @@ Gem::Specification.new do |s|
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
 
-  s.add_dependency 'highline', '= 1.6.11'
-  s.add_dependency 'rake-progressbar'
   s.add_dependency 'paperclip'
   s.add_dependency 'ransack', '~> 1.0'
+  s.add_dependency 'kaminari'
+
+  s.add_dependency 'devise', '~> 3.0.0'
+  s.add_dependency 'devise-i18n'
+  s.add_dependency 'cancan'
 
   #spreadsheet handling
   s.add_dependency 'roo'
   s.add_dependency 'gen_sheet'
   s.add_dependency 'thinreports-rails'
 
-  s.add_dependency 'devise', '~> 3.0.0'
-  s.add_dependency 'devise-i18n'
-  s.add_dependency 'cancan'
+  s.add_dependency 'highline', '= 1.6.11'
+  s.add_dependency 'rubyzip', '0.9.9'
 
-  s.add_dependency 'kaminari'
-
-  s.add_dependency 'foreman'
   s.add_dependency 'sidekiq'
   s.add_dependency 'sinatra'
+  s.add_dependency 'rake-progressbar'
+  s.add_dependency 'localeapp'
 end

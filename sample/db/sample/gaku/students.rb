@@ -6,10 +6,10 @@ enrollment_status = Gaku::EnrollmentStatus.where(:code => 'admitted').first.try(
 
 #student
 
-student = Gaku::Student.where(name: 'John', surname: 'Doe').first_or_create!(enrollment_status_code: enrollment_status)
+student = Gaku::Student.where(name: 'John', surname: 'Doe', birth_date: Date.new(1983,10,5)).first_or_create!(enrollment_status_code: enrollment_status)
 
 country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: '392').first_or_create!
-address = student.addresses.where(address1: Faker::Address.street_address, city: 'Nagoya', country_id: country.id).first_or_create!
+address = student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Home address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
 
 email = Gaku::ContactType.where(name: 'Email').first_or_create!
 home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
@@ -40,8 +40,8 @@ unless student.guardians.count > 1
 end
 
 students = [
-  { :name => 'Anonime', :surname => 'Anonimized', :enrollment_status_code => enrollment_status },
-  { :name => 'Amon', :surname => 'Tobin', :enrollment_status_code => enrollment_status },
+  { :name => 'Anonime', :surname => 'Anonimized', birth_date: Date.new(1982,1,1), :enrollment_status_code => enrollment_status },
+  { :name => 'Amon', :surname => 'Tobin', birth_date: Date.new(1983,1,1), :enrollment_status_code => enrollment_status },
   { :name => '零', :surname => '影月', :enrollment_status_code => enrollment_status },
   { :name => 'サニー', :surname => 'スノー', :enrollment_status_code => enrollment_status }
 ]

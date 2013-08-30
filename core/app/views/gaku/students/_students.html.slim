@@ -11,9 +11,7 @@
       = th t(:'address.primary')
       = th t(:'contact.primary')
       = th t(:'personal_information')
-      - if ['gaku/students', 'gaku/admissions'].include? params[:controller]
-
-        = th_actions 3
+      = th_actions 3
 
   tbody
     = render partial: 'gaku/students/student', collection: @students, as: 'student'

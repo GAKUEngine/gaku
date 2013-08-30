@@ -65,4 +65,3 @@ Gemfile.lock
 .localeapp
 
 core/coverage
-admissions/coverage

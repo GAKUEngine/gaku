@@ -8,6 +8,94 @@ describe Gaku::StudentsController do
   let(:valid_attributes) { {name: "Marta", surname: "Kostova"} }
   let(:invalid_attributes) { {name: ""} }
 
+  context 'search' do
+    describe 'name' do
+
+      let(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', birth_date: Date.new(1983,9,1)) }
+      let(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', birth_date: Date.new(1983,10,5)) }
+
+      it 'searches by name' do
+        gaku_js_get :index, q: { name_cont: "Re" }
+
+        expect(assigns(:students)).to eq [student1]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by surname' do
+        gaku_js_get :index, q: { surname_cont: "Kal" }
+
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      xit 'searches by birth_date from begining' do
+        gaku_js_get :index, q: { birth_date_gteq: Date.new(1980,1,1) }
+
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+    end
+
+    describe 'address' do
+      let(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki') }
+      let(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov') }
+      let(:country1) { create(:country, name: 'Japan') }
+      let(:country2) { create(:country, name: 'Bulgaria') }
+      let(:state1) { create(:state, name: "Aici", country: country1) }
+      let(:state2) { create(:state, name: "Varna", country: country2) }
+      let!(:address1) { create(:address, title: 'GTR', address1: "Toyota str.", address2: "gt86 str.", city: 'Nagoya', zipcode: '5000', state: state1, country: country1, addressable: student1) }
+      let!(:address2) { create(:address, title: 'S2000', address1: "Subaru str.", address2: "wrx str.", city: 'Varna', zipcode: '9004', state: state2, country: country2, addressable: student2) }
+
+      before do
+        student1.addresses.reload
+        student2.addresses.reload
+      end
+
+      it 'searches by address1' do
+        gaku_js_get :index, q: { addresses_address1_cont: 'su' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by address2' do
+        gaku_js_get :index, q: { addresses_address2_cont: 'wrx' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by city' do
+        gaku_js_get :index, q: { addresses_city_cont: 'va' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by state' do
+        gaku_js_get :index, q: { addresses_state_name_cont: 'va' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by country' do
+        gaku_js_get :index, q: { addresses_country_name_eq: country2.name }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by title' do
+        gaku_js_get :index, q: { addresses_title_cont: 'S2000' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+
+      it 'searches by zipcode' do
+        gaku_js_get :index, q: { addresses_zipcode_cont: '9' }
+        expect(assigns(:students)).to eq [student2]
+        expect(assigns(:students).size).to eq 1
+      end
+    end
+
+  end
+
   describe "GET #index" do
     before do
       student
