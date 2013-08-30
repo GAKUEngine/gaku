@@ -1,0 +1,5 @@
+.row-fluid
+  .well.well-small.span12
+    = image_tag resource.picture.url(:thumb), class: "pull-left img-polaroid", style: "height: 32px"
+    .pull-left style="margin-left"
+      = @student.surname << @student.name 
