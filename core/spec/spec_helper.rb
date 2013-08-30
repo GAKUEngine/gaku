@@ -82,9 +82,7 @@ Spork.each_run do
     config.include Paperclip::Shoulda::Matchers
     config.include Devise::TestHelpers, type: :controller
     config.include Gaku::Core::UrlHelpers
-    config.include Gaku::Testing::RequestHelpers, type: :request
     config.include Gaku::Testing::FlashHelpers, type: :request
-
     config.include HandyControllerHelpers::AllHelpers, type: :controller
 
     config.alias_it_should_behave_like_to :ensures, 'ensures'
