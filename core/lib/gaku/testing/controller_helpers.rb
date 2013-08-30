@@ -1,4 +1,4 @@
-module Gaku::Testing::ControllerRequests
+module Gaku::Testing::ControllerHelpers
 
   def gaku_get(action, parameters = nil, session = nil, flash = nil)
     process_gaku_action(action,'GET', parameters, session, flash)
@@ -72,4 +72,8 @@ module Gaku::Testing::ControllerRequests
     xml_http_request(method, action, parameters, session, flash)
   end
 
+end
+
+RSpec.configure do |config|
+  config.include Gaku::Testing::ControllerHelpers, type: :controller
 end

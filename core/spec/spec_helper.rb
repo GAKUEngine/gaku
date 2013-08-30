@@ -33,7 +33,7 @@ Spork.prefork do
 
   require 'gaku/testing/env'
   require 'gaku/testing/factories'
-  require 'gaku/testing/controller_requests'
+  require 'gaku/testing/controller_helpers'
   require 'gaku/testing/request_helpers'
   require 'gaku/testing/flash_helpers'
   require 'gaku/testing/auth_helpers'
@@ -82,7 +82,6 @@ Spork.each_run do
     config.include Paperclip::Shoulda::Matchers
     config.include Devise::TestHelpers, type: :controller
     config.include Gaku::Core::UrlHelpers
-    config.include Gaku::Testing::ControllerRequests, type: :controller
     config.include Gaku::Testing::RequestHelpers, type: :request
     config.include Gaku::Testing::FlashHelpers, type: :request
     config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
