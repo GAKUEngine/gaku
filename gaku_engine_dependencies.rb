@@ -13,12 +13,10 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
-  gem 'guard-spork'
   gem 'guard-cop'
 end
 
 group :test do
-  gem 'spork', '~> 1.0rc'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker'
