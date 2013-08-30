@@ -1,7 +1,7 @@
 = well_div do
   .span9#guardian-table
     = show_table do
-      = person_caption @guardian
+      = big_person_caption_for(@guardian)
       tbody
         = render 'show_table', guardian: @guardian
   .span3.well

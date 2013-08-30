@@ -29,3 +29,7 @@ module Gaku::Testing::FlashHelpers
   end
 
 end
+
+RSpec.configure do |config|
+  config.include Gaku::Testing::FlashHelpers, type: :request
+end

@@ -14,19 +14,15 @@ module Gaku
     end
 
 
-    def person_caption(person)
+    def big_person_caption_for(person)
       content_tag :caption do
         content_tag :h2 do
-
-          content_tag :ruby do
-            concat student_names(person)
-            concat content_tag(:rt) { student_names person, reading: true }
-          end
+          person_caption_for(person)
         end
       end
     end
 
-    def edit_person_caption(person)
+    def person_caption_for(person)
       content_tag :ruby do
         concat student_names(person)
         concat content_tag(:rt) { student_names person, reading: true }
