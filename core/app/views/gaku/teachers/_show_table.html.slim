@@ -1,4 +1,4 @@
 = table_for 'teacher-index' do
-  = person_caption teacher
+  = big_person_caption_for(teacher)
   tbody
     = render 'gaku/shared/fields/person_show_table', person: teacher
