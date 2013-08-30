@@ -9,7 +9,7 @@ describe Gaku::ProgramSpecialty do
 
   describe 'validations' do
     it { should validate_presence_of :specialty }
-    it { should validate_presence_of :program }
+    # it { should validate_presence_of :program }
   end
 
 end
