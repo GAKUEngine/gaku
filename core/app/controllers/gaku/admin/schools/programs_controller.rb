@@ -10,7 +10,7 @@ module Gaku
 
     before_filter :count, only: %i(create destroy)
     before_filter :program, only: %i(show_program_levels show_program_specialties show_program_syllabuses)
-    before_filter :load_data
+    before_filter :load_data, only: %i(new edit)
 
     protected
 
@@ -22,13 +22,17 @@ module Gaku
     private
 
     def attributes
-      [:name, :description, { program_specialties_attributes: [] }, { program_levels_attributes: [] }, { program_syllabuses_attributes: [] }]
+      #permit :id for update nested attributes
+      [:id, :name, :description,
+                  { program_specialties_attributes: [:id, :specialty_id, :_destroy] },
+                  { program_levels_attributes: [:id, :level_id, :_destroy] },
+                  { program_syllabuses_attributes: [:id, :syllabus_id, :_destroy] }]
     end
 
     def load_data
-      @levels = Level.all.collect { |l| [l.name, l.id] }
-      @syllabuses = Syllabus.all.collect { |s| [s.name, s.id] }
-      @specialties = Specialty.all.collect { |s| [s.name, s.id] }
+      @levels = Level.all
+      @syllabuses = Syllabus.all
+      @specialties = Specialty.all
     end
 
     def program

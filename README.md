@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Genshin/GAKUEngine.png)](https://travis-ci.org/Genshin/GAKUEngine)
 [![Code Climate](https://codeclimate.com/github/Genshin/GAKUEngine.png)](https://codeclimate.com/github/Genshin/GAKUEngine)
-
+[![Coverage Status](https://coveralls.io/repos/Genshin/GAKUEngine/badge.png?branch=master)](https://coveralls.io/r/Genshin/GAKUEngine?branch=master)
 
 GAKU Engine [学園陣]
 ====================
@@ -8,7 +8,10 @@ Genshin Academic Karte Unification Engine
 =========================================
 
 GAKU Engine is a modular, extendable, Open Source school and student management system built on Rails.  
-=GAKU Engine is currently under heavy development and subject to radical changes. We do not currently recommend any use it in a production environment.=
+GAKU Engine is currently under heavy development. 
+-------------------------------------------------------------------------------
+We do not currently recommend any use it in a production environment.
+
 
 What does the name mean?
 ------------------------

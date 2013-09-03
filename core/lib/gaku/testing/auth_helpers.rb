@@ -17,3 +17,9 @@ module Gaku::Testing::AuthHelpers
   end
 
 end
+
+RSpec.configure do |config|
+  config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
+  config.include Gaku::Testing::AuthHelpers::Request, type: :request
+end
+

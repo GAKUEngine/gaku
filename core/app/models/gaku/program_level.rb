@@ -4,7 +4,7 @@ module Gaku
     belongs_to :program
     belongs_to :level
 
-    validates :level, :program, presence: true
+    validates :level, presence: true
 
   end
 end

@@ -148,15 +148,23 @@ form {
 
 .well {
   .well {
-    background-color: white;
+    background-color: #FFF;
     margin-bottom: 0px;
     .well {
-      background-color: whiteSmoke;
+      background-color: #F5F5F5;
       margin-bottom: 20px;
     }
   }
+  &.well-white {
+    background-color: #FFF;
+  }
 }
 
+.divider-vertical {
+  height: 42px;
+  border-right: 1px solid #B8B8B8;
+  border-left: 1px solid #F2F2F2;
+}
 
 //for fix -----
 .mt-xs { margin-top: 5px }

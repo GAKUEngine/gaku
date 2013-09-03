@@ -69,12 +69,7 @@ module Gaku
     def users_check
       if User.count == 0
         redirect_to set_up_admin_account_path
-      else
-        if current_user && current_user.has_role?(:admin) && !Rails.env.test?
-          # Rack::MiniProfiler.authorize_request
-        end
       end
-
     end
 
     def extract_locale_from_accept_language_header

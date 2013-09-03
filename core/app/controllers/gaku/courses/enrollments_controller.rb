@@ -3,27 +3,22 @@ module Gaku
 
     authorize_resource class: false
 
-    respond_to :js
+    respond_to :js, only: %i( new enrolled_student enroll_class_group )
 
     def new
       @course = Course.find(params[:course_id])
-      respond_to do |format|
-        format.js { render :'gaku/courses/enrollments/class_groups/new' }
-      end
+      render 'gaku/courses/enrollments/class_groups/new'
     end
 
     def enroll_student
-      @course_enrollment = CourseEnrollment.new(params[:course_enrollment])
       @course = Course.find(params[:course_enrollment][:course_id])
+
+      @course_enrollment = CourseEnrollment.new(params[:course_enrollment])
       if @course_enrollment.save
-        respond_with(@course_enrollment) do |format|
-          format.js { render :'gaku/courses/enrollments/students/enroll' }
-        end
+        render 'gaku/courses/enrollments/students/enroll'
       else
         @errors = @course_enrollment.errors
-        respond_with(@course_enrollment) do |format|
-          format.js { render :error }
-        end
+        render :error
       end
     end
 
@@ -32,7 +27,7 @@ module Gaku
       @course = Course.find(params[:course_id])
       @not_added_students = []
 
-      if !params[:course][:class_group_id].blank?
+      unless params[:course][:class_group_id].blank?
         @class_group = ClassGroup.find(params[:course][:class_group_id])
         if @class_group.students.empty?
           flash_error(@course, t(:'alert.empty', resource: t(:'class_group.singular'))) && return
@@ -43,9 +38,7 @@ module Gaku
           end
         end
         @course.enroll_class_group(@class_group)
-        respond_to do |format|
-          format.js { render :'gaku/courses/enrollments/class_groups/enroll' }
-        end
+        render 'gaku/courses/enrollments/class_groups/enroll'
       else
         flash_error(@course,t(:'alert.not_selected', resource: t(:'class_group.singular')))
       end
@@ -54,11 +47,8 @@ module Gaku
     private
 
     def flash_error(respond_with_var,message)
-      respond_to do |format|
-        @course.errors[:base] << message
-        format.html { render nothing: true }
-        format.js { render :'gaku/courses/enrollments/class_groups/enroll'}
-      end
+      @course.errors[:base] << message
+      render 'gaku/courses/enrollments/class_groups/enroll'
     end
 
   end

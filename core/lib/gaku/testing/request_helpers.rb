@@ -192,3 +192,8 @@ module Gaku::Testing::RequestHelpers
   end
 
 end
+
+RSpec.configure do |config|
+  config.include Gaku::Testing::RequestHelpers, type: :request
+end
+
