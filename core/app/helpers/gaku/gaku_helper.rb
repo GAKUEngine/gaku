@@ -117,6 +117,14 @@ module Gaku
       content_tag :h4, text
     end
 
+    def state_load(object)
+      object.country.nil? ? Gaku::State.none : object.country.states
+    end
+
+    def disabled?(object)
+      object.state.try(:countries).try(:present?) || object.new_record?
+    end
+
   end
 end
 
