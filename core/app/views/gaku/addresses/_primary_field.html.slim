@@ -2,7 +2,7 @@ td class='primary_address'
 
   - if can_edit?
     - if address.primary?
-      = link_to ok_icon, [:make_primary] + target, remote: true, class: 'span12 btn btn-mini btn-primary make-primary-address', method: :post,confirm: t('confirm'), id: 'set_primary_link'
+      = link_to ok_icon, [:make_primary] + target, remote: true, class: 'span12 btn btn-mini btn-primary make-primary-address', method: :post, data: { confirm: t('confirm') }, id: 'set_primary_link'
     - else
       = link_to ok_icon, [:make_primary] + target, remote: true, id: 'set_primary_link', class: 'span12 btn btn-mini make-primary-address', method: :post, confirm: t('confirm')
 
