@@ -1,5 +1,3 @@
-console.log($('#state-dropdown .controls'));
-
 if(<%= @states.count %> > 0 ){
   $('#state-dropdown .controls').html("<%=j render 'states_select', states: @states%>")
 }else{
