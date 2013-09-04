@@ -1,6 +1,6 @@
 module Gaku
   class StatesController < GakuController
-    respond_to :json
+    respond_to :js, :json
 
     def index
       if params[:country_id]
