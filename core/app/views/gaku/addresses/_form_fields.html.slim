@@ -4,7 +4,11 @@
 
 .row-fluid
   .span3
-    = f.select :country_id, @countries , { selected: f.object.country_id || country_preset }, id: "country_dropdown", label: t(:'address.country')
+    = f.select :country_id, @countries , { prompt: t(:'address.choose_country'), selected: f.object.country_id || country_preset }, id: "country_dropdown", label: t(:'address.country')
+  .span3
+    #state-dropdown
+      = f.collection_select :state_id, state_load(f.object), :id, :name, { prompt: t(:'state.choose')} , disabled: disabled?(f.object), label: t(:'address.state')
+
   .span3
     = f.text_field :zipcode, label: t(:'address.zipcode')
   .span3

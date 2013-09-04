@@ -841,6 +841,7 @@ en:
     name_ascii: Name Ascii
     code: Code
     country_iso: Country ISO
+    choose: Choose State
   submit: Submit
   success:
     enrolled: Successfully enrolled!

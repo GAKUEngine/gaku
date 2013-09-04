@@ -52,7 +52,7 @@ module Gaku
     end
 
     def address_attr
-      %i(title country_id zipcode state_name city address1 address2)
+      %i(title country_id state_id zipcode state_name city address1 address2)
     end
 
 

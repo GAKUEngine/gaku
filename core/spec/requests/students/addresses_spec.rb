@@ -8,11 +8,15 @@ describe 'Student Address' do
   let(:student) { create(:student) }
   let(:student_with_address) { create(:student, :with_address) }
   let(:student_with_addresses) { create(:student, :with_addresses) }
-  let(:country) { create(:country, name: 'Japan') }
+
+  let(:country) { create(:country, name: 'Japan', iso: 'JP') }
+  let(:country2) { create(:country, name: 'USA', iso: 'US') }
+  let(:state) { create(:state, country: country) }
 
   before :all do
     set_resource 'student-address'
   end
+
 
   context 'new', js: true, type: 'address' do
 
@@ -22,6 +26,29 @@ describe 'Student Address' do
     end
 
     it_behaves_like 'new address'
+
+  end
+
+  context 'state dropdown', js: true do
+
+    before do
+      country; country2; state
+      visit gaku.edit_student_path(student_with_address)
+    end
+
+    context 'new form' do
+      before { click new_link }
+
+      it_behaves_like 'dynamic state dropdown'
+
+    end
+
+    context 'edit form' do
+      before { click edit_link }
+
+      it_behaves_like 'dynamic state dropdown'
+
+    end
 
   end
 
