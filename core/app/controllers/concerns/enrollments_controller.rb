@@ -12,9 +12,9 @@ module EnrollmentsController
       set_count
 
       if class_name_underscored_plural == 'courses'
-        render 'gaku/#{class_name_underscored_plural}/enrollments/students/enroll_students'
+        render "gaku/#{class_name_underscored_plural}/enrollments/students/enroll_students"
       else
-        render 'gaku/#{class_name_underscored_plural}/students/enroll_students'
+        render "gaku/#{class_name_underscored_plural}/students/enroll_students"
       end
     #else
     #  flash.now[:notice] = notice.html_safe
