@@ -7,6 +7,10 @@ describe Gaku::Address do
   let(:student) { create(:student) }
   let!(:address) { create(:address, country: country, addressable: student) }
 
+  describe 'versioning' do
+    it { should be_versioned }
+  end
+
   describe 'relations' do
     it { should belong_to :country }
     it { should belong_to :state }

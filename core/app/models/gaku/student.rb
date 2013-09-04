@@ -33,7 +33,7 @@ module Gaku
     belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
 
 
-    has_paper_trail class_name: 'Gaku::StudentVersion',
+    has_paper_trail class_name: 'Gaku::Versioning::StudentVersion',
                     on: [:update, :destroy],
                     only: [
                             :name, :surname, :middle_name,

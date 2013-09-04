@@ -42,6 +42,11 @@ describe Gaku::Student do
 
   end
 
+  describe 'versioning' do
+    it { should be_versioned }
+  end
+
+
   context 'counter_cache' do
 
     let!(:student) { create(:student) }

@@ -1,11 +1,12 @@
 module Gaku
   class Admin::Changes::StudentContactChangesController < Admin::BaseController
 
-    load_and_authorize_resource class: PaperTrail::Version
+    #load_and_authorize_resource class: PaperTrail::Version
+    respond_to :html
 
     def index
-      @changes = PaperTrail::Version.student_contacts
-      @count = PaperTrail::Version.student_contacts.count
+      @changes = Gaku::Versioning::ContactVersion.student_contacts
+      @count = Gaku::Versioning::ContactVersion.student_contacts.count
     end
 
   end
