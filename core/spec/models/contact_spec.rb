@@ -12,6 +12,11 @@ describe Gaku::Contact do
     it { should validate_presence_of :contact_type }
   end
 
+  describe 'versioning' do
+    it { should be_versioned }
+  end
+
+
   describe 'methods' do
     it { should respond_to :name }
     it { should respond_to :primary? }
