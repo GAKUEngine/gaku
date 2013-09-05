@@ -1,7 +1,12 @@
 /*
  *= require_self
- *= require bootstrap
- *= require bootstrap-responsive
+
+ * require bootstrap
+ * require bootstrap-responsive
+
+ *= require bootstrap_v3/css/bootstrap.min
+ *= require bootstrap_v3/css/bootstrap-theme.min
+
  * require tbs_datepicker/css/datepicker
  *= require jquery-ui-1.9.2.custom.min.css
  *= require jquery_validation_engine/validationEngine.jquery
