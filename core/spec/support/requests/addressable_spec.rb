@@ -114,3 +114,24 @@ shared_examples_for 'primary addresses' do
     @data.addresses.first.primary? == true
   end
 end
+
+shared_examples_for 'dynamic state dropdown' do
+
+  it 'change country with and without state' do
+    #country with state
+    select "#{country}", from: 'country_dropdown'
+    within('#state-dropdown') do
+      expect(page).to have_content state.name
+    end
+    select "#{state}", from: 'address_state_id'
+
+    #country without state
+    select "#{country2}", from: 'country_dropdown'
+    within('#state-dropdown') do
+      expect(page).to have_css("select#address_state_id[disabled]")
+      expect(page).to_not have_content state.name
+    end
+  end
+
+end
+

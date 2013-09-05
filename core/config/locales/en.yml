@@ -840,6 +840,19 @@ en:
     edit: Student Specialty Edit
     index: Student Specialty Index
     save: Save Student Specialty
+  state:
+    edit: Edit State
+    name: State Name
+    save: Save State
+    singular: State
+    plural: States
+    list: State List
+    add: Add State
+    abbr: Abbr
+    name_ascii: Name Ascii
+    code: Code
+    country_iso: Country ISO
+    choose: Choose State
   submit: Submit
   success:
     enrolled: Successfully enrolled!
