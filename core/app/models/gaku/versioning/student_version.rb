@@ -1,7 +1,7 @@
-module Gaku
+module Gaku::Versioning
   class StudentVersion < PaperTrail::Version
 
-    self.table_name = :gaku_student_versions
+    self.table_name = :gaku_versioning_student_versions
 
     serialize :human_changes
 
@@ -18,18 +18,18 @@ module Gaku
         case key
 
         when 'enrollment_status_code'
-          from = EnrollmentStatus.where(code: key0).first.to_s if key0
-          to = EnrollmentStatus.where(code: key1).first.to_s if key1
+          from = Gaku::EnrollmentStatus.where(code: key0).first.to_s if key0
+          to = Gaku::EnrollmentStatus.where(code: key1).first.to_s if key1
           human_changes[:enrollment_status] = [from, to]
 
         when 'commute_method_type_id'
-          from = CommuteMethodType.find(key0).to_s if key0
-          to = CommuteMethodType.find(key1).to_s if key1
+          from = Gaku::CommuteMethodType.find(key0).to_s if key0
+          to = Gaku::CommuteMethodType.find(key1).to_s if key1
           human_changes[:commute_method] = [from, to]
 
         when 'scholarship_status_id'
-          from = ScholarshipStatus.find(key0).to_s if key0
-          to = ScholarshipStatus.find(key1).to_s if key1
+          from = Gaku::ScholarshipStatus.find(key0).to_s if key0
+          to = Gaku::ScholarshipStatus.find(key1).to_s if key1
           human_changes[:scholarship_status] = [from, to]
 
         else
