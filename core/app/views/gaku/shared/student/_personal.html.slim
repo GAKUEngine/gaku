@@ -1,4 +1,5 @@
 = normal_form_for @student do |f|
+  = edit_person_caption student
   .row-fluid
     .span12
       = f.select :class_group_ids, @class_groups,{prompt: t(:'class_group.none_assigned')}, label: t(:'class')
