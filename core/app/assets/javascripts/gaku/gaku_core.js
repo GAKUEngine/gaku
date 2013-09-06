@@ -5,9 +5,8 @@
 //= require moment.min
 
 //= require bootstrap
-//= require_tree ../../../../vendor/assets/javascripts/bootstrap-datepicker/
+//= require bootstrap-datepicker
 
-//= require chosen-jquery
 //= require underscore
 //= require backbone
 //= require rails.validations
@@ -16,8 +15,8 @@
 //= require combobox
 //= require jquery.dataTables
 //= require jquery.miniColors.min
-//= require jquery_nested_form
 
+//= require jquery_nested_form
 //= require gaku_forms
 //= require gaku_nested_forms
 
@@ -30,6 +29,3 @@
 //= require gaku/exams
 //= require gaku/admin
 //= require_tree ./backbone/
-
-
-
