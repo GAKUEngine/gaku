@@ -1,9 +1,9 @@
 /*
  *= require_self
- *= require bootstrap
- *= require bootstrap-responsive
+ *= require ./gaku_import
+ * require bootstrap
+ * require bootstrap-responsive
  * require tbs_datepicker/css/datepicker
- *= require jquery-ui-1.9.2.custom.min.css
  *= require jquery_validation_engine/validationEngine.jquery
  *= require jquery.miniColors
  * require jquery.dataTables
@@ -11,6 +11,5 @@
  *= require gaku/exams
 
  *= require ./gaku_engine
- *= require ./devise/sessions
  *= require_tree ../../../../vendor/assets/stylesheets/bootstrap-datepicker/
 */
