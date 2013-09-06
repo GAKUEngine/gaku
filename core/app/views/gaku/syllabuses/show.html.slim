@@ -16,9 +16,9 @@
         = render 'gaku/shared/fields/syllabus_fields', syllabus: @syllabus
 
 = well_div do
-  .row-fluid
+  .row
     #syllabus-exams
-      .row-fluid
+      .row
         .pull-left
           = count_div 'exams-count' do
             = print_count @syllabus.exams_count, t_exam_list
@@ -26,21 +26,21 @@
           = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
           = ajax_link_to_new t(:'exam.add_existing'), '', id: 'new-existing-exam-link'
 
-      .row-fluid
-        .span12
+      .row
+        .col-md-12
           #new-existing-exam-errors
           #new-existing-exam.hide style='padding-top:10px'
             = render 'gaku/syllabuses/exams/select_form'
 
           #new-syllabus-exam.hide style='padding-top:10px'
             /= render 'gaku/syllabuses/exams/form'
-      .row-fluid
-        .span12
+      .row
+        .col-md-12
           hr
       = render 'gaku/syllabuses/exams/exams'
-  .row-fluid
+  .row
     br/
-  /.row-fluid
+  /.row
     #syllabus-assigmnents
       = render 'gaku/syllabuses/assignments/assignments'
     #new-syllabus-assignment
@@ -53,7 +53,7 @@
     = render 'gaku/notes/notes'
 
 = well_div do
-  .span6
+  .col-md-6
     = link_to_edit_with_text [:edit, @syllabus], remote: true
-  .span6
+  .col-md-6
     = link_to_back syllabuses_path

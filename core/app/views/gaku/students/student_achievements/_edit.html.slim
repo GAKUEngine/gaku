@@ -2,7 +2,7 @@
 = modal_body do
   = remote_form_for [@student, @student_achievement] do |f|
     =render 'form_fields', f: f
-    .row-fluid
-      .span12
+    .row
+      .col-md-12
         = submit_button t(:'student_achievement.save') , id: "submit-student-achievement-button"
         = ajax_link_to_back [@student, :student_achievements]

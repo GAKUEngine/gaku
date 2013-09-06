@@ -1,19 +1,19 @@
 = remote_form_for @exam do |f|
-  .row-fluid
-    .row-fluid
+  .row
+    .row
       h4 = t(:'exam.new')
     = hr
     = well_div do
       = render 'form_fields', f: f
 
-    .row-fluid
+    .row
       h4 = t(:'exam_portion.master')
     = hr
     = well_div do
       = f.fields_for :exam_portions do |ep_form|
         = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: ep_form
     = hr
-    .row-fluid
-      .span12
+    .row
+      .col-md-12
         = buttons_for @exam
 

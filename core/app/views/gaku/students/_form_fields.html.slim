@@ -1,17 +1,17 @@
-.row-fluid
-  .span12
+.row
+  .col-md-12
     = f.select :class_group_ids, @class_groups,{prompt: t(:'class_group.none_assigned')}, label: t(:'class')
 
 = render 'gaku/shared/form_fields/person_form_fields', f: f
 
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = f.text_field :admitted, class: "datepicker", label: t(:admitted)
-  .span6
+  .col-md-6
     = f.text_field :graduated, class: "datepicker", label: t(:graduated)
 
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = f.select :scholarship_status_id, @scholarship_statuses, {include_blank: true}, label: t(:scholarship_status)
-  .span6
+  .col-md-6
     = f.select :enrollment_status_code, @enrollment_statuses,  {include_blank: true}, label: t(:enrollment_status)

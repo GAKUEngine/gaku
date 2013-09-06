@@ -1,7 +1,7 @@
-.row-fluid
-  .span12.well
-    .row-fluid
-      .span12
+.row
+  .col-md-12.well
+    .row
+      .col-md-12
         = form_tag get_roster_importer_index_path, method: :get do
           .control-group
             .controls
@@ -11,8 +11,8 @@
             .controls
               = submit_tag t(:'student.download_roster'), class: 'span3 btn btn-primary'
         = hr
-    .row-fluid
-      .span12
+    .row
+      .col-md-12
         = link_to_file t(:'student.download_registration_roster'), action: :get_registration_roster
         hr /
         = form_for :importer, html: { multipart: true } do |f|

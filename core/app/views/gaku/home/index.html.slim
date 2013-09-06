@@ -1,12 +1,12 @@
 - content_for :title, translate("comname")
-.row-fluid
-  .span12
+.row
+  .col-md-12
     - if user_signed_in?
-      .row-fluid
-        .span12
+      .row
+        .col-md-12
           = render partial: 'user_info'
-      .row-fluid
-        .span12
+      .row
+        .col-md-12
           = render partial: 'user_menu'
     - else
       | 下記のリンクからログインを行ってください。

@@ -1,7 +1,7 @@
 = content_for :show_header do
   = t(:'class_group.show')
 
-.row-fluid
+.row
   = table do
     thead
       tr
@@ -19,7 +19,7 @@
     = render 'gaku/notes/notes'
 
 = well_div do
-  .span6
+  .col-md-6
     = link_to_edit_with_text [:edit, @class_group], remote: true
-  .span6
+  .col-md-6
     = link_to_back class_groups_path, id: 'back-class-group-link'

@@ -1,5 +1,5 @@
 = well_div do
-  .span9.well
+  .col-md-9.well
     ul.nav.nav-tabs.nav-justified
       li.active
         a#student-personal-tab-link data-toggle="tab" href="#personal"
@@ -14,7 +14,7 @@
         = render 'gaku/shared/student/academic', student: @student
 
 
-  .span3.well
+  .col-md-3.well
     = render 'gaku/shared/picture', resource: @student
 
 = render partial: 'gaku/shared/student/tabs'

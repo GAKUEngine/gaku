@@ -1,8 +1,8 @@
 = remote_form_for @class_group do |f|
   .control-group
-    .span12.well
-      .row-fluid
+    .col-md-12.well
+      .row
          = render 'form_fields', f: f
 
-      .row-fluid
+      .row
         =buttons_for @class_group

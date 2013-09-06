@@ -10,8 +10,8 @@
     hr
   p = f.link_to_add t(:'school_level.add_school_level'), :levels, class: 'btn btn-success add-school-level'
 
-  .row-fluid
-    .span12
+  .row
+    .col-md-12
       = submit_button t(:'school.save'), id: 'submit-admin-school-button'
-      .span6
+      .col-md-6
         = link_to_back admin_school_details_path , id: 'back-admin-school-link', class: 'btn span12'

@@ -1,11 +1,11 @@
 = remote_form_for [@syllabus, @exam] do |f|
-  .row-fluid
+  .row
     h4 = t(:'exam.new')
   = hr
   = well_div do
     = render 'gaku/syllabuses/exams/form_fields', f: f
 
-  .row-fluid
+  .row
     h4 = t(:'exam_portion.master')
   = hr
   = well_div do

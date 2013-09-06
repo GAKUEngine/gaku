@@ -1,10 +1,10 @@
 #campus-index
-.row-fluid
-  .span9
+.row
+  .col-md-9
     = table do
       tr
         th.btn-c1  width="25%" = t(:'campus.name')
         td = school.name
 
-  .span3.well
+  .col-md-3.well
     = render 'gaku/admin/shared/picture', resource: campus

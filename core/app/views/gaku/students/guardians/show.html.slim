@@ -1,10 +1,10 @@
 = well_div do
-  .span9#guardian-table
+  .col-md-9#guardian-table
     = show_table do
       = big_person_caption_for(@guardian)
       tbody
         = render 'show_table', guardian: @guardian
-  .span3.well
+  .col-md-3.well
     = render partial: 'picture', locals: { guardian: @guardian, student: @student }
 
 

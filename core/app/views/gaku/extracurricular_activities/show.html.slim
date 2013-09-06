@@ -14,7 +14,7 @@
 = render 'tabs'
 
 = well_div do
-  .span6
+  .col-md-6
     = link_to_edit_with_text [:edit, @extracurricular_activity], remote: true
-  .span6
+  .col-md-6
     = link_to_back extracurricular_activities_path, id: 'back-extracurricular-activity-link'

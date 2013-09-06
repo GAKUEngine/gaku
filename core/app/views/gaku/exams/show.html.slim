@@ -27,7 +27,7 @@
     = render partial: 'gaku/notes/notes'
 
 = well_div do
-  .span6
+  .col-md-6
     = link_to_edit_with_text [:edit,@exam], remote: true
-  .span6
+  .col-md-6
     = link_to_back exams_path

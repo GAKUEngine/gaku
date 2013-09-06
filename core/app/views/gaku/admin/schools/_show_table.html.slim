@@ -1,6 +1,6 @@
 #school-index
-.row-fluid
-  .span9
+.row
+  .col-md-9
     = table do
       tr
         th.btn-c1  width="25%" = t(:'school.name')
@@ -31,5 +31,5 @@
           th.btn-c2 = t(:'school_level.plural')
           td = comma_separated_list(school.levels)
 
-  .span3.well
+  .col-md-3.well
     = render 'gaku/admin/shared/picture', resource: school

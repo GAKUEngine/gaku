@@ -1,7 +1,7 @@
 = form_for resource, html: { multipart: true } do |form|
-  .row-fluid.mt-m
+  .row.mt-m
     = form.file_field :picture, class: "form-file"
-  .row-fluid.mt-xs
+  .row.mt-xs
     = link_to_upload
 coffee:
   $(".form-file").attr('size', 9)

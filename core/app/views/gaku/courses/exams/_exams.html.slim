@@ -1,4 +1,4 @@
-.row-fluid
+.row
   - if @course.syllabus and @course.syllabus.exams.any?
       = table_for 'course-exams-index' do
         thead
@@ -9,6 +9,6 @@
         tbody
           = render partial: 'gaku/courses/exams/exam', collection: @course.syllabus.exams, as: :exam
 
-.row-fluid.mt-m
+.row.mt-m
   - if @course.syllabus and @course.syllabus.exams.any?
     =link_to content_tag(:i, '', class: 'icon-white icon-list') + ' ' +t("grade.all_exams"), grading_course_exams_path(@course), class: "span12 btn btn-success", id: 'all-course-exams-grade'

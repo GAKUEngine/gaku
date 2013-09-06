@@ -1,5 +1,5 @@
-.row-fluid.mt-l
-  .span12.well
+.row.mt-l
+  .col-md-12.well
     .tabbable.tabs-right
       ul.nav.nav-tabs
         li#extracurricular-activity-students-tab.active
@@ -8,7 +8,7 @@
       .tab-content
 
         #exracurricular-activity-enrollments.tab-pane.active
-          .row-fluid#xracurricular-activity-enrollments-list
+          .row#xracurricular-activity-enrollments-list
             =render 'gaku/extracurricular_activities/students/students'
-          .row-fluid
+          .row
             #enrollment-form.hide

@@ -1,7 +1,7 @@
-.row-fluid
-  .span12.well
-    .row-fluid
-      .span12
+.row
+  .col-md-12.well
+    .row
+      .col-md-12
         = link_to_file t(:'syllabus.registration.csv'), action: :get_template id: "get_template"
         hr /
         = form_for :importer, url: { action: "import_from_template" }, html: { multipart: true } do |f|

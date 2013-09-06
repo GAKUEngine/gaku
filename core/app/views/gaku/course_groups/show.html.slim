@@ -12,19 +12,19 @@
 
 = well_div do
   #courses
-    .row-fluid
-      .span12
+    .row
+      .col-md-12
         #course-group-enrollment-form-errors
         #new-course-group-enrollment.hide
           = render 'gaku/course_groups/course_group_enrollments/form'
-    .row-fluid
+    .row
       #course-group-enrollments-index
         = render 'gaku/course_groups/course_group_enrollments/courses', course_group: @course_group
 
 = well_div do
-  .span5
+  .col-md-5
     = link_to_edit_with_text [:edit, @course_group], remote: true
-  .span5
+  .col-md-5
     = link_to_back course_groups_path
-  .span2
+  .col-md-2
     = render 'delete_confirm'
