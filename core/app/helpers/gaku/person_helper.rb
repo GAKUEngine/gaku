@@ -3,7 +3,7 @@ module Gaku
 
     def gender(student)
       if student.gender.nil?
-        t(:"gender.unknown")
+        ''
       else
         if student.gender?
           t(:"gender.male")
