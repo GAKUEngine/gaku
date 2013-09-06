@@ -1,21 +1,12 @@
 module Gaku
   class Admin::Changes::StudentChangesController < Admin::BaseController
 
-    load_and_authorize_resource class: StudentVersion
-    respond_to :html, :js
-
-    inherit_resources
-    actions :index
+    #load_and_authorize_resource class: StudentVersion
+    respond_to :html
 
     def index
-      @count = StudentVersion.count
-      index!
-    end
-
-    protected
-
-    def collection
-      @changes = StudentVersion.page(params[:page]).per(Preset.changes_per_page)
+      @count = Gaku::Versioning::StudentVersion.count
+      @changes = Gaku::Versioning::StudentVersion.all
     end
 
   end

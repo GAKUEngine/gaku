@@ -9,7 +9,7 @@ describe 'Student Changes' do
   let(:enrollment_status) { create(:enrollment_status) }
   let(:commute_method_type) { create(:commute_method_type) }
 
-  it 'saves edits' do
+  it 'saves edits', versioning: true do
     student.update_attributes(name: 'Changed name', surname: 'Changed surname',
                               middle_name: 'Changed middle_name',
                               student_id_number: 'Changed student_id_number',
@@ -29,7 +29,7 @@ describe 'Student Changes' do
     page.should have_content enrollment_status
   end
 
-  it 'saves soft deletes' do
+  it 'saves soft deletes', versioning: true do
     student.update_attribute(:is_deleted, true)
     visit gaku.admin_changes_students_path
     page.should have_content 'true'
@@ -38,7 +38,7 @@ describe 'Student Changes' do
     page.should have_content 'update'
   end
 
-  it 'saves destroy' do
+  it 'saves destroy', versioning: true do
     student.destroy
     visit gaku.admin_changes_students_path
     page.should have_content 'destroy'

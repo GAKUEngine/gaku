@@ -1,6 +1,7 @@
-class CreateVersions < ActiveRecord::Migration
+class CreateGakuVersioningContactVersions < ActiveRecord::Migration
+
   def self.up
-    create_table :versions do |t|
+    create_table :gaku_versioning_contact_versions do |t|
       t.string   :item_type, null: false
       t.integer  :item_id,   null: false
       t.string   :event,     null: false
@@ -11,11 +12,13 @@ class CreateVersions < ActiveRecord::Migration
       t.integer  :joined_resource_id
       t.datetime :created_at
     end
-    add_index :versions, [:item_type, :item_id]
+    add_index :gaku_versioning_contact_versions, [:item_type, :item_id]
   end
 
+
   def self.down
-    remove_index :versions, [:item_type, :item_id]
-    drop_table :versions
+    remove_index :gaku_versioning_contact_versions, [:item_type, :item_id]
+    drop_table :gaku_versioning_contact_versions
   end
+
 end

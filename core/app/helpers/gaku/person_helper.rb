@@ -33,7 +33,7 @@ module Gaku
       @names_preset ||= Gaku::Preset.get(:names)
       reading = options[:reading]
       if @names_preset.blank?
-        return reading ? student.phonetic_reading : student
+        return reading ? student.surname : student.name
       end
       result = @names_preset.gsub(/%(\w+)/) do |name|
         case name

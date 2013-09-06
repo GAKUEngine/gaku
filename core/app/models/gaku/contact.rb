@@ -4,7 +4,8 @@ module Gaku
     belongs_to :contact_type
     belongs_to :contactable, polymorphic: true, counter_cache: true
 
-    has_paper_trail on: [:update, :destroy],
+    has_paper_trail class_name: 'Gaku::Versioning::ContactVersion',
+                    on: [:update, :destroy],
                     meta: {
                             join_model: :join_model_name,
                             joined_resource_id: :joined_resource_id

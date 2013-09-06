@@ -6,6 +6,18 @@ FactoryGirl.define do
     school
   end
 
+  trait :full_program do |resource|
+    resource.after(:build) do |program|
+      level = create(:level)
+      syllabus = create(:syllabus)
+      specialty = create(:specialty)
+      create(:program_level, level: level, program: program)
+      create(:program_syllabus, level: level, program: program, syllabus: syllabus)
+      create(:program_specialty, specialty: specialty, program: program)
+    end
+  end
+
+
   trait :with_program_level do |resource|
     resource.after(:build) do |program|
       program.levels << create(:level)

@@ -2,22 +2,20 @@ require 'spec_helper'
 
 describe 'Student Contact Versioning' do
 
-  before do
-    @student = create(:student, :with_contact)
-    @student.reload
-    @contact = @student.contacts.first
-  end
+  let(:student) { create(:student, :with_contact) }
+  let(:contact) { student.contacts.first }
 
-  it 'saves update history' do
+  it 'saves update history', versioning: true do
     expect do
-      @contact.data = 'Changed'
-      @contact.save
-    end.to change(PaperTrail::Version, :count).by 1
+      contact.data = 'Changed'
+      contact.save!
+      contact.reload
+    end.to change(Gaku::Versioning::ContactVersion, :count).by 1
 
-    version = PaperTrail::Version.last
+    version = Gaku::Versioning::ContactVersion.last
 
     version.join_model.should eq 'Gaku::Student'
-    version.joined_resource_id.should eq @student.id
+    version.joined_resource_id.should eq student.id
   end
 
 end
