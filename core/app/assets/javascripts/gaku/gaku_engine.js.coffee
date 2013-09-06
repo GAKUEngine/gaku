@@ -11,8 +11,6 @@ $.fn.enableValidations = ->
 
 ready = ->
 
-  #console.log 'do_on_change loaded'
-
   $('#soft-delete-link').on 'click', (e)->
     e.preventDefault()
     $('#delete-modal').modal('show')
@@ -36,17 +34,16 @@ ready = ->
 
 
   $(document).on "click",".cancel-link", (e) ->
-    console.log 'Cancel event'
     e.preventDefault()
     resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id
     $(resource_new_link).show()
-    $(resource_form).slideUp()
+    $(resource_form).slide()
 
   $(document).on 'click', '#cancel-student-commute-method-link', (e) ->
     e.preventDefault()
-    $('#student-commute-method-form').slideUp ->
+    $('#student-commute-method-form').slide ->
       $('#commute-method').show()
       $('#edit-student-commute-method-link').show()
 

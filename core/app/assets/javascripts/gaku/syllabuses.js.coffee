@@ -1,5 +1,5 @@
 ready = ->
-  
+
   $('#syllabus-exams').on "click", '#new-syllabus-exam-link', (event) ->
     event.preventDefault()
     #$(@).hide()
