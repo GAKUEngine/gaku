@@ -2,6 +2,10 @@ FactoryGirl.define do
 
   factory :role, class: Gaku::Role do
     name 'Role #1'
+
+    factory :invalid_role do
+      name nil
+    end
   end
 
   factory :admin_role, parent: :role do
