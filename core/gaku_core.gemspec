@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
+  s.add_dependency 'bootstrap-datepicker-rails'
 
   s.add_dependency 'paperclip'
   s.add_dependency 'ransack', '~> 1.0'
@@ -62,4 +63,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'localeapp'
+  s.add_dependency 'rack-mini-profiler'
 end

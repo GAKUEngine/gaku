@@ -30,7 +30,7 @@ module Gaku
     private
 
     def load_data
-      @courses = Course.includes(:syllabus).collect do |c|
+      @courses = Course.includes(:syllabus).map do |c|
         if c.syllabus_name
           ["#{c.syllabus_name}-#{c.code}", c.id]
         else

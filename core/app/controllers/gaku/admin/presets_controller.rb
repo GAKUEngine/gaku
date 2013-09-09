@@ -10,7 +10,7 @@ module Gaku
     end
 
     def students
-      @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.iso] }
+      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.iso] }
       @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:student])
     end
 

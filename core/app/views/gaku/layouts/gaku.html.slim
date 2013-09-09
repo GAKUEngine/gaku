@@ -11,7 +11,7 @@ html
   body
     = render partial: 'gaku/shared/modal_config'
     = render partial: "gaku/shared/menubar"
-    .container-fluid
+    .container
       #notice
         - unless flash.empty?
           = render "gaku/shared/flash", flash: flash

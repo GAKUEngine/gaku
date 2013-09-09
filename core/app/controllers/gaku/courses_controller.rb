@@ -48,7 +48,7 @@ module Gaku
     end
 
     def load_data
-      @syllabuses = Syllabus.all.collect { |s| [s.name, s.id] }
+      @syllabuses = Syllabus.all.map { |s| [s.name, s.id] }
     end
 
     def count
@@ -58,7 +58,7 @@ module Gaku
     def before_show
       @notable = Course.find(params[:id])
       @notable_resource = get_resource_name(@notable)
-      @class_groups = ClassGroup.all.collect { |s| [s.name, s.id] }
+      @class_groups = ClassGroup.all.map { |s| [s.name, s.id] }
     end
 
     def sort_column

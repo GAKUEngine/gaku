@@ -40,7 +40,7 @@ module Gaku
     private
 
     def load_data
-      @specialties = Gaku::Specialty.all.collect { |s| [s.name, s.id] }
+      @specialties = Gaku::Specialty.all.map { |s| [s.name, s.id] }
     end
 
     def student

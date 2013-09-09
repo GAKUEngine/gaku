@@ -19,10 +19,12 @@ require 'paper_trail'
 require 'globalize3'
 require 'thinreports-rails'
 require 'bootstrap-sass'
+require 'bootstrap-datepicker-rails'
 require 'nested_form'
 require 'gaku_helpers'
 require 'gaku_forms'
 require 'gaku_nested_forms'
+require 'rack-mini-profiler'
 
 
 module Gaku

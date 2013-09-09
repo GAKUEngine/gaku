@@ -9,7 +9,7 @@ describe 'Sign Out' do
     click '#user_menu_dropdown'
     within('#user_menu') { click_link 'Sign Out' }
 
-    has_content? "Signed out successfully."
+    has_content? 'Signed out successfully.'
     expect(current_path).to eq gaku.new_user_session_path
   end
 

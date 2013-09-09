@@ -26,7 +26,7 @@ module Gaku
     end
 
     def load_data
-      @semesters = Semester.all.collect { |s| [s.to_s, s.id] }
+      @semesters = Semester.all.map { |s| [s.to_s, s.id] }
     end
 
     def count

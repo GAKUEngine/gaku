@@ -60,7 +60,7 @@ module Gaku
     end
 
     def load_data
-      @contact_types = ContactType.all.collect { |ct| [ct.name, ct.id] }
+      @contact_types = ContactType.all.map { |ct| [ct.name, ct.id] }
     end
 
     def count
@@ -81,7 +81,7 @@ module Gaku
     end
 
     def nested_resources(klasses)
-      nested_resources = Array.new
+      nested_resources = []
       last_klass_foreign_key = params[klasses.last.to_s.foreign_key]
       if klasses.is_a? Array
         @contactable = klasses.last.find(last_klass_foreign_key)
@@ -100,7 +100,7 @@ module Gaku
     end
 
     def resource_name
-      resource_name = Array.new
+      resource_name = []
       @nested_resources.each do |resource|
         if resource.is_a?(Symbol)
           resource_name.append(resource.to_s)

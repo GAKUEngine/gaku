@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-syllabus = Gaku::Syllabus.where(name: "Ruby", code: "rb").first_or_create!
-course = Gaku::Course.where(code: "Fall 2011").first_or_create!
+syllabus = Gaku::Syllabus.where(name: 'Ruby', code: 'rb').first_or_create!
+course = Gaku::Course.where(code: 'Fall 2011').first_or_create!
 enrollment_status_code = Gaku::EnrollmentStatus.where(code: 'admitted').first.try(:code)
 
 student = Gaku::Student.where(name: 'John', surname: 'Doe').first_or_create!(enrollment_status_code: enrollment_status_code)

@@ -51,18 +51,18 @@ describe Gaku::Admin::AchievementsController do
           end
         end
 
-        context "with invalid attributes" do
+        context 'with invalid attributes' do
           let(:invalid_create) do
             gaku_post :create, achievement: attributes_for(:invalid_achievement)
           end
 
-          xit "does not save the new achievement" do
+          xit 'does not save the new achievement' do
             expect do
               invalid_create
             end.to_not change(Gaku::Achievement, :count)
           end
 
-          xit "re-renders the new method" do
+          xit 're-renders the new method' do
             invalid_create
             template? :create
           end

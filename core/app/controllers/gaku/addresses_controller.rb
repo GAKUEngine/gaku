@@ -65,7 +65,7 @@ module Gaku
     end
 
     def load_data
-      @countries = Country.all.sort_by(&:name).collect { |s| [s.name, s.id] }
+      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.id] }
     end
 
     def unscoped_address
@@ -86,7 +86,7 @@ module Gaku
     end
 
     def nested_resources(klasses)
-      nested_resources = Array.new
+      nested_resources = []
       last_klass_foreign_key = params[klasses.last.to_s.foreign_key]
 
       if klasses.is_a? Array
@@ -106,7 +106,7 @@ module Gaku
     end
 
     def resource_name
-      resource_name = Array.new
+      resource_name = []
       @nested_resources.each do |resource|
         if resource.is_a?(Symbol)
           resource_name.append(resource.to_s)

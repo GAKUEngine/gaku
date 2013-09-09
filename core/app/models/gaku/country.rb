@@ -2,7 +2,7 @@ module Gaku
   class Country < ActiveRecord::Base
 
     has_many :states, -> { order name: :asc },
-                      foreign_key: :country_iso,
+             foreign_key: :country_iso,
                       primary_key: :iso
 
 
