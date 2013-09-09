@@ -1,29 +1,53 @@
 module Gaku
   class Admin::RolesController < Admin::BaseController
 
-    load_and_authorize_resource class: Role
+    #load_and_authorize_resource class: Role
 
-    respond_to :js, :html
+    respond_to :js,   only: %i( new create edit update destroy )
+    respond_to :html, only: :index
 
-    inherit_resources
+    before_action :set_role, only: %i( edit update destroy )
 
-    before_filter :count, only: %i(create destroy index)
+    def index
+      @roles = Role.all
+      @count = Role.count
+      respond_with @roles
+    end
 
-    protected
+    def new
+      @role = Role.new
+      respond_with @role
+    end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:role).permit(attributes)]
+    def create
+      @role = Role.new(role_params)
+      @role.save
+      @count = Role.count
+      respond_with @role
+    end
+
+    def edit
+    end
+
+    def update
+      @role.update(role_params)
+      respond_with @role
+    end
+
+    def destroy
+      @role.destroy
+      @count = Role.count
+      respond_with @role
     end
 
     private
 
-    def count
-      @count = Role.count
+    def set_role
+      @role = Role.find(params[:id])
     end
 
-    def attributes
-      %i(name class_group_enrollment extracurricular_activity_enrollment)
+    def role_params
+      params.require(:role).permit(:name)
     end
 
   end
