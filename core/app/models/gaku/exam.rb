@@ -30,11 +30,11 @@ module Gaku
     end
 
     def total_weight
-      exam_portions.inject(0) { |sum, p| p.weight ? sum + p.weight : sum }
+      exam_portions.reduce(0) { |sum, p| p.weight ? sum + p.weight : sum }
     end
 
     def total_weight_except(portion)
-      exam_portions.inject(0) do |sum, p|
+      exam_portions.reduce(0) do |sum, p|
         if portion == p
           sum
         else
@@ -44,7 +44,7 @@ module Gaku
     end
 
     def max_score
-      exam_portions.inject(0) { |sum, p| sum + p.max_score }
+      exam_portions.reduce(0) { |sum, p| sum + p.max_score }
     end
 
     def completion(students)
@@ -74,7 +74,7 @@ module Gaku
     end
 
     def completed_by_students(students)
-      completed = Array.new
+      completed = []
       students.each do |student|
         completed.append(student.id) if self.completed_by_student?(student)
       end
@@ -86,7 +86,7 @@ module Gaku
       state = true
 
       exam_portions.each do |ep|
-        student_eps = ep.exam_portion_scores.detect do |eps|
+        student_eps = ep.exam_portion_scores.find do |eps|
           eps.student_id == student.id
         end
         state = false if check_record_completion?(student_eps)

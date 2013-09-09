@@ -15,7 +15,7 @@ module Gaku::Importers::Students
       reg_name(row, student)
       reg_sex(row, student)
       reg_birthdate(row, student)
-      student.save()
+      student.save
 
       add_contacts(row, student)
       add_address(row, student)

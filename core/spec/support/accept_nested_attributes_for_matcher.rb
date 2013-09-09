@@ -19,7 +19,7 @@
       messages << "expected #{@model.class} to accept nested attributes for #{association}" unless @nested_att_present
       messages << "expected #{@model.class} to reject values #{@reject.inspect} for association #{association}" unless @reject_success
       messages << "expected #{@model.class} to accept values #{@accept.inspect} for association #{association}" unless @accept_success
-      messages.join(", ")
+      messages.join(', ')
     end
 
     description do

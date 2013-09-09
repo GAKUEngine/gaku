@@ -9,7 +9,7 @@ enrollment_status = Gaku::EnrollmentStatus.where(:code => 'admitted').first.try(
 student = Gaku::Student.where(name: 'John', surname: 'Doe', birth_date: Date.new(1983,10,5)).first_or_create!(enrollment_status_code: enrollment_status)
 
 country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: '392').first_or_create!
-address = student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Home address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
+address = student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Home address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
 
 email = Gaku::ContactType.where(name: 'Email').first_or_create!
 home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
@@ -67,8 +67,8 @@ unless Gaku::Student.count > students_count
                                         birth_date: Date.today-rand(1000),
                                         enrollment_status_code: enrollment_status
                                       )
-      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Home address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
-      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Alternative address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
+      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Home address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
+      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Alternative address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
 
       student.contacts.where(data: Faker::Internet.email, contact_type_id: email.id).first_or_create!
       student.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: home_phone.id).first_or_create!

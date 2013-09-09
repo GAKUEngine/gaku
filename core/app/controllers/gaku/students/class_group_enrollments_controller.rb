@@ -52,7 +52,7 @@ module Gaku
     end
 
     def load_data
-      @class_groups = ClassGroup.all.collect { |s| [s.name.capitalize, s.id] }
+      @class_groups = ClassGroup.all.map { |s| [s.name.capitalize, s.id] }
     end
 
   end

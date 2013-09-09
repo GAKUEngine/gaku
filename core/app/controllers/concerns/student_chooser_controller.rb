@@ -16,13 +16,13 @@ module StudentChooserController
   private
 
   def set_countries
-    @countries = Gaku::Country.all.sort_by(&:name).collect{|s| [s.name, s.id]}
+    @countries = Gaku::Country.all.sort_by(&:name).map{|s| [s.name, s.id]}
   end
 
   def set_enrollment_statuses
     @enrollment_status_applicant_code = Gaku::EnrollmentStatus.first_or_create(code: 'applicant').code
     @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.first_or_create(code: 'enrolled').code
-    @enrollment_statuses =  Gaku::EnrollmentStatus.all.collect { |es| [es.name, es.code] }
+    @enrollment_statuses =  Gaku::EnrollmentStatus.all.map { |es| [es.name, es.code] }
     @enrollment_statuses << [t('undefined'), nil]
   end
 

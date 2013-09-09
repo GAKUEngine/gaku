@@ -10,9 +10,9 @@ module I18n
 
         puts "I18N keys: #{keys}"  if ENV['I18N_DEBUG']
 
-        keys.inject(translations) do |result, _key|
+        keys.reduce(translations) do |result, _key|
           _key = _key.to_sym
-          return nil unless result.is_a?(Hash) && result.has_key?(_key)
+          return nil unless result.is_a?(Hash) && result.key?(_key)
           result = result[_key]
           result = resolve(locale, _key, result, options.merge(scope: nil)) if result.is_a?(Symbol)
 

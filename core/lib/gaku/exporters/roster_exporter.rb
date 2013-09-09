@@ -20,11 +20,11 @@ module Gaku
         begin
           @workbook = Roo::Spreadsheet.open(@template)
         rescue
-          @workbook = Roo::Spreadsheet.new()
+          @workbook = Roo::Spreadsheet.new
         end
       end
 
-      def export_all()
+      def export_all
 
       end
 

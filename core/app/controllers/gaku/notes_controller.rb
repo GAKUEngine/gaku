@@ -59,7 +59,7 @@ module Gaku
 
     def notable
       unnamespaced_klass = ''
-      klass = notable_klasses.detect do |c|
+      klass = notable_klasses.find do |c|
         unnamespaced_klass = c.to_s.split('::')
         params["#{unnamespaced_klass[1].underscore}_id"]
       end

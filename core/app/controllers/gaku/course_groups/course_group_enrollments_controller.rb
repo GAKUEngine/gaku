@@ -2,7 +2,7 @@ module Gaku
   class CourseGroups::CourseGroupEnrollmentsController < GakuController
 
     load_and_authorize_resource :course_group_enrollment,
-                                 class: 'Gaku::CourseGroupEnrollment'
+                                class: 'Gaku::CourseGroupEnrollment'
 
     inherit_resources
     respond_to :js, only: %i( new create destroy )

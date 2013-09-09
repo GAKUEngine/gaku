@@ -52,7 +52,7 @@ module Gaku
 
       respond_to do |format|
         format.json { render json: {
-          student_total_scores: @student_total_scores.as_json(),
+          student_total_scores: @student_total_scores.as_json,
           exams: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores }},root: false),
           course: @course.as_json(root: false),
           exam_averages: @exam_averages.as_json(root: false),
