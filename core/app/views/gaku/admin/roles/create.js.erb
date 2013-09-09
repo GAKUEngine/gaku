@@ -1,4 +1,4 @@
-$('#admin-roles-index tbody').append('<%= render_js_partial("role", {role: @role}) %>');
+$('#admin-roles-index tbody').append('<%= j render("role", {role: @role}) %>');
 
 $('#new-admin-role').slide();
 $('#new-admin-role-link').show();
