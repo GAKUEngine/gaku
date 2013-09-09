@@ -1,4 +1,5 @@
 td = role.name
+td = role.users.count
 td
   = ajax_link_to_edit [:edit, :admin, role]
   = ajax_link_to_delete [:admin, role]

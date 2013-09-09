@@ -884,6 +884,8 @@ en:
   title: Title
   undefined: Undefined
   user:
+    plural: Users
+    singular: User
     add: Add User
     edit: Edit User
     email: Email
