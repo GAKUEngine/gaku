@@ -54,12 +54,30 @@ end
 students_count = 1000
 
 
-
 unless Gaku::Student.count > students_count
   bar = RakeProgressbar.new(students_count)
+  gender = students_count.even? ? 1 : 0
   ActiveRecord::Base.transaction do
     students_count.times do
-      Gaku::Student.create!(:name => Faker::Name.first_name, :surname => Faker::Name.last_name, :enrollment_status_code => enrollment_status)
+      student = Gaku::Student.create!(
+                                        name: Faker::Name.first_name,
+                                        middle_name: Faker::Name.first_name,
+                                        surname: Faker::Name.last_name,
+                                        gender: gender,
+                                        birth_date: Date.today-rand(1000),
+                                        enrollment_status_code: enrollment_status
+                                      )
+      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Home address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
+      student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: "Alternative address", zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
+
+      student.contacts.where(data: Faker::Internet.email, contact_type_id: email.id).first_or_create!
+      student.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: home_phone.id).first_or_create!
+
+      note = Gaku::Note.where(title: Faker::Lorem.word, content: Faker::Lorem.sentence).first_or_create!
+      student.notes << note
+
+      guardian = Gaku::Guardian.where(name: Faker::Name.first_name, surname: Faker::Name.last_name).first_or_create!
+      student.guardians << guardian
       bar.inc
     end
   end
