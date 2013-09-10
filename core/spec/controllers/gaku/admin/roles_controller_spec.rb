@@ -61,6 +61,11 @@ describe Gaku::Admin::RolesController do
             valid_js_create
             flash_created?
           end
+
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 2
+          end
         end
 
         context 'with invalid attributes' do
@@ -77,6 +82,11 @@ describe Gaku::Admin::RolesController do
           it 're-renders the new method' do
             invalid_js_create
             template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 1
           end
         end
       end
@@ -127,9 +137,9 @@ describe Gaku::Admin::RolesController do
           end.to change(Gaku::Role, :count).by(-1)
         end
 
-        it 'assigns @count' do
+        it 'decrements @count' do
           gaku_js_delete :destroy, id: role
-          expect(assigns(:count)).to_not be_nil
+          expect(assigns(:count)).to eq 1
         end
       end
 
