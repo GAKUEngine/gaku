@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Gaku::ContactType do
 
+  describe 'relations' do
+    it { should have_many :contacts }
+  end
+
   describe 'validations' do
     it { should validate_presence_of :name }
   end
