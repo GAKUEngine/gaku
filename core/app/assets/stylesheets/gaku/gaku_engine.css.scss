@@ -89,16 +89,6 @@ hr {
 .btn-group + .btn-group {
   margin-left: 0px;
 }
-.navbar .brand {
-  padding: 8px 20px 0px;
-}
-
-.navbar .nav > li > a {
-  padding: 11px 10px 10px;
-}
-.navbar .btn, .navbar .btn-group {
-margin-top: 7px;
-}
 
 .table {
   margin-bottom: 0px;
@@ -142,10 +132,6 @@ form {
   margin-bottom:0px;
 }
 
-.nav {
-  margin-bottom: 0px;
-}
-
 .well {
   .well {
     background-color: #FFF;
@@ -158,6 +144,10 @@ form {
   &.well-white {
     background-color: #FFF;
   }
+}
+
+.navbar-brand {
+  padding: 12px 15px 0px 15px;
 }
 
 .divider-vertical {
