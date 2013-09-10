@@ -70,7 +70,7 @@ module Gaku::Grading::Calculations
 
     def calculate_rank_and_grade
       @grades = Hash.new { |hash,key| hash[key] = {} }
-      @scores = Array.new
+      @scores = []
 
       populate_student_scores
 
@@ -183,7 +183,7 @@ module Gaku::Grading::Calculations
               @scores.push [@student_total_scores[student.id][exam.id], student.id]
             end
           end
-        @scores.sort!().reverse!()
+        @scores.sort!.reverse!
       end
 
       def grade_calculate(grading_method)
@@ -254,7 +254,7 @@ module Gaku::Grading::Calculations
         rank_nums.each do |rnum|
           i = 0
           while i < rnum && @scores.length != 0
-            scoreMem = @scores.shift()
+            scoreMem = @scores.shift
             @ranks[exam.id][scoreMem[1]] = @rank_point
             rnum += 1 if @scores.length != 0 && scoreMem[0] == @scores[0][0]
             i += 1

@@ -37,7 +37,7 @@ module Gaku
     end
 
     def load_data
-      @grading_methods = GradingMethod.all.collect { |s| [s.name, s.id] }
+      @grading_methods = GradingMethod.all.map { |s| [s.name, s.id] }
     end
 
     def syllabus

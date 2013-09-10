@@ -11,7 +11,7 @@ describe 'Change Language' do
     sleep 0.1
     select '日本語', from: 'select_lang'
     click '#btn_config_save'
-    has_content? "Language is set to 日本語"
+    has_content? 'Language is set to 日本語'
 
     visit gaku.root_path
     click '#user_menu_dropdown'
@@ -19,7 +19,7 @@ describe 'Change Language' do
     sleep 0.1
     select 'English', from: 'select_lang'
     click '#btn_config_save'
-    has_content? "Language is set to English"
+    has_content? 'Language is set to English'
   end
 
 end

@@ -5,7 +5,7 @@
 //= require moment.min
 
 // require bootstrap
-//= require bootstrap_v3//js/bootstrap.min
+//= require bootstrap_v3/js/bootstrap.min
 //= require bootstrap-datepicker
 
 //= require underscore

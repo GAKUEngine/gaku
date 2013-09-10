@@ -28,7 +28,7 @@ module Gaku
 
       puts 'Generating dummy Rails application...'
       invoke Rails::Generators::AppGenerator,
-        [ File.expand_path(dummy_path, destination_root) ], opts
+             [ File.expand_path(dummy_path, destination_root) ], opts
     end
 
     def test_dummy_config
@@ -58,7 +58,7 @@ module Gaku
       end
     end
 
-    attr :lib_name
+    attr_reader :lib_name
 
     protected
     def dummy_path

@@ -10,7 +10,7 @@ module Gaku::Versioning
     private
 
     def set_human_changes
-      @human_changes = Hash.new
+      @human_changes = {}
       self.changeset.keys.each do |key|
         key0 = self.changeset[key][0]
         key1 = self.changeset[key][1]

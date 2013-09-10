@@ -57,7 +57,7 @@ module Gaku
     end
 
     def load_data
-      @courses = Course.includes(:syllabus).collect { |c| [c, c.id] }
+      @courses = Course.includes(:syllabus).map { |c| [c, c.id] }
     end
 
     def before_show

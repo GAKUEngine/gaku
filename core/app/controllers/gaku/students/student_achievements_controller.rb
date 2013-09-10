@@ -29,7 +29,7 @@
     private
 
     def load_data
-      @achievements = Achievement.all.collect { |s| [s.name, s.id] }
+      @achievements = Achievement.all.map { |s| [s.name, s.id] }
     end
 
     def student

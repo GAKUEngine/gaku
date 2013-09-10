@@ -49,12 +49,12 @@ module Gaku::Testing::ControllerHelpers
   end
 
   def ensure_not_found
-    expect(json_response).to eq({ "error" => "The resource you were looking for could not be found." })
+    expect(json_response).to eq({ 'error' => 'The resource you were looking for could not be found.' })
     expect(response.status).to eq 404
   end
 
   def ensure_unauthorized
-    expect(json_response).to eq({ "error" => "You need to sign in or sign up before continuing." })
+    expect(json_response).to eq({ 'error' => 'You need to sign in or sign up before continuing.' })
     expect(response.status).to eq 401
   end
 

@@ -29,7 +29,7 @@ module Gaku
       preset = @names_preset
 
       if options[:without_formating]
-        preset_without_format = String.new
+        preset_without_format = ''
         preset.gsub(/%(\w+)/) {|n|  preset_without_format << n + ' '}
         preset = preset_without_format.strip
       end
@@ -49,8 +49,8 @@ module Gaku
         when '%last' then proper_name(:surname, reading)
         end
       end
-      return result.gsub(/[^[[:word:]]\s]/, '').gsub(/\s+/, " ").strip if object.middle_name.blank?
-      result.gsub(/\s+/, " ").strip
+      return result.gsub(/[^[[:word:]]\s]/, '').gsub(/\s+/, ' ').strip if object.middle_name.blank?
+      result.gsub(/\s+/, ' ').strip
     end
 
     private

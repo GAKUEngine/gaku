@@ -1,13 +1,7 @@
 - content_for :title, translate("comname")
-.row
-  .col-md-12
-    - if user_signed_in?
-      .row
-        .col-md-12
-          = render partial: 'user_info'
-      .row
-        .col-md-12
-          = render partial: 'user_menu'
-    - else
-      | 下記のリンクからログインを行ってください。
-      #{link_to t("devise.sign_in"), new_user_session_path}
+- if user_signed_in?
+  = render partial: 'user_info'
+  = render partial: 'user_menu'
+- else
+  | 下記のリンクからログインを行ってください。
+  #{link_to t("devise.sign_in"), new_user_session_path}

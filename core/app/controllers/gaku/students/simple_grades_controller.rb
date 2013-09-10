@@ -39,7 +39,7 @@ module Gaku
     end
 
     def load_data
-      @schools = Gaku::School.all.collect { |s| [s.name, s.id] }
+      @schools = Gaku::School.all.map { |s| [s.name, s.id] }
     end
 
     def student

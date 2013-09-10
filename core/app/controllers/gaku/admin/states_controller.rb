@@ -32,7 +32,7 @@ module Gaku
       end
 
       def load_data
-        @countries = Country.all.collect { |c| [c, c.iso ]}
+        @countries = Country.all.map { |c| [c, c.iso ]}
       end
 
       def load_country_preset
