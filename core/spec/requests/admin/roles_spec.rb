@@ -3,43 +3,34 @@ require 'spec_helper'
 describe 'Admin Roles' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-role' }
 
   let(:role) { create(:role, name: 'teacher') }
 
-  before :all do
-    set_resource "admin-role"
-  end
-
   context 'new', js: true do
     before do
-      #admin
       visit gaku.admin_roles_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do
       expect do
         fill_in 'role_name', with: 'master admin'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::Role, :count).by 1
 
-      page.should have_content 'master admin'
-      within(count_div) { page.should have_content 'Roles list(2)' }
-      flash_created?
+      has_content? 'master admin'
+      count? 'Roles list(2)'
     end
 
     it 'validates' do
       fill_in 'role_name', with: ''
       click submit
 
-      page.should have_content "can't be blank"
+      has_content? "can't be blank"
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -57,40 +48,38 @@ describe 'Admin Roles' do
       it 'edits' do
         fill_in 'role_name', with: 'ninja'
         click submit
-
-        wait_until_invisible modal
-        page.should have_content 'ninja'
-        page.should_not have_content 'teacher'
         flash_updated?
+
+        expect(role.reload.name).to eq 'ninja'
+        has_content? 'ninja'
+        has_no_content? 'teacher'
       end
 
       it 'validates' do
         fill_in 'role_name', with: ''
         click submit
 
-        page.should have_content "can't be blank"
+        has_content? "can't be blank"
       end
 
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
 
     it 'deletes', js: true do
-      page.should have_content role.name
-      within(count_div) { page.should have_content 'Roles list(2)' }
+      has_content? role.name
+      within(count_div) { has_content? 'Roles list(2)' }
 
       tr_count = size_of table_rows
 
       expect do
         within('#admin-roles-index tbody tr:nth-child(2)') { click delete_link }
         accept_alert
+        flash_destroyed?
         wait_until { size_of(table_rows) == tr_count - 1 }
       end.to change(Gaku::Role, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Roles list(2)' }
-      page.should_not have_content role.name
-      flash_destroyed?
+      count? 'Roles list(2)'
+
+      has_content? role.name
     end
   end
 

@@ -3,6 +3,9 @@ module Gaku
     protect_from_forgery
     #check_authorization
 
+    self.responder = AppResponder
+    respond_to :html
+
     rescue_from CanCan::AccessDenied do |exception|
       redirect_to root_url, alert: exception.message
     end
@@ -12,7 +15,6 @@ module Gaku
 
     layout :resolve_layout
 
-    respond_to :html
 
     helper_method :preset
 

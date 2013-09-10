@@ -3,12 +3,9 @@ require 'spec_helper'
 describe 'Admin Commute Method Types' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-commute-method-type' }
 
   let(:commute_method_type) { create(:commute_method_type, name: 'metro') }
-
-  before :all do
-    set_resource "admin-commute-method-type"
-  end
 
   context 'new', js: true do
   	before do
@@ -17,23 +14,19 @@ describe 'Admin Commute Method Types' do
       wait_until_visible submit
     end
 
-    it { has_validations? }
-
     it 'creates and shows' do
       expect do
         fill_in 'commute_method_type_name', with: 'car'
         click submit
-        wait_until_invisible form
-      end.to change(Gaku::CommuteMethodType, :count).by 1
+        flash_created?
+      end.to change(Gaku::CommuteMethodType, :count).by(1)
 
-      page.should have_content 'car'
-      within(count_div) { page.should have_content 'Commute Method Types list(1)' }
-      flash_created?
+      has_content? 'car'
+      count? 'Commute Method Types list(1)'
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
+    it { has_validations? }
+
   end
 
   context 'existing' do
@@ -58,29 +51,25 @@ describe 'Admin Commute Method Types' do
     	  fill_in 'commute_method_type_name', with: 'car'
     	  click submit
 
-    	  wait_until_invisible modal
-    	  page.should have_content 'car'
-    	  page.should_not have_content 'metro'
-        flash_updated?
+    	  flash_updated?
+    	  has_content? 'car'
+    	  has_no_content? 'metro'
+        expect(commute_method_type.reload.name).to eq 'car'
     	end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
+
     it 'deletes', js: true do
-      page.should have_content commute_method_type.name
-      within(count_div) { page.should have_content 'Commute Method Types list(1)' }
+      has_content? commute_method_type.name
+      count? 'Commute Method Types list(1)'
 
       expect do
         ensure_delete_is_working
-      end.to change(Gaku::CommuteMethodType, :count).by -1
+      end.to change(Gaku::CommuteMethodType, :count).by(-1)
 
-      within(count_div) { page.should_not have_content 'Commute Method Types list(1)' }
-      page.should_not have_content commute_method_type.name
       flash_destroyed?
+      count? 'Commute Method Types list(1)'
+      has_content? commute_method_type.name
     end
 
   end
-
 end

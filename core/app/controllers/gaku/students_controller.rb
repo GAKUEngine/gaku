@@ -27,13 +27,12 @@ module Gaku
       @countries = Country.all
       @class_groups = ClassGroup.all
       @enrolled_students = params[:enrolled_students]
-      active_enrollment_statuses_codes = EnrollmentStatus.active.pluck(:code)
+
+      @search = Student.active.search(params[:q])
+      results = @search.result(distinct: true)
+      @students = results.order('created_at ASC').page(params[:page]).per(Preset.students_per_page)
 
       super do |format|
-        format.html do
-          @students = Student.where(enrollment_status_code: active_enrollment_statuses_codes).page(params[:page]).per(Preset.students_per_page)
-        end
-
         format.pdf do
           send_data render_to_string, filename: 'sido_yoroku.pdf',
                                       type: 'application/pdf',
@@ -100,12 +99,6 @@ module Gaku
     end
 
     protected
-
-    def collection
-      @search = Student.search(params[:q])
-      results = @search.result(distinct: true)
-      @students = results.page(params[:page]).per(Preset.students_per_page)
-    end
 
     def resource
       @student = Student.includes([contacts: :contact_type, addresses: :country])

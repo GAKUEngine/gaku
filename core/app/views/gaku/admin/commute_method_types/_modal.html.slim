@@ -3,4 +3,4 @@
   = modal_form_for [:admin, @commute_method_type] do |f|
     = modal_body do
       = f.text_field :name, label: t(:'commute_method_type.name')
-      = buttons_for @commute_method_type, nested_id: 'admin-commute-method-type'
+      = modal_buttons_for @commute_method_type, nested_id: 'admin-commute-method-type'

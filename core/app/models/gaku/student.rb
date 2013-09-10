@@ -71,6 +71,10 @@ module Gaku
       student_specialties.map &:name
     end
 
+    def self.active
+      where(enrollment_status_code: EnrollmentStatus.active.pluck(:code))
+    end
+
     def set_scholarship_status
       self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
     end

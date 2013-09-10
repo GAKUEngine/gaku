@@ -136,6 +136,10 @@ module Gaku::Testing::RequestHelpers
     wait_until { page.should have_content "can't be blank" }
   end
 
+  def count?(count)
+    within(count_div) { has_content? count }
+  end
+
   def enroll_one_student_via_button(caption)
     find(:css, "input#student-#{student1.id}").set(true)
     wait_until_visible '#students-checked-div'

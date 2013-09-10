@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Gaku::Admin::ContactTypesController do
+describe Gaku::Admin::RolesController do
 
-  let(:contact_type) { create(:contact_type) }
-  let(:invalid_contact_type) { create(:invalid_contact_type) }
+  let(:role) { create(:role) }
+  let(:invalid_role) { create(:invalid_role) }
 
   context 'as student' do
     before { as :student }
@@ -23,13 +23,13 @@ describe Gaku::Admin::ContactTypesController do
     context 'html' do
       describe 'GET #index' do
         before do
-          contact_type
+          role
           gaku_get :index
         end
 
         it { should respond_with 200 }
-        it('assigns @contact_types') { expect(assigns(:contact_types)).to eq [contact_type] }
-        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('assigns @roles') { expect(assigns(:roles)).to include(role) }
+        it('assigns @count') { expect(assigns(:count)).to eq 2 }
         it('renders :index template') { template? :index }
       end
 
@@ -41,20 +41,20 @@ describe Gaku::Admin::ContactTypesController do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
-        it('assigns @contact_type') { expect(assigns(:contact_type)).to be_a_new(Gaku::ContactType) }
+        it('assigns @role') { expect(assigns(:role)).to be_a_new(Gaku::Role) }
         it('renders the :new template') { template? :new }
       end
 
       describe 'POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, contact_type: attributes_for(:contact_type)
+            gaku_js_post :create, role: attributes_for(:role)
           end
 
-          it 'creates new contact_type' do
+          it 'creates new role' do
             expect do
               valid_js_create
-            end.to change(Gaku::ContactType, :count).by(1)
+            end.to change(Gaku::Role, :count).by(1)
           end
 
           it 'renders flash' do
@@ -64,19 +64,19 @@ describe Gaku::Admin::ContactTypesController do
 
           it 'increments @count' do
             valid_js_create
-            expect(assigns(:count)).to eq 1
+            expect(assigns(:count)).to eq 2
           end
         end
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, contact_type: attributes_for(:invalid_contact_type)
+            gaku_js_post :create, role: attributes_for(:invalid_role)
           end
 
-          it 'does not save the new contact_type' do
+          it 'does not save the new role' do
             expect do
               invalid_js_create
-            end.to_not change(Gaku::ContactType, :count)
+            end.to_not change(Gaku::Role, :count)
           end
 
           it 're-renders the new method' do
@@ -86,64 +86,64 @@ describe Gaku::Admin::ContactTypesController do
 
           it "doesn't increment @count" do
             invalid_js_create
-            expect(assigns(:count)).to eq 0
+            expect(assigns(:count)).to eq 1
           end
         end
       end
 
       describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: contact_type }
+        before { gaku_js_get :edit, id: role }
 
         it { should respond_with 200 }
-        it('assigns @contact_type') { expect(assigns(:contact_type)).to eq contact_type }
+        it('assigns @role') { expect(assigns(:role)).to eq role }
         it('renders the :edit template') { template? :edit }
       end
 
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: contact_type, contact_type: attributes_for(:contact_type, name: 'mobifon')
+            gaku_js_patch :update, id: role, role: attributes_for(:role, name: 'Super Admin')
           end
 
           it { should respond_with 200 }
-          it('assigns @contact_type') { expect(assigns(:contact_type)).to eq contact_type }
+          it('assigns @role') { expect(assigns(:role)).to eq role }
           it('sets flash') { flash_updated? }
-          it "changes contact_type's attributes" do
-            contact_type.reload
-            expect(contact_type.name).to eq 'mobifon'
+          it "changes role's attributes" do
+            role.reload
+            expect(role.name).to eq 'Super Admin'
           end
         end
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: contact_type, contact_type: attributes_for(:invalid_contact_type, name: '')
+            gaku_js_patch :update, id: role, role: attributes_for(:invalid_role, name: '')
           end
 
           it { should respond_with 200 }
-          it('assigns @contact_type') { expect(assigns(:contact_type)).to eq contact_type }
+          it('assigns @role') { expect(assigns(:role)).to eq role }
 
-          it "does not change contact_type's attributes" do
-            contact_type.reload
-            expect(contact_type.name).not_to eq ''
+          it "does not change role's attributes" do
+            role.reload
+            expect(role.name).not_to eq ''
           end
         end
       end
 
       describe 'XHR DELETE #destroy' do
-        it 'deletes the contact_type' do
-          contact_type
+        it 'deletes the role' do
+          role
           expect do
-            gaku_js_delete :destroy, id: contact_type
-          end.to change(Gaku::ContactType, :count).by(-1)
+            gaku_js_delete :destroy, id: role
+          end.to change(Gaku::Role, :count).by(-1)
         end
 
         it 'decrements @count' do
-          gaku_js_delete :destroy, id: contact_type
-          expect(assigns(:count)).to eq 0
+          gaku_js_delete :destroy, id: role
+          expect(assigns(:count)).to eq 1
         end
 
         it 'sets flash' do
-          gaku_js_delete :destroy, id: contact_type
+          gaku_js_delete :destroy, id: role
           flash_destroyed?
         end
       end

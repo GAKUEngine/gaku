@@ -3,4 +3,4 @@
   = modal_form_for [:admin, @contact_type] do |f|
     = modal_body do
       = f.text_field :name, label: t(:'contact_type.name')
-      = buttons_for @contact_type, nested_id: 'admin-contact-type'
+      = modal_buttons_for @contact_type, nested_id: 'admin-contact-type'
