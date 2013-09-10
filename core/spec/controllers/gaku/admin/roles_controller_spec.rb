@@ -141,6 +141,11 @@ describe Gaku::Admin::RolesController do
           gaku_js_delete :destroy, id: role
           expect(assigns(:count)).to eq 1
         end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: role
+          flash_destroyed?
+        end
       end
 
     end
