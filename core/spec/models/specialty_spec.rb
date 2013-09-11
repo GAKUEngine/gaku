@@ -14,4 +14,9 @@ describe Gaku::Specialty do
     it { should validate_presence_of :name }
   end
 
+  describe '#to_s' do
+    let(:specialty) { build(:specialty) }
+    specify { specialty.to_s.should eq specialty.name }
+  end
+
 end
