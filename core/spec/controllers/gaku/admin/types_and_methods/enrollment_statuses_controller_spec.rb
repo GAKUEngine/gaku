@@ -2,88 +2,152 @@ require 'spec_helper'
 
 describe Gaku::Admin::EnrollmentStatusesController do
 
-  before { as :admin }
-
   let(:enrollment_status) { create(:enrollment_status) }
+  let(:invalid_enrollment_status) { create(:invalid_enrollment_status) }
 
-  describe "GET #index" do
+  context 'as student' do
+    before { as :student }
 
-    before { gaku_js_get :index }
+    describe 'GET #index' do
+      before { gaku_get :index }
 
-    it { should respond_with(:success) }
-    it("assigns") { assigns(:enrollment_statuses).should eq [enrollment_status] }
-    it("renders") { response.should render_template :index }
-  end
-
-  describe 'GET #new' do
-    it "assigns @enrollment_status" do
-      gaku_js_get :new, name: "Enrolled"
-      assigns(:enrollment_status).should be_a_new(Gaku::EnrollmentStatus)
+      it { should respond_with 302 }
+      it('redirects') { redirect_to? gaku.root_path }
+      it('sets unauthorized flash') { flash_unauthorized? }
     end
   end
 
-  describe "POST #create" do
-    context "with valid attributes" do
-      it "saves the new enrollment status in the db" do
-        expect do
-          gaku_post :create, enrollment_status: attributes_for(:enrollment_status, code: "abc")
-        end.to change(Gaku::EnrollmentStatus, :count).by 1
+  context 'as admin' do
+    before { as :admin }
 
-        controller.should set_the_flash
+    context 'html' do
+      describe 'GET #index' do
+        before do
+          enrollment_status
+          gaku_get :index
+        end
+
+        it { should respond_with 200 }
+        it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to eq [enrollment_status] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
       end
+
     end
-    context "with invalid attributes" do
-      it "does not save the new contact type in the db" do
-        expect do
-          gaku_js_post :create, enrollment_status: attributes_for(:enrollment_status, code: "")
-        end.to_not change(Gaku::EnrollmentStatus, :count)
+
+    context 'js' do
+
+      describe 'XHR #new' do
+        before { gaku_js_get :new }
+
+        it { should respond_with 200 }
+        it('assigns @enrollment_status') { expect(assigns(:enrollment_status)).to be_a_new(Gaku::EnrollmentStatus) }
+        it('renders the :new template') { template? :new }
       end
-    end
-  end
 
-  describe 'GET #edit' do
-    before { gaku_js_get :edit, id: enrollment_status }
+      describe 'POST #create' do
+        context 'with valid attributes' do
+          let(:valid_js_create) do
+            gaku_js_post :create, enrollment_status: attributes_for(:enrollment_status)
+          end
 
-    it("locates enrollment status") { assigns(:enrollment_status).should eq(enrollment_status) }
-    it("renders") { response.should render_template :edit }
-  end
+          it 'creates new enrollment_status' do
+            expect do
+              valid_js_create
+            end.to change(Gaku::EnrollmentStatus, :count).by(1)
+          end
 
-  describe "PUT #update" do
-    it "locates the requested @enrollment_status" do
-      gaku_put :update, id: enrollment_status,
-                        enrollment_status: attributes_for(:enrollment_status)
+          it 'renders flash' do
+            valid_js_create
+            flash_created?
+          end
 
-      assigns(:enrollment_status).should eq(enrollment_status)
-    end
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 1
+          end
+        end
 
-    context "valid attributes" do
-      it "changes enrollment status attributes" do
-        gaku_js_put :update, id: enrollment_status,
-                             enrollment_status: attributes_for(:enrollment_status, code: "Edited code")
-        enrollment_status.reload
-        enrollment_status.code.should eq "Edited code"
+        context 'with invalid attributes' do
+          let(:invalid_js_create) do
+            gaku_js_post :create, enrollment_status: attributes_for(:invalid_enrollment_status)
+          end
+
+          it 'does not save the new enrollment_status' do
+            expect do
+              invalid_js_create
+            end.to_not change(Gaku::EnrollmentStatus, :count)
+          end
+
+          it 're-renders the new method' do
+            invalid_js_create
+            template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 0
+          end
+        end
       end
-    end
 
-    context "invalid attributes" do
-      it "does not change contact type's attributes" do
-        gaku_js_put :update, id: enrollment_status,
-                    enrollment_status: attributes_for(:enrollment_status, code: "")
-        enrollment_status.reload
-        enrollment_status.code.should_not eq ""
+      describe 'XHR #edit' do
+        before { gaku_js_get :edit, id: enrollment_status }
+
+        it { should respond_with 200 }
+        it('assigns @enrollment_status') { expect(assigns(:enrollment_status)).to eq enrollment_status }
+        it('renders the :edit template') { template? :edit }
       end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: enrollment_status, enrollment_status: attributes_for(:enrollment_status, code: 'new status')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @enrollment_status') { expect(assigns(:enrollment_status)).to eq enrollment_status }
+          it('sets flash') { flash_updated? }
+          it "changes enrollment_status's attributes" do
+            expect(enrollment_status.reload.code).to eq 'new status'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_js_patch :update, id: enrollment_status, enrollment_status: attributes_for(:invalid_enrollment_status, code: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @enrollment_status') { expect(assigns(:enrollment_status)).to eq enrollment_status }
+
+          it "does not change enrollment_status's attributes" do
+            enrollment_status.reload
+            expect(enrollment_status.code).not_to eq ''
+          end
+        end
+      end
+
+      describe 'XHR DELETE #destroy' do
+        it 'deletes the enrollment_status' do
+          enrollment_status
+          expect do
+            gaku_js_delete :destroy, id: enrollment_status
+          end.to change(Gaku::EnrollmentStatus, :count).by(-1)
+        end
+
+        it 'decrements @count' do
+          gaku_js_delete :destroy, id: enrollment_status
+          expect(assigns(:count)).to eq 0
+        end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: enrollment_status
+          flash_destroyed?
+        end
+      end
+
     end
+
   end
-
-  describe "DELETE #destroy" do
-    it "deletes the enrollment status" do
-      enrollment_status
-      expect do
-        gaku_delete :destroy, id: enrollment_status
-      end.to change(Gaku::EnrollmentStatus, :count).by -1
-
-      controller.should set_the_flash
-    end
-  end
-
 end
