@@ -21,4 +21,8 @@ FactoryGirl.define do
     immutable true
   end
 
+  factory :invalid_enrollment_status, class: Gaku::EnrollmentStatus do
+    code nil
+  end
+
 end
