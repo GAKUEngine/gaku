@@ -3,13 +3,12 @@ require 'spec_helper'
 describe 'Admin States' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-state' }
 
   let!(:country) { create(:country, name: 'Japan', iso: 'JP')}
   let(:state) { create(:state, name: 'Tokyo ', country: country) }
   let(:country2) { create(:country, name: 'Bulgaria', iso: 'BG')}
   let!(:country_table) { "#admin-#{country.iso.downcase}-states-index" }
-
-  before(:all) { set_resource 'admin-state' }
 
   context 'new', js:true do
     before do
@@ -21,9 +20,7 @@ describe 'Admin States' do
       select country.name, from: 'select-country'
       click '#admin-show-country-states-submit'
 
-      within country_table do
-        page.should have_content(state.name)
-      end
+      within(country_table) { has_content? state.name }
     end
 
     it 'create and show for selected country' do
@@ -31,12 +28,11 @@ describe 'Admin States' do
         fill_in 'state_name', with: 'Kanagawa'
         select country.name, from: 'state_country_iso'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::State, :count).by(1)
 
-      flash_created?
       within "#admin-#{country.iso.downcase}-states-index" do
-        page.should have_content('Kanagawa')
+        has_content? 'Kanagawa'
       end
     end
 
@@ -45,20 +41,13 @@ describe 'Admin States' do
         fill_in 'state_name', with: 'Plovdiv'
         select country2.name, from: 'state_country_iso'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::State, :count).by(1)
 
-      flash_created?
-      within country_table do
-        page.should_not have_content('Kanagawa')
-      end
+      within(country_table) { has_content? 'Kanagawa' }
     end
 
     it { has_validations? }
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing', js: true do
@@ -69,17 +58,11 @@ describe 'Admin States' do
       select country.name, from: 'select-country'
       click '#admin-show-country-states-submit'
 
-      within country_table do
-        page.should have_content(state.name)
-      end
+      within(country_table) { has_content? state.name }
     end
 
     context 'edits' do
-      before do
-        within country_table do
-          click edit_link
-        end
-      end
+      before { within(country_table) { click edit_link } }
 
       it 'has validations' do
         fill_in 'state_name', with: ''
@@ -90,17 +73,14 @@ describe 'Admin States' do
         fill_in 'state_name', with: 'Nagano'
         click submit
 
-        wait_until_invisible modal
+        flash_updated?
+
         within country_table do
-          page.should have_content 'Nagano'
-          page.should_not have_content 'Tokyo'
+          has_content? 'Nagano'
+          has_no_content?'Tokyo'
         end
 
-        flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
+        expect(state.reload.name).to eq 'Nagano'
       end
     end
 
@@ -113,9 +93,8 @@ describe 'Admin States' do
         wait_until { size_of("#{country_table} tr") == tr_count - 1 }
       end.to change(Gaku::State, :count).by(-1)
 
-      within country_table do
-        page.should_not have_content(state.name)
-      end
+      flash_destroyed?
+      within(country_table) { has_no_content? state.name }
     end
   end
 
@@ -125,9 +104,7 @@ describe 'Admin States' do
       Gaku::Preset.set 'address_country', 'JP'
       visit gaku.admin_states_path
 
-      within country_table do
-        page.should have_content state.name
-      end
+      within(country_table) { has_content? state.name }
     end
   end
 end
