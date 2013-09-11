@@ -1,3 +1,5 @@
+// for HTML tag ----------------
+
 $c_red: #e45353; /* Error red */
 
 html {
@@ -25,6 +27,17 @@ body {
     padding-top: 0;
   }
 }
+
+hr {
+  margin: 20px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+
+// for GAKUEngine ----------------
 
 .notice {
   border: 2px;
@@ -68,7 +81,9 @@ td.vm-tr {
   text-align: right;
 }
 
-//bootstrap fix ----------
+
+// bootstrap fix ----------------
+
 .btn-inverse a {
   color: white;
 }
@@ -76,9 +91,7 @@ td.vm-tr {
 .row-fluid a[class*='span']  {
   min-height:0px;
 }
-hr {
-  margin: 10px 0px;
-}
+
 .btn-toolbar {
   margin: 0px;
   height: 28px;
@@ -86,6 +99,7 @@ hr {
     margin-right: 15px;
   }
 }
+
 .btn-group + .btn-group {
   margin-left: 0px;
 }
@@ -156,7 +170,16 @@ form {
   border-left: 1px solid #F2F2F2;
 }
 
-//for fix -----
+.tab-content {
+  border: 1px solid #DDD;
+  padding: 15px;
+  border-top: none;
+  border-radius: 0px 0px 4px 4px;
+}
+
+
+// for fix ----------------
+
 .mt-xs { margin-top: 5px }
 .mt-s { margin-top: 10px }
 .mt-m { margin-top: 15px }
