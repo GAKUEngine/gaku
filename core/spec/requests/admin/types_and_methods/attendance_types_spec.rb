@@ -3,12 +3,10 @@ require 'spec_helper'
 describe 'Admin Attendance Types' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-attendance-type' }
 
   let(:attendance_type) { create(:attendance_type, name: 'metro') }
 
-  before :all do
-    set_resource "admin-attendance-type"
-  end
 
   context 'new', js: true do
   	before do
@@ -17,23 +15,22 @@ describe 'Admin Attendance Types' do
       wait_until_visible submit
     end
 
-    it { has_validations? }
-
     it 'creates and shows' do
       expect do
-        fill_in 'attendance_type_name', with: 'car'
+        fill_in 'attendance_type_name', with: 'new attendance type'
+        page.has_css? '#attendance_type_disable_credit'
+        page.has_css? '#attendance_type_counted_absent'
+        page.has_css? '#attendance_type_auto_credit'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::AttendanceType, :count).by 1
 
-      page.should have_content 'car'
-      within(count_div) { page.should have_content 'Attendance Types list(1)' }
-      flash_created?
+      has_content? 'new attendance type'
+      count? 'Attendance Types list(1)'
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
+    it { has_validations? }
+
   end
 
   context 'existing' do
@@ -58,28 +55,24 @@ describe 'Admin Attendance Types' do
     	  fill_in 'attendance_type_name', with: 'car'
     	  click submit
 
-    	  wait_until_invisible modal
-    	  page.should have_content 'car'
-    	  page.should_not have_content 'metro'
-        flash_updated?
+    	  flash_updated?
+    	  has_content? 'car'
+    	  has_no_content? 'metro'
+        expect(attendance_type.reload.name).to eq 'car'
     	end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
 
     it 'deletes', js: true do
-      page.should have_content attendance_type.name
-      within(count_div) { page.should have_content 'Attendance Types list(1)' }
+      has_content? attendance_type.name
+      count? 'Attendance Types list(1)'
 
       expect do
         ensure_delete_is_working
-      end.to change(Gaku::AttendanceType, :count).by -1
+      end.to change(Gaku::AttendanceType, :count).by(-1)
 
-      within(count_div) { page.should_not have_content 'Attendance Types list(1)' }
-      page.should_not have_content attendance_type.name
       flash_destroyed?
+      count? 'Attendance Types list(1)'
+      has_no_content? attendance_type.name
     end
 
   end

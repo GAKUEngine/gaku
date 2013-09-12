@@ -3,4 +3,4 @@
   = modal_form_for [:admin, @specialty] do |f|
     = modal_body do
       = render 'form_fields', f: f
-      = buttons_for @specialty, nested_id: 'admin-specialty' , label: t(:'specialty.save')
+      = modal_buttons_for @specialty, nested_id: 'admin-specialty', label: t(:'specialty.save')

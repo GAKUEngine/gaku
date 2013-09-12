@@ -3,12 +3,9 @@ require 'spec_helper'
 describe 'Admin Specialties' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-specialty' }
 
-  let(:specialty) { create(:specialty, name: 'mobile') }
-
-  before :all do
-    set_resource "admin-specialty"
-  end
+  let(:specialty) { create(:specialty, name: 'Clojure dev') }
 
   context 'new', js: true do
     before do
@@ -21,19 +18,14 @@ describe 'Admin Specialties' do
       expect do
         fill_in 'specialty_name', with: 'home phone'
         click submit
-        wait_until_invisible form
-      end.to change(Gaku::Specialty, :count).by 1
+        flash_created?
+      end.to change(Gaku::Specialty, :count).by(1)
 
-      page.should have_content 'home phone'
-      within(count_div) { page.should have_content 'Specialties list(1)' }
-      flash_created?
+      has_content? 'home phone'
+      count? 'Specialties list(1)'
     end
 
     it { has_validations? }
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -49,17 +41,13 @@ describe 'Admin Specialties' do
       end
 
       it 'edits' do
-        fill_in 'specialty_name', with: 'email'
+        fill_in 'specialty_name', with: 'Ruby dev'
         click submit
 
-        wait_until_invisible modal
-        page.should have_content 'email'
-        page.should_not have_content 'mobile'
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
+        has_content? 'Ruby dev'
+        has_no_content? 'Clojure dev'
+        expect(specialty.reload.name).to eq 'Ruby dev'
       end
 
       it 'has validations' do
@@ -69,17 +57,17 @@ describe 'Admin Specialties' do
     end
 
     it 'deletes', js: true do
-      page.should have_content specialty.name
-      within(count_div) { page.should have_content 'Specialties list(1)' }
+      has_content? specialty.name
+      count? 'Specialties list(1)'
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::Specialty, :count).by -1
 
-      within(count_div) { page.should_not have_content 'Specialties list(1)' }
-      page.should_not have_content specialty.name
       flash_destroyed?
+      count? 'Specialties list(1)'
+      has_no_content? specialty.name
     end
-  end
 
+  end
 end
