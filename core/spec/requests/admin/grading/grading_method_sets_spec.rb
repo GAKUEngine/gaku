@@ -3,14 +3,9 @@ require 'spec_helper'
 describe 'Admin Grading Method Sets' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-grading-method-set' }
 
-  let(:grading_method_set) { create(:grading_method_set, is_primary: true) }
-  let(:grading_method_set2) { create(:grading_method_set, name: 'Set 2') }
-
-
-  before :all do
-    set_resource 'admin-grading-method-set'
-  end
+  let(:grading_method_set) { create(:grading_method_set, name: 'Set 1', is_primary: true) }
 
   context 'new', js: true do
     before do
@@ -19,25 +14,21 @@ describe 'Admin Grading Method Sets' do
       wait_until_visible submit
     end
 
-    it { has_validations? }
-
     it 'creates and shows' do
       expect do
         fill_in 'grading_method_set_name', with: 'Bulgarian'
+        page.has_css? '#grading_method_set_display_deviation'
+        page.has_css? '#grading_method_set_display_rank'
+        page.has_css? '#grading_method_set_rank_order'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::GradingMethodSet, :count).by 1
 
-      page.should have_content 'Bulgarian'
-      within(count_div) do
-        page.should have_content 'Grading Method Sets list(1)'
-      end
-      flash_created?
+      has_content? 'Bulgarian'
+      count? 'Grading Method Sets list(1)'
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
+    it { has_validations? }
   end
 
   context 'existing' do
@@ -56,42 +47,34 @@ describe 'Admin Grading Method Sets' do
         fill_in 'grading_method_set_name', with: 'Japanese'
         click submit
 
-        wait_until_invisible modal
-        page.should have_content 'Japanese'
-        page.should_not have_content grading_method_set.name
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
+        has_content? 'Japanese'
+        has_no_content? 'Set 1'
+        expect(grading_method_set.reload.name).to eq 'Japanese'
       end
 
       it 'has validations' do
         fill_in 'grading_method_set_name', with: ''
         has_validations?
       end
-
     end
 
     it 'deletes', js: true do
-      page.should have_content grading_method_set.name
-      within(count_div) do
-        page.should have_content 'Grading Method Sets list(1)'
-      end
+      has_content? grading_method_set.name
+      count? 'Grading Method Sets list(1)'
 
       expect do
         ensure_delete_is_working
       end.to change(Gaku::GradingMethodSet, :count).by(-1)
 
-      within(count_div) do
-        page.should_not have_content 'Grading Method Sets list(1)'
-      end
-      page.should_not have_content grading_method_set.name
       flash_destroyed?
+      has_no_content? grading_method_set.name
     end
   end
 
   context 'primary' do
+    let(:grading_method_set2) { create(:grading_method_set, name: 'Set 2') }
+
     before do
       grading_method_set
       grading_method_set2
