@@ -4,6 +4,10 @@ FactoryGirl.define do
     name 'Method 1'
     method 'Method'
     description 'Grading method description'
+
+    factory :invalid_grading_method do
+      name nil
+    end
   end
 
 end
