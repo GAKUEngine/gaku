@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::GradingMethod do
 
-  describe 'associations' do
+  describe 'relations' do
   	it { should have_one :exam }
   	it { should have_one :exam_portion }
   	it { should have_one :assignment }
