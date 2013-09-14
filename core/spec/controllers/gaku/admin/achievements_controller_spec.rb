@@ -56,16 +56,17 @@ describe Gaku::Admin::AchievementsController do
             gaku_post :create, achievement: attributes_for(:invalid_achievement)
           end
 
-          xit 'does not save the new achievement' do
+          it 'redirects' do
+            invalid_create
+            should respond_with 302
+          end
+
+          it 'does not save the new achievement' do
             expect do
               invalid_create
             end.to_not change(Gaku::Achievement, :count)
           end
 
-          xit 're-renders the new method' do
-            invalid_create
-            template? :create
-          end
         end
       end
 
@@ -75,7 +76,7 @@ describe Gaku::Admin::AchievementsController do
             gaku_patch :update, id: achievement, achievement: attributes_for(:achievement, name: 'Ruby Champion')
           end
 
-          xit { should respond_with 200 }
+          it { should respond_with 302 }
           it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
           it('sets flash') { flash_updated? }
           it "changes achievement's attributes" do
@@ -89,12 +90,11 @@ describe Gaku::Admin::AchievementsController do
             gaku_patch :update, id: achievement, achievement: attributes_for(:invalid_achievement, description: 'Ruby Champion')
           end
 
-          xit { should respond_with 200 }
-          xit('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
+          it { should respond_with 302 }
+          it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
 
-          xit "does not change achievement's attributes" do
-            achievement.reload
-            expect(achievement.description).not_to eq 'Ruby Champion'
+          it "does not change achievement's attributes" do
+            expect(achievement.reload.description).not_to eq 'Ruby Champion'
           end
         end
 
@@ -111,11 +111,6 @@ describe Gaku::Admin::AchievementsController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'XHR POST #create' do
-
-
-      end
-
       describe 'XHR #edit' do
         before { gaku_js_get :edit, id: achievement }
 
@@ -123,8 +118,6 @@ describe Gaku::Admin::AchievementsController do
         it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
         it('renders the :edit template') { template? :edit }
       end
-
-
 
       describe 'XHR DELETE #destroy' do
         it 'deletes the achievement' do

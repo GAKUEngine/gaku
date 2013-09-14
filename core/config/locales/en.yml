@@ -613,15 +613,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: '%{resource} has been successfully added!'
-    created: '%{resource} has been successfully created!'
-    destroyed: '%{resource} has been successfully destroyed!'
-    enrolled: '%{resource} has been successfully enrolled to %{to}!'
+    added: '%{resource} was successfully added!'
+    created: '%{resource} was successfully created!'
+    destroyed: '%{resource} was successfully destroyed!'
+    enrolled: '%{resource} was successfully enrolled to %{to}!'
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: '%{resource} has been successfully recovered'
-    removed: '%{resource} has been successfully removed!'
-    updated: '%{resource} has been successfully updated!'
-    uploaded: '%{resource} has been successfully uploaded!'
+    recovered: '%{resource} was successfully recovered'
+    removed: '%{resource} was successfully removed!'
+    updated: '%{resource} was successfully updated!'
+    uploaded: '%{resource} was successfully uploaded!'
   num_enrolled: Number Enrolled
   options: Options
   order: Order
