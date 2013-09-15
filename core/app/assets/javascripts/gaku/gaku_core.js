@@ -18,8 +18,10 @@
 //= require jquery-minicolors
 
 //= require jquery_nested_form
-//= require gaku_forms
-//= require gaku_nested_forms
+//= require phantom_forms
+//= require phantom_nested_forms
+// require gaku_forms
+// require gaku_nested_forms
 
 //= require gaku/slide.js.erb
 
