@@ -10,10 +10,12 @@ describe 'Admin Presets Locales' do
 
   context '#default', js:true do
     it 'saves' do
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:locale])).to eq({})
       select 'en', from:'presets_language'
       click '#submit-preset'
 
       flash_updated?
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:locale])).to eq({language: 'en'})
     end
   end
 
