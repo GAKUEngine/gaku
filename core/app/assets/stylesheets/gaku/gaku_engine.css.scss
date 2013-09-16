@@ -101,19 +101,6 @@ td.vm-tr {
 
 // bootstrap fix ----------------
 
-.btn:hover {
-  text-decoration: none;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-
-.row-fluid a[class*='span']  {
-  min-height:0px;
-}
-
 .btn-toolbar {
   margin: 0px;
   height: 28px;
@@ -135,13 +122,6 @@ table.table{
     vertical-align: middle;
     text-align: center;
   }
-}
-
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: white;
-}
-.table tbody tr:hover td, .table tbody tr:hover th {
-  // background-color: #e2f3e7;
 }
 
 .icon-chair {
