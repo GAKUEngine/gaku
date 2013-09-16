@@ -99,7 +99,7 @@ td.vm-tr {
 }
 
 
-// bootstrap fix ----------------
+// for bootstrap ----------------
 
 .btn-toolbar {
   margin: 0px;
@@ -114,13 +114,15 @@ td.vm-tr {
 }
 
 .table {
-  margin-bottom: 0px;
-}
-
-table.table{
-  th {
-    vertical-align: middle;
-    text-align: center;
+  tr {
+    td {
+      .btn {
+        margin-right: 5px;
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
   }
 }
 
