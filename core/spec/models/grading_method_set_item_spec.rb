@@ -8,6 +8,12 @@ describe Gaku::GradingMethodSetItem do
   end
 
   describe 'validations' do
-    it { should validate_uniqueness_of(:grading_method_id).scoped_to(:grading_method_set_id).with_message('Grading Method already added to Grading Method Set') }
+    it do
+      should validate_uniqueness_of(:grading_method_id).scoped_to(:grading_method_set_id)
+                                                       .with_message('Grading Method already added to Grading Method Set')
+    end
+
+    it { should validate_presence_of :grading_method_id }
+    it { should validate_presence_of :grading_method_set_id }
   end
 end
