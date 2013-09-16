@@ -4,9 +4,9 @@ module Gaku
     #load_and_authorize_resource class: GradingMethodSet
 
     respond_to :js,   only: %i( new create edit update destroy make_primary )
-    respond_to :html, only: :index
+    respond_to :html, only: %i( index show )
 
-    before_action :set_grading_method_set, only: %i( edit update destroy make_primary )
+    before_action :set_grading_method_set, only: %i( edit update show destroy make_primary )
 
     def index
       @grading_method_sets = GradingMethodSet.all
@@ -27,6 +27,9 @@ module Gaku
     end
 
     def edit
+    end
+
+    def show
     end
 
     def update

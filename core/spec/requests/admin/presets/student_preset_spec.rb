@@ -18,9 +18,11 @@ describe 'Admin Presets Students' do
       select 'Female', from:'presets_students_gender'
       select "#{address.country}", from:'presets_address_country'
       fill_in 'presets_address_state', with: "#{address.state.name}"
+      fill_in 'presets_address_city', with: 'Varna'
       click '#submit-preset'
 
       flash_updated?
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:student])).to eq({:students_gender=>"false", :address_country=>"US", :address_state=>"Alabama", :address_city=>"Varna"})
     end
   end
 end

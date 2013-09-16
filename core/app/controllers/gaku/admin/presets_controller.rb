@@ -1,10 +1,6 @@
 module Gaku
   class Admin::PresetsController < Admin::BaseController
 
-    authorize_resource class: false
-
-    inherit_resources
-
     def names
       @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:names])
     end
@@ -28,6 +24,10 @@ module Gaku
 
     def output_formats
       @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:output_formats])
+    end
+
+    def defaults
+      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:default])
     end
 
     def update_presets

@@ -13,6 +13,10 @@ module Gaku
       self.update_attribute(:is_primary, true)
     end
 
+    def items
+      self.grading_method_set_items
+    end
+
     def ensure_first_is_primary
       self.is_primary = true if GradingMethodSet.all.empty?
     end
