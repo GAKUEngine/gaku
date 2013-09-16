@@ -52,6 +52,9 @@
   background-color: #e6e6e6;
   border-color: #e0e0e0;
 }
+.btn-default:hover {
+  border-color: #cdcdcd;
+}
 
 .btn-primary {
   background-color: hsl(208, 56%, 40%) !important;
