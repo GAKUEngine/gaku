@@ -53,3 +53,16 @@ guardian_user = Gaku::User.find_by_username('guardian')
 guardian_role = Gaku::Role.find_by_name('Guardian')
 guardian_user.roles << guardian_role
 guardian_user.save!
+
+
+users_count = 50
+
+unless Gaku::User.count > users_count
+  bar = RakeProgressbar.new(users_count)
+  users_count.times do
+    Gaku::User.create!(username: Faker::Name.first_name, email: Faker::Internet.email, password: '123456', password_confirmation: '123456')
+    bar.inc
+  end
+  bar.finished
+end
+
