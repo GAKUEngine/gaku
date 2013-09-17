@@ -28,7 +28,5 @@ ready = ->
         data:
           country_id: countryCode
 
-
-
 $(document).ready(ready)
 $(document).on('page:load', ready)
