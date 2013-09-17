@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :role, class: Gaku::Role do
-    name 'Role #1'
+    sequence(:name) { |n| "Role_#{n}" }
 
     factory :invalid_role do
       name nil
