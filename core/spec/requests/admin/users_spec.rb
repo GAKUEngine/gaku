@@ -3,19 +3,15 @@ require 'spec_helper'
 describe 'Admin Users' do
 
   before { as :admin }
+  before(:all) { set_resource 'admin-user' }
 
   let(:user) { create(:user) }
-  let(:principal_role) { create(:role, name: 'principal') }
-  let(:teacher_role) { create(:role, name: 'teacher') }
+  let!(:principal_role) { create(:role, name: 'principal') }
+  let!(:teacher_role)   { create(:role, name: 'teacher') }
 
-  before :all do
-    set_resource "admin-user"
-  end
 
   context 'new', js: true do
     before do
-      principal_role
-      teacher_role
       visit gaku.admin_users_path
       click new_link
       wait_until_visible submit
@@ -27,28 +23,21 @@ describe 'Admin Users' do
         fill_in 'user_email', with: "susumu@example.com"
         fill_in 'user_password', with: '123456'
         fill_in 'user_password_confirmation', with: '123456'
-        find(:css, "#user_role_ids_[value='1']").set(true)
+        find(:css, "#user_role_ids_[value='#{principal_role.id}']").set(true)
         click submit
-        wait_until_invisible form
-      end.to change(Gaku::User, :count).by 1
+        flash_created?
+      end.to change(Gaku::User, :count).by(1)
 
-      page.should have_content 'Susumu Yokota'
-      page.should have_content 'susumu@example.com'
-      within(count_div) { page.should have_content 'Users list(2)' }
-      flash_created?
+      has_content? 'Susumu Yokota'
+      has_content? 'susumu@example.com'
+      count? 'Users list(2)'
     end
 
     it 'validates' do
       fill_in 'user_username', with: ''
       click submit
-
-      page.should have_content "can't be blank"
+      has_validations?
     end
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
-
   end
 
   context 'existing' do
@@ -68,27 +57,22 @@ describe 'Admin Users' do
         fill_in 'user_username', with: 'ninja'
         click submit
 
-        wait_until_invisible modal
-        page.should have_content 'ninja'
-        page.should_not have_content old_username
         flash_updated?
+        has_content? 'ninja'
+        has_no_content? old_username
       end
 
       it 'validates' do
         fill_in 'user_username', with: ''
         click submit
 
-        page.should have_content "can't be blank"
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
+        has_validations?
       end
     end
 
     it 'deletes', js: true do
-      page.should have_content user.username
-      within(count_div) { page.should have_content 'Users list(2)' }
+      has_content? user.username
+      count? 'Users list(2)'
 
       tr_count = size_of table_rows
 
@@ -96,12 +80,12 @@ describe 'Admin Users' do
         within("#admin-users-index tbody tr#user-#{user.id}") { click delete_link }
         accept_alert
         wait_until { size_of(table_rows) == tr_count - 1 }
-      end.to change(Gaku::User, :count).by -1
+      end.to change(Gaku::User, :count).by(-1)
 
-      within(count_div) { page.should_not have_content 'Users list(2)' }
-      page.should_not have_content user.username
       flash_destroyed?
+      count? 'Users list(2)'
+      has_no_content? user.username
     end
-  end
 
+  end
 end

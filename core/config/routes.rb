@@ -250,7 +250,9 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
-    resources :users
+    resources :users do
+      get 'page/:page', action: :index, on: :collection
+    end
     resources :roles
     resources :templates do
       get :download, on: :member

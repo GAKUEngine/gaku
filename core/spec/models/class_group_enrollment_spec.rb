@@ -5,7 +5,7 @@ describe Gaku::ClassGroupEnrollment do
   describe 'associations' do
     it { should belong_to :class_group }
     it { should belong_to :student }
-    it { should have_many :roles }
+    it { should have_many :school_roles }
   end
 
   describe 'validations' do

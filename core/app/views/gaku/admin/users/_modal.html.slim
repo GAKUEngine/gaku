@@ -3,4 +3,4 @@
   = modal_form_for [:admin, @user] do |f|
     = modal_body do
       = render 'form_fields', f: f
-      = buttons_for @user, nested_id: 'admin-user'
+      = modal_buttons_for @user, nested_id: 'admin-user'

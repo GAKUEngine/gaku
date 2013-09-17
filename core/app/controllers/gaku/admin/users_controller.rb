@@ -1,50 +1,76 @@
 module Gaku
   class Admin::UsersController < Admin::BaseController
 
-    load_and_authorize_resource class: User
+    #load_and_authorize_resource class: User
 
-    respond_to :js, :html
+    respond_to :js,   only: %i( new create edit update destroy )
+    respond_to :html, only: :index
 
-    inherit_resources
+    before_action :set_user, only: %i( edit update destroy )
+    before_action :set_roles
 
-    after_filter  :save_user_roles, only: :create
-    before_filter :save_user_roles, only: :update
-    before_filter :count,           only: %i(create destroy index)
-    before_filter :clean_password,  only: :update
-    before_filter :load_data
+    def index
+      @users = User.all.page(params[:page]).per(Preset.default_per_page)
+      @count = User.count
+      respond_with @users
+    end
 
-    protected
+    def new
+      @user = User.new
+      respond_with @user
+    end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:user).permit(attributes)]
+    def create
+      @user = User.new(user_params)
+      @user.save
+      save_user_roles
+      @count = User.count
+      respond_with @user
+    end
+
+    def edit
+    end
+
+    def update
+      clean_password
+      save_user_roles
+      @user.update(user_params)
+      respond_with @user
+    end
+
+    def destroy
+      @user.destroy
+      @count = User.count
+      respond_with @user
     end
 
     private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(attributes)
+    end
 
     def attributes
       [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] } ]
     end
 
-    def load_data
+    def set_roles
       @roles = Role.all
     end
 
     def save_user_roles
-      @user = User.find(params[:id]) if params[:id]
-      @user.roles.destroy_all
-      params[:user][:role] ||= {}
-      Role.all.each do |role|
-        if params[:user][:role_ids].include?(role.id.to_s)
-          @user.roles << role
+      if params[:user][:role_ids]
+        @user.roles.destroy_all
+        Role.all.each do |role|
+          if params[:user][:role_ids].include?(role.id.to_s)
+            @user.roles << role
+          end
         end
       end
-
-      params[:user].delete(:role)
-    end
-
-    def count
-      @count = User.count
     end
 
     def clean_password
