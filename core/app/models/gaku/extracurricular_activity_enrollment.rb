@@ -2,7 +2,7 @@ module Gaku
   class ExtracurricularActivityEnrollment < ActiveRecord::Base
     belongs_to :extracurricular_activity
     belongs_to :student
-    has_many :roles
+    has_many :school_roles, as: :school_rolable
 
     validates :student_id,
               presence: true,

@@ -1,8 +1,7 @@
 module Gaku
-  class Role < ActiveRecord::Base
+  class SchoolRole < ActiveRecord::Base
 
-    has_many :user_roles
-    has_many :users, through: :user_roles
+    belongs_to :school_rolable, polymorphic: true
 
     validates :name, presence: true, uniqueness: true
 
