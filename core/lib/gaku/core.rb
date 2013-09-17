@@ -23,9 +23,14 @@ require 'thinreports-rails'
 require 'bootstrap-sass'
 require 'bootstrap-datepicker-rails'
 require 'nested_form'
-require 'gaku_helpers'
-require 'gaku_forms'
-require 'gaku_nested_forms'
+
+# require 'gaku_helpers'
+# require 'gaku_forms'
+# require 'gaku_nested_forms'
+require 'phantom_helpers'
+require 'phantom_forms'
+require 'phantom_nested_forms'
+
 require 'rack-mini-profiler'
 
 

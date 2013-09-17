@@ -81,16 +81,29 @@ td.vm-tr {
   text-align: right;
 }
 
-
-// bootstrap fix ----------------
-
-.btn-inverse a {
-  color: white;
+.table {
+  tr {
+    td {
+      .btn {
+        margin-right: 5px;
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
 }
 
-.row-fluid a[class*='span']  {
-  min-height:0px;
+.pull-right {
+  .btn {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
 }
+
+// for bootstrap ----------------
 
 .btn-toolbar {
   margin: 0px;
@@ -102,24 +115,6 @@ td.vm-tr {
 
 .btn-group + .btn-group {
   margin-left: 0px;
-}
-
-.table {
-  margin-bottom: 0px;
-}
-
-table.table{
-  th {
-    vertical-align: middle;
-    text-align: center;
-  }
-}
-
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: white;
-}
-.table tbody tr:hover td, .table tbody tr:hover th {
-  // background-color: #e2f3e7;
 }
 
 .icon-chair {
@@ -180,6 +175,7 @@ form {
 
 // for fix ----------------
 
+.mt-0 { margin-top: 0px }
 .mt-xs { margin-top: 5px }
 .mt-s { margin-top: 10px }
 .mt-m { margin-top: 15px }
@@ -190,9 +186,13 @@ form {
 .mr-m { margin-right: 15px }
 .mr-l { margin-right: 20px }
 
+.mb-xs { margin-bottom: 5px }
+.mb-s { margin-bottom: 10px }
+.mb-m { margin-bottom: 15px }
+.mb-l { margin-bottom: 20px }
+.mb-0 { margin-bottom: 0px }
+
 .ml-xs { margin-left: 5px }
 .ml-s { margin-left: 10px }
 .ml-m { margin-left: 15px }
 .ml-l { margin-left: 20px }
-
-.mb-0 { margin-bottom: 0px }

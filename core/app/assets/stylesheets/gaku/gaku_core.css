@@ -5,7 +5,7 @@
  *= require bootstrap-datepicker
 
  *= require bootstrap/3.0.0/bootstrap.min
- *= require bootstrap/3.0.0/bootstrap-theme.min
+ *= require bootstrap/3.0.0/bootstrap-theme-gaku_engine
 
  *= require jquery_validation_engine/validationEngine.jquery
  *= require jquery-minicolors

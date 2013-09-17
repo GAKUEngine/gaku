@@ -1,7 +1,11 @@
 FactoryGirl.define do
 
   factory :grading_method_set, class: Gaku::GradingMethodSet do
-    name 'Set 1'
+    sequence(:name) { |n| "Set #{n}" }
+
+    factory :invalid_grading_method_set do
+      name nil
+    end
   end
 
 end

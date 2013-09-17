@@ -9,12 +9,16 @@ module Gaku
     before_save :ensure_first_is_primary, on: :create
 
     def make_primary
-      GradingMethodSet.update_all( { is_primary: false }, ['id != ?', id] )
-      self.update_attribute :is_primary, true
+      GradingMethodSet.where(['id != ?', id]).update_all({ is_primary: false })
+      self.update_attribute(:is_primary, true)
+    end
+
+    def items
+      self.grading_method_set_items
     end
 
     def ensure_first_is_primary
-      self.is_primary = true if Gaku::GradingMethodSet.all.empty?
+      self.is_primary = true if GradingMethodSet.all.empty?
     end
 
     def update_items_positions(id, index)

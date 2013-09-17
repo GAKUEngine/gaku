@@ -1,5 +1,8 @@
 = content_for :title, t(:'student.list')
 
+= content_for :new_form do
+  .row#new-student.hide
+
 = content_for :index_header do
   .pull-left
     = count_div 'students-count' do
@@ -7,8 +10,5 @@
   .pull-right
     = ajax_link_to_new t(:'student.new'), new_student_path, id: "new-student-link"
     = link_to_import t(:'import'), importer_index_path, id: "import-students-link"
-
-= content_for :new_form do
-  #new-student.hide
 
 = render 'gaku/shared/student_chooser/chooser'

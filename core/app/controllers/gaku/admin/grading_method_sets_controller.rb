@@ -1,21 +1,49 @@
 module Gaku
   class Admin::GradingMethodSetsController < Admin::BaseController
 
-    load_and_authorize_resource class: GradingMethodSet
+    #load_and_authorize_resource class: GradingMethodSet
 
-    respond_to :js, :html
+    respond_to :js,   only: %i( new create edit update destroy make_primary )
+    respond_to :html, only: %i( index show )
 
-    inherit_resources
+    before_action :set_grading_method_set, only: %i( edit update show destroy make_primary )
 
-    before_filter :count, only: %i(index create destroy)
+    def index
+      @grading_method_sets = GradingMethodSet.all
+      @count = GradingMethodSet.count
+      respond_with @grading_method_sets
+    end
+
+    def new
+      @grading_method_set = GradingMethodSet.new
+      respond_with @grading_method_set
+    end
+
+    def create
+      @grading_method_set = GradingMethodSet.new(grading_method_set_params)
+      @grading_method_set.save
+      @count = GradingMethodSet.count
+      respond_with @grading_method_set
+    end
+
+    def edit
+    end
+
+    def show
+    end
+
+    def update
+      @grading_method_set.update(grading_method_set_params)
+      respond_with @grading_method_set
+    end
 
     def destroy
-      super do |format|
-        if @grading_method_set.is_primary?
-          GradingMethodSet.first.try(:make_primary)
-        end
-        format.js { render }
+      if @grading_method_set.is_primary?
+        GradingMethodSet.first.try(:make_primary)
       end
+      @grading_method_set.destroy
+      @count = GradingMethodSet.count
+      respond_with @grading_method_set
     end
 
     def make_primary
@@ -23,17 +51,14 @@ module Gaku
       respond_with @grading_method_set
     end
 
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:grading_method_set).permit(attributes)]
-    end
-
     private
 
-    def count
-      @count = GradingMethodSet.count
+    def set_grading_method_set
+      @grading_method_set = GradingMethodSet.find(params[:id])
+    end
+
+    def grading_method_set_params
+      params.require(:grading_method_set).permit(attributes)
     end
 
     def attributes
