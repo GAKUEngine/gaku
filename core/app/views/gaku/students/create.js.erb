@@ -1,6 +1,6 @@
-$('#new-student').slide();
+$('#new-student').fadeToggle();
 $('#new-student form')[0].reset();
-$('#new-student-link').show();
+$('#new-student-link').fadeToggle();
 
 $('#students-index tbody').append('<%= render_js_partial("student", {student: @student}) %>');
 $('.students-count').html("<%= print_count(@count+1, t_student_list) %>");

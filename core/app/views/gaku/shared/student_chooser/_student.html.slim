@@ -1,5 +1,5 @@
-.row
-  .col-md-12 style="margin-top:10px;"
+.row.mt-s
+  .col-md-12
     = form_tag( enroll_students_class_group_enrollments_path, method: "post", id: "enroll-to-class-form", remote: true) do
       .row
         .col-md-12
@@ -7,7 +7,7 @@
           = hidden_field_tag "source", "class_groups"
       .row
         = submit_tag t(:enroll_to_class), class: 'btn btn-primary'
-.row
+.row.mt-s
   .col-md-12 style="margin-top:10px;"
     = form_tag( enroll_students_course_enrollments_path, method: "post", id: "enroll-to-course-form", remote: true) do
       .row
