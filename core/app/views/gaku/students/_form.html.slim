@@ -1,4 +1,4 @@
-= remote_form_for(@student, {}, t('student.new')) do |f|
+= remote_form_panel_for(@student, t('student.new')) do |f|
   = render partial: 'form_fields', locals: { f: f }
-  .panel-footer
-    = buttons_for @student
+  hr.mt-0.mb-m
+  = buttons_for @student
