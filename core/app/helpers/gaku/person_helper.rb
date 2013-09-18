@@ -16,8 +16,8 @@ module Gaku
     def name_and_ruby_for(person)
       @names_preset ||= Gaku::Preset.get(:names)
       name_set = [
-        {word: person.surname, read: person.surname_reading},
-        {word: person.name, read: person.name_reading}
+        {word: person.surname,  reading: person.surname_reading},
+        {word: person.name,     reading: person.name_reading}
       ]
 
       name_set.map do |name|
@@ -26,11 +26,11 @@ module Gaku
             content_tag(:rb) do
               name[:word]
             end,
-            content_tag(:rp, "("),
+            content_tag(:rp, " ( "),
             content_tag(:rt) do
-              name[:read]
+              name[:reading]
             end,
-            content_tag(:rp, "("),
+            content_tag(:rp, " )"),
           ].join.html_safe
         end
       end.join.html_safe
