@@ -14,7 +14,6 @@ module Gaku
     end
 
     def name_and_ruby_for(person)
-      @names_preset ||= Gaku::Preset.get(:names)
       name_set = [
         {word: person.surname,  reading: person.surname_reading},
         {word: person.name,     reading: person.name_reading}
@@ -34,7 +33,6 @@ module Gaku
           ].join.html_safe
         end
       end.join.html_safe
-
     end
 
     def big_person_caption_for(person)
