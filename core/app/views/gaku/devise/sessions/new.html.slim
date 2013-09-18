@@ -17,8 +17,8 @@ div style="width:320px;margin:0 auto;"
                 = f.check_box :remember_me, style: 'margin-top:8px'
                 = f.label :remember_me, "&nbsp;".html_safe + t("devise.sessions.remember_me")
             hr.mt-0.mb-m
-              .form-group.mb-0
-                = f.submit t("devise.sessions.sign_in"), id: 'sign_in', class: 'col-md-12 btn btn-primary'
+            .form-group.mb-0
+              = f.submit t("devise.sessions.sign_in"), id: 'sign_in', class: 'col-md-12 btn btn-warning'
         ul.list-group
           li.list-group-item
             = render "devise/shared/links"
