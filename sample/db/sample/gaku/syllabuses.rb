@@ -123,6 +123,8 @@ syllabuses = [
 
 ]
 
+say "Creating #{syllabuses.size} syllabuses ...".yellow
+
 syllabuses.each do |syllabus|
 	Gaku::Syllabus.where(syllabus).first_or_create!
 end

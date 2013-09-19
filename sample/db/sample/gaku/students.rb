@@ -1,80 +1,22 @@
 # encoding: utf-8
-require 'ffaker'
-require 'rake-progressbar'
+require 'shared_sample_data'
 
-enrollment_status = Gaku::EnrollmentStatus.where(code: 'admitted').first.try(:code)
-country = Gaku::Country.where(name: '日本', iso3: 'JPN', iso: 'JP', iso_name: 'JAPAN', numcode: '392').first_or_create!
-email = Gaku::ContactType.where(name: 'Email').first_or_create!
-home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
-mobile_phone = Gaku::ContactType.where(name: 'Mobile Phone').first_or_create!
-
-
-#student John Doe
-student = Gaku::Student.where(name: 'John', surname: 'Doe', birth_date: Date.new(1983,10,5), enrollment_status_code: enrollment_status).first_or_create!
-
-student_address = student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Home address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
-student.contacts.where(data: 'john@example.com', contact_type_id: email.id).first_or_create!
-student.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: home_phone.id).first_or_create!
-student.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: mobile_phone.id, is_primary: true).first_or_create!
-note = Gaku::Note.where(title: 'Excellent', content: 'Excellent student').first_or_create!
-student.notes << note
-
-#guardian
-guardian = Gaku::Guardian.where(name: Faker::Name.first_name, surname: Faker::Name.last_name).first_or_create!
-guardian.contacts.where(data: "#{guardian.name}@example.com", contact_type_id: email.id).first_or_create!
-guardian.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: home_phone.id).first_or_create!
-guardian.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: mobile_phone.id, is_primary: true).first_or_create!
-guardian.addresses.where(address1: Faker::Address.street_address, city: 'Nagoya', country_id: country.id).first_or_create!
-
-
-student.guardians << guardian
-
+say "Creating predefined students ...".yellow
 students = [
-  { :name => 'Anonime', :surname => 'Anonimized', birth_date: Date.new(1982,1,1), :enrollment_status_code => enrollment_status },
-  { :name => 'Amon', :surname => 'Tobin', birth_date: Date.new(1983,1,1), :enrollment_status_code => enrollment_status },
-  { :name => '零', :surname => '影月', :enrollment_status_code => enrollment_status },
-  { :name => 'サニー', :surname => 'スノー', :enrollment_status_code => enrollment_status }
+  { :name => 'Anonime', :surname => 'Anonimized', birth_date: Date.new(1982,1,1), :enrollment_status_code => @enrollment_status },
+  { :name => 'Amon', :surname => 'Tobin', birth_date: Date.new(1983,1,1), :enrollment_status_code => @enrollment_status },
+  { :name => '零', :surname => '影月', :enrollment_status_code => @enrollment_status },
+  { :name => 'サニー', :surname => 'スノー', :enrollment_status_code => @enrollment_status }
 ]
 
+create_student_with_full_info(@john_doe)
 students.each do |student|
-  Gaku::Student.where(student).first_or_create!
+  create_student_with_full_info(student)
 end
 
 
-students_count = 1000
+say "Creating #{@count[:students]} students ...".yellow
 
-
-unless Gaku::Student.count > students_count
-  bar = RakeProgressbar.new(students_count)
-
-  gender = students_count.even? ? 1 : 0
-  ActiveRecord::Base.transaction do
-    students_count.times do |index|
-      student = Gaku::Student.create!(
-                                        name: Faker::Name.first_name,
-                                        middle_name: Faker::Name.first_name,
-                                        surname: Faker::Name.last_name,
-                                        gender: gender,
-                                        birth_date: Date.today-rand(1000),
-                                        enrollment_status_code: enrollment_status
-                                      )
-
-      if index < 50
-        student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Home address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
-        student.addresses.where(address1: Faker::Address.street_address, address2: Faker::Address.street_address, title: 'Alternative address', zipcode: '9000', city: 'Nagoya', country: country).first_or_create!
-
-        student.contacts.where(data: Faker::Internet.email, contact_type_id: email.id).first_or_create!
-        student.contacts.where(data: Faker::PhoneNumber.phone_number, contact_type_id: home_phone.id).first_or_create!
-
-        note = Gaku::Note.where(title: Faker::Lorem.word, content: Faker::Lorem.sentence).first_or_create!
-        student.notes << note
-
-        guardian = Gaku::Guardian.where(name: Faker::Name.first_name, surname: Faker::Name.last_name).first_or_create!
-        student.guardians << guardian
-      end
-      bar.inc
-    end
-  end
-
-  bar.finished
+batch_create(@count[:students]) do
+  create_student_with_full_info
 end

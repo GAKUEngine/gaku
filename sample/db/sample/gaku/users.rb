@@ -42,27 +42,18 @@ end
 admin_user = Gaku::User.find_by_username('admin')
 admin_role = Gaku::Role.find_by_name('Admin')
 admin_user.roles << admin_role
-admin_user.save!
 
 student_user = Gaku::User.find_by_username('student')
 student_role = Gaku::Role.find_by_name('Student')
 student_user.roles << student_role
-student_user.save!
 
 guardian_user = Gaku::User.find_by_username('guardian')
 guardian_role = Gaku::Role.find_by_name('Guardian')
 guardian_user.roles << guardian_role
-guardian_user.save!
 
+say "Creating #{@count[:users]} users...".yellow
 
-users_count = 50
-
-unless Gaku::User.count > users_count
-  bar = RakeProgressbar.new(users_count)
-  users_count.times do
-    Gaku::User.create!(username: Faker::Name.first_name, email: Faker::Internet.email, password: '123456', password_confirmation: '123456')
-    bar.inc
-  end
-  bar.finished
+batch_create(@count[:teachers]) do
+  Gaku::User.where(username: Faker::Name.first_name, email: Faker::Internet.email).first_or_create( password: '123456', password_confirmation: '123456')
 end
 
