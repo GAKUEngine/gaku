@@ -6,6 +6,7 @@ class CreateGakuExams < ActiveRecord::Migration
       t.float    :weight
       t.boolean  :use_weighting, default: false
       t.boolean  :is_standalone, default: false
+      t.boolean  :is_deleted, default: false
       t.boolean  :has_entry_numbers, default: false
 
       t.references :grading_method
