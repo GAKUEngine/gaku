@@ -14,22 +14,25 @@ module Gaku
     end
 
     def name_and_ruby_for(person)
-      name_set = [
+      name_elements = [
         {word: person.surname,  reading: person.surname_reading},
         {word: person.name,     reading: person.name_reading}
       ]
 
-      name_set.map do |name|
+      name_elements.map do |element|
         content_tag :ruby do
           [
             content_tag(:rb) do
-              name[:word]
+              element[:word]
             end,
-            content_tag(:rp, " ( "),
+            content_tag(:rp, "( "),
             content_tag(:rt) do
-              name[:reading]
+              element[:reading]
             end,
             content_tag(:rp, " )"),
+            unless name_elements.last == element
+              "&nbsp;"
+            end
           ].join.html_safe
         end
       end.join.html_safe

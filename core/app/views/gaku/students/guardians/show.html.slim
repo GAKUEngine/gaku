@@ -1,7 +1,7 @@
 = well_div do
   .col-md-9#guardian-table
     = show_table do
-      = big_person_caption_for(@guardian)
+      = name_and_ruby_for(@guardian)
       tbody
         = render 'show_table', guardian: @guardian
   .col-md-3.well

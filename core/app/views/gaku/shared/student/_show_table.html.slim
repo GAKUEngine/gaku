@@ -7,47 +7,47 @@
 table.table.table-bordered.th-center
   tbody
     tr
-      th rowspan="2" width="15%"
+      th.active rowspan="2" width="15%"
         = t('full_name')
       th rowspan=2
         h2
           = name_and_ruby_for(student)
           /= big_person_caption_for(student)
-      th width="10%"
+      th.active width="10%"
         = t('gender.label')
       td width="15%"
-      th rowspan="6" width="222px"
+      th.active rowspan="6" width="222px"
         = render 'gaku/shared/picture', resource: student
     tr
-      th = ('birth')
+      th.active = ('birth')
       td
     tr
-      th = t('class')
+      th.active = t('class')
       td colspan="1"
         = student.class_group
-      th = t(:'admitted')
+      th.active = t(:'admitted')
       td = student.admitted
     tr
-      th = t(:'address.primary')
+      th.active = t(:'address.primary')
       td#address_widget colspan="3" = student.primary_address
     tr
-      th = t(:'contact.primary')
+      th.active = t(:'contact.primary')
       td#contact_widget colspan="3" = student.primary_contact
     tr
-      th = t(:'achievement.plural')
+      th.active = t(:'achievement.plural')
       td colspan="3" = student.achievements_list
     / tr
-    /   th = t(:'enrollment_status.singular')
+    /   th.active = t(:'enrollment_status.singular')
     /   td = student.enrollment_status
     / tr
-    /   th = t(:'scholarship_status')
+    /   th.active = t(:'scholarship_status')
     /   td = student.scholarship_status
     / tr
-    /   th = t(:'commute_method.singular')
+    /   th.active = t(:'commute_method.singular')
     /   td = student.commute_method_type
     / tr
-    /   th = t(:'specialty.plural')
+    /   th.active = t(:'specialty.plural')
     /   td = student.specialties_list
     / tr
-    /   th = t(:'simple_grade.plural')
+    /   th.active = t(:'simple_grade.plural')
     /   td = student.simple_grades_list
