@@ -92,6 +92,12 @@ td.vm-tr {
       }
     }
   }
+  &.th-center {
+    th {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
 }
 
 .pull-right {

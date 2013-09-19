@@ -1,11 +1,7 @@
 /= render partial: 'gaku/shared/student/student_header'
 
-= panel_div do
-  .col-md-9.student-index
-    = render 'gaku/shared/student/show_table', student: @student
-
-  .col-md-3
-    = render 'gaku/shared/picture', resource: @student
+.panel.panel-default
+  = render 'gaku/shared/student/show_table', student: @student
 
 = render partial: 'gaku/shared/student/tabs'
 
