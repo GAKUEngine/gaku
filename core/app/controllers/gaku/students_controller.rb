@@ -1,25 +1,27 @@
 module Gaku
   class StudentsController < GakuController
 
-    load_and_authorize_resource class: Gaku::Student,
-                                except: [:recovery, :destroy]
+    # load_and_authorize_resource class: Gaku::Student,
+    #                             except: [:recovery, :destroy]
 
     helper_method :sort_column, :sort_direction
 
     #decorates_assigned :student
 
     inherit_resources
+
     respond_to :js,   only: %i( new create edit update index destroy recovery )
-    respond_to :html, only: %i( index edit show )
+    respond_to :html, only: %i( index edit show show_deleted, soft_delete )
     respond_to :pdf,  only: %i( index show )
 
     before_filter :load_data,         only: %i( new edit )
     before_filter :select_vars,       only: [:index,:new, :edit]
-    before_filter :notable,           only: [:show, :edit]
+    before_filter :notable,           only: [:show, :show_deleted, :edit]
     before_filter :count,             only: [:create, :destroy, :index]
     before_filter :selected_students, only: [:create,:index]
-    before_filter :unscoped_student,  only: [:show, :destroy, :recovery]
+    before_action :set_unscoped_student,  only: %i( show_deleted destroy recovery )
     after_filter  :make_enrolled,     only: [:create]
+    before_action :set_student,       only: %i( edit update soft_delete )
 
 
     def index
@@ -51,12 +53,19 @@ module Gaku
       end
     end
 
+
+    def show_deleted
+      respond_with(@user) do |format|
+        format.html { render :show }
+      end
+    end
+
     def destroy
       respond_with @student if @student.destroy
     end
 
     def recovery
-      @student.update_attribute(:is_deleted, false)
+      @student.recover
       flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @student
     end
@@ -68,7 +77,6 @@ module Gaku
     end
 
     def update
-      @student = get_student
       super do |format|
         if params[:student][:picture]
           format.html do
@@ -124,10 +132,6 @@ module Gaku
       t(:'student.singular')
     end
 
-    def unscoped_student
-      @student = Student.unscoped.find(params[:id])
-    end
-
     def select_vars
       @class_group_id ||= params[:class_group_id]
     end
@@ -156,9 +160,14 @@ module Gaku
       @notable_resource = get_resource_name @notable
     end
 
-    def get_student
-      Student.find(params[:id])
+    def set_student
+      @student = Student.find(params[:id])
     end
+
+    def set_unscoped_student
+      @student = Student.unscoped.find(params[:id]).decorate
+    end
+
 
     def count
       @count = Student.count
