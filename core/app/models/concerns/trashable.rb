@@ -9,6 +9,11 @@ module Trashable
       self.is_deleted = true
       save
     end
+
+    def recover
+      self.is_deleted = false
+      save
+    end
   end
 
 end
