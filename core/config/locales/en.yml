@@ -437,6 +437,7 @@ en:
         notice: '%{resource_name} was successfully updated!'
   full_name: Full Name
   full_name_reading: Full Name Reading
+  resource: Resource
   gender:
     choose: Choose Gender
     female: Female
@@ -500,6 +501,7 @@ en:
     save: Save Guardian
     singular: Guardian
     surname: Guardian Surname
+    addresses: Guardian Addresses
   hello: Hello world
   helpers:
     links:
@@ -532,7 +534,7 @@ en:
         disposals: Disposals
         exam: Exam Disposals
         student: Student Disposals
-        student_address: Student Addresses Disposals
+        address: Addresses Disposals
       grading:
         grading: Grading
         grading_methods: Grading Methods
@@ -829,6 +831,8 @@ en:
     save: Save Student
     show: Show Students
     singular: Student
+    addresses: Student Addresses
+    contacts: Student Contacts
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index
@@ -880,6 +884,8 @@ en:
     save: Save Teacher
     show: Show Teacher
     singular: Instructor
+    addresses: Teacher Addresses
+    contacts: Teacher Contacts
   template:
     add: Add Template
     choose: Choose template

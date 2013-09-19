@@ -1,7 +1,7 @@
 module Gaku
   class ExamsController < GakuController
 
-    load_and_authorize_resource class: Gaku::Exam
+    #load_and_authorize_resource class: Gaku::Exam
 
     inherit_resources
     actions :index, :show, :new, :create, :update, :edit, :destroy
@@ -13,7 +13,20 @@ module Gaku
     before_filter :before_show, only: :show
     before_filter :before_new,  only: :new
     before_filter :count,       only: [:create, :destroy, :index]
+    before_filter :set_exam,    only: %i( show edit update soft_delete )
+    before_action :set_unscoped_exam,  only: %i( destroy recovery )
 
+    def recovery
+      @exam.recover
+      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
+      respond_with @exam
+    end
+
+    def soft_delete
+      @exam.soft_delete
+      redirect_to exams_path,
+                  notice: t(:'notice.destroyed', resource: t_resource)
+    end
 
     def export
       @course = Course.find(params[:course_id])
@@ -86,6 +99,10 @@ module Gaku
 
     private
 
+    def t_resource
+      t(:'exam.singular')
+    end
+
     def exam_attr
       [:name, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
     end
@@ -95,13 +112,16 @@ module Gaku
       @master_portion = @exam.exam_portions.new
     end
 
-    def exam
+    def set_exam
       @exam = Exam.find(params[:id])
     end
 
+    def set_unscoped_exam
+      @exam = Exam.unscoped.find(params[:id])
+    end
+
     def before_show
-      exam
-      @notable = @exam
+      @notable = set_exam
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
     end
 

@@ -8,17 +8,24 @@ teachers = [
   { name: 'Rei', surname: 'Kagetsuki'}
 ]
 
+say "Creating predefined teachers...".yellow
+
 teachers.each do |teacher|
   Gaku::Teacher.where(teacher).first_or_create!
 end
 
-teachers_count = 50
 
-unless Gaku::Teacher.count > teachers_count
-  bar = RakeProgressbar.new(teachers_count)
-  teachers_count.times do
-    Gaku::Teacher.create!(name: Faker::Name.first_name, surname: Faker::Name.last_name)
-    bar.inc
-  end
-  bar.finished
+say "Creating #{@count[:teachers]} teachers...".yellow
+
+batch_create(@count[:teachers]) do
+  teacher = Gaku::Teacher.where(random_person).first_or_create!
+
+  teacher.addresses.where(random_address).first_or_create!
+  teacher.addresses.where(random_address).first_or_create!
+
+  teacher.contacts.where(random_mobile_phone).first_or_create!
+  teacher.contacts.where(random_home_phone).first_or_create!
+  teacher.contacts.where(random_email).first_or_create!
+
+  teacher.notes.where(random_note).first_or_create!
 end

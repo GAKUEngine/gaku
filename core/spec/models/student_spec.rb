@@ -8,6 +8,7 @@ describe Gaku::Student do
     it_behaves_like 'notable'
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
+    it_behaves_like 'thrashable'
   end
 
   describe 'associations' do

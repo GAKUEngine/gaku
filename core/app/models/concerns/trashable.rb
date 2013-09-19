@@ -6,10 +6,12 @@ module Trashable
     scope :deleted, -> { where(is_deleted: true) }
 
     def soft_delete
-      self.is_deleted = true
-      save
+      update_attribute(:is_deleted, true)
+    end
+
+    def recover
+      update_attribute(:is_deleted, false)
     end
   end
 
 end
-

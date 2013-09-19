@@ -8,7 +8,7 @@
  *= require bootstrap/3.0.0/bootstrap-theme-gaku_engine
 
  *= require jquery_validation_engine/validationEngine.jquery
- *= require jquery-minicolors
+ *= require jquery.minicolors
  * require jquery.dataTables
  *= require gaku/exams
 

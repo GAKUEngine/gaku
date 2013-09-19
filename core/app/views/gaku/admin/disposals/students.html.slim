@@ -1,3 +1,5 @@
+= render 'tabs'
+
 = well_div do
   = table_for 'disposal-student-index' do
     thead
@@ -7,7 +9,8 @@
         = th t(:'surname_reading')
         = th t(:'name_reading')
         = th t(:'birth_date')
-        = th t(:'address.primary')
         = th_actions 3
     tbody
-      =render partial: 'student', collection: @students, as: :student
+      = render partial: 'student', collection: @students, as: :student
+
+  = paginate @students

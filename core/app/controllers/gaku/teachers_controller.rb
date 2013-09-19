@@ -1,19 +1,37 @@
 module Gaku
   class TeachersController < GakuController
 
-    load_and_authorize_resource :teacher, class: Gaku::Teacher
+    #load_and_authorize_resource :teacher, class: Gaku::Teacher
 
     inherit_resources
     respond_to :js, :html
 
-    before_filter :count,   only: [:index, :create, :destroy]
-    before_filter :notable, only: :show
-    before_filter :teacher, only: [:soft_delete, :update]
+    before_filter :count,                only: %i( index create destroy )
+    before_filter :notable,              only: %i( show show_deleted )
+    before_action :set_unscoped_teacher, only: %i( show_deleted destroy recovery )
+    before_action :set_teacher,          only: %i( edit update soft_delete )
+
+    def recovery
+      @teacher.recover
+      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
+      respond_with @teacher
+    end
 
     def soft_delete
-      @teacher.update_attribute(:is_deleted, true)
+      @teacher.soft_delete
       redirect_to teachers_path,
-                  notice: t(:'notice.destroyed', resource: t(:'teacher.singular'))
+                  notice: t(:'notice.destroyed', resource: t_resource)
+    end
+
+    def destroy
+      @teacher.destroy
+      respond_with @teacher
+    end
+
+    def show_deleted
+      respond_with(@teacher) do |format|
+        format.html { render :show }
+      end
     end
 
     def update
@@ -58,8 +76,16 @@ module Gaku
       @count = Teacher.count
     end
 
-    def teacher
-      @teacher = Teacher.find(params[:id])
+    def set_teacher
+      @teacher = Teacher.find(params[:id]).decorate
+    end
+
+    def set_unscoped_teacher
+      @teacher = Teacher.unscoped.find(params[:id]).decorate
+    end
+
+    def t_resource
+      t(:'teacher.singular')
     end
 
     def notable

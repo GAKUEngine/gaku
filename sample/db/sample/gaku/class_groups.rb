@@ -15,6 +15,8 @@ class_groups = [
   { name: 'Mrs.Kostova', grade: 7 }
 ]
 
+say "Creating #{class_groups.size} class groups ...".yellow
+
 class_groups.each do |class_group|
   Gaku::ClassGroup.where(class_group).first_or_create!
 end

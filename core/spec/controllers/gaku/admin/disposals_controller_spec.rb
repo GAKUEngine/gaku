@@ -4,40 +4,173 @@ describe Gaku::Admin::DisposalsController do
 
   before { as :admin }
 
+  describe 'GET #index' do
+    before { gaku_get :index }
+
+    it { should respond_with 200 }
+    it('renders :index template') { template? :index }
+  end
+
   describe 'GET #exams' do
-    it 'is successful' do
+    let(:deleted_exam) { create(:exam, is_deleted: true) }
+    let(:exam) { create(:exam, is_deleted: false) }
+
+    before do
+      exam
+      deleted_exam
       gaku_get :exams
-      response.should be_success
     end
 
-    it 'renders the :exams view' do
-      gaku_get :exams
-      response.should render_template :exams
-    end
+    it { should respond_with 200 }
+    it('assigns @exams') { expect(assigns(:exams)).to eq [deleted_exam] }
+    it('renders :exams template') { template? :exams }
   end
 
   describe 'GET #course_groups' do
+    let(:deleted_course_group) { create(:course_group, is_deleted: true) }
+    let(:course_group) { create(:course_group, is_deleted: false) }
 
-    it 'is successful' do
-    gaku_get :course_groups
-    response.should be_success
-  end
-
-  it 'renders the :course_groups view' do
-    gaku_get :course_groups
-    response.should render_template :course_groups
+    before do
+      course_group
+      deleted_course_group
+      gaku_get :course_groups
     end
+
+    it { should respond_with 200 }
+    it('assigns @course_groups') { expect(assigns(:course_groups)).to eq [deleted_course_group] }
+    it('renders :course_groups template') { template? :course_groups }
   end
 
   describe 'GET #attachments' do
-    it 'is successful' do
-    gaku_get :attachments
-    response.should be_success
+    let(:deleted_attachment) { create(:attachment, is_deleted: true) }
+    let(:attachment) { create(:attachment, is_deleted: false) }
+
+    before do
+      attachment
+      deleted_attachment
+      gaku_get :attachments
+    end
+
+    it { should respond_with 200 }
+    it('assigns @attachments') { expect(assigns(:attachments)).to eq [deleted_attachment] }
+    it('renders :attachments template') { template? :attachments }
   end
 
-  it 'renders the :attachments view' do
-    gaku_get :attachments
-    response.should render_template :attachments
+  describe 'GET #students' do
+    let(:deleted_student) { create(:student, is_deleted: true) }
+    let(:student) { create(:student, is_deleted: false) }
+
+    before do
+      student
+      deleted_student
+      gaku_get :students
+    end
+
+    it { should respond_with 200 }
+    it('assigns @students') { expect(assigns(:students)).to eq [deleted_student] }
+    it('renders :students template') { template? :students }
+  end
+
+  describe 'GET #teachers' do
+    let(:deleted_teacher) { create(:teacher, is_deleted: true) }
+    let(:teacher) { create(:teacher, is_deleted: false) }
+
+    before do
+      teacher
+      deleted_teacher
+      gaku_get :teachers
+    end
+
+    it { should respond_with 200 }
+    it('assigns @teachers') { expect(assigns(:teachers)).to eq [deleted_teacher] }
+    it('renders :teachers template') { template? :teachers }
+  end
+
+  describe 'GET #guardians' do
+    let(:deleted_guardian) { create(:guardian, is_deleted: true) }
+    let(:guardian) { create(:guardian, is_deleted: false) }
+
+    before do
+      guardian
+      deleted_guardian
+      gaku_get :guardians
+    end
+
+    it { should respond_with 200 }
+    it('assigns @guardians') { expect(assigns(:guardians)).to eq [deleted_guardian] }
+    it('renders :guardians template') { template? :guardians }
+  end
+
+  describe 'GET #addresses' do
+    context 'student_addresses' do
+      let(:student) { create(:student) }
+      let(:deleted_address) { create(:address, addressable: student, is_deleted: true) }
+      let(:address) { create(:address, addressable: student, is_deleted: false) }
+
+      before do
+        address
+        deleted_address
+        gaku_get :addresses
+      end
+
+      it { should respond_with 200 }
+      it('assigns @student_addresses') { expect(assigns(:student_addresses)).to eq [deleted_address] }
+      it('assigns @students_count') { expect(assigns(:students_count)).to eq 1 }
+      it('renders :addresses template') { template? :addresses }
+    end
+
+        context 'teacher_addresses' do
+      let(:teacher) { create(:teacher) }
+      let(:deleted_address) { create(:address, addressable: teacher, is_deleted: true) }
+      let(:address) { create(:address, addressable: teacher, is_deleted: false) }
+
+      before do
+        address
+        deleted_address
+        gaku_get :addresses
+      end
+
+      it { should respond_with 200 }
+      it('assigns @teacher_addresses') { expect(assigns(:teacher_addresses)).to eq [deleted_address] }
+      it('assigns @teachers_count') { expect(assigns(:teachers_count)).to eq 1 }
+      it('renders :addresses template') { template? :addresses }
+    end
+  end
+
+
+  describe 'GET #contacts' do
+    context 'student_contacts' do
+      let(:student) { create(:student) }
+      let(:deleted_contact) { create(:contact, contactable: student, is_deleted: true) }
+      let(:contact) { create(:contact, contactable: student, is_deleted: false) }
+
+      before do
+        contact
+        deleted_contact
+        gaku_get :contacts
+      end
+
+      it { should respond_with 200 }
+      it('assigns @student_contacts') { expect(assigns(:student_contacts)).to eq [deleted_contact] }
+      it('assigns @students_count') { expect(assigns(:students_count)).to eq 1 }
+      it('renders :contacts template') { template? :contacts }
+    end
+
+    context 'teacher_contacts' do
+      let(:teacher) { create(:teacher) }
+      let(:deleted_contact) { create(:contact, contactable: teacher, is_deleted: true) }
+      let(:contact) { create(:contact, contactable: teacher, is_deleted: false) }
+
+      before do
+        contact
+        deleted_contact
+        gaku_get :contacts
+      end
+
+      it { should respond_with 200 }
+      it('assigns @teacher_contacts') { expect(assigns(:teacher_contacts)).to eq [deleted_contact] }
+      it('assigns @teachers_count') { expect(assigns(:teachers_count)).to eq 1 }
+      it('renders :contacts template') { template? :contacts }
     end
   end
 

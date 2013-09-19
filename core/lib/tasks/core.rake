@@ -9,10 +9,10 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
     file = Pathname.new(args.file)
 
     if %w{.yml}.include? file.extname
-      puts "loading fixture: #{File.basename(args.file)}"
+      puts "#{File.basename(args.file)}".green
       ActiveRecord::Fixtures.create_fixtures(args.dir, file.to_s.sub(file.extname, ""))
     elsif file.exist?
-      puts "loading ruby: #{File.basename(file)}"
+      puts "#{File.basename(file)}".green
       require file
     end
   end

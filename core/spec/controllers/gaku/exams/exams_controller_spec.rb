@@ -24,6 +24,54 @@ describe Gaku::ExamsController do
     end
   end
 
+  describe 'GET #soft_delete' do
+    let(:get_soft_delete) { gaku_get :soft_delete, id: exam }
+
+    it 'redirects' do
+      get_soft_delete
+      should respond_with(302)
+    end
+
+    it 'assigns  @exam' do
+      get_soft_delete
+      expect(assigns(:exam)).to eq exam
+    end
+
+    it 'updates :is_deleted attribute' do
+      expect do
+        get_soft_delete
+        exam.reload
+      end.to change(exam, :is_deleted)
+    end
+  end
+
+  describe 'GET #recovery' do
+    let(:get_recovery) { gaku_js_get :recovery, id: exam }
+
+    it 'is successfull' do
+      get_recovery
+      should respond_with(200)
+    end
+
+    it 'assigns  @exam' do
+      get_recovery
+      expect(assigns(:exam)).to eq exam
+    end
+
+    it 'renders :recovery' do
+      get_recovery
+      should render_template :recovery
+   end
+
+    it 'updates :is_deleted attribute' do
+      exam.soft_delete
+      expect do
+        get_recovery
+        exam.reload
+      end.to change(exam, :is_deleted)
+    end
+  end
+
   describe 'GET #show' do
     it "assigns the requested exam to @exam" do
       gaku_js_get :show, id: exam

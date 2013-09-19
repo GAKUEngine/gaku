@@ -15,7 +15,7 @@
 //= require tablefix
 //= require combobox
 //= require jquery.dataTables
-//= require jquery-minicolors
+//= require jquery.minicolors
 
 //= require jquery_nested_form
 //= require phantom_forms

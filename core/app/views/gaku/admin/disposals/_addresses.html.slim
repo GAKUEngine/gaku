@@ -2,7 +2,7 @@
   = table_for 'admin-student-addresses-disposals-index' do
     thead
       tr
-        = th 'Student'
+        = th 'Person'
         = th t(:'address.title')
         = th t(:'address.country')
         = th t(:'address.zipcode')
@@ -10,6 +10,8 @@
         = th t(:'address.city')
         = th t(:'address.address1')
         = th t(:'address.address2')
-        = th_actions 3
+        = th_actions 2
     tbody
-      =render partial: 'address', collection: @addresses, as: :address
+      =render partial: 'address', collection: disposals, as: :address
+
+  = paginate disposals

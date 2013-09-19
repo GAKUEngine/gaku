@@ -1,0 +1,16 @@
+= render 'tabs'
+
+= well_div do
+  = table_for 'disposal-teacher-index' do
+    thead
+      tr
+        = th t(:'surname')
+        = th t(:'name')
+        = th t(:'surname_reading')
+        = th t(:'name_reading')
+        = th t(:'birth_date')
+        = th_actions 3
+    tbody
+      = render partial: 'teacher', collection: @teachers, as: :teacher
+
+  = paginate @teachers

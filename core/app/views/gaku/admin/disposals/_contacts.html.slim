@@ -1,0 +1,14 @@
+= well_div do
+  = table_for 'admin-student-contacts-disposals-index' do
+    thead
+      tr
+        = th 'Person'
+        = th t(:'contact.contact_type')
+        = th t(:'contact.data')
+        = th t(:'contact.details')
+        = th t(:'contact.emergency')
+        = th_actions 2
+    tbody
+      =render partial: 'contact', collection: disposals, as: :contact
+
+  = paginate disposals

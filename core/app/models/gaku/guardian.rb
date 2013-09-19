@@ -1,7 +1,7 @@
 module Gaku
   class Guardian < ActiveRecord::Base
 
-    include Person, Addresses, Contacts, Picture
+    include Person, Addresses, Contacts, Picture, Trashable
 
     belongs_to :user
     has_many :student_guardians, dependent: :destroy

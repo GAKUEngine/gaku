@@ -29,6 +29,10 @@ module Gaku
 
     before_update :weight_calculate
 
+    def to_s
+      name
+    end
+
     def correct_weight_with_error
       self.weight = weight_was
       custom_errors =  I18n.t(:'exam_portion.error')

@@ -108,12 +108,20 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :teachers do
-    get :soft_delete, on: :member
+    member do
+      get :soft_delete
+      get :recovery
+      get :show_deleted
+    end
 
     resources :notes
 
     resources :contacts do
-      post :make_primary, on: :member
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
     end
 
     resources :addresses do
@@ -132,6 +140,7 @@ Gaku::Core::Engine.routes.draw do
       put :enrollment_status
       get :recovery
       get :soft_delete
+      get :show_deleted
     end
 
     collection do
@@ -162,9 +171,18 @@ Gaku::Core::Engine.routes.draw do
 
 
     resources :guardians, controller: 'students/guardians' do
+      member do
+        get :soft_delete
+        get :recovery
+      end
+
       resources :contacts do
         post :create_modal, on: :collection
-        post :make_primary, on: :member
+        member do
+          post :make_primary
+          get :soft_delete
+          get :recovery
+        end
       end
 
       resources :addresses do
@@ -177,7 +195,11 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :contacts do
-      post :make_primary, on: :member
+      member do
+        post :make_primary
+        get :soft_delete
+        get :recovery
+      end
     end
 
     resources :addresses do
@@ -186,10 +208,6 @@ Gaku::Core::Engine.routes.draw do
         get :soft_delete
         get :recovery
       end
-    end
-
-    resources :contacts do
-      post :make_primary, on: :member
     end
 
     resources :notes
@@ -201,7 +219,11 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :exams do
-    put :create_exam_portion, on: :member
+    member do
+      put :create_exam_portion
+      delete :soft_delete
+      get :recovery
+    end
 
     resources :notes
     resources :exam_scores
@@ -298,10 +320,22 @@ Gaku::Core::Engine.routes.draw do
     resources :disposals do
       collection do
         get :students
+        get :teachers
+        get :guardians
         get :exams
         get :course_groups
         get :attachments
-        get :student_addresses
+        get :addresses
+        get :contacts
+
+        get 'students/page/:page', action: :students
+        get 'teachers/page/:page', action: :teachers
+        get 'guardians/page/:page', action: :guardians
+        get 'exams/page/:page', action: :exams
+        get 'course_groups/page/:page', action: :course_groups
+        get 'attachments/page/:page', action: :attachments
+        get 'addresses/page/:page', action: :addresses
+        get 'contacts/page/:page', action: :contacts
       end
     end
 

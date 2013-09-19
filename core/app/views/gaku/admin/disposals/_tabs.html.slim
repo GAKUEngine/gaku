@@ -1,0 +1,17 @@
+ul.nav.nav-tabs
+  li.active
+    = link_to(t(:'student.plural'), students_admin_disposals_path, id: 'students-tab-link')
+  li
+    = link_to(t(:'teacher.plural'), teachers_admin_disposals_path, id: 'teachers-tab-link')
+  li
+    = link_to(t(:'guardian.plural'), guardians_admin_disposals_path, id: 'guardians-tab-link')
+  li
+    = link_to(t(:'address.plural'), addresses_admin_disposals_path, id: 'addresses-tab-link')
+  li
+    = link_to(t(:'contact.plural'), contacts_admin_disposals_path, id: 'contacts-tab-link')
+  li
+    = link_to(t(:'exam.plural'), exams_admin_disposals_path, id: 'exams-tab-link')
+  li
+    = link_to(t(:'course_group.plural'), course_groups_admin_disposals_path, id: 'course-groups-tab-link')
+  li
+    = link_to(t(:'attachment.plural'), attachments_admin_disposals_path, id: 'attachments-tab-link')
