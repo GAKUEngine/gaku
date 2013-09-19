@@ -108,7 +108,10 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :teachers do
-    get :soft_delete, on: :member
+    member do
+      get :soft_delete
+      get :recovery
+    end
 
     resources :notes
 
@@ -132,6 +135,7 @@ Gaku::Core::Engine.routes.draw do
       put :enrollment_status
       get :recovery
       get :soft_delete
+      get :show_deleted
     end
 
     collection do
@@ -201,7 +205,11 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :exams do
-    put :create_exam_portion, on: :member
+    member do
+      put :create_exam_portion
+      delete :soft_delete
+      get :recovery
+    end
 
     resources :notes
     resources :exam_scores
@@ -301,7 +309,7 @@ Gaku::Core::Engine.routes.draw do
         get :exams
         get :course_groups
         get :attachments
-        get :student_addresses
+        get :addresses
       end
     end
 
