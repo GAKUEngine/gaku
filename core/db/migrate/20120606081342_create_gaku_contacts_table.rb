@@ -5,10 +5,10 @@ class CreateGakuContactsTable < ActiveRecord::Migration
       t.text     :details
       t.boolean  :is_primary,   default: false
       t.boolean  :is_emergency, default: false
+      t.boolean  :is_deleted,   default: false
 
       t.references :contactable, polymorphic: true
       t.references :contact_type
-
 
       t.timestamps
     end
