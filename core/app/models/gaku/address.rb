@@ -37,6 +37,22 @@ module Gaku
       increment_count
     end
 
+    def self.deleted
+      where(is_deleted: true)
+    end
+
+    def self.students
+      where(addressable_type: Gaku::Student)
+    end
+
+    def self.teachers
+      where(addressable_type: Gaku::Teacher)
+    end
+
+    def self.guardians
+      where(addressable_type: Gaku::Guardian)
+    end
+
     def primary?
       is_primary
     end
