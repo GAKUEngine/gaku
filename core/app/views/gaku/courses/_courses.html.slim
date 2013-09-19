@@ -9,8 +9,6 @@
   tbody
     = render partial: 'course', collection: @courses_without_semester, as: :course
 
-=hr
-
 - @courses.each do |semester, semester_courses|
   =table_for "semester-#{semester}-courses-index" do
     thead
@@ -24,4 +22,3 @@
         =th_actions 3
     tbody
       = render partial: 'course', collection: extract_grouped(semester_courses, :course), as: :course
-  =hr

@@ -38,8 +38,8 @@ ready = ->
     resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
     resource_new_link = "#new-" + resource_id + "-link"
     resource_form = "#new-" + resource_id
-    $(resource_new_link).show()
-    $(resource_form).slide()
+    $(resource_form).animate({height:"toggle", opacity:"toggle"})
+    $(resource_new_link).fadeToggle()
 
   $(document).on 'click', '#cancel-student-commute-method-link', (e) ->
     e.preventDefault()
