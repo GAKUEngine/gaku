@@ -166,6 +166,11 @@ Gaku::Core::Engine.routes.draw do
 
 
     resources :guardians, controller: 'students/guardians' do
+      member do
+        get :soft_delete
+        get :recovery
+      end
+
       resources :contacts do
         post :create_modal, on: :collection
         post :make_primary, on: :member

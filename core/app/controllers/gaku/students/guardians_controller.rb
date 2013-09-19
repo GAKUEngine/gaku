@@ -1,14 +1,16 @@
 module Gaku
   class Students::GuardiansController < GakuController
 
-    load_and_authorize_resource :student, class: Gaku::Student
-    load_and_authorize_resource :guardian, through: :student, class: Gaku::Guardian
+    #load_and_authorize_resource :student, class: Gaku::Student
+    #load_and_authorize_resource :guardian, through: :student, class: Gaku::Guardian
 
     inherit_resources
     respond_to :js, :html
 
     before_filter :student
     before_filter :count, only: [:create,:destroy]
+    before_action :set_unscoped_guardian,  only: %i( destroy recovery )
+    before_action :set_guardian,           only: %i( soft_delete )
 
     def create
       super do |format|
@@ -27,6 +29,18 @@ module Gaku
           format.json { head :no_content }
          end
       end
+    end
+
+    def recovery
+      @guardian.recover
+      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
+      respond_with @guardian
+    end
+
+    def soft_delete
+      @guardian.soft_delete
+      redirect_to student_guardians_path(@student),
+                  notice: t(:'notice.destroyed', resource: t_resource)
     end
 
     protected
@@ -48,6 +62,18 @@ module Gaku
 
     def student
       @student = Student.find(params[:student_id])
+    end
+
+    def set_guardian
+      @guardian = Guardian.find(params[:id])
+    end
+
+    def set_unscoped_guardian
+      @guardian = Guardian.unscoped.find(params[:id])
+    end
+
+    def t_resource
+      t(:'guardian.singular')
     end
 
     def count
