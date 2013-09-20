@@ -1,5 +1,6 @@
 module Gaku
   class HomeController < GakuController
+    layout 'gaku/layouts/home'
 
     skip_authorization_check
 
