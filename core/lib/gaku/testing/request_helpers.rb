@@ -52,6 +52,10 @@ module Gaku::Testing::RequestHelpers
     '.edit-link'
   end
 
+  def recovery_link
+    '.recovery-link'
+  end
+
   def show_link
     '.show-link'
   end
