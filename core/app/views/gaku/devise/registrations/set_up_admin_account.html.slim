@@ -1,10 +1,12 @@
 div style="width:320px;margin:0 auto;"
   .row
     .col-md-12
-      .panel.panel-default
+      .panel.panel-primary
         .panel-heading
-          h3.panel-title = t "devise.registrations.admin_set_up"
+          h3.panel-title = t "devise.registrations.admin_create"
         .panel-body
+          = t "devise.registrations.admin_set_up"
+          hr.mt-m.mb-m
           = form_for(resource, as: resource_name, url: create_admin_path) do |f|
             = devise_error_messages!
             .form-group

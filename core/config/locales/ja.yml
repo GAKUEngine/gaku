@@ -279,6 +279,7 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
+      admin_create: 管理者を作成
       admin_set_up: |-
         学園陣が初期状態です。
         管理者ユーザを登録して下さい。
