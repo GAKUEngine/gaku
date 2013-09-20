@@ -1,9 +1,9 @@
 module Gaku
   class AddressesController < GakuController
 
-    load_and_authorize_resource :address,
-                                class: Gaku::Address,
-                                except: [:recovery, :destroy]
+    #load_and_authorize_resource :address,
+    #                            class: Gaku::Address,
+    #                            except: [:recovery, :destroy]
 
     inherit_resources
 

@@ -1,2 +1,12 @@
-#course-groups-deleted-index
-	= render 'gaku/admin/disposals/course_groups'
+= render 'tabs'
+
+= well_div do
+  = table_for 'disposal-course-group-index' do
+    thead
+      tr
+        = th t(:'course_group.name')
+        = th_actions 3
+    tbody
+      = render partial: 'course_group', collection: @course_groups, as: :course_group
+
+  = paginate @course_groups

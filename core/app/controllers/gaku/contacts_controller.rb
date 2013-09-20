@@ -23,6 +23,20 @@ module Gaku
       destroy!
     end
 
+    def recovery
+      @contact.recover
+      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
+      respond_with @contact
+    end
+
+    def soft_delete
+      @primary_contact = true if @contact.primary?
+      @contact.soft_delete
+      @contactable.contacts.first.try(:make_primary) if @contact.primary?
+      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
+      respond_with @contact
+    end
+
     def make_primary
       @contact.make_primary
       respond_with @contact

@@ -5,17 +5,28 @@ module Gaku
 
     authorize_resource class: false
 
+    def index
+
+    end
+
     def students
-      @students = Student.where(is_deleted: true)
+      @students = Student.deleted.page(params[:page]).per(Preset.default_per_page)
+    end
+
+    def teachers
+      @teachers = Teacher.deleted.page(params[:page]).per(Preset.default_per_page)
+    end
+
+    def guardians
+      @guardians = Guardian.deleted.page(params[:page]).per(Preset.default_per_page)
     end
 
     def exams
-      @exams = Exam.without_syllabuses
+      @exams = Exam.deleted.page(params[:page]).per(Preset.default_per_page)
     end
 
     def course_groups
-      @course_groups = CourseGroup.where(is_deleted: true)
-                                  .order(sort_column + ' ' + sort_direction)
+      @course_groups = CourseGroup.deleted.page(params[:page]).per(Preset.default_per_page)
     end
 
     def attachments
@@ -23,19 +34,18 @@ module Gaku
                                .order(sort_column + ' ' + sort_direction)
     end
 
-    def student_addresses
-      @addresses = Address.where(is_deleted: true,
-                                  addressable_type: Gaku::Student)
+    def addresses
+      @student_addresses = Address.includes(:addressable, :country).deleted.students.page(params[:page]).per(Preset.default_per_page)
+      @teacher_addresses = Address.includes(:addressable, :country).deleted.teachers.page(params[:page]).per(Preset.default_per_page)
+      @students_count = Address.deleted.students.count
+      @teachers_count = Address.deleted.teachers.count
     end
 
-    private
-
-    def sort_column
-      Student.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    def contacts
+      @student_contacts = Contact.includes(:contactable, :contact_type).deleted.students.page(params[:page]).per(Preset.default_per_page)
+      @teacher_contacts = Contact.includes(:contactable, :contact_type).deleted.teachers.page(params[:page]).per(Preset.default_per_page)
+      @students_count = Contact.deleted.students.count
+      @teachers_count = Contact.deleted.teachers.count
     end
 
   end

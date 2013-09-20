@@ -1,0 +1,19 @@
+.row-fluid.mt-l
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a#student-addresses-tab-link data-toggle="tab" href="#student_addresses"
+            = print_count @students_count, t(:'student.addresses')
+        li
+          a#teacher-addresses-tab-link data-toggle="tab" href="#teacher_addresses"
+            = print_count @teachers_count, t(:'teacher.addresses')
+
+      .tab-content
+        #student_addresses.tab-pane.active
+          .row-fluid
+            = render partial: 'gaku/admin/disposals/addresses', locals: { disposals: student_addresses }
+
+        #teacher_addresses.tab-pane
+          .row-fluid
+             = render partial: 'gaku/admin/disposals/addresses', locals: { disposals: teacher_addresses }

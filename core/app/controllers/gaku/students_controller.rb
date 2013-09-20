@@ -11,7 +11,7 @@ module Gaku
     inherit_resources
 
     respond_to :js,   only: %i( new create edit update index destroy recovery )
-    respond_to :html, only: %i( index edit show show_deleted, soft_delete )
+    respond_to :html, only: %i( index edit show show_deleted soft_delete )
     respond_to :pdf,  only: %i( index show )
 
     before_filter :load_data,         only: %i( new edit )
@@ -55,7 +55,7 @@ module Gaku
 
 
     def show_deleted
-      respond_with(@user) do |format|
+      respond_with(@student) do |format|
         format.html { render :show }
       end
     end

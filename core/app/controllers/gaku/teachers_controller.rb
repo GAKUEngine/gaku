@@ -8,7 +8,7 @@ module Gaku
 
     before_filter :count,   only: [:index, :create, :destroy]
     before_filter :notable, only: :show
-    before_action :set_unscoped_teacher,  only: %i( destroy recovery )
+    before_action :set_unscoped_teacher,  only: %i( show_deleted destroy recovery )
     before_action :set_teacher,       only: %i( edit update soft_delete )
 
     def recovery
@@ -21,6 +21,12 @@ module Gaku
       @teacher.soft_delete
       redirect_to teachers_path,
                   notice: t(:'notice.destroyed', resource: t_resource)
+    end
+
+    def show_deleted
+      respond_with(@teacher) do |format|
+        format.html { render :show }
+      end
     end
 
     def update

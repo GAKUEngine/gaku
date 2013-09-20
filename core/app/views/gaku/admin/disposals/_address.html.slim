@@ -9,4 +9,4 @@ tr
   td = address.address2
   td
     = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, address.addressable, address], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
-    = ajax_link_to_delete [address.addressable, address] , id: 'delete-disposal-student-address-link'
+    = ajax_link_to_delete [address.addressable, address] , id: 'delete-disposal-address-link'

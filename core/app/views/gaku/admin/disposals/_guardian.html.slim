@@ -1,0 +1,10 @@
+tr
+  td = guardian.surname
+  td = guardian.name
+  td = guardian.surname_reading
+  td = guardian.name_reading
+  td = guardian.birth_date
+  td
+    /= link_to_show [:show_deleted, guardian]
+    /= link_to content_tag(:li, nil, class: 'icon-white icon-repeat'), [:recovery, guardian], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
+    /= ajax_link_to_delete guardian , id: 'delete-disposal-guardian-link'
