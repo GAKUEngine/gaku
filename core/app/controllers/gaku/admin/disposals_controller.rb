@@ -28,7 +28,7 @@ module Gaku
     end
 
     def attachments
-      @attachments = Attachment.where(is_deleted: true)
+      @attachments = Attachment.includes(:attachable).deleted.page(params[:page]).per(Preset.default_per_page)
     end
 
     def addresses

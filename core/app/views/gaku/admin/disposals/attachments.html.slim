@@ -1,3 +1,5 @@
+= render 'tabs'
+
 = well_div do
   = table_for 'disposal-attachments-index' do
     thead
@@ -5,6 +7,7 @@
         = th t(:'attachment.name')
         = th t(:'attachment.description')
         = th t(:'attachment.asset_type')
+        = th t(:'resource')
         = th t(:'attachment.file_name')
         = th t(:'attachment.file_type')
         = th t(:'attachment.file_size')
@@ -15,11 +18,13 @@
           td = attachment.name
           td = attachment.description
           td = attachment.attachable_type
+          td = attachment.attachable
           td = attachment.asset_file_name
           td = attachment.asset_content_type
           td = number_to_human_size attachment.asset_file_size
           td
-            = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, attachment], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true, style: 'margin-left:5px'
+            = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, attachment], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
             = ajax_link_to_delete attachment , id: 'delete-disposal-attachment-link'
 
 
+  = paginate @attachments

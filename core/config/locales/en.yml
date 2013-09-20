@@ -439,6 +439,7 @@ en:
         notice: '%{resource_name} was successfully updated!'
   full_name: Full Name
   full_name_reading: Full Name Reading
+  resource: Resource
   gender:
     choose: Choose Gender
     female: Female
