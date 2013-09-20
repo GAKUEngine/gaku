@@ -1,9 +1,4 @@
-.row.pagination-centered
-  h4= t(:'picture')
-
-.row.mt-s
-  .col-md-12.pagination-centered
-    = image_tag resource.picture.url(:thumb), id: "avatar-picture"
+= image_tag resource.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
 
 - if can_edit?
   .row.mt-s

@@ -1,29 +1,27 @@
 div style="width:320px;margin:0 auto;"
   .row
     .col-md-12
-      h3= t "devise.registrations.sign_up"
-  .row
-    .col-md-12
-      hr/
-  .row
-    .col-md-12
-      .well
-        .row
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title = t "devise.registrations.sign_up"
+        .panel-body
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             = devise_error_messages!
-            .row
-              = f.label :username, t(:"devise.username")
-              = f.text_field :username, class: 'span12'
-            .row
-              = f.label :email, t(:"devise.email")
-              = f.email_field :email, class: 'span12'
-            .row
-              = f.label :password, t(:"devise.password")
-              = f.password_field :password, class: 'span12'
-            .row
-              = f.label :password_confirmation, t(:"devise.password_confirmation")
-              = f.password_field :password_confirmation, class: 'span12'
-            .row.mt-xs
-              = f.submit t("devise.registrations.sign_up"), class: 'span12 btn btn-primary'
-        .row.mt-s
-          = render "devise/shared/links"
+            .form-group
+              = f.label :username, t(:"devise.username"), class: 'control-label'
+              = f.text_field :username, class: 'form-control col-md-12'
+            .form-group
+              = f.label :email, t(:"devise.email"), class: 'control-label'
+              = f.email_field :email, class: 'form-control col-md-12'
+            .form-group
+              = f.label :password, t(:"devise.password"), class: 'control-label'
+              = f.password_field :password, class: 'form-control col-md-12'
+            .form-group
+              = f.label :password_confirmation, t(:"devise.password_confirmation"), class: 'control-label'
+              = f.password_field :password_confirmation, class: 'form-control col-md-12'
+            hr.mt-0.mb-m
+            .form-group.mb-0
+              = f.submit t("devise.registrations.sign_up"), class: 'col-md-12 btn btn-primary'
+        ul.list-group
+          li.list-group-item
+            = render "devise/shared/links"

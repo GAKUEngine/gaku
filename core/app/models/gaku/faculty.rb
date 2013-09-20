@@ -3,7 +3,7 @@ module Gaku
 
     include Addresses, Contacts
 
-    has_many :roles
+    has_many :school_roles, as: :school_rolable
     has_many :students
     has_many :class_groups
     has_many :courses

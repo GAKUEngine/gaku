@@ -5,7 +5,7 @@ describe Gaku::ExtracurricularActivityEnrollment do
   describe 'associations' do
     it { should belong_to :extracurricular_activity }
     it { should belong_to :student }
-    it { should have_many :roles }
+    it { should have_many :school_roles }
   end
 
   describe 'validations' do

@@ -36,6 +36,9 @@
     = paginate @students, remote: true
 
 javascript:
+  $(document).ready(function(){
+    //addOptions($(".class_group-select"));
+  });
   function addOptions(select){
     for(var i=0; i < select.length; i++){
       console.log(select[i])

@@ -31,7 +31,7 @@ require 'phantom_helpers'
 require 'phantom_forms'
 require 'phantom_nested_forms'
 
-require 'rack-mini-profiler'
+# require 'rack-mini-profiler'
 
 
 module Gaku

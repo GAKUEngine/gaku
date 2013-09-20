@@ -73,7 +73,7 @@ module Gaku
         redirect_to set_up_admin_account_path
       else
         if current_user && current_user.role?(:admin)
-          Rack::MiniProfiler.authorize_request
+          # Rack::MiniProfiler.authorize_request
         end
       end
     end

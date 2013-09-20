@@ -3,7 +3,7 @@ module Gaku
 
     belongs_to :class_group
     belongs_to :student
-    has_many :roles
+    has_many :school_roles, as: :school_rolable
 
     validates :class_group_id, presence: true
 
