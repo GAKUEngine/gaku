@@ -46,7 +46,7 @@ module Gaku
     protected
 
     def resource
-      @guardian = Guardian.includes(contacts: :contact_type).find(params[:id])
+      @guardian = Guardian.includes(contacts: :contact_type).find(params[:id]).decorate
     end
 
     def resource_params
@@ -65,11 +65,11 @@ module Gaku
     end
 
     def set_guardian
-      @guardian = Guardian.find(params[:id])
+      @guardian = Guardian.find(params[:id]).decorate
     end
 
     def set_unscoped_guardian
-      @guardian = Guardian.unscoped.find(params[:id])
+      @guardian = Guardian.unscoped.find(params[:id]).decorate
     end
 
     def t_resource
