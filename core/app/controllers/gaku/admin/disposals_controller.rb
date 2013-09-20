@@ -1,8 +1,6 @@
 module Gaku
   class Admin::DisposalsController < Admin::BaseController
 
-    helper_method :sort_column, :sort_direction
-
     authorize_resource class: false
 
     def index
@@ -31,7 +29,6 @@ module Gaku
 
     def attachments
       @attachments = Attachment.where(is_deleted: true)
-                               .order(sort_column + ' ' + sort_direction)
     end
 
     def addresses
