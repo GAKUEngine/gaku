@@ -1,8 +1,4 @@
-= remote_form_for @class_group do |f|
-  .control-group
-    .col-md-12.well
-      .row
-         = render 'form_fields', f: f
-
-      .row
-        =buttons_for @class_group
+= remote_form_panel_for @class_group, t('class_group.new') do |f|
+  = render partial: 'form_fields', locals: { f: f }
+  hr.mt-0.mb-m
+  =buttons_for @class_group

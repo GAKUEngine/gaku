@@ -1,3 +1,4 @@
-= remote_form_for @teacher do |f|
+= remote_form_panel_for @teacher, t('teacher.new') do |f|
   = render partial: 'form_fields', locals: { f: f }
+  hr.mt-0.mb-m
   = buttons_for @teacher
