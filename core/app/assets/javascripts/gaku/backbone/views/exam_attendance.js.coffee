@@ -49,7 +49,3 @@ class GAKUEngine.Views.ExamAttendance extends Backbone.View
 
 			@options.currentTarget.popover('destroy')
 			$('body').undelegate @submitId, 'submit'
-
-
-
-

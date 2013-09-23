@@ -13,7 +13,3 @@ class GAKUEngine.Views.ExamCalculationsView extends Backbone.View
         # $(@el).find("tr.student_#{id}").hide()
 
     @
-
-
-
-
