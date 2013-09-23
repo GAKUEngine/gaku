@@ -1,4 +1,4 @@
-- if grading_method_set.is_primary?
+- if grading_method_set.primary?
   = link_to ok_icon, [:make_primary, :admin,  grading_method_set], remote: true, class: 'span12 btn btn-mini btn-primary make-primary-grading-method-set', method: :post, data: { confirm: t('confirm') }, id: 'set_primary_link'
 - else
   = link_to ok_icon, [:make_primary, :admin, grading_method_set], remote: true, id: 'set_primary_link', class: 'span12 btn btn-mini make-primary-grading-method-set', method: :post, data: { confirm: t('confirm') }

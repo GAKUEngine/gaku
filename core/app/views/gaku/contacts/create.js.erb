@@ -7,7 +7,7 @@ $('.<%= @resource_name.pluralize %>-count').html("<%= print_count(@count+1, t_co
 $('#<%= @resource_name.pluralize %>-tab-link').html("<%= print_count(@count+1, t_contact_plural) %>");
 
 
-<% if @contact.is_primary? %>
+<% if @contact.primary? %>
   $('#<%= @resource_name.pluralize %>-index tbody tr').each(function(){
     $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
   });

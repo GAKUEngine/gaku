@@ -27,7 +27,7 @@ describe 'Student Addresses Changes' do
     visit gaku.admin_changes_student_addresses_path
     page.should have_content 'true'
     page.should have_content 'false'
-    page.should have_content 'is_deleted'
+    page.should have_content 'deleted'
     page.should have_content 'update'
   end
 

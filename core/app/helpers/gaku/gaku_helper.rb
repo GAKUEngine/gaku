@@ -81,7 +81,7 @@ module Gaku
     end
 
     def major_check(student_specialty)
-      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
+      student_specialty.major ? t(:'specialty.major') : t(:'specialty.minor')
     end
 
     def comma_separated_list(objects, options = {}, &block)

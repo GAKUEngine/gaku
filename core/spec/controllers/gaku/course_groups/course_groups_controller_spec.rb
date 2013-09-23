@@ -68,7 +68,7 @@ describe Gaku::CourseGroupsController do
   describe 'DELETE #destroy' do
     pending 'deletes the course group' do
       gaku_delete :destroy, id: course_group
-      expect(course_group.is_deleted).to eq true
+      expect(course_group.deleted).to eq true
       controller.should set_the_flash
     end
   end

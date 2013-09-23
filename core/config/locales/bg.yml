@@ -50,7 +50,7 @@ bg:
     new: Създай Задание
     plural: Задания
     results: Резултати от заданието
-    score: 
+    score:
     singular: Задание
     view: Покажи Заданията
   assignments:
@@ -60,11 +60,11 @@ bg:
     asset_type: Тип на файла.
     asset_upload: Файлът беше качен успешно!
     assets: Файлове
-    associated: 
-    attachment_recovered: 
+    associated:
+    attachment_recovered:
     create: Качи Файл
     description: Описание
-    edit: 
+    edit:
     file_name: Име на файла
     file_size: Големина на файла
     file_type: Тип на файла
@@ -124,7 +124,7 @@ bg:
   class: Клас
   class_group:
     add: Добави Клас
-    already_enrolled: 
+    already_enrolled:
     choose: Избери Клас
     edit: Редактирай Клас
     enroll: Запиши Клас
@@ -198,7 +198,7 @@ bg:
     singular: Вид Контакт
   course:
     add: Добави Курс
-    already_enrolled: 
+    already_enrolled:
     choose: Избери Курс
     code: Код на Курса
     code_sample: '[ПР: ЕСЕН2020]'
@@ -221,7 +221,7 @@ bg:
     plural: Записи в Курса
     singular: Запис в Курса
   course_group:
-    already_enrolled: 
+    already_enrolled:
     course_group_recover: Курс Група Възстановена
     edit: Редактирай Курс Група
     list: Списък Курс Групи
@@ -235,9 +235,9 @@ bg:
     save: Запази Курс Група
   date:
     formats:
-      default: 
-      long: 
-      short: 
+      default:
+      long:
+      short:
   date_placeholder: ГГГГ-ММ-ДД
   default: По подразбиране
   delete: Изтрий
@@ -308,7 +308,7 @@ bg:
     username: Потребителско Име
   edit: Редактиране
   email: Поща
-  empty: 
+  empty:
   enroll_to_class: Записване в клас
   enrollment:
     plural: Записи
@@ -317,7 +317,7 @@ bg:
     active: Активен
     add: Добави Статус на Записване
     choose_enrollment_status: Избери Статус на Записване
-    code: 
+    code:
     edit: Редактирай Статус на Записване
     list: Списък Статуси на Записване
     name: Име
@@ -327,544 +327,544 @@ bg:
     singular: Статус на Записване
   enrollment_status_type:
     active: Активен
-    add: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    singular: 
+    add:
+    edit:
+    list:
+    name:
+    new:
+    plural:
+    save:
+    singular:
   errors:
     messages:
-      already_confirmed: 
-      expired: 
-      file_type_unsupported: 
-      file_unreadable: 
-      not_found: 
-      not_locked: 
-      not_saved: 
-    not_uploaded: 
+      already_confirmed:
+      expired:
+      file_type_unsupported:
+      file_unreadable:
+      not_found:
+      not_locked:
+      not_saved:
+    not_uploaded:
   exam:
-    add: 
-    add_existing: 
-    add_portion: 
-    adjustments: 
-    already_added: 
-    choose: 
-    choose_schedule: 
-    completion: 
-    count: 
-    description: 
-    edit: 
-    exam_score: 
-    graded: 
-    grading_completion: 
-    grading_method: 
-    list: 
-    name: 
-    new: 
-    new_exam: 
-    options: 
-    plural: 
-    save: 
-    select: 
-    show: 
-    singular: 
-    total: 
-    total_weight: 
-    ungraded: 
-    use_weighting: 
-    view: 
-    weight: 
+    add:
+    add_existing:
+    add_portion:
+    adjustments:
+    already_added:
+    choose:
+    choose_schedule:
+    completion:
+    count:
+    description:
+    edit:
+    exam_score:
+    graded:
+    grading_completion:
+    grading_method:
+    list:
+    name:
+    new:
+    new_exam:
+    options:
+    plural:
+    save:
+    select:
+    show:
+    singular:
+    total:
+    total_weight:
+    ungraded:
+    use_weighting:
+    view:
+    weight:
   exam_portion:
-    adjustments: 
-    attached_file_count: 
-    count: 
-    description: 
-    edit: 
-    error: 
-    execution_date: 
-    is_master: 
-    list: 
-    master: 
-    max_score: 
-    name: 
-    plural: 
-    problem_count: 
-    save: 
-    show: 
-    singular: 
-    use_weighting: 
-    weight: 
-  export: 
-  extended: 
+    adjustments:
+    attached_file_count:
+    count:
+    description:
+    edit:
+    error:
+    execution_date:
+    master:
+    list:
+    master:
+    max_score:
+    name:
+    plural:
+    problem_count:
+    save:
+    show:
+    singular:
+    use_weighting:
+    weight:
+  export:
+  extended:
   external_school_record:
-    absences: 
-    attendance_rate: 
-    beginning: 
-    data: 
-    ending: 
-    singular: 
-    student_id_number: 
+    absences:
+    attendance_rate:
+    beginning:
+    data:
+    ending:
+    singular:
+    student_id_number:
   extracurricular_activity:
-    add: 
-    already_enrolled: 
-    edit: 
-    enroll: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    add:
+    already_enrolled:
+    edit:
+    enroll:
+    list:
+    name:
+    new:
+    plural:
+    save:
+    show:
+    singular:
   extracurricular_activity_enrollment:
-    list: 
+    list:
   failure:
-    enrolled: 
-  file: 
+    enrolled:
+  file:
   flash:
     actions:
       create:
-        notice: 
+        notice:
       destroy:
-        alert: 
-        notice: 
+        alert:
+        notice:
       update:
-        notice: 
-  full_name: 
-  full_name_reading: 
+        notice:
+  full_name:
+  full_name_reading:
   gender:
-    choose: 
-    female: 
-    label: 
-    male: 
-    unknown: 
-  given_name: 
+    choose:
+    female:
+    label:
+    male:
+    unknown:
+  given_name:
   grade:
-    all_exams: 
-    average_points: 
-    average_score: 
-    deviation: 
-    grading: 
-    how_grade: 
-    max: 
-    max_points: 
-    percent: 
-    points: 
-    rank: 
-    total: 
-    total_points: 
-    weighting: 
-    weighting_portion: 
+    all_exams:
+    average_points:
+    average_score:
+    deviation:
+    grading:
+    how_grade:
+    max:
+    max_points:
+    percent:
+    points:
+    rank:
+    total:
+    total_points:
+    weighting:
+    weighting_portion:
   grading_method:
-    add: 
-    arguments: 
-    choose: 
-    curved: 
-    description: 
-    edit: 
-    list: 
-    method: 
-    name: 
-    plural: 
-    save: 
-    singular: 
+    add:
+    arguments:
+    choose:
+    curved:
+    description:
+    edit:
+    list:
+    method:
+    name:
+    plural:
+    save:
+    singular:
   grading_method_set:
-    add: 
-    display_deviation: 
-    display_rank: 
-    edit: 
-    list: 
-    name: 
-    rank_order: 
-    save: 
-    show: 
-    singular: 
+    add:
+    display_deviation:
+    display_rank:
+    edit:
+    list:
+    name:
+    rank_order:
+    save:
+    show:
+    singular:
   grading_method_set_item:
-    already: 
-    edit: 
-    save: 
-  graduated: 
+    already:
+    edit:
+    save:
+  graduated:
   guardian:
-    add: 
-    edit: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    relationship: 
-    save: 
-    singular: 
-    surname: 
-  hello: 
+    add:
+    edit:
+    list:
+    name:
+    new:
+    plural:
+    relationship:
+    save:
+    singular:
+    surname:
+  hello:
   helpers:
     links:
-      cancel: 
-  hide: 
-  history: 
-  id: 
-  import: 
-  import_format: 
-  is_graduated: 
-  language: 
+      cancel:
+  hide:
+  history:
+  id:
+  import:
+  import_format:
+  is_graduated:
+  language:
   languages:
-    en: 
-    ja: 
-  manage: 
+    en:
+    ja:
+  manage:
   menu:
     admin:
-      achievements: 
-      admin: 
-      administration: 
-      administrator: 
+      achievements:
+      admin:
+      administration:
+      administrator:
       changes:
-        changes: 
-        student_addresses: 
-        student_contacts: 
-        students: 
+        changes:
+        student_addresses:
+        student_contacts:
+        students:
       disposals:
-        attachment: 
-        course_group: 
-        disposals: 
-        exam: 
-        student: 
-        student_address: 
+        attachment:
+        course_group:
+        disposals:
+        exam:
+        student:
+        student_address:
       grading:
-        grading: 
-        grading_methods: 
-        grading_sets: 
-      grading_methods: 
+        grading:
+        grading_methods:
+        grading_sets:
+      grading_methods:
       preset:
         grading:
-          grading_method: 
-          grading_scheme: 
+          grading_method:
+          grading_scheme:
         items:
-          defaults: 
-          grading: 
-          locale: 
-          names: 
-          student: 
-        names: 
-        pagination: 
-        plural: 
-        save: 
-        singular: 
+          defaults:
+          grading:
+          locale:
+          names:
+          student:
+        names:
+        pagination:
+        plural:
+        save:
+        singular:
         student:
-          city: 
-          country: 
-          gender: 
-          state: 
-      school_details: 
-      school_years: 
-      schools: 
-      specialties: 
+          city:
+          country:
+          gender:
+          state:
+      school_details:
+      school_years:
+      schools:
+      specialties:
       system:
-        backup: 
-        system_tools: 
+        backup:
+        system_tools:
       types:
-        attendance_types: 
-        commute_methods: 
-        contact: 
-        enrollment_status: 
-        types: 
+        attendance_types:
+        commute_methods:
+        contact:
+        enrollment_status:
+        types:
       users:
-        roles: 
-        users: 
-        users_and_roles: 
+        roles:
+        users:
+        users_and_roles:
     class_group:
-      management: 
-      plural: 
+      management:
+      plural:
     course:
-      management: 
-      plural: 
+      management:
+      plural:
     course_group:
-      plural: 
+      plural:
     exam:
-      management: 
-      plural: 
+      management:
+      plural:
     extracurricular_activity:
-      plural: 
+      plural:
     student:
-      plural: 
+      plural:
     syllabus:
-      plural: 
+      plural:
     teacher:
-      plural: 
-  middle_name: 
-  middle_name_reading: 
-  name: 
-  name_reading: 
-  none: 
+      plural:
+  middle_name:
+  middle_name_reading:
+  name:
+  name_reading:
+  none:
   note:
-    add: 
-    content: 
-    delete: 
-    edit: 
-    list: 
-    new: 
-    plural: 
-    save: 
-    singular: 
-    title: 
+    add:
+    content:
+    delete:
+    edit:
+    list:
+    new:
+    plural:
+    save:
+    singular:
+    title:
   notice:
-    added: 
-    created: 
-    destroyed: 
-    enrolled: 
-    no_resource_assign_first: 
-    recovered: 
-    removed: 
-    updated: 
-    uploaded: 
-  num_enrolled: 
-  options: 
-  order: 
-  panel: 
-  period: 
-  personal_information: 
-  phone: 
-  phonetic_reading: 
-  picture: 
+    added:
+    created:
+    destroyed:
+    enrolled:
+    no_resource_assign_first:
+    recovered:
+    removed:
+    updated:
+    uploaded:
+  num_enrolled:
+  options:
+  order:
+  panel:
+  period:
+  personal_information:
+  phone:
+  phonetic_reading:
+  picture:
   pictures:
-    change: 
-    upload: 
+    change:
+    upload:
   preset:
     grading:
-      grading_method: 
-      grading_scheme: 
-    names: 
+      grading_method:
+      grading_scheme:
+    names:
     output_formats:
-      choose: 
-      documents: 
-      printables: 
-      spreadsheets: 
-    pagination: 
+      choose:
+      documents:
+      printables:
+      spreadsheets:
+    pagination:
     per_page:
-      changes: 
-      default: 
-      students: 
-    plural: 
-    save: 
-    singular: 
+      changes:
+      default:
+      students:
+    plural:
+    save:
+    singular:
     student:
-      city: 
-      country: 
-      gender: 
-      state: 
-  profile: 
+      city:
+      country:
+      gender:
+      state:
+  profile:
   profiles:
-    new: 
-    save: 
+    new:
+    save:
   program:
-    add: 
-    description: 
-    edit: 
-    levels: 
-    list: 
-    name: 
-    plural: 
-    save: 
-    singular: 
+    add:
+    description:
+    edit:
+    levels:
+    list:
+    name:
+    plural:
+    save:
+    singular:
   program_level:
-    add: 
-    choose: 
-    list: 
-    plural: 
-    remove: 
+    add:
+    choose:
+    list:
+    plural:
+    remove:
   program_specialty:
-    add: 
-    choose: 
-    list: 
-    plural: 
-    remove: 
+    add:
+    choose:
+    list:
+    plural:
+    remove:
   program_syllabus:
-    add: 
-    choose: 
-    list: 
-    plural: 
-    remove: 
-  required: 
-  revert: 
+    add:
+    choose:
+    list:
+    plural:
+    remove:
+  required:
+  revert:
   role:
-    add: 
-    edit: 
-    list: 
-    name: 
-    save: 
-  save: 
-  schedule: 
-  scholarship_status: 
+    add:
+    edit:
+    list:
+    name:
+    save:
+  save:
+  schedule:
+  scholarship_status:
   school:
-    add: 
-    campuses: 
-    choose: 
-    code: 
-    description: 
-    edit: 
-    edit_master: 
-    founded: 
-    grades: 
-    list: 
-    master: 
-    name: 
-    new: 
-    plural: 
-    primary: 
-    principal: 
-    save: 
-    show: 
-    singular: 
-    slogan: 
-    vice_principal: 
+    add:
+    campuses:
+    choose:
+    code:
+    description:
+    edit:
+    edit_master:
+    founded:
+    grades:
+    list:
+    master:
+    name:
+    new:
+    plural:
+    primary:
+    principal:
+    save:
+    show:
+    singular:
+    slogan:
+    vice_principal:
   school_level:
-    add_school_level: 
-    plural: 
-    remove_school_level: 
-    singular: 
+    add_school_level:
+    plural:
+    remove_school_level:
+    singular:
   school_year:
-    add: 
-    day: 
-    duration: 
-    edit: 
-    ending: 
-    ending_after_starting: 
-    list: 
-    plural: 
-    save: 
-    show: 
-    singular: 
-    starting: 
-  search: 
-  select: 
+    add:
+    day:
+    duration:
+    edit:
+    ending:
+    ending_after_starting:
+    list:
+    plural:
+    save:
+    show:
+    singular:
+    starting:
+  search:
+  select:
   semester:
-    add: 
-    between: 
-    choose: 
-    day: 
-    duration: 
-    edit: 
-    ending: 
-    ending_after_starting: 
-    list: 
-    number: 
-    plural: 
-    remove: 
-    save: 
-    singular: 
-    starting: 
-    uniqueness: 
+    add:
+    between:
+    choose:
+    day:
+    duration:
+    edit:
+    ending:
+    ending_after_starting:
+    list:
+    number:
+    plural:
+    remove:
+    save:
+    singular:
+    starting:
+    uniqueness:
   semester_class_group:
-    choose: 
-    save: 
-    uniqueness: 
+    choose:
+    save:
+    uniqueness:
   semester_course:
-    uniqueness: 
-  sex: 
-  sex_and_birth: 
-  show: 
+    uniqueness:
+  sex:
+  sex_and_birth:
+  show:
   simple_grade:
-    add: 
-    edit: 
-    grade: 
-    index: 
-    list: 
-    plural: 
-    save: 
-    singular: 
+    add:
+    edit:
+    grade:
+    index:
+    list:
+    plural:
+    save:
+    singular:
   specialty:
-    add: 
-    already_added: 
-    choose: 
-    description: 
-    edit: 
-    list: 
-    major: 
-    major_only: 
-    minor: 
-    name: 
-    plural: 
-    save: 
-    singular: 
+    add:
+    already_added:
+    choose:
+    description:
+    edit:
+    list:
+    major:
+    major_only:
+    minor:
+    name:
+    plural:
+    save:
+    singular:
   student:
-    add: 
-    birth_and: 
-    birth_between: 
-    choose: 
-    chosen_students: 
-    class_group_enrollment: 
-    commute_method: 
-    create: 
-    download_registration_roster: 
-    download_roster: 
-    edit: 
-    enroll: 
-    export: 
-    import: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    roster: 
-    roster_sheet: 
-    save: 
-    show: 
-    singular: 
+    add:
+    birth_and:
+    birth_between:
+    choose:
+    chosen_students:
+    class_group_enrollment:
+    commute_method:
+    create:
+    download_registration_roster:
+    download_roster:
+    edit:
+    enroll:
+    export:
+    import:
+    list:
+    name:
+    new:
+    plural:
+    roster:
+    roster_sheet:
+    save:
+    show:
+    singular:
   student_achievement:
-    edit: 
-    index: 
-    save: 
-  student_foreign_id_number: 
-  student_id_number: 
-  student_name: 
+    edit:
+    index:
+    save:
+  student_foreign_id_number:
+  student_id_number:
+  student_name:
   student_specialty:
-    edit: 
-    index: 
-    save: 
-  submit: 
+    edit:
+    index:
+    save:
+  submit:
   success:
-    enrolled: 
-  surname: 
-  surname_reading: 
+    enrolled:
+  surname:
+  surname_reading:
   syllabus:
-    code: 
-    credits: 
-    description: 
-    edit: 
-    import: 
-    list: 
-    name: 
-    name_sample: 
-    new: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    code:
+    credits:
+    description:
+    edit:
+    import:
+    list:
+    name:
+    name_sample:
+    new:
+    plural:
+    save:
+    show:
+    singular:
   teacher:
-    edit: 
-    list: 
-    new: 
-    plural: 
-    save: 
-    show: 
-    singular: 
-  title: 
+    edit:
+    list:
+    new:
+    plural:
+    save:
+    show:
+    singular:
+  title:
   undefined: Неопределен
   user:
-    add: 
-    edit: 
-    email: 
-    info: 
-    list: 
-    password: 
-    password_confirmation: 
-    save: 
-    username: 
+    add:
+    edit:
+    email:
+    info:
+    list:
+    password:
+    password_confirmation:
+    save:
+    username:
   views:
     pagination:
-      first: 
-      last: 
-      next: 
-      previous: 
-      truncate: 
+      first:
+      last:
+      next:
+      previous:
+      truncate:

@@ -41,7 +41,7 @@ module Gaku
       end
 
       def attributes
-        %i(name context is_locked file)
+        %i(name context locked file)
       end
 
     end

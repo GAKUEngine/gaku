@@ -37,7 +37,7 @@ module Gaku
 
     def soft_delete
       @attachment = Attachment.find(params[:id])
-      @attachment.update_attribute(:is_deleted, true)
+      @attachment.update_attribute(:deleted, true)
       flash.now[:notice] = t(:'notice.destroyed', resource: t(:'attachment.singular'))
       respond_to do |format|
         format.js { render :soft_delete }
@@ -50,7 +50,7 @@ module Gaku
     end
 
     def recovery
-      @attachment.update_attribute(:is_deleted, false)
+      @attachment.update_attribute(:deleted, false)
       flash.now[:notice] = t(:'attachment.attachment_recovered')
 
       respond_to do |format|

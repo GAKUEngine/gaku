@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
   create_table 'gaku_attachments', force: true do |t|
     t.string   'name'
     t.text     'description'
-    t.boolean  'is_deleted',         default: false
+    t.boolean  'deleted',         default: false
     t.integer  'attachable_id'
     t.string   'attachable_type'
     t.string   'asset_file_name'
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
     t.string   'name'
     t.integer  'school_id'
     t.integer  'address_id'
-    t.boolean  'is_master',  default: false
+    t.boolean  'master',  default: false
     t.datetime 'created_at',                    null: false
     t.datetime 'updated_at',                    null: false
   end
@@ -144,8 +144,8 @@ ActiveRecord::Schema.define(version: 20121013102921) do
   create_table 'gaku_contacts', force: true do |t|
     t.string   'data'
     t.text     'details'
-    t.boolean  'is_primary',      default: false
-    t.boolean  'is_emergency',    default: false
+    t.boolean  'primary',      default: false
+    t.boolean  'emergency',    default: false
     t.integer  'contact_type_id'
     t.integer  'student_id'
     t.integer  'guardian_id'
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
 
   create_table 'gaku_course_groups', force: true do |t|
     t.string   'name'
-    t.boolean  'is_deleted', default: false
+    t.boolean  'deleted', default: false
     t.datetime 'created_at',                    null: false
     t.datetime 'updated_at',                    null: false
   end
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
 
   create_table 'gaku_enrollment_status_types', force: true do |t|
     t.string   'name'
-    t.boolean  'is_active'
+    t.boolean  'active'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
     t.integer  'problem_count'
     t.text     'description'
     t.text     'adjustments'
-    t.boolean  'is_master',         default: false
+    t.boolean  'master',         default: false
     t.integer  'exam_id'
     t.integer  'grading_method_id'
     t.datetime 'created_at',                           null: false
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
     t.text     'adjustments'
     t.float    'weight'
     t.boolean  'use_weighting',     default: false
-    t.boolean  'is_standalone',     default: false
+    t.boolean  'standalone',     default: false
     t.integer  'grading_method_id'
     t.datetime 'created_at',                           null: false
     t.datetime 'updated_at',                           null: false
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
   create_table 'gaku_guardian_addresses', force: true do |t|
     t.integer  'guardian_id'
     t.integer  'address_id'
-    t.boolean  'is_primary',  default: false
+    t.boolean  'primary',  default: false
     t.datetime 'created_at',                     null: false
     t.datetime 'updated_at',                     null: false
   end
@@ -374,7 +374,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
 
   create_table 'gaku_schools', force: true do |t|
     t.string   'name'
-    t.boolean  'is_primary',     default: false
+    t.boolean  'primary',     default: false
     t.text     'slogan'
     t.text     'description'
     t.date     'founded'
@@ -410,7 +410,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
   create_table 'gaku_student_addresses', force: true do |t|
     t.integer  'student_id'
     t.integer  'address_id'
-    t.boolean  'is_primary', default: false
+    t.boolean  'primary', default: false
     t.datetime 'created_at',                    null: false
     t.datetime 'updated_at',                    null: false
   end
@@ -418,7 +418,7 @@ ActiveRecord::Schema.define(version: 20121013102921) do
   create_table 'gaku_student_specialties', force: true do |t|
     t.integer 'student_id'
     t.integer 'specialty_id'
-    t.boolean 'is_mayor',     default: true
+    t.boolean 'mayor',     default: true
   end
 
   create_table 'gaku_students', force: true do |t|

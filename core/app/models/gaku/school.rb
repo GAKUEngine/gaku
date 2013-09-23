@@ -11,7 +11,7 @@ module Gaku
     validates :name, presence: true
 
     has_one :master_campus,
-            -> { where is_master: true },
+            -> { where master: true },
             class_name: Gaku::Campus,
             dependent: :destroy
 
@@ -24,11 +24,11 @@ module Gaku
     end
 
     def primary?
-      is_primary
+      primary
     end
 
     def self.primary
-      where(is_primary: true).first
+      where(primary: true).first
     end
 
     private
@@ -40,7 +40,7 @@ module Gaku
         campus = campuses.create(name: name)
       end
 
-      campus.is_master = true
+      campus.master = true
       campus.save
     end
 

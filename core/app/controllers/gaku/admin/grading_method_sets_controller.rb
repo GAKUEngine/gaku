@@ -38,7 +38,7 @@ module Gaku
     end
 
     def destroy
-      if @grading_method_set.is_primary?
+      if @grading_method_set.primary?
         GradingMethodSet.first.try(:make_primary)
       end
       @grading_method_set.destroy
@@ -62,7 +62,7 @@ module Gaku
     end
 
     def attributes
-      %i(display_deviation display_rank name is_primary rank_order)
+      %i(display_deviation display_rank name primary rank_order)
     end
 
   end
