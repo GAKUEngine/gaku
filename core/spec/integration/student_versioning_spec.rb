@@ -11,7 +11,7 @@ describe 'Student Versioning' do
     end.to change(Gaku::Versioning::StudentVersion, :count).by(1)
 
     version = Gaku::Versioning::StudentVersion.last
-    expect(version.human_changes['is_deleted']).to eq [false, true]
+    expect(version.human_changes['deleted']).to eq [false, true]
   end
 
   it 'saves id_number changes', versioning: true do

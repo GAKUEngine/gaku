@@ -2,15 +2,15 @@ module Trashable
   extend ActiveSupport::Concern
 
   included do
-    default_scope -> { where(is_deleted: false) }
-    scope :deleted, -> { where(is_deleted: true) }
+    default_scope -> { where(deleted: false) }
+    scope :deleted, -> { where(deleted: true) }
 
     def soft_delete
-      update_attribute(:is_deleted, true)
+      update_attribute(:deleted, true)
     end
 
     def recover
-      update_attribute(:is_deleted, false)
+      update_attribute(:deleted, false)
     end
   end
 

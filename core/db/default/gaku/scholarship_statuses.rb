@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-# Array format ['en scholarship_status', 'ja scholarship_status', 'is_default']
+# Array format ['en scholarship_status', 'ja scholarship_status', 'default']
 scholarship_statuses = [
   ['Self Paid',                   '自己支払い',       true ],
   ['Government Scholarship',      '政府奨学金',       false],
@@ -10,7 +10,7 @@ scholarship_statuses = [
 
 scholarship_statuses.each do |status|
   I18n.locale = :en
-  scholarship_status = Gaku::ScholarshipStatus.where(name: status[0], is_default: status[2]).first_or_create!
+  scholarship_status = Gaku::ScholarshipStatus.where(name: status[0], default: status[2]).first_or_create!
 
   I18n.locale = :ja
   scholarship_status.update_attribute(:name,  status[1])

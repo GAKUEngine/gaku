@@ -30,11 +30,11 @@ describe 'Student Changes' do
   end
 
   it 'saves soft deletes', versioning: true do
-    student.update_attribute(:is_deleted, true)
+    student.update_attribute(:deleted, true)
     visit gaku.admin_changes_students_path
     page.should have_content 'true'
     page.should have_content 'false'
-    page.should have_content 'is_deleted'
+    page.should have_content 'deleted'
     page.should have_content 'update'
   end
 

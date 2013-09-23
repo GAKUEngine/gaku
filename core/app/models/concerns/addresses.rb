@@ -5,7 +5,7 @@ module Addresses
     has_many :addresses, as: :addressable
 
     def get_primary_address
-      self.addresses.where(is_primary: true).first
+      self.addresses.where(primary: true).first
     end
 
     def address_widget

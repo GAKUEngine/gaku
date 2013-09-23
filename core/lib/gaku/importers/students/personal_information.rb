@@ -4,15 +4,15 @@ module Gaku::Importers::Students::PersonalInformation
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(
       name: 'Phone').first.id, data: phone).exists?
       person.contacts.create!(contact_type_id:
-        Gaku::ContactType.where(name: 'Phone').first.id, is_primary: true,
-        is_emergency: true, data: phone) unless (phone.nil? || phone == '')
+        Gaku::ContactType.where(name: 'Phone').first.id, primary: true,
+        emergency: true, data: phone) unless (phone.nil? || phone == '')
     end
 
     email = row[:email]
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(
       name: 'Email').first.id, data: email).exists?
-      person.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, is_primary: true,
-        is_emergency: true, data: email) unless (email.nil? || email == '')
+      person.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, primary: true,
+        emergency: true, data: email) unless (email.nil? || email == '')
     end
   end
 

@@ -12,8 +12,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #exams' do
-    let(:deleted_exam) { create(:exam, is_deleted: true) }
-    let(:exam) { create(:exam, is_deleted: false) }
+    let(:deleted_exam) { create(:exam, deleted: true) }
+    let(:exam) { create(:exam, deleted: false) }
 
     before do
       exam
@@ -27,8 +27,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #course_groups' do
-    let(:deleted_course_group) { create(:course_group, is_deleted: true) }
-    let(:course_group) { create(:course_group, is_deleted: false) }
+    let(:deleted_course_group) { create(:course_group, deleted: true) }
+    let(:course_group) { create(:course_group, deleted: false) }
 
     before do
       course_group
@@ -42,8 +42,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #attachments' do
-    let(:deleted_attachment) { create(:attachment, is_deleted: true) }
-    let(:attachment) { create(:attachment, is_deleted: false) }
+    let(:deleted_attachment) { create(:attachment, deleted: true) }
+    let(:attachment) { create(:attachment, deleted: false) }
 
     before do
       attachment
@@ -57,8 +57,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #students' do
-    let(:deleted_student) { create(:student, is_deleted: true) }
-    let(:student) { create(:student, is_deleted: false) }
+    let(:deleted_student) { create(:student, deleted: true) }
+    let(:student) { create(:student, deleted: false) }
 
     before do
       student
@@ -72,8 +72,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #teachers' do
-    let(:deleted_teacher) { create(:teacher, is_deleted: true) }
-    let(:teacher) { create(:teacher, is_deleted: false) }
+    let(:deleted_teacher) { create(:teacher, deleted: true) }
+    let(:teacher) { create(:teacher, deleted: false) }
 
     before do
       teacher
@@ -87,8 +87,8 @@ describe Gaku::Admin::DisposalsController do
   end
 
   describe 'GET #guardians' do
-    let(:deleted_guardian) { create(:guardian, is_deleted: true) }
-    let(:guardian) { create(:guardian, is_deleted: false) }
+    let(:deleted_guardian) { create(:guardian, deleted: true) }
+    let(:guardian) { create(:guardian, deleted: false) }
 
     before do
       guardian
@@ -104,8 +104,8 @@ describe Gaku::Admin::DisposalsController do
   describe 'GET #addresses' do
     context 'student_addresses' do
       let(:student) { create(:student) }
-      let(:deleted_address) { create(:address, addressable: student, is_deleted: true) }
-      let(:address) { create(:address, addressable: student, is_deleted: false) }
+      let(:deleted_address) { create(:address, addressable: student, deleted: true) }
+      let(:address) { create(:address, addressable: student, deleted: false) }
 
       before do
         address
@@ -121,8 +121,8 @@ describe Gaku::Admin::DisposalsController do
 
         context 'teacher_addresses' do
       let(:teacher) { create(:teacher) }
-      let(:deleted_address) { create(:address, addressable: teacher, is_deleted: true) }
-      let(:address) { create(:address, addressable: teacher, is_deleted: false) }
+      let(:deleted_address) { create(:address, addressable: teacher, deleted: true) }
+      let(:address) { create(:address, addressable: teacher, deleted: false) }
 
       before do
         address
@@ -141,8 +141,8 @@ describe Gaku::Admin::DisposalsController do
   describe 'GET #contacts' do
     context 'student_contacts' do
       let(:student) { create(:student) }
-      let(:deleted_contact) { create(:contact, contactable: student, is_deleted: true) }
-      let(:contact) { create(:contact, contactable: student, is_deleted: false) }
+      let(:deleted_contact) { create(:contact, contactable: student, deleted: true) }
+      let(:contact) { create(:contact, contactable: student, deleted: false) }
 
       before do
         contact
@@ -158,8 +158,8 @@ describe Gaku::Admin::DisposalsController do
 
     context 'teacher_contacts' do
       let(:teacher) { create(:teacher) }
-      let(:deleted_contact) { create(:contact, contactable: teacher, is_deleted: true) }
-      let(:contact) { create(:contact, contactable: teacher, is_deleted: false) }
+      let(:deleted_contact) { create(:contact, contactable: teacher, deleted: true) }
+      let(:contact) { create(:contact, contactable: teacher, deleted: false) }
 
       before do
         contact

@@ -7,7 +7,7 @@
 #end
 
 # -*- encoding: utf-8 -*-
-# Array format ['en commute_method_type', 'ja commute_method_type', 'is_active?']
+# Array format ['en commute_method_type', 'ja commute_method_type', 'active?']
 commute_method_types = [
   ['Unknown',  '不明'],
   ['Walking',  '歩行'],

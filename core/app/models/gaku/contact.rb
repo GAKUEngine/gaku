@@ -18,20 +18,20 @@ module Gaku
 
     delegate :name, to: :contact_type, allow_nil: true
 
-    default_scope -> { where(is_deleted: false) }
+    default_scope -> { where(deleted: false) }
 
     def soft_delete
-      update_attributes(is_deleted: true, is_primary: false)
+      update_attributes(deleted: true, primary: false)
       decrement_count
     end
 
     def recover
-      update_attribute(:is_deleted, false)
+      update_attribute(:deleted, false)
       increment_count
     end
 
     def self.deleted
-      where(is_deleted: true)
+      where(deleted: true)
     end
 
     def self.students
@@ -47,8 +47,8 @@ module Gaku
     end
 
     def make_primary
-      contacts.update_all({is_primary: false}, ['id != ?', id])
-      update_attribute(:is_primary, true)
+      contacts.update_all({primary: false}, ['id != ?', id])
+      update_attribute(:primary, true)
 
       if contactable.has_attribute?(:primary_contact)
         contactable.update_attribute(:primary_contact, contact_widget)
@@ -56,7 +56,7 @@ module Gaku
     end
 
     def primary?
-      is_primary
+      primary
     end
 
     def join_model_name
@@ -78,12 +78,12 @@ module Gaku
     end
 
     def remove_other_primary
-      contacts.where('id != ?', id).update_all(is_primary: false) if primary?
+      contacts.where('id != ?', id).update_all(primary: false) if primary?
     end
 
     def ensure_first_is_primary
       if contactable.respond_to? :contacts
-        self.is_primary = true if contacts.blank?
+        self.primary = true if contacts.blank?
       end
     end
 

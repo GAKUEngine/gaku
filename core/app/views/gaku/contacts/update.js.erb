@@ -2,7 +2,7 @@ $('#contact-<%= @contact.id %>').html('<%= render_js_partial("fields", {contact:
 $(".modal#edit-contact-modal").modal("hide");
 showNotice("<%= render_flash %>");
 
-<% if @contact.is_primary? %>
+<% if @contact.primary? %>
   $('#<%= @resource_name.pluralize %>-index tbody tr').each(function(){
     $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
   });

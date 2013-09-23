@@ -9,7 +9,6 @@
 
  *= require jquery_validation_engine/validationEngine.jquery
  *= require jquery.minicolors
- * require jquery.dataTables
  *= require gaku/exams
 
  *= require ./gaku_engine
