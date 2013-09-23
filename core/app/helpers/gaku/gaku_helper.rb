@@ -5,6 +5,14 @@ module Gaku
     include TranslationsHelper
     include FlashHelper
 
+    def current_parent_controller
+      controller.controller_path.split('/').second
+    end
+
+    def current_controller_action
+      controller.action_name
+    end
+
     def drag_field
       content_tag :td, class: 'sort-handler' do
         content_tag :i, nil, class: 'icon-move'

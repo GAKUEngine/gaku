@@ -37,13 +37,7 @@ describe 'Student Achievements' do
       flash_created?
     end
 
-    it 'cancel create' do
-      ensure_cancel_creating_is_working
-    end
-
     it {has_validations?}
-
-
   end
 
   context 'existing',  js: true do
@@ -70,10 +64,6 @@ describe 'Student Achievements' do
         end
 
         flash_updated?
-      end
-
-      it 'cancel editing' do
-        within('#index-student-achievements-modal') {click '.back-modal-link' }
       end
     end
 
