@@ -1,5 +1,5 @@
 Gaku::School.where( name: 'Our School',
-                    is_primary: true,
+                    primary: true,
                     slogan: 'Our Slogan',
                     founded: Time.now,
                     principal: 'Our Principal',

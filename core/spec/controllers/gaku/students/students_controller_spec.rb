@@ -132,11 +132,11 @@ describe Gaku::StudentsController do
       expect(assigns(:student)).to eq student
     end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       expect do
         get_soft_delete
         student.reload
-      end.to change(student, :is_deleted)
+      end.to change(student, :deleted)
     end
   end
 
@@ -158,12 +158,12 @@ describe Gaku::StudentsController do
       should render_template :recovery
    end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       student.soft_delete
       expect do
         get_recovery
         student.reload
-      end.to change(student, :is_deleted)
+      end.to change(student, :deleted)
     end
   end
 

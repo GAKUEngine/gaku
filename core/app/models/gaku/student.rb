@@ -40,7 +40,7 @@ module Gaku
                             :student_id_number, :student_foreign_id_number,
                             :scholarship_status_id,
                             :commute_method_type_id, :enrollment_status_code,
-                            :is_deleted
+                            :deleted
                           ]
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
@@ -49,7 +49,7 @@ module Gaku
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
-                            is_active: true, immutable: true).first_or_create!.try(:code)
+                            active: true, immutable: true).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save
     end
@@ -76,20 +76,17 @@ module Gaku
     end
 
     def set_scholarship_status
-      self.scholarship_status = ScholarshipStatus.find_by_is_default(true)
+      self.scholarship_status = ScholarshipStatus.find_by_default(true)
     end
 
-    def is_active
+    def active
       enrollment_status = EnrollmentStatus.find_by_code(self.enrollment_status_code)
       if enrollment_status
-        enrollment_status.is_active
+        enrollment_status.active?
       else
         false
       end
     end
-
-
-
 
   end
 end

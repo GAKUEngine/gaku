@@ -5,7 +5,7 @@ td = contact.name
 td = contact.data
 td = contact.details
 td
-  =t(:'contact.emergency') if contact.is_emergency?
+  =t(:'contact.emergency') if contact.emergency?
 
 - if can_edit?
   td

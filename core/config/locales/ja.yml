@@ -387,7 +387,7 @@ ja:
     edit: 試験要素を編集
     error: 試験の部分の合計が100%を越えてて自動修正が出来ませんでした。正しい数字を入力しなおして下さい。
     execution_date: 実施日
-    is_master: マスター
+    master: マスター
     list: 試験要素一覧
     master: 試験要素マスター
     max_score: 最高点数

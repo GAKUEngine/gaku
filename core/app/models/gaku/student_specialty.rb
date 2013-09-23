@@ -13,7 +13,7 @@ module Gaku
                             message: I18n.t(:'specialty.already_added')
                           }
 
-    scope :ordered, -> { order('is_major desc') }
+    scope :ordered, -> { order('major desc') }
 
   end
 end

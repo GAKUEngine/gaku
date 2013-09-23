@@ -34,7 +34,7 @@ module Gaku
     private
 
     def student_specialty_attr
-      %i(specialty_id is_major)
+      %i(specialty_id major)
     end
 
     private

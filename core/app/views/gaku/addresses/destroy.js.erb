@@ -1,6 +1,6 @@
 showNotice("<%= render_flash %>");
 
-<%- if @addressable.addresses.reload.any? && @address.is_primary? %>
+<%- if @addressable.addresses.reload.any? && @address.primary? %>
   $('#address-<%= @addressable.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 

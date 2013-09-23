@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::SchoolsController do
 
-  let(:school) { create(:school, is_primary: true) }
+  let(:school) { create(:school, primary: true) }
 
   context 'permissions' do
     ensures 'deny except', :admin

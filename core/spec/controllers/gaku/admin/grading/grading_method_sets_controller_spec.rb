@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gaku::Admin::GradingMethodSetsController do
 
-  let(:grading_method_set) { create(:grading_method_set, is_primary: false) }
+  let(:grading_method_set) { create(:grading_method_set, primary: false) }
   let(:invalid_grading_method_set) { create(:invalid_grading_method_set) }
 
   context 'as student' do
@@ -149,7 +149,7 @@ describe Gaku::Admin::GradingMethodSetsController do
       end
 
       describe 'POST #make_primary' do
-        before { create(:grading_method_set, is_primary: true) }
+        before { create(:grading_method_set, primary: true) }
 
         let(:valid_js_make_primary) do
           gaku_js_post :make_primary, id: grading_method_set
@@ -166,9 +166,9 @@ describe Gaku::Admin::GradingMethodSetsController do
         end
 
         it 'makes primary' do
-          expect(grading_method_set.reload.is_primary).to eq false
+          expect(grading_method_set.reload.primary).to eq false
           valid_js_make_primary
-          expect(grading_method_set.reload.is_primary).to eq true
+          expect(grading_method_set.reload.primary).to eq true
         end
 
         it('renders the :make_primary template')  do

@@ -8,7 +8,7 @@ module Gaku
 
     validates :name, :school, presence: true
 
-    scope :master, -> { where(is_master: true) }
+    scope :master, -> { where(master: true) }
 
     def to_s
       name
