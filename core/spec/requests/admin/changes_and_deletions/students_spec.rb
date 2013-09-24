@@ -44,5 +44,4 @@ describe 'Student Changes' do
     page.should have_content 'destroy'
   end
 
-
 end
