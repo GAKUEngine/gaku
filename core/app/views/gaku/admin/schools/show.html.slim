@@ -17,7 +17,7 @@
     = well_div do
       - if params[:action] == 'school_details'
         .col-md-4
-          = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-4',  data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
+          = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-4', data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
       - else
         - unless @school.is_primary
           .col-md-6
