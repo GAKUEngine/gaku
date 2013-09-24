@@ -47,6 +47,8 @@ module Gaku
 
     before_create :set_scholarship_status
 
+    paginates_per Preset.students_per_page
+
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
                             active: true, immutable: true).first_or_create!.try(:code)
