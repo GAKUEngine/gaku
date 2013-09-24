@@ -18,8 +18,3 @@
     = render 'gaku/shared/picture', resource: @student
 
 = render partial: 'gaku/shared/student/tabs'
-
-coffee:
-  $('#delete-student-link').on 'click', (event) ->
-    event.preventDefault()
-    $('#delete-modal').modal('show')

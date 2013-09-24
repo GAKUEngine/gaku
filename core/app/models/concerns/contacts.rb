@@ -5,7 +5,7 @@ module Contacts
     has_many :contacts, as: :contactable
 
     def get_primary_contact
-      self.contacts.where(is_primary: true).first
+      self.contacts.where(primary: true).first
     end
 
     def contact_widget

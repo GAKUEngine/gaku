@@ -65,10 +65,6 @@ describe 'Student Achievements' do
 
         flash_updated?
       end
-
-      it 'cancel editing' do
-        within('#index-student-achievements-modal') {click '.back-modal-link' }
-      end
     end
 
     it 'delete' do

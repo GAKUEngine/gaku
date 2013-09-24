@@ -1,6 +1,5 @@
 module Gaku::Versioning
   class StudentVersion < PaperTrail::Version
-
     self.table_name = :gaku_versioning_student_versions
 
     serialize :human_changes

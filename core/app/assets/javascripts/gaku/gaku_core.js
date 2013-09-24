@@ -1,31 +1,35 @@
 //= require jquery
+//= require jquery.minicolors
+
 //= require turbolinks
-//= require jquery.ui.all
+//= require jquery.ui.autocomplete
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+//= require jquery.ui.resizable
+//= require jquery.ui.selectable
+//= require jquery.ui.sortable
+//= require jquery.ui.effect-slide
 
-//= require moment.min
+//= require bootstrap-alert
+//= require bootstrap-button
+//= require bootstrap-tab
+//= require bootstrap-dropdown
+//= require bootstrap-modal
 
-//= require bootstrap
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 
 //= require underscore
+//= require moment
 //= require backbone
 //= require rails.validations
-//= require gaku/gaku_engine
+//= require gaku/slide.js.erb
 //= require tablefix
-//= require combobox
-//= require jquery.dataTables
-//= require jquery.minicolors
+
+//= require gaku/gaku_engine
 
 //= require jquery_nested_form
 //= require gaku_forms
 //= require gaku_nested_forms
 
-//= require gaku/slide.js.erb
-
-//= require gaku/selected_students
-//= require gaku/student_chooser
-//= require gaku/syllabuses
-//= require gaku/students
-//= require gaku/exams
-//= require gaku/admin
 //= require_tree ./backbone/
+//= require_tree .

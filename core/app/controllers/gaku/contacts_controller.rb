@@ -66,7 +66,7 @@ module Gaku
     end
 
     def contact_attr
-      %i(data details contact_type_id is_primary is_emergency)
+      %i(data details contact_type_id primary emergency)
     end
 
     def t_resource

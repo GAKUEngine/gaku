@@ -23,11 +23,11 @@ describe Gaku::Students::GuardiansController do
       expect(assigns(:guardian)).to eq guardian
     end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       expect do
         get_soft_delete
         guardian.reload
-      end.to change(guardian, :is_deleted)
+      end.to change(guardian, :deleted)
     end
   end
 
@@ -49,12 +49,12 @@ describe Gaku::Students::GuardiansController do
       should render_template :recovery
    end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       guardian.soft_delete
       expect do
         get_recovery
         guardian.reload
-      end.to change(guardian, :is_deleted)
+      end.to change(guardian, :deleted)
     end
   end
 

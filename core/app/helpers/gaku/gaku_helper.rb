@@ -5,6 +5,14 @@ module Gaku
     include TranslationsHelper
     include FlashHelper
 
+    def current_parent_controller
+      controller.controller_path.split('/').second
+    end
+
+    def current_controller_action
+      controller.action_name
+    end
+
     def drag_field
       content_tag :td, class: 'sort-handler' do
         content_tag :i, nil, class: 'icon-move'
@@ -73,7 +81,7 @@ module Gaku
     end
 
     def major_check(student_specialty)
-      student_specialty.is_major ? t(:'specialty.major') : t(:'specialty.minor')
+      student_specialty.major ? t(:'specialty.major') : t(:'specialty.minor')
     end
 
     def comma_separated_list(objects, options = {}, &block)

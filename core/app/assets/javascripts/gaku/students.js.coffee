@@ -1,33 +1,35 @@
 ready = ->
 
-  $('#delete-student-link').on 'click', (e)->
-    e.preventDefault()
-    $('#delete-modal').modal('show')
+  self = this
 
-  $(".class-group-select").combobox()
+  class StudentsController
+    index: ->
+      self.app.student_chooser()
 
-  $('#student-achievements-tab-link').on 'shown', (e)->
-    $('.achievements-group').each (index, element) ->
-      heights = []
-      $(element).children('li').each (index, li)->
-        heights.push $(li).height()
-      maxHeight =  Math.max.apply(null,heights)
+    edit: ->
+      self.app.country_dropdown()
 
-      $(element).find('li').children('.thumbnail').each (index, li)->
-        $(@).height maxHeight
+      $(document).on 'click', '#cancel-student-commute-method-link', (e) ->
+        e.preventDefault()
+        $('#student-commute-method-form').slide ->
+          $('#commute-method').show()
+          $('#edit-student-commute-method-link').show()
 
+      $('#delete-student-link').on 'click', (e)->
+        e.preventDefault()
+        $('#delete-modal').modal('show')
 
-  #should be included where addresses is needed
-  $('body').on 'change', '#country_dropdown', ->
-    countryCode = $("#country_dropdown option:selected").val()
-    if countryCode
-      $.ajax
-        type: 'get'
-        url: '/states'
-        dataType: 'script'
-        data:
-          country_id: countryCode
+      $('#student-achievements-tab-link').on 'shown', (e)->
+        $('.achievements-group').each (index, element) ->
+          heights = []
+          $(element).children('li').each (index, li)->
+            heights.push $(li).height()
+          maxHeight =  Math.max.apply(null,heights)
 
+          $(element).find('li').children('.thumbnail').each (index, li)->
+            $(@).height maxHeight
+
+  @app.students = new StudentsController
 
 
 $(document).ready(ready)

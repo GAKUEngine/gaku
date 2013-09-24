@@ -22,7 +22,7 @@ FactoryGirl.define do
   end
 
   trait :master do
-    is_primary true
+    primary true
   end
 
 end

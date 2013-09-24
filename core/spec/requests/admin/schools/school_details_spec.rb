@@ -5,7 +5,7 @@ describe 'Admin School Details' do
 
   before { as :admin }
 
-  let(:school) { create(:school, is_primary: true) }
+  let(:school) { create(:school, primary: true) }
 
   before do
     school

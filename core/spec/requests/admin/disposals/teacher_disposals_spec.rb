@@ -4,8 +4,8 @@ describe 'Admin Teacher Disposals' do
 
   before { as :admin }
 
-  let(:deleted_teacher) { create(:teacher, is_deleted: true) }
-  let(:teacher) { create(:teacher, is_deleted: false) }
+  let(:deleted_teacher) { create(:teacher, deleted: true) }
+  let(:teacher) { create(:teacher, deleted: false) }
 
   before do
     teacher
@@ -32,7 +32,7 @@ describe 'Admin Teacher Disposals' do
       click recovery_link
       flash_recovered?
       deleted_teacher.reload
-    end.to change(deleted_teacher, :is_deleted)
+    end.to change(deleted_teacher, :deleted)
 
     has_no_content? deleted_teacher.name
     has_no_content? deleted_teacher.surname

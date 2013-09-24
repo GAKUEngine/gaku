@@ -19,7 +19,7 @@
         span4
           = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger span4', confirm: t('confirm'), id: 'edit-admin-primary-school'
       - else
-        - unless @school.is_primary
+        - unless @school.primary?
           .span6
             = link_to_edit_with_text [:edit, :admin, @school], remote: true
       .span6

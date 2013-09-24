@@ -5,7 +5,7 @@ FactoryGirl.define do
     name 'Roster Template'
     context 'spreadsheet'
     file { fixture_file_upload(Rails.root + '../support/sample_roster.ods', 'application/vnd.oasis.opendocument.spreadsheet') }
-    is_locked 0
+    locked false
   end
 
 end
