@@ -1,5 +1,5 @@
 = index_header do
-  .hide *{id: 'new-' + @notable_resource + '-note'}
+  div style='display:none' *{id: 'new-' + @notable_resource + '-note'}
   .pull-left
     = count_div "#{@notable_resource}-notes-count" do
       = print_count @notable.notes_count, t_note_list
