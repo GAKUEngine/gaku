@@ -13,7 +13,7 @@ describe 'Student Class Group Enrollments' do
   end
 
 
-  it 'enrolls to class', js: true do
+  xit 'enrolls to class', js: true do
     student
     class_group
     visit gaku.edit_student_path(student)
