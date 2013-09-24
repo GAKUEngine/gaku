@@ -12,7 +12,7 @@ describe Gaku::Student do
   end
 
   describe 'associations' do
-    it { should have_many :course_enrollments }
+    it { should have_many(:course_enrollments).dependent(:destroy) }
     it { should have_many(:courses).through(:course_enrollments) }
 
     it { should have_many :class_group_enrollments }
@@ -24,7 +24,7 @@ describe Gaku::Student do
     it { should have_many :achievements }
     it { should have_many(:achievements).through(:student_achievements) }
 
-    it { should have_many :student_guardians}
+    it { should have_many(:student_guardians).dependent(:destroy) }
     it { should have_many(:guardians).through(:student_guardians) }
 
     it { should have_many :exam_portion_scores }
