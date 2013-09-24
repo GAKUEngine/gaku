@@ -6,6 +6,7 @@ bundler_args: --without development production
 env:
   - GEM=core DB=postgres
 before_install:
+  - gem install bundler --pre
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
 script:
   - bundle exec rake test_app
@@ -21,7 +22,3 @@ notifications:
       - "irc.freenode.org#gaku"
 rvm:
   - 2.0.0
-  - ruby-head
-matrix:
-  allow_failures:
-    - rvm: ruby-head

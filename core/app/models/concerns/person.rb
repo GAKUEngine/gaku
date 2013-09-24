@@ -2,7 +2,7 @@ module Person
   extend ActiveSupport::Concern
 
   included do
-    validates_presence_of :name, :surname
+    validates :name, :surname, presence: true
 
     def to_s
       "#{self.surname} #{self.name}"
