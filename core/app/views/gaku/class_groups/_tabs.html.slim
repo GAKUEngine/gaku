@@ -1,32 +1,34 @@
-.row.mt-l
-  .col-md-12.well
-    .tabbable.tabs-right
-      ul.nav.nav-tabs
-        li#class_group_students_tab.active
-          a#class-group-enrollments-tab-link data-toggle="tab" href="#class_group_enrollments"
-            = print_count @class_group.enrollments.count, t(:'student.plural')
-        li
-          a#class-group-semester-class-groups-tab-link data-toggle="tab" href="#semesters"
-            = print_count @class_group.semesters.count, t(:'semester.plural')
-        li
-          a#class-group-courses-tab-link data-toggle="tab" href="#courses"
-            = print_count @class_group.courses.count, t(:'course.plural')
-      .tab-content
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li#class_group_students_tab.active
+        a#class-group-enrollments-tab-link data-toggle="tab" href="#class_group_enrollments"
+          = print_count @class_group.enrollments.count, t(:'student.plural')
+      li
+        a#class-group-semester-class-groups-tab-link data-toggle="tab" href="#semesters"
+          = print_count @class_group.semesters.count, t(:'semester.plural')
+      li
+        a#class-group-courses-tab-link data-toggle="tab" href="#courses"
+          = print_count @class_group.courses.count, t(:'course.plural')
+    .tab-content
 
-        #class_group_enrollments.tab-pane.active
-          .row#class_group_enrollments_list
+      #class_group_enrollments.tab-pane.active
+        .row
+          #enrollment_form.hide
+        .row#class_group_enrollments_list
+          .col-md-12
             =render 'gaku/class_groups/students/students'
-          .row
-            #enrollment_form.hide
 
-        #semesters.tab-pane
-          .row
+      #semesters.tab-pane
+        .row
+          .col-md-12
             = render 'gaku/class_groups/semester_class_groups/semesters'
-          .row
-            #semester_form.hide
+        .row
+          #semester_form.hide
 
-        #courses.tab-pane
-          .row
+      #courses.tab-pane
+        .row
+          .col-md-12
             = render 'gaku/class_groups/courses/courses'
-          .row
-            #course_form.hide
+        .row
+          #course_form.hide

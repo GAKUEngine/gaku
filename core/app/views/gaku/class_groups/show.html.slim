@@ -1,24 +1,24 @@
 = content_for :show_header do
   = t(:'class_group.show')
-
+hr
 .row
-  = table do
-    thead
-      tr
-        th = t(:'class_group.grade')
-        th = t(:'class_group.name')
-        th = t(:'class_group.homeroom')
-    tbody
-      tr class="class-group-#{@class_group.id}"
-        = render 'gaku/shared/fields/class_group_fields', class_group: @class_group
+  .col-md-12
+    = table do
+      thead
+        tr
+          th = t(:'class_group.grade')
+          th = t(:'class_group.name')
+          th = t(:'class_group.homeroom')
+      tbody
+        tr class="class-group-#{@class_group.id}"
+          = render 'gaku/shared/fields/class_group_fields', class_group: @class_group
 
 = render 'tabs'
 
-= well_div do
-  #class-group-notes
-    = render 'gaku/notes/notes'
+#class-group-notes.mt-l
+  = render 'gaku/notes/notes'
 
-= well_div do
+.row
   .col-md-6
     = link_to_edit_with_text [:edit, @class_group], remote: true
   .col-md-6
