@@ -1,14 +1,14 @@
-= index_header do
-  div style='display:none' *{id: 'new-' + @notable_resource + '-note'}
-  .pull-left
-    = count_div "#{@notable_resource}-notes-count" do
-      = print_count @notable.notes_count, t_note_list
-  .pull-right
-    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], id: 'new-' + @notable_resource + '-note-link' if can_edit?
+.hide *{id: 'new-' + @notable_resource + '-note'}
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-md-12
+        .pull-left
+          = count_div "#{@notable_resource}-notes-count panel-title" do
+            = print_count @notable.notes_count, t_note_list
+        .pull-right
+          = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], {id: 'new-' + @notable_resource + '-note-link', class: 'btn btn-primary btn-xs'} if can_edit?
 
-= hr
-
-= index_body do
   = table_for "#{@notable_resource}-notes-index" do
     thead
       tr
