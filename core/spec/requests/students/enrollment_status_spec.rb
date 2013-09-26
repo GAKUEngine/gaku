@@ -16,7 +16,7 @@ describe 'Student Enrollment Status' do
     flash_updated?
     within('#student_enrollment_status_code') { has_content? enrollment_status.name }
     student.reload
-    expect(student.enrollment_status_code).to eq enrollment_status.id.to_s
+    expect(student.enrollment_status_code).to eq enrollment_status.code
   end
 
 end

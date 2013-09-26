@@ -1,16 +1,19 @@
 .row-fluid
-  = autocomplete_text_field(f, options = {  object_name: 'surname_cont',
-                                            tag_name: t(:surname),
-                                            class_name: 'student',
-                                            column: 'surname'})
-  = autocomplete_text_field(f, options = {  object_name: 'name_cont',
-                                            tag_name: t(:given_name),
-                                            class_name: 'student',
-                                            column: 'name'})
-  = autocomplete_date_field(f, options = {  object_name: 'birth_date_gteq',
-                                            tag_name: t(:birth_date_from)})
-  = autocomplete_date_field(f, options = {  object_name: 'birth_date_lteq',
-                                          tag_name: t(:birth_date_to)})
+  .span3
+    = f.label :surname_cont, t(:surname)
+    = f.text_field :surname_cont, class: "span12"
+
+  .span3
+    = f.label :name_cont, t(:given_name)
+    = f.text_field :name_cont, class: "span12"
+
+  .span3
+    = f.label :birth_date_gteq, t(:birth_date_from)
+    = f.text_field :birth_date_gteq, class: "span12"
+
+  .span3
+    = f.label :birth_date_lteq, t(:birth_date_to)
+    = f.text_field :birth_date_lteq, class: "span12"
 
 .row-fluid
   = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',

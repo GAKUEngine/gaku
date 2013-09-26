@@ -2,7 +2,7 @@ module Gaku
   class PersonDecorator < Draper::Decorator
 
     def sex_and_birth
-      [h.gender(object), object.birth_date].join(', ')
+      [h.gender(object), object.birth_date.to_s].reject(&:empty?).join(', ')
     end
 
     #returns full name complete with formatting [if any]

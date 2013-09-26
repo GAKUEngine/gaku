@@ -1,24 +1,6 @@
 = normal_form_for @student do |f|
   = person_caption_for student
-  .row-fluid
-    .span12
-      = f.select :class_group_ids, @class_groups,{prompt: t(:'class_group.none_assigned')}, label: t(:'class')
-
-  = render 'gaku/shared/form_fields/person_form_fields', f: f
-
-  .row-fluid
-    .span6
-      = f.text_field :admitted, class: "datepicker", label: t(:admitted)
-    .span6
-      = f.text_field :graduated, class: "datepicker", label: t(:graduated)
-
-  .row-fluid
-    .span3
-      = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, prompt: true, label: t(:'scholarship_status.singular'))
-    .span3
-      = f.collection_select(:enrollment_status_code, @enrollment_statuses, :id, :name, prompt: true, label: t(:'enrollment_status.singular'))
-    .span3
-      = f.collection_select(:commute_method_type_id, @commute_method_types, :id, :name, prompt: true, label: t(:'commute_method_type.singular'))
+  = render 'gaku/students/form_fields', f: f, student: @student
 
   = hr
   = submit_button 'Save Student', id: 'submit-student-button'

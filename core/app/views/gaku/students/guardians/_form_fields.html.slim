@@ -1,5 +1,4 @@
-= render 'gaku/shared/form_fields/person_form_fields', f: f
+= render 'gaku/shared/form_fields/person_form_fields', f: f, person: guardian
 .row-fluid
   .span12
     = f.text_field :relationship, label: t(:'guardian.relationship')
-    /= f.hidden_field :student_id, value: @student.id

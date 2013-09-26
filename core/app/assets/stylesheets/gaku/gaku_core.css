@@ -2,6 +2,7 @@
  *= require_self
  *= require ./gaku_import
  *= require bootstrap-datepicker
+ *= require jquery.ui.autocomplete
  *= require jquery.minicolors
  *= require gaku/exams
 
