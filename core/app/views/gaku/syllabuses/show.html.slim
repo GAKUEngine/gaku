@@ -26,13 +26,13 @@
           = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
           = ajax_link_to_new t(:'exam.add_existing'), '', id: 'new-existing-exam-link'
 
-      .row
+      .row.mt-s
         .col-md-12
           #new-existing-exam-errors
-          #new-existing-exam.hide style='padding-top:10px'
+          #new-existing-exam.hide
             = render 'gaku/syllabuses/exams/select_form'
 
-          #new-syllabus-exam.hide style='padding-top:10px'
+          #new-syllabus-exam.hide
             /= render 'gaku/syllabuses/exams/form'
       .row
         .col-md-12
@@ -45,7 +45,7 @@
       = render 'gaku/syllabuses/assignments/assignments'
     #new-syllabus-assignment
       = link_to t(:'assignment.new'), create_syllabus_assignment_path(@syllabus), { id: 'new-course-assignment-link', class: 'btn'}
-    #new-syllabus-assignment-form*{ 'style' => 'display:none;'}
+    #new-syllabus-assignment-form.hide
       = render 'gaku/syllabuses/assignments/form'
 
 = well_div do
