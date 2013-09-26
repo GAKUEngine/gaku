@@ -1,9 +1,5 @@
 source 'http://production.s3.rubygems.org'
 
-gem 'phantom_helpers',      github: 'Genshin/phantom_helpers',      branch: 'master'
-gem 'phantom_forms',        github: 'Genshin/phantom_forms',        branch: 'master'
-gem 'phantom_nested_forms', github: 'Genshin/phantom_nested_forms', branch: 'master'
-
 gem 'pg'
 
 gem 'sass-rails',   '~> 4.0.0'
