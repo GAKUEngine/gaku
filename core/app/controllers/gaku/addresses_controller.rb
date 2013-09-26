@@ -88,13 +88,11 @@ module Gaku
     def nested_resources(klasses)
       nested_resources = []
       last_klass_foreign_key = params[klasses.last.to_s.foreign_key]
-
       if klasses.is_a? Array
         @addressable = klasses.last.find(last_klass_foreign_key)
-
         klasses.pop #remove @addressable resource
         klasses.each do |klass|
-          nested_resources.append klass.find(last_klass_foreign_key)
+          nested_resources.append klass.find(params[klass.to_s.foreign_key])
         end
       else
         @addressable = klasses.find(params[klasses.to_s.foreign_key])
