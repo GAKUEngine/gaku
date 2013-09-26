@@ -23,7 +23,7 @@ module Gaku
     def update
       super do |format|
         if params[:guardian][:picture]
-          format.html { redirect_to [:edit, student, guardian], notice: t('notice.uploaded', resource: t('picture')) }
+          format.html { redirect_to [:edit, student, @guardian], notice: t('notice.uploaded', resource: t('picture')) }
         else
           format.js { render }
           format.json { head :no_content }
@@ -57,7 +57,7 @@ module Gaku
     private
 
     def guardian_attr
-      %i(name surname name_reading surname_reading birth_date gender relationship)
+      %i(name surname name_reading surname_reading birth_date gender relationship picture)
     end
 
     def student
