@@ -98,7 +98,7 @@ module Gaku
     end
 
     def update_primary_address_field
-      if addressable.has_attribute? :primary_address
+      if addressable && addressable.has_attribute?(:primary_address)
         addressable.update_attribute(:primary_address, addressable.address_widget)
       end
     end
