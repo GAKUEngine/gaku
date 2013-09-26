@@ -25,7 +25,7 @@ module Gaku
 
 
     def index
-      @enrollment_statuses = EnrollmentStatus.all
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations)
       @countries = Country.all
       @class_groups = ClassGroup.all
       @enrolled_students = params[:enrolled_students]
