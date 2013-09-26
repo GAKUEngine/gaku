@@ -37,11 +37,11 @@ describe Gaku::ExamsController do
       expect(assigns(:exam)).to eq exam
     end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       expect do
         get_soft_delete
         exam.reload
-      end.to change(exam, :is_deleted)
+      end.to change(exam, :deleted)
     end
   end
 
@@ -63,12 +63,12 @@ describe Gaku::ExamsController do
       should render_template :recovery
    end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       exam.soft_delete
       expect do
         get_recovery
         exam.reload
-      end.to change(exam, :is_deleted)
+      end.to change(exam, :deleted)
     end
   end
 

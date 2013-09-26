@@ -37,6 +37,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-i18n'
   s.add_dependency 'i18n-js'
 
+  s.add_dependency 'underscore-rails'
+  s.add_dependency 'momentjs-rails'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'jquery-minicolors-rails', '2.1.1'

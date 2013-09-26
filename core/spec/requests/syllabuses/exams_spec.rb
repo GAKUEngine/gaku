@@ -42,7 +42,7 @@ describe 'Syllabus Exams' do
       within(count_div) { page.should have_content 'Exams list(1)' }
     end
 
-    it "cancels adding existing exam", cancel: true, js: true do
+    xit "cancels adding existing exam", cancel: true, js: true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link

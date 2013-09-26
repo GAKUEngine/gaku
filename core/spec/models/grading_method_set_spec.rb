@@ -15,18 +15,18 @@ describe Gaku::GradingMethodSet do
   describe '#make_primary' do
     it 'makes primary the first one' do
       grading_method_set1 =  create(:grading_method_set)
-      expect(grading_method_set1.is_primary).to eq true
+      expect(grading_method_set1.primary).to eq true
     end
 
     it 'keeps primary only one' do
-      grading_method_set1 =  create(:grading_method_set, is_primary: true)
-      expect(grading_method_set1.is_primary).to eq true
+      grading_method_set1 =  create(:grading_method_set, primary: true)
+      expect(grading_method_set1.primary).to eq true
 
-      grading_method_set2 =  create(:grading_method_set, is_primary: false)
+      grading_method_set2 =  create(:grading_method_set, primary: false)
       grading_method_set2.make_primary
 
-      expect(grading_method_set1.reload.is_primary).to eq false
-      expect(grading_method_set2.reload.is_primary).to eq true
+      expect(grading_method_set1.reload.primary).to eq false
+      expect(grading_method_set2.reload.primary).to eq true
     end
   end
 

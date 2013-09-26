@@ -24,16 +24,16 @@ describe Gaku::Address do
   end
 
   describe '.before_save' do
-    it 'calls :ensure_first_is_primary on create' do
+    it 'calls :ensure_first_primary on create' do
       built_address = build(:address)
-      built_address.should_receive(:ensure_first_is_primary)
+      built_address.should_receive(:ensure_first_primary)
       built_address.save!
     end
   end
 
   describe '.deleted' do
-    let!(:active_address) { create(:address, is_deleted: false) }
-    let!(:deleted_address) { create(:address, is_deleted: true) }
+    let!(:active_address) { create(:address, deleted: false) }
+    let!(:deleted_address) { create(:address, deleted: true) }
 
     it 'returns records that are not deleted' do
       expect(Gaku::Address.deleted).to be == [deleted_address]
@@ -65,17 +65,17 @@ describe Gaku::Address do
   end
 
   describe '#make_primary' do
-    it 'sets is_primary: false except self' do
-      address2 = create(:address, country: country, addressable: student, is_primary: true)
+    it 'sets primary: false except self' do
+      address2 = create(:address, country: country, addressable: student, primary: true)
       address.make_primary
       address2.reload
-      expect(address2.is_primary).to be_false
-      expect(address.is_primary).to be_true
+      expect(address2.primary).to be_false
+      expect(address.primary).to be_true
     end
 
-    it 'sets is_primary: true' do
+    it 'sets primary: true' do
       address.make_primary
-      expect(address.is_primary).to eq true
+      expect(address.primary).to eq true
     end
 
     it 'updates address_widget field' do
@@ -91,9 +91,9 @@ describe Gaku::Address do
       address.soft_delete
     end
 
-    it 'sets is_deleted: true' do
+    it 'sets deleted: true' do
       address.soft_delete
-      expect(address.is_deleted).to eq true
+      expect(address.deleted).to eq true
     end
   end
 
@@ -103,9 +103,9 @@ describe Gaku::Address do
       address.recover
     end
 
-    it 'sets is_deleted: false' do
+    it 'sets deleted: false' do
       address.recover
-      expect(address.is_deleted).to eq false
+      expect(address.deleted).to eq false
     end
   end
 

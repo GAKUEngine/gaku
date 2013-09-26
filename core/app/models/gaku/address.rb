@@ -4,7 +4,7 @@ module Gaku
     belongs_to :state
     belongs_to :addressable, polymorphic: true, counter_cache: true
 
-    scope :deleted,   -> { where(is_deleted: true) }
+    scope :deleted,   -> { where(deleted: true) }
     scope :students,  -> { where(addressable_type: 'Gaku::Student') }
     scope :teachers,  -> { where(addressable_type: 'Gaku::Teacher') }
     scope :guardians, -> { where(addressable_type: 'Gaku::Guardian') }
@@ -16,34 +16,34 @@ module Gaku
                             joined_resource_id: :joined_resource_id
                           }
 
-    default_scope -> { where(is_deleted: false) }
+    default_scope -> { where(deleted: false) }
 
     validates :address1, :country, :city, presence: true
 
     accepts_nested_attributes_for :country
 
-    before_save :ensure_first_is_primary, on: :create
+    before_save :ensure_first_primary, on: :create
 
     after_destroy :reset_counter_cache
 
     def make_primary
-      addresses.where('id != ?', id).update_all(is_primary: false)
-      update_attribute(:is_primary, true)
+      addresses.where('id != ?', id).update_all(primary: false)
+      update_attribute(:primary, true)
       update_address_widget
     end
 
     def soft_delete
-      update_attributes(is_deleted: true, is_primary: false)
+      update_attributes(deleted: true, primary: false)
       decrement_count
     end
 
     def recover
-      update_attribute(:is_deleted, false)
+      update_attribute(:deleted, false)
       increment_count
     end
 
     def primary?
-      is_primary
+      primary
     end
 
     def join_model_name
@@ -91,9 +91,9 @@ module Gaku
       addressable.class.decrement_counter(:addresses_count, addressable.id)
     end
 
-    def ensure_first_is_primary
+    def ensure_first_primary
       if addressable.respond_to?(:addresses)
-        self.is_primary = true if addresses.blank?
+        self.primary = true if addresses.blank?
       end
     end
 

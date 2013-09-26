@@ -25,7 +25,7 @@ module Gaku
     accepts_nested_attributes_for :exam_portions
 
     def self.without_syllabuses
-      includes(:syllabuses).where(is_standalone: false)
+      includes(:syllabuses).where(standalone: false)
                            .select { |p| p.syllabuses.length == 0 }
     end
 

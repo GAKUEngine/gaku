@@ -51,7 +51,7 @@ module Gaku
     end
 
     def attributes
-      %i(code name is_active immutable)
+      %i(code name active immutable)
     end
 
   end

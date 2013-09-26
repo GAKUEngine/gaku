@@ -5,7 +5,7 @@ describe 'Admin Grading Method Sets' do
   before { as :admin }
   before(:all) { set_resource 'admin-grading-method-set' }
 
-  let(:grading_method_set) { create(:grading_method_set, name: 'Set 1', is_primary: true) }
+  let(:grading_method_set) { create(:grading_method_set, name: 'Set 1', primary: true) }
 
   context 'new', js: true do
     before do
@@ -82,16 +82,16 @@ describe 'Admin Grading Method Sets' do
     end
 
     it 'sets primary', js: true do
-      grading_method_set.is_primary? == true
-      grading_method_set2.is_primary? == false
+      grading_method_set.primary? == true
+      grading_method_set2.primary? == false
 
       within("#{table} tr#grading-method-set-#{grading_method_set2.id}") do
         click_link 'set_primary_link'
       end
       accept_alert
 
-      grading_method_set.is_primary? == false
-      grading_method_set2.is_primary? == true
+      grading_method_set.primary? == false
+      grading_method_set2.primary? == true
     end
 
     it 'delete primary', js: true do
@@ -112,7 +112,7 @@ describe 'Admin Grading Method Sets' do
 
       page.find("#{grading_method_set_tr} a.btn-primary.make-primary-grading-method-set")
 
-      grading_method_set.is_primary? == true
+      grading_method_set.primary? == true
     end
   end
 end

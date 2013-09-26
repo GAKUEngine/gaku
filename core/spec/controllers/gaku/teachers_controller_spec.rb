@@ -19,11 +19,11 @@ describe Gaku::TeachersController do
       expect(assigns(:teacher)).to eq teacher
     end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       expect do
         get_soft_delete
         teacher.reload
-      end.to change(teacher, :is_deleted)
+      end.to change(teacher, :deleted)
     end
   end
 
@@ -45,12 +45,12 @@ describe Gaku::TeachersController do
       should render_template :recovery
    end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       teacher.soft_delete
       expect do
         get_recovery
         teacher.reload
-      end.to change(teacher, :is_deleted)
+      end.to change(teacher, :deleted)
     end
   end
 

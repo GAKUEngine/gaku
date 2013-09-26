@@ -41,7 +41,7 @@ describe 'Admin Schools' do
   context 'shows primary school avatar' do
 
     before do
-      primary_school = create(:school, is_primary:true)
+      primary_school = create(:school, primary:true)
       visit gaku.admin_schools_path
       @file_name = 'school_picture'
     end

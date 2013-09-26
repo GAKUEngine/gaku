@@ -39,7 +39,7 @@ module Gaku
     end
 
     def attributes
-      %i(name school_id is_master picture)
+      %i(name school_id master picture)
     end
 
   end

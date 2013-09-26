@@ -20,15 +20,15 @@ module Gaku
 
     def soft_delete
       @course_group = CourseGroup.find(params[:id])
-      @course_group.update_attribute(:is_deleted, true)
+      @course_group.update_attribute(:deleted, true)
       redirect_to course_groups_path,
                   notice: t(:'notice.destroyed', resource: t_resource)
     end
 
     def recovery
       unscoped_course_group
-      @course_group.update_attribute(:is_deleted, false)
-      @course_groups = CourseGroup.where(is_deleted: true)
+      @course_group.update_attribute(:deleted, false)
+      @course_groups = CourseGroup.where(deleted: true)
       flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_to do |format|
         format.js { render :recovery }

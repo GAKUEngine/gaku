@@ -31,7 +31,7 @@ module Gaku
     private
 
     def attributes
-      %i(title address1 address2 city zipcode state state_id country country_id is_deleted is_primary past)
+      %i(title address1 address2 city zipcode state state_id country country_id deleted primary past)
     end
 
     def address_params

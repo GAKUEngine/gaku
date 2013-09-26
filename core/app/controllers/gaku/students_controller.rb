@@ -32,7 +32,7 @@ module Gaku
 
       @search = Student.active.search(params[:q])
       results = @search.result(distinct: true)
-      @students = results.order('created_at ASC').page(params[:page]).per(Preset.students_per_page)
+      @students = results.order('created_at ASC').page(params[:page])
 
       super do |format|
         format.pdf do

@@ -11,12 +11,12 @@ describe Gaku::StudentsController do
   context 'search' do
     describe 'name' do
 
-      let(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,9,1)) }
-      let(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,10,5)) }
+      let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,9,1)) }
+      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,10,5)) }
 
       it 'searches by name' do
         gaku_js_get :index, q: { name_cont: "Re" }
-        puts assigns(:students).to_json
+
         expect(assigns(:students)).to eq [student1]
         expect(assigns(:students).size).to eq 1
       end
@@ -132,11 +132,11 @@ describe Gaku::StudentsController do
       expect(assigns(:student)).to eq student
     end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       expect do
         get_soft_delete
         student.reload
-      end.to change(student, :is_deleted)
+      end.to change(student, :deleted)
     end
   end
 
@@ -158,12 +158,12 @@ describe Gaku::StudentsController do
       should render_template :recovery
    end
 
-    it 'updates :is_deleted attribute' do
+    it 'updates :deleted attribute' do
       student.soft_delete
       expect do
         get_recovery
         student.reload
-      end.to change(student, :is_deleted)
+      end.to change(student, :deleted)
     end
   end
 
