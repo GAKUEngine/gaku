@@ -30,4 +30,7 @@
 #students-index-div
   = render 'gaku/students/students'
 
-= paginate @students, remote: true
+  - if controller_name == 'students'
+    = paginate @students
+  - else
+    = paginate @students, remote: true
