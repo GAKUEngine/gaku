@@ -17,13 +17,14 @@ ready = ->
 
   class App
     init: ->
-      $(document).on "click",".cancel-link", (e) ->
+      $(document).off('click', '.cancel-link').on "click",".cancel-link", (e) ->
         e.preventDefault()
-        resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
-        resource_new_link = "#new-" + resource_id + "-link"
-        resource_form = "#new-" + resource_id
-        $(resource_new_link).show()
-        $(resource_form).slide()
+        if $(e.target).parents('.modal-body').length == 0
+          resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
+          resource_new_link = "#new-" + resource_id + "-link"
+          resource_form = "#new-" + resource_id
+          $(resource_new_link).show()
+          $(resource_form).slide()
 
       $(document).on 'ajax:success', '.recovery-link', ->
         $(this).closest('tr').remove()
