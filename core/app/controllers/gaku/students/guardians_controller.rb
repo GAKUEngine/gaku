@@ -23,8 +23,9 @@ module Gaku
     def update
       super do |format|
         if params[:guardian][:picture]
-          format.html { redirect_to [:edit, student, guardian], notice: t('notice.uploaded', resource: t('picture')) }
+          format.html { redirect_to [:edit, @student, @guardian], notice: t(:'notice.uploaded', resource: t(:'picture')) }
         else
+          format.html { redirect_to [:edit, @student, @guardian] }
           format.js { render }
           format.json { head :no_content }
          end
