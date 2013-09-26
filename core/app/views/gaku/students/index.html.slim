@@ -11,6 +11,11 @@
 = content_for :new_form do
   #new-student.hide
 
-= render 'gaku/shared/student_chooser/chooser'
 
+= render 'gaku/students/search/form'
 = hr
+
+#students-index-div
+  = render 'gaku/students/students'
+
+= paginate @students
