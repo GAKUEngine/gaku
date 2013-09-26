@@ -28,6 +28,7 @@ module Gaku
       @enrollment_statuses = EnrollmentStatus.all.includes(:translations)
       @countries = Country.all
       @class_groups = ClassGroup.all
+      @courses = Course.all
       @enrolled_students = params[:enrolled_students]
 
       @search = Student.active.search(params[:q])
