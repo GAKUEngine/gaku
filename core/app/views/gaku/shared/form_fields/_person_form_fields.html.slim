@@ -13,7 +13,7 @@
   .span6
     = f.text_field :birth_date, class: "datepicker", label: t(:birth_date)
   .span6
-    = f.select :gender, genders, {prompt: t(:'gender.choose'), selected: gender_preset}, label: t(:gender)
+    = f.select :gender, genders, {prompt: t(:'gender.choose'), selected: person.gender}, label: t(:gender)
 
 coffee:
   $(document).ready ->
