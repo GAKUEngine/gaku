@@ -27,6 +27,27 @@ table.table.table-bordered.th-center
         = student.class_group
       th.active = t(:'admitted')
       td = student.admitted
+
+    tr
+      th = t(:'enrollment_status.singular')
+      td = student.enrollment_status
+
+    tr
+      th = t(:'scholarship_status.singular')
+      td = student.scholarship_status
+
+    tr
+      th = t(:'commute_method.singular')
+      td = student.commute_method_type
+
+    tr
+      th = t(:'specialty.plural')
+      td = student.specialties_list
+
+    tr
+      th = t(:'simple_grade.plural')
+      td = student.simple_grades_list
+
     tr
       th.active = t(:'address.primary')
       td#address_widget colspan="3" = student.primary_address

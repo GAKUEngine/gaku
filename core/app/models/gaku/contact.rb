@@ -15,6 +15,7 @@ module Gaku
 
     before_save :ensure_first_is_primary, on: :create
     before_save :remove_other_primary
+    after_save :update_primary_contact_field
 
     delegate :name, to: :contact_type, allow_nil: true
 
@@ -89,6 +90,12 @@ module Gaku
 
     def contact_widget
       contactable.contact_widget
+    end
+
+    def update_primary_contact_field
+      if contactable.has_attribute? :primary_contact
+        contactable.update_attribute(:primary_contact, contactable.contact_widget)
+      end
     end
 
     def contacts

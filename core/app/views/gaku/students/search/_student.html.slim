@@ -1,21 +1,24 @@
-form role="form"
-  .row.mb-m
-    = autocomplete_text_field(f, options = {  object_name: 'surname_cont',
-                                              tag_name: t(:surname),
-                                              class_name: 'student',
-                                              column: 'surname'})
-    = autocomplete_text_field(f, options = {  object_name: 'name_cont',
-                                              tag_name: t(:given_name),
-                                              class_name: 'student',
-                                              column: 'name'})
-    = autocomplete_date_field(f, options = {  object_name: 'birth_date_gteq',
-                                              tag_name: t(:birth_date_from)})
-    = autocomplete_date_field(f, options = {  object_name: 'birth_date_lteq',
-                                              tag_name: t(:birth_date_to)})
-  .row
-    = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
-                                          tag_name: t('enrollment_status.singular'),
-                                          collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
-                                          selected: (@enrollment_status_enrolled_code),
-                                          prompt_position: "bottomRight:5",
-                                          html_options: {class: "validate[required] span12", id: "enrollment_status_dropdown"}})
+.row
+  .col-md-3
+    = f.label :surname_cont, t(:surname)
+    = f.text_field :surname_cont, class: "col-md-12"
+
+  .col-md-3
+    = f.label :name_cont, t(:given_name)
+    = f.text_field :name_cont, class: "col-md-12"
+
+  .col-md-3
+    = f.label :birth_date_gteq, t(:birth_date_from)
+    = f.text_field :birth_date_gteq, class: "col-md-12"
+
+  .col-md-3
+    = f.label :birth_date_lteq, t(:birth_date_to)
+    = f.text_field :birth_date_lteq, class: "col-md-12"
+
+.row
+  = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
+                                        tag_name: t('enrollment_status.singular'),
+                                        collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
+                                        selected: (@enrollment_status_enrolled_code),
+                                        prompt_position: "bottomRight:5",
+                                        html_options: {class: "validate[required] col-md-12", id: "enrollment_status_dropdown"}})

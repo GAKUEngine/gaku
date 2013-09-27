@@ -1,4 +1,7 @@
 en:
+  include_blank: Please select
+  personal: Personal
+  academic: Academic
   achievement:
     add: Add Achievement
     authority: Authority

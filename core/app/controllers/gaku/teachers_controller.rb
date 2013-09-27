@@ -69,7 +69,7 @@ module Gaku
     private
 
     def teacher_attr
-      %i(name surname name_reading surname_reading birth_date gender)
+      %i(name surname name_reading surname_reading birth_date gender picture)
     end
 
     def count

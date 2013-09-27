@@ -42,10 +42,6 @@ describe 'Student Guardians' do
       within(tab_link)  { page.should have_content 'Guardians(1)' }
       flash_created?
     end
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context "existing" do
@@ -59,8 +55,6 @@ describe 'Student Guardians' do
     context 'edit', js: true do
       before do
         visit gaku.edit_student_guardian_path(student, guardian)
-        click '#edit-modal'
-        wait_until_visible modal
       end
 
       it "edits" do
@@ -68,14 +62,9 @@ describe 'Student Guardians' do
         fill_in 'guardian_surname', with: 'Edited guardian surname'
         click submit
 
-        wait_until_invisible modal
         page.should have_content 'Edited guardian name'
         page.should have_content 'Edited guardian surname'
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
     end
 
