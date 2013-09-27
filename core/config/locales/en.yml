@@ -1,6 +1,4 @@
 en:
-  include_blank: Please select
-  personal: Personal
   academic: Academic
   achievement:
     add: Add Achievement
@@ -33,7 +31,19 @@ en:
     save: Save address
     search: Search Address
     singular: Address
-    state: State/Prefecture
+    state:
+      abbr: Abbr
+      add: Add State
+      choose: Choose State
+      code: Code
+      country_iso: Country ISO
+      edit: Edit State
+      list: State List
+      name: State Name
+      name_ascii: ASCII Name
+      plural: States
+      save: Save State
+      singular: State
     title: Title
     zipcode: Postal Code
   admitted: Admitted On
@@ -166,7 +176,6 @@ en:
     plural: Commute Method Types
     save: Save Commute Method Type
     singular: Commute Method Type
-  comname: GAKU Engine
   config:
     close: Close
     help:
@@ -241,7 +250,7 @@ en:
       default: '%Y-%m-%d'
       long: '%Y %B %d'
       short: '%y-%m-%d'
-  date_placeholder: YYYY-MM-DD
+    placeholder: YYYY-MM-DD
   default: Default
   delete: Delete
   description: Description
@@ -390,7 +399,7 @@ en:
     edit: Edit Exam Portion
     error: Please correct exam portions weights. The total exceeds 100%.
     execution_date: Execution date
-    master: Master
+    is_master: Master
     list: Exam portions list
     master: Master exam portion
     max_score: Maximum score
@@ -440,14 +449,13 @@ en:
         notice: '%{resource_name} was successfully updated!'
   full_name: Full Name
   full_name_reading: Full Name Reading
-  resource: Resource
+  gaku_engine: GAKU Engine
   gender:
     choose: Choose Gender
     female: Female
     label: Sex
     male: Male
     unknown: Unknown
-  given_name: Given Name
   grade:
     all_exams: All Exams
     average_points: Average Points
@@ -495,6 +503,7 @@ en:
   graduated: Graduated On
   guardian:
     add: Add Guardian
+    addresses: Guardian Addresses
     edit: Edit guardian
     list: Guardians list
     name: Guardian Name
@@ -504,8 +513,6 @@ en:
     save: Save Guardian
     singular: Guardian
     surname: Guardian Surname
-    addresses: Guardian Addresses
-  hello: Hello world
   helpers:
     links:
       cancel: Cancel
@@ -532,12 +539,13 @@ en:
         student_contacts: Student Contacts
         students: Students
       disposals:
+        address: Addresses Disposals
         attachment: Attachment Disposals
         course_group: Course Group Disposals
         disposals: Disposals
         exam: Exam Disposals
         student: Student Disposals
-        address: Addresses Disposals
+        student_address: Student Addresses Disposals
       grading:
         grading: Grading
         grading_methods: Grading Methods
@@ -576,8 +584,8 @@ en:
         commute_methods: Commute Methods
         contact: Contact Types
         enrollment_status: Enrollment Statuses
-        types: Types & Methods
         states: States
+        types: Types & Methods
       users:
         roles: Roles
         users: Users
@@ -632,6 +640,7 @@ en:
   order: Order
   panel: Panel
   period: Period
+  personal: Personal
   personal_information: Personal Information
   phone: Phone Number
   phonetic_reading: Phonetic Reading
@@ -695,6 +704,7 @@ en:
     plural: Program Syllabuses
     remove: Remove Program Syllabus
   required: required
+  resource: Resource
   revert: Revert
   role:
     add: Add Role
@@ -704,8 +714,6 @@ en:
     save: Save Role
   save: Save
   schedule: Schedule
-  scholarship_status:
-    singular: Scholarship Status
   school:
     add: Add School
     campuses: Campuses
@@ -772,7 +780,7 @@ en:
   semester_course:
     uniqueness: Semester already added to Course
   sex: Sex
-  sex_and_birth: Sex/Birth Date
+  sex_and_birth: Gender & Birth Date
   show: Show
   simple_grade:
     add: Add Simple Grade
@@ -798,55 +806,44 @@ en:
     save: Save Specialty
     singular: Specialty
   student:
+    academic_information: Academic Information
     add: Add Student
-    birth_and: and
+    addresses: Student Addresses
     birth_between: Birth date between
     choose: Choose students
     chosen_students: Chosen students
     class_group_enrollment: Class enrollment
     commute_method: Commute Method
+    contacts: Student Contacts
     create: Create Student
     download_registration_roster: Download Registration Roster Sheet
     download_roster: Download Roster Sheet
     edit: Edit Student
     enroll: Enroll Student
     export: Export Students
+    foreign_id_number: Foreign ID
+    id_number: Student ID
     import: Import Students
     list: Students list
     name: Name
     new: Register New Student
+    personal_information: Personal Information
     plural: Students
     roster: Roster
     roster_sheet: Student Roster Sheet
     save: Save Student
+    scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-    addresses: Student Addresses
-    contacts: Student Contacts
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index
     save: Save Student Achievement
-  student_foreign_id_number: Foreign ID
-  student_id_number: Student ID
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index
     save: Save Student Specialty
-  state:
-    edit: Edit State
-    name: State Name
-    save: Save State
-    singular: State
-    plural: States
-    list: State List
-    add: Add State
-    abbr: Abbr
-    name_ascii: Name Ascii
-    code: Code
-    country_iso: Country ISO
-    choose: Choose State
   submit: Submit
   success:
     enrolled: Successfully enrolled!
@@ -867,6 +864,8 @@ en:
     show: Show Syllabus
     singular: Syllabus
   teacher:
+    addresses: Teacher Addresses
+    contacts: Teacher Contacts
     edit: Edit Teacher
     list: Teachers list
     new: New Teacher
@@ -874,25 +873,21 @@ en:
     save: Save Teacher
     show: Show Teacher
     singular: Instructor
-    addresses: Teacher Addresses
-    contacts: Teacher Contacts
   template:
-    singular: Template
-    plural: Templates
     add: Add Template
-    list: Templates list
-    context: Context
-    lock: Lock
-    file: File
-    save: Save Template
-    edit: Template
-    file_type_error: Not supported file type
     choose: Choose template
+    context: Context
+    edit: Template
+    file: File
+    file_type_error: Not supported file type
+    list: Templates list
+    lock: Lock
+    plural: Templates
+    save: Save Template
+    singular: Template
   title: Title
   undefined: Undefined
   user:
-    plural: Users
-    singular: User
     add: Add User
     edit: Edit User
     email: Email
@@ -900,7 +895,9 @@ en:
     list: Users list
     password: Password
     password_confirmation: Confirm Password
+    plural: Users
     save: Save User
+    singular: User
     username: Username
   views:
     pagination:
