@@ -5,11 +5,3 @@
     = render partial: 'picture', locals: { guardian: @guardian, student: @student }
 
 = render 'tabs', guardian: @guardian
-
-= well_div do
-  .span6
-    = link_to_edit_with_text [:edit, @student, @guardian], { id: 'edit-modal', remote: true }
-  .span6
-    = link_to_back @student, class: "span12 btn"
-
-#guardians-modal

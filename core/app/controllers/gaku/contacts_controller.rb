@@ -102,7 +102,7 @@ module Gaku
 
         klasses.pop #remove @contactable resource
         klasses.each do |klass|
-          nested_resources.append klass.find(last_klass_foreign_key)
+          nested_resources.append klass.find(params[klass.to_s.foreign_key])
         end
       else
         @contactable = klasses.find(params[klasses.to_s.foreign_key])

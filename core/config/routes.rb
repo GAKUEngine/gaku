@@ -108,6 +108,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :teachers do
+    get 'page/:page', action: :index, on: :collection
     member do
       get :soft_delete
       get :recovery

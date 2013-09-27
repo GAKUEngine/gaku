@@ -2,7 +2,7 @@
   .span12
     = f.select :class_group_ids, @class_groups,{prompt: t(:'class_group.none_assigned')}, label: t(:'class')
 
-= render 'gaku/shared/form_fields/person_form_fields', f: f
+= render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
 
 .row-fluid
   .span6
@@ -11,7 +11,9 @@
     = f.text_field :graduated, class: "datepicker", label: t(:graduated)
 
 .row-fluid
+  .span3
+    = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'scholarship_status.singular'))
+  .span3
+    = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { include_blank: true }, label: t(:'enrollment_status.singular'))
   .span6
-    = f.select :scholarship_status_id, @scholarship_statuses, {include_blank: true}, label: t(:scholarship_status)
-  .span6
-    = f.select :enrollment_status_code, @enrollment_statuses,  {include_blank: true}, label: t(:enrollment_status)
+    = f.collection_select(:commute_method_type_id, @commute_method_types, :id, :name, { include_blank: true }, label: t(:'commute_method_type.singular'))

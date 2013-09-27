@@ -1,11 +1,9 @@
+= well_div do
+  = normal_form_for [@student, @guardian] do |f|
+    = big_person_caption_for @guardian
 
-= show_table_for 'guardian-index' do
-  caption
-    h2
-      = link_to person_caption_for(@guardian), [:edit, @student, @guardian], remote: true
-  tbody
-    = render 'gaku/shared/fields/person_edit_table', person: guardian
+    = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @guardian
+    = f.text_field :relationship, label: t(:'guardian.relationship')
 
-    tr
-      th width="20%" = t(:'guardian.relationship')
-      td.vm-tc style="font-size:12pt" = guardian.relationship
+    = hr
+    = submit_button t(:'guardian.save'), id: 'submit-student-guardian-button'

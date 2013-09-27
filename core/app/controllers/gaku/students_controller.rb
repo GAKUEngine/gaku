@@ -25,9 +25,10 @@ module Gaku
 
 
     def index
-      @enrollment_statuses = EnrollmentStatus.all
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations)
       @countries = Country.all
       @class_groups = ClassGroup.all
+      @courses = Course.all
       @enrolled_students = params[:enrolled_students]
 
       @search = Student.active.search(params[:q])
@@ -121,7 +122,7 @@ module Gaku
     private
 
     def student_attr
-      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated)
+      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated picture)
     end
 
     def includes
