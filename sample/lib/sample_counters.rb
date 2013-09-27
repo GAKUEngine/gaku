@@ -1,8 +1,8 @@
 @full_sample_counts = {
   disposals: 100,
   changes: 100,
-  students: 1000,
-  teachers: 100,
+  students: 500,
+  teachers: 80,
   users: 100
 }
 
