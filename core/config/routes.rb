@@ -159,15 +159,6 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements'
     resources :student_specialties, controller: 'students/student_specialties'
 
-    #resources :enrollment_statuses, controller: 'students/enrollment_statuses' do
-      #resources :notes, controller: 'students/enrollment_statuses/notes'
-    #  member do
-    #    get :history
-    #    get :revert
-    #  end
-    #end
-
-
     resources :guardians, controller: 'students/guardians' do
       member do
         get :soft_delete
