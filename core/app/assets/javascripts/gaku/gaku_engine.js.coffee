@@ -32,6 +32,12 @@ ready = ->
       $(document).on 'ajax:success','.delete-link', (evt, data, status, xhr) ->
         $(this).closest('tr').remove()
 
+      notice = $('#notice')
+      if notice.children().length > 0
+        notice.children().delay(3000).fadeOut ->
+          notice.html('')
+
+
       $('.sortable').sortable
         handle: '.sort-handler'
         helper: fixHelper
