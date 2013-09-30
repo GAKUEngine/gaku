@@ -5,7 +5,7 @@ module Gaku::Importers::Students
     include Gaku::Importers::Logger
     include Gaku::Importers::KeyMapper
 
-    ROSTER_KEY_SYMS = [:student_id_number, :student_foreign_id_number,
+    ROSTER_KEY_SYMS = [:'student.id_number', :'student.foreign_id_number',
       :full_name, :full_name_reading, :name, :name_reading,
       :middle_name, :middle_name_reading, :surname, :surname_reading,
       :sex, :birth_date, :admitted, :phone, :email,
