@@ -1,9 +1,9 @@
 = well_div do
   .span9.student-index
-    = render 'gaku/shared/student/show_table', student: @student
+    = render 'gaku/shared/student/show_table', student: student
 
   .span3.well
-    = render 'gaku/shared/picture', resource: @student
+    = render 'gaku/shared/picture', resource: student
 
 = render partial: 'gaku/shared/student/tabs'
 
@@ -11,4 +11,4 @@
   .span6
     = link_to_back students_path, class: "span12 btn"
   .span6
-    = link_to 'Generate Report', student_path(@student, format: :pdf), class: 'span12 btn'
+    = link_to 'Generate Report', student_path(student, format: :pdf), class: 'span12 btn'

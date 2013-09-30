@@ -9,12 +9,12 @@
           = t(:'academic')
     .tab-content
       #personal.tab-pane.active
-        = render 'gaku/shared/student/personal', student: @student
+        = render 'gaku/shared/student/personal', student: student
       #academic.tab-pane
-        = render 'gaku/shared/student/academic', student: @student
+        = render 'gaku/shared/student/academic', student: student
 
 
   .span3.well
-    = render 'gaku/shared/picture', resource: @student
+    = render 'gaku/shared/picture', resource: student
 
 = render partial: 'gaku/shared/student/tabs'

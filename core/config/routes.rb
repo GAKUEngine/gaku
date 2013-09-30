@@ -137,16 +137,13 @@ Gaku::Core::Engine.routes.draw do
   resources :students do
 
     member do
-      get :edit_enrollment_status
-      put :enrollment_status
-      get :recovery
-      get :soft_delete
+      patch :recovery
+      patch :soft_delete
       get :show_deleted
     end
 
     collection do
       get 'page/:page', action: :index
-      get :autocomplete_search
       get :load_autocomplete_data
 
       resources :importer, controller: 'students/importer' do

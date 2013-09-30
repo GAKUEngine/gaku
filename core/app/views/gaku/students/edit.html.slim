@@ -1,9 +1,9 @@
-= render 'gaku/shared/student/edit', student: @student
+= render 'gaku/shared/student/edit', student: student
 = well_div do
   .span9
     = link_to_back students_path
   .span3#delete-student
     = link_to_modal_delete nil, id: 'delete-student-link', data: {confirm: nil}
   .delete_modal
-    = render 'delete_modal', student: @student
+    = render 'delete_modal', student: student
 
