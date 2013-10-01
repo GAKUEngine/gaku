@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'slim', '~> 2.0.1'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'responders'
-  s.add_dependency 'paper_trail'
+  s.add_dependency 'paper_trail', '3.0.0.beta1'
   s.add_dependency 'globalize3'
   s.add_dependency 'draper', '~> 1.0'
 
