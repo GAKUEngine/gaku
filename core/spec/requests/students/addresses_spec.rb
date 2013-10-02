@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/addressable_spec'
 
 describe 'Student Address' do
 

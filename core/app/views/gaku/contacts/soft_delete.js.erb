@@ -1,0 +1,10 @@
+// needed for student tab counter
+$("#student-contacts-tab-link").html("<%= print_count(@count-1, t_contact_plural) %>");
+
+$(".<%= @resource_name.pluralize %>-count").html("<%= print_count(@count-1, t_contact_list) %>");
+
+showNotice("<%= render_flash %>");
+
+<%- if @contactable.contacts.reload.any? & @primary_contact %>
+  $('#contact-<%= @contactable.contacts.first.id %> td a').addClass('btn-primary');
+<% end %>

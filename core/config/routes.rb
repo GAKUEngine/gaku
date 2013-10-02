@@ -12,6 +12,16 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
+  concern :contactable do
+    resources :contacts do
+      member do
+        patch :make_primary
+        patch :soft_delete
+        patch :recovery
+      end
+    end
+  end
+
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
@@ -117,7 +127,7 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, controller: 'syllabuses/importer'
   end
 
-  resources :teachers, concerns: %i( addressable ) do
+  resources :teachers, concerns: %i( addressable contactable ) do
     get 'page/:page', action: :index, on: :collection
     member do
       get :soft_delete
@@ -126,14 +136,6 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :notes
-
-    resources :contacts do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
   end
 
   resources :students, concerns: %i( addressable ) do
@@ -161,20 +163,12 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements'
     resources :student_specialties, controller: 'students/student_specialties'
 
-    resources :guardians, controller: 'students/guardians', concerns: %i( addressable ) do
+    resources :guardians, controller: 'students/guardians', concerns: %i( addressable contactable ) do
       member do
         get :soft_delete
         get :recovery
       end
 
-      resources :contacts do
-        post :create_modal, on: :collection
-        member do
-          post :make_primary
-          get :soft_delete
-          get :recovery
-        end
-      end
     end
 
     resources :contacts do
@@ -230,10 +224,7 @@ Gaku::Core::Engine.routes.draw do
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'admin/schools/campuses' do
-        resources :contacts do
-          post :make_primary, on: :member
-        end
+      resources :campuses, controller: 'admin/schools/campuses', concerns: %i( contactable ) do
         resources :addresses, controller: 'admin/schools/campuses/addresses'
       end
     end

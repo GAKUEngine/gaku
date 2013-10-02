@@ -60,7 +60,6 @@ RSpec.configure do |config|
     end
 
     DatabaseCleaner.start
-    @routes = Gaku::Core::Engine.routes
   end
 
   config.after(:each) do
@@ -71,6 +70,7 @@ RSpec.configure do |config|
     DeferredGarbageCollection.reconsider
   end
 
+  config.deprecation_stream = 'log/deprecations.log'
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'

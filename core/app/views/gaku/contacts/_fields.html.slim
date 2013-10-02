@@ -10,4 +10,4 @@ td
 - if can_edit?
   td
     = ajax_link_to_edit [:edit, target].flatten
-    = ajax_link_to_delete target
+    = ajax_soft_delete [:soft_delete, target].flatten

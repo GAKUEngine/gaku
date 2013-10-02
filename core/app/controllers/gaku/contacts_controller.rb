@@ -1,30 +1,51 @@
 module Gaku
   class ContactsController < GakuController
 
-    load_and_authorize_resource :contact, class: Gaku::Contact
+    #load_and_authorize_resource :contact, class: Gaku::Contact
 
-    inherit_resources
     respond_to :js, :html
 
-    before_filter :contactable
-    before_filter :count
-    before_filter :load_data
+    before_action :set_contact_types
+    before_action :set_unscoped_contact, only: %i( recovery destroy )
+    before_action :set_contact,          only: %i( edit update soft_delete )
+
+    def new
+      @contact = Contact.new
+      contactable
+      respond_with @contact
+    end
 
     def create
+      contactable
       @contact = @contactable.contacts.new(contact_params)
-      create!
+      @contact.save
+      set_count
+      respond_with @contact
+    end
+
+    def edit
+      contactable
+    end
+
+    def update
+      @contact.update(contact_params)
+      contactable
+      respond_with @contact
     end
 
     def destroy
+      contactable
       if @contact.destroy
         @contactable.contacts.first.try(:make_primary) if @contact.primary?
       end
       flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
-      destroy!
+      set_count
+      respond_with @contact
     end
 
     def recovery
       @contact.recover
+      contactable
       flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @contact
     end
@@ -32,40 +53,36 @@ module Gaku
     def soft_delete
       @primary_contact = true if @contact.primary?
       @contact.soft_delete
+      contactable
       @contactable.contacts.first.try(:make_primary) if @contact.primary?
       flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
+      set_count
       respond_with @contact
     end
 
     def make_primary
       @contact.make_primary
+      contactable
       respond_with @contact
-    end
-
-    def create_modal
-      if @contactable.class == Gaku::Guardian
-        @contact = @contactable.contacts.build(params[:contact])
-        if @contact.save
-          flash.now[:notice] = t(:'notice.created', resource: t_resource)
-          respond_with @contact
-        end
-      end
     end
 
     protected
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:contact).permit(contact_attr)]
+    def set_unscoped_contact
+      @contact = Contact.unscoped.find(params[:id])
+    end
+
+    def set_contact
+      @contact = Contact.find(params[:id])
     end
 
     private
 
     def contact_params
-      params.require(:contact).permit(contact_attr)
+      params.require(:contact).permit(attributes)
     end
 
-    def contact_attr
+    def attributes
       %i(data details contact_type_id primary emergency)
     end
 
@@ -73,12 +90,12 @@ module Gaku
       t(:'contact.singular')
     end
 
-    def load_data
+    def set_contact_types
       @contact_types = ContactType.all.map { |ct| [ct.name, ct.id] }
     end
 
-    def count
-      @count = @contactable.contacts_count
+    def set_count
+      @count = @contactable.reload.contacts_count
     end
 
     def contactable_klasses

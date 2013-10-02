@@ -15,23 +15,17 @@ shared_examples_for 'new contact' do
         fill_in "contact_data",    with: "The contact data"
         fill_in "contact_details", with: "The contact details"
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(@data.contacts, :count).by 1
 
-      page.should have_content "The contact data"
-      page.should have_content "The contact details"
-      flash_created?
-      within(count_div) { page.should have_content 'Contacts list(1)' }
+      has_content? "The contact data"
+      has_content? "The contact details"
+
+      count? 'Contacts list(1)'
       if page.has_css?(tab_link)
-        within(tab_link)  { page.should have_content 'Contacts(1)' }
+        within(tab_link)  { has_content? 'Contacts(1)' }
       end
-
     end
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
-
   end
 
 end
@@ -48,22 +42,13 @@ shared_examples_for 'edit contact' do
     click submit
 
     wait_until_invisible modal
-    page.should have_content 'example@genshin.org'
+    has_content? 'example@genshin.org'
     flash_updated?
+    expect(@data.contacts.first.reload.data).to eq 'example@genshin.org'
   end
 
   it 'errors without required fields', js:true do
     fill_in 'contact_data',  with: ''
-
-    has_validations?
-  end
-
-  it 'cancels editting', cancel: true do
-    ensure_cancel_modal_is_working
-  end
-
-  it 'errors without required fields', js:true do
-    fill_in 'contact_data', with: ''
     has_validations?
   end
 
@@ -74,19 +59,24 @@ shared_examples_for 'delete contact' do
   it "deletes", js: true do
     contact_field = @data.contacts.first.data
 
-    within(count_div) { page.should have_content 'Contacts list(1)' }
-    page.should have_content contact_field
+    count? 'Contacts list(1)'
+    if page.has_css?(tab_link)
+      within(tab_link)  { has_content? 'Contacts(1)' }
+    end
+    has_content? contact_field
 
     expect do
-      ensure_delete_is_working
-    end.to change(@data.contacts, :count).by -1
+      expect do
+        ensure_delete_is_working
+        flash_destroyed?
+      end.to change(@data.contacts, :count).by(-1)
+    end.to change(@data.contacts.deleted, :count).by(1)
 
-    flash_destroyed?
-    within(count_div) { page.should_not have_content 'Contacts list(1)' }
+    within(count_div) { has_no_content? 'Contacts list(1)' }
     if page.has_css?(tab_link)
-      within(tab_link)  { page.should_not have_content 'Contacts(1)' }
+      within(tab_link)  { has_no_content? 'Contacts(1)' }
     end
-    page.should_not have_content contact_field
+    has_no_content? contact_field
   end
 
 end
@@ -94,14 +84,14 @@ end
 shared_examples_for 'primary contacts' do
 
   it "sets primary", js: true do
-    @data.contacts.first.primary? == true
-    @data.contacts.second.primary? == false
+    expect(@data.contacts.first.primary?).to eq true
+    expect(@data.contacts.second.primary?).to eq false
 
     within("#{table} tr#contact-2") { click_link 'set-primary-link' }
     accept_alert
 
-    @data.contacts.first.primary? == false
-    @data.contacts.second.primary? == true
+    expect(@data.contacts.first.primary?).to eq false
+    expect(@data.contacts.second.primary?).to eq true
   end
 
   it "delete primary", js: true do
@@ -117,6 +107,6 @@ shared_examples_for 'primary contacts' do
     accept_alert
 
     page.find("#{contact1_tr} .primary-contact a.btn-primary")
-    @data.contacts.first.primary? == true
+    expect(@data.contacts.first.primary?).to eq true
   end
 end
