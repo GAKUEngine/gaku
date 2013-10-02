@@ -3,13 +3,13 @@ module Gaku
 
     #load_and_authorize_resource :teacher, class: Gaku::Teacher
 
-    inherit_resources
-    respond_to :js, :html
+    decorates_assigned :teacher
 
-    before_filter :count,                only: %i( index create destroy )
-    before_filter :notable,              only: %i( show show_deleted )
+    respond_to :js,   only: %i( new create edit update destroy recovery )
+    respond_to :html, only: %i( index edit update show show_deleted soft_delete )
+
     before_action :set_unscoped_teacher, only: %i( show_deleted destroy recovery )
-    before_action :set_teacher,          only: %i( edit update soft_delete )
+    before_action :set_teacher,          only: %i( edit show update soft_delete )
 
     def recovery
       @teacher.recover
@@ -25,6 +25,7 @@ module Gaku
 
     def destroy
       @teacher.destroy
+      set_count
       respond_with @teacher
     end
 
@@ -34,8 +35,27 @@ module Gaku
       end
     end
 
+    def new
+      @teacher = Teacher.new
+      respond_with @teacher
+    end
+
+    def create
+      @teacher = Teacher.new(teacher_params)
+      @teacher.save
+      set_count
+      respond_with @teacher
+    end
+
+    def edit
+    end
+
+    def show
+    end
+
     def update
-      super do |format|
+      @teacher.update(teacher_params)
+      respond_with(@teacher) do |format|
         if params[:teacher][:picture]
           format.html do
             redirect_to @teacher,
@@ -43,54 +63,50 @@ module Gaku
           end
         else
           format.js { render }
+          format.html { redirect_to [:edit, @teacher] }
         end
       end
     end
 
-
-    protected
-
-    def collection
+    def index
       @search = Teacher.search(params[:q])
       results = @search.result(distinct: true)
-
       @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
-    end
-
-    def resource
-      @teacher = Teacher.find(params[:id]).decorate
-    end
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:teacher).permit(teacher_attr)]
+      set_count
+      respond_with @teachers
     end
 
     private
 
-    def teacher_attr
+    def teacher_params
+      params.require(:teacher).permit(attributes)
+    end
+
+    def attributes
       %i(name surname name_reading surname_reading birth_date gender picture)
     end
 
-    def count
-      @count = Teacher.count
-    end
-
     def set_teacher
-      @teacher = Teacher.find(params[:id]).decorate
+      @teacher = Teacher.find(params[:id])
+      set_notable
     end
 
     def set_unscoped_teacher
-      @teacher = Teacher.unscoped.find(params[:id]).decorate
+      @teacher = Teacher.unscoped.find(params[:id])
+      set_notable
     end
 
     def t_resource
       t(:'teacher.singular')
     end
 
-    def notable
-      @notable = Teacher.unscoped.find(params[:id])
+    def set_notable
+      @notable = @teacher
       @notable_resource = get_resource_name @notable
+    end
+
+    def set_count
+      @count = Teacher.count
     end
 
   end

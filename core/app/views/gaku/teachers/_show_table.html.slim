@@ -1,4 +1,7 @@
-= table_for 'teacher-index' do
+
+= show_table_for 'teacher-index' do
   = big_person_caption_for(teacher)
+
   tbody
-    = render 'gaku/shared/fields/person_show_table', person: teacher
+    tr
+      = render 'gaku/shared/fields/person_show_table', person: teacher

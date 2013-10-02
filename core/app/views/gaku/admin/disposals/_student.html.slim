@@ -6,5 +6,5 @@ tr
   td = student.birth_date
   td
     = link_to_show [:show_deleted, student]
-    = link_to content_tag(:li, nil, class: 'icon-white icon-repeat'), [:recovery, student], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
+    = link_to content_tag(:li, nil, class: 'icon-white icon-repeat'), [:recovery, student], method: :patch, class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
     = ajax_link_to_delete student , id: 'delete-disposal-student-link'

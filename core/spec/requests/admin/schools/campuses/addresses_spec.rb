@@ -3,36 +3,107 @@ require 'support/requests/addressable_spec'
 
 describe 'Admin School Campuses Address' do
 
-  before { as :admin }
-
-  let(:country) { create(:country, name: 'Japan') }
   let(:address) { create(:address) }
   let(:school) { create(:school)}
 
-  before :all do
-    set_resource 'admin-school-campus-address'
-  end
+  let!(:country) { create(:country, name: 'USA', iso: 'US') }
+  let!(:country2) { create(:country, name: 'Japan', iso: 'JA') }
+  let!(:state) { create(:state, country: country) }
 
-  context 'new', type: 'address' do
+  before(:all) { set_resource 'admin-school-campus-address' }
+  before { as :admin }
+
+  context 'new', type: 'address', js: true do
     before do
-      country
-      address
       visit gaku.admin_school_campus_path(school, school.master_campus)
+      click new_link
+      wait_until_invisible new_link
+      wait_until_visible submit
     end
 
-    it_behaves_like 'new address'
+    it 'creates and shows' do
+      fill_in "address_title",    with: 'Primary address'
+      select "#{country}",        from: 'country_dropdown'
+      fill_in "address_zipcode",  with: '123'
+      fill_in "address_city",     with: 'Nagoya'
+      fill_in "address_address1", with: 'The address details'
+      click submit
+
+      flash_created?
+      has_content? 'Primary address'
+      expect(school.master_campus.address.address1).to eq 'The address details'
+    end
+
+    it 'has validations' do
+      click submit
+      has_validations?
+    end
+
+    it 'changes country with state' do
+      select "#{country}", from: 'country_dropdown'
+      within('#state-dropdown') { has_content? state.name }
+      select "#{state}", from: 'address_state_id'
+    end
+
+    it 'changes country without state' do
+      select "#{country2}", from: 'country_dropdown'
+      within('#state-dropdown') do
+        expect(page).to have_css("select#address_state_id[disabled]")
+        has_no_content? state.name
+      end
+    end
+
   end
 
-  context 'existing', type: 'address' do
+  context 'existing', js: true, type: 'address' do
 
     before do
       school.master_campus.address = address
       visit gaku.admin_school_campus_path(school, school.master_campus)
     end
 
-    it_behaves_like 'edit address'
+    context 'edit' do
+      before do
+        click edit_link
+        wait_until_visible modal
+      end
 
-    it 'deletes single address', js:true do
+      it 'edits' do
+        old_address = address.address1
+
+        fill_in "address_address1", with:'The address new details'
+        click submit
+
+        flash_updated?
+        expect(address.reload.address1).to eq 'The address new details'
+        has_content? 'The address new details'
+        has_no_content? old_address
+      end
+
+      it 'errors without required fields' do
+        fill_in 'address_address1',  with: ''
+        fill_in 'address_city',      with: ''
+
+        has_validations?
+      end
+
+      it 'changes country with state' do
+        select "#{country}", from: 'country_dropdown'
+        within('#state-dropdown') { has_content? state.name }
+        select "#{state}", from: 'address_state_id'
+      end
+
+      it 'changes country without state' do
+        select "#{country2}", from: 'country_dropdown'
+        within('#state-dropdown') do
+          expect(page).to have_css("select#address_state_id[disabled]")
+          has_no_content? state.name
+        end
+      end
+
+    end
+
+    it 'deletes single address' do
       ensure_delete_is_working
       wait_until_visible new_link
 
