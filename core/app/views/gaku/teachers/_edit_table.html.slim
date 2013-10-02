@@ -1,0 +1,5 @@
+= normal_form_for teacher do |f|
+  = render 'form_fields', f: f, teacher: teacher
+
+  = hr
+  = submit_button t(:'teacher.save'), id: 'submit-teacher-button'

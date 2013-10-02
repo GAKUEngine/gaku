@@ -64,6 +64,16 @@ describe Gaku::Address do
     end
   end
 
+
+  describe '#ensure_first_primary' do
+    it 'sets first address as primary' do
+      address1 = create(:address, addressable: student)
+      address2 = create(:address, addressable: student)
+      expect(address1.primary).to be_true
+      expect(address2.primary).to be_false
+    end
+  end
+
   describe '#make_primary' do
     it 'sets primary: false except self' do
       address2 = create(:address, country: country, addressable: student, primary: true)
@@ -81,7 +91,7 @@ describe Gaku::Address do
     xit 'updates primary_address field' do
       expect do
         address.make_primary
-      end.to change(address.addressable, :primary_address)
+      end.to change(address.addressable.reload, :primary_address)
     end
   end
 

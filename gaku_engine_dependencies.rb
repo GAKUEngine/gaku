@@ -7,6 +7,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier',     '>= 1.0.3'
 
 gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'gaku_helpers', github: 'kalkov/gaku_helpers'
 
 group :development do
   gem 'guard'

@@ -1,40 +1,14 @@
-= content_for :show_header do
-  = count_div '' do
-    = t(:'teacher.show')
-
-
 = well_div do
   .span9.teacher-index
-    = render 'show_table', teacher: @teacher
+    = render 'show_table', teacher: teacher
 
   .span3.well
-    = render 'gaku/shared/picture', resource: @teacher
+    = render 'gaku/shared/picture', resource: teacher
 
-= well_div do
-  = render partial: 'gaku/contacts/contacts', locals: {nested_resources: [@teacher]}
-
-= well_div do
-  = render partial: 'gaku/addresses/addresses', locals: {nested_resources: [@teacher]}
-
-= well_div do
-  #teacher-notes
-    = render partial: 'gaku/notes/notes'
-
-/= render partial: 'tabs'
+= render 'tabs'
 
 = well_div do
   .span5
-    = link_to_edit_with_text [:edit, @teacher], remote: true
+    = link_to_edit_with_text [:edit, teacher]
   .span5
     = link_to_back teachers_path
-  .span2
-    #delete-student
-      = link_to_modal_delete nil, id: 'delete-teacher-link', data: {confirm: nil}
-
-.delete_modal
-  =render 'delete_modal', teacher: @teacher
-
-coffee:
-  $('#delete-teacher-link').on 'click', (event) ->
-    event.preventDefault()
-    $('#delete-modal').modal('show')

@@ -2,6 +2,16 @@ Gaku::Core::Engine.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
+  concern :addressable do
+    resources :addresses do
+      member do
+        patch :make_primary
+        patch :soft_delete
+        patch :recovery
+      end
+    end
+  end
+
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
@@ -107,7 +117,7 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, controller: 'syllabuses/importer'
   end
 
-  resources :teachers do
+  resources :teachers, concerns: %i( addressable ) do
     get 'page/:page', action: :index, on: :collection
     member do
       get :soft_delete
@@ -124,17 +134,9 @@ Gaku::Core::Engine.routes.draw do
         get :recovery
       end
     end
-
-    resources :addresses do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
   end
 
-  resources :students do
+  resources :students, concerns: %i( addressable ) do
 
     member do
       patch :recovery
@@ -159,7 +161,7 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements'
     resources :student_specialties, controller: 'students/student_specialties'
 
-    resources :guardians, controller: 'students/guardians' do
+    resources :guardians, controller: 'students/guardians', concerns: %i( addressable ) do
       member do
         get :soft_delete
         get :recovery
@@ -173,25 +175,9 @@ Gaku::Core::Engine.routes.draw do
           get :recovery
         end
       end
-
-      resources :addresses do
-        member do
-          post :make_primary
-          get :soft_delete
-          get :recovery
-        end
-      end
     end
 
     resources :contacts do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
-
-    resources :addresses do
       member do
         post :make_primary
         get :soft_delete

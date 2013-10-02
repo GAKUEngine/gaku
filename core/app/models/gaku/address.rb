@@ -22,7 +22,7 @@ module Gaku
 
     accepts_nested_attributes_for :country
 
-    before_save :ensure_first_primary, on: :create
+    before_create :ensure_first_primary #, on: :create
     after_save :update_primary_address_field
     after_destroy :reset_counter_cache
 
@@ -93,7 +93,11 @@ module Gaku
 
     def ensure_first_primary
       if addressable.respond_to?(:addresses)
-        self.primary = true if addresses.blank?
+        if addressable.addresses.blank?
+          self.primary = true
+        else
+          self.primary = false
+        end
       end
     end
 

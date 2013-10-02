@@ -18,7 +18,8 @@ describe 'Teacher Contacts' do
 
     before do
       contact_type
-      visit gaku.teacher_path(teacher)
+      visit gaku.edit_teacher_path(teacher)
+      click tab_link
       @data = teacher
     end
 
@@ -37,7 +38,8 @@ describe 'Teacher Contacts' do
       context 'edit', js: true do
 
         before do
-          visit gaku.teacher_path(@data)
+          visit gaku.edit_teacher_path(@data)
+          click tab_link
         end
 
         it_behaves_like 'edit contact'
@@ -52,7 +54,8 @@ describe 'Teacher Contacts' do
 
       before do
         @data = teacher_with_contacts
-        visit gaku.teacher_path(@data)
+        visit gaku.edit_teacher_path(@data)
+        click tab_link
       end
 
       it_behaves_like 'primary contacts'

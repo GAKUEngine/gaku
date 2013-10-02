@@ -12,7 +12,10 @@ ready = ->
     index: ->
       self.app.upload_picture()
 
-    show: ->
+    edit: ->
+      self.app.country_dropdown()
+
+    new: ->
       self.app.country_dropdown()
 
     school_details: ->

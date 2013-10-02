@@ -17,7 +17,8 @@ describe 'Teacher Notes' do
 
     before do
       @data = teacher
-      visit gaku.teacher_path(@data)
+      visit gaku.edit_teacher_path(@data)
+      click tab_link
     end
 
     it_behaves_like 'new note'
@@ -27,7 +28,8 @@ describe 'Teacher Notes' do
 
     before do
       @data = teacher_with_note
-      visit gaku.teacher_path(@data)
+      visit gaku.edit_teacher_path(@data)
+      click tab_link
     end
 
     it_behaves_like 'edit note'

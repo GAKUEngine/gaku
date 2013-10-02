@@ -8,34 +8,34 @@ shared_examples 'new address' do
       wait_until_visible submit
     end
 
-    it "creates and shows", js:true do
+    it 'creates and shows', js:true do
+      expect do
+        fill_in "address_title",    with: 'Primary address'
+        select "#{country}",        from: 'country_dropdown'
+        fill_in "address_zipcode",  with: '123'
+        fill_in "address_city",     with: 'Nagoya'
+        fill_in "address_address1", with: 'The address details'
+        click submit
 
-      fill_in "address_title", with: 'Primary address'
-      select "#{country}", from: 'country_dropdown'
-      fill_in "address_zipcode", with:'123'
-      fill_in "address_city", with:'Nagoya'
-      fill_in "address_address1", with:'The address details'
-      click submit
-      wait_until_invisible form
+        flash_created?
+      end.to change(@resource.addresses, :count).by(1)
 
-      page.should have_content "Primary address"
-      flash_created?
-    end
-
-    it 'cancels creating', js:true do
-      ensure_cancel_creating_is_working
+      has_content? 'Primary address'
     end
 
     it 'has validations', js:true do
-      click submit
-      has_validations?
+      expect do
+        click submit
+        has_validations?
+      end.to_not change(@resource.addresses, :count)
     end
 
   end
-
 end
 
 shared_examples_for 'edit address' do
+
+  let(:address) { @resource.addresses.first }
 
   before do
     click edit_link
@@ -43,18 +43,17 @@ shared_examples_for 'edit address' do
   end
 
   it "edits", js:true do
+    old_address = address.address1
+
     fill_in "address_address1", with:'The address new details'
     click submit
 
-    wait_until_invisible modal
-    page.should have_content 'The address new details'
-
     flash_updated?
+    expect(address.reload.address1).to eq 'The address new details'
+    has_content? 'The address new details'
+    has_no_content? old_address
   end
 
-  it 'cancels editting', js:true do
-    ensure_cancel_modal_is_working
-  end
 
   it 'errors without required fields', js:true do
     fill_in 'address_address1',  with: ''
@@ -68,18 +67,22 @@ end
 shared_examples_for 'delete address' do
 
   it "deletes", js: true do
-    address_field = @data.addresses.first.address1
+    address_field = @resource.addresses.first.address1
 
-    within(count_div) { page.should have_content 'Addresses list(1)' }
-    page.should have_content address_field
+    count? 'Addresses list(1)'
+    within(tab_link)  { has_content? 'Addresses(1)' }
+    has_content? address_field
 
     expect do
-      ensure_delete_is_working
-    end.to change(@data.addresses, :count).by -1
+      expect do
+        ensure_delete_is_working
+        flash_destroyed?
+      end.to change(@resource.addresses, :count).by(-1)
+    end.to change(@resource.addresses.deleted, :count).by(1)
 
-    within(count_div) { page.should_not have_content 'Addresses list(1)' }
-    page.should_not have_content address_field
-    flash_destroyed?
+    count? 'Addresses list(1)'
+    has_no_content? address_field
+    within(tab_link)  { has_no_content? 'Addresses(1)' }
   end
 
 end
@@ -87,19 +90,19 @@ end
 shared_examples_for 'primary addresses' do
 
   it "sets primary", js: true do
-    @data.addresses.first.primary? == true
-    @data.addresses.second.primary? == false
+    expect(@resource.addresses.first.primary?).to eq true
+    expect(@resource.addresses.second.primary?).to eq false
 
-    within("#{table} tr#address-#{@data.addresses.second.id}") { click_link 'set_primary_link' }
+    within("#{table} tr#address-#{@resource.addresses.second.id}") { click_link 'set_primary_link' }
     accept_alert
 
-    @data.addresses.first.primary? == false
-    @data.addresses.second.primary? == true
+    expect(@resource.addresses.first.primary?).to eq false
+    expect(@resource.addresses.second.primary?).to eq  true
   end
 
   it "delete primary", js: true do
-    address1_tr = "#address-#{@data.addresses.first.id}"
-    address2_tr = "#address-#{@data.addresses.second.id}"
+    address1_tr = "#address-#{@resource.addresses.first.id}"
+    address2_tr = "#address-#{@resource.addresses.second.id}"
 
     within("#{table} #{address2_tr}") { click_link 'set_primary_link' }
     accept_alert
@@ -111,25 +114,50 @@ shared_examples_for 'primary addresses' do
 
     page.find("#{address1_tr} .primary_address a.btn-primary")
 
-    @data.addresses.first.primary? == true
+    expect(@resource.addresses.first.primary?).to eq true
   end
 end
 
 shared_examples_for 'dynamic state dropdown' do
 
-  it 'change country with and without state' do
-    #country with state
-    select "#{country}", from: 'country_dropdown'
-    within('#state-dropdown') do
-      expect(page).to have_content state.name
-    end
-    select "#{state}", from: 'address_state_id'
+  let!(:country2) { create(:country, name: 'USA', iso: 'US') }
+  let!(:state) { create(:state, country: country) }
 
-    #country without state
-    select "#{country2}", from: 'country_dropdown'
-    within('#state-dropdown') do
-      expect(page).to have_css("select#address_state_id[disabled]")
-      expect(page).to_not have_content state.name
+  context 'new form' do
+    before { click new_link }
+
+    it 'changes country with state' do
+      select "#{country}", from: 'country_dropdown'
+      within('#state-dropdown') { has_content? state.name }
+      select "#{state}", from: 'address_state_id'
+    end
+
+
+    it 'changes country without state' do
+      select "#{country2}", from: 'country_dropdown'
+      within('#state-dropdown') do
+        expect(page).to have_css("select#address_state_id[disabled]")
+        has_no_content? state.name
+      end
+    end
+  end
+
+  context 'edit form' do
+    before { click edit_link }
+
+    it 'changes country with state' do
+      select "#{country}", from: 'country_dropdown'
+      within('#state-dropdown') { has_content? state.name }
+      select "#{state}", from: 'address_state_id'
+    end
+
+
+    it 'changes country without state' do
+      select "#{country2}", from: 'country_dropdown'
+      within('#state-dropdown') do
+        expect(page).to have_css("select#address_state_id[disabled]")
+        has_no_content? state.name
+      end
     end
   end
 
