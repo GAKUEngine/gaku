@@ -13,8 +13,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
-  gem 'rubocop'
-  gem 'guard-rubocop'
+  gem 'guard-cop'
 end
 
 group :test do
