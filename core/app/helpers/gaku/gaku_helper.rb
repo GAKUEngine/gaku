@@ -130,7 +130,7 @@ module Gaku
     end
 
     def disabled?(object)
-      object.state.try(:countries).try(:present?) || object.new_record?
+      object.new_record? || object.country.states.blank?
     end
 
   end
