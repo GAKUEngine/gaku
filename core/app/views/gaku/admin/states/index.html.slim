@@ -3,7 +3,7 @@
     = count_div 'admin-states-count' do
       = print_count @count, t_state_list
   .pull-right
-    = ajax_link_to_new t(:'state.add'), [:new, :admin, :state], id: 'new-admin-state-link'
+    = ajax_link_to_new t(:'address.state.add'), [:new, :admin, :state], id: 'new-admin-state-link'
 
 = content_for :new_form do
   #new-admin-state.hide

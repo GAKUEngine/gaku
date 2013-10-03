@@ -12,7 +12,7 @@ module Gaku::AutocompleteHelper
   def autocomplete_date_field(form, options = {})
     content_tag :div, class: 'span3' do
       concat form.label options[:object_name], options[:tag_name]
-      concat form.text_field options[:object_name], class: 'span12', placeholder: t(:'date_placeholder')
+      concat form.text_field options[:object_name], class: 'span12', placeholder: t(:'date.placeholder')
     end
   end
 

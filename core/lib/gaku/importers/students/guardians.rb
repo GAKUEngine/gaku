@@ -7,7 +7,7 @@ module Gaku::Importers::Students
     include Gaku::Importers::Students::StudentIdentity
     include Gaku::Importers::Students::PersonalInformation
 
-    GUARDIAN_KEY_SYMS = [:student_id_number, :student_foreign_id_number,
+    GUARDIAN_KEY_SYMS = [:'student.id_number', :'student.foreign_id_number',
       :student_name, :'guardian.relationship', :full_name, :'guardian.surname',
       :'surname_reading', :'guardian.name', :name_reading, :birth_date,
       :sex, :email, :phone,
