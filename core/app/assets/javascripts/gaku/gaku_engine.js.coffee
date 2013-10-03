@@ -119,7 +119,7 @@ ready = ->
           name = $(this).closest('tr').find('td.name').text()
           $('#students-checked').append("<tr class=" + thisId + "><td>" + surname + "</td><td>" + name + "</td></tr>")
           $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
-          $('#students-checked-div').slide()
+          $('#students-checked-div').slideDown()
           chosen_trs = $('#chosen-table').find('tbody tr')
           $('.chosen-count').html('(' + chosen_trs.length + ')')
         else
