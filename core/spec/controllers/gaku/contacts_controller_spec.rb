@@ -10,11 +10,6 @@ describe Gaku::ContactsController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-
-
-    end
-
     context 'js' do
 
       describe 'XHR #new' do

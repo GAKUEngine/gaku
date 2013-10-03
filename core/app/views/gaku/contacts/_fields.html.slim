@@ -1,4 +1,4 @@
-- target ||= [@nested_resources, @contactable, contact].flatten
+- target ||= [@nested_resources, @polymorphic_resource, contact].flatten
 = render partial: 'gaku/contacts/primary_field', locals: {contact: contact, target: target}
 
 td = contact.name
