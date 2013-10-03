@@ -93,7 +93,7 @@ describe 'CourseGroups' do
       page.should have_content course_group.name
 
       click '#delete-course-group-link'
-      within('.delete-modal') { click_on 'Delete' }
+      within('#delete-modal') { click_on 'Delete' }
       accept_alert
 
       page.should_not have_content 'Course Groups List(1)'
