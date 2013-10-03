@@ -170,7 +170,7 @@ module Gaku
     end
 
     def t_state_list
-      t(:'state.list')
+      t(:'address.state.list')
     end
 
     def t_template_list

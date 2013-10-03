@@ -1,11 +1,11 @@
 = table_for "admin-#{country.iso.downcase}-states-index" do
   thead
     tr
-      = th t(:'state.singular')
-      = th t(:'state.abbr')
-      = th t(:'state.name_ascii')
-      = th t(:'state.code')
-      = th t(:'state.country_iso')
+      = th t(:'address.state.singular')
+      = th t(:'address.state.abbr')
+      = th t(:'address.state.name_ascii')
+      = th t(:'address.state.code')
+      = th t(:'address.state.country_iso')
       = th_actions 2
   tbody
     = render partial: 'state', collection: states, as: :state

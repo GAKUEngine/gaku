@@ -12,7 +12,7 @@
 
 .row-fluid
   .span3
-    = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'scholarship_status.singular'))
+    = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'student.scholarship_status'))
   .span3
     = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { include_blank: true }, label: t(:'enrollment_status.singular'))
   .span6
