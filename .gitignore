@@ -63,5 +63,6 @@ Gemfile.lock
 */core/Gemfile.lock
 
 .localeapp
+locales
 
 core/coverage
