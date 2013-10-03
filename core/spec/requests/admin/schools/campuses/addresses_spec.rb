@@ -3,11 +3,11 @@ require 'support/requests/addressable_spec'
 
 describe 'Admin School Campuses Address' do
 
-  let(:address) { create(:address) }
+  let(:address) { create(:address, country: country) }
   let(:school) { create(:school)}
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
-  let!(:country2) { create(:country, name: 'Japan', iso: 'JA') }
+  let(:country2) { create(:country, name: 'Japan', iso: 'JP') }
   let!(:state) { create(:state, country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
@@ -15,6 +15,7 @@ describe 'Admin School Campuses Address' do
 
   context 'new', type: 'address', js: true do
     before do
+      country2
       visit gaku.admin_school_campus_path(school, school.master_campus)
       click new_link
       wait_until_invisible new_link
@@ -64,6 +65,7 @@ describe 'Admin School Campuses Address' do
 
     context 'edit' do
       before do
+        country2
         click edit_link
         wait_until_visible modal
       end

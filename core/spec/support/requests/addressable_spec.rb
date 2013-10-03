@@ -91,6 +91,7 @@ shared_examples_for 'primary addresses' do
 
   it "sets primary", js: true do
     expect(@resource.addresses.first.primary?).to eq true
+    @resource.reload
     expect(@resource.addresses.second.primary?).to eq false
 
     within("#{table} tr#address-#{@resource.addresses.second.id}") { click_link 'set_primary_link' }
@@ -126,14 +127,14 @@ shared_examples_for 'dynamic state dropdown' do
   context 'new form' do
     before { click new_link }
 
-    it 'changes country with state' do
+    it 'changes country with state', js: true do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
       select "#{state}", from: 'address_state_id'
     end
 
 
-    it 'changes country without state' do
+    it 'changes country without state',js: true do
       select "#{country2}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css("select#address_state_id[disabled]")
@@ -145,14 +146,14 @@ shared_examples_for 'dynamic state dropdown' do
   context 'edit form' do
     before { click edit_link }
 
-    it 'changes country with state' do
+    it 'changes country with state',js: true do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
       select "#{state}", from: 'address_state_id'
     end
 
 
-    it 'changes country without state' do
+    it 'changes country without state', js: true do
       select "#{country2}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css("select#address_state_id[disabled]")
