@@ -1,3 +1,3 @@
-= remote_form_for [@nested_resources, @addressable, @address].flatten do |f|
+= remote_form_for [@nested_resources, @polymorphic_resource, @address].flatten do |f|
   = render 'form_fields', f: f
-  = buttons_for @address, nested_id: @resource_name
+  = buttons_for @address, nested_id: @polymorphic_resource_name
