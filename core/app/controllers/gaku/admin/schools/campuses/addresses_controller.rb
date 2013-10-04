@@ -43,7 +43,7 @@ module Gaku
     end
 
     def load_data
-      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.id] }
+      @countries = Country.all
       @school = School.find(params[:school_id])
       @campus = Campus.find(params[:campus_id])
     end

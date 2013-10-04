@@ -32,7 +32,7 @@ en:
     search: Search Address
     singular: Address
     state:
-      abbr: Abbr
+      abbr: Abbreviation
       add: Add State
       choose: Choose State
       code: Code
