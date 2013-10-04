@@ -20,8 +20,8 @@ module StudentChooserController
   end
 
   def set_enrollment_statuses
-    @enrollment_status_applicant_code = Gaku::EnrollmentStatus.first_or_create(code: 'applicant').code
-    @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.first_or_create(code: 'enrolled').code
+    @enrollment_status_applicant_code = Gaku::EnrollmentStatus.where(code: 'applicant').first_or_create.code
+    @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.where(code: 'enrolled').first_or_create.code
     @enrollment_statuses =  Gaku::EnrollmentStatus.all.map { |es| [es.name, es.code] }
     @enrollment_statuses << [t('undefined'), nil]
   end
