@@ -91,12 +91,17 @@ shared_examples_for 'primary addresses' do
 
   it "sets primary", js: true do
     expect(@resource.addresses.first.primary?).to eq true
-    @resource.reload
     expect(@resource.addresses.second.primary?).to eq false
 
     within("#{table} tr#address-#{@resource.addresses.second.id}") { click_link 'set_primary_link' }
+
     accept_alert
 
+    within("#{table} tr#address-#{@resource.addresses.second.id}") do
+      expect(page).to have_css('.btn-primary')
+    end
+
+    @resource.addresses.reload
     expect(@resource.addresses.first.primary?).to eq false
     expect(@resource.addresses.second.primary?).to eq  true
   end
