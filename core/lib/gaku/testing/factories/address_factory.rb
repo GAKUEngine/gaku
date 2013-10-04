@@ -8,6 +8,12 @@ FactoryGirl.define do
     state
     country
 
+    after(:build) do |address|
+      if address.addressable.respond_to?(:addresses)
+        address.addressable.addresses.reload
+      end
+    end
+
     factory :invalid_address  do
       address1 nil
     end
