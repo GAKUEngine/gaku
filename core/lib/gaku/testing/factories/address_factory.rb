@@ -6,13 +6,10 @@ FactoryGirl.define do
     city     { Faker::Address.city }
 
     state
+    country
 
-    country do |address|
-      if address.state
-        address.state.country
-      else
-        address.association(:country)
-      end
+    factory :invalid_address  do
+      address1 nil
     end
   end
 

@@ -1,6 +1,0 @@
-$('#new-contact-modal').modal('hide');
-showNotice("<%= render_flash %>");
-
-<% if @contactable.primary_contact.try(:'primary?') %>
-	$('td#primary-contact').html('<%= "#{@contactable.primary_contact.contact_type.name}: #{@contactable.primary_contact.data} (#{@contactable.primary_contact.details})" %>')
-<% end %>

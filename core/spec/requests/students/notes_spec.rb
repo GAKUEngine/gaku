@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/notable_spec'
 
 describe 'Student Notes' do
 

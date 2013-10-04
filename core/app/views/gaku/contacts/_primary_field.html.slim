@@ -1,9 +1,9 @@
 td class="primary-contact" width="28px"
   - if can_edit?
     - if contact.primary?
-      = ajax_link_to_make_primary [:make_primary] + target, id: 'set-primary-link', class: 'btn btn-mini btn-primary make-primary'
+      = ajax_link_to_make_primary [:make_primary] + target, method: :patch, id: 'set-primary-link', class: 'btn btn-mini btn-primary make-primary'
     - else
-      = ajax_link_to_make_primary [:make_primary] + target, id: 'set-primary-link', class: 'btn btn-mini'
+      = ajax_link_to_make_primary [:make_primary] + target, method: :patch, id: 'set-primary-link', class: 'btn btn-mini'
 
   - else
     - if contact.primary?

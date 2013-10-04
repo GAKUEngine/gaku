@@ -1,10 +1,8 @@
-// needed for student tab counter
-$("#student-addresses-tab-link").html("<%= print_count(@count-1, t_address_plural) %>");
-
-$(".<%= @resource_name.pluralize %>-count").html("<%= print_count(@count-1, t_address_list) %>");
-
 showNotice("<%= render_flash %>");
-console.log('<%=  @address.primary? %>')
-<%- if @addressable.addresses.reload.any? & @primary_address %>
-	$('#address-<%= @addressable.addresses.first.id %> td a').addClass('btn-primary');
+
+$("#<%= @polymorphic_resource_name.pluralize %>-tab-link").html("<%= print_count(@count, t_address_plural) %>");
+$(".<%= @polymorphic_resource_name.pluralize %>-count").html("<%= print_count(@count, t_address_list) %>");
+
+<%- if @polymorphic_resource.addresses.reload.any? & @primary_address %>
+	$('#address-<%= @polymorphic_resource.addresses.first.id %> td a').addClass('btn-primary');
 <% end %>
