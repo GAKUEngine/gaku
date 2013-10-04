@@ -39,7 +39,7 @@ describe Gaku::CoursesController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new course in the db' do
-        expectdo
+        expect do
           gaku_post :create, course: attributes_for(:course)
         end.to change(Gaku::Course, :count).by 1
 
@@ -69,7 +69,7 @@ describe Gaku::CoursesController do
   describe 'DELETE #destroy' do
     it 'deletes the course' do
       @course = create(:course)
-      expectdo
+      expect do
         gaku_delete :destroy, id: @course
       end.to change(Gaku::Course, :count).by -1
 

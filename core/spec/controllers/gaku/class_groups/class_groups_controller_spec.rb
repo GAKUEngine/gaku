@@ -63,7 +63,7 @@ describe Gaku::ClassGroupsController do
     describe 'POST #create' do
       context 'with valid attributes' do
         it 'saves the new class group in the db' do
-          expectdo
+          expect do
             gaku_js_post :create, class_group: attributes_for(:class_group)
           end.to change(Gaku::ClassGroup, :count).by 1
 
@@ -71,7 +71,7 @@ describe Gaku::ClassGroupsController do
       end
       context 'with invalid attributes' do
         it 'does not save the new class group in the db' do
-          expectdo
+          expect do
             gaku_js_post :create, class_group: {name: ''}
           end.to_not change(Gaku::ClassGroup, :count)
         end
@@ -85,8 +85,8 @@ describe Gaku::ClassGroupsController do
       end
 
       it 'renders the :edit template' do
-          gaku_js_get :edit, id: class_group
-          response.should render_template :edit
+        gaku_js_get :edit, id: class_group
+        response.should render_template :edit
       end
     end
 
@@ -103,6 +103,7 @@ describe Gaku::ClassGroupsController do
           class_group.name.should eq('AZ')
         end
       end
+
       context 'invalid attributes' do
         it "does not change class group's attributes" do
           gaku_js_put :update, id: class_group,
@@ -116,7 +117,7 @@ describe Gaku::ClassGroupsController do
     describe 'DELETE #destroy' do
       it 'deletes the class group' do
         @class_group = create(:class_group)
-        expectdo
+        expect do
           gaku_delete :destroy, id: @class_group
         end.to change(Gaku::ClassGroup, :count).by -1
 

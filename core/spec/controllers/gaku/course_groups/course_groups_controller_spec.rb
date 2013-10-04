@@ -38,7 +38,7 @@ describe Gaku::CourseGroupsController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new course group in the db' do
-        expectdo
+        expect do
           gaku_post :create, course_group: attributes_for(:course_group)
         end.to change(Gaku::CourseGroup, :count).by 1
 

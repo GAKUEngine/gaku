@@ -99,7 +99,7 @@ describe Gaku::ExamsController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new exam in the db' do
-        expectdo
+        expect do
           gaku_js_post :create, exam: attributes_for(:exam)
         end.to change(Gaku::Exam, :count).by 1
 
@@ -108,7 +108,7 @@ describe Gaku::ExamsController do
     end
     context 'with invalid attributes' do
       it 'does not save the new exam in the db' do
-        expectdo
+        expect do
           gaku_js_post :create, exam: {name: ''}
         end.to_not change(Gaku::Exam, :count)
       end
@@ -146,7 +146,7 @@ describe Gaku::ExamsController do
   describe 'DELETE #destroy' do
     it 'deletes the exam' do
       @exam = create(:exam)
-      expectdo
+      expect do
         gaku_delete :destroy, id: @exam
       end.to change(Gaku::Exam, :count).by -1
 

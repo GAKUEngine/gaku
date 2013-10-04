@@ -45,7 +45,7 @@ describe Gaku::SyllabusesController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new syllabus in the db' do
-        expectdo
+        expect do
           gaku_js_post :create, syllabus: attributes_for(:syllabus)
         end.to change(Gaku::Syllabus, :count).by 1
 
@@ -53,7 +53,7 @@ describe Gaku::SyllabusesController do
     end
     context 'with invalid attributes' do
       it 'does not save the new syllabus in the db' do
-        expectdo
+        expect do
           gaku_js_post :create, syllabus: {name: ''}
         end.to_not change(Gaku::Syllabus, :count)
       end
@@ -81,7 +81,7 @@ describe Gaku::SyllabusesController do
   describe 'DELETE #destroy' do
     it 'deletes the syllabus' do
       @syllabus = create(:syllabus)
-      expectdo
+      expect do
         gaku_delete :destroy, id: @syllabus
       end.to change(Gaku::Syllabus, :count).by -1
 

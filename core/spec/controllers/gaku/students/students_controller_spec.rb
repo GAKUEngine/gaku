@@ -234,11 +234,9 @@ describe Gaku::StudentsController do
   describe 'DELETE #destroy' do
     it 'deletes the student' do
       student
-      expectdo
+      expect do
         gaku_js_delete :destroy, id: student
       end.to change(Gaku::Student, :count).by -1
-
-      #controller.should set_the_flash
     end
   end
 

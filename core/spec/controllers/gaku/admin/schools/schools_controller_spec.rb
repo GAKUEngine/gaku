@@ -61,7 +61,7 @@ describe Gaku::Admin::SchoolsController do
     describe 'POST #create' do
       context 'with valid attributes' do
         it 'saves the new school in the db' do
-          expectdo
+          expect do
             gaku_post :create, school: attributes_for(:school)
           end.to change(Gaku::School, :count).by 1
 
@@ -70,7 +70,7 @@ describe Gaku::Admin::SchoolsController do
       end
       context 'with invalid attributes' do
         it 'does not save the new school in the db' do
-          expectdo
+          expect do
             gaku_js_post :create, school: {name: ''}
           end.to_not change(Gaku::School, :count)
         end
@@ -84,8 +84,8 @@ describe Gaku::Admin::SchoolsController do
       end
 
       it 'renders the :edit template' do
-          gaku_js_get :edit, id: school
-          response.should render_template :edit
+        gaku_js_get :edit, id: school
+        response.should render_template :edit
       end
     end
 
@@ -117,7 +117,7 @@ describe Gaku::Admin::SchoolsController do
     describe 'DELETE #destroy' do
       it 'deletes the school' do
         school
-        expectdo
+        expect do
           gaku_delete :destroy, id: school
         end.to change(Gaku::School, :count).by -1
 
