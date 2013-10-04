@@ -3,20 +3,24 @@ require 'spec_helper'
 describe Gaku::AddressesController do
 
   let(:address) { create(:address, addressable: student, country: country) }
-  let(:invalid_address) { create(:invalid_address, addressable: student) }
+  let(:invalid_address) { build(:invalid_address, addressable: student) }
   let!(:student) { create(:student) }
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
 
   context 'as admin' do
     before { as :admin }
 
-    context 'js' do
+    context 'student' do
 
-      describe 'XHR #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
         it('assigns @address') { expect(assigns(:address)).to be_a_new(Gaku::Address) }
+        it('assigns @countries') { expect(assigns(:countries)).to eq [country] }
+        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+        it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+        it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :new template') { template? :new }
       end
 
@@ -83,11 +87,15 @@ describe Gaku::AddressesController do
         end
       end
 
-      describe 'XHR #edit' do
+      describe 'XHR GET #edit' do
         before { gaku_js_get :edit, id: address.id, student_id: student.id }
 
         it { should respond_with 200 }
         it('assigns @address') { expect(assigns(:address)).to eq address }
+        it('assigns @countries') { expect(assigns(:countries)).to eq [country] }
+        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+        it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+        it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :edit template') { template? :edit }
       end
 
@@ -99,6 +107,9 @@ describe Gaku::AddressesController do
 
           it { should respond_with 200 }
           it('assigns @address') { expect(assigns(:address)).to eq address }
+          it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+          it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+          it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
           it('sets flash') { flash_updated? }
           it "changes address's attributes" do
             expect(address.reload.address1).to eq 'mobifon'
@@ -112,7 +123,6 @@ describe Gaku::AddressesController do
 
           it { should respond_with 200 }
           it('assigns @address') { expect(assigns(:address)).to eq address }
-
           it "does not change address's attributes" do
             expect(address.reload.address1).not_to eq ''
           end
@@ -130,6 +140,21 @@ describe Gaku::AddressesController do
           end.to change(Gaku::Address, :count).by(-1)
         end
 
+        it('assigns @polymorphic_resource_name') do
+          js_delete
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+        end
+
+        it('assigns @polymorphic_resource') do
+          js_delete
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it('assigns @nested_resources') do
+          js_delete
+          expect(assigns(:nested_resources)).to eq []
+        end
+
         it 'decrements @count' do
           js_delete
           expect(assigns(:count)).to eq 0
@@ -143,54 +168,95 @@ describe Gaku::AddressesController do
 
 
       describe 'XHR PATCH #soft_delete' do
-        let(:get_soft_delete) { gaku_js_patch :soft_delete, id: address.id, student_id: student.id }
+        let(:js_get_soft_delete) { gaku_js_patch :soft_delete, id: address.id, student_id: student.id }
 
-        it 'redirects' do
-          get_soft_delete
+        it 'responds with success' do
+          js_get_soft_delete
           should respond_with(200)
         end
 
         it 'assigns  @address' do
-          get_soft_delete
+          js_get_soft_delete
           expect(assigns(:address)).to eq address
+        end
+
+        it('assigns @polymorphic_resource_name') do
+          js_get_soft_delete
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+        end
+
+        it('assigns @polymorphic_resource') do
+          js_get_soft_delete
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it('assigns @nested_resources') do
+          js_get_soft_delete
+          expect(assigns(:nested_resources)).to eq []
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            js_get_soft_delete
             address.reload
           end.to change(address, :deleted)
+        end
+
+        it 'sets flash' do
+          js_get_soft_delete
+          flash_destroyed?
         end
       end
 
       describe 'XHR PATCH #recovery' do
-        let(:get_recovery) { gaku_js_patch :recovery, id: address.id, student_id: student.id }
+        let(:js_get_recovery) { gaku_js_patch :recovery, id: address.id, student_id: student.id }
 
-        it 'is successfull' do
-          get_recovery
+        it 'responds with success' do
+          js_get_recovery
           should respond_with(200)
         end
 
         it 'assigns  @address' do
-          get_recovery
+          js_get_recovery
           expect(assigns(:address)).to eq address
         end
 
+        it('assigns @polymorphic_resource_name') do
+          js_get_recovery
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+        end
+
+        it('assigns @polymorphic_resource') do
+          js_get_recovery
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it('assigns @nested_resources') do
+          js_get_recovery
+          expect(assigns(:nested_resources)).to eq []
+        end
+
         it 'renders :recovery' do
-          get_recovery
+          js_get_recovery
           should render_template :recovery
        end
+
+        it 'sets flash' do
+          js_get_recovery
+          flash_recovered?
+        end
 
         it 'updates :deleted attribute' do
           address.soft_delete
           expect do
-            get_recovery
+            js_get_recovery
             address.reload
           end.to change(address, :deleted)
         end
       end
 
     end
-  end
 
+
+  end
 end

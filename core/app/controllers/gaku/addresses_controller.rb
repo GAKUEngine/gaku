@@ -7,9 +7,9 @@ module Gaku
     #                             class: Gaku::Address,
     #                             except: [:recovery, :destroy]
 
-    respond_to :js, :html
+    respond_to :js
 
-    before_action :set_countries
+    before_action :set_countries,        only: %i( new edit )
     before_action :set_unscoped_address, only: %i( recovery destroy )
     before_action :set_address,          only: %i( edit update soft_delete )
     before_action :set_polymorphic_resource
@@ -86,7 +86,7 @@ module Gaku
     end
 
     def set_countries
-      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.id] }
+      @countries = Country.all
     end
 
     def set_address
