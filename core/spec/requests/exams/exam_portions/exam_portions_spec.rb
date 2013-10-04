@@ -4,10 +4,10 @@ describe 'Exam portions' do
 
   before { as :admin }
 
-  let(:exam) { create(:exam, name: "Unix") }
+  let(:exam) { create(:exam, name: 'Unix') }
 
   before :all do
-    set_resource "exam-exam-portion"
+    set_resource 'exam-exam-portion'
   end
 
   context 'exam/show ' do
@@ -26,7 +26,7 @@ describe 'Exam portions' do
       it 'adds a portion' do
         #exam portions weight total cant be over 100
         expect do
-          fill_in "exam_portion_name", with: 'Ubuntu'
+          fill_in 'exam_portion_name', with: 'Ubuntu'
           fill_in 'exam_portion_weight', with: 100.6
           click submit
           wait_until_invisible form
@@ -34,10 +34,10 @@ describe 'Exam portions' do
         flash_created?
         within(count_div) { page.should have_content 'Exam portions list(2)' }
         size_of(table_rows).should == 3
-        within (table) { page.should have_content "Ubuntu" }
+        within (table) { page.should have_content 'Ubuntu' }
         page.should have_content 'Ubuntu Weight'
         page.should have_content 'Total Weight'
-        within('#weight-total') { page.should have_content "200.6" }
+        within('#weight-total') { page.should have_content '200.6' }
       end
 
       it 'cancels adding', cancel: true do
@@ -54,11 +54,11 @@ describe 'Exam portions' do
       click submit
 
       wait_until_invisible modal
-      within(table){
+      within(table)do
         page.should have_content 'MacOS'
         page.should have_content '50.6'
-      }
-      within('#weight-total'){ page.should have_content "50.6" }
+      end
+      within('#weight-total'){ page.should have_content '50.6' }
       #flash_updated?
     end
 
@@ -97,14 +97,14 @@ describe 'Exam portions' do
       end.to change(Gaku::ExamPortion, :count).by -1
 
       Gaku::Exam.count.should eq 0
-      current_path.should == "/exams"
+      current_path.should == '/exams'
       flash_destroyed?
     end
 
     context 'when select back' do
       it 'returns to exams/index page' do
         click_on 'Back'
-        current_path.should == "/exams"
+        current_path.should == '/exams'
       end
     end
 

@@ -50,7 +50,7 @@ module Gaku
     def completion(students)
       total_records = total_records(students)
       completion_ratio = 1 - (ungraded(students) / total_records.to_f)
-      return (completion_ratio * 100).round(2)
+      (completion_ratio * 100).round(2)
     end
 
     def ungraded(students)
@@ -66,7 +66,7 @@ module Gaku
           end
         end
 
-      return ungraded
+      ungraded
     end
 
     def total_records(students)
@@ -78,7 +78,7 @@ module Gaku
       students.each do |student|
         completed.append(student.id) if self.completed_by_student?(student)
       end
-      return completed
+      completed
     end
 
 
@@ -92,7 +92,7 @@ module Gaku
         state = false if check_record_completion?(student_eps)
       end
 
-      return state
+      state
     end
 
     private

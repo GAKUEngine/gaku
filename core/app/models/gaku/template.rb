@@ -7,7 +7,7 @@ module Gaku
     validates :file, presence: true, on: :create
 
     validates_attachment_content_type :file,
-      message: I18n.t(:'template.file_type_error'),
+                                      message: I18n.t(:'template.file_type_error'),
       content_type:
         [
           'text/plain',

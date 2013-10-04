@@ -15,10 +15,10 @@ describe 'Students' do
 
 
   before :all do
-    set_resource "student"
+    set_resource 'student'
   end
 
-  context "existing" do
+  context 'existing' do
     before do
       enrollment_status
       enrollment_status_applicant
@@ -30,7 +30,7 @@ describe 'Students' do
       visit gaku.students_path
     end
 
-    it "lists" do
+    it 'lists' do
       #list show only students with active enrollment statuses
       size_of(table_rows).should eq 4
       page.should have_content "#{student.name}"
@@ -55,25 +55,25 @@ describe 'Students' do
       end
     end
 
-    it "has autocomplete while searching", js: true do
+    it 'has autocomplete while searching', js: true do
       size_of(table_rows).should eq 4
 
-      fill_in 'q_name_cont', with: "J"
+      fill_in 'q_name_cont', with: 'J'
       wait_for_ajax
 
       size_of(table_rows).should eq 3
       within(table) do
-        page.should have_content "John"
-        page.should have_content "Johny"
+        page.should have_content 'John'
+        page.should have_content 'Johny'
       end
 
-      fill_in 'q_surname_cont', with: "B"
+      fill_in 'q_surname_cont', with: 'B'
       wait_for_ajax
 
       size_of(table_rows).should eq 2
       within(table) do
-        page.should have_content "Johny"
-        page.should have_content "Bravo"
+        page.should have_content 'Johny'
+        page.should have_content 'Bravo'
       end
     end
 
@@ -85,7 +85,7 @@ describe 'Students' do
 
       expect do
         click '#delete-student-link'
-        within(modal) { click_on "Delete" }
+        within(modal) { click_on 'Delete' }
         accept_alert
         wait_until { flash_destroyed? }
       end.to change(Gaku::Student, :count).by -1
@@ -97,22 +97,22 @@ describe 'Students' do
 
   end
 
-  context "new", js: true do
+  context 'new', js: true do
     before do
       visit gaku.students_path
       click new_link
       wait_until_visible submit
     end
 
-    it "creates and shows" do
+    it 'creates and shows' do
       expect do
-        fill_in "student_name", with: "John"
-        fill_in "student_surname", with: "Doe"
-        click_button "submit-student-button"
+        fill_in 'student_name', with: 'John'
+        fill_in 'student_surname', with: 'Doe'
+        click_button 'submit-student-button'
         wait_until_invisible form
       end.to change(Gaku::Student, :count).by 1
 
-      page.should have_content "John"
+      page.should have_content 'John'
       within(count_div) { page.should have_content 'Students list(1)' }
       flash_created?
     end

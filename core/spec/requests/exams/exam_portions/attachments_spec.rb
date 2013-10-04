@@ -4,7 +4,7 @@ describe 'Exam Portion Attachments' do
 
   before { as :admin }
 
-  let(:exam) { create(:exam, name: "Unix") }
+  let(:exam) { create(:exam, name: 'Unix') }
   let(:exam_portion) { create(:exam_portion, exam: exam) }
   let(:attachment) { create(:attachment, attachable: exam_portion) }
 
@@ -25,7 +25,7 @@ describe 'Exam Portion Attachments' do
         fill_in 'attachment_name', with: 'Attachment name'
         fill_in 'attachment_description', with: 'Attachment description'
 
-        absolute_path = Rails.root + "../support/120x120.jpg"
+        absolute_path = Rails.root + '../support/120x120.jpg'
         attach_file 'attachment_asset', absolute_path
         click submit
         current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
@@ -76,7 +76,7 @@ describe 'Exam Portion Attachments' do
         current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
       end
 
-      it "cancels editing" do
+      it 'cancels editing' do
         ensure_cancel_modal_is_working
       end
 

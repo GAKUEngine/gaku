@@ -129,7 +129,7 @@ module Gaku::Grading::Calculations
         array_data.each do |num|
           total += num
         end
-        return total
+        total
       end
 
       def add_to_exam_averages(exam, student)

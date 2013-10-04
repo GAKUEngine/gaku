@@ -14,7 +14,7 @@ describe 'Admin Presets Names' do
       click '#submit-preset'
 
       flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:names])).to eq({:names=>"%first_name"})
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:names])).to eq({names: "%first_name"})
     end
   end
 

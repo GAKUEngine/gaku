@@ -7,7 +7,7 @@ describe 'Admin School Years' do
   before { as :admin }
 
   before :all do
-    set_resource "admin-school-year"
+    set_resource 'admin-school-year'
   end
 
   context 'new', js: true do
@@ -86,7 +86,7 @@ describe 'Admin School Years' do
       end
 
       context 'validations' do
-        it "validate ending before starting" do
+        it 'validate ending before starting' do
           fill_in 'school_year_starting', with: Date.parse('2013-3-8')
           fill_in 'school_year_ending', with: Date.parse('2013-3-8')
           click submit

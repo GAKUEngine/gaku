@@ -13,7 +13,7 @@ module Gaku
     class_option :env, type: :string, default: 'development'
 
     def self.source_paths
-      paths = self.superclass.source_paths
+      paths = superclass.source_paths
       paths << File.expand_path('../templates', "../../#{__FILE__}")
       paths << File.expand_path('../templates', "../#{__FILE__}")
       paths << File.expand_path('../templates', __FILE__)
@@ -31,7 +31,7 @@ module Gaku
     end
 
     def remove_unneeded_files
-      remove_file "public/index.html"
+      remove_file 'public/index.html'
     end
 
     def clear_logs
@@ -50,12 +50,12 @@ module Gaku
         empty_directory "app/assets/#{path}/gaku"
       end
 
-      template "app/assets/javascripts/gaku/all.js"
-      template "app/assets/stylesheets/gaku/all.css"
+      template 'app/assets/javascripts/gaku/all.js'
+      template 'app/assets/stylesheets/gaku/all.css'
     end
 
     def create_overrides_directory
-      empty_directory "app/overrides"
+      empty_directory 'app/overrides'
     end
 
     def configure_application
@@ -74,25 +74,25 @@ module Gaku
     end
       APP
 
-      append_file "config/environment.rb", "\nActiveRecord::Base.include_root_in_json = true\n"
+      append_file 'config/environment.rb', "\nActiveRecord::Base.include_root_in_json = true\n"
     end
 
     def include_seed_data
-      append_file "db/seeds.rb", <<-SEEDS
+      append_file 'db/seeds.rb', <<-SEEDS
 \n
 Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       SEEDS
     end
 
     def install_migrations
-      say_status :copying, "migrations"
+      say_status :copying, 'migrations'
       silence_stream(STDOUT) do
         silence_warnings { rake 'railties:install:migrations' }
       end
     end
 
     def create_database
-      say_status :creating, "database"
+      say_status :creating, 'database'
       silence_stream(STDOUT) do
         silence_stream(STDERR) do
           silence_warnings { rake 'db:create', env: @env }
@@ -102,7 +102,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
 
     def run_migrations
       if @run_migrations
-        say_status :running, "migrations"
+        say_status :running, 'migrations'
         rake 'db:migrate', env: @env
       else
         say_status :skipping, "migrations (don't forget to run rake db:migrate)"
@@ -111,10 +111,10 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
 
     def populate_seed_data
       if @load_seed_data
-        say_status :loading,  "seed data"
+        say_status :loading,  'seed data'
         rake_options=[]
         rake_options << "RAILS_ENV=#{@env}"
-        rake_options << "AUTO_ACCEPT=1" if options[:auto_accept]
+        rake_options << 'AUTO_ACCEPT=1' if options[:auto_accept]
 
         cmd = lambda { rake("db:seed #{rake_options.join(' ')}") }
         if options[:auto_accept] || (options[:admin_email] && options[:admin_password])
@@ -123,7 +123,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
           cmd.call
         end
       else
-        say_status :skipping, "seed data (you can always run rake db:seed)"
+        say_status :skipping, 'seed data (you can always run rake db:seed)'
       end
     end
 
@@ -142,19 +142,19 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       end
 
       unless options[:quiet]
-        puts "*" * 50
+        puts '*' * 50
         puts "We added the following line to your application's config/routes.rb file:"
-        puts " "
+        puts ' '
         puts "    mount Gaku::Core::Engine, at: '/'"
       end
     end
 
     def complete
       unless options[:quiet]
-        puts "*" * 50
+        puts '*' * 50
         puts "Gaku has been installed successfully. You're all ready to go!"
-        puts " "
-        puts "Enjoy!"
+        puts ' '
+        puts 'Enjoy!'
       end
     end
 

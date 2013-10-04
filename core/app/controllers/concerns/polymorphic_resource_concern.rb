@@ -27,7 +27,7 @@ module PolymorphicResourceConcern
 
     #prepend :admin for admin/namespacing
     nested_resources.prepend(:admin) if @polymorphic_resource.class == Gaku::Campus
-    return nested_resources
+    nested_resources
   end
 
   def resource_name

@@ -25,7 +25,7 @@ Gaku::Core::Engine.routes.draw do
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
-     controllers: {
+    controllers: {
        sessions: 'gaku/devise/sessions',
        registrations: 'gaku/devise/registrations',
        passwords: 'gaku/devise/passwords'

@@ -10,7 +10,7 @@ describe 'Extracurricular Activities' do
     set_resource 'extracurricular-activity'
   end
 
-  context "new", js: true do
+  context 'new', js: true do
     before do
       visit gaku.extracurricular_activities_path
       click new_link
@@ -19,12 +19,12 @@ describe 'Extracurricular Activities' do
 
     it 'creates and shows' do
       expect do
-        fill_in "extracurricular_activity_name", with: "Tennis"
+        fill_in 'extracurricular_activity_name', with: 'Tennis'
         click submit
         wait_until_invisible form
       end.to change(Gaku::ExtracurricularActivity, :count).by 1
 
-      page.should have_content "Tennis"
+      page.should have_content 'Tennis'
       within(count_div) { page.should have_content 'Extracurricular Activities list(1)' }
       flash_created?
     end
@@ -49,8 +49,8 @@ describe 'Extracurricular Activities' do
         wait_until_visible modal
       end
 
-      it "edits" do
-        fill_in "extracurricular_activity_name", with: "Paintball"
+      it 'edits' do
+        fill_in 'extracurricular_activity_name', with: 'Paintball'
         click submit
         wait_until_invisible modal
 
@@ -73,7 +73,7 @@ describe 'Extracurricular Activities' do
 
     end
 
-    it "deletes", js: true do
+    it 'deletes', js: true do
 
       expect do
         ensure_delete_is_working

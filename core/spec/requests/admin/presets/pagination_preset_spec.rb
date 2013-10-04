@@ -16,7 +16,7 @@ describe 'Admin Presets Pagination' do
       click '#submit-preset'
 
       flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:pagination])).to eq({:default_per_page=>"25", :students_per_page=>"50", :changes_per_page=>"10"})
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:pagination])).to eq({default_per_page: "25", students_per_page: "50", changes_per_page: "10"})
     end
   end
 

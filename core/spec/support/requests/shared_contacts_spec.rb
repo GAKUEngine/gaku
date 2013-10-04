@@ -9,17 +9,17 @@ shared_examples_for 'new contact' do
 
     it { has_validations? }
 
-    it "adds and shows" do
+    it 'adds and shows' do
       expect do
         select 'Email',            from: 'contact_contact_type_id'
-        fill_in "contact_data",    with: "The contact data"
-        fill_in "contact_details", with: "The contact details"
+        fill_in 'contact_data',    with: 'The contact data'
+        fill_in 'contact_details', with: 'The contact details'
         click submit
         flash_created?
       end.to change(@data.contacts, :count).by 1
 
-      has_content? "The contact data"
-      has_content? "The contact details"
+      has_content? 'The contact data'
+      has_content? 'The contact details'
 
       count? 'Contacts list(1)'
       if page.has_css?(tab_link)
@@ -37,7 +37,7 @@ shared_examples_for 'edit contact' do
     wait_until_visible modal
   end
 
-  it "edits" do
+  it 'edits' do
     fill_in 'contact_data', with: 'example@genshin.org'
     click submit
 
@@ -56,7 +56,7 @@ end
 
 shared_examples_for 'delete contact' do
 
-  it "deletes", js: true do
+  it 'deletes', js: true do
     contact_field = @data.contacts.first.data
 
     count? 'Contacts list(1)'
@@ -83,7 +83,7 @@ end
 
 shared_examples_for 'primary contacts' do
 
-  it "sets primary", js: true do
+  it 'sets primary', js: true do
     expect(@data.contacts.first.primary?).to eq true
     expect(@data.contacts.second.primary?).to eq false
 
@@ -94,7 +94,7 @@ shared_examples_for 'primary contacts' do
     expect(@data.contacts.second.primary?).to eq true
   end
 
-  it "delete primary", js: true do
+  it 'delete primary', js: true do
     contact1_tr = "#contact-#{@data.contacts.first.id}"
     contact2_tr = "#contact-#{@data.contacts.second.id}"
 

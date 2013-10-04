@@ -34,8 +34,8 @@ users = [
 
 users.each do |user|
   Gaku::User.where(username: user[:username]).first_or_create!(email: user[:email],
-                                                            password: user[:password],
-                                                            password_confirmation: user[:password_confirmation]
+                                                               password: user[:password],
+                                                               password_confirmation: user[:password_confirmation]
                                                            )
 end
 

@@ -10,11 +10,11 @@ shared_examples 'new address' do
 
     it 'creates and shows', js:true do
       expect do
-        fill_in "address_title",    with: 'Primary address'
+        fill_in 'address_title',    with: 'Primary address'
         select "#{country}",        from: 'country_dropdown'
-        fill_in "address_zipcode",  with: '123'
-        fill_in "address_city",     with: 'Nagoya'
-        fill_in "address_address1", with: 'The address details'
+        fill_in 'address_zipcode',  with: '123'
+        fill_in 'address_city',     with: 'Nagoya'
+        fill_in 'address_address1', with: 'The address details'
         click submit
 
         flash_created?
@@ -42,10 +42,10 @@ shared_examples_for 'edit address' do
     wait_until_visible modal
   end
 
-  it "edits", js:true do
+  it 'edits', js:true do
     old_address = address.address1
 
-    fill_in "address_address1", with:'The address new details'
+    fill_in 'address_address1', with:'The address new details'
     click submit
 
     flash_updated?
@@ -66,7 +66,7 @@ end
 
 shared_examples_for 'delete address' do
 
-  it "deletes", js: true do
+  it 'deletes', js: true do
     address_field = @resource.addresses.first.address1
 
     count? 'Addresses list(1)'
@@ -89,7 +89,7 @@ end
 
 shared_examples_for 'primary addresses' do
 
-  it "sets primary", js: true do
+  it 'sets primary', js: true do
     expect(@resource.addresses.first.primary?).to eq true
     @resource.reload
     expect(@resource.addresses.second.primary?).to eq false
@@ -101,7 +101,7 @@ shared_examples_for 'primary addresses' do
     expect(@resource.addresses.second.primary?).to eq  true
   end
 
-  it "delete primary", js: true do
+  it 'delete primary', js: true do
     address1_tr = "#address-#{@resource.addresses.first.id}"
     address2_tr = "#address-#{@resource.addresses.second.id}"
 
@@ -137,7 +137,7 @@ shared_examples_for 'dynamic state dropdown' do
     it 'changes country without state',js: true do
       select "#{country2}", from: 'country_dropdown'
       within('#state-dropdown') do
-        expect(page).to have_css("select#address_state_id[disabled]")
+        expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name
       end
     end
@@ -156,7 +156,7 @@ shared_examples_for 'dynamic state dropdown' do
     it 'changes country without state', js: true do
       select "#{country2}", from: 'country_dropdown'
       within('#state-dropdown') do
-        expect(page).to have_css("select#address_state_id[disabled]")
+        expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name
       end
     end

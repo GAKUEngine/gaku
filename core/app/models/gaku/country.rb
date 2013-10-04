@@ -3,7 +3,7 @@ module Gaku
 
     has_many :states, -> { order name: :asc },
              foreign_key: :country_iso,
-                      primary_key: :iso
+             primary_key: :iso
 
 
     default_scope -> { order('name ASC') }

@@ -22,11 +22,11 @@ describe 'Admin School Campuses Address' do
     end
 
     it 'creates and shows' do
-      fill_in "address_title",    with: 'Primary address'
+      fill_in 'address_title',    with: 'Primary address'
       select "#{country}",        from: 'country_dropdown'
-      fill_in "address_zipcode",  with: '123'
-      fill_in "address_city",     with: 'Nagoya'
-      fill_in "address_address1", with: 'The address details'
+      fill_in 'address_zipcode',  with: '123'
+      fill_in 'address_city',     with: 'Nagoya'
+      fill_in 'address_address1', with: 'The address details'
       click submit
 
       flash_created?
@@ -48,7 +48,7 @@ describe 'Admin School Campuses Address' do
     it 'changes country without state' do
       select "#{country2}", from: 'country_dropdown'
       within('#state-dropdown') do
-        expect(page).to have_css("select#address_state_id[disabled]")
+        expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name
       end
     end
@@ -72,7 +72,7 @@ describe 'Admin School Campuses Address' do
       it 'edits' do
         old_address = address.address1
 
-        fill_in "address_address1", with:'The address new details'
+        fill_in 'address_address1', with:'The address new details'
         click submit
 
         flash_updated?
@@ -97,7 +97,7 @@ describe 'Admin School Campuses Address' do
       it 'changes country without state' do
         select "#{country2}", from: 'country_dropdown'
         within('#state-dropdown') do
-          expect(page).to have_css("select#address_state_id[disabled]")
+          expect(page).to have_css('select#address_state_id[disabled]')
           has_no_content? state.name
         end
       end
