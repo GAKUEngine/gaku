@@ -7,7 +7,7 @@ module Gaku::CountHelper
   end
 
   def print_count(count, text)
-    count != 0 ? text + ' ( ' + count.to_s + ' )' : text
+    count != 0 ? text + '(' + count.to_s + ')' : text
   end
 
 end

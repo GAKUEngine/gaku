@@ -1,4 +1,5 @@
 ja:
+  academic: アカデミック
   achievement:
     add: 実績を追加
     authority: 提供者
@@ -30,7 +31,19 @@ ja:
     save: 住所を保存
     search: 住所検索
     singular: 住所
-    state: 県・州・地方
+    state:
+      abbr: 省略
+      add: 都道府県を追加
+      choose: 都道府県を選択
+      code: コード
+      country_iso: 国別 ISO
+      edit: 都道府県を編集
+      list: 都道府県の一覧
+      name: 県/州
+      name_ascii: ASCII名
+      plural: 県/州
+      save: 都道府県を保存
+      singular: 都道府県
     title: 住所のタイトル
     zipcode: 郵便番号
   admitted: 入学日
@@ -163,7 +176,6 @@ ja:
     plural: 通学手段種別
     save: 通学手段種別を保存
     singular: 通学手段種別
-  comname: 学園陣
   config:
     close: 閉じる
     help:
@@ -238,7 +250,7 @@ ja:
       default: '%Y-%m-%d'
       long: '%Y-%m-%d'
       short: '%Y-%m-%d'
-  date_placeholder: YYYY-MM-DD
+    placeholder: YYYY-MM-DD
   default: デフェルト
   delete: 削除
   description: 説明
@@ -388,7 +400,7 @@ ja:
     edit: 試験要素を編集
     error: 試験の部分の合計が100%を越えてて自動修正が出来ませんでした。正しい数字を入力しなおして下さい。
     execution_date: 実施日
-    master: マスター
+    is_master: マスター
     list: 試験要素一覧
     master: 試験要素マスター
     max_score: 最高点数
@@ -438,13 +450,13 @@ ja:
         notice: '%{resource_name}は正常に更新されました'
   full_name: 氏名
   full_name_reading: 氏名のフリガナ
+  gaku_engine: 学園陣
   gender:
     choose: 性別を選択
     female: 女性
     label: 性別
     male: 男性
     unknown: 未登録
-  given_name: 名
   grade:
     all_exams: 全試験
     average_points: 平均点
@@ -492,6 +504,7 @@ ja:
   graduated: 卒業日
   guardian:
     add: 保護者を追加
+    addresses: 保護者の住所
     edit: 保護者を編集
     list: 保護者一覧
     name: 保護者氏名
@@ -501,7 +514,6 @@ ja:
     save: 保護者を保存
     singular: 保護者
     surname: 保護者名字
-  hello: ハローワールド
   helpers:
     links:
       cancel: キャンセル
@@ -528,6 +540,7 @@ ja:
         student_contacts: 生徒連絡先
         students: 生徒
       disposals:
+        address: 住所を削除
         attachment: 添付ファイルを処分
         course_group: 授業グループを処分
         disposals: 処分
@@ -566,7 +579,7 @@ ja:
       system:
         backup: バックアップ
         system_tools: システムツール
-      templates: 
+      templates: テンプレート
       types:
         attendance_types: 欠席種別
         commute_methods: 通学手段
@@ -628,6 +641,7 @@ ja:
   order: 順序
   panel: パネル
   period: 期間
+  personal: 個人
   personal_information: 個人情報
   phone: 電話番号
   phonetic_reading: ﾌﾘｶﾞﾅ
@@ -691,6 +705,7 @@ ja:
     plural: プログラム専攻
     remove: プログラム授業を削除
   required: 必須
+  resource: リソース
   revert: 元に戻す
   role:
     add: 役割を追加
@@ -700,7 +715,6 @@ ja:
     save: 役割を保存
   save: 保存
   schedule: 定刻
-  scholarship_status: 奨学生
   school:
     add: 学校を追加
     campuses: キャンパス
@@ -807,18 +821,21 @@ ja:
   student:
     academic_information: 学校関連情報
     add: 生徒を追加
-    birth_and: と
+    addresses: 生徒の住所
     birth_between: 生年月日〜
     choose: 生徒を選択して下さい
     chosen_students: 生徒を選択
     class_group_enrollment: クラスに生徒を追加
     commute_method: 通勤手段
+    contacts: 生徒の連絡先
     create: 生徒を作成
     download_registration_roster: 在校生登録シートをダウンロード
     download_roster: 在校生シートをダウンロード
     edit: 編集
     enroll: 生徒を追加
     export: 生徒情報をCSVで書き出し
+    foreign_id_number: 外部生徒番号
+    id_number: 生徒番号
     import: 生徒情報のインポート
     list: 生徒一覧
     name: 生徒名
@@ -828,15 +845,14 @@ ja:
     roster: 生徒一覧
     roster_sheet: 在校生シート
     save: 生徒を保存
+    scholarship_status: 奨学生
     show: 生徒照会
     singular: 生徒
   student_achievement:
     edit: 生徒の実績を編集
     index: 生徒の実績一覧
     save: 生徒の実績を保存
-  student_foreign_id_number: 外部生徒番号
-  student_id_number: 生徒番号
-  student_name: 生徒の名前
+  student_name: 生徒名
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
@@ -861,6 +877,8 @@ ja:
     show: 科目照会
     singular: 科目
   teacher:
+    addresses: 先生の住所
+    contacts: 先生の連絡先
     edit: 教師情報の編集
     list: 教師一覧
     new: 教師の新規登録
@@ -869,17 +887,17 @@ ja:
     show: 教師情報を表示
     singular: 教師
   template:
-    add: 
-    choose: 
-    context: 
-    edit: 
-    file: 
-    file_type_error: 
-    list: 
-    lock: 
-    plural: 
-    save: 
-    singular: 
+    add: テンプレートを追加
+    choose: テンプレートを選択
+    context: コンテキスト
+    edit: テンプレート
+    file: ファイル
+    file_type_error: このファイル形式は対応されていません。
+    list: テンプレート一覧
+    lock: ロック
+    plural: テンプレート
+    save: テンプレートを保存
+    singular: テンプレート
   title: タイトル
   undefined: 未定義
   user:
@@ -890,7 +908,9 @@ ja:
     list: ユーザ一覧
     password: パスワード
     password_confirmation: パスワードの確認
+    plural: ユーザ
     save: ユーザを保存
+    singular: ユーザ
     username: ユーザ名
   views:
     pagination:

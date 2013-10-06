@@ -3,7 +3,7 @@ row-fluid
     #course-group-delete
       = link_to_modal_delete @course_group,id: 'delete-course-group-link'
   .delete-modal
-    =render 'gaku/shared/delete_modal', target: [:soft_delete, @course_group]
+    = render 'gaku/shared/delete_modal', target: [:soft_delete, @course_group]
 
 coffee:
   $('#delete-course-group-link').on 'click', (e)->

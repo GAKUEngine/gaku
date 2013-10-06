@@ -45,6 +45,7 @@ describe 'Students' do
 
       within('#students-checked-div') do
         page.should have_content 'Chosen students(1)'
+        within('.show-chosen-table') { has_content? 'Show'}
         click_link 'Show'
         wait_until_visible '#chosen-table'
         page.should have_content "#{student.name}"

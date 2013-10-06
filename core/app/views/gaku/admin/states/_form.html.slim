@@ -1,4 +1,4 @@
 = remote_form_for [:admin, @state] do |f|
   = render 'form_fields', f: f
 
-  = buttons_for @state, nested_id: 'admin-state'
+  = buttons_for @state, nested_id: 'admin-state', label: t(:'address.state.save')

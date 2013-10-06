@@ -7,7 +7,7 @@ module Gaku
     end
 
     def name_reading_label
-      t(:phonetic_reading) + ' ('+t(:given_name)+')'
+      t(:phonetic_reading) + ' ('+t(:name)+')'
     end
 
     def surname_label
@@ -15,7 +15,7 @@ module Gaku
     end
 
     def name_label
-      t(:name)+' ('+t(:given_name)+')'
+      t(:name)+' ('+t(:name)+')'
     end
 
     def address_icon
