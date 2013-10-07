@@ -9,7 +9,7 @@ module Gaku
 
     before_action :set_contact_types
     before_action :set_unscoped_contact, only: %i( recovery destroy )
-    before_action :set_contact,          only: %i( edit update soft_delete )
+    before_action :set_contact,          only: %i( edit update soft_delete make_primary )
     before_action :set_polymorphic_resource
 
     def new

@@ -138,7 +138,7 @@ Gaku::Core::Engine.routes.draw do
     resources :notes
   end
 
-  resources :students, concerns: %i( addressable ) do
+  resources :students, concerns: %i( addressable contactable ) do
 
     member do
       patch :recovery

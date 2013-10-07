@@ -90,6 +90,11 @@ shared_examples_for 'primary contacts' do
     within("#{table} tr#contact-2") { click_link 'set-primary-link' }
     accept_alert
 
+    within("#{table} tr#contact-#{@data.contacts.second.id}") do
+      expect(page).to have_css('.btn-primary')
+    end
+
+    @data.contacts.reload
     expect(@data.contacts.first.primary?).to eq false
     expect(@data.contacts.second.primary?).to eq true
   end
