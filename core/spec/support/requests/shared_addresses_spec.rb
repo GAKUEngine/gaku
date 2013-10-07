@@ -126,7 +126,7 @@ end
 
 shared_examples_for 'dynamic state dropdown' do
 
-  let!(:country2) { create(:country, name: 'USA', iso: 'US') }
+  let!(:country_without_state) { create(:country, name: 'USA', iso: 'US') }
   let!(:state) { create(:state, country: country) }
 
   context 'new form' do
@@ -135,12 +135,12 @@ shared_examples_for 'dynamic state dropdown' do
     it 'changes country with state', js: true do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
-      select "#{state}", from: 'address_state_id'
+      select "#{state.name}", from: 'address_state_id'
     end
 
 
     it 'changes country without state',js: true do
-      select "#{country2}", from: 'country_dropdown'
+      select "#{country_without_state}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name
@@ -154,12 +154,12 @@ shared_examples_for 'dynamic state dropdown' do
     it 'changes country with state',js: true do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
-      select "#{state}", from: 'address_state_id'
+      select "#{state.name}", from: 'address_state_id'
     end
 
 
     it 'changes country without state', js: true do
-      select "#{country2}", from: 'country_dropdown'
+      select "#{country_without_state}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name

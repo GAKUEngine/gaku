@@ -6,7 +6,7 @@ describe 'Admin School Campuses Address' do
   let(:school) { create(:school)}
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
-  let(:country2) { create(:country, name: 'Japan', iso: 'JP') }
+  let(:country_without_state) { create(:country, name: 'Japan', iso: 'JP') }
   let!(:state) { create(:state, country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
@@ -14,7 +14,7 @@ describe 'Admin School Campuses Address' do
 
   context 'new', type: 'address', js: true do
     before do
-      country2
+      country_without_state
       visit gaku.admin_school_campus_path(school, school.master_campus)
       click new_link
       wait_until_invisible new_link
@@ -46,7 +46,7 @@ describe 'Admin School Campuses Address' do
     end
 
     it 'changes country without state' do
-      select "#{country2}", from: 'country_dropdown'
+      select "#{country_without_state}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css('select#address_state_id[disabled]')
         has_no_content? state.name
@@ -64,7 +64,7 @@ describe 'Admin School Campuses Address' do
 
     context 'edit' do
       before do
-        country2
+        country_without_state
         click edit_link
         wait_until_visible modal
       end
@@ -95,7 +95,8 @@ describe 'Admin School Campuses Address' do
       end
 
       it 'changes country without state' do
-        select "#{country2}", from: 'country_dropdown'
+        #select "#{country}", from: 'country_dropdown'
+        select "#{country_without_state}", from: 'country_dropdown'
         within('#state-dropdown') do
           expect(page).to have_css('select#address_state_id[disabled]')
           has_no_content? state.name
