@@ -1,6 +1,6 @@
 = normal_form_for @student do |f|
-  = person_caption_for student
+  = name_and_ruby_for student
   = render 'gaku/students/form_fields', f: f, student: @student
 
-  = hr
+  hr
   = submit_button 'Save Student', id: 'submit-student-button'

@@ -7,6 +7,6 @@ td = guardian.relationship
   td
     = link_to_show [@student, guardian]
     = link_to_edit [:edit, @student, guardian]
-    = ajax_link_to_delete [@student, guardian], class: 'btn btn-mini btn-danger delete-student-guardian-link'
+    = ajax_link_to_delete [@student, guardian], class: 'btn btn-xs btn-danger delete-student-guardian-link'
 - else
   td = link_to_show [@student, guardian]

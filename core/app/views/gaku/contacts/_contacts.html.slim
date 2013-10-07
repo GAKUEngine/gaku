@@ -1,14 +1,15 @@
 - prepare_resource_name(nested_resources, :contact)
 div class="#{@resource_name.pluralize}"
   = index_header do
-    div id="new-#{@resource_name}" class='hide'
-    .pull-left
-      = count_div "#{@resource_name.pluralize}-count" do
-        = print_count nested_resources.last.contacts_count, t_contact_list
-    .pull-right
-      = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, id: "new-#{@resource_name}-link" if can_edit?
+    .col-md-12
+      div id="new-#{@resource_name}" class='hide'
+      .pull-left
+        = count_div "#{@resource_name.pluralize}-count" do
+          = print_count nested_resources.last.contacts_count, t_contact_list
+      .pull-right
+        = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, id: "new-#{@resource_name}-link" if can_edit?
 
-  = hr
+  hr
 
   = index_body do
     = table_for "#{@resource_name.pluralize}-index" do
