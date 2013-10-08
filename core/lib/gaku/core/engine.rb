@@ -29,14 +29,14 @@ module Gaku
       end
 
       # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
-      initializer "gaku.assets.precompile", group: :all do |app|
+      initializer 'gaku.assets.precompile', group: :all do |app|
         app.config.assets.precompile += %w[
           gaku/all.*
         ]
       end
 
       # filter sensitive information during logging
-      initializer "gaku.params.filter" do |app|
+      initializer 'gaku.params.filter' do |app|
         app.config.filter_parameters += [:password, :password_confirmation, :number]
       end
 

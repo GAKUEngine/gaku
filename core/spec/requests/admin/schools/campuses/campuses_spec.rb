@@ -8,7 +8,7 @@ describe 'Admin School Campuses' do
   let(:campus) { create(:campus ) }
 
   before :all do
-    set_resource "admin-school-campus"
+    set_resource 'admin-school-campus'
   end
 
   before do
@@ -70,18 +70,18 @@ describe 'Admin School Campuses' do
 
     it 'shows' do
       within(table) { click show_link }
-      page.should have_content "Contacts list"
+      page.should have_content 'Contacts list'
     end
 
     it 'deletes' do
-      within(table) { page.should have_content "Nagoya University" }
+      within(table) { page.should have_content 'Nagoya University' }
       within(count_div) { page.should have_content 'Campuses list(1)' }
 
       expect do
         ensure_delete_is_working
       end.to change(school.campuses, :count).by -1
 
-      within(table) { page.should_not have_content "Nagoya University" }
+      within(table) { page.should_not have_content 'Nagoya University' }
       within(count_div) { page.should_not have_content 'Campuses list(1)' }
       flash_destroyed?
     end

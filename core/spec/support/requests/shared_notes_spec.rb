@@ -7,16 +7,16 @@ shared_examples_for 'new note' do
       wait_until_visible submit  
     end
 
-    it "adds and shows", js: true do
+    it 'adds and shows', js: true do
       expect do
-        fill_in "note_title",   with: "The note title"
-        fill_in "note_content", with: "The note content"
+        fill_in 'note_title',   with: 'The note title'
+        fill_in 'note_content', with: 'The note content'
         click submit
         wait_until_invisible submit
       end.to change(@data.notes, :count).by 1
 
-      page.should have_content "The note title"
-      page.should have_content "The note content"
+      page.should have_content 'The note title'
+      page.should have_content 'The note content'
       within(count_div) { page.should have_content 'Notes list(1)' }
       flash_created?
     end
@@ -40,7 +40,7 @@ shared_examples_for 'edit note' do
     wait_until_visible modal
   end
 
-  it "edits", js:true do
+  it 'edits', js:true do
     fill_in 'note_title',   with: 'Edited note title'
     fill_in 'note_content', with: 'Edited note content'
     click submit
@@ -64,7 +64,7 @@ end
 
 shared_examples_for 'delete note' do
 
-  it "deletes", js: true do
+  it 'deletes', js: true do
     note_field = @data.notes.first.title
 
     within(count_div) { page.should have_content 'Notes list(1)' }

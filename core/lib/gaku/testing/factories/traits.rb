@@ -24,7 +24,8 @@ FactoryGirl.define do
 
   trait :with_addresses do
     after(:create) do |resource|
-      create_list :address, 2, addressable: resource
+      create(:address, addressable: resource)
+      create(:address, addressable: resource)
       resource.addresses.reload
     end
   end
@@ -38,7 +39,8 @@ FactoryGirl.define do
 
   trait :with_contacts do
     after(:create) do |resource|
-      create_list :contact, 2, contactable: resource
+      create(:contact, contactable: resource)
+      create(:contact, contactable: resource)
       resource.contacts.reload
     end
   end

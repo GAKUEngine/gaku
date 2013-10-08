@@ -2,10 +2,30 @@ Gaku::Core::Engine.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
+  concern :addressable do
+    resources :addresses do
+      member do
+        patch :make_primary
+        patch :soft_delete
+        patch :recovery
+      end
+    end
+  end
+
+  concern :contactable do
+    resources :contacts do
+      member do
+        patch :make_primary
+        patch :soft_delete
+        patch :recovery
+      end
+    end
+  end
+
   devise_for :users, {
     class_name: 'Gaku::User',
     module: :devise,
-     controllers: {
+    controllers: {
        sessions: 'gaku/devise/sessions',
        registrations: 'gaku/devise/registrations',
        passwords: 'gaku/devise/passwords'
@@ -107,7 +127,7 @@ Gaku::Core::Engine.routes.draw do
     resources :importer, controller: 'syllabuses/importer'
   end
 
-  resources :teachers do
+  resources :teachers, concerns: %i( addressable contactable ) do
     get 'page/:page', action: :index, on: :collection
     member do
       get :soft_delete
@@ -116,37 +136,18 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :notes
-
-    resources :contacts do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
-
-    resources :addresses do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
   end
 
-  resources :students do
+  resources :students, concerns: %i( addressable contactable ) do
 
     member do
-      get :edit_enrollment_status
-      put :enrollment_status
-      get :recovery
-      get :soft_delete
+      patch :recovery
+      patch :soft_delete
       get :show_deleted
     end
 
     collection do
       get 'page/:page', action: :index
-      get :autocomplete_search
       get :load_autocomplete_data
 
       resources :importer, controller: 'students/importer' do
@@ -162,48 +163,15 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements'
     resources :student_specialties, controller: 'students/student_specialties'
 
-    #resources :enrollment_statuses, controller: 'students/enrollment_statuses' do
-      #resources :notes, controller: 'students/enrollment_statuses/notes'
-    #  member do
-    #    get :history
-    #    get :revert
-    #  end
-    #end
-
-
-    resources :guardians, controller: 'students/guardians' do
+    resources :guardians, controller: 'students/guardians', concerns: %i( addressable contactable ) do
       member do
         get :soft_delete
         get :recovery
       end
 
-      resources :contacts do
-        post :create_modal, on: :collection
-        member do
-          post :make_primary
-          get :soft_delete
-          get :recovery
-        end
-      end
-
-      resources :addresses do
-        member do
-          post :make_primary
-          get :soft_delete
-          get :recovery
-        end
-      end
     end
 
     resources :contacts do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
-
-    resources :addresses do
       member do
         post :make_primary
         get :soft_delete
@@ -256,10 +224,7 @@ Gaku::Core::Engine.routes.draw do
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'admin/schools/campuses' do
-        resources :contacts do
-          post :make_primary, on: :member
-        end
+      resources :campuses, controller: 'admin/schools/campuses', concerns: %i( contactable ) do
         resources :addresses, controller: 'admin/schools/campuses/addresses'
       end
     end

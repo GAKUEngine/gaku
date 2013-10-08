@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/contactable_spec'
 
 describe 'Student Contacts' do
 
@@ -10,9 +9,7 @@ describe 'Student Contacts' do
   let(:student_with_contacts) { create(:student, :with_contacts) }
   let!(:contact_type) { create(:contact_type, name: 'Email') }
 
-  before :all do
-    set_resource 'student-contact'
-  end
+  before(:all) { set_resource 'student-contact' }
 
   context 'new', js: true, type: 'contact' do
 
@@ -20,11 +17,10 @@ describe 'Student Contacts' do
       @data = student
       visit gaku.edit_student_path(@data)
       click tab_link
-      wait_until { page.has_content? 'Contacts list' }
+      wait_until { has_content? 'Contacts list' }
     end
 
     it_behaves_like 'new contact'
-
   end
 
 
@@ -32,22 +28,18 @@ describe 'Student Contacts' do
 
     context 'one contact' do
 
-      before(:each) do
-        @data = student_with_contact
-      end
+      before { @data = student_with_contact }
 
       context 'edit', js: true do
 
         before do
           visit gaku.edit_student_path(@data)
           click tab_link
-          wait_until { page.has_content? 'Contacts list' }
+          wait_until { has_content? 'Contacts list' }
         end
 
         it_behaves_like 'edit contact'
-
         it_behaves_like 'delete contact', @data
-
       end
 
     end
@@ -58,11 +50,11 @@ describe 'Student Contacts' do
         @data = student_with_contacts
         visit gaku.edit_student_path(@data)
         click tab_link
-        wait_until { page.has_content? 'Contacts list' }
+        wait_until { has_content? 'Contacts list' }
       end
 
       it_behaves_like 'primary contacts'
-
     end
   end
+
 end

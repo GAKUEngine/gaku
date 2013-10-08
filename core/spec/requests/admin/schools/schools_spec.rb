@@ -8,7 +8,7 @@ describe 'Admin Schools' do
   let(:school) { create(:school, name: 'Varna Technical University') }
 
   before :all do
-    set_resource "admin-school"
+    set_resource 'admin-school'
   end
 
   context 'new', js: true do
@@ -95,7 +95,7 @@ describe 'Admin Schools' do
 
       before do
         visit gaku.admin_school_path(school)
-        click_on "Edit"
+        click_on 'Edit'
         wait_until_visible modal
       end
 

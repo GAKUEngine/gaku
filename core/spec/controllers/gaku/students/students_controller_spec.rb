@@ -5,8 +5,8 @@ describe Gaku::StudentsController do
   let!(:admin) { create(:admin_user) }
   let!(:enrollment_status) { create(:enrollment_status_admitted) }
   let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
-  let(:valid_attributes) { {name: "Marta", surname: "Kostova"} }
-  let(:invalid_attributes) { {name: ""} }
+  let(:valid_attributes) { {name: 'Marta', surname: 'Kostova'} }
+  let(:invalid_attributes) { {name: ''} }
 
   context 'search' do
     describe 'name' do
@@ -15,14 +15,14 @@ describe Gaku::StudentsController do
       let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,10,5)) }
 
       it 'searches by name' do
-        gaku_js_get :index, q: { name_cont: "Re" }
+        gaku_js_get :index, q: { name_cont: 'Re' }
 
         expect(assigns(:students)).to eq [student1]
         expect(assigns(:students).size).to eq 1
       end
 
       it 'searches by surname' do
-        gaku_js_get :index, q: { surname_cont: "Kal" }
+        gaku_js_get :index, q: { surname_cont: 'Kal' }
 
         expect(assigns(:students)).to eq [student2]
         expect(assigns(:students).size).to eq 1
@@ -41,10 +41,10 @@ describe Gaku::StudentsController do
       let(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code) }
       let(:country1) { create(:country, name: 'Japan') }
       let(:country2) { create(:country, name: 'Bulgaria') }
-      let(:state1) { create(:state, name: "Aici", country: country1) }
-      let(:state2) { create(:state, name: "Varna", country: country2) }
-      let!(:address1) { create(:address, title: 'GTR', address1: "Toyota str.", address2: "gt86 str.", city: 'Nagoya', zipcode: '5000', state: state1, country: country1, addressable: student1) }
-      let!(:address2) { create(:address, title: 'S2000', address1: "Subaru str.", address2: "wrx str.", city: 'Varna', zipcode: '9004', state: state2, country: country2, addressable: student2) }
+      let(:state1) { create(:state, name: 'Aici', country: country1) }
+      let(:state2) { create(:state, name: 'Varna', country: country2) }
+      let!(:address1) { create(:address, title: 'GTR', address1: 'Toyota str.', address2: 'gt86 str.', city: 'Nagoya', zipcode: '5000', state: state1, country: country1, addressable: student1) }
+      let!(:address2) { create(:address, title: 'S2000', address1: 'Subaru str.', address2: 'wrx str.', city: 'Varna', zipcode: '9004', state: state2, country: country2, addressable: student2) }
 
       before do
         student1.addresses.reload
@@ -96,7 +96,7 @@ describe Gaku::StudentsController do
 
   end
 
-  describe "GET #index" do
+  describe 'GET #index' do
     before do
       student
       gaku_get :index
@@ -191,54 +191,52 @@ describe Gaku::StudentsController do
     it('assigns @commute_method_types') { expect(assigns(:commute_method_types)).to_not be_nil }
   end
 
-  describe "POST #create" do
+  describe 'POST #create' do
 
-    context "with valid attributes" do
+    context 'with valid attributes' do
       let(:js_post!) { gaku_js_post :create, student: valid_attributes }
 
-      it "saves" do
+      it 'saves' do
         expect { js_post! }.to change(Gaku::Student, :count).by 1
         response.should be_success
         response.should render_template :create
       end
     end
 
-    context "with invalid attributes" do
+    context 'with invalid attributes' do
       let(:js_post!) { gaku_js_post :create, student: invalid_attributes }
 
-      it "does not save" do
+      it 'does not save' do
         expect{ js_post!}.to_not change(Gaku::Student, :count)
         response.should be_success
       end
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
 
-    it "locates the requested @student" do
+    it 'locates the requested @student' do
       gaku_put :update, id: student, student: attributes_for(:student)
       assigns(:student).should eq(student)
     end
 
-    context "valid attributes" do
+    context 'valid attributes' do
       it "changes student's attributes" do
-        gaku_put :update, id: student, student: attributes_for(:student, name: "Kostova Marta")
+        gaku_put :update, id: student, student: attributes_for(:student, name: 'Kostova Marta')
         student.reload
-        student.name.should eq("Kostova Marta")
+        student.name.should eq('Kostova Marta')
 
         controller.should set_the_flash
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "deletes the student" do
+  describe 'DELETE #destroy' do
+    it 'deletes the student' do
       student
-      expect{
+      expect do
         gaku_js_delete :destroy, id: student
-      }.to change(Gaku::Student, :count).by -1
-
-      #controller.should set_the_flash
+      end.to change(Gaku::Student, :count).by -1
     end
   end
 

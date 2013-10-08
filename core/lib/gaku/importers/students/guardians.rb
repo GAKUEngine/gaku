@@ -8,11 +8,11 @@ module Gaku::Importers::Students
     include Gaku::Importers::Students::PersonalInformation
 
     GUARDIAN_KEY_SYMS = [:'student.id_number', :'student.foreign_id_number',
-      :student_name, :'guardian.relationship', :full_name, :'guardian.surname',
-      :'surname_reading', :'guardian.name', :name_reading, :birth_date,
-      :sex, :email, :phone,
-      :'address.zipcode', :'address.country', :'address.state',
-      :'address.city', :'address.address2', :'address.address1']
+                         :student_name, :'guardian.relationship', :full_name, :'guardian.surname',
+                         :'surname_reading', :'guardian.name', :name_reading, :birth_date,
+                         :sex, :email, :phone,
+                         :'address.zipcode', :'address.country', :'address.state',
+                         :'address.city', :'address.address2', :'address.address1']
 
     def initialize(file, logger = nil)
       @logger = logger

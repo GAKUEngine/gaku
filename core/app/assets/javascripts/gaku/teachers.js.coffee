@@ -3,7 +3,7 @@ ready = ->
   self = this
 
   class TeachersController
-    show: ->
+    edit: ->
       self.app.country_dropdown()
 
   @app.teachers = new TeachersController

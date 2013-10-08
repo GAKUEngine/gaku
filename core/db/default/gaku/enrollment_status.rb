@@ -14,7 +14,7 @@ statuses = [
 	['non_credit_exchange', 'Non-Credit Exchange',	  '休学留学',			true	],
 	['repeat',              'Repeat',                	'留年',			    true	],
 	['held_back',           'Held Back',	            '原級留置',			true	],
-  ['inactive',            'Inactive',					      '休学',					false	],
+ ['inactive',            'Inactive',					      '休学',					false	],
 	['graduated',           'Graduated',					      '卒業',					false	],
 	['re_enrolled',         'Re-Enrolled', 			      '復学', 				true	],
 	['suspended',           'Suspended', 				      '退学', 				false	],

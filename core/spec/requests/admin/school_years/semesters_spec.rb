@@ -8,7 +8,7 @@ describe 'Admin School Years Semesters' do
   before { as :admin }
 
   before :all do
-    set_resource "admin-school-year-semester"
+    set_resource 'admin-school-year-semester'
   end
 
   context 'new', js: true do
@@ -44,7 +44,7 @@ describe 'Admin School Years Semesters' do
         flash_created?
       end
 
-      it "semester should be beetween school year starting and ending" do
+      it 'semester should be beetween school year starting and ending' do
         fill_in 'semester_starting', with: Date.parse('2013-3-7')
         fill_in 'semester_ending', with: Date.parse('2014-11-9')
         click submit
@@ -116,7 +116,7 @@ describe 'Admin School Years Semesters' do
           flash_updated?
         end
 
-        it "semester should be beetween school year starting and ending" do
+        it 'semester should be beetween school year starting and ending' do
           fill_in 'semester_starting', with: Date.parse('2013-3-7')
           fill_in 'semester_ending', with: Date.parse('2014-11-9')
           click submit
@@ -138,13 +138,13 @@ describe 'Admin School Years Semesters' do
       end
     end
 
-    context "#back" do
+    context '#back' do
       before do
         school_year
         visit gaku.admin_school_year_path(school_year)
       end
 
-      it "back to school year index" do
+      it 'back to school year index' do
         click '.back-link'
         page.should have_content 'School Years list'
         current_path.should == gaku.admin_school_years_path

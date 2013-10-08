@@ -8,7 +8,7 @@ describe 'Teacher Picture' do
   let(:teacher) { create(:teacher) }
 
   before do
-    visit gaku.teacher_path(teacher)
+    visit gaku.edit_teacher_path(teacher)
   end
 
   context 'avatarable' do

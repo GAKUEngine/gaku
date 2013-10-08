@@ -12,9 +12,9 @@ module Gaku::Versioning
 
     def set_human_changes
       @human_changes = {}
-      self.changeset.keys.each do |key|
-        key0 = self.changeset[key][0]
-        key1 = self.changeset[key][1]
+      changeset.keys.each do |key|
+        key0 = changeset[key][0]
+        key1 = changeset[key][1]
 
         case key
 

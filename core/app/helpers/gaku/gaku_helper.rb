@@ -21,7 +21,7 @@ module Gaku
 
     def can_edit?
       if controller.action_name == 'show'
-        if controller.controller_name == 'students' || controller.controller_name == 'guardians'
+        if controller.controller_name == 'students' || controller.controller_name == 'guardians' || controller.controller_name == 'teachers'
           false
         else
           true
@@ -130,7 +130,7 @@ module Gaku
     end
 
     def disabled?(object)
-      object.state.try(:countries).try(:present?) || object.new_record?
+      object.new_record? || object.country.states.blank?
     end
 
   end

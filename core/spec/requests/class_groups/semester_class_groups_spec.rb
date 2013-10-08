@@ -11,7 +11,7 @@ describe 'ClassGroup Semesters' do
   let(:semester_class_group) { create(:semester_class_group, semester: semester, class_group: class_group)}
 
   before :all do
-    set_resource "class-group-semester-class-group"
+    set_resource 'class-group-semester-class-group'
   end
 
   before do

@@ -40,7 +40,7 @@ module Gaku
     end
 
     def to_selectbox
-      [self.to_s, self.id]
+      [to_s, id]
     end
 
     def enroll_class_group(class_group)

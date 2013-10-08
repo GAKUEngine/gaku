@@ -11,7 +11,7 @@ end
 
 task :default => :all_specs
 
-spec = eval(File.read('gaku_engine.gemspec'))
+spec = eval(File.read('gaku.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
@@ -72,7 +72,7 @@ end
 namespace :gem do
   desc "run gem install for all gems"
   task :install do
-    version = File.read(File.expand_path("../GAKU_ENGINE_VERSION", __FILE__)).strip
+    version = File.read(File.expand_path("../VERSION", __FILE__)).strip
 
     %w(core).each do |gem_name|
       puts "########################### #{gem_name} #########################"
@@ -91,7 +91,7 @@ end
 namespace :gem do
   desc "Release all gems to gemcutter. Package gaku components, then push gaku"
   task :release do
-    version = File.read(File.expand_path("../GAKU_ENGINE_VERSION", __FILE__)).strip
+    version = File.read(File.expand_path("../VERSION", __FILE__)).strip
 
     %w(core).each do |gem_name|
       puts "########################### #{gem_name} #########################"

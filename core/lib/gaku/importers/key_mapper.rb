@@ -4,7 +4,7 @@ module Gaku::Importers::KeyMapper
     key_syms.each do |key|
       keymap[key] = '^' + I18n.t(key) + '$'#.gsub(' ', ' ')
     end
-    return keymap
+    keymap
   end
 
   def filter_keymap(keymap,book)
@@ -14,6 +14,6 @@ module Gaku::Importers::KeyMapper
         filtered_keymap[key] = value if row.grep(/#{value}/i).any?
       end
     end
-    return filtered_keymap
+    filtered_keymap
   end
 end

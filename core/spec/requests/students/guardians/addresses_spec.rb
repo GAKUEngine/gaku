@@ -1,57 +1,61 @@
 require 'spec_helper'
-require 'support/requests/addressable_spec'
-
 
 describe 'Student Guardian Addresses' do
-
-  before { as :admin }
 
   let(:student)  { create(:student) }
   let(:guardian) { create(:guardian) }
   let(:guardian_with_address) { create(:guardian, :with_address) }
   let(:guardian_with_addresses) { create(:guardian, :with_addresses) }
-  let(:country)  { create(:country, name: 'Japan') }
-  let(:bulgaria) { create(:country, name: 'Bulgaria') }
 
-  before :all do
-    set_resource 'student-guardian-address'
-  end
+  let!(:country) { create(:country, name: 'Japan', iso: 'JP') }
+
+  before(:all) { set_resource 'student-guardian-address' }
+  before { as :admin }
 
   context 'new', js: true, type: 'address' do
     before do
-      country
-      student.guardians << guardian
-      visit gaku.edit_student_guardian_path(student, guardian)
+      @resource = guardian
+      student.guardians << @resource
+      visit gaku.edit_student_guardian_path(student, @resource)
     end
 
     it_behaves_like 'new address'
   end
 
+  context 'state dropdown', js: true, type: 'address' do
+
+    before do
+      @resource = guardian_with_address
+      student.guardians << @resource
+      visit gaku.edit_student_guardian_path(student, @resource)
+    end
+
+    it_behaves_like 'dynamic state dropdown'
+  end
+
   context 'existing', type: 'address' do
 
     context 'one address' do
-      before do
-        bulgaria
-        @data = guardian_with_address
-        student.guardians << @data
-        visit gaku.edit_student_guardian_path(student, @data)
+      before(:each) do
+        @resource = guardian_with_address
+        student.guardians << @resource
+        visit gaku.edit_student_guardian_path(student, @resource)
+        click tab_link
+        wait_until { has_content? 'Addresses list' }
       end
 
       it_behaves_like 'edit address'
-
-      context 'delete' do
-
-        it_behaves_like 'delete address'
-
-      end
+      it_behaves_like 'delete address'
     end
 
     context 'two addresses' do
-      before do
-        bulgaria
-        @data = guardian_with_addresses
-        student.guardians << @data
-        visit gaku.edit_student_guardian_path(student, @data)
+
+      before(:each) do
+        @resource = guardian_with_addresses
+        student.guardians << @resource
+        visit gaku.edit_student_guardian_path(student, @resource)
+        click tab_link
+        wait_until { page.has_content? 'Addresses list' }
       end
 
       it_behaves_like 'primary addresses'

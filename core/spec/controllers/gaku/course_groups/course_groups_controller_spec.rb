@@ -38,9 +38,9 @@ describe Gaku::CourseGroupsController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new course group in the db' do
-        expect{
+        expect do
           gaku_post :create, course_group: attributes_for(:course_group)
-        }.to change(Gaku::CourseGroup, :count).by 1
+        end.to change(Gaku::CourseGroup, :count).by 1
 
         controller.should set_the_flash
       end

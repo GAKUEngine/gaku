@@ -22,7 +22,7 @@ describe 'Admin Presets Students' do
       click '#submit-preset'
 
       flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:student])).to eq({:students_gender=>"false", :address_country=>"US", :address_state=>"Alabama", :address_city=>"Varna"})
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:student])).to eq({students_gender: "false", address_country: "US", address_state: "Alabama", address_city: "Varna"})
     end
   end
 end

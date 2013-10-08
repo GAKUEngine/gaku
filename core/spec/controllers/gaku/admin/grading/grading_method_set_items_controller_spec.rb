@@ -40,7 +40,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create,
-                grading_method_set_item: attributes_for(:grading_method_set_item, grading_method_id: grading_method.id),
+                         grading_method_set_item: attributes_for(:grading_method_set_item, grading_method_id: grading_method.id),
                 grading_method_set_id: grading_method_set
           end
 
@@ -64,7 +64,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         context 'with invalid attributes' do
           let(:invalid_js_create) do
             gaku_js_post :create,
-                grading_method_set_item: attributes_for(:invalid_grading_method_set_item, grading_method_id: nil),
+                         grading_method_set_item: attributes_for(:invalid_grading_method_set_item, grading_method_id: nil),
                 grading_method_set_id: grading_method_set
           end
 
@@ -102,7 +102,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         context 'with valid attributes' do
           before do
             gaku_js_patch :update,
-                id: grading_method_set_item,
+                          id: grading_method_set_item,
                 grading_method_set_item: attributes_for(:grading_method_set_item, grading_method_id: grading_method.id),
                 grading_method_set_id: grading_method_set
           end
@@ -119,7 +119,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         context 'with invalid attributes' do
           before do
             gaku_js_patch :update,
-                id: grading_method_set_item,
+                          id: grading_method_set_item,
                 grading_method_set_item: attributes_for(:invalid_grading_method_set_item, grading_method_id: nil),
                 grading_method_set_id: grading_method_set
           end
@@ -137,7 +137,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
       describe 'XHR DELETE #destroy' do
         let(:js_delete) do
           gaku_js_delete :destroy,
-              id: grading_method_set_item,
+                         id: grading_method_set_item,
               grading_method_set_id: grading_method_set
         end
 

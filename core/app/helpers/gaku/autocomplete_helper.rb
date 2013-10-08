@@ -5,7 +5,7 @@ module Gaku::AutocompleteHelper
       concat form.label options[:object_name], options[:tag_name]
       concat form.text_field options[:object_name],
                              class: 'js-autocomplete span12',
-        data: { autocomplete_source: load_autocomplete_data_students_path(class_name: options[:class_name], column: options[:column]) }
+                             data: { autocomplete_source: load_autocomplete_data_students_path(class_name: options[:class_name], column: options[:column]) }
     end
   end
 

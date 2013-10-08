@@ -6,6 +6,10 @@ FactoryGirl.define  do
     name_reading { Faker::Name.first_name }
     surname_reading { Faker::Name.last_name }
     gender 'male'
+
+    factory :invalid_teacher do
+      name nil
+    end
   end
 
 end

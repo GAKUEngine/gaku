@@ -5,7 +5,7 @@ module Gaku
     include CanCan::Ability
 
     def initialize(user)
-      self.clear_aliased_actions
+      clear_aliased_actions
 
       alias_action :edit, to: :update
       alias_action :new, to: :create
