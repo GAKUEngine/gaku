@@ -132,8 +132,8 @@ Separate branch:
 * Please create a feature branch for every separate change you make.
 * Open a pull-request early for any new features to get feedback.
 * Make sure your patches are well tested. All specs must pass.
-* Follow Bozhidar Batsov's style guides: [ruby-style-guide](https://github.com/bbatsov/ruby-style-guide) and [rails-style-guide](https://github.com/bbatsov/rails-style-guide).
-* Run [rubocop](https://github.com/bbatsov/rubocop) to ensure no style guide issues.
+* Follow Bozhidar Batsov's style guides: [ruby-style-guide](http://github.com/bbatsov/ruby-style-guide) and [rails-style-guide](https://github.com/bbatsov/rails-style-guide).
+* Run [rubocop](http://github.com/bbatsov/rubocop) to ensure no style guide issues.
 
 Master branch:
 
@@ -141,20 +141,21 @@ Master branch:
 
 ### Project Lead
 
-[Rei Kagetsuki](https://github.com/Kagetsuki) ([@kagetsuki0](http://twitter.com/kagetsuki0))
+[Rei Kagetsuki](http://github.com/Kagetsuki) ([@kagetsuki0](http://twitter.com/kagetsuki0))
 
 ### Core Team
 
-* [Vassil Kalkov](https://github.com/kalkov) ([@versicolor](http://twitter.com/versicolor), [blog](http://kalkov.github.io))
-* [Georgi Tapalilov](https://github.com/tapalilov)
-* [Yukiharu Nakaya](https://github.com/snowsunny)
+* [Vassil Kalkov](http://github.com/kalkov) ([@versicolor](http://twitter.com/versicolor), [blog](http://kalkov.github.io))
+* [Georgi Tapalilov](http://github.com/tapalilov)
+* [Yukiharu Nakaya](http://github.com/snowsunny)
 
 ### Inactive/Previously Involved Core Members
-* [Radoslav Georgiev](https://github.com/absolu7)
+* [Radoslav Georgiev](http://github.com/absolu7)
+* [Marta Kostova](http://github.com/martakostova)
 
 ### Contributors
 
-[https://github.com/Genshin/gaku/contributors](https://github.com/Genshin/gaku/contributors)
+[https://github.com/Genshin/gaku/contributors](http://github.com/Genshin/gaku/contributors)
 
 Support
 =======
