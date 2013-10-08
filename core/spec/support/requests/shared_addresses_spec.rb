@@ -21,6 +21,10 @@ shared_examples 'new address' do
       end.to change(@resource.addresses, :count).by(1)
 
       has_content? 'Primary address'
+      count? 'Addresses list(1)'
+      if page.has_css?(tab_link)
+        within(tab_link)  { has_content? 'Addresses(1)' }
+      end
     end
 
     it 'has validations', js:true do
