@@ -171,14 +171,6 @@ Gaku::Core::Engine.routes.draw do
 
     end
 
-    resources :contacts do
-      member do
-        post :make_primary
-        get :soft_delete
-        get :recovery
-      end
-    end
-
     resources :notes
     resources :course_enrollments, controller: 'students/course_enrollments'
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
