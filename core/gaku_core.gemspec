@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov', 'Radoslav Georgiev', 'Marta Kostova']
   s.email        = 'info@genshin.org'
-  s.homepage     = 'http://github.com/Genshin/GAKUEngine'
+  s.homepage     = 'http://github.com/Genshin/gaku'
 
   s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")

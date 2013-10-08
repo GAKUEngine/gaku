@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0.0'
   s.author      = 'Vassil Kalkov'
   s.email       = 'info@genshin.org'
-  s.homepage    = 'http://github.com/Genshin/GAKUEngine'
+  s.homepage    = 'http://github.com/Genshin/gaku'
 
   s.files        = Dir['LICENSE', 'README.md', 'lib/**/*', 'db/**/*']
   s.require_path = 'lib'

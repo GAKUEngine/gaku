@@ -1,14 +1,14 @@
-[![Build Status](https://travis-ci.org/Genshin/GAKUEngine.png)](https://travis-ci.org/Genshin/GAKUEngine)
+[![Build Status](https://travis-ci.org/Genshin/gaku.png)](https://travis-ci.org/Genshin/gaku)
 [![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
-[![Coverage Status](https://coveralls.io/repos/Genshin/GAKUEngine/badge.png?branch=master)](https://coveralls.io/r/Genshin/GAKUEngine?branch=master)
+[![Coverage Status](https://coveralls.io/repos/Genshin/gaku/badge.png?branch=master)](https://coveralls.io/r/Genshin/gaku?branch=master)
 
-GAKU Engine [学園陣]
+GAKU [学園陣]
 ====================
 Genshin Academic Karte Unification Engine
 =========================================
 
-GAKU Engine is a modular, extendable, Open Source school and student management system built on Rails.  
-GAKU Engine is currently under heavy development. 
+GAKU is a modular, extendable, Open Source school and student management system built on Rails.
+GAKU is currently under heavy development.
 -------------------------------------------------------------------------------
 We do not currently recommend any use it in a production environment.
 
@@ -34,7 +34,7 @@ It allows for full student management, grading etc. It's bascally what all stude
 * It will feature a full set of "social" interfaces for students. Students will be able to check their grades, assignments, download notes and printouts, communicate with teachers and staff and share links and information. These features can be enabled or disabled and can be easily regulated by staff.
 * It is multi-locale. Generated reports and paperwork will be formatted appropriately for your schools country of operation (if paperwork for your contry is not available yet please file an issue and we will see about adding it).
 
-Demo 
+Demo
 ----
 http://192.241.249.144/
 
@@ -64,10 +64,10 @@ Create a new Rails application:
     $ rails _4.0.0_ new my_app
 
 
-Then add GAKUEngine to your Gemfile.
+Then add GAKU to your Gemfile.
 
 ```ruby
-gem 'gaku_engine', github: 'Genshin/GAKUEngine'
+gem 'gaku', github: 'Genshin/gaku'
 ```
 
 Install dependencies:
@@ -152,7 +152,7 @@ Master branch:
 
 ### Contributors
 
-[https://github.com/Genshin/GAKUEngine/contributors](https://github.com/Genshin/GAKUEngine/contributors)
+[https://github.com/Genshin/gaku/contributors](https://github.com/Genshin/gaku/contributors)
 
 Support
 =======
@@ -162,7 +162,7 @@ Support
 Notes
 -----
 1. Schools can use it for free - though ideally we want schools to hire developers on maintenance contracts so the software can be improved and schools don't need to worry about the system being poorly maintained by untrained internal staff.
-2. Part of the reason GAKU Engine was created was to eliminate dependence on commercial licenses from certain companies.
+2. Part of the reason GAKU was created was to eliminate dependence on commercial licenses from certain companies.
 	- These licenses are expensive, and many school management systems are built on and rely on them.
 	- The problem is some companies have created organizations that actively go after schools for license infringement.
 	- Though unrelated to GAKU Engine core, we recommend switching to OSS software on school workstations as well, such as LibreOffice, GIMP, InkScape, GNU/Linux (we love Ubuntu and Debian), etc. This will reduce cost and eliminate the risk of having bad licenses.
@@ -174,6 +174,3 @@ GAKU Engine is primarily being developed by the Genshin Souzou organization in J
 But "gaku" alone in Japanese isn't a very good name for a software project. So we added "Engine" because it's also a common Rails naming construct and because adding the word "Engine" to something makes it sound all powerful and cool.
 So now the name was literally "Learning Engine". We decided to take that one step further and create a fully Japanized name using a practice called "ateji". It just so happens the word for "academic" is 学園[gakuen]. Now all we had left is "jin", which we chose the character 陣, which means "encampment" (like a strategic or battle formation).
 To further make things all cool and confusing we made GAKU into an acronym in English. The debate continues as to weather G should remain "Genshin" or should be changed to GNU, but for now just assume the G in Genshin to be synonymous with GNU.
-
-
-
