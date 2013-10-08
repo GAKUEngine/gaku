@@ -11,16 +11,15 @@ end
 
 task :default => :all_specs
 
-spec = eval(File.read('gaku_engine.gemspec'))
+spec = eval(File.read('gaku.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
 desc "Run specs for all engines"
 task :all_specs do
-  %w(core).each do |engine|
+  %w( core ).each do |engine|
     ENV['LIB_NAME'] = File.join('gaku', engine)
-    ENV['SELENIUM'] = '1'
     cmd = "cd #{engine} && bundle exec rspec"; puts cmd; system cmd
   end
 end
@@ -36,12 +35,10 @@ end
 
 desc "clean the whole repository by removing all the generated files"
 task :clean do
-  puts "Deleting sandbox..."
-  FileUtils.rm_rf("sandbox")
   puts "Deleting pkg directory.."
   FileUtils.rm_rf("pkg")
 
-  %w(core).each do |gem_name|
+  %w( core sample ).each do |gem_name|
     puts "Cleaning #{gem_name}:"
     puts "  Deleting #{gem_name}/Gemfile"
     FileUtils.rm_f("#{gem_name}/Gemfile")
@@ -57,7 +54,7 @@ end
 namespace :gem do
   desc "run rake gem for all gems"
   task :build do
-    %w(core).each do |gem_name|
+    %w( core sample ).each do |gem_name|
       puts "########################### #{gem_name} #########################"
       puts "Deleting #{gem_name}/pkg"
       FileUtils.rm_rf("#{gem_name}/pkg")
@@ -72,9 +69,9 @@ end
 namespace :gem do
   desc "run gem install for all gems"
   task :install do
-    version = File.read(File.expand_path("../GAKU_ENGINE_VERSION", __FILE__)).strip
+    version = File.read(File.expand_path("../VERSION", __FILE__)).strip
 
-    %w(core).each do |gem_name|
+    %w( core sample ).each do |gem_name|
       puts "########################### #{gem_name} #########################"
       puts "Deleting #{gem_name}/pkg"
       FileUtils.rm_rf("#{gem_name}/pkg")
@@ -91,19 +88,12 @@ end
 namespace :gem do
   desc "Release all gems to gemcutter. Package gaku components, then push gaku"
   task :release do
-    version = File.read(File.expand_path("../GAKU_ENGINE_VERSION", __FILE__)).strip
+    version = File.read(File.expand_path("../VERSION", __FILE__)).strip
 
-    %w(core).each do |gem_name|
+    %w( core sample ).each do |gem_name|
       puts "########################### #{gem_name} #########################"
       cmd = "cd #{gem_name}/pkg && gem push gaku_#{gem_name}-#{version}.gem"; puts cmd; system cmd
     end
     cmd = "gem push pkg/gaku-#{version}.gem"; puts cmd; system cmd
-  end
-end
-
-desc "Creates a sandbox application for simulating the GAKU Engine code in a deployed Rails app"
-task :sandbox do
-  Bundler.with_clean_env do
-    exec("lib/sandbox.sh")
   end
 end

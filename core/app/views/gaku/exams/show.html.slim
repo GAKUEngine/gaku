@@ -1,10 +1,12 @@
-= content_for :show_header do
-  h3 = t(:'exam.show')
-
-= well_div do
+- po = content_for :panel_option do
+  p bbbbbbbb
+= panel_div "default", t(:'exam.show'), po do
   = render 'show_table', exam: @exam
 
-= well_div do
+= panel_div do
+  - content_for :panel_option do
+    p aaaaaaaa
+
   #new-exam-exam-portion.mb-l.hide
 
   .pull-left
@@ -22,11 +24,11 @@
     .weight-check-widget
       = render 'weight_check_widget', exam: @exam
 
-= well_div do
+= panel_div do
   #exam-notes
     = render partial: 'gaku/notes/notes'
 
-= well_div do
+.row
   .col-md-6
     = link_to_edit_with_text [:edit,@exam], remote: true
   .col-md-6

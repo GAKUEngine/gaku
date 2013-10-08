@@ -14,27 +14,27 @@ module Gaku
     def self.save_presets(params)
       ActiveRecord::Base.transaction do
         params.each do |preset|
-          self.send(:set, preset[0], preset[1])
+          send(:set, preset[0], preset[1])
         end
       end
     end
 
     def self.method_missing(method, *args, &block)
-      return self.send method, *args, &block if self.respond_to? method
+      return send method, *args, &block if self.respond_to? method
 
       method_name = method.to_s
       if method_name =~ /=/
-        return self.set method_name.gsub('=', ''), args.first
+        return set method_name.gsub('=', ''), args.first
 
       elsif method_name =~ /^.*_per_page$/
-        if self.get(method_name)
-          return self.get method_name
+        if get(method_name)
+          return get method_name
         else
-          return self.get 'default_per_page' # default_per_page
+          return get 'default_per_page' # default_per_page
         end
 
       else
-        return self.get method_name
+        return get method_name
       end
     end
 
@@ -68,7 +68,7 @@ module Gaku
       @presets.each do |preset|
         presets_hash[preset.name.to_sym] = YAML.load(preset.content) rescue nil
       end
-      return presets_hash
+      presets_hash
     end
 
   end

@@ -1,7 +1,8 @@
 showNotice("<%= render_flash %>");
 
-<%- if @addressable.addresses.reload.any? && @address.primary? %>
-  $('#address-<%= @addressable.addresses.first.id%> td a').addClass('btn-primary');
+<%- if @polymorphic_resource.addresses.reload.any? && @address.primary? %>
+  $('#address-<%= @polymorphic_resource.addresses.first.id%> td a').addClass('btn-primary');
 <% end %>
 
-$('.<%= @resource_name.pluralize %>-count').html('<%= print_count(@count-1, t_address_list) %>');
+$('.<%= @polymorphic_resource_name.pluralize %>-count').html('<%= print_count(@count, t_address_list) %>');
+$("#<%= @polymorphic_resource_name.pluralize %>-tab-link").html("<%= print_count(@count, t_address_plural) %>");

@@ -13,7 +13,7 @@ describe 'Admin Program' do
   let(:program) { create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, school: school) }
 
   before :all do
-    set_resource "admin-school-program"
+    set_resource 'admin-school-program'
   end
 
   context 'new', js: true do

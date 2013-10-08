@@ -8,7 +8,7 @@ teachers = [
   { name: 'Rei', surname: 'Kagetsuki'}
 ]
 
-say "Creating predefined teachers...".yellow
+say 'Creating predefined teachers...'.yellow
 
 teachers.each do |teacher|
   Gaku::Teacher.where(teacher).first_or_create!

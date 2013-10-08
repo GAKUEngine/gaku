@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'shared_sample_data'
 
-say "Creating grading widget data ...".yellow
+say 'Creating grading widget data ...'.yellow
 
 syllabus = Gaku::Syllabus.where(name: 'Ruby', code: 'rb').first_or_create!
 course = Gaku::Course.where(code: 'Fall 2011').first_or_create!

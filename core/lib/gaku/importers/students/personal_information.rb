@@ -2,17 +2,17 @@ module Gaku::Importers::Students::PersonalInformation
   def add_contacts(row, person)
     phone = row[:phone]
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(
-      name: 'Phone').first.id, data: phone).exists?
+      name: 'Phone').first.id,   data: phone).exists?
       person.contacts.create!(contact_type_id:
-        Gaku::ContactType.where(name: 'Phone').first.id, primary: true,
-        emergency: true, data: phone) unless (phone.nil? || phone == '')
+        Gaku::ContactType.wherprimary: true,
+                              emergency: true, data: phone) unless (phone.nil? || phone == '')
     end
 
     email = row[:email]
     unless person.contacts.where(contact_type_id: Gaku::ContactType.where(
-      name: 'Email').first.id, data: email).exists?
+      name: 'Email').first.id,   data: email).exists?
       person.contacts.create!(contact_type_id: Gaku::ContactType.where(name: 'Email').first.id, primary: true,
-        emergency: true, data: email) unless (email.nil? || email == '')
+                              emergency: true, data: email) unless (email.nil? || email == '')
     end
   end
 
@@ -33,12 +33,12 @@ module Gaku::Importers::Students::PersonalInformation
       end
 
       unless person.addresses.where(zipcode: row[:'address.zipcode'].to_s,
-        country_id: country.id, state_id: state.id, city: row[:'city'],
-        address1: row[:'address.address1'], address2: row[:'address.address2']).exists?
+                                    country_id: country.id, state_id: state.id, city: row[:'city'],
+                                    address1: row[:'address.address1'], address2: row[:'address.address2']).exists?
 
         person_address = person.addresses.create!(zipcode: row[:'address.zipcode'],
-          country_id: country.id, state: state, city: row[:'city'],
-          address1: row[:'address.address1'], address2: row[:'address.address2'])
+                                                  country_id: country.id, state: state, city: row[:'city'],
+                                                  address1: row[:'address.address1'], address2: row[:'address.address2'])
       end
     end
   end

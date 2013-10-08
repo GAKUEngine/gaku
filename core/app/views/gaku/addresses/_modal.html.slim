@@ -1,6 +1,6 @@
 = modal_for 'edit-address-modal' do
   = modal_header t(:'address.edit')
-  = modal_form_for [@nested_resources, @addressable, @address].flatten do |f|
+  = modal_form_for [@nested_resources, @polymorphic_resource, @address].flatten do |f|
     = modal_body do
       = render 'form_fields', f: f
-      = buttons_for @address, nested_id: @resource_name
+      = modal_buttons_for @address, nested_id: @polymorphic_resource_name

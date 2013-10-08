@@ -1,22 +1,37 @@
 module Gaku
   class AddressesController < GakuController
 
-    load_and_authorize_resource :address,
-                                class: Gaku::Address,
-                                except: [:recovery, :destroy]
+    include PolymorphicResourceConcern
 
-    inherit_resources
+    # load_and_authorize_resource :address,
+    #                             class: Gaku::Address,
+    #                             except: [:recovery, :destroy]
 
-    respond_to :js, :html
+    respond_to :js
 
-    before_filter :load_data
-    before_filter :unscoped_address, only: [:destroy, :recovery]
-    before_filter :addressable
-    before_filter :count
+    before_action :set_countries,        only: %i( new edit )
+    before_action :set_unscoped_address, only: %i( recovery destroy )
+    before_action :set_address,          only: %i( edit update soft_delete make_primary )
+    before_action :set_polymorphic_resource
+
+    def new
+      @address = Address.new
+      respond_with @address
+    end
 
     def create
-      @address = @addressable.addresses.new(address_params)
-      create!
+      @address = @polymorphic_resource.addresses.new(address_params)
+      @address.save
+      set_count
+      respond_with @address
+    end
+
+    def edit
+    end
+
+    def update
+      @address.update(address_params)
+      respond_with @address
     end
 
     def make_primary
@@ -30,91 +45,60 @@ module Gaku
       respond_with @address
     end
 
-    def soft_delete
-      @primary_address = true if @address.primary?
-      @address.soft_delete
-      @addressable.addresses.first.try(:make_primary) if @address.primary?
+    def destroy
+      if @address.destroy
+        @polymorphic_resource.addresses.first.try(:make_primary) if @address.primary?
+      end
       flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
+      set_count
       respond_with @address
     end
 
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:address).permit(address_attr)]
+    def soft_delete
+      @primary_address = true if @address.primary?
+      @address.soft_delete
+      @poymorphic_resource.addresses.first.try(:make_primary) if @address.primary?
+      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
+      set_count
+      respond_with @address
     end
 
     private
 
     def address_params
-      params.require(:address).permit(address_attr)
+      params.require(:address).permit(attributes)
     end
 
-    def address_attr
-      %i(title country_id state_id zipcode state_name city address1 address2)
+    def attributes
+      %i( title country_id state_id zipcode state_name city address1 address2 )
     end
-
 
     def t_resource
       t(:'address.singular')
     end
 
-    def addressable_klasses
+    def resource_klass
+      'address'
+    end
+
+    def polymorphic_klasses
       [Gaku::Student, Gaku::Campus, Gaku::Guardian, Gaku::Teacher]
     end
 
-    def load_data
-      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.id] }
+    def set_countries
+      @countries = Country.all
     end
 
-    def unscoped_address
-      @address = Gaku::Address.unscoped.find(params[:id])
+    def set_address
+      @address = Address.find(params[:id])
     end
 
-    def count
-      @count = @addressable.addresses_count
+    def set_unscoped_address
+      @address = Address.unscoped.find(params[:id])
     end
 
-    def addressable
-      klasses = addressable_klasses.select do |c|
-        params[c.to_s.foreign_key]
-      end
-
-      @nested_resources = nested_resources(klasses)
-      @resource_name = resource_name
-    end
-
-    def nested_resources(klasses)
-      nested_resources = []
-      last_klass_foreign_key = params[klasses.last.to_s.foreign_key]
-      if klasses.is_a? Array
-        @addressable = klasses.last.find(last_klass_foreign_key)
-        klasses.pop #remove @addressable resource
-        klasses.each do |klass|
-          nested_resources.append klass.find(params[klass.to_s.foreign_key])
-        end
-      else
-        @addressable = klasses.find(params[klasses.to_s.foreign_key])
-      end
-
-      #prepend :admin for admin/namespacing
-      nested_resources.prepend(:admin) if @addressable.class == Gaku::Campus
-      return nested_resources
-    end
-
-    def resource_name
-      resource_name = []
-      @nested_resources.each do |resource|
-        if resource.is_a?(Symbol)
-          resource_name.append(resource.to_s)
-        else
-          resource_name.append(get_class(resource))
-        end
-      end
-      resource_name.append get_class(@addressable)
-      resource_name.append get_class(@address)
-      resource_name.join '-'
+    def set_count
+      @count = @polymorphic_resource.reload.addresses_count
     end
 
   end

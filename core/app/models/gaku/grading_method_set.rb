@@ -10,11 +10,11 @@ module Gaku
 
     def make_primary
       GradingMethodSet.where(['id != ?', id]).update_all({ primary: false })
-      self.update_attribute(:primary, true)
+      update_attribute(:primary, true)
     end
 
     def items
-      self.grading_method_set_items
+      grading_method_set_items
     end
 
     private
@@ -24,7 +24,7 @@ module Gaku
     end
 
     def update_items_positions(id, index)
-      self.grading_method_set_items.update_all( { position: index }, { id: id } )
+      grading_method_set_items.update_all( { position: index }, { id: id } )
     end
 
   end

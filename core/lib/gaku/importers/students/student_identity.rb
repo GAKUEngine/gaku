@@ -11,7 +11,7 @@ module Gaku::Importers::Students::StudentIdentity
     student =  Gaku::Student.where(
       student_id_number: normalize_id_num(student_id_number)).first
     return student unless student.nil?
-    return Gaku::Student.where(
+    Gaku::Student.where(
       student_foreign_id_number: normalize_id_num(student_foreign_id_number)).first
   end
 end

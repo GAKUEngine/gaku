@@ -20,7 +20,7 @@ describe 'Admin Users' do
     it 'creates and shows' do
       expect do
         fill_in 'user_username', with: 'Susumu Yokota'
-        fill_in 'user_email', with: "susumu@example.com"
+        fill_in 'user_email', with: 'susumu@example.com'
         fill_in 'user_password', with: '123456'
         fill_in 'user_password_confirmation', with: '123456'
         find(:css, "#user_role_ids_[value='#{principal_role.id}']").set(true)

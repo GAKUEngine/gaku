@@ -6,11 +6,11 @@ module Gaku::Importers::Students
     include Gaku::Importers::KeyMapper
 
     ROSTER_KEY_SYMS = [:'student.id_number', :'student.foreign_id_number',
-      :full_name, :full_name_reading, :name, :name_reading,
-      :middle_name, :middle_name_reading, :surname, :surname_reading,
-      :sex, :birth_date, :admitted, :phone, :email,
-      :'address.zipcode', :'address.country', :'address.state',
-      :'address.city', :'address.address2', :'address.address1']
+                       :full_name, :full_name_reading, :name, :name_reading,
+                       :middle_name, :middle_name_reading, :surname, :surname_reading,
+                       :sex, :birth_date, :admitted, :phone, :email,
+                       :'address.zipcode', :'address.country', :'address.state',
+                       :'address.city', :'address.address2', :'address.address1']
 
     def initialize(file, logger = nil)
       @logger = logger

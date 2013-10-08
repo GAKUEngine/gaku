@@ -6,19 +6,19 @@ describe Gaku::ExamsController do
 
   let(:exam) { create(:exam) }
 
-  describe "GET #index" do
-    it "is successful" do
+  describe 'GET #index' do
+    it 'is successful' do
       gaku_get :index
       response.should be_success
     end
 
-    it "populates an array of exams" do
+    it 'populates an array of exams' do
       exam
       gaku_get :index
       assigns(:exams).should eq [exam]
     end
 
-    it "renders the :index view" do
+    it 'renders the :index view' do
       gaku_get :index
       response.should render_template :index
     end
@@ -73,82 +73,82 @@ describe Gaku::ExamsController do
   end
 
   describe 'GET #show' do
-    it "assigns the requested exam to @exam" do
+    it 'assigns the requested exam to @exam' do
       gaku_js_get :show, id: exam
       assigns(:exam).should eq exam
     end
 
-    it "renders the :show template" do
+    it 'renders the :show template' do
       gaku_js_get :show, id: exam
       response.should render_template :show
     end
   end
 
   describe 'GET #new' do
-    it "assigns a new exam to @exam" do
+    it 'assigns a new exam to @exam' do
       gaku_js_get :new
       assigns(:exam).should be_a_new(Gaku::Exam)
     end
 
-    it "renders the :new template" do
+    it 'renders the :new template' do
       gaku_js_get :new
       response.should render_template :new
     end
   end
 
-  describe "POST #create" do
-    context "with valid attributes" do
-      it "saves the new exam in the db" do
-        expect{
+  describe 'POST #create' do
+    context 'with valid attributes' do
+      it 'saves the new exam in the db' do
+        expect do
           gaku_js_post :create, exam: attributes_for(:exam)
-        }.to change(Gaku::Exam, :count).by 1
+        end.to change(Gaku::Exam, :count).by 1
 
         #controller.should set_the_flash
       end
     end
-    context "with invalid attributes" do
-      it "does not save the new exam in the db" do
-        expect{
+    context 'with invalid attributes' do
+      it 'does not save the new exam in the db' do
+        expect do
           gaku_js_post :create, exam: {name: ''}
-        }.to_not change(Gaku::Exam, :count)
+        end.to_not change(Gaku::Exam, :count)
       end
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
 
-    it "locates the requested @exam" do
+    it 'locates the requested @exam' do
       gaku_js_put :update, id: exam, exam: attributes_for(:exam)
       assigns(:exam).should eq(exam)
     end
 
-    context "valid attributes" do
+    context 'valid attributes' do
       it "changes exam's attributes" do
-        gaku_js_put :update, id: exam,exam: attributes_for(:exam, name: "Math2012Fall")
+        gaku_js_put :update, id: exam,exam: attributes_for(:exam, name: 'Math2012Fall')
         exam.reload
-        exam.name.should eq("Math2012Fall")
+        exam.name.should eq('Math2012Fall')
 
         #TODO controller.should set_the_flash
       end
     end
 
-    context "invalid attributes" do
+    context 'invalid attributes' do
       it "changes exam's attributes" do
-        gaku_js_put :update, id: exam,exam: attributes_for(:exam, name: "")
+        gaku_js_put :update, id: exam,exam: attributes_for(:exam, name: '')
         exam.reload
-        exam.name.should_not eq("")
+        exam.name.should_not eq('')
 
         #TODO controller.should set_the_flash
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "deletes the exam" do
+  describe 'DELETE #destroy' do
+    it 'deletes the exam' do
       @exam = create(:exam)
-      expect{
+      expect do
         gaku_delete :destroy, id: @exam
-      }.to change(Gaku::Exam, :count).by -1
+      end.to change(Gaku::Exam, :count).by -1
 
       controller.should set_the_flash
     end

@@ -52,13 +52,13 @@ describe Gaku::Course do
       let(:note) { build(:note) }
       let(:course_with_note) { create(:course, :with_note) }
 
-      it "increments notes_count" do
+      it 'increments notes_count' do
         expect do
           course.notes << note
         end.to change { course.reload.notes_count }.by 1
       end
 
-      it "decrements notes_count" do
+      it 'decrements notes_count' do
         expect do
           course_with_note.notes.last.destroy
         end.to change { course_with_note.reload.notes_count }.by -1
@@ -70,13 +70,13 @@ describe Gaku::Course do
       let(:student) { build(:student) }
       let(:course_with_student) { create(:course, :with_student) }
 
-      it "increments students_count" do
+      it 'increments students_count' do
         expect do
           course.students << student
         end.to change { course.reload.students_count }.by 1
       end
 
-      it "decrements students_count" do
+      it 'decrements students_count' do
         expect do
           course_with_student.students.last.destroy
         end.to change { course_with_student.reload.students_count }.by -1

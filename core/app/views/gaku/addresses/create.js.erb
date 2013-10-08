@@ -1,11 +1,12 @@
-// needed for student tab counter
-$("#<%= @resource_name.pluralize %>-tab-link").html("<%= print_count(@count+1, t_address_plural) %>");
-
-$('#<%= @resource_name.pluralize %>-index tbody').append('<%= render_js_partial("address", {address: @address, nested_resources: [
-  @nested_resources, @addressable] }) %>');
-$('#new-<%= @resource_name %>').slide();
-$('#new-<%= @resource_name %> form')[0].reset();
-$('#new-<%= @resource_name %>-link').show();
-
 showNotice("<%= render_flash %>");
-$('.<%= @resource_name.pluralize %>-count').html('<%= print_count(@count+1, t_address_list) %>');
+
+$('#<%= @polymorphic_resource_name.pluralize %>-index tbody').append('<%= j render("address", {address: @address, nested_resources: [
+  @nested_resources, @polymorphic_resource] }) %>');
+
+$('#new-<%= @polymorphic_resource_name %>').slide();
+$('#new-<%= @polymorphic_resource_name %> form')[0].reset();
+$('#new-<%= @polymorphic_resource_name %>-link').show();
+
+
+$('.<%= @polymorphic_resource_name.pluralize %>-count').html('<%= print_count(@count, t_address_list) %>');
+$("#<%= @polymorphic_resource_name.pluralize %>-tab-link").html("<%= print_count(@count, t_address_plural) %>");

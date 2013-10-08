@@ -13,6 +13,18 @@ window.showNotice = (notice)->
 $.fn.enableValidations = ->
   $(this).enableRails4ClientSideValidations()
 
+
+window.load_states = ->
+  console.log "Load states executed"
+  countryCode = $("#country_dropdown option:selected").val()
+  if countryCode
+    $.ajax
+      type: 'get'
+      url: '/states'
+      dataType: 'script'
+      data:
+        country_id: countryCode
+
 ready = ->
 
   class App
@@ -75,17 +87,9 @@ ready = ->
 
     country_dropdown: ->
       $('body').on 'change', '#country_dropdown', ->
-        countryCode = $("#country_dropdown option:selected").val()
-        if countryCode
-          $.ajax
-            type: 'get'
-            url: '/states'
-            dataType: 'script'
-            data:
-              country_id: countryCode
+        window.load_states()
 
     student_chooser: ->
-
       $(document).on 'keydown', '.js-autocomplete', (event) ->
         element_id = '#' + $(this).attr('id')
         $(element_id).autocomplete

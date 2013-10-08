@@ -1,5 +1,5 @@
 # encoding: UTF-8
-version = File.read(File.expand_path("../../GAKU_ENGINE_VERSION", __FILE__)).strip
+version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov', 'Radoslav Georgiev', 'Marta Kostova']
   s.email        = 'info@genshin.org'
-  s.homepage     = 'http://github.com/Genshin/GAKUEngine'
+  s.homepage     = 'http://github.com/Genshin/gaku'
 
   s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
@@ -70,5 +70,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'localeapp'
-  s.add_dependency 'rack-mini-profiler'
 end

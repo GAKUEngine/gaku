@@ -5,11 +5,11 @@ module Person
     validates :name, :surname, presence: true
 
     def to_s
-      "#{self.surname} #{self.name}"
+      "#{surname} #{name}"
     end
 
     def phonetic_reading
-      "#{self.surname_reading} #{self.name_reading}"
+      "#{surname_reading} #{name_reading}"
     end
 
   end

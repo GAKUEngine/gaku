@@ -27,7 +27,7 @@
 //= require gaku/slide.js.erb
 //= require tablefix
 
-//= require gaku/gaku_engine
+//= require gaku/gaku
 
 //= require jquery_nested_form
 //= require phantom_forms

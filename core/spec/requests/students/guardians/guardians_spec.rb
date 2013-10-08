@@ -8,7 +8,7 @@ describe 'Student Guardians' do
   let(:guardian) { create(:guardian) }
 
   before :all do
-    set_resource "student-guardian"
+    set_resource 'student-guardian'
   end
 
   context 'new', js: true do
@@ -19,32 +19,32 @@ describe 'Student Guardians' do
       wait_until_visible submit
     end
 
-    it "creates and shows" do
+    it 'creates and shows' do
       expect do
         #required
-        fill_in "guardian_surname",         with: "Doe"
-        fill_in "guardian_name",            with: "John"
+        fill_in 'guardian_surname',         with: 'Doe'
+        fill_in 'guardian_name',            with: 'John'
 
-        fill_in "guardian_surname_reading", with: "Phonetic Doe"
-        fill_in "guardian_name_reading",    with: "Phonetic John"
-        fill_in "guardian_relationship",    with: "Father"
+        fill_in 'guardian_surname_reading', with: 'Phonetic Doe'
+        fill_in 'guardian_name_reading',    with: 'Phonetic John'
+        fill_in 'guardian_relationship',    with: 'Father'
 
         click submit
         wait_until_invisible form
       end.to change(student.guardians, :count).by 1
 
       #required
-      page.should have_content "Doe"
-      page.should have_content "John"
+      page.should have_content 'Doe'
+      page.should have_content 'John'
 
-      page.should have_content "Father"
+      page.should have_content 'Father'
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }
       flash_created?
     end
   end
 
-  context "existing" do
+  context 'existing' do
     before(:each) do
       student.guardians << guardian
 
@@ -57,7 +57,7 @@ describe 'Student Guardians' do
         visit gaku.edit_student_guardian_path(student, guardian)
       end
 
-      it "edits" do
+      it 'edits' do
         fill_in 'guardian_name',    with: 'Edited guardian name'
         fill_in 'guardian_surname', with: 'Edited guardian surname'
         click submit
@@ -68,7 +68,7 @@ describe 'Student Guardians' do
       end
     end
 
-    it "deletes", js: true do
+    it 'deletes', js: true do
       page.should have_content guardian.name
       within(count_div) { page.should have_content 'Guardians list(1)' }
       within(tab_link)  { page.should have_content 'Guardians(1)' }
@@ -76,7 +76,7 @@ describe 'Student Guardians' do
       expect do
         click '.delete-student-guardian-link'
         accept_alert
-        within("#student-guardians") { page.should_not have_content guardian.name }
+        within('#student-guardians') { page.should_not have_content guardian.name }
       end.to change(student.guardians, :count).by -1
 
       within(count_div) { page.should_not have_content 'Guardians list(1)' }

@@ -1,0 +1,21 @@
+.row-fluid
+  .span12.well
+    .tabbable.tabs-right
+      ul.nav.nav-tabs
+        li.active
+          a#teacher-addresses-tab-link data-toggle="tab" href="#addresses"
+            = print_count teacher.addresses_count, t(:'address.plural')
+        li
+          a#teacher-contacts-tab-link data-toggle="tab" href="#contacts"
+            = print_count teacher.contacts_count, t(:'contact.plural')
+        li
+          a#teacher-notes-tab-link data-toggle="tab" href="#notes"
+            = print_count teacher.notes_count, t(:'note.plural')
+
+      .tab-content
+        #addresses.tab-pane.active
+          = render partial: 'gaku/addresses/addresses', locals: {nested_resources: [teacher]}
+        #contacts.tab-pane
+          = render 'gaku/contacts/contacts', nested_resources: [teacher]
+        #notes.tab-pane
+          = render partial: 'gaku/notes/notes'

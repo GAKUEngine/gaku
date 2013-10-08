@@ -51,19 +51,19 @@ module Gaku
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
-                            active: true, immutable: true).first_or_create!.try(:code)
+                                                  active: true, immutable: true).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save
     end
 
     def identification_number
-      "%surname-%name-%id".gsub(/%(\w+)/) do |s|
+      '%surname-%name-%id'.gsub(/%(\w+)/) do |s|
         case s
-        when "%name"
+        when '%name'
           name.downcase
-        when "%surname"
+        when '%surname'
           surname.downcase
-        when "%id"
+        when '%id'
           id
         end
       end
@@ -82,7 +82,7 @@ module Gaku
     end
 
     def active
-      enrollment_status = EnrollmentStatus.find_by_code(self.enrollment_status_code)
+      enrollment_status = EnrollmentStatus.find_by_code(enrollment_status_code)
       if enrollment_status
         enrollment_status.active?
       else

@@ -15,7 +15,7 @@ describe 'Admin Presets Grading' do
       click '#submit-preset'
 
       flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:grading])).to eq({:grading_method=>"Exam", :grading_scheme=>"A"})
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:grading])).to eq({grading_method: "Exam", grading_scheme: "A"})
     end
   end
 
