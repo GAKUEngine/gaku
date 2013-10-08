@@ -33,13 +33,13 @@ module Gaku
     end
 
     def role?(role)
-      return !!self.roles.find_by_name(role.to_s.camelize)
+      !!self.roles.find_by_name(role.to_s.camelize)
     end
 
     private
 
     def default_language
-      self.settings[:locale] = Preset.get('language')
+      settings[:locale] = Preset.get('language')
     end
 
   end

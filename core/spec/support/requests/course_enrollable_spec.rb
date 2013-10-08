@@ -9,7 +9,7 @@ shared_examples_for 'enroll to course' do
 
     it { has_validations? }
 
-    it "creates and shows" do
+    it 'creates and shows' do
       expect do
         select "#{@course.code}", from: @select
         click submit
@@ -40,7 +40,7 @@ shared_examples_for 'enroll to course' do
       it "doesn't add a course 2 times" do
         select "#{@course.code}", from: @select
         click submit
-        wait_until { page.should have_content "Already enrolled" }
+        wait_until { page.should have_content 'Already enrolled' }
       
       end
     end
@@ -51,7 +51,7 @@ end
 
 shared_examples_for 'remove enrollment' do
 
-  it "removes", js: true do
+  it 'removes', js: true do
     course_field = @data.courses.first.code
 
     within(count_div) { page.should have_content 'Courses list(1)' }

@@ -7,7 +7,7 @@ describe 'Syllabus Exams' do
   let(:exam) { create(:exam) }
   let(:syllabus) { create(:syllabus, name: 'Biology', code: 'bio') }
   let(:exam) { create(:exam, name: 'Astronomy Exam') }
-  let!(:count_div) { ".exams-count" }
+  let!(:count_div) { '.exams-count' }
 
   existing_exam_form           = '#new-existing-exam'
   new_existing_exam_link       = '#new-existing-exam-link'
@@ -18,17 +18,17 @@ describe 'Syllabus Exams' do
     set_resource 'syllabus-exam'
   end
 
-  context "existing exam" do
+  context 'existing exam' do
     before do
       exam
       syllabus
       visit gaku.syllabuses_path
 
       within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
-      page.should have_content "No Exams"
+      page.should have_content 'No Exams'
     end
 
-    it "adds existing exam", js: true do
+    it 'adds existing exam', js: true do
       within(count_div) { page.should have_content 'Exams list' }
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
@@ -38,11 +38,11 @@ describe 'Syllabus Exams' do
 
       wait_until_invisible existing_exam_form
       page.should have_content exam.name
-      flash? "successfully added"
+      flash? 'successfully added'
       within(count_div) { page.should have_content 'Exams list(1)' }
     end
 
-    xit "cancels adding existing exam", cancel: true, js: true do
+    xit 'cancels adding existing exam', cancel: true, js: true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -53,18 +53,18 @@ describe 'Syllabus Exams' do
     end
   end
 
-  context "new exam" do
+  context 'new exam' do
     context 'new' do
       before do
         syllabus
         visit gaku.syllabuses_path
         within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
-        page.should have_content "No Exams"
+        page.should have_content 'No Exams'
         click new_link
         wait_until_visible submit
       end
 
-      it "creates and shows", js: true  do
+      it 'creates and shows', js: true  do
         within(count_div) { page.should have_content 'Exams list' }
         expect do
           #required
@@ -74,8 +74,8 @@ describe 'Syllabus Exams' do
           wait_until_invisible submit
         end.to change(syllabus.exams, :count).by 1
 
-        page.should have_content "Biology Exam"
-        page.should_not have_content "No Exams"
+        page.should have_content 'Biology Exam'
+        page.should_not have_content 'No Exams'
         within(count_div) { page.should have_content 'Exams list(1)' }
         flash_created?
       end
@@ -87,7 +87,7 @@ describe 'Syllabus Exams' do
         syllabus.exams.count.should eq 0
       end
 
-      it "cancels creating", cancel: true, js: true do
+      it 'cancels creating', cancel: true, js: true do
         ensure_cancel_creating_is_working
       end
     end
@@ -140,7 +140,7 @@ describe 'Syllabus Exams' do
       within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
     end
 
-    it "clicking on new-existing-exam-link hides new-exam form", js: true do
+    it 'clicking on new-existing-exam-link hides new-exam form', js: true do
       click new_link
       wait_until_visible form
 
@@ -152,7 +152,7 @@ describe 'Syllabus Exams' do
       visible? new_link
     end
 
-    it "clicking on new-syllabus-exam-link hides add-existing-exam form", js: true do
+    it 'clicking on new-syllabus-exam-link hides add-existing-exam form', js: true do
       click new_existing_exam_link
       wait_until_visible existing_exam_form
 

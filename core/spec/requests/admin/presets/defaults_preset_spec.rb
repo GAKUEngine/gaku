@@ -10,11 +10,11 @@ describe 'Admin Presets Defaults' do
 
   context '#default', js:true do
     xit 'saves' do
-      check "presets_chooser_table_fields[surname]"
+      check 'presets_chooser_table_fields[surname]'
       click '#submit-preset'
 
       flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:default])).to eq({:names=>"%first_name"})
+      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:default])).to eq({names: "%first_name"})
     end
   end
 

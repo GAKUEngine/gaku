@@ -24,9 +24,9 @@ module Gaku
     def attributes
       #permit :id for update nested attributes
       [:id, :name, :description,
-                  { program_specialties_attributes: [:id, :specialty_id, :_destroy] },
-                  { program_levels_attributes: [:id, :level_id, :_destroy] },
-                  { program_syllabuses_attributes: [:id, :syllabus_id, :_destroy] }]
+       { program_specialties_attributes: [:id, :specialty_id, :_destroy] },
+       { program_levels_attributes: [:id, :level_id, :_destroy] },
+       { program_syllabuses_attributes: [:id, :syllabus_id, :_destroy] }]
     end
 
     def load_data

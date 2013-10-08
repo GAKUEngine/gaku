@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Gaku::Address do
 
-  let(:country) { build(:country) }
   let(:state)   { build(:state) }
+  let(:country) { create(:country) }
   let(:student) { create(:student, primary_address: '') }
   let(:address) { create(:address, country: country, addressable: student) }
 
@@ -20,7 +20,7 @@ describe Gaku::Address do
   describe 'validations' do
     it { should validate_presence_of :address1 }
     it { should validate_presence_of :city }
-    it { should validate_presence_of :country }
+    it { should validate_presence_of :country_id }
   end
 
   describe '.before_save' do
@@ -64,6 +64,19 @@ describe Gaku::Address do
     end
   end
 
+
+  describe '#ensure_first_primary' do
+    it 'sets first address as primary' do
+      address1 = create(:address, addressable: student)
+      student.reload
+      address2 = create(:address, addressable: student)
+      student.reload
+
+      expect(address1.primary).to be_true
+      expect(address2.primary).to be_false
+    end
+  end
+
   describe '#make_primary' do
     it 'sets primary: false except self' do
       address2 = create(:address, country: country, addressable: student, primary: true)
@@ -81,7 +94,7 @@ describe Gaku::Address do
     xit 'updates primary_address field' do
       expect do
         address.make_primary
-      end.to change(address.addressable, :primary_address)
+      end.to change(address.addressable.reload, :primary_address)
     end
   end
 

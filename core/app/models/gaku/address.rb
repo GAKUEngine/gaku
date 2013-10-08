@@ -18,11 +18,11 @@ module Gaku
 
     default_scope -> { where(deleted: false) }
 
-    validates :address1, :country, :city, presence: true
+    validates :address1, :country_id, :city, presence: true
 
     accepts_nested_attributes_for :country
 
-    before_save :ensure_first_primary, on: :create
+    before_create :ensure_first_primary, on: :create
     after_save :update_primary_address_field
     after_destroy :reset_counter_cache
 
@@ -93,7 +93,7 @@ module Gaku
 
     def ensure_first_primary
       if addressable.respond_to?(:addresses)
-        self.primary = true if addresses.blank?
+        self.primary = true if addressable.addresses.blank?
       end
     end
 

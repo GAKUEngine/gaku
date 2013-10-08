@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/contactable_spec'
 
 describe 'Student Guardian Contacts' do
 

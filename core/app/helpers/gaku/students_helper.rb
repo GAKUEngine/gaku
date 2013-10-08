@@ -19,23 +19,23 @@ module Gaku
     end
 
     def address_icon
-      content_tag :i, nil, class: 'icon-globe'
+      content_tag :span, nil, class: 'glyphicon glyphicon-globe'
     end
 
     def contact_icon
-      content_tag :i, nil, class: 'icon-envelope'
+      content_tag :span, nil, class: 'glyphicon glyphicon-envelope'
     end
 
     def guardian_icon
-      content_tag :i, nil, class: 'icon-user'
+      content_tag :span, nil, class: 'glyphicon glyphicon-user'
     end
 
     def edit_button
-      content_tag :i, nil, class: 'icon-white icon-pencil'
+      content_tag :span, nil, class: 'glyphicon glyphicon-pencil'
     end
 
     def ok_icon
-      content_tag :i, nil, class: 'icon-white icon-ok'
+      content_tag :span, nil, class: 'glyphicon glyphicon-ok'
     end
 
   end

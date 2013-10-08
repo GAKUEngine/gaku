@@ -35,7 +35,7 @@ module Gaku::Importers::Students
       log 'Registering new student from importer.'
       student = Gaku::Student.new
       student.enrollment_status = Gaku::EnrollmentStatus.find_by_code('enrolled')
-      return student
+      student
     end
 
     def reg_id(row, student)

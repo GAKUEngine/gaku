@@ -3,7 +3,7 @@ html
   head
     = favicon_link_tag 'gakuengine20.png'
     title
-      = content_for?(:title) ? yield(:title) + " | GAKUEngine" : "GAKUEngine"
+      = content_for?(:title) ? yield(:title) + " | GAKU" : "GAKU"
     = javascript_tag '$.fx.off = true;' if Rails.env.test?
     = stylesheet_link_tag "gaku/all"
     = javascript_include_tag "gaku/all"

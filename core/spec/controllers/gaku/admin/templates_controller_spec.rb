@@ -86,7 +86,7 @@ describe Gaku::Admin::TemplatesController do
     context 'valid attributes' do
       it 'changes templates attributes' do
         gaku_put :update, id: template,
-                  template: attributes_for(:template, name: 'Student template')
+                          template: attributes_for(:template, name: 'Student template')
         template.reload
         template.name.should eq('Student template')
 
@@ -97,7 +97,7 @@ describe Gaku::Admin::TemplatesController do
     context 'invalid attributes' do
       it 'does not change templates attributes' do
         gaku_put :update, id: template,
-                              template: attributes_for(:template, name: '')
+                          template: attributes_for(:template, name: '')
         template.reload
         template.name.should_not eq('')
       end

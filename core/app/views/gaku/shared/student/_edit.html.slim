@@ -1,19 +1,22 @@
-.col-md-9.well
-  ul.nav.nav-tabs.nav-justified
-    li.active
-      a#student-personal-tab-link data-toggle="tab" href="#personal"
-        = t(:'personal')
-    li
-      a#student-academic-tab-link data-toggle="tab" href="#academic"
-        = t(:'academic')
-  .tab-content
-    #personal.tab-pane.active
-      = render 'gaku/shared/student/personal', student: @student
-    #academic.tab-pane
-      = render 'gaku/shared/student/academic', student: @student
+.row
+  .col-md-9
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#student-personal-tab-link data-toggle="tab" href="#personal"
+          = t(:'personal')
+      li
+        a#student-academic-tab-link data-toggle="tab" href="#academic"
+          = t(:'academic')
+    .tab-content
+      #personal.tab-pane.active
+        = render 'gaku/shared/student/personal', student: student
+      #academic.tab-pane
+        = render 'gaku/shared/student/academic', student: student
+  .col-md-3
+    = render 'gaku/shared/picture', resource: student
 
+hr
 
-.col-md-3.well
-  = render 'gaku/shared/picture', resource: @student
-
-= render partial: 'gaku/shared/student/tabs'
+.row.mt-l
+  .col-md-12
+    = render partial: 'gaku/shared/student/tabs'

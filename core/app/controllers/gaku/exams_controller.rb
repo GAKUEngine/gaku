@@ -64,7 +64,7 @@ module Gaku
       @exams.each { |exam| exam.exam_portions.reload }
 
       respond_to do |format|
-        format.json { render json: {
+        format.json do render json: {
           student_total_scores: @student_total_scores.as_json,
           exams: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores }},root: false),
           course: @course.as_json(root: false),
@@ -76,7 +76,7 @@ module Gaku
           attendances: @student_portion_attendance.as_json(root: true, include: :attendance_type),
           path_to_exam: @path_to_exam.to_json,
           completion: @completion
-        }}
+        }end
         format.html { render 'gaku/exams/grading' }
       end
     end
