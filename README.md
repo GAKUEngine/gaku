@@ -2,22 +2,21 @@
 [![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
 [![Coverage Status](https://coveralls.io/repos/Genshin/gaku/badge.png?branch=master)](https://coveralls.io/r/Genshin/gaku?branch=master)
 
-GAKU [学園陣]
+GAKU Engine [学園陣]
 ====================
-Genshin Academic Karte Unification Engine
-=========================================
+GAKU Engine, or just "GAKU" for short is the "Genshin Academic Karte Unification Engine". The gaku character 「学」 means "Learning", so saying GAKU Engine is roughly equivilent to saying "Learning Engine".
 
 GAKU is a modular, extendable, Open Source school and student management system built on Rails.
 GAKU is currently under heavy development.
 -------------------------------------------------------------------------------
-We do not currently recommend any use it in a production environment.
+We do not currently recommend anyone use it in a production environment.
 
 
-What does the name mean?
+Full details on the name
 ------------------------
 The kanji for "learning" is 学[gaku]. So literally GAKU Engine alone means "Learning Engine". The full Japanese name further uses "ateji" to make the name into 学園陣, which is broken down into 学園[gakuen] "academic" and 陣[jin] "encampment/battle formation". Either way it's always read the same, so take your pick of the meaning: "Learning Engine" or "Academic Encampment".
 
-For the English we also chose to treat GAKU as an acronym, which can be seen above. You know, because confusing acronyms are radical to the max.
+For the English we also chose to treat GAKU as an acronym, which can be seen above. You know, because using confusing acronyms makes stuff cooler.
 
 License
 -------
@@ -27,7 +26,7 @@ What does it do?
 ----------------
 It allows for full student management, grading etc. It's bascally what all student grading tools are but it's unique in that:
 
-* It's completely Open Source, licensed under the GPL3. (See note #1)
+* It's completely Open Source, licensed under the GPL3.
 * It only uses Free Open Source components and does not rely on a licensed back end - so you don't need to worry about the BSA suing you. (See note #2)
 * It's Rails based, so it's easily extendable and runs on everything.
 * It does not require a special client to use. Any web browser will do. Special clients can be developed, and one for students will eventually be created [for use on smart phones].
@@ -36,7 +35,7 @@ It allows for full student management, grading etc. It's bascally what all stude
 
 Demo
 ----
-http://192.241.249.144/
+http://demo.gakuengine.com/
 
 user: admin,   pass: 123456
 
@@ -140,7 +139,7 @@ Master branch:
 
 * Commit directly onto the master branch only for typos, improvements to the readme and documentation.
 
-### Author
+### Project Lead
 
 [Rei Kagetsuki](https://github.com/Kagetsuki) ([@kagetsuki0](http://twitter.com/kagetsuki0))
 
@@ -148,6 +147,9 @@ Master branch:
 
 * [Vassil Kalkov](https://github.com/kalkov) ([@versicolor](http://twitter.com/versicolor), [blog](http://kalkov.github.io))
 * [Georgi Tapalilov](https://github.com/tapalilov)
+* [Yukiharu Nakaya](https://github.com/snowsunny)
+
+### Inactive/Previously Involved Core Members
 * [Radoslav Georgiev](https://github.com/absolu7)
 
 ### Contributors
