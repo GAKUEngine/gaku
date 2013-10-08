@@ -66,5 +66,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'localeapp'
-  s.add_dependency 'rack-mini-profiler'
 end
