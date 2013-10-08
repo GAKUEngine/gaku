@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Genshin/GAKUEngine.png)](https://travis-ci.org/Genshin/GAKUEngine)
-[![Code Climate](https://codeclimate.com/github/Genshin/GAKUEngine.png)](https://codeclimate.com/github/Genshin/GAKUEngine)
+[![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
 [![Coverage Status](https://coveralls.io/repos/Genshin/GAKUEngine/badge.png?branch=master)](https://coveralls.io/r/Genshin/GAKUEngine?branch=master)
 
 GAKU Engine [学園陣]
