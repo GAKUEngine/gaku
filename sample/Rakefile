@@ -11,6 +11,6 @@ end
 
 desc "Release to gemcutter"
 task :release do
-  version = File.read(File.expand_path("../../GAKU_ENGINE_VERSION", __FILE__)).strip
+  version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
   cmd = "cd pkg && gem push gaku_sample-#{version}.gem"; puts cmd; system cmd
 end
