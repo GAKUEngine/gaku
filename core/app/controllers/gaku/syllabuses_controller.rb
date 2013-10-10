@@ -6,7 +6,7 @@ module Gaku
     respond_to :js,   only: %i( new create edit update destroy )
     respond_to :html, only: %i( index edit show )
 
-    before_action :set_syllabus, only: %i( show edit update destroy )
+    before_action :set_syllabus, only: %i( edit update destroy )
 
     def new
       @syllabus = Syllabus.new
@@ -26,12 +26,9 @@ module Gaku
       respond_with @syllabuses
     end
 
-    def show
+    def edit
       set_grading_methods
       set_notable
-    end
-
-    def edit
     end
 
     def update
