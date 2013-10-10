@@ -64,11 +64,18 @@ Create a new Rails application:
     $ rails _4.0.0_ new my_app
 
 
-Then add GAKU to your Gemfile.
-
+Then add GAKU to your Gemfile:
 ```ruby
+gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
+gem 'gaku', '~> 0.0.1'
+```
+
+Or use the master branch: 
+```ruby
+gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
 gem 'gaku', github: 'Genshin/gaku'
 ```
+
 
 Install dependencies:
 
@@ -86,10 +93,10 @@ Sample Data
 -----------
 If you want to populate sample data:
 
-    $ rake gaku:sample:load
+    $ rake db:sample
 
 Defaults:
-user: admin pass: 123456
+user: admin / pass: 123456
 
 
 Run
