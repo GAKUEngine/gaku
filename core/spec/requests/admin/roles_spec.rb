@@ -41,7 +41,7 @@ describe 'Admin Roles' do
 
     context 'edit', js: true do
       before do
-        within('#admin-roles-index tbody tr:nth-child(2)') { click edit_link }
+        within('#admin-roles-index tbody tr:nth-child(2)') { click js_edit_link }
         wait_until_visible modal
       end
 

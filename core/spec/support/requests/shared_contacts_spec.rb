@@ -35,7 +35,7 @@ shared_examples_for 'edit contact' do
   let(:contact) { @resource.contacts.first }
 
   before do
-    within(table) { click edit_link }
+    within(table) { click js_edit_link }
     wait_until_visible modal
   end
 

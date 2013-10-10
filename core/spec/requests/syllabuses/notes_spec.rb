@@ -11,7 +11,7 @@ describe 'Syllabus Notes' do
   context 'new', js: true do
     before do
       @resource = syllabus
-      visit gaku.syllabus_path(@resource)
+      visit gaku.edit_syllabus_path(@resource)
     end
 
     it_behaves_like 'new note'
@@ -20,7 +20,7 @@ describe 'Syllabus Notes' do
   context 'existing', js: true do
     before do
       @resource = syllabus_with_note
-      visit gaku.syllabus_path(@resource)
+      visit gaku.edit_syllabus_path(@resource)
     end
 
     it_behaves_like 'edit note'

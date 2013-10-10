@@ -37,7 +37,7 @@ shared_examples_for 'edit note' do
   let(:note) { @resource.notes.first }
 
   before do
-    within(table) { click edit_link }
+    within(table) { click js_edit_link }
     wait_until_visible modal
   end
 

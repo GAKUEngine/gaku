@@ -44,7 +44,7 @@ describe 'CourseGroups' do
 
     context '#edit', js: true do
       before do
-        click edit_link
+        click js_edit_link
         wait_until_visible submit
       end
 

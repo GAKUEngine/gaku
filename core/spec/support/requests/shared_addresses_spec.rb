@@ -42,7 +42,7 @@ shared_examples_for 'edit address' do
   let(:address) { @resource.addresses.first }
 
   before do
-    click edit_link
+    click js_edit_link
     wait_until_visible modal
   end
 
@@ -153,7 +153,7 @@ shared_examples_for 'dynamic state dropdown' do
   end
 
   context 'edit form' do
-    before { click edit_link }
+    before { click js_edit_link }
 
     it 'changes country with state',js: true do
       select "#{country}", from: 'country_dropdown'
