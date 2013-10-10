@@ -5,6 +5,10 @@ FactoryGirl.define do
     code '12345'
     description 'Short description'
     credits 'Huge Credits'
+
+    factory :invalid_syllabus do
+      code nil
+    end
   end
 
   trait :with_exam do
