@@ -21,7 +21,12 @@ Gem::Specification.new do |s|
   s.requirements << 'redis'
 
   s.add_dependency 'rails', '~> 4.0.0'
+  s.add_dependency 'coffee-rails', '~> 4.0.0'
+  s.add_dependency 'sass-rails',   '~> 4.0.0'
+  s.add_dependency 'uglifier',     '~> 1.3'
   s.add_dependency 'turbolinks'
+
+  s.add_dependency 'pg'
 
   s.add_dependency 'slim', '~> 2.0.1'
   s.add_dependency 'inherited_resources'
@@ -29,10 +34,17 @@ Gem::Specification.new do |s|
   s.add_dependency 'paper_trail', '3.0.0.beta1'
   s.add_dependency 'globalize3'
   s.add_dependency 'draper', '~> 1.0'
+  s.add_dependency 'paperclip'
+  s.add_dependency 'ransack', '~> 1.0'
+  s.add_dependency 'kaminari'
+
+  s.add_dependency 'devise', '~> 3.0.0'
+  s.add_dependency 'devise-i18n'
+  s.add_dependency 'cancan'
 
   s.add_dependency 'rails4_client_side_validations', '0.0.3'
   s.add_dependency 'gaku_forms', '0.1.5'
-  s.add_dependency 'gaku_nested_forms', '~> 0.1.0'
+  s.add_dependency 'gaku_nested_forms', '0.1.0'
   s.add_dependency 'nested_form'
   s.add_dependency 'gaku_helpers', '0.0.7'
 
@@ -48,20 +60,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'bootstrap-datepicker-rails'
 
-  s.add_dependency 'paperclip'
-  s.add_dependency 'ransack', '~> 1.0'
-  s.add_dependency 'kaminari'
-
-  s.add_dependency 'devise', '~> 3.0.0'
-  s.add_dependency 'devise-i18n'
-  s.add_dependency 'cancan'
-
   #spreadsheet handling
   s.add_dependency 'roo'
   s.add_dependency 'gen_sheet'
   s.add_dependency 'thinreports-rails'
 
-  s.add_dependency 'highline', '= 1.6.11'
+  s.add_dependency 'highline', '1.6.11'
   s.add_dependency 'rubyzip', '0.9.9'
 
   s.add_dependency 'sidekiq'
