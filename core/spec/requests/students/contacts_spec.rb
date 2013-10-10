@@ -14,8 +14,8 @@ describe 'Student Contacts' do
   context 'new', js: true, type: 'contact' do
 
     before do
-      @data = student
-      visit gaku.edit_student_path(@data)
+      @resource = student
+      visit gaku.edit_student_path(@resource)
       click tab_link
       wait_until { has_content? 'Contacts list' }
     end
@@ -28,18 +28,18 @@ describe 'Student Contacts' do
 
     context 'one contact' do
 
-      before { @data = student_with_contact }
+      before { @resource = student_with_contact }
 
       context 'edit', js: true do
 
         before do
-          visit gaku.edit_student_path(@data)
+          visit gaku.edit_student_path(@resource)
           click tab_link
           wait_until { has_content? 'Contacts list' }
         end
 
         it_behaves_like 'edit contact'
-        it_behaves_like 'delete contact', @data
+        it_behaves_like 'delete contact', @resource
       end
 
     end
@@ -47,8 +47,8 @@ describe 'Student Contacts' do
     context 'two contacts', type: 'contact' do
 
       before do
-        @data = student_with_contacts
-        visit gaku.edit_student_path(@data)
+        @resource = student_with_contacts
+        visit gaku.edit_student_path(@resource)
         click tab_link
         wait_until { has_content? 'Contacts list' }
       end

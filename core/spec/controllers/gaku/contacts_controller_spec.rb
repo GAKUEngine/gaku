@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Gaku::ContactsController do
 
-  let(:contact_type) { create(:contact_type) }
+  let!(:contact_type) { create(:contact_type) }
   let(:contact) { create(:contact, contactable: student, contact_type: contact_type) }
   let(:invalid_contact) { create(:invalid_contact, contactable: student) }
   let!(:student) { create(:student) }
 
-  context 'as admin' do
+  context 'as admin', type: :contact do
     before { as :admin }
 
     context 'js' do
@@ -17,6 +17,10 @@ describe Gaku::ContactsController do
 
         it { should respond_with 200 }
         it('assigns @contact') { expect(assigns(:contact)).to be_a_new(Gaku::Contact) }
+        it('assigns @contact_types') { expect(assigns(:contact_types)).to eq [contact_type] }
+        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+        it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+        it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :new template') { template? :new }
       end
 
@@ -40,6 +44,21 @@ describe Gaku::ContactsController do
           it 'increments @count' do
             valid_js_create
             expect(assigns(:count)).to eq 1
+          end
+
+          it 'assigns @polymorphic_resource_name' do
+            valid_js_create
+            expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+          end
+
+          it 'assigns @polymorphic_resource' do
+            valid_js_create
+            expect(assigns(:polymorphic_resource)).to eq student
+          end
+
+          it 'assigns @nested_resources' do
+            valid_js_create
+            expect(assigns(:nested_resources)).to eq []
           end
         end
 
@@ -71,6 +90,10 @@ describe Gaku::ContactsController do
 
         it { should respond_with 200 }
         it('assigns @contact') { expect(assigns(:contact)).to eq contact }
+        it('assigns @contact_types') { expect(assigns(:contact_types)).to eq [contact_type] }
+        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+        it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+        it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :edit template') { template? :edit }
       end
 
@@ -82,6 +105,9 @@ describe Gaku::ContactsController do
 
           it { should respond_with 200 }
           it('assigns @contact') { expect(assigns(:contact)).to eq contact }
+          it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+          it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
+          it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
           it('sets flash') { flash_updated? }
           it "changes contact's attributes" do
             expect(contact.reload.data).to eq 'mobifon'
@@ -113,6 +139,21 @@ describe Gaku::ContactsController do
           end.to change(Gaku::Contact, :count).by(-1)
         end
 
+        it 'assigns @polymorphic_resource_name' do
+          js_delete
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+        end
+
+        it 'assigns @polymorphic_resource' do
+          js_delete
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it 'assigns @nested_resources' do
+          js_delete
+          expect(assigns(:nested_resources)).to eq []
+        end
+
         it 'decrements @count' do
           js_delete
           expect(assigns(:count)).to eq 0
@@ -126,48 +167,78 @@ describe Gaku::ContactsController do
 
 
       describe 'XHR PATCH #soft_delete' do
-        let(:get_soft_delete) { gaku_js_patch :soft_delete, id: contact.id, student_id: student.id }
+        let(:js_get_soft_delete) { gaku_js_patch :soft_delete, id: contact.id, student_id: student.id }
 
         it 'redirects' do
-          get_soft_delete
+          js_get_soft_delete
           should respond_with(200)
         end
 
         it 'assigns  @contact' do
-          get_soft_delete
+          js_get_soft_delete
           expect(assigns(:contact)).to eq contact
+        end
+
+        it 'assigns @polymorphic_resource_name' do
+          js_get_soft_delete
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+        end
+
+        it 'assigns @polymorphic_resource' do
+          js_get_soft_delete
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it 'assigns @nested_resources' do
+          js_get_soft_delete
+          expect(assigns(:nested_resources)).to eq []
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            js_get_soft_delete
             contact.reload
           end.to change(contact, :deleted)
         end
       end
 
       describe 'XHR PATCH #recovery' do
-        let(:get_recovery) { gaku_js_patch :recovery, id: contact.id, student_id: student.id }
+        let(:js_get_recovery) { gaku_js_patch :recovery, id: contact.id, student_id: student.id }
 
         it 'is successfull' do
-          get_recovery
+          js_get_recovery
           should respond_with(200)
         end
 
         it 'assigns  @contact' do
-          get_recovery
+          js_get_recovery
           expect(assigns(:contact)).to eq contact
         end
 
+        it 'assigns @polymorphic_resource_name' do
+          js_get_recovery
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+        end
+
+        it 'assigns @polymorphic_resource' do
+          js_get_recovery
+          expect(assigns(:polymorphic_resource)).to eq student
+        end
+
+        it 'assigns @nested_resources' do
+          js_get_recovery
+          expect(assigns(:nested_resources)).to eq []
+        end
+
         it 'renders :recovery' do
-          get_recovery
+          js_get_recovery
           should render_template :recovery
-       end
+        end
 
         it 'updates :deleted attribute' do
           contact.soft_delete
           expect do
-            get_recovery
+            js_get_recovery
             contact.reload
           end.to change(contact, :deleted)
         end
