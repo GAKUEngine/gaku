@@ -9,3 +9,9 @@ $('.class-group-enrollments-count').html('<%= print_count(@count, t_student_list
 
 $('#student-modal').modal('hide');
 showNotice("<%= render_flash %>");
+
+var enrollments = <%= raw @enrollments.map {|e| [e.student_id, e.class_and_number ]}.to_json %>
+enrollments.forEach(function(enrollment) {
+  $('#student-' + enrollment[0] + ' td:eq(5)' ).html(enrollment[1])
+})
+

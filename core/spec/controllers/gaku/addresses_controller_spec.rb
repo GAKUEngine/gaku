@@ -7,7 +7,7 @@ describe Gaku::AddressesController do
   let!(:student) { create(:student) }
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
 
-  context 'as admin' do
+  context 'as admin', type: :address do
     before { as :admin }
 
     context 'student' do

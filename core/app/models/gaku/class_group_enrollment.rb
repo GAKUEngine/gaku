@@ -16,15 +16,16 @@ module Gaku
 
     after_save :save_student_class_and_number
 
+    def class_and_number
+      "#{class_group} - ##{seat_number}"
+    end
+
     private
 
     def save_student_class_and_number
       student.update_attribute(:class_and_number, class_and_number) if student
     end
 
-    def class_and_number
-      "#{class_group} - ##{seat_number}"
-    end
 
   end
 end

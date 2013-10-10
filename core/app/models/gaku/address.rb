@@ -27,7 +27,7 @@ module Gaku
     after_destroy :reset_counter_cache
 
     def make_primary
-      addresses.where('id != ?', id).update_all(primary: false)
+      addresses.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)
       update_primary_address_field
     end
