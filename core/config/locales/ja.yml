@@ -449,6 +449,7 @@ ja:
         notice: '%{resource_name}は正常に更新されました'
   full_name: 氏名
   full_name_reading: 氏名のフリガナ
+  generate_report:
   gaku_engine: 学園陣
   gender:
     choose: 性別を選択
