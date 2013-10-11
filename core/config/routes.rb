@@ -1,7 +1,5 @@
 Gaku::Core::Engine.routes.draw do
 
-  mount Sidekiq::Web => '/sidekiq'
-
   concern :addressable do
     resources :addresses do
       member do

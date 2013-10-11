@@ -60,16 +60,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'bootstrap-datepicker-rails'
 
-  #spreadsheet handling
-  s.add_dependency 'roo'
-  s.add_dependency 'gen_sheet'
-  s.add_dependency 'thinreports-rails'
-
   s.add_dependency 'highline', '1.6.11'
   s.add_dependency 'rubyzip', '0.9.9'
 
-  s.add_dependency 'sidekiq'
-  s.add_dependency 'sinatra'
   s.add_dependency 'rake-progressbar'
   s.add_dependency 'localeapp'
 end
