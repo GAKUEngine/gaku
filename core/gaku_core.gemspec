@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.0.0'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
   s.add_dependency 'sass-rails',   '~> 4.0.0'
-  s.add_dependency 'uglifier',     '~> 1.3'
+  s.add_dependency 'uglifier'
   s.add_dependency 'turbolinks'
 
   s.add_dependency 'pg'
@@ -59,6 +59,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'eco'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'bootstrap-datepicker-rails'
+
+  s.add_dependency 'thinreports-rails'
 
   s.add_dependency 'highline', '1.6.11'
   s.add_dependency 'rubyzip', '0.9.9'

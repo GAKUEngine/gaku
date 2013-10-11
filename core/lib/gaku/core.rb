@@ -26,6 +26,7 @@ require 'nested_form'
 require 'gaku_helpers'
 require 'gaku_forms'
 require 'gaku_nested_forms'
+require 'thinreports-rails'
 
 module Gaku
 
