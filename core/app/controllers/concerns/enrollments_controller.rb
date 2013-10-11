@@ -3,8 +3,7 @@ module EnrollmentsController
   include Gaku::ClassNameDetector
 
   def enroll_students
-    params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
-
+    @selected_students = params[:selected_students].presence || []
     enroll_selected_students
 
     if params[:source] == class_name_underscored_plural
