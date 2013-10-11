@@ -57,8 +57,7 @@ module Gaku
                                   .page(params[:page])
                                   .per(Preset.default_per_page)
 
-      @students_count = Address.deleted.students.count
-      @teachers_count = Address.deleted.teachers.count
+      set_student_and_teacher_count('Gaku::Address')
     end
 
     def contacts
@@ -71,11 +70,17 @@ module Gaku
       @teacher_contacts = Contact.includes(:contactable, :contact_type)
                                  .deleted
                                  .teachers
-                                 .page(params[:page]).
-                                 per(Preset.default_per_page)
+                                 .page(params[:page])
+                                 .per(Preset.default_per_page)
 
-      @students_count = Contact.deleted.students.count
-      @teachers_count = Contact.deleted.teachers.count
+      set_student_and_teacher_count('Gaku::Contact')
+    end
+
+    private
+
+    def set_student_and_teacher_count(klass)
+      @students_count = klass.constantize.deleted.students.count
+      @teachers_count = klass.constantize.deleted.teachers.count
     end
 
   end
