@@ -10,15 +10,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails', '~> 4.2.1'
-  gem 'ffaker'
-  gem 'shoulda-matchers', '~> 2.4.0'
-  gem 'handy_controller_helpers', '0.0.3'
-  gem 'capybara', '= 1.1.3'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
-  gem 'database_cleaner'
   gem 'simplecov'
   gem 'coveralls', require: false
 end

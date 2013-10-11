@@ -20,5 +20,4 @@ Gem::Specification.new do |s|
   s.requirements << 'redis'
 
   s.add_dependency 'gaku_core', version
-  s.add_dependency 'ffaker'
 end

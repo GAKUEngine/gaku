@@ -8,6 +8,8 @@ require 'database_cleaner'
 require 'active_record/fixtures'
 require 'factory_girl_rails'
 require 'paperclip/matchers'
+require 'handy_controller_helpers'
+require 'ffaker'
 
 require 'gaku/testing/env'
 require 'gaku/testing/factories'
