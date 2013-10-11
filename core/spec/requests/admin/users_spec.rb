@@ -48,7 +48,7 @@ describe 'Admin Users' do
 
     context 'edit', js: true do
       before do
-        within("#admin-users-index tbody tr#user-#{user.id}") { click edit_link }
+        within("#admin-users-index tbody tr#user-#{user.id}") { click js_edit_link }
         wait_until_visible modal
       end
 

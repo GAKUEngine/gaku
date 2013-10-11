@@ -5,9 +5,9 @@ module Gaku
 
     include PolymorphicResourceConcern
 
-    respond_to :js, :html
+    respond_to :js
 
-    before_action :set_contact_types
+    before_action :set_contact_types,    only: %i( new edit )
     before_action :set_unscoped_contact, only: %i( recovery destroy )
     before_action :set_contact,          only: %i( edit update soft_delete make_primary )
     before_action :set_polymorphic_resource
@@ -92,7 +92,7 @@ module Gaku
     end
 
     def set_contact_types
-      @contact_types = ContactType.all.map { |ct| [ct.name, ct.id] }
+      @contact_types = ContactType.all
     end
 
     def set_count

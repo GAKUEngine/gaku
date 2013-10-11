@@ -1,13 +1,6 @@
 source 'http://production.s3.rubygems.org'
 
-gem 'pg'
-
-gem 'sass-rails',   '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier',     '>= 1.0.3'
-
-gem 'globalize3',  github: 'svenfuchs/globalize3', branch: 'rails4'
-gem 'gaku_helpers', github: 'kalkov/gaku_helpers'
+gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
 
 group :development do
   gem 'guard'

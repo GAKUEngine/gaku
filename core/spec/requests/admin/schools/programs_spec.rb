@@ -75,7 +75,7 @@ describe 'Admin Program' do
     context 'edit' do
 
       before do
-        within(table) { click edit_link }
+        within(table) { click js_edit_link }
         wait_until_visible modal
       end
 

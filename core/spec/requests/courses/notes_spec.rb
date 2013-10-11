@@ -3,18 +3,15 @@ require 'spec_helper'
 describe 'Course Notes' do
 
   before { as :admin }
+  before(:all) { set_resource 'course-note' }
 
   let(:course) { create(:course) }
-  let(:note) { create(:note, notable: course) }
-
-  before :all do
-    set_resource 'course-note'
-  end
+  let(:course_with_note) { create(:course, :with_note) }
 
   context 'new', js: true, type: 'note'  do
     before do
-      visit gaku.course_path(course)
-      @data = course
+      @resource = course
+      visit gaku.course_path(@resource)
     end
 
     it_behaves_like 'new note'
@@ -22,13 +19,11 @@ describe 'Course Notes' do
 
   context 'existing', js: true, type: 'note'  do
     before do
-      note
-      visit gaku.course_path(course)
-      @data = course
+      @resource = course_with_note
+      visit gaku.course_path(@resource)
     end
 
     it_behaves_like 'edit note'
-
     it_behaves_like 'delete note'
   end
 
