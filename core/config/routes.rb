@@ -122,7 +122,6 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, controller: 'syllabuses/exams'
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
     resources :notes
-    resources :importer, controller: 'syllabuses/importer'
   end
 
   resources :teachers, concerns: %i( addressable contactable ) do
@@ -148,12 +147,7 @@ Gaku::Core::Engine.routes.draw do
       get 'page/:page', action: :index
       get :load_autocomplete_data
 
-      resources :importer, controller: 'students/importer' do
-        collection do
-          get :get_roster
-          get :get_registration_roster
-        end
-      end
+
     end
 
     resources :simple_grades, controller: 'students/simple_grades'
