@@ -37,7 +37,7 @@ module Gaku
     end
 
     def load_data
-      @grading_methods = GradingMethod.all.map { |s| [s.name, s.id] }
+      @grading_methods = GradingMethod.pluck(:name, :id)
     end
 
     def syllabus
@@ -45,7 +45,7 @@ module Gaku
     end
 
     def exam_syllabus
-      @exam_syllabus = ExamSyllabus.find_by_exam_id_and_syllabus_id(params[:id], params[:syllabus_id])
+      @exam_syllabus = ExamSyllabus.find_by(exam_id: params[:id], syllabus_id: params[:syllabus_id])
     end
 
 
