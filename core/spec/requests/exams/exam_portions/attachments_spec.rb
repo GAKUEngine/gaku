@@ -55,7 +55,7 @@ describe 'Exam Portion Attachments' do
 
     context '#edit' do
       before do
-        within(table) { click edit_link }
+        within(table) { click js_edit_link }
       end
 
       xit 'edits' do

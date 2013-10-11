@@ -68,7 +68,7 @@ describe 'Admin School Levels' do
     end
 
     it 'have no edit for school levels' do
-      within(table) { click edit_link }
+      within(table) { click js_edit_link }
       page.should_not have_css 'a.add-school-level'
     end
 

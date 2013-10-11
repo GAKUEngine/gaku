@@ -79,7 +79,7 @@ describe 'Courses' do
 
     context ' #edit ' do
       before do
-        click edit_link
+        click js_edit_link
         page.should have_content('Edit Course')
       end
 

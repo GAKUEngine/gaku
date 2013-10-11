@@ -65,7 +65,7 @@ describe 'Admin School Campuses Address' do
     context 'edit' do
       before do
         country_without_state
-        click edit_link
+        click js_edit_link
         wait_until_visible modal
       end
 

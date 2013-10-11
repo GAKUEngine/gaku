@@ -1,6 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/gaku.png)](http://badge.fury.io/rb/gaku)
 [![Build Status](https://travis-ci.org/Genshin/gaku.png)](https://travis-ci.org/Genshin/gaku)
-[![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
 [![Coverage Status](https://coveralls.io/repos/Genshin/gaku/badge.png?branch=master)](https://coveralls.io/r/Genshin/gaku?branch=master)
+[![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
 
 GAKU Engine [学園陣]
 ====================
@@ -63,11 +64,18 @@ Create a new Rails application:
     $ rails _4.0.0_ new my_app
 
 
-Then add GAKU to your Gemfile.
-
+Then add GAKU to your Gemfile:
 ```ruby
+gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
+gem 'gaku', '~> 0.0.2'
+```
+
+Or use the master branch: 
+```ruby
+gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
 gem 'gaku', github: 'Genshin/gaku'
 ```
+
 
 Install dependencies:
 
@@ -85,10 +93,10 @@ Sample Data
 -----------
 If you want to populate sample data:
 
-    $ rake gaku:sample:load
+    $ rake db:sample
 
 Defaults:
-user: admin pass: 123456
+user: admin / pass: 123456
 
 
 Run
