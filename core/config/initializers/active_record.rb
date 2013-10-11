@@ -19,7 +19,7 @@ class ActiveRecord::Associations::HasManyThroughAssociation
   def delete_records(records, method)
     ensure_not_nested
 
-    scope = through_association.scoped.where(construct_join_attributes(*records))
+    scope = through_association.scope.where(construct_join_attributes(*records))
 
     case method
     when :destroy
