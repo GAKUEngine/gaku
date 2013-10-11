@@ -10,6 +10,7 @@ require 'factory_girl_rails'
 require 'paperclip/matchers'
 require 'handy_controller_helpers'
 require 'ffaker'
+require 'shoulda-matchers'
 
 require 'gaku/testing/env'
 require 'gaku/testing/factories'
