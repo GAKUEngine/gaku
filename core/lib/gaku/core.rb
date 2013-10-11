@@ -18,16 +18,15 @@ require 'inherited_resources'
 require 'draper'
 require 'kaminari'
 require 'rails4_client_side_validations'
-require 'sidekiq/web'
 require 'paper_trail'
 require 'globalize3'
-require 'thinreports-rails'
 require 'bootstrap-sass'
 require 'bootstrap-datepicker-rails'
 require 'nested_form'
 require 'gaku_helpers'
 require 'gaku_forms'
 require 'gaku_nested_forms'
+require 'thinreports-rails'
 
 module Gaku
 
