@@ -4,9 +4,10 @@ gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b3
 
 group :development do
   gem 'guard'
+  gem 'rubocop'
   gem 'guard-rspec'
   gem 'guard-bundler'
-  gem 'guard-cop'
+  gem 'guard-rubocop'
 end
 
 group :test do
