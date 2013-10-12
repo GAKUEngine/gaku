@@ -8,6 +8,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-rubocop'
+  gem 'guard-minitest', github: 'guard/guard-minitest'
 end
 
 group :test do
