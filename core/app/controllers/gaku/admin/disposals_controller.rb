@@ -8,74 +8,47 @@ module Gaku
     end
 
     def students
-      @students = Student.deleted
-                         .page(params[:page])
-                         .per(Preset.default_per_page)
+      @students = Disposal.students.page(params[:page])
     end
 
     def teachers
-      @teachers = Teacher.deleted
-                         .page(params[:page])
-                         .per(Preset.default_per_page)
+      @teachers = Disposal.teachers.page(params[:page])
     end
 
     def guardians
-      @guardians = Guardian.deleted
-                           .page(params[:page])
-                           .per(Preset.default_per_page)
+      @guardians = Disposal.guardians.page(params[:page])
     end
 
     def exams
-      @exams = Exam.deleted
-                   .page(params[:page])
-                   .per(Preset.default_per_page)
+      @exams = Disposal.exams.page(params[:page])
     end
 
     def course_groups
-      @course_groups = CourseGroup.deleted
-                                  .page(params[:page])
-                                  .per(Preset.default_per_page)
+      @course_groups = Disposal.course_groups.page(params[:page])
     end
 
     def attachments
-      @attachments = Attachment.includes(:attachable)
-                               .deleted
-                               .page(params[:page])
-                               .per(Preset.default_per_page)
+      @attachments = Disposal.attachments.page(params[:page])
+
     end
 
     def addresses
-      @student_addresses = Address.includes(:addressable, :country)
-                                  .deleted
-                                  .students
-                                  .page(params[:page])
-                                  .per(Preset.default_per_page)
-
-      @teacher_addresses = Address.includes(:addressable, :country)
-                                  .deleted
-                                  .teachers
-                                  .page(params[:page])
-                                  .per(Preset.default_per_page)
-
-      @students_count = Address.deleted.students.count
-      @teachers_count = Address.deleted.teachers.count
+      @student_addresses = Disposal.student_addresses.page(params[:page])
+      @teacher_addresses = Disposal.teacher_addresses.page(params[:page])
+      set_student_and_teacher_count('Gaku::Address')
     end
 
     def contacts
-      @student_contacts = Contact.includes(:contactable, :contact_type)
-                                 .deleted
-                                 .students
-                                 .page(params[:page])
-                                 .per(Preset.default_per_page)
+      @student_contacts = Disposal.student_contacts.page(params[:page])
+      @teacher_contacts = Disposal.teacher_contacts.page(params[:page])
+      set_student_and_teacher_count('Gaku::Contact')
+    end
 
-      @teacher_contacts = Contact.includes(:contactable, :contact_type)
-                                 .deleted
-                                 .teachers
-                                 .page(params[:page]).
-                                 per(Preset.default_per_page)
+    private
 
-      @students_count = Contact.deleted.students.count
-      @teachers_count = Contact.deleted.teachers.count
+    def set_student_and_teacher_count(klass)
+      @students_count = klass.constantize.deleted.students.count
+      @teachers_count = klass.constantize.deleted.teachers.count
     end
 
   end

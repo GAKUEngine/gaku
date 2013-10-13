@@ -21,9 +21,9 @@ module Gaku::Versioning
         when 'enrollment_status_code'
           enrollment_status_code_change(key0, key1)
         when 'commute_method_type_id'
-          commute_method_change(key0, key1)
+          common_change('CommuteMethodType', key0, key1)
         when 'scholarship_status_id'
-          scholarship_status_change(key0, key1)
+          common_change('ScholarshipStatus', key0, key1)
         else
           @human_changes[key] = [key0, key1]
         end
@@ -38,16 +38,11 @@ module Gaku::Versioning
       @human_changes[:enrollment_status] = [from, to]
     end
 
-    def commute_method_change(key0, key1)
-      from = Gaku::CommuteMethodType.find(key0).to_s if key0
-      to = Gaku::CommuteMethodType.find(key1).to_s if key1
-      @human_changes[:commute_method_type] = [from, to]
-    end
-
-    def scholarship_status_change(key0, key1)
-      from = Gaku::ScholarshipStatus.find(key0).to_s if key0
-      to = Gaku::ScholarshipStatus.find(key1).to_s if key1
-      @human_changes[:scholarship_status] = [from, to]
+    def common_change(klass_name, key0, key1)
+      klass = "Gaku::#{klass_name}".constantize
+      from = klass.find(key0).to_s if key0
+      to = klass.find(key1).to_s if key1
+      @human_changes[klass_name.underscore.to_sym] = [from, to]
     end
 
   end
