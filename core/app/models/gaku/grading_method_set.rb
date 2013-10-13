@@ -9,7 +9,7 @@ module Gaku
     before_save :ensure_first_is_primary, on: :create
 
     def make_primary
-      GradingMethodSet.where(['id != ?', id]).update_all({ primary: false })
+      GradingMethodSet.where.not(id: id).update_all({ primary: false })
       update_attribute(:primary, true)
     end
 

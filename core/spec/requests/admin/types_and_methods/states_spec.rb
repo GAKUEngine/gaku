@@ -62,7 +62,7 @@ describe 'Admin States' do
     end
 
     context 'edits' do
-      before { within(country_table) { click edit_link } }
+      before { within(country_table) { click js_edit_link } }
 
       it 'has validations' do
         fill_in 'state_name', with: ''

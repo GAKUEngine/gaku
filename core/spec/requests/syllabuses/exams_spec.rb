@@ -24,7 +24,7 @@ describe 'Syllabus Exams' do
       syllabus
       visit gaku.syllabuses_path
 
-      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
       page.should have_content 'No Exams'
     end
 
@@ -58,7 +58,7 @@ describe 'Syllabus Exams' do
       before do
         syllabus
         visit gaku.syllabuses_path
-        within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
+        within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
         page.should have_content 'No Exams'
         click new_link
         wait_until_visible submit
@@ -95,11 +95,11 @@ describe 'Syllabus Exams' do
     context 'created exam' do
       before do
         syllabus.exams << exam
-        visit gaku.syllabus_path(syllabus)
+        visit gaku.edit_syllabus_path(syllabus)
       end
 
       it 'edits', js: true do
-        click edit_link
+        click js_edit_link
         wait_until_visible modal
 
         fill_in 'exam_name', with: 'Ruby Exam'
@@ -137,7 +137,7 @@ describe 'Syllabus Exams' do
     before do
       syllabus
       visit gaku.syllabuses_path
-      within('#syllabuses-index tbody tr:nth-child(1)') { click show_link }
+      within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
     end
 
     it 'clicking on new-existing-exam-link hides new-exam form', js: true do

@@ -52,6 +52,11 @@ module Gaku::Testing::RequestHelpers
     '.edit-link'
   end
 
+  def js_edit_link
+    '.js-edit-link'
+  end
+
+
   def recovery_link
     '.recovery-link'
   end

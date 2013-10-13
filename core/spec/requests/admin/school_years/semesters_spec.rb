@@ -80,7 +80,7 @@ describe 'Admin School Years Semesters' do
 
     context 'edit', js: true do
       before do
-        within(table) { click edit_link }
+        within(table) { click js_edit_link }
         wait_until_visible modal
       end
 

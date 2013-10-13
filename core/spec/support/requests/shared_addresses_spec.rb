@@ -21,6 +21,10 @@ shared_examples 'new address' do
       end.to change(@resource.addresses, :count).by(1)
 
       has_content? 'Primary address'
+      count? 'Addresses list(1)'
+      if page.has_css?(tab_link)
+        within(tab_link)  { has_content? 'Addresses(1)' }
+      end
     end
 
     it 'has validations', js:true do
@@ -38,7 +42,7 @@ shared_examples_for 'edit address' do
   let(:address) { @resource.addresses.first }
 
   before do
-    click edit_link
+    click js_edit_link
     wait_until_visible modal
   end
 
@@ -149,7 +153,7 @@ shared_examples_for 'dynamic state dropdown' do
   end
 
   context 'edit form' do
-    before { click edit_link }
+    before { click js_edit_link }
 
     it 'changes country with state',js: true do
       select "#{country}", from: 'country_dropdown'

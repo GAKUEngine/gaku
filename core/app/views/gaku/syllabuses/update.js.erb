@@ -1,4 +1,4 @@
 $('#syllabus-modal').modal('hide');
 $('#syllabus-modal').remove();
 showNotice("<%= render_flash %>");
-$('tr.syllabus-<%= @syllabus.id %>').html('<%= render_js_partial("gaku/shared/fields/syllabus_fields", {syllabus: @syllabus}) %>');
+$('tr.syllabus-<%= @syllabus.id %>').html('<%= j render("gaku/shared/fields/syllabus_fields", {syllabus: @syllabus}) %>');

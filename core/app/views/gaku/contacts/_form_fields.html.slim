@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 .row
   .col-md-6
     = f.select :contact_type_id, @contact_types, {prompt: t(:'contact_type.choose')}, label: t(:'contact_type.plural')
   .col-md-6
+=======
+.row-fluid
+  .span6
+    = f.select :contact_type_id,  options_from_collection_for_select(@contact_types, :id, :name), {prompt: t(:'contact_type.choose')}, label: t(:'contact_type.plural')
+  .span6
+>>>>>>> origin/master
     = f.text_field :data, label: t(:'contact.data')
 
 .row

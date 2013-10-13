@@ -1,49 +1,50 @@
 module Gaku
   class NotesController < GakuController
 
-    load_and_authorize_resource :note, class: Gaku::Note
+    #load_and_authorize_resource :note, class: Gaku::Note
 
-    before_filter :notable
-    inherit_resources
-    respond_to :js, :html
+    before_action :set_notable
+    before_action :set_note,    only: %i( edit update destroy )
+    respond_to :js
 
     def new
-      @note = @notable.notes.new
-      new!
+      @note = Note.new
+      respond_with @note
     end
 
     def create
       @note = @notable.notes.new(note_params)
-      create!
+      @note.save
+      set_count
+      respond_with @note
     end
 
-    protected
+    def edit
+    end
 
-    # def begin_of_association_chain
-    #   notable
-    #   @notable.notes
-    # end
+    def show
+    end
+
+    def update
+      @note.update(note_params)
+      respond_with @note
+    end
+
+    def destroy
+      @note.destroy
+      set_count
+      respond_with @note
+    end
+
+    private
 
     def note_params
       params.require(:note).permit(note_attr)
     end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:note).permit(note_attr)]
-    end
-
-    private
-
     def note_attr
       %i(title content)
     end
-
-    def collection
-      @notes = @notable.notes
-    end
-
-    private
 
     def notable_klasses
       [
@@ -57,7 +58,15 @@ module Gaku
       ]
     end
 
-    def notable
+    def set_count
+      @count = @notable.reload.notes_count
+    end
+
+    def set_note
+      @note = Note.find(params[:id])
+    end
+
+    def set_notable
       unnamespaced_klass = ''
       klass = notable_klasses.find do |c|
         unnamespaced_klass = c.to_s.split('::')
