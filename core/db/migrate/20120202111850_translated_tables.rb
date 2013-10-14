@@ -34,10 +34,9 @@ class TranslatedTables < ActiveRecord::Migration
     end
     Gaku::ScholarshipStatus.create_translation_table! name: :string
 
-    create_table 'gaku_departments' do |t|
-      t.string   'name'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
+    create_table :gaku_departments do |t|
+      t.string   :name
+      t.timestamps
     end
     Gaku::Department.create_translation_table! name: :string
 
