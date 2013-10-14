@@ -66,13 +66,11 @@ Create a new Rails application:
 
 Then add GAKU to your Gemfile:
 ```ruby
-gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
 gem 'gaku', '~> 0.0.2'
 ```
 
 Or use the master branch: 
 ```ruby
-gem 'globalize3',  github: 'globalize/globalize', branch: 'rails4', ref: '82b3b36308677745b261bd147dda00ed4560a25d'
 gem 'gaku', github: 'Genshin/gaku'
 ```
 
