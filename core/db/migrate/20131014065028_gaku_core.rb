@@ -59,28 +59,6 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'asset_updated_at'
     end
 
-    create_table 'gaku_attendance_type_translations' do |t|
-      t.integer  'gaku_attendance_type_id', null: false
-      t.string   'locale',                  null: false
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.string   'name'
-    end
-
-    add_index 'gaku_attendance_type_translations', ['gaku_attendance_type_id'], name: 'index_144d49f40337496bacec02aefc694f93f07d0581', using: :btree
-    add_index 'gaku_attendance_type_translations', ['locale'], name: 'index_gaku_attendance_type_translations_on_locale', using: :btree
-
-    create_table 'gaku_attendance_types' do |t|
-      t.string   'name'
-      t.string   'color_code'
-      t.boolean  'counted_absent'
-      t.boolean  'disable_credit'
-      t.float    'credit_rate'
-      t.boolean  'auto_credit'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-    end
-
     create_table 'gaku_attendances' do |t|
       t.text     'reason'
       t.integer  'attendancable_id'
@@ -128,23 +106,6 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
-    end
-
-    create_table 'gaku_commute_method_type_translations' do |t|
-      t.integer  'gaku_commute_method_type_id', null: false
-      t.string   'locale',                      null: false
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.string   'name'
-    end
-
-    add_index 'gaku_commute_method_type_translations', ['gaku_commute_method_type_id'], name: 'index_27960af5d7e19e965cc26c8f98c7d21e3a0ce580', using: :btree
-    add_index 'gaku_commute_method_type_translations', ['locale'], name: 'index_gaku_commute_method_type_translations_on_locale', using: :btree
-
-    create_table 'gaku_commute_method_types' do |t|
-      t.string   'name'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
     end
 
     create_table 'gaku_contact_types' do |t|
@@ -201,40 +162,6 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'updated_at'
       t.integer  'notes_count',    default: 0
       t.integer  'students_count', default: 0
-    end
-
-    create_table 'gaku_departments' do |t|
-      t.string   'name'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-    end
-
-    create_table 'gaku_department_translations' do |t|
-      t.integer  'gaku_department_id',      null: false
-      t.string   'locale',                  null: false
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.string   'name'
-    end
-
-    create_table 'gaku_enrollment_status_translations' do |t|
-      t.integer  'gaku_enrollment_status_id', null: false
-      t.string   'locale',                    null: false
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.string   'name'
-    end
-
-    add_index 'gaku_enrollment_status_translations', ['gaku_enrollment_status_id'], name: 'index_7865fd45090cea7b7810b5288a698bba41d45b8e', using: :btree
-    add_index 'gaku_enrollment_status_translations', ['locale'], name: 'index_gaku_enrollment_status_translations_on_locale', using: :btree
-
-    create_table 'gaku_enrollment_statuses' do |t|
-      t.string   'code'
-      t.string   'name'
-      t.boolean  'active'
-      t.boolean  'immutable'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
     end
 
     create_table 'gaku_exam_portion_scores' do |t|
@@ -382,15 +309,6 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'contacts_count',       default: 0
     end
 
-    create_table 'gaku_import_files' do |t|
-      t.string   'context'
-      t.string   'importer_type'
-      t.string   'data_file_file_name'
-      t.string   'data_file_content_type'
-      t.integer  'data_file_file_size'
-      t.datetime 'data_file_updated_at'
-    end
-
     create_table 'gaku_installs' do |t|
       t.string   'email',                  default: '', null: false
       t.string   'encrypted_password',     default: '', null: false
@@ -488,24 +406,6 @@ class GakuCore < ActiveRecord::Migration
       t.string   'repeat'
       t.datetime 'created_at'
       t.datetime 'updated_at'
-    end
-
-    create_table 'gaku_scholarship_status_translations' do |t|
-      t.integer  'gaku_scholarship_status_id', null: false
-      t.string   'locale',                     null: false
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.string   'name'
-    end
-
-    add_index 'gaku_scholarship_status_translations', ['gaku_scholarship_status_id'], name: 'index_fd3bb92292a989ddcdc49aabf021ceb1ce5f0d04', using: :btree
-    add_index 'gaku_scholarship_status_translations', ['locale'], name: 'index_gaku_scholarship_status_translations_on_locale', using: :btree
-
-    create_table 'gaku_scholarship_statuses' do |t|
-      t.string   'name'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-      t.boolean  'default'
     end
 
     create_table 'gaku_school_histories' do |t|

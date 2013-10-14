@@ -1,19 +1,22 @@
 # -*- encoding: utf-8 -*-
-# Array format ['en scholarship_status', 'ja scholarship_status', 'default']
+
 scholarship_statuses = [
-  ['Self Paid',                   '自己支払い',       true ],
-  ['Government Scholarship',      '政府奨学金',       false],
-  ['School Scholarship',          '学校の奨学金',     false],
-  ['Organizational Scholarship',  '組織の奨学金',     false],
-  ['Charity Scholarship',         'チャリティー奨学金',  false],
+  { name: 'Self Paid',                  name_ja: '自己支払い',       default: true },
+  { name: 'Government Scholarship',     name_ja: '政府奨学金',       default: false },
+  { name: 'School Scholarship',         name_ja: '学校の奨学金',     default: false },
+  { name: 'Organizational Scholarship', name_ja: '組織の奨学金',     default: false },
+  { name: 'Charity Scholarship',        name_ja: 'チャリティー奨学金', default: false }
 ]
 
 scholarship_statuses.each do |status|
   I18n.locale = :en
-  scholarship_status = Gaku::ScholarshipStatus.where(name: status[0], default: status[2]).first_or_create!
+  scholarship_status = Gaku::ScholarshipStatus.create!(
+                                                        name: status[:name],
+                                                        default: status[:default]
+                                                      )
 
   I18n.locale = :ja
-  scholarship_status.update_attribute(:name,  status[1])
+  scholarship_status.update_attribute(:name,  status[:name_ja])
 end
 
 I18n.locale = nil

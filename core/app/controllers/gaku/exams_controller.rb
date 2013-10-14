@@ -131,9 +131,9 @@ module Gaku
 
     def find_exams
       if params[:id] != nil
-        @exams = Exam.find_all_by_id(params[:id])
+        @exams = Exam.where(id: params[:id])
       else
-        @exams = @course.syllabus.exams.all
+        @exams = @course.syllabus.exams
       end
     end
   end
