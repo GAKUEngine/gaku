@@ -9,8 +9,8 @@
 @home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
 @email = Gaku::ContactType.where(name: 'Email').first_or_create!
 @enrollment_status = Gaku::EnrollmentStatus.where(code: 'admitted').first.try(:code)
-@commute_method_type = Gaku::CommuteMethodType.where(name: 'Superbike').first_or_create!
-@scholarship_status = Gaku::ScholarshipStatus.where(name: 'Charity').first_or_create!
+@commute_method_type = Gaku::CommuteMethodType.create!(name: 'Superbike')
+@scholarship_status = Gaku::ScholarshipStatus.create!(name: 'Charity')
 
 @john_doe = {
   name: 'John',
