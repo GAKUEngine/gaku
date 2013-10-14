@@ -203,6 +203,20 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'students_count', default: 0
     end
 
+    create_table 'gaku_departments' do |t|
+      t.string   'name'
+      t.datetime 'created_at'
+      t.datetime 'updated_at'
+    end
+
+    create_table 'gaku_department_translations' do |t|
+      t.integer  'gaku_department_id',      null: false
+      t.string   'locale',                  null: false
+      t.datetime 'created_at'
+      t.datetime 'updated_at'
+      t.string   'name'
+    end
+
     create_table 'gaku_enrollment_status_translations' do |t|
       t.integer  'gaku_enrollment_status_id', null: false
       t.string   'locale',                    null: false
