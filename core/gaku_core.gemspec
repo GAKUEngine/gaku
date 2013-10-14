@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'inherited_resources',            '~> 1.4'
   s.add_dependency 'responders',                     '~> 1.0'
   s.add_dependency 'paper_trail',                    '3.0.0.beta1'
-  s.add_dependency 'globalize3'
+  s.add_dependency 'globalize',                      '~> 4.0.0.alpha.1'
   s.add_dependency 'draper',                         '~> 1.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
   s.add_dependency 'ransack',                        '~> 1.0'
