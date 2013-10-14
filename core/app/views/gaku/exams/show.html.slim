@@ -1,6 +1,4 @@
-- po = content_for :panel_option do
-  p bbbbbbbb
-= panel_div "default", t(:'exam.show'), po do
+= panel_div tile: t(:'exam.show') do
   = render 'show_table', exam: @exam
 
 = panel_div do
