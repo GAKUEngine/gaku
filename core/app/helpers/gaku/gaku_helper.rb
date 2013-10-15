@@ -5,6 +5,13 @@ module Gaku
     include TranslationsHelper
     include FlashHelper
 
+    def tr_for(resource, &block)
+      content_tag :tr, id: "#{resource.class.to_s.demodulize.underscore.dasherize}-#{resource.id}" do
+        block.call
+      end
+    end
+
+
     def current_parent_controller
       controller.controller_path.split('/').second
     end

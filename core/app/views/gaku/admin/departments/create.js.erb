@@ -1,0 +1,7 @@
+$('#admin-departments-index tbody').append('<%= j render("department", {department: @department}) %>');
+
+$('#new-admin-department').slide();
+$('#new-admin-department-link').show();
+
+$('.admin-departments-count').html('<%= print_count(@count, t_department_list) %>');
+showNotice("<%= render_flash %>");

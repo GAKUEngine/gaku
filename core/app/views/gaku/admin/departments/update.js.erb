@@ -1,0 +1,4 @@
+$('tr#department-<%= @department.id %>').html('<%= j render("table_fields", {department: @department}) %>');
+$("#edit-department-modal").modal("hide");
+showNotice("<%= render_flash %>");
+

@@ -33,6 +33,13 @@ class TranslatedTables < ActiveRecord::Migration
       t.timestamps
     end
     Gaku::ScholarshipStatus.create_translation_table! name: :string
+
+    create_table :gaku_departments do |t|
+      t.string   :name
+      t.timestamps
+    end
+    Gaku::Department.create_translation_table! name: :string
+
   end
 
   def down
@@ -47,6 +54,9 @@ class TranslatedTables < ActiveRecord::Migration
 
     drop_table :gaku_scholarship_statuses
     Gaku::ScholarshipStatus.drop_translation_table!
+
+    drop_table :gaku_departments
+    Gaku::Department.drop_translation_table!
   end
 
 end
