@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'localeapp'
   s.add_dependency 'highline',                       '1.6.11'
   s.add_dependency 'rubyzip',                        '0.9.9'
-  s.add_dependency 'ffaker',                   '~> 1.19.0'
+  s.add_dependency 'ffaker',                         '~> 1.19.0'
   s.add_dependency 'rake-progressbar'
 
 

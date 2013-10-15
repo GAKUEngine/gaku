@@ -66,10 +66,10 @@ Create a new Rails application:
 
 Then add GAKU to your Gemfile:
 ```ruby
-gem 'gaku', '~> 0.0.2'
+gem 'gaku', '~> 0.0.3'
 ```
 
-Or use the master branch: 
+Or use the master branch:
 ```ruby
 gem 'gaku', github: 'Genshin/gaku'
 ```
