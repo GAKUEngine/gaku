@@ -10,7 +10,7 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.effect-slide
 
-//= require bootstrap/3.0.0/bootstrap.min
+//= require bootstrap.min
 //= require bootstrap-datepicker/core
 
 // require bootstrap
@@ -32,8 +32,6 @@
 //= require jquery_nested_form
 //= require phantom_forms
 //= require phantom_nested_forms
-// require gaku_forms
-// require gaku_nested_forms
 
 //= require_tree ./backbone/
 //= require_tree .
