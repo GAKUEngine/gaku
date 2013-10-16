@@ -68,3 +68,7 @@ locales/
 
 core/coverage
 locales/
+
+pkg/
+core/pkg/
+sample/pkg/
