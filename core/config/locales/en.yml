@@ -245,6 +245,13 @@ en:
     singular: Course Group
   course_group_enrollment:
     save: Save to Course Group
+  department:
+    singular: Department
+    add: Add department
+    list: Departments list
+    name: Department name
+    edit: Edit department
+    save: Save department
   date:
     formats:
       default: '%Y-%m-%d'
@@ -538,6 +545,7 @@ en:
         student_addresses: Student Addresses
         student_contacts: Student Contacts
         students: Students
+      departments: Departments
       disposals:
         address: Addresses Disposals
         attachment: Attachment Disposals
