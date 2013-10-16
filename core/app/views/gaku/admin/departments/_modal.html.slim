@@ -1,0 +1,6 @@
+= modal_for 'edit-department-modal' do
+  = modal_header t(:'department.edit')
+  = modal_form_for [:admin, @department] do |f|
+    = modal_body do
+      = render 'form_fields', f: f
+      = modal_buttons_for @department, nested_id: 'admin-department'

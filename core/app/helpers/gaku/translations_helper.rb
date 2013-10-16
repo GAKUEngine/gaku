@@ -177,5 +177,9 @@ module Gaku
       t(:'template.list')
     end
 
+    def t_department_list
+      t(:'department.list')
+    end
+
   end
 end
