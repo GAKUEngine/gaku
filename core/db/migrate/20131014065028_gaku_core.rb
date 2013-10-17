@@ -497,6 +497,7 @@ class GakuCore < ActiveRecord::Migration
       t.boolean  'major_only',  default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
+      t.references 'department'
     end
 
     create_table 'gaku_states' do |t|
