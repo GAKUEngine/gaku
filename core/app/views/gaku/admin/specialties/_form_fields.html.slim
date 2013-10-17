@@ -1,3 +1,4 @@
 = f.text_field :name,        label: t(:'specialty.name')
 = f.text_field :description, label: t(:'specialty.description')
 = f.check_box :major_only,   label: t(:'specialty.major_only')
+= f.select :department_id, options_from_collection_for_select(@departments, :id, :name), prompt: true, label: t(:'department.singular')
