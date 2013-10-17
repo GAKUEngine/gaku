@@ -6,9 +6,11 @@ describe 'Admin Specialties' do
   before(:all) { set_resource 'admin-specialty' }
 
   let(:specialty) { create(:specialty, name: 'Clojure dev') }
+  let(:department) { create(:department) }
 
   context 'new', js: true do
     before do
+      department
       visit gaku.admin_specialties_path
       click new_link
       wait_until_visible submit
@@ -17,11 +19,14 @@ describe 'Admin Specialties' do
     it 'creates and shows' do
       expect do
         fill_in 'specialty_name', with: 'home phone'
+        select department.name, from: 'specialty_department_id'
         click submit
         flash_created?
       end.to change(Gaku::Specialty, :count).by(1)
-
-      has_content? 'home phone'
+      within(table) do
+        has_content? department.name
+        has_content? 'home phone'
+      end
       count? 'Specialties list(1)'
     end
 
@@ -30,6 +35,7 @@ describe 'Admin Specialties' do
 
   context 'existing' do
     before do
+      department
       specialty
       visit gaku.admin_specialties_path
     end
@@ -41,12 +47,16 @@ describe 'Admin Specialties' do
       end
 
       it 'edits' do
+        select department.name, from: 'specialty_department_id'
         fill_in 'specialty_name', with: 'Ruby dev'
         click submit
 
         flash_updated?
-        has_content? 'Ruby dev'
-        has_no_content? 'Clojure dev'
+        within(table) do
+          has_content? 'Ruby dev'
+          has_no_content? 'Clojure dev'
+          has_content? department.name
+        end
         expect(specialty.reload.name).to eq 'Ruby dev'
       end
 
