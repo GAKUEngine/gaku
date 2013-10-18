@@ -2,6 +2,7 @@ module Gaku
   class Department < ActiveRecord::Base
 
     has_many :specialties
+    has_many :syllabuses
 
     translates :name
 

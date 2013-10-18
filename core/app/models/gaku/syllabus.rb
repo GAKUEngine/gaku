@@ -12,6 +12,8 @@ module Gaku
     has_many :exam_syllabuses, dependent: :destroy
     has_many :exams, through: :exam_syllabuses
 
+    belongs_to :department
+
     accepts_nested_attributes_for :exams, :assignments
 
     validates :name, :code, presence: true
