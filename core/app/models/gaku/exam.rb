@@ -13,6 +13,8 @@ module Gaku
     has_many :attendances, as: :attendancable
 
     belongs_to :grading_method
+    belongs_to :department
+
 
     validates :name, presence: true
 

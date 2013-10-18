@@ -3,6 +3,7 @@ module Gaku
 
     has_many :specialties
     has_many :syllabuses
+    has_many :exams
 
     translates :name
 
