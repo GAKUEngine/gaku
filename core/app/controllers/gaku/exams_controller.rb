@@ -15,6 +15,7 @@ module Gaku
     before_filter :count,       only: [:create, :destroy, :index]
     before_filter :set_exam,    only: %i( show edit update soft_delete )
     before_action :set_unscoped_exam,  only: %i( destroy recovery )
+    before_action :load_data, only: %i( new edit )
 
     def recovery
       @exam.recover
@@ -99,12 +100,16 @@ module Gaku
 
     private
 
+    def load_data
+      @departments = Department.all
+    end
+
     def t_resource
       t(:'exam.singular')
     end
 
     def exam_attr
-      [:name, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
+      [:name, :department_id, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
     end
 
     def before_new
