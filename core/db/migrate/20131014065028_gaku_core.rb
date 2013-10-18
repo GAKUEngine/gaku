@@ -221,6 +221,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',       default: 0
+      t.references 'department'
     end
 
     create_table 'gaku_external_school_records' do |t|
