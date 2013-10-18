@@ -1,6 +1,6 @@
 showNotice("<%= render_flash %>");
 
-$('table#syllabuses-index tbody').append('<%= j render("syllabus", {syllabus: @syllabus}) %>');
+$('table#syllabuses-index tbody').append('<%= j render("syllabus_fields", {syllabus: @syllabus}) %>');
 $('#new-syllabus form')[0].reset();
 $('#new-syllabus').slide();
 $('#new-syllabus-link').show();

@@ -1,6 +1,8 @@
 module Gaku
   class Department < ActiveRecord::Base
 
+    has_many :syllabuses
+
     translates :name
 
     validates :name, presence: true, uniqueness: true

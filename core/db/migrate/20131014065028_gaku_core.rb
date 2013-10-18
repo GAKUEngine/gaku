@@ -576,6 +576,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
       t.integer  'exams_count', default: 0
+      t.references 'department'
     end
 
     create_table 'gaku_teachers' do |t|
