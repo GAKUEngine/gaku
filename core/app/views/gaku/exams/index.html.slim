@@ -13,9 +13,10 @@
   thead
     tr
       = th t(:'exam.name')
+      = th t(:'department.singular')
       = th t(:'exam.adjustments')
       = th t(:'exam.weight')
       = th t(:'exam.use_weighting')
       = th_actions 3
   tbody
-    = render partial: 'exam', as: :exam, collection: @exams
+    = render @exams
