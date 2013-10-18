@@ -253,6 +253,13 @@ pt-BR:
     placeholder: DD-MM-YYYY
   default: Padrão
   delete: Excluir
+  department:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   description: 
   destroy: 
   devise:
@@ -291,6 +298,7 @@ pt-BR:
       updated: Sua senha foi alterada com sucesso. Agora você está logado(a).
       updated_not_active: Sua senha foi alterada com sucesso.
     registrations:
+      admin_create: 
       admin_set_up: Esta é a primeira vez que você está executando esta aplicação. Por favor defina o usuário administrador.
       destroyed: 
       inactive_signed_up: 
@@ -534,6 +542,7 @@ pt-BR:
         student_addresses: 
         student_contacts: 
         students: 
+      departments: 
       disposals:
         address: 
         attachment: 
@@ -798,6 +807,18 @@ pt-BR:
     major_only: 
     minor: 
     name: 
+    plural: 
+    save: 
+    singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
     plural: 
     save: 
     singular: 

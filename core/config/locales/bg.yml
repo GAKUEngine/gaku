@@ -253,6 +253,13 @@ bg:
     placeholder: ГГГГ-ММ-ДД
   default: По подразбиране
   delete: Изтрий
+  department:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   description: Описание
   destroy: Изтрий
   devise:
@@ -291,6 +298,7 @@ bg:
       updated: Вашата парола беше променена успешно. В момента сте в системата.
       updated_not_active: Вашата парола беше променена успешно.
     registrations:
+      admin_create: 
       admin_set_up: |-
         Това е първият път в който ползвате GAKU Engine.
         Моля виведете данни за потребител Администратор.
@@ -536,6 +544,7 @@ bg:
         student_addresses: 
         student_contacts: 
         students: 
+      departments: 
       disposals:
         address: 
         attachment: 
@@ -800,6 +809,18 @@ bg:
     major_only: 
     minor: 
     name: 
+    plural: 
+    save: 
+    singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
     plural: 
     save: 
     singular: 

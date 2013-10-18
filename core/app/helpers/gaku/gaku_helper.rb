@@ -11,7 +11,6 @@ module Gaku
       end
     end
 
-
     def current_parent_controller
       controller.controller_path.split('/').second
     end

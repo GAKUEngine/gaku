@@ -253,6 +253,13 @@ zh-CN:
     placeholder: 
   default: 
   delete: 
+  department:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   description: 
   destroy: 
   devise:
@@ -291,6 +298,7 @@ zh-CN:
       updated: 
       updated_not_active: 
     registrations:
+      admin_create: 
       admin_set_up: 
       destroyed: 
       inactive_signed_up: 
@@ -534,6 +542,7 @@ zh-CN:
         student_addresses: 
         student_contacts: 
         students: 
+      departments: 
       disposals:
         address: 
         attachment: 
@@ -798,6 +807,18 @@ zh-CN:
     major_only: 
     minor: 
     name: 
+    plural: 
+    save: 
+    singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
     plural: 
     save: 
     singular: 

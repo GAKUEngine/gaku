@@ -1,6 +1,6 @@
 = normal_form_for student do |f|
   = name_and_ruby_for student
-  = render 'gaku/students/form_fields', f: f, student: student
+  = render 'form_fields', f: f, student: student
 
   hr
   = submit_button t(:'student.save'), id: 'submit-student-button'

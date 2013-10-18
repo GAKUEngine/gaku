@@ -15,15 +15,17 @@
           = print_count student.guardians_count, t(:'guardian.plural')
       li
         a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
-          = print_count student.courses.count, t('course.plural')
+          = print_count student.courses.count, t(:'course.plural')
       li
         a#student-achievements-tab-link data-toggle="tab" href="#achievements_tab"
-          = print_count student.achievements.count, t('achievement.plural')
+          = print_count student.achievements.count, t(:'achievement.plural')
+
     .tab-content
+
       #addresses.tab-pane.active
         .row
           .col-md-12
-            = render partial: 'gaku/addresses/addresses', locals: {nested_resources: [student]}
+            = render 'gaku/addresses/addresses', nested_resources: [student]
       #contacts.tab-pane
         .row
           .col-md-12
@@ -31,16 +33,16 @@
       #notes.tab-pane
         .row
           .col-md-12
-            = render partial: 'gaku/notes/notes'
+            = render 'gaku/notes/notes'
       #guardians.tab-pane
         .row
           .col-md-12
-            = render partial: 'gaku/students/guardians/guardians'
+            = render 'gaku/students/guardians/guardians'
       #courses.tab-pane
         .row
           .col-md-12
-            = render partial: 'gaku/students/course_enrollments/course_enrollments'
+            = render 'gaku/students/course_enrollments/course_enrollments'
       #achievements_tab.tab-pane
         .row
           .col-md-12
-            = render partial: 'gaku/students/student_achievements/achievements_tab'
+            = render 'gaku/students/student_achievements/achievements_tab'

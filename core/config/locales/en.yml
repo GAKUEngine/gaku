@@ -245,13 +245,6 @@ en:
     singular: Course Group
   course_group_enrollment:
     save: Save to Course Group
-  department:
-    singular: Department
-    add: Add department
-    list: Departments list
-    name: Department name
-    edit: Edit department
-    save: Save department
   date:
     formats:
       default: '%Y-%m-%d'
@@ -260,6 +253,13 @@ en:
     placeholder: YYYY-MM-DD
   default: Default
   delete: Delete
+  department:
+    add: Add department
+    edit: Edit department
+    list: Departments list
+    name: Department name
+    save: Save department
+    singular: Department
   description: Description
   destroy: Destroy
   devise:

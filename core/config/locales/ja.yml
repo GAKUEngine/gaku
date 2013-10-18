@@ -253,6 +253,13 @@ ja:
     placeholder: YYYY-MM-DD
   default: デフェルト
   delete: 削除
+  department:
+    add: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   description: 説明
   destroy: 消去
   devise:
@@ -291,7 +298,7 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
-      admin_create: 管理者を作成
+      admin_create: 
       admin_set_up: |-
         学園陣が初期状態です。
         管理者ユーザを登録して下さい。
@@ -539,6 +546,7 @@ ja:
         student_addresses: 生徒住所
         student_contacts: 生徒連絡先
         students: 生徒
+      departments: 
       disposals:
         address: 住所を削除
         attachment: 添付ファイルを処分
