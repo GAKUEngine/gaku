@@ -87,9 +87,6 @@ describe 'Syllabus Exams' do
         syllabus.exams.count.should eq 0
       end
 
-      it 'cancels creating', cancel: true, js: true do
-        ensure_cancel_creating_is_working
-      end
     end
 
     context 'created exam' do

@@ -1,4 +1,4 @@
-= remote_form_for [@syllabus, @exam] do |f|
+= remote_form_for [@syllabus, @exam], { resource: 'syllabus-exam', label: t(:'exam.singular') } do |f|
   .row
     h4 = t(:'exam.new')
   = hr
@@ -11,5 +11,5 @@
   = well_div do
     = f.fields_for :exam_portions do |ep_form|
       = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: ep_form
-      
-  = buttons_for @exam, nested_id: 'syllabus-exam'
+
+  = buttons_for @exam, resource: 'syllabus-exam'
