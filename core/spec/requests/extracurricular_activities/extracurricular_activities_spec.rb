@@ -31,9 +31,6 @@ describe 'Extracurricular Activities' do
 
     it { has_validations? }
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -65,10 +62,6 @@ describe 'Extracurricular Activities' do
       it 'has validations' do
         fill_in 'extracurricular_activity_name', with: ''
         has_validations?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
 
     end
