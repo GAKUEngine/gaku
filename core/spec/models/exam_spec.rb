@@ -19,6 +19,7 @@ describe Gaku::Exam do
     it { should have_many :attendances }
     it { should have_many :exam_scores }
     it { should belong_to :grading_method }
+    it { should belong_to :department }
 
     it { should accept_nested_attributes_for :exam_portions }
   end
