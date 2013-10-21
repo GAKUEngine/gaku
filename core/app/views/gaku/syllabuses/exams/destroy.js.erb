@@ -1,2 +1,5 @@
 $('.exams-count').html('<%= print_count(@syllabus.reload.exams_count, t_exam_list) %>');
 showNotice("<%= render_flash %>");
+
+$('#syllabus-show').html('<%= j render("gaku/syllabuses/show_table", syllabus: @syllabus) %>')
+
