@@ -154,6 +154,7 @@ en:
     singular: Class Group
   class_group_course_enrollment:
     save: Save Course to Class Group
+    singular: Course
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
@@ -784,6 +785,7 @@ en:
     uniqueness: have this semester added
   semester_class_group:
     choose: Choose Semester
+    singular: Semester
     save: Save Semester
     uniqueness: Semester already added to Class Group
   semester_course:

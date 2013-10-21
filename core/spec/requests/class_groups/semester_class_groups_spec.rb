@@ -53,10 +53,6 @@ describe 'ClassGroup Semesters' do
       page.should have_content('Semester already added to Class Group')
     end
 
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -84,9 +80,6 @@ describe 'ClassGroup Semesters' do
         flash_updated?
       end
 
-      it 'cancels editing', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
 
     it 'delete', js: true do

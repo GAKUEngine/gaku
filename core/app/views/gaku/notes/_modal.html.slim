@@ -1,4 +1,4 @@
 = modal_for 'edit-note-modal' do
-  = modal_form_for [@notable, @note] do |f|
+  = modal_form_for [@notable, @note], { resource: "#{@notable_resource}-note" } do |f|
     = render 'form_fields', f: f
-    = buttons_for @note, resource: "#{@notable_resource}-note"
+    = buttons_for @note, { resource: "#{@notable_resource}-note" }

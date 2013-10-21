@@ -43,10 +43,6 @@ describe 'ClassGroups' do
     end
 
     it { has_validations? }
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -85,10 +81,6 @@ describe 'ClassGroups' do
         edited_class_group.grade.should eq 2
         edited_class_group.homeroom.should eq 'B2'
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
 
       it 'edits from show view' do
