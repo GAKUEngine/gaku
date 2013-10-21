@@ -43,10 +43,6 @@ describe 'Courses' do
     end
 
     it { has_validations? }
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing course' do
@@ -80,7 +76,6 @@ describe 'Courses' do
     context ' #edit ' do
       before do
         click js_edit_link
-        page.should have_content('Edit Course')
       end
 
       it 'has validations', js: true do
@@ -118,7 +113,6 @@ describe 'Courses' do
       click edit_link
       wait_until_visible(modal)
 
-      page.should have_content('Edit Course')
       fill_in 'course_code', with: 'biology2013'
       page.select 'biology2013Syllabus', from: 'course_syllabus_id'
       click submit

@@ -55,9 +55,6 @@ describe 'Course Semesters' do
       page.should have_content('Semester already added to Course')
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -85,10 +82,6 @@ describe 'Course Semesters' do
           page.should_not have_content "#{course_semester.starting} / #{course_semester.ending}"
         end
         flash_updated?
-      end
-
-      it 'cancels editing', cancel: true do
-        ensure_cancel_modal_is_working
       end
     end
 

@@ -1,7 +1,3 @@
 = remote_form_for @course do |f|
-  .row.mt-l
-    .col-md-12.well
-      = render 'form_fields', f: f
-
-  .row
-    = buttons_for @course, nested_id: 'course'
+  = render 'form_fields', f: f
+  = buttons_for @course
