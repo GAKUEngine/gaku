@@ -30,10 +30,6 @@ describe 'CourseGroups' do
     end
 
     it {has_validations?}
-
-    it 'cancels adding', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -59,10 +55,6 @@ describe 'CourseGroups' do
 
         Gaku::CourseGroup.last.name.should eq '2012 Courses'
         flash_updated?
-      end
-
-      it 'cancels editting' do
-        ensure_cancel_modal_is_working
       end
 
       it 'edits from show' do
