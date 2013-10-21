@@ -41,9 +41,6 @@ describe 'Exam Portion Attachments' do
 
     it {has_validations?}
 
-    it 'cancels creating' do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'when exists', js: true do
@@ -74,10 +71,6 @@ describe 'Exam Portion Attachments' do
         end
 
         current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
-      end
-
-      it 'cancels editing' do
-        ensure_cancel_modal_is_working
       end
 
       it 'has validations' do

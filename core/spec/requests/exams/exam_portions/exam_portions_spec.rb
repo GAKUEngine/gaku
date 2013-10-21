@@ -40,9 +40,6 @@ describe 'Exam portions' do
         within('#weight-total') { page.should have_content '200.6' }
       end
 
-      it 'cancels adding', cancel: true do
-        ensure_cancel_creating_is_working
-      end
     end
 
 
