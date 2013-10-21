@@ -1,3 +1,3 @@
-= remote_form_for [:admin, @school_year, @semester] do |f|
+= remote_form_for [:admin, @school_year, @semester], resource: 'admin-school-year-semester' do |f|
   = render 'form_fields', f: f
-  = buttons_for @semester, nested_id: 'admin-school-year-semester'
+  = buttons_for @semester, resource: 'admin-school-year-semester'

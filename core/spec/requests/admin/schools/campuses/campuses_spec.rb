@@ -35,9 +35,6 @@ describe 'Admin School Campuses' do
       flash_created?
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing', js: true do
@@ -61,10 +58,6 @@ describe 'Admin School Campuses' do
           page.should_not have_content 'Nagoya University'
         end
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
     end
 

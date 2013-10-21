@@ -1,7 +1,5 @@
 = modal_for 'edit-address-modal' do
-  = modal_header t(:'address.edit')
-  = modal_form_for [:admin, @school, @campus, @address] do |f|
-    = modal_body do
-      = hidden_field_tag :campus_id, @campus.id
-      = render 'gaku/addresses/form_fields', f: f
-      = buttons_for @address, nested_id: 'admin-school-campus-address'
+  = modal_form_for [:admin, @school, @campus, @address], resource: 'admin-school-campus-address' do |f|
+    = hidden_field_tag :campus_id, @campus.id
+    = render 'gaku/addresses/form_fields', f: f
+    = buttons_for @address, resource: 'admin-school-campus-address'

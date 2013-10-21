@@ -1,6 +1,4 @@
 = modal_for 'edit-state-modal' do
-  = modal_header t(:'address.state.edit')
-  = modal_form_for [:admin, @state] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = buttons_for @state, nested_id: 'admin-state', label: t(:'address.state.save')
+  = modal_form_for [:admin, @state], resource: 'admin-state' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @state, { resource: 'admin-state', label: t(:'address.state.save') }

@@ -1,3 +1,3 @@
-= remote_form_for [:admin, @enrollment_status] do |f|
+= remote_form_for [:admin, @enrollment_status], resource: 'admin-enrollment-status' do |f|
   = render 'form_fields', f: f
-  = buttons_for @enrollment_status, nested_id: 'admin-enrollment-status'
+  = buttons_for @enrollment_status, resource: 'admin-enrollment-status'

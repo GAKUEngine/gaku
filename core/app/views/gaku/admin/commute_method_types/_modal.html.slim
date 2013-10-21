@@ -1,6 +1,4 @@
 = modal_for 'edit-commute-method-type-modal' do
-  = modal_header t(:'commute_method_type.edit')
-  = modal_form_for [:admin, @commute_method_type] do |f|
-    = modal_body do
-      = f.text_field :name, label: t(:'commute_method_type.name')
-      = modal_buttons_for @commute_method_type, nested_id: 'admin-commute-method-type'
+  = modal_form_for [:admin, @commute_method_type], resource: 'admin-commute-method-type' do |f|
+    = f.text_field :name, label: t(:'commute_method_type.name')
+    = buttons_for @commute_method_type, resource: 'admin-commute-method-type'

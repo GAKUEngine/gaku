@@ -31,10 +31,6 @@ describe 'Admin Schools' do
       flash_created?
     end
 
-    it 'cancels creating' do
-      ensure_cancel_creating_is_working
-    end
-
     it { has_validations? }
   end
 
@@ -73,10 +69,6 @@ describe 'Admin Schools' do
         flash_updated?
       end
 
-      it 'cancels editting' do
-        ensure_cancel_modal_is_working
-      end
-
       it 'has validations' do
         fill_in 'school_name', with: ''
         has_validations?
@@ -113,10 +105,6 @@ describe 'Admin Schools' do
         find(show_table).should have_content 'Sofia Technical University'
         find(show_table).should_not have_content 'Varna Technical University'
         flash_updated?
-      end
-
-      it 'cancels editting' do
-        ensure_cancel_modal_is_working
       end
     end
 

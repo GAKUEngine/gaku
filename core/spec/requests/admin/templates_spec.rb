@@ -38,9 +38,6 @@ describe 'Admin Templates' do
 
     it { has_validations? }
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -66,10 +63,6 @@ describe 'Admin Templates' do
         flash_updated?
 
         expect(current_path).to eq gaku.admin_templates_path
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
 
       it 'has validations' do
