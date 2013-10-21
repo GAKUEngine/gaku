@@ -20,7 +20,7 @@ describe 'Student Simple Grades' do
       click '#student-academic-tab-link'
       click el
       click new_link
-      wait_until_visible modal
+      wait_until_visible submit
     end
 
     it 'create and show' do

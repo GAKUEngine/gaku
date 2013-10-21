@@ -23,7 +23,7 @@ describe 'Student Specialties' do
       click '#student-academic-tab-link'
       click el
       click new_link
-      wait_until_visible cancel_link
+      wait_until_visible submit
     end
 
     it 'create and show' do

@@ -860,11 +860,13 @@ en:
     edit: Edit Student Achievement
     index: Student Achievement Index
     save: Save Student Achievement
+    singular: Student Achievement
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index
     save: Save Student Specialty
+    singular: Student Specialty
   submit: Submit
   success:
     enrolled: Successfully enrolled!

@@ -29,5 +29,5 @@ hr
   .col-md-3#delete-student
     = link_to_modal_delete nil, id: 'delete-student-link', data: {confirm: nil}
   .delete_modal
-    = render 'gaku/shared/delete_modal', target: student
+    = render 'gaku/shared/soft_delete_modal', target: student
 

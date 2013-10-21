@@ -119,10 +119,6 @@ describe 'Students' do
     end
 
     it {has_validations?}
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
 end

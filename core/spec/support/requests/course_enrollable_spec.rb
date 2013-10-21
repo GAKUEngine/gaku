@@ -2,7 +2,7 @@ shared_examples_for 'enroll to course' do
 
   context 'add', js: true do
 
-    before do 
+    before do
       click new_link
       wait_until_visible submit
     end
@@ -21,15 +21,11 @@ shared_examples_for 'enroll to course' do
       if page.has_css?(tab_link)
         within(tab_link)  { page.should have_content 'Courses(1)' }
       end
-      
-    end
 
-    it 'cancels creating' do
-      ensure_cancel_creating_is_working
     end
 
     context 'validations' do
-      
+
       before do
         @data.courses << @course
         @data.reload
@@ -41,7 +37,7 @@ shared_examples_for 'enroll to course' do
         select "#{@course.code}", from: @select
         click submit
         wait_until { page.should have_content 'Already enrolled' }
-      
+
       end
     end
 
