@@ -2,18 +2,10 @@
   = count_div '' do
     = t(:'syllabus.show')
 
-= panel_div title: t(:'syllabus.show') do
-  = table do
-    thead
-      tr
-        = th t(:'syllabus.code')
-        = th t(:'syllabus.name')
-        = th t(:'syllabus.credits')
-        = th t(:'syllabus.description')
-        = th t(:'exam.plural')
-    tbody
-      tr class="syllabus-#{@syllabus.id}"
-        = render 'gaku/shared/fields/syllabus_fields', syllabus: @syllabus
+= well_div do
+  #syllabus-show
+    =render 'show_table', syllabus: @syllabus
+
 
 = well_div do
   .row
