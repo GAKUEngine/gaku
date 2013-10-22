@@ -15,10 +15,6 @@ ready = ->
           $('#commute-method').show()
           $('#edit-student-commute-method-link').show()
 
-      $('#delete-student-link').on 'click', (e)->
-        e.preventDefault()
-        $('#delete-modal').modal('show')
-
       $('#student-achievements-tab-link').on 'shown', (e)->
         $('.achievements-group').each (index, element) ->
           heights = []

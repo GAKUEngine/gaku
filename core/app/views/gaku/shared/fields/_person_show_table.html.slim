@@ -1,3 +1,14 @@
 tr
-  th = t(:'sex_and_birth')
-  td = person.sex_and_birth
+  th.active rowspan="2" width="15%"
+    = t(:'full_name')
+  th rowspan=2
+    h2
+      = name_and_ruby_for(person)
+  th.active width="10%"
+    = t(:'gender.label')
+  td width="15%"
+  th.active rowspan="6" width="222px"
+    = render 'gaku/shared/picture', resource: person
+tr
+  th.active = (:'birth')
+  td

@@ -1,15 +1,12 @@
 - prepare_resource_name(nested_resources, :address)
 div id="#{@resource_name.pluralize}"
   = index_header do
-    .col-md-12
-      div id="new-#{@resource_name}" class='hide'
-      .pull-left
-        = count_div "#{@resource_name.pluralize}-count" do
-          = print_count nested_resources.last.addresses_count, t_address_list
-      .pull-right
-        = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, id: "new-#{@resource_name}-link" if can_edit?
-
-  hr
+    div id="new-#{@resource_name}" class='hide'
+    .pull-left
+      = count_div "#{@resource_name.pluralize}-count" do
+        = print_count nested_resources.last.addresses_count, t_address_list
+    .pull-right
+      = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, id: "new-#{@resource_name}-link" if can_edit?
 
   = index_body do
     = table_for "#{@resource_name.pluralize}-index" do

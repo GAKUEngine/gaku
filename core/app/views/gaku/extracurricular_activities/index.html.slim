@@ -10,5 +10,6 @@
   .pull-right
     = ajax_link_to_new t(:'extracurricular_activity.new'), [:new, :extracurricular_activity], id: "new-extracurricular-activity-link"
 
-#extracurricular-activity-index
+#extracurricular-activity-index.mt-l
   = render 'extracurricular_activities'
+  = paginate @extracurricular_activities, remote: true

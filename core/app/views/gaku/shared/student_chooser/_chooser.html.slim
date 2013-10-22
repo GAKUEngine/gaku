@@ -1,4 +1,3 @@
-= modal_header t(:'student.choose')
 = render 'gaku/students/search/form'
 
 .row.hide#students-checked-div
@@ -28,7 +27,7 @@
         - else
           = render 'gaku/shared/student_chooser/student'
 
-#students-index-div.mt-l
+#students-index-div
   = render 'gaku/students/students'
 
   - if controller_name == 'students'

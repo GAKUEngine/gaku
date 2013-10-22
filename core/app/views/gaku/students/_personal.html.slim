@@ -1,6 +1,3 @@
-= normal_form_for student do |f|
-  = name_and_ruby_for student
+= normal_form_for student, label: 'nil' do |f|
   = render 'form_fields', f: f, student: student
-
-  hr
   = submit_button t(:'student.save'), id: 'submit-student-button'

@@ -51,6 +51,10 @@ ready = ->
         notice.children().delay(3000).fadeOut ->
           notice.html('')
 
+      $('.modal-delete-link').on 'click', (e)->
+        e.preventDefault()
+        $('#delete-modal').modal('show')
+
 
       $('.sortable').sortable
         handle: '.sort-handler'

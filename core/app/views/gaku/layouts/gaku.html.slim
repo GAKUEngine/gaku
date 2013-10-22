@@ -10,8 +10,8 @@ html
     = csrf_meta_tags
   body data-action=current_controller_action data-parent-controller=current_parent_controller
     .container
-      = render partial: 'gaku/shared/modal_config'
-      = render partial: "gaku/shared/menubar"
+      = render 'gaku/shared/modal_config'
+      = render 'gaku/shared/menubar'
       #notice
         - unless flash.empty?
           = render "gaku/shared/flash", flash: flash

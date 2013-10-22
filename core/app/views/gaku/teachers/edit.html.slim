@@ -1,23 +1,20 @@
-= well_div do
-  .span9.teacher-index
-    = render 'edit_table', teacher: teacher
+.row
+  .col-md-9.teacher-index
+    = normal_form_for teacher, label: 'nil' do |f|
+      = render 'form_fields', f: f, teacher: teacher
+      = submit_button t(:'teacher.save'), id: 'submit-teacher-button'
 
-  .span3.well
+
+  .col-md-3
     = render 'gaku/shared/picture', resource: teacher
+
+hr
 
 = render 'tabs'
 
-= well_div do
-  .span5
-    = link_to_back teachers_path
-  .span2
-    #delete-student
-      = link_to_modal_delete nil, id: 'delete-teacher-link', data: {confirm: nil}
-
-.delete_modal
-  = render 'delete_modal', teacher: teacher
-
-coffee:
-  $('#delete-teacher-link').on 'click', (event) ->
-    event.preventDefault()
-    $('#delete-modal').modal('show')
+= footer do
+  .col-md-9
+    = link_to_index teachers_path
+  .col-md-3
+    = link_to_modal_delete
+  = render 'gaku/shared/soft_delete_modal', target: teacher

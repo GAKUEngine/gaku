@@ -127,8 +127,8 @@ Gaku::Core::Engine.routes.draw do
   resources :teachers, concerns: %i( addressable contactable ) do
     get 'page/:page', action: :index, on: :collection
     member do
-      get :soft_delete
-      get :recovery
+      patch :soft_delete
+      patch :recovery
       get :show_deleted
     end
 

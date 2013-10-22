@@ -595,6 +595,8 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'user_id'
       t.datetime 'created_at'
       t.datetime 'updated_at'
+      t.string   'primary_address'
+      t.string   'primary_contact'
       t.integer  'addresses_count',      default: 0
       t.integer  'contacts_count',       default: 0
       t.integer  'notes_count',          default: 0
