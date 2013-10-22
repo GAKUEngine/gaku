@@ -7,6 +7,7 @@ module Gaku
     respond_to :html, only: %i( index edit show )
 
     before_action :set_syllabus, only: %i( edit update destroy )
+    before_action :load_data, only: %i( new edit )
 
     def new
       @syllabus = Syllabus.new
@@ -49,11 +50,15 @@ module Gaku
     end
 
     def syllabus_attr
-      %i( name code credits description )
+      %i( name code credits description department_id )
     end
 
     def set_syllabus
       @syllabus = Syllabus.find(params[:id])
+    end
+
+    def load_data
+      @departments = Department.all
     end
 
     def set_grading_methods

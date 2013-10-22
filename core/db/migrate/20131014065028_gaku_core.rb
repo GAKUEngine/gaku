@@ -221,6 +221,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',       default: 0
+      t.references 'department'
     end
 
     create_table 'gaku_external_school_records' do |t|
@@ -497,6 +498,7 @@ class GakuCore < ActiveRecord::Migration
       t.boolean  'major_only',  default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
+      t.references 'department'
     end
 
     create_table 'gaku_states' do |t|
@@ -576,6 +578,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
       t.integer  'exams_count', default: 0
+      t.references 'department'
     end
 
     create_table 'gaku_teachers' do |t|

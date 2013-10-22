@@ -8,6 +8,11 @@
     = f.text_area :description, size: "0x2", label: t(:'exam.description')
   .col-md-6
     = f.text_area :adjustments, size: "0x2", label: t(:'exam.adjustments')
+
 .row
-  .col-md-12
+  .col-md-6
+    = f.select :department_id, options_from_collection_for_select(@departments, :id, :name), {prompt: true}, class: 'span6', label: t(:'department.singular')
+
+.row
+  .col-md-6
     = f.check_box :use_weighting, label: t(:'exam_portion.use_weighting')
