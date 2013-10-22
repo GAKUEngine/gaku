@@ -5,6 +5,7 @@ describe Gaku::ExamsController do
   before { as :admin }
 
   let(:exam) { create(:exam) }
+  let(:department) { create(:department) }
 
   describe 'GET #index' do
     it 'is successful' do
@@ -94,7 +95,26 @@ describe Gaku::ExamsController do
       gaku_js_get :new
       response.should render_template :new
     end
+
+    it('assigns @departments') do
+      department
+      gaku_js_get :new
+      expect(assigns(:departments)).to eq [department]
+    end
   end
+
+  describe 'GET #edit' do
+    before do
+      department
+      gaku_js_get :edit, id: exam
+    end
+
+    it { should respond_with 200 }
+    it('assigns @exam') { expect(assigns(:exam)).to eq exam }
+    it('renders the :edit template') { template? :edit }
+    it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
+  end
+
 
   describe 'POST #create' do
     context 'with valid attributes' do

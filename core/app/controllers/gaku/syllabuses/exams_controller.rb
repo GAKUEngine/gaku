@@ -13,7 +13,9 @@ module Gaku
     before_filter :load_data
 
     def create
-      @exam = @syllabus.exams.create(params[:exam])
+      @exam = @syllabus.exams.create(params[:exam]) do |exam|
+        exam.department = @syllabus.department
+      end
       create!
     end
 

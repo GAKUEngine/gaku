@@ -5,8 +5,10 @@ describe 'Syllabus Exams' do
   before { as :admin }
 
   let(:exam) { create(:exam) }
-  let(:syllabus) { create(:syllabus, name: 'Biology', code: 'bio') }
   let(:exam) { create(:exam, name: 'Astronomy Exam') }
+  let(:department) { create(:department) }
+  let(:syllabus) { create(:syllabus, name: 'Biology', code: 'bio', department: department) }
+
   let!(:count_div) { '.exams-count' }
 
   existing_exam_form           = '#new-existing-exam'
@@ -21,7 +23,6 @@ describe 'Syllabus Exams' do
   context 'existing exam' do
     before do
       exam
-      syllabus
       visit gaku.syllabuses_path
 
       within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
@@ -76,10 +77,13 @@ describe 'Syllabus Exams' do
           wait_until_invisible submit
         end.to change(syllabus.exams, :count).by 1
 
-        has_content? 'Biology Exam'
-        has_no_content? 'No Exams'
-        within(count_div) { has_content? 'Exams list(1)' }
-        within('#syllabus-show') { has_content? '1' }
+        within(table) do
+          has_content? department.name
+          has_content? 'Biology Exam'
+          has_no_content? 'No Exams'
+        end
+        expect(syllabus.exams.last.department).to eq(department)
+        within(count_div) { page.should have_content 'Exams list(1)' }
 
         flash_created?
       end
