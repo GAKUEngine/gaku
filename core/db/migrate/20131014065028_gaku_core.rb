@@ -103,6 +103,7 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'grade'
       t.string   'homeroom'
       t.integer  'faculty_id'
+      t.boolean  'deleted',     default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
@@ -306,6 +307,8 @@ class GakuCore < ActiveRecord::Migration
       t.string   'picture_content_type'
       t.integer  'picture_file_size'
       t.datetime 'picture_updated_at'
+      t.string   'primary_address'
+      t.string   'primary_contact'
       t.integer  'addresses_count',      default: 0
       t.integer  'contacts_count',       default: 0
     end

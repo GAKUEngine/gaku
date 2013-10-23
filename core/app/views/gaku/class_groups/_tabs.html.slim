@@ -10,8 +10,12 @@
       li
         a#class-group-courses-tab-link data-toggle="tab" href="#courses"
           = print_count @class_group.courses.count, t(:'course.plural')
-    .tab-content
+      li
+        a#class-group-notes-tab-link data-toggle="tab" href="#notes"
+          = print_count @class_group.notes_count, t(:'note.plural')
 
+
+    .tab-content
       #class_group_enrollments.tab-pane.active
         .row
           #enrollment_form.hide
@@ -32,3 +36,5 @@
             = render 'gaku/class_groups/courses/courses'
         .row
           #course_form.hide
+      #notes.tab-pane
+        = render 'gaku/notes/notes'

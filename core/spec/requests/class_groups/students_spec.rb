@@ -26,7 +26,7 @@ describe 'ClassGroup Students' do
       student1
 
       visit gaku.class_groups_path
-      click show_link
+      click edit_link
       click_link 'class-group-enrollments-tab-link'
       Gaku::ClassGroupEnrollment.count.should eq 0
       click new_link
@@ -47,7 +47,7 @@ describe 'ClassGroup Students' do
   context '#search ' do
     it 'searches students', js: true do
       visit gaku.class_groups_path
-      click show_link
+      click edit_link
       click_link 'class-group-enrollments-tab-link'
 
       student2 = create(:student, name: 'Kenji', surname: 'Kita')
@@ -65,7 +65,7 @@ describe 'ClassGroup Students' do
   context 'when student is added' do
     before do
       class_group.students << student1
-      visit gaku.class_group_path(class_group)
+      visit gaku.edit_class_group_path(class_group)
       within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
       Gaku::ClassGroupEnrollment.count.should eq 1

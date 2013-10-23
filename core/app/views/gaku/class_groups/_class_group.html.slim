@@ -1,7 +1,5 @@
-- if class_group
-  tr class="class-group-#{class_group.id}"
-    = render 'gaku/shared/fields/class_group_fields', class_group: class_group
-    td
-  	  = link_to_show class_group
-  	  = ajax_link_to_edit [:edit, class_group]
-  	  = ajax_link_to_delete class_group
+tr class="class-group-#{class_group.id}"
+  = render 'fields', class_group: class_group
+  td
+	  = link_to_edit [:edit, class_group]
+	  = ajax_link_to_edit [:edit, class_group]

@@ -21,7 +21,7 @@ describe 'ClassGroup Semesters' do
   context 'new', js: true do
     before do
       semester
-      visit gaku.class_group_path(class_group)
+      visit gaku.edit_class_group_path(class_group)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -60,7 +60,7 @@ describe 'ClassGroup Semesters' do
       semester
       semester2
       semester_class_group
-      visit gaku.class_group_path(class_group)
+      visit gaku.edit_class_group_path(class_group)
       click tab_link
     end
 

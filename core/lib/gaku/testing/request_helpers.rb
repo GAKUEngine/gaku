@@ -61,6 +61,10 @@ module Gaku::Testing::RequestHelpers
     '.recovery-link'
   end
 
+  def modal_delete_link
+    '.modal-delete-link'
+  end
+
   def show_link
     '.show-link'
   end

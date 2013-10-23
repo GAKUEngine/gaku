@@ -1,9 +1,0 @@
-= well_div do
-  = normal_form_for [@student, @guardian] do |f|
-    = big_person_caption_for @guardian
-
-    = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @guardian
-    = f.text_field :relationship, label: t(:'guardian.relationship')
-
-    = hr
-    = submit_button t(:'guardian.save'), id: 'submit-student-guardian-button'

@@ -21,10 +21,9 @@
       #course-group-enrollments-index
         = render 'gaku/course_groups/course_group_enrollments/courses', course_group: @course_group
 
-= well_div do
-  .col-md-5
-    = link_to_edit_with_text [:edit, @course_group], remote: true
-  .col-md-5
-    = link_to_back course_groups_path
-  .col-md-2
-    = render 'delete_confirm'
+= footer do
+  .col-md-9
+    = link_to_index course_groups_path
+  .col-md-3
+    = link_to_modal_delete
+  = render 'gaku/shared/soft_delete_modal', target: @course_group

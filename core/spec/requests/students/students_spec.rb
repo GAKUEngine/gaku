@@ -82,16 +82,14 @@ describe 'Students' do
     it 'deletes', js: true do
       visit gaku.edit_student_path(student2)
       student_count = Gaku::Student.count
-      page.should have_content "#{student2.name}"
 
       expect do
-        click '#delete-student-link'
+        click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
         wait_until { flash_destroyed? }
       end.to change(Gaku::Student, :count).by -1
 
-      page.should_not have_content "#{student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
       current_path.should eq gaku.students_path
     end

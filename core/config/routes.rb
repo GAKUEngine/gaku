@@ -50,6 +50,8 @@ Gaku::Core::Engine.routes.draw do
   resources :class_groups do
     member do
       get :student_chooser
+      patch :soft_delete
+      patch :recover
     end
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses'
@@ -191,8 +193,8 @@ Gaku::Core::Engine.routes.draw do
   resources :course_groups do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
     member do
-      delete :soft_delete
-      get :recovery
+      patch :soft_delete
+      patch :recovery
     end
   end
 

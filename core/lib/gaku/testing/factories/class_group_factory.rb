@@ -4,6 +4,10 @@ FactoryGirl.define do
     name '1A'
     grade 8
     homeroom '123'
+
+    factory :invalid_class_group do
+      name nil
+    end
   end
 
   trait :with_students do

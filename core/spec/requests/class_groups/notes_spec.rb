@@ -11,7 +11,8 @@ describe 'ClassGroup Notes' do
   context 'new', type: 'note' do
     before do
       @resource = class_group
-      visit gaku.class_group_path(@resource)
+      visit gaku.edit_class_group_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'new note'
@@ -20,7 +21,8 @@ describe 'ClassGroup Notes' do
   context 'existing', js: true, type: 'note'  do
     before do
       @resource = class_group_with_note
-      visit gaku.class_group_path(@resource)
+      visit gaku.edit_class_group_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'edit note'
