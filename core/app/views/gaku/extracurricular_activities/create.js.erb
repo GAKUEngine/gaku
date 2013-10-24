@@ -2,5 +2,5 @@ $('table#extracurricular-activities-index tbody').append('<%= render_js_partial(
 $('#new-extracurricular-activity form')[0].reset();
 $('#new-extracurricular-activity').slide();
 $('#new-extracurricular-activity-link').show();
-$('.extracurricular-activities-count').html("<%= print_count(@count+1, t_extracurricular_activity_list) %>");
+$('.extracurricular-activities-count').html("<%= print_count(@count, t_extracurricular_activity_list) %>");
 showNotice("<%= render_flash %>");

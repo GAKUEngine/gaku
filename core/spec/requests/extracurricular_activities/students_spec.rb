@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'ExtracurricularActivity Students' do
 
+  before(:all) { set_resource 'extracurricular-activity-student' }
   before { as :admin }
 
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
@@ -11,10 +12,6 @@ describe 'ExtracurricularActivity Students' do
   let(:student1) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
   let(:student2) { create(:student, enrollment_status_code: enrollment_status_admitted.code) }
   let(:student3) { create(:student, enrollment_status_code: enrollment_status_admitted.code) }
-
-  before :all do
-    set_resource 'extracurricular-activity-student'
-  end
 
   before do
     extracurricular_activity
@@ -29,7 +26,7 @@ describe 'ExtracurricularActivity Students' do
       student2
       student3
       visit gaku.extracurricular_activities_path
-      click show_link
+      click edit_link
       click_link 'extracurricular-activity-enrollments-tab-link'
       Gaku::ExtracurricularActivityEnrollment.count.should eq 0
       click new_link
@@ -64,7 +61,7 @@ describe 'ExtracurricularActivity Students' do
   context '#search ' do
     it 'searches students', js: true do
       visit gaku.extracurricular_activities_path
-      click show_link
+      click edit_link
       click_link 'extracurricular-activity-enrollments-tab-link'
 
       create(:student, name: 'Kenji', surname: 'Kita')
@@ -81,7 +78,7 @@ describe 'ExtracurricularActivity Students' do
   context 'when student is already added' do
     before do
       extracurricular_activity.students << student1
-      visit gaku.extracurricular_activity_path(extracurricular_activity)
+      visit gaku.edit_extracurricular_activity_path(extracurricular_activity)
       within('.extracurricular-activity-enrollments-count') { page.should have_content '1' }
       within('#extracurricular-activity-enrollments-tab-link') { page.should have_content '1' }
       Gaku::ExtracurricularActivityEnrollment.count.should eq 1
@@ -108,7 +105,7 @@ describe 'ExtracurricularActivity Students' do
   it 'errors is student is enrolled meanwhile', js: true do
     student1
 
-    visit gaku.extracurricular_activity_path(extracurricular_activity)
+    visit gaku.edit_extracurricular_activity_path(extracurricular_activity)
     click new_link
     wait_until { page.find('#student-modal').visible? }
     extracurricular_activity.students << student1
