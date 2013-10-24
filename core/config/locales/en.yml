@@ -373,7 +373,7 @@ en:
     add_existing: Add Existing Exam
     add_portion: Add Portion
     adjustments: Adjustments
-    already_added: Exam already added !
+    already_added: Exam already added!
     choose: Choose Exam
     choose_schedule: Choose Schedule
     completion: Completion
@@ -432,7 +432,7 @@ en:
     student_id_number: Student ID
   extracurricular_activity:
     add: Add Extracurricular Activity
-    already_enrolled: Already enrolled to the extracurricular activity !
+    already_enrolled: Already enrolled to the extracurricular activity!
     edit: Edit Extracurricular Activity
     enroll: Enroll to Extracurricular Activity
     list: Extracurricular Activities list
