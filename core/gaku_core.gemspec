@@ -45,9 +45,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails4_client_side_validations', '0.0.3'
 
-  s.add_dependency 'phantom_helpers',                '0.10.0'
-  s.add_dependency 'phantom_forms',                  '0.1.8'
-  s.add_dependency 'phantom_nested_forms',           '0.1.2'
+  s.add_dependency 'phantom_helpers',                '0.11.0.alpha1'
+  s.add_dependency 'phantom_forms',                  '0.2.0.alpha1'
+  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha1'
   s.add_dependency 'nested_form'
 
   s.add_dependency 'jquery-rails',                   '~> 3'
