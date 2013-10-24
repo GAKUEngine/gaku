@@ -1,71 +1,98 @@
 module Gaku
   class CourseGroupsController < GakuController
 
-    load_and_authorize_resource class: Gaku::CourseGroup
-
+    #load_and_authorize_resource class: Gaku::CourseGroup
     helper_method :sort_column, :sort_direction
 
-    inherit_resources
-    #actions :show, :new, :create, :update, :edit, :destroy
-    respond_to :js, :html
+    respond_to :js,   only: %i( new create edit update destroy recovery )
+    respond_to :html, only: %i( index edit update soft_delete )
 
-    before_filter :before_show,  only: [:show]
-    before_filter :count, only: [:create, :destroy, :index]
-    before_filter :unscoped_course_group, only: :destroy
-    before_filter :load_data
+    before_action :set_unscoped_course_group, only: %i( destroy recovery )
+    before_action :set_course_group,          only: %i( edit show update soft_delete )
+    before_action :set_courses
 
-    def index
-      @course_groups = CourseGroup.order(sort_column + ' ' + sort_direction)
+    def recovery
+      @course_group.recover
+      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
+      respond_with @course_group
     end
 
     def soft_delete
-      @course_group = CourseGroup.find(params[:id])
-      @course_group.update_attribute(:deleted, true)
+      @course_group.soft_delete
       redirect_to course_groups_path,
                   notice: t(:'notice.destroyed', resource: t_resource)
     end
 
-    def recovery
-      unscoped_course_group
-      @course_group.update_attribute(:deleted, false)
-      @course_groups = CourseGroup.where(deleted: true)
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
-      respond_to do |format|
-        format.js { render :recovery }
+    def destroy
+      @course_group.destroy
+      set_count
+      respond_with @course_group
+    end
+
+    def new
+      @course_group = CourseGroup.new
+      respond_with @course_group
+    end
+
+    def create
+      @course_group = CourseGroup.new(course_group_params)
+      @course_group.save
+      set_count
+      respond_with @course_group
+    end
+
+    def edit
+      @course_group_enrollment = CourseGroupEnrollment.new
+    end
+
+    def update
+      @course_group.update(course_group_params)
+      respond_with(@course_group) do |format|
+        format.js { render }
+        format.html { redirect_to [:edit, @course_group] }
       end
     end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:course_group).permit(course_group_attr)]
+    def index
+      @course_groups = CourseGroup.order(sort_column + ' ' + sort_direction)
+      set_count
+      respond_with @course_groups
     end
 
     private
 
-    def course_group_attr
-      %i(name code)
+    def course_group_params
+      params.require(:course_group).permit(attributes)
     end
 
-    private
+    def attributes
+      %i( name code )
+    end
+
+    def set_course_group
+      @course_group = CourseGroup.find(params[:id])
+      set_notable
+    end
+
+    def set_unscoped_course_group
+      @course_group = CourseGroup.unscoped.find(params[:id])
+      set_notable
+    end
+
+    def set_courses
+      @courses = Course.all
+    end
 
     def t_resource
       t(:'course_group.singular')
     end
 
-    def unscoped_course_group
-      @course_group = CourseGroup.unscoped.find(params[:id])
+    def set_notable
+      @notable = @course_group
+      @notable_resource = get_resource_name @notable
     end
 
-    def load_data
-      @courses = Course.includes(:syllabus).map { |c| [c, c.id] }
-    end
-
-    def before_show
-      @course_group_enrollment = CourseGroupEnrollment.new
-      @courses = Course.all
-    end
-
-    def count
+    def set_count
       @count = CourseGroup.count
     end
 

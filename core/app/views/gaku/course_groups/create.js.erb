@@ -1,9 +1,9 @@
 <%- if @course_group.errors.any? %>
-  $('#course-group-form-errors').html('<%= render_js_partial("gaku/shared/errors", {target: @course_group}) %>');
+  $('#course-group-form-errors').html('<%= j render("gaku/shared/errors", {target: @course_group}) %>');
 <% else %>
-	$('#course-groups-index tbody').append('<%= render_js_partial("course_group", {course_group: @course_group}) %>');
+	$('#course-groups-index tbody').append('<%= j render("course_group", {course_group: @course_group}) %>');
 	showNotice("<%= render_flash %>");
-	$('.course-groups-count').html('<%= print_count(@count+1, t_course_group_list) %>');
+	$('.course-groups-count').html('<%= print_count(@count, t_course_group_list) %>');
 	$('#new-course-group').slide()
 	$('#new-course-group-link').show()
 	$('#new-course-group form')[0].reset();

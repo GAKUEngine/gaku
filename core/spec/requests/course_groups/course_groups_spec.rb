@@ -64,9 +64,7 @@ describe 'CourseGroups' do
     end
 
     it 'deletes', js: true do
-      visit gaku.course_group_path(course_group)
-
-      page.should have_content course_group.name
+      visit gaku.edit_course_group_path(course_group)
 
       click modal_delete_link
       within('#delete-modal') { click_on 'Delete' }
