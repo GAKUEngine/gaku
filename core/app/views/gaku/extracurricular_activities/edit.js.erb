@@ -1,3 +1,3 @@
-$('#modal-dialogs').html('<%= render_js_partial("modal", {extracurricular_activity: @extracurricular_activity}) %>');
+$('#modal-dialogs').html('<%= j render("modal", {extracurricular_activity: @extracurricular_activity}) %>');
 $('#extracurricular-activity-modal').modal('show');
 $('.remote-form').enableValidations();

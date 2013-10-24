@@ -2,7 +2,7 @@
   .col-md-12
     = normal_form_for @extracurricular_activity, label: 'nil' do |f|
       = render 'form_fields', f: f, extracurricular_activity: @extracurricular_activity
-      = submit_button t(:'extracurricular_activity.save'), id: 'submit-extracurricular-activity-button'
+      = buttons_for @extracurricular_activity
 
 hr
 

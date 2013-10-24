@@ -1,2 +1,2 @@
-$("#extracurricular-activities-index").html("<%= escape_javascript(render('extracurricular_activities')) %>");
-$('.extracurricular-activities-count').html('<%= print_count(@count, t_extracurricular_activity_list) %>');
+$("#extracurricular-activities-index").html("<%= j render('extracurricular_activities') %>");
+$('.extracurricular-activities-count').html("<%= print_count(@count, t(:'extracurricular_activity.list')) %>");
