@@ -20,14 +20,14 @@ module StudentChooserController
   end
 
   def set_enrollment_statuses
-    @enrollment_status_applicant_code = Gaku::EnrollmentStatus.where(code: 'applicant').first_or_create.code
-    @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.where(code: 'enrolled').first_or_create.code
-    @enrollment_statuses =  Gaku::EnrollmentStatus.all.map { |es| [es.name, es.code] }
+    @enrollment_status_applicant_code = Gaku::EnrollmentStatus.where(code: 'applicant').includes(:translations).first_or_create.code
+    @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.where(code: 'enrolled').includes(:translations).first_or_create.code
+    @enrollment_statuses =  Gaku::EnrollmentStatus.all.includes(:translations).map { |es| [es.name, es.code] }
     @enrollment_statuses << [t('undefined'), nil]
   end
 
   def set_students
-    active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.pluck(:code)
+    active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.includes(:translations).pluck(:code)
     @search = Gaku::Student.search(params[:q])
     @students = @search.result.where(enrollment_status_code: active_enrollment_statuses_codes)
                               .page(params[:page])

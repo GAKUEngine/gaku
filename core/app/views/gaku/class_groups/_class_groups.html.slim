@@ -4,7 +4,7 @@
 	    = th(sortable 'grade', t(:'class_group.grade'))
 	    = th(sortable 'name',  t(:'class_group.name'))
 	    = th(sortable 'homeroom', t(:'class_group.homeroom'))
-	    = th_actions 3
+	    = th_actions 2
 	tbody
 	  = render partial: 'class_group', collection: @class_groups_without_semester, as: 'class_group'
 
@@ -19,7 +19,7 @@
         = th t(:'class_group.grade')
         = th t(:'class_group.name')
         = th t(:'class_group.homeroom')
-        = th_actions 3
+        = th_actions 2
     tbody
       = render partial: 'class_group', collection: extract_grouped(semester_class_groups, :class_group), as: :class_group
   = hr

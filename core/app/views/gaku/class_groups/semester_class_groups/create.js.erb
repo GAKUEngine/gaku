@@ -1,5 +1,5 @@
 showNotice("<%= render_flash %>");
-$('#class-group-semester-class-groups-index tbody').append('<%= render_js_partial("semester", {semester_class_group: @semester_class_group}) %>');
+$('#class-group-semester-class-groups-index tbody').append('<%= j render("semester", {semester_class_group: @semester_class_group}) %>');
 $('#new-class-group-semester-class-group').slide();
 $('#new-class-group-semester-class-group-link').show();
 $('#class-group-semester-class-groups-tab-link').html("<%= print_count(@count+1, t_semester_plural) %>");

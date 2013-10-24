@@ -15,6 +15,7 @@
             th.btn-inverse = sort_link @search, "name", t("name")
         tbody#students-checked
       #chosen-actions.hide
+
         - if @class_group
           = render 'gaku/shared/student_chooser/class_group'
 

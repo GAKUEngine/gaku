@@ -2,7 +2,7 @@ ready = ->
   self = this
 
   class ClassGroupsController
-    show: ->
+    edit: ->
       self.app.student_chooser()
 
   @app.class_groups = new ClassGroupsController

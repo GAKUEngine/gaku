@@ -7,8 +7,6 @@
   .pull-right
     = ajax_link_to_new t(:'course.add'), new_class_group_class_group_course_enrollment_path(class_group_id: @class_group.id), id: 'new-class-group-course-link'
 
-= hr
-
 = index_body do
   = table_for 'class-group-courses-index' do
     thead
