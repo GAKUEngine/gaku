@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li#syllabus_exams_tab.active
+        a#syllabus-exams-tab-link data-toggle="tab" href="#syllabus-exams"
+          = print_count @syllabus.exams_count, t(:'exam.plural')
+      li
+        a#syllabus-notes-tab-link data-toggle="tab" href="#syllabus-notes"
+          = print_count @syllabus.notes_count, t(:'note.plural')
+
+
+    .tab-content
+      #syllabus-exams.tab-pane.active
+        = render 'all_exams'
+      #syllabus-notes.tab-pane
+        = render 'gaku/notes/notes'

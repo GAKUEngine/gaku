@@ -1,51 +1,16 @@
-= content_for :show_header do
-  = count_div '' do
-    = t(:'syllabus.show')
+.row
+  .col-md-12
+    = normal_form_for @syllabus, label: 'nil' do |f|
+      = render 'form_fields', f: f, syllabus: @syllabus
+      = buttons_for @syllabus
 
-= well_div do
-  #syllabus-show
-    =render 'show_table', syllabus: @syllabus
+hr
 
+= render 'tabs'
 
-= well_div do
-  .row
-    #syllabus-exams
-      .row
-        .pull-left
-          = count_div 'exams-count' do
-            = print_count @syllabus.exams_count, t_exam_list
-        .pull-right
-          = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
-          = ajax_link_to_new t(:'exam.add_existing'), '', id: 'new-existing-exam-link'
-
-      .row.mt-s
-        .col-md-12
-          #new-existing-exam-errors
-          #new-existing-exam.hide
-            = render 'gaku/syllabuses/exams/select_form'
-
-          #new-syllabus-exam.hide
-            /= render 'gaku/syllabuses/exams/form'
-      .row
-        .col-md-12
-          hr
-      = render 'gaku/syllabuses/exams/exams'
-  .row
-    br/
-  /.row
-    #syllabus-assigmnents
-      = render 'gaku/syllabuses/assignments/assignments'
-    #new-syllabus-assignment
-      = link_to t(:'assignment.new'), create_syllabus_assignment_path(@syllabus), { id: 'new-course-assignment-link', class: 'btn'}
-    #new-syllabus-assignment-form.hide
-      = render 'gaku/syllabuses/assignments/form'
-
-= well_div do
-  #syllabus-notes
-    = render 'gaku/notes/notes'
-
-= well_div do
-  .col-md-6
-    = link_to_edit_with_text [:edit, @syllabus], remote: true
-  .col-md-6
-    = link_to_back syllabuses_path
+= footer do
+  .col-md-9
+    = link_to_index syllabuses_path
+  .col-md-3
+    = link_to_modal_delete
+  /= render 'gaku/shared/soft_delete_modal', target: @syllabus

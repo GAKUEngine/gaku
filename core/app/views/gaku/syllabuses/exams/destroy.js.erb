@@ -1,5 +1,3 @@
-$('.exams-count').html('<%= print_count(@syllabus.reload.exams_count, t_exam_list) %>');
+$('.exams-count').html('<%= print_count(@exams_count, t_exam_list) %>');
+$('#syllabus-exams-tab-link').html("<%= print_count(@exams_count, t(:'exam.plural')) %>");
 showNotice("<%= render_flash %>");
-
-$('#syllabus-show').html('<%= j render("gaku/syllabuses/show_table", syllabus: @syllabus) %>')
-

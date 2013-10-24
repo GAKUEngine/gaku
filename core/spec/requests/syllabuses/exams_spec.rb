@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Syllabus Exams' do
 
+  before(:all) { set_resource 'syllabus-exam' }
   before { as :admin }
 
   let(:exam) { create(:exam) }
@@ -14,18 +15,12 @@ describe 'Syllabus Exams' do
   existing_exam_form           = '#new-existing-exam'
   new_existing_exam_link       = '#new-existing-exam-link'
   submit_existing_exam_button  = '#submit-existing-exam-button'
-  cancel_existing_exam_link    = '#cancel-existing-exam-link'
-
-  before :all do
-    set_resource 'syllabus-exam'
-  end
+  cancel_existing_exam_link    = '#close-existing-exam-button'
 
   context 'existing exam' do
     before do
       exam
-      visit gaku.syllabuses_path
-
-      within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
+      visit gaku.edit_syllabus_path(syllabus)
       has_content? 'No Exams'
     end
 
@@ -40,12 +35,12 @@ describe 'Syllabus Exams' do
       wait_until_invisible existing_exam_form
       has_content? exam.name
       flash? 'successfully added'
-      within('#syllabus-show') { has_content? '1' }
 
       within(count_div) { has_content? 'Exams list(1)' }
+      within(tab_link) { has_content? 'Exams(1)' }
     end
 
-    xit 'cancels adding existing exam', cancel: true, js: true do
+    it 'cancels adding existing exam', cancel: true, js: true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -59,9 +54,7 @@ describe 'Syllabus Exams' do
   context 'new exam' do
     context 'new' do
       before do
-        syllabus
-        visit gaku.syllabuses_path
-        within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
+        visit gaku.edit_syllabus_path(syllabus)
         has_content? 'No Exams'
         click new_link
         wait_until_visible submit
@@ -130,11 +123,11 @@ describe 'Syllabus Exams' do
         expect do
           ensure_delete_is_working
         end.to change(syllabus.exams, :count).by -1
+        flash_destroyed?
 
         within(table){ has_no_content? exam.name }
         within(count_div) { has_no_content? 'Exams list(1)' }
-        flash_destroyed?
-        within('#syllabus-show') { has_no_content? '1' }
+
       end
     end
   end

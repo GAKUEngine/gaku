@@ -2,6 +2,3 @@ $('#syllabus-modal').modal('hide');
 $('#syllabus-modal').remove();
 showNotice("<%= render_flash %>");
 $('tr.syllabus-<%= @syllabus.id %>').html('<%= j render("syllabus_fields", {syllabus: @syllabus}) %>');
-
-
-$('#syllabus-show').html('<%= j render("show_table", syllabus: @syllabus) %>')

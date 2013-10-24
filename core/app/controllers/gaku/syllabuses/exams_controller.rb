@@ -16,7 +16,13 @@ module Gaku
       @exam = @syllabus.exams.create(params[:exam]) do |exam|
         exam.department = @syllabus.department
       end
+      set_count
       create!
+    end
+
+    def destroy
+      set_count
+      destroy!
     end
 
     def new
@@ -48,6 +54,10 @@ module Gaku
 
     def exam_syllabus
       @exam_syllabus = ExamSyllabus.find_by(exam_id: params[:id], syllabus_id: params[:syllabus_id])
+    end
+
+    def set_count
+      @exams_count = @syllabus.reload.exams_count
     end
 
 

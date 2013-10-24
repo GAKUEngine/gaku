@@ -44,7 +44,7 @@ describe 'Syllabus' do
     context 'edit', js: true do
 
       context 'from edit view' do
-        xit 'edits' do
+        it 'edits' do
           visit gaku.edit_syllabus_path(syllabus)
 
           fill_in 'syllabus_name', with: 'Maths'
@@ -54,13 +54,14 @@ describe 'Syllabus' do
           click submit
           flash_updated?
 
-          has_content? 'Maths'
-          has_content? 'math'
+          expect(find_field('syllabus_name').value).to eq 'Maths'
+          expect(find_field('syllabus_code').value).to eq 'math'
+          expect(find_field('syllabus_description').value).to eq 'Maths Description'
 
-          has_no_content? 'Biology'
-          has_no_content? 'bio'
-
-          expect(syllabus.reload.name).to eq 'Maths'
+          syllabus.reload
+          expect(syllabus.name).to eq 'Maths'
+          expect(syllabus.code).to eq 'math'
+          expect(syllabus.description).to eq 'Maths Description'
         end
       end
 
@@ -72,12 +73,11 @@ describe 'Syllabus' do
           wait_until_visible modal
         end
 
-        xit 'edits from index' do
+        it 'edits' do
           fill_in 'syllabus_name', with: 'Maths'
           select department.name, from: 'syllabus_department_id'
           fill_in 'syllabus_code', with: 'math'
           fill_in 'syllabus_description', with: 'Maths Description'
-          puts submit.inspect
 
           click submit
 
@@ -95,20 +95,11 @@ describe 'Syllabus' do
 
         end
 
-        xit 'has validations' do
+        it 'has validations' do
           fill_in 'syllabus_name', with: ''
           has_validations?
         end
       end
-    end
-
-    xit 'deletes', js: true do
-
-      expect do
-        ensure_delete_is_working
-      end.to change(Gaku::Syllabus, :count).by -1
-
-      has_no_content?("#{syllabus.code}")
     end
 
   end

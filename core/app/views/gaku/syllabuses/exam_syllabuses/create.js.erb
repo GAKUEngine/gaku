@@ -5,9 +5,8 @@
 	$('#new-existing-exam').slide();
 	$('#new-existing-exam-link').show()
 
-	$('.exams-count').html('<%= print_count(@syllabus.reload.exams_count, t_exam_list) %>');
+	$('.exams-count').html('<%= print_count(@exams_count, t_exam_list) %>');
+  $('#syllabus-exams-tab-link').html('<%= print_count(@exams_count, t_exam_list) %>');
   $('#syllabus-exams-index tbody').append('<%= j render("gaku/syllabuses/exams/exam", {exam: @exam_syllabus.exam}) %>');
 	showNotice("<%= render_flash %>");
 <% end %>
-
-$('#syllabus-show').html('<%= j render("gaku/syllabuses/show_table", syllabus: @exam_syllabus) %>')
