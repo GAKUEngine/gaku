@@ -154,6 +154,7 @@ ja:
     singular: クラス
   class_group_course_enrollment:
     save: クラスに授業を登録
+    singular: 
   class_group_enrollment:
     count: 在籍数
     create: 在籍クラスを作成
@@ -508,6 +509,7 @@ ja:
     already: 評価方法は既にセットに追加されています。
     edit: 評価方法セットアイテムを編集
     save: 評価方法セットアイテムを保存
+    singular: 
   graduated: 卒業日
   guardian:
     add: 保護者を追加
@@ -721,6 +723,7 @@ ja:
     list: 役割一覧
     name: 役割名
     save: 役割を保存
+    singular: 
   save: 保存
   schedule: 定刻
   school:
@@ -785,6 +788,7 @@ ja:
   semester_class_group:
     choose: 学期を選択
     save: 学期を保存
+    singular: 
     uniqueness: このクラスに同じ学期が既に登録されています。
   semester_course:
     uniqueness: 同じ学期が既に授業に追加されています。
@@ -860,11 +864,13 @@ ja:
     edit: 生徒の実績を編集
     index: 生徒の実績一覧
     save: 生徒の実績を保存
+    singular: 
   student_name: 生徒名
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
     save: 専科を保存
+    singular: 
   submit: 登録する
   success:
     enrolled: 在籍処理が成功しました。

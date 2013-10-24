@@ -154,6 +154,7 @@ zh-CN:
     singular: 
   class_group_course_enrollment:
     save: 
+    singular: 
   class_group_enrollment:
     count: 
     create: 
@@ -504,6 +505,7 @@ zh-CN:
     already: 
     edit: 
     save: 
+    singular: 
   graduated: 
   guardian:
     add: 
@@ -717,6 +719,7 @@ zh-CN:
     list: 
     name: 
     save: 
+    singular: 
   save: 
   schedule: 
   school:
@@ -781,6 +784,7 @@ zh-CN:
   semester_class_group:
     choose: 
     save: 
+    singular: 
     uniqueness: 
   semester_course:
     uniqueness: 
@@ -856,11 +860,13 @@ zh-CN:
     edit: 
     index: 
     save: 
+    singular: 
   student_name: 
   student_specialty:
     edit: 
     index: 
     save: 
+    singular: 
   submit: 
   success:
     enrolled: 

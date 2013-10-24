@@ -154,6 +154,7 @@ bg:
     singular: Клас
   class_group_course_enrollment:
     save: Запази Курс към Клас
+    singular: 
   class_group_enrollment:
     count: Брой на записаните студенти
     create: Създай добавяне към Класа
@@ -506,6 +507,7 @@ bg:
     already: 
     edit: 
     save: 
+    singular: 
   graduated: 
   guardian:
     add: 
@@ -719,6 +721,7 @@ bg:
     list: 
     name: 
     save: 
+    singular: 
   save: 
   schedule: 
   school:
@@ -783,6 +786,7 @@ bg:
   semester_class_group:
     choose: 
     save: 
+    singular: 
     uniqueness: 
   semester_course:
     uniqueness: 
@@ -858,11 +862,13 @@ bg:
     edit: 
     index: 
     save: 
+    singular: 
   student_name: 
   student_specialty:
     edit: 
     index: 
     save: 
+    singular: 
   submit: 
   success:
     enrolled: 

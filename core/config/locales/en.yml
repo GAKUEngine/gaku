@@ -787,8 +787,8 @@ en:
     uniqueness: have this semester added
   semester_class_group:
     choose: Choose Semester
-    singular: Semester
     save: Save Semester
+    singular: Semester
     uniqueness: Semester already added to Class Group
   semester_course:
     uniqueness: Semester already added to Course
