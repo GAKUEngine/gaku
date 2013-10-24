@@ -22,7 +22,7 @@ describe 'Course Semesters' do
     before do
       course
       semester
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -62,7 +62,7 @@ describe 'Course Semesters' do
       course_with_semester
       course_semester
       semester
-      visit gaku.course_path(course_with_semester)
+      visit gaku.edit_course_path(course_with_semester)
       click tab_link
     end
 

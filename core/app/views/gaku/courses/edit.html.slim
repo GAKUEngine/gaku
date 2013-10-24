@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    = normal_form_for @course, label: 'nil' do |f|
+      = render 'form_fields', f: f, course: @course
+      = buttons_for @course
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-9
+    = link_to_index courses_path
+  .col-md-3
+    /= link_to_modal_delete
+  /= render 'gaku/shared/soft_delete_modal', target: course

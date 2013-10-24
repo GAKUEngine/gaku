@@ -1,5 +1,4 @@
 = render 'gaku/shared/fields/course_fields', course: course
 td
-  = link_to_show course
+  = link_to_edit [:edit, course]
   = ajax_link_to_edit [:edit, course]
-  = ajax_link_to_delete course

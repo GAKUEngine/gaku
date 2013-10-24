@@ -6,8 +6,6 @@
   .pull-right
     = ajax_link_to_new t(:'semester.add'), [:new, @course, :semester_course], id: 'new-course-semester-course-link'
 
-= hr
-
 = index_body do
   = table_for 'course-semester-courses-index' do
     thead

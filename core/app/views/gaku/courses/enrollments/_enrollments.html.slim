@@ -11,8 +11,6 @@
     #new-course-class-group-div.pull-right.mr-s
       = ajax_link_to_new t(:'class_group.add'), new_course_enrollment_path(course_id: @course.id), id: 'new-course-class-group-link'
 
-= hr
-
 = index_body do
   = table_for 'course-students-index' do
     thead

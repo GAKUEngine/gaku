@@ -1,7 +1,6 @@
-$('#courses-without-semester-index tbody').append('<%= render_js_partial("course", { course: @course }) %>');
-$('.courses-count').html('<%= print_count(@count+1, t_course_list) %>');
+showNotice("<%= render_flash %>");
+$('#courses-without-semester-index tbody').append('<%= j render("course", { course: @course }) %>');
+$('.courses-count').html('<%= print_count(@count, t_course_list) %>');
 
 $('#new-course').slide();
 $('#new-course-link').show();
-showNotice("<%= render_flash %>");
-

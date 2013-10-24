@@ -1,64 +1,90 @@
 module Gaku
   class CoursesController < GakuController
 
-    load_and_authorize_resource class: Gaku::Course
+    #load_and_authorize_resource class: Gaku::Course
 
     include StudentChooserController
 
     helper_method :sort_column, :sort_direction
 
-    inherit_resources
-    respond_to :js, :html
+    respond_to :js,   only: %i( new create edit update destroy )
+    respond_to :html, only: %i( index edit update show )
 
-    before_filter :before_show,  only: :show
-    before_filter :count,        only: [:create, :destroy, :index]
-    before_filter :load_data
+    before_action :set_course,   only: %i( edit show update destroy student_chooser )
+    before_action :set_syllabuses
+
+    def destroy
+      @course.destroy
+      set_count
+      respond_with @course
+    end
+
+    def new
+      @course = Course.new
+      respond_with @course
+    end
+
+    def create
+      @course = Course.new(course_params)
+      @course.save
+      set_count
+      respond_with @course
+    end
+
+    def edit
+      set_class_groups
+    end
+
+    def show
+      #format.json { render json: @course.as_json(include: :students) }
+    end
+
+    def update
+      @course.update(course_params)
+      respond_with(@course) do |format|
+        format.js { render }
+        format.html { redirect_to [:edit, @course] }
+      end
+    end
 
     def index
       @courses = SemesterCourse.group_by_semester
       @courses_without_semester = Course.without_semester
-    end
-
-    def show
-      super do |format|
-        format.json { render json: @course.as_json(include: :students) }
-      end
-    end
-
-    protected
-
-    def collection
-      @courses = Course.includes(:syllabus).all
-    end
-
-    def resource
-      @course = Course.includes(syllabus: {exams: :exam_portion_scores})
-                      .find(params[:id])
-    end
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:course).permit(course_attr)]
+      #@courses = Course.includes(:syllabus).all
+      set_count
+      respond_with @courses
     end
 
     private
 
-    def course_attr
-      %i(syllabus_id code)
+    def course_params
+      params.require(:course).permit(attributes)
     end
 
-    def load_data
-      @syllabuses = Syllabus.all.map { |s| [s.name, s.id] }
+    def attributes
+      %i( syllabus_id code )
     end
 
-    def count
+    def set_course
+      @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
+      set_notable
+    end
+
+    def set_notable
+      @notable = @course
+      @notable_resource = get_resource_name @notable
+    end
+
+    def set_count
       @count = Course.count
     end
 
-    def before_show
-      @notable = Course.find(params[:id])
-      @notable_resource = get_resource_name(@notable)
-      @class_groups = ClassGroup.all.map { |s| [s.name, s.id] }
+    def set_syllabuses
+      @syllabuses = Syllabus.all
+    end
+
+    def set_class_groups
+      @class_groups = ClassGroup.all
     end
 
     def sort_column

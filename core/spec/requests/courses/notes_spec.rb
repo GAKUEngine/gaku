@@ -11,7 +11,8 @@ describe 'Course Notes' do
   context 'new', js: true, type: 'note'  do
     before do
       @resource = course
-      visit gaku.course_path(@resource)
+      visit gaku.edit_course_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'new note'
@@ -20,7 +21,8 @@ describe 'Course Notes' do
   context 'existing', js: true, type: 'note'  do
     before do
       @resource = course_with_note
-      visit gaku.course_path(@resource)
+      visit gaku.edit_course_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'edit note'
