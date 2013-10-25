@@ -222,6 +222,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',       default: 0
+      t.integer  'exam_portions_count', default: 0
       t.references 'department'
     end
 
