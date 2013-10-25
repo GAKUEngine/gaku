@@ -1,8 +1,8 @@
 .row
-  .col-md-12.teacher-index
+  .col-md-12.exam-index
     = normal_form_for @exam, label: 'nil' do |f|
       = render 'form_fields', f: f
-      = submit_button t(:'exam.save'), id: 'submit-exam-button'
+      = buttons_for @exam, id: 'submit-exam-button'
 
 hr
 

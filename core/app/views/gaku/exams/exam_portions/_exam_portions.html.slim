@@ -4,7 +4,7 @@
     #new-exam-exam-portion.hide
     .pull-left
       = count_div 'exam-exam-portions-count' do
-        = print_count(@exam.exam_portions.count, t_exam_portion_list)
+        = print_count(@exam.exam_portions_count, t_exam_portion_list)
     .pull-right
       = ajax_link_to_new t(:'exam.add_portion'), [:new, @exam, :exam_portion], id: 'new-exam-exam-portion-link'
 
