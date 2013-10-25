@@ -6,10 +6,7 @@ module Gaku
 
     include Gaku::Grading::Calculations
 
-    before_filter :before_new,  only: :new
-    before_filter :set_count,       only: [:create, :destroy, :index]
-    before_filter :set_exam,    only: %i( show edit update soft_delete )
-    before_filter :set_notable, only: %i( show edit )
+    before_action :set_exam,    only: %i( show edit update soft_delete )
     before_action :set_unscoped_exam,  only: %i( destroy recovery )
     before_action :load_data, only: %i( new edit )
 
@@ -22,23 +19,33 @@ module Gaku
       end
 
       @exam.exam_portions.build
-
+      set_count
       respond_to do |format|
         format.html
         format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
       end
     end
 
-    def new; end
+    def show
+      respond_with @exam
+    end
+
+    def new
+      @exam = Exam.new
+      @master_portion = @exam.exam_portions.new
+      respond_with @exam
+    end
 
     def create
       @exam = Exam.create(exam_params)
       @exam.save
-      @count = Exam.count
+      set_count
       respond_with @exam
     end
 
-    def edit; end
+    def edit
+      respond_with @exam
+    end
 
     def update
       @exam.update(exam_params)
@@ -132,13 +139,9 @@ module Gaku
       ]
     end
 
-    def before_new
-      @exam = Exam.new
-      @master_portion = @exam.exam_portions.new
-    end
-
     def set_exam
       @exam = Exam.find(params[:id])
+      set_notable
     end
 
     def set_unscoped_exam
