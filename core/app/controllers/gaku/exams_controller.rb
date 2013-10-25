@@ -1,21 +1,55 @@
 module Gaku
   class ExamsController < GakuController
 
-    #load_and_authorize_resource class: Gaku::Exam
-
-    inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
     respond_to :html, :js, :json
     respond_to :xls, only: :export
 
     include Gaku::Grading::Calculations
 
-    before_filter :before_show, only: :show
     before_filter :before_new,  only: :new
-    before_filter :count,       only: [:create, :destroy, :index]
+    before_filter :set_count,       only: [:create, :destroy, :index]
     before_filter :set_exam,    only: %i( show edit update soft_delete )
+    before_filter :set_notable, only: %i( show edit )
     before_action :set_unscoped_exam,  only: %i( destroy recovery )
     before_action :load_data, only: %i( new edit )
+
+    def index
+      if params[:course_id]
+        @exams = Course.find(params[:course_id]).syllabus.exams
+      else
+        @exams = Exam.all
+        @exam = Exam.new
+      end
+
+      @exam.exam_portions.build
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
+      end
+    end
+
+    def new; end
+
+    def create
+      @exam = Exam.create(exam_params)
+      @exam.save
+      @count = Exam.count
+      respond_with @exam
+    end
+
+    def edit; end
+
+    def update
+      @exam.update(exam_params)
+      respond_with @exam, location: [:edit, @exam]
+    end
+
+    def destroy
+      @exam.destroy
+      set_count
+      respond_with @exam
+    end
 
     def recovery
       @exam.recover
@@ -33,21 +67,6 @@ module Gaku
       @course = Course.find(params[:course_id])
     end
 
-    def index
-      if params[:course_id]
-        @exams = Course.find(params[:course_id]).syllabus.exams
-      else
-        @exams = Exam.all
-        @exam = Exam.new
-      end
-
-      @exam.exam_portions.build
-
-      respond_to do |format|
-        format.html
-        format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
-      end
-    end
 
     def grading
       @course = Course.find(params[:course_id])
@@ -93,9 +112,8 @@ module Gaku
 
     protected
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:exam).permit(exam_attr)]
+    def exam_params
+      params.require(:exam).permit(attributes)
     end
 
     private
@@ -108,8 +126,10 @@ module Gaku
       t(:'exam.singular')
     end
 
-    def exam_attr
-      [:name, :department_id, :weight, :description, :adjustments, :use_weighting, { exam_portions_attributes: []}]
+    def attributes
+      [:name, :department_id, :weight, :description, :adjustments, :use_weighting,
+        exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]
+      ]
     end
 
     def before_new
@@ -125,12 +145,12 @@ module Gaku
       @exam = Exam.unscoped.find(params[:id])
     end
 
-    def before_show
-      @notable = set_exam
+    def set_notable
+      @notable = @exam
       @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
     end
 
-    def count
+    def set_count
       @count = Exam.count
     end
 
