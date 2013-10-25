@@ -1,0 +1,27 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#student-notes-tab-link data-toggle="tab" href="#notes"
+          = print_count student.notes_count, t(:'note.plural')
+      li
+        a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
+          = print_count student.courses.count, t(:'course.plural')
+      li
+        a#student-achievements-tab-link data-toggle="tab" href="#achievements_tab"
+          = print_count student.achievements.count, t(:'achievement.plural')
+
+    .tab-content
+
+      #notes.tab-pane.active
+        .row
+          .col-md-12
+            = render 'gaku/notes/notes'
+      #courses.tab-pane
+        .row
+          .col-md-12
+            = render 'gaku/students/course_enrollments/course_enrollments'
+      #achievements_tab.tab-pane
+        .row
+          .col-md-12
+            = render 'gaku/students/student_achievements/achievements_tab'
