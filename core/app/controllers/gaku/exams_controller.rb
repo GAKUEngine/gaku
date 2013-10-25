@@ -145,6 +145,7 @@ module Gaku
 
     def set_unscoped_exam
       @exam = Exam.unscoped.find(params[:id])
+      set_notable
     end
 
     def set_notable
