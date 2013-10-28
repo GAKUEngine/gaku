@@ -17,6 +17,10 @@ module Gaku
       t(:'course.list')
     end
 
+    def t_exam_portion_plural
+      t(:'exam_portion.plural')
+    end
+
     def t_semester_plural
       t(:'semester.plural')
     end
@@ -28,6 +32,7 @@ module Gaku
     def t_student_plural
       t(:'student.plural')
     end
+
 
     def t_student_list
       t(:'student.list')
