@@ -11,31 +11,29 @@
 }
 
 
-.close-form {
-position: relative;
-top: -2px;
-right: 0px;
-color: red;
-font-size: 24px;
+button.close-form {
+  float: right;
+  position: relative;
+  padding: 0px;
+  margin: -9px 0px 0px 0px;
+  border: 0;
+  font-size: 24px;
+  font-weight: bold;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  text-shadow: 0 1px 0 #ccc;
+  opacity:.8;
+  filter:alpha(opacity=80);
 
-padding: 0;
-cursor: pointer;
-background: transparent;
-border: 0;
--webkit-appearance: none;
-font-weight: bold;
-line-height: 1;
-text-shadow: 0 1px 0 #fff;
-opacity: .2;
-float: right;
+  &:hover, &:focus {
+    text-decoration:none;
+    cursor:pointer;
+    opacity:1;
+    filter:alpha(opacity=100);
+  }
 }
 
-.close-form:hover,.close-form:focus {
-  text-decoration:none;
-  cursor:pointer;
-  opacity:.5;
-  filter:alpha(opacity=50)
-}
 
 .panel:last-child {
 margin-bottom: 20px;
