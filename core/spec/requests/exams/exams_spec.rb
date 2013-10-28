@@ -35,7 +35,7 @@ describe 'Exams' do
       end.to change(Gaku::Exam, :count).by 1
 
       within(table) { has_content? department.name }
-      within(count_div) { has_content? 'Exams list(1)' }
+      count? 'Exams list(1)'
     end
 
     it { has_validations? }
@@ -82,7 +82,7 @@ describe 'Exams' do
     context '#edit from index view', js: true do
       before do
         visit gaku.exams_path
-        click '.js-edit-link'
+        click js_edit_link
       end
 
       it 'edits' do
@@ -99,7 +99,7 @@ describe 'Exams' do
           has_content? department.name
           has_content? 'Biology 2012'
         end
-        within(count_div) { has_content? 'Exams list(1)' }
+        count? 'Exams list(1)'
       end
 
       it 'has validations' do
@@ -109,7 +109,7 @@ describe 'Exams' do
     end
 
     it 'deletes', js: true do
-      within(count_div) { has_content? 'Exams list(1)' }
+      count? 'Exams list(1)'
       within(table) { has_content? exam.name }
 
       visit gaku.edit_exam_path(exam)
@@ -122,7 +122,7 @@ describe 'Exams' do
       end.to change(Gaku::Exam, :count).by -1
 
       expect(current_path).to eq gaku.exams_path
-      within(count_div) { has_no_content? 'Exams list(1)' }
+      count? 'Exams list(1)'
 
     end
 
