@@ -162,6 +162,10 @@ module Gaku
       t(:'attachment.list')
     end
 
+    def t_attachment_plural
+      t(:'attachment.plural')
+    end
+
     def t_school_year_list
       t(:'school_year.list')
     end
