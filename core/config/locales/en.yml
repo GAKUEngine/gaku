@@ -1,5 +1,4 @@
 en:
-  active: Active
   academic: Academic
   achievement:
     add: Add Achievement
@@ -13,6 +12,7 @@ en:
     plural: Achievements
     save: Save Achievement
     singular: Achievement
+  active: Active
   add: Add
   address:
     add: Add Address
@@ -257,6 +257,34 @@ en:
   delete: Delete
   department:
     add: Add department
+    defaults:
+      agriculture: Agriculture
+      aquaculture: Aquaculture
+      art: Art
+      business: Business
+      civics: Civics
+      elective_studies: Elective Studies
+      engineering: Engineering
+      english: English
+      extra-curricular_activities: Extra-Curricular Activities
+      fine_arts: Fine Arts
+      foreign_language: Foreign Language
+      gymnastics: Gymnastics
+      home_economics: Home Economics
+      information_sciences: Information Sciences
+      integrated_studies: Integrated Studies
+      manufacturing: Manufacturing
+      mathematics: Mathematics
+      medicine: Medicine
+      music: Music
+      native_language: Native Language
+      nursing: Nursing
+      physical_education: Physical Education
+      regional_history: Regional History
+      religion: Religion
+      science: Science
+      scientific_mathematics: Scientific Mathematics
+      welfare: Welfare
     edit: Edit department
     list: Departments list
     name: Department name
@@ -564,25 +592,7 @@ en:
         grading_sets: Grading Sets
       grading_methods: Grading Methods
       preset:
-        grading:
-          grading_method: Grading Method
-          grading_scheme: Grading Scheme
-        items:
-          defaults: Defaults Preset
-          grading: Grading Preset
-          locale: Locale Preset
-          names: Names
-          student: Student Preset
-        names: Names
-        pagination: Pagination Preset
         plural: Presets
-        save: Save
-        singular: Preset
-        student:
-          city: City
-          country: Country
-          gender: Gender
-          state: State
       school_details: School Details
       school_years: School Years
       schools: Schools
@@ -661,53 +671,39 @@ en:
     change: Change picture
     upload: Upload
   preset:
-    name: Name
-    list: Presets list
-    locale: Locale
-    names_order: Names Order
-    person:
-      singular: Person
-      gender: Gender
     address:
-      singular: Address
-      country: Country
-      state: State
       city: City
-
-    grading:
-      singular: Grading
-      grading_method: Grading Method
-      grading_scheme: Grading Scheme
-    names: Names
-
+      country: Country
+      singular: Address
+      state: State
     chooser_field:
       plural: Chooser Fields
-
     export_formats:
+      choose: Choose Format
+      documents: Documents
       plural: Export Formats
-      choose: Choose Format
-      documents: Documents
       printables: Printable
       spreadsheets: Spreadsheets
-    output_formats:
-      choose: Choose Format
-      documents: Documents
-      printables: Printable
-      spreadsheets: Spreadsheets
+    grading:
+      grading_method: Grading Method
+      grading_scheme: Grading Scheme
+      singular: Grading
+    list: Presets list
+    locale: Locale
+    name: Name
+    names_order: Names Order
     pagination: Pagination
     per_page:
       changes: Changes Per Page
       default: Default Items Per Page
       students: Students Per Page
       teachers: Teachers Per Page
+    person:
+      gender: Gender
+      singular: Person
     plural: Presets
     save: Save Presets
     singular: Preset
-    student:
-      city: City
-      country: Country
-      gender: Gender
-      state: State
   profile: Profile
   profiles:
     new: New Profile
