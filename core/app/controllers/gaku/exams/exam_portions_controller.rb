@@ -1,55 +1,76 @@
 module Gaku
   class Exams::ExamPortionsController < GakuController
 
-    #load_and_authorize_resource :exam, class: Gaku::Exam
-    #load_and_authorize_resource :exam_portion, through: :exam, class: Gaku::ExamPortion
     authorize_resource class: false
 
-    inherit_resources
-    belongs_to :exam
     respond_to :js, :html
 
-    before_filter :exam
-    before_filter :count, only: [:create, :destroy]
+    before_action :set_exam, only: %i( new show create edit update destroy sort )
+    before_action :set_exam_portion, only: %i( show edit update destroy )
 
+    def new
+      @exam_portion = ExamPortion.new
+      respond_with @exam_portion
+    end
+
+    def create
+      @exam_portion = @exam.exam_portions.create(exam_portion_params)
+      set_count
+      respond_with @exam_portion
+    end
+
+    def show
+      respond_with @exam_portion
+    end
+
+    def edit
+      respond_with @exam_portion
+    end
+
+    def update
+      @exam_portion.update(exam_portion_params)
+      respond_with @exam_portion, location: [:edit, @exam, @exam_portion]
+    end
 
     def destroy
-      super do |format|
-        if @exam.exam_portions.empty?
-          if @exam.destroy
-            flash[:notice] = t(:'notice.destroyed', resource: t(:'exam.singular'))
-          end
-        end
-        format.js { render }
-      end
+      @exam_portion.destroy
+      # if @exam.exam_portions.empty?
+      #   if @exam.destroy!
+      #     flash[:notice] = t(:'notice.destroyed', resource: t(:'exam.singular'))
+      #   end
+      # end
+      set_count
+      respond_with @exam_portion
     end
 
     def sort
       params[:exam_portion].each_with_index do |id, index|
-        @exam.exam_portions.update_all( {position: index}, {id: id} )
+        @exam.exam_portions.update_all({ position: index }, { id: id })
       end
       render nothing: true
     end
 
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:exam_portion).permit(exam_portion_attr)]
-    end
-
     private
 
-    def exam_portion_attr
-      %i(name weight problem_count max_score description adjustments)
+    def exam_portion_params
+      params.require(:exam_portion).permit(attributes)
     end
 
-    def exam
+
+    def attributes
+      %i( name weight problem_count max_score description adjustments )
+    end
+
+    def set_exam_portion
+      @exam_portion = ExamPortion.find(params[:id])
+    end
+
+    def set_exam
       @exam = Exam.find(params[:exam_id])
     end
 
-    def count
-      @count = @exam.exam_portions.count
+    def set_count
+      @count = @exam.reload.exam_portions_count
     end
   end
 end

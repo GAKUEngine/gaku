@@ -54,6 +54,7 @@ module Gaku
 
     def destroy
       @exam.destroy
+      set_count
       respond_with @exam
     end
 
