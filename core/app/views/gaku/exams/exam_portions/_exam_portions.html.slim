@@ -1,14 +1,27 @@
-.row
- = table_for 'exam-exam-portions-index' do
-    thead
-      tr
-        = th t(:'order')
-        = th t(:'exam_portion.name')
-        = th t(:'exam_portion.max_score')
-        - if @exam.use_weighting
-          = th t(:'exam_portion.weight')
-        = th t(:'exam_portion.problem_count')
-        = th t(:'exam_portion.attached_file_count')
-        = th_actions 3
-    tbody class='sortable' data-sort-url="#{sort_exam_exam_portions_path(@exam)}"
-      = render partial: 'gaku/exams/exam_portions/exam_portion', collection: @exam.exam_portions, as: :exam_portion
+#exam-portions-modal
+#exam-exam-portions
+  = index_header do
+    #new-exam-exam-portion.hide
+    .pull-left
+      = count_div 'exam-exam-portions-count' do
+        = print_count(@exam.exam_portions_count, t_exam_portion_list)
+    .pull-right
+      = ajax_link_to_new t(:'exam.add_portion'), [:new, @exam, :exam_portion], id: 'new-exam-exam-portion-link'
+
+  = index_body do
+     = table_for 'exam-exam-portions-index' do
+      thead
+        tr
+          = th t(:'order')
+          = th t(:'exam_portion.name')
+          = th t(:'exam_portion.max_score')
+          - if @exam.use_weighting
+            = th t(:'exam_portion.weight')
+          = th t(:'exam_portion.problem_count')
+          = th t(:'exam_portion.attached_file_count')
+          = th_actions 3
+      tbody class='sortable' data-sort-url="#{sort_exam_exam_portions_path(@exam)}"
+          = render partial: 'gaku/exams/exam_portions/exam_portion', collection: @exam.exam_portions, as: :exam_portion
+
+
+

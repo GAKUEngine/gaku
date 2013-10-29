@@ -176,7 +176,7 @@ Gaku::Core::Engine.routes.draw do
   resources :exams do
     member do
       put :create_exam_portion
-      delete :soft_delete
+      patch :soft_delete
       get :recovery
     end
 

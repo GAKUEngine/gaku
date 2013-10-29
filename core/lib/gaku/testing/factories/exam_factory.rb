@@ -7,6 +7,10 @@ FactoryGirl.define do
     after(:build) do |exam|
       exam.exam_portions << build(:exam_portion, exam: exam)
     end
+
+    factory :invalid_exam do
+      name nil
+    end
   end
 
   trait :with_portions do
