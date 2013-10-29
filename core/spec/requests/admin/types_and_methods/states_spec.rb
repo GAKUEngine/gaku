@@ -9,6 +9,7 @@ describe 'Admin States' do
   let(:state) { create(:state, name: 'Tokyo ', country: country) }
   let(:country2) { create(:country, name: 'Bulgaria', iso: 'BG')}
   let!(:country_table) { "#admin-#{country.iso.downcase}-states-index" }
+  let(:preset) { create(:preset, address: {country: 'JP'}) }
 
   context 'new', js:true do
     before do
@@ -101,7 +102,7 @@ describe 'Admin States' do
   context 'selected country when are set country preset', js: true do
     it 'show country state for country preset' do
       state
-      Gaku::Preset.set 'address_country', 'JP'
+      preset
       visit gaku.admin_states_path
 
       within(country_table) { has_content? state.name }

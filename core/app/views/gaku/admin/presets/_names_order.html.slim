@@ -1,0 +1,15 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do |f|
+  .row
+    .col-md-6
+      = f.text_field :names_order, value: @preset.names_order, title: t(:'preset.names_order')
+    .col-md-6
+      p
+        'Information:
+        br
+        '%first - Student first name
+        br
+        '%middle - Student middle name
+        br
+        '%last - Student last name
+
+  = buttons_for @preset, resource: 'admin-preset'

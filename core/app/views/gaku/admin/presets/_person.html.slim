@@ -1,0 +1,8 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-3
+        = f.fields_for :person do |p|
+          = p.label t(:'preset.person.gender')
+          = p.select :gender, genders, {selected: @preset['person']['gender'], prompt: t(:'gender.choose')}
+  = buttons_for @preset, resource: 'admin-preset'

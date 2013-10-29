@@ -31,7 +31,7 @@ module StudentChooserController
     @search = Gaku::Student.search(params[:q])
     @students = @search.result.where(enrollment_status_code: active_enrollment_statuses_codes)
                               .page(params[:page])
-                              .per(Gaku::Preset.students_per_page)
+
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

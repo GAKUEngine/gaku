@@ -1,4 +1,5 @@
 en:
+  active: Active
   academic: Academic
   achievement:
     add: Add Achievement
@@ -660,10 +661,34 @@ en:
     change: Change picture
     upload: Upload
   preset:
+    name: Name
+    list: Presets list
+    locale: Locale
+    names_order: Names Order
+    person:
+      singular: Person
+      gender: Gender
+    address:
+      singular: Address
+      country: Country
+      state: State
+      city: City
+
     grading:
+      singular: Grading
       grading_method: Grading Method
       grading_scheme: Grading Scheme
     names: Names
+
+    chooser_field:
+      plural: Chooser Fields
+
+    export_formats:
+      plural: Export Formats
+      choose: Choose Format
+      documents: Documents
+      printables: Printable
+      spreadsheets: Spreadsheets
     output_formats:
       choose: Choose Format
       documents: Documents
@@ -674,6 +699,7 @@ en:
       changes: Changes Per Page
       default: Default Items Per Page
       students: Students Per Page
+      teachers: Teachers Per Page
     plural: Presets
     save: Save Presets
     singular: Preset
