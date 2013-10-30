@@ -2,43 +2,67 @@ require 'spec_helper'
 
 describe Gaku::Admin::PresetsController do
 
-  before { as :admin }
+  let(:preset) { create(:preset) }
+  let(:country) { create(:country) }
 
-  describe 'GET #students' do
-    it 'is successful' do
-      gaku_get :students
-      response.should be_success
-    end
+  context 'as student' do
+    before { as :student }
 
-    it 'renders the :students view' do
-      gaku_get :students
-      response.should render_template :students
-    end
-  end
+    describe 'GET #index' do
+      before { gaku_get :index }
 
-  describe 'GET #locale' do
-
-    it 'is successful' do
-    gaku_get :locale
-    response.should be_success
-  end
-
-  it 'renders the :locale view' do
-    gaku_get :locale
-    response.should render_template :locale
+      it { should respond_with 302 }
+      it('redirects') { redirect_to? gaku.root_path }
+      it('sets unauthorized flash') { flash_unauthorized? }
     end
   end
 
-  describe 'GET #grading' do
-    it 'is successful' do
-    gaku_get :grading
-    response.should be_success
-  end
+  context 'as admin' do
+    before { as :admin }
 
-  it 'renders the :grading view' do
-    gaku_get :grading
-    response.should render_template :grading
+    context 'html' do
+      describe 'GET #index' do
+        before do
+          preset
+          gaku_get :index
+        end
+
+        it { should respond_with 200 }
+        it('assigns @presets') { expect(assigns(:presets)).to eq [preset] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
+      end
+
+
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: preset }
+
+        it { should respond_with 200 }
+        it('assigns @preset') { expect(assigns(:preset)).to eq preset }
+        it('assigns @countries') { expect(assigns(:countries)).to eq [country] }
+        it('assigns @per_page_values') { expect(assigns(:per_page_values)).to_not be_empty }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: preset, preset: attributes_for(:preset, name: 'custom')
+          end
+
+          it { should respond_with 302 }
+          it('redirects') { redirect_to? "/admin/presets/#{preset.id}/edit" }
+          it('assigns @preset') { expect(assigns(:preset)).to eq preset }
+          it('sets flash') { flash_updated? }
+          it "changes preset's attributes" do
+            preset.reload
+            expect(preset.name).to eq 'custom'
+          end
+        end
+      end
+
     end
-  end
 
+
+  end
 end

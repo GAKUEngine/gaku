@@ -1,17 +1,32 @@
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
+  - sudo /etc/init.d/postgresql stop
+  - sudo cp /etc/postgresql/9.1/main/pg_hba.conf ./
+  - sudo apt-get remove postgresql postgresql-9.1 -qq --purge
+  - source /etc/lsb-release
+  - echo "deb http://apt.postgresql.org/pub/repos/apt/ $DISTRIB_CODENAME-pgdg main" > pgdg.list
+  - sudo mv pgdg.list /etc/apt/sources.list.d/
+  - wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+  - sudo apt-get update
+  - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install postgresql-9.2 postgresql-contrib-9.2 -qq
+  - sudo /etc/init.d/postgresql stop
+  - sudo cp ./pg_hba.conf /etc/postgresql/9.2/main
+  - sudo /etc/init.d/postgresql start
   - psql -c 'create database gaku_test;' -U postgres
+
 bundler_args: --without production
+
 env:
   - TEST_SUITE=models GEM=core DB=postgres
   - TEST_SUITE=controllers GEM=core DB=postgres
   - TEST_SUITE=integration GEM=core DB=postgres
   - TEST_SUITE=routing GEM=core DB=postgres
   - TEST_SUITE=requests GEM=core DB=postgres
+
 before_install:
-  - travis_retry gem install bundler --pre
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
+
 script:
   - bundle exec rake test_app
   - SELENIUM=1 I18N=1 bundle exec rspec spec/$TEST_SUITE
@@ -23,5 +38,6 @@ notifications:
     on_failure: always
     channels:
       - "irc.freenode.org#gaku"
+
 rvm:
   - 2.0.0

@@ -54,7 +54,7 @@ module Gaku
     end
 
     def student_names(student, options = {})
-      @names_preset ||= Gaku::Preset.get(:names)
+      @names_preset ||= Gaku::Preset.names
       reading = options[:reading]
       if @names_preset.blank?
         return reading ? student.surname : student.name

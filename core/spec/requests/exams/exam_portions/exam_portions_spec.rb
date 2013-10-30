@@ -1,108 +1,81 @@
 require 'spec_helper'
 
-describe 'Exam portions' do
+describe 'Exam Portions' do
 
+  let!(:exam) { create(:exam, name: 'Linux') }
+  let(:exam_portion) { create(:exam_portion, exam: exam) }
+
+
+  before(:all) { set_resource 'exam-exam-portion' }
   before { as :admin }
 
-  let(:exam) { create(:exam, name: 'Unix') }
+  context '#new', js: true do
+    before do
 
-  before :all do
-    set_resource 'exam-exam-portion'
+      visit gaku.exam_path(exam)
+      click new_link
+      wait_until_visible submit
+    end
+
+    it 'creates new exam' do
+      expect do
+        fill_in 'exam_portion_name', with: 'Biology Exam Portion'
+
+        click submit
+        flash_created?
+      end.to change(Gaku::ExamPortion, :count).by 1
+
+      within(table) { has_content? 'Biology Exam Portion' }
+      count? 'Exam Portions list(1)'
+    end
+
+    it { has_validations? }
+
   end
 
-  context 'exam/show ' do
+  context 'existing' do
     before do
-      visit gaku.exam_path(exam)
-      exam.exam_portions.count.should eq 1
-      within (count_div) { page.should have_content 'Exam portions list(1)' }
+      exam_portion
     end
 
-    context '#add ', js: true do
-      before do
-        click new_link
-        wait_until_visible submit
+    context '#edit from edit view', js: true do
+      before { visit gaku.edit_exam_exam_portion_path(exam, exam_portion) }
+
+      it 'edits' do
+        fill_in 'exam_portion_name', with: 'Biology 2012 Portion'
+        click submit
+
+        flash_updated?
+        has_content? 'Biology 2012 Portion'
+        has_no_content? exam_portion.name
+
+        exam_portion.reload
+        expect(exam_portion.name).to eq 'Biology 2012 Portion'
+        expect(current_path).to eq gaku.edit_exam_exam_portion_path(exam, exam_portion)
       end
 
-      it 'adds a portion' do
-        #exam portions weight total cant be over 100
-        expect do
-          fill_in 'exam_portion_name', with: 'Ubuntu'
-          fill_in 'exam_portion_weight', with: 100.6
-          click submit
-          wait_until_invisible form
-        end.to change(exam.exam_portions,:count).by 1
-        flash_created?
-        within(count_div) { page.should have_content 'Exam portions list(2)' }
-        size_of(table_rows).should == 3
-        within (table) { page.should have_content 'Ubuntu' }
-        page.should have_content 'Ubuntu Weight'
-        page.should have_content 'Total Weight'
-        within('#weight-total') { page.should have_content '200.6' }
+      it 'has validations' do
+        fill_in 'exam_portion_name', with: ''
+        has_validations?
       end
-
     end
 
+    it 'deletes', js: true do
+      visit gaku.edit_exam_path(exam)
 
-    it 'edits a portion', js: true do
-      within(table){ click edit_link }
-      wait_until_visible modal
-      fill_in 'exam_portion_name', with: 'MacOS'
-      fill_in 'exam_portion_weight', with: 50.6
-      click submit
-
-      wait_until_invisible modal
-      within(table)do
-        page.should have_content 'MacOS'
-        page.should have_content '50.6'
-      end
-      within('#weight-total'){ page.should have_content '50.6' }
-      #flash_updated?
-    end
-
-    it 'shows a portion' do
-      click show_link
-      page.should have_content 'Show Exam Portion'
-    end
-
-    it 'deletes exam portion', js: true do
-      create(:exam_portion, exam: exam)
-
-      weight_total = find('#weight-total').text
-      exam_portion_name = exam.exam_portions.first.name
+      count? 'Exam Portions list(1)'
+      within(table) { has_content? exam_portion.name }
 
       expect do
-        ensure_delete_is_working
-      end.to change(Gaku::ExamPortion, :count).by -1
-
-      exam.exam_portions.count.should == 1
-
-      within(count_div) { page.should have_content 'Exam portions list(1)' }
-      #FIXME
-      #page.should_not have_content "#{exam_portion_name} Weight"
-      #within('#weight-total') { page.should_not have_content "#{weight_total}" }
-      flash_destroyed?
-    end
-
-    it 'deletes the last portion', js: true do
-      exam_portion_name = exam.exam_portions.first.name
-
-      expect do
-        within(table) { click delete_link }
+        click delete_link
         accept_alert
-        #FIXME
-        sleep 0.5
+        wait_until { flash_destroyed? }
       end.to change(Gaku::ExamPortion, :count).by -1
 
-      Gaku::Exam.count.should eq 0
-      current_path.should == '/exams'
-      flash_destroyed?
-    end
+      within(count_div) { has_no_content? 'Exam Portions list(1)' }
+      within(table) { has_no_content? exam_portion.name }
 
-    context 'when select back' do
-      it 'returns to exams/index page' do
-        click_on 'Back'
-        current_path.should == '/exams'
-      end
+
     end
 
   end

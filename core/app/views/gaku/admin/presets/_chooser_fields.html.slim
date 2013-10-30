@@ -1,0 +1,54 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-6
+        = f.label t(:'surname')
+        = f.check_box 'chooser_fields[surname]', {checked: preset_checked?(:surname)}
+
+    .row
+      .col-md-6
+        = f.label t(:'name')
+        = f.check_box 'chooser_fields[name]', { checked: preset_checked?(:name) }
+
+    .row
+      .col-md-6
+        = f.label (:'birth_date')
+        = f.check_box 'chooser_fields[birth_date]', {checked: preset_checked?(:birth_date)}
+
+    .row
+      .col-md-6
+        = f.label t(:'gender.label')
+        = f.check_box 'chooser_fields[sex]', {checked: preset_checked?(:sex)}
+
+    .row
+      .col-md-6
+        = f.label t(:'class_group.name')
+        = f.check_box 'chooser_fields[class_name]', {checked: preset_checked?(:class_name)}
+
+    .row
+      .col-md-6
+        = f.label t(:'class_group_enrollment.seat_number')
+        = f.check_box 'chooser_fields[seat_number]', {checked: preset_checked?(:seat_number)}
+
+    .row
+      .col-md-6
+        = f.label t(:'admitted')
+        = f.check_box 'chooser_fields[admitted_on]', {checked: preset_checked?(:admitted_on)}
+
+    .row
+      .col-md-6
+        = f.label t(:'address.primary')
+        = f.check_box 'chooser_fields[primary_address]', {checked: preset_checked?(:primary_address)}
+
+    .row
+      .col-md-6
+        = f.label t(:'contact.primary')
+        = f.check_box 'chooser_fields[primary_contact]', {checked: preset_checked?(:primary_contact)}
+
+    .row
+      .col-md-6
+        = f.label t(:'assignment.plural')
+        = f.check_box 'chooser_fields[assignments]', {checked: preset_checked?(:assignments)}
+
+  = buttons_for @preset, resource: 'admin-preset'
+

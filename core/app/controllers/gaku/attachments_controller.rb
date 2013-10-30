@@ -1,12 +1,18 @@
 module Gaku
   class AttachmentsController < GakuController
 
-    inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
-    before_filter :unscoped_attachment, only: [:recovery, :destroy]
+    before_action :set_attachment, only: %i( show edit update soft_delete download )
+    before_action :set_unscoped_attachment, only: %i( recovery destroy )
     respond_to :js, :html
 
     # TODO: merge and refactor two controllers
+
+    def new
+      @attachment = Attachment.new
+      respond_with @attachment
+    end
+
+
     def create
       @attachable = find_attachable
       @attachment = @attachable.attachments.build(params[:attachment])
@@ -19,29 +25,25 @@ module Gaku
       end
     end
 
+    def edit
+      respond_with @attachment
+    end
+
     def update
       super do |format|
         format.html { redirect_to :back }
       end
     end
 
-    def new
-      @note = @attachable.attachment.new
-    end
-
     def destroy
-      super do |format|
-        format.js { render :destroy }
-      end
+      @attachment.destroy!
+      respond_with @attachment
     end
 
     def soft_delete
-      @attachment = Attachment.find(params[:id])
       @attachment.update_attribute(:deleted, true)
       flash.now[:notice] = t(:'notice.destroyed', resource: t(:'attachment.singular'))
-      respond_to do |format|
-        format.js { render :soft_delete }
-      end
+      respond_with @attachment
     end
 
     def download
@@ -52,24 +54,25 @@ module Gaku
     def recovery
       @attachment.update_attribute(:deleted, false)
       flash.now[:notice] = t(:'attachment.attachment_recovered')
-
-      respond_to do |format|
-        format.js { render :recover_attachment }
-      end
+      respond_with @attachment
     end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:attachment).permit(attachment_attr)]
+    def attachment_params
+      params.require(:attachment).permit(attachment_attr)
     end
 
     private
 
-    def attachment_attr
+
+    def attributes
       [:name, :description, :asset]
     end
 
-    def unscoped_attachment
+    def set_attachment
+      @attachment = Attachment.find(params[:id])
+    end
+
+    def set_unscoped_attachment
       @attachment = Attachment.unscoped.find(params[:id])
     end
 

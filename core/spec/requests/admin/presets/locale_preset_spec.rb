@@ -1,22 +1,28 @@
-  require 'spec_helper'
+require 'spec_helper'
 
-describe 'Admin Presets Locales' do
+describe 'Admin Presets Locale' do
 
+  before(:all) { set_resource 'admin-preset' }
   before { as :admin }
 
+  let!(:preset) { create(:preset) }
+
   before do
-    visit gaku.locale_admin_presets_path
+    visit gaku.admin_presets_path
+    click edit_link
+    click '#admin-preset-locale-tab-link'
   end
 
-  context '#default', js:true do
-    it 'saves' do
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:locale])).to eq({})
-      select 'en', from:'presets_language'
-      click '#submit-preset'
+  it 'saves', js: true do
+    select 'en', from:'preset_locale'
+    click submit
 
-      flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:locale])).to eq({language: 'en'})
-    end
+    flash_updated?
+    click '#admin-preset-locale-tab-link'
+    expect(find_field('preset_locale').value).to eq 'en'
+
+    preset.reload
+    expect(preset.locale).to eq 'en'
   end
 
 end

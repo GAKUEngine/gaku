@@ -39,7 +39,11 @@ module Gaku
     private
 
     def default_language
-      settings[:locale] = Preset.get('language')
+      if Preset.active.nil?
+        settings[:locale] = 'en'
+      else
+        settings[:locale] = Preset.active.locale['language']
+      end
     end
 
   end
