@@ -494,6 +494,7 @@ ja:
     label: 性別
     male: 男性
     unknown: 未登録
+  generate_report: 
   grade:
     all_exams: 全試験
     average_points: 平均点
