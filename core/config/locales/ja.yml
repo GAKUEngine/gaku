@@ -12,6 +12,7 @@ ja:
     plural: 実績
     save: 実績類を保存
     singular: 実績
+  active: 
   add: 追加
   address:
     add: 住所の追加
@@ -256,11 +257,39 @@ ja:
   delete: 削除
   department:
     add: 
-    edit: 
-    list: 
-    name: 
-    save: 
-    singular: 
+    defaults:
+      agriculture: 農業
+      aquaculture: 水産
+      art: 芸術
+      business: 商業
+      civics: 公民
+      elective_studies: 選択学習
+      engineering: 工学
+      english: 英語
+      extra-curricular_activities: 特別活動
+      fine_arts: 美術
+      foreign_language: 外国語
+      gymnastics: 体育
+      home_economics: 家庭
+      information_sciences: 情報
+      integrated_studies: 総合学習
+      manufacturing: 工業
+      mathematics: 数学
+      medicine: 医学
+      music: 音楽
+      native_language: 国語
+      nursing: 看護
+      physical_education: 保健体育
+      regional_history: 地理歴史
+      religion: 宗教
+      science: 理科
+      scientific_mathematics: 理数
+      welfare: 福祉
+    edit: 学科を編集
+    list: 学科一覧
+    name: 学科名
+    save: 学科を保存
+    singular: 学科
   description: 説明
   destroy: 消去
   devise:
@@ -299,7 +328,7 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
-      admin_create: 
+      admin_create: 管理者を作成
       admin_set_up: |-
         学園陣が初期状態です。
         管理者ユーザを登録して下さい。
@@ -465,6 +494,7 @@ ja:
     label: 性別
     male: 男性
     unknown: 未登録
+  generate_report: 
   grade:
     all_exams: 全試験
     average_points: 平均点
@@ -563,25 +593,7 @@ ja:
         grading_sets: 評価セット
       grading_methods: 評価法
       preset:
-        grading:
-          grading_method: 採点方法
-          grading_scheme: 採点方式
-        items:
-          defaults: 初期プリセット
-          grading: 採点プリセット
-          locale: 言語プリセット
-          names: 名前
-          student: 生徒プリセット
-        names: 名前
-        pagination: ページ分けの設定
         plural: プリセット
-        save: プリセットを保存
-        singular: プリセット
-        student:
-          city: 市区
-          country: 国
-          gender: 性別
-          state: 都道府県
       school_details: 学校詳細
       school_years: 学年管理
       schools: 学校
@@ -660,28 +672,39 @@ ja:
     change: 写真を変更
     upload: 写真をアップロード
   preset:
+    address:
+      city: 
+      country: 
+      singular: 
+      state: 
+    chooser_field:
+      plural: 
+    export_formats:
+      choose: 
+      documents: 
+      plural: 
+      printables: 
+      spreadsheets: 
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
-    names: 名前
-    output_formats:
-      choose: フォーマット選択
-      documents: ドキュメント
-      printables: 印刷物
-      spreadsheets: 表計算
+      singular: 
+    list: 
+    locale: 
+    name: 
+    names_order: 
     pagination: ページ分け
     per_page:
       changes: ページ当たりの差分
       default: ページ当たりの件数
       students: ページ毎の生徒数
+      teachers: 
+    person:
+      gender: 
+      singular: 
     plural: プリセット
     save: プリセットを保存
     singular: プリセット
-    student:
-      city: 市区町村
-      country: 国
-      gender: 性別
-      state: 都道府県
   profile: プロフィール
   profiles:
     new: 新規プロフィール登録

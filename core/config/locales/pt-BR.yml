@@ -12,6 +12,7 @@ pt-BR:
     plural: Conquistas
     save: Salvar Conquista
     singular: Conquista
+  active: 
   add: Adicionar
   address:
     add: Adicionar Endereço
@@ -256,6 +257,34 @@ pt-BR:
   delete: Excluir
   department:
     add: 
+    defaults:
+      agriculture: 
+      aquaculture: 
+      art: 
+      business: 
+      civics: 
+      elective_studies: 
+      engineering: 
+      english: 
+      extra-curricular_activities: 
+      fine_arts: 
+      foreign_language: 
+      gymnastics: 
+      home_economics: 
+      information_sciences: 
+      integrated_studies: 
+      manufacturing: 
+      mathematics: 
+      medicine: 
+      music: 
+      native_language: 
+      nursing: 
+      physical_education: 
+      regional_history: 
+      religion: 
+      science: 
+      scientific_mathematics: 
+      welfare: 
     edit: 
     list: 
     name: 
@@ -461,6 +490,7 @@ pt-BR:
     label: 
     male: 
     unknown: 
+  generate_report: 
   grade:
     all_exams: 
     average_points: 
@@ -559,25 +589,7 @@ pt-BR:
         grading_sets: 
       grading_methods: 
       preset:
-        grading:
-          grading_method: 
-          grading_scheme: 
-        items:
-          defaults: 
-          grading: 
-          locale: 
-          names: 
-          student: 
-        names: 
-        pagination: 
         plural: 
-        save: 
-        singular: 
-        student:
-          city: 
-          country: 
-          gender: 
-          state: 
       school_details: 
       school_years: 
       schools: 
@@ -656,28 +668,39 @@ pt-BR:
     change: 
     upload: 
   preset:
+    address:
+      city: 
+      country: 
+      singular: 
+      state: 
+    chooser_field:
+      plural: 
+    export_formats:
+      choose: 
+      documents: 
+      plural: 
+      printables: 
+      spreadsheets: 
     grading:
       grading_method: 
       grading_scheme: 
-    names: 
-    output_formats:
-      choose: 
-      documents: 
-      printables: 
-      spreadsheets: 
+      singular: 
+    list: 
+    locale: 
+    name: 
+    names_order: 
     pagination: 
     per_page:
       changes: 
       default: 
       students: 
+      teachers: 
+    person:
+      gender: 
+      singular: 
     plural: 
     save: 
     singular: 
-    student:
-      city: 
-      country: 
-      gender: 
-      state: 
   profile: 
   profiles:
     new: 
