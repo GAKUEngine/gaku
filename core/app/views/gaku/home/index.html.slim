@@ -1,13 +1,9 @@
-- content_for :title, translate("gaku_engine")
-.row-fluid
-  .span12
-    - if user_signed_in?
-      .row-fluid
-        .span12
-          = render partial: 'user_info'
-      .row-fluid
-        .span12
-          = render partial: 'user_menu'
-    - else
-      | 下記のリンクからログインを行ってください。
-      #{link_to t("devise.sign_in"), new_user_session_path}
+/- content_for :title, translate("comname")
+- if user_signed_in?
+  = render partial: 'user_info'
+  = render partial: 'user_menu'
+  = well_div do
+    h1 Test dayo---
+- else
+  | 下記のリンクからログインを行ってください。
+  #{link_to t("devise.sign_in"), new_user_session_path}

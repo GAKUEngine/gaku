@@ -15,7 +15,7 @@ describe 'CourseGroup Courses' do
   context 'new', js: true do
     before do
       @course = course
-      visit gaku.course_group_path(course_group)
+      visit gaku.edit_course_group_path(course_group)
       @data = course_group
       @select = 'course_group_enrollment_course_id'
     end
@@ -27,7 +27,7 @@ describe 'CourseGroup Courses' do
 
     before do
       course_group.courses << course
-      visit gaku.course_group_path(course_group)
+      visit gaku.edit_course_group_path(course_group)
       @data = course_group
 
     end

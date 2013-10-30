@@ -1,14 +1,17 @@
-= well_div do
-  .span9#guardian-table
-    = show_table do
-      = big_person_caption_for(@guardian)
-      tbody
-        = render 'show_table', guardian: @guardian
-  .span3.well
-    = render partial: 'picture', locals: { guardian: @guardian, student: @student }
+= panel_for 'guardian-panel' do
+  = panel_header 'Guardian information', @guardian
 
+  table.table.table-bordered.th-center
+    tbody
+      = render 'gaku/shared/fields/person_show_table', person: @guardian
+      = render 'gaku/shared/fields/address_and_contact_show_table', person: @guardian
+      tr
+        th.active = t(:'guardian.relationship')
+        td colspan="3" = @guardian.relationship
 
-= render 'tabs', guardian: @guardian
+= render 'tabs'
 
-= well_div do
-  = link_to_back @student
+= footer do
+  .col-md-12
+      = link_to_back @student
+

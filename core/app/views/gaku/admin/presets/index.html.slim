@@ -1,0 +1,16 @@
+= content_for :index_header do
+  .pull-left
+    = count_div 'admin-presets-count' do
+      = print_count @count, t(:'preset.list')
+
+#admin-presets
+  = table_for 'admin-presets-index' do
+    thead
+      tr
+        = th t(:'active')
+        = th t(:'preset.name')
+        = th t(:'default')
+        = th_actions 1
+
+    tbody
+      = render partial: 'gaku/admin/presets/preset', collection: @presets, as: :preset

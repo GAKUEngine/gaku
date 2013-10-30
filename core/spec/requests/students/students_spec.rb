@@ -45,6 +45,7 @@ describe 'Students' do
 
       within('#students-checked-div') do
         page.should have_content 'Chosen students(1)'
+        within('.show-chosen-table') { has_content? 'Show'}
         click_link 'Show'
         wait_until_visible '#chosen-table'
         page.should have_content "#{student.name}"
@@ -81,16 +82,14 @@ describe 'Students' do
     it 'deletes', js: true do
       visit gaku.edit_student_path(student2)
       student_count = Gaku::Student.count
-      page.should have_content "#{student2.name}"
 
       expect do
-        click '#delete-student-link'
+        click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
         wait_until { flash_destroyed? }
       end.to change(Gaku::Student, :count).by -1
 
-      page.should_not have_content "#{student2.name}"
       within(count_div) { page.should_not have_content 'Students list(#{student_count - 1})' }
       current_path.should eq gaku.students_path
     end
@@ -118,10 +117,6 @@ describe 'Students' do
     end
 
     it {has_validations?}
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
 end

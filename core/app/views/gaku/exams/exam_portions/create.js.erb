@@ -2,9 +2,9 @@ $('#new-exam-exam-portion').slide();
 $('#new-exam-exam-portion-link').show();
 showNotice("<%= render_flash %>");
 
-$('#exam-exam-portions-index tbody').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion", {exam_portion: @exam_portion}) %>');
+$('#exam-exam-portions-index tbody').append('<%= j render("gaku/exams/exam_portions/exam_portion", {exam_portion: @exam_portion}) %>');
 
-$('.exam-exam-portions-count').html("<%= print_count(@count+1, t_exam_portion_list) %>");
+$('.exam-exam-portions-count').html("<%= print_count(@count, t_exam_portion_list) %>");
 
 <% if @exam.use_weighting? %>
 
@@ -24,7 +24,7 @@ $('.exam-exam-portions-count').html("<%= print_count(@count+1, t_exam_portion_li
   for (var i = 0; i < weights.length; i++) {
     total += parseFloat(weights[i]);
   }
-  
+
   $('.exam-portions-weight tbody form').each(function(i, form){
     $(form).find('input.exam-portion-weight').val(parseFloat(weights[i]))
   })
@@ -33,7 +33,7 @@ $('.exam-exam-portions-count').html("<%= print_count(@count+1, t_exam_portion_li
     tdWeight = $(tr).find('td')[3]
     $(tdWeight).text(weights[i])
   })
-  
+
   $('#weight-total').text(total);
 <% end %>
 
@@ -42,7 +42,7 @@ $('.exam-exam-portions-count').html("<%= print_count(@count+1, t_exam_portion_li
 error = '<%= @exam_portion.custom_errors %>'
 
 if(error){
-  $('.exam-portion-error').html('<%= render_js_partial("gaku/exams/exam_portions/custom_exam_portion_error", {error: @exam_portion.custom_errors}) %>')
+  $('.exam-portion-error').html('<%= j render("gaku/exams/exam_portions/custom_exam_portion_error", {error: @exam_portion.custom_errors}) %>')
 }else{
   $('.exam-portion-error').html('');
 }

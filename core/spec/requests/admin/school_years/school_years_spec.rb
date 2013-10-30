@@ -51,9 +51,6 @@ describe 'Admin School Years' do
       end
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -79,10 +76,6 @@ describe 'Admin School Years' do
         page.should have_content '2014 October 09'
 
         flash_updated?
-      end
-
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
       end
 
       context 'validations' do

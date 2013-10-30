@@ -1,6 +1,6 @@
-= remote_form_for [@syllabus, Gaku::ExamSyllabus.new], url: syllabus_exam_syllabuses_path(@syllabus), method: 'post' do |f|
+= remote_form_for [@syllabus, Gaku::ExamSyllabus.new], url: syllabus_exam_syllabuses_path(@syllabus), method: 'post', label: t(:'exam.singular'), resource: 'existing-exam'  do |f|
 
   = f.select :exam_id, Gaku::Exam.all.reject {|e| @syllabus.exams.include?(e)}.collect{ |exam| ["#{exam.name}", exam.id]}, {prompt: t('exam.choose')}, {class: 'chzn-select'}
   = f.hidden_field :syllabus_id, value: @syllabus.id
 
-  = buttons_for @syllabus, nested_id: 'existing-exam', label: t('exam.add')
+  = buttons_for @syllabus, { resource: 'existing-exam', label: t(:'exam.add') }

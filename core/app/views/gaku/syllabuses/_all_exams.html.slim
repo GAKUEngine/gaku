@@ -1,0 +1,17 @@
+#syllabus-exams
+  = index_header do
+    .pull-left
+      = count_div 'exams-count' do
+        = print_count @syllabus.exams_count, t(:'exam.list')
+    .pull-right
+      = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
+      = link_to t(:'exam.add_existing'), '', id: 'new-existing-exam-link', class: 'btn btn-primary'
+
+  .row
+    .col-md-12
+      #new-existing-exam-errors
+      #new-existing-exam.hide
+        = render 'gaku/syllabuses/exams/select_form'
+
+      #new-syllabus-exam.hide
+      = render 'gaku/syllabuses/exams/exams'

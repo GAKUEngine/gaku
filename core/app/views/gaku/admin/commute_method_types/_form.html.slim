@@ -1,3 +1,3 @@
-= remote_form_for [:admin, @commute_method_type] do |f|
+= remote_form_for [:admin, @commute_method_type], resource: 'admin-commute-method-type' do |f|
   = f.text_field :name, label: t(:'commute_method_type.name')
-  = buttons_for @commute_method_type, nested_id: 'admin-commute-method-type'
+  = buttons_for @commute_method_type, resource: 'admin-commute-method-type'

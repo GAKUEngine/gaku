@@ -14,7 +14,7 @@ describe 'CourseEnrollment'  do
 
   context 'no existing class group', js: true do
     before do
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
       click new_link
       wait_until_visible submit
     end
@@ -24,15 +24,12 @@ describe 'CourseEnrollment'  do
       page.should have_content 'No Class Group selected'
     end
 
-    it 'cancels enrolling', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'empty class group', js: true do
     it 'errors if class group is empty' do
       class_group
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
 
       click new_link
 
@@ -47,7 +44,7 @@ describe 'CourseEnrollment'  do
   context 'class group with 2 students', js: true do
     before do
       class_group_with_students
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
     end
 
     it 'enrolls a class group' do
@@ -70,7 +67,7 @@ describe 'CourseEnrollment'  do
     it 'errors if all students are already added' do
       course.students << class_group_with_students.students.first
       course.students << class_group_with_students.students.second
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
 
       click new_link
 

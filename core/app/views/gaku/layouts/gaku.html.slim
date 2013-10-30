@@ -9,15 +9,13 @@ html
     = javascript_include_tag "gaku/all"
     = csrf_meta_tags
   body data-action=current_controller_action data-parent-controller=current_parent_controller
-    = render partial: 'gaku/shared/modal_config'
-    = render partial: "gaku/shared/menubar"
-    .container-fluid
+    .container
+      = render 'gaku/shared/modal_config'
+      = render 'gaku/shared/menubar'
       #notice
         - unless flash.empty?
           = render "gaku/shared/flash", flash: flash
       #errors
       #modal-dialogs
 
-      .row-fluid
-        .span12
-          = content_for?(:content) ? yield(:content) : yield
+      = content_for?(:content) ? yield(:content) : yield

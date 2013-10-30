@@ -61,9 +61,6 @@ describe 'Admin Program' do
 
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing', js: true do
@@ -104,9 +101,6 @@ describe 'Admin Program' do
 
       end
 
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
 
     it 'deletes', js: true do

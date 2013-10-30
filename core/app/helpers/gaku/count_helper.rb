@@ -1,7 +1,7 @@
 module Gaku::CountHelper
 
   def count_div(html_class, &block)
-    content_tag :h4, class: "mt-xs mb-0 #{html_class}" do
+    content_tag :h3, class: "mt-xs #{html_class}" do
       block.call
     end
   end

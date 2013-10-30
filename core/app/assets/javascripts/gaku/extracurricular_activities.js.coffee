@@ -3,7 +3,7 @@ ready = ->
   self = this
 
   class ExtracurricularActivitiesController
-    show: ->
+    edit: ->
       self.app.student_chooser()
 
   @app.extracurricular_activities = new ExtracurricularActivitiesController

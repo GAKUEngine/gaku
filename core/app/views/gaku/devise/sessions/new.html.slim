@@ -1,27 +1,24 @@
 div style="width:320px;margin:0 auto;"
-  .row-fluid
-    .span12
-      h3= t "devise.sessions.sign_in"
-  .row-fluid
-    .span12
-      hr/
-  .row-fluid
-    .span12
-      .well
-        .row-fluid
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title = t "devise.sessions.sign_in"
+        .panel-body
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            .row-fluid
-              = f.label :login, t("devise.login")
-              = f.text_field :login, class: 'span12'
-            .row-fluid
-              = f.label :password, t("devise.password")
-              = f.password_field :password, class: 'span12'
-            .row-fluid
+            .form-group
+              = f.label :login, t("devise.login"), class: 'control-label'
+              = f.text_field :login, class: 'form-control col-md-12'
+            .form-group
+              = f.label :password, t("devise.password"), class: 'control-label'
+              = f.password_field :password, class: 'form-control col-md-12'
+            .checkbox
               - if devise_mapping.rememberable?
-                .span12.form-inline
-                  = f.check_box :remember_me
-                  = f.label :remember_me, t("devise.sessions.remember_me"), class: "help-inline"
-            .row-fluid.mt-xs
-              = f.submit t("devise.sessions.sign_in"), id: 'sign_in', class: 'span12 btn btn-primary'
-        .row-fluid.mt-s
-          = render "devise/shared/links"
+                = f.check_box :remember_me
+                = f.label :remember_me, "&nbsp;".html_safe + t("devise.sessions.remember_me")
+            hr.mt-0.mb-m
+            .form-group.mb-0
+              = f.submit t("devise.sessions.sign_in"), id: 'sign_in', class: 'col-md-12 btn btn-warning'
+        ul.list-group
+          li.list-group-item
+            = render "devise/shared/links"

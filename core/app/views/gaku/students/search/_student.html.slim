@@ -1,24 +1,24 @@
-.row-fluid
-  .span3
+.row.mb-m
+  .col-md-3
     = f.label :surname_cont, t(:surname)
-    = f.text_field :surname_cont, class: "span12"
+    = f.text_field :surname_cont, class: "col-md-12 form-control"
 
-  .span3
+  .col-md-3
     = f.label :name_cont, t(:name)
-    = f.text_field :name_cont, class: "span12"
+    = f.text_field :name_cont, class: "col-md-12 form-control"
 
-  .span3
+  .col-md-3
     = f.label :birth_date_gteq, t(:birth_date_from)
-    = f.text_field :birth_date_gteq, class: "span12"
+    = f.text_field :birth_date_gteq, class: "col-md-12 form-control"
 
-  .span3
+  .col-md-3
     = f.label :birth_date_lteq, t(:birth_date_to)
-    = f.text_field :birth_date_lteq, class: "span12"
+    = f.text_field :birth_date_lteq, class: "col-md-12 form-control"
 
-.row-fluid
+.row
   = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
                                         tag_name: t('enrollment_status.singular'),
                                         collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
                                         selected: (@enrollment_status_enrolled_code),
                                         prompt_position: "bottomRight:5",
-                                        html_options: {class: "validate[required] span12", id: "enrollment_status_dropdown"}})
+                                        html_options: {class: "validate[required] col-md-12", id: "enrollment_status_dropdown"}})

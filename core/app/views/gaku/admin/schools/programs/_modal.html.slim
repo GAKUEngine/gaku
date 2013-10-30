@@ -1,5 +1,3 @@
 = modal_for 'edit-program-modal' do
-  = modal_header t(:'program.edit')
-  = modal_form_for [:admin, @school, @program] do |f|
-    = modal_body do
-      = render 'form', f: f
+  = modal_form_for [:admin, @school, @program], resource: 'admin-school-program' do |f|
+    = render 'form', f: f

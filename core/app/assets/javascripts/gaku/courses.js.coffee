@@ -3,7 +3,7 @@ ready = ->
   self = this
 
   class CoursesController
-    show: ->
+    edit: ->
       self.app.student_chooser()
 
   @app.courses = new CoursesController

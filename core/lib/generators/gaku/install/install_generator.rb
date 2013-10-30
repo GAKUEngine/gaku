@@ -34,16 +34,6 @@ module Gaku
       remove_file 'public/index.html'
     end
 
-    def clear_logs
-      remove_file 'log/sidekiq.log'
-      add_file 'log/sidekiq.log'
-    end
-
-    def add_files
-      template 'config/sidekiq.yml', 'config/sidekiq.yml'
-      template 'Procfile', 'Procfile'
-    end
-
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
@@ -57,6 +47,7 @@ module Gaku
     def create_overrides_directory
       empty_directory 'app/overrides'
     end
+
 
     def configure_application
       application <<-APP

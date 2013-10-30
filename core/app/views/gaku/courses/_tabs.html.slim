@@ -1,25 +1,26 @@
-.row-fluid
-  .span12.well
-    .tabbable.tabs-right
-      ul.nav.nav-tabs
-        li.active
-          a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments"
-            = print_count @course.students_count, t(:'student.plural')
-        li
-          a#course-semester-courses-tab-link data-toggle="tab" href="#course-semesters"
-            = print_count @course.semesters.count, t(:'semester.plural')
-        li
-          a#new-course-assignment-tab-link data-toggle="tab" href="#course-assignments"
-            = t(:'assignment.plural')
-        li
-          a#course-exam-link data-toggle="tab" href="#course-exams"
-            = !@course.syllabus.nil? ? print_count(@course.syllabus.exams_count, t('exam.plural')) : t('exam.plural')
-      .tab-content
-        #course-enrollments.tab-pane.active
-          = render partial: "gaku/courses/enrollments/enrollments"
-        #course-semesters.tab-pane
-          = render partial: "gaku/courses/semester_courses/semester_courses"
-        #course-assignments.tab-pane
-          = render partial: "gaku/courses/assignments/assignments"
-        #course-exams.tab-pane
-          = render partial: "gaku/courses/exams/exams"
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments"
+          = print_count @course.students_count, t(:'student.plural')
+      li
+        a#course-semester-courses-tab-link data-toggle="tab" href="#course-semesters"
+          = print_count @course.semesters.count, t(:'semester.plural')
+
+      li
+        a#course-exam-link data-toggle="tab" href="#course-exams"
+          = !@course.syllabus.nil? ? print_count(@course.syllabus.exams_count, t(:'exam.plural')) : t(:'exam.plural')
+      li
+        a#course-notes-tab-link data-toggle="tab" href="#course-notes"
+          = print_count @course.notes_count, t(:'note.plural')
+
+    .tab-content
+      #course-enrollments.tab-pane.active
+        = render "gaku/courses/enrollments/enrollments"
+      #course-semesters.tab-pane
+        = render "gaku/courses/semester_courses/semester_courses"
+      #course-exams.tab-pane
+        = render "gaku/courses/exams/exams"
+      #course-notes.tab-pane
+        = render 'gaku/notes/notes'

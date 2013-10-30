@@ -18,7 +18,13 @@ module Gaku
 
     def create
       #@exam_syllabus = @syllabus.exams.create(params[:exam_syllabus])
+      set_count
       create!(notice: t(:'notice.added', resource: t(:'exam.singular')))
+    end
+
+    def destroy
+      set_count
+      destroy
     end
 
     protected
@@ -32,6 +38,10 @@ module Gaku
 
     def syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])
+    end
+
+    def set_count
+      @exams_count = @syllabus.reload.exams_count
     end
 
   end

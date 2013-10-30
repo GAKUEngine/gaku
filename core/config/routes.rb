@@ -1,7 +1,5 @@
 Gaku::Core::Engine.routes.draw do
 
-  mount Sidekiq::Web => '/sidekiq'
-
   concern :addressable do
     resources :addresses do
       member do
@@ -52,6 +50,8 @@ Gaku::Core::Engine.routes.draw do
   resources :class_groups do
     member do
       get :student_chooser
+      patch :soft_delete
+      patch :recover
     end
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses'
@@ -124,14 +124,13 @@ Gaku::Core::Engine.routes.draw do
     resources :exams, controller: 'syllabuses/exams'
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
     resources :notes
-    resources :importer, controller: 'syllabuses/importer'
   end
 
   resources :teachers, concerns: %i( addressable contactable ) do
     get 'page/:page', action: :index, on: :collection
     member do
-      get :soft_delete
-      get :recovery
+      patch :soft_delete
+      patch :recovery
       get :show_deleted
     end
 
@@ -150,12 +149,7 @@ Gaku::Core::Engine.routes.draw do
       get 'page/:page', action: :index
       get :load_autocomplete_data
 
-      resources :importer, controller: 'students/importer' do
-        collection do
-          get :get_roster
-          get :get_registration_roster
-        end
-      end
+
     end
 
     resources :simple_grades, controller: 'students/simple_grades'
@@ -182,7 +176,7 @@ Gaku::Core::Engine.routes.draw do
   resources :exams do
     member do
       put :create_exam_portion
-      delete :soft_delete
+      patch :soft_delete
       get :recovery
     end
 
@@ -199,8 +193,8 @@ Gaku::Core::Engine.routes.draw do
   resources :course_groups do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
     member do
-      delete :soft_delete
-      get :recovery
+      patch :soft_delete
+      patch :recovery
     end
   end
 
@@ -230,6 +224,7 @@ Gaku::Core::Engine.routes.draw do
     resources :contact_types
     resources :enrollment_statuses
     resources :attendance_types
+    resources :departments
     resources :users do
       get 'page/:page', action: :index, on: :collection
     end
@@ -261,19 +256,7 @@ Gaku::Core::Engine.routes.draw do
       resources :student_addresses, controller: 'student_address_changes'
     end
 
-    resources :presets do
-      collection do
-        get :students
-        get :locale
-        get :grading
-        get :pagination
-        get :defaults
-        get :output_formats
-        get :names
-
-        put :update_presets
-      end
-    end
+    resources :presets
 
     resources :disposals do
       collection do

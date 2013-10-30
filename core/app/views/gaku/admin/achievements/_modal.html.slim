@@ -1,6 +1,4 @@
 = modal_for 'edit-achievement-modal' do
-  = modal_header t(:'achievement.edit')
-  = normal_modal_form_for [:admin, @achievement] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = modal_buttons_for @achievement, nested_id: 'admin-achievement'
+  = normal_modal_form_for [:admin, @achievement], resource: 'admin-achievement' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @achievement, resource: 'admin-achievement'

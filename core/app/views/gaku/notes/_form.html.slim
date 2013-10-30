@@ -1,6 +1,6 @@
-= remote_form_for [@notable, @note] do |f|
+= remote_form_for [@notable, @note], { resource: "#{@notable_resource}-note" } do |f|
   = render 'form_fields', f: f
-  = buttons_for @note, nested_id: "#{@notable_resource}-note"
+  = buttons_for @note, { resource: "#{@notable_resource}-note" }
 
 javascript:
   window.notable_resource = '#{@notable_resource}';

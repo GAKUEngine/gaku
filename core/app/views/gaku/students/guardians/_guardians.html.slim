@@ -8,8 +8,6 @@
     .pull-right
       = ajax_link_to_new t(:'guardian.add'), [:new, @student, :guardian], id: "new-student-guardian-link" if can_edit?
 
-  = hr
-
   = index_body do
     = table_for "student-guardians-index" do
         thead

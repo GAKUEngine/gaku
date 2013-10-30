@@ -1,11 +1,11 @@
-.span12.well
-  .row-fluid
+.col-md-12.well
+  .row
     h3  = t('exam.weight')
-  .row-fluid
+  .row
     .exam-portion-error
-      / .alert.alert-error
+      / .alert.alert-danger
       /   = t('exam.weight')
-  .row-fluid
+  .row
     table.table.table-striped.table-bordered.table-condensed.exam-portions-weight
       thead
         - exam.exam_portions.each_with_index do |portion, i|

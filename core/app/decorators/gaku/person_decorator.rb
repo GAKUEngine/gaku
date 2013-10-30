@@ -25,7 +25,7 @@ module Gaku
     end
 
     def student_names(options = {})
-      @names_preset ||= Gaku::Preset.get(:names)
+      @names_preset ||= Gaku::Preset.names
       preset = @names_preset
 
       if options[:without_formating]

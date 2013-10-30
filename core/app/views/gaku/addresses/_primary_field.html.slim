@@ -2,12 +2,11 @@ td class='primary_address'
 
   - if can_edit?
     - if address.primary?
-      = link_to ok_icon, [:make_primary] + target, method: :patch, remote: true, class: 'span12 btn btn-mini btn-primary make-primary-address', data: { confirm: t('confirm') }, id: 'set_primary_link'
+      = link_to ok_icon, [:make_primary] + target, method: :patch, remote: true, class: 'col-md-12 btn btn-xs btn-primary make-primary-address', data: { confirm: t('confirm') }, id: 'set_primary_link'
     - else
-      = link_to ok_icon, [:make_primary] + target, remote: true, id: 'set_primary_link', class: 'span12 btn btn-mini make-primary-address', method: :patch, data: {confirm: t('confirm')}
-
+      = link_to ok_icon, [:make_primary] + target, remote: true, id: 'set_primary_link', class: 'col-md-12 btn btn-xs btn-default make-primary-address', method: :patch, data: {confirm: t('confirm')}
 
   - else
     - if address.primary?
-      span.btn.btn-mini.btn-primary
+      span.btn.btn-xs.btn-primary
         = primary_checkbox

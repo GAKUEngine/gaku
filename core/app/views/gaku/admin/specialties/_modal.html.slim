@@ -1,6 +1,4 @@
 = modal_for 'edit-specialty-modal' do
-  = modal_header t(:'specialty.edit')
-  = modal_form_for [:admin, @specialty] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = modal_buttons_for @specialty, nested_id: 'admin-specialty', label: t(:'specialty.save')
+  = modal_form_for [:admin, @specialty], resource: 'admin-specialty' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @specialty, { resource: 'admin-specialty', label: t(:'specialty.save') }

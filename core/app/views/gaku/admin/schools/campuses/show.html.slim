@@ -1,5 +1,5 @@
 = well_div do
-  .span9
+  .col-md-9
     = table_for 'campus-index' do
       tbody
         tr
@@ -7,7 +7,7 @@
           td.vm
             = @campus.name
 
-  .span3.well
+  .col-md-3.well
     = render 'picture', campus: @campus
 
 = well_div do
@@ -16,6 +16,6 @@
   = render 'gaku/admin/schools/campuses/addresses/addresses'
 
 = well_div do
-  .span12
+  .col-md-12
     = link_to_back admin_school_path(@school)
 

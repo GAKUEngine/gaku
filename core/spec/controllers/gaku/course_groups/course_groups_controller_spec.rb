@@ -2,74 +2,189 @@ require 'spec_helper'
 
 describe Gaku::CourseGroupsController do
 
-  before { as :admin }
-
   let(:course_group) { create(:course_group) }
+  let(:invalid_course_group) { create(:invalid_course_group) }
 
-  describe 'GET #index' do
-    it 'is successful' do
-      gaku_get :index
-      response.should be_success
-    end
+  context 'as admin' do
+    before { as :admin }
 
-    it 'populates an array of course group' do
-      gaku_get :index
-      assigns(:course_groups).should eq [course_group]
-    end
+    context 'html' do
+      describe 'GET #index' do
+        before do
+          course_group
+          gaku_get :index
+        end
 
-    it 'renders the :index view' do
-      gaku_get :index
-      response.should render_template :index
-    end
-  end
-
-  describe 'GET #show' do
-    it 'assigns the requested course group to @course_group' do
-      gaku_get :show, id: course_group
-      assigns(:course_group).should eq course_group
-    end
-
-    it 'renders the :show template' do
-      gaku_get :show, id: course_group
-      response.should render_template :show
-    end
-  end
-
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'saves the new course group in the db' do
-        expect do
-          gaku_post :create, course_group: attributes_for(:course_group)
-        end.to change(Gaku::CourseGroup, :count).by 1
-
-        controller.should set_the_flash
+        it { should respond_with 200 }
+        it('assigns @course_groups') { expect(assigns(:course_groups)).to eq [course_group] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
       end
-    end
-  end
 
-  describe 'PUT #update' do
+      describe 'GET #soft_delete' do
+        let(:get_soft_delete) { gaku_get :soft_delete, id: course_group }
 
-    it 'locates the requested @course_group' do
-      gaku_put :update, id: course_group, course_group: attributes_for(:course_group)
-      assigns(:course_group).should eq(course_group)
-    end
+        it 'redirects' do
+          get_soft_delete
+          should respond_with(302)
+        end
 
-    context 'valid attributes' do
-      it "changes course group's attributes" do
-        gaku_put :update, id: course_group,course_group: attributes_for(:course_group, name: 'AZ')
-        course_group.reload
-        course_group.name.should eq('AZ')
+        it 'assigns  @course_group' do
+          get_soft_delete
+          expect(assigns(:course_group)).to eq course_group
+        end
 
-        controller.should set_the_flash
+        it 'updates :deleted attribute' do
+          expect do
+            get_soft_delete
+            course_group.reload
+          end.to change(course_group, :deleted)
+        end
       end
+
+    end
+
+    context 'js' do
+
+      describe 'XHR #new' do
+        before { gaku_js_get :new }
+
+        it { should respond_with 200 }
+        it('assigns @course_group') { expect(assigns(:course_group)).to be_a_new(Gaku::CourseGroup) }
+        it('renders the :new template') { template? :new }
+      end
+
+      describe 'POST #create' do
+        context 'with valid attributes' do
+          let(:valid_js_create) do
+            gaku_js_post :create, course_group: attributes_for(:course_group)
+          end
+
+          it 'creates new course_group' do
+            expect do
+              valid_js_create
+            end.to change(Gaku::CourseGroup, :count).by(1)
+          end
+
+          it 'renders flash' do
+            valid_js_create
+            flash_created?
+          end
+
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 1
+          end
+        end
+
+        context 'with invalid attributes' do
+          let(:invalid_js_create) do
+            gaku_js_post :create, course_group: attributes_for(:invalid_course_group)
+          end
+
+          it 'does not save the new course_group' do
+            expect do
+              invalid_js_create
+            end.to_not change(Gaku::CourseGroup, :count)
+          end
+
+          it 're-renders the new method' do
+            invalid_js_create
+            template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 0
+          end
+        end
+      end
+
+      describe 'XHR #edit' do
+        before { gaku_js_get :edit, id: course_group }
+
+        it { should respond_with 200 }
+        it('assigns @course_group') { expect(assigns(:course_group)).to eq course_group }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: course_group, course_group: attributes_for(:course_group, name: 'mobifon')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @course_group') { expect(assigns(:course_group)).to eq course_group }
+          it('sets flash') { flash_updated? }
+          it "changes course_group's attributes" do
+            course_group.reload
+            expect(course_group.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_js_patch :update, id: course_group, course_group: attributes_for(:invalid_course_group, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @course_group') { expect(assigns(:course_group)).to eq course_group }
+
+          it "does not change course_group's attributes" do
+            course_group.reload
+            expect(course_group.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'XHR DELETE #destroy' do
+        it 'deletes the course_group' do
+          course_group
+          expect do
+            gaku_js_delete :destroy, id: course_group
+          end.to change(Gaku::CourseGroup, :count).by(-1)
+        end
+
+        it 'decrements @count' do
+          gaku_js_delete :destroy, id: course_group
+          expect(assigns(:count)).to eq 0
+        end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: course_group
+          flash_destroyed?
+        end
+      end
+
+      describe 'XHR GET #recovery' do
+        let(:get_recovery) { gaku_js_get :recovery, id: course_group }
+
+        it 'is successfull' do
+          get_recovery
+          should respond_with(200)
+        end
+
+        it 'assigns  @course_group' do
+          get_recovery
+          expect(assigns(:course_group)).to eq course_group
+        end
+
+        it 'renders :recovery' do
+          get_recovery
+          should render_template :recovery
+       end
+
+        it 'updates :deleted attribute' do
+          course_group.soft_delete
+          expect do
+            get_recovery
+            course_group.reload
+          end.to change(course_group, :deleted)
+        end
+      end
+
     end
   end
 
-  describe 'DELETE #destroy' do
-    pending 'deletes the course group' do
-      gaku_delete :destroy, id: course_group
-      expect(course_group.deleted).to eq true
-      controller.should set_the_flash
-    end
-  end
 end

@@ -1,13 +1,18 @@
-.row-fluid
-  .span9
+.row
+  .col-md-9
     = f.text_field :name, label: t(:'exam.name')
-  .span3
+  .col-md-3
     = f.number_field :weight, label: t(:'exam.weight')
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = f.text_area :description, size: "0x2", label: t(:'exam.description')
-  .span6
+  .col-md-6
     = f.text_area :adjustments, size: "0x2", label: t(:'exam.adjustments')
-.row-fluid
-  .span12
+
+.row
+  .col-md-6
+    = f.select :department_id, options_from_collection_for_select(@departments, :id, :name), {prompt: true}, class: 'span6', label: t(:'department.singular')
+
+.row
+  .col-md-6
     = f.check_box :use_weighting, label: t(:'exam_portion.use_weighting')

@@ -7,6 +7,7 @@ module Gaku
     respond_to :html, only: :index
 
     before_action :set_specialty, only: %i( edit update destroy )
+    before_action :load_data, only: %i( new edit )
 
     def index
       @specialties = Specialty.all
@@ -46,12 +47,16 @@ module Gaku
       @specialty = Specialty.find(params[:id])
     end
 
+    def load_data
+      @departments = Department.all
+    end
+
     def specialty_params
       params.require(:specialty).permit(attributes)
     end
 
     def attributes
-      %i(name description major_only)
+      %i(name description major_only department_id)
     end
 
   end

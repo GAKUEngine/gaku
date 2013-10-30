@@ -8,8 +8,6 @@ div class="#{@resource_name.pluralize}"
     .pull-right
       = ajax_link_to_new t(:'contact.add'), [:new, nested_resources, :contact].flatten, id: "new-#{@resource_name}-link" if can_edit?
 
-  = hr
-
   = index_body do
     = table_for "#{@resource_name.pluralize}-index" do
       thead

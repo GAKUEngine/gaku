@@ -1,14 +1,14 @@
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = f.select :contact_type_id,  options_from_collection_for_select(@contact_types, :id, :name), {prompt: t(:'contact_type.choose')}, label: t(:'contact_type.plural')
-  .span6
+  .col-md-6
     = f.text_field :data, label: t(:'contact.data')
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     = f.text_field :details, label: t(:'contact.details')
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = f.check_box :primary, label: t(:'contact.primary')
-  .span6
+  .col-md-6
     = f.check_box :emergency, label: t(:'contact.emergency')

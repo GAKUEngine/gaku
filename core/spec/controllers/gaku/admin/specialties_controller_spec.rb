@@ -4,6 +4,7 @@ describe Gaku::Admin::SpecialtiesController do
 
   let(:specialty) { create(:specialty) }
   let(:invalid_specialty) { create(:invalid_specialty) }
+  let(:department) { create(:department) }
 
   context 'as student' do
     before { as :student }
@@ -38,11 +39,16 @@ describe Gaku::Admin::SpecialtiesController do
     context 'js' do
 
       describe 'XHR #new' do
-        before { gaku_js_get :new }
+        before do
+          department
+          gaku_js_get :new
+        end
 
         it { should respond_with 200 }
         it('assigns @specialty') { expect(assigns(:specialty)).to be_a_new(Gaku::Specialty) }
         it('renders the :new template') { template? :new }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
+
       end
 
       describe 'POST #create' do
@@ -92,11 +98,15 @@ describe Gaku::Admin::SpecialtiesController do
       end
 
       describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: specialty }
+        before do
+          department
+          gaku_js_get :edit, id: specialty
+        end
 
         it { should respond_with 200 }
         it('assigns @specialty') { expect(assigns(:specialty)).to eq specialty }
         it('renders the :edit template') { template? :edit }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
       end
 
       describe 'PATCH #update' do

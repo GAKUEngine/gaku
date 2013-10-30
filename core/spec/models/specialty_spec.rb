@@ -8,6 +8,8 @@ describe Gaku::Specialty do
 
     it { should have_many(:program_specialties) }
     it { should have_many(:programs).through(:program_specialties) }
+
+    it { should belong_to :department }
   end
 
   describe 'validations' do

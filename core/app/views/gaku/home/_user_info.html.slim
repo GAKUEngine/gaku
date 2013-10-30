@@ -1,7 +1,7 @@
-.row-fluid
-  h3= t('user.info')
-.row-fluid
-  hr/
-.well
-  = t('email')+' '
-  = current_user.email
+h4= t('user.info')
+hr
+.row
+  .col-md-12
+    .well
+      = t('email')+' '
+      = current_user.email

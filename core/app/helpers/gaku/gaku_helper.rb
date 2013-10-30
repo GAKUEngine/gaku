@@ -5,6 +5,12 @@ module Gaku
     include TranslationsHelper
     include FlashHelper
 
+    def tr_for(resource, &block)
+      content_tag :tr, id: "#{resource.class.to_s.demodulize.underscore.dasherize}-#{resource.id}" do
+        block.call
+      end
+    end
+
     def current_parent_controller
       controller.controller_path.split('/').second
     end
@@ -131,6 +137,23 @@ module Gaku
 
     def disabled?(object)
       object.new_record? || object.country.states.blank?
+    end
+
+    def link_to_download(resource, options = {})
+      name = content_tag(:span, nil, class: 'glyphicon glyphicon-download')
+      attributes = {
+        class: "btn btn-xs btn-success download-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def ajax_link_to_recovery(resource, options = {})
+      name = content_tag(:span, nil, class: 'glyphicon glyphicon-repeat')
+      attributes = {
+        remote: true,
+        class: "btn btn-xs btn-success recovery-link"
+      }.merge(options)
+      link_to name, resource, attributes
     end
 
   end

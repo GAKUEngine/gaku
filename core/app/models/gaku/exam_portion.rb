@@ -4,7 +4,7 @@ module Gaku
 
     attr_accessor :custom_errors
 
-    belongs_to :exam
+    belongs_to :exam, counter_cache: true
     belongs_to :grading_method
 
     has_many :exam_schedules
@@ -78,7 +78,7 @@ module Gaku
     def refresh_positions
       exam_portions = exam.exam_portions
       exam_portions.pluck(:id).each_with_index do |id, index|
-        exam_portions.update_all({position: index}, {id: id})
+        exam_portions.where(id: id).update_all(position: index)
       end
     end
 

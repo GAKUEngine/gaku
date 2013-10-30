@@ -1,3 +1,5 @@
+// for HTML tag ----------------
+
 $c_red: #e45353; /* Error red */
 
 html {
@@ -10,7 +12,7 @@ html {
 }
 
 body {
-  padding-top: 55px;
+  padding-top: 70px;
 }
 
 @media (max-width: 768px) {
@@ -25,6 +27,17 @@ body {
     padding-top: 0;
   }
 }
+
+hr {
+  margin: 20px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+
+// for GAKUEngine ----------------
 
 .notice {
   border: 2px;
@@ -68,17 +81,36 @@ td.vm-tr {
   text-align: right;
 }
 
-//bootstrap fix ----------
-.btn-inverse a {
-  color: white;
+.table {
+  tr {
+    td {
+      .btn {
+        margin-right: 5px;
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+  &.th-center {
+    th {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
 }
 
-.row-fluid a[class*='span']  {
-  min-height:0px;
+.pull-right {
+  .btn {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
 }
-hr {
-  margin: 10px 0px;
-}
+
+// for bootstrap ----------------
+
 .btn-toolbar {
   margin: 0px;
   height: 28px;
@@ -86,36 +118,9 @@ hr {
     margin-right: 15px;
   }
 }
+
 .btn-group + .btn-group {
   margin-left: 0px;
-}
-.navbar .brand {
-  padding: 8px 20px 0px;
-}
-
-.navbar .nav > li > a {
-  padding: 11px 10px 10px;
-}
-.navbar .btn, .navbar .btn-group {
-margin-top: 7px;
-}
-
-.table {
-  margin-bottom: 0px;
-}
-
-table.table{
-  th {
-    vertical-align: middle;
-    text-align: center;
-  }
-}
-
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: white;
-}
-.table tbody tr:hover td, .table tbody tr:hover th {
-  // background-color: #e2f3e7;
 }
 
 .icon-chair {
@@ -142,23 +147,41 @@ form {
   margin-bottom:0px;
 }
 
-.nav {
-  margin-bottom: 0px;
-}
-
 .well {
   .well {
-    background-color: white;
+    background-color: #FFF;
     margin-bottom: 0px;
     .well {
-      background-color: whiteSmoke;
+      background-color: #F5F5F5;
       margin-bottom: 20px;
     }
   }
+  &.well-white {
+    background-color: #FFF;
+  }
+}
+
+.navbar-brand {
+  padding: 12px 15px 0px 15px;
+}
+
+.divider-vertical {
+  height: 42px;
+  border-right: 1px solid #B8B8B8;
+  border-left: 1px solid #F2F2F2;
+}
+
+.tab-content {
+  border: 1px solid #DDD;
+  padding: 15px;
+  border-top: none;
+  border-radius: 0px 0px 4px 4px;
 }
 
 
-//for fix -----
+// for fix ----------------
+
+.mt-0 { margin-top: 0px }
 .mt-xs { margin-top: 5px }
 .mt-s { margin-top: 10px }
 .mt-m { margin-top: 15px }
@@ -169,4 +192,13 @@ form {
 .mr-m { margin-right: 15px }
 .mr-l { margin-right: 20px }
 
+.mb-xs { margin-bottom: 5px }
+.mb-s { margin-bottom: 10px }
+.mb-m { margin-bottom: 15px }
+.mb-l { margin-bottom: 20px }
 .mb-0 { margin-bottom: 0px }
+
+.ml-xs { margin-left: 5px }
+.ml-s { margin-left: 10px }
+.ml-m { margin-left: 15px }
+.ml-l { margin-left: 20px }

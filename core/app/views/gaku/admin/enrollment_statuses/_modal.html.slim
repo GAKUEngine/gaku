@@ -1,6 +1,4 @@
 = modal_for 'edit-enrollment-status-modal' do
-  = modal_header t(:'enrollment_status.edit')
-  = modal_form_for [:admin, @enrollment_status] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = modal_buttons_for @enrollment_status, nested_id: 'admin-enrollment-status'
+  = modal_form_for [:admin, @enrollment_status], resource: 'admin-enrollment-status' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @enrollment_status, resource: 'admin-enrollment-status'

@@ -18,6 +18,8 @@ describe Gaku::Syllabus do
 
     it { should accept_nested_attributes_for :exams }
     it { should accept_nested_attributes_for :assignments }
+
+    it { should belong_to :department }
   end
 
   describe 'validations' do

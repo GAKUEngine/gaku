@@ -1,5 +1,5 @@
 tr id="student-#{student.id}"
-  = render 'gaku/shared/fields/student_fields', student: student
+  = render 'gaku/students/table_fields', student: student
   td
     = link_to_show student
     = link_to_edit [:edit, student]

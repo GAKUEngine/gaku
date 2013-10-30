@@ -1,12 +1,11 @@
+.hide *{id: 'new-' + @notable_resource + '-note'}
+
 = index_header do
-  .hide *{id: 'new-' + @notable_resource + '-note'}
   .pull-left
     = count_div "#{@notable_resource}-notes-count" do
       = print_count @notable.notes_count, t_note_list
   .pull-right
-    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], id: 'new-' + @notable_resource + '-note-link' if can_edit?
-
-= hr
+    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], {id: 'new-' + @notable_resource + '-note-link', class: 'btn btn-primary'} if can_edit?
 
 = index_body do
   = table_for "#{@notable_resource}-notes-index" do

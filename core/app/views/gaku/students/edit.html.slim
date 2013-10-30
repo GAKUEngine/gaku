@@ -1,9 +1,32 @@
-= render 'gaku/shared/student/edit', student: student
-= well_div do
-  .span9
+.row
+  .col-md-9
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#student-personal-tab-link data-toggle="tab" href="#personal"
+          = t(:'personal')
+      li
+        a#student-academic-tab-link data-toggle="tab" href="#academic"
+          = t(:'academic')
+
+    .tab-content
+      #personal.tab-pane.active
+        = render 'personal', student: student
+      #academic.tab-pane
+        = render 'academic', student: student
+  .col-md-3
+    = render 'gaku/shared/picture', resource: student
+
+hr
+
+.row.mt-l
+  .col-md-12
+    = render 'tabs'
+
+= footer do
+  .col-md-9
     = link_to_back students_path
-  .span3#delete-student
-    = link_to_modal_delete nil, id: 'delete-student-link', data: {confirm: nil}
+  .col-md-3
+    = link_to_modal_delete
   .delete_modal
-    = render 'delete_modal', student: student
+    = render 'gaku/shared/soft_delete_modal', target: student
 

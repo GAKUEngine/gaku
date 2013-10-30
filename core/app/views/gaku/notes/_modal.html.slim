@@ -1,6 +1,4 @@
 = modal_for 'edit-note-modal' do
-  = modal_header t(:'note.edit')
-  = modal_form_for [@notable, @note] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = buttons_for @note, nested_id: "#{@notable_resource}-note"
+  = modal_form_for [@notable, @note], { resource: "#{@notable_resource}-note" } do |f|
+    = render 'form_fields', f: f
+    = buttons_for @note, { resource: "#{@notable_resource}-note" }

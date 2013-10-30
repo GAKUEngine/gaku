@@ -1,36 +1,37 @@
-.row-fluid
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_title_cont',
-																						tag_name: t(:title),
-																						class_name: 'address',
-																						column: 'title'} )
+form role="form"
+  .row.mb-m
+    = autocomplete_text_field(f, options = {object_name: 'addresses_title_cont',
+                                            tag_name: t(:title),
+                                            class_name: 'address',
+                                            column: 'title'})
 
-	= autocomplete_select(f, options = { 	object_name: 'addresses_country_name_eq',
-																				tag_name: t('address.country'),
-																				collection: @countries, prompt: t('address.choose_country'),
-																				prompt_position: "bottomRight:5",
-																				html_options: {class: "validate[required] span12", id: "country_dropdown"}})
+    = autocomplete_select(f, options = {object_name: 'addresses_country_name_eq',
+                                        tag_name: t('address.country'),
+                                        collection: @countries, prompt: t('address.choose_country'),
+                                        prompt_position: "bottomRight:5",
+                                        html_options: {class: "validate[required] span12", id: "country_dropdown"}})
 
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_zipcode_cont',
-																						tag_name: t(:'address.zipcode'),
-																						class_name: 'address',
-																						column: 'zipcode'} )
+    = autocomplete_text_field(f, options = {object_name: 'addresses_zipcode_cont',
+                                            tag_name: t(:'address.zipcode'),
+                                            class_name: 'address',
+                                            column: 'zipcode'} )
 
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_state_name_eq',
-																						tag_name: t(:'address.state'),
-																						class_name: 'address',
-																						column: 'state_name'} )
-.row-fluid
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_city_cont',
-																						tag_name: t(:'address.city'),
-																						class_name: 'address',
-																						column: 'city'} )
+    = autocomplete_text_field(f, options = {object_name: 'addresses_state_name_eq',
+                                            tag_name: t(:'address.state'),
+                                            class_name: 'address',
+                                            column: 'state_name'} )
+  .row
+    = autocomplete_text_field(f, options = {object_name: 'addresses_city_cont',
+                                            tag_name: t(:'address.city'),
+                                            class_name: 'address',
+                                            column: 'city'} )
 
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_address1_cont',
-																						tag_name: t(:'address.address1'),
-																						class_name: 'address',
-																						column: 'address1'} )
+    = autocomplete_text_field(f, options = {object_name: 'addresses_address1_cont',
+                                            tag_name: t(:'address.address1'),
+                                            class_name: 'address',
+                                            column: 'address1'} )
 
-	= autocomplete_text_field(f, options = { 	object_name: 'addresses_address2_cont',
-																						tag_name: t(:'address.address2'),
-																						class_name: 'address',
-																						column: 'address2'} )
+    = autocomplete_text_field(f, options = {object_name: 'addresses_address2_cont',
+                                            tag_name: t(:'address.address2'),
+                                            class_name: 'address',
+                                            column: 'address2'} )

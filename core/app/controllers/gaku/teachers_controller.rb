@@ -71,7 +71,7 @@ module Gaku
     def index
       @search = Teacher.search(params[:q])
       results = @search.result(distinct: true)
-      @teachers = results.page(params[:page]).per(Preset.teachers_per_page)
+      @teachers = results.page(params[:page])
       set_count
       respond_with @teachers
     end

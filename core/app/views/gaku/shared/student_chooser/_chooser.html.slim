@@ -1,31 +1,32 @@
 = render 'gaku/students/search/form'
 
-.row-fluid.hide#students-checked-div
-  .span12.well.mt-m
-    h4.pull-left= t(:'student.chosen_students')
-    h4.chosen-count.pull-left
-    .table-action.show-chosen-table.pull-right = link_to t(:show),nil
-    .table-action.hide-chosen-table.pull-right.hide = link_to t(:hide),nil
+.row.hide#students-checked-div
+  .col-md-12
+    .well
+      h4.pull-left= t(:'student.chosen_students')
+      h4.chosen-count.pull-left
+      .table-action.show-chosen-table.pull-right = link_to t(:show),nil
+      .table-action.hide-chosen-table.pull-right.hide = link_to t(:hide),nil
 
-    table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
-      thead
-        tr
-          th.btn-inverse = sort_link @search, "surname", t("surname")
-          th.btn-inverse = sort_link @search, "name", t("name")
-      tbody#students-checked
-    #chosen-actions.hide
-      - if @class_group
-        = render 'gaku/shared/student_chooser/class_group'
+      table#chosen-table.table.table-striped.table-bordered.table-condensed.hide
+        thead
+          tr
+            th.btn-inverse = sort_link @search, "surname", t("surname")
+            th.btn-inverse = sort_link @search, "name", t("name")
+        tbody#students-checked
+      #chosen-actions.hide
 
-      - elsif @course
-        = render 'gaku/shared/student_chooser/course'
+        - if @class_group
+          = render 'gaku/shared/student_chooser/class_group'
 
-      - elsif @extracurricular_activity
-        = render 'gaku/shared/student_chooser/extracurricular_activity'
+        - elsif @course
+          = render 'gaku/shared/student_chooser/course'
 
-      - else
-        = render 'gaku/shared/student_chooser/student'
-= hr
+        - elsif @extracurricular_activity
+          = render 'gaku/shared/student_chooser/extracurricular_activity'
+
+        - else
+          = render 'gaku/shared/student_chooser/student'
 
 #students-index-div
   = render 'gaku/students/students'

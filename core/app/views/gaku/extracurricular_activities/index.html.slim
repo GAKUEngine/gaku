@@ -6,9 +6,10 @@
 
 = content_for :index_header do
   .pull-left
-    = count_div('extracurricular-activities-count') { print_count @count, t_extracurricular_activity_list }
+    = count_div('extracurricular-activities-count') { print_count @count, t(:'extracurricular_activity.list') }
   .pull-right
     = ajax_link_to_new t(:'extracurricular_activity.new'), [:new, :extracurricular_activity], id: "new-extracurricular-activity-link"
 
 #extracurricular-activity-index
   = render 'extracurricular_activities'
+  = paginate @extracurricular_activities, remote: true

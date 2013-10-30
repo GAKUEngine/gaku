@@ -1,4 +1,4 @@
-= form_tag( enroll_students_class_group_enrollments_path, method: "post", id: "enroll-to-class-form", remote: true) do
+= form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
   = hidden_field_tag "class_group_id", @class_group.id
   = hidden_field_tag "source", "class_groups"
   h4 = "Adding students to " + @class_group.name

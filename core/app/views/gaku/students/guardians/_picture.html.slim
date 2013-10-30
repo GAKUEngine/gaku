@@ -1,12 +1,8 @@
-.row-fluid.pagination-centered
-  h4= t(:'picture')
-
-.row-fluid.mt-s
-  .span12.pagination-centered
-    = image_tag guardian.picture.url(:thumb), id: "avatar-picture"
+= image_tag guardian.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
 
 - if can_edit?
-  .row-fluid.mt-s
-    = button_to t(:'pictures.change'), 'JavaScript:void(0);', method: :get, id: "upload-picture-link", class: "span12 btn"
-    #upload-picture.hide
-      = render partial: 'upload_picture', locals: { student: student, guardian: guardian }
+  .row.mt-m
+    .col-md-12
+      = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
+      #upload-picture.hide
+        = render 'upload_picture', student: student, guardian: guardian

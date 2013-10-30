@@ -1,0 +1,3 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do |f|
+  = f.select :locale, options_for_select(I18n.available_locales, selected: @preset['locale']), label: t(:'locale')
+  = buttons_for @preset, resource: 'admin-preset'

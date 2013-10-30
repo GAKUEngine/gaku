@@ -1,9 +1,11 @@
 development:
+  host: localhost
   adapter: postgresql
   database: gaku_development
   username: postgres
   min_messages: warning
 test:
+  host: localhost
   adapter: postgresql
   database: gaku_test
   username: postgres

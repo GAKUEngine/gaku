@@ -21,7 +21,7 @@ describe 'ClassGroup Semesters' do
   context 'new', js: true do
     before do
       semester
-      visit gaku.class_group_path(class_group)
+      visit gaku.edit_class_group_path(class_group)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -53,10 +53,6 @@ describe 'ClassGroup Semesters' do
       page.should have_content('Semester already added to Class Group')
     end
 
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -64,7 +60,7 @@ describe 'ClassGroup Semesters' do
       semester
       semester2
       semester_class_group
-      visit gaku.class_group_path(class_group)
+      visit gaku.edit_class_group_path(class_group)
       click tab_link
     end
 
@@ -84,9 +80,6 @@ describe 'ClassGroup Semesters' do
         flash_updated?
       end
 
-      it 'cancels editing', cancel: true do
-        ensure_cancel_modal_is_working
-      end
     end
 
     it 'delete', js: true do

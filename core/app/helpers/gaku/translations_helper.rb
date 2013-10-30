@@ -17,6 +17,10 @@ module Gaku
       t(:'course.list')
     end
 
+    def t_exam_portion_plural
+      t(:'exam_portion.plural')
+    end
+
     def t_semester_plural
       t(:'semester.plural')
     end
@@ -28,6 +32,7 @@ module Gaku
     def t_student_plural
       t(:'student.plural')
     end
+
 
     def t_student_list
       t(:'student.list')
@@ -157,6 +162,10 @@ module Gaku
       t(:'attachment.list')
     end
 
+    def t_attachment_plural
+      t(:'attachment.plural')
+    end
+
     def t_school_year_list
       t(:'school_year.list')
     end
@@ -175,6 +184,10 @@ module Gaku
 
     def t_template_list
       t(:'template.list')
+    end
+
+    def t_department_list
+      t(:'department.list')
     end
 
   end

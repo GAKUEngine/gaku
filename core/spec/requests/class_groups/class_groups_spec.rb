@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ClassGroups' do
 
   before { as :admin }
+  before(:all) { set_resource('class-group') }
 
   let(:class_group) do
     create(:class_group, grade: '1',
@@ -11,10 +12,6 @@ describe 'ClassGroups' do
   end
 
   let(:class_group_with_semesters) { create(:class_group, :with_semesters) }
-
-  before :all do
-    set_resource('class-group')
-  end
 
   context 'new', js: true do
     before do
@@ -29,24 +26,18 @@ describe 'ClassGroups' do
         fill_in 'class_group_name',     with: 'Awesome class group'
         fill_in 'class_group_homeroom', with: 'room#7'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::ClassGroup, :count).by 1
 
       within('#class-groups-without-semester-index') do
-        page.should have_content '7'
-        page.should have_content 'Awesome class group'
-        page.should have_content 'room#7'
+        has_content? '7'
+        has_content? 'Awesome class group'
+        has_content? 'room#7'
       end
-
-      within(count_div) { page.should have_content 'Class Groups list(1)' }
-      flash_created?
+      count? 'Class Groups list(1)'
     end
 
     it { has_validations? }
-
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -56,115 +47,89 @@ describe 'ClassGroups' do
     end
 
     context 'edit', js: true do
-      before do
-        click js_edit_link
-        wait_until_visible modal
-      end
 
-      it 'edits' do
-        semester, semester2 = class_group_with_semesters.semesters
-        fill_in 'class_group_grade',    with: '2'
-        fill_in 'class_group_name',     with: 'Really awesome class group'
-        fill_in 'class_group_homeroom', with: 'B2'
-
-        click submit
-
-        %W( #{semester.id} #{semester2.id} ).each do |id|
-          within("#semester-#{id}-class-groups-index") do
-            page.should have_content 'Really awesome class group'
-            page.should have_content '2'
-            page.should have_content 'B2'
-          end
+      context 'from index view' do
+        before do
+          click js_edit_link
+          wait_until_visible modal
         end
 
-        page.should_not have_content 'Not so awesome class group'
-        page.should_not have_content 'A1'
+        it 'edits' do
+          semester, semester2 = class_group_with_semesters.semesters
+          fill_in 'class_group_grade',    with: '2'
+          fill_in 'class_group_name',     with: 'Really awesome class group'
+          fill_in 'class_group_homeroom', with: 'B2'
 
-        edited_class_group = Gaku::ClassGroup.last
-        edited_class_group.name.should eq 'Really awesome class group'
-        edited_class_group.grade.should eq 2
-        edited_class_group.homeroom.should eq 'B2'
-        flash_updated?
+          click submit
+
+          flash_updated?
+
+          %W( #{semester.id} #{semester2.id} ).each do |id|
+            within("#semester-#{id}-class-groups-index") do
+              has_content? 'Really awesome class group'
+              has_content? '2'
+              has_content? 'B2'
+            end
+          end
+
+          has_no_content? 'Not so awesome class group'
+          has_no_content? 'A1'
+
+          class_group_with_semesters.reload
+          expect(class_group_with_semesters.name).to eq 'Really awesome class group'
+          expect(class_group_with_semesters.grade).to eq 2
+          expect(class_group_with_semesters.homeroom).to eq 'B2'
+        end
+
+        it 'has validations' do
+          fill_in 'class_group_name', with: ''
+          has_validations?
+        end
       end
 
-      it 'cancels editting', cancel: true do
-        ensure_cancel_modal_is_working
+      context 'from edit view' do
+        before do
+          visit gaku.edit_class_group_path(class_group_with_semesters)
+        end
+
+        it 'edits' do
+          fill_in 'class_group_grade',    with: '2'
+          fill_in 'class_group_name',     with: 'Really awesome class group'
+          fill_in 'class_group_homeroom', with: 'B2'
+
+          click submit
+          flash_updated?
+
+          expect(find_field('class_group_name').value).to eq 'Really awesome class group'
+          expect(find_field('class_group_grade').value).to eq '2'
+          expect(find_field('class_group_homeroom').value).to eq 'B2'
+
+          class_group_with_semesters.reload
+          expect(class_group_with_semesters.name).to eq 'Really awesome class group'
+          expect(class_group_with_semesters.grade).to eq 2
+          expect(class_group_with_semesters.homeroom).to eq 'B2'
+        end
+
+        it 'has validations' do
+          fill_in 'class_group_name', with: ''
+          has_validations?
+        end
       end
 
-      it 'edits from show view' do
-        visit gaku.class_group_path(class_group_with_semesters)
-        click edit_link
-        wait_until_visible modal
-
-        fill_in 'class_group_grade',    with: '2'
-        fill_in 'class_group_name',     with: 'Really awesome class group'
-        fill_in 'class_group_homeroom', with: 'B2'
-
-        click submit
-
-        page.should have_content 'Really awesome class group'
-        page.should have_content '2'
-        page.should have_content 'B2'
-
-        page.should_not have_content 'Not so awesome class group'
-        page.should_not have_content 'A1'
-
-        edited_class_group = Gaku::ClassGroup.last
-        edited_class_group.name.should eq 'Really awesome class group'
-        edited_class_group.grade.should eq 2
-        edited_class_group.homeroom.should eq 'B2'
-        flash_updated?
-      end
-
-      it 'has validations' do
-        fill_in 'class_group_name', with: ''
-        has_validations?
-      end
     end
 
     it 'deletes', js: true do
-      semester, semester2 = class_group_with_semesters.semesters
-
-      %W( #{semester.id} #{semester2.id} ).each do |id|
-        within("#semester-#{id}-class-groups-index") do
-          page.should have_content class_group_with_semesters.name
-        end
-      end
-
-      within(count_div) { page.should have_content 'Class Groups list(1)' }
+      visit gaku.edit_class_group_path(class_group_with_semesters)
 
       expect do
-        rows = "#semester-#{semester.id}-class-groups-index tr"
-        tr_count = size_of rows
-
-        within("#semester-#{semester.id}-class-groups-index") do
-          click delete_link
-        end
-
+        click modal_delete_link
+        within(modal) { click_on 'Delete' }
         accept_alert
-        wait_until { size_of(rows) == tr_count - 1 }
+        wait_until { flash_destroyed? }
+      end.to change(Gaku::ClassGroup, :count).by -1
 
-      end.to change(Gaku::ClassGroup, :count).by(-1)
-
-      %W( #{semester.id} #{semester2.id} ).each do |id|
-        within("#semester-#{id}-class-groups-index") do
-          page.should_not have_content class_group_with_semesters.name
-        end
-      end
-
-      within(count_div) { page.should_not have_content 'Class Groups list(1)' }
-      flash_destroyed?
-    end
-
-    it 'returns to class groups index when back is selected' do
-      visit gaku.class_group_path(class_group_with_semesters)
-      click_link('back-class-group-link')
-      page.should have_content('Class Groups list')
-    end
-
-    it 'redirects to show view when show btn selected' do
-      within(table) { click show_link }
-      page.should have_content('Show')
+      within(count_div) { has_no_content '1' }
+      current_path.should eq gaku.class_groups_path
     end
 
   end

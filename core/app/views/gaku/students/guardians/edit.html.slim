@@ -1,7 +1,20 @@
-= well_div do
-  .span9#guardian-table
-    = render 'edit_table', guardian: @guardian
-  .span3.well
-    = render partial: 'picture', locals: { guardian: @guardian, student: @student }
+.row
+  .col-md-9
+    = normal_form_for [@student, @guardian], label: 'nil' do |f|
+      = render 'form_fields', f: f, guardian: @guardian
+      = submit_button t(:'guardian.save'), id: 'submit-student-guardian-button'
 
-= render 'tabs', guardian: @guardian
+  .col-md-3
+     = render 'picture',  guardian: @guardian, student: @student
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-12
+    = link_to_back edit_student_path(@student)
+  /.col-md-3
+    /= link_to_modal_delete
+  /= render 'gaku/shared/soft_delete_modal', target: @guardian
+

@@ -1,5 +1,5 @@
 bg:
-  academic: 
+  academic: Академичен
   achievement:
     add: Добави Постижение
     authority: Пълномощие
@@ -12,6 +12,7 @@ bg:
     plural: Постижения
     save: Запази Постижение
     singular: Постижение
+  active: 
   add: Добави
   address:
     add: Добави Адрес
@@ -32,18 +33,18 @@ bg:
     search: Търси Адрес
     singular: Адрес
     state:
-      abbr: 
-      add: 
-      choose: 
-      code: 
-      country_iso: 
-      edit: 
-      list: 
-      name: 
-      name_ascii: 
-      plural: 
-      save: 
-      singular: 
+      abbr: Съкращение
+      add: Добави регион
+      choose: Избери регион
+      code: Код
+      country_iso: Страна ISO
+      edit: Редактирай региона
+      list: Региони
+      name: Име
+      name_ascii: ASCII Име
+      plural: Региони
+      save: Запази
+      singular: Регион
     title: Заглавие
     zipcode: Пощенски код
   admitted: Приет на
@@ -63,7 +64,7 @@ bg:
     new: Създай Задание
     plural: Задания
     results: Резултати от заданието
-    score: 
+    score: Точки
     singular: Задание
     view: Покажи Заданията
   assignments:
@@ -154,6 +155,7 @@ bg:
     singular: Клас
   class_group_course_enrollment:
     save: Запази Курс към Клас
+    singular: Курс
   class_group_enrollment:
     count: Брой на записаните студенти
     create: Създай добавяне към Класа
@@ -210,7 +212,7 @@ bg:
     singular: Вид Контакт
   course:
     add: Добави Курс
-    already_enrolled: 
+    already_enrolled: Вече е добавен към курса!
     choose: Избери Курс
     code: Код на Курса
     code_sample: '[ПР: ЕСЕН2020]'
@@ -233,7 +235,7 @@ bg:
     plural: Записи в Курса
     singular: Запис в Курса
   course_group:
-    already_enrolled: 
+    already_enrolled: Вече е добавен към курсовата група!
     course_group_recover: Курс Група Възстановена
     edit: Редактирай Курс Група
     list: Списък Курс Групи
@@ -253,6 +255,41 @@ bg:
     placeholder: ГГГГ-ММ-ДД
   default: По подразбиране
   delete: Изтрий
+  department:
+    add: Добави отдел
+    defaults:
+      agriculture: 
+      aquaculture: 
+      art: 
+      business: 
+      civics: 
+      elective_studies: 
+      engineering: 
+      english: 
+      extra-curricular_activities: 
+      fine_arts: 
+      foreign_language: 
+      gymnastics: 
+      home_economics: 
+      information_sciences: 
+      integrated_studies: 
+      manufacturing: 
+      mathematics: 
+      medicine: 
+      music: 
+      native_language: 
+      nursing: 
+      physical_education: 
+      regional_history: 
+      religion: 
+      science: 
+      scientific_mathematics: 
+      welfare: 
+    edit: Редактирай отдела
+    list: Отдели
+    name: 
+    save: 
+    singular: 
   description: Описание
   destroy: Изтрий
   devise:
@@ -291,6 +328,7 @@ bg:
       updated: Вашата парола беше променена успешно. В момента сте в системата.
       updated_not_active: Вашата парола беше променена успешно.
     registrations:
+      admin_create: Създай Админ
       admin_set_up: |-
         Това е първият път в който ползвате GAKU Engine.
         Моля виведете данни за потребител Администратор.
@@ -329,7 +367,7 @@ bg:
     active: Активен
     add: Добави Статус на Записване
     choose_enrollment_status: 
-    code: 
+    code: Код
     edit: Редактирай Статус на Записване
     list: Списък Статуси на Записване
     name: Име
@@ -342,7 +380,7 @@ bg:
     add: 
     edit: 
     list: 
-    name: 
+    name: Име
     new: 
     plural: 
     save: 
@@ -351,109 +389,112 @@ bg:
     messages:
       already_confirmed: 
       expired: 
-      file_type_unsupported: 
-      file_unreadable: 
+      file_type_unsupported: Файловият тип не е поддържан!
+      file_unreadable: Файлът не може да бъде прочетен!
       not_found: 
       not_locked: 
-      not_saved: 
+      not_saved:
+        one: '1 грешка попречи на %{resource} да бъде запазен:'
+        other: '%{count} грешки попречи на %{resource} да бъде запазен:'
     not_uploaded: 
   exam:
-    add: 
-    add_existing: 
+    add: Добави изпит
+    add_existing: 'Избери '
     add_portion: 
     adjustments: 
-    already_added: 
-    choose: 
-    choose_schedule: 
+    already_added: Изпитът вече е добавен !
+    choose: Избери изпит
+    choose_schedule: Избери програма
     completion: 
-    count: 
-    description: 
-    edit: 
-    exam_score: 
+    count: Брой изпити
+    description: Описание
+    edit: Редактирай изпита
+    exam_score: Изпитни точки
     graded: 
     grading_completion: 
     grading_method: 
-    list: 
-    name: 
-    new: 
+    list: Списък изпити
+    name: Име
+    new: Нов изпит
     new_exam: 
-    options: 
-    plural: 
-    save: 
-    select: 
-    show: 
-    singular: 
-    total: 
-    total_weight: 
+    options: Опции
+    plural: Изпити
+    save: Запази изпита
+    select: Избери изпит
+    show: Покажи изпита
+    singular: Изпит
+    total: Общо
+    total_weight: Обща тежест
     ungraded: 
     use_weighting: 
-    view: 
-    weight: 
+    view: Покажи изпитите
+    weight: Тежест
   exam_portion:
     adjustments: 
     attached_file_count: 
     count: 
-    description: 
+    description: Описание
     edit: 
     error: 
     execution_date: 
     is_master: 
     list: 
     master: 
-    max_score: 
+    max_score: Максимални точки
     name: 
     plural: 
     problem_count: 
-    save: 
+    save: Запази
     show: 
     singular: 
     use_weighting: 
-    weight: 
-  export: 
-  extended: 
+    weight: Тежест
+  export: Експортирай
+  extended: Разширен
   external_school_record:
     absences: 
     attendance_rate: 
-    beginning: 
-    data: 
-    ending: 
+    beginning: Започва
+    data: Данни
+    ending: Приключва
     singular: 
-    student_id_number: 
+    student_id_number: Номер
   extracurricular_activity:
-    add: 
-    already_enrolled: 
-    edit: 
+    add: Добави извънкласна дейност
+    already_enrolled: Вече е добавен към извънкласната дейност !
+    edit: Редактирай
     enroll: 
-    list: 
-    name: 
-    new: 
-    plural: 
-    save: 
-    show: 
-    singular: 
+    list: Списък извънкласни дейности
+    name: Име
+    new: Нова извънкласна дейност
+    plural: Извънкласни дейности
+    save: Запази
+    show: Покажи
+    singular: Извънкласна дейност
   extracurricular_activity_enrollment:
-    list: 
+    list: Списък студенти
   failure:
     enrolled: 
-  file: 
+  file: Файл
   flash:
     actions:
       create:
-        notice: 
+        notice: '%{resource_name} е успешно създаден!'
       destroy:
-        alert: 
+        alert: '%{resource_name} не може да бъде изтрит!'
         notice: 
       update:
-        notice: 
-  full_name: 
+        notice: '%{resource_name} е успешно изтрит!'
+  full_name: Пълно име
   full_name_reading: 
   gaku_engine: GAKU Сисетма
   gender:
-    choose: 
-    female: 
-    label: 
-    male: 
+    choose: Избери пол
+    female: Жена
+    label: Пол
+    male: Мъж
     unknown: 
+  generate_report: 
   grade:
     all_exams: 
     average_points: 
@@ -461,27 +502,27 @@ bg:
     deviation: 
     grading: 
     how_grade: 
-    max: 
-    max_points: 
-    percent: 
-    points: 
+    max: Максимум
+    max_points: Максимални точки
+    percent: Процент
+    points: Точки
     rank: 
-    total: 
-    total_points: 
-    weighting: 
+    total: Общо
+    total_points: Общ резултат
+    weighting: Тежест
     weighting_portion: 
   grading_method:
     add: 
-    arguments: 
+    arguments: Аргументи
     choose: 
     curved: 
-    description: 
-    edit: 
+    description: Описание
+    edit: Редактирай
     list: 
-    method: 
-    name: 
+    method: Метод
+    name: Име
     plural: 
-    save: 
+    save: Запази
     singular: 
   grading_method_set:
     add: 
@@ -498,6 +539,7 @@ bg:
     already: 
     edit: 
     save: 
+    singular: 
   graduated: 
   guardian:
     add: 
@@ -513,116 +555,99 @@ bg:
     surname: 
   helpers:
     links:
-      cancel: 
-  hide: 
-  history: 
-  id: 
+      cancel: Отказ
+  hide: Скрий
+  history: История
+  id: Номер
   import: 
   import_format: 
   is_graduated: 
   language: 
   languages:
-    en: 
-    ja: 
+    en: Английски
+    ja: Японски
   manage: 
   menu:
     admin:
-      achievements: 
-      admin: 
-      administration: 
-      administrator: 
+      achievements: Постижения
+      admin: Админ
+      administration: Администрация
+      administrator: Администратор
       changes:
-        changes: 
-        student_addresses: 
-        student_contacts: 
-        students: 
+        changes: Промени и изтривания
+        student_addresses: Адреси на студентите
+        student_contacts: Контакти на студентите
+        students: Студенти
+      departments: Отдели
       disposals:
         address: 
         attachment: 
-        course_group: 
-        disposals: 
-        exam: 
-        student: 
-        student_address: 
+        course_group: Курсови групи
+        disposals: Кошче
+        exam: Изпити
+        student: Студенти
+        student_address: Адреси-студенти
       grading:
         grading: 
         grading_methods: 
         grading_sets: 
       grading_methods: 
       preset:
-        grading:
-          grading_method: 
-          grading_scheme: 
-        items:
-          defaults: 
-          grading: 
-          locale: 
-          names: 
-          student: 
-        names: 
-        pagination: 
         plural: 
-        save: 
-        singular: 
-        student:
-          city: 
-          country: 
-          gender: 
-          state: 
       school_details: 
-      school_years: 
-      schools: 
-      specialties: 
+      school_years: Учебни години
+      schools: Училища
+      specialties: Специалности
       system:
-        backup: 
-        system_tools: 
+        backup: Архив
+        system_tools: Системни инструменти
       templates: 
       types:
         attendance_types: 
         commute_methods: 
-        contact: 
+        contact: Типове контакти
         enrollment_status: 
         states: 
         types: 
       users:
-        roles: 
-        users: 
-        users_and_roles: 
+        roles: Роли
+        users: Потребители
+        users_and_roles: Потребители и Роли
     class_group:
       management: 
-      plural: 
+      plural: Класни групи
     course:
       management: 
-      plural: 
+      plural: Курсове
     course_group:
-      plural: 
+      plural: Курсови групи
     exam:
       management: 
-      plural: 
+      plural: Изпити
     extracurricular_activity:
-      plural: 
+      plural: Извънкласни
     student:
-      plural: 
+      plural: Студенти
     syllabus:
       plural: 
     teacher:
-      plural: 
-  middle_name: 
+      plural: Инструктори
+  middle_name: Презиме
   middle_name_reading: 
-  name: 
+  name: Име
   name_reading: 
   none: 
   note:
-    add: 
-    content: 
-    delete: 
-    edit: 
-    list: 
-    new: 
-    plural: 
-    save: 
-    singular: 
-    title: 
+    add: Добави бележка
+    content: Съдържание
+    delete: Изтрии бележката
+    edit: Редактирай бележката
+    list: Списък бележки
+    new: Нова бележка
+    plural: Бележки
+    save: Запази
+    singular: Бележка
+    title: Заглавие
   notice:
     added: 
     created: 
@@ -632,43 +657,54 @@ bg:
     recovered: 
     removed: 
     updated: 
-    uploaded: 
+    uploaded: '%{resource} беше успешно прикрепен!'
   num_enrolled: 
-  options: 
+  options: Опции
   order: 
-  panel: 
-  period: 
-  personal: 
-  personal_information: 
-  phone: 
+  panel: Панел
+  period: Период
+  personal: Персонален
+  personal_information: Персонална информация
+  phone: Телефон
   phonetic_reading: 
-  picture: 
+  picture: Картинка
   pictures:
-    change: 
-    upload: 
+    change: Смени картинката
+    upload: Прикрепи
   preset:
+    address:
+      city: 
+      country: 
+      singular: 
+      state: 
+    chooser_field:
+      plural: 
+    export_formats:
+      choose: 
+      documents: 
+      plural: 
+      printables: 
+      spreadsheets: 
     grading:
       grading_method: 
       grading_scheme: 
-    names: 
-    output_formats:
-      choose: 
-      documents: 
-      printables: 
-      spreadsheets: 
+      singular: 
+    list: 
+    locale: 
+    name: 
+    names_order: 
     pagination: 
     per_page:
       changes: 
       default: 
       students: 
+      teachers: 
+    person:
+      gender: 
+      singular: 
     plural: 
     save: 
     singular: 
-    student:
-      city: 
-      country: 
-      gender: 
-      state: 
   profile: 
   profiles:
     new: 
@@ -710,6 +746,7 @@ bg:
     list: 
     name: 
     save: 
+    singular: 
   save: 
   schedule: 
   school:
@@ -774,6 +811,7 @@ bg:
   semester_class_group:
     choose: 
     save: 
+    singular: 
     uniqueness: 
   semester_course:
     uniqueness: 
@@ -800,6 +838,18 @@ bg:
     major_only: 
     minor: 
     name: 
+    plural: 
+    save: 
+    singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
     plural: 
     save: 
     singular: 
@@ -837,11 +887,13 @@ bg:
     edit: 
     index: 
     save: 
+    singular: 
   student_name: 
   student_specialty:
     edit: 
     index: 
     save: 
+    singular: 
   submit: 
   success:
     enrolled: 

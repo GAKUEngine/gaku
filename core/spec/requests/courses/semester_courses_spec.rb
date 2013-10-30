@@ -22,7 +22,7 @@ describe 'Course Semesters' do
     before do
       course
       semester
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
       click tab_link
       click new_link
       wait_until_visible submit
@@ -55,9 +55,6 @@ describe 'Course Semesters' do
       page.should have_content('Semester already added to Course')
     end
 
-    it 'cancels creating', cancel: true do
-      ensure_cancel_creating_is_working
-    end
   end
 
   context 'existing' do
@@ -65,7 +62,7 @@ describe 'Course Semesters' do
       course_with_semester
       course_semester
       semester
-      visit gaku.course_path(course_with_semester)
+      visit gaku.edit_course_path(course_with_semester)
       click tab_link
     end
 
@@ -85,10 +82,6 @@ describe 'Course Semesters' do
           page.should_not have_content "#{course_semester.starting} / #{course_semester.ending}"
         end
         flash_updated?
-      end
-
-      it 'cancels editing', cancel: true do
-        ensure_cancel_modal_is_working
       end
     end
 

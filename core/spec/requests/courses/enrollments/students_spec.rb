@@ -21,7 +21,7 @@ describe 'CourseEnrollment'  do
       enrollment_status_admitted
       enrollment_status
       student1
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
     end
 
     it 'enrolls and shows' do
@@ -46,7 +46,7 @@ describe 'CourseEnrollment'  do
     it 'enrolls student only once'  do
       course.students << student1
       course.reload
-      visit gaku.course_path(course)
+      visit gaku.edit_course_path(course)
 
       page.should have_content("#{student1.name}")
       course.students_count.should eq 1

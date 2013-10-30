@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    = normal_form_for @extracurricular_activity, label: 'nil' do |f|
+      = render 'form_fields', f: f, extracurricular_activity: @extracurricular_activity
+      = buttons_for @extracurricular_activity
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-9
+    = link_to_index extracurricular_activities_path
+  .col-md-3
+    /= link_to_modal_delete
+  /= render 'gaku/shared/soft_delete_modal', target: @extracurricular_activity

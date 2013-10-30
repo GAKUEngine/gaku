@@ -13,6 +13,16 @@ window.showNotice = (notice)->
 $.fn.enableValidations = ->
   $(this).enableRails4ClientSideValidations()
 
+$.fn.withAnimation = ->
+  $(this).animate({height:"toggle", opacity:"toggle"})
+
+$.fn.showModal = ->
+  $(this).modal('show')
+
+$.fn.hideModal = ->
+  $(this).modal('hide')
+
+
 
 window.load_states = ->
   console.log "Load states executed"
@@ -29,14 +39,6 @@ ready = ->
 
   class App
     init: ->
-      $(document).off('click', '.cancel-link').on "click",".cancel-link", (e) ->
-        e.preventDefault()
-        if $(e.target).parents('.modal-body').length == 0
-          resource_id = $(this).attr("id").replace("cancel-", "").replace("-link", "")
-          resource_new_link = "#new-" + resource_id + "-link"
-          resource_form = "#new-" + resource_id
-          $(resource_new_link).show()
-          $(resource_form).slide()
 
       $(document).on 'ajax:success', '.recovery-link', ->
         $(this).closest('tr').remove()
@@ -48,6 +50,10 @@ ready = ->
       if notice.children().length > 0
         notice.children().delay(3000).fadeOut ->
           notice.html('')
+
+      $('.modal-delete-link').on 'click', (e)->
+        e.preventDefault()
+        $('#delete-modal').modal('show')
 
 
       $('.sortable').sortable

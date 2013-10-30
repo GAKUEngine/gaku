@@ -4,7 +4,7 @@ module Gaku
     #load_and_authorize_resource :note, class: Gaku::Note
 
     before_action :set_notable
-    before_action :set_note,    only: %i( edit update destroy )
+    before_action :set_note,    only: %i( edit update destroy show )
     respond_to :js
 
     def new

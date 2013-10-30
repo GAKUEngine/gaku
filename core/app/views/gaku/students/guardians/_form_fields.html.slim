@@ -1,4 +1,4 @@
 = render 'gaku/shared/form_fields/person_form_fields', f: f, person: guardian
-.row-fluid
-  .span12
+.row
+  .col-md-12
     = f.text_field :relationship, label: t(:'guardian.relationship')

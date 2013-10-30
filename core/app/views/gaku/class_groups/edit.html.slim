@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    = normal_form_for @class_group, label: 'nil' do |f|
+      = render 'form_fields', f: f, class_group: @class_group
+      = buttons_for @class_group
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-9
+    = link_to_index class_groups_path
+  .col-md-3
+    = link_to_modal_delete
+  = render 'gaku/shared/soft_delete_modal', target: @class_group

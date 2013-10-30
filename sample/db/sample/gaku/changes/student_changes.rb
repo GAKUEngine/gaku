@@ -3,9 +3,9 @@ require 'shared_sample_data'
 
 say "Creating #{@count[:changes]} student changes ...".yellow
 
-commute_method_type = Gaku::CommuteMethodType.where(name: 'Changed CommuteMethodType').first_or_create!
-scholarship_status = Gaku::ScholarshipStatus.where(name: 'Changed Scholarship Status').first_or_create!
-enrollment_status = Gaku::EnrollmentStatus.where(code: 'changed_enrollment_status').first_or_create!
+commute_method_type = Gaku::CommuteMethodType.create!(name: 'Changed CommuteMethodType')
+scholarship_status = Gaku::ScholarshipStatus.create!(name: 'Changed Scholarship Status')
+enrollment_status = Gaku::EnrollmentStatus.create!(code: 'changed_enrollment_status')
 
 counter = 0
 

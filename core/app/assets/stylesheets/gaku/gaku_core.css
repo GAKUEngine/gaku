@@ -1,8 +1,14 @@
 /*
  *= require_self
- *= require ./gaku_import
+
+ * require ./gaku_import
  *= require bootstrap-datepicker
- *= require jquery.ui.autocomplete
+
+ *= require bootstrap.min
+ *= require gaku/bootstrap_theme
+
+ * require jquery_validation_engine/validationEngine.jquery
+ * require jquery.ui.autocomplete
  *= require jquery.minicolors
  *= require gaku/exams
 

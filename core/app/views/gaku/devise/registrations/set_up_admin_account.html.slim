@@ -1,27 +1,26 @@
 div style="width:320px;margin:0 auto;"
-  .row-fluid
-    .span12
-      h3= t "devise.registrations.admin_set_up"
-  .row-fluid
-    .span12
-      hr/
-  .row-fluid
-    .span12
-      .well
-        .row-fluid
+  .row
+    .col-md-12
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title = t "devise.registrations.admin_create"
+        .panel-body
+          = t "devise.registrations.admin_set_up"
+          hr.mt-m.mb-m
           = form_for(resource, as: resource_name, url: create_admin_path) do |f|
             = devise_error_messages!
-            .row-fluid
-              = f.label :username, t(:"devise.username")
-              = f.text_field :username, class: 'span12'
-            .row-fluid
-              = f.label :email, t(:"devise.email")
-              = f.email_field :email, class: 'span12'
-            .row-fluid
-              = f.label :password, t(:"devise.password")
-              = f.password_field :password, class: 'span12'
-            .row-fluid
-              = f.label :password_confirmation, t(:"devise.password_confirmation")
-              = f.password_field :password_confirmation, class: 'span12'
-            .row-fluid.mt-xs
-              = f.submit t("devise.registrations.sign_up"), class: 'span12 btn btn-primary'
+            .form-group
+              = f.label :username, t(:"devise.username"), class: 'control-label'
+              = f.text_field :username, class: 'form-control col-md-12'
+            .form-group
+              = f.label :email, t(:"devise.email"), class: 'control-label'
+              = f.email_field :email, class: 'form-control col-md-12'
+            .form-group
+              = f.label :password, t(:"devise.password"), class: 'control-label'
+              = f.password_field :password, class: 'form-control col-md-12'
+            .form-group
+              = f.label :password_confirmation, t(:"devise.password_confirmation"), class: 'control-label'
+              = f.password_field :password_confirmation, class: 'form-control col-md-12'
+            hr.mt-0.mb-m
+            .form-group.mb-0
+              = f.submit t("devise.registrations.sign_up"), class: 'col-md-12 btn btn-primary'

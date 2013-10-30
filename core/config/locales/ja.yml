@@ -12,6 +12,7 @@ ja:
     plural: 実績
     save: 実績類を保存
     singular: 実績
+  active: 
   add: 追加
   address:
     add: 住所の追加
@@ -154,6 +155,7 @@ ja:
     singular: クラス
   class_group_course_enrollment:
     save: クラスに授業を登録
+    singular: 
   class_group_enrollment:
     count: 在籍数
     create: 在籍クラスを作成
@@ -253,6 +255,41 @@ ja:
     placeholder: YYYY-MM-DD
   default: デフェルト
   delete: 削除
+  department:
+    add: 
+    defaults:
+      agriculture: 農業
+      aquaculture: 水産
+      art: 芸術
+      business: 商業
+      civics: 公民
+      elective_studies: 選択学習
+      engineering: 工学
+      english: 英語
+      extra-curricular_activities: 特別活動
+      fine_arts: 美術
+      foreign_language: 外国語
+      gymnastics: 体育
+      home_economics: 家庭
+      information_sciences: 情報
+      integrated_studies: 総合学習
+      manufacturing: 工業
+      mathematics: 数学
+      medicine: 医学
+      music: 音楽
+      native_language: 国語
+      nursing: 看護
+      physical_education: 保健体育
+      regional_history: 地理歴史
+      religion: 宗教
+      science: 理科
+      scientific_mathematics: 理数
+      welfare: 福祉
+    edit: 学科を編集
+    list: 学科一覧
+    name: 学科名
+    save: 学科を保存
+    singular: 学科
   description: 説明
   destroy: 消去
   devise:
@@ -291,6 +328,7 @@ ja:
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
+      admin_create: 管理者を作成
       admin_set_up: |-
         学園陣が初期状態です。
         管理者ユーザを登録して下さい。
@@ -456,6 +494,7 @@ ja:
     label: 性別
     male: 男性
     unknown: 未登録
+  generate_report: 
   grade:
     all_exams: 全試験
     average_points: 平均点
@@ -500,6 +539,7 @@ ja:
     already: 評価方法は既にセットに追加されています。
     edit: 評価方法セットアイテムを編集
     save: 評価方法セットアイテムを保存
+    singular: 
   graduated: 卒業日
   guardian:
     add: 保護者を追加
@@ -538,6 +578,7 @@ ja:
         student_addresses: 生徒住所
         student_contacts: 生徒連絡先
         students: 生徒
+      departments: 
       disposals:
         address: 住所を削除
         attachment: 添付ファイルを処分
@@ -552,25 +593,7 @@ ja:
         grading_sets: 評価セット
       grading_methods: 評価法
       preset:
-        grading:
-          grading_method: 採点方法
-          grading_scheme: 採点方式
-        items:
-          defaults: 初期プリセット
-          grading: 採点プリセット
-          locale: 言語プリセット
-          names: 名前
-          student: 生徒プリセット
-        names: 名前
-        pagination: ページ分けの設定
         plural: プリセット
-        save: プリセットを保存
-        singular: プリセット
-        student:
-          city: 市区
-          country: 国
-          gender: 性別
-          state: 都道府県
       school_details: 学校詳細
       school_years: 学年管理
       schools: 学校
@@ -649,28 +672,39 @@ ja:
     change: 写真を変更
     upload: 写真をアップロード
   preset:
+    address:
+      city: 
+      country: 
+      singular: 
+      state: 
+    chooser_field:
+      plural: 
+    export_formats:
+      choose: 
+      documents: 
+      plural: 
+      printables: 
+      spreadsheets: 
     grading:
       grading_method: 採点処理方式
       grading_scheme: 評価基準
-    names: 名前
-    output_formats:
-      choose: フォーマット選択
-      documents: ドキュメント
-      printables: 印刷物
-      spreadsheets: 表計算
+      singular: 
+    list: 
+    locale: 
+    name: 
+    names_order: 
     pagination: ページ分け
     per_page:
       changes: ページ当たりの差分
       default: ページ当たりの件数
       students: ページ毎の生徒数
+      teachers: 
+    person:
+      gender: 
+      singular: 
     plural: プリセット
     save: プリセットを保存
     singular: プリセット
-    student:
-      city: 市区町村
-      country: 国
-      gender: 性別
-      state: 都道府県
   profile: プロフィール
   profiles:
     new: 新規プロフィール登録
@@ -712,6 +746,7 @@ ja:
     list: 役割一覧
     name: 役割名
     save: 役割を保存
+    singular: 
   save: 保存
   schedule: 定刻
   school:
@@ -776,6 +811,7 @@ ja:
   semester_class_group:
     choose: 学期を選択
     save: 学期を保存
+    singular: 
     uniqueness: このクラスに同じ学期が既に登録されています。
   semester_course:
     uniqueness: 同じ学期が既に授業に追加されています。
@@ -805,6 +841,18 @@ ja:
     plural: 専科
     save: 専攻を保存
     singular: 専攻
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
+    plural: 
+    save: 
+    singular: 
   student:
     academic_information: 学校関連情報
     add: 生徒を追加
@@ -839,11 +887,13 @@ ja:
     edit: 生徒の実績を編集
     index: 生徒の実績一覧
     save: 生徒の実績を保存
+    singular: 
   student_name: 生徒名
   student_specialty:
     edit: 専科を編集
     index: 専科一覧
     save: 専科を保存
+    singular: 
   submit: 登録する
   success:
     enrolled: 在籍処理が成功しました。

@@ -67,27 +67,23 @@ describe 'Teachers' do
       before do
         visit gaku.teachers_path
         click edit_link
-        #wait_until_visible modal
       end
 
-      xit 'edits' do
+      it 'edits' do
         fill_in 'teacher_surname', with: 'Kostova'
         fill_in 'teacher_name',    with: 'Marta'
         click submit
-        wait_until_invisible modal
+        flash_updated?
 
-        page.should have_content 'Kostova'
-        page.should have_content 'Marta'
-        page.should_not have_content 'John'
-        page.should_not have_content 'Doe'
+        expect(find_field('teacher_name').value).to eq 'Marta'
+        expect(find_field('teacher_surname').value).to eq 'Kostova'
 
         teacher.reload
         teacher.name.should eq 'Marta'
         teacher.surname.should eq 'Kostova'
-        flash_updated?
       end
 
-      xit 'has validations' do
+      it 'has validations' do
         fill_in 'teacher_surname', with: ''
         has_validations?
       end
@@ -98,7 +94,7 @@ describe 'Teachers' do
       teacher_count = Gaku::Teacher.count
 
       expect do
-        click '#delete-teacher-link'
+        click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
         wait_until { flash_destroyed? }

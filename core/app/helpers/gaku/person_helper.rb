@@ -13,6 +13,30 @@ module Gaku
       end
     end
 
+    def name_and_ruby_for(person)
+      name_elements = [
+        {word: person.surname,  reading: person.surname_reading},
+        {word: person.name,     reading: person.name_reading}
+      ]
+
+      name_elements.map do |element|
+        content_tag :ruby do
+          [
+            content_tag(:rb) do
+              element[:word]
+            end,
+            content_tag(:rp, "( "),
+            content_tag(:rt) do
+              element[:reading]
+            end,
+            content_tag(:rp, " )"),
+            unless name_elements.last == element
+              "&nbsp;"
+            end
+          ].join.html_safe
+        end
+      end.join.html_safe
+    end
 
     def big_person_caption_for(person)
       content_tag :caption do
@@ -30,7 +54,7 @@ module Gaku
     end
 
     def student_names(student, options = {})
-      @names_preset ||= Gaku::Preset.get(:names)
+      @names_preset ||= Gaku::Preset.names
       reading = options[:reading]
       if @names_preset.blank?
         return reading ? student.surname : student.name

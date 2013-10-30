@@ -4,6 +4,7 @@ describe Gaku::SyllabusesController do
 
   let(:syllabus) { create(:syllabus) }
   let(:invalid_syllabus) { create(:invalid_syllabus) }
+  let(:department) { create(:department) }
 
   context 'as admin' do
     before { as :admin }
@@ -25,11 +26,15 @@ describe Gaku::SyllabusesController do
     context 'js' do
 
       describe 'XHR #new' do
-        before { gaku_js_get :new }
+        before do
+          department
+          gaku_js_get :new
+        end
 
         it { should respond_with 200 }
         it('assigns @syllabus') { expect(assigns(:syllabus)).to be_a_new(Gaku::Syllabus) }
         it('renders the :new template') { template? :new }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
       end
 
       describe 'POST #create' do
@@ -79,11 +84,16 @@ describe Gaku::SyllabusesController do
       end
 
       describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: syllabus }
+        before do
+          department
+          gaku_js_get :edit, id: syllabus
+        end
 
         it { should respond_with 200 }
         it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
         it('renders the :edit template') { template? :edit }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
+
       end
 
       describe 'PATCH #update' do

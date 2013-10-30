@@ -1,7 +1,11 @@
-.modal.hide#delete-modal
-	.modal-header
-		button type="button" class="close" data-dismiss="modal" ×
-		h3 = t(:delete)
-	.modal-body
-		.delete_button style='text-align:center'
-			=link_to t(:delete), target, method: :delete, class: 'btn btn-danger', data: {confirm: t('confirm_delete')}
+#delete-modal.modal.hide
+  .modal-dialog
+    .alert-dismissable
+      .panel.panel-danger
+        .panel-heading
+          .panel-title
+            = modal_close_button
+            = t(:confirm_delete)
+        .panel-body
+          .delete_button style='text-align:center'
+            = link_to_delete_with_text(target)

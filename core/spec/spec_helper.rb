@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'sidekiq'
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../dummy/config/environment', __FILE__)
@@ -9,7 +8,9 @@ require 'database_cleaner'
 require 'active_record/fixtures'
 require 'factory_girl_rails'
 require 'paperclip/matchers'
-require 'sidekiq/testing'
+require 'handy_controller_helpers'
+require 'ffaker'
+require 'shoulda-matchers'
 
 require 'gaku/testing/env'
 require 'gaku/testing/factories'
@@ -34,7 +35,6 @@ if ENV['COVERAGE']
     add_filter '/config/**'
     add_group 'Controllers', 'app/controllers'
     add_group 'Helpers', 'app/helpers'
-    add_group 'Workers', 'app/workers'
     add_group 'Mailers', 'app/mailers'
     add_group 'Models', 'app/models'
     add_group 'Libraries', 'lib'

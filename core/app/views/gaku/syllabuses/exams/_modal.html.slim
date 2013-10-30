@@ -1,6 +1,4 @@
 = modal_for 'edit-syllabus-exam-modal' do
-  = modal_header t(:'exam.edit')
-  = modal_form_for [@syllabus, @exam] do |f|
-    = modal_body do
-      = render 'form_fields', f: f
-      = buttons_for @exam, nested_id: 'syllabus-exam'
+  = modal_form_for [@syllabus, @exam], resource: 'syllabus-exam' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @exam, resource: 'syllabus-exam'

@@ -1,4 +1,4 @@
-= remote_nested_form_for [:admin, @school, @program] do |f|
+= remote_nested_form_for [:admin, @school, @program], resource: 'admin-school-program' do |f|
   = render 'form_fields', f: f
 
   = render 'gaku/admin/schools/programs/program_levels/form_fields', f: f
@@ -13,8 +13,8 @@
 
   br
 
-  .row-fluid
-    .span12
-      =buttons_for @program, nested_id: 'admin-school-program'
+  .row
+    .col-md-12
+      = buttons_for @program, resource: 'admin-school-program'
 
 

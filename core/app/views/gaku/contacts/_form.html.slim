@@ -1,4 +1,4 @@
-= remote_form_for [@nested_resources, @polymorphic_resource, @contact].flatten do |f|
+= remote_form_for [@nested_resources, @polymorphic_resource, @contact].flatten, resource: @polymorphic_resource_name do |f|
   = render 'form_fields', f: f
-  = modal_buttons_for @contact, nested_id: @polymorphic_resource_name
+  = buttons_for @contact, resource: @polymorphic_resource_name
 

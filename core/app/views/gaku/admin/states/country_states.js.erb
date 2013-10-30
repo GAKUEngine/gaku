@@ -1,1 +1,2 @@
-$('#admin-country-states').html('<%= render_js_partial("country_table", states: @states, country: @country) %>');
+$('#admin-country-states').html('<%= j render("country_table", states: @states, country: @country) %>');
+$('.admin-states-count').html('<%= print_count(@count, t_state_list) %>');

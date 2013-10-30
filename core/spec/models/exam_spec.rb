@@ -19,6 +19,7 @@ describe Gaku::Exam do
     it { should have_many :attendances }
     it { should have_many :exam_scores }
     it { should belong_to :grading_method }
+    it { should belong_to :department }
 
     it { should accept_nested_attributes_for :exam_portions }
   end
@@ -44,6 +45,25 @@ describe Gaku::Exam do
   end
 
   context 'counter_cache' do
+
+    context 'exam_portions_count' do
+      let(:exam_portion) { build(:exam_portion) }
+      let(:exam_with_portions) { create(:exam, :with_portions) }
+
+      it 'increments exam_portions_count' do
+        expect do
+          exam.exam_portions << exam_portion
+        end.to change { exam.reload.exam_portions_count }.by 1
+      end
+
+      it 'decrements exam_portions_count' do
+        expect do
+          exam_with_portions.exam_portions.last.destroy
+        end.to change { exam_with_portions.reload.exam_portions_count }.by -1
+      end
+    end
+
+
     context 'notes_count' do
 
       let(:note) { build(:note) }

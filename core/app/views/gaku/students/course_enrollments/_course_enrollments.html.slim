@@ -1,21 +1,16 @@
 #student-course-enrollments
-  .row-fluid
+  = index_header do
     #new-student-course-enrollment.hide
     .pull-left
       =count_div 'student-course-enrollments-count' do
         = print_count @student.courses_count, t(:'course.list')
     .pull-right
       = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], id: "new-student-course-enrollment-link" if can_edit?
-  .row-fluid
-    hr
-  .row-fluid
-    .span12
+  = index_body do
       = table_for 'student-course-enrollments-index' do
         thead
           tr
-            = th t(:id)
             = th t(:'course.code')
-            = th t(:'course.options')
+            = th_actions 1 if can_edit?
         tbody
           = render partial: 'gaku/students/course_enrollments/course_enrollment', collection: @student.courses, as: 'course'
-/#new-student-course-enrollment-form

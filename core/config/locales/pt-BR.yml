@@ -12,6 +12,7 @@ pt-BR:
     plural: Conquistas
     save: Salvar Conquista
     singular: Conquista
+  active: 
   add: Adicionar
   address:
     add: Adicionar Endereço
@@ -154,6 +155,7 @@ pt-BR:
     singular: Grupo de Classe
   class_group_course_enrollment:
     save: Salvar Curso para Grupo de Classes
+    singular: 
   class_group_enrollment:
     count: Contagem de matrículas
     create: Criar Matrícula de Classe
@@ -253,6 +255,41 @@ pt-BR:
     placeholder: DD-MM-YYYY
   default: Padrão
   delete: Excluir
+  department:
+    add: 
+    defaults:
+      agriculture: 
+      aquaculture: 
+      art: 
+      business: 
+      civics: 
+      elective_studies: 
+      engineering: 
+      english: 
+      extra-curricular_activities: 
+      fine_arts: 
+      foreign_language: 
+      gymnastics: 
+      home_economics: 
+      information_sciences: 
+      integrated_studies: 
+      manufacturing: 
+      mathematics: 
+      medicine: 
+      music: 
+      native_language: 
+      nursing: 
+      physical_education: 
+      regional_history: 
+      religion: 
+      science: 
+      scientific_mathematics: 
+      welfare: 
+    edit: 
+    list: 
+    name: 
+    save: 
+    singular: 
   description: 
   destroy: 
   devise:
@@ -291,6 +328,7 @@ pt-BR:
       updated: Sua senha foi alterada com sucesso. Agora você está logado(a).
       updated_not_active: Sua senha foi alterada com sucesso.
     registrations:
+      admin_create: 
       admin_set_up: Esta é a primeira vez que você está executando esta aplicação. Por favor defina o usuário administrador.
       destroyed: 
       inactive_signed_up: 
@@ -452,6 +490,7 @@ pt-BR:
     label: 
     male: 
     unknown: 
+  generate_report: 
   grade:
     all_exams: 
     average_points: 
@@ -496,6 +535,7 @@ pt-BR:
     already: 
     edit: 
     save: 
+    singular: 
   graduated: 
   guardian:
     add: 
@@ -534,6 +574,7 @@ pt-BR:
         student_addresses: 
         student_contacts: 
         students: 
+      departments: 
       disposals:
         address: 
         attachment: 
@@ -548,25 +589,7 @@ pt-BR:
         grading_sets: 
       grading_methods: 
       preset:
-        grading:
-          grading_method: 
-          grading_scheme: 
-        items:
-          defaults: 
-          grading: 
-          locale: 
-          names: 
-          student: 
-        names: 
-        pagination: 
         plural: 
-        save: 
-        singular: 
-        student:
-          city: 
-          country: 
-          gender: 
-          state: 
       school_details: 
       school_years: 
       schools: 
@@ -645,28 +668,39 @@ pt-BR:
     change: 
     upload: 
   preset:
+    address:
+      city: 
+      country: 
+      singular: 
+      state: 
+    chooser_field:
+      plural: 
+    export_formats:
+      choose: 
+      documents: 
+      plural: 
+      printables: 
+      spreadsheets: 
     grading:
       grading_method: 
       grading_scheme: 
-    names: 
-    output_formats:
-      choose: 
-      documents: 
-      printables: 
-      spreadsheets: 
+      singular: 
+    list: 
+    locale: 
+    name: 
+    names_order: 
     pagination: 
     per_page:
       changes: 
       default: 
       students: 
+      teachers: 
+    person:
+      gender: 
+      singular: 
     plural: 
     save: 
     singular: 
-    student:
-      city: 
-      country: 
-      gender: 
-      state: 
   profile: 
   profiles:
     new: 
@@ -708,6 +742,7 @@ pt-BR:
     list: 
     name: 
     save: 
+    singular: 
   save: 
   schedule: 
   school:
@@ -772,6 +807,7 @@ pt-BR:
   semester_class_group:
     choose: 
     save: 
+    singular: 
     uniqueness: 
   semester_course:
     uniqueness: 
@@ -798,6 +834,18 @@ pt-BR:
     major_only: 
     minor: 
     name: 
+    plural: 
+    save: 
+    singular: 
+  state:
+    abbr: 
+    add: 
+    code: 
+    country_iso: 
+    edit: 
+    list: 
+    name: 
+    name_ascii: 
     plural: 
     save: 
     singular: 
@@ -835,11 +883,13 @@ pt-BR:
     edit: 
     index: 
     save: 
+    singular: 
   student_name: 
   student_specialty:
     edit: 
     index: 
     save: 
+    singular: 
   submit: 
   success:
     enrolled: 

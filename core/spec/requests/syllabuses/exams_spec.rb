@@ -2,34 +2,30 @@ require 'spec_helper'
 
 describe 'Syllabus Exams' do
 
+  before(:all) { set_resource 'syllabus-exam' }
   before { as :admin }
 
   let(:exam) { create(:exam) }
-  let(:syllabus) { create(:syllabus, name: 'Biology', code: 'bio') }
   let(:exam) { create(:exam, name: 'Astronomy Exam') }
+  let(:department) { create(:department) }
+  let(:syllabus) { create(:syllabus, name: 'Biology', code: 'bio', department: department) }
+
   let!(:count_div) { '.exams-count' }
 
   existing_exam_form           = '#new-existing-exam'
   new_existing_exam_link       = '#new-existing-exam-link'
   submit_existing_exam_button  = '#submit-existing-exam-button'
-  cancel_existing_exam_link    = '#cancel-existing-exam-link'
-
-  before :all do
-    set_resource 'syllabus-exam'
-  end
+  cancel_existing_exam_link    = '#close-existing-exam-button'
 
   context 'existing exam' do
     before do
       exam
-      syllabus
-      visit gaku.syllabuses_path
-
-      within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
-      page.should have_content 'No Exams'
+      visit gaku.edit_syllabus_path(syllabus)
+      has_content? 'No Exams'
     end
 
     it 'adds existing exam', js: true do
-      within(count_div) { page.should have_content 'Exams list' }
+      within(count_div) { has_content? 'Exams list' }
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
 
@@ -37,12 +33,14 @@ describe 'Syllabus Exams' do
       click submit_existing_exam_button
 
       wait_until_invisible existing_exam_form
-      page.should have_content exam.name
+      has_content? exam.name
       flash? 'successfully added'
-      within(count_div) { page.should have_content 'Exams list(1)' }
+
+      within(count_div) { has_content? 'Exams list(1)' }
+      within(tab_link) { has_content? 'Exams(1)' }
     end
 
-    xit 'cancels adding existing exam', cancel: true, js: true do
+    it 'cancels adding existing exam', cancel: true, js: true do
       click new_existing_exam_link
       wait_until_visible submit_existing_exam_button
       invisible? new_existing_exam_link
@@ -56,16 +54,14 @@ describe 'Syllabus Exams' do
   context 'new exam' do
     context 'new' do
       before do
-        syllabus
-        visit gaku.syllabuses_path
-        within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
-        page.should have_content 'No Exams'
+        visit gaku.edit_syllabus_path(syllabus)
+        has_content? 'No Exams'
         click new_link
         wait_until_visible submit
       end
 
       it 'creates and shows', js: true  do
-        within(count_div) { page.should have_content 'Exams list' }
+        within(count_div) { has_content? 'Exams list' }
         expect do
           #required
           fill_in 'exam_name', with: 'Biology Exam'
@@ -74,9 +70,14 @@ describe 'Syllabus Exams' do
           wait_until_invisible submit
         end.to change(syllabus.exams, :count).by 1
 
-        page.should have_content 'Biology Exam'
-        page.should_not have_content 'No Exams'
+        within(table) do
+          has_content? department.name
+          has_content? 'Biology Exam'
+          has_no_content? 'No Exams'
+        end
+        expect(syllabus.exams.last.department).to eq(department)
         within(count_div) { page.should have_content 'Exams list(1)' }
+
         flash_created?
       end
 
@@ -87,9 +88,6 @@ describe 'Syllabus Exams' do
         syllabus.exams.count.should eq 0
       end
 
-      it 'cancels creating', cancel: true, js: true do
-        ensure_cancel_creating_is_working
-      end
     end
 
     context 'created exam' do
@@ -105,30 +103,31 @@ describe 'Syllabus Exams' do
         fill_in 'exam_name', with: 'Ruby Exam'
         click submit
 
-        page.should have_content 'Ruby Exam'
+        has_content? 'Ruby Exam'
 
         flash_updated?
       end
 
       it 'shows'  do
         click show_link
-        page.should have_content 'Show Exam'
-        page.should have_content 'Exam portions list'
-        page.should have_content 'Astronomy Exam'
+        has_content? 'Show Exam'
+        has_content? 'Exam portions list'
+        has_content? 'Astronomy Exam'
         current_path.should == gaku.exam_path(id: exam.id)
       end
 
       it 'deletes', js: true do
-        page.should have_content exam.name
-        within(count_div) { page.should have_content 'Exams list(1)' }
+        has_content? exam.name
+        within(count_div) { has_content? 'Exams list(1)' }
 
         expect do
           ensure_delete_is_working
         end.to change(syllabus.exams, :count).by -1
-
-        within(table){ page.should_not have_content exam.name }
-        within(count_div) { page.should_not have_content 'Exams list(1)' }
         flash_destroyed?
+
+        within(table){ has_no_content? exam.name }
+        within(count_div) { has_no_content? 'Exams list(1)' }
+
       end
     end
   end

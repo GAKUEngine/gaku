@@ -1,14 +1,13 @@
-= well_div do
-  .span9.teacher-index
-    = render 'show_table', teacher: teacher
+= panel_for 'teacher-panel' do
+  = panel_header 'Teacher information', teacher
 
-  .span3.well
-    = render 'gaku/shared/picture', resource: teacher
+  table.table.table-bordered.th-center
+    tbody
+      = render 'gaku/shared/fields/person_show_table', person: teacher
+      = render 'gaku/shared/fields/address_and_contact_show_table', person: teacher
 
 = render 'tabs'
 
-= well_div do
-  .span5
-    = link_to_edit_with_text [:edit, teacher]
-  .span5
-    = link_to_back teachers_path
+= footer do
+  .col-md-12
+    = link_to_index teachers_path

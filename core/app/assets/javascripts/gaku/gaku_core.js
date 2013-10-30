@@ -10,13 +10,15 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.effect-slide
 
-//= require bootstrap-alert
-//= require bootstrap-button
-//= require bootstrap-tab
-//= require bootstrap-dropdown
-//= require bootstrap-modal
-
+//= require bootstrap.min
 //= require bootstrap-datepicker/core
+
+// require bootstrap
+// require bootstrap-alert
+// require bootstrap-button
+// require bootstrap-tab
+// require bootstrap-dropdown
+// require bootstrap-modal
 
 //= require underscore
 //= require moment
@@ -28,8 +30,8 @@
 //= require gaku/gaku
 
 //= require jquery_nested_form
-//= require gaku_forms
-//= require gaku_nested_forms
+//= require phantom_forms
+//= require phantom_nested_forms
 
 //= require_tree ./backbone/
 //= require_tree .

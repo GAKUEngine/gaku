@@ -1,7 +1,7 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
 
-    include Notes
+    include Notes, Trashable
 
     has_many :enrollments, class_name: 'Gaku::ClassGroupEnrollment'
     has_many :students, through: :enrollments

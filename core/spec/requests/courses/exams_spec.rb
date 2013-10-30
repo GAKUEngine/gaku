@@ -16,7 +16,7 @@ describe 'CourseExams', js: true  do
     course.students << student
     syllabus.courses << course
 
-    visit gaku.course_path(course)
+    visit gaku.edit_course_path(course)
 
     click '#course-exam-link'
   end

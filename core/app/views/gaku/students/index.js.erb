@@ -1,5 +1,5 @@
-$("#students-index-div").html("<%= escape_javascript(render('students')) %>");
-$('.students-count').html('<%= print_count(@students_count, t_student_list) %>');
+$("#students-index-div").html("<%= j render('students') %>");
+$('.students-count').html("<%= print_count(@students_count, t(:'student.list')) %>");
 
 var students_per_page = 10;
 var pagination = $('.pagination');

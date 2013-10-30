@@ -7,6 +7,8 @@ module Gaku
     has_many :program_specialties
     has_many :programs, through: :program_specialties
 
+    belongs_to :department
+
     validates :name, presence: true
 
     def to_s

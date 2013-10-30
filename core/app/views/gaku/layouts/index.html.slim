@@ -1,14 +1,12 @@
 = content_for :content do
 
-  .row-fluid
-    = yield :new_form
-  .row-fluid
-    = yield :index_header
-  .row-fluid
-    .span12
-      hr/
-  .row-fluid
-    .span12.well
-      = yield
+  = yield :new_form
+
+  .row
+    .col-md-12
+      = yield :index_header
+  hr
+
+  = yield
 
 = render file: 'gaku/layouts/gaku'
