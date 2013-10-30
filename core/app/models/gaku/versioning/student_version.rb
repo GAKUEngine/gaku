@@ -4,8 +4,6 @@ module Gaku::Versioning
 
     serialize :human_changes
 
-    paginates_per Gaku::Preset.default_per_page
-
     before_save :set_human_changes
 
     private

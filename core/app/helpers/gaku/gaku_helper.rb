@@ -139,6 +139,23 @@ module Gaku
       object.new_record? || object.country.states.blank?
     end
 
+    def link_to_download(resource, options = {})
+      name = content_tag(:span, nil, class: 'glyphicon glyphicon-download')
+      attributes = {
+        class: "btn btn-xs btn-success download-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
+    def ajax_link_to_recovery(resource, options = {})
+      name = content_tag(:span, nil, class: 'glyphicon glyphicon-repeat')
+      attributes = {
+        remote: true,
+        class: "btn btn-xs btn-success recovery-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
   end
 end
 

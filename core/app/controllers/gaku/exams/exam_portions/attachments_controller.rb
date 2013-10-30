@@ -2,51 +2,44 @@ module Gaku
   class Exams::ExamPortions::AttachmentsController < GakuController
 
     respond_to :js, :html
-    inherit_resources
-    actions :index, :show, :new, :create, :update, :edit, :destroy
 
-    before_filter :exam, only: [:new, :create]
-    before_filter :exam_portion, only: [:new, :create,  :index]
-    before_filter :count, only: :index
+    before_action :set_exam, only: [:new, :create]
+    before_action :set_exam_portion, only: [:new, :create,  :index]
+
+    def new
+      @attachment = Attachment.new
+      respond_with @attachment
+    end
 
 
     def create
-      @attachment = @exam_portion.attachments.build(attachment_params)
-      respond_to do |format|
-        if @attachment.save
-          format.html { redirect_to [@exam, @exam_portion], notice: t(:'notice.uploaded', resource: t(:'attachment.singular') ) }
-        else
-          format.html { redirect_to [@exam, @exam_portion], flash: {error: t(:'errors.not_uploaded', resource: t(:'attachment.singular')) } }
-        end
-      end
+      @attachment = @exam_portion.attachments.create(attachment_params)
+      set_count
+      respond_with @attachment, location: [@exam, @exam_portion]
     end
 
     protected
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:attachment).permit(attachment_attr)]
+    def attachment_params
+      params.require(:attachment).permit(attributes)
     end
 
     private
 
-    def attachment_attr
+    def attributes
       [:name, :description, :asset]
     end
 
-    def attachment_params
-      params.require(:attachment).permit(attachment_attr)
-    end
 
-    def exam
+    def set_exam
       @exam = Exam.find(params[:exam_id])
     end
 
-    def exam_portion
+    def set_exam_portion
       @exam_portion = ExamPortion.find(params[:id] || params[:exam_portion_id])
     end
 
-    def count
+    def set_count
       @count = @exam_portion.attachments.count
     end
   end

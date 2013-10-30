@@ -4,7 +4,7 @@
 
 .row
   .col-md-3
-    = f.select :country_id, options_from_collection_for_select(@countries, :id, :name) , { prompt: t(:'address.choose_country'), selected: f.object.country_id || country_preset }, id: "country_dropdown", label: t(:'address.country')
+    = f.select :country_id, options_from_collection_for_select(@countries, :id, :name) , { prompt: t(:'address.choose_country'), selected: f.object.country_id || Gaku::Preset.address('country') }, id: "country_dropdown", label: t(:'address.country')
   .col-md-3
     #state-dropdown
       = f.collection_select :state_id, state_load(f.object), :id, :name, { prompt: t(:'address.state.choose')} , disabled: disabled?(f.object), label: t(:'address.state')
@@ -16,11 +16,11 @@
 
 .row
   .col-md-3
-    = f.text_field :city, value: f.object.city ||  city_preset, label: t(:'address.city')
+    = f.text_field :city, value: f.object.city ||  Gaku::Preset.address('city'), label: t(:'address.city')
   .col-md-3
     = f.text_field :address1, label: t(:'address.address1')
   .col-md-3
     = f.text_field :address2, label: t(:'address.address2')
 
 javascript:
-  var state_preset = '#{state_preset}'
+  var state_preset = "#{Gaku::Preset.address('state')}"

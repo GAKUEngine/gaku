@@ -1,0 +1,46 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#admin-preset-pagination-tab-link data-toggle="tab" href="#pagination"
+          = t(:'preset.pagination')
+      li
+        a#admin-preset-names-order-tab-link data-toggle="tab" href="#names_order"
+          = t(:'preset.names_order')
+      li
+        a#admin-preset-locale-tab-link data-toggle="tab" href="#locale"
+          = t(:'preset.locale')
+      li
+        a#admin-preset-person-tab-link data-toggle="tab" href="#person"
+          = t(:'preset.person.singular')
+      li
+        a#admin-preset-address-tab-link data-toggle="tab" href="#address"
+          = t(:'preset.address.singular')
+      li
+        a#admin-preset-grading-tab-link data-toggle="tab" href="#grading"
+          = t(:'preset.grading.singular')
+      li
+        a#admin-preset-chooser-fields-tab-link data-toggle="tab" href="#chooser_fields"
+          = t(:'preset.chooser_field.plural')
+      li
+        a#admin-preset-export-formats-tab-link data-toggle="tab" href="#export_formats"
+          = t(:'preset.export_formats.plural')
+
+    .tab-content
+      #pagination.tab-pane.active
+        = render 'gaku/admin/presets/pagination'
+      #names_order.tab-pane
+        = render 'gaku/admin/presets/names_order'
+      #locale.tab-pane
+        = render 'gaku/admin/presets/locale'
+      #person.tab-pane
+        = render 'gaku/admin/presets/person'
+      #address.tab-pane
+        = render 'gaku/admin/presets/address'
+      #grading.tab-pane
+        = render 'gaku/admin/presets/grading'
+      #chooser_fields.tab-pane
+        = render 'gaku/admin/presets/chooser_fields'
+      #export_formats.tab-pane
+        = render 'gaku/admin/presets/export_formats'
+

@@ -1,6 +1,6 @@
 class GakuCore < ActiveRecord::Migration
-  def change
 
+  def change
     create_table 'gaku_achievements' do |t|
       t.string   'name'
       t.text     'description'
@@ -222,6 +222,7 @@ class GakuCore < ActiveRecord::Migration
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',       default: 0
+      t.integer  'exam_portions_count', default: 0
       t.references 'department'
     end
 
@@ -363,13 +364,6 @@ class GakuCore < ActiveRecord::Migration
     end
 
     add_index 'gaku_notes', ['notable_id', 'notable_type'], name: 'index_gaku_notes_on_notable_id_and_notable_type', using: :btree
-
-    create_table 'gaku_presets' do |t|
-      t.string   'name'
-      t.string   'content'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-    end
 
     create_table 'gaku_program_levels' do |t|
       t.integer 'program_id'

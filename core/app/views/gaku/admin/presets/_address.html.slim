@@ -1,0 +1,19 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-3
+        = f.fields_for :address do |a|
+          = a.label t(:'preset.address.country')
+          = a.select :country, @countries, {selected: @preset['address']['country'], prompt: t(:'address.choose_country')}
+
+      .col-md-3
+        = f.fields_for :address do |a|
+          = a.label t(:'preset.address.state')
+          = a.text_field :state, value: @preset['address']['state']
+
+      .col-md-3
+        = f.fields_for :address do |a|
+          = a.label t(:'preset.address.city')
+          = a.text_field :city, value: @preset['address']['city']
+
+  = buttons_for @preset, resource: 'admin-preset'

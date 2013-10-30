@@ -1,39 +1,69 @@
 module Gaku
   class Admin::PresetsController < Admin::BaseController
 
-    def names
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:names])
+    respond_to :html, only: %i( index edit update )
+    before_action :set_preset, except: :index
+
+    def index
+      @presets = Preset.all
+      @count = Preset.count
+      respond_with @presets
     end
 
-    def students
-      @countries = Country.all.sort_by(&:name).map { |s| [s.name, s.iso] }
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:student])
+    def edit
+      @per_page_values = [10, 25, 50, 100]
+      @countries = Country.all
     end
 
-    def locale
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:locale])
+    def update
+      @preset.update(preset_params)
+      respond_with @preset, location: [:edit, :admin, @preset]
     end
 
-    def grading
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:grading])
+    private
+
+    def preset_params
+      params.require(:preset).permit(preset_attr)
     end
 
-    def pagination
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:pagination])
+    def preset_attr
+      [
+        :name, :default, :active, :locale, :names_order,
+        pagination: pagination_attr,
+        grading: grading_attr,
+        person: person_attr,
+        address: address_attr,
+        export_formats: export_formats_attr,
+        chooser_fields: chooser_fields_attr
+      ]
     end
 
-    def output_formats
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:output_formats])
+    def pagination_attr
+      %i( default students teachers changes )
     end
 
-    def defaults
-      @preset_hash = Preset.load_presets_hash(Preset::PRESETS[:default])
+    def grading_attr
+      %i( method scheme )
     end
 
-    def update_presets
-      Preset.save_presets(params[:presets])
-      redirect_to :back,
-                  notice: t(:'notice.updated', resource: t(:'preset.plural'))
+    def person_attr
+      %i( gender )
+    end
+
+    def address_attr
+      %i( country state city )
+    end
+
+    def export_formats_attr
+      %i( documents printables spreadsheets )
+    end
+
+    def chooser_fields_attr
+      %i( surname name birth_date sex class_name seat_number admitted_on primary_address primary_contact assignments )
+    end
+
+    def set_preset
+      @preset = Preset.find(params[:id])
     end
 
   end
