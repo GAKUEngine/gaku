@@ -1,0 +1,19 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-4
+        = f.fields_for :export_formats do |ef|
+          = ef.label t(:'preset.export_formats.spreadsheets')
+          = ef.select :spreadsheets, ['xls','xml','ods','fods', 'xlsx'], {selected: @preset['export_formats']['spreadsheets'], prompt: t(:'preset.export_formats.choose')}
+
+      .col-md-4
+        = f.fields_for :export_formats do |ef|
+          = ef.label t(:'preset.export_formats.printables')
+          = ef.select :printables, ['pdf', 'ps'], {selected: @preset['export_formats']['printables'], prompt: t(:'preset.export_formats.choose')}
+
+      .col-md-4
+        = fields_for :export_formats do |ef|
+          = ef.label t(:'preset.export_formats.documents')
+          = ef.select :documents, ['wip will be added'], {selected: @preset['export_formats']['documents'], prompt: t(:'preset.export_formats.choose')}
+
+  = buttons_for @preset, resource: 'admin-preset'

@@ -2,21 +2,30 @@ require 'spec_helper'
 
 describe 'Admin Presets Grading' do
 
+  before(:all) { set_resource 'admin-preset' }
   before { as :admin }
 
+  let!(:preset) { create(:preset) }
+
   before do
-    visit gaku.grading_admin_presets_path
+    visit gaku.admin_presets_path
+    click edit_link
+    click '#admin-preset-grading-tab-link'
   end
 
-  context '#default', js:true do
-    it 'saves' do
-      fill_in 'presets_grading_method', with:'Exam'
-      fill_in 'presets_grading_scheme', with:'A'
-      click '#submit-preset'
+  it 'saves', js: true do
+    fill_in 'preset_grading_method', with: 'Exam'
+    fill_in 'preset_grading_scheme', with: 'A'
+    click submit
 
-      flash_updated?
-      expect(Gaku::Preset.load_presets_hash(Gaku::Preset::PRESETS[:grading])).to eq({grading_method: "Exam", grading_scheme: "A"})
-    end
+    flash_updated?
+    click '#admin-preset-grading-tab-link'
+    expect(find_field('preset_grading_method').value).to eq 'Exam'
+    expect(find_field('preset_grading_scheme').value).to eq 'A'
+
+    preset.reload
+    expect(preset['grading']['method']).to eq 'Exam'
+    expect(preset['grading']['scheme']).to eq 'A'
   end
 
 end

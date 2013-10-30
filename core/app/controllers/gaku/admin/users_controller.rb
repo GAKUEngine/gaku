@@ -10,7 +10,7 @@ module Gaku
     before_action :set_roles
 
     def index
-      @users = User.all.page(params[:page]).per(Preset.default_per_page)
+      @users = User.all.page(params[:page])
       @count = User.count
       respond_with @users
     end

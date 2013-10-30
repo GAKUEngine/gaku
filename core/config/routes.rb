@@ -256,19 +256,7 @@ Gaku::Core::Engine.routes.draw do
       resources :student_addresses, controller: 'student_address_changes'
     end
 
-    resources :presets do
-      collection do
-        get :students
-        get :locale
-        get :grading
-        get :pagination
-        get :defaults
-        get :output_formats
-        get :names
-
-        put :update_presets
-      end
-    end
+    resources :presets
 
     resources :disposals do
       collection do

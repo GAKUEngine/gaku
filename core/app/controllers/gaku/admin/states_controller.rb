@@ -80,7 +80,7 @@ module Gaku
       end
 
       def country_preset
-        Preset.get('address_country')
+        Preset.address('country')
       end
 
       def set_default_country

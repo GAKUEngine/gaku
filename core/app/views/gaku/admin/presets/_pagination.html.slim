@@ -1,0 +1,25 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-2
+        = f.fields_for :pagination do |p|
+          = p.label t(:'preset.per_page.default')
+          = p.select :default, @per_page_values, { selected: @preset['pagination']['default'] }
+
+      .col-md-2
+        = f.fields_for :pagination do |p|
+          = p.label t(:'preset.per_page.students')
+          = p.select :students, @per_page_values, { selected: @preset['pagination']['students'] }
+
+      .col-md-2
+        = f.fields_for :pagination do |p|
+          = p.label t(:'preset.per_page.teachers')
+          = p.select :teachers, @per_page_values, { selected: @preset['pagination']['teachers'] }
+
+
+      .col-md-2
+        = f.fields_for :pagination do |p|
+          = p.label t(:'preset.per_page.changes')
+          = p.select :changes, @per_page_values, { selected: @preset['pagination']['changes'] }
+
+  = buttons_for @preset, resource: 'admin-preset'

@@ -1,0 +1,14 @@
+= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+  = fields_for :preset do |f|
+    .row
+      .col-md-6
+        = f.fields_for :grading do |g|
+          = g.label t(:'preset.grading.grading_method')
+          = g.text_field :method, value: @preset['grading']['method']
+
+      .col-md-6
+        = f.fields_for :grading do |g|
+          = g.label t(:'preset.grading.grading_scheme')
+          = g.text_field :scheme, value: @preset['grading']['scheme']
+
+  = buttons_for @preset, resource: 'admin-preset'

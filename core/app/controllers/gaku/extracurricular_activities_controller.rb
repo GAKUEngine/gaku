@@ -45,7 +45,7 @@ module Gaku
     def index
       @search = ExtracurricularActivity.search(params[:q])
       results = @search.result(distinct: true)
-      @extracurricular_activities = results.page(params[:page]).per(Preset.default_per_page)
+      @extracurricular_activities = results.page(params[:page])
       set_count
       respond_with @extracurricular_activities
     end
