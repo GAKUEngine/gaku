@@ -35,18 +35,13 @@ button.close-form {
 }
 
 
-.panel:last-child {
-margin-bottom: 20px;
-margin-top: 10px;
-}
+// .panel:last-child {
+//   margin-bottom: 20px;
+//   margin-top: 10px;
+// }
 
 .container {
   max-width: 1900px;
-}
-
-.panel-footer {
-  padding: 0px;
-  border: none;
 }
 
 .alert-dismissable .close {
@@ -577,7 +572,6 @@ font-size: 24px;
 }
 
 // for fix
-
 .table {
   & thead>tr>th {
     vertical-align: middle;
@@ -588,11 +582,11 @@ font-size: 24px;
   }
 }
 
-// .tab-pane {
-//   .panel {
-//     margin-bottom: 15px;
-//   }
-//   .panel:last-child {
-//     margin-bottom: 0px;
-//   }
-// }
+.tab-pane {
+  .panel {
+    margin-bottom: 15px;
+  }
+  .panel:last-child {
+    margin-bottom: 0px;
+  }
+}
