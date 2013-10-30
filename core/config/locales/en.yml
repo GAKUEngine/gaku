@@ -12,6 +12,7 @@ en:
     plural: Achievements
     save: Save Achievement
     singular: Achievement
+  active: Active
   add: Add
   address:
     add: Add Address
@@ -154,6 +155,7 @@ en:
     singular: Class Group
   class_group_course_enrollment:
     save: Save Course to Class Group
+    singular: Course
   class_group_enrollment:
     count: Enrollments count
     create: Create Class Enrollment
@@ -245,13 +247,6 @@ en:
     singular: Course Group
   course_group_enrollment:
     save: Save to Course Group
-  department:
-    singular: Department
-    add: Add department
-    list: Departments list
-    name: Department name
-    edit: Edit department
-    save: Save department
   date:
     formats:
       default: '%Y-%m-%d'
@@ -260,6 +255,41 @@ en:
     placeholder: YYYY-MM-DD
   default: Default
   delete: Delete
+  department:
+    add: Add department
+    defaults:
+      agriculture: Agriculture
+      aquaculture: Aquaculture
+      art: Art
+      business: Business
+      civics: Civics
+      elective_studies: Elective Studies
+      engineering: Engineering
+      english: English
+      extra-curricular_activities: Extra-Curricular Activities
+      fine_arts: Fine Arts
+      foreign_language: Foreign Language
+      gymnastics: Gymnastics
+      home_economics: Home Economics
+      information_sciences: Information Sciences
+      integrated_studies: Integrated Studies
+      manufacturing: Manufacturing
+      mathematics: Mathematics
+      medicine: Medicine
+      music: Music
+      native_language: Native Language
+      nursing: Nursing
+      physical_education: Physical Education
+      regional_history: Regional History
+      religion: Religion
+      science: Science
+      scientific_mathematics: Scientific Mathematics
+      welfare: Welfare
+    edit: Edit department
+    list: Departments list
+    name: Department name
+    save: Save department
+    singular: Department
   description: Description
   destroy: Destroy
   devise:
@@ -298,6 +328,7 @@ en:
       updated: Your password was changed successfully. You are now signed in.
       updated_not_active: Your password was changed successfully.
     registrations:
+      admin_create: Create Admin
       admin_set_up: |-
         This is your first time running GAKU Engine.
         Please set up the Admin user.
@@ -358,7 +389,7 @@ en:
     messages:
       already_confirmed: was already confirmed, please try signing in
       expired: has expired, please request a new one
-      file_type_unsupported: File Type Not Supported.
+      file_type_unsupported: File Type Not Supported !
       file_unreadable: File could not be read.
       not_found: not found
       not_locked: was not locked
@@ -456,7 +487,6 @@ en:
         notice: '%{resource_name} was successfully updated!'
   full_name: Full Name
   full_name_reading: Full Name Reading
-  generate_report: Generate Report
   gaku_engine: GAKU Engine
   gender:
     choose: Choose Gender
@@ -508,6 +538,7 @@ en:
     already: Grading Method already added to Grading Method Set
     edit: Edit Grading Method Set Item
     save: Save Grading Method Set Item
+    singular: Geading Method Set Item
   graduated: Graduated On
   guardian:
     add: Add Guardian
@@ -561,25 +592,7 @@ en:
         grading_sets: Grading Sets
       grading_methods: Grading Methods
       preset:
-        grading:
-          grading_method: Grading Method
-          grading_scheme: Grading Scheme
-        items:
-          defaults: Defaults Preset
-          grading: Grading Preset
-          locale: Locale Preset
-          names: Names
-          student: Student Preset
-        names: Names
-        pagination: Pagination Preset
         plural: Presets
-        save: Save
-        singular: Preset
-        student:
-          city: City
-          country: Country
-          gender: Gender
-          state: State
       school_details: School Details
       school_years: School Years
       schools: Schools
@@ -658,28 +671,39 @@ en:
     change: Change picture
     upload: Upload
   preset:
+    address:
+      city: City
+      country: Country
+      singular: Address
+      state: State
+    chooser_field:
+      plural: Chooser Fields
+    export_formats:
+      choose: Choose Format
+      documents: Documents
+      plural: Export Formats
+      printables: Printable
+      spreadsheets: Spreadsheets
     grading:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
-    names: Names
-    output_formats:
-      choose: Choose Format
-      documents: Documents
-      printables: Printable
-      spreadsheets: Spreadsheets
+      singular: Grading
+    list: Presets list
+    locale: Locale
+    name: Name
+    names_order: Names Order
     pagination: Pagination
     per_page:
       changes: Changes Per Page
       default: Default Items Per Page
       students: Students Per Page
+      teachers: Teachers Per Page
+    person:
+      gender: Gender
+      singular: Person
     plural: Presets
     save: Save Presets
     singular: Preset
-    student:
-      city: City
-      country: Country
-      gender: Gender
-      state: State
   profile: Profile
   profiles:
     new: New Profile
@@ -721,6 +745,7 @@ en:
     list: Roles list
     name: Name
     save: Save Role
+    singular: Role
   save: Save
   schedule: Schedule
   school:
@@ -785,6 +810,7 @@ en:
   semester_class_group:
     choose: Choose Semester
     save: Save Semester
+    singular: Semester
     uniqueness: Semester already added to Class Group
   semester_course:
     uniqueness: Semester already added to Course
@@ -814,6 +840,18 @@ en:
     plural: Specialties
     save: Save Specialty
     singular: Specialty
+  state:
+    abbr: Abbr
+    add: Add State
+    code: Code
+    country_iso: Country ISO
+    edit: Edit State
+    list: State List
+    name: State Name
+    name_ascii: Name Ascii
+    plural: States
+    save: Save State
+    singular: State
   student:
     academic_information: Academic Information
     add: Add Student
@@ -848,11 +886,13 @@ en:
     edit: Edit Student Achievement
     index: Student Achievement Index
     save: Save Student Achievement
+    singular: Student Achievement
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
     index: Student Specialty Index
     save: Save Student Specialty
+    singular: Student Specialty
   submit: Submit
   success:
     enrolled: Successfully enrolled!
