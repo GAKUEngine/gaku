@@ -1,59 +1,67 @@
 module Gaku
   class Students::StudentSpecialtiesController < GakuController
 
-    #load_and_authorize_resource :student, class: Gaku::Student
-    #load_and_authorize_resource :specialty, through: :student, class: Gaku::Specialty
-    skip_authorization_check
+    respond_to :js, only: %i( new create edit update index destroy )
 
-    inherit_resources
-    belongs_to :student
-    respond_to :js, :html
+    before_action :student
+    before_action :set_specialties, only: %i( new edit )
+    before_action :set_student_specialty, only: %i( edit update destroy )
 
-    before_filter :load_data
-    before_filter :student
-    before_filter :student_specialties, only: :update
-    before_filter :count, only: [:index, :create, :destroy, :update]
+    def new
+      @student_specialty = StudentSpecialty.new
+      respond_with @student_specialty
+    end
 
+    def create
+      @student_specialty = @student.student_specialties.create!(student_specialty_params)
+      set_count
+      respond_with @student_specialty
+    end
+
+    def edit
+    end
+
+    def update
+      @student_specialty.update(student_specialty_params)
+      respond_with @student_specialty
+    end
 
     def index
       @student_specialties = @student.student_specialties
+      set_count
       respond_with @student_specialties
     end
 
     def destroy
-      super do |format|
-        format.js { render }
-      end
-    end
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:student_specialty).permit(student_specialty_attr)]
+      @student_specialty.destroy
+      set_count
+      respond_with @student_specialty
     end
 
     private
+
+    def student_specialty_params
+      params.require(:student_specialty).permit(student_specialty_attr)
+    end
 
     def student_specialty_attr
-      %i(specialty_id major)
-    end
-
-    private
-
-    def load_data
-      @specialties = Gaku::Specialty.all.map { |s| [s.name, s.id] }
+      %i( specialty_id major )
     end
 
     def student
-      @student = Student.find(params[:student_id]).decorate
+      @student ||= Student.find(params[:student_id]).decorate
     end
 
-    def student_specialties
-      student
-      @student_specialties = @student.student_specialties
-    end
-
-    def count
+    def set_count
       @count = StudentSpecialty.count
+    end
+
+    def set_student_specialty
+      @student_specialty = StudentSpecialty.find(params[:id])
+    end
+
+    def set_specialties
+      @specialties = Specialty.all
     end
 
   end

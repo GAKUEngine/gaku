@@ -20,8 +20,8 @@ module Gaku
     end
 
     def student_specialties_list
-      h.comma_separated_list(object.specialties) do |specialty|
-        "#{specialty.name} (#{major_check(specialty)})"
+      h.comma_separated_list(object.student_specialties) do |student_specialty|
+        "#{student_specialty.specialty} (#{major_check(student_specialty)})"
       end
     end
 
@@ -38,7 +38,7 @@ module Gaku
     private
 
     def major_check(student_specialty)
-      student_specialty.major_only ? h.t(:'specialty.major') : h.t(:'specialty.minor')
+      student_specialty.major ? h.t(:'specialty.major') : h.t(:'specialty.minor')
     end
 
 
