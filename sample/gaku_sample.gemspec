@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.files        = Dir['LICENSE', 'README.md', 'lib/**/*', 'db/**/*']
   s.require_path = 'lib'
 
-  s.requirements << 'postgres'
-  s.requirements << 'redis'
+  s.requirements << 'postgresql'
+  s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', version
 end

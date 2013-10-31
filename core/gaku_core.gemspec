@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 
-  s.requirements << 'postgres'
-  s.requirements << 'redis'
+  s.requirements << 'postgresql'
+  s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'rails',                          '~> 4.0.0'
   s.add_dependency 'rails-i18n',                     '~> 4.0.0'

@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 
-  s.requirements << 'postgres'
-  s.requirements << 'redis'
+  s.requirements << 'postgresql'
+  s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', version
   s.add_dependency 'gaku_sample', version
