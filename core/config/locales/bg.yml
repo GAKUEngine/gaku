@@ -494,6 +494,7 @@ bg:
     label: Пол
     male: Мъж
     unknown: 
+  generate_report: 
   grade:
     all_exams: 
     average_points: 

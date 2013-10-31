@@ -494,6 +494,7 @@ en:
     label: Sex
     male: Male
     unknown: Unknown
+  generate_report: Generate Report
   grade:
     all_exams: All Exams
     average_points: Average Points

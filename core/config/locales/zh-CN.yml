@@ -490,6 +490,7 @@ zh-CN:
     label: 
     male: 
     unknown: 
+  generate_report: 
   grade:
     all_exams: 
     average_points: 
