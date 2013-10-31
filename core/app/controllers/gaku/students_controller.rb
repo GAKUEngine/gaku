@@ -13,7 +13,7 @@ module Gaku
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
-    before_action :set_class_group,       only: %i( index new edit )
+    #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update soft_delete )
     before_action :set_unscoped_student,  only: %i( show_deleted destroy recovery )

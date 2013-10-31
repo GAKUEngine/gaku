@@ -44,7 +44,7 @@ module Gaku
     end
 
     def student
-      @student = Student.find(params[:student_id])
+      @student = Student.find(params[:student_id]).decorate
     end
 
     def student_specialties

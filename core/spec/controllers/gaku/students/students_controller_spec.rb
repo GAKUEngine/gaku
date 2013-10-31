@@ -109,6 +109,7 @@ describe Gaku::StudentsController do
       it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
       it('assigns @countries') { expect(assigns(:countries)).to_not be_nil }
       it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
+      it('assigns @courses') { expect(assigns(:courses)).to_not be_nil }
       it('renders :index template') { template? :index }
     end
 

@@ -8,7 +8,7 @@ module Gaku
     #load_and_authorize_resource :simple_grade, through: :student, class: Gaku::SimpleGrade
 
     inherit_resources
-    belongs_to :student
+    #belongs_to :student
     respond_to :js, :html, :json
 
     before_filter :load_data
@@ -43,7 +43,7 @@ module Gaku
     end
 
     def student
-      @student = Student.find(params[:student_id])
+      @student = Student.find(params[:student_id]).decorate
     end
 
     def count
