@@ -44,8 +44,7 @@ Requirements
 ------------
 * ruby >= 2.0.0
 * postgresql
-* redis
-
+* postgresql-contrib
 
 Installation
 ------------
