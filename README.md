@@ -43,15 +43,8 @@ user: admin,   pass: 123456
 Requirements
 ------------
 * ruby >= 2.0.0
-* postgresql-9.2
-* postgresql-contrib-9.2
-
-Ubuntu 12.04 and up:
-
-    $ sudo add-apt-repository ppa:pitti/postgresql
-    $ sudo apt-get update
-    $ sudo apt-get install postgresql-9.2 postgresql-server-dev-9.2 postgresql-contrib-9.2
-
+* postgresql
+* postgresql-contrib
 
 Installation
 ------------
