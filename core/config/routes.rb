@@ -155,7 +155,7 @@ Gaku::Core::Engine.routes.draw do
     resources :simple_grades, controller: 'students/simple_grades'
     resources :commute_methods, controller: 'students/commute_methods'
     resources :student_achievements, controller: 'students/student_achievements'
-    resources :student_specialties, controller: 'students/student_specialties'
+    resources :student_specialties, controller: 'students/student_specialties', except: :show
 
     resources :guardians, controller: 'students/guardians', concerns: %i( addressable contactable ) do
       member do
