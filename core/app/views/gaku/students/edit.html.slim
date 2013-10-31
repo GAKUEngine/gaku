@@ -20,10 +20,10 @@ hr
         = render 'tabs_personal'
       #academic.tab-pane
         .row
-          .col-md-6
-            = render 'tabs_academic'
-          .col-md-6
+          .col-md-3
             = render 'academic', student: student
+          .col-md-9
+            = render 'tabs_academic'
 
 = footer do
   .col-md-9
