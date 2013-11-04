@@ -1,0 +1,78 @@
+table.grading-exam-portions.table.table-bordered.table-condensed
+  thead
+    tr
+      - @exam.exam_portions.each do |portion|
+        th.btn-warning style="width: 80px"
+          = portion.name
+          - if @exam.use_weighting
+            span style='margin-left: 5px'
+              = portion.max_score
+  tbody
+    - @students.each do |student|
+      = tr_for student do
+        - @exam.exam_portions.each do |portion|
+          - portion.exam_portion_scores.each do |score|
+            - if score.student_id == student.id
+              td
+                = form_for [@course, @exam, score], remote: true do |f|
+                  = f.text_field :score
+
+
+
+
+                       / course_exam_exam_portion_scores GET    /courses/:course_id/exams/:exam_id/exam_portion_scores(.:format)                                             gaku/exam_portion_scores#index
+
+
+/ <table class='exam-parts table table-bordered table-condensed'>
+/   <thead>
+/     <tr>
+/       <% for exam in @exams: %>
+/         <% for portion in exam.exam_portions: %>
+/           <% if exam.use_weighting : %>
+/             <th class='btn-warning' style="width: 80px"> 【 <%= portion.name %> 】 </th>
+/           <% else : %>
+/             <th class='btn-warning' style="width: 80px"> 【 <%= portion.name %> 】
+/               <%= portion.max_score %>
+/             </th>
+/           <% end %>
+/         <% end %>
+/       <% end %>
+/     </tr>
+/   </thead>
+/   <tbody>
+/     <% for student in @students: %>
+/       <tr class='student_<%= student.id %>'>
+/         <% for exam in @exams: %>
+/           <% for portion in exam.exam_portions: %>
+/             <% for score in portion.exam_portion_scores: %>
+/               <% if score.student_id == student.id : %>
+/                 <td class='score-column' id='exam-portion-score-<%= score.id %>' align="left">
+/                   <form class='portion_score_update span12' style="float: left; padding-right: 50px" name="input" action="<%= @path_to_exam %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" method="post" data-max-score='<%= portion.max_score %>'>
+/                     <div class='exam-portion-<%= portion.id %>'>
+
+/                       <% if @attendances[student.id][score.id][0] : %>
+/                         <input class="score-cell" style="text-align:right; margin-bottom:0px; background-color: <%= @attendances[student.id][score.id][1] %>" name='portion_score' type='number' value='<%= score.score %>'id='score-<%= score.id %>' disabled />
+/                       <% else : %>
+/                         <input class="score-cell" style="text-align:right; margin-bottom:0px" name='portion_score' type='number' value='<%= score.score %>' id='score-<%= score.id %>' />
+/                       <% end %>
+/                     </div>
+/                   </form>
+/                   <div class="portion_set_attendance pull-right btn" id="portion-score-<%= score.id %>"  rel ='popover' style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="<%= @path_to_exam %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" data-attendance="<%= @attendances[student.id][score.id][0] %>" >
+/                     <i class="icon-chair"></i>
+/                   </div>
+/                 </td>
+/               <% end %>
+/             <% end %>
+/           <% end %>
+/         <% end %>
+/       </tr>
+/     <% end %>
+/     <tr class='total_row'>
+/       <% for exam in @exams: %>
+/         <th class='btn-primary' colspan="<%= exam.exam_portions.length %>">
+/           Avarages:
+/         </th>
+/       <% end %>
+/     </tr>
+/   </tbody>
+/ </table>

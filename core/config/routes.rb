@@ -73,8 +73,8 @@ Gaku::Core::Engine.routes.draw do
       post :enroll_student, on: :collection
     end
 
-    resources :exams do
-      resources :exam_portion_scores do
+    resources :exams, controller: 'courses/exams' do
+      resources :exam_portion_scores, controller: 'courses/exams/exam_portion_scores' do
         resources :attendances
       end
 

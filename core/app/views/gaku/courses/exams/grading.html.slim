@@ -1,0 +1,16 @@
+row
+  .span12
+    table.main-grading.table.table-bordered.table-condensed
+      thead
+        tr
+          th.btn-primary Students
+          th.btn-success colspan='2' = @exam.name
+      tbody
+        tbody
+          tr
+            td.grading-students-td
+              = render 'gaku/courses/exams/grading/students', students: @students
+            td.grading-exam-scores-td
+              = render 'gaku/courses/exams/grading/exam_scores'
+            td.grading-calculations-td
+              = render 'gaku/courses/exams/grading/calculations'
