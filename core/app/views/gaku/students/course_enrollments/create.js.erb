@@ -1,4 +1,4 @@
-$('#student-course-enrollments-index tbody').append('<%= render_js_partial("course_enrollment", {course: @student.courses.last}) %>');
+$('#student-course-enrollments-index tbody').append('<%= j render("course_enrollment", {course: @student.courses.last}) %>');
 
 $('#new-student-course-enrollment form select').val('');
 $('#new-student-course-enrollment').slide();

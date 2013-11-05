@@ -67,36 +67,15 @@ module Gaku
       content_tag :div, nil, style: "width:100px;height:20px;background-color:#{color}"
     end
 
-    def student_specialties_list(specialties)
-      comma_separated_list specialties, empty: t(:'empty') do |specialty|
-        "#{specialty.specialty} (#{major_check(specialty)})"
-      end
-    end
-
-    def achievements_show(achievements)
-      comma_separated_list achievements, empty: t(:'empty') do |achievement|
-        "#{achievement.name} (#{resize_image(achievement.badge, size: 22)})"
-      end
-    end
 
 
-    def simple_grades_show(simple_grades)
-      comma_separated_list simple_grades, empty: t(:'empty') do |simple_grade|
-        "#{simple_grade.name} (#{simple_grade.grade})"
-      end
-    end
-
-    def major_check(student_specialty)
-      student_specialty.major ? t(:'specialty.major') : t(:'specialty.minor')
-    end
-
-    def comma_separated_list(objects, options = {}, &block)
+    def comma_separated_list(objects, &block)
       if objects.any?
         objects.map do |object|
           block_given? ? block.call(object) : object
         end.join(', ').html_safe
       else
-        options[:empty]
+        t(:empty)
       end
     end
 
