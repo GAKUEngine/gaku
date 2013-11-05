@@ -118,7 +118,7 @@ describe 'ClassGroups' do
 
     end
 
-    it 'deletes', js: true do
+    xit 'deletes', js: true do
       visit gaku.edit_class_group_path(class_group_with_semesters)
 
       expect do
