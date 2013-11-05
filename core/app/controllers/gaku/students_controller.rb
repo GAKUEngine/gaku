@@ -8,12 +8,12 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    respond_to :js,   only: %i( new create edit update index destroy recovery )
+    respond_to :js,   only: %i( new create index destroy recovery )
     respond_to :html, only: %i( index edit show show_deleted soft_delete )
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
-    before_action :set_class_group,       only: %i( index new edit )
+    #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update soft_delete )
     before_action :set_unscoped_student,  only: %i( show_deleted destroy recovery )
@@ -50,6 +50,9 @@ module Gaku
       end
     end
 
+    def edit
+      respond_with @student
+    end
 
     def show
       respond_with @student do |format|
@@ -96,7 +99,6 @@ module Gaku
           end
         else
           format.html { redirect_to [:edit, @student] }
-          format.js   { render }
           format.json { head :no_content }
         end
       end

@@ -2,18 +2,15 @@ require 'spec_helper'
 
 describe 'Student Simple Grades' do
 
+  before(:all) { set_resource 'student-simple-grade' }
   before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:school) { create(:school) }
-  let(:simple_grade) { create(:simple_grade, school: school, student: student) }
+  let(:simple_grade) { create(:simple_grade, name: 'Test', school: school, student: student) }
   let!(:el) { '#simple-grades' }
 
-  before :all do
-    set_resource 'student-simple-grade'
-  end
-
-  context '#new', js: true do
+  context 'new', js: true do
     before do
       school
       visit gaku.edit_student_path(student)
@@ -23,21 +20,21 @@ describe 'Student Simple Grades' do
       wait_until_visible submit
     end
 
-    it 'create and show' do
+    it 'creates' do
       expect do
         fill_in 'simple_grade_name', with: 'Ruby Science'
         fill_in 'simple_grade_grade', with: 'A+'
         select school.name, from: 'simple_grade_school_id'
 
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
-      within(el) { page.should have_content('Ruby Science') }
-      within(count_div) { page.should have_content 'Simple Grades list(1)'}
-      flash_created?
+      within(el) { has_content? 'Ruby Science' }
+      count? 'Simple Grades list(1)'
     end
 
+    it { has_validations? }
   end
 
   context 'existing', js: true do
@@ -48,37 +45,39 @@ describe 'Student Simple Grades' do
       click el
     end
 
-    context '#edit' do
-      before do
-        within(table) { click js_edit_link }
-      end
+    context 'edit' do
+      before { within(table) { click js_edit_link } }
 
       it 'edits' do
         fill_in 'simple_grade_name', with: 'Rails Science'
         click submit
 
-        wait_until_invisible form
-        page.should have_content('Rails Science')
         flash_updated?
+
+        within(el) do
+          has_content? 'Rails Science'
+          has_no_content? 'Test'
+        end
       end
 
       it 'cancels editting' do
         click '.back-modal-link'
-        within(el) { page.should have_content(simple_grade.name) }
+        within(el) { has_content? simple_grade.name }
       end
 
     end
 
-    it 'delete' do
-      page.should have_content(simple_grade.name)
-      within(count_div) { page.should have_content 'Simple Grades list(1)' }
+    it 'deletes' do
+      has_content? simple_grade.name
+      count? 'Simple Grades list(1)'
       expect do
         ensure_delete_is_working
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
-      within(count_div) { page.should have_content 'Simple Grades list' }
-      within(el) { page.should_not have_content(simple_grade.name) }
       flash_destroyed?
+
+      count? 'Simple Grades list'
+      within(el) { has_content? simple_grade.name }
     end
   end
 

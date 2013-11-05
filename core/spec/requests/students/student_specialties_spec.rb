@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Student Specialties' do
 
+  before(:all) { set_resource 'student-specialty' }
   before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
@@ -10,11 +11,7 @@ describe 'Student Specialties' do
   let(:specialty2) { create(:specialty, name: 'Math Specialty') }
   let!(:el) { '#specialties' }
 
-  before :all do
-    set_resource 'student-specialty'
-  end
-
-  context '#new', js: true do
+  context 'new', js: true do
 
     before do
       specialty
@@ -28,18 +25,18 @@ describe 'Student Specialties' do
 
     it 'create and show' do
       expect do
-        select specialty.name , from: 'student_specialty_specialty_id'
-        click submit
-        wait_until_invisible form
-      end.to change(Gaku::StudentSpecialty, :count).by(1)
+        expect do
+          select specialty.name , from: 'student_specialty_specialty_id'
+          click submit
+          flash_created?
+        end.to change(Gaku::StudentSpecialty, :count).by(1)
+      end.to change(student.specialties, :count).by(1)
 
-      within(el) { page.should have_content(specialty.name) }
-      within(count_div) { page.should have_content 'Specialties list(1)'}
-      flash_created?
+      within(el) { has_content? specialty.name }
+      count? 'Specialties list(1)'
     end
 
-    it {has_validations?}
-
+    it { has_validations? }
   end
 
   context 'existing', js: true do
@@ -52,39 +49,36 @@ describe 'Student Specialties' do
       click el
     end
 
-    context '#edit' do
-      before do
-        within(table) { click js_edit_link }
-      end
+    context 'edit' do
+      before { within(table) { click js_edit_link } }
 
       it 'edits' do
         select specialty2.name , from: 'student_specialty_specialty_id'
         click submit
 
         within(el) do
-          page.should have_content(specialty2.name)
-          page.should_not have_content(specialty.name)
+          has_content? specialty2.name
+          has_no_content? specialty.name
         end
         flash_updated?
       end
 
       it 'cancels editting' do
         click '.back-modal-link'
-        within(table) { page.should have_content(specialty.name) }
+        within(table) { has_content? specialty.name }
       end
     end
 
     it 'delete' do
-      page.should have_content(specialty.name)
-      within(count_div) { page.should have_content 'Specialties list(1)' }
+      has_content? specialty.name
+      count? 'Specialties list(1)'
       expect do
         ensure_delete_is_working
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
-      within(count_div) { page.should have_content 'Specialties list' }
-      within(el) { page.should_not have_content(specialty.name) }
-
       flash_destroyed?
+      count? 'Specialties list'
+      within(el) { has_no_content? specialty.name }
     end
 
   end

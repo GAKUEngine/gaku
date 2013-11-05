@@ -1,5 +1,5 @@
 <%- if @class_group_enrollment.errors.any? %>
-	$('.validation-error').html("<%= render_js_partial('/gaku/shared/errors', target: @class_group_enrollment) %>")
+	$('.validation-error').html("<%= j render('/gaku/shared/errors', target: @class_group_enrollment) %>")
 <% else %>
 	showNotice("<%= render_flash %>");
 	$('td#class-enrollment-name').html('<%= @class_group.name %>');

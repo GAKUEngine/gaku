@@ -4,6 +4,10 @@ FactoryGirl.define do
     student
     specialty
     major true
+
+    factory :invalid_student_specialty do
+      specialty nil
+    end
   end
 
 end

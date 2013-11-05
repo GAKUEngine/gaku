@@ -114,16 +114,8 @@ module Gaku
       t(:'specialty.list')
     end
 
-    def t_simple_grade_list
-      t(:'simple_grade.list')
-    end
-
     def t_note_list
       t(:'note.list')
-    end
-
-    def t_achievement_list
-      t(:'achievement.list')
     end
 
     def t_extracurricular_activity_list
