@@ -1,6 +1,4 @@
-//$('#index-student-achievements-modal').html("<%= j render('index', {student_achievements: @student_achievements}) %>");
 $('#index-student-achievements-modal').modal('hide');
-$('.student-achievements-count').html("<%= print_count(@count, t(:'achievement.list')) %>");
 $('#student-achievements-list a').text('<%= j(@student.achievements_list) %>');
 
 showNotice("<%= render_flash %>");

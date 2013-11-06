@@ -1,46 +1,66 @@
 [module Gaku
   class Students::StudentAchievementsController < GakuController
 
-    #load_and_authorize_resource :student, class: Gaku::Student
-    #load_and_authorize_resource :achievement, through: :student, class: Gaku::Achievement
-    skip_authorization_check
+    respond_to :js, only: %i( new create edit update destroy index )
 
-    inherit_resources
-    belongs_to :student
-    respond_to :js, :html, :json
+    before_action :set_student
+    before_action :set_student_achievement, only: %i( edit update destroy )
+    before_action :set_achievements,        only: %i( new edit )
 
-    before_filter :student
-    before_filter :student_achievements, only: [:update]
-    before_filter :count, only: [:index, :create, :destroy]
-    before_filter :load_data
+    def new
+      @student_achievement = StudentAchievement.new
+      respond_with @student_achievement
+    end
+
+    def create
+      @student_achievement = @student.student_achievements.create!(student_achievement_params)
+      set_count
+      respond_with @student_achievement
+    end
+
+    def edit
+    end
+
+    def update
+      @student_achievement.update(student_achievement_params)
+      respond_with @student_achievement
+    end
+
+    def destroy
+      @student_achievement.destroy
+      set_count
+      respond_with @student_achievement
+    end
 
     def index
       @student_achievements = @student.student_achievements
+      set_count
       respond_with @student_achievements
-    end
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:student_achievement).permit(:achievement_id)]
     end
 
     private
 
-    def load_data
-      @achievements = Achievement.all.map { |s| [s.name, s.id] }
+    def student_achievement_params
+      params.require(:student_achievement).permit(:achievement_id)
     end
 
-    def student
+    def set_achievements
+      @achievements = Achievement.all
+    end
+
+    def set_student
       @student = Student.find(params[:student_id]).decorate
+    end
+
+    def set_student_achievement
+      @student_achievement = StudentAchievement.find(params[:id])
     end
 
     def student_achievements
       @student_achievements = @student.student_achievements
     end
 
-    def count
+    def set_count
       @count = @student.student_achievements.count
     end
 
