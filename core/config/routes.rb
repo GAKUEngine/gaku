@@ -166,7 +166,7 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :notes
-    resources :course_enrollments, controller: 'students/course_enrollments'
+    resources :course_enrollments, controller: 'students/course_enrollments', only: %i( new create destroy )
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
     #resources :exams
     #resources :courses

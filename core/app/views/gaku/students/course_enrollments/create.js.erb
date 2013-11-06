@@ -1,10 +1,9 @@
-$('#student-course-enrollments-index tbody').append('<%= j render("course_enrollment", {course: @student.courses.last}) %>');
+$('#student-course-enrollments-index tbody').append('<%= j render("course_enrollment", {course_enrollment: @course_enrollment}) %>');
 
 $('#new-student-course-enrollment form select').val('');
 $('#new-student-course-enrollment').slide();
 $('#new-student-course-enrollment-link').show();
 
-
 showNotice("<%= render_flash %>");
-$('#student-course-enrollments-tab-link').html("<%= print_count(@student.reload.courses_count, t_course_plural) %>");
-$('.student-course-enrollments-count').html("<%= print_count(@student.courses_count, t_course_list) %>");
+$('#student-course-enrollments-tab-link').html("<%= print_count(@count, t(:'course.plural')) %>");
+$('.student-course-enrollments-count').html("<%= print_count(@count, t(:'course.list')) %>");
