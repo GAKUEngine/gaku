@@ -14,10 +14,8 @@ describe 'Student Guardian Picture' do
   end
 
   context 'avatarable' do
-
     before { @file_name = 'guardian_picture' }
     it_behaves_like 'new avatar'
-
   end
 
 end

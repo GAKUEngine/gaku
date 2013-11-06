@@ -1,7 +1,7 @@
 Gaku::Core::Engine.routes.draw do
 
   concern :addressable do
-    resources :addresses do
+    resources :addresses, except: %i( show index ) do
       member do
         patch :make_primary
         patch :soft_delete
@@ -157,10 +157,10 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements', except: :show
     resources :student_specialties, controller: 'students/student_specialties', except: :show
 
-    resources :guardians, controller: 'students/guardians', concerns: %i( addressable contactable ) do
+    resources :guardians, controller: 'students/guardians', concerns: %i( addressable contactable ), except: :index do
       member do
-        get :soft_delete
-        get :recovery
+        patch :soft_delete
+        patch :recovery
       end
 
     end
