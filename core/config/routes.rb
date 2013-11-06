@@ -138,16 +138,16 @@ Gaku::Core::Engine.routes.draw do
     match 'school_details' => 'schools#school_details', via: :get
     match 'school_details/edit' => 'schools#edit_master', via: :get
 
-    resources :schools, controller: 'admin/schools' do
-      resources :programs, controller: 'admin/schools/programs' do
+    resources :schools do
+      resources :programs, controller: 'schools/programs' do
         member do
           get :show_program_levels
           get :show_program_syllabuses
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'admin/schools/campuses', concerns: %i( contacts ) do
-        resources :addresses, controller: 'admin/schools/campuses/addresses'
+      resources :campuses, controller: 'schools/campuses', concerns: %i( contacts ) do
+        resources :addresses, controller: 'schools/campuses/addresses'
       end
     end
 
