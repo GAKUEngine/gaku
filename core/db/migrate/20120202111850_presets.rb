@@ -1,8 +1,6 @@
 class Presets < ActiveRecord::Migration
 
-  def self.up
-    execute "CREATE EXTENSION hstore"
-
+  def change
     create_table :gaku_presets do |t|
       t.string   :name
       t.boolean  :default,         default: false
@@ -18,12 +16,6 @@ class Presets < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :gaku_presets
-
-    execute "DROP EXTENSION hstore"
   end
 
 end
