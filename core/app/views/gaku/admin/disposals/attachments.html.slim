@@ -23,9 +23,8 @@
           td = attachment.asset_content_type
           td = number_to_human_size attachment.asset_file_size
           td
-            = ajax_link_to_recovery [:recovery, attachment], id: 'delete-disposal-recovery-link'
-
-            = ajax_link_to_delete attachment , id: 'delete-disposal-attachment-link'
+            = ajax_link_to_restore [:recovery, attachment]
+            = ajax_link_to_delete attachment
 
 
   = paginate @attachments

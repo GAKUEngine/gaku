@@ -30,7 +30,8 @@ module Gaku
     end
 
     def update
-      super do |format|
+      @attachment.update(attachment_params)
+      respond_with(@attachment) do |format|
         format.html { redirect_to :back }
       end
     end
@@ -64,7 +65,7 @@ module Gaku
     private
 
 
-    def attributes
+    def attachment_attr
       [:name, :description, :asset]
     end
 
