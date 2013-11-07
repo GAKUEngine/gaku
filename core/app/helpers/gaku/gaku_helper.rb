@@ -135,6 +135,16 @@ module Gaku
       link_to name, resource, attributes
     end
 
+    def ajax_link_to_restore(resource, options = {})
+      name = content_tag(:span, nil, class: 'glyphicon glyphicon-repeat')
+      attributes = {
+        remote: true,
+        method: :patch,
+        class: "btn btn-xs btn-success recovery-link"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
+
   end
 end
 

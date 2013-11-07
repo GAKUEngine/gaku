@@ -1,5 +1,5 @@
 $('#student-achievements-index tbody').append('<%= j render("student_achievement", {student_achievement: @student_achievement}) %>');
-$('.student-achievements-count').html("<%= print_count(@count+1, t(:'achievement.list')) %>");
+$('.student-achievements-count').html("<%= print_count(@count, t(:'achievement.list')) %>");
 $('#student-achievements-list a').text('<%= j(@student.achievements_list) %>');
 
 showNotice("<%= render_flash %>");

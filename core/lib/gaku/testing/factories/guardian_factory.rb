@@ -5,6 +5,10 @@ FactoryGirl.define do
     surname { Faker::Name.last_name }
     relationship 'Relationship'
     user
+
+    factory :invalid_guardian do
+      name nil
+    end
   end
 
 end

@@ -1,7 +1,7 @@
-$('#student-guardians-index').append('<%= render_js_partial("guardian", {guardian: @guardian}) %>');
+$('#student-guardians-index').append('<%= j render("guardian", {guardian: @guardian}) %>');
 $('#new-student-guardian').slide();
 $('#new-student-guardian-link').show();
 
-$('#student-guardians-tab-link').html("<%= print_count(@count+1, t_guardian_plural) %>");
-$('.student-guardians-count').html("<%= print_count(@count+1, t_guardian_list) %>");
+$('#student-guardians-tab-link').html("<%= print_count(@count, t(:'guardian.plural')) %>");
+$('.student-guardians-count').html("<%= print_count(@count, t(:'guardian.list')) %>");
 showNotice("<%= render_flash %>");

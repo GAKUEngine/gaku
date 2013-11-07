@@ -1,35 +1,47 @@
 module Gaku
   class Students::GuardiansController < GakuController
 
-    #load_and_authorize_resource :student, class: Gaku::Student
-    #load_and_authorize_resource :guardian, through: :student, class: Gaku::Guardian
+    respond_to :js,   only: %i( new create destroy recovery )
+    respond_to :html, only: %i( edit show soft_delete )
 
-    inherit_resources
-    respond_to :js, :html
-
-    before_filter :student
-    before_filter :count, only: [:create,:destroy]
+    before_action :set_student
     before_action :set_unscoped_guardian,  only: %i( destroy recovery )
-    before_action :set_guardian,           only: %i( soft_delete )
+    before_action :set_guardian,           only: %i( show edit update soft_delete )
+
+    def new
+      @guardian = Guardian.new
+      respond_with @guardian
+    end
 
     def create
-      super do |format|
-        if @student.guardians << @guardian
-          format.js { render }
-        end
-      end
+      @guardian = Guardian.new(guardian_params)
+      @student.guardians << @guardian
+      set_count
+      respond_with @guardian
+    end
+
+    def edit
+    end
+
+    def show
     end
 
     def update
-      super do |format|
+      @guardian.update(guardian_params)
+      respond_with(@guardian) do |format|
         if params[:guardian][:picture]
-          format.html { redirect_to [:edit, student, @guardian], notice: t(:'notice.uploaded', resource: t(:'picture')) }
+          format.html { redirect_to [:edit, @student, @guardian], notice: t(:'notice.uploaded', resource: t(:'picture')) }
         else
           format.html { redirect_to [:edit, @student, @guardian] }
           format.js { render }
-          format.json { head :no_content }
          end
       end
+    end
+
+    def destroy
+      @guardian.destroy
+      set_count
+      respond_with @guardian
     end
 
     def recovery
@@ -44,29 +56,22 @@ module Gaku
                   notice: t(:'notice.destroyed', resource: t_resource)
     end
 
-    protected
-
-    def resource
-      @guardian = Guardian.includes(contacts: :contact_type).find(params[:id]).decorate
-    end
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:guardian).permit(guardian_attr)]
-    end
-
     private
 
-    def guardian_attr
-      %i(name surname name_reading surname_reading birth_date gender relationship picture)
+    def guardian_params
+      params.require(:guardian).permit(guardian_attr)
     end
 
-    def student
+    def guardian_attr
+      %i( name surname name_reading surname_reading birth_date gender relationship picture )
+    end
+
+    def set_student
       @student = Student.find(params[:student_id])
     end
 
     def set_guardian
-      @guardian = Guardian.find(params[:id]).decorate
+      @guardian = Guardian.includes(contacts: :contact_type).find(params[:id]).decorate
     end
 
     def set_unscoped_guardian
@@ -77,8 +82,8 @@ module Gaku
       t(:'guardian.singular')
     end
 
-    def count
-      @count = @student.guardians.count
+    def set_count
+      @count = @student.reload.guardians_count
     end
 
   end

@@ -20,7 +20,6 @@ describe 'Student Course Enrollments' do
     end
 
     it_behaves_like 'enroll to course'
-
   end
 
   context 'remove' do

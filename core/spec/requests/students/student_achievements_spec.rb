@@ -24,10 +24,12 @@ describe 'Student Achievements' do
 
     it 'creates' do
       expect do
-        select achievement.name, from: 'student_achievement_achievement_id'
-        click submit
-        flash_created?
-      end.to change(Gaku::StudentAchievement, :count).by(1)
+        expect do
+          select achievement.name, from: 'student_achievement_achievement_id'
+          click submit
+          flash_created?
+        end.to change(Gaku::StudentAchievement, :count).by(1)
+      end.to change(student.student_achievements, :count).by(1)
 
       within(el) { has_content? achievement.name }
       count? 'Achievements list(1)'
