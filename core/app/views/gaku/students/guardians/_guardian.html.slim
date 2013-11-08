@@ -1,2 +1,12 @@
 tr id="guardian-#{guardian.id}"
-  = render 'gaku/students/guardians/guardian_unit', guardian: guardian
+  td = guardian.surname
+  td = guardian.name
+  td = guardian.birth_date
+  td = guardian.relationship
+
+  - if can_edit?
+    td
+      = link_to_show [@student, guardian]
+      = link_to_edit [:edit, @student, guardian]
+  - else
+    td = link_to_show [@student, guardian]

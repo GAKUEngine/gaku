@@ -51,14 +51,6 @@ describe Gaku::Students::GuardiansController do
         end
       end
 
-      describe 'GET #show' do
-        before { gaku_get :show, id: guardian, student_id: student.id }
-
-        it { should respond_with 200 }
-        it('assigns @guardian') { expect(assigns(:guardian)).to eq guardian }
-        it('renders the :show template') { template? :show }
-      end
-
       describe 'PATCH #soft_delete' do
         let(:patch_soft_delete) { gaku_patch :soft_delete, id: guardian, student_id: student }
 
@@ -69,7 +61,7 @@ describe Gaku::Students::GuardiansController do
 
         it('redirects') do
           patch_soft_delete
-          redirect_to? "/students/#{student.id}/guardians"
+          redirect_to? "/students/#{student.id}/edit"
         end
 
         it 'assigns  @guardian' do
@@ -144,7 +136,7 @@ describe Gaku::Students::GuardiansController do
         end
       end
 
-      describe 'PATCH #recovery' do
+      describe 'JS PATCH #recovery' do
         let(:js_patch_recovery) { gaku_js_patch :recovery, id: guardian, student_id: student }
 
         it 'is successfull' do

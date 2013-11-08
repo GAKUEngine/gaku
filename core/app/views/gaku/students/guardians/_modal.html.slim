@@ -1,5 +1,0 @@
-= modal_for 'edit-guardian-modal' do
-  = modal_form_for [@student, @guardian] do |f|
-    /= hidden_field_tag :student_id, @student.id
-    = render 'form_fields', f: f, guardian: @guardian
-    = buttons_for @guardian, resource: 'student-guardian'

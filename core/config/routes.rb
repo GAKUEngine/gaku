@@ -101,9 +101,9 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
 
-    resources :guardians,
+    resources :guardians, except: %i( index show ),
       controller: 'students/guardians',
-      concerns: %i( addresses contacts soft_delete ), except: :index
+      concerns: %i( addresses contacts soft_delete )
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
