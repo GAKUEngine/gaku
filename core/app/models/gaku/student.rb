@@ -47,7 +47,7 @@ module Gaku
 
     before_create :set_scholarship_status
 
-    paginates_per Preset.per_page('students')
+    paginates_per 25 #Preset.per_page('students')
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
