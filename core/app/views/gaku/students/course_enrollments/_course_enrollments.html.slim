@@ -6,6 +6,7 @@
         = print_count @student.courses_count, t(:'course.list')
     .pull-right
       = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], id: "new-student-course-enrollment-link" if can_edit?
+
   = index_body do
       = table_for 'student-course-enrollments-index' do
         thead

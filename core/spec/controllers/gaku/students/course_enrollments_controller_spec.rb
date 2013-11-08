@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaku::Students::CourseEnrollmentsController do
 
   let(:student) { create(:student) }
-  let(:course) { create(:course) }
+  let!(:course) { create(:course) }
   let(:course_enrollment) { create(:course_enrollment, course: course, student: student)}
 
   context 'as admin' do
@@ -16,6 +16,7 @@ describe Gaku::Students::CourseEnrollmentsController do
 
         it { should respond_with 200 }
         it('assigns @course_enrollment') { expect(assigns(:course_enrollment)).to be_a_new(Gaku::CourseEnrollment) }
+        it('assigns @courses') { expect(assigns(:courses)).to_not be_empty }
         it('renders the :new template') { template? :new }
       end
 

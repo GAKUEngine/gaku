@@ -3,10 +3,10 @@ module Gaku
 
     respond_to :js, only: %i( new create destroy )
 
-    before_action :set_courses, only: :new
     before_action :set_student
 
     def new
+      set_courses
       @course_enrollment = CourseEnrollment.new
       respond_with @course_enrollment
     end
