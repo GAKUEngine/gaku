@@ -96,7 +96,7 @@ Gaku::Core::Engine.routes.draw do
   resources :students, concerns: %i( addresses contacts notes soft_delete show_deleted pagination ) do
     get :load_autocomplete_data, on: :collection
 
-    resources :simple_grades,        controller: 'students/simple_grades'
+    resources :simple_grades,        controller: 'students/simple_grades', except: :show
     resources :commute_methods,      controller: 'students/commute_methods'
     resources :student_achievements, controller: 'students/student_achievements', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show

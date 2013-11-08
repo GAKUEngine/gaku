@@ -35,7 +35,6 @@ module Gaku
 
     def destroy
       @simple_grade.destroy
-
       set_count
       respond_with @simple_grade
     end
@@ -59,7 +58,7 @@ module Gaku
     end
 
     def set_count
-      @count = SimpleGrade.count
+      @count = @student.simple_grades.count
     end
 
     def set_simple_grade
