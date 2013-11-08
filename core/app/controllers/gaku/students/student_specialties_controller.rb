@@ -53,7 +53,7 @@ module Gaku
     end
 
     def set_count
-      @count = StudentSpecialty.count
+      @count = @student.student_specialties.count
     end
 
     def set_student_specialty

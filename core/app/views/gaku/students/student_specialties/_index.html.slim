@@ -2,7 +2,7 @@
     #new-student-specialty.hide
     .pull-left
       = count_div 'student-specialties-count' do
-        = print_count @count, t_specialty_list
+        = print_count @count, t(:'specialty.list')
     .pull-right
       = ajax_link_to_new t(:'specialty.add'), [:new, @student, :student_specialty], id: 'new-student-specialty-link'
 

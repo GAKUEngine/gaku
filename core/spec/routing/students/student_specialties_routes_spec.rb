@@ -5,8 +5,6 @@ describe Gaku::Students::StudentSpecialtiesController do
   routes { Gaku::Core::Engine.routes }
 
   describe 'member' do
-
-
     it 'routes to #edit' do
       expect(get: '/students/1/student_specialties/1/edit').to route_to(
         controller: 'gaku/students/student_specialties',
@@ -36,7 +34,6 @@ describe Gaku::Students::StudentSpecialtiesController do
   end
 
   describe 'collection' do
-
     it 'routes to #new' do
       expect(get: '/students/1/student_specialties/new').to route_to(
         controller: 'gaku/students/student_specialties',
