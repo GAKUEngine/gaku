@@ -56,10 +56,6 @@
       @student_achievement = StudentAchievement.find(params[:id])
     end
 
-    def student_achievements
-      @student_achievements = @student.student_achievements
-    end
-
     def set_count
       @count = @student.student_achievements.count
     end

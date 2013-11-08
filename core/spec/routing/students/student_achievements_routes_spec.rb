@@ -50,7 +50,6 @@ describe Gaku::Students::StudentAchievementsController do
       )
     end
 
-
     it 'routes to #index' do
       expect(get: '/students/1/student_achievements').to route_to(
         controller: 'gaku/students/student_achievements',

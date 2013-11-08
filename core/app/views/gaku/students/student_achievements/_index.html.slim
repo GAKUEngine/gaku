@@ -4,7 +4,7 @@
       = count_div 'student-achievements-count' do
         = print_count @count, t(:'achievement.list')
     .pull-right
-      = ajax_link_to_new 'Add Student Achievement', [:new, @student, :student_achievement], id: 'new-student-achievement-link'
+      = ajax_link_to_new t(:'achievement.add'), [:new, @student, :student_achievement], id: 'new-student-achievement-link'
 
 hr
 
