@@ -20,6 +20,10 @@
 // require bootstrap-dropdown
 // require bootstrap-modal
 
+//= require nprogress
+//= require nprogress-turbolinks
+//= require nprogress-ajax
+
 //= require underscore
 //= require moment
 //= require backbone
