@@ -1,7 +1,6 @@
 module Gaku
   class CourseGroupsController < GakuController
 
-    #load_and_authorize_resource class: Gaku::CourseGroup
     helper_method :sort_column, :sort_direction
 
     respond_to :js,   only: %i( new create edit update destroy recovery )
@@ -13,14 +12,12 @@ module Gaku
 
     def recovery
       @course_group.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @course_group
     end
 
     def soft_delete
       @course_group.soft_delete
-      redirect_to course_groups_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @course_group, location: course_groups_path
     end
 
     def destroy

@@ -36,14 +36,12 @@ module Gaku
       if @contact.destroy
         @polymorphic_resource.contacts.first.try(:make_primary) if @contact.primary?
       end
-      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @contact
     end
 
     def recovery
       @contact.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @contact
     end
 
@@ -51,7 +49,6 @@ module Gaku
       @primary_contact = true if @contact.primary?
       @contact.soft_delete
       @polymorphic_resource.contacts.first.try(:make_primary) if @contact.primary?
-      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @contact
     end
@@ -77,10 +74,6 @@ module Gaku
 
     def attributes
       %i(data details contact_type_id primary emergency)
-    end
-
-    def t_resource
-      t(:'contact.singular')
     end
 
     def resource_klass

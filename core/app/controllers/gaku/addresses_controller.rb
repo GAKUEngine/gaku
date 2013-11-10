@@ -3,10 +3,6 @@ module Gaku
 
     include PolymorphicResourceConcern
 
-    # load_and_authorize_resource :address,
-    #                             class: Gaku::Address,
-    #                             except: [:recovery, :destroy]
-
     respond_to :js
 
     before_action :set_countries,        only: %i( new edit )
@@ -41,7 +37,6 @@ module Gaku
 
     def recovery
       @address.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @address
     end
 
@@ -49,7 +44,6 @@ module Gaku
       if @address.destroy
         @polymorphic_resource.addresses.first.try(:make_primary) if @address.primary?
       end
-      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @address
     end
@@ -58,7 +52,6 @@ module Gaku
       @primary_address = true if @address.primary?
       @address.soft_delete
       @poymorphic_resource.addresses.first.try(:make_primary) if @address.primary?
-      flash.now[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @address
     end
@@ -71,10 +64,6 @@ module Gaku
 
     def attributes
       %i( title country_id state_id zipcode state_name city address1 address2 )
-    end
-
-    def t_resource
-      t(:'address.singular')
     end
 
     def resource_klass

@@ -22,22 +22,22 @@ describe Gaku::ExamsController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'GET #soft_delete' do
-        let(:get_soft_delete) { gaku_get :soft_delete, id: exam }
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: exam }
 
         it 'redirects' do
-          get_soft_delete
+          patch_soft_delete
           should respond_with(302)
         end
 
         it 'assigns  @exam' do
-          get_soft_delete
+          patch_soft_delete
           expect(assigns(:exam)).to eq exam
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            patch_soft_delete
             exam.reload
           end.to change(exam, :deleted)
         end

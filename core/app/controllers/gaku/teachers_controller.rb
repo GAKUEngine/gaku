@@ -11,14 +11,12 @@ module Gaku
 
     def recovery
       @teacher.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @teacher
     end
 
     def soft_delete
       @teacher.soft_delete
-      redirect_to teachers_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @teacher, location: teachers_path
     end
 
     def destroy
@@ -28,9 +26,7 @@ module Gaku
     end
 
     def show_deleted
-      respond_with(@teacher) do |format|
-        format.html { render :show }
-      end
+      render :show
     end
 
     def new
@@ -46,9 +42,11 @@ module Gaku
     end
 
     def edit
+      respond_with @teacher
     end
 
     def show
+      respond_with @teacher
     end
 
     def update
@@ -80,7 +78,7 @@ module Gaku
     end
 
     def attributes
-      %i(name surname name_reading surname_reading birth_date gender picture)
+      %i( name surname name_reading surname_reading birth_date gender picture )
     end
 
     def set_teacher
@@ -91,10 +89,6 @@ module Gaku
     def set_unscoped_teacher
       @teacher = Teacher.unscoped.find(params[:id])
       set_notable
-    end
-
-    def t_resource
-      t(:'teacher.singular')
     end
 
     def set_notable

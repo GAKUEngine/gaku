@@ -69,22 +69,22 @@ describe Gaku::TeachersController do
       end
 
 
-      describe 'GET #soft_delete' do
-        let(:get_soft_delete) { gaku_get :soft_delete, id: teacher }
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: teacher }
 
         it 'redirects' do
-          get_soft_delete
+          patch_soft_delete
           should respond_with(302)
         end
 
         it 'assigns  @teacher' do
-          get_soft_delete
+          patch_soft_delete
           expect(assigns(:teacher)).to eq teacher
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            patch_soft_delete
             teacher.reload
           end.to change(teacher, :deleted)
         end

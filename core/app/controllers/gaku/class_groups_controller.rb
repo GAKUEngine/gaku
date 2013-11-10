@@ -3,8 +3,6 @@ module Gaku
 
     include StudentChooserController
 
-    #load_and_authorize_resource class:  ClassGroup
-
     respond_to :js,   only: %i( new create edit update destroy recovery )
     respond_to :html, only: %i( index edit update soft_delete )
 
@@ -16,14 +14,12 @@ module Gaku
 
     def recovery
       @class_group.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @class_group
     end
 
     def soft_delete
       @class_group.soft_delete
-      redirect_to class_groups_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @class_group, location: class_groups_path
     end
 
     def destroy

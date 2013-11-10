@@ -1,9 +1,6 @@
 module Gaku
   class StudentsController < GakuController
 
-    # load_and_authorize_resource class: Gaku::Student,
-    #                             except: [:recovery, :destroy]
-
     decorates_assigned :student
 
     helper_method :sort_column, :sort_direction
@@ -65,9 +62,7 @@ module Gaku
     end
 
     def show_deleted
-      respond_with(@student) do |format|
-        format.html { render :show }
-      end
+      render :show
     end
 
     def destroy
@@ -78,15 +73,13 @@ module Gaku
 
     def recovery
       @student.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @student
     end
 
     def soft_delete
       @student.soft_delete
       @count = Student.count
-      redirect_to students_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @student, location: students_path
     end
 
     def update
@@ -128,10 +121,6 @@ module Gaku
 
     def includes
       [[contacts: :contact_type, addresses: :country], :guardians]
-    end
-
-    def t_resource
-      t(:'student.singular')
     end
 
     def set_class_group

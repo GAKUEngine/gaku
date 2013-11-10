@@ -21,22 +21,22 @@ describe Gaku::CourseGroupsController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'GET #soft_delete' do
-        let(:get_soft_delete) { gaku_get :soft_delete, id: course_group }
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: course_group }
 
         it 'redirects' do
-          get_soft_delete
+          patch_soft_delete
           should respond_with(302)
         end
 
         it 'assigns  @course_group' do
-          get_soft_delete
+          patch_soft_delete
           expect(assigns(:course_group)).to eq course_group
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            patch_soft_delete
             course_group.reload
           end.to change(course_group, :deleted)
         end
