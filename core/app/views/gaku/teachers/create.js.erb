@@ -2,7 +2,7 @@ $('#new-teacher').slide();
 $('#new-teacher form')[0].reset();
 $('#new-teacher-link').show();
 
-$('#teachers-index tbody').append('<%= render_js_partial("teacher", {teacher: @teacher}) %>');
-$('.teachers-count').html("<%= print_count(@count, t_teachers_list) %>");
+$('#teachers-index tbody').append('<%= j render("teacher", {teacher: @teacher}) %>');
+$('.teachers-count').html("<%= print_count(@count, t(:'teacher.list')) %>");
 
 showNotice("<%= render_flash %>");

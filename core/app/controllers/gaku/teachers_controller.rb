@@ -1,11 +1,9 @@
 module Gaku
   class TeachersController < GakuController
 
-    #load_and_authorize_resource :teacher, class: Gaku::Teacher
-
     decorates_assigned :teacher
 
-    respond_to :js,   only: %i( new create edit update destroy recovery )
+    respond_to :js,   only: %i( new create destroy recovery )
     respond_to :html, only: %i( index edit update show show_deleted soft_delete )
 
     before_action :set_unscoped_teacher, only: %i( show_deleted destroy recovery )
@@ -62,7 +60,6 @@ module Gaku
                         notice: t(:'notice.uploaded', resource: t(:'picture'))
           end
         else
-          format.js { render }
           format.html { redirect_to [:edit, @teacher] }
         end
       end
