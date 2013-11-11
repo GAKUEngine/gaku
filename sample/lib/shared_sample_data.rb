@@ -21,12 +21,16 @@
 
 def batch_create(count)
   ActiveRecord::Base.transaction do
-    bar = RakeProgressbar.new(count)
-    count.times do
-      bar.inc
-      yield
+    if Rails.env.development?
+      bar = RakeProgressbar.new(count)
+      count.times do
+        bar.inc
+        yield
+      end
+      bar.finished
+    else
+      count.times { yield }
     end
-    bar.finished
   end
 end
 
