@@ -1,11 +1,11 @@
 #admin-school-campus-addresses
   = index_header do
-    #new-admin-school-campus-address.hide
+    #new-admin-school-campus-address.d-none
     .pull-left
       = count_div '' do
         = t(:'address.singular')
     .pull-right
-      = ajax_link_to_new t(:'address.add'), [:new, :admin, @school, @campus, :address], id: 'new-admin-school-campus-address-link', class: @campus.address.nil? ? "btn btn-primary" : 'btn btn-primary hide'
+      = ajax_link_to_new t(:'address.add'), [:new, :admin, @school, @campus, :address], id: 'new-admin-school-campus-address-link', class: @campus.address.nil? ? "btn btn-primary" : 'btn btn-primary d-none'
   = hr
 
   = index_body do

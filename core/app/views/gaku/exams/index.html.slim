@@ -6,7 +6,7 @@
     = ajax_link_to_new t(:'exam.add'), [:new, :exam], id: 'new-exam-link'
 
 = content_for :new_form do
-  #new-exam.hide
+  #new-exam.d-none
     /= render 'form'
 
 = table_for 'exams-index' do

@@ -6,7 +6,7 @@
     = ajax_link_to_new t(:'enrollment_status.add'), [:new, :admin, :enrollment_status], id: 'new-admin-enrollment-status-link'
 
 = content_for :new_form do
-  #new-admin-enrollment-status.hide
+  #new-admin-enrollment-status.d-none
 
 #admin-enrollment-statuses
   = table_for 'admin-enrollment-statuses-index' do
