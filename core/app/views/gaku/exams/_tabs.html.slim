@@ -3,7 +3,7 @@
     ul.nav.nav-tabs.nav-justified
       li.active
         a#exam-exam-portions-tab-link data-toggle="tab" href="#exam-portions"
-          = print_count @exam.exam_portions_count, t_exam_portion_plural
+          = print_count @exam.exam_portions_count, t(:'exam_portion.plural')
       li
         a#exam-notes-tab-link data-toggle="tab" href="#exam-notes"
           = print_count @exam.notes_count, t(:'note.plural')

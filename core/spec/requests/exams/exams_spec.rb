@@ -79,35 +79,6 @@ describe 'Exams' do
       end
     end
 
-    context '#edit from index view', js: true do
-      before do
-        visit gaku.exams_path
-        click js_edit_link
-      end
-
-      it 'edits' do
-        fill_in 'exam_name', with: 'Biology 2012'
-        select department.name, from: 'exam_department_id'
-        click submit
-        flash_updated?
-
-        exam.reload
-        expect(exam.name).to eq 'Biology 2012'
-        expect(exam.department).to eq department
-
-        within(table) do
-          has_content? department.name
-          has_content? 'Biology 2012'
-        end
-        count? 'Exams list(1)'
-      end
-
-      it 'has validations' do
-        fill_in 'exam_name', with: ''
-        has_validations?
-      end
-    end
-
     it 'deletes', js: true do
       count? 'Exams list(1)'
       within(table) { has_content? exam.name }

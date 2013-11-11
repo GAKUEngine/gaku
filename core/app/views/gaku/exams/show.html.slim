@@ -1,25 +1,28 @@
-= panel_div title: t(:'exam.show') do
-  = render 'show_table', exam: @exam
+= panel_for 'exam-panel' do
+  = panel_header 'Exam information', @exam
 
-= panel_div do
-  - content_for :panel_option do
-    p aaaaaaaa
+  table.table.table-bordered.th-center
+    tbody
+      tr
+        th.active
+          = t(:'exam.name')
+        td
+          h2 = @exam.name
+      tr
+        th.active = t(:'department.singular')
+        td = @exam.department
+      tr
+        th.active = t(:'exam.weight')
+        td = @exam.weight
+      tr
+        th.active = t(:'exam.description')
+        td = @exam.description
+      tr
+        th.active = t(:'exam.adjustments')
+        td = @exam.adjustments
 
-  #new-exam-exam-portion.mb-l.hide
+= render 'tabs'
 
-  #exam-exam-portions
-    = render 'gaku/exams/exam_portions/exam_portions'
-
-  - if @exam.use_weighting
-    .weight-check-widget
-      = render 'weight_check_widget', exam: @exam
-
-= panel_div do
-  #exam-notes
-    = render partial: 'gaku/notes/notes'
-
-.row
-  .col-md-6
-    = link_to_edit_with_text [:edit,@exam], remote: true
-  .col-md-6
-    = link_to_back exams_path
+= footer do
+  .col-md-12
+    = link_to_index exams_path

@@ -2,25 +2,22 @@ require 'spec_helper'
 
 describe 'Exam Portion Attachments' do
 
+  before(:all) { set_resource 'exam-exam-portion-attachment' }
   before { as :admin }
 
   let(:exam) { create(:exam, name: 'Unix') }
   let(:exam_portion) { create(:exam_portion, exam: exam) }
   let(:attachment) { create(:attachment, attachable: exam_portion) }
 
-  before :all do
-    set_resource 'exam-exam-portion-attachment'
-  end
-
   context '#new', js: true do
     before do
       exam; exam_portion
-      visit gaku.exam_exam_portion_path(exam, exam_portion)
+      visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
       click new_link
       wait_until_visible submit
     end
 
-    xit 'creates and show' do
+    it 'creates and show' do
       expect do
         fill_in 'attachment_name', with: 'Attachment name'
         fill_in 'attachment_description', with: 'Attachment description'
@@ -28,18 +25,16 @@ describe 'Exam Portion Attachments' do
         absolute_path = Rails.root + '../support/120x120.jpg'
         attach_file 'attachment_asset', absolute_path
         click submit
-        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
+        flash_created?
       end.to change(Gaku::Attachment, :count).by 1
 
-      flash_uploaded?
-
-      page.should have_content 'Attachment name'
-      page.should have_content 'Attachment description'
-      page.should have_content '120x120.jpg'
-      page.should have_content 'image/jpeg'
+      has_content? 'Attachment name'
+      has_content? 'Attachment description'
+      has_content? '120x120.jpg'
+      has_content? 'image/jpeg'
     end
 
-    it {has_validations?}
+    it { has_validations? }
 
   end
 
@@ -47,15 +42,13 @@ describe 'Exam Portion Attachments' do
 
     before do
       exam; exam_portion; attachment
-      visit gaku.exam_exam_portion_path(exam, exam_portion)
+      visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
     end
 
-    context '#edit' do
-      before do
-        within(table) { click js_edit_link }
-      end
+    context 'edit' do
+      before { within(table) { click js_edit_link } }
 
-      xit 'edits' do
+      it 'edits' do
         page.should have_content attachment.name
 
         fill_in 'attachment_name', with: 'Different name'
@@ -68,8 +61,6 @@ describe 'Exam Portion Attachments' do
           has_content? 'Different name'
           has_no_content? attachment.name
         end
-
-        current_path.should == gaku.exam_exam_portion_path(exam, exam_portion)
       end
 
       it 'has validations' do
