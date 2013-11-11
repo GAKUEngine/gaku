@@ -6,7 +6,7 @@
 
 = content_for :index_header do
   .pull-left
-    = count_div('class-groups-count') { print_count @count, t_class_group_list }
+    = count_div('class-groups-count') { print_count @count, t(:'class_group.list') }
   .pull-right
     = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], id: "new-class-group-link"
 

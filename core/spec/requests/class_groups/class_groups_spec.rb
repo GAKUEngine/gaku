@@ -48,45 +48,6 @@ describe 'ClassGroups' do
 
     context 'edit', js: true do
 
-      context 'from index view' do
-        before do
-          click js_edit_link
-          wait_until_visible modal
-        end
-
-        it 'edits' do
-          semester, semester2 = class_group_with_semesters.semesters
-          fill_in 'class_group_grade',    with: '2'
-          fill_in 'class_group_name',     with: 'Really awesome class group'
-          fill_in 'class_group_homeroom', with: 'B2'
-
-          click submit
-
-          flash_updated?
-
-          %W( #{semester.id} #{semester2.id} ).each do |id|
-            within("#semester-#{id}-class-groups-index") do
-              has_content? 'Really awesome class group'
-              has_content? '2'
-              has_content? 'B2'
-            end
-          end
-
-          has_no_content? 'Not so awesome class group'
-          has_no_content? 'A1'
-
-          class_group_with_semesters.reload
-          expect(class_group_with_semesters.name).to eq 'Really awesome class group'
-          expect(class_group_with_semesters.grade).to eq 2
-          expect(class_group_with_semesters.homeroom).to eq 'B2'
-        end
-
-        it 'has validations' do
-          fill_in 'class_group_name', with: ''
-          has_validations?
-        end
-      end
-
       context 'from edit view' do
         before do
           visit gaku.edit_class_group_path(class_group_with_semesters)

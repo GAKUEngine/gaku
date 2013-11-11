@@ -2,5 +2,5 @@ $('table#class-groups-without-semester-index tbody').append('<%= j render("class
 $('#new-class-group form')[0].reset();
 $('#new-class-group').slide();
 $('#new-class-group-link').show();
-$('.class-groups-count').html("<%= print_count(@count, t_class_group_list) %>");
+$('.class-groups-count').html("<%= print_count(@count, t(:'class_group.list')) %>");
 showNotice("<%= render_flash %>");
