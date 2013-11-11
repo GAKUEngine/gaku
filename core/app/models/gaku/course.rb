@@ -1,7 +1,7 @@
 module Gaku
   class Course < ActiveRecord::Base
 
-    include Notes
+    include Notes, Trashable
 
     has_many :enrollments,
              class_name: 'Gaku::CourseEnrollment',

@@ -12,5 +12,5 @@ hr
   .col-md-9
     = link_to_index courses_path
   .col-md-3
-    /= link_to_modal_delete
-  /= render 'gaku/shared/soft_delete_modal', target: course
+    = link_to_modal_delete
+  = render 'gaku/shared/soft_delete_modal', target: @course

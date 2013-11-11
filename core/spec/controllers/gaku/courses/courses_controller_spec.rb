@@ -21,11 +21,98 @@ describe Gaku::CoursesController do
         it('renders :index template') { template? :index }
       end
 
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: course }
+
+        it { should respond_with 200 }
+        it('assigns @course') { expect(assigns(:course)).to eq course }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: course, course: attributes_for(:course, code: 'test')
+          end
+
+          it { should respond_with 302 }
+          it('redirects') { redirect_to? "/courses/#{course.id}/edit" }
+          it('assigns @course') { expect(assigns(:course)).to eq course }
+          it('sets flash') { flash_updated? }
+          it "changes course's attributes" do
+            course.reload
+            expect(course.code).to eq 'test'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: course, course: attributes_for(:invalid_course, code: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @course') { expect(assigns(:course)).to eq course }
+
+          it "does not change course's attributes" do
+            course.reload
+            expect(course.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: course }
+
+        it 'redirects' do
+          patch_soft_delete
+          should respond_with(302)
+        end
+
+        it 'assigns  @course' do
+          patch_soft_delete
+          expect(assigns(:course)).to eq course
+        end
+
+        it 'updates :deleted attribute' do
+          expect do
+            patch_soft_delete
+            course.reload
+          end.to change(course, :deleted)
+        end
+      end
+
     end
 
     context 'js' do
 
-      describe 'XHR #new' do
+      describe 'JS PATCH #recovery' do
+        let(:js_patch_recovery) { gaku_js_get :recovery, id: course }
+
+        it 'is successfull' do
+          js_patch_recovery
+          should respond_with(200)
+        end
+
+        it 'assigns  @course' do
+          js_patch_recovery
+          expect(assigns(:course)).to eq course
+        end
+
+        it 'renders :recovery' do
+          js_patch_recovery
+          should render_template :recovery
+       end
+
+        it 'updates :deleted attribute' do
+          course.soft_delete
+          expect do
+            js_patch_recovery
+            course.reload
+          end.to change(course, :deleted)
+        end
+      end
+
+      describe 'JS GET #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
@@ -33,7 +120,7 @@ describe Gaku::CoursesController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'POST #create' do
+      describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, course: attributes_for(:course)
@@ -79,45 +166,7 @@ describe Gaku::CoursesController do
         end
       end
 
-      describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: course }
-
-        it { should respond_with 200 }
-        it('assigns @course') { expect(assigns(:course)).to eq course }
-        it('renders the :edit template') { template? :edit }
-      end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: course, course: attributes_for(:course, code: 'test')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @course') { expect(assigns(:course)).to eq course }
-          it('sets flash') { flash_updated? }
-          it "changes course's attributes" do
-            course.reload
-            expect(course.code).to eq 'test'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: course, course: attributes_for(:invalid_course, code: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @course') { expect(assigns(:course)).to eq course }
-
-          it "does not change course's attributes" do
-            course.reload
-            expect(course.name).not_to eq ''
-          end
-        end
-      end
-
-      describe 'XHR DELETE #destroy' do
+      describe 'JS DELETE #destroy' do
         it 'deletes the course' do
           course
           expect do

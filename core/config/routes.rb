@@ -57,7 +57,7 @@ Gaku::Core::Engine.routes.draw do
     resources :students, controller: 'class_groups/students', concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser ) do
+  resources :courses, concerns: %i( notes student_chooser soft_delete show_deleted ) do
     resources :semester_courses, controller: 'courses/semester_courses'
     resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
       post :enroll_class_group, on: :collection

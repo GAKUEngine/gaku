@@ -159,6 +159,7 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'faculty_id'
       t.integer  'syllabus_id'
       t.integer  'class_group_id'
+      t.boolean  'deleted',       default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',    default: 0

@@ -14,7 +14,7 @@ describe 'Courses' do
     create(:course, :with_semesters, syllabus: syllabus)
   end
 
-  context '#new', js: true do
+  context 'new', js: true do
     before do
       syllabus
       visit gaku.courses_path
@@ -47,38 +47,6 @@ describe 'Courses' do
       syllabus2
       visit gaku.courses_path
       within(count_div) { page.should have_content('Courses list(1)') }
-    end
-
-    context 'edit ' do
-      context 'from index view' do
-        before do
-          click js_edit_link
-        end
-
-        it 'has validations', js: true do
-          fill_in 'course_code', with: ''
-          has_validations?
-        end
-
-        it 'edits a course', js: true  do
-          semester, semester2 = course_with_semesters.semesters
-
-          fill_in 'course_code', with: 'biology2013'
-          select syllabus2.name, from: 'course_syllabus_id'
-
-          click submit
-
-          %W( #{semester.id} #{semester2.id} ).each do |id|
-            within("#semester-#{id}-courses-index") do
-              page.should have_content 'biology2013'
-              page.should have_content syllabus2.name
-              page.should_not have_content syllabus.name
-            end
-          end
-
-          flash_updated?
-        end
-      end
     end
 
     context 'from edit view' do
