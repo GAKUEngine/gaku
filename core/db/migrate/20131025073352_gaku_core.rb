@@ -243,6 +243,7 @@ class GakuCore < ActiveRecord::Migration
 
     create_table 'gaku_extracurricular_activities' do |t|
       t.string   'name'
+      t.boolean  'deleted',        default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end

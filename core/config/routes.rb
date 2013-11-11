@@ -45,7 +45,7 @@ Gaku::Core::Engine.routes.draw do
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
-  resources :extracurricular_activities, concerns: %i( student_chooser ) do
+  resources :extracurricular_activities, concerns: %i( student_chooser pagination soft_delete show_deleted ) do
     resources :students,
       controller: 'extracurricular_activities/students',
       concerns: %i( enroll_student )

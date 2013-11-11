@@ -20,6 +20,66 @@ describe Gaku::ExtracurricularActivitiesController do
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
+
+
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: extracurricular_activity }
+
+        it { should respond_with 200 }
+        it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
+          end
+
+          it { should respond_with 302 }
+          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+          it('sets flash') { flash_updated? }
+          it "changes extracurricular_activity's attributes" do
+            extracurricular_activity.reload
+            expect(extracurricular_activity.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+
+          it "does not change extracurricular_activity's attributes" do
+            extracurricular_activity.reload
+            expect(extracurricular_activity.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: extracurricular_activity }
+
+        it 'redirects' do
+          patch_soft_delete
+          should respond_with(302)
+        end
+
+        it 'assigns  @extracurricular_activity' do
+          patch_soft_delete
+          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+        end
+
+        it 'updates :deleted attribute' do
+          expect do
+            patch_soft_delete
+            extracurricular_activity.reload
+          end.to change(extracurricular_activity, :deleted)
+        end
+      end
     end
 
     context 'js' do
@@ -78,41 +138,30 @@ describe Gaku::ExtracurricularActivitiesController do
         end
       end
 
-      describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: extracurricular_activity }
+      describe 'XHR GET #recovery' do
+        let(:js_patch_recovery) { gaku_js_patch :recovery, id: extracurricular_activity }
 
-        it { should respond_with 200 }
-        it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
-        it('renders the :edit template') { template? :edit }
-      end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
-          it('sets flash') { flash_updated? }
-          it "changes extracurricular_activity's attributes" do
-            extracurricular_activity.reload
-            expect(extracurricular_activity.name).to eq 'mobifon'
-          end
+        it 'is successfull' do
+          js_patch_recovery
+          should respond_with(200)
         end
 
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
-          end
+        it 'assigns  @extracurricular_activity' do
+          js_patch_recovery
+          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+        end
 
-          it { should respond_with 200 }
-          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+        it 'renders :recovery' do
+          js_patch_recovery
+          should render_template :recovery
+       end
 
-          it "does not change extracurricular_activity's attributes" do
+        it 'updates :deleted attribute' do
+          extracurricular_activity.soft_delete
+          expect do
+            js_patch_recovery
             extracurricular_activity.reload
-            expect(extracurricular_activity.name).not_to eq ''
-          end
+          end.to change(extracurricular_activity, :deleted)
         end
       end
 
