@@ -85,7 +85,7 @@ Gaku::Core::Engine.routes.draw do
   resources :course_enrollments,                   concerns: %i( enroll_students )
   resources :extracurricular_activity_enrollments, concerns: %i( enroll_students )
 
-  resources :syllabuses, concerns: %i( notes ) do
+  resources :syllabuses, concerns: %i( notes soft_delete show_deleted ) do
     resources :assignments,     controller: 'syllabuses/assignments'
     resources :exams,           controller: 'syllabuses/exams'
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'

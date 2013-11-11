@@ -40,13 +40,13 @@ describe 'ClassGroups' do
     it { has_validations? }
   end
 
-  context 'existing' do
+  context 'existing', js: true do
     before do
       class_group_with_semesters
       visit gaku.class_groups_path
     end
 
-    context 'edit', js: true do
+    context 'edit' do
 
       context 'from edit view' do
         before do
@@ -79,19 +79,18 @@ describe 'ClassGroups' do
 
     end
 
-    xit 'deletes', js: true do
-      visit gaku.edit_class_group_path(class_group_with_semesters)
+     it 'deletes' do
+        visit gaku.edit_class_group_path(class_group)
 
-      expect do
-        click modal_delete_link
-        within(modal) { click_on 'Delete' }
-        accept_alert
-        wait_until { flash_destroyed? }
-      end.to change(Gaku::ClassGroup, :count).by -1
+        expect do
+          click modal_delete_link
+          within(modal) { click_on 'Delete' }
+          accept_alert
+          wait_until { flash_destroyed? }
+        end.to change(Gaku::ClassGroup, :count).by -1
 
-      within(count_div) { has_no_content '1' }
-      current_path.should eq gaku.class_groups_path
-    end
+        current_path.should eq gaku.class_groups_path
+      end
 
   end
 end

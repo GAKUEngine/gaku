@@ -21,11 +21,75 @@ describe Gaku::SyllabusesController do
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
+
+      describe 'GET #edit' do
+        before do
+          department
+          gaku_get :edit, id: syllabus
+        end
+
+        it { should respond_with 200 }
+        it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+        it('renders the :edit template') { template? :edit }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: syllabus, syllabus: attributes_for(:syllabus, name: 'mobifon')
+          end
+
+          it { should respond_with 302 }
+          it('redirects') { redirect_to? "/syllabuses/#{syllabus.id}/edit" }
+          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+          it('sets flash') { flash_updated? }
+          it "changes syllabus's attributes" do
+            syllabus.reload
+            expect(syllabus.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: syllabus, syllabus: attributes_for(:invalid_syllabus, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+
+          it "does not change syllabus's attributes" do
+            syllabus.reload
+            expect(syllabus.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: syllabus }
+
+        it 'redirects' do
+          patch_soft_delete
+          should respond_with(302)
+        end
+
+        it 'assigns  @syllabus' do
+          patch_soft_delete
+          expect(assigns(:syllabus)).to eq syllabus
+        end
+
+        it 'updates :deleted attribute' do
+          expect do
+            patch_soft_delete
+            syllabus.reload
+          end.to change(syllabus, :deleted)
+        end
+      end
     end
 
     context 'js' do
 
-      describe 'XHR #new' do
+      describe 'JS #new' do
         before do
           department
           gaku_js_get :new
@@ -37,7 +101,7 @@ describe Gaku::SyllabusesController do
         it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
       end
 
-      describe 'POST #create' do
+      describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, syllabus: attributes_for(:syllabus)
@@ -83,50 +147,36 @@ describe Gaku::SyllabusesController do
         end
       end
 
-      describe 'XHR #edit' do
-        before do
-          department
-          gaku_js_get :edit, id: syllabus
+      describe 'JS PATCH #recovery' do
+        let(:js_patch_recovery) { gaku_js_patch :recovery, id: syllabus }
+
+        it 'is successfull' do
+          js_patch_recovery
+          should respond_with(200)
         end
 
-        it { should respond_with 200 }
-        it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
-        it('renders the :edit template') { template? :edit }
-        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
-
-      end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: syllabus, syllabus: attributes_for(:syllabus, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
-          it('sets flash') { flash_updated? }
-          it "changes syllabus's attributes" do
-            syllabus.reload
-            expect(syllabus.name).to eq 'mobifon'
-          end
+        it 'assigns  @syllabus' do
+          js_patch_recovery
+          expect(assigns(:syllabus)).to eq syllabus
         end
 
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: syllabus, syllabus: attributes_for(:invalid_syllabus, name: '')
-          end
+        it 'renders :recovery' do
+          js_patch_recovery
+          should render_template :recovery
+       end
 
-          it { should respond_with 200 }
-          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
-
-          it "does not change syllabus's attributes" do
+        it 'updates :deleted attribute' do
+          syllabus.soft_delete
+          expect do
+            js_patch_recovery
             syllabus.reload
-            expect(syllabus.name).not_to eq ''
-          end
+          end.to change(syllabus, :deleted)
         end
       end
 
-      describe 'XHR DELETE #destroy' do
+
+
+      describe 'JS DELETE #destroy' do
         it 'deletes the syllabus' do
           syllabus
           expect do

@@ -1,7 +1,7 @@
 module Gaku
   class Syllabus < ActiveRecord::Base
 
-    include Notes
+    include Notes, Trashable
 
     has_many :courses
     has_many :assignments

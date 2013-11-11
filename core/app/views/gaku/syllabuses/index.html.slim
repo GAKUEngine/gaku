@@ -3,7 +3,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'syllabuses-count' do
-      = print_count @count, t_syllabus_list
+      = print_count @count, t(:'syllabus.list')
   .pull-right
     = ajax_link_to_new t(:'syllabus.new'), [:new, :syllabus], id: "new-syllabus-link"
     = render 'gaku/shared/overrides/syllabuses/import_link'

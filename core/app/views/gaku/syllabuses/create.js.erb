@@ -4,4 +4,4 @@ $('table#syllabuses-index tbody').append('<%= j render("syllabus", {syllabus: @s
 $('#new-syllabus form')[0].reset();
 $('#new-syllabus').slide();
 $('#new-syllabus-link').show();
-$('.syllabuses-count').html('<%= print_count(@count, t_syllabus_list) %>');
+$('.syllabuses-count').html("<%= print_count(@count, t(:'syllabus.list')) %>");

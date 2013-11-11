@@ -571,6 +571,7 @@ class GakuCore < ActiveRecord::Migration
       t.text     'description'
       t.integer  'credits'
       t.integer  'hours'
+      t.boolean  'deleted',                   default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
