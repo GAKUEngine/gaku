@@ -8,8 +8,8 @@ describe 'Admin School Campus Picture' do
   let(:school) { create(:school) }
 
   before do
-    visit gaku.admin_school_path(school)
-    click show_link
+    visit gaku.edit_admin_school_path(school)
+    click edit_link
     @file_name = 'campus_picture'
   end
 

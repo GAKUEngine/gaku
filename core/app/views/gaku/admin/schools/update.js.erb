@@ -1,4 +1,3 @@
-$('tr#school-<%= @school.id %>').html('<%= render_js_partial("school_unit", {school: @school}) %>');
 $("#edit-school-modal").modal("hide");
 //edit from show
 $("#school-show-table").html('<%= render_js_partial("show_table", {school: @school}) %>');

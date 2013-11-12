@@ -1,4 +1,0 @@
-= modal_for 'edit-campus-modal' do
-  = modal_form_for [:admin, @school, @campus], resource: 'admin-school-campus' do |f|
-    = f.text_field :name, label: t(:'campus.name')
-    = buttons_for @campus, resource: 'admin-school-campus'

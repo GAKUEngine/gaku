@@ -8,7 +8,7 @@ describe 'Admin School Picture' do
   let(:school) { create(:school) }
 
   before do
-    visit gaku.admin_school_path(school)
+    visit gaku.edit_admin_school_path(school)
   end
 
   context 'avatarable' do

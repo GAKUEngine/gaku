@@ -12,11 +12,16 @@ module Gaku
 
     def school_details
       @school = @master_school
-      render :show, layout: 'gaku/layouts/show'
+      render :school_details, layout: 'gaku/layouts/show'
     end
 
     def edit_master
       render :edit_master, layout: 'gaku/layouts/show'
+    end
+
+    def edit
+      @school = School.find(params[:id])
+      edit!
     end
 
     def update

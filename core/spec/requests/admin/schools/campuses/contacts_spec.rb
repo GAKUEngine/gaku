@@ -11,7 +11,8 @@ describe 'Admin School Campus Contact' do
   context 'new', js: true, type: 'contact' do
     before do
       @resource = school.campuses.first
-      visit gaku.admin_school_campus_path(school, @resource)
+      visit gaku.edit_admin_school_campus_path(school, @resource)
+      click tab_link
     end
 
     it_behaves_like 'new contact'
@@ -27,7 +28,11 @@ describe 'Admin School Campus Contact' do
       end
 
       context 'edit' do
-        before { visit gaku.admin_school_campus_path(@school, @resource) }
+        before do
+          visit gaku.edit_admin_school_campus_path(@school, @resource)
+          click tab_link
+        end
+
         it_behaves_like 'edit contact'
         it_behaves_like 'delete contact', @resource
       end
@@ -39,7 +44,8 @@ describe 'Admin School Campus Contact' do
         @school = create(:school_with_two_contacts)
         @school.reload
         @resource = @school.campuses.first
-        visit gaku.admin_school_campus_path(@school, @resource)
+        visit gaku.edit_admin_school_campus_path(@school, @resource)
+        click tab_link
       end
 
       it_behaves_like 'primary contacts'

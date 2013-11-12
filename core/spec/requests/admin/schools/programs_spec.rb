@@ -18,7 +18,8 @@ describe 'Admin Program' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_school_path(school)
+      visit gaku.edit_admin_school_path(school)
+      click tab_link
       click new_link
       wait_until_visible submit
     end
@@ -66,7 +67,8 @@ describe 'Admin Program' do
   context 'existing', js: true do
     before do
       program
-      visit gaku.admin_school_path(school)
+      visit gaku.edit_admin_school_path(school)
+      click tab_link
     end
 
     context 'edit' do
