@@ -6,7 +6,7 @@ module Gaku
     helper_method :sort_column, :sort_direction
 
     respond_to :js,   only: %i( new create index destroy recovery )
-    respond_to :html, only: %i( index edit show show_deleted soft_delete )
+    respond_to :html, only: %i( index edit show show_deleted soft_delete update )
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
@@ -84,17 +84,7 @@ module Gaku
 
     def update
       @student.update(student_params)
-      respond_with(@student) do |format|
-        if params[:student][:picture]
-          format.html do
-            redirect_to [:edit, @student],
-                        notice: t(:'notice.uploaded', resource: t(:'picture'))
-          end
-        else
-          format.html { redirect_to [:edit, @student] }
-          format.json { head :no_content }
-        end
-      end
+      respond_with @student, location: [:edit, @student]
     end
 
     def load_autocomplete_data

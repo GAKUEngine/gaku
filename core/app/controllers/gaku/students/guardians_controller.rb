@@ -25,13 +25,7 @@ module Gaku
 
     def update
       @guardian.update(guardian_params)
-      respond_with(@guardian) do |format|
-        if params[:guardian][:picture]
-          format.html { redirect_to [:edit, @student, @guardian], notice: t(:'notice.uploaded', resource: t(:'picture')) }
-        else
-          format.html { redirect_to [:edit, @student, @guardian] }
-         end
-      end
+      respond_with @guardian, location: [:edit, @student, @guardian]
     end
 
     def destroy

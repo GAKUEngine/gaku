@@ -51,16 +51,7 @@ module Gaku
 
     def update
       @teacher.update(teacher_params)
-      respond_with(@teacher) do |format|
-        if params[:teacher][:picture]
-          format.html do
-            redirect_to @teacher,
-                        notice: t(:'notice.uploaded', resource: t(:'picture'))
-          end
-        else
-          format.html { redirect_to [:edit, @teacher] }
-        end
-      end
+      respond_with @teacher, location: [:edit, @teacher]
     end
 
     def index
