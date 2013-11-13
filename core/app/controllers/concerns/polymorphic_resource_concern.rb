@@ -8,7 +8,8 @@ module PolymorphicResourceConcern
     end
 
     @nested_resources = nested_resources(klasses)
-    #puts "Resource :::::::::::::::::::: #{resource_name}"
+    #puts "nested_resources :::::::::::::::::::: #{@nested_resources}"
+    #puts "resource_name:::::::::::::::::::: #{resource_name}"
     @polymorphic_resource_name = resource_name
   end
 
