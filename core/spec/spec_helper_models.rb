@@ -19,6 +19,7 @@ require 'gaku/testing/factories'
 require 'gaku/testing/deferred_garbage_collection'
 require 'gaku/testing/coverage'
 
+Rails.logger.level = 3
 
 Dir["#{File.dirname(__FILE__)}/support/models/**/*.rb"].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
