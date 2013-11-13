@@ -15,19 +15,6 @@ body {
   padding-top: 70px;
 }
 
-@media (max-width: 768px) {
-  /* Remove any padding from the body */
-  body {
-    padding-top: 0;
-  }
-}
-@media (min-width: 768px) and (max-width: 980px) {
-  /* Remove any padding from the body */
-  body {
-    padding-top: 0;
-  }
-}
-
 hr {
   margin: 20px 0px;
 }
@@ -208,3 +195,18 @@ form {
 .ml-l { margin-left: 20px }
 
 .d-none { display: none }
+
+
+// for responsive ----------------
+
+/* Small devices (tablets, 768px and down) */
+@media (max-width: 768px) {
+}
+
+/* Medium devices (desktops, 992px) */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
