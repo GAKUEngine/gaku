@@ -40,8 +40,7 @@ describe Gaku::Students::GuardiansController do
             gaku_patch :update, id: guardian, guardian: attributes_for(:invalid_guardian, name: nil), student_id: student.id
           end
 
-          it { should respond_with 302 }
-          it('redirects') { redirect_to? "/students/#{student.id}/guardians/#{guardian.id}/edit" }
+          it { should respond_with 200 }
           it('assigns @guardian') { expect(assigns(:guardian)).to eq guardian }
 
           it "does not change guardian's attributes" do

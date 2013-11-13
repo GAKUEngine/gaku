@@ -58,7 +58,7 @@ describe Gaku::TeachersController do
             gaku_patch :update, id: teacher, teacher: attributes_for(:invalid_teacher, name: '')
           end
 
-          it { should respond_with 302 }
+          it { should respond_with 200 }
           it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
 
           it "does not change teacher's attributes" do
