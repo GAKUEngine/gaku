@@ -14,7 +14,6 @@ ready = ->
 
     edit: ->
       self.app.country_dropdown()
-      #self.app.upload_picture()
 
     edit_master: ->
       self.app.upload_picture()

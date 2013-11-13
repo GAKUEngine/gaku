@@ -4,5 +4,5 @@
   .row.mt-m
     .col-md-12
       = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
-      #upload-picture.hide
+      #upload-picture.d-none
         = render 'gaku/admin/shared/upload_picture', resource: resource
