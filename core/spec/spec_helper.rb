@@ -18,28 +18,8 @@ require 'gaku/testing/controller_helpers'
 require 'gaku/testing/request_helpers'
 require 'gaku/testing/flash_helpers'
 require 'gaku/testing/auth_helpers'
+require 'gaku/testing/coverage'
 require 'gaku/core/url_helpers'
-
-
-require 'coveralls'
-Coveralls.wear!
-
-if ENV['COVERAGE']
-  # Run Coverage report
-  require 'simplecov'
-  puts 'Starting SimpleCov'
-  SimpleCov.start do
-    add_filter '/support/'
-    add_filter '/support/requests/'
-    add_filter '/spec/requests/**'
-    add_filter '/config/**'
-    add_group 'Controllers', 'app/controllers'
-    add_group 'Helpers', 'app/helpers'
-    add_group 'Mailers', 'app/mailers'
-    add_group 'Models', 'app/models'
-    add_group 'Libraries', 'lib'
-  end
-end
 
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
