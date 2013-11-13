@@ -15,10 +15,10 @@
                 | English
             p.help-block= t 'config.help.language'
               
-            div.hide
-              div id="current_lang"
+            .d-none
+              #current_lang
                 = I18n.locale
-              div id="link_langs"
+              #link_langs
                 = link_to "ja", locale: "ja"
                 = link_to "en", locale: "en"
 

@@ -45,14 +45,16 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails4_client_side_validations', '0.0.3'
 
-  s.add_dependency 'phantom_helpers',                '0.11.0.alpha2'
-  s.add_dependency 'phantom_forms',                  '0.2.0.alpha2'
-  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha2'
+  s.add_dependency 'phantom_helpers',                '0.11.0.alpha3'
+  s.add_dependency 'phantom_forms',                  '0.2.0.alpha3'
+  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha3'
   s.add_dependency 'nested_form'
 
   s.add_dependency 'jquery-rails',                   '~> 3'
   s.add_dependency 'jquery-ui-rails',                '~> 4'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
+  s.add_dependency 'bootstrap-sass',                 '~> 3.0.1.0.rc'
+  s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.1'
   s.add_dependency 'i18n-js',                        '~> 2.1'
   s.add_dependency 'eco',                            '~> 1'

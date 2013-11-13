@@ -1,13 +1,12 @@
 /*
- *= require_self
- * require ./gaku_import
- *= require bootstrap.min
- *= require gaku/bootstrap_theme
+ *= require gaku/bootstrap_and_theme
  *= require bootstrap-datepicker
+ * require font-awesome
  *= require jquery.ui.autocomplete
  *= require jquery.minicolors
  *= require phantom_helpers
  *= require phantom_forms
  *= require gaku/exams
- *= require ./gaku
+ *= require gaku/gaku
+ *= require_self
 */

@@ -6,5 +6,5 @@
     = image_tag resource.picture.url(:thumb), id: "avatar-picture"
 .row.mt-s
   = button_to t(:'pictures.change'), 'JavaScript:void(0);', method: :get, id: "upload-picture-link", class: "span12 btn"
-  #upload-picture.hide
+  #upload-picture.d-none
     = render 'gaku/admin/shared/upload_picture', resource: resource

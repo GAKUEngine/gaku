@@ -10,15 +10,14 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.effect-slide
 
-//= require bootstrap.min
-//= require bootstrap-datepicker/core
-
-// require bootstrap
+//= require bootstrap
 // require bootstrap-alert
 // require bootstrap-button
 // require bootstrap-tab
 // require bootstrap-dropdown
 // require bootstrap-modal
+
+//= require bootstrap-datepicker/core
 
 //= require underscore
 //= require moment
