@@ -22,7 +22,8 @@ env:
   - TEST_SUITE=controllers GEM=core DB=postgres
   - TEST_SUITE=integration GEM=core DB=postgres
   - TEST_SUITE=routing GEM=core DB=postgres
-  - TEST_SUITE=requests GEM=core DB=postgres
+  - TEST_SUITE=requests/admin GEM=core DB=postgres
+  - TEST_SUITE=requests/frontend GEM=core DB=postgres
 
 before_install:
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
