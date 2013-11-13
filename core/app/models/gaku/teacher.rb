@@ -5,7 +5,7 @@ module Gaku
 
     belongs_to :user
 
-    paginates_per Preset.per_page('teachers')
+    paginates_per 25 #Preset.per_page('teachers')
 
   end
 end

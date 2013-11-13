@@ -9,4 +9,4 @@
 			  td.name = course_group.name
 			  td
 				  = ajax_link_to_delete course_group , id: 'delete-course-group-link'
-				  = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, course_group], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
+				  = link_to ('<span class="glyphicon glyphicon-repeat"></span>').html_safe, [:recovery, course_group], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true

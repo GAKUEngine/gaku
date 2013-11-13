@@ -1,7 +1,7 @@
 - prepare_resource_name(nested_resources, :address)
 div id="#{@resource_name.pluralize}"
   = index_header do
-    div id="new-#{@resource_name}" class='hide'
+    .d-none id="new-#{@resource_name}"
     .pull-left
       = count_div "#{@resource_name.pluralize}-count" do
         = print_count nested_resources.last.addresses_count, t_address_list

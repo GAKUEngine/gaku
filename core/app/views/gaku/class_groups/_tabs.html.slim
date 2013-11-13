@@ -18,7 +18,7 @@
     .tab-content
       #class_group_enrollments.tab-pane.active
         .row
-          #enrollment_form.hide
+          #enrollment_form.d-none
         .row#class_group_enrollments_list
           .col-md-12
             = render 'gaku/class_groups/students/students'
@@ -28,14 +28,14 @@
           .col-md-12
             = render 'gaku/class_groups/semester_class_groups/semesters'
         .row
-          #semester_form.hide
+          #semester_form.d-none
 
       #courses.tab-pane
         .row
           .col-md-12
             = render 'gaku/class_groups/courses/courses'
         .row
-          #course_form.hide
+          #course_form.d-none
 
       #notes.tab-pane
         = render 'gaku/notes/notes'

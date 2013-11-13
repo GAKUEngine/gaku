@@ -43,11 +43,30 @@ user: admin,   pass: 123456
 Requirements
 ------------
 * ruby >= 2.0.0
-* postgresql
-* postgresql-contrib
+* postgresql-9.2
+* postgresql-9.2-contrib
 
 Installation
 ------------
+
+### Install postgresql-9.2 (Ubuntu >= 12.04)
+
+    $ cat /etc/*-release   #gets your DISTRIBUTION
+    $ nano /etc/apt/sources.list.d/pgdg.list
+ 
+Add the line to the pgdg.list file(change DISTRIBUTION):
+
+    $ deb http://apt.postgresql.org/pub/repos/apt/ DISTRIBUTION-pgdg main
+    
+Install postgre: 
+
+    $ wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -  #adds the repo key
+    $ sudo apt-get update
+    $ sudo apt-get install postgresql-9.2 postgresql-9.2-contrib
+    $ sudo -u postgres psql -d template1 -c 'create extension hstore;' #create extension on all the DBs
+
+
+### Install GAKU
 
 You have 2 choices:
 

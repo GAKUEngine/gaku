@@ -1,6 +1,6 @@
 #student-course-enrollments
   = index_header do
-    #new-student-course-enrollment.hide
+    #new-student-course-enrollment.d-none
     .pull-left
       = count_div 'student-course-enrollments-count' do
         = print_count @student.courses_count, t(:'course.list')

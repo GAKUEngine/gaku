@@ -1,7 +1,7 @@
 #guardians-modal
 #student-guardians
   = index_header do
-    #new-student-guardian.hide
+    #new-student-guardian.d-none
     .pull-left
       = count_div 'student-guardians-count' do
         = print_count @student.guardians_count, t(:'guardian.list')
