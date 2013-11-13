@@ -4,9 +4,9 @@
 
     .pull-left
       = count_div 'admin-school-programs-count' do
-        = print_count @school.programs.count, t_program_list
+        = print_count @school.programs.count, t(:'program.list')
     .pull-right
-      = ajax_link_to_new t(:'program.add'), [:new, :admin, @school, :program], id: 'new-admin-school-program-link'
+      = ajax_link_to_new t(:'program.add'), [:new, :admin, @school, :program], id: 'new-admin-school-program-link' if can_edit?
   = hr
 
   = index_body do
@@ -18,8 +18,6 @@
           = th t(:'program.levels')
           = th t(:'syllabus.plural')
           = th t(:'specialty.plural')
-
-
-          = th_actions 3
+          = th_actions 2 if can_edit?
       tbody
         = render partial: 'gaku/admin/schools/programs/program', collection: @school.programs, as: :program

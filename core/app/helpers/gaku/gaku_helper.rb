@@ -26,10 +26,10 @@ module Gaku
     end
 
     def can_edit?
-      if controller.action_name == 'show'
-        false
-      else
+      if controller.action_name.include?('edit')
         true
+      else
+        false
       end
     end
 

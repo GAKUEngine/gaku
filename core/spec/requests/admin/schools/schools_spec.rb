@@ -30,16 +30,6 @@ describe 'Admin Schools' do
     it { has_validations? }
   end
 
-  context 'avatar' do
-
-    before do
-      primary_school = create(:school, primary:true)
-      visit gaku.edit_admin_school_path(school)
-      @file_name = 'school_picture'
-    end
-
-    it_behaves_like 'new avatar'
-  end
 
   context 'existing', js: true do
 

@@ -14,9 +14,10 @@ ready = ->
 
     edit: ->
       self.app.country_dropdown()
+      #self.app.upload_picture()
 
-    show: ->
-      self.app.country_dropdown()
+    edit_master: ->
+      self.app.upload_picture()
 
     new: ->
       self.app.country_dropdown()

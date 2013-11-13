@@ -1,8 +1,4 @@
-shared_examples 'new avatar' do
-
-  it 'shows picture' do
-    page.should have_css '#avatar-picture'
-  end
+shared_examples 'upload avatar' do
 
   it 'uploads', js:true do
     sleep 0.5
@@ -10,7 +6,16 @@ shared_examples 'new avatar' do
     absolute_path = Rails.root + '../support/120x120.jpg'
     attach_file @file_name, absolute_path
     click_button 'Upload'
-    flash_uploaded?
+    flash_updated?
+  end
+
+end
+
+
+shared_examples 'show avatar' do
+
+  it 'shows avatar' do
+    page.should have_css '#avatar-picture'
   end
 
 end

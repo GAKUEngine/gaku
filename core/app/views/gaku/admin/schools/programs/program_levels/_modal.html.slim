@@ -1,4 +1,4 @@
-= modal_for 'show-program-levels-modal' do
+= index_modal_for 'show-program-levels-modal' do
   = modal_header t(:'program_level.list')
   = modal_body do
     = table_for 'program-levels-list' do
@@ -8,3 +8,4 @@
       tbody
         = content_tag_for(:tr, @program.program_levels) do |level|
           td = level.level.name
+

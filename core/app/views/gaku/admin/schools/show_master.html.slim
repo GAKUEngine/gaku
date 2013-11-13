@@ -7,8 +7,8 @@
 
 = render 'tabs'
 
-= well_div do
-  .col-md-4
-    = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-4', data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
-  .col-md-6
+= footer do
+  .col-md-3
+    = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-12', data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
+  .col-md-9
     = link_to_back admin_schools_path

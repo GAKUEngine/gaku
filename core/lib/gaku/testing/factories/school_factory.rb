@@ -6,6 +6,10 @@ FactoryGirl.define do
     description 'Nagoya University description'
     founded Date.new(1950, 4, 1)
     principal 'Hajime Togari'
+
+    factory :invalid_school do
+      name nil
+    end
   end
 
   factory :school_with_one_contact, parent: :school do

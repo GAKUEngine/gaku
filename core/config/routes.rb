@@ -135,8 +135,9 @@ Gaku::Core::Engine.routes.draw do
 
   namespace :admin do
 
-    match 'school_details' => 'schools#school_details', via: :get
-    match 'school_details/edit' => 'schools#edit_master', via: :get
+    get 'school_details',          to: 'schools#show_master'
+    get 'school_details/edit',     to: 'schools#edit_master'
+    patch 'school_details/update', to: 'schools#update_master'
 
     resources :schools do
       resources :programs, controller: 'schools/programs' do
@@ -146,8 +147,8 @@ Gaku::Core::Engine.routes.draw do
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'schools/campuses', concerns: %i( contacts ) do
-        resources :addresses, controller: 'schools/campuses/addresses'
+      resources :campuses, controller: 'schools/campuses', except: :index,  concerns: %i( contacts ) do
+        resources :addresses, controller: 'schools/campuses/addresses', except: %i( show index )
       end
     end
 

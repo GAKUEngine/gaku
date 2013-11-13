@@ -4,6 +4,7 @@ td = link_to t(:'program_level.list'), [:show_program_levels,:admin, @school, pr
 td = link_to t(:'program_syllabus.list'), [:show_program_syllabuses,:admin, @school, program], remote: true, class: 'program-syllabuses-list'
 td = link_to t(:'program_specialty.list'), [:show_program_specialties,:admin, @school, program], remote: true, class: 'program-specialties-list'
 
-td
-  = ajax_link_to_edit [:edit, :admin, @school, program]
-  = ajax_link_to_delete [:admin, @school, program]
+- if can_edit?
+  td
+    = ajax_link_to_edit [:edit, :admin, @school, program]
+    = ajax_link_to_delete [:admin, @school, program]
