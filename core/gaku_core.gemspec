@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails',                '~> 4'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
   s.add_dependency 'bootstrap-sass',                 '~> 3.0.1.0.rc'
-  s.add_dependency 'font-awesome-sass',              '~> 4.0.1'
+  s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.1'
   s.add_dependency 'i18n-js',                        '~> 2.1'
   s.add_dependency 'eco',                            '~> 1'
