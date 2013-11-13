@@ -19,6 +19,7 @@ require 'gaku/testing/request_helpers'
 require 'gaku/testing/flash_helpers'
 require 'gaku/testing/auth_helpers'
 require 'gaku/testing/coverage'
+require 'gaku/testing/deferred_garbage_collection'
 require 'gaku/core/url_helpers'
 
 
