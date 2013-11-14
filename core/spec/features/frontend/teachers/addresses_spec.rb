@@ -37,7 +37,7 @@ describe 'Teacher Address' do
         @resource = teacher_with_address
         visit gaku.edit_teacher_path(@resource)
         click tab_link
-        wait_until { has_content? 'Addresses list' }
+        page.has_content? 'Addresses list'
       end
 
       it_behaves_like 'edit address'
@@ -50,7 +50,7 @@ describe 'Teacher Address' do
         @resource = teacher_with_addresses
         visit gaku.edit_teacher_path(@resource)
         click tab_link
-        wait_until { page.has_content? 'Addresses list' }
+        page.has_content? 'Addresses list'
       end
 
       it_behaves_like 'primary addresses'

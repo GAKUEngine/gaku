@@ -30,7 +30,7 @@ describe 'ExtracurricularActivity Students' do
       click_link 'extracurricular-activity-enrollments-tab-link'
       Gaku::ExtracurricularActivityEnrollment.count.should eq 0
       click new_link
-      wait_until_visible('#student-modal')
+      visible? '#student-modal'
     end
 
     it 'adds and shows a student' do
@@ -68,10 +68,10 @@ describe 'ExtracurricularActivity Students' do
       create(:student, name: 'Chikuhei', surname: 'Nakajima')
 
       click new_link
-      wait_until_visible('#student-modal')
+      visible? '#student-modal'
       size_of(table_rows) == 3
       fill_in 'q[name_cont]', with: 'Sus'
-      wait_until { size_of(table_rows) == 1 }
+      expect(size_of(table_rows)).to eq 1
     end
   end
 
@@ -86,7 +86,7 @@ describe 'ExtracurricularActivity Students' do
 
     it 'enrolls student only once', js: true do
       click new_link
-      wait_until { page.find('#student-modal').visible? }
+      page.find('#student-modal').visible?
       within('tr#student-' + student1.id.to_s) do
         page.should have_selector('img.enrolled')
       end
@@ -107,10 +107,10 @@ describe 'ExtracurricularActivity Students' do
 
     visit gaku.edit_extracurricular_activity_path(extracurricular_activity)
     click new_link
-    wait_until { page.find('#student-modal').visible? }
+    page.find('#student-modal').visible?
     extracurricular_activity.students << student1
     enroll_one_student_via_button 'Enroll to Extracurricular Activity'
-    wait_until_invisible('#student-modal')
+    invisible? '#student-modal'
     page.should have_content "#{student1} : Student Already enrolled to the extracurricular activity!"
   end
 

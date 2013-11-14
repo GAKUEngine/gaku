@@ -7,6 +7,7 @@ require 'rspec/rails/adapters'
 require 'rspec/rails/view_rendering'
 require 'rspec/rails/example'
 
+require 'shoulda-matchers'
 require 'database_cleaner'
 require 'factory_girl_rails'
 require 'handy_controller_helpers'
@@ -17,6 +18,7 @@ require 'gaku/testing/auth_helpers'
 require 'gaku/core/url_helpers'
 
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+Dir["#{File.dirname(__FILE__)}/support/controllers/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.before(:suite) do

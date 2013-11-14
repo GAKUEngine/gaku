@@ -14,7 +14,6 @@ describe 'CourseGroups' do
     before do
       visit gaku.course_groups_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do

@@ -25,20 +25,18 @@ describe 'Course Semesters' do
       visit gaku.edit_course_path(course)
       click tab_link
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do
       expect do
         select "#{semester.starting} / #{semester.ending}", from: 'semester_course_semester_id'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::SemesterCourse, :count).by(1)
 
       within(table) { page.should have_content "#{semester.starting} / #{semester.ending}" }
       within(count_div) { page.should have_content 'Semesters list(1)' }
       within(tab_link) { page.should have_content 'Semesters(1)' }
-      flash_created?
     end
 
     it 'presence validations'  do
@@ -69,19 +67,18 @@ describe 'Course Semesters' do
     context 'edit', js: true do
       before do
         within(table) { click js_edit_link }
-        wait_until_visible modal
+        visible? modal
       end
 
       it 'edits' do
         select "#{semester.starting} / #{semester.ending}", from: 'semester_course_semester_id'
         click submit
 
-        wait_until_invisible modal
+        flash_updated?
         within(table) do
           page.should have_content "#{semester.starting} / #{semester.ending}"
           page.should_not have_content "#{course_semester.starting} / #{course_semester.ending}"
         end
-        flash_updated?
       end
     end
 
@@ -92,6 +89,7 @@ describe 'Course Semesters' do
 
       expect do
         ensure_delete_is_working
+        flash_destroyed?
       end.to change(Gaku::SemesterCourse, :count).by(-1)
 
       within(table)     { page.should_not have_content "#{course_semester.starting} / #{course_semester.ending}" }
@@ -104,8 +102,6 @@ describe 'Course Semesters' do
         page.should_not have_content 'Semesters(1)'
         page.should have_content 'Semesters'
       end
-
-      flash_destroyed?
     end
 
   end

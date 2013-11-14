@@ -19,7 +19,6 @@ describe 'Courses' do
       syllabus
       visit gaku.courses_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates new course' do
@@ -34,7 +33,6 @@ describe 'Courses' do
       end.to change(Gaku::Course, :count).by(1)
 
       within(count_div) { page.should have_content('Courses list(1)') }
-      wait_until_invisible '#new-course'
     end
 
     it { has_validations? }
@@ -93,8 +91,7 @@ describe 'Courses' do
         end
 
         accept_alert
-        wait_until { size_of(rows) == tr_count - 1 }
-
+        flash_destroyed?
       end.to change(Gaku::Course, :count).by(-1)
 
       %W( #{semester.id} #{semester2.id} ).each do |id|
@@ -104,7 +101,7 @@ describe 'Courses' do
       end
 
       within(count_div) { page.should_not have_content('Courses list(1)') }
-      flash_destroyed?
+
 
     end
   end

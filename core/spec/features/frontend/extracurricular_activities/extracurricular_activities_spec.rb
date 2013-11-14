@@ -14,7 +14,6 @@ describe 'Extracurricular Activities' do
     before do
       visit gaku.extracurricular_activities_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do
@@ -29,7 +28,6 @@ describe 'Extracurricular Activities' do
     end
 
     it { has_validations? }
-
   end
 
   context 'existing' do

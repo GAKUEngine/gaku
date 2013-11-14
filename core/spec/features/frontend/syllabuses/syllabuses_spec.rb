@@ -14,7 +14,6 @@ describe 'Syllabus' do
       department
       visit gaku.syllabuses_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates' do
@@ -23,9 +22,10 @@ describe 'Syllabus' do
         fill_in 'syllabus_code', with: 'code1'
         fill_in 'syllabus_description', with: 'Syllabus Description'
         select department.name, from: 'syllabus_department_id'
-        click submit
-        wait_until_invisible submit
+
+        flash_created?
       end.to change(Gaku::Syllabus, :count).by 1
+
       within(table) do
         has_content? 'Syllabus1'
         has_content? 'code1'

@@ -14,7 +14,6 @@ describe 'Exam Portion Attachments' do
       exam; exam_portion
       visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and show' do
@@ -74,11 +73,11 @@ describe 'Exam Portion Attachments' do
 
       expect do
         ensure_delete_is_working
+        flash_destroyed?
       end.to change(Gaku::Attachment, :count).by -1
 
       within(count_div) { page.should have_content 'Attachments list' }
       page.should_not have_content("#{attachment.name}")
-      flash_destroyed?
     end
 
     context 'when deleted' do

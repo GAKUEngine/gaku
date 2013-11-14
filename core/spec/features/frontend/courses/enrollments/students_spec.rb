@@ -26,7 +26,7 @@ describe 'CourseEnrollment'  do
 
     it 'enrolls and shows' do
       click new_link
-      wait_until_visible modal
+      visible? modal
       expect do
         enroll_one_student_via_button('Enroll to course')
       end.to change(Gaku::CourseEnrollment, :count).by 1
@@ -52,7 +52,7 @@ describe 'CourseEnrollment'  do
       course.students_count.should eq 1
 
       click new_link
-      wait_until_visible modal
+      visible? modal
       within('tr#student-' + student1.id.to_s) do
         page.should have_selector('img.enrolled')
       end

@@ -24,20 +24,19 @@ describe 'ClassGroup Semesters' do
       visit gaku.edit_class_group_path(class_group)
       click tab_link
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do
       expect do
         select "#{semester.starting} / #{semester.ending}", from: 'semester_class_group_semester_id'
         click submit
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::SemesterClassGroup, :count).by(1)
 
       within(table) { page.should have_content "#{semester.starting} / #{semester.ending}" }
       within(count_div) { page.should have_content 'Semesters list(1)' }
       within(tab_link) { page.should have_content 'Semesters(1)' }
-      flash_created?
+
     end
 
     it 'presence validations'  do
@@ -67,17 +66,16 @@ describe 'ClassGroup Semesters' do
     context 'edit', js: true do
       before do
         within(table) { click js_edit_link }
-        wait_until_visible modal
+        visible? modal
       end
 
       it 'edits' do
         select "#{semester2.starting} / #{semester2.ending}", from: 'semester_class_group_semester_id'
         click submit
 
-        wait_until_invisible modal
+        flash_updated?
         within(table) { page.should have_content "#{semester2.starting} / #{semester2.ending}" }
         within(table) { page.should_not have_content "#{semester.starting} / #{semester.ending}" }
-        flash_updated?
       end
 
     end

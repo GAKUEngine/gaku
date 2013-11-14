@@ -16,7 +16,7 @@ describe 'CourseEnrollment'  do
     before do
       visit gaku.edit_course_path(course)
       click new_link
-      wait_until_visible submit
+
     end
 
     it 'errors if no class_group is selected' do
@@ -33,7 +33,6 @@ describe 'CourseEnrollment'  do
 
       click new_link
 
-      wait_until_visible(submit)
       select 'Math', from: 'course_class_group_id'
       click submit
 
@@ -49,18 +48,17 @@ describe 'CourseEnrollment'  do
 
     it 'enrolls a class group' do
         click new_link
-        wait_until_visible(submit)
 
       expect do
         select 'Math', from: 'course_class_group_id'
         click submit
-        wait_until_invisible submit
+
+        page.should have_content class_group_with_students.students.first
+        page.should have_content class_group_with_students.students.second
+        page.should have_content 'View Assignments'
+        page.should have_content 'View Exams'
       end.to change(course.students, :count).by 2
 
-      page.should have_content class_group_with_students.students.first
-      page.should have_content class_group_with_students.students.second
-      page.should have_content 'View Assignments'
-      page.should have_content 'View Exams'
       # TODO show flash msgs for successfuly added students
     end
 
@@ -71,8 +69,7 @@ describe 'CourseEnrollment'  do
 
       click new_link
 
-      wait_until_visible(form)
-      wait_until_invisible(new_link)
+      visible?(form)
       select 'Math', from: 'course_class_group_id'
       click submit
 

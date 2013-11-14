@@ -30,7 +30,7 @@ describe 'ClassGroup Students' do
       click_link 'class-group-enrollments-tab-link'
       Gaku::ClassGroupEnrollment.count.should eq 0
       click new_link
-      wait_until_visible('#student-modal')
+      visible?('#student-modal')
     end
 
     it 'adds and shows a student', js: true do
@@ -54,10 +54,10 @@ describe 'ClassGroup Students' do
       student3 = create(:student, name: 'Chikuhei', surname: 'Nakajima')
 
       click new_link
-      wait_until_visible('#student-modal')
+      visible?('#student-modal')
       fill_in 'q[name_cont]', with: 'Sus'
 
-      wait_until { size_of(table_rows) == 1 }
+      size_of(table_rows) == 1
 
     end
   end
@@ -73,7 +73,7 @@ describe 'ClassGroup Students' do
 
     it 'enrolls student only once', js: true do
       click new_link
-      wait_until { page.find('#student-modal').visible? }
+      page.find('#student-modal').visible?
       within('tr#student-' + student1.id.to_s) do
         page.should have_selector('img.enrolled')
       end

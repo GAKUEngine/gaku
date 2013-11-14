@@ -122,16 +122,16 @@ module Gaku::Testing::FeatureHelpers
 
   def enroll_one_student_via_button(caption)
     find(:css, "input#student-#{student1.id}").set(true)
-    wait_until_visible '#students-checked-div'
+    visible? '#students-checked-div'
     within('#students-checked-div') do
       page.should have_content 'Chosen students(1)'
-      wait_until { page.should have_content 'Show'}
+      page.should have_content 'Show'
       click_link 'Show'
-      wait_until_visible '#chosen-table'
       page.should have_content "#{student1.name}"
+      visible? '#chosen-table'
       click_button caption
     end
-    wait_until_invisible '#student-modal'
+    invisible? '#student-modal'
 
     within(table){ page.should have_content "#{student1.name}" }
   end

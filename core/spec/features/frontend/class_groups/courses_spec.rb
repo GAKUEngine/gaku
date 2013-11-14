@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/course_enrollable_spec'
 
 describe 'ClassGroup Courses' do
 

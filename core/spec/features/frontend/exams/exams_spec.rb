@@ -15,7 +15,6 @@ describe 'Exams' do
       department
       visit gaku.exams_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates new exam' do
@@ -89,7 +88,7 @@ describe 'Exams' do
         click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
-        wait_until { flash_destroyed? }
+        flash_destroyed?
       end.to change(Gaku::Exam, :count).by -1
 
       expect(current_path).to eq gaku.exams_path

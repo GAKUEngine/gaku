@@ -17,7 +17,6 @@ describe 'ClassGroups' do
     before do
       visit gaku.class_groups_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows', js: true do
@@ -86,7 +85,7 @@ describe 'ClassGroups' do
           click modal_delete_link
           within(modal) { click_on 'Delete' }
           accept_alert
-          wait_until { flash_destroyed? }
+          flash_destroyed?
         end.to change(Gaku::ClassGroup, :count).by -1
 
         current_path.should eq gaku.class_groups_path

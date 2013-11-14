@@ -12,7 +12,6 @@ describe 'Teachers' do
     before do
       visit gaku.teachers_path
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates and shows' do
@@ -20,12 +19,11 @@ describe 'Teachers' do
         fill_in 'teacher_name', with: 'John'
         fill_in 'teacher_surname', with: 'Doe'
         click_button 'submit-teacher-button'
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::Teacher, :count).by 1
 
       has_content? 'John'
       count? 'Teachers list(1)'
-      flash_created?
     end
 
     it { has_validations? }
@@ -71,7 +69,7 @@ describe 'Teachers' do
         click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
-        wait_until { flash_destroyed? }
+        flash_destroyed?
       end.to change(Gaku::Teacher, :count).by -1
 
       page.should_not have_content "#{teacher2.name}"

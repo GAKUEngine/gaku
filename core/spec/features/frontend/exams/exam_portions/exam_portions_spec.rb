@@ -13,7 +13,6 @@ describe 'Exam Portions' do
     before do
       visit gaku.edit_exam_path(exam)
       click new_link
-      wait_until_visible submit
     end
 
     it 'creates new exam' do
@@ -68,7 +67,7 @@ describe 'Exam Portions' do
       expect do
         click delete_link
         accept_alert
-        wait_until { flash_destroyed? }
+        flash_destroyed?
       end.to change(Gaku::ExamPortion, :count).by -1
 
       within(count_div) { has_no_content? 'Exam Portions list(1)' }

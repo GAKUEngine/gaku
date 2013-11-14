@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'support/requests/avatarable_spec'
 
 describe 'Student Guardian Picture' do
 
