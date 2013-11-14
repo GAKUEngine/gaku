@@ -25,7 +25,6 @@ $.fn.hideModal = ->
 
 
 window.load_states = ->
-  console.log "Load states executed"
   countryCode = $("#country_dropdown option:selected").val()
   if countryCode
     $.ajax

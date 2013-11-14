@@ -10,7 +10,7 @@ module Gaku::Testing::AuthHelpers
     end
   end
 
-  module Request
+  module Feature
     def as(user)
       login_as create("#{user.to_sym}_user"), scope: :user
     end
@@ -20,6 +20,6 @@ end
 
 RSpec.configure do |config|
   config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
-  config.include Gaku::Testing::AuthHelpers::Request, type: :request
+  config.include Gaku::Testing::AuthHelpers::Feature, type: :feature
 end
 

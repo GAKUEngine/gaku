@@ -31,5 +31,5 @@ module Gaku::Testing::FlashHelpers
 end
 
 RSpec.configure do |config|
-  config.include Gaku::Testing::FlashHelpers, type: :request
+  config.include Gaku::Testing::FlashHelpers, type: :feature
 end
