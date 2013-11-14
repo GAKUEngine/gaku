@@ -22,22 +22,22 @@ describe Gaku::ExamsController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'GET #soft_delete' do
-        let(:get_soft_delete) { gaku_get :soft_delete, id: exam }
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: exam }
 
         it 'redirects' do
-          get_soft_delete
+          patch_soft_delete
           should respond_with(302)
         end
 
         it 'assigns  @exam' do
-          get_soft_delete
+          patch_soft_delete
           expect(assigns(:exam)).to eq exam
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            patch_soft_delete
             exam.reload
           end.to change(exam, :deleted)
         end
@@ -60,7 +60,7 @@ describe Gaku::ExamsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: exam, exam: attributes_for(:invalid_exam, name: '')
+            gaku_patch :update, id: exam, exam: attributes_for(:invalid_exam, name: '')
           end
 
           it { should respond_with 200 }
@@ -148,48 +148,6 @@ describe Gaku::ExamsController do
         end
       end
 
-      describe 'XHR GET #edit' do
-        before do
-          department
-          gaku_js_get :edit, id: exam
-        end
-
-        it { should respond_with 200 }
-        it('assigns @exam') { expect(assigns(:exam)).to eq exam }
-        it('renders the :edit template') { template? :edit }
-        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
-      end
-
-      describe 'XHR PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: exam, exam: attributes_for(:exam, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @exam') { expect(assigns(:exam)).to eq exam }
-          it('sets flash') { flash_updated? }
-          it "changes exam's attributes" do
-            exam.reload
-            expect(exam.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: exam, exam: attributes_for(:invalid_exam, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @exam') { expect(assigns(:exam)).to eq exam }
-
-          it "does not change exam's attributes" do
-            exam.reload
-            expect(exam.name).not_to eq ''
-          end
-        end
-      end
-
       describe 'XHR DELETE #destroy' do
         it 'deletes the exam' do
           exam
@@ -210,27 +168,27 @@ describe Gaku::ExamsController do
       end
 
       describe 'XHR GET #recovery' do
-        let(:get_recovery) { gaku_js_get :recovery, id: exam }
+        let(:js_patch_recovery) { gaku_js_patch :recovery, id: exam }
 
         it 'is successfull' do
-          get_recovery
+          js_patch_recovery
           should respond_with(200)
         end
 
         it 'assigns  @exam' do
-          get_recovery
+          js_patch_recovery
           expect(assigns(:exam)).to eq exam
         end
 
         it 'renders :recovery' do
-          get_recovery
+          js_patch_recovery
           should render_template :recovery
        end
 
         it 'updates :deleted attribute' do
           exam.soft_delete
           expect do
-            get_recovery
+            js_patch_recovery
             exam.reload
           end.to change(exam, :deleted)
         end

@@ -9,6 +9,7 @@ describe Gaku::TeachersController do
     before { as :admin }
 
     context 'html' do
+
       describe 'GET #index' do
         before do
           teacher
@@ -21,22 +22,69 @@ describe Gaku::TeachersController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'GET #soft_delete' do
-        let(:get_soft_delete) { gaku_get :soft_delete, id: teacher }
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: teacher }
+
+        it { should respond_with 200 }
+        it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'GET #show' do
+        before { gaku_get :show, id: teacher }
+
+        it { should respond_with 200 }
+        it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
+        it('renders the :show template') { template? :show }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: teacher, teacher: attributes_for(:teacher, name: 'mobifon')
+          end
+
+          it { should respond_with 302 }
+          it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
+          it('sets flash') { flash_updated? }
+          it "changes teacher's attributes" do
+            teacher.reload
+            expect(teacher.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: teacher, teacher: attributes_for(:invalid_teacher, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
+
+          it "does not change teacher's attributes" do
+            teacher.reload
+            expect(teacher.name).not_to eq ''
+          end
+        end
+      end
+
+
+      describe 'PATCH #soft_delete' do
+        let(:patch_soft_delete) { gaku_patch :soft_delete, id: teacher }
 
         it 'redirects' do
-          get_soft_delete
+          patch_soft_delete
           should respond_with(302)
         end
 
         it 'assigns  @teacher' do
-          get_soft_delete
+          patch_soft_delete
           expect(assigns(:teacher)).to eq teacher
         end
 
         it 'updates :deleted attribute' do
           expect do
-            get_soft_delete
+            patch_soft_delete
             teacher.reload
           end.to change(teacher, :deleted)
         end
@@ -46,7 +94,7 @@ describe Gaku::TeachersController do
 
     context 'js' do
 
-      describe 'XHR #new' do
+      describe 'JS #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
@@ -54,7 +102,7 @@ describe Gaku::TeachersController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'POST #create' do
+      describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, teacher: attributes_for(:teacher)
@@ -96,44 +144,6 @@ describe Gaku::TeachersController do
           it "doesn't increment @count" do
             invalid_js_create
             expect(assigns(:count)).to eq 0
-          end
-        end
-      end
-
-      describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: teacher }
-
-        it { should respond_with 200 }
-        it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
-        it('renders the :edit template') { template? :edit }
-      end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: teacher, teacher: attributes_for(:teacher, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
-          it('sets flash') { flash_updated? }
-          it "changes teacher's attributes" do
-            teacher.reload
-            expect(teacher.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: teacher, teacher: attributes_for(:invalid_teacher, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
-
-          it "does not change teacher's attributes" do
-            teacher.reload
-            expect(teacher.name).not_to eq ''
           end
         end
       end

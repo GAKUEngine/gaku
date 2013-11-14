@@ -1,19 +1,16 @@
 module Gaku
   class StudentsController < GakuController
 
-    # load_and_authorize_resource class: Gaku::Student,
-    #                             except: [:recovery, :destroy]
-
     decorates_assigned :student
 
     helper_method :sort_column, :sort_direction
 
-    respond_to :js,   only: %i( new create edit update index destroy recovery )
-    respond_to :html, only: %i( index edit show show_deleted soft_delete )
+    respond_to :js,   only: %i( new create index destroy recovery )
+    respond_to :html, only: %i( index edit show show_deleted soft_delete update )
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
-    before_action :set_class_group,       only: %i( index new edit )
+    #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update soft_delete )
     before_action :set_unscoped_student,  only: %i( show_deleted destroy recovery )
@@ -50,6 +47,9 @@ module Gaku
       end
     end
 
+    def edit
+      respond_with @student
+    end
 
     def show
       respond_with @student do |format|
@@ -62,9 +62,7 @@ module Gaku
     end
 
     def show_deleted
-      respond_with(@student) do |format|
-        format.html { render :show }
-      end
+      render :show
     end
 
     def destroy
@@ -75,31 +73,18 @@ module Gaku
 
     def recovery
       @student.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @student
     end
 
     def soft_delete
       @student.soft_delete
       @count = Student.count
-      redirect_to students_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @student, location: students_path
     end
 
     def update
       @student.update(student_params)
-      respond_with(@student) do |format|
-        if params[:student][:picture]
-          format.html do
-            redirect_to [:edit, @student],
-                        notice: t(:'notice.uploaded', resource: t(:'picture'))
-          end
-        else
-          format.html { redirect_to [:edit, @student] }
-          format.js   { render }
-          format.json { head :no_content }
-        end
-      end
+      respond_with @student, location: [:edit, @student]
     end
 
     def load_autocomplete_data
@@ -126,10 +111,6 @@ module Gaku
 
     def includes
       [[contacts: :contact_type, addresses: :country], :guardians]
-    end
-
-    def t_resource
-      t(:'student.singular')
     end
 
     def set_class_group

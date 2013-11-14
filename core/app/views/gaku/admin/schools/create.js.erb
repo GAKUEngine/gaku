@@ -1,7 +1,7 @@
-$('#admin-schools-index tbody').append('<%= render_js_partial("school", {school: @school}) %>');
+$('#admin-schools-index tbody').append('<%= j render("school", {school: @school}) %>');
 
 $('#new-admin-school').slide();
 $('#new-admin-school-link').show();
 
 showNotice("<%= render_flash %>");
-$('.admin-schools-count').html('<%= print_count(@count+1, t_school_list) %>');
+$('.admin-schools-count').html("<%= print_count(@count, t(:'school.list')) %>");

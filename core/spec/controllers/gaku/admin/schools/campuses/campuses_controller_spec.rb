@@ -2,92 +2,140 @@ require 'spec_helper'
 
 describe Gaku::Admin::Schools::CampusesController do
 
-  before { as :admin }
-
-  let(:school) { create(:school) }
+  let!(:school) { create(:school) }
   let(:campus) { create(:campus, school_id: school.id) }
+  let(:invalid_campus) { create(:ivalid_campus) }
 
-  describe 'GET #new' do
-    it 'assigns a new campus to @campus' do
-      gaku_js_get :new, school_id: school.id
-      assigns(:campus).should be_a_new(Gaku::Campus)
-    end
+  context 'as admin' do
+    before { as :admin }
 
-    it 'renders the :new template' do
-      gaku_js_get :new, school_id: school.id
-      response.should render_template :new
-    end
-  end
+    context 'html' do
 
-  describe 'POST #create' do
-    before { school }
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: campus, school_id: school.id }
 
-    context 'with valid attributes' do
-      it 'saves the new campus in the db' do
-        expect do
-          gaku_post :create, campus: attributes_for(:campus), school_id: school
-        end.to change(Gaku::Campus, :count).by 1
-
-        controller.should set_the_flash
+        it { should respond_with 200 }
+        it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+        it('renders the :edit template') { template? :edit }
       end
-    end
 
-    context 'with invalid attributes' do
-      it 'does not save the new campus in the db' do
-        expect do
-          gaku_js_post :create, campus: { name: '' }, school_id: school
-        end.to_not change(Gaku::Campus, :count)
+      describe 'GET #show' do
+        before { gaku_get :show, id: campus, school_id: school.id }
+
+        it { should respond_with 200 }
+        it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+        it('renders the :show template') { template? :show }
       end
-    end
-  end
 
-  describe 'GET #edit' do
-    it 'locates the requested campus' do
-      gaku_js_get :edit, id: campus, school_id: school.id
-      assigns(:campus).should eq campus
-    end
 
-    it 'renders the :edit template' do
-      gaku_js_get :edit, id: campus, school_id: school.id
-      response.should render_template :edit
-    end
-  end
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: 'test')
+          end
 
-  describe 'PUT #update' do
-    it 'locates the requested @campus' do
-      gaku_put :update, id: campus, campus: attributes_for(:campus), school_id: school
-      assigns(:campus).should eq campus
-    end
+          it { should respond_with 302 }
+          it('redirects to :edit view') { redirect_to? "/admin/schools/#{school.id}/campuses/#{campus.id}/edit"}
+          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+          it('sets flash') { flash_updated? }
+          it "changes campus's attributes" do
+            campus.reload
+            expect(campus.name).to eq 'test'
+          end
+        end
 
-    context 'valid attributes' do
-      it "changes campus's attributes" do
-        gaku_put :update, id: campus, campus: attributes_for(:campus, name: 'UE Varna'), school_id: school
-        campus.reload
-        campus.name.should eq 'UE Varna'
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: '')
+          end
 
-        controller.should set_the_flash
+          it { should respond_with 200 }
+          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+
+          it "does not change campus's attributes" do
+            campus.reload
+            expect(campus.name).not_to eq ''
+          end
+        end
       end
+
     end
 
-    context 'invalid attributes' do
-      it "does not change campus's attributes" do
-        gaku_js_put :update, id: campus,
-                             campus: attributes_for(:campus, name: ''), school_id: school
-        campus.reload
-        campus.name.should_not eq ''
+    context 'js' do
+
+      describe 'JS #new' do
+        before { gaku_js_get :new, school_id: school.id }
+
+        it { should respond_with 200 }
+        it('assigns @campus') { expect(assigns(:campus)).to be_a_new(Gaku::Campus) }
+        it('renders the :new template') { template? :new }
       end
-    end
-  end
 
-  describe 'DELETE #destroy' do
-    it 'deletes the campus' do
-      campus
+      describe 'JS POST #create' do
+        context 'with valid attributes' do
+          let(:valid_js_create) do
+            gaku_js_post :create, school_id: school.id, campus: attributes_for(:campus)
+          end
 
-      expect do
-        gaku_delete :destroy, id: campus, school_id: school.id
-      end.to change(Gaku::Campus, :count).by -1
+          it 'creates new campus' do
+            expect do
+              valid_js_create
+            end.to change(Gaku::Campus, :count).by(1)
+          end
 
-      controller.should set_the_flash
+          it 'renders flash' do
+            valid_js_create
+            flash_created?
+          end
+
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 2
+          end
+        end
+
+        context 'with invalid attributes' do
+          let(:invalid_js_create) do
+            gaku_js_post :create, school_id: school.id, campus: attributes_for(:invalid_campus, name: nil)
+          end
+
+          it 'does not save the new campus' do
+            expect do
+              invalid_js_create
+            end.to_not change(Gaku::Campus, :count)
+          end
+
+          it 're-renders the new method' do
+            invalid_js_create
+            template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 1
+          end
+        end
+      end
+
+      describe 'JS DELETE #destroy' do
+        it 'deletes the campus' do
+          campus
+          expect do
+            gaku_js_delete :destroy, id: campus, school_id: school.id
+          end.to change(Gaku::Campus, :count).by(-1)
+        end
+
+        it 'decrements @count' do
+          gaku_js_delete :destroy, id: campus, school_id: school.id
+          expect(assigns(:count)).to eq 1
+        end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: campus, school_id: school.id
+          flash_destroyed?
+        end
+      end
+
     end
   end
 

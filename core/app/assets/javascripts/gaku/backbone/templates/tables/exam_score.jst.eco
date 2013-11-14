@@ -33,7 +33,7 @@
                     </div>
                   </form>
                   <div class="portion_set_attendance pull-right btn" id="portion-score-<%= score.id %>"  rel ='popover' style="margin-left: -50px" targetinputelement='score-<%= exam.id %>-<%= portion.id %>-<%= student.id %>' action="<%= @path_to_exam %>/exams/<%= exam.id %>/exam_portion_scores/<%= score.id %>" data-attendance="<%= @attendances[student.id][score.id][0] %>" >
-                    <i class="icon-chair"></i>
+                    <span class="glyphicon glyphicon-ban-circle"></span>
                   </div>
                 </td>
               <% end %>

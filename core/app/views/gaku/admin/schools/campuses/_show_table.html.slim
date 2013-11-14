@@ -1,10 +1,10 @@
-#campus-index
-.row
-  .col-md-9
-    = table do
-      tr
-        th.btn-c1  width="25%" = t(:'campus.name')
-        td = school.name
+tr
+  th.active rowspan="2" width="15%" = t(:'campus.singular')
+  th rowspan=2
+    h2 = @campus.name
+  th.active width="15%"  = t(:'school.singular')
+  td width="15%"
+    h2 = @school.name
+  th.active rowspan="6" width="222px"
+    = render 'gaku/admin/shared/picture', resource: @campus
 
-  .col-md-3.well
-    = render 'gaku/admin/shared/picture', resource: campus

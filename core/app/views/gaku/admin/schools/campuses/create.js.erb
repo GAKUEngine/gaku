@@ -1,7 +1,9 @@
-$('#admin-school-campuses-index tbody').append('<%= render_js_partial("campus", {campus: @campus}) %>');
+showNotice("<%= render_flash %>");
+
+$('#admin-school-campuses-index tbody').append('<%= j render("campus", {campus: @campus}) %>');
 
 $('#new-admin-school-campus').slide();
 $('#new-admin-school-campus-link').show();
 
-$('.admin-school-campuses-count').html('<%= print_count(@count+1, t_campus_list) %>');
-showNotice("<%= render_flash %>");
+$('.admin-school-campuses-count').html("<%= print_count(@count, t(:'campus.list')) %>");
+

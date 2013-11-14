@@ -65,41 +65,6 @@ describe 'Syllabus' do
         end
       end
 
-      context 'from index view' do
-        before do
-          department
-          visit gaku.syllabuses_path
-          click js_edit_link
-          wait_until_visible modal
-        end
-
-        it 'edits' do
-          fill_in 'syllabus_name', with: 'Maths'
-          select department.name, from: 'syllabus_department_id'
-          fill_in 'syllabus_code', with: 'math'
-          fill_in 'syllabus_description', with: 'Maths Description'
-
-          click submit
-
-          flash_updated?
-          expect(syllabus.reload.name).to eq 'Maths'
-          within(table) do
-            has_content? 'Maths'
-            has_content? 'math'
-
-            has_no_content? 'Biology'
-            has_no_content? 'bio'
-
-            has_content? department.name
-          end
-
-        end
-
-        it 'has validations' do
-          fill_in 'syllabus_name', with: ''
-          has_validations?
-        end
-      end
     end
 
   end

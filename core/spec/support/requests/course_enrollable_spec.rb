@@ -13,7 +13,6 @@ shared_examples_for 'enroll to course' do
       expect do
         select "#{@course.code}", from: @select
         click submit
-        wait_until_invisible form
         flash? 'successfully'
       end.to change(@data.courses, :count).by 1
       page.should have_content "#{@course.code}"

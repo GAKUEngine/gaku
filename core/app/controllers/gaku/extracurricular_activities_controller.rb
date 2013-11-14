@@ -1,14 +1,27 @@
 module Gaku
   class ExtracurricularActivitiesController < GakuController
 
-    #load_and_authorize_resource class: Gaku::ExtracurricularActivity
-
     include StudentChooserController
 
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: %i( index edit update show )
+    respond_to :js,   only: %i( new create destroy recovery student_chooser )
+    respond_to :html, only: %i( index edit update show show_deleted soft_delete )
 
-    before_action :set_extracurricular_activity, only: %i( edit show update destroy student_chooser )
+    before_action :set_extracurricular_activity, only: %i( edit show update student_chooser soft_delete )
+    before_action :set_unscoped_extracurricular_activity, only: %i( show_deleted destroy recovery )
+
+    def recovery
+      @extracurricular_activity.recover
+      respond_with @extracurricular_activity
+    end
+
+    def soft_delete
+      @extracurricular_activity.soft_delete
+      respond_with @extracurricular_activity, location: extracurricular_activities_path
+    end
+
+    def show_deleted
+      render :show
+    end
 
     def destroy
       @extracurricular_activity.destroy
@@ -36,10 +49,7 @@ module Gaku
 
     def update
       @extracurricular_activity.update(extracurricular_activity_params)
-      respond_with(@extracurricular_activity) do |format|
-        format.js { render }
-        format.html { redirect_to [:edit, @extracurricular_activity] }
-      end
+      respond_with @extracurricular_activity, location: [:edit, @extracurricular_activity]
     end
 
     def index
@@ -62,6 +72,10 @@ module Gaku
 
     def set_extracurricular_activity
       @extracurricular_activity = ExtracurricularActivity.find(params[:id])
+    end
+
+    def set_unscoped_extracurricular_activity
+      @extracurricular_activity = ExtracurricularActivity.unscoped.find(params[:id])
     end
 
     def set_count

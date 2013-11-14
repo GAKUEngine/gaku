@@ -159,6 +159,7 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'faculty_id'
       t.integer  'syllabus_id'
       t.integer  'class_group_id'
+      t.boolean  'deleted',       default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',    default: 0
@@ -242,6 +243,7 @@ class GakuCore < ActiveRecord::Migration
 
     create_table 'gaku_extracurricular_activities' do |t|
       t.string   'name'
+      t.boolean  'deleted',        default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end
@@ -571,6 +573,7 @@ class GakuCore < ActiveRecord::Migration
       t.text     'description'
       t.integer  'credits'
       t.integer  'hours'
+      t.boolean  'deleted',                   default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0

@@ -5,5 +5,5 @@ tr
   td = contact.details
   td = t(:'contact.emergency') if contact.emergency?
   td
-    = link_to ("<i class='icon-white icon-repeat'></i>").html_safe, [:recovery, contact.contactable, contact], class: 'mr-xs btn btn-mini btn-warning recovery-link', remote: true
-    = ajax_link_to_delete [contact.contactable, contact] , id: 'delete-disposal-contact-link'
+    = ajax_link_to_restore [:recovery, contact.contactable, contact]
+    = ajax_link_to_delete [contact.contactable, contact]

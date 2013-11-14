@@ -12,9 +12,10 @@ hr
 = render 'tabs'
 
 = footer do
-  .col-md-12
+  .col-md-9
     = link_to_back edit_student_path(@student)
-  /.col-md-3
-    /= link_to_modal_delete
-  /= render 'gaku/shared/soft_delete_modal', target: @guardian
+  .col-md-3
+    = link_to_modal_delete
+  .delete_modal
+    = render 'soft_delete_modal', student: @student, guardian: @guardian
 

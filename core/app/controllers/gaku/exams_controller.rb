@@ -60,14 +60,12 @@ module Gaku
 
     def recovery
       @exam.recover
-      flash.now[:notice] = t(:'notice.recovered', resource: t_resource)
       respond_with @exam
     end
 
     def soft_delete
       @exam.soft_delete
-      redirect_to exams_path,
-                  notice: t(:'notice.destroyed', resource: t_resource)
+      respond_with @exam, location: exams_path
     end
 
     def export

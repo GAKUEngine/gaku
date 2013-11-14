@@ -28,7 +28,7 @@ describe Gaku::Exams::ExamPortionsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: exam_portion, exam_id: exam, exam_portion: attributes_for(:invalid_exam_portion, name: '')
+            gaku_patch :update, id: exam_portion, exam_id: exam, exam_portion: attributes_for(:invalid_exam_portion, name: '')
           end
 
           it { should respond_with 200 }
@@ -105,44 +105,6 @@ describe Gaku::Exams::ExamPortionsController do
             invalid_js_create
             #because there are autocreated master portion
             expect(assigns(:count)).to eq 0
-          end
-        end
-      end
-
-      describe 'XHR GET #edit' do
-        before { gaku_js_get :edit, exam_id: exam, id: exam_portion }
-
-        it { should respond_with 200 }
-        it('assigns @exam_portion') { expect(assigns(:exam_portion)).to eq exam_portion }
-        it('renders the :edit template') { template? :edit }
-      end
-
-      describe 'XHR PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, exam_id: exam, id: exam_portion, exam_portion: attributes_for(:exam_portion, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @exam_portion') { expect(assigns(:exam_portion)).to eq exam_portion }
-          it('sets flash') { flash_updated? }
-          it "changes exam_portion's attributes" do
-            exam_portion.reload
-            expect(exam_portion.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, exam_id: exam, id: exam_portion, exam_portion: attributes_for(:invalid_exam_portion, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @exam_portion') { expect(assigns(:exam_portion)).to eq exam_portion }
-
-          it "does not change exam_portion's attributes" do
-            exam_portion.reload
-            expect(exam_portion.name).not_to eq ''
           end
         end
       end

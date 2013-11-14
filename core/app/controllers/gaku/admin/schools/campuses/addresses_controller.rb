@@ -1,51 +1,62 @@
 module Gaku
   class Admin::Schools::Campuses::AddressesController < GakuController
 
-    authorize_resource class: false
+    respond_to :js,   only: %i( new create destroy edit update )
 
-    respond_to :js, :html
-
-    inherit_resources
-
-    before_filter :load_data
-    before_filter :before_index, only: :index
-
-    def create
-      @address = @campus.build_address(address_params)
-      respond_with @address if @address.save
-    end
+    before_action :set_address,  only: %i( edit update destroy )
+    before_action :set_school
+    before_action :set_campus
+    before_action :set_countries, only: %i( new edit )
 
     def destroy
-      @address = Address.find(params[:id])
       @campus.address.destroy
       respond_with @campus.address
     end
 
-    protected
+    def new
+      @address = Address.new
+      respond_with @address
+    end
 
-    def resource_params
-      return [] if request.get?
-      [address_params]
+    def create
+      @address = @campus.build_address(address_params)
+      @address.save
+      respond_with @address
+    end
+
+    def edit
+      respond_with @address
+    end
+
+    def update
+      @address.update(address_params)
+      respond_with @address, location: [:edit, :admin, @school, @campus]
     end
 
     private
-
-    def attributes
-      %i(title address1 address2 city zipcode state state_id country country_id deleted primary past)
-    end
 
     def address_params
       params.require(:address).permit(attributes)
     end
 
-    def before_index
-      @address = @campus.address
+    def attributes
+      %i( title address1 address2 city zipcode state state_id country country_id deleted primary past )
     end
 
-    def load_data
-      @countries = Country.all
+    def set_school
       @school = School.find(params[:school_id])
+    end
+
+    def set_campus
       @campus = Campus.find(params[:campus_id])
+    end
+
+    def set_address
+      @address = Address.find(params[:id])
+    end
+
+    def set_countries
+      @countries = Country.all
     end
 
   end

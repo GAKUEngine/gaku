@@ -1,22 +1,35 @@
 module Gaku
   class CoursesController < GakuController
 
-    #load_and_authorize_resource class: Gaku::Course
-
     include StudentChooserController
 
     helper_method :sort_column, :sort_direction
 
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: %i( index edit update show )
+    respond_to :js,   only: %i( new create destroy recovery )
+    respond_to :html, only: %i( index edit update show soft_delete show_deleted )
 
-    before_action :set_course,   only: %i( edit show update destroy student_chooser )
+    before_action :set_course,   only: %i( edit show update soft_delete student_chooser )
+    before_action :set_unscoped_course, only: %i( show_deleted destroy recovery )
     before_action :set_syllabuses
 
     def destroy
       @course.destroy
       set_count
       respond_with @course
+    end
+
+    def recovery
+      @course.recover
+      respond_with @course
+    end
+
+    def soft_delete
+      @course.soft_delete
+      respond_with @course, location: courses_path
+    end
+
+    def show_deleted
+      render :show
     end
 
     def new
@@ -41,10 +54,7 @@ module Gaku
 
     def update
       @course.update(course_params)
-      respond_with(@course) do |format|
-        format.js { render }
-        format.html { redirect_to [:edit, @course] }
-      end
+      respond_with @course, location: [:edit, @course]
     end
 
     def index
@@ -68,6 +78,10 @@ module Gaku
     def set_course
       @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
       set_notable
+    end
+
+    def set_unscoped_course
+      @course = Course.unscoped.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
     end
 
     def set_notable

@@ -1,26 +1,13 @@
-= content_for :show_header do
-  = t(:'school.show')
+= panel_for 'school-panel' do
+  = panel_header 'School information', @school
 
-
-= well_div do
-  - unless @school.blank?
-    #school-show-table
+  table.table.table-bordered.th-center
+    tbody
       = render 'show_table', school: @school
 
-    = hr
+= render 'tabs', school: @school
 
-    = render 'gaku/admin/schools/campuses/campuses'
-    br
-    = render 'gaku/admin/schools/programs/programs'
-    br
+= footer do
+  .col-md-12
+    = link_to_index admin_schools_path
 
-    = well_div do
-      - if params[:action] == 'school_details'
-        .col-md-4
-          = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-4', data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
-      - else
-        - unless @school.primary
-          .col-md-6
-            = link_to_edit_with_text [:edit, :admin, @school], remote: true
-      .col-md-6
-        = link_to_back admin_schools_path

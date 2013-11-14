@@ -1,0 +1,11 @@
+#delete-modal.modal.d-none
+  .modal-dialog
+    .alert-dismissable
+      .panel.panel-danger
+        .panel-heading
+          .panel-title
+            = modal_close_button
+            = t(:confirm_delete)
+        .panel-body
+          .delete_button style='text-align:center'
+            = link_to_soft_delete_with_text [:soft_delete, student, guardian]

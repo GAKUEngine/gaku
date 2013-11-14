@@ -1,0 +1,19 @@
+.row
+  .col-md-9
+    = normal_form_for [:admin, @school], label: 'nil' do |f|
+      = render 'form_fields', f: f, school: @school
+      = buttons_for @school, resource: 'admin-school'
+
+  .col-md-3
+    = render 'gaku/admin/shared/picture', resource: @school
+
+hr
+
+= render 'tabs', school: @school
+
+= footer do
+  .col-md-9
+    = link_to_index admin_schools_path
+  .col-md-3
+    = link_to_modal_delete
+  /= render 'gaku/shared/soft_delete_modal', target: school

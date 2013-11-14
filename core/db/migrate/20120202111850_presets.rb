@@ -1,7 +1,7 @@
 class Presets < ActiveRecord::Migration
 
   def self.up
-    execute "CREATE EXTENSION hstore"
+    enable_extension "hstore"
 
     create_table :gaku_presets do |t|
       t.string   :name
@@ -23,7 +23,7 @@ class Presets < ActiveRecord::Migration
   def self.down
     drop_table :gaku_presets
 
-    execute "DROP EXTENSION hstore"
+    disable_extension "hstore"
   end
 
 end

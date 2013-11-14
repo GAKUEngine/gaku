@@ -1,17 +1,22 @@
-= content_for :show_header do
-  = t(:'school.edit_master')
+.row
+  .col-md-9
+    = normal_nested_form_for [:admin, @school], url: {action: :update_master}, label: t(:'school.master') do |f|
+      = render 'form_fields', f: f
+      = f.fields_for :levels do |level|
+        = level.text_field :name, label: t(:'school_level.singular'), class: 'school-level-name'
+        = level.link_to_remove t(:'school_level.remove_school_level'), class: 'btn btn-danger remove-school-level'
+        hr
+      p = f.link_to_add t(:'school_level.add_school_level'), :levels, class: 'btn btn-success add-school-level'
 
-= remote_nested_form_for [:admin, @master_school] do |f|
-  = render 'form_fields', f: f
-  = f.fields_for :levels do |level|
-    .well
-      = level.text_field :name, label: t(:'school_level.singular'), class: 'school-level-name'
-      = level.link_to_remove t(:'school_level.remove_school_level'), class: 'btn btn-danger remove-school-level'
-    hr
-  p = f.link_to_add t(:'school_level.add_school_level'), :levels, class: 'btn btn-success add-school-level'
+      = buttons_for @school, label: t(:'school.save'), resource: 'admin-school'
 
-  .row
-    .col-md-12
-      = submit_button t(:'school.save'), id: 'submit-admin-school-button'
-      .col-md-6
-        = link_to_back admin_school_details_path , id: 'back-admin-school-link', class: 'btn span12'
+  .col-md-3
+    = render 'gaku/admin/shared/picture', resource: @school
+
+hr
+
+= render 'tabs', school: @school
+
+= footer do
+  .col-md-12
+    = link_to_back admin_school_details_path , id: 'back-admin-school-link'

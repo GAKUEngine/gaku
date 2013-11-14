@@ -3,19 +3,21 @@ require 'support/requests/avatarable_spec'
 
 describe 'Admin School Picture' do
 
-  before { as :admin }
-
-  let(:school) { create(:school) }
+  let!(:school) { create(:school) }
 
   before do
-    visit gaku.admin_school_path(school)
+    as :admin
+    @file_name = 'school_picture'
   end
 
-  context 'avatarable' do
+  context 'upload avatar' do
+    before { visit gaku.edit_admin_school_path(school) }
+    it_behaves_like 'upload avatar'
+  end
 
-    before { @file_name = 'school_picture' }
-    it_behaves_like 'new avatar'
-
+  context 'show avatar' do
+    before { visit gaku.admin_school_path(school) }
+    it_behaves_like 'show avatar'
   end
 
 end

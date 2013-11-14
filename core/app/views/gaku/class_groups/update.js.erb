@@ -1,8 +1,0 @@
-$('#class-group-modal').modal('hide');
-$('#class-group-modal').remove();
-showNotice("<%= render_flash %>");
-
-var rowHtml = ('<%= j render("class_group_unit", {class_group: @class_group}) %>');
-$('.class-group-<%= @class_group.id %>').each(function(){
-  $(this).html(rowHtml);
-});

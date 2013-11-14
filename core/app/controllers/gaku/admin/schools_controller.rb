@@ -1,57 +1,82 @@
 module Gaku
   class Admin::SchoolsController < Admin::BaseController
 
-    load_and_authorize_resource class: School
+    respond_to :js,   only: %i( new create destroy )
+    respond_to :html, only: %i( index edit edit_master update update_master show show_master )
 
-    respond_to :js, :html
+    before_action :set_school,  only: %i( edit show update destroy )
+    before_action :set_master_school, only: %i( show_master edit_master update_master )
 
-    inherit_resources
-
-    before_filter :count, only: %i(create destroy index)
-    before_filter :master_school, only: %i(index school_details edit_master)
-
-    def school_details
-      @school = @master_school
-      render :show, layout: 'gaku/layouts/show'
+    def show_master
+      respond_with @school
     end
 
     def edit_master
-      render :edit_master, layout: 'gaku/layouts/show'
+      respond_with @school
+    end
+
+    def destroy
+      @school.destroy
+      set_count
+      respond_with @school
+    end
+
+    def new
+      @school = School.new
+      respond_with @school
+    end
+
+    def create
+      @school = School.new(school_params)
+      @school.save
+      set_count
+      respond_with @school
+    end
+
+    def edit
+      respond_with @school
+    end
+
+    def show
+      respond_with @school
     end
 
     def update
-      @school = School.find(params[:id])
-      super do |format|
-        if params[:school][:picture]
-          format.html do
-            redirect_to [:admin, @school],
-                        notice: t(:'notice.uploaded', resource: t(:'picture'))
-          end
-        else
-          format.js { render }
-         end
-      end
+      @school.update(school_params)
+      respond_with @school, location: [:edit, :admin, @school]
     end
 
-    protected
+    def update_master
+      @school.update(school_params)
+      respond_with @school, location: admin_school_details_edit_path
+    end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:school).permit(attributes)]
+    def index
+      @schools = School.all
+      set_count
+      respond_with @schools
     end
 
     private
 
-    def master_school
-      @master_school = School.primary
-    end
-
-    def count
-      @count = School.count
+    def school_params
+      params.require(:school).permit(attributes)
     end
 
     def attributes
       [:name, :primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, { levels_attributes: [ :name, :'_destroy', :id ] }, :picture ]
+    end
+
+    def set_school
+      @school = School.find(params[:id])
+    end
+
+    def set_count
+      @count = School.count
+    end
+
+    def set_master_school
+      @school = School.primary
     end
 
   end

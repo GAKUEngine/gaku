@@ -24,10 +24,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-i18n',                     '~> 4.0.0'
   s.add_dependency 'coffee-rails',                   '~> 4.0.0'
   s.add_dependency 'sass-rails',                     '~> 4.0.0'
-  s.add_dependency 'uglifier'
-  s.add_dependency 'turbolinks'
+  s.add_dependency 'uglifier',                       '>= 1.3'
+  s.add_dependency 'turbolinks',                     '~> 1.3'
 
-  s.add_dependency 'pg'
+  s.add_dependency 'pg',                             '0.16'
 
   s.add_dependency 'slim',                           '~> 2.0'
   s.add_dependency 'inherited_resources',            '~> 1.4'
@@ -45,15 +45,19 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails4_client_side_validations', '0.0.3'
 
-  s.add_dependency 'phantom_helpers',                '0.11.0.alpha1'
-  s.add_dependency 'phantom_forms',                  '0.2.0.alpha1'
-  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha1'
+  s.add_dependency 'phantom_helpers',                '0.11.0.alpha3'
+  s.add_dependency 'phantom_forms',                  '0.2.0.alpha3'
+  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha4'
+
   s.add_dependency 'nested_form'
 
   s.add_dependency 'jquery-rails',                   '~> 3'
   s.add_dependency 'jquery-ui-rails',                '~> 4'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
+  s.add_dependency 'bootstrap-sass',                 '~> 3.0.1.0.rc'
+  s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.1'
+  s.add_dependency 'nprogress-rails'
   s.add_dependency 'i18n-js',                        '~> 2.1'
   s.add_dependency 'eco',                            '~> 1'
   s.add_dependency 'underscore-rails',               '~> 1.5'

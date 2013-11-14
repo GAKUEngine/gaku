@@ -1,2 +1,7 @@
 tr class="course-#{course.id}"
-  =render 'course_unit',  course: course
+  td.syllabus= "[#{course.syllabus_code}]: #{course.syllabus_name}-#{course.code}"
+  td
+  td
+  td.count= course.students_count
+  td
+    = link_to_edit [:edit, course]

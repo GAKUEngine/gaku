@@ -1,7 +1,1 @@
-$('.courses-count').html('<%= print_count(@count, t_course_list) %>');
 showNotice("<%= render_flash %>");
-
-$('.course-<%= @course.id %>').each(function(){
-  $(this).remove();
-});
-

@@ -11,7 +11,8 @@ describe 'Exam Notes' do
   context 'new', js: true, type: 'note'  do
     before do
       @resource = exam
-      visit gaku.exam_path(@resource)
+      visit gaku.edit_exam_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'new note'
@@ -20,7 +21,8 @@ describe 'Exam Notes' do
   context 'existing', js: true, type: 'note'  do
     before do
       @resource = exam_with_note
-      visit gaku.exam_path(@resource)
+      visit gaku.edit_exam_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'edit note'

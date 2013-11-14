@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#admin-school-campuses-tab-link data-toggle="tab" href="#campuses"
+          = print_count @school.campuses.count, t(:'campus.plural')
+      li
+        a#admin-school-programs-tab-link data-toggle="tab" href="#programs"
+          = print_count @school.programs.count, t(:'program.plural')
+
+    .tab-content
+      #campuses.tab-pane.active
+        = render 'gaku/admin/schools/campuses/campuses'
+      #programs.tab-pane
+         = render 'gaku/admin/schools/programs/programs'

@@ -57,8 +57,8 @@ describe Gaku::ClassGroupsController do
             gaku_patch :update, id: class_group, class_group: attributes_for(:invalid_class_group, name: '')
           end
 
-          it { should respond_with 302 }
-          it('redirects to :edit') { redirect_to? "/class_groups/#{class_group.id}/edit" }
+          it { should respond_with 200 }
+          it('renders the :edit template') { template? :edit }
           it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
 
           it "does not change class_group's attributes" do
@@ -93,7 +93,7 @@ describe Gaku::ClassGroupsController do
 
     context 'js' do
 
-      describe 'XHR #new' do
+      describe 'JS #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
@@ -101,7 +101,7 @@ describe Gaku::ClassGroupsController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'POST #create' do
+      describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, class_group: attributes_for(:class_group)
@@ -147,46 +147,7 @@ describe Gaku::ClassGroupsController do
         end
       end
 
-      describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: class_group }
-
-        it { should respond_with 200 }
-        it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
-        it('assigns @class_group_course_enrollment') { expect(assigns(:class_group_course_enrollment)).to be_a_new(Gaku::ClassGroupCourseEnrollment) }
-        it('renders the :edit template') { template? :edit }
-      end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_js_patch :update, id: class_group, class_group: attributes_for(:class_group, name: 'mobifon')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
-          it('sets flash') { flash_updated? }
-          it "changes class_group's attributes" do
-            class_group.reload
-            expect(class_group.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_js_patch :update, id: class_group, class_group: attributes_for(:invalid_class_group, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
-
-          it "does not change class_group's attributes" do
-            class_group.reload
-            expect(class_group.name).not_to eq ''
-          end
-        end
-      end
-
-      describe 'XHR DELETE #destroy' do
+      describe 'JS DELETE #destroy' do
         it 'deletes the class_group' do
           class_group
           expect do
@@ -205,28 +166,28 @@ describe Gaku::ClassGroupsController do
         end
       end
 
-      describe 'XHR GET #recovery' do
-        let(:get_recovery) { gaku_js_get :recovery, id: class_group }
+      describe 'JS PATCH #recovery' do
+        let(:js_patch_recovery) { gaku_js_patch :recovery, id: class_group }
 
         it 'is successfull' do
-          get_recovery
+          js_patch_recovery
           should respond_with(200)
         end
 
         it 'assigns  @class_group' do
-          get_recovery
+          js_patch_recovery
           expect(assigns(:class_group)).to eq class_group
         end
 
         it 'renders :recovery' do
-          get_recovery
+          js_patch_recovery
           should render_template :recovery
        end
 
         it 'updates :deleted attribute' do
           class_group.soft_delete
           expect do
-            get_recovery
+            js_patch_recovery
             class_group.reload
           end.to change(class_group, :deleted)
         end

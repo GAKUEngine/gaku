@@ -67,7 +67,7 @@ describe 'Admin School Levels' do
       visit gaku.admin_schools_path
     end
 
-    it 'have no edit for school levels' do
+    xit 'have no edit for school levels' do
       within(table) { click js_edit_link }
       page.should_not have_css 'a.add-school-level'
     end

@@ -6,7 +6,7 @@
     = ajax_link_to_new t(:'contact_type.add'), [:new, :admin, :contact_type], id: 'new-admin-contact-type-link'
 
 = content_for :new_form do
-  #new-admin-contact-type.hide
+  #new-admin-contact-type.d-none
 
 #admin-contact-types
   = table_for 'admin-contact-types-index' do

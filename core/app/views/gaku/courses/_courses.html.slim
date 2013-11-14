@@ -5,7 +5,7 @@
       = th t(:'schedule')
       = th t(:'teacher.singular')
       = th t(:'num_enrolled')
-      = th_actions 2
+      = th_actions 1
   tbody
     = render partial: 'course', collection: @courses_without_semester, as: :course
 
@@ -19,6 +19,6 @@
         = th t(:'schedule')
         = th t(:'teacher.singular')
         = th t(:'num_enrolled')
-        = th_actions 2
+        = th_actions 1
     tbody
       = render partial: 'course', collection: extract_grouped(semester_courses, :course), as: :course

@@ -1,21 +1,13 @@
-= well_div do
-  .col-md-9
-    = table_for 'campus-index' do
-      tbody
-        tr
-          th.btn-c1 = t(:'campus.name')
-          td.vm
-            = @campus.name
+= panel_for 'campus-panel' do
+  = panel_header 'Campus information', @campus
 
-  .col-md-3.well
-    = render 'picture', campus: @campus
+  table.table.table-bordered.th-center
+    tbody
+      = render 'show_table'
 
-= well_div do
-  = render 'gaku/contacts/contacts', nested_resources: [:admin, @school, @campus]
-  = hr
-  = render 'gaku/admin/schools/campuses/addresses/addresses'
+= render 'tabs', campus: @campus, school: @school
 
-= well_div do
+= footer do
   .col-md-12
-    = link_to_back admin_school_path(@school)
+    = link_to_index admin_school_path(@school)
 

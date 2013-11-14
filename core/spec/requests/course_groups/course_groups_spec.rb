@@ -38,23 +38,21 @@ describe 'CourseGroups' do
       visit gaku.course_groups_path
     end
 
-    context '#edit', js: true do
+    context 'edit', js: true do
       before do
-        click js_edit_link
-        wait_until_visible submit
+        visit gaku.edit_course_group_path(course_group)
       end
 
-      it 'edits from index' do
-        fill_in 'course_group_name', with: '2012 Courses'
+      it 'edits' do
+        fill_in 'course_group_name',    with: 'Test'
+
         click submit
-
-        within (table) do
-          page.should have_content '2012 Courses'
-          page.should_not have_content '2013Courses'
-        end
-
-        Gaku::CourseGroup.last.name.should eq '2012 Courses'
         flash_updated?
+
+        expect(find_field('course_group_name').value).to eq 'Test'
+
+        course_group.reload
+        expect(course_group.name).to eq 'Test'
       end
 
       it 'has validations' do
@@ -70,9 +68,8 @@ describe 'CourseGroups' do
       within('#delete-modal') { click_on 'Delete' }
       accept_alert
 
-      page.should_not have_content 'Course Groups List(1)'
-      page.should_not have_content course_group.name
       flash_destroyed?
+      current_path.should eq gaku.course_groups_path
     end
 
 

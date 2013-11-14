@@ -2,128 +2,203 @@ require 'spec_helper'
 
 describe Gaku::Admin::SchoolsController do
 
-  let(:school) { create(:school, primary: true) }
+  let(:school) { create(:school, primary: false) }
+  let(:master_school) { create(:school, primary: true) }
 
   context 'permissions' do
     ensures 'deny except', :admin
   end
 
-  context 'as admin' do
-
+ context 'as admin' do
     before { as :admin }
 
-    describe 'GET #index' do
-      it 'is successful' do
-        gaku_js_get :index
-        response.should be_success
+    context 'html' do
+
+      describe 'GET #index' do
+        before do
+          school
+          gaku_get :index
+        end
+
+        it { should respond_with 200 }
+        it('assigns @schools') { expect(assigns(:schools)).to eq [school] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
       end
 
-      it 'populates an array of schools' do
-        gaku_js_get :index
-        assigns(:schools).should eq [school]
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: school }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to eq school }
+        it('renders the :edit template') { template? :edit }
       end
 
-      it 'renders the :index view' do
-        gaku_js_get :index
-        response.should render_template :index
+      describe 'GET #edit_master' do
+        before { gaku_get :edit_master, id: master_school }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to eq master_school }
+        it('renders the :edit_master template') { template? :edit_master }
       end
+
+      describe 'GET #show' do
+        before { gaku_get :show, id: school }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to eq school }
+        it('renders the :show template') { template? :show }
+      end
+
+      describe 'GET #show_master' do
+        before { gaku_get :show_master, id: master_school }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to eq master_school }
+        it('renders the :show_master template') { template? :show_master }
+      end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: school, school: attributes_for(:school, name: 'test')
+          end
+
+          it { should respond_with 302 }
+          it('redirects to :edit view') { redirect_to? "/admin/schools/#{school.id}/edit"}
+          it('assigns @school') { expect(assigns(:school)).to eq school }
+          it('sets flash') { flash_updated? }
+          it "changes school's attributes" do
+            school.reload
+            expect(school.name).to eq 'test'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: school, school: attributes_for(:invalid_school, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @school') { expect(assigns(:school)).to eq school }
+
+          it "does not change school's attributes" do
+            school.reload
+            expect(school.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'PATCH #update_master' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update_master, id: master_school, school: attributes_for(:school, name: 'test')
+          end
+
+          it { should respond_with 302 }
+          it('redirects to :edit_master view') { redirect_to? "/admin/school_details/edit"}
+          it('assigns @school') { expect(assigns(:school)).to eq master_school }
+          it('sets flash') { flash_updated? }
+          it "changes school's attributes" do
+            master_school.reload
+            expect(master_school.name).to eq 'test'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: master_school, school: attributes_for(:invalid_school, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @school') { expect(assigns(:school)).to eq master_school }
+
+          it "does not change school's attributes" do
+            master_school.reload
+            expect(master_school.name).not_to eq ''
+          end
+        end
+      end
+
     end
 
-    describe 'GET #school_details' do
-      it 'is successful' do
-        gaku_get :school_details
-        response.should be_success
+    context 'js' do
+
+      describe 'JS #new' do
+        before { gaku_js_get :new }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to be_a_new(Gaku::School) }
+        it('renders the :new template') { template? :new }
       end
 
-      it 'assigns the requested school to @school' do
-        gaku_js_get :show, id: school
-        assigns(:school).should eq school
+      describe 'JS POST #create' do
+        context 'with valid attributes' do
+          let(:valid_js_create) do
+            gaku_js_post :create, school: attributes_for(:school)
+          end
+
+          it 'creates new school' do
+            expect do
+              valid_js_create
+            end.to change(Gaku::School, :count).by(1)
+          end
+
+          it 'renders flash' do
+            valid_js_create
+            flash_created?
+          end
+
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 1
+          end
+        end
+
+        context 'with invalid attributes' do
+          let(:invalid_js_create) do
+            gaku_js_post :create, school: attributes_for(:invalid_school)
+          end
+
+          it 'does not save the new school' do
+            expect do
+              invalid_js_create
+            end.to_not change(Gaku::School, :count)
+          end
+
+          it 're-renders the new method' do
+            invalid_js_create
+            template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 0
+          end
+        end
       end
 
-      it 'renders the :school_details view' do
-        gaku_get :school_details
-        response.should render_template :show
-      end
-    end
-
-    describe 'GET #new' do
-      it 'assigns a new school to @school' do
-        gaku_js_get :new, school_id: school.id
-        assigns(:school).should be_a_new(Gaku::School)
-      end
-
-      it 'renders the :new template' do
-          gaku_js_get :new, school_id: school.id
-          response.should render_template :new
-      end
-    end
-
-    describe 'POST #create' do
-      context 'with valid attributes' do
-        it 'saves the new school in the db' do
+      describe 'JS DELETE #destroy' do
+        it 'deletes the school' do
+          school
           expect do
-            gaku_post :create, school: attributes_for(:school)
-          end.to change(Gaku::School, :count).by 1
+            gaku_js_delete :destroy, id: school
+          end.to change(Gaku::School, :count).by(-1)
+        end
 
-          controller.should set_the_flash
+        it 'decrements @count' do
+          gaku_js_delete :destroy, id: school
+          expect(assigns(:count)).to eq 0
+        end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: school
+          flash_destroyed?
         end
       end
-      context 'with invalid attributes' do
-        it 'does not save the new school in the db' do
-          expect do
-            gaku_js_post :create, school: {name: ''}
-          end.to_not change(Gaku::School, :count)
-        end
-      end
-    end
 
-    describe 'GET #edit' do
-      it 'locates the requested school' do
-        gaku_js_get :edit, id: school
-        assigns(:school).should eq(school)
-      end
-
-      it 'renders the :edit template' do
-        gaku_js_get :edit, id: school
-        response.should render_template :edit
-      end
-    end
-
-    describe 'PUT #update' do
-      it 'locates the requested @school' do
-        gaku_put :update, id: school, school: attributes_for(:school)
-        assigns(:school).should eq(school)
-      end
-
-      context 'valid attributes' do
-        it "changes school's attributes" do
-          gaku_put :update, id: school,school: attributes_for(:school, name: 'UE Varna')
-          school.reload
-          school.name.should eq('UE Varna')
-
-          controller.should set_the_flash
-        end
-      end
-      context 'invalid attributes' do
-        it "does not change school's attributes" do
-          gaku_js_put :update, id: school,
-                               school: attributes_for(:school, name: "")
-          school.reload
-          school.name.should_not eq('')
-        end
-      end
-    end
-
-    describe 'DELETE #destroy' do
-      it 'deletes the school' do
-        school
-        expect do
-          gaku_delete :destroy, id: school
-        end.to change(Gaku::School, :count).by -1
-
-        controller.should set_the_flash
-      end
     end
   end
+
 
 end

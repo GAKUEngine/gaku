@@ -11,8 +11,7 @@ describe 'Exam Portions' do
 
   context '#new', js: true do
     before do
-
-      visit gaku.exam_path(exam)
+      visit gaku.edit_exam_path(exam)
       click new_link
       wait_until_visible submit
     end

@@ -1,4 +1,0 @@
-$('#edit-exam-modal').modal('hide');
-$('tr#exam-<%= @exam.id %>').html('<%=j render("table_fields", {exam: @exam}) %>');
-$('#exam-show').html('<%= j render("show_table", exam: @exam) %>');
-showNotice("<%= render_flash %>");

@@ -63,32 +63,6 @@ describe 'Extracurricular Activities' do
         end
       end
 
-      context 'from index view', js: true do
-        before do
-          visit gaku.extracurricular_activities_path
-          click js_edit_link
-          wait_until_visible modal
-        end
-
-        it 'edits' do
-          fill_in 'extracurricular_activity_name', with: 'Paintball'
-          click submit
-          flash_updated?
-
-          has_content? 'Paintball'
-          has_no_content? 'Tennis'
-
-
-          extracurricular_activity.reload
-          expect(extracurricular_activity.name).to eq 'Paintball'
-        end
-
-        it 'has validations' do
-          fill_in 'extracurricular_activity_name', with: ''
-          has_validations?
-        end
-      end
-
     end
   end
 

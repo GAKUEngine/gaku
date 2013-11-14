@@ -15,7 +15,7 @@ describe 'Admin School Campuses Address' do
   context 'new', type: 'address', js: true do
     before do
       country_without_state
-      visit gaku.admin_school_campus_path(school, school.master_campus)
+      visit gaku.edit_admin_school_campus_path(school, school.master_campus)
       click new_link
       wait_until_invisible new_link
       wait_until_visible submit
@@ -59,7 +59,7 @@ describe 'Admin School Campuses Address' do
 
     before do
       school.master_campus.address = address
-      visit gaku.admin_school_campus_path(school, school.master_campus)
+      visit gaku.edit_admin_school_campus_path(school, school.master_campus)
     end
 
     context 'edit' do

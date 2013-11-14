@@ -1,8 +1,30 @@
-= content_for :show_header do
-  h4 = t(:'exam_portion.show')
+= panel_for 'exam-panel' do
+  = panel_header 'Exam Portion information', @exam
 
-= well_div do
-  = render 'gaku/exams/exam_portions/show_table'
+  table.table.table-bordered.th-center
+    tbody
+      tr
+        th.active
+          = t(:'order')
+        td
+          h2 = drag_field
+      tr
+        th.active = t(:'exam_portion.name')
+        td = @exam_portion.name
+      tr
+        th.active = t(:'exam_portion.max_score')
+        td = @exam_portion.max_score
+      tr
+        th.active = t(:'exam_portion.weight')
+        td
+          - if @exam.use_weighting
+            = @exam_portion.weight
+      tr
+        th.active = t(:'exam_portion.problem_count')
+        td = @exam_portion.problem_count
 
-= well_div do
-  = render 'gaku/exams/exam_portions/attachments/attachments'
+= render 'tabs'
+
+= footer do
+  .col-md-12
+    = link_to_index exams_path

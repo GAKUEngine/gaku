@@ -1,35 +1,35 @@
-#school-index
-.row
-  .col-md-9
-    = table do
-      tr
-        th.btn-c1  width="25%" = t(:'school.name')
-        td = school.name
-      tr
-        th.btn-c2 = t(:'school.code')
-        td = school.grades
-      tr
-        th.btn-c2 = t(:'school.campuses')
-        td = school.campuses.count
-      tr
-        th.btn-c2 = t(:'school.slogan')
-        td = school.slogan
-      tr
-        th.btn-c2 = t(:'school.founded')
-        td = school.founded
-      tr
-        th.btn-c2 = t(:'school.principal')
-        td = school.principal
-      tr
-        th.btn-c2 = t(:'school.vice_principal')
-        td = school.vice_principal
-      tr
-        th.btn-c2 = t(:'school.grades')
-        td = school.grades
-      -if school.primary?
-        tr
-          th.btn-c2 = t(:'school_level.plural')
-          td = comma_separated_list(school.levels)
+tr
+  th.active rowspan="2" width="15%" = t(:'school.name')
+  th rowspan=2
+    h2
+      = school.name
 
-  .col-md-3.well
+  th.active width="10%" = t(:'school.code')
+    = school.grades
+  td width="15%"
+  th.active rowspan="6" width="222px"
     = render 'gaku/admin/shared/picture', resource: school
+
+tr
+  th.active = t(:'school.campuses')
+  td = school.campuses.count
+tr
+  th.active = t(:'school.slogan')
+  td colspan="3" = school.slogan
+tr
+  th.active = t(:'school.founded')
+  td colspan="3" = school.founded
+tr
+  th.active = t(:'school.principal')
+  td colspan="3" = school.principal
+tr
+  th.active = t(:'school.vice_principal')
+  td colspan="3" = school.vice_principal
+tr
+  th.active = t(:'school.grades')
+  td colspan="4" = school.grades
+-if school.primary?
+  tr
+    th.active = t(:'school_level.plural')
+    td colspan="4" = comma_separated_list(school.levels)
+

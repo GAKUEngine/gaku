@@ -3,13 +3,10 @@ require 'support/requests/avatarable_spec'
 
 describe 'Admin Schools' do
 
+  before(:all) { set_resource 'admin-school' }
   before { as :admin }
 
   let(:school) { create(:school, name: 'Varna Technical University') }
-
-  before :all do
-    set_resource 'admin-school'
-  end
 
   context 'new', js: true do
     before do
@@ -23,28 +20,17 @@ describe 'Admin Schools' do
         fill_in 'school_name', with: 'Nagoya University'
         click submit
 
-        wait_until_invisible form
+        flash_created?
       end.to change(Gaku::School, :count).by 1
 
-      page.should have_content 'Nagoya University'
-      within(count_div) { page.should have_content 'Schools list(1)' }
-      flash_created?
+      has_content? 'Nagoya University'
+      count? 'Schools list(1)'
     end
 
     it { has_validations? }
   end
 
-  context 'shows primary school avatar' do
 
-    before do
-      primary_school = create(:school, primary:true)
-      visit gaku.admin_schools_path
-      @file_name = 'school_picture'
-    end
-
-    it_behaves_like 'new avatar'
-
-  end
   context 'existing', js: true do
 
     before do
@@ -54,19 +40,15 @@ describe 'Admin Schools' do
 
     context 'edit' do
 
-      before do
-        within(table) { click js_edit_link }
-        wait_until_visible modal
-      end
+      before { within(table) { click edit_link } }
 
       it 'edits'  do
         fill_in 'school_name', with: 'Sofia Technical University'
         click submit
 
-        wait_until_invisible modal
-        page.should have_content 'Sofia Technical University'
-        page.should_not have_content 'Varna Technical University'
         flash_updated?
+        has_content? 'Sofia Technical University'
+        has_no_content? 'Varna Technical University'
       end
 
       it 'has validations' do
@@ -78,38 +60,11 @@ describe 'Admin Schools' do
 
     it 'shows' do
       within(table) { click show_link }
-      page.should have_content 'School Show'
+      has_content? 'School information'
       current_path.should eq "/admin/schools/#{school.id}"
     end
 
-    context '#edit from show' do
-      show_table  = '#school-show-table'
-
-      before do
-        visit gaku.admin_school_path(school)
-        click_on 'Edit'
-        wait_until_visible modal
-      end
-
-      it 'has validations' do
-        fill_in 'school_name', with: ''
-        has_validations?
-      end
-
-      it 'edits', js: true do
-        fill_in 'school_name', with: 'Sofia Technical University'
-        click submit
-
-        wait_until_invisible modal
-
-        find(show_table).should have_content 'Sofia Technical University'
-        find(show_table).should_not have_content 'Varna Technical University'
-        flash_updated?
-      end
-    end
-
-
-    it 'deletes' do
+    xit 'deletes' do
       within(count_div) { page.should have_content 'Schools list(1)' }
       page.should have_content school.name
 

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'Student Guardian Contacts' do
 
-  before { as :admin }
   before(:all) { set_resource 'student-guardian-contact' }
+  before { as :admin }
 
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }
@@ -26,7 +26,6 @@ describe 'Student Guardian Contacts' do
     end
 
     it_behaves_like 'new contact'
-
   end
 
   context 'existing', js: true, type: 'contact' do

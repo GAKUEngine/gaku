@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#admin-school-campus-addresses-tab-link data-toggle="tab" href="#addresses"
+          = print_count campus.addresses_count, t(:'address.plural')
+      li
+        a#admin-school-campus-contacts-tab-link data-toggle="tab" href="#contacts"
+          = print_count campus.contacts_count, t(:'contact.plural')
+
+    .tab-content
+      #addresses.tab-pane.active
+        = render 'gaku/admin/schools/campuses/addresses/addresses'
+      #contacts.tab-pane
+        = render 'gaku/contacts/contacts', nested_resources: [:admin, school, campus]

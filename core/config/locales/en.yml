@@ -483,7 +483,15 @@ en:
       destroy:
         alert: '%{resource_name} could not be destroyed!'
         notice: '%{resource_name} was successfully destroyed!'
+      soft_delete:
+        alert: '%{resource_name} could not be destroyed!'
+        notice: '%{resource_name} was successfully destroyed!'
+      recovery:
+        alert: '%{resource_name} could not be recovered!'
+        notice: '%{resource_name} was successfully recovered!'
       update:
+        notice: '%{resource_name} was successfully updated!'
+      update_master:
         notice: '%{resource_name} was successfully updated!'
   full_name: Full Name
   full_name_reading: Full Name Reading
@@ -654,7 +662,7 @@ en:
     destroyed: '%{resource} was successfully destroyed!'
     enrolled: '%{resource} was successfully enrolled to %{to}!'
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: '%{resource} was successfully recovered'
+    recovered: '%{resource} was successfully recovered!'
     removed: '%{resource} was successfully removed!'
     updated: '%{resource} was successfully updated!'
     uploaded: '%{resource} was successfully uploaded!'

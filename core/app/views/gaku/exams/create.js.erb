@@ -1,5 +1,5 @@
 $('#exams-index tbody').append('<%= j render "exam", {exam: @exam} %>');
-$('.exams-count').html('<%= print_count(@count, t_exam_list) %>');
+$('.exams-count').html("<%= print_count(@count, t(:'exam.list')) %>");
 
 showNotice("<%= render_flash %>");
 $('#new-exam').slide()

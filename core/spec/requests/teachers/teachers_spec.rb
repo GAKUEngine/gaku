@@ -31,13 +31,13 @@ describe 'Teachers' do
     it { has_validations? }
   end
 
-  context 'existing' do
+  context 'existing', js: true do
     before do
       teacher
       visit gaku.teachers_path
     end
 
-    context '#edit from edit view', js: true do
+    context 'edit' do
       before { visit gaku.edit_teacher_path(teacher) }
 
       it 'edits' do
@@ -63,33 +63,7 @@ describe 'Teachers' do
       end
     end
 
-    context '#edit from index view', js: true do
-      before do
-        visit gaku.teachers_path
-        click edit_link
-      end
-
-      it 'edits' do
-        fill_in 'teacher_surname', with: 'Kostova'
-        fill_in 'teacher_name',    with: 'Marta'
-        click submit
-        flash_updated?
-
-        expect(find_field('teacher_name').value).to eq 'Marta'
-        expect(find_field('teacher_surname').value).to eq 'Kostova'
-
-        teacher.reload
-        teacher.name.should eq 'Marta'
-        teacher.surname.should eq 'Kostova'
-      end
-
-      it 'has validations' do
-        fill_in 'teacher_surname', with: ''
-        has_validations?
-      end
-    end
-
-    it 'deletes', js: true do
+    it 'deletes' do
       visit gaku.edit_teacher_path(teacher2)
       teacher_count = Gaku::Teacher.count
 

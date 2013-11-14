@@ -1,42 +1,50 @@
 module Gaku
   class Students::CourseEnrollmentsController < GakuController
 
-    load_and_authorize_resource :student
-    load_and_authorize_resource :course_enrollment, through: :student, class: Gaku::CourseEnrollment
+    respond_to :js, only: %i( new create destroy )
 
-    inherit_resources
-    belongs_to :student, parent_class: Gaku::Student
+    before_action :set_student
 
-    defaults resource_class: CourseEnrollment,
-             instance_name: 'course_enrollment'
-
-    respond_to :js, :html
-
-    before_filter :load_data
+    def new
+      set_courses
+      @course_enrollment = CourseEnrollment.new
+      respond_with @course_enrollment
+    end
 
     def create
-      create! do |success, failure|
-        failure.js { render :error }
+      @course_enrollment = CourseEnrollment.new(course_enrollment_params)
+      if @course_enrollment.save
+        set_count
+        respond_with @course_enrollment
+      else
+        set_count
+        render :error
       end
     end
 
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:course_enrollment).permit([:course_id, :student_id])]
+    def destroy
+      @course_enrollment = CourseEnrollment.find(params[:id])
+      @course_enrollment.destroy
+      set_count
+      respond_with @course_enrollment
     end
 
     private
 
-    def load_data
-      @courses = Course.includes(:syllabus).map do |c|
-        if c.syllabus_name
-          ["#{c.syllabus_name}-#{c.code}", c.id]
-        else
-          ["#{c.code}", c.id]
-        end
-      end
+    def course_enrollment_params
+      params.require(:course_enrollment).permit([:course_id, :student_id])
+    end
+
+    def set_student
+      @student = Student.find(params[:student_id])
+    end
+
+    def set_courses
+      @courses = Course.includes(:syllabus).decorate
+    end
+
+    def set_count
+      @count = @student.reload.courses_count
     end
 
   end
