@@ -3,22 +3,22 @@ require_relative 'spec_helper_base'
 require 'rspec/core'
 require 'rspec/rails/extensions'
 require 'rspec/rails/adapters'
-require 'rspec/rails/matchers'
-require 'rspec/rails/mocks'
+#require 'rspec/rails/mocks'
+require 'rspec/rails/view_rendering'
+require 'rspec/rails/example'
 
 require 'database_cleaner'
 require 'factory_girl_rails'
-require 'paperclip/matchers'
-require 'ffaker'
-require 'shoulda-matchers'
+require 'handy_controller_helpers'
 
 require 'gaku/testing/factories'
+require 'gaku/testing/controller_helpers'
+require 'gaku/testing/auth_helpers'
+require 'gaku/core/url_helpers'
 
-Dir["#{File.dirname(__FILE__)}/support/models/**/*.rb"].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
-
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -33,6 +33,9 @@ RSpec.configure do |config|
   end
 
   config.include FactoryGirl::Syntax::Methods
-  config.include Paperclip::Shoulda::Matchers
+  config.include Devise::TestHelpers, type: :controller
+  config.include HandyControllerHelpers::AllHelpers, type: :controller
+  config.include Gaku::Core::UrlHelpers
 
+  config.alias_it_should_behave_like_to :ensures, 'ensures'
 end
