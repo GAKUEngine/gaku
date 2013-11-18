@@ -11,6 +11,34 @@ ready = ->
 
     index: ->
       self.app.upload_picture()
+      $(document).on 'keyup', '.dynamicAttributeName', ->
+        nameElem = $(@)
+        valueElem = nameElem.closest('.row')
+                            .find('.dynamicAttributeValue')
+        value = nameElem.val()
+
+        valueElem.attr 'id', "grading_method_arguments_#{value}"
+        valueElem.attr 'name', "grading_method[arguments][#{value}]"
+        valueElem.attr 'placeholder', "value for #{value}"
+
+        console.log valueElem
+
+      $(document).on 'click', '.remove-argument-row', (e)->
+        e.preventDefault()
+        if confirm('Are you sure?')
+          $(@).closest('.row').html ''
+
+      $(document).on 'click', '.add-argument-row', (e)->
+        e.preventDefault()
+
+        contents = "<div class='row'> #{$('.attribute-template').html()} </div>"
+        $(@).before(contents);
+
+
+
+# valueElem.attr('id',          'product_data_' + value       );
+#      valueElem.attr('name',        'product[data][' + value + ']');
+#      valueElem.attr('placeholder', 'value for ' + value          );
 
     edit: ->
       self.app.country_dropdown()
