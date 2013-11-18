@@ -1,31 +1,4 @@
 = f.text_field :name,        label: t(:'grading_method.name')
 = f.text_field :description, label: t(:'grading_method.description')
 = f.text_field :method,      label: t(:'grading_method.method')
-= label_tag t('grading_method.arguments')
-.attributeContainer
-  = f.fields_for :arguments, OpenStruct.new(f.object.arguments) do |d|
-    - f.object.arguments.try(:each) do |key, value|
-      .row
-        .col-md-3
-          .controls
-            = text_field_tag key, key, class: 'dynamicAttributeName form-control', name: nil
-        .col-md-3
-          = d.text_field key, class: 'dynamicAttributeValue', value: value, label: nil
-        .col-md-3
-          = link_to t('grading_method.remove_argument'), '#', class: 'remove-argument-row btn btn-danger'
-
-  .row.attribute-template class="#{'hide' if f.object.arguments.present?}"
-    .col-md-3
-      .form-group
-        .controls
-          = text_field_tag nil, nil, class: 'dynamicAttributeName form-control', name: nil
-    .col-md-3
-      .form-group
-        .controls
-          = text_field_tag nil, nil, class: 'dynamicAttributeValue form-control', name: nil
-    .col-md-3
-      = link_to t('grading_method.remove_argument'), '#', class: 'remove-argument-row btn btn-danger'
-  .row
-    .col-md-12
-      = link_to t('grading_method.add_argument'), '#', class: 'add-argument-row btn btn-primary'
-br
+= render 'arguments_form_fields', f: f

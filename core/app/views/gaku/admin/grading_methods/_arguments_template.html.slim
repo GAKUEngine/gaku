@@ -1,0 +1,11 @@
+.row.attribute-template class="#{'hide' if f.object.arguments.present?}"
+  .col-md-3
+    .form-group
+      .controls
+        = text_field_tag nil, nil, class: 'dynamicAttributeName form-control', name: nil
+  .col-md-3
+    .form-group
+      .controls
+        = text_field_tag nil, nil, class: 'dynamicAttributeValue form-control', name: nil
+  .col-md-3
+    = link_to t('grading_method.remove_argument'), '#', class: 'remove-argument-row btn btn-danger'
