@@ -286,7 +286,7 @@ class GakuCore < ActiveRecord::Migration
       t.string   'name'
       t.text     'description'
       t.text     'method'
-      t.text     'arguments'
+      t.hstore   'arguments'
       t.boolean  'curved',      default: true
       t.datetime 'created_at'
       t.datetime 'updated_at'
