@@ -47,11 +47,13 @@ module Gaku
     end
 
     def grading_method_params
-      params.require(:grading_method).permit(attributes)
+      params.require(:grading_method).permit(attributes).tap do |whitelisted|
+        whitelisted['arguments'] = params[:grading_method][:arguments]
+      end
     end
 
     def attributes
-      %i(description method name curved arguments)
+      %i( description method name curved arguments )
     end
 
   end
