@@ -522,6 +522,8 @@ en:
   grading_method:
     add: Add Grading Method
     arguments: Arguments
+    add_argument: Add argument
+    remove_argument: Remove argument
     choose: Choose Grading Method
     curved: Curved
     description: Description
