@@ -90,7 +90,7 @@ module Gaku::Testing::FeatureHelpers
   end
 
   def invisible?(selector)
-    !page.find(selector).visible?
+    page.has_no_selector?(selector)
   end
 
   def click(selector)
