@@ -111,7 +111,12 @@ module Gaku::Testing::FeatureHelpers
   end
 
   def wait_for_ajax(timeout = Capybara.default_wait_time)
-    page.evaluate_script 'jQuery.active == 0'
+    Timeout.timeout(timeout) do
+      active = page.evaluate_script('jQuery.active')
+      until active == 0
+        active = page.evaluate_script('jQuery.active')
+      end
+    end
   end
 
   def has_validations?

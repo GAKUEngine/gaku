@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe 'Students', type: :feature do
 
-  before(:all) { set_resource 'student' }
+  before(:all) do
+    Capybara.javascript_driver = :selenium
+    set_resource 'student'
+  end
   before { as :admin }
 
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
@@ -43,11 +46,19 @@ describe 'Students', type: :feature do
         page.has_text? 'Chosen students(1)'
         within('.show-chosen-table') { page.has_text? 'Show'}
         click_link 'Show'
+        wait_for_ajax
+
         page.has_selector? '#chosen-table'
         page.has_text? "#{student.name}"
         page.has_button? 'Enroll to class'
         page.has_button? 'Enroll to course'
-        click_link 'Hide'
+
+        within('.hide-chosen-table') do
+          page.has_content? 'Hide'
+          click_link 'Hide'
+        end
+
+        wait_for_ajax
         page.has_no_selector? '#chosen-table'
       end
     end
