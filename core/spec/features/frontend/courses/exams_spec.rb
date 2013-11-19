@@ -21,7 +21,7 @@ describe 'CourseExams', js: true  do
     click '#course-exam-link'
   end
 
-  it 'shows grading link' do
+  xit 'shows grading link' do
     click '.grading_link'
     page.should have_content 'Hide Completed'
     current_path.should eq gaku.grading_course_exam_path(course, exam)
