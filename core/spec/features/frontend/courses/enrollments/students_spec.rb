@@ -12,6 +12,7 @@ describe 'CourseEnrollment'  do
 
   before :all do
     set_resource 'course-student'
+    Capybara.javascript_driver = :selenium
   end
 
   context 'student', js: true do
@@ -28,7 +29,24 @@ describe 'CourseEnrollment'  do
       click new_link
       visible? modal
       expect do
-        enroll_one_student_via_button('Enroll to course')
+        find(:css, "input#student-#{student1.id}").set(true)
+        visible? '#students-checked-div'
+        within('#students-checked-div') do
+          page.has_content? 'Chosen students'
+
+          within('.show-chosen-table') do
+            page.has_content? 'Show'
+            click_link 'Show'
+          end
+
+          page.has_selector? '#chosen-table'
+          page.has_selector? '#students-checked'
+          within('#students-checked') { page.has_content? "#{student1.name}" }
+
+          click_button 'Enroll to course'
+        end
+        invisible? '#student-modal'
+        within(table) { page.has_content? "#{student1.name}" }
       end.to change(Gaku::CourseEnrollment, :count).by 1
 
       within(table) do

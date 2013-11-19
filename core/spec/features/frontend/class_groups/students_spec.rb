@@ -12,6 +12,7 @@ describe 'ClassGroup Students' do
 
   before :all do
     set_resource 'class-group-student'
+    Capybara.javascript_driver = :selenium
   end
 
   before do
@@ -35,30 +36,29 @@ describe 'ClassGroup Students' do
 
     it 'adds and shows a student', js: true do
       expect do
-        enroll_one_student_via_button('Enroll to class')
+        find(:css, "input#student-#{student1.id}").set(true)
+        visible? '#students-checked-div'
+        within('#students-checked-div') do
+          page.has_content? 'Chosen students'
+
+          within('.show-chosen-table') do
+            page.has_content? 'Show'
+            click_link 'Show'
+          end
+
+          page.has_selector? '#chosen-table'
+          page.has_selector? '#students-checked'
+          within('#students-checked') { page.has_content? "#{student1.name}" }
+
+          click_button 'Enroll to class'
+        end
+        invisible? '#student-modal'
+        within(table) { page.has_content? "#{student1.name}" }
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
 
       page.should have_content "#{student1} : Successfully enrolled!"
       within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
-    end
-  end
-
-  context '#search ' do
-    it 'searches students', js: true do
-      visit gaku.class_groups_path
-      click edit_link
-      click_link 'class-group-enrollments-tab-link'
-
-      student2 = create(:student, name: 'Kenji', surname: 'Kita')
-      student3 = create(:student, name: 'Chikuhei', surname: 'Nakajima')
-
-      click new_link
-      visible?('#student-modal')
-      fill_in 'q[name_cont]', with: 'Sus'
-
-      size_of(table_rows) == 1
-
     end
   end
 
