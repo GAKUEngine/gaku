@@ -13,6 +13,7 @@ describe 'Student Course Enrollments' do
     before do
       @course = course
       visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
       @data = student
       @select = 'course_enrollment_course_id'
       click tab_link
@@ -26,6 +27,7 @@ describe 'Student Course Enrollments' do
     before do
       student.courses << course
       visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
       @data = student
 
       click tab_link
