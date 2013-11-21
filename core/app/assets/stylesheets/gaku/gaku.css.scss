@@ -1,5 +1,9 @@
-// for HTML tag ----------------
+// for nprogress ----------------
+$nprogress-color: #bbbcde;
+@import 'nprogress';
+@import 'nprogress-bootstrap';
 
+// for HTML tag ----------------
 $c_red: #e45353; /* Error red */
 
 html {
