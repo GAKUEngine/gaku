@@ -1,5 +1,3 @@
-= panel_remote_form_for @student do |f|
-  .panel-body
-    = render 'form_fields',  f: f
-  .panel-footer
-    = buttons_for @student
+= remote_form_for @student do |f|
+  = render 'form_fields',  f: f
+  = buttons_for @student
