@@ -1,7 +1,7 @@
 @import "bootstrap";
 @import "bootstrap/glyphicons";
 
-// for submenu
+// for submenu --------
 .dropdown-submenu{position:relative;}
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
 .dropdown-submenu:hover>.dropdown-menu{display:block;}
@@ -9,6 +9,12 @@
 .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
+// for fix --------
+.nav-pills {
+  li {
+    background-color: #F8F8F8; 
+  }
+}
 
 .index-header {
   margin-bottom: 10px;
@@ -26,6 +32,26 @@ color: red;
 font-size: 24px;
 }
 
+.table {
+  & thead>tr>th {
+    vertical-align: middle;
+    text-align: center;
+  }
+  & tbody>tr>td {
+    vertical-align: middle;
+  }
+}
+
+.tab-pane {
+  .panel {
+    margin-bottom: 15px;
+  }
+  .panel:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+// theme main --------
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -256,6 +282,7 @@ font-size: 24px;
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
+  color: #FFF;
   background-color: #357ebd;
   background-image: -webkit-gradient(linear, left 0%, left 100%, from(#428bca), to(#357ebd));
   background-image: -webkit-linear-gradient(top, #428bca, 0%, #357ebd, 100%);
@@ -542,25 +569,5 @@ font-size: 24px;
       background-image: linear-gradient(to bottom, #428BCA 0%, #357EBD 100%);
       background-repeat: repeat-x;
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff357ebd', GradientType=0);    }
-  }
-}
-
-// for fix
-.table {
-  & thead>tr>th {
-    vertical-align: middle;
-    text-align: center;
-  }
-  & tbody>tr>td {
-    vertical-align: middle;
-  }
-}
-
-.tab-pane {
-  .panel {
-    margin-bottom: 15px;
-  }
-  .panel:last-child {
-    margin-bottom: 0px;
   }
 }
