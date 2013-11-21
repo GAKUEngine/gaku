@@ -6,13 +6,12 @@ before_script:
 bundler_args: --without production
 
 env:
-  - DATABASE_URL=$(curl http://api.postgression.com)
-  - TEST_SUITE=models GEM=core DB=postgres
-  - TEST_SUITE=controllers GEM=core DB=postgres
-  - TEST_SUITE=integration GEM=core DB=postgres
+  - TEST_SUITE=models GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
+  - TEST_SUITE=controllers GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
+  - TEST_SUITE=integration GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
   - TEST_SUITE=routing GEM=core DB=postgres
-  - TEST_SUITE=features/admin GEM=core DB=postgres
-  - TEST_SUITE=features/frontend GEM=core DB=postgres
+  - TEST_SUITE=features/admin GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
+  - TEST_SUITE=features/frontend GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
 
 before_install:
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
