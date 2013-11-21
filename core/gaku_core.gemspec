@@ -73,10 +73,11 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec-rails',              '~> 2.14'
   s.add_development_dependency 'factory_girl_rails',       '~> 4.2.1'
-  s.add_development_dependency 'capybara',                 '1.1.3'
+  s.add_development_dependency 'capybara',                 '~> 2.1'
   s.add_development_dependency 'database_cleaner',         '~> 1.1.1'
-  s.add_development_dependency 'selenium',                 '~> 0.2.10'
-  s.add_development_dependency 'poltergeist',              '~> 1.0.3'
+  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'poltergeist'
+  s.add_development_dependency 'launchy'
   s.add_development_dependency 'handy_controller_helpers', '0.0.3'
   s.add_development_dependency 'shoulda-matchers',         '~> 2.4.0'
 end

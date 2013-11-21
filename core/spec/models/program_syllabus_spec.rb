@@ -1,5 +1,4 @@
-require 'spec_helper'
-
+require 'spec_helper_models'
 describe Gaku::ProgramSyllabus do
 
   describe 'associations' do

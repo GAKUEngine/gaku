@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper_controllers'
 
 describe Gaku::Admin::Schools::CampusesController do
 
