@@ -6,6 +6,10 @@ FactoryGirl.define do
     context 'spreadsheet'
     file { fixture_file_upload(Rails.root + '../support/sample_roster.ods', 'application/vnd.oasis.opendocument.spreadsheet') }
     locked false
+
+    factory :invalid_template do
+      name nil
+    end
   end
 
 end

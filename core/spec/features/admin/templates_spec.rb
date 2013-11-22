@@ -16,7 +16,7 @@ describe 'Admin Templates' do
       click new_link
     end
 
-    it 'creates and shows' do
+    xit 'creates and shows' do
       expect do
         fill_in 'template_name', with: 'New Template'
         fill_in 'template_context', with: 'new_context'

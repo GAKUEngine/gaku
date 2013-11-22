@@ -2,48 +2,68 @@ module Gaku
   module Admin
     class TemplatesController < Admin::BaseController
 
-      load_and_authorize_resource class: Template
+      responders :collection
 
-      respond_to :js, :html
+      respond_to :js,   only: %i( new edit destroy )
+      respond_to :html, only: %i( index update create )
 
-      inherit_resources
+      before_action :set_template, only: %i( download edit update destroy )
 
-      before_action :count, only: %i(create destroy index)
+      def new
+        @template = Template.new
+      end
 
       def create
-        super do |format|
-          format.html { redirect_to :back }
-        end
+        @template = Template.new(template_params)
+        @template.save
+        set_count
+        respond_with @template, location: admin_templates_path
+      end
+
+      def edit
+        respond_with @template
       end
 
       def update
-        super do |format|
-          format.html { redirect_to :back }
-        end
+        @template.update(template_params)
+        respond_with @template, location: admin_templates_path
       end
 
       def download
-        @template = Template.find(params[:id])
         send_file @template.file.path
       end
 
-      protected
+      def index
+        @templates = Template.all
+        set_count
+        respond_with @templates
+      end
 
-      def resource_params
-        return [] if request.get?
-        [params.require(:template).permit(attributes)]
+      def destroy
+        @template.destroy
+        set_count
+        respond_with @template
       end
 
       private
 
-      def count
+      def set_count
         @count = Template.count
       end
 
+      def set_template
+        @template = Template.find(params[:id])
+      end
+
+      def template_params
+        params.require(:template).permit(attributes)
+      end
+
       def attributes
-        %i(name context locked file)
+        %i( name context locked file )
       end
 
     end
+
   end
 end
