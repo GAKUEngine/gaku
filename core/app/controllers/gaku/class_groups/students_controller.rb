@@ -1,13 +1,7 @@
 module Gaku
   class ClassGroups::StudentsController < GakuController
 
-    load_and_authorize_resource :class_group, class: ClassGroup
-    load_and_authorize_resource :student,
-                                through: :class_group,
-                                class: Student
-
-    inherit_resources
-    respond_to :js, only: %i(new destroy enroll_student)
+    respond_to :js, only: %i( new destroy enroll_student )
 
     def new
       @class_group = ClassGroup.find(params[:class_group_id])
