@@ -1,42 +1,48 @@
 module Gaku
   class ClassGroups::CoursesController < GakuController
 
-    load_and_authorize_resource :class_group, class: ClassGroup
-    load_and_authorize_resource :course,
-                                through: :class_group,
-                                class: Course
+    respond_to :js, only: %i( new create destroy )
 
-    respond_to :html, :js
+    before_action :set_class_group
+    before_action :set_enrollment, only: %i( destroy )
 
-    inherit_resources
-
-    defaults resource_class: ClassGroupCourseEnrollment,
-             instance_name: 'class_group_course_enrollment'
-
-
-
-    before_filter :class_group, only: %i(new create edit update destroy)
-    before_filter :count,       only: %i(create destroy)
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:class_group_course_enrollment).permit(attributes)]
+    def new
+      @class_group_course_enrollment = ClassGroupCourseEnrollment.new
     end
+
+    def create
+      @class_group_course_enrollment = ClassGroupCourseEnrollment.new(class_group_course_enrollment_params)
+      @class_group_course_enrollment.save
+      set_count
+      respond_with @class_group_course_enrollment
+    end
+
+    def destroy
+      @class_group_course_enrollment.destroy
+      set_count
+      respond_with @class_group_course_enrollment
+    end
+
 
     private
 
+    def class_group_course_enrollment_params
+      params.require(:class_group_course_enrollment).permit(attributes)
+    end
+
     def attributes
-      %i(course_id class_group_id)
+      %i( course_id class_group_id )
     end
 
-    def class_group
+    def set_enrollment
+      @class_group_course_enrollment = ClassGroupCourseEnrollment.find(params[:id])
+    end
+
+    def set_class_group
       @class_group = ClassGroup.find(params[:class_group_id])
     end
 
-    def count
-      @class_group = ClassGroup.find(params[:class_group_id])
+    def set_count
       @count = @class_group.courses.count
     end
 
