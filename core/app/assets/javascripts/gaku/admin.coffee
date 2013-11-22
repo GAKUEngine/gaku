@@ -35,11 +35,6 @@ ready = ->
         $(@).before(contents);
 
 
-
-# valueElem.attr('id',          'product_data_' + value       );
-#      valueElem.attr('name',        'product[data][' + value + ']');
-#      valueElem.attr('placeholder', 'value for ' + value          );
-
     edit: ->
       self.app.country_dropdown()
 
