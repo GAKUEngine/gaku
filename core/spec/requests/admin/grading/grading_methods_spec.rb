@@ -5,7 +5,8 @@ describe 'Admin Grading Methods' do
   before { as :admin }
   before(:all) { set_resource 'admin-grading-method' }
 
-  let(:grading_method) { create(:grading_method, name: 'Bulgarian') }
+  let(:grading_method) { create(:grading_method, name: 'Bulgarian',
+                        arguments: {"A" => 95, "B" => 85 } ) }
 
 
   context 'new', js: true do
@@ -18,12 +19,15 @@ describe 'Admin Grading Methods' do
     it 'creates and shows' do
       expect do
         fill_in 'grading_method_name', with: 'Bulgarian'
+        find('input.dynamicAttributeName').set 'A'
+        find('input.dynamicAttributeValue').set 85
         click submit
         flash_created?
       end.to change(Gaku::GradingMethod, :count).by 1
 
       has_content? 'Bulgarian'
       count? 'Grading Methods list(1)'
+      expect(Gaku::GradingMethod.last.arguments).to eq({"A"=>"85"})
     end
 
     it { has_validations? }
@@ -43,12 +47,35 @@ describe 'Admin Grading Methods' do
 
       it 'edits' do
         fill_in 'grading_method_name', with: 'Japanese'
+        all(:css, 'input.dynamicAttributeName').first.set 'C'
         click submit
 
         flash_updated?
         has_content? 'Japanese'
         has_no_content? 'Bulgarian'
-        expect(grading_method.reload.name).to eq 'Japanese'
+        grading_method.reload
+        expect(grading_method.name).to eq 'Japanese'
+        expect(grading_method.reload.arguments).to eq({'C' => '95', 'B' => '85'})
+      end
+
+      it 'add arguments' do
+        click '.add-argument-row'
+        all(:css, 'input.dynamicAttributeName').last.set 'C'
+        all(:css, 'input.dynamicAttributeValue').last.set '75'
+
+        click submit
+
+        flash_updated?
+        expect(grading_method.reload.arguments).to eq({'A' => '95', 'B' => '85', 'C' => '75'})
+      end
+
+      it 'remove arguments' do
+        all(:css, ".remove-argument-row").first.click
+        accept_alert
+        click submit
+
+        flash_updated?
+        expect(grading_method.reload.arguments).to eq({"B" => '85'})
       end
 
       it 'has validations' do
