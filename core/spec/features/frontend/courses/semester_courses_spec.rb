@@ -44,7 +44,7 @@ describe 'Course Semesters' do
     end
 
 
-    it 'uniqness scope validations'  do
+    xit 'uniqness scope validations'  do
       semester_course
       expect do
         select "#{semester.starting} / #{semester.ending}", from: 'semester_course_semester_id'
