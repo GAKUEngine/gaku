@@ -1,42 +1,32 @@
 module Gaku
   class Syllabuses::ExamSyllabusesController < GakuController
 
-    #authorize_resource class: false
-    #load_and_authorize_resource :syllabus, class: Gaku::Syllabus
-    #load_and_authorize_resource :exam_syllabus, through: :syllabus, class: Gaku::ExamSyllabus
+    respond_to :js, only: %i( new create destroy )
 
-    inherit_resources
-
-    defaults resource_class: ExamSyllabus,
-             instance_name: 'exam_syllabus'
-
-    actions :new, :create, :destroy
-    belongs_to :syllabus, parent_class: Gaku::Syllabus
-    respond_to :js, :html
-
-    before_filter :syllabus
+    before_action :set_syllabus
 
     def create
-      #@exam_syllabus = @syllabus.exams.create(params[:exam_syllabus])
+      @exam_syllabus = ExamSyllabus.new(exam_syllabus_params)
+      @exam_syllabus.save
       set_count
-      create!(notice: t(:'notice.added', resource: t(:'exam.singular')))
+      flash[:now] = t(:'notice.added', resource: t(:'exam.singular'))
+      respond_with @exam_syllabus
     end
 
     def destroy
+      @exam_syllabus = ExamSyllabus.find(params[:id])
+      @exam_syllabus.destroy
       set_count
-      destroy
-    end
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:exam_syllabus).permit([:exam_id, :syllabus_id])]
+      respond_with @exam_syllabus
     end
 
     private
 
-    def syllabus
+    def exam_syllabus_params
+      params.require(:exam_syllabus).permit([:exam_id, :syllabus_id])
+    end
+
+    def set_syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])
     end
 
