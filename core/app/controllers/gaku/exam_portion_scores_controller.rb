@@ -1,8 +1,7 @@
 module Gaku
   class ExamPortionScoresController < GakuController
-    inherit_resources
 
-    respond_to :js, :json, :html
+    respond_to :js, only: :update
 
     def update
       @exam_portion_score = ExamPortionScore.find(params[:id])

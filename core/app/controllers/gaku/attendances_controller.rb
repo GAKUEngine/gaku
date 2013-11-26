@@ -1,8 +1,7 @@
 module Gaku
   class AttendancesController < GakuController
-    inherit_resources
 
-    respond_to :js, :json
+    respond_to :js, :json, only: %i( create show )
 
     def create
       exam_portion_score = ExamPortionScore.find(params[:exam_portion_score_id])
