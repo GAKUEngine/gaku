@@ -95,12 +95,12 @@ describe 'Admin School Years Semesters' do
           fill_in 'semester_starting', with: Date.parse('2013-3-8')
           fill_in 'semester_ending', with: Date.parse('2013-3-8')
           click submit
-          within(modal) { page.should have_content 'The Ending Date must come after the Starting Date' }
+          page.should have_content 'The Ending Date must come after the Starting Date' 
 
           fill_in 'semester_starting', with: Date.parse('2013-3-8')
           fill_in 'semester_ending', with: Date.parse('2013-3-9')
           click submit
-          within(modal) { page.should_not have_content 'The Ending Date must come after the Starting Date' }
+          page.should_not have_content 'The Ending Date must come after the Starting Date' 
           flash_updated?
         end
 
@@ -108,12 +108,12 @@ describe 'Admin School Years Semesters' do
           fill_in 'semester_starting', with: Date.parse('2013-3-7')
           fill_in 'semester_ending', with: Date.parse('2014-11-9')
           click submit
-          within(modal) { page.should have_content 'Should be between School Year starting and ending' }
+          page.should have_content 'Should be between School Year starting and ending' 
 
           fill_in 'semester_starting', with: Date.parse('2013-3-8')
           fill_in 'semester_ending', with: Date.parse('2013-3-9')
           click submit
-          within(modal) {page.should_not have_content 'Should be between School Year starting and ending' }
+          page.should_not have_content 'Should be between School Year starting and ending' 
           flash_updated?
         end
 
