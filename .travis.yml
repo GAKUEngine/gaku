@@ -14,8 +14,8 @@ env:
   - TEST_SUITE=controllers GEM=core DB=postgres 
   - TEST_SUITE=integration GEM=core DB=postgres 
   - TEST_SUITE=routing GEM=core DB=postgres
-  - TEST_SUITE=features/admin GEM=core DB=postgres 
-  - TEST_SUITE=features/frontend GEM=core DB=postgres
+  - SELENIUM=1 TEST_SUITE=features/admin GEM=core DB=postgres 
+  - SELENIUM=1 TEST_SUITE=features/frontend GEM=core DB=postgres
 
 before_install:
   - gem install bundler --pre
