@@ -26,7 +26,6 @@
 
 #= require underscore
 #= require moment
-#= require backbone
 #= require rails.validations
 #= require gaku/slide.js.erb
 #= require tablefix
@@ -37,7 +36,6 @@
 #= require phantom_forms
 #= require phantom_nested_forms
 
-#= require_tree ./backbone/
 #= require_tree .
 
 NProgress.configure
