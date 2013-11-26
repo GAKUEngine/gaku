@@ -1,6 +1,7 @@
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
+  - sudo psql --version
   - sudo /etc/init.d/postgresql stop
   - sudo cp /etc/postgresql/9.1/main/pg_hba.conf ./
   - sudo apt-get remove postgresql postgresql-9.1 -qq --purge
@@ -12,6 +13,7 @@ before_script:
   - sudo /etc/init.d/postgresql stop
   - sudo cp ./pg_hba.conf /etc/postgresql/9.2/main
   - sudo psql --version
+  - ls -la /etc/init.d/
   - sudo /etc/init.d/postgresql start
   - psql -c 'create database gaku_test;' -U postgres
 
