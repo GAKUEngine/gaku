@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg',                             '0.16'
 
   s.add_dependency 'slim',                           '~> 2.0'
-  s.add_dependency 'inherited_resources',            '~> 1.4'
   s.add_dependency 'responders',                     '~> 1.0'
   s.add_dependency 'paper_trail',                    '3.0.0.beta1'
   s.add_dependency 'globalize',                      '~> 4.0.0.alpha.1'
@@ -58,8 +57,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.1'
   s.add_dependency 'nprogress-rails'
-  s.add_dependency 'i18n-js',                        '~> 2.1'
-  s.add_dependency 'eco',                            '~> 1'
   s.add_dependency 'underscore-rails',               '~> 1.5'
   s.add_dependency 'momentjs-rails',                 '~> 2.2'
 

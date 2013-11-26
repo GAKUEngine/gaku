@@ -1,36 +1,63 @@
 module Gaku
   class Courses::SemesterCoursesController < GakuController
 
-    load_and_authorize_resource :course, class: Gaku::Course
-    # load_and_authorize_resource :semester, through: :class_group, class: Gaku::Semester
+    respond_to :js, only: %i( new create edit update destroy )
 
-    inherit_resources
-    respond_to :js, :html
-    belongs_to :course, parent_class: Gaku::Course
+    before_action :set_course
+    before_action :set_semester_course, only: %i( edit update destroy )
+    before_action :set_semesters, only: %i( new edit )
 
-    before_filter :count, only: [:create, :destroy]
-    before_filter :load_data
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:semester_course).permit(semester_course_attr)]
+    def new
+      @semester_course = SemesterCourse.new
+      respond_with @semester_course
     end
+
+    def create
+      @semester_course = @course.semester_courses.build(semester_course_params)
+      @semester_course.save
+      set_count
+      respond_with @semester_course
+    end
+
+    def edit
+    end
+
+    def update
+      @semester_course.update(semester_course_params)
+      respond_with @semester_course
+    end
+
+    def destroy
+      @semester_course.destroy
+      set_count
+      respond_with @semester_course
+    end
+
 
     private
 
-    def semester_course_attr
-      %i(semester_id)
+    def set_course
+      @course = Course.find(params[:course_id])
     end
 
-    def count
-      course = Course.find(params[:course_id])
-      @count = course.semesters.count
+    def set_semester_course
+      @semester_course = SemesterCourse.find(params[:id])
     end
 
-    def load_data
-      @semesters = Semester.all.map { |s| [s.to_s, s.id] }
+    def semester_course_params
+      params.require(:semester_course).permit(attributes)
+    end
+
+    def attributes
+      %i( semester_id )
+    end
+
+    def set_count
+      @count = @course.semesters.count
+    end
+
+    def set_semesters
+      @semesters = Semester.all
     end
 
   end

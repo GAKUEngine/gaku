@@ -53,8 +53,8 @@ Gaku::Core::Engine.routes.draw do
 
   resources :class_groups, concerns: %i( notes soft_delete student_chooser ) do
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
-    resources :class_group_course_enrollments, controller: 'class_groups/courses'
-    resources :students, controller: 'class_groups/students', concerns: %i( enroll_student )
+    resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
+    resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
   resources :courses, concerns: %i( notes student_chooser soft_delete show_deleted ) do
@@ -162,7 +162,7 @@ Gaku::Core::Engine.routes.draw do
     resources :departments
     resources :users, concerns: %i( pagination )
     resources :roles
-    resources :templates, concerns: %i( download )
+    resources :templates, except: %i( show ), concerns: %i( download )
     resources :grading_methods
     resources :grading_method_sets, concerns: %i( primary ) do
       resources :grading_method_set_items,
@@ -175,7 +175,7 @@ Gaku::Core::Engine.routes.draw do
     end
 
     resources :school_years do
-      resources :semesters, controller: 'school_years/semesters'
+      resources :semesters, controller: 'school_years/semesters', except: %i( show index )
     end
 
     namespace :changes do

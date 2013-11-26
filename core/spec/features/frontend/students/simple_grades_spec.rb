@@ -26,10 +26,9 @@ describe 'Student Simple Grades' do
         select school.name, from: 'simple_grade_school_id'
 
         click submit
-        flash_created?
+        within(el) { has_content? 'Ruby Science' }
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
-      within(el) { has_content? 'Ruby Science' }
       count? 'Simple Grades list(1)'
     end
 
@@ -71,11 +70,10 @@ describe 'Student Simple Grades' do
       count? 'Simple Grades list(1)'
       expect do
         ensure_delete_is_working
-        flash_destroyed?
+        within(el) { has_content? simple_grade.name }
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
       count? 'Simple Grades list'
-      within(el) { has_content? simple_grade.name }
     end
   end
 

@@ -1,29 +1,62 @@
 module Gaku
   class Admin::SchoolYearsController < Admin::BaseController
 
-    load_and_authorize_resource class: SchoolYear
+    respond_to :html, only: %i( index show )
+    respond_to :js, only: %i( new create destroy edit update )
 
-    respond_to :js, :html
+    before_action :set_school_year, only: %i( show edit update destroy )
 
-    inherit_resources
-
-    before_filter :count, only: %i(create destroy index)
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:school_year).permit(attributes)]
+    def index
+      @school_years = SchoolYear.all
+      set_count
+      respond_with @school_years
     end
+
+    def new
+      @school_year = SchoolYear.new
+    end
+
+    def create
+      @school_year = SchoolYear.new(school_year_params)
+      @school_year.save
+      set_count
+      respond_with @school_year
+    end
+
+    def show
+    end
+
+    def edit
+    end
+
+    def update
+      @school_year.update(school_year_params)
+      respond_with @school_year
+    end
+
+    def destroy
+      @school_year.destroy
+      set_count
+      respond_with @school_year
+    end
+
 
     private
 
-    def count
+    def school_year_params
+      params.require(:school_year).permit(attributes)
+    end
+
+    def set_school_year
+      @school_year = SchoolYear.find(params[:id])
+    end
+
+    def set_count
       @count = SchoolYear.count
     end
 
     def attributes
-      %i(starting ending)
+      %i( starting ending )
     end
 
   end

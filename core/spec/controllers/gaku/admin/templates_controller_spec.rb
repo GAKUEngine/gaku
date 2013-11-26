@@ -2,117 +2,163 @@ require 'spec_helper_controllers'
 
 describe Gaku::Admin::TemplatesController do
 
-  before { as :admin }
-
   let(:template) { create(:template) }
+  let(:invalid_template) { create(:invalid_template) }
 
-  describe 'GET #index' do
-    it 'is successful' do
-      gaku_js_get :index
-      response.should be_success
-    end
+  context 'as student' do
+    before { as :student }
 
-    it 'populates an array of templates' do
-      gaku_js_get :index
-      assigns(:templates).should eq [template]
-    end
+    describe 'GET #index' do
+      before { gaku_get :index }
 
-    it 'renders the :index view' do
-      gaku_js_get :index
-      response.should render_template :index
+      it { should respond_with 302 }
+      it('redirects') { redirect_to? gaku.root_path }
+      it('sets unauthorized flash') { flash_unauthorized? }
     end
   end
 
-  describe 'GET #new' do
-    it 'assigns a new template to @template' do
-      gaku_js_get :new, template_id: template.id
-      assigns(:template).should be_a_new(Gaku::Template)
-    end
+  context 'as admin' do
+    before { as :admin }
 
-    it 'renders the :new template' do
-        gaku_js_get :new, template_id: template.id
-        response.should render_template :new
-    end
-  end
+    context 'html' do
+      describe 'GET #index' do
+        before do
+          template
+          gaku_get :index
+        end
 
-  describe 'POST #create' do
-
-    before(:each) do
-      request.env['HTTP_REFERER'] = '/admin/templates'
-    end
-
-    context 'with valid attributes' do
-      it 'saves the new template in the db' do
-        expect do
-          gaku_post :create, template: attributes_for(:template)
-        end.to change(Gaku::Template, :count).by 1
-
-        controller.should set_the_flash
+        it { should respond_with 200 }
+        it('assigns @templates') { expect(assigns(:templates)).to eq [template] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
       end
+
+      describe 'PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_patch :update, id: template, template: attributes_for(:template, name: 'Ruby dev')
+          end
+
+          it { should respond_with 302 }
+          it('redirects') { redirect_to? gaku.admin_templates_path }
+          it('assigns @template') { expect(assigns(:template)).to eq template }
+          it('sets flash') { flash_updated? }
+          it "changes template's attributes" do
+            template.reload
+            expect(template.name).to eq 'Ruby dev'
+          end
+        end
+
+        pending 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: template, template: attributes_for(:invalid_template, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @template') { expect(assigns(:template)).to eq template }
+
+          it "does not change template's attributes" do
+            template.reload
+            expect(template.name).not_to eq ''
+          end
+        end
+      end
+
+
+
+      describe 'POST #create' do
+        context 'with valid attributes' do
+          let(:valid_js_create) do
+            gaku_post :create, template: attributes_for(:template)
+          end
+
+          it 'creates new template' do
+            expect do
+              valid_js_create
+            end.to change(Gaku::Template, :count).by(1)
+          end
+
+          it 'renders flash' do
+            valid_js_create
+            flash_created?
+          end
+
+          it 'increments @count' do
+            valid_js_create
+            expect(assigns(:count)).to eq 1
+          end
+        end
+
+        pending 'with invalid attributes' do
+          let(:invalid_js_create) do
+            gaku_post :create, template: attributes_for(:invalid_template)
+          end
+
+          it 'does not save the new template' do
+            expect do
+              invalid_js_create
+            end.to_not change(Gaku::Template, :count)
+          end
+
+          it 're-renders the new method' do
+            invalid_js_create
+            template? :create
+          end
+
+          it "doesn't increment @count" do
+            invalid_js_create
+            expect(assigns(:count)).to eq 0
+          end
+        end
+      end
+
+
     end
-    context 'with invalid attributes' do
-      it 'does not save the new template in the db' do
+
+    context 'js' do
+
+      describe 'XHR #new' do
+        before do
+          gaku_js_get :new
+        end
+
+        it { should respond_with 200 }
+        it('assigns @template') { expect(assigns(:template)).to be_a_new(Gaku::Template) }
+        it('renders the :new template') { template? :new }
+
+      end
+
+      describe 'XHR #edit' do
+        before do
+
+          gaku_js_get :edit, id: template
+        end
+
+        it { should respond_with 200 }
+        it('assigns @template') { expect(assigns(:template)).to eq template }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'XHR DELETE #destroy' do
+        it 'deletes the template' do
+          template
           expect do
-            gaku_post :create, template: { name: '' }
-          end.to_not change(Gaku::Template, :count)
+            gaku_js_delete :destroy, id: template
+          end.to change(Gaku::Template, :count).by(-1)
+        end
+
+        it 'decrements @count' do
+          gaku_js_delete :destroy, id: template
+          expect(assigns(:count)).to eq 0
+        end
+
+        it 'sets flash' do
+          gaku_js_delete :destroy, id: template
+          flash_destroyed?
+        end
       end
+
     end
+
   end
-
-  describe 'GET #edit' do
-    it 'locates the requested template' do
-      gaku_js_get :edit, id: template
-      assigns(:template).should eq(template)
-    end
-
-    it 'renders the :edit template' do
-        gaku_js_get :edit, id: template
-        response.should render_template :edit
-    end
-  end
-
-  describe 'PUT #update' do
-
-    before(:each) do
-      request.env['HTTP_REFERER'] = '/admin/templates'
-    end
-
-    it 'locates the requested @template' do
-      gaku_put :update, id: template,
-                        template: attributes_for(:template)
-      assigns(:template).should eq(template)
-    end
-
-    context 'valid attributes' do
-      it 'changes templates attributes' do
-        gaku_put :update, id: template,
-                          template: attributes_for(:template, name: 'Student template')
-        template.reload
-        template.name.should eq('Student template')
-
-        controller.should set_the_flash
-      end
-    end
-
-    context 'invalid attributes' do
-      it 'does not change templates attributes' do
-        gaku_put :update, id: template,
-                          template: attributes_for(:template, name: '')
-        template.reload
-        template.name.should_not eq('')
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'deletes the template' do
-      template
-      expect do
-        gaku_delete :destroy, id: template
-      end.to change(Gaku::Template, :count).by(-1)
-
-      controller.should set_the_flash
-    end
-  end
-
 end

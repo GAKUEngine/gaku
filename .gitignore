@@ -50,6 +50,7 @@ nbproject
 .~lock.*#
 .rvmrc
 .yardoc/**
+core/.bundle
 
 # Paperclip attachments
 public/system/*

@@ -1,3 +1,0 @@
-<h3><%= @attendance.attendance_type.name %></h3>
-<p><%=@attendance.reason %></p>
-<a href='#'>Delete</a>

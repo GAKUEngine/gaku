@@ -1,30 +1,57 @@
 module Gaku
   class Admin::SchoolYears::SemestersController < Admin::BaseController
 
-    authorize_resource class: false
+    respond_to :js, only: %i( new create edit update destroy )
 
-    respond_to :js, :html
+    before_action :set_school_year
+    before_action :set_semester, only: %i( edit update destroy )
 
-    inherit_resources
-    belongs_to :school_year, parent_class: SchoolYear
 
-    before_filter :count, only: %i(create destroy index)
+    def new
+      @semester = Semester.new
+    end
 
-    protected
+    def create
+      @semester = @school_year.semesters.build(semester_params)
+      @semester.save
+      set_count
+      respond_with @semester
+    end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:semester).permit(attributes)]
+    def edit
+    end
+
+    def update
+      @semester.update(semester_params)
+      respond_with @semester
+    end
+
+    def destroy
+      @semester.destroy
+      set_count
+      respond_with @semester
     end
 
     private
 
-    def count
-      @count = Semester.count
+    def semester_params
+      params.require(:semester).permit(attributes)
+    end
+
+    def set_semester
+      @semester = Semester.find(params[:id])
+    end
+
+    def set_school_year
+      @school_year = SchoolYear.find(params[:school_year_id])
+    end
+
+    def set_count
+      @count = @school_year.semesters.count
     end
 
     def attributes
-      %i(starting ending)
+      %i( starting ending )
     end
 
   end

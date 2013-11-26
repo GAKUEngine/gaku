@@ -1,11 +1,3 @@
-window.GAKUEngine =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Routers: {}
-  resources: {}
-  init: ->
-
 window.showNotice = (notice)->
   $('#notice').html(notice).delay(3000).fadeOut ->
     $(@).html('').show()

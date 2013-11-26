@@ -1,20 +1,26 @@
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
-  #- psql -c 'create database gaku_test;' -U postgres
+  - sudo psql --version
+  - phantomjs --version
+  - sudo apt-get install postgresql-contrib-9.3 -qq
+  - sudo /etc/init.d/postgresql restart
+  - psql -c 'create database gaku_test;' -U postgres
 
-bundler_args: --without production
+bundler_args: --without production -j8
 
 env:
-  - DATABASE_URL=$(curl http://api.postgression.com)
-  - TEST_SUITE=models GEM=core DB=postgres
-  - TEST_SUITE=controllers GEM=core DB=postgres
-  - TEST_SUITE=integration GEM=core DB=postgres
+  - TEST_SUITE=models GEM=core DB=postgres 
+  - TEST_SUITE=controllers GEM=core DB=postgres 
+  - TEST_SUITE=integration GEM=core DB=postgres 
   - TEST_SUITE=routing GEM=core DB=postgres
-  - TEST_SUITE=features/admin GEM=core DB=postgres
-  - TEST_SUITE=features/frontend GEM=core DB=postgres
+  - SELENIUM=1 TEST_SUITE=features/admin GEM=core DB=postgres 
+  #- PHANTOM=1 TEST_SUITE=features/admin GEM=core DB=postgres 
+  - SELENIUM=1 TEST_SUITE=features/frontend GEM=core DB=postgres
+  #- PHANTOM=1 TEST_SUITE=features/frontend GEM=core DB=postgres
 
 before_install:
+  - gem install bundler --pre
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
 
 script:

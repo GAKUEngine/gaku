@@ -1,59 +1,62 @@
 module Gaku
   class Syllabuses::ExamsController < GakuController
 
-    load_and_authorize_resource :syllabus, class: Gaku::Syllabus
-    load_and_authorize_resource :exam, through: :syllabus, class: Gaku::Exam
+    respond_to :js, only: %i( new create edit update destroy )
 
-    inherit_resources
-    belongs_to :syllabus, parent_class: Gaku::Syllabus
-    respond_to :js, :html
+    before_action :set_syllabus
+    before_action :set_exam, only: %i( edit update destroy )
+    before_action :set_grading_methods, only: %i( new edit )
 
-    before_filter :syllabus
-    before_filter :exam_syllabus, only: :update
-    before_filter :load_data
+    def new
+      @exam = Exam.new
+      @exam.exam_portions.build
+      respond_with @exam
+    end
 
     def create
-      @exam = @syllabus.exams.create(params[:exam]) do |exam|
-        exam.department = @syllabus.department
-      end
+      @exam = Exam.new(exam_params)
+      @exam.department = @syllabus.department
+      @exam.save!
+      @syllabus.exams << @exam
+
       set_count
-      create!
+      respond_with @exam
+    end
+
+    def edit
+    end
+
+    def update
+      @exam.update(exam_params)
+      respond_with @exam
     end
 
     def destroy
+      @exam.destroy
       set_count
-      destroy!
-    end
-
-    def new
-      @exam = @syllabus.exams.new
-      @exam.exam_portions.build
-      new!
-    end
-
-    protected
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:exam).permit!]
+      respond_with @exam
     end
 
     private
 
-    def exam_attr
-      [:name, :description, :adjustments, { exam_portions_attributes: [] }]
+    def exam_params
+      params.require(:exam).permit(attributes)
     end
 
-    def load_data
+    def attributes
+      [:name, :description, :adjustments, :grading_method_id, exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]]
+    end
+
+    def set_exam
+      @exam = Exam.find(params[:id])
+    end
+
+    def set_grading_methods
       @grading_methods = GradingMethod.pluck(:name, :id)
     end
 
-    def syllabus
+    def set_syllabus
       @syllabus = Syllabus.find(params[:syllabus_id])
-    end
-
-    def exam_syllabus
-      @exam_syllabus = ExamSyllabus.find_by(exam_id: params[:id], syllabus_id: params[:syllabus_id])
     end
 
     def set_count

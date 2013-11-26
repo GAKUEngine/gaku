@@ -22,6 +22,7 @@ describe 'Syllabus' do
         fill_in 'syllabus_code', with: 'code1'
         fill_in 'syllabus_description', with: 'Syllabus Description'
         select department.name, from: 'syllabus_department_id'
+        click submit
 
         flash_created?
       end.to change(Gaku::Syllabus, :count).by 1
