@@ -15,7 +15,7 @@ module Gaku
       @semester_class_group = @class_group.semester_class_groups.build(semester_class_group_params)
       @semester_class_group.save
       set_count
-      respond_with @semester_class_group
+      respond_with @semester_class_group, alert: t(:'semester_class_group.uniqueness')
     end
 
     def edit
