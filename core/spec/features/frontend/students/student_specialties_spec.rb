@@ -27,11 +27,10 @@ describe 'Student Specialties' do
         expect do
           select specialty.name , from: 'student_specialty_specialty_id'
           click submit
-          flash_created?
+          within(el) { has_content? specialty.name }
         end.to change(Gaku::StudentSpecialty, :count).by(1)
       end.to change(student.specialties, :count).by(1)
 
-      within(el) { has_content? specialty.name }
       count? 'Specialties list(1)'
     end
 
@@ -73,12 +72,10 @@ describe 'Student Specialties' do
       count? 'Specialties list(1)'
       expect do
         ensure_delete_is_working
-        flash_destroyed?
+        within(el) { has_no_content? specialty.name }
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
-
       count? 'Specialties list'
-      within(el) { has_no_content? specialty.name }
     end
 
   end
