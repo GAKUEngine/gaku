@@ -1,17 +1,28 @@
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
-  #- psql -c 'create database gaku_test;' -U postgres
+  - sudo /etc/init.d/postgresql stop
+  - sudo cp /etc/postgresql/9.1/main/pg_hba.conf ./
+  - sudo apt-get remove postgresql postgresql-9.1 -qq --purge
+  - echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > pgdg.list
+  - sudo mv pgdg.list /etc/apt/sources.list.d/
+  - wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+  - sudo apt-get update
+  - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install postgresql-9.2 postgresql-contrib-9.2 -qq
+  - sudo /etc/init.d/postgresql stop
+  - sudo cp ./pg_hba.conf /etc/postgresql/9.2/main
+  - sudo /etc/init.d/postgresql start
+  - psql -c 'create database gaku_test;' -U postgres
 
 bundler_args: --without production
 
 env:
-  - TEST_SUITE=models GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
-  - TEST_SUITE=controllers GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
-  - TEST_SUITE=integration GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
+  - TEST_SUITE=models GEM=core DB=postgres 
+  - TEST_SUITE=controllers GEM=core DB=postgres 
+  - TEST_SUITE=integration GEM=core DB=postgres 
   - TEST_SUITE=routing GEM=core DB=postgres
-  - TEST_SUITE=features/admin GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
-  - TEST_SUITE=features/frontend GEM=core DB=postgres DATABASE_URL=$(curl http://api.postgression.com)
+  - TEST_SUITE=features/admin GEM=core DB=postgres 
+  - TEST_SUITE=features/frontend GEM=core DB=postgres
 
 before_install:
   - cd $GEM; export BUNDLE_GEMFILE="`pwd`/Gemfile"
