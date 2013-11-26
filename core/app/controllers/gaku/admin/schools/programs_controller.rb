@@ -28,6 +28,12 @@ module Gaku
       respond_with @program
     end
 
+    def destroy
+      @program.destroy
+      set_count
+      respond_with @program
+    end
+
     def show_program_levels
     end
 
