@@ -1,25 +1,47 @@
 module Gaku
   class Admin::Schools::ProgramsController < Admin::BaseController
+    
+    respond_to :js,   only: %i( new create destroy edit update show_program_levels show_program_specialties show_program_syllabuses )
 
-    authorize_resource class: false
+    before_action :set_school
+    before_action :set_program, only: %i( show_program_levels show_program_specialties show_program_syllabuses destroy edit show update )
+    before_action :load_data,   only: %i( new edit )
 
-    respond_to :js, :html
+    def new
+      @program = Program.new
+      respond_with @program
+    end
 
-    inherit_resources
-    belongs_to :school, parent_class: School
+    def create
+      @program = Program.new(program_params)
+      @program.save
+      @school.programs << @program
+      set_count
+      respond_with @program
+    end
 
-    before_filter :count, only: %i(create destroy)
-    before_filter :program, only: %i(show_program_levels show_program_specialties show_program_syllabuses)
-    before_filter :load_data, only: %i(new edit)
+    def edit
+    end
 
-    protected
+    def update
+      @program.update(program_params)
+      respond_with @program
+    end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:program).permit(attributes)]
+    def show_program_levels
+    end
+
+    def show_program_specialties
+    end
+
+    def show_program_syllabuses
     end
 
     private
+
+    def program_params
+      params.require(:program).permit(attributes)
+    end
 
     def attributes
       #permit :id for update nested attributes
@@ -35,13 +57,16 @@ module Gaku
       @specialties = Specialty.all
     end
 
-    def program
+    def set_program
       @program = Program.find(params[:id])
     end
 
-    def count
-      school = School.find(params[:school_id])
-      @count = school.programs.count
+    def set_school
+      @school = School.find(params[:school_id])
+    end
+
+    def set_count
+      @count = @school.programs.count
     end
 
   end
