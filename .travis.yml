@@ -10,14 +10,12 @@ before_script:
 bundler_args: --without production -j8
 
 env:
-  - TEST_SUITE=models GEM=core DB=postgres 
-  - TEST_SUITE=controllers GEM=core DB=postgres 
-  - TEST_SUITE=integration GEM=core DB=postgres 
-  - TEST_SUITE=routing GEM=core DB=postgres
-  - SELENIUM=1 TEST_SUITE=features/admin GEM=core DB=postgres 
-  #- PHANTOM=1 TEST_SUITE=features/admin GEM=core DB=postgres 
-  - SELENIUM=1 TEST_SUITE=features/frontend GEM=core DB=postgres
-  #- PHANTOM=1 TEST_SUITE=features/frontend GEM=core DB=postgres
+  - TEST_SUITE=models GEM=core DB=postgres
+  - TEST_SUITE=controllers GEM=frontend DB=postgres
+  - TEST_SUITE=integration GEM=frontend DB=postgres
+  - TEST_SUITE=routing GEM=frontend DB=postgres
+  - SELENIUM=1 TEST_SUITE=features/admin GEM=frontend DB=postgres
+  - SELENIUM=1 TEST_SUITE=features/frontend GEM=frontend DB=postgres
 
 before_install:
   - gem install bundler --pre
