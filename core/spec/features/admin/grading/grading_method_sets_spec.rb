@@ -82,16 +82,17 @@ describe 'Admin Grading Method Sets' do
     end
 
     it 'sets primary', js: true do
-      grading_method_set.primary? == true
-      grading_method_set2.primary? == false
+      expect(grading_method_set.primary?).to eq true
+      expect(grading_method_set2.primary?).to eq false
 
       within("#{table} tr#grading-method-set-#{grading_method_set2.id}") do
         click_link 'set_primary_link'
       end
       accept_alert
+      wait_for_ready
 
-      grading_method_set.primary? == false
-      grading_method_set2.primary? == true
+      expect(grading_method_set.reload.primary?).to eq false
+      expect(grading_method_set2.reload.primary?).to eq true
     end
 
     it 'delete primary', js: true do
