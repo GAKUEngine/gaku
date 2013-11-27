@@ -7,7 +7,7 @@ describe 'Admin School Campuses Address' do
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
   let(:country_without_state) { create(:country, name: 'Japan', iso: 'JP') }
-  let!(:state) { create(:state, country: country) }
+  let!(:state) { create(:state, name: "Florida", country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
   before { as :admin }
@@ -37,7 +37,7 @@ describe 'Admin School Campuses Address' do
       has_validations?
     end
 
-    xit 'changes country with state' do
+    it 'changes country with state' do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
       select "#{state}", from: 'address_state_id'
@@ -86,14 +86,13 @@ describe 'Admin School Campuses Address' do
         has_validations?
       end
 
-      xit 'changes country with state' do
+      it 'changes country with state' do
         select "#{country}", from: 'country_dropdown'
-        within('#state-dropdown') { has_content? state.name }
+        within('#state-dropdown') { page.has_content? state.name }
         select "#{state}", from: 'address_state_id'
       end
 
       it 'changes country without state' do
-        #select "#{country}", from: 'country_dropdown'
         select "#{country_without_state}", from: 'country_dropdown'
         within('#state-dropdown') do
           expect(page).to have_css('select#address_state_id[disabled]')

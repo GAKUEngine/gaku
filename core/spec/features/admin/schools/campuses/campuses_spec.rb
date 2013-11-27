@@ -4,8 +4,8 @@ describe 'Admin School Campuses' do
 
   before { as :admin }
 
-  let(:school) { create(:school, name:'Nagoya University') }
-  let(:campus) { create(:campus ) }
+  let(:school) { create(:school, name: 'Nagoya University') }
+  let(:campus) { create(:campus) }
 
   before :all do
     set_resource 'admin-school-campus'
@@ -43,16 +43,15 @@ describe 'Admin School Campuses' do
     end
 
     context 'edit' do
-      xit 'edits' do
+      it 'edits' do
         click edit_link
-        fill_in 'campus_name', with: 'Nagoya Campus'
+        fill_in 'campus_name', with: 'Varna Campus'
         click submit
 
-        within(table) do
-          page.should have_content 'Nagoya Campus'
-          page.should_not have_content 'Nagoya University'
-        end
         flash_updated?
+        expect(school.reload.master_campus.name).to eq 'Varna Campus'
+        expect(find_field('campus_name').value).to eq 'Varna Campus'
+        page.has_content? 'Varna Campus'
       end
     end
 
