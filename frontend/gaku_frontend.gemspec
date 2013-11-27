@@ -50,7 +50,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'momentjs-rails',                 '~> 2.2'
 
   s.add_dependency 'thinreports-rails',              '~> 0.1'
-  s.add_dependency 'localeapp'
 
 
   s.add_development_dependency 'capybara',                 '~> 2.1'

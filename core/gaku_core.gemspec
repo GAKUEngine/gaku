@@ -40,10 +40,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'rubyzip',                        '0.9.9'
   s.add_dependency 'ffaker',                         '~> 1.19.0'
   s.add_dependency 'rake-progressbar'
-
-
-  s.add_development_dependency 'rspec-rails',              '~> 2.14'
-  s.add_development_dependency 'factory_girl_rails',       '~> 4.2.1'
-  s.add_development_dependency 'database_cleaner',         '~> 1.1.1'
-  s.add_development_dependency 'shoulda-matchers',         '~> 2.4.0'
 end
