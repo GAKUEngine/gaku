@@ -1,6 +1,7 @@
 module Gaku
   module Frontend
     class Engine < ::Rails::Engine
+      engine_name 'gaku_frontend'
 
       config.autoload_paths += %W(#{config.root}/lib)
 

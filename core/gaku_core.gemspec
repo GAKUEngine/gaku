@@ -35,7 +35,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise-i18n',                    '~> 0.9'
   s.add_dependency 'cancan',                         '~> 1.6.10'
 
-  s.add_dependency 'thinreports-rails',              '~> 0.1'
   s.add_dependency 'localeapp'
   s.add_dependency 'highline',                       '1.6.11'
   s.add_dependency 'rubyzip',                        '0.9.9'
