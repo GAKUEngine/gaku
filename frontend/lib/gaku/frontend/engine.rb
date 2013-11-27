@@ -1,18 +1,16 @@
 module Gaku
-  module Core
+  module Frontend
     class Engine < ::Rails::Engine
-      isolate_namespace Gaku
-      engine_name 'gaku'
 
       config.autoload_paths += %W(#{config.root}/lib)
-
-      config.to_prepare do
-        GakuController.helper(GakuHelper)
-      end
 
       config.generators do |g|
         g.test_framework :rspec, view_specs: false
       end
+
+      # config.to_prepare do
+      #   GakuController.helper(GakuHelper)
+      # end
 
 
       def self.activate
@@ -31,6 +29,18 @@ module Gaku
       # This then makes the appended/prepended routes available to the application.
       config.after_initialize do
         Rails.application.routes_reloader.reload!
+      end
+
+      # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
+      initializer 'gaku.assets.precompile', group: :all do |app|
+        app.config.assets.precompile += %w[
+          gaku/all.*
+        ]
+      end
+
+      # filter sensitive information during logging
+      initializer 'gaku.params.filter' do |app|
+        app.config.filter_parameters += [:password, :password_confirmation, :number]
       end
 
     end
