@@ -110,6 +110,10 @@ module Gaku::Testing::FeatureHelpers
     accept_alert
   end
 
+  def wait_for_ready
+    page.has_no_selector?('.nprogress-busy')
+  end
+
   def wait_for_ajax(timeout = Capybara.default_wait_time)
     Timeout.timeout(timeout) do
       active = page.evaluate_script('jQuery.active')
