@@ -6,8 +6,8 @@ describe 'Admin School Levels' do
 
   let(:school) { create(:school) }
   let(:master_school) { create(:school, :master, name: 'Asenovgrad University') }
-  let(:level) { create(:level, school: master_school) }
-
+  let(:master_school_level) { create(:level, school: master_school) }
+  let(:school_level) { create(:level, school: school) }
 
   before :all do
     set_resource 'admin-school'
@@ -34,8 +34,8 @@ describe 'Admin School Levels' do
 
   context 'deletes', js: true do
     before do
-      level
       master_school
+      master_school_level
       visit gaku.admin_school_details_path
       click '#edit-admin-primary-school'
       accept_alert
@@ -46,7 +46,7 @@ describe 'Admin School Levels' do
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
-      page.should_not have_content level
+      page.should_not have_content master_school_level
     end
 
     it 'delete' do
@@ -54,7 +54,7 @@ describe 'Admin School Levels' do
       click submit
       flash_updated?
       visit gaku.admin_school_details_path
-      page.should_not have_content level
+      page.should_not have_content master_school_level
       page.should have_content '5 class'
     end
   end
@@ -62,20 +62,18 @@ describe 'Admin School Levels' do
   context 'non master schools should not edit and show school levels', js: true do
     before do
       school
-      master_school
-      level
+      school_level
       visit gaku.admin_schools_path
     end
 
-    xit 'have no edit for school levels' do
-      within(table) { click js_edit_link }
+    it 'have no edit for school levels' do
+      within(table) { click edit_link }
       page.should_not have_css 'a.add-school-level'
     end
 
-    xit 'not show school levels on non primary school' do
-      within(table) { find(show_link).first.click }
+    it 'not show school levels on non primary school' do
+      within(table) { click show_link }
       page.should_not have_content 'School Levels'
-      page.should_not have_content level
     end
   end
 
