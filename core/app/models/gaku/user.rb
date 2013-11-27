@@ -33,7 +33,7 @@ module Gaku
     end
 
     def role?(role)
-      !!self.roles.find_by(name: role.to_s.camelize)
+      roles.detect {|p| p.name == role.to_s.camelize}
     end
 
     private
