@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks',                     '~> 1.3'
 
   s.add_dependency 'slim',                           '~> 2.0'
-  s.add_dependency 'responders',                     '~> 1.0'
   s.add_dependency 'draper',                         '~> 1.0'
 
   s.add_dependency 'rails4_client_side_validations', '0.0.3'

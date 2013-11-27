@@ -9,8 +9,7 @@ require 'cancan'
 require 'kaminari'
 require 'paper_trail'
 require 'globalize'
-
-require 'thinreports-rails'
+require 'responders'
 
 module Gaku
 
