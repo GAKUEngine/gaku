@@ -1,4 +1,4 @@
-eval(File.read(File.dirname(__FILE__) + '/../gaku_dependencies.rb'))
+#eval(File.read(File.dirname(__FILE__) + '/../gaku_dependencies.rb'))
 
 group :test do
   gem 'capybara',                 '~> 2.1'
