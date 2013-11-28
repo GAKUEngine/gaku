@@ -1,6 +1,6 @@
 Gaku::Core::Engine.add_routes  do
 
-
+  root to: 'home#index'
 
   devise_for :users, {
     class_name: 'Gaku::User',

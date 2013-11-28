@@ -115,7 +115,5 @@ Gaku::Core::Engine.add_routes do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
   end
 
-  root to: 'home#index'
-
 
 end
