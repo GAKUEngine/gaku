@@ -10,14 +10,11 @@ before_script:
 bundler_args: --without production
 
 env:
-  - TEST_SUITE=models GEM=core DB=postgres
-  - TEST_SUITE=controllers GEM=frontend DB=postgres
-  - TEST_SUITE=integration GEM=frontend DB=postgres
-  - TEST_SUITE=routing GEM=frontend DB=postgres
-  - TEST_SUITE=controllers GEM=admin DB=postgres
-  - TEST_SUITE=routing GEM=admin DB=postgres
-  - SELENIUM=1 TEST_SUITE=features GEM=frontend DB=postgres
-  - SELENIUM=1 TEST_SUITE=features GEM=admin DB=postgres
+  - TEST_SUITE=spec/models GEM=core DB=postgres
+  - TEST_SUITE=spec/controllers spec/integration spec/routing GEM=frontend DB=postgres
+  - TEST_SUITE=spec/controllers spec/routing GEM=admin DB=postgres
+  - SELENIUM=1 TEST_SUITE=spec/features GEM=frontend DB=postgres
+  - SELENIUM=1 TEST_SUITE=spec/features GEM=admin DB=postgres
 
 before_install:
   #- gem install bundler --pre
