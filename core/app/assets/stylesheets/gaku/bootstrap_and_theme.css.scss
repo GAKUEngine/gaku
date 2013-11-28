@@ -38,6 +38,9 @@ font-size: 24px;
   & tbody>tr>td {
     vertical-align: middle;
   }
+  &.grading tbody>tr>td {
+    vertical-align: baseline;
+  } 
 }
 
 .tab-pane {
