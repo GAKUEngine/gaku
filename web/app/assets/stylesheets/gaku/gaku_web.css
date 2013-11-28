@@ -8,7 +8,6 @@
  *= require nprogress-bootstrap
  *= require phantom_helpers
  *= require phantom_forms
- *= require gaku/exams
  *= require gaku/gaku
  *= require_self
 */

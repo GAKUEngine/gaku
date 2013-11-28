@@ -36,8 +36,6 @@
 #= require phantom_forms
 #= require phantom_nested_forms
 
-#= require_tree .
-
 NProgress.configure
   showSpinner: false
   ease: 'ease-in-out'
