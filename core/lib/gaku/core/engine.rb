@@ -6,9 +6,7 @@ module Gaku
 
       config.autoload_paths += %W(#{config.root}/lib)
 
-      config.to_prepare do
-        GakuController.helper(GakuHelper)
-      end
+
 
       config.generators do |g|
         g.test_framework :rspec, view_specs: false

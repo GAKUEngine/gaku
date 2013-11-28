@@ -1,9 +1,16 @@
 module Gaku
   module GakuHelper
 
-    include SortHelper
-    include TranslationsHelper
-    include FlashHelper
+    include Gaku::AutocompleteHelper
+    include Gaku::IconHelper
+    include Gaku::PersonHelper
+    include Gaku::PresetsHelper
+    include Gaku::StudentChooserHelper
+    include Gaku::StudentsHelper
+    include Gaku::SortHelper
+    include Gaku::CountHelper
+    include Gaku::TranslationsHelper
+    include Gaku::FlashHelper
 
     def tr_for(resource, &block)
       content_tag :tr, id: "#{resource.class.to_s.demodulize.underscore.dasherize}-#{resource.id}" do

@@ -9,7 +9,6 @@ require 'cancan'
 require 'kaminari'
 require 'paper_trail'
 require 'globalize'
-require 'responders'
 require 'draper'
 
 module Gaku

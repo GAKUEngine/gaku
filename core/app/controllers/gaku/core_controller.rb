@@ -1,10 +1,7 @@
 module Gaku
-  class GakuController < ActionController::Base
+  class CoreController < ActionController::Base
     protect_from_forgery
     #check_authorization
-
-    self.responder = AppResponder
-    respond_to :html
 
     rescue_from CanCan::AccessDenied do |exception|
       redirect_to root_url, alert: exception.message
@@ -12,8 +9,6 @@ module Gaku
 
     before_filter :set_locale
     before_filter :users_check
-
-    layout :resolve_layout
 
     def user_for_paper_trail
       user_signed_in? ? current_user : 'Public user'  # or whatever
@@ -33,19 +28,6 @@ module Gaku
 
     def current_ability
       @current_ability ||= Gaku::Ability.new(current_user)
-    end
-
-    def resolve_layout
-      case action_name
-      when 'index'
-        'gaku/layouts/index'
-      when 'show'
-        'gaku/layouts/show'
-      when 'edit'
-        'gaku/layouts/edit'
-      else
-        'gaku/layouts/gaku'
-      end
     end
 
     def set_locale
