@@ -5,6 +5,13 @@ module Gaku
     include TranslationsHelper
     include FlashHelper
 
+    def broadcast(channel, &block)
+      message = {:channel => channel, :data => capture(&block)}
+      uri = URI.parse("http://localhost:9292/faye")
+      Net::HTTP.post_form(uri, :message => message.to_json)
+    end
+
+
     def tr_for(resource, &block)
       content_tag :tr, id: "#{resource.class.to_s.demodulize.underscore.dasherize}-#{resource.id}" do
         block.call
@@ -135,14 +142,12 @@ module Gaku
       link_to name, resource, attributes
     end
 
-    def ajax_link_to_restore(resource, options = {})
-      name = content_tag(:span, nil, class: 'glyphicon glyphicon-repeat')
-      attributes = {
-        remote: true,
-        method: :patch,
-        class: "btn btn-xs btn-success recovery-link"
-      }.merge(options)
-      link_to name, resource, attributes
+    def icon(name)
+      content_tag(:span, nil, class: "#{name}")
+    end
+
+    def icon_label(icon_name, label)
+      raw %{ #{icon(icon_name)} #{label} }
     end
 
   end

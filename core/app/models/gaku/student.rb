@@ -49,6 +49,10 @@ module Gaku
 
     paginates_per 25 #Preset.per_page('students')
 
+    def full_name
+      "#{name} #{surname}"
+    end
+
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
                                                   active: true, immutable: true).first_or_create!.try(:code)
