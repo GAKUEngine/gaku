@@ -1,6 +1,5 @@
-Gaku::Core::Engine.routes.draw do
+Gaku::Core::Engine.add_routes  do
 
-  # concerns
 
   concern :addresses do
     resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index soft )
@@ -24,28 +23,11 @@ Gaku::Core::Engine.routes.draw do
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
-
   concern(:enroll_students) { post :enroll_students, on: :collection }
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
 
-
-    devise_for :users, {
-    class_name: 'Gaku::User',
-    module: :devise,
-    controllers: {
-       sessions: 'gaku/devise/sessions',
-       registrations: 'gaku/devise/registrations',
-       passwords: 'gaku/devise/passwords'
-     }
-  }
-
-  devise_scope :user do
-    get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
-    post :create_admin,        to: 'devise/registrations#create_admin'
-  end
-
-  root to: :achievements
+  #root to: :achievements
 
   namespace :admin do
 

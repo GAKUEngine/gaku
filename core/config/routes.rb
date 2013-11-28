@@ -1,3 +1,5 @@
-Gaku::Core::Engine.routes.draw do
+Gaku::Core::Engine.draw_routes do
+
+
 
 end

@@ -33,6 +33,8 @@ module Gaku
         Rails.application.routes_reloader.reload!
       end
 
+      require 'gaku/core/routes'
+
     end
   end
 end
