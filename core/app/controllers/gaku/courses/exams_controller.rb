@@ -7,7 +7,9 @@ module Gaku
       @course = Course.find(params[:course_id])
       @exam = Exam.find(params[:id])
       @students = @course.students
-      init_portion_scores
+
+      calculate_totals
+
 
       respond_with @exam
     end
