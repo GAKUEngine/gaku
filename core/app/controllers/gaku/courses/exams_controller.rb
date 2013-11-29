@@ -33,7 +33,6 @@ module Gaku
       @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
       @exam_averages = Hash.new {0.0}
       @exam_weight_averages = Hash.new {0.0}
-      @weighting_score = true
 
       @students.each do |student|
         @exams.each do |exam|
