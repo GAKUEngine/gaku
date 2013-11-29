@@ -122,9 +122,7 @@ module Gaku
         end
         scores.sort!().reverse!()
 
-
         # WIP Grade Calculation -----↓
-
         # @grading_method = GradingMethod.find(exam.grading_method_id)
         # puts "@grading_method-------------"
         # puts @grading_method.name
