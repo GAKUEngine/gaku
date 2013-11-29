@@ -116,7 +116,7 @@ module Gaku
       # -------- }
 
 
-      # WIP Grade and Rank Calculation （ここは別途光ヶ丘生徒評価表を参照して下さい）-------- {
+      # Grade and Rank Calculation （ここは別途光ヶ丘生徒評価表を参照して下さい）-------- {
 
       # init variables --------
 
@@ -127,7 +127,7 @@ module Gaku
       #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡を使って評価を行う。
       # GRADE_LEVELS_BY_PERCENT:
       #   １０段階を相対評価で判定する時に使う定数。
-      #   決められたパーセンテージを基に、生徒がクラス内で何％以内かを調べ、評価を行う。
+      #   決められたパーセンテージを基に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
       @grades = Hash.new { |hash,key| hash[key] = {} }
       GRADE_LEVELS_BY_DEVIATION = [100, 66, 62, 58, 55, 59, 45, 37, 0]
       GRADE_LEVELS_BY_PERCENT = [5, 5, 10, 10, 30, 10, 100]
@@ -138,10 +138,10 @@ module Gaku
       @ranks = Hash.new { |hash,key| hash[key] = {} }
       RANK_LEVELS = [15, 20]
 
-      # set scores for set grade and rank --------
+      # set grade and rank --------
       @exams.each do |exam|
 
-        # 生徒の順位用配列を作成（点数合計がDBに入ってるならそれを降順で取れば良いと思う） -------- {
+        # 生徒の順位用配列を作成（合計点数がDBに入ってるならそれを降順で取れば良いと思う） -------- {
         scores = [] # 生徒の順位を出す為の変数。
 
         # 試験毎の合計点数と生徒IDをscoresに格納する。
