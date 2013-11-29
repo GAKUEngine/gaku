@@ -17,7 +17,7 @@ module Gaku
         return num
       end
 
-      # init: variables -------- {
+      # init variables -------- {
       @course = Course.find(params[:course_id])
       @exam = Exam.find(params[:id])
       @students = @course.students
@@ -71,46 +71,80 @@ module Gaku
       end
       # -------- }
 
+
       # calc for deviation -------- {
+
+      # init variables --------
       @deviation = Hash.new { |hash,key| hash[key] = {} }
-      stdDev = 0.0
-      devMem = 0.0
+      std_dev = 0.0
+      scratch_dev = 0.0
+
+      # start calc --------
       @exams.each do |exam|
+
+        # calc standard deviations --------
         @students.each do |student|
           if exam.use_weighting
-            stdDev += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
+            std_dev += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
           else
-            stdDev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
+            std_dev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
           end
         end
-        stdDev = Math.sqrt stdDev / @students.length
+
+        # calc deviations --------
+        std_dev = Math.sqrt std_dev / @students.length
         @students.each do |student|
+
+          # init valiable for deviations --------
           @deviation[student.id][exam.id] = 0.0
+
           if exam.use_weighting
-            devMem = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / stdDev
+            scratch_dev = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / std_dev
           else
-            devMem = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / stdDev
+            scratch_dev = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / std_dev
           end
 
-          if devMem.nan?
+          # set deviations --------
+          if scratch_dev.nan?
             @deviation[student.id][exam.id] = 50
           else
-            @deviation[student.id][exam.id] = fix_digit devMem * 10 + 50, 4
+            @deviation[student.id][exam.id] = fix_digit scratch_dev * 10 + 50, 4
           end
         end
+
       end
       # -------- }
 
-      # WIP Grade and Rank Calculation -----↓
+
+      # WIP Grade and Rank Calculation （ここは別途光ヶ丘生徒評価表を参照して下さい）-------- {
+
+      # init variables --------
+
+      # １０段階用の設定
+      # @grade: 生徒の１０段階を入れるHash。
+      # GRADE_LEVELS_BY_DEVIATION:
+      #   １０段階を全体評価で判定する時に使う定数。
+      #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡を使って評価を行う。
+      # GRADE_LEVELS_BY_PERCENT:
+      #   １０段階を相対評価で判定する時に使う定数。
+      #   決められたパーセンテージを基に、生徒がクラス内で何％以内かを調べ、評価を行う。
       @grades = Hash.new { |hash,key| hash[key] = {} }
-      gradeLevels_Deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
-      gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
+      GRADE_LEVELS_BY_DEVIATION = [100, 66, 62, 58, 55, 59, 45, 37, 0]
+      GRADE_LEVELS_BY_PERCENT = [5, 5, 10, 10, 30, 10, 100]
 
+      # ５段階用の設定
+      # @ranks: 生徒の５段階を入れるHash。
+      # RANK_LEVELS: ５段階を付ける時に使うパーセンテージ配列の定数。
       @ranks = Hash.new { |hash,key| hash[key] = {} }
-      rankLevels = [15, 20]
+      RANK_LEVELS = [15, 20]
 
+      # set scores for set grade and rank --------
       @exams.each do |exam|
-        scores = []
+
+        # 生徒の順位用配列を作成（点数合計がDBに入ってるならそれを降順で取れば良いと思う） -------- {
+        scores = [] # 生徒の順位を出す為の変数。
+
+        # 試験毎の合計点数と生徒IDをscoresに格納する。
         if exam.use_weighting
           @students.each do |student|
             scores.push [@student_total_weights[student.id][exam.id], student.id]
@@ -120,43 +154,40 @@ module Gaku
             scores.push [@student_total_scores[student.id][exam.id], student.id]
           end
         end
+        # 試験のスコアを降順に並び替える
         scores.sort!().reverse!()
+        # -------- }
 
-        # WIP Grade Calculation -----↓
-        # @grading_method = GradingMethod.find(exam.grading_method_id)
-        # puts "@grading_method-------------"
-        # puts @grading_method.name
-        # eval @grading_method.method
-
-        gradingMethod = 1
-        gradePoint = 10
-        case gradingMethod
+        # 採点方式を選択、その採点方式でGradeとRankを決定。
+        grading_method = 1
+        grade_point = 10
+        case grading_method
 
         # calc for zentai
         when 1
-          gradeLevels_Deviation.each_with_index do |glevel, i|
+          GRADE_LEVELS_BY_DEVIATION.each_with_index do |glevel, i|
             @students.each do |student|
-              if gradeLevels_Deviation[i] > @deviation[student.id][exam.id] && gradeLevels_Deviation[i+1] <= @deviation[student.id][exam.id]
-                @grades[exam.id][student.id] = gradePoint
+              if GRADE_LEVELS_BY_DEVIATION[i] > @deviation[student.id][exam.id] && GRADE_LEVELS_BY_DEVIATION[i+1] <= @deviation[student.id][exam.id]
+                @grades[exam.id][student.id] = grade_point
               end
             end
-            gradePoint -= 1
+            grade_point -= 1
           end
 
         # calc for soutai
         when 2
           scoresMem = scores.clone
           gradeNums = []
-          gradeLevels_Percent.each do |glevel|
+          GRADE_LEVELS_BY_PERCENT.each do |glevel|
             gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
           end
           gradeNums.each do |gnum|
             i = 0
             while i < gnum && scoresMem.length != 0
-              @grades[exam.id][scoresMem.shift[1]] = gradePoint
+              @grades[exam.id][scoresMem.shift[1]] = grade_point
               i += 1
             end
-            gradePoint -= 1
+            grade_point -= 1
           end
         end
 
@@ -166,7 +197,7 @@ module Gaku
           @ranks[exam.id][student.id] = 3
         end
         rankNums = []
-        rankLevels.each do |rlevel|
+        RANK_LEVELS.each do |rlevel|
           rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
         end
         rankNums.each do |rnum|
