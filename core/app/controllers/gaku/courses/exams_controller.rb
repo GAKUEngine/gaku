@@ -122,21 +122,21 @@ module Gaku
 
       # １０段階用の設定
       # @grade: 生徒の１０段階を入れるHash。
-      # GRADE_LEVELS_BY_DEVIATION:
+      # grade_level_deviation:
       #   １０段階を全体評価で判定する時に使う定数。
       #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡を使って評価を行う。
-      # GRADE_LEVELS_BY_PERCENT:
+      # grade_level_percent:
       #   １０段階を相対評価で判定する時に使う定数。
       #   決められたパーセンテージを基に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
       @grades = Hash.new { |hash,key| hash[key] = {} }
-      GRADE_LEVELS_BY_DEVIATION = [100, 66, 62, 58, 55, 59, 45, 37, 0]
-      GRADE_LEVELS_BY_PERCENT = [5, 5, 10, 10, 30, 10, 100]
+      grade_level_deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
+      grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
 
       # ５段階用の設定
       # @ranks: 生徒の５段階を入れるHash。
-      # RANK_LEVELS: ５段階を付ける時に使うパーセンテージ配列の定数。
+      # rank_level: ５段階を付ける時に使うパーセンテージ配列の定数。
       @ranks = Hash.new { |hash,key| hash[key] = {} }
-      RANK_LEVELS = [15, 20]
+      rank_level = [15, 20]
 
       # set grade and rank --------
       @exams.each do |exam|
@@ -165,9 +165,9 @@ module Gaku
 
         # calc for zentai
         when 1
-          GRADE_LEVELS_BY_DEVIATION.each_with_index do |glevel, i|
+          grade_level_deviation.each_with_index do |glevel, i|
             @students.each do |student|
-              if GRADE_LEVELS_BY_DEVIATION[i] > @deviation[student.id][exam.id] && GRADE_LEVELS_BY_DEVIATION[i+1] <= @deviation[student.id][exam.id]
+              if grade_level_deviation[i] > @deviation[student.id][exam.id] && grade_level_deviation[i+1] <= @deviation[student.id][exam.id]
                 @grades[exam.id][student.id] = grade_point
               end
             end
@@ -178,7 +178,7 @@ module Gaku
         when 2
           scoresMem = scores.clone
           gradeNums = []
-          GRADE_LEVELS_BY_PERCENT.each do |glevel|
+          grade_level_percent.each do |glevel|
             gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
           end
           gradeNums.each do |gnum|
@@ -197,7 +197,7 @@ module Gaku
           @ranks[exam.id][student.id] = 3
         end
         rankNums = []
-        RANK_LEVELS.each do |rlevel|
+        rank_level.each do |rlevel|
           rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
         end
         rankNums.each do |rnum|
