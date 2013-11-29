@@ -3,19 +3,21 @@ module Gaku
 
     respond_to :html
 
-    def fix_digit num, digitNum
-      fixNum = 10 ** digitNum
-      num = num * fixNum
-      if num.nan?
-        num = 0
-      else
-        num = num.truncate
-        num = num.to_f / fixNum.to_f
-      end
-      return num
-    end
 
     def grading
+
+      def fix_digit num, digit_num
+        for_fix = 10 ** digit_num
+        num = num * for_fix
+        if num.nan?
+          num = 0
+        else
+          num = num.truncate.to_f / for_fix.to_f
+        end
+        return num
+      end
+
+      # init: variables -------- {
       @course = Course.find(params[:course_id])
       @exam = Exam.find(params[:id])
       @students = @course.students
@@ -25,48 +27,51 @@ module Gaku
         @exams = Exam.find_all_by_id(params[:id])
       else
         @exams = @course.syllabus.exams.all
-        # TODO calculate all grades and put them in here
-        # @grades = 1
       end
 
       @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
       @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
       @exam_averages = Hash.new {0.0}
       @exam_weight_averages = Hash.new {0.0}
-
+      # -------- }
+      
+      # set ExamPortionScores & calc for exams average -------- {
       @students.each do |student|
         @exams.each do |exam|
           @student_total_scores[student.id][exam.id] = 0.0
           @student_total_weights[student.id][exam.id] = 0.0
           exam.exam_portions.each do |portion|
-            if student.exam_portion_scores.where(:exam_portion_id => portion.id).first.nil?
+            if student.exam_portion_scores.where(exam_portion_id: portion.id).first.nil?
               score = ExamPortionScore.new
               score.student_id = student.id
               score.exam_portion_id = portion.id
               score.save
             else
-              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
               if exam.use_weighting
-                @student_total_weights[student.id][exam.id] +=  (portion.weight.to_f / 100) * student.exam_portion_scores.where(:exam_portion_id => portion.id).first.score.to_f
+                @student_total_weights[student.id][exam.id] += (portion.weight.to_f / 100) * student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
               end
             end
           end
+          # calc for average --------
           @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
           if exam.use_weighting
             @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
           end
         end
       end
+      # -------- }
 
-      # Exam Averaes Calculation -----↓
+      # set Exams Average -------- {
       @exams.each do |exam|
         @exam_averages[exam.id] = fix_digit @exam_averages[exam.id] / @students.length, 4
         if exam.use_weighting
           @exam_weight_averages[exam.id] = fix_digit @exam_weight_averages[exam.id] / @students.length, 4
         end
       end
+      # -------- }
 
-      # Deviation Calculation -----↓
+      # calc for deviation -------- {
       @deviation = Hash.new { |hash,key| hash[key] = {} }
       stdDev = 0.0
       devMem = 0.0
@@ -94,12 +99,12 @@ module Gaku
           end
         end
       end
+      # -------- }
 
       # WIP Grade and Rank Calculation -----↓
       @grades = Hash.new { |hash,key| hash[key] = {} }
-      gradeLevels_Deviation = [10000000000, 66, 62, 58, 55, 59, 45, 37, 0]
+      gradeLevels_Deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
       gradeLevels_Percent = [5, 5, 10, 10, 30, 10, 100]
-
 
       @ranks = Hash.new { |hash,key| hash[key] = {} }
       rankLevels = [15, 20]
@@ -128,6 +133,8 @@ module Gaku
         gradingMethod = 1
         gradePoint = 10
         case gradingMethod
+
+        # calc for zentai
         when 1
           gradeLevels_Deviation.each_with_index do |glevel, i|
             @students.each do |student|
@@ -137,6 +144,8 @@ module Gaku
             end
             gradePoint -= 1
           end
+
+        # calc for soutai
         when 2
           scoresMem = scores.clone
           gradeNums = []
