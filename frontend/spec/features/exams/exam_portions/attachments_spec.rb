@@ -88,38 +88,12 @@ describe 'Exam Portion Attachments' do
         flash_destroyed?
       end
 
-      it 'shows the attachment in attachment disposals' do
-        visit gaku.attachments_admin_disposals_path
-        page.should have_content "#{attachment.name}"
-      end
 
       it 'deletes attachment from index table' do
         visit gaku.exam_exam_portion_path(exam, exam_portion)
         page.should_not have_content "#{attachment.name}"
       end
 
-      it 'revert deleting' do
-        visit gaku.attachments_admin_disposals_path
-        page.should have_content "#{attachment.name}"
-        click '.recovery-link'
-        flash_recovered?
-        visit gaku.exam_exam_portion_path(exam, exam_portion)
-        page.should have_content "#{attachment.name}"
-      end
-
-      it 'deletes forever' do
-        visit gaku.attachments_admin_disposals_path
-        page.should have_content "#{attachment.name}"
-        click delete_link
-        accept_alert
-        flash_destroyed?
-        page.should_not have_content "#{attachment.name}"
-
-        visit gaku.attachments_admin_disposals_path
-        page.should_not have_content "#{attachment.name}"
-        visit gaku.exam_exam_portion_path(exam, exam_portion)
-        page.should_not have_content "#{attachment.name}"
-      end
     end
 
   end
