@@ -14,7 +14,7 @@ describe 'Admin Teacher Disposals' do
     click '#teachers-tab-link'
   end
 
-  it 'indexes deleted teachers', js: true do
+  xit 'indexes deleted teachers', js: true do
     has_content? deleted_teacher.name
     has_content? deleted_teacher.surname
 
@@ -22,13 +22,13 @@ describe 'Admin Teacher Disposals' do
     has_no_content? teacher.surname
   end
 
-  it 'shows deleted teacher', js: true do
+  xit 'shows deleted teacher', js: true do
     click show_link
     page.has_content? 'Teacher information'
     expect(current_path).to eq "/teachers/#{deleted_teacher.id}/show_deleted"
   end
 
-  it 'recovers deleted teacher', js: true do
+  xit 'recovers deleted teacher', js: true do
     expect do
       click recovery_link
       flash_recovered?
@@ -39,7 +39,7 @@ describe 'Admin Teacher Disposals' do
     has_no_content? deleted_teacher.surname
   end
 
-  it 'deletes teacher permanently', js: true do
+  xit 'deletes teacher permanently', js: true do
     click delete_link
     accept_alert
     flash_destroyed?
