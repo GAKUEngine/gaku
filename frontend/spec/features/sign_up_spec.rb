@@ -21,10 +21,6 @@ describe 'Sign Up' do
 
       expect(current_path).to eq gaku.root_path
       expect(Gaku::User.last.roles.last.to_s).to eq 'Admin'
-
-      visit gaku.admin_users_path
-      has_content? 'admin@example.com'
-      has_content? 'Users(1)'
     end
 
     it 'errors if fields are missing' do
