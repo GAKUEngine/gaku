@@ -12,4 +12,6 @@ Gaku::Core::Engine.add_routes  do
      }
   }
 
+  resources :states, only: :index
+
 end

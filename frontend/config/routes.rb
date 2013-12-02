@@ -108,7 +108,6 @@ Gaku::Core::Engine.add_routes do
     end
   end
 
-  resources :states, only: :index
   resources :attachments, concerns: %i( soft_delete download )
 
   resources :course_groups, concerns: %i( soft_delete ) do

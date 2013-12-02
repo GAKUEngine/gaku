@@ -1,18 +1,5 @@
 Gaku::Core::Engine.add_routes  do
 
-
-  concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index soft )
-  end
-
-  concern :contacts do
-    resources :contacts, concerns: %i( soft_delete primary )
-  end
-
-  concern :notes do
-    resources :notes
-  end
-
   concern :soft_delete do
     patch :recovery,    on: :member
     patch :soft_delete, on: :member
@@ -43,7 +30,9 @@ Gaku::Core::Engine.add_routes  do
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'schools/campuses', except: :index,  concerns: %i( contacts ) do
+      resources :campuses, controller: 'schools/campuses', except: :index do
+        resources :contacts, concerns: %i( soft_delete primary )
+
         resources :addresses, controller: 'schools/campuses/addresses', except: %i( show index )
       end
     end
