@@ -20,9 +20,7 @@ describe 'Exam Portion Attachments' do
       expect do
         fill_in 'attachment_name', with: 'Attachment name'
         fill_in 'attachment_description', with: 'Attachment description'
-
-        absolute_path = Rails.root + '../support/120x120.jpg'
-        attach_file 'attachment_asset', absolute_path
+        attach_file 'attachment_asset', picture_path
         click submit
         flash_created?
       end.to change(Gaku::Attachment, :count).by 1

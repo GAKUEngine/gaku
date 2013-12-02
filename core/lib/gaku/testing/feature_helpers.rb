@@ -137,6 +137,10 @@ module Gaku::Testing::FeatureHelpers
     "#{uri.path}?#{uri.query}".should == expected_path
   end
 
+  def picture_path
+    Rails.root + '../../../core/spec/support/120x120.jpg'
+  end
+
   private
 
   def plural(text)
