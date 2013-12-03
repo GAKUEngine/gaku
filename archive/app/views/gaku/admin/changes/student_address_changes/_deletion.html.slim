@@ -1,0 +1,9 @@
+tr
+  td = change.id
+  td = link_to "#{t(:'student.singular')} #{change.joined_resource_id}", admin_student_path(change.joined_resource_id)
+  td = change.event
+  td
+  td
+  td
+  td = change.whodunnit
+  td = change.created_at

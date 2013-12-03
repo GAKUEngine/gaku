@@ -38,6 +38,18 @@
       </ul>
     </li>
 
+    <li class="dropdown-submenu" data-hook="changes_sub_menu">
+      <a tabindex='-1' href='#'><%= t('menu.admin.changes.changes') %></a>
+      <ul class="dropdown-menu">
+        <li data-hook="student_changes"><%= link_to t('menu.admin.changes.students'), admin_changes_students_path %></li>
+        <li data-hook="student_address_changes">
+          <%= link_to t('menu.admin.changes.student_addresses'), admin_changes_student_addresses_path %>
+        </li>
+        <li data-hook="student_contact_changes">
+          <%= link_to t('menu.admin.changes.student_contacts'), admin_changes_student_contacts_path %>
+        </li>
+      </ul>
+    </li>
 
     <li class="dropdown-submenu" data-hook="users_and_roles_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.users.users_and_roles') %></a>
@@ -51,6 +63,7 @@
 
     <li data-hook="presets"><%= link_to t('menu.admin.preset.plural'), admin_presets_path %></li>
 
+    <li data-hook="disposals"><%= link_to t('menu.admin.disposals.disposals'), admin_disposals_path %></li>
 
     <li class="dropdown-submenu" data-hook="system_tools_sub_menu">
       <a tabindex='-1' href='#'><%= t('menu.admin.system.system_tools') %></a>

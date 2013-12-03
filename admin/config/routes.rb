@@ -6,15 +6,10 @@ Gaku::Core::Engine.add_routes  do
   end
 
   concern(:primary)         { patch :make_primary, on: :member }
-  concern(:show_deleted)    { get :show_deleted, on: :member }
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
-  concern(:enroll_students) { post :enroll_students, on: :collection }
-  concern(:enroll_student)  { post :enroll_student, on: :collection }
-  concern(:student_chooser) { get :student_chooser, on: :member }
 
-  #root to: :achievements
 
   namespace :admin do
 
@@ -63,35 +58,7 @@ Gaku::Core::Engine.add_routes  do
       resources :semesters, controller: 'school_years/semesters', except: %i( show index )
     end
 
-    namespace :changes do
-      resources :students, controller: 'student_changes', concerns: %i( pagination )
-      resources :student_contacts,  controller: 'student_contact_changes'
-      resources :student_addresses, controller: 'student_address_changes'
-    end
-
     resources :presets
-
-    resources :disposals do
-      collection do
-        get :students
-        get :teachers
-        get :guardians
-        get :exams
-        get :course_groups
-        get :attachments
-        get :addresses
-        get :contacts
-
-        get 'students/page/:page',      action: :students
-        get 'teachers/page/:page',      action: :teachers
-        get 'guardians/page/:page',     action: :guardians
-        get 'exams/page/:page',         action: :exams
-        get 'course_groups/page/:page', action: :course_groups
-        get 'attachments/page/:page',   action: :attachments
-        get 'addresses/page/:page',     action: :addresses
-        get 'contacts/page/:page',      action: :contacts
-      end
-    end
 
   end
 end
