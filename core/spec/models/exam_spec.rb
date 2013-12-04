@@ -6,7 +6,6 @@ describe Gaku::Exam do
 
   describe 'concerns' do
     it_behaves_like 'notable'
-    it_behaves_like 'thrashable'
   end
 
   describe 'associations' do

@@ -60,57 +60,9 @@ describe Gaku::CoursesController do
         end
       end
 
-      describe 'PATCH #soft_delete' do
-        let(:patch_soft_delete) { gaku_patch :soft_delete, id: course }
-
-        it 'redirects' do
-          patch_soft_delete
-          should respond_with(302)
-        end
-
-        it 'assigns  @course' do
-          patch_soft_delete
-          expect(assigns(:course)).to eq course
-        end
-
-        it 'updates :deleted attribute' do
-          expect do
-            patch_soft_delete
-            course.reload
-          end.to change(course, :deleted)
-        end
-      end
-
     end
 
     context 'js' do
-
-      describe 'JS PATCH #recovery' do
-        let(:js_patch_recovery) { gaku_js_get :recovery, id: course }
-
-        it 'is successfull' do
-          js_patch_recovery
-          should respond_with(200)
-        end
-
-        it 'assigns  @course' do
-          js_patch_recovery
-          expect(assigns(:course)).to eq course
-        end
-
-        it 'renders :recovery' do
-          js_patch_recovery
-          should render_template :recovery
-       end
-
-        it 'updates :deleted attribute' do
-          course.soft_delete
-          expect do
-            js_patch_recovery
-            course.reload
-          end.to change(course, :deleted)
-        end
-      end
 
       describe 'JS GET #new' do
         before { gaku_js_get :new }

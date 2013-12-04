@@ -20,7 +20,6 @@ class GakuCore < ActiveRecord::Migration
       t.string   'city'
       t.string   'zipcode'
       t.string   'title'
-      t.boolean  'deleted',       default: false
       t.boolean  'primary',       default: false
       t.integer  'addressable_id'
       t.string   'addressable_type'
@@ -50,7 +49,6 @@ class GakuCore < ActiveRecord::Migration
     create_table 'gaku_attachments' do |t|
       t.string   'name'
       t.text     'description'
-      t.boolean  'deleted',         default: false
       t.integer  'attachable_id'
       t.string   'attachable_type'
       t.string   'asset_file_name'
@@ -103,7 +101,6 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'grade'
       t.string   'homeroom'
       t.integer  'faculty_id'
-      t.boolean  'deleted',     default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
@@ -118,7 +115,6 @@ class GakuCore < ActiveRecord::Migration
       t.text     'details'
       t.boolean  'primary',       default: false
       t.boolean  'emergency',     default: false
-      t.boolean  'deleted',       default: false
       t.integer  'contactable_id'
       t.string   'contactable_type'
       t.integer  'contact_type_id'
@@ -148,7 +144,6 @@ class GakuCore < ActiveRecord::Migration
 
     create_table 'gaku_course_groups' do |t|
       t.string   'name'
-      t.boolean  'deleted', default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end
@@ -159,7 +154,6 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'faculty_id'
       t.integer  'syllabus_id'
       t.integer  'class_group_id'
-      t.boolean  'deleted',       default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count',    default: 0
@@ -217,7 +211,6 @@ class GakuCore < ActiveRecord::Migration
       t.float    'weight'
       t.boolean  'use_weighting',     default: false
       t.boolean  'standalone',     default: false
-      t.boolean  'deleted',        default: false
       t.boolean  'has_entry_numbers', default: false
       t.integer  'grading_method_id'
       t.datetime 'created_at'
@@ -243,7 +236,6 @@ class GakuCore < ActiveRecord::Migration
 
     create_table 'gaku_extracurricular_activities' do |t|
       t.string   'name'
-      t.boolean  'deleted',        default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end
@@ -302,7 +294,6 @@ class GakuCore < ActiveRecord::Migration
       t.boolean  'gender'
       t.date     'birth_date'
       t.string   'relationship'
-      t.boolean  'deleted',           default: false
       t.integer  'user_id'
       t.datetime 'created_at'
       t.datetime 'updated_at'
@@ -545,7 +536,6 @@ class GakuCore < ActiveRecord::Migration
       t.string   'student_id_number'
       t.string   'student_foreign_id_number'
       t.string   'national_registration_number'
-      t.boolean  'deleted',                   default: false
       t.string   'enrollment_status_code'
       t.string   'picture_file_name'
       t.string   'picture_content_type'
@@ -573,7 +563,6 @@ class GakuCore < ActiveRecord::Migration
       t.text     'description'
       t.integer  'credits'
       t.integer  'hours'
-      t.boolean  'deleted',                   default: false
       t.datetime 'created_at'
       t.datetime 'updated_at'
       t.integer  'notes_count', default: 0
@@ -590,7 +579,6 @@ class GakuCore < ActiveRecord::Migration
       t.string   'surname_reading',      default: ''
       t.boolean  'gender'
       t.date     'birth_date'
-      t.boolean  'deleted',           default: false
       t.string   'picture_file_name'
       t.string   'picture_content_type'
       t.integer  'picture_file_size'
@@ -645,46 +633,6 @@ class GakuCore < ActiveRecord::Migration
     add_index 'gaku_users', ['reset_password_token'], name: 'index_gaku_users_on_reset_password_token', unique: true, using: :btree
     add_index 'gaku_users', ['username'], name: 'index_gaku_users_on_username', unique: true, using: :btree
 
-    create_table 'gaku_versioning_address_versions' do |t|
-      t.string   'item_type',          null: false
-      t.integer  'item_id',            null: false
-      t.string   'event',              null: false
-      t.string   'whodunnit'
-      t.text     'object'
-      t.text     'object_changes'
-      t.string   'join_model'
-      t.integer  'joined_resource_id'
-      t.datetime 'created_at'
-    end
-
-    add_index 'gaku_versioning_address_versions', ['item_type', 'item_id'], name: 'index_gaku_versioning_address_versions_on_item_fields', using: :btree
-
-    create_table 'gaku_versioning_contact_versions' do |t|
-      t.string   'item_type',          null: false
-      t.integer  'item_id',            null: false
-      t.string   'event',              null: false
-      t.string   'whodunnit'
-      t.text     'object'
-      t.text     'object_changes'
-      t.string   'join_model'
-      t.integer  'joined_resource_id'
-      t.datetime 'created_at'
-    end
-
-    add_index 'gaku_versioning_contact_versions', ['item_type', 'item_id'], name: 'index_gaku_versioning_contact_versions_on_item_fields', using: :btree
-
-    create_table 'gaku_versioning_student_versions' do |t|
-      t.string   'item_type',      null: false
-      t.integer  'item_id',        null: false
-      t.string   'event',          null: false
-      t.string   'whodunnit'
-      t.text     'object'
-      t.text     'object_changes'
-      t.text     'human_changes'
-      t.datetime 'created_at'
-    end
-
-    add_index 'gaku_versioning_student_versions', ['item_type', 'item_id'], name: 'index_gaku_versioning_student_versions_on_item_fields', using: :btree
 
   end
 end

@@ -11,4 +11,4 @@ td = address.address2
   - if can_edit?
     td
       = ajax_link_to_edit [:edit, target].flatten
-      = ajax_soft_delete [:soft_delete, target].flatten
+      = render 'gaku/addresses/delete_link', target: target

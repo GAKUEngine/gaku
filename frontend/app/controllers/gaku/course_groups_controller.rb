@@ -3,22 +3,12 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    respond_to :js,   only: %i( new create edit update destroy recovery )
-    respond_to :html, only: %i( index edit update soft_delete )
+    # respond_to :js,   only: %i( new create edit update destroy recovery )
+    # respond_to :html, only: %i( index edit update soft_delete )
+    respond_to :html, :js
 
-    before_action :set_unscoped_course_group, only: %i( destroy recovery )
-    before_action :set_course_group,          only: %i( edit show update soft_delete )
+    before_action :set_course_group,          only: %i( edit show update destroy )
     before_action :set_courses
-
-    def recovery
-      @course_group.recover
-      respond_with @course_group
-    end
-
-    def soft_delete
-      @course_group.soft_delete
-      respond_with @course_group, location: course_groups_path
-    end
 
     def destroy
       @course_group.destroy
@@ -71,10 +61,6 @@ module Gaku
       set_notable
     end
 
-    def set_unscoped_course_group
-      @course_group = CourseGroup.unscoped.find(params[:id])
-      set_notable
-    end
 
     def set_courses
       @courses = Course.all

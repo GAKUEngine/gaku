@@ -7,4 +7,4 @@ td = number_to_human_size attachment.asset_file_size
   td
     = link_to_download [:download, attachment], id: 'exam-portion-attachment-download'
     = ajax_link_to_edit [:edit, attachment], id: 'exam-portion-attachment-edit'
-    = ajax_soft_delete [:soft_delete, attachment], id: 'exam-portion-attachment-delete'
+    = render 'gaku/shared/delete_link', target: attachment

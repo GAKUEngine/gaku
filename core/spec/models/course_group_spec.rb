@@ -2,10 +2,6 @@ require 'spec_helper_models'
 
 describe Gaku::CourseGroup do
 
-  describe 'concerns' do
-    it_behaves_like 'thrashable'
-  end
-
   describe 'associations' do
     it { should have_many :course_group_enrollments }
     it { should have_many(:courses).through(:course_group_enrollments) }

@@ -1,13 +1,12 @@
 module Gaku
   class ExamsController < GakuController
 
+    include Gaku::Grading::Calculations
+
     respond_to :html, :js, :json
     respond_to :xls, only: :export
 
-    include Gaku::Grading::Calculations
-
-    before_action :set_exam,    only: %i( show edit update soft_delete )
-    before_action :set_unscoped_exam,  only: %i( destroy recovery )
+    before_action :set_exam,    only: %i( show edit update destroy )
     before_action :load_data, only: %i( new edit )
 
     def index
@@ -56,16 +55,6 @@ module Gaku
       @exam.destroy
       set_count
       respond_with @exam
-    end
-
-    def recovery
-      @exam.recover
-      respond_with @exam
-    end
-
-    def soft_delete
-      @exam.soft_delete
-      respond_with @exam, location: exams_path
     end
 
     def export
@@ -139,11 +128,6 @@ module Gaku
 
     def set_exam
       @exam = Exam.find(params[:id])
-      set_notable
-    end
-
-    def set_unscoped_exam
-      @exam = Exam.unscoped.find(params[:id])
       set_notable
     end
 

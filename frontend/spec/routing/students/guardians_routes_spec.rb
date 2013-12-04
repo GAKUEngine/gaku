@@ -6,24 +6,6 @@ describe Gaku::Students::GuardiansController do
 
   describe 'member' do
 
-    it 'routes to #soft_delete' do
-      expect(patch: '/students/1/guardians/1/soft_delete').to route_to(
-        controller: 'gaku/students/guardians',
-        action: 'soft_delete',
-        student_id: '1',
-        id: '1'
-      )
-    end
-
-    it 'routes to #recovery' do
-      expect(patch: '/students/1/guardians/1/recovery').to route_to(
-        controller: 'gaku/students/guardians',
-        action: 'recovery',
-        student_id: '1',
-        id: '1'
-      )
-    end
-
     it 'routes to #edit' do
       expect(get: '/students/1/guardians/1/edit').to route_to(
         controller: 'gaku/students/guardians',

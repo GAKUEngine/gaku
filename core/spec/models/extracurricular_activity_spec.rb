@@ -2,10 +2,6 @@ require 'spec_helper_models'
 
 describe Gaku::ExtracurricularActivity do
 
-  describe 'concerns' do
-    it_behaves_like 'thrashable'
-  end
-
   describe 'associations' do
     it { should have_many :enrollments }
     it { should have_many(:students).through(:enrollments) }

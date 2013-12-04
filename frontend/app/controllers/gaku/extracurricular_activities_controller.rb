@@ -3,25 +3,11 @@ module Gaku
 
     include StudentChooserController
 
-    respond_to :js,   only: %i( new create destroy recovery student_chooser )
-    respond_to :html, only: %i( index edit update show show_deleted soft_delete )
+    # respond_to :js,   only: %i( new create destroy recovery student_chooser )
+    # respond_to :html, only: %i( index edit update show show_deleted soft_delete )
+    respond_to :html, :js
 
-    before_action :set_extracurricular_activity, only: %i( edit show update student_chooser soft_delete )
-    before_action :set_unscoped_extracurricular_activity, only: %i( show_deleted destroy recovery )
-
-    def recovery
-      @extracurricular_activity.recover
-      respond_with @extracurricular_activity
-    end
-
-    def soft_delete
-      @extracurricular_activity.soft_delete
-      respond_with @extracurricular_activity, location: extracurricular_activities_path
-    end
-
-    def show_deleted
-      render :show
-    end
+    before_action :set_extracurricular_activity, only: %i( edit show update student_chooser destroy )
 
     def destroy
       @extracurricular_activity.destroy
@@ -72,10 +58,6 @@ module Gaku
 
     def set_extracurricular_activity
       @extracurricular_activity = ExtracurricularActivity.find(params[:id])
-    end
-
-    def set_unscoped_extracurricular_activity
-      @extracurricular_activity = ExtracurricularActivity.unscoped.find(params[:id])
     end
 
     def set_count

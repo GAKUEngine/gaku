@@ -16,7 +16,7 @@ require 'gaku/testing/auth_helpers'
 require 'gaku/core/url_helpers'
 
 
-require 'gaku/testing/support/features'
+#require 'gaku/testing/support/features'
 
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 

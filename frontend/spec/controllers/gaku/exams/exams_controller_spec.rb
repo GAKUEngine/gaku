@@ -22,26 +22,6 @@ describe Gaku::ExamsController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'PATCH #soft_delete' do
-        let(:patch_soft_delete) { gaku_patch :soft_delete, id: exam }
-
-        it 'redirects' do
-          patch_soft_delete
-          should respond_with(302)
-        end
-
-        it 'assigns  @exam' do
-          patch_soft_delete
-          expect(assigns(:exam)).to eq exam
-        end
-
-        it 'updates :deleted attribute' do
-          expect do
-            patch_soft_delete
-            exam.reload
-          end.to change(exam, :deleted)
-        end
-      end
 
       describe 'PATCH #update' do
         context 'with valid attributes' do
@@ -167,32 +147,6 @@ describe Gaku::ExamsController do
         end
       end
 
-      describe 'XHR GET #recovery' do
-        let(:js_patch_recovery) { gaku_js_patch :recovery, id: exam }
-
-        it 'is successfull' do
-          js_patch_recovery
-          should respond_with(200)
-        end
-
-        it 'assigns  @exam' do
-          js_patch_recovery
-          expect(assigns(:exam)).to eq exam
-        end
-
-        it 'renders :recovery' do
-          js_patch_recovery
-          should render_template :recovery
-       end
-
-        it 'updates :deleted attribute' do
-          exam.soft_delete
-          expect do
-            js_patch_recovery
-            exam.reload
-          end.to change(exam, :deleted)
-        end
-      end
 
     end
   end

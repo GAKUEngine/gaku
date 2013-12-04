@@ -8,7 +8,6 @@ describe Gaku::Student do
     it_behaves_like 'notable'
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
-    it_behaves_like 'thrashable'
   end
 
   describe 'associations' do
@@ -41,10 +40,6 @@ describe Gaku::Student do
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
 
-  end
-
-  describe 'versioning' do
-    it { should be_versioned }
   end
 
 

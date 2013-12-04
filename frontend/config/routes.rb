@@ -1,7 +1,12 @@
 Gaku::Core::Engine.add_routes do
 
+  concern :soft_delete do
+    patch :recovery,    on: :member
+    patch :soft_delete, on: :member
+  end
+
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index soft )
+    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index )
   end
 
   concern :contacts do
@@ -10,11 +15,6 @@ Gaku::Core::Engine.add_routes do
 
   concern :notes do
     resources :notes
-  end
-
-  concern :soft_delete do
-    patch :recovery,    on: :member
-    patch :soft_delete, on: :member
   end
 
   concern(:primary)         { patch :make_primary, on: :member }
@@ -32,19 +32,19 @@ Gaku::Core::Engine.add_routes do
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
-  resources :extracurricular_activities, concerns: %i( student_chooser pagination soft_delete show_deleted ) do
+  resources :extracurricular_activities, concerns: %i( student_chooser pagination ) do
     resources :students,
       controller: 'extracurricular_activities/students',
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes soft_delete student_chooser ) do
+  resources :class_groups, concerns: %i( notes student_chooser ) do
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser soft_delete show_deleted ) do
+  resources :courses, concerns: %i( notes student_chooser ) do
     resources :semester_courses, controller: 'courses/semester_courses'
     resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
       post :enroll_class_group, on: :collection
@@ -72,15 +72,15 @@ Gaku::Core::Engine.add_routes do
   resources :course_enrollments,                   concerns: %i( enroll_students )
   resources :extracurricular_activity_enrollments, concerns: %i( enroll_students )
 
-  resources :syllabuses, concerns: %i( notes soft_delete show_deleted ) do
+  resources :syllabuses, concerns: %i( notes ) do
     resources :assignments,     controller: 'syllabuses/assignments'
     resources :exams,           controller: 'syllabuses/exams'
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes soft_delete show_deleted pagination )
+  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
-  resources :students, concerns: %i( addresses contacts notes soft_delete show_deleted pagination ) do
+  resources :students, concerns: %i( addresses contacts notes pagination ) do
     get :load_autocomplete_data, on: :collection
 
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
@@ -90,7 +90,7 @@ Gaku::Core::Engine.add_routes do
 
     resources :guardians, except: %i( index show ),
       controller: 'students/guardians',
-      concerns: %i( addresses contacts soft_delete )
+      concerns: %i( addresses contacts )
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
@@ -99,7 +99,7 @@ Gaku::Core::Engine.add_routes do
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes soft_delete ) do
+  resources :exams, concerns: %i( notes ) do
     put :create_exam_portion, on: :member
 
     resources :exam_scores
@@ -108,9 +108,9 @@ Gaku::Core::Engine.add_routes do
     end
   end
 
-  resources :attachments, concerns: %i( soft_delete download )
+  resources :attachments, concerns: %i( download )
 
-  resources :course_groups, concerns: %i( soft_delete ) do
+  resources :course_groups  do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
   end
 

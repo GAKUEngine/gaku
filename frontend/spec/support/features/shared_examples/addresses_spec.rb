@@ -76,11 +76,9 @@ shared_examples_for 'delete address' do
     has_content? address_field
 
     expect do
-      expect do
-        ensure_delete_is_working
-        flash_destroyed?
-      end.to change(@resource.addresses, :count).by(-1)
-    end.to change(@resource.addresses.deleted, :count).by(1)
+      ensure_delete_is_working
+      flash_destroyed?
+    end.to change(@resource.addresses, :count).by(-1)
 
     count? 'Addresses list(1)'
     has_no_content? address_field

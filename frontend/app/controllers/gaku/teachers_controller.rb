@@ -3,30 +3,16 @@ module Gaku
 
     decorates_assigned :teacher
 
-    respond_to :js,   only: %i( new create destroy recovery )
-    respond_to :html, only: %i( index edit update show show_deleted soft_delete )
+    #respond_to :js,   only: %i( new create destroy )
+    #respond_to :html, only: %i( index edit update show )
+    respond_to :html, :js
 
-    before_action :set_unscoped_teacher, only: %i( show_deleted destroy recovery )
-    before_action :set_teacher,          only: %i( edit show update soft_delete )
-
-    def recovery
-      @teacher.recover
-      respond_with @teacher
-    end
-
-    def soft_delete
-      @teacher.soft_delete
-      respond_with @teacher, location: teachers_path
-    end
+    before_action :set_teacher,          only: %i( edit show update destroy )
 
     def destroy
       @teacher.destroy
       set_count
       respond_with @teacher
-    end
-
-    def show_deleted
-      render :show
     end
 
     def new
@@ -74,11 +60,6 @@ module Gaku
 
     def set_teacher
       @teacher = Teacher.find(params[:id])
-      set_notable
-    end
-
-    def set_unscoped_teacher
-      @teacher = Teacher.unscoped.find(params[:id])
       set_notable
     end
 

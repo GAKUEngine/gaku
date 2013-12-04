@@ -1,6 +1,22 @@
 Gaku::Core::Engine.add_routes  do
 
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
+  concern :soft_delete do
+    patch :recovery,    on: :member
+    patch :soft_delete, on: :member
+  end
+
+  resources :attachments, concerns: :soft_delete
+  resources :teachers, concerns: :soft_delete
+  resources :students, concerns: :soft_delete do
+    resources :guardians, controller: 'students/guardians', concerns: :soft_delete
+  end
+  resources :extracurricular_activities, concerns: :soft_delete
+  resources :class_groups, concerns: :soft_delete
+  resources :courses, concerns: :soft_delete
+  resources :course_groups, concerns: :soft_delete
+  resources :exams, concerns: :soft_delete
+  resources :syllabuses, concerns: :soft_delete
 
   namespace :admin do
 

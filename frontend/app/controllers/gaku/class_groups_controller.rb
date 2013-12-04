@@ -3,24 +3,16 @@ module Gaku
 
     include StudentChooserController
 
-    respond_to :js,   only: %i( new create destroy recovery )
-    respond_to :html, only: %i( index edit update soft_delete )
+    #respond_to :js,   only: %i( new create destroy recovery )
+    #respond_to :html, only: %i( index edit update soft_delete )
+
+    respond_to :html, :js
 
     helper_method :sort_column, :sort_direction
 
     before_action :set_courses
-    before_action :set_unscoped_class_group,  only: %i( destroy recovery )
-    before_action :set_class_group,       only: %i( edit update soft_delete student_chooser )
+    before_action :set_class_group,       only: %i( edit update destroy student_chooser )
 
-    def recovery
-      @class_group.recover
-      respond_with @class_group
-    end
-
-    def soft_delete
-      @class_group.soft_delete
-      respond_with @class_group, location: class_groups_path
-    end
 
     def destroy
       @class_group.destroy
@@ -67,11 +59,6 @@ module Gaku
 
     def set_class_group
       @class_group = ClassGroup.find(params[:id])
-      set_notable
-    end
-
-    def set_unscoped_class_group
-      @class_group = ClassGroup.unscoped.find(params[:id])
       set_notable
     end
 

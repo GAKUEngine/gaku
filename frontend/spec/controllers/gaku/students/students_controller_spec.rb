@@ -151,57 +151,9 @@ describe Gaku::StudentsController do
       end
     end
 
-    describe 'PATCH #soft_delete' do
-      let(:patch_soft_delete) { gaku_patch :soft_delete, id: student }
-
-      it 'redirects' do
-        patch_soft_delete
-        should respond_with(302)
-      end
-
-      it 'assigns  @student' do
-        patch_soft_delete
-        expect(assigns(:student)).to eq student
-      end
-
-      it 'updates :deleted attribute' do
-        expect do
-          patch_soft_delete
-          student.reload
-        end.to change(student, :deleted)
-      end
-    end
-
   end
 
   context 'JS' do
-
-    describe 'JS PATCH #recovery' do
-      let(:js_patch_recovery) { gaku_js_patch :recovery, id: student }
-
-      it 'is successfull' do
-        js_patch_recovery
-        should respond_with(200)
-      end
-
-      it 'assigns  @student' do
-        js_patch_recovery
-        expect(assigns(:student)).to eq student
-      end
-
-      it 'renders :recovery' do
-        js_patch_recovery
-        should render_template :recovery
-     end
-
-      it 'updates :deleted attribute' do
-        student.soft_delete
-        expect do
-          js_patch_recovery
-          student.reload
-        end.to change(student, :deleted)
-      end
-    end
 
     describe 'JS GET #new' do
       before { gaku_js_get :new }

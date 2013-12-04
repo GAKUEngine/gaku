@@ -7,7 +7,6 @@ FactoryGirl.define do
     asset_file_name { 'avatar.jpg' }
     asset_content_type { 'image/jpg' }
     #asset { fixture_file_upload(Rails.root + '../support/120x120.jpg', 'image/jpg') }
-    deleted false
   end
 
   trait :for_exam_portion do

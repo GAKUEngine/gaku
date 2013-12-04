@@ -3,7 +3,7 @@ shared_examples 'upload avatar' do
   it 'uploads', js:true do
     sleep 0.5
     click '#upload-picture-link'
-    absolute_path = Rails.root + '../../core/support/120x120.jpg'
+    absolute_path = Rails.root + '../support/120x120.jpg'
     attach_file @file_name, absolute_path
     click_button 'Upload'
     flash_updated?

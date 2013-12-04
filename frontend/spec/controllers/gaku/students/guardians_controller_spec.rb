@@ -50,31 +50,6 @@ describe Gaku::Students::GuardiansController do
         end
       end
 
-      describe 'PATCH #soft_delete' do
-        let(:patch_soft_delete) { gaku_patch :soft_delete, id: guardian, student_id: student }
-
-        it 'redirects' do
-          patch_soft_delete
-          should respond_with(302)
-        end
-
-        it('redirects') do
-          patch_soft_delete
-          redirect_to? "/students/#{student.id}/edit"
-        end
-
-        it 'assigns  @guardian' do
-          patch_soft_delete
-          expect(assigns(:guardian)).to eq guardian
-        end
-
-        it 'updates :deleted attribute' do
-          expect do
-            patch_soft_delete
-            guardian.reload
-          end.to change(guardian, :deleted)
-        end
-      end
     end
 
     context 'JS' do
@@ -132,33 +107,6 @@ describe Gaku::Students::GuardiansController do
         it 'sets flash' do
           js_delete
           flash_destroyed?
-        end
-      end
-
-      describe 'JS PATCH #recovery' do
-        let(:js_patch_recovery) { gaku_js_patch :recovery, id: guardian, student_id: student }
-
-        it 'is successfull' do
-          js_patch_recovery
-          should respond_with(200)
-        end
-
-        it 'assigns  @guardian' do
-          js_patch_recovery
-          expect(assigns(:guardian)).to eq guardian
-        end
-
-        it 'renders :recovery' do
-          js_patch_recovery
-          should render_template :recovery
-       end
-
-        it 'updates :deleted attribute' do
-          guardian.soft_delete
-          expect do
-            js_patch_recovery
-            guardian.reload
-          end.to change(guardian, :deleted)
         end
       end
 

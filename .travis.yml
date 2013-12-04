@@ -15,6 +15,7 @@ env:
   - TEST_SUITE=spec/controllers spec/routing GEM=admin DB=postgres
   - SELENIUM=1 TEST_SUITE=spec/features GEM=frontend DB=postgres
   - SELENIUM=1 TEST_SUITE=spec/features GEM=admin DB=postgres
+  - SELENIUM=1 GEM=archive DB=postgres
 
 before_install:
   #- gem install bundler --pre

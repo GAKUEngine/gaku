@@ -60,26 +60,6 @@ describe Gaku::ExtracurricularActivitiesController do
         end
       end
 
-      describe 'PATCH #soft_delete' do
-        let(:patch_soft_delete) { gaku_patch :soft_delete, id: extracurricular_activity }
-
-        it 'redirects' do
-          patch_soft_delete
-          should respond_with(302)
-        end
-
-        it 'assigns  @extracurricular_activity' do
-          patch_soft_delete
-          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
-        end
-
-        it 'updates :deleted attribute' do
-          expect do
-            patch_soft_delete
-            extracurricular_activity.reload
-          end.to change(extracurricular_activity, :deleted)
-        end
-      end
     end
 
     context 'js' do
@@ -135,33 +115,6 @@ describe Gaku::ExtracurricularActivitiesController do
             invalid_js_create
             expect(assigns(:count)).to eq 0
           end
-        end
-      end
-
-      describe 'XHR GET #recovery' do
-        let(:js_patch_recovery) { gaku_js_patch :recovery, id: extracurricular_activity }
-
-        it 'is successfull' do
-          js_patch_recovery
-          should respond_with(200)
-        end
-
-        it 'assigns  @extracurricular_activity' do
-          js_patch_recovery
-          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
-        end
-
-        it 'renders :recovery' do
-          js_patch_recovery
-          should render_template :recovery
-       end
-
-        it 'updates :deleted attribute' do
-          extracurricular_activity.soft_delete
-          expect do
-            js_patch_recovery
-            extracurricular_activity.reload
-          end.to change(extracurricular_activity, :deleted)
         end
       end
 

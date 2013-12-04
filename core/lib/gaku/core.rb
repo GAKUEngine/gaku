@@ -7,7 +7,6 @@ require 'ransack'
 require 'devise'
 require 'cancan'
 require 'kaminari'
-require 'paper_trail'
 require 'globalize'
 require 'draper'
 

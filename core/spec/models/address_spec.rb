@@ -7,10 +7,6 @@ describe Gaku::Address do
   let(:student) { create(:student, primary_address: '') }
   let(:address) { create(:address, country: country, addressable: student) }
 
-  describe 'versioning' do
-    it { should be_versioned }
-  end
-
   describe 'relations' do
     it { should belong_to :country }
     it { should belong_to :state }
@@ -28,15 +24,6 @@ describe Gaku::Address do
       built_address = build(:address)
       built_address.should_receive(:ensure_first_primary)
       built_address.save!
-    end
-  end
-
-  describe '.deleted' do
-    let!(:active_address) { create(:address, deleted: false) }
-    let!(:deleted_address) { create(:address, deleted: true) }
-
-    it 'returns records that are not deleted' do
-      expect(Gaku::Address.deleted).to be == [deleted_address]
     end
   end
 
@@ -98,29 +85,6 @@ describe Gaku::Address do
     end
   end
 
-  describe '#soft_delete' do
-    it 'calls #decrement_count' do
-      address.should_receive(:decrement_count)
-      address.soft_delete
-    end
-
-    it 'sets deleted: true' do
-      address.soft_delete
-      expect(address.deleted).to eq true
-    end
-  end
-
-  describe '#recover' do
-    it 'calls #increment_count' do
-      address.should_receive(:increment_count)
-      address.recover
-    end
-
-    it 'sets deleted: false' do
-      address.recover
-      expect(address.deleted).to eq false
-    end
-  end
 
   describe '.after_destroy' do
     describe '#reset_counter_cache' do

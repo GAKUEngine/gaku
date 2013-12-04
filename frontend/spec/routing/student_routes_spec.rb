@@ -5,29 +5,6 @@ describe Gaku::StudentsController do
   routes { Gaku::Core::Engine.routes }
 
   describe 'member' do
-    it 'routes to #soft_delete' do
-      expect(patch: '/students/1/soft_delete').to route_to(
-        controller: 'gaku/students',
-        action: 'soft_delete',
-        id: '1'
-      )
-    end
-
-    it 'routes to #recovery' do
-      expect(patch: '/students/1/recovery').to route_to(
-        controller: 'gaku/students',
-        action: 'recovery',
-        id: '1'
-      )
-    end
-
-    it 'routes to #show_deleted' do
-      expect(get: '/students/1/show_deleted').to route_to(
-        controller: 'gaku/students',
-        action: 'show_deleted',
-        id: '1'
-      )
-    end
 
     it 'routes to #show' do
       expect(get: '/students/1').to route_to(

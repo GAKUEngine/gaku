@@ -5,15 +5,15 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    respond_to :js,   only: %i( new create index destroy recovery )
-    respond_to :html, only: %i( index edit show show_deleted soft_delete update )
+    # respond_to :js,   only: %i( new create index destroy recovery )
+    # respond_to :html, only: %i( index edit show show_deleted soft_delete update )
+    respond_to :html, :js
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
     #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
-    before_action :set_student,           only: %i( show edit update soft_delete )
-    before_action :set_unscoped_student,  only: %i( show_deleted destroy recovery )
+    before_action :set_student,           only: %i( show edit update destroy )
 
     def new
       @student = Student.new
@@ -61,25 +61,10 @@ module Gaku
       end
     end
 
-    def show_deleted
-      render :show
-    end
-
     def destroy
       @student.destroy
       @count = Student.count
       respond_with @student
-    end
-
-    def recovery
-      @student.recover
-      respond_with @student
-    end
-
-    def soft_delete
-      @student.soft_delete
-      @count = Student.count
-      respond_with @student, location: students_path
     end
 
     def update
@@ -146,11 +131,6 @@ module Gaku
 
     def set_student
       @student ||= Student.includes(includes).find(params[:id])
-      set_notable
-    end
-
-    def set_unscoped_student
-      @student ||= Student.includes(includes).unscoped.find(params[:id])
       set_notable
     end
 

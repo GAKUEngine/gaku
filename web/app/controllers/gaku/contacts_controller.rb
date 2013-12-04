@@ -8,8 +8,7 @@ module Gaku
     respond_to :js
 
     before_action :set_contact_types,    only: %i( new edit )
-    before_action :set_unscoped_contact, only: %i( recovery destroy )
-    before_action :set_contact,          only: %i( edit update soft_delete make_primary )
+    before_action :set_contact,          only: %i( edit update destroy make_primary )
     before_action :set_polymorphic_resource
 
     def new
@@ -40,18 +39,6 @@ module Gaku
       respond_with @contact
     end
 
-    def recovery
-      @contact.recover
-      respond_with @contact
-    end
-
-    def soft_delete
-      @primary_contact = true if @contact.primary?
-      @contact.soft_delete
-      @polymorphic_resource.contacts.first.try(:make_primary) if @contact.primary?
-      set_count
-      respond_with @contact
-    end
 
     def make_primary
       @contact.make_primary
@@ -59,10 +46,6 @@ module Gaku
     end
 
     private
-
-    def set_unscoped_contact
-      @contact = Contact.unscoped.find(params[:id])
-    end
 
     def set_contact
       @contact = Contact.find(params[:id])
@@ -73,7 +56,7 @@ module Gaku
     end
 
     def attributes
-      %i(data details contact_type_id primary emergency)
+      %i( data details contact_type_id primary emergency )
     end
 
     def resource_klass

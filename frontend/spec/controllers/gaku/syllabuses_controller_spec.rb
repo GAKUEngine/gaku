@@ -65,26 +65,6 @@ describe Gaku::SyllabusesController do
         end
       end
 
-      describe 'PATCH #soft_delete' do
-        let(:patch_soft_delete) { gaku_patch :soft_delete, id: syllabus }
-
-        it 'redirects' do
-          patch_soft_delete
-          should respond_with(302)
-        end
-
-        it 'assigns  @syllabus' do
-          patch_soft_delete
-          expect(assigns(:syllabus)).to eq syllabus
-        end
-
-        it 'updates :deleted attribute' do
-          expect do
-            patch_soft_delete
-            syllabus.reload
-          end.to change(syllabus, :deleted)
-        end
-      end
     end
 
     context 'js' do
@@ -146,35 +126,6 @@ describe Gaku::SyllabusesController do
           end
         end
       end
-
-      describe 'JS PATCH #recovery' do
-        let(:js_patch_recovery) { gaku_js_patch :recovery, id: syllabus }
-
-        it 'is successfull' do
-          js_patch_recovery
-          should respond_with(200)
-        end
-
-        it 'assigns  @syllabus' do
-          js_patch_recovery
-          expect(assigns(:syllabus)).to eq syllabus
-        end
-
-        it 'renders :recovery' do
-          js_patch_recovery
-          should render_template :recovery
-       end
-
-        it 'updates :deleted attribute' do
-          syllabus.soft_delete
-          expect do
-            js_patch_recovery
-            syllabus.reload
-          end.to change(syllabus, :deleted)
-        end
-      end
-
-
 
       describe 'JS DELETE #destroy' do
         it 'deletes the syllabus' do
