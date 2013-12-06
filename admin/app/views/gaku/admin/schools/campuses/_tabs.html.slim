@@ -10,6 +10,6 @@
 
     .tab-content
       #addresses.tab-pane.active
-        = render 'gaku/admin/schools/campuses/addresses/addresses'
+        = render 'gaku/admin/schools/campuses/addresses/addresses', campus: campus
       #contacts.tab-pane
-        = render 'gaku/contacts/contacts', nested_resources: [:admin, school, campus]
+        = render 'gaku/admin/schools/campuses/contacts/contacts', campus: campus

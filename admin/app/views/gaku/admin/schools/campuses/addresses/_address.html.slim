@@ -1,6 +1,6 @@
 - unless address.nil?
   tr id="address-#{address.id}"
-    = render 'gaku/addresses/fields', address: address, target: [:admin, @school, @campus, address]
+    = render 'gaku/admin/schools/campuses/addresses/fields', address: address
     - if can_edit?
       td
         = ajax_link_to_edit [:edit, :admin, @school, @campus, address]

@@ -1,6 +1,6 @@
 require 'spec_helper_routing'
 
-describe Gaku::ContactsController do
+describe Gaku::Admin::Schools::Campuses::ContactsController  do
 
   routes { Gaku::Core::Engine.routes }
 

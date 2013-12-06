@@ -10,6 +10,7 @@ Gaku::Core::Engine.add_routes  do
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
 
+  resources :states, only: :index
 
   namespace :admin do
 
@@ -26,7 +27,7 @@ Gaku::Core::Engine.add_routes  do
         end
       end
       resources :campuses, controller: 'schools/campuses', except: :index do
-        resources :contacts, concerns: %i( soft_delete primary )
+        resources :contacts, controller: 'schools/campuses/contacts', except: %i( show index ), concerns: %i( soft_delete primary )
 
         resources :addresses, controller: 'schools/campuses/addresses', except: %i( show index )
       end
