@@ -65,7 +65,7 @@ describe 'Courses' do
         expect(course_with_semesters.code).to eq 'biology2013'
       end
 
-      it 'has validations', js: true do
+      xit 'has validations', js: true do
         fill_in 'course_code', with: ''
         has_validations?
       end
