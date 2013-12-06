@@ -1,12 +1,11 @@
 module Gaku
   class Students::GuardiansController < GakuController
 
-    respond_to :js,   only: %i( new create destroy recovery )
-    respond_to :html, only: %i( edit update soft_delete )
+    respond_to :js,   only: %i( new create )
+    respond_to :html, only: %i( edit update destroy )
 
     before_action :set_student
-    before_action :set_unscoped_guardian,  only: %i( destroy recovery )
-    before_action :set_guardian,           only: %i( show edit update soft_delete )
+    before_action :set_guardian, only: %i( show edit update destroy )
 
     def new
       @guardian = Guardian.new
@@ -31,7 +30,7 @@ module Gaku
     def destroy
       @guardian.destroy
       set_count
-      respond_with @guardian
+      respond_with @guardian, location: [:edit, @student ]
     end
 
     def recovery
@@ -61,10 +60,6 @@ module Gaku
 
     def set_guardian
       @guardian = Guardian.includes(contacts: :contact_type).find(params[:id]).decorate
-    end
-
-    def set_unscoped_guardian
-      @guardian = Guardian.unscoped.find(params[:id]).decorate
     end
 
     def set_count
