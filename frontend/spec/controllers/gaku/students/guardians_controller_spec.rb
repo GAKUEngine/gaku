@@ -11,6 +11,27 @@ describe Gaku::Students::GuardiansController do
 
     context 'HTML' do
 
+      describe 'DELETE #destroy' do
+        let(:delete) { gaku_delete :destroy, id: guardian, student_id: student.id }
+
+        it 'deletes the guardian' do
+          guardian
+          expect do
+            delete
+          end.to change(Gaku::Guardian, :count).by(-1)
+        end
+
+        it 'decrements @count' do
+          delete
+          expect(assigns(:count)).to eq 0
+        end
+
+        it 'sets flash' do
+          delete
+          flash_destroyed?
+        end
+      end
+
       describe 'GET #edit' do
         before { gaku_get :edit, id: guardian, student_id: student.id }
 
@@ -85,28 +106,6 @@ describe Gaku::Students::GuardiansController do
             valid_js_create
             expect(assigns(:count)).to eq 1
           end
-        end
-      end
-
-
-      describe 'JS DELETE #destroy' do
-        let(:js_delete) { gaku_js_delete :destroy, id: guardian, student_id: student.id }
-
-        it 'deletes the guardian' do
-          guardian
-          expect do
-            js_delete
-          end.to change(Gaku::Guardian, :count).by(-1)
-        end
-
-        it 'decrements @count' do
-          js_delete
-          expect(assigns(:count)).to eq 0
-        end
-
-        it 'sets flash' do
-          js_delete
-          flash_destroyed?
         end
       end
 
