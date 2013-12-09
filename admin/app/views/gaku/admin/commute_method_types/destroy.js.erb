@@ -1,2 +1,2 @@
-$('.admin-commute-method-types-count').html('<%= print_count(@count, t_commute_method_type_list) %>');
+$('.admin-commute-method-types-count').html("<%= print_count(@count, t(:'commute_method_type.list')) %>");
 showNotice("<%= render_flash %>");

@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-enrollment-statuses-count' do
-      = print_count @count, t_enrollment_status_list
+      = print_count @count, t(:'enrollment_status.list')
   .pull-right
     = ajax_link_to_new t(:'enrollment_status.add'), [:new, :admin, :enrollment_status], id: 'new-admin-enrollment-status-link'
 

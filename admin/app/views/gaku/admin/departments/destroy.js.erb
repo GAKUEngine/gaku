@@ -1,2 +1,2 @@
-$('.admin-departments-count').html('<%= print_count(@count, t_department_list) %>');
+$('.admin-departments-count').html("<%= print_count(@count, t(:'department.list')) %>");
 showNotice("<%= render_flash %>");

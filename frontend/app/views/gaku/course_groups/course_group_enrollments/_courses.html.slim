@@ -2,7 +2,7 @@
   #new-course-group-enrollment.d-none
   .pull-left
     = count_div 'course-group-enrollments-count' do
-     = print_count @course_group.course_group_enrollments.count, t_course_list
+     = print_count @course_group.course_group_enrollments.count, t(:'course.list')
   .pull-right
     = ajax_link_to_new t(:'course.add'), [:new, @course_group, :course_group_enrollment], id: 'new-course-group-enrollment-link'
 

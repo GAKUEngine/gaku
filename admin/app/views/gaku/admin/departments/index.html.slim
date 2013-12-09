@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-departments-count' do
-      = print_count @count, t_department_list
+      = print_count @count, t(:'department.list')
   .pull-right
     = ajax_link_to_new t(:'department.add'), [:new, :admin, :department], id: 'new-admin-department-link'
 

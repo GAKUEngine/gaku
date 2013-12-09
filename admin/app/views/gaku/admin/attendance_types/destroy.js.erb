@@ -1,2 +1,2 @@
-$('.admin-attendance-types-count').html('<%= print_count(@count, t_attendance_type_list) %>');
+$('.admin-attendance-types-count').html("<%= print_count(@count, t(:'attendance_type.list')) %>");
 showNotice("<%= render_flash %>");

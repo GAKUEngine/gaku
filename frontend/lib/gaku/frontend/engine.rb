@@ -9,9 +9,9 @@ module Gaku
         g.test_framework :rspec, view_specs: false
       end
 
-      # config.to_prepare do
-      #   GakuController.helper(GakuHelper)
-      # end
+      config.to_prepare do
+        Gaku::GakuController.helper(Gaku::FrontendHelper)
+      end
 
 
       def self.activate

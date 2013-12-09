@@ -3,5 +3,5 @@ $('#admin-roles-index tbody').append('<%= j render("role", {role: @role}) %>');
 $('#new-admin-role').slide();
 $('#new-admin-role-link').show();
 
-$('.admin-roles-count').html('<%= print_count(@count, t_role_list) %>');
+$('.admin-roles-count').html("<%= print_count(@count, t(:'role.list')) %>");
 showNotice("<%= render_flash %>");

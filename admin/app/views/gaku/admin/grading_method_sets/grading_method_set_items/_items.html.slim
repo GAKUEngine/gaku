@@ -2,7 +2,7 @@
   #new-admin-grading-method-set-grading-method-set-item.d-none
   .pull-left
     = count_div 'admin-grading-method-set-grading-method-set-items-count' do
-      = print_count @count, t_grading_method_list
+      = print_count @count, t(:'grading_method.list')
   .pull-right
     = ajax_link_to_new t(:'grading_method.add'), [:new, :admin, @grading_method_set, :grading_method_set_item], id: 'new-admin-grading-method-set-grading-method-set-item-link'
 

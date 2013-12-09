@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-contact-types-count' do
-      = print_count @count, t_contact_type_list
+      = print_count @count, t(:'contact_type.list')
   .pull-right
     = ajax_link_to_new t(:'contact_type.add'), [:new, :admin, :contact_type], id: 'new-admin-contact-type-link'
 

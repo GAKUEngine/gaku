@@ -2,7 +2,7 @@
   = index_header do
     .pull-left
       = count_div 'class-group-enrollments-count' do
-        = print_count @class_group.enrollments.count, t_student_list
+        = print_count @class_group.enrollments.count, t(:'student.list')
     .pull-right
       = ajax_link_to_new t(:'student.add'), student_chooser_class_group_path(class_group_id: @class_group.id), id: 'new-class-group-student-link'
 

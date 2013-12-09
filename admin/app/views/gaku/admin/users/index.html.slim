@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-users-count' do
-      = print_count @count, t_user_list
+      = print_count @count, t(:'user.list')
   .pull-right
     = ajax_link_to_new t(:'user.add'), [:new, :admin, :user], id: 'new-admin-user-link'
 

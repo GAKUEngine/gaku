@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-grading-methods-count' do
-      = print_count @count, t_grading_method_list
+      = print_count @count, t(:'grading_method.list')
   .pull-right
     = ajax_link_to_new t(:'grading_method.add'), [:new, :admin, :grading_method], id: 'new-admin-grading-method-link'
 

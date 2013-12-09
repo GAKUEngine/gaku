@@ -3,7 +3,7 @@
     ul.nav.nav-tabs.nav-justified
       li.active
         a#exam-exam-portion-attachments-tab-link data-toggle="tab" href="#exam-portion-attachments"
-          = print_count @exam_portion.attachments.count, t_attachment_plural
+          = print_count @exam_portion.attachments.count, t(:'attachment.plural')
 
     .tab-content
       #exam-exam-portion-attachments.tab-pane.active

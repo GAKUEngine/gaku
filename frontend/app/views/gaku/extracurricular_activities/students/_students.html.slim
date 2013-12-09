@@ -1,7 +1,7 @@
 = index_header do
   .pull-left
     = count_div 'extracurricular-activity-enrollments-count' do
-      = print_count @extracurricular_activity.enrollments.count, t_student_list
+      = print_count @extracurricular_activity.enrollments.count, t(:'student.list')
   .pull-right
     = ajax_link_to_new t(:'student.add'), student_chooser_extracurricular_activity_path(extracurricular_activity_id: @extracurricular_activity.id), id: 'new-extracurricular-activity-student-link'
 

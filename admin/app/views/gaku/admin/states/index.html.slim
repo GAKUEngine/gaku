@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-states-count' do
-      = print_count @count, t_state_list
+      = print_count @count, t(:'address.state.list')
   .pull-right
     = ajax_link_to_new t(:'address.state.add'), [:new, :admin, :state], id: 'new-admin-state-link'
 

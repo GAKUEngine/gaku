@@ -8,5 +8,5 @@ $('#new-<%= @polymorphic_resource_name %> form')[0].reset();
 $('#new-<%= @polymorphic_resource_name %>-link').show();
 
 
-$('.<%= @polymorphic_resource_name.pluralize %>-count').html('<%= print_count(@count, t_address_list) %>');
-$("#<%= @polymorphic_resource_name.pluralize %>-tab-link").html("<%= print_count(@count, t_address_plural) %>");
+$('.<%= @polymorphic_resource_name.pluralize %>-count').html("<%= print_count(@count, t(:'address.list')) %>");
+$("#<%= @polymorphic_resource_name.pluralize %>-tab-link").html("<%= print_count(@count, t(:'address.plural')) %>");

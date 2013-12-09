@@ -4,4 +4,4 @@ $('#new-admin-grading-method-set-grading-method-set-item').slide();
 $('#new-admin-grading-method-set-grading-method-set-item-link').show();
 
 showNotice("<%= render_flash %>");
-$('.admin-grading-method-set-grading-method-set-items-count').html('<%= print_count(@count, t_grading_method_list) %>');
+$('.admin-grading-method-set-grading-method-set-items-count').html("<%= print_count(@count, t(:'grading_method.list')) %>");

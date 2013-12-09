@@ -1,7 +1,7 @@
 = content_for :index_header do
   .pull-left
     = count_div 'admin-templates-count' do
-      = print_count @count, t_template_list
+      = print_count @count, t(:'template.list')
   .pull-right
     = ajax_link_to_new t(:'template.add'), [:new, :admin, :template], id: 'new-admin-template-link'
 
