@@ -29,20 +29,24 @@ module Gaku
         @exams = @course.syllabus.exams.all
       end
       
-      # ここは二重ハッシュにしてるけど、実際はIDで回してるから二重配列でも良いかも。
+      # 試験の合計点を入れるハッシュ
       @student_total_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-      @student_total_weights = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
       
-      # 試験の平均点を入れるハッシュと0.0で初期化する設定
-      @exam_averages = Hash.new 0.0.freeze
-      @exam_weight_averages = Hash.new 0.0.freeze
+      # 試験の平均点を入れるハッシュ
+      @exam_averages = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
       # -------- }
       
       # set ExamPortionScores & calc for exams average -------- {
       @students.each do |student|
         @exams.each do |exam|
+          
+          # 素点用と得点用変数の初期化 --------
           @student_total_scores[:raw][student.id][exam.id] = 0.0
           @student_total_scores[student.id][exam.id] = 0.0
+          
+          @exam_averages[:raw][exam.id] = 0.0
+          @exam_averages[exam.id] = 0.0
+
           exam.exam_portions.each do |portion|
             seps = student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
             if seps.nil?
@@ -60,6 +64,7 @@ module Gaku
             end
           end
           # calc for average --------
+          @exam_averages[:raw][exam.id] += @student_total_scores[student.id][exam.id]
           @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
         end
       end
@@ -67,6 +72,7 @@ module Gaku
 
       # set Exams Average -------- {
       @exams.each do |exam|
+        @exam_averages[:raw][exam.id] = fix_digit @exam_averages[:raw][exam.id] / @students.length, 4
         @exam_averages[exam.id] = fix_digit @exam_averages[exam.id] / @students.length, 4
       end
       # -------- }
