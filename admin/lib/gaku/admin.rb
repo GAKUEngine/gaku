@@ -23,7 +23,6 @@ require 'phantom_helpers'
 require 'phantom_forms'
 require 'phantom_nested_forms'
 
-require 'thinreports-rails'
 require 'gaku/core'
 
 module Gaku

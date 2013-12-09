@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', version
+  s.add_dependency 'gaku_testing', version
 
   s.add_dependency 'coffee-rails',                   '~> 4.0.0'
   s.add_dependency 'sass-rails',                     '~> 4.0.0'
