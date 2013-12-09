@@ -36,13 +36,13 @@ module Gaku
       @exam_averages = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
       # -------- }
       
-      # set ExamPortionScores & calc for exams average -------- {
-      @students.each do |student|
-        @exams.each do |exam|
-          
+      # set ExamPortionScores & set exams average -------- {
+      @exams.each do |exam|
+        @students.each do |student|
+
           # 素点用と得点用変数の初期化 --------
-          @student_total_scores[:raw][student.id][exam.id] = 0.0
-          @student_total_scores[student.id][exam.id] = 0.0
+          @student_total_scores[:raw][exam.id][student.id] = 0.0
+          @student_total_scores[exam.id][student.id] = 0.0
           
           @exam_averages[:raw][exam.id] = 0.0
           @exam_averages[exam.id] = 0.0
@@ -55,25 +55,25 @@ module Gaku
               score.exam_portion_id = portion.id
               score.save
             else
-              @student_total_scores[:raw][student.id][exam.id] += seps
+              @student_total_scores[:raw][exam.id][student.id] += seps
               if exam.use_weighting
-                @student_total_scores[student.id][exam.id] += (portion.weight.to_f / 100) * seps
+                @student_total_scores[exam.id][student.id] += (portion.weight.to_f / 100) * seps
               else
-                @student_total_scores[student.id][exam.id] += seps
+                @student_total_scores[exam.id][student.id] += seps
               end
             end
           end
-          # calc for average --------
-          @exam_averages[:raw][exam.id] += @student_total_scores[:raw][student.id][exam.id]
-          @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
-        end
-      end
-      # -------- }
 
-      # set Exams Average -------- {
-      @exams.each do |exam|
-        @exam_averages[:raw][exam.id] = fix_digit @exam_averages[:raw][exam.id] / @students.length, 4
-        @exam_averages[exam.id] = fix_digit @exam_averages[exam.id] / @students.length, 4
+          # calc for average --------
+          @exam_averages[:raw][exam.id] += @student_total_scores[:raw][exam.id][student.id]
+          @exam_averages[exam.id] += @student_total_scores[exam.id][student.id]
+        end
+
+        # set Exams Average --------
+        if exam === @exams.last
+          @exam_averages[:raw][exam.id] = fix_digit @exam_averages[:raw][exam.id] / @students.length, 4
+          @exam_averages[exam.id] = fix_digit @exam_averages[exam.id] / @students.length, 4
+        end
       end
       # -------- }
 
@@ -81,7 +81,7 @@ module Gaku
       # calc for deviation -------- {
 
       # init variables --------
-      @deviation = Hash.new { |hash,key| hash[key] = {} }
+      @deviation = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
       std_dev = 0.0
       scratch_dev = 0.0
 
@@ -90,7 +90,7 @@ module Gaku
 
         # calc standard deviations --------
         @students.each do |student|
-          std_dev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
+          std_dev += (@student_total_scores[exam.id][student.id] - @exam_averages[exam.id]) ** 2
         end
 
         # calc deviations --------
@@ -98,15 +98,15 @@ module Gaku
         @students.each do |student|
 
           # init valiable for deviations --------
-          @deviation[student.id][exam.id] = 0.0
+          @deviation[exam.id][student.id] = 0.0
 
-          scratch_dev = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / std_dev
+          scratch_dev = (@student_total_scores[exam.id][student.id] - @exam_averages[exam.id]) / std_dev
 
           # set deviations --------
           if scratch_dev.nan?
-            @deviation[student.id][exam.id] = 50
+            @deviation[exam.id][student.id] = 50
           else
-            @deviation[student.id][exam.id] = fix_digit scratch_dev * 10 + 50, 4
+            @deviation[exam.id][student.id] = fix_digit scratch_dev * 10 + 50, 4
           end
         end
 
@@ -144,7 +144,7 @@ module Gaku
 
         # 試験毎の合計点数と生徒IDをscoresに格納する。
         @students.each do |student|
-          scores.push [@student_total_scores[student.id][exam.id], student.id]
+          scores.push [@student_total_scores[exam.id][student.id], student.id]
         end
         # 試験のスコアを降順に並び替える
         # 合計スコアをどっかに保存してるなら、そこか降順で取れば良いと思う。
@@ -160,7 +160,7 @@ module Gaku
         when 1
           grade_level_deviation.each_with_index do |glevel, i|
             @students.each do |student|
-              if grade_level_deviation[i] > @deviation[student.id][exam.id] && grade_level_deviation[i+1] <= @deviation[student.id][exam.id]
+              if grade_level_deviation[i] > @deviation[exam.id][student.id] && grade_level_deviation[i+1] <= @deviation[exam.id][student.id]
                 @grades[exam.id][student.id] = grade_point
               end
             end
