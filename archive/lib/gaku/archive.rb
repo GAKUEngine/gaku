@@ -1,5 +1,4 @@
 require 'gaku/core'
-require 'gaku/web'
 require 'gaku/admin'
 require 'gaku/frontend'
 

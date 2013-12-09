@@ -1,5 +1,4 @@
 require 'gaku_core'
-require 'gaku_web'
 require 'gaku_frontend'
 require 'gaku_admin'
 require 'gaku_archive'

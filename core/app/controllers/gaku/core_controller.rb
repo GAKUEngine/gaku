@@ -10,9 +10,9 @@ module Gaku
     before_filter :set_locale
     before_filter :users_check
 
-    def user_for_paper_trail
-      user_signed_in? ? current_user : 'Public user'  # or whatever
-    end
+    # def user_for_paper_trail
+    #   user_signed_in? ? current_user : 'Public user'  # or whatever
+    # end
 
     protected
 

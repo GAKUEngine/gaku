@@ -1,4 +1,4 @@
-Gaku::Core::Engine.add_routes  do
+Gaku::Core::Engine.routes.draw  do
 
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
   concern :soft_delete do

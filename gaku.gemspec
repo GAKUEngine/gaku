@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', version
-  s.add_dependency 'gaku_web', version
   s.add_dependency 'gaku_admin', version
   s.add_dependency 'gaku_frontend', version
   s.add_dependency 'gaku_archive', version
