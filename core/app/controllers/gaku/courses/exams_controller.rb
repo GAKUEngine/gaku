@@ -28,36 +28,39 @@ module Gaku
       else
         @exams = @course.syllabus.exams.all
       end
-
-      @student_total_scores = Hash.new { |hash,key| hash[key] = {} }
-      @student_total_weights = Hash.new { |hash,key| hash[key] = {} }
-      @exam_averages = Hash.new {0.0}
-      @exam_weight_averages = Hash.new {0.0}
+      
+      # ここは二重ハッシュにしてるけど、実際はIDで回してるから二重配列でも良いかも。
+      @student_total_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+      @student_total_weights = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+      
+      # 試験の平均点を入れるハッシュと0.0で初期化する設定
+      @exam_averages = Hash.new 0.0.freeze
+      @exam_weight_averages = Hash.new 0.0.freeze
       # -------- }
       
       # set ExamPortionScores & calc for exams average -------- {
       @students.each do |student|
         @exams.each do |exam|
+          @student_total_scores[:raw][student.id][exam.id] = 0.0
           @student_total_scores[student.id][exam.id] = 0.0
-          @student_total_weights[student.id][exam.id] = 0.0
           exam.exam_portions.each do |portion|
-            if student.exam_portion_scores.where(exam_portion_id: portion.id).first.nil?
+            seps = student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
+            if seps.nil?
               score = ExamPortionScore.new
               score.student_id = student.id
               score.exam_portion_id = portion.id
               score.save
             else
-              @student_total_scores[student.id][exam.id] += student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
+              @student_total_scores[:raw][student.id][exam.id] += seps
               if exam.use_weighting
-                @student_total_weights[student.id][exam.id] += (portion.weight.to_f / 100) * student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
+                @student_total_scores[student.id][exam.id] += (portion.weight.to_f / 100) * seps
+              else
+                @student_total_scores[student.id][exam.id] += seps
               end
             end
           end
           # calc for average --------
           @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
-          if exam.use_weighting
-            @exam_weight_averages[exam.id] += @student_total_weights[student.id][exam.id]
-          end
         end
       end
       # -------- }
@@ -65,9 +68,6 @@ module Gaku
       # set Exams Average -------- {
       @exams.each do |exam|
         @exam_averages[exam.id] = fix_digit @exam_averages[exam.id] / @students.length, 4
-        if exam.use_weighting
-          @exam_weight_averages[exam.id] = fix_digit @exam_weight_averages[exam.id] / @students.length, 4
-        end
       end
       # -------- }
 
@@ -84,11 +84,7 @@ module Gaku
 
         # calc standard deviations --------
         @students.each do |student|
-          if exam.use_weighting
-            std_dev += (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) ** 2
-          else
-            std_dev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
-          end
+          std_dev += (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) ** 2
         end
 
         # calc deviations --------
@@ -98,11 +94,7 @@ module Gaku
           # init valiable for deviations --------
           @deviation[student.id][exam.id] = 0.0
 
-          if exam.use_weighting
-            scratch_dev = (@student_total_weights[student.id][exam.id] - @exam_weight_averages[exam.id]) / std_dev
-          else
-            scratch_dev = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / std_dev
-          end
+          scratch_dev = (@student_total_scores[student.id][exam.id] - @exam_averages[exam.id]) / std_dev
 
           # set deviations --------
           if scratch_dev.nan?
@@ -123,11 +115,11 @@ module Gaku
       # １０段階用の設定
       # @grade: 生徒の１０段階を入れるHash。
       # grade_level_deviation:
-      #   １０段階を全体評価で判定する時に使う変数。
+      #   １０段階の全体評価で判定する時に使う変数。
       #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
       # grade_level_percent:
-      #   １０段階を相対評価で判定する時に使う変数。
-      #   決められたパーセンテージを基に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
+      #   １０段階の相対評価で判定する時に使う変数。
+      #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
       @grades = Hash.new { |hash,key| hash[key] = {} }
       grade_level_deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
       grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
@@ -145,16 +137,11 @@ module Gaku
         scores = [] # 生徒の順位を出す為の変数。
 
         # 試験毎の合計点数と生徒IDをscoresに格納する。
-        if exam.use_weighting
-          @students.each do |student|
-            scores.push [@student_total_weights[student.id][exam.id], student.id]
-          end
-        else
-          @students.each do |student|
-            scores.push [@student_total_scores[student.id][exam.id], student.id]
-          end
+        @students.each do |student|
+          scores.push [@student_total_scores[student.id][exam.id], student.id]
         end
         # 試験のスコアを降順に並び替える
+        # 合計スコアをどっかに保存してるなら、そこか降順で取れば良いと思う。
         scores.sort!().reverse!()
         # -------- }
 
@@ -163,7 +150,7 @@ module Gaku
         grade_point = 10
         case grading_method
 
-        # calc for zentai
+        # calc for 全体評価
         when 1
           grade_level_deviation.each_with_index do |glevel, i|
             @students.each do |student|
@@ -174,7 +161,7 @@ module Gaku
             grade_point -= 1
           end
 
-        # calc for soutai
+        # calc for 相対評価
         when 2
           scoresMem = scores.clone
           gradeNums = []
