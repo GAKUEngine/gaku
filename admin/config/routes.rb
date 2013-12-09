@@ -1,5 +1,19 @@
 Gaku::Core::Engine.add_routes  do
 
+  root to: 'presets#index'
+
+  devise_for :users, {
+    class_name: 'Gaku::User',
+    module: :devise,
+    controllers: {
+       sessions: 'gaku/devise/sessions',
+       registrations: 'gaku/devise/registrations',
+       passwords: 'gaku/devise/passwords'
+     }
+  }
+
+  resources :states, only: :index
+
   concern :soft_delete do
     patch :recovery,    on: :member
     patch :soft_delete, on: :member

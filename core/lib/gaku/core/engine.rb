@@ -12,6 +12,12 @@ module Gaku
         g.test_framework :rspec, view_specs: false
       end
 
+      initializer "gaku.paperclip", :before => "gaku.environment" do
+        Paperclip.interpolates(:placeholder) do |attachment, style|
+          ActionController::Base.helpers.asset_path("missing_#{style}.png")
+        end
+      end
+
 
       def self.activate
       end
