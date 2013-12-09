@@ -81,31 +81,31 @@ module Gaku
       end
 
       def set_student_exams_deviaton
-        # start calc for deviation --------
-        @exams.each do |exam|
-          standard_deviation = 0.0
-          scratch_deviation = 0.0
 
-          # calc standard deviations --------
+        def get_standard_deviation exam
+          scratch_standard_deviation = 0.0
           @students.each do |student|
-            standard_deviation += (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) ** 2
+            scratch_standard_deviation += (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) ** 2
           end
+          return Math.sqrt scratch_standard_deviation / @students.length
+        end
 
-          # calc deviations --------
-          standard_deviation = Math.sqrt standard_deviation / @students.length
+        def get_deviation standard_deviation, exam, student
+          scratch_deviation = (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) / standard_deviation
+          if scratch_deviation.nan?
+            return 50
+          else
+            return fix_digit @student_exams_deviation[exam.id][student.id] * 10 + 50, 4
+          end
+        end
+
+        # start main --------
+        @exams.each do |exam|
+          standard_deviation = get_standard_deviation(exam)
+
+          # set deviations --------
           @students.each do |student|
-
-            # init valiable for deviations --------
-            @student_exams_deviation[exam.id][student.id] = 0.0
-
-            scratch_deviation = (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) / standard_deviation
-
-            # set deviations --------
-            if scratch_deviation.nan?
-              @student_exams_deviation[exam.id][student.id] = 50
-            else
-              @student_exams_deviation[exam.id][student.id] = fix_digit scratch_deviation * 10 + 50, 4
-            end
+            @student_exams_deviation[exam.id][student.id] = get_deviation(standard_deviation, exam, student)
           end
         end
       end
