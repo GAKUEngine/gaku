@@ -64,7 +64,7 @@ module Gaku
             end
           end
           # calc for average --------
-          @exam_averages[:raw][exam.id] += @student_total_scores[student.id][exam.id]
+          @exam_averages[:raw][exam.id] += @student_total_scores[:raw][student.id][exam.id]
           @exam_averages[exam.id] += @student_total_scores[student.id][exam.id]
         end
       end
