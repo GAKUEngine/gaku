@@ -13,4 +13,4 @@ table.grading.grading-calculations.table.table-bordered.table-condensed
           - p "student_total_scores dayo-"
           - p @student_total_scores
 
-          = @student_total_scores[:raw][@exam.id][student.id]
+          = @student_exam_total_scores[:raw][@exam.id][student.id]
