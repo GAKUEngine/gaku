@@ -92,12 +92,12 @@ module Gaku
       end
 
       def set_student_exams_grade_and_rank
-        # Grade and Rank Calculation （ここは別途光ヶ丘生徒評価表を参照して下さい）-------- {
+        # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
 
         # init variables --------
 
         # １０段階用の設定
-        # @grade: 生徒の１０段階を入れるHash。
+        # @student_exams_grade: 生徒の１０段階を入れるHash。
         # grade_level_deviation:
         #   １０段階の全体評価で判定する時に使う変数。
         #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
