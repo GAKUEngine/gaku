@@ -24,6 +24,25 @@ module Gaku
         
         # 偏差値を入れるハッシュ
         @student_exams_deviation = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+
+        # for grade and rank--------
+        # １０段階用の設定
+        # @student_exams_grade: 生徒の１０段階を入れるHash。
+        # @grade_level_deviation:
+        #   １０段階の全体評価で判定する時に使う変数。
+        #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
+        # @grade_level_percent:
+        #   １０段階の相対評価で判定する時に使う変数。
+        #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
+        @student_exams_grade = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @grade_level_deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
+        @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
+
+        # ５段階用の設定
+        # @student_exams_rank: 生徒の５段階を入れるHash。
+        # @rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
+        @student_exams_rank = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @rank_level = [15, 20]
       end
 
       def set_student_exams_total_scores_and_set_exams_average
@@ -93,27 +112,6 @@ module Gaku
 
       def set_student_exams_grade_and_rank
         # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
-
-        # init variables --------
-
-        # １０段階用の設定
-        # @student_exams_grade: 生徒の１０段階を入れるHash。
-        # grade_level_deviation:
-        #   １０段階の全体評価で判定する時に使う変数。
-        #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
-        # grade_level_percent:
-        #   １０段階の相対評価で判定する時に使う変数。
-        #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
-        @student_exams_grade = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        grade_level_deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
-        grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
-
-        # ５段階用の設定
-        # @student_exams_rank: 生徒の５段階を入れるHash。
-        # rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
-        @student_exams_rank = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        rank_level = [15, 20]
-
         # set grade and rank --------
         @exams.each do |exam|
 
@@ -127,7 +125,6 @@ module Gaku
           # 試験のスコアを降順に並び替える
           exam_student_scores = exam_student_scores.sort_by {|key,val| -val}
 
-
           # 採点方式を選択、その採点方式でGradeを決定。
           grading_method = 1
           grade_point = 10
@@ -136,9 +133,9 @@ module Gaku
 
           # calc for 全体評価
           when 1
-            grade_level_deviation.each_with_index do |glevel, i|
+            @grade_level_deviation.each_with_index do |glevel, i|
               @students.each do |student|
-                if grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && grade_level_deviation[i+1] <= @student_exams_deviation[exam.id][student.id]
+                if @grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && @grade_level_deviation[i+1] <= @student_exams_deviation[exam.id][student.id]
                   @student_exams_grade[exam.id][student.id] = grade_point
                 end
               end
@@ -149,7 +146,7 @@ module Gaku
           when 2
             scratch_exam_student_scores = exam_student_scores.clone
             grade_limit_nums = []
-            grade_level_percent.each do |glevel|
+            @grade_level_percent.each do |glevel|
               grade_limit_nums.push((@students.length * (glevel.to_f / 100)).ceil)
             end
             grade_limit_nums.each do |gnum|
@@ -169,7 +166,7 @@ module Gaku
           #   @student_exams_rank[exam.id][student.id] = 3
           # end
           # rankNums = []
-          # rank_level.each do |rlevel|
+          # @rank_level.each do |rlevel|
           #   rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
           # end
           # rankNums.each do |rnum|
