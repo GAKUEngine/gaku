@@ -117,16 +117,16 @@ module Gaku
         # set grade and rank --------
         @exams.each do |exam|
 
-          # 生徒の順位用配列を作成（合計点数がDBに入ってるならそれを降順で取れば良いと思う） -------- {
-          exam_student_scores_and_student_id = [] # 生徒の順位を出す為の変数。
+          # 生徒の順位用配列を作成
+          exam_student_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)} # 生徒の順位を出す為の変数。
 
-          # 試験毎の合計点数と生徒IDをexam_student_scores_and_student_idに格納する。
+          # 試験毎の合計点数と生徒IDをexam_student_scoresに格納する。
           @students.each do |student|
-            exam_student_scores_and_student_id.push [@student_exams_total_score[exam.id][student.id], student.id]
+            exam_student_scores[student.id] = @student_exams_total_score[exam.id][student.id]
           end
           # 試験のスコアを降順に並び替える
-          exam_student_scores_and_student_id.sort.reverse!
-          # -------- }
+          exam_student_scores = exam_student_scores.sort_by {|key,val| -val}
+
 
           # 採点方式を選択、その採点方式でGradeを決定。
           grading_method = 1
@@ -147,15 +147,15 @@ module Gaku
 
           # calc for 相対評価
           when 2
-            scratch_exam_student_scores_and_student_id = exam_student_scores_and_student_id.clone
-            gradeNums = []
+            scratch_exam_student_scores = exam_student_scores.clone
+            grade_limit_nums = []
             grade_level_percent.each do |glevel|
-              gradeNums.push((@students.length * (glevel.to_f / 100)).ceil)
+              grade_limit_nums.push((@students.length * (glevel.to_f / 100)).ceil)
             end
-            gradeNums.each do |gnum|
+            grade_limit_nums.each do |gnum|
               i = 0
-              while i < gnum && scratch_exam_student_scores_and_student_id.length != 0
-                @student_exams_grade[exam.id][scratch_exam_student_scores_and_student_id.shift[1]] = grade_point
+              while i < gnum && scratch_exam_student_scores.length != 0
+                @student_exams_grade[exam.id][scratch_exam_student_scores.shift[0]] = grade_point
                 i += 1
               end
               grade_point -= 1
@@ -164,33 +164,33 @@ module Gaku
           end
 
           # Rank Calculation --------
-          rankPoint = 5
-          @students.each do |student|
-            @student_exams_rank[exam.id][student.id] = 3
-          end
-          rankNums = []
-          rank_level.each do |rlevel|
-            rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
-          end
-          rankNums.each do |rnum|
-            i = 0
-            while i < rnum && exam_student_scores_and_student_id.length != 0
-              scoreMem = exam_student_scores_and_student_id.shift()
-              @student_exams_rank[exam.id][scoreMem[1]] = rankPoint
-              if exam_student_scores_and_student_id.length != 0 and scoreMem[0] == exam_student_scores_and_student_id[0][0]
-                rnum += 1
-              end
-              i += 1
-            end
-            rankPoint -= 1
-          end
-          exam_student_scores_and_student_id.each do |score|
-            if @student_exams_grade[exam.id][socre[1]] == 3
-              @student_exams_rank[exam.id][score[1]] = 2
-            elsif @student_exams_grade[exam.id][socre[1]] < 3
-              @student_exams_rank[exam.id][score[1]] = 1
-            end
-          end
+          # rankPoint = 5
+          # @students.each do |student|
+          #   @student_exams_rank[exam.id][student.id] = 3
+          # end
+          # rankNums = []
+          # rank_level.each do |rlevel|
+          #   rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
+          # end
+          # rankNums.each do |rnum|
+          #   i = 0
+          #   while i < rnum && exam_student_scores.length != 0
+          #     scoreMem = exam_student_scores.shift()
+          #     @student_exams_rank[exam.id][scoreMem[1]] = rankPoint
+          #     if exam_student_scores.length != 0 and scoreMem[0] == exam_student_scores[0][0]
+          #       rnum += 1
+          #     end
+          #     i += 1
+          #   end
+          #   rankPoint -= 1
+          # end
+          # exam_student_scores.each do |score|
+          #   if @student_exams_grade[exam.id][socre[1]] == 3
+          #     @student_exams_rank[exam.id][score[1]] = 2
+          #   elsif @student_exams_grade[exam.id][socre[1]] < 3
+          #     @student_exams_rank[exam.id][score[1]] = 1
+          #   end
+          # end
         end
       end
 
