@@ -34,14 +34,32 @@ module Gaku
       remove_file 'public/index.html'
     end
 
+    # def setup_assets
+    #   @lib_name = 'gaku'
+    #   %w{javascripts stylesheets images}.each do |path|
+    #     empty_directory "app/assets/#{path}/gaku"
+    #   end
+
+    #   template 'app/assets/javascripts/gaku/all.js'
+    #   template 'app/assets/stylesheets/gaku/all.css'
+    # end
+
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
-        empty_directory "app/assets/#{path}/gaku"
+        empty_directory "vendor/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
+        empty_directory "vendor/assets/#{path}/gaku/admin" if defined? Spree::Admin || Rails.env.test?
       end
 
-      template 'app/assets/javascripts/gaku/all.js'
-      template 'app/assets/stylesheets/gaku/all.css'
+      if defined? Spree::Frontend || Rails.env.test?
+        template "vendor/assets/javascripts/gaku/frontend/all.js"
+        template "vendor/assets/stylesheets/gaku/frontend/all.css"
+      end
+
+      if defined? Spree::Admin || Rails.env.test?
+        template "vendor/assets/javascripts/gaku/admin/all.js"
+        template "vendor/assets/stylesheets/gaku/admin/all.css"
+      end
     end
 
     def create_overrides_directory
