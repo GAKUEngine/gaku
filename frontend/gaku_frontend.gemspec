@@ -25,8 +25,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'coffee-rails',                   '~> 4.0.0'
   s.add_dependency 'sass-rails',                     '~> 4.0.0'
-  s.add_dependency 'uglifier',
-  s.add_dependency 'turbolinks',
+  s.add_dependency 'uglifier'
+  s.add_dependency 'turbolinks'
 
   s.add_dependency 'slim',                           '~> 2.0'
   s.add_dependency 'responders',                     '~> 1.0'
