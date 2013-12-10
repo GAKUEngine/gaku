@@ -196,7 +196,12 @@ module Gaku
         end
 
         # start main --------
+        case "ratio"
         
+        when "ratio"
+          method_ratio()
+        
+        end
 
       end
 
