@@ -10,7 +10,7 @@ module Gaku
       end
 
       config.to_prepare do
-        Gaku::GakuController.helper(Gaku::AdminHelper)
+        Gaku::Admin::BaseController.helper(Gaku::AdminHelper)
       end
 
 

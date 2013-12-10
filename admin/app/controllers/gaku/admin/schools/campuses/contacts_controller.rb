@@ -1,5 +1,5 @@
 module Gaku
-  class Admin::Schools::Campuses::ContactsController < GakuController
+  class Admin::Schools::Campuses::ContactsController < Admin::BaseController
 
     respond_to :js
 

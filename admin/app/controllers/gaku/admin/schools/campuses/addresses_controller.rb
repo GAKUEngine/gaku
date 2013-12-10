@@ -1,5 +1,5 @@
 module Gaku
-  class Admin::Schools::Campuses::AddressesController < GakuController
+  class Admin::Schools::Campuses::AddressesController < Admin::BaseController
 
     respond_to :js,   only: %i( new create destroy edit update )
 
