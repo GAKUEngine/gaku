@@ -1,7 +1,7 @@
 module Gaku
   class Students::ClassGroupEnrollmentsController < GakuController
 
-    respond_to :js, :only: %i( new create destroy )
+    respond_to :js, only: %i( new create destroy )
 
     before_action :student, only: %i( new create )
     before_action :set_class_groups, only: :new
