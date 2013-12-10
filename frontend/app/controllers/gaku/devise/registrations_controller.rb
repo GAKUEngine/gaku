@@ -1,5 +1,5 @@
 class Gaku::Devise::RegistrationsController < Devise::RegistrationsController
-  helper Gaku::GakuHelper
+  #helper Gaku::GakuHelper
   layout 'gaku/layouts/gaku'
 
   def set_up_admin_account

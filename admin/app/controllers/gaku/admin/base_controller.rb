@@ -1,6 +1,9 @@
 module Gaku
   module Admin
-    class BaseController < GakuController
+    class BaseController < CoreController
+
+      self.responder = AppResponder
+      respond_to :html
 
       layout :resolve_layout
 
@@ -15,11 +18,11 @@ module Gaku
       def resolve_layout
         case action_name
         when 'index'
-          'gaku/layouts/index'
+          'gaku/layouts/admin/index'
         when 'show'
-          'gaku/layouts/show'
+          'gaku/layouts/admin/show'
         else
-          'gaku/layouts/gaku'
+          'gaku/layouts/admin/gaku'
         end
       end
 
