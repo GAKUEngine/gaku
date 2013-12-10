@@ -35,7 +35,7 @@ module Gaku
         #   １０段階の相対評価で判定する時に使う変数。
         #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
         @student_exams_grade = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        @grade_level_deviation = [100, 66, 62, 58, 55, 59, 45, 37, 0]
+        @grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
         @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
 
         # ５段階用の設定
