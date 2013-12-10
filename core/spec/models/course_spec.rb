@@ -1,11 +1,6 @@
-require 'spec_helper'
+require 'spec_helper_models'
 
 describe Gaku::Course do
-
-  describe 'concerns' do
-    it_behaves_like 'notable'
-    it_behaves_like 'thrashable'
-  end
 
   describe 'associations' do
     it { should have_many :enrollments }

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper_models'
 
 FactoryGirl.factories.each do |factory|
   describe "Factory for :#{factory.name}" do

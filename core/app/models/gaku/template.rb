@@ -3,11 +3,8 @@ module Gaku
 
     has_attached_file :file
 
-    validates :name, :context, presence: true
-    validates :file, presence: true, on: :create
-
     validates_attachment_content_type :file,
-                                      message: I18n.t(:'template.file_type_error'),
+      message: I18n.t(:'template.file_type_error'),
       content_type:
         [
           'text/plain',
@@ -15,6 +12,9 @@ module Gaku
           'application/vnd.oasis.opendocument.spreadsheet',
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
+
+    validates :name, :context, presence: true
+    validates :file, presence: true, on: :create
 
   end
 end

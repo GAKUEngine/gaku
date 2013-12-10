@@ -13,6 +13,7 @@ db/test.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+**/log
 /tmp
 **/tmp
 
@@ -50,6 +51,7 @@ nbproject
 .~lock.*#
 .rvmrc
 .yardoc/**
+core/.bundle
 
 # Paperclip attachments
 public/system/*
@@ -70,5 +72,4 @@ core/coverage
 locales/
 
 pkg/
-core/pkg/
-sample/pkg/
+**/pkg/

@@ -1,8 +1,6 @@
 module Gaku
   class Attachment < ActiveRecord::Base
 
-    include Trashable
-
     belongs_to :attachable, polymorphic: true
 
     has_attached_file :asset

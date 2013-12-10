@@ -1,0 +1,10 @@
+tr
+  td = student.surname
+  td = student.name
+  td = student.surname_reading
+  td = student.name_reading
+  td = student.birth_date
+  td
+    = link_to_show [:admin, student]
+    = ajax_link_to_restore [:recovery, student]
+    = ajax_link_to_delete student

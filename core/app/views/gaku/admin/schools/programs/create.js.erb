@@ -1,7 +1,0 @@
-$('#admin-school-programs-index tbody').append('<%= render_js_partial("gaku/admin/schools/programs/program", {program: @program}) %>');
-
-$('#new-admin-school-program').slide();
-$('#new-admin-school-program-link').show();
-
-$('.admin-school-programs-count').html('<%= print_count(@count+1, t_program_list) %>');
-showNotice("<%= render_flash %>");

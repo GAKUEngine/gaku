@@ -1,0 +1,8 @@
+<% if @exam.destroyed? %>
+  window.location.href = '/exams'
+<% else %>
+  $('.exam-exam-portions-count').html("<%= print_count(@count, t(:'exam_portion.list')) %>");
+  $('[data-id=<%= @exam_portion.id %>]').remove();
+  $('#weight-total').text('<%= @exam.total_weight %>');
+  showNotice("<%= render_flash %>");
+<% end %>

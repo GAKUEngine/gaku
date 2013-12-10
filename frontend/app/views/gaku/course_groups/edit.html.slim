@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    = normal_form_for @course_group, label: 'nil' do |f|
+      = render 'form_fields', f: f, course_group: @course_group
+      = buttons_for @course_group
+
+#courses
+  #course-group-enrollment-form-errors
+  #new-course-group-enrollment.d-none
+    = render 'gaku/course_groups/course_group_enrollments/form'
+
+  #course-group-enrollments-div
+    = render 'gaku/course_groups/course_group_enrollments/courses', course_group: @course_group
+
+
+= footer do
+  .col-md-9
+    = link_to_index course_groups_path
+  .col-md-3
+    = link_to_modal_delete
+  = render 'gaku/shared/delete_modal', target: @course_group

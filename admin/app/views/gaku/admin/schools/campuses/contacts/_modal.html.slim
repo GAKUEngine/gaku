@@ -1,0 +1,5 @@
+= modal_for 'edit-contact-modal' do
+  = modal_form_for [:admin, @school, @campus, @contact], resource: 'admin-school-campus-contact' do |f|
+    = hidden_field_tag :campus_id, @campus.id
+    = render 'form_fields', f: f
+    = buttons_for @contact, resource: 'admin-school-campus-contact'

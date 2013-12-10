@@ -1,0 +1,15 @@
+ul#user_menu.nav.navbar-nav.navbar-right.mr-m
+  - if user_signed_in?
+    li
+      .btn-group.mt-s
+        button.btn.btn-sm.btn-default
+          span.glyphicon.glyphicon-user style="color:#EEA236"
+          = "&nbsp;&nbsp;".html_safe + current_user.username
+        button#user_menu_dropdown.btn.btn-sm.btn-warning.dropdown-toggle data-toggle="dropdown"
+          span.caret style="border-top-color:white;border-bottom-color:white;"
+        ul.dropdown-menu
+          li= link_to raw('<span class="glyphicon glyphicon-log-out"></span>' + "&nbsp;&nbsp;".html_safe + t("devise.sessions.sign_out")), destroy_user_session_path, method: :delete
+          li#options
+            a data-toggle="modal" href="#modal-options"
+              span.glyphicon.glyphicon-globe
+              = "&nbsp;&nbsp;".html_safe + t("config.label")

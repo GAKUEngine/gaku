@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper_models'
 
 describe Gaku::Teacher do
 
@@ -8,7 +8,6 @@ describe Gaku::Teacher do
     it_behaves_like 'notable'
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
-    it_behaves_like 'thrashable'
   end
 
   describe 'associations' do

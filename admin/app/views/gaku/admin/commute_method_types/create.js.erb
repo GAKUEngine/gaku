@@ -1,0 +1,7 @@
+$('#admin-commute-method-types table tbody').append('<%= j render("commute_method_type", {commute_method_type: @commute_method_type}) %>');
+
+$('#new-admin-commute-method-type').slide();
+$('#new-admin-commute-method-type-link').show();
+
+$('.admin-commute-method-types-count').html("<%= print_count(@count, t(:'commute_method_type.list')) %>");
+showNotice("<%= render_flash %>");

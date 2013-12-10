@@ -5,7 +5,7 @@ module Gaku
 
     belongs_to :external_school_record
 
-    has_attached_file :badge
+    has_attached_file :badge, default_url: ':placeholder'
 
     validates :name, presence: true
 

@@ -1,0 +1,5 @@
+$('#modal-dialogs').html('<%= j render("modal", {school_year: @school_year}) %>');
+$('#edit-school-year-modal').modal('show');
+$('.remote-form').enableValidations();
+$('.datepicker').datepicker();
+

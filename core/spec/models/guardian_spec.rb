@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper_models'
 
 describe Gaku::Guardian do
 
@@ -7,7 +7,6 @@ describe Gaku::Guardian do
     it_behaves_like 'addressable'
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
-    it_behaves_like 'thrashable'
   end
 
   describe 'relations' do

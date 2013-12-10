@@ -6,9 +6,26 @@ module Gaku
 
       config.autoload_paths += %W(#{config.root}/lib)
 
-      config.to_prepare do
-        GakuController.helper(GakuHelper)
+
+
+      config.generators do |g|
+        g.test_framework :rspec, view_specs: false
       end
+
+      initializer "gaku.paperclip", :before => "gaku.environment" do
+        Paperclip.interpolates(:placeholder) do |attachment, style|
+          ActionController::Base.helpers.asset_path("missing_#{style}.png")
+        end
+      end
+
+      initializer "gaku.ruby_template_handler", :before => "gaku.environment" do
+        ActionView::Template.register_template_handler(:rb, :source.to_proc)
+      end
+
+      initializer "gaku.mime_types", :before => "gaku.environment" do
+        Mime::Type.register 'application/xls', :xls
+      end
+
 
       def self.activate
       end
@@ -28,17 +45,7 @@ module Gaku
         Rails.application.routes_reloader.reload!
       end
 
-      # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
-      initializer 'gaku.assets.precompile', group: :all do |app|
-        app.config.assets.precompile += %w[
-          gaku/all.*
-        ]
-      end
-
-      # filter sensitive information during logging
-      initializer 'gaku.params.filter' do |app|
-        app.config.filter_parameters += [:password, :password_confirmation, :number]
-      end
+      require 'gaku/core/routes'
 
     end
   end

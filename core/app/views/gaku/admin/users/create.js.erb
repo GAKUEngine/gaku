@@ -1,7 +1,0 @@
-$('#admin-users-index tbody').append('<%= j render("user", {user: @user}) %>');
-
-$('#new-admin-user').slide();
-$('#new-admin-user-link').show();
-
-$('.admin-users-count').html('<%= print_count(@count, t_user_list) %>');
-showNotice("<%= render_flash %>");

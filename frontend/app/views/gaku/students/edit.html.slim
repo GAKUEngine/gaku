@@ -1,0 +1,35 @@
+.row
+  .col-md-9
+    = render 'personal', student: student
+  .col-md-3
+    = render 'gaku/shared/picture', resource: student
+
+hr
+
+.row.mt-l
+  .col-md-12
+    ul.nav.nav-pills.nav-justified
+      li.active
+        a#student-personal-tab-link data-toggle="tab" href="#personal"
+          = t(:'personal')
+      li
+        a#student-academic-tab-link data-toggle="tab" href="#academic"
+          = t(:'academic')
+    .tab-content
+      #personal.tab-pane.active
+        = render 'tabs_personal'
+      #academic.tab-pane
+        .row
+          .col-md-3
+            = render 'academic', student: student
+          .col-md-9
+            = render 'tabs_academic'
+
+= footer do
+  .col-md-9
+    = link_to_back students_path
+  .col-md-3
+    = link_to_modal_delete
+  .delete_modal
+    = render 'gaku/shared/delete_modal', target: student
+

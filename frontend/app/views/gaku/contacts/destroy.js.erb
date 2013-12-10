@@ -1,0 +1,9 @@
+showNotice("<%= render_flash %>");
+
+<%-if  @polymorphic_resource.contacts.reload.any? && @contact.primary? %>
+  $('#<%= @polymorphic_resource_name.pluralize %>-index').find('#contact-<%= @polymorphic_resource.contacts.first.id %> #set-primary-link').addClass('btn-primary');
+<% end %>
+
+
+$('.<%= @polymorphic_resource_name.pluralize %>-count').html("<%= print_count(@count, t(:'contact.list')) %>");
+$('#<%= @polymorphic_resource_name.pluralize %>-tab-link').html("<%= print_count(@count, t(:'contact.plural')) %>");
