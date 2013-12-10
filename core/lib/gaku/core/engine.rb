@@ -18,6 +18,14 @@ module Gaku
         end
       end
 
+      initializer "gaku.ruby_template_handler", :before => "gaku.environment" do
+        ActionView::Template.register_template_handler(:rb, :source.to_proc)
+      end
+
+      initializer "gaku.mime_types", :before => "gaku.environment" do
+        Mime::Type.register 'application/xls', :xls
+      end
+
 
       def self.activate
       end
