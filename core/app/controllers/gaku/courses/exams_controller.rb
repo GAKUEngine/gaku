@@ -28,21 +28,11 @@ module Gaku
         # for grade and rank--------
         # １０段階用の設定
         # @student_exams_grade: 生徒の１０段階を入れるHash。
-        # @grade_level_deviation:
-        #   １０段階の全体評価で判定する時に使う変数。
-        #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
-        # @grade_level_percent:
-        #   １０段階の相対評価で判定する時に使う変数。
-        #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
         @student_exams_grade = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        @grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
-        @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
 
         # ５段階用の設定
         # @student_exams_rank: 生徒の５段階を入れるHash。
-        # @rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
         @student_exams_rank = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        @rank_level = [15, 20]
       end
 
       def set_student_exams_total_scores_and_set_exams_average
@@ -111,84 +101,103 @@ module Gaku
       end
 
       def set_student_exams_grade_and_rank
-        # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
-        # set grade and rank --------
-        @exams.each do |exam|
 
-          # 生徒の順位用配列を作成
-          exam_student_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)} # 生徒の順位を出す為の変数。
+        def method_ratio
+          # @grade_level_deviation:
+          #   １０段階の全体評価で判定する時に使う変数。
+          #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
+          # @grade_level_percent:
+          #   １０段階の相対評価で判定する時に使う変数。
+          #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
+          @grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
+          @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
 
-          # 試験毎の合計点数と生徒IDをexam_student_scoresに格納する。
-          @students.each do |student|
-            exam_student_scores[student.id] = @student_exams_total_score[exam.id][student.id]
-          end
-          # 試験のスコアを降順に並び替える
-          exam_student_scores = exam_student_scores.sort_by {|key,val| -val}
+          # @rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
+          @rank_level = [15, 20]
 
-          # 採点方式を選択、その採点方式でGradeを決定。
-          grading_method = 1
-          grade_point = 10
+          # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
+          # set grade and rank --------
+          @exams.each do |exam|
 
-          case grading_method
+            # 生徒の順位用配列を作成
+            exam_student_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)} # 生徒の順位を出す為の変数。
 
-          # calc for 全体評価
-          when 1
-            @grade_level_deviation.each_with_index do |glevel, i|
-              @students.each do |student|
-                if @grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && @grade_level_deviation[i+1] <= @student_exams_deviation[exam.id][student.id]
-                  @student_exams_grade[exam.id][student.id] = grade_point
+            # 試験毎の合計点数と生徒IDをexam_student_scoresに格納する。
+            @students.each do |student|
+              exam_student_scores[student.id] = @student_exams_total_score[exam.id][student.id]
+            end
+            # 試験のスコアを降順に並び替える
+            exam_student_scores = exam_student_scores.sort_by {|key,val| -val}
+
+            # 採点方式を選択、その採点方式でGradeを決定。
+            grading_method = 1
+            grade_point = 10
+
+            case grading_method
+
+            # calc for 全体評価
+            when 1
+              @grade_level_deviation.each_with_index do |glevel, i|
+                @students.each do |student|
+                  if @grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && @grade_level_deviation[i+1] <= @student_exams_deviation[exam.id][student.id]
+                    @student_exams_grade[exam.id][student.id] = grade_point
+                  end
                 end
+                grade_point -= 1
               end
-              grade_point -= 1
+
+            # calc for 相対評価
+            when 2
+              scratch_exam_student_scores = exam_student_scores.clone
+              grade_limit_nums = []
+              @grade_level_percent.each do |glevel|
+                grade_limit_nums.push((@students.length * (glevel.to_f / 100)).ceil)
+              end
+              grade_limit_nums.each do |gnum|
+                i = 0
+                while i < gnum && scratch_exam_student_scores.length != 0
+                  @student_exams_grade[exam.id][scratch_exam_student_scores.shift[0]] = grade_point
+                  i += 1
+                end
+                grade_point -= 1
+              end
+
             end
 
-          # calc for 相対評価
-          when 2
-            scratch_exam_student_scores = exam_student_scores.clone
-            grade_limit_nums = []
-            @grade_level_percent.each do |glevel|
-              grade_limit_nums.push((@students.length * (glevel.to_f / 100)).ceil)
-            end
-            grade_limit_nums.each do |gnum|
-              i = 0
-              while i < gnum && scratch_exam_student_scores.length != 0
-                @student_exams_grade[exam.id][scratch_exam_student_scores.shift[0]] = grade_point
-                i += 1
-              end
-              grade_point -= 1
-            end
-
+            # Rank Calculation --------
+            # rankPoint = 5
+            # @students.each do |student|
+            #   @student_exams_rank[exam.id][student.id] = 3
+            # end
+            # rankNums = []
+            # @rank_level.each do |rlevel|
+            #   rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
+            # end
+            # rankNums.each do |rnum|
+            #   i = 0
+            #   while i < rnum && exam_student_scores.length != 0
+            #     scoreMem = exam_student_scores.shift()
+            #     @student_exams_rank[exam.id][scoreMem[1]] = rankPoint
+            #     if exam_student_scores.length != 0 and scoreMem[0] == exam_student_scores[0][0]
+            #       rnum += 1
+            #     end
+            #     i += 1
+            #   end
+            #   rankPoint -= 1
+            # end
+            # exam_student_scores.each do |score|
+            #   if @student_exams_grade[exam.id][socre[1]] == 3
+            #     @student_exams_rank[exam.id][score[1]] = 2
+            #   elsif @student_exams_grade[exam.id][socre[1]] < 3
+            #     @student_exams_rank[exam.id][score[1]] = 1
+            #   end
+            # end
           end
-
-          # Rank Calculation --------
-          # rankPoint = 5
-          # @students.each do |student|
-          #   @student_exams_rank[exam.id][student.id] = 3
-          # end
-          # rankNums = []
-          # @rank_level.each do |rlevel|
-          #   rankNums.push((@students.length * (rlevel.to_f / 100)).ceil)
-          # end
-          # rankNums.each do |rnum|
-          #   i = 0
-          #   while i < rnum && exam_student_scores.length != 0
-          #     scoreMem = exam_student_scores.shift()
-          #     @student_exams_rank[exam.id][scoreMem[1]] = rankPoint
-          #     if exam_student_scores.length != 0 and scoreMem[0] == exam_student_scores[0][0]
-          #       rnum += 1
-          #     end
-          #     i += 1
-          #   end
-          #   rankPoint -= 1
-          # end
-          # exam_student_scores.each do |score|
-          #   if @student_exams_grade[exam.id][socre[1]] == 3
-          #     @student_exams_rank[exam.id][score[1]] = 2
-          #   elsif @student_exams_grade[exam.id][socre[1]] < 3
-          #     @student_exams_rank[exam.id][score[1]] = 1
-          #   end
-          # end
         end
+
+        # start main --------
+        
+
       end
 
       def fix_digit num, digit_num
