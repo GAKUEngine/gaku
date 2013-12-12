@@ -102,18 +102,54 @@ module Gaku
 
       def set_student_exams_grade_and_rank
 
+        # def method_ratio(grading_method)
         def method_ratio
+          default_grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
+          @rank_level = [15, 20]
+
+          # default_grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
+
+          default = {
+            # for grade ----
+            g10: 100,
+            g9: 66,
+            g8: 62,
+
+            # for rank----
+            r10: 5,
+            r9: 5,
+            r8: 10
+          }
+
+          default = {
+            grade:{
+              g10: 100,
+              g9: 66,
+              g8: 62
+            },
+            rank: {
+              r10: 5,
+              r9: 5,
+              r8: 10
+            }
+          }
+          
           # @grade_level_deviation:
           #   １０段階の全体評価で判定する時に使う変数。
           #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
           # @grade_level_percent:
           #   １０段階の相対評価で判定する時に使う変数。
           #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
+
+          @ = JSON.parse grading_method.method.arguments, symbolize_names: true
+
           @grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
           @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
 
           # @rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
           @rank_level = [15, 20]
+
+
 
           # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
           # set grade and rank --------
@@ -196,11 +232,24 @@ module Gaku
         end
 
         # start main --------
+        # p '@exam.grading_method.method -------'
+        # p @exam.grading_method
+        
+        # case @exam.grading_method.method
         case "ratio"
-        
+
         when "ratio"
-          method_ratio()
-        
+          # method_ratio(@exam.grading_method)
+          # method_ratio()
+          method = Grading::Ratio.new (arguments)
+
+          exam.student_score.each do |student|
+            results << method.grade (student, exam)
+          end
+
+          return results
+
+
         end
 
       end
