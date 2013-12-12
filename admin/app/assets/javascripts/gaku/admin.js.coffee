@@ -27,9 +27,9 @@
 #= require underscore
 #= require moment
 #= require rails.validations
-#= require gaku/slide.js.erb
+#= require gaku/admin/slide.js.erb
 
-#= require gaku/gaku
+#= require gaku/admin/admin_base
 
 #= require jquery_nested_form
 #= require phantom_forms

@@ -17,7 +17,6 @@
 #= require bootstrap/dropdown
 #= require bootstrap/modal
 
-
 #= require nprogress
 #= require nprogress-turbolinks
 #= require nprogress-ajax
@@ -27,9 +26,9 @@
 #= require underscore
 #= require moment
 #= require rails.validations
-#= require gaku/slide.js.erb
 
-#= require gaku/gaku
+#= require gaku/frontend/slide.js.erb
+#= require gaku/frontend/gaku
 
 #= require jquery_nested_form
 #= require phantom_forms

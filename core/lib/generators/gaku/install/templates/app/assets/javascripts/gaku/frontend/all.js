@@ -7,7 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 <% if options[:lib_name] == 'gaku' || options[:lib_name] == 'gaku/frontend' %>
-//= require gaku/gaku_frontend
+//= require gaku/frontend
 <% else %>
 //= require gaku/frontend/<%= options[:lib_name].gsub("/", "_") %>
 <% end %>

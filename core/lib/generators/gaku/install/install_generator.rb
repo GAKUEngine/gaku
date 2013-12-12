@@ -47,18 +47,18 @@ module Gaku
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
-        empty_directory "vendor/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
-        empty_directory "vendor/assets/#{path}/gaku/admin" if defined? Spree::Admin || Rails.env.test?
+        empty_directory "app/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
+        empty_directory "app/assets/#{path}/gaku/admin" if defined? Spree::Admin || Rails.env.test?
       end
 
       if defined? Spree::Frontend || Rails.env.test?
-        template "vendor/assets/javascripts/gaku/frontend/all.js"
-        template "vendor/assets/stylesheets/gaku/frontend/all.css"
+        template "app/assets/javascripts/gaku/frontend/all.js"
+        template "app/assets/stylesheets/gaku/frontend/all.css"
       end
 
       if defined? Spree::Admin || Rails.env.test?
-        template "vendor/assets/javascripts/gaku/admin/all.js"
-        template "vendor/assets/stylesheets/gaku/admin/all.css"
+        template "app/assets/javascripts/gaku/admin/all.js"
+        template "app/assets/stylesheets/gaku/admin/all.css"
       end
     end
 

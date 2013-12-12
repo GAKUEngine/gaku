@@ -10,7 +10,7 @@ ready = ->
         ,500
 
     index: ->
-      self.app.upload_picture()
+      self.admin.upload_picture()
       $(document).on 'keyup', '.dynamicAttributeName', ->
         nameElem = $(@)
         valueElem = nameElem.closest('.row')
@@ -36,18 +36,18 @@ ready = ->
 
 
     edit: ->
-      self.app.country_dropdown()
+      self.admin.country_dropdown()
 
     edit_master: ->
-      self.app.upload_picture()
+      self.admin.upload_picture()
 
     new: ->
-      self.app.country_dropdown()
+      self.admin.country_dropdown()
 
     school_details: ->
-      self.app.upload_picture()
+      self.admin.upload_picture()
 
-  @app.admin = new AdminController
+  @admin.admin = new AdminController
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

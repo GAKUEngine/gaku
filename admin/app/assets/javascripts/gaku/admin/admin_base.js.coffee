@@ -28,7 +28,7 @@ window.load_states = ->
 
 ready = ->
 
-  class App
+  class Admin
     init: ->
 
       $(document).on 'ajax:success', '.recovery-link', ->
@@ -87,7 +87,7 @@ ready = ->
         window.load_states()
 
 
-  @app = new App
+  @admin = new Admin
 
   (($, undefined_) ->
     $ ->
@@ -95,10 +95,10 @@ ready = ->
       parent_controller = $body.data("parent-controller")
       action = $body.data("action")
 
-      @app.init()  if $.isFunction(@app.init)
-      @app[action]()  if $.isFunction(@app[action])
+      @admin.init()  if $.isFunction(@admin.init)
+      @admin[action]()  if $.isFunction(@admin[action])
 
-      activeController = @app[parent_controller]
+      activeController = @admin[parent_controller]
       if activeController isnt `undefined`
         activeController.init()  if $.isFunction(activeController.init)
         activeController[action]()  if $.isFunction(activeController[action])

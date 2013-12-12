@@ -1,5 +1,5 @@
 /*
- *= require gaku/bootstrap_and_theme
+ *= require gaku/admin/bootstrap_and_theme
  *= require bootstrap-datepicker
  * require font-awesome
  *= require jquery.ui.autocomplete
@@ -8,6 +8,6 @@
  *= require nprogress-bootstrap
  *= require phantom_helpers
  *= require phantom_forms
- *= require gaku/gaku
+ *= require gaku/admin/gaku
  *= require_self
 */

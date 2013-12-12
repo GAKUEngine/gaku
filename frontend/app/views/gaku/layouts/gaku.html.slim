@@ -5,8 +5,8 @@ html
     title
       = content_for?(:title) ? yield(:title) + " | GAKU" : "GAKU"
     = javascript_tag '$.fx.off = true;' if Rails.env.test?
-    = stylesheet_link_tag "application"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag "gaku/frontend/all"
+    = javascript_include_tag "gaku/frontend/all"
     = csrf_meta_tags
   body data-action=current_controller_action data-parent-controller=current_parent_controller
     .container
