@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery.minicolors
 
-#= require turbolinks
 #= require jquery.ui.autocomplete
 #= require jquery.ui.draggable
 #= require jquery.ui.droppable
@@ -28,7 +27,7 @@
 #= require rails.validations
 
 #= require gaku/frontend/slide.js.erb
-#= require gaku/frontend/gaku
+#= require gaku/frontend/base
 
 #= require jquery_nested_form
 #= require phantom_forms
