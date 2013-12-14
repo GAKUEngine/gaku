@@ -1,7 +1,7 @@
 module Gaku::AutocompleteHelper
 
   def autocomplete_text_field(form, options = {})
-    content_tag :div, class: 'col-sm-3' do
+    content_tag :div do
       concat form.label options[:object_name], options[:tag_name], class: 'control-label'
       concat form.text_field options[:object_name],
                              class: 'form-control input-sm js-autocomplete',
@@ -10,14 +10,14 @@ module Gaku::AutocompleteHelper
   end
 
   def autocomplete_date_field(form, options = {})
-    content_tag :div, class: 'col-sm-3' do
+    content_tag :div do
       concat form.label options[:object_name], options[:tag_name], class: 'control-label'
       concat form.text_field options[:object_name], class: 'form-control input-sm', placeholder: t(:'date.placeholder')
     end
   end
 
   def autocomplete_select(form, options = {})
-    content_tag :div, class: 'col-sm-3' do
+    content_tag :div do
       concat form.label options[:object_name], options[:tag_name], class: 'control-label'
       concat form.select(
         options[:object_name],
