@@ -1,7 +1,7 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Person, Addresses, Contacts, Notes, Picture
+    include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :course_enrollments, dependent: :destroy
     has_many :courses, through: :course_enrollments
@@ -36,7 +36,6 @@ module Gaku
 
     before_create :set_scholarship_status
 
-    paginates_per 25 #Preset.per_page('students')
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',

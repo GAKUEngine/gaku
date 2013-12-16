@@ -1,11 +1,9 @@
 module Gaku
   class Teacher < ActiveRecord::Base
 
-    include Person, Addresses, Contacts, Notes, Picture
+    include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     belongs_to :user
-
-    paginates_per 25
 
   end
 end
