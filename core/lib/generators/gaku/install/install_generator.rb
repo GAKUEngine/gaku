@@ -49,6 +49,7 @@ module Gaku
       %w{javascripts stylesheets images}.each do |path|
         empty_directory "app/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
         empty_directory "app/assets/#{path}/gaku/admin" if defined? Spree::Admin || Rails.env.test?
+        empty_directory "app/assets/#{path}/gaku/archive" if defined? Gaku::Archive || Rails.env.test?
       end
 
       if defined? Spree::Frontend || Rails.env.test?
@@ -59,6 +60,11 @@ module Gaku
       if defined? Spree::Admin || Rails.env.test?
         template "app/assets/javascripts/gaku/admin/all.js"
         template "app/assets/stylesheets/gaku/admin/all.css"
+      end
+
+      if defined? Spree::Archive || Rails.env.test?
+        template "app/assets/javascripts/gaku/archive/all.js"
+        template "app/assets/stylesheets/gaku/archive/all.css"
       end
     end
 
