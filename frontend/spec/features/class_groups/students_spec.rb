@@ -57,7 +57,6 @@ describe 'ClassGroup Students' do
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
 
       page.should have_content "#{student1} : Successfully enrolled!"
-      within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
     end
   end
@@ -66,7 +65,6 @@ describe 'ClassGroup Students' do
     before do
       class_group.students << student1
       visit gaku.edit_class_group_path(class_group)
-      within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
       Gaku::ClassGroupEnrollment.count.should eq 1
     end
@@ -84,7 +82,6 @@ describe 'ClassGroup Students' do
 
       ensure_delete_is_working
 
-      within('.class-group-enrollments-count') { page.should_not have_content('1') }
       within('#class-group-enrollments-tab-link') { page.should_not have_content('1') }
     end
   end
