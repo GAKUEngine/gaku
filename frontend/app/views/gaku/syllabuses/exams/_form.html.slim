@@ -1,15 +1,17 @@
 = remote_form_for [@syllabus, @exam], { resource: 'syllabus-exam', label: t(:'exam.singular') } do |f|
-  .row
-    h4 = t(:'exam.new')
-  = hr
-  = well_div do
-    = render 'gaku/syllabuses/exams/form_fields', f: f
+  .panel.panel-default
+    .panel-heading
+      = t(:'exam.singular')
 
-  .row
-    h4 = t(:'exam_portion.master')
-  = hr
-  = well_div do
-    = f.fields_for :exam_portions do |ep_form|
-      = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: ep_form
+    .panel-body
+      = render 'gaku/syllabuses/exams/form_fields', f: f
+
+  .panel.panel-default
+    .panel-heading
+      = t(:'exam_portion.master')
+
+    .panel-body
+      = f.fields_for :exam_portions do |ep_form|
+        = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: ep_form
 
   = buttons_for @exam, resource: 'syllabus-exam'

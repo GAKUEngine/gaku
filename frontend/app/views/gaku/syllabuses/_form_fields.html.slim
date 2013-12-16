@@ -1,14 +1,11 @@
 .row
-  .col-md-4
+  .col-md-5
     = f.text_field :name, label: t(:'syllabus.name')
-  .col-md-4
+  .col-md-1
     = f.text_field :code, label: t(:'syllabus.code')
-  .col-md-4
-
-.row
-  .col-md-6
+  .col-md-5
     = f.select :department_id, options_from_collection_for_select(@departments, :id, :name), { prompt: true}, class: 'span12', label: t(:'department.singular')
-  .col-md-6
+  .col-md-1
     = f.number_field :credits, label: t(:'syllabus.credits')
 .row
   .col-md-12
