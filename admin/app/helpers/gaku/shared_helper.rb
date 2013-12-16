@@ -2,11 +2,7 @@ module Gaku
   module SharedHelper
 
     def can_edit?
-      if controller.action_name.include?('edit')
-        true
-      else
-        false
-      end
+      %w( edit create ).include? controller.action_name
     end
 
     def cannot_edit?
