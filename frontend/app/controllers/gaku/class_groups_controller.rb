@@ -8,8 +8,6 @@ module Gaku
 
     respond_to :html, :js
 
-    helper_method :sort_column, :sort_direction
-
     before_action :set_courses
     before_action :set_class_group,       only: %i( edit update destroy student_chooser )
 
@@ -41,9 +39,18 @@ module Gaku
       respond_with @class_group, location: [:edit, @class_group]
     end
 
+    # def index
+    #   @class_groups = SemesterClassGroup.group_by_semester
+    #   @class_groups_without_semester = ClassGroup.without_semester
+    #   set_count
+    # end
+
     def index
       @class_groups = SemesterClassGroup.group_by_semester
-      @class_groups_without_semester = ClassGroup.without_semester
+
+      @search = ClassGroup.without_semester.search(params[:q])
+      results = @search.result(distinct: true)
+      @class_groups_without_semester = results.page(params[:page])
       set_count
     end
 
@@ -73,14 +80,6 @@ module Gaku
 
     def set_courses
       @courses = Course.includes(:syllabus).map { |c| [c, c.id] }
-    end
-
-    def sort_column
-      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
   end

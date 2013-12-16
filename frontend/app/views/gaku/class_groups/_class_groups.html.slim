@@ -1,14 +1,14 @@
 = table_for 'class-groups-without-semester-index' do
 	thead
 	  tr
-	    = th(sortable 'grade', t(:'class_group.grade'))
-	    = th(sortable 'name',  t(:'class_group.name'))
-	    = th(sortable 'homeroom', t(:'class_group.homeroom'))
+	    = th t(:'class_group.grade')
+	    = th t(:'class_group.name')
+	    = th t(:'class_group.homeroom')
 	    = th_actions 1
 	tbody
 	  = render partial: 'class_group', collection: @class_groups_without_semester, as: 'class_group'
 
-= hr
+= paginate @class_groups_without_semester
 
 - @class_groups.each do |semester, semester_class_groups|
   = table_for "semester-#{semester}-class-groups-index" do
