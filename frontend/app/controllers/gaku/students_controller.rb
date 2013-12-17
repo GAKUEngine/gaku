@@ -32,10 +32,9 @@ module Gaku
       set_index_vars
       @enrolled_students = params[:enrolled_students]
 
-      @count = Student.count
-
       @search = Student.active.search(params[:q])
       results = @search.result(distinct: true)
+      @count = results.count
       @students = results.order('created_at ASC').page(params[:page])
 
       respond_with(@students) do |format|
