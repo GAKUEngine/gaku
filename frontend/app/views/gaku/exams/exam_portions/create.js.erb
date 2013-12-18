@@ -5,6 +5,7 @@ showNotice("<%= render_flash %>");
 $('#exam-exam-portions-index tbody').append('<%= j render("gaku/exams/exam_portions/exam_portion", {exam_portion: @exam_portion}) %>');
 
 $('.exam-exam-portions-count').html("<%= print_count(@count, t(:'exam_portion.list')) %>");
+$('#exam-exam-portions-tab-link').html("<%= print_count(@count, t(:'exam_portion.plural')) %>");
 
 <% if @exam.use_weighting? %>
 
