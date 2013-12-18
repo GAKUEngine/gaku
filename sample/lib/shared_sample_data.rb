@@ -110,3 +110,19 @@ def create_student_with_full_info(predefined_student=nil)
 
   student.guardians << guardian
 end
+
+def create_teacher_with_full_info(predefined_teacher=nil)
+  if predefined_teacher
+    teacher = Gaku::Teacher.where(predefined_teacher).first_or_create!
+  else
+    random_teacher = random_person
+    teacher = Gaku::Teacher.where(random_teacher).first_or_create!
+  end
+
+  teacher.addresses.create!(random_address)
+  teacher.contacts.create!(random_email)
+  teacher.contacts.create!(random_home_phone)
+  teacher.contacts.create!(random_mobile_phone)
+  teacher.notes.create!(random_note)
+  teacher.notes.create!(random_note)
+end

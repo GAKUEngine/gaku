@@ -1,4 +1,5 @@
 require 'rake-progressbar'
+require 'shared_sample_data'
 
 teachers = [
   { name: 'Vassil', surname: 'Kalkov' },
@@ -11,21 +12,12 @@ teachers = [
 say 'Creating predefined teachers...'.yellow
 
 teachers.each do |teacher|
-  Gaku::Teacher.where(teacher).first_or_create!
+  create_teacher_with_full_info(teacher)
 end
 
 
 say "Creating #{@count[:teachers]} teachers...".yellow
 
 batch_create(@count[:teachers]) do
-  teacher = Gaku::Teacher.where(random_person).first_or_create!
-
-  teacher.addresses.where(random_address).first_or_create!
-  teacher.addresses.where(random_address).first_or_create!
-
-  teacher.contacts.where(random_mobile_phone).first_or_create!
-  teacher.contacts.where(random_home_phone).first_or_create!
-  teacher.contacts.where(random_email).first_or_create!
-
-  teacher.notes.where(random_note).first_or_create!
+  create_teacher_with_full_info
 end
