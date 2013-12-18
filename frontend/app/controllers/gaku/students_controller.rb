@@ -17,6 +17,7 @@ module Gaku
 
     def new
       @student = Student.new
+      @student.class_group_enrollments.new
       respond_with @student
     end
 
@@ -81,16 +82,16 @@ module Gaku
 
     private
 
-    def student_params
-      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated picture)
-    end
 
     def student_params
       params.require(:student).permit(attributes)
     end
 
     def attributes
-      %i( name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated picture )
+      [ :name, :surname, :name_reading, :surname_reading, :birth_date,
+          :gender, :scholarship_status_id,
+          :enrollment_status_code, :commute_method_type_id, :admitted,
+          :graduated, :picture, class_group_enrollments_attributes: [:id, :class_group_id] ]
     end
 
     def includes
