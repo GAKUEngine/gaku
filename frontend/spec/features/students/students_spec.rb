@@ -8,6 +8,7 @@ describe 'Students', type: :feature do
   end
   before { as :admin }
 
+  let(:class_group) { create(:class_group) }
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
@@ -105,10 +106,27 @@ describe 'Students', type: :feature do
 
   context 'new', js: true do
     before do
+      class_group
             #page.driver.debug
       visit gaku.students_path
-
       click new_link
+    end
+
+    it 'creates and shows with class_group' do
+      expect do
+        expect do
+          select class_group.name, from: 'Class'
+          fill_in 'student_name', with: 'John'
+          fill_in 'student_surname', with: 'Doe'
+          click_button 'submit-student-button'
+          flash_created?
+        end.to change(Gaku::Student, :count).by 1
+      end.to change(Gaku::ClassGroupEnrollment, :count).by 1
+
+      expect(Gaku::Student.last.class_groups).to eq [class_group]
+
+      page.has_text? 'John'
+      count? 'Students list(1)'
     end
 
     it 'creates and shows' do

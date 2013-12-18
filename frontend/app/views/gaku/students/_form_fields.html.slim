@@ -1,6 +1,7 @@
 .row
   .col-md-12
-    = f.select :class_group_ids, @class_groups, { prompt: t(:'class_group.none_assigned') }, label: t(:'class')
+    = f.fields_for :class_group_enrollments do |cge_form|
+      = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'), include_blank: true }, label: t(:'class'))
 
 = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
 

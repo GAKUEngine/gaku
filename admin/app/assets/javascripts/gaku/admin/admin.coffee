@@ -21,8 +21,6 @@ ready = ->
         valueElem.attr 'name', "grading_method[arguments][#{value}]"
         valueElem.attr 'placeholder', "value for #{value}"
 
-        console.log valueElem
-
       $(document).on 'click', '.remove-argument-row', (e)->
         e.preventDefault()
         if confirm('Are you sure?')

@@ -5,9 +5,9 @@ module Gaku
     belongs_to :student
     has_many :school_roles, as: :school_rolable
 
-    validates :class_group_id, presence: true
+    validates :class_group, presence: true
 
-    validates :student_id,
+    validates :student,
               presence: true,
               uniqueness: {
                             scope: :class_group_id,
