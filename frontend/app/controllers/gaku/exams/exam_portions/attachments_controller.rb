@@ -15,7 +15,7 @@ module Gaku
     def create
       @attachment = @exam_portion.attachments.create(attachment_params)
       set_count
-      respond_with @attachment, location: [@exam, @exam_portion]
+      respond_with @attachment, location: [:edit, @exam, @exam_portion]
     end
 
     protected
