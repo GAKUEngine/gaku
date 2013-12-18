@@ -1,12 +1,8 @@
 .row
-    ul.thumbnails
-      - @student.achievements.each_slice(6) do |achievements|
-        .row
-          .achievements-group
-            - achievements.each do |achievement|
-              li.col-md-2
-                .thumbnail.well
-                  =image_tag(achievement.badge)
-                  h4 =achievement.name
-                  p.muted =achievement.authority
-        =hr
+  ul.thumbnails.list-unstyled
+    - @student.achievements.each_slice(6) do |achievements|
+      .row
+        .achievements-group
+          - achievements.each do |achievement|
+            = render 'gaku/students/student_achievements/achievement', achievement: achievement
+      hr
