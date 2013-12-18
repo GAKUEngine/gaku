@@ -99,7 +99,7 @@ Gaku::Core::Engine.routes.draw do
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes ) do
+  resources :exams, concerns: %i( notes pagination ) do
     put :create_exam_portion, on: :member
 
     resources :exam_scores
