@@ -24,7 +24,7 @@ describe 'Exam Portions' do
       end.to change(Gaku::ExamPortion, :count).by 1
 
       within(table) { has_content? 'Biology Exam Portion' }
-      count? 'Exam Portions list(1)'
+      within(tab_link) { expect(page.has_content?('Exam Portions(1)')) }
     end
 
     it { has_validations? }
@@ -61,7 +61,7 @@ describe 'Exam Portions' do
     it 'deletes', js: true do
       visit gaku.edit_exam_path(exam)
 
-      count? 'Exam Portions list(1)'
+      within(tab_link) { page.has_content? 'Exam Portions(1)' }
       within(table) { has_content? exam_portion.name }
 
       expect do
@@ -70,7 +70,7 @@ describe 'Exam Portions' do
         flash_destroyed?
       end.to change(Gaku::ExamPortion, :count).by -1
 
-      within(count_div) { has_no_content? 'Exam Portions list(1)' }
+      within(tab_link) { has_no_content? 'Exam Portions(1)' }
       within(table) { has_no_content? exam_portion.name }
 
 
