@@ -9,10 +9,6 @@ module Gaku
       end
     end
 
-    def cannot_edit?
-      ! can_edit?
-    end
-
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end

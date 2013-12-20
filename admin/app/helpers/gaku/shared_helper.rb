@@ -5,10 +5,6 @@ module Gaku
       %w( edit create ).include? controller.action_name
     end
 
-    def cannot_edit?
-      ! can_edit?
-    end
-
     def genders
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
