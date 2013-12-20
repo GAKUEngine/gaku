@@ -3,7 +3,6 @@ module Gaku
 
     include Gaku::AutocompleteHelper
     include Gaku::ExamHelper
-    include Gaku::FlashHelper
     include Gaku::PersonHelper
     include Gaku::SharedHelper
     include Gaku::StudentChooserHelper

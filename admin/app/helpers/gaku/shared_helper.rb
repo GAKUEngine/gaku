@@ -21,22 +21,16 @@ module Gaku
       end
     end
 
-    def title(text)
-      content_for(:title) do
-        text
-      end
-    end
-
-    def datepicker_date_format(date)
-      date ?  date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
-    end
-
     def state_load(object)
       object.country.nil? ? Gaku::State.none : object.country.states
     end
 
     def disabled?(object)
       object.new_record? || object.country.states.blank?
+    end
+
+    def render_flash
+      escape_javascript(render 'gaku/shared/flash', flash: flash)
     end
 
   end
