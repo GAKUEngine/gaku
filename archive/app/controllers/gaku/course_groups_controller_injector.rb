@@ -1,16 +1,19 @@
 module Gaku
   CourseGroupsController.class_eval do
 
-    def recovery
-      @course_group = CourseGroup.deleted.find(params[:id])
-      @course_group.recover
-      respond_with @course_group
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = CourseGroup.find(params[:id])
     end
 
-    def soft_delete
-      @course_group = CourseGroup.find(params[:id])
-      @course_group.soft_delete
-      respond_with @course_group, location: course_groups_path
+    def set_deleted_resource
+      @resource = CourseGroup.deleted.find(params[:id])
     end
 
   end

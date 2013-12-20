@@ -1,16 +1,19 @@
 module Gaku
   SyllabusesController.class_eval do
 
-    def recovery
-      @syllabus = Syllabus.deleted.find(params[:id])
-      @syllabus.recover
-      respond_with @syllabus
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = Syllabus.find(params[:id])
     end
 
-    def soft_delete
-      @syllabus = Syllabus.find(params[:id])
-      @syllabus.soft_delete
-      respond_with @syllabus, location: syllabuses_path
+    def set_deleted_resource
+      @resource = Syllabus.deleted.find(params[:id])
     end
 
   end

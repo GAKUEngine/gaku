@@ -1,16 +1,19 @@
 module Gaku
   StudentsController.class_eval do
 
-    def recovery
-      @student = Student.deleted.find(params[:id])
-      @student.recover
-      respond_with @student
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = Student.find(params[:id])
     end
 
-    def soft_delete
-      @student = Student.find(params[:id])
-      @student.soft_delete
-      respond_with @student, location: students_path
+    def set_deleted_resource
+      @resource = Student.deleted.find(params[:id])
     end
 
   end

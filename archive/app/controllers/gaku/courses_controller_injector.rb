@@ -1,16 +1,19 @@
 module Gaku
   CoursesController.class_eval do
 
-    def recovery
-      @course = Course.deleted.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
-      @course.recover
-      respond_with @course
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
     end
 
-    def soft_delete
-      @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
-      @course.soft_delete
-      respond_with @course, location: courses_path
+    def set_deleted_resource
+      @resource = Course.deleted.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
     end
 
   end

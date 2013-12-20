@@ -1,16 +1,19 @@
 module Gaku
   ClassGroupsController.class_eval do
 
-    def recovery
-      @class_group = ClassGroup.deleted.find(params[:id])
-      @class_group.recover
-      respond_with @class_group
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = ClassGroup.find(params[:id])
     end
 
-    def soft_delete
-      @class_group = ClassGroup.find(params[:id])
-      @class_group.soft_delete
-      respond_with @class_group, location: class_groups_path
+    def set_deleted_resource
+      @resource = ClassGroup.deleted.find(params[:id])
     end
 
   end

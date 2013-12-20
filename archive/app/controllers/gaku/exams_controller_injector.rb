@@ -1,16 +1,19 @@
 module Gaku
   ExamsController.class_eval do
 
-    def recovery
-      @exam = Exam.deleted.find(params[:id])
-      @exam.recover
-      respond_with @exam
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = Exam.find(params[:id])
     end
 
-    def soft_delete
-      @exam = Exam.find(params[:id])
-      @exam.soft_delete
-      respond_with @exam, location: exams_path
+    def set_deleted_resource
+      @resource = Exam.deleted.find(params[:id])
     end
 
   end

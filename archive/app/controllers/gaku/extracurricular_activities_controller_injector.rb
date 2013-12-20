@@ -1,16 +1,19 @@
 module Gaku
   ExtracurricularActivitiesController.class_eval do
 
-    def recovery
-      @extracurricular_activity = ExtracurricularActivity.deleted.find(params[:id])
-      @extracurricular_activity.recover
-      respond_with @extracurricular_activity
+    include TrashableController
+
+    before_action :set_resource,         only: :soft_delete
+    before_action :set_deleted_resource, only: :recovery
+
+    private
+
+    def set_resource
+      @resource = ExtracurricularActivity.find(params[:id])
     end
 
-    def soft_delete
-      @extracurricular_activity = ExtracurricularActivity.find(params[:id])
-      @extracurricular_activity.soft_delete
-      respond_with @extracurricular_activity, location: extracurricular_activities_path
+    def set_deleted_resource
+      @resource = ExtracurricularActivity.deleted.find(params[:id])
     end
 
   end
