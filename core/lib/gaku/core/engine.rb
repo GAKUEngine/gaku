@@ -6,46 +6,23 @@ module Gaku
 
       config.autoload_paths += %W(#{config.root}/lib)
 
-
-
-      config.generators do |g|
-        g.test_framework :rspec, view_specs: false
-      end
-
-      initializer "gaku.paperclip", :before => "gaku.environment" do
+      initializer "gaku.paperclip" do
         Paperclip.interpolates(:placeholder) do |attachment, style|
           ActionController::Base.helpers.asset_path("missing_#{style}.png")
         end
       end
 
-      initializer "gaku.ruby_template_handler", :before => "gaku.environment" do
+      initializer "gaku.ruby_template_handler" do
         ActionView::Template.register_template_handler(:rb, :source.to_proc)
       end
 
-      initializer "gaku.mime_types", :before => "gaku.environment" do
+      initializer "gaku.mime_types" do
         Mime::Type.register 'application/xls', :xls
       end
 
-
-      def self.activate
-      end
-
-      config.to_prepare &method(:activate).to_proc
-
-      config.after_initialize do
-      end
-
-      # We need to reload the routes here due to how Gaku sets them up.
-      # The different facets of Gaku  append/prepend routes to Core
-      # *after* Core has been loaded.
-      #
-      # So we wait until after initialization is complete to do one final reload.
-      # This then makes the appended/prepended routes available to the application.
       config.after_initialize do
         Rails.application.routes_reloader.reload!
       end
-
-      require 'gaku/core/routes'
 
     end
   end
