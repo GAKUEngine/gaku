@@ -1,7 +1,7 @@
 $('#new-class-group-course').slide();
 $('#new-class-group-course-link').show();
 
-$('#class-group-courses-index tbody').append('<%= render_js_partial("course", {enrollment: @class_group_course_enrollment}) %>');
+$('#class-group-courses-index tbody').append('<%= j render("course", {enrollment: @class_group_course_enrollment}) %>');
 
 showNotice("<%= render_flash %>");
 $('#class-group-courses-tab-link').html("<%= print_count(@count, t(:'course.plural')) %>");

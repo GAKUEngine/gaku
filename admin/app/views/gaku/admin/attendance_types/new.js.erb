@@ -1,4 +1,4 @@
-$('#new-admin-attendance-type').html('<%= render_js_partial("form") %>').slide();
+$('#new-admin-attendance-type').html('<%= j render("form") %>').slide();
 $('#new-admin-attendance-type #attendance_type_color_code').minicolors({theme: 'bootstrap'});
 $('#new-admin-attendance-type-link').hide();
 $('.remote-form').enableValidations();
