@@ -8,7 +8,7 @@ html
     = stylesheet_link_tag "gaku/frontend/all"
     = javascript_include_tag "gaku/frontend/all"
     = csrf_meta_tags
-  body data-action=current_controller_action data-parent-controller=current_parent_controller
+  body data-controller=current_controller data-action=current_controller_action data-parent-controller=current_parent_controller
     .container
       = render 'gaku/shared/modal_config'
       = render 'gaku/shared/menubar'
