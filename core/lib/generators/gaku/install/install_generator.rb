@@ -34,16 +34,6 @@ module Gaku
       remove_file 'public/index.html'
     end
 
-    # def setup_assets
-    #   @lib_name = 'gaku'
-    #   %w{javascripts stylesheets images}.each do |path|
-    #     empty_directory "app/assets/#{path}/gaku"
-    #   end
-
-    #   template 'app/assets/javascripts/gaku/all.js'
-    #   template 'app/assets/stylesheets/gaku/all.css'
-    # end
-
     def setup_assets
       @lib_name = 'gaku'
       %w{javascripts stylesheets images}.each do |path|
@@ -135,24 +125,19 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     end
 
     def notify_about_routes
-      insert_into_file File.join('config', 'routes.rb'), after: "Application.routes.draw do\n" do
-        %Q{
-  # This line mounts Gaku's routes at the root of your application.
-  # This means, any requests to URLs such as /students, will go to Gaku::StudentsController.
-  # If you would like to change where this engine is mounted, simply change the :at option to something different.
-  #
-  # We ask that you don't use the :as option here, as Gaku relies on it being the default of "gaku"
+      if File.readlines(File.join('config', 'routes.rb')).grep(/mount Gaku::Core::Engine/).any?
+        say_status :skipping, "route Gaku::Core::Engine already present."
+      else
+        insert_into_file File.join('config', 'routes.rb'), after: "Application.routes.draw do\n" do
+          %Q{ mount Gaku::Core::Engine, at: '/' }
+        end
 
-  mount Gaku::Core::Engine, at: '/'
-
-        }
-      end
-
-      unless options[:quiet]
-        puts '*' * 50
-        puts "We added the following line to your application's config/routes.rb file:"
-        puts ' '
-        puts "    mount Gaku::Core::Engine, at: '/'"
+        unless options[:quiet]
+          puts '*' * 50
+          puts "We added the following line to your application's config/routes.rb file:"
+          puts ' '
+          puts "    mount Gaku::Core::Engine, at: '/'"
+        end
       end
     end
 
