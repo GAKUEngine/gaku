@@ -127,16 +127,8 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def populate_seed_data
       if @load_seed_data
         say_status :loading,  'seed data'
-        rake_options=[]
-        rake_options << "RAILS_ENV=#{@env}"
-        rake_options << 'AUTO_ACCEPT=1' if options[:auto_accept]
-
-        cmd = lambda { rake("db:seed #{rake_options.join(' ')}") }
-        if options[:auto_accept] || (options[:admin_email] && options[:admin_password])
-          quietly &cmd
-        else
-          cmd.call
-        end
+        cmd = lambda { rake "db:seed", env: @env }
+        cmd.call
       else
         say_status :skipping, 'seed data (you can always run rake db:seed)'
       end
