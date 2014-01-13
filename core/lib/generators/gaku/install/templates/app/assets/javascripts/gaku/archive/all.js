@@ -6,5 +6,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require gaku/archiv
+//= require gaku/archive
 //= require_tree .
