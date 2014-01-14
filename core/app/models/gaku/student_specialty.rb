@@ -14,6 +14,5 @@ module Gaku
                           }
 
     scope :ordered, -> { order('major desc') }
-
   end
 end

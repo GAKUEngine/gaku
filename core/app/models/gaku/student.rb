@@ -39,7 +39,8 @@ module Gaku
 
 
     before_create :set_scholarship_status
-    before_save   :set_id_code
+    after_save   :set_serial_id
+    after_save   :set_code
 
 
     def make_enrolled
@@ -49,9 +50,10 @@ module Gaku
       save
     end
 
-    def set_id_code
-
+    def major_specialty
+      student_specialties.ordered.first.specialty if student_specialties.any?
     end
+
 
     def identification_number
       '%surname-%name-%id'.gsub(/%(\w+)/) do |s|
@@ -86,6 +88,30 @@ module Gaku
         false
       end
     end
+
+    private
+
+
+    def major_specialty_code
+      major_specialty || empty_string(2)
+    end
+
+    def admitted_code
+      admitted.try(:year) || empty_string(4)
+    end
+
+    def set_code
+      self.code = "#{major_specialty_code}-#{admitted_code}-#{serial_id}"
+    end
+
+    def set_serial_id
+      self.serial_id = "%05d" % id
+    end
+
+    def empty_string(size)
+      '*' * size
+    end
+
 
   end
 end

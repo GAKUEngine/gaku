@@ -42,6 +42,32 @@ describe Gaku::Student do
 
   end
 
+  describe '#set_serial_id' do
+    it 'generates serial_id' do
+      student = create(:student)
+      expect(student.serial_id).to eq("%05d" % student.id)
+    end
+  end
+
+
+  describe '#set_code' do
+
+    it "returns '**-****-serial_id' if missing major specialty and admitted" do
+      student = create(:student)
+      expect(student.code).to eq "**-****-#{student.serial_id}"
+    end
+
+    it "returns '**-year-serial_id' if no major specialty but admitted" do
+      student = create(:student, admitted: Time.now)
+      expect(student.code).to eq "**-#{Time.now.year}-#{student.serial_id}"
+    end
+
+    it "returns 'major_specialty-year-serial_id'" do
+      student = create(:student, admitted: Time.now)
+      expect(student.code).to eq "**-#{Time.now.year}-#{student.serial_id}"
+    end
+  end
+
 
   context 'counter_cache' do
 
