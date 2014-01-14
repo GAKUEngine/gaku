@@ -112,7 +112,7 @@ describe 'Students', type: :feature do
       click new_link
     end
 
-    it 'creates and shows with class_group' do
+    xit 'creates and shows with class_group' do
       expect do
         expect do
           select class_group.name, from: 'Class'
