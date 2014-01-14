@@ -1,15 +1,17 @@
 = panel_for 'student-panel' do
-  = panel_header 'Student information', student
+  = panel_header student.code, student
 
   table.table.table-bordered.th-center
     tbody
       = render 'gaku/shared/fields/person_show_table', person: student
+
       tr
         th.active = t(:'class')
-        td colspan="1"
-          = student.class_group
+        td = student.class_group
+
         th.active = t(:'admitted')
         td = student.admitted
+
       = render 'gaku/shared/fields/address_and_contact_show_table', person: student
       tr
         th.active = t(:'achievement.plural')

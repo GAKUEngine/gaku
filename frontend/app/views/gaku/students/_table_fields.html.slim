@@ -5,6 +5,7 @@
 - else
   td.vm-tc = check_box_tag "","", false, class: "student-check student-#{student.id}", id: "student-#{student.id}"
 
+td.code = student.code
 = render 'gaku/shared/fields/person_fields', person: student
 
 td.class-name = student.class_and_number

@@ -15,8 +15,8 @@ batch_create(@count[:changes]) do
                                         commute_method_type: @commute_method_type,
                                         enrollment_status_code: @enrollment_status,
                                         scholarship_status: @scholarship_status,
-                                        student_id_number: "number_#{counter}",
-                                        student_foreign_id_number: "foreign_number_#{counter}",
+
+                                        foreign_id_code: "foreign_id_code_#{counter}",
                                       )
 
   student = Gaku::Student.where(random_student).first_or_create!
@@ -26,8 +26,7 @@ batch_create(@count[:changes]) do
   student.enrollment_status_code = enrollment_status.code
   student.commute_method_type = commute_method_type
   student.scholarship_status = scholarship_status
-  student.student_id_number = "number_#{counter+100}"
-  student.student_foreign_id_number = "foreign_number_#{counter+100}"
+  student.foreign_id_code = "foreign_code_#{counter+100}"
   student.save!
 
   student.soft_delete

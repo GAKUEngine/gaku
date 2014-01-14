@@ -39,7 +39,7 @@ module Gaku
 
 
     before_create :set_scholarship_status
-    after_save   :set_serial_id
+    after_create  :set_serial_id
     after_save   :set_code
 
 
@@ -101,11 +101,11 @@ module Gaku
     end
 
     def set_code
-      self.code = "#{major_specialty_code}-#{admitted_code}-#{serial_id}"
+      update_column(:code, "#{major_specialty_code}-#{admitted_code}-#{serial_id}")
     end
 
     def set_serial_id
-      self.serial_id = "%05d" % id
+      update_column(:serial_id, "%05d" % id)
     end
 
     def empty_string(size)
