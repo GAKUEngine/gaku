@@ -39,6 +39,7 @@ module Gaku
 
 
     before_create :set_scholarship_status
+    before_save   :set_id_code
 
 
     def make_enrolled
@@ -46,6 +47,10 @@ module Gaku
                                                   active: true, immutable: true).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save
+    end
+
+    def set_id_code
+
     end
 
     def identification_number
