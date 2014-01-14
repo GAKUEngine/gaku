@@ -5,6 +5,8 @@
                                  numcode: '392'
                               ).first_or_create!
 
+@state = Gaku::State.where(name: Faker::Address.us_state, country_iso: @country.iso).first_or_create!
+
 @mobile_phone = Gaku::ContactType.where(name: 'Mobile Phone').first_or_create!
 @home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
 @email = Gaku::ContactType.where(name: 'Email').first_or_create!
@@ -80,7 +82,8 @@ def random_address
     title: 'Home address',
     zipcode: '452-0813',
     city: 'Nagoya',
-    country: @country
+    country: @country,
+    state: @state
   }
 end
 
