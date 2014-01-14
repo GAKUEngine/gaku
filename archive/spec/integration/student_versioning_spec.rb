@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Versioning' do
 
-  let(:student) { create(:student, name: 'Vassil', middle_name: 'Anastasov', surname: 'Kalkov', student_id_number: '69', student_foreign_id_number: '96') }
+  let(:student) { create(:student, name: 'Vassil', middle_name: 'Anastasov', surname: 'Kalkov', foreign_id_code: '96') }
 
 
   it 'saves soft delete', versioning: true do
@@ -14,19 +14,17 @@ describe 'Student Versioning' do
     expect(version.human_changes['deleted']).to eq [false, true]
   end
 
-  it 'saves id_number changes', versioning: true do
-    old_student_id_number = student.student_id_number
-    old_student_foreign_id_number = student.student_foreign_id_number
+  it 'saves foreign_id_code changes', versioning: true do
+
+    old_foreign_id_code = student.foreign_id_code
 
     expect do
-      student.student_foreign_id_number = '1'
-      student.student_id_number = '2'
+      student.foreign_id_code = '1'
       student.save
     end.to change(Gaku::Versioning::StudentVersion, :count).by(1)
 
     version = Gaku::Versioning::StudentVersion.last
-    expect(version.human_changes['student_id_number']).to eq [old_student_id_number, student.student_id_number]
-    expect(version.human_changes['student_foreign_id_number']).to eq [old_student_foreign_id_number, student.student_foreign_id_number]
+    expect(version.human_changes['foreign_id_code']).to eq [old_foreign_id_code, student.foreign_id_code]
   end
 
   it 'saves names changes', versioning: true do
