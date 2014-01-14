@@ -81,8 +81,6 @@ Gaku::Core::Engine.routes.draw do
   resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
   resources :students, concerns: %i( addresses contacts notes pagination ) do
-    get :load_autocomplete_data, on: :collection
-
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
     resources :commute_methods,      controller: 'students/commute_methods'
     resources :student_achievements, controller: 'students/student_achievements', except: :show
@@ -112,6 +110,12 @@ Gaku::Core::Engine.routes.draw do
 
   resources :course_groups  do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
+  end
+
+  resources :search, only: :index do
+    collection do
+      get :students
+    end
   end
 
 

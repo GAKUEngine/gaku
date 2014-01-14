@@ -12,10 +12,10 @@ form role="form"
                                               class_name: 'address',
                                               column: 'zipcode'} )
     .col-md-2
-      = autocomplete_text_field(f, options = {object_name: 'addresses_state_name_eq',
+      = autocomplete_text_field(f, options = {object_name: 'addresses_state_name_cont',
                                               tag_name: t(:'address.state.singular'),
-                                              class_name: 'address',
-                                              column: 'state_name'})
+                                              class_name: 'state',
+                                              column: 'name'})
     .col-md-2
       = autocomplete_text_field(f, options = {object_name: 'addresses_city_cont',
                                               tag_name: t(:'address.city'),

@@ -72,13 +72,6 @@ module Gaku
       respond_with @student, location: [:edit, @student]
     end
 
-    def load_autocomplete_data
-      object = "Gaku::#{params[:class_name].capitalize}".constantize
-      @result = object.order(params[:column].to_sym)
-                      .where(params[:column] + ' like ?', "%#{params[:term]}%")
-      render json: @result.map(&params[:column].to_sym).uniq
-    end
-
 
     private
 
