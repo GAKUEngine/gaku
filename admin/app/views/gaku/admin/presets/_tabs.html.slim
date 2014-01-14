@@ -14,6 +14,9 @@
         a#admin-preset-person-tab-link data-toggle="tab" href="#person"
           = t(:'preset.person.singular')
       li
+        a#admin-preset-student-tab-link data-toggle="tab" href="#student"
+          = t(:'preset.student.singular')
+      li
         a#admin-preset-address-tab-link data-toggle="tab" href="#address"
           = t(:'preset.address.singular')
       li
@@ -35,6 +38,8 @@
         = render 'gaku/admin/presets/locale'
       #person.tab-pane
         = render 'gaku/admin/presets/person'
+      #student.tab-pane
+        = render 'gaku/admin/presets/student'
       #address.tab-pane
         = render 'gaku/admin/presets/address'
       #grading.tab-pane

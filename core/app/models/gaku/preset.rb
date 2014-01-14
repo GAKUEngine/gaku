@@ -3,6 +3,7 @@ module Gaku
 
     store_accessor :pagination
     store_accessor :person
+    store_accessor :student
     store_accessor :address
     store_accessor :export_formats
     store_accessor :chooser_fields

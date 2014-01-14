@@ -11,6 +11,7 @@ class Presets < ActiveRecord::Migration
       t.string   :names_order
       t.hstore   :pagination ,     default: '', null: false
       t.hstore   :person,          default: '', null: false
+      t.hstore   :student,         default: '', null: false
       t.hstore   :chooser_fields,  default: '', null: false
       t.hstore   :address,         default: '', null: false
       t.hstore   :grading,         default: '', null: false

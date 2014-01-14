@@ -699,6 +699,9 @@ en:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
       singular: Grading
+    student:
+      singular: Student
+      id_code: id_code
     list: Presets list
     locale: Locale
     name: Name
