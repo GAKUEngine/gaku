@@ -23,10 +23,13 @@ module Gaku
 
     def create
       @student = Student.new(student_params)
-      @student.save
-      @student.make_enrolled if @student.valid?
-      @count = Student.count
-      respond_with @student, location: edit_student_path(@student)
+      if @student.save
+        @student.make_enrolled if @student.valid?
+        @count = Student.count
+        respond_with @student, location: [:edit, @student]
+      else
+        render :new
+      end
     end
 
     def index

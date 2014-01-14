@@ -139,9 +139,13 @@ describe Gaku::StudentsController do
         let(:html_post) { gaku_post :create, student: valid_attributes }
 
         it 'saves' do
-          expect { html_post }.to change(Gaku::Student, :count).by 1
-          response.should be_success
-          response.should render_template :create
+          expect { html_post }.to change(Gaku::Student, :count).by(1)
+        end
+
+        it 'redirects' do
+          html_post
+          redirect_to? "/students/#{Gaku::Student.last.id}/edit"
+          expect(response.code).to eq '302'
         end
       end
 
@@ -149,8 +153,12 @@ describe Gaku::StudentsController do
         let(:html_post) { gaku_post :create, student: invalid_attributes }
 
         it 'does not save' do
-          expect{ html_post }.to_not change(Gaku::Student, :count)
-          response.should be_success
+          expect{ html_post }.to_not change(Gaku::Student, :count).by(1)
+        end
+
+        it 'renders :new template' do
+          html_post
+          template? :new
         end
       end
     end
@@ -199,29 +207,6 @@ describe Gaku::StudentsController do
       it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
       it('assigns @scholarship_statuses') { expect(assigns(:scholarship_statuses)).to_not be_nil }
       it('assigns @commute_method_types') { expect(assigns(:commute_method_types)).to_not be_nil }
-    end
-
-
-    describe 'JS POST #create' do
-
-      context 'with valid attributes' do
-        let(:js_post) { gaku_js_post :create, student: valid_attributes }
-
-        it 'saves' do
-          expect { js_post }.to change(Gaku::Student, :count).by 1
-          response.should be_success
-          response.should render_template :create
-        end
-      end
-
-      context 'with invalid attributes' do
-        let(:js_post) { gaku_js_post :create, student: invalid_attributes }
-
-        it 'does not save' do
-          expect{ js_post}.to_not change(Gaku::Student, :count)
-          response.should be_success
-        end
-      end
     end
 
     describe 'DELETE #destroy' do
