@@ -26,7 +26,7 @@ module Gaku
       @student.save
       @student.make_enrolled if @student.valid?
       @count = Student.count
-      respond_with @student
+      respond_with @student, location: edit_student_path(@student)
     end
 
     def index
