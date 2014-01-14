@@ -1,9 +1,12 @@
 .row.mb-m
-  .col-md-3
+  .col-md-2
+    = f.label :code_cont, t(:code)
+    = f.text_field :code_cont, class: "form-control input-sm"
+  .col-md-2
     = f.label :surname_cont, t(:surname)
     = f.text_field :surname_cont, class: "form-control input-sm"
 
-  .col-md-3
+  .col-md-2
     = f.label :name_cont, t(:name)
     = f.text_field :name_cont, class: "form-control input-sm"
 
