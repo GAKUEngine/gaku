@@ -942,7 +942,7 @@ en:
     context: Context
     edit: Template
     file: File
-    file_type_error: Not supported file type
+    file_type_error: "Only text, excel or openoffice documents are supported"
     list: Templates list
     lock: Lock
     plural: Templates

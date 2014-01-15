@@ -20,7 +20,7 @@ desc "Run specs for all engines"
 task :all_specs do
   %w( core ).each do |engine|
     ENV['LIB_NAME'] = File.join('gaku', engine)
-    cmd = "cd #{engine} && bundle exec rspec"; puts cmd; system cmd
+    cmd = "cd #{engine} && bundle exec rspec export BUNDLE_GEMFILE='`pwd`/Gemfile'"; puts cmd; system cmd
   end
 end
 
