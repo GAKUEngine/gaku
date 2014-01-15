@@ -33,7 +33,7 @@ Gaku::Core::Engine.routes.draw  do
       end
     end
 
-    resources :achievements
+    resources :badge_types
     resources :specialties
     resources :system_tools
     resources :commute_method_types

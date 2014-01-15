@@ -1,9 +1,9 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Admin::AchievementsController do
+describe Gaku::Admin::BadgeTypesController do
 
-  let(:achievement) { create(:achievement) }
-  let(:invalid_achivement) { create(:invalid_achivement) }
+  let(:badge_type) { create(:badge_type) }
+  let(:invalid_badge_type) { create(:invalid_badge_type) }
 
   context 'as student' do
     before { as :student }
@@ -23,12 +23,12 @@ describe Gaku::Admin::AchievementsController do
     context 'html' do
       describe 'GET #index' do
         before do
-          achievement
+          badge_type
           gaku_get :index
         end
 
         it { should respond_with 200 }
-        it('assigns @achievements') { expect(assigns(:achievements)).to eq [achievement] }
+        it('assigns @badge_types') { expect(assigns(:badge_types)).to eq [badge_type] }
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
@@ -36,13 +36,13 @@ describe Gaku::Admin::AchievementsController do
       describe 'POST #create' do
         context 'with valid attributes' do
           let(:valid_create) do
-            gaku_post :create, achievement: attributes_for(:achievement)
+            gaku_post :create, badge_type: attributes_for(:badge_type)
           end
 
-          it 'creates new achievement' do
+          it 'creates new badge_type' do
             expect do
               valid_create
-            end.to change(Gaku::Achievement, :count).by(1)
+            end.to change(Gaku::BadgeType, :count).by(1)
           end
 
           it 'renders flash' do
@@ -53,7 +53,7 @@ describe Gaku::Admin::AchievementsController do
 
         context 'with invalid attributes' do
           let(:invalid_create) do
-            gaku_post :create, achievement: attributes_for(:invalid_achievement)
+            gaku_post :create, badge_type: attributes_for(:invalid_badge_type)
           end
 
           it 'redirects' do
@@ -61,10 +61,10 @@ describe Gaku::Admin::AchievementsController do
             should respond_with 302
           end
 
-          it 'does not save the new achievement' do
+          it 'does not save the new badge_type' do
             expect do
               invalid_create
-            end.to_not change(Gaku::Achievement, :count)
+            end.to_not change(Gaku::BadgeType, :count)
           end
 
         end
@@ -73,28 +73,28 @@ describe Gaku::Admin::AchievementsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: achievement, achievement: attributes_for(:achievement, name: 'Ruby Champion')
+            gaku_patch :update, id: badge_type, badge_type: attributes_for(:badge_type, name: 'Ruby Champion')
           end
 
           it { should respond_with 302 }
-          it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
+          it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
           it('sets flash') { flash_updated? }
-          it "changes achievement's attributes" do
-            achievement.reload
-            expect(achievement.name).to eq 'Ruby Champion'
+          it "changes badge_type's attributes" do
+            badge_type.reload
+            expect(badge_type.name).to eq 'Ruby Champion'
           end
         end
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: achievement, achievement: attributes_for(:invalid_achievement, description: 'Ruby Champion')
+            gaku_patch :update, id: badge_type, badge_type: attributes_for(:invalid_badge_type, description: 'Ruby Champion')
           end
 
           it { should respond_with 302 }
-          it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
+          it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
 
-          it "does not change achievement's attributes" do
-            expect(achievement.reload.description).not_to eq 'Ruby Champion'
+          it "does not change badge_type's attributes" do
+            expect(badge_type.reload.description).not_to eq 'Ruby Champion'
           end
         end
 
@@ -107,28 +107,28 @@ describe Gaku::Admin::AchievementsController do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
-        it('assigns @achievement') { expect(assigns(:achievement)).to be_a_new(Gaku::Achievement) }
+        it('assigns @badge_type') { expect(assigns(:badge_type)).to be_a_new(Gaku::BadgeType) }
         it('renders the :new template') { template? :new }
       end
 
       describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: achievement }
+        before { gaku_js_get :edit, id: badge_type }
 
         it { should respond_with 200 }
-        it('assigns @achievement') { expect(assigns(:achievement)).to eq achievement }
+        it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
         it('renders the :edit template') { template? :edit }
       end
 
       describe 'XHR DELETE #destroy' do
-        it 'deletes the achievement' do
-          achievement
+        it 'deletes the badge_type' do
+          badge_type
           expect do
-            gaku_js_delete :destroy, id: achievement
-          end.to change(Gaku::Achievement, :count).by(-1)
+            gaku_js_delete :destroy, id: badge_type
+          end.to change(Gaku::BadgeType, :count).by(-1)
         end
 
         it 'assigns @count' do
-          gaku_js_delete :destroy, id: achievement
+          gaku_js_delete :destroy, id: badge_type
           expect(assigns(:count)).to_not be_nil
         end
       end

@@ -1,0 +1,4 @@
+= modal_for 'edit-badge-type-modal' do
+  = normal_modal_form_for [:admin, @badge_type], resource: 'admin-badge-type' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @badge_type, resource: 'admin-badge-type'

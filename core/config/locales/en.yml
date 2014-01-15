@@ -1,17 +1,5 @@
 en:
   academic: Academic
-  achievement:
-    add: Add Achievement
-    authority: Authority
-    badge: Badge
-    choose: Choose Achievement
-    description: Description
-    edit: Edit Achievement
-    list: Achievements list
-    name: Name
-    plural: Achievements
-    save: Save Achievement
-    singular: Achievement
   active: Active
   add: Add
   address:
@@ -102,6 +90,18 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
+  badge_type:
+    add: Add badge type
+    authority: Authority
+    badge: Badge
+    choose: Choose badge type
+    description: Description
+    edit: Edit badge type
+    list: Badge types list
+    name: Name
+    plural: Badge types
+    save: Save badge type
+    singular: Badge type
   back: Back
   birth: Birth Date
   birth_and: and
@@ -579,10 +579,10 @@ en:
   manage: Manage
   menu:
     admin:
-      achievements: Achievements
       admin: Admin
       administration: Administration
       administrator: Administrator
+      badge_types: Badge types
       changes:
         changes: Changes and Deletions
         student_addresses: Student Addresses
