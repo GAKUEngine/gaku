@@ -72,7 +72,7 @@ ready = ->
         e.preventDefault()
         $('#delete-modal').modal('show')
 
-      $('.datepicker').datepicker(format:'yyyy/mm/dd')
+      #$('.datepicker').datepicker(format:'yyyy/mm/dd')
 
     show: ->
       # FIXME Remove after view refactoring

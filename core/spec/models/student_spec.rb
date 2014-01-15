@@ -93,6 +93,28 @@ describe Gaku::Student do
       end
     end
 
+     context 'external_school_records_count' do
+
+      let(:school) { create(:school) }
+      let(:external_school_record) { create(:external_school_record, school: school, student: student) }
+
+      it 'increments' do
+        external_school_record
+        expect do
+          external_school_record
+          student.reload
+        end.to change { student.external_school_records_count }.by 1
+      end
+
+      it 'decrements' do
+        external_school_record
+        puts student.external_school_records.last.to_json
+        expect do
+          student.external_school_records.last.destroy
+        end.to change { student.reload.external_school_records_count }.by -1
+      end
+    end
+
     context 'courses_count' do
 
       let(:course) { create(:course) }

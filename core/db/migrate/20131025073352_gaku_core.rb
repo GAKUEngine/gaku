@@ -548,11 +548,12 @@ class GakuCore < ActiveRecord::Migration
       t.integer  'scholarship_status_id'
       t.datetime 'created_at'
       t.datetime 'updated_at'
-      t.integer  'addresses_count',              default: 0
-      t.integer  'contacts_count',               default: 0
-      t.integer  'notes_count',                  default: 0
-      t.integer  'courses_count',                default: 0
-      t.integer  'guardians_count',              default: 0
+      t.integer  'addresses_count',               default: 0
+      t.integer  'contacts_count',                default: 0
+      t.integer  'notes_count',                   default: 0
+      t.integer  'courses_count',                 default: 0
+      t.integer  'guardians_count',               default: 0
+      t.integer  'external_school_records_count', default: 0
       t.string   'primary_address'
       t.string   'primary_contact'
       t.string   'class_and_number'
