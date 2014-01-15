@@ -7,7 +7,6 @@ describe Gaku::ExternalSchoolRecord do
     it { should belong_to :student }
 
     it { should have_many :simple_grades }
-    it { should have_many :achievements }
   end
 
   describe 'validations' do

@@ -1,10 +1,10 @@
 FactoryGirl.define do
 
-  factory :achievement, class: Gaku::Achievement do
+  factory :badge_type, class: Gaku::BadgeType do
     name 'credits'
     description 'some helpful achievement'
 
-    factory :invalid_achievement do
+    factory :invalid_badge_type do
       name nil
     end
   end

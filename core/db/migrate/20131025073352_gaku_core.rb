@@ -1,15 +1,17 @@
 class GakuCore < ActiveRecord::Migration
 
   def change
-    create_table 'gaku_achievements' do |t|
+    create_table 'gaku_badge_types' do |t|
       t.string   'name'
+      t.string   'code'
       t.text     'description'
       t.string   'authority'
-      t.string   'badge_file_name'
-      t.string   'badge_content_type'
-      t.integer  'badge_file_size'
-      t.datetime 'badge_updated_at'
-      t.integer  'external_school_record_id'
+      t.string   'issuer'
+      t.string   'url'
+      t.string   'badge_image_file_name'
+      t.string   'badge_image_content_type'
+      t.integer  'badge_image_file_size'
+      t.datetime 'badge_image_updated_at'
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end
@@ -499,10 +501,11 @@ class GakuCore < ActiveRecord::Migration
       t.string  'country_iso'
     end
 
-    create_table 'gaku_student_achievements' do |t|
+    create_table 'gaku_badges' do |t|
       t.integer  'student_id'
-      t.integer  'achievement_id'
-      t.string   'assertion'
+      t.integer  'badge_type_id'
+      t.string   'url'
+      t.date     'award_date'
       t.datetime 'created_at'
       t.datetime 'updated_at'
     end

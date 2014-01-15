@@ -8,8 +8,6 @@ module Gaku
              class_name: 'Gaku::SimpleGrade',
              dependent: :destroy
 
-    has_many :achievements
-
     validates :school, :student, presence: true
   end
 end
