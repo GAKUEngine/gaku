@@ -2,9 +2,9 @@
   .col-md-6
     = f.select :school_id, options_from_collection_for_select(@schools, :id, :name), { prompt: t(:'school.choose')}, label: t(:'school.plural')
   .col-md-3
-    = f.text_field :beginning, class: "datepicker", label: t(:'external_school_record.beginning')
+    = f.text_field :beginning, class: 'datepicker', value: datepicker_date_format(f.object.beginning), data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'external_school_record.beginning')
   .col-md-3
-    = f.text_field :ending, class: "datepicker", label: t(:'external_school_record.ending')
+    = f.text_field :ending, class: 'datepicker', value: datepicker_date_format(f.object.ending), data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'external_school_record.ending')
 
   = f.hidden_field :student_id, value: @student.id
   = buttons_for @external_school_record, label: t(:'external_school_record.create'), resource: 'student-external-school-record'

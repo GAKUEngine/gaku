@@ -4,9 +4,9 @@ module Gaku
     respond_to :js, only: %i( new create destroy )
 
     before_action :set_student
+    before_action :set_schools, only: :new
 
     def new
-      set_schools
       @external_school_record = ExternalSchoolRecord.new
       respond_with @external_school_record
     end
