@@ -8,7 +8,7 @@
     = count_div 'students-count' do
       = print_count @count, t(:'student.list')
   .pull-right
-    = ajax_link_to_new t(:'student.new'), new_student_path, id: "new-student-link"
+    = link_to_new t(:'student.new'), new_student_path, id: "new-student-link"
     = render 'gaku/shared/overrides/students/import_link'
 
 = render 'gaku/shared/student_chooser/chooser'

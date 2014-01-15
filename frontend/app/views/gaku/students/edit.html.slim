@@ -26,8 +26,10 @@ hr
             = render 'tabs_academic'
 
 = footer do
-  .col-md-9
+  .col-md-6
     = link_to_index students_path
+  .col-md-3
+    = link_to_new t(:'student.new'), new_student_path
   .col-md-3
     = link_to_modal_delete
   .delete_modal
