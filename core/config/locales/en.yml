@@ -457,7 +457,10 @@ en:
     beginning: Beginning
     data: Data
     ending: Ending
+    add: Add External School Record
     singular: External School Record
+    plural: External School Records
+    list: External School Records list
     student_id_number: Student ID
   extracurricular_activity:
     add: Add Extracurricular Activity
