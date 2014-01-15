@@ -110,6 +110,7 @@ describe 'Students', type: :feature do
             #page.driver.debug
       visit gaku.students_path
       click new_link
+      expect(current_path).to eq gaku.new_student_path
     end
 
     xit 'creates and shows with class_group' do
@@ -120,13 +121,14 @@ describe 'Students', type: :feature do
           fill_in 'student_surname', with: 'Doe'
           click_button 'submit-student-button'
           flash_created?
+
         end.to change(Gaku::Student, :count).by 1
       end.to change(Gaku::ClassGroupEnrollment, :count).by 1
 
-      expect(Gaku::Student.last.class_groups).to eq [class_group]
+      expect(current_path).to eq gaku.edit_student_path(Gaku::Student.last)
 
+      expect(Gaku::Student.last.class_groups).to eq [class_group]
       page.has_text? 'John'
-      count? 'Students list(1)'
     end
 
     it 'creates and shows' do
@@ -136,9 +138,9 @@ describe 'Students', type: :feature do
         click_button 'submit-student-button'
         flash_created?
       end.to change(Gaku::Student, :count).by 1
+      expect(current_path).to eq gaku.edit_student_path(Gaku::Student.last)
 
       page.has_text? 'John'
-      count? 'Students list(1)'
     end
 
     it { has_validations? }
