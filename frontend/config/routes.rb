@@ -85,6 +85,7 @@ Gaku::Core::Engine.routes.draw do
     resources :commute_methods,      controller: 'students/commute_methods'
     resources :student_achievements, controller: 'students/student_achievements', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
+    resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
     resources :guardians, except: %i( index show ),
       controller: 'students/guardians',

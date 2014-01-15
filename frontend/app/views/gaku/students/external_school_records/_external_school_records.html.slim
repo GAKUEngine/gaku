@@ -1,0 +1,19 @@
+#student-external_school-records
+  = index_header do
+    #new-student-external-school-record.d-none
+    .pull-left
+      = count_div 'student-external-school-records-count' do
+        = print_count @student.external_school_records_count, t(:'external_school_record.list')
+    .pull-right
+      = ajax_link_to_new t(:'external_school_record.add'), [:new, @student, :external_school_record], id: "new-student-external-school-record-link" if can_edit?
+
+  = index_body do
+      = table_for 'student-external-school-records-index' do
+        thead
+          tr
+            = th t(:'school.singular')
+            = th t(:'external_school_record.beginning')
+            = th t(:'external_school_record.ending')
+            = th_actions 1 if can_edit?
+        tbody
+          = render partial: 'gaku/students/external_school_records/external_school_record', collection: @student.external_school_records, as: 'external_school_record'

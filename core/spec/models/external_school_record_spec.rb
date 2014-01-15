@@ -6,7 +6,7 @@ describe Gaku::ExternalSchoolRecord do
     it { should belong_to :school }
     it { should belong_to :student }
 
-    it { should have_many :simple_grades }
+    xit { should have_many :simple_grades }
     it { should have_many :achievements }
   end
 
