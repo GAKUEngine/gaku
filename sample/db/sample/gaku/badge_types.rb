@@ -5,7 +5,7 @@ els = %w(
           JuniorScala SeniorScala ScalaGuru
         )
 
-say "Creating #{els.size} achievements ...".yellow
+say "Creating #{els.size} badges ...".yellow
 
 els.each do |el|
   Gaku::BadgeType.where(name: el).first_or_create!
