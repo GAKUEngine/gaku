@@ -3,12 +3,12 @@ module Gaku
     decorates 'Gaku::Student'
     delegate_all
 
-    def achievements_list
-      h.comma_separated_list(object.achievements) do |achievement|
-        if achievement.badge_file_name.nil?
-          achievement.name
+    def badges_list
+      h.comma_separated_list(object.badges) do |badge|
+        if badge.badge_type.badge_image_file_name.nil?
+          badge.badge_type.name
         else
-          "#{achievement.name} (#{h.resize_image(achievement.badge, size: 22)})"
+          "#{badge.badge_type.name} (#{h.resize_image(badge.badge_type.badge_image, size: 22)})"
         end
       end
     end
