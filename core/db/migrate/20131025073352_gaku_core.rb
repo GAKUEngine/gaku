@@ -1,4 +1,8 @@
+require 'gaku/migrations'
+
 class GakuCore < ActiveRecord::Migration
+
+  include Gaku::Migrations
 
   def change
     create_table :gaku_badge_types do |t|
@@ -60,8 +64,7 @@ class GakuCore < ActiveRecord::Migration
       t.string   :name
       t.boolean  :master,            default: false
       t.attachment :picture
-      t.integer  :contacts_count,       default: 0
-      t.integer  :addresses_count,      default: 0
+      t.counters :contacts, :addresses
       t.references  :school
       t.timestamps
     end
@@ -83,7 +86,7 @@ class GakuCore < ActiveRecord::Migration
       t.string   :name
       t.integer  :grade
       t.string   :homeroom
-      t.integer  :notes_count, default: 0
+      t.counters :notes
       t.references  :faculty
       t.timestamps
     end
@@ -132,8 +135,7 @@ class GakuCore < ActiveRecord::Migration
     create_table :gaku_courses do |t|
       t.string   :name
       t.string   :code
-      t.integer  :notes_count,    default: 0
-      t.integer  :students_count, default: 0
+      t.counters :notes, :students
       t.references  :faculty
       t.references  :syllabus
       t.references  :class_group
@@ -189,8 +191,7 @@ class GakuCore < ActiveRecord::Migration
       t.boolean  :use_weighting,     default: false
       t.boolean  :standalone,     default: false
       t.boolean  :has_entry_numbers, default: false
-      t.integer  :notes_count,       default: 0
-      t.integer  :exam_portions_count, default: 0
+      t.counters :notes, :exam_portions
       t.references  :grading_method
       t.references :department
       t.timestamps
@@ -254,22 +255,14 @@ class GakuCore < ActiveRecord::Migration
     end
 
     create_table :gaku_guardians do |t|
-      t.string   :name
-      t.string   :surname
-      t.string   :middle_name
-      t.string   :name_reading,         default: ''
-      t.string   :middle_name_reading,  default: ''
-      t.string   :surname_reading,      default: ''
-      t.boolean  :gender
-      t.date     :birth_date
+      t.person_fields
       t.string   :relationship
       t.references  :user
       t.timestamps
       t.attachment :picture
       t.string   :primary_address
       t.string   :primary_contact
-      t.integer  :addresses_count,      default: 0
-      t.integer  :contacts_count,       default: 0
+      t.counters :addresses, :contacts
     end
 
     create_table :gaku_installs do |t|
@@ -292,7 +285,7 @@ class GakuCore < ActiveRecord::Migration
     create_table :gaku_lesson_plans do |t|
       t.string   :title
       t.text     :description
-      t.integer  :notes_count, default: 0
+      t.counters :notes
       t.references  :syllabus
       t.timestamps
     end
@@ -468,14 +461,7 @@ class GakuCore < ActiveRecord::Migration
     end
 
     create_table :gaku_students do |t|
-      t.string   :name
-      t.string   :middle_name
-      t.string   :surname
-      t.string   :name_reading,                 default: ''
-      t.string   :middle_name_reading,          default: ''
-      t.string   :surname_reading,              default: ''
-      t.boolean  :gender
-      t.date     :birth_date
+      t.person_fields
       t.date     :admitted
       t.date     :graduated
       t.string   :code
@@ -484,12 +470,7 @@ class GakuCore < ActiveRecord::Migration
       t.string   :national_registration_code
       t.string   :enrollment_status_code
       t.attachment :picture
-      t.integer  :addresses_count,               default: 0
-      t.integer  :contacts_count,                default: 0
-      t.integer  :notes_count,                   default: 0
-      t.integer  :courses_count,                 default: 0
-      t.integer  :guardians_count,               default: 0
-      t.integer  :external_school_records_count, default: 0
+      t.counters :addresses, :contacts, :notes, :courses, :guardians, :external_school_records
       t.string   :primary_address
       t.string   :primary_contact
       t.string   :class_and_number
@@ -506,27 +487,17 @@ class GakuCore < ActiveRecord::Migration
       t.text     :description
       t.integer  :credits
       t.integer  :hours
-      t.integer  :notes_count, default: 0
-      t.integer  :exams_count, default: 0
+      t.counters :notes, :exams
       t.references :department
       t.timestamps
     end
 
     create_table :gaku_teachers do |t|
-      t.string   :name
-      t.string   :surname
-      t.string   :middle_name
-      t.string   :name_reading,         default: ''
-      t.string   :middle_name_reading,  default: ''
-      t.string   :surname_reading,      default: ''
-      t.boolean  :gender
-      t.date     :birth_date
+      t.person_fields
       t.attachment :picture
       t.string   :primary_address
       t.string   :primary_contact
-      t.integer  :addresses_count,      default: 0
-      t.integer  :contacts_count,       default: 0
-      t.integer  :notes_count,          default: 0
+      t.counters :addresses, :contacts, :notes
       t.references  :user
       t.timestamps
     end
