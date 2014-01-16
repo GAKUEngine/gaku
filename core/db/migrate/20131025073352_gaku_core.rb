@@ -227,9 +227,9 @@ class GakuCore < ActiveRecord::Migration
     end
 
     create_table :gaku_grading_method_set_items do |t|
+      t.integer  :position
       t.references :grading_method
       t.references  :grading_method_set
-      t.integer  :position
       t.timestamps
     end
 
@@ -238,7 +238,7 @@ class GakuCore < ActiveRecord::Migration
 
     create_table :gaku_grading_method_sets do |t|
       t.string   :name
-      t.boolean  :primary,        default: false
+      t.boolean  :primary,           default: false
       t.boolean  :display_deviation, default: true
       t.boolean  :display_rank,      default: true
       t.boolean  :rank_order,        default: true
@@ -257,12 +257,12 @@ class GakuCore < ActiveRecord::Migration
     create_table :gaku_guardians do |t|
       t.person_fields
       t.string   :relationship
-      t.references  :user
-      t.timestamps
       t.attachment :picture
       t.string   :primary_address
       t.string   :primary_contact
       t.counters :addresses, :contacts
+      t.references  :user
+      t.timestamps
     end
 
     create_table :gaku_installs do |t|
@@ -340,8 +340,8 @@ class GakuCore < ActiveRecord::Migration
       t.string   :name
       t.references  :class_group_enrollment
       t.references :faculty
-      t.timestamps
       t.references :extracurricular_activity_enrollment
+      t.timestamps
     end
 
     create_table :gaku_schedules do |t|
@@ -440,10 +440,10 @@ class GakuCore < ActiveRecord::Migration
     end
 
     create_table :gaku_badges do |t|
-      t.references  :student
-      t.references  :badge_type
       t.string   :url
       t.date     :award_date
+      t.references  :student
+      t.references  :badge_type
       t.timestamps
     end
 
