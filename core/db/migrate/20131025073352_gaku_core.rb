@@ -116,7 +116,7 @@ class GakuCore < ActiveRecord::Migration
     end
 
     create_table :gaku_course_enrollments do |t|
-      t.references  :student
+      t.references :student
       t.references :course
       t.timestamps
     end
@@ -338,9 +338,6 @@ class GakuCore < ActiveRecord::Migration
 
     create_table :gaku_roles do |t|
       t.string   :name
-      t.references  :class_group_enrollment
-      t.references :faculty
-      t.references :extracurricular_activity_enrollment
       t.timestamps
     end
 
@@ -351,20 +348,9 @@ class GakuCore < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :gaku_school_histories do |t|
-      t.date     :beginning
-      t.date     :ending
-      t.string   :specialty
-      t.boolean  :graduated
-      t.references  :school
-      t.references  :student
-      t.timestamps
-    end
-
     create_table :gaku_school_roles do |t|
       t.string   :name
       t.references :school_rolable, polymorphic: true
-      t.references :school_role_type
       t.timestamps
     end
 
