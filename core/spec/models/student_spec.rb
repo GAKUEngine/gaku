@@ -20,8 +20,8 @@ describe Gaku::Student do
     it { should have_many :student_specialties }
     it { should have_many(:specialties).through(:student_specialties) }
 
-    it { should have_many :achievements }
-    it { should have_many(:achievements).through(:student_achievements) }
+    it { should have_many :badges }
+    it { should have_many(:badge_types).through(:badges) }
 
     it { should have_many(:student_guardians).dependent(:destroy) }
     it { should have_many(:guardians).through(:student_guardians) }
@@ -29,7 +29,7 @@ describe Gaku::Student do
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :attendances }
-    it { should have_many :achievements }
+
     it { should have_many :external_school_records }
     it { should have_many :simple_grades }
 
