@@ -15,8 +15,8 @@ module Gaku
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
 
-    has_many :student_achievements
-    has_many :achievements, through: :student_achievements
+    has_many :badges
+    has_many :badge_types, through: :badges
 
     has_many :student_guardians, dependent: :destroy
     has_many :guardians, through: :student_guardians
