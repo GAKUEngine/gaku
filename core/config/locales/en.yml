@@ -90,6 +90,14 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
+  badge:
+    list: Badges list
+    add: Add badge
+    edit: Edit badge
+    index: Badges index
+    save: Save badge
+    singular: Badge
+    plural: Badges
   badge_type:
     add: Add badge type
     authority: Authority
@@ -899,11 +907,6 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-  student_achievement:
-    edit: Edit Student Achievement
-    index: Student Achievement Index
-    save: Save Student Achievement
-    singular: Student Achievement
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
