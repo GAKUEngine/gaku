@@ -63,14 +63,14 @@
   .panel-body
     .row
       .col-md-6
-        = autocomplete_text_field(f, options = {  object_name:  'achievements_name_cont',
-                                                  tag_name:     t(:'achievement.name'),
-                                                  class_name:   'achievements',
+        = autocomplete_text_field(f, options = {  object_name:  'badge_types_name_cont',
+                                                  tag_name:     t(:'badge_type.name'),
+                                                  class_name:   'badge_types',
                                                   column:       'name'})
       .col-md-6
-        = autocomplete_text_field(f, options = {  object_name:  'achievements_authority_cont',
-                                                  tag_name:     t(:'achievement.authority'),
-                                                  class_name:   'achievements',
+        = autocomplete_text_field(f, options = {  object_name:  'badge_types_authority_cont',
+                                                  tag_name:     t(:'badge_type.authority'),
+                                                  class_name:   'badge_types',
                                                   column:       'authority'})
 
 .panel.panel-default

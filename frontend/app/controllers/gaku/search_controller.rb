@@ -5,7 +5,7 @@ module Gaku
 
     def students
       if params[:class_name]
-        object = "Gaku::#{params[:class_name].capitalize}".constantize
+        object = "Gaku::#{params[:class_name].classify}".constantize
         @result = object.order(params[:column].to_sym)
                         .where(params[:column] + ' like ?', "%#{params[:term]}%")
         render json: @result.map(&params[:column].to_sym).uniq
