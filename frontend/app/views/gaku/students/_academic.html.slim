@@ -2,17 +2,17 @@
   .col-md-12
     table.table.table-bordered
       tr
-        th = t(:'specialty.singular')
+        th = t(:'specialty.plural')
         td
           #student-specialty
             = render 'gaku/students/student_specialties/student_specialties', student: student
       tr
-        th = t(:'simple_grade.singular')
+        th = t(:'simple_grade.plural')
         td
           #student-simple-grade
             = render 'gaku/students/simple_grades/simple_grades', student: student
       tr
-        th = t(:'achievement.singular')
+        th = t(:'badge.plural')
         td
-          #student-achievement
-            = render 'gaku/students/student_achievements/student_achievements', student: student
+          #student-badge
+            = render 'gaku/students/badges/badges', student: student

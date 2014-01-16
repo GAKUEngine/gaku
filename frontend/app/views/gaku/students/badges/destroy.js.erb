@@ -1,0 +1,6 @@
+$('.student-badges-count').html("<%= print_count(@count, t(:'badge.list')) %>");
+$('#student-badges-tab-link').html("<%= print_count(@count, t(:'badge.plural')) %>");
+$('#student-badges-list a').text('<%= j(@student.badges_list) %>');
+$('#badges-tab').html("<%= j render('gaku/students/badges/badges_tab') %>");
+showNotice("<%= render_flash %>");
+

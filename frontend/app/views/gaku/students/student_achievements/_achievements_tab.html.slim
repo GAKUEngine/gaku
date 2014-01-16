@@ -1,8 +1,0 @@
-.row
-  ul.thumbnails.list-unstyled
-    - @student.achievements.each_slice(6) do |achievements|
-      .row
-        .achievements-group
-          - achievements.each do |achievement|
-            = render 'gaku/students/student_achievements/achievement', achievement: achievement
-      hr

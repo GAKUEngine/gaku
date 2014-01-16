@@ -8,8 +8,8 @@
         a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
           = print_count student.courses.count, t(:'course.plural')
       li
-        a#student-achievements-tab-link data-toggle="tab" href="#achievements_tab"
-          = print_count student.achievements.count, t(:'achievement.plural')
+        a#student-badges-tab-link data-toggle="tab" href="#badges_tab"
+          = print_count student.badges.count, t(:'badge.plural')
       li
         a#student-external-school-records-tab-link data-toggle="tab" href="#external_school_records_tab"
           = print_count student.external_school_records_count, t(:'external_school_record.plural')
@@ -24,10 +24,10 @@
         .row
           .col-md-12
             = render 'gaku/students/course_enrollments/course_enrollments'
-      #achievements_tab.tab-pane
+      #badges_tab.tab-pane
         .row
-          .col-md-12#achievements-tab
-            = render 'gaku/students/student_achievements/achievements_tab'
+          .col-md-12#badges-tab
+            = render 'gaku/students/badges/badges_tab'
 
       #external_school_records_tab.tab-pane
         .row

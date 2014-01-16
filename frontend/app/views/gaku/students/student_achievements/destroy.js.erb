@@ -1,6 +1,0 @@
-$('.student-achievements-count').html("<%= print_count(@count, t(:'achievement.list')) %>");
-$('#student-achievements-tab-link').html("<%= print_count(@count, t(:'achievement.list')) %>");
-$('#student-achievements-list a').text('<%= j(@student.achievements_list) %>');
-$('#achievements-tab').html("<%= j render('gaku/students/student_achievements/achievements_tab') %>");
-showNotice("<%= render_flash %>");
-

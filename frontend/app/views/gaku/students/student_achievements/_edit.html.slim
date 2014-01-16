@@ -1,8 +1,0 @@
-= modal_form_for [@student, @student_achievement] do |f|
-  = render 'form_fields', f: f
-  .row
-    .col-md-12
-      .col-md-6
-        = submit_button t(:'student_achievement.save') , id: "submit-student-achievement-button"
-      .col-md-6
-        = ajax_link_to_back [@student, :student_achievements]

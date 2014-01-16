@@ -1,0 +1,20 @@
+= index_header do
+    #new-student-badge.d-none
+    .pull-left
+      = count_div 'student-badges-count' do
+        = print_count @count, t(:'badge.list')
+    .pull-right
+      = ajax_link_to_new t(:'badge.add'), [:new, @student, :badge], id: 'new-student-badge-link'
+
+hr
+
+= table_for 'student-badges-index' do
+  thead
+    tr
+      = th t(:'badge_type.name')
+      = th t(:'badge_type.description')
+      = th t(:'badge_type.authority')
+      = th t(:'badge_type.badge_image')
+      = th_actions 2
+  tbody
+    = render partial: 'badge', collection: badges, as: :badge

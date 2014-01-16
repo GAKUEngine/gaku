@@ -1,0 +1,14 @@
+$('#student-badges-index').append('<%= j render("badge", {badge: @badge}) %>');
+
+$('#badges-tab').html("<%= j render('gaku/students/badges/badges_tab') %>");
+
+$('.student-badges-count').html("<%= print_count(@count, t(:'badge.list')) %>");
+$('#student-badges-tab-link').html("<%= print_count(@count, t(:'badge.plural')) %>");
+$('#student-badges-list a').text('<%= j(@student.badges_list) %>');
+
+showNotice("<%= render_flash %>");
+
+$('#new-student-badge').slide()
+$('#new-student-badge-link').show();
+
+$('.remote-form').enableValidations();
