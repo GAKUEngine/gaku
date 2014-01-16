@@ -456,7 +456,7 @@ class GakuCore < ActiveRecord::Migration
       t.string   :national_registration_code
       t.string   :enrollment_status_code
       t.attachment :picture
-      t.counters :addresses, :contacts, :notes, :courses, :guardians, :external_school_records
+      t.counters :addresses, :contacts, :notes, :courses, :guardians, :external_school_records, :badges
       t.string   :primary_address
       t.string   :primary_contact
       t.string   :class_and_number

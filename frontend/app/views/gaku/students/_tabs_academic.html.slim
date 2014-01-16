@@ -6,10 +6,10 @@
           = print_count student.notes_count, t(:'note.plural')
       li
         a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
-          = print_count student.courses.count, t(:'course.plural')
+          = print_count student.courses_count, t(:'course.plural')
       li
         a#student-badges-tab-link data-toggle="tab" href="#badges_tab"
-          = print_count student.badges.count, t(:'badge.plural')
+          = print_count student.badges_count, t(:'badge.plural')
       li
         a#student-external-school-records-tab-link data-toggle="tab" href="#external_school_records_tab"
           = print_count student.external_school_records_count, t(:'external_school_record.plural')
