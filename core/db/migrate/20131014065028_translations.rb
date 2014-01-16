@@ -8,12 +8,14 @@ class Translations < ActiveRecord::Migration
       t.boolean  :disable_credit
       t.float    :credit_rate
       t.boolean  :auto_credit
+
       t.timestamps
     end
     Gaku::AttendanceType.create_translation_table! name: :string
 
     create_table :gaku_commute_method_types do |t|
       t.string   :name
+
       t.timestamps
     end
     Gaku::CommuteMethodType.create_translation_table! name: :string
@@ -23,6 +25,7 @@ class Translations < ActiveRecord::Migration
       t.string   :name
       t.boolean  :active
       t.boolean  :immutable
+
       t.timestamps
     end
     Gaku::EnrollmentStatus.create_translation_table! name: :string
@@ -30,12 +33,14 @@ class Translations < ActiveRecord::Migration
     create_table :gaku_scholarship_statuses do |t|
       t.string   :name
       t.boolean  :default
+
       t.timestamps
     end
     Gaku::ScholarshipStatus.create_translation_table! name: :string
 
     create_table :gaku_departments do |t|
       t.string   :name
+
       t.timestamps
     end
     Gaku::Department.create_translation_table! name: :string
