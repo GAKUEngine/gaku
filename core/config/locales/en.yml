@@ -101,6 +101,9 @@ en:
   badge_type:
     add: Add badge type
     authority: Authority
+    code: Code
+    issuer: issuer
+    url: Url
     badge: Badge
     choose: Choose badge type
     description: Description
