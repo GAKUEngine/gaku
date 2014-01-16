@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ransack',                        '~> 1.0'
   s.add_dependency 'kaminari',                       '~> 0.14'
   s.add_dependency 'draper',                         '~> 1.0'
+  s.add_dependency 'deface',                         '~> 1.0.0'
 
   s.add_dependency 'devise',                         '~> 3.0.0'
   s.add_dependency 'devise-i18n',                    '~> 0.9'

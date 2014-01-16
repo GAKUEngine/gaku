@@ -3,6 +3,7 @@ require 'rails/generators'
 require 'rails-i18n'
 require 'paperclip'
 require 'ransack'
+require 'deface'
 
 require 'devise'
 require 'cancan'
