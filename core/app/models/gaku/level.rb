@@ -7,6 +7,7 @@ module Gaku
     has_many :programs, through: :program_levels
 
     validates :name, :school, presence: true
+    validates :name, uniqueness: true
 
     def to_s
       name

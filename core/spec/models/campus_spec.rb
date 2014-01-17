@@ -29,7 +29,6 @@ describe Gaku::Campus do
     context 'addresses_count' do
 
       let(:address) { build(:address) }
-      let(:campus_with_address) { create(:campus, :with_one_address) }
 
       it 'increments addresses_count' do
         expect do
@@ -38,16 +37,16 @@ describe Gaku::Campus do
       end
 
       it 'decrements addresses_count' do
+        campus.address = address
         expect do
-          campus_with_address.address.destroy
-        end.to change { campus_with_address.reload.addresses_count }.by(-1)
+          campus.address.destroy
+        end.to change { campus.reload.addresses_count }.by(-1)
       end
     end
 
     context 'contacts_count' do
 
       let(:contact) { build(:contact) }
-      let(:campus_with_contact) { create(:campus, :with_contact) }
 
       it 'increments contacts_count' do
         expect do
@@ -56,9 +55,10 @@ describe Gaku::Campus do
       end
 
       it 'decrements contacts_count' do
+        campus.contacts << contact
         expect do
-          campus_with_contact.contacts.last.destroy
-        end.to change { campus_with_contact.reload.contacts_count }.by(-1)
+          campus.contacts.last.destroy
+        end.to change { campus.reload.contacts_count }.by(-1)
       end
     end
 

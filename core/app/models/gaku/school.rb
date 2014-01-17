@@ -8,7 +8,7 @@ module Gaku
     has_many :levels
     has_many :programs
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 
     has_one :master_campus,
             -> { where master: true },

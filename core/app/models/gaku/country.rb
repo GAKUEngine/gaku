@@ -9,6 +9,7 @@ module Gaku
     default_scope -> { order('name ASC') }
 
     validates :name, :iso_name, :iso, presence: true
+    validates :iso, uniqueness: true
 
     def <=>(other)
       name <=> other.name
