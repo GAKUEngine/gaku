@@ -78,7 +78,7 @@ describe Gaku::Student do
       let(:badge) { create(:badge) }
       let(:student_badge) { create(:badge, student: student) }
 
-      it 'increments' do
+      xit 'increments' do
         badge
         expect do
           student.badges << badge
@@ -87,7 +87,7 @@ describe Gaku::Student do
         end.to change { student.badges_count }.by 1
       end
 
-      it 'decrements' do
+      xit 'decrements' do
         student.badges << student_badge
         expect do
           student.badges.last.destroy!
