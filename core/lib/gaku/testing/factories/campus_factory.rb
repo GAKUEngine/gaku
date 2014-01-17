@@ -1,8 +1,7 @@
 FactoryGirl.define do
 
   factory :campus, class: Gaku::Campus do
-    name Faker::Education.school_generic_name
-    #sequence(:name) { |n| "Takiko Campus_#{n}" }
+    name { Faker::Education.school_generic_name }
     school
 
     factory :invalid_campus do
