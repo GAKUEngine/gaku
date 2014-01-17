@@ -73,6 +73,29 @@ describe Gaku::Student do
 
     let!(:student) { create(:student) }
 
+    context 'badges_count' do
+
+      let(:badge) { create(:badge) }
+      let(:student_badge) { create(:badge, student: student) }
+
+      xit 'increments' do
+        badge
+        expect do
+          student.badges << badge
+          student.reload
+          puts student.badges.to_json
+        end.to change { student.badges_count }.by 1
+      end
+
+      xit 'decrements' do
+        student.badges << student_badge
+        expect do
+          student.badges.last.destroy!
+          student.reload
+        end.to change { student.badges_count }.by -1
+      end
+    end
+
     context 'guardians_count' do
 
       let(:guardian) { create(:guardian) }

@@ -8,7 +8,7 @@ module Gaku
     has_many :grading_method_set_items
     has_many :grading_method_sets, through: :grading_method_set_items
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 
     def to_s
       name

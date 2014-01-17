@@ -13,6 +13,7 @@ module Gaku
     belongs_to :school
 
     validates :name, :school, presence: true
+    validates :name, uniqueness: true
 
     accepts_nested_attributes_for :program_levels,
                                   :program_specialties,

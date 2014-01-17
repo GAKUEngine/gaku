@@ -3,8 +3,8 @@ FactoryGirl.define do
   factory :country, class: Gaku::Country do
     iso_name 'UNITED STATES'
     name 'United States of Foo'
-    iso 'US'
-    iso3 'USA'
+    sequence(:iso) { |n| "US_#{n}" }
+    sequence(:iso3) { |n| "USA_#{n}" }
     numcode 840
   end
 

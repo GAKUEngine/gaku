@@ -31,17 +31,6 @@ describe 'Student Contacts' do
 
     end
 
-    context 'two contacts', type: 'contact' do
-
-      before do
-        @resource = student_with_contacts
-        visit gaku.edit_student_path(@resource)
-        click tab_link
-        page.has_content? 'Contacts list'
-      end
-
-      it_behaves_like 'primary contacts'
-    end
   end
 
 end

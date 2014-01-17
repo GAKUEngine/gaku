@@ -27,17 +27,5 @@ describe 'Student Guardian Contacts' do
       it_behaves_like 'delete contact', @resource
     end
 
-    context 'two contacts', type: 'contact' do
-
-      before do
-        @resource = guardian_with_contacts
-        student.guardians << @resource
-        visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
-      end
-
-      it_behaves_like 'primary contacts'
-    end
-
   end
 end

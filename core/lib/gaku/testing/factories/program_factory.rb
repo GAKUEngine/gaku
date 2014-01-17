@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :program, class: Gaku::Program do
-    name 'Advanced Ruby'
+    name { Faker::Education.degree }
     description 'Superior Ruby Skills'
     school
   end

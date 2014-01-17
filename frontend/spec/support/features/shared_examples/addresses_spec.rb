@@ -90,37 +90,37 @@ end
 shared_examples_for 'primary addresses' do
 
   it 'sets primary', js: true do
-    expect(@resource.addresses.first.primary?).to eq true
-    expect(@resource.addresses.second.primary?).to eq false
+    old_primary = @resource.addresses.primary
+    old_secondary = @resource.addresses.secondary.first
 
-    within("#{table} tr#address-#{@resource.addresses.second.id}") { click_link 'set_primary_link' }
+    expect(old_primary.primary).to eq true
+    expect(old_secondary.primary).to eq false
+
+    within("#{table} tr#address-#{old_secondary.id}") { click_link 'set_primary_link' }
 
     accept_alert
 
-    within("#{table} tr#address-#{@resource.addresses.second.id}") do
+    within("#{table} tr#address-#{old_secondary.id}") do
       expect(page).to have_css('.btn-primary')
     end
 
-    @resource.addresses.reload
-    expect(@resource.addresses.first.primary?).to eq false
-    expect(@resource.addresses.second.primary?).to eq  true
+    expect(old_primary.reload.primary).to eq false
+    expect(old_secondary.reload.primary).to eq  true
   end
 
   it 'delete primary', js: true do
-    address1_tr = "#address-#{@resource.addresses.first.id}"
-    address2_tr = "#address-#{@resource.addresses.second.id}"
+    old_primary = @resource.addresses.primary
+    old_secondary = @resource.addresses.secondary.first
 
-    within("#{table} #{address2_tr}") { click_link 'set_primary_link' }
+    address_pri_tr = "#address-#{old_primary.id}"
+    address_sec_tr = "#address-#{old_secondary.id}"
+
+    within("#{table} #{address_pri_tr}") { click '.delete-link'}
     accept_alert
 
-    page.find("#{address2_tr} .primary_address a.btn-primary")
+    page.find("#{address_sec_tr} .primary_address a.btn-primary")
 
-    within("#{table} #{address2_tr}") { click '.delete-link'}
-    accept_alert
-
-    page.find("#{address1_tr} .primary_address a.btn-primary")
-
-    expect(@resource.addresses.first.primary?).to eq true
+    expect(old_secondary.reload.primary).to eq true
   end
 end
 

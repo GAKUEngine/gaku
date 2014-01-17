@@ -15,10 +15,10 @@
           = print_count student.guardians_count, t(:'guardian.plural')
       li
         a#student-course-enrollments-tab-link data-toggle="tab" href="#courses"
-          = print_count student.courses.count, t(:'course.plural')
+          = print_count student.courses_count, t(:'course.plural')
       li
         a#student-badges-tab-link data-toggle="tab" href="#badges_tab"
-          = print_count student.badges.count, t(:'badge.plural')
+          = print_count student.badges_count, t(:'badge.plural')
 
     .tab-content
 

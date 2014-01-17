@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :level, class: Gaku::Level do
-    name 'High 3'
+    sequence(:name) { |n| "High #{n}" }
     school
   end
 
