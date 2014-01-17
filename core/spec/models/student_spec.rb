@@ -90,8 +90,9 @@ describe Gaku::Student do
       it 'decrements' do
         student.badges << student_badge
         expect do
-          student.badges.last.destroy
-        end.to change { student.reload.badges_count }.by -1
+          student.badges.last.destroy!
+          student.reload
+        end.to change { student.badges_count }.by -1
       end
     end
 
