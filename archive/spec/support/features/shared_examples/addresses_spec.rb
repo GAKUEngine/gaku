@@ -20,23 +20,3 @@ shared_examples_for 'delete address' do
   end
 
 end
-
-shared_examples_for 'primary addresses' do
-
-  it 'delete primary', js: true do
-    address1_tr = "#address-#{@resource.addresses.first.id}"
-    address2_tr = "#address-#{@resource.addresses.second.id}"
-
-    within("#{table} #{address2_tr}") { click_link 'set_primary_link' }
-    accept_alert
-
-    page.find("#{address2_tr} .primary_address a.btn-primary")
-
-    within("#{table} #{address2_tr}") { click '.delete-link'}
-    accept_alert
-
-    page.find("#{address1_tr} .primary_address a.btn-primary")
-
-    expect(@resource.addresses.first.primary?).to eq true
-  end
-end
