@@ -4,6 +4,7 @@ module Gaku
     has_one :exam
     has_one :exam_portion
     has_one :assignment
+    has_many :simple_grade_types
 
     has_many :grading_method_set_items
     has_many :grading_method_sets, through: :grading_method_set_items
