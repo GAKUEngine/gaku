@@ -467,16 +467,25 @@ class GakuCore < ActiveRecord::Migration
     add_index :gaku_semesters, :school_year_id
 
     create_table :gaku_simple_grades do |t|
-      t.string   :name
-      t.string   :grade
-      t.references  :school
+      t.float       :score
+      t.date        :award_date
+      t.references  :simple_grade_type
       t.references  :student
-      t.references  :external_school_record
       t.timestamps
     end
-    add_index :gaku_simple_grades, :school_id
+    add_index :gaku_simple_grades, :simple_grade_type_id
     add_index :gaku_simple_grades, :student_id
-    add_index :gaku_simple_grades, :external_school_record_id
+
+    create_table :gaku_simple_grade_types do |t|
+      t.string      :name
+      t.float       :max_score
+      t.float       :passing_score
+      t.references  :grading_method
+      t.references  :school
+      t.timestamps
+    end
+    add_index :gaku_simple_grade_types, :grading_method_id
+    add_index :gaku_simple_grade_types, :school_id
 
     create_table :gaku_specialties do |t|
       t.string   :name
