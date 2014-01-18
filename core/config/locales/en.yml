@@ -98,6 +98,21 @@ en:
     save: Save badge
     singular: Badge
     plural: Badges
+  badge_type:
+    add: Add badge type
+    authority: Authority
+    code: Code
+    issuer: Issuer
+    url: Url
+    badge: Badge
+    choose: Choose badge type
+    description: Description
+    edit: Edit badge type
+    list: Badge types list
+    name: Name
+    plural: Badge types
+    save: Save badge type
+    singular: Badge type
   back: Back
   birth: Birth Date
   birth_and: and

@@ -38,6 +38,7 @@ module Gaku
 
     def destroy
       @badge_type.destroy
+      flash[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @badge_type
     end
