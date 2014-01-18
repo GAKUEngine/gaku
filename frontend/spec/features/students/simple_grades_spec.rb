@@ -71,7 +71,6 @@ describe 'Student Simple Grades' do
       count? 'Simple Grades list(1)'
       expect do
         ensure_delete_is_working
-        flash_destroyed?
         within(el) { has_content? simple_grade.score }
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
