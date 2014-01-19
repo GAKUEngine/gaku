@@ -16,10 +16,16 @@ $.fn.hideModal = ->
 
 
 $.fn.datepicker_i18n = ->
-  $(this).datepicker({language: $('body').data('locale')})
+  $(this).datepicker({
+       language: $('body').data('locale'),
+       startView: 2,
+       autoclose: true,
+       todayBtn: true,
+       todayHighlight: true,
+       calendarWeeks: true
+  })
 
 $.fn.datepicker.defaults.format = "yyyy-mm-dd"
-
 
 
 

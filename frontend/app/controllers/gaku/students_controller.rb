@@ -44,9 +44,16 @@ module Gaku
       @enrolled_students = params[:enrolled_students]
 
       @search = Student.active.search(params[:q])
+      if params[:q]
+        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq]
+          @search.sorts = 'birth_date desc'
+        else
+          @search.sorts = 'created_at desc'
+        end
+      end
       results = @search.result(distinct: true)
+      @students = results.page(params[:page])
       @count = results.count
-      @students = results.order('created_at ASC').page(params[:page])
 
       respond_with(@students) do |format|
         format.pdf do
