@@ -28,6 +28,7 @@ window.load_states = ->
 
 class App
   init: ->
+    $('.datepicker').datepicker()
 
     $(document).on 'ajax:success', '.recovery-link', ->
       $(this).closest('tr').remove()
@@ -69,7 +70,6 @@ class App
     $('#soft-delete-link').on 'click', (e)->
       e.preventDefault()
       $('#delete-modal').modal('show')
-
 
   show: ->
     # FIXME Remove after view refactoring

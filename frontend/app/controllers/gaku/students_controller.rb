@@ -16,7 +16,14 @@ module Gaku
     before_action :set_student,           only: %i( show edit update destroy )
 
     def new
+      @last_student = Student.last
+
       @student = Student.new
+      if @last_student
+        @student.admitted = @last_student.admitted
+        @student.enrollment_status_code = @last_student.enrollment_status_code
+
+      end
       @student.class_group_enrollments.new
       respond_with @student
     end

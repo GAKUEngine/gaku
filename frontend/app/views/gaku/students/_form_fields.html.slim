@@ -1,20 +1,24 @@
-.row
-  .col-md-12
-    = f.fields_for :class_group_enrollments do |cge_form|
-      = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'), include_blank: true }, label: t(:'class'))
+.pull-left.col-md-6
+  .row
+    .col-md-6
+      = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { }, label: t(:'enrollment_status.singular'))
 
-= render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
+    .col-md-6
+      = f.fields_for :class_group_enrollments do |cge_form|
+        = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'), include_blank: true, default: @last_student.try(:class_groups).try(:last) }, label: t(:'class'))
 
-.row
-  .col-md-6
-    = f.text_field :admitted, class: "datepicker", label: t(:admitted)
-  .col-md-6
-    = f.text_field :graduated, class: "datepicker", label: t(:graduated)
+  .row
 
-.row
-  .col-md-3
-    = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'student.scholarship_status'))
-  .col-md-3
-    = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { include_blank: true }, label: t(:'enrollment_status.singular'))
-  .col-md-6
-    = f.collection_select(:commute_method_type_id, @commute_method_types, :id, :name, { include_blank: true }, label: t(:'commute_method_type.singular'))
+    .col-md-4
+      = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'student.scholarship_status'))
+
+    .col-md-4
+      = f.collection_select(:commute_method_type_id, @commute_method_types, :id, :name, { include_blank: true }, label: t(:'commute_method_type.singular'))
+    .col-md-2
+      = f.text_field :admitted, class: "datepicker", label: t(:admitted)
+
+    .col-md-2
+      = f.text_field :graduated, class: "datepicker", label: t(:graduated)
+
+.pull-right.col-md-6
+  = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
