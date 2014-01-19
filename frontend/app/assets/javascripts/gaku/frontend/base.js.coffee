@@ -15,6 +15,8 @@ $.fn.hideModal = ->
   $(this).modal('hide')
 
 
+$.fn.datepicker.defaults.format = "yyyy-mm-dd"
+
 
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()
@@ -28,6 +30,7 @@ window.load_states = ->
 
 class App
   init: ->
+    $('.datepicker').datepicker()
 
     $('.datepicker').datepicker()
 
@@ -71,7 +74,6 @@ class App
     $('#soft-delete-link').on 'click', (e)->
       e.preventDefault()
       $('#delete-modal').modal('show')
-
 
   show: ->
     # FIXME Remove after view refactoring
