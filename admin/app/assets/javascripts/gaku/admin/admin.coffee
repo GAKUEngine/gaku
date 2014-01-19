@@ -6,7 +6,7 @@ ready = ->
       #need to add datepicker to newly added inputs from nested_form_for
       $('body').on 'click','.add-semester', ->
         setTimeout ->
-          $('.datepicker').datepicker()
+          $('.datepicker').datepicker_i18n()
         ,500
 
     index: ->

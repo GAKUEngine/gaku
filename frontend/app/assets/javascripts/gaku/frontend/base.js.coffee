@@ -15,7 +15,13 @@ $.fn.hideModal = ->
   $(this).modal('hide')
 
 
+$.fn.datepicker_i18n = ->
+  $(this).datepicker({language: $('body').data('locale')})
+
 $.fn.datepicker.defaults.format = "yyyy-mm-dd"
+
+
+
 
 
 window.load_states = ->
@@ -30,9 +36,8 @@ window.load_states = ->
 
 class App
   init: ->
-    $('.datepicker').datepicker()
 
-    $('.datepicker').datepicker()
+    $('.datepicker').datepicker_i18n()
 
     $(document).on 'ajax:success', '.recovery-link', ->
       $(this).closest('tr').remove()
