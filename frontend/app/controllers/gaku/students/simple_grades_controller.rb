@@ -4,7 +4,7 @@ module Gaku
     respond_to :js, only: %i( new create edit update index destroy )
 
     before_action :student
-    before_action :set_schools, only: %i( new edit )
+    before_action :set_simple_grade_types, only: %i( new edit )
     before_action :set_simple_grade, only: %i( edit update destroy )
 
     def new
@@ -46,11 +46,11 @@ module Gaku
     end
 
     def simple_grade_attr
-      %i( name grade school_id )
+      %i( score award_data simple_grade_type_id )
     end
 
-    def set_schools
-      @schools = School.all
+    def set_simple_grade_types
+      @simple_grade_types = SimpleGradeType.all
     end
 
     def student

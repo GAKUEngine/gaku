@@ -102,7 +102,7 @@ en:
     add: Add badge type
     authority: Authority
     code: Code
-    issuer: issuer
+    issuer: Issuer
     url: Url
     badge: Badge
     choose: Choose badge type
@@ -854,6 +854,16 @@ en:
     plural: Simple Grades
     save: Save Simple Grade
     singular: Simple Grade
+  simple_grade_type:
+    max_score: Max score
+    passing_score: Passing score
+    add: Add simple grade type
+    edit: Edit simple grade type
+    list: Simple grade types list
+    name: Name
+    plural: Simple grade types
+    save: Save Simple grade type
+    singular: Simple grade type
   specialty:
     add: Add Specialty
     already_added: Specialty already added!

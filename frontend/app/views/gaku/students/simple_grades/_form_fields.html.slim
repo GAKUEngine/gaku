@@ -1,3 +1,3 @@
-= f.text_field :name, label: t(:'simple_grade.plural')
-= f.text_field :grade, label: t(:'simple_grade.grade')
-= f.select :school_id, @schools, { prompt: t(:'school.choose')}, label: t(:'school.plural')
+= f.number_field :score, label: t(:'simple_grade.score')
+= f.text_field :award_date, label: t(:'simple_grade.award_date')
+= f.select :simple_grade_type_id,  options_from_collection_for_select(@simple_grade_types, :id, :name), {prompt: t(:'simple_grade_type.choose')}, label: t(:'simple_grade_type.plural')

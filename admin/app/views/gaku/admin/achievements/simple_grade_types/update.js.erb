@@ -1,0 +1,4 @@
+$('tr#simple-grade-type-<%= @simple_grade_type.id %>').html('<%= j render("fields", {simple_grade_type: @simple_grade_type}) %>');
+$("#edit-simple-grade-type-modal").modal("hide");
+showNotice("<%= render_flash %>");
+
