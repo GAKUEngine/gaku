@@ -63,8 +63,9 @@ describe 'CourseEnrollment'  do
     end
 
     it 'errors if all students are already added' do
-      course.students << class_group_with_students.students.first
-      course.students << class_group_with_students.students.second
+      class_group_with_students.students.each do |student|
+        course.students << student
+      end
       visit gaku.edit_course_path(course)
 
       click new_link
