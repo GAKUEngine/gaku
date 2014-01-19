@@ -29,6 +29,8 @@ window.load_states = ->
 class App
   init: ->
 
+    $('.datepicker').datepicker()
+
     $(document).on 'ajax:success', '.recovery-link', ->
       $(this).closest('tr').remove()
 
@@ -106,6 +108,10 @@ class App
     $(document).on 'change', "#search-students select", (event) ->
       $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
       return false
+
+    $('.datepicker').datepicker().on 'hide', (e) ->
+      $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
+      console.log "Picked"
 
 
     $('body').on 'change', 'input.student-check', ->
