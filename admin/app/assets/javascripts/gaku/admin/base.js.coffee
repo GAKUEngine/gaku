@@ -14,7 +14,7 @@ $.fn.showModal = ->
 $.fn.hideModal = ->
   $(this).modal('hide')
 
-
+$.fn.datepicker.defaults.format = "yyyy-mm-dd"
 
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()

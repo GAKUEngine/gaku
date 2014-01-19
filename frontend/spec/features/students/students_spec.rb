@@ -6,6 +6,7 @@ describe 'Students', type: :feature do
     Capybara.javascript_driver = :selenium
     set_resource 'student'
   end
+
   before { as :admin }
 
   let(:class_group) { create(:class_group) }
@@ -141,6 +142,48 @@ describe 'Students', type: :feature do
       expect(current_path).to eq gaku.edit_student_path(Gaku::Student.last)
 
       page.has_text? 'John'
+    end
+
+    context 'there is existing student' do
+
+      it 'prefills enrollment_status, admitted and class_group with last student ones' do
+        student = create(:student, enrollment_status_code: enrollment_status_applicant.code, admitted: '2013-01-19')
+        create(:class_group_enrollment, class_group: class_group, student: student)
+        visit gaku.new_student_path
+        expect(find('#student_enrollment_status_code').value).to eq 'applicant'
+        expect(find('#student_admitted').value).to eq '2013-01-19'
+        expect(find('#student_class_group_enrollments_attributes_0_class_group_id').value).to eq class_group.id.to_s
+
+        fill_in 'student_name', with: 'John'
+        fill_in 'student_surname', with: 'Doe'
+        click_button 'submit-student-button'
+        flash_created?
+
+        expect(current_path).to eq gaku.edit_student_path(Gaku::Student.last)
+        expect(find('#student_enrollment_status_code').value).to eq 'applicant'
+        expect(find('#student_admitted').value).to eq '2013-01-19'
+        expect(find('#student_class_group_enrollments_attributes_0_class_group_id').value).to eq class_group.id.to_s
+
+        created_student = Gaku::Student.last
+        expect(created_student.enrollment_status_code).to eq 'applicant'
+        expect(created_student.admitted.to_s).to eq '2013-01-19'
+        expect(created_student.class_groups.last).to eq class_group
+      end
+    end
+
+
+    it 'prefills enrollment_status code' do
+      expect(find('#student_enrollment_status_code').value).to eq 'enrolled'
+      fill_in 'student_name', with: 'John'
+      fill_in 'student_surname', with: 'Doe'
+      click_button 'submit-student-button'
+      flash_created?
+      expect(current_path).to eq gaku.edit_student_path(Gaku::Student.last)
+      expect(find('#student_enrollment_status_code').value).to eq 'enrolled'
+
+
+      created_student = Gaku::Student.last
+      expect(created_student.enrollment_status_code).to eq 'enrolled'
     end
 
     it { has_validations? }

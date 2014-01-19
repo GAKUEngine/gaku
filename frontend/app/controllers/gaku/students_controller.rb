@@ -16,6 +16,7 @@ module Gaku
     before_action :set_student,           only: %i( show edit update destroy )
 
     def new
+      @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
       @last_student = Student.last
 
       @student = Student.new
@@ -31,7 +32,6 @@ module Gaku
     def create
       @student = Student.new(student_params)
       if @student.save
-        @student.make_enrolled if @student.valid?
         @count = Student.count
         respond_with @student, location: [:edit, @student]
       else
