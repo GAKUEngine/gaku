@@ -13,10 +13,12 @@ describe 'Students', type: :feature do
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
+  let(:enrollment_status_transferred) { create(:enrollment_status, code: 'transferred', name: 'Transferred', active: true) }
   let(:student) { create(:student, name: 'John', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code) }
   let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
   let(:student3) { create(:student, name: 'Johny', surname: 'Bravo', enrollment_status_code: enrollment_status_admitted.code) }
   let(:student4) { create(:student, name: 'Felix', surname: 'Baumgartner', enrollment_status_code: enrollment_status_applicant.code) }
+  let(:student5) { create(:student, name: 'Mike', surname: 'Tyson', enrollment_status_code: enrollment_status_transferred.code) }
 
 
   context 'existing' do
@@ -28,12 +30,13 @@ describe 'Students', type: :feature do
       student2
       student3
       student4
+      student5
       visit gaku.students_path
     end
 
     it 'lists' do
       #list show only students with active enrollment statuses
-      size_of(table_rows).should eq 4
+      size_of(table_rows).should eq 5
       page.has_text? "#{student.name}"
       page.has_text? "#{student.surname}"
       page.has_no_text? "#{student4.name}"
@@ -65,8 +68,29 @@ describe 'Students', type: :feature do
       end
     end
 
-    it 'has autocomplete while searching', js: true do
+    it 'searches by enrollment_status', js: true do
+      size_of(table_rows).should eq 5
+      count? '4'
+
+      select 'Transferred', from: 'q_enrollment_status_code_eq'
+      wait_for_ajax
+
+      size_of(table_rows).should eq 2
+      within(count_div) { page.has_content? '1' }
+      page.has_content? 'Mike'
+      page.has_content? 'Tyson'
+
+      select 'Admitted', from: 'q_enrollment_status_code_eq'
+      wait_for_ajax
+
       size_of(table_rows).should eq 4
+      within(count_div) { page.has_content? '3' }
+      page.has_content? 'Mike'
+      page.has_content? 'Tyson'
+    end
+
+    it 'has autocomplete while searching', js: true do
+      size_of(table_rows).should eq 5
 
       fill_in 'q_name_cont', with: 'J'
       wait_for_ajax

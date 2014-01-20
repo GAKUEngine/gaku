@@ -113,7 +113,7 @@ module Gaku
     end
 
     def set_index_vars
-      @enrollment_statuses = EnrollmentStatus.all.includes(:translations)
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
       @countries = Country.all
       @class_groups = ClassGroup.all
       @courses = Course.all
