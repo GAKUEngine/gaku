@@ -39,6 +39,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   resources :class_groups, concerns: %i( notes student_chooser pagination ) do
+    get :with_semesters, on: :collection
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )

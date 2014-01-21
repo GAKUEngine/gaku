@@ -148,6 +148,8 @@ en:
     user: Changed by
   class: Class
   class_group:
+    with_semester: With Semester
+    without_semester: Without Semester
     add: Add Class Group
     already_enrolled: Already enrolled to the class group!
     choose: Choose Class Group

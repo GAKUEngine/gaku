@@ -8,8 +8,7 @@
   .pull-left
     = count_div('class-groups-count') { print_count @count, t(:'class_group.list') }
   .pull-right
-    = button t(:'class_group.with_semester'), with_semesters_class_groups_path
-    = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], id: "new-class-group-link"
+    = button t(:'class_group.without_semester'), class_groups_path
 
 #class-groups-index
-  = render 'class_groups'
+  = render 'class_groups_with_semesters'

@@ -1,0 +1,13 @@
+- @class_groups.each do |semester, semester_class_groups|
+  = table_for "semester-#{semester}-class-groups-index" do
+    thead
+      tr
+        th.btn-inverse colspan='4' ="#{t(:'semester.singular')}: #{semester_class_groups.first.semester}"
+      tr
+        = th t(:'class_group.grade')
+        = th t(:'class_group.name')
+        = th t(:'class_group.homeroom')
+        = th_actions 1
+    tbody
+      = render partial: 'class_group', collection: extract_grouped(semester_class_groups, :class_group), as: :class_group
+  = hr

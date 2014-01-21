@@ -39,19 +39,17 @@ module Gaku
       respond_with @class_group, location: [:edit, @class_group]
     end
 
-    # def index
-    #   @class_groups = SemesterClassGroup.group_by_semester
-    #   @class_groups_without_semester = ClassGroup.without_semester
-    #   set_count
-    # end
-
     def index
-      @class_groups = SemesterClassGroup.group_by_semester
-
       @search = ClassGroup.without_semester.search(params[:q])
       results = @search.result(distinct: true)
-      @class_groups_without_semester = results.page(params[:page])
+      @class_groups = results.page(params[:page])
       set_count
+    end
+
+    def with_semesters
+      @class_groups = SemesterClassGroup.group_by_semester
+      @count = @class_groups.count
+      render :with_semesters, layout: 'gaku/layouts/index'
     end
 
     private
@@ -79,7 +77,7 @@ module Gaku
     end
 
     def set_courses
-      @courses = Course.includes(:syllabus).map { |c| [c, c.id] }
+      @courses = Course.all.map { |c| [c, c.id] }
     end
 
   end
