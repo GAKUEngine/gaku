@@ -32,6 +32,10 @@ module Gaku
       where(primary: true).first
     end
 
+    def code_and_name
+      "#{code}: #{name}"
+    end
+
     private
 
     def build_default_campus
