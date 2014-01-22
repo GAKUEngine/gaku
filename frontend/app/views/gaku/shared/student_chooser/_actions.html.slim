@@ -1,0 +1,11 @@
+- if @class_group
+  = render 'gaku/shared/student_chooser/class_group'
+
+- elsif @course
+  = render 'gaku/shared/student_chooser/course'
+
+- elsif @extracurricular_activity
+  = render 'gaku/shared/student_chooser/extracurricular_activity'
+
+- else
+  = render 'gaku/shared/student_chooser/student'

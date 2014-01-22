@@ -69,6 +69,7 @@ describe 'Students', type: :feature do
     end
 
     it 'searches by enrollment_status', js: true do
+      click '#student-advanced-search-link'
       size_of(table_rows).should eq 5
       count? '4'
 
@@ -90,6 +91,7 @@ describe 'Students', type: :feature do
     end
 
     it 'has autocomplete while searching', js: true do
+      click '#student-advanced-search-link'
       size_of(table_rows).should eq 5
 
       fill_in 'q_name_cont', with: 'J'

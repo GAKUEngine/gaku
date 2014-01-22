@@ -1,0 +1,8 @@
+.row
+  .col-md-2
+    = f.label :graduated_gteq, t(:'student.graduated_from')
+    = f.text_field :graduated_gteq, class: "form-control input-sm datepicker"
+
+  .col-md-2
+    = f.label :graduated_lteq, t(:'student.graduated_to')
+    = f.text_field :graduated_lteq, class: "form-control input-sm datepicker"

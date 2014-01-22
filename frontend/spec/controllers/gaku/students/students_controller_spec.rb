@@ -12,28 +12,86 @@ describe Gaku::StudentsController do
     describe 'name' do
 
       let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,9,1)) }
-      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,10,5)) }
+      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(2000,10,5)) }
 
       it 'searches by name' do
-        gaku_js_get :index, q: { name_cont: 'Re' }
+        gaku_js_get :search, q: { name_cont: 'Re' }
 
         expect(assigns(:students)).to eq [student1]
         expect(assigns(:students).size).to eq 1
       end
 
       it 'searches by surname' do
-        gaku_js_get :index, q: { surname_cont: 'Kal' }
+        gaku_js_get :search, q: { surname_cont: 'Kal' }
 
         expect(assigns(:students)).to eq [student2]
         expect(assigns(:students).size).to eq 1
       end
 
-      xit 'searches by birth_date from begining' do
-        gaku_js_get :index, q: { birth_date_gteq: Date.new(1980,1,1) }
+      it 'searches by birth_date_gteq' do
+        gaku_js_get :search, q: { birth_date_gteq: Date.new(2000,1,1) }
 
         expect(assigns(:students)).to eq [student2]
         expect(assigns(:students).size).to eq 1
       end
+
+      it 'searches by birth_date_lteq' do
+        gaku_js_get :search, q: { birth_date_lteq: Date.new(2000,1,1) }
+
+        expect(assigns(:students)).to eq [student1]
+        expect(assigns(:students).size).to eq 1
+      end
+    end
+
+    describe 'academic' do
+      context 'graduated' do
+
+        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', graduated: Date.new(1983,9,1)) }
+        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', graduated: Date.new(2000,10,5)) }
+
+        before do
+          student1
+          student2
+        end
+
+        it 'searches by graduated_gteq' do
+          gaku_js_get :search, q: { graduated_gteq: Date.new(2000,1,1) }
+          expect(assigns(:students)).to eq [student2]
+          expect(assigns(:students).size).to eq 1
+        end
+
+        it 'searches by graduated_lteq' do
+          gaku_js_get :search, q: { graduated_lteq: Date.new(2000,1,1) }
+
+          expect(assigns(:students)).to eq [student1]
+          expect(assigns(:students).size).to eq 1
+        end
+      end
+
+      context 'admitted' do
+
+        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', admitted: Date.new(1983,9,1)) }
+        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', admitted: Date.new(2000,10,5)) }
+
+        before do
+          student1
+          student2
+        end
+
+        it 'searches by admitted_gteq' do
+          gaku_js_get :search, q: { admitted_gteq: Date.new(2000,1,1) }
+          expect(assigns(:students)).to eq [student2]
+          expect(assigns(:students).size).to eq 1
+        end
+
+        it 'searches by admitted_lteq' do
+          gaku_js_get :search, q: { admitted_lteq: Date.new(2000,1,1) }
+
+          expect(assigns(:students)).to eq [student1]
+          expect(assigns(:students).size).to eq 1
+        end
+      end
+
     end
 
     describe 'address' do
@@ -106,10 +164,6 @@ describe Gaku::StudentsController do
       it { should respond_with 200 }
       it('assigns @students') { expect(assigns(:students)).to eq [student] }
       it('assigns @count') { expect(assigns(:count)).to eq 1 }
-      it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
-      it('assigns @countries') { expect(assigns(:countries)).to_not be_nil }
-      it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
-      it('assigns @courses') { expect(assigns(:courses)).to_not be_nil }
       it('renders :index template') { template? :index }
     end
 
@@ -197,6 +251,32 @@ describe Gaku::StudentsController do
 
   context 'JS' do
 
+    describe 'JS GET #chosen' do
+      before do
+        student
+        gaku_js_get :chosen
+      end
+
+      it { should respond_with 200 }
+      it('assigns @students') { expect(assigns(:students)).to eq [student] }
+      it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
+      it('assigns @courses') { expect(assigns(:courses)).to_not be_nil }
+      it('renders :chosen template') { template? :chosen }
+    end
+
+    describe 'JS GET #advanced_search' do
+      before do
+        student
+        gaku_js_get :advanced_search
+      end
+
+      it { should respond_with 200 }
+      it('assigns @students') { expect(assigns(:students)).to eq [student] }
+      it('assigns @countries') { expect(assigns(:countries)).to_not be_nil }
+      it('assigns @enrollment_statuses') { expect(assigns(:enrollment_statuses)).to_not be_nil }
+      it('renders :advanced_search template') { template? :advanced_search }
+    end
+
     describe 'JS GET #new' do
       before { gaku_js_get :new }
 
@@ -217,6 +297,7 @@ describe Gaku::StudentsController do
         end.to change(Gaku::Student, :count).by -1
       end
     end
+
   end
 
 end

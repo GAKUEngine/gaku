@@ -40,17 +40,7 @@ module Gaku
     end
 
     def index
-      set_index_vars
-      @enrolled_students = params[:enrolled_students]
-
       @search = Student.active.search(params[:q])
-      if params[:q]
-        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq]
-          @search.sorts = 'birth_date desc'
-        else
-          @search.sorts = 'created_at desc'
-        end
-      end
       results = @search.result(distinct: true)
       @students = results.page(params[:page])
       @count = results.count
@@ -63,6 +53,48 @@ module Gaku
         end
       end
     end
+
+    def chosen
+      set_class_groups
+      set_courses
+
+      @enrolled_students = params[:enrolled_students]
+      @search = Student.active.search(params[:q])
+      @students = @search.result(distinct: true)
+    end
+
+    def advanced_search
+      set_countries
+      set_enrollment_statuses
+      @search = Student.active.search(params[:q])
+      @students = @search.result(distinct: true)
+    end
+
+    def search
+      if params[:q]
+        if params[:q][:graduated_gteq]  || params[:q][:graduated_lteq] || params[:q][:admitted_gteq] || params[:q][:admitted_lteq]
+          @search = Student.search(params[:q])
+        else
+          @search = Student.active.search(params[:q])
+        end
+
+        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq]
+          @search.sorts = 'birth_date desc'
+        else
+          @search.sorts = 'created_at desc'
+        end
+
+      else
+        @search = Student.active.search(params[:q])
+      end
+
+      results = @search.result(distinct: true)
+      @students = results.page(params[:page])
+      @count = results.count
+
+      render :index
+    end
+
 
     def edit
       respond_with @student
@@ -116,6 +148,22 @@ module Gaku
       @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
       @countries = Country.all
       @class_groups = ClassGroup.all
+      @courses = Course.all
+    end
+
+    def set_enrollment_statuses
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
+    end
+
+    def set_countries
+      @countries = Country.all
+    end
+
+    def set_class_groups
+      @class_groups = ClassGroup.all
+    end
+
+    def set_courses
       @courses = Course.all
     end
 

@@ -1,0 +1,9 @@
+$('#student-advanced-search').html('<%= j render("gaku/students/search/advanced_form") %>').withAnimation();
+$('#student-advanced-search-link').slide();
+$('.datepicker').datepicker_i18n();
+
+
+$('.datepicker').datepicker().on('hide', function(e) {
+  $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
+  return console.log("Picked");
+});

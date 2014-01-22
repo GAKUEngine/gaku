@@ -149,12 +149,12 @@ class App
           chosen_trs = $('#chosen-table').find('tbody tr')
           $('.chosen-count').html('(' + chosen_trs.length + ')')
 
-    $('body').on 'click', '.show-chosen-table', (event) ->
-      event.preventDefault()
-      $('.show-chosen-table').hide()
-      $('.hide-chosen-table').show()
-      $('#chosen-table').slide()
-      $('#chosen-actions').slide()
+    # $('body').on 'click', '.show-chosen-table', (event) ->
+    #   event.preventDefault()
+    #   $('.show-chosen-table').hide()
+    #   $('.hide-chosen-table').show()
+    #   $('#chosen-table').slide()
+    #   $('#chosen-actions').slide()
 
     $('body').on 'click', '.hide-chosen-table', (event) ->
       event.preventDefault()
