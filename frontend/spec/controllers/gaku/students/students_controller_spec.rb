@@ -109,6 +109,21 @@ describe Gaku::StudentsController do
         end
       end
 
+
+      context 'specialty' do
+        let(:student) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code) }
+        let(:specialty) { create(:specialty, name: 'Clojure') }
+        let(:student_specialty) { create(:student_specialty, student: student, specialty: specialty) }
+
+        it 'searches by specialty' do
+          student_specialty
+          gaku_js_get :search, q: { specialties_name_cont: 'ju' }
+
+          expect(assigns(:students)).to eq [student]
+          expect(assigns(:students).size).to eq 1
+        end
+      end
+
     end
 
     describe 'address' do

@@ -41,21 +41,6 @@
                                                   class_name:   'extracurricular_activities',
                                                   column:       'name'})
 
-.panel.panel-default
-  .panel-heading
-    h3.panel-title =t(:'specialty.singular')
-  .panel-body
-    .row
-      .col-md-6
-        = autocomplete_text_field(f, options = {  object_name: 'specialties_name_cont',
-                                                  tag_name:     t(:'specialty.name'),
-                                                  class_name:   'specialties',
-                                                  column:       'name'})
-      .col-md-6
-        = autocomplete_text_field(f, options = {  object_name:  'specialties_description_cont',
-                                                  tag_name:     t(:'specialty.description'),
-                                                  class_name:   'specialties',
-                                                  column:       'description'})
 
 .panel.panel-default
   .panel-heading

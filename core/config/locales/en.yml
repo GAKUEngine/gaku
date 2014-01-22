@@ -924,6 +924,10 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
+    admitted_from: Admitted(from)
+    admitted_to: Admitted(To)
+    graduated_from: Graduated(from)
+    graduated_to: Graduated(to)
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
