@@ -1,4 +1,9 @@
 en:
+  group:
+    singular: Group
+    plural: Groups
+  achievement:
+    singular: Achievement
   academic: Academic
   active: Active
   add: Add
