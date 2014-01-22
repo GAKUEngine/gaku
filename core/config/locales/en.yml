@@ -120,6 +120,8 @@ en:
   birth_date: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
+  age_from: Age(from)
+  age_to: Age(to)
   campus:
     add: Add Campus
     address: Campus Address

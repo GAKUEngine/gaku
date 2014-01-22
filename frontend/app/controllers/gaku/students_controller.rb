@@ -78,7 +78,7 @@ module Gaku
           @search = Student.active.search(params[:q])
         end
 
-        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq]
+        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq] || params[:q][:age_gteq] ||params[:q][:age_lteq]
           @search.sorts = 'birth_date desc'
         else
           @search.sorts = 'created_at desc'

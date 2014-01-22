@@ -11,8 +11,8 @@ describe Gaku::StudentsController do
   context 'search' do
     describe 'name' do
 
-      let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1983,9,1)) }
-      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(2000,10,5)) }
+      let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1950,9,1)) }
+      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(2013,10,5)) }
 
       it 'searches by name' do
         gaku_js_get :search, q: { name_cont: 'Re' }
@@ -40,6 +40,23 @@ describe Gaku::StudentsController do
 
         expect(assigns(:students)).to eq [student1]
         expect(assigns(:students).size).to eq 1
+      end
+
+      context 'age' do
+
+        it 'searches by age_gteq' do
+          gaku_js_get :search, q: { age_gteq: 50 }
+
+          expect(assigns(:students)).to eq [student1]
+          expect(assigns(:students).size).to eq 1
+        end
+
+        it 'searches by age_lteq' do
+          gaku_js_get :search, q: { age_lteq: 50 }
+
+          expect(assigns(:students)).to eq [student2]
+          expect(assigns(:students).size).to eq 1
+        end
       end
     end
 
