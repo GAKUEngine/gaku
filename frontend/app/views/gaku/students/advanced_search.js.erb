@@ -1,6 +1,7 @@
-$('#student-advanced-search').html('<%= j render("gaku/students/search/advanced_form") %>').withAnimation();
+$('#student-advanced-search').html('<%= j render("gaku/students/search/advanced_form") %>').slide();
 $('#student-advanced-search-link').slide();
 $('.datepicker').datepicker_i18n();
+$('.hide-advanced-search-table').show();
 
 
 $(document).on('keydown', '.js-autocomplete', function(event) {
@@ -36,4 +37,13 @@ $(document).on('change', "#search-students select", function(event) {
 
 $('.datepicker').datepicker().on('hide', function(e) {
   return $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
+});
+
+
+
+
+$('body').on('click', '.hide-advanced-search-table', function(event) {
+  event.preventDefault();
+  $('#student-advanced-search').hide();
+  $('#student-advanced-search-link').show();
 });
