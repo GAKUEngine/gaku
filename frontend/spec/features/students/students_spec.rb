@@ -49,8 +49,8 @@ describe 'Students', type: :feature do
 
       within('#students-checked-div') do
         page.has_text? 'Chosen students(1)'
-        within('.show-chosen-table') { page.has_text? 'Show'}
-        click_link 'Show'
+        #within('.show-chosen-table') { page.has_text? 'Show'}
+        #click_link 'Show'
         wait_for_ajax
 
         page.has_selector? '#chosen-table'
@@ -58,10 +58,10 @@ describe 'Students', type: :feature do
         page.has_button? 'Enroll to class'
         page.has_button? 'Enroll to course'
 
-        within('.hide-chosen-table') do
-          page.has_content? 'Hide'
-          click_link 'Hide'
-        end
+        # within('.hide-chosen-table') do
+        #   page.has_content? 'Hide'
+        #   click_link 'Hide'
+        # end
 
         wait_for_ajax
         page.has_no_selector? '#chosen-table'

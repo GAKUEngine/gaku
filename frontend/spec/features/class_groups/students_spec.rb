@@ -41,10 +41,10 @@ describe 'ClassGroup Students' do
         within('#students-checked-div') do
           page.has_content? 'Chosen students'
 
-          within('.show-chosen-table') do
-            page.has_content? 'Show'
-            click_link 'Show'
-          end
+          # within('.show-chosen-table') do
+          #   page.has_content? 'Show'
+          #   click_link 'Show'
+          # end
 
           page.has_selector? '#chosen-table'
           page.has_selector? '#students-checked'

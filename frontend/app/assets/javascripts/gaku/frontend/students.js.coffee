@@ -6,6 +6,13 @@ ready = ->
     index: ->
       self.app.student_chooser()
 
+      $('body').on 'click', '.hide-chosen-table', (event) ->
+        event.preventDefault()
+        $('.hide-chosen-table').hide()
+        $('.show-chosen-table').show()
+        $('#chosen-table').slide()
+        $('#chosen-actions').slide()
+
     edit: ->
       self.app.country_dropdown()
 

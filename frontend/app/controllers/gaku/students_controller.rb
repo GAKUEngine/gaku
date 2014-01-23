@@ -55,8 +55,11 @@ module Gaku
     end
 
     def chosen
+      set_selected_students
       set_class_groups
       set_courses
+      @extracurricular_activity = ExtracurricularActivity.find(params[:extracurricular_activity_id]) if params[:extracurricular_activity_id]
+      @class_group = ClassGroup.find(params[:class_group_id]) if params[:class_group_id]
 
       @enrolled_students = params[:enrolled_students]
       @search = Student.active.search(params[:q])
@@ -142,13 +145,6 @@ module Gaku
 
     def set_class_group
       @class_group_id ||= params[:class_group_id]
-    end
-
-    def set_index_vars
-      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
-      @countries = Country.all
-      @class_groups = ClassGroup.all
-      @courses = Course.all
     end
 
     def set_enrollment_statuses
