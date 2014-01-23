@@ -98,35 +98,8 @@ class App
     $('body').on 'change', '#country_dropdown', ->
       window.load_states()
 
+
   student_chooser: ->
-    $(document).on 'keydown', '.js-autocomplete', (event) ->
-      element_id = '#' + $(this).attr('id')
-      $(element_id).autocomplete
-        source: $(element_id).data('autocomplete-source')
-        messages:
-          noResults: ->
-          results: ->
-        select: (event, ui) ->
-          $(this).val(ui.item.value);
-          $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
-
-    $(document).on 'click', "#students-index th a", (event) ->
-      $.getScript(this.href)
-      return false
-
-    $(document).on 'keyup', "#search-students input", (event) ->
-      $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
-      return false
-
-    $(document).on 'change', "#search-students select", (event) ->
-      $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
-      return false
-
-    $('.datepicker').datepicker().on 'hide', (e) ->
-      $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script")
-      console.log "Picked"
-
-
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       thisId = $(this).closest('tr').attr('id')
@@ -149,19 +122,6 @@ class App
           chosen_trs = $('#chosen-table').find('tbody tr')
           $('.chosen-count').html('(' + chosen_trs.length + ')')
 
-    $('body').on 'click', '.show-chosen-table', (event) ->
-      event.preventDefault()
-      $('.show-chosen-table').hide()
-      $('.hide-chosen-table').show()
-      $('#chosen-table').slide()
-      $('#chosen-actions').slide()
-
-    $('body').on 'click', '.hide-chosen-table', (event) ->
-      event.preventDefault()
-      $('.hide-chosen-table').hide()
-      $('.show-chosen-table').show()
-      $('#chosen-table').slide()
-      $('#chosen-actions').slide()
 
 ready = ->
 

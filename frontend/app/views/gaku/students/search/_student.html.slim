@@ -10,13 +10,22 @@
     = f.label :name_cont, t(:name)
     = f.text_field :name_cont, class: "form-control input-sm"
 
-  .col-md-2
+  .col-md-1
     = f.label :birth_date_gteq, t(:birth_date_from)
     = f.text_field :birth_date_gteq, class: "form-control input-sm datepicker"
 
-  .col-md-2
+  .col-md-1
     = f.label :birth_date_lteq, t(:birth_date_to)
     = f.text_field :birth_date_lteq, class: "form-control input-sm datepicker"
+
+  .col-md-1
+    = f.label :age_gteq, t(:age_from)
+    = f.text_field :age_gteq, class: "form-control input-sm"
+
+  .col-md-1
+    = f.label :age_lteq, t(:age_to)
+    = f.text_field :age_lteq, class: "form-control input-sm"
+
 
   .col-md-2
     = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',

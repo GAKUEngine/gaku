@@ -1,0 +1,22 @@
+.row
+  .col-md-1
+    = f.label :graduated_gteq, t(:'student.graduated_from')
+    = f.text_field :graduated_gteq, class: "form-control input-sm datepicker"
+
+  .col-md-1
+    = f.label :graduated_lteq, t(:'student.graduated_to')
+    = f.text_field :graduated_lteq, class: "form-control input-sm datepicker"
+
+  .col-md-1
+    = f.label :admitted_gteq, t(:'student.admitted_from')
+    = f.text_field :admitted_gteq, class: "form-control input-sm datepicker"
+
+  .col-md-1
+    = f.label :admitted_lteq, t(:'student.admitted_to')
+    = f.text_field :admitted_lteq, class: "form-control input-sm datepicker"
+
+  .col-md-4
+    = autocomplete_text_field(f, options = {  object_name: 'specialties_name_cont',
+                                              tag_name:     t(:'specialty.singular'),
+                                              class_name:   'specialties',
+                                              column:       'name'})

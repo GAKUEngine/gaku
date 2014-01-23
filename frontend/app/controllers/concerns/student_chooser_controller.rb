@@ -3,8 +3,6 @@ module StudentChooserController
   include Gaku::ClassNameDetector
 
   def student_chooser
-    set_enrollment_statuses
-    set_countries
     set_students
 
     set_collection
@@ -15,23 +13,9 @@ module StudentChooserController
 
   private
 
-  def set_countries
-    @countries = Gaku::Country.all.sort_by(&:name).map{|s| [s.name, s.id]}
-  end
-
-  def set_enrollment_statuses
-    @enrollment_status_applicant_code = Gaku::EnrollmentStatus.where(code: 'applicant').includes(:translations).first_or_create.code
-    @enrollment_status_enrolled_code = Gaku::EnrollmentStatus.where(code: 'enrolled').includes(:translations).first_or_create.code
-    @enrollment_statuses =  Gaku::EnrollmentStatus.all.includes(:translations).map { |es| [es.name, es.code] }
-    @enrollment_statuses << [t('undefined'), nil]
-  end
-
   def set_students
-    active_enrollment_statuses_codes = Gaku::EnrollmentStatus.active.includes(:translations).pluck(:code)
-    @search = Gaku::Student.search(params[:q])
-    @students = @search.result.where(enrollment_status_code: active_enrollment_statuses_codes)
-                              .page(params[:page])
-
+    @search = Gaku::Student.active.search(params[:q])
+    @students = @search.result.page(params[:page])
 
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 

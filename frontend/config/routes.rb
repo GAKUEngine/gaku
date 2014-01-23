@@ -82,6 +82,9 @@ Gaku::Core::Engine.routes.draw do
   resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
   resources :students, concerns: %i( addresses contacts notes pagination ) do
+    get :search, on: :collection
+    get :advanced_search, on: :collection
+    get :chosen, on: :collection
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
     resources :commute_methods,      controller: 'students/commute_methods'
     resources :badges, controller: 'students/badges', except: :show

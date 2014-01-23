@@ -1,4 +1,9 @@
 en:
+  group:
+    singular: Group
+    plural: Groups
+  achievement:
+    singular: Achievement
   academic: Academic
   active: Active
   add: Add
@@ -120,6 +125,8 @@ en:
   birth_date: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
+  age_from: Age(from)
+  age_to: Age(to)
   campus:
     add: Add Campus
     address: Campus Address
@@ -922,6 +929,10 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
+    admitted_from: Admitted(from)
+    admitted_to: Admitted(To)
+    graduated_from: Graduated(from)
+    graduated_to: Graduated(to)
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit

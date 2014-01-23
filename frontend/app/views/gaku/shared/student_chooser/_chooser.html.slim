@@ -1,34 +1,7 @@
-= render 'gaku/students/search/form'
+.pull-right
+  = ajax_link_to_search t(:'search'), advanced_search_students_path, id: "student-advanced-search-link"
+#student-advanced-search.d-none
 
-.row.d-none#students-checked-div
-  .col-md-12
-    .panel.panel-default
-      .panel-body
-        h4.pull-left= t(:'student.chosen_students')
-        h4.chosen-count.pull-left
-        .table-action.show-chosen-table.pull-right = link_to t(:show),nil
-        .table-action.hide-chosen-table.pull-right.d-none = link_to t(:hide),nil
-
-      table#chosen-table.table.d-none
-        thead
-          tr
-            th.btn-inverse = sort_link @search, "surname", t("surname")
-            th.btn-inverse = sort_link @search, "name", t("name")
-        tbody#students-checked
-      .panel-footer
-        #chosen-actions.d-none
-
-          - if @class_group
-            = render 'gaku/shared/student_chooser/class_group'
-
-          - elsif @course
-            = render 'gaku/shared/student_chooser/course'
-
-          - elsif @extracurricular_activity
-            = render 'gaku/shared/student_chooser/extracurricular_activity'
-
-          - else
-            = render 'gaku/shared/student_chooser/student'
-
+= render 'gaku/shared/student_chooser/chooser_widget'
 #students-index-div
   = render 'gaku/students/students'
