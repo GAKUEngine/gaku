@@ -14,6 +14,8 @@ $.fn.showModal = ->
 $.fn.hideModal = ->
   $(this).modal('hide')
 
+$.fn.gaku_select2 = (placeholder)->
+  $(@).select2({ width: 'resolve', placeholder: placeholder }).removeClass('form-control')
 
 $.fn.datepicker_i18n = ->
   $(this).datepicker({
@@ -26,9 +28,6 @@ $.fn.datepicker_i18n = ->
   })
 
 $.fn.datepicker.defaults.format = "yyyy-mm-dd"
-
-
-
 
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()

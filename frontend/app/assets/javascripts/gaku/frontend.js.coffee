@@ -26,6 +26,7 @@
 #= require underscore
 #= require moment
 #= require rails.validations
+#= require select2
 
 #= require gaku/frontend/slide.js.erb
 #= require gaku/frontend/base
