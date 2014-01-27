@@ -23,14 +23,21 @@ describe 'Student Simple Grades' do
 
     it 'creates' do
       expect do
-        fill_in 'simple_grade_score', with: 123
         select simple_grade_type.name, from: 'simple_grade_simple_grade_type_id'
+        fill_in 'simple_grade_score', with: 123
+        fill_in 'simple_grade_award_date', with: Date.today
+        page.find('body').click
 
         click submit
         within(el) { has_content? 'Ruby Science' }
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
       count? 'Simple Grades list(1)'
+      within('#student-simple-grades-index') do
+        expect(page).to have_content Date.today
+        expect(page).to have_content simple_grade_type.grading_method
+        expect(page).to have_content simple_grade_type.school
+      end
     end
 
     it { has_validations? }

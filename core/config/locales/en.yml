@@ -863,6 +863,8 @@ en:
     plural: Simple Grades
     save: Save Simple Grade
     singular: Simple Grade
+    score: Score
+    award_date: Award date
   simple_grade_type:
     max_score: Max score
     passing_score: Passing score
@@ -873,6 +875,7 @@ en:
     plural: Simple grade types
     save: Save Simple grade type
     singular: Simple grade type
+    choose: Choose simple grade type
   specialty:
     add: Add Specialty
     already_added: Specialty already added!
