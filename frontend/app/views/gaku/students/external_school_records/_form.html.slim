@@ -1,10 +1,3 @@
 = remote_form_for [@student, @external_school_record], resource: 'student-external-school-record' do |f|
-  .col-md-6
-    = f.select :school_id, options_from_collection_for_select(@schools, :id, :code_and_name), { prompt: t(:'school.choose')}, label: t(:'school.plural')
-  .col-md-3
-    = f.text_field :beginning, class: 'datepicker', data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'external_school_record.beginning')
-  .col-md-3
-    = f.text_field :ending, class: 'datepicker', data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'external_school_record.ending')
-
-  = f.hidden_field :student_id, value: @student.id
+  = render 'form_fields', f: f
   = buttons_for @external_school_record, label: t(:'external_school_record.create'), resource: 'student-external-school-record'

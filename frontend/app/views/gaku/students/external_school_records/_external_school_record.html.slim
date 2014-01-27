@@ -1,6 +1,2 @@
 tr id="external-school-record-#{external_school_record.id}"
-  td = external_school_record.school
-  td = external_school_record.beginning
-  td = external_school_record.ending
-  - if can_edit?
-    td = ajax_link_to_delete [@student, external_school_record]
+  = render 'gaku/students/external_school_records/fields', external_school_record: external_school_record

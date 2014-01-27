@@ -69,6 +69,47 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
       end
 
+
+      describe 'JS GET #edit' do
+        before { gaku_js_get :edit, id: external_school_record, student_id: student.id }
+
+        it { should respond_with 200 }
+        it('assigns @external_school_record') { expect(assigns(:external_school_record)).to eq external_school_record }
+        it('assigns @schools') { expect(assigns(:schools)).to_not be_empty }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'JS PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: external_school_record, external_school_record: attributes_for(:external_school_record, school_id: school), student_id: student.id
+          end
+
+          it { should respond_with 200 }
+          it('assigns @external_school_record') { expect(assigns(:external_school_record)).to eq external_school_record }
+          it('sets flash') { flash_updated? }
+          it "changes external_school_record's attributes" do
+            external_school_record.reload
+            expect(external_school_record.school_id).to eq school.id
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_js_patch :update, id: external_school_record, external_school_record: attributes_for(:invalid_external_school_record, school_id: nil), student_id: student.id
+          end
+
+          it { should respond_with 200 }
+          it('assigns @external_school_record') { expect(assigns(:external_school_record)).to eq external_school_record }
+
+          it "does not change external_school_record's attributes" do
+            external_school_record.reload
+            expect(external_school_record.school_id).not_to eq nil
+          end
+        end
+      end
+
+
       describe 'JS DELETE #destroy' do
 
         let(:js_delete) { gaku_js_delete :destroy, id: external_school_record, student_id: student.id }

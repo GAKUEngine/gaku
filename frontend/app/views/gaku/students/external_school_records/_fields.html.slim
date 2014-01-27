@@ -1,0 +1,7 @@
+td = external_school_record.school
+td = external_school_record.beginning
+td = external_school_record.ending
+- if can_edit?
+  td
+    = ajax_link_to_edit [:edit, @student, external_school_record]
+    = ajax_link_to_delete [@student, external_school_record]

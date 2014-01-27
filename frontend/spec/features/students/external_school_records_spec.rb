@@ -32,21 +32,33 @@ describe 'Student External School Records' do
 
     let!(:external_school_record) { create(:external_school_record, school: school, student: student) }
 
-    context 'remove' do
+    before do
+      visit gaku.edit_student_path(student)
+      click '#student-academic-tab-link'
+      click tab_link
+    end
 
-      before do
-        visit gaku.edit_student_path(student)
-        click '#student-academic-tab-link'
-        click tab_link
-      end
+    context 'edit' do
+      it 'edits' do
+        click js_edit_link
+        fill_in 'external_school_record_beginning', with: '2012-01-01'
+        fill_in 'external_school_record_ending', with: '2013-01-01'
+        click submit
 
-      it 'deletes' do
-        expect do
-          ensure_delete_is_working
-          flash_destroyed?
-        end.to change(Gaku::ExternalSchoolRecord, :count).by(-1)
+        flash_updated?
+        external_school_record.reload
+        expect(external_school_record.beginning.to_s).to eq '2012-01-01'
+        expect(external_school_record.ending.to_s).to eq '2013-01-01'
       end
     end
+
+    it 'deletes' do
+      expect do
+        ensure_delete_is_working
+        flash_destroyed?
+      end.to change(Gaku::ExternalSchoolRecord, :count).by(-1)
+    end
+
 
   end
 

@@ -2,7 +2,7 @@ module Gaku
   module SharedHelper
 
     def can_edit?
-      %w( edit create ).include? controller.action_name
+      %w( edit create update ).include? controller.action_name
     end
 
     def genders

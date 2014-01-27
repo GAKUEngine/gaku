@@ -1,10 +1,11 @@
 module Gaku
   class Students::ExternalSchoolRecordsController < GakuController
 
-    respond_to :js, only: %i( new create destroy )
+    respond_to :js, only: %i( new create destroy edit update )
 
     before_action :set_student
-    before_action :set_schools, only: :new
+    before_action :set_schools, only: %i( new edit )
+    before_action :set_external_school_record, only: %i( edit update )
 
     def new
       @external_school_record = ExternalSchoolRecord.new
@@ -20,6 +21,16 @@ module Gaku
         set_count
         render :new
       end
+    end
+
+
+    def edit
+      respond_with @external_school_record
+    end
+
+    def update
+      @external_school_record.update(external_school_record_params)
+      respond_with @external_school_record
     end
 
     def destroy
@@ -41,6 +52,10 @@ module Gaku
 
     def set_schools
       @schools = School.all
+    end
+
+    def set_external_school_record
+      @external_school_record = ExternalSchoolRecord.find(params[:id])
     end
 
     def set_count
