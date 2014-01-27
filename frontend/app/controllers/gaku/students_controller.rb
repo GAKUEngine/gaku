@@ -95,7 +95,7 @@ module Gaku
       @students = results.page(params[:page])
       @count = results.count
 
-      render :index
+      render :index, layout: 'gaku/layouts/index'
     end
 
 

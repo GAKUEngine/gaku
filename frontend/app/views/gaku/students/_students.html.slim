@@ -15,7 +15,5 @@
   tbody
     = render @students
 
-- if controller_name == 'students'
-  = paginate @students
-- else
-  = paginate @students, remote: true
+
+= paginate @students, remote: true
