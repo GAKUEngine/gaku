@@ -46,7 +46,7 @@ module Gaku
     end
 
     def simple_grade_attr
-      %i( score award_data simple_grade_type_id )
+      %i( score award_date simple_grade_type_id )
     end
 
     def set_simple_grade_types

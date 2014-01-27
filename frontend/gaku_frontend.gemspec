@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'nprogress-rails'
   s.add_dependency 'underscore-rails',               '~> 1.5'
   s.add_dependency 'momentjs-rails',                 '~> 2.2'
+  s.add_dependency 'select2-rails',                  '~> 3.5.2'
 
   s.add_dependency 'thinreports-rails',              '~> 0.1'
 end

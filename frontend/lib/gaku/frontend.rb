@@ -19,6 +19,7 @@ require 'nested_form'
 require 'phantom_helpers'
 require 'phantom_forms'
 require 'phantom_nested_forms'
+require 'select2-rails'
 
 require 'thinreports-rails'
 require 'gaku/core'
