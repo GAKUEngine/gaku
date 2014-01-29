@@ -7,8 +7,9 @@ tr
   th.active width="10%"
     = t(:'gender.label')
   td width="15%"
+    = gender(person)
   th.active rowspan="6" width="222px"
     = render 'gaku/shared/picture', resource: person
 tr
   th.active = (:'birth')
-  td
+  td = person.birth_date
