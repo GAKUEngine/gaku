@@ -14,6 +14,9 @@ module Gaku
     validate :between_school_year_dates
     validate :ending_after_starting
 
+    scope :with_class_group, joins(:class_groups)
+    scope :active, -> { where("starting < ? and ending > ?", Time.now, Time.now) }
+
     def to_s
       "#{starting} / #{ending}"
     end

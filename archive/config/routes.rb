@@ -16,7 +16,14 @@ Gaku::Core::Engine.routes.draw  do
   end
   resources :extracurricular_activities, concerns: :soft_delete
   resources :class_groups, concerns: :soft_delete do
-    get :with_semesters, on: :collection
+    collection do
+      get :search
+      get :search_semester
+      get :advanced_search
+      get :semester_advanced_search
+      get :with_semester
+      get :without_semester
+    end
   end
   resources :courses, concerns: :soft_delete
   resources :course_groups, concerns: :soft_delete
