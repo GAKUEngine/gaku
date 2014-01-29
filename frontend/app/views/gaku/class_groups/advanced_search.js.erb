@@ -1,0 +1,30 @@
+$('#class-groups-advanced-search').html('<%= j render("gaku/class_groups/search/form") %>').slide();
+$('#class-groups-advanced-search-link').hide();
+$('.hide-advanced-search-table').show();
+
+
+$(document).on('keyup', "#search-class-groups input", function(event) {
+  process_search();
+});
+
+function process_search()
+{
+  action = $("#search-class-groups").attr('action');
+  form_data = $("#search-class-groups").serialize();
+  $.get(action, form_data, null, "script");
+  history.pushState(null, "", action + "?" + form_data);
+  return false;
+}
+
+
+$(document).on('change', "#search-class-groups select", function(event) {
+  process_search();
+});
+
+
+
+$('body').on('click', '.hide-advanced-search-table', function(event) {
+  event.preventDefault();
+  $('#class-groups-advanced-search').hide();
+  $('#class-groups-advanced-search-link').show();
+});

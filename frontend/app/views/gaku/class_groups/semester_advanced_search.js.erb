@@ -1,0 +1,30 @@
+$('#class-groups-semester-advanced-search').html('<%= j render("gaku/class_groups/search/semester_form") %>').slide();
+$('#class-groups-semester-advanced-search-link').slide();
+$('.hide-advanced-search-table').show();
+
+
+$(document).on('keyup', "#search-semesters input", function(event) {
+  process_search();
+});
+
+function process_search()
+{
+  action = $("#search-semesters").attr('action');
+  form_data = $("#search-semesters").serialize();
+  $.get(action, form_data, null, "script");
+  history.pushState(null, "", action + "?" + form_data);
+  return false;
+}
+
+
+$(document).on('change', "#search-semesters select", function(event) {
+  process_search();
+});
+
+
+
+$('body').on('click', '.hide-advanced-search-table', function(event) {
+  event.preventDefault();
+  $('#class-groups-semesters-advanced-search').hide();
+  $('#class-groups-semesters-advanced-search-link').show();
+});
