@@ -19,7 +19,6 @@ ready = ->
 
         valueElem.attr 'id', "grading_method_criteria_#{value}"
         valueElem.attr 'name', "grading_method[criteria][#{value}]"
-        valueElem.attr 'placeholder', "value for #{value}"
 
       $(document).on 'click', '.remove-criteria-row', (e)->
         e.preventDefault()
