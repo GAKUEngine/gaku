@@ -550,9 +550,14 @@ en:
     weighting_portion: Weighting
   grading_method:
     add: Add Grading Method
+<<<<<<< HEAD
     add_argument: Add Argument
     add_criteria: Add Criteria
     arguments: Arguments
+=======
+    add_criteria: Add criteria
+    criteria: criteria
+>>>>>>> bde81bf... [locale+view] eg key
     choose: Choose Grading Method
     criteria: Criteria
     curved: Curved
@@ -567,8 +572,12 @@ en:
     percentage: Percentage
     plural: Grading Methods
     ratio: Ratio
+<<<<<<< HEAD
     remove_argument: Remove Argument
     remove_criteria: Remove Criteria
+=======
+    remove_criteria: Remove criteria
+>>>>>>> bde81bf... [locale+view] eg key
     save: Save Grading Method
     score: Score
     singular: Grading Method
