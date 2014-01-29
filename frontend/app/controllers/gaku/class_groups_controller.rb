@@ -8,8 +8,6 @@ module Gaku
 
     respond_to :html, :js
 
-    helper_method :sort_column, :sort_direction
-
     before_action :set_courses
     before_action :set_class_group,       only: %i( edit update destroy student_chooser )
 
@@ -42,10 +40,53 @@ module Gaku
     end
 
     def index
-      @class_groups = SemesterClassGroup.group_by_semester
-      @class_groups_without_semester = ClassGroup.without_semester
-      set_count
+      @semesters = Semester.with_class_group.active.includes(:class_groups)
+      @count = @semesters.count
     end
+
+    def with_semester
+      @semesters = Semester.with_class_group.includes(:class_groups)
+      @count = @semesters.count
+      render :with_semester, layout: 'gaku/layouts/index'
+    end
+
+    def without_semester
+      @class_groups = ClassGroup.without_semester.includes(:semester_class_groups)
+      @count = @class_groups.count
+      render :without_semester, layout: 'gaku/layouts/index'
+    end
+
+    def advanced_search
+      @semesters = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+      @search = ClassGroup.search(params[:q])
+      results = @search.result(distinct: true)
+      @class_groups = results.page(params[:page])
+    end
+
+    def semester_advanced_search
+      @search = Semester.with_class_group.includes(:class_groups).search(params[:q])
+      results = @search.result(distinct: true)
+      @semesters = results.page(params[:page])
+      @semesters_for_select = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+    end
+
+    def search_semester
+      @search = Semester.includes(:class_groups).search(params[:q])
+      results = @search.result(distinct: true)
+      @semesters = results.page(params[:page])
+      @count = results.count
+      render :with_semester, layout: 'gaku/layouts/index'
+    end
+
+    def search
+      @semesters = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+      @search = ClassGroup.without_semester.search(params[:q])
+      results = @search.result(distinct: true)
+      @class_groups = results.page(params[:page])
+      @count = results.count
+      render :without_semester, layout: 'gaku/layouts/index'
+    end
+
 
     private
 
@@ -72,15 +113,7 @@ module Gaku
     end
 
     def set_courses
-      @courses = Course.includes(:syllabus).map { |c| [c, c.id] }
-    end
-
-    def sort_column
-      ClassGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      @courses = Course.all.map { |c| [c, c.id] }
     end
 
   end

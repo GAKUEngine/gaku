@@ -12,6 +12,7 @@ if Gaku::Preset.count.zero?
                                       changes: 25
                                     },
                         person: { gender: true },
+                        student: { id_code: '%year-%yearly_serial'},
                         address: { country: 'JP', state: 'Aichi', city: 'Nagoya' },
                         grading: { scheme: '', method: '' },
                         export_formats: { spreadsheets: 'xls', printables: 'pdf', documents: 'xls' },

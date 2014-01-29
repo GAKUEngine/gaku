@@ -1,0 +1,5 @@
+$('#index-student-badges-modal').modal('hide');
+$('#student-badges-list a').text('<%= j(@student.badges_list) %>');
+$('#badges-tab').html("<%= j render('gaku/students/badges/badges_tab') %>");
+
+  showNotice("<%= render_flash %>");

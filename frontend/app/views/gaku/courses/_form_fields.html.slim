@@ -1,5 +1,5 @@
 .row
   .col-md-6
-    = f.select :syllabus_id, options_from_collection_for_select(@syllabuses, :id, :name), label: t(:'syllabus.singular')
+    = f.collection_select :syllabus_id, @syllabuses, :id, :name, {}, label: t(:'syllabus.singular')
   .col-md-6
     = f.text_field :code, placeholder: t(:'course.code_sample'), label: t(:'course.code')

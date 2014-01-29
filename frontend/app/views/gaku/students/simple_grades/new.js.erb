@@ -1,3 +1,6 @@
 $('#new-student-simple-grade').html('<%= j render("form") %>').slide();
+$('.datepicker').datepicker_i18n()
+$('#simple_grade_simple_grade_type_id').gaku_select2('<%= t(:"simple_grade_type.choose") %>');
+
 $('.remote-form').enableValidations();
 $('#new-student-simple-grade-link').hide();

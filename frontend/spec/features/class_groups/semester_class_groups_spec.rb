@@ -34,7 +34,6 @@ describe 'ClassGroup Semesters' do
       end.to change(Gaku::SemesterClassGroup, :count).by(1)
 
       within(table) { page.should have_content "#{semester.starting} / #{semester.ending}" }
-      within(count_div) { page.should have_content 'Semesters list(1)' }
       within(tab_link) { page.should have_content 'Semesters(1)' }
 
     end
@@ -82,7 +81,6 @@ describe 'ClassGroup Semesters' do
 
     it 'delete', js: true do
       within(table)     { page.should have_content "#{semester.starting} / #{semester.ending}" }
-      within(count_div) { page.should have_content 'Semesters list(1)' }
       within(tab_link)  { page.should have_content 'Semesters(1)' }
 
       expect do
@@ -91,9 +89,6 @@ describe 'ClassGroup Semesters' do
       end.to change(Gaku::SemesterClassGroup,:count).by -1
 
       within(table)     { page.should_not have_content "#{semester.starting} / #{semester.ending}" }
-      within(count_div) { page.should_not have_content 'Semesters list(1)' }
-      within(count_div) { page.should have_content 'Semesters list' }
-
       within(tab_link) { page.should_not have_content 'Semesters(1)' }
       within(tab_link) { page.should have_content 'Semesters' }
     end

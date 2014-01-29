@@ -25,7 +25,7 @@ describe 'Syllabus Exams' do
     end
 
     it 'adds existing exam', js: true do
-      within(count_div) { has_content? 'Exams list' }
+      within(tab_link) { has_no_content? 'Exams(1)' }
       click new_existing_exam_link
       visible? submit_existing_exam_button
 
@@ -36,7 +36,6 @@ describe 'Syllabus Exams' do
       has_content? exam.name
       flash? 'successfully added'
 
-      within(count_div) { has_content? 'Exams list(1)' }
       within(tab_link) { has_content? 'Exams(1)' }
     end
 
@@ -60,7 +59,7 @@ describe 'Syllabus Exams' do
       end
 
       it 'creates and shows', js: true  do
-        within(count_div) { has_content? 'Exams list' }
+        within(tab_link) { has_no_content? 'Exams(1)' }
         expect do
           #required
           fill_in 'exam_name', with: 'Biology Exam'
@@ -75,7 +74,7 @@ describe 'Syllabus Exams' do
           has_no_content? 'No Exams'
         end
         expect(syllabus.exams.last.department).to eq(department)
-        within(count_div) { page.should have_content 'Exams list(1)' }
+        within(tab_link) { has_content? 'Exams(1)' }
       end
 
       it 'errors without the required fields', js: true do
@@ -113,7 +112,7 @@ describe 'Syllabus Exams' do
 
       it 'deletes', js: true do
         has_content? exam.name
-        within(count_div) { has_content? 'Exams list(1)' }
+        within(tab_link) { has_content? 'Exams(1)' }
 
         expect do
           ensure_delete_is_working
@@ -122,8 +121,7 @@ describe 'Syllabus Exams' do
 
 
         within(table){ has_no_content? exam.name }
-        within(count_div) { has_no_content? 'Exams list(1)' }
-
+        within(tab_link) { has_no_content? 'Exams(1)' }
       end
     end
   end

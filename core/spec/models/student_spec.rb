@@ -20,8 +20,8 @@ describe Gaku::Student do
     it { should have_many :student_specialties }
     it { should have_many(:specialties).through(:student_specialties) }
 
-    it { should have_many :achievements }
-    it { should have_many(:achievements).through(:student_achievements) }
+    it { should have_many :badges }
+    it { should have_many(:badge_types).through(:badges) }
 
     it { should have_many(:student_guardians).dependent(:destroy) }
     it { should have_many(:guardians).through(:student_guardians) }
@@ -29,7 +29,7 @@ describe Gaku::Student do
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :attendances }
-    it { should have_many :achievements }
+
     it { should have_many :external_school_records }
     it { should have_many :simple_grades }
 
@@ -42,10 +42,59 @@ describe Gaku::Student do
 
   end
 
+  describe '#set_serial_id' do
+    it 'generates serial_id' do
+      student = create(:student)
+      expect(student.serial_id).to eq("%05d" % student.id)
+    end
+  end
+
+
+  describe '#set_code' do
+
+    it "returns '**-****-serial_id' if missing major specialty and admitted" do
+      student = create(:student)
+      expect(student.code).to eq "**-****-#{student.serial_id}"
+    end
+
+    it "returns '**-year-serial_id' if no major specialty but admitted" do
+      student = create(:student, admitted: Time.now)
+      expect(student.code).to eq "**-#{Time.now.year}-#{student.serial_id}"
+    end
+
+    it "returns 'major_specialty-year-serial_id'" do
+      student = create(:student, admitted: Time.now)
+      expect(student.code).to eq "**-#{Time.now.year}-#{student.serial_id}"
+    end
+  end
+
 
   context 'counter_cache' do
 
     let!(:student) { create(:student) }
+
+    context 'badges_count' do
+
+      let(:badge) { create(:badge) }
+      let(:student_badge) { create(:badge, student: student) }
+
+      xit 'increments' do
+        badge
+        expect do
+          student.badges << badge
+          student.reload
+          puts student.badges.to_json
+        end.to change { student.badges_count }.by 1
+      end
+
+      xit 'decrements' do
+        student.badges << student_badge
+        expect do
+          student.badges.last.destroy!
+          student.reload
+        end.to change { student.badges_count }.by -1
+      end
+    end
 
     context 'guardians_count' do
 
@@ -64,6 +113,28 @@ describe Gaku::Student do
         expect do
           student_with_one_guardian.guardians.last.destroy
         end.to change { student_with_one_guardian.reload.guardians_count }.by -1
+      end
+    end
+
+     context 'external_school_records_count' do
+
+      let(:school) { create(:school) }
+      let(:external_school_record) { create(:external_school_record, school: school, student: student) }
+
+      it 'increments' do
+        external_school_record
+        expect do
+          external_school_record
+          student.reload
+        end.to change { student.external_school_records_count }.by 1
+      end
+
+      it 'decrements' do
+        external_school_record
+        puts student.external_school_records.last.to_json
+        expect do
+          student.external_school_records.last.destroy
+        end.to change { student.reload.external_school_records_count }.by -1
       end
     end
 

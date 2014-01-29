@@ -2,16 +2,18 @@
   thead
     tr
       = th_icon 'check'
+      = th t(:'code')
       = th t(:'surname')
       = th t(:'name')
       = th t(:'birth_date')
       = th t(:'gender.label')
       = th t(:'class_group.name')
       = th t(:'admitted')
-      = th t(:'address.primary')
-      = th t(:'contact.primary')
       = th t(:'personal_information')
       = th_actions 2
 
   tbody
     = render @students
+
+
+= paginate @students, remote: true

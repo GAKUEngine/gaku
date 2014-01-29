@@ -1,7 +1,6 @@
 module Gaku
   module AdminHelper
 
-    include Gaku::FlashHelper
     include Gaku::PresetsHelper
     include Gaku::SharedHelper
 

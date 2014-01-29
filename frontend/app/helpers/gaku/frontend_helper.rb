@@ -3,11 +3,20 @@ module Gaku
 
     include Gaku::AutocompleteHelper
     include Gaku::ExamHelper
-    include Gaku::FlashHelper
     include Gaku::PersonHelper
     include Gaku::SharedHelper
     include Gaku::StudentChooserHelper
     include Gaku::StudentsHelper
+
+
+    def ajax_link_to_search(text, resource, options = {})
+      name = ("<span class='glyphicon glyphicon-search'></span> " + text).html_safe
+      attributes = {
+        :remote => true,
+        :class => "btn btn-primary"
+      }.merge(options)
+      link_to name, resource, attributes
+    end
 
     def prepare_target(nested_resource, address)
       return nil if nested_resource.blank?

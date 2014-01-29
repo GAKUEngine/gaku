@@ -3,7 +3,7 @@
     = count_div 'admin-templates-count' do
       = print_count @count, t(:'template.list')
   .pull-right
-    = ajax_link_to_new t(:'template.add'), [:new, :admin, :template], id: 'new-admin-template-link'
+    = link_to_new t(:'template.add'), [:new, :admin, :template], id: 'new-admin-template-link'
 
 = content_for :new_form do
   #new-admin-template.d-none

@@ -1,24 +1,36 @@
 .row.mb-m
-  .col-md-3
+  .col-md-2
+    = f.label :code_cont, t(:code)
+    = f.text_field :code_cont, class: "form-control input-sm"
+  .col-md-2
     = f.label :surname_cont, t(:surname)
-    = f.text_field :surname_cont, class: "col-md-12 form-control"
+    = f.text_field :surname_cont, class: "form-control input-sm"
 
-  .col-md-3
+  .col-md-2
     = f.label :name_cont, t(:name)
-    = f.text_field :name_cont, class: "col-md-12 form-control"
+    = f.text_field :name_cont, class: "form-control input-sm"
 
-  .col-md-3
+  .col-md-1
     = f.label :birth_date_gteq, t(:birth_date_from)
-    = f.text_field :birth_date_gteq, class: "col-md-12 form-control"
+    = f.text_field :birth_date_gteq, class: "form-control input-sm datepicker"
 
-  .col-md-3
+  .col-md-1
     = f.label :birth_date_lteq, t(:birth_date_to)
-    = f.text_field :birth_date_lteq, class: "col-md-12 form-control"
+    = f.text_field :birth_date_lteq, class: "form-control input-sm datepicker"
 
-.row
-  = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
-                                        tag_name: t('enrollment_status.singular'),
-                                        collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
-                                        selected: (@enrollment_status_enrolled_code),
-                                        prompt_position: "bottomRight:5",
-                                        html_options: {class: "validate[required] col-md-12", id: "enrollment_status_dropdown"}})
+  .col-md-1
+    = f.label :age_gteq, t(:age_from)
+    = f.text_field :age_gteq, class: "form-control input-sm"
+
+  .col-md-1
+    = f.label :age_lteq, t(:age_to)
+    = f.text_field :age_lteq, class: "form-control input-sm"
+
+
+  .col-md-2
+    = autocomplete_select(f, options = {  object_name: 'enrollment_status_code_eq',
+                                          tag_name: t('enrollment_status.singular'),
+                                          collection: @enrollment_statuses, prompt: t('enrollment_status.choose_enrollment_status'),
+                                          selected: (@enrollment_status_enrolled_code),
+                                          prompt_position: "bottomRight:5",
+                                          html_options: {class: "validate[required] form-control", id: "enrollment_status_dropdown"}})

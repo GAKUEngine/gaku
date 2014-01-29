@@ -27,6 +27,7 @@ describe 'ClassGroup Students' do
       student1
 
       visit gaku.class_groups_path
+      click '#class-groups-without-semester-tab-link'
       click edit_link
       click_link 'class-group-enrollments-tab-link'
       Gaku::ClassGroupEnrollment.count.should eq 0
@@ -41,10 +42,10 @@ describe 'ClassGroup Students' do
         within('#students-checked-div') do
           page.has_content? 'Chosen students'
 
-          within('.show-chosen-table') do
-            page.has_content? 'Show'
-            click_link 'Show'
-          end
+          # within('.show-chosen-table') do
+          #   page.has_content? 'Show'
+          #   click_link 'Show'
+          # end
 
           page.has_selector? '#chosen-table'
           page.has_selector? '#students-checked'
@@ -57,7 +58,6 @@ describe 'ClassGroup Students' do
       end.to change(Gaku::ClassGroupEnrollment,:count).by 1
 
       page.should have_content "#{student1} : Successfully enrolled!"
-      within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
     end
   end
@@ -66,7 +66,6 @@ describe 'ClassGroup Students' do
     before do
       class_group.students << student1
       visit gaku.edit_class_group_path(class_group)
-      within('.class-group-enrollments-count'){ page.should have_content('1') }
       within('#class-group-enrollments-tab-link'){ page.should have_content('1') }
       Gaku::ClassGroupEnrollment.count.should eq 1
     end
@@ -84,7 +83,6 @@ describe 'ClassGroup Students' do
 
       ensure_delete_is_working
 
-      within('.class-group-enrollments-count') { page.should_not have_content('1') }
       within('#class-group-enrollments-tab-link') { page.should_not have_content('1') }
     end
   end

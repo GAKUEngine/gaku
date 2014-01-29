@@ -1,0 +1,8 @@
+td = badge.badge_type
+
+td = badge.badge_type.description
+td = badge.badge_type.authority
+td = resize_image badge.badge_type.badge_image, size: 22
+td
+  = ajax_link_to_edit [:edit, @student, badge]
+  = ajax_link_to_delete [@student, badge]

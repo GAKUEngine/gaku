@@ -1,12 +1,12 @@
 module Gaku
   class Student < ActiveRecord::Base
 
-    include Person, Addresses, Contacts, Notes, Picture
+    include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :course_enrollments, dependent: :destroy
     has_many :courses, through: :course_enrollments
 
-    has_many :class_group_enrollments
+    has_many :class_group_enrollments,  inverse_of: :student
     has_many :class_groups, through: :class_group_enrollments
 
     has_many :extracurricular_activity_enrollments
@@ -15,8 +15,8 @@ module Gaku
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
 
-    has_many :student_achievements
-    has_many :achievements, through: :student_achievements
+    has_many :badges
+    has_many :badge_types, through: :badges
 
     has_many :student_guardians, dependent: :destroy
     has_many :guardians, through: :student_guardians
@@ -33,10 +33,15 @@ module Gaku
     belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
+    accepts_nested_attributes_for :class_group_enrollments,
+        reject_if: proc { |attributes| attributes[:class_group_id].blank? }
+
+
 
     before_create :set_scholarship_status
+    after_create  :set_serial_id
+    after_save   :set_code
 
-    paginates_per 25 #Preset.per_page('students')
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
@@ -44,6 +49,11 @@ module Gaku
       update_column(:enrollment_status_code, enrollment_status)
       save
     end
+
+    def major_specialty
+      student_specialties.ordered.first.specialty if student_specialties.any?
+    end
+
 
     def identification_number
       '%surname-%name-%id'.gsub(/%(\w+)/) do |s|
@@ -78,6 +88,30 @@ module Gaku
         false
       end
     end
+
+    private
+
+
+    def major_specialty_code
+      major_specialty || empty_string(2)
+    end
+
+    def admitted_code
+      admitted.try(:year) || empty_string(4)
+    end
+
+    def set_code
+      update_column(:code, "#{major_specialty_code}-#{admitted_code}-#{serial_id}")
+    end
+
+    def set_serial_id
+      update_column(:serial_id, "%05d" % id)
+    end
+
+    def empty_string(size)
+      '*' * size
+    end
+
 
   end
 end

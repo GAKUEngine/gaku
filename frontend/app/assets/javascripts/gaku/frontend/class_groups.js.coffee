@@ -1,11 +1,19 @@
 ready = ->
-  self = this
+	self = this
 
-  class ClassGroupsController
-    edit: ->
-      self.app.student_chooser()
+	class ClassGroupsController
+		index: ->
+			$(document).on 'change', "#search-class-groups select", (event) ->
+				action = $("#search-class-groups ").attr('action')
+				form_data = $("#search-class-groups ").serialize()
+				$.get(action, form_data, null, "script")
+				history.pushState(null, "", action + "?" + form_data)
+				return false
 
-  @app.class_groups = new ClassGroupsController
+		edit: ->
+			self.app.student_chooser()
+
+	@app.class_groups = new ClassGroupsController
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

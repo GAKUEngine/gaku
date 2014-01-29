@@ -1,17 +1,10 @@
 en:
-  academic: Academic
+  group:
+    singular: Group
+    plural: Groups
   achievement:
-    add: Add Achievement
-    authority: Authority
-    badge: Badge
-    choose: Choose Achievement
-    description: Description
-    edit: Edit Achievement
-    list: Achievements list
-    name: Name
-    plural: Achievements
-    save: Save Achievement
     singular: Achievement
+  academic: Academic
   active: Active
   add: Add
   address:
@@ -102,6 +95,29 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
+  badge:
+    list: Badges list
+    add: Add badge
+    edit: Edit badge
+    index: Badges index
+    save: Save badge
+    singular: Badge
+    plural: Badges
+  badge_type:
+    add: Add badge type
+    authority: Authority
+    code: Code
+    issuer: Issuer
+    url: Url
+    badge: Badge
+    choose: Choose badge type
+    description: Description
+    edit: Edit badge type
+    list: Badge types list
+    name: Name
+    plural: Badge types
+    save: Save badge type
+    singular: Badge type
   back: Back
   birth: Birth Date
   birth_and: and
@@ -109,6 +125,8 @@ en:
   birth_date: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
+  age_from: Age(from)
+  age_to: Age(to)
   campus:
     add: Add Campus
     address: Campus Address
@@ -137,6 +155,8 @@ en:
     user: Changed by
   class: Class
   class_group:
+    with_semester: With Semester
+    without_semester: Without Semester
     add: Add Class Group
     already_enrolled: Already enrolled to the class group!
     choose: Choose Class Group
@@ -457,7 +477,10 @@ en:
     beginning: Beginning
     data: Data
     ending: Ending
+    add: Add External School Record
     singular: External School Record
+    plural: External School Records
+    list: External School Records list
     student_id_number: Student ID
   extracurricular_activity:
     add: Add Extracurricular Activity
@@ -579,10 +602,10 @@ en:
   manage: Manage
   menu:
     admin:
-      achievements: Achievements
       admin: Admin
       administration: Administration
       administrator: Administrator
+      badge_types: Badge types
       changes:
         changes: Changes and Deletions
         student_addresses: Student Addresses
@@ -699,6 +722,9 @@ en:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
       singular: Grading
+    student:
+      singular: Student
+      id_code: id_code
     list: Presets list
     locale: Locale
     name: Name
@@ -837,6 +863,19 @@ en:
     plural: Simple Grades
     save: Save Simple Grade
     singular: Simple Grade
+    score: Score
+    award_date: Award date
+  simple_grade_type:
+    max_score: Max score
+    passing_score: Passing score
+    add: Add simple grade type
+    edit: Edit simple grade type
+    list: Simple grade types list
+    name: Name
+    plural: Simple grade types
+    save: Save Simple grade type
+    singular: Simple grade type
+    choose: Choose simple grade type
   specialty:
     add: Add Specialty
     already_added: Specialty already added!
@@ -893,11 +932,10 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-  student_achievement:
-    edit: Edit Student Achievement
-    index: Student Achievement Index
-    save: Save Student Achievement
-    singular: Student Achievement
+    admitted_from: Admitted(from)
+    admitted_to: Admitted(To)
+    graduated_from: Graduated(from)
+    graduated_to: Graduated(to)
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
@@ -939,7 +977,7 @@ en:
     context: Context
     edit: Template
     file: File
-    file_type_error: Not supported file type
+    file_type_error: "Only text, excel or openoffice documents are supported"
     list: Templates list
     lock: Lock
     plural: Templates

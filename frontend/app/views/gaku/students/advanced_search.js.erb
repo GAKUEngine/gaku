@@ -1,0 +1,84 @@
+$('#student-advanced-search').html('<%= j render("gaku/students/search/advanced_form") %>').slide();
+$('#student-advanced-search-link').slide();
+$('.datepicker').datepicker_i18n();
+$('.hide-advanced-search-table').show();
+
+
+$(document).on('keydown', '.js-autocomplete', function(event) {
+  var element_id;
+  element_id = '#' + $(this).attr('id');
+  return $(element_id).autocomplete({
+    source: $(element_id).data('autocomplete-source'),
+    messages: {
+      noResults: function() {},
+      results: function() {}
+    },
+    select: function(event, ui) {
+      $(this).val(ui.item.value);
+      return $.get($("#search-students").attr("action"), $("#search-students").serialize(), null, "script");
+    }
+  });
+});
+
+$(document).on('click', "#students-index th a", function(event) {
+  $.getScript(this.href);
+  return false;
+});
+
+$(document).on('keyup', "#search-students input", function(event) {
+  process_search();
+});
+
+function process_search()
+{
+  action = $("#search-students").attr('action');
+  form_data = $("#search-students").serialize();
+  $.get(action, form_data, null, "script");
+  history.pushState(null, "", action + "?" + form_data);
+  return false;
+}
+
+function get_params()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+    for(var i = 0; i < hashes.length; i++)
+        {
+         hash = hashes[i].split('=');
+         vars.push(hash[0]);
+         vars[hash[0]] = hash[1];
+         }
+
+     return vars;
+}
+
+var params = get_params();
+//console.log(params);
+
+$('#q_code_cont').val(params['q%5Bcode_cont%5D']);
+$('#q_surname_cont').val(params['q%5Bsurname_cont%5D']);
+$('#q_name_cont').val(params['q%5Bname_cont%5D']);
+$('#q_birth_date_gteq').val(params['q%5Bbirth_date_gteq%5D']);
+$('#q_birth_date_lteq').val(params['q%5Bbirth_date_lteq%5D']);
+$('#q_age_gteq').val(params['q%5Bage_gteq%5D']);
+$('#q_age_lteq').val(params['q%5Bage_lteq%5D']);
+$('#q_enrollment_status_code_eq').val(params['q%5Benrollment_status_code_eq%5D']);
+
+
+
+$(document).on('change', "#search-students select", function(event) {
+  process_search();
+});
+
+$('.datepicker').datepicker().on('hide', function(e) {
+  process_search();
+});
+
+
+
+$('body').on('click', '.hide-advanced-search-table', function(event) {
+  event.preventDefault();
+  $('#student-advanced-search').hide();
+  $('#student-advanced-search-link').show();
+});

@@ -1,0 +1,7 @@
+= f.text_field :name,        label: t(:'simple_grade_type.name')
+= f.number_field :max_score,             label: t(:'simple_grade_type.max_score')
+= f.number_field  :passing_score,        label: t(:'simple_grade_type.passing_score')
+
+
+= f.select :school_id,  options_from_collection_for_select(@schools, :id, :name), {prompt: t(:'school.choose')}, label: t(:'school.plural')
+= f.select :grading_method_id,  options_from_collection_for_select(@grading_methods, :id, :name), {prompt: t(:'grading_method.choose')}, label: t(:'grading_method.plural')

@@ -6,7 +6,7 @@ ready = ->
       #need to add datepicker to newly added inputs from nested_form_for
       $('body').on 'click','.add-semester', ->
         setTimeout ->
-          $('.datepicker').datepicker()
+          $('.datepicker').datepicker_i18n()
         ,500
 
     index: ->
@@ -20,8 +20,6 @@ ready = ->
         valueElem.attr 'id', "grading_method_arguments_#{value}"
         valueElem.attr 'name', "grading_method[arguments][#{value}]"
         valueElem.attr 'placeholder', "value for #{value}"
-
-        console.log valueElem
 
       $(document).on 'click', '.remove-argument-row', (e)->
         e.preventDefault()

@@ -6,7 +6,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-<% if options[:lib_name] == 'gaku' || options[:lib_name] == 'gaku/archive' %>
 //= require gaku/archive
-<% end %>
 //= require_tree .

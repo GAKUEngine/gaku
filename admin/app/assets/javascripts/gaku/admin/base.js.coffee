@@ -14,7 +14,17 @@ $.fn.showModal = ->
 $.fn.hideModal = ->
   $(this).modal('hide')
 
+$.fn.datepicker_i18n = ->
+  $(this).datepicker({
+       language: $('body').data('locale'),
+       startView: 2,
+       autoclose: true,
+       todayBtn: true,
+       todayHighlight: true,
+       calendarWeeks: true
+  })
 
+$.fn.datepicker.defaults.format = "yyyy-mm-dd"
 
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()
@@ -30,6 +40,7 @@ ready = ->
 
   class Admin
     init: ->
+      $('.datepicker').datepicker_i18n()
 
       $(document).on 'ajax:success', '.recovery-link', ->
         $(this).closest('tr').remove()
@@ -71,8 +82,6 @@ ready = ->
       $('#soft-delete-link').on 'click', (e)->
         e.preventDefault()
         $('#delete-modal').modal('show')
-
-      $('.datepicker').datepicker(format:'yyyy/mm/dd')
 
     show: ->
       # FIXME Remove after view refactoring

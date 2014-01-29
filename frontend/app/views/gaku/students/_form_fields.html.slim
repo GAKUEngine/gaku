@@ -1,19 +1,25 @@
 .row
-  .col-md-12
-    = f.select :class_group_ids, @class_groups, { prompt: t(:'class_group.none_assigned') }, label: t(:'class')
+  .col-md-6
+    = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { default: @enrolled_status }, label: t(:'enrollment_status.singular'))
 
+  .col-md-6
+    = f.fields_for :class_group_enrollments do |cge_form|
+      - if @student.new_record?
+        = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'),  selected: @last_student.try(:class_groups).try(:last) }, label: t(:'class'))
+      - else
+        = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'),  default: @last_student.try(:class_groups).try(:last) }, label: t(:'class'))
 = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
-
-.row
-  .col-md-6
-    = f.text_field :admitted, class: "datepicker", label: t(:admitted)
-  .col-md-6
-    = f.text_field :graduated, class: "datepicker", label: t(:graduated)
 
 .row
   .col-md-3
     = f.collection_select(:scholarship_status_id, @scholarship_statuses, :id, :name, { include_blank: true }, label: t(:'student.scholarship_status'))
+
   .col-md-3
-    = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { include_blank: true }, label: t(:'enrollment_status.singular'))
-  .col-md-6
     = f.collection_select(:commute_method_type_id, @commute_method_types, :id, :name, { include_blank: true }, label: t(:'commute_method_type.singular'))
+  .col-md-3
+    = f.text_field :admitted, class: "datepicker", label: t(:admitted)
+
+  .col-md-3
+    = f.text_field :graduated, class: "datepicker", label: t(:graduated)
+
+

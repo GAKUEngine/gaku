@@ -21,10 +21,12 @@
 #= require nprogress-ajax
 
 #= require bootstrap-datepicker/core
+#= require bootstrap-datepicker/locales/bootstrap-datepicker.ja
 
 #= require underscore
 #= require moment
 #= require rails.validations
+#= require select2
 
 #= require gaku/frontend/slide.js.erb
 #= require gaku/frontend/base

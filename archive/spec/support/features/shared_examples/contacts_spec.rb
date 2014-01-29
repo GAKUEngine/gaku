@@ -24,22 +24,3 @@ shared_examples_for 'delete contact' do
   end
 
 end
-
-shared_examples_for 'primary contacts' do
-
-  it 'delete primary', js: true do
-    contact1_tr = "#contact-#{@resource.contacts.first.id}"
-    contact2_tr = "#contact-#{@resource.contacts.second.id}"
-
-    within("#{table} #{contact2_tr}") { click_link 'set-primary-link' }
-    accept_alert
-
-    !page.find("#{contact2_tr} td.primary-contact a.btn-primary")
-
-    click "#{contact2_tr} .delete-link"
-    accept_alert
-
-    page.find("#{contact1_tr} .primary-contact a.btn-primary")
-    expect(@resource.contacts.first.primary?).to eq true
-  end
-end

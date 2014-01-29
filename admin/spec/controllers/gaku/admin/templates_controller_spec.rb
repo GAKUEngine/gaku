@@ -49,7 +49,7 @@ describe Gaku::Admin::TemplatesController do
           end
         end
 
-        pending 'with invalid attributes' do
+        describe 'with invalid attributes' do
           before do
             gaku_patch :update, id: template, template: attributes_for(:invalid_template, name: '')
           end
@@ -68,50 +68,53 @@ describe Gaku::Admin::TemplatesController do
 
       describe 'POST #create' do
         context 'with valid attributes' do
-          let(:valid_js_create) do
+          let(:valid_create) do
             gaku_post :create, template: attributes_for(:template)
           end
 
           it 'creates new template' do
             expect do
-              valid_js_create
+              valid_create
             end.to change(Gaku::Template, :count).by(1)
           end
 
           it 'renders flash' do
-            valid_js_create
+            valid_create
             flash_created?
           end
 
           it 'increments @count' do
-            valid_js_create
+            valid_create
             expect(assigns(:count)).to eq 1
           end
         end
 
-        pending 'with invalid attributes' do
-          let(:invalid_js_create) do
+        describe 'with invalid attributes' do
+          let(:invalid_create) do
             gaku_post :create, template: attributes_for(:invalid_template)
           end
 
           it 'does not save the new template' do
             expect do
-              invalid_js_create
+              invalid_create
             end.to_not change(Gaku::Template, :count)
           end
 
           it 're-renders the new method' do
-            invalid_js_create
-            template? :create
+            invalid_create
+            template? :new
           end
 
-          it "doesn't increment @count" do
-            invalid_js_create
-            expect(assigns(:count)).to eq 0
-          end
         end
       end
 
+      describe 'GET #edit' do
+        before { gaku_get :edit, id: template }
+
+        it { should respond_with 200 }
+        it('assigns @template') { expect(assigns(:template)).to eq template }
+        it('renders the :edit template') { template? :edit }
+      end
 
     end
 
@@ -125,19 +128,8 @@ describe Gaku::Admin::TemplatesController do
         it { should respond_with 200 }
         it('assigns @template') { expect(assigns(:template)).to be_a_new(Gaku::Template) }
         it('renders the :new template') { template? :new }
-
       end
 
-      describe 'XHR #edit' do
-        before do
-
-          gaku_js_get :edit, id: template
-        end
-
-        it { should respond_with 200 }
-        it('assigns @template') { expect(assigns(:template)).to eq template }
-        it('renders the :edit template') { template? :edit }
-      end
 
       describe 'XHR DELETE #destroy' do
         it 'deletes the template' do

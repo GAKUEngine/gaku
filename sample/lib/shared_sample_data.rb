@@ -5,6 +5,8 @@
                                  numcode: '392'
                               ).first_or_create!
 
+@state = Gaku::State.where(name: Faker::Address.us_state, country_iso: @country.iso).first_or_create!
+
 @mobile_phone = Gaku::ContactType.where(name: 'Mobile Phone').first_or_create!
 @home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
 @email = Gaku::ContactType.where(name: 'Email').first_or_create!
@@ -80,7 +82,8 @@ def random_address
     title: 'Home address',
     zipcode: '452-0813',
     city: 'Nagoya',
-    country: @country
+    country: @country,
+    state: @state
   }
 end
 
@@ -109,4 +112,20 @@ def create_student_with_full_info(predefined_student=nil)
   #guardian.notes.where(random_note).first_or_create!
 
   student.guardians << guardian
+end
+
+def create_teacher_with_full_info(predefined_teacher=nil)
+  if predefined_teacher
+    teacher = Gaku::Teacher.where(predefined_teacher).first_or_create!
+  else
+    random_teacher = random_person
+    teacher = Gaku::Teacher.where(random_teacher).first_or_create!
+  end
+
+  teacher.addresses.create!(random_address)
+  teacher.contacts.create!(random_email)
+  teacher.contacts.create!(random_home_phone)
+  teacher.contacts.create!(random_mobile_phone)
+  teacher.notes.create!(random_note)
+  teacher.notes.create!(random_note)
 end

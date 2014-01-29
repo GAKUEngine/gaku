@@ -3,8 +3,8 @@ require 'spec_helper_controllers'
 describe Gaku::Students::SimpleGradesController do
 
   let(:student) { create(:student) }
+  let!(:simple_grade_type) { create(:simple_grade_type) }
   let(:simple_grade) { create(:simple_grade) }
-  let!(:school) { create(:school) }
 
   context 'as admin' do
     before { as :admin }
@@ -28,14 +28,14 @@ describe Gaku::Students::SimpleGradesController do
 
         it { should respond_with 200 }
         it('assigns @simple_grade') { expect(assigns(:simple_grade)).to be_a_new(Gaku::SimpleGrade) }
-        it('assigns @schools') { expect(assigns(:schools)).to_not be_empty }
+        it('assigns @simple_grade_types') { expect(assigns(:simple_grade_types)).to_not be_empty }
         it('renders the :new template') { template? :new }
       end
 
       describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, simple_grade: attributes_for(:simple_grade), student_id: student.id
+            gaku_js_post :create, simple_grade: attributes_for(:simple_grade, simple_grade_type_id: simple_grade_type.id), student_id: student.id
           end
 
           it 'creates new simple_grade' do
@@ -85,14 +85,14 @@ describe Gaku::Students::SimpleGradesController do
 
         it { should respond_with 200 }
         it('assigns @simple_grade') { expect(assigns(:simple_grade)).to eq simple_grade }
-        it('assigns @schools') { expect(assigns(:schools)).to_not be_empty }
+        it('assigns @simple_grade_types') { expect(assigns(:simple_grade_types)).to_not be_empty }
         it('renders the :edit template') { template? :edit }
       end
 
       describe 'JS PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: simple_grade, simple_grade: attributes_for(:simple_grade, name: 'test'), student_id: student.id
+            gaku_js_patch :update, id: simple_grade, simple_grade: attributes_for(:simple_grade, score: 145), student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -100,13 +100,13 @@ describe Gaku::Students::SimpleGradesController do
           it('sets flash') { flash_updated? }
           it "changes simple_grade's attributes" do
             simple_grade.reload
-            expect(simple_grade.name).to eq 'test'
+            expect(simple_grade.score).to eq 145
           end
         end
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: simple_grade, simple_grade: attributes_for(:invalid_simple_grade, name: ''), student_id: student.id
+            gaku_js_patch :update, id: simple_grade, simple_grade: attributes_for(:invalid_simple_grade, score: ''), student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -114,7 +114,7 @@ describe Gaku::Students::SimpleGradesController do
 
           it "does not change simple_grade's attributes" do
             simple_grade.reload
-            expect(simple_grade.name).not_to eq ''
+            expect(simple_grade.score).not_to eq ''
           end
         end
       end

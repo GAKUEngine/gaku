@@ -73,14 +73,14 @@ types = [
 
 types.each do |type|
   I18n.locale = :en
-  attendance_type = Gaku::AttendanceType.create!(
+  attendance_type = Gaku::AttendanceType.where(
                                                   name:           type[:name],
                                                   color_code:     type[:color_code],
                                                   counted_absent: type[:counted_absent],
                                                   disable_credit: type[:disable_credit],
                                                   credit_rate:    type[:credit_rate],
                                                   auto_credit:    type[:auto_credit]
-                                                )
+                                                ).first_or_create!
 
   I18n.locale = :ja
   attendance_type.update_attributes(name: type[:name_ja])

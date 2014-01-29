@@ -1,6 +1,8 @@
-td = simple_grade.name
-td = simple_grade.grade
-td = simple_grade.school
+td = simple_grade.score
+td = simple_grade.award_date
+td = simple_grade.simple_grade_type_name
+td = simple_grade.simple_grade_type_school
+td = simple_grade.simple_grade_type_grading_method
 td
   = ajax_link_to_edit [:edit, @student, simple_grade]
   = ajax_link_to_delete [@student, simple_grade]

@@ -6,6 +6,7 @@
  *= require jquery.minicolors
  *= require nprogress
  *= require nprogress-bootstrap
+ *= require select2
  *= require phantom_helpers
  *= require phantom_forms
  *= require gaku/frontend/gaku

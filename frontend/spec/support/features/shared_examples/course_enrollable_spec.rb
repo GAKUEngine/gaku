@@ -15,7 +15,11 @@ shared_examples_for 'enroll to course' do
         flash? 'successfully'
       end.to change(@data.courses, :count).by 1
       page.should have_content "#{@course.code}"
-      within(count_div) { page.should have_content 'Courses list(1)' }
+
+      if page.has_css?(count_div)
+        within(count_div) { page.should have_content 'Courses list(1)' }
+      end
+
       if page.has_css?(tab_link)
         within(tab_link)  { page.should have_content 'Courses(1)' }
       end
@@ -47,8 +51,7 @@ shared_examples_for 'remove enrollment' do
 
   it 'removes', js: true do
     course_field = @data.courses.first.code
-
-    within(count_div) { page.should have_content 'Courses list(1)' }
+    within(count_div) { page.should have_content 'Courses list(1)' } if page.has_css?(count_div)
     page.should have_content course_field
 
     expect do
@@ -56,7 +59,7 @@ shared_examples_for 'remove enrollment' do
       flash_destroyed?
     end.to change(@data.courses, :count).by -1
 
-    within(count_div) { page.should_not have_content 'Courses list(1)' }
+    within(count_div) { page.should_not have_content 'Courses list(1)' } if page.has_css?(count_div)
     if page.has_css?(tab_link)
       within(tab_link)  { page.should_not have_content 'Courses(1)' }
     end

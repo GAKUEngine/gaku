@@ -28,6 +28,14 @@ module Gaku
       primary
     end
 
+    def self.primary
+      where(primary: true).first
+    end
+
+    def self.secondary
+      where(primary: false)
+    end
+
     def state_text
       if state
         state.abbr.blank? ? state.name : state.abbr

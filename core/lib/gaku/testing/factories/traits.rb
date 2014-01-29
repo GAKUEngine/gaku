@@ -51,6 +51,14 @@ FactoryGirl.define do
     end
   end
 
+  trait :with_students do
+    after(:create) do |resource|
+      2.times do
+        resource.students << create(:student)
+      end
+    end
+  end
+
   trait :with_semesters do
     after(:create) do |resource|
       2.times do

@@ -5,6 +5,7 @@ showNotice("<%= render_flash %>");
 $('#exam-exam-portions-index tbody').append('<%= j render("gaku/exams/exam_portions/exam_portion", {exam_portion: @exam_portion}) %>');
 
 $('.exam-exam-portions-count').html("<%= print_count(@count, t(:'exam_portion.list')) %>");
+$('#exam-exam-portions-tab-link').html("<%= print_count(@count, t(:'exam_portion.plural')) %>");
 
 <% if @exam.use_weighting? %>
 
@@ -15,7 +16,7 @@ $('.exam-exam-portions-count').html("<%= print_count(@count, t(:'exam_portion.li
   }
 
   $('.exam-portions-weight thead tr').append('<th class="btn-warning" data-id=<%= @exam.exam_portions.last.id%>> <%= @exam.exam_portions.last.name+ " " + t("exam.weight") %> </th>');
-  $('.exam-portions-weight tbody tr').append('<%= render_js_partial("gaku/exams/exam_portions/exam_portion_weight_td", {portion: @exam.exam_portions.last}) %>');
+  $('.exam-portions-weight tbody tr').append('<%= j render("gaku/exams/exam_portions/exam_portion_weight_td", {portion: @exam.exam_portions.last}) %>');
 
   weights = ('<%= @exam.exam_portions.pluck(:weight) %>');
   weights = weights.slice(1, -1).split(',');

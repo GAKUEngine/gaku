@@ -13,7 +13,9 @@ module Gaku
       if params[:course_id]
         @exams = Course.find(params[:course_id]).syllabus.exams
       else
-        @exams = Exam.all
+        @search = Exam.search(params[:q])
+        results = @search.result(distinct: true)
+        @exams = results.page(params[:page])
         @exam = Exam.new
       end
 

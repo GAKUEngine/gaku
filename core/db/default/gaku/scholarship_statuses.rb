@@ -10,10 +10,10 @@ scholarship_statuses = [
 
 scholarship_statuses.each do |status|
   I18n.locale = :en
-  scholarship_status = Gaku::ScholarshipStatus.create!(
+  scholarship_status = Gaku::ScholarshipStatus.where(
                                                         name: status[:name],
                                                         default: status[:default]
-                                                      )
+                                                      ).first_or_create!
 
   I18n.locale = :ja
   scholarship_status.update_attribute(:name,  status[:name_ja])

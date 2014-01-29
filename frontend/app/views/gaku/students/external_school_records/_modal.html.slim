@@ -1,0 +1,4 @@
+= modal_for 'edit-external-school-record-modal' do
+  = modal_form_for [@student, @external_school_record], resource: 'student-external-school-record' do |f|
+    = render 'form_fields', f: f
+    = buttons_for @external_school_record, label: t(:'external_school_record.save'), resource: 'student-external-school-record'

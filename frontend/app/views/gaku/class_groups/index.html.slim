@@ -2,13 +2,24 @@
   = t(:'class_group.plural')
 
 = content_for :new_form do
-  .row#new-class-group.d-none
+  #new-class-group.d-none
+
+#class-groups-advanced-search.d-none
 
 = content_for :index_header do
   .pull-left
-    = count_div('class-groups-count') { print_count @count, t(:'class_group.list') }
+    = count_div('semesters-count') { print_count @count, t(:'semester.list') }
   .pull-right
     = ajax_link_to_new t(:'class_group.new'), [:new, :class_group], id: "new-class-group-link"
 
+ul.nav.nav-tabs
+  li.active
+    = link_to(t(:'class_group.active'), class_groups_path, id: 'class-groups-active-tab-link')
+  li
+    = link_to(t(:'class_group.with_semester'), with_semester_class_groups_path, id: 'class-groups-with-semester-tab-link')
+  li
+    = link_to(t(:'class_group.without_semester'), without_semester_class_groups_path, id: 'class-groups-without-semester-tab-link')
+
+
 #class-groups-index
-  = render 'class_groups'
+  = render 'class_groups_with_semester'

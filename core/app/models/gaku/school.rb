@@ -7,8 +7,9 @@ module Gaku
     has_many :simple_grades
     has_many :levels
     has_many :programs
+    has_many :simple_grade_types
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 
     has_one :master_campus,
             -> { where master: true },
@@ -29,6 +30,10 @@ module Gaku
 
     def self.primary
       where(primary: true).first
+    end
+
+    def code_and_name
+      "#{code}: #{name}"
     end
 
     private

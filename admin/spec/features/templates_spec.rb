@@ -7,6 +7,7 @@ describe 'Admin Templates' do
   let(:template) { create(:template) }
 
   before :all do
+    Capybara.javascript_driver = :selenium
     set_resource 'admin-template'
   end
 
@@ -16,7 +17,7 @@ describe 'Admin Templates' do
       click new_link
     end
 
-    xit 'creates and shows' do
+    it 'creates and shows' do
       expect do
         fill_in 'template_name', with: 'New Template'
         fill_in 'template_context', with: 'new_context'
@@ -31,8 +32,20 @@ describe 'Admin Templates' do
       expect(page).to have_content 'New Template'
       within(count_div) { expect(page).to have_content 'Templates list(1)' }
 
-
       expect(current_path).to eq gaku.admin_templates_path
+    end
+
+    it 'has file validations' do
+      expect do
+        fill_in 'template_name', with: 'New Template'
+        fill_in 'template_context', with: 'new_context'
+
+        absolute_path = Rails.root + '../support/120x120.jpg'
+        attach_file 'template_file', absolute_path
+
+        click submit
+        page.has_content? 'Only text, excel or openoffice documents are supported'
+      end.not_to change(Gaku::Template, :count)
     end
 
     it { has_validations? }
@@ -47,8 +60,7 @@ describe 'Admin Templates' do
 
     context 'edit', js: true do
       before do
-        within(table) { click js_edit_link }
-        visible? modal
+        within(table) { click edit_link }
       end
 
       it 'edits' do
@@ -61,6 +73,18 @@ describe 'Admin Templates' do
         expect(page).to_not have_content 'mobile'
 
         expect(current_path).to eq gaku.admin_templates_path
+      end
+
+
+      it 'has file validations' do
+        fill_in 'template_name', with: 'New Template'
+        fill_in 'template_context', with: 'new_context'
+
+        absolute_path = Rails.root + '../support/120x120.jpg'
+        attach_file 'template_file', absolute_path
+
+        click submit
+        page.has_content? 'Only text, excel or openoffice documents are supported'
       end
 
       it 'has validations' do

@@ -24,17 +24,6 @@ describe 'Student Address' do
       it_behaves_like 'delete address'
     end
 
-    context 'two addresses' do
-
-      before(:each) do
-        @resource = student_with_addresses
-        visit gaku.edit_student_path(@resource)
-        click tab_link
-        page.has_content? 'Addresses list'
-      end
-
-      it_behaves_like 'primary addresses'
-    end
   end
 
 end

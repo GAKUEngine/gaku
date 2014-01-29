@@ -5,7 +5,7 @@ module Gaku
 
     translates :name
 
-    validates :code, presence: true
+    validates :code, presence: true, uniqueness: true
 
     before_create :set_name
 

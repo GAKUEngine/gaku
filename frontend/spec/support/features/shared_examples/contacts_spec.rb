@@ -86,34 +86,38 @@ end
 shared_examples_for 'primary contacts' do
 
   it 'sets primary', js: true do
-    expect(@resource.contacts.first.primary?).to eq true
-    expect(@resource.contacts.second.primary?).to eq false
+    old_primary = @resource.contacts.primary
+    old_secondary = @resource.contacts.secondary.first
 
-    within("#{table} tr#contact-2") { click_link 'set-primary-link' }
+    expect(old_primary.primary).to eq true
+    expect(old_secondary.primary).to eq false
+
+    within("#{table} tr#contact-#{old_secondary.id}") { click_link 'set-primary-link' }
     accept_alert
 
-    within("#{table} tr#contact-#{@resource.contacts.second.id}") do
+    within("#{table} tr#contact-#{old_secondary.id}") do
       expect(page).to have_css('.btn-primary')
     end
 
-    @resource.contacts.reload
-    expect(@resource.contacts.first.primary?).to eq false
-    expect(@resource.contacts.second.primary?).to eq true
+    old_primary.reload
+    old_secondary.reload
+
+    expect(old_primary.primary).to eq false
+    expect(old_secondary.primary).to eq true
   end
 
   it 'delete primary', js: true do
-    contact1_tr = "#contact-#{@resource.contacts.first.id}"
-    contact2_tr = "#contact-#{@resource.contacts.second.id}"
+    old_primary = @resource.contacts.primary
+    old_secondary  = @resource.contacts.secondary.first
 
-    within("#{table} #{contact2_tr}") { click_link 'set-primary-link' }
+    contact_pri_tr = "#contact-#{old_primary.id}"
+    contact_sec_tr = "#contact-#{old_secondary.id}"
+
+    click "#{contact_pri_tr} .delete-link"
     accept_alert
 
-    !page.find("#{contact2_tr} td.primary-contact a.btn-primary")
+    page.find("#{contact_sec_tr} .primary-contact a.btn-primary")
 
-    click "#{contact2_tr} .delete-link"
-    accept_alert
-
-    page.find("#{contact1_tr} .primary-contact a.btn-primary")
-    expect(@resource.contacts.first.primary?).to eq true
+    expect(old_secondary.reload.primary).to eq true
   end
 end

@@ -38,7 +38,15 @@ Gaku::Core::Engine.routes.draw do
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser ) do
+  resources :class_groups, concerns: %i( notes student_chooser pagination ) do
+    collection do
+      get :search
+      get :search_semester
+      get :advanced_search
+      get :semester_advanced_search
+      get :with_semester
+      get :without_semester
+    end
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
@@ -81,12 +89,14 @@ Gaku::Core::Engine.routes.draw do
   resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
   resources :students, concerns: %i( addresses contacts notes pagination ) do
-    get :load_autocomplete_data, on: :collection
-
+    get :search, on: :collection
+    get :advanced_search, on: :collection
+    get :chosen, on: :collection
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
     resources :commute_methods,      controller: 'students/commute_methods'
-    resources :student_achievements, controller: 'students/student_achievements', except: :show
+    resources :badges, controller: 'students/badges', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
+    resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
     resources :guardians, except: %i( index show ),
       controller: 'students/guardians',
@@ -99,7 +109,7 @@ Gaku::Core::Engine.routes.draw do
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes ) do
+  resources :exams, concerns: %i( notes pagination ) do
     put :create_exam_portion, on: :member
 
     resources :exam_scores
@@ -112,6 +122,12 @@ Gaku::Core::Engine.routes.draw do
 
   resources :course_groups  do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
+  end
+
+  resources :search, only: :index do
+    collection do
+      get :students
+    end
   end
 
 

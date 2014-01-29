@@ -10,6 +10,7 @@ describe Gaku::Country do
     it { should validate_presence_of :name }
     it { should validate_presence_of :iso_name }
     it { should validate_presence_of :iso }
+    it { should validate_uniqueness_of :iso }
   end
 
   describe '#to_s' do

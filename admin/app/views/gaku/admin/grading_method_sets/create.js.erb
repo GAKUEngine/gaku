@@ -1,4 +1,4 @@
-$('#admin-grading-method-sets-index tbody').append('<%= render_js_partial("grading_method_set", {grading_method_set: @grading_method_set}) %>');
+$('#admin-grading-method-sets-index tbody').append('<%= j render("grading_method_set", {grading_method_set: @grading_method_set}) %>');
 
 $('#new-admin-grading-method-set').slide();
 $('#new-admin-grading-method-set-link').show();

@@ -14,7 +14,7 @@ commute_method_types = [
 
 commute_method_types.each do |type|
   I18n.locale = :en
-  commute_method_type = Gaku::CommuteMethodType.create!(name: type[:name])
+  commute_method_type = Gaku::CommuteMethodType.where(name: type[:name]).first_or_create!
 
   I18n.locale = :ja
   commute_method_type.update_attributes(name: type[:name_ja])

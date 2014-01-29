@@ -16,27 +16,34 @@ module Gaku
     before_action :set_student,           only: %i( show edit update destroy )
 
     def new
+      @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
+      @last_student = Student.last
+
       @student = Student.new
+      if @last_student
+        @student.admitted = @last_student.admitted
+        @student.enrollment_status_code = @last_student.enrollment_status_code
+
+      end
+      @student.class_group_enrollments.new
       respond_with @student
     end
 
     def create
       @student = Student.new(student_params)
-      @student.save
-      @student.make_enrolled if @student.valid?
-      @count = Student.count
-      respond_with @student
+      if @student.save
+        @count = Student.count
+        respond_with @student, location: [:edit, @student]
+      else
+        render :new
+      end
     end
 
     def index
-      set_index_vars
-      @enrolled_students = params[:enrolled_students]
-
-      @count = Student.count
-
       @search = Student.active.search(params[:q])
       results = @search.result(distinct: true)
-      @students = results.order('created_at ASC').page(params[:page])
+      @students = results.page(params[:page])
+      @count = results.count
 
       respond_with(@students) do |format|
         format.pdf do
@@ -46,6 +53,51 @@ module Gaku
         end
       end
     end
+
+    def chosen
+      set_selected_students
+      set_class_groups
+      set_courses
+      @extracurricular_activity = ExtracurricularActivity.find(params[:extracurricular_activity_id]) if params[:extracurricular_activity_id]
+      @class_group = ClassGroup.find(params[:class_group_id]) if params[:class_group_id]
+
+      @enrolled_students = params[:enrolled_students]
+      @search = Student.active.search(params[:q])
+      @students = @search.result(distinct: true)
+    end
+
+    def advanced_search
+      set_countries
+      set_enrollment_statuses
+      @search = Student.active.search(params[:q])
+      @students = @search.result(distinct: true)
+    end
+
+    def search
+      if params[:q]
+        if params[:q][:graduated_gteq]  || params[:q][:graduated_lteq] || params[:q][:admitted_gteq] || params[:q][:admitted_lteq]
+          @search = Student.search(params[:q])
+        else
+          @search = Student.active.search(params[:q])
+        end
+
+        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq] || params[:q][:age_gteq] ||params[:q][:age_lteq]
+          @search.sorts = 'birth_date desc'
+        else
+          @search.sorts = 'created_at desc'
+        end
+
+      else
+        @search = Student.active.search(params[:q])
+      end
+
+      results = @search.result(distinct: true)
+      @students = results.page(params[:page])
+      @count = results.count
+
+      render :index, layout: 'gaku/layouts/index'
+    end
+
 
     def edit
       respond_with @student
@@ -72,26 +124,19 @@ module Gaku
       respond_with @student, location: [:edit, @student]
     end
 
-    def load_autocomplete_data
-      object = "Gaku::#{params[:class_name].capitalize}".constantize
-      @result = object.order(params[:column].to_sym)
-                      .where(params[:column] + ' like ?', "%#{params[:term]}%")
-      render json: @result.map(&params[:column].to_sym).uniq
-    end
-
 
     private
 
-    def student_params
-      %i(name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated picture)
-    end
 
     def student_params
       params.require(:student).permit(attributes)
     end
 
     def attributes
-      %i( name surname name_reading surname_reading birth_date gender class_group_ids scholarship_status_id enrollment_status_code commute_method_type_id admitted graduated picture )
+      [ :name, :surname, :name_reading, :surname_reading, :birth_date,
+          :gender, :scholarship_status_id,
+          :enrollment_status_code, :commute_method_type_id, :admitted,
+          :graduated, :picture, class_group_enrollments_attributes: [:id, :class_group_id] ]
     end
 
     def includes
@@ -102,10 +147,19 @@ module Gaku
       @class_group_id ||= params[:class_group_id]
     end
 
-    def set_index_vars
-      @enrollment_statuses = EnrollmentStatus.all.includes(:translations)
+    def set_enrollment_statuses
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
+    end
+
+    def set_countries
       @countries = Country.all
+    end
+
+    def set_class_groups
       @class_groups = ClassGroup.all
+    end
+
+    def set_courses
       @courses = Course.all
     end
 

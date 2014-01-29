@@ -97,6 +97,29 @@ Install dependencies:
 
     $ bundle
 
+Edit config/database.yml to use postgre. Example:
+
+```yml
+    
+development:
+  adapter: postgresql
+  database: gaku_development
+  username: postgres
+  min_messages: warning
+test:
+  adapter: postgresql
+  database: gaku_test
+  username: postgres
+  min_messages: warning
+production:
+  adapter: postgresql
+  database: gaku_production
+  username: postgres
+  min_messages: warning
+
+```
+
+
 Create the database:
 
     $ rake db:create:all
