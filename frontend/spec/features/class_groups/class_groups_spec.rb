@@ -28,11 +28,12 @@ describe 'ClassGroups' do
         flash_created?
       end.to change(Gaku::ClassGroup, :count).by 1
 
-      within('#class-groups-without-semester-index') do
-        has_content? '7'
-        has_content? 'Awesome class group'
-        has_content? 'room#7'
-      end
+      click '#class-groups-without-semester-tab-link'
+
+      has_content? '7'
+      has_content? 'Awesome class group'
+      has_content? 'room#7'
+
       count? 'Class Groups list(1)'
     end
 

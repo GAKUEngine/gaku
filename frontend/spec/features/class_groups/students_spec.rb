@@ -27,6 +27,7 @@ describe 'ClassGroup Students' do
       student1
 
       visit gaku.class_groups_path
+      click '#class-groups-without-semester-tab-link'
       click edit_link
       click_link 'class-group-enrollments-tab-link'
       Gaku::ClassGroupEnrollment.count.should eq 0
