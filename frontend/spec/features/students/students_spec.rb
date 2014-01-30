@@ -170,6 +170,11 @@ describe 'Students', type: :feature do
       page.has_text? 'John'
     end
 
+
+    it 'has enrollment_status_code set to enrolled' do
+      expect(find('#student_enrollment_status_code').value).to eq 'enrolled'
+    end
+
     context 'there is existing student' do
 
       it 'prefills enrollment_status, admitted and class_group with last student ones' do

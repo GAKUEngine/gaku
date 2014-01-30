@@ -23,7 +23,8 @@ module Gaku
       if @last_student
         @student.admitted = @last_student.admitted
         @student.enrollment_status_code = @last_student.enrollment_status_code
-
+      else
+        @student.enrollment_status_code = @enrolled_status.code
       end
       @student.class_group_enrollments.new
       respond_with @student
