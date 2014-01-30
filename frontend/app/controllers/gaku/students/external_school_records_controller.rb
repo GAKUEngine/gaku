@@ -43,7 +43,11 @@ module Gaku
     private
 
     def external_school_record_params
-      params.require(:external_school_record).permit([:school_id, :student_id, :beginning, :ending])
+      params.require(:external_school_record).permit(external_school_record_attr)
+    end
+
+    def external_school_record_attr
+      %i( school_id student_id beginning ending units_absent total_units)
     end
 
     def set_student
