@@ -9,5 +9,12 @@ module Gaku
     #          dependent: :destroy
 
     validates :school, :student, presence: true
+
+    def attendance_rate
+      if units_absent.present? && total_units.present?
+        ( units_absent / total_units) * 100
+      end
+    end
+
   end
 end
