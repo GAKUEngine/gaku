@@ -14,6 +14,10 @@
             = th t(:'school.singular')
             = th t(:'external_school_record.beginning')
             = th t(:'external_school_record.ending')
+            = th t(:'external_school_record.units_absent')
+            = th t(:'external_school_record.total_units')
+            = th t(:'external_school_record.attendance_rate')
+
             = th_actions 2 if can_edit?
         tbody
           = render partial: 'gaku/students/external_school_records/external_school_record', collection: @student.external_school_records, as: 'external_school_record'
