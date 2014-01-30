@@ -20,11 +20,17 @@ describe 'Student External School Records' do
     it 'creates' do
       expect do
         select school.name, from: 'external_school_record_school_id'
+        fill_in 'external_school_record_units_absent', with: 500
+        fill_in 'external_school_record_total_units', with: 100
         click submit
         flash_created?
       end.to change(Gaku::ExternalSchoolRecord, :count).by(1)
-    end
 
+      within(table) do
+        has_content? 500
+        has_content? 100
+      end
+    end
   end
 
 
