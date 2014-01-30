@@ -32,8 +32,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'draper',                         '~> 1.0'
   s.add_dependency 'deface',                         '~> 1.0.0'
 
-  s.add_dependency 'devise',                         '~> 3.0.0'
-  s.add_dependency 'devise-i18n',                    '~> 0.9'
+  s.add_dependency 'devise',                         '~> 3.2.0'
+  s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan',                         '~> 1.6.10'
 
   s.add_dependency 'localeapp'

@@ -2,6 +2,9 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
+  config.secret_key = '1a13e006ae0213c1dd24279693f125e03201a6f1f0c6ac833fe4c5ff7e64ad4a7407652a63f0f8f1b28790af0c68d965ac28bbfdf23db305f993de39b90bf24a'
+
+
   config.router_name = :gaku
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
