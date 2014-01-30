@@ -473,7 +473,7 @@ en:
   extended: Extended
   external_school_record:
     absences: Absences
-    attendance_rate: Attendance Rate
+    attendance_rate: Attendance rate
     beginning: Beginning
     data: Data
     ending: Ending
@@ -482,6 +482,8 @@ en:
     plural: External School Records
     list: External School Records list
     student_id_number: Student ID
+    units_absent: Units absent
+    toal_units: Total units
   extracurricular_activity:
     add: Add Extracurricular Activity
     already_enrolled: Already enrolled to the extracurricular activity!
