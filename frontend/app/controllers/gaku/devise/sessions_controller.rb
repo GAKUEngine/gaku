@@ -7,7 +7,7 @@ class Gaku::Devise::SessionsController < Devise::SessionsController
     set_flash_message(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
-    redirect_to session['previous_url'] || class_groups_path
+    redirect_to session['previous_url'] || root_path
   end
 
 end
