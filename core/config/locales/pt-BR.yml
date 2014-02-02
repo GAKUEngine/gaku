@@ -103,6 +103,29 @@ pt-BR:
     save: 
     singular: 
   back: Voltar
+  badge:
+    add: 
+    edit: 
+    index: 
+    list: 
+    plural: 
+    save: 
+    singular: 
+  badge_type:
+    add: 
+    authority: 
+    badge: 
+    choose: 
+    code: 
+    description: 
+    edit: 
+    issuer: 
+    list: 
+    name: 
+    plural: 
+    save: 
+    singular: 
+    url: 
   birth: Data de Nascimento
   birth_and: e
   birth_between: Data de Nascimento entre
@@ -153,6 +176,8 @@ pt-BR:
     save: Salvar Grupo de Classe
     show: Exibir
     singular: Grupo de Classe
+    with_semester: 
+    without_semester: 
   class_group_course_enrollment:
     save: Salvar Curso para Grupo de Classes
     singular: 
@@ -355,6 +380,7 @@ pt-BR:
       unlocked: 
     username: 
   edit: 
+  eg: 
   email: 
   empty: 
   enroll_to_class: 
@@ -449,10 +475,13 @@ pt-BR:
   extended: 
   external_school_record:
     absences: 
+    add: 
     attendance_rate: 
     beginning: 
     data: 
     ending: 
+    list: 
+    plural: 
     singular: 
     student_id_number: 
   extracurricular_activity:
@@ -479,7 +508,15 @@ pt-BR:
       destroy:
         alert: 
         notice: 
+      recovery:
+        alert: 
+        notice: 
+      soft_delete:
+        alert: 
+        notice: 
       update:
+        notice: 
+      update_master:
         notice: 
   full_name: 
   full_name_reading: 
@@ -509,16 +546,27 @@ pt-BR:
     weighting_portion: 
   grading_method:
     add: 
+    add_argument: 
+    add_criteria: 
     arguments: 
     choose: 
+    criteria: 
     curved: 
     description: 
     edit: 
+    interval: 
     list: 
     method: 
     name: 
+    ordinal: 
+    pass_fail: 
+    percentage: 
     plural: 
+    ratio: 
+    remove_argument: 
+    remove_criteria: 
     save: 
+    score: 
     singular: 
   grading_method_set:
     add: 
@@ -537,6 +585,9 @@ pt-BR:
     save: 
     singular: 
   graduated: 
+  group:
+    plural: 
+    singular: 
   guardian:
     add: 
     addresses: 
@@ -569,6 +620,7 @@ pt-BR:
       admin: 
       administration: 
       administrator: 
+      badge_types: 
       changes:
         changes: 
         student_addresses: 
@@ -701,6 +753,9 @@ pt-BR:
     plural: 
     save: 
     singular: 
+    student:
+      id_code: 
+      singular: 
   profile: 
   profiles:
     new: 
@@ -816,10 +871,22 @@ pt-BR:
   show: 
   simple_grade:
     add: 
+    award_date: 
     edit: 
     grade: 
     index: 
     list: 
+    plural: 
+    save: 
+    score: 
+    singular: 
+  simple_grade_type:
+    add: 
+    edit: 
+    list: 
+    max_score: 
+    name: 
+    passing_score: 
     plural: 
     save: 
     singular: 
@@ -865,6 +932,7 @@ pt-BR:
     edit: 
     enroll: 
     export: 
+    foreign_id_code: 
     foreign_id_number: 
     id_number: 
     import: 

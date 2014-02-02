@@ -1,10 +1,17 @@
 en:
-  group:
-    singular: Group
-    plural: Groups
-  achievement:
-    singular: Achievement
   academic: Academic
+  achievement:
+    add: Add Achievement
+    authority: Authority
+    badge: Badge
+    choose: Choose Achievement
+    description: Description
+    edit: Edit Achievement
+    list: Achievements list
+    name: Name
+    plural: Achievements
+    save: Save Achievement
+    singular: Achievement
   active: Active
   add: Add
   address:
@@ -95,38 +102,36 @@ en:
     plural: Attendance Types
     save: Save Attendance Type
     singular: Attendance Type
-  badge:
-    list: Badges list
-    add: Add badge
-    edit: Edit badge
-    index: Badges index
-    save: Save badge
-    singular: Badge
-    plural: Badges
-  badge_type:
-    add: Add badge type
-    authority: Authority
-    code: Code
-    issuer: Issuer
-    url: Url
-    badge: Badge
-    choose: Choose badge type
-    description: Description
-    edit: Edit badge type
-    list: Badge types list
-    name: Name
-    plural: Badge types
-    save: Save badge type
-    singular: Badge type
   back: Back
+  badge:
+    add: Add Badge
+    edit: Edit Badge
+    index: Badge Index
+    list: Badge List
+    plural: Badges
+    save: Save Badge
+    singular: Badge
+  badge_type:
+    add: Add Badge Type
+    authority: Authority
+    badge: Badge Type
+    choose: Choose Badge Type
+    code: Badge Type Code
+    description: Badge Type Description
+    edit: Edit Badge Type
+    issuer: Issuing Institution
+    list: Badge Types List
+    name: Badge Type Name
+    plural: Badge Types
+    save: Save Badge Type
+    singular: Badge Type
+    url: Badge Type URL
   birth: Birth Date
   birth_and: and
   birth_between: Birth date between
   birth_date: Birth Date
   birth_date_from: Birth date(from)
   birth_date_to: Birth date(to)
-  age_from: Age(from)
-  age_to: Age(to)
   campus:
     add: Add Campus
     address: Campus Address
@@ -155,8 +160,6 @@ en:
     user: Changed by
   class: Class
   class_group:
-    with_semester: With Semester
-    without_semester: Without Semester
     add: Add Class Group
     already_enrolled: Already enrolled to the class group!
     choose: Choose Class Group
@@ -173,6 +176,8 @@ en:
     save: Save Class Group
     show: Show
     singular: Class Group
+    with_semester: With Semester
+    without_semester: Without Semester
   class_group_course_enrollment:
     save: Save Course to Class Group
     singular: Course
@@ -377,6 +382,7 @@ en:
       unlocked: Your account was successfully unlocked. You are now signed in.
     username: Username
   edit: Edit
+  eg: eg
   email: Email
   empty: Empty
   enroll_to_class: Enroll to class
@@ -473,17 +479,15 @@ en:
   extended: Extended
   external_school_record:
     absences: Absences
-    attendance_rate: Attendance rate
+    add: Add External School Record
+    attendance_rate: Attendance Rate
     beginning: Beginning
     data: Data
     ending: Ending
-    add: Add External School Record
-    singular: External School Record
+    list: External School Record List
     plural: External School Records
-    list: External School Records list
+    singular: External School Record
     student_id_number: Student ID
-    units_absent: Units absent
-    toal_units: Total units
   extracurricular_activity:
     add: Add Extracurricular Activity
     already_enrolled: Already enrolled to the extracurricular activity!
@@ -508,12 +512,12 @@ en:
       destroy:
         alert: '%{resource_name} could not be destroyed!'
         notice: '%{resource_name} was successfully destroyed!'
-      soft_delete:
-        alert: '%{resource_name} could not be destroyed!'
-        notice: '%{resource_name} was successfully destroyed!'
       recovery:
         alert: '%{resource_name} could not be recovered!'
         notice: '%{resource_name} was successfully recovered!'
+      soft_delete:
+        alert: '%{resource_name} could not be destroyed!'
+        notice: '%{resource_name} was successfully destroyed!'
       update:
         notice: '%{resource_name} was successfully updated!'
       update_master:
@@ -546,18 +550,27 @@ en:
     weighting_portion: Weighting
   grading_method:
     add: Add Grading Method
+    add_argument: Add Argument
+    add_criteria: Add Criteria
     arguments: Arguments
-    add_argument: Add argument
-    remove_argument: Remove argument
     choose: Choose Grading Method
+    criteria: Criteria
     curved: Curved
     description: Description
     edit: Edit Grading Method
+    interval: Interval
     list: Grading Methods list
     method: Method
     name: Name
+    ordinal: Ordinal
+    pass_fail: Pass/Fail
+    percentage: Percentage
     plural: Grading Methods
+    ratio: Ratio
+    remove_argument: Remove Argument
+    remove_criteria: Remove Criteria
     save: Save Grading Method
+    score: Score
     singular: Grading Method
   grading_method_set:
     add: Add Grading Method Set
@@ -576,6 +589,9 @@ en:
     save: Save Grading Method Set Item
     singular: Geading Method Set Item
   graduated: Graduated On
+  group:
+    plural: Groups
+    singular: Group
   guardian:
     add: Add Guardian
     addresses: Guardian Addresses
@@ -604,10 +620,11 @@ en:
   manage: Manage
   menu:
     admin:
+      achievements: Achievements
       admin: Admin
       administration: Administration
       administrator: Administrator
-      badge_types: Badge types
+      badge_types: Badge Types
       changes:
         changes: Changes and Deletions
         student_addresses: Student Addresses
@@ -724,9 +741,6 @@ en:
       grading_method: Grading Method
       grading_scheme: Grading Scheme
       singular: Grading
-    student:
-      singular: Student
-      id_code: id_code
     list: Presets list
     locale: Locale
     name: Name
@@ -743,6 +757,9 @@ en:
     plural: Presets
     save: Save Presets
     singular: Preset
+    student:
+      id_code: ID Code
+      singular: Student
   profile: Profile
   profiles:
     new: New Profile
@@ -858,26 +875,25 @@ en:
   show: Show
   simple_grade:
     add: Add Simple Grade
+    award_date: Award Date
     edit: Edit Simple Grade
     grade: Grade
     index: Simple Grade Index
     list: Simple Grades list
     plural: Simple Grades
     save: Save Simple Grade
-    singular: Simple Grade
     score: Score
-    award_date: Award date
+    singular: Simple Grade
   simple_grade_type:
-    max_score: Max score
-    passing_score: Passing score
-    add: Add simple grade type
-    edit: Edit simple grade type
-    list: Simple grade types list
-    name: Name
-    plural: Simple grade types
-    save: Save Simple grade type
-    singular: Simple grade type
-    choose: Choose simple grade type
+    add: Add Simple Grade Type
+    edit: Edit Simple Grade Type
+    list: Simple Grade Type List
+    max_score: Maximum Score
+    name: Simple Grade Type Name
+    passing_score: Passing Score
+    plural: Simple Grade Types
+    save: Save Simple Grade Type
+    singular: Simple Grade Type
   specialty:
     add: Add Specialty
     already_added: Specialty already added!
@@ -920,6 +936,7 @@ en:
     edit: Edit Student
     enroll: Enroll Student
     export: Export Students
+    foreign_id_code: Foreign ID/Entry Code
     foreign_id_number: Foreign ID
     id_number: Student ID
     import: Import Students
@@ -934,10 +951,11 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-    admitted_from: Admitted(from)
-    admitted_to: Admitted(To)
-    graduated_from: Graduated(from)
-    graduated_to: Graduated(to)
+  student_achievement:
+    edit: Edit Student Achievement
+    index: Student Achievement Index
+    save: Save Student Achievement
+    singular: Student Achievement
   student_name: Student Name
   student_specialty:
     edit: Student Specialty Edit
@@ -979,7 +997,7 @@ en:
     context: Context
     edit: Template
     file: File
-    file_type_error: "Only text, excel or openoffice documents are supported"
+    file_type_error: Only text, excel or openoffice documents are supported
     list: Templates list
     lock: Lock
     plural: Templates
