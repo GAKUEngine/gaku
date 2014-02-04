@@ -50,6 +50,38 @@ describe Gaku::Student do
   end
 
 
+  describe '#set_foreign_id_code' do
+    context 'when increment_foreign_id_code is false' do
+      let(:student_config) { create(:student_config, active: true) }
+
+      it 'sets increment_foreign_id_code to true' do
+        student_config
+        student = create(:student, foreign_id_code: '3')
+        expect(student_config.reload.increment_foreign_id_code).to eq true
+      end
+
+      it 'sets last_foreign_id_code' do
+        student_config
+        student = create(:student, foreign_id_code: '3')
+        expect(student_config.reload.last_foreign_id_code).to eq '3'
+      end
+
+    end
+
+    context 'when increment_foreign_id_code is true' do
+      let(:student_config) { create(:student_config, active: true, increment_foreign_id_code: true, last_foreign_id_code: '3') }
+
+      it 'increments last_foreign_id_code' do
+        student_config
+        student = create(:student)
+        expect(student.foreign_id_code).to eq '4'
+        expect(student_config.reload.last_foreign_id_code).to eq '4'
+      end
+
+    end
+  end
+
+
   describe '#set_code' do
 
     it "returns '**-****-serial_id' if missing major specialty and admitted" do
