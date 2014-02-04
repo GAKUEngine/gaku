@@ -14,6 +14,7 @@ module Gaku
     #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update destroy )
+    before_action :set_student_config
 
     def new
       @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
@@ -142,6 +143,10 @@ module Gaku
 
     def includes
       [[contacts: :contact_type, addresses: :country], :guardians]
+    end
+
+    def set_student_config
+      @student_config = StudentConfig.active
     end
 
     def set_class_group

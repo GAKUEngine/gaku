@@ -7,6 +7,7 @@ FactoryGirl.define do
     default true
     pagination {{ }}
     person {{ }}
+    student {{ increment_foreign_id_code: 0 }}
     address {{ }}
     export_formats {{ }}
     chooser_fields {{ }}

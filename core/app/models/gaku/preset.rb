@@ -9,6 +9,10 @@ module Gaku
     store_accessor :chooser_fields
     store_accessor :grading
 
+    def self.default
+      where(default: true).first
+    end
+
     def self.active
       where(active: true).first
     end
