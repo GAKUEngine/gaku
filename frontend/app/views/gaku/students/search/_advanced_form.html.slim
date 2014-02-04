@@ -1,7 +1,8 @@
 .panel.panel-success
   .panel-heading
     = t(:'student.search')
-    span.hide-advanced-search-table.d-none = modal_close_button
+    span.hide-advanced-search-table.d-none
+      = modal_close_button
   .panel-body
     = search_form_for @search, url: search_students_path, html: {id: 'search-students'} do |f|
       .row
@@ -32,3 +33,4 @@
 
       = hidden_field_tag "enrolled_students", @enrolled_students
       #selected-students.d-none
+      = link_to 'Reset', clear_search_students_path

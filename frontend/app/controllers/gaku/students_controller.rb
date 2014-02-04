@@ -68,7 +68,13 @@ module Gaku
       @students = @search.result(distinct: true)
     end
 
+    def clear_search
+      session[:q] = nil
+      redirect_to students_path
+    end
+
     def advanced_search
+      @prefilled = session[:q].to_json
       set_countries
       set_enrollment_statuses
       @search = Student.active.search(params[:q])
