@@ -1,0 +1,11 @@
+= tr_for student do
+  td.vm-tc
+  td.vm-tc
+  td.vm = "#{student.name} #{student.surname}"
+
+  - @exam.exam_portions.each do |portion|
+    - portion.exam_portion_scores.each do |score|
+      - if score.student_id == student.id
+        td
+          = form_for [@course, @exam, score], remote: true do |f|
+            = f.number_field :score, min: 0, max: 100, class: 'span12'
