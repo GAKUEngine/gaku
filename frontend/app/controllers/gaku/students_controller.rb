@@ -14,6 +14,7 @@ module Gaku
     #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update destroy )
+    before_action :set_student_config
 
     def new
       @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
@@ -41,18 +42,19 @@ module Gaku
     end
 
     def index
-      @search = Student.active.search(params[:q])
-      results = @search.result(distinct: true)
-      @students = results.page(params[:page])
-      @count = results.count
+      search
+      # @search = Student.active.search(params[:q])
+      # results = @search.result(distinct: true)
+      # @students = results.page(params[:page])
+      # @count = results.count
 
-      respond_with(@students) do |format|
-        format.pdf do
-          send_data render_to_string, filename: 'sido_yoroku.pdf',
-                                      type: 'application/pdf',
-                                      disposition: 'attachment'
-        end
-      end
+      # respond_with(@students) do |format|
+      #   format.pdf do
+      #     send_data render_to_string, filename: 'sido_yoroku.pdf',
+      #                                 type: 'application/pdf',
+      #                                 disposition: 'attachment'
+      #   end
+      # end
     end
 
     def chosen
@@ -67,7 +69,13 @@ module Gaku
       @students = @search.result(distinct: true)
     end
 
+    def clear_search
+      session[:q] = nil
+      redirect_to students_path
+    end
+
     def advanced_search
+      @prefilled = session[:q].to_json
       set_countries
       set_enrollment_statuses
       @search = Student.active.search(params[:q])
@@ -75,21 +83,25 @@ module Gaku
     end
 
     def search
-      if params[:q]
-        if params[:q][:graduated_gteq]  || params[:q][:graduated_lteq] || params[:q][:admitted_gteq] || params[:q][:admitted_lteq]
-          @search = Student.search(params[:q])
+      if session[:q] != params[:q] && !params[:q].nil?
+        session[:q] = params[:q]
+      end
+
+      if session[:q]
+        if session[:q][:graduated_gteq]  || session[:q][:graduated_lteq] || session[:q][:admitted_gteq] || session[:q][:admitted_lteq]
+          @search = Student.search(session[:q])
         else
-          @search = Student.active.search(params[:q])
+          @search = Student.active.search(session[:q])
         end
 
-        if params[:q][:birth_date_gteq]  || params[:q][:birth_date_lteq] || params[:q][:age_gteq] ||params[:q][:age_lteq]
+        if session[:q][:birth_date_gteq]  || session[:q][:birth_date_lteq] || session[:q][:age_gteq] ||session[:q][:age_lteq]
           @search.sorts = 'birth_date desc'
         else
           @search.sorts = 'created_at desc'
         end
 
       else
-        @search = Student.active.search(params[:q])
+        @search = Student.active.search(session[:q])
       end
 
       results = @search.result(distinct: true)
@@ -142,6 +154,10 @@ module Gaku
 
     def includes
       [[contacts: :contact_type, addresses: :country], :guardians]
+    end
+
+    def set_student_config
+      @student_config = StudentConfig.active
     end
 
     def set_class_group

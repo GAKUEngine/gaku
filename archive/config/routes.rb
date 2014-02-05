@@ -10,6 +10,7 @@ Gaku::Core::Engine.routes.draw  do
   resources :teachers, concerns: :soft_delete
   resources :students, concerns: :soft_delete do
     get :search, on: :collection
+    get :clear_search, on: :collection
     get :advanced_search, on: :collection
     get :chosen, on: :collection
     resources :guardians, controller: 'students/guardians', concerns: :soft_delete

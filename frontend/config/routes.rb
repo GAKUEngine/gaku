@@ -58,7 +58,7 @@ Gaku::Core::Engine.routes.draw do
       post :enroll_class_group, on: :collection
     end
 
-    resources :exams do
+    resources :exams, controller: 'courses/exams' do
       resources :exam_portion_scores do
         resources :attendances
       end
@@ -90,6 +90,7 @@ Gaku::Core::Engine.routes.draw do
 
   resources :students, concerns: %i( addresses contacts notes pagination ) do
     get :search, on: :collection
+    get :clear_search, on: :collection
     get :advanced_search, on: :collection
     get :chosen, on: :collection
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
@@ -129,6 +130,8 @@ Gaku::Core::Engine.routes.draw do
       get :students
     end
   end
+
+  get 'realtime/exam_portion_scores', to: 'realtime#exam_portion_scores'
 
 
 end

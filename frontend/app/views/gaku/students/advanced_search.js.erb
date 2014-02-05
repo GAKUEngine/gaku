@@ -38,34 +38,6 @@ function process_search()
   return false;
 }
 
-function get_params()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-
-    for(var i = 0; i < hashes.length; i++)
-        {
-         hash = hashes[i].split('=');
-         vars.push(hash[0]);
-         vars[hash[0]] = hash[1];
-         }
-
-     return vars;
-}
-
-var params = get_params();
-//console.log(params);
-
-$('#q_code_cont').val(params['q%5Bcode_cont%5D']);
-$('#q_surname_cont').val(params['q%5Bsurname_cont%5D']);
-$('#q_name_cont').val(params['q%5Bname_cont%5D']);
-$('#q_birth_date_gteq').val(params['q%5Bbirth_date_gteq%5D']);
-$('#q_birth_date_lteq').val(params['q%5Bbirth_date_lteq%5D']);
-$('#q_age_gteq').val(params['q%5Bage_gteq%5D']);
-$('#q_age_lteq').val(params['q%5Bage_lteq%5D']);
-$('#q_enrollment_status_code_eq').val(params['q%5Benrollment_status_code_eq%5D']);
-
-
 
 $(document).on('change', "#search-students select", function(event) {
   process_search();
@@ -75,10 +47,20 @@ $('.datepicker').datepicker().on('hide', function(e) {
   process_search();
 });
 
-
-
 $('body').on('click', '.hide-advanced-search-table', function(event) {
   event.preventDefault();
   $('#student-advanced-search').hide();
   $('#student-advanced-search-link').show();
 });
+
+
+var q = <%= @prefilled.html_safe %>;
+
+$('#q_code_cont').val(q.code_cont);
+$('#q_surname_cont').val(q.surname_cont);
+$('#q_name_cont').val(q.name_cont);
+$('#q_birth_date_gteq').val(q.birth_date_gteq);
+$('#q_birth_date_lteq').val(q.birth_date_lteq);
+$('#q_age_gteq').val(q.age_gteq);
+$('#q_age_lteq').val(q.age_lteq);
+$('#q_enrollment_status_code_eq').val(q.enrollment_status_code_eq);

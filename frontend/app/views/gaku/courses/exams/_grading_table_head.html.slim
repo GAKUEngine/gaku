@@ -1,0 +1,9 @@
+tr
+  th.btn-primary colspan='3'  =t(:'student.singular')
+  th.btn-success colspan="#{@exam.exam_portions.count + 1}"= @exam.name
+tr
+  th.btn-info style="width:60px" Class
+  th.btn-info style="width:60px" Seat_Number
+  th.btn-info style="width:150px" Name
+  = render partial: 'exam_portion_head', collection: @exam.exam_portions, as: :exam_portion
+  th.btn-inverse Calculations goes here

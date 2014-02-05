@@ -1,0 +1,7 @@
+row
+  .span12
+    table.main-grading.table.table-bordered.table-condensed
+      thead
+        = render 'grading_table_head'
+      tbody
+        = render partial: 'grading_table_student_field', collection: @students, as: :student
