@@ -1,5 +1,5 @@
 module Gaku
-  class GradingMethod
+  class GradingMethodRouter
     attr_reader :methods 
 
     def initialize
