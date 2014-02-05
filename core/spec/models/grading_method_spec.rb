@@ -17,7 +17,7 @@ describe Gaku::GradingMethod do
     it { should validate_presence_of :name }
     it { should validate_uniqueness_of :name }
     it { should validate_presence_of :method }
-    it { should ensure_inclusion_of(:method).in_array(Gaku::GradingMethodRouter.grading_methods.keys.map(&:to_s)) }
+    it { should ensure_inclusion_of(:method).in_array(Gaku::GradingMethod.method_list.keys.map(&:to_s)) }
 
   end
 
