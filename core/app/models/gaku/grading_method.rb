@@ -21,6 +21,12 @@ module Gaku
 
     validates :method, presence: true, inclusion: { in: @@method_list.keys.map(&:to_s) }
 
+    after_initialize do
+      if self.new_record?
+        self.curved = false
+      end
+    end
+
     def self.method_list
       @@method_list
     end
