@@ -18,6 +18,7 @@ describe 'Admin Grading Methods' do
     it 'creates and shows' do
       expect do
         fill_in 'grading_method_name', with: 'Bulgarian'
+        select 'Score', from: 'grading_method_method'
         find('input.dynamicAttributeName').set 'A'
         find('input.dynamicAttributeValue').set 85
         click submit

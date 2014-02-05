@@ -10,6 +10,7 @@ module Gaku
     has_many :grading_method_sets, through: :grading_method_set_items
 
     validates :name, presence: true, uniqueness: true
+    validates :method, presence: true, inclusion: { in: Gaku::GradingMethodRouter.grading_methods.keys.map(&:to_s) }
 
     def to_s
       name
