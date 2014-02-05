@@ -39,6 +39,7 @@ module Gaku
 
 
     before_create :set_scholarship_status
+    before_create :set_foreign_id_code
     after_create  :set_serial_id
     after_save   :set_code
 
@@ -78,6 +79,22 @@ module Gaku
 
     def set_scholarship_status
       self.scholarship_status = ScholarshipStatus.find_by(default: true)
+    end
+
+    def set_foreign_id_code
+      if student_config = StudentConfig.active
+        if student_config.increment_foreign_id_code == true
+          self.foreign_id_code = (student_config.last_foreign_id_code.to_i + 1).to_s
+          student_config.last_foreign_id_code = self.foreign_id_code
+          student_config.save!
+        else
+          if self.foreign_id_code.to_i.is_a? Integer
+            student_config.increment_foreign_id_code = true
+            student_config.last_foreign_id_code = self.foreign_id_code
+            student_config.save!
+          end
+        end
+      end
     end
 
     def active

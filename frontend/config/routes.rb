@@ -58,7 +58,7 @@ Gaku::Core::Engine.routes.draw do
       post :enroll_class_group, on: :collection
     end
 
-    resources :exams do
+    resources :exams, controller: 'courses/exams' do
       resources :exam_portion_scores do
         resources :attendances
       end
@@ -130,6 +130,8 @@ Gaku::Core::Engine.routes.draw do
       get :students
     end
   end
+
+  get 'realtime/exam_portion_scores', to: 'realtime#exam_portion_scores'
 
 
 end
