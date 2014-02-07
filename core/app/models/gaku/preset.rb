@@ -3,7 +3,7 @@ module Gaku
 
     store_accessor :pagination
     store_accessor :person
-    store_accessor :student
+    store_accessor :student, :increment_foreign_id_code, :last_foreign_id_code
     store_accessor :address
     store_accessor :export_formats
 
