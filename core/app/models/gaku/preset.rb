@@ -6,7 +6,15 @@ module Gaku
     store_accessor :student
     store_accessor :address
     store_accessor :export_formats
-    store_accessor :chooser_fields
+
+    store_accessor :chooser_fields,
+                      :show_code,
+                      :show_class_name,
+                      :show_admitted,
+                      :show_primary_address,
+                      :show_primary_contact,
+                      :show_personal_information
+
     store_accessor :grading
 
     def self.default

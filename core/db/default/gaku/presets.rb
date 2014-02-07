@@ -18,16 +18,12 @@ if Gaku::Preset.count.zero?
                         export_formats: { spreadsheets: 'xls', printables: 'pdf', documents: 'xls' },
 
                         chooser_fields: {
-                                          name: 1,
-                                          surname: 1,
-                                          birth_date: 1,
-                                          sex: 1,
-                                          class_name: 1,
-                                          seat_number: 1,
-                                          admitted_on: 1,
-                                          primary_address: 1,
-                                          primary_contact: 1,
-                                          assignments: 1
+                                          show_code: 1,
+                                          show_class_name: 1,
+                                          show_admitted: 1,
+                                          show_primary_address: 1,
+                                          show_primary_contact: 1,
+                                          show_personal_information: 1
                                         }
                       )
 end

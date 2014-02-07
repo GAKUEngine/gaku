@@ -59,7 +59,7 @@ module Gaku
     end
 
     def chooser_fields_attr
-      %i( surname name birth_date sex class_name seat_number admitted_on primary_address primary_contact assignments )
+      %i( show_code show_admitted  show_class_name show_primary_address show_primary_contact show_personal_information )
     end
 
     def set_preset

@@ -5,16 +5,22 @@
 - else
   td.vm-tc = check_box_tag "","", false, class: "student-check student-#{student.id}", id: "student-#{student.id}"
 
-td.code = student.code
+- if show_field?(@preset.show_code)
+  td.code = student.code
+
 = render 'gaku/shared/fields/person_fields', person: student
 
-td.class-name = student.class_and_number
-td.admitted = student.admitted
+- if show_field?(@preset.show_class_name)
+  td.class-name = student.class_and_number
 
-td.assignments
-  - student.addresses_count.times do
-    = address_icon
-  - student.contacts_count.times do
-    = contact_icon
-  - student.guardians_count.times do
-    = guardian_icon
+- if show_field?(@preset.show_admitted)
+  td.admitted = student.admitted
+
+- if show_field?(@preset.show_personal_information)
+  td.personal-information
+    - student.addresses_count.times do
+      = address_icon
+    - student.contacts_count.times do
+      = contact_icon
+    - student.guardians_count.times do
+      = guardian_icon
