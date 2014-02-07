@@ -5,13 +5,10 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    # respond_to :js,   only: %i( new create index destroy recovery )
-    # respond_to :html, only: %i( index edit show show_deleted soft_delete update )
     respond_to :html, :js
     respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
-    #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update destroy )
     before_action :set_preset, only: :index
@@ -43,11 +40,6 @@ module Gaku
 
     def index
       search
-      # @search = Student.active.search(params[:q])
-      # results = @search.result(distinct: true)
-      # @students = results.page(params[:page])
-      # @count = results.count
-
       # respond_with(@students) do |format|
       #   format.pdf do
       #     send_data render_to_string, filename: 'sido_yoroku.pdf',
@@ -157,11 +149,7 @@ module Gaku
     end
 
     def set_preset
-      @preset = Preset.last
-    end
-
-    def set_class_group
-      @class_group_id ||= params[:class_group_id]
+      @preset = Preset.active
     end
 
     def set_enrollment_statuses
