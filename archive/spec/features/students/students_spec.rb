@@ -13,11 +13,7 @@ describe 'Students', type: :feature do
 
 
   context 'existing' do
-    before do
-      student
-      visit gaku.students_path
-    end
-
+    before { student }
 
     it 'deletes', js: true do
       visit gaku.edit_student_path(student)
