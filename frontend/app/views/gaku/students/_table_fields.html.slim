@@ -8,7 +8,11 @@
 - if show_field?(@preset.try(:show_code))
   td.code = student.code
 
-= render 'gaku/shared/fields/person_fields', person: student
+td.surname = student.surname
+td.name = student.name
+td.birth = student.birth_date
+td.gender = gender(student)
+
 
 - if show_field?(@preset.try(:show_class_name))
   td.class-name = student.class_and_number
