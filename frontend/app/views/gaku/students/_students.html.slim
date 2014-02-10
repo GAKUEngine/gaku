@@ -3,7 +3,7 @@
     tr
       = th_icon 'check'
       - if show_field?(@preset.try(:show_code))
-        th.btn-inverse.col-sm-1 = t(:'code')
+        th.code.btn-inverse.col-sm-1 = t(:'code')
 
       - if show_field?(@preset.try(:show_surname))
         th.surname.btn-inverse = t(:'surname')

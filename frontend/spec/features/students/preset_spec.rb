@@ -18,6 +18,16 @@ describe 'Students', type: :feature do
     context 'existing preset' do
 
       context 'enabled' do
+
+        it 'shows code' do
+          create(:preset, chooser_fields: {show_code: '1'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.code')).to eq true
+          expect(page.has_css?('#students-index td.code')).to eq true
+          expect(page.has_text?(student.code)).to eq true
+        end
+
         it 'shows name' do
           create(:preset, chooser_fields: {show_name: '1'})
           visit gaku.students_path
@@ -66,6 +76,16 @@ describe 'Students', type: :feature do
       end
 
       context 'disabled' do
+
+        it "doesn't show code" do
+          create(:preset, chooser_fields: {show_code: '0'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.code')).to eq false
+          expect(page.has_css?('#students-index td.code')).to eq false
+          expect(page.has_text?(student.code)).to eq false
+        end
+
         it "doesn't show name" do
           create(:preset, chooser_fields: {show_name: '0'})
           visit gaku.students_path
@@ -116,6 +136,13 @@ describe 'Students', type: :feature do
 
 
     context 'missing preset' do
+      it "doesn't show code" do
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.code')).to eq false
+        expect(page.has_css?('#students-index td.code')).to eq false
+        expect(page.has_text?(student.code)).to eq false
+      end
+
       it "doesn't show name" do
         visit gaku.students_path
         expect(page.has_css?('#students-index th.name')).to eq false
