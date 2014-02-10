@@ -3,6 +3,26 @@
 
     .row
       .col-md-6
+        = f.label t(:'name')
+        = f.check_box 'chooser_fields[show_name]' , {checked: preset_checked?(:show_name)}
+
+    .row
+      .col-md-6
+        = f.label t(:'surname')
+        = f.check_box 'chooser_fields[show_surname]' , {checked: preset_checked?(:show_surname)}
+
+    .row
+      .col-md-6
+        = f.label t(:'birth_date')
+        = f.check_box 'chooser_fields[show_birth_date]' , {checked: preset_checked?(:show_birth_date)}
+
+    .row
+      .col-md-6
+        = f.label t(:'gender.label')
+        = f.check_box 'chooser_fields[show_gender]' , {checked: preset_checked?(:show_gender)}
+
+    .row
+      .col-md-6
         = f.label t(:'code')
         = f.check_box 'chooser_fields[show_code]' , {checked: preset_checked?(:show_code)}
 

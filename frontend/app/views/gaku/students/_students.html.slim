@@ -5,10 +5,17 @@
       - if show_field?(@preset.try(:show_code))
         th.btn-inverse.col-sm-1 = t(:'code')
 
-      th.btn-inverse = t(:'surname')
-      th.btn-inverse = t(:'name')
-      th.btn-inverse.col-sm-1 = t(:'birth_date')
-      th.btn-inverse.col-sm-1 = t(:'gender.label')
+      - if show_field?(@preset.try(:show_surname))
+        th.btn-inverse = t(:'surname')
+
+      - if show_field?(@preset.try(:show_name))
+        th.btn-inverse = t(:'name')
+
+      - if show_field?(@preset.try(:show_birth_date))
+        th.btn-inverse.col-sm-1 = t(:'birth_date')
+
+      - if show_field?(@preset.try(:show_gender))
+        th.btn-inverse.col-sm-1 = t(:'gender.label')
 
       - if show_field?(@preset.try(:show_class_name))
         th.btn-inverse = t(:'class_group.name')

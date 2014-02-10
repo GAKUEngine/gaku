@@ -8,11 +8,17 @@
 - if show_field?(@preset.try(:show_code))
   td.code = student.code
 
-td.surname = student.surname
-td.name = student.name
-td.birth = student.birth_date
-td.gender = gender(student)
+- if show_field?(@preset.try(:show_surname))
+  td.surname = student.surname
 
+- if show_field?(@preset.try(:show_name))
+  td.name = student.name
+
+- if show_field?(@preset.try(:show_birth_date))
+  td.birth = student.birth_date
+
+- if show_field?(@preset.try(:show_gender))
+  td.gender = gender(student)
 
 - if show_field?(@preset.try(:show_class_name))
   td.class-name = student.class_and_number

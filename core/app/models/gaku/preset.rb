@@ -8,6 +8,10 @@ module Gaku
     store_accessor :export_formats
 
     store_accessor :chooser_fields,
+                      :show_name,
+                      :show_surname,
+                      :show_birth_date,
+                      :show_gender,
                       :show_code,
                       :show_class_name,
                       :show_admitted,
