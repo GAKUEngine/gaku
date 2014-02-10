@@ -9,6 +9,7 @@ module Gaku
 
     store_accessor :chooser_fields,
                       :show_name,
+                      :show_middle_name,
                       :show_surname,
                       :show_birth_date,
                       :show_gender,

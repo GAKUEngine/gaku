@@ -11,6 +11,9 @@
 - if show_field?(@preset.try(:show_surname))
   td.surname = student.surname
 
+- if show_field?(@preset.try(:show_middle_name))
+  td.middle_name = student.middle_name
+
 - if show_field?(@preset.try(:show_name))
   td.name = student.name
 

@@ -8,6 +8,9 @@
       - if show_field?(@preset.try(:show_surname))
         th.surname.btn-inverse = t(:'surname')
 
+      - if show_field?(@preset.try(:show_middle_name))
+        th.middle_name.btn-inverse = t(:'middle_name')
+
       - if show_field?(@preset.try(:show_name))
         th.name.btn-inverse = t(:'name')
 

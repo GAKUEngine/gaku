@@ -60,8 +60,8 @@ module Gaku
 
     def chooser_fields_attr
       %i(
-          show_name show_surname show_birth_date show_gender show_code
-          show_admitted  show_class_name
+          show_name show_middle_name show_surname show_birth_date show_gender
+          show_code show_admitted  show_class_name
           show_primary_address show_primary_contact show_personal_information
         )
     end

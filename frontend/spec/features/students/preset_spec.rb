@@ -5,7 +5,9 @@ describe 'Students', type: :feature do
   before { as :admin }
 
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
-  let(:student) { create(:student, name: 'John', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code) }
+  let(:student) do
+    create(:student, name: 'John',  middle_name: 'Little', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code)
+  end
 
 
   context 'existing' do
@@ -24,6 +26,16 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.name')).to eq true
           expect(page.has_text?(student.name)).to eq true
         end
+
+        it 'shows middle_name' do
+          create(:preset, chooser_fields: {show_middle_name: '1'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.middle_name')).to eq true
+          expect(page.has_css?('#students-index td.middle_name')).to eq true
+          expect(page.has_text?(student.middle_name)).to eq true
+        end
+
 
         it 'shows surname' do
           create(:preset, chooser_fields: {show_surname: '1'})
@@ -63,6 +75,15 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.name)).to eq false
         end
 
+        it "doesn't show middle_name" do
+          create(:preset, chooser_fields: {show_middle_name: '0'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.middle_name')).to eq false
+          expect(page.has_css?('#students-index td.middle_name')).to eq false
+          expect(page.has_text?(student.middle_name)).to eq false
+        end
+
         it "doesn't show surname" do
           create(:preset, chooser_fields: {show_surname: '0'})
           visit gaku.students_path
@@ -100,6 +121,13 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.name')).to eq false
         expect(page.has_css?('#students-index td.name')).to eq false
         expect(page.has_text?(student.name)).to eq false
+      end
+
+      it "doesn't show middle_name" do
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.middle_name')).to eq false
+        expect(page.has_css?('#students-index td.middle_name')).to eq false
+        expect(page.has_text?(student.middle_name)).to eq false
       end
 
       it "doesn't show surname" do

@@ -8,6 +8,11 @@
 
     .row
       .col-md-6
+        = f.label t(:'middle_name')
+        = f.check_box 'chooser_fields[show_middle_name]' , {checked: preset_checked?(:show_middle_name)}
+
+    .row
+      .col-md-6
         = f.label t(:'surname')
         = f.check_box 'chooser_fields[show_surname]' , {checked: preset_checked?(:show_surname)}
 
