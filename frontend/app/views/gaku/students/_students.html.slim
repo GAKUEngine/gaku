@@ -26,6 +26,9 @@
       - if show_field?(@preset.try(:show_admitted))
         th.admitted.btn-inverse.col-sm-1 = t(:'admitted')
 
+      - if show_field?(@preset.try(:show_primary_contact))
+        th.primary_contact.btn-inverse.col-sm-1 = t(:'primary_contact')
+
       - if show_field?(@preset.try(:show_personal_information))
         th.btn-inverse.col-sm-1 = t(:'personal')
 

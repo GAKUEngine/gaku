@@ -84,6 +84,16 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.admitted')).to eq true
           expect(page.has_text?(student.admitted)).to eq true
         end
+
+        it 'shows primary_contact' do
+          create(:contact, contactable: student)
+          create(:preset, chooser_fields: {show_primary_contact: '1'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.primary_contact')).to eq true
+          expect(page.has_css?('#students-index td.primary_contact')).to eq true
+          expect(page.has_text?(student.primary_contact)).to eq true
+        end
       end
 
       context 'disabled' do
@@ -152,6 +162,16 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.admitted')).to eq false
           expect(page.has_text?(student.admitted)).to eq false
         end
+
+        it "doesn't show primary_contact" do
+          create(:contact, contactable: student)
+          create(:preset, chooser_fields: {show_primary_contact: '0'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.primary_contact')).to eq false
+          expect(page.has_css?('#students-index td.primary_contact')).to eq false
+          expect(page.has_text?(student.primary_contact)).to eq false
+        end
       end
 
     end
@@ -207,6 +227,14 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.admitted')).to eq false
         expect(page.has_css?('#students-index td.admitted')).to eq false
         expect(page.has_text?(student.admitted)).to eq false
+      end
+
+      it "doesn't show primary_contact" do
+        create(:contact, contactable: student)
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.primary_contact')).to eq false
+        expect(page.has_css?('#students-index td.primary_contact')).to eq false
+        expect(page.has_text?(student.primary_contact)).to eq false
       end
     end
 
