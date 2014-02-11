@@ -32,6 +32,9 @@
 - if show_field?(@preset.try(:show_primary_contact))
   td.primary_contact = student.primary_contact
 
+- if show_field?(@preset.try(:show_primary_address))
+  td.primary_address = student.primary_address
+
 - if show_field?(@preset.try(:show_personal_information))
   td.personal-information
     - student.addresses_count.times do
