@@ -137,6 +137,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.primary_contact)).to eq true
         end
 
+        it 'shows primary_email' do
+          contact_type = create(:contact_type, name: 'Email')
+          create(:contact, contactable: student, contact_type: contact_type)
+          create(:preset, chooser_fields: {show_primary_email: '1'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.primary_email')).to eq true
+          expect(page.has_css?('#students-index td.primary_email')).to eq true
+          expect(page.has_text?(student.contacts.primary_email)).to eq true
+        end
+
         it 'shows primary_address' do
           create(:address, addressable: student)
           create(:preset, chooser_fields: {show_primary_address: '1'})
@@ -275,6 +286,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.primary_contact)).to eq false
         end
 
+        it "doesn't show primary_email" do
+          contact_type = create(:contact_type, name: 'Email')
+          create(:contact, contactable: student, contact_type: contact_type)
+          create(:preset, chooser_fields: {show_primary_contact: '0'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.primary_email')).to eq false
+          expect(page.has_css?('#students-index td.primary_email')).to eq false
+          expect(page.has_text?(student.contacts.primary_email)).to eq false
+        end
+
         it "doesn't show primary_address" do
           create(:address, addressable: student)
           create(:preset, chooser_fields: {show_primary_address: '0'})
@@ -389,6 +411,15 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.primary_contact')).to eq false
         expect(page.has_css?('#students-index td.primary_contact')).to eq false
         expect(page.has_text?(student.primary_contact)).to eq false
+      end
+
+      it "doesn't show primary_email" do
+        contact_type = create(:contact_type, name: 'Email')
+        create(:contact, contactable: student, contact_type: contact_type)
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.primary_email')).to eq false
+        expect(page.has_css?('#students-index td.primary_email')).to eq false
+        expect(page.has_text?(student.contacts.primary_email)).to eq false
       end
 
       it "doesn't show primary_address" do

@@ -73,6 +73,11 @@
 
     .row
       .col-md-6
+        = f.label t(:'contact.primary_email')
+        = f.check_box 'chooser_fields[show_primary_email]', {checked: preset_checked?(:show_primary_email)}
+
+    .row
+      .col-md-6
         = f.label t(:'personal_information')
         = f.check_box 'chooser_fields[show_personal_information]', {checked: preset_checked?(:show_personal_information)}
 

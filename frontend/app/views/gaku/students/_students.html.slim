@@ -41,6 +41,9 @@
       - if show_field?(@preset.try(:show_primary_contact))
         th.primary_contact.btn-inverse.col-sm-1 = t(:'primary_contact')
 
+      - if show_field?(@preset.try(:show_primary_email))
+        th.primary_email.btn-inverse.col-sm-1 = t(:'primary_email')
+
       - if show_field?(@preset.try(:show_primary_address))
         th.primary_address.btn-inverse.col-sm-1 = t(:'primary_address')
 
