@@ -73,6 +73,17 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.gender')).to eq true
           #expect(page.has_text?(student.gender)).to eq true
         end
+
+        it 'shows admitted' do
+          create(:preset, chooser_fields: {show_admitted: '1'})
+          student.admitted = Time.now
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.admitted')).to eq true
+          expect(page.has_css?('#students-index td.admitted')).to eq true
+          expect(page.has_text?(student.admitted)).to eq true
+        end
       end
 
       context 'disabled' do
@@ -130,6 +141,17 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.gender')).to eq false
           expect(page.has_text?(student.gender)).to eq false
         end
+
+        it "doesn't show admitted" do
+          create(:preset, chooser_fields: {show_admitted: '0'})
+          student.admitted = Time.now
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.admitted')).to eq false
+          expect(page.has_css?('#students-index td.admitted')).to eq false
+          expect(page.has_text?(student.admitted)).to eq false
+        end
       end
 
     end
@@ -176,6 +198,15 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.gender')).to eq false
         expect(page.has_css?('#students-index td.gender')).to eq false
         expect(page.has_text?(student.gender)).to eq false
+      end
+
+      it "doesn't show admitted" do
+        student.admitted = Time.now
+        student.save
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.admitted')).to eq false
+        expect(page.has_css?('#students-index td.admitted')).to eq false
+        expect(page.has_text?(student.admitted)).to eq false
       end
     end
 
