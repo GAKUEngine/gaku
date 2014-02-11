@@ -8,6 +8,9 @@
 - if show_field?(@preset.try(:show_code))
   td.code = student.code
 
+- if show_field?(@preset.try(:show_enrollment_status))
+  td.enrollment_status = student.enrollment_status
+
 - if show_field?(@preset.try(:show_surname))
   td.surname = student.surname
 

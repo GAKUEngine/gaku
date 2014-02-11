@@ -5,6 +5,9 @@
       - if show_field?(@preset.try(:show_code))
         th.code.btn-inverse.col-sm-1 = t(:'code')
 
+      - if show_field?(@preset.try(:show_enrollment_status))
+        th.enrollment_status.btn-inverse.col-sm-1 = t(:'enrollment_status.singular')
+
       - if show_field?(@preset.try(:show_surname))
         th.surname.btn-inverse = t(:'surname')
 

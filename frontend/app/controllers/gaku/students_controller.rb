@@ -81,9 +81,9 @@ module Gaku
 
       if session[:q]
         if session[:q][:graduated_gteq]  || session[:q][:graduated_lteq] || session[:q][:admitted_gteq] || session[:q][:admitted_lteq]
-          @search = Student.search(session[:q])
+          @search = Student.includes(:enrollment_status).search(session[:q])
         else
-          @search = Student.active.search(session[:q])
+          @search = Student.includes(:enrollment_status).active.search(session[:q])
         end
 
         if session[:q][:birth_date_gteq]  || session[:q][:birth_date_lteq] || session[:q][:age_gteq] ||session[:q][:age_lteq]
@@ -93,7 +93,7 @@ module Gaku
         end
 
       else
-        @search = Student.active.search(session[:q])
+        @search = Student.includes(:enrollment_status).active.search(session[:q])
       end
 
       results = @search.result(distinct: true)

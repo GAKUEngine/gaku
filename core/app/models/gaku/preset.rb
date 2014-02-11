@@ -14,6 +14,7 @@ module Gaku
                       :show_birth_date,
                       :show_gender,
                       :show_code,
+                      :show_enrollment_status,
                       :show_class_name,
                       :show_admitted,
                       :show_graduated,
