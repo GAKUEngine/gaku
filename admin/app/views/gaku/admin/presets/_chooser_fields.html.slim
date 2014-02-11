@@ -43,6 +43,11 @@
 
     .row
       .col-md-6
+        = f.label t(:'graduated')
+        = f.check_box 'chooser_fields[show_graduated]', {checked: preset_checked?(:show_graduated)}
+
+    .row
+      .col-md-6
         = f.label t(:'address.primary')
         = f.check_box 'chooser_fields[show_primary_address]', {checked: preset_checked?(:show_primary_address)}
 

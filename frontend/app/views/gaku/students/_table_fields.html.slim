@@ -29,6 +29,9 @@
 - if show_field?(@preset.try(:show_admitted))
   td.admitted = student.admitted
 
+- if show_field?(@preset.try(:show_graduated))
+  td.graduated = student.graduated
+
 - if show_field?(@preset.try(:show_primary_contact))
   td.primary_contact = student.primary_contact
 

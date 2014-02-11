@@ -16,6 +16,7 @@ module Gaku
                       :show_code,
                       :show_class_name,
                       :show_admitted,
+                      :show_graduated,
                       :show_primary_address,
                       :show_primary_contact,
                       :show_personal_information
