@@ -104,6 +104,14 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.primary_address')).to eq true
           expect(page.has_text?(student.primary_address)).to eq true
         end
+
+        it 'shows personal_information' do
+          create(:preset, chooser_fields: {show_personal_information: '1'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.personal_information')).to eq true
+          expect(page.has_css?('#students-index td.personal_information')).to eq true
+        end
       end
 
       context 'disabled' do
@@ -192,6 +200,14 @@ describe 'Students', type: :feature do
           expect(page.has_css?('#students-index td.primary_address')).to eq false
           expect(page.has_text?(student.primary_address)).to eq false
         end
+
+        it "doesn't show personal_information" do
+          create(:preset, chooser_fields: {show_personal_information: '0'})
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.personal_information')).to eq false
+          expect(page.has_css?('#students-index td.personal_information')).to eq false
+        end
       end
 
     end
@@ -257,13 +273,18 @@ describe 'Students', type: :feature do
         expect(page.has_text?(student.primary_contact)).to eq false
       end
 
-
       it "doesn't show primary_address" do
         create(:address, addressable: student)
         visit gaku.students_path
         expect(page.has_css?('#students-index th.primary_address')).to eq false
         expect(page.has_css?('#students-index td.primary_address')).to eq false
         expect(page.has_text?(student.primary_address)).to eq false
+      end
+
+      it "doesn't show personal_information" do
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.personal_information')).to eq false
+        expect(page.has_css?('#students-index td.personal_information')).to eq false
       end
     end
 

@@ -36,7 +36,7 @@
   td.primary_address = student.primary_address
 
 - if show_field?(@preset.try(:show_personal_information))
-  td.personal-information
+  td.personal_information
     - student.addresses_count.times do
       = address_icon
     - student.contacts_count.times do
