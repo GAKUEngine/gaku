@@ -28,6 +28,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.code)).to eq true
         end
 
+        it 'shows foreign_id_code' do
+          create(:preset, chooser_fields: {show_foreign_id_code: '1'})
+          student.foreign_id_code = '33'
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.foreign_id_code')).to eq true
+          expect(page.has_css?('#students-index td.foreign_id_code')).to eq true
+          expect(page.has_text?(student.foreign_id_code)).to eq true
+        end
+
         it 'shows enrollment_status' do
           create(:preset, chooser_fields: {show_enrollment_status: '1'})
           visit gaku.students_path
@@ -156,6 +167,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.code)).to eq false
         end
 
+        it "doesn't show foreign_id_code" do
+          create(:preset, chooser_fields: {show_foreign_id_code: '0'})
+          student.foreign_id_code = '33'
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.foreign_id_code')).to eq false
+          expect(page.has_css?('#students-index td.foreign_id_code')).to eq false
+          expect(page.has_text?(student.foreign_id_code)).to eq false
+        end
+
         it "doesn't show enrollment_status" do
           create(:preset, chooser_fields: {show_enrollment_status: '0'})
           visit gaku.students_path
@@ -281,6 +303,15 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.code')).to eq false
         expect(page.has_css?('#students-index td.code')).to eq false
         expect(page.has_text?(student.code)).to eq false
+      end
+
+      it "doesn't show foreign_id_code" do
+        student.foreign_id_code = '33'
+        student.save
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.foreign_id_code')).to eq false
+        expect(page.has_css?('#students-index td.foreign_id_code')).to eq false
+        expect(page.has_text?(student.foreign_id_code)).to eq false
       end
 
       it "doesn't show enrollment_status" do

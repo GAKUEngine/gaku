@@ -15,6 +15,7 @@ module Gaku
                       :show_gender,
                       :show_user,
                       :show_code,
+                      :show_foreign_id_code,
                       :show_enrollment_status,
                       :show_class_name,
                       :show_admitted,

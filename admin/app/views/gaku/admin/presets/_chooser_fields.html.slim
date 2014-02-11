@@ -31,11 +31,15 @@
         = f.label t(:'user.singular')
         = f.check_box 'chooser_fields[show_user]' , {checked: preset_checked?(:show_user)}
 
-
     .row
       .col-md-6
         = f.label t(:'code')
         = f.check_box 'chooser_fields[show_code]' , {checked: preset_checked?(:show_code)}
+
+    .row
+      .col-md-6
+        = f.label t(:'student.foreign_id_code')
+        = f.check_box 'chooser_fields[show_foreign_id_code]' , {checked: preset_checked?(:show_foreign_id_code)}
 
     .row
       .col-md-6
