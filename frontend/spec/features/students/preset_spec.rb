@@ -37,6 +37,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.enrollment_status)).to eq true
         end
 
+        it 'shows user' do
+          create(:preset, chooser_fields: {show_user: '1'})
+          student.user = create(:user)
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.user')).to eq true
+          expect(page.has_css?('#students-index td.user')).to eq true
+          expect(page.has_text?(student.user)).to eq true
+        end
+
         it 'shows name' do
           create(:preset, chooser_fields: {show_name: '1'})
           visit gaku.students_path
@@ -154,6 +165,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.enrollment_status)).to eq false
         end
 
+        it "doesn't show surname" do
+          create(:preset, chooser_fields: {show_user: '0'})
+          student.user = create(:user)
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.user')).to eq false
+          expect(page.has_css?('#students-index td.user')).to eq false
+          expect(page.has_text?(student.user)).to eq false
+        end
+
         it "doesn't show name" do
           create(:preset, chooser_fields: {show_name: '0'})
           visit gaku.students_path
@@ -266,6 +288,15 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.enrollment_status')).to eq false
         expect(page.has_css?('#students-index td.enrollment_status')).to eq false
         expect(page.has_text?(student.enrollment_status)).to eq false
+      end
+
+      it "doesn't show user" do
+        student.user = create(:user)
+        student.save
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.user')).to eq false
+        expect(page.has_css?('#students-index td.user')).to eq false
+        expect(page.has_text?(student.user)).to eq false
       end
 
       it "doesn't show name" do

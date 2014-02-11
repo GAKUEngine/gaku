@@ -13,6 +13,7 @@ module Gaku
                       :show_surname,
                       :show_birth_date,
                       :show_gender,
+                      :show_user,
                       :show_code,
                       :show_enrollment_status,
                       :show_class_name,
