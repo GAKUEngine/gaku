@@ -85,6 +85,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.admitted)).to eq true
         end
 
+        it 'shows graduated' do
+          create(:preset, chooser_fields: {show_graduated: '1'})
+          student.graduated = Time.now
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.graduated')).to eq true
+          expect(page.has_css?('#students-index td.graduated')).to eq true
+          expect(page.has_text?(student.graduated)).to eq true
+        end
+
         it 'shows primary_contact' do
           create(:contact, contactable: student)
           create(:preset, chooser_fields: {show_primary_contact: '1'})
@@ -181,6 +192,17 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.admitted)).to eq false
         end
 
+        it "doesn't show graduated" do
+          create(:preset, chooser_fields: {show_graduated: '0'})
+          student.graduated = Time.now
+          student.save
+          visit gaku.students_path
+
+          expect(page.has_css?('#students-index th.graduated')).to eq false
+          expect(page.has_css?('#students-index td.graduated')).to eq false
+          expect(page.has_text?(student.graduated)).to eq false
+        end
+
         it "doesn't show primary_contact" do
           create(:contact, contactable: student)
           create(:preset, chooser_fields: {show_primary_contact: '0'})
@@ -263,6 +285,15 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index th.admitted')).to eq false
         expect(page.has_css?('#students-index td.admitted')).to eq false
         expect(page.has_text?(student.admitted)).to eq false
+      end
+
+      it "doesn't show graduated" do
+        student.graduated = Time.now
+        student.save
+        visit gaku.students_path
+        expect(page.has_css?('#students-index th.graduated')).to eq false
+        expect(page.has_css?('#students-index td.graduated')).to eq false
+        expect(page.has_text?(student.graduated)).to eq false
       end
 
       it "doesn't show primary_contact" do
