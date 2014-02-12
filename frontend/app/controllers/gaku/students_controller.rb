@@ -11,7 +11,7 @@ module Gaku
     before_action :load_data,             only: %i( new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update destroy )
-    before_action :set_preset, only: :index
+    before_action :set_preset, only: %i( search advanced_search index )
 
     def new
       @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
