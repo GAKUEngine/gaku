@@ -32,6 +32,9 @@
       - if show_field?(@preset.try(:show_class_name))
         th.btn-inverse = t(:'class_group.name')
 
+      - if show_field?(@preset.try(:show_specialty))
+        th.major_specialty.btn-inverse = t(:'specialty.singular')
+
       - if show_field?(@preset.try(:show_admitted))
         th.admitted.btn-inverse.col-sm-1 = t(:'admitted')
 

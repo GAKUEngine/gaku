@@ -51,6 +51,12 @@
         = f.label t(:'class_group.name')
         = f.check_box 'chooser_fields[show_class_name]', {checked: preset_checked?(:show_class_name)}
 
+
+    .row
+      .col-md-6
+        = f.label t(:'specialty.singular')
+        = f.check_box 'chooser_fields[show_specialty]', {checked: preset_checked?(:show_specialty)}
+
     .row
       .col-md-6
         = f.label t(:'admitted')

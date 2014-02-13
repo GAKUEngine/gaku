@@ -35,6 +35,9 @@
 - if show_field?(@preset.try(:show_class_name))
   td.class-name = student.class_and_number
 
+- if show_field?(@preset.try(:show_specialty))
+  td.major_specialty = student.major_specialty
+
 - if show_field?(@preset.try(:show_admitted))
   td.admitted = student.admitted
 

@@ -62,7 +62,7 @@ module Gaku
       %i(
           show_name show_middle_name show_surname show_birth_date show_gender
           show_user show_code show_foreign_id_code show_enrollment_status
-          show_admitted show_graduated show_class_name
+          show_admitted show_graduated show_class_name show_specialty
           show_primary_address show_primary_contact show_primary_email show_personal_information
         )
     end

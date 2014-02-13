@@ -18,6 +18,7 @@ module Gaku
                       :show_foreign_id_code,
                       :show_enrollment_status,
                       :show_class_name,
+                      :show_specialty,
                       :show_admitted,
                       :show_graduated,
                       :show_primary_address,
