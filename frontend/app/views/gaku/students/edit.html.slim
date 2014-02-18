@@ -25,6 +25,8 @@ hr
           .col-md-9
             = render 'tabs_academic'
 
+ul#students-collection
+
 = footer do
   .col-md-6
     = link_to_index students_path
@@ -35,3 +37,5 @@ hr
   .delete_modal
     = render 'gaku/shared/delete_modal', target: student
 
+javascript:
+  var students_path = "#{students_path}"

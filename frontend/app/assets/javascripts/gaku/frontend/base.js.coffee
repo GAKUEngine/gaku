@@ -98,28 +98,56 @@ class App
       window.load_states()
 
 
+
   student_chooser: ->
+    if localStorage['students']
+      students = JSON.parse(localStorage['students'])
+
+      console.log(students)
+
+      if students.length != 0
+        students.map (student) ->
+          #console.log(student['id'])
+          $("input#student-#{student['id']}").attr('checked', true)
+          $('#students-checked').append("<tr class=#{student['id']}><td>#{student['name']}</td></tr>")
+          #$('#students-checked').append("<li class=#{student['id']}>#{student['name']}</li>")
+
+        $('#students-checked-div').slideDown()
+        chosen_trs = $('#chosen-table').find('tbody tr')
+        $('.chosen-count').html("(#{chosen_trs.length})")
+    else
+      students = localStorage['students'] = []
+
+
+
+
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       thisId = $(this).closest('tr').attr('id')
 
+
       if thisCheck.is (':checked')
         surname = $(this).closest('tr').find('td.surname').text()
         name = $(this).closest('tr').find('td.name').text()
-        $('#students-checked').append("<tr class=" + thisId + "><td>" + surname + "</td><td>" + name + "</td></tr>")
+        $('#students-checked').append("<tr class=#{thisId}><td>#{surname}</td><td>#{name}</td></tr>")
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
+
+        parsed_id = thisId.split('student-')
+        students.push({id : parsed_id[1], name: "#{surname} #{name}" })
+        localStorage["students"] = JSON.stringify(students)
+
         $('#students-checked-div').slideDown()
         chosen_trs = $('#chosen-table').find('tbody tr')
-        $('.chosen-count').html('(' + chosen_trs.length + ')')
+        $('.chosen-count').html("(#{chosen_trs.length})")
       else
-        $('#students-checked tr.' + thisId).remove()
-        $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find('input.' + thisId).remove()
+        $("#students-checked tr.#{thisId}").remove()
+        $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find("input.#{thisId}").remove()
 
         if $('#students-checked tr').length == 0
           $('#students-checked-div').slide()
         else
           chosen_trs = $('#chosen-table').find('tbody tr')
-          $('.chosen-count').html('(' + chosen_trs.length + ')')
+          $('.chosen-count').html("(#{chosen_trs.length})")
 
 
 ready = ->
