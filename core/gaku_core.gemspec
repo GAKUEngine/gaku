@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'rails',                          '~> 4.0.3'
-  s.add_dependency 'rails-i18n',                     '~> 4.0.0'
+  s.add_dependency 'rails-i18n',                     '~> 4.0.1'
 
   s.add_dependency 'pg',                             '0.16'
 
