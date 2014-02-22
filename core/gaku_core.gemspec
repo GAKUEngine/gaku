@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails',                          '~> 4.0.3'
   s.add_dependency 'rails-i18n',                     '~> 4.0.1'
 
-  s.add_dependency 'pg',                             '0.16'
+  s.add_dependency 'pg',                             '0.17.1'
 
   s.add_dependency 'globalize',                      '~> 4.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
