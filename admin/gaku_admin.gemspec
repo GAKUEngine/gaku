@@ -38,8 +38,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'nested_form'
 
-  s.add_dependency 'jquery-rails',                   '~> 3'
-  s.add_dependency 'jquery-ui-rails',                '~> 4'
+  s.add_dependency 'jquery-rails',                   '~> 3.1'
+  s.add_dependency 'jquery-ui-rails',                '~> 4.2'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
   s.add_dependency 'bootstrap-sass',                 '~> 3.0.2.1'
   s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
