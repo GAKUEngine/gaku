@@ -24,6 +24,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'gaku_admin', version
   s.add_dependency 'gaku_frontend', version
 
-  s.add_dependency 'paper_trail',                    '3.0.0.beta1'
+  s.add_dependency 'paper_trail',                    '3.0.0'
 
 end
