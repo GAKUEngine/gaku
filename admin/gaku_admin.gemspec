@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.3.0.1'
   s.add_dependency 'nprogress-rails'
-  s.add_dependency 'underscore-rails',               '~> 1.5'
-  s.add_dependency 'momentjs-rails',                 '~> 2.2'
+  s.add_dependency 'underscore-rails',               '~> 1.5.2'
+  s.add_dependency 'momentjs-rails',                 '~> 2.5.1'
 
 end
