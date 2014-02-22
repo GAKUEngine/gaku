@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'pg',                             '0.16'
 
-  s.add_dependency 'globalize',                      '~> 4.0.0.alpha.1'
+  s.add_dependency 'globalize',                      '~> 4.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
   s.add_dependency 'ransack',                        '~> 1.0'
   s.add_dependency 'kaminari',                       '~> 0.14'
