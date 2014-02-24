@@ -6,7 +6,6 @@ module Gaku
     helper_method :sort_column, :sort_direction
 
     respond_to :html, :js
-    respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
     before_action :set_selected_students, only: %i( create index )
@@ -40,13 +39,6 @@ module Gaku
 
     def index
       search
-      # respond_with(@students) do |format|
-      #   format.pdf do
-      #     send_data render_to_string, filename: 'sido_yoroku.pdf',
-      #                                 type: 'application/pdf',
-      #                                 disposition: 'attachment'
-      #   end
-      # end
     end
 
     def chosen
@@ -103,19 +95,12 @@ module Gaku
       render :index, layout: 'gaku/layouts/index'
     end
 
-
     def edit
       respond_with @student
     end
 
     def show
-      respond_with @student do |format|
-        format.pdf do
-          send_data render_to_string, filename: "student-#{@student.id}.pdf",
-                                      type: 'application/pdf',
-                                      disposition: 'inline'
-        end
-      end
+      respond_with @student
     end
 
     def destroy
