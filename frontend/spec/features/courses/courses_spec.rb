@@ -14,6 +14,8 @@ describe 'Courses' do
     create(:course, :with_semesters, syllabus: syllabus)
   end
 
+  let(:grading_method_set) {create(:grading_method_set, :with_grading_methods )}
+
   context 'new', js: true do
     before do
       syllabus
@@ -36,6 +38,37 @@ describe 'Courses' do
     end
 
     it { has_validations? }
+  end
+
+  context 'new with primary grading method set', js: true do
+    before do
+      grading_method_set
+      syllabus
+      visit gaku.courses_path
+      click new_link
+    end
+
+    it 'create and show' do
+      expect do
+        fill_in 'course_code', with: 'SUMMER2012'
+        select "#{syllabus.name}", from: 'course_syllabus_id'
+        click submit
+        flash_created?
+        within('#courses-without-semester-index') do
+          page.should have_content(syllabus.name)
+        end
+      end.to change(Gaku::Course, :count).by(1)
+
+      has_content? 'SUMMER2012'
+
+      click edit_link
+      click '#course-grading-method-connectors-tab-link'
+      within('#course-grading-method-connectors') do
+        has_content? grading_method_set.grading_methods.first
+        has_content? grading_method_set.grading_methods.second
+      end
+
+    end
   end
 
   context 'existing course' do
