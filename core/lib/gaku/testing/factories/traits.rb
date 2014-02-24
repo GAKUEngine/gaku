@@ -73,4 +73,21 @@ FactoryGirl.define do
     end
   end
 
+  trait :with_grading_method do
+    after(:create) do |resource|
+      resource.grading_methods << create(:grading_method)
+    end
+  end
+
+  trait :with_grading_methods do
+    after(:create) do |resource|
+      2.times do
+        resource.grading_methods << create(:grading_method)
+      end
+    end
+  end
+
+
+
+
 end
