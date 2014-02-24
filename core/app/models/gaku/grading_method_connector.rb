@@ -22,7 +22,7 @@ module Gaku
     private
 
     def proper_position
-      self.position = gradable.grading_method_connectors.count
+      self.position = gradable.grading_method_connectors.count if gradable
     end
 
     def refresh_positions
