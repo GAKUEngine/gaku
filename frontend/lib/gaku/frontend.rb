@@ -30,5 +30,4 @@ module Gaku
 
 end
 
-require 'gaku/frontend/version'
 require 'gaku/frontend/engine'
