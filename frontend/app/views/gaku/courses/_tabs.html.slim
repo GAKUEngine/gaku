@@ -14,6 +14,9 @@
       li
         a#course-notes-tab-link data-toggle="tab" href="#course-notes"
           = print_count @course.notes_count, t(:'note.plural')
+      li
+        a#course-grading-method-connectors-tab-link data-toggle="tab" href="#course-grading-method-connectors"
+          = print_count @course.grading_method_connectors.count, t(:'grading_method.plural')
 
     .tab-content
       #course-enrollments.tab-pane.active
@@ -24,3 +27,5 @@
         = render "gaku/courses/exams/exams"
       #course-notes.tab-pane
         = render 'gaku/notes/notes'
+      #course-grading-method-connectors.tab-pane
+        = render 'gaku/grading_method_connectors/grading_method_connectors'
