@@ -17,6 +17,10 @@ Gaku::Core::Engine.routes.draw do
     resources :notes
   end
 
+  concern :gradable do
+    resources :grading_method_connectors, only: %i( new create destroy ), concerns: %i( sort )
+  end
+
   concern(:primary)         { patch :make_primary, on: :member }
   concern(:show_deleted)    { get :show_deleted, on: :member }
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
@@ -52,7 +56,7 @@ Gaku::Core::Engine.routes.draw do
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser ) do
+  resources :courses, concerns: %i( notes student_chooser gradable ) do
     resources :semester_courses, controller: 'courses/semester_courses'
     resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
       post :enroll_class_group, on: :collection
@@ -110,7 +114,7 @@ Gaku::Core::Engine.routes.draw do
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes pagination ) do
+  resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member
 
     resources :exam_scores
