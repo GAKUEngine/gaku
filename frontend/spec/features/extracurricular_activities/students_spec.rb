@@ -9,6 +9,7 @@ describe 'ExtracurricularActivity Students' do
 
   before { as :admin }
 
+  let!(:preset) { create(:preset, chooser_fields: { show_name: '1' }) }
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }

@@ -5,16 +5,59 @@
 - else
   td.vm-tc = check_box_tag "","", false, class: "student-check student-#{student.id}", id: "student-#{student.id}"
 
-td.code = student.code
-= render 'gaku/shared/fields/person_fields', person: student
+- if show_field?(@preset.try(:show_code))
+  td.code = student.code
 
-td.class-name = student.class_and_number
-td.admitted = student.admitted
+- if show_field?(@preset.try(:show_foreign_id_code))
+  td.foreign_id_code = student.foreign_id_code
 
-td.assignments
-  - student.addresses_count.times do
-    = address_icon
-  - student.contacts_count.times do
-    = contact_icon
-  - student.guardians_count.times do
-    = guardian_icon
+- if show_field?(@preset.try(:show_enrollment_status))
+  td.enrollment_status = student.enrollment_status
+
+- if show_field?(@preset.try(:show_user))
+  td.user = student.user
+
+- if show_field?(@preset.try(:show_surname))
+  td.surname = student.surname
+
+- if show_field?(@preset.try(:show_middle_name))
+  td.middle_name = student.middle_name
+
+- if show_field?(@preset.try(:show_name))
+  td.name = student.name
+
+- if show_field?(@preset.try(:show_birth_date))
+  td.birth_date = student.birth_date
+
+- if show_field?(@preset.try(:show_gender))
+  td.gender = gender(student)
+
+- if show_field?(@preset.try(:show_class_name))
+  td.class-name = student.class_and_number
+
+- if show_field?(@preset.try(:show_specialty))
+  td.major_specialty = student.major_specialty
+
+- if show_field?(@preset.try(:show_admitted))
+  td.admitted = student.admitted
+
+- if show_field?(@preset.try(:show_graduated))
+  td.graduated = student.graduated
+
+- if show_field?(@preset.try(:show_primary_contact))
+  td.primary_contact = student.primary_contact
+
+- if show_field?(@preset.try(:show_primary_email))
+  td.primary_email = student.contacts.primary_email
+
+- if show_field?(@preset.try(:show_primary_address))
+  td.primary_address = student.primary_address
+
+- if show_field?(@preset.try(:show_personal_information))
+  td.personal_information
+    - student.addresses_count.times do
+      = address_icon
+    - student.contacts_count.times do
+      = contact_icon
+    - student.guardians_count.times do
+      = guardian_icon

@@ -7,5 +7,4 @@ module Gaku
 
 end
 
-require 'gaku/testing/version'
 require 'gaku/testing/engine'

@@ -21,7 +21,6 @@ require 'phantom_forms'
 require 'phantom_nested_forms'
 require 'select2-rails'
 
-require 'thinreports-rails'
 require 'gaku/core'
 
 module Gaku
@@ -31,5 +30,4 @@ module Gaku
 
 end
 
-require 'gaku/frontend/version'
 require 'gaku/frontend/engine'

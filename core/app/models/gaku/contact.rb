@@ -12,6 +12,14 @@ module Gaku
 
     delegate :name, to: :contact_type, allow_nil: true
 
+    def to_s
+      data
+    end
+
+    def self.primary_email
+      where(primary: true, contact_type: Gaku::ContactType.where(name: 'Email').first).first
+    end
+
     def self.students
       where(contactable_type: Gaku::Student)
     end

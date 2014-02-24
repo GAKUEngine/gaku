@@ -223,6 +223,7 @@ en:
     new: New Contact
     plural: Contacts
     primary: Primary Contact
+    primary_email: Primary Email
     save: Save Contact
     singular: Contact
   contact_type:

@@ -24,6 +24,11 @@ module Gaku
     end
 
 
+    def show_field?(field)
+      ActiveRecord::ConnectionAdapters::Column.value_to_boolean(field.to_i)
+    end
+
+
     def prepare_resource_name(nested_resources, resource)
       @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
     end
