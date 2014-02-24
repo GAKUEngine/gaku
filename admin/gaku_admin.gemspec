@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku_admin'
   s.version      = version
-  s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
-  s.description  = "It allows for full student management, grading etc. It's basically what all student grading tools are with some unique features"
+  s.summary      = 'Admin engine for GAKU'
+  s.description  = "It allows basic admin functionality"
   s.required_ruby_version = '~> 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']
@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'gaku_core', version
   s.add_dependency 'gaku_testing', version
-
 
   s.add_dependency 'coffee-rails',                   '~> 4.0.1'
   s.add_dependency 'sass-rails',                     '~> 4.0.1'
@@ -47,5 +46,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'nprogress-rails'
   s.add_dependency 'underscore-rails',               '~> 1.5.2'
   s.add_dependency 'momentjs-rails',                 '~> 2.5.1'
-
 end
