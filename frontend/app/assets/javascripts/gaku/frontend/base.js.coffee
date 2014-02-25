@@ -59,6 +59,11 @@ class App
       e.preventDefault()
       $('#delete-modal').modal('show')
 
+    # sorting helper fixixing table row width when drag
+    fixHelper = (e, ui) ->
+      ui.children().each ->
+        $(@).width $(@).width()
+      ui
 
     $('.sortable').sortable
       handle: '.sort-handler'
@@ -67,11 +72,6 @@ class App
       update: ->
         $.post $(@).data('sort-url'), $(@).sortable('serialize')
 
-    # sorting
-    fixHelper = (e, ui) ->
-      ui.children().each ->
-        $(@).width $(@).width()
-      ui
 
   edit: ->
     @upload_picture()

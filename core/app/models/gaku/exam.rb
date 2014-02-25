@@ -1,7 +1,7 @@
 module Gaku
   class Exam < ActiveRecord::Base
 
-    include Notes, Pagination
+    include Notes, Pagination, Gradable
 
     has_many :exam_scores
     has_many :exam_portions, -> { order :position }
@@ -96,8 +96,6 @@ module Gaku
 
       state
     end
-
-    private
 
     def check_record_completion?(student_eps)
       student_eps.score.nil? && !student_eps.attendances

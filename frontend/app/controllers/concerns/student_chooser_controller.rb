@@ -3,6 +3,7 @@ module StudentChooserController
   include Gaku::ClassNameDetector
 
   def student_chooser
+    set_preset
     set_students
 
     set_collection
@@ -12,6 +13,10 @@ module StudentChooserController
   end
 
   private
+
+  def set_preset
+    @preset = Gaku::Preset.active
+  end
 
   def set_students
     @search = Gaku::Student.active.search(params[:q])

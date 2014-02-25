@@ -1,0 +1,8 @@
+$('#<%= @gradable_resource %>-grading-method-connectors-index tbody').append('<%= j render "grading_method_connector", {grading_method_connector: @grading_method_connector} %>');
+
+$('.<%= @gradable_resource %>-grading-method-connectors-count').html("<%= print_count(@count, t(:'grading_method.list')) %>");
+$('#<%= @gradable_resource %>-grading-method-connectors-tab-link').html("<%= print_count(@count, t(:'grading_method.list')) %>");
+
+showNotice("<%= render_flash %>");
+$('#new-<%= @gradable_resource %>-grading-method-connector').slide()
+$('#new-<%= @gradable_resource %>-grading-method-connector-link').show()

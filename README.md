@@ -72,19 +72,19 @@ You have 2 choices:
 
 ### Simple
 
-Get [gaku\_base\_app](http://github.com/kalkov/gaku_base_app) and follow the instructions.
+Get [gaku\_dev\_app](http://github.com/Genshin/gaku_dev_app) and follow the instructions.
 
 ### Custom
 
 Create a new Rails application:
 
-    $ gem install rails -v 4.0.0
-    $ rails _4.0.0_ new my_app
+    $ gem install rails -v 4.0.3
+    $ rails new my_app
 
 
 Then add GAKU to your Gemfile:
 ```ruby
-gem 'gaku', '~> 0.0.3'
+gem 'gaku', '~> 0.1.1'
 ```
 
 Or use the master branch:

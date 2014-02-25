@@ -24,12 +24,29 @@ module Gaku
     end
 
 
+    def show_field?(field)
+      ActiveRecord::ConnectionAdapters::Column.value_to_boolean(field.to_i)
+    end
+
+
     def prepare_resource_name(nested_resources, resource)
       @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
     end
 
     def extract_grouped(grouped, resource)
       grouped.map(&resource.to_sym)
+    end
+
+    def sort_handler
+      content_tag :td, class: 'sort-handler' do
+        content_tag :i, nil, class: 'glyphicon glyphicon-move'
+      end
+    end
+
+    def sortable_tbody(path, &block)
+      content_tag(:tbody, class: 'sortable', data: { 'sort-url' => url_for(path) }) do
+        block.call
+      end
     end
 
 

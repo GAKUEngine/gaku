@@ -5,16 +5,12 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    # respond_to :js,   only: %i( new create index destroy recovery )
-    # respond_to :html, only: %i( index edit show show_deleted soft_delete update )
     respond_to :html, :js
-    respond_to :pdf,  only: %i( index show )
 
     before_action :load_data,             only: %i( new edit )
-    #before_action :set_class_group,       only: %i( index new edit )
     before_action :set_selected_students, only: %i( create index )
     before_action :set_student,           only: %i( show edit update destroy )
-    before_action :set_student_config
+    before_action :set_preset, only: %i( search advanced_search index )
 
     def new
       @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
@@ -43,18 +39,6 @@ module Gaku
 
     def index
       search
-      # @search = Student.active.search(params[:q])
-      # results = @search.result(distinct: true)
-      # @students = results.page(params[:page])
-      # @count = results.count
-
-      # respond_with(@students) do |format|
-      #   format.pdf do
-      #     send_data render_to_string, filename: 'sido_yoroku.pdf',
-      #                                 type: 'application/pdf',
-      #                                 disposition: 'attachment'
-      #   end
-      # end
     end
 
     def chosen
@@ -89,9 +73,9 @@ module Gaku
 
       if session[:q]
         if session[:q][:graduated_gteq]  || session[:q][:graduated_lteq] || session[:q][:admitted_gteq] || session[:q][:admitted_lteq]
-          @search = Student.search(session[:q])
+          @search = Student.includes(index_includes).search(session[:q])
         else
-          @search = Student.active.search(session[:q])
+          @search = Student.includes(index_includes).active.search(session[:q])
         end
 
         if session[:q][:birth_date_gteq]  || session[:q][:birth_date_lteq] || session[:q][:age_gteq] ||session[:q][:age_lteq]
@@ -101,7 +85,7 @@ module Gaku
         end
 
       else
-        @search = Student.active.search(session[:q])
+        @search = Student.includes(index_includes).active.search(session[:q])
       end
 
       results = @search.result(distinct: true)
@@ -111,19 +95,12 @@ module Gaku
       render :index, layout: 'gaku/layouts/index'
     end
 
-
     def edit
       respond_with @student
     end
 
     def show
-      respond_with @student do |format|
-        format.pdf do
-          send_data render_to_string, filename: "student-#{@student.id}.pdf",
-                                      type: 'application/pdf',
-                                      disposition: 'inline'
-        end
-      end
+      respond_with @student
     end
 
     def destroy
@@ -156,12 +133,12 @@ module Gaku
       [[contacts: :contact_type, addresses: :country], :guardians]
     end
 
-    def set_student_config
-      @student_config = StudentConfig.active
+    def index_includes
+      [:enrollment_status, :user]
     end
 
-    def set_class_group
-      @class_group_id ||= params[:class_group_id]
+    def set_preset
+      @preset = Preset.active
     end
 
     def set_enrollment_statuses

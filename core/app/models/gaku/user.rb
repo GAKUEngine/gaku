@@ -19,6 +19,10 @@ module Gaku
 
     scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
 
+    def to_s
+      username
+    end
+
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)
