@@ -1,0 +1,3 @@
+$('.<%= @gradable_resource %>-grading-method-connectors-count').html("<%= print_count(@count, t(:'grading_method.list')) %>");
+$('#<%= @gradable_resource %>-grading-method-connectors-tab-link').html("<%= print_count(@count, t(:'grading_method.list')) %>");
+showNotice("<%= render_flash %>");

@@ -37,6 +37,18 @@ module Gaku
       grouped.map(&resource.to_sym)
     end
 
+    def sort_handler
+      content_tag :td, class: 'sort-handler' do
+        content_tag :i, nil, class: 'glyphicon glyphicon-move'
+      end
+    end
+
+    def sortable_tbody(path, &block)
+      content_tag(:tbody, class: 'sortable', data: { 'sort-url' => url_for(path) }) do
+        block.call
+      end
+    end
+
 
   end
 end
