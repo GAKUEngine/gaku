@@ -573,6 +573,9 @@ en:
     save: Save Grading Method
     score: Score
     singular: Grading Method
+  grading_method_connector:
+    add_set: Grading methods from grading method set added
+    already: Grading methods are already added
   grading_method_set:
     add: Add Grading Method Set
     display_deviation: Display Deviation
@@ -793,6 +796,7 @@ en:
     list: Program Syllabuses list
     plural: Program Syllabuses
     remove: Remove Program Syllabus
+  prompt: Please select
   required: required
   resource: Resource
   revert: Revert
