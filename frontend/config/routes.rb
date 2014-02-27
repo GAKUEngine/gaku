@@ -18,7 +18,12 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :gradable do
-    resources :grading_method_connectors, only: %i( new create destroy ), concerns: %i( sort )
+    resources :grading_method_connectors, only: %i( new create destroy ), concerns: %i( sort ) do
+      collection do
+        get :new_set
+        post :add_set
+      end
+    end
   end
 
   concern(:primary)         { patch :make_primary, on: :member }
