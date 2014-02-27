@@ -28,10 +28,12 @@ hr
 ul#students-collection
 
 = footer do
-  .col-md-6
+  .col-md-3
     = link_to_index students_path
   .col-md-3
-    = link_to_new t(:'student.new'), new_student_path
+    = link_to t(:'show'), student_path, class: 'btn btn-default col-md-12'
+  .col-md-3
+    = link_to t(:'new'), new_student_path, class: 'btn btn-primary col-md-12'
   .col-md-3
     = link_to_modal_delete
   .delete_modal
