@@ -36,7 +36,7 @@ module EnrollmentsController
     @enrollments = []
 
     @selected_students.each do |student|
-      student_id = student.split('-')[1].to_i
+      student_id = student.to_i
       enrollment = class_name.constantize.new(enrollment_param => params[enrollment_param], student_id: student_id)
       if enrollment.save
         @enrollments << enrollment
