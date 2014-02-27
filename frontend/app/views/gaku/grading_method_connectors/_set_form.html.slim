@@ -1,0 +1,6 @@
+= remote_form_for [:add_set, @gradable, @grading_method_connector], { label: t('grading_method.singular'), resource: "set-#{@gradable_resource}-grading-method-connector" } do |f|
+  .form-group
+    = label_tag :grading_method_set_id, t(:'grading_method_set.singular')
+    = select_tag :grading_method_set_id, options_from_collection_for_select(@grading_method_sets, :id, :name), prompt: t(:'prompt'), class: 'form-control', validate: {presence: true }
+
+  = buttons_for @grading_method_connector, { resource: "set-#{@gradable_resource}-grading-method-connector" }
