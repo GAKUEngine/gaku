@@ -17,7 +17,6 @@ ready = ->
       students = JSON.parse(localStorage['students'])
 
       students.map (student) ->
-        console.log(student)
         $('#students-collection').append("<li class=#{student['id']}><a href='#{students_path}/#{student['id']}'>#{student['name']}</a></li>")
 
       self.app.country_dropdown()
