@@ -77,6 +77,24 @@ describe 'Selecting Students', type: :feature do
       expect(page.has_content?('Chosen students(1)')).to eq false
     end
 
+    it 'removes selected student', js: true do
+      find(:css, "input#student-#{student.id}").set(true)
+      page.has_selector? '#students-checked-div'
+      page.has_content? 'Chosen students(1)'
+      click_link 'Show'
+      find(:css, ".remove-student").click
+      find(:css, "input#student-#{student.id}").should_not be_checked
+      page.has_content? 'Chosen students(1)'
+
+      visit gaku.root_path
+      visit gaku.students_path
+
+      find(:css, "input#student-#{student.id}").should_not be_checked
+
+      !page.has_selector? '#students-checked-div'
+      expect(page.has_content?('Chosen students(1)')).to eq false
+    end
+
   end
 
 end
