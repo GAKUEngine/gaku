@@ -47,8 +47,7 @@ module Gaku
 
     def index
       @courses = SemesterCourse.group_by_semester
-      @courses_without_semester = Course.without_semester
-      #@courses = Course.includes(:syllabus).all
+      @courses_without_semester = Course.includes(:syllabus).without_semester
       set_count
       respond_with @courses
     end
