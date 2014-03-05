@@ -1,0 +1,3 @@
+$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
+$('.chosen-count').html('<%= "(#{@selection.size})" %>');
+$('#students-checked-div').slideDown();

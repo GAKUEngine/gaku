@@ -44,6 +44,15 @@ module Gaku
     after_create  :set_serial_id
     after_save   :set_code
 
+    def add_to_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.rpush(:student_selection, hash.to_json)
+    end
+
+    def remove_from_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.lrem(:student_selection, 0, hash.to_json)
+    end
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',

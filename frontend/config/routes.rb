@@ -97,6 +97,14 @@ Gaku::Core::Engine.routes.draw do
 
   resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
+  resources :student_selection, only: :index do
+    collection do
+      get :clear
+      post :add
+      post :remove
+    end
+  end
+
   resources :students, concerns: %i( addresses contacts notes pagination ) do
     get :search, on: :collection
     get :clear_search, on: :collection

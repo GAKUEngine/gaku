@@ -1,0 +1,9 @@
+$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
+$('.chosen-count').html('<%= "(#{@selection.size})" %>');
+
+var selection = JSON.parse("<%= @selection %>");
+
+if(selection.length == 0) {
+  console.log(selection.length);
+  $('#students-checked-div').slideUp();
+}

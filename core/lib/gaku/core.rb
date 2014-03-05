@@ -4,6 +4,7 @@ require 'rails-i18n'
 require 'paperclip'
 require 'ransack'
 require 'deface'
+require 'redis'
 
 require 'devise'
 require 'cancan'
