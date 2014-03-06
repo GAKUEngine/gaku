@@ -15,6 +15,15 @@ Gaku::Core::Engine.routes.draw  do
     get :chosen, on: :collection
     resources :guardians, controller: 'students/guardians', concerns: :soft_delete
   end
+
+  resources :student_selection, only: :index do
+    collection do
+      get :clear
+      post :add
+      post :remove
+    end
+  end
+
   resources :extracurricular_activities, concerns: :soft_delete
   resources :class_groups, concerns: :soft_delete do
     collection do

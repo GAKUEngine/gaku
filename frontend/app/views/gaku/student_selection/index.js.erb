@@ -1,0 +1,16 @@
+$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
+$('.chosen-count').html('<%= "(#{@selection.size})" %>');
+
+$('#students-checked-div').slideDown();
+
+console.log("<%= @selection.size %>");
+
+var selection = "<%= j @selection.to_json %>";
+console.log($.parseJSON(selection));
+
+selection.forEach(function(student) {
+  console.log(student);
+  $("input#student-"+ student).prop('checked', true);
+});
+
+if(selection.length != 0) { $('#students-checked-div').slideDown(); }

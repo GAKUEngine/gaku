@@ -1,0 +1,3 @@
+= remote_form_for [@gradable, @grading_method_connector], { label: t('grading_method.singular'), resource: "#{@gradable_resource}-grading-method-connector" } do |f|
+  = render 'form_fields', f: f
+  = buttons_for @grading_method_connector, { resource: "#{@gradable_resource}-grading-method-connector" }

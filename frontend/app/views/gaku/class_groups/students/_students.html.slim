@@ -3,6 +3,8 @@
     .pull-right
       = ajax_link_to_new t(:'student.add'), student_chooser_class_group_path(class_group_id: @class_group.id), id: 'new-class-group-student-link'
 
+      = ajax_link_to_new t(:'student.selection'), student_selection_class_group_path(@class_group.id), id: 'new-class-group-student-selection-link'
+
   = index_body do
     = table_for 'class-group-students-index' do
       thead

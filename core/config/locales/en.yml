@@ -1,4 +1,6 @@
 en:
+  enroll: Enroll
+  clear: Clear
   academic: Academic
   achievement:
     add: Add Achievement
@@ -223,6 +225,7 @@ en:
     new: New Contact
     plural: Contacts
     primary: Primary Contact
+    primary_email: Primary Email
     save: Save Contact
     singular: Contact
   contact_type:
@@ -572,6 +575,9 @@ en:
     save: Save Grading Method
     score: Score
     singular: Grading Method
+  grading_method_connector:
+    add_set: Grading methods from grading method set added
+    already: Grading methods are already added
   grading_method_set:
     add: Add Grading Method Set
     display_deviation: Display Deviation
@@ -792,6 +798,7 @@ en:
     list: Program Syllabuses list
     plural: Program Syllabuses
     remove: Remove Program Syllabus
+  prompt: Please select
   required: required
   resource: Resource
   revert: Revert
@@ -921,6 +928,7 @@ en:
     save: Save State
     singular: State
   student:
+    selection: Student Selection
     academic_information: Academic Information
     add: Add Student
     addresses: Student Addresses

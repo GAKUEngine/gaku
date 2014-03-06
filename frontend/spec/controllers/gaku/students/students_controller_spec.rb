@@ -188,14 +188,17 @@ describe Gaku::StudentsController do
 
   context 'HTML' do
     describe 'GET #index' do
+      let(:preset) { create(:preset) }
+
       before do
-        student
+        student; preset
         gaku_get :index
       end
 
       it { should respond_with 200 }
       it('assigns @students') { expect(assigns(:students)).to eq [student] }
       it('assigns @count') { expect(assigns(:count)).to eq 1 }
+      it('assigns @preset') { expect(assigns(:preset)).to_not be_nil }
       it('renders :index template') { template? :index }
     end
 

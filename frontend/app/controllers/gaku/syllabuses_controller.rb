@@ -21,7 +21,7 @@ module Gaku
     end
 
     def index
-      @syllabuses = Syllabus.all
+      @syllabuses = Syllabus.includes(:department).all
       set_count
       respond_with @syllabuses
     end

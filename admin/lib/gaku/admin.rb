@@ -28,5 +28,4 @@ module Gaku
 
 end
 
-require 'gaku/admin/version'
 require 'gaku/admin/engine'

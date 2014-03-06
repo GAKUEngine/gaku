@@ -50,6 +50,10 @@ module Gaku
 
     private
 
+    def includes
+      [[contacts: :contact_type, addresses: :country]]
+    end
+
     def teacher_params
       params.require(:teacher).permit(attributes)
     end
@@ -59,7 +63,7 @@ module Gaku
     end
 
     def set_teacher
-      @teacher = Teacher.find(params[:id])
+      @teacher = Teacher.includes(includes).find(params[:id])
       set_notable
     end
 

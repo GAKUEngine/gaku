@@ -1,0 +1,14 @@
+= sortable_table_for 'student-selection-table' do
+  = form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
+    = hidden_field_tag "class_group_id", @class_group.id
+    = hidden_field_tag "source", "class_groups"
+
+    - @student_selection.each do |student|
+      tr
+        td = student['id']
+        td = student['full_name']
+        td = link_to 'Remove', nil, html: { id: student['id'], class: 'remove-student'}, remote: true
+        input type='hidden' name='selected_students[]' value="#{student['id']}"
+
+    .enroll.pull-right
+      = submit_tag t(:enroll), class: 'btn btn-success'

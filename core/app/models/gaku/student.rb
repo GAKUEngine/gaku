@@ -14,6 +14,7 @@ module Gaku
 
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
+    has_one :major_specialty, conditions: ["gaku_student_specialties.major = ?", true]
 
     has_many :badges
     has_many :badge_types, through: :badges
@@ -43,6 +44,15 @@ module Gaku
     after_create  :set_serial_id
     after_save   :set_code
 
+    def add_to_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.rpush(:student_selection, hash.to_json)
+    end
+
+    def remove_from_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.lrem(:student_selection, 0, hash.to_json)
+    end
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',
@@ -82,16 +92,16 @@ module Gaku
     end
 
     def set_foreign_id_code
-      if student_config = StudentConfig.active
-        if student_config.increment_foreign_id_code == true
-          self.foreign_id_code = (student_config.last_foreign_id_code.to_i + 1).to_s
-          student_config.last_foreign_id_code = self.foreign_id_code
-          student_config.save!
+      if preset = Preset.active
+        if preset.increment_foreign_id_code == '1'
+          self.foreign_id_code = (preset.last_foreign_id_code.to_i + 1).to_s
+          preset.last_foreign_id_code = self.foreign_id_code
+          preset.save!
         else
           if self.foreign_id_code.to_i.is_a? Integer
-            student_config.increment_foreign_id_code = true
-            student_config.last_foreign_id_code = self.foreign_id_code
-            student_config.save!
+            preset.increment_foreign_id_code = true
+            preset.last_foreign_id_code = self.foreign_id_code
+            preset.save!
           end
         end
       end
