@@ -132,7 +132,7 @@ class App
       if thisCheck.is (':checked')
         #surname = $(this).closest('tr').find('td.surname').text()
         #name = $(this).closest('tr').find('td.name').text()
-        #$('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
+        $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
 
         #$('#students-checked-div').slideDown()
         #chosen_trs = $('#chosen-table').find('tbody tr')

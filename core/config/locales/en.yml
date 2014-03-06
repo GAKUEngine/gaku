@@ -1,4 +1,5 @@
 en:
+  enroll: Enroll
   clear: Clear
   academic: Academic
   achievement:
@@ -927,6 +928,7 @@ en:
     save: Save State
     singular: State
   student:
+    selection: Student Selection
     academic_information: Academic Information
     add: Add Student
     addresses: Student Addresses

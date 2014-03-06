@@ -34,6 +34,7 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_students) { post :enroll_students, on: :collection }
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
+  concern(:student_selection) { get :student_selection, on: :member }
 
 
   devise_scope :user do
@@ -47,7 +48,7 @@ Gaku::Core::Engine.routes.draw do
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser pagination ) do
+  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination ) do
     collection do
       get :search
       get :search_semester
