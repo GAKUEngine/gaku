@@ -1,8 +1,6 @@
 $('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
 $('.chosen-count').html('<%= "(#{@selection.size})" %>');
 
-$('#students-checked-div').slideDown();
-
 selection = JSON.parse(("<%=j @selection.to_json.html_safe %>"))
 
 $.each(selection, function(index, student){
