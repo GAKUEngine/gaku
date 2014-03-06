@@ -112,15 +112,11 @@ class App
     $(document).on 'click', '.remove-student', ->
       thisId = $(this).closest('a').attr('id')
 
-      # $("input#student-#{thisId}").prop('checked', false)
-      # $("#students-checked tr.#{thisId}").remove()
-      # $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').find("input.#{thisId}").remove()
-
-      # if $('#students-checked tr').length == 0
-      #   $('#students-checked-div').slide()
-      # else
-      #   chosen_trs = $('#chosen-table').find('tbody tr')
-      #   $('.chosen-count').html("(#{chosen_trs.length})")
+      $.ajax
+        type: "POST",
+        url: "/student_selection/remove",
+        data: { id: thisId },
+        dataType: 'script'
 
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
@@ -130,13 +126,7 @@ class App
 
 
       if thisCheck.is (':checked')
-        #surname = $(this).closest('tr').find('td.surname').text()
-        #name = $(this).closest('tr').find('td.name').text()
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
-
-        #$('#students-checked-div').slideDown()
-        #chosen_trs = $('#chosen-table').find('tbody tr')
-        #$('.chosen-count').html("(#{chosen_trs.length})")
 
         $.ajax
           type: "POST",
@@ -150,16 +140,6 @@ class App
           url: "/student_selection/remove",
           data: { id: thisId },
           dataType: 'script'
-
-        #$("#students-checked tr.#{thisId}").remove()
-        #$('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').find("input.#{thisId}").remove()
-
-        #if $('#students-checked tr').length == 0
-        #  $('#students-checked-div').slide()
-        #else
-        #  chosen_trs = $('#chosen-table').find('tbody tr')
-        #  $('.chosen-count').html("(#{chosen_trs.length})")
-
 
 
 ready = ->

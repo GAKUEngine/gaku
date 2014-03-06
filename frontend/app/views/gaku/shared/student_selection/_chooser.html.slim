@@ -1,14 +1,18 @@
-= sortable_table_for 'student-selection-table' do
-  = form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
-    = hidden_field_tag "class_group_id", @class_group.id
-    = hidden_field_tag "source", "class_groups"
+.row#students-checked-div.center-block
+  .col-md-12
+    .panel.panel-success
+      .panel-heading
+        = t(:'student.selection')
+        span.chosen-count
+      .panel-body
+        = form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
+          = hidden_field_tag "class_group_id", @class_group.id
+          = hidden_field_tag "source", "class_groups"
+          table#chosen-table.table
+            tbody#students-checked
+              - @student_selection.each do |student|
+                = render 'gaku/student_selection/selected_student', student: student
+                input type='hidden' name='selected_students[]' value="#{student['id']}"
 
-    - @student_selection.each do |student|
-      tr
-        td = student['id']
-        td = student['full_name']
-        td = link_to 'Remove', nil, html: { id: student['id'], class: 'remove-student'}, remote: true
-        input type='hidden' name='selected_students[]' value="#{student['id']}"
-
-    .enroll.pull-right
-      = submit_tag t(:enroll), class: 'btn btn-success'
+          #chosen-actions.panel-footer
+            = submit_tag t(:enroll), class: 'btn btn-success'
