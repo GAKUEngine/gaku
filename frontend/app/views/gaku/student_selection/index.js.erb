@@ -3,14 +3,10 @@ $('.chosen-count').html('<%= "(#{@selection.size})" %>');
 
 $('#students-checked-div').slideDown();
 
-console.log("<%= @selection.size %>");
+selection = JSON.parse(("<%=j @selection.to_json.html_safe %>"))
 
-var selection = "<%= j @selection.to_json %>";
-console.log($.parseJSON(selection));
-
-selection.forEach(function(student) {
-  console.log(student);
-  $("input#student-"+ student).prop('checked', true);
+$.each(selection, function(index, student){
+  $(".student-check#student-" + student['id']).prop('checked', true)
 });
 
-if(selection.length != 0) { $('#students-checked-div').slideDown(); }
+if(selection.length > 0) { $('#students-checked-div').slideDown(); }
