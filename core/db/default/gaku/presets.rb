@@ -4,6 +4,7 @@ if Gaku::Preset.count.zero?
                         default: true,
                         active: true,
                         locale: 'en',
+                        time_format_24: true,
                         names_order: '%first %middle %last',
                         pagination: {
                                       default: 25,
