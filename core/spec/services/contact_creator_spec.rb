@@ -69,20 +69,21 @@ describe Gaku::ContactCreator do
           end
         end
 
-        # context 'when contactable has primary_contact attribute' do
-        #   let(:campus) { create(:campus) }
-        #   let(:contact_attributes) { build(:contact).attributes.merge(contactable: campus) }
-        #
-        #   it 'sets primary contact widget for contactable' do
-        #     service = Gaku::ContactCreator.new(contact_attributes)
-        #     expect do
-        #       expect(service.save).to be_true
-        #     end.to change { Gaku::Contact.count }.by(1)
-        #
-        #     campus.reload
-        #     expect(campus.primary_contact).to be == 'sdf'
-        #   end
-        # end
+        context 'when contactable has primary_contact attribute' do
+          let(:student) { create(:student) }
+          let(:contact_attributes) { build(:contact).attributes.merge(contactable: student, data: 'test@example.com') }
+
+          it 'sets primary contact widget for contactable' do
+            service = Gaku::ContactCreator.new(contact_attributes)
+            expect do
+              expect(service.save).to be_true
+            end.to change { Gaku::Contact.count }.by(1)
+
+            student.reload
+            expect(student.primary_contact).to include 'Email'
+            expect(student.primary_contact).to include 'test@example.com'
+          end
+        end
       end
     end
   end
