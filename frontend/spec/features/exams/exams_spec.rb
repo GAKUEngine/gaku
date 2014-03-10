@@ -36,6 +36,7 @@ describe 'Exams' do
       end.to change(Gaku::Exam, :count).by 1
 
       within(table) { has_content? department.name }
+      within('#exams-tab-link') { has_content? 'Exams(1)' }
       count? 'Exams list(1)'
     end
 
