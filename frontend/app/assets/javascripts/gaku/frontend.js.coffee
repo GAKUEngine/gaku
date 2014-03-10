@@ -22,7 +22,7 @@
 
 #= require bootstrap-datepicker/core
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.ja
-
+#= require bootstrap-datetimepicker/bootstrap-datetimepicker
 #= require underscore
 #= require moment
 #= require rails.validations
