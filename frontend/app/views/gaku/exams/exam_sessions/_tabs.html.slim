@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a#exam-session-students-tab-link data-toggle="tab" href="#exam-session-students"
+          = print_count @exam_session.students.count, t(:'student.plural')
+
+    .tab-content
+      #exam-session-students.tab-pane.active
+        = render "gaku/exams/exam_sessions/students"

@@ -1,0 +1,7 @@
+$('#exam-sessions-index tbody').append('<%= j render("gaku/exams/exam_sessions/exam_session", {exam_session: @exam_session}) %>');
+$('#new-exam-session').slide();
+$('#new-exam-session-link').show();
+
+$('.exam-sessions-count').html("<%= print_count(@count, t(:'exam_session.list')) %>");
+$('#exam-sessions-tab-link').html("<%= print_count(@count, t(:'exam_session.plural')) %>");
+showNotice("<%= render_flash %>");

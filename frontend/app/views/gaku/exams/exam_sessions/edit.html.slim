@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    = normal_form_for @exam_session, label: 'nil' do |f|
+      = render 'form_fields', f: f, exam_session: @exam_session
+      = buttons_for @exam_session
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-9
+    = link_to_index exams_path
+  .col-md-3
+    = link_to_modal_delete
+  = render 'gaku/shared/delete_modal_without_soft', target: @exam_session
