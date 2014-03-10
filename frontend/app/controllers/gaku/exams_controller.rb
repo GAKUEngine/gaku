@@ -17,6 +17,7 @@ module Gaku
         results = @search.result(distinct: true)
         @exams = results.page(params[:page])
         @exam = Exam.new
+        @exam_sessions = ExamSession.all
       end
 
       @exam.exam_portions.build
