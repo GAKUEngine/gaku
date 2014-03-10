@@ -457,6 +457,15 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+  exam_session:
+    plural: Exam sessions
+    singular: Exam session
+    list: Exam session list
+    add: Add exam session
+    name: Name
+    session_time: Session time
+    session_start: Session start
+    minutes: "%{time} minutes"
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
