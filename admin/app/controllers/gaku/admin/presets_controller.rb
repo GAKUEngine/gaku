@@ -28,7 +28,7 @@ module Gaku
 
     def preset_attr
       [
-        :name, :default, :active, :locale, :names_order,
+        :name, :default, :active, :locale, :names_order, :time_format_24,
         pagination: pagination_attr,
         grading: grading_attr,
         person: person_attr,
