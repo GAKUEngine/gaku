@@ -757,6 +757,7 @@ en:
       singular: Grading
     list: Presets list
     locale: Locale
+    time_format: Time format
     name: Name
     names_order: Names Order
     pagination: Pagination
