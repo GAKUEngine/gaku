@@ -76,6 +76,11 @@ module Gaku
       Dir.glob(File.join(File.dirname(__FILE__), "../app/overrides/*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
+      # Load application's services
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/services/**/*.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
     end
       APP
 
