@@ -1,5 +1,6 @@
 module Gaku
   class StudentsController < GakuController
+    include PictureController
 
     decorates_assigned :student
 
@@ -112,6 +113,10 @@ module Gaku
     def update
       @student.update(student_params)
       respond_with @student, location: [:edit, @student]
+    end
+
+    def set_avatar
+
     end
 
 
