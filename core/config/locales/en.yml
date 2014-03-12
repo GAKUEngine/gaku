@@ -724,6 +724,7 @@ en:
     removed: '%{resource} was successfully removed!'
     updated: '%{resource} was successfully updated!'
     uploaded: '%{resource} was successfully uploaded!'
+    image_update: Image are successfully updated!
   num_enrolled: Number Enrolled
   options: Options
   order: Order
