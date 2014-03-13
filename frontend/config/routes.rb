@@ -34,6 +34,7 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_students) { post :enroll_students, on: :collection }
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
+  concern(:set_picture)     { patch :set_picture, on: :member }
 
 
   devise_scope :user do
@@ -97,7 +98,7 @@ Gaku::Core::Engine.routes.draw do
 
   resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
 
-  resources :students, concerns: %i( addresses contacts notes pagination ) do
+  resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
     get :advanced_search, on: :collection

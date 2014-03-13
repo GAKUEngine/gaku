@@ -27,6 +27,7 @@
 #= require moment
 #= require rails.validations
 #= require select2
+#= require jquery.remotipart
 
 #= require gaku/frontend/slide.js.erb
 #= require gaku/frontend/base
