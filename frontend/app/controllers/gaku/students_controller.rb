@@ -115,11 +115,6 @@ module Gaku
       respond_with @student, location: [:edit, @student]
     end
 
-    def set_avatar
-
-    end
-
-
     private
 
 
