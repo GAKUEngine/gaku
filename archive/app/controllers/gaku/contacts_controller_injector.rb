@@ -9,7 +9,7 @@ module Gaku
 
     def soft_delete
       set_polymorphic_resource
-      @contact =Contact.find(params[:id])
+      @contact = Contact.find(params[:id])
       @primary_contact = true if @contact.primary?
       @contact.soft_delete
       @polymorphic_resource.contacts.first.try(:make_primary) if @contact.primary?
