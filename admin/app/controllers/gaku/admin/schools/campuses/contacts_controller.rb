@@ -26,7 +26,7 @@ module Gaku
     end
 
     def update
-      @contact.update(contact_params)
+      ContactUpdation.new(@contact).update(contact_params)
       respond_with @contact, location: [:edit, :admin, @school, @campus]
     end
 
