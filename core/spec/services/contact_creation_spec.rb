@@ -1,16 +1,16 @@
 require 'spec_helper_models'
 
-describe Gaku::ContactCreator do
+describe Gaku::ContactCreation do
   describe '#initialize' do
     it 'instantiates new Contact object' do
-      service = Gaku::ContactCreator.new(data: 'data')
+      service = described_class.new(data: 'data')
       contact = service.contact
       errors  = service.errors
 
       expect(contact).to be_new_record
       expect(contact).to be_instance_of Gaku::Contact
 
-      expect(errors).to be == []
+      expect(errors).to eq []
     end
   end
 
@@ -19,7 +19,7 @@ describe Gaku::ContactCreator do
       it 'returns true' do
         contact_attributes = build(:contact).attributes
 
-        service = Gaku::ContactCreator.new(contact_attributes)
+        service = described_class.new(contact_attributes)
         expect do
           expect(service.save).to be_true
         end.to change { Gaku::Contact.count }.by(1)
@@ -31,7 +31,7 @@ describe Gaku::ContactCreator do
           let(:contact_attributes) { build(:contact).attributes.merge(contactable: student) }
 
           it 'creates a primary contact' do
-            service = Gaku::ContactCreator.new(contact_attributes)
+            service = described_class.new(contact_attributes)
             expect do
               expect(service.save).to be_true
             end.to change { Gaku::Contact.count }.by(1)
@@ -45,13 +45,13 @@ describe Gaku::ContactCreator do
           let!(:student) { create(:student) }
           let(:contact_attributes) { build(:contact).attributes.merge(contactable: student) }
           let!(:contact_1) do
-            service = Gaku::ContactCreator.new(contact_attributes)
+            service = described_class.new(contact_attributes)
             service.save
             service.contact
           end
 
           it 'makes other contacts non-primary' do
-            service = Gaku::ContactCreator.new(contact_attributes)
+            service = described_class.new(contact_attributes)
             expect do
               expect(service.save).to be_true
             end.to change { Gaku::Contact.count }.by(1)
@@ -60,7 +60,7 @@ describe Gaku::ContactCreator do
             contact_1.reload
             contact_2 = service.contact
 
-            expect(student.contacts.count).to be == 2
+            expect(student.contacts.count).to eq 2
             expect(student.contacts).to include contact_1
             expect(student.contacts).to include contact_2
 
@@ -74,7 +74,7 @@ describe Gaku::ContactCreator do
           let(:contact_attributes) { build(:contact).attributes.merge(contactable: student, data: 'test@example.com') }
 
           it 'sets primary contact widget for contactable' do
-            service = Gaku::ContactCreator.new(contact_attributes)
+            service = described_class.new(contact_attributes)
             expect do
               expect(service.save).to be_true
             end.to change { Gaku::Contact.count }.by(1)

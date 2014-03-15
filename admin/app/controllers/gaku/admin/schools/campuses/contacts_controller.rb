@@ -14,7 +14,7 @@ module Gaku
     end
 
     def create
-      creator = ContactCreator.new(contact_params.merge(contactable: @campus))
+      creator = ContactCreation.new(contact_params.merge(contactable: @campus))
       creator.save
       @contact = creator.contact
       set_count

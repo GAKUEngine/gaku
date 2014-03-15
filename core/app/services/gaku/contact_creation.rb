@@ -1,5 +1,5 @@
 module Gaku
-  class ContactCreator
+  class ContactCreation
     attr_reader :errors, :contact
 
     def initialize(params = {})
@@ -44,6 +44,7 @@ module Gaku
       end
     end
 
+    # Workaround performance issue by not using JOIN
     def update_primary_contact_field
       if @contact.contactable.has_attribute?(:primary_contact)
         @contact.contactable.update_column(:primary_contact, @contact.contactable.contact_widget)

@@ -98,7 +98,7 @@ def create_student_with_full_info(predefined_student=nil)
   student.addresses.where(random_address).first_or_create!
 
   [random_email, random_home_phone, random_mobile_phone].each do |params|
-    ContactCreator.new(params.merge(contactable: student)).save!
+    ContactCreation.new(params.merge(contactable: student)).save!
   end
 
   student.notes.where(random_note).first_or_create!
@@ -109,7 +109,7 @@ def create_student_with_full_info(predefined_student=nil)
   guardian.addresses.where(random_address).first_or_create!
 
   [random_email, random_home_phone, random_mobile_phone].each do |params|
-    ContactCreator.new(params.merge(contactable: guardian)).save!
+    ContactCreation.new(params.merge(contactable: guardian)).save!
   end
 
   #guardian.notes.where(random_note).first_or_create!
@@ -129,7 +129,7 @@ def create_teacher_with_full_info(predefined_teacher=nil)
   teacher.addresses.create!(random_address)
 
   [random_email, random_home_phone, random_mobile_phone].each do |params|
-    ContactCreator.new(params.merge(contactable: teacher)).save!
+    ContactCreation.new(params.merge(contactable: teacher)).save!
   end
 
   teacher.notes.create!(random_note)

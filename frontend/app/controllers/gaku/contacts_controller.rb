@@ -17,7 +17,7 @@ module Gaku
     end
 
     def create
-      creator = ContactCreator.new(contact_params.merge(contactable: @polymorphic_resource))
+      creator = ContactCreation.new(contact_params.merge(contactable: @polymorphic_resource))
       creator.save
       @contact = creator.contact
       set_count
