@@ -6,7 +6,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index )
+    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show )
   end
 
   concern :contacts do
