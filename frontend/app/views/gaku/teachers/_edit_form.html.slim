@@ -1,0 +1,8 @@
+.row
+  .col-md-9.teacher-index
+    = normal_form_for teacher, label: 'nil' do |f|
+      = render 'form_fields', f: f, teacher: teacher
+      = submit_button t(:'teacher.save'), id: 'submit-teacher-button'
+
+  .col-md-3
+    = render 'gaku/shared/picture', resource: teacher

@@ -1,19 +1,29 @@
 .row
-  .col-md-9.teacher-index
-    = normal_form_for teacher, label: 'nil' do |f|
-      = render 'form_fields', f: f, teacher: teacher
-      = submit_button t(:'teacher.save'), id: 'submit-teacher-button'
-
   .col-md-3
-    = render 'gaku/shared/picture', resource: teacher
-
-hr
-
-= render 'tabs'
-
-= footer do
-  .col-md-9
-    = link_to_index teachers_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: teacher
+    .panel-group#accordion
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to('#collapseOne', remote: true, data: { toggle: 'collapse', parent: '#accordion'}) do
+              = t('teacher.edit')
+        #collapseOne.panel-collapse.collapse.in
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" Personal
+        #collapseTwo.panel-collapse.collapse
+          .panel-body
+            ul.list-unstyled
+              li = link_to 'Addresses', [teacher, :addresses], remote: true
+              li = link_to 'Contacts', '#'
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" Academic
+        #collapseThree.panel-collapse.collapse
+          .panel-body
+            ul.list-unstyled
+              li = link_to 'Addresses', '#'
+              li = link_to 'Contacts', '#'
+  .col-md-9#ajax-load
+    =render 'edit_form', teacher: @teacher
