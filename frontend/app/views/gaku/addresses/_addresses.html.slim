@@ -1,4 +1,5 @@
 - prepare_resource_name(nested_resources, :address)
+
 div id="#{@resource_name.pluralize}"
   = index_header do
     .d-none id="new-#{@resource_name}"
@@ -6,7 +7,7 @@ div id="#{@resource_name.pluralize}"
       = count_div "#{@resource_name.pluralize}-count" do
         = print_count nested_resources.last.addresses_count, t(:'address.list')
     .pull-right
-      = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, id: "new-#{@resource_name}-link" if can_edit?
+      = ajax_link_to_new t(:'address.add'), [:new, nested_resources, :address].flatten, id: "new-#{@resource_name}-link"
 
   = index_body do
     = table_for "#{@resource_name.pluralize}-index" do

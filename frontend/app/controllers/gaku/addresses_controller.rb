@@ -11,7 +11,7 @@ module Gaku
     before_action :set_polymorphic_resource
 
     def index
-      @addresss = @polymorphic_resource.addresses
+      @addresses = @polymorphic_resource.addresses
       respond_with @addresses
     end
 
