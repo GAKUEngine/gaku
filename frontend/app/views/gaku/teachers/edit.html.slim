@@ -1,13 +1,30 @@
 .row
-  .col-md-1
+  .col-md-2
     .panel-group#accordion
+      .panel
+        = image_tag teacher.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
+
+      - if can_edit?
+        .row.mt-m
+          .col-md-12
+            /= link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
+            #upload-picture.d-none
+              /= render 'gaku/shared/upload_picture', resource: teacher
+
+
 
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            = link_to('#collapseOne', remote: true, data: { toggle: 'collapse', parent: '#accordion'}) do
-              = t(:'teacher.edit')
-        #collapseOne.panel-collapse.collapse.in
+            = link_to('#collapseThree', remote: true, data: { toggle: 'collapse', parent: '#accordion'}) do
+              = t(:'edit')
+        #collapseThree.panel-collapse.collapse.in
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'show'), teacher, remote: true
+        #collapseThree.panel-collapse.collapse.in
 
       .panel.panel-default
         .panel-heading
@@ -19,7 +36,11 @@
               li = link_to t(:'address.plural'), [teacher, :addresses], remote: true
               li = link_to t(:'contact.plural'), [teacher, :contacts], remote: true
               li = link_to t(:'note.plural'), [teacher, :notes], remote: true
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'teacher.plural'), teachers_path
+        #collapseOne.panel-collapse.collapse.in
 
-
-  .col-md-11#ajax-load
+  .col-md-10#ajax-load
     = render 'edit_form', teacher: @teacher
