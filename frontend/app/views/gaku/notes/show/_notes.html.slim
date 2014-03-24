@@ -1,6 +1,6 @@
-= panel_for 'teacher-notes-panel' do
+= panel_for "#{@notable_resource}-notes-panel" do
   .panel-heading
-    = print_count teacher.notes_count, t(:'note.plural')
+    = print_count @notable.notes_count, t(:'note.plural')
   .panel-body
     .table-responsive
     table.table.table-condensed.table-hover

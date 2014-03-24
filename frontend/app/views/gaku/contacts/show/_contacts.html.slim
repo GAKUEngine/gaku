@@ -1,6 +1,7 @@
-= panel_for 'teacher-contacts-panel' do
+- prepare_resource_name(nested_resources, :contact)
+= panel_for "#{@resource_name.pluralize}-panel" do
   .panel-heading
-    = print_count teacher.contacts_count, t(:'contact.plural')
+    = print_count nested_resources.last.contacts_count, t(:'contact.plural')
   .panel-body
     .table-responsive
     table.table.table-condensed.table-hover

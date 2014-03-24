@@ -7,8 +7,6 @@ td = contact.details
 td
   = t(:'contact.emergency') if contact.emergency?
 
-- if can_edit?
-  td
-    = ajax_link_to_edit [:edit, target].flatten
-    = render 'gaku/contacts/delete_link', target: target
-
+td
+  = ajax_link_to_edit [:edit, target].flatten
+  = render 'gaku/contacts/delete_link', target: target
