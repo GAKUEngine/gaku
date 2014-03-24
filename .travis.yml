@@ -34,4 +34,4 @@ notifications:
       - "irc.freenode.org#gaku"
 
 rvm:
-  - 2.1.0
+  - 2.1.1
