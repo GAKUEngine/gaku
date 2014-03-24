@@ -1,8 +1,8 @@
 .row
   .col-md-9
     = render 'personal', student: student
-  .col-md-3
-    = render 'gaku/shared/picture', resource: student
+  .col-md-3.picture-upload
+    = render 'gaku/shared/ajax_picture', resource: student
 
 hr
 

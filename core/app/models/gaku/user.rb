@@ -11,8 +11,6 @@ module Gaku
 
     attr_accessor :login
 
-    before_create :default_language
-
     validates :username, presence: true, uniqueness: true
 
     roles_table_name = Role.table_name
@@ -47,16 +45,6 @@ module Gaku
 
     def role?(role)
       roles.detect {|p| p.name == role.to_s.camelize}
-    end
-
-    private
-
-    def default_language
-      if Preset.active.nil?
-        settings[:locale] = 'en'
-      else
-        settings[:locale] = Preset.active.locale['language']
-      end
     end
 
   end

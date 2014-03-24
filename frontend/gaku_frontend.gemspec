@@ -47,4 +47,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'underscore-rails',               '~> 1.5.2'
   s.add_dependency 'momentjs-rails',                 '~> 2.5.1'
   s.add_dependency 'select2-rails',                  '~> 3.5.2'
+  s.add_dependency 'remotipart',                     '~> 1.2.1'
+  s.add_dependency 'bootstrap-datetime-picker-for-rails', '~> 0.0.4'
+
+
 end

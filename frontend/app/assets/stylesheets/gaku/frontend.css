@@ -1,6 +1,7 @@
 /*
  *= require gaku/bootstrap_and_theme
  *= require bootstrap-datepicker
+ *= require bootstrap-datetimepicker
  * require font-awesome
  *= require jquery.ui.autocomplete
  *= require jquery.minicolors

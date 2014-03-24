@@ -26,6 +26,9 @@ describe Gaku::Student do
     it { should have_many(:student_guardians).dependent(:destroy) }
     it { should have_many(:guardians).through(:student_guardians) }
 
+    it { should have_many(:student_exam_sessions) }
+    it { should have_many(:exam_sessions).through(:student_exam_sessions) }
+
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :attendances }
@@ -163,7 +166,6 @@ describe Gaku::Student do
 
       it 'decrements' do
         external_school_record
-        puts student.external_school_records.last.to_json
         expect do
           student.external_school_records.last.destroy
         end.to change { student.reload.external_school_records_count }.by -1

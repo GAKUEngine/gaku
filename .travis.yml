@@ -10,7 +10,7 @@ before_script:
   - sudo /etc/init.d/postgresql restart
   - psql -c 'create database gaku_test;' -U postgres
 
-bundler_args: --without production
+bundler_args: -j4 --without development production --quiet
 
 env:
   - GEM=core SUITE=spec/models

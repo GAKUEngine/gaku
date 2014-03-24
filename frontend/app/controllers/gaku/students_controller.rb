@@ -1,5 +1,6 @@
 module Gaku
   class StudentsController < GakuController
+    include PictureController
 
     decorates_assigned :student
 
@@ -113,7 +114,6 @@ module Gaku
       @student.update(student_params)
       respond_with @student, location: [:edit, @student]
     end
-
 
     private
 

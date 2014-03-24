@@ -15,6 +15,9 @@
 #= require bootstrap/tab
 #= require bootstrap/dropdown
 #= require bootstrap/modal
+#= require bootstrap/collapse
+#= require bootstrap/transition
+
 
 #= require nprogress
 #= require nprogress-turbolinks
@@ -22,11 +25,12 @@
 
 #= require bootstrap-datepicker/core
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.ja
-
+#= require bootstrap-datetimepicker/bootstrap-datetimepicker
 #= require underscore
 #= require moment
 #= require rails.validations
 #= require select2
+#= require jquery.remotipart
 
 #= require gaku/frontend/slide.js.erb
 #= require gaku/frontend/base

@@ -20,3 +20,9 @@ say "Creating #{@count[:students]} students ...".yellow
 batch_create(@count[:students]) do
   create_student_with_full_info
 end
+
+say "Creating #{@count[:students]} applicant students ...".yellow
+
+batch_create(@count[:students]) do
+  create_non_active_student
+end

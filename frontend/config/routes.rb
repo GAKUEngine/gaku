@@ -6,7 +6,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index )
+    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show )
   end
 
   concern :contacts do
@@ -35,7 +35,7 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
   concern(:student_selection) { get :student_selection, on: :member }
-
+  concern(:set_picture)     { patch :set_picture, on: :member }
 
   devise_scope :user do
     get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
@@ -106,7 +106,7 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
-  resources :students, concerns: %i( addresses contacts notes pagination ) do
+  resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
     get :advanced_search, on: :collection
@@ -127,6 +127,8 @@ Gaku::Core::Engine.routes.draw do
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
+
+  resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
 
   resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member
