@@ -17,16 +17,15 @@ ready = ->
                             .find('.dynamicAttributeValue')
         value = nameElem.val()
 
-        valueElem.attr 'id', "grading_method_arguments_#{value}"
-        valueElem.attr 'name', "grading_method[arguments][#{value}]"
-        valueElem.attr 'placeholder', "value for #{value}"
+        valueElem.attr 'id', "grading_method_criteria_#{value}"
+        valueElem.attr 'name', "grading_method[criteria][#{value}]"
 
-      $(document).on 'click', '.remove-argument-row', (e)->
+      $(document).on 'click', '.remove-criteria-row', (e)->
         e.preventDefault()
         if confirm('Are you sure?')
           $(@).closest('.row').html ''
 
-      $(document).on 'click', '.add-argument-row', (e)->
+      $(document).on 'click', '.add-criteria-row', (e)->
         e.preventDefault()
 
         contents = "<div class='row'> #{$('.attribute-template').html()} </div>"

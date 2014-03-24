@@ -1,0 +1,11 @@
+.row.attribute-template class="#{'hide' if f.object.criteria.present?}"
+  .col-md-3
+    .form-group
+      .controls
+        = text_field_tag nil, nil, class: 'dynamicAttributeName form-control', name: nil, placeholder: "#{t(:'eg')} A"
+  .col-md-3
+    .form-group
+      .controls
+        = text_field_tag nil, nil, class: 'dynamicAttributeValue form-control', name: nil, placeholder:"#{t(:'eg')} 90"
+  .col-md-3
+    = link_to t('grading_method.remove_criteria'), '#', class: 'remove-criteria-row btn btn-danger'
