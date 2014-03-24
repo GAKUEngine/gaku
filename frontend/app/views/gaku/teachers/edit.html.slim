@@ -1,46 +1,43 @@
 .row
   .col-md-2
     .panel-group#accordion
+
       .panel
         = image_tag teacher.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
-
-      - if can_edit?
-        .row.mt-m
-          .col-md-12
-            /= link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
-            #upload-picture.d-none
-              /= render 'gaku/shared/upload_picture', resource: teacher
-
-
+        .panel-heading
+          = teacher.full_name
 
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            = link_to('#collapseThree', remote: true, data: { toggle: 'collapse', parent: '#accordion'}) do
-              = t(:'edit')
-        #collapseThree.panel-collapse.collapse.in
+            = link_to t(:'edit'), [:edit, teacher], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:delete), nil, class: 'modal-delete-link'
+          .delete_modal
+            = render 'gaku/shared/delete_modal', target: teacher
 
       .panel.panel-default
         .panel-heading
           h4.panel-title
             = link_to t(:'show'), teacher, remote: true
-        #collapseThree.panel-collapse.collapse.in
 
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" Personal
-        #collapseTwo.panel-collapse.collapse.in
-          .panel-body
-            ul.list-unstyled
-              li = link_to t(:'address.plural'), [teacher, :addresses], remote: true
-              li = link_to t(:'contact.plural'), [teacher, :contacts], remote: true
-              li = link_to t(:'note.plural'), [teacher, :notes], remote: true
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'address.plural'), [teacher, :addresses], remote: true, id: 'teacher-addresses-tab-link'
+            li = link_to t(:'contact.plural'), [teacher, :contacts], remote: true, id: 'teacher-contacts-tab-link'
+            li = link_to t(:'note.plural'), [teacher, :notes], remote: true, id: 'teacher-notes-tab-link'
+
       .panel.panel-default
         .panel-heading
           h4.panel-title
             = link_to t(:'teacher.plural'), teachers_path
-        #collapseOne.panel-collapse.collapse.in
 
   .col-md-10#ajax-load
     = render 'edit_form', teacher: @teacher

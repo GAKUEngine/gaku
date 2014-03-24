@@ -15,6 +15,7 @@ describe 'Teacher Address' do
     before do
       @resource = teacher
       visit gaku.edit_teacher_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'new address'
@@ -25,6 +26,7 @@ describe 'Teacher Address' do
     before do
       @resource = teacher_with_address
       visit gaku.edit_teacher_path(@resource)
+      click tab_link
     end
 
     it_behaves_like 'dynamic state dropdown'

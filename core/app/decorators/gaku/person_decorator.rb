@@ -14,10 +14,8 @@ module Gaku
       student_names reading: true
     end
 
-    # return full name without formatting but in order,
-    # with spaces between portions
     def full_name
-      student_names without_formating: true
+      "#{object.surname} #{object.name}"
     end
 
     def full_name_reading
