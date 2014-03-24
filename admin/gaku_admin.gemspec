@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'gaku_testing', version
 
   s.add_dependency 'coffee-rails',                   '~> 4.0.1'
-  s.add_dependency 'sass-rails',                     '~> 4.0.1'
+  s.add_dependency 'sass-rails',                     '~> 4.0.2'
 
   s.add_dependency 'slim',                           '~> 2.0.2'
   s.add_dependency 'responders',                     '~> 1.0'
