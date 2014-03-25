@@ -1,5 +1,6 @@
 module Gaku
   class TeachersController < GakuController
+    include PictureController
 
     decorates_assigned :teacher
 
