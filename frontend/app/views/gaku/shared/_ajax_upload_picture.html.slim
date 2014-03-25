@@ -1,7 +1,7 @@
 = form_for([:set_picture, resource], remote: true, html: { multipart: true }) do |form|
-  .row.mt-m
-    = form.file_field :picture, class: "form-file"
-  .row.mt-xs
-    = link_to_upload
-coffee:
-  $(".form-file").attr('size', 9)
+  .row
+    .col-md-12
+      .form-group
+        = form.file_field :picture, class: "form-file form-control "
+    .col-md-12
+      = link_to_upload class: 'col-md-12'
