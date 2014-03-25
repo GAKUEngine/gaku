@@ -1,12 +1,4 @@
-= panel_for 'teacher-panel' do
-  = panel_header 'Teacher information', teacher
-
-  table.table.table-bordered.th-center
-    tbody
-      = render 'gaku/shared/fields/person_show_table', person: teacher
-      = render 'gaku/shared/fields/address_and_contact_show_table', person: teacher
-
-= render 'tabs'
+= render 'show_table'
 
 = footer do
   .col-md-12
