@@ -24,6 +24,7 @@
           ul.list-unstyled
             li = link_to t(:'address.plural'), [student, :addresses], remote: true, id: 'student-addresses-tab-link'
             li = link_to t(:'contact.plural'), [student, :contacts], remote: true, id: 'student-contacts-tab-link'
+            li = link_to t(:'guardian.plural'), [student, :guardians], remote: true, id: 'student-guardians-tab-link'
 
 
       .panel.panel-default
@@ -33,11 +34,11 @@
         .panel-body
           ul.list-unstyled
             li = link_to t(:'note.plural'), [student, :notes], remote: true, id: 'student-notes-tab-link'
-            li = link_to t(:'specialty.plural'), [student, :student_specialties], id: 'specialties', remote: true
-            li = link_to t(:'simple_grade.plural'), [student, :simple_grades], remote: true, id: 'student-contacts-tab-link'
-            li = link_to t(:'badge.plural'), [student, :badges], remote: true, id: 'student-badges'
-            li = link_to t(:'external_school_record.plural'), [student, :external_school_records], remote: true, id: 'student-badges'
-            li = link_to t(:'course.plural'), [student, :course_enrollments], remote: true, id: 'student-badges'
+            li = link_to t(:'specialty.plural'), [student, :student_specialties], id: 'student-specialties-tab-link', remote: true
+            li = link_to t(:'simple_grade.plural'), [student, :simple_grades], remote: true, id: 'student-simple-grades-tab-link'
+            li = link_to t(:'badge.plural'), [student, :badges], remote: true, id: 'student-badges-tab-link'
+            li = link_to t(:'external_school_record.plural'), [student, :external_school_records], remote: true, id: 'student-external-school-records-tab-link'
+            li = link_to t(:'course.plural'), [student, :course_enrollments], remote: true, id: 'student-course-enrollments-tab-link'
 
       .panel.panel-default
         .panel-heading
@@ -45,8 +46,10 @@
             = link_to t(:'student.plural'), students_path
 
 
-  .col-md-10#ajax-load
-    = render 'edit_form', student: student
+  .col-md-10
+    #edit-modals
+    #ajax-load
+      = render 'edit_form', student: student
 
 javascript:
   var students_path = "#{students_path}"

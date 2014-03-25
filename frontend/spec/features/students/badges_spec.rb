@@ -9,15 +9,13 @@ describe 'Student Badges' do
   let(:badge_type) { create(:badge_type) }
   let(:badge_type2) { create(:badge_type, name: 'Another badge type') }
   let(:badge) { create(:badge, student: student, badge_type: badge_type) }
-  let!(:el) { '#badges' }
 
   context 'new', js: true do
 
     before do
       badge_type
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      click el
+      click tab_link
       click new_link
     end
 
@@ -26,14 +24,14 @@ describe 'Student Badges' do
         expect do
           select badge_type.name, from: 'badge_badge_type_id'
           click submit
-          within(el) { has_content? badge_type.name }
+          within(table) { has_content? badge_type.name }
         end.to change(Gaku::Badge, :count).by(1)
       end.to change(student.badges, :count).by(1)
-      within('#student-badge') { has_content? badge_type.name }
-      within('#student-badges-tab-link') { has_content? 'Badges(1)' }
+      within(table) { has_content? badge_type.name }
+      #within('#student-badges-tab-link') { has_content? 'Badges(1)' }
 
-      click '#student-badges-tab-link'
-      within('#badges_tab') { has_content? badge_type.name }
+      click tab_link
+      within(table) { has_content? badge_type.name }
 
       count? 'Badges list(1)'
     end
@@ -46,8 +44,7 @@ describe 'Student Badges' do
       badge_type2
       badge
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      click el
+      click tab_link
     end
 
     context 'edit' do
@@ -59,13 +56,13 @@ describe 'Student Badges' do
 
         flash_updated?
 
-        within(el) do
+        within(table) do
           has_content? badge_type2.name
           has_no_content? badge_type.name
         end
 
-        click '#student-badges-tab-link'
-        within('#badges_tab') do
+        click tab_link
+        within(table) do
           has_content? badge_type2.name
           has_no_content? badge_type.name
         end
@@ -79,14 +76,14 @@ describe 'Student Badges' do
       count? 'Badges list(1)'
       expect do
         ensure_delete_is_working
-        within(el) { has_no_content? badge_type.name }
+        within(table) { has_no_content? badge_type.name }
       end.to change(Gaku::Badge, :count).by(-1)
 
       count? 'Badges list'
-      within('#student-badges-tab-link') { has_content? 'Badges' }
+      #within('#student-badges-tab-link') { has_content? 'Badges' }
 
-      click '#student-badges-tab-link'
-      within('#badges_tab') do
+      click tab_link
+      within(table) do
         has_no_content? badge_type.name
       end
 

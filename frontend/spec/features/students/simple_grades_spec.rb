@@ -10,14 +10,12 @@ describe 'Student Simple Grades' do
   let(:simple_grade) { create(:simple_grade,
                                 student: student,
                                 simple_grade_type:simple_grade_type) }
-  let!(:el) { '#simple-grades' }
 
   context 'new', js: true do
     before do
       simple_grade_type
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      click el
+      click tab_link
       click new_link
     end
 
@@ -29,7 +27,7 @@ describe 'Student Simple Grades' do
         page.find('body').click
 
         click submit
-        within(el) { has_content? 'Ruby Science' }
+        within(table) { has_content? 'Ruby Science' }
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
       count? 'Simple Grades list(1)'
@@ -47,8 +45,7 @@ describe 'Student Simple Grades' do
     before do
       simple_grade
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      click el
+      click tab_link
     end
 
     context 'edit' do
@@ -60,7 +57,7 @@ describe 'Student Simple Grades' do
 
         flash_updated?
 
-        within(el) do
+        within(table) do
           has_content? 33.3
           has_no_content? simple_grade.score
         end
@@ -68,7 +65,7 @@ describe 'Student Simple Grades' do
 
       it 'cancels editting' do
         click '.back-modal-link'
-        within(el) { has_content? simple_grade.score }
+        within(table) { has_content? simple_grade.score }
       end
 
     end
@@ -78,10 +75,10 @@ describe 'Student Simple Grades' do
       count? 'Simple Grades list(1)'
       expect do
         ensure_delete_is_working
-        within(el) { has_content? simple_grade.score }
+        within(table) { has_content? simple_grade.score }
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
-      within(el) { has_no_content? simple_grade.score }
+      within(table) { has_no_content? simple_grade.score }
       count? 'Simple Grades list'
     end
   end

@@ -12,7 +12,6 @@ describe 'Student External School Records' do
   context 'new', js: true do
     before do
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
       click tab_link
       click new_link
     end
@@ -40,7 +39,6 @@ describe 'Student External School Records' do
 
     before do
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
       click tab_link
     end
 

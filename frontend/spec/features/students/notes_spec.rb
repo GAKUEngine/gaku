@@ -13,7 +13,6 @@ describe 'Student Notes' do
     before do
       @resource = student
       visit gaku.edit_student_path(@resource)
-      click '#student-academic-tab-link'
       click tab_link
     end
 
@@ -24,7 +23,6 @@ describe 'Student Notes' do
     before do
       @resource = student_with_note
       visit gaku.edit_student_path(@resource)
-      click '#student-academic-tab-link'
       click tab_link
     end
 

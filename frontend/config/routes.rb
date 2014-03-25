@@ -117,7 +117,7 @@ Gaku::Core::Engine.routes.draw do
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
     resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
-    resources :guardians, except: %i( index show ),
+    resources :guardians, except: %i( show ),
       controller: 'students/guardians',
       concerns: %i( addresses contacts )
 
