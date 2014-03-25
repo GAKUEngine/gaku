@@ -7,7 +7,6 @@ class Presets < ActiveRecord::Migration
       t.string   :name
       t.boolean  :default,         default: false
       t.boolean  :active,          default: false
-      t.boolean  :time_format_24,  default: true
       t.string   :locale,          default: 'en'
       t.string   :names_order
       t.hstore   :pagination ,     default: '', null: false
