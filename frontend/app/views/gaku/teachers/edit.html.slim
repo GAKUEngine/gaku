@@ -15,18 +15,6 @@
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            = link_to t(:delete), nil, class: 'modal-delete-link'
-          .delete_modal
-            = render 'gaku/shared/delete_modal', target: teacher
-
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            = link_to t(:'show'), teacher, remote: true
-
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
             = t(:'personal')
         .panel-body
           ul.list-unstyled
@@ -38,6 +26,13 @@
         .panel-heading
           h4.panel-title
             = link_to t(:'teacher.plural'), teachers_path
+
+      .panel.panel-danger
+        .panel-heading
+          h4.panel-title
+            = link_to t(:delete), nil, class: 'modal-delete-link'
+          .delete_modal
+            = render 'gaku/shared/delete_modal', target: teacher
 
   .col-md-10#ajax-load
     = render 'edit_form', teacher: @teacher
