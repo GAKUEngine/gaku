@@ -96,7 +96,7 @@ Gaku::Core::Engine.routes.draw do
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
+  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination set_picture )
 
   resources :student_selection, only: :index do
     collection do
