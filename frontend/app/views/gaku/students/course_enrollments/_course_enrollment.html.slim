@@ -1,4 +1,3 @@
 tr id="course-enrollment-#{course_enrollment.course_id}"
   td = course_enrollment.code_with_syllabus_name
-  - if can_edit?
-    td = ajax_link_to_delete [@student, course_enrollment]
+  td = ajax_link_to_delete [@student, course_enrollment]

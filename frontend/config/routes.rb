@@ -123,7 +123,7 @@ Gaku::Core::Engine.routes.draw do
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
-      only: %i( new create destroy )
+      only: %i( new create destroy index )
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end

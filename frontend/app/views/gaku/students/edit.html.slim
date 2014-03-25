@@ -1,43 +1,52 @@
 .row
-  .col-md-9
-    = render 'personal', student: student
-  .col-md-3.picture-upload
-    = render 'gaku/shared/ajax_picture', resource: student
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel
+        = image_tag student.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
+        .panel-heading
+          = student.full_name
 
-.row.mt-l
-  .col-md-12
-    ul.nav.nav-pills.nav-justified
-      li.active
-        a#student-personal-tab-link data-toggle="tab" href="#personal"
-          = t(:'personal')
-      li
-        a#student-academic-tab-link data-toggle="tab" href="#academic"
-          = t(:'academic')
-    .tab-content
-      #personal.tab-pane.active
-        = render 'tabs_personal'
-      #academic.tab-pane
-        .row
-          .col-md-3
-            = render 'academic', student: student
-          .col-md-9
-            = render 'tabs_academic'
+        /.col-md-3.picture-upload
+        /  = render 'gaku/shared/ajax_picture', resource: student
 
-ul#students-collection
 
-= footer do
-  .col-md-3
-    = link_to_index students_path
-  .col-md-3
-    = link_to t(:'show'), student_path, class: 'btn btn-default col-md-12'
-  .col-md-3
-    = link_to t(:'new'), new_student_path, class: 'btn btn-primary col-md-12'
-  .col-md-3
-    = link_to_modal_delete
-  .delete_modal
-    = render 'gaku/shared/delete_modal', target: student
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, student], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'address.plural'), [student, :addresses], remote: true, id: 'student-addresses-tab-link'
+            li = link_to t(:'contact.plural'), [student, :contacts], remote: true, id: 'student-contacts-tab-link'
+
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'academic')
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'note.plural'), [student, :notes], remote: true, id: 'student-notes-tab-link'
+            li = link_to t(:'specialty.plural'), [student, :student_specialties], id: 'specialties', remote: true
+            li = link_to t(:'simple_grade.plural'), [student, :simple_grades], remote: true, id: 'student-contacts-tab-link'
+            li = link_to t(:'badge.plural'), [student, :badges], remote: true, id: 'student-badges'
+            li = link_to t(:'external_school_record.plural'), [student, :external_school_records], remote: true, id: 'student-badges'
+            li = link_to t(:'course.plural'), [student, :course_enrollments], remote: true, id: 'student-badges'
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'student.plural'), students_path
+
+
+  .col-md-10#ajax-load
+    = render 'edit_form', student: student
 
 javascript:
   var students_path = "#{students_path}"
