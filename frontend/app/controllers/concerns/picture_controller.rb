@@ -4,7 +4,7 @@ module PictureController
 
   def set_picture
     @resource = set_resource
-    @resource.update params.require(:student).permit(:picture)
+    @resource.update params.require(param_name).permit(:picture)
     flash.now[:notice] = t('notice.image_update')
     render 'gaku/shared/js/set_picture'
   end
@@ -13,6 +13,10 @@ module PictureController
 
   def set_resource
     instance_variable_set("@#{class_name_underscored}", class_name.constantize.find(params[:id]))
+  end
+
+  def param_name
+    controller_name.singularize.to_sym
   end
 
 end
