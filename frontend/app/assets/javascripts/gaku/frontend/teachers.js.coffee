@@ -6,11 +6,15 @@ ready = ->
     edit: ->
       self.app.country_dropdown()
 
-      $('.picture-upload').popover
+      $('body').popover
+        selector: '.picture-upload'
         html: true
-        content: $('#upload-picture')[0].innerHTML
+        content: ()->
+          console.log(@)
+          return $('#upload-picture').html()
         placement: 'bottom'
         trigger: 'click'
+
 
   @app.teachers = new TeachersController
 
