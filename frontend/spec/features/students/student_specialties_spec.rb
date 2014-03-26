@@ -15,7 +15,7 @@ describe 'Student Specialties' do
     before do
       specialty
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-specialties-menu a'
       click new_link
     end
 
@@ -29,6 +29,7 @@ describe 'Student Specialties' do
       end.to change(student.specialties, :count).by(1)
 
       count? 'Specialties list(1)'
+      within('.specialties-count') { expect(page.has_content?('1')).to eq true }
     end
 
     it { has_validations? }
@@ -40,7 +41,7 @@ describe 'Student Specialties' do
       specialty2
       student_specialty
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-specialties-menu a'
     end
 
     context 'edit' do
@@ -52,8 +53,8 @@ describe 'Student Specialties' do
         flash_updated?
 
         within(table) do
-          has_content? specialty2.name
-          has_no_content? specialty.name
+          expect(page.has_content? specialty2.name).to eq true
+          expect(page.has_no_content? specialty.name).to eq true
         end
       end
 
@@ -72,6 +73,7 @@ describe 'Student Specialties' do
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
       count? 'Specialties list'
+      within('.specialties-count') { expect(page.has_content?('0')).to eq true }
     end
 
   end

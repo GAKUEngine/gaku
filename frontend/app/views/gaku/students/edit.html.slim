@@ -22,10 +22,14 @@
             = t(:'personal')
         .panel-body
           ul.list-unstyled
-            li = link_to t(:'address.plural'), [student, :addresses], remote: true, id: 'student-addresses-tab-link'
-            li = link_to t(:'contact.plural'), [student, :contacts], remote: true, id: 'student-contacts-tab-link'
-            li = link_to t(:'guardian.plural'), [student, :guardians], remote: true, id: 'student-guardians-tab-link'
+            li#student-addresses-menu
+              = link_to badge_count(student.addresses_count, t(:'address.plural'), 'addresses-count'), [student, :addresses], remote: true
 
+            li#student-contacts-menu
+              = link_to badge_count(student.contacts_count, t(:'contact.plural'), 'contacts-count'), [student, :contacts], remote: true
+
+            li#student-guardians-menu
+              = link_to badge_count(student.guardians_count, t(:'guardian.plural'), 'guardians-count'), [student, :guardians], remote: true
 
       .panel.panel-default
         .panel-heading
@@ -33,12 +37,24 @@
             = t(:'academic')
         .panel-body
           ul.list-unstyled
-            li = link_to t(:'note.plural'), [student, :notes], remote: true, id: 'student-notes-tab-link'
-            li = link_to t(:'specialty.plural'), [student, :student_specialties], id: 'student-specialties-tab-link', remote: true
-            li = link_to t(:'simple_grade.plural'), [student, :simple_grades], remote: true, id: 'student-simple-grades-tab-link'
-            li = link_to t(:'badge.plural'), [student, :badges], remote: true, id: 'student-badges-tab-link'
-            li = link_to t(:'external_school_record.plural'), [student, :external_school_records], remote: true, id: 'student-external-school-records-tab-link'
-            li = link_to t(:'course.plural'), [student, :course_enrollments], remote: true, id: 'student-course-enrollments-tab-link'
+
+            li#student-notes-menu
+              = link_to badge_count(student.notes_count, t(:'note.plural'), 'notes-count'), [student, :notes], remote: true
+
+            li#student-specialties-menu
+              = link_to badge_count(student.specialties.count, t(:'specialty.plural'), 'specialties-count'), [student, :student_specialties], remote: true
+
+            li#student-simple-grades-menu
+              = link_to badge_count(student.simple_grades.count, t(:'simple_grade.plural'), 'simple-grades-count'), [student, :simple_grades], remote: true
+
+            li#student-badges-menu
+              = link_to badge_count(student.badges_count, t(:'badge.plural'), 'badges-count'), [student, :badges], remote: true
+
+            li#student-external-school-records-menu
+              = link_to badge_count(student.external_school_records_count, t(:'external_school_record.plural'), 'external-school-records-count'), [student, :external_school_records], remote: true
+
+            li#student-courses-menu
+              = link_to badge_count(student.courses_count, t(:'course.plural'), 'courses-count'), [student, :course_enrollments], remote: true
 
       .panel.panel-default
         .panel-heading

@@ -15,7 +15,7 @@ describe 'Student Simple Grades' do
     before do
       simple_grade_type
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-simple-grades-menu a'
       click new_link
     end
 
@@ -31,6 +31,7 @@ describe 'Student Simple Grades' do
       end.to change(Gaku::SimpleGrade, :count).by(1)
 
       count? 'Simple Grades list(1)'
+      within('.simple-grades-count') { expect(page.has_content?('1')).to eq true }
       within('#student-simple-grades-index') do
         expect(page).to have_content Date.today
         expect(page).to have_content simple_grade_type.grading_method
@@ -45,7 +46,7 @@ describe 'Student Simple Grades' do
     before do
       simple_grade
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-simple-grades-menu a'
     end
 
     context 'edit' do
@@ -79,6 +80,7 @@ describe 'Student Simple Grades' do
       end.to change(Gaku::SimpleGrade, :count).by(-1)
 
       within(table) { has_no_content? simple_grade.score }
+      within('.simple-grades-count') { expect(page.has_content?('0')).to eq true }
       count? 'Simple Grades list'
     end
   end

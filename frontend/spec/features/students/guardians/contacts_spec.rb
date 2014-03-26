@@ -19,7 +19,7 @@ describe 'Student Guardian Contacts' do
       student.guardians << guardian
       visit gaku.edit_student_path(student)
       @resource = guardian
-      click '#student-guardians-tab-link'
+      click '#student-guardians-menu a'
       page.has_content? 'Guardians list'
       click edit_link
       click tab_link

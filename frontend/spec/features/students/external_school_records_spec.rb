@@ -12,7 +12,7 @@ describe 'Student External School Records' do
   context 'new', js: true do
     before do
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-external-school-records-menu a'
       click new_link
     end
 
@@ -24,6 +24,8 @@ describe 'Student External School Records' do
         click submit
         flash_created?
       end.to change(Gaku::ExternalSchoolRecord, :count).by(1)
+
+      within('.external-school-records-count') { expect(page.has_content?('1')).to eq true }
 
       within(table) do
         has_content? 500
@@ -39,7 +41,7 @@ describe 'Student External School Records' do
 
     before do
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-external-school-records-menu a'
     end
 
     context 'edit' do
@@ -61,6 +63,7 @@ describe 'Student External School Records' do
         ensure_delete_is_working
         flash_destroyed?
       end.to change(Gaku::ExternalSchoolRecord, :count).by(-1)
+      within('.external-school-records-count') { expect(page.has_content?('0')).to eq true }
     end
 
 

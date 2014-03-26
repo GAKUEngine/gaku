@@ -15,7 +15,7 @@ describe 'Student Course Enrollments' do
       visit gaku.edit_student_path(student)
       @data = student
       @select = 'course_enrollment_course_id'
-      click tab_link
+      click '#student-courses-menu a'
     end
 
     it_behaves_like 'enroll to course'
@@ -28,7 +28,7 @@ describe 'Student Course Enrollments' do
       visit gaku.edit_student_path(student)
       @data = student
 
-      click tab_link
+      click '#student-courses-menu a'
     end
 
     it_behaves_like 'remove enrollment'

@@ -15,7 +15,7 @@ describe 'Student Badges' do
     before do
       badge_type
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-badges-menu a'
       click new_link
     end
 
@@ -28,9 +28,9 @@ describe 'Student Badges' do
         end.to change(Gaku::Badge, :count).by(1)
       end.to change(student.badges, :count).by(1)
       within(table) { has_content? badge_type.name }
-      #within('#student-badges-tab-link') { has_content? 'Badges(1)' }
+      within('.badges-count') { expect(page.has_content?('1')).to eq true }
 
-      click tab_link
+      click '#student-badges-menu a'
       within(table) { has_content? badge_type.name }
 
       count? 'Badges list(1)'
@@ -44,7 +44,7 @@ describe 'Student Badges' do
       badge_type2
       badge
       visit gaku.edit_student_path(student)
-      click tab_link
+      click '#student-badges-menu a'
     end
 
     context 'edit' do
@@ -61,7 +61,7 @@ describe 'Student Badges' do
           has_no_content? badge_type.name
         end
 
-        click tab_link
+        click '#student-badges-menu a'
         within(table) do
           has_content? badge_type2.name
           has_no_content? badge_type.name
@@ -80,9 +80,9 @@ describe 'Student Badges' do
       end.to change(Gaku::Badge, :count).by(-1)
 
       count? 'Badges list'
-      #within('#student-badges-tab-link') { has_content? 'Badges' }
+      within('.badges-count') { expect(page.has_content?('0')).to eq true }
 
-      click tab_link
+      #click '#student-badges-menu a'
       within(table) do
         has_no_content? badge_type.name
       end
