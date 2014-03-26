@@ -5,8 +5,15 @@ module PictureController
   def set_picture
     @resource = set_resource
     @resource.update params.require(param_name).permit(:picture)
-    flash.now[:notice] = t('notice.image_update')
+    flash.now[:notice] = t('notice.picture_update')
     render 'gaku/shared/js/set_picture'
+  end
+
+  def remove_picture
+    @resource = set_resource
+    @resource.update(picture: nil)
+    flash.now[:notice] = t('notice.picture_remove')
+    render 'gaku/shared/js/remove_picture'
   end
 
   private
