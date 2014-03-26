@@ -7,10 +7,6 @@
         .panel-heading
           = student.full_name
 
-        /.col-md-3.picture-upload
-        /  = render 'gaku/shared/ajax_picture', resource: student
-
-
       .panel.panel-default
         .panel-heading
           h4.panel-title
@@ -59,7 +55,11 @@
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            = link_to t(:'student.plural'), students_path
+            = t(:'student.selection')
+        .panel-body
+          ul.list-unstyled
+            - @selection.each do |selected_student|
+              li = link_to selected_student['full_name'], student_path(selected_student['id'])
 
 
   .col-md-10

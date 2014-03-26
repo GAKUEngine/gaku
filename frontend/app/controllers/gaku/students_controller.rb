@@ -100,6 +100,7 @@ module Gaku
     end
 
     def edit
+      @selection = current_user.student_selection
       respond_with @student
     end
 
