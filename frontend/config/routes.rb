@@ -35,7 +35,12 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
   concern(:student_selection) { get :student_selection, on: :member }
-  concern(:set_picture)     { patch :set_picture, on: :member }
+  concern(:set_picture) do
+    member do
+      patch :set_picture
+      delete :remove_picture
+    end
+  end
 
   devise_scope :user do
     get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
