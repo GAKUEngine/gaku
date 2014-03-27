@@ -10,7 +10,6 @@ ready = ->
         selector: '.picture-upload'
         html: true
         content: ()->
-          console.log(@)
           return $('#upload-picture').html()
         placement: 'bottom'
         trigger: 'click'
