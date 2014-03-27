@@ -1,7 +1,14 @@
 = form_for([:set_picture, resource], remote: true, html: { multipart: true }) do |form|
-  .row.mt-m
-    = form.file_field :picture, class: "form-file"
-  .row.mt-xs
-    = link_to_upload
-coffee:
-  $(".form-file").attr('size', 9)
+  .row
+    .col-md-12
+      .form-group
+        = form.file_field :picture, class: "form-file form-control "
+  .row
+    .col-md-12
+      -if resource.picture.file?
+        = button_tag class: 'col-md-8 btn btn-default', style: 'margin-right:13px'
+          = content_tag(:span, t('upload'), class: 'glyphicon glyphicon-upload')
+        = link_to [:remove_picture, resource], remote: true, method: :delete, class: 'col-md-3 btn btn-danger remove-picture-link', data: {confirm: t('confirm')} do
+          = content_tag(:span, nil, class: 'glyphicon glyphicon-trash')
+      -else
+        = link_to_upload class: 'col-md-12 btn btn-default'

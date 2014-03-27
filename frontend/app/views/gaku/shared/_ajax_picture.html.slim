@@ -1,8 +1,8 @@
-= image_tag resource.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
-
-- if can_edit? or action_name == 'set_picture'
-  .row.mt-m
-    .col-md-12
-      = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
-      #upload-picture.d-none
-        = render 'gaku/shared/ajax_upload_picture', resource: resource
+a.thumbnail.mb-0#thumb-picture
+  = image_tag resource.picture.url(:thumb), id: "avatar-picture"
+  #popover-upload-picture.d-none
+    = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link", style: "width: 280px"
+    #upload-picture.d-none
+      .row
+        .col-md-12
+          = render 'gaku/shared/ajax_upload_picture', resource: resource
