@@ -1,9 +1,9 @@
 FactoryGirl.define do
 
   factory :simple_grade_type, class: Gaku::SimpleGradeType do
-    name 'ruby'
-    grading_method
-    school
+    sequence(:name) { |n | "ruby_#{n}" }
+    #grading_method
+    #school
 
     factory :invalid_simple_grade_type do
       name nil
