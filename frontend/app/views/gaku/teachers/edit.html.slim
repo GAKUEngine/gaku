@@ -3,7 +3,8 @@
     .panel-group#accordion
 
       .panel
-        = image_tag teacher.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
+        .picture-upload
+          =render 'gaku/shared/ajax_picture', resource: @teacher
         .panel-heading
           = teacher.full_name
 
