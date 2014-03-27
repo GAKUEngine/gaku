@@ -293,9 +293,6 @@ describe Gaku::StudentsController do
       end
 
       it { should respond_with 200 }
-      it('assigns @students') { expect(assigns(:students)).to eq [student] }
-      it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
-      it('assigns @courses') { expect(assigns(:courses)).to_not be_nil }
       it('renders :chosen template') { template? :chosen }
     end
 
