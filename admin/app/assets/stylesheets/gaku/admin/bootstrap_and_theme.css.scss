@@ -579,3 +579,8 @@ font-size: 24px;
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff357ebd', GradientType=0);    }
   }
 }
+
+.modal-backdrop.in {
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+}
