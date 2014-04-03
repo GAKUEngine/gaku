@@ -1,0 +1,7 @@
+- target ||= prepare_target(nested_resources, contact) if defined?(nested_resources)
+tr id="contact-#{contact.id}"
+  td = contact.name
+  td = contact.data
+  td = contact.details
+  td
+    = t(:'contact.emergency') if contact.emergency?

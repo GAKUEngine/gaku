@@ -1,0 +1,10 @@
+$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
+$('.chosen-count').html('<%= "(#{@selection.size})" %>');
+
+selection = JSON.parse(("<%=j @selection.to_json.html_safe %>"))
+
+$.each(selection, function(index, student){
+  $(".student-check#student-" + student['id']).prop('checked', true)
+});
+
+if(selection.length > 0) { $('#students-checked-div').slideDown(); }

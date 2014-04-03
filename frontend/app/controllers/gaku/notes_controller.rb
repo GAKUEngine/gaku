@@ -7,6 +7,11 @@ module Gaku
     before_action :set_note,    only: %i( edit update destroy show )
     respond_to :js
 
+    def index
+      @notes = @notable.notes
+      respond_with @notes
+    end
+
     def new
       @note = Note.new
       respond_with @note

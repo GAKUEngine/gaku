@@ -1,0 +1,9 @@
+- target ||= prepare_target(nested_resources, address) if defined?(nested_resources)
+tr id="address-#{address.id}"
+  td = address.title
+  td = address.country
+  td = address.state
+  td = address.zipcode
+  td = address.city
+  td = address.address1
+  td = address.address2

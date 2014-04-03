@@ -9,7 +9,11 @@ module Gaku
     respond_to :html, :js
 
     before_action :set_courses
-    before_action :set_class_group,       only: %i( edit update destroy student_chooser )
+    before_action :set_class_group,       only: %i( edit update destroy student_chooser student_selection )
+
+    def student_selection
+      @student_selection = current_user.student_selection
+    end
 
 
     def destroy

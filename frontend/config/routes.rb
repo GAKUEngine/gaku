@@ -6,7 +6,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index )
+    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show )
   end
 
   concern :contacts do
@@ -34,7 +34,13 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_students) { post :enroll_students, on: :collection }
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
-
+  concern(:student_selection) { get :student_selection, on: :member }
+  concern(:set_picture) do
+    member do
+      patch :set_picture
+      delete :remove_picture
+    end
+  end
 
   devise_scope :user do
     get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
@@ -47,7 +53,7 @@ Gaku::Core::Engine.routes.draw do
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser pagination ) do
+  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination ) do
     collection do
       get :search
       get :search_semester
@@ -95,9 +101,17 @@ Gaku::Core::Engine.routes.draw do
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
+  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination set_picture )
 
-  resources :students, concerns: %i( addresses contacts notes pagination ) do
+  resources :student_selection, only: :index do
+    collection do
+      get :clear
+      post :add
+      post :remove
+    end
+  end
+
+  resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
     get :advanced_search, on: :collection
@@ -118,6 +132,8 @@ Gaku::Core::Engine.routes.draw do
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
+
+  resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
 
   resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member

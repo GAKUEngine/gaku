@@ -1,19 +1,33 @@
 .row
-  .col-md-9.teacher-index
-    = normal_form_for teacher, label: 'nil' do |f|
-      = render 'form_fields', f: f, teacher: teacher
-      = submit_button t(:'teacher.save'), id: 'submit-teacher-button'
+  .col-md-2
+    .panel-group#accordion
 
-  .col-md-3
-    = render 'gaku/shared/picture', resource: teacher
+      .panel
+        .picture-upload
+          =render 'gaku/shared/ajax_picture', resource: @teacher
+        .panel-heading
+          = teacher.full_name
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, teacher], remote: true
 
-= render 'tabs'
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'address.plural'), [teacher, :addresses], remote: true, id: 'teacher-addresses-tab-link'
+            li = link_to t(:'contact.plural'), [teacher, :contacts], remote: true, id: 'teacher-contacts-tab-link'
+            li = link_to t(:'note.plural'), [teacher, :notes], remote: true, id: 'teacher-notes-tab-link'
 
-= footer do
-  .col-md-9
-    = link_to_index teachers_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: teacher
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'teacher.plural'), teachers_path
+
+
+  .col-md-10#ajax-load
+    = render 'edit_form', teacher: @teacher

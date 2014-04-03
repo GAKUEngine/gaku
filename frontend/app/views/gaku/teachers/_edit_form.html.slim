@@ -1,0 +1,10 @@
+= normal_form_for teacher, label: 'nil' do |f|
+  = render 'form_fields', f: f, teacher: teacher
+  = submit_button t(:'teacher.save'), id: 'submit-teacher-button'
+
+
+= footer do
+  .col-md-3.pull-right
+    = link_to_modal_delete
+  .delete_modal
+    = render 'gaku/shared/delete_modal', target: teacher

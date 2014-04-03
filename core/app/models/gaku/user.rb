@@ -17,6 +17,15 @@ module Gaku
 
     scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
 
+    def student_selection
+      hashes = $redis.lrange(:student_selection, 0, -1)
+      hashes.map! { |x| JSON.parse(x) }
+    end
+
+    def clear_student_selection
+      $redis.del(:student_selection)
+    end
+
     def to_s
       username
     end

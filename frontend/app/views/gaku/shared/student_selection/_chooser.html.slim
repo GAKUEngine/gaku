@@ -1,0 +1,18 @@
+.row#students-checked-div.center-block
+  .col-md-12
+    .panel.panel-success
+      .panel-heading
+        = t(:'student.selection')
+        span.chosen-count
+      .panel-body
+        = form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
+          = hidden_field_tag "class_group_id", @class_group.id
+          = hidden_field_tag "source", "class_groups"
+          table#chosen-table.table
+            tbody#students-checked
+              - @student_selection.each do |student|
+                = render 'gaku/student_selection/selected_student', student: student
+                input type='hidden' name='selected_students[]' value="#{student['id']}"
+
+          #chosen-actions.panel-footer
+            = submit_tag t(:enroll), class: 'btn btn-success'

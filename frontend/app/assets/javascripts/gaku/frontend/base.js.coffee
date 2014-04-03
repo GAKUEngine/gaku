@@ -98,21 +98,25 @@ class App
       window.load_states()
 
   student_chooser: ->
+    $.ajax
+      type: 'get'
+      url: '/student_selection'
+      dataType: 'script'
+
     $(document).on 'click', '#clear-student-selection', ->
-      students = localStorage['students'] = []
+      $.ajax
+        type: 'get'
+        url: '/student_selection/clear'
+        dataType: 'script'
 
-    if localStorage['students']
-      students = JSON.parse(localStorage['students'])
-      if students.length != 0
-        students.map (student) ->
-          $("input#student-#{student['id']}").attr('checked', true)
-          $('#students-checked').append("<tr class=#{student['id']}><td>#{student['name']}</td></tr>")
+    $(document).on 'click', '.remove-student', ->
+      thisId = $(this).closest('a').attr('id')
 
-        $('#students-checked-div').slideDown()
-        chosen_trs = $('#chosen-table').find('tbody tr')
-        $('.chosen-count').html("(#{chosen_trs.length})")
-    else
-      students = localStorage['students'] = []
+      $.ajax
+        type: "POST",
+        url: "/student_selection/remove",
+        data: { id: thisId },
+        dataType: 'script'
 
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
@@ -122,35 +126,20 @@ class App
 
 
       if thisCheck.is (':checked')
-        surname = $(this).closest('tr').find('td.surname').text()
-        name = $(this).closest('tr').find('td.name').text()
-        $('#students-checked').append("<tr class=#{thisId}><td>#{surname}</td><td>#{name}</td></tr>")
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
 
-        students.push({id : thisId, name: "#{surname} #{name}" })
-        localStorage["students"] = JSON.stringify(students)
+        $.ajax
+          type: "POST",
+          url: "/student_selection/add",
+          data: { id: thisId },
+          dataType: 'script'
 
-        $('#students-checked-div').slideDown()
-        chosen_trs = $('#chosen-table').find('tbody tr')
-        $('.chosen-count').html("(#{chosen_trs.length})")
       else
-        console.log(students)
-
-        students.map (student) ->
-          if student['id'] == thisId
-            students.splice(students.indexOf(student), 1)
-
-        localStorage["students"] = JSON.stringify(students)
-
-        $("#students-checked tr.#{thisId}").remove()
-        $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').find("input.#{thisId}").remove()
-
-        if $('#students-checked tr').length == 0
-          $('#students-checked-div').slide()
-        else
-          chosen_trs = $('#chosen-table').find('tbody tr')
-          $('.chosen-count').html("(#{chosen_trs.length})")
-
+        $.ajax
+          type: "POST",
+          url: "/student_selection/remove",
+          data: { id: thisId },
+          dataType: 'script'
 
 
 ready = ->

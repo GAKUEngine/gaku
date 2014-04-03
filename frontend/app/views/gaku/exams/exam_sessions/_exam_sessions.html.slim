@@ -1,0 +1,20 @@
+#new-exam-session.d-none
+
+= index_header do
+  .pull-left
+    = count_div "exam-sessions-count" do
+      = print_count @exam_sessions.count, t(:'exam_session.list')
+  .pull-right
+    = ajax_link_to_new t(:'exam_session.add'), [:new, :exam_session], {id: 'new-exam-session-link'}
+
+= index_body do
+  = table_for 'exam-sessions-index' do
+    thead
+      tr
+        = th t(:'exam_session.name')
+        = th t(:'exam_session.session_time')
+        = th t(:'exam.singular')
+        = th t(:'exam_session.session_start')
+        = th_actions 1
+    tbody
+      = render partial: 'gaku/exams/exam_sessions/exam_session', collection: @exam_sessions, as: :exam_session

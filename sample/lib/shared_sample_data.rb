@@ -11,6 +11,7 @@
 @home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
 @email = Gaku::ContactType.where(name: 'Email').first_or_create!
 @enrollment_status = Gaku::EnrollmentStatus.where(code: 'admitted').first.try(:code)
+@enrollment_status_applicant = Gaku::EnrollmentStatus.where(code: 'applicant').first.try(:code)
 @commute_method_type = Gaku::CommuteMethodType.create!(name: 'Superbike')
 @scholarship_status = Gaku::ScholarshipStatus.create!(name: 'Charity')
 
@@ -104,7 +105,6 @@ def create_student_with_full_info(predefined_student=nil)
   student.notes.where(random_note).first_or_create!
   student.notes.where(random_note).first_or_create!
 
-  #guardian
   guardian = Gaku::Guardian.where(random_person).first_or_create!
   guardian.addresses.where(random_address).first_or_create!
 
@@ -116,6 +116,15 @@ def create_student_with_full_info(predefined_student=nil)
   #guardian.notes.where(random_note).first_or_create!
 
   student.guardians << guardian
+end
+
+def create_non_active_student(predefined_student=nil)
+  if predefined_student
+    student = Gaku::Student.where(predefined_student).first_or_create!
+  else
+    random_student = random_person.merge(enrollment_status_code: @enrollment_status_applicant)
+    student = Gaku::Student.where(random_student).first_or_create!
+  end
 end
 
 def create_teacher_with_full_info(predefined_teacher=nil)

@@ -20,10 +20,11 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql'
   s.requirements << 'postgresql-contrib'
 
-  s.add_dependency 'rails',                          '~> 4.0.3'
-  s.add_dependency 'rails-i18n',                     '~> 4.0.1'
+  s.add_dependency 'rails',                          '4.0.4'
+  s.add_dependency 'rails-i18n',                     '~> 4.0.2'
 
   s.add_dependency 'pg',                             '0.17.1'
+  s.add_dependency 'redis',                          '3.0.7'
 
   s.add_dependency 'globalize',                      '~> 4.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'

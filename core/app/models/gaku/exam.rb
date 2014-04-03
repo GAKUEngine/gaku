@@ -12,6 +12,8 @@ module Gaku
 
     has_many :attendances, as: :attendancable
 
+    has_many :exam_sessions
+
     belongs_to :grading_method
     belongs_to :department
 
@@ -25,6 +27,10 @@ module Gaku
 
 
     accepts_nested_attributes_for :exam_portions
+
+    def to_s
+      name
+    end
 
     def self.without_syllabuses
       includes(:syllabuses).where(standalone: false)

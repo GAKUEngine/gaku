@@ -19,4 +19,4 @@ scholarship_statuses.each do |status|
   scholarship_status.update_attribute(:name,  status[:name_ja])
 end
 
-I18n.locale = nil
+I18n.locale = :en

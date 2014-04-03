@@ -1,0 +1,17 @@
+= panel_for "#{@notable_resource}-notes-panel" do
+  .panel-heading
+    = print_count @notable.notes_count, t(:'note.plural')
+  .panel-body
+    .table-responsive
+    table.table.table-condensed.table-hover
+      thead
+        tr
+          th = t(:'note.title')
+          th = t(:'note.content')
+      tbody
+        - @notable.notes.each do |note|
+          tr id="note-#{note.id}"
+            td = note.title
+            td = truncate(note.content, length: 80)
+
+

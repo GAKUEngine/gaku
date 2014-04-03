@@ -1,4 +1,5 @@
 en:
+  enroll: Enroll
   clear: Clear
   academic: Academic
   achievement:
@@ -457,6 +458,15 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
+  exam_session:
+    plural: Exam sessions
+    singular: Exam session
+    list: Exam session list
+    add: Add exam session
+    name: Name
+    session_time: Session time
+    session_start: Session start
+    minutes: "%{time} minutes"
   exam_portion:
     adjustments: Adjustments
     attached_file_count: Attached file count
@@ -715,6 +725,8 @@ en:
     removed: '%{resource} was successfully removed!'
     updated: '%{resource} was successfully updated!'
     uploaded: '%{resource} was successfully uploaded!'
+    picture_update: Picture are successfully updated!
+    picture_remove: Picture are successfully destroyed!
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -748,6 +760,7 @@ en:
       singular: Grading
     list: Presets list
     locale: Locale
+    time_format: Time format
     name: Name
     names_order: Names Order
     pagination: Pagination
@@ -927,6 +940,7 @@ en:
     save: Save State
     singular: State
   student:
+    selection: Student Selection
     academic_information: Academic Information
     add: Add Student
     addresses: Student Addresses
@@ -1011,6 +1025,7 @@ en:
     singular: Template
   title: Title
   undefined: Undefined
+  upload: Upload
   user:
     add: Add User
     edit: Edit User

@@ -1,5 +1,6 @@
 module Gaku
   class StudentsController < GakuController
+    include PictureController
 
     decorates_assigned :student
 
@@ -72,20 +73,23 @@ module Gaku
       end
 
       if session[:q]
-        if session[:q][:graduated_gteq]  || session[:q][:graduated_lteq] || session[:q][:admitted_gteq] || session[:q][:admitted_lteq]
+
+        search_unscoped = search_unscoped_params.any? { |k| session[:q].key?(k) }
+        if search_unscoped == true
           @search = Student.includes(index_includes).search(session[:q])
         else
           @search = Student.includes(index_includes).active.search(session[:q])
         end
 
-        if session[:q][:birth_date_gteq]  || session[:q][:birth_date_lteq] || session[:q][:age_gteq] ||session[:q][:age_lteq]
+        sort_by_age = sort_age_params.any? { |k| session[:q].key?(k) }
+        if sort_by_age == true
           @search.sorts = 'birth_date desc'
         else
           @search.sorts = 'created_at desc'
         end
 
       else
-        @search = Student.includes(index_includes).active.search(session[:q])
+        @search = Student.includes(index_includes).active.search(params[:q])
       end
 
       results = @search.result(distinct: true)
@@ -114,7 +118,6 @@ module Gaku
       respond_with @student, location: [:edit, @student]
     end
 
-
     private
 
 
@@ -136,6 +139,19 @@ module Gaku
     def index_includes
       [:enrollment_status, :user]
     end
+
+    def search_unscoped_params
+      %w(
+           graduated_gteq graduated_lteq
+           admitted_gteq admitted_lteq
+           enrollment_status_code_eq
+        )
+    end
+
+    def sort_age_params
+      %w( birth_date_gteq birth_date_lteq age_gteq age_lteq )
+    end
+
 
     def set_preset
       @preset = Preset.active

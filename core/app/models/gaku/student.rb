@@ -12,6 +12,9 @@ module Gaku
     has_many :extracurricular_activity_enrollments
     has_many :extracurricular_activities, through: :extracurricular_activity_enrollments
 
+    has_many :student_exam_sessions
+    has_many :exam_sessions, through: :student_exam_sessions
+
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
     has_one :major_specialty, conditions: ["gaku_student_specialties.major = ?", true]
@@ -44,6 +47,15 @@ module Gaku
     after_create  :set_serial_id
     after_save   :set_code
 
+    def add_to_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.rpush(:student_selection, hash.to_json)
+    end
+
+    def remove_from_selection
+      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
+      $redis.lrem(:student_selection, 0, hash.to_json)
+    end
 
     def make_enrolled
       enrollment_status = EnrollmentStatus.where( code: 'enrolled',

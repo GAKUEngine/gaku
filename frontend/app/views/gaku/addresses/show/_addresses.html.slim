@@ -1,0 +1,19 @@
+- prepare_resource_name(nested_resources, :address)
+
+= panel_for "#{@resource_name.pluralize}-panel" do
+  .panel-heading
+    = print_count nested_resources.last.addresses_count, t(:'address.plural')
+  .panel-body
+    .table-responsive
+    table.table.table-condensed.table-hover
+      thead
+        tr
+          th = t(:'address.title')
+          th = t(:'address.country')
+          th = t(:'address.state.singular')
+          th = t(:'address.zipcode')
+          th = t(:'address.city')
+          th = t(:'address.address1')
+          th = t(:'address.address2')
+      tbody
+       = render partial: 'gaku/addresses/show/address', collection: nested_resources.last.addresses, as: :address, locals: {nested_resources: nested_resources}
