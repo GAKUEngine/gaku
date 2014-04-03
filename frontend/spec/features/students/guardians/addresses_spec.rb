@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Guardian Addresses' do
 
-  before(:all) { set_resource 'student-guardian-address' }
+  before(:all) { set_resource 'guardian-address' }
   before { as :admin }
 
   let(:student)  { create(:student) }
@@ -17,6 +17,7 @@ describe 'Student Guardian Addresses' do
       @resource = guardian
       student.guardians << @resource
       visit gaku.edit_student_guardian_path(student, @resource)
+      click '#guardian-addresses-menu a'
     end
 
     it_behaves_like 'new address'
@@ -28,6 +29,7 @@ describe 'Student Guardian Addresses' do
       @resource = guardian_with_address
       student.guardians << @resource
       visit gaku.edit_student_guardian_path(student, @resource)
+      click '#guardian-addresses-menu a'
     end
 
     it_behaves_like 'dynamic state dropdown'
@@ -40,7 +42,7 @@ describe 'Student Guardian Addresses' do
         @resource = guardian_with_address
         student.guardians << @resource
         visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
+        click '#guardian-addresses-menu a'
         page.has_content? 'Addresses list'
       end
 
@@ -54,7 +56,7 @@ describe 'Student Guardian Addresses' do
         @resource = guardian_with_addresses
         student.guardians << @resource
         visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
+        click '#guardian-addresses-menu a'
         page.has_content? 'Addresses list'
       end
 

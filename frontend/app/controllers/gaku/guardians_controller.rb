@@ -1,10 +1,11 @@
 module Gaku
-  class Students::GuardiansController < GakuController
+  class GuardiansController < GakuController
+    include PictureController
 
     respond_to :js,   only: %i( new create index )
     respond_to :html, only: %i( edit update destroy )
 
-    before_action :set_student
+    before_action :set_student, except: %i( set_picture remove_picture )
     before_action :set_guardian, only: %i( show edit update destroy )
 
     def index

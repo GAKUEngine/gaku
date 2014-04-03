@@ -1,0 +1,32 @@
+.row
+  .col-md-2
+    .panel-group#accordion
+
+      .panel
+        .picture-upload
+          = render 'gaku/shared/ajax_picture', resource: @guardian
+        .panel-heading
+          = @guardian.full_name
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @student, @guardian], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li#guardian-addresses-menu
+              = link_to badge_count(@guardian.addresses_count, t(:'address.plural'), 'addresses-count'), [@guardian, :addresses], remote: true
+
+            li#guardian-contacts-menu
+              = link_to badge_count(@guardian.contacts_count, t(:'contact.plural'), 'contacts-count'), [@guardian, :contacts], remote: true
+
+
+  .col-md-10
+    #edit-modals
+    #ajax-load
+      = render 'edit_form', guardian: @guardian, student: @student

@@ -111,6 +111,8 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
+  resources :guardians, only: [], concerns: %i( addresses contacts set_picture )
+
   resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
@@ -122,9 +124,7 @@ Gaku::Core::Engine.routes.draw do
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
     resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
-    resources :guardians, except: %i( show ),
-      controller: 'students/guardians',
-      concerns: %i( addresses contacts )
+    resources :guardians, except: %i( show )
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
@@ -132,6 +132,8 @@ Gaku::Core::Engine.routes.draw do
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
+
+
 
   resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
 
