@@ -90,7 +90,6 @@ module Gaku
     end
 
     def edit
-      @selection = current_user.student_selection if current_user
       respond_with @student
     end
 

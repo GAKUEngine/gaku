@@ -53,16 +53,6 @@
             li#student-courses-menu
               = link_to badge_count(student.courses_count, t(:'course.plural'), 'courses-count'), [student, :course_enrollments], remote: true
 
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            = t(:'student.selection')
-        .panel-body
-          ul.list-unstyled
-            - @selection.each do |selected_student|
-              li = link_to selected_student['full_name'], student_path(selected_student['id'])
-
-
   .col-md-10
     #edit-modals
     #ajax-load
