@@ -13,12 +13,12 @@ before_script:
 bundler_args: -j4 --without development production --quiet
 
 env:
-  - GEM=core SUITE=spec/models
+  - GEM=core SUITE=all
   - GEM=frontend SUITE=fast
-  - GEM=admin SUITE=spec/controllers spec/routing
+  - GEM=admin SUITE=fast
   - GEM=frontend SUITE=slow SELENIUM=1
-  - GEM=admin SUITE=spec/features SELENIUM=1
-  - GEM=archive SELENIUM=1
+  - GEM=admin SUITE=slow SELENIUM=1
+  - GEM=archive SUITE=all SELENIUM=1
 
 before_install:
   #- gem install bundler --pre
