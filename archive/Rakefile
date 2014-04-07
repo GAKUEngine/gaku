@@ -29,13 +29,3 @@ task :test_app do
   ENV['LIB_NAME'] = 'gaku/archive'
   Rake::Task['common:test_app'].invoke
 end
-
-
-namespace :spec do
-
-  desc "Run fast specs"
-  task :all do
-    system 'rspec'
-  end
-
-end
