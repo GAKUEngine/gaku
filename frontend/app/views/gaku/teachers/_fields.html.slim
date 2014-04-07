@@ -2,4 +2,9 @@ td.surname = teacher.surname
 td.name = teacher.name
 td.birth = teacher.birth_date
 td.gender = gender(teacher)
+td.personal_information
+  - teacher.addresses_count.times do
+    = address_icon
+  - teacher.contacts_count.times do
+    = contact_icon
 
