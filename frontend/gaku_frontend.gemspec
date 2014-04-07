@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails',                     '4.0.2'
   s.add_dependency 'sprockets',                      '2.11.0'
   s.add_dependency 'sass',                           '~> 3.2'
-  s.add_dependency 'sprockets',                      '2.11.0'
   s.add_dependency 'slim',                           '2.0.0'
 
   s.add_dependency 'responders',                     '~> 1.0'
@@ -44,7 +43,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails',                '~> 4.2'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
   s.add_dependency 'bootstrap-sass',                 '~> 3.1.1.0'
-  s.add_dependency 'font-awesome-sass',              '~> 4.0.2'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.3.0.1'
   s.add_dependency 'nprogress-rails'
   s.add_dependency 'underscore-rails',               '~> 1.5.2'
