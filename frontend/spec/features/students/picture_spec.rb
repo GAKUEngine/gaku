@@ -20,12 +20,12 @@ describe 'Student Picture' do
     it 'upload avatar', js: true do
       click '#avatar-picture'
       expect do
-      attach_file :student_picture,
-              File.join(Rails.root + '../support/120x120.jpg')
-      click_button 'Upload'
-      wait_for_ajax
-      student.reload
-      flash_updated?
+        attach_file :student_picture,
+                File.join(Rails.root + '../support/120x120.jpg')
+        click_button 'Upload'
+        wait_for_ajax
+        student.reload
+        flash_updated?
       end.to change(student, :picture_content_type).from(nil).to('image/jpeg')
     end
   end
