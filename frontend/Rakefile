@@ -29,19 +29,3 @@ task :test_app do
   ENV['LIB_NAME'] = 'gaku/frontend'
   Rake::Task['common:test_app'].invoke
 end
-
-
-
-namespace :spec do
-
-  desc "Run fast specs"
-  task :fast do
-    system 'rspec spec/controllers spec/routing'
-  end
-
-  desc "Run slow specs"
-  task :slow do
-    system 'rspec spec/features'
-  end
-
-end

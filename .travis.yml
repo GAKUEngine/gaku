@@ -14,9 +14,9 @@ bundler_args: -j4 --without development production
 
 env:
   - GEM=core SUITE=spec/models
-  - GEM=frontend SUITE=fast
+  - GEM=frontend SUITE=spec/controllers spec/integration spec/routing
   - GEM=admin SUITE=spec/controllers spec/routing
-  - GEM=frontend SUITE=slow SELENIUM=1
+  - GEM=frontend SUITE=spec/features SELENIUM=1
   - GEM=admin SUITE=spec/features SELENIUM=1
   - GEM=archive SELENIUM=1
 
@@ -26,7 +26,7 @@ before_install:
 
 script:
   - bundle exec rake test_app
-  - I18N=1 bundle exec rake spec:$SUITE
+  - I18N=1 bundle exec rspec $SUITE
 
 notifications:
   email: false
