@@ -9,12 +9,12 @@
 
       .panel.panel-default
         .panel-heading
-          h4#exams-exam-portion-menu.panel-title
+          h4#exams-exam-portions-menu.panel-title
             = link_to badge_count(@exam.exam_portions_count, t(:'exam_portion.plural'), 'exam-portions-count'), [@exam, :exam_portions], remote: true
         .panel-body
-          ul.list-unstyled
+          ul#exams-exam-portions-menu-list.list-unstyled
             - @exam.exam_portions.each do |portion|
-              li = link_to portion, [:edit, @exam, portion], remote: true
+              li id="exam-portion-#{portion.id}" = link_to portion, [:edit, @exam, portion], remote: true
       .panel.panel-default
         .panel-heading
           h4.panel-title

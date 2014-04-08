@@ -1,6 +1,6 @@
 .row
   .col-md-12.exam-index
-    = remote_form_for [@exam, @exam_portion], label: 'nil', resource: 'exam-exam-portion' do |f|
+    = remote_form_for [@exam, @exam_portion], label: t(:'exam_portion.singular'), resource: 'exam-exam-portion' do |f|
       = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: f
       = buttons_for @exam_portion, resource: 'exam-exam-portion'
 

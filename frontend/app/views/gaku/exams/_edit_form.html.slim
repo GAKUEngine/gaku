@@ -1,4 +1,4 @@
-= normal_form_for @exam, label: @exam do |f|
+= normal_form_for @exam, label: t(:'exam.singular') do |f|
   = render 'form_fields', f: f
   = buttons_for @exam
 
