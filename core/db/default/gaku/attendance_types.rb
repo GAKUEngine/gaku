@@ -1,7 +1,7 @@
 types = [
   {
     name: 'Present',
-    name_ja: 'Japanese Present',
+    name_ja: '出席',
     color_code: '#006e54',
     counted_absent: false,
     disable_credit: false,
@@ -11,7 +11,7 @@ types = [
 
   {
     name: 'Present for Credit',
-    name_ja: 'Japanese Present for Credit',
+    name_ja: '認定出席',
     color_code: '#00a497',
     counted_absent: false,
     disable_credit: false,
@@ -21,7 +21,7 @@ types = [
 
   {
     name: 'Excused',
-    name_ja: 'Japanese Excused',
+    name_ja: '公欠',
     color_code: '#2c4f54',
     counted_absent: false,
     disable_credit: false,
@@ -31,7 +31,7 @@ types = [
 
   {
     name: 'Illness',
-    name_ja: 'Japanese Illness',
+    name_ja: '病欠',
     color_code: '#4d4398',
     counted_absent: true,
     disable_credit: false,
@@ -41,7 +41,7 @@ types = [
 
   {
     name: 'Injury',
-    name: 'Japanese Injury',
+    name: '病欠[怪我]',
     color_code: '#c85179',
     counted_absent: true,
     disable_credit: false,
@@ -51,7 +51,7 @@ types = [
 
   {
     name: 'Mourning',
-    name_ja: 'Japanese Mourning',
+    name_ja: '忌引',
     color_code: '#7d7d7d',
     counted_absent: true,
     disable_credit: false,
@@ -61,7 +61,7 @@ types = [
 
   {
     name: 'Absent',
-    name_ja: 'Japanese Absent',
+    name_ja: '欠席',
     color_code: '#e60033',
     counted_absent: true,
     disable_credit: true,
