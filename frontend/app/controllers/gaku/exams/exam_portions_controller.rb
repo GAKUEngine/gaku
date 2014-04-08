@@ -5,8 +5,11 @@ module Gaku
 
     respond_to :js, :html
 
-    before_action :set_exam, only: %i( new show create edit update destroy sort )
+    before_action :set_exam, only: %i( new show create edit update destroy sort index )
     before_action :set_exam_portion, only: %i( show edit update destroy )
+
+    def index
+    end
 
     def new
       @exam_portion = ExamPortion.new
@@ -29,7 +32,7 @@ module Gaku
 
     def update
       @exam_portion.update(exam_portion_params)
-      respond_with @exam_portion, location: [:edit, @exam, @exam_portion]
+      respond_with @exam_portion#, location: [@exam, :exam_portions]
     end
 
     def destroy

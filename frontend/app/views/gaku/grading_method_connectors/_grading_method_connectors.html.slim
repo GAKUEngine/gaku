@@ -7,20 +7,17 @@
     = count_div "#{@gradable_resource}-grading-method-connectors-count" do
       = print_count @gradable.grading_methods.count, t(:'grading_method.list')
   .pull-right
-    = ajax_link_to_new t(:'grading_method_set.add'), [:new_set, @gradable, :grading_method_connectors], {id: 'new-set-' + @gradable_resource + '-grading-method-connector-link', class: 'btn btn-primary'} if can_edit?
+    = ajax_link_to_new t(:'grading_method_set.add'), [:new_set, @gradable, :grading_method_connectors], {id: 'new-set-' + @gradable_resource + '-grading-method-connector-link', class: 'btn btn-primary'}
 
-    = ajax_link_to_new t(:'grading_method.add'), [:new, @gradable, :grading_method_connector], {id: 'new-' + @gradable_resource + '-grading-method-connector-link', class: 'btn btn-primary'} if can_edit?
+    = ajax_link_to_new t(:'grading_method.add'), [:new, @gradable, :grading_method_connector], {id: 'new-' + @gradable_resource + '-grading-method-connector-link', class: 'btn btn-primary'}
 
 = index_body do
   = table_for "#{@gradable_resource}-grading-method-connectors-index" do
     thead
       tr
-        = th t(:'order') if can_edit?
+        = th t(:'order')
         = th t(:'grading_method.name')
         = th t(:'grading_method.method')
-        - if can_edit?
-          = th_actions 3
-        - else
-          = th_actions 1
+        = th_actions 3
     = sortable_tbody [:sort, @gradable, :grading_method_connectors] do
       = render partial: 'gaku/grading_method_connectors/grading_method_connector', collection: @gradable.grading_method_connectors, as: :grading_method_connector

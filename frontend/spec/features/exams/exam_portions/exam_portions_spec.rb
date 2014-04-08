@@ -12,6 +12,7 @@ describe 'Exam Portions' do
   context '#new', js: true do
     before do
       visit gaku.edit_exam_path(exam)
+      click '#exams-exam-portion-menu a'
       click new_link
     end
 
@@ -24,7 +25,7 @@ describe 'Exam Portions' do
       end.to change(Gaku::ExamPortion, :count).by 1
 
       within(table) { has_content? 'Biology Exam Portion' }
-      within(tab_link) { expect(page.has_content?('Exam Portions(1)')) }
+      within('#exams-exam-portion-menu') { expect(page.has_content?('1')).to eq true }
     end
 
     it { has_validations? }
@@ -37,7 +38,9 @@ describe 'Exam Portions' do
     end
 
     context '#edit from edit view', js: true do
-      before { visit gaku.edit_exam_exam_portion_path(exam, exam_portion) }
+      before do
+        visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
+      end
 
       it 'edits' do
         fill_in 'exam_portion_name', with: 'Biology 2012 Portion'
@@ -60,8 +63,9 @@ describe 'Exam Portions' do
 
     it 'deletes', js: true do
       visit gaku.edit_exam_path(exam)
+      click '#exams-exam-portion-menu a'
 
-      within(tab_link) { page.has_content? 'Exam Portions(1)' }
+      within('#exams-exam-portion-menu') { expect(page.has_content?('1')).to eq true }
       within(table) { has_content? exam_portion.name }
 
       expect do
@@ -70,10 +74,8 @@ describe 'Exam Portions' do
         flash_destroyed?
       end.to change(Gaku::ExamPortion, :count).by -1
 
-      within(tab_link) { has_no_content? 'Exam Portions(1)' }
+      within('#exams-exam-portion-menu') { expect(page.has_no_content?('1')).to eq true }
       within(table) { has_no_content? exam_portion.name }
-
-
     end
 
   end

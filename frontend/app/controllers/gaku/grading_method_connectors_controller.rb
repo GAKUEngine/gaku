@@ -8,6 +8,10 @@ module Gaku
     before_action :load_data, only: %i( new )
     before_action :load_sets, only: %i( new_set )
 
+    def index
+
+    end
+
     def new
      @grading_method_connector = @gradable.grading_method_connectors.new
      respond_with @grading_method_connector

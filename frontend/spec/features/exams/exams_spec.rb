@@ -6,8 +6,7 @@ describe 'Exams' do
   let(:exam2) { create(:exam) }
   let(:department) { create(:department) }
 
-  let(:grading_method_set) {create(:grading_method_set, :with_grading_methods )}
-
+  let(:grading_method_set) { create(:grading_method_set, :with_grading_methods) }
 
   before(:all) { set_resource 'exam' }
   before { as :admin }
@@ -75,8 +74,8 @@ describe 'Exams' do
       within(table) { has_content? 'Biology Exam' }
 
       click edit_link
-      click '#exam-grading-method-connectors-tab-link'
-      within('#exam-grading-method-connectors') do
+      click '#exams-grading-methods-menu a'
+      within('#exam-grading-method-connectors-index') do
         has_content? grading_method_set.grading_methods.first
         has_content? grading_method_set.grading_methods.second
       end

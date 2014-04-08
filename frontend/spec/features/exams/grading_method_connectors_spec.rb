@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Exam Graidng Method Connectors' do
+describe 'Exam Grading Method Connectors' do
 
   let!(:exam) { create(:exam) }
   let(:grading_method) { create(:grading_method) }
@@ -15,7 +15,7 @@ describe 'Exam Graidng Method Connectors' do
     before do
       grading_method
       visit gaku.edit_exam_path(exam)
-      click '#exam-grading-method-connectors-tab-link'
+      click '#exams-grading-methods-menu a'
       click new_link
     end
 
@@ -32,8 +32,8 @@ describe 'Exam Graidng Method Connectors' do
         has_content? grading_method.name
       end
 
-      within('#exam-grading-method-connectors-tab-link') do
-        has_content? 'Grading Methods(1)'
+      within('.grading-methods-count') do
+        expect(page.has_content?('1')).to eq true
       end
 
       count? 'Grading methods list(1)'
@@ -50,7 +50,7 @@ describe 'Exam Graidng Method Connectors' do
     it 'add set grading methods if not in collection' do
       visit gaku.edit_exam_path(exam)
 
-      click '#exam-grading-method-connectors-tab-link'
+      click '#exams-grading-methods-menu a'
       click '#new-set-exam-grading-method-connector-link'
       expect do
         select grading_method_set.name,
@@ -67,7 +67,7 @@ describe 'Exam Graidng Method Connectors' do
       exam.grading_method_connectors.create( grading_method: grading_method_set.grading_methods.first)
       visit gaku.edit_exam_path(exam)
 
-      click '#exam-grading-method-connectors-tab-link'
+      click '#exams-grading-methods-menu a'
       click '#new-set-exam-grading-method-connector-link'
       expect do
         select grading_method_set.name,
@@ -82,7 +82,7 @@ describe 'Exam Graidng Method Connectors' do
     before do
       exam.grading_methods << grading_method
       visit gaku.edit_exam_path(exam)
-      click '#exam-grading-method-connectors-tab-link'
+      click '#exams-grading-methods-menu a'
     end
 
     it 'deletes', js: true do
@@ -94,12 +94,11 @@ describe 'Exam Graidng Method Connectors' do
         flash_destroyed?
       end.to change(Gaku::GradingMethodConnector, :count).by -1
 
-      within('#exam-grading-method-connectors-tab-link') do
-        has_no_content? 'Grading Methods(1)'
+      within('.grading-methods-count') do
+        expect(page.has_no_content?('1')).to eq true
       end
 
       count? 'Grading methods list'
-
     end
 
   end
