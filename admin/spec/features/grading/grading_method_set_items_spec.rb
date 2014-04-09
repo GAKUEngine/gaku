@@ -20,7 +20,10 @@ describe 'Admin Grading Method Set Items' do
   context 'new', js: true do
     before do
       grading_method_set
-      visit gaku.admin_grading_method_set_path(grading_method_set)
+      visit gaku.admin_root_path
+      click '#grading-method-sets-menu a'
+      click '.show-link'
+      #visit gaku.admin_grading_method_set_path(grading_method_set)
       click new_link
     end
 
@@ -43,7 +46,9 @@ describe 'Admin Grading Method Set Items' do
       grading_method2
       grading_method_set
       grading_method_set_item
-      visit gaku.admin_grading_method_set_path(grading_method_set)
+      visit gaku.admin_root_path
+      click '#grading-method-sets-menu a'
+      click '.show-link'
     end
 
     context 'edit', js: true do

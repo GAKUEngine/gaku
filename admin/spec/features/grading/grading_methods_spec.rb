@@ -11,7 +11,8 @@ describe 'Admin Grading Methods' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_grading_methods_path
+      visit gaku.admin_root_path
+      click '#grading-methods-menu a'
       click new_link
     end
 
@@ -35,7 +36,8 @@ describe 'Admin Grading Methods' do
   context 'existing' do
     before do
       grading_method
-      visit gaku.admin_grading_methods_path
+      visit gaku.admin_root_path
+      click '#grading-methods-menu a'
     end
 
     context 'edit', js: true do

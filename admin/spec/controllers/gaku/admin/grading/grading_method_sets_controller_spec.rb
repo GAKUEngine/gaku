@@ -8,8 +8,8 @@ describe Gaku::Admin::GradingMethodSetsController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'XHR #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -20,11 +20,12 @@ describe Gaku::Admin::GradingMethodSetsController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+
+       describe 'XHR #index' do
         before do
           grading_method_set
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -32,10 +33,6 @@ describe Gaku::Admin::GradingMethodSetsController do
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
-
-    end
-
-    context 'js' do
 
       describe 'XHR #new' do
         before { gaku_js_get :new }

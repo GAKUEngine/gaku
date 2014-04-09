@@ -3,14 +3,13 @@ module Gaku
 
     #load_and_authorize_resource class: GradingMethod
 
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_grading_method, only: %i( edit update destroy )
 
     def index
       @grading_methods = GradingMethod.all
-      @count = GradingMethod.count
+      set_count
       respond_with @grading_methods
     end
 
@@ -22,7 +21,7 @@ module Gaku
     def create
       @grading_method = GradingMethod.new(grading_method_params)
       @grading_method.save
-      @count = GradingMethod.count
+      set_count
       respond_with @grading_method
     end
 
@@ -36,7 +35,7 @@ module Gaku
 
     def destroy
       @grading_method.destroy
-      @count = GradingMethod.count
+      set_count
       respond_with @grading_method
     end
 
@@ -54,6 +53,10 @@ module Gaku
 
     def attributes
       %i( description method name curved arguments )
+    end
+
+    def set_count
+      @count = GradingMethod.count
     end
 
   end
