@@ -12,7 +12,8 @@ describe 'Admin Users' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_users_path
+      visit gaku.admin_root_path
+      click '#users-menu a'
       click new_link
     end
 
@@ -42,7 +43,8 @@ describe 'Admin Users' do
   context 'existing' do
     before do
       user
-      visit gaku.admin_users_path
+      visit gaku.admin_root_path
+      click '#users-menu a'
     end
 
     context 'edit', js: true do

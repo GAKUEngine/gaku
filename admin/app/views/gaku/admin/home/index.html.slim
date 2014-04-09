@@ -30,14 +30,28 @@
             = t(:'menu.admin.grading.grading')
         .panel-body
           ul.list-unstyled
+
             li#grading-methods-menu
               = link_to t(:'menu.admin.grading.grading_methods'), [:admin, :grading_methods], remote: true
+
             li#grading-method-sets-menu
               = link_to t(:'menu.admin.grading.grading_sets'), [:admin, :grading_method_sets], remote: true
 
       .panel.panel-default
         .panel-heading
           h4.panel-title
-            = link_to t(:'edit'), [:admin, :specialties], remote: true
+            =  t(:'menu.admin.users.users_and_roles')
+        .panel-body
+          ul.list-unstyled
+
+            li#users-menu
+              = link_to t(:'menu.admin.users.users'), [:admin, :users], remote: true
+
+            li#roles-menu
+              = link_to t(:'menu.admin.users.roles'), [:admin, :roles], remote: true
+
+
+
+
 
   .col-md-10#ajax-load

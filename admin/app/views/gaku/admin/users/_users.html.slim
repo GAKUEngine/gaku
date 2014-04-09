@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    #new-admin-user.d-none
+    .pull-left
+      = count_div 'admin-users-count' do
+        = print_count @count, t(:'user.list')
+    .pull-right
+      = ajax_link_to_new t(:'user.add'), [:new, :admin, :user], id: 'new-admin-user-link'
+
+hr
+
+#admin-users
+  = table_for 'admin-users-index' do
+    thead
+      tr
+        = th t(:'user.username')
+        = th t(:'user.email')
+        = th_actions 2
+    tbody
+      = render partial: 'gaku/admin/users/user', collection: @users, as: :user
+
+= paginate @users
