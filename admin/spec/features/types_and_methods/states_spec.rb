@@ -14,7 +14,8 @@ describe 'Admin States' do
   context 'new', js:true do
     before do
       state; country2
-      visit gaku.admin_states_path
+      visit gaku.admin_root_path
+      click '#states-menu a'
       click new_link
 
       select country.name, from: 'select-country'
@@ -53,7 +54,8 @@ describe 'Admin States' do
   context 'existing', js: true do
     before do
       state
-      visit gaku.admin_states_path
+      visit gaku.admin_root_path
+      click '#states-menu a'
 
       select country.name, from: 'select-country'
       click '#admin-show-country-states-submit'
@@ -101,7 +103,8 @@ describe 'Admin States' do
     it 'show country state for country preset' do
       state
       preset
-      visit gaku.admin_states_path
+      visit gaku.admin_root_path
+      click '#states-menu a'
 
       within(country_table) { has_content? state.name }
     end

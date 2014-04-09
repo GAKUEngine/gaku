@@ -4,8 +4,8 @@ module Gaku
 
       #load_and_authorize_resource class: State
 
-      respond_to :js,   only: %i( new create edit update destroy country_states )
-      respond_to :html, only: %i( index edit update )
+      respond_to :js,   only: %i( new create edit update destroy country_states index )
+      respond_to :html, only: %i( edit update )
 
       before_action :set_state, only: %i( edit show update destroy )
       before_action :set_countries

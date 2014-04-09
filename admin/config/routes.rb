@@ -13,6 +13,7 @@ Gaku::Core::Engine.routes.draw  do
   resources :states, only: :index
 
   namespace :admin do
+    root to: 'home#index'
 
     get 'school_details',          to: 'schools#show_master'
     get 'school_details/edit',     to: 'schools#edit_master'

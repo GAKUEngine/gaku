@@ -3,14 +3,13 @@ module Gaku
 
     #load_and_authorize_resource class: CommuteMethodType
 
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_commute_method_type, only: %i( edit update destroy )
 
     def index
       @commute_method_types = CommuteMethodType.all
-      @count = CommuteMethodType.count
+      set_count
       respond_with @commute_method_types
     end
 
@@ -22,7 +21,7 @@ module Gaku
     def create
       @commute_method_type = CommuteMethodType.new(commute_method_type_params)
       @commute_method_type.save
-      @count = CommuteMethodType.count
+      set_count
       respond_with @commute_method_type
     end
 
@@ -36,7 +35,7 @@ module Gaku
 
     def destroy
       @commute_method_type.destroy
-      @count = CommuteMethodType.count
+      set_count
       respond_with @commute_method_type
     end
 
@@ -48,6 +47,10 @@ module Gaku
 
     def commute_method_type_params
       params.require(:commute_method_type).permit(:name)
+    end
+
+    def set_count
+      @count = CommuteMethodType.count
     end
 
   end

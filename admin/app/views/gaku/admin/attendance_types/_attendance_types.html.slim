@@ -1,12 +1,13 @@
-= content_for :index_header do
-  .pull-left
-    = count_div 'admin-attendance-types-count' do
-      = print_count @count, t(:'attendance_type.list')
-  .pull-right
-    = ajax_link_to_new t(:'attendance_type.add'), [:new, :admin, :attendance_type], id: 'new-admin-attendance-type-link'
+.row
+  .col-md-12
+    #new-admin-attendance-type.d-none
+    .pull-left
+      = count_div 'admin-attendance-types-count' do
+        = print_count @count, t(:'attendance_type.list')
+    .pull-right
+      = ajax_link_to_new t(:'attendance_type.add'), [:new, :admin, :attendance_type], id: 'new-admin-attendance-type-link'
 
-= content_for :new_form do
-  #new-admin-attendance-type.d-none
+hr
 
 #admin-attendance-types
   = table_for 'admin-attendance-types-index' do

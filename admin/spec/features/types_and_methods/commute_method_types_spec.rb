@@ -9,7 +9,8 @@ describe 'Admin Commute Method Types' do
 
   context 'new', js: true do
   	before do
-  	  visit gaku.admin_commute_method_types_path
+  	  visit gaku.admin_root_path
+      click '#commute-methods-menu a'
       click new_link
     end
 
@@ -31,7 +32,8 @@ describe 'Admin Commute Method Types' do
 
     before do
       commute_method_type
-      visit gaku.admin_commute_method_types_path
+      visit gaku.admin_root_path
+      click '#commute-methods-menu a'
     end
 
     context '#edit ', js: true do

@@ -10,5 +10,5 @@
     = f.text_field :code, label: t(:'address.state.code')
 .row
   .col-md-6
-    = f.select :country_iso, @countries, { prompt: t(:'address.choose_country') }, label: t(:'address.country')
+    = f.select :country_iso, @countries, { prompt: t(:'address.choose_country') }, label: t(:'address.country'), class: 'form-control'
 

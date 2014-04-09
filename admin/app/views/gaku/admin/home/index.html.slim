@@ -1,0 +1,32 @@
+.row
+  .col-md-2
+    .panel-group#accordion
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'menu.admin.types.types')
+        .panel-body
+          ul.list-unstyled
+
+            li#attendance-types-menu
+              = link_to t(:'menu.admin.types.attendance_types'), [:admin, :attendance_types], remote: true
+
+            li#commute-methods-menu
+              = link_to t(:'menu.admin.types.commute_methods'), [:admin, :commute_method_types], remote: true
+
+            li#contact-types-menu
+              = link_to t(:'menu.admin.types.contact'), [:admin, :contact_types], remote: true
+
+            li#enrollment-statuses-menu
+              = link_to t(:'menu.admin.types.enrollment_status'), [:admin, :enrollment_statuses], remote: true
+
+            li#states-menu
+              = link_to t(:'menu.admin.types.states'), [:admin, :states], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:admin, :specialties], remote: true
+
+  .col-md-10#ajax-load

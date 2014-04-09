@@ -9,7 +9,8 @@ describe 'Admin Contact Types' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_contact_types_path
+      visit gaku.admin_root_path
+      click '#contact-types-menu a'
       click new_link
     end
 
@@ -31,7 +32,8 @@ describe 'Admin Contact Types' do
   context 'existing' do
     before do
       contact_type
-      visit gaku.admin_contact_types_path
+      visit gaku.admin_root_path
+      click '#contact-types-menu a'
     end
 
     context 'edit', js: true do
