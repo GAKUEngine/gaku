@@ -1,12 +1,13 @@
-= content_for :index_header do
-  .pull-left
-    = count_div 'admin-badge-types-count' do
-      = print_count @count, t(:'badge_type.list')
-  .pull-right
-    = ajax_link_to_new t(:'badge_type.add'), [:new, :admin, :badge_type], id: 'new-admin-badge-type-link'
+.row
+  .col-md-12
+    #new-admin-badge-type.d-none
+    .pull-left
+      = count_div 'admin-badge-types-count' do
+        = print_count @count, t(:'badge_type.list')
+    .pull-right
+      = ajax_link_to_new t(:'badge_type.add'), [:new, :admin, :badge_type], id: 'new-admin-badge-type-link'
 
-= content_for :new_form do
-  #new-admin-badge-type.d-none
+hr
 
 #admin-badge-types
   = table_for 'admin-badge-types-index' do

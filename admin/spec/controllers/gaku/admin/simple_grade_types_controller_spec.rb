@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Admin::Achievements::SimpleGradeTypesController do
+describe Gaku::Admin::SimpleGradeTypesController do
 
   let(:simple_grade_type) { create(:simple_grade_type) }
   let(:invalid_simple_grade_type) do
@@ -12,8 +12,8 @@ describe Gaku::Admin::Achievements::SimpleGradeTypesController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'XHR GET #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -24,11 +24,12 @@ describe Gaku::Admin::Achievements::SimpleGradeTypesController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+
+      describe 'XHR GET #index' do
         before do
           simple_grade_type
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -36,10 +37,6 @@ describe Gaku::Admin::Achievements::SimpleGradeTypesController do
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
-
-    end
-
-    context 'js' do
 
       describe 'XHR #new' do
         before do

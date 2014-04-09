@@ -34,8 +34,7 @@ Gaku::Core::Engine.routes.draw  do
       end
     end
 
-    resources :simple_grade_types, controller: 'achievements/simple_grade_types'
-
+    resources :simple_grade_types
     resources :badge_types
     resources :specialties
     resources :system_tools

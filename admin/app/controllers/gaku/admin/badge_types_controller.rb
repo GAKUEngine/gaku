@@ -3,8 +3,7 @@ module Gaku
 
     #load_and_authorize_resource class: Achievement
 
-    respond_to :js,   only: %i( new edit destroy )
-    respond_to :html, only: %i( index create update )
+    respond_to :js, only: %i( new create edit update destroy index )
 
     before_action :set_badge_type, only: %i( edit update destroy )
 
@@ -21,10 +20,12 @@ module Gaku
 
     def create
       @badge_type = BadgeType.new(badge_type_params)
-      @badge_type.save
-      set_count
-      flash[:notice] = t(:'notice.created', resource: t_resource)
-      respond_with [:admin, :badge_types]
+      if @badge_type.save
+        set_count
+        respond_with @badge_type
+      else
+        render :new
+      end
     end
 
     def edit
@@ -32,13 +33,11 @@ module Gaku
 
     def update
       @badge_type.update(badge_type_params)
-      flash[:notice] = t(:'notice.updated', resource: t_resource)
-      respond_with [:admin, :badge_types]
+      respond_with @badge_type
     end
 
     def destroy
       @badge_type.destroy
-      flash[:notice] = t(:'notice.destroyed', resource: t_resource)
       set_count
       respond_with @badge_type
     end
@@ -58,11 +57,7 @@ module Gaku
     end
 
     def attributes
-      %i(name description code authority url issuer badge_image )
-    end
-
-    def t_resource
-      t(:'badge_type.singular')
+      %i( name description code authority url issuer badge_image )
     end
 
   end

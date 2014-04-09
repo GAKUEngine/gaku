@@ -51,6 +51,20 @@
               = link_to t(:'menu.admin.users.roles'), [:admin, :roles], remote: true
 
 
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'menu.admin.achievements.achievements')
+        .panel-body
+          ul.list-unstyled
+
+            li#simple-grade-types-menu
+             = link_to t(:'menu.admin.achievements.simple_grade_types'), [:admin, :simple_grade_types], remote: true
+
+            li#badge-types-menu
+              = link_to t(:'menu.admin.badge_types'), [:admin, :badge_types], remote: true
+
+
 
 
 

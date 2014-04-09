@@ -1,7 +1,7 @@
 module Gaku
-  class Admin::Achievements::SimpleGradeTypesController < Admin::BaseController
-    respond_to :js,   only: %i( new create update edit destroy )
-    respond_to :html, only: %i( index  )
+  class Admin::SimpleGradeTypesController < Admin::BaseController
+
+    respond_to :js, only: %i( new create update edit destroy index )
 
     before_action :set_simple_grade_type, only: %i( edit update destroy )
     before_action :load_data, only: %i( new edit )

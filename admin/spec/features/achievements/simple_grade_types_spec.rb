@@ -12,7 +12,8 @@ describe 'Admin Simple grade types' do
   context 'new', js: true do
     before do
       school; grading_method
-      visit gaku.admin_simple_grade_types_path
+      visit gaku.admin_root_path
+      click '#simple-grade-types-menu a'
       click new_link
     end
 
@@ -40,7 +41,8 @@ describe 'Admin Simple grade types' do
     before do
       school;grading_method
       simple_grade_type
-      visit gaku.admin_simple_grade_types_path
+      visit gaku.admin_root_path
+      click '#simple-grade-types-menu a'
     end
 
     context 'edit', js: true do

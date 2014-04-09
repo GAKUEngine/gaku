@@ -8,8 +8,8 @@ describe Gaku::Admin::BadgeTypesController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'XHR #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -20,11 +20,12 @@ describe Gaku::Admin::BadgeTypesController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+
+      describe 'XHR #index' do
         before do
           badge_type
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -33,10 +34,18 @@ describe Gaku::Admin::BadgeTypesController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'POST #create' do
+      describe 'XHR #new' do
+        before { gaku_js_get :new }
+
+        it { should respond_with 200 }
+        it('assigns @badge_type') { expect(assigns(:badge_type)).to be_a_new(Gaku::BadgeType) }
+        it('renders the :new template') { template? :new }
+      end
+
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_create) do
-            gaku_post :create, badge_type: attributes_for(:badge_type)
+            gaku_js_post :create, badge_type: attributes_for(:badge_type)
           end
 
           it 'creates new badge_type' do
@@ -53,12 +62,12 @@ describe Gaku::Admin::BadgeTypesController do
 
         context 'with invalid attributes' do
           let(:invalid_create) do
-            gaku_post :create, badge_type: attributes_for(:invalid_badge_type)
+            gaku_js_post :create, badge_type: attributes_for(:invalid_badge_type)
           end
 
           it 'redirects' do
             invalid_create
-            should respond_with 302
+            should respond_with 200
           end
 
           it 'does not save the new badge_type' do
@@ -70,13 +79,21 @@ describe Gaku::Admin::BadgeTypesController do
         end
       end
 
-      describe 'PATCH #update' do
+      describe 'XHR #edit' do
+        before { gaku_js_get :edit, id: badge_type }
+
+        it { should respond_with 200 }
+        it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: badge_type, badge_type: attributes_for(:badge_type, name: 'Ruby Champion')
+            gaku_js_patch :update, id: badge_type, badge_type: attributes_for(:badge_type, name: 'Ruby Champion')
           end
 
-          it { should respond_with 302 }
+          it { should respond_with 200 }
           it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
           it('sets flash') { flash_updated? }
           it "changes badge_type's attributes" do
@@ -87,10 +104,10 @@ describe Gaku::Admin::BadgeTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: badge_type, badge_type: attributes_for(:invalid_badge_type, description: 'Ruby Champion')
+            gaku_js_patch :update, id: badge_type, badge_type: attributes_for(:invalid_badge_type, description: 'Ruby Champion')
           end
 
-          it { should respond_with 302 }
+          it { should respond_with 200 }
           it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
 
           it "does not change badge_type's attributes" do
@@ -98,25 +115,6 @@ describe Gaku::Admin::BadgeTypesController do
           end
         end
 
-      end
-    end
-
-    context 'js' do
-
-      describe 'XHR #new' do
-        before { gaku_js_get :new }
-
-        it { should respond_with 200 }
-        it('assigns @badge_type') { expect(assigns(:badge_type)).to be_a_new(Gaku::BadgeType) }
-        it('renders the :new template') { template? :new }
-      end
-
-      describe 'XHR #edit' do
-        before { gaku_js_get :edit, id: badge_type }
-
-        it { should respond_with 200 }
-        it('assigns @badge_type') { expect(assigns(:badge_type)).to eq badge_type }
-        it('renders the :edit template') { template? :edit }
       end
 
       describe 'XHR DELETE #destroy' do
