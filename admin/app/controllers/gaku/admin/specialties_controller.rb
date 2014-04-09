@@ -3,8 +3,7 @@ module Gaku
 
     #load_and_authorize_resource class: Specialty
 
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_specialty, only: %i( edit update destroy )
     before_action :load_data, only: %i( new edit )

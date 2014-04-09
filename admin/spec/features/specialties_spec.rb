@@ -11,7 +11,8 @@ describe 'Admin Specialties' do
   context 'new', js: true do
     before do
       department
-      visit gaku.admin_specialties_path
+      visit gaku.admin_root_path
+      click '#specialties-menu a'
       click new_link
     end
 
@@ -37,7 +38,8 @@ describe 'Admin Specialties' do
     before do
       department
       specialty
-      visit gaku.admin_specialties_path
+      visit gaku.admin_root_path
+      click '#specialties-menu a'
     end
 
     context 'edit', js: true do
