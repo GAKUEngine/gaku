@@ -10,8 +10,9 @@ describe 'Admin Presets Students' do
   let!(:state) { create(:state, country: country) }
 
   before do
-    visit gaku.admin_presets_path
-    click edit_link
+    visit gaku.admin_root_path
+    click '#presets-menu a'
+    click js_edit_link
     click '#admin-preset-address-tab-link'
   end
 

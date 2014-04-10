@@ -1,5 +1,6 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do |f|
-  = f.select :locale, options_for_select(I18n.available_locales, selected: @preset['locale']), label: t(:'locale')
-
-  = f.select :time_format_24, options_for_select([['24', true], ['am/pm', false]], selected: @preset['time_format_24']), label: t(:'time_format')
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.locale') do |f|
+  .col-md-6
+    = f.select :locale, options_for_select(I18n.available_locales, selected: @preset['locale']), { class: 'form-control' }, label: t(:'locale')
+  .col-md-6
+    = f.select :time_format_24, options_for_select([['24', true], ['am/pm', false]], selected: @preset['time_format_24']), { class: 'form-control' }, label: t(:'time_format'), class: 'form-control'
   = buttons_for @preset, resource: 'admin-preset'

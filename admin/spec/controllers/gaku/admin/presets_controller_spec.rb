@@ -8,8 +8,8 @@ describe Gaku::Admin::PresetsController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'XHR GET #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -20,11 +20,11 @@ describe Gaku::Admin::PresetsController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+      describe 'XHR GET #index' do
         before do
           preset
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -34,8 +34,8 @@ describe Gaku::Admin::PresetsController do
       end
 
 
-      describe 'GET #edit' do
-        before { gaku_get :edit, id: preset }
+      describe 'XHR GET #edit' do
+        before { gaku_js_get :edit, id: preset }
 
         it { should respond_with 200 }
         it('assigns @preset') { expect(assigns(:preset)).to eq preset }
@@ -47,11 +47,10 @@ describe Gaku::Admin::PresetsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: preset, preset: attributes_for(:preset, name: 'custom')
+            gaku_js_patch :update, id: preset, preset: attributes_for(:preset, name: 'custom')
           end
 
-          it { should respond_with 302 }
-          it('redirects') { redirect_to? "/admin/presets/#{preset.id}/edit" }
+          it { should respond_with 200 }
           it('assigns @preset') { expect(assigns(:preset)).to eq preset }
           it('sets flash') { flash_updated? }
           it "changes preset's attributes" do

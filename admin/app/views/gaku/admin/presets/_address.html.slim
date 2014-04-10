@@ -1,19 +1,20 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.address.singular') do
   = fields_for :preset do |f|
     .row
-      .col-md-3
+      .col-md-4
         = f.fields_for :address do |a|
           = a.label t(:'preset.address.country')
-          = a.select :country, @countries, {selected: @preset['address']['country'], prompt: t(:'address.choose_country')}
+          = a.select :country, @countries, {selected: @preset['address']['country'], prompt: t(:'address.choose_country')}, { class: 'form-control' }
 
-      .col-md-3
+      .col-md-4
         = f.fields_for :address do |a|
           = a.label t(:'preset.address.state')
-          = a.text_field :state, value: @preset['address']['state']
+          = a.text_field :state, value: @preset['address']['state'], class: 'form-control'
 
-      .col-md-3
+      .col-md-4
         = f.fields_for :address do |a|
           = a.label t(:'preset.address.city')
-          = a.text_field :city, value: @preset['address']['city']
+          = a.text_field :city, value: @preset['address']['city'], class: 'form-control'
+  br
 
   = buttons_for @preset, resource: 'admin-preset'

@@ -1,4 +1,4 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do |f|
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.names_order') do |f|
   .row
     .col-md-6
       = f.text_field :names_order, value: @preset.names_order, title: t(:'preset.names_order')

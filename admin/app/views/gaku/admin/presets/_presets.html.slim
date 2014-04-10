@@ -1,7 +1,8 @@
-= content_for :index_header do
-  .pull-left
-    = count_div 'admin-presets-count' do
-      = print_count @count, t(:'preset.list')
+.row
+  .col-md-12
+    .pull-left
+      = count_div 'admin-presets-count' do
+        = print_count @count, t(:'preset.list')
 
 #admin-presets
   = table_for 'admin-presets-index' do

@@ -1,7 +1,7 @@
 module Gaku
   class Admin::PresetsController < Admin::BaseController
 
-    respond_to :html, only: %i( index edit update )
+    respond_to :js, only: %i( index edit update )
     before_action :set_preset, except: :index
 
     def index
