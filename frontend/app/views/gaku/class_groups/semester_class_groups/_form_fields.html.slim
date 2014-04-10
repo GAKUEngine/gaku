@@ -1,3 +1,0 @@
-.row
-  .col-md-6
-    = f.select :semester_id, options_from_collection_for_select(@semesters, :id, :to_s) , {prompt: t(:'semester_class_group.choose')}, class: "span12", label: t(:'semester.plural'), uniqueness: true
