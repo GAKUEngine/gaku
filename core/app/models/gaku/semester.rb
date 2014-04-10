@@ -1,11 +1,9 @@
 module Gaku
   class Semester < ActiveRecord::Base
 
-    has_many :semester_courses
-    has_many :courses, through: :semester_courses
-
-    has_many :semester_class_groups
-    has_many :class_groups, through: :semester_class_groups
+    has_many :semester_connectors
+    has_many :courses,      through: :semester_connectors, source: :semesterable, source_type: "Gaku::Course"
+    has_many :class_groups, through: :semester_connectors, source: :semesterable, source_type: "Gaku::ClassGroup"
 
     belongs_to :school_year
 
