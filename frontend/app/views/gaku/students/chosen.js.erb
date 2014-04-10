@@ -1,4 +1,3 @@
-$('#chosen-actions').html('<%= j render("student_chooser_form") %>');
 $('.show-chosen-table').hide();
 $('.hide-chosen-table').show();
 $('#chosen-table').slide();
@@ -8,5 +7,5 @@ $('#chosen-actions').slide();
 var chosen_trs = $('#chosen-table').find('tbody tr');
 chosen_trs.each(function() {
   var id = $(this).attr('class');
-  $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').append('<input type="hidden" name="selected_students[]" value="' + id + '" class="' + id + '"/>');
+  $('#selected-students').append('<input type="hidden" name="selected_students[]" value="' + id + '" class="' + id + '"/>');
 });

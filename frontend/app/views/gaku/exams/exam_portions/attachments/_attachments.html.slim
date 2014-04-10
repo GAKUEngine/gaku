@@ -4,17 +4,17 @@
     = count_div 'exam-exam-portion-attachments-count' do
       = print_count @exam_portion.attachments.count, t(:'attachment.list')
   .pull-right
-    = ajax_link_to_new t(:'attachment.new'), [:new, @exam, @exam_portion, :attachment], id: 'new-exam-exam-portion-attachment-link' if can_edit?
+    = ajax_link_to_new t(:'attachment.new'), [:new, @exam, @exam_portion, :attachment], id: 'new-exam-exam-portion-attachment-link'
 
 = index_body do
   = table_for 'exam-exam-portion-attachments-index' do
 		thead
 			tr
-				= th t(:'attachment.name')
-				= th t(:'attachment.description')
-				= th t(:'attachment.file_name')
-				= th t(:'attachment.file_type')
-				= th t(:'attachment.file_size')
+				th.btn-inverse = t(:'attachment.name')
+				th.btn-inverse = t(:'attachment.description')
+				th.btn-inverse.col-sm-2 = t(:'attachment.file_name')
+				th.btn-inverse.col-sm-1 = t(:'attachment.file_type')
+				th.btn-inverse.col-sm-1 = t(:'attachment.file_size')
         = th_actions 3
 		tbody
 			= render partial: 'gaku/exams/exam_portions/attachments/attachment', collection: @exam_portion.attachments, as: :attachment

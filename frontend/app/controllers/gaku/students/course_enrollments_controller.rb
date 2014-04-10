@@ -1,9 +1,13 @@
 module Gaku
   class Students::CourseEnrollmentsController < GakuController
 
-    respond_to :js, only: %i( new create destroy )
+    respond_to :js, only: %i( new create destroy index )
 
     before_action :set_student
+
+    def index
+      @course_enrollments = @student.course_enrollments
+    end
 
     def new
       set_courses

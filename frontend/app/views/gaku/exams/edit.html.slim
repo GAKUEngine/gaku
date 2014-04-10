@@ -1,16 +1,36 @@
 .row
-  .col-md-12.exam-index
-    = normal_form_for @exam, label: 'nil' do |f|
-      = render 'form_fields', f: f
-      = buttons_for @exam
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4#exam-edit-menu.panel-title
+            = link_to t(:'edit'), [:edit, @exam], remote: true
 
-= render 'tabs'
+      .panel.panel-default
+        .panel-heading
+          h4#exams-exam-portions-menu.panel-title
+            = link_to badge_count(@exam.exam_portions_count, t(:'exam_portion.plural'), 'exam-portions-count'), [@exam, :exam_portions], remote: true
+        .panel-body
+          ul#exams-exam-portions-menu-list.list-unstyled
+            - @exam.exam_portions.each do |portion|
+              li id="exam-portion-#{portion.id}" = link_to portion, [:edit, @exam, portion], remote: true
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
 
-= footer do
-  .col-md-9
-    = link_to_index exams_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @exam
+        .panel-body
+          ul.list-unstyled
+            li#exams-notes-menu
+              = link_to badge_count(@exam.notes_count, t(:'note.plural'),'notes-count'), [@exam, :notes], remote: true
+            li#exams-grading-methods-menu
+              = link_to badge_count(@exam.grading_method_connectors.count, t(:'grading_method.plural'), 'grading-methods-count'), [@exam, :grading_method_connectors], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'exam.plural'), exams_path
+
+
+  .col-md-10#ajax-load
+    = render 'edit_form', exam: @exam

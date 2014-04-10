@@ -5,7 +5,7 @@
       = count_div 'student-external-school-records-count' do
         = print_count @student.external_school_records_count, t(:'external_school_record.list')
     .pull-right
-      = ajax_link_to_new t(:'external_school_record.add'), [:new, @student, :external_school_record], id: "new-student-external-school-record-link" if can_edit?
+      = ajax_link_to_new t(:'external_school_record.add'), [:new, @student, :external_school_record], id: "new-student-external-school-record-link"
 
   = index_body do
       = table_for 'student-external-school-records-index' do
@@ -19,6 +19,6 @@
             = th t(:'external_school_record.total_units')
             = th t(:'external_school_record.attendance_rate')
 
-            = th_actions 2 if can_edit?
+            = th_actions 2
         tbody
           = render partial: 'gaku/students/external_school_records/external_school_record', collection: @student.external_school_records, as: 'external_school_record'

@@ -1,5 +1,9 @@
+$('.exam-portions-count').html("<%= @count %>");
+
 $('#new-exam-exam-portion').slide();
 $('#new-exam-exam-portion-link').show();
+
+$('#exams-exam-portions-menu-list').append('<%= j render("gaku/exams/exam_portions/exam_portion_menu_link", {exam_portion: @exam_portion}) %>' );
 showNotice("<%= render_flash %>");
 
 $('#exam-exam-portions-index tbody').append('<%= j render("gaku/exams/exam_portions/exam_portion", {exam_portion: @exam_portion}) %>');

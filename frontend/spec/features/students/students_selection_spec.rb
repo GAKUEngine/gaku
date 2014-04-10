@@ -7,6 +7,8 @@ describe 'Selecting Students', type: :feature do
     set_resource 'student'
   end
 
+  let(:admin) { create(:admin_user) }
+
   let!(:preset) { create(:preset, chooser_fields: {show_name: '1', show_surname: '1'}) }
 
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
@@ -14,7 +16,8 @@ describe 'Selecting Students', type: :feature do
   let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
 
   before do
-    as :admin
+    as admin
+    admin.clear_student_selection
   end
 
   context 'existing' do
@@ -82,7 +85,9 @@ describe 'Selecting Students', type: :feature do
       page.has_selector? '#students-checked-div'
       page.has_content? 'Chosen students(1)'
       click_link 'Show'
+      #sleep 10
       find(:css, ".remove-student").click
+      sleep 1
       find(:css, "input#student-#{student.id}").should_not be_checked
       page.has_content? 'Chosen students(1)'
 

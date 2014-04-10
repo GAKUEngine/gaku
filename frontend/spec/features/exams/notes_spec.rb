@@ -12,7 +12,7 @@ describe 'Exam Notes' do
     before do
       @resource = exam
       visit gaku.edit_exam_path(@resource)
-      click tab_link
+      click '#exams-notes-menu a'
     end
 
     it_behaves_like 'new note'
@@ -22,7 +22,7 @@ describe 'Exam Notes' do
     before do
       @resource = exam_with_note
       visit gaku.edit_exam_path(@resource)
-      click tab_link
+      click '#exams-notes-menu a'
     end
 
     it_behaves_like 'edit note'

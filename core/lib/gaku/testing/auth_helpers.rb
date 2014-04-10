@@ -12,7 +12,11 @@ module Gaku::Testing::AuthHelpers
 
   module Feature
     def as(user)
-      login_as create("#{user.to_sym}_user"), scope: :user
+     if user.is_a?(Symbol)
+        login_as create("#{user.to_sym}_user"), scope: :user
+      else
+        login_as user, scope: :user
+      end
     end
   end
 

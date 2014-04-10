@@ -1,5 +1,6 @@
 $('#student-simple-grades-index tbody').append('<%= j render("simple_grade", {simple_grade: @simple_grade}) %>');
 $('.student-simple-grades-count').html("<%= print_count(@count, t(:'simple_grade.list')) %>");
+$('.simple-grades-count').html("<%= @count %>");
 $('#student-simple-grades-list a').text('<%= j(@student.simple_grades_list) %>');
 
 showNotice("<%= render_flash %>");

@@ -93,6 +93,16 @@ class App
     $(document).on 'click', '#upload-picture-link', ->
       $("#upload-picture").toggle()
 
+  upload_picture_ajax: ->
+    $('body').popover
+      selector: '.picture-upload'
+      html: true
+      content: ()->
+        return $('#upload-picture').html()
+      placement: 'bottom'
+      trigger: 'click'
+
+
   country_dropdown: ->
     $('body').on 'change', '#country_dropdown', ->
       window.load_states()

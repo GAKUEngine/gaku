@@ -1,6 +1,4 @@
-= sort_handler if can_edit? || action_name == 'add_set'
-td= grading_method_connector.grading_method.name
+= sort_handler
+td = grading_method_connector.grading_method.name
 td = grading_method_connector.grading_method.method
-td
-  -if can_edit? || action_name == 'add_set'
-    = ajax_link_to_delete [@gradable, grading_method_connector]
+td = ajax_link_to_delete [@gradable, grading_method_connector]

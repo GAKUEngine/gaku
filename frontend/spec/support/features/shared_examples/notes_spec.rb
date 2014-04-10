@@ -22,6 +22,9 @@ shared_examples_for 'new note' do
       if page.has_css?(tab_link)
         within(tab_link)  { has_content? 'Notes(1)' }
       end
+      if page.has_css?('.notes-count')
+        within('.notes-count')  { expect(page.has_text? '1').to eq true }
+      end
     end
 
     it 'has validations', js: true do
@@ -75,6 +78,10 @@ shared_examples_for 'delete note' do
     within(count_div) { has_no_content? 'Notes list(1)' }
     if page.has_css?(tab_link)
       within(tab_link)  { has_no_content? 'Notes(1)' }
+    end
+
+    if page.has_css?('.notes-count')
+      within('.notes-count')  { expect(page.has_text?('0')).to eq true }
     end
     has_no_content? note_field
   end

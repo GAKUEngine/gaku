@@ -56,11 +56,11 @@ module Gaku
     private
 
     def increment_count
-      contactable.class.increment_counter(:addresses_count, contactable.id)
+      contactable.class.increment_counter(:contacts_count, contactable.id)
     end
 
     def decrement_count
-      contactable.class.decrement_counter(:addresses_count, contactable.id)
+      contactable.class.decrement_counter(:contacts_count, contactable.id)
     end
 
     def remove_other_primary

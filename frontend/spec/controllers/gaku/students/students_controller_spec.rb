@@ -4,6 +4,7 @@ describe Gaku::StudentsController do
 
   let!(:admin) { create(:admin_user) }
   let!(:enrollment_status) { create(:enrollment_status_admitted) }
+  let(:enrollment_status_not_active) { create(:enrollment_status, active: false) }
   let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
   let(:valid_attributes) { {name: 'Marta', surname: 'Kostova'} }
   let(:invalid_attributes) { {name: ''} }
@@ -184,6 +185,116 @@ describe Gaku::StudentsController do
       end
     end
 
+    describe 'setting session' do
+      it 'sets session based on params[:q]' do
+        gaku_js_get :index, q: { enrollment_status_code_eq: 'admitted' }
+        expect(session[:q]['enrollment_status_code_eq']).to eq 'admitted'
+      end
+
+      it "doesn't set session if params[:q] is nil" do
+        gaku_js_get :index
+        expect(session[:q]).to eq nil
+      end
+
+      it "changes session if params[:q] is changed" do
+        gaku_js_get :index, q: { enrollment_status_code_eq: 'admitted' }
+        expect(session[:q]['enrollment_status_code_eq']).to eq 'admitted'
+        gaku_js_get :index, q: { enrollment_status_code_eq: 'admitted', graduated_gteq: 'test' }
+        expect(session[:q]['enrollment_status_code_eq']).to eq 'admitted'
+        expect(session[:q]['graduated_gteq']).to eq 'test'
+      end
+
+    end
+
+
+    describe 'search unscoped' do
+      let(:unscoped_student) { create(:student, enrollment_status_code: enrollment_status_not_active.code) }
+
+      it 'searches by enrollment_status_code_eq' do
+        unscoped_student
+        gaku_js_get :index, q: { enrollment_status_code_eq: '' }
+        expect(assigns(:students)).to eq [unscoped_student]
+      end
+
+      it 'searches by graduated_gteq' do
+        unscoped_student
+        gaku_js_get :index, q: { graduated_gteq: '' }
+        expect(assigns(:students)).to eq [unscoped_student]
+      end
+
+      it 'searches by graduated_lteq' do
+        unscoped_student
+        gaku_js_get :index, q: { graduated_lteq: '' }
+        expect(assigns(:students)).to eq [unscoped_student]
+      end
+
+      it 'searches by admitted_gteq' do
+        unscoped_student
+        gaku_js_get :index, q: { admitted_gteq: '' }
+        expect(assigns(:students)).to eq [unscoped_student]
+      end
+
+      it 'searches by admitted_lteq' do
+        unscoped_student
+        gaku_js_get :index, q: { admitted_lteq: '' }
+        expect(assigns(:students)).to eq [unscoped_student]
+      end
+    end
+
+
+    describe 'search active scope' do
+      let(:unscoped_student) { create(:student, enrollment_status_code: enrollment_status_not_active.code) }
+
+      it 'searches by enrollment_status_code_eq' do
+        unscoped_student
+        gaku_js_get :index, q: { name_eq: '' }
+        expect(assigns(:students)).to eq []
+      end
+
+    end
+
+     describe 'sorting' do
+      context 'by created_at' do
+        it 'sorts by created_at' do
+          student
+          gaku_js_get :index, q: { name_eq: '' }
+          expect(assigns(:search).sorts.first.name).to eq 'created_at'
+          expect(assigns(:search).sorts.first.dir).to eq 'desc'
+        end
+      end
+
+      context 'by birth_date' do
+        it 'sorts by birth_date when params[:q][:birth_date_gteq] is present' do
+          student
+          gaku_js_get :index, q: { birth_date_gteq: '2012' }
+          expect(assigns(:search).sorts.first.name).to eq 'birth_date'
+          expect(assigns(:search).sorts.first.dir).to eq 'desc'
+        end
+
+        it 'sorts by birth_date when params[:q][:birth_date_lteq] is present' do
+          student
+          gaku_js_get :index, q: { birth_date_lteq: '2012' }
+          expect(assigns(:search).sorts.first.name).to eq 'birth_date'
+          expect(assigns(:search).sorts.first.dir).to eq 'desc'
+        end
+
+        it 'sorts by birth_date when params[:q][:age_gteq] is present' do
+          student
+          gaku_js_get :index, q: { age_gteq: '2012' }
+          expect(assigns(:search).sorts.first.name).to eq 'birth_date'
+          expect(assigns(:search).sorts.first.dir).to eq 'desc'
+        end
+
+        it 'sorts by birth_date when params[:q][:age_lteq] is present' do
+          student
+          gaku_js_get :index, q: { age_lteq: '2012' }
+          expect(assigns(:search).sorts.first.name).to eq 'birth_date'
+          expect(assigns(:search).sorts.first.dir).to eq 'desc'
+        end
+      end
+
+    end
+
   end
 
   context 'HTML' do
@@ -293,9 +404,6 @@ describe Gaku::StudentsController do
       end
 
       it { should respond_with 200 }
-      it('assigns @students') { expect(assigns(:students)).to eq [student] }
-      it('assigns @class_groups') { expect(assigns(:class_groups)).to_not be_nil }
-      it('assigns @courses') { expect(assigns(:courses)).to_not be_nil }
       it('renders :chosen template') { template? :chosen }
     end
 

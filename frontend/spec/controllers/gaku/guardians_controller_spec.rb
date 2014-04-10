@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Students::GuardiansController do
+describe Gaku::GuardiansController do
 
   let(:guardian) { create(:guardian) }
   let(:student) { create(:student) }

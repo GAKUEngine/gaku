@@ -11,15 +11,13 @@
 
   .col-md-3
     = f.text_field :zipcode, label: t(:'address.zipcode')
-  .col-md-3
-    button.col-md-12.btn.btn-primary = t(:'address.search')
 
-.row
   .col-md-3
     = f.text_field :city, value: f.object.city ||  Gaku::Preset.address('city'), label: t(:'address.city')
-  .col-md-3
+.row
+  .col-md-6
     = f.text_field :address1, label: t(:'address.address1')
-  .col-md-3
+  .col-md-6
     = f.text_field :address2, label: t(:'address.address2')
 
 javascript:

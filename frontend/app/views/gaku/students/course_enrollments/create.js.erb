@@ -5,5 +5,6 @@ $('#new-student-course-enrollment').slide();
 $('#new-student-course-enrollment-link').show();
 
 showNotice("<%= render_flash %>");
-$('#student-course-enrollments-tab-link').html("<%= print_count(@count, t(:'course.plural')) %>");
+//$('#student-course-enrollments-tab-link').html("<%= print_count(@count, t(:'course.plural')) %>");
 $('.student-course-enrollments-count').html("<%= print_count(@count, t(:'course.list')) %>");
+$('.courses-count').html("<%= @count %>");

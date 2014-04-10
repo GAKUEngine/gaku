@@ -1,5 +1,9 @@
 source 'http://production.s3.rubygems.org'
 
+group :development, :production do
+  gem 'localeapp'
+end
+
 group :test do
   gem 'rspec-rails',              '~> 2.14.1'
   gem 'factory_girl_rails',       '~> 4.4.0'

@@ -24,8 +24,8 @@ describe 'Student Guardians' do
       end.to change(Gaku::Guardian, :count).by(-1)
 
       current_path.should eq gaku.edit_student_path(student)
-      click tab_link
-      within(tab_link)  { has_no_content? 'Guardians(1)' }
+      click '#student-guardians-menu a'
+      #within('.guardians-count')  { expect(page.has_content?('0')).to eq true }
       within(count_div) { has_no_content? 'Guardians list(1)' }
     end
   end
