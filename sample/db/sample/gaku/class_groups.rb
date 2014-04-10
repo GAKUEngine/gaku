@@ -28,5 +28,5 @@ end
 active_class_group = Gaku::ClassGroup.where(name: 'Mr.Kalkov').first
 not_active_class_group = Gaku::ClassGroup.where(name: 'Mr.Kagetsuki').first
 
-Gaku::SemesterClassGroup.where(class_group_id: active_class_group.id, semester_id: active_semester.id).first_or_create!
-Gaku::SemesterClassGroup.where(class_group_id: not_active_class_group.id, semester_id: not_active_semester.id).first_or_create!
+Gaku::SemesterConnector.where(semesterable_id: active_class_group.id, semesterable_type: "Gaku::ClassGroup", semester_id: active_semester.id).first_or_create!
+Gaku::SemesterConnector.where(semesterable_id: not_active_class_group.id, semesterable_type: "Gaku::ClassGroup", semester_id: not_active_semester.id).first_or_create!
