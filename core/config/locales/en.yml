@@ -882,6 +882,7 @@ en:
     singular: Semester
     starting: Semester starting
     uniqueness: have this semester added
+    already: Semester already added
   semester_class_group:
     choose: Choose Semester
     save: Save Semester
