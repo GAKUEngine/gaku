@@ -1,0 +1,3 @@
+.row
+  .col-md-12
+    = f.select :semester_id, options_from_collection_for_select(@semesters, :id, :to_s), { prompt: t(:'semester.choose') }, label: t(:'semester.plural'), uniqueness: true
