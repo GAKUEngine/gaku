@@ -14,7 +14,7 @@ describe 'Admin School Campus Contact' do
     before do
       @resource = school.campuses.first
       visit gaku.edit_admin_school_campus_path(school, @resource)
-      click tab_link
+      click '#contacts-menu a'
     end
 
     it_behaves_like 'new contact'
@@ -32,7 +32,7 @@ describe 'Admin School Campus Contact' do
       context 'edit' do
         before do
           visit gaku.edit_admin_school_campus_path(school, @resource)
-          click tab_link
+          click '#contacts-menu a'
         end
 
         it_behaves_like 'edit contact'
@@ -47,7 +47,7 @@ describe 'Admin School Campus Contact' do
         school.reload
         @resource = school.campuses.first
         visit gaku.edit_admin_school_campus_path(school, @resource)
-        click tab_link
+        click '#contacts-menu a'
       end
 
       it_behaves_like 'primary contacts'

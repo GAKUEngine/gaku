@@ -10,6 +10,13 @@ Gaku::Core::Engine.routes.draw  do
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
 
+  concern(:set_picture) do
+    member do
+      patch :set_picture
+      delete :remove_picture
+    end
+  end
+
   resources :states, only: :index
 
   namespace :admin do
@@ -19,7 +26,7 @@ Gaku::Core::Engine.routes.draw  do
     get 'school_details/edit',     to: 'schools#edit_master'
     patch 'school_details/update', to: 'schools#update_master'
 
-    resources :schools do
+    resources :schools, concerns: %i( set_picture ) do
       resources :programs, controller: 'schools/programs' do
         member do
           get :show_program_levels
@@ -27,11 +34,13 @@ Gaku::Core::Engine.routes.draw  do
           get :show_program_specialties
         end
       end
-      resources :campuses, controller: 'schools/campuses', except: :index do
-        resources :contacts, controller: 'schools/campuses/contacts', except: %i( show index ), concerns: %i( soft_delete primary )
+      resources :campuses
+    end
 
-        resources :addresses, controller: 'schools/campuses/addresses', except: %i( show index )
-      end
+    resources :campuses, only: [], concerns: %i( set_picture ) do
+      resources :contacts, controller: 'campuses/contacts', except: %i( show ), concerns: %i( soft_delete primary )
+
+      resources :addresses, controller: 'campuses/addresses', except: %i( show )
     end
 
     resources :simple_grade_types

@@ -1,0 +1,83 @@
+.panel.panel-default
+  .panel-heading
+    h4#schools-menu.panel-title
+      = link_to t(:'menu.admin.schools'), [:admin, :schools], remote: true
+  .panel-body
+    ul.list-unstyled
+
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = t(:'menu.admin.types.types')
+  .panel-body
+    ul.list-unstyled
+
+      li#attendance-types-menu
+        = link_to t(:'menu.admin.types.attendance_types'), [:admin, :attendance_types], remote: true
+
+      li#commute-methods-menu
+        = link_to t(:'menu.admin.types.commute_methods'), [:admin, :commute_method_types], remote: true
+
+      li#contact-types-menu
+        = link_to t(:'menu.admin.types.contact'), [:admin, :contact_types], remote: true
+
+      li#enrollment-statuses-menu
+        = link_to t(:'menu.admin.types.enrollment_status'), [:admin, :enrollment_statuses], remote: true
+
+      li#states-menu
+        = link_to t(:'menu.admin.types.states'), [:admin, :states], remote: true
+
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = t(:'menu.admin.grading.grading')
+  .panel-body
+    ul.list-unstyled
+
+      li#grading-methods-menu
+        = link_to t(:'menu.admin.grading.grading_methods'), [:admin, :grading_methods], remote: true
+
+      li#grading-method-sets-menu
+        = link_to t(:'menu.admin.grading.grading_sets'), [:admin, :grading_method_sets], remote: true
+
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      =  t(:'menu.admin.users.users_and_roles')
+  .panel-body
+    ul.list-unstyled
+
+      li#users-menu
+        = link_to t(:'menu.admin.users.users'), [:admin, :users], remote: true
+
+      li#roles-menu
+        = link_to t(:'menu.admin.users.roles'), [:admin, :roles], remote: true
+
+
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = t(:'menu.admin.achievements.achievements')
+  .panel-body
+    ul.list-unstyled
+
+      li#simple-grade-types-menu
+       = link_to t(:'menu.admin.achievements.simple_grade_types'), [:admin, :simple_grade_types], remote: true
+
+      li#badge-types-menu
+        = link_to t(:'menu.admin.badge_types'), [:admin, :badge_types], remote: true
+
+.panel.panel-default
+  .panel-heading
+    h4#specialties-menu.panel-title
+      = link_to t(:'menu.admin.specialties'), [:admin, :specialties], remote: true
+
+.panel.panel-default
+  .panel-heading
+    h4#departments-menu.panel-title
+      = link_to t(:'menu.admin.departments'), [:admin, :departments], remote: true
+
+.panel.panel-default
+  .panel-heading
+    h4#presets-menu.panel-title
+      = link_to t(:'menu.admin.preset.plural'), [:admin, :presets], remote: true

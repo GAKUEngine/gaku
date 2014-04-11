@@ -1,11 +1,10 @@
 module Gaku
-  class Admin::Schools::Campuses::ContactsController < Admin::BaseController
+  class Admin::Campuses::ContactsController < Admin::BaseController
 
     respond_to :js
 
     before_action :set_contact_types,    only: %i( new edit )
     before_action :set_contact,          only: %i( edit update destroy make_primary )
-    before_action :set_school
     before_action :set_campus
 
     def new
@@ -26,7 +25,7 @@ module Gaku
 
     def update
       @contact.update(contact_params)
-      respond_with @contact, location: [:edit, :admin, @school, @campus]
+      respond_with @contact
     end
 
     def destroy
@@ -47,10 +46,6 @@ module Gaku
 
     def set_contact
       @contact = Contact.find(params[:id])
-    end
-
-    def set_school
-      @school = School.find(params[:school_id])
     end
 
     def set_campus

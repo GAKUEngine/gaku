@@ -1,0 +1,23 @@
+.row
+  .col-md-2
+    .panel-group#accordion
+      .panel
+        .picture-upload
+          = render 'gaku/admin/shared/ajax_picture', resource: @campus
+
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = @campus.name
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'edit'), [:edit, :admin, @school, @campus], remote: true
+            li#addresses-menu
+              = link_to badge_count(@campus.addresses_count, t(:'address.plural'), 'addresses-count'), [:admin, @campus, :addresses], remote: true
+            li#contacts-menu
+              = link_to badge_count(@campus.contacts_count, t(:'contact.plural'), 'contacts-count'), [:admin, @campus, :contacts], remote: true
+
+  .col-md-10#ajax-load
+
+    = render 'edit_form'

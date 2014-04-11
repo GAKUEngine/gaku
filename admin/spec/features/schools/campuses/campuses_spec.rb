@@ -7,12 +7,11 @@ describe 'Admin School Campuses' do
   let(:school) { create(:school, name: 'Nagoya University') }
   let(:campus) { create(:campus) }
 
-  before :all do
-    set_resource 'admin-school-campus'
-  end
+  before(:all) { set_resource 'admin-school-campus' }
 
   before do
     visit gaku.edit_admin_school_path(school)
+    click '#campuses-menu a'
   end
 
   context 'new', js: true do
@@ -31,7 +30,6 @@ describe 'Admin School Campuses' do
 
       page.should have_content 'Nagoya Campus'
       within(count_div) { page.should have_content 'Campuses list(2)' }
-
     end
 
   end
@@ -39,12 +37,11 @@ describe 'Admin School Campuses' do
   context 'existing', js: true do
     before do
       campus
-      visit gaku.edit_admin_school_path(school)
+      visit gaku.edit_admin_school_campus_path(school, campus)
     end
 
     context 'edit' do
       it 'edits' do
-        click edit_link
         fill_in 'campus_name', with: 'Varna Campus'
         click submit
 
@@ -55,11 +52,5 @@ describe 'Admin School Campuses' do
       end
     end
 
-    it 'shows' do
-      within(table) { click show_link }
-      page.should have_content 'Contacts'
-    end
-
   end
-
 end

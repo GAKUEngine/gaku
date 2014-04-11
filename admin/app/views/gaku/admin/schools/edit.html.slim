@@ -1,19 +1,37 @@
 .row
-  .col-md-9
-    = normal_form_for [:admin, @school], label: 'nil' do |f|
-      = render 'form_fields', f: f, school: @school
-      = buttons_for @school, resource: 'admin-school'
+  .col-md-2
+    .panel-group#accordion
+      .panel
+        .picture-upload
+          = render 'gaku/admin/shared/ajax_picture', resource: @school
 
-  .col-md-3
-    = render 'gaku/admin/shared/picture', resource: @school
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = @school.name
+        .panel-body
+          ul.list-unstyled
+            li = link_to t(:'edit'), [:edit, :admin, @school], remote: true
 
-= render 'tabs', school: @school
 
-= footer do
-  .col-md-9
-    = link_to_index admin_schools_path
-  .col-md-3
-    = link_to_modal_delete
-  /= render 'gaku/shared/delete_modal', target: school
+      .panel.panel-default
+        .panel-heading
+          h4#campuses-menu.panel-title
+            = link_to badge_count(@school.campuses.count, t(:'campus.plural'), 'campuses-count'), [:admin, @school, :campuses], remote: true
+        .panel-body
+          ul.list-unstyled
+            - @school.campuses.each do |campus|
+              li = link_to campus.name, [:edit, :admin, @school, campus]
+
+      .panel.panel-default
+        .panel-heading
+          h4#programs-menu.panel-title
+            = link_to badge_count(@school.programs.count, t(:'program.plural'), 'programs-count'), [:admin, @school, :programs], remote: true
+        .panel-body
+          ul.list-unstyled
+            - @school.programs.each do |program|
+              li = link_to program.name, [:edit, :admin, @school, program]
+
+  .col-md-10#ajax-load
+    = render 'edit_form'

@@ -1,0 +1,3 @@
+= remote_form_for [:admin, @school], label: t(:'school.singular') do |f|
+  = render 'form_fields', f: f, school: @school
+  = buttons_for @school, resource: 'admin-school'

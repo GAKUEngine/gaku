@@ -16,6 +16,7 @@ describe 'Admin School Campuses Address' do
     before do
       country_without_state
       visit gaku.edit_admin_school_campus_path(school, school.master_campus)
+      click '#addresses-menu a'
       click new_link
     end
 
@@ -58,6 +59,7 @@ describe 'Admin School Campuses Address' do
     before do
       school.master_campus.address = address
       visit gaku.edit_admin_school_campus_path(school, school.master_campus)
+      click '#addresses-menu a'
     end
 
     context 'edit' do
@@ -87,6 +89,7 @@ describe 'Admin School Campuses Address' do
       end
 
       it 'changes country with state' do
+        sleep 1
         select "#{country}", from: 'country_dropdown'
         within('#state-dropdown') { page.has_content? state.name }
         select "#{state}", from: 'address_state_id'

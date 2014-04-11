@@ -6,7 +6,7 @@
       = count_div 'admin-school-campuses-count' do
         = print_count @school.campuses.count, t(:'campus.list')
     .pull-right
-      = ajax_link_to_new t(:'campus.add'), [:new, :admin, @school, :campus], id: 'new-admin-school-campus-link' if can_edit?
+      = ajax_link_to_new t(:'campus.add'), [:new, :admin, @school, :campus], id: 'new-admin-school-campus-link'
   = hr
 
   = index_body do
@@ -15,9 +15,7 @@
         tr
           = th_icon 'home'
           = th t(:'campus.name')
-          - if can_edit?
-            = th_actions 2
-          - else
-            = th_actions 1
+          = th_actions 2
+
       tbody
-        = render partial: 'gaku/admin/schools/campuses/campus', collection: @school.campuses, as: 'campus'
+        = render partial: 'gaku/admin/campuses/campus', collection: @school.campuses, as: 'campus'

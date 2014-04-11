@@ -1,10 +1,9 @@
 module Gaku
-  class Admin::Schools::Campuses::AddressesController < Admin::BaseController
+  class Admin::Campuses::AddressesController < Admin::BaseController
 
     respond_to :js,   only: %i( new create destroy edit update )
 
     before_action :set_address,  only: %i( edit update destroy )
-    before_action :set_school
     before_action :set_campus
     before_action :set_countries, only: %i( new edit )
 
@@ -30,7 +29,7 @@ module Gaku
 
     def update
       @address.update(address_params)
-      respond_with @address, location: [:edit, :admin, @school, @campus]
+      respond_with @address
     end
 
     private
@@ -41,10 +40,6 @@ module Gaku
 
     def attributes
       %i( title address1 address2 city zipcode state state_id country country_id deleted primary past )
-    end
-
-    def set_school
-      @school = School.find(params[:school_id])
     end
 
     def set_campus

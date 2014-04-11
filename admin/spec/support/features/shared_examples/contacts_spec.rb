@@ -22,9 +22,7 @@ shared_examples_for 'new contact' do
       has_content? 'The contact details'
 
       count? 'Contacts list(1)'
-      if page.has_css?(tab_link)
-        within(tab_link)  { has_content? 'Contacts(1)' }
-      end
+      within('.contacts-count') { expect(page.has_content?('1')).to eq true }
     end
   end
 
@@ -74,10 +72,9 @@ shared_examples_for 'delete contact' do
       flash_destroyed?
     end.to change(@resource.contacts, :count).by(-1)
 
+    within('.contacts-count') { expect(page.has_no_content?('1')).to eq true }
+
     within(count_div) { has_no_content? 'Contacts list(1)' }
-    if page.has_css?(tab_link)
-      within(tab_link)  { has_no_content? 'Contacts(1)' }
-    end
     has_no_content? contact_field
   end
 
@@ -119,5 +116,6 @@ shared_examples_for 'primary contacts' do
     page.find("#{contact_sec_tr} .primary-contact a.btn-primary")
 
     expect(old_secondary.reload.primary).to eq true
+    within('.contacts-count') { expect(page.has_content?('1')).to eq true }
   end
 end

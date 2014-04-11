@@ -1,11 +1,12 @@
 module Gaku
-  class Admin::Schools::CampusesController < Admin::BaseController
+  class Admin::CampusesController < Admin::BaseController
+    include AdminPictureController
 
-    respond_to :js,   only: %i( new create destroy )
+    respond_to :js,   only: %i( new create destroy edit update index )
     respond_to :html, only: %i( edit update show )
 
     before_action :set_campus,  only: %i( edit show update destroy )
-    before_action :set_school
+    before_action :set_school, except: %i( set_picture remove_picture )
 
 
     def destroy
@@ -37,7 +38,7 @@ module Gaku
 
     def update
       @campus.update(campus_params)
-      respond_with @campus, location: [:edit, :admin, @school, @campus]
+      respond_with @campus
     end
 
     def index

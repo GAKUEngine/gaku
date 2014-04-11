@@ -15,6 +15,8 @@
 #= require bootstrap/tab
 #= require bootstrap/dropdown
 #= require bootstrap/modal
+#= require bootstrap/tooltip
+#= require bootstrap/popover
 
 
 #= require nprogress
@@ -27,6 +29,8 @@
 #= require underscore
 #= require moment
 #= require rails.validations
+#= require jquery.remotipart
+
 #= require gaku/admin/slide.js.erb
 
 #= require gaku/admin/base
