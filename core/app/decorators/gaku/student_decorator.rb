@@ -41,6 +41,5 @@ module Gaku
       student_specialty.major ? h.t(:'specialty.major') : h.t(:'specialty.minor')
     end
 
-
   end
 end

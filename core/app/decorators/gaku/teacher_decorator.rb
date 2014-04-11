@@ -4,3 +4,4 @@ module Gaku
     delegate_all
   end
 end
+

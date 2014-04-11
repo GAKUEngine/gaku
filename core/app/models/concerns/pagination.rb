@@ -4,5 +4,5 @@ module Pagination
   included do
     paginates_per 20
   end
-
 end
+

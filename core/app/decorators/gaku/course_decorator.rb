@@ -10,6 +10,6 @@ module Gaku
         object.code
       end
     end
-
   end
 end
+
