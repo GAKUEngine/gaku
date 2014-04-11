@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Admin::Schools::CampusesController do
+describe Gaku::Admin::CampusesController do
 
   let!(:school) { create(:school) }
   let(:campus) { create(:campus, school_id: school.id) }
@@ -25,38 +25,6 @@ describe Gaku::Admin::Schools::CampusesController do
         it { should respond_with 200 }
         it('assigns @campus') { expect(assigns(:campus)).to eq campus }
         it('renders the :show template') { template? :show }
-      end
-
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: 'test')
-          end
-
-          it { should respond_with 302 }
-          it('redirects to :edit view') { redirect_to? "/admin/schools/#{school.id}/campuses/#{campus.id}/edit"}
-          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
-          it('sets flash') { flash_updated? }
-          it "changes campus's attributes" do
-            campus.reload
-            expect(campus.name).to eq 'test'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
-
-          it "does not change campus's attributes" do
-            campus.reload
-            expect(campus.name).not_to eq ''
-          end
-        end
       end
 
     end
@@ -113,6 +81,36 @@ describe Gaku::Admin::Schools::CampusesController do
           it "doesn't increment @count" do
             invalid_js_create
             expect(assigns(:count)).to eq 1
+          end
+        end
+      end
+
+      describe 'JS PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: 'test')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+          it('sets flash') { flash_updated? }
+          it "changes campus's attributes" do
+            campus.reload
+            expect(campus.name).to eq 'test'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_js_patch :update, id: campus, school_id: school.id, campus: attributes_for(:campus, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @campus') { expect(assigns(:campus)).to eq campus }
+
+          it "does not change campus's attributes" do
+            campus.reload
+            expect(campus.name).not_to eq ''
           end
         end
       end
