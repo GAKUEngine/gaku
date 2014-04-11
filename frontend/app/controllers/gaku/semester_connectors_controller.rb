@@ -37,7 +37,7 @@ module Gaku
     private
 
     def set_semesterable
-      resource, id = request.path.split('/')[1,2]
+      resource, id = request.path.split('/')[1, 2]
       @semesterable = resource.insert(0, 'gaku/').pluralize.classify.constantize.find(id)
       @semesterable_resource = @semesterable.class.to_s.demodulize.underscore.dasherize
     end
