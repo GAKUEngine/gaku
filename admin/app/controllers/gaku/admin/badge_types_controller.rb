@@ -1,8 +1,6 @@
 module Gaku
   class Admin::BadgeTypesController < Admin::BaseController
 
-    #load_and_authorize_resource class: Achievement
-
     respond_to :js, only: %i( new create edit update destroy index )
 
     before_action :set_badge_type, only: %i( edit update destroy )

@@ -1,8 +1,6 @@
 module Gaku
   class Admin::GradingMethodSetsController < Admin::BaseController
 
-    #load_and_authorize_resource class: GradingMethodSet
-
     respond_to :js,   only: %i( new create edit update destroy make_primary index )
     respond_to :html, only: %i( show )
 
@@ -38,9 +36,7 @@ module Gaku
     end
 
     def destroy
-      if @grading_method_set.primary?
-        GradingMethodSet.first.try(:make_primary)
-      end
+      GradingMethodSet.first.try(:make_primary) if @grading_method_set.primary?
       @grading_method_set.destroy
       set_count
       respond_with @grading_method_set

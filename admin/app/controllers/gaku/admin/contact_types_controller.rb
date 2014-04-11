@@ -1,8 +1,6 @@
 module Gaku
   class Admin::ContactTypesController < Admin::BaseController
 
-    #load_and_authorize_resource class: ContactType
-
     respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_contact_type, only: %i( edit update destroy )

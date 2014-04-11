@@ -1,8 +1,6 @@
 module Gaku
   class Admin::EnrollmentStatusesController < Admin::BaseController
 
-    #load_and_authorize_resource class: EnrollmentStatus
-
     respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_enrollment_status, only: %i( edit update destroy )

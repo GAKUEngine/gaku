@@ -1,9 +1,7 @@
 module Gaku
   class Admin::RolesController < Admin::BaseController
 
-    #load_and_authorize_resource class: Role
-
-    respond_to :js,   only: %i( new create edit update destroy index )
+    respond_to :js, only: %i( new create edit update destroy index )
 
     before_action :set_role, only: %i( edit update destroy )
 

@@ -1,5 +1,4 @@
 module AdminPictureController
-
   include Gaku::ClassNameDetector
 
   def set_picture

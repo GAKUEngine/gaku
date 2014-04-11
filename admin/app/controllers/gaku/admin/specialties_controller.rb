@@ -1,12 +1,10 @@
 module Gaku
   class Admin::SpecialtiesController < Admin::BaseController
 
-    #load_and_authorize_resource class: Specialty
-
-    respond_to :js,   only: %i( new create edit update destroy index )
+    respond_to :js, only: %i( new create edit update destroy index )
 
     before_action :set_specialty, only: %i( edit update destroy )
-    before_action :load_data, only: %i( new edit )
+    before_action :load_data,     only: %i( new edit )
 
     def index
       @specialties = Specialty.all

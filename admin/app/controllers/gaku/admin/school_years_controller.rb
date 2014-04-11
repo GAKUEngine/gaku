@@ -2,7 +2,7 @@ module Gaku
   class Admin::SchoolYearsController < Admin::BaseController
 
     respond_to :html, only: %i( index show )
-    respond_to :js, only: %i( new create destroy edit update )
+    respond_to :js,   only: %i( new create destroy edit update )
 
     before_action :set_school_year, only: %i( show edit update destroy )
 
@@ -39,7 +39,6 @@ module Gaku
       set_count
       respond_with @school_year
     end
-
 
     private
 

@@ -1,8 +1,6 @@
 module Gaku
   class Admin::DepartmentsController < Admin::BaseController
 
-    #load_and_authorize_resource class: Department
-
     respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_department, only: %i( edit update destroy )
@@ -52,7 +50,6 @@ module Gaku
     def set_count
       @count = Department.count
     end
-
 
   end
 end

@@ -1,8 +1,6 @@
 module Gaku
   class Admin::AttendanceTypesController < Admin::BaseController
 
-    #load_and_authorize_resource class: AttendanceType
-
     respond_to :json, only: :index
     respond_to :js,   only: %i( new create edit update destroy index )
 
@@ -60,4 +58,3 @@ module Gaku
 
   end
 end
-

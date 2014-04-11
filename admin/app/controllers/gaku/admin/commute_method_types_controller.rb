@@ -1,8 +1,6 @@
 module Gaku
   class Admin::CommuteMethodTypesController < Admin::BaseController
 
-    #load_and_authorize_resource class: CommuteMethodType
-
     respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_commute_method_type, only: %i( edit update destroy )

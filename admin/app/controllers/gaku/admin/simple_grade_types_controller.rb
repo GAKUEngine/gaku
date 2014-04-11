@@ -66,5 +66,6 @@ module Gaku
     def t_resource
       t(:'simple_grade_type.singular')
     end
+
   end
 end

@@ -8,7 +8,6 @@ module Gaku
     before_action :set_campus,  only: %i( edit show update destroy )
     before_action :set_school, except: %i( set_picture remove_picture )
 
-
     def destroy
       @campus.destroy
       set_count

@@ -1,8 +1,6 @@
 module Gaku
   class Admin::GradingMethodsController < Admin::BaseController
 
-    #load_and_authorize_resource class: GradingMethod
-
     respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_grading_method, only: %i( edit update destroy )

@@ -36,7 +36,6 @@ module Gaku
       respond_with @contact
     end
 
-
     def make_primary
       @contact.make_primary
       respond_with @contact

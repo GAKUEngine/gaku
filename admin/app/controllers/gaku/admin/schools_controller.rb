@@ -1,6 +1,5 @@
 module Gaku
   class Admin::SchoolsController < Admin::BaseController
-
     include AdminPictureController
 
     respond_to :js,   only: %i( new create destroy index edit update )
@@ -66,7 +65,12 @@ module Gaku
     end
 
     def attributes
-      [:name, :primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, { levels_attributes: [ :name, :'_destroy', :id ] }, :picture ]
+      [:name, :primary, :slogan, :description, :founded, :principal, :vice_principal, :grades, :code, :picture,
+       { levels_attributes: level_attributes }]
+    end
+
+    def level_attributes
+      [:name, :'_destroy', :id]
     end
 
     def set_school
@@ -82,5 +86,4 @@ module Gaku
     end
 
   end
-
 end

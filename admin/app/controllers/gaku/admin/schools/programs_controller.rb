@@ -1,10 +1,12 @@
 module Gaku
   class Admin::Schools::ProgramsController < Admin::BaseController
 
-    respond_to :js,   only: %i( index new create destroy edit update show_program_levels show_program_specialties show_program_syllabuses )
+    respond_to :js,   only: %i( index new create destroy edit update
+                                show_program_levels show_program_specialties show_program_syllabuses )
 
     before_action :set_school
-    before_action :set_program, only: %i( show_program_levels show_program_specialties show_program_syllabuses destroy edit show update )
+    before_action :set_program, only: %i( show_program_levels show_program_specialties show_program_syllabuses
+                                          destroy edit show update )
     before_action :load_data,   only: %i( new edit )
 
     def index
@@ -55,7 +57,7 @@ module Gaku
     end
 
     def attributes
-      #permit :id for update nested attributes
+      # permit :id for update nested attributes
       [:id, :name, :description,
        { program_specialties_attributes: [:id, :specialty_id, :_destroy] },
        { program_levels_attributes: [:id, :level_id, :_destroy] },
