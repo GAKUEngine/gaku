@@ -1,11 +1,16 @@
 module Gaku
   class Admin::Schools::ProgramsController < Admin::BaseController
-    
-    respond_to :js,   only: %i( new create destroy edit update show_program_levels show_program_specialties show_program_syllabuses )
+
+    respond_to :js,   only: %i( index new create destroy edit update show_program_levels show_program_specialties show_program_syllabuses )
 
     before_action :set_school
     before_action :set_program, only: %i( show_program_levels show_program_specialties show_program_syllabuses destroy edit show update )
     before_action :load_data,   only: %i( new edit )
+
+    def index
+      @programs = @school.programs
+      respond_with @programs
+    end
 
     def new
       @program = Program.new

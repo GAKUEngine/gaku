@@ -19,7 +19,7 @@ describe 'Admin Program' do
   context 'new', js: true do
     before do
       visit gaku.edit_admin_school_path(school)
-      click tab_link
+      click '#programs-menu a'
       click new_link
     end
 
@@ -49,6 +49,7 @@ describe 'Admin Program' do
 
       page.should have_content 'Rails Ninja'
       within(count_div) { page.should have_content 'Programs list(1)' }
+      within('.programs-count') { expect(page.has_content?('1')).to eq true }
 
       %w(level syllabus specialty).each do |resource|
         click ".program-#{resource.pluralize}-list"
@@ -66,7 +67,7 @@ describe 'Admin Program' do
     before do
       program
       visit gaku.edit_admin_school_path(school)
-      click tab_link
+      click '#programs-menu a'
     end
 
     context 'edit' do
@@ -104,7 +105,7 @@ describe 'Admin Program' do
     end
 
     it 'deletes', js: true do
-      page.should have_content program.name
+      within('#admin-school-programs-index') { expect(page.has_content?(program.name)).to eq true }
       within(count_div) { page.should have_content 'Programs list(1)' }
 
       expect do
@@ -112,8 +113,10 @@ describe 'Admin Program' do
         flash_destroyed?
       end.to change(Gaku::Program, :count).by -1
 
+      within('#admin-school-programs-index') { expect(page.has_no_content?(program.name)).to eq true }
       within(count_div) { page.should_not have_content 'Programs list(1)' }
-      page.should_not have_content program.name
+      within('.programs-count') { expect(page.has_no_content?('1')).to eq true }
+
     end
   end
 end
