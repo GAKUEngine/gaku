@@ -1,0 +1,20 @@
+AsciiIdentifiers:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+AccessorMethodName:
+  Enabled: false
+
+LineLength:
+  Max: 119
+
+Documentation:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+EmptyLinesAroundBody:
+  Enabled: false

@@ -43,7 +43,7 @@ Requirements
 Installation
 ------------
 
-### Install postgresql-9.2 (Ubuntu >= 12.04)
+### Install postgresql (newer Ubuntu/Debian)
 
     $ cat /etc/*-release   #gets your DISTRIBUTION
     $ nano /etc/apt/sources.list.d/pgdg.list
@@ -56,8 +56,7 @@ Install postgre:
 
     $ wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -  #adds the repo key
     $ sudo apt-get update
-    $ sudo apt-get install postgresql-9.2 postgresql-9.2-contrib
-    $ sudo -u postgres psql -d template1 -c 'create extension hstore;' #create extension on all the DBs
+    $ sudo apt-get install postgresql postgresql-contrib libpq-dev
 
 
 ### Install GAKU
