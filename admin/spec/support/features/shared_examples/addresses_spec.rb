@@ -1,12 +1,11 @@
 shared_examples 'new address' do
 
   context 'new' do
-
     before do
       click new_link
     end
 
-    it 'creates and shows', js:true do
+    it 'creates and shows', js: true do
       expect do
         fill_in 'address_title',    with: 'Primary address'
         select "#{country}",        from: 'country_dropdown'
@@ -25,7 +24,7 @@ shared_examples 'new address' do
       end
     end
 
-    it 'has validations', js:true do
+    it 'has validations', js: true do
       expect do
         click submit
         has_validations?
@@ -36,7 +35,6 @@ shared_examples 'new address' do
 end
 
 shared_examples_for 'edit address' do
-
   let(:address) { @resource.addresses.first }
 
   before do
@@ -44,10 +42,10 @@ shared_examples_for 'edit address' do
     page.has_selector? modal
   end
 
-  it 'edits', js:true do
+  it 'edits', js: true do
     old_address = address.address1
 
-    fill_in 'address_address1', with:'The address new details'
+    fill_in 'address_address1', with: 'The address new details'
     click submit
 
     flash_updated?
@@ -56,18 +54,15 @@ shared_examples_for 'edit address' do
     has_no_content? old_address
   end
 
-
-  it 'errors without required fields', js:true do
+  it 'errors without required fields', js: true do
     fill_in 'address_address1',  with: ''
     fill_in 'address_city',      with: ''
 
     has_validations?
   end
-
 end
 
 shared_examples_for 'delete address' do
-
   it 'deletes', js: true do
     address_field = @resource.addresses.first.address1
 
@@ -84,11 +79,9 @@ shared_examples_for 'delete address' do
     has_no_content? address_field
     within(tab_link)  { has_no_content? 'Addresses(1)' }
   end
-
 end
 
 shared_examples_for 'primary addresses' do
-
   it 'sets primary', js: true do
     expect(@resource.addresses.first.primary?).to eq true
     expect(@resource.addresses.second.primary?).to eq false
@@ -103,7 +96,7 @@ shared_examples_for 'primary addresses' do
 
     @resource.addresses.reload
     expect(@resource.addresses.first.primary?).to eq false
-    expect(@resource.addresses.second.primary?).to eq  true
+    expect(@resource.addresses.second.primary?).to eq true
   end
 
   it 'delete primary', js: true do
@@ -115,7 +108,7 @@ shared_examples_for 'primary addresses' do
 
     page.find("#{address2_tr} .primary_address a.btn-primary")
 
-    within("#{table} #{address2_tr}") { click '.delete-link'}
+    within("#{table} #{address2_tr}") { click '.delete-link' }
     accept_alert
 
     page.find("#{address1_tr} .primary_address a.btn-primary")
@@ -125,7 +118,6 @@ shared_examples_for 'primary addresses' do
 end
 
 shared_examples_for 'dynamic state dropdown' do
-
   let!(:country_without_state) { create(:country, name: 'USA', iso: 'US') }
   let!(:state) { create(:state, name: 'Florida', country: country) }
 
@@ -138,8 +130,7 @@ shared_examples_for 'dynamic state dropdown' do
       select "#{state.name}", from: 'address_state_id'
     end
 
-
-    it 'changes country without state',js: true do
+    it 'changes country without state', js: true do
       select "#{country_without_state}", from: 'country_dropdown'
       within('#state-dropdown') do
         expect(page).to have_css('select#address_state_id[disabled]')
@@ -151,12 +142,11 @@ shared_examples_for 'dynamic state dropdown' do
   context 'edit form' do
     before { click js_edit_link }
 
-    it 'changes country with state',js: true do
+    it 'changes country with state', js: true do
       select "#{country}", from: 'country_dropdown'
       within('#state-dropdown') { has_content? state.name }
       select "#{state.name}", from: 'address_state_id'
     end
-
 
     it 'changes country without state', js: true do
       select "#{country_without_state}", from: 'country_dropdown'
@@ -168,4 +158,3 @@ shared_examples_for 'dynamic state dropdown' do
   end
 
 end
-

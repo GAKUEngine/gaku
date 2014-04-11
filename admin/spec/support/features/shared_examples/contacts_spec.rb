@@ -49,7 +49,7 @@ shared_examples_for 'edit contact' do
     has_no_content? old_contact
   end
 
-  it 'errors without required fields', js:true do
+  it 'errors without required fields', js: true do
     fill_in 'contact_data',  with: ''
     has_validations?
   end
