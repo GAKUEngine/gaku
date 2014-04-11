@@ -8,4 +8,4 @@ AccessorMethodName:
   Enabled: false
 
 LineLength:
-  Max: 99
+  Max: 119
