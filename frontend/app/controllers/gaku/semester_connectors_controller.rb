@@ -8,8 +8,8 @@ module Gaku
     before_action :set_semesters, only: %i( new edit )
 
     def new
-     @semester_connector = @semesterable.semester_connectors.new
-     respond_with @semester_connector
+      @semester_connector = @semesterable.semester_connectors.new
+      respond_with @semester_connector
     end
 
     def create
@@ -33,7 +33,6 @@ module Gaku
       set_count
       respond_with @semester_connector
     end
-
 
     private
 

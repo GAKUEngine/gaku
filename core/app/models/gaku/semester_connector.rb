@@ -6,7 +6,7 @@ module Gaku
 
     validates :semester_id,
       uniqueness: {
-                    scope: [ :semesterable_type, :semesterable_id ],
+                    scope: [:semesterable_type, :semesterable_id],
                     message: I18n.t(:'semester.already')
                   }
 
@@ -19,7 +19,7 @@ module Gaku
       }
 
     %w( course class_group ).each do |resource|
-      self.define_singleton_method "group_by_semester_#{resource}" do
+      define_singleton_method "group_by_semester_#{resource}" do
         where(semesterable_type: extract_model_name(resource)).includes([:semester, :semesterable]).group_by(&:semester_id)
       end
     end
