@@ -1,0 +1,11 @@
+AsciiIdentifiers:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+AccessorMethodName:
+  Enabled: false
+
+LineLength:
+  Max: 99
