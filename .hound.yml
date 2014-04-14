@@ -18,3 +18,8 @@ ClassAndModuleChildren:
 
 EmptyLinesAroundBody:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - '**/spec/dummy/**'
+  RunRailsCops: false
