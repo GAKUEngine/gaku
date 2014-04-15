@@ -5,4 +5,3 @@ module Notes
     has_many :notes, as: :notable
   end
 end
-

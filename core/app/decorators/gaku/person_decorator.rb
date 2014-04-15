@@ -37,9 +37,7 @@ module Gaku
       end
 
       reading = options[:reading]
-      if preset.blank?
-        return reading ? object.phonetic_reading : object.to_s
-      end
+        return reading ? object.phonetic_reading : object.to_s if preset.blank?
       result = preset.gsub(/%(\w+)/) do |name|
         case name
         when '%first' then proper_name(:name, reading)
@@ -56,7 +54,5 @@ module Gaku
     def proper_name(attribute, reading)
       reading ? object.send(attribute.to_s + '_reading') : object.send(attribute)
     end
-
   end
 end
-

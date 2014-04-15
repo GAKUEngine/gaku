@@ -5,4 +5,3 @@ module Pagination
     paginates_per 20
   end
 end
-

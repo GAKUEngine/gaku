@@ -1,6 +1,5 @@
 module Gaku
   class School < ActiveRecord::Base
-
     include Picture
 
     has_many :campuses
@@ -48,6 +47,5 @@ module Gaku
       campus.master = true
       campus.save
     end
-
   end
 end

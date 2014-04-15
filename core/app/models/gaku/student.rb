@@ -142,6 +142,5 @@ module Gaku
       '*' * size
     end
 
-
   end
 end

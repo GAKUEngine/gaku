@@ -45,7 +45,7 @@ module Gaku
     end
 
     def users_check
-        redirect_to set_up_admin_account_path if User.count == 0
+      redirect_to set_up_admin_account_path if User.count == 0
     end
 
     def extract_locale_from_accept_language_header
