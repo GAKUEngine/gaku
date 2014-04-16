@@ -15,7 +15,7 @@ module Gaku
     validate :ending_after_starting
 
     scope :with_class_group, -> { joins(:class_groups) }
-    scope :active, -> { where("starting < ? and ending > ?", Time.now, Time.now) }
+    scope :active, -> { where('starting < ? and ending > ?', Time.now, Time.now) }
 
     def to_s
       "#{starting} / #{ending}"
@@ -35,6 +35,5 @@ module Gaku
         errors.add(:base, I18n.t(:'semester.between'))
       end
     end
-
   end
 end

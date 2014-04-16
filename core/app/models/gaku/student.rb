@@ -58,8 +58,10 @@ module Gaku
     end
 
     def make_enrolled
-      enrollment_status = EnrollmentStatus.where( code: 'enrolled',
-                                                  active: true, immutable: true).first_or_create!.try(:code)
+      enrollment_status = EnrollmentStatus.where(
+        code: 'enrolled',
+        active: true,
+        immutable: true).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save
     end
@@ -67,7 +69,6 @@ module Gaku
     def major_specialty
       student_specialties.ordered.first.specialty if student_specialties.any?
     end
-
 
     def identification_number
       '%surname-%name-%id'.gsub(/%(\w+)/) do |s|
@@ -98,12 +99,12 @@ module Gaku
       if preset = Preset.active
         if preset.increment_foreign_id_code == '1'
           self.foreign_id_code = (preset.last_foreign_id_code.to_i + 1).to_s
-          preset.last_foreign_id_code = self.foreign_id_code
+          preset.last_foreign_id_code = foreign_id_code
           preset.save!
         else
-          if self.foreign_id_code.to_i.is_a? Integer
+          if foreign_id_code.to_i.is_a? Integer
             preset.increment_foreign_id_code = true
-            preset.last_foreign_id_code = self.foreign_id_code
+            preset.last_foreign_id_code = foreign_id_code
             preset.save!
           end
         end
@@ -120,7 +121,6 @@ module Gaku
     end
 
     private
-
 
     def major_specialty_code
       major_specialty || empty_string(2)
@@ -141,6 +141,5 @@ module Gaku
     def empty_string(size)
       '*' * size
     end
-
   end
 end

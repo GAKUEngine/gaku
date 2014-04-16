@@ -1,6 +1,5 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
-
     include Notes, Pagination
 
     has_many :enrollments, class_name: 'Gaku::ClassGroupEnrollment'
