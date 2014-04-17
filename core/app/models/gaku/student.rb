@@ -1,6 +1,5 @@
 module Gaku
   class Student < ActiveRecord::Base
-
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :course_enrollments, dependent: :destroy
@@ -17,7 +16,7 @@ module Gaku
 
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
-    has_one :major_specialty, conditions: ["gaku_student_specialties.major = ?", true]
+    has_one :major_specialty, conditions: ['gaku_student_specialties.major = ?', true]
 
     has_many :badges
     has_many :badge_types, through: :badges
@@ -37,15 +36,14 @@ module Gaku
     belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
-    accepts_nested_attributes_for :class_group_enrollments,
-        reject_if: proc { |attributes| attributes[:class_group_id].blank? }
-
-
+    accepts_nested_attributes_for :class_group_enrollments, reject_if: proc do
+      |attributes| attributes[:class_group_id].blank?
+    end
 
     before_create :set_scholarship_status
     before_create :set_foreign_id_code
-    after_create  :set_serial_id
-    after_save   :set_code
+    after_create :set_serial_id
+    after_save :set_code
 
     def add_to_selection
       hash = { id: "#{id}", full_name: "#{surname} #{name}" }
@@ -84,7 +82,7 @@ module Gaku
     end
 
     def self.specialties
-      student_specialties.map &:name
+      student_specialties.map & :name
     end
 
     def self.active
