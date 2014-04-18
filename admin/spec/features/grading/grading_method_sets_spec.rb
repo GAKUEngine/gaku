@@ -69,7 +69,6 @@ describe 'Admin Grading Method Sets' do
         flash_destroyed?
       end.to change(Gaku::GradingMethodSet, :count).by(-1)
 
-
       has_no_content? grading_method_set.name
     end
   end

@@ -5,9 +5,7 @@ describe 'Admin Grading Methods' do
   before { as :admin }
   before(:all) { set_resource 'admin-grading-method' }
 
-  let(:grading_method) { create(:grading_method, name: 'Bulgarian',
-                        arguments: {"A" => 95, "B" => 85 } ) }
-
+  let(:grading_method) { create(:grading_method, name: 'Bulgarian', arguments: { 'A' => 95, 'B' => 85 }) }
 
   context 'new', js: true do
     before do
@@ -27,7 +25,7 @@ describe 'Admin Grading Methods' do
 
       has_content? 'Bulgarian'
       count? 'Grading Methods list(1)'
-      expect(Gaku::GradingMethod.last.arguments).to eq({"A"=>"85"})
+      expect(Gaku::GradingMethod.last.arguments).to eq('A' => '85')
     end
 
     it { has_validations? }
@@ -56,7 +54,7 @@ describe 'Admin Grading Methods' do
         has_no_content? 'Bulgarian'
         grading_method.reload
         expect(grading_method.name).to eq 'Japanese'
-        expect(grading_method.reload.arguments).to eq({'C' => '95', 'B' => '85'})
+        expect(grading_method.reload.arguments).to eq('C' => '95', 'B' => '85')
       end
 
       it 'add arguments' do
@@ -67,16 +65,16 @@ describe 'Admin Grading Methods' do
         click submit
 
         flash_updated?
-        expect(grading_method.reload.arguments).to eq({'A' => '95', 'B' => '85', 'C' => '75'})
+        expect(grading_method.reload.arguments).to eq('A' => '95', 'B' => '85', 'C' => '75')
       end
 
       it 'remove arguments' do
-        all(:css, ".remove-argument-row").first.click
+        all(:css, '.remove-argument-row').first.click
         accept_alert
         click submit
 
         flash_updated?
-        expect(grading_method.reload.arguments).to eq({"B" => '85'})
+        expect(grading_method.reload.arguments).to eq('B' => '85')
       end
 
       it 'has validations' do
@@ -92,8 +90,7 @@ describe 'Admin Grading Methods' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::GradingMethod, :count).by -1
-
+      end.to change(Gaku::GradingMethod, :count).by(-1)
 
       count? 'Grading Methods list(1)'
       has_content? grading_method.name

@@ -110,7 +110,10 @@ describe Gaku::Admin::SchoolYearsController do
           it('sets flash') { flash_updated? }
           xit("changes school_year's attributes") do
             expect do
-              gaku_js_patch :update, id: school_year, school_year: attributes_for(:school_year, starting: time_starting - 2.years, ending: Time.now)
+              gaku_js_patch :update, id: school_year,
+                                     school_year: attributes_for(:school_year,
+                                                                 starting: time_starting - 2.years,
+                                                                 ending: Time.now)
             end.to change(school_year.reload, :starting)
           end
         end

@@ -15,7 +15,7 @@ describe 'Admin Presets Locale' do
   end
 
   it 'saves', js: true do
-    select 'en', from:'preset_locale'
+    select 'en', from: 'preset_locale'
     click submit
 
     flash_updated?

@@ -22,7 +22,7 @@ describe Gaku::Admin::GradingMethodSetsController do
 
     context 'js' do
 
-       describe 'XHR #index' do
+      describe 'XHR #index' do
         before do
           grading_method_set
           gaku_js_get :index
@@ -99,7 +99,8 @@ describe Gaku::Admin::GradingMethodSetsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: grading_method_set, grading_method_set: attributes_for(:grading_method_set, name: 'new method')
+            gaku_js_patch :update, id: grading_method_set,
+                                   grading_method_set: attributes_for(:grading_method_set, name: 'new method')
           end
 
           it { should respond_with 200 }
@@ -113,7 +114,8 @@ describe Gaku::Admin::GradingMethodSetsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: grading_method_set, grading_method_set: attributes_for(:invalid_grading_method_set, name: '')
+            gaku_js_patch :update, id: grading_method_set,
+                                   grading_method_set: attributes_for(:invalid_grading_method_set, name: '')
           end
 
           it { should respond_with 200 }

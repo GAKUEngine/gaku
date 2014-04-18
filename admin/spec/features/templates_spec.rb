@@ -76,7 +76,6 @@ describe 'Admin Templates' do
         expect(current_path).to eq gaku.admin_templates_path
       end
 
-
       it 'has file validations' do
         fill_in 'template_name', with: 'New Template'
         fill_in 'template_context', with: 'new_context'

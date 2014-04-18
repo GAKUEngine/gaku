@@ -64,8 +64,6 @@ describe Gaku::Admin::TemplatesController do
         end
       end
 
-
-
       describe 'POST #create' do
         context 'with valid attributes' do
           let(:valid_create) do
@@ -129,7 +127,6 @@ describe Gaku::Admin::TemplatesController do
         it('assigns @template') { expect(assigns(:template)).to be_a_new(Gaku::Template) }
         it('renders the :new template') { template? :new }
       end
-
 
       describe 'XHR DELETE #destroy' do
         it 'deletes the template' do

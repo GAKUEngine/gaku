@@ -23,7 +23,7 @@ describe Gaku::Admin::AttendanceTypesController do
     context 'json' do
 
       let(:attributes) do
-       %i( name color_code counted_absent disable_credit credit_rate auto_credit created_at updated_at )
+        %i( name color_code counted_absent disable_credit credit_rate auto_credit created_at updated_at )
       end
 
       describe 'GET #index' do
@@ -121,7 +121,8 @@ describe Gaku::Admin::AttendanceTypesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: attendance_type, attendance_type: attributes_for(:attendance_type, name: 'new type')
+            gaku_js_patch :update, id: attendance_type,
+                                   attendance_type: attributes_for(:attendance_type, name: 'new type')
           end
 
           it { should respond_with 200 }
@@ -135,7 +136,8 @@ describe Gaku::Admin::AttendanceTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: attendance_type, attendance_type: attributes_for(:invalid_attendance_type, name: '')
+            gaku_js_patch :update, id: attendance_type,
+                                   attendance_type: attributes_for(:invalid_attendance_type, name: '')
           end
 
           it { should respond_with 200 }

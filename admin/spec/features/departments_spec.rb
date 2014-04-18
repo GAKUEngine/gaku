@@ -7,7 +7,6 @@ describe 'Admin Departments' do
 
   let(:department) { create(:department, name: 'Ruby') }
 
-
   context 'new', js: true do
     before do
       visit gaku.admin_root_path

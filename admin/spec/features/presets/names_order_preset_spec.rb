@@ -27,4 +27,3 @@ describe 'Admin Presets Names Order' do
   end
 
 end
-

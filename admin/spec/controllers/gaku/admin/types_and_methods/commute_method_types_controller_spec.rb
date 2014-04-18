@@ -38,7 +38,11 @@ describe Gaku::Admin::CommuteMethodTypesController do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
-        it('assigns @commute_method_type') { expect(assigns(:commute_method_type)).to be_a_new(Gaku::CommuteMethodType) }
+
+        it('assigns @commute_method_type') do
+          expect(assigns(:commute_method_type)).to be_a_new(Gaku::CommuteMethodType)
+        end
+
         it('renders the :new template') { template? :new }
       end
 
@@ -99,7 +103,8 @@ describe Gaku::Admin::CommuteMethodTypesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: commute_method_type, commute_method_type: attributes_for(:commute_method_type, name: 'new method')
+            gaku_js_patch :update, id: commute_method_type,
+                                   commute_method_type: attributes_for(:commute_method_type, name: 'new method')
           end
 
           it { should respond_with 200 }
@@ -113,7 +118,8 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: commute_method_type, commute_method_type: attributes_for(:invalid_commute_method_type, name: '')
+            gaku_js_patch :update, id: commute_method_type,
+                                   commute_method_type: attributes_for(:invalid_commute_method_type, name: '')
           end
 
           it { should respond_with 200 }

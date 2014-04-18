@@ -104,7 +104,8 @@ describe Gaku::Admin::BadgeTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: badge_type, badge_type: attributes_for(:invalid_badge_type, description: 'Ruby Champion')
+            gaku_js_patch :update, id: badge_type,
+                                   badge_type: attributes_for(:invalid_badge_type, description: 'Ruby Champion')
           end
 
           it { should respond_with 200 }

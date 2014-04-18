@@ -22,7 +22,7 @@ describe Gaku::Admin::EnrollmentStatusesController do
 
     context 'js' do
 
-       describe 'XHR #index' do
+      describe 'XHR #index' do
         before do
           enrollment_status
           gaku_js_get :index
@@ -99,7 +99,8 @@ describe Gaku::Admin::EnrollmentStatusesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: enrollment_status, enrollment_status: attributes_for(:enrollment_status, code: 'new status')
+            gaku_js_patch :update, id: enrollment_status,
+                                   enrollment_status: attributes_for(:enrollment_status, code: 'new status')
           end
 
           it { should respond_with 200 }
@@ -112,7 +113,8 @@ describe Gaku::Admin::EnrollmentStatusesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: enrollment_status, enrollment_status: attributes_for(:invalid_enrollment_status, code: '')
+            gaku_js_patch :update, id: enrollment_status,
+                                   enrollment_status: attributes_for(:invalid_enrollment_status, code: '')
           end
 
           it { should respond_with 200 }

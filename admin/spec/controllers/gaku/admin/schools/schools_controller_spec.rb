@@ -9,11 +9,10 @@ describe Gaku::Admin::SchoolsController do
     ensures 'deny except', :admin
   end
 
- context 'as admin' do
+  context 'as admin' do
     before { as :admin }
 
     context 'html' do
-
 
       describe 'GET #edit' do
         before { gaku_get :edit, id: school }
@@ -84,7 +83,7 @@ describe Gaku::Admin::SchoolsController do
           end
 
           it { should respond_with 302 }
-          it('redirects to :edit_master view') { redirect_to? "/admin/school_details/edit"}
+          it('redirects to :edit_master view') { redirect_to? '/admin/school_details/edit' }
           it('assigns @school') { expect(assigns(:school)).to eq master_school }
           it('sets flash') { flash_updated? }
           it "changes school's attributes" do
@@ -123,7 +122,6 @@ describe Gaku::Admin::SchoolsController do
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
-
 
       describe 'JS #new' do
         before { gaku_js_get :new }
@@ -185,6 +183,7 @@ describe Gaku::Admin::SchoolsController do
             expect(assigns(:count)).to eq 0
           end
         end
+
       end
 
       describe 'JS DELETE #destroy' do
@@ -208,6 +207,5 @@ describe Gaku::Admin::SchoolsController do
 
     end
   end
-
 
 end

@@ -40,7 +40,8 @@ describe Gaku::Admin::SimpleGradeTypesController do
 
       describe 'XHR #new' do
         before do
-          school; grading_method
+          school
+          grading_method
           gaku_js_get :new
         end
 
@@ -113,7 +114,8 @@ describe Gaku::Admin::SimpleGradeTypesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: simple_grade_type, simple_grade_type: attributes_for(:simple_grade_type, name: 'Ruby dev')
+            gaku_js_patch :update, id: simple_grade_type,
+                                   simple_grade_type: attributes_for(:simple_grade_type, name: 'Ruby dev')
           end
 
           it { should respond_with 200 }
@@ -127,7 +129,8 @@ describe Gaku::Admin::SimpleGradeTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: simple_grade_type, simple_grade_type: attributes_for(:invalid_simple_grade_type, name: '')
+            gaku_js_patch :update, id: simple_grade_type,
+                                   simple_grade_type: attributes_for(:invalid_simple_grade_type, name: '')
           end
 
           it { should respond_with 200 }

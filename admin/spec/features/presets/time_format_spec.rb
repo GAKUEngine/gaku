@@ -15,7 +15,7 @@ describe 'Admin Presets Time Format' do
   end
 
   it 'saves', js: true do
-    select 'am/pm', from:'preset_time_format_24'
+    select 'am/pm', from: 'preset_time_format_24'
     click submit
 
     flash_updated?
