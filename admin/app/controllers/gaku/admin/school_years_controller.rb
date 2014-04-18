@@ -1,10 +1,10 @@
 module Gaku
   class Admin::SchoolYearsController < Admin::BaseController
 
-    respond_to :html, only: %i( index show )
-    respond_to :js,   only: %i( new create destroy edit update )
+    respond_to :html, only: %i( edit )
+    respond_to :js,   only: %i( index new create destroy edit update )
 
-    before_action :set_school_year, only: %i( show edit update destroy )
+    before_action :set_school_year, only: %i( edit update destroy )
 
     def index
       @school_years = SchoolYear.all
@@ -21,9 +21,6 @@ module Gaku
       @school_year.save
       set_count
       respond_with @school_year
-    end
-
-    def show
     end
 
     def edit

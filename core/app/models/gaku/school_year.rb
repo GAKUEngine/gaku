@@ -7,6 +7,10 @@ module Gaku
 
     validate :ending_after_starting
 
+    def to_s
+      "#{starting} - #{ending}"
+    end
+
     private
 
     def ending_after_starting

@@ -67,7 +67,7 @@ Gaku::Core::Engine.routes.draw  do
     end
 
     resources :school_years do
-      resources :semesters, controller: 'school_years/semesters', except: %i( show index )
+      resources :semesters, controller: 'school_years/semesters', except: %i( show )
     end
 
     resources :presets
