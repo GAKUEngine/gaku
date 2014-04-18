@@ -1,6 +1,5 @@
 module Gaku
   class GradingMethodSet < ActiveRecord::Base
-
     has_many :grading_method_set_items, -> { order(:position) }
     has_many :grading_methods, through: :grading_method_set_items
 
@@ -28,8 +27,7 @@ module Gaku
     end
 
     def update_items_positions(id, index)
-      grading_method_set_items.update_all( { position: index }, { id: id } )
+      grading_method_set_items.update_all({ position: index }, { id: id })
     end
-
   end
 end

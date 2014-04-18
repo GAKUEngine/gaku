@@ -1,6 +1,5 @@
 module Gaku
   class State < ActiveRecord::Base
-
     has_many :addresses
 
     belongs_to :country, foreign_key: :country_iso, primary_key: :iso
@@ -29,7 +28,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end
-

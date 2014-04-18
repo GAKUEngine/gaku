@@ -1,6 +1,5 @@
 module Gaku
   class ScholarshipStatus < ActiveRecord::Base
-
     has_many :students
 
     translates :name
@@ -10,6 +9,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

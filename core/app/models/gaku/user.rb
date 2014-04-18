@@ -46,6 +46,5 @@ module Gaku
     def role?(role)
       roles.detect {|p| p.name == role.to_s.camelize}
     end
-
   end
 end

@@ -7,23 +7,22 @@ module Gaku
     store_accessor :address
     store_accessor :export_formats
 
-    store_accessor  :chooser_fields,
-                    :show_name,
-                    :show_middle_name,
-                    :show_surname,
-                    :show_birth_date,
-                    :show_gender,
-                    :show_user,
-                    :show_code,
-                    :show_foreign_id_code,
-                    :show_enrollment_status,
-                    :show_class_name,
-                    :show_specialty,
-                    :show_admitted,
-                    :show_graduated,
-                    :show_primary_address,
-                    :show_primary_contact,
-                    :show_primary_email,
-
+    store_accessor :chooser_fields,
+                   :show_name,
+                   :show_middle_name,
+                   :show_surname,
+                   :show_birth_date,
+                   :show_gender,
+                   :show_user,
+                   :show_code,
+                   :show_foreign_id_code,
+                   :show_enrollment_status,
+                   :show_class_name,
+                   :show_specialty,
+                   :show_admitted,
+                   :show_graduated,
+                   :show_primary_address,
+                   :show_primary_contact,
+                   :show_primary_email
   end
 end

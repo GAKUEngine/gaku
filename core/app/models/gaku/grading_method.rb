@@ -1,6 +1,5 @@
 module Gaku
   class GradingMethod < ActiveRecord::Base
-
     has_one :exam
     has_one :exam_portion
     has_one :assignment
@@ -16,6 +15,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

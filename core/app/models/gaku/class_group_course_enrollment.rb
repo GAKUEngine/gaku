@@ -1,6 +1,5 @@
 module Gaku
   class ClassGroupCourseEnrollment < ActiveRecord::Base
-
     belongs_to :class_group
     belongs_to :course
 
@@ -9,9 +8,8 @@ module Gaku
     validates :course_id,
               presence: true,
               uniqueness: {
-                            scope: :class_group_id,
-                            message: I18n.t(:'class_group.already_enrolled')
-                          }
-
+                scope: :class_group_id,
+                message: I18n.t(:'class_group.already_enrolled')
+              }
   end
 end

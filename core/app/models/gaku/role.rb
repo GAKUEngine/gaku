@@ -1,6 +1,5 @@
 module Gaku
   class Role < ActiveRecord::Base
-
     has_many :user_roles
     has_many :users, through: :user_roles
 
@@ -9,6 +8,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

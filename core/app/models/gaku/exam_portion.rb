@@ -15,10 +15,8 @@ module Gaku
     validates :name, presence: true
 
     validates :weight,
-              numericality: {
-                              greater_than_or_equal_to: 0,
-                              if: proc { |ep| ep.weight.present? }
-                            }
+              numericality: { greater_than_or_equal_to: 0,
+                              if: proc { |ep| ep.weight.present? } }
 
     validates :max_score, presence: true,
                           numericality: { greater_than_or_equal_to: 0 }
