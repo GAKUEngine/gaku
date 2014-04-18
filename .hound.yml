@@ -26,4 +26,5 @@ AllCops:
     - '**/bin/**'
     - '**/db/schema.rb'
     - '**/pkg/**'
+    - 'pkg/**'
   RunRailsCops: false
