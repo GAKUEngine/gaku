@@ -18,3 +18,12 @@ ClassAndModuleChildren:
 
 EmptyLinesAroundBody:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - '**/spec/dummy/**'
+    - 'bin/**'
+    - '**/bin/**'
+    - '**/db/schema.rb'
+    - '**/pkg/**'
+  RunRailsCops: false
