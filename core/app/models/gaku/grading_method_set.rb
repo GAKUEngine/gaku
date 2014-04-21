@@ -12,7 +12,7 @@ module Gaku
     end
 
     def make_primary
-      GradingMethodSet.where.not(id: id).update_all({ primary: false })
+      GradingMethodSet.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)
     end
 

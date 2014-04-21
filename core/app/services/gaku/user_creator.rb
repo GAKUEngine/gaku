@@ -13,9 +13,7 @@ module Gaku
       @user.save!
     end
 
-    def get_user
-      @user
-    end
+    attr_reader :user
 
     private
 
@@ -26,6 +24,5 @@ module Gaku
         get_user.settings[:locale] = Preset.active.locale['language']
       end
     end
-
   end
 end
