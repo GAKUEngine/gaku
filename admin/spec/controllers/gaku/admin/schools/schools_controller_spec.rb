@@ -38,14 +38,6 @@ describe Gaku::Admin::SchoolsController do
         it('renders the :show template') { template? :show }
       end
 
-      describe 'GET #show_master' do
-        before { gaku_get :show_master, id: master_school }
-
-        it { should respond_with 200 }
-        it('assigns @school') { expect(assigns(:school)).to eq master_school }
-        it('renders the :show_master template') { template? :show_master }
-      end
-
       describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do

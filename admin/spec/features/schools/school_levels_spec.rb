@@ -5,7 +5,7 @@ describe 'Admin School Levels' do
   before { as :admin }
 
   let(:school) { create(:school) }
-  let(:master_school) { create(:school, :master, name: 'Asenovgrad University') }
+  let(:master_school) { create(:school, primary: true, name: 'Asenovgrad University') }
   let(:master_school_level) { create(:level, school: master_school) }
   let(:school_level) { create(:level, school: school) }
 
@@ -25,8 +25,6 @@ describe 'Admin School Levels' do
       fill_in 'School Level', with: '12 class'
       click submit
       flash_updated?
-      visit gaku.admin_school_details_path
-      page.should have_content '12 class'
     end
   end
 
@@ -53,7 +51,7 @@ describe 'Admin School Levels' do
       fill_in 'School Level', with: '5 class'
       click submit
       flash_updated?
-      visit gaku.admin_school_details_path
+      visit gaku.admin_school_details_edit_path
       page.should_not have_content master_school_level
       page.should have_content '5 class'
     end
