@@ -9,6 +9,8 @@ https://gnu.org/licenses/agpl.html
 Alternative licenses can be granted upon consultation.  
 Please contact info@genshin.org for details.
 
+* * *
+
 Some of the included sources were derived from the Spree project.  
 These portions are Copyright Spree Commerce Inc as per the following statement:  
 Copyright (c) 2007-2012, Spree Commerce, Inc. and other contributors  
