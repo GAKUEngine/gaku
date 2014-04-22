@@ -4,14 +4,10 @@ module Gaku
       include AdminPictureController
 
       respond_to :js,   only: %i( new create destroy index edit update )
-      respond_to :html, only: %i( edit_master edit update_master show show_master )
+      respond_to :html, only: %i( edit_master edit update_master show )
 
       before_action :set_school,  only: %i( edit show update destroy set_picture remove_picture )
-      before_action :set_master_school, only: %i( show_master edit_master update_master )
-
-      def show_master
-        respond_with @school
-      end
+      before_action :set_master_school, only: %i( edit_master update_master )
 
       def edit_master
         respond_with @school

@@ -46,7 +46,7 @@ describe 'Admin School Campuses' do
         click submit
 
         flash_updated?
-        expect(school.reload.master_campus.name).to eq 'Varna Campus'
+        expect(campus.reload.name).to eq 'Varna Campus'
         expect(find_field('campus_name').value).to eq 'Varna Campus'
         page.has_content? 'Varna Campus'
       end
