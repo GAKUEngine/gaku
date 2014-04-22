@@ -75,7 +75,7 @@ describe 'Admin Specialties' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Specialty, :count).by -1
+      end.to change(Gaku::Specialty, :count).by(-1)
 
       count? 'Specialties list(1)'
       has_no_content? specialty.name

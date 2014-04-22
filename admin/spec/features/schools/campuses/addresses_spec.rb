@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'Admin School Campuses Address' do
 
   let(:address) { create(:address, country: country) }
-  let(:school) { create(:school)}
+  let(:school) { create(:school) }
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
   let(:country_without_state) { create(:country, name: 'Japan', iso: 'JP') }
-  let!(:state) { create(:state, name: "Florida", country: country) }
+  let!(:state) { create(:state, name: 'Florida', country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
   before { as :admin }
@@ -72,7 +72,7 @@ describe 'Admin School Campuses Address' do
       it 'edits' do
         old_address = address.address1
 
-        fill_in 'address_address1', with:'The address new details'
+        fill_in 'address_address1', with: 'The address new details'
         click submit
 
         flash_updated?

@@ -5,7 +5,6 @@ describe 'Admin School Campus Contact' do
   before { as :admin }
   before(:all) { set_resource 'admin-school-campus-contact' }
 
-
   let!(:contact_type) { create(:contact_type, name: 'Email') }
 
   context 'new', js: true, type: 'contact' do

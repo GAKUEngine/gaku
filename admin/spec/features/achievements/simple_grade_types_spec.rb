@@ -11,7 +11,8 @@ describe 'Admin Simple grade types' do
 
   context 'new', js: true do
     before do
-      school; grading_method
+      school
+      grading_method
       visit gaku.admin_root_path
       click '#simple-grade-types-menu a'
       click new_link
@@ -39,7 +40,8 @@ describe 'Admin Simple grade types' do
 
   context 'existing' do
     before do
-      school;grading_method
+      school
+      grading_method
       simple_grade_type
       visit gaku.admin_root_path
       click '#simple-grade-types-menu a'
@@ -70,13 +72,13 @@ describe 'Admin Simple grade types' do
     end
 
     it 'deletes', js: true do
-      within(table) {has_content? simple_grade_type.name }
+      within(table) { has_content? simple_grade_type.name }
       count? 'Simple grade types list(1)'
 
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::SimpleGradeType, :count).by -1
+      end.to change(Gaku::SimpleGradeType, :count).by(-1)
 
       count? 'Simple grade type list'
       within(table) { has_no_content? simple_grade_type.name }

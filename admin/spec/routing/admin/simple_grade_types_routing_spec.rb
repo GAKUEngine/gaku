@@ -25,7 +25,6 @@ describe Gaku::Admin::SimpleGradeTypesController do
 
   describe 'collection' do
 
-
     it 'routes to #index' do
       expect(get: 'admin/simple_grade_types/').to route_to(
         controller: 'gaku/admin/simple_grade_types',

@@ -58,8 +58,8 @@ Gaku::Core::Engine.routes.draw  do
     resources :grading_methods
     resources :grading_method_sets, concerns: %i( primary ) do
       resources :grading_method_set_items,
-        controller: 'grading_method_sets/grading_method_set_items',
-        concerns: %i( sort )
+                controller: 'grading_method_sets/grading_method_set_items',
+                concerns: %i( sort )
     end
 
     resources :states do

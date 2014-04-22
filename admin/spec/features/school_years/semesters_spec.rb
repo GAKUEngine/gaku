@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Admin School Years Semesters' do
 
   let(:school_year) { create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8')) }
-  let(:semester) { create(:semester, school_year: school_year)}
+  let(:semester) { create(:semester, school_year: school_year) }
 
   before { as :admin }
   before(:all) { set_resource 'admin-school-year-semester' }
@@ -75,7 +75,6 @@ describe 'Admin School Years Semesters' do
       click '#semesters-menu a'
     end
 
-
     context 'edit', js: true do
       before do
         within(table) { click js_edit_link }
@@ -136,7 +135,7 @@ describe 'Admin School Years Semesters' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Semester, :count).by -1
+      end.to change(Gaku::Semester, :count).by(-1)
 
       within(count_div) { page.should_not have_content 'Semesters list(1)' }
       within(count_div) { page.should have_content 'Semesters list' }

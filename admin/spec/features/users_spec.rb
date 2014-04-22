@@ -9,7 +9,6 @@ describe 'Admin Users' do
   let!(:principal_role) { create(:role, name: 'principal') }
   let!(:teacher_role)   { create(:role, name: 'teacher') }
 
-
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
@@ -80,7 +79,6 @@ describe 'Admin Users' do
         accept_alert
         flash_destroyed?
       end.to change(Gaku::User, :count).by(-1)
-
 
       count? 'Users list(2)'
       has_no_content? user.username

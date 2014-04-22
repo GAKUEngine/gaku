@@ -4,13 +4,9 @@ describe 'Admin School Campus Picture' do
 
   let(:school) { create(:school) }
   let(:campus) { create(:campus, school: school) }
-  let(:campus_with_picture) { create(:campus, school: school,
-    picture: ActionDispatch::Http::UploadedFile.new(:tempfile => File.new("#{Rails.root}/../support/120x120.jpg"), :filename => "120x120.jpg")
-    )}
+  let(:campus_with_picture) { create(:campus, school: school, picture: uploaded_file('120x120.jpg')) }
 
-  before do
-    as :admin
-  end
+  before { as :admin }
 
   context 'without picture' do
     before do
@@ -20,12 +16,11 @@ describe 'Admin School Campus Picture' do
     it 'upload avatar', js: true do
       click '#avatar-picture'
       expect do
-      attach_file :campus_picture,
-              File.join(Rails.root + '../support/120x120.jpg')
-      click_button 'Upload'
-      wait_for_ajax
-      campus.reload
-      flash_updated?
+        attach_file :campus_picture, File.join(Rails.root + '../support/120x120.jpg')
+        click_button 'Upload'
+        wait_for_ajax
+        campus.reload
+        flash_updated?
       end.to change(campus, :picture_content_type).from(nil).to('image/jpeg')
     end
   end

@@ -3,13 +3,9 @@ require 'spec_helper'
 describe 'Admin School Picture' do
 
   let(:school) { create(:school) }
-  let(:school_with_picture) { create(:school,
-    picture: ActionDispatch::Http::UploadedFile.new(:tempfile => File.new("#{Rails.root}/../support/120x120.jpg"), :filename => "120x120.jpg")
-    )}
+  let(:school_with_picture) { create(:school, picture: uploaded_file('120x120.jpg')) }
 
-  before do
-    as :admin
-  end
+  before { as :admin }
 
   context 'without picture' do
     before do
@@ -19,12 +15,11 @@ describe 'Admin School Picture' do
     it 'upload avatar', js: true do
       click '#avatar-picture'
       expect do
-      attach_file :school_picture,
-              File.join(Rails.root + '../support/120x120.jpg')
-      click_button 'Upload'
-      wait_for_ajax
-      school.reload
-      flash_updated?
+        attach_file :school_picture, File.join(Rails.root + '../support/120x120.jpg')
+        click_button 'Upload'
+        wait_for_ajax
+        school.reload
+        flash_updated?
       end.to change(school, :picture_content_type).from(nil).to('image/jpeg')
     end
   end

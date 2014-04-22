@@ -8,8 +8,8 @@ describe 'Admin Commute Method Types' do
   let(:commute_method_type) { create(:commute_method_type, name: 'metro') }
 
   context 'new', js: true do
-  	before do
-  	  visit gaku.admin_root_path
+    before do
+      visit gaku.admin_root_path
       click '#commute-methods-menu a'
       click new_link
     end
@@ -47,15 +47,15 @@ describe 'Admin Commute Method Types' do
         has_validations?
       end
 
-    	it 'edits' do
-    	  fill_in 'commute_method_type_name', with: 'car'
-    	  click submit
+      it 'edits' do
+        fill_in 'commute_method_type_name', with: 'car'
+        click submit
 
-    	  flash_updated?
-    	  has_content? 'car'
-    	  has_no_content? 'metro'
+        flash_updated?
+        has_content? 'car'
+        has_no_content? 'metro'
         expect(commute_method_type.reload.name).to eq 'car'
-    	end
+      end
     end
 
     it 'deletes', js: true do

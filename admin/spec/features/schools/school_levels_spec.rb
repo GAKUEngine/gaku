@@ -22,7 +22,6 @@ describe 'Admin School Levels' do
     it 'create and show' do
       click '#edit-admin-primary-school'
       accept_alert
-      #page.should have_content 'Edit Master School'
       click '.add-school-level'
       fill_in 'School Level', with: '12 class'
       click submit

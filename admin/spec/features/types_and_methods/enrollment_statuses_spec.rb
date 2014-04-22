@@ -8,8 +8,8 @@ describe 'Admin Enrollment Statuses' do
   let(:enrollment_status) { create(:enrollment_status_admitted) }
 
   context 'new', js: true do
-  	before do
-  	  visit gaku.admin_root_path
+    before do
+      visit gaku.admin_root_path
       click '#enrollment-statuses-menu a'
       click new_link
     end
@@ -42,15 +42,15 @@ describe 'Admin Enrollment Statuses' do
         visible? modal
       end
 
-    	it 'edits' do
-    	  fill_in 'enrollment_status_name', with: 'Expelled'
-    	  click submit
+      it 'edits' do
+        fill_in 'enrollment_status_name', with: 'Expelled'
+        click submit
 
-    	  flash_updated?
-    	  has_content? 'Expelled'
-    	  has_no_content? 'Admitted'
+        flash_updated?
+        has_content? 'Expelled'
+        has_no_content? 'Admitted'
         expect(enrollment_status.reload.name).to eq 'Expelled'
-    	end
+      end
 
       it 'has validations' do
         fill_in 'enrollment_status_code', with: ''
@@ -58,8 +58,7 @@ describe 'Admin Enrollment Statuses' do
       end
     end
 
-
-  	it 'deletes', js: true do
+    it 'deletes', js: true do
       has_content? enrollment_status.name
       count? 'Enrollment Statuses list(1)'
 

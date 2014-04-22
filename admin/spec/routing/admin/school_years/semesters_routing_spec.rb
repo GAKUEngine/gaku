@@ -24,7 +24,6 @@ describe Gaku::Admin::SchoolYears::SemestersController do
       )
     end
 
-
     it 'routes to #destroy' do
       expect(delete: 'admin/school_years/1/semesters/1').to route_to(
         controller: 'gaku/admin/school_years/semesters',
