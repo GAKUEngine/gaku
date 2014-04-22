@@ -94,7 +94,8 @@ module Gaku
     end
 
     def set_foreign_id_code
-      if preset = Preset.active
+      preset = Preset.active
+      if preset
         if preset.increment_foreign_id_code == '1'
           self.foreign_id_code = (preset.last_foreign_id_code.to_i + 1).to_s
           preset.last_foreign_id_code = foreign_id_code
@@ -133,7 +134,7 @@ module Gaku
     end
 
     def set_serial_id
-      update_column(:serial_id, "%05d" % id)
+      update_column :serial_id, format('%05d', id)
     end
 
     def empty_string(size)

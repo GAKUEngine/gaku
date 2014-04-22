@@ -6,10 +6,10 @@ module Gaku
     validates :grading_method_set_id, :grading_method_id, presence: true
 
     validates :grading_method_id,
-      uniqueness: {
-        scope: :grading_method_set_id,
-        message: I18n.t(:'grading_method_set_item.already')
-      }
+              uniqueness: {
+                scope: :grading_method_set_id,
+                message: I18n.t(:'grading_method_set_item.already')
+              }
 
     before_create :proper_position
     after_destroy :refresh_positions
