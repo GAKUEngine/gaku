@@ -9,7 +9,7 @@ module Gaku
       :gradable_type,
       inclusion: {
         in: %w(Gaku::Exam Gaku::Course),
-        message: format '%s is not a valid', value
+        message: '%value is not a valid'
       }
     )
 
