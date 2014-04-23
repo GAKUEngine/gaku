@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'Admin School Campuses Address' do
 
   let(:address) { create(:address, country: country) }
-  let(:school) { create(:school)}
+  let(:school) { create(:school) }
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
   let(:country_without_state) { create(:country, name: 'Japan', iso: 'JP') }
-  let!(:state) { create(:state, name: "Florida", country: country) }
+  let!(:state) { create(:state, name: 'Florida', country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
   before { as :admin }
@@ -16,6 +16,7 @@ describe 'Admin School Campuses Address' do
     before do
       country_without_state
       visit gaku.edit_admin_school_campus_path(school, school.master_campus)
+      click '#addresses-menu a'
       click new_link
     end
 
@@ -58,6 +59,7 @@ describe 'Admin School Campuses Address' do
     before do
       school.master_campus.address = address
       visit gaku.edit_admin_school_campus_path(school, school.master_campus)
+      click '#addresses-menu a'
     end
 
     context 'edit' do
@@ -70,7 +72,7 @@ describe 'Admin School Campuses Address' do
       it 'edits' do
         old_address = address.address1
 
-        fill_in 'address_address1', with:'The address new details'
+        fill_in 'address_address1', with: 'The address new details'
         click submit
 
         flash_updated?
@@ -87,6 +89,7 @@ describe 'Admin School Campuses Address' do
       end
 
       it 'changes country with state' do
+        sleep 1
         select "#{country}", from: 'country_dropdown'
         within('#state-dropdown') { page.has_content? state.name }
         select "#{state}", from: 'address_state_id'

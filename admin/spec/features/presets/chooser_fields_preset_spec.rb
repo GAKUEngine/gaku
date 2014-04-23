@@ -8,8 +8,9 @@ describe 'Admin Presets Chooser Fields' do
   let!(:preset) { create(:preset, active: true) }
 
   before do
-    visit gaku.admin_presets_path
-    click edit_link
+    visit gaku.admin_root_path
+    click '#presets-menu a'
+    click js_edit_link
     click '#admin-preset-chooser-fields-tab-link'
   end
 

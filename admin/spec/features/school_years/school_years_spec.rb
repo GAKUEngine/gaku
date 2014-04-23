@@ -2,17 +2,16 @@ require 'spec_helper'
 
 describe 'Admin School Years' do
 
-  let(:school_year) { create(:school_year)}
+  let(:school_year) { create(:school_year) }
 
   before { as :admin }
-
-  before :all do
-    set_resource 'admin-school-year'
-  end
+  before(:all) { set_resource 'admin-school-year' }
 
   context 'new', js: true do
     before do
-      visit gaku.admin_school_years_path
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#school-years-menu a'
       click new_link
     end
 
@@ -42,7 +41,6 @@ describe 'Admin School Years' do
         flash_created?
       end
 
-
       it 'has validations' do
         fill_in 'school_year_starting', with: ''
         fill_in 'school_year_ending', with: ''
@@ -55,13 +53,14 @@ describe 'Admin School Years' do
   context 'existing' do
     before do
       school_year
-      visit gaku.admin_school_years_path
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#school-years-menu a'
     end
 
     context 'edit', js: true do
       before do
-        within(table) { click js_edit_link }
-        visible? modal
+        within(table) { click edit_link }
       end
 
       it 'edits' do
@@ -70,10 +69,10 @@ describe 'Admin School Years' do
 
         click submit
 
-        page.should have_content '2013 October 08'
-        page.should have_content '2014 October 09'
-
         flash_updated?
+
+        find_field('school_year_starting').value.should eq '2013-10-08'
+        find_field('school_year_ending').value.should eq '2014-10-09'
       end
 
       context 'validations' do
@@ -97,19 +96,17 @@ describe 'Admin School Years' do
         end
 
       end
-
-      it 'deletes', js: true do
-        within(count_div) { page.should have_content 'School Years list(1)' }
-        expect do
-          ensure_delete_is_working
-          flash_destroyed?
-        end.to change(Gaku::SchoolYear, :count).by -1
-
-        within(count_div) { page.should_not have_content 'School Years list(1)' }
-        within(count_div) { page.should have_content 'School Years list' }
-
     end
 
+    it 'deletes', js: true do
+      within(count_div) { page.should have_content 'School Years list(1)' }
+      expect do
+        ensure_delete_is_working
+        flash_destroyed?
+      end.to change(Gaku::SchoolYear, :count).by(-1)
+
+      within(count_div) { page.should_not have_content 'School Years list(1)' }
+      within(count_div) { page.should have_content 'School Years list' }
 
     end
   end

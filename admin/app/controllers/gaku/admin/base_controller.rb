@@ -2,7 +2,7 @@ module Gaku
   module Admin
     class BaseController < CoreController
 
-      self.responder = AppResponder
+      self.responder = Gaku::AppResponder
       respond_to :html
 
       layout :resolve_layout

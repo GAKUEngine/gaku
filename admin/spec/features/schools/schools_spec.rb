@@ -9,7 +9,9 @@ describe 'Admin Schools' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_schools_path
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#schools-menu a'
       click new_link
     end
 
@@ -27,12 +29,13 @@ describe 'Admin Schools' do
     it { has_validations? }
   end
 
-
   context 'existing', js: true do
 
     before do
       school
-      visit gaku.admin_schools_path
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#schools-menu a'
     end
 
     context 'edit' do
@@ -55,19 +58,13 @@ describe 'Admin Schools' do
 
     end
 
-    it 'shows' do
-      within(table) { click show_link }
-      has_content? 'School information'
-      current_path.should eq "/admin/schools/#{school.id}"
-    end
-
     xit 'deletes' do
       within(count_div) { page.should have_content 'Schools list(1)' }
       page.should have_content school.name
 
       expect do
         ensure_delete_is_working
-      end.to change(Gaku::School, :count).by -1
+      end.to change(Gaku::School, :count).by(-1)
 
       within(count_div) { page.should_not have_content 'Schools list(1)' }
       page.should_not have_content school.name

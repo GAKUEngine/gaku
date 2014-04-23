@@ -20,7 +20,7 @@
         a#admin-preset-address-tab-link data-toggle="tab" href="#address"
           = t(:'preset.address.singular')
       li
-        a#admin-preset-grading-tab-link data-toggle="tab" href="#grading"
+        a#admin-preset-grading-tab-link data-toggle="tab" href="#grading-tab"
           = t(:'preset.grading.singular')
       li
         a#admin-preset-chooser-fields-tab-link data-toggle="tab" href="#chooser_fields"
@@ -42,7 +42,7 @@
         = render 'gaku/admin/presets/student'
       #address.tab-pane
         = render 'gaku/admin/presets/address'
-      #grading.tab-pane
+      #grading-tab.tab-pane
         = render 'gaku/admin/presets/grading'
       #chooser_fields.tab-pane
         = render 'gaku/admin/presets/chooser_fields'

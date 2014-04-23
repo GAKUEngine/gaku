@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    #new-admin-department.d-none
+    .pull-left
+      = count_div 'admin-departments-count' do
+        = print_count @count, t(:'department.list')
+    .pull-right
+      = ajax_link_to_new t(:'department.add'), [:new, :admin, :department], id: 'new-admin-department-link'
+
+hr
+
+#admin-departments
+  = table_for 'admin-departments-index' do
+    thead
+      tr
+        = th t(:'department.name')
+
+        = th_actions 2
+    tbody
+      = render partial: 'gaku/admin/departments/department', collection: @departments, as: :department
+

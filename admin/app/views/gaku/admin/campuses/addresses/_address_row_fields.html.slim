@@ -1,0 +1,4 @@
+= render 'gaku/admin/campuses/addresses/fields', address: address
+td
+  = ajax_link_to_edit [:edit, :admin, @school, @campus, address]
+  = ajax_link_to_delete [:admin, @school, @campus, address]

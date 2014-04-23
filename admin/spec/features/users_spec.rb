@@ -9,10 +9,11 @@ describe 'Admin Users' do
   let!(:principal_role) { create(:role, name: 'principal') }
   let!(:teacher_role)   { create(:role, name: 'teacher') }
 
-
   context 'new', js: true do
     before do
-      visit gaku.admin_users_path
+      visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
+      click '#users-menu a'
       click new_link
     end
 
@@ -42,7 +43,9 @@ describe 'Admin Users' do
   context 'existing' do
     before do
       user
-      visit gaku.admin_users_path
+      visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
+      click '#users-menu a'
     end
 
     context 'edit', js: true do
@@ -78,7 +81,6 @@ describe 'Admin Users' do
         accept_alert
         flash_destroyed?
       end.to change(Gaku::User, :count).by(-1)
-
 
       count? 'Users list(2)'
       has_no_content? user.username

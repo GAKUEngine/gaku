@@ -1,8 +1,0 @@
-= image_tag campus.picture.url(:thumb), id: "avatar-picture", class: "img-thumbnail"
-
-- if can_edit?
-  .row.mt-m
-    .col-md-12
-      = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link"
-      #upload-picture.d-none
-        = render 'upload_picture', campus: campus

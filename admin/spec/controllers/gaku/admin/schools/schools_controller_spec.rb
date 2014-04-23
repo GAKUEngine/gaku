@@ -9,22 +9,10 @@ describe Gaku::Admin::SchoolsController do
     ensures 'deny except', :admin
   end
 
- context 'as admin' do
+  context 'as admin' do
     before { as :admin }
 
     context 'html' do
-
-      describe 'GET #index' do
-        before do
-          school
-          gaku_get :index
-        end
-
-        it { should respond_with 200 }
-        it('assigns @schools') { expect(assigns(:schools)).to eq [school] }
-        it('assigns @count') { expect(assigns(:count)).to eq 1 }
-        it('renders :index template') { template? :index }
-      end
 
       describe 'GET #edit' do
         before { gaku_get :edit, id: school }
@@ -42,7 +30,7 @@ describe Gaku::Admin::SchoolsController do
         it('renders the :edit_master template') { template? :edit_master }
       end
 
-      describe 'GET #show' do
+      pending 'GET #show' do
         before { gaku_get :show, id: school }
 
         it { should respond_with 200 }
@@ -50,22 +38,13 @@ describe Gaku::Admin::SchoolsController do
         it('renders the :show template') { template? :show }
       end
 
-      describe 'GET #show_master' do
-        before { gaku_get :show_master, id: master_school }
-
-        it { should respond_with 200 }
-        it('assigns @school') { expect(assigns(:school)).to eq master_school }
-        it('renders the :show_master template') { template? :show_master }
-      end
-
-      describe 'PATCH #update' do
+      describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: school, school: attributes_for(:school, name: 'test')
+            gaku_js_patch :update, id: school, school: attributes_for(:school, name: 'test')
           end
 
-          it { should respond_with 302 }
-          it('redirects to :edit view') { redirect_to? "/admin/schools/#{school.id}/edit"}
+          it { should respond_with 200 }
           it('assigns @school') { expect(assigns(:school)).to eq school }
           it('sets flash') { flash_updated? }
           it "changes school's attributes" do
@@ -76,7 +55,7 @@ describe Gaku::Admin::SchoolsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: school, school: attributes_for(:invalid_school, name: '')
+            gaku_js_patch :update, id: school, school: attributes_for(:invalid_school, name: '')
           end
 
           it { should respond_with 200 }
@@ -96,7 +75,7 @@ describe Gaku::Admin::SchoolsController do
           end
 
           it { should respond_with 302 }
-          it('redirects to :edit_master view') { redirect_to? "/admin/school_details/edit"}
+          it('redirects to :edit_master view') { redirect_to? '/admin/school_details/edit' }
           it('assigns @school') { expect(assigns(:school)).to eq master_school }
           it('sets flash') { flash_updated? }
           it "changes school's attributes" do
@@ -107,7 +86,7 @@ describe Gaku::Admin::SchoolsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: master_school, school: attributes_for(:invalid_school, name: '')
+            gaku_patch :update_master, id: master_school, school: attributes_for(:invalid_school, name: '')
           end
 
           it { should respond_with 200 }
@@ -124,12 +103,32 @@ describe Gaku::Admin::SchoolsController do
 
     context 'js' do
 
+      describe 'JS GET #index' do
+        before do
+          school
+          gaku_js_get :index
+        end
+
+        it { should respond_with 200 }
+        it('assigns @schools') { expect(assigns(:schools)).to eq [school] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
+      end
+
       describe 'JS #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
         it('assigns @school') { expect(assigns(:school)).to be_a_new(Gaku::School) }
         it('renders the :new template') { template? :new }
+      end
+
+      describe 'JS GET #edit' do
+        before { gaku_js_get :edit, id: school }
+
+        it { should respond_with 200 }
+        it('assigns @school') { expect(assigns(:school)).to eq school }
+        it('renders the :edit template') { template? :edit }
       end
 
       describe 'JS POST #create' do
@@ -176,6 +175,7 @@ describe Gaku::Admin::SchoolsController do
             expect(assigns(:count)).to eq 0
           end
         end
+
       end
 
       describe 'JS DELETE #destroy' do
@@ -199,6 +199,5 @@ describe Gaku::Admin::SchoolsController do
 
     end
   end
-
 
 end
