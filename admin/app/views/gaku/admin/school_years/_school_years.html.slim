@@ -1,13 +1,15 @@
-#new-admin-school-year-errors
-#new-admin-school-year.d-none
+.row
+  .col-md-12
+    #new-admin-school-year-errors
+    #new-admin-school-year.d-none
 
-.pull-left
-  = count_div 'admin-school-years-count' do
-    = print_count @count, t(:'school_year.list')
-.pull-right
-  = ajax_link_to_new t(:'school_year.add'), [:new, :admin, :school_year], id: 'new-admin-school-year-link'
+    .pull-left
+      = count_div 'admin-school-years-count' do
+        = print_count @count, t(:'school_year.list')
+    .pull-right
+      = ajax_link_to_new t(:'school_year.add'), [:new, :admin, :school_year], id: 'new-admin-school-year-link'
 
-br
+hr
 
 #admin-school-years
   = table_for 'admin-school-years-index' do
