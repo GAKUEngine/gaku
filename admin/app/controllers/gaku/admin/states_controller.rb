@@ -9,13 +9,7 @@ module Gaku
 
     def country_states
       if params[:state][:country_iso].empty?
-        @country = set_default_country
-        set_count @country
-        if @country
-          respond_with @country
-        else
-          render nothing: true
-        end
+        states_for_default_country
       else
         @country = Country.where(iso: params[:state][:country_iso]).first
         @states = @country.states
@@ -55,6 +49,16 @@ module Gaku
     end
 
     private
+
+    def states_for_default_country
+      @country = set_default_country
+      set_count @country
+      if @country
+        respond_with @country
+      else
+        render nothing: true
+      end
+    end
 
     def state_params
       params.require(:state).permit(attributes)

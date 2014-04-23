@@ -10,7 +10,7 @@ module Gaku
 
     def badge_count(count, text, css_class)
       if count != 0
-        "#{text}<span class='badge pull-right #{css_class}'>#{count.to_s}</span>".html_safe
+        "#{text}<span class='badge pull-right #{css_class}'>#{count}</span>".html_safe
       else
         "#{text}<span class='badge pull-right #{css_class}'></span>".html_safe
       end

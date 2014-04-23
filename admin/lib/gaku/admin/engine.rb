@@ -15,9 +15,7 @@ module Gaku
 
       # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
       initializer 'gaku.assets.precompile', group: :all do |app|
-        app.config.assets.precompile += %w[
-          gaku/admin/all*
-        ]
+        app.config.assets.precompile += %w( gaku/admin/all* )
       end
 
       # filter sensitive information during logging

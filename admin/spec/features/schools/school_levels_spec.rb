@@ -53,7 +53,7 @@ describe 'Admin School Levels' do
       flash_updated?
       visit gaku.admin_school_details_edit_path
       page.should_not have_content master_school_level
-      expect(find('.school-level-name').value).to eq  '5 class'
+      expect(find('.school-level-name').value).to eq '5 class'
     end
   end
 

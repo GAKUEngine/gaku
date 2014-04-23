@@ -22,7 +22,6 @@ describe Gaku::Admin::CampusesController do
       )
     end
 
-
     it 'routes to #edit' do
       expect(get: 'admin/schools/1/campuses/1/edit').to route_to(
         controller: 'gaku/admin/campuses',

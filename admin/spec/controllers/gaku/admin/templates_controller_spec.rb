@@ -114,7 +114,6 @@ describe Gaku::Admin::TemplatesController do
         it('renders the :edit template') { template? :edit }
       end
 
-
       describe 'XHR #new' do
         before do
           gaku_js_get :new
