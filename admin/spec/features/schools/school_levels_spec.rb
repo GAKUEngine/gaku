@@ -47,13 +47,13 @@ describe 'Admin School Levels' do
       page.should_not have_content master_school_level
     end
 
-    it 'delete' do
+    it 'deletes' do
       fill_in 'School Level', with: '5 class'
       click submit
       flash_updated?
       visit gaku.admin_school_details_edit_path
       page.should_not have_content master_school_level
-      page.should have_content '5 class'
+      expect(find('.school-level-name').value).to eq  '5 class'
     end
   end
 
