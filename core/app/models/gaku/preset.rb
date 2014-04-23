@@ -24,5 +24,24 @@ module Gaku
                    :show_primary_address,
                    :show_primary_contact,
                    :show_primary_email
+
+    store_accessor :grading
+
+    def self.default
+      where(default: true).first
+    end
+
+    def self.active
+      where(active: true).first
+    end
+
+    def self.per_page(key)
+      active.pagination[key.to_s].to_i unless active.nil?
+    end
+
+    def self.address(key)
+      active.address[key.to_s] unless active.nil?
+    end
+
   end
 end

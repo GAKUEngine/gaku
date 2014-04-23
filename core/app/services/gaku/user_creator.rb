@@ -13,7 +13,9 @@ module Gaku
       @user.save!
     end
 
-    attr_reader :user
+    def get_user
+      @user
+    end
 
     private
 
