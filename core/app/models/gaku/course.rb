@@ -1,7 +1,7 @@
 module Gaku
   class Course < ActiveRecord::Base
 
-    include Notes, Gradable
+    include Notes, Gradable, Semesterable
 
     has_many :enrollments,
              class_name: 'Gaku::CourseEnrollment',
@@ -15,9 +15,6 @@ module Gaku
     has_many :class_groups, through: :class_group_course_enrollments
     has_many :class_group_course_enrollments, dependent: :destroy
 
-    has_many :semester_courses, dependent: :destroy
-    has_many :semesters, through: :semester_courses
-
     has_many :exam_schedules
 
     belongs_to :syllabus
@@ -28,8 +25,6 @@ module Gaku
     accepts_nested_attributes_for :enrollments
 
     validates :code, presence: true
-
-    scope :without_semester, -> { includes(:semester_courses).where(gaku_semester_courses: { course_id: nil }) }
 
     def to_s
       if syllabus_name

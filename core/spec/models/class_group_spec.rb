@@ -4,6 +4,7 @@ describe Gaku::ClassGroup do
 
   describe 'concerns' do
     it_behaves_like 'notable'
+    it_behaves_like 'semesterable'
   end
 
   describe 'associations' do
@@ -11,8 +12,6 @@ describe Gaku::ClassGroup do
     it { should have_many(:students).through(:enrollments) }
     it { should have_many(:class_group_course_enrollments).dependent(:destroy) }
     it { should have_many(:courses).through(:class_group_course_enrollments) }
-    it { should have_many(:semester_class_groups).dependent(:destroy) }
-    it { should have_many(:semesters).through(:semester_class_groups) }
   end
 
   describe 'validations' do

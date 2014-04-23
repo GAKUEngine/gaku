@@ -5,7 +5,7 @@
         a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments"
           = print_count @course.students_count, t(:'student.plural')
       li
-        a#course-semester-courses-tab-link data-toggle="tab" href="#course-semesters"
+        a#course-semester-connectors-tab-link data-toggle="tab" href="#course-semesters"
           = print_count @course.semesters.count, t(:'semester.plural')
 
       li
@@ -22,7 +22,7 @@
       #course-enrollments.tab-pane.active
         = render "gaku/courses/enrollments/enrollments"
       #course-semesters.tab-pane
-        = render "gaku/courses/semester_courses/semester_courses"
+        = render "gaku/semester_connectors/semester_connectors"
       #course-exams.tab-pane
         = render "gaku/courses/exams/exams"
       #course-notes.tab-pane

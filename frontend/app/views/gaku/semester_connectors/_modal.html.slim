@@ -1,0 +1,4 @@
+= modal_for 'semester-modal' do
+  = modal_form_for [@semesterable, @semester_connector], { resource: "#{@semesterable_resource}-semester-connector", label: t(:'semester.singular') } do |f|
+      = render 'form_fields', f: f
+      = buttons_for @semester_connector, { resource: "#{@semesterable_resource}-semester-connector", label: t(:'semester.save') }
