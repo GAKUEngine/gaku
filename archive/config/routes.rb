@@ -13,7 +13,7 @@ Gaku::Core::Engine.routes.draw  do
     get :clear_search, on: :collection
     get :advanced_search, on: :collection
     get :chosen, on: :collection
-    resources :guardians, controller: 'students/guardians', concerns: :soft_delete
+    resources :guardians, concerns: :soft_delete
   end
 
   resources :student_selection, only: :index do

@@ -1,0 +1,10 @@
+= normal_form_for [@student, @guardian], label: 'nil' do |f|
+  = render 'form_fields', f: f, guardian: @guardian
+  = submit_button t(:'guardian.save'), id: 'submit-student-guardian-button'
+
+
+= footer do
+  .col-md-3.pull-right
+    = link_to_modal_delete
+  .delete_modal
+    = render 'delete_modal', student: @student, guardian: @guardian

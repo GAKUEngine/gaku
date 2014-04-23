@@ -1,5 +1,6 @@
 module Gaku
   class StatesController < CoreController
+
     respond_to :js, :json
 
     def index
@@ -13,5 +14,6 @@ module Gaku
 
       respond_with @states
     end
+
   end
 end

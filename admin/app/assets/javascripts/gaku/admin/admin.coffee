@@ -35,9 +35,10 @@ ready = ->
 
     edit: ->
       self.admin.country_dropdown()
+      self.admin.upload_picture_ajax()
 
     edit_master: ->
-      self.admin.upload_picture()
+      self.admin.upload_picture_ajax()
 
     new: ->
       self.admin.country_dropdown()

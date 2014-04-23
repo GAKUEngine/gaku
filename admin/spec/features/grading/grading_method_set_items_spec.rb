@@ -20,7 +20,10 @@ describe 'Admin Grading Method Set Items' do
   context 'new', js: true do
     before do
       grading_method_set
-      visit gaku.admin_grading_method_set_path(grading_method_set)
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-method-sets-menu a'
+      click '.show-link'
       click new_link
     end
 
@@ -43,7 +46,10 @@ describe 'Admin Grading Method Set Items' do
       grading_method2
       grading_method_set
       grading_method_set_item
-      visit gaku.admin_grading_method_set_path(grading_method_set)
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-method-sets-menu a'
+      click '.show-link'
     end
 
     context 'edit', js: true do
@@ -63,7 +69,6 @@ describe 'Admin Grading Method Set Items' do
       end
 
       it 'has validations' do
-        #select '', from: 'grading_method_set_item_grading_method_id'
         has_validations?
       end
 
@@ -77,7 +82,6 @@ describe 'Admin Grading Method Set Items' do
         ensure_delete_is_working
         flash_destroyed?
       end.to change(Gaku::GradingMethodSetItem, :count).by(-1)
-
 
       within(table) { has_no_content? grading_method.name }
     end

@@ -7,10 +7,10 @@ describe 'Admin Departments' do
 
   let(:department) { create(:department, name: 'Ruby') }
 
-
   context 'new', js: true do
     before do
-      visit gaku.admin_departments_path
+      visit gaku.admin_root_path
+      click '#departments-menu a'
       click new_link
     end
 
@@ -33,7 +33,8 @@ describe 'Admin Departments' do
 
     before do
       department
-      visit gaku.admin_departments_path
+      visit gaku.admin_root_path
+      click '#departments-menu a'
     end
 
     context '#edit ', js: true do

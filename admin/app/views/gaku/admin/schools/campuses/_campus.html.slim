@@ -1,6 +1,0 @@
-tr id="campus-#{campus.id}"
-  td
-  td = campus.name
-  td
-    = link_to_show [:admin, @school, campus]
-    = link_to_edit [:edit, :admin, @school, campus] if can_edit?

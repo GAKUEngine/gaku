@@ -3,5 +3,6 @@ eval(File.read(File.dirname(__FILE__) + '/../all_dependencies.rb'))
 
 gem 'gaku_core', path: '../core'
 gem 'gaku_testing', path: '../testing'
+
 gemspec
 

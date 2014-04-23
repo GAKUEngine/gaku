@@ -1,0 +1,8 @@
+tr id="guardian-#{guardian.id}"
+  td = guardian.surname
+  td = guardian.name
+  td = guardian.birth_date
+  td = guardian.relationship
+  td
+    = link_to_show [@student, guardian]
+    = link_to_edit [:edit, @student, guardian]

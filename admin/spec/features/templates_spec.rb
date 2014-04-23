@@ -13,7 +13,8 @@ describe 'Admin Templates' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_templates_path
+      visit gaku.admin_root_path
+      click '#templates-menu a'
       click new_link
     end
 
@@ -26,13 +27,12 @@ describe 'Admin Templates' do
         attach_file 'template_file', absolute_path
 
         click submit
+        sleep 1
         flash_created?
       end.to change(Gaku::Template, :count).by 1
 
       expect(page).to have_content 'New Template'
       within(count_div) { expect(page).to have_content 'Templates list(1)' }
-
-      expect(current_path).to eq gaku.admin_templates_path
     end
 
     it 'has file validations' do
@@ -55,12 +55,13 @@ describe 'Admin Templates' do
   context 'existing' do
     before do
       template
-      visit gaku.admin_templates_path
+      visit gaku.admin_root_path
+      click '#templates-menu a'
     end
 
     context 'edit', js: true do
       before do
-        within(table) { click edit_link }
+        within(table) { click js_edit_link }
       end
 
       it 'edits' do
@@ -71,20 +72,6 @@ describe 'Admin Templates' do
 
         expect(page).to have_content 'Edited name'
         expect(page).to_not have_content 'mobile'
-
-        expect(current_path).to eq gaku.admin_templates_path
-      end
-
-
-      it 'has file validations' do
-        fill_in 'template_name', with: 'New Template'
-        fill_in 'template_context', with: 'new_context'
-
-        absolute_path = Rails.root + '../support/120x120.jpg'
-        attach_file 'template_file', absolute_path
-
-        click submit
-        page.has_content? 'Only text, excel or openoffice documents are supported'
       end
 
       it 'has validations' do

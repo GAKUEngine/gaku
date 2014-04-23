@@ -1,0 +1,8 @@
+a.thumbnail.mb-0#thumb-picture
+  = image_tag resource.picture.url(:thumb), id: "avatar-picture"
+  #popover-upload-picture.d-none
+    = link_to_upload_image 'JavaScript:void(0);', method: :get, id: "upload-picture-link", style: "width: 280px"
+    #upload-picture.d-none
+      .row
+        .col-md-12
+          = render 'gaku/admin/shared/ajax_upload_picture', resource: resource

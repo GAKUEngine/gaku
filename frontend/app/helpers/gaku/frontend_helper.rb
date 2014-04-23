@@ -8,6 +8,13 @@ module Gaku
     include Gaku::StudentChooserHelper
     include Gaku::StudentsHelper
 
+    def badge_count(count, text, css_class)
+      if count != 0
+        "#{text}<span class='badge pull-right #{css_class}'>#{count.to_s}</span>".html_safe
+      else
+        "#{text}<span class='badge pull-right #{css_class}'></span>".html_safe
+      end
+    end
 
     def ajax_link_to_search(text, resource, options = {})
       name = ("<span class='glyphicon glyphicon-search'></span> " + text).html_safe

@@ -30,7 +30,6 @@ describe Gaku::Admin::SchoolYearsController do
       )
     end
 
-
     it 'routes to #destroy' do
       expect(delete: 'admin/school_years/1').to route_to(
         controller: 'gaku/admin/school_years',
@@ -41,7 +40,6 @@ describe Gaku::Admin::SchoolYearsController do
   end
 
   describe 'collection' do
-
 
     it 'routes to #index' do
       expect(get: 'admin/school_years/').to route_to(

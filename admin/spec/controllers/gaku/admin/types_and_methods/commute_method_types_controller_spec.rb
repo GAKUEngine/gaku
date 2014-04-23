@@ -8,8 +8,8 @@ describe Gaku::Admin::CommuteMethodTypesController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'XHR #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -20,11 +20,12 @@ describe Gaku::Admin::CommuteMethodTypesController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+
+      describe 'XHR #index' do
         before do
           commute_method_type
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -33,15 +34,15 @@ describe Gaku::Admin::CommuteMethodTypesController do
         it('renders :index template') { template? :index }
       end
 
-    end
-
-    context 'js' do
-
       describe 'XHR #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
-        it('assigns @commute_method_type') { expect(assigns(:commute_method_type)).to be_a_new(Gaku::CommuteMethodType) }
+
+        it('assigns @commute_method_type') do
+          expect(assigns(:commute_method_type)).to be_a_new(Gaku::CommuteMethodType)
+        end
+
         it('renders the :new template') { template? :new }
       end
 
@@ -102,7 +103,8 @@ describe Gaku::Admin::CommuteMethodTypesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: commute_method_type, commute_method_type: attributes_for(:commute_method_type, name: 'new method')
+            gaku_js_patch :update, id: commute_method_type,
+                                   commute_method_type: attributes_for(:commute_method_type, name: 'new method')
           end
 
           it { should respond_with 200 }
@@ -116,7 +118,8 @@ describe Gaku::Admin::CommuteMethodTypesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: commute_method_type, commute_method_type: attributes_for(:invalid_commute_method_type, name: '')
+            gaku_js_patch :update, id: commute_method_type,
+                                   commute_method_type: attributes_for(:invalid_commute_method_type, name: '')
           end
 
           it { should respond_with 200 }

@@ -8,8 +8,8 @@ describe Gaku::Admin::TemplatesController do
   context 'as student' do
     before { as :student }
 
-    describe 'GET #index' do
-      before { gaku_get :index }
+    describe 'JS GET #index' do
+      before { gaku_js_get :index }
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -20,11 +20,12 @@ describe Gaku::Admin::TemplatesController do
   context 'as admin' do
     before { as :admin }
 
-    context 'html' do
-      describe 'GET #index' do
+    context 'js' do
+
+      describe 'JS GET #index' do
         before do
           template
-          gaku_get :index
+          gaku_js_get :index
         end
 
         it { should respond_with 200 }
@@ -33,14 +34,13 @@ describe Gaku::Admin::TemplatesController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'PATCH #update' do
+      describe 'JS PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: template, template: attributes_for(:template, name: 'Ruby dev')
+            gaku_js_patch :update, id: template, template: attributes_for(:template, name: 'Ruby dev')
           end
 
-          it { should respond_with 302 }
-          it('redirects') { redirect_to? gaku.admin_templates_path }
+          it { should respond_with 200 }
           it('assigns @template') { expect(assigns(:template)).to eq template }
           it('sets flash') { flash_updated? }
           it "changes template's attributes" do
@@ -51,7 +51,7 @@ describe Gaku::Admin::TemplatesController do
 
         describe 'with invalid attributes' do
           before do
-            gaku_patch :update, id: template, template: attributes_for(:invalid_template, name: '')
+            gaku_js_patch :update, id: template, template: attributes_for(:invalid_template, name: '')
           end
 
           it { should respond_with 200 }
@@ -64,12 +64,10 @@ describe Gaku::Admin::TemplatesController do
         end
       end
 
-
-
-      describe 'POST #create' do
+      describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_create) do
-            gaku_post :create, template: attributes_for(:template)
+            gaku_js_post :create, template: attributes_for(:template)
           end
 
           it 'creates new template' do
@@ -91,7 +89,7 @@ describe Gaku::Admin::TemplatesController do
 
         describe 'with invalid attributes' do
           let(:invalid_create) do
-            gaku_post :create, template: attributes_for(:invalid_template)
+            gaku_js_post :create, template: attributes_for(:invalid_template)
           end
 
           it 'does not save the new template' do
@@ -108,17 +106,13 @@ describe Gaku::Admin::TemplatesController do
         end
       end
 
-      describe 'GET #edit' do
-        before { gaku_get :edit, id: template }
+      describe 'JS GET #edit' do
+        before { gaku_js_get :edit, id: template }
 
         it { should respond_with 200 }
         it('assigns @template') { expect(assigns(:template)).to eq template }
         it('renders the :edit template') { template? :edit }
       end
-
-    end
-
-    context 'js' do
 
       describe 'XHR #new' do
         before do
@@ -129,7 +123,6 @@ describe Gaku::Admin::TemplatesController do
         it('assigns @template') { expect(assigns(:template)).to be_a_new(Gaku::Template) }
         it('renders the :new template') { template? :new }
       end
-
 
       describe 'XHR DELETE #destroy' do
         it 'deletes the template' do

@@ -72,7 +72,9 @@ shared_examples_for 'delete address' do
     address_field = @resource.addresses.first.address1
 
     count? 'Addresses list(1)'
-    within(tab_link)  { has_content? 'Addresses(1)' }
+    if page.has_css?(tab_link)
+      within(tab_link)  { has_content? 'Addresses(1)' }
+    end
     has_content? address_field
 
     expect do
@@ -82,7 +84,9 @@ shared_examples_for 'delete address' do
 
     count? 'Addresses list(1)'
     has_no_content? address_field
-    within(tab_link)  { has_no_content? 'Addresses(1)' }
+    if page.has_css?(tab_link)
+      within(tab_link)  { has_no_content? 'Addresses(1)' }
+    end
   end
 
 end

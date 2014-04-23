@@ -5,14 +5,7 @@ ready = ->
   class TeachersController
     edit: ->
       self.app.country_dropdown()
-
-      $('body').popover
-        selector: '.picture-upload'
-        html: true
-        content: ()->
-          return $('#upload-picture').html()
-        placement: 'bottom'
-        trigger: 'click'
+      self.app.upload_picture_ajax()
 
 
   @app.teachers = new TeachersController

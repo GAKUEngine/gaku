@@ -1,0 +1,8 @@
+$('#student-guardians-index').append('<%= j render("guardian", {guardian: @guardian}) %>');
+$('#new-student-guardian').slide();
+$('#new-student-guardian-link').show();
+
+//$('#student-guardians-tab-link').html("<%= print_count(@count, t(:'guardian.plural')) %>");
+$('.student-guardians-count').html("<%= print_count(@count, t(:'guardian.list')) %>");
+$('.guardians-count').html("<%= @count %>");
+showNotice("<%= render_flash %>");

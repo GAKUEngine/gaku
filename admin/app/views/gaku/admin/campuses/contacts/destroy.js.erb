@@ -1,0 +1,8 @@
+showNotice("<%= render_flash %>");
+
+<%-if  @campus.contacts.reload.any? && @contact.primary? %>
+  $('#admin-school-campus-contacts-index').find('#contact-<%= @campus.contacts.first.id %> #set-primary-link').addClass('btn-primary');
+<% end %>
+
+$('.admin-school-campus-contacts-count').html("<%= print_count(@count, t(:'contact.list')) %>");
+$('.contacts-count').html("<%= @count %>");
