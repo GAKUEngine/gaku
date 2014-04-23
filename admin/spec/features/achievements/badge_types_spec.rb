@@ -10,6 +10,7 @@ describe 'Admin BadgeTypes' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#achievements-master-menu a'
       click '#badge-types-menu a'
       click new_link
     end
@@ -33,6 +34,7 @@ describe 'Admin BadgeTypes' do
     before do
       badge_type
       visit gaku.admin_root_path
+      click '#achievements-master-menu a'
       click '#badge-types-menu a'
     end
 

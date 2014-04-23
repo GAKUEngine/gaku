@@ -10,6 +10,7 @@ describe 'Admin Contact Types' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#contact-types-menu a'
       click new_link
     end
@@ -33,6 +34,7 @@ describe 'Admin Contact Types' do
     before do
       contact_type
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#contact-types-menu a'
     end
 

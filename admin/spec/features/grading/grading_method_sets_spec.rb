@@ -10,6 +10,7 @@ describe 'Admin Grading Method Sets' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#grading-master-menu a'
       click '#grading-method-sets-menu a'
       click new_link
     end
@@ -35,6 +36,7 @@ describe 'Admin Grading Method Sets' do
     before do
       grading_method_set
       visit gaku.admin_root_path
+      click '#grading-master-menu a'
       click '#grading-method-sets-menu a'
     end
 
@@ -80,6 +82,7 @@ describe 'Admin Grading Method Sets' do
       grading_method_set
       grading_method_set2
       visit gaku.admin_root_path
+      click '#grading-master-menu a'
       click '#grading-method-sets-menu a'
     end
 

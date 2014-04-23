@@ -10,6 +10,7 @@ describe 'Admin School Years' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#school-years-menu a'
       click new_link
     end
@@ -53,6 +54,7 @@ describe 'Admin School Years' do
     before do
       school_year
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#school-years-menu a'
     end
 

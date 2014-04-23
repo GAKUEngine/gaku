@@ -12,6 +12,7 @@ describe 'Admin School Years Semesters' do
     before do
       school_year
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#school-years-menu a'
       click edit_link
       click '#semesters-menu a'
@@ -70,6 +71,7 @@ describe 'Admin School Years Semesters' do
       school_year
       semester
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#school-years-menu a'
       click edit_link
       click '#semesters-menu a'

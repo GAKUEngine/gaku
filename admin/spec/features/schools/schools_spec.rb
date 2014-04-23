@@ -10,6 +10,7 @@ describe 'Admin Schools' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#schools-menu a'
       click new_link
     end
@@ -33,6 +34,7 @@ describe 'Admin Schools' do
     before do
       school
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#schools-menu a'
     end
 

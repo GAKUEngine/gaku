@@ -10,6 +10,7 @@ describe 'Admin Roles' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
       click '#roles-menu a'
       click new_link
     end
@@ -38,6 +39,7 @@ describe 'Admin Roles' do
     before do
       role
       visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
       click '#roles-menu a'
     end
 

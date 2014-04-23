@@ -12,6 +12,7 @@ describe 'Admin Users' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
       click '#users-menu a'
       click new_link
     end
@@ -43,6 +44,7 @@ describe 'Admin Users' do
     before do
       user
       visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
       click '#users-menu a'
     end
 

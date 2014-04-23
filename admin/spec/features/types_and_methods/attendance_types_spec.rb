@@ -10,6 +10,7 @@ describe 'Admin Attendance Types' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#attendance-types-menu a'
       click new_link
     end
@@ -37,6 +38,7 @@ describe 'Admin Attendance Types' do
     before do
       attendance_type
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#attendance-types-menu a'
     end
 

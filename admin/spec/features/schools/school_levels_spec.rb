@@ -15,6 +15,7 @@ describe 'Admin School Levels' do
     before do
       master_school
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#schools-menu a'
     end
 
@@ -33,6 +34,7 @@ describe 'Admin School Levels' do
       master_school
       master_school_level
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#schools-menu a'
       click '#edit-admin-primary-school'
       accept_alert
@@ -43,6 +45,7 @@ describe 'Admin School Levels' do
       click submit
       flash_updated?
       visit gaku.admin_root_path
+      click '#schools-master-menu a'
       click '#schools-menu a'
       page.should_not have_content master_school_level
     end
@@ -54,20 +57,6 @@ describe 'Admin School Levels' do
       visit gaku.admin_school_details_edit_path
       page.should_not have_content master_school_level
       expect(find('.school-level-name').value).to eq '5 class'
-    end
-  end
-
-  context 'non master schools should not edit school levels', js: true do
-    before do
-      school
-      school_level
-      visit gaku.admin_root_path
-      click '#schools-menu a'
-    end
-
-    it 'have no edit for school levels' do
-      within(table) { click edit_link }
-      page.should_not have_css 'a.add-school-level'
     end
   end
 

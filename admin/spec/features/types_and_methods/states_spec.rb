@@ -16,6 +16,7 @@ describe 'Admin States' do
       state
       country2
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#states-menu a'
       click new_link
 
@@ -56,6 +57,7 @@ describe 'Admin States' do
     before do
       state
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#states-menu a'
 
       select country.name, from: 'select-country'
@@ -103,6 +105,7 @@ describe 'Admin States' do
       state
       preset
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#states-menu a'
 
       within(country_table) { has_content? state.name }

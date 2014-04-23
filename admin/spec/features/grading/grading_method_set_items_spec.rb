@@ -21,6 +21,7 @@ describe 'Admin Grading Method Set Items' do
     before do
       grading_method_set
       visit gaku.admin_root_path
+      click '#grading-master-menu a'
       click '#grading-method-sets-menu a'
       click '.show-link'
       click new_link
@@ -46,6 +47,7 @@ describe 'Admin Grading Method Set Items' do
       grading_method_set
       grading_method_set_item
       visit gaku.admin_root_path
+      click '#grading-master-menu a'
       click '#grading-method-sets-menu a'
       click '.show-link'
     end

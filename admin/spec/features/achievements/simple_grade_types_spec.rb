@@ -14,6 +14,7 @@ describe 'Admin Simple grade types' do
       school
       grading_method
       visit gaku.admin_root_path
+      click '#achievements-master-menu a'
       click '#simple-grade-types-menu a'
       click new_link
     end
@@ -44,6 +45,7 @@ describe 'Admin Simple grade types' do
       grading_method
       simple_grade_type
       visit gaku.admin_root_path
+      click '#achievements-master-menu a'
       click '#simple-grade-types-menu a'
     end
 

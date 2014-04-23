@@ -10,6 +10,7 @@ describe 'Admin Enrollment Statuses' do
   context 'new', js: true do
     before do
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#enrollment-statuses-menu a'
       click new_link
     end
@@ -33,6 +34,7 @@ describe 'Admin Enrollment Statuses' do
     before do
       enrollment_status
       visit gaku.admin_root_path
+      click '#types-master-menu a'
       click '#enrollment-statuses-menu a'
     end
 
