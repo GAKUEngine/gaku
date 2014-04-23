@@ -3,8 +3,8 @@ module Gaku
 
     responders :collection
 
-    respond_to :js,   only: %i( destroy )
-    respond_to :html, only: %i( new edit index update create )
+    respond_to :js,   only: %i( new create edit update destroy index )
+    respond_to :html, only: :download
 
     before_action :set_template, only: %i( download edit update destroy )
 
@@ -16,7 +16,7 @@ module Gaku
       @template = Template.new(template_params)
       if @template.save
         set_count
-        respond_with @template, location: admin_templates_path
+        respond_with @template
       else
         render :new
       end
@@ -28,7 +28,7 @@ module Gaku
 
     def update
       @template.update(template_params)
-      respond_with @template, location: admin_templates_path
+      respond_with @template
     end
 
     def download
