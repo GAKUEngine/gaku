@@ -22,7 +22,6 @@ describe Gaku::Admin::TemplatesController do
       )
     end
 
-
     it 'routes to #destroy' do
       expect(delete: 'admin/templates/1').to route_to(
         controller: 'gaku/admin/templates',
@@ -33,7 +32,6 @@ describe Gaku::Admin::TemplatesController do
   end
 
   describe 'collection' do
-
 
     it 'routes to #index' do
       expect(get: 'admin/templates/').to route_to(

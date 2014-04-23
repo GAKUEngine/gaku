@@ -23,11 +23,13 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
         it('renders the :edit template') { template? :edit }
       end
 
-
       describe 'JS PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: address, school_id: school.id, campus_id: campus.id, address: attributes_for(:address, address1: 'test')
+            gaku_js_patch :update, id: address,
+                                   school_id: school.id,
+                                   campus_id: campus.id,
+                                   address: attributes_for(:address, address1: 'test')
           end
 
           it { should respond_with 200 }
@@ -42,7 +44,10 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: address, school_id: school.id, campus_id: campus.id, address: attributes_for(:address, address1: '')
+            gaku_js_patch :update, id: address,
+                                   school_id: school.id,
+                                   campus_id: campus.id,
+                                   address: attributes_for(:address, address1: '')
           end
 
           it { should respond_with 200 }
@@ -66,7 +71,9 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
       describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, school_id: school.id, campus_id: campus.id, address: attributes_for(:address, country_id: country.id)
+            gaku_js_post :create, school_id: school.id,
+                                  campus_id: campus.id,
+                                  address: attributes_for(:address, country_id: country.id)
           end
 
           it 'creates new address' do
@@ -84,7 +91,9 @@ describe Gaku::Admin::Schools::Campuses::AddressesController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, school_id: school.id, campus_id: campus.id,  address: attributes_for(:invalid_address, address1: nil)
+            gaku_js_post :create, school_id: school.id,
+                                  campus_id: campus.id,
+                                  address: attributes_for(:invalid_address, address1: nil)
           end
 
           it 'does not save the new address' do

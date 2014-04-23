@@ -1,0 +1,11 @@
+= render 'gaku/admin/campuses/contacts/primary_field', contact: contact
+
+td = contact.name
+td = contact.data
+td = contact.details
+td
+  = t(:'contact.emergency') if contact.emergency?
+
+td
+  = ajax_link_to_edit [:edit, :admin, @school, @campus, contact]
+  = render 'gaku/admin/campuses/contacts/delete_link', contact: contact

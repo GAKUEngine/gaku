@@ -1,12 +1,12 @@
 # encoding: UTF-8
-version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
+version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku_admin'
   s.version      = version
   s.summary      = 'Admin engine for GAKU'
-  s.description  = "It allows basic admin functionality"
+  s.description  = 'It allows basic admin functionality'
   s.required_ruby_version = '~> 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']
@@ -41,9 +41,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails',                   '~> 3.1'
   s.add_dependency 'jquery-ui-rails',                '~> 4.2'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
-  s.add_dependency 'bootstrap-sass',                 '~> 3.1.1.0'
+  s.add_dependency 'bootstrap-sass',                 '3.1.1.0'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.3.0.1'
   s.add_dependency 'nprogress-rails'
   s.add_dependency 'underscore-rails',               '~> 1.5.2'
   s.add_dependency 'momentjs-rails',                 '~> 2.5.1'
+  s.add_dependency 'remotipart',                     '~> 1.2.1'
 end

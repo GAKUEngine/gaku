@@ -8,13 +8,14 @@ describe 'Admin Presets Time Format' do
   let!(:preset) { create(:preset) }
 
   before do
-    visit gaku.admin_presets_path
-    click edit_link
+    visit gaku.admin_root_path
+    click '#presets-menu a'
+    click js_edit_link
     click '#admin-preset-locale-tab-link'
   end
 
   it 'saves', js: true do
-    select 'am/pm', from:'preset_time_format_24'
+    select 'am/pm', from: 'preset_time_format_24'
     click submit
 
     flash_updated?

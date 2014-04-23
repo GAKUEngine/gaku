@@ -5,16 +5,19 @@ describe 'Admin States' do
   before { as :admin }
   before(:all) { set_resource 'admin-state' }
 
-  let!(:country) { create(:country, name: 'Japan', iso: 'JP')}
+  let!(:country) { create(:country, name: 'Japan', iso: 'JP') }
   let(:state) { create(:state, name: 'Tokyo ', country: country) }
-  let(:country2) { create(:country, name: 'Bulgaria', iso: 'BG')}
+  let(:country2) { create(:country, name: 'Bulgaria', iso: 'BG') }
   let!(:country_table) { "#admin-#{country.iso.downcase}-states-index" }
-  let(:preset) { create(:preset, address: {country: 'JP'}) }
+  let(:preset) { create(:preset, address: { country: 'JP' }) }
 
-  context 'new', js:true do
+  context 'new', js: true do
     before do
-      state; country2
-      visit gaku.admin_states_path
+      state
+      country2
+      visit gaku.admin_root_path
+      click '#types-master-menu a'
+      click '#states-menu a'
       click new_link
 
       select country.name, from: 'select-country'
@@ -53,7 +56,9 @@ describe 'Admin States' do
   context 'existing', js: true do
     before do
       state
-      visit gaku.admin_states_path
+      visit gaku.admin_root_path
+      click '#types-master-menu a'
+      click '#states-menu a'
 
       select country.name, from: 'select-country'
       click '#admin-show-country-states-submit'
@@ -77,7 +82,7 @@ describe 'Admin States' do
 
         within country_table do
           has_content? 'Nagano'
-          has_no_content?'Tokyo'
+          has_no_content? 'Tokyo'
         end
 
         expect(state.reload.name).to eq 'Nagano'
@@ -85,8 +90,6 @@ describe 'Admin States' do
     end
 
     it 'deletes' do
-      tr_count = size_of "#{country_table} tr"
-
       expect do
         click delete_link
         accept_alert
@@ -101,7 +104,9 @@ describe 'Admin States' do
     it 'show country state for country preset' do
       state
       preset
-      visit gaku.admin_states_path
+      visit gaku.admin_root_path
+      click '#types-master-menu a'
+      click '#states-menu a'
 
       within(country_table) { has_content? state.name }
     end

@@ -1,4 +1,4 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do |f|
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.student.singular') do |f|
   .row
     .col-md-6
       = f.text_field 'student[id_code]', value: @preset.student['id_code'], title: t(:'preset.student.id_code')

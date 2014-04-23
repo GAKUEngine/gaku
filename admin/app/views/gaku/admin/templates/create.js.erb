@@ -1,0 +1,7 @@
+$('#admin-templates-index tbody').append('<%= j render("template", {template: @template}) %>');
+
+$('#new-admin-template').slide();
+$('#new-admin-template-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-templates-count').html("<%= print_count(@count, t(:'template.list')) %>");

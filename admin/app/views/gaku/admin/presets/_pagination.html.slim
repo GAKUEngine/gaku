@@ -1,25 +1,26 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.pagination') do
   = fields_for :preset do |f|
     .row
-      .col-md-2
+      .col-md-3
         = f.fields_for :pagination do |p|
           = p.label t(:'preset.per_page.default')
-          = p.select :default, @per_page_values, { selected: @preset['pagination']['default'] }
+          = p.select :default, @per_page_values, { selected: @preset['pagination']['default'] }, class: 'form-control'
 
-      .col-md-2
+      .col-md-3
         = f.fields_for :pagination do |p|
           = p.label t(:'preset.per_page.students')
-          = p.select :students, @per_page_values, { selected: @preset['pagination']['students'] }
+          = p.select :students, @per_page_values, { selected: @preset['pagination']['students'] }, class: 'form-control'
 
-      .col-md-2
+      .col-md-3
         = f.fields_for :pagination do |p|
           = p.label t(:'preset.per_page.teachers')
-          = p.select :teachers, @per_page_values, { selected: @preset['pagination']['teachers'] }
+          = p.select :teachers, @per_page_values, { selected: @preset['pagination']['teachers'] }, class: 'form-control'
 
 
-      .col-md-2
+      .col-md-3
         = f.fields_for :pagination do |p|
           = p.label t(:'preset.per_page.changes')
-          = p.select :changes, @per_page_values, { selected: @preset['pagination']['changes'] }
+          = p.select :changes, @per_page_values, { selected: @preset['pagination']['changes'] }, class: 'form-control'
+  br
 
   = buttons_for @preset, resource: 'admin-preset'

@@ -12,10 +12,8 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
 
     describe 'XHR #edit' do
       before do
-        gaku_js_get :edit,
-                    id: grading_method_set_item,
-                    grading_method_set_id: grading_method_set
-        end
+        gaku_js_get :edit, id: grading_method_set_item, grading_method_set_id: grading_method_set
+      end
 
       it { should respond_with 302 }
       it('redirects') { redirect_to? gaku.root_path }
@@ -32,16 +30,20 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         before { gaku_js_get :new, grading_method_set_id: grading_method_set }
 
         it { should respond_with 200 }
-        it('assigns @grading_method_set_item') { expect(assigns(:grading_method_set_item)).to be_a_new(Gaku::GradingMethodSetItem) }
+
+        it('assigns @grading_method_set_item') do
+          expect(assigns(:grading_method_set_item)).to be_a_new(Gaku::GradingMethodSetItem)
+        end
+
         it('renders the :new template') { template? :new }
       end
 
       describe 'POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create,
-                         grading_method_set_item: attributes_for(:grading_method_set_item, grading_method_id: grading_method.id),
-                grading_method_set_id: grading_method_set
+            gaku_js_post :create, grading_method_set_item: attributes_for(:grading_method_set_item,
+                                                                          grading_method_id: grading_method.id),
+                                  grading_method_set_id: grading_method_set
           end
 
           it 'creates new grading_method_set_item' do
@@ -63,9 +65,9 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create,
-                         grading_method_set_item: attributes_for(:invalid_grading_method_set_item, grading_method_id: nil),
-                grading_method_set_id: grading_method_set
+            gaku_js_post :create, grading_method_set_item: attributes_for(:invalid_grading_method_set_item,
+                                                                          grading_method_id: nil),
+                                  grading_method_set_id: grading_method_set
           end
 
           it 'does not save the new grading_method_set_item' do
@@ -94,21 +96,29 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
         end
 
         it { should respond_with 200 }
-        it('assigns @grading_method_set_item') { expect(assigns(:grading_method_set_item)).to eq grading_method_set_item }
+
+        it('assigns @grading_method_set_item') do
+          expect(assigns(:grading_method_set_item)).to eq grading_method_set_item
+        end
+
         it('renders the :edit template') { template? :edit }
       end
 
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update,
-                          id: grading_method_set_item,
-                grading_method_set_item: attributes_for(:grading_method_set_item, grading_method_id: grading_method.id),
-                grading_method_set_id: grading_method_set
+            gaku_js_patch :update, id: grading_method_set_item,
+                                   grading_method_set_item: attributes_for(:grading_method_set_item,
+                                                                           grading_method_id: grading_method.id),
+                                   grading_method_set_id: grading_method_set
           end
 
           it { should respond_with 200 }
-          it('assigns @grading_method_set_item') { expect(assigns(:grading_method_set_item)).to eq grading_method_set_item }
+
+          it('assigns @grading_method_set_item') do
+            expect(assigns(:grading_method_set_item)).to eq grading_method_set_item
+          end
+
           it('sets flash') { flash_updated? }
           it "changes grading_method_set_item's attributes" do
             grading_method_set_item.reload
@@ -120,12 +130,16 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
           before do
             gaku_js_patch :update,
                           id: grading_method_set_item,
-                grading_method_set_item: attributes_for(:invalid_grading_method_set_item, grading_method_id: nil),
-                grading_method_set_id: grading_method_set
+                          grading_method_set_item: attributes_for(:invalid_grading_method_set_item,
+                                                                  grading_method_id: nil),
+                          grading_method_set_id: grading_method_set
           end
 
           it { should respond_with 200 }
-          it('assigns @grading_method_set_item') { expect(assigns(:grading_method_set_item)).to eq grading_method_set_item }
+
+          it('assigns @grading_method_set_item') do
+            expect(assigns(:grading_method_set_item)).to eq grading_method_set_item
+          end
 
           it "does not change grading_method_set_item's attributes" do
             grading_method_set_item.reload
@@ -136,9 +150,7 @@ describe Gaku::Admin::GradingMethodSets::GradingMethodSetItemsController do
 
       describe 'XHR DELETE #destroy' do
         let(:js_delete) do
-          gaku_js_delete :destroy,
-                         id: grading_method_set_item,
-              grading_method_set_id: grading_method_set
+          gaku_js_delete :destroy, id: grading_method_set_item, grading_method_set_id: grading_method_set
         end
 
         it 'deletes the grading_method_set_item' do

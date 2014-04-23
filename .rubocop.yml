@@ -8,4 +8,23 @@ AccessorMethodName:
   Enabled: false
 
 LineLength:
-  Max: 99
+  Max: 119
+
+Documentation:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+EmptyLinesAroundBody:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - '**/spec/dummy/**'
+    - 'bin/**'
+    - '**/bin/**'
+    - '**/db/schema.rb'
+    - '**/pkg/**'
+    - 'pkg/**'
+  RunRailsCops: false

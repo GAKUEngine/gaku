@@ -1,8 +1,9 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.person.singular') do
   = fields_for :preset do |f|
     .row
       .col-md-3
         = f.fields_for :person do |p|
           = p.label t(:'preset.person.gender')
-          = p.select :gender, genders, {selected: @preset['person']['gender'], prompt: t(:'gender.choose')}
+          = p.select :gender, genders, {selected: @preset['person']['gender'], prompt: t(:'gender.choose')}, { class: 'form-control' }
+  br
   = buttons_for @preset, resource: 'admin-preset'

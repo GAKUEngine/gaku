@@ -18,6 +18,7 @@ require 'nested_form'
 require 'phantom_helpers'
 require 'phantom_forms'
 require 'phantom_nested_forms'
+require 'remotipart'
 
 require 'gaku/core'
 
