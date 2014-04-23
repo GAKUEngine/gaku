@@ -19,4 +19,4 @@ hr
     tbody
       = render partial: 'gaku/admin/users/user', collection: @users, as: :user
 
-= paginate @users
+= paginate @users, remote: true
