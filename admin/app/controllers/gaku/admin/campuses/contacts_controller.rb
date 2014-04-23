@@ -25,7 +25,7 @@ module Gaku
     end
 
     def update
-      ContactUpdation.new(@contact).update(contact_params
+      ContactUpdation.new(@contact).update(contact_params)
       @contact.update(contact_params)
       respond_with @contact
     end

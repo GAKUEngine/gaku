@@ -29,7 +29,7 @@ module Gaku
     end
 
     def make_primary
-      contacts.where.not(id: id).update_all(primary: false)
+      contactable.contacts.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)
 
       if contactable.has_attribute?(:primary_contact)
