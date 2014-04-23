@@ -1,16 +1,19 @@
 .panel.panel-default
   .panel-heading
-    h4#schools-menu.panel-title
-      = link_to t(:'menu.admin.schools'), [:admin, :schools], remote: true
-  .panel-body
+    h4.panel-title
+      a data-toggle="collapse" data-parent="#accordion" href="#schools"
+        = t(:'menu.admin.schools')
+  #schools.panel-body.panel-collapse.collapse
     ul.list-unstyled
+      li#schools-menu = link_to t(:'menu.admin.schools'), [:admin, :schools], remote: true
       li#school-years-menu = link_to t(:'menu.admin.school_years'), [:admin, :school_years], remote: true
 
 .panel.panel-default
   .panel-heading
     h4.panel-title
-      = t(:'menu.admin.types.types')
-  .panel-body
+      a data-toggle="collapse" data-parent="#accordion" href="#types"
+        = t(:'menu.admin.types.types')
+  #types.panel-body.panel-collapse.collapse
     ul.list-unstyled
 
       li#attendance-types-menu
@@ -31,8 +34,9 @@
 .panel.panel-default
   .panel-heading
     h4.panel-title
-      = t(:'menu.admin.grading.grading')
-  .panel-body
+      a data-toggle="collapse" data-parent="#accordion" href="#grading"
+        = t(:'menu.admin.grading.grading')
+  #grading.panel-body.panel-collapse.collapse
     ul.list-unstyled
 
       li#grading-methods-menu
@@ -44,8 +48,9 @@
 .panel.panel-default
   .panel-heading
     h4.panel-title
-      =  t(:'menu.admin.users.users_and_roles')
-  .panel-body
+      a data-toggle="collapse" data-parent="#accordion" href="#users-and-roles"
+        =  t(:'menu.admin.users.users_and_roles')
+  #users-and-roles.panel-body.panel-collapse.collapse
     ul.list-unstyled
 
       li#users-menu
@@ -58,8 +63,9 @@
 .panel.panel-default
   .panel-heading
     h4.panel-title
-      = t(:'menu.admin.achievements.achievements')
-  .panel-body
+      a data-toggle="collapse" data-parent="#accordion" href="#achievements"
+        = t(:'menu.admin.achievements.achievements')
+  #achievements.panel-body.panel-collapse.collapse
     ul.list-unstyled
 
       li#simple-grade-types-menu

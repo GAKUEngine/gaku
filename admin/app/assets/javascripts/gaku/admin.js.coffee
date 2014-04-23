@@ -14,6 +14,8 @@
 #= require bootstrap/button
 #= require bootstrap/tab
 #= require bootstrap/dropdown
+#= require bootstrap/collapse
+#= require bootstrap/transition
 #= require bootstrap/modal
 #= require bootstrap/tooltip
 #= require bootstrap/popover
