@@ -2,22 +2,19 @@ require 'spec_helper'
 
 describe 'Admin School Campuses' do
 
-  before { as :admin }
-
   let(:school) { create(:school, name: 'Nagoya University') }
   let(:campus) { create(:campus) }
 
   before(:all) { set_resource 'admin-school-campus' }
 
   before do
+    as :admin
     visit gaku.edit_admin_school_path(school)
     click '#campuses-menu a'
   end
 
   context 'new', js: true do
-    before do
-      click new_link
-    end
+    before { click new_link }
 
     it 'creates and shows' do
       within(count_div) { page.should have_content 'Campuses list(1)' }
@@ -31,6 +28,8 @@ describe 'Admin School Campuses' do
       page.should have_content 'Nagoya Campus'
       within(count_div) { page.should have_content 'Campuses list(2)' }
     end
+
+    it { has_validations? }
 
   end
 
@@ -48,7 +47,12 @@ describe 'Admin School Campuses' do
         flash_updated?
         expect(campus.reload.name).to eq 'Varna Campus'
         expect(find_field('campus_name').value).to eq 'Varna Campus'
-        page.has_content? 'Varna Campus'
+        within('#campus-name') { expect(page.has_content?('Varna Campus')).to eq true }
+      end
+
+      it 'has validations' do
+        fill_in 'campus_name', with: ''
+        has_validations?
       end
     end
 

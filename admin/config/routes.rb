@@ -34,7 +34,7 @@ Gaku::Core::Engine.routes.draw  do
           get :show_program_specialties
         end
       end
-      resources :campuses
+      resources :campuses, except: :show
     end
 
     resources :campuses, only: [], concerns: %i( set_picture ) do

@@ -31,7 +31,12 @@
         .panel-body
           ul.list-unstyled
             - @school.programs.each do |program|
-              li = link_to program.name, [:edit, :admin, @school, program]
+              li = link_to program.name, [:edit, :admin, @school, program], remote: true
+
+      .panel.panel-default
+        .panel-heading
+           h4.panel-title
+             = link_to t(:'admin.back'), [:admin, :root]
 
   .col-md-10#ajax-load
     = render 'edit_master_form'

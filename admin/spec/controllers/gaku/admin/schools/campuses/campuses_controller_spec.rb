@@ -19,19 +19,21 @@ describe Gaku::Admin::CampusesController do
         it('renders the :edit template') { template? :edit }
       end
 
-      describe 'GET #show' do
-        before { gaku_get :show, id: campus, school_id: school.id }
-
-        it { should respond_with 200 }
-        it('assigns @campus') { expect(assigns(:campus)).to eq campus }
-        it('renders the :show template') { template? :show }
-      end
-
     end
 
     context 'js' do
+      describe 'JS GET #index' do
+        before do
+          campus
+          gaku_js_get :index, school_id: school.id
+        end
 
-      describe 'JS #new' do
+        it { should respond_with 200 }
+        it('assigns @campuses') { expect(assigns(:campuses)).to eq [school.master_campus, campus] }
+        it('renders the :index template') { template? :index }
+      end
+
+      describe 'JS GET #new' do
         before { gaku_js_get :new, school_id: school.id }
 
         it { should respond_with 200 }

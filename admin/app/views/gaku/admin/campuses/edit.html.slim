@@ -8,7 +8,7 @@
 
       .panel.panel-default
         .panel-heading
-          h4.panel-title
+          h4#campus-name.panel-title
             = @campus.name
         .panel-body
           ul.list-unstyled
@@ -17,6 +17,17 @@
               = link_to badge_count(@campus.addresses_count, t(:'address.plural'), 'addresses-count'), [:admin, @campus, :addresses], remote: true
             li#contacts-menu
               = link_to badge_count(@campus.contacts_count, t(:'contact.plural'), 'contacts-count'), [:admin, @campus, :contacts], remote: true
+
+      .panel.panel-default
+        .panel-heading
+           h4.panel-title
+             = link_to t(:'admin.back_to_school'), [:edit, :admin, @school]
+
+
+      .panel.panel-default
+        .panel-heading
+           h4.panel-title
+             = link_to t(:'admin.back'), [:admin, :root]
 
   .col-md-10#ajax-load
 
