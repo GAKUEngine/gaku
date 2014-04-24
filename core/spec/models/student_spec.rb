@@ -11,11 +11,11 @@ describe Gaku::Student do
   end
 
   describe 'associations' do
-    it { should have_many(:course_enrollments).dependent(:destroy) }
-    it { should have_many(:courses).through(:course_enrollments) }
 
-    it { should have_many :class_group_enrollments }
-    it { should have_many(:class_groups).through(:class_group_enrollments) }
+    it { should have_many(:enrollments).dependent(:destroy) }
+    it { should have_many(:courses).through(:enrollments).source(:enrollmentable)  }
+    it { should have_many(:class_groups).through(:enrollments).source(:enrollmentable)  }
+    it { should have_many(:extracurricular_activities).through(:enrollments).source(:enrollmentable)  }
 
     it { should have_many :student_specialties }
     it { should have_many(:specialties).through(:student_specialties) }

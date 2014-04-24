@@ -3,14 +3,19 @@ module Gaku
 
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
-    has_many :course_enrollments, dependent: :destroy
-    has_many :courses, through: :course_enrollments
-
-    has_many :class_group_enrollments,  inverse_of: :student
-    has_many :class_groups, through: :class_group_enrollments
-
-    has_many :extracurricular_activity_enrollments
-    has_many :extracurricular_activities, through: :extracurricular_activity_enrollments
+    has_many :enrollments, dependent: :destroy
+    has_many :courses,
+        through: :enrollments,
+        source: :enrollmentable,
+        source_type: 'Gaku::Course'
+    has_many :class_groups,
+        through: :enrollments,
+        source: :enrollmentable,
+        source_type: 'Gaku::ClassGroup'
+    has_many :extracurricular_activities,
+        through: :enrollments,
+        source: :enrollmentable,
+        source_type: 'Gaku::ExtracurricularActivity'
 
     has_many :student_exam_sessions
     has_many :exam_sessions, through: :student_exam_sessions
@@ -37,8 +42,8 @@ module Gaku
     belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
-    accepts_nested_attributes_for :class_group_enrollments,
-        reject_if: proc { |attributes| attributes[:class_group_id].blank? }
+    # accepts_nested_attributes_for :class_group_enrollments,
+    #     reject_if: proc { |attributes| attributes[:class_group_id].blank? }
 
 
 

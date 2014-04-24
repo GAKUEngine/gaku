@@ -2,8 +2,8 @@
   .col-md-12
     ul.nav.nav-tabs.nav-justified
       li.active
-        a#new-course-enrollment-tab-link data-toggle="tab" href="#course-enrollments"
-          = print_count @course.students_count, t(:'student.plural')
+        a#course-enrollments-tab-link data-toggle="tab" href="#course-enrollments"
+          = print_count @course.students.count, t(:'enrollment.plural')
       li
         a#course-semester-courses-tab-link data-toggle="tab" href="#course-semesters"
           = print_count @course.semesters.count, t(:'semester.plural')
@@ -20,7 +20,7 @@
 
     .tab-content
       #course-enrollments.tab-pane.active
-        = render "gaku/courses/enrollments/enrollments"
+        = render "gaku/enrollments/enrollments"
       #course-semesters.tab-pane
         = render "gaku/courses/semester_courses/semester_courses"
       #course-exams.tab-pane

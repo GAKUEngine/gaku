@@ -26,6 +26,10 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
+  concern :enrollmentable do
+    resources :enrollments, except: :index
+  end
+
   concern(:primary)         { patch :make_primary, on: :member }
   concern(:show_deleted)    { get :show_deleted, on: :member }
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
@@ -47,13 +51,13 @@ Gaku::Core::Engine.routes.draw do
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
-  resources :extracurricular_activities, concerns: %i( student_chooser pagination ) do
+  resources :extracurricular_activities, concerns: %i( student_chooser pagination enrollmentable ) do
     resources :students,
       controller: 'extracurricular_activities/students',
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination ) do
+  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination enrollmentable ) do
     collection do
       get :search
       get :search_semester
@@ -67,11 +71,11 @@ Gaku::Core::Engine.routes.draw do
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser gradable ) do
+  resources :courses, concerns: %i( notes student_chooser gradable enrollmentable ) do
     resources :semester_courses, controller: 'courses/semester_courses'
-    resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
-      post :enroll_class_group, on: :collection
-    end
+    # resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
+    #   post :enroll_class_group, on: :collection
+    # end
 
     resources :exams, controller: 'courses/exams' do
       resources :exam_portion_scores do

@@ -2,30 +2,22 @@ module Gaku
   class ClassGroupEnrollment < ActiveRecord::Base
 
     belongs_to :class_group
-    belongs_to :student
+    belongs_to :enrollmentable, polymorphic: true
     has_many :school_roles, as: :school_rolable
 
-    validates :class_group, presence: true
+    validates :enrollmentable_type, :enrollmentable_id, :class_group_id, presence: true
 
-    validates :student,
-              presence: true,
-              uniqueness: {
-                            scope: :class_group_id,
-                            message: I18n.t(:'class_group.already_enrolled')
-                          }
+    validates :class_group_id,
+       uniqueness: {
+                     scope: [ :enrollmentable_type, :enrollmentable_id ],
+                     message: I18n.t(:'class_group.already_enrolled')
+                   }
 
-    after_save :save_student_class_and_number
-
-    def class_and_number
-      "#{class_group} - ##{seat_number}"
-    end
-
-    private
-
-    def save_student_class_and_number
-      student.update_attribute(:class_and_number, class_and_number) if student
-    end
-
+    validates :enrollmentable_type,
+      inclusion: {
+        in: %w(Gaku::Course),
+        message: "%{value} is not a valid"
+      }
 
   end
 end

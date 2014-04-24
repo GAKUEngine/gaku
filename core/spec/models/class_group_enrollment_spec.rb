@@ -4,21 +4,16 @@ describe Gaku::ClassGroupEnrollment do
 
   describe 'associations' do
     it { should belong_to :class_group }
-    it { should belong_to :student }
-    it { should have_many :school_roles }
+    it { should belong_to :enrollmentable }
   end
 
   describe 'validations' do
-    xit { should validate_presence_of :class_group_id }
-    xit { should validate_presence_of :student_id }
-    xit { should validate_uniqueness_of(:student_id).scoped_to(:class_group_id).with_message('Already enrolled to the class group!') }
+    it { should validate_presence_of :class_group_id }
+    it { should validate_presence_of :enrollmentable_id }
+    it { should validate_presence_of :enrollmentable_type }
+    it { should validate_uniqueness_of(:class_group_id).scoped_to([:enrollmentable_id, :enrollmentable_type]).with_message(/Class group already enrolled/) }
+    it { should ensure_inclusion_of(:enrollmentable_type).in_array( %w(Gaku::Course) ) }
   end
 
-  context '#save_student_class_and_number' do
-    it 'saves after creation' do
-      enrollment = create(:class_group_enrollment)
-      enrollment.student.class_and_number.should eq "#{enrollment.class_group} - ##{enrollment.seat_number}"
-    end
-  end
 
 end

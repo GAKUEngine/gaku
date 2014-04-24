@@ -66,6 +66,7 @@ module Gaku
       @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
       set_notable
       set_gradable
+      set_enrollmentable
     end
 
     def set_notable
@@ -76,6 +77,11 @@ module Gaku
     def set_gradable
       @gradable = @course
       @gradable_resource = @gradable.class.to_s.demodulize.underscore.dasherize
+    end
+
+    def set_enrollmentable
+      @enrollmentable = @course
+      @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
     end
 
     def set_count

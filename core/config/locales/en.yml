@@ -163,7 +163,7 @@ en:
   class: Class
   class_group:
     add: Add Class Group
-    already_enrolled: Already enrolled to the class group!
+    already_enrolled: Class group already enrolled!
     choose: Choose Class Group
     edit: Edit Class Group
     enroll: Enroll Class Group
@@ -390,8 +390,11 @@ en:
   empty: Empty
   enroll_to_class: Enroll to class
   enrollment:
-    plural: Enrollments
-    singular: Enrollment
+    plural: Student enrollments
+    singular: Student enrollment
+    add: Enroll student
+    list: Student enrollments list
+    save: Save student enrollment
   enrollment_status:
     active: Active
     add: Add Enrollment Status
@@ -971,6 +974,7 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
+    already_enrolled: Student already enrolled!
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index

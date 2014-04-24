@@ -1,0 +1,4 @@
+$('#new-<%= @enrollmentable_resource %>-enrollment').html('<%= j render("form") %>').slide();
+$('#new-<%= @enrollmentable_resource %>-enrollment-link').hide();
+$('.remote-form').enableValidations();
+console.log("$('#new-<%= @enrollmentable_resource %>-enrollment')")

@@ -1,0 +1,3 @@
+= remote_form_for [@enrollmentable, @enrollment], { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.singular') } do |f|
+  = render 'form_fields', f: f
+  = buttons_for @enrollment, { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.save') }

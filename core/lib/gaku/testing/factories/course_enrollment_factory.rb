@@ -1,12 +1,12 @@
-FactoryGirl.define do
+# FactoryGirl.define do
 
-  factory :course_enrollment, class: Gaku::CourseEnrollment do
-    course
-    student
+#   factory :course_enrollment, class: Gaku::CourseEnrollment do
+#     course
+#     student
 
-    factory :invalid_course_enrollment do
-      course nil
-    end
-  end
+#     factory :invalid_course_enrollment do
+#       course nil
+#     end
+#   end
 
-end
+# end

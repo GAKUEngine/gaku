@@ -58,6 +58,12 @@ module Gaku
 
     def set_extracurricular_activity
       @extracurricular_activity = ExtracurricularActivity.find(params[:id])
+      set_enrollmentable
+    end
+
+    def set_enrollmentable
+      @enrollmentable = @extracurricular_activity
+      @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
     end
 
     def set_count
