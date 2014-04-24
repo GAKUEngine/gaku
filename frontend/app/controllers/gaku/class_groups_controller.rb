@@ -115,6 +115,7 @@ module Gaku
     def set_enrollmentable
       @enrollmentable = @class_group
       @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
+    end
 
     def set_semesterable
       @semesterable = @class_group

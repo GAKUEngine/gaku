@@ -32,7 +32,6 @@ describe Gaku::ClassGroupsController do
 
         it { should respond_with 200 }
         it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
-        it('assigns @class_group_course_enrollment') { expect(assigns(:class_group_course_enrollment)).to be_a_new(Gaku::ClassGroupCourseEnrollment) }
         it('renders the :edit template') { template? :edit }
       end
 
