@@ -1,7 +1,7 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
 
-    include Notes, Pagination, Enrollmentable
+    include Notes, Pagination, Enrollmentable, Semesterable
 
     # has_many :enrollments, class_name: 'Gaku::ClassGroupEnrollment'
     # has_many :students, through: :enrollments
@@ -14,15 +14,7 @@ module Gaku
     #                    source_type: "Gaku::Course"
 
 
-    has_many :semester_class_groups, dependent: :destroy
-    has_many :semesters, through: :semester_class_groups
-
     validates :name, presence: true
-
-    scope :without_semester, -> {
-                                  includes(:semester_class_groups)
-                                  .where(gaku_semester_class_groups: {class_group_id: nil})
-                                }
 
     def to_s
       "#{grade} - #{name}"

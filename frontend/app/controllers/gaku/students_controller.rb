@@ -4,8 +4,6 @@ module Gaku
 
     decorates_assigned :student
 
-    helper_method :sort_column, :sort_direction
-
     respond_to :html, :js
 
     before_action :load_data,             only: %i( new edit )
@@ -44,14 +42,6 @@ module Gaku
 
     def chosen
       set_selected_students
-      set_class_groups
-      set_courses
-      @extracurricular_activity = ExtracurricularActivity.find(params[:extracurricular_activity_id]) if params[:extracurricular_activity_id]
-      @class_group = ClassGroup.find(params[:class_group_id]) if params[:class_group_id]
-
-      @enrolled_students = params[:enrolled_students]
-      @search = Student.active.search(params[:q])
-      @students = @search.result(distinct: true)
     end
 
     def clear_search
@@ -165,14 +155,6 @@ module Gaku
       @countries = Country.all
     end
 
-    def set_class_groups
-      @class_groups = ClassGroup.all
-    end
-
-    def set_courses
-      @courses = Course.all
-    end
-
     def load_data
       @class_groups = ClassGroup.all
       @enrollment_statuses = EnrollmentStatus.includes(:translations)
@@ -196,18 +178,6 @@ module Gaku
     def set_student
       @student ||= Student.includes(includes).find(params[:id])
       set_notable
-    end
-
-    def sort_column
-      Student.column_names.include?(params[:sort]) ? params[:sort] : 'surname'
-    end
-
-    def sort_direction
-      if %w[asc desc].include?(params[:direction])
-        params[:direction]
-      else
-        'asc'
-       end
     end
 
   end

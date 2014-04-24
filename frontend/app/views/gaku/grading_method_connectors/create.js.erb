@@ -2,7 +2,9 @@ $('#<%= @gradable_resource %>-grading-method-connectors-index tbody').append('<%
 
 $('.<%= @gradable_resource %>-grading-method-connectors-count').html("<%= print_count(@count, t(:'grading_method.list')) %>");
 $('#<%= @gradable_resource %>-grading-method-connectors-tab-link').html("<%= print_count(@count, t(:'grading_method.list')) %>");
+$('.grading-methods-count').html("<%= @count %>");
 
 showNotice("<%= render_flash %>");
 $('#new-<%= @gradable_resource %>-grading-method-connector').slide()
 $('#new-<%= @gradable_resource %>-grading-method-connector-link').show()
+

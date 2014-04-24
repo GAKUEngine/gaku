@@ -1,8 +1,0 @@
-showNotice("<%= render_flash %>");
-
-<%- if @semester_class_group.valid? %>
-	$('#class-group-semester-class-groups-index tbody').append('<%= j render("semester", {semester_class_group: @semester_class_group}) %>');
-	$('#new-class-group-semester-class-group').slide();
-	$('#new-class-group-semester-class-group-link').show();
-	$('#class-group-semester-class-groups-tab-link').html("<%= print_count(@count, t(:'semester.plural')) %>");
-<% end %>

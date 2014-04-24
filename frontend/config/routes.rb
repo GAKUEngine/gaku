@@ -17,8 +17,12 @@ Gaku::Core::Engine.routes.draw do
     resources :notes
   end
 
+  concern :semesterable do
+    resources :semester_connectors
+  end
+
   concern :gradable do
-    resources :grading_method_connectors, only: %i( new create destroy ), concerns: %i( sort ) do
+    resources :grading_method_connectors, only: %i( new create destroy index ), concerns: %i( sort ) do
       collection do
         get :new_set
         post :add_set
@@ -57,7 +61,7 @@ Gaku::Core::Engine.routes.draw do
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination enrollmentable ) do
+  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination enrollmentable semesterable) do
     collection do
       get :search
       get :search_semester
@@ -66,16 +70,11 @@ Gaku::Core::Engine.routes.draw do
       get :with_semester
       get :without_semester
     end
-    resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
     resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser gradable enrollmentable ) do
-    resources :semester_courses, controller: 'courses/semester_courses'
-    # resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
-    #   post :enroll_class_group, on: :collection
-    # end
+  resources :courses, concerns: %i( notes student_chooser gradable enrollmentable semesterable ) do
 
     resources :exams, controller: 'courses/exams' do
       resources :exam_portion_scores do
@@ -115,6 +114,8 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
+  resources :guardians, only: [], concerns: %i( addresses contacts set_picture )
+
   resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
@@ -126,16 +127,16 @@ Gaku::Core::Engine.routes.draw do
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
     resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
-    resources :guardians, except: %i( index show ),
-      controller: 'students/guardians',
-      concerns: %i( addresses contacts )
+    resources :guardians, except: %i( show )
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
-      only: %i( new create destroy )
+      only: %i( new create destroy index )
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
+
+
 
   resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
 

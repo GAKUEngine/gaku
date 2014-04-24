@@ -1,0 +1,14 @@
+.row
+  .col-md-12.exam-index
+    = remote_form_for [@exam, @exam_portion], label: t(:'exam_portion.singular'), resource: 'exam-exam-portion' do |f|
+      = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: f
+      = buttons_for @exam_portion, resource: 'exam-exam-portion'
+
+hr
+
+= render 'tabs'
+
+= footer do
+  .col-md-3.pull-right
+    = link_to_modal_delete
+  / = render 'gaku/shared/delete_modal', target: @exam

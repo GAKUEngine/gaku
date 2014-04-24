@@ -39,12 +39,6 @@ describe Gaku::StudentsController do
       )
     end
 
-    it 'routes to #load_autocomplete_data' do
-      expect(get: '/students/load_autocomplete_data').to route_to(
-        controller: 'gaku/students',
-        action: 'load_autocomplete_data'
-      )
-    end
   end
 
 end

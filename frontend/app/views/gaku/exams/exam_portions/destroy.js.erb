@@ -1,6 +1,8 @@
 <% if @exam.destroyed? %>
   window.location.href = '/exams'
 <% else %>
+  $("#exam-portion-<%= @exam_portion.id %>").remove();
+  $('.exam-portions-count').html("<%= @count %>");
   $('#exam-exam-portions-tab-link').html("<%= print_count(@count, t(:'exam_portion.plural')) %>");
   $('[data-id=<%= @exam_portion.id %>]').remove();
   $('#weight-total').text('<%= @exam.total_weight %>');

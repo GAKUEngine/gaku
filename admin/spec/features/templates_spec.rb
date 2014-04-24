@@ -26,6 +26,7 @@ describe 'Admin Templates' do
         attach_file 'template_file', absolute_path
 
         click submit
+        sleep 1
         flash_created?
       end.to change(Gaku::Template, :count).by 1
 

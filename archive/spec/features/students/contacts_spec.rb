@@ -22,7 +22,8 @@ describe 'Student Contacts' do
 
         before do
           visit gaku.edit_student_path(@resource)
-          click tab_link
+          click '#student-contacts-menu a'
+          within('.contacts-count') { expect(page.has_content?('1')).to eq true }
           page.has_content? 'Contacts list'
         end
 

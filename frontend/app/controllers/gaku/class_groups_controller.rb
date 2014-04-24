@@ -53,7 +53,7 @@ module Gaku
     end
 
     def without_semester
-      @class_groups = ClassGroup.without_semester.includes(:semester_class_groups)
+      @class_groups = ClassGroup.without_semester.includes(:semester_connectors)
       @count = @class_groups.count
       render :without_semester, layout: 'gaku/layouts/index'
     end
@@ -104,6 +104,7 @@ module Gaku
       @class_group = ClassGroup.find(params[:id])
       set_notable
       set_enrollmentable
+      set_semesterable
     end
 
     def set_notable
@@ -114,6 +115,10 @@ module Gaku
     def set_enrollmentable
       @enrollmentable = @class_group
       @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
+
+    def set_semesterable
+      @semesterable = @class_group
+      @semesterable_resource = get_resource_name @semesterable
     end
 
     def set_count

@@ -19,9 +19,9 @@
             = t(:'personal')
         .panel-body
           ul.list-unstyled
-            li = link_to t(:'address.plural'), [teacher, :addresses], remote: true, id: 'teacher-addresses-tab-link'
-            li = link_to t(:'contact.plural'), [teacher, :contacts], remote: true, id: 'teacher-contacts-tab-link'
-            li = link_to t(:'note.plural'), [teacher, :notes], remote: true, id: 'teacher-notes-tab-link'
+            li = link_to badge_count(teacher.addresses_count, t(:'address.plural'), 'addresses-count'), [teacher, :addresses], remote: true, id: 'teacher-addresses-tab-link'
+            li = link_to badge_count(teacher.contacts_count, t(:'contact.plural'),'contacts-count'), [teacher, :contacts], remote: true, id: 'teacher-contacts-tab-link'
+            li = link_to badge_count(teacher.notes_count, t(:'note.plural'), 'notes-count'), [teacher, :notes], remote: true, id: 'teacher-notes-tab-link'
 
       .panel.panel-default
         .panel-heading

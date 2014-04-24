@@ -17,7 +17,8 @@ describe 'Student Address' do
       before(:each) do
         @resource = student_with_address
         visit gaku.edit_student_path(@resource)
-        click tab_link
+        click '#student-addresses-menu a'
+        within('.addresses-count') { expect(page.has_content?('1')).to eq true }
         has_content? 'Addresses list'
       end
 

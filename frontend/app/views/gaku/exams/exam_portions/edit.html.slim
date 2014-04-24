@@ -1,16 +1,1 @@
-.row
-  .col-md-12.exam-index
-    = normal_form_for [@exam, @exam_portion], label: 'nil', resource: 'exam-exam-portion' do |f|
-      = render 'gaku/shared/form_fields/exam_portion_form_fields', ep_form: f
-      = buttons_for @exam_portion, resource: 'exam-exam-portion'
-
-hr
-
-= render 'tabs'
-
-= footer do
-  .col-md-9
-    = link_to_index [:edit, @exam]
-  .col-md-3
-    = link_to_modal_delete
-  / = render 'gaku/shared/delete_modal', target: @exam
+= render 'edit_form'

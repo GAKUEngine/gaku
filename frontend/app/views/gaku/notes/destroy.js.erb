@@ -1,4 +1,5 @@
 $('#new-<%= @notable_resource %>-note-tab-link').html("<%= print_count(@count, t('note.plural')) %>");
 $('.<%= @notable_resource %>-notes-count').html("<%= print_count(@count, t('note.list')) %>");
-$('#<%= @notable_resource %>-notes-tab-link').html("<%= print_count(@count, t('note.plural')) %>");
+//$('#<%= @notable_resource %>-notes-tab-link').html("<%= print_count(@count, t('note.plural')) %>");
+$('.notes-count').html("<%= @count %>");
 showNotice("<%= render_flash %>");

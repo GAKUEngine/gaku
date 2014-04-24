@@ -1,43 +1,62 @@
 .row
-  .col-md-9
-    = render 'personal', student: student
-  .col-md-3.picture-upload
-    = render 'gaku/shared/ajax_picture', resource: student
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel
+        .picture-upload
+          = render 'gaku/shared/ajax_picture', resource: student
+        .panel-heading
+          = student.full_name
 
-.row.mt-l
-  .col-md-12
-    ul.nav.nav-pills.nav-justified
-      li.active
-        a#student-personal-tab-link data-toggle="tab" href="#personal"
-          = t(:'personal')
-      li
-        a#student-academic-tab-link data-toggle="tab" href="#academic"
-          = t(:'academic')
-    .tab-content
-      #personal.tab-pane.active
-        = render 'tabs_personal'
-      #academic.tab-pane
-        .row
-          .col-md-3
-            = render 'academic', student: student
-          .col-md-9
-            = render 'tabs_academic'
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, student], remote: true
 
-ul#students-collection
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li#student-addresses-menu
+              = link_to badge_count(student.addresses_count, t(:'address.plural'), 'addresses-count'), [student, :addresses], remote: true
 
-= footer do
-  .col-md-3
-    = link_to_index students_path
-  .col-md-3
-    = link_to t(:'show'), student_path, class: 'btn btn-default col-md-12'
-  .col-md-3
-    = link_to t(:'new'), new_student_path, class: 'btn btn-primary col-md-12'
-  .col-md-3
-    = link_to_modal_delete
-  .delete_modal
-    = render 'gaku/shared/delete_modal', target: student
+            li#student-contacts-menu
+              = link_to badge_count(student.contacts_count, t(:'contact.plural'), 'contacts-count'), [student, :contacts], remote: true
+
+            li#student-guardians-menu
+              = link_to badge_count(student.guardians_count, t(:'guardian.plural'), 'guardians-count'), [student, :guardians], remote: true
+
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'academic')
+        .panel-body
+          ul.list-unstyled
+
+            li#student-notes-menu
+              = link_to badge_count(student.notes_count, t(:'note.plural'), 'notes-count'), [student, :notes], remote: true
+
+            li#student-specialties-menu
+              = link_to badge_count(student.specialties.count, t(:'specialty.plural'), 'specialties-count'), [student, :student_specialties], remote: true
+
+            li#student-simple-grades-menu
+              = link_to badge_count(student.simple_grades.count, t(:'simple_grade.plural'), 'simple-grades-count'), [student, :simple_grades], remote: true
+
+            li#student-badges-menu
+              = link_to badge_count(student.badges_count, t(:'badge.plural'), 'badges-count'), [student, :badges], remote: true
+
+            li#student-external-school-records-menu
+              = link_to badge_count(student.external_school_records_count, t(:'external_school_record.plural'), 'external-school-records-count'), [student, :external_school_records], remote: true
+
+            li#student-courses-menu
+              = link_to badge_count(student.courses_count, t(:'course.plural'), 'courses-count'), [student, :course_enrollments], remote: true
+
+  .col-md-10
+    #edit-modals
+    #ajax-load
+      = render 'edit_form', student: student
 
 javascript:
   var students_path = "#{students_path}"

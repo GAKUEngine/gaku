@@ -5,7 +5,6 @@ td = external_school_record.ending
 td = external_school_record.units_absent
 td = external_school_record.total_units
 td = external_school_record.attendance_rate
-- if can_edit?
-  td
-    = ajax_link_to_edit [:edit, @student, external_school_record]
-    = ajax_link_to_delete [@student, external_school_record]
+td
+  = ajax_link_to_edit [:edit, @student, external_school_record]
+  = ajax_link_to_delete [@student, external_school_record]

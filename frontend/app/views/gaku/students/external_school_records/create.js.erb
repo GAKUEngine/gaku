@@ -4,5 +4,6 @@ $('#new-student-external-school-record').slide();
 $('#new-student-external-school-record-link').show();
 
 showNotice("<%= render_flash %>");
-$('#student-external-school-records-tab-link').html("<%= print_count(@count, t(:'external_school_record.plural')) %>");
+//$('#student-external-school-records-tab-link').html("<%= print_count(@count, t(:'external_school_record.plural')) %>");
 $('.student-external-school-records-count').html("<%= print_count(@count, t(:'external_school_record.list')) %>");
+$('.external-school-records-count').html("<%= @count %>");

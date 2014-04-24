@@ -14,10 +14,10 @@ describe Gaku::Exams::ExamPortionsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, exam_id: exam, id: exam_portion, exam_portion: attributes_for(:exam_portion, name: 'mobifon')
+            gaku_js_patch :update, exam_id: exam, id: exam_portion, exam_portion: attributes_for(:exam_portion, name: 'mobifon')
           end
 
-          it { should respond_with 302 }
+          it { should respond_with 200 }
           it('assigns @exam_portion') { expect(assigns(:exam_portion)).to eq exam_portion }
           it('sets flash') { flash_updated? }
           it "changes exam_portion's attributes" do

@@ -1,5 +1,1 @@
-$('#modal-dialogs').html("<%= j render('index_modal', {simple_grades: @simple_grades}) %>");
-$('.modal-backdrop').remove()
-$('#index-student-simple-grades-modal').modal('show');
-
-
+$('#ajax-load').html("<%=j render('index', {simple_grades: @simple_grades}) %>");

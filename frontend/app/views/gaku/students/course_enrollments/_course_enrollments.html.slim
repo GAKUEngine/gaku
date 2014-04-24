@@ -5,13 +5,13 @@
       = count_div 'student-course-enrollments-count' do
         = print_count @student.courses_count, t(:'course.list')
     .pull-right
-      = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], id: "new-student-course-enrollment-link" if can_edit?
+      = ajax_link_to_new t(:'course_enrollment.add'), [:new, @student, :course_enrollment], id: "new-student-course-enrollment-link"
 
   = index_body do
       = table_for 'student-course-enrollments-index' do
         thead
           tr
             = th t(:'course.code')
-            = th_actions 1 if can_edit?
+            = th_actions 1
         tbody
           = render partial: 'gaku/students/course_enrollments/course_enrollment', collection: @student.course_enrollments, as: 'course_enrollment'
