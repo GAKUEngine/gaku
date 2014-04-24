@@ -36,8 +36,7 @@ module Gaku
     belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
-    accepts_nested_attributes_for :class_group_enrollments,
-      reject_if: (proc do |attributes| attributes[:class_group_id].blank? end)
+    accepts_nested_attributes_for :class_group_enrollments, reject_if: (proc { |attr| attr[:class_group_id].blank? })
 
     before_create :set_scholarship_status
     before_create :set_foreign_id_code
