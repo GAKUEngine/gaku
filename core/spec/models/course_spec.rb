@@ -4,7 +4,7 @@ describe Gaku::Course do
 
   describe 'concerns' do
     it_behaves_like 'gradable'
-    it_behaves_like 'student_enrollmentable'
+    it_behaves_like 'enrollmentable'
     it_behaves_like 'class_group_enrollmentable'
     it_behaves_like 'semesterable'
   end
