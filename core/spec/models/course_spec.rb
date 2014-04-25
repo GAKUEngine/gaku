@@ -5,19 +5,13 @@ describe Gaku::Course do
   describe 'concerns' do
     it_behaves_like 'gradable'
     it_behaves_like 'enrollmentable'
-    it_behaves_like 'class_group_enrollmentable'
     it_behaves_like 'semesterable'
   end
 
   describe 'associations' do
-    # it { should have_many :enrollments }
-    # it { should have_many(:students).through(:enrollments) }
 
     it { should have_many :course_group_enrollments }
     it { should have_many(:course_groups).through(:course_group_enrollments) }
-
-    # it { should have_many :class_group_course_enrollments }
-    # it { should have_many(:class_groups).through(:class_group_course_enrollments) }
 
     it { should belong_to :syllabus }
     it { should belong_to :class_group }
