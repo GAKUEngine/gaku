@@ -1,6 +1,5 @@
 module Gaku
   class EnrollmentStatus < ActiveRecord::Base
-
     has_many :students, foreign_key: :enrollment_status_code, primary_key: :code
 
     translates :name
@@ -20,6 +19,5 @@ module Gaku
     def set_name
       self.name = code if name.nil?
     end
-
   end
 end

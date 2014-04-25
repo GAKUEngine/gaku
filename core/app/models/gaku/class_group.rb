@@ -1,6 +1,5 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
-
     include Notes, Pagination
 
     has_many :enrollments, class_name: 'Gaku::ClassGroupEnrollment'
@@ -14,14 +13,12 @@ module Gaku
 
     validates :name, presence: true
 
-    scope :without_semester, -> {
-                                  includes(:semester_class_groups)
-                                  .where(gaku_semester_class_groups: {class_group_id: nil})
-                                }
+    scope :without_semester, lambda {
+      includes(:semester_class_groups).where(gaku_semester_class_groups: { class_group_id: nil })
+    }
 
     def to_s
       "#{grade} - #{name}"
     end
-
   end
 end

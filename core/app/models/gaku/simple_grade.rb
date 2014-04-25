@@ -1,6 +1,5 @@
 module Gaku
   class SimpleGrade < ActiveRecord::Base
-
     belongs_to :student
     belongs_to :simple_grade_type
 
@@ -13,6 +12,5 @@ module Gaku
     def to_s
       simple_grade_type_name
     end
-
   end
 end

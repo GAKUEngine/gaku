@@ -7,9 +7,9 @@ module Gaku
 
     validates :grading_method_id,
               uniqueness: {
-                            scope: :grading_method_set_id,
-                            message: I18n.t(:'grading_method_set_item.already')
-                          }
+                scope: :grading_method_set_id,
+                message: I18n.t(:'grading_method_set_item.already')
+              }
 
     before_create :proper_position
     after_destroy :refresh_positions
@@ -24,9 +24,8 @@ module Gaku
     def refresh_positions
       items = grading_method_set.grading_method_set_items
       items.pluck(:id).each_with_index do |id, index|
-        items.update_all( { position: index }, { id: id } )
+        items.update_all(position: index, id: id)
       end
     end
-
   end
 end

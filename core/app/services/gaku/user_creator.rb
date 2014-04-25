@@ -26,6 +26,5 @@ module Gaku
         get_user.settings[:locale] = Preset.active.locale['language']
       end
     end
-
   end
 end

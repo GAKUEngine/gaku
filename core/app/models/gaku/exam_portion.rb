@@ -15,10 +15,8 @@ module Gaku
     validates :name, presence: true
 
     validates :weight,
-              numericality: {
-                              greater_than_or_equal_to: 0,
-                              if: Proc.new { |ep| ep.weight.present? }
-                            }
+              numericality: { greater_than_or_equal_to: 0,
+                              if: proc { |ep| ep.weight.present? } }
 
     validates :max_score, presence: true,
                           numericality: { greater_than_or_equal_to: 0 }
@@ -35,7 +33,6 @@ module Gaku
 
     def correct_weight_with_error
       self.weight = weight_was
-      custom_errors =  I18n.t(:'exam_portion.error')
     end
 
     def weight_calculate
@@ -81,6 +78,5 @@ module Gaku
         exam_portions.where(id: id).update_all(position: index)
       end
     end
-
   end
 end

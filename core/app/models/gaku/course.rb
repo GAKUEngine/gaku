@@ -1,6 +1,5 @@
 module Gaku
   class Course < ActiveRecord::Base
-
     include Notes, Gradable
 
     has_many :enrollments,
@@ -48,10 +47,9 @@ module Gaku
         ActiveRecord::Base.transaction do
           class_group.student_ids.each do |student_id|
             CourseEnrollment.find_or_create_by(student_id: student_id, course_id: id)
-         end
+          end
         end
       end
     end
-
   end
 end

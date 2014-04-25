@@ -1,6 +1,5 @@
 module Gaku
   class CourseEnrollment < ActiveRecord::Base
-
     belongs_to :student, counter_cache: :courses_count
     belongs_to :course,  counter_cache: :students_count
 
@@ -9,9 +8,9 @@ module Gaku
     validates :student_id,
               presence: true,
               uniqueness: {
-                            scope: :course_id,
-                            message: I18n.t(:'course.already_enrolled')
-                          }
+                scope: :course_id,
+                message: I18n.t(:'course.already_enrolled')
+              }
     def code_with_syllabus_name
       course.decorate.code_with_syllabus_name if course
     end

@@ -1,6 +1,5 @@
 module Gaku
   class Disposal
-
     def self.students
       Student.deleted
     end
@@ -40,6 +39,5 @@ module Gaku
     def self.teacher_contacts
       Contact.includes(:contactable, :contact_type).deleted.teachers
     end
-
   end
 end
