@@ -5,8 +5,6 @@ FactoryGirl.define do
     details 'My email'
     contact_type
 
-    initialize_with { Gaku::ContactCreation.new(attributes).save! }
-
     after(:build) do |contact|
       if contact.contactable.respond_to?(:contacts)
         contact.contactable.contacts.reload
