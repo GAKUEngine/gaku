@@ -14,14 +14,14 @@ FactoryGirl.define do
 
   factory :school_with_one_contact, parent: :school do
     after(:create) do |school|
-      create(:contact, contactable: school.campuses.first)
+      create(:contact_creation, contactable: school.campuses.first)
     end
   end
 
   factory :school_with_two_contacts, parent: :school do
     after(:create) do |school|
-      create(:contact, contactable: school.campuses.first)
-      create(:contact, contactable: school.campuses.first)
+      create(:contact_creation, contactable: school.campuses.first)
+      create(:contact_creation, contactable: school.campuses.first)
     end
   end
 

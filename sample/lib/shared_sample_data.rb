@@ -97,17 +97,23 @@ def create_student_with_full_info(predefined_student=nil)
   end
 
   student.addresses.where(random_address).first_or_create!
-  student.contacts.where(random_email).first_or_create!
-  student.contacts.where(random_home_phone).first_or_create!
-  student.contacts.where(random_mobile_phone).first_or_create!
+
+  [random_email, random_home_phone, random_mobile_phone].each do |params|
+    ContactCreation.new(params.merge(contactable: student)).save!
+  end
+
   student.notes.where(random_note).first_or_create!
   student.notes.where(random_note).first_or_create!
 
   guardian = Gaku::Guardian.where(random_person).first_or_create!
   guardian.addresses.where(random_address).first_or_create!
-  guardian.contacts.where(random_email).first_or_create!
-  guardian.contacts.where(random_home_phone).first_or_create!
-  guardian.contacts.where(random_mobile_phone).first_or_create
+
+  [random_email, random_home_phone, random_mobile_phone].each do |params|
+    ContactCreation.new(params.merge(contactable: guardian)).save!
+  end
+
+  #guardian.notes.where(random_note).first_or_create!
+  #guardian.notes.where(random_note).first_or_create!
 
   student.guardians << guardian
 end
@@ -130,9 +136,11 @@ def create_teacher_with_full_info(predefined_teacher=nil)
   end
 
   teacher.addresses.create!(random_address)
-  teacher.contacts.create!(random_email)
-  teacher.contacts.create!(random_home_phone)
-  teacher.contacts.create!(random_mobile_phone)
+
+  [random_email, random_home_phone, random_mobile_phone].each do |params|
+    ContactCreation.new(params.merge(contactable: teacher)).save!
+  end
+
   teacher.notes.create!(random_note)
   teacher.notes.create!(random_note)
 end
