@@ -13,7 +13,7 @@ describe 'Teacher Notes' do
     before do
       @resource = teacher
       visit gaku.edit_teacher_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'new note'
@@ -24,7 +24,7 @@ describe 'Teacher Notes' do
     before do
       @resource = teacher_with_note
       visit gaku.edit_teacher_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'edit note'

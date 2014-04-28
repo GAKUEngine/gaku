@@ -4,8 +4,6 @@ module Gaku
 
     decorates_assigned :teacher
 
-    #respond_to :js,   only: %i( new create destroy )
-    #respond_to :html, only: %i( index edit update show )
     respond_to :html, :js
 
     before_action :set_teacher, only: %i( edit show update destroy )
