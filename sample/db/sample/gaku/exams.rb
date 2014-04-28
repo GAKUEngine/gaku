@@ -8,7 +8,4 @@ names = [
 ]
 
 say "Creating #{names.size} exams ...".yellow
-
-names.each do |name|
-  Gaku::Exam.where(name: name).first_or_create!
-end
+names.each { |name| Gaku::Exam.where(name: name).first_or_create! }
