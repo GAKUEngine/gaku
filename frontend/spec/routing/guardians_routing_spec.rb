@@ -6,6 +6,22 @@ describe Gaku::GuardiansController do
 
   describe 'member' do
 
+    it 'routes to #set_picture' do
+      expect(patch: '/guardians/1/set_picture').to route_to(
+        controller: 'gaku/guardians',
+        action: 'set_picture',
+        id: '1'
+      )
+    end
+
+    it 'routes to #remove_picture' do
+      expect(delete: '/guardians/1/remove_picture').to route_to(
+        controller: 'gaku/guardians',
+        action: 'remove_picture',
+        id: '1'
+      )
+    end
+
     it 'routes to #edit' do
       expect(get: '/students/1/guardians/1/edit').to route_to(
         controller: 'gaku/guardians',
@@ -39,6 +55,14 @@ describe Gaku::GuardiansController do
       expect(get: '/students/1/guardians/new').to route_to(
         controller: 'gaku/guardians',
         action: 'new',
+        student_id: '1'
+      )
+    end
+
+    it 'routes to #new' do
+      expect(get: '/students/1/guardians/').to route_to(
+        controller: 'gaku/guardians',
+        action: 'index',
         student_id: '1'
       )
     end
