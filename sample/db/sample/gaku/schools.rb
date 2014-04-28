@@ -1,6 +1,7 @@
 require 'shared_sample_data'
 
-school = Gaku::School.where(  name: 'Test School',
+school = Gaku::School.where(
+                              name: 'Test School',
                               slogan: 'Test School Slogan',
                               founded: Time.now,
                               principal: 'Test School Principal',

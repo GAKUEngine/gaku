@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 syllabuses = [
-
   {
     name: 'Introduction to Biology',
     code: 'B01',
@@ -19,21 +18,25 @@ syllabuses = [
   {
     name: 'Literature',
     code: 'LIT',
-    description: 'In this course you will read a series of short stories and essays by stuck up self-proclaimed writers.',
+    description: 'In this course you will read a series of short stories and essays
+                  by stuck up self-proclaimed writers.',
     credits: 1
   },
 
   {
     name: 'Introductory Japanese[日本語入門]',
     code: 'NH1',
-    description: 'Learn basic moonspeak. This course covers introductions, greetings and basic questions and answers for every day life. This course also covers both sets of kana and some basic kanji.',
+    description: 'Learn basic moonspeak. This course covers introductions,
+                  greetings and basic questions and answers for every day life.
+                  This course also covers both sets of kana and some basic kanji.',
     credits: 2
   },
 
   {
     name: 'ブルガリア語入門',
     code: 'BG1',
-    description: 'ブルガリアで日常生活が出来る様、挨拶や日常に使う質問と答えの仕方が学べます。ブルガリア語に使われるキリル文字の読み書きも出来る様になります。',
+    description: 'ブルガリアで日常生活が出来る様、挨拶や日常に使う質問と答えの仕方が学べます。
+                  ブルガリア語に使われるキリル文字の読み書きも出来る様になります。',
     credits: 2
   },
 
@@ -124,7 +127,4 @@ syllabuses = [
 ]
 
 say "Creating #{syllabuses.size} syllabuses ...".yellow
-
-syllabuses.each do |syllabus|
-  Gaku::Syllabus.where(syllabus).first_or_create!
-end
+syllabuses.each { |syllabus| Gaku::Syllabus.where(syllabus).first_or_create! }
