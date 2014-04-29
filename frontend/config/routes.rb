@@ -68,7 +68,6 @@ Gaku::Core::Engine.routes.draw do
       get :with_semester
       get :without_semester
     end
-    resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
   end
 
   resources :courses, concerns: %i( notes gradable enrollmentable semesterable ) do
