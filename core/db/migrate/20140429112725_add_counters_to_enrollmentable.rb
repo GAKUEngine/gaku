@@ -4,6 +4,7 @@ class AddCountersToEnrollmentable < ActiveRecord::Migration
     add_column :gaku_class_groups, :enrollments_count, :integer, default: 0, null: false
     add_column :gaku_extracurricular_activities, :enrollments_count, :integer, default: 0, null: false
 
+    #for courses already exist
     add_column :gaku_students, :extracurricular_activities_count, :integer, default: 0, null: false
     add_column :gaku_students, :class_groups_count, :integer, default: 0, null: false
   end
