@@ -3,7 +3,7 @@
     ul.nav.nav-tabs.nav-justified
       li.active
         a#course-enrollments-tab-link data-toggle="tab" href="#course-enrollments"
-          = print_count @course.students.count, t(:'enrollment.plural')
+          = print_count @course.enrollments_count, t(:'enrollment.plural')
       li
         a#course-semester-connectors-tab-link data-toggle="tab" href="#course-semesters"
           = print_count @course.semesters.count, t(:'semester.plural')

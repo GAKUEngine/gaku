@@ -2,7 +2,7 @@
   = content_tag(:div, nil, id: "new-#{@enrollmentable_resource}-enrollment", class: 'd-none')
   .pull-left
     = count_div "#{@enrollmentable_resource}-enrollments-count" do
-      = print_count @enrollmentable.students.count, t(:'enrollment.list')
+      = print_count @enrollmentable.enrollments_count, t(:'enrollment.list')
   .pull-right
     = ajax_link_to_new t(:'enrollment.add'), [:new, @enrollmentable, :enrollment], id: "new-#{@enrollmentable_resource}-enrollment-link"
 
