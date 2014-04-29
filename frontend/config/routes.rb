@@ -44,9 +44,6 @@ Gaku::Core::Engine.routes.draw do
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
-  concern(:enroll_students) { post :enroll_students, on: :collection }
-  concern(:enroll_student)  { post :enroll_student, on: :collection }
-  concern(:student_chooser) { get :student_chooser, on: :member }
   concern(:student_selection) { get :student_selection, on: :member }
   concern(:set_picture) do
     member do
@@ -60,13 +57,9 @@ Gaku::Core::Engine.routes.draw do
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
-  resources :extracurricular_activities, concerns: %i( student_chooser pagination enrollmentable ) do
-    resources :students,
-      controller: 'extracurricular_activities/students',
-      concerns: %i( enroll_student )
-  end
+  resources :extracurricular_activities, concerns: %i( pagination enrollmentable )
 
-  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination enrollmentable semesterable) do
+  resources :class_groups, concerns: %i( notes student_selection pagination enrollmentable semesterable) do
     collection do
       get :search
       get :search_semester
@@ -76,10 +69,9 @@ Gaku::Core::Engine.routes.draw do
       get :without_semester
     end
     resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
-    resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser gradable enrollmentable semesterable ) do
+  resources :courses, concerns: %i( notes gradable enrollmentable semesterable ) do
 
     resources :exams, controller: 'courses/exams' do
       resources :exam_portion_scores do
@@ -98,10 +90,6 @@ Gaku::Core::Engine.routes.draw do
       end
     end
   end
-
-  resources :class_group_enrollments,              concerns: %i( enroll_students )
-  resources :course_enrollments,                   concerns: %i( enroll_students )
-  resources :extracurricular_activity_enrollments, concerns: %i( enroll_students )
 
   resources :syllabuses, concerns: %i( notes ) do
     resources :assignments,     controller: 'syllabuses/assignments'
