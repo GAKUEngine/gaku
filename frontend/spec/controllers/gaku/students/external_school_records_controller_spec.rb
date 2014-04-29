@@ -11,7 +11,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
     context 'JS' do
 
-      describe 'JS GET #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
@@ -20,7 +20,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, external_school_record: attributes_for(:external_school_record, school_id: school.id, student_id: student.id), student_id: student.id
@@ -56,11 +56,6 @@ describe Gaku::Students::ExternalSchoolRecordsController do
             end.to_not change(Gaku::ExternalSchoolRecord, :count)
           end
 
-          it 'renders :new template' do
-            invalid_js_create
-            template? :new
-          end
-
           it "doesn't increment @count" do
             invalid_js_create
             expect(assigns(:count)).to eq 0
@@ -69,8 +64,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
       end
 
-
-      describe 'JS GET #edit' do
+      describe 'XHR GET #edit' do
         before { gaku_js_get :edit, id: external_school_record, student_id: student.id }
 
         it { should respond_with 200 }
@@ -79,7 +73,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
         it('renders the :edit template') { template? :edit }
       end
 
-      describe 'JS PATCH #update' do
+      describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
             gaku_js_patch :update, id: external_school_record, external_school_record: attributes_for(:external_school_record, school_id: school), student_id: student.id
@@ -109,8 +103,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
         end
       end
 
-
-      describe 'JS DELETE #destroy' do
+      describe 'XHR DELETE #destroy' do
 
         let(:js_delete) { gaku_js_delete :destroy, id: external_school_record, student_id: student.id }
 

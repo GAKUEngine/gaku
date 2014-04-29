@@ -12,6 +12,4 @@ module Contacts
       "#{get_primary_contact.contact_type}: #{get_primary_contact.data}" if get_primary_contact
     end
   end
-
 end
-

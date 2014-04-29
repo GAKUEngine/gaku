@@ -63,7 +63,7 @@ module Gaku
     end
 
     def attributes
-      %i(position grading_method_id grading_method_set_id)
+      %i( position grading_method_id grading_method_set_id )
     end
 
   end

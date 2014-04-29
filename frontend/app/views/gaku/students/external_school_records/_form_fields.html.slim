@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = f.select :school_id, options_from_collection_for_select(@schools, :id, :code_and_name), { prompt: t(:'school.choose')}, label: t(:'school.plural')
+    = f.select :school_id, options_from_collection_for_select(@schools, :id, :code_and_name), { prompt: t(:'school.choose') }, label: t(:'school.plural')
   .col-md-6
     = f.text_field :student_id_number, label: t(:'external_school_record.student_id_number')
 .row

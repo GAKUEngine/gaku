@@ -24,6 +24,4 @@ module Person
     end
 
   end
-
 end
-

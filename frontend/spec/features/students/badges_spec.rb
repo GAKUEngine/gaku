@@ -27,6 +27,7 @@ describe 'Student Badges' do
           within(table) { has_content? badge_type.name }
         end.to change(Gaku::Badge, :count).by(1)
       end.to change(student.badges, :count).by(1)
+
       within(table) { has_content? badge_type.name }
       within('.badges-count') { expect(page.has_content?('1')).to eq true }
 
@@ -67,7 +68,6 @@ describe 'Student Badges' do
           has_no_content? badge_type.name
         end
 
-
       end
     end
 
@@ -82,7 +82,6 @@ describe 'Student Badges' do
       count? 'Badges list'
       within('.badges-count') { expect(page.has_content?('0')).to eq true }
 
-      #click '#student-badges-menu a'
       within(table) do
         has_no_content? badge_type.name
       end

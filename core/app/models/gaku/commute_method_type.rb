@@ -1,6 +1,5 @@
 module Gaku
   class CommuteMethodType < ActiveRecord::Base
-
     has_many :students
 
     validates :name, presence: true, uniqueness: true
@@ -10,6 +9,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

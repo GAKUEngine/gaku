@@ -1,6 +1,5 @@
 module Gaku
   class Syllabus < ActiveRecord::Base
-
     include Notes
 
     has_many :courses
@@ -17,8 +16,5 @@ module Gaku
     accepts_nested_attributes_for :exams, :assignments
 
     validates :name, :code, presence: true
-
   end
 end
-
-

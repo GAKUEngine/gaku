@@ -636,6 +636,10 @@ en:
     en: English
     ja: 日本語[Japanese]
   manage: Manage
+
+  admin:
+    back: Back to Admin
+    back_to_school: Back to School
   menu:
     admin:
       achievements: Achievements

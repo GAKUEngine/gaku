@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    #new-admin-role.d-none
+    .pull-left
+      = count_div 'admin-roles-count' do
+        = print_count @count, t(:'role.list')
+    .pull-right
+      = ajax_link_to_new t(:'role.add'), [:new, :admin, :role], id: 'new-admin-role-link'
+
+hr
+
+#admin-roles
+  = table_for 'admin-roles-index' do
+    thead
+      tr
+        = th t(:'role.name')
+        = th t(:'user.plural')
+        = th_actions 2
+    tbody
+      = render partial: 'gaku/admin/roles/role', collection: @roles, as: :role
+

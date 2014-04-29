@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    #new-admin-badge-type.d-none
+    .pull-left
+      = count_div 'admin-badge-types-count' do
+        = print_count @count, t(:'badge_type.list')
+    .pull-right
+      = ajax_link_to_new t(:'badge_type.add'), [:new, :admin, :badge_type], id: 'new-admin-badge-type-link'
+
+hr
+
+#admin-badge-types
+  = table_for 'admin-badge-types-index' do
+    thead
+      tr
+        = th t(:'badge_type.singular')
+        = th t(:'badge_type.description')
+        = th t(:'badge_type.authority')
+        = th t(:'badge_type.badge')
+        = th_actions 2
+    tbody
+      = render partial: 'gaku/admin/badge_types/badge_type', collection: @badge_types, as: :badge_type
+

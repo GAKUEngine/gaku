@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    #new-admin-state.d-none
+    .pull-left
+      = count_div 'admin-states-count' do
+        = print_count @count, t(:'address.state.list')
+    .pull-right
+      = ajax_link_to_new t(:'address.state.add'), [:new, :admin, :state], id: 'new-admin-state-link'
+
+#show-admin-states-form
+  = render 'country_select_form'
+hr
+
+#admin-country-states
+  = render 'country_table', states: @country.states, country: @country if @country
+

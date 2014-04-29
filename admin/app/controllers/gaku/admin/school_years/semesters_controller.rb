@@ -6,7 +6,6 @@ module Gaku
     before_action :set_school_year
     before_action :set_semester, only: %i( edit update destroy )
 
-
     def new
       @semester = Semester.new
     end

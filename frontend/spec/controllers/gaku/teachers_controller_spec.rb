@@ -73,7 +73,7 @@ describe Gaku::TeachersController do
 
     context 'js' do
 
-      describe 'JS #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
@@ -81,7 +81,7 @@ describe Gaku::TeachersController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, teacher: attributes_for(:teacher)
@@ -125,6 +125,14 @@ describe Gaku::TeachersController do
             expect(assigns(:count)).to eq 0
           end
         end
+      end
+
+      describe 'XHR GET #edit' do
+        before { gaku_js_get :edit, id: teacher }
+
+        it { should respond_with 200 }
+        it('assigns @teacher') { expect(assigns(:teacher)).to eq teacher }
+        it('renders the :edit template') { template? :edit }
       end
 
       describe 'XHR DELETE #destroy' do

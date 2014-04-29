@@ -1,4 +1,7 @@
 = modal_for 'edit-template-modal' do
-  = normal_modal_form_for [:admin, @template], resource: 'admin-template' do |f|
-    = render 'form_fields', f: f
+  = modal_form_for [:admin, @template], resource: 'admin-template' do |f|
+    = f.text_field :name, label: t(:'name')
+    = f.text_field :context, label: t(:'template.context')
+    = f.check_box :locked, label: t(:'template.lock')
+
     = buttons_for @template, resource: 'admin-template'

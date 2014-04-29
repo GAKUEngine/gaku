@@ -150,7 +150,7 @@ describe 'Students', type: :feature do
 
         it 'shows primary_email' do
           contact_type = create(:contact_type, name: 'Email')
-          create(:contact, contactable: student, contact_type: contact_type)
+          create(:contact_creation, contactable: student, contact_type: contact_type)
           create(:preset, chooser_fields: {show_primary_email: '1'})
           visit gaku.students_path
 
@@ -301,7 +301,7 @@ describe 'Students', type: :feature do
 
 
         it "doesn't show primary_contact" do
-          create(:contact, contactable: student)
+          create(:contact_creation, contactable: student)
           create(:preset, chooser_fields: {show_primary_contact: '0'})
           visit gaku.students_path
 
@@ -312,7 +312,7 @@ describe 'Students', type: :feature do
 
         it "doesn't show primary_email" do
           contact_type = create(:contact_type, name: 'Email')
-          create(:contact, contactable: student, contact_type: contact_type)
+          create(:contact_creation, contactable: student, contact_type: contact_type)
           create(:preset, chooser_fields: {show_primary_contact: '0'})
           visit gaku.students_path
 
@@ -441,7 +441,7 @@ describe 'Students', type: :feature do
 
 
       it "doesn't show primary_contact" do
-        create(:contact, contactable: student)
+        create(:contact_creation, contactable: student)
         visit gaku.students_path
         expect(page.has_css?('#students-index th.primary_contact')).to eq false
         expect(page.has_css?('#students-index td.primary_contact')).to eq false
@@ -450,7 +450,7 @@ describe 'Students', type: :feature do
 
       it "doesn't show primary_email" do
         contact_type = create(:contact_type, name: 'Email')
-        create(:contact, contactable: student, contact_type: contact_type)
+        create(:contact_creation, contactable: student, contact_type: contact_type)
         visit gaku.students_path
         expect(page.has_css?('#students-index th.primary_email')).to eq false
         expect(page.has_css?('#students-index td.primary_email')).to eq false

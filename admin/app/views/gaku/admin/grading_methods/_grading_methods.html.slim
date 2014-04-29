@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    #new-admin-grading-method.d-none
+    .pull-left
+      = count_div 'admin-grading-methods-count' do
+        = print_count @count, t(:'grading_method.list')
+    .pull-right
+      = ajax_link_to_new t(:'grading_method.add'), [:new, :admin, :grading_method], id: 'new-admin-grading-method-link'
+
+hr
+
+#admin-grading-methods
+  = table_for 'admin-grading-methods-index' do
+    thead
+      tr
+        = th t(:'grading_method.singular')
+        = th t(:'grading_method.description')
+        = th t(:'grading_method.method')
+        = th_actions 2
+    tbody
+      = render partial: 'grading_method', collection: @grading_methods, as: :grading_method

@@ -1,6 +1,5 @@
 module Gaku
   class Attendance < ActiveRecord::Base
-
     belongs_to :attendancable, polymorphic: true
     belongs_to :student
     belongs_to :attendance_type
@@ -11,6 +10,5 @@ module Gaku
     def to_s
       reason
     end
-
   end
 end

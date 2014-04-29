@@ -1,6 +1,5 @@
 module Gaku
   class Exam < ActiveRecord::Base
-
     include Notes, Pagination, Gradable
 
     has_many :exam_scores
@@ -17,14 +16,9 @@ module Gaku
     belongs_to :grading_method
     belongs_to :department
 
-
     validates :name, presence: true
 
-    validates :weight, numericality: {
-                                        allow_blank: true,
-                                        greater_than_or_equal_to: 0
-                                     }
-
+    validates :weight, numericality: { allow_blank: true, greater_than_or_equal_to: 0 }
 
     accepts_nested_attributes_for :exam_portions
 
@@ -62,17 +56,17 @@ module Gaku
     end
 
     def ungraded(students)
-       ungraded = 0
+      ungraded = 0
 
-        students.each do |student|
-          student_exam_eps = exam_portion_scores.select do |eps|
-            eps.student_id == student.id
-          end
-
-          student_exam_eps.each do |eps|
-            ungraded += 1 if check_record_completion?(eps)
-          end
+      students.each do |student|
+        student_exam_eps = exam_portion_scores.select do |eps|
+          eps.student_id == student.id
         end
+
+        student_exam_eps.each do |eps|
+          ungraded += 1 if check_record_completion?(eps)
+        end
+      end
 
       ungraded
     end
@@ -88,7 +82,6 @@ module Gaku
       end
       completed
     end
-
 
     def completed_by_student?(student)
       state = true
@@ -111,5 +104,3 @@ module Gaku
     end
   end
 end
-
-

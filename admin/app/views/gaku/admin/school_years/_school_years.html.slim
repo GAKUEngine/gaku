@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    #new-admin-school-year-errors
+    #new-admin-school-year.d-none
+
+    .pull-left
+      = count_div 'admin-school-years-count' do
+        = print_count @count, t(:'school_year.list')
+    .pull-right
+      = ajax_link_to_new t(:'school_year.add'), [:new, :admin, :school_year], id: 'new-admin-school-year-link'
+
+hr
+
+#admin-school-years
+  = table_for 'admin-school-years-index' do
+    thead
+      tr
+        = th t(:'school_year.starting')
+        = th t(:'school_year.ending')
+        = th t(:'school_year.duration')
+        = th_actions 2
+    tbody
+      = render partial: 'school_year', collection: @school_years, as: 'school_year'

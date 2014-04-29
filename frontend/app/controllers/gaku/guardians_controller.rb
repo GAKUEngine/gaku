@@ -2,7 +2,7 @@ module Gaku
   class GuardiansController < GakuController
     include PictureController
 
-    respond_to :js,   only: %i( new create index )
+    respond_to :js,   only: %i( new create edit index )
     respond_to :html, only: %i( edit update destroy )
 
     before_action :set_student, except: %i( set_picture remove_picture )
@@ -10,6 +10,7 @@ module Gaku
 
     def index
       @guardians = @student.guardians
+      respond_with @guardians
     end
 
     def new
@@ -25,6 +26,7 @@ module Gaku
     end
 
     def edit
+      respond_with @guardian
     end
 
     def update
@@ -35,18 +37,7 @@ module Gaku
     def destroy
       @guardian.destroy
       set_count
-      respond_with @guardian, location: [:edit, @student ]
-    end
-
-    def recovery
-      @guardian.recover
-      respond_with @guardian
-    end
-
-    def soft_delete
-      @guardian.soft_delete
-      set_count
-      respond_with @guardian, location: edit_student_path(@student)
+      respond_with @guardian, location: [:edit, @student]
     end
 
     private

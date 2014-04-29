@@ -9,7 +9,9 @@ describe 'Admin Roles' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_roles_path
+      visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
+      click '#roles-menu a'
       click new_link
     end
 
@@ -36,7 +38,9 @@ describe 'Admin Roles' do
   context 'existing' do
     before do
       role
-      visit gaku.admin_roles_path
+      visit gaku.admin_root_path
+      click '#users-and-roles-master-menu a'
+      click '#roles-menu a'
     end
 
     context 'edit', js: true do
@@ -72,7 +76,7 @@ describe 'Admin Roles' do
         within('#admin-roles-index tbody tr:nth-child(2)') { click delete_link }
         accept_alert
         flash_destroyed?
-      end.to change(Gaku::Role, :count).by -1
+      end.to change(Gaku::Role, :count).by(-1)
 
       count? 'Roles list(2)'
 

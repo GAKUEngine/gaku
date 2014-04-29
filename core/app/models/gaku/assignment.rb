@@ -1,6 +1,5 @@
 module Gaku
   class Assignment < ActiveRecord::Base
-
     belongs_to :syllabus
     belongs_to :grading_method
 
@@ -10,6 +9,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

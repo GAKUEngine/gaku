@@ -3,31 +3,33 @@ require 'spec_helper'
 describe 'Admin School Years Semesters' do
 
   let(:school_year) { create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8')) }
-  let(:semester) { create(:semester, school_year: school_year)}
+  let(:semester) { create(:semester, school_year: school_year) }
 
   before { as :admin }
-
-  before :all do
-    set_resource 'admin-school-year-semester'
-  end
+  before(:all) { set_resource 'admin-school-year-semester' }
 
   context 'new', js: true do
     before do
       school_year
-      visit gaku.admin_school_year_path(school_year)
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#school-years-menu a'
+      click edit_link
+      click '#semesters-menu a'
       click new_link
     end
 
     it 'creates and shows' do
       expect do
         fill_in 'semester_starting', with: '2013-04-08'
-        fill_in 'semester_ending', with: '2014-04-15'
+        fill_in 'semester_ending', with: '2014-04-08'
         click submit
         flash_created?
       end.to change(Gaku::Semester, :count).by(1)
 
       within(count_div) { page.should have_content 'Semesters list(1)' }
     end
+
     context 'validations' do
       it 'has ending after starting validation' do
         fill_in 'semester_starting', with: Date.parse('2013-3-8')
@@ -68,9 +70,12 @@ describe 'Admin School Years Semesters' do
     before do
       school_year
       semester
-      visit gaku.admin_school_year_path(school_year)
+      visit gaku.admin_root_path
+      click '#schools-master-menu a'
+      click '#school-years-menu a'
+      click edit_link
+      click '#semesters-menu a'
     end
-
 
     context 'edit', js: true do
       before do
@@ -132,7 +137,7 @@ describe 'Admin School Years Semesters' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Semester, :count).by -1
+      end.to change(Gaku::Semester, :count).by(-1)
 
       within(count_div) { page.should_not have_content 'Semesters list(1)' }
       within(count_div) { page.should have_content 'Semesters list' }

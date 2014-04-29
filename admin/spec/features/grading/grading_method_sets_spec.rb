@@ -9,7 +9,9 @@ describe 'Admin Grading Method Sets' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_grading_method_sets_path
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-method-sets-menu a'
       click new_link
     end
 
@@ -33,7 +35,9 @@ describe 'Admin Grading Method Sets' do
   context 'existing' do
     before do
       grading_method_set
-      visit gaku.admin_grading_method_sets_path
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-method-sets-menu a'
     end
 
     context 'edit', js: true do
@@ -67,7 +71,6 @@ describe 'Admin Grading Method Sets' do
         flash_destroyed?
       end.to change(Gaku::GradingMethodSet, :count).by(-1)
 
-
       has_no_content? grading_method_set.name
     end
   end
@@ -78,7 +81,9 @@ describe 'Admin Grading Method Sets' do
     before do
       grading_method_set
       grading_method_set2
-      visit gaku.admin_grading_method_sets_path
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-method-sets-menu a'
     end
 
     it 'sets primary', js: true do

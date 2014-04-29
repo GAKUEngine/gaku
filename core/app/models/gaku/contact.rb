@@ -1,14 +1,9 @@
 module Gaku
   class Contact < ActiveRecord::Base
-
     belongs_to :contact_type
     belongs_to :contactable, polymorphic: true, counter_cache: true
 
     validates :data, :contact_type, presence: true
-
-    before_save :ensure_first_is_primary, on: :create
-    before_save :remove_other_primary
-    after_save :update_primary_contact_field
 
     delegate :name, to: :contact_type, allow_nil: true
 
@@ -33,11 +28,11 @@ module Gaku
     end
 
     def make_primary
-      contacts.where.not(id: id).update_all(primary: false)
+      contactable.contacts.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)
 
       if contactable.has_attribute?(:primary_contact)
-        contactable.update_attribute(:primary_contact, contact_widget)
+        contactable.update_attribute(:primary_contact, contactable.contact_widget)
       end
     end
 
@@ -63,30 +58,5 @@ module Gaku
       contactable.class.decrement_counter(:contacts_count, contactable.id)
     end
 
-    def remove_other_primary
-      contacts.where.not(id: id).update_all(primary: false) if primary?
-    end
-
-    def ensure_first_is_primary
-      if contactable.respond_to? :contacts
-        self.primary = true if contacts.blank?
-      end
-    end
-
-    def contact_widget
-      contactable.contact_widget
-    end
-
-    def update_primary_contact_field
-      if contactable.has_attribute? :primary_contact
-        contactable.update_attribute(:primary_contact, contactable.contact_widget)
-      end
-    end
-
-    def contacts
-      contactable.contacts
-    end
-
   end
 end
-

@@ -1,8 +1,6 @@
-tr id="guardian-#{guardian.id}"
+= tr_for guardian
   td = guardian.surname
   td = guardian.name
   td = guardian.birth_date
   td = guardian.relationship
-  td
-    = link_to_show [@student, guardian]
-    = link_to_edit [:edit, @student, guardian]
+  td = link_to_edit [:edit, @student, guardian]

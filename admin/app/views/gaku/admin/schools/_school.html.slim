@@ -1,6 +1,8 @@
 tr id="school-#{school.id}"
   = render 'fields', school: school
   td
-    = link_to_show [:admin, school]
-    = link_to_edit [:edit, :admin, school]
+    - if school.primary?
+      = link_to t(:'school.edit_master'), admin_school_details_edit_path, class: 'btn btn-danger col-md-12', data: { confirm: t(:'confirm') }, id: 'edit-admin-primary-school'
+    - else
+      = link_to_edit [:edit, :admin, school]
 

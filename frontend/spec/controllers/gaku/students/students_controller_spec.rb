@@ -313,14 +313,6 @@ describe Gaku::StudentsController do
       it('renders :index template') { template? :index }
     end
 
-    describe 'GET #show' do
-      before { gaku_get :show, id: student }
-
-      it { should respond_with(:success) }
-      it('renders') { should render_template :show }
-      it('assigns  @student') { assigns(:student).should eq student }
-    end
-
     describe 'GET #new' do
       before { gaku_get :new }
 
