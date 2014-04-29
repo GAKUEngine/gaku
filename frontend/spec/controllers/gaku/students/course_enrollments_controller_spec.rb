@@ -11,7 +11,19 @@ describe Gaku::Students::CourseEnrollmentsController do
 
     context 'JS' do
 
-      describe 'JS GET #new' do
+      describe 'XHR GET #index' do
+        before do
+          course_enrollment
+          gaku_js_get :index, student_id: student.id
+        end
+
+        it { should respond_with 200 }
+        it('assigns @course_enrollments') { expect(assigns(:course_enrollments)).to eq [course_enrollment] }
+        it('assigns @count') { expect(assigns(:count)).to eq 1 }
+        it('renders :index template') { template? :index }
+      end
+
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
@@ -20,7 +32,7 @@ describe Gaku::Students::CourseEnrollmentsController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, course_enrollment: attributes_for(:course_enrollment, course_id: course.id, student_id: student.id), student_id: student.id
@@ -93,7 +105,7 @@ describe Gaku::Students::CourseEnrollmentsController do
 
       end
 
-      describe 'JS DELETE #destroy' do
+      describe 'XHR DELETE #destroy' do
 
         let(:js_delete) { gaku_js_delete :destroy, id: course_enrollment, student_id: student.id }
 

@@ -16,6 +16,15 @@ describe Gaku::Students::CourseEnrollmentsController do
   end
 
   describe 'collection' do
+
+    it 'routes to #index' do
+      expect(get: '/students/1/course_enrollments').to route_to(
+        controller: 'gaku/students/course_enrollments',
+        action: 'index',
+        student_id: '1'
+      )
+    end
+
     it 'routes to #new' do
       expect(get: '/students/1/course_enrollments/new').to route_to(
         controller: 'gaku/students/course_enrollments',
