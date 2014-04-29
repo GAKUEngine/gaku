@@ -1,15 +1,33 @@
 module Gaku
   class EnrollmentsController < GakuController
 
-    respond_to :js, only: %i( new create edit update destroy )
+    respond_to :js, only: %i( new create edit update destroy student_selection create_from_collection )
 
     before_action :set_enrollmentable
-    before_action :set_enrollment, only: %i( edit update destroy)
+    before_action :set_enrollment, only: %i( edit update destroy )
     before_action :set_students, only: %i( new edit )
+
+    def student_selection
+      @enrollment = @enrollmentable.enrollments.new
+      @student_selection = current_user.student_selection
+    end
 
     def new
      @enrollment = @enrollmentable.enrollments.new
      respond_with @enrollment
+    end
+
+    def create_from_collection
+      unless params[:selected_students].blank?
+        @enrollments = []
+
+        params[:selected_students].each  do |student_id|
+          if Student.exists?(student_id)
+            enrollment = @enrollmentable.enrollments.create!(student_id: student_id)
+            @enrollments << enrollment
+          end
+        end
+      end
     end
 
     def create
@@ -24,7 +42,7 @@ module Gaku
     end
 
     def update
-      @enrollment.update(enrollmentr_params)
+      @enrollment.update(enrollment_params)
       respond_with @enrollment
     end
 
@@ -33,7 +51,6 @@ module Gaku
       set_count
       respond_with @enrollment
     end
-
 
     private
 

@@ -6,6 +6,8 @@
   .pull-right
     = ajax_link_to_new t(:'enrollment.add'), [:new, @enrollmentable, :enrollment], id: "new-#{@enrollmentable_resource}-enrollment-link"
 
+    = ajax_link_to_new t(:'student.selection'), [:student_selection, @enrollmentable, :enrollments], id: "new-#{@enrollmentable_resource}-student-selection-link"
+
 = index_body do
   = table_for "#{@enrollmentable_resource}-enrollments-index" do
     thead
