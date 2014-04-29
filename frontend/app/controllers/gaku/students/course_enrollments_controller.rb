@@ -7,6 +7,7 @@ module Gaku
 
     def index
       @course_enrollments = @student.course_enrollments
+      set_count
     end
 
     def new

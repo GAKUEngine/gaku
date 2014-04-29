@@ -74,6 +74,8 @@ describe 'Selecting Students', type: :feature do
       find(:css, "input#student-#{student2.id}").should be_checked
       find(:css, "#clear-student-selection").click
 
+      sleep 1
+
       find(:css, "input#student-#{student.id}").should_not be_checked
       find(:css, "input#student-#{student2.id}").should_not be_checked
       !page.has_selector? '#students-checked-div'
@@ -85,7 +87,6 @@ describe 'Selecting Students', type: :feature do
       page.has_selector? '#students-checked-div'
       page.has_content? 'Chosen students(1)'
       click_link 'Show'
-      #sleep 10
       find(:css, ".remove-student").click
       sleep 1
       find(:css, "input#student-#{student.id}").should_not be_checked
