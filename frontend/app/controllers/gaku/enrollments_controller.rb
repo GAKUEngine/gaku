@@ -56,7 +56,7 @@ module Gaku
     end
 
     def set_count
-      @count = @enrollmentable.students.count
+      @count = @enrollmentable.reload.enrollments_count
     end
 
     def set_students
