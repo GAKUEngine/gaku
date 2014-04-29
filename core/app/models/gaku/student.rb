@@ -3,18 +3,11 @@ module Gaku
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :enrollments, dependent: :destroy
-    has_many :courses,
-        through: :enrollments,
-        source: :enrollmentable,
-        source_type: 'Gaku::Course'
-    has_many :class_groups,
-        through: :enrollments,
-        source: :enrollmentable,
-        source_type: 'Gaku::ClassGroup'
-    has_many :extracurricular_activities,
-        through: :enrollments,
-        source: :enrollmentable,
-        source_type: 'Gaku::ExtracurricularActivity'
+    with_options through: :enrollments, source: :enrollmentable do |assoc|
+      assoc.has_many :courses, source_type: 'Gaku::Course'
+      assoc.has_many :class_groups, source_type: 'Gaku::ClassGroup'
+      assoc.has_many :extracurricular_activities, source_type: 'Gaku::ExtracurricularActivity'
+    end
 
     has_many :student_exam_sessions
     has_many :exam_sessions, through: :student_exam_sessions
