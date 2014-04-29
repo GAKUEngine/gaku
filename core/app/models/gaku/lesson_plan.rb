@@ -1,6 +1,5 @@
 module Gaku
   class LessonPlan < ActiveRecord::Base
-
     include Notes
 
     has_many :lessons
@@ -8,6 +7,5 @@ module Gaku
     belongs_to :syllabus
 
     validates :syllabus, presence: true
-
   end
 end

@@ -15,13 +15,14 @@ require 'rails4_client_side_validations'
 require 'sass'
 require 'bootstrap-sass'
 require 'bootstrap-datepicker-rails'
+require 'bootstrap-datetime-picker-for-rails'
 require 'nested_form'
 require 'phantom_helpers'
 require 'phantom_forms'
 require 'phantom_nested_forms'
 require 'select2-rails'
+require 'remotipart'
 
-require 'thinreports-rails'
 require 'gaku/core'
 
 module Gaku
@@ -31,5 +32,4 @@ module Gaku
 
 end
 
-require 'gaku/frontend/version'
 require 'gaku/frontend/engine'

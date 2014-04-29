@@ -5,7 +5,7 @@
     = count_div "#{@notable_resource}-notes-count" do
       = print_count @notable.notes_count, t(:'note.list')
   .pull-right
-    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], {id: 'new-' + @notable_resource + '-note-link', class: 'btn btn-primary'} if can_edit?
+    = ajax_link_to_new t(:'note.add'), [:new, @notable, :note], {id: 'new-' + @notable_resource + '-note-link', class: 'btn btn-primary'}
 
 = index_body do
   = table_for "#{@notable_resource}-notes-index" do
@@ -13,9 +13,7 @@
       tr
         = th t(:'note.title')
         = th t(:'note.content')
-        - if can_edit?
-          = th_actions 3
-        - else
-          = th_actions 1
+        = th_actions 3
+
     tbody
       = render partial: 'gaku/notes/note', collection: @notable.notes, as: :note

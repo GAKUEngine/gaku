@@ -6,19 +6,16 @@ describe 'Student Specialties' do
   before { as :admin }
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:specialty) {create(:specialty) }
-  let(:student_specialty) {create(:student_specialty, student: student, specialty: specialty )}
+  let(:specialty) { create(:specialty) }
+  let(:student_specialty) { create(:student_specialty, student: student, specialty: specialty ) }
   let(:specialty2) { create(:specialty, name: 'Math Specialty') }
-  let!(:el) { '#specialties' }
 
   context 'new', js: true do
 
     before do
       specialty
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      within(el) { page.should have_content('Empty') }
-      click el
+      click '#student-specialties-menu a'
       click new_link
     end
 
@@ -27,11 +24,12 @@ describe 'Student Specialties' do
         expect do
           select specialty.name , from: 'student_specialty_specialty_id'
           click submit
-          within(el) { has_content? specialty.name }
+          within(table) { has_content? specialty.name }
         end.to change(Gaku::StudentSpecialty, :count).by(1)
       end.to change(student.specialties, :count).by(1)
 
       count? 'Specialties list(1)'
+      within('.specialties-count') { expect(page.has_content?('1')).to eq true }
     end
 
     it { has_validations? }
@@ -43,8 +41,7 @@ describe 'Student Specialties' do
       specialty2
       student_specialty
       visit gaku.edit_student_path(student)
-      click '#student-academic-tab-link'
-      click el
+      click '#student-specialties-menu a'
     end
 
     context 'edit' do
@@ -53,12 +50,12 @@ describe 'Student Specialties' do
       it 'edits' do
         select specialty2.name , from: 'student_specialty_specialty_id'
         click submit
-
-        within(el) do
-          has_content? specialty2.name
-          has_no_content? specialty.name
-        end
         flash_updated?
+
+        within(table) do
+          expect(page.has_content? specialty2.name).to eq true
+          expect(page.has_no_content? specialty.name).to eq true
+        end
       end
 
       it 'cancels editting' do
@@ -72,10 +69,11 @@ describe 'Student Specialties' do
       count? 'Specialties list(1)'
       expect do
         ensure_delete_is_working
-        within(el) { has_no_content? specialty.name }
+        within(table) { has_no_content? specialty.name }
       end.to change(Gaku::StudentSpecialty, :count).by(-1)
 
       count? 'Specialties list'
+      within('.specialties-count') { expect(page.has_content?('0')).to eq true }
     end
 
   end

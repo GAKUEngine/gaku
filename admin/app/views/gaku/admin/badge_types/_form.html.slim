@@ -1,3 +1,3 @@
-= normal_form_for [:admin, @badge_type], resource: 'admin-badge-type' do |f|
+= remote_form_for [:admin, @badge_type], resource: 'admin-badge-type' do |f|
   = render 'form_fields', f: f
   = buttons_for @badge_type, resource: 'admin-badge-type'

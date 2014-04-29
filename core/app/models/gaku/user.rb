@@ -1,6 +1,5 @@
 module Gaku
   class User < ActiveRecord::Base
-
     has_many :user_roles
     has_many :roles, through: :user_roles
 
@@ -11,18 +10,33 @@ module Gaku
 
     attr_accessor :login
 
-    before_create :default_language
-
     validates :username, presence: true, uniqueness: true
 
     roles_table_name = Role.table_name
 
     scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
 
+    def student_selection
+      hashes = $redis.lrange(:student_selection, 0, -1)
+      hashes.map! { |x| JSON.parse(x) }
+    end
+
+    def clear_student_selection
+      $redis.del(:student_selection)
+    end
+
+    def to_s
+      username
+    end
+
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
-      if login = conditions.delete(:login)
-        where(conditions).where(['lower(username) = :value OR lower(email) = :value', { value: login.downcase }]).first
+      login = conditions.delete(:login)
+      if login
+        where(conditions).where(
+          ['lower(username) = :value OR lower(email) = :value',
+           { value: login.downcase }]
+        ).first
       else
         where(conditions).first
       end
@@ -33,18 +47,7 @@ module Gaku
     end
 
     def role?(role)
-      roles.detect {|p| p.name == role.to_s.camelize}
+      roles.find { |p| p.name == role.to_s.camelize }
     end
-
-    private
-
-    def default_language
-      if Preset.active.nil?
-        settings[:locale] = 'en'
-      else
-        settings[:locale] = Preset.active.locale['language']
-      end
-    end
-
   end
 end

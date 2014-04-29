@@ -11,14 +11,20 @@ module Gaku
     before_action :set_contact,          only: %i( edit update destroy make_primary )
     before_action :set_polymorphic_resource
 
+    def index
+      @contacts = @polymorphic_resource.contacts
+      respond_with @contacts
+    end
+
     def new
       @contact = Contact.new
       respond_with @contact
     end
 
     def create
-      @contact = @polymorphic_resource.contacts.new(contact_params)
-      @contact.save
+      creator = ContactCreation.new(contact_params.merge(contactable: @polymorphic_resource))
+      creator.save
+      @contact = creator.contact
       set_count
       respond_with @contact
     end
@@ -27,7 +33,7 @@ module Gaku
     end
 
     def update
-      @contact.update(contact_params)
+      ContactUpdation.new(@contact).update(contact_params)
       respond_with @contact
     end
 

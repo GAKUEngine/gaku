@@ -1,4 +1,6 @@
-$('#index-student-simple-grades-modal').html("<%= j render('edit') %>");
-$('#simple_grade_simple_grade_type_id').gaku_select2('<%= t(:"simple_grade_type.choose") %>');
-$('.datepicker').datepicker_i18n()
+$('#edit-modals').html('<%= j render("edit") %>');
+$('#edit-simple-grade-modal').modal('show');
 $('.remote-form').enableValidations();
+
+$('#simple_grade_simple_grade_type_id').gaku_select2('<%= t(:"simple_grade_type.choose") %>');
+$('.datepicker').datepicker_i18n();

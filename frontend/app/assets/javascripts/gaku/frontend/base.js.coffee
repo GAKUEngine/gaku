@@ -59,6 +59,11 @@ class App
       e.preventDefault()
       $('#delete-modal').modal('show')
 
+    # sorting helper fixixing table row width when drag
+    fixHelper = (e, ui) ->
+      ui.children().each ->
+        $(@).width $(@).width()
+      ui
 
     $('.sortable').sortable
       handle: '.sort-handler'
@@ -67,11 +72,6 @@ class App
       update: ->
         $.post $(@).data('sort-url'), $(@).sortable('serialize')
 
-    # sorting
-    fixHelper = (e, ui) ->
-      ui.children().each ->
-        $(@).width $(@).width()
-      ui
 
   edit: ->
     @upload_picture()
@@ -93,33 +93,63 @@ class App
     $(document).on 'click', '#upload-picture-link', ->
       $("#upload-picture").toggle()
 
+  upload_picture_ajax: ->
+    $('body').popover
+      selector: '.picture-upload'
+      html: true
+      content: ()->
+        return $('#upload-picture').html()
+      placement: 'bottom'
+      trigger: 'click'
+
+
   country_dropdown: ->
     $('body').on 'change', '#country_dropdown', ->
       window.load_states()
 
-
   student_chooser: ->
+    $.ajax
+      type: 'get'
+      url: '/student_selection'
+      dataType: 'script'
+
+    $(document).on 'click', '#clear-student-selection', ->
+      $.ajax
+        type: 'get'
+        url: '/student_selection/clear'
+        dataType: 'script'
+
+    $(document).on 'click', '.remove-student', ->
+      thisId = $(this).closest('a').attr('id')
+
+      $.ajax
+        type: "POST",
+        url: "/student_selection/remove",
+        data: { id: thisId },
+        dataType: 'script'
+
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
-      thisId = $(this).closest('tr').attr('id')
+      tr_id = $(this).closest('tr').attr('id')
+      parsed_id = tr_id.split('student-')
+      thisId = parsed_id[1]
+
 
       if thisCheck.is (':checked')
-        surname = $(this).closest('tr').find('td.surname').text()
-        name = $(this).closest('tr').find('td.name').text()
-        $('#students-checked').append("<tr class=" + thisId + "><td>" + surname + "</td><td>" + name + "</td></tr>")
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
-        $('#students-checked-div').slideDown()
-        chosen_trs = $('#chosen-table').find('tbody tr')
-        $('.chosen-count').html('(' + chosen_trs.length + ')')
-      else
-        $('#students-checked tr.' + thisId).remove()
-        $('#selected-students, #enroll-to-class-form, #enroll-to-course-form').find('input.' + thisId).remove()
 
-        if $('#students-checked tr').length == 0
-          $('#students-checked-div').slide()
-        else
-          chosen_trs = $('#chosen-table').find('tbody tr')
-          $('.chosen-count').html('(' + chosen_trs.length + ')')
+        $.ajax
+          type: "POST",
+          url: "/student_selection/add",
+          data: { id: thisId },
+          dataType: 'script'
+
+      else
+        $.ajax
+          type: "POST",
+          url: "/student_selection/remove",
+          data: { id: thisId },
+          dataType: 'script'
 
 
 ready = ->

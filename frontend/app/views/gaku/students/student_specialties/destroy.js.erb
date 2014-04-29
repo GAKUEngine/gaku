@@ -1,4 +1,5 @@
 $('.student-specialties-count').html("<%= print_count(@count, t(:'specialty.list')) %>");
+$('.specialties-count').html("<%= @count %>");
 $('#student-specialty-list a').text("<%= j(@student.student_specialties_list) %>");
 
 showNotice("<%= render_flash %>");

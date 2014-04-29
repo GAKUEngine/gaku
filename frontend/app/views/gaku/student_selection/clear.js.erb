@@ -1,0 +1,4 @@
+console.log("<%= @selection.to_json %>");
+
+$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
+$('.chosen-count').html('<%= "(#{@selection.size})" %>');

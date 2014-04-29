@@ -6,7 +6,7 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index )
+    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show )
   end
 
   concern :contacts do
@@ -17,6 +17,15 @@ Gaku::Core::Engine.routes.draw do
     resources :notes
   end
 
+  concern :gradable do
+    resources :grading_method_connectors, only: %i( new create destroy index ), concerns: %i( sort ) do
+      collection do
+        get :new_set
+        post :add_set
+      end
+    end
+  end
+
   concern(:primary)         { patch :make_primary, on: :member }
   concern(:show_deleted)    { get :show_deleted, on: :member }
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
@@ -25,7 +34,13 @@ Gaku::Core::Engine.routes.draw do
   concern(:enroll_students) { post :enroll_students, on: :collection }
   concern(:enroll_student)  { post :enroll_student, on: :collection }
   concern(:student_chooser) { get :student_chooser, on: :member }
-
+  concern(:student_selection) { get :student_selection, on: :member }
+  concern(:set_picture) do
+    member do
+      patch :set_picture
+      delete :remove_picture
+    end
+  end
 
   devise_scope :user do
     get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
@@ -38,7 +53,7 @@ Gaku::Core::Engine.routes.draw do
       concerns: %i( enroll_student )
   end
 
-  resources :class_groups, concerns: %i( notes student_chooser pagination ) do
+  resources :class_groups, concerns: %i( notes student_chooser student_selection pagination ) do
     collection do
       get :search
       get :search_semester
@@ -52,7 +67,7 @@ Gaku::Core::Engine.routes.draw do
     resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
   end
 
-  resources :courses, concerns: %i( notes student_chooser ) do
+  resources :courses, concerns: %i( notes student_chooser gradable ) do
     resources :semester_courses, controller: 'courses/semester_courses'
     resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
       post :enroll_class_group, on: :collection
@@ -86,9 +101,19 @@ Gaku::Core::Engine.routes.draw do
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination )
+  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination set_picture )
 
-  resources :students, concerns: %i( addresses contacts notes pagination ) do
+  resources :student_selection, only: :index do
+    collection do
+      get :clear
+      post :add
+      post :remove
+    end
+  end
+
+  resources :guardians, only: [], concerns: %i( addresses contacts set_picture )
+
+  resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
     get :search, on: :collection
     get :clear_search, on: :collection
     get :advanced_search, on: :collection
@@ -99,18 +124,20 @@ Gaku::Core::Engine.routes.draw do
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
     resources :external_school_records,  controller: 'students/external_school_records',  except: :show
 
-    resources :guardians, except: %i( index show ),
-      controller: 'students/guardians',
-      concerns: %i( addresses contacts )
+    resources :guardians, except: %i( show )
 
     resources :course_enrollments,
       controller: 'students/course_enrollments',
-      only: %i( new create destroy )
+      only: %i( new create destroy index )
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes pagination ) do
+
+
+  resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
+
+  resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member
 
     resources :exam_scores

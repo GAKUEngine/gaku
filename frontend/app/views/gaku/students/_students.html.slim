@@ -2,14 +2,57 @@
   thead
     tr
       = th_icon 'check'
-      = th t(:'code')
-      = th t(:'surname')
-      = th t(:'name')
-      = th t(:'birth_date')
-      = th t(:'gender.label')
-      = th t(:'class_group.name')
-      = th t(:'admitted')
-      = th t(:'personal_information')
+      - if show_field?(@preset.try(:show_code))
+        th.code.btn-inverse.col-sm-1 = t(:'code')
+
+      - if show_field?(@preset.try(:show_foreign_id_code))
+        th.foreign_id_code.btn-inverse.col-sm-1 = t(:'student.foreign_id_code')
+
+      - if show_field?(@preset.try(:show_enrollment_status))
+        th.enrollment_status.btn-inverse.col-sm-1 = t(:'enrollment_status.singular')
+
+      - if show_field?(@preset.try(:show_user))
+        th.user.btn-inverse = t(:'user.singular')
+
+      - if show_field?(@preset.try(:show_surname))
+        th.surname.btn-inverse = t(:'surname')
+
+      - if show_field?(@preset.try(:show_middle_name))
+        th.middle_name.btn-inverse = t(:'middle_name')
+
+      - if show_field?(@preset.try(:show_name))
+        th.name.btn-inverse = t(:'name')
+
+      - if show_field?(@preset.try(:show_birth_date))
+        th.birth_date.btn-inverse.col-sm-1 = t(:'birth_date')
+
+      - if show_field?(@preset.try(:show_gender))
+        th.gender.btn-inverse.col-sm-1 = t(:'gender.label')
+
+      - if show_field?(@preset.try(:show_class_name))
+        th.btn-inverse = t(:'class_group.name')
+
+      - if show_field?(@preset.try(:show_specialty))
+        th.major_specialty.btn-inverse = t(:'specialty.singular')
+
+      - if show_field?(@preset.try(:show_admitted))
+        th.admitted.btn-inverse.col-sm-1 = t(:'admitted')
+
+      - if show_field?(@preset.try(:show_graduated))
+        th.graduated.btn-inverse.col-sm-1 = t(:'graduated')
+
+      - if show_field?(@preset.try(:show_primary_contact))
+        th.primary_contact.btn-inverse.col-sm-1 = t(:'primary_contact')
+
+      - if show_field?(@preset.try(:show_primary_email))
+        th.primary_email.btn-inverse.col-sm-1 = t(:'primary_email')
+
+      - if show_field?(@preset.try(:show_primary_address))
+        th.primary_address.btn-inverse.col-sm-1 = t(:'primary_address')
+
+      - if show_field?(@preset.try(:show_personal_information))
+        th.personal_information.btn-inverse.col-sm-1 = t(:'personal')
+
       = th_actions 2
 
   tbody

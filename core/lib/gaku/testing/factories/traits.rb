@@ -32,15 +32,16 @@ FactoryGirl.define do
 
   trait :with_contact do
     after(:create) do |resource|
-      create(:contact, contactable: resource)
+      create(:contact_creation, contactable: resource)
       resource.contacts.reload
     end
   end
 
   trait :with_contacts do
     after(:create) do |resource|
-      create(:contact, contactable: resource)
-      create(:contact, contactable: resource)
+      2.times do
+        create(:contact_creation, contactable: resource)
+      end
       resource.contacts.reload
     end
   end
@@ -72,5 +73,22 @@ FactoryGirl.define do
       resource.semesters << create(:semester)
     end
   end
+
+  trait :with_grading_method do
+    after(:create) do |resource|
+      resource.grading_methods << create(:grading_method)
+    end
+  end
+
+  trait :with_grading_methods do
+    after(:create) do |resource|
+      2.times do
+        resource.grading_methods << create(:grading_method)
+      end
+    end
+  end
+
+
+
 
 end

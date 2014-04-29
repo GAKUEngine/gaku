@@ -16,6 +16,8 @@ ready = ->
       #     else
       #       $('#exam_weight').attr 'class','span12'
       #       $('.exam_weightformError').remove()
+    edit: ->
+      $('.datetimepicker').datetimepicker()
 
   @app.exams = new ExamsController
 

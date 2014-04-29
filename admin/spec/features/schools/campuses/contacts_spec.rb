@@ -5,7 +5,6 @@ describe 'Admin School Campus Contact' do
   before { as :admin }
   before(:all) { set_resource 'admin-school-campus-contact' }
 
-
   let!(:contact_type) { create(:contact_type, name: 'Email') }
 
   context 'new', js: true, type: 'contact' do
@@ -14,7 +13,7 @@ describe 'Admin School Campus Contact' do
     before do
       @resource = school.campuses.first
       visit gaku.edit_admin_school_campus_path(school, @resource)
-      click tab_link
+      click '#contacts-menu a'
     end
 
     it_behaves_like 'new contact'
@@ -32,7 +31,7 @@ describe 'Admin School Campus Contact' do
       context 'edit' do
         before do
           visit gaku.edit_admin_school_campus_path(school, @resource)
-          click tab_link
+          click '#contacts-menu a'
         end
 
         it_behaves_like 'edit contact'
@@ -47,7 +46,7 @@ describe 'Admin School Campus Contact' do
         school.reload
         @resource = school.campuses.first
         visit gaku.edit_admin_school_campus_path(school, @resource)
-        click tab_link
+        click '#contacts-menu a'
       end
 
       it_behaves_like 'primary contacts'

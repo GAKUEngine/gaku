@@ -6,6 +6,7 @@ describe Gaku::Exam do
 
   describe 'concerns' do
     it_behaves_like 'notable'
+    it_behaves_like 'gradable'
   end
 
   describe 'associations' do
@@ -19,6 +20,8 @@ describe Gaku::Exam do
     it { should have_many :exam_scores }
     it { should belong_to :grading_method }
     it { should belong_to :department }
+
+    it { should have_many :exam_sessions }
 
     it { should accept_nested_attributes_for :exam_portions }
   end

@@ -26,6 +26,9 @@ describe Gaku::Student do
     it { should have_many(:student_guardians).dependent(:destroy) }
     it { should have_many(:guardians).through(:student_guardians) }
 
+    it { should have_many(:student_exam_sessions) }
+    it { should have_many(:exam_sessions).through(:student_exam_sessions) }
+
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :attendances }
@@ -52,30 +55,30 @@ describe Gaku::Student do
 
   describe '#set_foreign_id_code' do
     context 'when increment_foreign_id_code is false' do
-      let(:student_config) { create(:student_config, active: true) }
+      let(:preset) { create(:preset, active: true) }
 
       it 'sets increment_foreign_id_code to true' do
-        student_config
+        preset
         student = create(:student, foreign_id_code: '3')
-        expect(student_config.reload.increment_foreign_id_code).to eq true
+        expect(preset.reload.increment_foreign_id_code).to eq 'true'
       end
 
       it 'sets last_foreign_id_code' do
-        student_config
+        preset
         student = create(:student, foreign_id_code: '3')
-        expect(student_config.reload.last_foreign_id_code).to eq '3'
+        expect(preset.reload.last_foreign_id_code).to eq '3'
       end
 
     end
 
     context 'when increment_foreign_id_code is true' do
-      let(:student_config) { create(:student_config, active: true, increment_foreign_id_code: true, last_foreign_id_code: '3') }
+      let(:preset) { create(:preset, active: true, increment_foreign_id_code: '1', last_foreign_id_code: '3') }
 
       it 'increments last_foreign_id_code' do
-        student_config
+        preset
         student = create(:student)
         expect(student.foreign_id_code).to eq '4'
-        expect(student_config.reload.last_foreign_id_code).to eq '4'
+        expect(preset.reload.last_foreign_id_code).to eq '4'
       end
 
     end
@@ -163,7 +166,6 @@ describe Gaku::Student do
 
       it 'decrements' do
         external_school_record
-        puts student.external_school_records.last.to_json
         expect do
           student.external_school_records.last.destroy
         end.to change { student.reload.external_school_records_count }.by -1

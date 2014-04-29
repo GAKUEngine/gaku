@@ -10,6 +10,11 @@ module Gaku
     before_action :set_address,          only: %i( edit update soft_delete make_primary )
     before_action :set_polymorphic_resource
 
+    def index
+      @addresses = @polymorphic_resource.addresses
+      respond_with @addresses
+    end
+
     def new
       @address = Address.new
       respond_with @address

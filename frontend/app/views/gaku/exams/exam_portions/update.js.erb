@@ -1,0 +1,2 @@
+showNotice("<%= render_flash %>");
+$("#exam-portion-<%= @exam_portion.id %>").html('<%= j render("gaku/exams/exam_portions/exam_portion_menu_link", {exam_portion: @exam_portion}) %>' );

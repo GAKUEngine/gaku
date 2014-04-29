@@ -4,6 +4,7 @@ if Gaku::Preset.count.zero?
                         default: true,
                         active: true,
                         locale: 'en',
+                        time_format_24: true,
                         names_order: '%first %middle %last',
                         pagination: {
                                       default: 25,
@@ -12,22 +13,22 @@ if Gaku::Preset.count.zero?
                                       changes: 25
                                     },
                         person: { gender: true },
-                        student: { id_code: '%year-%yearly_serial'},
+                        student: { id_code: '%year-%yearly_serial', increment_foreign_id_code: 1 },
                         address: { country: 'JP', state: 'Aichi', city: 'Nagoya' },
                         grading: { scheme: '', method: '' },
                         export_formats: { spreadsheets: 'xls', printables: 'pdf', documents: 'xls' },
 
                         chooser_fields: {
-                                          name: 1,
-                                          surname: 1,
-                                          birth_date: 1,
-                                          sex: 1,
-                                          class_name: 1,
-                                          seat_number: 1,
-                                          admitted_on: 1,
-                                          primary_address: 1,
-                                          primary_contact: 1,
-                                          assignments: 1
+                                          show_name: 1,
+                                          show_surname: 1,
+                                          show_birth_date: 1,
+                                          show_gender: 1,
+                                          show_code: 1,
+                                          show_class_name: 1,
+                                          show_admitted: 1,
+                                          show_primary_address: 1,
+                                          show_primary_contact: 1,
+                                          show_personal_information: 1
                                         }
                       )
 end

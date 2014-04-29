@@ -7,7 +7,8 @@ describe 'Students', type: :feature do
     set_resource 'student'
   end
 
-  before { as :admin }
+
+  let!(:preset) { create(:preset, chooser_fields: {show_name: '1', show_surname: '1'}) }
 
   let(:class_group) { create(:class_group) }
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
@@ -20,6 +21,10 @@ describe 'Students', type: :feature do
   let(:student4) { create(:student, name: 'Felix', surname: 'Baumgartner', enrollment_status_code: enrollment_status_applicant.code) }
   let(:student5) { create(:student, name: 'Mike', surname: 'Tyson', enrollment_status_code: enrollment_status_transferred.code) }
 
+  before do
+    as :admin
+    #preset
+  end
 
   context 'existing' do
     before do

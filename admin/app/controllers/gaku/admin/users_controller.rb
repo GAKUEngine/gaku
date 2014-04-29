@@ -1,10 +1,7 @@
 module Gaku
   class Admin::UsersController < Admin::BaseController
 
-    #load_and_authorize_resource class: User
-
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_user, only: %i( edit update destroy )
     before_action :set_roles
@@ -21,8 +18,9 @@ module Gaku
     end
 
     def create
-      @user = User.new(user_params)
-      @user.save
+      user_creator = UserCreator.new(user_params)
+      user_creator.save
+      @user = user_creator.get_user
       save_user_roles
       @count = User.count
       respond_with @user
@@ -55,7 +53,7 @@ module Gaku
     end
 
     def attributes
-      [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] } ]
+      [:login, :username, :email, :password, :password_confirmation, :remember_me, :locale, { role_ids: [] }]
     end
 
     def set_roles

@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'gaku_admin', version
   s.add_dependency 'gaku_frontend', version
   s.add_dependency 'gaku_archive', version
+  s.add_dependency 'gaku_testing', version
   s.add_dependency 'gaku_sample', version
 end

@@ -1,0 +1,24 @@
+.row
+  .col-md-12
+    #new-admin-simple-grade-type.d-none
+    .pull-left
+      = count_div 'admin-simple-grade-types-count' do
+        = print_count @count, t(:'simple_grade_type.list')
+    .pull-right
+      = ajax_link_to_new t(:'simple_grade_type.add'), [:new, :admin, :simple_grade_type], id: 'new-admin-simple-grade-type-link'
+
+hr
+
+#admin-simple-grade-types
+  = table_for 'admin-simple-grade-types-index' do
+    thead
+      tr
+        = th t(:'simple_grade_type.singular')
+        = th t(:'simple_grade_type.max_score')
+        = th t(:'simple_grade_type.passing_score')
+        = th t(:'school.singular')
+        = th t(:'grading_method.singular')
+        = th_actions 2
+    tbody
+      = render partial: 'simple_grade_type', collection: @simple_grade_types, as: :simple_grade_type
+

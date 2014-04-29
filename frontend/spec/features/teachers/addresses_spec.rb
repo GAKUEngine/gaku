@@ -15,6 +15,7 @@ describe 'Teacher Address' do
     before do
       @resource = teacher
       visit gaku.edit_teacher_path(@resource)
+      click '#addresses-menu a'
     end
 
     it_behaves_like 'new address'
@@ -25,6 +26,7 @@ describe 'Teacher Address' do
     before do
       @resource = teacher_with_address
       visit gaku.edit_teacher_path(@resource)
+      click '#addresses-menu a'
     end
 
     it_behaves_like 'dynamic state dropdown'
@@ -36,7 +38,7 @@ describe 'Teacher Address' do
       before(:each) do
         @resource = teacher_with_address
         visit gaku.edit_teacher_path(@resource)
-        click tab_link
+        click '#addresses-menu a'
         page.has_content? 'Addresses list'
       end
 
@@ -49,7 +51,7 @@ describe 'Teacher Address' do
       before(:each) do
         @resource = teacher_with_addresses
         visit gaku.edit_teacher_path(@resource)
-        click tab_link
+        click '#addresses-menu a'
         page.has_content? 'Addresses list'
       end
 

@@ -1,0 +1,18 @@
+.row
+  .col-md-12
+    #new-admin-commute-method-type.d-none
+  	.pull-left
+  		= count_div 'admin-commute-method-types-count' do
+  			= print_count @count, t(:'commute_method_type.list')
+  	.pull-right
+  		= ajax_link_to_new t(:'commute_method_type.new'), [:new, :admin, :commute_method_type], id: 'new-admin-commute-method-type-link'
+hr
+
+#admin-commute-method-types
+	= table_for 'admin-commute-method-types-index' do
+	  thead
+	    tr
+	      = th t(:'commute_method_type.plural')
+	      = th_actions 2
+	    tbody
+	    	= render partial: 'commute_method_type', collection: @commute_method_types, as: :commute_method_type

@@ -8,7 +8,6 @@ td = address.city
 td = address.address1
 td = address.address2
 - unless address.campus_address?
-  - if can_edit?
-    td
-      = ajax_link_to_edit [:edit, target].flatten
-      = render 'gaku/addresses/delete_link', target: target
+  td
+    = ajax_link_to_edit [:edit, target].flatten
+    = render 'gaku/addresses/delete_link', target: target

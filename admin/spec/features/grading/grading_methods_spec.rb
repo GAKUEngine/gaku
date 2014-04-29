@@ -11,7 +11,9 @@ describe 'Admin Grading Methods' do
 
   context 'new', js: true do
     before do
-      visit gaku.admin_grading_methods_path
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-methods-menu a'
       click new_link
     end
 
@@ -36,7 +38,9 @@ describe 'Admin Grading Methods' do
   context 'existing' do
     before do
       grading_method
-      visit gaku.admin_grading_methods_path
+      visit gaku.admin_root_path
+      click '#grading-master-menu a'
+      click '#grading-methods-menu a'
     end
 
     context 'edit', js: true do
@@ -91,8 +95,7 @@ describe 'Admin Grading Methods' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::GradingMethod, :count).by -1
-
+      end.to change(Gaku::GradingMethod, :count).by(-1)
 
       count? 'Grading Methods list(1)'
       has_content? grading_method.name

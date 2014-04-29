@@ -4,6 +4,7 @@ require 'rails-i18n'
 require 'paperclip'
 require 'ransack'
 require 'deface'
+require 'redis'
 
 require 'devise'
 require 'cancan'
@@ -21,7 +22,6 @@ module Gaku
   end
 end
 
-require 'gaku/core/version'
 require 'gaku/core/engine'
 require 'gaku/core/console_colors'
 require 'generators/gaku/dummy/dummy_generator'

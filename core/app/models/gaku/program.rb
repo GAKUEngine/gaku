@@ -1,6 +1,5 @@
 module Gaku
   class Program < ActiveRecord::Base
-
     has_many :program_specialties
     has_many :specialties, through: :program_specialties
 
@@ -23,6 +22,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

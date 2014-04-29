@@ -8,6 +8,5 @@ module Gaku
     def to_s
       score
     end
-
   end
 end

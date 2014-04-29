@@ -1,0 +1,7 @@
+$('#new-<%= @gradable_resource%>-grading-method-connector').html('<%= j render("form") %>').slide();
+$('#new-<%= @gradable_resource%>-grading-method-connector-link').hide();
+$('.remote-form').enableValidations();
+
+// hide add grading method set form and show new button
+$('#new-set-<%= @gradable_resource %>-grading-method-connector').slideUp()
+$('#new-set-<%= @gradable_resource %>-grading-method-connector-link').show()

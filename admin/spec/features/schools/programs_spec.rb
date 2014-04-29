@@ -10,7 +10,9 @@ describe 'Admin Program' do
   let!(:syllabus) { create(:syllabus, name: 'Ruby Ninja Championship') }
   let!(:specialty) { create(:specialty, name: 'Ruby throw exception') }
 
-  let(:program) { create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, school: school) }
+  let(:program) do
+    create(:program, :with_program_level, :with_program_syllabus, :with_program_specialty, school: school)
+  end
 
   before :all do
     set_resource 'admin-school-program'
@@ -19,7 +21,7 @@ describe 'Admin Program' do
   context 'new', js: true do
     before do
       visit gaku.edit_admin_school_path(school)
-      click tab_link
+      click '#programs-menu a'
       click new_link
     end
 
@@ -29,13 +31,13 @@ describe 'Admin Program' do
         fill_in 'program_description', with: 'Rails Ninja Camp'
 
         click '.add-program-specialty'
-        select  specialty.name, from: 'program-specialty-select'
+        select specialty.name, from: 'program-specialty-select'
 
         click '.add-program-level'
-        select  level.name, from: 'program-level-select'
+        select level.name, from: 'program-level-select'
 
         click '.add-program-syllabus'
-        select  syllabus.name, from: 'program-syllabus-select'
+        select syllabus.name, from: 'program-syllabus-select'
 
         click submit
         flash_created?
@@ -49,6 +51,7 @@ describe 'Admin Program' do
 
       page.should have_content 'Rails Ninja'
       within(count_div) { page.should have_content 'Programs list(1)' }
+      within('.programs-count') { expect(page.has_content?('1')).to eq true }
 
       %w(level syllabus specialty).each do |resource|
         click ".program-#{resource.pluralize}-list"
@@ -66,7 +69,7 @@ describe 'Admin Program' do
     before do
       program
       visit gaku.edit_admin_school_path(school)
-      click tab_link
+      click '#programs-menu a'
     end
 
     context 'edit' do
@@ -81,17 +84,16 @@ describe 'Admin Program' do
         fill_in 'program_name', with: 'Rails Samurai'
         fill_in 'program_description', with: 'Rails Ninja Camp'
 
-        select  specialty.name, from: 'program-specialty-select'
-        select  level.name, from: 'program-level-select'
-        select  syllabus.name, from: 'program-syllabus-select'
+        select specialty.name, from: 'program-specialty-select'
+        select level.name, from: 'program-level-select'
+        select syllabus.name, from: 'program-syllabus-select'
 
         click submit
         flash_updated?
 
         within(table) { page.should have_content 'Rails Samurai' }
 
-
-        %w(level syllabus specialty).each do |resource|
+        %w( level syllabus specialty ).each do |resource|
           click ".program-#{resource.pluralize}-list"
           within("#show-program-#{resource.pluralize}-modal") do
             page.should have_content(send(resource.to_s).name)
@@ -104,16 +106,18 @@ describe 'Admin Program' do
     end
 
     it 'deletes', js: true do
-      page.should have_content program.name
+      within('#admin-school-programs-index') { expect(page.has_content?(program.name)).to eq true }
       within(count_div) { page.should have_content 'Programs list(1)' }
 
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Program, :count).by -1
+      end.to change(Gaku::Program, :count).by(-1)
 
+      within('#admin-school-programs-index') { expect(page.has_no_content?(program.name)).to eq true }
       within(count_div) { page.should_not have_content 'Programs list(1)' }
-      page.should_not have_content program.name
+      within('.programs-count') { expect(page.has_no_content?('1')).to eq true }
     end
   end
+
 end

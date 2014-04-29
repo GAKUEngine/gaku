@@ -15,8 +15,7 @@ describe 'Teacher Contacts' do
     before do
       @resource = teacher
       visit gaku.edit_teacher_path(@resource)
-      click tab_link
-
+      click '#contacts-menu a'
     end
 
     it_behaves_like 'new contact'
@@ -32,7 +31,7 @@ describe 'Teacher Contacts' do
 
         before do
           visit gaku.edit_teacher_path(@resource)
-          click tab_link
+          click '#contacts-menu a'
         end
 
         it_behaves_like 'edit contact'
@@ -46,7 +45,7 @@ describe 'Teacher Contacts' do
       before do
         @resource = teacher_with_contacts
         visit gaku.edit_teacher_path(@resource)
-        click tab_link
+        click '#contacts-menu a'
       end
 
       it_behaves_like 'primary contacts'

@@ -26,7 +26,7 @@ module Gaku
       clear_aliased_actions
 
       # override cancan default aliasing
-      #(we don't want to differentiate between read and index)
+      # (we don't want to differentiate between read and index)
       alias_action :edit, to: :update
       alias_action :new,  to: :create
       alias_action :new_action, to: :create
@@ -47,13 +47,11 @@ module Gaku
         end
       end
 
-
-      #include any abilities registered by extensions, etc.
+      # include any abilities registered by extensions, etc.
       Ability.abilities.each do |clazz|
         ability = clazz.send(:new, user)
         @rules = rules + ability.send(:rules)
       end
-
     end
   end
 end

@@ -10,5 +10,4 @@ module Gaku
 
 end
 
-require 'gaku/archive/version'
 require 'gaku/archive/engine'

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Guardian Contacts' do
 
-  before(:all) { set_resource 'student-guardian-contact' }
+  before(:all) { set_resource 'guardian-contact' }
   before { as :admin }
 
   let(:student) { create(:student) }
@@ -11,18 +11,13 @@ describe 'Student Guardian Contacts' do
   let(:guardian_with_contacts) { create(:guardian, :with_contacts) }
   let(:contact_type) { create(:contact_type, name: 'Email') }
 
-  tab_link = '#student-guardian-contacts-tab-link'
-
   context 'new', js: true, type: 'contact'  do
     before(:each) do
       contact_type
       student.guardians << guardian
-      visit gaku.edit_student_path(student)
       @resource = guardian
-      click '#student-guardians-tab-link'
-      page.has_content? 'Guardians list'
-      click edit_link
-      click tab_link
+      visit gaku.edit_student_guardian_path(student, @resource)
+      click '#guardian-contacts-menu a'
     end
 
     it_behaves_like 'new contact'
@@ -35,7 +30,7 @@ describe 'Student Guardian Contacts' do
         @resource = guardian_with_contact
         student.guardians << @resource
         visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
+        click '#guardian-contacts-menu a'
       end
 
       it_behaves_like 'edit contact'
@@ -48,7 +43,7 @@ describe 'Student Guardian Contacts' do
         @resource = guardian_with_contacts
         student.guardians << @resource
         visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
+        click '#guardian-contacts-menu a'
       end
 
       it_behaves_like 'primary contacts'

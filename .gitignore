@@ -17,6 +17,9 @@ db/test.sqlite3-journal
 /tmp
 **/tmp
 
+#ruby version
+.ruby-version
+
 # Wijmo Complete files (may need the purchase of a license - not for distrobution)
 /app/assets/images/images/wijeditor
 /app/assets/images/images/wijrating

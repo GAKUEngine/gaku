@@ -1,54 +1,91 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.chooser_field.plural') do
   = fields_for :preset do |f|
-    .row
-      .col-md-6
-        = f.label t(:'surname')
-        = f.check_box 'chooser_fields[surname]', {checked: preset_checked?(:surname)}
 
     .row
       .col-md-6
         = f.label t(:'name')
-        = f.check_box 'chooser_fields[name]', { checked: preset_checked?(:name) }
+        = f.check_box 'chooser_fields[show_name]' , {checked: preset_checked?(:show_name)}
 
     .row
       .col-md-6
-        = f.label (:'birth_date')
-        = f.check_box 'chooser_fields[birth_date]', {checked: preset_checked?(:birth_date)}
+        = f.label t(:'middle_name')
+        = f.check_box 'chooser_fields[show_middle_name]' , {checked: preset_checked?(:show_middle_name)}
+
+    .row
+      .col-md-6
+        = f.label t(:'surname')
+        = f.check_box 'chooser_fields[show_surname]' , {checked: preset_checked?(:show_surname)}
+
+    .row
+      .col-md-6
+        = f.label t(:'birth_date')
+        = f.check_box 'chooser_fields[show_birth_date]' , {checked: preset_checked?(:show_birth_date)}
 
     .row
       .col-md-6
         = f.label t(:'gender.label')
-        = f.check_box 'chooser_fields[sex]', {checked: preset_checked?(:sex)}
+        = f.check_box 'chooser_fields[show_gender]' , {checked: preset_checked?(:show_gender)}
+
+    .row
+      .col-md-6
+        = f.label t(:'user.singular')
+        = f.check_box 'chooser_fields[show_user]' , {checked: preset_checked?(:show_user)}
+
+    .row
+      .col-md-6
+        = f.label t(:'code')
+        = f.check_box 'chooser_fields[show_code]' , {checked: preset_checked?(:show_code)}
+
+    .row
+      .col-md-6
+        = f.label t(:'student.foreign_id_code')
+        = f.check_box 'chooser_fields[show_foreign_id_code]' , {checked: preset_checked?(:show_foreign_id_code)}
+
+    .row
+      .col-md-6
+        = f.label t(:'enrollment_status.singular')
+        = f.check_box 'chooser_fields[show_enrollment_status]', {checked: preset_checked?(:show_enrollment_status)}
 
     .row
       .col-md-6
         = f.label t(:'class_group.name')
-        = f.check_box 'chooser_fields[class_name]', {checked: preset_checked?(:class_name)}
+        = f.check_box 'chooser_fields[show_class_name]', {checked: preset_checked?(:show_class_name)}
+
 
     .row
       .col-md-6
-        = f.label t(:'class_group_enrollment.seat_number')
-        = f.check_box 'chooser_fields[seat_number]', {checked: preset_checked?(:seat_number)}
+        = f.label t(:'specialty.singular')
+        = f.check_box 'chooser_fields[show_specialty]', {checked: preset_checked?(:show_specialty)}
 
     .row
       .col-md-6
         = f.label t(:'admitted')
-        = f.check_box 'chooser_fields[admitted_on]', {checked: preset_checked?(:admitted_on)}
+        = f.check_box 'chooser_fields[show_admitted]', {checked: preset_checked?(:show_admitted)}
+
+    .row
+      .col-md-6
+        = f.label t(:'graduated')
+        = f.check_box 'chooser_fields[show_graduated]', {checked: preset_checked?(:show_graduated)}
 
     .row
       .col-md-6
         = f.label t(:'address.primary')
-        = f.check_box 'chooser_fields[primary_address]', {checked: preset_checked?(:primary_address)}
+        = f.check_box 'chooser_fields[show_primary_address]', {checked: preset_checked?(:show_primary_address)}
 
     .row
       .col-md-6
         = f.label t(:'contact.primary')
-        = f.check_box 'chooser_fields[primary_contact]', {checked: preset_checked?(:primary_contact)}
+        = f.check_box 'chooser_fields[show_primary_contact]', {checked: preset_checked?(:show_primary_contact)}
 
     .row
       .col-md-6
-        = f.label t(:'assignment.plural')
-        = f.check_box 'chooser_fields[assignments]', {checked: preset_checked?(:assignments)}
+        = f.label t(:'contact.primary_email')
+        = f.check_box 'chooser_fields[show_primary_email]', {checked: preset_checked?(:show_primary_email)}
+
+    .row
+      .col-md-6
+        = f.label t(:'personal_information')
+        = f.check_box 'chooser_fields[show_personal_information]', {checked: preset_checked?(:show_personal_information)}
 
   = buttons_for @preset, resource: 'admin-preset'
 

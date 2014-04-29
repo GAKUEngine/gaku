@@ -9,8 +9,10 @@ Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
 end
 
-desc "Release to gemcutter"
+desc 'Release to gemcutter'
 task :release do
-  version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
-  cmd = "cd pkg && gem push gaku_sample-#{version}.gem"; puts cmd; system cmd
+  version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+  cmd = "cd pkg && gem push gaku_sample-#{version}.gem"
+  puts cmd
+  system cmd
 end

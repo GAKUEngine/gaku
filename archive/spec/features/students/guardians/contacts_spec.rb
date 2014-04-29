@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Student Guardian Contacts' do
 
-  before(:all) { set_resource 'student-guardian-contact' }
+  before(:all) { set_resource 'guardian-contact' }
   before { as :admin }
 
   let(:student) { create(:student) }
@@ -21,7 +21,7 @@ describe 'Student Guardian Contacts' do
         @resource = guardian_with_contact
         student.guardians << @resource
         visit gaku.edit_student_guardian_path(student, @resource)
-        click tab_link
+        click '#guardian-contacts-menu a'
       end
 
       it_behaves_like 'delete contact', @resource

@@ -20,7 +20,7 @@
 = render 'gaku/students/tabs'
 
 = footer do
-  .col-md-12
+  .col-md-6
     = link_to_index students_path
   .col-md-6
-    /= link_to_report student_path(student, format: :pdf)
+    = link_to t(:'edit'), edit_student_path, class: 'btn btn-default col-md-12'

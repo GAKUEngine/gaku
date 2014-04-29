@@ -1,13 +1,12 @@
 module Gaku
   class TeachersController < GakuController
+    include PictureController
 
     decorates_assigned :teacher
 
-    #respond_to :js,   only: %i( new create destroy )
-    #respond_to :html, only: %i( index edit update show )
     respond_to :html, :js
 
-    before_action :set_teacher,          only: %i( edit show update destroy )
+    before_action :set_teacher, only: %i( edit show update destroy )
 
     def destroy
       @teacher.destroy
@@ -50,6 +49,10 @@ module Gaku
 
     private
 
+    def includes
+      [[contacts: :contact_type, addresses: :country]]
+    end
+
     def teacher_params
       params.require(:teacher).permit(attributes)
     end
@@ -59,7 +62,7 @@ module Gaku
     end
 
     def set_teacher
-      @teacher = Teacher.find(params[:id])
+      @teacher = Teacher.includes(includes).find(params[:id])
       set_notable
     end
 

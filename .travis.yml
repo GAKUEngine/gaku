@@ -1,3 +1,9 @@
+services:
+  - redis-server
+
+addons:
+  postgresql: 9.3
+
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
@@ -7,12 +13,12 @@ before_script:
   - sudo /etc/init.d/postgresql restart
   - psql -c 'create database gaku_test;' -U postgres
 
-bundler_args: --without production
+bundler_args: -j4 --without development production
 
 env:
   - GEM=core SUITE=spec/models
-  - GEM=frontend SUITE=spec/controllers spec/integration spec/routing
-  - GEM=admin SUITE=spec/controllers spec/routing
+  - GEM=frontend SUITE="spec/controllers spec/routing"
+  - GEM=admin SUITE="spec/controllers spec/routing"
   - GEM=frontend SUITE=spec/features SELENIUM=1
   - GEM=admin SUITE=spec/features SELENIUM=1
   - GEM=archive SELENIUM=1
@@ -34,4 +40,4 @@ notifications:
       - "irc.freenode.org#gaku"
 
 rvm:
-  - 2.0.0
+  - 2.1.0

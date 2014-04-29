@@ -11,10 +11,11 @@ module Gaku
       if params[:course_id]
         @exams = Course.find(params[:course_id]).syllabus.exams
       else
-        @search = Exam.search(params[:q])
+        @search = Exam.includes(:department).search(params[:q])
         results = @search.result(distinct: true)
         @exams = results.page(params[:page])
         @exam = Exam.new
+        @exam_sessions = ExamSession.all
       end
 
       @exam.exam_portions.build
@@ -36,8 +37,10 @@ module Gaku
     end
 
     def create
-      @exam = Exam.create(exam_params)
-      @exam.save
+      @exam = Exam.new(exam_params)
+      if @exam.save
+        @exam.use_primary_grading_method_set
+      end
       set_count
       respond_with @exam
     end
@@ -126,14 +129,25 @@ module Gaku
       ]
     end
 
+    def includes
+      { grading_method_connectors: :grading_method }
+    end
+
     def set_exam
-      @exam = Exam.find(params[:id])
+      @exam = Exam.includes(includes).find(params[:id])
       set_notable
+      set_gradable
     end
 
     def set_notable
       @notable = @exam
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
+      @notable_resource = @notable.class.to_s.demodulize.underscore.dasherize
+
+    end
+
+    def set_gradable
+      @gradable = @exam
+      @gradable_resource = @gradable.class.to_s.demodulize.underscore.dasherize
     end
 
     def set_count

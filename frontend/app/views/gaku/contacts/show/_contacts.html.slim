@@ -1,0 +1,15 @@
+- prepare_resource_name(nested_resources, :contact)
+= panel_for "#{@resource_name.pluralize}-panel" do
+  .panel-heading
+    = print_count nested_resources.last.contacts_count, t(:'contact.plural')
+  .panel-body
+    .table-responsive
+    table.table.table-condensed.table-hover
+      thead
+        tr
+          th = t(:'contact.contact_type')
+          th = t(:'contact.data')
+          th = t(:'contact.details')
+          th = t(:'contact.emergency')
+      tbody
+        = render partial: 'gaku/contacts/show/contact', collection: nested_resources.last.contacts, as: :contact, locals: {nested_resources: nested_resources}
