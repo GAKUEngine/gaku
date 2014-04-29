@@ -5,9 +5,7 @@
         = t(:'student.selection')
         span.chosen-count
       .panel-body
-        = form_tag(enroll_students_class_group_enrollments_path, method: :post, id: "enroll-to-class-form", remote: true) do
-          = hidden_field_tag "class_group_id", @class_group.id
-          = hidden_field_tag "source", "class_groups"
+        = remote_form_for [:create_from_collection, @enrollmentable, @enrollment], { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.singular') } do |f|
           table#chosen-table.table
             tbody#students-checked
               - @student_selection.each do |student|
@@ -15,4 +13,4 @@
                 input type='hidden' name='selected_students[]' value="#{student['id']}"
 
           #chosen-actions.panel-footer
-            = submit_tag t(:enroll), class: 'btn btn-success'
+            = buttons_for @enrollment, { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.save') }

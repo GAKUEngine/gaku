@@ -31,7 +31,12 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern :enrollmentable do
-    resources :enrollments, except: :index
+    resources :enrollments, except: :index do
+      collection do
+        get :student_selection
+        post :create_from_collection
+      end
+    end
   end
 
   concern(:primary)         { patch :make_primary, on: :member }
