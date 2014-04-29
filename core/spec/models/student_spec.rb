@@ -191,6 +191,44 @@ describe Gaku::Student do
       end
     end
 
+    context 'class_groups_count' do
+
+      let(:class_group) { create(:class_group) }
+      let(:student_with_class_group) { create(:student, :with_class_group) }
+
+      it 'increments class_groups_count' do
+        expect do
+          student.class_groups << class_group
+          student.reload
+        end.to change { student.class_groups_count }.by 1
+      end
+
+      it 'decrements class_groups_count' do
+        expect do
+          student_with_class_group.class_groups.last.destroy
+        end.to change { student_with_class_group.reload.class_groups_count }.by -1
+      end
+    end
+
+    context 'extracurricular_activities_count' do
+
+      let(:extracurricular_activity) { create(:extracurricular_activity) }
+      let(:student_with_with_extracurricular_activity) { create(:student, :with_extracurricular_activity) }
+
+      it 'increments class_groups_count' do
+        expect do
+          student.extracurricular_activities << extracurricular_activity
+          student.reload
+        end.to change { student.extracurricular_activities_count }.by 1
+      end
+
+      it 'decrements extracurricular_activities_count' do
+        expect do
+          student_with_with_extracurricular_activity.extracurricular_activities.last.destroy
+        end.to change { student_with_with_extracurricular_activity.reload.extracurricular_activities_count }.by -1
+      end
+    end
+
     context 'addresses_count' do
 
       let(:address) { build(:address) }
