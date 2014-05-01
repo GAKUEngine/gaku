@@ -38,6 +38,24 @@ describe Gaku::ClassGroup do
         end.to change { class_group_with_note.reload.notes_count }.by -1
       end
     end
+
+    context 'enrollments_count' do
+
+      let(:student) { build(:student) }
+      let(:class_group_with_enrollment) { create(:class_group, :with_enrollment) }
+
+      it 'increments enrollments_count' do
+        expect do
+          class_group.students << student
+        end.to change { class_group.reload.enrollments_count }.by 1
+      end
+
+      it 'decrements enrollments_count' do
+        expect do
+          class_group_with_enrollment.students.last.destroy
+        end.to change { class_group_with_enrollment.reload.enrollments_count }.by -1
+      end
+    end
   end
 
 end

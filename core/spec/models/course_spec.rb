@@ -59,21 +59,21 @@ describe Gaku::Course do
       end
     end
 
-    context 'students_count' do
+    context 'enrollments_count' do
 
       let(:student) { build(:student) }
-      let(:course_with_student) { create(:course, :with_student) }
+      let(:course_with_enrollment) { create(:course, :with_enrollment) }
 
-      it 'increments students_count' do
+      it 'increments enrollments_count' do
         expect do
           course.students << student
-        end.to change { course.reload.students_count }.by 1
+        end.to change { course.reload.enrollments_count }.by 1
       end
 
-      it 'decrements students_count' do
+      it 'decrements enrollments_count' do
         expect do
-          course_with_student.students.last.destroy
-        end.to change { course_with_student.reload.students_count }.by -1
+          course_with_enrollment.students.last.destroy
+        end.to change { course_with_enrollment.reload.enrollments_count }.by -1
       end
     end
 

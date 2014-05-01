@@ -4,4 +4,3 @@ $("#new-<%= @enrollmentable_resource %>-enrollment").slide();
 $("#new-<%= @enrollmentable_resource %>-enrollment-link").show();
 $("#<%= @enrollmentable_resource %>-enrollments-tab-link").html("<%= print_count(@count, t(:'enrollment.plural')) %>");
 $(".<%= @enrollmentable_resource %>-enrollments-count").html("<%= print_count(@count, t(:'enrollment.list')) %>");
-console.log('#<%= @enrollmentable_resource %>-enrollments-index tbody');

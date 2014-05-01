@@ -3,7 +3,7 @@
     ul.nav.nav-tabs.nav-justified
       li#class_group_students_tab.active
         a#class-group-enrollments-tab-link data-toggle="tab" href="#class_group_enrollments"
-          = print_count @class_group.enrollments.count, t(:'enrollment.plural')
+          = print_count @class_group.enrollments_count, t(:'enrollment.plural')
       li
         a#class-group-semester-connectors-tab-link data-toggle="tab" href="#semesters"
           = print_count @class_group.semesters.count, t(:'semester.plural')
