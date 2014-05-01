@@ -1,30 +1,40 @@
 require 'spec_helper'
 
-describe 'EnrollmentsController' do
+describe 'Extracurricular Activity Enrollments' do
 
-  let!(:class_group) { create(:class_group) }
+  let!(:extracurricular_activity) { create(:extracurricular_activity) }
   let!(:student) { create(:student) }
   let(:student2) { create(:student) }
 
   before { as :admin }
 
   describe 'XHR GET :new' do
-    before { get "/class_groups/#{class_group.id}/enrollments/new", format: :js }
+    before { get "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/new", format: :js }
 
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :new template') { template? :new }
-    it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq class_group }
-    it('assigns @enrollmentable_resource') { expect(assigns(:enrollmentable_resource)).to eq 'class-group' }
+    it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq extracurricular_activity }
+
+    it('assigns @enrollmentable_resource') do
+      expect(assigns(:enrollmentable_resource)).to eq 'extracurricular-activity'
+    end
+
     it('assigns @students') { expect(assigns(:students)).to eq [student] }
   end
 
   describe 'XHR GET :student_selection' do
-    before { get "/class_groups/#{class_group.id}/enrollments/student_selection", format: :js }
+    before do
+      get "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/student_selection", format: :js
+    end
 
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :student_selection template') { template? :student_selection }
-    it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq class_group }
-    it('assigns @enrollmentable_resource') { expect(assigns(:enrollmentable_resource)).to eq 'class-group' }
+    it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq extracurricular_activity }
+
+    it('assigns @enrollmentable_resource') do
+      expect(assigns(:enrollmentable_resource)).to eq 'extracurricular-activity'
+    end
+
     it('assigns @enrollment') { expect(assigns(:enrollment)).to be_a_new Gaku::Enrollment }
     it('assigns @student_selection') { expect(assigns(:student_selection)).to_not be_nil }
   end
@@ -32,7 +42,9 @@ describe 'EnrollmentsController' do
   describe 'XHR POST #create' do
     context 'with valid attributes' do
       let(:subject) do
-        post "/class_groups/#{class_group.id}/enrollments", format: :js, enrollment: { student_id: student.id }
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments",
+             format: :js,
+             enrollment: { student_id: student.id }
       end
 
       it('is successful') { expect(subject).to eq 200 }
@@ -55,12 +67,12 @@ describe 'EnrollmentsController' do
 
       it 'assigns @enrollmentable' do
         subject
-        expect(assigns(:enrollmentable)).to eq class_group
+        expect(assigns(:enrollmentable)).to eq extracurricular_activity
       end
 
       it 'assigns @enrollmentable_resource' do
         subject
-        expect(assigns(:enrollmentable_resource)).to eq 'class-group'
+        expect(assigns(:enrollmentable_resource)).to eq 'extracurricular-activity'
       end
     end
   end
@@ -68,7 +80,7 @@ describe 'EnrollmentsController' do
   describe 'XHR POST #create_from_selection' do
     context 'with valid student' do
       let(:subject) do
-        post "/class_groups/#{class_group.id}/enrollments/create_from_selection",
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/create_from_selection",
              format: :js , selected_students: ["#{student.id}", "#{student2.id}"]
       end
 
@@ -95,8 +107,9 @@ describe 'EnrollmentsController' do
 
     context 'with invalid student' do
       subject do
-        post "/class_groups/#{class_group.id}/enrollments/create_from_selection", format: :js,
-                                                                                  selected_students: ['666666']
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/create_from_selection",
+             format: :js,
+             selected_students: ['666666']
       end
 
       it('is successful') { expect(subject).to eq 200 }
@@ -125,12 +138,12 @@ describe 'EnrollmentsController' do
 
     context 'with duplicated student' do
       subject do
-        post "/class_groups/#{class_group.id}/enrollments/create_from_selection",
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/create_from_selection",
              format: :js,
              selected_students: ["#{student.id}", "#{student2.id}"]
       end
 
-      before { class_group.students << student }
+      before { extracurricular_activity.students << student }
 
       it('is successful') { expect(subject).to eq 200 }
       it('creates new enrollment') { expect { subject }.to change(Gaku::Enrollment, :count).by(1) }
@@ -160,7 +173,7 @@ describe 'EnrollmentsController' do
 
     context 'with valid and invalid student' do
       subject do
-        post "/class_groups/#{class_group.id}/enrollments/create_from_selection",
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/create_from_selection",
              format: :js,
              selected_students: ["#{student.id}", '666666']
       end
@@ -192,7 +205,8 @@ describe 'EnrollmentsController' do
 
     context 'without :selected_students params' do
       subject do
-        post "/class_groups/#{class_group.id}/enrollments/create_from_selection", format: :js
+        post "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/create_from_selection",
+             format: :js
       end
 
       it('is successful') { expect(subject).to eq 302 }
@@ -200,7 +214,7 @@ describe 'EnrollmentsController' do
 
       it 'redirects' do
         subject
-        redirect_to? "/class_groups/#{class_group.id}/enrollments"
+        redirect_to? "/extracurricular_activities/#{extracurricular_activity.id}/enrollments"
       end
 
       it 'renders flash[:error]' do
@@ -218,8 +232,10 @@ describe 'EnrollmentsController' do
 
   describe 'XHR DELETE #destroy' do
 
-    let(:enrollment) { create(:class_group_enrollment) }
-    subject { delete "/class_groups/#{class_group.id}/enrollments/#{enrollment.id}", format: :js }
+    let(:enrollment) { create(:extracurricular_activity_enrollment) }
+    subject do
+      delete "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/#{enrollment.id}", format: :js
+    end
 
     it 'deletes enrollment' do
       enrollment
