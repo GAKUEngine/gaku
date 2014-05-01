@@ -24,6 +24,7 @@ end
 
 RSpec.configure do |config|
   config.include Gaku::Testing::AuthHelpers::Controller, type: :controller
+  config.include Gaku::Testing::AuthHelpers::Feature, type: :request
   config.include Gaku::Testing::AuthHelpers::Feature, type: :feature
 end
 

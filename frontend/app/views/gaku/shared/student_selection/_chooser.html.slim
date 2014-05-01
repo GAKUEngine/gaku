@@ -5,7 +5,7 @@
         = t(:'student.selection')
         span.chosen-count
       .panel-body
-        = remote_form_for [:create_from_collection, @enrollmentable, @enrollment], { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.singular') } do |f|
+        = remote_form_for [:create_from_selection, @enrollmentable, @enrollment], { resource: "#{@enrollmentable_resource}-enrollment", label: t(:'enrollment.singular') } do |f|
           table#chosen-table.table
             tbody#students-checked
               - @student_selection.each do |student|

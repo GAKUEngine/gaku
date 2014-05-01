@@ -34,7 +34,7 @@ Gaku::Core::Engine.routes.draw do
     resources :enrollments, except: :index do
       collection do
         get :student_selection
-        post :create_from_collection
+        post :create_from_selection
       end
     end
   end
