@@ -27,4 +27,6 @@ AllCops:
     - '**/db/schema.rb'
     - '**/pkg/**'
     - 'pkg/**'
+    - '**/config/initializers/**'
+    - '**/db/migrate/**'
   RunRailsCops: false
