@@ -22,4 +22,11 @@ EmptyLinesAroundBody:
 AllCops:
   Exclude:
     - '**/spec/dummy/**'
+    - 'bin/**'
+    - '**/bin/**'
+    - '**/db/schema.rb'
+    - '**/pkg/**'
+    - 'pkg/**'
+    - '**/config/initializers/**'
+    - '**/db/migrate/**'
   RunRailsCops: false

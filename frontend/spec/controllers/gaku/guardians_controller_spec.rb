@@ -8,7 +8,6 @@ describe Gaku::GuardiansController do
   context 'as admin' do
     before { as :admin }
 
-
     context 'HTML' do
 
       describe 'DELETE #destroy' do
@@ -75,7 +74,7 @@ describe Gaku::GuardiansController do
 
     context 'JS' do
 
-      describe 'JS GET #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
@@ -83,7 +82,7 @@ describe Gaku::GuardiansController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, guardian: attributes_for(:guardian), student_id: student.id
@@ -107,6 +106,14 @@ describe Gaku::GuardiansController do
             expect(assigns(:count)).to eq 1
           end
         end
+      end
+
+      describe 'XHR GET #edit' do
+        before { gaku_js_get :edit, id: guardian, student_id: student.id }
+
+        it { should respond_with 200 }
+        it('assigns @guardian') { expect(assigns(:guardian)).to eq guardian }
+        it('renders the :edit template') { template? :edit }
       end
 
     end

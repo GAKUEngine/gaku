@@ -1,14 +1,15 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.grading.singular') do
   = fields_for :preset do |f|
     .row
       .col-md-6
         = f.fields_for :grading do |g|
           = g.label t(:'preset.grading.grading_method')
-          = g.text_field :method, value: @preset['grading']['method']
+          = g.text_field :method, value: @preset['grading']['method'], class: 'form-control'
 
       .col-md-6
         = f.fields_for :grading do |g|
           = g.label t(:'preset.grading.grading_scheme')
-          = g.text_field :scheme, value: @preset['grading']['scheme']
+          = g.text_field :scheme, value: @preset['grading']['scheme'], class: 'form-control'
+  br
 
   = buttons_for @preset, resource: 'admin-preset'

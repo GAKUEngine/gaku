@@ -1,0 +1,20 @@
+showNotice("<%= render_flash %>");
+
+$('#admin-school-campus-contacts-index tbody').append('<%= j render("contact", {contact: @contact}) %>');
+$("#new-admin-school-campus-contact-link").show();
+$('#new-admin-school-campus-contact').slide();
+
+$('.admin-school-campus-contacts-count').html("<%= print_count(@count, t(:'contact.list')) %>");
+$('.contacts-count').html("<%= @count %>");
+
+<% if @contact.primary? %>
+  $('#admin-school-campus-contacts-index tbody tr').each(function(){
+    $(this).children('td.primary-contact').find('a').removeClass('btn-primary')
+  });
+  $("#contact-<%= @contact.id %>").children('td.primary-contact')
+                                                .find('a')
+                                                .addClass('btn-primary')
+
+
+  $('#primary-contact').html("<%= @contact.contact_type.name + ':' + @contact.data + '(' + @contact.details + ')' %>");
+<% end %>

@@ -64,11 +64,6 @@ describe 'Student Simple Grades' do
         end
       end
 
-      it 'cancels editting' do
-        click '.back-modal-link'
-        within(table) { has_content? simple_grade.score }
-      end
-
     end
 
     it 'deletes' do

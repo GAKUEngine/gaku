@@ -1,17 +1,14 @@
 module Gaku
   class Admin::AttendanceTypesController < Admin::BaseController
 
-    #load_and_authorize_resource class: AttendanceType
-
     respond_to :json, only: :index
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_attendance_type, only: %i( edit update destroy )
 
     def index
       @attendance_types = AttendanceType.all
-      @count = AttendanceType.count
+      set_count
       respond_with @attendance_types
     end
 
@@ -23,7 +20,7 @@ module Gaku
     def create
       @attendance_type = AttendanceType.new(attendance_type_params)
       @attendance_type.save
-      @count = AttendanceType.count
+      set_count
       respond_with @attendance_type
     end
 
@@ -37,7 +34,7 @@ module Gaku
 
     def destroy
       @attendance_type.destroy
-      @count = AttendanceType.count
+      set_count
       respond_with @attendance_type
     end
 
@@ -55,6 +52,9 @@ module Gaku
       %i(name color_code counted_absent disable_credit credit_rate auto_credit)
     end
 
+    def set_count
+      @count = AttendanceType.count
+    end
+
   end
 end
-

@@ -12,7 +12,7 @@ describe 'Student Contact Changes' do
 
   it 'saves edits', type: 'contact', versioning: true do
     old_data = @contact.data
-    @contact.update_attributes(data: '123456789')
+    Gaku::ContactUpdation.new(@contact).update(data: '123456789')
     visit gaku.admin_changes_student_contacts_path
     page.should have_content old_data
     page.should have_content 'update'

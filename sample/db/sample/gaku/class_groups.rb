@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-school_year = Gaku::SchoolYear.where(starting: Time.now - 3.months, ending: Time.now + 9.months).first_or_create!
+Gaku::SchoolYear.where(starting: Time.now - 3.months, ending: Time.now + 9.months).first_or_create!
 active_semester = Gaku::Semester.where(starting: Time.now - 2.months, ending: Time.now + 2.months).first_or_create!
 not_active_semester = Gaku::Semester.where(starting: Time.now + 3.months, ending: Time.now + 9.months).first_or_create!
 

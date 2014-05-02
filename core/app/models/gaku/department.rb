@@ -1,6 +1,5 @@
 module Gaku
   class Department < ActiveRecord::Base
-
     has_many :specialties
     has_many :syllabuses
     has_many :exams
@@ -12,6 +11,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

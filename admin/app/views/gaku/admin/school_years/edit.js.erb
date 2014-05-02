@@ -1,5 +1,7 @@
-$('#modal-dialogs').html('<%= j render("modal", {school_year: @school_year}) %>');
-$('#edit-school-year-modal').modal('show');
+// $('#modal-dialogs').html('<%= j render("modal", {school_year: @school_year}) %>');
+// $('#edit-school-year-modal').modal('show');
+$('#ajax-load').html('<%=j render "edit_form" %>')
+
 $('.remote-form').enableValidations();
 $('.datepicker').datepicker_i18n();
 

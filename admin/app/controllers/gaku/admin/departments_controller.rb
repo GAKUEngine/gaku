@@ -1,16 +1,13 @@
 module Gaku
   class Admin::DepartmentsController < Admin::BaseController
 
-    #load_and_authorize_resource class: Department
-
-    respond_to :js,   only: %i( new create edit update destroy )
-    respond_to :html, only: :index
+    respond_to :js,   only: %i( new create edit update destroy index )
 
     before_action :set_department, only: %i( edit update destroy )
 
     def index
       @departments = Department.all
-      @count = Department.count
+      set_count
       respond_with @departments
     end
 
@@ -22,7 +19,7 @@ module Gaku
     def create
       @department = Department.new(department_params)
       @department.save
-      @count = Department.count
+      set_count
       respond_with @department
     end
 
@@ -36,7 +33,7 @@ module Gaku
 
     def destroy
       @department.destroy
-      @count = Department.count
+      set_count
       respond_with @department
     end
 
@@ -50,6 +47,9 @@ module Gaku
       params.require(:department).permit(:name)
     end
 
+    def set_count
+      @count = Department.count
+    end
 
   end
 end

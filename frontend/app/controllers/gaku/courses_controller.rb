@@ -5,11 +5,9 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    # respond_to :js,   only: %i( new create destroy recovery )
-    # respond_to :html, only: %i( index edit update show soft_delete show_deleted )
     respond_to :html, :js
 
-    before_action :set_course,   only: %i( edit show update destroy student_chooser )
+    before_action :set_course,   only: %i( edit show update destroy )
     before_action :set_syllabuses
 
     def destroy
@@ -66,6 +64,7 @@ module Gaku
       @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
       set_notable
       set_gradable
+      set_enrollmentable
       set_semesterable
     end
 
@@ -77,6 +76,11 @@ module Gaku
     def set_gradable
       @gradable = @course
       @gradable_resource = @gradable.class.to_s.demodulize.underscore.dasherize
+    end
+
+    def set_enrollmentable
+      @enrollmentable = @course
+      @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
     end
 
     def set_semesterable

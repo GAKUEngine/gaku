@@ -1,6 +1,5 @@
 module Gaku
   class Level < ActiveRecord::Base
-
     belongs_to :school
 
     has_many :program_levels
@@ -12,6 +11,5 @@ module Gaku
     def to_s
       name
     end
-
   end
 end

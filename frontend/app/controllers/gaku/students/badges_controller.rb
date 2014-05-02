@@ -19,6 +19,7 @@
     end
 
     def edit
+      respond_with @badge
     end
 
     def update

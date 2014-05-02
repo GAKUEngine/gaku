@@ -10,7 +10,10 @@ describe Gaku::CourseGroupEnrollment do
   describe 'validations' do
     it { should validate_presence_of :course_group_id }
     it { should validate_presence_of :course_id }
-    it { should validate_uniqueness_of(:course_id).scoped_to(:course_group_id).with_message(/Already enrolled to this course group!/) }
+    it do
+      should validate_uniqueness_of(:course_id).scoped_to(:course_group_id)
+                                               .with_message(/Already enrolled to this course group!/)
+    end
   end
 
 end

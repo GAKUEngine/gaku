@@ -1,0 +1,7 @@
+$('#admin-badge-types-index tbody').append('<%= j render("badge_type", {badge_type: @badge_type}) %>');
+
+$('#new-admin-badge-type').slide();
+$('#new-admin-badge-type-link').show();
+
+showNotice("<%= render_flash %>");
+$('.admin-badge-types-count').html("<%= print_count(@count, t(:'badge_type.list')) %>");

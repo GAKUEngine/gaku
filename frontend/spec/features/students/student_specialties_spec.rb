@@ -58,10 +58,6 @@ describe 'Student Specialties' do
         end
       end
 
-      it 'cancels editting' do
-        click '.back-modal-link'
-        within(table) { has_content? specialty.name }
-      end
     end
 
     it 'delete' do

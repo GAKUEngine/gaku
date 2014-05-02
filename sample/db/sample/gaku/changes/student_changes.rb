@@ -25,7 +25,7 @@ batch_create(@count[:changes]) do
   student.enrollment_status_code = enrollment_status.code
   student.commute_method_type = commute_method_type
   student.scholarship_status = scholarship_status
-  student.foreign_id_code = "foreign_code_#{counter+100}"
+  student.foreign_id_code = "foreign_code_#{counter + 100}"
   student.save!
 
   student.soft_delete

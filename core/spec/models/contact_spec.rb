@@ -12,12 +12,19 @@ describe Gaku::Contact do
     it { should validate_presence_of :contact_type }
   end
 
-  describe 'methods' do
+  describe 'instance methods' do
     it { should respond_to :name }
     it { should respond_to :primary? }
     it { should respond_to :make_primary }
-    xit 'ensure_first_is_primary'
-    xit 'remove_other_primary'
+  end
+
+  describe 'class methods' do
+    it('responds to .teachers') { expect(Gaku::Contact).to respond_to(:teachers) }
+    it('responds to .students') { expect(Gaku::Contact).to respond_to(:students) }
+    it('responds to .guardians') { expect(Gaku::Contact).to respond_to(:guardians) }
+    it('responds to .primary_email') { expect(Gaku::Contact).to respond_to(:primary_email) }
+    it('responds to .primary') { expect(Gaku::Contact).to respond_to(:primary) }
+    it('responds to .secondary') { expect(Gaku::Contact).to respond_to(:secondary) }
   end
 
 end

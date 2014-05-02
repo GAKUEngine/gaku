@@ -22,7 +22,6 @@ module Gaku
       else
         @student.enrollment_status_code = @enrolled_status.code
       end
-      @student.class_group_enrollments.new
       respond_with @student
     end
 

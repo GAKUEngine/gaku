@@ -1,5 +1,11 @@
-= render 'show_table'
+= panel_for 'teacher-panel' do
+  = panel_header 'Teacher information', @teacher
 
-= footer do
-  .col-md-12
-    = link_to_index teachers_path
+  table.table.table-bordered.th-center
+    tbody
+      = render 'gaku/shared/fields/person_show_table', person: @teacher
+      = render 'gaku/shared/fields/address_and_contact_show_table', person: @teacher
+
+= render 'gaku/addresses/show/addresses', nested_resources: [@teacher]
+= render 'gaku/contacts/show/contacts', nested_resources: [@teacher]
+= render 'gaku/notes/show/notes'

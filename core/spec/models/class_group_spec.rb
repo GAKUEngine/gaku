@@ -4,14 +4,8 @@ describe Gaku::ClassGroup do
 
   describe 'concerns' do
     it_behaves_like 'notable'
+    it_behaves_like 'enrollmentable'
     it_behaves_like 'semesterable'
-  end
-
-  describe 'associations' do
-    it { should have_many :enrollments }
-    it { should have_many(:students).through(:enrollments) }
-    it { should have_many(:class_group_course_enrollments).dependent(:destroy) }
-    it { should have_many(:courses).through(:class_group_course_enrollments) }
   end
 
   describe 'validations' do
@@ -35,13 +29,31 @@ describe Gaku::ClassGroup do
       it 'increments notes_count' do
         expect do
           class_group.notes << note
-        end.to change { class_group.reload.notes_count }.by 1
+        end.to change { class_group.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           class_group_with_note.notes.last.destroy
-        end.to change { class_group_with_note.reload.notes_count }.by -1
+        end.to change { class_group_with_note.reload.notes_count }.by(-1)
+      end
+    end
+
+    context 'enrollments_count' do
+
+      let(:student) { build(:student) }
+      let(:class_group_with_enrollment) { create(:class_group, :with_enrollment) }
+
+      it 'increments enrollments_count' do
+        expect do
+          class_group.students << student
+        end.to change { class_group.reload.enrollments_count }.by(1)
+      end
+
+      it 'decrements enrollments_count' do
+        expect do
+          class_group_with_enrollment.students.last.destroy
+        end.to change { class_group_with_enrollment.reload.enrollments_count }.by(-1)
       end
     end
   end

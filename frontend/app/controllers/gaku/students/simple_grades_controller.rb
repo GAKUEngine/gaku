@@ -5,7 +5,7 @@ module Gaku
 
     before_action :student
     before_action :set_simple_grade_types, only: %i( new edit )
-    before_action :set_simple_grade, only: %i( edit update destroy )
+    before_action :set_simple_grade,       only: %i( edit update destroy )
 
     def new
       @simple_grade = SimpleGrade.new

@@ -43,5 +43,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryGirl::Syntax::Methods
   config.include Gaku::Core::UrlHelpers
+  config.include HandyControllerHelpers::AllHelpers, type: :request
+
 
 end

@@ -1,4 +1,3 @@
 = form_tag country_states_admin_states_path, { remote: true, class: 'form-inline' } do
-  = label :state, t(:'address.country')
-  = collection_select :state, :country_iso, Gaku::Country.all, :iso, :name, { selected: @default_country.try(:iso), prompt: t(:'address.choose_country') } , { class: 'input-normal', id: 'select-country' }
+  = collection_select :state, :country_iso, Gaku::Country.all, :iso, :name, { selected: @default_country.try(:iso), prompt: t(:'address.choose_country') } , { class: 'input-normal form-control', id: 'select-country' }
   = submit_tag 'Show States', class: 'btn btn-primary', id: 'admin-show-country-states-submit'

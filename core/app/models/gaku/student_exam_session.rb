@@ -5,9 +5,7 @@ module Gaku
 
     validates :exam_session_id, presence: true
     validates :student_id,
-          presence: true,
-          uniqueness: {
-                        scope: :exam_session_id,
-                      }
+              presence: true,
+              uniqueness: { scope: :exam_session_id }
   end
 end

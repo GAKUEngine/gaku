@@ -1,4 +1,4 @@
-= normal_form_for [:admin, @preset], resource: 'admin-preset', label: 'nil' do
+= remote_form_for [:admin, @preset], resource: 'admin-preset', label: t(:'preset.chooser_field.plural') do
   = fields_for :preset do |f|
 
     .row
