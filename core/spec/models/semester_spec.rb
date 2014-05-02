@@ -1,16 +1,16 @@
 require 'spec_helper_models'
 
 describe Gaku::Semester do
-  let(:school_year) {school_year =  create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8'))}
+  let(:school_year) do
+    create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8'))
+  end
 
   describe 'associations' do
-    it { should have_many :semester_courses }
-    it { should have_many(:courses).through(:semester_courses) }
+    it { should have_many :semester_connectors }
+    it { should have_many(:class_groups).through(:semester_connectors).source(:semesterable) }
+    it { should have_many(:courses).through(:semester_connectors).source(:semesterable) }
 
-    it { should have_many :semester_class_groups }
-    it { should have_many(:class_groups).through(:semester_class_groups) }
-
-    it { should belong_to :school_year}
+    it { should belong_to :school_year }
   end
 
   describe 'validations' do
@@ -36,8 +36,6 @@ describe Gaku::Semester do
       end
     end
 
-
-    xit 'uniqness of class group for semester'
   end
 
 end

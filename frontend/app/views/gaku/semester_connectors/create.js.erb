@@ -1,0 +1,7 @@
+showNotice("<%= render_flash %>");
+$("#<%= @semesterable_resource %>-semester-connectors-index tbody").append('<%= j render("semester_connector", { semester_connector: @semester_connector }) %>');
+$("#new-<%= @semesterable_resource %>-semester-connector").slide();
+$("#new-<%= @semesterable_resource %>-semester-connector-link").show();
+$("#<%= @semesterable_resource %>-semester-connectors-tab-link").html("<%= print_count(@count, t(:'semester.plural')) %>");
+$(".<%= @semesterable_resource %>-semester-connectors-count").html("<%= print_count(@count, t(:'semester.list')) %>");
+

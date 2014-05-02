@@ -60,6 +60,20 @@ FactoryGirl.define do
     end
   end
 
+  trait :with_enrollment do
+    after(:create) do |resource|
+      resource.enrollments.create(student: create(:student))
+    end
+  end
+
+  trait :with_enrollments do
+    after(:create) do |resource|
+      2.times do
+        resource.enrollments.create(student: create(:student))
+      end
+    end
+  end
+
   trait :with_semesters do
     after(:create) do |resource|
       2.times do

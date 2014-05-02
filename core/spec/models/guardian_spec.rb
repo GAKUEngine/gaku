@@ -15,8 +15,15 @@ describe Gaku::Guardian do
     it { should have_many(:students).through(:student_guardians) }
   end
 
-  context 'counter_cache' do
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
 
+  describe '#primary_address' do
+    it('responds to primary_address') { should respond_to(:primary_address) }
+  end
+
+  context 'counter_cache' do
     let!(:guardian) { create(:guardian) }
 
     context 'addresses_count' do
@@ -27,13 +34,13 @@ describe Gaku::Guardian do
       it 'increments addresses_count' do
         expect do
           guardian.addresses << address
-        end.to change { guardian.reload.addresses_count }.by 1
+        end.to change { guardian.reload.addresses_count }.by(1)
       end
 
       it 'decrements addresses_count' do
         expect do
           guardian_with_address.addresses.last.destroy
-        end.to change { guardian_with_address.reload.addresses_count }.by -1
+        end.to change { guardian_with_address.reload.addresses_count }.by(-1)
       end
     end
 
@@ -45,20 +52,15 @@ describe Gaku::Guardian do
       it 'increments contacts_count' do
         expect do
           guardian.contacts << contact
-        end.to change { guardian.reload.contacts_count }.by 1
+        end.to change { guardian.reload.contacts_count }.by(1)
       end
 
       it 'decrements contacts_count' do
         expect do
           guardian_with_contact.contacts.last.destroy
-        end.to change { guardian_with_contact.reload.contacts_count }.by -1
+        end.to change { guardian_with_contact.reload.contacts_count }.by(-1)
       end
     end
-  end
-
-  context 'methods' do
-    xit 'primary_contact'
-    xit 'primary_address'
   end
 
 end

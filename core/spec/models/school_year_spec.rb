@@ -3,7 +3,7 @@ require 'spec_helper_models'
 describe Gaku::SchoolYear do
 
   describe 'associations' do
-    it { should have_many :semesters}
+    it { should have_many :semesters }
   end
 
   describe 'validations' do

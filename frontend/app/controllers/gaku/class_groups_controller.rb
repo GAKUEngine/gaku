@@ -1,20 +1,13 @@
 module Gaku
   class ClassGroupsController < GakuController
 
-    include StudentChooserController
-
     #respond_to :js,   only: %i( new create destroy recovery )
     #respond_to :html, only: %i( index edit update soft_delete )
 
     respond_to :html, :js
 
     before_action :set_courses
-    before_action :set_class_group,       only: %i( edit update destroy student_chooser student_selection )
-
-    def student_selection
-      @student_selection = current_user.student_selection
-    end
-
+    before_action :set_class_group,       only: %i( edit update destroy )
 
     def destroy
       @class_group.destroy
@@ -35,7 +28,7 @@ module Gaku
     end
 
     def edit
-      @class_group_course_enrollment = ClassGroupCourseEnrollment.new
+      # @class_group_course_enrollment = ClassGroupCourseEnrollment.new
     end
 
     def update
@@ -55,7 +48,7 @@ module Gaku
     end
 
     def without_semester
-      @class_groups = ClassGroup.without_semester.includes(:semester_class_groups)
+      @class_groups = ClassGroup.without_semester.includes(:semester_connectors)
       @count = @class_groups.count
       render :without_semester, layout: 'gaku/layouts/index'
     end
@@ -105,11 +98,23 @@ module Gaku
     def set_class_group
       @class_group = ClassGroup.find(params[:id])
       set_notable
+      set_enrollmentable
+      set_semesterable
     end
 
     def set_notable
       @notable = @class_group
       @notable_resource = get_resource_name @notable
+    end
+
+    def set_enrollmentable
+      @enrollmentable = @class_group
+      @enrollmentable_resource = @enrollmentable.class.to_s.demodulize.underscore.dasherize
+    end
+
+    def set_semesterable
+      @semesterable = @class_group
+      @semesterable_resource = get_resource_name @semesterable
     end
 
     def set_count
