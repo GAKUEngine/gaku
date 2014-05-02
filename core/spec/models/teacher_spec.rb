@@ -34,13 +34,13 @@ describe Gaku::Teacher do
       it 'increments addresses_count' do
         expect do
           teacher.addresses << address
-        end.to change { teacher.reload.addresses_count }.by 1
+        end.to change { teacher.reload.addresses_count }.by(1)
       end
 
       it 'decrements addresses_count' do
         expect do
           teacher_with_address.addresses.last.destroy
-        end.to change { teacher_with_address.reload.addresses_count }.by -1
+        end.to change { teacher_with_address.reload.addresses_count }.by(-1)
       end
     end
 
@@ -52,16 +52,15 @@ describe Gaku::Teacher do
       it 'increments contacts_count' do
         expect do
           teacher.contacts << contact
-        end.to change { teacher.reload.contacts_count }.by 1
+        end.to change { teacher.reload.contacts_count }.by(1)
       end
 
       it 'decrements contacts_count' do
         expect do
           teacher_with_contact.contacts.last.destroy
-        end.to change { teacher_with_contact.reload.contacts_count }.by -1
+        end.to change { teacher_with_contact.reload.contacts_count }.by(-1)
       end
     end
-
 
     context 'notes_count' do
 
@@ -71,16 +70,15 @@ describe Gaku::Teacher do
       it 'increments notes_count' do
         expect do
           teacher.notes << note
-        end.to change { teacher.reload.notes_count }.by 1
+        end.to change { teacher.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           teacher_with_note.notes.last.destroy
-        end.to change { teacher_with_note.reload.notes_count }.by -1
+        end.to change { teacher_with_note.reload.notes_count }.by(-1)
       end
     end
-
 
   end
 

@@ -5,7 +5,7 @@ module Gaku
     let!(:student) { create(:student) }
     let!(:contact_type) { create(:contact_type, name: 'Email') }
     let!(:contact) { create(:contact, data: 'gaku@example.net', contactable: student, contact_type: contact_type) }
-    let!(:service) { service = described_class.new(contact) }
+    let!(:service) { described_class.new(contact) }
 
     describe '#initialize' do
       it 'instantiates contact object' do

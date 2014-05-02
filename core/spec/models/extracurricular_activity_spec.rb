@@ -23,7 +23,6 @@ describe Gaku::ExtracurricularActivity do
 
     let!(:extracurricular_activity) { create(:extracurricular_activity) }
 
-
     context 'enrollments_count' do
 
       let(:student) { build(:student) }
@@ -32,13 +31,13 @@ describe Gaku::ExtracurricularActivity do
       it 'increments enrollments_count' do
         expect do
           extracurricular_activity.students << student
-        end.to change { extracurricular_activity.reload.enrollments_count }.by 1
+        end.to change { extracurricular_activity.reload.enrollments_count }.by(1)
       end
 
       it 'decrements enrollments_count' do
         expect do
           extracurricular_activity_with_enrollment.students.last.destroy
-        end.to change { extracurricular_activity_with_enrollment.reload.enrollments_count }.by -1
+        end.to change { extracurricular_activity_with_enrollment.reload.enrollments_count }.by(-1)
       end
     end
   end

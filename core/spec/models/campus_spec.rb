@@ -12,10 +12,10 @@ describe Gaku::Campus do
     it { should have_one :address }
   end
 
-	describe 'validations' do
+  describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :school }
-	end
+  end
 
   describe '#primary_contact' do
     it('responds to primary_contact') { should respond_to(:primary_contact) }
@@ -65,7 +65,6 @@ describe Gaku::Campus do
         end.to change { campus.reload.contacts_count }.by(-1)
       end
     end
-
 
   end
 

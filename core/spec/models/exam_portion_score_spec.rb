@@ -10,7 +10,7 @@ describe Gaku::ExamPortionScore do
 
   describe 'validations' do
     it { should validate_presence_of :student }
-    it { should validate_presence_of :exam_portion}
+    it { should validate_presence_of :exam_portion }
   end
 
 end

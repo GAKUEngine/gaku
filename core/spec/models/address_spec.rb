@@ -51,7 +51,6 @@ describe Gaku::Address do
     end
   end
 
-
   describe '#ensure_first_primary' do
     it 'sets first address as primary' do
       address1 = create(:address, addressable: student)
@@ -84,7 +83,6 @@ describe Gaku::Address do
       end.to change(address.addressable.reload, :primary_address)
     end
   end
-
 
   describe '.after_destroy' do
     describe '#reset_counter_cache' do

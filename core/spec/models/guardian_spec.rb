@@ -34,13 +34,13 @@ describe Gaku::Guardian do
       it 'increments addresses_count' do
         expect do
           guardian.addresses << address
-        end.to change { guardian.reload.addresses_count }.by 1
+        end.to change { guardian.reload.addresses_count }.by(1)
       end
 
       it 'decrements addresses_count' do
         expect do
           guardian_with_address.addresses.last.destroy
-        end.to change { guardian_with_address.reload.addresses_count }.by -1
+        end.to change { guardian_with_address.reload.addresses_count }.by(-1)
       end
     end
 
@@ -52,17 +52,15 @@ describe Gaku::Guardian do
       it 'increments contacts_count' do
         expect do
           guardian.contacts << contact
-        end.to change { guardian.reload.contacts_count }.by 1
+        end.to change { guardian.reload.contacts_count }.by(1)
       end
 
       it 'decrements contacts_count' do
         expect do
           guardian_with_contact.contacts.last.destroy
-        end.to change { guardian_with_contact.reload.contacts_count }.by -1
+        end.to change { guardian_with_contact.reload.contacts_count }.by(-1)
       end
     end
   end
-
-
 
 end

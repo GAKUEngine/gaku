@@ -7,9 +7,9 @@ describe Gaku::LessonPlan do
   end
 
   describe 'relations' do
-  	it { should have_many :lessons }
-  	it { should have_many :attachments }
-  	it { should belong_to :syllabus }
+    it { should have_many :lessons }
+    it { should have_many :attachments }
+    it { should belong_to :syllabus }
   end
 
   describe 'validations' do
@@ -28,13 +28,13 @@ describe Gaku::LessonPlan do
       it 'increments notes_count' do
         expect do
           lesson_plan.notes << note
-        end.to change { lesson_plan.reload.notes_count }.by 1
+        end.to change { lesson_plan.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           lesson_plan_with_note.notes.last.destroy
-        end.to change { lesson_plan_with_note.reload.notes_count }.by -1
+        end.to change { lesson_plan_with_note.reload.notes_count }.by(-1)
       end
 
     end
