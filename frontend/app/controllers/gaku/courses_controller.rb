@@ -5,11 +5,9 @@ module Gaku
 
     helper_method :sort_column, :sort_direction
 
-    # respond_to :js,   only: %i( new create destroy recovery )
-    # respond_to :html, only: %i( index edit update show soft_delete show_deleted )
     respond_to :html, :js
 
-    before_action :set_course,   only: %i( edit show update destroy student_chooser )
+    before_action :set_course,   only: %i( edit show update destroy )
     before_action :set_syllabuses
 
     def destroy
