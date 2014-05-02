@@ -50,7 +50,7 @@ module Gaku
                 contact.reload
                 other_contact.reload
 
-                expect(student.primary_contact).to eq 'Email: gaku@example.net'
+                expect(student.contact_widget).to eq 'Email: gaku@example.net'
               end
             end
           end
