@@ -42,7 +42,20 @@ describe Gaku::Student do
     it { should belong_to :enrollment_status }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
+  end
 
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
+
+  describe 'address' do
+    it('responds to primary_address') { should respond_to(:primary_address) }
+
+    it 'generates address_widget' do
+      student = build(:student)
+      address = create(:address, addressable: student, primary: true)
+      expect(student.address_widget).to eq "#{address.city}, #{address.address1}"
+    end
   end
 
   describe '#set_serial_id' do
@@ -285,12 +298,6 @@ describe Gaku::Student do
 
   end
 
-  context 'methods' do
-    xit 'scholarship'
-    xit 'class_group_widget'
-    xit 'seat_number_widget'
-    xit 'address_widget'
-    xit 'primary_address'
-  end
+
 
 end

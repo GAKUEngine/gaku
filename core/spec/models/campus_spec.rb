@@ -17,6 +17,10 @@ describe Gaku::Campus do
     it { should validate_presence_of :school }
 	end
 
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
+
   describe '#to_s' do
     let(:campus) { build(:campus) }
     specify { campus.to_s.should eq campus.name }

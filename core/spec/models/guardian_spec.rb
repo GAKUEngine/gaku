@@ -15,8 +15,15 @@ describe Gaku::Guardian do
     it { should have_many(:students).through(:student_guardians) }
   end
 
-  context 'counter_cache' do
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
 
+  describe '#primary_address' do
+    it('responds to primary_address') { should respond_to(:primary_address) }
+  end
+
+  context 'counter_cache' do
     let!(:guardian) { create(:guardian) }
 
     context 'addresses_count' do
@@ -56,9 +63,6 @@ describe Gaku::Guardian do
     end
   end
 
-  context 'methods' do
-    xit 'primary_contact'
-    xit 'primary_address'
-  end
+
 
 end

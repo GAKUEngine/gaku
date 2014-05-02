@@ -14,6 +14,14 @@ describe Gaku::Teacher do
     it { should belong_to :user }
   end
 
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
+
+  describe '#primary_address' do
+    it('responds to primary_address') { should respond_to(:primary_address) }
+  end
+
   context 'counter_cache' do
 
     let!(:teacher) { create(:teacher) }

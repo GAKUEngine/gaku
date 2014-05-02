@@ -5,8 +5,6 @@ describe Gaku::ExternalSchoolRecord do
   describe 'associations' do
     it { should belong_to :school }
     it { should belong_to :student }
-
-    xit { should have_many :simple_grades }
   end
 
   describe 'validations' do

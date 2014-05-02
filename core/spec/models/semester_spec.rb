@@ -34,8 +34,6 @@ describe Gaku::Semester do
       end
     end
 
-
-    xit 'uniqness of class group for semester'
   end
 
 end
