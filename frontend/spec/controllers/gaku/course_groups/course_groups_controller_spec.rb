@@ -117,7 +117,6 @@ describe Gaku::CourseGroupsController do
         end
       end
 
-
       describe 'JS DELETE #destroy' do
         it 'deletes the course_group' do
           course_group

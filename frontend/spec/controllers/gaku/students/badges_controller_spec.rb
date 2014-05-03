@@ -35,7 +35,9 @@ describe Gaku::Students::BadgesController do
       describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, badge: attributes_for(:badge, badge_type_id: badge_type.id), student_id: student.id
+            gaku_js_post :create,
+                         badge: attributes_for(:badge, badge_type_id: badge_type.id),
+                         student_id: student.id
           end
 
           it 'creates new badge' do
@@ -71,7 +73,10 @@ describe Gaku::Students::BadgesController do
       describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: badge, badge: attributes_for(:badge, badge_type_id: badge_type), student_id: student.id
+            gaku_js_patch :update,
+                          id: badge,
+                          badge: attributes_for(:badge, badge_type_id: badge_type),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -85,7 +90,10 @@ describe Gaku::Students::BadgesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: badge, badge: attributes_for(:invalid_badge, badge_type_id: nil), student_id: student.id
+            gaku_js_patch :update,
+                          id: badge,
+                          badge: attributes_for(:invalid_badge, badge_type_id: nil),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
