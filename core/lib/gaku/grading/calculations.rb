@@ -19,7 +19,7 @@ module Gaku::Grading::Calculations
           @student_total_scores[student.id][exam.id] = 0.0
           @student_total_weights[student.id][exam.id] = 0.0
           exam.exam_portions.each do |portion|
-            if have_portion_score?(student, portion)
+            if portion_score?(student, portion)
               add_to_student_total_score(student, exam, portion)
               add_to_student_total_weight(student, exam, portion) if exam.use_weighting
               add_to_portion_attendance(student, exam, portion)
@@ -32,7 +32,7 @@ module Gaku::Grading::Calculations
       end
     end
 
-    def add_to_portion_attendance(student, exam, portion, score = nil)
+    def add_to_portion_attendance(student, _exam, portion, score = nil)
       score ||= portion.student_score(student)
       @student_portion_attendance[student.id][score.id] = [score.attendances.last
                                                                             .try(:id),
@@ -122,7 +122,7 @@ module Gaku::Grading::Calculations
                                                            .score.to_f
     end
 
-    def have_portion_score?(student, portion)
+    def portion_score?(student, portion)
       student.exam_portion_scores.where(exam_portion_id: portion.id).first.present?
     end
 
@@ -203,7 +203,7 @@ module Gaku::Grading::Calculations
     end
 
     def grading_method_one(exam)
-      @grade_levels_deviation.each_with_index do |glevel, i|
+      @grade_levels_deviation.each_with_index do |_glevel, i|
         @students.each do |student|
           if @grade_levels_deviation[i] > @deviation[student.id][exam.id] && @grade_levels_deviation[i + 1] <= @deviation[student.id][exam.id]
             @grades[exam.id][student.id] = @grade_point
