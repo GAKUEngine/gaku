@@ -1,4 +1,4 @@
-[module Gaku
+module Gaku
   class Students::BadgesController < GakuController
 
     respond_to :js, only: %i( new create edit update destroy index )
@@ -63,4 +63,3 @@
 
   end
 end
-]

@@ -25,7 +25,7 @@ module StudentChooserController
     params[:selected_students].nil? ? @selected_students = [] : @selected_students = params[:selected_students]
 
     # Example: @enrolled_students = @class_group.students.map {|i| i.id.to_s }
-    @enrolled_students = instance_variable_get("@#{class_name_underscored}").students.map {|i| i.id.to_s }
+    @enrolled_students = instance_variable_get("@#{class_name_underscored}").students.map { |i| i.id.to_s }
   end
 
   def set_collection

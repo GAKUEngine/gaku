@@ -1,8 +1,8 @@
 module Gaku
   class ClassGroupsController < GakuController
 
-    #respond_to :js,   only: %i( new create destroy recovery )
-    #respond_to :html, only: %i( index edit update soft_delete )
+    # respond_to :js,   only: %i( new create destroy recovery )
+    # respond_to :html, only: %i( index edit update soft_delete )
 
     respond_to :html, :js
 
@@ -54,7 +54,7 @@ module Gaku
     end
 
     def advanced_search
-      @semesters = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+      @semesters = Semester.with_class_group.map { |p| [p.to_s, p.id] }
       @search = ClassGroup.search(params[:q])
       results = @search.result(distinct: true)
       @class_groups = results.page(params[:page])
@@ -64,7 +64,7 @@ module Gaku
       @search = Semester.with_class_group.includes(:class_groups).search(params[:q])
       results = @search.result(distinct: true)
       @semesters = results.page(params[:page])
-      @semesters_for_select = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+      @semesters_for_select = Semester.with_class_group.map { |p| [p.to_s, p.id] }
     end
 
     def search_semester
@@ -76,14 +76,13 @@ module Gaku
     end
 
     def search
-      @semesters = Semester.with_class_group.collect{|p| [p.to_s, p.id]}
+      @semesters = Semester.with_class_group.map { |p| [p.to_s, p.id] }
       @search = ClassGroup.without_semester.search(params[:q])
       results = @search.result(distinct: true)
       @class_groups = results.page(params[:page])
       @count = results.count
       render :without_semester, layout: 'gaku/layouts/index'
     end
-
 
     private
 
