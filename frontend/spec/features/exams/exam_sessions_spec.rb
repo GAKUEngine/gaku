@@ -7,7 +7,6 @@ describe 'Exam Sessions' do
 
   let(:exam_session) { create(:exam_session, exam: exam) }
 
-
   before(:all) { set_resource 'exam-session' }
   before { as :admin }
 
@@ -30,7 +29,7 @@ describe 'Exam Sessions' do
 
       within(table) { has_content? exam.name }
       count? 'Exam sessions list(1)'
-      within('#exam-sessions-tab-link') { has_content? 'Exam sessions(1)'}
+      within('#exam-sessions-tab-link') { has_content? 'Exam sessions(1)' }
     end
 
     it { has_validations? }
@@ -66,7 +65,7 @@ describe 'Exam Sessions' do
         within(modal) { click_on 'Delete' }
         accept_alert
         flash_destroyed?
-      end.to change(Gaku::ExamSession, :count).by -1
+      end.to change(Gaku::ExamSession, :count).by(-1)
 
       expect(current_path).to eq gaku.exams_path
     end

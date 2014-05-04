@@ -14,7 +14,7 @@ describe 'Courses' do
     create(:course, :with_semesters, syllabus: syllabus)
   end
 
-  let(:grading_method_set) {create(:grading_method_set, :with_grading_methods )}
+  let(:grading_method_set) { create(:grading_method_set, :with_grading_methods) }
 
   context 'new', js: true do
     before do
@@ -116,9 +116,6 @@ describe 'Courses' do
       within(count_div) { page.should have_content('Courses list(1)') }
 
       expect do
-        rows = "#semester-#{semester.id}-courses-index tr"
-        tr_count = size_of rows
-
         within("#semester-#{semester.id}-courses-index") do
           click delete_link
         end
@@ -134,8 +131,7 @@ describe 'Courses' do
       end
 
       within(count_div) { page.should_not have_content('Courses list(1)') }
-
-
     end
+
   end
 end

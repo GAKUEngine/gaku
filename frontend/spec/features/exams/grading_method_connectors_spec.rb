@@ -5,7 +5,7 @@ describe 'Exam Grading Method Connectors' do
   let!(:exam) { create(:exam) }
   let(:grading_method) { create(:grading_method) }
 
-  let(:grading_method_set) { create(:grading_method_set, :with_grading_method)}
+  let(:grading_method_set) { create(:grading_method_set, :with_grading_method) }
 
   before(:all) { set_resource 'exam-grading-method-connector' }
 
@@ -22,11 +22,11 @@ describe 'Exam Grading Method Connectors' do
     it 'creates and shows' do
       expect do
         select grading_method.name,
-          from: 'grading_method_connector_grading_method_id'
+               from: 'grading_method_connector_grading_method_id'
 
         click submit
         flash_created?
-      end.to change(Gaku::GradingMethodConnector, :count).by 1
+      end.to change(Gaku::GradingMethodConnector, :count).by(1)
 
       within(table) do
         has_content? grading_method.name
@@ -54,27 +54,27 @@ describe 'Exam Grading Method Connectors' do
       click '#new-set-exam-grading-method-connector-link'
       expect do
         select grading_method_set.name,
-          from: 'grading_method_set_id'
+               from: 'grading_method_set_id'
         click '#submit-set-exam-grading-method-connector-button'
         flash? 'Grading methods from grading method set added'
 
-      end.to change(Gaku::GradingMethodConnector, :count).by 1
+      end.to change(Gaku::GradingMethodConnector, :count).by(1)
       within(table) { has_content? grading_method_set.grading_methods.first.name }
     end
 
     it 'do not add set grading methods if already in collection' do
       grading_method_set
-      exam.grading_method_connectors.create( grading_method: grading_method_set.grading_methods.first)
+      exam.grading_method_connectors.create(grading_method: grading_method_set.grading_methods.first)
       visit gaku.edit_exam_path(exam)
 
       click '#exams-grading-methods-menu a'
       click '#new-set-exam-grading-method-connector-link'
       expect do
         select grading_method_set.name,
-          from: 'grading_method_set_id'
+               from: 'grading_method_set_id'
         click '#submit-set-exam-grading-method-connector-button'
         flash? 'Grading methods are already added'
-      end.to change(Gaku::GradingMethodConnector, :count).by 0
+      end.to_not change(Gaku::GradingMethodConnector, :count)
     end
   end
 
@@ -92,7 +92,7 @@ describe 'Exam Grading Method Connectors' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::GradingMethodConnector, :count).by -1
+      end.to change(Gaku::GradingMethodConnector, :count).by(-1)
 
       within('.grading-methods-count') do
         expect(page.has_no_content?('1')).to eq true

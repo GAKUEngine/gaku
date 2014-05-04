@@ -23,7 +23,6 @@ describe 'Student Contacts' do
     it_behaves_like 'new contact'
   end
 
-
   context 'existing', type: 'contact' do
 
     context 'one contact' do

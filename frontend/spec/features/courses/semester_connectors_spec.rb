@@ -6,13 +6,18 @@ describe 'Course Semester Connectors' do
 
   let(:course) { create(:course) }
   let(:school_year) { create(:school_year, starting: Date.parse('2013-1-1'), ending: Date.parse('2013-12-30')) }
-  let(:semester) { create(:semester, school_year: school_year, starting: Date.parse('2013-1-1'), ending: Date.parse('2013-6-1')) }
-  let(:semester2) { create(:semester, school_year: school_year, starting: Date.parse('2013-6-1'), ending: Date.parse('2013-12-30')) }
+
+  let(:semester) do
+    create(:semester, school_year: school_year, starting: Date.parse('2013-1-1'), ending: Date.parse('2013-6-1'))
+  end
+
+  let(:semester2) do
+    create(:semester, school_year: school_year, starting: Date.parse('2013-6-1'), ending: Date.parse('2013-12-30'))
+  end
+
   let(:semester_connector_course) { create(:semester_connector_course, semester: semester, semesterable: course) }
 
-  before :all do
-    set_resource 'course-semester-connector'
-  end
+  before(:all) { set_resource 'course-semester-connector' }
 
   before do
     course
@@ -87,7 +92,7 @@ describe 'Course Semester Connectors' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::SemesterConnector, :count).by -1
+      end.to change(Gaku::SemesterConnector, :count).by(-1)
 
       within(table)     { expect(page).to_not have_content "#{semester.starting} / #{semester.ending}" }
       within(tab_link) { expect(page).to_not have_content 'Semesters(1)' }

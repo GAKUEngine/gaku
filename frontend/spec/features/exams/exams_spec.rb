@@ -126,7 +126,7 @@ describe 'Exams' do
         within(modal) { click_on 'Delete' }
         accept_alert
         flash_destroyed?
-      end.to change(Gaku::Exam, :count).by -1
+      end.to change(Gaku::Exam, :count).by(-1)
 
       expect(current_path).to eq gaku.exams_path
       count? 'Exams list(1)'

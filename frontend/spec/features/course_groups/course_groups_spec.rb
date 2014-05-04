@@ -24,11 +24,11 @@ describe 'CourseGroups' do
       end.to change(Gaku::CourseGroup, :count).by 1
 
       within(count_div) { page.should have_content('Course Groups List(1)') }
-      within (table) { page.should have_content 'MathCourses2012' }
+      within(table) { page.should have_content 'MathCourses2012' }
 
     end
 
-    it {has_validations?}
+    it { has_validations? }
   end
 
   context 'existing' do
@@ -70,7 +70,6 @@ describe 'CourseGroups' do
       flash_destroyed?
       current_path.should eq gaku.course_groups_path
     end
-
 
   end
 end
