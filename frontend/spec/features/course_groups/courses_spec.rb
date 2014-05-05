@@ -15,6 +15,7 @@ describe 'CourseGroup Courses' do
     before do
       @course = course
       visit gaku.edit_course_group_path(course_group)
+      click '#courses-menu a'
       @data = course_group
       @select = 'course_group_enrollment_course_id'
     end
@@ -27,8 +28,8 @@ describe 'CourseGroup Courses' do
     before do
       course_group.courses << course
       visit gaku.edit_course_group_path(course_group)
+      click '#courses-menu a'
       @data = course_group
-
     end
 
     it_behaves_like 'remove enrollment'
