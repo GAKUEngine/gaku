@@ -50,7 +50,6 @@ describe Gaku::Students::SimpleGradesController do
       )
     end
 
-
     it 'routes to #index' do
       expect(get: '/students/1/simple_grades').to route_to(
         controller: 'gaku/students/simple_grades',

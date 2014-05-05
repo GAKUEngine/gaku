@@ -1,12 +1,12 @@
 # encoding: UTF-8
-version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
+version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku_frontend'
   s.version      = version
   s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
-  s.description  = "It allows for full student management, grading etc."
+  s.description  = 'It allows for full student management, grading etc.'
   s.required_ruby_version = '~> 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']
@@ -50,6 +50,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'select2-rails',                  '~> 3.5.2'
   s.add_dependency 'remotipart',                     '~> 1.2.1'
   s.add_dependency 'bootstrap-datetime-picker-for-rails', '~> 0.0.4'
-
 
 end
