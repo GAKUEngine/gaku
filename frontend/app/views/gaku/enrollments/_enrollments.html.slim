@@ -2,7 +2,7 @@
   = content_tag(:div, nil, id: "new-#{@enrollmentable_resource}-enrollment", class: 'd-none')
   .pull-left
     = count_div "#{@enrollmentable_resource}-enrollments-count" do
-      = print_count @enrollmentable.enrollments_count, t(:'enrollment.list')
+      = print_count @enrollmentable.enrollments_count, t(:'student.list')
   .pull-right
     = ajax_link_to_new t(:'enrollment.add'), [:new, @enrollmentable, :enrollment], id: "new-#{@enrollmentable_resource}-enrollment-link"
 
@@ -14,6 +14,6 @@
       tr
       = th t(:'student.surname')
       = th t(:'student.name')
-      = th_actions 2
+      = th_actions 1
     tbody
       =render partial: 'gaku/enrollments/enrollment', collection: @enrollmentable.enrollments, as: :enrollment
