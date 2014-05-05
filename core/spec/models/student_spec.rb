@@ -17,6 +17,29 @@ describe Gaku::Student do
     it { should have_many(:class_groups).through(:enrollments).source(:enrollmentable)  }
     it { should have_many(:extracurricular_activities).through(:enrollments).source(:enrollmentable)  }
 
+    # has_many :course_enrollments, -> { where(enrollmentable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
+    # has_many :class_group_enrollments, -> { where(enrollmentable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
+    # has_many :extracurricular_activity_enrollments, -> { where(enrollmentable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
+
+    it do
+      should have_many(:course_enrollments)
+              .class_name('Gaku::Enrollment')
+              .conditions(enrollmentable_type: 'Gaku::Course')
+    end
+
+    it do
+      should have_many(:class_group_enrollments)
+              .class_name('Gaku::Enrollment')
+              .conditions(enrollmentable_type: 'Gaku::ClassGroup')
+    end
+
+    it do
+      should have_many(:extracurricular_activity_enrollments)
+              .class_name('Gaku::Enrollment')
+              .conditions(enrollmentable_type: 'Gaku::ExtracurricularActivity')
+    end
+
+
     it { should have_many :student_specialties }
     it { should have_many(:specialties).through(:student_specialties) }
 
