@@ -1,5 +1,3 @@
 td = enrollment.student.surname
 td = enrollment.student.name
-td
-  = link_to_show [enrollment.student]
-  = ajax_link_to_delete [@enrollmentable, enrollment]
+td = ajax_link_to_delete [@enrollmentable, enrollment]

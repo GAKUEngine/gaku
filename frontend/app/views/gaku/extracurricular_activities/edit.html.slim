@@ -1,16 +1,16 @@
 .row
-  .col-md-12
-    = normal_form_for @extracurricular_activity, label: 'nil' do |f|
-      = render 'form_fields', f: f, extracurricular_activity: @extracurricular_activity
-      = buttons_for @extracurricular_activity
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @extracurricular_activity], remote: true
 
-= render 'tabs'
+      .panel.panel-default
+        .panel-heading
+          h4#students-menu.panel-title
+            = link_to badge_count(@extracurricular_activity.enrollments_count, t(:'student.plural'), 'students-count'), [@extracurricular_activity, :enrollments], remote: true
 
-= footer do
-  .col-md-9
-    = link_to_index extracurricular_activities_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @extracurricular_activity
+  .col-md-10#ajax-load
+    = render 'edit_form'

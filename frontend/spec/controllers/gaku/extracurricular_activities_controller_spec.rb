@@ -36,51 +36,11 @@ describe Gaku::ExtracurricularActivitiesController do
 
         it('renders the :edit template') { template? :edit }
       end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_patch :update, id: extracurricular_activity,
-                                extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
-          end
-
-          it { should respond_with 302 }
-
-          it('assigns @extracurricular_activity') do
-            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
-          end
-
-          it('sets flash') { flash_updated? }
-          it "changes extracurricular_activity's attributes" do
-            extracurricular_activity.reload
-            expect(extracurricular_activity.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_patch :update, id: extracurricular_activity,
-                                extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
-          end
-
-          it { should respond_with 200 }
-
-          it('assigns @extracurricular_activity') do
-            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
-          end
-
-          it "does not change extracurricular_activity's attributes" do
-            extracurricular_activity.reload
-            expect(extracurricular_activity.name).not_to eq ''
-          end
-        end
-      end
-
     end
 
     context 'js' do
 
-      describe 'XHR #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
@@ -92,7 +52,7 @@ describe Gaku::ExtracurricularActivitiesController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
             gaku_js_post :create, extracurricular_activity: attributes_for(:extracurricular_activity)
@@ -134,6 +94,57 @@ describe Gaku::ExtracurricularActivitiesController do
           it "doesn't increment @count" do
             invalid_js_create
             expect(assigns(:count)).to eq 0
+          end
+        end
+      end
+
+      describe 'XHR GET #edit' do
+        before { gaku_js_get :edit, id: extracurricular_activity }
+
+        it { should respond_with 200 }
+
+        it('assigns @extracurricular_activity') do
+          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+        end
+
+        it('renders the :edit template') { template? :edit }
+      end
+
+      describe 'XHR PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: extracurricular_activity,
+                                extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
+          end
+
+          it { should respond_with 200 }
+
+          it('assigns @extracurricular_activity') do
+            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+          end
+
+          it('sets flash') { flash_updated? }
+          it "changes extracurricular_activity's attributes" do
+            extracurricular_activity.reload
+            expect(extracurricular_activity.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_js_patch :update, id: extracurricular_activity,
+                                extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
+          end
+
+          it { should respond_with 200 }
+
+          it('assigns @extracurricular_activity') do
+            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+          end
+
+          it "does not change extracurricular_activity's attributes" do
+            extracurricular_activity.reload
+            expect(extracurricular_activity.name).not_to eq ''
           end
         end
       end
