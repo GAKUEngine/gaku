@@ -49,7 +49,6 @@ describe Gaku::ContactsController do
         end
       end
 
-
       describe 'XHR PATCH #soft_delete' do
         let(:js_get_soft_delete) { gaku_js_patch :soft_delete, id: contact.id, student_id: student.id }
 

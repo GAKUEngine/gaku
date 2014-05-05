@@ -119,7 +119,7 @@ describe Gaku::Admin::DisposalsController do
       it('renders :addresses template') { template? :addresses }
     end
 
-        context 'teacher_addresses' do
+    context 'teacher_addresses' do
       let(:teacher) { create(:teacher) }
       let(:deleted_address) { create(:address, addressable: teacher, deleted: true) }
       let(:address) { create(:address, addressable: teacher, deleted: false) }
@@ -136,7 +136,6 @@ describe Gaku::Admin::DisposalsController do
       it('renders :addresses template') { template? :addresses }
     end
   end
-
 
   describe 'GET #contacts' do
     context 'student_contacts' do

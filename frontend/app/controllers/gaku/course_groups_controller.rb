@@ -61,7 +61,6 @@ module Gaku
       set_notable
     end
 
-
     def set_courses
       @courses = Course.all
     end
@@ -84,7 +83,7 @@ module Gaku
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
   end

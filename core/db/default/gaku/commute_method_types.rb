@@ -7,10 +7,8 @@ commute_method_types = [
   { name: 'Train',    name_ja: '列車' },
   { name: 'Bus',      name_ja: 'バス' },
   { name: 'Car',      name_ja: '車' },
-  { name: 'Metro',    name_ja: '地下鉄'}
+  { name: 'Metro',    name_ja: '地下鉄' }
 ]
-
-
 
 commute_method_types.each do |type|
   I18n.locale = :en

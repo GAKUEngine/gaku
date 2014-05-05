@@ -6,9 +6,12 @@ describe 'Students', type: :feature do
 
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:student) do
-    create(:student, name: 'John',  middle_name: 'Little', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code)
+    create(:student,
+           name: 'John',
+           middle_name: 'Little',
+           surname: 'Doe',
+           enrollment_status_code: enrollment_status_admitted.code)
   end
-
 
   context 'existing' do
     before do
@@ -20,7 +23,7 @@ describe 'Students', type: :feature do
       context 'enabled' do
 
         it 'shows code' do
-          create(:preset, chooser_fields: {show_code: '1'})
+          create(:preset, chooser_fields: { show_code: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.code')).to eq true
@@ -29,7 +32,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows foreign_id_code' do
-          create(:preset, chooser_fields: {show_foreign_id_code: '1'})
+          create(:preset, chooser_fields: { show_foreign_id_code: '1' })
           student.foreign_id_code = '33'
           student.save
           visit gaku.students_path
@@ -40,7 +43,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows enrollment_status' do
-          create(:preset, chooser_fields: {show_enrollment_status: '1'})
+          create(:preset, chooser_fields: { show_enrollment_status: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.enrollment_status')).to eq true
@@ -49,7 +52,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows user' do
-          create(:preset, chooser_fields: {show_user: '1'})
+          create(:preset, chooser_fields: { show_user: '1' })
           student.user = create(:user)
           student.save
           visit gaku.students_path
@@ -60,7 +63,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows name' do
-          create(:preset, chooser_fields: {show_name: '1'})
+          create(:preset, chooser_fields: { show_name: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.name')).to eq true
@@ -69,7 +72,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows middle_name' do
-          create(:preset, chooser_fields: {show_middle_name: '1'})
+          create(:preset, chooser_fields: { show_middle_name: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.middle_name')).to eq true
@@ -77,9 +80,8 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.middle_name)).to eq true
         end
 
-
         it 'shows surname' do
-          create(:preset, chooser_fields: {show_surname: '1'})
+          create(:preset, chooser_fields: { show_surname: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.surname')).to eq true
@@ -88,7 +90,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows birth_date' do
-          create(:preset, chooser_fields: {show_birth_date: '1'})
+          create(:preset, chooser_fields: { show_birth_date: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.birth_date')).to eq true
@@ -97,16 +99,16 @@ describe 'Students', type: :feature do
         end
 
         it 'shows gender' do
-          create(:preset, chooser_fields: {show_gender: '1'})
+          create(:preset, chooser_fields: { show_gender: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.gender')).to eq true
           expect(page.has_css?('#students-index td.gender')).to eq true
-          #expect(page.has_text?(student.gender)).to eq true
+          # expect(page.has_text?(student.gender)).to eq true
         end
 
         it 'shows admitted' do
-          create(:preset, chooser_fields: {show_admitted: '1'})
+          create(:preset, chooser_fields: { show_admitted: '1' })
           student.admitted = Time.now
           student.save
           visit gaku.students_path
@@ -117,7 +119,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows graduated' do
-          create(:preset, chooser_fields: {show_graduated: '1'})
+          create(:preset, chooser_fields: { show_graduated: '1' })
           student.graduated = Time.now
           student.save
           visit gaku.students_path
@@ -128,7 +130,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows major_specialty' do
-          create(:preset, chooser_fields: {show_specialty: '1'})
+          create(:preset, chooser_fields: { show_specialty: '1' })
           specialty = create(:specialty)
           create(:student_specialty, student: student, specialty: specialty, major: true)
           visit gaku.students_path
@@ -140,7 +142,7 @@ describe 'Students', type: :feature do
 
         it 'shows primary_contact' do
           create(:contact, contactable: student)
-          create(:preset, chooser_fields: {show_primary_contact: '1'})
+          create(:preset, chooser_fields: { show_primary_contact: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_contact')).to eq true
@@ -151,7 +153,7 @@ describe 'Students', type: :feature do
         it 'shows primary_email' do
           contact_type = create(:contact_type, name: 'Email')
           create(:contact_creation, contactable: student, contact_type: contact_type)
-          create(:preset, chooser_fields: {show_primary_email: '1'})
+          create(:preset, chooser_fields: { show_primary_email: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_email')).to eq true
@@ -161,7 +163,7 @@ describe 'Students', type: :feature do
 
         it 'shows primary_address' do
           create(:address, addressable: student)
-          create(:preset, chooser_fields: {show_primary_address: '1'})
+          create(:preset, chooser_fields: { show_primary_address: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_address')).to eq true
@@ -170,7 +172,7 @@ describe 'Students', type: :feature do
         end
 
         it 'shows personal_information' do
-          create(:preset, chooser_fields: {show_personal_information: '1'})
+          create(:preset, chooser_fields: { show_personal_information: '1' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.personal_information')).to eq true
@@ -181,7 +183,7 @@ describe 'Students', type: :feature do
       context 'disabled' do
 
         it "doesn't show code" do
-          create(:preset, chooser_fields: {show_code: '0'})
+          create(:preset, chooser_fields: { show_code: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.code')).to eq false
@@ -190,7 +192,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show foreign_id_code" do
-          create(:preset, chooser_fields: {show_foreign_id_code: '0'})
+          create(:preset, chooser_fields: { show_foreign_id_code: '0' })
           student.foreign_id_code = '33'
           student.save
           visit gaku.students_path
@@ -201,7 +203,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show enrollment_status" do
-          create(:preset, chooser_fields: {show_enrollment_status: '0'})
+          create(:preset, chooser_fields: { show_enrollment_status: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.enrollment_status')).to eq false
@@ -210,7 +212,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show surname" do
-          create(:preset, chooser_fields: {show_user: '0'})
+          create(:preset, chooser_fields: { show_user: '0' })
           student.user = create(:user)
           student.save
           visit gaku.students_path
@@ -221,7 +223,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show name" do
-          create(:preset, chooser_fields: {show_name: '0'})
+          create(:preset, chooser_fields: { show_name: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.name')).to eq false
@@ -230,7 +232,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show middle_name" do
-          create(:preset, chooser_fields: {show_middle_name: '0'})
+          create(:preset, chooser_fields: { show_middle_name: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.middle_name')).to eq false
@@ -239,7 +241,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show surname" do
-          create(:preset, chooser_fields: {show_surname: '0'})
+          create(:preset, chooser_fields: { show_surname: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.surname')).to eq false
@@ -248,7 +250,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show birth_date" do
-          create(:preset, chooser_fields: {show_birth_date: '0'})
+          create(:preset, chooser_fields: { show_birth_date: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.birth_date')).to eq false
@@ -257,7 +259,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show gender" do
-          create(:preset, chooser_fields: {show_gender: '0'})
+          create(:preset, chooser_fields: { show_gender: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.gender')).to eq false
@@ -266,7 +268,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show admitted" do
-          create(:preset, chooser_fields: {show_admitted: '0'})
+          create(:preset, chooser_fields: { show_admitted: '0' })
           student.admitted = Time.now
           student.save
           visit gaku.students_path
@@ -277,7 +279,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show graduated" do
-          create(:preset, chooser_fields: {show_graduated: '0'})
+          create(:preset, chooser_fields: { show_graduated: '0' })
           student.graduated = Time.now
           student.save
           visit gaku.students_path
@@ -287,9 +289,8 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.graduated)).to eq false
         end
 
-
         it "doesn't show specialty" do
-          create(:preset, chooser_fields: {show_specialty: '0'})
+          create(:preset, chooser_fields: { show_specialty: '0' })
           specialty = create(:specialty)
           create(:student_specialty, student: student, specialty: specialty, major: true)
           visit gaku.students_path
@@ -299,10 +300,9 @@ describe 'Students', type: :feature do
           expect(page.has_text?(student.major_specialty)).to eq false
         end
 
-
         it "doesn't show primary_contact" do
           create(:contact_creation, contactable: student)
-          create(:preset, chooser_fields: {show_primary_contact: '0'})
+          create(:preset, chooser_fields: { show_primary_contact: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_contact')).to eq false
@@ -313,7 +313,7 @@ describe 'Students', type: :feature do
         it "doesn't show primary_email" do
           contact_type = create(:contact_type, name: 'Email')
           create(:contact_creation, contactable: student, contact_type: contact_type)
-          create(:preset, chooser_fields: {show_primary_contact: '0'})
+          create(:preset, chooser_fields: { show_primary_contact: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_email')).to eq false
@@ -323,7 +323,7 @@ describe 'Students', type: :feature do
 
         it "doesn't show primary_address" do
           create(:address, addressable: student)
-          create(:preset, chooser_fields: {show_primary_address: '0'})
+          create(:preset, chooser_fields: { show_primary_address: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.primary_address')).to eq false
@@ -332,7 +332,7 @@ describe 'Students', type: :feature do
         end
 
         it "doesn't show personal_information" do
-          create(:preset, chooser_fields: {show_personal_information: '0'})
+          create(:preset, chooser_fields: { show_personal_information: '0' })
           visit gaku.students_path
 
           expect(page.has_css?('#students-index th.personal_information')).to eq false
@@ -341,7 +341,6 @@ describe 'Students', type: :feature do
       end
 
     end
-
 
     context 'missing preset' do
       it "doesn't show code" do
@@ -438,8 +437,6 @@ describe 'Students', type: :feature do
         expect(page.has_text?(student.major_specialty)).to eq false
       end
 
-
-
       it "doesn't show primary_contact" do
         create(:contact_creation, contactable: student)
         visit gaku.students_path
@@ -471,7 +468,6 @@ describe 'Students', type: :feature do
         expect(page.has_css?('#students-index td.personal_information')).to eq false
       end
     end
-
 
   end
 end

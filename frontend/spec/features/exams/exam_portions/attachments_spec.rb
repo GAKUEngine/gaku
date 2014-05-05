@@ -11,7 +11,8 @@ describe 'Exam Portion Attachments' do
 
   context '#new', js: true do
     before do
-      exam; exam_portion
+      exam
+      exam_portion
       visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
       click new_link
     end
@@ -38,7 +39,9 @@ describe 'Exam Portion Attachments' do
   context 'when exists', js: true do
 
     before do
-      exam; exam_portion; attachment
+      exam
+      exam_portion
+      attachment
       visit gaku.edit_exam_exam_portion_path(exam, exam_portion)
     end
 
@@ -72,7 +75,7 @@ describe 'Exam Portion Attachments' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Attachment, :count).by -1
+      end.to change(Gaku::Attachment, :count).by(-1)
 
       within(count_div) { page.should have_content 'Attachments list' }
       page.should_not have_content("#{attachment.name}")
@@ -87,7 +90,6 @@ describe 'Exam Portion Attachments' do
         end
         flash_destroyed?
       end
-
 
       it 'deletes attachment from index table' do
         visit gaku.exam_exam_portion_path(exam, exam_portion)

@@ -14,7 +14,9 @@ describe Gaku::Exams::ExamPortionsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, exam_id: exam, id: exam_portion, exam_portion: attributes_for(:exam_portion, name: 'mobifon')
+            gaku_js_patch :update, exam_id: exam,
+                                   id: exam_portion,
+                                   exam_portion: attributes_for(:exam_portion, name: 'mobifon')
           end
 
           it { should respond_with 200 }
@@ -28,7 +30,9 @@ describe Gaku::Exams::ExamPortionsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: exam_portion, exam_id: exam, exam_portion: attributes_for(:invalid_exam_portion, name: '')
+            gaku_patch :update, id: exam_portion,
+                                exam_id: exam,
+                                exam_portion: attributes_for(:invalid_exam_portion, name: '')
           end
 
           it { should respond_with 200 }
@@ -103,7 +107,7 @@ describe Gaku::Exams::ExamPortionsController do
 
           it "doesn't increment @count" do
             invalid_js_create
-            #because there are autocreated master portion
+            # because there are autocreated master portion
             expect(assigns(:count)).to eq 0
           end
         end

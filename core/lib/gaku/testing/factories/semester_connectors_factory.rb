@@ -1,4 +1,4 @@
-#add assigments when integrate with GradingMethodConnector
+# add assigments when integrate with GradingMethodConnector
 %w( class_group course ).each do |resource|
   FactoryGirl.define do
 

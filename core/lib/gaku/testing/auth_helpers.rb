@@ -12,7 +12,7 @@ module Gaku::Testing::AuthHelpers
 
   module Feature
     def as(user)
-     if user.is_a?(Symbol)
+      if user.is_a?(Symbol)
         login_as create("#{user.to_sym}_user"), scope: :user
       else
         login_as user, scope: :user
@@ -27,4 +27,3 @@ RSpec.configure do |config|
   config.include Gaku::Testing::AuthHelpers::Feature, type: :request
   config.include Gaku::Testing::AuthHelpers::Feature, type: :feature
 end
-

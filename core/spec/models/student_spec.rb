@@ -11,7 +11,6 @@ describe Gaku::Student do
   end
 
   describe 'associations' do
-
     it { should have_many(:enrollments).dependent(:destroy) }
     it { should have_many(:courses).through(:enrollments).source(:enrollmentable)  }
     it { should have_many(:class_groups).through(:enrollments).source(:enrollmentable)  }
@@ -65,16 +64,28 @@ describe Gaku::Student do
     it { should belong_to :enrollment_status }
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
+  end
 
+  describe '#primary_contact' do
+    it('responds to primary_contact') { should respond_to(:primary_contact) }
+  end
+
+  describe 'address' do
+    it('responds to primary_address') { should respond_to(:primary_address) }
+
+    it 'generates address_widget' do
+      student = build(:student)
+      address = create(:address, addressable: student, primary: true)
+      expect(student.address_widget).to eq "#{address.city}, #{address.address1}"
+    end
   end
 
   describe '#set_serial_id' do
     it 'generates serial_id' do
       student = create(:student)
-      expect(student.serial_id).to eq("%05d" % student.id)
+      expect(student.serial_id).to eq(format('%05d', student.id))
     end
   end
-
 
   describe '#set_foreign_id_code' do
     context 'when increment_foreign_id_code is false' do
@@ -82,16 +93,15 @@ describe Gaku::Student do
 
       it 'sets increment_foreign_id_code to true' do
         preset
-        student = create(:student, foreign_id_code: '3')
+        create(:student, foreign_id_code: '3')
         expect(preset.reload.increment_foreign_id_code).to eq 'true'
       end
 
       it 'sets last_foreign_id_code' do
         preset
-        student = create(:student, foreign_id_code: '3')
+        create(:student, foreign_id_code: '3')
         expect(preset.reload.last_foreign_id_code).to eq '3'
       end
-
     end
 
     context 'when increment_foreign_id_code is true' do
@@ -103,13 +113,11 @@ describe Gaku::Student do
         expect(student.foreign_id_code).to eq '4'
         expect(preset.reload.last_foreign_id_code).to eq '4'
       end
-
     end
+
   end
 
-
   describe '#set_code' do
-
     it "returns '**-****-serial_id' if missing major specialty and admitted" do
       student = create(:student)
       expect(student.code).to eq "**-****-#{student.serial_id}"
@@ -126,9 +134,7 @@ describe Gaku::Student do
     end
   end
 
-
   context 'counter_cache' do
-
     let!(:student) { create(:student) }
 
     context 'badges_count' do
@@ -142,7 +148,7 @@ describe Gaku::Student do
           student.badges << badge
           student.reload
           puts student.badges.to_json
-        end.to change { student.badges_count }.by 1
+        end.to change { student.badges_count }.by(1)
       end
 
       xit 'decrements' do
@@ -150,7 +156,7 @@ describe Gaku::Student do
         expect do
           student.badges.last.destroy!
           student.reload
-        end.to change { student.badges_count }.by -1
+        end.to change { student.badges_count }.by(-1)
       end
     end
 
@@ -164,17 +170,17 @@ describe Gaku::Student do
         expect do
           student.guardians << guardian
           student.reload
-        end.to change { student.guardians_count }.by 1
+        end.to change { student.guardians_count }.by(1)
       end
 
       it 'decrements guardians_count' do
         expect do
           student_with_one_guardian.guardians.last.destroy
-        end.to change { student_with_one_guardian.reload.guardians_count }.by -1
+        end.to change { student_with_one_guardian.reload.guardians_count }.by(-1)
       end
     end
 
-     context 'external_school_records_count' do
+    context 'external_school_records_count' do
 
       let(:school) { create(:school) }
       let(:external_school_record) { create(:external_school_record, school: school, student: student) }
@@ -184,14 +190,14 @@ describe Gaku::Student do
         expect do
           external_school_record
           student.reload
-        end.to change { student.external_school_records_count }.by 1
+        end.to change { student.external_school_records_count }.by(1)
       end
 
       it 'decrements' do
         external_school_record
         expect do
           student.external_school_records.last.destroy
-        end.to change { student.reload.external_school_records_count }.by -1
+        end.to change { student.reload.external_school_records_count }.by(-1)
       end
     end
 
@@ -204,13 +210,13 @@ describe Gaku::Student do
         expect do
           student.courses << course
           student.reload
-        end.to change { student.courses_count }.by 1
+        end.to change { student.courses_count }.by(1)
       end
 
       it 'decrements courses_count' do
         expect do
           student_with_course.courses.last.destroy
-        end.to change { student_with_course.reload.courses_count }.by -1
+        end.to change { student_with_course.reload.courses_count }.by(-1)
       end
     end
 
@@ -223,13 +229,13 @@ describe Gaku::Student do
         expect do
           student.class_groups << class_group
           student.reload
-        end.to change { student.class_groups_count }.by 1
+        end.to change { student.class_groups_count }.by(1)
       end
 
       it 'decrements class_groups_count' do
         expect do
           student_with_class_group.class_groups.last.destroy
-        end.to change { student_with_class_group.reload.class_groups_count }.by -1
+        end.to change { student_with_class_group.reload.class_groups_count }.by(-1)
       end
     end
 
@@ -242,13 +248,13 @@ describe Gaku::Student do
         expect do
           student.extracurricular_activities << extracurricular_activity
           student.reload
-        end.to change { student.extracurricular_activities_count }.by 1
+        end.to change { student.extracurricular_activities_count }.by(1)
       end
 
       it 'decrements extracurricular_activities_count' do
         expect do
           student_with_with_extracurricular_activity.extracurricular_activities.last.destroy
-        end.to change { student_with_with_extracurricular_activity.reload.extracurricular_activities_count }.by -1
+        end.to change { student_with_with_extracurricular_activity.reload.extracurricular_activities_count }.by(-1)
       end
     end
 
@@ -260,13 +266,13 @@ describe Gaku::Student do
       it 'increments addresses_count' do
         expect do
           student.addresses << address
-        end.to change { student.reload.addresses_count }.by 1
+        end.to change { student.reload.addresses_count }.by(1)
       end
 
       it 'decrements addresses_count' do
         expect do
           student_with_address.addresses.last.destroy
-        end.to change { student_with_address.reload.addresses_count }.by -1
+        end.to change { student_with_address.reload.addresses_count }.by(-1)
       end
     end
 
@@ -278,13 +284,13 @@ describe Gaku::Student do
       it 'increments contacts_count' do
         expect do
           student.contacts << contact
-        end.to change { student.reload.contacts_count }.by 1
+        end.to change { student.reload.contacts_count }.by(1)
       end
 
       it 'decrements contacts_count' do
         expect do
           student_with_contact.contacts.last.destroy
-        end.to change { student_with_contact.reload.contacts_count }.by -1
+        end.to change { student_with_contact.reload.contacts_count }.by(-1)
       end
     end
 
@@ -296,24 +302,15 @@ describe Gaku::Student do
       it 'increments notes_count' do
         expect do
           student.notes << note
-        end.to change { student.reload.notes_count }.by 1
+        end.to change { student.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           student_with_note.notes.last.destroy
-        end.to change { student_with_note.reload.notes_count }.by -1
+        end.to change { student_with_note.reload.notes_count }.by(-1)
       end
     end
 
   end
-
-  context 'methods' do
-    xit 'scholarship'
-    xit 'class_group_widget'
-    xit 'seat_number_widget'
-    xit 'address_widget'
-    xit 'primary_address'
-  end
-
 end

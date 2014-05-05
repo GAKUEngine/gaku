@@ -27,8 +27,7 @@ module Gaku
       opts[:old_style_hash] = true
 
       puts 'Generating dummy Rails application...'
-      invoke Rails::Generators::AppGenerator,
-             [ File.expand_path(dummy_path, destination_root) ], opts
+      invoke Rails::Generators::AppGenerator, [File.expand_path(dummy_path, destination_root)], opts
     end
 
     def test_dummy_config
@@ -61,6 +60,7 @@ module Gaku
     attr_reader :lib_name
 
     protected
+
     def dummy_path
       ENV['DUMMY_PATH'] || 'spec/dummy'
     end
@@ -73,13 +73,14 @@ module Gaku
       @application_definition ||= begin
 
         dummy_application_path = File.expand_path("#{dummy_path}/config/application.rb", destination_root)
-        unless options[:pretend] || !File.exists?(dummy_application_path)
+        unless options[:pretend] || !File.exist?(dummy_application_path)
           contents = File.read(dummy_application_path)
           contents[(contents.index("module #{module_name}"))..-1]
         end
       end
     end
-    alias :store_application_definition! :application_definition
+
+    alias_method :store_application_definition!, :application_definition
 
     def camelized
       @camelized ||= name.gsub(/\W/, '_').squeeze('_').camelize

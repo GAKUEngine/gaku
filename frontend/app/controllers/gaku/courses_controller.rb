@@ -23,9 +23,7 @@ module Gaku
 
     def create
       @course = Course.new(course_params)
-      if @course.save
-        @course.use_primary_grading_method_set
-      end
+      @course.use_primary_grading_method_set if @course.save
       set_count
       respond_with @course
     end
@@ -35,7 +33,7 @@ module Gaku
     end
 
     def show
-      #format.json { render json: @course.as_json(include: :students) }
+      # format.json { render json: @course.as_json(include: :students) }
     end
 
     def update
@@ -61,7 +59,7 @@ module Gaku
     end
 
     def set_course
-      @course = Course.includes(syllabus: {exams: :exam_portion_scores}).find(params[:id])
+      @course = Course.includes(syllabus: { exams: :exam_portion_scores }).find(params[:id])
       set_notable
       set_gradable
       set_enrollmentable
@@ -105,7 +103,7 @@ module Gaku
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
     end
 
   end

@@ -1,7 +1,7 @@
 module Gaku
   class NotesController < GakuController
 
-    #load_and_authorize_resource :note, class: Gaku::Note
+    # load_and_authorize_resource :note, class: Gaku::Note
 
     before_action :set_notable
     before_action :set_note,    only: %i( edit update destroy show )

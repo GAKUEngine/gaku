@@ -24,7 +24,6 @@ FactoryGirl.define do
     end
   end
 
-
   factory :principal_user, parent: :user do
     after(:create) do |user|
       role = create(:principal_role)

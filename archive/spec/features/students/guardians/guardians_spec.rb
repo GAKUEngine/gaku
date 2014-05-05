@@ -8,7 +8,6 @@ describe 'Student Guardians' do
   let(:student) { create(:student) }
   let(:guardian) { create(:guardian) }
 
-
   context 'existing' do
     before do
       student.guardians << guardian
@@ -25,7 +24,7 @@ describe 'Student Guardians' do
 
       current_path.should eq gaku.edit_student_path(student)
       click '#student-guardians-menu a'
-      #within('.guardians-count')  { expect(page.has_content?('0')).to eq true }
+      # within('.guardians-count')  { expect(page.has_content?('0')).to eq true }
       within(count_div) { has_no_content? 'Guardians list(1)' }
     end
   end

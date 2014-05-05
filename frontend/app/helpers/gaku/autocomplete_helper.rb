@@ -22,7 +22,7 @@ module Gaku::AutocompleteHelper
       concat form.select(
         options[:object_name],
         options[:collection],
-        {prompt: options[:prompt], selected: options[:selected]},
+        { prompt: options[:prompt], selected: options[:selected] },
         class: 'form-control input-sm'
       )
     end

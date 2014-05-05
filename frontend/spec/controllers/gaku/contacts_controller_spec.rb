@@ -18,7 +18,11 @@ describe Gaku::ContactsController do
         it { should respond_with 200 }
         it('assigns @contact') { expect(assigns(:contact)).to be_a_new(Gaku::Contact) }
         it('assigns @contact_types') { expect(assigns(:contact_types)).to eq [contact_type] }
-        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+
+        it('assigns @polymorphic_resource_name') do
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+        end
+
         it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
         it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :new template') { template? :new }
@@ -27,7 +31,8 @@ describe Gaku::ContactsController do
       describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, contact: attributes_for(:contact, contact_type_id: contact_type.id), student_id: student.id
+            gaku_js_post :create, contact: attributes_for(:contact, contact_type_id: contact_type.id),
+                                  student_id: student.id
           end
 
           it 'creates new contact' do
@@ -64,7 +69,8 @@ describe Gaku::ContactsController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, contact: attributes_for(:invalid_contact, contact_type_id: contact_type.id), student_id: student.id
+            gaku_js_post :create, contact: attributes_for(:invalid_contact, contact_type_id: contact_type.id),
+                                  student_id: student.id
           end
 
           it 'does not save the new contact' do
@@ -91,7 +97,11 @@ describe Gaku::ContactsController do
         it { should respond_with 200 }
         it('assigns @contact') { expect(assigns(:contact)).to eq contact }
         it('assigns @contact_types') { expect(assigns(:contact_types)).to eq [contact_type] }
-        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+
+        it('assigns @polymorphic_resource_name') do
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+        end
+
         it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
         it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :edit template') { template? :edit }
@@ -100,12 +110,18 @@ describe Gaku::ContactsController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: contact.id, student_id: student.id, contact: attributes_for(:contact, data: 'mobifon')
+            gaku_js_patch :update, id: contact.id,
+                                   student_id: student.id,
+                                   contact: attributes_for(:contact, data: 'mobifon')
           end
 
           it { should respond_with 200 }
           it('assigns @contact') { expect(assigns(:contact)).to eq contact }
-          it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-contact' }
+
+          it('assigns @polymorphic_resource_name') do
+            expect(assigns(:polymorphic_resource_name)).to eq 'student-contact'
+          end
+
           it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
           it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
           it('sets flash') { flash_updated? }
@@ -116,7 +132,9 @@ describe Gaku::ContactsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: contact.id, student_id: student.id, contact: attributes_for(:invalid_contact, data: '')
+            gaku_js_patch :update, id: contact.id,
+                                   student_id: student.id,
+                                   contact: attributes_for(:invalid_contact, data: '')
           end
 
           it { should respond_with 200 }
@@ -127,7 +145,6 @@ describe Gaku::ContactsController do
           end
         end
       end
-
 
     end
   end

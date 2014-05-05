@@ -89,7 +89,7 @@ describe 'Course Enrollments' do
       expect do
         ensure_delete_is_working
         flash_destroyed?
-      end.to change(Gaku::Enrollment, :count).by -1
+      end.to change(Gaku::Enrollment, :count).by(-1)
 
       within(table) { has_no_content? course_enrollment.student.surname }
       within(table) { has_no_content? course_enrollment.student.name }

@@ -121,12 +121,12 @@ Gaku::Core::Engine.routes.draw do
 
     resources :guardians, except: %i( show )
 
-    resources :class_group_enrollments, controller: 'students/class_group_enrollments'
-    resources :course_enrollments, controller: 'students/course_enrollments'
-    resources :extracurricular_activity_enrollments, controller: 'students/extracurricular_activity_enrollments'
+    with_options only: %i( index new create destroy ) do |enrollment|
+      enrollment.resources :class_group_enrollments, controller: 'students/class_group_enrollments'
+      enrollment.resources :course_enrollments, controller: 'students/course_enrollments'
+      enrollment.resources :extracurricular_activity_enrollments, controller: 'students/extracurricular_activity_enrollments'
+    end
   end
-
-
 
   resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
 
@@ -152,6 +152,5 @@ Gaku::Core::Engine.routes.draw do
   end
 
   get 'realtime/exam_portion_scores', to: 'realtime#exam_portion_scores'
-
 
 end

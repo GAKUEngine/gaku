@@ -51,7 +51,7 @@ describe Gaku::SyllabusesController do
         it 'renders :recovery' do
           js_patch_recovery
           should render_template :recovery
-       end
+        end
 
         it 'updates :deleted attribute' do
           expect do
@@ -60,7 +60,6 @@ describe Gaku::SyllabusesController do
           end.to change(deleted_syllabus, :deleted)
         end
       end
-
 
       describe 'JS DELETE #destroy' do
         it 'deletes the syllabus' do

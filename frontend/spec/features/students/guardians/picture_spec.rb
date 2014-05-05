@@ -1,39 +1,14 @@
-# require 'spec_helper'
-
-# describe 'Student Guardian Picture' do
-
-#   let(:student) { create(:student) }
-#   let(:guardian) { create(:guardian) }
-
-#   before do
-#     as :admin
-#     @file_name = 'guardian_picture'
-#     student.guardians << guardian
-#   end
-
-#   context 'upload avatar' do
-#     before { visit gaku.edit_student_guardian_path(student, guardian) }
-#     it_behaves_like 'upload avatar'
-#   end
-
-#   context 'show avatar' do
-#     before { visit gaku.edit_student_guardian_path(student, guardian) }
-#     it_behaves_like 'show avatar'
-#   end
-
-# end
-
-
-
 require 'spec_helper'
 
 describe 'Student Guardian Picture' do
 
-   let(:student) { create(:student) }
-   let(:guardian) { create(:guardian) }
-   let(:guardian_with_picture) { create(:guardian,
-    picture: ActionDispatch::Http::UploadedFile.new(:tempfile => File.new("#{Rails.root}/../support/120x120.jpg"), :filename => "120x120.jpg")
-    )}
+  let(:student) { create(:student) }
+  let(:guardian) { create(:guardian) }
+  let(:guardian_with_picture) do
+    create(:guardian,
+           picture: ActionDispatch::Http::UploadedFile.new(tempfile: File.new("#{Rails.root}/../support/120x120.jpg"),
+                                                           filename: '120x120.jpg'))
+  end
 
   before do
     as :admin
@@ -45,16 +20,15 @@ describe 'Student Guardian Picture' do
       visit gaku.edit_student_guardian_path(student, guardian)
     end
 
-
     it 'upload avatar', js: true do
       click '#avatar-picture'
       expect do
-      attach_file :guardian_picture,
-              File.join(Rails.root + '../support/120x120.jpg')
-      click_button 'Upload'
-      wait_for_ajax
-      guardian.reload
-      flash_updated?
+        attach_file :guardian_picture,
+                    File.join(Rails.root + '../support/120x120.jpg')
+        click_button 'Upload'
+        wait_for_ajax
+        guardian.reload
+        flash_updated?
       end.to change(guardian, :picture_content_type).from(nil).to('image/jpeg')
     end
   end

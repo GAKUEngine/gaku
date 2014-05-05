@@ -13,7 +13,7 @@ describe Gaku::ExamPortion do
   end
 
   describe 'validations' do
-  	let(:exam_portion) { create(:exam_portion) }
+    let(:exam_portion) { create(:exam_portion) }
 
     it { should validate_presence_of :max_score }
     it { should validate_numericality_of :max_score }

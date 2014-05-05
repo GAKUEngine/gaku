@@ -25,16 +25,16 @@ describe Gaku::Course do
   end
 
   # context 'enroll_class_group' do
-  # 	it 'should enroll class group to course' do
-		# 	course = create(:course)
-		# 	student1, student2 = create(:student), create(:student, name: 'gaku')
+  #   it 'should enroll class group to course' do
+  #     course = create(:course)
+  #     student1, student2 = create(:student), create(:student, name: 'gaku')
   #     class_group = create(:class_group)
   #     create(:class_group_enrollment, student_id: student1.id, class_group_id: class_group.id)
   #     create(:class_group_enrollment, student_id: student2.id, class_group_id: class_group.id)
-  # 		course.enroll_class_group(class_group)
-  # 		course.student_ids.include?(student1.id)
-  # 		course.student_ids.include?(student2.id)
-  # 	end
+  #     course.enroll_class_group(class_group)
+  #     course.student_ids.include?(student1.id)
+  #     course.student_ids.include?(student2.id)
+  #   end
   # end
 
   context 'counter_cache' do
@@ -49,13 +49,13 @@ describe Gaku::Course do
       it 'increments notes_count' do
         expect do
           course.notes << note
-        end.to change { course.reload.notes_count }.by 1
+        end.to change { course.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           course_with_note.notes.last.destroy
-        end.to change { course_with_note.reload.notes_count }.by -1
+        end.to change { course_with_note.reload.notes_count }.by(-1)
       end
     end
 
@@ -67,13 +67,13 @@ describe Gaku::Course do
       it 'increments enrollments_count' do
         expect do
           course.students << student
-        end.to change { course.reload.enrollments_count }.by 1
+        end.to change { course.reload.enrollments_count }.by(1)
       end
 
       it 'decrements enrollments_count' do
         expect do
           course_with_enrollment.students.last.destroy
-        end.to change { course_with_enrollment.reload.enrollments_count }.by -1
+        end.to change { course_with_enrollment.reload.enrollments_count }.by(-1)
       end
     end
 

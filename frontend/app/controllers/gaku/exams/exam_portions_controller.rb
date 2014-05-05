@@ -32,7 +32,7 @@ module Gaku
 
     def update
       @exam_portion.update(exam_portion_params)
-      respond_with @exam_portion#, location: [@exam, :exam_portions]
+      respond_with @exam_portion# , location: [@exam, :exam_portions]
     end
 
     def destroy
@@ -58,7 +58,6 @@ module Gaku
     def exam_portion_params
       params.require(:exam_portion).permit(attributes)
     end
-
 
     def attributes
       %i( name weight problem_count max_score description adjustments )

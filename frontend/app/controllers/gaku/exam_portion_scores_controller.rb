@@ -1,7 +1,7 @@
 module Gaku
   class ExamPortionScoresController < GakuController
 
-     respond_to :js
+    respond_to :js
 
     def update
       @exam_portion_score = ExamPortionScore.find(params[:id])
@@ -15,7 +15,7 @@ module Gaku
     private
 
     def exam_portion_score_params
-       params.require(:exam_portion_score).permit(attributes)
+      params.require(:exam_portion_score).permit(attributes)
     end
 
     def attributes

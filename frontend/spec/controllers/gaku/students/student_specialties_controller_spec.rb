@@ -35,7 +35,9 @@ describe Gaku::Students::StudentSpecialtiesController do
       describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, student_specialty: attributes_for(:student_specialty, specialty_id: specialty.id), student_id: student.id
+            gaku_js_post :create,
+                         student_specialty: attributes_for(:student_specialty, specialty_id: specialty.id),
+                         student_id: student.id
           end
 
           it 'creates new student_specialty' do
@@ -71,7 +73,10 @@ describe Gaku::Students::StudentSpecialtiesController do
       describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: student_specialty, student_specialty: attributes_for(:student_specialty, specialty_id: specialty), student_id: student.id
+            gaku_js_patch :update,
+                          id: student_specialty,
+                          student_specialty: attributes_for(:student_specialty, specialty_id: specialty),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -85,7 +90,10 @@ describe Gaku::Students::StudentSpecialtiesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: student_specialty, student_specialty: attributes_for(:invalid_student_specialty, specialty_id: nil), student_id: student.id
+            gaku_js_patch :update,
+                          id: student_specialty,
+                          student_specialty: attributes_for(:invalid_student_specialty, specialty_id: nil),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }

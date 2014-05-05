@@ -34,7 +34,6 @@ describe 'Student External School Records' do
     end
   end
 
-
   context 'existing', js: true do
 
     let!(:external_school_record) { create(:external_school_record, school: school, student: student) }
@@ -65,7 +64,6 @@ describe 'Student External School Records' do
       end.to change(Gaku::ExternalSchoolRecord, :count).by(-1)
       within('.external-school-records-count') { expect(page.has_content?('0')).to eq true }
     end
-
 
   end
 

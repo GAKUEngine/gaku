@@ -9,11 +9,17 @@ describe 'Selecting Students', type: :feature do
 
   let(:admin) { create(:admin_user) }
 
-  let!(:preset) { create(:preset, chooser_fields: {show_name: '1', show_surname: '1'}) }
+  let!(:preset) { create(:preset, chooser_fields: { show_name: '1', show_surname: '1' }) }
 
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
-  let(:student) { create(:student, name: 'John', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code) }
-  let(:student2) { create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code) }
+
+  let(:student) do
+    create(:student, name: 'John', surname: 'Doe', enrollment_status_code: enrollment_status_admitted.code)
+  end
+
+  let(:student2) do
+    create(:student, name: 'Susumu', surname: 'Yokota', enrollment_status_code: enrollment_status_admitted.code)
+  end
 
   before do
     as admin
@@ -72,7 +78,7 @@ describe 'Selecting Students', type: :feature do
 
       find(:css, "input#student-#{student.id}").should be_checked
       find(:css, "input#student-#{student2.id}").should be_checked
-      find(:css, "#clear-student-selection").click
+      find(:css, '#clear-student-selection').click
 
       sleep 1
 
@@ -87,7 +93,7 @@ describe 'Selecting Students', type: :feature do
       page.has_selector? '#students-checked-div'
       page.has_content? 'Chosen students(1)'
       click_link 'Show'
-      find(:css, ".remove-student").click
+      find(:css, '.remove-student').click
       sleep 1
       find(:css, "input#student-#{student.id}").should_not be_checked
       page.has_content? 'Chosen students(1)'

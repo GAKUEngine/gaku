@@ -11,7 +11,6 @@ describe 'Student Contacts' do
 
   before(:all) { set_resource 'student-contact' }
 
-
   context 'existing', type: 'contact' do
 
     context 'one contact' do

@@ -67,5 +67,4 @@ describe 'Sign Up' do
     end
   end
 
-
 end
