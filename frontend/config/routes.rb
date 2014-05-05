@@ -121,9 +121,11 @@ Gaku::Core::Engine.routes.draw do
 
     resources :guardians, except: %i( show )
 
-    resources :course_enrollments, controller: 'students/course_enrollments', only: %i( new create destroy index )
-
-    resources :class_group_enrollments, controller: 'students/class_group_enrollments'
+    with_options only: %i( index new create destroy ) do |enrollment|
+      enrollment.resources :class_group_enrollments, controller: 'students/class_group_enrollments'
+      enrollment.resources :course_enrollments, controller: 'students/course_enrollments'
+      enrollment.resources :extracurricular_activity_enrollments, controller: 'students/extracurricular_activity_enrollments'
+    end
   end
 
   resources :exam_sessions, controller: 'exams/exam_sessions', except: :index

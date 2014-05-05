@@ -180,10 +180,8 @@ en:
     singular: Class Group
     with_semester: With Semester
     without_semester: Without Semester
-  class_group_course_enrollment:
-    save: Save Course to Class Group
-    singular: Course
   class_group_enrollment:
+    add: Enroll to class group
     count: Enrollments count
     create: Create Class Enrollment
     current: Current enrollment
@@ -515,8 +513,8 @@ en:
     save: Save
     show: Show Extracurricular Activity
     singular: Extracurricular Activity
-  extracurricular_activity_enrollment:
-    list: Student list
+    create: Create Extracurricular Activity Enrollment
+    choose: Choose Extracurricular Activity
   failure:
     enrolled: Failed to enroll!
   file: File

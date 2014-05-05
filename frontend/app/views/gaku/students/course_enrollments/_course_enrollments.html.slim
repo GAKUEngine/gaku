@@ -14,4 +14,4 @@
             = th t(:'course.code')
             = th_actions 1
         tbody
-          = render partial: 'gaku/students/course_enrollments/course_enrollment', collection: @student.course_enrollments, as: 'course_enrollment'
+          = render partial:'course_enrollment', collection: @course_enrollments, as: :course_enrollment

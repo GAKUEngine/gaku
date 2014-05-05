@@ -1,0 +1,3 @@
+= remote_form_for [@student, @extracurricular_activity_enrollment], url: student_extracurricular_activity_enrollments_path(@student, @extracurricular_activity_enrollment)  , resource: 'student-extracurricular-activity-enrollment' do |f|
+  = f.select :enrollmentable_id, options_from_collection_for_select(@extracurricular_activities, :id, :to_s), { prompt: t(:'extracurricular_activity.choose')}, label: t(:'extracurricular_activity.plural')
+  = buttons_for @extracurricular_activity_enrollments, label: t(:'extracurricular_activity.create'), resource: 'student-extracurricular-activity-enrollment'

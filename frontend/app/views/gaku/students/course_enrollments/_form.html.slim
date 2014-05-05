@@ -1,4 +1,3 @@
-= remote_form_for [@student, @course_enrollment], resource: 'student-course-enrollment' do |f|
-  = f.select :course_id, options_from_collection_for_select(@courses, :id, :code_with_syllabus_name), { prompt: t(:'course.choose')}, label: t(:'course.plural')
-  = f.hidden_field :student_id, value: @student.id
+= remote_form_for [@student, @course_enrollment], url: student_course_enrollments_path(@student, @course_enrollment)  , resource: 'student-course-enrollment' do |f|
+  = f.select :enrollmentable_id, options_from_collection_for_select(@courses, :id, :to_s), { prompt: t(:'course.choose')}, label: t(:'course.plural')
   = buttons_for @course_enrollment, label: t(:'course_enrollment.create'), resource: 'student-course-enrollment'
