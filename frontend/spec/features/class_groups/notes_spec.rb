@@ -12,7 +12,7 @@ describe 'ClassGroup Notes' do
     before do
       @resource = class_group
       visit gaku.edit_class_group_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'new note'
@@ -22,7 +22,7 @@ describe 'ClassGroup Notes' do
     before do
       @resource = class_group_with_note
       visit gaku.edit_class_group_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'edit note'
