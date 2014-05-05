@@ -15,8 +15,8 @@ module Gaku
 
     def name_and_ruby_for(person)
       name_elements = [
-        {word: person.surname,  reading: person.surname_reading},
-        {word: person.name,     reading: person.name_reading}
+        { word: person.surname,  reading: person.surname_reading },
+        { word: person.name,     reading: person.name_reading }
       ]
 
       name_elements.map do |element|
@@ -25,13 +25,13 @@ module Gaku
             content_tag(:rb) do
               element[:word]
             end,
-            content_tag(:rp, "( "),
+            content_tag(:rp, '( '),
             content_tag(:rt) do
               element[:reading]
             end,
-            content_tag(:rp, " )"),
+            content_tag(:rp, ' )'),
             unless name_elements.last == element
-              "&nbsp;"
+              '&nbsp;'
             end
           ].join.html_safe
         end
@@ -56,9 +56,8 @@ module Gaku
     def student_names(student, options = {})
       @names_preset ||= Gaku::Preset.names
       reading = options[:reading]
-      if @names_preset.blank?
-        return reading ? student.surname : student.name
-      end
+      return reading ? student.surname : student.names if @names_preset.blank?
+
       result = @names_preset.gsub(/%(\w+)/) do |name|
         case name
         when '%first' then proper_name(student, :name, reading)

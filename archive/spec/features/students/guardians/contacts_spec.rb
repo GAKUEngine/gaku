@@ -11,9 +11,6 @@ describe 'Student Guardian Contacts' do
   let(:guardian_with_contacts) { create(:guardian, :with_contacts) }
   let(:contact_type) { create(:contact_type, name: 'Email') }
 
-  tab_link = '#student-guardian-contacts-tab-link'
-
-
   context 'existing', js: true, type: 'contact' do
 
     context 'one contact' do

@@ -51,7 +51,7 @@ shared_examples_for 'edit contact' do
     has_no_content? old_contact
   end
 
-  it 'errors without required fields', js:true do
+  it 'errors without required fields', js: true do
     fill_in 'contact_data',  with: ''
     has_validations?
   end
@@ -64,9 +64,7 @@ shared_examples_for 'delete contact' do
     contact_field = @resource.contacts.first.data
 
     count? 'Contacts list(1)'
-    if page.has_css?(tab_link)
-      within(tab_link)  { has_content? 'Contacts(1)' }
-    end
+    within(tab_link)  { has_content? 'Contacts(1)' } if page.has_css?(tab_link)
     has_content? contact_field
 
     expect do

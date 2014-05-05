@@ -24,7 +24,7 @@ module Gaku
       set_count
       respond_to do |format|
         format.html
-        format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
+        format.json { render json: @exams.as_json(include: { exam_portions: { include: :exam_portion_scores } }) }
       end
     end
 
@@ -40,9 +40,7 @@ module Gaku
 
     def create
       @exam = Exam.new(exam_params)
-      if @exam.save
-        @exam.use_primary_grading_method_set
-      end
+      @exam.use_primary_grading_method_set if @exam.save
       set_count
       respond_with @exam
     end
@@ -66,10 +64,9 @@ module Gaku
       @course = Course.find(params[:course_id])
     end
 
-
     def grading
       @course = Course.find(params[:course_id])
-      @students = @course.students #.select("id, surname, name")
+      @students = @course.students # .select("id, surname, name")
       find_exams
 
       calculate_totals
@@ -79,23 +76,25 @@ module Gaku
 
       @path_to_exam = course_path(id: params[:course_id])
 
-      #exam_portions need reload to properly include exam_portion_score in as_json
+      # exam_portions need reload to properly include exam_portion_score in as_json
       @exams.each { |exam| exam.exam_portions.reload }
 
       respond_to do |format|
-        format.json do render json: {
-          student_total_scores: @student_total_scores.as_json,
-          exams: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores }},root: false),
-          course: @course.as_json(root: false),
-          exam_averages: @exam_averages.as_json(root: false),
-          deviation: @deviation.as_json(root: false),
-          students: @students.to_json(root: false),
-          grades: @grades.as_json(root: false),
-          ranks: @ranks.as_json(root: false),
-          attendances: @student_portion_attendance.as_json(root: true, include: :attendance_type),
-          path_to_exam: @path_to_exam.to_json,
-          completion: @completion
-        }end
+        format.json do
+          render json: {
+            student_total_scores: @student_total_scores.as_json,
+            exams: @exams.as_json(include: { exam_portions: { include: :exam_portion_scores } }, root: false),
+            course: @course.as_json(root: false),
+            exam_averages: @exam_averages.as_json(root: false),
+            deviation: @deviation.as_json(root: false),
+            students: @students.to_json(root: false),
+            grades: @grades.as_json(root: false),
+            ranks: @ranks.as_json(root: false),
+            attendances: @student_portion_attendance.as_json(root: true, include: :attendance_type),
+            path_to_exam: @path_to_exam.to_json,
+            completion: @completion
+          }
+        end
         format.html { render 'gaku/exams/grading' }
       end
     end
@@ -104,7 +103,6 @@ module Gaku
       @exam = Exam.find(params[:id])
       @course = Course.find(params[:course_id])
       @students = @course.students
-
 
       respond_with @exam.completed_by_students(@students)
     end
@@ -127,7 +125,7 @@ module Gaku
 
     def attributes
       [:name, :department_id, :weight, :description, :adjustments, :use_weighting,
-        exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]
+       exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]
       ]
     end
 
@@ -157,7 +155,7 @@ module Gaku
     end
 
     def find_exams
-      if params[:id] != nil
+      if params[:id]
         @exams = Exam.where(id: params[:id])
       else
         @exams = @course.syllabus.exams

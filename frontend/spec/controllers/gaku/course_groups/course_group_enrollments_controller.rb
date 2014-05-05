@@ -4,7 +4,7 @@ describe Gaku::CourseGroups::CourseGroupEnrollmentsController do
 
   let(:course_group) { create(:course_group) }
   let(:course) { create(:course) }
-  let(:course_group_enrollment) { create(:course_group_enrollment, course_group: course_group, course: course)}
+  let(:course_group_enrollment) { create(:course_group_enrollment, course_group: course_group, course: course) }
 
   context 'as admin' do
     before { as :admin }
@@ -15,14 +15,21 @@ describe Gaku::CourseGroups::CourseGroupEnrollmentsController do
         before { gaku_js_get :new, course_group_id: course_group }
 
         it { should respond_with 200 }
-        it('assigns @course_group_enrollment') { expect(assigns(:course_group_enrollment)).to be_a_new(Gaku::CourseGroupEnrollment) }
+
+        it('assigns @course_group_enrollment') do
+          expect(assigns(:course_group_enrollment)).to be_a_new(Gaku::CourseGroupEnrollment)
+        end
+
         it('renders the :new template') { template? :new }
       end
 
       describe 'JS POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, course_group_id: course_group, course_group_enrollment: attributes_for(:course_group_enrollment, course_id: course.id, course_group_id: course_group.id)
+            gaku_js_post :create, course_group_id: course_group,
+                                  course_group_enrollment: attributes_for(:course_group_enrollment,
+                                                                          course_id: course.id,
+                                                                          course_group_id: course_group.id)
           end
 
           it 'creates new course_group' do
@@ -44,7 +51,8 @@ describe Gaku::CourseGroups::CourseGroupEnrollmentsController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, course_group_id: course_group, course_group_enrollment: attributes_for(:course_group, course_id: nil)
+            gaku_js_post :create, course_group_id: course_group,
+                                  course_group_enrollment: attributes_for(:course_group, course_id: nil)
           end
 
           xit 'does not save the new course_group' do

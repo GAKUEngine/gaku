@@ -68,7 +68,6 @@ describe Gaku::TeachersController do
         end
       end
 
-
     end
 
     context 'js' do

@@ -56,7 +56,6 @@ module Gaku::Testing::FeatureHelpers
     '.js-edit-link'
   end
 
-
   def recovery_link
     '.recovery-link'
   end
@@ -117,9 +116,7 @@ module Gaku::Testing::FeatureHelpers
   def wait_for_ajax(timeout = Capybara.default_wait_time)
     Timeout.timeout(timeout) do
       active = page.evaluate_script('jQuery.active')
-      until active == 0
-        active = page.evaluate_script('jQuery.active')
-      end
+      active = page.evaluate_script('jQuery.active') until active == 0
     end
   end
 
@@ -132,7 +129,7 @@ module Gaku::Testing::FeatureHelpers
     within(count_div) { page.has_content? count }
   end
 
-  def check_path(current_url,expected_path)
+  def check_path(current_url, expected_path)
     uri = URI.parse(current_url)
     "#{uri.path}?#{uri.query}".should == expected_path
   end
@@ -144,7 +141,7 @@ module Gaku::Testing::FeatureHelpers
   private
 
   def plural(text)
-    a = []
+    # a = []
     a = text.split('-')
     p = a.last.pluralize
     result = a[0..-2] << p
@@ -156,4 +153,3 @@ end
 RSpec.configure do |config|
   config.include Gaku::Testing::FeatureHelpers, type: :feature
 end
-

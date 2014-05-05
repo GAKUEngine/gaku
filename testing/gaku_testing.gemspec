@@ -1,12 +1,12 @@
 # encoding: UTF-8
-version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
+version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku_testing'
   s.version      = version
   s.summary      = 'Shared testing helpers for GAKU Engine'
-  s.description  = "Testing helpers used in other engines"
+  s.description  = 'Testing helpers used in other engines'
   s.required_ruby_version = '~> 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']

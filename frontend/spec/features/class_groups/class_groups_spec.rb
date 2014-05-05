@@ -79,18 +79,18 @@ describe 'ClassGroups' do
 
     end
 
-     it 'deletes' do
-        visit gaku.edit_class_group_path(class_group)
+    it 'deletes' do
+      visit gaku.edit_class_group_path(class_group)
 
-        expect do
-          click modal_delete_link
-          within(modal) { click_on 'Delete' }
-          accept_alert
-          flash_destroyed?
-        end.to change(Gaku::ClassGroup, :count).by -1
+      expect do
+        click modal_delete_link
+        within(modal) { click_on 'Delete' }
+        accept_alert
+        flash_destroyed?
+      end.to change(Gaku::ClassGroup, :count).by(-1)
 
-        current_path.should eq gaku.class_groups_path
-      end
+      current_path.should eq gaku.class_groups_path
+    end
 
   end
 end

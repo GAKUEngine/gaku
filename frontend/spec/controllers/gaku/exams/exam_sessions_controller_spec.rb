@@ -33,7 +33,7 @@ describe Gaku::Exams::ExamSessionsController do
         it('renders the :edit template') { template? :edit }
       end
 
-       describe 'PATCH #update' do
+      describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
             gaku_patch :update, id: exam_session, exam_session: attributes_for(:exam_session, name: 'new method')
@@ -83,9 +83,7 @@ describe Gaku::Exams::ExamSessionsController do
         end
       end
 
-
     end
-
 
     context 'js' do
 
@@ -101,7 +99,7 @@ describe Gaku::Exams::ExamSessionsController do
         context 'with valid attributes' do
           let(:valid_js_create) do
             exam
-            gaku_js_post :create, exam_session: FactoryGirl.build(:exam_session, exam_id: exam.id).attributes.symbolize_keys
+            gaku_js_post :create, exam_session: build(:exam_session, exam_id: exam.id).attributes.symbolize_keys
           end
 
           it 'creates new exam_session' do

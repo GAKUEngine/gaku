@@ -50,7 +50,6 @@ describe 'Extracurricular Activities' do
 
           expect(find_field('extracurricular_activity_name').value).to eq 'Paintball'
 
-
           extracurricular_activity.reload
           expect(extracurricular_activity.name).to eq 'Paintball'
         end

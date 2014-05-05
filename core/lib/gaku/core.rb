@@ -17,7 +17,7 @@ module Gaku
   module Core
   end
 
-  def self.config(&block)
+  def self.config(&_block)
     yield(Gaku::Config)
   end
 end

@@ -6,14 +6,27 @@ describe Gaku::StudentsController do
   let!(:enrollment_status) { create(:enrollment_status_admitted) }
   let(:enrollment_status_not_active) { create(:enrollment_status, active: false) }
   let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
-  let(:valid_attributes) { {name: 'Marta', surname: 'Kostova'} }
-  let(:invalid_attributes) { {name: ''} }
+  let(:valid_attributes) { { name: 'Marta', surname: 'Kostova' } }
+  let(:invalid_attributes) { { name: '' } }
 
   context 'search' do
     describe 'name' do
 
-      let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code, birth_date: Date.new(1950,9,1)) }
-      let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code, birth_date: Date.new(2013,10,5)) }
+      let!(:student1) do
+        create(:student,
+               name: 'Rei',
+               surname: 'Kagetsuki',
+               enrollment_status_code: enrollment_status.code,
+               birth_date: Date.new(1950, 9, 1))
+      end
+
+      let!(:student2) do
+        create(:student,
+               name: 'Vassil',
+               surname: 'Kalkov',
+               enrollment_status_code: enrollment_status.code,
+               birth_date: Date.new(2013, 10, 5))
+      end
 
       it 'searches by name' do
         gaku_js_get :search, q: { name_cont: 'Re' }
@@ -30,14 +43,14 @@ describe Gaku::StudentsController do
       end
 
       it 'searches by birth_date_gteq' do
-        gaku_js_get :search, q: { birth_date_gteq: Date.new(2000,1,1) }
+        gaku_js_get :search, q: { birth_date_gteq: Date.new(2000, 1, 1) }
 
         expect(assigns(:students)).to eq [student2]
         expect(assigns(:students).size).to eq 1
       end
 
       it 'searches by birth_date_lteq' do
-        gaku_js_get :search, q: { birth_date_lteq: Date.new(2000,1,1) }
+        gaku_js_get :search, q: { birth_date_lteq: Date.new(2000, 1, 1) }
 
         expect(assigns(:students)).to eq [student1]
         expect(assigns(:students).size).to eq 1
@@ -64,8 +77,8 @@ describe Gaku::StudentsController do
     describe 'academic' do
       context 'graduated' do
 
-        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', graduated: Date.new(1983,9,1)) }
-        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', graduated: Date.new(2000,10,5)) }
+        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', graduated: Date.new(1983, 9, 1)) }
+        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', graduated: Date.new(2000, 10, 5)) }
 
         before do
           student1
@@ -73,13 +86,13 @@ describe Gaku::StudentsController do
         end
 
         it 'searches by graduated_gteq' do
-          gaku_js_get :search, q: { graduated_gteq: Date.new(2000,1,1) }
+          gaku_js_get :search, q: { graduated_gteq: Date.new(2000, 1, 1) }
           expect(assigns(:students)).to eq [student2]
           expect(assigns(:students).size).to eq 1
         end
 
         it 'searches by graduated_lteq' do
-          gaku_js_get :search, q: { graduated_lteq: Date.new(2000,1,1) }
+          gaku_js_get :search, q: { graduated_lteq: Date.new(2000, 1, 1) }
 
           expect(assigns(:students)).to eq [student1]
           expect(assigns(:students).size).to eq 1
@@ -88,8 +101,8 @@ describe Gaku::StudentsController do
 
       context 'admitted' do
 
-        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', admitted: Date.new(1983,9,1)) }
-        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', admitted: Date.new(2000,10,5)) }
+        let!(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', admitted: Date.new(1983, 9, 1)) }
+        let!(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', admitted: Date.new(2000, 10, 5)) }
 
         before do
           student1
@@ -97,22 +110,24 @@ describe Gaku::StudentsController do
         end
 
         it 'searches by admitted_gteq' do
-          gaku_js_get :search, q: { admitted_gteq: Date.new(2000,1,1) }
+          gaku_js_get :search, q: { admitted_gteq: Date.new(2000, 1, 1) }
           expect(assigns(:students)).to eq [student2]
           expect(assigns(:students).size).to eq 1
         end
 
         it 'searches by admitted_lteq' do
-          gaku_js_get :search, q: { admitted_lteq: Date.new(2000,1,1) }
+          gaku_js_get :search, q: { admitted_lteq: Date.new(2000, 1, 1) }
 
           expect(assigns(:students)).to eq [student1]
           expect(assigns(:students).size).to eq 1
         end
       end
 
-
       context 'specialty' do
-        let(:student) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code) }
+        let(:student) do
+          create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code)
+        end
+
         let(:specialty) { create(:specialty, name: 'Clojure') }
         let(:student_specialty) { create(:student_specialty, student: student, specialty: specialty) }
 
@@ -128,14 +143,42 @@ describe Gaku::StudentsController do
     end
 
     describe 'address' do
-      let(:student1) { create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code) }
-      let(:student2) { create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code) }
+      let(:student1) do
+        create(:student, name: 'Rei', surname: 'Kagetsuki', enrollment_status_code: enrollment_status.code)
+      end
+
+      let(:student2) do
+        create(:student, name: 'Vassil', surname: 'Kalkov', enrollment_status_code: enrollment_status.code)
+      end
+
       let(:country1) { create(:country, name: 'Japan') }
       let(:country2) { create(:country, name: 'Bulgaria') }
       let(:state1) { create(:state, name: 'Aici', country: country1) }
       let(:state2) { create(:state, name: 'Varna', country: country2) }
-      let!(:address1) { create(:address, title: 'GTR', address1: 'Toyota str.', address2: 'gt86 str.', city: 'Nagoya', zipcode: '5000', state: state1, country: country1, addressable: student1) }
-      let!(:address2) { create(:address, title: 'S2000', address1: 'Subaru str.', address2: 'wrx str.', city: 'Varna', zipcode: '9004', state: state2, country: country2, addressable: student2) }
+
+      let!(:address1) do
+        create(:address,
+               title: 'GTR',
+               address1: 'Toyota str.',
+               address2: 'gt86 str.',
+               city: 'Nagoya',
+               zipcode: '5000',
+               state: state1,
+               country: country1,
+               addressable: student1)
+      end
+
+      let!(:address2) do
+        create(:address,
+               title: 'S2000',
+               address1: 'Subaru str.',
+               address2: 'wrx str.',
+               city: 'Varna',
+               zipcode: '9004',
+               state: state2,
+               country: country2,
+               addressable: student2)
+      end
 
       before do
         student1.addresses.reload
@@ -196,7 +239,7 @@ describe Gaku::StudentsController do
         expect(session[:q]).to eq nil
       end
 
-      it "changes session if params[:q] is changed" do
+      it 'changes session if params[:q] is changed' do
         gaku_js_get :index, q: { enrollment_status_code_eq: 'admitted' }
         expect(session[:q]['enrollment_status_code_eq']).to eq 'admitted'
         gaku_js_get :index, q: { enrollment_status_code_eq: 'admitted', graduated_gteq: 'test' }
@@ -205,7 +248,6 @@ describe Gaku::StudentsController do
       end
 
     end
-
 
     describe 'search unscoped' do
       let(:unscoped_student) { create(:student, enrollment_status_code: enrollment_status_not_active.code) }
@@ -241,7 +283,6 @@ describe Gaku::StudentsController do
       end
     end
 
-
     describe 'search active scope' do
       let(:unscoped_student) { create(:student, enrollment_status_code: enrollment_status_not_active.code) }
 
@@ -253,7 +294,7 @@ describe Gaku::StudentsController do
 
     end
 
-     describe 'sorting' do
+    describe 'sorting' do
       context 'by created_at' do
         it 'sorts by created_at' do
           student
@@ -292,7 +333,6 @@ describe Gaku::StudentsController do
           expect(assigns(:search).sorts.first.dir).to eq 'desc'
         end
       end
-
     end
 
   end
@@ -302,7 +342,8 @@ describe Gaku::StudentsController do
       let(:preset) { create(:preset) }
 
       before do
-        student; preset
+        student
+        preset
         gaku_get :index
       end
 
@@ -345,7 +386,7 @@ describe Gaku::StudentsController do
         let(:html_post) { gaku_post :create, student: invalid_attributes }
 
         it 'does not save' do
-          expect{ html_post }.to_not change(Gaku::Student, :count).by(1)
+          expect { html_post }.to_not change(Gaku::Student, :count).by(1)
         end
 
         it 'renders :new template' do
@@ -429,7 +470,7 @@ describe Gaku::StudentsController do
         student
         expect do
           gaku_js_delete :destroy, id: student
-        end.to change(Gaku::Student, :count).by -1
+        end.to change(Gaku::Student, :count).by(-1)
       end
     end
 

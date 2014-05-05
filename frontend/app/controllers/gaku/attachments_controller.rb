@@ -12,7 +12,6 @@ module Gaku
       respond_with @attachment
     end
 
-
     def create
       @attachable = find_attachable
       @attachment = @attachable.attachments.build(params[:attachment])
@@ -20,7 +19,7 @@ module Gaku
         if @attachment.save
           format.html { redirect_to :back, flash: { notice: 'Asset upload was successful!' } }
         else
-          format.html { redirect_to :back, flash: {success: 'Error when upload asset'} }
+          format.html { redirect_to :back, flash: { success: 'Error when upload asset' } }
         end
       end
     end
@@ -61,7 +60,6 @@ module Gaku
     end
 
     private
-
 
     def attachment_attr
       [:name, :description, :asset]

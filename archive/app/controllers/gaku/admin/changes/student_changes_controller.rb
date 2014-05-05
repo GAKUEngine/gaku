@@ -1,7 +1,7 @@
 module Gaku
   class Admin::Changes::StudentChangesController < Admin::BaseController
 
-    #load_and_authorize_resource class: StudentVersion
+    # load_and_authorize_resource class: StudentVersion
     respond_to :html, only: :index
 
     def index

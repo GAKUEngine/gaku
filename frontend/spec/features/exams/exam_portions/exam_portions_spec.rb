@@ -5,7 +5,6 @@ describe 'Exam Portions' do
   let!(:exam) { create(:exam, name: 'Linux') }
   let(:exam_portion) { create(:exam_portion, exam: exam) }
 
-
   before(:all) { set_resource 'exam-exam-portion' }
   before { as :admin }
 
@@ -22,7 +21,7 @@ describe 'Exam Portions' do
 
         click submit
         flash_created?
-      end.to change(Gaku::ExamPortion, :count).by 1
+      end.to change(Gaku::ExamPortion, :count).by(1)
 
       within(table) { has_content? 'Biology Exam Portion' }
       within('#exams-exam-portions-menu') { expect(page.has_content?('1')).to eq true }
@@ -75,10 +74,10 @@ describe 'Exam Portions' do
         click delete_link
         accept_alert
         flash_destroyed?
-      end.to change(Gaku::ExamPortion, :count).by -1
+      end.to change(Gaku::ExamPortion, :count).by(-1)
 
       within('#exams-exam-portions-menu') { expect(page.has_no_content?('1')).to eq true }
-      #within('#exams-exam-portions-menu-list') { expect(page.has_no_content?(exam_portion.name)).to eq true }
+      # within('#exams-exam-portions-menu-list') { expect(page.has_no_content?(exam_portion.name)).to eq true }
       within(table) { has_no_content? exam_portion.name }
     end
 

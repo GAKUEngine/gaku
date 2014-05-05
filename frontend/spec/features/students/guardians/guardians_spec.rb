@@ -57,7 +57,6 @@ describe 'Student Guardians' do
       end
     end
 
-
     it 'soft deletes', js: true do
       expect do
         click modal_delete_link

@@ -1,7 +1,7 @@
 module Gaku
   class Admin::Changes::StudentContactChangesController < Admin::BaseController
 
-    #load_and_authorize_resource class: PaperTrail::Version
+    # load_and_authorize_resource class: PaperTrail::Version
     respond_to :html
 
     def index

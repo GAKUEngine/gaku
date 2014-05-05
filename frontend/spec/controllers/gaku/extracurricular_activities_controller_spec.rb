@@ -16,28 +16,40 @@ describe Gaku::ExtracurricularActivitiesController do
         end
 
         it { should respond_with 200 }
-        it('assigns @extracurricular_activitys') { expect(assigns(:extracurricular_activities)).to eq [extracurricular_activity] }
+
+        it('assigns @extracurricular_activitys') do
+          expect(assigns(:extracurricular_activities)).to eq [extracurricular_activity]
+        end
+
         it('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
-
 
       describe 'GET #edit' do
         before { gaku_get :edit, id: extracurricular_activity }
 
         it { should respond_with 200 }
-        it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+
+        it('assigns @extracurricular_activity') do
+          expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+        end
+
         it('renders the :edit template') { template? :edit }
       end
 
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
+            gaku_patch :update, id: extracurricular_activity,
+                                extracurricular_activity: attributes_for(:extracurricular_activity, name: 'mobifon')
           end
 
           it { should respond_with 302 }
-          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+
+          it('assigns @extracurricular_activity') do
+            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+          end
+
           it('sets flash') { flash_updated? }
           it "changes extracurricular_activity's attributes" do
             extracurricular_activity.reload
@@ -47,11 +59,15 @@ describe Gaku::ExtracurricularActivitiesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: extracurricular_activity, extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
+            gaku_patch :update, id: extracurricular_activity,
+                                extracurricular_activity: attributes_for(:invalid_extracurricular_activity, name: '')
           end
 
           it { should respond_with 200 }
-          it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to eq extracurricular_activity }
+
+          it('assigns @extracurricular_activity') do
+            expect(assigns(:extracurricular_activity)).to eq extracurricular_activity
+          end
 
           it "does not change extracurricular_activity's attributes" do
             extracurricular_activity.reload
@@ -68,7 +84,11 @@ describe Gaku::ExtracurricularActivitiesController do
         before { gaku_js_get :new }
 
         it { should respond_with 200 }
-        it('assigns @extracurricular_activity') { expect(assigns(:extracurricular_activity)).to be_a_new(Gaku::ExtracurricularActivity) }
+
+        it('assigns @extracurricular_activity') do
+          expect(assigns(:extracurricular_activity)).to be_a_new(Gaku::ExtracurricularActivity)
+        end
+
         it('renders the :new template') { template? :new }
       end
 

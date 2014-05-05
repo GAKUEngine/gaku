@@ -7,7 +7,7 @@ Capybara.default_wait_time = 5
 Capybara.default_driver = :rack_test
 
 Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, :inspector => true, js_errors: false)
+  Capybara::Poltergeist::Driver.new(app, inspector: true, js_errors: false)
 end
 
 if ENV['SELENIUM']

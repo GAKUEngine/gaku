@@ -26,7 +26,7 @@ module Gaku
       if save
         return @contact
       else
-        raise 'Failed to save record'
+        fail 'Failed to save record'
       end
     end
 

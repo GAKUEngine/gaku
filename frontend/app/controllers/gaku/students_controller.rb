@@ -57,9 +57,7 @@ module Gaku
     end
 
     def search
-      if session[:q] != params[:q] && !params[:q].nil?
-        session[:q] = params[:q]
-      end
+      session[:q] = params[:q] if session[:q] != params[:q] && params[:q]
 
       if session[:q]
 
@@ -109,16 +107,15 @@ module Gaku
 
     private
 
-
     def student_params
       params.require(:student).permit(attributes)
     end
 
     def attributes
-      [ :name, :surname, :name_reading, :surname_reading, :birth_date,
-          :gender, :scholarship_status_id,
-          :enrollment_status_code, :commute_method_type_id, :admitted,
-          :graduated, :picture, class_group_enrollments_attributes: [:id, :class_group_id] ]
+      [:name, :surname, :name_reading, :surname_reading, :birth_date,
+       :gender, :scholarship_status_id,
+       :enrollment_status_code, :commute_method_type_id, :admitted,
+       :graduated, :picture, class_group_enrollments_attributes: [:id, :class_group_id]]
     end
 
     def includes
@@ -131,9 +128,9 @@ module Gaku
 
     def search_unscoped_params
       %w(
-           graduated_gteq graduated_lteq
-           admitted_gteq admitted_lteq
-           enrollment_status_code_eq
+        graduated_gteq graduated_lteq
+        admitted_gteq admitted_lteq
+        enrollment_status_code_eq
         )
     end
 
@@ -141,13 +138,12 @@ module Gaku
       %w( birth_date_gteq birth_date_lteq age_gteq age_lteq )
     end
 
-
     def set_preset
       @preset = Preset.active
     end
 
     def set_enrollment_statuses
-      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).collect{|p| [p.name, p.code]}
+      @enrollment_statuses = EnrollmentStatus.all.includes(:translations).map { |p| [p.name, p.code] }
     end
 
     def set_countries

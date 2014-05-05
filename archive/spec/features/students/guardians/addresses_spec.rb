@@ -12,7 +12,6 @@ describe 'Student Guardian Addresses' do
 
   let!(:country) { create(:country, name: 'Japan', iso: 'JP') }
 
-
   context 'existing', type: 'address' do
 
     context 'one address' do

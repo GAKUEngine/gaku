@@ -7,9 +7,10 @@ describe 'Student Simple Grades' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:simple_grade_type) { create(:simple_grade_type) }
-  let(:simple_grade) { create(:simple_grade,
-                                student: student,
-                                simple_grade_type:simple_grade_type) }
+
+  let(:simple_grade) do
+    create(:simple_grade, student: student, simple_grade_type: simple_grade_type)
+  end
 
   context 'new', js: true do
     before do

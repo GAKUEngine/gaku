@@ -11,7 +11,6 @@ module Gaku
       respond_with @attachment
     end
 
-
     def create
       @attachment = @exam_portion.attachments.create(attachment_params)
       set_count
@@ -29,7 +28,6 @@ module Gaku
     def attributes
       [:name, :description, :asset]
     end
-
 
     def set_exam
       @exam = Exam.find(params[:exam_id])
