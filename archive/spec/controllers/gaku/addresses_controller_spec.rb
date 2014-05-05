@@ -49,7 +49,6 @@ describe Gaku::AddressesController do
         end
       end
 
-
       describe 'XHR PATCH #soft_delete' do
         let(:js_get_soft_delete) { gaku_js_patch :soft_delete, id: address.id, student_id: student.id }
 
@@ -122,7 +121,7 @@ describe Gaku::AddressesController do
         it 'renders :recovery' do
           js_get_recovery
           should render_template :recovery
-       end
+        end
 
         it 'sets flash' do
           js_get_recovery
@@ -138,7 +137,6 @@ describe Gaku::AddressesController do
       end
 
     end
-
 
   end
 end

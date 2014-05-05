@@ -70,7 +70,7 @@ describe Gaku::TeachersController do
         it 'renders :recovery' do
           get_recovery
           should render_template :recovery
-       end
+        end
 
         it 'updates :deleted attribute' do
           expect do

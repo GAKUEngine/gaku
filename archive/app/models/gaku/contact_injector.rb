@@ -1,10 +1,10 @@
 Gaku::Contact.class_eval do
 
   has_paper_trail class_name: 'Gaku::Versioning::ContactVersion',
-                on: [:update, :destroy],
-                meta: {
-                        join_model: :join_model_name,
-                        joined_resource_id: :joined_resource_id
+                  on: [:update, :destroy],
+                  meta: {
+                    join_model: :join_model_name,
+                    joined_resource_id: :joined_resource_id
                       }
 
   default_scope -> { where(deleted: false) }

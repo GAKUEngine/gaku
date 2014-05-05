@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe 'Student Versioning' do
 
-  let(:student) { create(:student, name: 'Vassil', middle_name: 'Anastasov', surname: 'Kalkov', foreign_id_code: '96') }
-
+  let(:student) do
+    create(:student, name: 'Vassil', middle_name: 'Anastasov', surname: 'Kalkov', foreign_id_code: '96')
+  end
 
   it 'saves soft delete', versioning: true do
     expect do
@@ -56,7 +57,10 @@ describe 'Student Versioning' do
       student.save
     end.to change(Gaku::Versioning::StudentVersion, :count).by(1)
 
-    expect(Gaku::Versioning::StudentVersion.last.human_changes[:enrollment_status]).to eq [enrollment_status1.to_s, enrollment_status2.to_s]
+    expect do
+      Gaku::Versioning::StudentVersion.last.human_changes[:enrollment_status]
+    end.to eq [enrollment_status1.to_s, enrollment_status2.to_s]
+
   end
 
   it 'saves commute_method_type changes', versioning: true do
@@ -70,7 +74,9 @@ describe 'Student Versioning' do
       student.save
     end.to change(Gaku::Versioning::StudentVersion, :count).by(1)
 
-    expect(Gaku::Versioning::StudentVersion.last.human_changes[:commute_method_type]).to eq [commute_method_type1.to_s, commute_method_type2.to_s]
+    expect do
+      Gaku::Versioning::StudentVersion.last.human_changes[:commute_method_type]
+    end.to eq [commute_method_type1.to_s, commute_method_type2.to_s]
   end
 
   it 'saves scholarship_status changes', versioning: true do
@@ -84,8 +90,9 @@ describe 'Student Versioning' do
       student.save
     end.to change(Gaku::Versioning::StudentVersion, :count).by(1)
 
-    expect(Gaku::Versioning::StudentVersion.last.human_changes[:scholarship_status]).to eq [scholarship_status1.to_s, scholarship_status2.to_s]
+    expect do
+      Gaku::Versioning::StudentVersion.last.human_changes[:scholarship_status]
+    end.to eq [scholarship_status1.to_s, scholarship_status2.to_s]
   end
-
 
 end
