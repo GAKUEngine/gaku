@@ -5,11 +5,16 @@ module Gaku
 
     before_action :set_syllabus
 
+    def new
+      @exam_syllabus = ExamSyllabus.new
+      respond_with @exam_syllabus
+    end
+
     def create
       @exam_syllabus = ExamSyllabus.new(exam_syllabus_params)
       @exam_syllabus.save
       set_count
-      flash[:now] = t(:'notice.added', resource: t(:'exam.singular'))
+      #flash[:notice] = t(:'notice.added', resource: t(:'exam.singular'))
       respond_with @exam_syllabus
     end
 
