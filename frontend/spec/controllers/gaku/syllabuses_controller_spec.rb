@@ -33,43 +33,11 @@ describe Gaku::SyllabusesController do
         it('renders the :edit template') { template? :edit }
         it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
       end
-
-      describe 'PATCH #update' do
-        context 'with valid attributes' do
-          before do
-            gaku_patch :update, id: syllabus, syllabus: attributes_for(:syllabus, name: 'mobifon')
-          end
-
-          it { should respond_with 302 }
-          it('redirects') { redirect_to? "/syllabuses/#{syllabus.id}/edit" }
-          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
-          it('sets flash') { flash_updated? }
-          it "changes syllabus's attributes" do
-            syllabus.reload
-            expect(syllabus.name).to eq 'mobifon'
-          end
-        end
-
-        context 'with invalid attributes' do
-          before do
-            gaku_patch :update, id: syllabus, syllabus: attributes_for(:invalid_syllabus, name: '')
-          end
-
-          it { should respond_with 200 }
-          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
-
-          it "does not change syllabus's attributes" do
-            syllabus.reload
-            expect(syllabus.name).not_to eq ''
-          end
-        end
-      end
-
     end
 
     context 'js' do
 
-      describe 'JS #new' do
+      describe 'XHR JS #new' do
         before do
           department
           gaku_js_get :new
@@ -127,7 +95,49 @@ describe Gaku::SyllabusesController do
         end
       end
 
-      describe 'JS DELETE #destroy' do
+      describe 'XHR GET #edit' do
+        before do
+          department
+          gaku_js_get :edit, id: syllabus
+        end
+
+        it { should respond_with 200 }
+        it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+        it('renders the :edit template') { template? :edit }
+        it('assigns @departments') { expect(assigns(:departments)).to eq [department] }
+      end
+
+      describe 'XHR PATCH #update' do
+        context 'with valid attributes' do
+          before do
+            gaku_js_patch :update, id: syllabus, syllabus: attributes_for(:syllabus, name: 'mobifon')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+          it('sets flash') { flash_updated? }
+          it "changes syllabus's attributes" do
+            syllabus.reload
+            expect(syllabus.name).to eq 'mobifon'
+          end
+        end
+
+        context 'with invalid attributes' do
+          before do
+            gaku_patch :update, id: syllabus, syllabus: attributes_for(:invalid_syllabus, name: '')
+          end
+
+          it { should respond_with 200 }
+          it('assigns @syllabus') { expect(assigns(:syllabus)).to eq syllabus }
+
+          it "does not change syllabus's attributes" do
+            syllabus.reload
+            expect(syllabus.name).not_to eq ''
+          end
+        end
+      end
+
+      describe 'XHR DELETE #destroy' do
         it 'deletes the syllabus' do
           syllabus
           expect do

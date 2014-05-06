@@ -12,7 +12,7 @@ describe 'Syllabus Notes' do
     before do
       @resource = syllabus
       visit gaku.edit_syllabus_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'new note'
@@ -22,7 +22,7 @@ describe 'Syllabus Notes' do
     before do
       @resource = syllabus_with_note
       visit gaku.edit_syllabus_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'edit note'

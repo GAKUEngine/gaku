@@ -21,11 +21,10 @@ describe 'Syllabus Exams' do
     before do
       exam
       visit gaku.edit_syllabus_path(syllabus)
-      has_content? 'No Exams'
+      click '#exams-menu a'
     end
 
     it 'adds existing exam', js: true do
-      within(tab_link) { has_no_content? 'Exams(1)' }
       click new_existing_exam_link
       visible? submit_existing_exam_button
 
@@ -34,9 +33,9 @@ describe 'Syllabus Exams' do
 
       invisible? existing_exam_form
       has_content? exam.name
-      flash? 'successfully added'
+      flash_created?
 
-      within(tab_link) { has_content? 'Exams(1)' }
+      within('.syllabus-exams-count') { has_content? 'Exams(1)' }
     end
 
     it 'cancels adding existing exam', cancel: true, js: true do
@@ -54,12 +53,12 @@ describe 'Syllabus Exams' do
     context 'new' do
       before do
         visit gaku.edit_syllabus_path(syllabus)
-        has_content? 'No Exams'
+        click '#exams-menu a'
         click new_link
       end
 
       it 'creates and shows', js: true  do
-        within(tab_link) { has_no_content? 'Exams(1)' }
+        within('.syllabus-exams-count') { has_no_content? 'Exams(1)' }
         expect do
           # required
           fill_in 'exam_name', with: 'Biology Exam'
@@ -74,7 +73,7 @@ describe 'Syllabus Exams' do
           has_no_content? 'No Exams'
         end
         expect(syllabus.exams.last.department).to eq(department)
-        within(tab_link) { has_content? 'Exams(1)' }
+        within('.syllabus-exams-count') { has_content? 'Exams(1)' }
       end
 
       it 'errors without the required fields', js: true do
@@ -90,6 +89,7 @@ describe 'Syllabus Exams' do
       before do
         syllabus.exams << exam
         visit gaku.edit_syllabus_path(syllabus)
+        click '#exams-menu a'
       end
 
       it 'edits', js: true do
@@ -112,7 +112,7 @@ describe 'Syllabus Exams' do
 
       it 'deletes', js: true do
         has_content? exam.name
-        within(tab_link) { has_content? 'Exams(1)' }
+        within('.syllabus-exams-count') { has_content? 'Exams(1)' }
 
         expect do
           ensure_delete_is_working
@@ -120,7 +120,7 @@ describe 'Syllabus Exams' do
         end.to change(syllabus.exams, :count).by(-1)
 
         within(table) { has_no_content? exam.name }
-        within(tab_link) { has_no_content? 'Exams(1)' }
+        within('.syllabus-exams-count') { has_no_content? 'Exams(1)' }
       end
     end
   end
@@ -130,6 +130,7 @@ describe 'Syllabus Exams' do
       syllabus
       visit gaku.syllabuses_path
       within('#syllabuses-index tbody tr:nth-child(1)') { click edit_link }
+      click '#exams-menu a'
     end
 
     it 'clicking on new-existing-exam-link hides new-exam form', js: true do

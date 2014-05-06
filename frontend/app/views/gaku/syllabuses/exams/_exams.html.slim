@@ -1,13 +1,29 @@
-= index_body do
-  = table_for 'syllabus-exams-index' do
-    thead
-      tr
-        = th t(:'exam.name')
-        = th t(:'department.singular')
-        = th t(:'exam.description')
-        = th t(:'exam.adjustments')
-        = th t(:'exam.weight')
-        = th t(:'exam.use_weighting')
-        = th_actions 3
-    tbody
-      = render partial: 'gaku/syllabuses/exams/exam', collection: @syllabus.exams, as: :exam
+.row
+  .col-md-12
+    #new-existing-exam-errors
+    #new-existing-exam.d-none
+      /= render 'gaku/syllabuses/exams/select_form'
+
+    #new-syllabus-exam.d-none
+    br
+    .pull-left
+      = count_div 'syllabus-exams-count' do
+        = print_count(@syllabus.exams.count, t(:'exam.list'))
+    .pull-right
+      = ajax_link_to_new t(:'exam.new'), [:new, @syllabus, :exam], id: 'new-syllabus-exam-link'
+      = ajax_link_to_new t(:'exam.add_existing'), [:new, @syllabus, :exam_syllabus], id: 'new-existing-exam-link'
+
+hr
+    #syllabus-exams
+      = table_for 'syllabus-exams-index' do
+        thead
+          tr
+            = th t(:'exam.name')
+            = th t(:'department.singular')
+            = th t(:'exam.description')
+            = th t(:'exam.adjustments')
+            = th t(:'exam.weight')
+            = th t(:'exam.use_weighting')
+            = th_actions 3
+        tbody
+          = render partial: 'gaku/syllabuses/exams/exam', collection: @syllabus.exams, as: :exam
