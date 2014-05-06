@@ -15,7 +15,7 @@ describe 'Course Graidng Method Connectors' do
     before do
       grading_method
       visit gaku.edit_course_path(course)
-      click '#course-grading-method-connectors-tab-link'
+      click '#grading-methods-menu a'
       click new_link
     end
 
@@ -32,10 +32,6 @@ describe 'Course Graidng Method Connectors' do
         has_content? grading_method.name
       end
 
-      within('#course-grading-method-connectors-tab-link') do
-        has_content? 'Grading Methods(1)'
-      end
-
       count? 'Grading methods list(1)'
     end
 
@@ -50,7 +46,7 @@ describe 'Course Graidng Method Connectors' do
     it 'add set grading methods if not in collection' do
       visit gaku.edit_course_path(course)
 
-      click '#course-grading-method-connectors-tab-link'
+      click '#grading-methods-menu a'
       click '#new-set-course-grading-method-connector-link'
       expect do
         select grading_method_set.name,
@@ -67,7 +63,7 @@ describe 'Course Graidng Method Connectors' do
       course.grading_method_connectors.create(grading_method: grading_method_set.grading_methods.first)
       visit gaku.edit_course_path(course)
 
-      click '#course-grading-method-connectors-tab-link'
+      click '#grading-methods-menu a'
       click '#new-set-course-grading-method-connector-link'
       expect do
         select grading_method_set.name,
@@ -82,7 +78,7 @@ describe 'Course Graidng Method Connectors' do
     before do
       course.grading_methods << grading_method
       visit gaku.edit_course_path(course)
-      click '#course-grading-method-connectors-tab-link'
+      click '#grading-methods-menu a'
     end
 
     it 'deletes', js: true do
@@ -94,12 +90,8 @@ describe 'Course Graidng Method Connectors' do
         flash_destroyed?
       end.to change(Gaku::GradingMethodConnector, :count).by(-1)
 
-      within('#course-grading-method-connectors-tab-link') do
-        has_no_content? 'Grading Methods(1)'
-      end
-
+      has_no_content? 'Grading Methods(1)'
       count? 'Grading methods list'
-
     end
 
   end

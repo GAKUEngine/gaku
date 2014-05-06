@@ -1,16 +1,31 @@
 .row
-  .col-md-12
-    = normal_form_for @course, label: 'nil' do |f|
-      = render 'form_fields', f: f, course: @course
-      = buttons_for @course
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @course], remote: true
 
-= render 'tabs'
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = t(:'personal')
+        .panel-body
+          ul.list-unstyled
+            li#students-menu = link_to badge_count(@course.enrollments_count, t(:'student.plural'), 'students-count'), [@course, :enrollments], remote: true
 
-= footer do
-  .col-md-9
-    = link_to_index courses_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @course
+            li#semesters-menu = link_to badge_count(@course.semesters.count, t(:'semester.plural'), 'semesters-count'), [@course, :semester_connectors], remote: true
+
+            - if @course.syllabus
+              li#exams-menu = link_to badge_count(@course.syllabus.exams_count, t(:'exam.plural'), 'exams-count'), [@course, :exams], remote: true
+            - else
+              li#exams-menu = link_to badge_count(0, t(:'exam.plural'), 'exams-count'), [@course, :exams], remote: true
+
+            li#notes-menu = link_to badge_count(@course.notes_count, t(:'note.plural'), 'notes-count'), [@course, :notes], remote: true
+
+            li#grading-methods-menu = link_to badge_count(@course.grading_method_connectors.count, t(:'grading_method.plural'), 'grading-methods-count'), [@course, :grading_method_connectors], remote: true
+
+
+  .col-md-10#ajax-load
+    = render 'edit_form'
