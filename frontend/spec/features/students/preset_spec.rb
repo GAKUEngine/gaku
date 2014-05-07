@@ -168,7 +168,7 @@ describe 'Students', type: :feature do
 
           expect(page.has_css?('#students-index th.primary_address')).to eq true
           expect(page.has_css?('#students-index td.primary_address')).to eq true
-          expect(page.has_text?(student.primary_address)).to eq true
+          expect(page.has_text?(student.address_widget)).to eq true
         end
 
         it 'shows personal_information' do
