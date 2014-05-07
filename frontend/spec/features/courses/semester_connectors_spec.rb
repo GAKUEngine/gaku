@@ -27,7 +27,7 @@ describe 'Course Semester Connectors' do
     before do
       semester
       visit gaku.edit_course_path(course)
-      click tab_link
+      click '#semesters-menu a'
       click new_link
     end
 
@@ -39,9 +39,7 @@ describe 'Course Semester Connectors' do
       end.to change(Gaku::SemesterConnector, :count).by(1)
 
       within(table) { expect(page).to have_content "#{semester.starting} / #{semester.ending}" }
-      within(tab_link) { expect(page).to have_content 'Semesters(1)' }
       within(count_div) { expect(page).to have_content 'Semesters list(1)' }
-
     end
 
     it 'presence validations'  do
@@ -65,7 +63,7 @@ describe 'Course Semester Connectors' do
       semester2
       semester_connector_course
       visit gaku.edit_course_path(course)
-      click tab_link
+      click '#semesters-menu a'
     end
 
     context 'edit', js: true do
@@ -87,7 +85,6 @@ describe 'Course Semester Connectors' do
 
     it 'delete', js: true do
       within(table)     { expect(page).to have_content "#{semester.starting} / #{semester.ending}" }
-      within(tab_link)  { expect(page).to have_content 'Semesters(1)' }
 
       expect do
         ensure_delete_is_working
@@ -95,8 +92,6 @@ describe 'Course Semester Connectors' do
       end.to change(Gaku::SemesterConnector, :count).by(-1)
 
       within(table)     { expect(page).to_not have_content "#{semester.starting} / #{semester.ending}" }
-      within(tab_link) { expect(page).to_not have_content 'Semesters(1)' }
-      within(tab_link) { expect(page).to have_content 'Semesters' }
     end
   end
 end

@@ -18,7 +18,7 @@ describe 'CourseExams', js: true  do
 
     visit gaku.edit_course_path(course)
 
-    click '#course-exam-link'
+    click '#exams-menu a'
   end
 
   xit 'shows grading link' do

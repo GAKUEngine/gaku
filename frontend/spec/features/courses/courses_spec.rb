@@ -62,7 +62,7 @@ describe 'Courses' do
       has_content? 'SUMMER2012'
 
       click edit_link
-      click '#course-grading-method-connectors-tab-link'
+      click '#grading-methods-menu a'
       within('#course-grading-method-connectors') do
         has_content? grading_method_set.grading_methods.first
         has_content? grading_method_set.grading_methods.second

@@ -23,7 +23,7 @@ describe 'Course Enrollments' do
     before do
       student
       visit gaku.edit_course_path(course)
-      click tab_link
+      click '#students-menu a'
       click new_link
     end
 
@@ -36,9 +36,7 @@ describe 'Course Enrollments' do
 
       within(table) { expect(page).to have_content student.surname }
       within(table) { expect(page).to have_content student.name }
-      within(tab_link) { expect(page).to have_content 'Student enrollments(1)' }
       within(count_div) { expect(page).to have_content 'Student enrollments list(1)' }
-
     end
 
     it 'presence validations'  do
@@ -60,7 +58,7 @@ describe 'Course Enrollments' do
     before do
       course_enrollment
       visit gaku.edit_course_path(course)
-      click tab_link
+      click '#students-menu a'
     end
 
     # context 'edit', js: true do
@@ -83,7 +81,6 @@ describe 'Course Enrollments' do
     it 'delete', js: true do
       within(table) { expect(page).to have_content course_enrollment.student.surname }
       within(table) { expect(page).to have_content course_enrollment.student.name }
-      within(tab_link)  { expect(page).to have_content 'Student enrollments(1)' }
       has_content? 'Student enrollments list(1)'
 
       expect do
@@ -93,7 +90,6 @@ describe 'Course Enrollments' do
 
       within(table) { has_no_content? course_enrollment.student.surname }
       within(table) { has_no_content? course_enrollment.student.name }
-      within(tab_link) { has_no_content? 'Student enrollments(1)' }
       has_no_content? 'Student enrollments list(1)'
     end
   end
