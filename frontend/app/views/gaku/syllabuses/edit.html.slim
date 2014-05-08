@@ -7,10 +7,6 @@
           h4.panel-title
             = link_to t(:'edit'), [:edit, @syllabus], remote: true
 
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            = t(:'personal')
         .panel-body
           ul.list-unstyled
             li#exams-menu = link_to badge_count(@syllabus.exams_count, t(:'exam.plural'), 'exams-count'), [@syllabus, :exams], remote: true

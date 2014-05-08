@@ -7,10 +7,6 @@
           h4.panel-title
             = link_to t(:'edit'), [:edit, @class_group], remote: true
 
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            = t(:'personal')
         .panel-body
           ul.list-unstyled
             li#students-menu = link_to badge_count(@class_group.enrollments_count, t(:'student.plural'), 'students-count'), [@class_group, :enrollments], remote: true
