@@ -1,11 +1,9 @@
 FactoryGirl.define do
 
   factory :course, class: Gaku::Course do
-    code  'A1'
+    code 'A1'
 
-    factory :invalid_course do
-      code nil
-    end
+    factory(:invalid_course) { code nil }
   end
 
 end

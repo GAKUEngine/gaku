@@ -1,21 +1,17 @@
+
 .row
-  .col-md-12
-    = normal_form_for @course_group, label: 'nil' do |f|
-      = render 'form_fields', f: f, course_group: @course_group
-      = buttons_for @course_group
+  .col-md-2
+    .panel-group#accordion
 
-#courses
-  #course-group-enrollment-form-errors
-  #new-course-group-enrollment.d-none
-    = render 'gaku/course_groups/course_group_enrollments/form'
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @course_group], remote: true
+        .panel-body
+          ul.list-unstyled
 
-  #course-group-enrollments-div
-    = render 'gaku/course_groups/course_group_enrollments/courses', course_group: @course_group
+            li#courses-menu
+              = link_to badge_count(@course_group.courses.count, t(:'course.plural'), 'courses-count'), [@course_group, :course_group_enrollments], remote: true
 
-
-= footer do
-  .col-md-9
-    = link_to_index course_groups_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @course_group
+  .col-md-10#ajax-load
+    = render 'edit_form', course_group: @course_group

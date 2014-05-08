@@ -13,8 +13,8 @@ module Gaku
     end
 
     def new
-     @grading_method_connector = @gradable.grading_method_connectors.new
-     respond_with @grading_method_connector
+      @grading_method_connector = @gradable.grading_method_connectors.new
+      respond_with @grading_method_connector
     end
 
     def create
@@ -31,7 +31,7 @@ module Gaku
     end
 
     def sort
-      params["grading-method-connector"].each_with_index do |id, index|
+      params['grading-method-connector'].each_with_index do |id, index|
         @gradable.grading_method_connectors.where(id: id).update_all(position: index)
       end
 
@@ -51,7 +51,6 @@ module Gaku
       set_count
       render :add_set
     end
-
 
     private
 
@@ -76,7 +75,7 @@ module Gaku
     end
 
     def load_gradable
-      resource, id = request.path.split('/')[1,2]
+      resource, id = request.path.split('/')[1, 2]
       @gradable = resource.insert(0, 'gaku/').pluralize.classify.constantize.find(id)
       @gradable_resource = @gradable.class.to_s.demodulize.underscore.dasherize
     end
@@ -87,19 +86,19 @@ module Gaku
 
     def set_flash
       flash.now[:notice] = if @grading_method_connectors.any?
-        t(:'grading_method_connector.add_set')
-      else
-        t(:'grading_method_connector.already')
-      end
+                             t(:'grading_method_connector.add_set')
+                           else
+                             t(:'grading_method_connector.already')
+                           end
     end
 
     def add_not_included_grading_methods
       @grading_method_set = Gaku::GradingMethodSet.find(params[:grading_method_set_id])
 
-      #remove methods that are already in gradable grading methods collection
+      # remove methods that are already in gradable grading methods collection
       not_included_grading_methods = @grading_method_set.grading_methods - @gradable.grading_methods
 
-      #get join model records for view appending
+      # get join model records for view appending
       @grading_method_connectors = not_included_grading_methods.map do |method|
         @gradable.grading_method_connectors.create(grading_method: method)
       end

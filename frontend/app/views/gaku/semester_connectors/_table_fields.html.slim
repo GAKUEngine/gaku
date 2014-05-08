@@ -1,0 +1,4 @@
+= render 'gaku/shared/fields/semester_fields', semester: semester_connector.semester
+td
+  = ajax_link_to_edit [:edit, @semesterable, semester_connector]
+  = ajax_link_to_delete [@semesterable, semester_connector]

@@ -1,6 +1,0 @@
-showNotice("<%= render_flash %>");
-$('#course-semester-courses-index tbody').append('<%= j render("semester_course", { semester_course: @semester_course }) %>');
-$('#new-course-semester-course').slide();
-$('#new-course-semester-course-link').show();
-$('#course-semester-courses-tab-link').html("<%= print_count(@count, t(:'semester.plural')) %>");
-$('.course-semester-courses-count').html("<%= print_count(@count, t(:'semester.list')) %>");

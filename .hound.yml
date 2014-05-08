@@ -19,15 +19,18 @@ ClassAndModuleChildren:
 EmptyLinesAroundBody:
   Enabled: false
 
+SingleLineBlockParams:
+  Enabled: false
+
 AllCops:
   Exclude:
-    - '**/spec/dummy/**'
-<<<<<<< HEAD
-    - 'bin/**'
-    - '**/bin/**'
+    - '**/spec/dummy/**/*'
+    - 'bin/**/*'
+    - '**/bin/**/*'
     - '**/db/schema.rb'
-    - '**/pkg/**'
-    - 'pkg/**'
-=======
->>>>>>> staging
+    - '**/pkg/**/*'
+    - 'pkg/**/*'
+    - '**/config/initializers/**/*'
+    - '**/db/migrate/**/*'
+    - '**/lib/generators/**/*'
   RunRailsCops: false

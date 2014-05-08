@@ -6,19 +6,6 @@
         .panel-heading
           h4#exam-edit-menu.panel-title
             = link_to t(:'edit'), [:edit, @exam], remote: true
-
-      .panel.panel-default
-        .panel-heading
-          h4#exams-exam-portions-menu.panel-title
-            = link_to badge_count(@exam.exam_portions_count, t(:'exam_portion.plural'), 'exam-portions-count'), [@exam, :exam_portions], remote: true
-        .panel-body
-          ul#exams-exam-portions-menu-list.list-unstyled
-            - @exam.exam_portions.each do |portion|
-              li id="exam-portion-#{portion.id}" = link_to portion, [:edit, @exam, portion], remote: true
-      .panel.panel-default
-        .panel-heading
-          h4.panel-title
-
         .panel-body
           ul.list-unstyled
             li#exams-notes-menu
@@ -28,9 +15,12 @@
 
       .panel.panel-default
         .panel-heading
-          h4.panel-title
-            = link_to t(:'exam.plural'), exams_path
-
+          h4#exams-exam-portions-menu.panel-title
+            = link_to badge_count(@exam.exam_portions_count, t(:'exam_portion.plural'), 'exam-portions-count'), [@exam, :exam_portions], remote: true
+        .panel-body
+          ul#exams-exam-portions-menu-list.list-unstyled
+            - @exam.exam_portions.each do |portion|
+              li id="exam-portion-#{portion.id}" = link_to portion, [:edit, @exam, portion], remote: true
 
   .col-md-10#ajax-load
     = render 'edit_form', exam: @exam

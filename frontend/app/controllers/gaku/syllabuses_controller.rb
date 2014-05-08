@@ -33,7 +33,7 @@ module Gaku
 
     def update
       @syllabus.update(syllabus_params)
-      respond_with @syllabus, location: [:edit, @syllabus]
+      respond_with @syllabus
     end
 
     def destroy

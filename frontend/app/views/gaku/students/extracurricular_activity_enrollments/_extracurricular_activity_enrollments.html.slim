@@ -1,0 +1,17 @@
+#student-extracurricular-activity-enrollments
+  = index_header do
+    #new-student-extracurricular-activity-enrollment.d-none
+    .pull-left
+      = count_div 'student-extracurricular-activity-enrollments-count' do
+        = print_count @student.extracurricular_activities_count, t(:'extracurricular_activity.list')
+    .pull-right
+      = ajax_link_to_new t(:'extracurricular_activity.enroll'), [:new, @student, :extracurricular_activity_enrollment], id: "new-student-extracurricular-activity-enrollment-link"
+
+  = index_body do
+      = table_for 'student-extracurricular-activity-enrollments-index' do
+        thead
+          tr
+            = th t(:'extracurricular_activity.name')
+            = th_actions 1
+        tbody
+          = render partial:'extracurricular_activity_enrollment', collection: @extracurricular_activity_enrollments, as: :extracurricular_activity_enrollment

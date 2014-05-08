@@ -17,7 +17,6 @@ FactoryGirl.define do
     end
   end
 
-
   trait :with_program_level do |resource|
     resource.after(:build) do |program|
       program.levels << create(:level)

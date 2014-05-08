@@ -1,16 +1,17 @@
 .row
-  .col-md-12
-    = normal_form_for @class_group, label: 'nil' do |f|
-      = render 'form_fields', f: f, class_group: @class_group
-      = buttons_for @class_group
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @class_group], remote: true
 
-= render 'tabs'
+        .panel-body
+          ul.list-unstyled
+            li#students-menu = link_to badge_count(@class_group.enrollments_count, t(:'student.plural'), 'students-count'), [@class_group, :enrollments], remote: true
+            li#semesters-menu = link_to badge_count(@class_group.semesters.count, t(:'semester.plural'),'semesters-count'), [@class_group, :semester_connectors], remote: true
+            li#notes-menu = link_to badge_count(@class_group.notes_count, t(:'note.plural'), 'notes-count'), [@class_group, :notes], remote: true
 
-= footer do
-  .col-md-9
-    = link_to_index class_groups_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @class_group
+  .col-md-10#ajax-load
+    = render 'edit_form'

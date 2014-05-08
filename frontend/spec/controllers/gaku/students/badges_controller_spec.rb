@@ -11,7 +11,7 @@ describe Gaku::Students::BadgesController do
 
     context 'JS' do
 
-      describe 'JS GET #index' do
+      describe 'XHR GET #index' do
         before do
           badge
           gaku_js_get :index, student_id: student.id
@@ -23,7 +23,7 @@ describe Gaku::Students::BadgesController do
         it('renders :index template') { template? :index }
       end
 
-      describe 'JS GET #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
@@ -32,10 +32,12 @@ describe Gaku::Students::BadgesController do
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, badge: attributes_for(:badge, badge_type_id: badge_type.id), student_id: student.id
+            gaku_js_post :create,
+                         badge: attributes_for(:badge, badge_type_id: badge_type.id),
+                         student_id: student.id
           end
 
           it 'creates new badge' do
@@ -59,7 +61,7 @@ describe Gaku::Students::BadgesController do
 
       end
 
-      describe 'JS GET #edit' do
+      describe 'XHR GET #edit' do
         before { gaku_js_get :edit, id: badge, student_id: student.id }
 
         it { should respond_with 200 }
@@ -68,10 +70,13 @@ describe Gaku::Students::BadgesController do
         it('renders the :edit template') { template? :edit }
       end
 
-      describe 'JS PATCH #update' do
+      describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: badge, badge: attributes_for(:badge, badge_type_id: badge_type), student_id: student.id
+            gaku_js_patch :update,
+                          id: badge,
+                          badge: attributes_for(:badge, badge_type_id: badge_type),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -85,7 +90,10 @@ describe Gaku::Students::BadgesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: badge, badge: attributes_for(:invalid_badge, badge_type_id: nil), student_id: student.id
+            gaku_js_patch :update,
+                          id: badge,
+                          badge: attributes_for(:invalid_badge, badge_type_id: nil),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
@@ -98,7 +106,7 @@ describe Gaku::Students::BadgesController do
         end
       end
 
-      describe 'JS DELETE #destroy' do
+      describe 'XHR DELETE #destroy' do
 
         let(:js_delete) { gaku_js_delete :destroy, id: badge, student_id: student.id }
 

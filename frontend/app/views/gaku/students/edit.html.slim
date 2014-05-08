@@ -53,6 +53,11 @@
             li#student-courses-menu
               = link_to badge_count(student.courses_count, t(:'course.plural'), 'courses-count'), [student, :course_enrollments], remote: true
 
+            li#student-class-groups-menu
+              = link_to badge_count(student.class_groups_count, t(:'class_group.plural'), 'class-groups-count'), [student, :class_group_enrollments], remote: true
+            li#student-extracurricular-activities-menu
+              = link_to badge_count(student.extracurricular_activities_count, t(:'extracurricular_activity.plural'), 'extracurricular-activities-count'), [student, :extracurricular_activity_enrollments], remote: true
+
   .col-md-10
     #edit-modals
     #ajax-load

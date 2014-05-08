@@ -1,3 +1,8 @@
 $('#new-syllabus-exam').html('<%= j render("form") %>').slide();
 $('#new-syllabus-exam-link').hide();
+
+$('#new-existing-exam').slideUp(function() {
+  return $('#new-existing-exam-link').show();
+});
+
 $('.remote-form').enableValidations();

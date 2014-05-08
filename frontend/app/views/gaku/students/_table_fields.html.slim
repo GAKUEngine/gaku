@@ -51,7 +51,7 @@
   td.primary_email = student.contacts.primary_email
 
 - if show_field?(@preset.try(:show_primary_address))
-  td.primary_address = student.primary_address
+  td.primary_address = student.address_widget
 
 - if show_field?(@preset.try(:show_personal_information))
   td.personal_information

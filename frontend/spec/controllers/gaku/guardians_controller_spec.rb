@@ -57,7 +57,10 @@ describe Gaku::GuardiansController do
 
         context 'with invalid attributes' do
           before do
-            gaku_patch :update, id: guardian, guardian: attributes_for(:invalid_guardian, name: nil), student_id: student.id
+            gaku_patch :update,
+                       id: guardian,
+                       guardian: attributes_for(:invalid_guardian, name: nil),
+                       student_id: student.id
           end
 
           it { should respond_with 200 }

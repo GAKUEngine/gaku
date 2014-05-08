@@ -3,8 +3,8 @@ require 'spec_helper_models'
 describe Gaku::Attendance do
 
   describe 'relations' do
-  	it { should belong_to :attendance_type }
-  	it { should belong_to :attendancable }
+    it { should belong_to :attendance_type }
+    it { should belong_to :attendancable }
     it { should belong_to :student }
   end
 

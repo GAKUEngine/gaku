@@ -1,6 +1,6 @@
 shared_examples 'upload avatar' do
 
-  it 'uploads', js:true do
+  it 'uploads', js: true do
     sleep 0.5
     click '#upload-picture-link'
     absolute_path = Rails.root + '../support/120x120.jpg'
@@ -10,7 +10,6 @@ shared_examples 'upload avatar' do
   end
 
 end
-
 
 shared_examples 'show avatar' do
 

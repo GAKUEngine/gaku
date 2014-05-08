@@ -25,9 +25,7 @@ module Gaku
       @run_migrations = options[:migrate]
       @load_seed_data = options[:seed]
 
-      unless @run_migrations
-         @load_seed_data = false
-      end
+      @load_seed_data = false unless @run_migrations
     end
 
     def remove_unneeded_files
@@ -36,32 +34,31 @@ module Gaku
 
     def setup_assets
       @lib_name = 'gaku'
-      %w{javascripts stylesheets images}.each do |path|
+      %w( javascripts stylesheets images ).each do |path|
         empty_directory "app/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
         empty_directory "app/assets/#{path}/gaku/admin" if defined? Gaku::Admin || Rails.env.test?
         empty_directory "app/assets/#{path}/gaku/archive" if defined? Gaku::Archive || Rails.env.test?
       end
 
       if defined? Gaku::Frontend || Rails.env.test?
-        template "app/assets/javascripts/gaku/frontend/all.js"
-        template "app/assets/stylesheets/gaku/frontend/all.css"
+        template 'app/assets/javascripts/gaku/frontend/all.js'
+        template 'app/assets/stylesheets/gaku/frontend/all.css'
       end
 
       if defined? Gaku::Admin || Rails.env.test?
-        template "app/assets/javascripts/gaku/admin/all.js"
-        template "app/assets/stylesheets/gaku/admin/all.css"
+        template 'app/assets/javascripts/gaku/admin/all.js'
+        template 'app/assets/stylesheets/gaku/admin/all.css'
       end
 
       if defined? Gaku::Archive || Rails.env.test?
-        template "app/assets/javascripts/gaku/archive/all.js"
-        template "app/assets/stylesheets/gaku/archive/all.css"
+        template 'app/assets/javascripts/gaku/archive/all.js'
+        template 'app/assets/stylesheets/gaku/archive/all.css'
       end
     end
 
     def create_overrides_directory
       empty_directory 'app/overrides'
     end
-
 
     def configure_application
       application <<-APP
@@ -122,7 +119,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
     def populate_seed_data
       if @load_seed_data
         say_status :loading,  'seed data'
-        cmd = lambda { rake "db:seed", env: @env }
+        cmd = lambda { rake 'db:seed', env: @env }
         cmd.call
       else
         say_status :skipping, 'seed data (you can always run rake db:seed)'
@@ -131,10 +128,10 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
 
     def notify_about_routes
       if File.readlines(File.join('config', 'routes.rb')).grep(/mount Gaku::Core::Engine/).any?
-        say_status :skipping, "route Gaku::Core::Engine already present."
+        say_status :skipping, 'route Gaku::Core::Engine already present.'
       else
         insert_into_file File.join('config', 'routes.rb'), after: "Application.routes.draw do\n" do
-          %Q{ mount Gaku::Core::Engine, at: '/' }
+          %Q( mount Gaku::Core::Engine, at: '/' )
         end
 
         unless options[:quiet]

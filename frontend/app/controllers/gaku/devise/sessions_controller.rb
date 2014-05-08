@@ -1,8 +1,8 @@
 class Gaku::Devise::SessionsController < Devise::SessionsController
-  #helper Gaku::GakuHelper
+  # helper Gaku::GakuHelper
   layout 'gaku/layouts/gaku'
 
-   def create
+  def create
     self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in)
     sign_in(resource_name, resource)

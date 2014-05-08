@@ -1,12 +1,12 @@
 # encoding: UTF-8
-version = File.read(File.expand_path("../../VERSION", __FILE__)).strip
+version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'gaku_archive'
   s.version      = version
   s.summary      = 'Archive engine for GAKU Engine'
-  s.description  = "It allows archiving functionality"
+  s.description  = 'It allows archiving functionality'
   s.required_ruby_version = '~> 2.0.0'
 
   s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']

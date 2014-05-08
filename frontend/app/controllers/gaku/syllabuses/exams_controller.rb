@@ -44,7 +44,9 @@ module Gaku
     end
 
     def attributes
-      [:name, :description, :adjustments, :grading_method_id, exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]]
+      [:name, :description, :adjustments, :grading_method_id,
+       exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]
+      ]
     end
 
     def set_exam
@@ -62,7 +64,6 @@ module Gaku
     def set_count
       @exams_count = @syllabus.reload.exams_count
     end
-
 
   end
 end

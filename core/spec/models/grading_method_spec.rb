@@ -3,9 +3,9 @@ require 'spec_helper_models'
 describe Gaku::GradingMethod do
 
   describe 'relations' do
-  	it { should have_one :exam }
-  	it { should have_one :exam_portion }
-  	it { should have_one :assignment }
+    it { should have_one :exam }
+    it { should have_one :exam_portion }
+    it { should have_one :assignment }
 
     it { should have_many :simple_grade_types }
     it { should have_many :grading_method_connectors }

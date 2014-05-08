@@ -15,7 +15,8 @@ module TrashableController
 
     def soft_delete
       @resource.soft_delete
-      respond_with instance_variable_set("@#{class_name_underscored}", @resource), location: "/#{class_name_underscored_plural}"
+      respond_with instance_variable_set("@#{class_name_underscored}", @resource),
+                   location: "/#{class_name_underscored_plural}"
     end
 
     private

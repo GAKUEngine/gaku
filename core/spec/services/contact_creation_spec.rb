@@ -80,8 +80,8 @@ describe Gaku::ContactCreation do
             end.to change { Gaku::Contact.count }.by(1)
 
             student.reload
-            expect(student.primary_contact).to include 'Email'
-            expect(student.primary_contact).to include 'test@example.com'
+            expect(student.contact_widget).to include 'Email'
+            expect(student.contact_widget).to include 'test@example.com'
           end
         end
       end

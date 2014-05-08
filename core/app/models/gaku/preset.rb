@@ -23,7 +23,8 @@ module Gaku
                    :show_graduated,
                    :show_primary_address,
                    :show_primary_contact,
-                   :show_primary_email
+                   :show_primary_email,
+                   :show_personal_information
 
     store_accessor :grading
 

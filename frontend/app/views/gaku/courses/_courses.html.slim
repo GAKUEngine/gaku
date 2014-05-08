@@ -21,4 +21,4 @@
         = th t(:'num_enrolled')
         = th_actions 1
     tbody
-      = render partial: 'course', collection: extract_grouped(semester_courses, :course), as: :course
+      = render partial: 'course', collection: extract_grouped(semester_courses, :semesterable), as: :course

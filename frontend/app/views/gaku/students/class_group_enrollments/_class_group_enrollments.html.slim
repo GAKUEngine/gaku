@@ -1,0 +1,19 @@
+#student-class-group-enrollments
+  = index_header do
+    #new-student-class-group-enrollment.d-none
+    .pull-left
+      = count_div 'student-class-group-enrollments-count' do
+        = print_count @student.class_groups_count, t(:'class_group.list')
+    .pull-right
+      = ajax_link_to_new t(:'class_group_enrollment.add'), [:new, @student, :class_group_enrollment], id: "new-student-class-group-enrollment-link"
+
+  = index_body do
+      = table_for 'student-class-group-enrollments-index' do
+        thead
+          tr
+            = th t(:'class_group.grade')
+            = th t(:'class_group.name')
+            = th t(:'class_group.homeroom')
+            = th_actions 1
+        tbody
+          = render partial:'class_group_enrollment', collection: @class_group_enrollments, as: :class_group_enrollment

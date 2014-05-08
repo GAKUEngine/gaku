@@ -3,8 +3,8 @@ Gaku::Address.class_eval do
   has_paper_trail class_name: 'Gaku::Versioning::AddressVersion',
                   on:   [:update, :destroy],
                   meta: {
-                          join_model: :join_model_name,
-                          joined_resource_id: :joined_resource_id
+                    join_model: :join_model_name,
+                    joined_resource_id: :joined_resource_id
                         }
 
   default_scope -> { where(deleted: false) }
@@ -26,6 +26,5 @@ Gaku::Address.class_eval do
   def joined_resource_id
     addressable_id
   end
-
 
 end

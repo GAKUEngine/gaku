@@ -8,8 +8,8 @@ module PolymorphicResourceConcern
     end
 
     @nested_resources = nested_resources(klasses)
-    #puts "nested_resources :::::::::::::::::::: #{@nested_resources}"
-    #puts "resource_name:::::::::::::::::::: #{resource_name}"
+    # puts "nested_resources :::::::::::::::::::: #{@nested_resources}"
+    # puts "resource_name:::::::::::::::::::: #{resource_name}"
     @polymorphic_resource_name = resource_name
   end
 
@@ -18,7 +18,7 @@ module PolymorphicResourceConcern
     last_klass_foreign_key = params[klasses.last.to_s.foreign_key]
     if klasses.is_a? Array
       @polymorphic_resource = klasses.last.find(last_klass_foreign_key)
-      klasses.pop #remove @polymorphic_resource resource
+      klasses.pop # remove @polymorphic_resource resource
       klasses.each do |klass|
         nested_resources.append klass.find(params[klass.to_s.foreign_key])
       end
@@ -26,7 +26,7 @@ module PolymorphicResourceConcern
       @polymorphic_resource = klasses.find(params[klasses.to_s.foreign_key])
     end
 
-    #prepend :admin for admin/namespacing
+    # prepend :admin for admin/namespacing
     nested_resources.prepend(:admin) if @polymorphic_resource.class == Gaku::Campus
     nested_resources
   end

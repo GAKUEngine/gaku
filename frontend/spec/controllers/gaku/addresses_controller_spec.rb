@@ -18,7 +18,11 @@ describe Gaku::AddressesController do
         it { should respond_with 200 }
         it('assigns @address') { expect(assigns(:address)).to be_a_new(Gaku::Address) }
         it('assigns @countries') { expect(assigns(:countries)).to eq [country] }
-        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+
+        it('assigns @polymorphic_resource_name') do
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+        end
+
         it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
         it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :new template') { template? :new }
@@ -66,7 +70,8 @@ describe Gaku::AddressesController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, address: attributes_for(:invalid_address, country_id: country.id), student_id: student.id
+            gaku_js_post :create, address: attributes_for(:invalid_address, country_id: country.id),
+                                  student_id: student.id
           end
 
           it 'does not save the new address' do
@@ -93,7 +98,11 @@ describe Gaku::AddressesController do
         it { should respond_with 200 }
         it('assigns @address') { expect(assigns(:address)).to eq address }
         it('assigns @countries') { expect(assigns(:countries)).to eq [country] }
-        it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+
+        it('assigns @polymorphic_resource_name') do
+          expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+        end
+
         it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
         it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
         it('renders the :edit template') { template? :edit }
@@ -102,12 +111,18 @@ describe Gaku::AddressesController do
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: address.id, student_id: student.id, address: attributes_for(:address, address1: 'mobifon')
+            gaku_js_patch :update, id: address.id,
+                                   student_id: student.id,
+                                   address: attributes_for(:address, address1: 'mobifon')
           end
 
           it { should respond_with 200 }
           it('assigns @address') { expect(assigns(:address)).to eq address }
-          it('assigns @polymorphic_resource_name') { expect(assigns(:polymorphic_resource_name)).to eq 'student-address' }
+
+          it('assigns @polymorphic_resource_name') do
+            expect(assigns(:polymorphic_resource_name)).to eq 'student-address'
+          end
+
           it('assigns @polymorphic_resource') { expect(assigns(:polymorphic_resource)).to eq student }
           it('assigns @nested_resources') { expect(assigns(:nested_resources)).to eq [] }
           it('sets flash') { flash_updated? }
@@ -118,7 +133,9 @@ describe Gaku::AddressesController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: address.id, student_id: student.id, address: attributes_for(:invalid_address, address1: '')
+            gaku_js_patch :update, id: address.id,
+                                   student_id: student.id,
+                                   address: attributes_for(:invalid_address, address1: '')
           end
 
           it { should respond_with 200 }
@@ -130,7 +147,6 @@ describe Gaku::AddressesController do
       end
 
     end
-
 
   end
 end

@@ -11,19 +11,27 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
     context 'JS' do
 
-      describe 'JS GET #new' do
+      describe 'XHR GET #new' do
         before { gaku_js_get :new, student_id: student.id }
 
         it { should respond_with 200 }
-        it('assigns @external_school_record') { expect(assigns(:external_school_record)).to be_a_new(Gaku::ExternalSchoolRecord) }
+
+        it('assigns @external_school_record') do
+          expect(assigns(:external_school_record)).to be_a_new(Gaku::ExternalSchoolRecord)
+        end
+
         it('assigns @schools') { expect(assigns(:schools)).to_not be_empty }
         it('renders the :new template') { template? :new }
       end
 
-      describe 'JS POST #create' do
+      describe 'XHR POST #create' do
         context 'with valid attributes' do
           let(:valid_js_create) do
-            gaku_js_post :create, external_school_record: attributes_for(:external_school_record, school_id: school.id, student_id: student.id), student_id: student.id
+            gaku_js_post :create,
+                         external_school_record: attributes_for(:external_school_record,
+                                                                school_id: school.id,
+                                                                student_id: student.id),
+                         student_id: student.id
           end
 
           it 'creates new external_school_record' do
@@ -47,18 +55,15 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
         context 'with invalid attributes' do
           let(:invalid_js_create) do
-            gaku_js_post :create, external_school_record: attributes_for(:invalid_external_school_record, school_id: nil), student_id: student.id
+            gaku_js_post :create,
+                         external_school_record: attributes_for(:invalid_external_school_record, school_id: nil),
+                         student_id: student.id
           end
 
           it 'does not save the new external_school_record' do
             expect do
               invalid_js_create
             end.to_not change(Gaku::ExternalSchoolRecord, :count)
-          end
-
-          it 'renders :new template' do
-            invalid_js_create
-            template? :new
           end
 
           it "doesn't increment @count" do
@@ -69,8 +74,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
       end
 
-
-      describe 'JS GET #edit' do
+      describe 'XHR GET #edit' do
         before { gaku_js_get :edit, id: external_school_record, student_id: student.id }
 
         it { should respond_with 200 }
@@ -79,14 +83,21 @@ describe Gaku::Students::ExternalSchoolRecordsController do
         it('renders the :edit template') { template? :edit }
       end
 
-      describe 'JS PATCH #update' do
+      describe 'XHR PATCH #update' do
         context 'with valid attributes' do
           before do
-            gaku_js_patch :update, id: external_school_record, external_school_record: attributes_for(:external_school_record, school_id: school), student_id: student.id
+            gaku_js_patch :update,
+                          id: external_school_record,
+                          external_school_record: attributes_for(:external_school_record, school_id: school),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
-          it('assigns @external_school_record') { expect(assigns(:external_school_record)).to eq external_school_record }
+
+          it('assigns @external_school_record') do
+            expect(assigns(:external_school_record)).to eq external_school_record
+          end
+
           it('sets flash') { flash_updated? }
           it "changes external_school_record's attributes" do
             external_school_record.reload
@@ -96,11 +107,17 @@ describe Gaku::Students::ExternalSchoolRecordsController do
 
         context 'with invalid attributes' do
           before do
-            gaku_js_patch :update, id: external_school_record, external_school_record: attributes_for(:invalid_external_school_record, school_id: nil), student_id: student.id
+            gaku_js_patch :update,
+                          id: external_school_record,
+                          external_school_record: attributes_for(:invalid_external_school_record, school_id: nil),
+                          student_id: student.id
           end
 
           it { should respond_with 200 }
-          it('assigns @external_school_record') { expect(assigns(:external_school_record)).to eq external_school_record }
+
+          it('assigns @external_school_record') do
+            expect(assigns(:external_school_record)).to eq external_school_record
+          end
 
           it "does not change external_school_record's attributes" do
             external_school_record.reload
@@ -109,8 +126,7 @@ describe Gaku::Students::ExternalSchoolRecordsController do
         end
       end
 
-
-      describe 'JS DELETE #destroy' do
+      describe 'XHR DELETE #destroy' do
 
         let(:js_delete) { gaku_js_delete :destroy, id: external_school_record, student_id: student.id }
 

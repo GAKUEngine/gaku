@@ -12,7 +12,7 @@ describe 'Course Notes' do
     before do
       @resource = course
       visit gaku.edit_course_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'new note'
@@ -22,7 +22,7 @@ describe 'Course Notes' do
     before do
       @resource = course_with_note
       visit gaku.edit_course_path(@resource)
-      click tab_link
+      click '#notes-menu a'
     end
 
     it_behaves_like 'edit note'

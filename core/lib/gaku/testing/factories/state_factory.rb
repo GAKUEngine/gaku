@@ -3,7 +3,8 @@ FactoryGirl.define do
     name 'Alabama'
     abbr 'AL'
     country do |country|
-      if usa = Gaku::Country.find_by_numcode(840)
+      usa = Gaku::Country.find_by_numcode(840)
+      if usa
         country = usa
       else
         country.association(:country)

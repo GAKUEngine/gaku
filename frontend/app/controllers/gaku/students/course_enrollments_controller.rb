@@ -1,55 +1,53 @@
 module Gaku
   class Students::CourseEnrollmentsController < GakuController
 
-    respond_to :js, only: %i( new create destroy index )
+    respond_to :js, only: %i( index new create destroy )
 
     before_action :set_student
+    before_action :load_data
+
+    def new
+      @course_enrollment = @student.course_enrollments.build
+      respond_with @course_enrollment
+    end
+
+    def create
+      @course_enrollment = @student.course_enrollments.create(enrollment_params)
+      set_count
+      respond_with @course_enrollment
+    end
 
     def index
       @course_enrollments = @student.course_enrollments
     end
 
-    def new
-      set_courses
-      @course_enrollment = CourseEnrollment.new
-      respond_with @course_enrollment
-    end
-
-    def create
-      @course_enrollment = CourseEnrollment.new(course_enrollment_params)
-      if @course_enrollment.save
-        set_count
-        respond_with @course_enrollment
-      else
-        set_count
-        render :error
-      end
-    end
-
     def destroy
-      @course_enrollment = CourseEnrollment.find(params[:id])
-      @course_enrollment.destroy
+      @course_enrollment = Gaku::Enrollment.find(params[:id])
+      @course_enrollment.destroy!
       set_count
       respond_with @course_enrollment
     end
 
     private
 
-    def course_enrollment_params
-      params.require(:course_enrollment).permit([:course_id, :student_id])
+    def enrollment_params
+      params.require(:enrollment).permit(enrollment_attr)
+    end
+
+    def enrollment_attr
+      %i( enrollmentable_id )
     end
 
     def set_student
-      @student = Student.find(params[:student_id])
-    end
-
-    def set_courses
-      @courses = Course.includes(:syllabus).decorate
+      @student = Student.find(params[:student_id]).decorate
     end
 
     def set_count
       @count = @student.reload.courses_count
     end
 
+    def load_data
+      @courses = Gaku::Course.all
+    end
   end
 end

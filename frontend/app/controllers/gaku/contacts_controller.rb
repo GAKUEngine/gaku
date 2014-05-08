@@ -1,7 +1,7 @@
 module Gaku
   class ContactsController < GakuController
 
-    #load_and_authorize_resource :contact, class: Gaku::Contact
+    # load_and_authorize_resource :contact, class: Gaku::Contact
 
     include PolymorphicResourceConcern
 
@@ -44,7 +44,6 @@ module Gaku
       set_count
       respond_with @contact
     end
-
 
     def make_primary
       @contact.make_primary

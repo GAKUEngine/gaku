@@ -12,17 +12,23 @@ describe Gaku::ClassGroupsController do
       describe 'GET #index' do
         let(:class_group_for_semester) { create(:class_group) }
         let(:semester) { create(:semester) }
-        let(:semester_class_group) { create(:semester_class_group, semester: semester, class_group: class_group) }
+        let(:semester_connector_class_group) do
+          create(:semester_connector_class_group, semester: semester, semesterable: class_group)
+        end
 
         before do
           class_group
-          semester_class_group
+          semester_connector_class_group
           gaku_get :index
         end
 
         it { should respond_with 200 }
-        xit('assigns @class_groups') { expect(assigns(:class_groups)).to eq [semester_class_group] }
-        xit('assigns @class_groups_without_semester') { expect(assigns(:class_groups_without_semester)).to eq [class_group] }
+        xit('assigns @class_groups') { expect(assigns(:class_groups)).to eq [semester_connector_class_group] }
+
+        xit('assigns @class_groups_without_semester') do
+          expect(assigns(:class_groups_without_semester)).to eq [class_group]
+        end
+
         xit('assigns @count') { expect(assigns(:count)).to eq 1 }
         it('renders :index template') { template? :index }
       end
@@ -32,7 +38,6 @@ describe Gaku::ClassGroupsController do
 
         it { should respond_with 200 }
         it('assigns @class_group') { expect(assigns(:class_group)).to eq class_group }
-        it('assigns @class_group_course_enrollment') { expect(assigns(:class_group_course_enrollment)).to be_a_new(Gaku::ClassGroupCourseEnrollment) }
         it('renders the :edit template') { template? :edit }
       end
 

@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe 'Teacher Picture' do
 
-   let(:teacher) { create(:teacher) }
-   let(:teacher_with_picture) { create(:teacher,
-    picture: ActionDispatch::Http::UploadedFile.new(:tempfile => File.new("#{Rails.root}/../support/120x120.jpg"), :filename => "120x120.jpg")
-    )}
+  let(:teacher) { create(:teacher) }
+  let(:teacher_with_picture) do
+    create(:teacher,
+           picture: ActionDispatch::Http::UploadedFile.new(tempfile: File.new("#{Rails.root}/../support/120x120.jpg"),
+                                                           filename: '120x120.jpg'))
+  end
 
   before do
     as :admin
@@ -16,16 +18,15 @@ describe 'Teacher Picture' do
       visit gaku.edit_teacher_path(teacher)
     end
 
-
     it 'upload avatar', js: true do
       click '#avatar-picture'
       expect do
-      attach_file :teacher_picture,
-              File.join(Rails.root + '../support/120x120.jpg')
-      click_button 'Upload'
-      wait_for_ajax
-      teacher.reload
-      flash_updated?
+        attach_file :teacher_picture,
+                    File.join(Rails.root + '../support/120x120.jpg')
+        click_button 'Upload'
+        wait_for_ajax
+        teacher.reload
+        flash_updated?
       end.to change(teacher, :picture_content_type).from(nil).to('image/jpeg')
     end
   end

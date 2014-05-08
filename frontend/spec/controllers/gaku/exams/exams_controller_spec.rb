@@ -22,7 +22,6 @@ describe Gaku::ExamsController do
         it('renders :index template') { template? :index }
       end
 
-
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
@@ -146,7 +145,6 @@ describe Gaku::ExamsController do
           flash_destroyed?
         end
       end
-
 
     end
   end

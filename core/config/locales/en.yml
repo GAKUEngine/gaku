@@ -163,7 +163,7 @@ en:
   class: Class
   class_group:
     add: Add Class Group
-    already_enrolled: Already enrolled to the class group!
+    already_enrolled: Class group already enrolled!
     choose: Choose Class Group
     edit: Edit Class Group
     enroll: Enroll Class Group
@@ -180,10 +180,8 @@ en:
     singular: Class Group
     with_semester: With Semester
     without_semester: Without Semester
-  class_group_course_enrollment:
-    save: Save Course to Class Group
-    singular: Course
   class_group_enrollment:
+    add: Enroll to class group
     count: Enrollments count
     create: Create Class Enrollment
     current: Current enrollment
@@ -390,8 +388,11 @@ en:
   empty: Empty
   enroll_to_class: Enroll to class
   enrollment:
-    plural: Enrollments
-    singular: Enrollment
+    plural: Student enrollments
+    singular: Student enrollment
+    add: Enroll student
+    list: Student enrollments list
+    save: Save student enrollment
   enrollment_status:
     active: Active
     add: Add Enrollment Status
@@ -512,8 +513,8 @@ en:
     save: Save
     show: Show Extracurricular Activity
     singular: Extracurricular Activity
-  extracurricular_activity_enrollment:
-    list: Student list
+    create: Create Extracurricular Activity Enrollment
+    choose: Choose Extracurricular Activity
   failure:
     enrolled: Failed to enroll!
   file: File
@@ -883,6 +884,7 @@ en:
     singular: Semester
     starting: Semester starting
     uniqueness: have this semester added
+    already: Semester already added
   semester_class_group:
     choose: Choose Semester
     save: Save Semester
@@ -972,6 +974,7 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
+    already_enrolled: Student already enrolled!
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index

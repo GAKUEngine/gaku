@@ -70,7 +70,7 @@ describe Gaku::CourseGroupsController do
         it 'renders :recovery' do
           js_patch_recovery
           should render_template :recovery
-       end
+        end
 
         it 'updates :deleted attribute' do
           expect do

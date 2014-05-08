@@ -1,10 +1,15 @@
 module Gaku
   class CourseGroups::CourseGroupEnrollmentsController < GakuController
 
-    respond_to :js, only: %i( new create destroy )
+    respond_to :js, only: %i( new create destroy index )
 
     before_action :set_course_group
     before_action :set_course_group_enrollment, only: :destroy
+    before_action :set_courses, only: :new
+
+    def index
+
+    end
 
     def new
       @course_group_enrollment = CourseGroupEnrollment.new
@@ -44,6 +49,10 @@ module Gaku
 
     def set_course_group_enrollment
       @course_group_enrollment = CourseGroupEnrollment.find(params[:id])
+    end
+
+    def set_courses
+      @courses = Course.all
     end
 
     def set_count

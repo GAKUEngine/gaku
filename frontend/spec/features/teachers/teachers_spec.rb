@@ -63,14 +63,13 @@ describe 'Teachers' do
 
     it 'deletes' do
       visit gaku.edit_teacher_path(teacher2)
-      teacher_count = Gaku::Teacher.count
 
       expect do
         click modal_delete_link
         within(modal) { click_on 'Delete' }
         accept_alert
         flash_destroyed?
-      end.to change(Gaku::Teacher, :count).by -1
+      end.to change(Gaku::Teacher, :count).by(-1)
 
       page.should_not have_content "#{teacher2.name}"
       within(count_div) { page.should_not have_content 'Teachers list(#{teacher_count - 1})' }

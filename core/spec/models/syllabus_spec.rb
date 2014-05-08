@@ -39,13 +39,13 @@ describe Gaku::Syllabus do
       it 'increments notes_count' do
         expect do
           syllabus.notes << note
-        end.to change { syllabus.reload.notes_count }.by 1
+        end.to change { syllabus.reload.notes_count }.by(1)
       end
 
       it 'decrements notes_count' do
         expect do
           syllabus_with_note.notes.last.destroy
-        end.to change { syllabus_with_note.reload.notes_count }.by -1
+        end.to change { syllabus_with_note.reload.notes_count }.by(-1)
       end
     end
 
@@ -57,13 +57,13 @@ describe Gaku::Syllabus do
       it 'increments exams_count' do
         expect do
           syllabus.exams << exam
-        end.to change { syllabus.reload.exams_count }.by 1
+        end.to change { syllabus.reload.exams_count }.by(1)
       end
 
       it 'decrements exams_count' do
         expect do
           syllabus_with_exam.exams.last.destroy
-        end.to change { syllabus_with_exam.reload.exams_count }.by -1
+        end.to change { syllabus_with_exam.reload.exams_count }.by(-1)
       end
     end
 

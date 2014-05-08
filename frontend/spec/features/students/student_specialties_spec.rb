@@ -7,7 +7,7 @@ describe 'Student Specialties' do
 
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
   let(:specialty) { create(:specialty) }
-  let(:student_specialty) { create(:student_specialty, student: student, specialty: specialty ) }
+  let(:student_specialty) { create(:student_specialty, student: student, specialty: specialty) }
   let(:specialty2) { create(:specialty, name: 'Math Specialty') }
 
   context 'new', js: true do
@@ -58,10 +58,6 @@ describe 'Student Specialties' do
         end
       end
 
-      it 'cancels editting' do
-        click '.back-modal-link'
-        within(table) { has_content? specialty.name }
-      end
     end
 
     it 'delete' do

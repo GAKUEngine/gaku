@@ -24,19 +24,31 @@ FactoryGirl.define  do
     end
   end
 
+  trait :with_class_group do
+    after(:create) do |student|
+      student.class_groups << create(:class_group)
+      student.save
+    end
+  end
+
+  trait :with_extracurricular_activity do
+    after(:create) do |student|
+      student.extracurricular_activities << create(:extracurricular_activity)
+      student.save
+    end
+  end
+
   trait :with_enrollment_status do
     enrollment_status
   end
 
   trait :admitted do
     deleted false
-    #admitted false
     association :enrollment_status, factory: :enrollment_status_admitted
   end
 
   trait :applicant do
     deleted false
-    #admitted false
     association :enrollment_status, factory: :enrollment_status_applicant
   end
 

@@ -3,7 +3,7 @@ require_relative 'spec_helper_base'
 require 'rspec/core'
 require 'rspec/rails/extensions'
 require 'rspec/rails/adapters'
-#require 'rspec/rails/mocks'
+# require 'rspec/rails/mocks'
 require 'rspec/rails/view_rendering'
 require 'rspec/rails/example'
 
@@ -17,10 +17,9 @@ require 'gaku/testing/controller_helpers'
 require 'gaku/testing/auth_helpers'
 require 'gaku/core/url_helpers'
 
-#require 'gaku/testing/support/controllers'
+# require 'gaku/testing/support/controllers'
 
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
 
 RSpec.configure do |config|
   config.before(:suite) do

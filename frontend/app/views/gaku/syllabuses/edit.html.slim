@@ -1,16 +1,16 @@
 .row
-  .col-md-12
-    = normal_form_for @syllabus, label: 'nil' do |f|
-      = render 'form_fields', f: f, syllabus: @syllabus
-      = buttons_for @syllabus
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title
+            = link_to t(:'edit'), [:edit, @syllabus], remote: true
 
-= render 'tabs'
+        .panel-body
+          ul.list-unstyled
+            li#exams-menu = link_to badge_count(@syllabus.exams_count, t(:'exam.plural'), 'exams-count'), [@syllabus, :exams], remote: true
+            li#notes-menu = link_to badge_count(@syllabus.notes_count, t(:'note.plural'), 'notes-count'), [@syllabus, :notes], remote: true
 
-= footer do
-  .col-md-9
-    = link_to_index syllabuses_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal', target: @syllabus
+  .col-md-10#ajax-load
+    = render 'edit_form'

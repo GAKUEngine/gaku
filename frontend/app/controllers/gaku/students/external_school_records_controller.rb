@@ -5,7 +5,7 @@ module Gaku
 
     before_action :set_student
     before_action :set_schools, only: %i( new edit )
-    before_action :set_external_school_record, only: %i( edit update )
+    before_action :set_external_school_record, only: %i( edit update destroy )
 
     def new
       @external_school_record = ExternalSchoolRecord.new
@@ -13,16 +13,10 @@ module Gaku
     end
 
     def create
-      @external_school_record = ExternalSchoolRecord.new(external_school_record_params)
-      if @external_school_record.save
-        set_count
-        respond_with @external_school_record
-      else
-        set_count
-        render :new
-      end
+      @external_school_record = ExternalSchoolRecord.create(external_school_record_params)
+      set_count
+      respond_with @external_school_record
     end
-
 
     def edit
       respond_with @external_school_record
@@ -34,7 +28,6 @@ module Gaku
     end
 
     def destroy
-      @external_school_record = ExternalSchoolRecord.find(params[:id])
       @external_school_record.destroy
       set_count
       respond_with @external_school_record
@@ -47,7 +40,7 @@ module Gaku
     end
 
     def external_school_record_attr
-      %i( school_id student_id beginning ending units_absent total_units)
+      %i( school_id student_id student_id_number beginning ending units_absent total_units )
     end
 
     def set_student
