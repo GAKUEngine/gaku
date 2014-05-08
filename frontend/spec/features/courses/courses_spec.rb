@@ -63,7 +63,7 @@ describe 'Courses' do
 
       click edit_link
       click '#grading-methods-menu a'
-      within('#course-grading-method-connectors') do
+      within('#course-grading-method-connectors-index') do
         has_content? grading_method_set.grading_methods.first
         has_content? grading_method_set.grading_methods.second
       end
