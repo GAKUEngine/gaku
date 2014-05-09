@@ -135,11 +135,11 @@ Gaku::Core::Engine.routes.draw do
 
     resources :exam_scores
     resources :exam_portions, controller: 'exams/exam_portions', concerns: %i( sort ) do
-      resources :attachments, controller: 'exams/exam_portions/attachments'
+      resources :attachments, concerns: %i( download soft_delete )
     end
   end
 
-  resources :attachments, concerns: %i( download )
+  resources :attachments, only: :destroy,  concerns: %i( soft_delete )
 
   resources :course_groups  do
     resources :course_group_enrollments, controller: 'course_groups/course_group_enrollments'
