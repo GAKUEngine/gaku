@@ -40,7 +40,7 @@ module PolyController
   end
 
   def nested_resource_names
-    nested_resource_params.keys.map {|p| p.gsub('_id', '').dasherize }
+    nested_resource_params.keys.map { |p| p.gsub('_id', '').dasherize }
   end
 
   def polymorphic_resource_name

@@ -28,7 +28,7 @@ describe 'Exam Portion Attachments' do
         flash_created?
       end.to change(Gaku::Attachment, :count).by 1
       has_content? 'Attachments(1)'
-      has_content?  'Attachments list(1)'
+      has_content? 'Attachments list(1)'
 
       has_content? 'Attachment name'
       has_content? 'Attachment description'
