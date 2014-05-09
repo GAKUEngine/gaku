@@ -7,5 +7,5 @@
 
     .tab-content
       #exam-exam-portion-attachments.tab-pane.active
-        = render 'gaku/exams/exam_portions/attachments/attachments'
+        = render 'gaku/attachments/attachments', nested_resources: [@exam, @exam_portion]
 

@@ -1,0 +1,4 @@
+= modal_for "edit-attachment-modal" do
+  = modal_form_for [@nested_resources, @attachment].flatten, multipart: true, resource: "#{@attachment_resource}" do |f|
+    = render 'gaku/attachments/form_fields', f: f
+    = buttons_for @attachment, resource: "#{@attachment_resource}"
