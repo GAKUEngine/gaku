@@ -1,0 +1,9 @@
+td = attachment
+td = attachment.description
+td = attachment.asset_file_name
+td = attachment.asset_content_type
+td = number_to_human_size attachment.asset_file_size
+td
+  = link_to_download [:download, nested_resources, attachment].flatten, id: "#{@attachable_resource}"
+  = ajax_link_to_edit [:edit, nested_resources, attachment].flatten, id: "#{@attachable_resource}-edit"
+  = render 'gaku/shared/delete_link', target: [nested_resources, attachment].flatten

@@ -7,6 +7,7 @@ module Gaku
 
     before_action :set_exam, only: %i( new show create edit update destroy sort index )
     before_action :set_exam_portion, only: %i( show edit update destroy )
+    before_action :set_attachable, only: %i( edit )
 
     def index
     end
@@ -73,6 +74,11 @@ module Gaku
 
     def set_count
       @count = @exam.reload.exam_portions_count
+    end
+
+    def set_attachable
+      @attachable = @exam_portion
+      @attachable_resource = 'exam-exam-portion-attachment'
     end
   end
 end

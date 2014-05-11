@@ -1,4 +1,0 @@
-= modal_for 'edit-exam-exam-portion-attachment-modal' do
-  = normal_modal_form_for [@exam,@exam_portion, @attachment], resource: "exam-exam-portion-attachment" do |f|
-    = render 'gaku/exams/exam_portions/attachments/form_fields', f: f
-    = buttons_for @attachment, resource: "exam-exam-portion-attachment"

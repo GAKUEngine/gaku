@@ -64,41 +64,6 @@ module Gaku
       @course = Course.find(params[:course_id])
     end
 
-    def grading
-      @course = Course.find(params[:course_id])
-      @students = @course.students # .select("id, surname, name")
-      find_exams
-
-      calculate_totals
-      calculate_exam_averages
-      calculate_deviation
-      calculate_rank_and_grade
-
-      @path_to_exam = course_path(id: params[:course_id])
-
-      # exam_portions need reload to properly include exam_portion_score in as_json
-      @exams.each { |exam| exam.exam_portions.reload }
-
-      respond_to do |format|
-        format.json do
-          render json: {
-            student_total_scores: @student_total_scores.as_json,
-            exams: @exams.as_json(include: { exam_portions: { include: :exam_portion_scores } }, root: false),
-            course: @course.as_json(root: false),
-            exam_averages: @exam_averages.as_json(root: false),
-            deviation: @deviation.as_json(root: false),
-            students: @students.to_json(root: false),
-            grades: @grades.as_json(root: false),
-            ranks: @ranks.as_json(root: false),
-            attendances: @student_portion_attendance.as_json(root: true, include: :attendance_type),
-            path_to_exam: @path_to_exam.to_json,
-            completion: @completion
-          }
-        end
-        format.html { render 'gaku/exams/grading' }
-      end
-    end
-
     def completed
       @exam = Exam.find(params[:id])
       @course = Course.find(params[:course_id])
@@ -142,7 +107,6 @@ module Gaku
     def set_notable
       @notable = @exam
       @notable_resource = @notable.class.to_s.demodulize.underscore.dasherize
-
     end
 
     def set_gradable
