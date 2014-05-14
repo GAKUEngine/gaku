@@ -38,7 +38,7 @@ describe Gaku::Semester do
   end
 
   let(:active_semester) { create(:active_semester) }
-  let(:not_started_semester) { create(:not_started_semester) }
+  let(:upcomming_semester) { create(:upcomming_semester) }
   let(:ended_semester) { create(:ended_semester) }
 
   describe 'scopes' do
@@ -47,9 +47,9 @@ describe Gaku::Semester do
       expect(described_class.active).to eq [active_semester]
     end
 
-    it 'not_started' do
-      not_started_semester
-      expect(described_class.not_started).to eq [not_started_semester]
+    it 'upcomming' do
+      upcomming_semester
+      expect(described_class.upcomming).to eq [upcomming_semester]
     end
   end
 
@@ -58,9 +58,9 @@ describe Gaku::Semester do
     expect(active_semester.active?).to be true
   end
 
-  it '#not_started?' do
-    not_started_semester
-    expect(not_started_semester.not_started?).to be true
+  it '#upcomming?' do
+    upcomming_semester
+    expect(upcomming_semester.upcomming?).to be true
   end
 
   it '#ended?' do
