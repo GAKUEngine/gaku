@@ -14,7 +14,6 @@ describe 'Students', type: :feature do
   let(:semester_connector) do
     create(:semester_connector_class_group, semester: active_semester, semesterable: class_group)
   end
-  let(:cl) { create(:active_semester, )}
   let(:enrollment_status_applicant) { create(:enrollment_status_applicant) }
   let(:enrollment_status_admitted) { create(:enrollment_status_admitted) }
   let(:enrollment_status) { create(:enrollment_status) }
@@ -183,9 +182,6 @@ describe 'Students', type: :feature do
       within('.class-groups-count') { has_content?('1') }
       click '#student-class-groups-menu a'
       has_content? class_group.name
-
-
-
       expect(Gaku::Student.last.class_groups).to eq [class_group]
     end
 
