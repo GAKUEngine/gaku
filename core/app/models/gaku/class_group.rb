@@ -5,6 +5,20 @@ module Gaku
 
     validates :name, presence: true
 
+    def self.for_select
+      %w(active upcomming).map do |state|
+        [state.humanize, send(state).map { |cg| [cg.name, cg.id] } ]
+      end
+    end
+
+    def self.active
+      @active = self.joins(:semesters).merge(Gaku::Semester.active).uniq
+    end
+
+    def self.upcomming
+      @upcomming = self.joins(:semesters).merge(Gaku::Semester.upcomming).uniq - active
+    end
+
     def to_s
       "#{grade} - #{name}"
     end
