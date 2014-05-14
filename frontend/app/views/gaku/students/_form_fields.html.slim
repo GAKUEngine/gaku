@@ -3,11 +3,10 @@
     = f.collection_select(:enrollment_status_code, @enrollment_statuses, :code, :name, { default: @enrolled_status }, label: t(:'enrollment_status.singular'))
 
   .col-md-6
-    = f.fields_for :class_group_enrollments do |cge_form|
-      - if @student.new_record?
-        = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'),  selected: @last_student.try(:class_groups).try(:last) }, label: t(:'class'))
-      - else
-        = cge_form.collection_select(:class_group_id, @class_groups, :id, :name, { prompt: t(:'class_group.none_assigned'),  default: @last_student.try(:class_groups).try(:last) }, label: t(:'class'))
+    - if @student.new_record?
+      = f.fields_for :enrollments do |enrollment_form|
+        = enrollment_form.select :enrollmentable_id, grouped_options_for_select(@class_groups, selected: @last_student.try(:class_groups).try(:last).try(:id)), { prompt: t(:'class_group.none_assigned') }, class: 'form-control', label: t(:'class')
+
 = render 'gaku/shared/form_fields/person_form_fields', f: f, person: @student
 
 .row
