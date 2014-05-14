@@ -10,18 +10,18 @@ FactoryGirl.define do
     end
 
     factory :active_semester do
-      starting { Time.now - 1.day }
-      ending  { Time.now + 1.day }
+      starting { Date.today - 1.day }
+      ending  { Date.today + 1.day }
     end
 
-    factory :not_started_semester do
-      starting { Time.now + 1.day }
-      ending  { Time.now + 2.day }
+    factory :upcomming_semester do
+      starting { Date.today + 1.day }
+      ending  { Date.today + 2.day }
     end
 
     factory :ended_semester do
-      starting { Time.now  - 2.day }
-      ending  { Time.now - 1.day }
+      starting { Date.today  - 2.day }
+      ending  { Date.today - 1.day }
     end
 
   end
