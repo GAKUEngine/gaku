@@ -17,6 +17,35 @@ describe Gaku::ClassGroup do
     specify { class_group.to_s.should eq "#{class_group.grade} - #{class_group.name}" }
   end
 
+  it '.active' do
+    class_group = create(:class_group)
+    active_semester = create(:active_semester)
+    create(:semester_connector_class_group, semester: active_semester, semesterable: class_group)
+
+    expect(described_class.active).to eq [class_group]
+  end
+
+  it '.not_started' do
+    class_group = create(:class_group)
+    not_started_semester = create(:not_started_semester)
+    create(:semester_connector_class_group, semester: not_started_semester, semesterable: class_group)
+
+    expect(described_class.not_started).to eq [class_group]
+  end
+
+  it 'exclude form .not_started if have active and not started semester' do
+
+    class_group = create(:class_group)
+
+    not_started_semester = create(:not_started_semester)
+    create(:semester_connector_class_group, semester: not_started_semester, semesterable: class_group)
+
+    active_semester = create(:active_semester)
+    create(:semester_connector_class_group, semester: active_semester, semesterable: class_group)
+
+    expect(described_class.not_started).to_not eq [class_group]
+  end
+
   context 'counter_cache' do
 
     let!(:class_group) { create(:class_group) }

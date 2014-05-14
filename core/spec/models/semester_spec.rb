@@ -35,7 +35,37 @@ describe Gaku::Semester do
         semester.should have(1).error_on(:base)
       end
     end
+  end
 
+  let(:active_semester) { create(:active_semester) }
+  let(:not_started_semester) { create(:not_started_semester) }
+  let(:ended_semester) { create(:ended_semester) }
+
+  describe 'scopes' do
+    it 'active' do
+      active_semester
+      expect(described_class.active).to eq [active_semester]
+    end
+
+    it 'not_started' do
+      not_started_semester
+      expect(described_class.not_started).to eq [not_started_semester]
+    end
+  end
+
+  it '#active?' do
+    active_semester
+    expect(active_semester.active?).to be true
+  end
+
+  it '#not_started?' do
+    not_started_semester
+    expect(not_started_semester.not_started?).to be true
+  end
+
+  it '#ended?' do
+    ended_semester
+    expect(ended_semester.ended?).to be true
   end
 
 end
