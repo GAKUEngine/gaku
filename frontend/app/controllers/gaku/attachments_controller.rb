@@ -1,27 +1,22 @@
 module Gaku
   class AttachmentsController < GakuController
+    include PolyController
 
-    before_action :set_attachment, only: %i( show edit update soft_delete download )
-    before_action :set_unscoped_attachment, only: %i( recovery destroy )
     respond_to :js, :html
 
-    # TODO: merge and refactor two controllers
+    before_action :set_attachable
+    before_action :set_attachment, only: %i( show edit update soft_delete download )
+    before_action :set_unscoped_attachment, only: %i( recovery destroy )
 
     def new
-      @attachment = Attachment.new
+      @attachment = @attachable.attachments.new
       respond_with @attachment
     end
 
     def create
-      @attachable = find_attachable
-      @attachment = @attachable.attachments.build(params[:attachment])
-      respond_to do |format|
-        if @attachment.save
-          format.html { redirect_to :back, flash: { notice: 'Asset upload was successful!' } }
-        else
-          format.html { redirect_to :back, flash: { success: 'Error when upload asset' } }
-        end
-      end
+      @attachment = @attachable.attachments.create(attachment_params)
+      set_count
+      respond_with @attachment
     end
 
     def edit
@@ -55,11 +50,11 @@ module Gaku
       respond_with @attachment
     end
 
+    private
+
     def attachment_params
       params.require(:attachment).permit(attachment_attr)
     end
-
-    private
 
     def attachment_attr
       [:name, :description, :asset]
@@ -73,15 +68,14 @@ module Gaku
       @attachment = Attachment.unscoped.find(params[:id])
     end
 
-    def find_attachable
-      # unnamespaced_klass = ''
-      # klass = [Gaku::Student, Gaku::LessonPlan, Gaku::Syllabus, Gaku::ClassGroup, Gaku::Course, Gaku::Exam].detect do |c|
-      #   unnamespaced_klass = c.to_s.split("::")
-      #   params["#{unnamespaced_klass[1].underscore}_id"]
-      # end
+    def set_attachable
+      @attachable = parent_resource
+      @attachment_resource = resource_names
+      @nested_resources = nested_resources
+    end
 
-      # @notable = klass.find(params["#{unnamespaced_klass[1].underscore}_id"])
-      # @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub("_","-")
+    def set_count
+      @count = @attachable.attachments.count
     end
 
   end

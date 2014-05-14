@@ -14,7 +14,7 @@ module Gaku
 
     roles_table_name = Role.table_name
 
-    scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
+    scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'Admin') }
 
     def student_selection
       hashes = $redis.lrange(:student_selection, 0, -1)
@@ -29,6 +29,8 @@ module Gaku
       username
     end
 
+    # Override Devise::Models::Authenticatable#find_first_by_auth_conditions
+    # so login can be authenticated against username or email
     def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       login = conditions.delete(:login)
@@ -42,12 +44,8 @@ module Gaku
       end
     end
 
-    def has_role?(role_sym)
-      roles.any? { |r| r.name.underscore.to_sym == role_sym }
-    end
-
     def role?(role)
-      roles.find { |p| p.name == role.to_s.camelize }
+      roles.where(name: role.to_s.camelize).any?
     end
   end
 end
