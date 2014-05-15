@@ -3,7 +3,6 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 
 require 'gaku/testing/deferred_garbage_collection'
 require 'gaku/testing/coverage'
-require 'pry'
 
 Rails.logger.level = 3
 
