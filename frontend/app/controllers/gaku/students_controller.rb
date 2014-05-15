@@ -28,7 +28,9 @@ module Gaku
     def create
       @student = Student.new(student_params)
       if @student.save
-        @student.class_group_enrollments.create(enrollmentable_id: params[:student][:enrollments][:enrollmentable_id])
+        if params[:student][:enrollments]
+          @student.class_group_enrollments.create(enrollmentable_id: params[:student][:enrollments][:enrollmentable_id])
+        end
         @count = Student.count
         respond_with @student, location: [:edit, @student]
       else
