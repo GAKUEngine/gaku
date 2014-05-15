@@ -14,7 +14,7 @@ module Gaku
     def new
       @enrolled_status = EnrollmentStatus.where(code: 'enrolled').first_or_create!
       @last_student = Student.last
-
+      # raise @last_student.try(:class_groups).try(:last).try(:id).inspect
       @student = Student.new
       if @last_student
         @student.admitted = @last_student.admitted
@@ -28,6 +28,9 @@ module Gaku
     def create
       @student = Student.new(student_params)
       if @student.save
+        if params[:student][:enrollments]
+          @student.class_group_enrollments.create(enrollmentable_id: params[:student][:enrollments][:enrollmentable_id])
+        end
         @count = Student.count
         respond_with @student, location: [:edit, @student]
       else
@@ -115,7 +118,7 @@ module Gaku
       [:name, :surname, :name_reading, :surname_reading, :birth_date,
        :gender, :scholarship_status_id,
        :enrollment_status_code, :commute_method_type_id, :admitted,
-       :graduated, :picture, class_group_enrollments_attributes: [:id, :class_group_id]]
+       :graduated, :picture]
     end
 
     def includes
@@ -151,7 +154,7 @@ module Gaku
     end
 
     def load_data
-      @class_groups = ClassGroup.all
+      @class_groups = ClassGroup.for_select
       @enrollment_statuses = EnrollmentStatus.includes(:translations)
       @scholarship_statuses = ScholarshipStatus.includes(:translations)
       @commute_method_types = CommuteMethodType.includes(:translations)
