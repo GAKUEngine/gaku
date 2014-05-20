@@ -7,7 +7,7 @@ module Gaku
 
     def self.for_select
       %w(active upcomming).map do |state|
-        [state.humanize, send(state).map { |cg| [cg.name, cg.id] }]
+        [state.humanize, send(state).map { |cg| [cg.to_s, cg.id] }]
       end
     end
 
