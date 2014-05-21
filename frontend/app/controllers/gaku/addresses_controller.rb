@@ -5,9 +5,9 @@ module Gaku
 
     respond_to :js
 
-    before_action :set_countries,        only: %i( new edit )
-    before_action :set_unscoped_address, only: %i( recovery destroy )
-    before_action :set_address,          only: %i( edit update soft_delete make_primary )
+    before_action :set_countries_and_states,        only: %i( new edit )
+    before_action :set_unscoped_address,            only: %i( recovery destroy )
+    before_action :set_address,                     only: %i( edit update soft_delete make_primary )
     before_action :set_polymorphic_resource
 
     def index
@@ -79,8 +79,11 @@ module Gaku
       [Gaku::Student, Gaku::Campus, Gaku::Guardian, Gaku::Teacher]
     end
 
-    def set_countries
+    def set_countries_and_states
       @countries = Country.all
+      @default_country = Country.where(name: Preset.address('country')).first
+      @default_state = State.where(name_ascii: Preset.address('state')).first
+      @states = @default_country.states if @default_country
     end
 
     def set_address

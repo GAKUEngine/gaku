@@ -1,0 +1,3 @@
+= remote_form_for [@nested_resources, @attachment].flatten, multipart: true, resource: "#{@attachment_resource}" do |f|
+	= render 'form_fields', f: f
+	= buttons_for @attachment, resource: "#{@attachment_resource}"

@@ -1,0 +1,8 @@
+showNotice("<%= render_flash %>");
+
+$('#<%= @attachment_resource.pluralize %>-index tbody').append('<%= j render("attachment", attachment: @attachment, nested_resources: @nested_resources) %>');
+$('.<%= @attachment_resource.pluralize %>-count').html("<%= print_count(@count, t(:'attachment.list')) %>");
+$('#<%= @attachment_resource.pluralize %>-tab-link').html("<%= print_count(@count, t(:'attachment.plural')) %>");
+
+$('#new-<%= @attachment_resource %>').slide();
+$('#new-<%= @attachment_resource %>-link').show();

@@ -1,0 +1,20 @@
+= index_header do
+  = content_tag(:div,nil,  id: "new-#{@attachable_resource}", class: 'd-none')
+  .pull-left
+    = count_div "#{@attachable_resource.pluralize}-count" do
+      = print_count @exam_portion.attachments.count, t(:'attachment.list')
+  .pull-right
+    = ajax_link_to_new t(:'attachment.new'), [:new, @exam, @attachable, :attachment], id: "new-#{@attachable_resource}-link"
+
+= index_body do
+  = table_for "#{@attachable_resource.pluralize}-index" do
+    thead
+      tr
+        = th t(:'attachment.name')
+        = th t(:'attachment.description')
+        = th t(:'attachment.file_name')
+        = th t(:'attachment.file_type')
+        = th t(:'attachment.file_size')
+        = th_actions 3
+    tbody
+      =render partial: 'gaku/attachments/attachment', collection: @attachable.attachments, as: :attachment, locals: { nested_resources: nested_resources }
