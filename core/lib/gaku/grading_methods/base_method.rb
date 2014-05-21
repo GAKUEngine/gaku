@@ -9,24 +9,16 @@ module Gaku
         @students = students
         @criteria = criteria
       end
-      
+
       # Obtain graded hash of results
       def grade
-        case @gradable_type
-        when :exam then
-          grade_exam
-        when :assignment then
-          grade_assignment
+        if @gradable.is_a?(Gaku::Exam)
+          grade_exam(@gradable)
+        elsif @gradable.is_a?(Gaku::Assignment)
+          grade_assignment(@gradable)
         end
       end
 
-      private
-
-      def grade_exam
-      end
-
-      def grade_assignment
-      end
     end
   end
 end

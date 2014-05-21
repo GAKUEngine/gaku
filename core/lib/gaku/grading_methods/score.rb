@@ -2,19 +2,19 @@ class  Gaku::GradingMethods::Score < Gaku::GradingMethods::BaseMethod
 
   private
 
-  def grade_exam
-    @results = Hash.new { |hash, key| hash[key] = {} }
-    @students.each do |student|
-      @results[@exam.id][student.id] = nil
-      @exam.exam_portions.each do |exam_portion|
-        exam_portion_score =
-          student.exam_portion_scores.where(exam_portion_id: exam_portion.id).first.try(:score)
-        if exam_portion_score.present?
-          @results[@exam.id][student.id] =
-            @results[@exam.id][student.id].to_f +  exam_portion_score.to_f
+  def grade_exam(exam)
+    Gaku::GradingMethods::Result.new(exam.id).tap do |result|
+      @students.each do |student|
+        @score = nil
+
+        exam.exam_portions.each do |exam_portion|
+          ep_score = student.exam_portion_scores.where(exam_portion_id: exam_portion.id).first_or_create!(score: 0)
+          @score = @score.to_f + ep_score.score.to_f
         end
+
+        result.append_score(student.id, @score)
       end
-    end
-    @results
+    end.as_json
+
   end
 end
