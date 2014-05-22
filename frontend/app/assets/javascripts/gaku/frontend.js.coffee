@@ -1,6 +1,8 @@
 #= require jquery
 #= require jquery.minicolors
 
+#= require socket.io
+
 #= require jquery.ui.autocomplete
 #= require jquery.ui.draggable
 #= require jquery.ui.droppable

@@ -76,3 +76,5 @@ locales/
 
 pkg/
 **/pkg/
+
+realtime_grading/node_modules/

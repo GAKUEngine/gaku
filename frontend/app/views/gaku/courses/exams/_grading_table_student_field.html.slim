@@ -9,3 +9,6 @@
         td
           = form_for [@course, @exam, score], remote: true do |f|
             = f.number_field :score, min: 0, max: 100, class: 'span12'
+  td.vm id="student-#{student.id}-score"
+    = @score['student_results'].find { |h| h['id'] == student.id }['score']
+  td.vm

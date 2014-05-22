@@ -51,4 +51,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'remotipart',                     '~> 1.2.1'
   s.add_dependency 'bootstrap-datetime-picker-for-rails', '~> 0.0.4'
 
+  s.add_dependency 'socket.io-rails'
 end
