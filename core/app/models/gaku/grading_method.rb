@@ -12,12 +12,13 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
-    @@method_list = { score:       Gaku::GradingMethods::Score,
-        percentage:  Gaku::GradingMethods::Percentage,
-        ordinal:     Gaku::GradingMethods::Ordinal,
-        interval:    Gaku::GradingMethods::Interval,
-        ratio:       Gaku::GradingMethods::Ratio,
-        pass_fail:   Gaku::GradingMethods::PassFail
+    @@method_list = {
+        score:       Gaku::Grading::Collection::Score #,
+        # percentage:  Gaku::Grading::Collection::Percentage,
+        # ordinal:     Gaku::Grading::Collection::Ordinal,
+        # interval:    Gaku::Grading::Collection::Interval,
+        # ratio:       Gaku::Grading::Collection::Ratio,
+        # pass_fail:   Gaku::Grading::Collection::PassFail
     }
 
     validates :method, presence: true, inclusion: { in: @@method_list.keys.map(&:to_s) }

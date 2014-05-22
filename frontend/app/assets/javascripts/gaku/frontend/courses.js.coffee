@@ -18,8 +18,8 @@ ready = ->
           input = form.children('input#exam_portion_score_score')
           input.val("#{exam_portion_score.score}")
 
-        student_id = message.score.student_results[0].id
-        score = message.score.student_results[0].score
+        student_id = message.score.id
+        score = message.score.score
 
         $("#student-#{student_id}-score").html(score)
 

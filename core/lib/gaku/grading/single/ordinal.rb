@@ -1,4 +1,4 @@
-class  Gaku::GradingMethods::Ordinal < Gaku::GradingMethods::BaseMethod
+class  Gaku::Grading::Single::Ordinal < Gaku::Grading::Single::BaseMethod
 
   private
 
