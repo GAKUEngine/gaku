@@ -664,6 +664,9 @@ en:
         grading_methods: Grading Methods
         grading_sets: Grading Sets
       grading_methods: Grading Methods
+      importer:
+        importer: Importer
+        student: Student Importer
       preset:
         plural: Presets
       school_details: School Details
