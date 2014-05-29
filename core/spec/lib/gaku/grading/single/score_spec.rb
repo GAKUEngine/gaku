@@ -9,7 +9,7 @@ describe Gaku::Grading::Single::Score do
 
   describe 'initialize' do
     it 'initializes with exam' do
-      expect(subject.grade_exam).to eq({ id: student.id, score: 0.0 })
+      expect(subject.grade_exam).to eq({ id: student.id, score: nil })
     end
   end
 

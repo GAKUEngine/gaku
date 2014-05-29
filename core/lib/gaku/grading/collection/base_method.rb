@@ -14,9 +14,10 @@ module Gaku
 
         # Obtain graded hash of results
         def grade
-          if @gradable.is_a?(Gaku::Exam)
+          case @gradable
+          when Gaku::Exam
             grade_exam
-          elsif @gradable.is_a?(Gaku::Assignment)
+          when Gaku::Assignment
             grade_assignment(@gradable)
           end
 

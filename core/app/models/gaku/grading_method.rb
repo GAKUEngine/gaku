@@ -14,8 +14,8 @@ module Gaku
 
     @@method_list = {
         score:       Gaku::Grading::Collection::Score,
-        percentage:  Gaku::Grading::Collection::Percentage #,
-        # ordinal:     Gaku::Grading::Collection::Ordinal,
+        percentage:  Gaku::Grading::Collection::Percentage,
+        ordinal:     Gaku::Grading::Single::Ordinal
         # interval:    Gaku::Grading::Collection::Interval,
         # ratio:       Gaku::Grading::Collection::Ratio,
         # pass_fail:   Gaku::Grading::Collection::PassFail

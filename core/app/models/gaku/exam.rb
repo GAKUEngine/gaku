@@ -46,7 +46,7 @@ module Gaku
     end
 
     def max_score
-      exam_portions.reduce(0) { |sum, p| sum + p.max_score }
+      exam_portions.inject(0) { |sum, p| sum + p.max_score }
     end
 
     def completion(students)
