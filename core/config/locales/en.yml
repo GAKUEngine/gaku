@@ -628,6 +628,18 @@ en:
   id: ID
   import: Import
   import_format: Import Format
+  import_file:
+    singular: Import file
+    pluralize: Import files
+    list: Import files list
+    add: Add import file
+    save: Save import file
+    importer_type: Importer type
+    data_file: Data file
+    choose: Choose importer type
+    file_name: File name
+    file_size: File size
+    content_type: Content type
   is_graduated: Has Graduated
   language: Language
   languages:
