@@ -20,10 +20,10 @@ class Gaku::Grading::Single::Ordinal < Gaku::Grading::Single::BaseMethod
   end
 
   def criteria
-    if values.include? 0
+    if @criteria.values.include? '0'
       @criteria
     else
-      @criteria.merge('' => 0)
+      @criteria.merge('' => '0')
     end
   end
 
