@@ -640,6 +640,8 @@ en:
     file_name: File name
     file_size: File size
     content_type: Content type
+    importing: 'Importing for %{type} started!'
+
   is_graduated: Has Graduated
   language: Language
   languages:
