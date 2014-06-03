@@ -15,7 +15,7 @@ describe Gaku::Grading::Single::Ordinal do
 
   let(:grading_method) do
     create(:grading_method, name: 'Ordinal', method: 'ordinal',
-      criteria: {"A" => '90', "B" => '80', "C" => '60', "D" => '40', "F" => '10'})
+      criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
 
   subject { described_class.new(exam, student, grading_method.criteria) }
