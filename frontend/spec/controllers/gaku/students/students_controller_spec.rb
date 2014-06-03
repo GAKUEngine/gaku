@@ -2,12 +2,14 @@ require 'spec_helper_controllers'
 
 describe Gaku::StudentsController do
 
-  let!(:admin) { create(:admin_user) }
+  # let!(:admin) { create(:admin_user) }
   let!(:enrollment_status) { create(:enrollment_status_admitted) }
   let(:enrollment_status_not_active) { create(:enrollment_status, active: false) }
   let(:student) { create(:student, enrollment_status_code: enrollment_status.code) }
   let(:valid_attributes) { { name: 'Marta', surname: 'Kostova' } }
   let(:invalid_attributes) { { name: '' } }
+
+  before { as :admin }
 
   context 'search' do
     describe 'name' do
