@@ -21,7 +21,7 @@ module Gaku
             grade_assignment(@gradable)
           end
 
-          Gaku::Grading::Collection::Result.new(@gradable, @result).as_json
+          Gaku::Grading::Collection::Result.new(@gradable.id, @result).as_json
         end
 
       end
