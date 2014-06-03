@@ -18,6 +18,7 @@ module Gaku
               hash[grading_method.id] = grading.grade
             end
           end
+
         end
 
         private
