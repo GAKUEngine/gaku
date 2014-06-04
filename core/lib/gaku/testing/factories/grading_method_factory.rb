@@ -4,6 +4,8 @@ FactoryGirl.define do
     sequence(:name) { |n| "Method #{n}" }
     description 'Grading method description'
 
+    grading_type 'score'
+
     factory :invalid_grading_method do
       name nil
     end
