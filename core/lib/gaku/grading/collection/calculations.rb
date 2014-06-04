@@ -14,7 +14,7 @@ module Gaku
         def calculate
           {}.tap do |hash|
             @grading_methods.each do |grading_method|
-              grading = grading_types[grading_method.method].constantize.new(@exam, @students, grading_method.criteria)
+              grading = grading_types[grading_method.grading_type].constantize.new(@exam, @students, grading_method.criteria)
               hash[grading_method.id] = grading.grade
             end
           end
