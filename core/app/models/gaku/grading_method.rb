@@ -12,26 +12,9 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
-    @@method_list = {
-        score:       Gaku::Grading::Collection::Score,
-        percentage:  Gaku::Grading::Collection::Percentage,
-        ordinal:     Gaku::Grading::Single::Ordinal
-        # interval:    Gaku::Grading::Collection::Interval,
-        # ratio:       Gaku::Grading::Collection::Ratio,
-        # pass_fail:   Gaku::Grading::Collection::PassFail
-    }
+    Types = %w( score percentage ordinal )
 
-    validates :method, presence: true, inclusion: { in: @@method_list.keys.map(&:to_s) }
-
-    after_initialize do
-      if self.new_record?
-        self.curved = false
-      end
-    end
-
-    def self.method_list
-      @@method_list
-    end
+    validates :grading_type, presence: true, inclusion: { in: Types }
 
     def to_s
       name
