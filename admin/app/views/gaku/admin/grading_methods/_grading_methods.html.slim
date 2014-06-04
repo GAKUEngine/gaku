@@ -15,7 +15,7 @@ hr
       tr
         = th t(:'grading_method.singular')
         = th t(:'grading_method.description')
-        = th t(:'grading_method.method')
+        = th t(:'grading_method.grading_type')
         = th_actions 2
     tbody
       = render partial: 'grading_method', collection: @grading_methods, as: :grading_method
