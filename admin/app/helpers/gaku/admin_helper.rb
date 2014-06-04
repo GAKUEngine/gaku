@@ -9,8 +9,7 @@ module Gaku
     end
 
     def grading_methods_with_i18n
-      grading_methods = Gaku::GradingMethod.method_list.keys
-      Hash[*grading_methods.map do |k|
+      Hash[*Gaku::GradingMethod::Types.map do |k|
         [I18n.t("grading_method.#{k}"), k.to_s]
       end.flatten]
 

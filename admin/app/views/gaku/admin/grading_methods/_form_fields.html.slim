@@ -1,5 +1,5 @@
 = f.text_field :name,        label: t(:'grading_method.name')
 = f.text_field :description, label: t(:'grading_method.description')
-= f.select :method, options_for_select(grading_methods_with_i18n), {prompt: t(:'grading_method.choose')}, label: t(:'grading_method.method')
+= f.select :grading_type, options_for_select(grading_methods_with_i18n), {prompt: t(:'grading_method.choose')}, label: t(:'grading_method.grading_type')
 = f.check_box :curved, label: t(:'grading_method.curved')
 = render 'criteria_form_fields', f: f

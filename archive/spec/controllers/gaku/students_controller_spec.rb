@@ -2,9 +2,10 @@ require 'spec_helper_controllers'
 
 describe Gaku::StudentsController do
 
-  let!(:admin) { create(:admin_user) }
   let(:student) { create(:student) }
   let(:deleted_student) { create(:student, deleted: true) }
+
+  before { as :admin }
 
   context 'HTML' do
 

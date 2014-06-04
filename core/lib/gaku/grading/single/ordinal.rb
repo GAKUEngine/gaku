@@ -1,20 +1,30 @@
-class  Gaku::Grading::Single::Ordinal < Gaku::Grading::Single::BaseMethod
+class Gaku::Grading::Single::Ordinal < Gaku::Grading::Single::BaseMethod
+
+  attr_accessor :criteria
+
+  def grade_exam
+    exam = @gradable
+
+    percentage = Gaku::Grading::Single::Percentage.new(exam, @student).grade
+    @result = { id: @student.id, score: ordinal(percentage['score']) }
+  end
 
   private
 
-  def grade_exam
-    @results = Hash.new { |hash, key| hash[key] = {} }
-    @students.each do |student|
-      @results[@gradable.id][student.id] = nil
-      @gradable.exam_portions.each do |exam_portion|
-        exam_portion_score =
-          student.exam_portion_scores.where(exam_portion_id: exam_portion.id).first.try(:score)
-        if exam_portion_score.present?
-          @results[@gradable.id][student.id] =
-            @results[@gradable.id][student.id].to_f +  exam_portion_score.to_f
-        end
-      end
+  def ordinal(percentage)
+    if percentage
+      criteria.sort_by(&:last).reverse.find  do |grade, min_points|
+        percentage >= min_points.to_i
+      end.first
     end
-    @results
   end
+
+  def criteria
+    if @criteria.values.include? '0'
+      @criteria
+    else
+      @criteria.merge('' => '0')
+    end
+  end
+
 end
