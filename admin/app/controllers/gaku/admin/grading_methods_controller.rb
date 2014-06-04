@@ -50,7 +50,7 @@ module Gaku
     end
 
     def attributes
-      %i( description method name curved criteria )
+      %i( description grading_type name curved criteria )
     end
 
     def set_count
