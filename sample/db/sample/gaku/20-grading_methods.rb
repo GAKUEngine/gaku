@@ -1,25 +1,25 @@
 grading_methods = [
   {
     name: 'Score',
-    method: 'score',
+    grading_type: 'score',
     description: 'Straight Score',
     curved: false
   },
   {
     name: 'Curved Score',
-    method: 'score',
+    grading_type: 'score',
     description: 'Curved Score',
     curved: true
   },
   {
     name: 'Percentage',
-    method: 'percentage',
+    grading_type: 'percentage',
     description: 'Straight Percentage',
     curved: false
   },
   {
     name: 'Curved Percentage',
-    method: 'percentage',
+    grading_type: 'percentage',
     description: 'Curved Percentage',
     curved: true
   }
