@@ -8,10 +8,10 @@ describe Gaku::Grading::Collection::Calculations do
   let(:exam_portion1) { create(:exam_portion, exam: exam) }
   let(:exam_portion2) { create(:exam_portion, exam: exam) }
 
-  let(:grading_method1) { create(:grading_method, method: 'score')}
-  let(:grading_method2) { create(:grading_method, method: 'percentage')}
+  let(:grading_method1) { create(:grading_method, grading_type: 'score')}
+  let(:grading_method2) { create(:grading_method, grading_type: 'percentage')}
   let(:grading_method3) do
-    create(:grading_method, method: 'ordinal',
+    create(:grading_method, grading_type: 'ordinal',
       criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
 

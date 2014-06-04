@@ -9,7 +9,7 @@ describe Gaku::Grading::Collection::Ordinal do
   let(:exam_portion2) { create(:exam_portion, exam: exam) }
 
   let(:grading_method) do
-    create(:grading_method, name: 'Ordinal', method: 'ordinal',
+    create(:grading_method, name: 'Ordinal', grading_type: 'ordinal',
       criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
 

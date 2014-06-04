@@ -13,10 +13,10 @@ describe Gaku::Grading::Single::Calculations do
     create(:exam_portion_score, score: 65, student:student, exam_portion: exam_portion2)
   end
 
-  let(:grading_method1) { create(:grading_method, method: 'score')}
-  let(:grading_method2) { create(:grading_method, method: 'percentage')}
+  let(:grading_method1) { create(:grading_method, grading_type: 'score')}
+  let(:grading_method2) { create(:grading_method, grading_type: 'percentage')}
   let(:grading_method3) do
-    create(:grading_method, method: 'ordinal',
+    create(:grading_method, grading_type: 'ordinal',
       criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
   subject { described_class.new([grading_method1, grading_method2, grading_method3], student, exam) }
