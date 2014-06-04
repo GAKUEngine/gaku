@@ -564,14 +564,14 @@ en:
   grading_method:
     add: Add Grading Method
     add_criteria: Add criteria
-    choose: Choose Grading Method
+    choose: Choose grading type
     criteria: Criteria
     curved: Curved
     description: Description
     edit: Edit Grading Method
     interval: Interval
     list: Grading Methods list
-    method: Method
+    grading_type: Grading type
     name: Name
     ordinal: Ordinal
     pass_fail: Pass/Fail
