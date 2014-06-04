@@ -28,6 +28,7 @@ script:
   - I18N=1 bundle exec rspec $SUITE
 
 env:
+  - GEM=core SUITE=spec/lib
   - GEM=core SUITE=spec/models
   - GEM=frontend SUITE="spec/controllers spec/routing spec/requests"
   - GEM=admin SUITE="spec/controllers spec/routing"
