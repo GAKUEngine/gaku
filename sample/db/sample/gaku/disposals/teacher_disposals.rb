@@ -1,8 +1,8 @@
-# encoding: utf-8
-require 'shared_sample_data'
+# # encoding: utf-8
+# require 'shared_sample_data'
 
-say "Creating #{@count[:disposals]} teachers ...".yellow
+# say "Creating #{@count[:disposals]} teachers ...".yellow
 
-batch_create(@count[:disposals]) do
-  Gaku::Teacher.where(random_person.merge(deleted: true)).first_or_create!
-end
+# batch_create(@count[:disposals]) do
+#   Gaku::Teacher.where(random_person.merge(deleted: true)).first_or_create!
+# end
