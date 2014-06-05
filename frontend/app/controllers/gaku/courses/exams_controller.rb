@@ -13,7 +13,9 @@ module Gaku
       @course = Course.find(params[:course_id])
       @exam = Exam.find(params[:id])
       @students = @course.students
-      init_portion_scores
+      @grading_methods = @course.grading_methods
+
+      @grading_calculations = Grading::Collection::Calculations.new(@grading_methods, @students, @exam).calculate
 
       respond_with @exam
     end

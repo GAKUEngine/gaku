@@ -203,7 +203,7 @@ describe 'Students', type: :feature do
 
     context 'there is existing student' do
 
-      it 'prefills enrollment_status, admitted and class_group with last student ones' do
+      it 'prefills enrollment_status, admitted, and class_group fields with same information using the student just viewed as a base' do
         student = create(:student, enrollment_status_code: enrollment_status_applicant.code, admitted: '2013-01-19')
         create(:class_group_enrollment, enrollmentable: class_group, student: student)
         visit gaku.new_student_path

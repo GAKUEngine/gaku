@@ -8,6 +8,13 @@ module Gaku
       content_tag :h4, text
     end
 
+    def grading_methods_with_i18n
+      Hash[*Gaku::GradingMethod::Types.map do |k|
+        [I18n.t("grading_method.#{k}"), k.to_s]
+      end.flatten]
+
+    end
+
     def badge_count(count, text, css_class)
       if count != 0
         "#{text}<span class='badge pull-right #{css_class}'>#{count}</span>".html_safe

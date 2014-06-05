@@ -563,25 +563,22 @@ en:
     weighting_portion: Weighting
   grading_method:
     add: Add Grading Method
-    add_argument: Add Argument
-    add_criteria: Add Criteria
-    arguments: Arguments
-    choose: Choose Grading Method
+    add_criteria: Add criteria
+    choose: Choose grading type
     criteria: Criteria
     curved: Curved
     description: Description
     edit: Edit Grading Method
     interval: Interval
     list: Grading Methods list
-    method: Method
+    grading_type: Grading type
     name: Name
     ordinal: Ordinal
     pass_fail: Pass/Fail
     percentage: Percentage
     plural: Grading Methods
     ratio: Ratio
-    remove_argument: Remove Argument
-    remove_criteria: Remove Criteria
+    remove_criteria: Remove criteria
     save: Save Grading Method
     score: Score
     singular: Grading Method

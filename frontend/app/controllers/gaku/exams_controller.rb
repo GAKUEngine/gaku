@@ -1,8 +1,6 @@
 module Gaku
   class ExamsController < GakuController
 
-    include Gaku::Grading::Calculations
-
     respond_to :html, :js, :json
     respond_to :xls, only: :export
 

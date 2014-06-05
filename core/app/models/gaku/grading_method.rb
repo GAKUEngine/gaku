@@ -12,6 +12,10 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
+    Types = %w( score percentage ordinal )
+
+    validates :grading_type, presence: true, inclusion: { in: Types }
+
     def to_s
       name
     end

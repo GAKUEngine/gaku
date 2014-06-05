@@ -8,4 +8,8 @@
       - if score.student_id == student.id
         td
           = form_for [@course, @exam, score], remote: true do |f|
-            = f.number_field :score, min: 0, max: 100, class: 'span12'
+            = f.number_field :score, min: 0, max: portion.max_score, class: 'span12'
+  - @grading_methods.each do |grading_method|
+      td.vm id="course-#{@course.id}-exam-#{@exam.id}-student-#{student.id}-grading-method-#{grading_method.id}-score"
+        = @grading_calculations[grading_method.id]['student_results'].find { |h| h['id'] == student.id }['score']
+  / td.vm

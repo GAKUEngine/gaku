@@ -1,0 +1,19 @@
+.attributeContainer
+  = f.fields_for :criteria, OpenStruct.new(f.object.criteria) do |d|
+    = label_tag t('grading_method.criteria')
+    - f.object.criteria.try(:each) do |key, value|
+      .row
+        .col-md-3
+          .controls
+            = text_field_tag key, key, class: 'dynamicAttributeName form-control', name: nil
+        .col-md-3
+          = d.text_field key, class: 'dynamicAttributeValue', value: value, label: nil
+        .col-md-3
+          = link_to t('grading_method.remove_criteria'), '#', class: 'remove-criteria-row btn btn-danger'
+
+  =render 'criteria_template', f: f
+
+  .row
+    .col-md-12
+      .form-group
+        = link_to t('grading_method.add_criteria'), '#', class: 'add-criteria-row btn btn-primary'
