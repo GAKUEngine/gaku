@@ -1,9 +1,0 @@
-tr
-  td = contact.contactable
-  td = contact.name
-  td = contact.data
-  td = contact.details
-  td = t(:'contact.emergency') if contact.emergency?
-  td
-    = ajax_link_to_restore [:recovery, contact.contactable, contact]
-    = ajax_link_to_delete [contact.contactable, contact]
