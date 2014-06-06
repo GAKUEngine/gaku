@@ -42,7 +42,7 @@ module Gaku
     #     reject_if: proc { |attributes| attributes[:class_group_id].blank? }
 
     before_create :set_scholarship_status
-    before_create :set_foreign_id_code
+    #before_create :set_foreign_id_code
     after_create :set_serial_id
     after_save :set_code
 
