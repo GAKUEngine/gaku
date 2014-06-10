@@ -3,8 +3,6 @@ module Gaku
 
     include StudentChooserController
 
-    # respond_to :js,   only: %i( new create destroy recovery student_chooser )
-    # respond_to :html, only: %i( index edit update show show_deleted soft_delete )
     respond_to :html, :js
 
     before_action :set_extracurricular_activity, only: %i( edit show update student_chooser destroy )

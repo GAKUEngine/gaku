@@ -40,7 +40,6 @@ Gaku::Core::Engine.routes.draw do
   end
 
   concern(:primary)         { patch :make_primary, on: :member }
-  concern(:show_deleted)    { get :show_deleted, on: :member }
   concern(:pagination)      { get 'page/:page', action: :index, on: :collection }
   concern(:sort)            { post :sort, on: :collection }
   concern(:download)        { get :download, on: :member }
@@ -96,7 +95,7 @@ Gaku::Core::Engine.routes.draw do
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes show_deleted pagination set_picture )
+  resources :teachers, concerns: %i( addresses contacts notes pagination set_picture )
 
   resources :student_selection, only: :index do
     collection do

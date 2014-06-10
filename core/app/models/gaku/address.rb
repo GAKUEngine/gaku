@@ -4,7 +4,6 @@ module Gaku
     belongs_to :state
     belongs_to :addressable, polymorphic: true, counter_cache: true
 
-    scope :deleted,   -> { where(deleted: true) }
     scope :students,  -> { where(addressable_type: 'Gaku::Student') }
     scope :teachers,  -> { where(addressable_type: 'Gaku::Teacher') }
     scope :guardians, -> { where(addressable_type: 'Gaku::Guardian') }

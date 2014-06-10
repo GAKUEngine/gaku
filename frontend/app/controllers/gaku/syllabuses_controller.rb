@@ -1,8 +1,6 @@
 module Gaku
   class SyllabusesController < GakuController
 
-    # respond_to :js,   only: %i( new create destroy recovery )
-    # respond_to :html, only: %i( index edit update soft_delete show_deleted )
     respond_to :html, :js
 
     before_action :set_syllabus, only: %i( edit update destroy )
