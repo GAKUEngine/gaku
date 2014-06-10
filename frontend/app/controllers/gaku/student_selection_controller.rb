@@ -5,13 +5,13 @@ module Gaku
     before_action :set_student, only: %i( add remove )
 
     def add
-      @student.add_to_selection
+      Gaku::StudentSelection.new(@student).add
       set_selection
       respond_with @selection
     end
 
     def remove
-      @student.remove_from_selection
+      Gaku::StudentSelection.new(@student).remove
       set_selection
       respond_with @selection
     end
