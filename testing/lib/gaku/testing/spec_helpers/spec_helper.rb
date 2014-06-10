@@ -7,6 +7,7 @@ require 'database_cleaner'
 require 'active_record/fixtures'
 require 'factory_girl_rails'
 require 'ffaker'
+require 'rspec/retry'
 
 require 'gaku/testing/env'
 require 'gaku/testing/factories'
@@ -20,6 +21,9 @@ require 'gaku/core/url_helpers'
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+
+  config.verbose_retry = true
+  config.default_retry_count = 3
 
   config.before(:each) do
     if example.metadata[:js]
