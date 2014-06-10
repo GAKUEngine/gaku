@@ -2,23 +2,33 @@ require 'spec_helper_models'
 
 describe Gaku::StudentSelection do
 
-  let(:student) { build(:student) }
+  let(:student) { create(:student) }
 
-  it 'instantializes' do
-    expect(described_class.new(student).student).to eq student
+  describe '.add' do
+    it 'adds student to selection' do
+      expect(described_class.add(student)).to eq([{ id: student.id.to_s, full_name: student.full_name}].as_json)
+    end
   end
 
-  it 'adds student to selection' do
-    described_class.new(student).add
-    expect($redis.lrange(:student_selection, 0, -1))
-      .to eq ([{ id: "#{student.id}", full_name: "#{student.surname} #{student.name}" }.to_json])
+  describe '.remove' do
+    it 'removes student from selection' do
+      described_class.add(student)
+      expect(described_class.remove(student)).to eq []
+    end
   end
 
-  it 'removes student to selection' do
-    described_class.new(student).add
+  describe '.all' do
+    it 'returns all selected students' do
+      described_class.add(student)
+      expect(described_class.all).to eq([{ id: student.id.to_s, full_name: student.full_name}].as_json)
+    end
+  end
 
-    described_class.new(student).remove
-    expect($redis.lrange(:student_selection, 0, -1)).to eq []
+  describe '.remove_all' do
+    it 'removes all selected students' do
+      described_class.add(student)
+      expect(described_class.remove_all).to eq []
+    end
   end
 
 end
