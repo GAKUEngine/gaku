@@ -1,7 +1,8 @@
 FactoryGirl.define do
 
   factory :class_group, class: Gaku::ClassGroup do
-    name '1A'
+    sequence(:name) { |n| "A#{n}" }
+
     grade 8
     homeroom '123'
 
