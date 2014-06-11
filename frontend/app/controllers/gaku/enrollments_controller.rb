@@ -3,9 +3,12 @@ module Gaku
 
     respond_to :js, only: %i( new create destroy student_selection create_from_selection )
 
-    before_action :set_enrollmentable
+    before_action :set_enrollmentable, except: %i( index )
     before_action :set_enrollment, only: %i( destroy )
     before_action :set_students, only: %i( new )
+
+    def index
+    end
 
     def student_selection
       @enrollment = @enrollmentable.enrollments.new
