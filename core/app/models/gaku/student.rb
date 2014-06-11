@@ -12,6 +12,8 @@ module Gaku
       assoc.has_many :extracurricular_activities, source_type: 'Gaku::ExtracurricularActivity'
     end
 
+    has_many :semesters, through: :class_groups
+
     has_many :student_exam_sessions
     has_many :exam_sessions, through: :student_exam_sessions
 
