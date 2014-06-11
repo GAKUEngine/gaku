@@ -41,7 +41,9 @@ module Gaku
     end
 
     def overlap_semester?
-      student.semesters.where(id: enrollmentable.semester_ids).any?
+      if student && student.semesters
+        student.semesters.where(id: enrollmentable.semester_ids).any?
+      end
     end
 
     def not_in_student_class_groups?
