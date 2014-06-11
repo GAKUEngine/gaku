@@ -1,0 +1,7 @@
+$('#student-selection').modal('hide');
+
+<% @enrollments.each do |enrollment| %>
+  $("#class-group-enrollments-index tbody").append('<%= j render("enrollment", {enrollment: enrollment}) %>');
+<% end %>
+
+showNotice("<%= render_flash %>");

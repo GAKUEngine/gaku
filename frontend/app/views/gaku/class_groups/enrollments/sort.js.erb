@@ -1,0 +1,3 @@
+<% @enrollments.each do |enrollment| %>
+  $('#enrollment-<%= enrollment.id %>-seat-number').html('<%= enrollment.seat_number %>')
+<% end %>
