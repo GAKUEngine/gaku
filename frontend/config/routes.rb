@@ -59,7 +59,7 @@ Gaku::Core::Engine.routes.draw do
 
   resources :extracurricular_activities, concerns: %i( pagination enrollmentable )
 
-  resources :class_groups, concerns: %i( notes student_selection pagination enrollmentable semesterable) do
+  resources :class_groups, concerns: %i( notes student_selection pagination semesterable) do
     collection do
       get :search
       get :search_semester
@@ -67,6 +67,13 @@ Gaku::Core::Engine.routes.draw do
       get :semester_advanced_search
       get :with_semester
       get :without_semester
+    end
+
+    resources :enrollments, controller: 'class_groups/enrollments', concerns: :sort do
+      collection do
+        get :student_selection
+        post :create_from_selection
+      end
     end
   end
 
