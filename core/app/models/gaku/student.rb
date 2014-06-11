@@ -3,9 +3,14 @@ module Gaku
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :enrollments, dependent: :destroy
-    has_many :course_enrollments, -> { where(enrollmentable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
-    has_many :class_group_enrollments, -> { where(enrollmentable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
-    has_many :extracurricular_activity_enrollments, -> { where(enrollmentable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
+
+    has_many :course_enrollments,
+      -> { where(enrollmentable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
+    has_many :class_group_enrollments,
+      -> { where(enrollmentable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
+    has_many :extracurricular_activity_enrollments,
+      -> { where(enrollmentable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
+
     with_options through: :enrollments, source: :enrollmentable do |assoc|
       assoc.has_many :courses, source_type: 'Gaku::Course'
       assoc.has_many :class_groups, source_type: 'Gaku::ClassGroup'
@@ -40,22 +45,20 @@ module Gaku
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
 
-    # accepts_nested_attributes_for :class_group_enrollments,
-    #     reject_if: proc { |attributes| attributes[:class_group_id].blank? }
-
     before_create :set_scholarship_status
-    #before_create :set_foreign_id_code
-    after_create :set_serial_id
-    after_save :set_code
+    after_create  :set_serial_id
+    after_save    :set_code
 
-    def add_to_selection
-      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
-      $redis.rpush(:student_selection, hash.to_json)
+    def full_name
+      "#{surname} #{name}"
     end
 
-    def remove_from_selection
-      hash = { id: "#{id}", full_name: "#{surname} #{name}" }
-      $redis.lrem(:student_selection, 0, hash.to_json)
+    def self.specialties
+      student_specialties.map & :name
+    end
+
+    def self.active
+      where(enrollment_status_code: EnrollmentStatus.active.pluck(:code))
     end
 
     def make_enrolled
@@ -84,33 +87,8 @@ module Gaku
       end
     end
 
-    def self.specialties
-      student_specialties.map & :name
-    end
-
-    def self.active
-      where(enrollment_status_code: EnrollmentStatus.active.pluck(:code))
-    end
-
     def set_scholarship_status
       self.scholarship_status = ScholarshipStatus.find_by(default: true)
-    end
-
-    def set_foreign_id_code
-      preset = Preset.active
-      if preset
-        if preset.increment_foreign_id_code == '1'
-          self.foreign_id_code = (preset.last_foreign_id_code.to_i + 1).to_s
-          preset.last_foreign_id_code = foreign_id_code
-          preset.save!
-        else
-          if foreign_id_code.to_i.is_a? Integer
-            preset.increment_foreign_id_code = true
-            preset.last_foreign_id_code = foreign_id_code
-            preset.save!
-          end
-        end
-      end
     end
 
     def active

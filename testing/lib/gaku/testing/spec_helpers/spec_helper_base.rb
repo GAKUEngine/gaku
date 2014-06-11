@@ -7,6 +7,10 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.order = 'random'
 
+  config.before(:each) do
+    $redis.flushdb
+  end
+
   config.before(:all) do
     DeferredGarbageCollection.start
   end

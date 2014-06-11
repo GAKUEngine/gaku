@@ -39,7 +39,7 @@ module Gaku
     end
 
     def attributes
-      %i( title address1 address2 city zipcode state state_id country country_id deleted primary past )
+      %i( title address1 address2 city zipcode state state_id country country_id primary past )
     end
 
     def set_campus
