@@ -991,7 +991,7 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-    already_enrolled: Student already enrolled!
+    already_enrolled: already enrolled!
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index
