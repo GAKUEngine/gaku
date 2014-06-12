@@ -393,6 +393,7 @@ en:
     add: Enroll student
     list: Student enrollments list
     save: Save student enrollment
+    class_group_overlapping: A student cannot belong to two Class Groups with overlapping semesters
   enrollment_status:
     active: Active
     add: Add Enrollment Status
