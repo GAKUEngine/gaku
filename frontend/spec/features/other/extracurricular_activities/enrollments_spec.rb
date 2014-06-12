@@ -36,8 +36,9 @@ describe 'Extracurricular Activity Enrollments' do
 
       within(table) { expect(page).to have_content student.surname }
       within(table) { expect(page).to have_content student.name }
-      within(tab_link) { expect(page).to have_content 'Student enrollments(1)' }
-      within(count_div) { expect(page).to have_content 'Student enrollments list(1)' }
+      within('#students-menu .badge') { has_content? '1' }
+
+      within(count_div) { expect(page).to have_content 'Students list(1)' }
 
     end
 
@@ -60,13 +61,13 @@ describe 'Extracurricular Activity Enrollments' do
     before do
       extracurricular_activity_enrollment
       visit gaku.edit_extracurricular_activity_path(extracurricular_activity)
-      click tab_link
+      click '#students-menu a'
     end
 
     it 'delete', js: true do
       within(table) { expect(page).to have_content extracurricular_activity_enrollment.student.surname }
       within(table) { expect(page).to have_content extracurricular_activity_enrollment.student.name }
-      within(tab_link)  { expect(page).to have_content 'Student enrollments(1)' }
+      within('#students-menu .badge') { has_content? '1' }
       has_content? 'Student enrollments list(1)'
 
       expect do
@@ -76,8 +77,8 @@ describe 'Extracurricular Activity Enrollments' do
 
       within(table) { has_no_content? extracurricular_activity_enrollment.student.surname }
       within(table) { has_no_content? extracurricular_activity_enrollment.student.name }
-      within(tab_link) { has_no_content? 'Student enrollments(1)' }
-      has_no_content? 'Student enrollments list(1)'
+      within('#students-menu .badge') { has_no_content? '1' }
+      has_no_content? 'Students list(1)'
     end
   end
 end

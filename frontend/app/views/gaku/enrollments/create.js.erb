@@ -2,6 +2,5 @@ showNotice("<%= render_flash %>");
 $("#<%= @enrollmentable_resource %>-enrollments-index tbody").append('<%= j render("enrollment", { enrollment: @enrollment }) %>');
 $("#new-<%= @enrollmentable_resource %>-enrollment").slide();
 $("#new-<%= @enrollmentable_resource %>-enrollment-link").show();
-$("#<%= @enrollmentable_resource %>-enrollments-tab-link").html("<%= print_count(@count, t(:'enrollment.plural')) %>");
-$(".<%= @enrollmentable_resource %>-enrollments-count").html("<%= print_count(@count, t(:'enrollment.list')) %>");
+$(".<%= @enrollmentable_resource %>-enrollments-count").html("<%= print_count(@count, t(:'student.list')) %>");
 $('.students-count').html("<%= @count %>");

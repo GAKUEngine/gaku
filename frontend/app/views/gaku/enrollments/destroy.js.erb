@@ -1,5 +1,4 @@
 showNotice('<%= render_flash %>');
-$('#<%= @enrollmentable_resource %>-enrollments-tab-link').html("<%= print_count(@count, t(:'semester.plural')) %>");
-$('.<%= @enrollmentable_resource %>-enrollments-count').html("<%= print_count(@count, t(:'semester.list')) %>");
+$('.<%= @enrollmentable_resource %>-enrollments-count').html("<%= print_count(@count, t(:'student.list')) %>");
 $('.students-count').html("<%= @count %>");
 
