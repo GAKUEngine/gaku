@@ -14,7 +14,6 @@ describe 'Class Group Enrollments' do
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :new template') { template? :new }
     it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq class_group }
-    it('assigns @enrollmentable_resource') { expect(assigns(:enrollmentable_resource)).to eq 'class-group' }
     it('assigns @students') { expect(assigns(:students)).to eq [student] }
   end
 
@@ -24,7 +23,6 @@ describe 'Class Group Enrollments' do
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :student_selection template') { template? :student_selection }
     it('assigns @enrollmentable') { expect(assigns(:enrollmentable)).to eq class_group }
-    it('assigns @enrollmentable_resource') { expect(assigns(:enrollmentable_resource)).to eq 'class-group' }
     it('assigns @enrollment') { expect(assigns(:enrollment)).to be_a_new Gaku::Enrollment }
     it('assigns @student_selection') { expect(assigns(:student_selection)).to_not be_nil }
   end
@@ -58,10 +56,6 @@ describe 'Class Group Enrollments' do
         expect(assigns(:enrollmentable)).to eq class_group
       end
 
-      it 'assigns @enrollmentable_resource' do
-        subject
-        expect(assigns(:enrollmentable_resource)).to eq 'class-group'
-      end
     end
   end
 
