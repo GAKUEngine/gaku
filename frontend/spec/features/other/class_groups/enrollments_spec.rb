@@ -38,7 +38,7 @@ describe 'Class Group Enrollments' do
         flash_created?
       end.to change(Gaku::Enrollment, :count).by(1)
 
-      expect(Galu::Enrollment.last.seat_number).to eq(1)
+      expect(Gaku::Enrollment.last.seat_number).to eq(1)
 
       within(table) { expect(page).to have_content student.surname }
       within(table) { expect(page).to have_content student.name }
