@@ -4,9 +4,9 @@ describe 'Class Group Enrollments' do
 
   before { as :admin }
 
-  let(:class_group) { create(:class_group) }
-  let(:class_group2) { create(:class_group) }
   let(:student) { create(:student) }
+  let(:class_group) { create(:class_group_with_active_semester, semester: semester) }
+  let(:class_group2) { create(:class_group_with_active_semester, semester: semester) }
   let(:semester) { create(:active_semester) }
 
   let(:class_group_enrollment) do
@@ -42,7 +42,7 @@ describe 'Class Group Enrollments' do
 
       within(table) { expect(page).to have_content student.surname }
       within(table) { expect(page).to have_content student.name }
-      within('.badge') { has_content? '1' }
+      within('#students-menu .badge') { has_content? '1' }
       within(count_div) { expect(page).to have_content 'Students list(1)' }
 
     end
@@ -64,11 +64,7 @@ describe 'Class Group Enrollments' do
   context 'overlapping semesters', js: true do
     before do
       student
-      class_group_enrollment
-
-      class_group.semesters << semester
-      class_group2.semesters << semester
-
+      class_group; class_group2;class_group_enrollment
       visit gaku.edit_class_group_path(class_group2)
       click '#students-menu a'
     end
@@ -96,7 +92,7 @@ describe 'Class Group Enrollments' do
     it 'delete', js: true do
       within(table) { expect(page).to have_content class_group_enrollment.student.surname }
       within(table) { expect(page).to have_content class_group_enrollment.student.name }
-      within('.badge') { has_content? '1' }
+      within('#students-menu .badge') { has_content? '1' }
       has_content? 'Student enrollments list(1)'
 
       expect do
@@ -106,7 +102,7 @@ describe 'Class Group Enrollments' do
 
       within(table) { has_no_content? class_group_enrollment.student.surname }
       within(table) { has_no_content? class_group_enrollment.student.name }
-      within('.badge') { has_no_content? '1' }
+      within('#students-menu .badge') { has_no_content? '1' }
       has_no_content? 'Students list(1)'
     end
   end

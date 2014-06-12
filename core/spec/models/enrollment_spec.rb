@@ -26,13 +26,9 @@ describe Gaku::Enrollment do
   describe 'class_group_semesters_overlap validation' do
     it 'add message to base if semester overlapping' do
       student  = create(:student)
-      semester = create(:semester)
 
-      class_group2 = create(:class_group)
-      class_group  = create(:class_group)
-
-      class_group.semesters  << semester
-      class_group2.semesters << semester
+      class_group  = create(:class_group_with_active_semester, semester: semester)
+      class_group2 = create(:class_group_with_active_semester, semester: semester)
 
       create(:class_group_enrollment, enrollmentable: class_group, student: student)
 

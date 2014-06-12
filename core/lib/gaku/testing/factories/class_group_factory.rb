@@ -9,6 +9,16 @@ FactoryGirl.define do
     factory :invalid_class_group do
       name nil
     end
+
+    factory :class_group_with_active_semester do
+      ignore do
+        semester { create(:active_semester) }
+      end
+
+      after(:create) do |class_group, evaluator|
+        class_group.semesters << evaluator.semester
+      end
+    end
   end
 
 end
