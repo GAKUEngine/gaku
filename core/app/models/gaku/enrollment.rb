@@ -36,7 +36,7 @@ module Gaku
 
     def class_group_semesters_overlap
       if overlap_semester? && not_in_student_class_groups?
-        errors.add(:base, t('enrollment.class_group_overlapping'))
+        errors.add(:base, I18n.t('enrollment.class_group_overlapping'))
       end
     end
 
