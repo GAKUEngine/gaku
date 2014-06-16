@@ -5,9 +5,14 @@ describe 'Student class group enrollment' do
   before(:all) { set_resource 'student-class-group-enrollment' }
   before { as :admin }
 
+  let(:semester) { create(:active_semester) }
+
+  let(:class_group) { create(:class_group_with_active_semester, semester: semester) }
+  let(:class_group2) { create(:class_group_with_active_semester, semester: semester) }
+
   let(:student) { create(:student, name: 'John', surname: 'Doe') }
-  let(:class_group) { create(:class_group) }
   let(:class_group_enrollment) { create(:class_group_enrollment, student: student, enrollmentable: class_group) }
+
 
   context 'new', js: true do
 
@@ -36,6 +41,28 @@ describe 'Student class group enrollment' do
 
     it { has_validations? }
   end
+
+  context 'overlapping semesters', js: true do
+    before do
+      student
+      class_group;class_group2
+      class_group_enrollment
+
+
+      visit gaku.edit_student_path(student)
+      click '#student-class-groups-menu a'
+    end
+
+    it 'didnt create if have overlapping semesters' do
+      click new_link
+      expect do
+        select class_group2.name, from: 'enrollment_enrollmentable_id'
+        click submit
+      end.to_not change(Gaku::Enrollment, :count)
+      expect(page).to have_content('A student cannot belong to two Class Groups with overlapping semesters')
+    end
+  end
+
 
   context 'existing',  js: true do
     before do

@@ -1,0 +1,9 @@
+showNotice('<%= render_flash %>');
+$('#class-group-enrollments-tab-link').html("<%= print_count(@count, t(:'student.plural')) %>");
+$('.class-group-enrollments-count').html("<%= print_count(@count, t(:'student.list')) %>");
+$('.students-count').html("<%= @count %>");
+
+<% @enrollments.each do |enrollment| %>
+  $('#enrollment-<%= enrollment.id %>-seat-number').html('<%= enrollment.seat_number %>')
+<% end %>
+

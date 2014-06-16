@@ -29,6 +29,19 @@ $.fn.datepicker_i18n = ->
 
 $.fn.datepicker.defaults.format = "yyyy-mm-dd"
 
+window.add_sortable = ->
+  fixHelper = (e, ui) ->
+    ui.children().each ->
+      $(@).width $(@).width()
+    ui
+
+  $('.sortable').sortable
+    handle: '.sort-handler'
+    helper: fixHelper
+    axis: 'y'
+    update: ->
+      $.post $(@).data('sort-url'), $(@).sortable('serialize')
+
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()
   if countryCode

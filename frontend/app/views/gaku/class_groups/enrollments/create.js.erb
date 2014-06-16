@@ -1,0 +1,11 @@
+<% if @enrollment.errors.any? %>
+  $('#class-group-enrollment-errors').html('<%= j render("gaku/shared/errors", target: @enrollment) %>')
+<% else %>
+  showNotice("<%= render_flash %>");
+  $("#class-group-enrollments-index tbody").append('<%= j render("enrollment", { enrollment: @enrollment }) %>');
+  $("#new-class-group-enrollment").slide();
+  $("#new-class-group-enrollment-link").show();
+  $("#class-group-enrollments-tab-link").html("<%= print_count(@count, t(:'student.plural')) %>");
+  $(".class-group-enrollments-count").html("<%= print_count(@count, t(:'student.list')) %>");
+  $('.students-count').html("<%= @count %>");
+<% end %>

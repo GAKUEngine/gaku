@@ -1,0 +1,21 @@
+= index_header do
+  = content_tag(:div, nil, id: "new-class-group-enrollment", class: 'd-none')
+  .pull-left
+    = count_div "class-group-enrollments-count" do
+      = print_count @class_group.enrollments_count, t(:'student.list')
+  .pull-right
+    = ajax_link_to_new t(:'enrollment.add'), [:new, @class_group, :enrollment], id: "new-class-group-enrollment-link"
+
+    = ajax_link_to_new t(:'student.selection'), [:student_selection, @class_group, :enrollments], id: "new-class-group-student-selection-link"
+
+= index_body do
+  = table_for "class-group-enrollments-index" do
+    thead
+      tr
+        = th 'Seat Sort'
+        = th 'Seat Number'
+        = th t(:'student.surname')
+        = th t(:'student.name')
+        = th_actions 1
+    = sortable_tbody [:sort, @class_group, :enrollments] do
+      =render partial: 'gaku/class_groups/enrollments/enrollment', collection: @enrollments, as: :enrollment

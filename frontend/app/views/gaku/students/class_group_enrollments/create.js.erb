@@ -1,9 +1,13 @@
-$('#student-class-group-enrollments-index').append('<%= j render("class_group_enrollment", {class_group_enrollment: @class_group_enrollment}) %>');
+<% if @class_group_enrollment.errors.any? %>
+  $('#student-class-group-enrollment-errors').html('<%= j render("gaku/shared/errors", target: @class_group_enrollment) %>')
+<% else %>
+  $('#student-class-group-enrollments-index').append('<%= j render("class_group_enrollment", {class_group_enrollment: @class_group_enrollment}) %>');
 
-$('.student-class-group-enrollments-count').html("<%= print_count(@count, t(:'class_group.list')) %>");
-$('.class-groups-count').html("<%= @count %>");
+  $('.student-class-group-enrollments-count').html("<%= print_count(@count, t(:'class_group.list')) %>");
+  $('.class-groups-count').html("<%= @count %>");
 
-$('#new-student-class-group').slide()
-$('#new-student-class-group-link').show();
+  $('#new-student-class-group-enrollment').slide()
+  $('#new-student-class-group-enrollment-link').show();
 
-showNotice("<%= render_flash %>");
+  showNotice("<%= render_flash %>");
+<% end %>

@@ -7,6 +7,9 @@ module Gaku
     before_action :set_enrollment, only: %i( destroy )
     before_action :set_students, only: %i( new )
 
+    def index
+    end
+
     def student_selection
       @enrollment = @enrollmentable.enrollments.new
       @student_selection = Gaku::StudentSelection.all

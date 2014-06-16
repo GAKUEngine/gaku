@@ -36,7 +36,7 @@ describe 'Course Enrollments' do
 
       within(table) { expect(page).to have_content student.surname }
       within(table) { expect(page).to have_content student.name }
-      within(count_div) { expect(page).to have_content 'Student enrollments list(1)' }
+      within(count_div) { expect(page).to have_content 'Students list(1)' }
     end
 
     it 'presence validations'  do
@@ -81,7 +81,7 @@ describe 'Course Enrollments' do
     it 'delete', js: true do
       within(table) { expect(page).to have_content course_enrollment.student.surname }
       within(table) { expect(page).to have_content course_enrollment.student.name }
-      has_content? 'Student enrollments list(1)'
+      has_content? 'Students list(1)'
 
       expect do
         ensure_delete_is_working
@@ -90,7 +90,7 @@ describe 'Course Enrollments' do
 
       within(table) { has_no_content? course_enrollment.student.surname }
       within(table) { has_no_content? course_enrollment.student.name }
-      has_no_content? 'Student enrollments list(1)'
+      has_no_content? 'Students list(1)'
     end
   end
 end
