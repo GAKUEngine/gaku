@@ -1,7 +1,9 @@
 = sortable_table_for 'students-index' do
   thead
     tr
-      = th_icon 'check'
+      td.btn-inverse.check-all
+        = link_to '#' do
+          span.glyphicon.glyphicon-check
       - if show_field?(@preset.try(:show_code))
         th.code.btn-inverse.col-sm-1 = t(:'code')
 
