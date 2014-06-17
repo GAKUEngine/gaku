@@ -109,6 +109,8 @@ Gaku::Core::Engine.routes.draw do
       get :clear
       post :add
       post :remove
+      post :collection
+      post :remove_collection
     end
   end
 
