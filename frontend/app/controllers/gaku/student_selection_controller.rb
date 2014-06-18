@@ -10,7 +10,6 @@ module Gaku
       respond_with @selection
     end
 
-
     def remove
       @selection = Gaku::StudentSelection.remove(@student)
       respond_with @selection
@@ -42,7 +41,7 @@ module Gaku
     end
 
     def set_students
-      @students = Student.where(id: params[:student_ids] )
+      @students = Student.where(id: params[:student_ids])
     end
 
   end

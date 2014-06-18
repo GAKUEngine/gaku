@@ -9,30 +9,30 @@ module Gaku
 
       def remove_all
         $redis.del(:student_selection)
-        self.all
+        all
       end
 
       def add(student)
         $redis.rpush(:student_selection, json_for(student))
-        self.all
+        all
       end
 
       def remove(student)
         $redis.lrem(:student_selection, 0, json_for(student))
-        self.all
+        all
       end
 
       def collection(students)
         prepared_students = prepare_not_added_students(students)
         $redis.rpush(:student_selection, prepared_students) unless prepared_students.blank?
-        self.all
+        all
       end
 
       def remove_collection(students)
-        students.map{ |student| json_for(student) }.each do |student|
+        students.map { |student| json_for(student) }.each do |student|
           $redis.lrem(:student_selection, 0, student)
         end
-        self.all
+        all
       end
 
       private
@@ -46,11 +46,11 @@ module Gaku
       end
 
       def not_added_students(students)
-        students.reject {|student| all.include?(hash_for(student).stringify_keys) }
+        students.reject { |student| all.include?(hash_for(student).stringify_keys) }
       end
 
       def prepare_not_added_students(students)
-        not_added_students(students).map{ |student| json_for(student) }
+        not_added_students(students).map { |student| json_for(student) }
       end
 
     end
