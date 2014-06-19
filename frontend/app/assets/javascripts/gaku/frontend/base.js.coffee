@@ -141,6 +141,33 @@ class App
         data: { id: thisId },
         dataType: 'script'
 
+    $(document).on 'click', '.check-all', (e)->
+      e.preventDefault()
+
+      $checkboxes = $('.student-check')
+
+      student_ids = []
+      $('#students-index').find('tbody tr').map ->
+        student_ids.push @id.split('-')[1]
+
+      if $('.student-check:checked').length == $('.student-check').length
+        $checkboxes.prop('checked', false)
+
+        $.ajax
+          type: "POST",
+          url: "/student_selection/remove_collection",
+          data: { 'student_ids': student_ids },
+          dataType: 'script'
+
+      else
+        $checkboxes.prop('checked', true)
+
+        $.ajax
+          type: "POST",
+          url: "/student_selection/collection",
+          data: { 'student_ids': student_ids },
+          dataType: 'script'
+
     $('body').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       tr_id = $(this).closest('tr').attr('id')
