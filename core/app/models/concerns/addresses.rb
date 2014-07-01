@@ -3,10 +3,11 @@ module Addresses
 
   included do
     has_many :addresses, as: :addressable
+    has_one :primary_address, -> { where(primary: true) }, class_name: 'Address', as: :addressable
 
-    def primary_address
-      addresses.where(primary: true).first
-    end
+    # def primary_address
+    #   addresses.where(primary: true).first
+    # end
 
     def address_widget
       "#{primary_address.city}, " \

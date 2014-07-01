@@ -3,54 +3,48 @@ module Gaku
 
     class << self
 
+
       def all
-        $redis.lrange(:student_selection, 0, -1).map! { |x| JSON.parse(x) }
+        $redis.lrange(:student_selection, 0, -1)
       end
 
       def remove_all
         $redis.del(:student_selection)
-        all
+        self.students
       end
 
       def add(student)
-        $redis.rpush(:student_selection, json_for(student))
-        all
+        $redis.rpush(:student_selection, student.id)
+        self.students
       end
 
       def remove(student)
-        $redis.lrem(:student_selection, 0, json_for(student))
-        all
+        $redis.lrem(:student_selection, 0, student.id)
+        self.students
       end
 
       def collection(students)
-        prepared_students = prepare_not_added_students(students)
-        $redis.rpush(:student_selection, prepared_students) unless prepared_students.blank?
-        all
+        new_students = not_added_students(students)
+        puts new_students.inspect
+        $redis.rpush(:student_selection, new_students) unless new_students.blank?
+        self.students
       end
 
       def remove_collection(students)
-        students.map { |student| json_for(student) }.each do |student|
-          $redis.lrem(:student_selection, 0, student)
+        students.each do |student|
+          $redis.lrem(:student_selection, 0, student.id)
         end
-        all
+        self.students
+      end
+
+      def students
+        Student.where(id: all)
       end
 
       private
 
-      def json_for(student)
-        hash_for(student).to_json
-      end
-
-      def hash_for(student)
-        { id: "#{student.id}", full_name: "#{student.surname} #{student.name}" }
-      end
-
       def not_added_students(students)
-        students.reject { |student| all.include?(hash_for(student).stringify_keys) }
-      end
-
-      def prepare_not_added_students(students)
-        not_added_students(students).map { |student| json_for(student) }
+        students.reject { |student| all.include?(student.id) }.map(&:id)
       end
 
     end

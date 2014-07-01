@@ -12,6 +12,7 @@ module Gaku
 
     def remove
       @selection = Gaku::StudentSelection.remove(@student)
+      set_count
       respond_with @selection
     end
 
@@ -26,7 +27,7 @@ module Gaku
     end
 
     def index
-      @selection = Gaku::StudentSelection.all
+      @selection = Gaku::StudentSelection.students
     end
 
     def clear
@@ -42,6 +43,10 @@ module Gaku
 
     def set_students
       @students = Student.where(id: params[:student_ids])
+    end
+
+    def set_count
+      @count = @selection.count
     end
 
   end
