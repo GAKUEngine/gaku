@@ -12,9 +12,17 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
-    Types = %w( score percentage ordinal )
+    Types = %w( score percentage ordinal interval )
 
     validates :grading_type, presence: true, inclusion: { in: Types }
+
+    serialize :criteria, Hash
+
+    Types.each do |type|
+      define_method "#{type}?" do
+        grading_type == type
+      end
+    end
 
     def to_s
       name
