@@ -13,13 +13,15 @@ module Gaku
       student         = exam_portion_score.student
       grading_methods = @course.grading_methods
 
-      calculations = Grading::Single::Calculations.new(grading_methods, student, @exam).calculate
+      calculations = Grading::Single::Calculations.new(grading_methods, student, @exam, @course.students).calculate
+
       message = {
                   exam_id: @exam.id,
                   course_id: @course.id,
                   calculations: calculations,
                   exam_portion_score: exam_portion_score
                 }
+
       $redis.publish('grading-change', message.to_json)
 
       render nothing: true
