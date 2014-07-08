@@ -3,19 +3,25 @@ module Gaku
     module Single
       class  Calculations
 
-        attr_reader :grading_methods, :students, :exam
+        attr_reader :grading_methods, :student, :exam, :collection_students
 
-        def initialize(grading_methods, student, exam)
-          @exam            = exam
-          @student         = student
-          @grading_methods = grading_methods
+        def initialize(grading_methods, student, exam, collection_students = nil)
+          @exam                = exam
+          @student             = student
+          @grading_methods     = grading_methods
+          @collection_students = collection_students
         end
 
         def calculate
           {}.tap do |hash|
             @grading_methods.each do |grading_method|
-              grading = grading_types[grading_method.grading_type].constantize.new(@exam, @student, grading_method.criteria)
-              hash[grading_method.id] = grading.grade
+              if grading_method.interval?
+                grading = Gaku::Grading::Collection::Interval.new(@exam, collection_students, grading_method.criteria )
+                hash[grading_method.id] = grading.grade
+              else
+                grading = grading_types[grading_method.grading_type].constantize.new(@exam, @student, grading_method.criteria)
+                hash[grading_method.id] = grading.grade
+              end
             end
           end
 
