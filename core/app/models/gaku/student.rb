@@ -100,6 +100,15 @@ module Gaku
       end
     end
 
+    def temp_gender
+      if gender
+        I18n.t('gender.male')
+      else
+        I18n.t('gender.female')
+      end
+
+    end
+
     private
 
     def major_specialty_code

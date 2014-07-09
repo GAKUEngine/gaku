@@ -16,6 +16,10 @@ module Gaku
     after_save :update_primary_address_field
     after_destroy :reset_counter_cache
 
+    def to_s
+      "#{city} #{address1}"
+    end
+
     def make_primary
       addresses.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)

@@ -841,6 +841,9 @@ en:
     name: Name
     save: Save Role
     singular: Role
+  report:
+    plural: Reports
+    personal_information: Personal information
   save: Save
   schedule: Schedule
   school:
