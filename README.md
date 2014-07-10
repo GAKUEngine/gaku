@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/gaku.png)](http://badge.fury.io/rb/gaku)
 [![Build Status](https://travis-ci.org/GAKUEngine/gaku.svg)](https://travis-ci.org/GAKUEngine/gaku)
-[![Coverage Status](https://coveralls.io/repos/GAKUEngine/gaku/badge.png?branch=master)](https://coveralls.io/r/Genshin/gaku?branch=master)
+[![Coverage Status](https://coveralls.io/repos/GAKUEngine/gaku/badge.png?branch=master)](https://coveralls.io/r/GAKUEngine/gaku?branch=master)
 [![Code Climate](https://codeclimate.com/github/GAKUEngine/gaku.png)](https://codeclimate.com/github/GAKUEngine/gaku)
 
 GAKU Engine [学エンジン]
