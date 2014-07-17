@@ -913,6 +913,10 @@ en:
     uniqueness: Semester already added to Class Group
   semester_course:
     uniqueness: Semester already added to Course
+  semester_attendance:
+    plural: Semester attendances
+    absence: Absence
+    presence: Presence
   sex: Sex
   sex_and_birth: Gender & Birth Date
   show: Show

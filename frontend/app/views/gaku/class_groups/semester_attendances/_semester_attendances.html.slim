@@ -8,8 +8,8 @@
     tr
       th.btn-inverse
       - @semesters.count.times do |i|
-         = th 'Presence'
-         = th 'Absence'
+         = th t('semester_attendance.presence')
+         = th t('semester_attendance.absence')
   tbody
     - @students.each do |student|
       tr
