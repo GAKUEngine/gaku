@@ -50,6 +50,7 @@ describe Gaku::Student do
     it { should have_many :exam_portion_scores }
     it { should have_many :assignment_scores }
     it { should have_many :attendances }
+    it { should have_many  :semester_attendances }
 
     it { should have_many :external_school_records }
     it { should have_many :simple_grades }
@@ -58,6 +59,7 @@ describe Gaku::Student do
     it { should belong_to :user }
     it { should belong_to :scholarship_status }
     it { should belong_to :enrollment_status }
+
 
     it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
   end
