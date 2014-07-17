@@ -1,0 +1,23 @@
+= table_for 'semester-attendances' do
+  thead
+    tr
+      = th t('student.singular')
+
+      - @semesters.each do |semester|
+        th.btn-inverse colspan="2" = semester
+    tr
+      th.btn-inverse
+      - @semesters.count.times do |i|
+         = th 'Presence'
+         = th 'Absence'
+  tbody
+    - @students.each do |student|
+      tr
+        td = student
+        - @semesters.each do |semester|
+          td
+            = form_for([@class_group, @semester_attendance_results[student.id][semester.id]], remote: true) do |f|
+              = f.number_field :days_present, class: 'form-control update-semester-attendance', id: "semester-#{semester.id}-student-#{student.id}-days-present"
+          td
+            = form_for([@class_group, @semester_attendance_results[student.id][semester.id]], remote: true) do |f|
+              = f.number_field :days_absent, class: 'form-control update-semester-attendance', id: "semester-#{semester.id}-student-#{student.id}-days-absent"
