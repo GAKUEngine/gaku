@@ -1,7 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/gaku.png)](http://badge.fury.io/rb/gaku)
-[![Build Status](https://travis-ci.org/Genshin/gaku.png)](https://travis-ci.org/Genshin/gaku)
-[![Coverage Status](https://coveralls.io/repos/Genshin/gaku/badge.png?branch=master)](https://coveralls.io/r/Genshin/gaku?branch=master)
-[![Code Climate](https://codeclimate.com/github/Genshin/gaku.png)](https://codeclimate.com/github/Genshin/gaku)
+[![Build Status](https://travis-ci.org/GAKUEngine/gaku.svg)](https://travis-ci.org/GAKUEngine/gaku)
+[![Coverage Status](https://coveralls.io/repos/GAKUEngine/gaku/badge.png?branch=master)](https://coveralls.io/r/GAKUEngine/gaku?branch=master)
+[![Code Climate](https://codeclimate.com/github/GAKUEngine/gaku.png)](https://codeclimate.com/github/GAKUEngine/gaku)
 
 GAKU Engine [学エンジン]
 ========================
@@ -65,7 +65,7 @@ You have 2 choices:
 
 ### Simple
 
-Get [gaku\_dev\_app](http://github.com/Genshin/gaku_dev_app) and follow the instructions.
+Get [gaku\_dev\_app](http://github.com/GAKUEngine/gaku_dev_app) and follow the instructions.
 
 ### Custom
 
@@ -82,7 +82,7 @@ gem 'gaku', '~> 0.1.1'
 
 Or use the master branch:
 ```ruby
-gem 'gaku', github: 'Genshin/gaku'
+gem 'gaku', github: 'GAKUEngine/gaku'
 ```
 
 
@@ -200,4 +200,4 @@ Master branch:
 
 ### Contributors
 
-[https://github.com/Genshin/gaku/contributors](http://github.com/Genshin/gaku/contributors)
+[https://github.com/GAKUEngine/gaku/contributors](http://github.com/GAKUEngine/gaku/contributors)
