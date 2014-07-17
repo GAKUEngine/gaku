@@ -68,6 +68,8 @@ Gaku::Core::Engine.routes.draw do
       get :without_semester
     end
 
+    resources :semester_attendances, controller: 'class_groups/semester_attendances'
+
     resources :enrollments, controller: 'class_groups/enrollments', concerns: :sort do
       collection do
         get :student_selection
