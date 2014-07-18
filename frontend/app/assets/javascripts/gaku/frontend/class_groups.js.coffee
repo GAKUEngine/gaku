@@ -12,6 +12,8 @@ ready = ->
 
 		edit: ->
 			self.app.student_chooser()
+			$(document).on 'keyup', 'input.update-semester-attendance', ->
+				$(@).parent('form').submit()
 
 	@app.class_groups = new ClassGroupsController
 

@@ -10,6 +10,8 @@ describe Gaku::Semester do
     it { should have_many(:class_groups).through(:semester_connectors).source(:semesterable) }
     it { should have_many(:courses).through(:semester_connectors).source(:semesterable) }
 
+    it { should have_many :semester_attendances }
+
     it { should belong_to :school_year }
   end
 

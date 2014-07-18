@@ -37,6 +37,7 @@ module Gaku
     has_many :attendances
     has_many :external_school_records
     has_many :simple_grades
+    has_many :semester_attendances
 
     belongs_to :user
     belongs_to :commute_method_type
