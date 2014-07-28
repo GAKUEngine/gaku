@@ -696,6 +696,7 @@ en:
         enrollment_status: Enrollment Statuses
         states: States
         types: Types & Methods
+        student_review_categories: Student Review Categories
       users:
         roles: Roles
         users: Users
@@ -1011,6 +1012,12 @@ en:
     index: Student Specialty Index
     save: Save Student Specialty
     singular: Student Specialty
+  student_review_category:
+    plural: Student review categories
+    singular: Student review category
+    list: Student review categories list
+    new: New student review category
+    name: Student review category name
   submit: Submit
   success:
     enrolled: Successfully enrolled!
