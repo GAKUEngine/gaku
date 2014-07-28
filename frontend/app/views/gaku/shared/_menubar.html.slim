@@ -10,6 +10,7 @@
           /= render partial: "shared/language_bar"
     .row#navbar-sub
       .col-md-12
-        .navbar-header
-          a.navbar-brand href=root_path = image_tag('gaku-logo.png') 
-          = render partial: "gaku/shared/menu/global"
+        ul.nav.navbar-nav
+          li = link_to "Collector", root_path          
+          li = link_to "Events", root_path          
+          li = link_to "Notifications", root_path          
