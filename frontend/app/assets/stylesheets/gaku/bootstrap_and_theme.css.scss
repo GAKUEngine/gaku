@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "bootstrap/glyphicons";
+$navbar-height: 100px;
 
 // for submenu --------
 .dropdown-submenu{position:relative;}
@@ -11,14 +12,15 @@
 
 .center-block {float: none !important}
 
-// for fix --------
+// for GAKUEngine UI --------
+#navbar-sub {
+}
+
 .nav-pills {
   li {
     background-color: #F8F8F8;
   }
 }
-
-//.index-header { margin-bottom: 10px; }
 
 .container {
   max-width: 1900px;

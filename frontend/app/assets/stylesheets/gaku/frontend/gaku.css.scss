@@ -2,6 +2,7 @@
 $nprogress-color: #bbbcde;
 @import 'nprogress';
 @import 'nprogress-bootstrap';
+@import '../bootstrap_and_theme';
 
 // for HTML tag ----------------
 $c_red: #e45353; /* Error red */
@@ -16,7 +17,7 @@ html {
 }
 
 body {
-  padding-top: 70px;
+  padding-top: $navbar-height + 20px;
 }
 
 hr {
