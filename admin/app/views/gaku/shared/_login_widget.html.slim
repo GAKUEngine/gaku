@@ -1,7 +1,7 @@
 ul#user_menu.nav.navbar-nav.navbar-right.mr-m
   - if user_signed_in?
     li
-      .btn-group.mt-s
+      .btn-group.mt-xs
         button.btn.btn-sm.btn-default
           span.glyphicon.glyphicon-user style="color:#EEA236"
           = "&nbsp;&nbsp;".html_safe + current_user.username

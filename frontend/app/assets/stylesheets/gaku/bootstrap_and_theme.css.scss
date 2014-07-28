@@ -1,6 +1,8 @@
+$navbar-padding-vertical: 8px;
+$navbar-height: 72px;
+
 @import "bootstrap";
 @import "bootstrap/glyphicons";
-$navbar-height: 100px;
 
 // for submenu --------
 .dropdown-submenu{position:relative;}
@@ -13,9 +15,6 @@ $navbar-height: 100px;
 .center-block {float: none !important}
 
 // for GAKUEngine UI --------
-#navbar-sub {
-}
-
 .nav-pills {
   li {
     background-color: #F8F8F8;
