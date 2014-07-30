@@ -1,0 +1,7 @@
+$('#admin-student-review-categories-index tbody').append('<%= j render("student_review_category", {student_review_category: @student_review_category}) %>');
+
+$('#new-admin-student-review-category').slide();
+$('#new-admin-student-review-category-link').show();
+
+$('.admin-student-review-categories-count').html("<%= print_count(@count, t(:'student_review_category.list')) %>");
+showNotice("<%= render_flash %>");
