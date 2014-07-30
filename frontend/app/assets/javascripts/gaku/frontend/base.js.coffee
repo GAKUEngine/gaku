@@ -126,13 +126,13 @@ class App
       url: '/student_selection'
       dataType: 'script'
 
-    $(document).on 'click', '#clear-student-selection', ->
+    $(document).off('click', '#clear-student-selection').on 'click', '#clear-student-selection', ->
       $.ajax
         type: 'get'
         url: '/student_selection/clear'
         dataType: 'script'
 
-    $(document).on 'click', '.remove-student', ->
+    $(document).off('click', '.remove-student').on 'click', '.remove-student', ->
       thisId = $(this).closest('a').attr('id')
 
       $.ajax
@@ -141,11 +141,10 @@ class App
         data: { id: thisId },
         dataType: 'script'
 
-    $(document).on 'click', '.check-all', (e)->
+    $(document).off('click', '.check-all').on 'click', '.check-all', (e)->
       e.preventDefault()
 
       $checkboxes = $('.student-check')
-
       student_ids = []
       $('#students-index').find('tbody tr').map ->
         student_ids.push @id.split('-')[1]
@@ -168,7 +167,7 @@ class App
           data: { 'student_ids': student_ids },
           dataType: 'script'
 
-    $('body').off('change').on 'change', 'input.student-check', ->
+    $('body').off('change', 'input.student-check').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       tr_id = $(this).closest('tr').attr('id')
       parsed_id = tr_id.split('student-')
