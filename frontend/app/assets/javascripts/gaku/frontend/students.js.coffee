@@ -4,7 +4,7 @@ ready = ->
 
   class StudentsController
     index: ->
-      self.app.student_chooser()
+      # self.app.student_chooser()
 
       # $('body').on 'click', '.hide-chosen-table', (event) ->
       #   event.preventDefault()

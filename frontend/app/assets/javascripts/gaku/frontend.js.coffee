@@ -49,6 +49,8 @@ NProgress.configure
   ease: 'ease-in-out'
 
 $ ->
+  $(document)[0].app.student_chooser()
+
   $('#btn-students-chooser').popover(
     html: true
   ).on "shown.bs.popover", ->

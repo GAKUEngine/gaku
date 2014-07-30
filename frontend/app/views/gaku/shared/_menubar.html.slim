@@ -14,6 +14,7 @@
           li = link_to "Collector", root_path
           li = link_to "Events", root_path
           li = link_to "Notifications", root_path
-          button#btn-students-chooser.btn.btn-xs.btn-lg.btn-danger.pull-left data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom"
+          button#btn-students-chooser.btn.btn-xs.btn-danger.pull-left data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom" style="margin-top:7px"
+            span.chosen-count.badge.pull-right.ml-xs
             | chooser
 
