@@ -5,4 +5,4 @@ var selection = JSON.parse(("<%=j @selection.to_json.html_safe %>"))
 
 $(".student-check#student-" + '<%= @student.id %>').prop('checked', false)
 
-if(selection.length == 0) { $('#students-checked-div').slideUp(); }
+// if(selection.length == 0) { $('#students-checked-div').slideUp(); }

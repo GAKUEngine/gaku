@@ -30,6 +30,11 @@ h1, h2, h3, h4, h5, h6 {
 
 
 // for GAKUEngine ----------------
+.popover {
+  #students-checked-div {
+    width: $popover-max-width - 20px;
+  }
+}
 .container {
   width: 100%;
   max-width: 1900px;

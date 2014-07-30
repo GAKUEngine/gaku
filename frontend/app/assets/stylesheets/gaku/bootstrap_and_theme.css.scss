@@ -1,5 +1,6 @@
 $navbar-padding-vertical: 8px;
 $navbar-height: 72px;
+$popover-max-width: 512px + $navbar-padding-vertical * 2 ;
 
 @import "bootstrap";
 @import "bootstrap/glyphicons";
@@ -15,6 +16,15 @@ $navbar-height: 72px;
 .center-block {float: none !important}
 
 // for GAKUEngine UI --------
+.popover {
+  .popover-content {
+    padding: $navbar-padding-vertical;
+  }
+  .panel {
+    margin: 0px;
+  }
+}
+
 .nav-pills {
   li {
     background-color: #F8F8F8;

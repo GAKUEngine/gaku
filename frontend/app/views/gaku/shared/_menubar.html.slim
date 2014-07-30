@@ -3,7 +3,7 @@
     .row#navbar-main
       .col-md-12
         .navbar-header
-          a.navbar-brand href=root_path = image_tag('gaku-logo.png') 
+          a.navbar-brand href=root_path = image_tag('gaku-logo.png')
         - if user_signed_in?
           = render partial: "gaku/shared/menu/global"
           = render partial: "gaku/shared/login_widget"
@@ -11,6 +11,9 @@
     .row#navbar-sub
       .col-md-12
         ul.nav.navbar-nav
-          li = link_to "Collector", root_path          
-          li = link_to "Events", root_path          
-          li = link_to "Notifications", root_path          
+          li = link_to "Collector", root_path
+          li = link_to "Events", root_path
+          li = link_to "Notifications", root_path
+          button#btn-students-chooser.btn.btn-xs.btn-lg.btn-danger.pull-left data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom"
+            | chooser
+

@@ -168,12 +168,11 @@ class App
           data: { 'student_ids': student_ids },
           dataType: 'script'
 
-    $('body').on 'change', 'input.student-check', ->
+    $('body').off('change').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       tr_id = $(this).closest('tr').attr('id')
       parsed_id = tr_id.split('student-')
       thisId = parsed_id[1]
-
 
       if thisCheck.is (':checked')
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
