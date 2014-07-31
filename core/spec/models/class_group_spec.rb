@@ -6,6 +6,7 @@ describe Gaku::ClassGroup do
     it_behaves_like 'notable'
     it_behaves_like 'enrollmentable'
     it_behaves_like 'semesterable'
+    it_behaves_like 'student_reviewable'
   end
 
   describe 'validations' do
