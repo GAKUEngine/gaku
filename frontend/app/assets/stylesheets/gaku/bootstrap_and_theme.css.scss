@@ -16,6 +16,12 @@ $popover-max-width: 512px + $navbar-padding-vertical * 2 ;
 .center-block {float: none !important}
 
 // for GAKUEngine UI --------
+.nav.navbar-nav {
+  .btn.btn-xs {
+    margin-top: 7px;
+  }
+}
+
 .popover {
   .popover-content {
     padding: $navbar-padding-vertical;
@@ -36,11 +42,11 @@ $popover-max-width: 512px + $navbar-padding-vertical * 2 ;
 }
 
 .alert-dismissable .close {
-position: relative;
-top: -2px;
-right: 0px;
-color: red;
-font-size: 24px;
+  position: relative;
+  top: -2px;
+  right: 0px;
+  color: red;
+  font-size: 24px;
 }
 
 .table {

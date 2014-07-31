@@ -30,14 +30,26 @@ h1, h2, h3, h4, h5, h6 {
 
 
 // for GAKUEngine ----------------
+$logo-width: 205px;
+.navbar.navbar-fixed-top {
+  #logo {
+    height: $navbar-height;
+    vertical-align: middle;
+    display: table-cell;
+  }
+  .row[id^="navbar-"]{
+    height: $navbar-height / 2;
+    .col-md-12{
+      margin-left: -$logo-width;
+      padding-left: $logo-width + 15px;
+    }
+  }
+}
+
 .popover {
   #students-checked-div {
     width: $popover-max-width - 20px;
   }
-}
-.container {
-  width: 100%;
-  max-width: 1900px;
 }
 
 .notice {
