@@ -36,6 +36,8 @@ $logo-width: 205px;
     height: $navbar-height;
     vertical-align: middle;
     display: table-cell;
+    position: relative;
+    z-index: 10;
   }
   .row[id^="navbar-"]{
     height: $navbar-height / 2;

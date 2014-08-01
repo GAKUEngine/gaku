@@ -16,9 +16,9 @@ $popover-max-width: 512px + $navbar-padding-vertical * 2 ;
 .center-block {float: none !important}
 
 // for GAKUEngine UI --------
-.nav.navbar-nav {
+ul.nav.navbar-nav {
   .btn.btn-xs {
-    margin-top: 7px;
+    margin: 8px 15px;
   }
 }
 

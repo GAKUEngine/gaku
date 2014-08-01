@@ -4,20 +4,18 @@
       a#logo href=root_path
         = image_tag 'gaku-logo.png', class: 'img-responsive'
 
-    .row#navbar-main
-      .col-md-12
-        - if user_signed_in?
-          = render partial: "gaku/shared/menu/global"
-          = render partial: "gaku/shared/login_widget"
-          /= render partial: "shared/language_bar"
-    .row#navbar-sub
-      .col-md-12
-        ul.nav.navbar-nav
-          li = link_to "Collector", root_path
-          li = link_to "Events", root_path
-          li = link_to "Notifications", root_path
-          button#btn-students-chooser.btn.btn-xs.btn-danger.pull-left [
-            data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom"
-          ]
-            span.chosen-count.badge.pull-right.ml-xs
-            | chooser
+    - if user_signed_in?
+      .row#navbar-main
+        .col-md-12
+            = render partial: "gaku/shared/menu/global"
+            = render partial: "gaku/shared/login_widget"
+            /= render partial: "shared/language_bar"
+      .row#navbar-sub
+        .col-md-12
+          ul.nav.navbar-nav
+            li
+              button#btn-students-chooser.btn.btn-xs.btn-info.pull-left [
+                data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                span.chosen-count.badge.pull-right.ml-xs
+                | Collector
