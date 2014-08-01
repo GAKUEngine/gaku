@@ -17,8 +17,8 @@ $popover-max-width: 512px + $navbar-padding-vertical * 2 ;
 
 // for GAKUEngine UI --------
 ul.nav.navbar-nav {
-  .btn.btn-xs {
-    margin: 8px 0px 8px 15px;
+  .btn-group {
+    margin: 8px 0px;
   }
 }
 
@@ -325,10 +325,6 @@ ul.nav.navbar-nav {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
-}
-
-#user_menu {
-   margin-right: 25px;
 }
 
 .navbar .navbar-nav > .active > a {

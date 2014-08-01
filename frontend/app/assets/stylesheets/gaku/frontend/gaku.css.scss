@@ -30,6 +30,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 // for GAKUEngine ----------------
+#user_menu {
+  padding-right: 30px;
+}
+
 $logo-width: 205px;
 .navbar.navbar-fixed-top {
   #logo {
@@ -44,6 +48,13 @@ $logo-width: 205px;
     .col-md-12{
       margin-left: -$logo-width;
       padding-left: $logo-width + 15px;
+    }
+  }
+  .row#navbar-sub {
+    ul.nav.navbar-nav {
+      .btn.btn-xs {
+        margin: 8px 0px 8px 15px;
+      }
     }
   }
 }
