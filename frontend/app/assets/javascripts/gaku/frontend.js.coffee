@@ -55,3 +55,6 @@ $ ->
     html: true
   ).on "shown.bs.popover", ->
     $(document)[0].app.student_chooser()
+
+  $('[data-toggle="popover"]').popover
+    html: true

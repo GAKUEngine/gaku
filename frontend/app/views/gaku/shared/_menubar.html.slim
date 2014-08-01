@@ -15,7 +15,22 @@
           ul.nav.navbar-nav
             li
               button#btn-students-chooser.btn.btn-xs.btn-info.pull-left [
-                data-content=("#{render 'gaku/students/chooser_widget'}") data-toggle="popover" type="button" data-placement="bottom"
+                data-content=("#{render 'gaku/students/chooser_widget'}")
+                data-toggle="popover" type="button" data-placement="bottom"
               ]
-                span.chosen-count.badge.pull-right.ml-xs
                 | Collector
+                span.chosen-count.badge.ml-xs
+            li
+              button#btn-students-chooser.btn.btn-xs.btn-warning.pull-left [
+                data-content=("Events")
+                data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                | Events
+                span.events-count.badge.ml-xs 123
+            li
+              button#btn-students-chooser.btn.btn-xs.btn-danger.pull-left [
+                data-content=("Warning")
+                data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                | Notifications
+                span.notifications-count.badge.ml-xs 123
