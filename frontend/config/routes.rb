@@ -76,6 +76,8 @@ Gaku::Core::Engine.routes.draw do
         post :create_from_selection
       end
     end
+
+    resources :student_reviews, controller: 'class_groups/student_reviews'
   end
 
   resources :courses, concerns: %i( notes gradable enrollmentable semesterable ) do

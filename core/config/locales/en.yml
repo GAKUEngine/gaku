@@ -918,6 +918,7 @@ en:
     plural: Semester attendances
     absence: Absence
     presence: Presence
+    attendances_and_reviews: Attendances and reviews
   sex: Sex
   sex_and_birth: Gender & Birth Date
   show: Show
@@ -1012,12 +1013,19 @@ en:
     index: Student Specialty Index
     save: Save Student Specialty
     singular: Student Specialty
+  student_review:
+    edit_label: 'Edit %{student} review'
+    new_label: 'New %{student} review'
+    show_label: '%{student} review'
+    review: Review
+    content: Content
   student_review_category:
     plural: Student review categories
     singular: Student review category
     list: Student review categories list
     new: New student review category
     name: Student review category name
+    choose: Choose student review category
   submit: Submit
   success:
     enrolled: Successfully enrolled!

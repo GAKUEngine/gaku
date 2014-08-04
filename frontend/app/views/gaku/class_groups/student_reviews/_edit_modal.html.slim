@@ -1,0 +1,4 @@
+= modal_for 'edit-student-review-modal' do
+  = modal_form_for [@class_group, @student_review], label: t('student_review.edit_label', student: @student) do |f|
+    = render 'form_fields', f: f
+    = buttons_for nil, { resource: 'edit-class-group-student-review' }
