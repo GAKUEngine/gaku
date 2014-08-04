@@ -55,6 +55,7 @@ Gaku::Core::Engine.routes.draw  do
     resources :users, concerns: %i( pagination )
     resources :roles
     resources :templates, except: %i( show ), concerns: %i( download )
+    resources :student_review_categories
     resources :grading_methods
     resources :grading_method_sets, concerns: %i( primary ) do
       resources :grading_method_set_items,

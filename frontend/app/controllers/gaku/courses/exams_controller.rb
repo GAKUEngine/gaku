@@ -22,15 +22,15 @@ module Gaku
 
     private
 
-    def init_portion_scores
-      @students.each do |student|
-        @exam.exam_portions.each do |portion|
-          unless portion.exam_portion_scores.pluck(:student_id).include?(student.id)
-            ExamPortionScore.create!(exam_portion: portion, student: student)
-          end
-        end
-      end
-    end
+    # def init_portion_scores
+    #   @students.each do |student|
+    #     @exam.exam_portions.each do |portion|
+    #       unless portion.exam_portion_scores.pluck(:student_id).include?(student.id)
+    #         ExamPortionScore.create!(exam_portion: portion, student: student)
+    #       end
+    #     end
+    #   end
+    # end
 
   end
 end

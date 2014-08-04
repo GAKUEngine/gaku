@@ -26,7 +26,8 @@ module Gaku
           ActiveSupport::HashWithIndifferentAccess.new(
             score: 'Gaku::Grading::Collection::Score',
             percentage: 'Gaku::Grading::Collection::Percentage',
-            ordinal: 'Gaku::Grading::Collection::Ordinal'
+            ordinal: 'Gaku::Grading::Collection::Ordinal',
+            interval: 'Gaku::Grading::Collection::Interval'
           )
         end
       end

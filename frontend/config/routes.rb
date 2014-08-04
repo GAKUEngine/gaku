@@ -68,12 +68,16 @@ Gaku::Core::Engine.routes.draw do
       get :without_semester
     end
 
+    resources :semester_attendances, controller: 'class_groups/semester_attendances'
+
     resources :enrollments, controller: 'class_groups/enrollments', concerns: :sort do
       collection do
         get :student_selection
         post :create_from_selection
       end
     end
+
+    resources :student_reviews, controller: 'class_groups/student_reviews'
   end
 
   resources :courses, concerns: %i( notes gradable enrollmentable semesterable ) do

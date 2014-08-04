@@ -7,6 +7,8 @@ module Gaku
       assoc.has_many :class_groups, source_type: 'Gaku::ClassGroup'
     end
 
+    has_many :semester_attendances
+
     belongs_to :school_year
 
     validates :starting, :ending, presence: true

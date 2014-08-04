@@ -37,6 +37,9 @@ module Gaku
     has_many :attendances
     has_many :external_school_records
     has_many :simple_grades
+    has_many :semester_attendances
+
+    has_many :student_reviews
 
     belongs_to :user
     belongs_to :commute_method_type
@@ -98,6 +101,15 @@ module Gaku
       else
         false
       end
+    end
+
+    def temp_gender
+      if gender
+        I18n.t('gender.male')
+      else
+        I18n.t('gender.female')
+      end
+
     end
 
     private
