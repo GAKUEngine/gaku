@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/GAKUEngine/gaku.svg)](https://travis-ci.org/GAKUEngine/gaku)
 [![Coverage Status](https://coveralls.io/repos/GAKUEngine/gaku/badge.png?branch=master)](https://coveralls.io/r/GAKUEngine/gaku?branch=master)
 [![Code Climate](https://codeclimate.com/github/GAKUEngine/gaku.png)](https://codeclimate.com/github/GAKUEngine/gaku)
-
+[![Gitter chat](https://badges.gitter.im/GAKUEngine/gaku.png)](https://gitter.im/GAKUEngine/gaku)
 GAKU Engine [学エンジン]
 ========================
 GAKU Engine, or just "GAKU" for short is the "Genshin Academic Karte Unification Engine". The gaku character 「学」 means "Learning", so saying GAKU Engine is roughly equivilent to saying "Learning Engine".
