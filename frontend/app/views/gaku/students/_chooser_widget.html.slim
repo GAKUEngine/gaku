@@ -1,17 +1,18 @@
-.row#students-checked-div.center-block
+.row.d-none#students-checked-div.center-block
   .panel.panel-success
     .panel-heading
       = t(:'student.chosen_students')
-      / span.chosen-count.badge.pull-left.mr-s
+      | (
+      span.chosen-count
+      | )
       .table-action.show-chosen-table.pull-right
-        /= button t(:show), chosen_students_path, remote: true, class: 'btn-xs'
+        = button t(:show), chosen_students_path, remote: true, class: 'btn-xs'
         = button t(:clear), nil, id: 'clear-student-selection', remote: true, class: 'btn-xs'
-      / .table-action.hide-chosen-table.pull-right.d-none
+      .table-action.hide-chosen-table.pull-right.d-none
         = button t(:hide), nil, class: 'btn-xs'
         = button t(:clear), nil, id: 'clear-student-selection', remote: true, class: 'btn-xs'
-    / .panel-body
+    /.panel-body
 
-    table#chosen-table.table
+    table#chosen-table.table.d-none
       tbody#students-checked
-    / #chosen-actions.panel-footer
-
+    /#chosen-actions.d-none.panel-footer
