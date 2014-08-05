@@ -34,7 +34,7 @@ module Gaku
 
     def remove_collection(students)
       students.each do |student|
-        $redis.lrem(user_selection  , 0, student.id)
+        $redis.lrem(user_selection, 0, student.id)
       end
       self.students
     end
