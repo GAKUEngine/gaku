@@ -11,6 +11,7 @@ describe Gaku::Student do
   end
 
   describe 'associations' do
+    it { should have_many(:student_reviews) }
     it { should have_many(:enrollments).dependent(:destroy) }
     it { should have_many(:courses).through(:enrollments).source(:enrollmentable)  }
     it { should have_many(:class_groups).through(:enrollments).source(:enrollmentable)  }

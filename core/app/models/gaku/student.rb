@@ -39,6 +39,8 @@ module Gaku
     has_many :simple_grades
     has_many :semester_attendances
 
+    has_many :student_reviews
+
     belongs_to :user
     belongs_to :commute_method_type
     belongs_to :scholarship_status
