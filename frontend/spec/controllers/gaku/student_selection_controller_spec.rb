@@ -2,6 +2,8 @@ require 'spec_helper_controllers'
 
 describe Gaku::StudentSelectionController do
 
+  let(:user) { create(:user) }
+
   let(:student) { create(:student) }
 
   context 'as admin' do
@@ -11,14 +13,14 @@ describe Gaku::StudentSelectionController do
 
       describe 'XHR GET #index' do
         before do
-          Gaku::StudentSelection.add(student)
+          Gaku::StudentSelection.new(Gaku::User.last).add(student)
           gaku_js_get :index
         end
 
         it { should respond_with 200 }
         it('renders :index template') { template? :index }
         it('assigns @selection') do
-           expect(assigns(:selection)).to eq [{ id: student.id.to_s, full_name: student.full_name}].as_json
+           expect(assigns(:selection)).to eq [student]
          end
       end
 
@@ -28,13 +30,13 @@ describe Gaku::StudentSelectionController do
         it { should respond_with 200 }
         it('renders the :add template') { template? :add }
         it('assigns @selection') do
-           expect(assigns(:selection)).to eq [{ id: student.id.to_s, full_name: student.full_name}].as_json
+           expect(assigns(:selection)).to eq [student]
         end
       end
 
       describe 'XHR GET #remove' do
         before do
-          Gaku::StudentSelection.add(student)
+          Gaku::StudentSelection.new(user).add(student)
           gaku_js_get :remove, id: student.id
         end
 
@@ -47,7 +49,7 @@ describe Gaku::StudentSelectionController do
 
       describe 'XHR GET #clear' do
         before do
-          Gaku::StudentSelection.add(student)
+          Gaku::StudentSelection.new(user).add(student)
           gaku_js_get :clear, id: student.id
         end
 
