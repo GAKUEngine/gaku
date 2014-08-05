@@ -3,7 +3,7 @@ module Contacts
 
   included do
     has_many :contacts, as: :contactable
-    has_one :primary_contact, -> { where(primary: true) }, class_name: 'Contact', as: :contactable
+    has_one :primary_contact, -> { where(primary: true) }, class_name: 'Gaku::Contact', as: :contactable
 
 
     # def primary_contact
