@@ -2,7 +2,6 @@
   .panel.panel-success
     .panel-heading
       = t(:'student.chosen_students')
-      / span.chosen-count
       .table-action.show-chosen-table.pull-right
         = button t(:clear), nil, id: 'clear-student-selection', remote: true, class: 'btn-xs'
         / = button t(:show), chosen_students_path, remote: true, class: 'btn-xs'
