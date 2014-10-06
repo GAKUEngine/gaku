@@ -3,8 +3,7 @@
 require_relative '../common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
-  include CommonGakuGemspecMixin
-  set_common_attributes s
+  set_gaku_gemspec_shared s
   
   s.name         = 'gaku_frontend'
   s.summary      = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'

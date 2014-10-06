@@ -3,8 +3,7 @@
 require_relative '../common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
-  include CommonGakuGemspecMixin
-  set_common_attributes s
+  set_gaku_gemspec_shared s
 
   s.name         = 'gaku_admin'
   s.summary      = 'Admin module for GAKU Engine'
