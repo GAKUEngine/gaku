@@ -1,17 +1,14 @@
 # encoding: UTF-8
-version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+
+require_relative '../common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
-  s.platform     = Gem::Platform::RUBY
-  s.name         = 'gaku_core'
-  s.version      = version
-  s.summary      = 'GAKU Engine is a student/assignment focused student and school management system'
-  s.description  = 'Core functionality for GAKU Engine'
-  s.required_ruby_version = '~> 2.0.0'
+  include CommonGakuGemspecMixin
+  set_common_attributes s
 
-  s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']
-  s.email        = 'info@genshin.org'
-  s.homepage     = 'http://github.com/Genshin/gaku'
+  s.name         = 'gaku_core'
+  s.summary      = 'GAKU Engine core module'
+  s.description  = 'Core functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
 
   s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")

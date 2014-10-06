@@ -1,19 +1,28 @@
 # encoding: UTF-8
-version = File.read(File.expand_path('../VERSION', __FILE__)).strip
+
+require_relative 'common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
-  s.platform     = Gem::Platform::RUBY
-  s.name         = 'gaku'
-  s.version      = version
-  s.summary      = 'GAKU is a student/assignment focused student and school management system'
-  s.description  = "It allows for full student management, grading etc.
-                    It's bascally what all student grading tools are with some unique features"
-  s.post_install_message = 'Thanks for installing Gaku!'
-  s.required_ruby_version = '~> 2.0.0'
+  include CommonGakuGemspecMixin
+  set_common_attributes s
 
-  s.authors      = ['Rei Kagetsuki', 'Nakaya Yukiharu', 'Vassil Kalkov', 'Georgi Tapalilov']
-  s.email        = 'info@genshin.org'
-  s.homepage     = 'http://github.com/Genshin/gaku'
+  s.name         = 'gaku'
+  s.summary      = 'GAKU Engine - Dynamic Open Source School Management'
+  s.description  = \
+    'GAKU Engine is a highly customizable Open Source School Management System. ' +
+    'It offers extensions to exceed the bounds of a standardized curriculum, ' +
+    'and original tools to augment the learning experience.' +
+    'It is the engine to drive a more dynamic education.'
+  s.post_install_message =  \
+    '╔═════════════════════════╼' +
+    "║⚙学 GAKU Engine [学エンジン] V.#{s.version.to_s}" +
+    '╟─────────────────────────╼' +
+    '║©2014 幻信創造株式会社 [Phantom Creation Inc.]' +
+    '║http://www.gakuengine.com' +
+    '╟─────────────────────────╼' +
+    '║Thank you for installing GAKU Engine!' +
+    '║GAKU Engine is Open Source [GPL/AGPL] Software.' +
+    '╚═════════════════════════╼' 
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
@@ -22,9 +31,9 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql'
   s.requirements << 'postgresql-contrib'
 
-  s.add_dependency 'gaku_core', version
-  s.add_dependency 'gaku_admin', version
-  s.add_dependency 'gaku_frontend', version
-  s.add_dependency 'gaku_testing', version
-  s.add_dependency 'gaku_sample', version
+  s.add_dependency 'gaku_core', s.version
+  s.add_dependency 'gaku_admin', s.version
+  s.add_dependency 'gaku_frontend', s.version
+  s.add_dependency 'gaku_testing', s.version
+  s.add_dependency 'gaku_sample', s.version
 end
