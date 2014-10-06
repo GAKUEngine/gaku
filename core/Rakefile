@@ -4,11 +4,11 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/packagetask'
 require 'rubygems/package_task'
-require 'gaku/testing/common_rake'
+require 'gaku_testing'
 
 Bundler::GemHelper.install_tasks
 
-spec = eval(File.read('gaku_core.gemspec'))
+spec = eval(File.read('gaku_core.gemspec', __FILE__))
 Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
 end
