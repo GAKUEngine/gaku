@@ -126,7 +126,7 @@ module Gaku
     end
 
     def index_includes
-      [:enrollment_status, :user]
+      [:enrollment_status, :user, :primary_address, :primary_contact]
     end
 
     def search_unscoped_params

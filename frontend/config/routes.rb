@@ -138,6 +138,9 @@ Gaku::Core::Engine.routes.draw do
       enrollment.resources :course_enrollments, controller: 'students/course_enrollments'
       enrollment.resources :extracurricular_activity_enrollments, controller: 'students/extracurricular_activity_enrollments'
     end
+
+    resources :reports, only: :index, controller: 'students/reports'
+
   end
 
   resources :exam_sessions, controller: 'exams/exam_sessions', except: :index

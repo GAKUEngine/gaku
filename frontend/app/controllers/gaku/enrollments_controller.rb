@@ -12,7 +12,7 @@ module Gaku
 
     def student_selection
       @enrollment = @enrollmentable.enrollments.new
-      @student_selection = Gaku::StudentSelection.all
+      @student_selection = Gaku::StudentSelection.new(current_user).all
     end
 
     def new

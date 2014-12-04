@@ -31,9 +31,9 @@ module Gaku
       contactable.contacts.where.not(id: id).update_all(primary: false)
       update_attribute(:primary, true)
 
-      if contactable.has_attribute?(:primary_contact)
-        contactable.update_attribute(:primary_contact, contactable.contact_widget)
-      end
+      # if contactable.has_attribute?(:primary_contact)
+      #   contactable.update_attribute(:primary_contact, contactable.contact_widget)
+      # end
     end
 
     def primary?
