@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql'
   s.requirements << 'postgresql-contrib'
 
-  s.add_dependency 'rails',                          '4.0.4'
+  s.add_dependency 'rails',                          '~> 4.1.0'
   s.add_dependency 'rails-i18n',                     '~> 4.0.2'
 
   s.add_dependency 'pg',                             '0.17.1'
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'globalize',                      '~> 4.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
-  s.add_dependency 'ransack',                        '~> 1.1.0'
+  s.add_dependency 'ransack',                        '~> 1.6.0'
   s.add_dependency 'kaminari',                       '~> 0.15.1'
   s.add_dependency 'draper',                         '~> 1.3.0'
   s.add_dependency 'deface',                         '~> 1.0.0'
