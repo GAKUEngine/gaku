@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe 'Selecting Students', type: :feature do
 
-  before(:all) do
-    Capybara.javascript_driver = :selenium
-    set_resource 'student'
-  end
+  before(:all) { set_resource 'student' }
 
   let(:admin) { create(:admin_user) }
 
