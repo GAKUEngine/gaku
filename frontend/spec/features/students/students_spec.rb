@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe 'Students', type: :feature do
 
-  before(:all) do
-    Capybara.javascript_driver = :selenium
-    set_resource 'student'
-  end
+  before(:all) { set_resource 'student' }
 
   let!(:preset) { create(:preset, chooser_fields: { show_name: '1', show_surname: '1' }) }
 
@@ -162,6 +159,7 @@ describe 'Students', type: :feature do
       semester_connector
       visit gaku.students_path
       click new_link
+      expect(page.has_text?('Save Student'))
       expect(current_path).to eq gaku.new_student_path
     end
 
