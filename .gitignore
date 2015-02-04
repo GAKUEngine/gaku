@@ -78,3 +78,6 @@ pkg/
 **/pkg/
 
 realtime_grading/node_modules/
+
+# bundle folders
+**/.bundle
