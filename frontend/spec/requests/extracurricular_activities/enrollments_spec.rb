@@ -9,7 +9,7 @@ describe 'Extracurricular Activity Enrollments' do
   before { as :admin }
 
   describe 'XHR GET :new' do
-    before { get "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/new", format: :js }
+    before { xhr :get, "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/new" }
 
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :new template') { template? :new }
@@ -24,7 +24,7 @@ describe 'Extracurricular Activity Enrollments' do
 
   describe 'XHR GET :student_selection' do
     before do
-      get "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/student_selection", format: :js
+      xhr :get, "/extracurricular_activities/#{extracurricular_activity.id}/enrollments/student_selection"
     end
 
     it('is successful') { expect(response.code).to eq '200' }
