@@ -1,4 +1,4 @@
-source 'http://production.s3.rubygems.org'
+source 'http://rubygems.org'
 
 unless ENV['TRAVIS']
   group :development do
