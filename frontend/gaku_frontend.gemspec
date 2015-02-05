@@ -4,7 +4,7 @@ require_relative '../common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
   set_gaku_gemspec_shared s
-  
+
   s.name         = 'gaku_frontend'
   s.summary      = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'
   s.description  = 'The default Rails front end for GAKU Engine, with web views etc.'
@@ -27,11 +27,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'responders',                     '~> 1.0'
 
-  s.add_dependency 'rails4_client_side_validations', '0.0.3'
+  s.add_dependency 'rails4_client_side_validations', '~> 4.2'
 
-  s.add_dependency 'phantom_helpers',                '0.11.0.alpha6'
-  s.add_dependency 'phantom_forms',                  '0.2.0.alpha5'
-  s.add_dependency 'phantom_nested_forms',           '0.2.0.alpha4'
+  s.add_dependency 'phantom_helpers',                '0.11.0'
+  s.add_dependency 'phantom_forms',                  '0.3.0'
+  s.add_dependency 'phantom_nested_forms',           '0.3.0'
 
   s.add_dependency 'nested_form'
 
