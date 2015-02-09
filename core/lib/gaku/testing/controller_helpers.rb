@@ -1,5 +1,11 @@
 module Gaku::Testing::ControllerHelpers
 
+  extend ActiveSupport::Concern
+
+  included do
+    routes { ::Gaku::Core::Engine.routes }
+  end
+
   def gaku_get(action, parameters = nil, session = nil, flash = nil)
     process_gaku_action(action, 'GET', parameters, session, flash)
   end
@@ -83,13 +89,12 @@ module Gaku::Testing::ControllerHelpers
 
   def process_gaku_action(action, method = 'GET', parameters = nil, session = nil, flash = nil)
     parameters ||= {}
-    process(action, method, parameters.merge!(use_route: :gaku), session, flash)
+    process(action, method, parameters, session, flash)
   end
 
   def process_js_gaku_action(action, method = 'GET', parameters = nil, session = nil, flash = nil)
     parameters ||= {}
     parameters.reverse_merge!(format: :js)
-    parameters.merge!(use_route: :gaku)
     xml_http_request(method, action, parameters, session, flash)
   end
 
