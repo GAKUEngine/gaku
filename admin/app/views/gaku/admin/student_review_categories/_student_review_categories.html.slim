@@ -1,0 +1,18 @@
+.row
+  .col-md-12
+    #new-admin-student-review-category.d-none
+    .pull-left
+      = count_div 'admin-student-review-categories-count' do
+        = print_count @count, t(:'student_review_category.list')
+    .pull-right
+      = ajax_link_to_new t(:'student_review_category.new'), [:new, :admin, :student_review_category], id: 'new-admin-student-review-category-link'
+hr
+
+#admin-student-review-categories
+  = table_for 'admin-student-review-categories-index' do
+    thead
+      tr
+        = th t(:'student_review_category.plural')
+        = th_actions 2
+      tbody
+        = render partial: 'student_review_category', collection: @student_review_categories, as: :student_review_category

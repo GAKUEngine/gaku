@@ -13,7 +13,6 @@ module Gaku
       if @contact.save
         if @contact.contactable.respond_to?(:contacts)
           remove_other_primary
-          update_primary_contact_field
         end
         return true
       else
@@ -45,11 +44,6 @@ module Gaku
     end
 
     # Workaround performance issue by not using JOIN
-    def update_primary_contact_field
-      if @contact.contactable.has_attribute?(:primary_contact)
-        @contact.contactable.update_column(:primary_contact, @contact.contactable.contact_widget)
-      end
-    end
 
   end
 end

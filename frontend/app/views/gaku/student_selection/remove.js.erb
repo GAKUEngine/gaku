@@ -1,8 +1,8 @@
 $('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
-$('.chosen-count').html('<%= "(#{@selection.size})" %>');
 
-var selection = JSON.parse(("<%=j @selection.to_json.html_safe %>"))
-
+$('.chosen-count').html('<%= "(#{@count})" %>');
 $(".student-check#student-" + '<%= @student.id %>').prop('checked', false)
 
-if(selection.length == 0) { $('#students-checked-div').slideUp(); }
+<%- if @count.zero? %>
+   $('#students-checked-div').slideUp();
+<%- end %>

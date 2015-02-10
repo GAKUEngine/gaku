@@ -1,0 +1,8 @@
+<% if @student_reviews.any? %>
+  $('#modal-dialogs').html("<%=j render('show_modal', student_review: @student_reviews.first) %>");
+  $('#show-student-review-modal').modal('show');
+<% else %>
+  $('#modal-dialogs').html("<%=j render('new_modal') %>");
+  $('#new-student-review-modal').modal('show');
+  $('.remote-form').enableValidations();
+<% end %>

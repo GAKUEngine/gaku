@@ -126,7 +126,10 @@ class App
       url: '/student_selection'
       dataType: 'script'
 
-    $(document).on 'click', '#clear-student-selection', ->
+    $(document).on 'click', '#clear-student-selection', (e)->
+
+      e.preventDefault()
+
       $.ajax
         type: 'get'
         url: '/student_selection/clear'

@@ -11,7 +11,7 @@
           ul.list-unstyled
             li#students-menu = link_to badge_count(@class_group.enrollments_count, t(:'student.plural'), 'students-count'), [@class_group, :enrollments], remote: true
             li#semesters-menu = link_to badge_count(@class_group.semesters.count, t(:'semester.plural'),'semesters-count'), [@class_group, :semester_connectors], remote: true
-            li#semester-attendances-menu = link_to t(:'semester_attendance.plural'), [@class_group, :semester_attendances], remote: true
+            li#semester-attendances-menu = link_to t('semester_attendance.attendances_and_reviews'), [@class_group, :semester_attendances], remote: true
             li#notes-menu = link_to badge_count(@class_group.notes_count, t(:'note.plural'), 'notes-count'), [@class_group, :notes], remote: true
 
   .col-md-10#ajax-load

@@ -2,35 +2,37 @@ module Gaku
   class StudentSelectionController < GakuController
 
     respond_to :js,             only: %i( index add remove clear )
+    before_action :user_selection
     before_action :set_student, only: %i( add remove )
     before_action :set_students, only: %i( collection remove_collection )
 
     def add
-      @selection = Gaku::StudentSelection.add(@student)
+      @selection = @user_selection.add(@student)
       respond_with @selection
     end
 
     def remove
-      @selection = Gaku::StudentSelection.remove(@student)
+      @selection = @user_selection.remove(@student)
+      set_count
       respond_with @selection
     end
 
     def collection
-      @selection = Gaku::StudentSelection.collection(@students)
+      @selection = @user_selection.collection(@students)
       render 'index'
     end
 
     def remove_collection
-      @selection = Gaku::StudentSelection.remove_collection(@students)
+      @selection = @user_selection.remove_collection(@students)
       render 'index'
     end
 
     def index
-      @selection = Gaku::StudentSelection.all
+      @selection = @user_selection.students
     end
 
     def clear
-      @selection = Gaku::StudentSelection.remove_all
+      @selection = @user_selection.remove_all
       respond_with @selection
     end
 
@@ -42,6 +44,14 @@ module Gaku
 
     def set_students
       @students = Student.where(id: params[:student_ids])
+    end
+
+    def set_count
+      @count = @selection.count
+    end
+
+    def user_selection
+      @user_selection = Gaku::StudentSelection.new(current_user)
     end
 
   end

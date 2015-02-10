@@ -4,7 +4,7 @@ describe Gaku::Address do
 
   let(:state)   { build(:state) }
   let(:country) { create(:country) }
-  let(:student) { create(:student, primary_address: '') }
+  let(:student) { create(:student) }
   let(:address) { create(:address, country: country, addressable: student) }
 
   describe 'relations' do

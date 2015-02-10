@@ -20,7 +20,7 @@ describe 'Selecting Students', type: :feature do
 
   before do
     as admin
-    Gaku::StudentSelection.remove_all
+    Gaku::StudentSelection.new(admin).remove_all
   end
 
   context 'existing' do

@@ -1,0 +1,4 @@
+= modal_for 'new-student-review-modal' do
+  = modal_form_for [@class_group, Gaku::StudentReview.new], label: t('student_review.new_label', student: @student) do |f|
+    = render 'form_fields', f: f
+    = buttons_for nil, { resource: 'new-class-group-student-review' }
