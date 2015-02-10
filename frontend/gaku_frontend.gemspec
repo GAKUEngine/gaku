@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass',                           '~> 3.2'
   s.add_dependency 'slim',                           '2.0.0'
 
-  s.add_dependency 'responders',                     '~> 1.0'
+  s.add_dependency 'responders',                     '~> 2.0'
 
   s.add_dependency 'rails4_client_side_validations', '~> 4.2'
 
