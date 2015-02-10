@@ -18,7 +18,7 @@ describe Gaku::Enrollment do
     end
 
     it('ensures inclusion') do
-      should ensure_inclusion_of(:enrollmentable_type)
+      should validate_inclusion_of(:enrollmentable_type)
         .in_array(%w(Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity))
     end
   end

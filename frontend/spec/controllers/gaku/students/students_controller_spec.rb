@@ -423,7 +423,7 @@ describe Gaku::StudentsController do
           student.reload
           student.name.should eq('Kostova Marta')
 
-          controller.should set_the_flash
+          controller.should set_flash
         end
       end
     end
