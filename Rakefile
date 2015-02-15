@@ -80,7 +80,7 @@ namespace :gem do
 
     engines.each do |gem_name|
       puts "〓〓〓⚙学〓〓〓⭜ Releasing #{gem_name}⭝ 〓〓〓⚙学〓〓〓"
-      cmd = "gem push ./gem_name/gaku_#{gem_name}-#{version}.gem"
+      cmd = "gem push ./#{gem_name}/gaku_#{gem_name}-#{version}.gem"
       puts cmd
       system cmd
     end
