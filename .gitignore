@@ -36,6 +36,7 @@ public/assets
 *~
 .#*
 *.swn
+**/*.gem
 
 .DS_Store
 .idea
