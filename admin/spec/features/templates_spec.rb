@@ -7,7 +7,7 @@ describe 'Admin Templates' do
   let(:template) { create(:template) }
 
   before :all do
-    Capybara.javascript_driver = :selenium
+    #Capybara.javascript_driver = :selenium
     set_resource 'admin-template'
   end
 

@@ -1,4 +1,4 @@
-source 'http://production.s3.rubygems.org'
+source 'http://rubygems.org'
 
 unless ENV['TRAVIS']
   group :development do
@@ -17,10 +17,8 @@ end
 group :test do
   gem 'rspec-rails',              '~> 2.14.1'
   gem 'factory_girl_rails',       '~> 4.4.0'
-  gem 'database_cleaner',         '~> 1.2'
-  gem 'shoulda-matchers',         '~> 2.5.0'
+  gem 'database_cleaner',         '~> 1.3.0'
+  gem 'shoulda-matchers',         '~> 2.8.0'
   gem 'simplecov'
   gem 'coveralls', require: false
 end
-
-gemspec

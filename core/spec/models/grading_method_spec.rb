@@ -18,7 +18,7 @@ describe Gaku::GradingMethod do
     it { should validate_presence_of :name }
     it { should validate_uniqueness_of :name }
     it { should validate_presence_of :grading_type }
-    it { should ensure_inclusion_of(:grading_type).in_array(Gaku::GradingMethod::Types) }
+    it { should validate_inclusion_of(:grading_type).in_array(Gaku::GradingMethod::Types) }
 
   end
 

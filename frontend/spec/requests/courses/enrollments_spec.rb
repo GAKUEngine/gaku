@@ -9,7 +9,7 @@ describe 'Courses Enrollments' do
   before { as :admin }
 
   describe 'XHR GET :new' do
-    before { get "/courses/#{course.id}/enrollments/new", format: :js }
+    before { xhr :get, "/courses/#{course.id}/enrollments/new" }
 
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :new template') { template? :new }
@@ -19,7 +19,7 @@ describe 'Courses Enrollments' do
   end
 
   describe 'XHR GET :student_selection' do
-    before { get "/courses/#{course.id}/enrollments/student_selection", format: :js }
+    before { xhr :get, "/courses/#{course.id}/enrollments/student_selection" }
 
     it('is successful') { expect(response.code).to eq '200' }
     it('renders :student_selection template') { template? :student_selection }

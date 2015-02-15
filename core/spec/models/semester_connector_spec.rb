@@ -17,7 +17,7 @@ describe Gaku::SemesterConnector do
                                                  .with_message(/Semester already added/)
     end
 
-    it { should ensure_inclusion_of(:semesterable_type).in_array(%w(Gaku::ClassGroup Gaku::Course)) }
+    it { should validate_inclusion_of(:semesterable_type).in_array(%w(Gaku::ClassGroup Gaku::Course)) }
   end
 
 end

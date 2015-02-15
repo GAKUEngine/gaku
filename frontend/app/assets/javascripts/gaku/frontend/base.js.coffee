@@ -3,7 +3,7 @@ window.showNotice = (notice)->
     $(@).html('').show()
 
 $.fn.enableValidations = ->
-  $(this).enableRails4ClientSideValidations()
+  $(this).enableClientSideValidations()
 
 $.fn.withAnimation = ->
   $(this).animate({height:"toggle", opacity:"toggle"})

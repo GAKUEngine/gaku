@@ -1,1 +1,3 @@
-eval(File.read(File.dirname(__FILE__) + '/all_dependencies.rb'))
+eval(File.read(File.dirname(__FILE__) + '/common_gaku_dependencies.rb'))
+
+gemspec
