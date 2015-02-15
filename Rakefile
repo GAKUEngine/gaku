@@ -53,9 +53,7 @@ namespace :gem do
     puts cmd
     system cmd
   end
-end
 
-namespace :gem do
   desc 'Install all gems'
   task :install do
     version = File.read(File.expand_path('../VERSION', __FILE__)).strip
@@ -71,9 +69,7 @@ namespace :gem do
     puts cmd
     system cmd
   end
-end
 
-namespace :gem do
   desc 'Release all gems to gemcutter. Package gaku components, then push gaku'
   task :release do
     version = File.read(File.expand_path('../VERSION', __FILE__)).strip
