@@ -37,7 +37,6 @@ module Gaku
       %w( javascripts stylesheets images ).each do |path|
         empty_directory "app/assets/#{path}/gaku/frontend" if defined? Gaku::Frontend || Rails.env.test?
         empty_directory "app/assets/#{path}/gaku/admin" if defined? Gaku::Admin || Rails.env.test?
-        empty_directory "app/assets/#{path}/gaku/archive" if defined? Gaku::Archive || Rails.env.test?
       end
 
       if defined? Gaku::Frontend || Rails.env.test?
@@ -48,11 +47,6 @@ module Gaku
       if defined? Gaku::Admin || Rails.env.test?
         template 'app/assets/javascripts/gaku/admin/all.js'
         template 'app/assets/stylesheets/gaku/admin/all.css'
-      end
-
-      if defined? Gaku::Archive || Rails.env.test?
-        template 'app/assets/javascripts/gaku/archive/all.js'
-        template 'app/assets/stylesheets/gaku/archive/all.css'
       end
     end
 
@@ -130,7 +124,7 @@ Gaku::Core::Engine.load_seed if defined?(Gaku::Core)
       if File.readlines(File.join('config', 'routes.rb')).grep(/mount Gaku::Core::Engine/).any?
         say_status :skipping, 'route Gaku::Core::Engine already present.'
       else
-        insert_into_file File.join('config', 'routes.rb'), after: "Application.routes.draw do\n" do
+        insert_into_file File.join('config', 'routes.rb'), after: "Rails.application.routes.draw do\n" do
           %Q( mount Gaku::Core::Engine, at: '/' )
         end
 
