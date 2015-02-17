@@ -11,6 +11,7 @@ require 'cancan'
 require 'kaminari'
 require 'globalize'
 require 'draper'
+require 'carmen'
 
 module Gaku
 
