@@ -91,10 +91,11 @@ def create_admin_user
     say "\nWARNING: There is already a user with the username: #{username}, so no account changes were made.  If you wish to create an additional admin user, please run rake gaku:generate_admin again with a different username.\n\n"
   else
     say "Creating user..."
-    creator = Gaku::UserCreator.new(attributes).save
+    creator = Gaku::UserCreator.new(attributes)
+    creator.save
     admin = creator.get_user
     # create an admin role and and assign the admin user to that role
-    role = Gaku::Role.find_or_create_by_name 'Admin'
+    role = Gaku::Role.where(name: 'Admin').first_or_initialize
     admin.roles << role
     if admin.save
       say "User Created"
