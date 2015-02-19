@@ -46,17 +46,17 @@ module Gaku
 
     def self.state
       if active
-        Gaku::State.find(active.address['state'])
+        State.find(active.address['state'])
       else
-        Gaku::State.first
+        State.first
       end
     end
 
     def self.country
       if active
-        Gsku::Country.find(active.address['country'])
+        Country.find(active.address['country'])
       else
-        Gaku::Country.first
+        Country.first
       end
     end
 
