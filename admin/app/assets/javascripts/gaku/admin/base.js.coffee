@@ -26,12 +26,23 @@ $.fn.datepicker_i18n = ->
 
 $.fn.datepicker.defaults.format = "yyyy-mm-dd"
 
+window.load_preset_states = (preset_id)->
+  countryCode = $("#country_dropdown option:selected").val()
+  if countryCode
+    $.ajax
+      type: 'get'
+      url: '/admin/states_list'
+      dataType: 'script'
+      data:
+        country_id: countryCode
+        preset_id: preset_id
+
 window.load_states = ->
   countryCode = $("#country_dropdown option:selected").val()
   if countryCode
     $.ajax
       type: 'get'
-      url: '/states'
+      url: '/admin/states_list'
       dataType: 'script'
       data:
         country_id: countryCode

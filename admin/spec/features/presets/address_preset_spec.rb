@@ -17,20 +17,20 @@ describe 'Admin Presets Students' do
   end
 
   it 'saves', js: true do
-    select country.name, from: 'preset_address_country'
-    fill_in 'preset_address_state', with: state.name
+    select country.name, from: 'country_dropdown'
+    select state.name, from: 'preset_address_state'
     fill_in 'preset_address_city', with: 'Varna'
     click submit
 
     flash_updated?
     click '#admin-preset-address-tab-link'
-    expect(find_field('preset_address_country').value).to eq country.name
-    expect(find_field('preset_address_state').value).to eq state.name
+    expect(find_field('country_dropdown').value).to eq "#{country.id}"
+    expect(find_field('preset_address_state').value).to eq "#{state.id}"
     expect(find_field('preset_address_city').value).to eq 'Varna'
 
     preset.reload
-    expect(preset['address']['country']). to eq country.name
-    expect(preset['address']['state']). to eq state.name
+    expect(preset['address']['country']). to eq "#{country.id}"
+    expect(preset['address']['state']). to eq "#{state.id}"
     expect(preset['address']['city']). to eq 'Varna'
   end
 

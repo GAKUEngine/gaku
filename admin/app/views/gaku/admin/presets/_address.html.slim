@@ -4,12 +4,14 @@
       .col-md-4
         = f.fields_for :address do |a|
           = a.label t(:'preset.address.country')
-          = a.select :country, @countries, {selected: @preset['address']['country'], prompt: t(:'address.choose_country')}, { class: 'form-control' }
+          = a.select :country, options_from_collection_for_select(@countries, :id, :name, @country.try(:id)) , { prompt: t(:'address.choose_country') }, { id: "country_dropdown", class: 'form-control', label: t(:'address.country') }
 
       .col-md-4
         = f.fields_for :address do |a|
           = a.label t(:'preset.address.state')
-          = a.text_field :state, value: @preset['address']['state'], class: 'form-control'
+          #state-dropdown
+            = a.select :state, options_from_collection_for_select(state_load(@preset['address']['country']), :id, :name, @state.try(:id)), { prompt: t(:'address.state.choose') }, { class: 'form-control', disabled: disabled?(a.object), label: t(:'address.state') }
+
 
       .col-md-4
         = f.fields_for :address do |a|

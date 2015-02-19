@@ -13,6 +13,8 @@ module Gaku
     def edit
       @per_page_values = [10, 25, 50, 100]
       @countries = Country.all
+      @country = @preset['address']['country'] ? Country.find(@preset['address']['country']) : Country.first
+      @state = @preset['address']['state'] ? State.find(@preset['address']['state']) : nil
     end
 
     def update

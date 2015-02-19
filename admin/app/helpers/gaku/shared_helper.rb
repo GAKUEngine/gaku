@@ -9,12 +9,22 @@ module Gaku
       { t(:'gender.female') => false, t(:'gender.male') => true }
     end
 
-    def state_load(object)
-      object.country.nil? ? Gaku::State.none : object.country.states
+    def state_load(country_preset)
+      country = Gaku::Country.find_by(iso: country_preset)
+      if country
+        country.states
+      else
+        Gaku::State.none
+      end
     end
 
-    def disabled?(object)
-      object.new_record? || object.country.states.blank?
+    def disabled?(country_preset)
+      country = Gaku::Country.find_by(iso: country_preset)
+      if country
+        country.states_required
+      else
+        true
+      end
     end
 
     def render_flash

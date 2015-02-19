@@ -44,5 +44,22 @@ module Gaku
       active.address[key.to_s] unless active.nil?
     end
 
+    def self.state
+      if active
+        Gaku::State.find(active.address['state'])
+      else
+        Gaku::State.first
+      end
+    end
+
+    def self.country
+      if active
+        Gsku::Country.find(active.address['country'])
+      else
+        Gaku::Country.first
+      end
+    end
+
+
   end
 end

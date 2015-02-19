@@ -47,7 +47,7 @@ window.load_states = ->
   if countryCode
     $.ajax
       type: 'get'
-      url: '/states'
+      url: '/states_list'
       dataType: 'script'
       data:
         country_id: countryCode

@@ -17,10 +17,10 @@ Gaku::Core::Engine.routes.draw  do
     end
   end
 
-  resources :states, only: :index
-
   namespace :admin do
     root to: 'home#index'
+
+    resources :states_list, only: :index
 
     get 'school_details',          to: 'schools#show_master'
     get 'school_details/edit',     to: 'schools#edit_master'
