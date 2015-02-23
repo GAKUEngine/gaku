@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'globalize',                      '~> 5.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
   s.add_dependency 'ransack',                        '~> 1.6.0'
-  s.add_dependency 'kaminari',                       '~> 0.15.1'
+  s.add_dependency 'kaminari',                       '~> 0.16'
   s.add_dependency 'draper',                         '~> 1.3.0'
   s.add_dependency 'deface',                         '~> 1.0.0'
 
