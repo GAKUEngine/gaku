@@ -33,7 +33,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise-i18n'
   s.add_dependency 'cancan',                         '~> 1.6.10'
 
-  s.add_dependency 'highline',                       '1.6.11'
   s.add_dependency 'ffaker',                         '~> 1.32'
   s.add_dependency 'rake-progressbar'
 end
