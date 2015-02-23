@@ -1,5 +1,5 @@
 group :test do
-  gem 'capybara',                 '~> 2.1'
+  gem 'capybara',                 '~> 2.4'
   gem 'selenium-webdriver',       '2.43'
   gem 'poltergeist'
   gem 'launchy'
