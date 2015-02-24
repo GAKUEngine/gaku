@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'gaku_core', s.version
   s.add_dependency 'gaku_testing', s.version
 
-  s.add_dependency 'coffee-rails',                   '~> 4.0.1'
-  s.add_dependency 'sass-rails',                     '4.0.2'
+  s.add_dependency 'coffee-rails',                   '~> 4.1.0'
+  s.add_dependency 'sass-rails',                     '~> 5.0.0'
   s.add_dependency 'sass',                           '~> 3.2'
   s.add_dependency 'sprockets',                      '2.11.0'
   s.add_dependency 'slim',                           '~> 3.0'

@@ -36,6 +36,7 @@ public/assets
 *~
 .#*
 *.swn
+**/*.gem
 
 .DS_Store
 .idea
@@ -81,3 +82,7 @@ realtime_grading/node_modules/
 
 # bundle folders
 **/.bundle
+
+**/.ruby-version
+**/.ruby-gemset
+

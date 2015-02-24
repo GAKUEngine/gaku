@@ -13,15 +13,15 @@ Gem::Specification.new do |s|
     'and original tools to augment the learning experience.' +
     'It is the engine to drive a more dynamic education.'
   s.post_install_message =  \
-    '╔═════════════════════════╼' +
-    "║⚙学 GAKU Engine [学エンジン] V.#{s.version.to_s}" +
-    '╟─────────────────────────╼' +
-    '║©2014 幻信創造株式会社 [Phantom Creation Inc.]' +
-    '║http://www.gakuengine.com' +
-    '╟─────────────────────────╼' +
-    '║Thank you for installing GAKU Engine!' +
-    '║GAKU Engine is Open Source [GPL/AGPL] Software.' +
-    '╚═════════════════════════╼' 
+    "╔═════════════════════════╼\n" +
+    "║⚙学 GAKU Engine [学エンジン] V.#{s.version.to_s}\n" +
+    "╟─────────────────────────╼\n" +
+    "║©2014 幻信創造株式会社 [Phantom Creation Inc.]\n" +
+    "║http://www.gakuengine.com\n" +
+    "╟─────────────────────────╼\n" +
+    "║Thank you for installing GAKU Engine!\n" +
+    "║GAKU Engine is Open Source [GPL/AGPL] Software.\n" +
+    "╚═════════════════════════╼\n" 
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")

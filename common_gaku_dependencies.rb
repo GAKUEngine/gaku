@@ -1,5 +1,3 @@
-source 'http://rubygems.org'
-
 group :test do
   gem 'capybara',                 '~> 2.1'
   gem 'selenium-webdriver',       '2.43'
