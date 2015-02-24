@@ -16,7 +16,7 @@ end
 
 group :test do
   gem 'rspec-rails',              '~> 2.14.1'
-  gem 'factory_girl_rails',       '~> 4.4.0'
+  gem 'factory_girl_rails',       '~> 4.5.0'
   gem 'database_cleaner',         '~> 1.3.0'
   gem 'shoulda-matchers',         '~> 2.8.0'
   gem 'simplecov'

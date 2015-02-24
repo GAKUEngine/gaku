@@ -11,7 +11,7 @@ FactoryGirl.define do
     end
 
     factory :class_group_with_active_semester do
-      ignore do
+      transient do
         semester { create(:active_semester) }
       end
 
