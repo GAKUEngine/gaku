@@ -47,7 +47,7 @@ describe 'Admin School Campuses Address' do
     it 'changes country without state' do
       select "#{country_without_state}", from: 'country_dropdown'
       within('#state-dropdown') do
-        expect(page).to have_css('select#address_state_id[disabled]')
+        expect(page).to have_css('select#address_state_id', visible: false)
         has_no_content? state.name
       end
     end
@@ -98,7 +98,7 @@ describe 'Admin School Campuses Address' do
       it 'changes country without state' do
         select "#{country_without_state}", from: 'country_dropdown'
         within('#state-dropdown') do
-          expect(page).to have_css('select#address_state_id[disabled]')
+          expect(page).to have_css('select#address_state_id', visible: false)
           has_no_content? state.name
         end
       end
