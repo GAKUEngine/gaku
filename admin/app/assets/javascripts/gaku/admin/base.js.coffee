@@ -31,7 +31,7 @@ window.load_preset_states = (preset_id)->
   if countryCode
     $.ajax
       type: 'get'
-      url: '/admin/states_list'
+      url: '/admin/presets/states_list'
       dataType: 'script'
       data:
         country_id: countryCode

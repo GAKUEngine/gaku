@@ -71,7 +71,9 @@ Gaku::Core::Engine.routes.draw  do
       resources :semesters, controller: 'school_years/semesters', except: %i( show )
     end
 
-    resources :presets
+    resources :presets do
+      get :states_list, on: :collection
+    end
 
   end
 end

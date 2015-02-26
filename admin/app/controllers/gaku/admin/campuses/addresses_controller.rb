@@ -13,6 +13,8 @@ module Gaku
     end
 
     def new
+      @default_country = Preset.country
+      @default_state = Preset.state
       @address = Address.new
       respond_with @address
     end
