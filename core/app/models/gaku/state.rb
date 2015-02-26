@@ -1,5 +1,8 @@
 module Gaku
   class State < ActiveRecord::Base
+
+    default_scope { order(:abbr) }
+
     has_many :addresses
 
     belongs_to :country, foreign_key: :country_iso, primary_key: :iso

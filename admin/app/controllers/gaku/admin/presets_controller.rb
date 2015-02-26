@@ -31,7 +31,7 @@ module Gaku
           @state = @preset['address']['state'] ? State.find(@preset['address']['state']) : nil
         end
 
-        @states = State.where(country_iso: @country.iso).order('name asc')
+        @states = State.where(country_iso: @country.iso)
       else
         @states = State.all
       end
