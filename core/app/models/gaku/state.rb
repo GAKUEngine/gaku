@@ -33,7 +33,12 @@ module Gaku
     end
 
     def i18n_name
-      Carmen::Country.coded(country_iso).subregions.coded(abbr).name
+      carmen_country = Carmen::Country.coded(country_iso)
+      if carmen_country && carmen_country.subregions? && carmen_country.subregions.coded(abbr)
+        carmen_country.subregions.coded(abbr).name
+      else
+        name
+      end
     end
 
   end
