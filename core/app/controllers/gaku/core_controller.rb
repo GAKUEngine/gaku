@@ -34,12 +34,15 @@ module Gaku
     def set_locale
       if current_user && params[:locale]
         I18n.locale = params[:locale]
+        Carmen.i18n_backend.locale = I18n.locale
         current_user.settings[:locale] = params[:locale]
         notice = "Language is set to #{t('languages.' + current_user.locale)}"
         flash[:notice] = notice if current_user.save
       elsif current_user
         I18n.locale = current_user.settings[:locale]
+        Carmen.i18n_backend.locale = I18n.locale
       else
+        Carmen.i18n_backend.locale = I18n.default_locale
         I18n.default_locale
       end
     end

@@ -29,7 +29,12 @@ module Gaku
     end
 
     def to_s
-      name
+      i18n_name
     end
+
+    def i18n_name
+      Carmen::Country.coded(country_iso).subregions.coded(abbr).name
+    end
+
   end
 end

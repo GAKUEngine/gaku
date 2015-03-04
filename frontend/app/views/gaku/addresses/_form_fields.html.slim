@@ -4,10 +4,10 @@
 
 .row
   .col-md-3
-    = f.select :country_id, options_from_collection_for_select(@countries, :id, :name, (f.object.country_id || @default_country.try(:id))) , { prompt: t(:'address.choose_country') }, { id: "country_dropdown", label: t(:'address.country') }
+    = f.select :country_id, options_from_collection_for_select(@countries, :id, :i18n_name, (f.object.country_id || @default_country.try(:id))) , { prompt: t(:'address.choose_country') }, { id: "country_dropdown", label: t(:'address.country') }
   .col-md-3
     #state-dropdown
-      = f.select :state_id, options_from_collection_for_select(state_load(f.object), :id, :name, (f.object.state_id || @default_state.try(:id))), { prompt: t(:'address.state.choose') }, { class: 'form-control', disabled: disabled?(f.object), label: t(:'address.state') }
+      = f.select :state_id, options_from_collection_for_select(state_load(f.object), :id, :i18n_name, (f.object.state_id || @default_state.try(:id))), { prompt: t(:'address.state.choose') }, { class: 'form-control', disabled: disabled?(f.object), label: t(:'address.state') }
 
   .col-md-3
     = f.text_field :zipcode, label: t(:'address.zipcode')
