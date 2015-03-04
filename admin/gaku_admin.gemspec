@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'jquery-rails',                   '~> 3.1'
   s.add_dependency 'jquery-ui-rails',                '~> 4.2'
-  s.add_dependency 'jquery-minicolors-rails',        '2.1.1'
+  s.add_dependency 'jquery-minicolors-rails',        '2.1.4'
   s.add_dependency 'bootstrap-sass',                 '3.1.1.0'
   s.add_dependency 'bootstrap-datepicker-rails',     '~> 1.3.0.1'
   s.add_dependency 'nprogress-rails'
