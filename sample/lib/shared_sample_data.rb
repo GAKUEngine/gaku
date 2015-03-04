@@ -1,5 +1,5 @@
 @country = Gaku::Country.where(
-                                name: '日本',
+                                name: 'Japan',
                                 iso3: 'JPN',
                                 iso: 'JP',
                                 iso_name: 'JAPAN',
