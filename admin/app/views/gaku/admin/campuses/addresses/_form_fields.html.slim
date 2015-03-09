@@ -3,22 +3,22 @@
     = f.text_field :title, label: t(:'address.title')
 
 .row
-  .col-md-3
+  .col-md-4
     = f.select :country_id, options_from_collection_for_select(@countries, :id, :i18n_name, (f.object.country_id || @default_country.try(:id))) , { prompt: t(:'address.choose_country') }, { id: "country_dropdown", label: t(:'address.country') }
-  .col-md-3
+  .col-md-4
     #state-dropdown
-      = f.select :state_id, options_from_collection_for_select(state_load(f.object), :id, :i18n_name, (f.object.state_id || @default_state.try(:id))), { prompt: t(:'address.state.choose') }, { class: 'form-control', disabled: disabled?(f.object), label: t(:'address.state') }
-  .col-md-3
+      = f.select :state_id, options_from_collection_for_select(state_load(f.object), :id, :i18n_name, (f.object.state_id || @default_state.try(:id))), { prompt: t(:'address.state.choose') }, { class: 'form-control', disabled: disabled?(f.object), label: t(:'address.state.singular') }
+  .col-md-4
+    = f.object.state_id || @default_state.try(:id)
+    / = f.object.to_json
     = f.text_field :zipcode, label: t(:'address.zipcode')
-  .col-md-3
-    button.col-md-12.btn.btn-primary = t(:'address.search')
 
 .row
-  .col-md-3
+  .col-md-4
     = f.text_field :city, value: f.object.city ||  Gaku::Preset.address('city'), label: t(:'address.city')
-  .col-md-3
+  .col-md-4
     = f.text_field :address1, label: t(:'address.address1')
-  .col-md-3
+  .col-md-4
     = f.text_field :address2, label: t(:'address.address2')
 
 javascript:
