@@ -7,7 +7,7 @@ describe 'Admin School Campuses Address' do
 
   let!(:country) { create(:country, name: 'USA', iso: 'US') }
   let(:country_without_state) { create(:country, name: 'Japan', iso: 'JP') }
-  let!(:state) { create(:state, name: 'Florida', country: country) }
+  let!(:state) { create(:state, name: 'Florida', abbr: 'FL', country: country) }
 
   before(:all) { set_resource 'admin-school-campus-address' }
   before { as :admin }
