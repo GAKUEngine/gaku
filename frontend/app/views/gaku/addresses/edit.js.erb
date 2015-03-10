@@ -1,4 +1,4 @@
 $('#modal-dialogs').html('<%= j render("modal", {address: @address}) %>');
 $('#edit-address-modal').modal('show');
 $('.remote-form').enableValidations();
-load_states();
+load_edit_states(<%= @address.state_id %>);

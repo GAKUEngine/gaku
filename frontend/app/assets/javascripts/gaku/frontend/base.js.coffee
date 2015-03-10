@@ -52,6 +52,17 @@ window.load_states = ->
       data:
         country_id: countryCode
 
+window.load_edit_states = (state_id) ->
+  countryCode = $("#country_dropdown option:selected").val()
+  if countryCode
+    $.ajax
+      type: 'get'
+      url: '/states_list'
+      dataType: 'script'
+      data:
+        country_id: countryCode
+        state_id: state_id
+
 class App
   init: ->
 
