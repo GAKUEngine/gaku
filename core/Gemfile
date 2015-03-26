@@ -1,3 +1,5 @@
 eval(File.read(File.dirname(__FILE__) + '/core_dependencies.rb'))
 
+gem 'carmen', github: 'Kagetsuki/carmen', branch: 'add_jp_prefectures_in_ja'
+
 gemspec

@@ -81,8 +81,9 @@ module Gaku
 
     def set_countries_and_states
       @countries = Country.all
-      @default_country = Country.where(name: Preset.address('country')).first
-      @default_state = State.where(name_ascii: Preset.address('state')).first
+
+      @default_country = Preset.country
+      @default_state = Preset.state
       @states = @default_country.states if @default_country
     end
 

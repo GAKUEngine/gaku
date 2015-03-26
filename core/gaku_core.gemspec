@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg',                             '~> 0.18'
   s.add_dependency 'redis',                          '~> 3.2'
 
+  s.add_dependency 'carmen',                         '~> 1.0'
   s.add_dependency 'globalize',                      '~> 5.0.0'
   s.add_dependency 'paperclip',                      '~> 3.5'
   s.add_dependency 'ransack',                        '~> 1.6.0'

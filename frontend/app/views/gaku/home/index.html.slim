@@ -1,10 +1,8 @@
-/- content_for :title, translate("comname")
 - if user_signed_in?
   = render partial: 'user_info'
   = render partial: 'user_menu'
 - else
-  | 下記のリンクからログインを行ってください。
-  #{link_to t("devise.sign_in"), new_user_session_path}
+  = link_to t(:"devise.sign_in"), new_user_session_path
 
 .panel.panel-default
  .panel-body

@@ -56,6 +56,8 @@ Gaku::Core::Engine.routes.draw do
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
+  resources :states_list, only: :index
+
   resources :extracurricular_activities, concerns: %i( pagination enrollmentable )
 
   resources :class_groups, concerns: %i( notes student_selection pagination semesterable) do

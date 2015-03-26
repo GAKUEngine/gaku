@@ -17,10 +17,10 @@ Gaku::Core::Engine.routes.draw  do
     end
   end
 
-  resources :states, only: :index
-
   namespace :admin do
     root to: 'home#index'
+
+    resources :states_list, only: :index
 
     get 'school_details',          to: 'schools#show_master'
     get 'school_details/edit',     to: 'schools#edit_master'
@@ -71,7 +71,9 @@ Gaku::Core::Engine.routes.draw  do
       resources :semesters, controller: 'school_years/semesters', except: %i( show )
     end
 
-    resources :presets
+    resources :presets do
+      get :states_list, on: :collection
+    end
 
   end
 end

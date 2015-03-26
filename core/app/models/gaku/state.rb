@@ -1,5 +1,8 @@
 module Gaku
   class State < ActiveRecord::Base
+
+    default_scope { order(:abbr) }
+
     has_many :addresses
 
     belongs_to :country, foreign_key: :country_iso, primary_key: :iso
@@ -26,7 +29,17 @@ module Gaku
     end
 
     def to_s
-      name
+      i18n_name
     end
+
+    def i18n_name
+      carmen_country = Carmen::Country.coded(country_iso)
+      if carmen_country && carmen_country.subregions? && carmen_country.subregions.coded(abbr)
+        carmen_country.subregions.coded(abbr).name
+      else
+        name
+      end
+    end
+
   end
 end

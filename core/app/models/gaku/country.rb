@@ -14,7 +14,17 @@ module Gaku
     end
 
     def to_s
-      name
+      i18n_name
     end
+
+    def i18n_name
+      carmen_country = Carmen::Country.coded(iso)
+      if carmen_country
+        carmen_country.name
+      else
+        name
+      end
+    end
+
   end
 end
