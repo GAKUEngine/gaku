@@ -43,41 +43,23 @@ Requirements
 Installation
 ------------
 
-### Install postgresql (newer Ubuntu/Debian)
+### Install postgresql
 
-    $ cat /etc/*-release   #gets your DISTRIBUTION
-    $ nano /etc/apt/sources.list.d/pgdg.list
- 
-Add the line to the pgdg.list file(change DISTRIBUTION):
-
-    $ deb http://apt.postgresql.org/pub/repos/apt/ DISTRIBUTION-pgdg main
-    
-Install postgre: 
-
-    $ wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -  #adds the repo key
     $ sudo apt-get update
     $ sudo apt-get install postgresql postgresql-contrib libpq-dev
 
 
 ### Install GAKU
 
-You have 2 choices:
-
-### Simple
-
-Get [gaku\_dev\_app](http://github.com/GAKUEngine/gaku_dev_app) and follow the instructions.
-
-### Custom
-
 Create a new Rails application:
 
-    $ gem install rails -v 4.0.3
+    $ gem install rails -v 4.2.0
     $ rails new my_app
 
 
 Then add GAKU to your Gemfile:
 ```ruby
-gem 'gaku', '~> 0.1.1'
+gem 'gaku', '~> 0.2.4'
 ```
 
 Or use the master branch:
