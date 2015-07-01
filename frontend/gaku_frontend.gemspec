@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'coffee-rails',                   '~> 4.1.0'
   s.add_dependency 'sass-rails',                     '~> 5.0.0'
-  s.add_dependency 'sprockets',                      '2.11.0'
+  s.add_dependency 'sprockets',                      '3.2.0'
   s.add_dependency 'sass',                           '~> 3.2'
   s.add_dependency 'slim',                           '~> 3.0'
 
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'nested_form'
 
-  s.add_dependency 'jquery-rails',                   '~> 3.1'
+  s.add_dependency 'jquery-rails',                   '~> 4.0'
   s.add_dependency 'jquery-ui-rails',                '~> 4.2'
   s.add_dependency 'jquery-minicolors-rails',        '2.1.4'
   s.add_dependency 'bootstrap-sass',                 '3.1.1.0'
