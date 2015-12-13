@@ -9,7 +9,7 @@ services:
   - redis-server
 
 addons:
-  postgresql: 9.3
+  postgresql: 9.4
 
 before_script:
   - sh -e /etc/init.d/xvfb start
