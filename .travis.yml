@@ -14,10 +14,8 @@ addons:
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
-  - sudo psql --version
+  - psql --version
   - phantomjs --version
-  - sudo apt-get install postgresql-contrib-9.3 -qq
-  - sudo /etc/init.d/postgresql restart
   - psql -c 'create database gaku_test;' -U postgres
 
 bundler_args: -j4 --without development production
