@@ -20,6 +20,11 @@ module Gaku
       paths.flatten
     end
 
+    def copy_grading
+      directory 'lib/grading', 'lib/grading'
+      copy_file 'Procfile', 'Procfile'
+    end
+
     def prepare_options
       @env = options[:env]
       @run_migrations = options[:migrate]

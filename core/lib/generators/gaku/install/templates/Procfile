@@ -1,0 +1,3 @@
+#web: bundle exec puma
+websocket: coffee lib/grading/bin/gaku_grading.coffee
+#worker: sidekiq
