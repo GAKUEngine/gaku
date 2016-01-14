@@ -1,0 +1,19 @@
+{
+  "name": "gaku_grading",
+  "version": "0.0.1",
+  "description": "Gaku grading connects to gaku via socket.io",
+  "main": "./bin/gaku_grading",
+
+  "bin": {
+    "gaku_grading": "./bin/gaku_grading"
+  },
+  "repository": "",
+  "author": "Vassil Kalkov",
+  "license": "BSD",
+
+  "dependencies": {
+      "socket.io": "latest"
+    , "redis": "latest"
+    , "coffee-script": "latest"
+  }
+}
