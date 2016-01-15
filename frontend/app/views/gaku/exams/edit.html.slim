@@ -7,7 +7,7 @@
           h4#exam-edit-menu.panel-title
             = link_to t(:'edit'), [:edit, @exam], remote: true
         .panel-body
-          ul.list-unstyled
+          ul#edit-panel.list-unstyled
             li#exams-notes-menu
               = link_to badge_count(@exam.notes_count, t(:'note.plural'),'notes-count'), [@exam, :notes], remote: true
             li#exams-grading-methods-menu
