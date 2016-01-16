@@ -98,6 +98,7 @@ Gaku::Core::Engine.routes.draw do
         get :grading
         put :update_score
         get :completed
+        post :generate, to: 'courses/exams/reports#generate'
       end
     end
   end
@@ -123,6 +124,7 @@ Gaku::Core::Engine.routes.draw do
   resources :guardians, only: [], concerns: %i( addresses contacts set_picture )
 
   resources :students, concerns: %i( addresses contacts notes pagination set_picture ) do
+
     get :search, on: :collection
     get :clear_search, on: :collection
     get :advanced_search, on: :collection
@@ -132,6 +134,8 @@ Gaku::Core::Engine.routes.draw do
     resources :badges, controller: 'students/badges', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
     resources :external_school_records,  controller: 'students/external_school_records',  except: :show
+    resources :reports, only: :index, controller: 'students/reports'
+
 
     resources :guardians, except: %i( show )
 
@@ -140,16 +144,14 @@ Gaku::Core::Engine.routes.draw do
       enrollment.resources :course_enrollments, controller: 'students/course_enrollments'
       enrollment.resources :extracurricular_activity_enrollments, controller: 'students/extracurricular_activity_enrollments'
     end
-
-    resources :reports, only: :index, controller: 'students/reports'
-
   end
 
-  resources :exam_sessions, controller: 'exams/exam_sessions', except: :index
+  resources :exam_sessions, concerns: %i( enrollmentable ), controller: 'exams/exam_sessions', except: :index
 
   resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member
 
+    resources :reports, controller: 'exams/reports'
     resources :exam_scores
     resources :exam_portions, controller: 'exams/exam_portions', concerns: %i( sort ) do
       resources :attachments, concerns: %i( download soft_delete )
