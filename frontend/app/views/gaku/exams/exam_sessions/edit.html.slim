@@ -1,16 +1,15 @@
 .row
-  .col-md-12
-    = normal_form_for @exam_session, label: 'nil' do |f|
-      = render 'form_fields', f: f, exam_session: @exam_session
-      = buttons_for @exam_session
+  .col-md-2
+    .panel-group#accordion
 
-hr
+      .panel.panel-default
+        .panel-heading
+          h4#exam-session-edit-menu.panel-title
+            = link_to t(:'edit'), [:edit, @exam_session], remote: true
+        .panel-body
+          ul#edit-panel.list-unstyled
+            li#exams-notes-menu
+              = link_to badge_count(@exam_session.students.count, t(:'student.plural'), 'students-count'), [@exam_session, :enrollments], remote: true
 
-= render 'tabs'
-
-= footer do
-  .col-md-9
-    = link_to_index exams_path
-  .col-md-3
-    = link_to_modal_delete
-  = render 'gaku/shared/delete_modal_without_soft', target: @exam_session
+  .col-md-10#ajax-load
+    = render 'edit_form', exam: @exam
