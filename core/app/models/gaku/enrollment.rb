@@ -14,7 +14,7 @@ module Gaku
 
     validates :enrollmentable_type,
               inclusion: {
-                in: %w( Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity ),
+                in: %w( Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity Gaku::ExamSession ),
                 message: '%{value} is not a valid'
               }
 

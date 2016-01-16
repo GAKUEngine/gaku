@@ -15,12 +15,10 @@ module Gaku
       assoc.has_many :courses, source_type: 'Gaku::Course'
       assoc.has_many :class_groups, source_type: 'Gaku::ClassGroup'
       assoc.has_many :extracurricular_activities, source_type: 'Gaku::ExtracurricularActivity'
+      assoc.has_many :exam_sessions, source_type: 'Gaku::ExamSession'
     end
 
     has_many :semesters, through: :class_groups
-
-    has_many :student_exam_sessions
-    has_many :exam_sessions, through: :student_exam_sessions
 
     has_many :student_specialties
     has_many :specialties, through: :student_specialties
