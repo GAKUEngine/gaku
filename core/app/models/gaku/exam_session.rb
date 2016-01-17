@@ -1,9 +1,9 @@
 module Gaku
   class ExamSession < ActiveRecord::Base
-    belongs_to :exam
 
-    has_many :student_exam_sessions
-    has_many :students, through: :student_exam_sessions
+    include Enrollmentable
+
+    belongs_to :exam
 
     validates :exam_id, presence: true
 
