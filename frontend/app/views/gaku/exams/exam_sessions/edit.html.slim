@@ -8,8 +8,11 @@
             = link_to t(:'edit'), [:edit, @exam_session], remote: true
         .panel-body
           ul#edit-panel.list-unstyled
-            li#exams-notes-menu
+            li#exam-sessions-enrollments-menu
               = link_to badge_count(@exam_session.students.count, t(:'student.plural'), 'students-count'), [@exam_session, :enrollments], remote: true
-
+            li#exam-sessions-grading-methods-menu
+                = link_to badge_count(@exam_session.grading_method_connectors.count, t(:'grading_method.plural'), 'grading-methods-count'), [@exam_session, :grading_method_connectors], remote: true
+            li#exam-sessions-grading
+              = link_to t('grade.grading'), grading_exam_session_path(@exam_session)
   .col-md-10#ajax-load
     = render 'edit_form', exam: @exam

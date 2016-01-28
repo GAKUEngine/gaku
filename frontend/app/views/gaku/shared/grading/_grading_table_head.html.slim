@@ -1,0 +1,12 @@
+tr
+  th.btn-primary colspan='3'  =t(:'student.singular')
+  th.btn-success colspan="#{@exam.exam_portions_count +  @grading_methods.count}"= @exam.name
+tr
+  th.btn-info style="width:60px" Class
+  th.btn-info style="width:60px" Seat_Number
+  th.btn-info style="width:150px" Name
+  = render partial: 'gaku/shared/grading/exam_portion_head', collection: @exam.exam_portions, as: :exam_portion
+  / th.btn-danger style="width:60px" Score
+  - @gradable_scope.grading_methods.each do |grading_method|
+    th.btn-danger style="width:60px"
+      = grading_method
