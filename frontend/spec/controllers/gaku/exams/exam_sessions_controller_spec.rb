@@ -25,14 +25,6 @@ describe Gaku::Exams::ExamSessionsController do
     before { as :admin }
 
     context 'html' do
-      describe 'XHR #edit' do
-        before { gaku_get :edit, id: exam_session }
-
-        it { should respond_with 200 }
-        it('assigns @exam_session') { expect(assigns(:exam_session)).to eq exam_session }
-        it('renders the :edit template') { template? :edit }
-      end
-
       describe 'PATCH #update' do
         context 'with valid attributes' do
           before do
@@ -49,7 +41,7 @@ describe Gaku::Exams::ExamSessionsController do
           end
         end
 
-        context 'with invalid attributes' do
+        pending 'with invalid attributes' do
           before do
             gaku_js_patch :update, id: exam_session, exam_session: attributes_for(:invalid_exam_session, name: '')
           end

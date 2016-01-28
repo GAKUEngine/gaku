@@ -146,7 +146,12 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
-  resources :exam_sessions, concerns: %i( enrollmentable ), controller: 'exams/exam_sessions', except: :index
+  resources :exam_sessions, concerns: %i( enrollmentable gradable ), controller: 'exams/exam_sessions', except: :index do
+    get :grading, on: :member
+    resources :exam, only: %i() do
+      resources :exam_portion_scores, only: :update
+    end
+  end
 
   resources :exams, concerns: %i( notes pagination gradable ) do
     put :create_exam_portion, on: :member
