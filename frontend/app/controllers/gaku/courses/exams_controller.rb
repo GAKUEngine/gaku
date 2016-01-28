@@ -14,23 +14,12 @@ module Gaku
       @exam = Exam.find(params[:id])
       @students = @course.students
       @grading_methods = @course.grading_methods
+      @gradable_scope = @course
 
-      @grading_calculations = Grading::Collection::Calculations.new(@grading_methods, @students, @exam).calculate
+      @grading_calculations = Grading::Collection::Calculations.new(@grading_methods, @students, @exam, @gradable_scope).calculate
 
-      respond_with @exam
+      render 'gaku/shared/grading/grading'
     end
-
-    private
-
-    # def init_portion_scores
-    #   @students.each do |student|
-    #     @exam.exam_portions.each do |portion|
-    #       unless portion.exam_portion_scores.pluck(:student_id).include?(student.id)
-    #         ExamPortionScore.create!(exam_portion: portion, student: student)
-    #       end
-    #     end
-    #   end
-    # end
 
   end
 end

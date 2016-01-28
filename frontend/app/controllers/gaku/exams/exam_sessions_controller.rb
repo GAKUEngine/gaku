@@ -3,7 +3,7 @@ module Gaku
 
     respond_to :js, except: :index
 
-    before_filter :set_exam_session, only: %i( edit update destroy )
+    before_filter :set_exam_session, only: %i( edit update destroy grading )
     before_filter :load_data, only: %i( new edit )
     before_filter :set_count, only: :create
 
@@ -30,6 +30,16 @@ module Gaku
     def destroy
       @exam_session.destroy!
       respond_with @exam_session, location: [:exams]
+    end
+
+    def grading
+        @gradable_scope = @exam_session
+        @exam = @exam_session.exam
+        @students = @gradable_scope.students
+        @grading_methods = @gradable_scope.grading_methods
+
+        @grading_calculations = Grading::Collection::Calculations.new(@grading_methods, @students, @exam, @gradable_scope).calculate
+        render 'gaku/shared/grading/grading'
     end
 
     private

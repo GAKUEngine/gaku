@@ -12,7 +12,9 @@ ready = ->
 
       socket.on "grading-change", (message) ->
         exam_id   = message.exam_id
-        course_id = message.course_id
+        gradable_id = message.gradable_id
+        gradable_type = message.gradable_type
+
         if message.exam_portion_score
           exam_portion_score = message.exam_portion_score.exam_portion_score
           form = $("#edit_exam_portion_score_#{exam_portion_score.id}")
@@ -20,14 +22,12 @@ ready = ->
           input.val("#{exam_portion_score.score}")
         for grading_method_id, calculation of message.calculations
           if calculation.student_results
-            console.log('vika me collection')
             for result in calculation.student_results
-              el = $("#course-#{course_id}-exam-#{exam_id}-student-#{result.id}-grading-method-#{grading_method_id}-score")
+              el = $("##{gradable_type}-#{gradable_id}-exam-#{exam_id}-student-#{result.id}-grading-method-#{grading_method_id}-score")
               el.html result.score
 
           else
-            console.log('vika me single')
-            el = $("#course-#{course_id}-exam-#{exam_id}-student-#{calculation.id}-grading-method-#{grading_method_id}-score")
+            el = $("##{gradable_type}-#{gradable_id}-exam-#{exam_id}-student-#{calculation.id}-grading-method-#{grading_method_id}-score")
             el.html calculation.score
 
   @app.courses = new CoursesController

@@ -8,6 +8,10 @@ module Gaku
     include Gaku::StudentChooserHelper
     include Gaku::StudentsHelper
 
+    def gradable_resource(gradable)
+      gradable.class.to_s.demodulize.underscore.dasherize
+    end
+
     def badge_count(count, text, css_class)
       if count != 0
         "#{text}<span class='badge pull-right #{css_class}'>#{count}</span>".html_safe

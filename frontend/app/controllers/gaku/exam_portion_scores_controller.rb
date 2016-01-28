@@ -3,7 +3,7 @@ module Gaku
 
     respond_to :js
 
-    before_action :set_course, only: :update
+    before_action :set_resource, only: :update
     before_action :set_exam, only: :update
 
     def update
@@ -11,13 +11,13 @@ module Gaku
       exam_portion_score.update_attributes(exam_portion_score_params)
 
       student         = exam_portion_score.student
-      grading_methods = @course.grading_methods
+      grading_methods = @gradable_scope.grading_methods
 
-      calculations = Grading::Single::Calculations.new(grading_methods, student, @exam, @course.students).calculate
-
+      calculations = Grading::Single::Calculations.new(grading_methods, student, @exam, @gradable_scope, @gradable_scope.students).calculate
       message = {
                   exam_id: @exam.id,
-                  course_id: @course.id,
+                  gradable_type: gradable_type,
+                  gradable_id: @gradable_scope.id,
                   calculations: calculations,
                   exam_portion_score: exam_portion_score
                 }
@@ -37,13 +37,22 @@ module Gaku
       %i( score )
     end
 
-    def set_course
-      @course = Course.find(params[:course_id])
+    def set_resource
+      @gradable_scope = "gaku/#{request_path_array[1]}".classify.constantize.find(request_path_array[2])
     end
 
     def set_exam
       @exam = Exam.find(params[:exam_id])
     end
+
+    def request_path_array
+      request.path.split('/')
+    end
+
+    def gradable_type
+      @gradable_scope.class.to_s.demodulize.underscore.dasherize
+    end
+
 
   end
 end

@@ -1,4 +1,5 @@
-class Exam::ExamSessions::EnrollmentsSessionsController < EnrollmentsController
+module Gaku
+  class Exams::ExamSessions::EnrollmentsSessionsController < EnrollmentsController
 
-
+  end
 end
