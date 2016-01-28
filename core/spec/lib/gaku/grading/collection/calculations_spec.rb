@@ -5,6 +5,7 @@ describe Gaku::Grading::Collection::Calculations do
   let(:student1) { create(:student) }
   let(:student2) { create(:student) }
   let(:exam) { create(:exam) }
+  let(:course) { create(:course) }
   let(:exam_portion1) { create(:exam_portion, exam: exam) }
   let(:exam_portion2) { create(:exam_portion, exam: exam) }
 
@@ -23,7 +24,7 @@ describe Gaku::Grading::Collection::Calculations do
   describe 'initialize' do
     it 'initializes with exam' do
       exam_portion1; exam_portion2
-      subject = described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], [student1, student2], exam)
+      subject = described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], [student1, student2], exam, course)
       expect(subject.calculate).to eq({
         grading_method1.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json,
         grading_method2.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json,
@@ -34,12 +35,12 @@ describe Gaku::Grading::Collection::Calculations do
   end
 
   it 'calculate grading methods from exam portion scores' do
-    create(:exam_portion_score, score: 80,  student:student1, exam_portion: exam_portion1)
-    create(:exam_portion_score, score: 65,  student:student1, exam_portion: exam_portion2)
-    create(:exam_portion_score, score: 68,  student:student2, exam_portion: exam_portion1)
-    create(:exam_portion_score, score: 100, student:student2, exam_portion: exam_portion2)
+    create(:exam_portion_score, score: 80,  student:student1, exam_portion: exam_portion1, gradable: course)
+    create(:exam_portion_score, score: 65,  student:student1, exam_portion: exam_portion2, gradable: course)
+    create(:exam_portion_score, score: 68,  student:student2, exam_portion: exam_portion1, gradable: course)
+    create(:exam_portion_score, score: 100, student:student2, exam_portion: exam_portion2, gradable: course)
 
-    subject = described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], [student1, student2], exam)
+    subject = described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], [student1, student2], exam, course)
 
     expect(subject.calculate).to eq({
       grading_method1.id => {exam_id: exam.id, student_results: [{id: student1.id, score: 145.0}, {id: student2.id, score: 168.0}]}.as_json,

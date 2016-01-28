@@ -5,20 +5,21 @@ describe Gaku::Grading::Single::Calculations do
   let(:student) { create(:student) }
   let(:student2) { create(:student) }
   let(:exam) { create(:exam) }
+  let(:course) { create(:course) }
   let(:exam_portion1) { create(:exam_portion, exam: exam) }
   let(:exam_portion2) { create(:exam_portion, exam: exam) }
   let(:exam_portion_score1) do
-    create(:exam_portion_score, score: 80, student: student, exam_portion: exam_portion1)
+    create(:exam_portion_score, score: 80, student: student, exam_portion: exam_portion1, gradable: course)
   end
   let(:exam_portion_score2) do
-    create(:exam_portion_score, score: 65, student: student, exam_portion: exam_portion2)
+    create(:exam_portion_score, score: 65, student: student, exam_portion: exam_portion2, gradable: course)
   end
 
   let(:exam_portion_score3) do
-    create(:exam_portion_score, score: 50, student: student2, exam_portion: exam_portion1)
+    create(:exam_portion_score, score: 50, student: student2, exam_portion: exam_portion1, gradable: course)
   end
   let(:exam_portion_score4) do
-    create(:exam_portion_score, score: 50, student: student2, exam_portion: exam_portion2)
+    create(:exam_portion_score, score: 50, student: student2, exam_portion: exam_portion2, gradable: course)
   end
 
   let(:grading_method1) { create(:grading_method, grading_type: 'score')}
@@ -28,7 +29,6 @@ describe Gaku::Grading::Single::Calculations do
       criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
 
-  let(:course) { create()}
 
 
   let(:grading_method4) do
@@ -36,7 +36,7 @@ describe Gaku::Grading::Single::Calculations do
       criteria: { Top: '50',  Bottom: '50' }.as_json)
   end
 
-  subject { described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], student, exam, [student, student2] ) }
+  subject { described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], student, exam, course, [student, student2] ) }
 
   describe 'initialize' do
     it 'initializes with exam' do
