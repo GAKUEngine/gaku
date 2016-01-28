@@ -1,11 +1,10 @@
 class Gaku::Grading::Single::Ordinal < Gaku::Grading::Single::BaseMethod
 
-  attr_accessor :criteria
+  # attr_accessor :criteria
 
   def grade_exam
     exam = @gradable
-
-    percentage = Gaku::Grading::Single::Percentage.new(exam, @student).grade
+    percentage = Gaku::Grading::Single::Percentage.new(exam, @student, gradable_scope).grade
     @result = { id: @student.id, score: ordinal(percentage['score']) }
   end
 

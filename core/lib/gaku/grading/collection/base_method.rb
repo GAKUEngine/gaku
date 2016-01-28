@@ -2,10 +2,11 @@ module Gaku
   module Grading
     module Collection
       class  BaseMethod
-        attr_reader :gradable, :gradable_type, :students, :criteria, :results
+        attr_reader :gradable, :gradable_type, :students, :criteria, :results, :gradable_scope
 
         # Pass a gradable object [exam or assignment] and students
-        def initialize(gradable, students, criteria = nil)
+        def initialize(gradable, students, gradable_scope, criteria = nil)
+          @gradable_scope = gradable_scope
           @gradable = gradable
           @students = students
           @criteria = criteria

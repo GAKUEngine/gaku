@@ -5,7 +5,7 @@ class Gaku::Grading::Collection::Interval < Gaku::Grading::Collection::BaseMetho
     @scores = students_with_scores
 
     formated_student_results.each do |student|
-      @result << Gaku::Grading::Single::Interval.new(@gradable, student).grade_exam
+      @result << Gaku::Grading::Single::Interval.new(@gradable, student, gradable_scope).grade_exam
     end
 
     @result
@@ -35,7 +35,7 @@ class Gaku::Grading::Collection::Interval < Gaku::Grading::Collection::BaseMetho
   end
 
   def score_results
-    Gaku::Grading::Collection::Score.new(@gradable, @students).grade
+    Gaku::Grading::Collection::Score.new(@gradable, @students, gradable_scope).grade
   end
 
   def students_with_scores
