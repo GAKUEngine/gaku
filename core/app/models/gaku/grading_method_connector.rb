@@ -8,7 +8,7 @@ module Gaku
     validates(
       :gradable_type,
       inclusion: {
-        in: %w(Gaku::Exam Gaku::Course),
+        in: %w(Gaku::Exam Gaku::Course Gaku::ExamSession),
         message: '%value is not a valid'
       }
     )

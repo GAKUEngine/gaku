@@ -4,6 +4,8 @@ module Gradable
   included do
     has_many :grading_method_connectors, as: :gradable
     has_many :grading_methods, through: :grading_method_connectors
+
+    has_many :exam_portion_scores, as: :gradable
   end
 
   def use_primary_grading_method_set
