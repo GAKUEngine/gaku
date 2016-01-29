@@ -37,6 +37,7 @@ module Gaku
         @exam = @exam_session.exam
         @students = @gradable_scope.students
         @grading_methods = @gradable_scope.grading_methods
+        init_portion_scores
 
         @grading_calculations = Grading::Collection::Calculations.new(@grading_methods, @students, @exam, @gradable_scope).calculate
         render 'gaku/shared/grading/grading'
@@ -62,6 +63,14 @@ module Gaku
 
     def set_count
       @count = ExamSession.count
+    end
+
+    def init_portion_scores
+      @students.each do |student|
+        @exam.exam_portions.each do |portion|
+          portion.exam_portion_scores.where(student: student, gradable: @gradable_scope).first_or_create
+        end
+      end
     end
 
   end
