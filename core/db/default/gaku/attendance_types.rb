@@ -41,7 +41,7 @@ types = [
 
   {
     name: 'Injury',
-    name: '病欠[怪我]',
+    name_ja: '病欠[怪我]',
     color_code: '#c85179',
     counted_absent: true,
     disable_credit: false,
