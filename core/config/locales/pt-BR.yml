@@ -49,8 +49,8 @@ pt-BR:
     zipcode: CEP
   admitted: Admitido Em
   alert:
-    already_added: '%{resource} já foram adicionados!'
-    empty: '%{resource} está vazio!'
+    already_added: "%{resource} já foram adicionados!"
+    empty: "%{resource} está vazio!"
     not_selected: Nenhum %{resource} selecionado!
   and: e
   are_you_sure: Você tem certeza?
@@ -240,7 +240,7 @@ pt-BR:
     already_enrolled: 
     choose: Escolha Curso
     code: Código de Curso
-    code_sample: '[EX: FALL2020]'
+    code_sample: "[EX: FALL2020]"
     combined_code: Código Combinado
     count: Contagem de cursos
     edit: Editar Curso
@@ -452,6 +452,7 @@ pt-BR:
     view: 
     weight: 
   exam_portion:
+    add_option: 
     adjustments: 
     attached_file_count: 
     count: 
@@ -466,7 +467,14 @@ pt-BR:
     name: 
     plural: 
     problem_count: 
+    remove_option: 
     save: 
+    score_selection_options: 
+    score_type:
+      plural: 
+      score: 
+      score_selection: 
+      score_text: 
     show: 
     singular: 
     use_weighting: 
