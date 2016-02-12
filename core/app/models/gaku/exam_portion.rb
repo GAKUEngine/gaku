@@ -26,6 +26,9 @@ module Gaku
     after_destroy :refresh_positions
 
     before_update :weight_calculate
+    before_save :sanitize_score_selection_options
+
+    enum score_type: %i( score score_selection score_text )
 
     def to_s
       name
@@ -67,6 +70,12 @@ module Gaku
     end
 
     private
+
+    def sanitize_score_selection_options
+      if self.score_selection_options
+        self.score_selection_options = self.score_selection_options.reject(&:blank?)
+      end
+    end
 
     def proper_position
       self.position = exam.exam_portions.count

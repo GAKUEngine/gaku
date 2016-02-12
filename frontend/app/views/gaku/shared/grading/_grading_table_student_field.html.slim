@@ -7,7 +7,8 @@
       - if score.student_id == student.id && score.gradable == @gradable_scope
         td
           = form_for [@gradable_scope, @exam, score], remote: true do |f|
-            = f.number_field :score, min: 0, max: portion.max_score, class: 'span12'
+            = render "gaku/shared/grading/#{portion.score_type}", f: f, portion: portion
+            /= "gaku/shared/grading/#{portion.score_type}"
   - @grading_methods.each do |grading_method|
       td.vm id="#{gradable_resource(@gradable_scope)}-#{@gradable_scope.id}-exam-#{@exam.id}-student-#{student.id}-grading-method-#{grading_method.id}-score"
         = @grading_calculations[grading_method.id]['student_results'].find { |h| h['id'] == student.id }['score']

@@ -22,17 +22,6 @@ describe Gaku::Grading::Single::Percentage do
     end
   end
 
-  describe 'without exam portion scores' do
-    before do
-      exam_portion1; exam_portion2;
-    end
-    it 'creates exam_portion_score if not exist' do
-      expect do
-        subject.grade_exam
-      end.to change(student.reload.exam_portion_scores, :count).by(2)
-    end
-  end
-
   describe 'with exam portion scores' do
     before do
       exam

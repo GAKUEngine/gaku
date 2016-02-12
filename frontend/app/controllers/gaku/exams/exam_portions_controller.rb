@@ -33,7 +33,9 @@ module Gaku
 
     def update
       @exam_portion.update(exam_portion_params)
-      respond_with @exam_portion# , location: [@exam, :exam_portions]
+      #if params doesnt exist that mean options are removed
+      @exam_portion.update_attribute(:score_selection_options, nil) unless score_selection_options?
+      respond_with @exam_portion
     end
 
     def destroy
@@ -61,7 +63,7 @@ module Gaku
     end
 
     def attributes
-      %i( name weight problem_count max_score description adjustments )
+      [ :name, :weight, :problem_count, :max_score, :description, :adjustments, :score_type, score_selection_options: [] ]
     end
 
     def set_exam_portion
@@ -79,6 +81,10 @@ module Gaku
     def set_attachable
       @attachable = @exam_portion
       @attachable_resource = 'exam-exam-portion-attachment'
+    end
+
+    def score_selection_options?
+      not params[:exam_portion][:score_selection_options].blank?
     end
   end
 end
