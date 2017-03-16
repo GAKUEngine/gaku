@@ -21,7 +21,7 @@ describe Gaku::ContactCreation do
 
         service = described_class.new(contact_attributes)
         expect do
-          expect(service.save).to be_true
+          expect(service.save).to be_truthy
         end.to change { Gaku::Contact.count }.by(1)
       end
 
@@ -33,7 +33,7 @@ describe Gaku::ContactCreation do
           it 'creates a primary contact' do
             service = described_class.new(contact_attributes)
             expect do
-              expect(service.save).to be_true
+              expect(service.save).to be_truthy
             end.to change { Gaku::Contact.count }.by(1)
 
             contact = service.contact
@@ -53,7 +53,7 @@ describe Gaku::ContactCreation do
           it 'makes other contacts non-primary' do
             service = described_class.new(contact_attributes)
             expect do
-              expect(service.save).to be_true
+              expect(service.save).to be_truthy
             end.to change { Gaku::Contact.count }.by(1)
 
             student.reload
@@ -76,7 +76,7 @@ describe Gaku::ContactCreation do
           it 'sets primary contact widget for contactable' do
             service = described_class.new(contact_attributes)
             expect do
-              expect(service.save).to be_true
+              expect(service.save).to be_truthy
             end.to change { Gaku::Contact.count }.by(1)
 
             student.reload

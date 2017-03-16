@@ -1,5 +1,5 @@
 module Gaku
-  class Student < ActiveRecord::Base
+  class Student < ApplicationRecord
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :enrollments, dependent: :destroy

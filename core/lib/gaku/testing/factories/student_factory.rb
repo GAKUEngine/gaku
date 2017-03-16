@@ -1,11 +1,13 @@
+require 'ffaker'
+
 FactoryGirl.define  do
 
   factory :student, class: Gaku::Student do
-    name { Faker::Name.first_name }
-    middle_name { Faker::Name.first_name }
-    surname { Faker::Name.last_name }
-    name_reading { Faker::Name.first_name }
-    surname_reading { Faker::Name.last_name }
+    name { FFaker::Name.first_name }
+    middle_name { FFaker::Name.first_name }
+    surname { FFaker::Name.last_name }
+    name_reading { FFaker::Name.first_name }
+    surname_reading { FFaker::Name.last_name }
     gender true
     birth_date Date.today
   end

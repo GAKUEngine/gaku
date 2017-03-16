@@ -92,10 +92,12 @@ module Gaku::Testing::ControllerHelpers
     process(action, method, parameters, session, flash)
   end
 
-  def process_js_gaku_action(action, method = 'GET', parameters = nil, session = nil, flash = nil)
-    parameters ||= {}
-    parameters.reverse_merge!(format: :js)
-    xml_http_request(method, action, parameters, session, flash)
+  def process_js_gaku_action(action, method = 'GET', params = nil, session = nil, flash = nil)
+    # parameters ||= {}
+    # parameters.reverse_merge!(format: :js)
+    # xml_http_request(method, action, parameters, session, flash)
+    process action, method: method, params: params.reverse_merge!(format: :js), session: session, flash: flash, xhr: true
+
   end
 
 end

@@ -34,19 +34,19 @@ describe Gaku::Address do
 
     describe '.students' do
       it 'returns records with address type Student' do
-        expect(Gaku::Address.students).to be == [student_address]
+        expect(Gaku::Address.students).to eq [student_address]
       end
     end
 
     describe '.teachers' do
       it 'returns records with address type Teacher' do
-        expect(Gaku::Address.teachers).to be == [teacher_address]
+        expect(Gaku::Address.teachers).to eq [teacher_address]
       end
     end
 
     describe '.guardians' do
       it 'returns records with address type Guardian' do
-        expect(Gaku::Address.guardians).to be == [guardian_address]
+        expect(Gaku::Address.guardians).to eq [guardian_address]
       end
     end
   end
@@ -58,8 +58,8 @@ describe Gaku::Address do
       address2 = create(:address, addressable: student)
       student.reload
 
-      expect(address1.primary).to be_true
-      expect(address2.primary).to be_false
+      expect(address1.primary).to be_truthy
+      expect(address2.primary).to be_falsey
     end
   end
 
@@ -68,8 +68,8 @@ describe Gaku::Address do
       address2 = create(:address, country: country, addressable: student, primary: true)
       address.make_primary
       address2.reload
-      expect(address2.primary).to be_false
-      expect(address.primary).to be_true
+      expect(address2.primary).to be_falsey
+      expect(address.primary).to be_truthy
     end
 
     it 'sets primary: true' do
@@ -104,7 +104,7 @@ describe Gaku::Address do
   describe '#campus_address?' do
     context "addressable_type is 'Gaku::Campus'" do
       let(:address) { build(:address, addressable_type: 'Gaku::Campus') }
-      specify { expect(address.addressable_type?).to be_true }
+      specify { expect(address.addressable_type?).to be_truthy }
     end
   end
 

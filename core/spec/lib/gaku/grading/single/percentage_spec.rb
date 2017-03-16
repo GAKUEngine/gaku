@@ -10,6 +10,7 @@ describe Gaku::Grading::Single::Percentage do
   let(:exam_portion_score1) do
     create(:exam_portion_score, score: 28, student:student, exam_portion: exam_portion1, gradable: course)
   end
+
   let(:exam_portion_score2) do
     create(:exam_portion_score, score: 35, student:student, exam_portion: exam_portion2, gradable: course)
   end

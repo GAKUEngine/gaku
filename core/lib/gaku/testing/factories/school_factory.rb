@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :school, class: Gaku::School do
-    name { Faker::Education.school_generic_name }
+    name { FFaker::Education.school_generic_name }
     slogan 'Draw the individual potencial'
     description 'Nagoya University description'
     founded Date.new(1950, 4, 1)

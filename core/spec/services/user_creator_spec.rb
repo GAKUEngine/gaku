@@ -12,7 +12,7 @@ describe Gaku::UserCreator do
         allow(Gaku::Preset).to receive(:active).and_return(nil)
         user = Gaku::UserCreator.new(email: 'gaku@engine.io').get_user
 
-        expect(user.settings[:locale]).to be == 'en'
+        expect(user.settings[:locale]).to eq 'en'
       end
     end
 
@@ -21,7 +21,7 @@ describe Gaku::UserCreator do
         allow(Gaku::Preset).to receive(:active).and_return(OpenStruct.new(locale: { 'language' => 'de' }))
         user = Gaku::UserCreator.new(email: 'gaku@engine.io').get_user
 
-        expect(user.settings[:locale]).to be == 'de'
+        expect(user.settings[:locale]).to eq 'de'
       end
     end
   end
@@ -29,14 +29,14 @@ describe Gaku::UserCreator do
   describe '#save' do
     it 'creates new user and return true' do
       service = Gaku::UserCreator.new(username: 'gaku', email: 'gaku@engine.io', password: '123456')
-      expect { expect(service.save).to be_true }.to change { Gaku::User.count }.by(1)
+      expect { expect(service.save).to be_truthy }.to change { Gaku::User.count }.by(1)
     end
 
     context 'when failed to create' do
       it 'does not create new user and return false' do
         allow(Gaku::User).to receive(:valid?).and_return(false)
         service = Gaku::UserCreator.new(username: 'gaku')
-        expect { expect(service.save).to be_false }.not_to change { Gaku::User.count }
+        expect { expect(service.save).to be_falsy }.not_to change { Gaku::User.count }
       end
     end
   end

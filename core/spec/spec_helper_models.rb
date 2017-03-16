@@ -4,7 +4,7 @@ require 'rspec/core'
 require 'rspec/rails/extensions'
 require 'rspec/rails/adapters'
 require 'rspec/rails/matchers'
-require 'rspec/rails/mocks'
+# require 'rspec/rails/mocks'
 
 require 'database_cleaner'
 require 'factory_girl_rails'
