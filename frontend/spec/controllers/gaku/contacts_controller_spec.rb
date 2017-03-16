@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::ContactsController do
+describe Gaku::ContactsController, type: :controller do
 
   let!(:contact_type) { create(:contact_type) }
   let(:contact) { create(:contact, contactable: student, contact_type: contact_type) }

@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::SyllabusesController do
+describe Gaku::SyllabusesController, type: :controller  do
 
   let(:syllabus) { create(:syllabus) }
   let(:invalid_syllabus) { create(:invalid_syllabus) }

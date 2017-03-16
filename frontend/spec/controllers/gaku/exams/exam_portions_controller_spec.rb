@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Exams::ExamPortionsController do
+describe Gaku::Exams::ExamPortionsController, type: :controller  do
 
   let(:exam) { create(:exam) }
   let(:exam_portion) { create(:exam_portion, exam: exam) }

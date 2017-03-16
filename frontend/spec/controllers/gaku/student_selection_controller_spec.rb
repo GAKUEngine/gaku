@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::StudentSelectionController do
+describe Gaku::StudentSelectionController, type: :controller  do
 
   let(:user) { create(:user) }
 

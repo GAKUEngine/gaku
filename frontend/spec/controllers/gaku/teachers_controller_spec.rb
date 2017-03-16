@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::TeachersController do
+describe Gaku::TeachersController, type: :controller  do
 
   let(:teacher) { create(:teacher) }
   let(:invalid_teacher) { create(:invalid_teacher) }

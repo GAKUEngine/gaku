@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::ExamsController do
+describe Gaku::ExamsController, type: :controller  do
 
   let(:exam) { create(:exam) }
   let(:invalid_exam) { create(:invalid_exam) }

@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Students::BadgesController do
+describe Gaku::Students::BadgesController, type: :controller  do
 
   let(:student) { create(:student) }
   let!(:badge_type) { create(:badge_type) }

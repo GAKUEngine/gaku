@@ -25,7 +25,7 @@ RSpec.configure do |config|
   # config.verbose_retry = true
   # config.default_retry_count = 3
 
-  config.before(:each) do
+  config.before(:each) do |example|
     if example.metadata[:js]
       DatabaseCleaner.strategy = :truncation
     else

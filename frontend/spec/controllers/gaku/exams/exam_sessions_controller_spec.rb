@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Exams::ExamSessionsController do
+describe Gaku::Exams::ExamSessionsController, type: :controller  do
 
   let(:exam) { create(:exam) }
   let(:exam_session) { create(:exam_session) }

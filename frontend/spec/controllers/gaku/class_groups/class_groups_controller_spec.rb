@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::ClassGroupsController do
+describe Gaku::ClassGroupsController, type: :controller  do
 
   let(:class_group) { create(:class_group) }
   let(:invalid_class_group) { create(:invalid_class_group) }

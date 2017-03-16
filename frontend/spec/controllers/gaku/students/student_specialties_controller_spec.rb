@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Students::StudentSpecialtiesController do
+describe Gaku::Students::StudentSpecialtiesController, type: :controller  do
 
   let(:student) { create(:student) }
   let!(:specialty) { create(:specialty) }

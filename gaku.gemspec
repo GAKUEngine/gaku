@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
     "╟─────────────────────────╼\n" +
     "║Thank you for installing GAKU Engine!\n" +
     "║GAKU Engine is Open Source [GPL/AGPL] Software.\n" +
-    "╚═════════════════════════╼\n" 
+    "╚═════════════════════════╼\n"
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
@@ -31,8 +31,8 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', s.version
-  s.add_dependency 'gaku_admin', s.version
+  #s.add_dependency 'gaku_admin', s.version
   s.add_dependency 'gaku_frontend', s.version
-  s.add_dependency 'gaku_testing', s.version
-  s.add_dependency 'gaku_sample', s.version
+  #s.add_dependency 'gaku_testing', s.version
+  #s.add_dependency 'gaku_sample', s.version
 end

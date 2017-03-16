@@ -19,9 +19,9 @@
 #                                       )
 
 #   student = Gaku::Student.where(random_student).first_or_create!
-#   student.name = Faker::Name.first_name
-#   student.middle_name = Faker::Name.first_name
-#   student.surname = Faker::Name.last_name
+#   student.name = FFaker::Name.first_name
+#   student.middle_name = FFaker::Name.first_name
+#   student.surname = FFaker::Name.last_name
 #   student.enrollment_status_code = enrollment_status.code
 #   student.commute_method_type = commute_method_type
 #   student.scholarship_status = scholarship_status

@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::AddressesController do
+describe Gaku::AddressesController, type: :controller do
 
   let(:address) { create(:address, addressable: student, country: country) }
   let(:invalid_address) { build(:invalid_address, addressable: student) }

@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Students::ExternalSchoolRecordsController do
+describe Gaku::Students::ExternalSchoolRecordsController, type: :controller  do
 
   let(:student) { create(:student) }
   let!(:school) { create(:school) }
