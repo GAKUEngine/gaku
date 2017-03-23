@@ -1,6 +1,4 @@
 def set_gaku_gemspec_shared(s)
-  s.platform    = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2.1.3'
 
   s.version     = File.read(File.expand_path('../VERSION', __FILE__)).strip
 
