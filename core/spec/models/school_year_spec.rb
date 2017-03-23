@@ -1,5 +1,4 @@
 require 'spec_helper_models'
-require 'pry'
 describe Gaku::SchoolYear do
 
   describe 'associations' do
