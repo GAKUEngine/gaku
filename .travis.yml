@@ -25,7 +25,6 @@ before_install:
 
 script:
   - bundle exec rake test_app
-  - rake db:migrate RAILS_ENV=test
   - I18N=1 bundle exec rspec $SUITE
 
 env:
