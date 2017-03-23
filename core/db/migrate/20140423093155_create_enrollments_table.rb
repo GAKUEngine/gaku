@@ -1,4 +1,4 @@
-class CreateEnrollmentsTable < ActiveRecord::Migration
+class CreateEnrollmentsTable < ActiveRecord::Migration[4.2]
   def change
     create_table :gaku_enrollments do |t|
       t.references :student

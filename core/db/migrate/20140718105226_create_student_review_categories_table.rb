@@ -1,4 +1,4 @@
-class CreateStudentReviewCategoriesTable < ActiveRecord::Migration
+class CreateStudentReviewCategoriesTable < ActiveRecord::Migration[4.2]
   def up
     create_table :gaku_student_review_categories do |t|
       t.string :name

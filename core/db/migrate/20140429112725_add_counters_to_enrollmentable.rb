@@ -1,4 +1,4 @@
-class AddCountersToEnrollmentable < ActiveRecord::Migration
+class AddCountersToEnrollmentable < ActiveRecord::Migration[4.2]
   def change
     add_column :gaku_courses, :enrollments_count, :integer, default: 0, null: false
     add_column :gaku_class_groups, :enrollments_count, :integer, default: 0, null: false

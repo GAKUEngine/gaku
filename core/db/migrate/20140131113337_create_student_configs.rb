@@ -1,4 +1,4 @@
-class CreateStudentConfigs < ActiveRecord::Migration
+class CreateStudentConfigs < ActiveRecord::Migration[4.2]
   def change
     create_table :gaku_student_configs do |t|
       t.boolean :active, default: false

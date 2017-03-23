@@ -19,7 +19,7 @@ require 'gaku/testing/controller_helpers'
 
 # require 'gaku/testing/support/controllers'
 
-# ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+# ActiveRecord::Migration[4.2].check_pending! if defined?(ActiveRecord::Migration[4.2])
 
 RSpec.configure do |config|
 

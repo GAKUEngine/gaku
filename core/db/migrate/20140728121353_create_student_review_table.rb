@@ -1,4 +1,4 @@
-class CreateStudentReviewTable < ActiveRecord::Migration
+class CreateStudentReviewTable < ActiveRecord::Migration[4.2]
   def change
     create_table :gaku_student_reviews do |t|
       t.references :student

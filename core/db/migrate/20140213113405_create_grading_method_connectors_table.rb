@@ -1,4 +1,4 @@
-class CreateGradingMethodConnectorsTable < ActiveRecord::Migration
+class CreateGradingMethodConnectorsTable < ActiveRecord::Migration[4.2]
   def change
     create_table :gaku_grading_method_connectors do |t|
       t.references :grading_method
