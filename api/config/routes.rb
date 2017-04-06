@@ -3,6 +3,7 @@ Gaku::Core::Engine.routes.draw do
     namespace :v1 do
       post 'authenticate', to: 'authentication#authenticate'
       post 'authenticate/refresh', to: 'authentication#refresh'
+
       resources :students do
         resources :guardians, controller: 'students/guardians'
         resources :courses, controller: 'students/courses'
@@ -10,6 +11,8 @@ Gaku::Core::Engine.routes.draw do
         resources :extracurricular_activities, controller: 'students/extracurricular_activities'
         resources :exam_sessions, controller: 'students/exam_sessions'
       end
+
+      resources :courses
     end
   end
 end
