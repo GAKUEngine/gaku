@@ -3,16 +3,55 @@ module Gaku
     module V1
       class CoursesController < BaseController
 
+        skip_before_action :authenticate_request
+        before_action :set_course, only: %i( show update destroy )
+
+        rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+        rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
         def index
           @courses = Course.all
-          respond_to do |format|
-            format.json { render json: @courses, root: :courses, adapter: :json }
-            format.msgpack { render msgpack: @courses, root: :courses, adapter: :json }
+          collection_respond_to @courses, root: :courses
+        end
+
+        def show
+          member_respond_to @course
+        end
+
+        def create
+          @course = Course.new(course_params)
+          if @course.save!
+            member_respond_to @course
           end
         end
 
-      end
+        def update
+          if @course.update(course_params)
+            member_respond_to @course
+          end
+        end
 
+        def destroy
+          if @course.destroy!
+            member_respond_to @course
+          end
+        end
+
+        private
+
+        def set_course
+          @course = Course.find(params[:id])
+        end
+
+        def course_params
+          params.require(:course).permit(course_attrs)
+        end
+
+        def course_attrs
+          %i( syllabus_id code )
+        end
+
+      end
     end
   end
 end
