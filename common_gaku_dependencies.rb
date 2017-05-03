@@ -4,5 +4,6 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'handy_controller_helpers', '0.0.3'
+  gem 'rails-controller-testing'
   # gem 'rspec-retry'
 end

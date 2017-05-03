@@ -3,6 +3,7 @@ require 'simple_command'
 require 'jwt'
 require 'active_model_serializers'
 require 'msgpack_rails'
+require 'kaminari'
 
 module Gaku
 

@@ -2,7 +2,6 @@ require_relative 'spec_helper_base'
 require 'rubygems'
 
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'database_cleaner'
 require 'active_record/fixtures'
 require 'factory_girl_rails'
