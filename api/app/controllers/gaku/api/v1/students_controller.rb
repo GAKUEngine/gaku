@@ -7,7 +7,7 @@ module Gaku
         before_action :set_student, except: %i( index create )
 
         def index
-          @students = Student.all
+          @students = Student.includes(:primary_contact, :primary_address).all.page(params[:page ])
           collection_respond_to @students, root: :students
         end
 
@@ -23,7 +23,7 @@ module Gaku
         end
 
         def update
-          if @course.update(student_params)
+          if @student.update!(student_params)
             member_respond_to @student
           end
         end

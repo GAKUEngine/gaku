@@ -19,14 +19,21 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   def collection_respond_to(collection, options = {})
     respond_to do |format|
-      format.json { render({json: collection, root: :courses, adapter: :json}.merge!(options)) }
-      format.msgpack { render({msgpack: collection, root: :courses, adapter: :json}.merge!(options)) }
+      format.json { render({json: collection, root: :courses, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
+      format.msgpack { render({msgpack: collection, root: :courses, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
     end
+  end
+
+  def meta_for(collection)
+    { count: collection.size , total_count: collection.total_count, page: collection.current_page }
   end
 
   def authenticate_request
     @current_user =  Gaku::Api::AuthorizeApiRequest.call(request.headers).result
-    render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+    respond_to do |format|
+      format.json { render json: { error: 'Not Authorized' }, status: 401 unless @current_user }
+      format.msgpack { render msgpack: { error: 'Not Authorized' }, status: 401 unless @current_user }
+    end
   end
 
   def set_default_format
