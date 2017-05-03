@@ -13,7 +13,6 @@ module Gaku
       config.after_initialize do
         ActionController.add_renderer :msgpack do |resource, options|
           resource_serializer = ActiveModelSerializers::SerializableResource.new(resource, options)
-
           self.content_type = Mime[:msgpack]
           if resource_serializer.serializer?
             self.response_body = resource_serializer.serializable_hash.to_msgpack
