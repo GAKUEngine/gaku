@@ -1,6 +1,6 @@
 require 'spec_helper_routing'
 
-describe Gaku::Students::StudentSpecialtiesController do
+describe Gaku::Students::StudentSpecialtiesController, type: :routing do
 
   routes { Gaku::Core::Engine.routes }
 

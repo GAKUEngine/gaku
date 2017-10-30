@@ -2,17 +2,17 @@ module Gaku
   class Enrollment < ActiveRecord::Base
 
     belongs_to :student
-    belongs_to :enrollmentable, polymorphic: true, counter_cache: true
+    belongs_to :enrollable, polymorphic: true, counter_cache: true
 
-    validates :enrollmentable_type, :enrollmentable_id, :student_id, presence: true
+    validates :enrollable_type, :enrollable_id, :student_id, presence: true
 
     validates :student_id,
               uniqueness: {
-                scope: %w( enrollmentable_type enrollmentable_id ),
+                scope: %w( enrollable_type enrollable_id ),
                 message: I18n.t(:'student.already_enrolled')
               }
 
-    validates :enrollmentable_type,
+    validates :enrollable_type,
               inclusion: {
                 in: %w( Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity Gaku::ExamSession ),
                 message: '%{value} is not a valid'
@@ -20,8 +20,8 @@ module Gaku
 
     validate :class_group_semesters_overlap, if: ->(record) { record.class_group_type? }
 
-    before_create :increment_enrollmentable_counter
-    before_destroy :decrement_enrollmentable_counter
+    before_create :increment_enrollable_counter
+    before_destroy :decrement_enrollable_counter
 
     before_create :proper_position, if: ->(record) { record.class_group_type? }
     after_destroy :refresh_positions, if: ->(record) { record.class_group_type? }
@@ -29,7 +29,11 @@ module Gaku
     scope :seat_numbered, -> { order('seat_number ASC') }
 
     def class_group_type?
-      enrollmentable_type == 'Gaku::ClassGroup'
+      enrollable_type == 'Gaku::ClassGroup'
+    end
+
+    def course_type?
+      enrollable_type == 'Gaku::Course'
     end
 
     private
@@ -41,44 +45,44 @@ module Gaku
     end
 
     def overlap_semester?
-      if student && student.semesters && enrollmentable
-        student.semesters.where(id: enrollmentable.semester_ids).any?
+      if student && student.semesters && enrollable
+        student.semesters.where(id: enrollable.semester_ids).any?
       end
     end
 
     def not_in_student_class_groups?
-      student.class_groups.exclude?(enrollmentable)
+      student.class_groups.exclude?(enrollable)
     end
 
-    def increment_enrollmentable_counter
+    def increment_enrollable_counter
       Student.increment_counter(resource_name_counter, student.id) if student
     end
 
-    def decrement_enrollmentable_counter
+    def decrement_enrollable_counter
       Student.decrement_counter(resource_name_counter, student.id) if student
     end
 
     def resource_name_counter
-      enrollmentable_type.demodulize.underscore.pluralize.concat('_count') if enrollmentable_type
+      enrollable_type.demodulize.underscore.pluralize.concat('_count') if enrollable_type
     end
 
     def proper_position
-      self.seat_number = enrollmentable.enrollments_count.next
+      self.seat_number = enrollable.enrollments_count.next
     end
 
     def refresh_positions
-      enrollments = enrollmentable.enrollments
+      enrollments = enrollable.enrollments
       enrollments.pluck(:id).each_with_index do |id, index|
         enrollments.where(id: id).update_all(seat_number: index.next)
       end
     end
 
     def class_group_is_active?
-      Gaku::ClassGroup.active.include?(enrollmentable)
+      Gaku::ClassGroup.active.include?(enrollable)
     end
 
     def not_in_student_class_groups?
-      student.class_groups.exclude?(enrollmentable)
+      student.class_groups.exclude?(enrollable)
     end
 
   end

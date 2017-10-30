@@ -3,14 +3,13 @@ module Gaku
     module V1
       class CoursesController < BaseController
 
-        skip_before_action :authenticate_request
         before_action :set_course, only: %i( show update destroy )
 
         rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
         def index
-          @courses = Course.all
+          @courses = Course.all.page(params[:page ])
           collection_respond_to @courses, root: :courses
         end
 
@@ -26,7 +25,7 @@ module Gaku
         end
 
         def update
-          if @course.update(course_params)
+          if @course.update!(course_params)
             member_respond_to @course
           end
         end

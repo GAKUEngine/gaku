@@ -7,4 +7,3 @@ Bundler.require(:default, Rails.env)
 require '<%= lib_name %>'
 
 <%= application_definition %>
-

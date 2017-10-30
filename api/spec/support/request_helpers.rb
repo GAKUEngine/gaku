@@ -1,5 +1,5 @@
 require 'json_web_token'
-
+require 'pry'
 module RequestHelpers
 
   def json
@@ -7,6 +7,7 @@ module RequestHelpers
   end
 
   def msgpack
+    # binding.pry
     ActiveSupport::MessagePack.decode(response.body).with_indifferent_access
   end
 

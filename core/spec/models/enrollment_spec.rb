@@ -4,21 +4,21 @@ describe Gaku::Enrollment do
 
   describe 'associations' do
     it { should belong_to :student }
-    it { should belong_to :enrollmentable }
+    it { should belong_to :enrollable }
   end
 
   describe 'validations' do
     it { should validate_presence_of :student_id }
-    it { should validate_presence_of :enrollmentable_id }
-    it { should validate_presence_of :enrollmentable_type }
+    it { should validate_presence_of :enrollable_id }
+    it { should validate_presence_of :enrollable_type }
 
     it do
-      should validate_uniqueness_of(:student_id).scoped_to([:enrollmentable_id, :enrollmentable_type])
+      should validate_uniqueness_of(:student_id).scoped_to([:enrollable_id, :enrollable_type])
                                                 .with_message(/already enrolled/)
     end
 
     it('ensures inclusion') do
-      should validate_inclusion_of(:enrollmentable_type)
+      should validate_inclusion_of(:enrollable_type)
         .in_array(%w(Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity))
     end
   end
@@ -31,9 +31,9 @@ describe Gaku::Enrollment do
       class_group  = create(:class_group_with_active_semester, semester: semester)
       class_group2 = create(:class_group_with_active_semester, semester: semester)
 
-      create(:class_group_enrollment, enrollmentable: class_group, student: student)
+      create(:class_group_enrollment, enrollable: class_group, student: student)
 
-      enrollment = build(:class_group_enrollment, enrollmentable: class_group2, student: student)
+      enrollment = build(:class_group_enrollment, enrollable: class_group2, student: student)
 
       enrollment.valid?
 

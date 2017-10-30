@@ -1,6 +1,16 @@
 Gaku::Core::Engine.routes.draw do
   namespace :api do
     namespace :v1 do
+
+      concern :enrollable do
+        resources :enrollments, only: %i( create destroy )
+      end
+
+      concern :enrollable do
+        resources :enrollments
+      end
+
+
       post 'authenticate', to: 'authentication#authenticate'
       post 'authenticate/refresh', to: 'authentication#refresh'
 
@@ -12,7 +22,7 @@ Gaku::Core::Engine.routes.draw do
         resources :exam_sessions, controller: 'students/exam_sessions'
       end
 
-      resources :courses
+      resources :courses, concerns: %i( enrollable )
     end
   end
 end

@@ -19,8 +19,8 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   def collection_respond_to(collection, options = {})
     respond_to do |format|
-      format.json { render({json: collection, root: :courses, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
-      format.msgpack { render({msgpack: collection, root: :courses, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
+      format.json { render({json: collection, root: false, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
+      format.msgpack { render({msgpack: collection, root: false, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
     end
   end
 
