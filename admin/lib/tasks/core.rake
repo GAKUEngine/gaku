@@ -10,7 +10,7 @@ For .rb       use rake db:load_file[/absolute/path/to/sample/filename.rb]}
 
     if %w{.yml}.include? file.extname
       puts "#{File.basename(args.file)}".green
-      ActiveRecord::Fixtures.create_fixtures(args.dir, file.to_s.sub(file.extname, ""))
+      ActiveRecord::FixtureSet.create_fixtures(args.dir, file.to_s.sub(file.extname, ""))
     elsif file.exist?
       puts "#{File.basename(file)}".green
       require file

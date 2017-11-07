@@ -22,7 +22,7 @@ RUN apt-get install -y libpq-dev postgresql-client
 #
 # ENV PATH="${BUNDLE_BIN}:${PATH}"
 
-RUN gem install rails -v 4.2.5 --no-ri --no-rdoc
+RUN gem install rails -v 5.0.2 --no-ri --no-rdoc
 RUN gem install bundler --no-ri --no-rdoc
 
 ADD	.	/gaku
