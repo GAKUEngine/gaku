@@ -1,0 +1,2 @@
+gem 'gaku', git: 'https://github.com/GAKUEngine/gaku.git', branch: 'docker'
+gem 'gaku', git: 'https://github.com/GAKUEngine/gaku.git', branch: 'docker'
