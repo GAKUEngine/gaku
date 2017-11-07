@@ -10,7 +10,7 @@
   - add gem in gemspec files and then stop and run docker-compose
 
 # Add sample data
- - run `docker-compose exec web `
+ - run `docker-compose exec web bundle exec rake db:sample`
 
 # NOTE!!!
   - do not run `docker-compose up --build` because will install initialize app, will download all gems  and will copy migrations again and will not start becase of duplicated tables
