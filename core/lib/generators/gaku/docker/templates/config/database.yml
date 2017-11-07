@@ -1,0 +1,2 @@
+development:
+  url: postgres://postgres:@postgres:5432/gaku_dev_staging
