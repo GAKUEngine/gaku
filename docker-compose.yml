@@ -4,9 +4,9 @@ services:
     environment:
       - RAILS_ENV=development
     build: .
-    command: "bin/check_postgres.sh bundle exec rails server -b 0.0.0.0"
+    command: "bin/check_postgres.sh bundle exec rails server -b 0.0.0.0 -p 9000"
     ports:
-      - "3000:3000"
+      - "9000:9000"
     volumes:
       - .:/gaku
     depends_on:
@@ -15,14 +15,14 @@ services:
   postgres:
     image: postgres:9.6.5
     ports:
-      - "5432:5432"
+      - "9001:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
   redis:
     image: redis:4.0.1
     ports:
-      - "6379:6379"
+      - "9002:6379"
 
 volumes:
   postgres-data:
