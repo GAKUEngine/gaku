@@ -23,12 +23,26 @@ Gem::Specification.new do |s|
     "║GAKU Engine is Open Source [GPL/AGPL] Software.\n" +
     "╚═════════════════════════╼\n" 
 
-  s.files        = `git ls-files`.split("\n")
-  s.test_files   = `git ls-files -- {spec}/*`.split("\n")
-  s.require_path = 'lib'
+  s.files =       Dir.glob('lib/**/*.rb', File::FNM_DOTMATCH) +
+                  Dir.glob('bin/**/*', File::FNM_DOTMATCH) +
+                  [
+                    'common_gaku_dependencies.rb',
+                    'common_gaku_gemspec_mixin.rb',
+                    'Dockerfile',
+                    'docker-compose.yml',
+                    'wait-for-it.sh',
+                    'Gemfile',
+                    'Rakefile',
+                    'VERSION',
+                    'gaku.gemspec'
+                  ]
+  # s.test_files    = `git ls-files -- {spec}/*`.split("\n")
+  s.require_paths = ['lib']
+  s.bindir        = 'bin'
+  s.executables   << 'gaku'
 
-  s.requirements << 'postgresql'
-  s.requirements << 'postgresql-contrib'
+  s.requirements  << 'postgresql'
+  s.requirements  << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', s.version
   s.add_dependency 'gaku_admin', s.version

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'thor'
+require 'fileutils'
+
+class GakuCLI < Thor
+  desc 'version', "Prints the version of the installed WSlave"
+  def version()
+    require 'rubygems'
+    spec = Gem::Specification::load("#{__dir__}/../gaku.gemspec")
+    puts spec.version
+  end
+end
+
+GakuCLI.start(ARGV)
