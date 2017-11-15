@@ -1,5 +1,6 @@
 Gaku::Core::Engine.routes.draw do
   namespace :api do
+    resource :status
     namespace :v1 do
 
       concern :enrollable do
