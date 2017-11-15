@@ -33,7 +33,7 @@ module Gaku
 
     def install_migrations
       say_status :copying, 'migrations'
-      rake 'railties:install:migrations'
+      rake 'gaku:install:migrations'
     end
 
     def setup_assets
