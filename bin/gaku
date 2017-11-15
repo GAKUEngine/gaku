@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'thor'
+require_relative '../lib/gaku/container'
+
+class GakuCLI < Thor
+  desc 'container', 'handle container for gaku'
+  argument :command, default: 'start', description: 'action to execute'
+  def container
+    return unless check
+    Gaku::Container.new(command).execute
+  end
+
+  desc 'version', "Prints the version of the installed WSlave"
+  def version()
+    require 'rubygems'
+    spec = Gem::Specification::load("#{__dir__}/../gaku.gemspec")
+    puts spec.version
+  end
+
+  private
+
+  def check
+    return true if File.exist?("Dockerfile") && File.exist?("docker-compose.yml")
+    puts "This does not appear to be the root of gaku."
+    false
+  end
+
+end
+
+GakuCLI.start(ARGV)
