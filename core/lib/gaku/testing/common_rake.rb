@@ -20,14 +20,41 @@ namespace :common do
                                  ]
 
     puts 'Setting up dummy database...'
-    cmd = 'bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
 
-    if RUBY_PLATFORM =~ /mswin/ # windows
-      cmd += ' >nul'
-    else
-      cmd += ' >/dev/null'
+    db_accessible = false
+    begin
+      ActiveRecord::Base.establish_connection
+      ActiveRecord::Base.connection
+      db_accessible = true if ActiveRecord::Base.connected?
+    rescue
+      puts 'Database was not accessible. Attempting to create (hit CTRL+C to cancel)...'
+      `sudo -u postgres psql -c "CREATE USER manabu WITH PASSWORD 'manabu';"`
+      `sudo -u postgres psql -c "ALTER USER manabu CREATEDB;"`
+      `sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS hstore;"`
+      #`sudo -u postgres psql -c "DROP DATABASE gaku_test;"`
+      #`sudo -u postgres psql -c "CREATE DATABASE gaku_test;"`
+      #`sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_test\" to manabu;"`
+      #`sudo -u postgres psql -c "ALTER DATABASE gaku_test OWNER TO manabu;"`
+      #`sudo -u postgres psql -c "DROP DATABASE gaku_development;"`
+      #`sudo -u postgres psql -c "CREATE DATABASE gaku_development;"`
+      #`sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_development\" to manabu;"`
+      #`sudo -u postgres psql -c "ALTER DATABASE gaku_development OWNER TO manabu;"`
+      `sudo -u postgres psql -c "ALTER ROLE manabu superuser;"`
+      `bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test`
+      `sudo -u postgres psql -c "ALTER ROLE manabu nosuperuser;"`
     end
 
-    system(cmd)
+    if db_accessible
+      #cmd = 'bundle exec rails app:update:bin db:environment:set db:migrate db:test:prepare RAILS_ENV=test'
+      cmd = 'bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
+
+      if RUBY_PLATFORM =~ /mswin/ # windows
+        cmd += ' >nul'
+      else
+        cmd += ' >/dev/null'
+      end
+
+      system(cmd)
+    end
   end
 end

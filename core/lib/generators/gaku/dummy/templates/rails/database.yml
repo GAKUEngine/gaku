@@ -1,17 +1,18 @@
+default: &default
+  host: localhost
+  adapter: postgresql
+  username: manabu
+  password: manabu
+  min_messages: warning
+
 development:
-  host: localhost
-  adapter: postgresql
+  <<: *default
   database: gaku_development
-  username: postgres
-  min_messages: warning
+
 test:
-  host: localhost
-  adapter: postgresql
+  <<: *default
   database: gaku_test
-  username: postgres
-  min_messages: warning
+
 production:
-  adapter: postgresql
+  <<: *default
   database: gaku_production
-  username: postgres
-  min_messages: warning
