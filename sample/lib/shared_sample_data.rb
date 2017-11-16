@@ -6,7 +6,7 @@
                                 numcode: '392'
                               ).first_or_create!
 
-@state = Gaku::State.where(name: Faker::Address.us_state, country_iso: @country.iso).first_or_create!
+@state = Gaku::State.where(name: FFaker::Address.us_state, country_iso: @country.iso).first_or_create!
 
 @mobile_phone = Gaku::ContactType.where(name: 'Mobile Phone').first_or_create!
 @home_phone = Gaku::ContactType.where(name: 'Home Phone').first_or_create!
@@ -40,45 +40,45 @@ end
 
 def random_person
   {
-    name: Faker::Name.first_name,
-    middle_name: Faker::Name.first_name,
-    surname: Faker::Name.last_name,
+    name: FFaker::Name.first_name,
+    middle_name: FFaker::Name.first_name,
+    surname: FFaker::Name.last_name,
     birth_date: Date.today - rand(1000)
   }
 end
 
 def random_home_phone
   {
-    data: Faker::PhoneNumber.phone_number,
+    data: FFaker::PhoneNumber.phone_number,
     contact_type_id: @home_phone.id
   }
 end
 
 def random_mobile_phone
   {
-    data: Faker::PhoneNumber.phone_number,
+    data: FFaker::PhoneNumber.phone_number,
     contact_type_id: @mobile_phone.id
   }
 end
 
 def random_email
   {
-    data: Faker::Internet.email,
+    data: FFaker::Internet.email,
     contact_type_id: @email.id
   }
 end
 
 def random_note
   {
-    title: Faker::Lorem.word,
-    content: Faker::Lorem.sentence
+    title: FFaker::Lorem.word,
+    content: FFaker::Lorem.sentence
   }
 end
 
 def random_address
   {
-    address1: Faker::Address.street_address,
-    address2: Faker::Address.street_address,
+    address1: FFaker::Address.street_address,
+    address2: FFaker::Address.street_address,
     title: 'Home address',
     zipcode: '452-0813',
     city: 'Nagoya',

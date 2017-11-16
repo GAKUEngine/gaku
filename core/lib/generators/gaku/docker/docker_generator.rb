@@ -33,9 +33,7 @@ module Gaku
 
     def install_migrations
       say_status :copying, 'migrations'
-      silence_stream(STDOUT) do
-        silence_warnings { rake 'railties:install:migrations' }
-      end
+      rake 'gaku:install:migrations'
     end
 
     def setup_assets

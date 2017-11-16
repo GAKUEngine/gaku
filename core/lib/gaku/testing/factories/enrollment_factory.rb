@@ -3,7 +3,7 @@
 
     factory "#{resource}_enrollment", class: Gaku::Enrollment do
       student
-      association :enrollmentable, factory: resource
+      association :enrollable, factory: resource
     end
 
   end

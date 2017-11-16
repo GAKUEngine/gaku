@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::NotesController do
+describe Gaku::NotesController, type: :controller do
 
   let(:note) { create(:note, notable: student) }
   let(:invalid_note) { build(:invalid_note, notable: student) }

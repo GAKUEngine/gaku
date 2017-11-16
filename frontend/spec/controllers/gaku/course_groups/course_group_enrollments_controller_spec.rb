@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::CourseGroups::CourseGroupEnrollmentsController do
+describe Gaku::CourseGroups::CourseGroupEnrollmentsController, type: :controller  do
 
   let(:course_group) { create(:course_group) }
   let(:course) { create(:course) }

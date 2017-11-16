@@ -1,4 +1,4 @@
-class Translations < ActiveRecord::Migration
+class Translations < ActiveRecord::Migration[4.2]
 
   def up
     create_table :gaku_attendance_types do |t|

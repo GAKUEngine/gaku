@@ -1,7 +1,7 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
 
-    include Notes, Pagination, Enrollmentable, Semesterable, StudentReviewable
+    include Notes, Pagination, Enrollable, Semesterable, StudentReviewable
 
     validates :name, presence: true
 

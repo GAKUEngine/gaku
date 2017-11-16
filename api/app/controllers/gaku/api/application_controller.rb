@@ -1,3 +1,3 @@
-class Gaku::Api::ApplicationController < ActionController::Base
+class Gaku::Api::ApplicationController < ActionController::API
 
 end

@@ -1,7 +1,7 @@
 module Gaku
   class ExtracurricularActivity < ActiveRecord::Base
 
-    include Enrollmentable
+    include Enrollable
 
     validates :name, presence: true, uniqueness: true
 

@@ -1,7 +1,7 @@
 module Gaku
   class ExamSession < ActiveRecord::Base
 
-    include Enrollmentable, Gradable
+    include Enrollable, Gradable
 
     belongs_to :exam
 

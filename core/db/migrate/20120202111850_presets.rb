@@ -1,4 +1,4 @@
-class Presets < ActiveRecord::Migration
+class Presets < ActiveRecord::Migration[4.2]
 
   def self.up
     enable_extension "hstore"

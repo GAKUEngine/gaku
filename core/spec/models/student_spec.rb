@@ -13,27 +13,27 @@ describe Gaku::Student do
   describe 'associations' do
     it { should have_many(:student_reviews) }
     it { should have_many(:enrollments).dependent(:destroy) }
-    it { should have_many(:courses).through(:enrollments).source(:enrollmentable)  }
-    it { should have_many(:class_groups).through(:enrollments).source(:enrollmentable)  }
-    it { should have_many(:exam_sessions).through(:enrollments).source(:enrollmentable)  }
-    it { should have_many(:extracurricular_activities).through(:enrollments).source(:enrollmentable)  }
+    it { should have_many(:courses).through(:enrollments).source(:enrollable)  }
+    it { should have_many(:class_groups).through(:enrollments).source(:enrollable)  }
+    it { should have_many(:exam_sessions).through(:enrollments).source(:enrollable)  }
+    it { should have_many(:extracurricular_activities).through(:enrollments).source(:enrollable)  }
 
     it do
       should have_many(:course_enrollments)
               .class_name('Gaku::Enrollment')
-              .conditions(enrollmentable_type: 'Gaku::Course')
+              .conditions(enrollable_type: 'Gaku::Course')
     end
 
     it do
       should have_many(:class_group_enrollments)
               .class_name('Gaku::Enrollment')
-              .conditions(enrollmentable_type: 'Gaku::ClassGroup')
+              .conditions(enrollable_type: 'Gaku::ClassGroup')
     end
 
     it do
       should have_many(:extracurricular_activity_enrollments)
               .class_name('Gaku::Enrollment')
-              .conditions(enrollmentable_type: 'Gaku::ExtracurricularActivity')
+              .conditions(enrollable_type: 'Gaku::ExtracurricularActivity')
     end
 
 

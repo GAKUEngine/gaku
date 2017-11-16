@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::ExtracurricularActivitiesController do
+describe Gaku::ExtracurricularActivitiesController, type: :controller  do
 
   let(:extracurricular_activity) { create(:extracurricular_activity) }
   let(:invalid_extracurricular_activity) { create(:invalid_extracurricular_activity) }

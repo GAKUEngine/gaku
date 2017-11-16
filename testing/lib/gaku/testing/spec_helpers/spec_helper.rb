@@ -2,7 +2,6 @@ require_relative 'spec_helper_base'
 require 'rubygems'
 
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'database_cleaner'
 require 'active_record/fixtures'
 require 'factory_girl_rails'
@@ -18,14 +17,14 @@ require 'gaku/core/url_helpers'
 
 # require 'gaku/testing/support/features'
 
-# ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+# ActiveRecord::Migration[4.2].check_pending! if defined?(ActiveRecord::Migration[4.2])
 
 RSpec.configure do |config|
 
   # config.verbose_retry = true
   # config.default_retry_count = 3
 
-  config.before(:each) do
+  config.before(:each) do |example|
     if example.metadata[:js]
       DatabaseCleaner.strategy = :truncation
     else

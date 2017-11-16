@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::StudentsController do
+describe Gaku::StudentsController, type: :controller  do
 
   # let!(:admin) { create(:admin_user) }
   let!(:enrollment_status) { create(:enrollment_status_admitted) }

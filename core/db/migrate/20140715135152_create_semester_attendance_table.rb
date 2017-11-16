@@ -1,4 +1,4 @@
-class CreateSemesterAttendanceTable < ActiveRecord::Migration
+class CreateSemesterAttendanceTable < ActiveRecord::Migration[4.2]
 
   def change
     create_table :gaku_semester_attendances do |t|

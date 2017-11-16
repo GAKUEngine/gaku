@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::Students::SimpleGradesController do
+describe Gaku::Students::SimpleGradesController, type: :controller  do
 
   let(:student) { create(:student) }
   let!(:simple_grade_type) { create(:simple_grade_type) }

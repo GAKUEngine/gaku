@@ -1,6 +1,6 @@
 require 'spec_helper_controllers'
 
-describe Gaku::CoursesController do
+describe Gaku::CoursesController, type: :controller  do
 
   let(:course) { create(:course) }
   let(:invalid_course) { create(:invalid_course) }

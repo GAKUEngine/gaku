@@ -2,7 +2,7 @@ require 'spec_helper_models'
 
 describe Gaku::ExamSession do
 
-  it_behaves_like 'enrollmentable'
+  it_behaves_like 'enrollable'
 
   describe 'relations' do
     it { should belong_to :exam }

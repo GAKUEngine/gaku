@@ -1,17 +1,17 @@
 module Gaku
-  class Student < ActiveRecord::Base
+  class Student < ApplicationRecord
     include Person, Addresses, Contacts, Notes, Picture, Pagination
 
     has_many :enrollments, dependent: :destroy
 
     has_many :course_enrollments,
-      -> { where(enrollmentable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
+      -> { where(enrollable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
     has_many :class_group_enrollments,
-      -> { where(enrollmentable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
+      -> { where(enrollable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
     has_many :extracurricular_activity_enrollments,
-      -> { where(enrollmentable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
+      -> { where(enrollable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
 
-    with_options through: :enrollments, source: :enrollmentable do |assoc|
+    with_options through: :enrollments, source: :enrollable do |assoc|
       assoc.has_many :courses, source_type: 'Gaku::Course'
       assoc.has_many :class_groups, source_type: 'Gaku::ClassGroup'
       assoc.has_many :extracurricular_activities, source_type: 'Gaku::ExtracurricularActivity'

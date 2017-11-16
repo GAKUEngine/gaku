@@ -20,7 +20,7 @@ namespace :common do
                                  ]
 
     puts 'Setting up dummy database...'
-    cmd = 'bundle exec rake db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
+    cmd = 'bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
 
     if RUBY_PLATFORM =~ /mswin/ # windows
       cmd += ' >nul'

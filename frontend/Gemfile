@@ -1,9 +1,12 @@
 eval(File.read(File.dirname(__FILE__) + '/../core/core_dependencies.rb'))
 eval(File.read(File.dirname(__FILE__) + '/../common_gaku_dependencies.rb'))
 
-gemspec
 
 gem 'gaku_core', path: '../core'
 gem 'gaku_testing', path: '../testing'
+gem 'rails4_client_side_validations', path: '../../rails4_client_side_validations'
+gem 'phantom_helpers'
+gem 'phantom_forms'
+gem 'phantom_nested_forms'
 
-
+gemspec

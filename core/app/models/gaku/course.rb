@@ -1,7 +1,7 @@
 module Gaku
   class Course < ActiveRecord::Base
 
-    include Notes, Gradable, Enrollmentable, Semesterable
+    include Notes, Gradable, Enrollable, Semesterable
 
     has_many :course_group_enrollments
     has_many :course_groups, through: :course_group_enrollments

@@ -1,6 +1,6 @@
 require 'gaku/migrations'
 
-class GakuCore < ActiveRecord::Migration
+class GakuCore < ActiveRecord::Migration[4.2]
 
   include Gaku::Migrations
 

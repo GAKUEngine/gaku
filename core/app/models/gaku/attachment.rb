@@ -1,5 +1,5 @@
 module Gaku
-  class Attachment < ActiveRecord::Base
+  class Attachment < ApplicationRecord
     belongs_to :attachable, polymorphic: true
 
     has_attached_file :asset
@@ -8,6 +8,8 @@ module Gaku
 
     validates :name, presence: true
     validates :asset, presence: true, on: :create
+    do_not_validate_attachment_file_type :asset
+    validates_attachment_presence :asset
 
     def to_s
       name

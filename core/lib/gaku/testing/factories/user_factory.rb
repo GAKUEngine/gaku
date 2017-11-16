@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user, class: Gaku::User do
-    username { Faker::Internet.user_name }
-    email { Faker::Internet.email }
+    username { FFaker::Internet.user_name }
+    email { FFaker::Internet.email }
     password 'secret'
     password_confirmation 'secret'
 

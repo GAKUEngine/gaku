@@ -1,5 +1,5 @@
 require 'gaku_core'
-require 'gaku_frontend'
-require 'gaku_admin'
+require 'gaku_api'
+# require 'gaku_admin'
 require 'gaku_sample'
 require 'gaku_api'
