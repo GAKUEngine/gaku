@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
                     'VERSION',
                     'gaku.gemspec'
                   ]
-  # s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.require_paths = ['lib']
   s.bindir        = 'bin'
   s.executables   << 'gaku'
@@ -45,9 +44,10 @@ Gem::Specification.new do |s|
   s.requirements  << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', s.version
-  #s.add_dependency 'gaku_admin', s.version
+  # s.add_dependency 'gaku_admin', s.version
   # s.add_dependency 'gaku_frontend', s.version
   s.add_dependency 'gaku_api', s.version
-  s.add_dependency 'gaku_testing', s.version
-  s.add_dependency 'gaku_sample', s.version
+
+  s.add_development_dependency 'gaku_testing', s.version
+  s.add_development_dependency 'gaku_sample', s.version
 end
