@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
 
   s.files         = ['gaku_api.gemspec', "{app,config,db,lib}/**/*", 'Rakefile']
 
-  s.add_dependency "simple_command"
-  s.add_dependency "jwt"
-  s.add_dependency "active_model_serializers"
-  s.add_dependency "msgpack_rails"
-  s.add_dependency "kaminari"
+  s.add_dependency 'simple_command'
+  s.add_dependency 'jwt'
+  s.add_dependency 'active_model_serializers'
+  s.add_dependency 'msgpack_rails'
+  s.add_dependency 'kaminari'
 
   s.add_dependency 'gaku_core', s.version
 

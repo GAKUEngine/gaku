@@ -65,8 +65,7 @@ routes.txt
 elasticsearch*
 
 Gemfile.lock
-*/Gemfile.lock
-*/core/Gemfile.lock
+**/Gemfile.lock
 
 .localeapp
 /locales/

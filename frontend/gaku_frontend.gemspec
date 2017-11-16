@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.requirements << 'postgresql'
   s.requirements << 'postgresql-contrib'
 
+  s.add_dependency 'deface',                         '~> 1.2.0'
   s.add_dependency 'coffee-rails',                   '~> 4.2.1'
   s.add_dependency 'sass-rails',                     '~> 5.0.6'
   s.add_dependency 'sprockets',                      '3.7.1'
@@ -35,6 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'remotipart',                     '~> 1.3.1'
   s.add_dependency 'bootstrap-datetime-picker-for-rails', '~> 0.0.4'
   s.add_dependency 'socket.io-rails'
+  s.add_dependency 'activemodel-serializers-xml'
 
   s.add_dependency 'gaku_core', s.version
   s.add_dependency 'gaku_testing', s.version
