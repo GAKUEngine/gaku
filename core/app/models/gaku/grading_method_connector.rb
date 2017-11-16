@@ -1,7 +1,7 @@
 module Gaku
   class GradingMethodConnector < ActiveRecord::Base
-    belongs_to :grading_method
-    belongs_to :gradable, polymorphic: true
+    belongs_to :grading_method, required: false
+    belongs_to :gradable, polymorphic: true, required: false
 
     validates :grading_method_id, :gradable_id, :gradable_type, presence: true
 

@@ -1,8 +1,8 @@
 module Gaku
   class Enrollment < ActiveRecord::Base
 
-    belongs_to :student
-    belongs_to :enrollable, polymorphic: true, counter_cache: true
+    belongs_to :student, required: false
+    belongs_to :enrollable, polymorphic: true, counter_cache: true, required: false
 
     validates :enrollable_type, :enrollable_id, :student_id, presence: true
 

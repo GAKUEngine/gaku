@@ -87,7 +87,7 @@ describe Gaku::Exam do
   context '#max_score' do
     let(:exam_with_portions) { create(:exam, :with_portions) }
     it 'sums' do
-      expect(exam_with_portions.max_score).to eq 200
+      expect(exam_with_portions.max_score).to eq 300
     end
   end
 

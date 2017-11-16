@@ -5,7 +5,7 @@ module Gaku
     attr_accessor :custom_errors
 
     belongs_to :exam, counter_cache: true
-    belongs_to :grading_method
+    belongs_to :grading_method, required: false
 
     has_many :exam_schedules
     has_many :exam_portion_scores

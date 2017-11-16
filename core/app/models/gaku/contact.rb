@@ -1,7 +1,7 @@
 module Gaku
   class Contact < ActiveRecord::Base
-    belongs_to :contact_type
-    belongs_to :contactable, polymorphic: true, counter_cache: true
+    belongs_to :contact_type, required: false
+    belongs_to :contactable, polymorphic: true, counter_cache: true, required: false
 
     validates :data, :contact_type, presence: true
 

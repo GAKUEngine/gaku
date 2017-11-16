@@ -10,8 +10,8 @@ unless ENV['TRAVIS']
   end
 end
 
-group :development, :production do
-
+group :development, :test do
+  gem 'pry'
 end
 
 group :test do

@@ -1,7 +1,7 @@
 module Gaku
   class StudentSpecialty < ActiveRecord::Base
-    belongs_to :specialty
-    belongs_to :student
+    belongs_to :specialty, required: false
+    belongs_to :student, required: false
 
     validates :specialty_id, presence: true
 

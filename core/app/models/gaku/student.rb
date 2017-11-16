@@ -39,10 +39,10 @@ module Gaku
 
     has_many :student_reviews
 
-    belongs_to :user
-    belongs_to :commute_method_type
-    belongs_to :scholarship_status
-    belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code
+    belongs_to :user, required: false
+    belongs_to :commute_method_type, required: false
+    belongs_to :scholarship_status, required: false
+    belongs_to :enrollment_status, foreign_key: :enrollment_status_code, primary_key: :code, required: false
 
     accepts_nested_attributes_for :guardians, allow_destroy: true
 

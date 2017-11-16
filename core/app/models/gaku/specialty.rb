@@ -6,7 +6,7 @@ module Gaku
     has_many :program_specialties
     has_many :programs, through: :program_specialties
 
-    belongs_to :department
+    belongs_to :department, required: false
 
     validates :name, presence: true, uniqueness: true
 

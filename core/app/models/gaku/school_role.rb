@@ -1,6 +1,6 @@
 module Gaku
   class SchoolRole < ActiveRecord::Base
-    belongs_to :school_rolable, polymorphic: true
+    belongs_to :school_rolable, polymorphic: true, required: false
 
     validates :name, presence: true, uniqueness: true
 

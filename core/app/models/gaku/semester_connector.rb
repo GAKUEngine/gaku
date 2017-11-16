@@ -1,8 +1,8 @@
 module Gaku
   class SemesterConnector < ActiveRecord::Base
 
-    belongs_to :semester
-    belongs_to :semesterable, polymorphic: true
+    belongs_to :semester, required: false
+    belongs_to :semesterable, polymorphic: true, required: false
 
     validates :semester_id, :semesterable_type, :semesterable_id, presence: true
 

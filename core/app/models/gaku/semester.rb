@@ -9,7 +9,7 @@ module Gaku
 
     has_many :semester_attendances
 
-    belongs_to :school_year
+    belongs_to :school_year, required: false
 
     validates :starting, :ending, presence: true
 

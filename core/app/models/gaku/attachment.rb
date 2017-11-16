@@ -1,6 +1,6 @@
 module Gaku
   class Attachment < ApplicationRecord
-    belongs_to :attachable, polymorphic: true
+    belongs_to :attachable, polymorphic: true, required: false
 
     has_attached_file :asset
 

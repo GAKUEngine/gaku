@@ -13,8 +13,8 @@ module Gaku
 
     has_many :exam_sessions
 
-    belongs_to :grading_method
-    belongs_to :department
+    belongs_to :grading_method, required: false
+    belongs_to :department, required: false
 
     validates :name, presence: true
 

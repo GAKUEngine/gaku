@@ -1,8 +1,8 @@
 module Gaku
   class Address < ActiveRecord::Base
-    belongs_to :country
-    belongs_to :state
-    belongs_to :addressable, polymorphic: true, counter_cache: true
+    belongs_to :country, required: false
+    belongs_to :state, required: false
+    belongs_to :addressable, polymorphic: true, counter_cache: true, required: false
 
     scope :students,  -> { where(addressable_type: 'Gaku::Student') }
     scope :teachers,  -> { where(addressable_type: 'Gaku::Teacher') }

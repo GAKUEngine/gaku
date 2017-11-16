@@ -8,8 +8,8 @@ module Gaku
 
     has_many :exam_schedules
 
-    belongs_to :syllabus
-    belongs_to :class_group
+    belongs_to :syllabus, required: false
+    belongs_to :class_group, required: false
 
     delegate :name, :code, to: :syllabus, prefix: true, allow_nil: true
 
