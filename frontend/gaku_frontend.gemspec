@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.summary      = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'
   s.description  = 'The default Rails front end for GAKU Engine, with web views etc.'
 
-  s.files        = Dir['gaku_frontend.gemspec', 'LICENSE', 'README.md', 'app/**/*', 'config/**/*',
-                       'lib/**/*', 'db/**/*', 'vendor/**/*']
+  s.files        = ['gaku_frontend.gemspec', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*',
+                    'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 

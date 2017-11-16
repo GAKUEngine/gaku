@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.summary      = 'GAKU Engine core module'
   s.description  = 'Core functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
 
-  s.files        = Dir['gaku_core.gemspec', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*',
-                       'vendor/**/*']
+  s.files        = ['gaku_core.gemspec', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*',
+                    'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 
