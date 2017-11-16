@@ -1,20 +1,13 @@
-$:.push File.expand_path("../lib", __FILE__)
+require_relative '../common_gaku_gemspec_mixin'
 
-# Maintain your gem's version:
-require "gaku/api/version"
-
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "gaku_api"
-  s.version     = Gaku::Api::VERSION
-  s.authors     = ["Georgi Tapalilov"]
-  s.email       = ["tapalilov@gmail.com"]
-  s.homepage    = ""
-  s.summary     = "Summary of Api."
-  s.description = "Description of Api."
-  s.license     = "MIT"
+  set_gaku_gemspec_shared s
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.name        = 'gaku_api'
+  s.summary      = 'GAKU Engine API module'
+  s.description  = 'API functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
+
+  s.files = Dir'gaku_api.gemspec', "{app,config,db,lib}/**/*", 'Rakefile']
 
   s.add_dependency "simple_command"
   s.add_dependency "jwt"
@@ -23,9 +16,5 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari"
 
   s.add_dependency 'gaku_core', s.version
-  s.add_dependency 'gaku_testing', s.version
-
-
-
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'gaku_testing', s.version
 end

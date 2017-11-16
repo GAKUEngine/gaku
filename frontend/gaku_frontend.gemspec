@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.summary      = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'
   s.description  = 'The default Rails front end for GAKU Engine, with web views etc.'
 
-  s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
+  s.files        = Dir['gaku_frontend.gemspec', 'LICENSE', 'README.md', 'app/**/*', 'config/**/*',
+                       'lib/**/*', 'db/**/*', 'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 
@@ -26,12 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'slim',                           '~> 3.0.7'
 
   s.add_dependency 'responders',                     '~> 2.3.0'
-
-  # s.add_dependency 'rails4_client_side_validations', '~> 4.2'
-  #
-  # s.add_dependency 'phantom_helpers',                '~> 0.11'
-  # s.add_dependency 'phantom_forms',                  '~> 0.3.0'
-  # s.add_dependency 'phantom_nested_forms',           '~> 0.3'
 
   s.add_dependency 'nested_form'
 

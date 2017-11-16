@@ -135,7 +135,6 @@ Pull requests are very welcome! Please try to follow these simple rules:
 * [Rei Kagetsuki](http://github.com/Kagetsuki)
 * [Georgi Tapalilov](http://github.com/tapalilov)
 * [Yukiharu Nakaya](http://github.com/snowsunny)
-* [Rika Yoshida](http://github.com/snowsunny)
 
 ### Contributors
 

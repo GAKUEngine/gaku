@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require_relative '../common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
@@ -9,7 +7,8 @@ Gem::Specification.new do |s|
   s.summary      = 'GAKU Engine core module'
   s.description  = 'Core functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
 
-  s.files        = Dir['LICENSE', 'README.md', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*', 'vendor/**/*']
+  s.files        = Dir['gaku_core.gemspec', 'app/**/*', 'config/**/*', 'lib/**/*', 'db/**/*',
+                       'vendor/**/*']
   s.test_files   = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
 
@@ -23,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'redis',                          '~> 3.3.3'
 
   s.add_dependency 'carmen',                         '~> 1.0.2'
-  s.add_dependency 'globalize',                      '5.1.0'
+  s.add_dependency 'globalize',                      '~> 5.1.0'
   s.add_dependency 'activemodel-serializers-xml'
 
   s.add_dependency 'paperclip',                      '~> 5.1.0'
