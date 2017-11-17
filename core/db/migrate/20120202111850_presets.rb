@@ -1,8 +1,8 @@
 class Presets < ActiveRecord::Migration[4.2]
 
   def self.up
-    enable_extension "hstore"
-
+    # enable_extension "hstore"
+    execute "CREATE EXTENSION IF NOT EXISTS hstore"
     create_table :gaku_presets do |t|
       t.string   :name
       t.boolean  :default,         default: false
@@ -23,8 +23,7 @@ class Presets < ActiveRecord::Migration[4.2]
 
   def self.down
     drop_table :gaku_presets
-
-    disable_extension "hstore"
+    execute "DROP EXTENSION IF EXISTS hstore"
   end
 
 end
