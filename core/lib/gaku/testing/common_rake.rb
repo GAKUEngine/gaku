@@ -27,10 +27,21 @@ namespace :common do
       ActiveRecord::Base.connection
       db_accessible = true if ActiveRecord::Base.connected?
     rescue
-      puts 'Database was not accessible. Attempting to create (hit CTRL+C to cancel)...'
+      printf "Database was not accessible. How would you like to proceed?\n" \
+        "(1) Try to create user and database manually (requires sudo)\n" \
+        "(2) Attempt to run migrations. This requires the following:\n" \
+        "\t * HStore installed\n" \
+        "\t * Postgres user \"manabu\" with password \"manabu\"\n" \
+        "\t * Database \"gaku_test\" and \"gaku_development\" with full permission granted to \"manabu\"\n" \
+        "(3) Use \"manabu\" Postgres user (password \"manabu\"), assuming user has superuser status\n" \
+        "Please enter 1, 2, or 3. Enter anything else or simply hit enter to cancel: "
+      selection = STDIN.getc
+      puts "Selection was #{selection.chr}"
+
       `sudo -u postgres psql -c "CREATE USER manabu WITH PASSWORD 'manabu';"`
       `sudo -u postgres psql -c "ALTER USER manabu CREATEDB;"`
       `sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS hstore;"`
+      
       #`sudo -u postgres psql -c "DROP DATABASE gaku_test;"`
       #`sudo -u postgres psql -c "CREATE DATABASE gaku_test;"`
       #`sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_test\" to manabu;"`
@@ -39,22 +50,24 @@ namespace :common do
       #`sudo -u postgres psql -c "CREATE DATABASE gaku_development;"`
       #`sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_development\" to manabu;"`
       #`sudo -u postgres psql -c "ALTER DATABASE gaku_development OWNER TO manabu;"`
-      `sudo -u postgres psql -c "ALTER ROLE manabu superuser;"`
+      
+      #`sudo -u postgres psql -c "ALTER ROLE manabu superuser;"`
       `bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test`
-      `sudo -u postgres psql -c "ALTER ROLE manabu nosuperuser;"`
+      #`sudo -u postgres psql -c "ALTER ROLE manabu nosuperuser;"`
     end
 
     if db_accessible
+      puts 'Database found and is accessible by manabu user. Assuming empty and preparing. To clear database run "rake drop_test_app".'
       #cmd = 'bundle exec rails app:update:bin db:environment:set db:migrate db:test:prepare RAILS_ENV=test'
-      cmd = 'bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
+      #cmd = 'bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test'
 
-      if RUBY_PLATFORM =~ /mswin/ # windows
-        cmd += ' >nul'
-      else
-        cmd += ' >/dev/null'
-      end
+      #if RUBY_PLATFORM =~ /mswin/ # windows
+      #  cmd += ' >nul'
+      #else
+      #  cmd += ' >/dev/null'
+      #end
 
-      system(cmd)
+      #system(cmd)
     end
   end
 end
