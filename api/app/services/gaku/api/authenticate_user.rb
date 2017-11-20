@@ -1,3 +1,4 @@
+require 'json_web_token'
 module Gaku
   module Api
     class AuthenticateUser

@@ -3,6 +3,7 @@ services:
   web:
     environment:
       - RAILS_ENV=development
+      - REDIS_HOST=redis
     build: .
     command: "bin/check_postgres.sh bundle exec rails server -b 0.0.0.0 -p 9000"
     ports:
