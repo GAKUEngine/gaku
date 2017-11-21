@@ -1,2 +1,2 @@
 development:
-  url: postgres://postgres:@postgres:5432/gaku_dev_staging
+  url: postgres://manabu:manabu@postgres:5432/gaku_development
