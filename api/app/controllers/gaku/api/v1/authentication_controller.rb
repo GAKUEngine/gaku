@@ -9,10 +9,11 @@ module Gaku
             email: params[:email],
             password: params[:password]
           )
+
           if command.success?
-            render json: { tokens: command.result }
+            render(respond_format => { tokens: command.result })
           else
-            render json: { error: command.errors }, status: :unauthorized
+            render(respond_format => { error: command.errors }, status: :unauthorized)
           end
         end
 
@@ -21,9 +22,9 @@ module Gaku
           command = Gaku::Api::RefreshAuthenticateUser.call(params[:refresh_token])
 
           if command.success?
-            render json: { tokens: command.result }
+            render respond_format => { tokens: command.result }
           else
-            render json: { error: command.errors }, status: :unauthorized
+            render respond_format => { error: command.errors }, status: :unauthorized
           end
         end
 

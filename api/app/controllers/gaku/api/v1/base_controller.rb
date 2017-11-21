@@ -10,18 +10,16 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   private
 
+  def respond_format
+    request.format.to_sym
+  end
+
   def member_respond_to(object, options = {})
-    respond_to do |format|
-      format.json { render({ json: object, root: false, adapter: :attributes }.merge!(options)) }
-      format.msgpack { render({ msgpack: object, root: false, adapter: :attributes }.merge!(options)) }
-    end
+    render({respond_format => object, root: false, adapter: :attributes }.merge!(options))
   end
 
   def collection_respond_to(collection, options = {})
-    respond_to do |format|
-      format.json { render({json: collection, root: false, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
-      format.msgpack { render({msgpack: collection, root: false, adapter: :json, meta: meta_for(collection)}.merge!(options)) }
-    end
+    render({respond_format => collection, root: false, adapter: :json, meta: meta_for(collection)}.merge!(options))
   end
 
   def meta_for(collection)
@@ -30,10 +28,7 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   def authenticate_request
     @current_user =  Gaku::Api::AuthorizeApiRequest.call(request.headers).result
-    respond_to do |format|
-      format.json { render json: { error: 'Not Authorized' }, status: 401 unless @current_user }
-      format.msgpack { render msgpack: { error: 'Not Authorized' }, status: 401 unless @current_user }
-    end
+    render respond_format => { error: 'Not Authorized' }, status: 401 unless @current_user
   end
 
   def set_default_format
@@ -43,17 +38,11 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   end
 
   def render_unprocessable_entity_response(exception)
-    respond_to do |format|
-      format.json { render json: exception.record.errors, status: :unprocessable_entity }
-      format.msgpack { render msgpack: exception.record.errors, status: :unprocessable_entity }
-    end
+    render(respond_format => exception.record.errors, status: :unprocessable_entity)
   end
 
   def render_not_found_response(exception)
-    respond_to do |format|
-      format.json { render json: { error: "record not found" }, status: :not_found }
-      format.msgpack { render msgpack: { error: "record not found" }, status: :not_found }
-    end
+    render(respond_format => { error: "record not found" }, status: :not_found)
   end
 
 end
