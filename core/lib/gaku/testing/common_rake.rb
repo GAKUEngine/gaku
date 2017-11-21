@@ -30,6 +30,7 @@ namespace :common do
         "\t * HStore installed\n" \
         "\t * Postgres user \"manabu\" with password \"manabu\"\n" \
         "\t * Database \"gaku_test\" and \"gaku_development\" with full permission granted to \"manabu\"\n" \
+        "\t * Database \"gaku_test\" and \"gaku_development\" are *empty*\n" \
         "Please enter 1 or 2. Enter anything else or simply hit enter to cancel: "
       selection = STDIN.getc
       case selection
@@ -38,7 +39,7 @@ namespace :common do
           _autopilot_setup
         when '2' then
           puts 'Running creation tasks/migrations...'
-          `bundle exec rails app:update:bin db:environment:set db:migrate db:test:prepare RAILS_ENV=test`
+          `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
         else
           puts
       end
@@ -67,7 +68,7 @@ def _autopilot_setup
   puts "Done."
 
   puts "Running tasks..."
-  `bundle exec rails app:update:bin db:environment:set db:migrate db:test:prepare RAILS_ENV=test`
+  `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
   puts "Done. If the test app does not run normally please follow the setup guide at: "
   puts "https://github.com/GAKUEngine/gaku"
 end
