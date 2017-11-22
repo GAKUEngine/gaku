@@ -3,20 +3,27 @@ module Gaku
     attr_accessor :command
 
     def initialize(command)
-      require 'pry';binding.pry
       @command = command
     end
 
     def execute
-      system(resolve_command)
+      system("#{goto_root_dir};#{resolve_command}")
     end
 
     private
 
+    def goto_root_dir
+      "cd #{__dir__}/../../"
+    end
+
     def resolve_command
       case command
       when 'start'
-        'docker-compose up'
+        "docker-compose up -d"
+      when 'stop'
+        'docker-compose down'
+      when 'delete'
+        'docker-compose down -v'
       when 'console'
         'docker-compose exec web bundle exec rails console'
       when 'shell'
