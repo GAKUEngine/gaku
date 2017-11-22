@@ -30,5 +30,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'highline'
   s.add_dependency 'ffaker',            '~> 2.5.0'
   s.add_dependency 'rake-progressbar'
-  s.add_dependency 'globalize'
+  s.add_dependency 'globalize', '~> 5.1.0.beta2'
 end

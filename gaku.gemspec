@@ -48,6 +48,6 @@ Gem::Specification.new do |s|
   # s.add_dependency 'gaku_frontend', s.version
   s.add_dependency 'gaku_api', s.version
 
-  s.add_development_dependency 'gaku_testing', s.version
-  s.add_development_dependency 'gaku_sample', s.version
+  s.add_dependency 'gaku_testing', s.version
+  s.add_dependency 'gaku_sample', s.version
 end

@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 eval(File.read(File.dirname(__FILE__) + '/core_dependencies.rb'))
 
-gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'activemodel-serializers-xml'
 
 gemspec
