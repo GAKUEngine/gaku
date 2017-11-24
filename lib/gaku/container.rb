@@ -16,7 +16,7 @@ module Gaku
       _exe 'docker-compose exec web bundle exec rails console'
     end
 
-    def self.Shell
+    def self.Terminal
       _exe 'docker-compose exec web bundle exec /bin/bash'
     end
 
