@@ -1,39 +1,39 @@
 module Gaku
   class Container
-    attr_accessor :command
-
-    def initialize(command)
-      @command = command
+    def self.Start
+      _exe 'docker-compose up -d'
     end
 
-    def execute
-      system("#{goto_root_dir};#{resolve_command}")
+    def self.Stop
+      _exe 'docker-compose down'
     end
 
-    private
+    def self.Delete
+      _exe 'docker-compose down -v'
+    end
 
-    def goto_root_dir
+    def self.Console
+      _exe 'docker-compose exec web bundle exec rails console'
+    end
+
+    def self.Shell
+      _exe 'docker-compose exec web bundle exec /bin/bash'
+    end
+
+    def self.Sample
+      _exe 'docker-compose exec  web bundle exec rake db:sample'
+    end
+
+    def self.Detach
+      _exe 'docker-compose up -d'
+    end
+
+    def self._goto_root_dir
       "cd #{__dir__}/../../"
     end
 
-    def resolve_command
-      case command
-      when 'start'
-        "docker-compose up -d"
-      when 'stop'
-        'docker-compose down'
-      when 'delete'
-        'docker-compose down -v'
-      when 'console'
-        'docker-compose exec web bundle exec rails console'
-      when 'shell'
-        'docker-compose exec web bundle exec /bin/bash'
-      when 'sample'
-        'docker-compose exec  web bundle exec rake db:sample'
-      when 'detach'
-        'docker-compose up -d'
-      end
+    def self._exe(command)
+      `#{_goto_root_dir} && #{command}`
     end
-
   end
 end
