@@ -7,7 +7,11 @@ Gem::Specification.new do |s|
   s.summary       = 'GAKU Engine API module'
   s.description   = 'API functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
 
-  s.files         = ['gaku_api.gemspec', "{app,config,db,lib}/**/*", 'Rakefile']
+  s.files         = Dir.glob("{app,config,db,lib}/**/*") +
+                    [
+                      'Rakefile',
+                      'gaku_api.gemspec'
+                    ]
 
   s.add_dependency 'simple_command'
   s.add_dependency 'jwt'

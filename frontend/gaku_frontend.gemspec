@@ -5,16 +5,19 @@ require_relative '../common_gaku_gemspec_mixin'
 Gem::Specification.new do |s|
   set_gaku_gemspec_shared s
 
-  s.name         = 'gaku_frontend'
-  s.summary      = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'
-  s.description  = 'The default Rails front end for GAKU Engine, with web views etc.'
+  s.name          = 'gaku_frontend'
+  s.summary       = 'Default front end web views for GAKU Engine. See https://github.com/GAKUEngine/gaku'
+  s.description   = 'The default Rails front end for GAKU Engine, with web views etc.'
 
-  s.files        = ['gaku_frontend.gemspec', "app/**/*", "config/**/*", "lib/**/*", "db/**/*",
-                    "vendor/**/*"]
-  s.require_path = 'lib'
+  s.files         = Dir.glob("{app,config,lib}/**/*") +
+                    [
+                      'Rakefile',
+                      'gaku_frontend.gemspec'
+                    ]
+  s.require_path  = 'lib'
 
-  s.requirements << 'postgresql'
-  s.requirements << 'postgresql-contrib'
+  s.requirements  << 'postgresql'
+  s.requirements  << 'postgresql-contrib'
 
   s.add_dependency 'deface',                         '~> 1.2.0'
   s.add_dependency 'coffee-rails',                   '~> 4.2.1'

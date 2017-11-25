@@ -3,16 +3,19 @@ require_relative '../common_gaku_gemspec_mixin'
 Gem::Specification.new do |s|
   set_gaku_gemspec_shared s
 
-  s.name         = 'gaku_core'
-  s.summary      = 'GAKU Engine core module'
-  s.description  = 'Core functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
+  s.name          = 'gaku_core'
+  s.summary       = 'GAKU Engine core module'
+  s.description   = 'Core functionality for GAKU Engine. See https://github.com/GAKUEngine/gaku'
 
-  s.files        = ['gaku_core.gemspec', "app/**/*", "config/**/*", "lib/**/*", "db/**/*",
-                    "vendor/**/*"]
-  s.require_path = 'lib'
+  s.files         = Dir.glob("{app,config,db,lib}/**/*") +
+                    [
+                      'Rakefile',
+                      'gaku_core.gemspec'
+                    ]
+  s.require_path  = 'lib'
 
-  s.requirements << 'postgresql'
-  s.requirements << 'postgresql-contrib'
+  s.requirements  << 'postgresql'
+  s.requirements  << 'postgresql-contrib'
 
   s.add_dependency 'rails',             '~> 5.1.4'
   s.add_dependency 'rails-i18n',        '~> 5.0.3'
