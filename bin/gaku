@@ -10,9 +10,11 @@ class GakuCLI < Thor
     puts spec.version
   end
 
-  desc 'new', 'Creates a new installation of GAKU Engine.'
-  def new()
-    puts 'WIP'
+  desc 'new [APP_PATH]', 'Creates a new installation of GAKU Engine at APP_PATH.'
+  long_desc "Creates a new application in the current directory or in the specificed path."
+  def new(path = './')
+    real_path = File.expand_path(path)
+    puts "Creating new GAKU Engine installation at #{path}"
   end
 
   desc 'update', 'Updates an installation of GAKU Engine.'
@@ -25,8 +27,22 @@ class GakuCLI < Thor
     puts 'WIP'
   end
   
-  desc 'backup', 'Creates a full backup of the current GAKU installation.'
-  def backup()
+  desc 'backup [BACKUP_PATH]', 'Creates a full backup of the current GAKU installation in BACKUP_PATH.'
+  def backup(path = './backup/')
+    real_path = File.expand_path(path)
+    time = DateTime.now()
+    puts "Creating a GAKU Engine backup at #{path}/GAKU-backup-#{time}.tar.xz"
+    puts 'WIP'
+  end
+
+  desc 'restore [BACKUP_PATH]', 'Restores a full backup of a GAKU installation from BACKUP_PATH.'
+  def backup(path = '')
+    if path == ''
+      puts 'Backup not specified. Aborting restore.'
+      return
+    end
+    restore_path = File.expand_path(path)
+    puts "Restoring GAKU Engine backup from #{path}"
     puts 'WIP'
   end
 
