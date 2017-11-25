@@ -2,34 +2,56 @@
 require 'thor'
 require_relative '../lib/gaku/container'
 
-module GakuCLI
+class GakuCLI < Thor
+  desc 'version', 'Prints the version of the installed gaku gem (from which this command is being run).'
+  def version()
+    require 'rubygems'
+    spec = Gem::Specification::load("#{__dir__}/../gaku.gemspec")
+    puts spec.version
+  end
+
+  desc 'new', 'Creates a new installation of GAKU Engine.'
+  def new()
+    puts 'WIP'
+  end
+
+  desc 'update', 'Updates an installation of GAKU Engine.'
+  def update()
+    puts 'WIP'
+  end
+
+  desc 'install', 'Installs GAKU into the OS as a service.'
+  def install()
+    puts 'WIP'
+  end
+  
+  desc 'backup', 'Creates a full backup of the current GAKU installation.'
+  def backup()
+    puts 'WIP'
+  end
+
   class Container < Thor
-    # TODO: add description to commands
-    desc 'test', 'test'
+    desc 'start', 'Starts a container, using local Docker settings if found in current directory.'
     def start
       ::Gaku::Container.Start
     end
 
-    # TODO: add description
-    desc 'stop', 'test'
+    desc 'stop', 'Stops running containers.'
     def stop
       ::Gaku::Container.Stop
     end
 
-    # TODO: add description
-    desc 'delete', 'test'
+    desc 'delete', 'Deletes container data, stopping running containers if needed.'
     def delete
       ::Gaku::Container.Delete
     end
 
-    # TODO: add description
-    desc 'console', 'test'
+    desc 'console', 'Connects to a console session on a running container.'
     def console
       ::Gaku::Container.Console
     end
 
-    # TODO: add description
-    desc 'sample', 'test'
+    desc 'sample', 'Seeds sample data to running container.'
     def sample
       ::Gaku::Container.Sample
     end
@@ -46,18 +68,8 @@ module GakuCLI
       ::Gaku::Container.Detach
     end
   end
-
-  class Gaku < Thor
-    desc 'version', "Prints the version of the installed WSlave"
-    def version()
-      require 'rubygems'
-      spec = Gem::Specification::load("#{__dir__}/../gaku.gemspec")
-      puts spec.version
-    end
-    # TODO: add description
-    desc 'container', 'test'
-    subcommand 'container', GakuCLI::Container
-  end
-
+  desc 'container', 'Build and run GAKU containers using Docker.'
+  subcommand 'container', GakuCLI::Container
 end
-GakuCLI::Gaku.start(ARGV)
+
+GakuCLI.start(ARGV)
