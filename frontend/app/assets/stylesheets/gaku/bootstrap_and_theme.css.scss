@@ -1,3 +1,7 @@
+$navbar-padding-vertical: 8px;
+$navbar-height: 72px;
+$popover-max-width: 512px + $navbar-padding-vertical * 2 ;
+
 @import "bootstrap";
 @import "bootstrap/glyphicons";
 
@@ -11,25 +15,38 @@
 
 .center-block {float: none !important}
 
-// for fix --------
+// for GAKUEngine UI --------
+ul.nav.navbar-nav {
+  .btn-group {
+    margin: 7px 0px;
+  }
+}
+
+.popover {
+  .popover-content {
+    padding: $navbar-padding-vertical;
+  }
+  .panel {
+    margin: 0px;
+  }
+}
+
 .nav-pills {
   li {
     background-color: #F8F8F8;
   }
 }
 
-//.index-header { margin-bottom: 10px; }
-
 .container {
   max-width: 1900px;
 }
 
 .alert-dismissable .close {
-position: relative;
-top: -2px;
-right: 0px;
-color: red;
-font-size: 24px;
+  position: relative;
+  top: -2px;
+  right: 0px;
+  color: red;
+  font-size: 24px;
 }
 
 .table {
@@ -48,6 +65,12 @@ font-size: 24px;
   }
   .panel:last-child {
     margin-bottom: 0px;
+  }
+}
+
+.btn-xs {
+  .badge {
+    margin-top: 2px;
   }
 }
 
@@ -302,10 +325,6 @@ font-size: 24px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
-}
-
-#user_menu {
-   margin-right: 25px;
 }
 
 .navbar .navbar-nav > .active > a {

@@ -1,5 +1,5 @@
 $('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
-$('.chosen-count').html('<%= "(#{@selection.size})" %>');
+<%= "#{@selection.size}" %> != 0 ? $('.chosen-count').html('<%= "#{@selection.size}" %>') : $('.chosen-count').html("");
 
 var selection = JSON.parse(("<%=j @selection.pluck(:id).to_json %>"))
 

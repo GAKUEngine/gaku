@@ -68,10 +68,14 @@ describe 'Students', type: :feature do
 
     it 'chooses students', js: true do
       find(:css, "input#student-#{student.id}").set(true)
+
+      find(:css, '#btn-students-chooser').click
+      sleep 1
+
       page.has_selector? '#students-checked-div'
 
       within('#students-checked-div') do
-        page.has_text? 'Chosen students(1)'
+        page.has_content? 'Collector1'
         # within('.show-chosen-table') { page.has_text? 'Show'}
         # click_link 'Show'
         wait_for_ajax

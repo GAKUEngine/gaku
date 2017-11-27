@@ -137,16 +137,20 @@ class App
       url: '/student_selection'
       dataType: 'script'
 
+<<<<<<< HEAD
     $(document).on 'click', '#clear-student-selection', (e)->
 
       e.preventDefault()
 
+=======
+    $(document).off('click', '#clear-student-selection').on 'click', '#clear-student-selection', ->
+>>>>>>> 07962f6b61d88d05be925d8c2d9ecfa3db7fee31
       $.ajax
         type: 'get'
         url: '/student_selection/clear'
         dataType: 'script'
 
-    $(document).on 'click', '.remove-student', ->
+    $(document).off('click', '.remove-student').on 'click', '.remove-student', ->
       thisId = $(this).closest('a').attr('id')
 
       $.ajax
@@ -155,11 +159,10 @@ class App
         data: { id: thisId },
         dataType: 'script'
 
-    $(document).on 'click', '.check-all', (e)->
+    $(document).off('click', '.check-all').on 'click', '.check-all', (e)->
       e.preventDefault()
 
       $checkboxes = $('.student-check')
-
       student_ids = []
       $('#students-index').find('tbody tr').map ->
         student_ids.push @id.split('-')[1]
@@ -182,12 +185,11 @@ class App
           data: { 'student_ids': student_ids },
           dataType: 'script'
 
-    $('body').on 'change', 'input.student-check', ->
+    $('body').off('change', 'input.student-check').on 'change', 'input.student-check', ->
       thisCheck = $(this)
       tr_id = $(this).closest('tr').attr('id')
       parsed_id = tr_id.split('student-')
       thisId = parsed_id[1]
-
 
       if thisCheck.is (':checked')
         $('#selected-students, #enroll-to-class-form, #enroll-to-course-form, #enroll-to-extracurricular-activity-form').append('<input type="hidden" name="selected_students[]" value="' + thisId + '" class="' + thisId + '"/>')
