@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::School do
+describe Gaku::School, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'avatarable'

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Role do
+describe Gaku::Role, type: :model do
 
   describe 'associations' do
     it { should have_many :user_roles }

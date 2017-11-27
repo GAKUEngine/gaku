@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ContactType do
+describe Gaku::ContactType, type: :model do
 
   describe 'relations' do
     it { should have_many :contacts }

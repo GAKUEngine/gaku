@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::StudentSpecialty do
+describe Gaku::StudentSpecialty, type: :model do
 
   describe 'associations' do
     it { should belong_to :specialty }

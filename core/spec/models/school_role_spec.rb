@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::SchoolRole do
+describe Gaku::SchoolRole, type: :model do
 
   describe 'relations' do
     it { should belong_to :school_rolable }

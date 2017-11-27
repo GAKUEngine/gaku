@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Exam do
+describe Gaku::Exam, type: :model do
 
   let!(:exam) { create(:exam) }
 

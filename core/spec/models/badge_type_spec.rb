@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::BadgeType do
+describe Gaku::BadgeType, type: :model do
 
   describe 'relations' do
     it { should have_many :badges }

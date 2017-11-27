@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Preset do
+describe Gaku::Preset, type: :model do
 
   it 'responds to .default' do
     expect(Gaku::Preset).to respond_to(:default)

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::SimpleGrade do
+describe Gaku::SimpleGrade, type: :model do
 
   describe 'associations' do
     it { should belong_to :simple_grade_type }

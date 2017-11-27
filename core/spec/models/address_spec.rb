@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Address do
+describe Gaku::Address, type: :model do
 
   let(:state)   { build(:state) }
   let(:country) { create(:country) }

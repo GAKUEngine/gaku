@@ -13,7 +13,7 @@ describe Gaku::Enrollment, type: :model do
     it { should validate_presence_of :enrollable_type }
 
     it do
-      should validate_uniqueness_of(:student_id).scoped_to([:enrollable_id, :enrollable_type])
+      should validate_uniqueness_of(:student_id).scoped_to([:enrollable_type, :enrollable_id])
                                                 # .with_message(/already enrolled/)
     end
 

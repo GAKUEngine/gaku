@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::StudentGuardian do
+describe Gaku::StudentGuardian, type: :model do
 
   describe 'associations' do
     it { should belong_to :student }

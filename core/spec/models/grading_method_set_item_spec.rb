@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::GradingMethodSetItem do
+describe Gaku::GradingMethodSetItem, type: :model do
 
   describe 'associations' do
     it { should belong_to :grading_method }

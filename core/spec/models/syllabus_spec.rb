@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Syllabus do
+describe Gaku::Syllabus, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'notable'

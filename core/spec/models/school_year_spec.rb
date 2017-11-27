@@ -1,5 +1,5 @@
 require 'spec_helper_models'
-describe Gaku::SchoolYear do
+describe Gaku::SchoolYear, type: :model do
 
   describe 'associations' do
     it { should have_many :semesters }

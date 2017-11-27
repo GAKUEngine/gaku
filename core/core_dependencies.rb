@@ -15,10 +15,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails',              '~> 3.6.0.beta2'
-  gem 'factory_girl_rails',       '~> 4.8.0'
+  gem 'rspec-rails',              '~> 3.7.2'
+  gem 'factory_girl_rails',       '~> 4.9.0'
   gem 'database_cleaner',         '~> 1.3.0'
-  gem 'shoulda-matchers',         '~> 2.8.0'
+  gem 'shoulda-matchers',         '~> 3.1.2'
   gem 'rails-controller-testing'
   gem 'simplecov'
   gem 'coveralls', require: false

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Attachment do
+describe Gaku::Attachment, type: :model do
 
   describe 'associations' do
     it { should belong_to :attachable }

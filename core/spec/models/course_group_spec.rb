@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::CourseGroup do
+describe Gaku::CourseGroup, type: :model do
 
   describe 'associations' do
     it { should have_many :course_group_enrollments }

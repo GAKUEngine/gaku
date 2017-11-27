@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::GradingMethodConnector do
+describe Gaku::GradingMethodConnector, type: :model do
 
   describe 'associations' do
     it { should belong_to :gradable }

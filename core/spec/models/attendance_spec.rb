@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Attendance do
+describe Gaku::Attendance, type: :model do
 
   describe 'relations' do
     it { should belong_to :attendance_type }
