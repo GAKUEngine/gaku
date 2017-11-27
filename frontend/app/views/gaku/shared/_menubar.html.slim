@@ -1,7 +1,36 @@
-nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
-  .navbar-header
-    a.navbar-brand href=root_path = image_tag('gaku-logo.png')
-  - if user_signed_in?
-    = render partial: "gaku/shared/menu/global"
-    = render partial: "gaku/shared/login_widget"
-    /= render partial: "shared/language_bar"
+.col-md-12
+  nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
+    .pull-left.ml-s
+      a#logo href=root_path
+        = image_tag 'gaku-logo.png', class: 'img-responsive'
+
+    - if user_signed_in?
+      .row#navbar-main
+        .col-md-12
+          = render partial: "gaku/shared/menu/global"
+          = render partial: "gaku/shared/login_widget"
+          /= render partial: "shared/language_bar"
+      .row#navbar-sub
+        .col-md-12
+          ul.nav.navbar-nav
+            li
+              button#btn-students-chooser.btn.btn-xs.btn-info.pull-left [
+                data-content=("#{render 'gaku/students/chooser_widget'}")
+                data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                | Collector
+                span.chosen-count.badge.ml-xs
+            / li
+              button#btn-students-chooser.btn.btn-xs.btn-warning.pull-left [
+                data-content=("Events")
+                data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                | Events
+                span.events-count.badge.ml-xs 123
+            / li
+              button#btn-students-chooser.btn.btn-xs.btn-danger.pull-left [
+                data-content=("Warning")
+                data-toggle="popover" type="button" data-placement="bottom"
+              ]
+                | Notifications
+                span.notifications-count.badge.ml-xs 123

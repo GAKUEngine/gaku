@@ -2,6 +2,7 @@
 $nprogress-color: #bbbcde;
 @import 'nprogress';
 @import 'nprogress-bootstrap';
+@import '../bootstrap_and_theme';
 
 // for HTML tag ----------------
 $c_red: #e45353; /* Error red */
@@ -16,7 +17,7 @@ html {
 }
 
 body {
-  padding-top: 70px;
+  padding-top: $navbar-height + 20px;
 }
 
 hr {
@@ -29,9 +30,39 @@ h1, h2, h3, h4, h5, h6 {
 
 
 // for GAKUEngine ----------------
-.container {
-  width: 100%;
-  max-width: 1900px;
+#user_menu {
+  padding-right: 30px;
+}
+
+$logo-width: 205px;
+.navbar.navbar-fixed-top {
+  #logo {
+    height: $navbar-height;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    z-index: 10;
+  }
+  .row[id^="navbar-"]{
+    height: $navbar-height / 2;
+    .col-md-12{
+      margin-left: -$logo-width;
+      padding-left: $logo-width + 15px;
+    }
+  }
+  .row#navbar-sub {
+    ul.nav.navbar-nav {
+      .btn.btn-xs {
+        margin: 7px 0px 7px 15px;
+      }
+    }
+  }
+}
+
+.popover {
+  #students-checked-div {
+    width: $popover-max-width - 20px;
+  }
 }
 
 .notice {
@@ -157,7 +188,7 @@ form {
 }
 
 .navbar-brand {
-  padding: 12px 15px 0px 15px;
+  height: $line-height-computed + $navbar-padding-vertical * 2;
 }
 
 .divider-vertical {

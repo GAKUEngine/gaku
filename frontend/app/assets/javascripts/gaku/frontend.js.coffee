@@ -47,3 +47,14 @@
 NProgress.configure
   showSpinner: false
   ease: 'ease-in-out'
+
+$ ->
+  $(document)[0].app.student_chooser()
+
+  $('#btn-students-chooser').popover(
+    html: true
+  ).on "shown.bs.popover", ->
+    $(document)[0].app.student_chooser()
+
+  $('[data-toggle="popover"]').popover
+    html: true
