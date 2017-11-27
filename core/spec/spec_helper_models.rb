@@ -19,6 +19,9 @@ Dir["#{File.dirname(__FILE__)}/support/models/**/*.rb"].each { |f| require f }
 # ActiveRecord::Migration[4.2].check_pending! if defined?(ActiveRecord::Migration[4.2])
 
 RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
