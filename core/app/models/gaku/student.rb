@@ -62,6 +62,10 @@ module Gaku
       where(enrollment_status_code: EnrollmentStatus.active.pluck(:code))
     end
 
+    def full_name
+      "#{name} #{surname}"
+    end
+
     def make_enrolled
       enrollment_status = EnrollmentStatus.where(
         code: 'enrolled',

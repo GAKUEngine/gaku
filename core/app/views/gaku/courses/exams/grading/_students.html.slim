@@ -1,0 +1,12 @@
+table.grading.grading-students.table.table-bordered.table-condensed
+  thead
+    tr
+      th.btn-info style="width:60px" Class
+      th.btn-info style="width:60px" Seat_Number
+      th.btn-info style="width:150px" Name
+  tbody
+    - students.each do |student|
+      = tr_for student do
+        td.vm-tc
+        td.vm-tc
+        td.vm = student.full_name

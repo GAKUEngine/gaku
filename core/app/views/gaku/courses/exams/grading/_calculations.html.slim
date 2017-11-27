@@ -1,0 +1,16 @@
+table.grading.grading-calculations.table.table-bordered.table-condensed
+  thead
+    tr
+      th.btn-inverse Total & Grade
+  tbody
+    - @students.each do |student|
+      = tr_for student do
+        td
+          - p "student dayo-"
+          - p student
+          - p "exam dayo-"
+          - p @exam
+          - p "student_total_scores dayo-"
+          - p @student_total_scores
+
+          = @student_exams_total_score[:raw][@exam.id][student.id]

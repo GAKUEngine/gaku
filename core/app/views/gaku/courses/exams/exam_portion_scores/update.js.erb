@@ -1,0 +1,5 @@
+var jsonObject = '<%= @exam_portion_score.to_json.html_safe.to_s %>'
+<% broadcast "/messages/new" do %>
+  $('#edit_exam_portion_score_<%= @exam_portion_score.id %>').children('input').val('<%= @exam_portion_score.score %>')
+<% end %>
+

@@ -1,0 +1,25 @@
+doctype 5
+html
+  head
+    = favicon_link_tag 'gakuengine20.png'
+    title
+      = content_for?(:title) ? yield(:title) + " | GAKU" : "GAKU"
+    = javascript_tag '$.fx.off = true;' if Rails.env.test?
+    = stylesheet_link_tag "gaku/all"
+    = javascript_include_tag "gaku/all"
+    = javascript_include_tag  "http://localhost:9292/faye.js"
+
+
+    = csrf_meta_tags
+  body data-action=current_controller_action data-parent-controller=current_parent_controller
+    .container
+      = render 'gaku/shared/modal_config'
+      = render 'gaku/shared/menubar'
+      #notice
+        - unless flash.empty?
+          = render "gaku/shared/flash", flash: flash
+      #errors
+
+      #modal-dialogs
+
+      = content_for?(:content) ? yield(:content) : yield

@@ -1,0 +1,7 @@
+= f.text_field :name,        label: t(:'grading_method.name')
+= f.text_field :description, label: t(:'grading_method.description')
+
+/= f.text_field :method,      label: t(:'grading_method.method')
+= f.select :method, {"Score" => "score", "Percentage" => "percentage", "Ordinal" => "ordinal", "Interval" => "interval", "Ratio" => "ratio", "Pass/Fail" => "pass_fail"}, {prompt: "メソッドを選択してください"} , class: "form-control"
+
+= render 'arguments_form_fields', f: f
