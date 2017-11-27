@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::State do
+describe Gaku::State, type: :model do
 
   describe 'associations' do
     it { should belong_to :country }

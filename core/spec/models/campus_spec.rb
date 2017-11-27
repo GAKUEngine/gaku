@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Campus do
+describe Gaku::Campus, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'contactable'

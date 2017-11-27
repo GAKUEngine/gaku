@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ClassGroup do
+describe Gaku::ClassGroup, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'notable'

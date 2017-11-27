@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::UserRole do
+describe Gaku::UserRole, type: :model do
 
   describe 'associations' do
     it { should belong_to :user }

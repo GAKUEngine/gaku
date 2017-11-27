@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::GradingMethodSet do
+describe Gaku::GradingMethodSet, type: :model do
 
   describe 'relations' do
     it { should have_many(:grading_method_set_items) }

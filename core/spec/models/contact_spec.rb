@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Contact do
+describe Gaku::Contact, type: :model do
 
   describe 'associations' do
     it { should belong_to :contact_type }

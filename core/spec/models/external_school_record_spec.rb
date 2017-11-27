@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ExternalSchoolRecord do
+describe Gaku::ExternalSchoolRecord, type: :model do
 
   describe 'associations' do
     it { should belong_to :school }

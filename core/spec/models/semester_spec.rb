@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Semester do
+describe Gaku::Semester, type: :model do
   let(:school_year) do
     create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8'))
   end

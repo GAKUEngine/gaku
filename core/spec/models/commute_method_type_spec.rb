@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::CommuteMethodType do
+describe Gaku::CommuteMethodType, type: :model do
 
   describe 'associations' do
     it { should have_many :students }

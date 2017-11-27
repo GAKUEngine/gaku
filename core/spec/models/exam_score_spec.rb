@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ExamScore do
+describe Gaku::ExamScore, type: :model do
 
   describe 'relations' do
     it { should belong_to :exam }

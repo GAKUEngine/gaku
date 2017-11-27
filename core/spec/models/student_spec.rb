@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Student do
+describe Gaku::Student, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'person'

@@ -1,6 +1,4 @@
 en:
-  enroll: Enroll
-  clear: Clear
   academic: Academic
   achievement:
     add: Add Achievement
@@ -51,10 +49,10 @@ en:
     zipcode: Postal Code
   admitted: Admitted On
   alert:
-    already_added: '%{resource} are already added!'
-    empty: '%{resource} is empty!'
+    already_added: "%{resource} are already added!"
+    empty: "%{resource} is empty!"
     not_selected: No %{resource} selected!
-  and: ' and '
+  and: " and "
   are_you_sure: Are you sure?
   assignment:
     add: Add Assignment
@@ -163,7 +161,7 @@ en:
   class: Class
   class_group:
     add: Add Class Group
-    already_enrolled: Class group already enrolled!
+    already_enrolled: Already enrolled to the class group!
     choose: Choose Class Group
     edit: Edit Class Group
     enroll: Enroll Class Group
@@ -180,8 +178,10 @@ en:
     singular: Class Group
     with_semester: With Semester
     without_semester: Without Semester
+  class_group_course_enrollment:
+    save: Save Course to Class Group
+    singular: Course
   class_group_enrollment:
-    add: Enroll to class group
     count: Enrollments count
     create: Create Class Enrollment
     current: Current enrollment
@@ -223,7 +223,6 @@ en:
     new: New Contact
     plural: Contacts
     primary: Primary Contact
-    primary_email: Primary Email
     save: Save Contact
     singular: Contact
   contact_type:
@@ -241,7 +240,7 @@ en:
     already_enrolled: Already enrolled to course!
     choose: Choose Course
     code: Course Code
-    code_sample: '[EX: FALL2020]'
+    code_sample: "[EX: FALL2020]"
     combined_code: Combined Code
     count: Courses count
     edit: Edit Course
@@ -275,9 +274,9 @@ en:
     save: Save to Course Group
   date:
     formats:
-      default: '%Y-%m-%d'
-      long: '%Y %B %d'
-      short: '%y-%m-%d'
+      default: "%Y-%m-%d"
+      long: "%Y %B %d"
+      short: "%y-%m-%d"
     placeholder: YYYY-MM-DD
   default: Default
   delete: Delete
@@ -388,12 +387,8 @@ en:
   empty: Empty
   enroll_to_class: Enroll to class
   enrollment:
-    plural: Student enrollments
-    singular: Student enrollment
-    add: Enroll student
-    list: Student enrollments list
-    save: Save student enrollment
-    class_group_overlapping: A student cannot belong to two Class Groups with overlapping semesters
+    plural: Enrollments
+    singular: Enrollment
   enrollment_status:
     active: Active
     add: Add Enrollment Status
@@ -426,7 +421,7 @@ en:
       not_locked: was not locked
       not_saved:
         one: '1 error prohibited this %{resource} from being saved:'
-        other: '%{count} errors prohibited this %{resource} from being saved:'
+        other: "%{count} errors prohibited this %{resource} from being saved:"
     not_uploaded: Error when upload %{resource}!
   exam:
     add: Add Exam
@@ -460,16 +455,8 @@ en:
     use_weighting: Use Weighting
     view: View Exams
     weight: Weight
-  exam_session:
-    plural: Exam sessions
-    singular: Exam session
-    list: Exam session list
-    add: Add exam session
-    name: Name
-    session_time: Session time
-    session_start: Session start
-    minutes: "%{time} minutes"
   exam_portion:
+    add_option: Add option
     adjustments: Adjustments
     attached_file_count: Attached file count
     count: Exam portions count
@@ -484,7 +471,14 @@ en:
     name: Portion name
     plural: Exam Portions
     problem_count: Problem count
+    remove_option: Remove option
     save: Save exam portion
+    score_selection_options: Score Selection Options
+    score_type:
+      plural: 'Score type '
+      score: Numercial
+      score_selection: Selection
+      score_text: Text
     show: Show Exam Portion
     singular: Exam Portion
     use_weighting: Use Weighting
@@ -514,28 +508,28 @@ en:
     save: Save
     show: Show Extracurricular Activity
     singular: Extracurricular Activity
-    create: Create Extracurricular Activity Enrollment
-    choose: Choose Extracurricular Activity
+  extracurricular_activity_enrollment:
+    list: Student list
   failure:
     enrolled: Failed to enroll!
   file: File
   flash:
     actions:
       create:
-        notice: '%{resource_name} was successfully created!'
+        notice: "%{resource_name} was successfully created!"
       destroy:
-        alert: '%{resource_name} could not be destroyed!'
-        notice: '%{resource_name} was successfully destroyed!'
+        alert: "%{resource_name} could not be destroyed!"
+        notice: "%{resource_name} was successfully destroyed!"
       recovery:
-        alert: '%{resource_name} could not be recovered!'
-        notice: '%{resource_name} was successfully recovered!'
+        alert: "%{resource_name} could not be recovered!"
+        notice: "%{resource_name} was successfully recovered!"
       soft_delete:
-        alert: '%{resource_name} could not be destroyed!'
-        notice: '%{resource_name} was successfully destroyed!'
+        alert: "%{resource_name} could not be destroyed!"
+        notice: "%{resource_name} was successfully destroyed!"
       update:
-        notice: '%{resource_name} was successfully updated!'
+        notice: "%{resource_name} was successfully updated!"
       update_master:
-        notice: '%{resource_name} was successfully updated!'
+        notice: "%{resource_name} was successfully updated!"
   full_name: Full Name
   full_name_reading: Full Name Reading
   gaku_engine: GAKU Engine
@@ -564,28 +558,28 @@ en:
     weighting_portion: Weighting
   grading_method:
     add: Add Grading Method
-    add_criteria: Add criteria
-    choose: Choose grading type
+    add_argument: Add Argument
+    add_criteria: Add Criteria
+    arguments: Arguments
+    choose: Choose Grading Method
     criteria: Criteria
     curved: Curved
     description: Description
     edit: Edit Grading Method
     interval: Interval
     list: Grading Methods list
-    grading_type: Grading type
+    method: Method
     name: Name
     ordinal: Ordinal
     pass_fail: Pass/Fail
     percentage: Percentage
     plural: Grading Methods
     ratio: Ratio
-    remove_criteria: Remove criteria
+    remove_argument: Remove Argument
+    remove_criteria: Remove Criteria
     save: Save Grading Method
     score: Score
     singular: Grading Method
-  grading_method_connector:
-    add_set: Grading methods from grading method set added
-    already: Grading methods are already added
   grading_method_set:
     add: Add Grading Method Set
     display_deviation: Display Deviation
@@ -626,30 +620,12 @@ en:
   id: ID
   import: Import
   import_format: Import Format
-  import_file:
-    singular: Import file
-    pluralize: Import files
-    list: Import files list
-    add: Add import file
-    save: Save import file
-    importer_type: Importer type
-    data_file: Data file
-    choose: Choose importer type
-    file_name: File name
-    file_size: File size
-    content_type: Content type
-    importing: 'Importing for %{type} started!'
-
   is_graduated: Has Graduated
   language: Language
   languages:
     en: English
-    ja: 日本語[Japanese]
+    ja: "日本語[Japanese]"
   manage: Manage
-
-  admin:
-    back: Back to Admin
-    back_to_school: Back to School
   menu:
     admin:
       achievements: Achievements
@@ -676,9 +652,6 @@ en:
         grading_methods: Grading Methods
         grading_sets: Grading Sets
       grading_methods: Grading Methods
-      importer:
-        importer: Importer
-        student: Student Importer
       preset:
         plural: Presets
       school_details: School Details
@@ -696,7 +669,6 @@ en:
         enrollment_status: Enrollment Statuses
         states: States
         types: Types & Methods
-        student_review_categories: Student Review Categories
       users:
         roles: Roles
         users: Users
@@ -737,17 +709,15 @@ en:
     singular: Note
     title: Note Title
   notice:
-    added: '%{resource} was successfully added!'
-    created: '%{resource} was successfully created!'
-    destroyed: '%{resource} was successfully destroyed!'
-    enrolled: '%{resource} was successfully enrolled to %{to}!'
+    added: "%{resource} was successfully added!"
+    created: "%{resource} was successfully created!"
+    destroyed: "%{resource} was successfully destroyed!"
+    enrolled: "%{resource} was successfully enrolled to %{to}!"
     no_resource_assign_first: No %{resource}, assign one first
-    recovered: '%{resource} was successfully recovered!'
-    removed: '%{resource} was successfully removed!'
-    updated: '%{resource} was successfully updated!'
-    uploaded: '%{resource} was successfully uploaded!'
-    picture_update: Picture are successfully updated!
-    picture_remove: Picture are successfully destroyed!
+    recovered: "%{resource} was successfully recovered!"
+    removed: "%{resource} was successfully removed!"
+    updated: "%{resource} was successfully updated!"
+    uploaded: "%{resource} was successfully uploaded!"
   num_enrolled: Number Enrolled
   options: Options
   order: Order
@@ -781,7 +751,6 @@ en:
       singular: Grading
     list: Presets list
     locale: Locale
-    time_format: Time format
     name: Name
     names_order: Names Order
     pagination: Pagination
@@ -831,7 +800,6 @@ en:
     list: Program Syllabuses list
     plural: Program Syllabuses
     remove: Remove Program Syllabus
-  prompt: Please select
   required: required
   resource: Resource
   revert: Revert
@@ -842,9 +810,6 @@ en:
     name: Name
     save: Save Role
     singular: Role
-  report:
-    plural: Reports
-    personal_information: Personal information
   save: Save
   schedule: Schedule
   school:
@@ -906,7 +871,6 @@ en:
     singular: Semester
     starting: Semester starting
     uniqueness: have this semester added
-    already: Semester already added
   semester_class_group:
     choose: Choose Semester
     save: Save Semester
@@ -914,11 +878,6 @@ en:
     uniqueness: Semester already added to Class Group
   semester_course:
     uniqueness: Semester already added to Course
-  semester_attendance:
-    plural: Semester attendances
-    absence: Absence
-    presence: Presence
-    attendances_and_reviews: Attendances and reviews
   sex: Sex
   sex_and_birth: Gender & Birth Date
   show: Show
@@ -970,7 +929,6 @@ en:
     save: Save State
     singular: State
   student:
-    selection: Student Selection
     academic_information: Academic Information
     add: Add Student
     addresses: Student Addresses
@@ -1001,7 +959,6 @@ en:
     scholarship_status: Scholarship Status
     show: Show Students
     singular: Student
-    already_enrolled: already enrolled!
   student_achievement:
     edit: Edit Student Achievement
     index: Student Achievement Index
@@ -1013,19 +970,6 @@ en:
     index: Student Specialty Index
     save: Save Student Specialty
     singular: Student Specialty
-  student_review:
-    edit_label: 'Edit %{student} review'
-    new_label: 'New %{student} review'
-    show_label: '%{student} review'
-    review: Review
-    content: Content
-  student_review_category:
-    plural: Student review categories
-    singular: Student review category
-    list: Student review categories list
-    new: New student review category
-    name: Student review category name
-    choose: Choose student review category
   submit: Submit
   success:
     enrolled: Successfully enrolled!
@@ -1039,7 +983,7 @@ en:
     import: Import Syllabuses
     list: List Syllabuses
     name: Course Name
-    name_sample: '[EX: Science A]'
+    name_sample: "[EX: Science A]"
     new: New Syllabus
     plural: Syllabuses
     save: Save Syllabus
@@ -1069,7 +1013,6 @@ en:
     singular: Template
   title: Title
   undefined: Undefined
-  upload: Upload
   user:
     add: Add User
     edit: Edit User
@@ -1084,8 +1027,8 @@ en:
     username: Username
   views:
     pagination:
-      first: '&laquo; First'
+      first: "&laquo; First"
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '...'
+      previous: "&lsaquo; Prev"
+      truncate: "..."

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::GradingMethod do
+describe Gaku::GradingMethod, type: :model do
 
   describe 'relations' do
     it { should have_one :exam }

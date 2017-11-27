@@ -21,19 +21,6 @@ describe Gaku::Grading::Collection::Calculations do
       criteria: { Top: '50',  Bottom: '50' }.as_json)
   end
 
-  describe 'initialize' do
-    it 'initializes with exam' do
-      exam_portion1; exam_portion2
-      subject = described_class.new([grading_method1, grading_method2, grading_method3, grading_method4], [student1, student2], exam, course)
-      expect(subject.calculate).to eq({
-        grading_method1.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json,
-        grading_method2.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json,
-        grading_method3.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json,
-        grading_method4.id => {exam_id: exam.id, student_results: [{id: student1.id, score: nil}, {id: student2.id, score: nil}]}.as_json
-      })
-    end
-  end
-
   it 'calculate grading methods from exam portion scores' do
     create(:exam_portion_score, score: 80,  student:student1, exam_portion: exam_portion1, gradable: course)
     create(:exam_portion_score, score: 65,  student:student1, exam_portion: exam_portion2, gradable: course)

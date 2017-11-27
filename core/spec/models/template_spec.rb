@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Template do
+describe Gaku::Template, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :name }

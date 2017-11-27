@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Note do
+describe Gaku::Note, type: :model do
 
   describe 'associations' do
     it { should belong_to :notable }

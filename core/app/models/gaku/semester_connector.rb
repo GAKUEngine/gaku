@@ -7,7 +7,7 @@ module Gaku
     validates :semester_id, :semesterable_type, :semesterable_id, presence: true
 
     validates :semester_id,
-              uniqueness: { scope: %w( semesterable_type semesterable_id ), message: I18n.t(:'semester.already') }
+              uniqueness: { scope: %i( semesterable_id semesterable_type ), message: I18n.t(:'semester.already') }
 
     validates :semesterable_type,
               inclusion: { in: %w( Gaku::ClassGroup Gaku::Course ), message: '%{value} is not a valid' }

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Department do
+describe Gaku::Department, type: :model do
 
   describe 'associations' do
     it { should have_many :specialties }

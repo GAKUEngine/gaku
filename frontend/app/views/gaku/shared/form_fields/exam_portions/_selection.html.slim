@@ -1,0 +1,21 @@
+
+  .col-md-6
+    .attributeContainer
+      = label_tag 'exam_portion[score_selection_options][]', t('exam_portion.score_selection_options'), class: 'control-label'
+      - unless f.object.score_selection_options.blank?
+        - f.object.score_selection_options.each do |option|
+          .row
+            .col-md-9
+              .form-group
+                .controls
+                  = text_field_tag 'exam_portion[score_selection_options][]', option, class: 'form-control', placeholder: 'e.g Good'
+            .col-md-3
+              = link_to t('exam_portion.remove_option'), '#', class: 'remove-option-row btn btn-danger col-md-12'
+      = render 'gaku/shared/form_fields/exam_portions/options_template', f: f
+
+
+
+    .row
+      .col-md-12
+        .form-group
+          = link_to t('exam_portion.add_option'), '#', class: 'add-option-row btn btn-primary'

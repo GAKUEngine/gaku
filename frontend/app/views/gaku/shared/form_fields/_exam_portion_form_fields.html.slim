@@ -12,3 +12,8 @@
     = ep_form.text_area :description, size: "0x2", label: t(:'exam_portion.description')
   .col-md-6
     = ep_form.text_area :adjustments, size: "0x2", label: t(:'exam_portion.adjustments')
+.row
+  .col-md-6
+    = ep_form.select :score_type, options_for_select(score_type_options, ep_form.object.score_type), {}, class:'form-control', label: t(:'exam_portion.score_type.plural')
+#score_selection_options.row class="#{'hide' unless ep_form.object.score_selection?}"
+  = render 'gaku/shared/form_fields/exam_portions/selection', f: ep_form

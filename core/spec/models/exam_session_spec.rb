@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ExamSession do
+describe Gaku::ExamSession, type: :model do
 
   it_behaves_like 'enrollable'
 

@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Country do
+describe Gaku::Country, type: :model do
 
   describe 'associations' do
     it { should have_many :states }

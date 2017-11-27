@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Lesson do
+describe Gaku::Lesson, type: :model do
 
   describe 'relations' do
     it { should belong_to :lesson_plan }

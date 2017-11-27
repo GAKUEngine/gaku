@@ -19,7 +19,8 @@ module Gaku
                   gradable_type: gradable_type,
                   gradable_id: @gradable_scope.id,
                   calculations: calculations,
-                  exam_portion_score: exam_portion_score
+                  exam_portion_score: exam_portion_score,
+                  exam_portion_score_type: exam_portion_score.exam_portion.score_type
                 }
 
       $redis.publish('grading-change', message.to_json)
@@ -34,7 +35,7 @@ module Gaku
     end
 
     def attributes
-      %i( score )
+      %i( score score_text score_selection )
     end
 
     def set_resource

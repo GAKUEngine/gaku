@@ -8,7 +8,7 @@ module Gaku
 
     validates :student_id,
               uniqueness: {
-                scope: %w( enrollable_type enrollable_id ),
+                scope: %i( enrollable_type enrollable_id ),
                 message: I18n.t(:'student.already_enrolled')
               }
 

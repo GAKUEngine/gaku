@@ -1,108 +1,108 @@
 bg:
-  academic: Академичен
+  academic: "Академичен"
   achievement:
-    add: Добави Постижение
-    authority: Пълномощие
-    badge: Значка
-    choose: Избери Постижение
-    description: Описание
-    edit: Редактирай Постижение
-    list: Списък Постижения
-    name: Име
-    plural: Постижения
-    save: Запази Постижение
-    singular: Постижение
+    add: "Добави Постижение"
+    authority: "Пълномощие"
+    badge: "Значка"
+    choose: "Избери Постижение"
+    description: "Описание"
+    edit: "Редактирай Постижение"
+    list: "Списък Постижения"
+    name: "Име"
+    plural: "Постижения"
+    save: "Запази Постижение"
+    singular: "Постижение"
   active: 
-  add: Добави
+  add: "Добави"
   address:
-    add: Добави Адрес
-    address1: Адрес 1
-    address2: Адрес 2
-    choose_country: Избери Държава
-    city: Град
-    count: Брой адреси
-    country: Държава
-    edit: Редактирай адрес
-    list: Списък Адреси
-    new: Добави Адрес
-    past: Маркирай като стар?
-    plural: Адреси
-    prefecture: Щат/Провинция/Префектура
-    primary: Основен Адрес
-    save: Запази Адрес
-    search: Търси Адрес
-    singular: Адрес
+    add: "Добави Адрес"
+    address1: "Адрес 1"
+    address2: "Адрес 2"
+    choose_country: "Избери Държава"
+    city: "Град"
+    count: "Брой адреси"
+    country: "Държава"
+    edit: "Редактирай адрес"
+    list: "Списък Адреси"
+    new: "Добави Адрес"
+    past: "Маркирай като стар?"
+    plural: "Адреси"
+    prefecture: "Щат/Провинция/Префектура"
+    primary: "Основен Адрес"
+    save: "Запази Адрес"
+    search: "Търси Адрес"
+    singular: "Адрес"
     state:
-      abbr: Съкращение
-      add: Добави регион
-      choose: Избери регион
-      code: Код
-      country_iso: Страна ISO
-      edit: Редактирай региона
-      list: Региони
-      name: Име
+      abbr: "Съкращение"
+      add: "Добави регион"
+      choose: "Избери регион"
+      code: "Код"
+      country_iso: "Страна ISO"
+      edit: "Редактирай региона"
+      list: "Региони"
+      name: "Име"
       name_ascii: ASCII Име
-      plural: Региони
-      save: Запази
-      singular: Регион
-    title: Заглавие
-    zipcode: Пощенски код
-  admitted: Приет на
+      plural: "Региони"
+      save: "Запази"
+      singular: "Регион"
+    title: "Заглавие"
+    zipcode: "Пощенски код"
+  admitted: "Приет на"
   alert:
-    already_added: '%{resource} са вече добавени!'
-    empty: '%{resource} е празен!'
-    not_selected: Няма избран %{resource}!
-  and: и
-  are_you_sure: Сигурен ли сте?
+    already_added: "%{resource} са вече добавени!"
+    empty: "%{resource} е празен!"
+    not_selected: "Няма избран %{resource}!"
+  and: "и"
+  are_you_sure: "Сигурен ли сте?"
   assignment:
-    add: Добави Зaдание
-    count: Брой на заданията
-    description: Описание
-    list: Задания
-    max_score: Максимален резултат
-    name: Име на заданието
-    new: Създай Задание
-    plural: Задания
-    results: Резултати от заданието
-    score: Точки
-    singular: Задание
-    view: Покажи Заданията
+    add: "Добави Зaдание"
+    count: "Брой на заданията"
+    description: "Описание"
+    list: "Задания"
+    max_score: "Максимален резултат"
+    name: "Име на заданието"
+    new: "Създай Задание"
+    plural: "Задания"
+    results: "Резултати от заданието"
+    score: "Точки"
+    singular: "Задание"
+    view: "Покажи Заданията"
   assignments:
-    description: Описание на заданието
+    description: "Описание на заданието"
   attachment:
-    asset_error: Грешка при качването на файла
-    asset_type: Тип на файла.
-    asset_upload: Файлът беше качен успешно!
-    assets: Файлове
+    asset_error: "Грешка при качването на файла"
+    asset_type: "Тип на файла."
+    asset_upload: "Файлът беше качен успешно!"
+    assets: "Файлове"
     associated: 
     attachment_recovered: 
-    create: Качи Файл
-    description: Описание
+    create: "Качи Файл"
+    description: "Описание"
     edit: 
-    file_name: Име на файла
-    file_size: Големина на файла
-    file_type: Тип на файла
-    list: Списък на файловете
-    name: Име
-    new: Ново прикачване на файл
-    plural: Прикачени файлове
-    save: Запази прикачения файл
-    singular: Прикачен файл
+    file_name: "Име на файла"
+    file_size: "Големина на файла"
+    file_type: "Тип на файла"
+    list: "Списък на файловете"
+    name: "Име"
+    new: "Ново прикачване на файл"
+    plural: "Прикачени файлове"
+    save: "Запази прикачения файл"
+    singular: "Прикачен файл"
   attendance_type:
-    add: Добави нов вид посещаемост
-    auto_credit: Авто Кредит
-    color_code: Код за цвят
-    counted_absent: Брой отсъстващи
-    credit_rate: Кредитен Курс
-    disable_credit: Премахни Кредит
-    edit: Редактирай типове на посещаемост
-    list: Списък с типове на посещаемост
-    name: Име
-    new: Добави тип на посещаемост
-    plural: Типове на посещаемост
-    save: Запази тип на посещаемост
-    singular: Тим на посещаемост
-  back: Назад
+    add: "Добави нов вид посещаемост"
+    auto_credit: "Авто Кредит"
+    color_code: "Код за цвят"
+    counted_absent: "Брой отсъстващи"
+    credit_rate: "Кредитен Курс"
+    disable_credit: "Премахни Кредит"
+    edit: "Редактирай типове на посещаемост"
+    list: "Списък с типове на посещаемост"
+    name: "Име"
+    new: "Добави тип на посещаемост"
+    plural: "Типове на посещаемост"
+    save: "Запази тип на посещаемост"
+    singular: "Тим на посещаемост"
+  back: "Назад"
   badge:
     add: 
     edit: 
@@ -126,162 +126,162 @@ bg:
     save: 
     singular: 
     url: 
-  birth: Рождена дата
-  birth_and: и
-  birth_between: Рождена дата между
-  birth_date: Рождена дата
-  birth_date_from: Рождена дата(от)
-  birth_date_to: Рождена дата(до)
+  birth: "Рождена дата"
+  birth_and: "и"
+  birth_between: "Рождена дата между"
+  birth_date: "Рождена дата"
+  birth_date_from: "Рождена дата(от)"
+  birth_date_to: "Рождена дата(до)"
   campus:
-    add: Добави Факултет
-    address: Адрес на факултета
-    contacs: Контакти на факултета
-    edit: Редактирай Факултет
-    list: Списък Факултети
-    name: Име
-    new: Нов Факултет
-    plural: Факултети
-    primary: Основен
-    save: Запази Факултет
-    singular: Факултет
-  cancel: Отмени
+    add: "Добави Факултет"
+    address: "Адрес на факултета"
+    contacs: "Контакти на факултета"
+    edit: "Редактирай Факултет"
+    list: "Списък Факултети"
+    name: "Име"
+    new: "Нов Факултет"
+    plural: "Факултети"
+    primary: "Основен"
+    save: "Запази Факултет"
+    singular: "Факултет"
+  cancel: "Отмени"
   changes:
-    change: Промени
-    changed_at: Променено На
-    event: Събитие
-    from: От
+    change: "Промени"
+    changed_at: "Променено На"
+    event: "Събитие"
+    from: "От"
     student:
-      list: Списък с промени по ученическите данни
+      list: "Списък с промени по ученическите данни"
     student_address:
-      list: Списък с промени по ученическите адреси
+      list: "Списък с промени по ученическите адреси"
     student_contact:
-      list: Списък с промени по ученическите контакти
-    to: До
-    user: Променено от
-  class: Клас
+      list: "Списък с промени по ученическите контакти"
+    to: "До"
+    user: "Променено от"
+  class: "Клас"
   class_group:
-    add: Добави Клас
+    add: "Добави Клас"
     already_enrolled: 
-    choose: Избери Клас
-    edit: Редактирай Клас
-    enroll: Запиши Клас
-    grade: Оценка
-    homeroom: Класна Стая
-    list: Списък Класове
-    name: Име на класа
-    new: Нов Клас
-    none: Няма
-    none_assigned: Няма Назначен
-    plural: Класове
-    save: Запази Клас
-    show: Покажи
-    singular: Клас
+    choose: "Избери Клас"
+    edit: "Редактирай Клас"
+    enroll: "Запиши Клас"
+    grade: "Оценка"
+    homeroom: "Класна Стая"
+    list: "Списък Класове"
+    name: "Име на класа"
+    new: "Нов Клас"
+    none: "Няма"
+    none_assigned: "Няма Назначен"
+    plural: "Класове"
+    save: "Запази Клас"
+    show: "Покажи"
+    singular: "Клас"
     with_semester: 
     without_semester: 
   class_group_course_enrollment:
-    save: Запази Курс към Клас
-    singular: Курс
+    save: "Запази Курс към Клас"
+    singular: "Курс"
   class_group_enrollment:
-    count: Брой на записаните студенти
-    create: Създай добавяне към Класа
-    current: Текущо записване
-    list: Списък на Класа
-    new: Ново добавяне в Класа
-    seat_number: Номер на място
-  class_group_management: Ръководство на Класа
+    count: "Брой на записаните студенти"
+    create: "Създай добавяне към Класа"
+    current: "Текущо записване"
+    list: "Списък на Класа"
+    new: "Ново добавяне в Класа"
+    seat_number: "Номер на място"
+  class_group_management: "Ръководство на Класа"
   commute_method:
-    add: Добави Вид Транспорт
-    edit: Редактирай Вид Транспорт
-    plural: Видове Транспорт
-    singular: Вид Транспорт
+    add: "Добави Вид Транспорт"
+    edit: "Редактирай Вид Транспорт"
+    plural: "Видове Транспорт"
+    singular: "Вид Транспорт"
   commute_method_type:
-    add: Добави Тип Транспорт
-    edit: Редактирай Тип Транспорт
-    list: Списък с Типове Транспорт
-    name: Име
-    new: Нов Тип Транспорт
-    plural: Типове Транспорт
-    save: Запази Тип Транспорт
-    singular: Тип Транспорт
+    add: "Добави Тип Транспорт"
+    edit: "Редактирай Тип Транспорт"
+    list: "Списък с Типове Транспорт"
+    name: "Име"
+    new: "Нов Тип Транспорт"
+    plural: "Типове Транспорт"
+    save: "Запази Тип Транспорт"
+    singular: "Тип Транспорт"
   config:
-    close: Затвори
+    close: "Затвори"
     help:
-      language: Избери Език
-    label: Език
-    save: Запази
-  confirm: Сигурен ли сте?
-  confirm_delete: Изтриване на този запис?
+      language: "Избери Език"
+    label: "Език"
+    save: "Запази"
+  confirm: "Сигурен ли сте?"
+  confirm_delete: "Изтриване на този запис?"
   contact:
-    add: Добави Контакт
-    contact_type: Тип Контакт
-    create: Създай Контакт
-    data: Данни
-    details: Детайли
-    edit: Редактирай Контакт
-    emergency: Спешни случаи
-    list: Списък Контакти
-    new: Нов Контакт
-    plural: Контакти
-    primary: Основен Контакт
-    save: Запази Контакт
-    singular: Контакт
+    add: "Добави Контакт"
+    contact_type: "Тип Контакт"
+    create: "Създай Контакт"
+    data: "Данни"
+    details: "Детайли"
+    edit: "Редактирай Контакт"
+    emergency: "Спешни случаи"
+    list: "Списък Контакти"
+    new: "Нов Контакт"
+    plural: "Контакти"
+    primary: "Основен Контакт"
+    save: "Запази Контакт"
+    singular: "Контакт"
   contact_type:
-    add: Добави Вид Контакт
-    choose: Избери Вид Контакт
-    edit: Редактирай Вид Контакт
-    list: Списък Видове Контакти
-    name: Име
-    new: Нов Вид Контакт
-    plural: Видове Контакти
-    save: Запази Вид Контакт
-    singular: Вид Контакт
+    add: "Добави Вид Контакт"
+    choose: "Избери Вид Контакт"
+    edit: "Редактирай Вид Контакт"
+    list: "Списък Видове Контакти"
+    name: "Име"
+    new: "Нов Вид Контакт"
+    plural: "Видове Контакти"
+    save: "Запази Вид Контакт"
+    singular: "Вид Контакт"
   course:
-    add: Добави Курс
-    already_enrolled: Вече е добавен към курса!
-    choose: Избери Курс
-    code: Код на Курса
-    code_sample: '[ПР: ЕСЕН2020]'
-    combined_code: Комбиниран Код
-    count: Брой Курсове
-    edit: Редактирай Курс
-    list: Списък Курсове
-    management: Ръководство на Курса
-    name: Име на Курса
-    new: Нов Курс
-    options: Опции
-    plural: Курсове
-    save: Запази Курс
-    show: Покажи Курс
-    singular: Курс
+    add: "Добави Курс"
+    already_enrolled: "Вече е добавен към курса!"
+    choose: "Избери Курс"
+    code: "Код на Курса"
+    code_sample: "[ПР: ЕСЕН2020]"
+    combined_code: "Комбиниран Код"
+    count: "Брой Курсове"
+    edit: "Редактирай Курс"
+    list: "Списък Курсове"
+    management: "Ръководство на Курса"
+    name: "Име на Курса"
+    new: "Нов Курс"
+    options: "Опции"
+    plural: "Курсове"
+    save: "Запази Курс"
+    show: "Покажи Курс"
+    singular: "Курс"
   course_enrollment:
-    add: Запиши в Курс
-    create: Добави в Курс
-    list: Записи в Курса
-    plural: Записи в Курса
-    singular: Запис в Курса
+    add: "Запиши в Курс"
+    create: "Добави в Курс"
+    list: "Записи в Курса"
+    plural: "Записи в Курса"
+    singular: "Запис в Курса"
   course_group:
-    already_enrolled: Вече е добавен към курсовата група!
-    course_group_recover: Курс Група Възстановена
-    edit: Редактирай Курс Група
-    list: Списък Курс Групи
-    name: Име
-    new: Нова Курс Група
-    plural: Курс Групи
-    save: Запази Курс Група
-    show: Курс Група
-    singular: Курс Група
+    already_enrolled: "Вече е добавен към курсовата група!"
+    course_group_recover: "Курс Група Възстановена"
+    edit: "Редактирай Курс Група"
+    list: "Списък Курс Групи"
+    name: "Име"
+    new: "Нова Курс Група"
+    plural: "Курс Групи"
+    save: "Запази Курс Група"
+    show: "Курс Група"
+    singular: "Курс Група"
   course_group_enrollment:
-    save: Запази Курс Група
+    save: "Запази Курс Група"
   date:
     formats:
       default: 
       long: 
       short: 
-    placeholder: ГГГГ-ММ-ДД
-  default: По подразбиране
-  delete: Изтрий
+    placeholder: "ГГГГ-ММ-ДД"
+  default: "По подразбиране"
+  delete: "Изтрий"
   department:
-    add: Добави отдел
+    add: "Добави отдел"
     defaults:
       agriculture: 
       aquaculture: 
@@ -310,103 +310,103 @@ bg:
       science: 
       scientific_mathematics: 
       welfare: 
-    edit: Редактирай отдела
-    list: Отдели
+    edit: "Редактирай отдела"
+    list: "Отдели"
     name: 
     save: 
     singular: 
-  description: Описание
-  destroy: Изтрий
+  description: "Описание"
+  destroy: "Изтрий"
   devise:
     confirmations:
-      confirmed: Вашият акаунт беше създаден успешно. В момента сте в системата.
-      send_instructions: Ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
-      send_paranoid_instructions: Ако вашият имейл адрес е в нашата база данни, ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути.
-    email: Имейл
+      confirmed: "Вашият акаунт беше създаден успешно. В момента сте в системата."
+      send_instructions: "Ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути."
+      send_paranoid_instructions: "Ако вашият имейл адрес е в нашата база данни, ще получите имейл с инструкции как да потвърдите вашия акаунт до няколко минути."
+    email: "Имейл"
     failure:
-      already_authenticated: Влезли сте в системата.
-      inactive: Вашият акаунт не е активиран все още.
-      invalid: Невалиден имейл или парола.
-      invalid_token: Невалиден аутентикиращ токен.
-      locked: Вашият акаунт е заключен.
-      timeout: Вашата сесия е изтекла, моля влезте в системата за да продължите.
-      unauthenticated: Нужно е да влезете в системата преди да продължите.
-      unconfirmed: Нужно е да потвърдите вашия акаунт преди да продължите.
-    login: Потребителско име или Имейл
+      already_authenticated: "Влезли сте в системата."
+      inactive: "Вашият акаунт не е активиран все още."
+      invalid: "Невалиден имейл или парола."
+      invalid_token: "Невалиден аутентикиращ токен."
+      locked: "Вашият акаунт е заключен."
+      timeout: "Вашата сесия е изтекла, моля влезте в системата за да продължите."
+      unauthenticated: "Нужно е да влезете в системата преди да продължите."
+      unconfirmed: "Нужно е да потвърдите вашия акаунт преди да продължите."
+    login: "Потребителско име или Имейл"
     mailer:
       confirmation_instructions:
-        subject: Инструкции за потвърждаване
+        subject: "Инструкции за потвърждаване"
       reset_password_instructions:
-        subject: Инструкции за ресет на парола
+        subject: "Инструкции за ресет на парола"
       unlock_instructions:
-        subject: Отключи Инструкции
+        subject: "Отключи Инструкции"
     omniauth_callbacks:
       failure: Системата не можа да ви оторизира от %{kind} защото "%{reason}".
-      success: Успешно оторизиран от %{kind} акаунт.
-    password: Парола
-    password_confirmation: Потвърждаване на парола
+      success: "Успешно оторизиран от %{kind} акаунт."
+    password: "Парола"
+    password_confirmation: "Потвърждаване на парола"
     passwords:
-      forgot: Забравена парола?
-      no_token: Няма Токен.
-      send_instructions: Ще получите имейл с инстукции как да нулирате вашата парола.
-      send_paranoid_instructions: Ако вашият имейл е вече в нашата база данни, ще получите линк за възстановяване на вашата парола на вашия имейл
-      updated: Вашата парола беше променена успешно. В момента сте в системата.
-      updated_not_active: Вашата парола беше променена успешно.
+      forgot: "Забравена парола?"
+      no_token: "Няма Токен."
+      send_instructions: "Ще получите имейл с инстукции как да нулирате вашата парола."
+      send_paranoid_instructions: "Ако вашият имейл е вече в нашата база данни, ще получите линк за възстановяване на вашата парола на вашия имейл"
+      updated: "Вашата парола беше променена успешно. В момента сте в системата."
+      updated_not_active: "Вашата парола беше променена успешно."
     registrations:
-      admin_create: Създай Админ
+      admin_create: "Създай Админ"
       admin_set_up: |-
         Това е първият път в който ползвате GAKU Engine.
         Моля виведете данни за потребител Администратор.
-      destroyed: Довиждане! Вашият акаунт беше успешно затворен. Надяваме се да ви видим отново.
-      inactive_signed_up: Вие се регистрирахте успешно в системата. Въпреки това, не можете да влезете в системата, защото вашият акаунт е  %{reason}.
+      destroyed: "Довиждане! Вашият акаунт беше успешно затворен. Надяваме се да ви видим отново."
+      inactive_signed_up: "Вие се регистрирахте успешно в системата. Въпреки това, не можете да влезете в системата, защото вашият акаунт е  %{reason}."
       reasons:
-        inactive: неактивен
-        locked: заключен
-        unconfirmed: непотвърден
-      sign_up: Регистрирайте се
-      signed_up: Добре дошли! Вие се регистрирахте успешно.
-      signed_up_but_inactive: Този акаунт е неактивен
-      signed_up_but_locked: Този акаунт е заключен
-      signed_up_but_unconfirmed: Този акаунт все още не е потвърден
-      update_needs_confirmation: Обновяването на регистрацията има нужда от потвърждаване
-      updated: Вие обновихте вашият акаунт успешно.
+        inactive: "неактивен"
+        locked: "заключен"
+        unconfirmed: "непотвърден"
+      sign_up: "Регистрирайте се"
+      signed_up: "Добре дошли! Вие се регистрирахте успешно."
+      signed_up_but_inactive: "Този акаунт е неактивен"
+      signed_up_but_locked: "Този акаунт е заключен"
+      signed_up_but_unconfirmed: "Този акаунт все още не е потвърден"
+      update_needs_confirmation: "Обновяването на регистрацията има нужда от потвърждаване"
+      updated: "Вие обновихте вашият акаунт успешно."
     sessions:
-      remember_me: Запомни ме
-      sign_in: Влизане в системата
-      sign_out: Излизане от системата
-      signed_in: Влязохте в системата успешно.
-      signed_out: Излязохте от системата успешно.
+      remember_me: "Запомни ме"
+      sign_in: "Влизане в системата"
+      sign_out: "Излизане от системата"
+      signed_in: "Влязохте в системата успешно."
+      signed_out: "Излязохте от системата успешно."
     unlocks:
-      send_instructions: Ще получите имейл с инструкции как да отключите вашия акаунт до няколко минути.
-      send_paranoid_instructions: Ако вашият акаунт вече съществува, ще получите имейл с инструкции как да го отключите до няколко минути.
-      unlocked: Вашият акаунт е отключен успешно. В момента сте в системата.
-    username: Потребителско Име
-  edit: Редактиране
+      send_instructions: "Ще получите имейл с инструкции как да отключите вашия акаунт до няколко минути."
+      send_paranoid_instructions: "Ако вашият акаунт вече съществува, ще получите имейл с инструкции как да го отключите до няколко минути."
+      unlocked: "Вашият акаунт е отключен успешно. В момента сте в системата."
+    username: "Потребителско Име"
+  edit: "Редактиране"
   eg: 
-  email: Поща
+  email: "Поща"
   empty: 
-  enroll_to_class: Записване в клас
+  enroll_to_class: "Записване в клас"
   enrollment:
-    plural: Записи
-    singular: Запис
+    plural: "Записи"
+    singular: "Запис"
   enrollment_status:
-    active: Активен
-    add: Добави Статус на Записване
+    active: "Активен"
+    add: "Добави Статус на Записване"
     choose_enrollment_status: 
-    code: Код
-    edit: Редактирай Статус на Записване
-    list: Списък Статуси на Записване
-    name: Име
-    new: Нов Статус на Записване
-    plural: Статуси на Записване
-    save: Запази Статус на Записване
-    singular: Статус на Записване
+    code: "Код"
+    edit: "Редактирай Статус на Записване"
+    list: "Списък Статуси на Записване"
+    name: "Име"
+    new: "Нов Статус на Записване"
+    plural: "Статуси на Записване"
+    save: "Запази Статус на Записване"
+    singular: "Статус на Записване"
   enrollment_status_type:
-    active: Активен
+    active: "Активен"
     add: 
     edit: 
     list: 
-    name: Име
+    name: "Име"
     new: 
     plural: 
     save: 
@@ -415,102 +415,110 @@ bg:
     messages:
       already_confirmed: 
       expired: 
-      file_type_unsupported: Файловият тип не е поддържан!
-      file_unreadable: Файлът не може да бъде прочетен!
+      file_type_unsupported: "Файловият тип не е поддържан!"
+      file_unreadable: "Файлът не може да бъде прочетен!"
       not_found: 
       not_locked: 
       not_saved:
         one: '1 грешка попречи на %{resource} да бъде запазен:'
-        other: '%{count} грешки попречи на %{resource} да бъде запазен:'
+        other: "%{count} грешки попречи на %{resource} да бъде запазен:"
     not_uploaded: 
   exam:
-    add: Добави изпит
-    add_existing: 'Избери '
+    add: "Добави изпит"
+    add_existing: "Избери "
     add_portion: 
     adjustments: 
-    already_added: Изпитът вече е добавен !
-    choose: Избери изпит
-    choose_schedule: Избери програма
+    already_added: "Изпитът вече е добавен !"
+    choose: "Избери изпит"
+    choose_schedule: "Избери програма"
     completion: 
-    count: Брой изпити
-    description: Описание
-    edit: Редактирай изпита
-    exam_score: Изпитни точки
+    count: "Брой изпити"
+    description: "Описание"
+    edit: "Редактирай изпита"
+    exam_score: "Изпитни точки"
     graded: 
     grading_completion: 
     grading_method: 
-    list: Списък изпити
-    name: Име
-    new: Нов изпит
+    list: "Списък изпити"
+    name: "Име"
+    new: "Нов изпит"
     new_exam: 
-    options: Опции
-    plural: Изпити
-    save: Запази изпита
-    select: Избери изпит
-    show: Покажи изпита
-    singular: Изпит
-    total: Общо
-    total_weight: Обща тежест
+    options: "Опции"
+    plural: "Изпити"
+    save: "Запази изпита"
+    select: "Избери изпит"
+    show: "Покажи изпита"
+    singular: "Изпит"
+    total: "Общо"
+    total_weight: "Обща тежест"
     ungraded: 
     use_weighting: 
-    view: Покажи изпитите
-    weight: Тежест
+    view: "Покажи изпитите"
+    weight: "Тежест"
   exam_portion:
+    add_option: 
     adjustments: 
     attached_file_count: 
     count: 
-    description: Описание
+    description: "Описание"
     edit: 
     error: 
     execution_date: 
     is_master: 
     list: 
     master: 
-    max_score: Максимални точки
+    max_score: "Максимални точки"
     name: 
     plural: 
     problem_count: 
-    save: Запази
+    remove_option: 
+    save: "Запази"
+    score_selection_options: 
+    score_type:
+      plural: 
+      score: 
+      score_selection: 
+      score_text: 
     show: 
     singular: 
     use_weighting: 
-    weight: Тежест
-  export: Експортирай
-  extended: Разширен
+    weight: "Тежест"
+  export: "Експортирай"
+  extended: "Разширен"
   external_school_record:
     absences: 
     add: 
     attendance_rate: 
-    beginning: Започва
-    data: Данни
-    ending: Приключва
+    beginning: "Започва"
+    data: "Данни"
+    ending: "Приключва"
     list: 
     plural: 
     singular: 
-    student_id_number: Номер
+    student_id_number: "Номер"
   extracurricular_activity:
-    add: Добави извънкласна дейност
-    already_enrolled: Вече е добавен към извънкласната дейност !
-    edit: Редактирай
+    add: "Добави извънкласна дейност"
+    already_enrolled: "Вече е добавен към извънкласната дейност !"
+    edit: "Редактирай"
     enroll: 
-    list: Списък извънкласни дейности
-    name: Име
-    new: Нова извънкласна дейност
-    plural: Извънкласни дейности
-    save: Запази
-    show: Покажи
-    singular: Извънкласна дейност
+    list: "Списък извънкласни дейности"
+    name: "Име"
+    new: "Нова извънкласна дейност"
+    plural: "Извънкласни дейности"
+    save: "Запази"
+    show: "Покажи"
+    singular: "Извънкласна дейност"
   extracurricular_activity_enrollment:
-    list: Списък студенти
+    list: "Списък студенти"
   failure:
     enrolled: 
-  file: Файл
+  file: "Файл"
   flash:
     actions:
       create:
-        notice: '%{resource_name} е успешно създаден!'
+        notice: "%{resource_name} е успешно създаден!"
       destroy:
-        alert: '%{resource_name} не може да бъде изтрит!'
+        alert: "%{resource_name} не може да бъде изтрит!"
         notice: 
       recovery:
         alert: 
@@ -519,17 +527,17 @@ bg:
         alert: 
         notice: 
       update:
-        notice: '%{resource_name} е успешно изтрит!'
+        notice: "%{resource_name} е успешно изтрит!"
       update_master:
         notice: 
-  full_name: Пълно име
+  full_name: "Пълно име"
   full_name_reading: 
   gaku_engine: GAKU Сисетма
   gender:
-    choose: Избери пол
-    female: Жена
-    label: Пол
-    male: Мъж
+    choose: "Избери пол"
+    female: "Жена"
+    label: "Пол"
+    male: "Мъж"
     unknown: 
   generate_report: 
   grade:
@@ -539,14 +547,14 @@ bg:
     deviation: 
     grading: 
     how_grade: 
-    max: Максимум
-    max_points: Максимални точки
-    percent: Процент
-    points: Точки
+    max: "Максимум"
+    max_points: "Максимални точки"
+    percent: "Процент"
+    points: "Точки"
     rank: 
-    total: Общо
-    total_points: Общ резултат
-    weighting: Тежест
+    total: "Общо"
+    total_points: "Общ резултат"
+    weighting: "Тежест"
     weighting_portion: 
   grading_method:
     add: 
@@ -556,12 +564,12 @@ bg:
     choose: 
     criteria: 
     curved: 
-    description: Описание
-    edit: Редактирай
+    description: "Описание"
+    edit: "Редактирай"
     interval: 
     list: 
-    method: Метод
-    name: Име
+    method: "Метод"
+    name: "Име"
     ordinal: 
     pass_fail: 
     percentage: 
@@ -569,7 +577,7 @@ bg:
     ratio: 
     remove_argument: 
     remove_criteria: 
-    save: Запази
+    save: "Запази"
     score: 
     singular: 
   grading_method_set:
@@ -606,39 +614,39 @@ bg:
     surname: 
   helpers:
     links:
-      cancel: Отказ
-  hide: Скрий
-  history: История
-  id: Номер
+      cancel: "Отказ"
+  hide: "Скрий"
+  history: "История"
+  id: "Номер"
   import: 
   import_format: 
   is_graduated: 
   language: 
   languages:
-    en: Английски
-    ja: Японски
+    en: "Английски"
+    ja: "Японски"
   manage: 
   menu:
     admin:
-      achievements: Постижения
-      admin: Админ
-      administration: Администрация
-      administrator: Администратор
+      achievements: "Постижения"
+      admin: "Админ"
+      administration: "Администрация"
+      administrator: "Администратор"
       badge_types: 
       changes:
-        changes: Промени и изтривания
-        student_addresses: Адреси на студентите
-        student_contacts: Контакти на студентите
-        students: Студенти
-      departments: Отдели
+        changes: "Промени и изтривания"
+        student_addresses: "Адреси на студентите"
+        student_contacts: "Контакти на студентите"
+        students: "Студенти"
+      departments: "Отдели"
       disposals:
         address: 
         attachment: 
-        course_group: Курсови групи
-        disposals: Кошче
-        exam: Изпити
-        student: Студенти
-        student_address: Адреси-студенти
+        course_group: "Курсови групи"
+        disposals: "Кошче"
+        exam: "Изпити"
+        student: "Студенти"
+        student_address: "Адреси-студенти"
       grading:
         grading: 
         grading_methods: 
@@ -647,59 +655,59 @@ bg:
       preset:
         plural: 
       school_details: 
-      school_years: Учебни години
-      schools: Училища
-      specialties: Специалности
+      school_years: "Учебни години"
+      schools: "Училища"
+      specialties: "Специалности"
       system:
-        backup: Архив
-        system_tools: Системни инструменти
+        backup: "Архив"
+        system_tools: "Системни инструменти"
       templates: 
       types:
         attendance_types: 
         commute_methods: 
-        contact: Типове контакти
+        contact: "Типове контакти"
         enrollment_status: 
         states: 
         types: 
       users:
-        roles: Роли
-        users: Потребители
-        users_and_roles: Потребители и Роли
+        roles: "Роли"
+        users: "Потребители"
+        users_and_roles: "Потребители и Роли"
     class_group:
       management: 
-      plural: Класни групи
+      plural: "Класни групи"
     course:
       management: 
-      plural: Курсове
+      plural: "Курсове"
     course_group:
-      plural: Курсови групи
+      plural: "Курсови групи"
     exam:
       management: 
-      plural: Изпити
+      plural: "Изпити"
     extracurricular_activity:
-      plural: Извънкласни
+      plural: "Извънкласни"
     student:
-      plural: Студенти
+      plural: "Студенти"
     syllabus:
       plural: 
     teacher:
-      plural: Инструктори
-  middle_name: Презиме
+      plural: "Инструктори"
+  middle_name: "Презиме"
   middle_name_reading: 
-  name: Име
+  name: "Име"
   name_reading: 
   none: 
   note:
-    add: Добави бележка
-    content: Съдържание
-    delete: Изтрии бележката
-    edit: Редактирай бележката
-    list: Списък бележки
-    new: Нова бележка
-    plural: Бележки
-    save: Запази
-    singular: Бележка
-    title: Заглавие
+    add: "Добави бележка"
+    content: "Съдържание"
+    delete: "Изтрии бележката"
+    edit: "Редактирай бележката"
+    list: "Списък бележки"
+    new: "Нова бележка"
+    plural: "Бележки"
+    save: "Запази"
+    singular: "Бележка"
+    title: "Заглавие"
   notice:
     added: 
     created: 
@@ -709,20 +717,20 @@ bg:
     recovered: 
     removed: 
     updated: 
-    uploaded: '%{resource} беше успешно прикрепен!'
+    uploaded: "%{resource} беше успешно прикрепен!"
   num_enrolled: 
-  options: Опции
+  options: "Опции"
   order: 
-  panel: Панел
-  period: Период
-  personal: Персонален
-  personal_information: Персонална информация
-  phone: Телефон
+  panel: "Панел"
+  period: "Период"
+  personal: "Персонален"
+  personal_information: "Персонална информация"
+  phone: "Телефон"
   phonetic_reading: 
-  picture: Картинка
+  picture: "Картинка"
   pictures:
-    change: Смени картинката
-    upload: Прикрепи
+    change: "Смени картинката"
+    upload: "Прикрепи"
   preset:
     address:
       city: 

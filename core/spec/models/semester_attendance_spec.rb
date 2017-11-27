@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::SemesterAttendance do
+describe Gaku::SemesterAttendance, type: :model do
 
   describe 'relations' do
     it { should belong_to :semester }

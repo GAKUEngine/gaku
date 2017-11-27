@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Course do
+describe Gaku::Course, type: :model do
 
   describe 'concerns' do
     it_behaves_like 'gradable'

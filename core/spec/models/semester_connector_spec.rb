@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::SemesterConnector do
+describe Gaku::SemesterConnector, type: :model do
 
   describe 'associations' do
     it { should belong_to :semester }
@@ -13,8 +13,8 @@ describe Gaku::SemesterConnector do
     it { should validate_presence_of :semesterable_type }
 
     it do
-      should validate_uniqueness_of(:semester_id).scoped_to([:semesterable_type, :semesterable_id])
-                                                 .with_message(/Semester already added/)
+      should validate_uniqueness_of(:semester_id).scoped_to([:semesterable_id, :semesterable_type])
+                                                 # .with_message(/Semester already added/)
     end
 
     it { should validate_inclusion_of(:semesterable_type).in_array(%w(Gaku::ClassGroup Gaku::Course)) }

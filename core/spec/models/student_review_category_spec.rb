@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Program do
+describe Gaku::Program, type: :model do
 
   describe 'associations' do
   end

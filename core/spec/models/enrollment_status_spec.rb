@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::EnrollmentStatus do
+describe Gaku::EnrollmentStatus, type: :model do
 
   describe 'associations' do
     it { should have_many :students }

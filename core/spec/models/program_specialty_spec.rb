@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ProgramSpecialty do
+describe Gaku::ProgramSpecialty, type: :model do
 
   describe 'associations' do
     it { should belong_to :program }

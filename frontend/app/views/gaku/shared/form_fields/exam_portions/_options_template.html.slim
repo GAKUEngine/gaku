@@ -1,0 +1,7 @@
+.row.options-template class='hide'
+  .col-md-9
+    .form-group
+      .controls
+        = text_field_tag nil, nil, class: 'form-control', placeholder: 'e.g Good'
+  .col-md-3
+    = link_to t('exam_portion.remove_option'), '#', class: 'remove-option-row btn btn-danger col-md-12'

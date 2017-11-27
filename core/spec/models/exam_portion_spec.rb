@@ -1,6 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::ExamPortion do
+describe Gaku::ExamPortion, type: :model do
 
   describe 'associations' do
     it { should belong_to :exam }
