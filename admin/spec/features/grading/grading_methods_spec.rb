@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Admin Grading Methods' do
+describe 'Admin Grading Methods', type: :model do
 
   before { as :admin }
   before(:all) { set_resource 'admin-grading-method' }
