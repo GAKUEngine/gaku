@@ -137,14 +137,7 @@ class App
       url: '/student_selection'
       dataType: 'script'
 
-<<<<<<< HEAD
-    $(document).on 'click', '#clear-student-selection', (e)->
-
-      e.preventDefault()
-
-=======
     $(document).off('click', '#clear-student-selection').on 'click', '#clear-student-selection', ->
->>>>>>> 07962f6b61d88d05be925d8c2d9ecfa3db7fee31
       $.ajax
         type: 'get'
         url: '/student_selection/clear'
