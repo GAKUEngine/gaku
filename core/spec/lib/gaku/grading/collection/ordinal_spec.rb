@@ -15,14 +15,6 @@ describe Gaku::Grading::Collection::Ordinal do
       criteria: { A: '90', B:'80', C: '60', D: '40', F: '10' }.as_json)
   end
 
-  describe 'initialize' do
-    it 'initializes with exam' do
-      exam_portion1; exam_portion2
-      subject = described_class.new(exam, [student1, student2], course, grading_method.criteria)
-      expect(subject.grade_exam).to eq [{id: student1.id, score: nil}, {id: student2.id, score: nil}]
-    end
-  end
-
   it 'calculates ordinal from exam portion scores' do
     create(:exam_portion_score, score: 28,  student:student1, exam_portion: exam_portion1, gradable: course)
     create(:exam_portion_score, score: 45,  student:student1, exam_portion: exam_portion2, gradable: course)

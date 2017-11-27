@@ -6,7 +6,7 @@ FactoryGirl.define do
     weight 100
     problem_count 1
     exam
-
+    score_type 'score'
     factory(:invalid_exam_portion) { name nil }
   end
 

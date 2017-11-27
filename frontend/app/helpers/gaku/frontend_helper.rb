@@ -58,5 +58,11 @@ module Gaku
       end
     end
 
+    def score_type_options
+      Gaku::ExamPortion.score_types.keys.map do |option|
+        [I18n.t("exam_portion.score_type.#{option}"), option]
+      end
+    end
+
   end
 end

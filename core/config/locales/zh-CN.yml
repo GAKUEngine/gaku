@@ -1,7 +1,7 @@
 zh-CN:
   academic: 
   achievement:
-    add: 添加成就
+    add: "添加成就"
     authority: 
     badge: 
     choose: 
@@ -452,6 +452,7 @@ zh-CN:
     view: 
     weight: 
   exam_portion:
+    add_option: 
     adjustments: 
     attached_file_count: 
     count: 
@@ -466,7 +467,14 @@ zh-CN:
     name: 
     plural: 
     problem_count: 
+    remove_option: 
     save: 
+    score_selection_options: 
+    score_type:
+      plural: 
+      score: 
+      score_selection: 
+      score_text: 
     show: 
     singular: 
     use_weighting: 
