@@ -5,6 +5,8 @@ module Gaku
         class CoursesController < BaseController
 
           before_action :set_student
+          skip_before_action :authenticate_request
+
 
           def index
             @courses = @student.courses

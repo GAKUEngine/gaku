@@ -28,6 +28,10 @@ module Gaku
       _exe 'docker-compose up -d'
     end
 
+    def self.Testing
+      _exe 'docker-compose exec web bundle exec rake testing:env_setup'
+    end
+
     def self._goto_root_dir
       "cd #{__dir__}/../../"
     end

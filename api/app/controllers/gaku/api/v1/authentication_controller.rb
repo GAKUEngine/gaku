@@ -6,7 +6,7 @@ module Gaku
 
         def authenticate
           command = Gaku::Api::AuthenticateUser.call(
-            email: params[:email],
+            username: params[:username],
             password: params[:password]
           )
 

@@ -41,11 +41,11 @@ def prompt_for_admin_email
     email = ENV['ADMIN_EMAIL'].dup
     say "Admin User #{email}"
   else
-    email = ask('Email [admin@gaku-engine.com]: ') do |q|
+    email = ask('Email [admin@gakuengine.com]: ') do |q|
       q.echo = true
       q.whitespace = :strip
     end
-    email = 'admin@gaku-engine.com' if email.blank?
+    email = 'admin@gakuengine.com' if email.blank?
   end
 
   email
@@ -70,7 +70,7 @@ end
 def create_admin_user
   if ENV['AUTO_ACCEPT']
     password = '123456'
-    email = 'admin@gaku-engine.com'
+    email = 'admin@gakuengine.com'
   else
     puts 'Create the admin user (press enter for defaults).'
     username = prompt_for_admin_username

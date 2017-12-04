@@ -1,7 +1,7 @@
 Gaku::Core::Engine.routes.draw do
   namespace :api do
-    resource :status
     namespace :v1 do
+      resource :status
 
       concern :enrollable do
         resources :enrollments, only: %i( create destroy )

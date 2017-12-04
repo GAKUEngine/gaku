@@ -1,6 +1,7 @@
 require 'highline/import'
 
 namespace :gaku do
+
   desc "Create admin username and password"
   task generate_admin: :environment do
 
@@ -41,11 +42,11 @@ def prompt_for_admin_email
     email = ENV['ADMIN_EMAIL'].dup
     say "Admin User #{email}"
   else
-    email = ask('Email [admin@gaku-engine.com]: ') do |q|
+    email = ask('Email [admin@gakuengine.com]: ') do |q|
       q.echo = true
       q.whitespace = :strip
     end
-    email = 'admin@gaku-engine.com' if email.blank?
+    email = 'admin@gakuengine.com' if email.blank?
   end
 
   email
@@ -70,7 +71,7 @@ end
 def create_admin_user
   if ENV['AUTO_ACCEPT']
     password = '123456'
-    email = 'admin@gaku-engine.com'
+    email = 'admin@gakuengine.com'
   else
     puts 'Create the admin user (press enter for defaults).'
     username = prompt_for_admin_username
@@ -91,10 +92,11 @@ def create_admin_user
     say "\nWARNING: There is already a user with the username: #{username}, so no account changes were made.  If you wish to create an additional admin user, please run rake gaku:generate_admin again with a different username.\n\n"
   else
     say "Creating user..."
-    creator = Gaku::UserCreator.new(attributes).save
+    creator = Gaku::UserCreator.new(attributes)
+    creator.save
     admin = creator.get_user
     # create an admin role and and assign the admin user to that role
-    role = Gaku::Role.find_or_create_by_name 'Admin'
+    role = Gaku::Role.first_or_create(name: 'Admin')
     admin.roles << role
     if admin.save
       say "User Created"
