@@ -2,7 +2,7 @@ module Gaku
   module Api
     module V1
       class AuthenticationController < BaseController
-        skip_before_action :authenticate_request
+        # skip_before_action :authenticate_request
 
         def authenticate
           command = Gaku::Api::AuthenticateUser.call(
