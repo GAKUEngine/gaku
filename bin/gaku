@@ -36,7 +36,7 @@ class GakuCLI < Thor
   end
 
   desc 'restore [BACKUP_PATH]', 'Restores a full backup of a GAKU installation from BACKUP_PATH.'
-  def backup(path = '')
+  def restore(path = '')
     if path == ''
       puts 'Backup not specified. Aborting restore.'
       return
