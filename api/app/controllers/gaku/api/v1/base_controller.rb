@@ -3,7 +3,7 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   attr_reader :current_user
 
   before_action :set_default_format
-  before_action :authenticate_request
+  # before_action :authenticate_request
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response

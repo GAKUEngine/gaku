@@ -4,10 +4,10 @@ module Gaku
     class AuthenticateUser
       prepend SimpleCommand
 
-      attr_accessor :email, :password
+      attr_accessor :username, :password
 
-      def initialize(email:, password:)
-        @email = email
+      def initialize(username:, password:)
+        @username = username
         @password = password
       end
 
@@ -29,7 +29,7 @@ module Gaku
       end
 
       def user
-        user = Gaku::User.find_by(email: email)
+        user = Gaku::User.find_by(username: username)
         return user if user && user.valid_password?(password)
 
         errors.add(:user_authentication, 'invalid credentials')
