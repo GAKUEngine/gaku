@@ -2,8 +2,6 @@ module Gaku
   module Api
     module V1
       class StudentsController < BaseController
-        rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-        rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
         before_action :set_student, except: %i( index create )
 
@@ -42,7 +40,8 @@ module Gaku
         end
 
         def student_params
-          params.require(:student).permit(student_attributes)
+          params.require([:name, :surname])
+          params.permit(student_attributes)
         end
 
         def student_attributes
