@@ -5,9 +5,6 @@ module Gaku
 
         before_action :set_course, only: %i( show update destroy )
 
-        rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-        rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
         def index
           @courses = Course.all.page(params[:page ])
           collection_respond_to @courses, root: :courses
@@ -43,7 +40,8 @@ module Gaku
         end
 
         def course_params
-          params.require(:course).permit(course_attrs)
+          params.require(:code)
+          params.permit(course_attrs)
         end
 
         def course_attrs

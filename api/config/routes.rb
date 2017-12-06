@@ -24,6 +24,7 @@ Gaku::Core::Engine.routes.draw do
       end
 
       resources :courses, concerns: %i( enrollable )
+      resources :syllabuses
     end
   end
 end
