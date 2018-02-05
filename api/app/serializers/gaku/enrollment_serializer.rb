@@ -1,6 +1,6 @@
 module Gaku
   class EnrollmentSerializer < ActiveModel::Serializer
-    attributes %i( student_id seat_number )
+    attributes %i( id student_id seat_number )
     attribute :course_id, if: :course_enrollment?
 
     def course_id
