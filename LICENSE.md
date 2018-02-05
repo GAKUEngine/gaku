@@ -1,4 +1,4 @@
-GAKU Engine is Copyright 2012 K.K. GenSouSha of Aichi, Japan  
+GAKU Engine Copyright 2012 K.K. GenSouSha of Aichi, Japan  
 All rights reserved.
 
 This software is dual licensed under the GNU GPL version 3 and the AGPL version 3.  

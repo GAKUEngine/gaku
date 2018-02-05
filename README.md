@@ -16,8 +16,8 @@ We do not currently recommend anyone use it in a production environment.
 
 License
 -------
-This software is dual licensed under the GNU GPL version 3 and the AGPL version 3. 
-Separate licenses are available upon consultation. Please contact info@genshin.org for details.
+This software is dual licensed under the GNU GPL version 3 and the AGPL version 3.   
+Separate licenses are available upon consultation. Please contact info@gakuengine.com for details.
 
 What does it do?
 ----------------

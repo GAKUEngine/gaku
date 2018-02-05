@@ -50,6 +50,10 @@ module Gaku
     after_create  :set_serial_id
     after_save    :set_code
 
+    def self.ransackable_attributes(auth_object = nil)
+      super & %w(enrollment_status_code)
+    end
+
     def full_name
       "#{surname} #{name}"
     end
