@@ -28,7 +28,7 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   end
 
   def meta_for(collection)
-    { count: collection.size , total_count: collection.total_count, page: collection.current_page }
+    { count: collection.size }
   end
 
   def authenticate_request
