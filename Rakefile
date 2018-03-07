@@ -8,7 +8,7 @@ rescue LoadError
   raise 'Could not find gaku/testing/common_rake. You need to run this command using Bundler.'
 end
 
-engines = %w( core admin frontend sample testing )
+engines = %w( core admin frontend sample testing api )
 
 task default: :all_specs
 

@@ -1,20 +1,14 @@
 FROM ubuntu:16.04
-MAINTAINER Georgi Tapalilov
+MAINTAINER Georgi Tapalilov & Rei Kagetsuki
 
 EXPOSE 3000
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends apt-utils
 
-RUN apt-get install -y cmake libpng-dev libboost-program-options-dev libboost-regex-dev libboost-system-dev libboost-filesystem-dev
-RUN apt-get install -y build-essential
-RUN apt-get install -y ruby2.3-dev
-RUN apt-get install -y libgmp-dev
-RUN apt-get install -y imagemagick
-RUN apt-get install -y libmagickcore-dev libmagickwand-dev
-
-RUN apt-get install -y git
-RUN apt-get install -y libpq-dev postgresql-client
+RUN apt-get install -y cmake libpng-dev libboost-program-options-dev libboost-regex-dev \
+	libboost-system-dev libboost-filesystem-dev build-essential ruby2.3-dev autoconf \
+	libgmp-dev imagemagick libmagickcore-dev libmagickwand-dev git libpq-dev postgresql-client
 
 # ENV BUNDLE_PATH=/gems \
 #     BUNDLE_BIN=/gems/bin \
@@ -36,6 +30,7 @@ RUN rails new $app --database=postgresql --skip-bundle
 WORKDIR $app
 
 RUN echo "gem 'gaku', path: '../gaku'" >> Gemfile
+RUN echo "gem 'therubyracer'" >> Gemfile
 RUN echo "gem 'therubyracer'" >> Gemfile
 RUN echo "gem 'tzinfo-data'" >> Gemfile
 
