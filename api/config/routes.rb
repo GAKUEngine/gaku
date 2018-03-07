@@ -6,13 +6,14 @@ Gaku::Core::Engine.routes.draw do
       post 'authenticate', to: 'authentication#authenticate'
       post 'authenticate/refresh', to: 'authentication#refresh'
 
-      resources :students do
+      resources :students, model_name: 'Gaku::Student' do
         resources :guardians, controller: 'students/guardians'
         resources :student_guardians, controller: 'students/student_guardians', only: %i(create destroy)
         resources :courses, controller: 'students/courses'
         resources :class_groups, controller: 'students/class_groups'
         resources :extracurricular_activities, controller: 'students/extracurricular_activities'
         resources :exam_sessions, controller: 'students/exam_sessions'
+        resources :contacts
       end
 
       resources :courses do
@@ -26,6 +27,7 @@ Gaku::Core::Engine.routes.draw do
       end
 
       resources :syllabuses
+      resources :contact_types
     end
   end
 end
