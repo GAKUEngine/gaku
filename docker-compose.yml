@@ -10,6 +10,7 @@ services:
       - "9000:9000"
     volumes:
       - .:/gaku
+      - uploads:/app/uploads
     depends_on:
       - postgres
       - redis
@@ -27,4 +28,6 @@ services:
 
 volumes:
   postgres-data:
+    driver: local
+  uploads:
     driver: local
