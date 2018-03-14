@@ -14,6 +14,8 @@ Gaku::Core::Engine.routes.draw do
         resources :extracurricular_activities, controller: 'students/extracurricular_activities'
         resources :exam_sessions, controller: 'students/exam_sessions'
         resources :contacts
+
+        get :picture, on: :member
       end
 
       resources :courses do

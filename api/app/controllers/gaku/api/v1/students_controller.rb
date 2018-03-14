@@ -11,6 +11,10 @@ module Gaku
           collection_respond_to @students, root: :students
         end
 
+        def picture
+          send_file @student.picture.path
+        end
+
         def show
           member_respond_to @student
         end
