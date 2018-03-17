@@ -3,7 +3,7 @@
 [![Gitter chat](https://badges.gitter.im/GAKUEngine/gaku.svg)](https://gitter.im/GAKUEngine/gaku)
 GAKU Engine [学エンジン]
 ========================
-GAKU Engine, or just "GAKU" for short is the "Gensou Academic Karte Unification Engine". The gaku 
+GAKU Engine, or just "GAKU" for short is the "GenSou Academic Karte Unification Engine". The gaku 
 character 「学」 means "Learning", so saying GAKU Engine is roughly equivilent to saying 
 "Learning Engine".
 
@@ -22,8 +22,8 @@ What does it do?
 ----------------
 GAKU Engine is a full school and student management solution including student, staff, syllabus, 
 course, class, exam management and more. It has a full grading system and offers templatable 
-printable reports. Functionality can be enhanced and extended with extension modules. GAKU Engine 
-also features a full API for integration with external services and clients. 
+printable reports. Functionality can be enhanced with extensions and can be integrated with 
+external services and clients using the API. 
 
 GAKU Engine is also:
 * Completely Open Source, Free as in Freedom, licensed under the GPL v3 and AGPL 3.
@@ -36,56 +36,44 @@ Requirements
 ------------
 Full installation:
 * A newer version of Ruby and a user account that can install Gems
-	* We recommend at least Ruby 2.5 at this time
 * A newer version of postgresql and postgresql-contrib
 
 Docker instance:
+* A newer version of Ruby and a user account that can install Gems
 * Docker and docker-compose
 
 New Installation
 ----------------
-### On a completely new installation of Ubuntu 18.04
-If you have a completely fresh installation of Ubuntu 18.04+ (or Debain / GNU Linux):
-```shell
-sudo install ruby ruby-dev postgresql postgresql-contrib build-essential \
-zlib1g-dev liblzma-dev libpq-dev
-```
+*work in progress*
 
-### Install gaku
-## Latest Development version
-*Not recommended unless you are testing newer features.*
-To install the latest development verison, clone the gaku repository from GitHub:
-```shell
-git clone https://github.com/GAKUEngine/gaku.git
-cd gaku
-bundle install
-```
-*If you don't have bundler installed, you will need to run ```gem install bundler``` 
-before you run ```bundle install```. If you are are using a system packaged Ruby 
-you may need to prefix gem with sudo.*
-
-## Stable release
-*Recommended for most intallations.*
-Install the "gaku" gem for normal GAKU Engine installations:
+### Install the 'gaku' gem and command
 ```shell
 gem install gaku
 ```
-*You may need to prefix this command with 'sudo' if you are using a system packaged 
-Ruby installation.*
 
-### Create a GAKU installation
-For gem installations, you will have the gaku command available to you:
+### Create a new GAKU installation
 ```shell
-gaku install MySchoolName
-```
-  
-For repository installaitons, you will have to access the gaku command through a relative or 
-absolute path:
-```shell
-./gaku/bin/gaku install MySchoolName
+gaku new MySchoolName
 ```
 *Replace MySchoolName with your school name or the name you want for your GAKU installation.*  
 *Please avoid using spaces and special characters in your installation name.*
+
+### Set GAKU to boot on startup using nginx
+*work in progress*
+```shell
+gaku set startup
+```
+
+Manual Installation
+-------------------
+0. Create a Rails app using PostgreSQL as your database, enable hstore on the database and 
+    configure your config/database.yml
+1. Add the following to your Gemfile: ```gem 'gaku'``` and run ```bundle install```
+2. Install GAKU with the Rails generator: ```RAILS_ENV=production rails g gaku:install```
+3. Run migrations
+3. Set up the administrator account: ```RAILS_ENV=production rake gaku:generate_admin```
+4. Set up an application/web server (EG: passenger/ngixn) and set it up to automatically start 
+    at boot
 
 Developer Information
 =====================
