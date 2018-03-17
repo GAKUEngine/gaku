@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/gaku.svg)](http://badge.fury.io/rb/gaku)
-[![Build Status](https://travis-ci.org/GAKUEngine/gaku.svg)](https://travis-ci.org/GAKUEngine/gaku)
 [![Code Climate](https://codeclimate.com/github/GAKUEngine/gaku.svg)](https://codeclimate.com/github/GAKUEngine/gaku)
 [![Gitter chat](https://badges.gitter.im/GAKUEngine/gaku.svg)](https://gitter.im/GAKUEngine/gaku)
 GAKU Engine [学エンジン]
