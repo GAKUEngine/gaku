@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/gaku.svg)](http://badge.fury.io/rb/gaku)
+[![Build Status](https://travis-ci.org/GAKUEngine/gaku.svg)](https://travis-ci.org/GAKUEngine/gaku)
 [![Code Climate](https://codeclimate.com/github/GAKUEngine/gaku.svg)](https://codeclimate.com/github/GAKUEngine/gaku)
 [![Gitter chat](https://badges.gitter.im/GAKUEngine/gaku.svg)](https://gitter.im/GAKUEngine/gaku)
 GAKU Engine [学エンジン]
@@ -51,29 +52,17 @@ New Installation
 gem install gaku
 ```
 
-### Create a new GAKU installation
+### Create a GAKU installation
 ```shell
-gaku new MySchoolName
+gaku install MySchoolName
 ```
 *Replace MySchoolName with your school name or the name you want for your GAKU installation.*  
 *Please avoid using spaces and special characters in your installation name.*
 
-### Set GAKU to boot on startup using nginx
-*work in progress*
-```shell
-gaku set startup
-```
-
 Manual Installation
 -------------------
-0. Create a Rails app using PostgreSQL as your database, enable hstore on the database and 
-    configure your config/database.yml
+0. Create a Rails app using PostgreSQL as your database and configure your config/database.yml
 1. Add the following to your Gemfile: ```gem 'gaku'``` and run ```bundle install```
-2. Install GAKU with the Rails generator: ```RAILS_ENV=production rails g gaku:install```
-3. Run migrations
-3. Set up the administrator account: ```RAILS_ENV=production rake gaku:generate_admin```
-4. Set up an application/web server (EG: passenger/ngixn) and set it up to automatically start 
-    at boot
 
 Developer Information
 =====================
