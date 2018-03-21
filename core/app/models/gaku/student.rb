@@ -66,7 +66,7 @@ module Gaku
     end
 
     def full_name
-      "#{surname} #{name}"
+      [surname, name, middle_name].join(' ')
     end
 
     def self.specialties
@@ -75,10 +75,6 @@ module Gaku
 
     def self.active
       where(enrollment_status_code: EnrollmentStatus.active.pluck(:code))
-    end
-
-    def full_name
-      "#{name} #{surname}"
     end
 
     def make_enrolled
