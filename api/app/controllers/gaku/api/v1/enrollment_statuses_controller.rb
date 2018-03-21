@@ -6,7 +6,7 @@ module Gaku
 
         def index
           @enrollment_statuses = EnrollmentStatus.all
-          collection_respond_to @enrollment_statuses, root: :enrollment_statuss
+          collection_respond_to @enrollment_statuses, root: :enrollment_statuses
         end
 
         def create
