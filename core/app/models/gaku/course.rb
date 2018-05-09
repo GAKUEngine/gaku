@@ -13,6 +13,9 @@ module Gaku
     belongs_to :syllabus, required: false
     belongs_to :class_group, required: false
 
+    has_many :course_teachers
+    has_many :teachers, through: :course_teachers
+
     delegate :name, :code, to: :syllabus, prefix: true, allow_nil: true
 
     # accepts_nested_attributes_for :enrollments

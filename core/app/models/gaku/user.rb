@@ -3,6 +3,8 @@ module Gaku
     has_many :user_roles
     has_many :roles, through: :user_roles
 
+    has_one :teacher
+
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,6 +17,11 @@ module Gaku
     roles_table_name = Role.table_name
 
     scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'Admin') }
+
+    scope :enabled, -> do
+      where("disabled_until <= ?", Date.today)
+      .or(where(disabled_until: nil, disabled: false))
+    end
 
     def to_s
       username
@@ -36,7 +43,8 @@ module Gaku
     end
 
     def role?(role)
-      roles.where(name: role.to_s.camelize).any?
+      roles.exists?(name: role)
     end
+
   end
 end
