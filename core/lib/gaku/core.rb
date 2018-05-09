@@ -7,7 +7,7 @@ require 'ransack'
 require 'redis'
 
 require 'devise'
-require 'cancan'
+require 'cancancan'
 require 'kaminari'
 require 'globalize'
 require 'draper'

@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'draper',            '~> 3.0.1'
   s.add_dependency 'devise',            '~> 4.5.0'
   s.add_dependency 'devise-i18n'
-  s.add_dependency 'cancan',            '~> 1.6.10'
+  s.add_dependency 'cancancan',         '~> 2.1.3'
   s.add_dependency 'highline'
   s.add_dependency 'ffaker',            '~> 2.10.0'
   s.add_dependency 'rake-progressbar'
