@@ -2,7 +2,6 @@ module Gaku
   module Api
     module V1
       class EnrollmentsController < BaseController
-        skip_before_action :authenticate_request
         before_action :set_enrollable
 
         def index

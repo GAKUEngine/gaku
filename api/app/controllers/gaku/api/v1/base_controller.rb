@@ -1,18 +1,24 @@
 class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   include ActionController::MimeResponds
+  include CanCan::ControllerAdditions
+
   attr_reader :current_user
 
   before_action :set_default_format
   before_action :authenticate_request
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
   rescue_from StandardError do |exception|
     render respond_format => { error: exception.message }, status: 500
   end
 
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
   private
+
+  def current_ability
+    Gaku::Ability.new(current_user)
+  end
 
   def respond_format
     request.format.to_sym

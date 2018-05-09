@@ -2,22 +2,27 @@ module Gaku
   module Api
     module V1
       class SyllabusesController < BaseController
+        authorize_resource class: 'Gaku::Syllabus'
 
         before_action :set_syllabus, only: %i( show update destroy )
 
         def index
-          @syllabuses = Syllabus.all.page(params[:page])
+          @syllabuses = Syllabus.accessible_by(current_ability).page(params[:page])
           collection_respond_to @syllabuses, root: :syllabuses
         end
 
         def show
+          @syllabuses = Syllabus.accessible_by(current_ability)
+          @syllabus = @syllabus
           member_respond_to @syllabus
         end
 
         def create
-          @syllabus = Syllabus.new(syllabus_params)
-          if @syllabus.save!
-            member_respond_to @syllabus
+          @syllabus = CreateSyllabusService.call(current_user, syllabus_params)
+          if @syllabus.success?
+            member_respond_to @syllabus.result
+          else
+            fail @syllabus.errors[:base]
           end
         end
 
@@ -36,7 +41,7 @@ module Gaku
         private
 
         def set_syllabus
-          @syllabus = Syllabus.find(params[:id])
+          @syllabus = Syllabus.accessible_by(current_ability).find(params[:id])
         end
 
         def syllabus_params
