@@ -31,6 +31,12 @@ Gaku::Core::Engine.routes.draw do
       resources :syllabuses
       resources :contact_types
       resources :enrollment_statuses
+      resources :users do
+        resources :user_roles, controller: 'users/user_roles'
+      end
+
+      resources :roles, only: :index
+      resources :enrollment_statuses, only: :index
     end
   end
 end
