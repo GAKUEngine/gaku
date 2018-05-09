@@ -29,7 +29,7 @@ module Gaku
       end
 
       def user
-        user = Gaku::User.find_by(username: username)
+        user = Gaku::User.enabled.find_by(username: username)
         return user if user && user.valid_password?(password)
 
         errors.add(:user_authentication, 'invalid credentials')
