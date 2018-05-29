@@ -1,8 +1,8 @@
 module Gaku
   module Api
     module V1
-      module Exams
-        module Courses
+      module Courses
+        module Exams
           class ExamPortionScoresController < BaseController
             skip_before_action :authenticate_request
             before_action :set_exam

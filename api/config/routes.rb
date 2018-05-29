@@ -22,7 +22,7 @@ Gaku::Core::Engine.routes.draw do
 
       resources :exams do
         resources :courses do
-          resources :exam_portion_scores, controller: 'exams/courses/exam_portion_scores'
+          resources :exam_portion_scores, controller: 'courses/exams/exam_portion_scores'
         end
       end
 
@@ -36,7 +36,10 @@ Gaku::Core::Engine.routes.draw do
         resources :enrollments, controller: 'class_groups/enrollments'
       end
 
-      resources :syllabuses
+      resources :syllabuses do
+        resources :courses, controller: 'syllabuses/courses'
+        resources :exams, controller: 'syllabuses/exams'
+      end
       resources :contact_types
       resources :enrollment_statuses
       resources :users do
