@@ -2,7 +2,7 @@ module ApplicationCable
 
   class ExamChannel < ActionCable::Channel::Base
     def subscribed
-      stream_from "exam_1"
+      stream_from "exam_#{params['exam_id']}"
     end
 
     def unsubscribed
