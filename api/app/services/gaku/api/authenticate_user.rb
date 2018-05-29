@@ -16,7 +16,7 @@ module Gaku
           secret = SecureRandom.hex(64)
           $redis.set("token:#{jti}", secret, ex: 20.minutes)
           {
-            auth_token: JsonWebToken.encode({user_id: user.id}, exp: 3.minutes.from_now, jti: jti, secret: secret),
+            auth_token: JsonWebToken.encode({user_id: user.id}, exp: 20.minutes.from_now, jti: jti, secret: secret),
             refresh_token: JsonWebToken.encode({user_id: user.id}, exp: 20.minutes.from_now, jti: jti, secret: secret)
           }
         end

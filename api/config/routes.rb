@@ -1,6 +1,8 @@
 Gaku::Core::Engine.routes.draw do
   namespace :api do
     namespace :v1 do
+      mount ActionCable.server => '/cable'
+
       resource :status
 
       post 'authenticate', to: 'authentication#authenticate'
@@ -16,6 +18,12 @@ Gaku::Core::Engine.routes.draw do
         resources :contacts
 
         get :picture, on: :member
+      end
+
+      resources :exams do
+        resources :courses do
+          resources :exam_portion_scores, controller: 'exams/courses/exam_portion_scores'
+        end
       end
 
       resources :courses do
