@@ -21,10 +21,12 @@ Gaku::Core::Engine.routes.draw do
       end
 
       resources :exams do
-        resources :courses do
-          resources :exam_portion_scores, controller: 'courses/exams/exam_portion_scores'
+        resources :exam_portions, controller: 'exams/exam_portions' do
+          resources :exam_portion_scores, controller: 'exams/exam_portions/exam_portion_scores'
         end
       end
+
+      resources :exam_portion_scores, only: :update
 
       resources :courses do
         resources :students, controller: 'courses/students'
