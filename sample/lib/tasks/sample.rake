@@ -4,14 +4,15 @@ require 'benchmark'
 
 namespace :db do
   desc 'Loads sample data'
-  task :sample do
+  task :sample, [:mode] => [:environment] do |t, args|
 
     say "Simple mode: #{@simple_sample_counts.to_json}".yellow
     say "Normal mode: #{@normal_sample_counts.to_json}".yellow
     say "Full mode: #{@full_sample_counts.to_json}".yellow
     say "------------------------------------------------------------------------------------------------".green
 
-    mode = ENV['mode']
+    mode = ENV['mode'] || args[:mode]
+
     if mode.nil?
       choose do |menu|
         menu.prompt = "Please choose a mode  ".yellow

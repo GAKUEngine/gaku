@@ -21,7 +21,7 @@ module Gaku
     end
 
     def self.Sample
-      _exe 'docker-compose exec web bundle exec rake db:sample'
+      _exe 'docker-compose exec web bundle exec rake db:sample[simple]'
     end
 
     def self.Detach
