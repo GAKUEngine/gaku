@@ -40,7 +40,7 @@ users.each do |user|
 end
 
 admin_user = Gaku::User.find_by_username('admin')
-admin_role = Gaku::Role.find_by_name('Admin')
+admin_role = Gaku::Role.find_by_name('admin')
 admin_user.roles << admin_role
 
 student_user = Gaku::User.find_by_username('student')
