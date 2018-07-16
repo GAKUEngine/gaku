@@ -10,5 +10,7 @@ module Gaku
     user_id faculty_id commute_method_type_id scholarship_status_id created_at updated_at
     extracurricular_activities_count class_groups_count exam_sessions_count)
 
+    # its belongs_to assoc
+    has_one :enrollment_status
   end
 end

@@ -12,8 +12,7 @@ module Gaku
           exam = @exam_portion_score.exam_portion.exam
           serialized_exam_portion_score = Gaku::ExamPortionScoreSerializer.new(@exam_portion_score)
 
-          broadcast_scoring(exam, serialized_exam_portion_score)
-          broadcast_grading(exam, 'TEST')
+          broadcast_scoring(exam, serialized_exam_portion_score.as_json)
 
           member_respond_to @exam_portion_score
         end
@@ -22,10 +21,6 @@ module Gaku
 
         def broadcast_scoring(exam, data)
           ActionCable.server.broadcast("exam_#{exam.id}", data)
-        end
-
-        def broadcast_grading(exam, data)
-          ActionCable.server.broadcast("grading_exam_#{exam.id}", data)
         end
 
         def exam_portion_score_params
