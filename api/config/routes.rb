@@ -30,6 +30,7 @@ Gaku::Core::Engine.routes.draw do
 
       resources :syllabuses
       resources :contact_types
+      resources :enrollment_statuses
     end
   end
 end
