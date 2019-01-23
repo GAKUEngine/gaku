@@ -1,5 +1,0 @@
-showNotice("<%= render_flash %>");
-
-$('tr#attachment-<%= @attachment.id %>').html('<%= j render("table_fields", { attachment: @attachment, nested_resources: @nested_resources  }) %>');
-$(".modal#edit-address-modal").modal("hide");
-$(".modal#edit-attachment-modal").modal("hide");

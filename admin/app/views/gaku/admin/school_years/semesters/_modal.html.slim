@@ -1,5 +1,0 @@
-= modal_for 'edit-school-year-semester-modal' do
-  = modal_form_for [:admin, @school_year, semester], resource: 'admin-school-year-semester' do |f|
-    = modal_form_error 'edit-school-year-semester-modal-error'
-    = render 'form_fields', f: f
-    = buttons_for semester, resource: 'admin-school-year-semester'

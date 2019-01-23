@@ -1,4 +1,0 @@
-= modal_for 'edit-user-modal' do
-  = modal_form_for [:admin, @user], resource: 'admin-user' do |f|
-    = render 'form_fields', f: f
-    = buttons_for @user, resource: 'admin-user'

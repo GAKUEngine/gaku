@@ -1,7 +1,0 @@
-$('#ajax-load').html('<%=j render "tabs" %>');
-
-$('body').on('change', '#country_dropdown', function() {
-  return load_preset_states(<%= @preset.id %>);
-});
-
-load_preset_states(<%= @preset.id %>);

@@ -1,3 +1,0 @@
-$('#students-checked').html('<%= j render(partial: "selected_student", collection: @selection, as: :student) %>');
-<%= "#{@selection.size}" %> != 0 ? $('.chosen-count').html('<%= "#{@selection.size}" %>') : $('.chosen-count').html("");
-$('#students-checked-div').slideDown();

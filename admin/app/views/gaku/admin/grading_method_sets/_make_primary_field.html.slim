@@ -1,4 +1,0 @@
-- if grading_method_set.primary?
-  = link_to ok_icon, [:make_primary, :admin,  grading_method_set], remote: true, class: 'col-md-12 btn btn-xs btn-primary make-primary-grading-method-set', method: :patch, data: { confirm: t('confirm') }, id: 'set_primary_link'
-- else
-  = link_to ok_icon, [:make_primary, :admin, grading_method_set], remote: true, id: 'set_primary_link', class: 'col-md-12 btn btn-xs btn-default make-primary-grading-method-set', method: :patch, data: { confirm: t('confirm') }

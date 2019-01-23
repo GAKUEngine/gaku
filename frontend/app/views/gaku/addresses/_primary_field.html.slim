@@ -1,5 +1,0 @@
-td class='primary_address'
-  - if address.primary?
-    = link_to ok_icon, [:make_primary] + target, method: :patch, remote: true, class: 'col-md-12 btn btn-xs btn-primary make-primary-address', data: { confirm: t('confirm') }, id: 'set_primary_link'
-  - else
-    = link_to ok_icon, [:make_primary] + target, remote: true, id: 'set_primary_link', class: 'col-md-12 btn btn-xs btn-default make-primary-address', method: :patch, data: {confirm: t('confirm')}

@@ -1,7 +1,0 @@
-$('#admin-grading-method-set-grading-method-set-items-index tbody').append('<%= j render("item", {grading_method_set_item: @grading_method_set_item}) %>');
-
-$('#new-admin-grading-method-set-grading-method-set-item').slide();
-$('#new-admin-grading-method-set-grading-method-set-item-link').show();
-
-showNotice("<%= render_flash %>");
-$('.admin-grading-method-set-grading-method-set-items-count').html("<%= print_count(@count, t(:'grading_method.list')) %>");

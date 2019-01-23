@@ -1,6 +1,0 @@
-= modal_for 'edit-simple-grade-modal' do
-  = modal_form_for [@student, @simple_grade], {resource: 'student-simple-grade'} do |f|
-    = render 'form_fields', f: f
-    .row
-      .col-md-12
-          = submit_button t(:'simple_grade.save') , id: "submit-student-simple-grade-button"

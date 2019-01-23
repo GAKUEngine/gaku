@@ -1,7 +1,0 @@
-$('#admin-schools-index tbody').append('<%= j render("school", {school: @school}) %>');
-
-$('#new-admin-school').slide();
-$('#new-admin-school-link').show();
-
-showNotice("<%= render_flash %>");
-$('.admin-schools-count').html("<%= print_count(@count, t(:'school.list')) %>");
