@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :contact_type, class: Gaku::ContactType do
     sequence(:name) { |n| "Email_#{n}" }

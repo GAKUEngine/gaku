@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :program_specialty, class: Gaku::ProgramSpecialty do
     program

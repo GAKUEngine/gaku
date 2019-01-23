@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :schedule, class: Gaku::Schedule do
     starting { Time.now }

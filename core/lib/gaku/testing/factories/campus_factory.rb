@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :campus, class: Gaku::Campus do
     name { FFaker::Education.school_generic_name }

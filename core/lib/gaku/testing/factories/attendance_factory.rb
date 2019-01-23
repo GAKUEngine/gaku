@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :attendance, class: Gaku::Attendance do
     reason 'headache'

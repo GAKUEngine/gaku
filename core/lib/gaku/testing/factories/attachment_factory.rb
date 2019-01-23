@@ -1,6 +1,6 @@
 include ActionDispatch::TestProcess
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :attachment, class: Gaku::Attachment do
     name 'pic1'

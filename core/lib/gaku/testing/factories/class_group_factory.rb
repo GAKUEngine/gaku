@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :class_group, class: Gaku::ClassGroup do
     sequence(:name) { |n| "A#{n}" }

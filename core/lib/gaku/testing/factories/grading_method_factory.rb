@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :grading_method, class: Gaku::GradingMethod do
     sequence(:name) { |n| "Method #{n}" }

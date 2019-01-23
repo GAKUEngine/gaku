@@ -1,4 +1,4 @@
-FactoryGirl.define  do
+FactoryBot.define  do
 
   factory :department, class: Gaku::Department do
     name 'Mathematics'

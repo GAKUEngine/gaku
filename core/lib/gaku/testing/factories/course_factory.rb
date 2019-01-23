@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :course, class: Gaku::Course do
     code 'A1'

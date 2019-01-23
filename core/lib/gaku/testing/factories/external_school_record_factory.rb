@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :external_school_record, class: Gaku::ExternalSchoolRecord do
     beginning Time.now - 1.year
