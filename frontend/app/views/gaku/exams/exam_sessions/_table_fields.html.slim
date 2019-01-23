@@ -1,6 +1,0 @@
-td = exam_session.name
-td = t('exam_session.minutes', time: exam_session.session_time ) if exam_session.session_time
-td = exam_session.exam
-td = I18n.l(exam_session.session_start) if exam_session.session_start
-td
-  = link_to_edit [:edit, exam_session]

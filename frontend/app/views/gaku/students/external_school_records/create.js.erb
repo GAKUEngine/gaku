@@ -1,9 +1,0 @@
-$('#student-external-school-records-index tbody').append('<%= j render("external_school_record", {external_school_record: @external_school_record}) %>');
-
-$('#new-student-external-school-record').slide();
-$('#new-student-external-school-record-link').show();
-
-$('.student-external-school-records-count').html("<%= print_count(@count, t(:'external_school_record.list')) %>");
-$('.external-school-records-count').html("<%= @count %>");
-
-showNotice("<%= render_flash %>");

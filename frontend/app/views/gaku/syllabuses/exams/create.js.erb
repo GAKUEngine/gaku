@@ -1,9 +1,0 @@
-$('#new-syllabus-exam').slide();
-$('#new-syllabus-exam-link').show()
-
-$('#syllabus-exams-index tbody').append('<%= j render("gaku/syllabuses/exams/exam", {exam: @exam}) %>');
-$('.exams-count').html("<%= print_count(@exams_count, t('exam.list')) %>");
-$('#syllabus-exams-tab-link').html("<%= print_count(@exams_count, t(:'exam.plural')) %>");
-
-$('.no-exam-msg').remove();
-showNotice("<%= render_flash %>");

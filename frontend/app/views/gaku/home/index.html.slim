@@ -1,8 +1,0 @@
-- if user_signed_in?
-  = render partial: 'user_info'
-  = render partial: 'user_menu'
-- else
-  = link_to t(:"devise.sign_in"), new_user_session_path
-
-.panel.panel-default
- .panel-body

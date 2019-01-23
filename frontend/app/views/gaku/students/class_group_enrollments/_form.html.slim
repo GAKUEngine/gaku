@@ -1,4 +1,0 @@
-= remote_form_for [@student, @class_group_enrollment], url: student_class_group_enrollments_path(@student, @class_group_enrollment)  , resource: 'student-class-group-enrollment' do |f|
-  #student-class-group-enrollment-errors
-  = f.select :enrollmentable_id, options_from_collection_for_select(@class_groups, :id, :to_s), { prompt: t(:'class_group.choose')}, label: t(:'class_group.plural')
-  = buttons_for @class_group_enrollment, label: t(:'class_group_enrollment.create'), resource: 'student-class-group-enrollment'
