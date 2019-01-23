@@ -1,6 +1,6 @@
 # add assigments when integrate with GradingMethodConnector
 %w( exam course ).each do |resource|
-  FactoryGirl.define do
+  FactoryBot.define do
 
     factory "grading_method_connector_#{resource}", class: Gaku::GradingMethodConnector do
       grading_method

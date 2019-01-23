@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :exam_score, class: Gaku::ExamScore do
     exam

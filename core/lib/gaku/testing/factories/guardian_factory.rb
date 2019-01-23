@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :guardian, class: Gaku::Guardian do
     name { FFaker::Name.first_name }

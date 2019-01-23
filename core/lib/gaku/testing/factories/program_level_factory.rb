@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :program_level, class: Gaku::ProgramLevel do
     program

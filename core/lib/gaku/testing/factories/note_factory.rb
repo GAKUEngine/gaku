@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :note, class: Gaku::Note do
     title 'Excellent'

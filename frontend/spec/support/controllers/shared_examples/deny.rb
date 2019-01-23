@@ -1,6 +1,6 @@
 shared_examples_for 'deny' do |user_role|
   it "deny index for #{user_role}" do
-    user = FactoryGirl.create("#{user_role}_user")
+    user = FactoryBot.create("#{user_role}_user")
     login_as user, scope: :user
 
     gaku_get :index
@@ -15,7 +15,7 @@ shared_examples_for 'deny except' do |except_role|
   %w(principal vice_principal).each do |role|
     unless role == except_role
       it "deny index for #{role}" do
-        user = FactoryGirl.create("#{role}_user")
+        user = FactoryBot.create("#{role}_user")
         login_as user, scope: :user
 
         gaku_get :index

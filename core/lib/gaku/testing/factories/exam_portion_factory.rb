@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :exam_portion, class: Gaku::ExamPortion do
     name 'wow'

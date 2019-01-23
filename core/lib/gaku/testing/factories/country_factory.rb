@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :country, class: Gaku::Country do
     iso_name 'UNITED STATES'

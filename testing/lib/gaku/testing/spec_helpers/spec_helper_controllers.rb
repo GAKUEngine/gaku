@@ -9,7 +9,7 @@ require 'rspec/rails/view_rendering'
 
 require 'shoulda-matchers'
 require 'database_cleaner'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'handy_controller_helpers'
 
 require 'gaku/testing/factories'
@@ -37,7 +37,7 @@ RSpec.configure do |config|
   end
 
   config.include Gaku::Testing::ControllerHelpers, type: :controller
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include HandyControllerHelpers::AllHelpers, type: :controller
   config.include Gaku::Core::UrlHelpers

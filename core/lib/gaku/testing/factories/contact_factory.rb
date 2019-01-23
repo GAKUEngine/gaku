@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :contact, class: Gaku::Contact do
     data 'gaku@example.com'

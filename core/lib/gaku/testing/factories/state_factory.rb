@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :state, class: Gaku::State do
     name 'Alabama'
     abbr 'AL'

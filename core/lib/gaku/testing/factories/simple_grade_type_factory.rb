@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :simple_grade_type, class: Gaku::SimpleGradeType do
     sequence(:name) { |n | "ruby_#{n}" }

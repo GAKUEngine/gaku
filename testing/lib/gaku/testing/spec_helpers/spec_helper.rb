@@ -4,7 +4,7 @@ require 'rubygems'
 require 'rspec/rails'
 require 'database_cleaner'
 require 'active_record/fixtures'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'ffaker'
 # require 'rspec/retry'
 
@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Gaku::Core::UrlHelpers
   config.include HandyControllerHelpers::AllHelpers, type: :request
 

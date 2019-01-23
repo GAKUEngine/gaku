@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :exam_session, class: Gaku::ExamSession do
     name 'Ruby Session'
