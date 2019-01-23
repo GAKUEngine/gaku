@@ -1,4 +1,4 @@
-version: '2'
+version: '3.5'
 services:
   web:
     environment:
@@ -15,14 +15,14 @@ services:
       - postgres
       - redis
   postgres:
-    image: postgres:9.6.5
+    image: postgres:11
     ports:
       - "9001:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
   redis:
-    image: redis:4.0.1
+    image: redis:5
     ports:
       - "9002:6379"
 

@@ -1,20 +1,11 @@
-FROM ubuntu:16.04
+FROM ubuntu:bionic
 MAINTAINER Georgi Tapalilov & Rei Kagetsuki
 
 EXPOSE 3000
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends apt-utils
-
-RUN apt-get install -y cmake libpng-dev libboost-program-options-dev libboost-regex-dev \
-	libboost-system-dev libboost-filesystem-dev build-essential ruby2.3-dev autoconf \
-	libgmp-dev imagemagick libmagickcore-dev libmagickwand-dev git libpq-dev postgresql-client
-
-# ENV BUNDLE_PATH=/gems \
-#     BUNDLE_BIN=/gems/bin \
-#     GEM_HOME=/gems
-#
-# ENV PATH="${BUNDLE_BIN}:${PATH}"
+RUN apt-get install -y ruby ruby-dev build-essential imagemagick libmagickcore-dev git \
+	libpq-dev postgresql-client nodejs
 
 RUN gem install rails -v 5.1.4 --no-ri --no-rdoc
 RUN gem install bundler --no-ri --no-rdoc
@@ -30,32 +21,9 @@ RUN rails new $app --database=postgresql --skip-bundle
 WORKDIR $app
 
 RUN echo "gem 'gaku', path: '../gaku'" >> Gemfile
-RUN echo "gem 'therubyracer'" >> Gemfile
-RUN echo "gem 'therubyracer'" >> Gemfile
+#RUN echo "gem 'therubyracer'" >> Gemfile
 RUN echo "gem 'tzinfo-data'" >> Gemfile
 
 RUN bundle install
 
-# WORKDIR $app
-
 RUN bundle exec rails g gaku:docker
-# # prepare staging enviroment
-# RUN echo "staging:\n  url: postgres://postgres:@postgres:5432/app_staging" >> config/database.yml
-# RUN cp config/environments/development.rb config/environments/staging.rb
-#
-# # generate secret
-# RUN SECRET="$(bundle exec rake secret)"; echo "staging:\n  secret_key_base: ${SECRET}" >> config/secrets.yml
-#
-# # wait for postgres script
-# COPY support/docker/check_postgres.sh /usr/bin/check_postgres
-# RUN chmod +x /usr/bin/check_postgres
-#
-# # add route
-# RUN sed -i "2imount Gaku::Core::Engine, at: '/'" config/routes.rb
-#
-# # copy migrations
-# RUN bundle exec rake gaku:install:migrations
-#
-# # assets
-#
-# RUN bundle exec rake assets:precompile
