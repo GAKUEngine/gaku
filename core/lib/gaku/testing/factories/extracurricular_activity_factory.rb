@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :extracurricular_activity, class: Gaku::ExtracurricularActivity do
     sequence(:name) { |n| "tennis#{n}" }
 
@@ -7,5 +6,4 @@ FactoryBot.define do
       name nil
     end
   end
-
 end

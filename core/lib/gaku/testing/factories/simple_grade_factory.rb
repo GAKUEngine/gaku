@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :simple_grade, class: Gaku::SimpleGrade do
     score 2.5
     award_date Date.today
@@ -10,5 +9,4 @@ FactoryBot.define do
       score nil
     end
   end
-
 end

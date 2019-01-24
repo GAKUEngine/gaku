@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :student_specialty, class: Gaku::StudentSpecialty do
     student
     specialty
@@ -9,5 +8,4 @@ FactoryBot.define do
       specialty nil
     end
   end
-
 end

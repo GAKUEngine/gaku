@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :grading_method, class: Gaku::GradingMethod do
     sequence(:name) { |n| "Method #{n}" }
     description 'Grading method description'
@@ -10,5 +9,4 @@ FactoryBot.define do
       name nil
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::Preset, type: :model do
-
   it 'responds to .default' do
     expect(Gaku::Preset).to respond_to(:default)
   end
@@ -17,5 +16,4 @@ describe Gaku::Preset, type: :model do
   it 'responds to .address' do
     expect(Gaku::Preset).to respond_to(:address)
   end
-
 end

@@ -11,9 +11,7 @@ module Gaku
       ensure_first_is_primary
 
       if @contact.save
-        if @contact.contactable.respond_to?(:contacts)
-          remove_other_primary
-        end
+        remove_other_primary if @contact.contactable.respond_to?(:contacts)
         return true
       else
         @errors = @contact.errors
@@ -23,27 +21,22 @@ module Gaku
 
     def save!
       if save
-        return @contact
+        @contact
       else
-        fail 'Failed to save record'
+        raise 'Failed to save record'
       end
     end
 
     private
 
     def ensure_first_is_primary
-      if @contact.contactable.respond_to?(:contacts) && @contact.contactable.contacts.blank?
-        @contact.primary = true
-      end
+      @contact.primary = true if @contact.contactable.respond_to?(:contacts) && @contact.contactable.contacts.blank?
     end
 
     def remove_other_primary
-      if @contact.primary?
-        @contact.contactable.reload.contacts.where.not(id: @contact.id).update_all(primary: false)
-      end
+      @contact.contactable.reload.contacts.where.not(id: @contact.id).update_all(primary: false) if @contact.primary?
     end
 
     # Workaround performance issue by not using JOIN
-
   end
 end

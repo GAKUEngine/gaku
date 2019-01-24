@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :exam_portion, class: Gaku::ExamPortion do
     name 'wow'
     max_score 100
@@ -9,5 +8,4 @@ FactoryBot.define do
     score_type 'score'
     factory(:invalid_exam_portion) { name nil }
   end
-
 end

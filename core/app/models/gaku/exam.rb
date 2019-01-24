@@ -1,6 +1,8 @@
 module Gaku
   class Exam < ActiveRecord::Base
-    include Notes, Pagination, Gradable
+    include Gradable
+    include Pagination
+    include Notes
 
     has_many :exam_scores
     has_many :exam_portions, -> { order :position }
@@ -28,7 +30,7 @@ module Gaku
 
     def self.without_syllabuses
       includes(:syllabuses).where(standalone: false)
-                           .select { |p| p.syllabuses.length == 0 }
+                           .select { |p| p.syllabuses.empty? }
     end
 
     def total_weight
@@ -78,7 +80,7 @@ module Gaku
     def completed_by_students(students)
       completed = []
       students.each do |student|
-        completed.append(student.id) if self.completed_by_student?(student)
+        completed.append(student.id) if completed_by_student?(student)
       end
       completed
     end

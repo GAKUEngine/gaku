@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :preset, class: Gaku::Preset do
     name 'Default'
     names_order '%first %middle %last'
@@ -13,5 +12,4 @@ FactoryBot.define do
     chooser_fields { {} }
     grading { {} }
   end
-
 end

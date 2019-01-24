@@ -47,7 +47,7 @@ module Gaku
     end
 
     def empty?
-      except_fields = %w(id created_at updated_at country_numcode)
+      except_fields = %w[id created_at updated_at country_numcode]
       attributes.except(except_fields).all? { |_, v| v.nil? }
     end
 
@@ -62,9 +62,7 @@ module Gaku
     end
 
     def reset_counter_cache
-      unless addressable.instance_of? Gaku::Campus
-        addressable.class.reset_counters(addressable.id, :addresses)
-      end
+      addressable.class.reset_counters(addressable.id, :addresses) unless addressable.instance_of? Gaku::Campus
     end
 
     def increment_count

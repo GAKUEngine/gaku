@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :exam, class: Gaku::Exam do
     name 'Math exam'
     weight 4
@@ -24,5 +23,4 @@ FactoryBot.define do
       exam.save
     end
   end
-
 end

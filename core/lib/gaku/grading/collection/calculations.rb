@@ -1,8 +1,7 @@
 module Gaku
   module Grading
     module Collection
-      class  Calculations
-
+      class Calculations
         attr_reader :grading_methods, :students, :exam, :gradable_scope
 
         def initialize(grading_method, students, exam, gradable_scope)
@@ -10,7 +9,6 @@ module Gaku
           @students        = students
           @grading_methods = grading_method
           @gradable_scope  = gradable_scope
-
         end
 
         def calculate

@@ -1,14 +1,13 @@
 module Gaku
   class ExamsController < GakuController
-
     respond_to :html, :js, :json
     respond_to :xls, only: :export
 
     include Gaku::Grading::Calculations
 
-    before_action :set_exam,    only: %i( show edit update soft_delete )
-    before_action :set_unscoped_exam,  only: %i( destroy recovery )
-    before_action :load_data, only: %i( new edit )
+    before_action :set_exam, only: %i[show edit update soft_delete]
+    before_action :set_unscoped_exam, only: %i[destroy recovery]
+    before_action :load_data, only: %i[new edit]
 
     def index
       if params[:course_id]
@@ -22,7 +21,7 @@ module Gaku
       set_count
       respond_to do |format|
         format.html
-        format.json { render json: @exams.as_json(include: {exam_portions: {include: :exam_portion_scores}})}
+        format.json { render json: @exams.as_json(include: { exam_portions: { include: :exam_portion_scores } }) }
       end
     end
 
@@ -72,7 +71,6 @@ module Gaku
       @course = Course.find(params[:course_id])
     end
 
-
     # def grading
     #   @course = Course.find(params[:course_id])
     #   @exam = Exam.find(params[:id])
@@ -114,7 +112,6 @@ module Gaku
       @course = Course.find(params[:course_id])
       @students = @course.students
 
-
       respond_with @exam.completed_by_students(@students)
     end
 
@@ -136,8 +133,7 @@ module Gaku
 
     def attributes
       [:name, :department_id, :weight, :description, :adjustments, :use_weighting,
-        exam_portions_attributes: [:id, :name, :weight, :problem_count, :max_score, :description, :adjustments]
-      ]
+       exam_portions_attributes: %i[id name weight problem_count max_score description adjustments]]
     end
 
     def set_exam
@@ -152,7 +148,7 @@ module Gaku
 
     def set_notable
       @notable = @exam
-      @notable_resource = @notable.class.to_s.underscore.split('/')[1].gsub('_','-')
+      @notable_resource = @notable.class.to_s.underscore.split('/')[1].tr('_', '-')
     end
 
     def set_count
@@ -160,11 +156,11 @@ module Gaku
     end
 
     def find_exams
-      if params[:id] != nil
-        @exams = Exam.where(id: params[:id])
-      else
-        @exams = @course.syllabus.exams
-      end
+      @exams = if !params[:id].nil?
+                 Exam.where(id: params[:id])
+               else
+                 @course.syllabus.exams
+               end
     end
   end
 end

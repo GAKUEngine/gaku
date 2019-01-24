@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :exam_session, class: Gaku::ExamSession do
     name 'Ruby Session'
     session_time 45
@@ -10,5 +9,4 @@ FactoryBot.define do
       exam_id ''
     end
   end
-
 end

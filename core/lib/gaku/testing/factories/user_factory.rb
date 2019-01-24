@@ -37,5 +37,4 @@ FactoryBot.define do
       create(:user_role, role: role, user: user)
     end
   end
-
 end

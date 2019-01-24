@@ -33,4 +33,7 @@ AllCops:
     - '**/config/initializers/**/*'
     - '**/db/migrate/**/*'
     - '**/lib/generators/**/*'
-  RunRailsCops: false
+  # RunRailsCops: false
+
+Rails:
+  Enabled: false

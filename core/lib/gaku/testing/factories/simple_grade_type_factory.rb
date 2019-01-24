@@ -1,7 +1,6 @@
 FactoryBot.define do
-
   factory :simple_grade_type, class: Gaku::SimpleGradeType do
-    sequence(:name) { |n | "ruby_#{n}" }
+    sequence(:name) { |n| "ruby_#{n}" }
     grading_method
     school
 
@@ -9,5 +8,4 @@ FactoryBot.define do
       name nil
     end
   end
-
 end

@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :role, class: Gaku::Role do
     sequence(:name) { |n| "Role_#{n}" }
 
@@ -39,5 +38,4 @@ FactoryBot.define do
   factory :counselor_role, parent: :role do
     name 'counselor'
   end
-
 end

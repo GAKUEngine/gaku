@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :campus, class: Gaku::Campus do
     name { FFaker::Education.school_generic_name }
     school
@@ -15,5 +14,4 @@ FactoryBot.define do
       campus.save
     end
   end
-
 end

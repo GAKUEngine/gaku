@@ -1,3 +1,3 @@
 shared_examples_for 'addressable' do
-  it { should have_many :addresses }
+  it { is_expected.to have_many :addresses }
 end

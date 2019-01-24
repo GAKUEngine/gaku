@@ -1,21 +1,18 @@
 require 'highline/import'
 
 namespace :gaku do
-
-  desc "Create admin username and password"
+  desc 'Create admin username and password'
   task generate_admin: :environment do
-
-  if Gaku::User.admin.empty?
-    create_admin_user
-  else
-    puts 'Admin user has already been previously created.'
-    if agree('Would you like to create a new admin user? (yes/no)')
+    if Gaku::User.admin.empty?
       create_admin_user
     else
-      puts 'No admin user created.'
+      puts 'Admin user has already been previously created.'
+      if agree('Would you like to create a new admin user? (yes/no)')
+        create_admin_user
+      else
+        puts 'No admin user created.'
+      end
     end
-  end
-
   end
 end
 
@@ -36,7 +33,6 @@ def prompt_for_admin_password
   password
 end
 
-
 def prompt_for_admin_email
   if ENV['ADMIN_EMAIL']
     email = ENV['ADMIN_EMAIL'].dup
@@ -51,7 +47,6 @@ def prompt_for_admin_email
 
   email
 end
-
 
 def prompt_for_admin_username
   if ENV['ADMIN_USERNAME']
@@ -85,13 +80,12 @@ def create_admin_user
     username: username
   }
 
-
   if Gaku::User.find_by_email(email)
     say "\nWARNING: There is already a user with the email: #{email}, so no account changes were made.  If you wish to create an additional admin user, please run rake gaku:generate_admin again with a different email.\n\n"
   elsif Gaku::User.find_by_username(username)
     say "\nWARNING: There is already a user with the username: #{username}, so no account changes were made.  If you wish to create an additional admin user, please run rake gaku:generate_admin again with a different username.\n\n"
   else
-    say "Creating user..."
+    say 'Creating user...'
     creator = Gaku::UserCreator.new(attributes)
     creator.save
     admin = creator.get_user
@@ -99,9 +93,9 @@ def create_admin_user
     role = Gaku::Role.first_or_create(name: 'Admin')
     admin.roles << role
     if admin.save
-      say "User Created"
+      say 'User Created'
     else
-      say "User NOT Created"
+      say 'User NOT Created'
     end
   end
 end

@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :country, class: Gaku::Country do
     iso_name 'UNITED STATES'
     name 'United States of Foo'
@@ -7,5 +6,4 @@ FactoryBot.define do
     sequence(:iso3) { |n| "USA_#{n}" }
     numcode 840
   end
-
 end

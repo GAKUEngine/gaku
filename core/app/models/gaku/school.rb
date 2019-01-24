@@ -38,11 +38,11 @@ module Gaku
     private
 
     def build_default_campus
-      if campuses.any?
-        campus = campuses.first
-      else
-        campus = campuses.create(name: name)
-      end
+      campus = if campuses.any?
+                 campuses.first
+               else
+                 campuses.create(name: name)
+               end
 
       campus.master = true
       campus.save

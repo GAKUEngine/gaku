@@ -12,5 +12,4 @@ FactoryBot.define do
 
     factory(:invalid_template) { name nil }
   end
-
 end

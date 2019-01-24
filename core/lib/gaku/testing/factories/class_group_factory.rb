@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :class_group, class: Gaku::ClassGroup do
     sequence(:name) { |n| "A#{n}" }
 
@@ -20,5 +19,4 @@ FactoryBot.define do
       end
     end
   end
-
 end

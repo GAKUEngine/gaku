@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :program, class: Gaku::Program do
     name { FFaker::Education.degree }
     description 'Superior Ruby Skills'
@@ -34,5 +33,4 @@ FactoryBot.define do
       program.specialties << create(:specialty)
     end
   end
-
 end

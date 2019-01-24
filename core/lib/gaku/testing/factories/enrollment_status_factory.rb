@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :enrollment_status, class: Gaku::EnrollmentStatus do
     code 'enrolled'
     name 'Enrolled'
@@ -24,5 +23,4 @@ FactoryBot.define do
   factory :invalid_enrollment_status, class: Gaku::EnrollmentStatus do
     code nil
   end
-
 end

@@ -1,5 +1,4 @@
-FactoryBot.define  do
-
+FactoryBot.define do
   factory :department, class: Gaku::Department do
     name 'Mathematics'
 
@@ -7,5 +6,4 @@ FactoryBot.define  do
       name nil
     end
   end
-
 end

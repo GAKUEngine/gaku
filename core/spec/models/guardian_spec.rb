@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
-describe Gaku::Guardian, type: :model  do
-
+describe Gaku::Guardian, type: :model do
   describe 'concerns' do
     it_behaves_like 'person'
     it_behaves_like 'addressable'
@@ -10,24 +9,23 @@ describe Gaku::Guardian, type: :model  do
   end
 
   describe 'relations' do
-    it { should belong_to :user }
-    it { should have_many :student_guardians }
-    it { should have_many(:students).through(:student_guardians) }
+    it { is_expected.to belong_to :user }
+    it { is_expected.to have_many :student_guardians }
+    it { is_expected.to have_many(:students).through(:student_guardians) }
   end
 
   describe '#primary_contact' do
-    it('responds to primary_contact') { should respond_to(:primary_contact) }
+    it('responds to primary_contact') { is_expected.to respond_to(:primary_contact) }
   end
 
   describe '#primary_address' do
-    it('responds to primary_address') { should respond_to(:primary_address) }
+    it('responds to primary_address') { is_expected.to respond_to(:primary_address) }
   end
 
   context 'counter_cache' do
     let!(:guardian) { create(:guardian) }
 
     context 'addresses_count' do
-
       let(:address) { build(:address) }
       let(:guardian_with_address) { create(:guardian, :with_address) }
 
@@ -45,7 +43,6 @@ describe Gaku::Guardian, type: :model  do
     end
 
     context 'contacts_count' do
-
       let(:contact) { build(:contact) }
       let(:guardian_with_contact) { create(:guardian, :with_contact) }
 
@@ -62,5 +59,4 @@ describe Gaku::Guardian, type: :model  do
       end
     end
   end
-
 end

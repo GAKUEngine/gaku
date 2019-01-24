@@ -1,17 +1,16 @@
 require 'spec_helper_models'
 
 describe Gaku::State, type: :model do
+  before(:all) { Gaku::State.destroy_all }
 
   describe 'associations' do
-    it { should belong_to :country }
+    it { is_expected.to belong_to :country }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :name }
-    it { should validate_presence_of :country_iso }
+    it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_presence_of :country_iso }
   end
-
-  before(:all) { Gaku::State.destroy_all }
 
   it 'can find a state by name or abbr' do
     state = create(:state, name: 'California', abbr: 'CA')

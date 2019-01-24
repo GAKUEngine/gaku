@@ -59,7 +59,5 @@ module Gaku
         Country.first
       end
     end
-
-
   end
 end

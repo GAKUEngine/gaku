@@ -14,7 +14,6 @@ require 'draper'
 require 'carmen'
 
 module Gaku
-
   module Core
   end
 

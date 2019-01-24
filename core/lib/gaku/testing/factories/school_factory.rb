@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :school, class: Gaku::School do
     name { FFaker::Education.school_generic_name }
     slogan 'Draw the individual potencial'
@@ -28,5 +27,4 @@ FactoryBot.define do
   trait :master do
     primary true
   end
-
 end

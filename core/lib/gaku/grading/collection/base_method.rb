@@ -1,7 +1,7 @@
 module Gaku
   module Grading
     module Collection
-      class  BaseMethod
+      class BaseMethod
         attr_reader :gradable, :gradable_type, :students, :criteria, :results, :gradable_scope
 
         # Pass a gradable object [exam or assignment] and students
@@ -24,7 +24,6 @@ module Gaku
 
           Gaku::Grading::Collection::Result.new(@gradable.id, @result).as_json
         end
-
       end
     end
   end

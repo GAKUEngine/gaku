@@ -15,7 +15,7 @@ module Gaku
 
     def simple_grades_list
       h.comma_separated_list(object.simple_grades) do |simple_grade|
-        "#{simple_grade.simple_grade_type_name}"
+        simple_grade.simple_grade_type_name.to_s
       end
     end
 

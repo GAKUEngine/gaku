@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :attendance, class: Gaku::Attendance do
     reason 'headache'
     after(:build) do |attendance|
@@ -7,5 +6,4 @@ FactoryBot.define do
       attendance.student = build(:student)
     end
   end
-
 end

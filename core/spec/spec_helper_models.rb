@@ -21,13 +21,13 @@ require 'shoulda/matchers'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
-  with.test_framework :rspec
-  with.library :rails
+    with.test_framework :rspec
+    with.library :rails
   end
 end
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
-    c.syntax = [:should, :expect]
+    c.syntax = %i[should expect]
   end
 
   config.before(:suite) do
@@ -35,15 +35,14 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
   end
 
   config.include FactoryBot::Syntax::Methods
   config.include Paperclip::Shoulda::Matchers
-
 end

@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :syllabus, class: Gaku::Syllabus do
     name { FFaker::Name.name }
     code '12345'
@@ -16,5 +15,4 @@ FactoryBot.define do
       syllabus.exams << create(:exam)
     end
   end
-
 end

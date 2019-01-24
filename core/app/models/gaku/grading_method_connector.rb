@@ -8,12 +8,12 @@ module Gaku
     validates(
       :gradable_type,
       inclusion: {
-        in: %w(Gaku::Exam Gaku::Course Gaku::ExamSession),
+        in: %w[Gaku::Exam Gaku::Course Gaku::ExamSession],
         message: '%value is not a valid'
       }
     )
 
-    validates :grading_method_id, uniqueness: { scope: [:gradable_type, :gradable_id] }
+    validates :grading_method_id, uniqueness: { scope: %i[gradable_type gradable_id] }
 
     default_scope { order('position ASC') }
 

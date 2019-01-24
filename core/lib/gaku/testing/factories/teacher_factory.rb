@@ -1,5 +1,4 @@
-FactoryBot.define  do
-
+FactoryBot.define do
   factory :teacher, class: Gaku::Teacher do
     name { FFaker::Name.first_name }
     surname { FFaker::Name.last_name }
@@ -11,5 +10,4 @@ FactoryBot.define  do
       name nil
     end
   end
-
 end

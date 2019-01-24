@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :specialty, class: Gaku::Specialty do
     name 'Biology Specialty'
     description 'Biology Specialty Description'
@@ -9,5 +8,4 @@ FactoryBot.define do
       name nil
     end
   end
-
 end

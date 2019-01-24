@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :external_school_record, class: Gaku::ExternalSchoolRecord do
     beginning Time.now - 1.year
     ending Time.now
@@ -10,5 +9,4 @@ FactoryBot.define do
       school nil
     end
   end
-
 end

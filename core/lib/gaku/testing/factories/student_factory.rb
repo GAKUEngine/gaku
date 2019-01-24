@@ -1,7 +1,6 @@
 require 'ffaker'
 
-FactoryBot.define  do
-
+FactoryBot.define do
   factory :student, class: Gaku::Student do
     name { FFaker::Name.first_name }
     middle_name { FFaker::Name.first_name }
@@ -59,5 +58,4 @@ FactoryBot.define  do
   trait :with_commute_method_type do
     commute_method_type
   end
-
 end

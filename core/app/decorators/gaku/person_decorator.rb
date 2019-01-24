@@ -27,18 +27,19 @@ module Gaku
 
       if options[:without_formating]
         preset_without_format = ''
-        preset.gsub(/%(\w+)/) { |n|  preset_without_format << n + ' ' }
+        preset.gsub(/%(\w+)/) { |n| preset_without_format << n + ' ' }
         preset = preset_without_format.strip
       end
 
       if options[:reading] && object.name_reading.blank? &&
-        object.surname_reading.blank? &&
-        object.middle_name_reading.blank?
+         object.surname_reading.blank? &&
+         object.middle_name_reading.blank?
         return ''
       end
 
       reading = options[:reading]
       return reading ? object.phonetic_reading : object.to_s if preset.blank?
+
       result = preset.gsub(/%(\w+)/) do |name|
         case name
         when '%first' then proper_name(:name, reading)
@@ -47,6 +48,7 @@ module Gaku
         end
       end
       return result.gsub(/[^[[:word:]]\s]/, '').gsub(/\s+/, ' ').strip if object.middle_name.blank?
+
       result.gsub(/\s+/, ' ').strip
     end
 

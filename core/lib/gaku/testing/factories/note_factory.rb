@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :note, class: Gaku::Note do
     title 'Excellent'
     content 'Excellent student'
@@ -8,5 +7,4 @@ FactoryBot.define do
       title nil
     end
   end
-
 end

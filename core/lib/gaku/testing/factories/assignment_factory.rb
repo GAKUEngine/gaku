@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :assignment, class: Gaku::Assignment do
     name 'Assignment #1'
     description 'Assignment #1 description'
@@ -7,5 +6,4 @@ FactoryBot.define do
     syllabus
     grading_method
   end
-
 end
