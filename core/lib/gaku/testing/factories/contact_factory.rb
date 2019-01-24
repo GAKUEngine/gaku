@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :contact, class: Gaku::Contact do
-    data 'gaku@example.com'
-    details 'My email'
+    data { 'gaku@example.com' }
+    details { 'My email' }
     contact_type
 
     after(:build) do |contact|
@@ -9,7 +9,7 @@ FactoryBot.define do
     end
 
     factory :invalid_contact do
-      data nil
+      data { nil }
     end
   end
 end

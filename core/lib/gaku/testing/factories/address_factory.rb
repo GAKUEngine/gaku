@@ -12,7 +12,7 @@ FactoryBot.define do
     end
 
     factory :invalid_address do
-      address1 nil
+      address1 { nil }
     end
   end
 end

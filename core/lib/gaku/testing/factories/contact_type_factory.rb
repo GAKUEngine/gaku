@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "Email_#{n}" }
 
     factory :invalid_contact_type do
-      name nil
+      name { nil }
     end
   end
 end

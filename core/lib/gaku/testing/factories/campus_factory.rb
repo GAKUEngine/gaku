@@ -4,7 +4,7 @@ FactoryBot.define do
     school
 
     factory :invalid_campus do
-      name nil
+      name { nil }
     end
   end
 

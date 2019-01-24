@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "Set #{n}" }
 
     factory :invalid_grading_method_set do
-      name nil
+      name { nil }
     end
   end
 end

@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :department, class: Gaku::Department do
-    name 'Mathematics'
+    name { 'Mathematics' }
 
     factory :invalid_department do
-      name nil
+      name { nil }
     end
   end
 end

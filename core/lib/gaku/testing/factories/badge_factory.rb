@@ -4,7 +4,7 @@ FactoryBot.define do
     badge_type
 
     factory :invalid_badge do
-      student nil
+      student { nil }
     end
   end
 end

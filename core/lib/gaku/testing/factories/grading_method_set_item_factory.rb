@@ -4,7 +4,7 @@ FactoryBot.define do
     grading_method
 
     factory :invalid_grading_method_set_item do
-      grading_method nil
+      grading_method { nil }
     end
   end
 end

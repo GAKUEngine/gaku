@@ -5,7 +5,7 @@ FactoryBot.define do
     school
 
     factory :invalid_simple_grade_type do
-      name nil
+      name { nil }
     end
   end
 end

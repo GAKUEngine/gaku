@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "tennis#{n}" }
 
     factory :invalid_extracurricular_activity do
-      name nil
+      name { nil }
     end
   end
 end
