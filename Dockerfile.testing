@@ -8,13 +8,15 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update
 RUN apt-get install -y ruby ruby-dev build-essential imagemagick libmagickcore-dev git \
-	libpq-dev postgresql-client nodejs
+	libpq-dev postgresql-client postgresql postgresql-contrib redis redis-tools redis-server nodejs
 
 RUN gem install rails -v 5.1.4 --no-ri --no-rdoc
 RUN gem install bundler --no-ri --no-rdoc
 
 ADD	.	/gaku
 WORKDIR /gaku
+
+ADD tmp /tmp
 
 ENV app /app
 ENV gaku /gaku
