@@ -1,8 +1,0 @@
-td = template.name
-td = template.context
-td = boolean_image template.locked?
-td
-  = link_to_download [:download, :admin, template]
-  = ajax_link_to_edit [:edit, :admin, template]
-  = ajax_link_to_delete [:admin, template]
-

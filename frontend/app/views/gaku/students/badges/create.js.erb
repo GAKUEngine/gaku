@@ -1,9 +1,0 @@
-$('#student-badges-index').append('<%= j render("badge", {badge: @badge}) %>');
-
-$('.student-badges-count').html("<%= print_count(@count, t(:'badge.list')) %>");
-$('.badges-count').html("<%= @count %>");
-
-$('#new-student-badge').slide()
-$('#new-student-badge-link').show();
-
-showNotice("<%= render_flash %>");

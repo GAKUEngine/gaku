@@ -7,7 +7,7 @@ require 'rspec/rails/matchers'
 # require 'rspec/rails/mocks'
 
 require 'database_cleaner'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'paperclip/matchers'
 require 'ffaker'
 # require 'shoulda-matchers'
@@ -43,7 +43,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Paperclip::Shoulda::Matchers
 
 end

@@ -1,6 +1,6 @@
 include ActionDispatch::TestProcess
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :template, class: Gaku::Template do
     name 'Roster Template'
     context 'spreadsheet'

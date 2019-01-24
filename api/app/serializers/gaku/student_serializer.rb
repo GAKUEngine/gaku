@@ -1,5 +1,7 @@
 module Gaku
   class StudentSerializer < ActiveModel::Serializer
+    belongs_to :enrollment_status
+
     attributes %i( id name surname middle_name name_reading middle_name_reading surname_reading
     gender birth_date admitted graduated code serial_id foreign_id_code national_registration_code
     enrollment_status_code picture_file_name picture_content_type picture_file_size

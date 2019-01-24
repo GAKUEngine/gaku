@@ -1,9 +1,0 @@
-$('#student-extracurricular-activity-enrollments-index').append('<%= j render("extracurricular_activity_enrollment", {extracurricular_activity_enrollment: @extracurricular_activity_enrollment}) %>');
-
-$('.student-extracurricular-activity-enrollments-count').html("<%= print_count(@count, t(:'extracurricular_activity.list')) %>");
-$('.extracurricular-activities-count').html("<%= @count %>");
-
-$('#new-student-extracurricular-activity-enrollment').slide()
-$('#new-student-extracurricular-activity-enrollment-link').show();
-
-showNotice("<%= render_flash %>");

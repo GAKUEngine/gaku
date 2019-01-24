@@ -1,8 +1,0 @@
-row
-  .span12
-    #generate-report
-    table.main-grading.table.table-bordered.table-condensed
-      thead
-        = render partial: 'gaku/shared/grading/grading_table_head'
-      tbody
-        = render partial: 'gaku/shared/grading/grading_table_student_field', collection: @students, as: :student

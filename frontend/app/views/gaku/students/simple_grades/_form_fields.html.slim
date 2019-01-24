@@ -1,7 +1,0 @@
-.row
-  .col-md-4
-    = f.select :simple_grade_type_id,  options_from_collection_for_select(@simple_grade_types, :id, :name), {prompt: t(:'simple_grade_type.choose')}, label: t(:'simple_grade_type.plural')
-  .col-md-4
-    = f.number_field :score, label: t(:'simple_grade.score')
-  .col-md-4
-    = f.text_field :award_date, class: 'datepicker', label: t(:'simple_grade.award_date')

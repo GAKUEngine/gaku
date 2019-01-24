@@ -7,9 +7,12 @@ module Gaku
         before_action :set_student, except: %i( index create )
 
         def index
-          @q = Student.includes(:primary_contact, :primary_address).search(params[:q])
-          @students = @q.result.page(params[:page])
+          @students = Student.includes(:primary_contact, :primary_address).all
           collection_respond_to @students, root: :students
+        end
+
+        def picture
+          send_file @student.picture.path
         end
 
         def show
@@ -56,8 +59,8 @@ module Gaku
 
         def student_attributes
           %i(
-            name surname name_reading surname_reading birth_date gender scholarship_status_id,
-            enrollment_status_code commute_method_type_id admitted graduated picture
+            name surname name_reading surname_reading middle_name middle_name_reading
+            birth_date gender enrollment_status_code picture
           )
         end
 

@@ -1,7 +1,0 @@
-$('#admin-simple-grade-types-index tbody').append('<%= j render("simple_grade_type", {simple_grade_type: @simple_grade_type}) %>');
-
-$('#new-admin-simple-grade-type').slide();
-$('#new-admin-simple-grade-type-link').show();
-
-$('.admin-simple-grade-types-count').html("<%= print_count(@count, t(:'simple_grade_type.list')) %>");
-showNotice("<%= render_flash %>");

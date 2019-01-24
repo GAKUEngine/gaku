@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :attendance_type, class: Gaku::AttendanceType do
     name 'Illness'

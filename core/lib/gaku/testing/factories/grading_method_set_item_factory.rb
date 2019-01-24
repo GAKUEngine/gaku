@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :grading_method_set_item, class: Gaku::GradingMethodSetItem do
     grading_method_set

@@ -1,6 +1,0 @@
-showNotice("<%= render_flash %>");
-$('table#extracurricular-activities-index tbody').append('<%= j render("extracurricular_activity", {extracurricular_activity: @extracurricular_activity}) %>');
-$('#new-extracurricular-activity form')[0].reset();
-$('#new-extracurricular-activity').slide();
-$('#new-extracurricular-activity-link').show();
-$('.extracurricular-activities-count').html("<%= print_count(@count, t(:'extracurricular_activity.list')) %>");

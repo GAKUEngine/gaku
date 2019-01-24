@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :address, class: Gaku::Address do
     address1 { FFaker::Address.street_address }

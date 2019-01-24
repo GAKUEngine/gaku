@@ -1,7 +1,0 @@
-showNotice("<%= render_flash %>");
-
-$('table#syllabuses-index tbody').append('<%= j render("syllabus", {syllabus: @syllabus}) %>');
-$('#new-syllabus form')[0].reset();
-$('#new-syllabus').slide();
-$('#new-syllabus-link').show();
-$('.syllabuses-count').html("<%= print_count(@count, t(:'syllabus.list')) %>");

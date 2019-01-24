@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: Gaku::User do
     username { FFaker::Internet.user_name }
     email { FFaker::Internet.email }

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :badge_type, class: Gaku::BadgeType do
     name 'credits'

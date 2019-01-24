@@ -1,3 +1,0 @@
-= fields_for :address do |a|
-  = a.label :state_id,  t(:'address.state.singular')
-  = a.select :state_id, options_from_collection_for_select(states, :id, :i18n_name, state.try(:id)), { prompt: t(:'address.state.choose') }, { class: 'form-control' }

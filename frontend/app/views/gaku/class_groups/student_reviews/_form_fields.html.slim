@@ -1,3 +1,0 @@
-= f.select :student_review_category_id, options_from_collection_for_select(@student_review_categories, :id, :to_s), { prompt: t(:'student_review_category.choose') }, label: t(:'student_review_category.plural'), uniqueness: true
-= f.text_area :content, rows: 10, label: t('student_review.content')
-= f.hidden_field :student_id, value: @student.id

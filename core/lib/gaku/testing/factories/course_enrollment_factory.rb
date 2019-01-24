@@ -1,4 +1,4 @@
-# FactoryGirl.define do
+# FactoryBot.define do
 
 #   factory :course_enrollment, class: Gaku::CourseEnrollment do
 #     course

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :scholarship_status, class: Gaku::ScholarshipStatus do
     name 'Self Paid'

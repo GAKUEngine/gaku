@@ -1,6 +1,6 @@
 module Gaku
   class Student < ApplicationRecord
-    include Person, Addresses, Contacts, Notes, Picture, Pagination
+    include Person, Addresses, Contacts, Notes, Pagination
 
     has_many :enrollments, dependent: :destroy
 
@@ -49,6 +49,11 @@ module Gaku
     before_create :set_scholarship_status
     after_create  :set_serial_id
     after_save    :set_code
+
+    has_attached_file :picture,
+      path: ":rails_root/uploads/:class/:attachment/:id_partition/:style/:filename",
+      styles: { thumb: '256x256>' }, default_url: ':placeholder'
+    do_not_validate_attachment_file_type :picture
 
     def self.ransackable_attributes(auth_object = nil)
       super & %w(enrollment_status_code)

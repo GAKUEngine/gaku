@@ -1,6 +1,6 @@
 require 'ffaker'
 
-FactoryGirl.define  do
+FactoryBot.define  do
 
   factory :student, class: Gaku::Student do
     name { FFaker::Name.first_name }

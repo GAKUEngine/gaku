@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :simple_grade, class: Gaku::SimpleGrade do
     score 2.5

@@ -1,7 +1,0 @@
-$('#exams-index tbody').append('<%= j render "exam", {exam: @exam} %>');
-$('.exams-count').html("<%= print_count(@count, t(:'exam.list')) %>");
-$('#exams-tab-link').html("<%= print_count(@count, t(:'exam.plural')) %>");
-
-showNotice("<%= render_flash %>");
-$('#new-exam').slide()
-$('#new-exam-link').show()
