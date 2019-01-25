@@ -16,9 +16,6 @@ Documentation:
 ClassAndModuleChildren:
   Enabled: false
 
-EmptyLinesAroundBody:
-  Enabled: false
-
 SingleLineBlockParams:
   Enabled: false
 
@@ -33,7 +30,6 @@ AllCops:
     - '**/config/initializers/**/*'
     - '**/db/migrate/**/*'
     - '**/lib/generators/**/*'
-  # RunRailsCops: false
 
 Rails:
-  Enabled: false
+  Enabled: true

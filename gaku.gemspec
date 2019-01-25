@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     "╔═════════════════════════╼\n" +
     "║⚙学 GAKU Engine [学エンジン] V.#{s.version.to_s}\n" +
     "╟─────────────────────────╼\n" +
-    "║©2014 幻信創造株式会社 [Phantom Creation Inc.]\n" +
+    "║©2014 株式会社幻創社 [Phantom Creation Inc.]\n" +
     "║http://www.gakuengine.com\n" +
     "╟─────────────────────────╼\n" +
     "║Thank you for installing GAKU Engine!\n" +
