@@ -1,10 +1,11 @@
 require_relative 'spec_helper_base'
 
-require 'rspec/core'
-require 'rspec/rails/extensions'
-require 'rspec/rails/adapters'
-require 'rspec/rails/matchers'
+# require 'rspec/core'
+# require 'rspec/rails/extensions'
+# require 'rspec/rails/adapters'
+# require 'rspec/rails/matchers'
 # require 'rspec/rails/mocks'
+require 'rspec/rails'
 
 require 'database_cleaner'
 require 'factory_bot_rails'
