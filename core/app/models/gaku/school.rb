@@ -12,7 +12,7 @@ module Gaku
 
     has_one :master_campus,
             -> { where master: true },
-            class_name: Gaku::Campus,
+            class_name: 'Gaku::Campus',
             dependent: :destroy
 
     accepts_nested_attributes_for :levels, allow_destroy: true
