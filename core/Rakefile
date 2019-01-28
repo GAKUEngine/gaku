@@ -15,3 +15,15 @@ task :test_app do
   ENV['LIB_NAME'] = 'gaku/core'
   Rake::Task['common:test_app'].invoke
 end
+
+desc 'start testing'
+task :start_testing do
+  ENV['LIB_NAME'] = 'gaku/core'
+  Rake::Task['common:start_testing'].invoke
+end
+
+desc 'stop testing'
+task :stop_testing do
+  ENV['LIB_NAME'] = 'gaku/core'
+  Rake::Task['common:stop_testing'].invoke
+end

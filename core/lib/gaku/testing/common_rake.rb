@@ -4,6 +4,16 @@ end
 
 desc 'Generates a dummy app for testing'
 namespace :common do
+  task :start_testing do
+    dir = "cd #{__dir__}/../../../../docker"
+    puts `#{dir} && docker-compose up -d`
+  end
+
+  task :stop_testing do
+    dir = "cd #{__dir__}/../../../../docker"
+    puts `#{dir} && docker-compose down -v`
+  end
+
   task :test_app do
 
     require "#{ENV['LIB_NAME']}"
@@ -21,29 +31,9 @@ namespace :common do
 
     puts 'Setting up dummy database...'
 
-    if (!!(`PGPASSWORD=manabu psql postgres --user manabu -c "SELECT current_setting('is_superuser');"` =~ /on/))
-      `bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate db:test:prepare RAILS_ENV=test`
-    else
-      printf "Database was not accessible. How would you like to proceed?\n" \
-        "(1) Try to create user and database automatically (requires sudo)\n" \
-        "(2) Attempt to run creation tasks/migrations. This requires the following:\n" \
-        "\t * HStore installed\n" \
-        "\t * Postgres user \"manabu\" with password \"manabu\"\n" \
-        "\t * Database \"gaku_test\" and \"gaku_development\" with full permission granted to \"manabu\"\n" \
-        "\t * Database \"gaku_test\" and \"gaku_development\" are *empty*\n" \
-        "Please enter 1 or 2. Enter anything else or simply hit enter to cancel: "
-      selection = STDIN.getc
-      case selection
-        when '1' then
-          puts 'Creating user and database automatically...'
-          _autopilot_setup
-        when '2' then
-          puts 'Running creation tasks/migrations...'
-          `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
-        else
-          puts
-      end
-    end
+    Rake::Task['start_testing'].invoke
+    `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
+
   end
 end
 
@@ -68,7 +58,6 @@ def _autopilot_setup
   puts "Done."
 
   puts "Running tasks..."
-  `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
   puts "Done. If the test app does not run normally please follow the setup guide at: "
   puts "https://github.com/GAKUEngine/gaku"
 end

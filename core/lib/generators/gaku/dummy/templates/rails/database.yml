@@ -9,9 +9,11 @@ development:
   <<: *default
   database: gaku_development
 
+
 test:
   <<: *default
   database: gaku_test
+  port: 5434
 
 production:
   <<: *default
