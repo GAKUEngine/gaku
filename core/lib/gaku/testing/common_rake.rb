@@ -32,8 +32,7 @@ namespace :common do
     puts 'Setting up dummy database...'
 
     Rake::Task['start_testing'].invoke
-    `bundle exec rails app:update:bin db:environment:set db:migrate RAILS_ENV=test`
-
+    `bundle exec rails app:update:bin db:environment:set db:drop db:create db:migrate RAILS_ENV=test`
   end
 end
 
