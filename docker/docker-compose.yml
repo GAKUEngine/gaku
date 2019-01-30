@@ -1,0 +1,10 @@
+version: '3'
+services:
+  db:
+    image: postgres:10
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: manabu
+      POSTGRES_PASSWORD: manabu
+      POSTGRES_DB: gaku_test
