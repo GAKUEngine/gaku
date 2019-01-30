@@ -8,7 +8,7 @@ module Gaku
 
     before_create :set_name
 
-    scope :active,  -> { where(active: true) }
+    scope :active, -> { where(active: true) }
 
     def to_s
       name

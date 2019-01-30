@@ -1,12 +1,12 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: Gaku::User do
     username { FFaker::Internet.user_name }
     email { FFaker::Internet.email }
-    password 'secret'
-    password_confirmation 'secret'
+    password { 'secret' }
+    password_confirmation { 'secret' }
 
     factory :invalid_user do
-      email nil
+      email { nil }
     end
   end
 
@@ -37,5 +37,4 @@ FactoryGirl.define do
       create(:user_role, role: role, user: user)
     end
   end
-
 end

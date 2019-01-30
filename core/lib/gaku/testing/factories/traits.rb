@@ -1,5 +1,4 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   trait :with_note do
     after(:create) do |resource|
       create(:note, notable: resource)
@@ -100,5 +99,4 @@ FactoryGirl.define do
       end
     end
   end
-
 end

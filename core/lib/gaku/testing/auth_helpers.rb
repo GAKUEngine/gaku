@@ -2,7 +2,6 @@ require 'spec_helper'
 include Warden::Test::Helpers
 
 module Gaku::Testing::AuthHelpers
-
   module Controller
     def as(user)
       @request.env['devise.mapping'] = ::Devise.mappings[:admin] if user == 'admin'
@@ -19,7 +18,6 @@ module Gaku::Testing::AuthHelpers
       end
     end
   end
-
 end
 
 RSpec.configure do |config|

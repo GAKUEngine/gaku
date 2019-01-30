@@ -1,15 +1,14 @@
 require 'ffaker'
 
-FactoryGirl.define  do
-
+FactoryBot.define do
   factory :student, class: Gaku::Student do
     name { FFaker::Name.first_name }
     middle_name { FFaker::Name.first_name }
     surname { FFaker::Name.last_name }
     name_reading { FFaker::Name.first_name }
     surname_reading { FFaker::Name.last_name }
-    gender true
-    birth_date Date.today
+    gender { true }
+    birth_date { Date.today }
   end
 
   factory :student_with_one_guardian, parent: :student do
@@ -59,5 +58,4 @@ FactoryGirl.define  do
   trait :with_commute_method_type do
     commute_method_type
   end
-
 end

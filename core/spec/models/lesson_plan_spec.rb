@@ -1,27 +1,24 @@
 require 'spec_helper_models'
 
 describe Gaku::LessonPlan, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'notable'
   end
 
   describe 'relations' do
-    it { should have_many :lessons }
-    it { should have_many :attachments }
-    it { should belong_to :syllabus }
+    it { is_expected.to have_many :lessons }
+    it { is_expected.to have_many :attachments }
+    it { is_expected.to belong_to :syllabus }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :syllabus }
+    it { is_expected.to validate_presence_of :syllabus }
   end
 
   context 'counter_cache' do
-
     let!(:lesson_plan) { create(:lesson_plan) }
 
     context 'notes_count' do
-
       let(:note) { build(:note) }
       let(:lesson_plan_with_note) { create(:lesson_plan, :with_note) }
 
@@ -36,8 +33,6 @@ describe Gaku::LessonPlan, type: :model do
           lesson_plan_with_note.notes.last.destroy
         end.to change { lesson_plan_with_note.reload.notes_count }.by(-1)
       end
-
     end
   end
-
 end

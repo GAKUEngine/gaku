@@ -1,7 +1,0 @@
-$('#admin-contact-types-index tbody').append('<%= j render("contact_type", {contact_type: @contact_type}) %>');
-
-$('#new-admin-contact-type').slide();
-$('#new-admin-contact-type-link').show();
-
-showNotice("<%= render_flash %>");
-$('.admin-contact-types-count').html("<%= print_count(@count, t(:'contact_type.list')) %>");

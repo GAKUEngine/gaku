@@ -1,5 +1,0 @@
-if(<%= @states.count %> > 0 ) {
-  $('#state-dropdown').html("<%=j render 'states_select', states: @states, state: @state %>");
-} else {
-  $('#state-dropdown').html("<%=j render 'no_states_select', states: @states %>");
-}

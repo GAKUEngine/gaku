@@ -1,6 +1,4 @@
-unless defined?(Gaku::InstallGenerator)
-  require 'generators/gaku/install/install_generator'
-end
+require 'generators/gaku/install/install_generator' unless defined?(Gaku::InstallGenerator)
 
 desc 'Generates a dummy app for testing'
 namespace :common do
@@ -15,8 +13,7 @@ namespace :common do
   end
 
   task :test_app do
-
-    require "#{ENV['LIB_NAME']}"
+    require (ENV['LIB_NAME']).to_s
 
     puts ENV['LIB_NAME']
 
@@ -26,8 +23,7 @@ namespace :common do
                                   '--migrate=false',
                                   '--seed=false',
                                   '--sample=false',
-                                  '--quiet'
-                                 ]
+                                  '--quiet']
 
     puts 'Setting up dummy database...'
 
@@ -37,8 +33,8 @@ namespace :common do
 end
 
 def _autopilot_setup
-  term_cover = " 1> /dev/null 2> /dev/null"
-  puts "Setting up DB User, Database, and Extensions..."
+  term_cover = ' 1> /dev/null 2> /dev/null'
+  puts 'Setting up DB User, Database, and Extensions...'
   `sudo -u postgres psql -c "CREATE USER manabu WITH PASSWORD 'manabu';"#{term_cover}`
   `sudo -u postgres psql -c "ALTER USER manabu CREATEDB;"#{term_cover}`
   `sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS hstore;"#{term_cover}`
@@ -48,13 +44,13 @@ def _autopilot_setup
   `sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_test\" to manabu;"#{term_cover}`
   `sudo -u postgres psql gaku_test -c "CREATE EXTENSION hstore;"#{term_cover}`
   `sudo -u postgres psql -c "ALTER DATABASE gaku_test OWNER TO manabu;"#{term_cover}`
-  
+
   `sudo -u postgres psql -c "DROP DATABASE gaku_development;"#{term_cover}`
   `sudo -u postgres psql -c "CREATE DATABASE gaku_development;"#{term_cover}`
   `sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"gaku_development\" to manabu;"#{term_cover}`
   `sudo -u postgres psql gaku_development -c "CREATE EXTENSION hstore;"#{term_cover}`
   `sudo -u postgres psql -c "ALTER DATABASE gaku_development OWNER TO manabu;"#{term_cover}`
-  puts "Done."
+  puts 'Done.'
 
   puts "Running tasks..."
   puts "Done. If the test app does not run normally please follow the setup guide at: "

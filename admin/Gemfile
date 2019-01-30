@@ -1,9 +1,0 @@
-source 'https://rubygems.org'
-
-eval(File.read(File.dirname(__FILE__) + '/../core/core_dependencies.rb'))
-eval(File.read(File.dirname(__FILE__) + '/../common_gaku_dependencies.rb'))
-
-gem 'gaku_core', path: '../core'
-gem 'gaku_testing', path: '../testing'
-
-gemspec

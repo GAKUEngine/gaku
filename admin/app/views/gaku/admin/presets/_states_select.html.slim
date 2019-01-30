@@ -1,3 +1,0 @@
-= fields_for :preset do |f|
-  = f.fields_for :address do |a|
-    = a.select :state, options_from_collection_for_select(states, :id, :name, state.try(:id)), { prompt: t(:'address.state.choose') }, { class: 'form-control', label: t(:'address.state') }

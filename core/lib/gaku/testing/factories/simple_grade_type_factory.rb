@@ -1,13 +1,11 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :simple_grade_type, class: Gaku::SimpleGradeType do
-    sequence(:name) { |n | "ruby_#{n}" }
+    sequence(:name) { |n| "ruby_#{n}" }
     grading_method
     school
 
     factory :invalid_simple_grade_type do
-      name nil
+      name { nil }
     end
   end
-
 end

@@ -1,21 +1,20 @@
 require 'spec_helper_models'
 
 describe Gaku::Contact, type: :model do
-
   describe 'associations' do
-    it { should belong_to :contact_type }
-    it { should belong_to :contactable }
+    it { is_expected.to belong_to :contact_type }
+    it { is_expected.to belong_to :contactable }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :data }
-    it { should validate_presence_of :contact_type }
+    it { is_expected.to validate_presence_of :data }
+    it { is_expected.to validate_presence_of :contact_type }
   end
 
   describe 'instance methods' do
-    it { should respond_to :name }
-    it { should respond_to :primary? }
-    it { should respond_to :make_primary }
+    it { is_expected.to respond_to :name }
+    it { is_expected.to respond_to :primary? }
+    it { is_expected.to respond_to :make_primary }
   end
 
   describe 'class methods' do
@@ -26,5 +25,4 @@ describe Gaku::Contact, type: :model do
     it('responds to .primary') { expect(Gaku::Contact).to respond_to(:primary) }
     it('responds to .secondary') { expect(Gaku::Contact).to respond_to(:secondary) }
   end
-
 end

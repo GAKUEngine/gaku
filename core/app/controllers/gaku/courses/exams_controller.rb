@@ -1,48 +1,44 @@
 module Gaku
   class Courses::ExamsController < GakuController
-
     respond_to :html
 
-
     def grading
-
       def init_variables
         @course = Course.find(params[:course_id])
         @exam = Exam.find(params[:id])
         @students = @course.students
-        if params[:id] != nil
-          @exams = Exam.find_all_by_id(params[:id])
-        else
-          @exams = @course.syllabus.exams.all
-        end
-        
+        @exams = if !params[:id].nil?
+                   Exam.find_all_by_id(params[:id])
+                 else
+                   @course.syllabus.exams.all
+                 end
+
         # 試験の平均点を入れるハッシュ
-        @exams_average = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @exams_average = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
 
         # 試験の合計点を入れるハッシュ
-        @student_exams_total_score = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
-        
+        @student_exams_total_score = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
+
         # 偏差値を入れるハッシュ
-        @student_exams_deviation = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @student_exams_deviation = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
 
         # for grade and rank--------
         # １０段階用の設定
         # @student_exams_grade: 生徒の１０段階を入れるHash。
-        @student_exams_grade = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @student_exams_grade = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
 
         # ５段階用の設定
         # @student_exams_rank: 生徒の５段階を入れるHash。
-        @student_exams_rank = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+        @student_exams_rank = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
       end
 
       def set_student_exams_total_scores_and_set_exams_average
         @exams.each do |exam|
           @students.each do |student|
-
             # 素点用と得点用変数の初期化 --------
             @student_exams_total_score[:raw][exam.id][student.id] = 0.0
             @student_exams_total_score[exam.id][student.id] = 0.0
-            
+
             @exams_average[:raw][exam.id] = 0.0
             @exams_average[exam.id] = 0.0
 
@@ -50,11 +46,11 @@ module Gaku
               seps = student.exam_portion_scores.where(exam_portion_id: portion.id).first.score.to_f
 
               @student_exams_total_score[:raw][exam.id][student.id] += seps
-              if exam.use_weighting
-                @student_exams_total_score[exam.id][student.id] += (portion.weight.to_f / 100) * seps
-              else
-                @student_exams_total_score[exam.id][student.id] += seps
-              end
+              @student_exams_total_score[exam.id][student.id] += if exam.use_weighting
+                                                                   (portion.weight.to_f / 100) * seps
+                                                                 else
+                                                                   seps
+                                                                 end
             end
 
             # calc for average --------
@@ -71,16 +67,15 @@ module Gaku
       end
 
       def set_student_exams_deviaton
-
-        def get_standard_deviation exam
+        def get_standard_deviation(exam)
           scratch_standard_deviation = 0.0
           @students.each do |student|
-            scratch_standard_deviation += (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) ** 2
+            scratch_standard_deviation += (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id])**2
           end
-          return Math.sqrt scratch_standard_deviation / @students.length
+          Math.sqrt scratch_standard_deviation / @students.length
         end
 
-        def get_deviation standard_deviation, exam, student
+        def get_deviation(standard_deviation, exam, student)
           scratch_deviation = (@student_exams_total_score[exam.id][student.id] - @exams_average[exam.id]) / standard_deviation
           if scratch_deviation.nan?
             return 50
@@ -101,7 +96,6 @@ module Gaku
       end
 
       def set_student_exams_grade_and_rank
-
         # def method_ratio(grading_method)
         def method_ratio
           default_grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
@@ -122,7 +116,7 @@ module Gaku
           }
 
           default = {
-            grade:{
+            grade: {
               g10: 100,
               g9: 66,
               g8: 62
@@ -133,7 +127,7 @@ module Gaku
               r8: 10
             }
           }
-          
+
           # @grade_level_deviation:
           #   １０段階の全体評価で判定する時に使う変数。
           #   決められた偏差値を基に、生徒の偏差値と比べ、その多寡で評価を行う。
@@ -141,7 +135,7 @@ module Gaku
           #   １０段階の相対評価で判定する時に使う変数。
           #   決められたパーセンテージを元に、生徒がクラス内で上位何％以内かを調べ、評価を行う。
 
-          @ = JSON.parse grading_method.method.arguments, symbolize_names: true
+          @parsed_grading_method = JSON.parse grading_method.method.arguments, symbolize_names: true
 
           @grade_level_deviation = [100, 66, 62, 58, 55, 50, 45, 37, 0]
           @grade_level_percent = [5, 5, 10, 10, 30, 10, 100]
@@ -149,21 +143,18 @@ module Gaku
           # @rank_level: ５段階を付ける時に使うパーセンテージ配列の変数。
           @rank_level = [15, 20]
 
-
-
           # Grade and Rank Calculation （ここは別途光ヶ丘の生徒評価表を参照して下さい）-------- {
           # set grade and rank --------
           @exams.each do |exam|
-
             # 生徒の順位用配列を作成
-            exam_student_scores = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)} # 生徒の順位を出す為の変数。
+            exam_student_scores = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) } # 生徒の順位を出す為の変数。
 
             # 試験毎の合計点数と生徒IDをexam_student_scoresに格納する。
             @students.each do |student|
               exam_student_scores[student.id] = @student_exams_total_score[exam.id][student.id]
             end
             # 試験のスコアを降順に並び替える
-            exam_student_scores = exam_student_scores.sort_by {|key,val| -val}
+            exam_student_scores = exam_student_scores.sort_by { |_key, val| -val }
 
             # 採点方式を選択、その採点方式でGradeを決定。
             grading_method = 1
@@ -173,9 +164,9 @@ module Gaku
 
             # calc for 全体評価
             when 1
-              @grade_level_deviation.each_with_index do |glevel, i|
+              @grade_level_deviation.each_with_index do |_glevel, i|
                 @students.each do |student|
-                  if @grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && @grade_level_deviation[i+1] <= @student_exams_deviation[exam.id][student.id]
+                  if @grade_level_deviation[i] > @student_exams_deviation[exam.id][student.id] && @grade_level_deviation[i + 1] <= @student_exams_deviation[exam.id][student.id]
                     @student_exams_grade[exam.id][student.id] = grade_point
                   end
                 end
@@ -191,7 +182,7 @@ module Gaku
               end
               grade_limit_nums.each do |gnum|
                 i = 0
-                while i < gnum && scratch_exam_student_scores.length != 0
+                while i < gnum && !scratch_exam_student_scores.empty?
                   @student_exams_grade[exam.id][scratch_exam_student_scores.shift[0]] = grade_point
                   i += 1
                 end
@@ -234,43 +225,41 @@ module Gaku
         # start main --------
         # p '@exam.grading_method.method -------'
         # p @exam.grading_method
-        
-        # case @exam.grading_method.method
-        case "ratio"
 
-        when "ratio"
+        # case @exam.grading_method.method
+        case 'ratio'
+
+        when 'ratio'
           # method_ratio(@exam.grading_method)
           # method_ratio()
-          method = Grading::Ratio.new (arguments)
+          method = Grading::Ratio.new arguments
 
           exam.student_score.each do |student|
-            results << method.grade (student, exam)
+            results += method.grade(student, exam)
           end
 
           return results
 
-
         end
-
       end
 
-      def fix_digit num, digit_num
-        for_fix = 10 ** digit_num
-        num = num * for_fix
-        if num.nan?
-          num = 0
-        else
-          num = num.truncate.to_f / for_fix.to_f
-        end
-        return num
+      def fix_digit(num, digit_num)
+        for_fix = 10**digit_num
+        num *= for_fix
+        num = if num.nan?
+                0
+              else
+                num.truncate.to_f / for_fix.to_f
+              end
+        num
       end
 
       # start main --------
-      init_variables()
-      init_portion_scores()
-      set_student_exams_total_scores_and_set_exams_average()
-      set_student_exams_deviaton()
-      set_student_exams_grade_and_rank()
+      init_variables
+      init_portion_scores
+      set_student_exams_total_scores_and_set_exams_average
+      set_student_exams_deviaton
+      set_student_exams_grade_and_rank
 
       respond_with @exam
     end
@@ -286,6 +275,5 @@ module Gaku
         end
       end
     end
-
   end
 end

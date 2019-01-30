@@ -12,7 +12,7 @@ module Gaku
 
     has_one :master_campus,
             -> { where master: true },
-            class_name: Gaku::Campus,
+            class_name: 'Gaku::Campus',
             dependent: :destroy
 
     accepts_nested_attributes_for :levels, allow_destroy: true
@@ -38,11 +38,11 @@ module Gaku
     private
 
     def build_default_campus
-      if campuses.any?
-        campus = campuses.first
-      else
-        campus = campuses.create(name: name)
-      end
+      campus = if campuses.any?
+                 campuses.first
+               else
+                 campuses.create(name: name)
+               end
 
       campus.master = true
       campus.save

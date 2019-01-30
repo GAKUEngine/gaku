@@ -10,8 +10,10 @@ module Addresses
     # end
 
     def address_widget
-      "#{primary_address.city}, " \
-        "#{primary_address.address1}" if primary_address
+      if primary_address
+        "#{primary_address.city}, " \
+          "#{primary_address.address1}"
+      end
     end
   end
 end

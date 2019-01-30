@@ -25,6 +25,5 @@ module Gaku
         name
       end
     end
-
   end
 end

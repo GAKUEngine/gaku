@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::Student, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'person'
     it_behaves_like 'addressable'
@@ -11,64 +10,62 @@ describe Gaku::Student, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:student_reviews) }
-    it { should have_many(:enrollments).dependent(:destroy) }
-    it { should have_many(:courses).through(:enrollments).source(:enrollable)  }
-    it { should have_many(:class_groups).through(:enrollments).source(:enrollable)  }
-    it { should have_many(:exam_sessions).through(:enrollments).source(:enrollable)  }
-    it { should have_many(:extracurricular_activities).through(:enrollments).source(:enrollable)  }
+    it { is_expected.to have_many(:student_reviews) }
+    it { is_expected.to have_many(:enrollments).dependent(:destroy) }
+    it { is_expected.to have_many(:courses).through(:enrollments).source(:enrollable) }
+    it { is_expected.to have_many(:class_groups).through(:enrollments).source(:enrollable) }
+    it { is_expected.to have_many(:exam_sessions).through(:enrollments).source(:enrollable) }
+    it { is_expected.to have_many(:extracurricular_activities).through(:enrollments).source(:enrollable) }
 
     it do
-      should have_many(:course_enrollments)
-              .class_name('Gaku::Enrollment')
-              .conditions(enrollable_type: 'Gaku::Course')
+      expect(subject).to have_many(:course_enrollments)
+        .class_name('Gaku::Enrollment')
+        .conditions(enrollable_type: 'Gaku::Course')
     end
 
     it do
-      should have_many(:class_group_enrollments)
-              .class_name('Gaku::Enrollment')
-              .conditions(enrollable_type: 'Gaku::ClassGroup')
+      expect(subject).to have_many(:class_group_enrollments)
+        .class_name('Gaku::Enrollment')
+        .conditions(enrollable_type: 'Gaku::ClassGroup')
     end
 
     it do
-      should have_many(:extracurricular_activity_enrollments)
-              .class_name('Gaku::Enrollment')
-              .conditions(enrollable_type: 'Gaku::ExtracurricularActivity')
+      expect(subject).to have_many(:extracurricular_activity_enrollments)
+        .class_name('Gaku::Enrollment')
+        .conditions(enrollable_type: 'Gaku::ExtracurricularActivity')
     end
 
+    it { is_expected.to have_many :student_specialties }
+    it { is_expected.to have_many(:specialties).through(:student_specialties) }
 
-    it { should have_many :student_specialties }
-    it { should have_many(:specialties).through(:student_specialties) }
+    it { is_expected.to have_many :badges }
+    it { is_expected.to have_many(:badge_types).through(:badges) }
 
-    it { should have_many :badges }
-    it { should have_many(:badge_types).through(:badges) }
+    it { is_expected.to have_many(:student_guardians).dependent(:destroy) }
+    it { is_expected.to have_many(:guardians).through(:student_guardians) }
 
-    it { should have_many(:student_guardians).dependent(:destroy) }
-    it { should have_many(:guardians).through(:student_guardians) }
+    it { is_expected.to have_many :exam_portion_scores }
+    it { is_expected.to have_many :assignment_scores }
+    it { is_expected.to have_many :attendances }
+    it { is_expected.to have_many :semester_attendances }
 
-    it { should have_many :exam_portion_scores }
-    it { should have_many :assignment_scores }
-    it { should have_many :attendances }
-    it { should have_many  :semester_attendances }
+    it { is_expected.to have_many :external_school_records }
+    it { is_expected.to have_many :simple_grades }
 
-    it { should have_many :external_school_records }
-    it { should have_many :simple_grades }
+    it { is_expected.to belong_to :commute_method_type }
+    it { is_expected.to belong_to :user }
+    it { is_expected.to belong_to :scholarship_status }
+    it { is_expected.to belong_to :enrollment_status }
 
-    it { should belong_to :commute_method_type }
-    it { should belong_to :user }
-    it { should belong_to :scholarship_status }
-    it { should belong_to :enrollment_status }
-
-
-    it { should accept_nested_attributes_for(:guardians).allow_destroy(true) }
+    it { is_expected.to accept_nested_attributes_for(:guardians).allow_destroy(true) }
   end
 
   describe '#primary_contact' do
-    it('responds to primary_contact') { should respond_to(:primary_contact) }
+    it('responds to primary_contact') { is_expected.to respond_to(:primary_contact) }
   end
 
   describe 'address' do
-    it('responds to primary_address') { should respond_to(:primary_address) }
+    it('responds to primary_address') { is_expected.to respond_to(:primary_address) }
 
     xit 'generates address_widget' do
       student = build(:student)
@@ -105,7 +102,6 @@ describe Gaku::Student, type: :model do
     let!(:student) { create(:student) }
 
     context 'badges_count' do
-
       let(:badge) { create(:badge) }
       let(:student_badge) { create(:badge, student: student) }
 
@@ -115,7 +111,7 @@ describe Gaku::Student, type: :model do
           student.badges << badge
           student.reload
           puts student.badges.to_json
-        end.to change { student.badges_count }.by(1)
+        end.to change(student, :badges_count).by(1)
       end
 
       xit 'decrements' do
@@ -123,12 +119,11 @@ describe Gaku::Student, type: :model do
         expect do
           student.badges.last.destroy!
           student.reload
-        end.to change { student.badges_count }.by(-1)
+        end.to change(student, :badges_count).by(-1)
       end
     end
 
     context 'guardians_count' do
-
       let(:guardian) { create(:guardian) }
       let(:student_with_one_guardian) { create(:student_with_one_guardian) }
 
@@ -137,7 +132,7 @@ describe Gaku::Student, type: :model do
         expect do
           student.guardians << guardian
           student.reload
-        end.to change { student.guardians_count }.by(1)
+        end.to change(student, :guardians_count).by(1)
       end
 
       it 'decrements guardians_count' do
@@ -148,7 +143,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'external_school_records_count' do
-
       let(:school) { create(:school) }
       let(:external_school_record) { create(:external_school_record, school: school, student: student) }
 
@@ -157,7 +151,7 @@ describe Gaku::Student, type: :model do
         expect do
           external_school_record
           student.reload
-        end.to change { student.external_school_records_count }.by(1)
+        end.to change(student, :external_school_records_count).by(1)
       end
 
       it 'decrements' do
@@ -169,7 +163,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'courses_count' do
-
       let(:course) { create(:course) }
       let(:student_with_course) { create(:student, :with_course) }
 
@@ -177,7 +170,7 @@ describe Gaku::Student, type: :model do
         expect do
           student.courses << course
           student.reload
-        end.to change { student.courses_count }.by(1)
+        end.to change(student, :courses_count).by(1)
       end
 
       it 'decrements courses_count' do
@@ -188,7 +181,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'class_groups_count' do
-
       let(:class_group) { create(:class_group) }
       let(:student_with_class_group) { create(:student, :with_class_group) }
 
@@ -196,7 +188,7 @@ describe Gaku::Student, type: :model do
         expect do
           student.class_groups << class_group
           student.reload
-        end.to change { student.class_groups_count }.by(1)
+        end.to change(student, :class_groups_count).by(1)
       end
 
       it 'decrements class_groups_count' do
@@ -207,7 +199,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'extracurricular_activities_count' do
-
       let(:extracurricular_activity) { create(:extracurricular_activity) }
       let(:student_with_with_extracurricular_activity) { create(:student, :with_extracurricular_activity) }
 
@@ -215,7 +206,7 @@ describe Gaku::Student, type: :model do
         expect do
           student.extracurricular_activities << extracurricular_activity
           student.reload
-        end.to change { student.extracurricular_activities_count }.by(1)
+        end.to change(student, :extracurricular_activities_count).by(1)
       end
 
       it 'decrements extracurricular_activities_count' do
@@ -226,7 +217,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'addresses_count' do
-
       let(:address) { build(:address) }
       let(:student_with_address) { create(:student, :with_address) }
 
@@ -244,7 +234,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'contacts_count' do
-
       let(:contact) { build(:contact) }
       let(:student_with_contact) { create(:student, :with_contact) }
 
@@ -262,7 +251,6 @@ describe Gaku::Student, type: :model do
     end
 
     context 'notes_count' do
-
       let(:note) { build(:note) }
       let(:student_with_note) { create(:student, :with_note) }
 
@@ -278,6 +266,5 @@ describe Gaku::Student, type: :model do
         end.to change { student_with_note.reload.notes_count }.by(-1)
       end
     end
-
   end
 end

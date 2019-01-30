@@ -4,7 +4,7 @@ module Gaku
     # check_authorization
 
     rescue_from CanCan::AccessDenied do |exception|
-      session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+      session[:previous_url] = request.fullpath unless request.fullpath =~ %r{/users}
       redirect_to root_url, alert: exception.message
     end
 
@@ -18,7 +18,7 @@ module Gaku
     protected
 
     def get_resource_name(object)
-      object.class.to_s.underscore.split('/')[1].gsub('_', '-')
+      object.class.to_s.underscore.split('/')[1].tr('_', '-')
     end
 
     def get_class(object)

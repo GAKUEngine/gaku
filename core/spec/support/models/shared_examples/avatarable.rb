@@ -1,3 +1,3 @@
 shared_examples_for 'avatarable' do
-  it { should have_attached_file :picture }
+  it { is_expected.to have_attached_file :picture }
 end

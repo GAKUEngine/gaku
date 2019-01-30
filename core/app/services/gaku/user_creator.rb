@@ -1,6 +1,5 @@
 module Gaku
   class UserCreator
-
     def initialize(params = {})
       @user = User.new(params)
       set_default_language
@@ -21,11 +20,11 @@ module Gaku
     private
 
     def set_default_language
-      if Preset.active.nil?
-        @user.settings[:locale] = 'en'
-      else
-        @user.settings[:locale] = Preset.active.locale['language']
-      end
+      @user.settings[:locale] = if Preset.active.nil?
+                                  'en'
+                                else
+                                  Preset.active.locale['language']
+                                end
     end
   end
 end

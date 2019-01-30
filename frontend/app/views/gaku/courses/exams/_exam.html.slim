@@ -1,6 +1,0 @@
-tr
-  td = exam.name
-  td = exam_completion_info(exam)
-  td
-    = link_to grading_course_exam_path(@course, exam), class: "span12 btn btn-sm btn-primary grading_link" do
-      = icon_label 'glyphicon glyphicon-pencil', t(:'grade.grading')

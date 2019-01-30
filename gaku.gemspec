@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require_relative 'common_gaku_gemspec_mixin'
 
 Gem::Specification.new do |s|
@@ -16,7 +14,7 @@ Gem::Specification.new do |s|
     "╔═════════════════════════╼\n" +
     "║⚙学 GAKU Engine [学エンジン] V.#{s.version.to_s}\n" +
     "╟─────────────────────────╼\n" +
-    "║©2014 幻信創造株式会社 [Phantom Creation Inc.]\n" +
+    "║©2014 株式会社幻創社 [Phantom Creation Inc.]\n" +
     "║http://www.gakuengine.com\n" +
     "╟─────────────────────────╼\n" +
     "║Thank you for installing GAKU Engine!\n" +
@@ -44,8 +42,6 @@ Gem::Specification.new do |s|
   s.requirements  << 'postgresql-contrib'
 
   s.add_dependency 'gaku_core', s.version
-  # s.add_dependency 'gaku_admin', s.version
-  # s.add_dependency 'gaku_frontend', s.version
   s.add_dependency 'gaku_api', s.version
 
   s.add_dependency 'gaku_testing', s.version

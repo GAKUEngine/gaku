@@ -1,12 +1,11 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :exam, class: Gaku::Exam do
-    name 'Math exam'
-    weight 4
-    use_weighting true
+    name { 'Math exam' }
+    weight { 4 }
+    use_weighting { true }
 
     factory :invalid_exam do
-      name nil
+      name { nil }
     end
   end
 
@@ -24,5 +23,4 @@ FactoryGirl.define do
       exam.save
     end
   end
-
 end

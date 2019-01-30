@@ -7,6 +7,5 @@ module Semesterable
 
     scope :without_semester,
           -> { includes(:semester_connectors).where(gaku_semester_connectors: { semesterable_id: nil }) }
-
   end
 end

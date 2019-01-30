@@ -3,7 +3,6 @@ require 'capybara/dsl'
 require 'capybara/poltergeist'
 
 Capybara.default_selector = :css
-Capybara.default_wait_time = 5
 Capybara.default_driver = :rack_test
 
 Capybara.register_driver :poltergeist_debug do |app|

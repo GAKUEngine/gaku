@@ -1,13 +1,12 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :class_group, class: Gaku::ClassGroup do
     sequence(:name) { |n| "A#{n}" }
 
-    grade 8
-    homeroom '123'
+    grade { 8 }
+    homeroom { '123' }
 
     factory :invalid_class_group do
-      name nil
+      name { nil }
     end
 
     factory :class_group_with_active_semester do
@@ -20,5 +19,4 @@ FactoryGirl.define do
       end
     end
   end
-
 end

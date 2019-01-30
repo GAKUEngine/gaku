@@ -1,9 +1,0 @@
-= remote_form_for @course, label: t(:'course.singular') do |f|
-  = render 'form_fields', f: f, course: @course
-  = buttons_for @course
-
-= footer do
-  .col-md-3.pull-right
-    = link_to_modal_delete
-  .delete_modal
-    = render 'gaku/shared/delete_modal', target: @course

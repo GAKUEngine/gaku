@@ -1,5 +1,4 @@
 module Gaku::ClassNameDetector
-
   def class_name
     "Gaku::#{controller_name.classify}"
   end
@@ -19,5 +18,4 @@ module Gaku::ClassNameDetector
   def enrollment_param
     "#{controller_name.classify.split('Enrollment').first.underscore}_id"
   end
-
 end

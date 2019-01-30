@@ -25,9 +25,7 @@ module Gaku
     private
 
     def remove_other_primary
-      if @contact.primary?
-        @contact.contactable.reload.contacts.where.not(id: @contact.id).update_all(primary: false)
-      end
+      @contact.contactable.reload.contacts.where.not(id: @contact.id).update_all(primary: false) if @contact.primary?
     end
 
     # Workaround performance issue by not using JOIN
@@ -36,6 +34,5 @@ module Gaku
     #     @contact.contactable.update_column(:primary_contact, @contact.contactable.contact_widget)
     #   end
     # end
-
   end
 end

@@ -57,7 +57,7 @@ module RequestHelpers
   def auth_token
     #JWT: Authorize user
     user = create(:user)
-    authenticate = Gaku::Api::AuthenticateUser.new(email: user.email, password: user.password).call
+    authenticate = Gaku::Api::AuthenticateUser.new(username: user.username, password: user.password).call
     authenticate.result[:auth_token]
   end
 

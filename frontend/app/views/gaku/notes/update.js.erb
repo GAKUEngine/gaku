@@ -1,4 +1,0 @@
-$('tr#note-<%= @note.id %>').html('<%= j render("gaku/notes/fields", {note: @note}) %>');
-$('tr#note-<%= @note.id %>').append('<%= j render("buttons", {note: @note}) %>');
-$("#edit-note-modal").modal('hide');
-showNotice("<%= render_flash %>");

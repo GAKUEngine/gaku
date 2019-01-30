@@ -9,8 +9,6 @@ module Gradable
   end
 
   def use_primary_grading_method_set
-    if Gaku::GradingMethodSet.primary
-      grading_methods << Gaku::GradingMethodSet.primary.grading_methods
-    end
+    grading_methods << Gaku::GradingMethodSet.primary.grading_methods if Gaku::GradingMethodSet.primary
   end
 end

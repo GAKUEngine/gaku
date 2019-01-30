@@ -1,5 +1,0 @@
-.row.datepicker-form data-locale="#{I18n.locale}"
-  .col-md-6
-      = f.text_field :starting, class: 'datepicker', value: datepicker_date_format(f.object.starting), data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'school_year.starting')
-  .col-md-6
-    = f.text_field :ending, class: 'datepicker',value: datepicker_date_format(f.object.ending), data: {:'date-format' => 'yyyy-mm-dd'}, label: t(:'school_year.ending')

@@ -5,19 +5,23 @@ describe Gaku::Semester, type: :model do
     create(:school_year, starting: Date.parse('2013-3-8'), ending: Date.parse('2014-11-8'))
   end
 
+  let(:ended_semester) { create(:ended_semester) }
+  let(:upcomming_semester) { create(:upcomming_semester) }
+  let(:active_semester) { create(:active_semester) }
+
   describe 'associations' do
-    it { should have_many :semester_connectors }
-    it { should have_many(:class_groups).through(:semester_connectors).source(:semesterable) }
-    it { should have_many(:courses).through(:semester_connectors).source(:semesterable) }
+    it { is_expected.to have_many :semester_connectors }
+    it { is_expected.to have_many(:class_groups).through(:semester_connectors).source(:semesterable) }
+    it { is_expected.to have_many(:courses).through(:semester_connectors).source(:semesterable) }
 
-    it { should have_many :semester_attendances }
+    it { is_expected.to have_many :semester_attendances }
 
-    it { should belong_to :school_year }
+    it { is_expected.to belong_to :school_year }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :starting }
-    it { should validate_presence_of :ending }
+    it { is_expected.to validate_presence_of :starting }
+    it { is_expected.to validate_presence_of :ending }
 
     context 'custom validations' do
       before do
@@ -38,10 +42,6 @@ describe Gaku::Semester, type: :model do
       end
     end
   end
-
-  let(:active_semester) { create(:active_semester) }
-  let(:upcomming_semester) { create(:upcomming_semester) }
-  let(:ended_semester) { create(:ended_semester) }
 
   describe 'scopes' do
     it 'active' do
@@ -69,5 +69,4 @@ describe Gaku::Semester, type: :model do
     ended_semester
     expect(ended_semester.ended?).to be true
   end
-
 end

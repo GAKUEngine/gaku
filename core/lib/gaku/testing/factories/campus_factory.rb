@@ -1,11 +1,10 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :campus, class: Gaku::Campus do
     name { FFaker::Education.school_generic_name }
     school
 
     factory :invalid_campus do
-      name nil
+      name { nil }
     end
   end
 
@@ -15,5 +14,4 @@ FactoryGirl.define do
       campus.save
     end
   end
-
 end

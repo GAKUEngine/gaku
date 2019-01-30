@@ -1,8 +1,0 @@
-= search_form_for @search, url: search_students_path, html: {id: 'search-students'} do |f|
-
-  = render partial: 'gaku/students/search/student', locals: {f: f}
-
-  = hidden_field_tag "autocomplete_field"
-
-  = hidden_field_tag "enrolled_students", @enrolled_students
-  #selected-students.d-none

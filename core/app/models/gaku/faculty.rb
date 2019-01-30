@@ -1,6 +1,7 @@
 module Gaku
   class Faculty < ActiveRecord::Base
-    include Addresses, Contacts
+    include Contacts
+    include Addresses
 
     has_many :school_roles, as: :school_rolable
     has_many :students

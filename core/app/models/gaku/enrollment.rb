@@ -1,6 +1,5 @@
 module Gaku
   class Enrollment < ActiveRecord::Base
-
     belongs_to :student, required: false
     belongs_to :enrollable, polymorphic: true, counter_cache: true, required: false
 
@@ -8,13 +7,13 @@ module Gaku
 
     validates :student_id,
               uniqueness: {
-                scope: %i( enrollable_type enrollable_id ),
+                scope: %i[enrollable_type enrollable_id],
                 message: I18n.t(:'student.already_enrolled')
               }
 
     validates :enrollable_type,
               inclusion: {
-                in: %w( Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity Gaku::ExamSession ),
+                in: %w[Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity Gaku::ExamSession],
                 message: '%{value} is not a valid'
               }
 
@@ -45,9 +44,7 @@ module Gaku
     end
 
     def overlap_semester?
-      if student && student.semesters && enrollable
-        student.semesters.where(id: enrollable.semester_ids).any?
-      end
+      student.semesters.where(id: enrollable.semester_ids).any? if student && student.semesters && enrollable
     end
 
     def not_in_student_class_groups?
@@ -84,6 +81,5 @@ module Gaku
     def not_in_student_class_groups?
       student.class_groups.exclude?(enrollable)
     end
-
   end
 end

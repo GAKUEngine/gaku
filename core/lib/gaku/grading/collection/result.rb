@@ -1,8 +1,7 @@
 module Gaku
   module Grading
     module Collection
-      class  Result
-
+      class Result
         def initialize(exam_id, result)
           @exam_id = exam_id
           @result = result
@@ -11,7 +10,6 @@ module Gaku
         def as_json
           { exam_id: @exam_id, student_results: @result }.as_json
         end
-
       end
     end
   end

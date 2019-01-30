@@ -1,5 +1,4 @@
 module Gaku::Testing::ControllerHelpers
-
   extend ActiveSupport::Concern
 
   included do
@@ -97,9 +96,7 @@ module Gaku::Testing::ControllerHelpers
     # parameters.reverse_merge!(format: :js)
     # xml_http_request(method, action, parameters, session, flash)
     process action, method: method, params: params.reverse_merge!(format: :js), session: session, flash: flash, xhr: true
-
   end
-
 end
 
 RSpec.configure do |config|

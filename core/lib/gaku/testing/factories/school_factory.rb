@@ -1,14 +1,13 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :school, class: Gaku::School do
     name { FFaker::Education.school_generic_name }
-    slogan 'Draw the individual potencial'
-    description 'Nagoya University description'
-    founded Date.new(1950, 4, 1)
-    principal 'Hajime Togari'
+    slogan { 'Draw the individual potencial' }
+    description { 'Nagoya University description' }
+    founded { Date.new(1950, 4, 1) }
+    principal { 'Hajime Togari' }
 
     factory :invalid_school do
-      name nil
+      name { nil }
     end
   end
 
@@ -26,7 +25,6 @@ FactoryGirl.define do
   end
 
   trait :master do
-    primary true
+    primary { true }
   end
-
 end

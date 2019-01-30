@@ -1,6 +1,5 @@
 module Gaku
   class Courses::Exams::ExamPortionScoresController < GakuController
-
     respond_to :js
 
     def update
@@ -13,11 +12,11 @@ module Gaku
     private
 
     def exam_portion_score_params
-       params.require(:exam_portion_score).permit(attributes)
+      params.require(:exam_portion_score).permit(attributes)
     end
 
     def attributes
-      %i( score )
+      %i[score]
     end
   end
 end

@@ -1,8 +1,7 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :program, class: Gaku::Program do
     name { FFaker::Education.degree }
-    description 'Superior Ruby Skills'
+    description { 'Superior Ruby Skills' }
     school
   end
 
@@ -34,5 +33,4 @@ FactoryGirl.define do
       program.specialties << create(:specialty)
     end
   end
-
 end
